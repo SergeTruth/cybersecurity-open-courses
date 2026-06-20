@@ -1,7 +1,5 @@
 # Cybersecurity Open Courses
 
-> *Information wants to be free.*
-
 Free cybersecurity training courses published as open educational resources.
 
 This repository contains cybersecurity courses covering application security, AI security, cloud security, compliance, threat hunting, secure development, software supply chain security, digital forensics, and related topics.
