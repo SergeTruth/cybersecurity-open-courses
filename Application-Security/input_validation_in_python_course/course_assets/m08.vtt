@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.692
+Validation logic should be tested as deliberately as business logic.
+
+00:00:04.692 --> 00:00:10.200
+Unit tests should confirm that valid inputs pass and invalid inputs fail.
+
+00:00:10.200 --> 00:00:15.709
+Negative tests are especially important because validation exists to reject bad data.
+
+00:00:15.709 --> 00:00:24.481
+Test missing fields, wrong types, invalid formats, excessive lengths, boundary values, unexpected nested structures, and values that violate business rules.
+
+00:00:24.481 --> 00:00:27.541
+Boundary tests catch many real defects.
+
+00:00:27.541 --> 00:00:35.497
+If a field allows one to one hundred items, test zero, one, one hundred, and one hundred one.
+
+00:00:35.497 --> 00:00:42.230
+If a number has a maximum, test the maximum and the value just above it.
+
+00:00:42.230 --> 00:00:48.962
+If a string has a length limit, test empty strings, maximum length, and overlong input.
+
+00:00:48.962 --> 00:00:52.022
+These tests make the contract concrete.
+
+00:00:52.022 --> 00:01:00.386
+Property-based testing and fuzzing, at a high level, can help discover cases developers did not think to write manually.
+
+00:01:00.386 --> 00:01:09.159
+They are not replacements for clear requirements, but they can expose parser issues, encoding surprises, type confusion, and boundary failures.
+
+00:01:09.159 --> 00:01:15.483
+Use them where input parsing or transformation is complex enough to justify broader exploration.
+
+00:01:15.483 --> 00:01:18.543
+Invalid input should be logged safely.
+
+00:01:18.543 --> 00:01:30.579
+Logs can help detect abuse and debug integration problems, but raw invalid input may contain secrets, personal data, control characters, or payloads that make logs hard to read.
+
+00:01:30.579 --> 00:01:38.128
+Log enough context to support troubleshooting and monitoring, but avoid storing sensitive or dangerous raw values unnecessarily.
+
+00:01:38.128 --> 00:01:43.228
+Testing should cover behavior, errors, and observability, not only happy paths.

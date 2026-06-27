@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.573
+File names and paths are input, even when they look like ordinary strings.
+
+2
+00:00:05.573 --> 00:00:17.576
+If a user, configuration file, environment variable, archive, or network message can influence a path, the program must decide what locations are allowed before opening or writing anything.
+
+3
+00:00:17.576 --> 00:00:28.721
+Path traversal occurs when input can move access outside the intended directory, often through dot-dot segments, absolute paths, drive-specific syntax, encoded separators, or platform-specific path behavior.
+
+4
+00:00:28.721 --> 00:00:36.009
+A path that looks harmless before normalization may resolve somewhere else after the operating system interprets it.
+
+5
+00:00:36.009 --> 00:00:43.725
+A strong path handling design starts with an allowlisted base directory and a clear rule for relative input.
+
+6
+00:00:43.725 --> 00:00:53.155
+Canonicalization can help compare the resolved path to the allowed root, but it must be used carefully and close to the operation.
+
+7
+00:00:53.155 --> 00:00:59.586
+Symbolic links and time-of-check to time-of-use races can matter when attackers can modify the filesystem.
+
+8
+00:00:59.586 --> 00:01:03.872
+Avoid treating a string check as the whole security decision.
+
+9
+00:01:03.872 --> 00:01:12.446
+If the program needs to create files, consider safe creation flags, restrictive permissions, and behavior when the file already exists.
+
+10
+00:01:12.446 --> 00:01:17.590
+Extensions are useful for user experience, but they are weak security evidence.
+
+11
+00:01:17.590 --> 00:01:21.019
+An attacker can rename a file.
+
+12
+00:01:21.019 --> 00:01:24.449
+A malformed file can carry a normal extension.
+
+13
+00:01:24.449 --> 00:01:29.593
+When content matters, validate the actual content, expected header, or parser result.
+
+14
+00:01:29.593 --> 00:01:38.166
+Also enforce file size limits before reading an entire file into memory, and handle errors without leaking sensitive filesystem details.
+
+15
+00:01:38.166 --> 00:01:43.310
+Path input should lead to a narrow, predictable set of filesystem operations.
+
+16
+00:01:43.310 --> 00:01:50.598
+When the program cannot prove a path is within policy, the secure answer is to reject it.

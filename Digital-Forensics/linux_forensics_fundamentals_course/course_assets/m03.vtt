@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.919
+User and account artifacts help analysts understand who could access the system and what activity may be tied to specific accounts.
+
+00:00:09.919 --> 00:00:17.193
+The /etc/passwd file commonly lists local user accounts, user identifiers, home directories, and default shells.
+
+00:00:17.193 --> 00:00:28.434
+It does not usually contain password hashes on modern systems, but it is still valuable for identifying unexpected accounts, service users, and shell-enabled users.
+
+00:00:28.434 --> 00:00:36.590
+/etc/shadow stores sensitive password-related information at a high level and should be handled carefully under approved authority.
+
+00:00:36.590 --> 00:00:49.154
+Analysts may use it to understand account status, password aging, or whether an account has an unusual authentication state, but it should be protected as sensitive evidence.
+
+00:00:49.154 --> 00:00:56.868
+/etc/group can show group membership, which may explain administrative privileges or access to files and services.
+
+00:00:56.868 --> 00:01:07.669
+Home directories can contain user-level evidence such as shell configuration, command history, downloads, SSH authorized_keys files, known hosts, application settings, and project files.
+
+00:01:07.669 --> 00:01:14.502
+Shell history may show commands associated with an account, but it is not perfect.
+
+00:01:14.502 --> 00:01:22.217
+It can be disabled, edited, truncated, overwritten, or shared by multiple people using the same account.
+
+00:01:22.217 --> 00:01:29.491
+Treat it as one source to correlate, not absolute proof of who typed a command.
+
+00:01:29.491 --> 00:01:40.291
+Sudo usage, account creation, account modification, and privilege changes can appear in authentication logs, system logs, package or configuration records, and file timestamps.
+
+00:01:40.291 --> 00:01:43.157
+Analysts should look for consistency.
+
+00:01:43.157 --> 00:01:49.990
+If a new account appears in /etc/passwd, do logs show when it was created?
+
+00:01:49.990 --> 00:01:55.059
+If an SSH key appears, do authentication records show use?
+
+00:01:55.059 --> 00:01:59.688
+Good account analysis connects files, logs, permissions, and timelines.

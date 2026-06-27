@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.241
+Kubernetes adds orchestration boundaries and identities around containers.
+
+00:00:04.241 --> 00:00:08.928
+Pods group one or more containers with shared context.
+
+00:00:08.928 --> 00:00:10.937
+Nodes run pods.
+
+00:00:10.937 --> 00:00:14.731
+Service accounts identify workloads to the API.
+
+00:00:14.731 --> 00:00:21.650
+RBAC determines allowed API actions, while admission controls evaluate objects before they are accepted.
+
+00:00:21.650 --> 00:00:27.230
+Secrets, configuration, storage, and network policy connect workloads to other assets.
+
+00:00:27.230 --> 00:00:41.291
+The threat model should identify which secrets a pod can receive, which services it can reach, which volumes it can mount, and which API operations its service account can perform.
+
+00:00:41.291 --> 00:00:47.317
+Container escape risk connects to cluster risk through node and orchestration access.
+
+00:00:47.317 --> 00:00:53.790
+A boundary failure on one node does not automatically mean total cluster compromise.
+
+00:00:53.790 --> 00:01:01.155
+Blast radius depends on node credentials, service-account permissions, network paths, workload placement, and control-plane protections.
+
+00:01:01.155 --> 00:01:04.503
+RBAC should minimize actions and scope.
+
+00:01:04.503 --> 00:01:11.422
+Admission policies can reject privileged settings, unsafe mounts, disallowed images, or missing security requirements.
+
+00:01:11.422 --> 00:01:19.234
+Pod Security Standards provide a common baseline, but application-specific controls and justified exceptions are still necessary.
+
+00:01:19.234 --> 00:01:26.153
+Network policies and segmentation limit workload communication, though they do not replace host isolation.
+
+00:01:26.153 --> 00:01:33.965
+Namespace separation organizes resources but should not be treated as a complete hard-security boundary by itself.
+
+00:01:33.965 --> 00:01:36.866
+Multi-tenant clusters require special care.
+
+00:01:36.866 --> 00:01:51.820
+Separate workloads with different trust levels, consider dedicated nodes or clusters for high-risk boundaries, protect shared services, and test whether one tenant can affect another through identity, storage, network, or node dependencies.
+
+00:01:51.820 --> 00:01:55.615
+The architecture should make expected containment explicit.

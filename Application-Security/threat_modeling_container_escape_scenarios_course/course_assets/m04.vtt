@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.890
+Risk conditions are configurations or dependencies that weaken expected isolation.
+
+00:00:04.890 --> 00:00:11.056
+A privileged container is a major example because it receives broad host-facing authority.
+
+00:00:11.056 --> 00:00:18.923
+Privilege should be treated as a documented exception with a narrow purpose, explicit owner, and compensating controls.
+
+00:00:18.923 --> 00:00:24.238
+Excessive Linux capabilities create a similar problem at a smaller scale.
+
+00:00:24.238 --> 00:00:28.278
+Workloads should receive only the capabilities they require.
+
+00:00:28.278 --> 00:00:36.995
+Running as root, permitting privilege escalation, or exposing host devices can further expand the effect of a container compromise.
+
+00:00:36.995 --> 00:00:42.311
+HostPath and other host mounts intentionally expose node files or directories.
+
+00:00:42.311 --> 00:00:48.902
+The threat model should identify the exact path, access mode, data sensitivity, and reason.
+
+00:00:48.902 --> 00:00:54.643
+Broad or writable mounts can undermine filesystem isolation and increase node impact.
+
+00:00:54.643 --> 00:01:02.509
+Runtime sockets and management interfaces are highly sensitive because they may control workload creation or host resources.
+
+00:01:02.509 --> 00:01:06.974
+They should not be exposed to ordinary application containers.
+
+00:01:06.974 --> 00:01:13.991
+Network policy alone does not compensate for a powerful local interface mounted into a workload.
+
+00:01:13.991 --> 00:01:22.283
+Weak pod-security settings, unsafe platform defaults, vulnerable images, unnecessary packages, and overly broad Kubernetes permissions all increase risk.
+
+00:01:22.283 --> 00:01:30.575
+Broad service-account access can turn a workload issue into orchestration or cluster impact even without direct host control.
+
+00:01:30.575 --> 00:01:32.488
+Conditions often combine.
+
+00:01:32.488 --> 00:01:42.907
+A vulnerable image running with privilege, a host mount, and broad RBAC has a much larger blast radius than any one finding suggests.
+
+00:01:42.907 --> 00:01:53.325
+Review deployments as complete scenarios, enforce policy at admission, inventory exceptions, and prioritize combinations that connect workloads to high-value host or cluster assets.

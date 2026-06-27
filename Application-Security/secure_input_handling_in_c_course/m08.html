@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Defensive Error Handling and Testing | Secure Input Handling in C</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="15"
+        data-total="19"
+        data-audio="m08"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C</p>
+        <h1 id="module-title">Defensive Error Handling and Testing</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m08.png"
+          alt="Blank placeholder graphic for module 8, Defensive Error Handling and Testing."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m07-code.html">Previous</a>
+        <a id="next-module" class="btn" href="m08-code.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+                    <p>Secure input handling depends on what happens when input is wrong. Fail closed means the program rejects, stops, or falls back to a safe state when a required check fails. It does not continue with partially initialized data. It does not guess a default that changes the security meaning of the request. It does not log an error and keep processing as if validation succeeded. Consistent error returns make this easier because callers can handle one clear failure path instead of many ambiguous outcomes.</p>
+          <p>Cleanup paths deserve the same attention as success paths. A parser that allocates memory, opens files, locks resources, or builds partial objects must release them correctly when validation fails. The cleanup code should avoid leaks, double frees, and use-after-free behavior. Logging is useful, but log messages should not expose secrets, raw tokens, private paths, or unbounded attacker-controlled text. Error messages should help operators diagnose problems without becoming another input handling problem.</p>
+          <p>Testing should include the inputs real programs actually receive: empty input, maximum-length input, one byte over the limit, missing terminators, malformed encodings, invalid numbers, huge counts, negative values, truncated records, duplicate fields, and random data. Unit tests are good for known boundaries. Fuzzing is valuable because it explores combinations humans do not think to write by hand. Compiler warnings, sanitizers, and static analysis add another layer by surfacing memory errors, undefined behavior, suspicious conversions, and boundary mistakes during development. The point of testing malformed input is to prove that rejection is as engineered as acceptance.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Is Different in C",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Example: Validate Before Copying",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding C Input Sources",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Example: Treat Every Source as Untrusted",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Buffer Sizes and String Boundaries",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Example: Preserve Capacity and Termination",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Example: Bounded Line Read and Exact Parse",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Parsing and Integer Safety",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Example: Parse Numbers and Check Overflow",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. File and Path Input",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Example: Allowlisted File Names",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Structured and Binary Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Example: Validate Binary Length Fields",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling and Testing",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Example: Boundary Tests for Rejection",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Example: A Complete Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

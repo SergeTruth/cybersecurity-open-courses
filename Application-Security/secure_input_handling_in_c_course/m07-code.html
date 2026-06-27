@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Example: Validate Binary Length Fields | Secure Input Handling in C</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="14"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C</p>
+        <h1 id="module-title">Code Example: Validate Binary Length Fields</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">C Code Example</h2>
+        <pre class="code-block"><code>#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_PAYLOAD 4096
+
+static uint32_t read_u32_le(const unsigned char bytes[4]) {
+    return ((uint32_t)bytes[0]) |
+           ((uint32_t)bytes[1] &lt;&lt; 8) |
+           ((uint32_t)bytes[2] &lt;&lt; 16) |
+           ((uint32_t)bytes[3] &lt;&lt; 24);
+}
+
+int parse_packet(const unsigned char *input, size_t input_len,
+                 const unsigned char **payload, size_t *payload_len) {
+    uint32_t declared_len;
+
+    if (input == NULL || payload == NULL || payload_len == NULL) {
+        return -1;
+    }
+    if (input_len &lt; 8) {
+        return -1;
+    }
+    if (memcmp(input, &quot;PKT1&quot;, 4) != 0) {
+        return -1;
+    }
+
+    declared_len = read_u32_le(input + 4);
+    if (declared_len &gt; MAX_PAYLOAD) {
+        return -1;
+    }
+    if ((size_t)declared_len &gt; input_len - 8) {
+        return -1;
+    }
+
+    *payload = input + 8;
+    *payload_len = (size_t)declared_len;
+    return 0;
+}</code></pre>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m07.html">Previous</a>
+        <a id="next-module" class="btn" href="m08.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Is Different in C",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Example: Validate Before Copying",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding C Input Sources",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Example: Treat Every Source as Untrusted",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Buffer Sizes and String Boundaries",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Example: Preserve Capacity and Termination",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Example: Bounded Line Read and Exact Parse",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Parsing and Integer Safety",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Example: Parse Numbers and Check Overflow",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. File and Path Input",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Example: Allowlisted File Names",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Structured and Binary Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Example: Validate Binary Length Fields",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling and Testing",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Example: Boundary Tests for Rejection",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Example: A Complete Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.109
+Text input becomes risky when the program uses functions or formats that do not clearly limit how much data can be written.
+
+2
+00:00:08.109 --> 00:00:13.638
+Unbounded reads are dangerous because the caller cannot prove that the destination has enough room.
+
+3
+00:00:13.638 --> 00:00:25.064
+Ambiguous reads are also dangerous because they make it hard to distinguish a successful conversion from a partial conversion, an empty line, an overlong line, or input with unexpected extra fields.
+
+4
+00:00:25.064 --> 00:00:32.436
+The safer pattern is to read into a known-size buffer, check the result, and only then parse the stored text.
+
+5
+00:00:32.436 --> 00:00:41.282
+A bounded line-read pattern, such as an fgets-style approach, gives the program a capacity limit, but it does not solve every problem by itself.
+
+6
+00:00:41.282 --> 00:00:45.337
+The function may return null on error or end of file.
+
+7
+00:00:45.337 --> 00:00:48.654
+It may include the newline when one was read.
+
+8
+00:00:48.654 --> 00:00:53.814
+It may return a partial line when the input is longer than the buffer.
+
+9
+00:00:53.814 --> 00:01:06.715
+Secure code checks the return value, removes the newline only when it is actually present, and treats a missing newline as a possible overlong line that must be drained or rejected before the next read.
+
+10
+00:01:06.715 --> 00:01:09.664
+Parsing should also be explicit.
+
+11
+00:01:09.664 --> 00:01:21.827
+Width limits in formatted parsing are useful when they match the destination buffer, but the program still needs to check how many fields were converted and whether the remaining input contains unexpected characters.
+
+12
+00:01:21.827 --> 00:01:26.987
+A line that begins correctly but continues with extra data may not be acceptable.
+
+13
+00:01:26.987 --> 00:01:31.779
+Avoid assuming that input is well formed just because a simple case worked.
+
+14
+00:01:31.779 --> 00:01:41.362
+Read bounded text, check the read, check the parse, reject trailing surprises when the format requires exact input, and keep raw input separate from validated values.

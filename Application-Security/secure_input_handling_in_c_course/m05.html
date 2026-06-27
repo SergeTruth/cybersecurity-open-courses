@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Numeric Parsing and Integer Safety | Secure Input Handling in C</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="9"
+        data-total="19"
+        data-audio="m05"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C</p>
+        <h1 id="module-title">Numeric Parsing and Integer Safety</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m05.png"
+          alt="Blank placeholder graphic for module 5, Numeric Parsing and Integer Safety."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m04-code.html">Previous</a>
+        <a id="next-module" class="btn" href="m05-code.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+                    <p>Numbers from input should not be converted with routines that hide failure. A function such as atoi cannot reliably tell the difference between a real zero and a failed conversion. A safer pattern uses strtol, strtoul, or related functions at a high level: reset errno when appropriate, parse the token, inspect the end pointer, and confirm that the value ended where the format says it should end. Conversion is only the first question. The second question is whether the converted number is valid for the program.</p>
+          <p>Range validation must be tied to the purpose of the value. A port, count, array index, timeout, allocation size, offset, percentage, and enum value all have different valid ranges. The C type system will not automatically enforce those domain rules. Signed and unsigned conversions are especially easy to get wrong. A negative value converted to an unsigned type can become a very large value. A value that fits in a long may not fit in an int, a size_t, or a protocol field. Validate before narrowing or mixing signedness.</p>
+          <p>Integer overflow becomes dangerous when a value is used to size memory or advance through a buffer. A calculation such as count times element size can wrap around and allocate less memory than later code expects to fill. Offset plus length can wrap and appear to be inside a buffer when it is not. Check calculations before allocation, indexing, copying, or pointer movement. Treat counts, lengths, offsets, and indexes as untrusted until every relationship has been checked: nonnegative where required, within the allowed maximum, and consistent with the actual data available.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Is Different in C",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Example: Validate Before Copying",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding C Input Sources",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Example: Treat Every Source as Untrusted",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Buffer Sizes and String Boundaries",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Example: Preserve Capacity and Termination",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Example: Bounded Line Read and Exact Parse",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Parsing and Integer Safety",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Example: Parse Numbers and Check Overflow",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. File and Path Input",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Example: Allowlisted File Names",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Structured and Binary Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Example: Validate Binary Length Fields",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling and Testing",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Example: Boundary Tests for Rejection",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Example: A Complete Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

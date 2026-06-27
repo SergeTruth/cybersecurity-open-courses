@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.714
+Numbers from input should not be converted with routines that hide failure.
+
+2
+00:00:04.714 --> 00:00:11.786
+A function such as atoi cannot reliably tell the difference between a real zero and a failed conversion.
+
+3
+00:00:11.786 --> 00:00:26.322
+A safer pattern uses strtol, strtoul, or related functions at a high level: reset errno when appropriate, parse the token, inspect the end pointer, and confirm that the value ended where the format says it should end.
+
+4
+00:00:26.322 --> 00:00:29.465
+Conversion is only the first question.
+
+5
+00:00:29.465 --> 00:00:34.572
+The second question is whether the converted number is valid for the program.
+
+6
+00:00:34.572 --> 00:00:38.893
+Range validation must be tied to the purpose of the value.
+
+7
+00:00:38.893 --> 00:00:45.965
+A port, count, array index, timeout, allocation size, offset, percentage, and enum value all have different valid ranges.
+
+8
+00:00:45.965 --> 00:00:50.286
+The C type system will not automatically enforce those domain rules.
+
+9
+00:00:50.286 --> 00:00:54.215
+Signed and unsigned conversions are especially easy to get wrong.
+
+10
+00:00:54.215 --> 00:00:59.715
+A negative value converted to an unsigned type can become a very large value.
+
+11
+00:00:59.715 --> 00:01:07.179
+A value that fits in a long may not fit in an int, a size_t, or a protocol field.
+
+12
+00:01:07.179 --> 00:01:10.322
+Validate before narrowing or mixing signedness.
+
+13
+00:01:10.322 --> 00:01:17.001
+Integer overflow becomes dangerous when a value is used to size memory or advance through a buffer.
+
+14
+00:01:17.001 --> 00:01:25.251
+A calculation such as count times element size can wrap around and allocate less memory than later code expects to fill.
+
+15
+00:01:25.251 --> 00:01:31.536
+Offset plus length can wrap and appear to be inside a buffer when it is not.
+
+16
+00:01:31.536 --> 00:01:35.072
+Check calculations before allocation, indexing, copying, or pointer movement.
+
+17
+00:01:35.072 --> 00:01:46.072
+Treat counts, lengths, offsets, and indexes as untrusted until every relationship has been checked: nonnegative where required, within the allowed maximum, and consistent with the actual data available.

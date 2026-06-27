@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Example: Validation with Safe APIs | Input Validation in Python</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="input_validation_in_python">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="14"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Input Validation in Python</p>
+        <h1 id="module-title">Code Example: Validation with Safe APIs</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">Python Code Example</h2>
+        <pre class="code-block"><code>import sqlite3
+import subprocess
+
+
+ALLOWED_PROFILE_FIELDS = {&quot;display_name&quot;, &quot;timezone&quot;}
+ALLOWED_REPORTS = {&quot;daily&quot;, &quot;weekly&quot;, &quot;monthly&quot;}
+
+
+class ValidationError(ValueError):
+    pass
+
+
+def update_profile(conn: sqlite3.Connection, user_id: int, changes: dict) -&gt; None:
+    unexpected = set(changes) - ALLOWED_PROFILE_FIELDS
+    if unexpected:
+        raise ValidationError(f&quot;fields are not allowed: {sorted(unexpected)}&quot;)
+
+    display_name = str(changes.get(&quot;display_name&quot;, &quot;&quot;)).strip()
+    timezone = str(changes.get(&quot;timezone&quot;, &quot;&quot;)).strip()
+    if not display_name or len(display_name) &gt; 60:
+        raise ValidationError(&quot;display_name is invalid&quot;)
+    if &quot;/&quot; not in timezone or len(timezone) &gt; 64:
+        raise ValidationError(&quot;timezone is invalid&quot;)
+
+    conn.execute(
+        &quot;UPDATE profiles SET display_name = ?, timezone = ? WHERE user_id = ?&quot;,
+        (display_name, timezone, user_id),
+    )
+
+
+def run_report(report_name: str) -&gt; None:
+    if report_name not in ALLOWED_REPORTS:
+        raise ValidationError(&quot;report is not allowed&quot;)
+
+    subprocess.run([&quot;python&quot;, &quot;-m&quot;, &quot;reports&quot;, report_name], check=True)</code></pre>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m07.html">Previous</a>
+        <a id="next-module" class="btn" href="m08.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label":  "1. Why Input Validation Matters in Python",
+        "href":  "m01.html"
+    },
+    {
+        "label":  "2. Code Example: Validating at the Boundary",
+        "href":  "m01-code.html"
+    },
+    {
+        "label":  "3. Python Input Sources",
+        "href":  "m02.html"
+    },
+    {
+        "label":  "4. Code Example: Validating Multiple Input Sources",
+        "href":  "m02-code.html"
+    },
+    {
+        "label":  "5. Defining Expected Data",
+        "href":  "m03.html"
+    },
+    {
+        "label":  "6. Code Example: Enforcing a Data Contract",
+        "href":  "m03-code.html"
+    },
+    {
+        "label":  "7. Python Type Hints and Runtime Validation",
+        "href":  "m04.html"
+    },
+    {
+        "label":  "8. Code Example: Runtime Model Validation",
+        "href":  "m04-code.html"
+    },
+    {
+        "label":  "9. Validating Web and API Input",
+        "href":  "m05.html"
+    },
+    {
+        "label":  "10. Code Example: Validating an API Request",
+        "href":  "m05-code.html"
+    },
+    {
+        "label":  "11. Validating Files and Structured Data",
+        "href":  "m06.html"
+    },
+    {
+        "label":  "12. Code Example: Validating File Input",
+        "href":  "m06-code.html"
+    },
+    {
+        "label":  "13. Preventing Common Python Security Issues",
+        "href":  "m07.html"
+    },
+    {
+        "label":  "14. Code Example: Validation with Safe APIs",
+        "href":  "m07-code.html"
+    },
+    {
+        "label":  "15. Testing Validation Logic",
+        "href":  "m08.html"
+    },
+    {
+        "label":  "16. Code Example: Testing Boundaries",
+        "href":  "m08-code.html"
+    },
+    {
+        "label":  "17. Course Summary and Key Takeaways",
+        "href":  "m09.html"
+    },
+    {
+        "label":  "18. Code Example: A Complete Validation Pattern",
+        "href":  "m09-code.html"
+    },
+    {
+        "label":  "19. Final Quiz",
+        "href":  "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.468
+Python type hints are useful developer guidance.
+
+00:00:03.468 --> 00:00:11.425
+They make code easier to read, improve editor support, and allow static analysis tools to catch certain mistakes.
+
+00:00:11.425 --> 00:00:16.525
+But type hints usually do not enforce runtime safety by themselves.
+
+00:00:16.525 --> 00:00:27.746
+If a function is annotated to receive an integer, Python will not automatically reject a string unless the code or framework performs an actual runtime check.
+
+00:00:27.746 --> 00:00:34.478
+Dataclasses, TypedDict, attrs, and similar patterns can improve structure, but they have different enforcement behavior.
+
+00:00:34.478 --> 00:00:41.210
+A dataclass can organize fields, but it does not automatically validate every field's business rule.
+
+00:00:41.210 --> 00:00:51.207
+TypedDict helps describe dictionary shapes to type checkers, but raw JSON from a request still needs runtime validation before it should be trusted.
+
+00:00:51.207 --> 00:00:57.123
+These tools support clarity; they do not remove the need for boundary checks.
+
+00:00:57.123 --> 00:01:03.040
+Pydantic is commonly used for runtime validation and data models in Python applications.
+
+00:01:03.040 --> 00:01:10.180
+It can parse inputs, enforce field types, apply constraints, validate nested structures, and produce structured errors.
+
+00:01:10.180 --> 00:01:15.280
+Frameworks such as FastAPI can integrate model validation into request handling.
+
+00:01:15.280 --> 00:01:24.461
+Even then, developers should understand what is being coerced, what is being rejected, and which business rules still require explicit checks.
+
+00:01:24.461 --> 00:01:28.745
+Runtime checks for external input are the security boundary.
+
+00:01:28.745 --> 00:01:37.926
+Static types, annotations, and model definitions are helpful only when the data crossing into trusted code is actually parsed and validated.
+
+00:01:37.926 --> 00:01:49.146
+A mature approach uses type hints for developer clarity, schema or model validation for input boundaries, and explicit business-rule checks where correctness depends on application context.

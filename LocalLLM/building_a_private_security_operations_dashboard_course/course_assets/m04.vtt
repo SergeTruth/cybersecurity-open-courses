@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.565
+A practical private dashboard can run on a local server, workstation, or small cluster, depending on scale and availability needs.
+
+00:00:09.565 --> 00:00:16.016
+Collectors or agents receive events from cameras, endpoints, network tools, sensors, and applications.
+
+00:00:16.016 --> 00:00:21.133
+APIs support controlled integration when direct collection is not appropriate.
+
+00:00:21.133 --> 00:00:27.139
+A message queue can buffer events and separate producers from downstream processing.
+
+00:00:27.139 --> 00:00:33.145
+This helps absorb bursts and lets services recover without immediately losing data.
+
+00:00:33.145 --> 00:00:45.380
+A database or event store retains normalized records, while larger artifacts such as video clips may use separate storage paths with tighter access and retention controls.
+
+00:00:45.380 --> 00:00:50.496
+Event normalization maps different source formats into a consistent structure.
+
+00:00:50.496 --> 00:00:58.282
+Common fields may include event time, source, category, severity, confidence, asset, location, status, and evidence link.
+
+00:00:58.282 --> 00:01:06.957
+Preserve the original record or a reference to it so normalization does not erase details needed for investigation.
+
+00:01:06.957 --> 00:01:13.853
+The dashboard frontend should query controlled services rather than connect directly to every source.
+
+00:01:13.853 --> 00:01:21.639
+This reduces credential sprawl and creates one place to enforce authorization, pagination, filtering, and audit logging.
+
+00:01:21.639 --> 00:01:27.645
+Service accounts and API keys should have narrow privileges and protected storage.
+
+00:01:27.645 --> 00:01:35.876
+Design the flow from collection through review: source, collector, queue, normalizer, store, dashboard, notification, and analyst action.
+
+00:01:35.876 --> 00:01:44.106
+At each step, identify what happens during delay, duplication, malformed input, storage failure, or loss of connectivity.
+
+00:01:44.106 --> 00:01:47.888
+Event identifiers and timestamps help prevent confusion.
+
+00:01:47.888 --> 00:01:53.004
+Privacy-aware architecture keeps sensitive content close to its legitimate purpose.
+
+00:01:53.004 --> 00:02:03.015
+Store clips separately from ordinary alert metadata, limit thumbnails where possible, minimize personal data, encrypt appropriate paths, and avoid public exposure.
+
+00:02:03.015 --> 00:02:10.800
+Architecture should make safe handling the default rather than relying on every user to remember policy.

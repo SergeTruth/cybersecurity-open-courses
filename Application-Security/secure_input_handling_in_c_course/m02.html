@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Understanding C Input Sources | Secure Input Handling in C</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="3"
+        data-total="19"
+        data-audio="m02"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C</p>
+        <h1 id="module-title">Understanding C Input Sources</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m02.png"
+          alt="Blank placeholder graphic for module 2, Understanding C Input Sources."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m01-code.html">Previous</a>
+        <a id="next-module" class="btn" href="m02-code.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+                    <p>A C program can receive input through many different routes, and each route has its own failure modes. Standard input may be typed by a person, pasted from a terminal, redirected from a file, or streamed from another process. Command-line arguments may be missing, reordered, extremely long, or encoded in ways the program did not expect. Environment variables can be controlled by the process launcher and may influence paths, modes, credentials, configuration, or library behavior. None of these sources should be used just because they appear close to the program.</p>
+          <p>Files and configuration files are common input boundaries. They may be stale, partially written, replaced between checks, or edited by a user who does not understand the expected format. Sockets add timing, framing, and partial-read problems: the program may receive only part of a message, multiple messages at once, or data that never completes. Binary protocols and device input introduce byte order, alignment, versioning, and hardware-specific assumptions. Inter-process communication and library callbacks can be especially subtle because the data may feel internal even when it crossed a trust boundary earlier.</p>
+          <p>For every source, establish a small contract before parsing deeply. Decide the maximum size, expected encoding, allowed characters or byte ranges, termination rules, ownership of memory, and what counts as a complete message. Decide whether the input is text or binary, whether it can contain embedded null bytes, and whether it is allowed to reference files, indexes, counts, or offsets. These assumptions should be enforced close to the boundary. When a boundary is explicit, downstream code can operate on validated facts instead of guesses.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Is Different in C",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Example: Validate Before Copying",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding C Input Sources",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Example: Treat Every Source as Untrusted",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Buffer Sizes and String Boundaries",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Example: Preserve Capacity and Termination",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Example: Bounded Line Read and Exact Parse",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Parsing and Integer Safety",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Example: Parse Numbers and Check Overflow",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. File and Path Input",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Example: Allowlisted File Names",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Structured and Binary Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Example: Validate Binary Length Fields",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling and Testing",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Example: Boundary Tests for Rejection",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Example: A Complete Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:13.603
+A compromised container can become a node risk when the workload can interact with the shared kernel, host filesystem, device interfaces, runtime, or node services beyond its intended scope.
+
+00:00:13.603 --> 00:00:20.070
+The node is therefore part of container security, not merely infrastructure underneath it.
+
+00:00:20.070 --> 00:00:26.092
+The shared kernel processes system requests from every container on the node.
+
+00:00:26.092 --> 00:00:33.451
+Kernel maintenance, supported versions, security updates, and reduction of exposed functionality are important control assumptions.
+
+00:00:33.451 --> 00:00:39.026
+Workload restrictions reduce exposure but do not remove the kernel dependency.
+
+00:00:39.026 --> 00:00:44.601
+Host filesystem access can expose configuration, logs, application data, or credentials.
+
+00:00:44.601 --> 00:00:52.852
+Node metadata and credentials may allow the node to authenticate to registries, orchestrators, cloud services, or storage.
+
+00:00:52.852 --> 00:01:00.211
+Protect these assets with least privilege, short-lived credentials where possible, and careful metadata access controls.
+
+00:01:00.211 --> 00:01:04.448
+Kubelet and container-runtime interfaces perform powerful management operations.
+
+00:01:04.448 --> 00:01:11.362
+Restrict network and local access, authenticate and authorize administration, protect configuration, and monitor use.
+
+00:01:11.362 --> 00:01:15.153
+Ordinary workloads should not inherit node-management reachability.
+
+00:01:15.153 --> 00:01:30.094
+Node design can reduce blast radius through hardened images, minimal services, dedicated workload pools, controlled administration, secure boot and integrity features where supported, and separation of workloads with different trust or sensitivity.
+
+00:01:30.094 --> 00:01:32.993
+Multi-tenant assumptions deserve explicit review.
+
+00:01:32.993 --> 00:01:37.230
+Response planning should address both workload and node.
+
+00:01:37.230 --> 00:01:48.603
+Teams need criteria for isolating or draining a node, preserving evidence, replacing it from a known-good image, rotating affected credentials, and safely restoring workloads.
+
+00:01:48.603 --> 00:01:55.516
+Automation helps only when these actions and their availability impact are understood in advance.

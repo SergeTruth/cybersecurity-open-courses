@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.283
+Container isolation is assembled from several controls rather than provided by one wall.
+
+00:00:06.283 --> 00:00:14.733
+Linux namespaces give processes separate views of resources such as process identifiers, mounts, networking, host names, and users.
+
+00:00:14.733 --> 00:00:20.583
+The exact namespaces enabled and their configuration define part of the boundary.
+
+00:00:20.583 --> 00:00:28.166
+Control groups, or cgroups, account for and limit resources such as CPU, memory, and process counts.
+
+00:00:28.166 --> 00:00:37.049
+They support availability and workload governance, but resource limits alone do not authorize access or create complete security isolation.
+
+00:00:37.049 --> 00:00:41.599
+Linux capabilities divide powerful system privileges into smaller units.
+
+00:00:41.599 --> 00:00:47.449
+Removing capabilities reduces what a process can ask the kernel to do.
+
+00:00:47.449 --> 00:00:55.465
+Granting broad or unnecessary capabilities weakens the least-privilege assumption even when the workload still runs inside namespaces.
+
+00:00:55.465 --> 00:00:59.582
+Filesystem isolation normally presents a container-specific root filesystem.
+
+00:00:59.582 --> 00:01:07.165
+Image layers, writable layers, volumes, device access, and host mounts determine what data crosses that boundary.
+
+00:01:07.165 --> 00:01:14.315
+A mount can intentionally share information while also expanding the assets exposed to the workload.
+
+00:01:14.315 --> 00:01:21.031
+The container runtime creates and manages these controls and communicates with the host kernel.
+
+00:01:21.031 --> 00:01:27.314
+Runtime configuration, interfaces, versions, and permissions are therefore part of the trust model.
+
+00:01:27.314 --> 00:01:33.597
+A container remains dependent on the security and correctness of the shared kernel.
+
+00:01:33.597 --> 00:01:41.614
+Threat modeling should record each isolation mechanism, the privileges and mounts granted, and the expected host interfaces.
+
+00:01:41.614 --> 00:01:48.330
+Defense in depth matters because no single control should carry the entire containment claim.
+
+00:01:48.330 --> 00:01:54.614
+Workload restrictions, runtime hardening, node security, orchestration policy, and monitoring reinforce one another.

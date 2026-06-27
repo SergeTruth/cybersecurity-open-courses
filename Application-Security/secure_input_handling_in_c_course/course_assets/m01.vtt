@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.152
+Input handling in C is security-sensitive because several concerns arrive at the same time.
+
+2
+00:00:06.152 --> 00:00:10.985
+The program is not just deciding whether a value looks acceptable.
+
+3
+00:00:10.985 --> 00:00:28.122
+It is also deciding how many bytes to read, where those bytes will live, how they become strings or numbers, what happens if parsing fails, and whether the next operation has enough memory and enough context to be safe.
+
+4
+00:00:28.122 --> 00:00:33.395
+In many languages, some of those decisions are guarded by runtime checks.
+
+5
+00:00:33.395 --> 00:00:36.910
+In C, the program owns those checks directly.
+
+6
+00:00:36.910 --> 00:00:42.622
+External input should be treated as untrusted no matter where it comes from.
+
+7
+00:00:42.622 --> 00:00:55.365
+Keyboard input, command-line arguments, files, network packets, device data, environment variables, configuration files, and library callbacks can all contain values that are malformed, oversized, incomplete, surprising, or intentionally hostile.
+
+8
+00:00:55.365 --> 00:00:58.880
+A local file is not automatically trustworthy.
+
+9
+00:00:58.880 --> 00:01:03.713
+A value supplied by another internal process is not automatically trustworthy.
+
+10
+00:01:03.713 --> 00:01:11.623
+Every boundary deserves the same question: what exactly are we willing to accept before we use this data?
+
+11
+00:01:11.623 --> 00:01:22.608
+C does not automatically protect buffer capacity, pointer validity, integer ranges, string termination, or the relationship between a length field and the actual memory available.
+
+12
+00:01:22.608 --> 00:01:37.547
+If code copies before validating, formats text into a too-small destination, trusts a count from a file, or assumes a string is null terminated, the bug may become memory corruption or unpredictable control flow.
+
+13
+00:01:37.547 --> 00:01:41.502
+Secure input handling is therefore a defensive engineering discipline.
+
+14
+00:01:41.502 --> 00:01:49.851
+Define acceptable input, validate before use, preserve lengths alongside buffers, check every return value, and make rejection paths predictable.
+
+15
+00:01:49.851 --> 00:01:53.366
+The goal is not to make parsing complicated.
+
+16
+00:01:53.366 --> 00:02:00.396
+The goal is to make every later operation depend on facts the program has actually verified.

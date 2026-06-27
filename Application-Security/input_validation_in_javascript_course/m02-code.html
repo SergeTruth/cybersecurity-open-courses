@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Example: Validating Multiple Input Sources | Input Validation in JavaScript</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="input_validation_in_javascript">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="4"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Input Validation in JavaScript</p>
+        <h1 id="module-title">Code Example: Validating Multiple Input Sources</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">JavaScript Code Example</h2>
+        <pre class="code-block"><code>function parsePositiveInteger(value, name, maximum) {
+  const number = Number(value);
+  if (!Number.isInteger(number) || number &lt; 1 || number &gt; maximum) {
+    throw new Error(`${name} must be an integer from 1 to ${maximum}`);
+  }
+  return number;
+}
+
+function parseShortText(value, name, maximum) {
+  if (typeof value !== &quot;string&quot;) {
+    throw new Error(`${name} must be text`);
+  }
+
+  const text = value.trim();
+  if (text.length === 0 || text.length &gt; maximum) {
+    throw new Error(`${name} must be 1 to ${maximum} characters`);
+  }
+  return text;
+}
+
+const query = new URLSearchParams(&quot;?pageSize=25&quot;);
+const storageValue = JSON.parse(&#x27;{&quot;displayName&quot;:&quot;Ada&quot;}&#x27;);
+
+const pageSize = parsePositiveInteger(query.get(&quot;pageSize&quot;), &quot;pageSize&quot;, 100);
+const displayName = parseShortText(storageValue.displayName, &quot;displayName&quot;, 80);
+
+console.log({ pageSize, displayName });</code></pre>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m02.html">Previous</a>
+        <a id="next-module" class="btn" href="m03.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Validation Matters in JavaScript",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Example: Validating at the Boundary",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. JavaScript Input Sources",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Example: Validating Multiple Input Sources",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Defining Expected Data",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Example: Enforcing a Data Contract",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Runtime Validation and Schema Libraries",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Example: Runtime Schema Validation",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Client-Side and Server-Side Validation",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Example: Client Hints and Server Enforcement",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Validating Web and API Data",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Example: Validating an API Route",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Validation and Common JavaScript Security Issues",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Example: Rejecting Dangerous Object Input",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Testing Validation Logic",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Example: Testing Boundaries",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Example: A Complete Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

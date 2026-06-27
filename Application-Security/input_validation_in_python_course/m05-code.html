@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Example: Validating an API Request | Input Validation in Python</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="input_validation_in_python">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Input Validation in Python</p>
+        <h1 id="module-title">Code Example: Validating an API Request</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">Python Code Example</h2>
+        <pre class="code-block"><code>from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, ConfigDict, Field
+
+
+app = FastAPI()
+
+
+class ProfileUpdate(BaseModel):
+    model_config = ConfigDict(extra=&quot;forbid&quot;)
+
+    display_name: str = Field(min_length=1, max_length=60)
+    timezone: str = Field(pattern=r&quot;^[A-Za-z_]+/[A-Za-z_]+$&quot;)
+
+
+@app.patch(&quot;/users/{user_id}/profile&quot;)
+def update_profile(user_id: int, update: ProfileUpdate):
+    if user_id &lt;= 0:
+        raise HTTPException(status_code=404, detail=&quot;user not found&quot;)
+
+    return {
+        &quot;user_id&quot;: user_id,
+        &quot;display_name&quot;: update.display_name.strip(),
+        &quot;timezone&quot;: update.timezone,
+    }</code></pre>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m05.html">Previous</a>
+        <a id="next-module" class="btn" href="m06.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label":  "1. Why Input Validation Matters in Python",
+        "href":  "m01.html"
+    },
+    {
+        "label":  "2. Code Example: Validating at the Boundary",
+        "href":  "m01-code.html"
+    },
+    {
+        "label":  "3. Python Input Sources",
+        "href":  "m02.html"
+    },
+    {
+        "label":  "4. Code Example: Validating Multiple Input Sources",
+        "href":  "m02-code.html"
+    },
+    {
+        "label":  "5. Defining Expected Data",
+        "href":  "m03.html"
+    },
+    {
+        "label":  "6. Code Example: Enforcing a Data Contract",
+        "href":  "m03-code.html"
+    },
+    {
+        "label":  "7. Python Type Hints and Runtime Validation",
+        "href":  "m04.html"
+    },
+    {
+        "label":  "8. Code Example: Runtime Model Validation",
+        "href":  "m04-code.html"
+    },
+    {
+        "label":  "9. Validating Web and API Input",
+        "href":  "m05.html"
+    },
+    {
+        "label":  "10. Code Example: Validating an API Request",
+        "href":  "m05-code.html"
+    },
+    {
+        "label":  "11. Validating Files and Structured Data",
+        "href":  "m06.html"
+    },
+    {
+        "label":  "12. Code Example: Validating File Input",
+        "href":  "m06-code.html"
+    },
+    {
+        "label":  "13. Preventing Common Python Security Issues",
+        "href":  "m07.html"
+    },
+    {
+        "label":  "14. Code Example: Validation with Safe APIs",
+        "href":  "m07-code.html"
+    },
+    {
+        "label":  "15. Testing Validation Logic",
+        "href":  "m08.html"
+    },
+    {
+        "label":  "16. Code Example: Testing Boundaries",
+        "href":  "m08-code.html"
+    },
+    {
+        "label":  "17. Course Summary and Key Takeaways",
+        "href":  "m09.html"
+    },
+    {
+        "label":  "18. Code Example: A Complete Validation Pattern",
+        "href":  "m09-code.html"
+    },
+    {
+        "label":  "19. Final Quiz",
+        "href":  "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>
