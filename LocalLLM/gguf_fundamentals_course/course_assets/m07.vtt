@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.774
+Performance issues in local inference often fall into two categories: slow prompt processing and slow generation.
+
+00:00:07.774 --> 00:00:12.796
+Prompt processing is the work of reading and embedding the input context.
+
+00:00:12.796 --> 00:00:15.892
+Generation is the token-by-token output step.
+
+00:00:15.892 --> 00:00:23.185
+A setup may load quickly but generate slowly, or handle short prompts well but struggle with long context.
+
+00:00:23.185 --> 00:00:26.693
+Knowing which phase is slow helps narrow the cause.
+
+00:00:26.693 --> 00:00:30.202
+Memory pressure is one of the most common problems.
+
+00:00:30.202 --> 00:00:35.775
+A model, quantization, or context length may exceed available VRAM or system RAM.
+
+00:00:35.775 --> 00:00:41.003
+GPU offload settings may be too aggressive, causing failures or instability.
+
+00:00:41.003 --> 00:00:43.893
+CPU-only execution may work but feel slow.
+
+00:00:43.893 --> 00:00:48.708
+Disk speed can affect model loading time, especially with large files.
+
+00:00:48.708 --> 00:00:56.620
+Batch size and thread settings can help, but they should be adjusted carefully and tested with the actual workload.
+
+00:00:56.620 --> 00:01:03.569
+Sampling settings affect output behavior and can be mistaken for performance or model quality issues.
+
+00:01:03.569 --> 00:01:11.549
+Temperature, top-p, repetition controls, and related options influence how deterministic or varied the output feels.
+
+00:01:11.549 --> 00:01:21.869
+If results seem rambling, repetitive, or inconsistent, the issue may be sampling configuration, prompt formatting, model fit, or quantization quality.
+
+00:01:21.869 --> 00:01:26.753
+Troubleshooting should separate runtime settings from model capability.
+
+00:01:26.753 --> 00:01:37.073
+A practical troubleshooting loop starts with a known compatible runtime, a trusted model file, conservative context length, and a documented baseline.
+
+00:01:37.073 --> 00:01:44.916
+Then change one variable at a time: quantization, GPU offload, thread count, context length, or sampling settings.
+
+00:01:44.916 --> 00:01:48.080
+Compare memory use, speed, and output quality.
+
+00:01:48.080 --> 00:01:54.822
+This disciplined approach is slower than random tweaking, but it produces knowledge you can reuse.

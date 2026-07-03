@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.310
+Batch size tuning for LLM inference is about matching the model, runtime, hardware, context length, and workload.
+
+2
+00:00:07.310 --> 00:00:10.174
+It is not a contest to maximize every setting.
+
+3
+00:00:10.174 --> 00:00:17.861
+A larger value can improve throughput in one situation and damage latency, memory stability, or reliability in another.
+
+4
+00:00:17.861 --> 00:00:22.760
+The right setting is the one that supports the way the system is actually used.
+
+5
+00:00:22.760 --> 00:00:26.754
+The most important distinction is between prefill and decode.
+
+6
+00:00:26.754 --> 00:00:30.070
+Prefill processes the prompt and existing context.
+
+7
+00:00:30.070 --> 00:00:31.879
+Decode produces new tokens.
+
+8
+00:00:31.879 --> 00:00:38.284
+Batch settings, prompt length, concurrency, and memory pressure affect those phases differently.
+
+9
+00:00:38.284 --> 00:00:46.876
+That is why first-token latency, tokens per second, total response time, and requests per second all tell different parts of the story.
+
+10
+00:00:46.876 --> 00:00:50.493
+Good tuning is measured, conservative, and repeatable.
+
+11
+00:00:50.493 --> 00:00:52.603
+Start with a realistic workload.
+
+12
+00:00:52.603 --> 00:00:54.412
+Change one setting at a time.
+
+13
+00:00:54.412 --> 00:00:59.311
+Track memory, utilization, temperature, errors, latency, and throughput.
+
+14
+00:00:59.311 --> 00:01:06.922
+Keep enough headroom for normal variation, because a configuration that barely survives a test can fail under real use.
+
+15
+00:01:06.922 --> 00:01:11.746
+For local interactive systems, prioritize responsiveness and stability.
+
+16
+00:01:11.746 --> 00:01:18.604
+For API serving, balance user latency with total throughput, fairness, queue behavior, and backpressure.
+
+17
+00:01:18.604 --> 00:01:23.879
+In both cases, document the settings that work for each model and hardware profile.
+
+18
+00:01:23.879 --> 00:01:30.436
+The goal is reliable inference that feels predictable, observable, and appropriate for the workload.
+
+19
+00:01:30.436 --> 00:01:36.615
+The durable lesson is that inference tuning is operational engineering, not a magic number hunt.
+
+20
+00:01:36.615 --> 00:01:42.418
+The same model can need different settings on a laptop, a workstation, and a shared service.
+
+21
+00:01:42.418 --> 00:01:53.798
+What carries across environments is the method: define the workload, measure the phases, control memory pressure, and keep the system observable enough to explain its behavior.

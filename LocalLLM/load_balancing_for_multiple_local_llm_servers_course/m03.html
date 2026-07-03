@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workload Patterns and Routing Needs | Load Balancing for Multiple Local LLM Servers</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="load_balancing_for_multiple_local_llm_servers">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="3"
+        data-total="10"
+        data-audio="m03"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Load Balancing for Multiple Local LLM Servers</p>
+        <h1 id="module-title">Workload Patterns and Routing Needs</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m03.png"
+          alt="Blank placeholder image for a lesson on local LLM workload patterns and routing decisions."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m02.html">Previous</a>
+        <a id="next-module" class="btn" href="m04.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Local LLM workloads vary widely. Interactive chat is latency-sensitive because a person is waiting. Coding agents may issue many sequential calls while reading files, proposing edits, and retrying. Batch summarization can tolerate longer waits but may create bursts. Document analysis stresses context length. Embedding jobs may use different models and endpoints entirely.</p>
+          <p>Short requests and long-context requests create different routing needs. A quick prompt may finish in seconds. A large document prompt may spend significant time in prompt processing before generation begins. If those requests are treated as identical, one backend can become clogged with long jobs while another could have served short interactive work quickly.</p>
+          <p>Concurrency turns simple user behavior into real capacity pressure. Several people may each think they are making one request, while the service sees overlapping prompt processing, token generation, and streaming connections. A coding assistant or tool-using agent may keep a backend busy for minutes. Routing should consider how much work each server can accept before queueing or rejecting new requests.</p>
+          <p>Session continuity and retries also matter. Stateless clients send full context with each request and can route to any compatible backend. Other workflows rely on cache behavior, temporary state, or tool context and may need sticky sessions. Retries can improve reliability after a backend failure, but blind retries are risky when a request triggered actions or external tool use.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label": "What Local LLM Load Balancing Means",
+        "href": "m01.html"
+    },
+    {
+        "label": "Local LLM Server Architecture",
+        "href": "m02.html"
+    },
+    {
+        "label": "Workload Patterns and Routing Needs",
+        "href": "m03.html"
+    },
+    {
+        "label": "Load Balancing Strategies",
+        "href": "m04.html"
+    },
+    {
+        "label": "Client Compatibility and API Design",
+        "href": "m05.html"
+    },
+    {
+        "label": "Performance and Capacity Planning",
+        "href": "m06.html"
+    },
+    {
+        "label": "Reliability, Monitoring, and Troubleshooting",
+        "href": "m07.html"
+    },
+    {
+        "label": "Security and Local Network Operations",
+        "href": "m08.html"
+    },
+    {
+        "label": "Course Summary and Key Takeaways",
+        "href": "m09.html"
+    },
+    {
+        "label": "Final Quiz",
+        "href": "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

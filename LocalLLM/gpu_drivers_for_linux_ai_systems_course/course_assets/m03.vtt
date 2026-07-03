@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.721
+NVIDIA-based Linux AI systems commonly involve the NVIDIA driver, CUDA-related runtime libraries, and sometimes a CUDA toolkit.
+
+00:00:08.721 --> 00:00:14.832
+At a high level, the driver enables GPU operation and exposes capabilities to the system.
+
+00:00:14.832 --> 00:00:21.493
+The CUDA toolkit provides development tools and libraries used to build or run CUDA applications.
+
+00:00:21.493 --> 00:00:24.995
+These are related, but they are not the same thing.
+
+00:00:24.995 --> 00:00:36.806
+nvidia-smi is a common first check because it reports driver information, detected NVIDIA GPUs, utilization, memory use, temperature, power, and processes using the device.
+
+00:00:36.806 --> 00:00:43.192
+It is a useful signal, but it is not the final proof that a specific AI framework is working.
+
+00:00:43.192 --> 00:00:53.973
+A Python library, container, or inference runtime may still fail because of missing libraries, incompatible versions, or incorrect environment configuration.
+
+00:00:53.973 --> 00:00:56.101
+Compatibility planning matters.
+
+00:00:56.101 --> 00:01:07.706
+Driver versions, CUDA runtime libraries, cuDNN and related acceleration libraries, Python packages, containers, and inference runtimes may all have version expectations.
+
+00:01:07.706 --> 00:01:14.916
+Randomly mixing versions can create errors that look like model failures but are really stack mismatches.
+
+00:01:14.916 --> 00:01:22.264
+Stable AI systems benefit from known-good combinations rather than constant chasing of the newest packages.
+
+00:01:22.264 --> 00:01:31.877
+GPU visibility should be checked from the places that matter: the host shell, Python environment, container, notebook, and inference server.
+
+00:01:31.877 --> 00:01:35.929
+Each layer can have different visibility and library paths.
+
+00:01:35.929 --> 00:01:42.933
+Document the driver version, runtime versions, container image, model runtime, and validation results.
+
+00:01:42.933 --> 00:01:47.602
+That documentation turns a working setup into something recoverable.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.984
+A local LLM server is a stack.
+
+2
+00:00:01.984 --> 00:00:07.440
+Hardware provides CPU, GPU, VRAM, system memory, disk, and network capacity.
+
+3
+00:00:07.440 --> 00:00:13.722
+A runtime loads the model file, prepares prompts, manages context, and generates tokens.
+
+4
+00:00:13.722 --> 00:00:20.005
+An API layer receives requests from chat clients, coding assistants, scripts, or agents.
+
+5
+00:00:20.005 --> 00:00:27.280
+Load balancing works only when each layer is understood well enough to predict what a backend can handle.
+
+6
+00:00:27.280 --> 00:00:29.512
+The model file shapes capacity.
+
+7
+00:00:29.512 --> 00:00:38.026
+Size, format, quantization level, context capability, and runtime compatibility affect memory use and response speed.
+
+8
+00:00:38.026 --> 00:00:46.210
+A smaller quantized model may fit on modest hardware, while a larger model may require more VRAM and longer load times.
+
+9
+00:00:46.210 --> 00:00:54.890
+A long context setting can help with document analysis, but it can also increase prompt processing time and memory pressure.
+
+10
+00:00:54.890 --> 00:01:08.282
+Most clients interact with local servers through HTTP APIs, often using concepts similar to cloud LLM APIs: model names, chat-style request bodies, streaming chunks, and structured errors.
+
+11
+00:01:08.282 --> 00:01:11.506
+Compatibility is helpful but not guaranteed.
+
+12
+00:01:11.506 --> 00:01:18.450
+Endpoint paths, request fields, headers, authentication behavior, and error formats can differ.
+
+13
+00:01:18.450 --> 00:01:22.831
+A load balancer must preserve the behavior the client expects.
+
+14
+00:01:22.831 --> 00:01:25.394
+Streaming is especially important.
+
+15
+00:01:25.394 --> 00:01:36.471
+Many interfaces expect partial output while the model is still generating, so the backend, proxy, and load balancer must avoid buffering the entire response.
+
+16
+00:01:36.471 --> 00:01:40.356
+Each backend should also be monitored as its own system.
+
+17
+00:01:40.356 --> 00:01:50.607
+A server with a different model, smaller context window, older runtime, or weaker GPU may need different routing rules instead of equal treatment.

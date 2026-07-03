@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.423
+LLM API design should make request and response structure explicit.
+
+00:00:04.423 --> 00:00:15.380
+A chat endpoint usually accepts system, user, and assistant messages, model selection parameters, generation settings, and possibly tool or structured output options.
+
+00:00:15.380 --> 00:00:18.614
+A completion endpoint may accept a single prompt.
+
+00:00:18.614 --> 00:00:23.829
+An embeddings endpoint usually accepts text and returns vector representations.
+
+00:00:23.829 --> 00:00:29.176
+Clear schemas help clients send predictable requests and handle responses safely.
+
+00:00:29.176 --> 00:00:33.532
+Generation settings should be treated as part of the API contract.
+
+00:00:33.532 --> 00:00:41.453
+Temperature, sampling controls, max output length, stop conditions, and context limits can affect behavior dramatically.
+
+00:00:41.453 --> 00:00:49.242
+Some applications should expose these settings to trusted operators, while others should enforce server-side defaults.
+
+00:00:49.242 --> 00:00:56.503
+If clients can change everything, troubleshooting becomes difficult and safety assumptions may no longer hold.
+
+00:00:56.503 --> 00:01:02.840
+Streaming responses are useful when users benefit from seeing partial output as it is generated.
+
+00:01:02.840 --> 00:01:12.411
+Streaming can improve perceived responsiveness, but it also complicates cancellation, timeout behavior, logging, error handling, and client code.
+
+00:01:12.411 --> 00:01:24.095
+A robust API should define what happens when a request is canceled, when the model stalls, when the client disconnects, or when the service cannot finish within expected limits.
+
+00:01:24.095 --> 00:01:27.197
+Structured output expectations need validation.
+
+00:01:27.197 --> 00:01:40.003
+If an application asks the model to return JSON, a classification, or an action plan, the downstream system should still verify that the output is well formed, complete, and appropriate for use.
+
+00:01:40.003 --> 00:01:43.171
+Models are not parsers or authorization engines.
+
+00:01:43.171 --> 00:01:52.017
+Version API behavior as models and prompts change so clients do not silently inherit incompatible output formats or changed semantics.

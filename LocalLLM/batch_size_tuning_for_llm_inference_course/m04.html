@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Key Runtime Parameters | Batch Size Tuning for LLM Inference</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="batch_size_tuning_for_llm_inference">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="4"
+        data-total="10"
+        data-audio="m04"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Batch Size Tuning for LLM Inference</p>
+        <h1 id="module-title">Key Runtime Parameters</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m04.png"
+          alt="Blank placeholder graphic for module 4"
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m03.html">Previous</a>
+        <a id="next-module" class="btn" href="m05.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Different runtimes use different names, but several concepts appear again and again. Batch size describes how much work the runtime tries to process together. Microbatch size breaks larger work into smaller chunks so the runtime can fit within memory limits. Maximum batch tokens may limit the total number of prompt or generation tokens being processed across active requests.</p>
+          <p>Maximum concurrent sequences controls how many active conversations or requests can be in flight. Context length controls how much prompt and history each request can carry. Thread count affects CPU execution and support work around the model. GPU layers or GPU offload settings decide how much of the model runs on the GPU instead of the CPU. Parallelism settings may affect how work is split across devices or streams.</p>
+          <p>The confusing part is that names vary. One runtime may expose n_batch and n_ubatch. Another may talk about max batch tokens, continuous batching, slots, sequences, or scheduler limits. Do not assume two settings are identical just because they sound similar. Documentation, release notes, and measurement are part of the tuning process.</p>
+          <p>A useful mental model is to ask what each setting controls: memory footprint, concurrency, prompt processing, decode scheduling, CPU support work, or GPU utilization. Once you know what kind of constraint a setting touches, you can make smaller changes and interpret the result more confidently. The setting name matters less than understanding the behavior it changes.</p>
+          <p>When a runtime exposes many knobs, resist the urge to turn all of them at once. Start with the settings that define the workload boundary: context length, concurrency, and maximum prompt or batch tokens. Then tune the settings that affect how the work is divided internally. That order makes failures easier to interpret and rollback easier to manage.</p>
+        
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "Module 1: What Batch Size Means in LLM Inference",
+    "href": "m01.html"
+  },
+  {
+    "label": "Module 2: Prefill, Decode, and Where Batching Helps",
+    "href": "m02.html"
+  },
+  {
+    "label": "Module 3: Hardware Constraints and Memory Pressure",
+    "href": "m03.html"
+  },
+  {
+    "label": "Module 4: Key Runtime Parameters",
+    "href": "m04.html"
+  },
+  {
+    "label": "Module 5: Measuring Performance Correctly",
+    "href": "m05.html"
+  },
+  {
+    "label": "Module 6: Tuning for Local Interactive Use",
+    "href": "m06.html"
+  },
+  {
+    "label": "Module 7: Tuning for API Serving and Throughput",
+    "href": "m07.html"
+  },
+  {
+    "label": "Module 8: Troubleshooting Batch-Related Problems",
+    "href": "m08.html"
+  },
+  {
+    "label": "Module 9: Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

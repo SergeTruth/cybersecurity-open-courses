@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.214
+The serving runtime turns model files and accelerator resources into a network service.
+
+00:00:06.214 --> 00:00:07.286
+Llama.
+
+00:00:07.286 --> 00:00:14.357
+cpp server is portable and effective for quantized models across CPU and several GPU backends.
+
+00:00:14.357 --> 00:00:18.857
+Ollama packages model management behind a straightforward local service.
+
+00:00:18.857 --> 00:00:27.214
+These tools are useful for labs and modest deployments where operational simplicity matters more than maximizing concurrent throughput.
+
+00:00:27.214 --> 00:00:36.428
+VLLM is designed for high-throughput language-model serving and includes memory-management and batching techniques suited to concurrent requests on supported hardware.
+
+00:00:36.428 --> 00:00:43.500
+Text Generation Inference, often called TGI, is another production-oriented server with model-serving and observability features.
+
+00:00:43.500 --> 00:00:49.285
+Their advantages appear only when models, accelerators, and traffic patterns are compatible.
+
+00:00:49.285 --> 00:00:58.928
+Benchmark the actual model and prompt distribution; do not select a runtime solely from an impressive result produced on different hardware.
+
+00:00:58.928 --> 00:01:03.857
+An OpenAI-compatible API can decouple clients from the underlying server.
+
+00:01:03.857 --> 00:01:10.928
+Applications use a familiar request format while a gateway or router directs traffic to llama.
+
+00:01:10.928 --> 00:01:14.142
+cpp, Ollama, VLLM, or another backend.
+
+00:01:14.142 --> 00:01:24.214
+Compatibility is not always identical across parameters, streaming, tool calls, embeddings, and error behavior, so test the features your clients depend on.
+
+00:01:24.214 --> 00:01:34.285
+Open WebUI can provide a shared browser front end, but it should use the same authentication and routing controls as other clients.
+
+00:01:34.285 --> 00:01:38.785
+Introduce model routing only after one server is reliable.
+
+00:01:38.785 --> 00:01:47.142
+Start a known model, confirm acceleration, measure latency and throughput, exercise health checks, and document startup and shutdown.
+
+00:01:47.142 --> 00:01:51.642
+Then replicate the service or add another model role.
+
+00:01:51.642 --> 00:01:57.856
+Complex orchestration cannot repair an unstable serving process; it only distributes the instability.
+
+00:01:57.856 --> 00:02:04.070
+A simple, observable serving layer is the foundation for safe scheduling and scale.

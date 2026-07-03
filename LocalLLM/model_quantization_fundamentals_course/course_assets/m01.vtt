@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.071
+Model quantization represents weights, and sometimes activations or caches, with lower numerical precision.
+
+00:00:06.071 --> 00:00:16.747
+A model originally stored with 32-bit or 16-bit floating-point values may be converted so many weights use 8, 6, 5, 4, or fewer bits.
+
+00:00:16.747 --> 00:00:24.911
+The runtime combines those compact values with scales and other metadata to approximate the original computations during inference.
+
+00:00:24.911 --> 00:00:31.400
+Lower precision reduces the bytes that must be stored, loaded, and moved through memory.
+
+00:00:31.400 --> 00:00:39.983
+That can make a model fit in limited VRAM or system RAM and reduce memory-bandwidth pressure during token generation.
+
+00:00:39.983 --> 00:00:49.403
+A model that remains fully on an accelerator may run much faster than a higher-precision version split between GPU and CPU.
+
+00:00:49.403 --> 00:00:53.381
+Smaller files also download and load more quickly.
+
+00:00:53.381 --> 00:00:55.683
+The tradeoff is approximation.
+
+00:00:55.683 --> 00:01:03.848
+Quantization can alter probabilities and model behavior, with effects that depend on architecture, method, bit level, and task.
+
+00:01:03.848 --> 00:01:11.593
+Some models tolerate moderate quantization well; aggressive compression may damage reasoning, coding, instruction following, or rare knowledge.
+
+00:01:11.593 --> 00:01:16.826
+Hardware and runtimes also differ in which formats they accelerate efficiently.
+
+00:01:16.826 --> 00:01:19.548
+Quantization is not magic compression.
+
+00:01:19.548 --> 00:01:25.618
+It does not remove context-cache memory, runtime overhead, tokenizer files, or every activation.
+
+00:01:25.618 --> 00:01:30.852
+It does not increase the model's underlying capability or guarantee speed.
+
+00:01:30.852 --> 00:01:42.784
+The useful question is whether a particular quantized artifact fits the target system, runs efficiently in the selected runtime, and preserves acceptable quality for the real workload.

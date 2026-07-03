@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.575
+Capacity planning should begin with measurements from each backend.
+
+2
+00:00:04.575 --> 00:00:18.299
+Useful signals include prompt processing speed, generation speed, time to first token, total response time, active requests, queue length, CPU use, GPU use, VRAM pressure, memory pressure, and failure rate.
+
+3
+00:00:18.299 --> 00:00:23.494
+Tokens per second is useful, but it does not describe the whole user experience.
+
+4
+00:00:23.494 --> 00:00:25.975
+Context length changes performance.
+
+5
+00:00:25.975 --> 00:00:32.255
+A long document prompt can consume far more memory and processing time than a short chat message.
+
+6
+00:00:32.255 --> 00:00:40.164
+A service may benchmark well with small prompts and then struggle with real document analysis or coding-agent sessions.
+
+7
+00:00:40.164 --> 00:00:46.522
+Testing should include the actual types of work the load-balanced endpoint is expected to serve.
+
+8
+00:00:46.522 --> 00:00:50.477
+Concurrency limits protect the service from slow collapse.
+
+9
+00:00:50.477 --> 00:00:58.230
+Every backend reaches a point where adding more simultaneous requests makes everyone wait longer or causes failures.
+
+10
+00:00:58.230 --> 00:01:04.278
+Runtime batching and parallelism can help in some environments, but they need measurement.
+
+11
+00:01:04.278 --> 00:01:11.877
+More concurrency is not automatically better if it increases time to first token or causes out-of-memory behavior.
+
+12
+00:01:11.877 --> 00:01:13.738
+Warm and cold states matter.
+
+13
+00:01:13.738 --> 00:01:19.320
+A model already loaded in memory can respond much faster than one being read from disk.
+
+14
+00:01:19.320 --> 00:01:22.887
+A freshly restarted server may be online but not ready.
+
+15
+00:01:22.887 --> 00:01:33.044
+Capacity planning should combine benchmark data with representative workloads: chat, coding assistants, batch jobs, long contexts, and mixed traffic.
+
+16
+00:01:33.044 --> 00:01:38.239
+The goal is to know when to route, queue, shed load, or ask clients to retry later.

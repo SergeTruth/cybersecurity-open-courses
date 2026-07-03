@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.658
+A practical starting pattern is one front end with multiple inference nodes.
+
+00:00:05.658 --> 00:00:13.412
+The front end provides a stable user or application interface, while each worker hosts a model server.
+
+00:00:13.412 --> 00:00:20.746
+A router or load balancer sends requests only to workers capable of serving the requested model.
+
+00:00:20.746 --> 00:00:31.853
+Replicating the same model across several nodes increases concurrent capacity and creates options for maintenance or failure, provided the routing layer removes unhealthy instances promptly.
+
+00:00:31.853 --> 00:00:34.996
+Another pattern assigns separate model roles.
+
+00:00:34.996 --> 00:00:46.522
+One node may serve a general language model, another a coding model, and a smaller CPU or GPU service may generate embeddings or rerank search results.
+
+00:00:46.522 --> 00:00:53.437
+Role separation makes resource use predictable and prevents a large model from evicting smaller services.
+
+00:00:53.437 --> 00:01:01.610
+CPU support nodes can host APIs, queues, databases, observability, and retrieval components, preserving expensive GPU capacity for inference.
+
+00:01:01.610 --> 00:01:05.172
+Storage and management may also be separated.
+
+00:01:05.172 --> 00:01:12.088
+A storage node can hold controlled model versions and distribute them to local worker caches.
+
+00:01:12.088 --> 00:01:17.327
+A management node can provide configuration, monitoring, secrets, and deployment coordination.
+
+00:01:17.327 --> 00:01:22.146
+Avoid making either service an undocumented single point of failure.
+
+00:01:22.146 --> 00:01:29.481
+Define what happens when shared storage, the router, name resolution, or the management plane is unavailable.
+
+00:01:29.481 --> 00:01:33.043
+Local clusters favor privacy and predictable ownership.
+
+00:01:33.043 --> 00:01:37.025
+Cloud clusters favor rapid provisioning and elastic capacity.
+
+00:01:37.025 --> 00:01:44.360
+Hybrid designs can combine them, but data classification and routing policy must make the boundary explicit.
+
+00:01:44.360 --> 00:01:48.760
+Start with the fewest roles that meet the requirement.
+
+00:01:48.760 --> 00:02:01.124
+Add replication, queues, and management services in response to observed failure or capacity needs, because every architectural box becomes software that must be secured, monitored, upgraded, and recovered.

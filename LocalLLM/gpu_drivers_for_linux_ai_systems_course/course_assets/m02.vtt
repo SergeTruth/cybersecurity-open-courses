@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.441
+The Linux GPU stack includes several layers that have to line up.
+
+00:00:04.441 --> 00:00:09.907
+Kernel modules provide low-level driver functionality inside the running kernel.
+
+00:00:09.907 --> 00:00:12.709
+Firmware may be required by the hardware.
+
+00:00:12.709 --> 00:00:18.380
+User-space driver libraries provide interfaces that applications and runtimes call.
+
+00:00:18.380 --> 00:00:25.759
+Display drivers may support monitors and desktops, while compute runtimes support GPU-accelerated workloads.
+
+00:00:25.759 --> 00:00:33.480
+Package managers install and update many of these pieces, but AI workloads often depend on more than one package.
+
+00:00:33.480 --> 00:00:37.170
+Kernel headers may be needed to build a driver module.
+
+00:00:37.170 --> 00:00:42.089
+DKMS, at a high level, helps rebuild kernel modules when kernels change.
+
+00:00:42.089 --> 00:00:45.984
+Device nodes expose GPU hardware to user-space processes.
+
+00:00:45.984 --> 00:00:51.791
+Permissions determine which users, services, and containers can access those devices.
+
+00:00:51.791 --> 00:00:57.394
+A working desktop display does not automatically mean compute workloads are ready.
+
+00:00:57.394 --> 00:01:09.215
+Likewise, a headless inference server may not need a full desktop stack, but it still needs the right kernel support, firmware, user-space libraries, and runtime interfaces.
+
+00:01:09.215 --> 00:01:16.594
+The exact package names vary by distribution and vendor, but the architectural responsibilities are similar.
+
+00:01:16.594 --> 00:01:21.035
+Understanding these layers makes troubleshooting less mysterious.
+
+00:01:21.035 --> 00:01:26.023
+If the GPU is not visible, look at hardware detection and kernel modules.
+
+00:01:26.023 --> 00:01:33.129
+If the driver is loaded but an AI library fails, look at user-space libraries and runtime compatibility.
+
+00:01:33.129 --> 00:01:40.508
+If containers cannot see the GPU, look at device exposure, container runtime configuration, and permissions.
+
+00:01:40.508 --> 00:01:43.651
+AI acceleration depends on the complete stack.

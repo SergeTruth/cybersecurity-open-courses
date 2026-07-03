@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.266
+Quantization lowers numerical precision so a model uses less memory and often runs more practically on local hardware.
+
+00:00:08.266 --> 00:00:16.108
+Labels such as Q2 through Q8 describe broad precision levels, but exact schemes and model behavior differ.
+
+00:00:16.108 --> 00:00:23.102
+Lower-bit quantization generally reduces file and memory size while increasing the chance of quality loss.
+
+00:00:23.102 --> 00:00:30.520
+Higher precision uses more resources and is not automatically better for every task, runtime, or machine.
+
+00:00:30.520 --> 00:00:32.851
+Test the actual file.
+
+00:00:32.851 --> 00:00:38.573
+G G U F is a common local model format for llama.
+
+00:00:38.573 --> 00:00:40.057
+cpp-compatible runtimes.
+
+00:00:40.057 --> 00:00:48.323
+Compatibility depends on architecture, runtime version, tokenizer, prompt template, metadata, and acceleration backend, not only the file extension.
+
+00:00:48.323 --> 00:00:57.012
+Memory fit includes model weights, key-value cache, context, batch settings, concurrent sessions, runtime overhead, display use, and other applications.
+
+00:00:57.012 --> 00:01:02.311
+File size is therefore not a complete VRAM or unified-memory estimate.
+
+00:01:02.311 --> 00:01:09.729
+Some runtimes allow different cache precision or memory strategies, creating another quality, compatibility, and capacity tradeoff.
+
+00:01:09.729 --> 00:01:17.995
+Treat those settings as part of the tested configuration instead of assuming model quantization tells the whole story.
+
+00:01:17.995 --> 00:01:25.413
+Partial GPU offload can run some layers on the accelerator and leave others on the CPU.
+
+00:01:25.413 --> 00:01:32.407
+This may make a larger model load, but transfer and CPU work can reduce speed.
+
+00:01:32.407 --> 00:01:36.858
+A technically successful load is not an operational success.
+
+00:01:36.858 --> 00:01:45.547
+Avoid configurations that consume nearly all available memory, swap heavily, crash on long prompts, or throttle under sustained work.
+
+00:01:45.547 --> 00:01:52.117
+Compare several quantizations and sizes with realistic context, then preserve a margin for stability.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.451
+API serving introduces concurrency.
+
+2
+00:00:02.451 --> 00:00:11.872
+Instead of one user waiting on one response, the system may receive many requests with different prompt lengths, generation limits, and urgency.
+
+3
+00:00:11.872 --> 00:00:17.004
+Batch tuning becomes a scheduling problem as much as a raw performance problem.
+
+4
+00:00:17.004 --> 00:00:24.586
+The service has to decide how many requests to accept, how much work to group together, and when to apply backpressure.
+
+5
+00:00:24.586 --> 00:00:29.029
+Continuous batching and dynamic batching are common serving ideas.
+
+6
+00:00:29.029 --> 00:00:38.986
+At a high level, they let the runtime group active requests in ways that improve hardware utilization while requests arrive and finish at different times.
+
+7
+00:00:38.986 --> 00:00:43.582
+This can improve throughput, but it does not remove latency tradeoffs.
+
+8
+00:00:43.582 --> 00:00:48.254
+Users still care about queue delay, first-token latency, and timeouts.
+
+9
+00:00:48.254 --> 00:00:57.598
+Concurrency limits, maximum prompt size, and maximum generated tokens are part of batch tuning because they shape the work entering the system.
+
+10
+00:00:57.598 --> 00:01:03.036
+Without limits, a few very large prompts can consume memory and delay everyone else.
+
+11
+00:01:03.036 --> 00:01:04.415
+Fairness matters.
+
+12
+00:01:04.415 --> 00:01:12.457
+A service should avoid letting one request pattern dominate the queue or make normal interactive requests feel unreliable.
+
+13
+00:01:12.457 --> 00:01:15.368
+Operational controls complete the picture.
+
+14
+00:01:15.368 --> 00:01:18.968
+Rate limiting protects the service from demand spikes.
+
+15
+00:01:18.968 --> 00:01:24.789
+Backpressure tells clients to slow down instead of silently building an unhealthy queue.
+
+16
+00:01:24.789 --> 00:01:30.916
+Monitoring should show queue depth, active sequences, token rates, errors, and resource use.
+
+17
+00:01:30.916 --> 00:01:38.116
+The best throughput configuration is not just fast; it is understandable and recoverable when demand changes.
+
+18
+00:01:38.116 --> 00:01:42.099
+For API platforms, define the service promise before tuning.
+
+19
+00:01:42.099 --> 00:01:50.907
+Decide whether the priority is low latency for interactive users, high throughput for batch jobs, or a controlled balance between both.
+
+20
+00:01:50.907 --> 00:01:56.269
+Those goals lead to different queue limits, timeout values, and batching choices.
+
+21
+00:01:56.269 --> 00:02:01.707
+Without that service promise, a faster benchmark can still produce a worse product.

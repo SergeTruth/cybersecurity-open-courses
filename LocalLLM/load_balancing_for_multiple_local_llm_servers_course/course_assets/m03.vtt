@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.166
+Local LLM workloads vary widely.
+
+2
+00:00:02.166 --> 00:00:06.654
+Interactive chat is latency-sensitive because a person is waiting.
+
+3
+00:00:06.654 --> 00:00:13.153
+Coding agents may issue many sequential calls while reading files, proposing edits, and retrying.
+
+4
+00:00:13.153 --> 00:00:17.717
+Batch summarization can tolerate longer waits but may create bursts.
+
+5
+00:00:17.717 --> 00:00:20.657
+Document analysis stresses context length.
+
+6
+00:00:20.657 --> 00:00:24.912
+Embedding jobs may use different models and endpoints entirely.
+
+7
+00:00:24.912 --> 00:00:29.864
+Short requests and long-context requests create different routing needs.
+
+8
+00:00:29.864 --> 00:00:32.262
+A quick prompt may finish in seconds.
+
+9
+00:00:32.262 --> 00:00:38.761
+A large document prompt may spend significant time in prompt processing before generation begins.
+
+10
+00:00:38.761 --> 00:00:48.819
+If those requests are treated as identical, one backend can become clogged with long jobs while another could have served short interactive work quickly.
+
+11
+00:00:48.819 --> 00:00:53.384
+Concurrency turns simple user behavior into real capacity pressure.
+
+12
+00:00:53.384 --> 00:01:03.906
+Several people may each think they are making one request, while the service sees overlapping prompt processing, token generation, and streaming connections.
+
+13
+00:01:03.906 --> 00:01:08.780
+A coding assistant or tool-using agent may keep a backend busy for minutes.
+
+14
+00:01:08.780 --> 00:01:15.588
+Routing should consider how much work each server can accept before queueing or rejecting new requests.
+
+15
+00:01:15.588 --> 00:01:18.528
+Session continuity and retries also matter.
+
+16
+00:01:18.528 --> 00:01:24.718
+Stateless clients send full context with each request and can route to any compatible backend.
+
+17
+00:01:24.718 --> 00:01:31.449
+Other workflows rely on cache behavior, temporary state, or tool context and may need sticky sessions.
+
+18
+00:01:31.449 --> 00:01:40.578
+Retries can improve reliability after a backend failure, but blind retries are risky when a request triggered actions or external tool use.

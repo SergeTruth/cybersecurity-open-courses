@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reliability, Monitoring, and Troubleshooting | Load Balancing for Multiple Local LLM Servers</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="load_balancing_for_multiple_local_llm_servers">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="7"
+        data-total="10"
+        data-audio="m07"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Load Balancing for Multiple Local LLM Servers</p>
+        <h1 id="module-title">Reliability, Monitoring, and Troubleshooting</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m07.png"
+          alt="Blank placeholder image for a lesson on reliability, monitoring, and troubleshooting local LLM load balancing."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m06.html">Previous</a>
+        <a id="next-module" class="btn" href="m08.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>A load balancer can improve reliability, but it can also hide problems until users feel them. Health checks should reflect real readiness: the process is alive, the API responds, the needed model is available, and recent requests are not failing at an unhealthy rate. A server with an open port but constant generation timeouts is not a healthy target.</p>
+          <p>Monitor both the front endpoint and every backend. At the gateway, track request volume, response times, status codes, timeouts, streaming interruptions, and queues. On each backend, track resource pressure, active requests, model-loaded status, runtime errors, restarts, and failures. Without backend visibility, you may know the service is slow without knowing why.</p>
+          <p>Many troubleshooting problems come from mismatches. A backend may run a different runtime version, expose a different endpoint, use a different quantization, or map the same model name to a different file. A proxy may strip a required header. A timeout between layers may interrupt streaming. Load balancing increases the need to keep assumptions consistent.</p>
+          <p>Failover and retries should match the workload. Retrying before a response starts may be safe. Retrying after streaming begins may confuse the client. Retrying an agent request that performed tool actions can duplicate work. Simple dashboards showing backend health, model availability, active requests, failures, and queue growth are enough to tell whether load balancing is helping or hiding trouble.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label": "What Local LLM Load Balancing Means",
+        "href": "m01.html"
+    },
+    {
+        "label": "Local LLM Server Architecture",
+        "href": "m02.html"
+    },
+    {
+        "label": "Workload Patterns and Routing Needs",
+        "href": "m03.html"
+    },
+    {
+        "label": "Load Balancing Strategies",
+        "href": "m04.html"
+    },
+    {
+        "label": "Client Compatibility and API Design",
+        "href": "m05.html"
+    },
+    {
+        "label": "Performance and Capacity Planning",
+        "href": "m06.html"
+    },
+    {
+        "label": "Reliability, Monitoring, and Troubleshooting",
+        "href": "m07.html"
+    },
+    {
+        "label": "Security and Local Network Operations",
+        "href": "m08.html"
+    },
+    {
+        "label": "Course Summary and Key Takeaways",
+        "href": "m09.html"
+    },
+    {
+        "label": "Final Quiz",
+        "href": "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

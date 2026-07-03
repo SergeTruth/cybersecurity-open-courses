@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Troubleshooting Batch-Related Problems | Batch Size Tuning for LLM Inference</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="batch_size_tuning_for_llm_inference">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="8"
+        data-total="10"
+        data-audio="m08"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Batch Size Tuning for LLM Inference</p>
+        <h1 id="module-title">Troubleshooting Batch-Related Problems</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m08.png"
+          alt="Blank placeholder graphic for module 8"
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m07.html">Previous</a>
+        <a id="next-module" class="btn" href="m09.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Batch-related problems often show up as memory failures first. Out-of-memory errors, excessive swapping, process crashes, or sudden latency spikes are signs that the configuration may be too aggressive for the model, context length, or concurrency level. Reduce the workload dimensions one at a time: batch size, microbatch size, context length, maximum concurrent sequences, or prompt size.</p>
+          <p>Slow prompt ingestion points toward prefill constraints. Test with a shorter prompt, then with the realistic long prompt, and compare prompt processing speed. Slow generation points toward decode behavior, memory bandwidth, device utilization, or thermal throttling. High first-token latency may come from a long prefill phase, a queue, or a scheduler waiting to assemble a batch.</p>
+          <p>Uneven GPU utilization can mean the runtime is not feeding the device efficiently, but it can also mean the workload is too small to keep it busy. CPU utilization can reveal bottlenecks around tokenization, sampling, scheduling, or partial offload. Temperature and power limits matter too. A system that begins fast and then slows down may be thermally constrained rather than poorly batched.</p>
+          <p>Be careful not to blame batch settings for unrelated issues. Output quality problems are often caused by sampling parameters, prompts, model choice, or retrieval quality, not batch size. A model that is simply too large for the hardware may never tune well. Troubleshooting works best when you separate resource failures, latency problems, throughput limits, and model behavior into different hypotheses.</p>
+          <p>A good troubleshooting habit is to reduce the system to a known-good baseline before chasing exotic explanations. Use a smaller context, lower concurrency, conservative batch settings, and a representative prompt. If stability returns, increase one dimension at a time. If stability does not return, the issue may be model compatibility, drivers, hardware health, or the runtime itself.</p>
+        
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "Module 1: What Batch Size Means in LLM Inference",
+    "href": "m01.html"
+  },
+  {
+    "label": "Module 2: Prefill, Decode, and Where Batching Helps",
+    "href": "m02.html"
+  },
+  {
+    "label": "Module 3: Hardware Constraints and Memory Pressure",
+    "href": "m03.html"
+  },
+  {
+    "label": "Module 4: Key Runtime Parameters",
+    "href": "m04.html"
+  },
+  {
+    "label": "Module 5: Measuring Performance Correctly",
+    "href": "m05.html"
+  },
+  {
+    "label": "Module 6: Tuning for Local Interactive Use",
+    "href": "m06.html"
+  },
+  {
+    "label": "Module 7: Tuning for API Serving and Throughput",
+    "href": "m07.html"
+  },
+  {
+    "label": "Module 8: Troubleshooting Batch-Related Problems",
+    "href": "m08.html"
+  },
+  {
+    "label": "Module 9: Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.664
+Batch size tuning is bounded by hardware.
+
+2
+00:00:02.664 --> 00:00:11.265
+GPU VRAM is usually the first constraint people notice because model weights, runtime buffers, and the KV cache all compete for space.
+
+3
+00:00:11.265 --> 00:00:21.693
+System RAM matters too, especially when the model is partially offloaded, when the runtime uses CPU memory for staging, or when the machine falls back to swapping.
+
+4
+00:00:21.693 --> 00:00:27.858
+Once swapping begins, performance can collapse even if the process does not crash immediately.
+
+5
+00:00:27.858 --> 00:00:33.034
+Memory bandwidth and compute utilization are just as important as raw capacity.
+
+6
+00:00:33.034 --> 00:00:38.590
+A GPU with enough VRAM may still be underused if the runtime cannot feed it efficiently.
+
+7
+00:00:38.590 --> 00:00:44.527
+A CPU-only setup may be limited by memory bandwidth, thread scheduling, and cache behavior.
+
+8
+00:00:44.527 --> 00:00:52.443
+Integrated GPUs share memory with the system, so aggressive settings can affect both inference and the rest of the machine.
+
+9
+00:00:52.443 --> 00:00:59.978
+Context length has a direct impact because longer conversations and larger documents require more attention state.
+
+10
+00:00:59.978 --> 00:01:07.894
+The KV cache stores intermediate state that lets generation continue without reprocessing the entire context every time.
+
+11
+00:01:07.894 --> 00:01:10.406
+That cache is useful, but it is not free.
+
+12
+00:01:10.406 --> 00:01:18.169
+More concurrent sequences, longer contexts, and larger batch-related settings can increase memory pressure quickly.
+
+13
+00:01:18.169 --> 00:01:30.500
+Oversized batch settings can look attractive because they promise more parallelism, but they can also cause out-of-memory errors, runtime instability, high latency, or slower throughput.
+
+14
+00:01:30.500 --> 00:01:37.350
+The practical goal is to find a setting that keeps the hardware busy without pushing it into a fragile state.
+
+15
+00:01:37.350 --> 00:01:44.505
+Stable headroom matters, especially for systems that need to run for hours instead of surviving one benchmark.
+
+16
+00:01:44.505 --> 00:01:49.148
+This is why a stable configuration usually leaves deliberate headroom.
+
+17
+00:01:49.148 --> 00:01:58.967
+A machine that reports just enough free VRAM during a clean test may fail when the prompt is longer, another process opens, or concurrent requests arrive.
+
+18
+00:01:58.967 --> 00:02:01.098
+Headroom is not wasted capacity.
+
+19
+00:02:01.098 --> 00:02:08.329
+It is the margin that keeps inference predictable when real operating conditions are less tidy than a benchmark.

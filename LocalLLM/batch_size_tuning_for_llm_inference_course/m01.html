@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Batch Size Means in LLM Inference | Batch Size Tuning for LLM Inference</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="batch_size_tuning_for_llm_inference">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="1"
+        data-total="10"
+        data-audio="m01"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Batch Size Tuning for LLM Inference</p>
+        <h1 id="module-title">What Batch Size Means in LLM Inference</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m01.png"
+          alt="Blank placeholder graphic for module 1"
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#">Previous</a>
+        <a id="next-module" class="btn" href="m02.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Batch size tuning for inference is the practice of choosing how much work the runtime should process together when it serves prompts and generates tokens. It sounds simple, but it sits at the intersection of model size, context length, memory, hardware, and user expectations. In practical terms, batch settings decide whether the system handles one request at a time, groups pieces of work together, or keeps multiple active requests moving through the model at once.</p>
+          <p>This is different from training batch size. During training, a batch is tied to examples, loss calculation, gradients, and weight updates. During inference, the model weights are already fixed. The question becomes operational: how can the runtime use available compute efficiently while still returning useful responses quickly? A setting that makes sense for training documentation may not translate directly to a chat server or a local assistant.</p>
+          <p>It also helps to separate prompt processing from token generation. When a prompt is submitted, the runtime has to process the existing context before the first new token appears. After that, generation usually happens step by step. Batch settings can affect these phases differently, so a configuration that improves prompt ingestion may not produce the smoothest streaming response.</p>
+          <p>The right answer depends on the workload. A single-user local coding assistant usually values responsiveness and stable memory use. A multi-user API service may accept slightly more latency if it can increase total throughput. There is no universal best batch size because the best operating point changes with model architecture, quantization, runtime, hardware, prompt length, concurrency, and reliability goals.</p>
+          <p>A practical way to think about this is to start with the user experience you want, then work backward to the runtime settings. If the system is a private assistant, the tuning target may be quick feedback and steady streaming. If it is an internal API, the target may be more completed requests per minute. Batch size is only meaningful when it is tied to one of those operating goals.</p>
+        
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "Module 1: What Batch Size Means in LLM Inference",
+    "href": "m01.html"
+  },
+  {
+    "label": "Module 2: Prefill, Decode, and Where Batching Helps",
+    "href": "m02.html"
+  },
+  {
+    "label": "Module 3: Hardware Constraints and Memory Pressure",
+    "href": "m03.html"
+  },
+  {
+    "label": "Module 4: Key Runtime Parameters",
+    "href": "m04.html"
+  },
+  {
+    "label": "Module 5: Measuring Performance Correctly",
+    "href": "m05.html"
+  },
+  {
+    "label": "Module 6: Tuning for Local Interactive Use",
+    "href": "m06.html"
+  },
+  {
+    "label": "Module 7: Tuning for API Serving and Throughput",
+    "href": "m07.html"
+  },
+  {
+    "label": "Module 8: Troubleshooting Batch-Related Problems",
+    "href": "m08.html"
+  },
+  {
+    "label": "Module 9: Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

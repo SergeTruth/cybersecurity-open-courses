@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.153
+Local LLM load balancing means placing one stable endpoint in front of several independently running model-serving servers.
+
+2
+00:00:08.153 --> 00:00:15.239
+Each backend still has its own runtime, model files, memory limits, network address, logs, and failure modes.
+
+3
+00:00:15.239 --> 00:00:18.897
+The load balancer does not make those systems disappear.
+
+4
+00:00:18.897 --> 00:00:27.735
+It decides which available backend should receive an incoming request, while clients continue to call one predictable service address.
+
+5
+00:00:27.735 --> 00:00:37.184
+That is different from distributed inference, model parallelism, or a true cluster designed to split one inference job across multiple machines.
+
+6
+00:00:37.184 --> 00:00:40.765
+A normal load balancer sends one request to one backend.
+
+7
+00:00:40.765 --> 00:00:48.613
+Specialized distributed inference can divide work across compute resources, but it requires specific runtime support.
+
+8
+00:00:48.613 --> 00:00:56.842
+In this course, the focus is practical routing across local inference endpoints, not combining machines into one larger model.
+
+9
+00:00:56.842 --> 00:01:00.881
+The most important expectation is latency versus throughput.
+
+10
+00:01:00.881 --> 00:01:06.519
+Latency is the delay for one request, such as time to first token and total response time.
+
+11
+00:01:06.519 --> 00:01:10.405
+Throughput is how much work the service completes over time.
+
+12
+00:01:10.405 --> 00:01:22.673
+Two servers can increase total throughput when several requests are active, but they usually do not make a single response twice as fast because one backend is still generating that response.
+
+13
+00:01:22.673 --> 00:01:33.874
+Load balancing is useful for labs, coding assistants, chat UIs, batch jobs, and small team environments because it gives tools one endpoint while the backend pool can change.
+
+14
+00:01:33.874 --> 00:01:37.531
+Used well, it improves availability and spreads demand.
+
+15
+00:01:37.531 --> 00:01:48.732
+Used poorly, it can hide overload, route requests to incompatible models, break streaming behavior, or expose a sensitive local inference service without proper controls.

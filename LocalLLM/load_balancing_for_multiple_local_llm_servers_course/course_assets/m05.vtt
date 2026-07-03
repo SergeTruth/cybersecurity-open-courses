@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.347
+Many teams use a load balancer because clients want one endpoint.
+
+2
+00:00:04.347 --> 00:00:12.962
+Chat UIs, coding assistants, automation scripts, and internal tools are easier to configure when they all call a single base URL.
+
+3
+00:00:12.962 --> 00:00:21.576
+A reverse proxy, gateway, or load balancer can present that endpoint while distributing work across multiple local LLM servers.
+
+4
+00:00:21.576 --> 00:00:23.947
+Compatibility depends on details.
+
+5
+00:00:23.947 --> 00:00:27.188
+Endpoint paths must match client expectations.
+
+6
+00:00:27.188 --> 00:00:29.638
+Model names may need stable aliases.
+
+7
+00:00:29.638 --> 00:00:34.459
+Headers may carry authentication, tracing, or streaming preferences.
+
+8
+00:00:34.459 --> 00:00:39.596
+Response fields and error codes should remain understandable to the client.
+
+9
+00:00:39.596 --> 00:00:47.025
+A setup that works for one script may still fail for a coding assistant if it changes streaming or error behavior.
+
+10
+00:00:47.025 --> 00:00:50.503
+Streaming compatibility is a common failure point.
+
+11
+00:00:50.503 --> 00:00:58.959
+Some proxies buffer responses by default, turning an interactive token stream into a long pause followed by a complete answer.
+
+12
+00:00:58.959 --> 00:01:03.069
+Others apply idle timeouts that interrupt slow generations.
+
+13
+00:01:03.069 --> 00:01:11.446
+If a client expects server-sent events or chunked output, the entire path from client to backend must preserve that behavior.
+
+14
+00:01:11.446 --> 00:01:14.766
+Authentication and testing belong in the design.
+
+15
+00:01:14.766 --> 00:01:21.800
+A local endpoint may process source code, private documents, prompts, outputs, and accidental secrets.
+
+16
+00:01:21.800 --> 00:01:28.597
+Centralizing access can simplify controls, but it also makes the gateway sensitive infrastructure.
+
+17
+00:01:28.597 --> 00:01:41.005
+Before replacing direct backend connections, test the real chat UI, coding assistant, scripts, model selection, streaming, cancellation, retries, long prompts, and error handling.

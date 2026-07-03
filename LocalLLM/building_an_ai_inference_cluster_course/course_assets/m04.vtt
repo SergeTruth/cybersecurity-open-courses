@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.638
+Size each worker for the models it will serve.
+
+00:00:04.638 --> 00:00:13.251
+GPU architecture determines supported acceleration features, while VRAM determines whether model weights, context cache, and runtime overhead fit.
+
+00:00:13.251 --> 00:00:17.447
+More GPUs do not create shared memory automatically.
+
+00:00:17.447 --> 00:00:27.385
+A runtime must support tensor or pipeline parallelism to divide one model across devices, and cross-device communication may become the bottleneck.
+
+00:00:27.385 --> 00:00:34.673
+Replicating a model on separate GPUs is often simpler when the goal is concurrent capacity.
+
+00:00:34.673 --> 00:00:40.636
+CPUs handle tokenization, request processing, data movement, and services that surround inference.
+
+00:00:40.636 --> 00:00:46.599
+System RAM must accommodate model loading, caches, and non-GPU components without swapping.
+
+00:00:46.599 --> 00:01:00.071
+Use fast local SSD storage for active model copies when possible; repeatedly loading large models over a shared network can delay startup and turn storage into a cluster-wide dependency.
+
+00:01:00.071 --> 00:01:02.942
+Network design follows traffic patterns.
+
+00:01:02.942 --> 00:01:12.880
+Small text prompts may use little bandwidth, but model distribution, multimodal inputs, logging, backups, and distributed inference can move substantial data.
+
+00:01:12.880 --> 00:01:15.751
+Measure both bandwidth and latency.
+
+00:01:15.751 --> 00:01:23.480
+Choose switches with enough nonblocking capacity, appropriate port speeds, and management features for segmentation and monitoring.
+
+00:01:23.480 --> 00:01:33.419
+A fast link cannot compensate for an oversubscribed switch, poor cabling, or a design that transfers model state unnecessarily between nodes.
+
+00:01:33.419 --> 00:01:35.848
+Account for physical infrastructure.
+
+00:01:35.848 --> 00:01:43.578
+Confirm power circuits, outlet distribution, power-supply headroom, heat removal, airflow, and noise before installing dense compute.
+
+00:01:43.578 --> 00:01:51.749
+Rack systems improve serviceability and cable management, while desktop systems can be economical for a small lab.
+
+00:01:51.749 --> 00:02:00.362
+Consumer hardware may offer strong performance per dollar but usually has fewer remote-management, redundancy, validation, and support features.
+
+00:02:00.362 --> 00:02:06.767
+Document those tradeoffs rather than assuming low purchase cost means low operational cost.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.086
+Local interactive inference has a different personality than server tuning.
+
+2
+00:00:05.086 --> 00:00:10.866
+The user is usually waiting directly in front of the machine, so responsiveness matters.
+
+3
+00:00:10.866 --> 00:00:23.350
+A coding assistant, research helper, or document analysis workflow may tolerate modest total response time, but it feels broken if the first token takes too long or generation stutters badly.
+
+4
+00:00:23.350 --> 00:00:28.667
+For this environment, conservative settings are often the right starting point.
+
+5
+00:00:28.667 --> 00:00:36.913
+Choose a batch size and microbatch size that leave memory headroom for the operating system, editor, browser, and other tools.
+
+6
+00:00:36.913 --> 00:00:43.309
+If the workload uses long-context prompts, test with realistic documents instead of short demos.
+
+7
+00:00:43.309 --> 00:00:49.011
+Long prompts can make a configuration that looked stable suddenly feel slow or fragile.
+
+8
+00:00:49.011 --> 00:00:52.248
+Balance prompt speed against smooth generation.
+
+9
+00:00:52.248 --> 00:01:03.422
+A larger batch setting may speed up ingestion of a long prompt, but if it causes memory pressure, thermal throttling, or uneven generation, the user experience may be worse.
+
+10
+00:01:03.422 --> 00:01:12.746
+A smaller setting that streams reliably can be better for interactive work than a larger setting that wins one benchmark and then causes pauses.
+
+11
+00:01:12.746 --> 00:01:17.986
+Document stable settings by model, quantization, context length, and runtime.
+
+12
+00:01:17.986 --> 00:01:24.383
+A 7B model, a 13B model, and a larger mixture model can behave very differently on the same hardware.
+
+13
+00:01:24.383 --> 00:01:28.005
+Treat each configuration as its own operating profile.
+
+14
+00:01:28.005 --> 00:01:36.250
+The result should be boring in the best way: predictable startup, predictable memory use, and predictable response behavior.
+
+15
+00:01:36.250 --> 00:01:40.720
+Local users also notice interruptions that aggregate metrics hide.
+
+16
+00:01:40.720 --> 00:01:49.274
+A benchmark may report an acceptable average, while the actual assistant pauses at awkward times or makes the editor feel sluggish.
+
+17
+00:01:49.274 --> 00:02:00.139
+Treat subjective responsiveness as evidence, then connect it back to measurements such as first-token latency, memory headroom, CPU load, and sustained token rate.

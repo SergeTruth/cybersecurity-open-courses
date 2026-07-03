@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Inspect Linux GPU Stack Layers | GPU Drivers for Linux AI Systems</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="gpu_drivers_for_linux_ai_systems">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="4"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">GPU Drivers for Linux AI Systems</p>
+        <h1 id="module-title">Code Examples: Inspect Linux GPU Stack Layers</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">Linux GPU Code Examples</h2>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Review Kernel Modules, Headers, and DKMS Status</h3>
+          <pre class="code-block" data-lang="shell"><code>KERNEL=$(uname -r)
+
+printf &#x27;[running kernel]\n%s\n\n&#x27; &quot;$KERNEL&quot;
+printf &#x27;[kernel headers]\n&#x27;
+test -e &quot;/lib/modules/$KERNEL/build&quot; &amp;&amp; echo &quot;headers present&quot; || echo &quot;headers missing&quot;
+
+printf &#x27;\n[dkms status]\n&#x27;
+dkms status 2&gt;/dev/null || echo &quot;dkms not installed or no dkms modules&quot;
+
+printf &#x27;\n[gpu module details]\n&#x27;
+for module in nvidia amdgpu i915; do
+  modinfo &quot;$module&quot; 2&gt;/dev/null | sed -n &#x27;1,12p&#x27; || true
+done</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Check Device Nodes and Access Groups</h3>
+          <pre class="code-block" data-lang="shell"><code>printf &#x27;[current user]\n&#x27;
+id
+
+printf &#x27;\n[gpu device nodes]\n&#x27;
+ls -l /dev/nvidia* /dev/dri/renderD* /dev/kfd 2&gt;/dev/null || true
+
+printf &#x27;\n[relevant groups]\n&#x27;
+getent group video render 2&gt;/dev/null || true
+
+printf &#x27;\n[user-space gpu libraries]\n&#x27;
+ldconfig -p 2&gt;/dev/null | grep -Ei &#x27;cuda|nvidia|rocm|hip|vulkan|opencl&#x27; | head -80 || true</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Summarize Stack Layers as JSON</h3>
+          <pre class="code-block" data-lang="python"><code>import json
+import subprocess
+from pathlib import Path
+
+def run(command):
+    result = subprocess.run(command, text=True, capture_output=True, check=False)
+    return result.stdout.strip()
+
+report = {
+    &quot;kernel&quot;: run([&quot;uname&quot;, &quot;-r&quot;]),
+    &quot;gpu_pci&quot;: run([&quot;sh&quot;, &quot;-c&quot;, &quot;lspci -nn | grep -Ei &#x27;vga|3d|display|nvidia|amd|ati|intel&#x27; || true&quot;]).splitlines(),
+    &quot;device_nodes&quot;: [str(path) for path in Path(&quot;/dev&quot;).glob(&quot;nvidia*&quot;)] + [str(path) for path in Path(&quot;/dev/dri&quot;).glob(&quot;renderD*&quot;)],
+    &quot;loaded_modules&quot;: run([&quot;sh&quot;, &quot;-c&quot;, &quot;lsmod | grep -Ei &#x27;nvidia|amdgpu|i915|drm&#x27; || true&quot;]).splitlines(),
+}
+
+print(json.dumps(report, indent=2))</code></pre>
+        </article>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m02.html">Previous</a>
+        <a id="next-module" class="btn" href="m03.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why GPU Drivers Matter for Linux AI",
+    "title": "Why GPU Drivers Matter for Linux AI",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Prove the Acceleration Stack",
+    "title": "Code Examples: Prove the Acceleration Stack",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Linux Graphics and Compute Stack Basics",
+    "title": "Linux Graphics and Compute Stack Basics",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Inspect Linux GPU Stack Layers",
+    "title": "Code Examples: Inspect Linux GPU Stack Layers",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. NVIDIA Driver and CUDA Concepts",
+    "title": "NVIDIA Driver and CUDA Concepts",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Validate NVIDIA and CUDA",
+    "title": "Code Examples: Validate NVIDIA and CUDA",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. AMD, ROCm, Vulkan, and Open Compute Paths",
+    "title": "AMD, ROCm, Vulkan, and Open Compute Paths",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Validate AMD, ROCm, and Vulkan Paths",
+    "title": "Code Examples: Validate AMD, ROCm, and Vulkan Paths",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Installation Planning and Version Control",
+    "title": "Installation Planning and Version Control",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Document and Pin a Known-Good Stack",
+    "title": "Code Examples: Document and Pin a Known-Good Stack",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Containers and GPU Access",
+    "title": "Containers and GPU Access",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Validate Container GPU Access",
+    "title": "Code Examples: Validate Container GPU Access",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Validation and Performance Checks",
+    "title": "Validation and Performance Checks",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Validate Runtime and Performance",
+    "title": "Code Examples: Validate Runtime and Performance",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Troubleshooting Common Driver Problems",
+    "title": "Troubleshooting Common Driver Problems",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Gather Troubleshooting Evidence",
+    "title": "Code Examples: Gather Troubleshooting Evidence",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Build a Repeatable GPU Validation Record",
+    "title": "Code Examples: Build a Repeatable GPU Validation Record",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

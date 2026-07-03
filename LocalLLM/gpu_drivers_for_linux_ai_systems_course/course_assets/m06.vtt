@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.979
+Containers can simplify application dependencies, but they do not remove host GPU driver requirements.
+
+00:00:06.979 --> 00:00:12.794
+The host still needs the right driver, kernel modules, device nodes, and permissions.
+
+00:00:12.794 --> 00:00:19.020
+The container runtime then exposes GPU devices and compatible libraries into the container.
+
+00:00:19.020 --> 00:00:23.809
+If the host stack is broken, the container cannot magically repair it.
+
+00:00:23.809 --> 00:00:31.951
+For NVIDIA systems, the NVIDIA Container Toolkit is commonly used at a high level to make GPUs available to containers.
+
+00:00:31.951 --> 00:00:39.545
+ROCm container workflows have their own considerations around devices, groups, libraries, and supported images.
+
+00:00:39.545 --> 00:00:48.166
+In both cases, the container image must be compatible with the host driver and the runtime expectations of the AI application.
+
+00:00:48.166 --> 00:00:58.360
+Container failures often come from missing runtime configuration, missing device access, permissions, incorrect image selection, or version mismatch.
+
+00:00:58.360 --> 00:01:05.544
+A container might run successfully but still use the CPU if the application cannot see the GPU libraries.
+
+00:01:05.544 --> 00:01:10.197
+Validation should happen inside the container, not only on the host.
+
+00:01:10.197 --> 00:01:16.149
+The question is whether the workload sees and uses acceleration where it actually runs.
+
+00:01:16.149 --> 00:01:27.369
+Good container practice includes documenting the host driver, container runtime settings, image tags, environment variables, mounted devices, and validation output.
+
+00:01:27.369 --> 00:01:30.174
+Pin known-good images for stable systems.
+
+00:01:30.174 --> 00:01:31.774
+Update deliberately.
+
+00:01:31.774 --> 00:01:42.900
+Containers make AI applications easier to package, but GPU access remains a contract between host driver, runtime configuration, image contents, and application code.

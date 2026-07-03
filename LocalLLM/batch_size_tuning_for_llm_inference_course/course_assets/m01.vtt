@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.731
+Batch size tuning for inference is the practice of choosing how much work the runtime should process together when it serves prompts and generates tokens.
+
+2
+00:00:09.731 --> 00:00:17.440
+It sounds simple, but it sits at the intersection of model size, context length, memory, hardware, and user expectations.
+
+3
+00:00:17.440 --> 00:00:29.491
+In practical terms, batch settings decide whether the system handles one request at a time, groups pieces of work together, or keeps multiple active requests moving through the model at once.
+
+4
+00:00:29.491 --> 00:00:32.261
+This is different from training batch size.
+
+5
+00:00:32.261 --> 00:00:38.324
+During training, a batch is tied to examples, loss calculation, gradients, and weight updates.
+
+6
+00:00:38.324 --> 00:00:41.842
+During inference, the model weights are already fixed.
+
+7
+00:00:41.842 --> 00:00:50.674
+The question becomes operational: how can the runtime use available compute efficiently while still returning useful responses quickly?
+
+8
+00:00:50.674 --> 00:00:58.159
+A setting that makes sense for training documentation may not translate directly to a chat server or a local assistant.
+
+9
+00:00:58.159 --> 00:01:02.426
+It also helps to separate prompt processing from token generation.
+
+10
+00:01:02.426 --> 00:01:09.387
+When a prompt is submitted, the runtime has to process the existing context before the first new token appears.
+
+11
+00:01:09.387 --> 00:01:12.755
+After that, generation usually happens step by step.
+
+12
+00:01:12.755 --> 00:01:22.561
+Batch settings can affect these phases differently, so a configuration that improves prompt ingestion may not produce the smoothest streaming response.
+
+13
+00:01:22.561 --> 00:01:25.181
+The right answer depends on the workload.
+
+14
+00:01:25.181 --> 00:01:31.019
+A single-user local coding assistant usually values responsiveness and stable memory use.
+
+15
+00:01:31.019 --> 00:01:37.007
+A multi-user API service may accept slightly more latency if it can increase total throughput.
+
+16
+00:01:37.007 --> 00:01:49.208
+There is no universal best batch size because the best operating point changes with model architecture, quantization, runtime, hardware, prompt length, concurrency, and reliability goals.
+
+17
+00:01:49.208 --> 00:01:56.992
+A practical way to think about this is to start with the user experience you want, then work backward to the runtime settings.
+
+18
+00:01:56.992 --> 00:02:03.205
+If the system is a private assistant, the tuning target may be quick feedback and steady streaming.
+
+19
+00:02:03.205 --> 00:02:08.070
+If it is an internal API, the target may be more completed requests per minute.
+
+20
+00:02:08.070 --> 00:02:12.861
+Batch size is only meaningful when it is tied to one of those operating goals.

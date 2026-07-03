@@ -1,0 +1,43 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.392
+Local quantized model names often include labels such as Q2, Q3, Q4, Q5, Q6, or Q8.
+
+00:00:07.392 --> 00:00:21.544
+At a high level, the number indicates the approximate weight precision family: lower levels use less memory and usually accept more approximation, while higher levels retain more information and require more space.
+
+00:00:21.544 --> 00:00:31.048
+Suffixes identify specific methods, group sizes, or mixed-precision choices and are meaningful only in the context of that format and runtime.
+
+00:00:31.048 --> 00:00:41.398
+Q4 variants are often a practical starting point because they provide substantial memory savings while preserving useful quality for many models and tasks.
+
+00:00:41.398 --> 00:00:44.988
+That is a heuristic, not a guarantee.
+
+00:00:44.988 --> 00:00:57.027
+A particular architecture may respond differently, two Q4 methods may not behave identically, and a coding or reasoning task may reveal losses that casual conversation does not.
+
+00:00:57.027 --> 00:01:03.997
+Q2 and Q3 can make otherwise inaccessible models fit, but aggressive compression increases quality risk.
+
+00:01:03.997 --> 00:01:09.700
+Q5 and Q6 consume more memory and may preserve behavior more closely.
+
+00:01:09.700 --> 00:01:18.782
+Q8 often approaches the memory cost of higher precision while remaining useful when quality is prioritized and hardware has room.
+
+00:01:18.782 --> 00:01:27.020
+Speed does not increase monotonically as bits decrease; kernel efficiency, offload, memory fit, and hardware support all matter.
+
+00:01:27.020 --> 00:01:30.188
+Choose candidates around the hardware boundary.
+
+00:01:30.188 --> 00:01:38.003
+If Q5 fits with context headroom, compare it with Q4 rather than assuming the smaller one wins.
+
+00:01:38.003 --> 00:01:47.507
+If only Q3 fits fully on the GPU, compare its quality and speed with a smaller model at Q4 or Q5.
+
+00:01:47.507 --> 00:01:54.055
+Quantization level is one decision among model family, parameter count, context, runtime, and workload.

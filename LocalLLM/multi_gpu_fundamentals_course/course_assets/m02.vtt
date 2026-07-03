@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.186
+Model splitting can distribute weights across devices so a larger model fits.
+
+00:00:06.186 --> 00:00:10.997
+Layer splitting assigns groups of layers to different GPUs.
+
+00:00:10.997 --> 00:00:17.183
+Other parallel methods divide operations more tightly and may require frequent communication.
+
+00:00:17.183 --> 00:00:27.950
+Independent placement can be simpler: one GPU serves a general model while another serves code, vision, embeddings, or a second user queue.
+
+00:00:27.950 --> 00:00:35.052
+Failure and performance remain more isolated, but each workload must fit its assigned device.
+
+00:00:35.052 --> 00:00:42.613
+Serving multiple users often benefits from replicas or request routing rather than splitting every request.
+
+00:00:42.613 --> 00:00:48.340
+This can increase throughput and availability while preserving predictable single-GPU behavior.
+
+00:00:48.340 --> 00:00:53.151
+It also requires queueing, load balancing, and capacity controls.
+
+00:00:53.151 --> 00:00:58.879
+Batch workloads can process several documents, images, or prompts in parallel.
+
+00:00:58.879 --> 00:01:06.897
+Vision-and-text pipelines may assign image processing, language generation, and post-processing according to device capability and memory.
+
+00:01:06.897 --> 00:01:17.207
+Tradeoffs include motherboard and chassis constraints, power, heat, fan noise, purchase cost, idle consumption, software support, driver compatibility, monitoring, and recovery.
+
+00:01:17.207 --> 00:01:23.851
+Adding a second GPU can expose a weak power supply or airflow design.
+
+00:01:23.851 --> 00:01:33.702
+Define success numerically: required model and context, users, requests per minute, latency, throughput, memory margin, power budget, uptime, and cost.
+
+00:01:33.702 --> 00:01:40.346
+Without that baseline, multi-GPU becomes an expensive experiment with no clear pass condition.
+
+00:01:40.346 --> 00:01:43.782
+Separate memory-capacity need from compute-throughput need.
+
+00:01:43.782 --> 00:01:55.008
+Adding VRAM through splitting may allow a model to run while leaving generation limited by transfers, synchronization, or the least capable participating device.

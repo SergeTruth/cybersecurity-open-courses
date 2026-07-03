@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.069
+A load balancer can improve reliability, but it can also hide problems until users feel them.
+
+2
+00:00:06.069 --> 00:00:17.430
+Health checks should reflect real readiness: the process is alive, the API responds, the needed model is available, and recent requests are not failing at an unhealthy rate.
+
+3
+00:00:17.430 --> 00:00:22.876
+A server with an open port but constant generation timeouts is not a healthy target.
+
+4
+00:00:22.876 --> 00:00:26.222
+Monitor both the front endpoint and every backend.
+
+5
+00:00:26.222 --> 00:00:34.003
+At the gateway, track request volume, response times, status codes, timeouts, streaming interruptions, and queues.
+
+6
+00:00:34.003 --> 00:00:42.173
+On each backend, track resource pressure, active requests, model-loaded status, runtime errors, restarts, and failures.
+
+7
+00:00:42.173 --> 00:00:47.542
+Without backend visibility, you may know the service is slow without knowing why.
+
+8
+00:00:47.542 --> 00:00:51.121
+Many troubleshooting problems come from mismatches.
+
+9
+00:00:51.121 --> 00:01:01.081
+A backend may run a different runtime version, expose a different endpoint, use a different quantization, or map the same model name to a different file.
+
+10
+00:01:01.081 --> 00:01:03.415
+A proxy may strip a required header.
+
+11
+00:01:03.415 --> 00:01:06.761
+A timeout between layers may interrupt streaming.
+
+12
+00:01:06.761 --> 00:01:11.196
+Load balancing increases the need to keep assumptions consistent.
+
+13
+00:01:11.196 --> 00:01:14.387
+Failover and retries should match the workload.
+
+14
+00:01:14.387 --> 00:01:17.421
+Retrying before a response starts may be safe.
+
+15
+00:01:17.421 --> 00:01:21.156
+Retrying after streaming begins may confuse the client.
+
+16
+00:01:21.156 --> 00:01:26.058
+Retrying an agent request that performed tool actions can duplicate work.
+
+17
+00:01:26.058 --> 00:01:37.963
+Simple dashboards showing backend health, model availability, active requests, failures, and queue growth are enough to tell whether load balancing is helping or hiding trouble.

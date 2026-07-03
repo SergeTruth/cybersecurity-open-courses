@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Validate Runtime and Performance | GPU Drivers for Linux AI Systems</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="gpu_drivers_for_linux_ai_systems">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="14"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">GPU Drivers for Linux AI Systems</p>
+        <h1 id="module-title">Code Examples: Validate Runtime and Performance</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">Linux GPU Code Examples</h2>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Record GPU Utilization and Memory Snapshot</h3>
+          <pre class="code-block" data-lang="shell"><code>nvidia-smi --query-gpu=timestamp,index,name,utilization.gpu,memory.used,memory.total,temperature.gpu,power.draw \
+  --format=csv |
+  tee gpu-telemetry-snapshot.csv
+
+rocm-smi --showuse --showmemuse --showtemp --showpower 2&gt;/dev/null |
+  tee rocm-telemetry-snapshot.txt || true</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Run a Small Matrix Performance Smoke Test</h3>
+          <pre class="code-block" data-lang="python"><code>import time
+import torch
+
+if not torch.cuda.is_available():
+    raise SystemExit(&quot;GPU runtime is not visible; refusing to report a CPU fallback as success&quot;)
+
+device = torch.device(&quot;cuda:0&quot;)
+torch.cuda.reset_peak_memory_stats(device)
+
+start = time.perf_counter()
+x = torch.randn((4096, 4096), device=device)
+for _ in range(10):
+    x = x @ x.T
+torch.cuda.synchronize()
+elapsed = time.perf_counter() - start
+
+print({
+    &quot;device&quot;: torch.cuda.get_device_name(device),
+    &quot;elapsed_seconds&quot;: round(elapsed, 3),
+    &quot;peak_memory_mb&quot;: round(torch.cuda.max_memory_allocated(device) / 1024 / 1024, 1),
+})</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Validate an Inference Server Uses GPU</h3>
+          <pre class="code-block" data-lang="shell"><code>SERVER=http://127.0.0.1:8000
+
+curl -s &quot;$SERVER/health&quot; | tee inference-health.json
+curl -s &quot;$SERVER/v1/models&quot; | tee inference-models.json
+
+before=$(nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits 2&gt;/dev/null || true)
+curl -s &quot;$SERVER/v1/completions&quot; \
+  -H &#x27;content-type: application/json&#x27; \
+  -d &#x27;{&quot;model&quot;:&quot;local-model&quot;,&quot;prompt&quot;:&quot;Say ready.&quot;,&quot;max_tokens&quot;:8}&#x27; | tee inference-smoke.json
+after=$(nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits 2&gt;/dev/null || true)
+
+printf &#x27;before=%s\nafter=%s\n&#x27; &quot;$before&quot; &quot;$after&quot; | tee inference-gpu-delta.txt</code></pre>
+        </article>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m07.html">Previous</a>
+        <a id="next-module" class="btn" href="m08.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why GPU Drivers Matter for Linux AI",
+    "title": "Why GPU Drivers Matter for Linux AI",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Prove the Acceleration Stack",
+    "title": "Code Examples: Prove the Acceleration Stack",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Linux Graphics and Compute Stack Basics",
+    "title": "Linux Graphics and Compute Stack Basics",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Inspect Linux GPU Stack Layers",
+    "title": "Code Examples: Inspect Linux GPU Stack Layers",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. NVIDIA Driver and CUDA Concepts",
+    "title": "NVIDIA Driver and CUDA Concepts",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Validate NVIDIA and CUDA",
+    "title": "Code Examples: Validate NVIDIA and CUDA",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. AMD, ROCm, Vulkan, and Open Compute Paths",
+    "title": "AMD, ROCm, Vulkan, and Open Compute Paths",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Validate AMD, ROCm, and Vulkan Paths",
+    "title": "Code Examples: Validate AMD, ROCm, and Vulkan Paths",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Installation Planning and Version Control",
+    "title": "Installation Planning and Version Control",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Document and Pin a Known-Good Stack",
+    "title": "Code Examples: Document and Pin a Known-Good Stack",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Containers and GPU Access",
+    "title": "Containers and GPU Access",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Validate Container GPU Access",
+    "title": "Code Examples: Validate Container GPU Access",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Validation and Performance Checks",
+    "title": "Validation and Performance Checks",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Validate Runtime and Performance",
+    "title": "Code Examples: Validate Runtime and Performance",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Troubleshooting Common Driver Problems",
+    "title": "Troubleshooting Common Driver Problems",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Gather Troubleshooting Evidence",
+    "title": "Code Examples: Gather Troubleshooting Evidence",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Build a Repeatable GPU Validation Record",
+    "title": "Code Examples: Build a Repeatable GPU Validation Record",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

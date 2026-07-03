@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.474
+VRAM is normally local to each GPU.
+
+00:00:03.474 --> 00:00:10.217
+Installing two cards with 12 gigabytes each does not automatically create one transparent 24-gigabyte device.
+
+00:00:10.217 --> 00:00:16.143
+The runtime must support splitting or parallelism for a model to use both.
+
+00:00:16.143 --> 00:00:20.434
+Layer splitting places different model layers on different GPUs.
+
+00:00:20.434 --> 00:00:27.177
+A request moves through those layers, so the boundary between devices can add communication overhead.
+
+00:00:27.177 --> 00:00:31.468
+Uneven splits may be useful when memory sizes differ.
+
+00:00:31.468 --> 00:00:36.576
+Tensor parallelism divides mathematical operations across GPUs at a high level.
+
+00:00:36.576 --> 00:00:42.093
+It can use several devices simultaneously but requires synchronization and fast communication.
+
+00:00:42.093 --> 00:00:46.385
+Benefits depend on model, runtime, topology, and batch behavior.
+
+00:00:46.385 --> 00:00:51.493
+Model sharding is the broader idea of dividing weights or components.
+
+00:00:51.493 --> 00:01:00.279
+CPU offload can place some layers or cache in system memory when GPU capacity is insufficient, trading speed for fit.
+
+00:01:00.279 --> 00:01:02.936
+These methods are not equivalent.
+
+00:01:02.936 --> 00:01:10.905
+Context memory and key-value cache can be large, especially with long prompts, multiple sessions, or certain model architectures.
+
+00:01:10.905 --> 00:01:18.057
+A weight split that barely fits may leave no room for the intended context or concurrency.
+
+00:01:18.057 --> 00:01:22.756
+The smallest, slowest, or least-connected GPU can become a bottleneck.
+
+00:01:22.756 --> 00:01:28.274
+Balance should consider usable memory, compute, bandwidth, thermal behavior, and software capability.
+
+00:01:28.274 --> 00:01:32.973
+Benchmark the exact split rather than adding VRAM labels together.
+
+00:01:32.973 --> 00:01:37.264
+Cache placement can be as important as weight placement.
+
+00:01:37.264 --> 00:01:46.460
+Long context and simultaneous sessions may load one device unevenly or require transfers, so test the intended cache strategy and concurrency.

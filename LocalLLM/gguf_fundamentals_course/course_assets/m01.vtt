@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.719
+GGUF is a model file format commonly used in local inference workflows, especially in llama.cpp-style ecosystems and the tools built around them.
+
+00:00:09.719 --> 00:00:19.505
+When people download a local language model for a desktop, workstation, or homelab, the file they actually run is often a packaged inference file.
+
+00:00:19.505 --> 00:00:28.420
+GGUF helps that runtime understand what the model is, how the data is laid out, and what supporting information is needed to load it.
+
+00:00:28.420 --> 00:00:31.168
+A model file needs more than raw numbers.
+
+00:00:31.168 --> 00:00:39.815
+It needs weights, metadata, tokenizer information, architecture details, context information, and often quantization information.
+
+00:00:39.815 --> 00:00:47.926
+Those pieces let a compatible runtime read the file, allocate memory, prepare prompt text correctly, and generate output.
+
+00:00:47.926 --> 00:00:57.444
+Without structure, the runtime would not know how to interpret the tensors or how to connect the file contents to the model family it expects.
+
+00:00:57.444 --> 00:01:03.610
+It is useful to separate three ideas: architecture, checkpoint, and packaged inference file.
+
+00:01:03.610 --> 00:01:09.442
+Architecture describes the model design, such as how layers and attention are arranged.
+
+00:01:09.442 --> 00:01:14.067
+A checkpoint is a saved set of learned weights for that architecture.
+
+00:01:14.067 --> 00:01:22.110
+A packaged inference file is a runtime-friendly artifact that combines weights and metadata in a format a tool can load.
+
+00:01:22.110 --> 00:01:24.456
+GGUF lives in that packaging layer.
+
+00:01:24.456 --> 00:01:32.500
+GGUF matters because it makes local AI more practical on consumer hardware, used workstations, and private lab machines.
+
+00:01:32.500 --> 00:01:40.342
+It supports model variants that can be loaded by efficient runtimes and matched to available CPU, GPU, RAM, and VRAM.
+
+00:01:40.342 --> 00:01:50.598
+The format does not make every model fast or accurate by itself, but it gives local inference tools a common way to package and read model data reliably.

@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.890
+A multi-GPU AI system uses more than one graphics processor for compute.
+
+00:00:05.890 --> 00:00:16.143
+The GPUs may live in one workstation, connect through supported external or server designs, or operate in separate machines coordinated by software.
+
+00:00:16.143 --> 00:00:19.851
+Gaming multi-GPU historically focused on rendering frames.
+
+00:00:19.851 --> 00:00:23.996
+Compute multi-GPU divides numerical work or independent jobs.
+
+00:00:23.996 --> 00:00:32.940
+Language-model inference may split one model, place different models on different devices, or route separate requests to separate GPUs.
+
+00:00:32.940 --> 00:00:38.393
+Multiple GPUs do not automatically behave like one simple larger GPU.
+
+00:00:38.393 --> 00:00:44.283
+Each device has its own memory, compute, thermal limits, and connection path.
+
+00:00:44.283 --> 00:00:50.173
+Software must explicitly decide how model data and work move among them.
+
+00:00:50.173 --> 00:00:58.244
+One use case is capacity: fitting a model or context that does not fit on one device.
+
+00:00:58.244 --> 00:01:02.825
+Another is throughput: processing more independent jobs or users.
+
+00:01:02.825 --> 00:01:10.460
+A third is pipeline separation, such as placing vision encoding and text generation on different resources.
+
+00:01:10.460 --> 00:01:14.168
+These goals have different architectures and metrics.
+
+00:01:14.168 --> 00:01:18.749
+Splitting one request may add synchronization and transfer delay.
+
+00:01:18.749 --> 00:01:25.948
+Running independent requests can scale more cleanly but does not help one oversized model fit.
+
+00:01:25.948 --> 00:01:33.583
+Multi-GPU is worthwhile when a measured workload justifies power, heat, cost, configuration, monitoring, and failure complexity.
+
+00:01:33.583 --> 00:01:41.218
+Start by stating whether the requirement is larger-model capacity, single-request speed, concurrency, batch throughput, or experimentation.
+
+00:01:41.218 --> 00:01:44.054
+Also define the failure domain.
+
+00:01:44.054 --> 00:01:52.125
+One split model may stop when either GPU fails, while separate model replicas may preserve partial service.
+
+00:01:52.125 --> 00:01:56.270
+More devices increase options, but architecture determines resilience.

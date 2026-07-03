@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local LLM Server Architecture | Load Balancing for Multiple Local LLM Servers</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="load_balancing_for_multiple_local_llm_servers">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="2"
+        data-total="10"
+        data-audio="m02"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Load Balancing for Multiple Local LLM Servers</p>
+        <h1 id="module-title">Local LLM Server Architecture</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m02.png"
+          alt="Blank placeholder image for a lesson on local LLM server architecture."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m01.html">Previous</a>
+        <a id="next-module" class="btn" href="m03.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>A local LLM server is a stack. Hardware provides CPU, GPU, VRAM, system memory, disk, and network capacity. A runtime loads the model file, prepares prompts, manages context, and generates tokens. An API layer receives requests from chat clients, coding assistants, scripts, or agents. Load balancing works only when each layer is understood well enough to predict what a backend can handle.</p>
+          <p>The model file shapes capacity. Size, format, quantization level, context capability, and runtime compatibility affect memory use and response speed. A smaller quantized model may fit on modest hardware, while a larger model may require more VRAM and longer load times. A long context setting can help with document analysis, but it can also increase prompt processing time and memory pressure.</p>
+          <p>Most clients interact with local servers through HTTP APIs, often using concepts similar to cloud LLM APIs: model names, chat-style request bodies, streaming chunks, and structured errors. Compatibility is helpful but not guaranteed. Endpoint paths, request fields, headers, authentication behavior, and error formats can differ. A load balancer must preserve the behavior the client expects.</p>
+          <p>Streaming is especially important. Many interfaces expect partial output while the model is still generating, so the backend, proxy, and load balancer must avoid buffering the entire response. Each backend should also be monitored as its own system. A server with a different model, smaller context window, older runtime, or weaker GPU may need different routing rules instead of equal treatment.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label": "What Local LLM Load Balancing Means",
+        "href": "m01.html"
+    },
+    {
+        "label": "Local LLM Server Architecture",
+        "href": "m02.html"
+    },
+    {
+        "label": "Workload Patterns and Routing Needs",
+        "href": "m03.html"
+    },
+    {
+        "label": "Load Balancing Strategies",
+        "href": "m04.html"
+    },
+    {
+        "label": "Client Compatibility and API Design",
+        "href": "m05.html"
+    },
+    {
+        "label": "Performance and Capacity Planning",
+        "href": "m06.html"
+    },
+    {
+        "label": "Reliability, Monitoring, and Troubleshooting",
+        "href": "m07.html"
+    },
+    {
+        "label": "Security and Local Network Operations",
+        "href": "m08.html"
+    },
+    {
+        "label": "Course Summary and Key Takeaways",
+        "href": "m09.html"
+    },
+    {
+        "label": "Final Quiz",
+        "href": "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

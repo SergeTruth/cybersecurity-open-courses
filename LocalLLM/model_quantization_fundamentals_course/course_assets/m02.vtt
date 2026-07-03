@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.461
+Local inference is frequently constrained by memory capacity and bandwidth.
+
+00:00:04.461 --> 00:00:12.800
+A full-precision language model may exceed the VRAM of a consumer GPU or the system RAM of a small computer.
+
+00:00:12.800 --> 00:00:20.364
+Quantization reduces the weight footprint, allowing a larger parameter count or more operating headroom on the same hardware.
+
+00:00:20.364 --> 00:00:27.151
+That headroom matters because the runtime, context cache, operating system, and other applications also need memory.
+
+00:00:27.151 --> 00:00:28.897
+Fit changes performance.
+
+00:00:28.897 --> 00:00:36.460
+When a quantized model remains entirely on the GPU, generation can avoid repeated transfers to slower system memory.
+
+00:00:36.460 --> 00:00:43.636
+On CPU-only systems, smaller weights reduce RAM demand and the amount of data moved through memory channels.
+
+00:00:43.636 --> 00:00:48.873
+Loading and startup can improve because fewer bytes are read from storage.
+
+00:00:48.873 --> 00:00:56.048
+These benefits vary with hardware and runtime; compact values still have to be unpacked and processed efficiently.
+
+00:00:56.048 --> 00:01:01.672
+Quantization expands practical choice, but it does not make every large model sensible.
+
+00:01:01.672 --> 00:01:09.624
+A heavily compressed model may fit while responding slowly, leaving little context headroom, or losing too much task quality.
+
+00:01:09.624 --> 00:01:16.800
+A smaller model at a healthier precision may be faster and more accurate for a specific job.
+
+00:01:16.800 --> 00:01:21.648
+Capability depends on model design and training, not parameter count alone.
+
+00:01:21.648 --> 00:01:28.436
+Think in terms of a complete resource budget: weights, context, cache, batch, runtime, and concurrent work.
+
+00:01:28.436 --> 00:01:34.060
+Select a quantization that fits with margin and test it on real prompts.
+
+00:01:34.060 --> 00:01:39.297
+The purpose is not to squeeze the largest possible file through startup.
+
+00:01:39.297 --> 00:01:45.309
+It is to make useful local AI responsive, stable, and affordable on available hardware.

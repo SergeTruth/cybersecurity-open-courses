@@ -1,0 +1,46 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:16.512
+A typical LLM API architecture includes clients, an API gateway or reverse proxy, an application backend, an inference server, a model runtime, model files, a tokenizer, compute resources, queues, caches, logs, monitoring, and storage.
+
+00:00:16.512 --> 00:00:26.489
+Not every system needs every component on day one, but each component represents a responsibility that becomes important as the service grows.
+
+00:00:26.489 --> 00:00:31.197
+Requests usually begin in application code or a user-facing client.
+
+00:00:31.197 --> 00:00:40.331
+The request may pass through a gateway or reverse proxy that handles TLS, routing, authentication, rate limits, and policy checks.
+
+00:00:40.331 --> 00:00:49.185
+The application backend may add business context, retrieve documents, apply authorization, format messages, or select a model.
+
+00:00:49.185 --> 00:00:56.773
+The inference server then passes the prepared request to a runtime that loads the model and produces output.
+
+00:00:56.773 --> 00:01:05.275
+The model runtime depends on model files, tokenizer information, CPU resources, GPU resources, memory, and configuration.
+
+00:01:05.275 --> 00:01:07.734
+Queues can smooth bursts of demand.
+
+00:01:07.734 --> 00:01:12.372
+Caches may reduce repeated work for embeddings or common requests.
+
+00:01:12.372 --> 00:01:19.679
+Logs and metrics provide visibility into latency, errors, token use, queue depth, and resource pressure.
+
+00:01:19.679 --> 00:01:26.916
+Storage may hold prompts, outputs, embeddings, configuration, or audit records depending on the design.
+
+00:01:26.916 --> 00:01:30.078
+Good architecture makes request flow visible.
+
+00:01:30.078 --> 00:01:37.175
+Teams should be able to explain how a prompt moves from caller to model and how the response returns.
+
+00:01:37.175 --> 00:01:49.400
+They should know where authentication happens, where user authorization is checked, where sensitive data may be logged, where timeouts apply, and where failures are reported.
+
+00:01:49.400 --> 00:01:54.951
+An LLM API is an application service, not a single model file with a port open.

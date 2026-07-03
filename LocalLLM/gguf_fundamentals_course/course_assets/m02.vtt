@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.570
+A local model file contains model weights, usually stored as tensors.
+
+00:00:04.570 --> 00:00:11.856
+Tensors are structured arrays of numbers that represent what the model learned during training or fine-tuning.
+
+00:00:11.856 --> 00:00:14.638
+Those numbers are not useful in isolation.
+
+00:00:14.638 --> 00:00:25.235
+The runtime has to know the model architecture, tensor names, tensor shapes, precision, and layout so it can map the file contents into the correct computation.
+
+00:00:25.235 --> 00:00:29.872
+Metadata turns a model file into something a runtime can reason about.
+
+00:00:29.872 --> 00:00:40.734
+It can describe architecture information, context length, tokenizer details, quantization type, special tokens, model family, and sometimes prompt formatting hints.
+
+00:00:40.734 --> 00:00:44.907
+This is why a model file is more than a single blob of numbers.
+
+00:00:44.907 --> 00:00:51.531
+It is a package of data and instructions that helps the runtime load and use the model consistently.
+
+00:00:51.531 --> 00:00:57.293
+Tokenizer data is especially important because models do not process text as raw words.
+
+00:00:57.293 --> 00:01:02.459
+Text is broken into tokens, and generated tokens are converted back into text.
+
+00:01:02.459 --> 00:01:08.553
+The vocabulary, special tokens, and tokenizer behavior need to match what the model expects.
+
+00:01:08.553 --> 00:01:18.886
+If the tokenizer is wrong, prompt text may be represented differently than the model was trained to understand, which can lead to weak or unexpected output.
+
+00:01:18.886 --> 00:01:23.655
+Runtime compatibility depends on both the file and the inference engine.
+
+00:01:23.655 --> 00:01:31.868
+A GGUF file may be valid, but an older runtime might not support a newer architecture, metadata field, or quantization type.
+
+00:01:31.868 --> 00:01:38.160
+Likewise, a runtime may support the architecture but require specific settings to perform well.
+
+00:01:38.160 --> 00:01:44.784
+Local inference is a combination of model file, runtime capability, hardware fit, and configuration.

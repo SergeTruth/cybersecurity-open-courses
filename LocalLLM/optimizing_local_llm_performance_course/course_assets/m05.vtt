@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.045
+GPU offload moves model layers or operations from CPU execution to an accelerator.
+
+00:00:06.045 --> 00:00:12.089
+Full offload is usually fastest when the model and cache fit in VRAM.
+
+00:00:12.089 --> 00:00:20.635
+Partial offload can make a larger model usable, but each remaining CPU stage and data transfer can reduce speed.
+
+00:00:20.635 --> 00:00:27.096
+Increase offload while watching VRAM headroom and stability rather than setting the maximum blindly.
+
+00:00:27.096 --> 00:00:31.890
+Batch settings affect how much prompt work is processed together.
+
+00:00:31.890 --> 00:00:39.602
+Larger batches may improve accelerator utilization and prompt throughput but consume more memory and can increase latency.
+
+00:00:39.602 --> 00:00:48.982
+Thread count affects CPU-side work; using every logical thread is not always fastest because memory bandwidth, scheduling, and background tasks matter.
+
+00:00:48.982 --> 00:00:52.942
+Test a small range around the runtime default.
+
+00:00:52.942 --> 00:00:58.570
+Select the backend that is genuinely supported by the hardware and build.
+
+00:00:58.570 --> 00:01:01.279
+CUDA commonly accelerates NVIDIA devices.
+
+00:01:01.279 --> 00:01:09.825
+ROCm supports compatible AMD configurations, Vulkan can provide cross-vendor acceleration, Metal supports Apple platforms, and CPU fallback preserves portability.
+
+00:01:09.825 --> 00:01:13.785
+Confirm the active backend in logs and utilization.
+
+00:01:13.785 --> 00:01:18.996
+A successful launch may still be running mostly on the CPU.
+
+00:01:18.996 --> 00:01:23.373
+Defaults aim for broad compatibility, not every machine's optimum.
+
+00:01:23.373 --> 00:01:28.584
+Context length, cache format, offload, batch, threads, and memory mapping interact.
+
+00:01:28.584 --> 00:01:37.130
+Record a baseline, change one setting, rerun the same workload, and keep only improvements that preserve quality and reliability.
+
+00:01:37.130 --> 00:01:44.008
+Tuning should reduce a measured constraint, not create a mysterious collection of copied command-line flags.

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Compatibility and API Design | Load Balancing for Multiple Local LLM Servers</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="load_balancing_for_multiple_local_llm_servers">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="5"
+        data-total="10"
+        data-audio="m05"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Load Balancing for Multiple Local LLM Servers</p>
+        <h1 id="module-title">Client Compatibility and API Design</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m05.png"
+          alt="Blank placeholder image for a lesson on client compatibility and local LLM API design."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m04.html">Previous</a>
+        <a id="next-module" class="btn" href="m06.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Many teams use a load balancer because clients want one endpoint. Chat UIs, coding assistants, automation scripts, and internal tools are easier to configure when they all call a single base URL. A reverse proxy, gateway, or load balancer can present that endpoint while distributing work across multiple local LLM servers.</p>
+          <p>Compatibility depends on details. Endpoint paths must match client expectations. Model names may need stable aliases. Headers may carry authentication, tracing, or streaming preferences. Response fields and error codes should remain understandable to the client. A setup that works for one script may still fail for a coding assistant if it changes streaming or error behavior.</p>
+          <p>Streaming compatibility is a common failure point. Some proxies buffer responses by default, turning an interactive token stream into a long pause followed by a complete answer. Others apply idle timeouts that interrupt slow generations. If a client expects server-sent events or chunked output, the entire path from client to backend must preserve that behavior.</p>
+          <p>Authentication and testing belong in the design. A local endpoint may process source code, private documents, prompts, outputs, and accidental secrets. Centralizing access can simplify controls, but it also makes the gateway sensitive infrastructure. Before replacing direct backend connections, test the real chat UI, coding assistant, scripts, model selection, streaming, cancellation, retries, long prompts, and error handling.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+    {
+        "label": "What Local LLM Load Balancing Means",
+        "href": "m01.html"
+    },
+    {
+        "label": "Local LLM Server Architecture",
+        "href": "m02.html"
+    },
+    {
+        "label": "Workload Patterns and Routing Needs",
+        "href": "m03.html"
+    },
+    {
+        "label": "Load Balancing Strategies",
+        "href": "m04.html"
+    },
+    {
+        "label": "Client Compatibility and API Design",
+        "href": "m05.html"
+    },
+    {
+        "label": "Performance and Capacity Planning",
+        "href": "m06.html"
+    },
+    {
+        "label": "Reliability, Monitoring, and Troubleshooting",
+        "href": "m07.html"
+    },
+    {
+        "label": "Security and Local Network Operations",
+        "href": "m08.html"
+    },
+    {
+        "label": "Course Summary and Key Takeaways",
+        "href": "m09.html"
+    },
+    {
+        "label": "Final Quiz",
+        "href": "m10.html"
+    }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.182
+VRAM often sets the first boundary.
+
+00:00:03.182 --> 00:00:10.183
+It must hold model weights, runtime overhead, and the key-value cache used by active context.
+
+00:00:10.183 --> 00:00:17.608
+When the model fits completely on a supported GPU, generation usually benefits from high memory bandwidth.
+
+00:00:17.608 --> 00:00:25.882
+If only part fits, the runtime may split work between GPU and CPU, increasing transfers and slowing output.
+
+00:00:25.882 --> 00:00:32.883
+A model that consumes nearly all VRAM can fail as context or batch size grows.
+
+00:00:32.883 --> 00:00:38.611
+CPU performance matters for tokenization, prompt processing, unsupported layers, and CPU-only inference.
+
+00:00:38.611 --> 00:00:47.734
+System RAM must hold the operating system, runtime, model data that does not fit on the GPU, and other applications.
+
+00:00:47.734 --> 00:00:53.462
+Heavy paging to disk can make a configuration technically functional but unusable.
+
+00:00:53.462 --> 00:01:03.857
+Storage speed affects model loading and cache operations, though it does not usually control token generation after the working set is in memory.
+
+00:01:03.857 --> 00:01:11.282
+PCI Express bandwidth matters when model data moves repeatedly between system memory and a discrete GPU.
+
+00:01:11.282 --> 00:01:20.405
+Unified-memory systems share one memory pool between CPU and GPU, reducing some transfers but sharing bandwidth and capacity across both.
+
+00:01:20.405 --> 00:01:24.860
+Neither architecture removes limits; each changes where they appear.
+
+00:01:24.860 --> 00:01:30.588
+Observe clocks, utilization, temperature, power, memory, and storage during the real workload.
+
+00:01:30.588 --> 00:01:36.740
+Cooling or power limits can reduce sustained clocks after an initially fast run.
+
+00:01:36.740 --> 00:01:40.771
+Background processes can consume RAM or GPU resources.
+
+00:01:40.771 --> 00:01:44.802
+Upgrade only after evidence identifies the constrained stage.
+
+00:01:44.802 --> 00:01:57.743
+More RAM will not fix a fully GPU-resident model limited by GPU memory bandwidth, and a faster GPU will not fix a workload stalled on storage or thermal throttling.
