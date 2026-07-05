@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.575
+A secret in a Go application is any value that gives access, proves identity, protects integrity, or unlocks private material.
+
+2
+00:00:08.575 --> 00:00:21.077
+Common examples include API keys, database passwords, OAuth client secrets, signing keys, TLS private keys, service account tokens, webhook signing secrets, and cloud credentials.
+
+3
+00:00:21.077 --> 00:00:35.101
+If disclosure of the value would let another person or process call an internal service, connect to a database, impersonate a workload, decrypt protected data, or forge trusted messages, treat it as a secret.
+
+4
+00:00:35.101 --> 00:00:37.986
+Not every configuration value is a secret.
+
+5
+00:00:37.986 --> 00:00:48.003
+A port number, feature flag name, public client identifier, service URL, or region setting may be configuration without being sensitive by itself.
+
+6
+00:00:48.003 --> 00:00:54.414
+Some identifiers are safe to share, while others become sensitive when combined with a secret.
+
+7
+00:00:54.414 --> 00:01:02.188
+For example, a database host name may not be a secret, but the username and password used to connect to it usually are.
+
+8
+00:01:02.188 --> 00:01:07.637
+A cloud account ID may be an identifier, while the access key material is a secret.
+
+9
+00:01:07.637 --> 00:01:15.812
+The engineering habit is to classify values by consequence, not by variable name. Go services often touch secrets early.
+
+10
+00:01:15.812 --> 00:01:30.397
+A server may read configuration, construct dependencies, open a database pool, create HTTP clients, configure TLS, initialize background workers, or connect to message queues before it starts accepting traffic.
+
+11
+00:01:30.397 --> 00:01:39.292
+This makes startup a critical control point. Missing secrets should be detected clearly. Misplaced secrets should not be printed.
+
+12
+00:01:39.292 --> 00:01:49.390
+Insecure defaults should not quietly replace required production values. Secrets management is more than hiding strings. A secret has a lifecycle.
+
+13
+00:01:49.390 --> 00:01:58.526
+Someone or something creates it. A system stores it. A workload receives it. Code uses it. Operators rotate it. Auditors review access.
+
+14
+00:01:58.526 --> 00:02:03.254
+Incident responders revoke it when needed. Eventually it is deleted.
+
+15
+00:02:03.254 --> 00:02:17.679
+If a team only thinks about where to put the value today, it will miss the questions that matter tomorrow: who owns it, what can it access, how long should it live, how will it be rotated, and what happens if it is exposed.
+
+16
+00:02:17.679 --> 00:02:23.449
+In Go, clean secrets management usually shows up as boring code and clear boundaries.
+
+17
+00:02:23.449 --> 00:02:31.383
+The application loads required values through a small configuration layer. It validates them without logging them.
+
+18
+00:02:31.383 --> 00:02:37.954
+It passes credentials only to the components that need them. It redacts secret-bearing structs.
+
+19
+00:02:37.954 --> 00:02:47.250
+It uses context timeouts when calling external providers. It avoids printing full request headers, DSNs, or raw configuration objects.
+
+20
+00:02:47.250 --> 00:02:49.093
+The goal is not cleverness.
+
+21
+00:02:49.093 --> 00:02:57.668
+The goal is a service that can start, run, fail, rotate, and be investigated without leaking the values that protect the system.
+
+22
+00:02:57.668 --> 00:03:07.125
+A practical classification habit is to ask three questions during design review. What can this value access? Who or what is allowed to use it?
+
+23
+00:03:07.125 --> 00:03:15.299
+What would we need to rotate if it appeared in a log, ticket, or repository? Those questions keep the discussion grounded.
+
+24
+00:03:15.299 --> 00:03:24.515
+They also help Go teams avoid treating every string as equally sensitive while still protecting the values that can change system trust.

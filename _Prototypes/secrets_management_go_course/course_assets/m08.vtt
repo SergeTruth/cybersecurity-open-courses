@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.457
+Secrets management is tested as much in the development workflow as in production.
+
+2
+00:00:05.457 --> 00:00:11.772
+Local development often uses .env-like files, shell variables, or local configuration files.
+
+3
+00:00:11.772 --> 00:00:22.687
+That can be fine for developer convenience, but those files must stay out of source control, use development-only values, and avoid sharing production credentials.
+
+4
+00:00:22.687 --> 00:00:31.340
+A local secret should not unlock production simply because the code path is the same. Go tests are a good place to enforce boundaries.
+
+5
+00:00:31.340 --> 00:00:40.228
+Instead of calling a real managed secret store in ordinary unit tests, define a small provider interface and use a fake implementation.
+
+6
+00:00:40.228 --> 00:00:47.712
+The fake returns known nonsecret values or controlled errors. This makes tests faster, more reliable, and safer.
+
+7
+00:00:47.712 --> 00:00:56.210
+It also lets you test fail-closed behavior: missing secret, empty value, provider timeout, revoked value, and refresh failure.
+
+8
+00:00:56.210 --> 00:01:06.423
+Integration tests can exercise a real provider when needed, but they should run in a controlled environment with dedicated test secrets and clear cleanup.
+
+9
+00:01:06.423 --> 00:01:13.361
+Avoid realistic secrets in fixtures. A token that looks real can trigger scanners and confuse reviewers.
+
+10
+00:01:13.361 --> 00:01:17.649
+Worse, a copied production header in a fixture may actually work.
+
+11
+00:01:17.649 --> 00:01:24.588
+Use obvious nonworking values such as test-only-token or example.invalid when a placeholder is enough.
+
+12
+00:01:24.588 --> 00:01:29.733
+If a test proves redaction, assert that sensitive input is absent from output.
+
+13
+00:01:29.733 --> 00:01:38.933
+If a config loader fails, assert that the error names the missing key without including the secret value. CI and CD systems need special care.
+
+14
+00:01:38.933 --> 00:01:47.041
+Pipeline variables, logs, artifacts, cache directories, test reports, and container build output may all expose values.
+
+15
+00:01:47.041 --> 00:01:56.240
+Treat pipeline output as sensitive. Disable shell tracing around secret-handling steps. Avoid commands that print entire environments.
+
+16
+00:01:56.240 --> 00:02:00.216
+Do not bake secrets into Docker images or compiled binaries.
+
+17
+00:02:00.216 --> 00:02:09.416
+If a build needs access to a secret, prefer a scoped CI secret or workload identity that is available only to the required job and environment.
+
+18
+00:02:09.416 --> 00:02:13.470
+Secret scanning is a useful control, not a perfect guarantee.
+
+19
+00:02:13.470 --> 00:02:20.876
+Scanners can catch common key formats, high-entropy strings, and known credential patterns before they merge.
+
+20
+00:02:20.876 --> 00:02:26.099
+They should run in pre-commit hooks, pull requests, or CI gates where possible.
+
+21
+00:02:26.099 --> 00:02:35.299
+But scanning does not replace code review, redaction, or rotation planning. If a real secret is committed, treat it as exposed and rotate it.
+
+22
+00:02:35.299 --> 00:02:42.861
+Finally, keep environments separate. Development, test, staging, and production should not share credentials.
+
+23
+00:02:42.861 --> 00:02:50.891
+A staging bug should not expose production access. A developer laptop should not need production secrets for normal work.
+
+24
+00:02:50.891 --> 00:03:04.534
+The safer workflow is boring: fake providers in unit tests, dedicated test credentials for integration tests, scoped CI secrets, scanning gates, and production access only where the service truly needs it.
+
+25
+00:03:04.534 --> 00:03:08.432
+Local development should also teach the production habit.
+
+26
+00:03:08.432 --> 00:03:18.021
+If developers routinely run the service with explicit nonworking values, fake providers, and ignored local files, the safe path becomes normal.
+
+27
+00:03:18.021 --> 00:03:24.648
+If the easiest path requires copying production secrets, the workflow is training people into risk.
+
+28
+00:03:24.648 --> 00:03:29.170
+Good tooling makes the secure path the fast path for everyday Go work.

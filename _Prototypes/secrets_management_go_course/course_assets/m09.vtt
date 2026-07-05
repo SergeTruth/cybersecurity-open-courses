@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.473
+A practical secrets review for a Go service starts with inventory.
+
+2
+00:00:04.473 --> 00:00:11.502
+Identify the values that grant access, prove identity, protect integrity, or unlock private material.
+
+3
+00:00:11.502 --> 00:00:21.247
+Separate ordinary configuration from true secrets. Name each secret by purpose, owner, environment, permission boundary, and rotation path.
+
+4
+00:00:21.247 --> 00:00:29.794
+If no one knows who owns a credential or how it can be replaced, the service has an operational risk, not just a documentation gap.
+
+5
+00:00:29.794 --> 00:00:32.750
+Next, check where secrets enter the system.
+
+6
+00:00:32.750 --> 00:00:41.377
+They should not be hardcoded in source, embedded in binaries, committed to fixtures, baked into Docker layers, or printed by CI.
+
+7
+00:00:41.377 --> 00:00:53.997
+A Go configuration loader should use explicit required settings, prefer os.LookupEnv when it needs to distinguish unset from empty, and fail closed when production secrets are missing.
+
+8
+00:00:53.997 --> 00:01:02.464
+Startup errors should name missing configuration keys without printing values. Then inspect how secrets move through code.
+
+9
+00:01:02.464 --> 00:01:10.612
+Pass them only to components that need them. Avoid broad global config objects that every package can print or serialize.
+
+10
+00:01:10.612 --> 00:01:12.848
+Redact secret-bearing structs.
+
+11
+00:01:12.848 --> 00:01:21.235
+Do not log full DSNs, Authorization headers, raw config, provider responses, or panic output containing sensitive fields.
+
+12
+00:01:21.235 --> 00:01:29.942
+If the service needs diagnostics, log safe identifiers and error classes instead. Provider integration deserves its own check.
+
+13
+00:01:29.942 --> 00:01:38.968
+If the service uses a managed store, verify authentication, least privilege, context timeouts, retry limits, and audit visibility.
+
+14
+00:01:38.968 --> 00:01:47.675
+If the platform injects secrets, verify file permissions, environment exposure, refresh behavior, and restart expectations.
+
+15
+00:01:47.675 --> 00:01:56.142
+If the service caches secrets, document the time-to-live, refresh policy, failure behavior, and revocation implications.
+
+16
+00:01:56.142 --> 00:02:03.970
+Finally, review rotation, testing, CI/CD, and incident response. Rotation should be possible without guesswork.
+
+17
+00:02:03.970 --> 00:02:11.718
+Tests should use fake providers and nonworking values unless an integration environment is explicitly required.
+
+18
+00:02:11.718 --> 00:02:20.505
+CI secrets should be scoped, protected from logs, and separated by environment. Secret scanning should help block risky commits.
+
+19
+00:02:20.505 --> 00:02:32.167
+Incident response should include how to identify affected secrets, rotate or revoke them, redeploy safely, and confirm that logs and artifacts did not spread the exposure.
+
+20
+00:02:32.167 --> 00:02:34.962
+Secrets management is a system behavior.
+
+21
+00:02:34.962 --> 00:02:43.270
+Go code matters, but so do runtime identity, infrastructure policy, developer workflow, observability, and operations.
+
+22
+00:02:43.270 --> 00:02:52.136
+A secure service is not one that merely hides a string. It is one that can load, use, rotate, audit, and recover secrets deliberately.

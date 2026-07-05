@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.444
+Secrets change. Sometimes they change on a schedule.
+
+2
+00:00:03.444 --> 00:00:11.557
+Sometimes they change because a person leaves, a token expires, a provider rotates a key, or an incident requires revocation.
+
+3
+00:00:11.557 --> 00:00:18.445
+A Go service that assumes credentials never change will eventually turn a routine rotation into an outage.
+
+4
+00:00:18.445 --> 00:00:23.496
+Rotation needs to be part of the design, not a surprising production exercise.
+
+5
+00:00:23.496 --> 00:00:32.603
+Static secrets, such as a long-lived database password or webhook signing secret, are simple to understand but risky when they live too long.
+
+6
+00:00:32.603 --> 00:00:36.966
+They need an owner, rotation interval, and replacement procedure.
+
+7
+00:00:36.966 --> 00:00:45.155
+Dynamic or short-lived credentials reduce exposure time because they expire automatically, but they require refresh logic.
+
+8
+00:00:45.155 --> 00:00:56.788
+A service using dynamic database credentials, for example, must understand when connections need to be recreated and how to handle credentials that expire while work is in flight.
+
+9
+00:00:56.788 --> 00:01:03.446
+Caching is a tradeoff. A local cache reduces latency and avoids calling the provider for every request.
+
+10
+00:01:03.446 --> 00:01:12.707
+It can also reduce provider load and make the service more resilient during brief provider interruptions. But cached secrets can become stale.
+
+11
+00:01:12.707 --> 00:01:20.054
+They can delay revocation. They can cause multiple service instances to use different versions during a rollout.
+
+12
+00:01:20.054 --> 00:01:28.473
+The cache needs a time-to-live, refresh behavior, and error policy that matches the risk of the secret and the needs of the service.
+
+13
+00:01:28.473 --> 00:01:31.152
+Refresh logic should avoid two extremes.
+
+14
+00:01:31.152 --> 00:01:38.269
+One extreme is panic on any provider error, which can take down healthy traffic during a short provider outage.
+
+15
+00:01:38.269 --> 00:01:43.856
+The other extreme is use an old secret forever, which defeats rotation and revocation.
+
+16
+00:01:43.856 --> 00:01:57.096
+A better design is explicit: use a valid cached value until its allowed lifetime ends, refresh in the background when possible, fail closed when no valid value exists, and report metrics when refresh fails.
+
+17
+00:01:57.096 --> 00:02:02.760
+The exact policy depends on the system, but the policy should be written down and tested.
+
+18
+00:02:02.760 --> 00:02:21.434
+Common failure modes include an expired provider token, a revoked credential, a provider outage, a partial rollout where only some instances receive the new value, a rotated database password while old connections remain open, and clients that verify signatures with only one active key.
+
+19
+00:02:21.434 --> 00:02:27.327
+Many production systems need overlap windows, where old and new secrets both work briefly.
+
+20
+00:02:27.327 --> 00:02:31.690
+Others need immediate revocation, where overlap is unacceptable.
+
+21
+00:02:31.690 --> 00:02:45.466
+For Go engineers, the rotation question is practical: how does this dependency learn about a new secret, how does it replace old state, how does it behave when refresh fails, and how will operators see what happened?
+
+22
+00:02:45.466 --> 00:02:53.655
+If those answers are clear before an incident, rotation becomes maintenance instead of drama. Rotation should be observable.
+
+23
+00:02:53.655 --> 00:03:04.752
+Operators need to know when the last refresh succeeded, which version or generation is active when that information is safe to expose, and whether failures are increasing.
+
+24
+00:03:04.752 --> 00:03:09.803
+Metrics and logs should describe refresh health without printing the secret.
+
+25
+00:03:09.803 --> 00:03:18.528
+This lets teams detect stale credentials, provider outages, or partial rollout problems before customers experience a hard failure.

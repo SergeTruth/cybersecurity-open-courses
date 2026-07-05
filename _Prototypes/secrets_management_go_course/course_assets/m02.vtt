@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.441
+The secret lifecycle starts before application code reads a value.
+
+2
+00:00:04.441 --> 00:00:19.323
+A secret is created for a purpose, stored in a location, granted to a workload or person, used by code, rotated on a schedule or after an event, audited for access, revoked when trust changes, and deleted when it is no longer needed.
+
+3
+00:00:19.323 --> 00:00:28.050
+Each phase is a chance to reduce risk or accidentally expand it. Hardcoding a secret is dangerous even when the repository is private.
+
+4
+00:00:28.050 --> 00:00:30.699
+Source control is optimized for memory.
+
+5
+00:00:30.699 --> 00:00:40.673
+Git history, forks, pull request diffs, code review tools, local clones, backups, and build systems can preserve a value long after the line is removed.
+
+6
+00:00:40.673 --> 00:00:46.984
+Once a secret enters source control, the right response is usually rotation, not just deletion.
+
+7
+00:00:46.984 --> 00:00:55.555
+Removing the visible string may clean the current file, but it does not make old commits, build logs, or developer machines forget.
+
+8
+00:00:55.555 --> 00:00:58.438
+Secret exposure also happens outside code.
+
+9
+00:00:58.438 --> 00:01:07.087
+A Go service can leak a database password through a formatted error, a panic, a test fixture, a golden file, or a structured log field.
+
+10
+00:01:07.087 --> 00:01:16.826
+A CI job can print environment variables during debugging. A Dockerfile can copy a secret into a build layer. A crash dump can contain process memory.
+
+11
+00:01:16.826 --> 00:01:24.618
+A binary or container image can carry embedded configuration if the build process substituted values at compile time.
+
+12
+00:01:24.618 --> 00:01:34.747
+These paths matter because attackers and incident responders both look beyond the current source file. Ownership makes lifecycle management possible.
+
+13
+00:01:34.747 --> 00:01:44.253
+Every secret should have a purpose, an owner, an environment, a permission boundary, and a rotation path. Purpose answers why the secret exists.
+
+14
+00:01:44.253 --> 00:01:52.980
+Owner answers who can approve changes and respond to exposure. Environment separates development, test, staging, and production.
+
+15
+00:01:52.980 --> 00:02:01.317
+Permission boundary defines what the value can do. Rotation path explains how to replace it without guessing during an outage.
+
+16
+00:02:01.317 --> 00:02:04.901
+For Go engineers, lifecycle thinking changes design.
+
+17
+00:02:04.901 --> 00:02:13.706
+Instead of passing a raw string through many packages, you define where the value enters the program and which dependency receives it.
+
+18
+00:02:13.706 --> 00:02:19.861
+Instead of letting missing values fall back to insecure defaults, you fail closed at startup.
+
+19
+00:02:19.861 --> 00:02:25.316
+Instead of logging full configuration for convenience, you implement redaction.
+
+20
+00:02:25.316 --> 00:02:35.211
+Instead of assuming a database password is permanent, you design for rotation and connection refresh. The lifecycle is not paperwork around the code.
+
+21
+00:02:35.211 --> 00:02:41.678
+It is part of the system behavior that keeps a service recoverable when credentials change or leak.
+
+22
+00:02:41.678 --> 00:02:47.210
+A useful lifecycle review also asks where the secret might be copied automatically.
+
+23
+00:02:47.210 --> 00:02:57.885
+Build caches, deployment manifests, container registries, crash reporting tools, and observability pipelines may all receive data from the application path.
+
+24
+00:02:57.885 --> 00:03:03.651
+The safest teams assume that a secret can travel unless the system is designed to stop it.
+
+25
+00:03:03.651 --> 00:03:11.988
+That assumption leads to better rotation procedures, cleaner access reviews, and fewer surprises during incident response.

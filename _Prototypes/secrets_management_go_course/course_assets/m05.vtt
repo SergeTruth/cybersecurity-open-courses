@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.428
+Managed secret stores move sensitive values out of source code and ordinary configuration files.
+
+2
+00:00:06.428 --> 00:00:16.419
+Common options include Vault, AWS Secrets Manager, cloud key vault services, Kubernetes integrations, and platform-provided injection mechanisms.
+
+3
+00:00:16.419 --> 00:00:32.063
+The names differ, but the engineering concerns are similar: where is the secret stored, how does the workload authenticate, what permissions does it receive, how is access audited, and what happens when the provider is slow or unavailable.
+
+4
+00:00:32.063 --> 00:00:39.188
+There are two broad delivery models. In a pull model, the Go service calls a provider API at startup or runtime.
+
+5
+00:00:39.188 --> 00:00:45.074
+It authenticates with a workload identity, requests a named secret, and receives a value.
+
+6
+00:00:45.074 --> 00:00:52.122
+Pull models can support dynamic credentials and explicit refresh logic, but they add a runtime dependency.
+
+7
+00:00:52.122 --> 00:01:03.042
+Your code must use context deadlines, handle cancellation, limit retries, and decide whether a missing provider is a startup failure or a degraded runtime condition.
+
+8
+00:01:03.042 --> 00:01:12.645
+In an injection model, the platform delivers the secret to the process through an environment variable, mounted file, sidecar, or other boundary.
+
+9
+00:01:12.645 --> 00:01:17.602
+The application reads a local value, while the platform handles retrieval.
+
+10
+00:01:17.602 --> 00:01:23.410
+Injection can make application code simpler, but it does not remove lifecycle concerns.
+
+11
+00:01:23.410 --> 00:01:33.246
+File permissions, environment exposure, refresh behavior, and rotation still matter. If a mounted secret changes, the service may need to reload it.
+
+12
+00:01:33.246 --> 00:01:40.061
+If an environment variable changes, an already running process usually will not see it without restart.
+
+13
+00:01:40.061 --> 00:01:44.940
+A useful Go pattern is to hide provider specifics behind a small interface.
+
+14
+00:01:44.940 --> 00:01:52.762
+For example, application code can depend on a SecretProvider with a Get method that accepts a context and a logical name.
+
+15
+00:01:52.762 --> 00:01:58.648
+The production implementation calls the managed store. Tests use a fake implementation.
+
+16
+00:01:58.648 --> 00:02:08.716
+This keeps business logic from importing provider SDKs everywhere and makes timeout behavior easier to test. Client initialization also deserves care.
+
+17
+00:02:08.716 --> 00:02:18.552
+Use the platform's recommended workload identity or service account path instead of embedding long-lived provider credentials in the application.
+
+18
+00:02:18.552 --> 00:02:23.664
+Grant only the secret paths or names the service needs. Set explicit timeouts.
+
+19
+00:02:23.664 --> 00:02:29.937
+Avoid unbounded retries during startup, because a failing provider can make deployments hang.
+
+20
+00:02:29.937 --> 00:02:35.823
+Log the secret name or provider path only if it is approved to disclose; never log the value.
+
+21
+00:02:35.823 --> 00:02:39.927
+Managed stores are not a substitute for engineering judgment.
+
+22
+00:02:39.927 --> 00:02:48.214
+They centralize control, but your Go service still has to retrieve, validate, use, cache, rotate, and report failures safely.
+
+23
+00:02:48.214 --> 00:02:51.699
+Provider-neutral design also helps with migration.
+
+24
+00:02:51.699 --> 00:02:59.367
+A team may start with platform-injected files, move to a cloud secrets service, and later adopt dynamic credentials.
+
+25
+00:02:59.367 --> 00:03:05.950
+If business code depends on a small interface, those changes stay near the infrastructure boundary.
+
+26
+00:03:05.950 --> 00:03:15.398
+If provider SDK objects spread through the codebase, rotation policy, retries, and error handling become harder to change consistently later.

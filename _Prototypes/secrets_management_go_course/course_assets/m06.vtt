@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.095
+After a Go service loads a secret, the next question is where that value goes.
+
+2
+00:00:05.095 --> 00:00:19.267
+Runtime consumers include database connection pools, HTTP clients that set Authorization headers, TLS clients that use private keys, webhook verifiers, token signers, message queue clients, and cloud SDKs.
+
+3
+00:00:19.267 --> 00:00:24.681
+A common mistake is to pass an entire config object everywhere because it is easy.
+
+4
+00:00:24.681 --> 00:00:33.758
+That expands the number of packages, tests, logs, and developers that can accidentally touch the secret. Prefer narrow construction.
+
+5
+00:00:33.758 --> 00:00:39.729
+The database package receives the database DSN or credential object because it needs it.
+
+6
+00:00:39.729 --> 00:00:45.382
+The webhook verifier receives the webhook secret because it validates signatures.
+
+7
+00:00:45.382 --> 00:00:52.945
+The HTTP client constructor receives a token source or credential provider because it attaches authorization.
+
+8
+00:00:52.945 --> 00:01:02.420
+Other packages receive nonsecret settings or already constructed dependencies. This style makes the permission boundary visible in code.
+
+9
+00:01:02.420 --> 00:01:09.904
+Runtime memory deserves honest language. Go strings are convenient, immutable, and widely used by libraries.
+
+10
+00:01:09.904 --> 00:01:22.404
+They are not ideal when you need guaranteed memory wiping, because copying, garbage collection, compiler behavior, and library internals make strong zeroization promises difficult.
+
+11
+00:01:22.404 --> 00:01:38.088
+For most web services, practical controls usually matter more: use least privilege, prefer short-lived credentials, isolate processes, avoid unnecessary copies, avoid debug dumps, and keep secrets out of broad global variables.
+
+12
+00:01:38.088 --> 00:01:45.970
+Database DSNs are a good example. A DSN may include host, username, password, database name, and connection options.
+
+13
+00:01:45.970 --> 00:01:55.922
+It is tempting to log the DSN when connection setup fails. Do not. Log the safe parts: database alias, host if approved, environment, and error class.
+
+14
+00:01:55.922 --> 00:01:59.346
+Pass the DSN only to the driver or connection layer.
+
+15
+00:01:59.346 --> 00:02:09.537
+If your driver supports structured credential options or token sources, consider those patterns because they can make rotation and redaction easier.
+
+16
+00:02:09.537 --> 00:02:17.180
+HTTP Authorization headers need similar treatment. Build them as close as possible to the outbound request path.
+
+17
+00:02:17.180 --> 00:02:26.973
+Do not store full headers in shared request logs. If you must record request metadata, record that authorization was present, not the credential.
+
+18
+00:02:26.973 --> 00:02:37.323
+TLS private keys and signing keys should be loaded through controlled paths and handed only to the TLS configuration or signing component that needs them.
+
+19
+00:02:37.323 --> 00:02:46.957
+The runtime goal is controlled usefulness. A secret exists so the service can do required work. It should not become general application state.
+
+20
+00:02:46.957 --> 00:02:57.626
+Keep it scoped, pass it deliberately, avoid exposing it through diagnostics, and assume that someday it will need to change while the service keeps operating.
+
+21
+00:02:57.626 --> 00:03:02.004
+Be especially careful with helper functions that seem harmless.
+
+22
+00:03:02.004 --> 00:03:09.568
+A function that builds an HTTP client, formats a DSN, or constructs a signer may create extra copies of the secret.
+
+23
+00:03:09.568 --> 00:03:13.708
+That is sometimes unavoidable, but it should be intentional.
+
+24
+00:03:13.708 --> 00:03:25.412
+Keep constructors narrow, avoid returning secret-bearing structs to broad callers, and document which component owns refresh or replacement when the credential changes.
