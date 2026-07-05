@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Capture Ethics, Scope, and Setup",
+  "graphicAlt": "Conceptual visual of authorized capture scope, privacy, and responsible handling.",
+  "narration": "Before starting any packet capture, confirm that you are authorized to inspect the traffic. Authorization is not a small detail. Packet captures can expose addresses, hostnames, usernames, cookies, tokens, credentials, personal information, browsing behavior, file names, and application data. Even when your intent is defensive, the capture file may contain information that belongs to other people or systems.\n\nScope is how you keep the work professional and controlled. Define the network, the device, the interface, the time window, and the purpose of the capture. A good scope statement might say that you are capturing traffic from one approved lab workstation on its wired interface for five minutes while reproducing a DNS resolution problem. A weak scope statement would simply say that you are capturing traffic to see what is happening. The first statement is bounded. The second invites unnecessary collection.\n\nFor learning, the safest path is to open approved capture files or capture only from an authorized lab system that you control. Do not capture from networks, systems, or users that are outside your permission. Do not intercept private communications. If you are uncertain whether a capture is allowed, stop and ask for clarification before collecting anything.\n\nHandle capture files like evidence. Store them in approved locations, limit access, and follow your organization's retention rules. If a report or ticket needs packet details, include only the minimum required information. Redact sensitive values when policy requires it. When credentials, tokens, cookies, API keys, or personal data appear in a capture, protect them and avoid copying them into chat messages, screenshots, tickets, or documents unless there is a clear approved need.\n\nEthical packet analysis is not slower analysis. It is better analysis. Clear authorization, limited scope, secure storage, and careful reporting make your technical findings more trustworthy.",
+  "narrationPoints": [
+    "Capture only traffic you are authorized to inspect.",
+    "Define network, device, interface, and time window.",
+    "Packet captures can contain sensitive data.",
+    "Minimize collection and protect capture files.",
+    "Use approved labs or approved capture files."
+  ]
+};

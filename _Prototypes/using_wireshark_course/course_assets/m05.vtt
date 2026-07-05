@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.401
+Filters are one of the first skills that make Wireshark usable.
+
+2
+00:00:04.401 --> 00:00:10.380
+The important beginner distinction is between display filters and capture filters.
+
+3
+00:00:10.380 --> 00:00:17.605
+A display filter changes which captured packets are shown on the screen. The packets remain in the file.
+
+4
+00:00:17.605 --> 00:00:25.743
+You can clear the filter and return to the full capture. A capture filter changes what is collected in the first place.
+
+5
+00:00:25.743 --> 00:00:34.213
+Packets excluded by a capture filter are not available later. Display filters are usually safer while you are exploring.
+
+6
+00:00:34.213 --> 00:00:40.524
+If you want to focus on TCP traffic, you can use tcp. If you want UDP, use udp. For DNS, use dns.
+
+7
+00:00:40.524 --> 00:00:49.078
+For HTTP, use http when that protocol is visible. To focus on a host, a beginner-friendly example is ip.addr == 192.0.2.10.
+
+8
+00:00:49.078 --> 00:00:52.981
+To focus on a service port, you might use tcp.port == 443.
+
+9
+00:00:52.981 --> 00:01:00.786
+To look for a simple approved test string in packet data, frame contains "example" can be useful in a lab capture.
+
+10
+00:01:00.786 --> 00:01:08.592
+These examples are for defensive analysis of authorized traffic. A display filter should match your question.
+
+11
+00:01:08.592 --> 00:01:13.990
+If the question is whether a device queried DNS, filtering on dns makes sense.
+
+12
+00:01:13.990 --> 00:01:22.377
+If the question is whether a connection to a server was attempted, filtering on the server IP address or TCP port may help.
+
+13
+00:01:22.377 --> 00:01:28.439
+If the filter returns nothing, that is information, but it is not automatically proof.
+
+14
+00:01:28.439 --> 00:01:38.155
+The capture point, timing, and protocol behavior still matter. Capture filters can reduce noise and file size, but they require more care.
+
+15
+00:01:38.155 --> 00:01:45.380
+If you filter too narrowly at capture time, you may exclude packets that would have explained the issue.
+
+16
+00:01:45.380 --> 00:01:53.518
+For beginners, it is often better to capture within a clear authorized scope, then use display filters for analysis.
+
+17
+00:01:53.518 --> 00:02:03.483
+Good filtering is not about hiding data you do not like. It is about reducing noise while preserving the evidence needed to answer the question.
