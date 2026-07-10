@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Storage, Integrity, and Transport",
+  "graphicAlt": "Blank placeholder graphic for DFIR storage and integrity",
+  "narration": "Evidence storage deserves planning before an incident. Evidence drives, secure shares, object storage buckets, and case repositories should be selected with capacity, access control, encryption, retention, and transfer needs in mind. Evidence may contain personal data, business secrets, credentials, security architecture details, regulated information, or attacker artifacts. Treating evidence casually can create a second incident.\n\nWrite blockers are commonly discussed in forensics because they help prevent changes to source media during acquisition. The practical idea is simple: when evidence should not be altered, use approved methods that reduce the chance of writing to the source. Not every collection scenario uses a physical write blocker, especially in cloud, SaaS, and live response contexts, but the principle still applies. Preserve first, work from copies, and document any unavoidable changes.\n\nHash verification is one of the simplest ways to support integrity. By calculating a cryptographic hash at collection and later comparing it against the stored item, analysts can detect whether a file changed. Hashes do not explain what evidence means, and they do not prove every aspect of collection was perfect. They do provide a practical integrity check that belongs in the toolkit workflow.\n\nSecure transport is also part of the toolkit. Evidence may need to move from a remote site, endpoint, cloud export, or external partner into a controlled repository. Transfers should protect confidentiality and integrity, and access should be limited to people with a legitimate need. Backups and retention rules should align with policy, legal guidance, and case requirements. The toolkit should make the safe path the easy path.",
+  "narrationPoints": [
+    "Evidence storage deserves planning before an incident.",
+    "Write blockers are commonly discussed in forensics because they help prevent changes to source media during acquisition.",
+    "Hash verification is one of the simplest ways to support integrity.",
+    "Secure transport is also part of the toolkit."
+  ]
+};

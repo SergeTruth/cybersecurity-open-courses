@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Authorization Means",
+  "graphicAlt": "Blank placeholder image for a lesson introducing authorization fundamentals.",
+  "narration": "Authorization is the decision about what an authenticated identity is allowed to do. Authentication answers whether the subject is who or what it claims to be. Authorization answers whether that verified subject may read a record, update a file, call an API, approve a workflow, administer a tenant, or perform some other protected action. Successful login is only the beginning of access control, not the end.\n\nIt helps to separate identification, authentication, authorization, and accounting. Identification is the claim, such as a username or service identity. Authentication verifies the claim. Authorization determines permitted actions against protected resources. Accounting records activity for audit, investigation, billing, or operational review. When teams blend these concepts together, they often create systems where being logged in is treated as permission to do too much.\n\nSubjects can be human users, service accounts, applications, workloads, devices, or API clients. Protected objects can be resources, records, files, functions, APIs, tenants, reports, administrative operations, or background jobs. The authorization question is always tied to a subject, an action, a resource, and relevant context. Without all of those pieces, the decision is usually vague or overbroad.\n\nAuthorization failures can expose data, enable privilege escalation, or allow unintended system changes. They can also create operational problems when legitimate users cannot do their work or support teams do not understand why access was denied. Strong authorization is therefore a design and operations discipline: access should be predictable, appropriate, auditable, and aligned with business and security risk.",
+  "narrationPoints": [
+    "Authorization is the decision about what an authenticated identity is allowed to do.",
+    "It helps to separate identification, authentication, authorization, and accounting.",
+    "Subjects can be human users, service accounts, applications, workloads, devices, or API clients.",
+    "Authorization failures can expose data, enable privilege escalation, or allow unintended system changes."
+  ]
+};

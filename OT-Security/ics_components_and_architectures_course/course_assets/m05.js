@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "SCADA and Control Platforms",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "SCADA stands for supervisory control and data acquisition. A SCADA platform gathers information from controllers and remote sites, presents that information to operators, manages alarms and trends, and supports authorized supervisory actions. It is especially common when assets are distributed across a large geographic area.\n\nRemote sites may contain RTUs, PLCs, communications equipment, and local control that continues when the central connection is unavailable. At the center, SCADA servers, communications front ends, databases, operator stations, and engineering functions work together to acquire and interpret field data.\n\nSupervisory control usually operates above fast local control loops. The central system may issue setpoints, schedules, or high-level commands while controllers handle immediate equipment logic. This separation helps remote processes remain stable, but the exact authority depends on the engineered design.\n\nControl room personnel use SCADA to maintain situational awareness, respond to alarms, coordinate field work, and manage changing conditions. Reliable time, consistent asset naming, communications health, and clear alarm priorities are essential to trustworthy decisions.\n\nSCADA concentration creates security value and risk. Central platforms can reveal broad process state and may reach many remote assets. Protect them with segmentation, strong identity controls, restricted administration, monitored remote access, resilient backups, and tested failover. Communication gateways and front ends are important trust boundaries.\n\nAn architecture review should document what happens if central servers, a remote link, or a control-room workstation becomes unavailable. Security measures must preserve local safety and control while limiting unauthorized reach. Monitoring should connect central events with remote-site evidence so incident responders can understand both technical and operational impact.",
+  "narrationPoints": [
+    "SCADA stands for supervisory control and data acquisition.",
+    "Remote sites may contain RTUs, PLCs, communications equipment, and local control that continues when the central connection is unavailable.",
+    "Supervisory control usually operates above fast local control loops.",
+    "Control room personnel use SCADA to maintain situational awareness, respond to alarms, coordinate field work, and manage changing conditions.",
+    "SCADA concentration creates security value and risk.",
+    "An architecture review should document what happens if central servers, a remote link, or a control-room workstation becomes unavailable."
+  ]
+};

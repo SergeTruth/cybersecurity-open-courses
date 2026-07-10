@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "File System and Timeline Analysis",
+  "graphicAlt": "Blank placeholder graphic for macOS filesystem and timeline analysis",
+  "narration": "APFS is Apple's modern file system used on many macOS systems. At a high level, analysts care about how file metadata, timestamps, snapshots, permissions, ownership, and volume structure affect evidence. File timestamps can support timeline reconstruction, but they need careful interpretation. Normal application behavior, sync tools, updates, and investigator actions can all change metadata.\n\nPermissions and ownership help explain which users or processes could access files. Hidden files and dot directories can contain shell configuration, application state, developer artifacts, and user settings. Downloads and execution clues may appear in file metadata, quarantine attributes, browser artifacts, application logs, and endpoint telemetry. The strongest analysis compares several sources rather than relying on one marker.\n\nQuarantine attributes can help indicate that a file may have been downloaded or received from an external source. They are useful clues, but they do not automatically prove maliciousness, user intent, or execution. A file can have a quarantine attribute and be harmless. A suspicious file may lack one. Analysts should interpret quarantine data alongside downloads, browser history, logs, timestamps, signatures, and user activity.\n\nTimelines connect the investigation. A useful macOS timeline may combine file metadata, unified logs, application artifacts, plists, launch item changes, browser records, endpoint telemetry, and cloud or identity events. The analyst should note time zones, clock issues, collection limitations, and uncertainty. A timeline should make the evidence easier to reason about, not hide weak assumptions.",
+  "narrationPoints": [
+    "APFS is Apple's modern file system used on many macOS systems.",
+    "Permissions and ownership help explain which users or processes could access files.",
+    "Quarantine attributes can help indicate that a file may have been downloaded or received from an external source.",
+    "Timelines connect the investigation."
+  ]
+};

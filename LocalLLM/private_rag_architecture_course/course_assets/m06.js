@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Permissions, Tenant Isolation, and Access Enforcement",
+  "graphicAlt": "Draft visual summary for Permissions, Tenant Isolation, and Access Enforcement",
+  "narration": "Permission enforcement is a core requirement for private RAG. The system must not allow users to retrieve documents or chunks they could not access through the approved source system or workflow. This requirement applies even when the answer is summarized, transformed, or returned through a conversational interface.\n\nEnforcement can happen at ingestion time, query time, or both. Ingestion-time separation may reduce risk by placing different tenants, classifications, or departments into different collections. Query-time enforcement is often essential because user access changes, documents move, groups are updated, projects close, and workflow-specific restrictions may apply.\n\nA strong design connects user identity, group membership, service accounts, application roles, tenant IDs, document permissions, metadata filters, row-level or document-level rules, and audit trails. The retrieval service should know who is asking, what workflow they are using, and what content is eligible before selecting context for the model.\n\nAdministrative access deserves separate treatment. People who manage indexes, prompts, connectors, logs, or source mappings may have visibility and influence that ordinary users do not. Admin roles should be narrow, reviewable, and logged.\n\nPrivate RAG should favor least privilege and deny-by-default behavior for restricted material. Do not rely only on separate user interfaces or broad shared indexes when sensitive content is involved. Test permission boundaries before launch, after source changes, and whenever the retrieval architecture changes.\n\nAccess tests should use realistic roles and document examples. Include users with partial access, users from other tenants, users whose access was recently removed, and service identities that support background jobs or evaluation workflows.",
+  "narrationPoints": [
+    "Permission enforcement is a core requirement for private RAG.",
+    "Enforcement can happen at ingestion time, query time, or both.",
+    "A strong design connects user identity, group membership, service accounts, application roles, tenant IDs, document permissions, metadata filters...",
+    "Administrative access deserves separate treatment.",
+    "Private RAG should favor least privilege and deny-by-default behavior for restricted material."
+  ]
+};

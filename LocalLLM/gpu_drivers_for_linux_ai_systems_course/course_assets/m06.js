@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Containers and GPU Access",
+  "graphicAlt": "Blank placeholder image for module 6: Containers and GPU Access",
+  "narration": "Containers can simplify application dependencies, but they do not remove host GPU driver requirements. The host still needs the right driver, kernel modules, device nodes, and permissions. The container runtime then exposes GPU devices and compatible libraries into the container. If the host stack is broken, the container cannot magically repair it.\n\nFor NVIDIA systems, the NVIDIA Container Toolkit is commonly used at a high level to make GPUs available to containers. ROCm container workflows have their own considerations around devices, groups, libraries, and supported images. In both cases, the container image must be compatible with the host driver and the runtime expectations of the AI application.\n\nContainer failures often come from missing runtime configuration, missing device access, permissions, incorrect image selection, or version mismatch. A container might run successfully but still use the CPU if the application cannot see the GPU libraries. Validation should happen inside the container, not only on the host. The question is whether the workload sees and uses acceleration where it actually runs.\n\nGood container practice includes documenting the host driver, container runtime settings, image tags, environment variables, mounted devices, and validation output. Pin known-good images for stable systems. Update deliberately. Containers make AI applications easier to package, but GPU access remains a contract between host driver, runtime configuration, image contents, and application code.",
+  "narrationPoints": [
+    "Containers can simplify application dependencies, but they do not remove host GPU driver requirements.",
+    "For NVIDIA systems, the NVIDIA Container Toolkit is commonly used at a high level to make GPUs available to containers.",
+    "Container failures often come from missing runtime configuration, missing device access, permissions, incorrect image selection, or version mismatch.",
+    "Good container practice includes documenting the host driver, container runtime settings, image tags, environment variables, mounted devices, and..."
+  ]
+};

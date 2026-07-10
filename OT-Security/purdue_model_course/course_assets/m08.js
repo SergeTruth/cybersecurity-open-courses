@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Applying the Purdue Model to Security",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Applying Purdue begins with reality, not a blank diagram. Inventory assets, document their operational functions, and map actual communication paths. Then assign levels where the model clarifies responsibility and trust. If a system performs several functions or crosses levels, record that complexity rather than forcing a misleading label.\n\nUse the model to design segmentation. Group systems with compatible functions and consequences, place controls at meaningful boundaries, and permit only required flows. Remote access should enter through managed services, not bypass levels. Administrative paths deserve the same scrutiny as production data because they can change configurations and logic.\n\nPurdue also guides monitoring placement. Enterprise boundaries reveal attempted movement toward OT. The industrial DMZ provides visibility into cross-environment exchange. Site and control-area monitoring can identify new devices, unexpected protocols, engineering activity, and changes in normal communication. Monitoring choices must account for sensitive devices and operational traffic.\n\nDuring incident-response planning, use levels to identify containment options and dependencies. Blocking a boundary may protect lower levels, but it may also interrupt identity, reporting, or support. Plans should distinguish which functions can continue locally, what visibility remains, and who can authorize isolation or shutdown.\n\nModern cloud, industrial Internet of Things, mobile, and vendor services challenge a simple hierarchy. Some devices communicate directly with cloud platforms. Remote operations may span sites. Software-defined infrastructure can shift functions dynamically. Extend the analysis with data-flow diagrams, identity architecture, trust boundaries, and environment-specific threat modeling.\n\nThe model's value lies in disciplined reasoning. It supports segmentation, access control, monitoring, inventory, and response, but it does not replace them. Validate every conclusion against the actual process, architecture, and operating constraints.",
+  "narrationPoints": [
+    "Applying Purdue begins with reality, not a blank diagram.",
+    "Use the model to design segmentation.",
+    "Purdue also guides monitoring placement.",
+    "During incident-response planning, use levels to identify containment options and dependencies.",
+    "Modern cloud, industrial Internet of Things, mobile, and vendor services challenge a simple hierarchy.",
+    "The model's value lies in disciplined reasoning."
+  ]
+};

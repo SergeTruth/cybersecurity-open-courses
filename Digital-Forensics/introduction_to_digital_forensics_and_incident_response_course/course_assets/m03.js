@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "The Incident Response Lifecycle",
+  "graphicAlt": "Placeholder illustration for the incident response lifecycle",
+  "narration": "Incident response is a lifecycle, not a single tool or a single heroic action. The lifecycle begins with preparation. Preparation includes response plans, contact lists, escalation paths, logging standards, access to forensic tools, evidence-handling procedures, tabletop exercises, and clear authority for emergency decisions. Preparation is where the organization buys time before the incident happens.\n\nDetection and analysis begin when suspicious activity is reported or discovered. Analysts review alerts, logs, endpoint telemetry, user reports, and environmental context to determine whether an event is real, how severe it is, and what scope is currently known. This phase requires discipline because early evidence is often incomplete. A good team separates facts from assumptions and records both carefully.\n\nContainment limits spread or impact while the investigation continues. Containment can mean isolating a host, disabling an account, blocking a network route, suspending a token, quarantining email, or restricting access to a cloud service. The right containment choice depends on the incident. Acting too slowly can allow more damage. Acting without understanding can destroy evidence or disrupt critical operations.\n\nEradication removes the cause of compromise, such as malware, unauthorized accounts, exposed credentials, malicious mailbox rules, vulnerable services, or attacker persistence. Recovery restores systems and services to a trusted state, then validates that normal operations can resume safely. The post-incident review closes the loop by documenting what happened, what worked, what failed, and what should change. The lifecycle matters because response is a process of learning, deciding, acting, and improving.",
+  "narrationPoints": [
+    "Incident response is a lifecycle, not a single tool or a single heroic action.",
+    "The lifecycle begins with preparation.",
+    "Preparation includes response plans, contact lists, escalation paths, logging standards, access to forensic tools, evidence-handling procedures, tabletop exercises, and clear authority for emergency decisions.",
+    "Preparation is where the organization buys time before the incident happens.",
+    "Detection and analysis begin when suspicious activity is reported or discovered.",
+    "Analysts review alerts, logs, endpoint telemetry, user reports, and environmental context to determine whether an event is real, how severe it is, and what."
+  ]
+};

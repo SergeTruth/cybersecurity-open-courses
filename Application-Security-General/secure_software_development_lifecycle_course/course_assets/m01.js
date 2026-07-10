@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What the Secure SDLC Means",
+  "graphicAlt": "Blank placeholder image for a lesson introducing the secure software development lifecycle.",
+  "narration": "The software development lifecycle is the way an organization plans, designs, builds, tests, releases, operates, and maintains software. A secure SDLC integrates security into those stages instead of treating security as a final gate after most decisions have already been made. The point is to make security part of normal engineering work, not a separate inspection that arrives too late to shape the product.\n\nSecure SDLC includes secure coding, but it is broader than coding practices. Application security testing checks whether controls behave as expected. DevSecOps emphasizes automation and shared ownership in delivery pipelines. Software assurance focuses on confidence that software is trustworthy for its intended use. Governance defines expectations, accountability, evidence, and risk decisions. These ideas overlap, but none of them alone is the entire lifecycle.\n\nSecurity defects are usually easier and cheaper to address earlier in the process. A missing authorization requirement can be corrected quickly during planning, but it may require redesign, data migration, and painful retesting after release. A risky dependency can be replaced early, while the same issue discovered late may block deployment or force emergency remediation. Early security work reduces rework and surprises.\n\nA strong secure SDLC supports engineering quality, customer trust, compliance, resilience, and risk management. It does not promise perfect software. It creates repeatable practices that help teams understand risk, make informed tradeoffs, produce evidence, and improve over time. The goal is software that is safer to build, safer to operate, and easier to maintain under changing business and threat conditions.",
+  "narrationPoints": [
+    "The software development lifecycle is the way an organization plans, designs, builds, tests, releases, operates, and maintains software.",
+    "A secure SDLC integrates security into those stages instead of treating security as a final gate after most decisions have already been made.",
+    "The point is to make security part of normal engineering work, not a separate inspection that arrives too late to shape the product.",
+    "Secure SDLC includes secure coding, but it is broader than coding practices.",
+    "Application security testing checks whether controls behave as expected.",
+    "DevSecOps emphasizes automation and shared ownership in delivery pipelines."
+  ]
+};

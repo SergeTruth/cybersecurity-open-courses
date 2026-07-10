@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Threat Hunting Outcomes",
+  "graphicAlt": "Detection-improvement feedback loop showing hunt conclusions, telemetry gaps, new analytics, incident escalation, defensive changes, and future hypotheses.",
+  "narration": "A threat hunt can produce several valuable outcomes. Confirmed suspicious activity is one possibility, but it is not the only measure of success and should never be promised in advance.\n\nA hunt may uncover a telemetry gap. Important systems may not be reporting, fields may be missing, retention may be too short, or timestamps may be inconsistent. Correcting those issues improves both future hunts and routine monitoring.\n\nThe investigation may reveal a detection opportunity. A useful pattern can be translated into a documented analytic, tested against historical data, reviewed for false positives, and incorporated into the monitoring program.\n\nHunters may also identify asset and ownership gaps. Unknown systems, unclear business roles, outdated inventories, and ambiguous support responsibilities can obstruct analysis and indicate broader security-governance problems.\n\nEven normal activity can provide value. Understanding expected administrative tools, service relationships, identity patterns, maintenance schedules, and cloud operations helps analysts recognize meaningful deviations more accurately in the future.\n\nWhen evidence suggests an active security event, the outcome should include a controlled handoff to the appropriate incident process. The hunt record provides context, but response decisions belong within established organizational procedures.\n\nHunt reporting should distinguish fact, interpretation, limitation, and recommendation. Leaders need a concise risk view, while analysts and engineers need enough detail to improve data, detections, and defensive controls.\n\nOver time, organizations can measure the improvements produced by hunting: gaps resolved, detections created or tuned, coverage increased, recurring questions automated, and lessons incorporated into future hypotheses.",
+  "narrationPoints": [
+    "A threat hunt can produce several valuable outcomes.",
+    "Confirmed suspicious activity is one possibility, but it is not the only measure of success and should never be promised in advance.",
+    "A hunt may uncover a telemetry gap.",
+    "Important systems may not be reporting, fields may be missing, retention may be too short, or timestamps may be inconsistent.",
+    "Correcting those issues improves both future hunts and routine monitoring.",
+    "The investigation may reveal a detection opportunity."
+  ]
+};

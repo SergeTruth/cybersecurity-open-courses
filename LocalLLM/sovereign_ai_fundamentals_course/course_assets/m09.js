@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Security Governance and Risk Management",
+  "graphicAlt": "Preview bullet summary visual for security governance and risk management.",
+  "narration": "AI governance should be practical enough to support adoption. If governance is only a slogan or a long document that teams ignore, it will not protect the organization. A useful program defines approved use cases, data handling rules, model approval criteria, vendor review, access control expectations, logging requirements, evaluation standards, incident response, vulnerability management, and change control.\n\nGovernance should be risk-based. A low-risk internal drafting assistant does not need the same controls as a system that uses regulated data, supports customer-facing decisions, or can trigger production workflows. The right level of review depends on data sensitivity, user population, tool access, external dependencies, impact of errors, and the ability to detect and correct problems.\n\nOwnership is essential. Teams should know who approves models, who maintains retrieval collections, who reviews tool permissions, who handles incidents, who monitors cost and reliability, and who communicates changes to users. Without ownership, a private AI platform can drift into unmanaged use even when the original design was careful.\n\nResponsible rollout includes pilots, feedback loops, documented limitations, training, and continuous review. Governance should make safe paths easier, not merely slow down every request. Sovereign AI is not a one-time installation. It is a managed capability that must be maintained as models, data, vendors, infrastructure, and organizational needs change.\n\nGovernance should also produce evidence. Approval records, model inventories, data-flow notes, evaluation summaries, incident records, and change histories help teams answer reasonable questions later. What changed, who approved it, what data was involved, and what controls were tested? Those records make responsible AI operations easier to defend and improve.",
+  "narrationPoints": [
+    "AI governance should be practical enough to support adoption.",
+    "Governance should be risk-based.",
+    "Ownership is essential.",
+    "Responsible rollout includes pilots, feedback loops, documented limitations, training, and continuous review.",
+    "Governance should also produce evidence."
+  ]
+};

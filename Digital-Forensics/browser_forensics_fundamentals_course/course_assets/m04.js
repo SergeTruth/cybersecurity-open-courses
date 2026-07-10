@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Cookies, Sessions, and Web Storage",
+  "graphicAlt": "Blank white placeholder image for module 4, Cookies, Sessions, and Web Storage.",
+  "narration": "Cookies and web storage are central to modern browser behavior. Cookies may maintain state, preferences, tracking context, or authentication-related information for web applications. Session cookies may be designed to last for a browsing session, while persistent cookies may remain longer. Their presence can help explain interaction with a site, but they should not be treated as standalone proof of a specific user action.\n\nLocalStorage and sessionStorage are browser-managed storage areas used by web applications. LocalStorage may persist across sessions, while sessionStorage is generally scoped to a session. IndexedDB, at a high level, can store larger structured web application data. Service workers can support offline behavior, background sync, push notifications, and cached application resources depending on site design and browser behavior.\n\nThese artifacts can be highly sensitive. They may contain identifiers, application state, preferences, personal data, account context, or session-related information. Investigators should avoid credential extraction or misuse and should report only what is relevant and authorized. The existence of sensitive browser storage calls for privacy discipline, not curiosity.\n\nAuthentication state is especially easy to overstate. A cookie or storage item may show that a browser had state associated with a web application, but it may not prove that a person actively logged in during the precise time window under review. State can persist, expire, sync, be refreshed automatically, or be created by background application behavior.\n\nThe best use of cookies and web storage is contextual. They can support timelines, show that a browser profile interacted with a service, identify application state, or corroborate other records. They are strongest when combined with history, downloads, server logs, endpoint telemetry, account logs, and user context.",
+  "narrationPoints": [
+    "Cookies and web storage are central to modern browser behavior.",
+    "LocalStorage and sessionStorage are browser-managed storage areas used by web applications.",
+    "These artifacts can be highly sensitive.",
+    "Authentication state is especially easy to overstate.",
+    "The best use of cookies and web storage is contextual."
+  ]
+};

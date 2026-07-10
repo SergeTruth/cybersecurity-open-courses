@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why OT Telemetry Matters",
+  "graphicAlt": "Instructional illustration for Why OT Telemetry Matters.",
+  "narration": "You cannot reliably detect, investigate, or explain activity that you cannot observe. OT blind spots carry operational consequences because an unseen system may control equipment, provide operator visibility, or bridge a critical communication path. Missing evidence delays decisions when time and safety matter.\n\nTelemetry supports asset inventory by revealing devices, roles, protocols, peers, and dependencies. Observation can identify undocumented or dormant assets returning to service, but it does not replace engineering records or physical verification. Devices that do not communicate during collection may remain invisible.\n\nDuring incident response, telemetry helps reconstruct timelines, accounts, sessions, affected assets, commands, configuration changes, and process conditions. Vulnerability teams can use observed reachability and asset criticality to prioritize findings rather than treating every vulnerable product as equally exposed.\n\nBusiness continuity also benefits. Communication loss, failed collection, degraded redundancy, unusual process trends, or inaccessible remote sites may indicate a cyber event, equipment failure, or network problem. Shared evidence lets teams coordinate diagnosis and recovery.\n\nIT and OT telemetry overlap, but their emphasis differs. IT sources commonly focus on users, endpoints, cloud services, and business applications. OT telemetry adds controllers, industrial protocols, field communications, process values, engineering activity, and long-lived devices with limited native logging.\n\nMore data is not automatically better. Useful telemetry is selected around operational questions, collected safely, retained appropriately, and enriched with asset and process context. The objective is enough trustworthy evidence to reduce uncertainty without burdening sensitive systems or analysts with unmanaged noise.",
+  "narrationPoints": [
+    "You cannot reliably detect, investigate, or explain activity that you cannot observe.",
+    "Telemetry supports asset inventory by revealing devices, roles, protocols, peers, and dependencies.",
+    "During incident response, telemetry helps reconstruct timelines, accounts, sessions, affected assets, commands, configuration changes, and process...",
+    "Business continuity also benefits.",
+    "IT and OT telemetry overlap, but their emphasis differs."
+  ]
+};

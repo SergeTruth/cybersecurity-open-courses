@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "JavaScript Trust Boundaries and Data Flow",
+  "graphicAlt": "Blank placeholder graphic for module 2",
+  "narration": "Injection prevention begins with trust boundaries. In a JavaScript application, untrusted data can arrive through request bodies, query strings, route parameters, headers, cookies, file uploads, JSON payloads, form fields, client-side state, environment variables, message queues, webhooks, and third-party API responses. Some of these sources feel internal, but they can still be influenced by users, integrations, deployment systems, or compromised dependencies.\n\nThe first defensive task is to identify where data enters application logic. A route handler may receive parameters from the URL. A background worker may receive a message from a queue. A webhook handler may receive data from a partner system. A frontend component may receive state from the browser or from an API response. Each entry point should have a clear expectation for type, shape, length, format, and meaning.\n\nThe second task is to map where data goes before sensitive use. A value may be validated in one layer, transformed in another, stored in a database, later rendered into HTML, and finally passed into a downstream API. Controls that were appropriate at entry may not be sufficient for a later context. Data flow review helps teams see when a value crosses from one interpreter or trust level into another.\n\nJavaScript applications often blur server and client responsibilities. Client-side validation improves user experience, but it does not protect the server because clients can be modified or bypassed. Server-side validation and safe server-side construction remain necessary. Similarly, data that is safe for a database is not automatically safe for HTML, JSON embedded in a page, or a command argument.\n\nA practical data flow map does not need to be perfect to be useful. List the entry points, transformations, sensitive sinks, and controls. Then review the places where assumptions are weak or where data moves between contexts. That map becomes the foundation for secure design, code review, and testing.",
+  "narrationPoints": [
+    "Injection prevention begins with trust boundaries.",
+    "The first defensive task is to identify where data enters application logic.",
+    "The second task is to map where data goes before sensitive use.",
+    "JavaScript applications often blur server and client responsibilities.",
+    "A practical data flow map does not need to be perfect to be useful."
+  ]
+};

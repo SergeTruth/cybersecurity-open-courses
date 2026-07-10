@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Secure Implementation Practices",
+  "graphicAlt": "Blank placeholder graphic for module 7, Secure Implementation Practices.",
+  "narration": "Secure session implementation starts with the basics: use TLS consistently, rely on mature framework session features, and validate session state on the server side. TLS helps protect identifiers in transit, but it does not replace cookie attributes, lifecycle controls, or authorization. Framework defaults are often strong, but they still need review. Developers should understand how the framework generates identifiers, stores state, sets cookie attributes, handles rotation, and invalidates sessions.\n\nCSRF protections matter when browsers automatically send session cookies. SameSite can help, but applications may still need CSRF tokens or framework protections depending on the workflow and compatibility requirements. Least privilege also applies to sessions. The session should carry only the context needed for decisions, and authorization should still be checked for each protected resource. A valid session does not mean the user can perform every action.\n\nMonitoring and audit logging make session controls operational. Log security-relevant events such as login, logout, session renewal, password change, MFA change, privilege change, suspicious session use, and administrative session activity without logging the session secret itself. Device awareness can support risk decisions at a high level, such as recognizing new devices or unusual patterns, but it should be used carefully and transparently. Avoid custom session systems unless there is a strong reason and enough expertise to design, test, and maintain them safely.",
+  "narrationPoints": [
+    "Secure session implementation starts with the basics: use TLS consistently, rely on mature framework session features, and validate session st...",
+    "CSRF protections matter when browsers automatically send session cookies.",
+    "Monitoring and audit logging make session controls operational."
+  ]
+};

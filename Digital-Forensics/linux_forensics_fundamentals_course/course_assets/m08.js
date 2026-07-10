@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Collection, Preservation, and Reporting",
+  "graphicAlt": "Blank placeholder graphic for Linux forensic collection and reporting",
+  "narration": "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions. On a live Linux system, even listing files or running commands can create artifacts. Sometimes live collection is still necessary because volatile data, running processes, memory, or current network state may be important. The decision should be deliberate, authorized, and documented.\n\nDisk images, snapshots, targeted file collections, memory capture at a high level, log exports, and cloud records can all support an investigation. The right collection approach depends on urgency, business impact, system criticality, data sensitivity, and available tooling. Hashes help verify whether collected evidence changed after collection. Chain of custody records help document who handled evidence, when, and how it was stored or transferred.\n\nCase notes are part of the evidence process. They should capture commands run, tools used, timestamps, source paths, observations, decisions, assumptions, and limitations. Notes are especially important when analysts must work from a live system or when response actions occur at the same time as collection. Later reviewers need to distinguish investigator activity from system activity under investigation.\n\nReporting should communicate evidence, methods, findings, confidence, limitations, and supporting references. A good report explains what was observed, how it was observed, what it likely means, and what remains uncertain. Linux forensics often involves incomplete data, rotated logs, distribution differences, and live system changes. Communicating uncertainty is not weakness. It is part of defensible investigation.",
+  "narrationPoints": [
+    "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions.",
+    "Disk images, snapshots, targeted file collections, memory capture at a high level, log exports, and cloud records can all support an...",
+    "Case notes are part of the evidence process.",
+    "Reporting should communicate evidence, methods, findings, confidence, limitations, and supporting references."
+  ]
+};

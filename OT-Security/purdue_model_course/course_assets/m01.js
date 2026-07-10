@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Is the Purdue Model?",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "The Purdue Enterprise Reference Architecture is an industrial architecture model that organizes systems according to the functions they perform, from the physical process through control and operations to enterprise planning. In security discussions, the term Purdue Model usually refers to this layered view of an industrial environment.\n\nThe model gives engineers, operators, architects, and security teams a shared vocabulary. Instead of describing a network only by subnets or vendor products, teams can discuss where a function belongs, what it depends on, and how close it is to physical control. A controller at Level 1 has a different operational purpose and consequence than an enterprise application at Level 4.\n\nOT security practitioners use the model to reason about trust boundaries, communication paths, access, monitoring, and incident containment. It helps expose questionable architecture. For example, a user workstation should not normally communicate directly with a field controller simply because both devices use Ethernet.\n\nThe Purdue Model is not a product, a protocol, or a complete security design. It does not prescribe every firewall rule, and assigning a system to a level does not make that system secure. The model must be combined with asset inventory, current diagrams, operational requirements, risk analysis, and engineering judgment.\n\nModern environments also include cloud analytics, wireless devices, vendor platforms, remote operations, and industrial Internet of Things systems that may not fit neatly into a simple stack. Use Purdue as a reference for asking better questions, not as a perfect map that forces every architecture into identical boxes.",
+  "narrationPoints": [
+    "The Purdue Enterprise Reference Architecture is an industrial architecture model that organizes systems according to the functions they perform,...",
+    "The model gives engineers, operators, architects, and security teams a shared vocabulary.",
+    "OT security practitioners use the model to reason about trust boundaries, communication paths, access, monitoring, and incident containment.",
+    "The Purdue Model is not a product, a protocol, or a complete security design.",
+    "Modern environments also include cloud analytics, wireless devices, vendor platforms, remote operations, and industrial Internet of Things systems..."
+  ]
+};

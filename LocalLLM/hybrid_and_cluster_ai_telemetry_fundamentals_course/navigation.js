@@ -10,7 +10,7 @@
 
   function unavailable(link) {
     var href = link.getAttribute("href") || "";
-    return !href || href === "#";
+    return !href || href === "#" || href.indexOf("{{") !== -1;
   }
 
   function fallbackModules() {
@@ -26,21 +26,34 @@
     return modules;
   }
 
-  function courseModules() {
-    var source = document.getElementById("course-modules-data");
-    if (!source) return fallbackModules();
-    try {
-      var modules = JSON.parse(source.textContent);
-      return Array.isArray(modules) && modules.length ? modules : fallbackModules();
-    } catch (error) {
-      return fallbackModules();
-    }
+  function normalizeModules(value) {
+    if (value && Array.isArray(value.modules)) value = value.modules;
+    return Array.isArray(value)
+      ? value.filter(function (moduleItem) { return moduleItem && moduleItem.href; })
+      : [];
   }
 
-  function addSidebar() {
+  function scriptModules() {
+    return normalizeModules(window.COURSE_MODULES);
+  }
+
+  function courseModules() {
+    var modules = scriptModules();
+    return Promise.resolve(modules.length ? modules : fallbackModules());
+  }
+
+  function notifyNavigationReady() {
+    if (typeof window.CustomEvent !== "function") return;
+    document.dispatchEvent(new CustomEvent("course:navigation-ready"));
+  }
+
+  function addSidebar(modules) {
     var main = document.querySelector("main.main-content");
     var wrap = main ? main.querySelector(".wrap") : null;
-    if (!main || !wrap || main.querySelector(".course-nav-pane")) return;
+    if (!main || !wrap || main.querySelector(".course-nav-pane")) {
+      notifyNavigationReady();
+      return;
+    }
 
     var pane = createElement("aside", "course-nav-pane card");
     pane.setAttribute("aria-label", "Course modules");
@@ -51,7 +64,7 @@
     var list = createElement("ul", "course-nav-list");
     var currentPage = (window.location.pathname.split("/").pop() || "m01.html").toLowerCase();
 
-    courseModules().forEach(function (moduleItem) {
+    modules.forEach(function (moduleItem) {
       if (!moduleItem || !moduleItem.href) return;
       var item = createElement("li", "course-nav-item");
       var link = createElement("a", "course-nav-link", moduleItem.label || moduleItem.title || moduleItem.href);
@@ -69,10 +82,11 @@
     pane.appendChild(navigation);
     main.classList.add("course-layout");
     main.insertBefore(pane, wrap);
+    notifyNavigationReady();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    addSidebar();
+    courseModules().then(addSidebar);
 
     var links = document.querySelectorAll(".module-nav a");
     Array.prototype.forEach.call(links, function (link) {

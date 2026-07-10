@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "What Is Session Management?",
+  "graphicAlt": "Blank placeholder graphic for module 1, What Is Session Management.",
+  "narration": "Session management is the mechanism that maintains authenticated state across multiple requests. HTTP by itself is stateless: one request does not automatically prove anything about a previous request. After a user signs in, the application needs a reliable way to recognize that same user on later requests without asking for the password every time. A session provides that continuity, usually through a session identifier, server-side state, a token, or a combination of these patterns.\n\nAuthentication, authorization, identity, and session management are related, but they are not the same thing. Authentication verifies who the user or workload is. Authorization decides what that identity is allowed to do. Identity describes attributes such as user ID, role, tenant, account status, or assurance level. Session management preserves the authenticated state and supporting context across time. A secure application needs all four concepts to work together rather than assuming that login alone solves access control.\n\nCommon architectures include server-side sessions referenced by browser cookies, token-based API sessions, mobile app token flows, and hybrid designs that combine short-lived access tokens with longer-lived refresh mechanisms. Developers are responsible for selecting appropriate framework features, configuring cookie and token behavior, enforcing lifecycle rules, validating sessions server-side, and logging security-relevant events. Session management is not just plumbing. It is the security layer that keeps identity meaningful after login.",
+  "narrationPoints": [
+    "Session management is the mechanism that maintains authenticated state across multiple requests.",
+    "Authentication, authorization, identity, and session management are related, but they are not the same thing.",
+    "Common architectures include server-side sessions referenced by browser cookies, token-based API sessions, mobile app token flows, and hybrid..."
+  ]
+};

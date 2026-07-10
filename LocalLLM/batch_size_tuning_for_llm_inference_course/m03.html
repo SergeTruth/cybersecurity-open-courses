@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hardware Constraints and Memory Pressure | Batch Size Tuning for LLM Inference</title>
+  <title>Course</title>
   <link rel="stylesheet" href="base.css">
 </head>
-<body data-course-id="batch_size_tuning_for_llm_inference">
+<body data-course-id="batch-size-tuning-for-llm-inference-course">
   <main id="main-content" class="main-content">
     <div class="wrap">
       <section
@@ -14,24 +14,33 @@
         data-module="3"
         data-total="10"
         data-audio="m03"
+        data-narration="m03"
         aria-labelledby="module-title"
       >
       <header class="card title-card">
-        <p class="meta">Batch Size Tuning for LLM Inference</p>
-        <h1 id="module-title">Hardware Constraints and Memory Pressure</h1>
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading module title...</h1>
         <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
       </header>
 
-      <figure class="card graphic-card">
+      <figure id="module-graphic-card" class="card graphic-card">
         <img
           class="module-graphic"
           src="course_assets/m03.png"
-          alt="Blank placeholder graphic for module 3"
+          alt=""
+          aria-label="Expand module graphic"
           tabindex="0"
           role="button"
           aria-expanded="false"
         >
       </figure>
+
+      <section id="module-code-example-card" class="card code-example-card code-example-card-hidden" aria-labelledby="code-examples-heading-m03">
+        <h2 id="code-examples-heading-m03">Code Examples</h2>
+        <div class="code-example-list" data-code-examples-target>
+          <p class="narration-loading">Loading code examples...</p>
+        </div>
+      </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
         <a id="previous-module" class="btn secondary" href="m02.html">Previous</a>
@@ -40,67 +49,22 @@
 
       <section class="card narration-card" aria-labelledby="narration-title">
         <h2 id="narration-title">Narration</h2>
-        <div class="narration-text">
-          <p>Batch size tuning is bounded by hardware. GPU VRAM is usually the first constraint people notice because model weights, runtime buffers, and the KV cache all compete for space. System RAM matters too, especially when the model is partially offloaded, when the runtime uses CPU memory for staging, or when the machine falls back to swapping. Once swapping begins, performance can collapse even if the process does not crash immediately.</p>
-          <p>Memory bandwidth and compute utilization are just as important as raw capacity. A GPU with enough VRAM may still be underused if the runtime cannot feed it efficiently. A CPU-only setup may be limited by memory bandwidth, thread scheduling, and cache behavior. Integrated GPUs share memory with the system, so aggressive settings can affect both inference and the rest of the machine.</p>
-          <p>Context length has a direct impact because longer conversations and larger documents require more attention state. The KV cache stores intermediate state that lets generation continue without reprocessing the entire context every time. That cache is useful, but it is not free. More concurrent sequences, longer contexts, and larger batch-related settings can increase memory pressure quickly.</p>
-          <p>Oversized batch settings can look attractive because they promise more parallelism, but they can also cause out-of-memory errors, runtime instability, high latency, or slower throughput. The practical goal is to find a setting that keeps the hardware busy without pushing it into a fragile state. Stable headroom matters, especially for systems that need to run for hours instead of surviving one benchmark.</p>
-          <p>This is why a stable configuration usually leaves deliberate headroom. A machine that reports just enough free VRAM during a clean test may fail when the prompt is longer, another process opens, or concurrent requests arrive. Headroom is not wasted capacity. It is the margin that keeps inference predictable when real operating conditions are less tidy than a benchmark.</p>
-        
+        <div class="narration-text" data-narration-target>
+          <p class="narration-loading">Loading narration...</p>
         </div>
       </section>
       </section>
     </div>
   </main>
 
-  <script id="course-modules-data" type="application/json">
-    [
-  {
-    "label": "Module 1: What Batch Size Means in LLM Inference",
-    "href": "m01.html"
-  },
-  {
-    "label": "Module 2: Prefill, Decode, and Where Batching Helps",
-    "href": "m02.html"
-  },
-  {
-    "label": "Module 3: Hardware Constraints and Memory Pressure",
-    "href": "m03.html"
-  },
-  {
-    "label": "Module 4: Key Runtime Parameters",
-    "href": "m04.html"
-  },
-  {
-    "label": "Module 5: Measuring Performance Correctly",
-    "href": "m05.html"
-  },
-  {
-    "label": "Module 6: Tuning for Local Interactive Use",
-    "href": "m06.html"
-  },
-  {
-    "label": "Module 7: Tuning for API Serving and Throughput",
-    "href": "m07.html"
-  },
-  {
-    "label": "Module 8: Troubleshooting Batch-Related Problems",
-    "href": "m08.html"
-  },
-  {
-    "label": "Module 9: Course Summary and Key Takeaways",
-    "href": "m09.html"
-  },
-  {
-    "label": "Final Quiz",
-    "href": "m10.html"
-  }
-]
-  </script>
   <script src="scorm-wrapper.js"></script>
   <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m03.js"></script>
   <script src="navigation.js"></script>
-  <script src="audio-controls.js"></script>
   <script src="base.js"></script>
+  <script src="syntax-highlighter.js"></script>
+  <script src="audio-controls.js"></script>
 </body>
 </html>

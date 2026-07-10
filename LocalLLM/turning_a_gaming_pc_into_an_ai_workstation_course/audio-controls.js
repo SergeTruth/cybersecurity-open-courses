@@ -31,51 +31,19 @@
     return control;
   }
 
-  function parseTimestamp(value) {
-    var match = String(value).trim().match(/^(?:(\d{2}):)?(\d{2}):(\d{2})[.,](\d{3})$/);
-    if (!match) return NaN;
-    return Number(match[1] || 0) * 3600 + Number(match[2]) * 60 + Number(match[3]) + Number(match[4]) / 1000;
-  }
-
-  function parseVtt(vttText) {
-    var lines = String(vttText || "").replace(/\r/g, "").split("\n");
-    var cues = [];
-
-    for (var index = 0; index < lines.length; index += 1) {
-      var line = lines[index].trim();
-      if (!line || line === "WEBVTT" || line.indexOf("NOTE") === 0) continue;
-
-      var timing = line;
-      if (timing.indexOf("-->") === -1 && index + 1 < lines.length && lines[index + 1].indexOf("-->") !== -1) {
-        index += 1;
-        timing = lines[index].trim();
-      }
-      if (timing.indexOf("-->") === -1) continue;
-
-      var parts = timing.split("-->");
-      var start = parseTimestamp(parts[0]);
-      var end = parseTimestamp(parts[1].trim().split(/\s+/)[0]);
-      if (!isFinite(start) || !isFinite(end) || end <= start) continue;
-
-      var textLines = [];
-      while (index + 1 < lines.length && lines[index + 1].trim()) {
-        index += 1;
-        textLines.push(lines[index].trim());
-      }
-      var cueText = textLines.join(" ").replace(/<[^>]+>/g, "").trim();
-      if (cueText) cues.push({ start: start, end: end, text: cueText });
-    }
-
-    return cues;
-  }
-
-  function initialize() {
+  function setup() {
     var meta = document.getElementById("module-meta");
     var audioBase = meta && meta.dataset.audio;
     var narration = document.querySelector(".narration-card");
+    var header = document.querySelector(".title-card");
+    var graphic = document.querySelector(".graphic-card");
+    var codeExamples = document.querySelector(".code-example-card");
     if (!audioBase || !narration) return;
 
     var narrationVisible = readPreference("narrationVisible", "true") === "true";
+    var headerVisible = readPreference("headerVisible", "true") === "true";
+    var imageVisible = readPreference("imageVisible", "true") === "true";
+    var codeExamplesVisible = readPreference("codeExamplesVisible", "true") === "true";
     var captionsVisible = readPreference("captionsVisible", "false") === "true";
     var playbackRate = Number(readPreference("playbackRate", "1")) || 1;
     var captionCues = [];
@@ -135,6 +103,24 @@
     ccButton.setAttribute("aria-pressed", String(captionsVisible));
     var narrationButton = button(narrationVisible ? "Hide Narration" : "Show Narration", "btn secondary");
     narrationButton.setAttribute("aria-expanded", String(narrationVisible));
+    var headerButton = button(headerVisible ? "Hide Header" : "Show Header", "btn secondary");
+    headerButton.setAttribute("aria-expanded", String(headerVisible));
+    if (header) {
+      if (!header.id) header.id = "course-title-card";
+      headerButton.setAttribute("aria-controls", header.id);
+    }
+    var imageButton = button(imageVisible ? "Hide Image" : "Show Image", "btn secondary");
+    imageButton.setAttribute("aria-expanded", String(imageVisible));
+    if (graphic) {
+      if (!graphic.id) graphic.id = "module-graphic-card";
+      imageButton.setAttribute("aria-controls", graphic.id);
+    }
+    var codeExamplesButton = button(codeExamplesVisible ? "Hide Code Examples" : "Show Code Examples", "btn secondary");
+    codeExamplesButton.setAttribute("aria-expanded", String(codeExamplesVisible));
+    if (codeExamples) {
+      if (!codeExamples.id) codeExamples.id = "module-code-example-card";
+      codeExamplesButton.setAttribute("aria-controls", codeExamples.id);
+    }
 
     var captions = document.createElement("div");
     captions.className = "narration-cc" + (captionsVisible ? "" : " hidden");
@@ -172,19 +158,24 @@
         return;
       }
 
-      if (!captionCues.length) buildFallbackCaptionCues();
-      var customCue = cueAtTime(audio.currentTime || 0);
-      if (customCue) {
-        captions.textContent = customCue.text;
-        return;
-      }
-
       var active = textTrack && textTrack.activeCues;
       if (active && active.length) {
         var lines = [];
         for (var index = 0; index < active.length; index += 1) lines.push(active[index].text);
         captions.textContent = lines.join(" ");
-      } else if (nativeTrackFailed && !captionSegments.length) {
+        return;
+      }
+
+      if (nativeTrackFailed || !textTrack) {
+        if (!captionCues.length) buildFallbackCaptionCues();
+        var customCue = cueAtTime(audio.currentTime || 0);
+        if (customCue) {
+          captions.textContent = customCue.text;
+          return;
+        }
+      }
+
+      if (nativeTrackFailed && !captionSegments.length) {
         captions.textContent = "Captions unavailable.";
       } else {
         captions.textContent = "Captions enabled. Start playback to display captions.";
@@ -202,32 +193,13 @@
       renderCaptions();
     }
 
-    function loadVttCues() {
-      if (window.location.protocol === "file:" || typeof window.fetch !== "function") {
-        return Promise.resolve(false);
-      }
-      return window.fetch(trackElement.src)
-        .then(function (response) {
-          if (!response.ok) throw new Error("vtt_unavailable");
-          return response.text();
-        })
-        .then(function (vttText) {
-          var parsed = parseVtt(vttText);
-          if (!parsed.length) throw new Error("vtt_empty");
-          captionCues = parsed;
-          renderCaptions();
-          return true;
-        })
-        .catch(function () { return false; });
-    }
-
     if (textTrack) textTrack.oncuechange = renderCaptions;
     audio.addEventListener("loadedmetadata", function () {
-      buildFallbackCaptionCues();
+      if (nativeTrackFailed) buildFallbackCaptionCues();
       renderCaptions();
     });
     audio.addEventListener("durationchange", function () {
-      buildFallbackCaptionCues();
+      if (nativeTrackFailed) buildFallbackCaptionCues();
       renderCaptions();
     });
     audio.addEventListener("timeupdate", renderCaptions);
@@ -241,15 +213,23 @@
     controls.appendChild(speedLabel);
     controls.appendChild(ccButton);
     controls.appendChild(narrationButton);
+    controls.appendChild(headerButton);
+    controls.appendChild(imageButton);
+    controls.appendChild(codeExamplesButton);
     card.appendChild(audio);
     card.appendChild(controls);
     card.appendChild(captions);
-    narration.parentNode.insertBefore(card, narration);
+    var playerInsertTarget = codeExamples && codeExamples.parentNode === narration.parentNode
+      ? codeExamples
+      : narration;
+    narration.parentNode.insertBefore(card, playerInsertTarget);
 
     narration.classList.toggle("hidden", !narrationVisible);
+    if (header) header.classList.toggle("title-card-hidden", !headerVisible);
+    if (graphic) graphic.classList.toggle("hidden", !imageVisible);
+    if (codeExamples) codeExamples.classList.toggle("code-example-card-user-hidden", !codeExamplesVisible);
     audio.playbackRate = playbackRate;
     setTrackMode();
-    loadVttCues();
 
     speed.addEventListener("change", function () {
       audio.playbackRate = Number(speed.value);
@@ -264,6 +244,30 @@
       savePreference("narrationVisible", narrationVisible);
     });
 
+    headerButton.addEventListener("click", function () {
+      headerVisible = !headerVisible;
+      if (header) header.classList.toggle("title-card-hidden", !headerVisible);
+      headerButton.textContent = headerVisible ? "Hide Header" : "Show Header";
+      headerButton.setAttribute("aria-expanded", String(headerVisible));
+      savePreference("headerVisible", headerVisible);
+    });
+
+    imageButton.addEventListener("click", function () {
+      imageVisible = !imageVisible;
+      if (graphic) graphic.classList.toggle("hidden", !imageVisible);
+      imageButton.textContent = imageVisible ? "Hide Image" : "Show Image";
+      imageButton.setAttribute("aria-expanded", String(imageVisible));
+      savePreference("imageVisible", imageVisible);
+    });
+
+    codeExamplesButton.addEventListener("click", function () {
+      codeExamplesVisible = !codeExamplesVisible;
+      if (codeExamples) codeExamples.classList.toggle("code-example-card-user-hidden", !codeExamplesVisible);
+      codeExamplesButton.textContent = codeExamplesVisible ? "Hide Code Examples" : "Show Code Examples";
+      codeExamplesButton.setAttribute("aria-expanded", String(codeExamplesVisible));
+      savePreference("codeExamplesVisible", codeExamplesVisible);
+    });
+
     ccButton.addEventListener("click", function () {
       captionsVisible = !captionsVisible;
       captions.classList.toggle("hidden", !captionsVisible);
@@ -272,6 +276,15 @@
       setTrackMode();
       savePreference("captionsVisible", captionsVisible);
     });
+  }
+
+  function initialize() {
+    var narrationReady = window.CourseNarration && window.CourseNarration.ready;
+    if (narrationReady && typeof narrationReady.then === "function") {
+      narrationReady.then(setup, setup);
+    } else {
+      setup();
+    }
   }
 
   document.addEventListener("DOMContentLoaded", initialize);

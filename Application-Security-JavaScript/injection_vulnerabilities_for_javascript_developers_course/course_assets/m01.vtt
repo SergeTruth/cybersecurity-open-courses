@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.335
+Injection happens when untrusted input changes the meaning of something the application sends to an interpreter or downstream system.
+
+2
+00:00:09.335 --> 00:00:18.102
+That something might be a database query, command, document, template, script, URL, header, protocol message, or API request.
+
+3
+00:00:18.102 --> 00:00:22.161
+The security failure is not simply that input was accepted.
+
+4
+00:00:22.161 --> 00:00:30.360
+The failure is that data was allowed to become instructions or structure in a context where it should have remained data.
+
+5
+00:00:30.360 --> 00:00:31.821
+JavaScript and Node.
+
+6
+00:00:31.821 --> 00:00:35.068
+js applications encounter many interpreters.
+
+7
+00:00:35.068 --> 00:00:45.459
+A backend may build SQL queries, NoSQL queries, shell commands, template output, JSON documents, URLs, HTTP headers, and messages to downstream APIs.
+
+8
+00:00:45.459 --> 00:00:54.063
+A frontend may render HTML, set attributes, build URLs, update the DOM, parse JSON, and interact with browser security rules.
+
+9
+00:00:54.063 --> 00:00:59.908
+Each context has its own rules for what characters, types, structures, and APIs mean.
+
+10
+00:00:59.908 --> 00:01:03.723
+This is why injection prevention is context-specific.
+
+11
+00:01:03.723 --> 00:01:09.000
+Input validation checks whether data has the shape the application expects.
+
+12
+00:01:09.000 --> 00:01:13.383
+Parameterization keeps values separate from query structure.
+
+13
+00:01:13.383 --> 00:01:17.929
+Output encoding makes data safe for a specific rendering context.
+
+14
+00:01:17.929 --> 00:01:22.475
+Escaping may be useful only when it matches the exact interpreter.
+
+15
+00:01:22.475 --> 00:01:27.021
+Safe API design avoids string-built instructions when possible.
+
+16
+00:01:27.021 --> 00:01:31.323
+These controls are related, but they are not interchangeable.
+
+17
+00:01:31.323 --> 00:01:38.142
+A common mistake is trying to memorize dangerous inputs instead of understanding sensitive sinks.
+
+18
+00:01:38.142 --> 00:01:45.285
+The safer mental model is to ask where untrusted data enters, where it flows, and where it is interpreted.
+
+19
+00:01:45.285 --> 00:01:57.299
+If the data reaches a database, shell, template engine, browser, file path, URL, header, or external API, the developer must choose a control appropriate to that destination.
+
+20
+00:01:57.299 --> 00:02:02.251
+The goal is simple to state and demanding to implement: keep data as data.
+
+21
+00:02:02.251 --> 00:02:15.402
+JavaScript developers prevent injection by designing application boundaries so untrusted input cannot change command meaning, query structure, document structure, or executable logic.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "SBOMs in the Software Development Lifecycle",
+  "graphicAlt": "CI/CD pipeline showing source code, dependency resolution, build, SBOM generation, release, deployment, and monitoring.",
+  "narration": "Many organizations generate SBOMs during software builds, release processes, and deployment activities. Integrating SBOM generation into development workflows can improve consistency and reduce manual effort.\n\nThe software development lifecycle is a natural place to create SBOMs because build systems often know which packages, libraries, containers, and artifacts were included in a release.\n\nAutomation helps keep SBOMs current. If an SBOM is generated every time software is built or released, the inventory is more likely to reflect what was actually delivered.\n\nSBOMs can also be stored with release artifacts. This makes it easier to connect a product version to the components that were present at the time of release.\n\nDevelopment teams can use SBOMs to review dependency changes. A new package, major version change, or unexpected transitive dependency may deserve additional review before release.\n\nSecurity teams can use SBOM outputs to enrich vulnerability management and software risk workflows. Compliance teams may use the same data to support evidence requests or customer assurance processes.\n\nThe practical lesson is to make SBOM generation part of how software is built and maintained. When SBOMs are embedded in the lifecycle, they become living operational artifacts rather than occasional documents.\n\nTeams should also decide how SBOMs are versioned and retained. Being able to connect a released product version to the SBOM generated for that release can be critical during vulnerability response or customer assurance work.\n\nLifecycle integration also makes ownership clearer. If each product team knows where its SBOMs are created, stored, and reviewed, software transparency becomes a repeatable engineering practice rather than an occasional special request.",
+  "narrationPoints": [
+    "Many organizations generate SBOMs during software builds, release processes, and deployment activities.",
+    "The software development lifecycle is a natural place to create SBOMs because build systems often know which packages, libraries, containers, and...",
+    "Automation helps keep SBOMs current.",
+    "SBOMs can also be stored with release artifacts.",
+    "Development teams can use SBOMs to review dependency changes."
+  ]
+};

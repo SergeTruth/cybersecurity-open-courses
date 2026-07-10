@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Balancing Signal and Noise",
+  "graphicAlt": "Signal versus noise comparison chart showing excessive false positives narrowing into useful analyst signals.",
+  "narration": "High-quality detections help analysts focus their attention. Poorly tuned rules may generate excessive false positives, consume investigation time, and erode confidence in the detection program.\n\nDetection authors should consider expected activity, environmental context, baseline patterns, known administrative workflows, and the operational burden created by alerts. A rule that fires constantly may hide the activity it was meant to reveal.\n\nGood detections balance sensitivity and specificity. Sensitivity helps catch more relevant activity. Specificity helps reduce irrelevant matches. The right balance depends on the risk, the available telemetry, and what analysts are expected to do with the signal.\n\nNoise reduction should not mean hiding uncertainty. Some detections are intentionally broad because the behavior matters. In those cases, the rule should include context, enrichment, severity guidance, and triage notes so analysts can make faster decisions.",
+  "narrationPoints": [
+    "High-quality detections help analysts focus their attention. Poorly tuned rules may generate excessive false positives, consume investigation time, and erode confidence in the detection program.",
+    "Detection authors should consider expected activity, environmental context, baseline patterns, known administrative workflows, and the operational burden created by alerts. A rule that fires constantly may hide the activity it was meant to reveal.",
+    "Good detections balance sensitivity and specificity. Sensitivity helps catch more relevant activity. Specificity helps reduce irrelevant matches. The right balance depends on the risk, the available telemetry, and what analysts are expected to do with the signal.",
+    "Noise reduction should not mean hiding uncertainty. Some detections are intentionally broad because the behavior matters. In those cases, the rule should include context, enrichment, severity guidance, and triage notes so analysts can make faster decisions."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Monitoring, Logging, and Auditability",
+  "graphicAlt": "Blank white placeholder image for the monitoring, logging, and auditability module.",
+  "narration": "Agent activity should be observable and reviewable. Useful records may include the requesting user, agent and model version, task identifier, instruction source, tool selected, arguments or protected references, data accessed, policy result, approval decision, action outcome, errors, and timestamps. Correlation identifiers help investigators reconstruct a multi-step workflow across services.\n\nAuditability does not mean copying every secret or full sensitive document into a log. Logging design should balance investigation needs with privacy and data minimization. Sensitive values can be redacted, tokenized, hashed, or referenced through controlled identifiers. Access to agent logs should itself be restricted and monitored because those records may reveal valuable operational context.\n\nMonitoring can identify behavior that needs attention, such as repeated blocked actions, unusual tool sequences, unexpected data access, elevated failure rates, approval bypass attempts, sudden changes in cost or volume, or activity outside the agent's intended scope. Teams should establish normal patterns and connect important signals to triage and response procedures.\n\nIncident response plans should explain how to pause the agent, revoke credentials, disable tools, preserve logs and memory, identify affected users or systems, and review recent changes. Near misses matter too. Investigation findings should feed back into prompts, policies, permissions, tests, tool design, monitoring, and reviewer guidance.",
+  "narrationPoints": [
+    "Agent activity should be observable and reviewable.",
+    "Auditability does not mean copying every secret or full sensitive document into a log.",
+    "Monitoring can identify behavior that needs attention, such as repeated blocked actions, unusual tool sequences, unexpected data access, eleva...",
+    "Incident response plans should explain how to pause the agent, revoke credentials, disable tools, preserve logs and memory, identify affected..."
+  ]
+};

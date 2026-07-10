@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "OT Threats and Vulnerabilities",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT threats include cybercriminals, ransomware operators, insiders, contractors, state-linked groups, hacktivists, and accidental users. Their goals and capabilities differ, but several actors may exploit the same weak account, remote pathway, exposed service, or poorly controlled engineering workstation.\n\nCommon vulnerabilities include unsupported operating systems, unpatched devices, insecure protocols, weak or shared authentication, excessive privileges, flat networks, and limited monitoring. Remote access may be necessary for maintenance, yet permanently enabled tunnels and unmanaged vendor endpoints create risk if identity, approval, and session activity are not controlled.\n\nMisconfiguration and poor change control are also vulnerabilities. An incorrect firewall rule can expose a control zone or interrupt required traffic. An undocumented logic change can affect process behavior. A temporary connection may remain long after maintenance. These conditions can cause incidents without a sophisticated attacker.\n\nTechnical severity alone does not establish OT risk. Analysts must confirm that the affected feature is present, determine whether the asset is reachable, understand what it controls, identify independent safeguards, and evaluate the consequences of both exploitation and remediation. Patching a vulnerable system may still require testing and an approved maintenance window.\n\nThreat and vulnerability analysis should therefore produce operational decisions. Reduce unnecessary access, monitor important boundaries, protect privileged tools, apply compensating controls, schedule remediation, and document residual risk. The goal is not a larger finding count. It is a defensible understanding of which weaknesses can produce meaningful harm in the actual process.",
+  "narrationPoints": [
+    "OT threats include cybercriminals, ransomware operators, insiders, contractors, state-linked groups, hacktivists, and accidental users.",
+    "Common vulnerabilities include unsupported operating systems, unpatched devices, insecure protocols, weak or shared authentication, excessive...",
+    "Misconfiguration and poor change control are also vulnerabilities.",
+    "Technical severity alone does not establish OT risk.",
+    "Threat and vulnerability analysis should therefore produce operational decisions."
+  ]
+};

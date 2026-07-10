@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.993
+Embeddings and indexes are sensitive infrastructure in a private RAG system.
+
+2
+00:00:04.993 --> 00:00:12.708
+An embedding is a mathematical representation used to support similarity search, but it is derived from source content.
+
+3
+00:00:12.708 --> 00:00:22.315
+When the source material is sensitive, the embedding, nearby metadata, and index records deserve careful treatment as part of the data architecture.
+
+4
+00:00:22.315 --> 00:00:31.242
+Vector stores may hold embeddings, chunk text, document IDs, tenant labels, permission tags, source references, and lifecycle metadata.
+
+5
+00:00:31.242 --> 00:00:33.662
+They are not just performance caches.
+
+6
+00:00:33.662 --> 00:00:41.378
+They are systems that influence which evidence reaches the model and which users can discover source-derived material.
+
+7
+00:00:41.378 --> 00:00:48.943
+Collection and namespace design should follow data sensitivity, ownership, tenant boundaries, and query patterns.
+
+8
+00:00:48.943 --> 00:00:57.642
+Mixing unrelated tenants or sensitivity levels into one broad index can make permission enforcement and lifecycle management harder.
+
+9
+00:00:57.642 --> 00:01:04.450
+Separate collections are not always required, but the design should make access rules clear and testable.
+
+10
+00:01:04.450 --> 00:01:07.022
+Metadata filters should be deliberate.
+
+11
+00:01:07.022 --> 00:01:16.780
+Tenant identifiers, classification labels, lifecycle status, source type, effective dates, and permission fields often become retrieval controls.
+
+12
+00:01:16.780 --> 00:01:26.387
+If those fields are incomplete or inconsistent, the retrieval layer may select content that is stale, irrelevant, or inappropriate for the workflow.
+
+13
+00:01:26.387 --> 00:01:29.262
+Index refresh and deletion behavior matter.
+
+14
+00:01:29.262 --> 00:01:34.406
+Documents change, permissions move, projects close, and old guidance expires.
+
+15
+00:01:34.406 --> 00:01:40.760
+The architecture should define how indexes are rebuilt, updated, backed up, restored, and purged.
+
+16
+00:01:40.760 --> 00:01:50.594
+Administrative access to indexes should be protected because index operators may influence retrieval behavior and source-derived data availability.
+
+17
+00:01:50.594 --> 00:01:59.142
+Teams should document what each index contains, who owns it, how it is refreshed, and what operational signals show that it is healthy.
+
+18
+00:01:59.142 --> 00:02:06.782
+That record helps reviewers treat the vector store as a managed data system rather than a hidden implementation detail.

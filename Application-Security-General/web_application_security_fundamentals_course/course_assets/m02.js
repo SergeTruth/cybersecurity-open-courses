@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Web Application Attack Surface",
+  "graphicAlt": "Blank placeholder graphic for module 2, Web Application Attack Surface.",
+  "narration": "The attack surface is every place where a user, system, file, browser, API client, administrator, integration, or background process can influence the application. Routes and forms are obvious examples, but they are only the beginning. API endpoints, authentication flows, password reset pages, session cookies, file uploads, admin panels, webhook receivers, search fields, reporting tools, and internal management interfaces all deserve review. Anything that accepts input or makes a decision can become security-relevant.\n\nClient-side code is part of the surface even when enforcement must happen on the server. JavaScript, browser storage, hidden fields, and front-end route checks can shape the user experience, but users can inspect, modify, replay, and bypass client-side behavior. Third-party integrations also expand the surface. A payment processor, analytics script, identity provider, email service, package, or embedded widget can affect security, privacy, availability, or the trust model of the application.\n\nDeployment configuration completes the picture. Debug settings, cloud storage permissions, container images, environment variables, CORS policies, TLS configuration, security headers, logging destinations, and secret handling can create vulnerabilities even when the application code looks reasonable. Mapping the attack surface helps teams decide where to focus review and testing. It also prevents blind spots, because security issues often appear where two features meet: a file upload feeding a parser, an admin tool calling an API, or a public route using an internal helper.",
+  "narrationPoints": [
+    "The attack surface is every place where a user, system, file, browser, API client, administrator, integration, or background process can influ...",
+    "Client-side code is part of the surface even when enforcement must happen on the server.",
+    "Deployment configuration completes the picture."
+  ]
+};

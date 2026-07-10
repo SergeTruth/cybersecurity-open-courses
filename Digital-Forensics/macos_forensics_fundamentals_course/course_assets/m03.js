@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "User Accounts and Activity Artifacts",
+  "graphicAlt": "Blank placeholder graphic for macOS user accounts and activity artifacts",
+  "narration": "User account artifacts help analysts understand who could access a Mac and what activity may be associated with a profile. Local users have home directories under /Users, but enterprise environments may also involve directory services, mobile accounts, single sign-on tools, device management, cloud identity, and shared administrative accounts. Account evidence should be interpreted alongside identity and endpoint records when available.\n\nHome directories can contain documents, downloads, desktop files, browser data, application data, shell history, messaging artifacts, recent item traces, and user-specific configuration. Downloads are often especially useful because they may show files obtained from browsers, email, collaboration tools, or other external sources. Browser data can help explain web activity, downloads, authentication, and application use.\n\nFinder activity, recent items, saved state, and application usage traces can support user activity reconstruction. They may show files or folders that were opened, applications that were used, or resources that appeared in a user's workflow. These artifacts can be very helpful, but they do not automatically prove intent or physical presence at the keyboard.\n\nUser attribution has limits. A profile artifact may show activity under an account, but the account could have been shared, remotely accessed, compromised, automated, or synced from another service. Analysts should compare local artifacts with login records, file metadata, application logs, endpoint telemetry, and business context. The question is not only what artifact exists, but whether multiple sources support the same story.",
+  "narrationPoints": [
+    "User account artifacts help analysts understand who could access a Mac and what activity may be associated with a profile.",
+    "Home directories can contain documents, downloads, desktop files, browser data, application data, shell history, messaging artifacts, recent...",
+    "Finder activity, recent items, saved state, and application usage traces can support user activity reconstruction.",
+    "User attribution has limits."
+  ]
+};

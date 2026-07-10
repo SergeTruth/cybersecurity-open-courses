@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Is IEC 62443?",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "IEC 62443 is a family of standards focused on cybersecurity for industrial automation and control systems. These systems monitor or control physical processes in manufacturing, energy, water, transportation, buildings, and other operational environments. Their security must account for safety, availability, reliability, process integrity, and long equipment lifecycles.\n\nThe standards provide a structured way to discuss industrial cyber risk across organizations and technical disciplines. They address security programs, system design, risk assessment, product development, technical capabilities, integration, and service delivery. IEC 62443 is therefore broader than a list of firewall settings or product features.\n\nAsset owners use the concepts to establish governance and determine what protection their operations require. Integrators translate those requirements into an architecture and commissioned system. Product suppliers build security capabilities into components and maintain secure development practices. Service providers support systems without weakening the controls around them.\n\nThis division of responsibility matters because no single product can secure an industrial operation. A capable component can be configured poorly. A well-segmented system can be exposed through unmanaged remote access. Strong policy can fail if teams cannot produce evidence that controls are implemented and maintained.\n\nIEC 62443 should be treated as a risk-based, lifecycle-oriented framework for disciplined engineering. It does not eliminate uncertainty or replace knowledge of the process. Its practical value comes from connecting organizational responsibility, architecture, technical requirements, verification, and ongoing operation using a common industrial cybersecurity language.",
+  "narrationPoints": [
+    "IEC 62443 is a family of standards focused on cybersecurity for industrial automation and control systems.",
+    "The standards provide a structured way to discuss industrial cyber risk across organizations and technical disciplines.",
+    "Asset owners use the concepts to establish governance and determine what protection their operations require.",
+    "This division of responsibility matters because no single product can secure an industrial operation.",
+    "IEC 62443 should be treated as a risk-based, lifecycle-oriented framework for disciplined engineering."
+  ]
+};

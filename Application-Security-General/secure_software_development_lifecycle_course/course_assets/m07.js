@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "CI/CD, Release, and Change Controls",
+  "graphicAlt": "Blank placeholder image for a lesson on CI/CD, release, and change controls.",
+  "narration": "Secure build pipelines help enforce repeatable controls without relying on memory. Source control protections, branch protection concepts, required code review, build integrity checks, artifact handling, and environment separation all reduce the chance that unreviewed or untrusted changes reach production. Automation is useful because it applies common checks consistently, but it should not hide accountability.\n\nCI/CD security also includes infrastructure-as-code review, configuration management, registry or artifact repository controls, secret handling, and policy gates. Build systems often have access to source code, deployment credentials, package registries, signing keys, and production configuration. That makes the pipeline part of the product security boundary. Protecting the pipeline protects the software that comes out of it.\n\nRelease control is about making risk visible before change reaches users. Deployment approvals, release risk assessments, audit trails, and separation between development, testing, staging, and production environments help teams understand what is changing and who accepted the risk. Not every release needs a heavy process, but high-impact changes should have more evidence and review than routine low-risk updates.\n\nRollback planning gives teams a planned way to recover if a release causes unacceptable security, operational, or functional impact. A secure release process asks whether the artifact is known, the configuration is reviewed, the deployment path is controlled, monitoring is ready, and recovery is practical. Pipelines should enforce checks while still leaving humans responsible for risk decisions and exceptions.",
+  "narrationPoints": [
+    "Secure build pipelines help enforce repeatable controls without relying on memory.",
+    "Source control protections, branch protection concepts, required code review, build integrity checks, artifact handling, and environment separation all reduce the chance that unreviewed or.",
+    "Automation is useful because it applies common checks consistently, but it should not hide accountability.",
+    "CI/CD security also includes infrastructure-as-code review, configuration management, registry or artifact repository controls, secret handling, and policy gates.",
+    "Build systems often have access to source code, deployment credentials, package registries, signing keys, and production configuration.",
+    "That makes the pipeline part of the product security boundary."
+  ]
+};

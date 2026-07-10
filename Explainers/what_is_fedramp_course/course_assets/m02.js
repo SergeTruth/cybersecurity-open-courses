@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why FedRAMP Exists",
+  "graphicAlt": "Government cloud ecosystem showing agencies reusing standardized security evidence instead of duplicating separate assessments.",
+  "narration": "FedRAMP exists because federal cloud adoption created a practical challenge. Many agencies needed cloud services, but each agency also needed confidence that those services met appropriate security expectations.\n\nIf every agency performed a completely separate review of the same cloud service, cloud adoption could become slower, more expensive, and less consistent. Providers would answer similar questions repeatedly, and agencies might receive evidence in different formats.\n\nFedRAMP helps reduce duplicated effort by standardizing cloud security assessment and authorization activities. It promotes a common baseline for documentation, controls, assessment evidence, and continuous monitoring.\n\nStandardization supports risk reduction because it makes expectations clearer. Cloud providers can design programs around known requirements, assessors can evaluate against a recognized structure, and agencies can review evidence more consistently.\n\nFedRAMP also supports reuse. Security packages and assessment results can be reused across agencies, while each agency remains responsible for its own risk decisions and mission context.\n\nThe program does not remove the need for cybersecurity programs, agency judgment, or ongoing security operations. It gives organizations a common way to evaluate cloud security risk and maintain visibility over time.\n\nIn practice, FedRAMP helps federal agencies adopt cloud technologies while preserving a disciplined approach to governance, assessment, authorization, and monitoring.\n\nThis standardization also helps cloud providers plan their programs. Instead of responding to completely different expectations for every customer, providers can build security and evidence processes around a recognized federal model.",
+  "narrationPoints": [
+    "FedRAMP exists because federal cloud adoption created a practical challenge.",
+    "If every agency performed a completely separate review of the same cloud service, cloud adoption could become slower, more expensive, and...",
+    "FedRAMP helps reduce duplicated effort by standardizing cloud security assessment and authorization activities.",
+    "Standardization supports risk reduction because it makes expectations clearer.",
+    "FedRAMP also supports reuse."
+  ]
+};

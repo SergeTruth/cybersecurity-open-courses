@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Common OT Threat Actors",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT risk involves actors with different goals, resources, and levels of process knowledge. Cybercriminals often seek payment, resale value, or access they can monetize. Ransomware operators may disrupt an industrial organization without intentionally manipulating control systems; encrypting business and operational support services can be enough to stop production.\n\nNation-state and state-linked groups may pursue espionage, strategic access, disruption capability, or influence. Their activity can include long-term collection and preparation rather than immediate impact. Defenders should avoid assuming that every incident is highly specialized, but critical operators should account for patient adversaries with significant resources.\n\nInsiders possess legitimate knowledge and access. A malicious insider may misuse privileges, while a well-intentioned employee can create similar exposure by bypassing procedure, reusing credentials, or connecting unauthorized equipment. Contractors and third parties add another form of trusted access. Their security practices, endpoints, accounts, and remote connections become part of the organization's risk.\n\nHacktivists may seek visibility, disruption, or symbolic effect against a company, industry, or public service. Their technical capability varies. Accidental and negligent users are not hostile actors, but they belong in the threat landscape because routine mistakes can change configurations, weaken boundaries, or interrupt operations.\n\nActor labels should guide preparation, not replace evidence. The same remote-access pathway could be misused by a criminal, contractor, or compromised employee account. Layered controls such as individual identities, least privilege, segmentation, monitoring, approval, and change records reduce risk across several actor types. Focus on what access exists, what it can influence, and how misuse would be detected.",
+  "narrationPoints": [
+    "OT risk involves actors with different goals, resources, and levels of process knowledge.",
+    "Nation-state and state-linked groups may pursue espionage, strategic access, disruption capability, or influence.",
+    "Insiders possess legitimate knowledge and access.",
+    "Hacktivists may seek visibility, disruption, or symbolic effect against a company, industry, or public service.",
+    "Actor labels should guide preparation, not replace evidence."
+  ]
+};

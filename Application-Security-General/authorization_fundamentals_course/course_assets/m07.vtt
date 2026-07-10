@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.756
+Authorization architecture defines where decisions are made and where they are enforced.
+
+2
+00:00:05.756 --> 00:00:10.241
+A policy decision point, at a high level, evaluates policy and context.
+
+3
+00:00:10.241 --> 00:00:15.548
+A policy enforcement point applies the result by allowing or denying the operation.
+
+4
+00:00:15.548 --> 00:00:27.283
+In practice, these may be centralized services, application-local checks, middleware, guard clauses, framework annotations, database controls, or combinations of those patterns.
+
+5
+00:00:27.283 --> 00:00:35.655
+Centralized authorization can improve consistency and governance, but it must be integrated carefully with application context.
+
+6
+00:00:35.655 --> 00:00:43.429
+Application-local checks can be close to the code and easier to understand, but they may become inconsistent across teams.
+
+7
+00:00:43.429 --> 00:00:49.633
+Reusable authorization middleware and guard clauses can help make safe behavior easier to apply.
+
+8
+00:00:49.633 --> 00:00:57.258
+The architecture should make correct checks routine rather than relying on every developer to remember every edge case.
+
+9
+00:00:57.258 --> 00:01:05.629
+Data filtering and database-layer controls at a high level can support authorization by limiting which records queries can return.
+
+10
+00:01:05.629 --> 00:01:10.488
+However, data filtering should not be confused with complete policy design.
+
+11
+00:01:10.488 --> 00:01:19.009
+The system still needs to know which actions are allowed, how tenant boundaries are enforced, and how administrative exceptions work.
+
+12
+00:01:19.009 --> 00:01:28.054
+Caching authorization decisions can improve performance, but stale permissions can create risk if changes are not reflected quickly enough.
+
+13
+00:01:28.054 --> 00:01:31.642
+Fail-closed behavior and error handling are important.
+
+14
+00:01:31.642 --> 00:01:38.668
+If the authorization system cannot evaluate a decision, the safer default is usually to deny rather than allow.
+
+15
+00:01:38.668 --> 00:01:45.022
+Error messages should not reveal sensitive resources or policy internals to unauthorized callers.
+
+16
+00:01:45.022 --> 00:01:53.170
+A strong architecture makes safe behavior consistent, observable, and hard to bypass accidentally as the application evolves.

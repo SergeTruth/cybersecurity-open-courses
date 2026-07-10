@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Identity, Access, and Policy Enforcement",
+  "graphicAlt": "Preview bullet summary visual for identity, access, and policy enforcement.",
+  "narration": "A private model does not automatically make private use safe. Users, service accounts, applications, agents, administrators, and support tools all need appropriate permissions. A user may be allowed to ask general questions but not access sensitive document collections, call production tools, export logs, or trigger automated actions.\n\nAccess control should cover more than the front door. Teams need rules for model access, retrieval collection access, tool permissions, administrative functions, service identities, and audit trails. Role-based access can be useful, but AI systems often benefit from capability-style permissions as well: this user can summarize approved documents, that service can call a specific retrieval index, and this workflow requires approval before an action is taken.\n\nPolicy layers can decide which model is allowed, which data class may be used, which tools are enabled, which outputs require review, and when human approval is required. These decisions should be close enough to the workflow that they are testable and reviewable. Sensitive actions should fail closed when policy context is missing or unclear.\n\nAgents and tool-using systems need especially clear boundaries because they can perform work beyond text generation. They may read, write, search, call APIs, open tickets, or trigger business processes. Least privilege, administrative separation, approval gates, and structured audit records help keep those capabilities accountable. Sovereign AI depends on visible policy enforcement, not informal trust that every user and tool will behave within expectations.",
+  "narrationPoints": [
+    "A private model does not automatically make private use safe.",
+    "Access control should cover more than the front door.",
+    "Policy layers can decide which model is allowed, which data class may be used, which tools are enabled, which outputs require review, and when...",
+    "Agents and tool-using systems need especially clear boundaries because they can perform work beyond text generation."
+  ]
+};

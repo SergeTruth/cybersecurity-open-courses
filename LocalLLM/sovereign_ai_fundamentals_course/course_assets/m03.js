@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Deployment Models: Local, Private, Cloud, and Hybrid",
+  "graphicAlt": "Preview bullet summary visual for local, private, cloud, and hybrid deployment models.",
+  "narration": "Sovereign AI does not require one deployment model for every workflow. Local workstations, local inference servers, private data center deployments, private cloud environments, managed cloud AI services, hybrid routing, and restricted environments all have a place. Each model changes the balance of control, cost, performance, scalability, usability, and operational responsibility.\n\nA local workstation can be excellent for experimentation, offline work, and individual privacy. It may also be hard to monitor, patch, back up, or standardize. A private server can centralize access, policy, and logging, but it needs capacity planning, maintenance, security updates, and support. A managed cloud service can scale quickly and integrate with existing platforms, but data handling, retention, vendor controls, and contractual commitments must be understood before sensitive workflows are routed there.\n\nHybrid deployment is often the practical middle path. Sensitive work can be routed to private models or private retrieval systems, while lower-risk tasks use approved external services with clear settings and review. That pattern only works when routing rules are explicit. Teams need to know which data classes are allowed, which models are approved, who owns exceptions, and how changes are recorded.\n\nDeployment choice should follow data sensitivity, workload needs, latency, budget, user experience, risk tolerance, and support capacity. A highly controlled system that no one can maintain is not a durable solution. A convenient system with unclear data flow is not sovereign. The right deployment model is the one whose controls match the workflow and whose operations can be sustained.",
+  "narrationPoints": [
+    "Sovereign AI does not require one deployment model for every workflow.",
+    "A local workstation can be excellent for experimentation, offline work, and individual privacy.",
+    "Hybrid deployment is often the practical middle path.",
+    "Deployment choice should follow data sensitivity, workload needs, latency, budget, user experience, risk tolerance, and support capacity."
+  ]
+};

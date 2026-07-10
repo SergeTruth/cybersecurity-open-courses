@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Prompt Boundaries and Retrieved Content Risk",
+  "graphicAlt": "Draft visual summary for Prompt Boundaries and Retrieved Content Risk",
+  "narration": "Prompt boundaries matter because retrieved content is not the same as trusted application policy. Source material can be outdated, incomplete, written for a different audience, copied from somewhere else, or inconsistent with newer guidance. It may also contain instructions intended for human readers that should not control the model or the application.\n\nA private RAG prompt should maintain separation between system instructions, developer rules, application policy, the user request, and retrieved evidence. The model can be guided to use retrieved chunks as evidence while still following higher-priority trusted instructions and access rules. This hierarchy should be reflected in prompt design and in review expectations.\n\nThe architecture should also handle source priority. A current policy may outrank an old procedure. A tenant-specific rule may outrank general guidance. A regulated workflow may require approved sources only. When sources disagree, the system should avoid pretending the conflict does not exist.\n\nWeak evidence needs cautious behavior. If retrieval finds nothing relevant, finds only stale material, or returns conflicting sources, the answer should explain the limitation or route the user to review rather than manufacturing certainty. This is a quality control issue and a governance issue.\n\nThe durable habit is simple: retrieved text is context, not command. It should help the model answer, but it should not override access rules, trusted policy, source priority, or human review requirements.\n\nThis boundary should be tested with normal business content, not just ideal examples. Review how the system behaves when content is old, ambiguous, duplicated, informal, or written in a way that sounds more confident than the approved policy.",
+  "narrationPoints": [
+    "Prompt boundaries matter because retrieved content is not the same as trusted application policy.",
+    "A private RAG prompt should maintain separation between system instructions, developer rules, application policy, the user request, and retrieved...",
+    "The architecture should also handle source priority.",
+    "Weak evidence needs cautious behavior.",
+    "The durable habit is simple: retrieved text is context, not command."
+  ]
+};

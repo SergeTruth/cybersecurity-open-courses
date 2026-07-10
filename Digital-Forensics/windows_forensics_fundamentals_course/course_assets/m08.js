@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Collection, Preservation, and Reporting",
+  "graphicAlt": "Blank placeholder graphic for Windows forensic collection and reporting",
+  "narration": "Collection and preservation determine how reliable the investigation can be. Disk images, targeted collections, memory capture at a high level, log exports, EDR exports, registry hives, user profile artifacts, and cloud or domain records may all be useful. The right approach depends on incident urgency, system importance, data sensitivity, available tools, and legal or policy requirements.\n\nTriage collection is often used when analysts need a focused snapshot quickly. It can gather key logs, registry hives, event records, running process information, selected files, and system metadata. Triage is not the same as a full forensic image, so reports should explain what was collected and what may be missing. Memory capture may be valuable when volatile evidence matters, but it should be handled carefully and documented.\n\nHashes help verify whether collected evidence changes after collection. Chain of custody records document who collected evidence, when it was collected, where it came from, where it was stored, and who handled it. Case notes should capture commands, tools, timestamps, observations, decisions, assumptions, and limitations. These records help distinguish analyst actions from system activity.\n\nReporting should include methods, evidence, findings, confidence, limitations, and supporting references. Windows artifacts can be complex, incomplete, or affected by normal system behavior. A good report avoids overclaiming and explains uncertainty. The best outcome is not a dramatic story. It is a defensible explanation of what happened, when it happened, and what systems or users were affected.",
+  "narrationPoints": [
+    "Collection and preservation determine how reliable the investigation can be.",
+    "Triage collection is often used when analysts need a focused snapshot quickly.",
+    "Hashes help verify whether collected evidence changes after collection.",
+    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references."
+  ]
+};

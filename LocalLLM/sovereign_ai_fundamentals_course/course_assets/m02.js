@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Data Control and Privacy Boundaries",
+  "graphicAlt": "Preview bullet summary visual for data control and privacy boundaries.",
+  "narration": "Data control is the foundation of sovereign AI. An AI workflow may process prompts, uploaded files, retrieved documents, embeddings, chat history, generated outputs, tool results, logs, telemetry, evaluation records, and user feedback. Some of that data may be public. Some may be internal. Some may be confidential, regulated, customer-specific, personal, or operationally sensitive.\n\nA practical program starts by classifying the data that can enter each workflow. Teams should know whether prompts may include customer records, source code, contract language, incident details, credentials, health information, financial data, or proprietary strategy. They should also understand derived data. Embeddings, summaries, evaluations, and logs can carry sensitive meaning even when they do not look like the original document.\n\nPrivacy boundaries can be broken accidentally. Sensitive prompts may be routed to the wrong service. Logs may be retained too long. Embeddings may be stored without a clear owner. Retrieval systems may ignore document permissions. Monitoring data may be shared more broadly than the underlying content would allow. These are design and operations problems, not only legal concerns.\n\nSovereign AI needs explicit rules for what data can enter each workflow, where it can be stored, who can inspect it, how long it can be retained, and when it must be deleted or reviewed. Separate inference data from retrieval data and operational telemetry. Preserve tenant and permission boundaries. Use redaction and access control where logging is necessary. Strong data control makes later decisions about models, deployment, and policy much easier.",
+  "narrationPoints": [
+    "Data control is the foundation of sovereign AI.",
+    "A practical program starts by classifying the data that can enter each workflow.",
+    "Privacy boundaries can be broken accidentally.",
+    "Sovereign AI needs explicit rules for what data can enter each workflow, where it can be stored, who can inspect it, how long it can be retained..."
+  ]
+};

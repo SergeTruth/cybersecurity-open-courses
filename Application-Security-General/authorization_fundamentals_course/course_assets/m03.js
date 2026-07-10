@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authorization Models",
+  "graphicAlt": "Blank placeholder image for a lesson on authorization models.",
+  "narration": "Authorization models are design tools that help teams organize access decisions. Role-based access control, or RBAC, assigns permissions through roles. A role might represent a job function, application responsibility, or operational duty. RBAC can be straightforward to understand and administer, but it can become too coarse if roles are broad or too complex if every exception creates another role.\n\nAttribute-based access control, or ABAC, uses attributes such as user properties, resource properties, action type, environment, sensitivity, or context. ABAC can express flexible policies, such as allowing managers to approve requests for their region during business hours or allowing access only when a resource is marked internal. The tradeoff is that policies and attributes must be governed carefully so decisions remain understandable.\n\nRelationship-based access control, or ReBAC, focuses on relationships between subjects and resources, such as owner, member, parent organization, reviewer, collaborator, or tenant administrator. Policy-based access concepts separate policy rules from enforcement points. Discretionary and mandatory access concepts at a high level describe who controls access decisions and whether policy is centrally enforced.\n\nGroups, roles, permissions, scopes, claims, and entitlements are all ways of representing access information, but none is magic. Choosing a model depends on application complexity, user population, data sensitivity, tenant structure, audit needs, and maintainability. A good model makes the right access easy to express and the wrong access difficult to grant accidentally.",
+  "narrationPoints": [
+    "Authorization models are design tools that help teams organize access decisions.",
+    "Attribute-based access control, or ABAC, uses attributes such as user properties, resource properties, action type, environment, sensitivity,...",
+    "Relationship-based access control, or ReBAC, focuses on relationships between subjects and resources, such as owner, member, parent organizati...",
+    "Groups, roles, permissions, scopes, claims, and entitlements are all ways of representing access information, but none is magic."
+  ]
+};

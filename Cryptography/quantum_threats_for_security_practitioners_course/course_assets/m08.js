@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Preparing for Post-Quantum Migration",
+  "graphicAlt": "Blank white placeholder image for module 8, Preparing for Post-Quantum Migration.",
+  "narration": "Preparation begins with cryptographic inventory. An inventory records where cryptography is used, including algorithms, protocols, libraries, certificates, keys, systems, services, devices, and dependencies. It should cover external-facing systems, internal service communication, VPNs, SSH, code signing, firmware signing, identity platforms, cloud services, build pipelines, embedded devices, and data protection workflows.\n\nCryptographic agility is the ability to change algorithms, keys, libraries, and protocols without redesigning the entire system. Agility is partly technical, but it is also operational. It requires ownership, documentation, testing, configuration control, vendor engagement, and deployment discipline. A system that can only use one algorithm forever is fragile, even if that algorithm is strong today.\n\nPost-quantum cryptography provides new algorithms intended to resist known quantum attacks. During migration, some environments may use hybrid approaches that combine classical and post-quantum mechanisms to manage compatibility and transition risk. Hybrid designs still need careful testing. They can affect handshake sizes, certificate sizes, key management, performance, logging, monitoring, and interoperability with older clients or devices.\n\nVendor questions should be concrete. Which algorithms and standards are supported? Which products are in scope? What timelines apply? Will updates be validated? How will certificates, keys, and APIs change? What testing guidance is available? A migration roadmap should connect those answers to pilot deployments, compatibility testing, procurement requirements, change windows, rollback plans, and long-term crypto agility.",
+  "narrationPoints": [
+    "Preparation begins with cryptographic inventory.",
+    "Cryptographic agility is the ability to change algorithms, keys, libraries, and protocols without redesigning the entire system.",
+    "Post-quantum cryptography provides new algorithms intended to resist known quantum attacks.",
+    "Vendor questions should be concrete."
+  ]
+};

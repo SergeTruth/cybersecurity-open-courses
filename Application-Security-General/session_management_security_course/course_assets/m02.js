@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Session Identifiers",
+  "graphicAlt": "Blank placeholder graphic for module 2, Session Identifiers.",
+  "narration": "A session identifier is the handle that lets the application connect a request to a session. In a traditional server-side model, the identifier is stored by the client, often in a cookie, and the server uses it to look up session state. That state may include the user ID, authentication time, roles, tenant, security flags, expiration, and other context. Because possession of the identifier can allow a request to be treated as authenticated, session identifiers must be protected like credentials.\n\nSecure identifiers need strong randomness, unpredictability, uniqueness, and enough length to resist guessing. Developers should rely on mature framework or platform session generation rather than inventing their own identifier format. Identifiers should not reveal user IDs, timestamps, roles, tenant names, or other meaningful internals. They should not be sequential, human-readable, or derived from predictable input. A session ID should be an opaque reference, not a miniature profile of the user or application.\n\nSession tokens and bearer tokens carry similar responsibility. If a token grants access, then whoever presents it may be treated as authorized within its scope. That means storage, transmission, logging, expiration, rotation, and revocation all matter. Avoid placing session identifiers in URLs, log messages, analytics tools, referrer headers, or error details. Server-side validation remains essential: the application should confirm that the session exists, is active, has not expired, matches required security state, and is still allowed for the requested action.",
+  "narrationPoints": [
+    "A session identifier is the handle that lets the application connect a request to a session.",
+    "Secure identifiers need strong randomness, unpredictability, uniqueness, and enough length to resist guessing.",
+    "Session tokens and bearer tokens carry similar responsibility."
+  ]
+};

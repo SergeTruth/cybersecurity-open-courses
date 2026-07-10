@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Evidence, Communication, and Lessons Learned",
+  "graphicAlt": "Blank placeholder graphic for module 8",
+  "narration": "Evidence preservation in cloud environments includes audit logs, identity activity, API calls, storage access, snapshots, configuration history, alert records, tickets, timelines, and responder notes. Some evidence is controlled by the customer, some by the provider, and some by SaaS vendors or identity providers. Knowing where evidence lives and how long it is retained is essential before an incident occurs.\n\nChain of custody at a high level means documenting what was collected, when, by whom, from where, and how it was preserved. Not every incident becomes a legal matter, but evidence handling should still be disciplined. Clean documentation supports technical analysis, management decisions, compliance obligations, insurance questions, and possible customer communications.\n\nCommunication must be coordinated. Technical responders, service owners, business leaders, legal counsel, privacy teams, compliance teams, customer support, and cloud providers may all have roles. Early messages should distinguish confirmed facts from uncertainty. Overstating conclusions can damage trust, while withholding necessary coordination can slow containment and recovery.\n\nAfter-action reviews turn incidents into improvement. A good review asks what happened, how it was detected, what worked, what slowed the response, what evidence was missing, what controls failed, and what should change. The purpose is not blame. The purpose is to improve detection, runbooks, architecture, identity controls, logging, training, and escalation paths.\n\nLessons learned should become tracked work. Update runbooks, tune detections, improve asset inventory, change risky defaults, strengthen access controls, adjust retention, and rehearse the new process. A cloud incident response program matures when every incident produces better preparation for the next one.",
+  "narrationPoints": [
+    "Evidence preservation in cloud environments includes audit logs, identity activity, API calls, storage access, snapshots, configuration histor...",
+    "Chain of custody at a high level means documenting what was collected, when, by whom, from where, and how it was preserved.",
+    "Communication must be coordinated.",
+    "After-action reviews turn incidents into improvement.",
+    "Lessons learned should become tracked work."
+  ]
+};

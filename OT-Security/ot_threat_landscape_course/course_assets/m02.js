@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why OT Environments Are Attractive Targets",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT environments support production and critical services, so disruption can create immediate financial and operational pressure. A manufacturer may lose output every minute a line is stopped. A utility or transportation operator may need to maintain public service while investigating. Attackers understand that the cost of downtime can influence response decisions.\n\nLong equipment lifecycles add exposure. Controllers, workstations, and proprietary applications may remain in service for decades because replacement affects machinery, certification, or process design. Some assets run unsupported operating systems or lack modern authentication and logging. These conditions do not guarantee compromise, but they narrow defensive options.\n\nArchitecture can also increase risk. Older environments may have flat networks designed for reliability and easy maintenance rather than containment. A system introduced for reporting or vendor support can create a path between enterprise and control functions. Documentation may not reflect years of temporary connections and production changes.\n\nRemote access is operationally valuable but attractive to attackers. Vendors, integrators, and engineers may require connections across sites and time zones. Weak authentication, shared accounts, unmanaged endpoints, or permanently enabled tunnels can turn legitimate support pathways into exposure. Multiple third parties make ownership and monitoring harder.\n\nFinally, high availability makes defensive work complex. Patching, scanning, and configuration changes require testing and maintenance windows. Teams may postpone work rather than risk an outage. Effective programs reduce this imbalance through segmentation, secure access, passive monitoring, compensating controls, tested recovery, and lifecycle investment. OT is attractive not because it is always insecure, but because valuable operations, constrained change, and expensive downtime can combine into significant leverage.",
+  "narrationPoints": [
+    "OT environments support production and critical services, so disruption can create immediate financial and operational pressure.",
+    "Long equipment lifecycles add exposure.",
+    "Architecture can also increase risk.",
+    "Remote access is operationally valuable but attractive to attackers.",
+    "Finally, high availability makes defensive work complex."
+  ]
+};

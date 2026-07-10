@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Choosing the Right Telemetry",
+  "graphicAlt": "Security telemetry source diagram showing endpoint, identity, cloud, network, and application logs feeding detection logic.",
+  "narration": "Detection rules depend on telemetry. Endpoint logs, authentication events, identity provider records, cloud activity, network data, application events, email security data, and case management context all provide different perspectives.\n\nDetection engineers should identify which data sources can actually show the behavior they care about. Some activity may require endpoint process data. Other activity may be clearer in identity logs, cloud audit logs, proxy records, or application events.\n\nVisibility limitations matter. You cannot reliably detect behaviors you cannot observe. If the needed telemetry is missing, delayed, incomplete, inconsistently parsed, or not retained long enough, the detection may produce weak or misleading results.\n\nTelemetry selection also affects cost and usability. High-volume data may be expensive or noisy. Low-volume data may be easier to review but less complete. Good rules account for data quality, field consistency, retention, latency, and how analysts will use the signal.",
+  "narrationPoints": [
+    "Detection rules depend on telemetry. Endpoint logs, authentication events, identity provider records, cloud activity, network data, application events, email security data, and case management context all provide different perspectives.",
+    "Detection engineers should identify which data sources can actually show the behavior they care about. Some activity may require endpoint process data. Other activity may be clearer in identity logs, cloud audit logs, proxy records, or application events.",
+    "Visibility limitations matter. You cannot reliably detect behaviors you cannot observe. If the needed telemetry is missing, delayed, incomplete, inconsistently parsed, or not retained long enough, the detection may produce weak or misleading results.",
+    "Telemetry selection also affects cost and usability. High-volume data may be expensive or noisy. Low-volume data may be easier to review but less complete. Good rules account for data quality, field consistency, retention, latency, and how analysts will use the signal."
+  ]
+};

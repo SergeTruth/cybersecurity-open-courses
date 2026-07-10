@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Cookies and Browser Security",
+  "graphicAlt": "Blank placeholder graphic for module 3, Cookies and Browser Security.",
+  "narration": "Cookie-based sessions are common because browsers automatically attach cookies to matching requests. That convenience is powerful, but it means cookie configuration becomes part of the security design. A session cookie should have a narrow purpose, a clear lifetime, and attributes that match the application?s risk. Developers should avoid mixing session cookies with general preference or tracking data. A session cookie carries authenticated state and deserves stricter handling.\n\nThe Secure attribute tells the browser to send the cookie only over HTTPS connections. HttpOnly helps reduce direct access to the cookie from client-side scripts. SameSite helps control when cookies are included in cross-site requests, which can reduce some cross-site request risks when configured appropriately. These attributes are not magic, and they do not replace server-side authorization, but they create important browser-side barriers around a sensitive identifier.\n\nDomain, path, and lifetime choices also matter. A broad domain can expose a cookie to more subdomains than intended. A broad path can make the cookie available to more application areas than necessary. Session cookies typically expire when the browser session ends, while persistent cookies survive longer and require careful justification. Browser storage options such as local storage and session storage have different risk profiles and should not be chosen casually for session secrets. Protecting session identifiers in the browser means limiting where they go, how long they live, and which browser features can reach them.",
+  "narrationPoints": [
+    "Cookie-based sessions are common because browsers automatically attach cookies to matching requests.",
+    "The Secure attribute tells the browser to send the cookie only over HTTPS connections.",
+    "Domain, path, and lifetime choices also matter."
+  ]
+};

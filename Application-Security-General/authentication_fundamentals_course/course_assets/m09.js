@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Blank placeholder image for the course summary on authentication fundamentals.",
+  "narration": "Authentication verifies identity claims for users, services, devices, applications, and workloads. It is different from identification, authorization, and accounting, and confusing those ideas leads to weak designs. Login success should never imply unlimited access. Authentication establishes who or what is present; authorization decides what that identity may do.\n\nStrong authentication combines appropriate authenticators, credential protection, MFA, secure sessions, recovery controls, lifecycle management, federation governance, monitoring, and response. Passwords still require careful storage, reset, throttling, and usability decisions. MFA improves assurance, especially when phishing-resistant methods are used, but it depends on secure enrollment and recovery. Sessions and tokens must be protected after login.\n\nModern identity often involves federation, SSO, service accounts, customer identities, devices, and workloads. Central identity providers can improve consistency, but misconfiguration can affect many applications at once. Service accounts may have persistent access without a human present, so ownership, scope, rotation, and monitoring matter. Authentication design must cover both people and non-human identities.\n\nThe goal is identity assurance that is secure, usable, observable, and appropriate to risk. Users should be able to authenticate reliably. Operators should be able to detect and respond to abuse. Security teams should be able to govern recovery, lifecycle, and federation. Authentication is not a single login screen; it is an ongoing system of trust.",
+  "narrationPoints": [
+    "Authentication verifies identity claims for users, services, devices, applications, and workloads.",
+    "Strong authentication combines appropriate authenticators, credential protection, MFA, secure sessions, recovery controls, lifecycle managemen...",
+    "Modern identity often involves federation, SSO, service accounts, customer identities, devices, and workloads.",
+    "The goal is identity assurance that is secure, usable, observable, and appropriate to risk."
+  ]
+};

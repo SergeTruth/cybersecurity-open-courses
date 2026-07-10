@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.301
+NoSQL injection is less about SQL syntax and more about unsafe query structure.
+
+2
+00:00:05.301 --> 00:00:20.097
+In document databases, search systems, and JSON-driven APIs, user-controlled objects can sometimes influence operators, filters, selectors, or nested conditions if they are passed directly into query construction.
+
+3
+00:00:20.097 --> 00:00:25.794
+The risk is that the application accepts more structure or behavior than it intended.
+
+4
+00:00:25.794 --> 00:00:31.332
+JavaScript developers should pay attention to JSON body parsing and object shape.
+
+5
+00:00:31.332 --> 00:00:41.539
+A request body may look like ordinary data, but it can contain nested objects, arrays, unexpected types, or fields that the route did not intend to expose.
+
+6
+00:00:41.539 --> 00:00:50.322
+If application code passes that structure directly into a query, update, or filter, the user may influence more than a simple value.
+
+7
+00:00:50.322 --> 00:00:54.119
+Schema validation and type checking are important here.
+
+8
+00:00:54.119 --> 00:01:06.067
+Define the expected shape of input, reject unknown fields where appropriate, constrain types, set length limits, and map accepted fields into application-owned query objects.
+
+9
+00:01:06.067 --> 00:01:10.735
+This is different from simply checking that the request is valid JSON.
+
+10
+00:01:10.735 --> 00:01:16.827
+JSON syntax only proves the input can be parsed, not that it represents an authorized query.
+
+11
+00:01:16.827 --> 00:01:22.208
+Allowlisting fields and operators is especially important for filtering APIs.
+
+12
+00:01:22.208 --> 00:01:31.069
+A client may be allowed to filter by status, owner, or creation date, but not by arbitrary internal fields or special query operators.
+
+13
+00:01:31.069 --> 00:01:41.039
+The application should translate approved client choices into controlled query behavior rather than treating the request body as the query itself.
+
+14
+00:01:41.039 --> 00:01:44.837
+Mass assignment and over-posting are related concerns.
+
+15
+00:01:44.837 --> 00:01:54.727
+If a JavaScript API accepts an entire object and writes or queries with it directly, clients may provide fields the developer did not intend to honor.
+
+16
+00:01:54.727 --> 00:02:02.481
+The safer pattern is to validate intent, construct explicit objects, and make the allowed behavior visible in code.

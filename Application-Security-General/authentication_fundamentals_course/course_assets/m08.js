@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Monitoring, Abuse Detection, and Operational Controls",
+  "graphicAlt": "Blank placeholder image for a lesson on authentication monitoring and operational controls.",
+  "narration": "Authentication monitoring turns identity events into operational visibility. Useful signals include successful sign-ins, failed login patterns, account lockouts, new device events, suspicious MFA activity, privileged account sign-ins, service account activity, password reset events, MFA reset events, token anomalies, and changes to authentication policy. The goal is to detect meaningful risk without drowning teams in noise.\n\nSome signals require context. Impossible travel concepts at a high level may indicate suspicious access, but travel, network routing, remote work, and privacy tools can complicate interpretation. A new device event may be expected after a laptop replacement or suspicious after a password reset. Failed logins may represent user error, credential stuffing at a high level, or a service misconfiguration. Triage matters.\n\nMonitoring should connect to escalation and response. Alerts need owners, severity expectations, investigation steps, and containment options. Response might include disabling an account, revoking sessions, resetting credentials, reviewing MFA enrollment, rotating service credentials, contacting an application owner, or preserving audit trails. Authentication data is often central to incident response because identity is the path to many other systems.\n\nPrivacy-aware logging is part of responsible operations. Logs should provide enough detail to investigate and audit authentication activity without unnecessarily exposing passwords, tokens, regulated data, or sensitive personal information. Strong programs define what is logged, who can access it, how long it is retained, and how it supports compliance, detection, support, and forensic needs.",
+  "narrationPoints": [
+    "Authentication monitoring turns identity events into operational visibility.",
+    "Some signals require context.",
+    "Monitoring should connect to escalation and response.",
+    "Privacy-aware logging is part of responsible operations."
+  ]
+};

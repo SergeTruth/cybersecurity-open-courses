@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "HTTPS, Transport, and HSTS",
+  "graphicAlt": "Blank placeholder image for HTTPS, Transport, and HSTS.",
+  "narration": "Secure transport is the foundation for modern web security. Before a browser can enforce meaningful page behavior, the connection itself needs confidentiality and integrity. HTTPS protects requests and responses in transit and helps users know they are talking to the intended site. Without it, credentials, session cookies, form data, and page content can be exposed or modified between the browser and the service.\n\nStrict-Transport-Security, usually called HSTS, tells browsers to use HTTPS for future connections to a site. The max-age directive tells the browser how long to remember the rule. includeSubDomains extends the rule to subdomains. Preload is an additional ecosystem-level commitment where a domain may be included in browser preload lists. These options are powerful because they reduce opportunities for downgrade and mixed transport mistakes.\n\nHSTS rollout needs care. If a domain uses includeSubDomains or preload before every subdomain and legacy service is ready for HTTPS, legitimate users can be locked out of services that still depend on HTTP. The fix is not to avoid HSTS forever. The fix is to inventory subdomains, validate certificates and redirects, stage the rollout, use appropriate max-age values during testing, and increase commitment only when the environment is ready.\n\nHTTPS redirection and mixed content handling are part of the same transport story. The server should redirect HTTP requests to HTTPS, and the application should avoid loading insecure scripts, images, frames, or API calls from secure pages. Transport headers reduce risk when they are paired with platform hygiene: valid certificates, consistent redirects, secure cookies, and deployment processes that do not accidentally reintroduce HTTP paths.",
+  "narrationPoints": [
+    "Secure transport is the foundation for modern web security.",
+    "Strict-Transport-Security, usually called HSTS, tells browsers to use HTTPS for future connections to a site.",
+    "HSTS rollout needs care.",
+    "HTTPS redirection and mixed content handling are part of the same transport story."
+  ]
+};

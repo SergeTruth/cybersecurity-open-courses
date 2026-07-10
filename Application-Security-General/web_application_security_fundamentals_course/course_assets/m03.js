@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Trust Boundaries and Data Flow",
+  "graphicAlt": "Blank placeholder graphic for module 3, Trust Boundaries and Data Flow.",
+  "narration": "A trust boundary is a place where data or control crosses between different levels of trust. The boundary between a browser and a server is one example, but web applications usually have many more. A server crosses a boundary when it reads from a database, calls a third-party API, consumes a queue message, loads a file, accepts a webhook, or receives data from another internal service. Internal does not always mean trusted. Data may have originated outside the organization before it reached an internal component.\n\nData flow mapping shows where information enters, moves, changes form, and leaves the application. Start with entry points such as routes, forms, APIs, upload handlers, scheduled jobs, and integrations. Then track the data through validation, authorization checks, business logic, storage, logging, and response rendering. Mark sensitive data such as credentials, tokens, personal data, payment data, medical data, source code, business secrets, and authorization decisions. The map should show not only where data exists, but which code is allowed to use it.\n\nTrust boundaries are also role boundaries. Anonymous users, authenticated users, administrators, service accounts, support staff, partners, and background jobs should not all be able to perform the same actions or see the same data. Mapping roles with data flow makes review more concrete. Instead of asking whether the application is secure in general, the team can ask whether this user can reach this data through this route, whether this service call preserves authorization context, and whether this response exposes more information than intended.",
+  "narrationPoints": [
+    "A trust boundary is a place where data or control crosses between different levels of trust.",
+    "Data flow mapping shows where information enters, moves, changes form, and leaves the application.",
+    "Trust boundaries are also role boundaries."
+  ]
+};

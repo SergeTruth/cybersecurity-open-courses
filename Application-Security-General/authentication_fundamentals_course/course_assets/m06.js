@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Account Lifecycle and Recovery",
+  "graphicAlt": "Blank placeholder image for a lesson on account lifecycle and recovery controls.",
+  "narration": "Account lifecycle covers account creation, identity verification at a high level, enrollment, credential issuance, role changes, access reviews, dormant account handling, and deactivation. Authentication quality depends on lifecycle quality. If the wrong person can create an account, enroll a factor, or keep access after leaving a role, the login mechanism may work exactly as designed while the overall identity program fails.\n\nRecovery is often as important as primary login security. Password reset, MFA reset, account recovery, backup codes, and help desk procedures exist because legitimate users lose devices, forget secrets, and change roles. Attackers also look for recovery paths because they may be easier to influence than the main login flow. A weak recovery process can allow account takeover even when the normal login path is strong.\n\nSocial engineering resistance at a high level means the process should not depend only on a caller sounding convincing or having easily available personal information. Recovery workflows should define required evidence, approval paths, audit events, waiting periods when appropriate, and escalation for privileged or high-risk accounts. Help desk teams need training and tools that make secure decisions practical under pressure.\n\nLifecycle must be owned and monitored. Dormant accounts, stale service accounts, unnecessary privileges, and unreviewed recovery changes create hidden risk. Access reviews confirm that users and services still need what they have. Deactivation should remove or disable access when identities leave the organization or no longer need a role. Authentication is strongest when account state stays aligned with real-world responsibility.",
+  "narrationPoints": [
+    "Account lifecycle covers account creation, identity verification at a high level, enrollment, credential issuance, role changes, access review...",
+    "Recovery is often as important as primary login security.",
+    "Social engineering resistance at a high level means the process should not depend only on a caller sounding convincing or having easily availa...",
+    "Lifecycle must be owned and monitored."
+  ]
+};

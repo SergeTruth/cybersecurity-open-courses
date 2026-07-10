@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Process, Persistence, and Malware Clues",
+  "graphicAlt": "Blank placeholder graphic for Windows process and persistence clues",
+  "narration": "Process and persistence clues help analysts understand what ran and what was configured to run again. During live response, running processes, command lines, parent-child relationships, loaded modules, network connections, and security tool telemetry may be useful. Because live collection can change the system, analysts should document collection actions and preserve volatile evidence deliberately.\n\nWindows services, scheduled tasks, startup folders, run keys, and WMI-related persistence at a high level can all be relevant. These mechanisms are used for legitimate administration and software operations, so their presence alone does not prove compromise. Analysts should ask whether the item fits the system role, whether it appeared during the timeline of concern, and whether related logs or file metadata support the interpretation.\n\nSuspicious binaries and script execution should be reviewed defensively. Useful questions include where the file came from, when it appeared, which account interacted with it, whether it matches known software, whether security tools recorded activity, and whether logs show related execution. Hashes, metadata, signatures, path analysis, and EDR or antivirus telemetry can all help with triage.\n\nThe safest forensic posture is careful correlation. A service entry, scheduled task, script, or detection alert may be a lead, not a conclusion. Malware triage and persistence analysis should protect evidence, avoid unnecessary execution, and stay inside authorized response procedures. The analyst's job is to explain what the evidence supports and what remains uncertain.",
+  "narrationPoints": [
+    "Process and persistence clues help analysts understand what ran and what was configured to run again.",
+    "Windows services, scheduled tasks, startup folders, run keys, and WMI-related persistence at a high level can all be relevant.",
+    "Suspicious binaries and script execution should be reviewed defensively.",
+    "The safest forensic posture is careful correlation."
+  ]
+};

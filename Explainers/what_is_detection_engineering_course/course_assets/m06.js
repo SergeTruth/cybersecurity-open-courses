@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Measuring and Improving Detections",
+  "graphicAlt": "Detection quality dashboard showing false positive patterns, coverage, analyst feedback, lifecycle health, and improvement actions.",
+  "narration": "Detection engineering requires measurement because teams need evidence that their detections are useful. Metrics help teams understand quality, coverage, operational performance, and where improvement work should be prioritized.\n\nUseful measures may include false positive patterns, analyst feedback, investigation outcomes, coverage analysis, alert volume trends, data quality issues, time spent tuning, and lifecycle health.\n\nMetrics should support better decisions, not create vanity dashboards. A large number of detections does not automatically mean strong visibility. A low alert count does not automatically mean the environment is quiet.\n\nAnalyst feedback is one of the most valuable sources of improvement. If responders consistently need missing context, if alerts are unclear, or if a detection no longer maps to current systems, the detection should be reviewed.\n\nMeasurement creates a feedback loop. Teams observe how detections perform, make changes, validate those changes, and document what they learned. Over time, that loop improves confidence, maintainability, and operational effectiveness.\n\nCoverage analysis is another important measurement area. Teams compare important behaviors, assets, identities, and platforms against current detections to understand where visibility is strong and where additional work may be needed.\n\nMetrics should be interpreted with judgment. A noisy detection may still be valuable if it reveals real risk, while a quiet detection may need testing to confirm that the underlying telemetry and logic still function.\n\nImprovement work should be prioritized like engineering work. Teams can weigh operational pain, security value, platform effort, dependency risk, and expected benefit before deciding what to tune or build next.",
+  "narrationPoints": [
+    "Detection engineering requires measurement because teams need evidence that their detections are useful.",
+    "Useful measures may include false positive patterns, analyst feedback, investigation outcomes, coverage analysis, alert volume trends, data...",
+    "Metrics should support better decisions, not create vanity dashboards.",
+    "Analyst feedback is one of the most valuable sources of improvement.",
+    "Measurement creates a feedback loop."
+  ]
+};

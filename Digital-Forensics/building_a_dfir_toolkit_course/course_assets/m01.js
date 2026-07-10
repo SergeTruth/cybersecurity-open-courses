@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Is a DFIR Toolkit?",
+  "graphicAlt": "Blank placeholder graphic for a DFIR toolkit overview module",
+  "narration": "A DFIR toolkit is a prepared collection of tools, scripts, procedures, templates, storage, and documentation that supports digital forensics and incident response work. It is not just a folder of utilities gathered during an emergency. A useful toolkit helps a team collect evidence, protect integrity, analyze data, document actions, coordinate decisions, and recover with less confusion.\n\nThe difference between tools and capability is important. A disk imager, log parser, memory acquisition tool, or packet viewer can be valuable, but none of them creates a DFIR capability by itself. Capability comes from knowing when to use a tool, how to preserve evidence, how to document the action, how to interpret the result, and how the result supports a response decision. The toolkit should therefore include procedures and templates alongside software.\n\nReadiness matters because incidents are bad times to invent basic workflows. During a ransomware event, cloud account compromise, data exposure, or insider investigation, responders are already dealing with urgency, uncertainty, and business pressure. If the team must also search for download links, debate storage methods, write collection scripts from scratch, or locate chain of custody forms, the response slows down and evidence may be lost.\n\nA DFIR toolkit should be used only for defensive, authorized, evidence-preserving work. It should help responders answer questions, not create risk. The toolkit should reduce unnecessary changes to systems, support clear records of what was done, and keep sensitive evidence protected. The mindset is simple: prepare before the incident, act carefully during the incident, and make the organization more capable after the incident.",
+  "narrationPoints": [
+    "A DFIR toolkit is a prepared collection of tools, scripts, procedures, templates, storage, and documentation that supports digital forensics...",
+    "The difference between tools and capability is important.",
+    "Readiness matters because incidents are bad times to invent basic workflows.",
+    "A DFIR toolkit should be used only for defensive, authorized, evidence-preserving work."
+  ]
+};

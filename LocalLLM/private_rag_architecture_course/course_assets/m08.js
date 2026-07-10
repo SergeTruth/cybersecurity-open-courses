@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Observability, Evaluation, and Quality Control",
+  "graphicAlt": "Draft visual summary for Observability, Evaluation, and Quality Control",
+  "narration": "Private RAG systems need observability because impressive demos can still return incomplete, stale, or misleading answers. Teams need to know whether retrieval finds the right sources, whether answers are grounded, whether citations are useful, and whether sensitive data is handled correctly.\n\nEvaluation should cover both retrieval and generation. Retrieval metrics may track relevant source coverage, filter behavior, ranking quality, duplicate results, no-answer outcomes, and freshness. Answer review may look at groundedness, citation coverage, completeness, tone, uncertainty handling, and whether the response stays inside the approved workflow.\n\nEvaluation sets make quality more repeatable. Teams can collect representative questions, expected source references, known edge cases, and workflow-specific success criteria. Running those checks before and after prompt changes, model changes, source changes, or index rebuilds helps prevent quiet regressions.\n\nLogging needs discipline. Prompt and response logs can help debug quality, but they may contain confidential source material, personal data, customer information, or sensitive operational details. Observability should include redaction, sampling, retention limits, access control, and privacy review rather than storing everything by default.\n\nUser feedback and expert review are valuable when they are connected to a process. Feedback should help improve sources, chunking, ranking, prompts, and documentation. Quality control is continuous because private RAG changes whenever the sources, index, model, permissions, or workflow changes.\n\nUseful dashboards should separate system health from answer quality. Latency, errors, and job status show whether the pipeline is running, while groundedness, citation usefulness, no-answer rates, and reviewer findings show whether the workflow is trustworthy.",
+  "narrationPoints": [
+    "Private RAG systems need observability because impressive demos can still return incomplete, stale, or misleading answers.",
+    "Evaluation should cover both retrieval and generation.",
+    "Evaluation sets make quality more repeatable.",
+    "Logging needs discipline.",
+    "User feedback and expert review are valuable when they are connected to a process."
+  ]
+};

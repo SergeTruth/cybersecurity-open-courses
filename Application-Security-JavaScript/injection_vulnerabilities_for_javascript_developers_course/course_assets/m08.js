@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Review, and Secure Design Practices",
+  "graphicAlt": "Blank placeholder graphic for module 8",
+  "narration": "Injection prevention should be visible in design, code review, and tests. Reviewers should ask where untrusted data enters, where it flows, and which sensitive sinks it reaches. Sensitive sinks include database queries, shell commands, templates, browser rendering, file paths, headers, URLs, parsers, and downstream APIs. If data reaches one of those locations, the review should identify the context-specific control.\n\nSecurity-focused tests should cover schemas, negative cases, boundaries, and high-risk transformations. A test can confirm that unknown fields are rejected, that unsupported operators are not accepted, that route parameters are treated as values, that rendering paths use safe APIs, and that command execution paths only allow approved operations. These tests should use safe representative inputs rather than exploit payload collections.\n\nStatic analysis and dependency review can help, but they are not complete by themselves. Tools may find string-built queries, risky process execution calls, raw HTML rendering, or unsafe evaluation patterns. Human review is still needed to understand data flow, framework behavior, business intent, and compensating controls.\n\nLeast privilege and defense in depth reduce impact. Database accounts should have only the permissions the application needs. Processes should run with constrained privileges. Logging and monitoring should identify suspicious validation failures without exposing secrets. Content Security Policy, safe defaults, and framework protections can add layers, but they should not be treated as permission to build unsafe sinks.\n\nDocument assumptions and sensitive sinks. Future developers need to know why a field is allowlisted, why a query builder escape hatch is prohibited, why a template path rejects user content, or why a rendering helper is required. Secure design becomes easier to maintain when the reasoning is visible.",
+  "narrationPoints": [
+    "Injection prevention should be visible in design, code review, and tests.",
+    "Security-focused tests should cover schemas, negative cases, boundaries, and high-risk transformations.",
+    "Static analysis and dependency review can help, but they are not complete by themselves.",
+    "Least privilege and defense in depth reduce impact.",
+    "Document assumptions and sensitive sinks."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Validation and Common Vulnerabilities",
+  "graphicAlt": "Blank placeholder graphic for validation and common vulnerabilities",
+  "narration": "Input validation can reduce the likelihood and impact of common vulnerabilities, but it should be paired with safer design patterns. Injection risks occur when untrusted data is interpreted as part of a command, query, expression, template, or protocol. Validation can reject unexpected input, but safe APIs such as parameterized queries and structured command invocation are still required.\n\nPath traversal and unsafe file upload issues often involve weak assumptions about names, paths, extensions, or content. Validation should define acceptable filenames, storage locations, file sizes, and content expectations. Normalization should happen before path decisions. The application should still enforce access controls and avoid serving uploaded content in unsafe ways.\n\nBroken business logic and mass assignment show that validation is not only about characters. A request may be perfectly formatted but still unacceptable because it changes a field the user should not control, skips a workflow step, or violates a relationship between account, tenant, and resource. Validation should include business rules, and authorization should enforce what each user can do.\n\nSome risks, such as request smuggling and unsafe deserialization, involve parsing boundaries and high-level architecture. Validation can help reject unexpected structures, but it is not a complete fix. Use well-maintained frameworks, consistent parsing behavior, safe serialization formats, output encoding, secure defaults, and defense in depth. Validation is most effective when it supports a broader secure design.",
+  "narrationPoints": [
+    "Input validation can reduce the likelihood and impact of common vulnerabilities, but it should be paired with safer design patterns.",
+    "Path traversal and unsafe file upload issues often involve weak assumptions about names, paths, extensions, or content.",
+    "Broken business logic and mass assignment show that validation is not only about characters.",
+    "Some risks, such as request smuggling and unsafe deserialization, involve parsing boundaries and high-level architecture."
+  ]
+};

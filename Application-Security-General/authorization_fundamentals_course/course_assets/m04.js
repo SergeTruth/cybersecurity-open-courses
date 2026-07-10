@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Least Privilege and Permission Design",
+  "graphicAlt": "Blank placeholder image for a lesson on least privilege and permission design.",
+  "narration": "Least privilege means granting only the access needed for a role, task, service, or system function. It is not simply a slogan. It requires understanding real workflows, separating routine work from privileged operations, and designing permissions that are narrow enough to reduce risk but usable enough for operations. If access is too broad, compromise or mistakes have greater impact. If access is too narrow without support, users find workarounds.\n\nPermission granularity is a design tradeoff. Very coarse permissions are easy to administer but may overexpose sensitive operations. Extremely fine-grained permissions can become difficult to understand, test, and review. Default deny and allowlist thinking help: access should be denied unless an explicit rule or policy allows it. This creates a safer baseline and forces teams to define intended access.\n\nSeparation of duties reduces the chance that one identity can complete a high-risk workflow alone. Temporary access and just-in-time access concepts can reduce standing privilege by granting elevated permission only when needed and only for a limited period. Privilege review helps confirm that users, roles, groups, and service accounts still need the access they have.\n\nPermission design must also avoid role explosion and overbroad administrator roles. Every exception should not become a permanent role, and every support need should not become full administration. Strong designs use clear permission names, ownership, approval paths, review cadence, and operational guidance. Least privilege succeeds when it supports both security and practical work.",
+  "narrationPoints": [
+    "Least privilege means granting only the access needed for a role, task, service, or system function.",
+    "Permission granularity is a design tradeoff.",
+    "Separation of duties reduces the chance that one identity can complete a high-risk workflow alone.",
+    "Permission design must also avoid role explosion and overbroad administrator roles."
+  ]
+};

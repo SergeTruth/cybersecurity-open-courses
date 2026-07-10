@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Level 3.5: Industrial DMZ",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "The industrial DMZ is commonly described as Level 3.5. It is a security extension to the traditional Purdue discussion, not an original numbered level. Its purpose is to create a controlled buffer between enterprise IT and site operations so ordinary enterprise systems do not communicate directly with control networks.\n\nServices in the industrial DMZ mediate necessary exchange. A jump host can provide a managed path for administration. A remote-access broker can enforce identity, approval, and session controls. Patch and antivirus repositories can stage content before it enters OT. Data replication services can move historian information outward without allowing enterprise clients to query control systems directly.\n\nMonitoring, logging, authentication proxies, file-transfer services, and update gateways may also belong in this zone. The exact design depends on operations, but each service should have a narrow purpose. Connections should specify approved sources, destinations, protocols, direction, and owner. Broad routing through the DMZ defeats the reason for having it.\n\nThe DMZ is not automatically trusted. It faces connections from two environments and may contain high-value access services. Harden systems, separate administrative access, monitor traffic, patch deliberately, retain logs, and avoid using the zone as a general-purpose server network. Remote sessions should terminate or be proxied there rather than passing transparently into OT.\n\nA strong industrial DMZ reduces direct enterprise-to-control connectivity and creates inspection points for data and control flows. It cannot repair weak segmentation below Level 3 or poor identity governance above it. Think of it as one architectural layer in a broader defense that includes controlled pathways, least privilege, asset knowledge, and operational oversight.",
+  "narrationPoints": [
+    "The industrial DMZ is commonly described as Level 3.",
+    "Services in the industrial DMZ mediate necessary exchange.",
+    "Monitoring, logging, authentication proxies, file-transfer services, and update gateways may also belong in this zone.",
+    "The DMZ is not automatically trusted.",
+    "A strong industrial DMZ reduces direct enterprise-to-control connectivity and creates inspection points for data and control flows."
+  ]
+};

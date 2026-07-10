@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Windows System and Evidence Layout",
+  "graphicAlt": "Blank placeholder graphic for Windows system and evidence layout",
+  "narration": "Windows systems organize evidence across standard locations, user-specific areas, protected directories, and application data stores. The Windows directory, especially C:\\Windows and C:\\Windows\\System32, contains operating system components, drivers, configuration, logs, and administrative utilities. Analysts should treat these locations carefully because normal system activity and updates can create many changes.\n\nUser profiles are usually found under C:\\Users. A profile can contain documents, desktop items, downloads, browser data, application settings, jump lists, shortcuts, recent file traces, cloud sync artifacts, and user-specific registry hives. Profiles are central to user activity reconstruction, but they do not automatically prove who physically performed an action. Shared systems, remote access, service accounts, and compromised credentials can complicate attribution.\n\nProgram Files and Program Files x86 commonly contain installed applications. ProgramData often stores shared application data, logs, configuration, and updater artifacts. Temp directories may contain short-lived files, installers, scripts, extracted archives, or application working data. The recycle bin may preserve deleted file references and metadata depending on the scenario. Hidden and protected files can also matter.\n\nSystem context matters. A domain-joined workstation, kiosk, server, cloud instance, developer machine, and shared jump host all produce different evidence patterns. Analysts should identify the system role, operating system version, installed security tools, time zone, user population, and logging configuration before drawing conclusions. The layout gives a map, but context tells the analyst where to look first.",
+  "narrationPoints": [
+    "Windows systems organize evidence across standard locations, user-specific areas, protected directories, and application data stores.",
+    "User profiles are usually found under C:\\Users.",
+    "Program Files and Program Files x86 commonly contain installed applications.",
+    "System context matters."
+  ]
+};

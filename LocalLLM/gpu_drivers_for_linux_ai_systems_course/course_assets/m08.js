@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Troubleshooting Common Driver Problems",
+  "graphicAlt": "Blank placeholder image for module 8: Troubleshooting Common Driver Problems",
+  "narration": "Kernel update breakage is a common Linux GPU issue. A new kernel may require driver modules to be rebuilt, and missing headers can prevent that rebuild. DKMS can help, but it still depends on compatible packages and kernel headers. If a system fails after a kernel update, check the running kernel, installed headers, module build status, and driver logs before making broad changes.\n\nSecure Boot can block unsigned or improperly signed kernel modules from loading. The result may look like the driver is installed but unavailable. Some environments require module signing or Secure Boot policy changes. The right approach depends on organizational policy and system ownership. Treat this as a controlled configuration decision, not a random workaround.\n\nDisplay conflicts, black screens, missing device permissions, and containers that cannot see the GPU each point to different layers. Display problems may involve graphics stack configuration. Permission problems may involve device nodes, groups, or service users. Container issues may involve runtime flags, toolkit configuration, or image compatibility. Version mismatch errors often indicate an unsupported combination of driver, library, runtime, and package.\n\nDeciding when to rollback, reinstall, or rebuild is an operational judgement. Rollback is attractive when a known-good snapshot exists. Reinstall may be reasonable when the package state is confused but the base system is healthy. Rebuild may be faster when experiments have left the machine inconsistent and documentation exists. The safest troubleshooting habit is to preserve evidence, change one variable at a time, and document the result.",
+  "narrationPoints": [
+    "Kernel update breakage is a common Linux GPU issue.",
+    "Secure Boot can block unsigned or improperly signed kernel modules from loading.",
+    "Display conflicts, black screens, missing device permissions, and containers that cannot see the GPU each point to different layers.",
+    "Deciding when to rollback, reinstall, or rebuild is an operational judgement."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Modbus Fundamentals",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Modbus is a widely used industrial protocol known for a straightforward request-and-response model. It began in serial control environments and remains common through variants such as Modbus RTU and Modbus TCP. Modern documentation often describes client and server roles, while older installations may use master and slave terminology.\n\nModbus organizes device data into logical types. Coils commonly represent binary values that can be read or written. Discrete inputs are binary read-only values. Input registers and holding registers represent word-sized data, with holding registers commonly supporting both reads and writes. The exact operational meaning of an address comes from the device and process documentation.\n\nA routine exchange may read status or measurements at a predictable interval. Other operations may write a value or change a binary state. Monitoring can identify the communicating devices and general operation, but it cannot safely assume that register number alone has the same meaning across vendors or sites.\n\nMany Modbus deployments provide limited native authentication, authorization, or encryption. A device may process a syntactically valid request without knowing whether the sender is an approved engineer or application. That legacy assumption makes network architecture and endpoint control especially important.\n\nDefensive measures include restricting communication to required peers, segmenting control zones, controlling engineering access, monitoring for new clients or unexpected write activity, and documenting normal polling patterns. Gateways may mediate older serial networks, but they also become important trust and monitoring points.\n\nModbus traffic should always be interpreted in process context. A write may be approved maintenance, an application error, or a security concern. The responsible response comes from combining protocol visibility with asset function, operating state, user authority, and coordinated engineering review.",
+  "narrationPoints": [
+    "Modbus is a widely used industrial protocol known for a straightforward request-and-response model.",
+    "Modbus organizes device data into logical types.",
+    "A routine exchange may read status or measurements at a predictable interval.",
+    "Many Modbus deployments provide limited native authentication, authorization, or encryption.",
+    "Defensive measures include restricting communication to required peers, segmenting control zones, controlling engineering access, monitoring for...",
+    "Modbus traffic should always be interpreted in process context."
+  ]
+};

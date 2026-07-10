@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:11.464
+Function-level authorization checks whether a caller may perform a particular operation, such as creating a report, changing a setting, approving a request, or deleting a file.
+
+2
+00:00:11.464 --> 00:00:22.928
+Object-level authorization checks whether the caller may perform that operation on a specific object, such as this record, this tenant, this file, this invoice, or this project.
+
+3
+00:00:22.928 --> 00:00:28.394
+Many serious access bugs appear when one type of check exists but the other is missing.
+
+4
+00:00:28.394 --> 00:00:32.418
+Hidden routes and hidden buttons are not sufficient controls.
+
+5
+00:00:32.418 --> 00:00:40.314
+They may improve the user interface, but clients can be modified, requests can be replayed, and APIs can be called directly.
+
+6
+00:00:40.314 --> 00:00:45.173
+Sensitive actions must be enforced server-side and close to the operation.
+
+7
+00:00:45.173 --> 00:00:54.283
+The server should verify both the action and the specific resource, even if the user interface already attempted to hide unavailable options.
+
+8
+00:00:54.283 --> 00:00:57.320
+Tenant boundaries deserve special attention.
+
+9
+00:00:57.320 --> 00:01:09.392
+A user from one organization should not be able to access another organization's records, files, workflows, or administrative operations unless the business model explicitly allows it.
+
+10
+00:01:09.392 --> 00:01:22.222
+Ownership checks, tenant membership, record-level access, file-level access, and administrative role checks should be tested across multiple users and tenants, not assumed from route structure.
+
+11
+00:01:22.222 --> 00:01:32.775
+Insecure direct object reference concepts at a high level describe cases where a caller changes a resource identifier and reaches something they should not access.
+
+12
+00:01:32.775 --> 00:01:40.975
+The defensive lesson is straightforward: never rely only on an object identifier being hard to guess or hidden in the interface.
+
+13
+00:01:40.975 --> 00:01:49.098
+Every sensitive operation should verify that the authenticated subject is authorized for that specific resource and action.

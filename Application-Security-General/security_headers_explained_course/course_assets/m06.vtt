@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.410
+Referrer-Policy controls how much referrer information a browser sends when navigating or loading resources.
+
+2
+00:00:07.410 --> 00:00:13.182
+The referrer can reveal the page a user came from, and sometimes the full URL of that page.
+
+3
+00:00:13.182 --> 00:00:29.172
+If URLs contain sensitive values such as tokens, identifiers, search terms, email addresses, or internal paths, referrer data can leak information to third parties, analytics systems, support tooling, or logs outside the application team.
+
+4
+00:00:29.172 --> 00:00:35.412
+Common policies include strict-origin-when-cross-origin, no-referrer, and same-origin.
+
+5
+00:00:35.412 --> 00:00:48.594
+strict-origin-when-cross-origin sends full referrer information for same-origin requests, but only the origin when crossing to another site over HTTPS, and less information in less secure cases.
+
+6
+00:00:48.594 --> 00:00:51.558
+no-referrer sends no referrer information.
+
+7
+00:00:51.558 --> 00:00:55.380
+same-origin sends referrers only within the same origin.
+
+8
+00:00:55.380 --> 00:01:02.010
+The right choice depends on privacy expectations, analytics needs, and integration requirements.
+
+9
+00:01:02.010 --> 00:01:03.414
+There are tradeoffs.
+
+10
+00:01:03.414 --> 00:01:10.512
+Product and analytics teams may rely on referrer information to understand navigation and campaign flows.
+
+11
+00:01:10.512 --> 00:01:15.036
+Privacy and security teams may want to minimize cross-site leakage.
+
+12
+00:01:15.036 --> 00:01:23.070
+A clear policy helps teams make an intentional decision instead of inheriting whatever the browser default happens to be.
+
+13
+00:01:23.070 --> 00:01:28.452
+It also creates a standard that can be tested and documented across applications.
+
+14
+00:01:28.452 --> 00:01:32.196
+Referrer-Policy is not a substitute for safe URL design.
+
+15
+00:01:32.196 --> 00:01:42.804
+Sensitive data should not be placed in URLs because URLs appear in browser history, logs, bookmarks, screenshots, analytics, network tools, and referrer data.
+
+16
+00:01:42.804 --> 00:01:51.072
+Use server-side state, request bodies where appropriate, short-lived opaque identifiers, and careful logging practices.
+
+17
+00:01:51.072 --> 00:01:59.964
+The header reduces unnecessary leakage, but the application should avoid putting secrets in leak-prone locations in the first place.

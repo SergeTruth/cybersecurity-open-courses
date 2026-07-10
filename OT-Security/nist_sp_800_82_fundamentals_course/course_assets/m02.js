@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why NIST SP 800-82 Matters",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT risk differs from ordinary IT risk because the system's purpose is operational. Confidentiality remains important, but availability and integrity may directly support safety, production, mission delivery, and environmental protection. The impact of a cyber event must be evaluated in terms of both information and physical process consequences.\n\nOperational systems also have unusual constraints. Equipment may remain in service for decades. Changes may require vendor involvement, testing, maintenance windows, and safety review. Some devices have limited authentication, logging, or update capabilities. A security tool that is routine in IT may introduce latency, instability, or an unexpected restart in OT.\n\nNIST SP 800-82 provides a structured bridge between cybersecurity practices and these operating realities. It helps security teams understand industrial architectures and helps engineers consider cyber threats, access paths, and monitoring. Leadership gains a framework for risk decisions, resource allocation, and accountability.\n\nThe publication also supports planning across organizational boundaries. Operators, control engineers, IT administrators, physical-security teams, incident responders, vendors, and management may all own part of the environment. Shared terminology and documented responsibilities reduce gaps during procurement, maintenance, and emergencies.\n\nThe guide matters because OT security cannot be solved by copying an enterprise checklist or by declaring the control network isolated. Organizations need current asset knowledge, architecture, risk analysis, layered controls, monitored access, and practiced recovery. NIST SP 800-82 helps teams organize that work while preserving the engineering judgment required at each site.",
+  "narrationPoints": [
+    "OT risk differs from ordinary IT risk because the system's purpose is operational.",
+    "Operational systems also have unusual constraints.",
+    "NIST SP 800-82 provides a structured bridge between cybersecurity practices and these operating realities.",
+    "The publication also supports planning across organizational boundaries.",
+    "The guide matters because OT security cannot be solved by copying an enterprise checklist or by declaring the control network isolated."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why the Purdue Model Matters",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "The Purdue Model matters because industrial operations depend on several kinds of systems working together. Enterprise planning may create a production schedule. Site operations translate that demand into work. Supervisory systems provide operator visibility, controllers execute logic, and field instruments interact with the process. A failure or compromise can move through these dependencies even when the systems belong to different teams.\n\nPlacing functions into levels helps identify where connectivity should be limited. Traffic that stays within a control area has a different purpose from data being transferred to enterprise analytics. The model supports segmentation by showing where trust changes and where controlled intermediary services may be appropriate.\n\nIt also supports risk analysis. Systems near the process may have direct safety and reliability consequences. Systems higher in the architecture may have broader user populations, internet dependencies, and exposure to common enterprise threats. Neither is automatically more important; their risk comes from different functions, pathways, and operational effects.\n\nThe model improves communication between disciplines. Security teams can explain why direct enterprise-to-controller access creates risk. Engineers can explain why a control flow requires low latency or high availability. Operators can identify which systems provide essential visibility. These conversations turn an abstract network diagram into an operational architecture.\n\nFinally, Purdue helps distinguish data flow from control flow. Production data may move upward for reporting, while commands, recipes, or configuration changes move downward under stricter authority. Reviewing both directions reveals remote access, update, and administration paths that a simple data-flow discussion might miss. The goal is not to prevent communication, but to make every cross-level flow necessary, controlled, observable, and owned.",
+  "narrationPoints": [
+    "The Purdue Model matters because industrial operations depend on several kinds of systems working together.",
+    "Placing functions into levels helps identify where connectivity should be limited.",
+    "It also supports risk analysis.",
+    "The model improves communication between disciplines.",
+    "Finally, Purdue helps distinguish data flow from control flow."
+  ]
+};

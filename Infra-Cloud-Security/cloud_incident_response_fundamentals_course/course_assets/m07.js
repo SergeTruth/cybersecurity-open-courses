@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Containment, Eradication, and Recovery",
+  "graphicAlt": "Blank placeholder graphic for module 7",
+  "narration": "Containment limits immediate harm. Short-term containment may restrict an identity, block suspicious network paths, revoke credentials, isolate workloads, disable exposed access, or pause risky automation. Long-term containment addresses the weakness that allowed the incident to persist, such as overbroad permissions, weak logging, exposed storage, unsafe deployment defaults, or missing guardrails.\n\nContainment should be scoped carefully. Overly broad actions can cause outages, erase evidence, or affect unrelated systems. Under-scoped actions can leave active risk in place. Responders should document the reason for each action, the expected effect, the owner who approved it, and any business impact. Good containment is controlled, observable, and reversible where possible.\n\nEradication removes unauthorized resources, credentials, configuration, persistence mechanisms, or exposed paths. In cloud environments, eradication may include removing unauthorized keys, deleting unapproved resources after evidence is preserved, correcting policies, replacing compromised workloads, and redeploying from known-good images or infrastructure-as-code. It should be paired with monitoring to confirm the activity has stopped.\n\nRecovery restores trusted service. That may involve rebuilding workloads, restoring data from known-good backups, validating configuration, redeploying infrastructure, re-enabling access, and confirming monitoring coverage. Recovery sequencing matters. If identities are restored before policies are fixed, or workloads are rebuilt before exposed storage is secured, the environment may return to risk.\n\nAvoid rushed changes that create new incidents. A responder under pressure may want to delete, rebuild, rotate, and reconfigure everything at once. Sometimes urgent action is necessary, but uncontrolled changes can make impact harder to understand. A strong recovery plan restores service while preserving evidence, validating controls, and watching for recurrence.",
+  "narrationPoints": [
+    "Containment limits immediate harm.",
+    "Containment should be scoped carefully.",
+    "Eradication removes unauthorized resources, credentials, configuration, persistence mechanisms, or exposed paths.",
+    "Recovery restores trusted service.",
+    "Avoid rushed changes that create new incidents."
+  ]
+};

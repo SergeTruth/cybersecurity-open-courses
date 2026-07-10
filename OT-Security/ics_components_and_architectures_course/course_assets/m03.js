@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Controllers",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Controllers make real-time decisions for industrial equipment. A programmable logic controller, or PLC, is commonly used for local machine and process control. It reads inputs, executes control logic, and updates outputs on a predictable cycle. PLCs are valued for reliability, deterministic behavior, and long service life.\n\nA remote terminal unit, or RTU, supports telemetry and control at distributed or unattended locations. RTUs are common in utilities, pipelines, transportation, and water systems, where communications may be constrained or intermittent. They can collect field data, execute local logic, and communicate with a central supervisory system.\n\nDistributed control systems use coordinated controllers across continuous or complex processes. Their controllers, servers, operator stations, and engineering tools are usually designed as an integrated platform. Although product names differ, the controller still links process inputs, logic, and outputs.\n\nControl logic may implement sequencing, interlocks, permissives, timing, calculations, alarms, or automatic regulation. Inputs represent measurements and states; outputs direct actuators or communicate results. A controller's operating mode, project, firmware, and I/O configuration all contribute to trusted behavior.\n\nController integrity is critical. An accidental change, corrupted project, incorrect firmware, or unauthorized action can alter the process or remove a protection. Availability also matters because loss of communication or control may force equipment into a defined fallback state.\n\nDefensive controls include restricted engineering pathways, approved change procedures, protected project files, known-good backups, role-based access where supported, and monitoring for unexpected programming or mode changes. Response must be coordinated with engineering: restarting, isolating, or reloading a controller without process knowledge can create more risk than the original event.",
+  "narrationPoints": [
+    "Controllers make real-time decisions for industrial equipment.",
+    "A remote terminal unit, or RTU, supports telemetry and control at distributed or unattended locations.",
+    "Distributed control systems use coordinated controllers across continuous or complex processes.",
+    "Control logic may implement sequencing, interlocks, permissives, timing, calculations, alarms, or automatic regulation.",
+    "Controller integrity is critical.",
+    "Defensive controls include restricted engineering pathways, approved change procedures, protected project files, known-good backups, role-based..."
+  ]
+};

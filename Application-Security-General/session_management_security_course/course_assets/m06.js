@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Sessions in Modern Applications",
+  "graphicAlt": "Blank placeholder graphic for module 6, Sessions in Modern Applications.",
+  "narration": "Modern applications often mix traditional server sessions with token-based approaches. A server-rendered web application may use an opaque cookie-backed session. A single-page application may call APIs with access tokens. A mobile application may rely on tokens stored in platform-managed storage. Backend services may exchange credentials through an identity provider. The architecture changes the mechanics, but the security questions stay familiar: who is this request for, what is it allowed to do, and is the session state still valid?\n\nAccess tokens and refresh tokens need different handling. Access tokens are commonly short-lived credentials used to call APIs or access resources. Refresh tokens can allow the client to obtain new access tokens over time, so they are especially sensitive. Their storage, rotation, revocation, and reuse detection policies matter. Developers should not assume that a token is safe just because it uses a common format. Issuer, audience, expiration, signature, scope, and relevant claims still need validation.\n\nSingle-page applications, mobile applications, and APIs introduce storage and cross-origin considerations. Browser-accessible storage may be convenient, but it can create exposure if the application has client-side script weaknesses. Native mobile storage should use platform protections where available. APIs should validate tokens server-side and enforce authorization on every sensitive operation. Modern session management is not about choosing cookies or tokens as a slogan. It is about matching the storage, lifetime, validation, and renewal model to the application?s threat profile.",
+  "narrationPoints": [
+    "Modern applications often mix traditional server sessions with token-based approaches.",
+    "Access tokens and refresh tokens need different handling.",
+    "Single-page applications, mobile applications, and APIs introduce storage and cross-origin considerations."
+  ]
+};

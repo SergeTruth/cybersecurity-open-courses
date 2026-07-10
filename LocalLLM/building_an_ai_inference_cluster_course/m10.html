@@ -1,34 +1,179 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Final Quiz | Building an AI Inference Cluster</title><link rel="stylesheet" href="base.css"></head>
-<body data-course-id="ai-inference-cluster">
-  <main id="main-content" class="main-content"><div class="wrap"><section id="module-meta" data-module="10" data-total="10" data-quiz="true" aria-labelledby="module-title">
-    <header class="card title-card"><p class="meta">Building an AI Inference Cluster</p><h1 id="module-title">Final Quiz</h1><p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p></header>
-    <section class="card" aria-labelledby="quiz-heading"><h2 id="quiz-heading">Assessment</h2>
-      <form id="quiz-form" class="quiz-form" data-passing-score="80" data-answer-key='{"q1":"B","q2":"D","q3":"A","q4":"C","q5":"C","q6":"B","q7":"D","q8":"A","q9":"C","q10":"D","q11":"B","q12":"A","q13":"D","q14":"C","q15":"A","q16":"B","q17":"C","q18":"D"}'>
-        <fieldset class="quiz-question"><legend>1. What is an AI inference cluster?</legend><label><input type="radio" name="q1" value="A" required> A collection of model files with no serving software</label><label><input type="radio" name="q1" value="B"> Coordinated compute resources that serve requests to trained AI models</label><label><input type="radio" name="q1" value="C"> A single prompt stored on shared disk</label><label><input type="radio" name="q1" value="D"> A system used only to train frontier models</label></fieldset>
-        <fieldset class="quiz-question"><legend>2. Why should workload requirements be defined before selecting cluster hardware?</legend><label><input type="radio" name="q2" value="A" required> Requirements eliminate all queueing.</label><label><input type="radio" name="q2" value="B"> Requirements guarantee a model's output quality.</label><label><input type="radio" name="q2" value="C"> Requirements replace security and recovery planning.</label><label><input type="radio" name="q2" value="D"> They establish whether clustering is needed and what capacity and architecture make sense.</label></fieldset>
-        <fieldset class="quiz-question"><legend>3. What does throughput measure?</legend><label><input type="radio" name="q3" value="A" required> The amount of work completed over a period of time</label><label><input type="radio" name="q3" value="B"> Only the delay before the first token</label><label><input type="radio" name="q3" value="C"> Total model storage capacity</label><label><input type="radio" name="q3" value="D"> The number of network switches</label></fieldset>
-        <fieldset class="quiz-question"><legend>4. What is inference latency?</legend><label><input type="radio" name="q4" value="A" required> The total number of model versions retained</label><label><input type="radio" name="q4" value="B"> The maximum GPU temperature</label><label><input type="radio" name="q4" value="C"> The delay a request experiences before and while receiving useful output</label><label><input type="radio" name="q4" value="D"> The amount of storage used by logs</label></fieldset>
-        <fieldset class="quiz-question"><legend>5. Why can one multi-GPU server be simpler than a distributed cluster?</legend><label><input type="radio" name="q5" value="A" required> It provides unlimited shared VRAM automatically.</label><label><input type="radio" name="q5" value="B"> It removes all cooling and power requirements.</label><label><input type="radio" name="q5" value="C"> It avoids much of the network routing, node coordination, and distributed failure handling.</label><label><input type="radio" name="q5" value="D"> It never needs monitoring or updates.</label></fieldset>
-        <fieldset class="quiz-question"><legend>6. What is the role of a load balancer or request router?</legend><label><input type="radio" name="q6" value="A" required> It increases physical VRAM on every worker.</label><label><input type="radio" name="q6" value="B"> It directs requests to eligible, available serving nodes according to policy.</label><label><input type="radio" name="q6" value="C"> It replaces model versioning.</label><label><input type="radio" name="q6" value="D"> It quantizes models during every request.</label></fieldset>
-        <fieldset class="quiz-question"><legend>7. Why is VRAM capacity important when assigning models to GPU workers?</legend><label><input type="radio" name="q7" value="A" required> VRAM controls the network switch port count.</label><label><input type="radio" name="q7" value="B"> VRAM eliminates the need for runtime support.</label><label><input type="radio" name="q7" value="C"> VRAM matters only during model download.</label><label><input type="radio" name="q7" value="D"> It must hold model weights, context cache, and runtime overhead for the planned workload.</label></fieldset>
-        <fieldset class="quiz-question"><legend>8. Why should both network bandwidth and latency be evaluated?</legend><label><input type="radio" name="q8" value="A" required> Cluster traffic may include requests, model distribution, multimodal data, logs, and coordination that depend on both.</label><label><input type="radio" name="q8" value="B"> Network performance changes the model's parameter count.</label><label><input type="radio" name="q8" value="C"> A fast link always fixes an oversubscribed switch.</label><label><input type="radio" name="q8" value="D"> Networking is irrelevant when workers use GPUs.</label></fieldset>
-        <fieldset class="quiz-question"><legend>9. Which storage design is generally practical for active models?</legend><label><input type="radio" name="q9" value="A" required> Let every worker download an unverified latest model independently.</label><label><input type="radio" name="q9" value="B"> Store private prompts in a public model share.</label><label><input type="radio" name="q9" value="C"> Maintain approved versions centrally and copy active artifacts into verified local worker caches.</label><label><input type="radio" name="q9" value="D"> Load every request directly from slow archival storage.</label></fieldset>
-        <fieldset class="quiz-question"><legend>10. What is the best initial approach to model serving?</legend><label><input type="radio" name="q10" value="A" required> Deploy every available runtime at once.</label><label><input type="radio" name="q10" value="B"> Add a complex orchestrator before proving inference works.</label><label><input type="radio" name="q10" value="C"> Choose the runtime with the most configuration options.</label><label><input type="radio" name="q10" value="D"> Establish one stable, accelerated, observable model server before adding routing or replicas.</label></fieldset>
-        <fieldset class="quiz-question"><legend>11. What does model routing do?</legend><label><input type="radio" name="q11" value="A" required> It moves physical GPUs between servers.</label><label><input type="radio" name="q11" value="B"> It sends a request to a model and node suited to its capabilities and current availability.</label><label><input type="radio" name="q11" value="C"> It removes the need for health checks.</label><label><input type="radio" name="q11" value="D"> It guarantees zero queue delay.</label></fieldset>
-        <fieldset class="quiz-question"><legend>12. Why must concurrency be planned and tested?</legend><label><input type="radio" name="q12" value="A" required> Simultaneous sequences increase cache, compute, queueing, and memory pressure.</label><label><input type="radio" name="q12" value="B"> Concurrency always improves individual response latency.</label><label><input type="radio" name="q12" value="C"> Concurrent requests do not share accelerator resources.</label><label><input type="radio" name="q12" value="D"> Concurrency replaces capacity limits.</label></fieldset>
-        <fieldset class="quiz-question"><legend>13. What is a common tradeoff of request batching?</legend><label><input type="radio" name="q13" value="A" required> It permanently reduces model accuracy.</label><label><input type="radio" name="q13" value="B"> It eliminates the need for a queue.</label><label><input type="radio" name="q13" value="C"> It always reduces throughput.</label><label><input type="radio" name="q13" value="D"> It can improve total throughput while increasing wait time for an individual request.</label></fieldset>
-        <fieldset class="quiz-question"><legend>14. Which monitoring set best describes cluster health?</legend><label><input type="radio" name="q14" value="A" required> Only whether each process has a process identifier</label><label><input type="radio" name="q14" value="B"> Only aggregate GPU utilization</label><label><input type="radio" name="q14" value="C"> Availability, errors, queues, latency, throughput, resource use, power, and thermal conditions</label><label><input type="radio" name="q14" value="D"> Only the number of stored model files</label></fieldset>
-        <fieldset class="quiz-question"><legend>15. Why are authentication and API access controls essential?</legend><label><input type="radio" name="q15" value="A" required> Unauthorized clients could consume capacity, access data, or abuse exposed services.</label><label><input type="radio" name="q15" value="B"> Authentication increases GPU memory.</label><label><input type="radio" name="q15" value="C"> Every inference API is safe by default.</label><label><input type="radio" name="q15" value="D"> Access controls replace monitoring and network segmentation.</label></fieldset>
-        <fieldset class="quiz-question"><legend>16. What should a cluster backup strategy prioritize?</legend><label><input type="radio" name="q16" value="A" required> Repeated copies of every public model regardless of recoverability</label><label><input type="radio" name="q16" value="B"> Irreplaceable configuration, metadata, authorized private data, and tested restoration procedures</label><label><input type="radio" name="q16" value="C"> Logs with unlimited retention and no access controls</label><label><input type="radio" name="q16" value="D"> Only operating-system installation media</label></fieldset>
-        <fieldset class="quiz-question"><legend>17. Why should model and runtime releases support rollback?</legend><label><input type="radio" name="q17" value="A" required> Rollback makes every model smaller.</label><label><input type="radio" name="q17" value="B"> Rollback removes the need for testing.</label><label><input type="radio" name="q17" value="C"> Updates can change compatibility, behavior, memory use, or performance even when installation succeeds.</label><label><input type="radio" name="q17" value="D"> Rollback guarantees that incidents never occur.</label></fieldset>
-        <fieldset class="quiz-question"><legend>18. When should an inference cluster be scaled?</legend><label><input type="radio" name="q18" value="A" required> Whenever new accelerator hardware is announced</label><label><input type="radio" name="q18" value="B"> Before workloads and service objectives are defined</label><label><input type="radio" name="q18" value="C"> By adding GPU workers regardless of the actual bottleneck</label><label><input type="radio" name="q18" value="D"> When measurements show justified demand and identify the constrained component</label></fieldset>
-        <button id="submit-quiz" type="submit">Submit Quiz</button><p id="quiz-result" aria-live="polite"></p>
-      </form>
-    </section>
-    <nav class="nav module-nav" aria-label="Module navigation"><a id="previous-module" class="btn secondary" href="m09.html">Previous</a></nav>
-  </section></div></main>
-  <script id="course-modules-data" type="application/json">[{"label":"What Is an AI Inference Cluster?","href":"m01.html"},{"label":"Defining Cluster Requirements","href":"m02.html"},{"label":"Cluster Architecture Patterns","href":"m03.html"},{"label":"Hardware and Networking","href":"m04.html"},{"label":"Model Serving and Runtime Options","href":"m05.html"},{"label":"Scheduling, Routing, and Capacity","href":"m06.html"},{"label":"Storage, Models, and Data Management","href":"m07.html"},{"label":"Security, Monitoring, and Operations","href":"m08.html"},{"label":"Course Summary and Key Takeaways","href":"m09.html"},{"label":"Final Quiz","href":"m10.html"}]</script>
-  <script src="scorm-wrapper.js"></script><script src="quiz-engine.js"></script><script src="navigation.js"></script><script src="base.js"></script>
-</body></html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="building-an-ai-inference-cluster-course">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;: &quot;C&quot;, &quot;q2&quot;: &quot;A&quot;, &quot;q3&quot;: &quot;D&quot;, &quot;q4&quot;: &quot;B&quot;, &quot;q5&quot;: &quot;B&quot;, &quot;q6&quot;: &quot;D&quot;, &quot;q7&quot;: &quot;A&quot;, &quot;q8&quot;: &quot;C&quot;, &quot;q9&quot;: &quot;D&quot;, &quot;q10&quot;: &quot;A&quot;, &quot;q11&quot;: &quot;C&quot;, &quot;q12&quot;: &quot;B&quot;, &quot;q13&quot;: &quot;B&quot;, &quot;q14&quot;: &quot;D&quot;, &quot;q15&quot;: &quot;A&quot;, &quot;q16&quot;: &quot;C&quot;, &quot;q17&quot;: &quot;A&quot;, &quot;q18&quot;: &quot;D&quot;}'
+        >
+          <fieldset class="quiz-question" data-question="q1">
+      <legend>1. What is an AI inference cluster?</legend>
+      <label for="q1-a"><input id="q1-a" type="radio" name="q1" value="A"> <strong>A.</strong> Coordinated compute resources that serve requests to trained AI models</label>
+      <label for="q1-b"><input id="q1-b" type="radio" name="q1" value="B"> <strong>B.</strong> A single prompt stored on shared disk</label>
+      <label for="q1-c"><input id="q1-c" type="radio" name="q1" value="C"> <strong>C.</strong> A collection of model files with no serving software</label>
+      <label for="q1-d"><input id="q1-d" type="radio" name="q1" value="D"> <strong>D.</strong> A system used only to train frontier models</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q2">
+      <legend>2. Why should workload requirements be defined before selecting cluster hardware?</legend>
+      <label for="q2-a"><input id="q2-a" type="radio" name="q2" value="A"> <strong>A.</strong> Requirements eliminate all queueing.</label>
+      <label for="q2-b"><input id="q2-b" type="radio" name="q2" value="B"> <strong>B.</strong> Requirements guarantee a model&#x27;s output quality.</label>
+      <label for="q2-c"><input id="q2-c" type="radio" name="q2" value="C"> <strong>C.</strong> Requirements replace security and recovery planning.</label>
+      <label for="q2-d"><input id="q2-d" type="radio" name="q2" value="D"> <strong>D.</strong> They establish whether clustering is needed and what capacity and architecture make sense.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q3">
+      <legend>3. What does throughput measure?</legend>
+      <label for="q3-a"><input id="q3-a" type="radio" name="q3" value="A"> <strong>A.</strong> Only the delay before the first token</label>
+      <label for="q3-b"><input id="q3-b" type="radio" name="q3" value="B"> <strong>B.</strong> Total model storage capacity</label>
+      <label for="q3-c"><input id="q3-c" type="radio" name="q3" value="C"> <strong>C.</strong> The number of network switches</label>
+      <label for="q3-d"><input id="q3-d" type="radio" name="q3" value="D"> <strong>D.</strong> The amount of work completed over a period of time</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q4">
+      <legend>4. What is inference latency?</legend>
+      <label for="q4-a"><input id="q4-a" type="radio" name="q4" value="A"> <strong>A.</strong> The maximum GPU temperature</label>
+      <label for="q4-b"><input id="q4-b" type="radio" name="q4" value="B"> <strong>B.</strong> The total number of model versions retained</label>
+      <label for="q4-c"><input id="q4-c" type="radio" name="q4" value="C"> <strong>C.</strong> The delay a request experiences before and while receiving useful output</label>
+      <label for="q4-d"><input id="q4-d" type="radio" name="q4" value="D"> <strong>D.</strong> The amount of storage used by logs</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q5">
+      <legend>5. Why can one multi-GPU server be simpler than a distributed cluster?</legend>
+      <label for="q5-a"><input id="q5-a" type="radio" name="q5" value="A"> <strong>A.</strong> It removes all cooling and power requirements.</label>
+      <label for="q5-b"><input id="q5-b" type="radio" name="q5" value="B"> <strong>B.</strong> It provides unlimited shared VRAM automatically.</label>
+      <label for="q5-c"><input id="q5-c" type="radio" name="q5" value="C"> <strong>C.</strong> It avoids much of the network routing, node coordination, and distributed failure handling.</label>
+      <label for="q5-d"><input id="q5-d" type="radio" name="q5" value="D"> <strong>D.</strong> It never needs monitoring or updates.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q6">
+      <legend>6. What is the role of a load balancer or request router?</legend>
+      <label for="q6-a"><input id="q6-a" type="radio" name="q6" value="A"> <strong>A.</strong> It directs requests to eligible, available serving nodes according to policy.</label>
+      <label for="q6-b"><input id="q6-b" type="radio" name="q6" value="B"> <strong>B.</strong> It replaces model versioning.</label>
+      <label for="q6-c"><input id="q6-c" type="radio" name="q6" value="C"> <strong>C.</strong> It quantizes models during every request.</label>
+      <label for="q6-d"><input id="q6-d" type="radio" name="q6" value="D"> <strong>D.</strong> It increases physical VRAM on every worker.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q7">
+      <legend>7. Why is VRAM capacity important when assigning models to GPU workers?</legend>
+      <label for="q7-a"><input id="q7-a" type="radio" name="q7" value="A"> <strong>A.</strong> VRAM controls the network switch port count.</label>
+      <label for="q7-b"><input id="q7-b" type="radio" name="q7" value="B"> <strong>B.</strong> VRAM eliminates the need for runtime support.</label>
+      <label for="q7-c"><input id="q7-c" type="radio" name="q7" value="C"> <strong>C.</strong> VRAM matters only during model download.</label>
+      <label for="q7-d"><input id="q7-d" type="radio" name="q7" value="D"> <strong>D.</strong> It must hold model weights, context cache, and runtime overhead for the planned workload.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q8">
+      <legend>8. Why should both network bandwidth and latency be evaluated?</legend>
+      <label for="q8-a"><input id="q8-a" type="radio" name="q8" value="A"> <strong>A.</strong> Network performance changes the model&#x27;s parameter count.</label>
+      <label for="q8-b"><input id="q8-b" type="radio" name="q8" value="B"> <strong>B.</strong> A fast link always fixes an oversubscribed switch.</label>
+      <label for="q8-c"><input id="q8-c" type="radio" name="q8" value="C"> <strong>C.</strong> Cluster traffic may include requests, model distribution, multimodal data, logs, and coordination that depend on both.</label>
+      <label for="q8-d"><input id="q8-d" type="radio" name="q8" value="D"> <strong>D.</strong> Networking is irrelevant when workers use GPUs.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q9">
+      <legend>9. Which storage design is generally practical for active models?</legend>
+      <label for="q9-a"><input id="q9-a" type="radio" name="q9" value="A"> <strong>A.</strong> Store private prompts in a public model share.</label>
+      <label for="q9-b"><input id="q9-b" type="radio" name="q9" value="B"> <strong>B.</strong> Maintain approved versions centrally and copy active artifacts into verified local worker caches.</label>
+      <label for="q9-c"><input id="q9-c" type="radio" name="q9" value="C"> <strong>C.</strong> Load every request directly from slow archival storage.</label>
+      <label for="q9-d"><input id="q9-d" type="radio" name="q9" value="D"> <strong>D.</strong> Let every worker download an unverified latest model independently.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q10">
+      <legend>10. What is the best initial approach to model serving?</legend>
+      <label for="q10-a"><input id="q10-a" type="radio" name="q10" value="A"> <strong>A.</strong> Deploy every available runtime at once.</label>
+      <label for="q10-b"><input id="q10-b" type="radio" name="q10" value="B"> <strong>B.</strong> Add a complex orchestrator before proving inference works.</label>
+      <label for="q10-c"><input id="q10-c" type="radio" name="q10" value="C"> <strong>C.</strong> Choose the runtime with the most configuration options.</label>
+      <label for="q10-d"><input id="q10-d" type="radio" name="q10" value="D"> <strong>D.</strong> Establish one stable, accelerated, observable model server before adding routing or replicas.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q11">
+      <legend>11. What does model routing do?</legend>
+      <label for="q11-a"><input id="q11-a" type="radio" name="q11" value="A"> <strong>A.</strong> It sends a request to a model and node suited to its capabilities and current availability.</label>
+      <label for="q11-b"><input id="q11-b" type="radio" name="q11" value="B"> <strong>B.</strong> It removes the need for health checks.</label>
+      <label for="q11-c"><input id="q11-c" type="radio" name="q11" value="C"> <strong>C.</strong> It moves physical GPUs between servers.</label>
+      <label for="q11-d"><input id="q11-d" type="radio" name="q11" value="D"> <strong>D.</strong> It guarantees zero queue delay.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q12">
+      <legend>12. Why must concurrency be planned and tested?</legend>
+      <label for="q12-a"><input id="q12-a" type="radio" name="q12" value="A"> <strong>A.</strong> Concurrency always improves individual response latency.</label>
+      <label for="q12-b"><input id="q12-b" type="radio" name="q12" value="B"> <strong>B.</strong> Simultaneous sequences increase cache, compute, queueing, and memory pressure.</label>
+      <label for="q12-c"><input id="q12-c" type="radio" name="q12" value="C"> <strong>C.</strong> Concurrent requests do not share accelerator resources.</label>
+      <label for="q12-d"><input id="q12-d" type="radio" name="q12" value="D"> <strong>D.</strong> Concurrency replaces capacity limits.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q13">
+      <legend>13. What is a common tradeoff of request batching?</legend>
+      <label for="q13-a"><input id="q13-a" type="radio" name="q13" value="A"> <strong>A.</strong> It eliminates the need for a queue.</label>
+      <label for="q13-b"><input id="q13-b" type="radio" name="q13" value="B"> <strong>B.</strong> It permanently reduces model accuracy.</label>
+      <label for="q13-c"><input id="q13-c" type="radio" name="q13" value="C"> <strong>C.</strong> It always reduces throughput.</label>
+      <label for="q13-d"><input id="q13-d" type="radio" name="q13" value="D"> <strong>D.</strong> It can improve total throughput while increasing wait time for an individual request.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q14">
+      <legend>14. Which monitoring set best describes cluster health?</legend>
+      <label for="q14-a"><input id="q14-a" type="radio" name="q14" value="A"> <strong>A.</strong> Only aggregate GPU utilization</label>
+      <label for="q14-b"><input id="q14-b" type="radio" name="q14" value="B"> <strong>B.</strong> Availability, errors, queues, latency, throughput, resource use, power, and thermal conditions</label>
+      <label for="q14-c"><input id="q14-c" type="radio" name="q14" value="C"> <strong>C.</strong> Only the number of stored model files</label>
+      <label for="q14-d"><input id="q14-d" type="radio" name="q14" value="D"> <strong>D.</strong> Only whether each process has a process identifier</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q15">
+      <legend>15. Why are authentication and API access controls essential?</legend>
+      <label for="q15-a"><input id="q15-a" type="radio" name="q15" value="A"> <strong>A.</strong> Unauthorized clients could consume capacity, access data, or abuse exposed services.</label>
+      <label for="q15-b"><input id="q15-b" type="radio" name="q15" value="B"> <strong>B.</strong> Authentication increases GPU memory.</label>
+      <label for="q15-c"><input id="q15-c" type="radio" name="q15" value="C"> <strong>C.</strong> Every inference API is safe by default.</label>
+      <label for="q15-d"><input id="q15-d" type="radio" name="q15" value="D"> <strong>D.</strong> Access controls replace monitoring and network segmentation.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q16">
+      <legend>16. What should a cluster backup strategy prioritize?</legend>
+      <label for="q16-a"><input id="q16-a" type="radio" name="q16" value="A"> <strong>A.</strong> Irreplaceable configuration, metadata, authorized private data, and tested restoration procedures</label>
+      <label for="q16-b"><input id="q16-b" type="radio" name="q16" value="B"> <strong>B.</strong> Logs with unlimited retention and no access controls</label>
+      <label for="q16-c"><input id="q16-c" type="radio" name="q16" value="C"> <strong>C.</strong> Repeated copies of every public model regardless of recoverability</label>
+      <label for="q16-d"><input id="q16-d" type="radio" name="q16" value="D"> <strong>D.</strong> Only operating-system installation media</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q17">
+      <legend>17. Why should model and runtime releases support rollback?</legend>
+      <label for="q17-a"><input id="q17-a" type="radio" name="q17" value="A"> <strong>A.</strong> Rollback makes every model smaller.</label>
+      <label for="q17-b"><input id="q17-b" type="radio" name="q17" value="B"> <strong>B.</strong> Rollback removes the need for testing.</label>
+      <label for="q17-c"><input id="q17-c" type="radio" name="q17" value="C"> <strong>C.</strong> Updates can change compatibility, behavior, memory use, or performance even when installation succeeds.</label>
+      <label for="q17-d"><input id="q17-d" type="radio" name="q17" value="D"> <strong>D.</strong> Rollback guarantees that incidents never occur.</label>
+    </fieldset>
+<fieldset class="quiz-question" data-question="q18">
+      <legend>18. When should an inference cluster be scaled?</legend>
+      <label for="q18-a"><input id="q18-a" type="radio" name="q18" value="A"> <strong>A.</strong> Before workloads and service objectives are defined</label>
+      <label for="q18-b"><input id="q18-b" type="radio" name="q18" value="B"> <strong>B.</strong> By adding GPU workers regardless of the actual bottleneck</label>
+      <label for="q18-c"><input id="q18-c" type="radio" name="q18" value="C"> <strong>C.</strong> When measurements show justified demand and identify the constrained component</label>
+      <label for="q18-d"><input id="q18-d" type="radio" name="q18" value="D"> <strong>D.</strong> Whenever new accelerator hardware is announced</label>
+    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m09.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

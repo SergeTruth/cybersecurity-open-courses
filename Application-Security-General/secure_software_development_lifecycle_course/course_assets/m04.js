@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secure Coding Practices",
+  "graphicAlt": "Blank placeholder image for a lesson on secure coding practices.",
+  "narration": "Secure coding means writing implementation that preserves the intended security design. If the design says users can access only their own records, the code must enforce that rule on every relevant path. If the design says input must be constrained, the code must validate the data at a trustworthy boundary. Secure coding standards should be specific, teachable, and testable so developers know what good looks like in their language and framework.\n\nCore practices include input validation, output encoding, parameterized queries, safe API usage, access control checks, session handling, error handling, secure file handling, secrets handling, and safe logging. These practices are not slogans. They need concrete examples, review checklists, reusable helpers, and tests. A team should know which validation libraries, query patterns, logging conventions, and authorization mechanisms are approved.\n\nSome dangerous patterns deserve special attention at a high level. Injection-prone string construction, unsafe deserialization, overly broad file access, leaking secrets to logs, trusting client-side checks, exposing internal errors, and missing authorization checks are common ways secure design fails during implementation. The secure SDLC helps teams catch these patterns during coding and review instead of after deployment.\n\nCode review is where design intent and implementation meet. Reviewers should look for missing checks, unsafe assumptions, dangerous framework use, inconsistent error handling, and places where the code no longer matches the threat model or requirements. Review should not be a guessing game. It works best when supported by standards, examples, automated checks, and a culture where security feedback is treated as engineering quality.",
+  "narrationPoints": [
+    "Secure coding means writing implementation that preserves the intended security design.",
+    "If the design says users can access only their own records, the code must enforce that rule on every relevant path.",
+    "If the design says input must be constrained, the code must validate the data at a trustworthy boundary.",
+    "Secure coding standards should be specific, teachable, and testable so developers know what good looks like in their language and framework.",
+    "Core practices include input validation, output encoding, parameterized queries, safe API usage, access control checks, session handling, error handling, secure file handling, secrets handling.",
+    "These practices are not slogans."
+  ]
+};

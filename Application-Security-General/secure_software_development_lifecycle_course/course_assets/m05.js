@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Dependencies and Software Supply Chain",
+  "graphicAlt": "Blank placeholder image for a lesson on dependencies and software supply chain security.",
+  "narration": "Modern software depends on third-party libraries, open-source components, package managers, transitive dependencies, container images, build tools, source repositories, and CI/CD services. These components save time and improve capability, but they also become part of the product risk. A vulnerability, license issue, abandoned package, or unexpected behavior in a component the team did not write can still affect customers.\n\nDependency freshness and ownership matter. Teams should know which components are used, who owns upgrades, how vulnerability alerts are triaged, and what happens when a dependency is no longer maintained. Transitive dependencies deserve attention because they may enter the product indirectly. If nobody is responsible for reviewing or updating them, supply chain risk accumulates quietly.\n\nVulnerability scanning, license review, provenance concepts, and software bills of materials all support supply chain hygiene. Scanning can identify known issues, but findings need triage and remediation. Provenance helps teams understand where software came from and whether it should be trusted. An SBOM, at a high level, provides visibility into the components included in a product or system so response is based on inventory.\n\nSupply chain security is part of the secure SDLC because it starts before release and continues after deployment. Teams should avoid unnecessary components, use trusted sources, control registry and repository access, protect build systems, review container images, and document exceptions. The goal is not to ban third-party software. The goal is to use it deliberately, with evidence and ownership.",
+  "narrationPoints": [
+    "Modern software depends on third-party libraries, open-source components, package managers, transitive dependencies, container images, build tools, source repositories, and CI/CD services.",
+    "These components save time and improve capability, but they also become part of the product risk.",
+    "A vulnerability, license issue, abandoned package, or unexpected behavior in a component the team did not write can still affect customers.",
+    "Dependency freshness and ownership matter.",
+    "Teams should know which components are used, who owns upgrades, how vulnerability alerts are triaged, and what happens when a dependency is no longer.",
+    "Transitive dependencies deserve attention because they may enter the product indirectly."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Collection, Preservation, and Reporting",
+  "graphicAlt": "Blank placeholder graphic for macOS collection and reporting",
+  "narration": "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions. macOS systems may use FileVault encryption, Apple Silicon security controls, user privacy protections, endpoint management, and cloud synchronization. Those features can affect what is available and how collection should be performed. The collection plan should be authorized, documented, and matched to the case.\n\nDisk images, snapshots, targeted collections, memory capture at a high level, log exports, user profile artifacts, plists, application data, and endpoint security exports can all be useful. The right approach depends on urgency, system availability, data sensitivity, legal requirements, and whether the device is live, locked, remote, or managed. Reports should explain the collection method because it affects confidence and limitations.\n\nHashes help verify whether evidence changes after collection. Chain of custody records document what was collected, where it came from, who handled it, when it moved, and how it was stored. Case notes should record commands, tools, timestamps, observations, decisions, assumptions, and limitations. These records help future reviewers separate investigator activity from system activity.\n\nReporting should include methods, evidence, findings, confidence, limitations, and supporting references. macOS artifacts can be complex, application-specific, and affected by privacy settings or synchronization. A good report avoids unsupported certainty. It explains what the evidence supports, what remains unknown, and what additional sources might improve confidence.",
+  "narrationPoints": [
+    "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions.",
+    "Disk images, snapshots, targeted collections, memory capture at a high level, log exports, user profile artifacts, plists, application data,...",
+    "Hashes help verify whether evidence changes after collection.",
+    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references."
+  ]
+};

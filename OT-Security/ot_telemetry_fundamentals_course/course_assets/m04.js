@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Process and Control Telemetry",
+  "graphicAlt": "Instructional illustration for Process and Control Telemetry.",
+  "narration": "Process and control telemetry describes the physical operation and the control system's view of it. Sources may include sensor values, actuator states, alarms, setpoints, controller modes, equipment status, and process trends retained by HMIs, controllers, SCADA platforms, or historians.\n\nSensor values show measured conditions such as pressure, temperature, flow, level, position, or speed. Actuator states indicate whether equipment is running, stopped, open, closed, or in another commanded state. Setpoints describe intended targets, while controller status can reveal mode, health, communications, or fault conditions.\n\nAlarms call attention to conditions defined by the control design. Their priority, acknowledgment, suppression, and duration provide important context. A single alarm code is rarely enough; analysts need to know the associated equipment, process state, and operating procedure.\n\nTrends show how values change over time. They can help investigators compare a network or identity event with process behavior. A changed setpoint followed by a process deviation may be relevant, but correlation alone does not establish cause.\n\nEquipment failures, calibration problems, maintenance, process transitions, operator actions, and cyber events can produce similar observations. Units, tag identity, sampling rate, clock accuracy, data quality flags, and historian gaps all affect interpretation.\n\nProtect process telemetry because its integrity and availability influence decisions. Limit access, monitor configuration and tag changes, and preserve trustworthy retention. Security teams should use this evidence with operators and engineers, who can explain whether the observed behavior is expected, unsafe, or simply a normal response to changing conditions.",
+  "narrationPoints": [
+    "Process and control telemetry describes the physical operation and the control system's view of it.",
+    "Sensor values show measured conditions such as pressure, temperature, flow, level, position, or speed.",
+    "Alarms call attention to conditions defined by the control design.",
+    "Trends show how values change over time.",
+    "Equipment failures, calibration problems, maintenance, process transitions, operator actions, and cyber events can produce similar observations."
+  ]
+};

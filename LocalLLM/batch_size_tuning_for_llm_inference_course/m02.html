@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prefill, Decode, and Where Batching Helps | Batch Size Tuning for LLM Inference</title>
+  <title>Course</title>
   <link rel="stylesheet" href="base.css">
 </head>
-<body data-course-id="batch_size_tuning_for_llm_inference">
+<body data-course-id="batch-size-tuning-for-llm-inference-course">
   <main id="main-content" class="main-content">
     <div class="wrap">
       <section
@@ -14,24 +14,33 @@
         data-module="2"
         data-total="10"
         data-audio="m02"
+        data-narration="m02"
         aria-labelledby="module-title"
       >
       <header class="card title-card">
-        <p class="meta">Batch Size Tuning for LLM Inference</p>
-        <h1 id="module-title">Prefill, Decode, and Where Batching Helps</h1>
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading module title...</h1>
         <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
       </header>
 
-      <figure class="card graphic-card">
+      <figure id="module-graphic-card" class="card graphic-card">
         <img
           class="module-graphic"
           src="course_assets/m02.png"
-          alt="Blank placeholder graphic for module 2"
+          alt=""
+          aria-label="Expand module graphic"
           tabindex="0"
           role="button"
           aria-expanded="false"
         >
       </figure>
+
+      <section id="module-code-example-card" class="card code-example-card code-example-card-hidden" aria-labelledby="code-examples-heading-m02">
+        <h2 id="code-examples-heading-m02">Code Examples</h2>
+        <div class="code-example-list" data-code-examples-target>
+          <p class="narration-loading">Loading code examples...</p>
+        </div>
+      </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
         <a id="previous-module" class="btn secondary" href="m01.html">Previous</a>
@@ -40,67 +49,22 @@
 
       <section class="card narration-card" aria-labelledby="narration-title">
         <h2 id="narration-title">Narration</h2>
-        <div class="narration-text">
-          <p>Most LLM inference can be understood as two related phases: prefill and decode. Prefill is the work of reading the prompt and existing context. If the user sends a long document, a repository excerpt, or a large instruction block, prefill can dominate the time before the model starts speaking. Decode is the phase that produces new tokens after the prompt has been processed.</p>
-          <p>Batching often helps these phases in different ways. During prefill, the runtime may be able to process larger blocks of prompt tokens efficiently because there is a lot of parallel work available. During decode, each active sequence usually needs the next token before it can move forward, so the shape of the work is more incremental. That is why prompt processing speed and generation speed should be measured separately.</p>
-          <p>First-token latency is the time between submitting the request and seeing the first generated token. It is strongly affected by prompt length, queueing, prefill efficiency, and how many other requests are active. Tokens per second measures generation speed once the model is producing output. Requests per second matters more for services that handle many users or automated clients.</p>
-          <p>A workload made of long prompts and short answers behaves differently from a workload made of short prompts and long answers. Long prompts stress prefill and context memory. Long responses stress decode and sustained generation. Good tuning begins by naming the workload clearly, because a batch configuration is only good relative to the kind of requests the system actually needs to serve.</p>
-          <p>When reviewing benchmark output, avoid collapsing prefill and decode into one vague speed number. A configuration can be excellent at absorbing a long prompt but ordinary during generation, or the other way around. Separate measurements help you decide whether to tune for faster first response, smoother streaming, or better total capacity under repeated requests.</p>
-        
+        <div class="narration-text" data-narration-target>
+          <p class="narration-loading">Loading narration...</p>
         </div>
       </section>
       </section>
     </div>
   </main>
 
-  <script id="course-modules-data" type="application/json">
-    [
-  {
-    "label": "Module 1: What Batch Size Means in LLM Inference",
-    "href": "m01.html"
-  },
-  {
-    "label": "Module 2: Prefill, Decode, and Where Batching Helps",
-    "href": "m02.html"
-  },
-  {
-    "label": "Module 3: Hardware Constraints and Memory Pressure",
-    "href": "m03.html"
-  },
-  {
-    "label": "Module 4: Key Runtime Parameters",
-    "href": "m04.html"
-  },
-  {
-    "label": "Module 5: Measuring Performance Correctly",
-    "href": "m05.html"
-  },
-  {
-    "label": "Module 6: Tuning for Local Interactive Use",
-    "href": "m06.html"
-  },
-  {
-    "label": "Module 7: Tuning for API Serving and Throughput",
-    "href": "m07.html"
-  },
-  {
-    "label": "Module 8: Troubleshooting Batch-Related Problems",
-    "href": "m08.html"
-  },
-  {
-    "label": "Module 9: Course Summary and Key Takeaways",
-    "href": "m09.html"
-  },
-  {
-    "label": "Final Quiz",
-    "href": "m10.html"
-  }
-]
-  </script>
   <script src="scorm-wrapper.js"></script>
   <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m02.js"></script>
   <script src="navigation.js"></script>
-  <script src="audio-controls.js"></script>
   <script src="base.js"></script>
+  <script src="syntax-highlighter.js"></script>
+  <script src="audio-controls.js"></script>
 </body>
 </html>

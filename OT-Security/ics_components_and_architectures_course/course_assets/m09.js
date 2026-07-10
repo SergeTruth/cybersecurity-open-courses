@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "An industrial control system combines people, procedures, hardware, software, and networks to monitor and control a physical process. Field devices measure conditions and perform actions. Controllers execute logic. HMIs and SCADA platforms give operators visibility and supervisory control.\n\nEngineering workstations hold privileged configuration and programming capabilities, while historians preserve process evidence over time. Industrial networks connect these functions through Ethernet, serial, wireless, and specialized protocols whose timing and availability requirements may differ from ordinary enterprise traffic.\n\nArchitecture models help teams understand the field, control, supervisory, operations, and enterprise relationships. The Purdue model is a useful reference, and an industrial DMZ can mediate necessary exchange, but each organization must document its real systems, data flows, remote paths, and dependencies.\n\nSecurity depends on process context. The same technical event can have different consequences depending on equipment state, operational timing, redundancy, and safety design. Cybersecurity teams need operators and engineers to interpret evidence and choose actions that do not create additional hazards.\n\nStrong ICS security protects safety, reliability, availability, and process integrity through accurate inventory, segmentation, controlled access, trusted configuration, passive monitoring, change management, backups, and practiced response. The central lesson is architectural: protect each component according to its operational role and protect the pathways that allow those components to work as a system.",
+  "narrationPoints": [
+    "An industrial control system combines people, procedures, hardware, software, and networks to monitor and control a physical process.",
+    "Engineering workstations hold privileged configuration and programming capabilities, while historians preserve process evidence over time.",
+    "Architecture models help teams understand the field, control, supervisory, operations, and enterprise relationships.",
+    "Security depends on process context.",
+    "Strong ICS security protects safety, reliability, availability, and process integrity through accurate inventory, segmentation, controlled access,..."
+  ]
+};

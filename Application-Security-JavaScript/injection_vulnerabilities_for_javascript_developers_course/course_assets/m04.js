@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "NoSQL and Document Query Injection",
+  "graphicAlt": "Blank placeholder graphic for module 4",
+  "narration": "NoSQL injection is less about SQL syntax and more about unsafe query structure. In document databases, search systems, and JSON-driven APIs, user-controlled objects can sometimes influence operators, filters, selectors, or nested conditions if they are passed directly into query construction. The risk is that the application accepts more structure or behavior than it intended.\n\nJavaScript developers should pay attention to JSON body parsing and object shape. A request body may look like ordinary data, but it can contain nested objects, arrays, unexpected types, or fields that the route did not intend to expose. If application code passes that structure directly into a query, update, or filter, the user may influence more than a simple value.\n\nSchema validation and type checking are important here. Define the expected shape of input, reject unknown fields where appropriate, constrain types, set length limits, and map accepted fields into application-owned query objects. This is different from simply checking that the request is valid JSON. JSON syntax only proves the input can be parsed, not that it represents an authorized query.\n\nAllowlisting fields and operators is especially important for filtering APIs. A client may be allowed to filter by status, owner, or creation date, but not by arbitrary internal fields or special query operators. The application should translate approved client choices into controlled query behavior rather than treating the request body as the query itself.\n\nMass assignment and over-posting are related concerns. If a JavaScript API accepts an entire object and writes or queries with it directly, clients may provide fields the developer did not intend to honor. The safer pattern is to validate intent, construct explicit objects, and make the allowed behavior visible in code.",
+  "narrationPoints": [
+    "NoSQL injection is less about SQL syntax and more about unsafe query structure.",
+    "JavaScript developers should pay attention to JSON body parsing and object shape.",
+    "Schema validation and type checking are important here.",
+    "Allowlisting fields and operators is especially important for filtering APIs.",
+    "Mass assignment and over-posting are related concerns."
+  ]
+};

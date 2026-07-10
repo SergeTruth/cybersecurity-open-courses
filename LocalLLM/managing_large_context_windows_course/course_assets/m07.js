@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Failure Modes in Large Context Use",
+  "graphicAlt": "Blank placeholder image for module 7: Failure Modes in Large Context Use",
+  "narration": "Large context can fail in ways that are easy to miss. One commonly discussed issue is the lost-in-the-middle effect, where important information buried deep inside a long context may be underused or missed. The exact behavior depends on the model and task, but the practical lesson is clear: placement and emphasis still matter. Do not assume that every token receives equal attention.\n\nIrrelevant context can reduce reliability by distracting the model or encouraging shallow synthesis. Stale context can conflict with current facts, decisions, or requirements. Conflicting instructions can cause the model to follow the wrong priority. If a prompt contains old meeting notes, current policy, examples, and user preferences, the model needs help understanding which material controls the answer.\n\nPrompt injection and context poisoning are serious concerns when retrieved or user-supplied material is included. A document may contain text that tries to redirect the model, reveal hidden instructions, ignore the user's task, or change output requirements. Large context increases the amount of untrusted text that may be present. Workflows should separate instructions from data and treat retrieved text as evidence, not authority.\n\nHallucinated synthesis can happen when the model blends sources into an answer that sounds coherent but is not fully supported. Overconfident summaries may hide uncertainty or omit exceptions. Missed details can be especially costly when the user assumes a large context window means the model checked everything. More context can improve performance, but it can also reduce reliability if selection, structure, and review are weak.",
+  "narrationPoints": [
+    "Large context can fail in ways that are easy to miss.",
+    "Irrelevant context can reduce reliability by distracting the model or encouraging shallow synthesis.",
+    "Prompt injection and context poisoning are serious concerns when retrieved or user-supplied material is included.",
+    "Hallucinated synthesis can happen when the model blends sources into an answer that sounds coherent but is not fully supported."
+  ]
+};

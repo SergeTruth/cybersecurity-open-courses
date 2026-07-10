@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Protocol-Aware Telemetry",
+  "graphicAlt": "Instructional illustration for Protocol-Aware Telemetry.",
+  "narration": "Protocol-aware telemetry adds industrial meaning to network communication. Instead of reporting only addresses and ports, it may identify device roles, sessions, reads, writes, commands, errors, discovery, or engineering activity. This additional context helps teams distinguish routine control from meaningful change.\n\nModbus telemetry can separate common reads from writes and identify expected clients. DNP3 visibility may describe master and outstation relationships, event reporting, and control operations. OPC UA sources can expose application sessions, certificate events, security policy, and subscriptions.\n\nEtherNet/IP and PROFINET environments may include cyclic control traffic, diagnostics, discovery, configuration, and engineering functions. Expected patterns depend on the vendor ecosystem and engineered design. A new peer or unusual management operation may deserve review even when the protocol itself is approved.\n\nProtocol labels are not process meaning. A write may be normal during startup, approved during maintenance, and concerning during production. Register, object, and tag semantics vary across sites. Asset role, process state, user authority, and work records provide the context telemetry cannot infer alone.\n\nEncrypted or proprietary communication can limit inspection. Do not weaken secure settings simply to collect more content. Endpoint logs, gateway records, controller change records, certificate events, and session metadata can fill part of the gap.\n\nDocument parser coverage, protocol versions, unsupported operations, and confidence. Protocol-aware telemetry is valuable when it explains behavior without overstating intent. It should help an analyst ask better questions and engage the engineer or operator who can determine operational consequence.",
+  "narrationPoints": [
+    "Protocol-aware telemetry adds industrial meaning to network communication.",
+    "Modbus telemetry can separate common reads from writes and identify expected clients.",
+    "EtherNet/IP and PROFINET environments may include cyclic control traffic, diagnostics, discovery, configuration, and engineering functions.",
+    "Protocol labels are not process meaning.",
+    "Encrypted or proprietary communication can limit inspection."
+  ]
+};

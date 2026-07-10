@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Zero Trust Beyond Technology",
+  "graphicAlt": "Zero Trust operating model connecting leadership, governance, policy, architecture, identity, operations, data owners, and workforce experience.",
+  "narration": "Zero Trust is a security strategy, not a single product, feature, or vendor service. Technology enables the strategy, but governance and operating processes determine how access decisions support business and risk objectives.\n\nLeadership establishes direction and accountability. Executives and risk owners define priorities, approve investment, resolve cross-team barriers, and decide how the organization balances security, user experience, cost, and mission needs.\n\nGovernance translates strategy into policy. It defines protected resources, identity and device expectations, least privilege principles, monitoring requirements, exceptions, metrics, review cycles, and accountable owners.\n\nArchitecture connects those policies to systems. Identity platforms, endpoint controls, applications, networks, data services, and monitoring tools need consistent information and enforcement paths rather than isolated product decisions.\n\nOperational processes keep the model working. Access requests, employee changes, device enrollment, application onboarding, incident response, exception review, vendor access, and decommissioning all affect whether Zero Trust remains accurate over time.\n\nPeople are part of the design. Employees and administrators need clear expectations, usable authentication, understandable access requests, support when controls fail, and training that explains why changes are occurring.\n\nCollaboration is essential because no single team owns every signal or enforcement point. Security, identity, network, endpoint, application, data, privacy, compliance, human resources, procurement, and business owners all contribute.\n\nA product purchase may improve one capability, but it does not create Zero Trust by itself. The strategy succeeds when technology, policy, processes, ownership, and measurement produce consistent risk-informed access decisions.",
+  "narrationPoints": [
+    "Zero Trust is a security strategy, not a single product, feature, or vendor service.",
+    "Leadership establishes direction and accountability.",
+    "Governance translates strategy into policy.",
+    "Architecture connects those policies to systems.",
+    "Operational processes keep the model working."
+  ]
+};

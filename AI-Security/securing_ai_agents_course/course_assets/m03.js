@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Instruction and Prompt Risks",
+  "graphicAlt": "Blank white placeholder image for the agent instruction and prompt risk module.",
+  "narration": "Agents may receive instructions from developers, users, system prompts, retrieved documents, web pages, emails, tickets, files, tool responses, or other agents. The application may intend these sources to have different authority, but the model sees natural language from all of them. Untrusted content can therefore resemble an instruction even when it was meant to be treated only as data.\n\nPrompt injection is the high-level risk that input changes model behavior in an unintended way. Direct injection comes from a user interaction. Indirect injection comes from external content that the agent later reads or retrieves. The defensive lesson is not that every document is hostile. It is that external content should not be allowed to grant itself authority over permissions, policies, or high-impact actions.\n\nInstruction hierarchy and clear context can help the model follow the intended task, but wording alone is not a reliable security boundary. Authorization must be enforced by application code and identity systems. The model should not be able to expand its own permissions, reveal protected data, or approve a sensitive action merely because text asked it to do so.\n\nSafer designs separate trusted configuration from untrusted content, preserve source and provenance, validate tool arguments, constrain downstream actions, and require approval where impact is high. Teams should test how the agent behaves when content is confusing, contradictory, or misleading. If instruction handling fails, surrounding controls should still prevent unauthorized access or execution.",
+  "narrationPoints": [
+    "Agents may receive instructions from developers, users, system prompts, retrieved documents, web pages, emails, tickets, files, tool responses...",
+    "Prompt injection is the high-level risk that input changes model behavior in an unintended way.",
+    "Instruction hierarchy and clear context can help the model follow the intended task, but wording alone is not a reliable security boundary.",
+    "Safer designs separate trusted configuration from untrusted content, preserve source and provenance, validate tool arguments, constrain downst..."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, and Monitoring Authorization",
+  "graphicAlt": "Blank placeholder image for a lesson on testing, logging, and monitoring authorization.",
+  "narration": "Authorization controls must be tested continuously because systems change. Useful tests include positive cases, negative cases, role matrix tests, tenant boundary tests, object-level access tests, function-level checks, and regression tests for previously fixed access bugs. Defensive privilege escalation tests at a high level verify that lower-privilege subjects cannot perform higher-privilege actions or access resources outside their scope.\n\nCode review should ask direct questions. Where is the authorization check? Is it server-side? Is it close to the sensitive action? Does it check the specific object, tenant, or resource? What happens for background jobs and service accounts? Are hidden buttons being mistaken for enforcement? Are new routes, exports, administrative functions, and bulk operations covered by the same policy expectations?\n\nAudit logging supports investigation, troubleshooting, abuse detection, and access review. Important events include access denied decisions, privileged actions, permission changes, role assignment changes, tenant administration, delegation changes, and unusual access patterns. Logs should provide useful evidence without exposing secrets, tokens, regulated data, or unnecessary sensitive content.\n\nMonitoring connects authorization to operations and incident response. Repeated denied access, unexpected privileged actions, cross-tenant attempts, unusual service account behavior, or sudden permission changes may require triage. Authorization is not a one-time design artifact. It needs tests, logs, alerts, review, and remediation as business workflows, integrations, users, and services evolve.",
+  "narrationPoints": [
+    "Authorization controls must be tested continuously because systems change.",
+    "Code review should ask direct questions.",
+    "Audit logging supports investigation, troubleshooting, abuse detection, and access review.",
+    "Monitoring connects authorization to operations and incident response."
+  ]
+};

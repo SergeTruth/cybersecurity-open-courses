@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Risk Management for OT",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Risk management connects cybersecurity activity to mission and operational outcomes. Begin by defining the system, physical process, assets, dependencies, owners, and boundaries. Identify what the organization must protect: safe operation, reliable control, production, environmental limits, service delivery, data, and recovery capability.\n\nNext, consider threats, vulnerabilities, likelihood, existing safeguards, and impact. Threats may be malicious or accidental. Vulnerabilities may be technical, architectural, procedural, or human. Impact should include safety, equipment, quality, downtime, mission, environment, financial loss, and public consequence where applicable.\n\nOperations and engineering teams are essential participants. They understand process states, maintenance constraints, independent safety functions, and the consequences of losing visibility or control. Cybersecurity teams contribute threat knowledge, architecture analysis, access pathways, monitoring, and incident experience. Risk decisions are stronger when both perspectives are present.\n\nControl selection should reduce the most important risk without creating greater operational harm. Segmentation may reduce exposure while a patch awaits testing. Secure remote access may preserve vendor support while improving accountability. Backup and recovery controls may reduce the duration of disruption. Each decision should state assumptions and evidence.\n\nResidual risk remains after controls are applied. Accountable leadership must understand and accept that risk, fund additional treatment, avoid the activity, or transfer part of the exposure through appropriate arrangements. Risk acceptance should not be an indefinite technical exception without ownership.\n\nReassess when systems, connectivity, suppliers, threats, vulnerabilities, or process consequences change. Risk management is a continuing operational cycle, not a one-time document produced before commissioning.",
+  "narrationPoints": [
+    "Risk management connects cybersecurity activity to mission and operational outcomes.",
+    "Next, consider threats, vulnerabilities, likelihood, existing safeguards, and impact.",
+    "Operations and engineering teams are essential participants.",
+    "Control selection should reduce the most important risk without creating greater operational harm.",
+    "Residual risk remains after controls are applied.",
+    "Reassess when systems, connectivity, suppliers, threats, vulnerabilities, or process consequences change."
+  ]
+};

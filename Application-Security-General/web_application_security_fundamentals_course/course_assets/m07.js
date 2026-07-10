@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Configuration, Dependencies, and Deployment",
+  "graphicAlt": "Blank placeholder graphic for module 7, Configuration, Dependencies, and Deployment.",
+  "narration": "A web application can be vulnerable because of configuration even when the application logic is sound. Secure defaults should disable debug behavior, avoid verbose error exposure, enforce HTTPS, restrict administrative interfaces, and keep sensitive settings out of client-visible responses. Error handling should help operators diagnose issues without showing stack traces, secrets, internal paths, SQL fragments, or framework details to ordinary users. Logs should be useful, but they should not become a second copy of sensitive data.\n\nSecurity headers and TLS are important operating controls. Headers such as Content Security Policy, Strict-Transport-Security, X-Content-Type-Options, Referrer-Policy, and framing controls can reduce browser-side risk when configured carefully for the application. TLS protects data in transit and supports user trust, but it must be deployed consistently. Mixed content, expired certificates, weak redirects, and insecure internal callbacks can weaken the protection users expect.\n\nDependencies and deployment platforms are part of application security. Third-party packages can contain known vulnerabilities, malicious updates, weak defaults, or transitive risk. Dependency management should include inventory, version tracking, updates, review of high-risk packages, and removal of unused libraries. Cloud and container environments add permissions, images, secrets, network rules, storage policies, and runtime configuration. Treat environment variables, CI/CD credentials, container registries, and infrastructure templates as security-sensitive application assets.",
+  "narrationPoints": [
+    "A web application can be vulnerable because of configuration even when the application logic is sound.",
+    "Security headers and TLS are important operating controls.",
+    "Dependencies and deployment platforms are part of application security."
+  ]
+};

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.429
+Identity is one of the most important design choices in an MCP system.
+
+2
+00:00:04.429 --> 00:00:13.593
+A user may ask for an action, the AI host may decide how to assist, an MCP server may expose the tool, and a downstream API may enforce permissions.
+
+3
+00:00:13.593 --> 00:00:17.564
+Those layers should not be collapsed into one vague identity.
+
+4
+00:00:17.564 --> 00:00:21.917
+User authorization is different from application authorization.
+
+5
+00:00:21.917 --> 00:00:25.735
+A service account is different from a delegated user token.
+
+6
+00:00:25.735 --> 00:00:30.088
+A model-generated request is different from verified user intent.
+
+7
+00:00:30.088 --> 00:00:35.433
+Delegated access lets an application act on behalf of a user within defined limits.
+
+8
+00:00:35.433 --> 00:00:44.826
+OAuth-style concepts such as scopes, audience, token lifetime, and consent are useful mental models even when the exact implementation varies.
+
+9
+00:00:44.826 --> 00:00:48.034
+Scope should describe what an integration can do.
+
+10
+00:00:48.034 --> 00:00:51.394
+Audience should constrain where a token can be used.
+
+11
+00:00:51.394 --> 00:00:56.205
+Consent should make the user or administrator aware of meaningful access.
+
+12
+00:00:56.205 --> 00:01:00.710
+Token lifetime should limit exposure if credentials are mishandled.
+
+13
+00:01:00.710 --> 00:01:04.299
+Careless token passthrough can blur trust boundaries.
+
+14
+00:01:04.299 --> 00:01:17.281
+If a powerful user token is passed through multiple components, tools, or servers without clear policy, components may gain access they do not need and users may not understand what is being authorized.
+
+15
+00:01:17.281 --> 00:01:32.249
+Safer designs separate user intent from model-generated action requests, issue narrowly scoped credentials where possible, keep secrets out of prompts and logs, and enforce authorization at the application or service boundary.
+
+16
+00:01:32.249 --> 00:01:36.984
+MCP tools should not gain permission merely because a model asks for them.
+
+17
+00:01:36.984 --> 00:01:42.482
+The model can propose an action, but policy must decide whether the action is allowed.
+
+18
+00:01:42.482 --> 00:01:46.835
+High-impact actions should require explicit consent or approval.
+
+19
+00:01:46.835 --> 00:01:55.999
+Permission checks should consider the user, the tool, the resource, the requested operation, the data sensitivity, and the current context.
+
+20
+00:01:55.999 --> 00:02:02.642
+Consent is not a decorative prompt; it is a control that helps connect user intent to authorized action.

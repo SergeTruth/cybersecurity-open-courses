@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Know Your Exposed Services and Dependencies",
+  "graphicAlt": "Conceptual visual of public services, DNS, CDN, APIs, dependencies, owners, and escalation paths.",
+  "narration": "DDoS defense begins with knowing what must stay available. That sounds obvious, but many incidents are made harder by unknown public services, forgotten domains, unowned APIs, old test systems, undocumented admin panels, or origins that were meant to sit behind an edge provider but remain directly reachable. An inventory is not paperwork for its own sake. It is the map responders use when time is scarce and the service is under pressure.\n\nA useful inventory covers more than public IP addresses. It includes domains, DNS zones, CDN front doors, WAF policies, API gateways, load balancers, login flows, customer portals, payment paths, status pages, monitoring endpoints, and third-party integrations. It also identifies administrative access paths and whether they depend on the same public edge as the customer-facing service. If responders cannot reach dashboards, management interfaces, or provider portals during an event, recovery becomes harder.\n\nDependencies matter because availability is often constrained by the weakest path. A website may rely on DNS, certificate validation, an identity provider, a payment service, a queue, a cache, a database, a fraud service, and support tooling. A DDoS event against one public endpoint can expose hidden coupling in another system. The defensive inventory should show which dependencies are critical, which can fail gracefully, which have provider support, and which have alternate procedures.\n\nOwnership is part of the asset record. Each critical service should have an owner, an escalation path, a runbook, provider contacts, and a known business priority. The team should know which services are supposed to be public, which should be private, and which origins should accept traffic only through approved front doors. Unknown exposure creates incident confusion. Known exposure can be protected, monitored, tested, and improved before pressure arrives.",
+  "narrationPoints": [
+    "Inventory public-facing services before incidents.",
+    "DNS, CDN, APIs, and login flows are critical paths.",
+    "Dependencies can become availability bottlenecks.",
+    "Each service needs an owner and escalation path.",
+    "Unknown exposure slows response."
+  ]
+};

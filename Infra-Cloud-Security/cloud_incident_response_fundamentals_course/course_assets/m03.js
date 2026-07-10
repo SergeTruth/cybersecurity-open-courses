@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Preparation and Visibility",
+  "graphicAlt": "Blank placeholder graphic for module 3",
+  "narration": "Preparation determines how much can be reconstructed during a cloud incident. If logs were not enabled, exported, retained, or protected before the event, responders may be left with partial evidence. A cloud incident response plan should define logging strategy, evidence retention, asset inventory, identity inventory, roles, escalation paths, runbooks, and access methods before the first serious alert arrives.\n\nCloud asset inventory is foundational. Responders need to know which accounts, subscriptions, projects, tenants, regions, services, workloads, storage locations, and data owners exist. Identity inventory is just as important. User accounts, service accounts, roles, groups, federated identities, API keys, automation identities, and break-glass accounts all shape both investigation and containment.\n\nLogging should be centralized where practical and protected from casual modification. Audit logs, API activity logs, identity logs, network telemetry, storage access logs, workload logs, and configuration history can all contribute to scoping and timeline reconstruction. Cloud security posture tools and detection rules can help identify risky configuration and suspicious activity, but they are most useful when integrated with response workflows.\n\nPreparation also includes access. Responders need appropriate, scoped access for investigation and containment. Break-glass access should be controlled, monitored, and documented so it is available during emergencies without becoming a standing weakness. Runbooks should explain how to collect common evidence, who to notify, and how to avoid actions that erase important context.\n\nPrepared teams can move faster because they do not spend the first hours discovering where logs live, who owns the service, or whether evidence exists. The goal is not to predict every incident. The goal is to make the environment observable and the response process repeatable enough that uncertainty can be managed.",
+  "narrationPoints": [
+    "Preparation determines how much can be reconstructed during a cloud incident.",
+    "Cloud asset inventory is foundational.",
+    "Logging should be centralized where practical and protected from casual modification.",
+    "Preparation also includes access.",
+    "Prepared teams can move faster because they do not spend the first hours discovering where logs live, who owns the service, or whether evidenc..."
+  ]
+};

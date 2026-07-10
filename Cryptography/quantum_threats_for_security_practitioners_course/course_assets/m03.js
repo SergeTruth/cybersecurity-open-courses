@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Quantum Algorithms at a Practical Level",
+  "graphicAlt": "Blank white placeholder image for module 3, Quantum Algorithms at a Practical Level.",
+  "narration": "Security practitioners do not need quantum physics expertise to understand the migration problem. The key idea is that some quantum algorithms change the difficulty of certain mathematical problems used in cryptography. Shor's algorithm is important because, at a high level, it threatens public-key schemes based on factoring and discrete logarithms. That includes RSA, classic Diffie-Hellman, and elliptic curve systems.\n\nIf a sufficiently large and reliable cryptographically relevant quantum computer existed, Shor's algorithm would undermine assumptions behind many public-key systems. That does not mean attackers can do this at scale today. It means systems being built, purchased, or archived today may still be in use when capability changes. Planning is about reducing that future exposure before the timeline becomes urgent.\n\nGrover's algorithm affects symmetric cryptography differently. It can provide a quadratic speedup for brute-force search, which changes the security margin but does not collapse symmetric encryption in the same way Shor's algorithm affects many public-key schemes. In practice, this often leads to discussions about using sufficiently strong symmetric key sizes rather than redesigning every symmetric primitive from scratch.\n\nThe safest practitioner posture is balanced. Avoid dismissing quantum threats because the hardest attack is not practical today. Also avoid claiming that quantum computers already break every system or make all security controls obsolete. The real work is risk-based migration: know where vulnerable public-key cryptography sits, understand data and system lifetimes, and build the ability to change cryptography deliberately.",
+  "narrationPoints": [
+    "Security practitioners do not need quantum physics expertise to understand the migration problem.",
+    "If a sufficiently large and reliable cryptographically relevant quantum computer existed, Shor's algorithm would undermine assumptions behind...",
+    "Grover's algorithm affects symmetric cryptography differently.",
+    "The safest practitioner posture is balanced."
+  ]
+};

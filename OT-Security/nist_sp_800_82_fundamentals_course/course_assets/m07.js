@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "OT Security Architecture",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT security architecture makes connectivity intentional. Enterprise IT and control networks should be separated where their functions and risk differ. Separation does not mean eliminating every connection. It means permitting required communication through controlled, documented, and monitored pathways.\n\nAn industrial DMZ can buffer enterprise and site operations. Services such as jump hosts, remote-access brokers, update repositories, logging gateways, and data replication can terminate or mediate cross-boundary activity. Enterprise users should not reach controllers directly simply because a route is technically possible.\n\nConduits should use least-privilege connectivity. Define approved sources, destinations, protocols, direction, business or operational purpose, and owner. Review administrative traffic, authentication, backup, updates, and vendor support as carefully as production data. Temporary paths need expiration and removal.\n\nMonitoring placement should align with trust boundaries and operational value. Visibility at enterprise-to-OT boundaries can reveal attempted movement. Monitoring within site and control areas can identify unexpected devices, engineering actions, and unusual communications. Passive techniques may be preferable around sensitive devices.\n\nArchitecture should also preserve resilience. Understand which functions continue if an enterprise service, DMZ, network link, or site server is lost. Design local control, redundancy, and recovery so a cyber containment decision does not create an avoidable safety problem.\n\nModern OT may include cloud analytics, wireless systems, industrial Internet of Things devices, and vendor-managed services that do not follow a simple hierarchy. Extend the architecture with data-flow diagrams, identity paths, external dependencies, and current asset records. The objective is not a perfect diagram; it is controlled communication supported by evidence and operational understanding.",
+  "narrationPoints": [
+    "OT security architecture makes connectivity intentional.",
+    "An industrial DMZ can buffer enterprise and site operations.",
+    "Conduits should use least-privilege connectivity.",
+    "Monitoring placement should align with trust boundaries and operational value.",
+    "Architecture should also preserve resilience.",
+    "Modern OT may include cloud analytics, wireless systems, industrial Internet of Things devices, and vendor-managed services that do not follow a..."
+  ]
+};

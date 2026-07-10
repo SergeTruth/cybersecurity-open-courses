@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Signature and Trust Risks",
+  "graphicAlt": "Blank white placeholder image for module 5, Signature and Trust Risks.",
+  "narration": "Digital signatures are part of the quantum threat discussion because they protect identity, integrity, authenticity, and trust. A signature can prove that a software update came from the expected publisher, that firmware was approved, that a certificate was issued by a trusted authority, or that a document was not changed after signing. These uses are deeply embedded in security operations.\n\nCertificate chains are especially important. A certificate chain links identities to public keys through trusted issuers. If the signature algorithms used in those chains become unsuitable, organizations need a migration path for certificate authorities, clients, servers, devices, verification libraries, and policy rules. That migration is not only technical. It may involve contracts, audits, governance, procurement, and operational change windows.\n\nCode signing and firmware signing can be harder than changing an encryption setting. Devices may validate signatures offline. Boot chains may depend on algorithms burned into firmware or hardware. Update systems may require compatibility across multiple product generations. Some devices stay deployed for years in medical, industrial, automotive, defense, or infrastructure environments where patching is slow and replacement is expensive.\n\nThe practical question is where trust depends on long-lived signatures. Signed logs, software packages, firmware images, documents, certificates, and device identities may all have different validity periods and operational constraints. Signature migration requires understanding verification behavior, not just signing behavior. A new signing algorithm helps only if every relying system can verify it correctly.",
+  "narrationPoints": [
+    "Digital signatures are part of the quantum threat discussion because they protect identity, integrity, authenticity, and trust.",
+    "Certificate chains are especially important.",
+    "Code signing and firmware signing can be harder than changing an encryption setting.",
+    "The practical question is where trust depends on long-lived signatures."
+  ]
+};

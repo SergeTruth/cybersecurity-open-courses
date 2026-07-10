@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:03,797
+Cloud IAM is not only about employees signing into a console.
+
+2
+00:00:03,797 --> 00:00:05,733
+Workloads also need identity.
+
+3
+00:00:05,733 --> 00:00:08,338
+CI/CD pipelines deploy infrastructure.
+
+4
+00:00:08,338 --> 00:00:10,125
+Containers call cloud APIs.
+
+5
+00:00:10,125 --> 00:00:12,880
+Virtual machines retrieve configuration.
+
+6
+00:00:12,880 --> 00:00:15,337
+Serverless functions process events.
+
+7
+00:00:15,337 --> 00:00:18,910
+Kubernetes workloads read secrets or publish messages.
+
+8
+00:00:18,910 --> 00:00:28,961
+Applications use service accounts, managed identities, workload identities, tokens, or deployment roles to perform tasks without a human clicking a button.
+
+9
+00:00:28,961 --> 00:00:32,758
+Non-human identities often create the largest blind spots.
+
+10
+00:00:32,758 --> 00:00:39,458
+A shared service account may be used by several applications, so no one knows which system caused an action.
+
+11
+00:00:39,458 --> 00:00:44,744
+A deployment role may be overpowered because it was created to make automation easy.
+
+12
+00:00:44,744 --> 00:00:49,062
+A leaked access key may remain active because no owner is tracking it.
+
+13
+00:00:49,062 --> 00:00:54,199
+A workload in development may accidentally have access to production resources.
+
+14
+00:00:54,199 --> 00:00:58,369
+These problems are not exotic; they are normal engineering drift.
+
+15
+00:00:58,369 --> 00:01:11,249
+Safer patterns include workload identity federation, managed identities, short-lived credentials, narrowly scoped deployment roles, environment separation, secret rotation, and clear ownership.
+
+16
+00:01:11,249 --> 00:01:18,545
+A build pipeline should have the permissions needed to deploy its application, not broad rights across the account.
+
+17
+00:01:18,545 --> 00:01:24,203
+A serverless function should read the specific data it needs, not every storage resource.
+
+18
+00:01:24,203 --> 00:01:29,787
+A Kubernetes workload should not share one powerful identity with unrelated workloads.
+
+19
+00:01:29,787 --> 00:01:31,573
+Auditability is essential.
+
+20
+00:01:31,573 --> 00:01:40,210
+Automation should leave a clear trail of which principal acted, which pipeline or workload used it, what changed, and who owns the system.
+
+21
+00:01:40,210 --> 00:01:50,111
+When a production change happens, responders should not have to guess whether it came from a user, a deployment tool, a managed identity, or a compromised key.
+
+22
+00:01:50,111 --> 00:01:56,067
+Workload identity hardening is how cloud teams make automation fast without making it opaque.
+
+23
+00:01:56,067 --> 00:01:59,269
+Environment separation is a practical guardrail.
+
+24
+00:01:59,269 --> 00:02:05,374
+A development pipeline should not normally deploy to production unless that is its explicit job.
+
+25
+00:02:05,374 --> 00:02:09,096
+A test service account should not read production secrets.
+
+26
+00:02:09,096 --> 00:02:14,456
+A serverless function in one application should not write to another team's storage.
+
+27
+00:02:14,456 --> 00:02:19,891
+These boundaries make mistakes easier to contain and ownership easier to understand.
+
+28
+00:02:19,891 --> 00:02:24,358
+Workload identity design should be part of application architecture.
+
+29
+00:02:24,358 --> 00:02:32,771
+When a new service is created, teams should ask which cloud APIs it needs, which resources it can touch, how credentials are delivered,
+
+30
+00:02:32,771 --> 00:02:38,429
+who owns the identity, how logs identify its actions, and how access will be removed later.
+
+31
+00:02:38,429 --> 00:02:46,098
+Answering those questions early is far cheaper than cleaning up an overpowered service account after production launch.
+
+32
+00:02:46,098 --> 00:02:50,341
+Automation should have the same review discipline as human access.
+
+33
+00:02:50,341 --> 00:02:58,233
+If a pipeline is allowed to create networks, assign roles, or deploy privileged functions, reviewers should understand why.
+
+34
+00:02:58,233 --> 00:03:02,328
+The fact that a principal is non-human does not make it lower risk.
+
+35
+00:03:02,328 --> 00:03:08,879
+In many cloud environments, workload identities are among the most powerful identities in the account.

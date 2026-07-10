@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Evidence Collection Tools",
+  "graphicAlt": "Blank placeholder graphic for evidence collection tools",
+  "narration": "Evidence collection tools help preserve information before it disappears or changes. Disk imaging tools can capture a full storage device or a targeted logical collection, depending on the investigation need and operational constraints. Full images may be useful when deeper forensic analysis is expected, while targeted collections may be more practical when speed, storage, or business impact matters. The choice should be documented so later reviewers understand the limits of the evidence.\n\nMemory acquisition is another important capability. Memory can contain running processes, command lines, network connections, loaded modules, encryption keys, injected code, and other volatile artifacts. It can also disappear when a system is shut down or rebooted. A toolkit should include tested, approved methods for collecting memory when appropriate, along with guidance on when collection is worth the operational risk.\n\nLog export and file collection are often the backbone of investigations. Responders may need Windows Event Logs, Linux logs, EDR exports, authentication events, firewall records, proxy logs, DNS data, email evidence, browser artifacts, cloud audit records, and application logs. The toolkit should include procedures that explain how to collect these sources, where to store them, and what metadata to record.\n\nScreenshots and notes can also be evidence, especially when they capture console state, security tool findings, user reports, or administrative changes that may not be exported cleanly. Collection should preserve integrity and minimize unnecessary changes to systems. That means using working copies where possible, avoiding casual browsing through evidence, recording commands or tools used, and keeping collection activity separate from attacker activity in the timeline.",
+  "narrationPoints": [
+    "Evidence collection tools help preserve information before it disappears or changes.",
+    "Memory acquisition is another important capability.",
+    "Log export and file collection are often the backbone of investigations.",
+    "Screenshots and notes can also be evidence, especially when they capture console state, security tool findings, user reports, or..."
+  ]
+};

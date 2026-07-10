@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Introduction to Threat Hunting",
+  "graphicAlt": "Threat-hunting lifecycle connecting questions, telemetry, investigation, evidence, detection improvement, and defensive action.",
+  "narration": "Threat hunting is a proactive cybersecurity activity in which analysts search for evidence of malicious activity, suspicious behavior, or hidden threats that may have evaded automated detection systems.\n\nTraditional security operations often begin with an alert. A tool identifies activity that matches a rule or analytic, and an analyst responds. Hunting begins with a question and actively looks for evidence, even when no alert has fired.\n\nThe purpose is not to distrust every security tool. Automated detection remains essential because it observes large environments continuously. Hunting complements that coverage by exploring uncertainty, testing assumptions, and examining behavior that may not fit known alert logic.\n\nA hunt may focus on a business concern, a change in threat intelligence, an unusual pattern, a high-value service, or a suspected visibility gap. The investigation should have a defined scope and a clear defensive purpose.\n\nHunters combine analytical judgment with telemetry from endpoints, identities, networks, applications, and cloud services. They compare observations with expected behavior and follow evidence carefully rather than relying on intuition alone.\n\nNot every hunt discovers a threat. A well-run hunt can still improve asset knowledge, expose missing logs, clarify normal activity, refine detections, and help security teams understand where their controls are strong or weak.\n\nThreat hunting is part of a larger defensive lifecycle. Findings may inform monitoring, detection engineering, incident response, vulnerability management, identity security, architecture, and risk decisions.\n\nThis course provides educational information about threat-hunting concepts. It is not operational incident-response advice, offensive security instruction, or guidance for conducting unauthorized activity.",
+  "narrationPoints": [
+    "Threat hunting is a proactive cybersecurity activity in which analysts search for evidence of malicious activity, suspicious behavior, or hidden threats that may have...",
+    "Traditional security operations often begin with an alert.",
+    "A tool identifies activity that matches a rule or analytic, and an analyst responds.",
+    "Hunting begins with a question and actively looks for evidence, even when no alert has fired.",
+    "The purpose is not to distrust every security tool.",
+    "Automated detection remains essential because it observes large environments continuously."
+  ]
+};

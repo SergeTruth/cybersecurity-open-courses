@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Risk Assessment for Quantum Threats",
+  "graphicAlt": "Blank white placeholder image for module 7, Risk Assessment for Quantum Threats.",
+  "narration": "Quantum risk assessment should be specific, not one-size-fits-all. Useful factors include data sensitivity, data lifetime, system lifetime, cryptographic dependency, exposure, adversary interest, replacement difficulty, vendor readiness, and business impact. A public website with short-lived data may not have the same urgency as a sensitive archive, a firmware signing system, or an industrial device with a twenty-year deployment cycle.\n\nData sensitivity asks what harm would occur if the information were exposed in the future. Data lifetime asks how long confidentiality must be preserved. System lifetime asks how long the system will remain in use. Cryptographic dependency asks whether the system relies on quantum-vulnerable public-key algorithms. Exposure asks whether traffic or artifacts can be collected or tampered with by relevant adversaries.\n\nReplacement difficulty is often the deciding factor. If a system can be updated quickly through a well-tested library and normal deployment pipeline, it may be lower priority than a system with hard-coded cryptography, vendor-controlled firmware, or regulatory constraints. Vendor readiness matters because many organizations cannot change product cryptography on their own. Business impact matters because migration failures can disrupt operations.\n\nA good assessment produces a prioritized roadmap. It should identify high-risk data, high-dependency systems, hard-to-change platforms, trust anchors, and vendor-controlled components. It should also identify lower-risk areas where routine lifecycle updates may be enough. The point is to avoid both complacency and uncontrolled urgency. Quantum readiness should be disciplined, evidence-based, and tied to real systems.",
+  "narrationPoints": [
+    "Quantum risk assessment should be specific, not one-size-fits-all.",
+    "Data sensitivity asks what harm would occur if the information were exposed in the future.",
+    "Replacement difficulty is often the deciding factor.",
+    "A good assessment produces a prioritized roadmap."
+  ]
+};

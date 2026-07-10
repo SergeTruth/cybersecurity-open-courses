@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Sessions, Tokens, and Authentication State",
+  "graphicAlt": "Blank placeholder image for a lesson on sessions, tokens, and authentication state.",
+  "narration": "Login is an event, but session management is an ongoing state. After authentication succeeds, the system usually creates a session cookie, token, or other credential that represents the user or client for later requests. Protecting that state is just as important as protecting the login form. A valid session can continue representing the user long after the initial authentication event.\n\nSession cookies and bearer tokens are common mechanisms. A bearer token, at a high level, usually grants access to whoever presents it, within its validity and scope. That means token exposure can matter even if the original password remains safe. Refresh tokens can extend access by obtaining new access tokens, so their storage, rotation, revocation, and lifetime deserve special care.\n\nToken lifetime affects the window during which a token can be used before expiration or renewal is required. Very long lifetimes may increase exposure if a token is lost. Very short lifetimes may create usability and reliability problems if renewal is brittle. Revocation, logout behavior, device trust at a high level, and secure cookie attributes such as secure transport and script access restrictions all shape the risk profile.\n\nAuthentication systems must protect what happens after login. Session fixation concepts at a high level involve an attacker influencing or reusing a session identifier across authentication. Logout should end meaningful access where the design expects it. Role changes, password resets, MFA resets, and account deactivation may need to affect existing sessions. Session design turns one-time authentication into ongoing access control reality.",
+  "narrationPoints": [
+    "Login is an event, but session management is an ongoing state.",
+    "Session cookies and bearer tokens are common mechanisms.",
+    "Token lifetime affects the window during which a token can be used before expiration or renewal is required.",
+    "Authentication systems must protect what happens after login."
+  ]
+};

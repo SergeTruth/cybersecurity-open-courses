@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Writing Clear Detection Logic",
+  "graphicAlt": "Detection rule documentation template showing title, objective, logic, data sources, assumptions, severity, and triage notes.",
+  "narration": "Detection logic should be understandable and maintainable. Clear naming conventions, readable conditions, consistent severity labels, and descriptive metadata help analysts and future maintainers understand what the rule is meant to do.\n\nDocumentation should explain the behavior being detected, the data sources required, key assumptions, expected false positives, known limitations, and recommended triage steps. It should also point to relevant references or internal tickets when useful.\n\nReadable logic matters because detections change over time. A rule may need tuning after a false positive, a telemetry change, a new business process, a platform migration, or a lesson from an incident. If nobody can understand the rule, nobody can improve it safely.\n\nGood rule writing also supports collaboration. Analysts, threat hunters, incident responders, engineers, and managers may all need to understand why a detection exists and how to interpret its output.",
+  "narrationPoints": [
+    "Detection logic should be understandable and maintainable. Clear naming conventions, readable conditions, consistent severity labels, and descriptive metadata help analysts and future maintainers understand what the rule is meant to do.",
+    "Documentation should explain the behavior being detected, the data sources required, key assumptions, expected false positives, known limitations, and recommended triage steps. It should also point to relevant references or internal tickets when useful.",
+    "Readable logic matters because detections change over time. A rule may need tuning after a false positive, a telemetry change, a new business process, a platform migration, or a lesson from an incident. If nobody can understand the rule, nobody can improve it safely.",
+    "Good rule writing also supports collaboration. Analysts, threat hunters, incident responders, engineers, and managers may all need to understand why a detection exists and how to interpret its output."
+  ]
+};

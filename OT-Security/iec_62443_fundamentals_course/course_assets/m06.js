@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Security Levels",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Security levels express increasing degrees of protection for industrial automation and control functions. They provide a structured way to translate risk into security expectations. A higher level represents resistance to a more capable, motivated, and well-resourced threat, but it also requires stronger capabilities, implementation, and evidence.\n\nThe target security level describes the protection required for a zone or conduit based on risk. It should result from analysis of threats, consequences, exposure, existing safeguards, and risk tolerance. It is not selected simply because a system is important or because a supplier markets a high level.\n\nA component's capability security level describes the security capability it can support when correctly configured and used. The achieved security level describes what the integrated and operated system actually provides. These concepts are related but not interchangeable. A capable device can be undermined by poor architecture, shared credentials, weak remote access, or disabled features.\n\nSecurity level selection should be specific to the foundational requirements and the system context. A zone may need particularly strong integrity and restricted data flow while having different confidentiality needs. Independent safety functions, physical controls, and operational procedures also influence risk, but they should be documented rather than assumed.\n\nVerification matters. Teams should be able to trace a target level to risk decisions, requirements, design controls, component capabilities, configuration, test results, and operational procedures. Changes to connectivity, process consequence, threat conditions, or components may require reassessment.\n\nSecurity levels are therefore decision and engineering tools. They do not certify an entire facility with one number, and they do not guarantee that a system remains secure throughout its life.",
+  "narrationPoints": [
+    "Security levels express increasing degrees of protection for industrial automation and control functions.",
+    "The target security level describes the protection required for a zone or conduit based on risk.",
+    "A component's capability security level describes the security capability it can support when correctly configured and used.",
+    "Security level selection should be specific to the foundational requirements and the system context.",
+    "Verification matters.",
+    "Security levels are therefore decision and engineering tools."
+  ]
+};

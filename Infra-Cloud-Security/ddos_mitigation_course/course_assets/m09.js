@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A DDoS Mitigation Operating Routine",
+  "graphicAlt": "Conceptual visual of a repeatable DDoS mitigation operating routine.",
+  "narration": "The operating routine for DDoS mitigation starts before there is an incident. Prepare by inventorying public-facing services, domains, DNS zones, CDN front doors, APIs, login flows, critical dependencies, administrative paths, and service owners. Know which origins should be protected by edge services and which systems should never be exposed directly. Record provider contacts, escalation procedures, emergency change paths, and the business priority of each critical service.\n\nBuild baselines and telemetry that make abnormal behavior easier to classify. Track request rates, bandwidth, connection rates, latency, errors, saturation, cache hit rate, DNS query rates, edge events, WAF events, and provider alerts. During an event, use those signals to classify where pressure appears: volumetric capacity, protocol or state handling, application behavior, dependencies, or a mix. Avoid unsupported certainty. Describe observations, impact, action, owner, and next checkpoint.\n\nApply controls in layers. Edge services such as CDN, WAF, DNS protection, Anycast, and scrubbing can absorb or filter traffic before it reaches origins. Network and transport controls can reduce unwanted pressure when they are scoped and reversible. Application controls such as caching, quotas, circuit breakers, feature flags, and degraded modes can preserve critical user journeys. The best response is coordinated across providers, network teams, security, SRE, application teams, support, and leadership.\n\nAfter recovery, improve the system. Remove emergency controls carefully, validate user experience, review evidence, preserve the timeline, and update the runbook. Tune dashboards, change thresholds, close exposure gaps, improve provider procedures, and redesign fragile application paths. DDoS mitigation is not just defensive tooling. It is availability engineering under pressure, supported by preparation, visibility, coordination, disciplined controls, and continuous improvement.",
+  "narrationPoints": [
+    "Prepare inventory, baselines, providers, and runbooks.",
+    "Detect and classify traffic pressure quickly.",
+    "Apply scoped edge, network, and application controls.",
+    "Communicate clearly and preserve evidence.",
+    "Improve architecture and runbooks after recovery."
+  ]
+};

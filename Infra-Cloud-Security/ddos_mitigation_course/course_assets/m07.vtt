@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:06,540
+Application-layer pressure is difficult because the requests may resemble normal user activity.
+
+2
+00:00:06,540 --> 00:00:08,953
+The problem is not always raw volume.
+
+3
+00:00:08,953 --> 00:00:22,267
+It may be that certain routes are expensive, certain queries miss cache, certain login or search flows trigger heavy downstream work, or certain API patterns create queues that consume worker capacity.
+
+4
+00:00:22,267 --> 00:00:26,471
+From the user's perspective the service is slow or unavailable.
+
+5
+00:00:26,471 --> 00:00:33,244
+From the defender's perspective, the response needs application context as much as security context.
+
+6
+00:00:33,244 --> 00:00:39,784
+The first defensive step is to identify expensive endpoints and critical paths before an incident.
+
+7
+00:00:39,784 --> 00:00:42,120
+Which pages must remain available?
+
+8
+00:00:42,120 --> 00:00:45,078
+Which APIs support core business functions?
+
+9
+00:00:45,078 --> 00:00:47,103
+Which routes are safe to cache?
+
+10
+00:00:47,103 --> 00:00:49,594
+Which operations should have quotas?
+
+11
+00:00:49,594 --> 00:00:52,319
+Which features can degrade temporarily?
+
+12
+00:00:52,319 --> 00:00:59,949
+Which requests touch databases, search clusters, identity providers, payment systems, or third-party services?
+
+13
+00:00:59,949 --> 00:01:06,411
+The answers help the team prioritize protection rather than treating every request path as equal.
+
+14
+00:01:06,411 --> 00:01:19,646
+Useful application-layer controls include caching, request limits, API quotas, queueing, bot controls, WAF rules, authentication hardening, circuit breakers, feature flags, and degraded modes.
+
+15
+00:01:19,646 --> 00:01:22,293
+A cache can reduce repeated origin work.
+
+16
+00:01:22,293 --> 00:01:24,785
+A quota can protect shared resources.
+
+17
+00:01:24,785 --> 00:01:30,624
+A circuit breaker can stop one failing dependency from consuming the whole application.
+
+18
+00:01:30,624 --> 00:01:37,319
+A degraded mode can preserve the most important user journey while less critical features are paused.
+
+19
+00:01:37,319 --> 00:01:40,745
+These are resilience patterns, not magic switches.
+
+20
+00:01:40,745 --> 00:01:42,614
+Coordination is essential.
+
+21
+00:01:42,614 --> 00:01:45,728
+Security may see suspicious request patterns.
+
+22
+00:01:45,728 --> 00:01:48,453
+SRE may see saturation and error budgets.
+
+23
+00:01:48,453 --> 00:01:54,993
+Application engineers may know which path is expensive and which configuration can safely change.
+
+24
+00:01:54,993 --> 00:01:59,119
+Product or business owners may need to approve a degraded mode.
+
+25
+00:01:59,119 --> 00:02:07,761
+During an event, the strongest control may be code, configuration, edge policy, cache strategy, or a temporary business decision.
+
+26
+00:02:07,761 --> 00:02:15,313
+Afterward, expensive paths should be reviewed and redesigned where possible so the next event is easier to absorb.

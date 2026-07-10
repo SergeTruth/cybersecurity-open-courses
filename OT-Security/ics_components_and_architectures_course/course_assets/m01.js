@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Is an Industrial Control System?",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "An industrial control system, or ICS, is a combination of hardware, software, networks, procedures, and people used to monitor and control an industrial process. It turns measurements from the physical world into information, applies control logic, and sends actions back to equipment. The purpose is reliable operation, not merely data processing.\n\nICS is closely related to operational technology, or OT. OT is the broader category of technology that interacts with physical operations. Industrial control systems are a major part of OT, although organizations may use the terms differently. What matters is the operational role: a system may affect production, movement, energy, water, environmental conditions, or safety.\n\nExamples include manufacturing lines, electrical generation and distribution, water treatment and pumping, pipeline operations, transportation signaling, and facility automation. The scale varies from a local machine controller to a supervisory platform coordinating hundreds of remote sites.\n\nA basic control loop illustrates the relationship. A sensor measures a condition such as pressure or position. A controller compares that input with programmed logic or a target. An actuator changes equipment, and the process produces a new measurement. Operators supervise this loop through displays, alarms, trends, and approved manual controls.\n\nICS security requires understanding both technology and process. A server outage may remove visibility. A controller change may alter product quality. A communications failure may interrupt control or force a safe shutdown. The consequence depends on architecture, equipment state, redundancy, and operating procedures.\n\nDefenders therefore protect more than computers. They protect safety, reliability, availability, and process integrity. Effective decisions come from combining cybersecurity evidence with engineering knowledge, operating context, and clear authority for actions that could affect the physical system.",
+  "narrationPoints": [
+    "An industrial control system, or ICS, is a combination of hardware, software, networks, procedures, and people used to monitor and control an...",
+    "ICS is closely related to operational technology, or OT.",
+    "Examples include manufacturing lines, electrical generation and distribution, water treatment and pumping, pipeline operations, transportation...",
+    "A basic control loop illustrates the relationship.",
+    "ICS security requires understanding both technology and process.",
+    "Defenders therefore protect more than computers."
+  ]
+};

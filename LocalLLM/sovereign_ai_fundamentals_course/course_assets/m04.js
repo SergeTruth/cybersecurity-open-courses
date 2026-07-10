@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Models, Tools, and Runtime Choices",
+  "graphicAlt": "Preview bullet summary visual for models, tools, and runtime choices.",
+  "narration": "Model and runtime choices are security and operations decisions, not just engineering preferences. Model size, model capability, quantization, context window, latency, hardware requirements, memory needs, licensing, and supportability all affect whether a system can be safely operated. The best model for a workflow is not always the largest or newest model. It is the model whose capability, cost, control, and reliability fit the job.\n\nA smaller model may be faster, cheaper, easier to isolate, and good enough for a focused workflow. A larger model may be helpful for complex reasoning or broader language tasks, but it may require more expensive hardware, stricter monitoring, and clearer usage controls. Quantization and runtime settings can reduce resource demands, but they may also affect output quality, latency, and evaluation requirements.\n\nThe runtime determines real system behavior. It controls how requests are accepted, how sessions are managed, how context is assembled, whether outputs stream, what rate limits apply, and how usage is logged. Local model runners, inference servers, private endpoints, gateways, and orchestration layers each create different operational responsibilities.\n\nTool access deserves special attention. Tools let an AI system search, read, write, call APIs, create tickets, run workflows, or interact with internal systems. A private model with broad tools can still create serious operational risk if permissions are unclear. Sovereign AI requires deliberate runtime decisions, scoped tools, monitored usage, and approval patterns for sensitive actions. Downloading a model is not the same thing as designing a controlled AI system.",
+  "narrationPoints": [
+    "Model and runtime choices are security and operations decisions, not just engineering preferences.",
+    "A smaller model may be faster, cheaper, easier to isolate, and good enough for a focused workflow.",
+    "The runtime determines real system behavior.",
+    "Tool access deserves special attention."
+  ]
+};

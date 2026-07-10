@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "MIME Sniffing and Content Type Controls",
+  "graphicAlt": "Blank placeholder image for MIME Sniffing and Content Type Controls.",
+  "narration": "Content-Type tells clients what kind of content is being served, such as HTML, JSON, JavaScript, CSS, images, or file downloads. Browsers use this information when deciding how to process a response. If the declared type is missing, wrong, or ambiguous, browsers may try to infer the type. That behavior is called MIME sniffing, and in some cases it can cause content to be interpreted more dangerously than the server intended.\n\nX-Content-Type-Options: nosniff tells supporting browsers not to override certain declared content types, especially for scripts and styles. This helps reduce cases where a response served with an unexpected type is still treated as executable content. It is a small header, but it supports a larger discipline: serve content with accurate types, avoid ambiguous responses, and keep untrusted content away from executable contexts.\n\nFile downloads and uploads need special care. User-supplied files should not be served from the same trusted origin in ways that allow them to execute as scripts or render as active HTML. Content-Disposition can help direct browsers to treat content as an attachment when appropriate. Storage names, content types, scanning, isolation, and download behavior should be designed together rather than relying on a file extension or a user-provided MIME type.\n\nMIME controls do not replace content validation. A malicious file can have a harmless-looking extension, and a harmless file can be mislabeled by a client. The server should set accurate response headers based on trusted handling, not blindly echo client-supplied metadata. For static assets, APIs, and uploads, predictable Content-Type behavior makes browser processing safer and troubleshooting easier.",
+  "narrationPoints": [
+    "Content-Type tells clients what kind of content is being served, such as HTML, JSON, JavaScript, CSS, images, or file downloads.",
+    "X-Content-Type-Options: nosniff tells supporting browsers not to override certain declared content types, especially for scripts and styles.",
+    "File downloads and uploads need special care.",
+    "MIME controls do not replace content validation."
+  ]
+};

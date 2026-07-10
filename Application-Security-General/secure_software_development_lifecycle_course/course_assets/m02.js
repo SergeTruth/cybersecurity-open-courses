@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Security Requirements and Planning",
+  "graphicAlt": "Blank placeholder image for a lesson on secure requirements and planning.",
+  "narration": "Security requirements define expectations before design and implementation begin. They connect business goals, user roles, data sensitivity, privacy expectations, availability needs, logging requirements, and regulatory or contractual obligations at a high level. Without these expectations, teams are forced to make security decisions later from incomplete context, and different engineers may choose inconsistent patterns for the same product risk.\n\nGood requirements describe what must be protected and how success will be evaluated. A product that handles sensitive customer records needs different controls than a public marketing site. A feature used by administrators needs stronger access controls than a feature used by anonymous visitors. Security acceptance criteria help product owners, developers, testers, and operations teams agree on when a feature is safe enough to release.\n\nAbuse cases are useful because they describe how a feature might be misused. They do not need to be dramatic. A password reset flow can be abused if it reveals whether an account exists. A file upload feature can be abused if it accepts unexpected file types or stores content in unsafe locations. A reporting API can be abused if it allows users to retrieve data outside their role.\n\nRisk tolerance also belongs in planning. Not every issue has the same urgency, and not every control is appropriate for every system. The important practice is to document assumptions, decision makers, acceptance criteria, and review points. Clear requirements give engineers a security target they can build toward, and they give testers and operators something concrete to verify.",
+  "narrationPoints": [
+    "Security requirements define expectations before design and implementation begin.",
+    "They connect business goals, user roles, data sensitivity, privacy expectations, availability needs, logging requirements, and regulatory or contractual obligations at a high level.",
+    "Without these expectations, teams are forced to make security decisions later from incomplete context, and different engineers may choose inconsistent patterns for the same.",
+    "Good requirements describe what must be protected and how success will be evaluated.",
+    "A product that handles sensitive customer records needs different controls than a public marketing site.",
+    "A feature used by administrators needs stronger access controls than a feature used by anonymous visitors."
+  ]
+};

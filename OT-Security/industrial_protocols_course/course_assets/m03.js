@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Common Industrial Communication Patterns",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Industrial systems use several recurring communication patterns. Recognizing them helps defenders distinguish routine control behavior from meaningful change. The patterns are not tied to one protocol, and a single site may use several of them at the same time.\n\nPolling is common when one system repeatedly asks devices for current values or status. The responding device returns requested data, creating a stable request-and-response rhythm. Command-and-response communication is similar, but the request may direct an operation and the response confirms acceptance, completion, or an error.\n\nPublish-and-subscribe designs separate data producers from consumers. A publisher makes selected information available, and subscribers receive updates without individually polling the source. This can support efficient distribution, but defenders still need to understand which publishers, subscribers, topics, and data flows are approved.\n\nController-to-controller communication coordinates related equipment, interlocks, sequencing, or shared process state. Supervisory communication connects HMIs or SCADA servers with controllers so operators can view conditions and issue authorized actions. These pathways may be highly repetitive and operationally critical.\n\nHistorians collect measurements, alarms, and events for trending, reporting, and analysis. Their collection paths often cross architectural levels, so interfaces and replication routes deserve careful design. Engineering access is less frequent but more privileged. It may support configuration, diagnostics, firmware maintenance, or controller project changes.\n\nA useful baseline describes expected roles, peers, direction, frequency, and operating windows for each pattern. New controller relationships, unexpected publishers, a historian reaching into an unusual zone, or engineering access outside maintenance may warrant review. The pattern identifies what changed; operators, engineers, and change records explain why.",
+  "narrationPoints": [
+    "Industrial systems use several recurring communication patterns.",
+    "Polling is common when one system repeatedly asks devices for current values or status.",
+    "Publish-and-subscribe designs separate data producers from consumers.",
+    "Controller-to-controller communication coordinates related equipment, interlocks, sequencing, or shared process state.",
+    "Historians collect measurements, alarms, and events for trending, reporting, and analysis.",
+    "A useful baseline describes expected roles, peers, direction, frequency, and operating windows for each pattern."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Command and Process Injection",
+  "graphicAlt": "Blank placeholder graphic for module 5",
+  "narration": "Node.js applications sometimes call external processes for image processing, document conversion, system utilities, build steps, or operational scripts. Command injection risk appears when user-controlled input influences the command, arguments, options, environment, file paths, or working directory in an unsafe way. The danger increases when code builds one shell string and asks the operating system to interpret it.\n\nA safer design starts by asking whether a shell is needed at all. Many tasks can be performed through libraries, platform APIs, or process execution modes that pass a fixed executable and controlled arguments separately. Avoiding shell interpretation removes a large class of ambiguity. When external execution is necessary, the set of allowed operations should be narrow and explicit.\n\nArgument handling matters. User choices should map to allowlisted operations, file types, or options rather than becoming free-form command text. File paths should be resolved carefully within intended directories. Environment variables should be controlled. The process should run with the least privilege practical for the task, and the working directory should not be left to chance.\n\nLogging should support investigation without leaking sensitive data. It is useful to record which approved operation was requested, who requested it, and whether it succeeded. It is not useful to dump secrets, full command strings containing private values, or untrusted input into logs without thought. Observability and privacy need to be balanced.\n\nThe defensive principle is to avoid string-built commands, separate commands from arguments, constrain what users can request, prefer safer libraries when practical, and treat process execution as a sensitive sink. The more powerful the command environment, the stricter the design should be.",
+  "narrationPoints": [
+    "Node.js applications sometimes call external processes for image processing, document conversion, system utilities, build steps, or operationa...",
+    "A safer design starts by asking whether a shell is needed at all.",
+    "Argument handling matters.",
+    "Logging should support investigation without leaking sensitive data.",
+    "The defensive principle is to avoid string-built commands, separate commands from arguments, constrain what users can request, prefer safer li..."
+  ]
+};

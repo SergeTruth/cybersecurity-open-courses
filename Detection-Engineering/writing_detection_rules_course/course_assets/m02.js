@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Starting with Behaviors",
+  "graphicAlt": "Detection planning board mapping organizational risks, suspicious behaviors, and detection ideas.",
+  "narration": "Strong detection rules often begin with a behavioral question. What activity are we trying to identify? What suspicious behavior concerns us? What risk would the organization face if this behavior occurred and went unnoticed?\n\nBehavior-first thinking helps teams avoid random rule creation. Instead of starting with a log field and looking for something to match, detection engineers start with a meaningful defensive objective and then determine what evidence could support it.\n\nUseful inputs include threat intelligence, prior incidents, ATT&CK technique mapping, organizational priorities, red team lessons, compliance concerns, and patterns analysts have observed during investigations. These inputs help keep the rule connected to real operational need.\n\nContext matters. The same behavior may be normal in one environment and suspicious in another. A good detection idea considers who performs the activity, where it happens, how often it is expected, and what surrounding events would make it more or less concerning.",
+  "narrationPoints": [
+    "Strong detection rules often begin with a behavioral question. What activity are we trying to identify? What suspicious behavior concerns us? What risk would the organization face if this behavior occurred and went unnoticed?",
+    "Behavior-first thinking helps teams avoid random rule creation. Instead of starting with a log field and looking for something to match, detection engineers start with a meaningful defensive objective and then determine what evidence could support it.",
+    "Useful inputs include threat intelligence, prior incidents, ATT&CK technique mapping, organizational priorities, red team lessons, compliance concerns, and patterns analysts have observed during investigations. These inputs help keep the rule connected to real operational need.",
+    "Context matters. The same behavior may be normal in one environment and suspicious in another. A good detection idea considers who performs the activity, where it happens, how often it is expected, and what surrounding events would make it more or less concerning."
+  ]
+};

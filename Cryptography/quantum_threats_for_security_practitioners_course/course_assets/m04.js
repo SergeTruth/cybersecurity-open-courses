@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Harvest Now, Decrypt Later",
+  "graphicAlt": "Blank white placeholder image for module 4, Harvest Now, Decrypt Later.",
+  "narration": "Harvest now, decrypt later is the risk that an attacker collects encrypted traffic or stored encrypted data today and saves it for possible decryption in the future. The attacker may not be able to read the data now. The concern is that future capability, including cryptographically relevant quantum capability, could expose data whose confidentiality still matters years from now.\n\nThis risk depends heavily on data lifetime. If information only needs to remain confidential for minutes or days, future decryption years later may have limited value. If information must remain confidential for decades, the risk is much more important. Government data, healthcare records, legal records, intellectual property, trade secrets, critical infrastructure details, and sensitive personal information may all have long value windows.\n\nEncrypted network traffic is one area of concern, especially when sessions depend on quantum-vulnerable public-key key exchange. Stored encrypted data is another. Backups, archives, database dumps, document repositories, and captured files may remain sensitive long after the original system is retired. Security teams should understand which data has long confidentiality requirements and where encryption depends on vulnerable key establishment.\n\nThe response is not panic collection of new tools. It is prioritization. Start with data that has long sensitivity, high adversary interest, and exposure to collection. Then identify the systems, protocols, certificates, keys, and vendors involved. Harvest-now-decrypt-later risk becomes manageable when it is tied to concrete data classes and migration plans rather than treated as a vague future worry.",
+  "narrationPoints": [
+    "Harvest now, decrypt later is the risk that an attacker collects encrypted traffic or stored encrypted data today and saves it for possible de...",
+    "This risk depends heavily on data lifetime.",
+    "Encrypted network traffic is one area of concern, especially when sessions depend on quantum-vulnerable public-key key exchange.",
+    "The response is not panic collection of new tools."
+  ]
+};

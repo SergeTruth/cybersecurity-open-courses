@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "SQL Injection Prevention",
+  "graphicAlt": "Blank placeholder graphic for module 3",
+  "narration": "SQL injection occurs when application input is used to construct a database query unsafely, allowing the input to alter query meaning. For JavaScript developers, the highest-value prevention pattern is to avoid building SQL by combining strings with untrusted values. The preferred control is parameterized queries or prepared statements, where values are passed separately from the query structure.\n\nQuery builders and ORMs can reduce risk, but they should not be treated as magic shields. Many libraries are safe for common patterns and unsafe when developers drop into raw query fragments, dynamic clauses, custom sorting, or handwritten filters. The assessment question is not whether an ORM is present. The question is whether untrusted values can influence query structure rather than being bound as values.\n\nDynamic features need careful design. Sorting, filtering, pagination, search fields, and report builders often require parts of a query to change based on user choices. These are places where allowlists are more appropriate than free-form input. For example, a client can be allowed to select from known field names or directions, while the application maps those choices to controlled query components.\n\nInput validation helps, but it does not replace safe query construction. Validation can reject values that do not match business expectations, reduce accidental errors, and improve type safety. Parameterization addresses the database interpretation problem. Least-privileged database accounts add another layer by limiting what the application can do if a query path fails.\n\nStrong SQL injection prevention is boring by design. Use parameterized APIs, constrain dynamic query structure to known choices, avoid raw string-built queries, review escape hatches in ORMs, and test high-risk paths such as search, filters, sort controls, and administrative reporting.",
+  "narrationPoints": [
+    "SQL injection occurs when application input is used to construct a database query unsafely, allowing the input to alter query meaning.",
+    "Query builders and ORMs can reduce risk, but they should not be treated as magic shields.",
+    "Dynamic features need careful design.",
+    "Input validation helps, but it does not replace safe query construction.",
+    "Strong SQL injection prevention is boring by design."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Object-Level and Function-Level Authorization",
+  "graphicAlt": "Blank placeholder image for a lesson on object-level and function-level authorization.",
+  "narration": "Function-level authorization checks whether a caller may perform a particular operation, such as creating a report, changing a setting, approving a request, or deleting a file. Object-level authorization checks whether the caller may perform that operation on a specific object, such as this record, this tenant, this file, this invoice, or this project. Many serious access bugs appear when one type of check exists but the other is missing.\n\nHidden routes and hidden buttons are not sufficient controls. They may improve the user interface, but clients can be modified, requests can be replayed, and APIs can be called directly. Sensitive actions must be enforced server-side and close to the operation. The server should verify both the action and the specific resource, even if the user interface already attempted to hide unavailable options.\n\nTenant boundaries deserve special attention. A user from one organization should not be able to access another organization's records, files, workflows, or administrative operations unless the business model explicitly allows it. Ownership checks, tenant membership, record-level access, file-level access, and administrative role checks should be tested across multiple users and tenants, not assumed from route structure.\n\nInsecure direct object reference concepts at a high level describe cases where a caller changes a resource identifier and reaches something they should not access. The defensive lesson is straightforward: never rely only on an object identifier being hard to guess or hidden in the interface. Every sensitive operation should verify that the authenticated subject is authorized for that specific resource and action.",
+  "narrationPoints": [
+    "Function-level authorization checks whether a caller may perform a particular operation, such as creating a report, changing a setting, approv...",
+    "Hidden routes and hidden buttons are not sufficient controls.",
+    "Tenant boundaries deserve special attention.",
+    "Insecure direct object reference concepts at a high level describe cases where a caller changes a resource identifier and reaches something th..."
+  ]
+};

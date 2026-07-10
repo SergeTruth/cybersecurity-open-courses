@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Timeline and Transfer Analysis",
+  "graphicAlt": "Blank white placeholder image for module 6, Timeline and Transfer Analysis.",
+  "narration": "Timeline and transfer analysis attempts to reconstruct relevant activity across the removable media and host systems. A useful timeline may include device connection times, mount events, user logons, file creation and modification times, recent file references, application activity, endpoint telemetry, DLP alerts, and network or cloud records. The goal is sequence, context, and consistency.\n\nCopied versus moved file interpretation is tricky. A copied file may preserve original modification time while receiving a new creation time on the destination. A moved file within the same file system may preserve more metadata. A file extracted from an archive may receive timestamps from the archive or extraction process. Different tools and operating systems can produce different timestamp patterns.\n\nTime zones and clock drift can complicate the picture. A removable device may be examined on one system, created on another, and mounted by a third system with different time settings. Application records may store UTC, local time, or custom formats. Reports should preserve original timestamps where appropriate and explain how normalization was performed.\n\nUser activity correlation helps avoid overclaiming. If host artifacts show a device connection, recent documents show file interaction, and media timestamps show new files created during the same window, the combined evidence may support a transfer hypothesis. If the only evidence is a connection record, the conclusion should be narrower. Correlation raises confidence; it does not remove the need for caution.\n\nA defensible timeline includes uncertainty notes. It should say which events are observed directly, which are inferred, which are approximate, and which depend on tool interpretation or system behavior. Strong timelines help investigators communicate what likely happened without pretending that every timestamp tells the whole story.",
+  "narrationPoints": [
+    "Timeline and transfer analysis attempts to reconstruct relevant activity across the removable media and host systems.",
+    "Copied versus moved file interpretation is tricky.",
+    "Time zones and clock drift can complicate the picture.",
+    "User activity correlation helps avoid overclaiming.",
+    "A defensible timeline includes uncertainty notes."
+  ]
+};

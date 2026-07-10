@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Toolkit Requirements",
+  "graphicAlt": "Blank placeholder graphic for DFIR toolkit requirements",
+  "narration": "A good toolkit begins with requirements. Before choosing tools, define the kinds of investigations the team actually expects to support. A small organization may need practical triage for endpoint infections, suspicious emails, and account compromise. A larger team may also need cloud investigations, mobile collection, network forensics, malware triage, insider misuse support, and evidence handling for legal or regulatory matters.\n\nOperating system coverage is one of the first requirements. Windows endpoints often require access to event logs, registry artifacts, prefetch data, scheduled tasks, services, browser artifacts, and endpoint security telemetry. Linux systems may require shell history, authentication logs, process data, package records, cron entries, and container artifacts. macOS introduces its own logging, privacy controls, and endpoint management considerations. The toolkit should reflect the systems the organization really operates.\n\nCloud and SaaS environments also shape requirements. A toolkit may need documented procedures for exporting identity logs, mailbox audit records, object storage activity, administrative changes, collaboration activity, and cloud workload evidence. Endpoint-only tools do not answer questions that live in identity providers, email systems, source control platforms, customer support platforms, or infrastructure consoles.\n\nRequirements should also account for network evidence, endpoint coverage, malware triage needs, legal constraints, policy expectations, and team skill level. A tool that produces excellent output but requires expertise the team does not have may not be useful during a crisis. The best toolkit is matched to mission, environment, authority, and people. It supports the work the team is allowed and prepared to perform.",
+  "narrationPoints": [
+    "A good toolkit begins with requirements.",
+    "Operating system coverage is one of the first requirements.",
+    "Cloud and SaaS environments also shape requirements.",
+    "Requirements should also account for network evidence, endpoint coverage, malware triage needs, legal constraints, policy expectations, and..."
+  ]
+};

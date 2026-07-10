@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Misconfiguration, Human Error, and Insider Risk",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Not every serious OT event begins with an external attacker. Configuration mistakes, weak change control, excessive privileges, and ordinary operational errors can disrupt production or create pathways for later compromise. These risks deserve the same disciplined analysis as malicious threats.\n\nAn incorrect firewall rule may expose a control network or block a required communication. A change to controller logic or an HMI screen may affect process behavior or operator decisions. Engineering workstations are especially sensitive because their tools can modify many devices. Using them for email, web browsing, or unrelated administration expands both error and malware exposure.\n\nPoor change control makes failures harder to detect and reverse. Teams should know what changed, who approved it, what was tested, when it was deployed, and how to restore the previous state. Emergency changes may be necessary, but they still require follow-up documentation and review.\n\nExcessive privilege increases the consequence of a mistake or compromised account. Separate routine operation, engineering, administration, and vendor roles. Use individual identities where systems support them, control shared emergency credentials, and review access when personnel or contracts change.\n\nInsider risk includes malicious action, but prevention cannot rely on distrust alone. Clear procedures, usable tools, peer review for sensitive changes, training, monitoring, and a healthy reporting culture reduce accidental and intentional misuse. Operators should be able to report unexpected behavior without fear that every anomaly will be treated as personal failure.\n\nHuman reliability improves when the system supports good decisions. Maintain accurate diagrams and backups, make approved access easier than workarounds, test changes, and learn from near misses. OT security is partly the engineering of conditions in which one mistake does not become a facility-wide incident.",
+  "narrationPoints": [
+    "Not every serious OT event begins with an external attacker.",
+    "An incorrect firewall rule may expose a control network or block a required communication.",
+    "Poor change control makes failures harder to detect and reverse.",
+    "Excessive privilege increases the consequence of a mistake or compromised account.",
+    "Insider risk includes malicious action, but prevention cannot rely on distrust alone.",
+    "Human reliability improves when the system supports good decisions."
+  ]
+};

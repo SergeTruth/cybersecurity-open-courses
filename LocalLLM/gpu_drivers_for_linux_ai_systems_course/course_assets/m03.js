@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "NVIDIA Driver and CUDA Concepts",
+  "graphicAlt": "Blank placeholder image for module 3: NVIDIA Driver and CUDA Concepts",
+  "narration": "NVIDIA-based Linux AI systems commonly involve the NVIDIA driver, CUDA-related runtime libraries, and sometimes a CUDA toolkit. At a high level, the driver enables GPU operation and exposes capabilities to the system. The CUDA toolkit provides development tools and libraries used to build or run CUDA applications. These are related, but they are not the same thing.\n\nnvidia-smi is a common first check because it reports driver information, detected NVIDIA GPUs, utilization, memory use, temperature, power, and processes using the device. It is a useful signal, but it is not the final proof that a specific AI framework is working. A Python library, container, or inference runtime may still fail because of missing libraries, incompatible versions, or incorrect environment configuration.\n\nCompatibility planning matters. Driver versions, CUDA runtime libraries, cuDNN and related acceleration libraries, Python packages, containers, and inference runtimes may all have version expectations. Randomly mixing versions can create errors that look like model failures but are really stack mismatches. Stable AI systems benefit from known-good combinations rather than constant chasing of the newest packages.\n\nGPU visibility should be checked from the places that matter: the host shell, Python environment, container, notebook, and inference server. Each layer can have different visibility and library paths. Document the driver version, runtime versions, container image, model runtime, and validation results. That documentation turns a working setup into something recoverable.",
+  "narrationPoints": [
+    "NVIDIA-based Linux AI systems commonly involve the NVIDIA driver, CUDA-related runtime libraries, and sometimes a CUDA toolkit.",
+    "nvidia-smi is a common first check because it reports driver information, detected NVIDIA GPUs, utilization, memory use, temperature, power, and...",
+    "Compatibility planning matters.",
+    "GPU visibility should be checked from the places that matter: the host shell, Python environment, container, notebook, and inference server."
+  ]
+};

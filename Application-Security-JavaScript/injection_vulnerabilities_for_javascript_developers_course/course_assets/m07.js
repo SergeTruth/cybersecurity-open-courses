@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Browser-Side Injection and XSS Contexts",
+  "graphicAlt": "Blank placeholder graphic for module 7",
+  "narration": "Cross-site scripting is browser-side injection. It happens when untrusted content is interpreted as executable script or unsafe markup in a browser context. JavaScript developers need to think about server-rendered HTML, DOM insertion points, frontend framework behavior, HTML attributes, URLs, CSS, JavaScript contexts, and JSON embedded in pages. The browser is an interpreter with many sub-contexts.\n\nOutput encoding depends on where the data is placed. Text inside an HTML element is not the same as data inside an attribute. A URL context is different from a JavaScript string context. CSS and JSON have their own rules. One generic escaping function cannot safely handle every browser location. Developers should use framework-supported safe rendering patterns and context-aware encoding.\n\nSafe DOM APIs help reduce risk. Setting text content is different from asking the browser to parse markup. Building elements through APIs is generally safer than injecting large strings of HTML. When HTML sanitization is necessary, it should be done with a well-reviewed library and a clear understanding of what the sanitizer allows. Sanitization is not a substitute for good design.\n\nFrontend frameworks often provide escaping by default, but escape hatches exist. Features that render raw markup, build dynamic URLs, bind styles, or integrate third-party widgets deserve extra review. Server-provided data should still be treated as untrusted from the browser perspective unless the context and encoding are controlled.\n\nContent Security Policy can provide defense in depth by limiting certain resource loading and script execution patterns. It does not replace output encoding, safe DOM APIs, or server-side controls. Client-side validation also does not protect the server. Strong browser-side injection prevention combines safe rendering, context-aware encoding, review of escape hatches, and layered browser defenses.",
+  "narrationPoints": [
+    "Cross-site scripting is browser-side injection.",
+    "Output encoding depends on where the data is placed.",
+    "Safe DOM APIs help reduce risk.",
+    "Frontend frameworks often provide escaping by default, but escape hatches exist.",
+    "Content Security Policy can provide defense in depth by limiting certain resource loading and script execution patterns."
+  ]
+};

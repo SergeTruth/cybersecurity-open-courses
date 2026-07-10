@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Is OT Telemetry?",
+  "graphicAlt": "Instructional illustration for What Is OT Telemetry?.",
+  "narration": "OT telemetry is observable data produced by industrial systems, networks, devices, applications, and physical processes. It is the evidence that helps teams understand what exists, what is communicating, what changed, and how the operation responded.\n\nTelemetry can include network packets and flow records, device health events, controller status, process values, alarms, user authentication, application logs, remote-access sessions, file activity, and configuration changes. Each source describes a different layer of the environment.\n\nRaw telemetry is not the same as visibility. A record becomes useful when it has reliable time, asset identity, operational meaning, sufficient retention, and an owner who understands the source. A device address or alarm code without context may be technically accurate but difficult to act upon.\n\nSecurity teams use telemetry to build inventory, establish expected behavior, design detections, investigate anomalies, reconstruct incidents, and verify architecture. Operations and engineering teams use many of the same records for troubleshooting, maintenance, quality, reliability, and performance analysis.\n\nCollection must respect OT constraints. Passive network monitoring and existing logs are often preferred near sensitive devices. New agents, active queries, and configuration changes should be tested and approved so visibility does not introduce latency, instability, or unsupported behavior.\n\nA telemetry program asks practical questions: what activity matters, which source can observe it, what is missing, how trustworthy is the data, and who responds when collection fails? Strong telemetry does not guarantee security, but it replaces assumptions with evidence that security, operations, and engineering can interpret together.",
+  "narrationPoints": [
+    "OT telemetry is observable data produced by industrial systems, networks, devices, applications, and physical processes.",
+    "Telemetry can include network packets and flow records, device health events, controller status, process values, alarms, user authentication...",
+    "Raw telemetry is not the same as visibility.",
+    "Security teams use telemetry to build inventory, establish expected behavior, design detections, investigate anomalies, reconstruct incidents, and...",
+    "Collection must respect OT constraints."
+  ]
+};

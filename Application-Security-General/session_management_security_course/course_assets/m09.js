@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Blank placeholder graphic for module 9, Course Summary and Key Takeaways.",
+  "narration": "Session management protects authenticated user state after login. Authentication establishes identity, but sessions carry that identity through later requests. Because session identifiers and tokens can grant access, they must be generated securely, transmitted safely, stored carefully, validated server-side, and removed or renewed when security conditions change. Session management is the bridge between sign-in and every protected action that follows.\n\nStrong session management combines secure identifiers, protected cookies, lifecycle management, monitoring, server-side validation, and careful framework configuration. Use mature framework features where possible. Configure Secure, HttpOnly, SameSite, domain, path, and lifetime settings intentionally. Apply idle and absolute timeouts according to risk. Rotate or renew session state at sensitive transitions. Invalidate sessions when logout, account, credential, or privilege events require it.\n\nThe goal is to preserve user identity securely throughout an authenticated session while minimizing exposure if a session is compromised. That means balancing usability and security, treating tokens like credentials, avoiding unnecessary custom implementations, and testing the behaviors users and defenders rely on. When teams review session lifecycle, cookie and token handling, logging, and authorization together, session security becomes a practical engineering discipline instead of an invisible assumption.",
+  "narrationPoints": [
+    "Session management protects authenticated user state after login.",
+    "Strong session management combines secure identifiers, protected cookies, lifecycle management, monitoring, server-side validation, and carefu...",
+    "The goal is to preserve user identity securely throughout an authenticated session while minimizing exposure if a session is compromised."
+  ]
+};

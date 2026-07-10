@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "macOS System Layout",
+  "graphicAlt": "Blank placeholder graphic for macOS system layout",
+  "narration": "Understanding macOS layout gives investigators a map for likely evidence locations. Applications are often installed under /Applications, but user-specific application data usually lives elsewhere. User home directories are under /Users, and they may contain documents, downloads, desktop files, browser data, shell history, application traces, and a user-specific Library directory. That user Library is one of the richest evidence areas on a Mac.\n\n/Library contains system-wide application support data, launch items, logs, preferences, and configuration shared across users. ~/Library contains user-specific preferences, caches, saved application state, browser and productivity app artifacts, application support files, containers, and recent activity traces. The distinction between system Library and user Library matters because it helps separate device-wide configuration from activity tied to a specific profile.\n\n/System contains operating system components and is protected on modern macOS versions by platform security features. /private/var can contain logs, temporary data, databases, spool files, and system state. Temporary directories and caches can be useful, but they may be volatile and heavily affected by normal operation. Analysts should understand what is persistent, what is user-specific, and what may change quickly.\n\nSystem context matters. A personal laptop, managed enterprise Mac, shared lab workstation, developer machine, or Apple Silicon device may expose different artifacts and collection constraints. macOS privacy controls, system integrity protections, encryption, mobile device management, and user permissions all affect what can be collected and interpreted. The folder structure is the starting point, not the whole investigation.",
+  "narrationPoints": [
+    "Understanding macOS layout gives investigators a map for likely evidence locations.",
+    "/Library contains system-wide application support data, launch items, logs, preferences, and configuration shared across users.",
+    "/System contains operating system components and is protected on modern macOS versions by platform security features.",
+    "System context matters."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Industrial protocols are the communication rules that connect controllers, HMIs, sensors, actuators, historians, engineering tools, and supervisory systems. Their messages carry operational data and, in many cases, actions that can affect physical processes.\n\nCommon patterns include polling, command and response, publish and subscribe, controller coordination, historian collection, supervisory control, and privileged engineering access. Defenders can use these stable relationships to establish baselines and identify meaningful change.\n\nModbus offers simple reads and writes but often relies on external controls for trust. DNP3 supports distributed telemetry and control, including efficient event reporting. OPC technologies enable interoperable data exchange, while OPC UA adds modern security capabilities that still require sound certificate and configuration management.\n\nEtherNet/IP and PROFINET operate within engineered vendor ecosystems where timing, supported configurations, and device roles matter. Across every protocol, technical interpretation must include process state, architecture, user authority, and planned maintenance.\n\nGood protection combines passive protocol-aware monitoring, segmentation, controlled engineering and remote access, secure configuration, change management, and coordinated incident response. Many industrial protocols were designed for reliability before current cybersecurity expectations. Effective security respects that history without accepting unmanaged risk, bringing security, operations, and engineering together around evidence and safe action.",
+  "narrationPoints": [
+    "Industrial protocols are the communication rules that connect controllers, HMIs, sensors, actuators, historians, engineering tools, and...",
+    "Common patterns include polling, command and response, publish and subscribe, controller coordination, historian collection, supervisory control,...",
+    "Modbus offers simple reads and writes but often relies on external controls for trust.",
+    "EtherNet/IP and PROFINET operate within engineered vendor ecosystems where timing, supported configurations, and device roles matter.",
+    "Good protection combines passive protocol-aware monitoring, segmentation, controlled engineering and remote access, secure configuration, change..."
+  ]
+};

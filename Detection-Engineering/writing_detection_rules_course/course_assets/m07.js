@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Tuning and Continuous Improvement",
+  "graphicAlt": "Detection tuning lifecycle wheel showing feedback, analysis, refinement, validation, deployment, and review.",
+  "narration": "Environments change. Threats evolve. Business processes adapt. Detection rules should evolve as well. A rule that worked well last quarter may need changes after a new system, new logging pipeline, or new operational pattern appears.\n\nTuning may involve refining conditions, updating exclusions, adjusting thresholds, improving enrichment, changing severity, adding triage notes, or revising documentation. The goal is to improve value without hiding meaningful activity.\n\nOperational feedback is one of the best sources of improvement. Analysts can identify confusing alerts, repeated false positives, missing context, and signals that require too much manual work. Detection engineers can use that feedback to make rules more useful.\n\nContinuous improvement turns detections into living defensive assets. Review cycles, ownership, version history, testing notes, and performance metrics help teams keep rules aligned with changing threats and changing environments.",
+  "narrationPoints": [
+    "Environments change. Threats evolve. Business processes adapt. Detection rules should evolve as well. A rule that worked well last quarter may need changes after a new system, new logging pipeline, or new operational pattern appears.",
+    "Tuning may involve refining conditions, updating exclusions, adjusting thresholds, improving enrichment, changing severity, adding triage notes, or revising documentation. The goal is to improve value without hiding meaningful activity.",
+    "Operational feedback is one of the best sources of improvement. Analysts can identify confusing alerts, repeated false positives, missing context, and signals that require too much manual work. Detection engineers can use that feedback to make rules more useful.",
+    "Continuous improvement turns detections into living defensive assets. Review cycles, ownership, version history, testing notes, and performance metrics help teams keep rules aligned with changing threats and changing environments."
+  ]
+};

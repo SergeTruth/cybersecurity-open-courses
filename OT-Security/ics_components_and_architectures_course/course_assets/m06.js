@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Engineering Workstations and Historians",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "An engineering workstation contains specialized software used to configure, program, diagnose, and maintain control-system components. It may hold controller projects, HMI applications, device profiles, firmware tools, network settings, and vendor utilities. Because it can make privileged operational changes, it is one of the most security-sensitive assets in an ICS.\n\nEngineering work should follow approved pathways and change procedures. Dedicated accounts, controlled removable media, verified software, protected project repositories, and known-good backups help preserve integrity. Remote engineering access should be time-limited, monitored, and tied to a specific work authorization.\n\nA historian performs a different role. It collects process values, alarms, events, and production information over time. Operators and engineers use trends for troubleshooting and performance analysis, while business systems may consume selected data for reporting, planning, or quality functions.\n\nHistorians are high-value because their data reveals how the process behaves. They also often connect operational and enterprise information flows. Architecture should avoid uncontrolled direct access from business networks into control systems. Replication, brokered interfaces, or services in an industrial DMZ can reduce unnecessary paths.\n\nAccess control should separate users who view data from users who administer collection, interfaces, or retention. Monitor changes to tags, collection sources, replication destinations, service identities, and time settings. Protect historian availability and integrity so incident responders can trust the timeline.\n\nEngineering workstations can change the process; historians can explain the process. Both deserve strong inventory, endpoint management, backup, logging, and recovery planning. Security teams should preserve their specialized functions rather than treating them as interchangeable office computers.",
+  "narrationPoints": [
+    "An engineering workstation contains specialized software used to configure, program, diagnose, and maintain control-system components.",
+    "Engineering work should follow approved pathways and change procedures.",
+    "A historian performs a different role.",
+    "Historians are high-value because their data reveals how the process behaves.",
+    "Access control should separate users who view data from users who administer collection, interfaces, or retention.",
+    "Engineering workstations can change the process; historians can explain the process."
+  ]
+};

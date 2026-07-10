@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Plists, Preferences, and Application Data",
+  "graphicAlt": "Blank placeholder graphic for macOS plists and application data",
+  "narration": "Property lists, commonly called plists, are a common macOS format for configuration and state. They may store system settings, application preferences, recent items, launch configuration, saved state references, and user-specific behavior. Plists can be XML or binary, and analysts should use tools that preserve and interpret the data correctly rather than relying on casual text viewing alone.\n\nUser preferences and application data often live under ~/Library. Browser profiles, productivity apps, chat tools, developer utilities, sync clients, and enterprise applications may all leave evidence there. Application support folders can contain databases, caches, configuration, logs, extensions, and local state. These artifacts can help explain what a user or application did, but they should be handled carefully because they may contain sensitive data.\n\nRecent files, saved state, and application traces can be useful for reconstructing activity. For example, an application may remember recently opened documents, windows, projects, downloads, or account associations. Browser and productivity app artifacts may show history, downloads, session data, local databases, and synchronization clues. The exact evidence depends on the application version, privacy settings, and whether data is stored locally or in a cloud service.\n\nPlists and application artifacts need context and corroboration. A preference value may be stale. A recent item may come from sync behavior rather than direct local interaction. A cached file may not prove it was viewed. Strong analysis compares plists with logs, file timestamps, quarantine attributes, user activity artifacts, and case context before making a finding.",
+  "narrationPoints": [
+    "Property lists, commonly called plists, are a common macOS format for configuration and state.",
+    "User preferences and application data often live under ~/Library.",
+    "Recent files, saved state, and application traces can be useful for reconstructing activity.",
+    "Plists and application artifacts need context and corroboration."
+  ]
+};

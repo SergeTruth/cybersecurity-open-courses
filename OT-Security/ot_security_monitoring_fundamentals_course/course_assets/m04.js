@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Passive Monitoring in OT",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Passive monitoring observes existing communication without sending probes or commands to the monitored devices. This approach is often preferred in OT because some legacy controllers, protocol stacks, and embedded devices are sensitive to unexpected traffic. Visibility should not create an avoidable production or safety risk.\n\nA network tap can provide a copy of traffic while remaining electrically isolated from the monitored path. A switch SPAN or mirror port can also copy selected traffic to a sensor, though configuration, capacity, and switch behavior must be reviewed. Sensors should be placed where they can observe meaningful flows without becoming part of the control path.\n\nPassive collection can identify devices, protocols, communication pairs, timing, and some command types. It is particularly useful around control-area boundaries, industrial DMZs, remote-access gateways, and links between site operations and lower-level networks.\n\nPassive monitoring has limits. It may not see dormant assets, serial networks, encrypted content, traffic on an unobserved switch, or activity that occurs entirely within a device. Asset inventory, host logs, vendor records, configuration review, and physical verification remain necessary.\n\nDeployment requires engineering coordination. Confirm that taps, mirror ports, sensors, power, and management connections do not interfere with redundancy or timing. Secure the monitoring platform itself, separate its management path, restrict access to captured data, and define what happens if collection stops.\n\nThe principle is observe safely and interpret carefully. Passive evidence reduces blind spots, but it does not automatically prove that an asset is secure or that every action is authorized. Monitoring becomes reliable when its coverage, limitations, ownership, and operational assumptions are documented.",
+  "narrationPoints": [
+    "Passive monitoring observes existing communication without sending probes or commands to the monitored devices.",
+    "This approach is often preferred in OT because some legacy controllers, protocol stacks, and embedded devices are sensitive to unexpected traffic.",
+    "Visibility should not create an avoidable production or safety risk.",
+    "A network tap can provide a copy of traffic while remaining electrically isolated from the monitored path.",
+    "A switch SPAN or mirror port can also copy selected traffic to a sensor, though configuration, capacity, and switch behavior must be reviewed.",
+    "Sensors should be placed where they can observe meaningful flows without becoming part of the control path."
+  ]
+};

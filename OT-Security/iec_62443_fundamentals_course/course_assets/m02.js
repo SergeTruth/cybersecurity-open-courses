@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why IEC 62443 Exists",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Industrial cyber risk does not fit neatly into traditional information-security assumptions. A loss of confidentiality may expose engineering information, but a loss of system integrity or availability can also affect machinery, product quality, safety, environmental conditions, and essential services. Security decisions must be evaluated against physical operations.\n\nOT environments combine specialized control devices, conventional computers, industrial networks, safety functions, cloud services, remote vendors, and human operators. Equipment may remain in service for decades. Patching and architecture changes may require vendor support, testing, maintenance windows, and carefully planned recovery.\n\nWithout a common framework, each organization or supplier may define security differently. An asset owner may request a secure system without describing risk or acceptance criteria. A supplier may describe a component as secure without explaining its capabilities or assumptions. An integrator may deliver a working process while leaving remote access and account ownership unresolved.\n\nIEC 62443 creates a common language for these conversations. It connects business and operational risk to system requirements, supplier capabilities, service responsibilities, and lifecycle practices. It encourages teams to define boundaries, identify required communication, select protection based on context, and preserve evidence that decisions were implemented.\n\nThe standards also reinforce that cybersecurity is continuous. Operations change, software ages, vendors release updates, and threat conditions evolve. Security must be considered during design, procurement, integration, commissioning, operation, maintenance, and retirement. IEC 62443 exists to make that shared work more consistent, accountable, and suited to industrial reality.",
+  "narrationPoints": [
+    "Industrial cyber risk does not fit neatly into traditional information-security assumptions.",
+    "OT environments combine specialized control devices, conventional computers, industrial networks, safety functions, cloud services, remote...",
+    "Without a common framework, each organization or supplier may define security differently.",
+    "IEC 62443 creates a common language for these conversations.",
+    "The standards also reinforce that cybersecurity is continuous."
+  ]
+};

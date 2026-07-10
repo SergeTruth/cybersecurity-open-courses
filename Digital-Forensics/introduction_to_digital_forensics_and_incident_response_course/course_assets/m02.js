@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why DFIR Matters",
+  "graphicAlt": "Placeholder illustration for why DFIR matters",
+  "narration": "DFIR becomes important whenever an organization needs to understand a potentially harmful event and respond without making the situation worse. A breach investigation may require analysts to reconstruct attacker activity across endpoints, identities, email, cloud services, and network logs. Without a structured DFIR approach, the team may see fragments of the event but miss the sequence that explains how the compromise started and where it spread.\n\nRansomware is a common example. The immediate pressure is to restore service, but a safe recovery also depends on knowing how the attacker got in, what accounts were used, whether data was staged or exfiltrated, and whether persistence remains. If a team rebuilds systems without understanding the root cause, the same weakness may allow the incident to repeat.\n\nBusiness email compromise, insider misuse, malware infections, cloud incidents, and data exposure all create similar demands. Investigators need reliable records of authentication, mailbox rules, file access, administrative actions, device activity, and network traffic. Responders need to decide which accounts to disable, which systems to isolate, which keys to rotate, and which stakeholders must be notified. Good DFIR connects those investigative findings to operational decisions.\n\nThe value of DFIR also extends beyond the immediate incident. Lessons learned can strengthen logging, access controls, segmentation, backup practices, security awareness, and detection coverage. Organizations that treat incidents as learning opportunities become more resilient. They do not simply ask how to close the ticket. They ask what the event revealed about their environment and how to reduce the chance, impact, or duration of the next incident.",
+  "narrationPoints": [
+    "DFIR becomes important whenever an organization needs to understand a potentially harmful event and respond without making the situation worse.",
+    "A breach investigation may require analysts to reconstruct attacker activity across endpoints, identities, email, cloud services, and network logs.",
+    "Without a structured DFIR approach, the team may see fragments of the event but miss the sequence that explains how the compromise started and.",
+    "Ransomware is a common example.",
+    "The immediate pressure is to restore service, but a safe recovery also depends on knowing how the attacker got in, what accounts were used.",
+    "If a team rebuilds systems without understanding the root cause, the same weakness may allow the incident to repeat."
+  ]
+};

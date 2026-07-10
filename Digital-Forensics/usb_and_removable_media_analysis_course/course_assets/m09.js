@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways.",
+  "narration": "USB and removable media analysis combines safe evidence handling, host artifact review, file system analysis, timeline correlation, and careful interpretation. The media itself may contain important files, but the host systems often explain when the device appeared, which user context was active, and whether there are signs of file interaction or transfer.\n\nStrong investigations begin with preservation. Unknown media should not be casually connected to production systems. Investigators should document condition, apply appropriate write protection where available, create forensic images or verified working copies, hash evidence, maintain chain of custody, and preserve original media. These steps make later analysis more repeatable and defensible.\n\nDevice identity requires caution. Volume labels, serial numbers, controller identifiers, file systems, drive letters, and host records may not all agree. A device may be reformatted, used through an adapter, or reported differently across systems. Identity findings are strongest when multiple details align across physical evidence, media metadata, and host artifacts.\n\nAnalysis should separate observations from conclusions. Device connection is not automatically file transfer. File presence is not automatically user intent. Timestamps are important but can be affected by file system behavior, copying, time zones, clock drift, application behavior, or tool presentation. Timelines should include corroboration and uncertainty notes.\n\nThe goal is to preserve evidence, reconstruct relevant activity, document uncertainty, and support defensible investigative findings. Good removable media analysis is practical and careful: it protects original evidence, uses multiple sources, avoids unsafe handling, and communicates conclusions in proportion to the artifacts.",
+  "narrationPoints": [
+    "USB and removable media analysis combines safe evidence handling, host artifact review, file system analysis, timeline correlation, and...",
+    "Strong investigations begin with preservation.",
+    "Device identity requires caution.",
+    "Analysis should separate observations from conclusions.",
+    "The goal is to preserve evidence, reconstruct relevant activity, document uncertainty, and support defensible investigative findings."
+  ]
+};

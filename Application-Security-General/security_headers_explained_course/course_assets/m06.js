@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Referrer and Privacy-Related Headers",
+  "graphicAlt": "Blank placeholder image for Referrer and Privacy-Related Headers.",
+  "narration": "Referrer-Policy controls how much referrer information a browser sends when navigating or loading resources. The referrer can reveal the page a user came from, and sometimes the full URL of that page. If URLs contain sensitive values such as tokens, identifiers, search terms, email addresses, or internal paths, referrer data can leak information to third parties, analytics systems, support tooling, or logs outside the application team.\n\nCommon policies include strict-origin-when-cross-origin, no-referrer, and same-origin. strict-origin-when-cross-origin sends full referrer information for same-origin requests, but only the origin when crossing to another site over HTTPS, and less information in less secure cases. no-referrer sends no referrer information. same-origin sends referrers only within the same origin. The right choice depends on privacy expectations, analytics needs, and integration requirements.\n\nThere are tradeoffs. Product and analytics teams may rely on referrer information to understand navigation and campaign flows. Privacy and security teams may want to minimize cross-site leakage. A clear policy helps teams make an intentional decision instead of inheriting whatever the browser default happens to be. It also creates a standard that can be tested and documented across applications.\n\nReferrer-Policy is not a substitute for safe URL design. Sensitive data should not be placed in URLs because URLs appear in browser history, logs, bookmarks, screenshots, analytics, network tools, and referrer data. Use server-side state, request bodies where appropriate, short-lived opaque identifiers, and careful logging practices. The header reduces unnecessary leakage, but the application should avoid putting secrets in leak-prone locations in the first place.",
+  "narrationPoints": [
+    "Referrer-Policy controls how much referrer information a browser sends when navigating or loading resources.",
+    "Common policies include strict-origin-when-cross-origin, no-referrer, and same-origin.",
+    "There are tradeoffs.",
+    "Referrer-Policy is not a substitute for safe URL design."
+  ]
+};

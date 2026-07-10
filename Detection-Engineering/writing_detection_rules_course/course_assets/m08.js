@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Building a Detection Engineering Mindset",
+  "graphicAlt": "Detection engineering mindset illustration showing outcomes, collaboration, empathy, feedback, documentation, and improvement.",
+  "narration": "Writing detection rules is not merely a technical exercise. It requires curiosity, communication, operational awareness, and empathy for analysts who rely on alerts during stressful situations.\n\nEffective detection engineers focus on outcomes rather than alert counts. They ask whether a rule helps defenders make better decisions, whether it fits the investigation workflow, and whether it gives enough context to act responsibly.\n\nCollaboration matters. Detection engineers benefit from feedback from SOC analysts, incident responders, threat hunters, IT teams, cloud teams, identity teams, and application owners. Each group understands part of the environment and can help improve signal quality.\n\nSustainable detection engineering depends on habits: document decisions, track assumptions, test changes, review performance, retire rules that no longer add value, and improve detections as the environment changes. The objective is helping defenders identify and investigate activity that matters.",
+  "narrationPoints": [
+    "Writing detection rules is not merely a technical exercise. It requires curiosity, communication, operational awareness, and empathy for analysts who rely on alerts during stressful situations.",
+    "Effective detection engineers focus on outcomes rather than alert counts. They ask whether a rule helps defenders make better decisions, whether it fits the investigation workflow, and whether it gives enough context to act responsibly.",
+    "Collaboration matters. Detection engineers benefit from feedback from SOC analysts, incident responders, threat hunters, IT teams, cloud teams, identity teams, and application owners. Each group understands part of the environment and can help improve signal quality.",
+    "Sustainable detection engineering depends on habits: document decisions, track assumptions, test changes, review performance, retire rules that no longer add value, and improve detections as the environment changes. The objective is helping defenders identify and investigate activity that matters."
+  ]
+};

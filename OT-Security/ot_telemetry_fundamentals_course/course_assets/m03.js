@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Industrial Network Telemetry",
+  "graphicAlt": "Instructional illustration for Industrial Network Telemetry.",
+  "narration": "Industrial network telemetry describes communication among HMIs, PLCs, RTUs, SCADA servers, historians, engineering workstations, gateways, and remote-access systems. It can show source and destination, protocol, direction, timing, volume, session behavior, and in some cases the industrial operation represented.\n\nStable OT networks often produce recognizable patterns. An HMI polls a controller, a historian collects values, and an engineering workstation communicates during approved maintenance. New peers, changed frequency, unexpected protocols, or traffic crossing an unintended boundary can become useful investigation signals.\n\nPassive collection is commonly used to reduce disruption risk. Network taps or switch mirror ports copy existing traffic to a sensor without asking devices to respond. Placement matters: sensors near industrial DMZs, control-area boundaries, remote links, and key supervisory paths see different parts of the system.\n\nCollection design should account for redundancy, bandwidth, management access, and failure. A monitoring sensor should not become part of the control path or create an uncontrolled bridge. Captured data also reveals sensitive architecture and should be protected accordingly.\n\nNetwork telemetry has blind spots. It may miss serial segments, encrypted content, dormant devices, local actions, traffic inside an unobserved switch, or devices hidden behind a gateway. Metadata can still be valuable when content is unavailable, but confidence must reflect the actual coverage.\n\nInterpret communication with asset and process context. A protocol write is not automatically malicious, and a missing connection may reflect a planned shutdown. Network evidence becomes actionable when it is combined with maintenance records, device roles, endpoint logs, process trends, and engineering knowledge.",
+  "narrationPoints": [
+    "Industrial network telemetry describes communication among HMIs, PLCs, RTUs, SCADA servers, historians, engineering workstations, gateways, and...",
+    "Stable OT networks often produce recognizable patterns.",
+    "Passive collection is commonly used to reduce disruption risk.",
+    "Collection design should account for redundancy, bandwidth, management access, and failure.",
+    "Network telemetry has blind spots."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Roles and Responsibilities",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "IEC 62443 distributes cybersecurity responsibility across the industrial lifecycle. The asset owner owns or operates the industrial environment and remains accountable for understanding operational risk, defining security requirements, approving residual risk, and sustaining the security program.\n\nSystem integrators and automation solution providers turn requirements into a working architecture. They select and configure components, define zones and conduits, establish accounts and communication paths, test controls, and deliver documentation. Their work must satisfy both cybersecurity objectives and process requirements.\n\nProduct suppliers develop hardware and software used in industrial systems. They are responsible for secure development practices, documented capabilities, vulnerability handling, update information, and clear assumptions about how a product should be deployed. A product's capability is useful only when the system design uses it correctly.\n\nService and maintenance providers preserve or modify the system after commissioning. Their remote access, tools, credentials, change practices, and incident communication become part of the security architecture. Contracts and operating procedures should define what access is permitted, how it is approved, and what evidence must be retained.\n\nShared responsibility does not mean vague responsibility. Projects should assign ownership for risk decisions, configuration, accounts, patching, backups, monitoring, incident response, documentation, and end-of-life planning. Handoffs between suppliers, integrators, and operators are common failure points. Acceptance criteria should verify that required controls work and that the asset owner receives the information needed to operate them.\n\nSecurity is strongest when every role understands both its obligations and its dependencies. No participant can transfer all risk to another party, and no single participant can manage the entire lifecycle alone.",
+  "narrationPoints": [
+    "IEC 62443 distributes cybersecurity responsibility across the industrial lifecycle.",
+    "System integrators and automation solution providers turn requirements into a working architecture.",
+    "Product suppliers develop hardware and software used in industrial systems.",
+    "Service and maintenance providers preserve or modify the system after commissioning.",
+    "Shared responsibility does not mean vague responsibility.",
+    "Security is strongest when every role understands both its obligations and its dependencies."
+  ]
+};

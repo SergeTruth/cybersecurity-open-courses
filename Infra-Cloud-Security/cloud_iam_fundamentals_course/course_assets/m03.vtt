@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:03,525
+Permissions describe allowed actions on resources.
+
+2
+00:00:03,525 --> 00:00:13,629
+A permission might allow reading an object, starting a virtual machine, listing secrets, changing a firewall rule, creating a key, or updating a policy.
+
+3
+00:00:13,629 --> 00:00:18,486
+Policies are the rules that grant, deny, or condition those permissions.
+
+4
+00:00:18,486 --> 00:00:29,139
+They may be attached to an identity, a resource, a group, a role, an organization, a folder, a subscription, a project, or another scope depending on the provider.
+
+5
+00:00:29,139 --> 00:00:32,272
+Cloud environments use several access models.
+
+6
+00:00:32,272 --> 00:00:38,382
+Role-based access control, or RBAC, grants roles that bundle permissions for a job or scope.
+
+7
+00:00:38,382 --> 00:00:50,053
+Attribute-based access control, or ABAC, uses attributes such as tags, labels, departments, environments, resource names, or identity properties to make access decisions.
+
+8
+00:00:50,053 --> 00:00:53,578
+Identity-based policies travel with the principal.
+
+9
+00:00:53,578 --> 00:00:57,495
+Resource-based policies define who can access a resource.
+
+10
+00:00:57,495 --> 00:01:01,176
+Conditions can limit when, where, or how access is used.
+
+11
+00:01:01,176 --> 00:01:03,918
+Explicit deny rules can override grants.
+
+12
+00:01:03,918 --> 00:01:10,262
+Effective access is the access a principal actually has after all relevant rules are evaluated.
+
+13
+00:01:10,262 --> 00:01:14,727
+It can be different from what one visible role assignment suggests.
+
+14
+00:01:14,727 --> 00:01:23,187
+A user may inherit access from a group, receive additional access through a role assumption path, be blocked by an explicit deny,
+
+15
+00:01:23,187 --> 00:01:25,928
+or gain access through a resource policy.
+
+16
+00:01:25,928 --> 00:01:33,057
+A workload may look limited in one project but have a token that can impersonate a service account elsewhere.
+
+17
+00:01:33,057 --> 00:01:36,895
+This is why IAM review must look beyond the first role name.
+
+18
+00:01:36,895 --> 00:01:40,106
+Practical IAM analysis asks several questions.
+
+19
+00:01:40,106 --> 00:01:42,613
+What principal is requesting access?
+
+20
+00:01:42,613 --> 00:01:44,336
+What action is requested?
+
+21
+00:01:44,336 --> 00:01:46,216
+Which resource is affected?
+
+22
+00:01:46,216 --> 00:01:50,759
+What policies apply from identity, resource, and inherited scopes?
+
+23
+00:01:50,759 --> 00:01:52,248
+Are there conditions?
+
+24
+00:01:52,248 --> 00:01:53,971
+Is there an explicit deny?
+
+25
+00:01:53,971 --> 00:01:56,164
+Is access temporary or standing?
+
+26
+00:01:56,164 --> 00:01:59,767
+Does another path allow impersonation or delegation?
+
+27
+00:01:59,767 --> 00:02:07,914
+Understanding effective access is essential for least privilege, troubleshooting, incident response, and governance.
+
+28
+00:02:07,914 --> 00:02:10,968
+Policy evaluation can also cross boundaries.
+
+29
+00:02:10,968 --> 00:02:20,995
+A project-level grant, subscription-level role, organization policy, bucket policy, key policy, or service control may all affect the final answer.
+
+30
+00:02:20,995 --> 00:02:26,400
+Troubleshooting access often means tracing the request through several layers.
+
+31
+00:02:26,400 --> 00:02:28,906
+Governance review works the same way.
+
+32
+00:02:28,906 --> 00:02:35,643
+A visible assignment may look safe until inherited permissions or a resource policy adds a wider path.
+
+33
+00:02:35,643 --> 00:02:37,992
+The practical outcome is humility.
+
+34
+00:02:37,992 --> 00:02:42,927
+Do not assume a principal has only the permissions you remember assigning.
+
+35
+00:02:42,927 --> 00:02:48,959
+Use provider tools, access analysis, logs, and policy review to understand actual access.
+
+36
+00:02:48,959 --> 00:02:54,364
+Effective access is what matters during an incident, an audit, or a design review.
+
+37
+00:02:54,364 --> 00:02:59,533
+It is also what matters when you decide whether a role is truly least privilege.
+
+38
+00:02:59,533 --> 00:03:03,058
+Access design should also account for failure modes.
+
+39
+00:03:03,058 --> 00:03:06,661
+If a condition depends on a tag, who can change that tag?
+
+40
+00:03:06,661 --> 00:03:10,735
+If access depends on group membership, who manages the group?
+
+41
+00:03:10,735 --> 00:03:17,079
+If a resource policy grants access to another account or tenant, who reviews that relationship?
+
+42
+00:03:17,079 --> 00:03:22,249
+Effective access includes both the grant and the governance around the grant.

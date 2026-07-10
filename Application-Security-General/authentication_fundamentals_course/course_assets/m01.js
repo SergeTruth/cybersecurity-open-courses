@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Authentication Means",
+  "graphicAlt": "Blank placeholder image for a lesson introducing authentication fundamentals.",
+  "narration": "Authentication is the process of verifying who or what is requesting access. A person might authenticate to a web application. A service account might authenticate to an API. A device might authenticate to a network. A workload might authenticate to a cloud service. In each case, the system is trying to decide whether the claimed identity can be trusted enough to continue.\n\nIt helps to separate identification, authentication, authorization, and accounting. Identification is the claim, such as a username, account number, client identifier, or device identity. Authentication verifies that claim. Authorization determines what the verified identity may do. Accounting records activity for audit, billing, investigation, or operational visibility. Confusing these ideas leads to designs where login success is mistaken for permission to do everything.\n\nAuthentication is foundational, but it is not sufficient by itself. A system can authenticate the right user and still allow that user to access the wrong record. It can authenticate a service and still give that service excessive privileges. It can authenticate successfully and then fail to protect the session that represents the user. Good authentication supports access control, accountability, auditability, and trust, but it must work with the rest of the security design.\n\nFailed authentication design affects more than security. It can create user frustration, support burden, operational outages, confusing incident response, and customer confidence problems. The goal is not simply to make login harder. The goal is appropriate identity assurance: strong enough for the risk, usable enough for legitimate users, observable enough for operators, and maintainable over the account lifecycle.",
+  "narrationPoints": [
+    "Authentication is the process of verifying who or what is requesting access.",
+    "It helps to separate identification, authentication, authorization, and accounting.",
+    "Authentication is foundational, but it is not sufficient by itself.",
+    "Failed authentication design affects more than security."
+  ]
+};

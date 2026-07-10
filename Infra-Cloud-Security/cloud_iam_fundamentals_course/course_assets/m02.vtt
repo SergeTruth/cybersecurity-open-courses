@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00,000 --> 00:00:05,056
+A principal is an identity that can request access to a cloud resource or API.
+
+2
+00:00:05,056 --> 00:00:17,458
+Common building blocks include users, groups, roles, service accounts, managed identities, workload identities, applications, API keys, access tokens, and temporary credentials.
+
+3
+00:00:17,458 --> 00:00:20,301
+Different providers use different names.
+
+4
+00:00:20,301 --> 00:00:33,730
+AWS roles, Azure managed identities, and Google Cloud service accounts are not identical, but they all represent a basic idea: something is being authenticated and then authorized to perform actions.
+
+5
+00:00:33,730 --> 00:00:38,391
+Human identities and non-human identities need different controls.
+
+6
+00:00:38,391 --> 00:00:48,344
+A person may sign in through a browser or command-line tool using a federated identity provider, multi-factor authentication, and role assumption.
+
+7
+00:00:48,344 --> 00:00:57,587
+A workload may run inside a virtual machine, container, serverless function, Kubernetes pod, CI/CD pipeline, or deployment automation.
+
+8
+00:00:57,587 --> 00:01:05,328
+It may need to read a secret, write logs, publish an artifact, deploy infrastructure, or call another cloud service.
+
+9
+00:01:05,328 --> 00:01:09,436
+The security design should reflect the identity type and job.
+
+10
+00:01:09,436 --> 00:01:14,965
+Every identity should have a purpose, owner, lifecycle, and permission boundary.
+
+11
+00:01:14,965 --> 00:01:17,098
+Purpose explains why it exists.
+
+12
+00:01:17,098 --> 00:01:23,497
+Ownership explains who reviews it, approves changes, and responds when something looks wrong.
+
+13
+00:01:23,497 --> 00:01:28,710
+Lifecycle explains when it should be created, rotated, disabled, or deleted.
+
+14
+00:01:28,710 --> 00:01:37,321
+A permission boundary or equivalent guardrail limits what the identity can do, even if a policy or role assignment changes later.
+
+15
+00:01:37,321 --> 00:01:41,744
+These details prevent stale identities from becoming quiet risk.
+
+16
+00:01:41,744 --> 00:01:43,482
+Credentials also differ.
+
+17
+00:01:43,482 --> 00:01:51,302
+Long-lived access keys and static secrets are operationally risky because they can be copied, forgotten, or leaked.
+
+18
+00:01:51,302 --> 00:02:01,809
+Temporary credentials, managed identity mechanisms, workload identity federation, and short-lived tokens reduce that risk when implemented correctly.
+
+19
+00:02:01,809 --> 00:02:04,731
+The goal is not merely to create identities.
+
+20
+00:02:04,731 --> 00:02:12,315
+The goal is to make each identity understandable, owned, scoped, auditable, and removable when its purpose ends.
+
+21
+00:02:12,315 --> 00:02:15,949
+Human identities usually follow people and job roles.
+
+22
+00:02:15,949 --> 00:02:21,083
+They need onboarding, role changes, offboarding, MFA, and periodic review.
+
+23
+00:02:21,083 --> 00:02:24,717
+Non-human identities follow systems and automation.
+
+24
+00:02:24,717 --> 00:02:32,932
+They need owners, rotation or short-lived credentials, clear deployment context, and removal when the workload retires.
+
+25
+00:02:32,932 --> 00:02:43,043
+Treating both categories the same leads to mistakes: humans get permanent machine keys, or workloads inherit human-style administrator privileges.
+
+26
+00:02:43,043 --> 00:02:44,781
+Naming and metadata help.
+
+27
+00:02:44,781 --> 00:02:51,812
+An identity name, tag, label, description, or owner field should tell a reviewer what the identity is for.
+
+28
+00:02:51,812 --> 00:03:00,343
+If a service account called temp-admin has existed for two years and no one knows what it runs, that is not only untidy; it is a risk.
+
+29
+00:03:00,343 --> 00:03:06,347
+Identity inventory is the foundation for access review, incident response, and cleanup.
+
+30
+00:03:06,347 --> 00:03:10,533
+Reviews should ask whether an identity still matches reality.
+
+31
+00:03:10,533 --> 00:03:13,219
+Does the group still represent the team?
+
+32
+00:03:13,219 --> 00:03:16,063
+Does the role still match the application?
+
+33
+00:03:16,063 --> 00:03:17,880
+Is the API key still needed?
+
+34
+00:03:17,880 --> 00:03:20,171
+Is the token issuer still trusted?
+
+35
+00:03:20,171 --> 00:03:29,571
+IAM drift often comes from identities that were correct when created but were never revisited after projects, teams, and workloads changed.

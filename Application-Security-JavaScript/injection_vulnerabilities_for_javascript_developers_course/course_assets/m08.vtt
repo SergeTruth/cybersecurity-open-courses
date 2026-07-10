@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.981
+Injection prevention should be visible in design, code review, and tests.
+
+2
+00:00:04.981 --> 00:00:11.939
+Reviewers should ask where untrusted data enters, where it flows, and which sensitive sinks it reaches.
+
+3
+00:00:11.939 --> 00:00:21.980
+Sensitive sinks include database queries, shell commands, templates, browser rendering, file paths, headers, URLs, parsers, and downstream APIs.
+
+4
+00:00:21.980 --> 00:00:28.543
+If data reaches one of those locations, the review should identify the context-specific control.
+
+5
+00:00:28.543 --> 00:00:35.896
+Security-focused tests should cover schemas, negative cases, boundaries, and high-risk transformations.
+
+6
+00:00:35.896 --> 00:00:52.263
+A test can confirm that unknown fields are rejected, that unsupported operators are not accepted, that route parameters are treated as values, that rendering paths use safe APIs, and that command execution paths only allow approved operations.
+
+7
+00:00:52.263 --> 00:00:58.509
+These tests should use safe representative inputs rather than exploit payload collections.
+
+8
+00:00:58.509 --> 00:01:04.439
+Static analysis and dependency review can help, but they are not complete by themselves.
+
+9
+00:01:04.439 --> 00:01:12.583
+Tools may find string-built queries, risky process execution calls, raw HTML rendering, or unsafe evaluation patterns.
+
+10
+00:01:12.583 --> 00:01:20.647
+Human review is still needed to understand data flow, framework behavior, business intent, and compensating controls.
+
+11
+00:01:20.647 --> 00:01:24.126
+Least privilege and defense in depth reduce impact.
+
+12
+00:01:24.126 --> 00:01:29.187
+Database accounts should have only the permissions the application needs.
+
+13
+00:01:29.187 --> 00:01:32.665
+Processes should run with constrained privileges.
+
+14
+00:01:32.665 --> 00:01:39.386
+Logging and monitoring should identify suspicious validation failures without exposing secrets.
+
+15
+00:01:39.386 --> 00:01:49.427
+Content Security Policy, safe defaults, and framework protections can add layers, but they should not be treated as permission to build unsafe sinks.
+
+16
+00:01:49.427 --> 00:01:52.353
+Document assumptions and sensitive sinks.
+
+17
+00:01:52.353 --> 00:02:04.687
+Future developers need to know why a field is allowlisted, why a query builder escape hatch is prohibited, why a template path rejects user content, or why a rendering helper is required.
+
+18
+00:02:04.687 --> 00:02:09.510
+Secure design becomes easier to maintain when the reasoning is visible.

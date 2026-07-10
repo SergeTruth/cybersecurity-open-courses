@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Cache, Downloads, and File Interaction",
+  "graphicAlt": "Blank white placeholder image for module 5, Cache, Downloads, and File Interaction.",
+  "narration": "Browser cache and downloads connect web activity to files and local content. Cache may contain stored copies or fragments of web resources such as images, scripts, pages, style sheets, thumbnails, media segments, or other content. Downloads can show file names, source URLs, destination paths, timestamps, partial downloads, and sometimes status or interruption details.\n\nCache evidence can be useful but misleading. A cached image may have loaded because it was embedded on a page, not because the user selected it. A script may be cached because an application required it, not because the user understood it. A cached page may be partial, stale, or automatically refreshed. Cache shows browser behavior, not necessarily deliberate attention.\n\nDownload history often provides stronger evidence of user interaction, but it still needs context. A download record may include source URL, target path, start time, end time, file size, danger status, or interruption state depending on browser. Partial downloads may show attempts that did not complete. A file path can help connect the browser event to file system artifacts, but it does not prove the file was opened or used later.\n\nCloud drive and webmail downloads add additional interpretation questions. A file may have come from a SaaS application, corporate storage, personal cloud account, email attachment, shared link, or automated export. The browser may show a downloaded file while the web application logs show who requested it, what account was used, and whether the action was expected under policy.\n\nFile names and metadata should be verified. Extensions may be misleading, downloaded names can be changed, and browser-safe-name behavior may alter destination names. The strongest analysis correlates download records with file system metadata, hash values, endpoint logs, DLP records, application logs, and user context.",
+  "narrationPoints": [
+    "Browser cache and downloads connect web activity to files and local content.",
+    "Cache evidence can be useful but misleading.",
+    "Download history often provides stronger evidence of user interaction, but it still needs context.",
+    "Cloud drive and webmail downloads add additional interpretation questions.",
+    "File names and metadata should be verified."
+  ]
+};

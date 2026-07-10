@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Chunking, Metadata, and Provenance",
+  "graphicAlt": "Draft visual summary for Chunking, Metadata, and Provenance",
+  "narration": "Chunking turns source material into retrievable pieces, but it is not a neutral formatting step. The wrong chunking strategy can remove context, mix unrelated topics, split requirements from exceptions, separate a table from its explanation, or detach a statement from the source rules that control who may see it.\n\nGood chunking follows structure and meaning. Headings, sections, lists, tables, version notes, policy clauses, and natural topic boundaries should influence how content is divided. A chunk should be small enough to retrieve precisely, but large enough to keep useful context. When a document contains exceptions or conditions, those details should not be separated from the rule they qualify.\n\nMetadata makes chunks governable. Useful fields include source document ID, title, owner, classification, tenant, section heading, reference URL, ingestion date, modified date, effective date, expiration date, lifecycle status, and permissions. These fields support filtering, ranking, review, and eventual cleanup.\n\nProvenance answers the practical questions: where did this come from, who may see it, and is it still current? Citations and source references are not just user-interface polish. They support accountability, correction, expert review, and user confidence. Without provenance, a good answer can still be hard to trust.\n\nPrivate RAG architecture should keep every chunk attached to its source context, lifecycle status, and access rules. The retrieval layer should be able to explain not only what text was selected, but also why that text was eligible for the user and workflow.\n\nChunking also needs maintenance. As documents are revised, renamed, merged, or retired, derived chunks should be refreshed so the index does not preserve old fragments that no longer match the source record or the current permission model.",
+  "narrationPoints": [
+    "Chunking turns source material into retrievable pieces, but it is not a neutral formatting step.",
+    "Good chunking follows structure and meaning.",
+    "Metadata makes chunks governable.",
+    "Provenance answers the practical questions: where did this come from, who may see it, and is it still current?",
+    "Private RAG architecture should keep every chunk attached to its source context, lifecycle status, and access rules."
+  ]
+};

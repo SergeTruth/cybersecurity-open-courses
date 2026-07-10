@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Authorization and Risk Decisions",
+  "graphicAlt": "Authorization decision process showing system evidence, assessment findings, remediation plans, risk posture, and leadership decision.",
+  "narration": "RMF supports informed authorization decisions. Authorization is the point where accountable leaders review security information, control effectiveness, known weaknesses, remediation plans, mission needs, and remaining risk.\n\nThe authorizing official or equivalent decision maker does not need every system to be risk free. Instead, the decision is whether the known risk is acceptable for the system to operate in its context and under defined conditions.\n\nGood authorization depends on reliable evidence. System security plans, control implementations, assessment results, vulnerability information, plans of action, monitoring data, and operational context all help decision makers understand risk.\n\nAuthorization also creates accountability. It makes clear who is accepting risk, what information supported the decision, which conditions apply, and what actions may be required to reduce risk over time.\n\nFor technical teams, authorization is connected to daily work. Architecture decisions, identity controls, logging, encryption, patching, configuration management, incident response, and change control can all affect the risk picture presented for authorization.\n\nAuthorization should not be treated as a paperwork finish line. A system may be authorized with conditions, planned remediation, ongoing monitoring expectations, or future reassessment triggers.\n\nThe practical purpose is informed leadership judgment. RMF gives leaders a structured way to understand system risk and make decisions that balance security, privacy, mission, operations, and resources.\n\nA good authorization package should therefore tell a coherent story. It should explain the system, the controls, the assessment results, unresolved risks, planned remediation, and the operational reason for the decision.",
+  "narrationPoints": [
+    "RMF supports informed authorization decisions.",
+    "The authorizing official or equivalent decision maker does not need every system to be risk free.",
+    "Good authorization depends on reliable evidence.",
+    "Authorization also creates accountability.",
+    "For technical teams, authorization is connected to daily work."
+  ]
+};

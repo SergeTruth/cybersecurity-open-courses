@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Operations, Lifecycle, and Reliability",
+  "graphicAlt": "Draft visual summary for Operations, Lifecycle, and Reliability",
+  "narration": "A private RAG system has many moving parts: source connectors, ingestion jobs, parsers, chunkers, embedding generation, vector stores, metadata stores, retrieval services, model endpoints, user interfaces, logs, evaluation jobs, and administration workflows. Each component needs ownership and failure behavior.\n\nOperations starts with refresh and lifecycle planning. Sources change, documents expire, permissions move, and old guidance is replaced. The system should define refresh schedules, incremental indexing, deletion workflows, stale-content handling, and review for sources that fail to update. A RAG system that cannot remove or update knowledge reliably will lose trust.\n\nReliability planning should cover source outages, parser failures, embedding failures, index corruption, model unavailability, slow retrieval, storage limits, and failed background jobs. Users may not see these components directly, but their answers depend on them. Monitoring and alerts should make important failures visible before users quietly receive poor results.\n\nVersioning helps teams understand change. Models, prompts, indexes, chunking rules, retrieval settings, and evaluation sets may all affect output. Recording versions makes it easier to compare behavior, explain changes, and roll back when needed.\n\nReliability is also a governance concern. Users may rely on retrieved answers for real work, so backup, restore, rollback, cost controls, incident response, and communication plans belong in the architecture. Private RAG becomes dependable when operations are planned, owned, and tested.\n\nOperational runbooks should name owners, normal recovery steps, escalation paths, and communication expectations. When retrieval quality drops or a connector fails, the team should know whether to pause the workflow, serve degraded results, or direct users to source systems.",
+  "narrationPoints": [
+    "A private RAG system has many moving parts: source connectors, ingestion jobs, parsers, chunkers, embedding generation, vector stores, metadata...",
+    "Operations starts with refresh and lifecycle planning.",
+    "Reliability planning should cover source outages, parser failures, embedding failures, index corruption, model unavailability, slow retrieval...",
+    "Versioning helps teams understand change.",
+    "Reliability is also a governance concern."
+  ]
+};

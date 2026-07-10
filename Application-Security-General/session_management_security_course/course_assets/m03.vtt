@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.059
+Cookie-based sessions are common because browsers automatically attach cookies to matching requests.
+
+2
+00:00:05.059 --> 00:00:11.382
+That convenience is powerful, but it means cookie configuration becomes part of the security design.
+
+3
+00:00:11.382 --> 00:00:18.549
+A session cookie should have a narrow purpose, a clear lifetime, and attributes that match the application?
+
+4
+00:00:18.549 --> 00:00:21.921
+s risk.
+
+5
+00:00:21.921 --> 00:00:26.980
+Developers should avoid mixing session cookies with general preference or tracking data.
+
+6
+00:00:26.980 --> 00:00:31.196
+A session cookie carries authenticated state and deserves stricter handling.
+
+7
+00:00:31.196 --> 00:00:37.097
+The Secure attribute tells the browser to send the cookie only over HTTPS connections.
+
+8
+00:00:37.097 --> 00:00:41.735
+HttpOnly helps reduce direct access to the cookie from client-side scripts.
+
+9
+00:00:41.735 --> 00:00:50.166
+SameSite helps control when cookies are included in cross-site requests, which can reduce some cross-site request risks when configured appropriately.
+
+10
+00:00:50.166 --> 00:00:59.440
+These attributes are not magic, and they do not replace server-side authorization, but they create important browser-side barriers around a sensitive identifier.
+
+11
+00:00:59.440 --> 00:01:02.813
+Domain, path, and lifetime choices also matter.
+
+12
+00:01:02.813 --> 00:01:07.871
+A broad domain can expose a cookie to more subdomains than intended.
+
+13
+00:01:07.871 --> 00:01:13.773
+A broad path can make the cookie available to more application areas than necessary.
+
+14
+00:01:13.773 --> 00:01:21.361
+Session cookies typically expire when the browser session ends, while persistent cookies survive longer and require careful justification.
+
+15
+00:01:21.361 --> 00:01:31.057
+Browser storage options such as local storage and session storage have different risk profiles and should not be chosen casually for session secrets.
+
+16
+00:01:31.057 --> 00:01:40.332
+Protecting session identifiers in the browser means limiting where they go, how long they live, and which browser features can reach them.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Zones and Conduits",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Zones and conduits turn risk analysis into architectural boundaries. A zone groups logical or physical assets that share security requirements based on factors such as function, criticality, consequence, ownership, and exposure. A zone should represent a meaningful trust decision, not merely an existing subnet or room.\n\nA conduit is a controlled communication path between zones. It carries the data and services that the operation requires while enforcing the boundary's security expectations. Teams should document approved sources, destinations, protocols, direction, purpose, users, and administrative ownership.\n\nFor example, an enterprise reporting system may need production data from a site historian. That requirement does not justify direct enterprise access to controllers. An intermediary service in an industrial DMZ can replicate required data while reducing reachability toward lower-level control functions.\n\nZone design should distinguish systems with different risk and capability. Safety functions, control areas, engineering services, remote access, wireless devices, and legacy equipment may warrant separate treatment. Conduits should also account for administration, updates, backups, authentication, and vendor support, not only routine production traffic.\n\nSegmentation technology implements part of the design, but a firewall alone does not create a defensible zone. The boundary needs current inventory, documented flows, secure configuration, monitoring, ownership, and change control. Teams must also test that restrictions preserve timing, redundancy, failover, and recovery.\n\nReview zones and conduits when architecture or risk changes. Cloud analytics, new vendors, temporary maintenance links, and production expansions can introduce paths that bypass the intended model. The objective is necessary, limited, observable communication between assets with clearly understood trust relationships.",
+  "narrationPoints": [
+    "Zones and conduits turn risk analysis into architectural boundaries.",
+    "A conduit is a controlled communication path between zones.",
+    "For example, an enterprise reporting system may need production data from a site historian.",
+    "Zone design should distinguish systems with different risk and capability.",
+    "Segmentation technology implements part of the design, but a firewall alone does not create a defensible zone.",
+    "Review zones and conduits when architecture or risk changes."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authentication Factors and Authenticators",
+  "graphicAlt": "Blank placeholder image for a lesson on authentication factors and authenticators.",
+  "narration": "Authentication factors are categories of proof. Something you know includes passwords or memorized secrets. Something you have includes a hardware security key, authenticator app, certificate, registered device, or platform authenticator. Something you are refers to biometrics at a high level. Some systems also consider something you do or somewhere you are as contextual signals, although those are often better treated as risk signals than primary proof.\n\nAn authenticator is the concrete mechanism used to present proof. A password, one-time code, push approval, hardware-backed key, certificate, biometric unlock of a local device credential, or passkey can all participate in authentication. The strength of the authenticator depends on implementation, user experience, recovery processes, replay resistance, device binding, and whether it resists phishing or social engineering.\n\nNot every second factor provides the same level of protection. One-time codes can reduce simple password-only risk, but reusable codes may still be captured and replayed in some scenarios. Push approvals are convenient, but unclear prompts or repeated prompts can create approval fatigue. Hardware security keys, platform authenticators, and passkeys can provide stronger phishing resistance when they bind authentication to the legitimate service and avoid reusable shared secrets.\n\nMatching authenticator strength to risk is the practical skill. A low-risk internal tool may not need the same assurance as privileged administration, financial approval, production deployment, or access to sensitive personal data. Strong authentication programs use the right factors for the context, protect enrollment and recovery, and recognize that usability and supportability are part of security outcomes.",
+  "narrationPoints": [
+    "Authentication factors are categories of proof.",
+    "An authenticator is the concrete mechanism used to present proof.",
+    "Not every second factor provides the same level of protection.",
+    "Matching authenticator strength to risk is the practical skill."
+  ]
+};

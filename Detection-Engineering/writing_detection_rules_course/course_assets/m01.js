@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Are Detection Rules?",
+  "graphicAlt": "Detection workflow diagram showing telemetry becoming a detection signal for analyst review.",
+  "narration": "Detection rules evaluate security telemetry and generate signals when predefined conditions are met. They help transform raw events into information that analysts can investigate, correlate, and use during security operations.\n\nA detection is not the same thing as an alert. The detection is the logic and context that identifies a behavior of interest. An alert is one possible output that asks a human or process to review that signal. Good detections can also enrich cases, support hunting, or feed automated triage.\n\nThe goal is not to create alerts for everything. More alert volume does not automatically create better security. A rule is useful when it points defenders toward activity that matters, gives enough context to support a decision, and fits the team's operating model.\n\nEffective detection engineering balances sensitivity, specificity, maintainability, and analyst usability. A rule that is too broad can bury the SOC in noise, while a rule that is too narrow may miss important signals.",
+  "narrationPoints": [
+    "Detection rules evaluate security telemetry and generate signals when predefined conditions are met. They help transform raw events into information that analysts can investigate, correlate, and use during security operations.",
+    "A detection is not the same thing as an alert. The detection is the logic and context that identifies a behavior of interest. An alert is one possible output that asks a human or process to review that signal. Good detections can also enrich cases, support hunting, or feed automated triage.",
+    "The goal is not to create alerts for everything. More alert volume does not automatically create better security. A rule is useful when it points defenders toward activity that matters, gives enough context to support a decision, and fits the team's operating model.",
+    "Effective detection engineering balances sensitivity, specificity, maintainability, and analyst usability. A rule that is too broad can bury the SOC in noise, while a rule that is too narrow may miss important signals."
+  ]
+};

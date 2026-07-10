@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Infrastructure, Cost, and Reliability",
+  "graphicAlt": "Preview bullet summary visual for infrastructure, cost, and reliability.",
+  "narration": "Local and private AI shift responsibility toward the organization. Teams may gain control over data flow, model selection, and runtime behavior, but they also own more of the infrastructure. GPUs, CPUs, memory, storage, model caches, vector stores, backups, networking, queues, scheduling, monitoring, patching, and recovery planning all become part of the operating model.\n\nCost drivers can be easy to underestimate. Accelerator time, idle resources, storage for model files, embeddings, logs, backups, data movement, monitoring systems, and staff time all matter. A private system that appears inexpensive during a pilot can become expensive when many users, large context windows, multiple models, and retained telemetry enter the picture.\n\nReliability matters because useful AI systems attract real work. Once people depend on the platform, downtime, slow responses, missing indexes, stale documents, failed backups, and unclear ownership become business problems. Resource limits, usage tracking, cleanup routines, model cache management, queue controls, and shutdown policies help prevent uncontrolled growth and surprise costs.\n\nA sovereign AI environment should include backup and restore plans, configuration management, capacity planning, incident ownership, and recovery procedures. It should also define what happens when a local node fails, a model endpoint is unavailable, an index is corrupted, or a cost threshold is exceeded. Infrastructure decisions should support the workflow without creating fragile operations that only one person understands.\n\nOperational planning should be tied to real usage patterns. Track which teams use which models, when demand spikes, which collections grow fastest, and where requests queue. That evidence supports right-sized hardware, cleanup work, and budget conversations. Sovereignty is easier to sustain when cost and reliability are visible before they become surprises.",
+  "narrationPoints": [
+    "Local and private AI shift responsibility toward the organization.",
+    "Cost drivers can be easy to underestimate.",
+    "Reliability matters because useful AI systems attract real work.",
+    "A sovereign AI environment should include backup and restore plans, configuration management, capacity planning, incident ownership, and recovery...",
+    "Operational planning should be tied to real usage patterns."
+  ]
+};

@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.584
+Implementation should make validation consistent and maintainable.
+
+00:00:03.584 --> 00:00:11.385
+Centralized validation, schema validation, framework validators, typed request models, and reusable business rule checks can all help.
+
+00:00:11.385 --> 00:00:17.078
+The goal is not to hide every rule in one giant function.
+
+00:00:17.078 --> 00:00:26.987
+The goal is to make validation clear, testable, and close to the boundary where data enters the trusted part of the application.
+
+00:00:26.987 --> 00:00:29.307
+Server-side validation is mandatory.
+
+00:00:29.307 --> 00:00:37.108
+Client-side validation improves usability by catching mistakes early, but clients can be modified, bypassed, or replaced entirely.
+
+00:00:37.108 --> 00:00:42.379
+Attackers and automated tools can send requests directly to the server.
+
+00:00:42.379 --> 00:00:50.601
+The server must enforce the real rules, even if the browser or mobile application already performed friendly checks.
+
+00:00:50.601 --> 00:00:55.872
+Error messages should help legitimate users without revealing unnecessary internal details.
+
+00:00:55.872 --> 00:01:03.673
+A message can explain that a field is required, out of range, or in the wrong format.
+
+00:01:03.673 --> 00:01:10.631
+It should not expose stack traces, database structure, secret values, parser internals, or security-sensitive logic.
+
+00:01:10.631 --> 00:01:16.745
+Invalid input should also be logged carefully, avoiding raw sensitive values where possible.
+
+00:01:16.745 --> 00:01:20.751
+Testing validation requires both positive and negative cases.
+
+00:01:20.751 --> 00:01:26.022
+Unit tests should confirm valid examples pass and invalid examples fail.
+
+00:01:26.022 --> 00:01:35.088
+Negative tests should cover missing fields, wrong types, boundary values, unexpected encodings, excessive length, disallowed values, and invalid field relationships.
+
+00:01:35.088 --> 00:01:40.781
+Fuzzing at a high level can help discover parser and boundary issues.
+
+00:01:40.781 --> 00:01:46.052
+Good validation is engineered, tested, and revisited as the application evolves.

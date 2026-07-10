@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Cryptography at Risk",
+  "graphicAlt": "Blank white placeholder image for module 2, Cryptography at Risk.",
+  "narration": "Public-key cryptography allows parties to communicate or verify trust without first sharing a secret key through a private channel. RSA, Diffie-Hellman, and elliptic curve cryptography are common examples. They appear in key exchange, certificates, digital signatures, secure shell access, VPNs, TLS, identity systems, code signing, firmware signing, and many forms of public key infrastructure.\n\nThe risk is serious because these mechanisms protect more than confidentiality. Key exchange helps parties establish session keys for encrypted communication. Digital signatures support integrity, authenticity, and trust. Certificates bind identities to public keys. PKI connects those certificates into chains of trust. If public-key assumptions fail, the impact can reach authentication, software supply chain trust, device identity, and secure update workflows.\n\nTLS, VPNs, and SSH are easy examples because they are visible to administrators and security teams. But public-key cryptography also appears inside application frameworks, service meshes, cloud control planes, package managers, mobile apps, hardware devices, and vendor products. Many teams do not have a complete map of these dependencies, which is why cryptographic inventory is a foundational activity.\n\nThis course avoids instructions for attacking cryptography. The practitioner focus is defensive readiness. The useful questions are where public-key cryptography exists, what data or trust depends on it, who controls the implementation, how long it must remain secure, and what would be required to migrate it without breaking availability, interoperability, compliance, or operational trust.",
+  "narrationPoints": [
+    "Public-key cryptography allows parties to communicate or verify trust without first sharing a secret key through a private channel.",
+    "The risk is serious because these mechanisms protect more than confidentiality.",
+    "TLS, VPNs, and SSH are easy examples because they are visible to administrators and security teams.",
+    "This course avoids instructions for attacking cryptography."
+  ]
+};

@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Input, Output, and Injection Risks",
+  "graphicAlt": "Blank placeholder graphic for module 6, Input, Output, and Injection Risks.",
+  "narration": "Input validation checks whether incoming data is acceptable before the application relies on it. Validation should be tied to the business meaning of the field: type, length, format, range, allowed values, required fields, and relationship to other values. Validation is not only for forms. API payloads, file names, uploaded content, headers, cookies, query parameters, webhook bodies, queue messages, and configuration values can all carry input that affects behavior.\n\nInjection risks appear when untrusted input changes the meaning of a command, query, expression, template, or document. SQL injection is the classic example: input is interpreted as part of a database query instead of as data. Command injection is similar, but the destination is an operating system command or shell. Template injection can occur when user-controlled content is interpreted by a template engine. Strong defenses use safe APIs, parameterized queries, careful command construction, allowlisted options, and avoidance of interpreters when a simpler API exists.\n\nOutput encoding prepares data safely for the place it will be rendered. Cross-site scripting, or XSS, occurs when untrusted content executes in a user browser context. The right defense depends on context: HTML text, HTML attributes, JavaScript, CSS, URLs, and JSON all have different encoding rules. Validation and encoding are complementary. Validation rejects unacceptable data; encoding preserves data while preventing it from being interpreted as code in a specific output context. Secure web applications do both, and they choose defenses based on where the data goes next.",
+  "narrationPoints": [
+    "Input validation checks whether incoming data is acceptable before the application relies on it.",
+    "Injection risks appear when untrusted input changes the meaning of a command, query, expression, template, or document.",
+    "Output encoding prepares data safely for the place it will be rendered."
+  ]
+};

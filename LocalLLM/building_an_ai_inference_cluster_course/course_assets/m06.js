@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Scheduling, Routing, and Capacity",
+  "graphicAlt": "Blank placeholder for request routing and cluster capacity",
+  "narration": "Routing begins with capability. A request should reach a node that has the requested model loaded, supports the required context and features, and has enough available memory. Within that eligible group, the router may choose the least-loaded instance, follow a weighted policy, or preserve session affinity when a workflow depends on local state. Health checks must remove failed or degraded nodes quickly without sending traffic into a restart loop.\n\nConcurrency describes simultaneous work. Each active sequence consumes cache and compute, so accepting more requests can reduce per-user speed or exhaust memory. Queueing protects the server by holding work until capacity is available, but queue delay contributes directly to latency. Establish maximum queue depth, request timeouts, and admission controls. When the service is saturated, a clear busy response is safer than allowing every node to become unresponsive.\n\nBatching groups compatible work to improve accelerator utilization and total throughput. The tradeoff is that a request may wait for a batch and share compute with others. Interactive chat usually prioritizes low time to first token, while offline processing may accept delay in exchange for higher throughput. Separate service classes or queues when one policy cannot serve both workloads fairly.\n\nFailover is more than pointing at another IP address. The alternate node must have the correct model version, configuration, capacity, and dependencies. Test what happens to in-flight requests and whether clients retry safely. Track arrival rate, service time, queue time, rejection rate, and resource saturation. Scale only after identifying the constrained stage. Adding a GPU worker will not fix a slow shared storage service, an overloaded router, or a network path that cannot carry the traffic.",
+  "narrationPoints": [
+    "Routing begins with capability.",
+    "Concurrency describes simultaneous work.",
+    "Batching groups compatible work to improve accelerator utilization and total throughput.",
+    "Failover is more than pointing at another IP address."
+  ]
+};

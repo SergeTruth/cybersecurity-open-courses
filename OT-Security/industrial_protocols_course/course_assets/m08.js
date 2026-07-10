@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Monitoring and Protecting Industrial Protocols",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Protecting industrial protocols begins with knowing where they are used, which assets depend on them, and which communication paths are required. Passive monitoring through taps, mirror ports, or carefully placed sensors can reveal device relationships and protocol behavior without actively probing sensitive equipment.\n\nProtocol-aware visibility adds operations to ordinary network metadata. A useful baseline may describe approved device pairs, client and server roles, polling rates, engineering windows, command categories, and expected direction. Allowlisting should reflect those engineered relationships rather than permitting every system that shares a subnet or port.\n\nSegmentation limits unnecessary pathways through zones and controlled conduits. Firewalls and gateways can restrict which assets and services cross boundaries. Segmentation does not add authentication to a legacy message, but it reduces exposure and creates points where access and monitoring can be enforced.\n\nRemote access deserves equivalent discipline. Use managed entry points, strong identity controls, approved destinations, time-limited authorization, session records, and clear ownership. Engineering tools and privileged workstations should not become uncontrolled bridges between enterprise and control networks.\n\nChange control keeps architecture, baselines, and detection aligned. Record new devices, firmware, certificates, protocol settings, communication paths, and maintenance windows. Investigate anomalies with operations and engineering teams; an unexpected write, new master, or changed subscription is a reason to gather context, not automatic proof of an attack.\n\nAvoid disruptive scanning or untested inline enforcement. Use vendor guidance, passive discovery, staged testing, and safe maintenance processes. Effective protection combines architecture, access control, monitoring, configuration management, and practiced incident response while preserving the reliability of the physical process.",
+  "narrationPoints": [
+    "Protecting industrial protocols begins with knowing where they are used, which assets depend on them, and which communication paths are required.",
+    "Protocol-aware visibility adds operations to ordinary network metadata.",
+    "Segmentation limits unnecessary pathways through zones and controlled conduits.",
+    "Remote access deserves equivalent discipline.",
+    "Change control keeps architecture, baselines, and detection aligned.",
+    "Avoid disruptive scanning or untested inline enforcement."
+  ]
+};

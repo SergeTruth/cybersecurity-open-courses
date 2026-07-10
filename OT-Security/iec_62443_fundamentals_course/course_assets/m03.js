@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "The IEC 62443 Standard Family",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "IEC 62443 is a standards family rather than one checklist. Its parts address different subjects and audiences while using related concepts. Understanding that structure helps teams select the material relevant to their role instead of treating one document as the entire industrial cybersecurity program.\n\nThe general category establishes shared concepts, terminology, models, and measures. These foundations help asset owners, engineers, suppliers, and assessors use terms consistently. Policies and procedures focus on organizational and operational practices, including security programs and service-provider responsibilities.\n\nSystem-focused material addresses risk assessment, secure system design, security levels, and technical requirements for industrial automation and control systems. This is where concepts such as zones, conduits, and system security requirements become central. Component-focused material addresses secure product development and technical capabilities for software applications, embedded devices, host devices, and network devices.\n\nThe categories are connected. An asset owner's risk assessment creates system requirements. An integrator designs and verifies an architecture that addresses those requirements. Product suppliers provide components with appropriate security capabilities and development evidence. Service providers maintain the system within defined controls.\n\nA practical implementation starts by identifying applicable roles, lifecycle stages, and system boundaries. Teams should use the applicable current standards and organizational requirements for detailed work. This introductory course explains the framework, but it does not substitute for the official documents, project-specific engineering, or formal assessment criteria.",
+  "narrationPoints": [
+    "IEC 62443 is a standards family rather than one checklist.",
+    "The general category establishes shared concepts, terminology, models, and measures.",
+    "System-focused material addresses risk assessment, secure system design, security levels, and technical requirements for industrial automation and...",
+    "The categories are connected.",
+    "A practical implementation starts by identifying applicable roles, lifecycle stages, and system boundaries."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "ICS Architecture Models",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Architecture models organize ICS functions so teams can discuss dependencies, trust boundaries, and required communication. At the field level, sensors and actuators interact with the physical process. The control level contains PLCs, RTUs, and other controllers. Supervisory systems provide operator views and higher-level coordination.\n\nAbove direct supervision, operations systems may include historians, application servers, engineering services, production management, and site administration. Enterprise systems consume selected information and provide services such as identity, business planning, or support. These connections are useful, but they must be explicit and controlled.\n\nThe Purdue model is a common reference for describing these functional layers. It can help identify how a connection crosses from enterprise activity toward site operations and control. It is not a perfect map of every modern environment, and it should not replace a site-specific architecture or data-flow analysis.\n\nAn industrial DMZ is commonly placed between enterprise and industrial operations. It can host intermediary services such as jump systems, remote-access brokers, update staging, file transfer, or historian replication. The objective is to avoid broad, direct connections while creating monitored points for necessary exchange.\n\nSegmentation groups assets by function, criticality, and trust. Controlled conduits permit only required communication between zones. Good design also accounts for redundancy, failover, management access, vendor support, safety systems, and what happens when a boundary device is unavailable.\n\nArchitecture is a living operational record. Validate diagrams against observed traffic and engineering knowledge, document serial and wireless paths, assign owners, and update changes. A useful model helps teams predict consequence, place controls, investigate movement, and coordinate recovery without assuming that every site follows the same layered pattern.",
+  "narrationPoints": [
+    "Architecture models organize ICS functions so teams can discuss dependencies, trust boundaries, and required communication.",
+    "Above direct supervision, operations systems may include historians, application servers, engineering services, production management, and site...",
+    "The Purdue model is a common reference for describing these functional layers.",
+    "An industrial DMZ is commonly placed between enterprise and industrial operations.",
+    "Segmentation groups assets by function, criticality, and trust.",
+    "Architecture is a living operational record."
+  ]
+};

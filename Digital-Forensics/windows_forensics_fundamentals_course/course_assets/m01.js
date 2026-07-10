@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Is Windows Forensics?",
+  "graphicAlt": "Blank placeholder graphic for Windows forensics overview",
+  "narration": "Windows forensics is the preservation and analysis of evidence from Windows systems. Those systems may be employee laptops, desktops, servers, virtual machines, cloud-hosted Windows instances, or specialized systems that support business operations. The purpose is to understand what happened, when it happened, what accounts or systems were involved, and what evidence supports those conclusions.\n\nWindows forensics is a core part of DFIR. It supports incident response, insider investigations, malware triage, policy investigations, user activity reconstruction, and breach analysis. A Windows system can contain evidence in event logs, user profiles, registry hives, file system metadata, execution traces, security tool telemetry, application data, and memory. The analyst's job is to preserve and correlate those sources, not to rely on a single artifact.\n\nAuthorization and careful handling matter because Windows endpoints often contain sensitive business data, personal information, credentials, browser activity, chat history, source code, documents, and regulated records. Forensic collection should follow approved authority, case scope, and data handling rules. The analyst should know what is being collected, why it is needed, and how it will be protected.\n\nEvidence integrity is the foundation. Investigator actions can alter timestamps, create logs, change memory, or overwrite artifacts. Sometimes live response is necessary, but it should be deliberate and documented. Strong Windows forensics is not about memorizing tools. It is about preserving context, interpreting artifacts carefully, building timelines, and communicating confidence and limitations clearly.",
+  "narrationPoints": [
+    "Windows forensics is the preservation and analysis of evidence from Windows systems.",
+    "Windows forensics is a core part of DFIR.",
+    "Authorization and careful handling matter because Windows endpoints often contain sensitive business data, personal information, credentials,...",
+    "Evidence integrity is the foundation."
+  ]
+};

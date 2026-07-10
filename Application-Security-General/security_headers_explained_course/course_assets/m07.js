@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Permissions and Browser Feature Controls",
+  "graphicAlt": "Blank placeholder image for Permissions and Browser Feature Controls.",
+  "narration": "Permissions-Policy lets a site restrict access to browser features such as camera, microphone, geolocation, payment, fullscreen, sensors, and other capabilities. The purpose is to align browser capabilities with what the application actually needs. If a page does not need the microphone or location, the policy can say so. That reduces unnecessary exposure if a page, embedded component, or third-party script behaves unexpectedly.\n\nFeature controls are especially important in embedded contexts. An iframe may have its own allow attributes, and the top-level page may use Permissions-Policy to decide what embedded frames can request. This matters for partner content, payment flows, maps, media capture, and dashboard integrations. A permissive feature policy can accidentally grant capabilities to content that only needed to display information.\n\nThe right policy starts with application requirements. A video conferencing page may need camera and microphone. A checkout flow may need payment features. A read-only help page probably needs neither. Policy design should be specific enough to support required functionality without enabling every browser feature everywhere. That specificity also helps reviewers understand why a feature is available on a page.\n\nPermissions-Policy should be maintained as the application changes. New product features, third-party embeds, browser changes, and platform migrations can all affect what capabilities are needed. As with CSP, the risk is cargo-cult configuration: copying a header that appears strict but does not match reality. Treat feature policy as part of the application contract and revisit it when pages gain new capabilities.",
+  "narrationPoints": [
+    "Permissions-Policy lets a site restrict access to browser features such as camera, microphone, geolocation, payment, fullscreen, sensors, and...",
+    "Feature controls are especially important in embedded contexts.",
+    "The right policy starts with application requirements.",
+    "Permissions-Policy should be maintained as the application changes."
+  ]
+};

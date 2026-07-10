@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Is Input Validation?",
+  "graphicAlt": "Blank placeholder graphic for input validation overview",
+  "narration": "Input validation is the practice of checking whether data is acceptable before an application trusts it or processes it. It answers a practical question: does this value match what the application expects at this point in the workflow? A valid value should have the right type, format, length, range, and relationship to the business rule it is meant to support.\n\nValidation is related to, but different from, several other controls. Sanitization attempts to clean or transform data. Normalization converts data into a consistent representation. Parsing turns raw input into a structured form the application understands. Output encoding prepares data safely for a specific output context, such as HTML, JavaScript, SQL parameters, logs, or command arguments. These controls often work together, but they are not interchangeable.\n\nExternal input must be treated as untrusted because it can be malformed, unexpected, hostile, stale, or outside the assumptions made by the application. A request may come from a browser, a script, an API client, a partner integration, an imported file, or a compromised internal system. The application should not assume that user interface controls are the only path into server-side logic.\n\nInput validation is one layer of defense, not the whole security model. It helps make application behavior safer and more predictable, but it does not replace authorization, safe APIs, parameterized queries, output encoding, secure file handling, business logic checks, or careful design. Strong applications validate early, enforce on the server, and still use context-appropriate controls at every boundary.",
+  "narrationPoints": [
+    "Input validation is the practice of checking whether data is acceptable before an application trusts it or processes it.",
+    "Validation is related to, but different from, several other controls.",
+    "External input must be treated as untrusted because it can be malformed, unexpected, hostile, stale, or outside the assumptions made by the ap...",
+    "Input validation is one layer of defense, not the whole security model."
+  ]
+};

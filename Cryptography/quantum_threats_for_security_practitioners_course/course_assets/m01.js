@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why Quantum Threats Matter",
+  "graphicAlt": "Blank white placeholder image for module 1, Why Quantum Threats Matter.",
+  "narration": "Quantum threats matter because security planning has to begin before a crisis is visible. The practical concern is not that every current system is already broken. The concern is that large cryptographically relevant quantum computers could weaken widely used public-key cryptography, and the systems that depend on that cryptography often take years to discover, change, test, approve, and deploy.\n\nSecurity practitioners need to distinguish present-day risk, future capability, and migration lead time. Present-day risk includes data being collected now, systems being designed now, and products being purchased now. Future capability refers to the possibility that quantum computers eventually become strong enough to attack certain public-key schemes. Migration lead time is the gap between deciding to change and actually changing complex systems safely.\n\nPublic-key cryptography is the central concern because it supports key exchange, digital signatures, certificates, identity, software trust, and many secure protocols. Symmetric cryptography and hashing are affected differently, and the response is not the same. The migration problem is therefore not simply replace encryption everywhere. It is identify where specific public-key functions create future exposure.\n\nPlanning matters most for systems with long lifetimes, long data sensitivity periods, and complex dependencies. A web service that can be updated monthly is different from a medical device, satellite, vehicle, industrial controller, or long-lived archive. The goal of quantum readiness is not fear. It is disciplined preparation while there is still time to inventory, prioritize, test, and coordinate.",
+  "narrationPoints": [
+    "Quantum threats matter because security planning has to begin before a crisis is visible.",
+    "Security practitioners need to distinguish present-day risk, future capability, and migration lead time.",
+    "Public-key cryptography is the central concern because it supports key exchange, digital signatures, certificates, identity, software trust, a...",
+    "Planning matters most for systems with long lifetimes, long data sensitivity periods, and complex dependencies."
+  ]
+};

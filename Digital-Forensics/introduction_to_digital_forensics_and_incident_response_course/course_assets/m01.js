@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Is DFIR?",
+  "graphicAlt": "Placeholder illustration for an introductory DFIR module",
+  "narration": "Digital Forensics and Incident Response, usually shortened to DFIR, is the combined practice of understanding security events through evidence and helping an organization respond in a controlled way. The two halves are closely related. Digital forensics focuses on collecting, preserving, and analyzing data so that conclusions are reliable. Incident response focuses on organizing action during a security incident so teams can contain harm, restore operations, and make sound decisions under pressure.\n\nForensics is not just looking at a suspicious file or reading a log. A good forensic process protects the integrity of evidence before drawing conclusions from it. That may mean preserving endpoint artifacts, exporting cloud audit records, collecting memory, documenting system state, and recording who handled each item. The point is to avoid turning a useful source of truth into a confusing pile of altered data.\n\nIncident response is the operational side of the same problem. When ransomware, account compromise, malware, insider misuse, or data exposure occurs, the organization needs more than analysis. It needs roles, communication channels, decision points, containment options, recovery plans, and a way to keep leadership informed without flooding everyone with uncertainty. Response turns investigation into coordinated action.\n\nDFIR matters because incidents rarely stay inside one technical lane. A single event can affect security, legal obligations, customer commitments, business operations, insurance questions, and executive decisions. DFIR gives the organization a disciplined way to answer what happened, what was affected, whether the threat is still active, and what must happen next. The goal is not drama or guesswork. The goal is evidence-based action that reduces harm and improves resilience.",
+  "narrationPoints": [
+    "Digital Forensics and Incident Response, usually shortened to DFIR, is the combined practice of understanding security events through evidence and helping an organization respond.",
+    "The two halves are closely related.",
+    "Digital forensics focuses on collecting, preserving, and analyzing data so that conclusions are reliable.",
+    "Incident response focuses on organizing action during a security incident so teams can contain harm, restore operations, and make sound decisions under pressure.",
+    "Forensics is not just looking at a suspicious file or reading a log.",
+    "A good forensic process protects the integrity of evidence before drawing conclusions from it."
+  ]
+};

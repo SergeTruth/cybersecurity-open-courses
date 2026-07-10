@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "What Is Web Application Security?",
+  "graphicAlt": "Blank placeholder graphic for module 1, What Is Web Application Security.",
+  "narration": "Web application security is the practice of protecting applications, APIs, users, data, sessions, and business workflows from misuse and failure. A modern web application is not just a page served by a web server. It is usually a browser experience, a set of API endpoints, server-side logic, databases, identity systems, third-party services, background jobs, caches, and deployment infrastructure working together. Security has to cover the behavior of that whole system, not only one layer.\n\nApplication security is different from network security. Network controls can limit exposure, segment systems, inspect traffic, and reduce the chance that an attacker reaches a service. But once a request reaches the application, the application still has to decide who the user is, what the user is allowed to do, whether input is acceptable, how data should be stored, what response is safe to render, and whether a workflow can be abused. Firewalls cannot reliably enforce business rules that only the application understands.\n\nBrowsers, servers, databases, APIs, and third-party services interact across many boundaries. A browser may send a form, a script may call an API, the server may query a database, and a backend service may call a payment provider or identity platform. Each step creates assumptions about trust, identity, data format, and error behavior. Secure web applications make those assumptions explicit. Security is therefore a design, development, testing, and operations responsibility. It starts before code is written and continues after deployment through monitoring, patching, and remediation.",
+  "narrationPoints": [
+    "Web application security is the practice of protecting applications, APIs, users, data, sessions, and business workflows from misuse and failure.",
+    "Application security is different from network security.",
+    "Browsers, servers, databases, APIs, and third-party services interact across many boundaries."
+  ]
+};

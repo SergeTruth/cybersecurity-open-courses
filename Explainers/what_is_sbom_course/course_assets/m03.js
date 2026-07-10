@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Software Supply Chain Security",
+  "graphicAlt": "Software supply chain map showing source code, dependencies, packages, build pipeline, container images, vendors, and deployed products.",
+  "narration": "Software supply chain security focuses on the many sources, tools, dependencies, build processes, and distribution paths involved in creating and operating software. Software rarely consists only of original code written by one team.\n\nApplications often rely on numerous external components. Those components may be maintained by open-source communities, commercial vendors, cloud providers, package repositories, or internal platform teams.\n\nEvery dependency introduces questions. Who maintains it? Which version is used? Is it still supported? Does it bring in additional dependencies? Where is it used? How quickly can the organization respond if a concern appears?\n\nSBOMs help organizations answer those questions more consistently. By documenting components and relationships, they improve awareness of the software supply chain and help teams understand where dependencies appear.\n\nSupply chain visibility supports incident response. If a component is affected by a newly disclosed vulnerability or other concern, an SBOM can help teams narrow the search and identify products that need review.\n\nSBOMs also support procurement and vendor risk conversations. Customers may ask vendors for component transparency, and buyers may use SBOM information as one input when evaluating software risk.\n\nThe key idea is visibility, not fear. SBOMs help organizations understand software composition so they can manage dependencies with better information and more deliberate decisions.\n\nThat visibility can also improve collaboration. Developers, security teams, product owners, procurement teams, and customers can discuss the same component information instead of working from separate assumptions about what the software contains.",
+  "narrationPoints": [
+    "Software supply chain security focuses on the many sources, tools, dependencies, build processes, and distribution paths involved in creating and...",
+    "Applications often rely on numerous external components.",
+    "Every dependency introduces questions.",
+    "SBOMs help organizations answer those questions more consistently.",
+    "Supply chain visibility supports incident response."
+  ]
+};

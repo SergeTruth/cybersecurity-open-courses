@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authorization in APIs and Services",
+  "graphicAlt": "Blank placeholder image for a lesson on API and service authorization.",
+  "narration": "APIs often expose data and business operations directly to clients, services, partners, and automation. That makes API authorization a first-class design concern. Scopes and claims at a high level may describe requested permissions or facts about the subject, but the application still needs to validate whether the caller may perform the requested action on the requested resource.\n\nDelegated access means a user or system allows another application or service to act with limited permission on its behalf. Delegation should be narrow, visible, revocable, and governed by policy. A delegated token or permission should not silently become full account access. The system should preserve enough context to know who delegated access, which client is acting, and what actions are permitted.\n\nService-to-service authorization and workload identity matter because not every request comes from a human user. Internal APIs, microservices, partner APIs, webhooks, background jobs, and automation often use service accounts or workload identities. Internal traffic should not automatically be trusted. A request from inside the network can still be mistaken, overprivileged, stale, or compromised.\n\nAPI gateways can centralize some controls, but they do not remove the need for application-layer enforcement. Gateways may validate tokens, rate limits, routes, or broad scopes, while the application still understands business objects and tenant boundaries. Authorization context must travel safely across service boundaries without being inflated, stripped, or trusted from unverified client input.",
+  "narrationPoints": [
+    "APIs often expose data and business operations directly to clients, services, partners, and automation.",
+    "Delegated access means a user or system allows another application or service to act with limited permission on its behalf.",
+    "Service-to-service authorization and workload identity matter because not every request comes from a human user.",
+    "API gateways can centralize some controls, but they do not remove the need for application-layer enforcement."
+  ]
+};

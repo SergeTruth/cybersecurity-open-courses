@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Field Devices",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Field devices form the connection between digital control and the physical process. Sensors measure conditions such as temperature, pressure, flow, level, speed, vibration, or position. Instrumentation may condition, convert, or transmit those measurements so a controller can use them reliably.\n\nActuators perform physical work in response to control signals. A valve actuator changes flow, a motor drives machinery, a variable-frequency drive adjusts speed, and a relay changes an electrical circuit. Some devices combine measurement, local logic, diagnostics, and actuation in one package.\n\nField signals may be discrete, indicating states such as open or closed, or analog, representing a range of values. They can travel through direct input and output wiring, serial links, fieldbus networks, industrial Ethernet, or gateways. The architecture must account for both networked devices and equipment that never appears as a conventional IP endpoint.\n\nField-device integrity is essential because bad data can lead to a bad control decision, while an incorrect output can affect equipment immediately. A failed sensor, wiring problem, calibration error, configuration mistake, or cyber event may produce similar symptoms. Diagnosis requires process history, device health, controller evidence, and physical inspection.\n\nSecurity measures include accurate inventory, controlled physical access, protected cabinets and wiring, documented calibration, approved configuration tools, and monitoring of unexpected device or communication changes. Safety protections and fail-safe behavior should be engineered independently rather than assumed to come from cybersecurity controls.\n\nField devices remind us why ICS security is operational. A digital message can open a valve, start a motor, or change an electrical state. Defenders must understand the device function, expected operating range, failure mode, and safe response before recommending actions.",
+  "narrationPoints": [
+    "Field devices form the connection between digital control and the physical process.",
+    "Actuators perform physical work in response to control signals.",
+    "Field signals may be discrete, indicating states such as open or closed, or analog, representing a range of values.",
+    "Field-device integrity is essential because bad data can lead to a bad control decision, while an incorrect output can affect equipment immediately.",
+    "Security measures include accurate inventory, controlled physical access, protected cabinets and wiring, documented calibration, approved...",
+    "Field devices remind us why ICS security is operational."
+  ]
+};

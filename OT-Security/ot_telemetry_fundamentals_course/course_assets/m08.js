@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Using OT Telemetry in Security Operations",
+  "graphicAlt": "Instructional illustration for Using OT Telemetry in Security Operations.",
+  "narration": "Security operations use OT telemetry in several ways. Detection engineering turns known conditions into maintained alerts. Threat hunting asks focused questions across historical data. Anomaly detection identifies deviation from expected behavior, while incident response reconstructs identities, assets, communication, changes, and process impact.\n\nThe same telemetry can update asset inventory. Newly observed devices, changed peers, dormant systems returning to service, and unexpected protocols should be validated and assigned ownership. Vulnerability teams can use observed reachability, asset function, and dependencies to improve prioritization.\n\nA useful investigation joins sources. A remote-access session, firewall connection, engineering-workstation logon, controller interaction, and historian trend may describe one operational story. Reliable time and consistent asset identifiers make that correlation possible.\n\nSOC alerts need OT context: site, zone, asset role, criticality, protocol or action, maintenance state, supporting evidence, and the team that can validate process meaning. Generic severity without this information shifts work to the analyst and increases unsafe assumptions.\n\nEscalation should connect security with operations and engineering. They can distinguish a cyber event from equipment failure, planned maintenance, or process transition and can advise which containment actions are safe. Automated isolation should be used cautiously where it could remove control, visibility, or redundancy.\n\nEvery investigation should improve the telemetry program. Correct asset records, repair collection gaps, tune detections, preserve new indicators, and update runbooks. Telemetry creates value when it moves from collection to shared evidence, coordinated decisions, and measurable improvement.",
+  "narrationPoints": [
+    "Security operations use OT telemetry in several ways.",
+    "The same telemetry can update asset inventory.",
+    "A useful investigation joins sources.",
+    "SOC alerts need OT context: site, zone, asset role, criticality, protocol or action, maintenance state, supporting evidence, and the team that can...",
+    "Escalation should connect security with operations and engineering."
+  ]
+};

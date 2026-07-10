@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Testing and Reviewing Session Security",
+  "graphicAlt": "Blank placeholder graphic for module 8, Testing and Reviewing Session Security.",
+  "narration": "Session security review starts with configuration and lifecycle. Inspect cookie attributes, session lifetime settings, token validation settings, logout behavior, renewal behavior, and framework defaults. Confirm that the application rotates or renews session state at important transitions such as login and privilege changes. Verify that password changes, account disablement, and permission changes have the intended effect on active sessions. These are design checks, code checks, and runtime behavior checks.\n\nTesting should include normal flows and edge cases. Confirm that logout prevents continued use of the old authenticated state. Verify idle and absolute timeouts. Inspect cookies with browser developer tools to confirm expected attributes, scope, and lifetime. Review API behavior for expired or invalid tokens. Confirm that sensitive actions still enforce server-side authorization and do not rely only on client-side state. Penetration testing observations should be translated into durable configuration or code fixes, not one-off patches.\n\nLogs and monitoring should be part of the review. Session events should support troubleshooting, security investigation, and operational monitoring without exposing secrets. Review whether session identifiers, access tokens, refresh tokens, or authorization headers can appear in logs, URLs, error reports, analytics, or support exports. Ask whether defenders can answer basic questions: who signed in, when sessions were created or ended, when privileges changed, and whether unusual session activity occurred. Testing is strongest when it proves both prevention and visibility.",
+  "narrationPoints": [
+    "Session security review starts with configuration and lifecycle.",
+    "Testing should include normal flows and edge cases.",
+    "Logs and monitoring should be part of the review."
+  ]
+};

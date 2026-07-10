@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Retrieval, Ranking, and Context Assembly",
+  "graphicAlt": "Draft visual summary for Retrieval, Ranking, and Context Assembly",
+  "narration": "Retrieval is the decision layer that chooses what evidence reaches the model. A RAG system usually cannot send the entire knowledge base into the context window. It selects a limited set of chunks using query processing, filters, similarity search, keyword matching, ranking, reranking, source rules, and context limits.\n\nThose decisions strongly influence answer quality and safety. Retrieval should be constrained by user permissions, tenant scope, workflow purpose, source eligibility, and freshness requirements. A user should not receive a chunk just because it is semantically similar when the source is restricted, expired, or outside the approved workflow.\n\nMore retrieved text is not always better. Too much context can crowd out important evidence, introduce stale or conflicting material, increase cost, and make the answer harder to steer. Retrieval design should consider top-k choices, relevance thresholds, duplicate handling, source diversity, freshness preferences, and no-answer behavior when the evidence is weak.\n\nContext assembly is also an architectural boundary. The final prompt should separate trusted system instructions, application policy, user requests, and retrieved evidence. Retrieved chunks should be labeled as source material rather than treated as system policy. That separation helps the model use evidence without confusing it with higher-priority rules.\n\nA mature private RAG system makes retrieval observable and tunable. Engineers should be able to see which chunks were considered, which filters were applied, why certain sources were selected, and whether the answer was grounded in the retrieved material.\n\nRetrieval settings should be reviewed as requirements change. A workflow that supports exploratory research may need different ranking, source diversity, and no-answer behavior than a workflow used for policy guidance or customer-facing support.",
+  "narrationPoints": [
+    "Retrieval is the decision layer that chooses what evidence reaches the model.",
+    "Those decisions strongly influence answer quality and safety.",
+    "More retrieved text is not always better.",
+    "Context assembly is also an architectural boundary.",
+    "A mature private RAG system makes retrieval observable and tunable."
+  ]
+};

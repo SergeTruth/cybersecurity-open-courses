@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.979
+Permission enforcement is a core requirement for private RAG.
+
+2
+00:00:03.979 --> 00:00:12.387
+The system must not allow users to retrieve documents or chunks they could not access through the approved source system or workflow.
+
+3
+00:00:12.387 --> 00:00:20.345
+This requirement applies even when the answer is summarized, transformed, or returned through a conversational interface.
+
+4
+00:00:20.345 --> 00:00:24.324
+Enforcement can happen at ingestion time, query time, or both.
+
+5
+00:00:24.324 --> 00:00:33.108
+Ingestion-time separation may reduce risk by placing different tenants, classifications, or departments into different collections.
+
+6
+00:00:33.108 --> 00:00:44.219
+Query-time enforcement is often essential because user access changes, documents move, groups are updated, projects close, and workflow-specific restrictions may apply.
+
+7
+00:00:44.219 --> 00:00:57.357
+A strong design connects user identity, group membership, service accounts, application roles, tenant IDs, document permissions, metadata filters, row-level or document-level rules, and audit trails.
+
+8
+00:00:57.357 --> 00:01:06.666
+The retrieval service should know who is asking, what workflow they are using, and what content is eligible before selecting context for the model.
+
+9
+00:01:06.666 --> 00:01:10.120
+Administrative access deserves separate treatment.
+
+10
+00:01:10.120 --> 00:01:18.753
+People who manage indexes, prompts, connectors, logs, or source mappings may have visibility and influence that ordinary users do not.
+
+11
+00:01:18.753 --> 00:01:22.207
+Admin roles should be narrow, reviewable, and logged.
+
+12
+00:01:22.207 --> 00:01:28.438
+Private RAG should favor least privilege and deny-by-default behavior for restricted material.
+
+13
+00:01:28.438 --> 00:01:35.044
+Do not rely only on separate user interfaces or broad shared indexes when sensitive content is involved.
+
+14
+00:01:35.044 --> 00:01:42.477
+Test permission boundaries before launch, after source changes, and whenever the retrieval architecture changes.
+
+15
+00:01:42.477 --> 00:01:46.531
+Access tests should use realistic roles and document examples.
+
+16
+00:01:46.531 --> 00:01:58.092
+Include users with partial access, users from other tenants, users whose access was recently removed, and service identities that support background jobs or evaluation workflows.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Maintaining the Toolkit",
+  "graphicAlt": "Blank placeholder graphic for maintaining a DFIR toolkit",
+  "narration": "A DFIR toolkit is not finished when the first version is assembled. Tools change, operating systems change, cloud services change, log formats change, licenses change, and attacker behavior changes. Maintenance keeps the toolkit useful. Without maintenance, responders may discover during an incident that a tool no longer runs, a parser no longer understands the current log format, or a download link points to an untrusted source.\n\nTrack tool versions and licensing. Different versions may parse artifacts differently, support different operating systems, or produce different output. Licensing can affect where a tool may be installed, who may use it, and whether it can be included in offline media. Trusted downloads matter because DFIR tools often run with high privileges and handle sensitive evidence. The toolkit should include source records, hashes when available, and a process for validating updates.\n\nOffline copies are useful when networks are unavailable, restricted, or untrusted. They should not become stale archives that are never reviewed. Keep offline media organized, labeled, and refreshed. Include documentation, procedures, forms, known dependencies, and approved installers where appropriate. Retire obsolete tools so responders do not pick unsafe or unsupported options during stress.\n\nLab validation is the maintenance habit that makes the toolkit real. Test collection procedures against sample systems, validate parsers with known artifacts, rehearse evidence storage and transfer, and confirm that analysts can follow the documentation. Readiness checks should be scheduled, not improvised. A maintained toolkit gives the team confidence because it has already been exercised before the incident arrives.",
+  "narrationPoints": [
+    "A DFIR toolkit is not finished when the first version is assembled.",
+    "Track tool versions and licensing.",
+    "Offline copies are useful when networks are unavailable, restricted, or untrusted.",
+    "Lab validation is the maintenance habit that makes the toolkit real."
+  ]
+};

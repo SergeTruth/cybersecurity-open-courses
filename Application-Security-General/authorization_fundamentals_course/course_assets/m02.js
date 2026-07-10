@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Subjects, Resources, Actions, and Context",
+  "graphicAlt": "Blank placeholder image for a lesson on authorization subjects, resources, actions, and context.",
+  "narration": "The basic authorization question is: who can do what to which resource under what conditions? The subject is the identity requesting access. The action is the operation being attempted. The resource is the object being protected. Context includes surrounding facts that may affect the decision, such as ownership, tenant membership, group membership, data sensitivity, environment, device posture, time, location concepts, or workflow state.\n\nSubjects and identities need to be represented clearly. A human user may act through a browser session, mobile client, API token, or delegated app. A workload may act through a service account. An automation job may act without a person present. Authorization logic should know which subject is making the request and whether the subject is acting directly, through delegation, or as part of a service-to-service flow.\n\nResources and actions should be specific enough to support meaningful decisions. A generic permission such as manage everything is easy to administer but risky. More precise actions, such as view invoice, update invoice status, export tenant report, or rotate integration credential, give teams better control. Resource identity matters too: being able to view one record does not imply access to every record of the same type.\n\nAuthorization decisions should be explicit, reviewable, and close to the sensitive action. A check performed far away from the operation can be forgotten, bypassed by another code path, or made invalid by later changes. Clear subject, resource, action, and context modeling gives developers and reviewers a shared language for access control instead of relying on assumptions hidden in code.",
+  "narrationPoints": [
+    "The basic authorization question is: who can do what to which resource under what conditions?",
+    "Subjects and identities need to be represented clearly.",
+    "Resources and actions should be specific enough to support meaningful decisions.",
+    "Authorization decisions should be explicit, reviewable, and close to the sensitive action."
+  ]
+};

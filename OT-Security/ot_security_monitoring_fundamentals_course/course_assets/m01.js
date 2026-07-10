@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Is OT Security Monitoring?",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "OT security monitoring is the continuing observation and analysis of industrial systems, networks, identities, and operational activity for evidence of security-relevant change. It helps defenders understand what is communicating, what actions are occurring, and whether current behavior matches the expected operation.\n\nVisibility may include network conversations among controllers, HMIs, engineering workstations, historians, and remote-access systems. It can also include authentication, firewall, endpoint, application, and configuration events. No single source provides the complete picture, so monitoring combines evidence from several layers.\n\nOT monitoring differs from ordinary enterprise monitoring because technical activity has process meaning. A command may be expected during a maintenance window and concerning during production. A communication loss may represent a cyber event, equipment failure, network fault, or planned shutdown. Operators and engineers provide context that security telemetry cannot create by itself.\n\nSafety, reliability, and availability constrain how monitoring is deployed. Active probes and untested agents may disrupt sensitive devices. Passive collection and carefully placed sensors are often preferred, especially near control networks. Monitoring should never create an uncontrolled path or a single point of failure.\n\nThe purpose is not to collect every packet forever or generate the most alerts. Effective monitoring establishes asset and behavior visibility, detects meaningful deviation, supports investigation, preserves evidence, and informs response. It becomes valuable when the organization can explain what an observation means, who reviews it, and what action follows without jeopardizing the physical process.",
+  "narrationPoints": [
+    "OT security monitoring is the continuing observation and analysis of industrial systems, networks, identities, and operational activity for evidence of...",
+    "It helps defenders understand what is communicating, what actions are occurring, and whether current behavior matches the expected operation.",
+    "Visibility may include network conversations among controllers, HMIs, engineering workstations, historians, and remote-access systems.",
+    "It can also include authentication, firewall, endpoint, application, and configuration events.",
+    "No single source provides the complete picture, so monitoring combines evidence from several layers.",
+    "OT monitoring differs from ordinary enterprise monitoring because technical activity has process meaning."
+  ]
+};
