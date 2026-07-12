@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Python type hints are useful developer guidance.",
     "Dataclasses, TypedDict, attrs, and similar patterns can improve structure, but they have different enforcement behavior.",
     "Pydantic is commonly used for runtime validation and data models in Python applications.",
-    "Runtime checks for external input are the security boundary."
+    "Runtime checks for external input are the security boundary.",
+    "Pydantic coercion is a policy choice; strict boundary models reject strings, floats, and integers masquerading as other types."
   ]
 };

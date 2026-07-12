@@ -8,6 +8,7 @@ window.COURSE_MODULE = {
     "Ambiguous reads are also dangerous because they make it hard to distinguish a successful conversion from a partial conversion, an empty line, an overlong.",
     "The safer pattern is to read into a known-size buffer, check the result, and only then parse the stored text.",
     "A bounded line-read pattern, such as an fgets-style approach, gives the program a capacity limit, but it does not solve every problem by itself.",
-    "The function may return null on error or end of file."
+    "The function may return null on error or end of file.",
+    "The example accepts one or more spaces or tabs between fields and rejects trailing whitespace or content."
   ]
 };

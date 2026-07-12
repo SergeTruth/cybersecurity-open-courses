@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "APFS is Apple's modern file system used on many macOS systems.",
     "Permissions and ownership help explain which users or processes could access files.",
     "Quarantine attributes can help indicate that a file may have been downloaded or received from an external source.",
-    "Timelines connect the investigation."
+    "Timelines connect the investigation.",
+    "Timeline records use integer nanoseconds, numeric UID and GID values, raw pathname bytes, explicit timestamp meanings, and UTC normalization policies.",
+    "Quarantine attributes preserve both their raw bytes and decoded fields, including a defensibly parsed timestamp when present."
   ]
 };

@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "User account and activity artifacts help analysts understand who could access a Windows system and what actions may be associated with an...",
     "User profiles are rich evidence sources.",
     "Shellbags, at a high level, can provide clues about folder browsing behavior and viewed locations.",
-    "Limits of user attribution are important."
+    "Limits of user attribution are important.",
+    "Before entering a profile or known-folder lead, validate every path component and reject reparse points; Downloads, Desktop, Documents, and OneDrive remain lead lists because known folders can be redirected."
   ]
 };

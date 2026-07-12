@@ -6,6 +6,9 @@ window.COURSE_MODULE = {
     "Persistence analysis on macOS focuses on programs, scripts, agents, daemons, profiles, and settings that cause software to run automatically...",
     "Login items are another startup-related source.",
     "Suspicious scripts or binaries should be interpreted defensively.",
-    "The course focus is defensive persistence analysis only."
+    "The course focus is defensive persistence analysis only.",
+    "System LaunchAgents, system LaunchDaemons, and user LaunchAgents are collected into one verified parser workflow.",
+    "Cron tabs and shell profiles are explicitly labeled as a limited startup-adjacent lead inventory rather than complete persistence coverage.",
+    "Launchd review includes scheduling, keep-alive, watch-path, environment, identity, working-directory, and standard-stream directives."
   ]
 };

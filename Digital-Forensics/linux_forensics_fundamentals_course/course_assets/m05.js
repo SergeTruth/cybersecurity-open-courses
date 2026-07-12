@@ -5,7 +5,9 @@ window.COURSE_MODULE = {
   "narrationPoints": [
     "Processes and services show what a Linux system is doing or was configured to do.",
     "Systemd services are a major source of persistence and operational context on many distributions.",
+    "Review base service files and service drop-ins together because override.conf can replace execution and security directives without changing the base unit.",
     "Cron jobs, at, anacron, shell startup files, profile scripts, and application-specific schedulers may indicate legitimate automation or...",
-    "Unusual binaries, unexpected paths, recently modified service definitions, odd permissions, and unfamiliar startup entries can be persistence..."
+    "Unusual binaries, unexpected paths, recently modified service definitions, odd permissions, and unfamiliar startup entries can be persistence...",
+    "Each capture card establishes its own case prerequisites; live commands are timestamped separately because they are not one atomic snapshot, and evidence symlinks are recorded rather than followed."
   ]
 };

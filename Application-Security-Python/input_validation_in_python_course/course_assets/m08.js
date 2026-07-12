@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Validation logic should be tested as deliberately as business logic.",
     "Boundary tests catch many real defects.",
     "Property-based testing and fuzzing, at a high level, can help discover cases developers did not think to write manually.",
-    "Invalid input should be logged safely."
+    "Invalid input should be logged safely.",
+    "Python-specific negative tests should include booleans when an exact integer is required."
   ]
 };

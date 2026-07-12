@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Network and remote access artifacts help analysts understand how a Linux system communicated and how users reached it.",
     "Listening services and network configuration provide context.",
     "Web access logs, reverse proxy logs, load balancer records, and application logs can help connect Linux host evidence to user activity.",
-    "Remote access analysis should be careful about attribution."
+    "Remote access analysis should be careful about attribution.",
+    "The SSH example preserves matching raw directives, including Include and Match, but does not calculate the final effective configuration.",
+    "Validate both IPv4 and IPv6 tokens, preserve authentication-log provenance, and scan regular configuration files without following evidence symlinks."
   ]
 };

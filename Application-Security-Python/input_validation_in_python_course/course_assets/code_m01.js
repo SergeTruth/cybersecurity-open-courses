@@ -4,7 +4,66 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Code Example: Validating at the Boundary",
       "language": "python",
-      "code": "from dataclasses import dataclass\n\n\nclass ValidationError(ValueError):\n    pass\n\n\n@dataclass(frozen=True)\nclass Signup:\n    email: str\n    age: int\n\n\ndef parse_signup(raw: dict) -> Signup:\n    email = raw.get(\"email\")\n    age = raw.get(\"age\")\n\n    if not isinstance(email, str):\n        raise ValidationError(\"email is required\")\n\n    email = email.strip().lower()\n    if \"@\" not in email or len(email) > 254:\n        raise ValidationError(\"email is invalid\")\n\n    if not isinstance(age, int) or not 13 <= age <= 120:\n        raise ValidationError(\"age must be between 13 and 120\")\n\n    return Signup(email=email, age=age)\n\n\nsignup = parse_signup({\"email\": \"User@example.com \", \"age\": 30})\nprint(signup)"
+      "code": String.raw`from dataclasses import dataclass
+
+
+class ValidationError(ValueError):
+    pass
+
+
+@dataclass(frozen=True)
+class Signup:
+    email: str
+    age: int
+
+
+def normalize_email(value: object) -> str:
+    if type(value) is not str:
+        raise ValidationError("email is required")
+
+    email = value.strip()
+    if (
+        len(email) > 254
+        or email.count("@") != 1
+        or any(
+            character.isspace()
+            or ord(character) < 32
+            or ord(character) == 127
+            for character in email
+        )
+    ):
+        raise ValidationError("email failed a basic address sanity check")
+
+    local_part, domain = email.split("@")
+    if (
+        not local_part
+        or not domain
+        or len(local_part) > 64
+        or domain.startswith(".")
+        or domain.endswith(".")
+    ):
+        raise ValidationError("email failed a basic address sanity check")
+
+    # Preserve the local part; this application normalizes only the domain.
+    return f"{local_part}@{domain.lower()}"
+
+
+def parse_signup(raw: object) -> Signup:
+    required_fields = {"email", "age"}
+    if type(raw) is not dict or set(raw) != required_fields:
+        raise ValidationError("signup must contain exactly email and age")
+
+    email = normalize_email(raw["email"])
+    age = raw["age"]
+    if type(age) is not int or not 13 <= age <= 120:
+        raise ValidationError("age must be an integer from 13 to 120")
+
+    return Signup(email=email, age=age)
+
+
+signup = parse_signup({"email": "User@Example.COM ", "age": 30})
+print(signup)
+`
     }
   ]
 };

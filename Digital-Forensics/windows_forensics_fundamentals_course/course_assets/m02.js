@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Windows systems organize evidence across standard locations, user-specific areas, protected directories, and application data stores.",
     "User profiles are usually found under C:\\Users.",
     "Program Files and Program Files x86 commonly contain installed applications.",
-    "System context matters."
+    "System context matters.",
+    "Export every immediate core-directory child, verify the selected run against the current mount, and preserve registry source/copy hashes in a durable manifest."
   ]
 };

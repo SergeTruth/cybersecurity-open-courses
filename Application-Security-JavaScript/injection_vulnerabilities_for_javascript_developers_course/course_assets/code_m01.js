@@ -4,12 +4,90 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Validate a Request Payload at the Boundary",
       "language": "javascript",
-      "code": "class ValidationError extends Error {}\n\nfunction parseSignupRequest(raw) {\n  if (typeof raw !== \"object\" || raw === null || Array.isArray(raw)) {\n    throw new ValidationError(\"request body must be an object\");\n  }\n\n  const email = typeof raw.email === \"string\" ? raw.email.trim().toLowerCase() : \"\";\n  const displayName = typeof raw.displayName === \"string\" ? raw.displayName.trim() : \"\";\n  const role = typeof raw.role === \"string\" ? raw.role.trim() : \"\";\n  const errors = [];\n\n  if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email) || email.length > 254) {\n    errors.push(\"email must be a valid address\");\n  }\n  if (!/^[A-Za-z][A-Za-z0-9 _.-]{1,39}$/.test(displayName)) {\n    errors.push(\"displayName must be 2 to 40 safe characters\");\n  }\n  if (!new Set([\"viewer\", \"editor\"]).has(role)) {\n    errors.push(\"role must be viewer or editor\");\n  }\n\n  if (errors.length > 0) {\n    throw new ValidationError(errors.join(\"; \"));\n  }\n\n  return { email, displayName, role };\n}\n\nconst signup = parseSignupRequest({\n  email: \" NewUser@example.com \",\n  displayName: \"New User\",\n  role: \"viewer\",\n});\n\nconsole.log(signup);"
+      "code": `class ValidationError extends Error {}
+
+function parseSignupRequest(raw) {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw) ||
+      Object.getPrototypeOf(raw) !== Object.prototype ||
+      !Object.hasOwn(raw, "email") || !Object.hasOwn(raw, "displayName") ||
+      !Object.hasOwn(raw, "role")) {
+    throw new ValidationError("request body must be a plain JSON object");
+  }
+  const email = typeof raw.email === "string" ? raw.email.trim().toLowerCase() : "";
+  const displayName = typeof raw.displayName === "string" ? raw.displayName.trim() : "";
+  const role = typeof raw.role === "string" ? raw.role.trim() : "";
+  const errors = [];
+
+  if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email) || email.length > 254) {
+    errors.push("email must pass a basic address sanity check");
+  }
+  if (!/^[A-Za-z][A-Za-z0-9 _.-]{1,39}$/.test(displayName)) {
+    errors.push("displayName must be 2 to 40 safe characters");
+  }
+  if (!new Set(["viewer", "editor"]).has(role)) {
+    errors.push("role must be viewer or editor");
+  }
+  if (errors.length > 0) throw new ValidationError(errors.join("; "));
+  return { email, displayName, role };
+}
+
+console.log(parseSignupRequest({
+  email: " NewUser@example.com ", displayName: "New User", role: "viewer",
+}));
+`
     },
     {
       "title": "Convert Query Strings into Typed Values",
       "language": "javascript",
-      "code": "function parseProductSearch(query) {\n  const allowedSorts = new Map([\n    [\"name\", \"p.name\"],\n    [\"newest\", \"p.created_at\"],\n    [\"price\", \"p.price_cents\"],\n  ]);\n  const allowedDirections = new Set([\"asc\", \"desc\"]);\n\n  const term = typeof query.q === \"string\" ? query.q.trim() : \"\";\n  const sort = typeof query.sort === \"string\" ? query.sort.trim() : \"name\";\n  const direction = typeof query.direction === \"string\" ? query.direction.trim() : \"asc\";\n  const limit = Number(query.limit ?? 25);\n  const errors = [];\n\n  if (!/^[A-Za-z0-9 ._-]{1,80}$/.test(term)) {\n    errors.push(\"q must be 1 to 80 search-safe characters\");\n  }\n  if (!allowedSorts.has(sort)) {\n    errors.push(\"sort is not supported\");\n  }\n  if (!allowedDirections.has(direction)) {\n    errors.push(\"direction must be asc or desc\");\n  }\n  if (!Number.isInteger(limit) || limit < 1 || limit > 50) {\n    errors.push(\"limit must be an integer from 1 to 50\");\n  }\n\n  if (errors.length > 0) {\n    throw new Error(errors.join(\"; \"));\n  }\n\n  return {\n    term,\n    sortColumn: allowedSorts.get(sort),\n    direction: direction.toUpperCase(),\n    limit,\n  };\n}\n\nasync function searchProducts(db, query) {\n  const input = parseProductSearch(query);\n\n  return db.query(\n    `SELECT id, name, price_cents\n       FROM products p\n      WHERE p.name ILIKE $1\n      ORDER BY ${input.sortColumn} ${input.direction}\n      LIMIT $2`,\n    [`%${input.term}%`, input.limit],\n  );\n}"
+      "code": `const SORTS = new Map([
+  ["name", "p.name"], ["newest", "p.created_at"], ["price", "p.price_cents"],
+]);
+const DIRECTIONS = new Map([["asc", "ASC"], ["desc", "DESC"]]);
+
+function parseCanonicalLimit(value) {
+  const text = value === undefined ? "25" : value;
+  if (typeof text !== "string" || !/^[1-9][0-9]*$/.test(text)) {
+    throw new Error("limit must be canonical decimal text");
+  }
+  const limit = Number(text);
+  if (!Number.isSafeInteger(limit) || limit > 50) {
+    throw new Error("limit must be an integer from 1 to 50");
+  }
+  return limit;
+}
+
+function parseProductSearch(query) {
+  const term = typeof query.q === "string" ? query.q.trim() : "";
+  const sort = typeof query.sort === "string" ? query.sort.trim() : "name";
+  const direction = typeof query.direction === "string" ? query.direction.trim() : "asc";
+  const sortColumn = SORTS.get(sort);
+  const sortDirection = DIRECTIONS.get(direction);
+  const limit = parseCanonicalLimit(query.limit);
+
+  if (!/^[A-Za-z0-9 ._-]{1,80}$/.test(term)) throw new Error("q is invalid");
+  if (sortColumn === undefined || sortDirection === undefined) {
+    throw new Error("sort option is unsupported");
+  }
+  return { term, sortColumn, sortDirection, limit };
+}
+
+async function searchProducts(db, query) {
+  const input = parseProductSearch(query);
+  const sql = "SELECT id, name, price_cents FROM products p " +
+    "WHERE p.name ILIKE $1 ORDER BY " + input.sortColumn + " " +
+    input.sortDirection + " LIMIT $2";
+  return db.query(sql, ["%" + input.term + "%", input.limit]);
+}
+
+for (const invalidLimit of ["0x10", "1e1"]) {
+  try {
+    parseCanonicalLimit(invalidLimit);
+    throw new Error("unexpected acceptance");
+  } catch (error) {
+    if (!error.message.includes("canonical")) throw error;
+  }
+}
+`
     }
   ]
 };

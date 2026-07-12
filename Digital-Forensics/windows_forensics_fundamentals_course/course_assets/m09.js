@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Windows forensics depends on correlating user activity, logs, registry artifacts, file system evidence, execution traces, and security telemetry.",
     "Strong analysis preserves evidence and avoids overclaiming.",
     "Collection choices shape confidence.",
-    "The goal is defensible understanding."
+    "The goal is defensible understanding.",
+    "The capstone combines exact 100-nanosecond ordering, component containment, and shared run-to-mount provenance verification.",
+    "Limited triage establishes its run context inside explicit error handling, so a context failure cannot break run-dependent error reporting."
   ]
 };

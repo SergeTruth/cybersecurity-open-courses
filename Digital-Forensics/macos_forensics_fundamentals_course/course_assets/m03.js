@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "User account artifacts help analysts understand who could access a Mac and what activity may be associated with a profile.",
     "Home directories can contain documents, downloads, desktop files, browser data, application data, shell history, messaging artifacts, recent...",
     "Finder activity, recent items, saved state, and application usage traces can support user activity reconstruction.",
-    "User attribution has limits."
+    "User attribution has limits.",
+    "Malformed account plists are retained as anomalies, while Chrome History and its WAL and shared-memory sidecars are copied and hash-verified before querying.",
+    "Chrome rows with invalid source timestamps are retained separately and do not terminate the remaining history review."
   ]
 };

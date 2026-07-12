@@ -8,6 +8,7 @@ window.COURSE_MODULE = {
     "That control is powerful, but it means the program must define and enforce its own boundaries.",
     "The safest code treats every external source as untrusted, whether the bytes arrive from a terminal, an argument, a file, a socket, a device.",
     "The strongest pattern is validation before use.",
-    "Check read results before parsing."
+    "Check read results before parsing.",
+    "The complete request grammar requires a real space-or-tab delimiter and rejects all trailing bytes."
   ]
 };

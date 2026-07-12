@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Strong validation starts before writing code.",
     "Type is only part of the contract.",
     "Business rules matter as much as technical shape.",
-    "Clear contracts make validation easier to share across teams."
+    "Clear contracts make validation easier to share across teams.",
+    "Because bool subclasses int in Python, exact integer contracts must reject True and False explicitly."
   ]
 };

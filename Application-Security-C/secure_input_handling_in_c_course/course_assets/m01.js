@@ -8,6 +8,7 @@ window.COURSE_MODULE = {
     "It is also deciding how many bytes to read, where those bytes will live, how they become strings or numbers, what happens if parsing.",
     "In many languages, some of those decisions are guarded by runtime checks.",
     "In C, the program owns those checks directly.",
-    "External input should be treated as untrusted no matter where it comes from."
+    "External input should be treated as untrusted no matter where it comes from.",
+    "A string-only API requires a readable, NUL-terminated input; otherwise the boundary must provide a readable length."
   ]
 };

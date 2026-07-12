@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Linux forensics is the preservation, review, and interpretation of evidence from Linux systems during digital forensics and incident response...",
     "A Linux investigation often combines operating system knowledge with careful evidence handling.",
     "Authorization matters.",
-    "Evidence integrity is the foundation."
+    "Evidence integrity is the foundation.",
+    "Record and verify both the mount holding the image file and the mounted analysis root; both must be read-only, and their source mapping belongs in the case record.",
+    "Verify read-only evidence access and preserve each run's source, command, tool, analyst, timestamp, errors, and exit status without overwriting earlier notes."
   ]
 };

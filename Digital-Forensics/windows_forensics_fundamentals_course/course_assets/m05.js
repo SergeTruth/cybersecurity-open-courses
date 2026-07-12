@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "The Windows Registry is a database of system, application, and user configuration information.",
     "User registry hives are especially valuable because they can preserve activity tied to a profile.",
     "Autoruns and startup locations are important because they show programs or scripts configured to start automatically.",
-    "Registry evidence needs context and corroboration."
+    "Registry evidence needs context and corroboration.",
+    "Registry working-copy manifests preserve source and copy paths, hashes, sizes, timestamps, and roles; unload failures are recorded without replacing earlier exceptions."
   ]
 };

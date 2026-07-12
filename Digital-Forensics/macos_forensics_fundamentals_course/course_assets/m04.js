@@ -6,6 +6,9 @@ window.COURSE_MODULE = {
     "macOS unified logging is a major event source for modern Mac investigations.",
     "Traditional logs and application-specific logs still matter.",
     "Retention and time ranges are important.",
-    "Logs must be correlated with other evidence."
+    "Logs must be correlated with other evidence.",
+    "Unified-log collection hashes its source archive, records tool and macOS versions, and uses an explicit UTC incident window.",
+    "Rotated gzip, bzip2, and xz install logs are reviewed with source paths and line numbers; unsupported formats and malformed records remain visible limitations.",
+    "Nonexistent local wall-clock times are rejected, while both UTC possibilities for an ambiguous time are retained for analyst resolution."
   ]
 };

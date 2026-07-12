@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Web and API input should be validated on the server before business logic acts on it.",
     "Flask applications often require explicit request parsing and validation choices.",
     "File metadata deserves special attention.",
-    "Validation error messages should be useful without revealing unnecessary internals."
+    "Validation error messages should be useful without revealing unnecessary internals.",
+    "Validate normalized text and use runtime timezone data rather than a regex that only resembles an IANA name."
   ]
 };

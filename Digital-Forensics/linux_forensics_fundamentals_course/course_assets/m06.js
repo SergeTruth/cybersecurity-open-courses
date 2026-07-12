@@ -6,6 +6,9 @@ window.COURSE_MODULE = {
     "File system analysis helps analysts understand what changed on disk and when.",
     "Permissions and ownership can reveal whether files are accessible to unexpected users or groups.",
     "Deleted file considerations depend on collection method, filesystem, system activity, and timing.",
-    "Timelines become powerful when filesystem metadata is combined with logs and other evidence."
+    "Timelines become powerful when filesystem metadata is combined with logs and other evidence.",
+    "The example exporter is specifically a modification-time timeline, not a complete MACB timeline; preserve that limitation when correlating its records.",
+    "Use escaped machine-readable paths, integer nanosecond timestamps, numeric ownership, explicit incident windows, and documented timezone and clock assumptions.",
+    "Record device IDs and mount topology, report every pruned cross-device directory, and never silently discard a regular file solely because its device differs."
   ]
 };

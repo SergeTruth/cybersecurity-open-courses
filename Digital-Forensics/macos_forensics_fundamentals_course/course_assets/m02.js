@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Understanding macOS layout gives investigators a map for likely evidence locations.",
     "/Library contains system-wide application support data, launch items, logs, preferences, and configuration shared across users.",
     "/System contains operating system components and is protected on modern macOS versions by platform security features.",
-    "System context matters."
+    "System context matters.",
+    "The executable inventory is complete rather than a traversal preview, does not follow symbolic links or cross filesystems, and uses filename-safe JSON Lines records."
   ]
 };

@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Collection and preservation determine how reliable the investigation can be.",
     "Triage collection is often used when analysts need a focused snapshot quickly.",
     "Hashes help verify whether collected evidence changes after collection.",
-    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references."
+    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references.",
+    "A manifest rejects empty collections and uses deterministic ordering, while findings require an existing selected run with acquisition provenance."
   ]
 };

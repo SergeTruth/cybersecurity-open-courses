@@ -1,10 +1,105 @@
 window.COURSE_CODE_MODULE = {
-  "title": "Code Example: Allowlisted File Names",
+  "title": "Code Example: Contain a POSIX File Open",
   "codeExamples": [
     {
-      "title": "Allowlisted File Names",
+      "title": "Contain a POSIX File Open",
       "language": "c",
-      "code": "#include <ctype.h>\n#include <stdio.h>\n#include <string.h>\n\n#define BASE_DIR \"uploads\"\n#define PATH_CAP 128\n#define MAX_FILE_BYTES 1048576L\n\nstatic int safe_file_name(const char *name) {\n    size_t length;\n\n    if (name == NULL) {\n        return 0;\n    }\n    length = strlen(name);\n    if (length == 0 || length > 64) {\n        return 0;\n    }\n    if (strstr(name, \"..\") != NULL || strchr(name, '/') != NULL || strchr(name, '\\\\') != NULL) {\n        return 0;\n    }\n    if (length < 4 || strcmp(name + length - 4, \".cfg\") != 0) {\n        return 0;\n    }\n\n    for (size_t i = 0; i < length; i++) {\n        unsigned char ch = (unsigned char)name[i];\n        if (!isalnum(ch) && ch != '_' && ch != '-' && ch != '.') {\n            return 0;\n        }\n    }\n    return 1;\n}\n\nint open_valid_config(const char *name, FILE **out) {\n    char path[PATH_CAP];\n    int written;\n    FILE *file;\n\n    if (!safe_file_name(name)) {\n        return -1;\n    }\n\n    written = snprintf(path, sizeof(path), \"%s/%s\", BASE_DIR, name);\n    if (written < 0 || (size_t)written >= sizeof(path)) {\n        return -1;\n    }\n\n    file = fopen(path, \"rb\");\n    if (file == NULL) {\n        return -1;\n    }\n    if (fseek(file, 0, SEEK_END) != 0 || ftell(file) > MAX_FILE_BYTES) {\n        fclose(file);\n        return -1;\n    }\n    rewind(file);\n\n    *out = file;\n    return 0;\n}"
+      "code": String.raw`#define _GNU_SOURCE
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#ifndef BASE_DIR
+#define BASE_DIR "/srv/app/uploads"
+#endif
+
+#define MAX_FILE_BYTES ((off_t)1048576)
+
+static int ascii_alphanumeric(unsigned char ch)
+{
+    return (ch >= (unsigned char)'A' && ch <= (unsigned char)'Z') ||
+           (ch >= (unsigned char)'a' && ch <= (unsigned char)'z') ||
+           (ch >= (unsigned char)'0' && ch <= (unsigned char)'9');
+}
+
+static int safe_file_name(const char *name)
+{
+    size_t index;
+    size_t length = 0U;
+
+    if (name == NULL) {
+        return 0;
+    }
+    while (length <= 64U && name[length] != '\0') {
+        length++;
+    }
+    if (length < 5U || length > 64U ||
+        !ascii_alphanumeric((unsigned char)name[0]) ||
+        strcmp(name + length - 4U, ".cfg") != 0) {
+        return 0;
+    }
+
+    for (index = 1U; index < length - 4U; index++) {
+        unsigned char ch = (unsigned char)name[index];
+        if (!ascii_alphanumeric(ch) && ch != (unsigned char)'_' &&
+            ch != (unsigned char)'-' && ch != (unsigned char)'.') {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+static int open_config_directory(void)
+{
+    return open(BASE_DIR,
+                O_RDONLY | O_DIRECTORY | O_CLOEXEC | O_NOFOLLOW);
+}
+
+int open_valid_config(const char *name, FILE **out)
+{
+    int directory_fd;
+    int file_fd;
+    struct stat file_info;
+    FILE *file;
+
+    /* Output-slot contract: callers pass an empty owner slot. */
+    if (out == NULL || *out != NULL || !safe_file_name(name)) {
+        return -1;
+    }
+
+    directory_fd = open_config_directory();
+    if (directory_fd < 0) {
+        return -1;
+    }
+    /* O_NONBLOCK prevents a FIFO from stalling before fstat rejects it. */
+    file_fd = openat(directory_fd, name,
+                     O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
+    (void)close(directory_fd);
+    if (file_fd < 0) {
+        return -1;
+    }
+
+    if (fstat(file_fd, &file_info) != 0 ||
+        !S_ISREG(file_info.st_mode) || file_info.st_size < (off_t)0 ||
+        file_info.st_size > MAX_FILE_BYTES) {
+        (void)close(file_fd);
+        return -1;
+    }
+
+    file = fdopen(file_fd, "rb");
+    if (file == NULL) {
+        (void)close(file_fd);
+        return -1;
+    }
+
+    /* Enforce the same byte limit while reading if files can change. */
+    *out = file;
+    return 0;
+}
+`
     }
   ]
 };

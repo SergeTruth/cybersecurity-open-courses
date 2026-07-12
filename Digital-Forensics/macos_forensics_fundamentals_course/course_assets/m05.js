@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Property lists, commonly called plists, are a common macOS format for configuration and state.",
     "User preferences and application data often live under ~/Library.",
     "Recent files, saved state, and application traces can be useful for reconstructing activity.",
-    "Plists and application artifacts need context and corroboration."
+    "Plists and application artifacts need context and corroboration.",
+    "Selected plists are copied and hash-verified before bounded parsing, and malformed files are retained instead of terminating the review."
   ]
 };

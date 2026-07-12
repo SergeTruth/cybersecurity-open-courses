@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Logs are central to Linux forensics, but their location and completeness vary.",
     "Systems that use systemd may also store events in the systemd journal.",
     "Application logs can be just as important as operating system logs.",
-    "Log rotation matters because older logs may be compressed, renamed, archived, or deleted according to retention settings."
+    "Log rotation matters because older logs may be compressed, renamed, archived, or deleted according to retention settings.",
+    "Stream both common authentication-log families, preserve source provenance, normalize timestamps explicitly, and record missing or unreadable artifacts as limitations.",
+    "An offline journal must resolve inside the evidence root and contain no symbolic entries before journalctl is allowed to inspect it."
   ]
 };

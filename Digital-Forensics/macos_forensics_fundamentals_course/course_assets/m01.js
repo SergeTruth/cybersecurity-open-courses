@@ -6,6 +6,9 @@ window.COURSE_MODULE = {
     "macOS forensics is the preservation and analysis of evidence from Apple desktop and laptop systems.",
     "macOS investigations often support DFIR, insider investigations, endpoint response, user activity reconstruction, policy investigations, and...",
     "Authorization and careful handling matter because Macs often contain sensitive business records, source code, credentials, personal files,...",
-    "Evidence integrity is the foundation."
+    "Evidence integrity is the foundation.",
+    "Every offline card uses one exclusive analyst-controlled run that is rebound to a recorded read-only volume and device before analysis.",
+    "Initialization preserves source hashes, mount-session provenance, tool versions, analyst identity, UTC start time, errors, and limitations.",
+    "Every context load recomputes the acquisition-record and source-to-mount mapping hashes before using the run."
   ]
 };

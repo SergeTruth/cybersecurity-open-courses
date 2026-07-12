@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Input validation helps reduce common Python security issues, but it must be paired with safe APIs and authorization.",
     "Path traversal happens when input influences file paths outside intended directories.",
     "Unsafe deserialization is risky because attacker-controlled data may be processed in dangerous ways by a deserializer.",
-    "Mass assignment and business logic abuse show that validation is not only about syntax."
+    "Mass assignment and business logic abuse show that validation is not only about syntax.",
+    "Do not coerce arbitrary objects into trusted strings, and resolve subprocess executables from trusted application state.",
+    "The application owns report-program identity; the update caller owns database commit and rollback."
   ]
 };

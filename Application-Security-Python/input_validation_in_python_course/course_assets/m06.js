@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Python is frequently used to process files and structured data, so validation must go beyond web requests.",
     "JSON parsing confirms syntax, but schema validation confirms expected structure.",
     "XML risks should be understood at a high level.",
-    "Structured data validation should be layered."
+    "Structured data validation should be layered.",
+    "For hostile POSIX upload directories, open and verify one descriptor, cap bytes while reading, and validate every nested record."
   ]
 };

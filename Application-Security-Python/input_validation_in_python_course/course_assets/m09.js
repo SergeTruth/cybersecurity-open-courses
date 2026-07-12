@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Python input validation requires explicit runtime enforcement.",
     "Strong validation starts with clear contracts.",
     "Safe libraries and framework validators can reduce mistakes.",
-    "The goal is predictable, safe application behavior."
+    "The goal is predictable, safe application behavior.",
+    "Validate container and value types before set or dictionary membership so every rejection is controlled."
   ]
 };

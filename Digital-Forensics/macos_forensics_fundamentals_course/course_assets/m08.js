@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions.",
     "Disk images, snapshots, targeted collections, memory capture at a high level, log exports, user profile artifacts, plists, application data,...",
     "Hashes help verify whether evidence changes after collection.",
-    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references."
+    "Reporting should include methods, evidence, findings, confidence, limitations, and supporting references.",
+    "A filename-safe collection manifest rejects an unexpectedly empty derivative set and records an explicit file count and manifest hash."
   ]
 };

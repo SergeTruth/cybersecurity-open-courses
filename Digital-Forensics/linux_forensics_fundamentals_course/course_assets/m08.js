@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Collection should minimize unnecessary changes while preserving enough evidence to answer the investigation questions.",
     "Disk images, snapshots, targeted file collections, memory capture at a high level, log exports, and cloud records can all support an...",
     "Case notes are part of the evidence process.",
-    "Reporting should communicate evidence, methods, findings, confidence, limitations, and supporting references."
+    "Reporting should communicate evidence, methods, findings, confidence, limitations, and supporting references.",
+    "A collection manifest must reject an unexpected empty set, remain filename-safe, and never confuse the hash of empty standard input with collected evidence.",
+    "Analyst identity should come from the effective account database rather than environment-controlled login-name variables."
   ]
 };

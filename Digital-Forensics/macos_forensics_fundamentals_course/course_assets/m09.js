@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "macOS forensics requires understanding system layout, user artifacts, logs, plists, persistence locations, file metadata, and application traces.",
     "Strong analysis preserves evidence and correlates multiple sources.",
     "Collection choices shape confidence.",
-    "The goal is defensible understanding of what happened, when it happened, and what systems or users were affected."
+    "The goal is defensible understanding of what happened, when it happened, and what systems or users were affected.",
+    "The capstone sorts supported observations by exact normalized time and writes untimed artifact leads to a separate durable derivative.",
+    "Every timeline row retains timestamp meaning, original value, timezone assumption, derivative provenance, and source row number."
   ]
 };

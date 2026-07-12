@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "Linux forensics depends on understanding system layout, user artifacts, logs, services, files, and network activity.",
     "Strong analysis preserves evidence and correlates sources.",
     "Collection and preservation shape the quality of the investigation.",
-    "The goal is defensible investigation, not guessing from isolated artifacts."
+    "The goal is defensible investigation, not guessing from isolated artifacts.",
+    "Cross-artifact timelines require one case directory, normalized numeric time, recorded assumptions, and a clear distinction between complete correlation and a limited preview.",
+    "A limited preview still retains and classifies every account row and records unsupported compressed logs rather than silently excluding unusual evidence."
   ]
 };

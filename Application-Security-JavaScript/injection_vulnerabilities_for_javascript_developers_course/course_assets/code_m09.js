@@ -4,12 +4,67 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Vulnerable: User Input Builds a Shell Command",
       "language": "javascript",
-      "code": "import { exec } from \"node:child_process\";\n\napp.get(\"/support/ticket/:id/log\", (req, res, next) => {\n  const ticketId = req.params.id;\n\n  exec(`grep ${ticketId} /var/log/support/tickets.log`, (error, stdout) => {\n    if (error) return next(error);\n\n    res.type(\"text/plain\").send(stdout);\n  });\n});"
+      "code": `import { exec } from "node:child_process";
+
+app.get("/support/ticket/:id/log", (req, res, next) => {
+  const ticketId = req.params.id;
+  exec("grep " + ticketId + " /var/log/support/tickets.log", (error, stdout) => {
+    if (error) return next(error);
+    res.type("text/plain").send(stdout);
+  });
+});
+`
     },
     {
-      "title": "Fixed: Validate Input and Pass Arguments Without a Shell",
+      "title": "Fixed: Validate Input and Pass Literal Arguments Without a Shell",
       "language": "javascript",
-      "code": "import { execFile } from \"node:child_process\";\nimport { promisify } from \"node:util\";\n\nconst runFile = promisify(execFile);\nconst TICKET_ID_PATTERN = /^[A-Z]{2,6}-\\d{1,10}$/;\nconst LOG_FILE = \"/var/log/support/tickets.log\";\n\nfunction parseTicketId(value) {\n  if (typeof value !== \"string\" || !TICKET_ID_PATTERN.test(value)) {\n    const error = new Error(\"invalid ticket id\");\n    error.status = 400;\n    throw error;\n  }\n\n  return value;\n}\n\napp.get(\"/support/ticket/:id/log\", async (req, res, next) => {\n  try {\n    const ticketId = parseTicketId(req.params.id);\n    const { stdout } = await runFile(\"grep\", [ticketId, LOG_FILE], {\n      shell: false,\n      timeout: 3000,\n      maxBuffer: 64 * 1024,\n      windowsHide: true,\n    });\n\n    res.type(\"text/plain\").send(stdout);\n  } catch (error) {\n    next(error);\n  }\n});"
+      "code": `import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const runFile = promisify(execFile);
+const TICKET_ID_PATTERN = /^[A-Z]{2,6}-\\d{1,10}$/;
+const GREP_EXECUTABLE = "/usr/bin/grep";
+const LOG_FILE = "/var/log/support/tickets.log";
+
+function parseTicketId(value) {
+  if (typeof value !== "string" || !TICKET_ID_PATTERN.test(value)) {
+    const error = new Error("invalid ticket id");
+    error.status = 400;
+    throw error;
+  }
+  return value;
+}
+
+async function findTicketLines(ticketId) {
+  try {
+    const { stdout } = await runFile(
+      GREP_EXECUTABLE,
+      ["-F", "--", ticketId, LOG_FILE],
+      {
+        shell: false,
+        timeout: 3000,
+        maxBuffer: 64 * 1024,
+        windowsHide: true,
+      },
+    );
+    return stdout;
+  } catch (error) {
+    /* grep uses status 1 for a valid search with no matching lines. */
+    if (error?.code === 1) return "";
+    throw error;
+  }
+}
+
+app.get("/support/ticket/:id/log", async (req, res, next) => {
+  try {
+    const ticketId = parseTicketId(req.params.id);
+    const stdout = await findTicketLines(ticketId);
+    res.type("text/plain").send(stdout);
+  } catch (error) {
+    next(error);
+  }
+});
+`
     }
   ]
 };

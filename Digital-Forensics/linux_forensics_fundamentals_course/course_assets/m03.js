@@ -6,6 +6,8 @@ window.COURSE_MODULE = {
     "User and account artifacts help analysts understand who could access the system and what activity may be tied to specific accounts.",
     "/etc/shadow stores sensitive password-related information at a high level and should be handled carefully under approved authority.",
     "Home directories can contain user-level evidence such as shell configuration, command history, downloads, SSH authorized_keys files, known...",
-    "Sudo usage, account creation, account modification, and privilege changes can appear in authentication logs, system logs, package or..."
+    "Sudo usage, account creation, account modification, and privilege changes can appear in authentication logs, system logs, package or...",
+    "Preserve numeric evidence UID and GID values, map them with the evidence account files, and retain malformed account rows as anomalies.",
+    "Classify every account row using exact disabled-shell paths; unknown shells, noncanonical IDs, negative IDs, and duplicates are findings rather than filter conditions."
   ]
 };

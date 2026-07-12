@@ -8,6 +8,7 @@ window.COURSE_MODULE = {
     "Command-line arguments may be missing, reordered, extremely long, or encoded in ways the program did not expect.",
     "Environment variables can be controlled by the process launcher and may influence paths, modes, credentials, configuration, or library behavior.",
     "None of these sources should be used just because they appear close to the program.",
-    "Files and configuration files are common input boundaries."
+    "Files and configuration files are common input boundaries.",
+    "A logical-name allowlist does not replace path- or command-specific validation at a later sink."
   ]
 };

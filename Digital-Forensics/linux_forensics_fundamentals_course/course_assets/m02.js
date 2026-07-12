@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Understanding the Linux filesystem hierarchy gives analysts a map for where evidence may live.",
     "/etc is especially important because it can reveal system configuration, user and group definitions, service settings, scheduled task...",
     "/var often contains logs, application data, spool files, caches, package records, and service-specific state.",
-    "Distribution differences matter."
+    "Distribution differences matter.",
+    "Save complete, filename-safe inventories and label deliberately sorted samples rather than presenting an arbitrary traversal prefix."
   ]
 };

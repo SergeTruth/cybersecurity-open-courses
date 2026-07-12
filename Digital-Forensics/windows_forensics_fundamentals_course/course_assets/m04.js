@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Windows Event Logs are one of the most important sources for forensic analysis.",
     "PowerShell logs, when enabled, can provide useful evidence about script execution and command activity.",
     "Event IDs are useful reference points, but Windows forensics is not only memorizing event numbers.",
-    "Retention matters."
+    "Retention matters.",
+    "Offline event derivatives validate every parent component and preserve duplicate EventData names as indexed records alongside source hashes and raw XML."
   ]
 };

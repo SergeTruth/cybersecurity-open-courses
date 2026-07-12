@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Python applications often sit behind frameworks such as Flask, Django, and FastAPI.",
     "JSON payloads are common in Python APIs, but JSON parsing only tells the application that the payload is syntactically valid JSON.",
     "Python programs also process input outside web frameworks.",
-    "A practical validation strategy begins by inventorying input sources."
+    "A practical validation strategy begins by inventorying input sources.",
+    "Canonical decimal contracts should reject signs, whitespace, separators, and leading zeros before calling int."
   ]
 };

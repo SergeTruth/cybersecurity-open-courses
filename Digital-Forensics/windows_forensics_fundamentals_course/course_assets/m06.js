@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "File system analysis helps analysts understand when files were created, modified, accessed, moved, or deleted.",
     "Execution traces can provide clues about programs that ran.",
     "Link files, jump lists, recent file artifacts, and recycle bin records can help reconstruct user and file interaction.",
-    "Timelines bring these pieces together."
+    "Timelines bring these pieces together.",
+    "The mounted-filesystem inventory streams rows incrementally, while every offline source is first bound to the run's recorded root, volume, and disk."
   ]
 };

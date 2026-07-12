@@ -6,6 +6,7 @@ window.COURSE_MODULE = {
     "Python applications process untrusted data from many directions: users, APIs, files, queues, command-line interfaces, environment variables, d...",
     "Dynamic typing does not remove validation requirements.",
     "Validation is related to several other ideas.",
-    "Input validation is one layer, not the entire security model."
+    "Input validation is one layer, not the entire security model.",
+    "A lightweight email sanity check is not full address validation; preserve the local part unless policy says otherwise."
   ]
 };
