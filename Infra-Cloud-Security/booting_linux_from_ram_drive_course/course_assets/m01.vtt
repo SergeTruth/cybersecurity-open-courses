@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.229
+Booting Linux from RAM is not one single feature.
+
+2
+00:00:03.229 --> 00:00:11.262
+It is a family of designs where some part of the running system is backed by memory instead of ordinary persistent storage.
+
+3
+00:00:11.262 --> 00:00:22.209
+In one design, a live image is copied into RAM during boot, so the system can run with less dependence on the USB drive, optical media, or network source that started it.
+
+4
+00:00:22.209 --> 00:00:30.084
+In another design, the base root filesystem is read-only, and a writable tmpfs overlay records session changes in RAM.
+
+5
+00:00:30.084 --> 00:00:36.936
+In another, the initramfs stages early boot work in memory before the final root filesystem is mounted.
+
+6
+00:00:36.936 --> 00:00:45.835
+Some systems go further and make the whole root effectively volatile, so each reboot returns to a clean state. The appeal is practical.
+
+7
+00:00:45.835 --> 00:00:54.183
+RAM-backed reads can be fast after the system is loaded. Disk writes can be reduced, which helps low-wear media and lab images.
+
+8
+00:00:54.183 --> 00:01:02.767
+A live session can be portable. A kiosk, classroom, training machine, or recovery environment can reset cleanly after each boot.
+
+9
+00:01:02.767 --> 00:01:09.619
+A test machine can be changed freely because the changes disappear unless they are deliberately saved.
+
+10
+00:01:09.619 --> 00:01:19.227
+The warning is just as important: RAM is temporary. If the system reboots, loses power, crashes, or runs out of memory, RAM-only changes are gone.
+
+11
+00:01:19.227 --> 00:01:29.465
+That can be a feature when the goal is clean rollback, but it can be a disaster if the learner expected logs, configuration, updates, or user data to persist.
+
+12
+00:01:29.465 --> 00:01:38.837
+Good RAM-boot design starts with a clear goal. Are you trying to remove dependence on the boot device after startup? Reduce writes to storage?
+
+13
+00:01:38.837 --> 00:01:47.815
+Build a disposable lab workstation? Keep a read-only base image with a temporary writable layer? Test software in a clean environment?
+
+14
+00:01:47.815 --> 00:01:57.817
+Each goal points to a different pattern and a different persistence plan. Avoid treating RAM booting as automatically faster, safer, or more private.
+
+15
+00:01:57.817 --> 00:02:05.613
+It is an engineering choice with tradeoffs that must match the workload, hardware, distribution, and recovery plan.

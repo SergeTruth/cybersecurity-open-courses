@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Segmentation, Zones, and Trust Boundaries",
+  "graphicAlt": "Conceptual visual of segmented network zones and controlled trust boundaries.",
+  "narration": "Segmentation separates systems so a mistake, compromise, or overload in one area does not automatically affect everything else. A flat network allows too much unnecessary communication and increases blast radius. Segmentation introduces zones: user networks, server networks, management networks, guest wireless, production, development, sensitive environments, cloud networks, and third-party connection areas. Each zone should have a purpose and a reason for the communication it allows.\n\nA trust boundary is the place where communication should be controlled, inspected, logged, or explicitly approved. Boundaries often sit at firewalls, access control lists, security groups, VPN gateways, identity-aware proxies, or cloud routing controls. A boundary is useful when it reflects real risk: data sensitivity, business function, administrative privilege, partner access, internet exposure, or operational criticality. It is less useful when it exists only as a diagram that no one operates.\n\nSegmentation should support the business. A payroll system, guest wireless network, building control network, development environment, and production database do not need the same trust model. Some systems need tightly controlled access, while others need broad user reachability. Good segmentation creates clear communication paths and denies unnecessary paths. It should also support logging, troubleshooting, and incident response so teams can understand what is happening across boundaries.\n\nAvoid designs that are so complex teams cannot maintain them. Overly complicated segmentation can lead to emergency exceptions, undocumented firewall rules, and fragile troubleshooting. Start with critical zones, known data flows, and high-value administrative paths. Review the design as the environment changes. Effective segmentation is understandable, enforceable, and aligned with ownership, monitoring, and change control.",
+  "narrationPoints": [
+    "Segmentation limits unnecessary communication.",
+    "Zones group systems by purpose, risk, or sensitivity.",
+    "Trust boundaries define where access should be controlled.",
+    "Flat networks increase blast radius.",
+    "Segmentation must remain understandable and operable."
+  ]
+};

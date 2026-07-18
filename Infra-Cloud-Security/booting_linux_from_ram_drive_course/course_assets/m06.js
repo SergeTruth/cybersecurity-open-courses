@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "OverlayFS and Volatile Root Designs",
+  "graphicAlt": "Conceptual visual of read-only lower layer, RAM-backed upper layer, and merged filesystem view.",
+  "narration": "Overlay-style designs are a useful way to understand many RAM-backed systems. The lower layer holds the base system. It may be a read-only filesystem image, an immutable snapshot, or a mounted root that should not be changed during normal use. The upper layer records writes. When the system presents a merged view, applications see what looks like a normal writable filesystem. Reads can come from the lower layer unless a file has been changed in the upper layer.\n\nIf the upper layer is tmpfs, writes are stored in memory. That makes the session flexible but volatile. A user can change files, install a package temporarily, modify configuration, or create logs during the session, and those changes can vanish at reboot. This is useful when the goal is a resettable workstation, kiosk, classroom lab, training environment, or controlled analysis sandbox at a safe conceptual level. It can also protect the base system from routine writes.\n\nThe merged view is convenient, but it can hide important design questions. Which paths are in the overlay? Which paths are mounted separately? Do logs persist? Does /home persist? Are machine identity files, SSH host keys, package databases, or application state expected to survive? If the upper layer fills memory, what fails first? If updates are installed into the temporary layer, do they disappear at the next boot?\n\nPersistence must be deliberate. A design might mount /home from persistent storage while keeping the system root volatile. It might send logs to a remote server. It might provide an explicit save action. It might update the read-only base image through a separate maintenance workflow. Without these decisions, the system may appear to work until a reboot removes something important.\n\nOverlayFS and similar designs are powerful because they separate base state from session state. They are also easy to misunderstand. Always test the actual writable layer, verify mounts, inspect what changes after a reboot, and document which data survives.",
+  "narrationPoints": [
+    "Overlay designs use lower and upper layers.",
+    "The lower layer can be read-only.",
+    "A tmpfs upper layer makes changes volatile.",
+    "The merged view behaves like a writable system.",
+    "Persistence must be designed deliberately."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.748
+Live Linux systems are a common place to encounter RAM-backed booting.
+
+2
+00:00:04.748 --> 00:00:12.819
+A live system often starts from a compressed read-only filesystem image on USB media, optical media, or a network source.
+
+3
+00:00:12.819 --> 00:00:20.099
+During boot, the live environment presents a working Linux session without installing to the internal disk.
+
+4
+00:00:20.099 --> 00:00:33.313
+Because the base image is read-only, the system usually adds a writable layer so the session can create files, write temporary state, install packages temporarily, or change settings for that boot.
+
+5
+00:00:33.313 --> 00:00:42.730
+Some live distributions support a toram-style option. The exact name and behavior vary, so treat toram as a concept, not a universal command.
+
+6
+00:00:42.730 --> 00:00:48.585
+In this style, the boot process copies the live image or required media content into RAM.
+
+7
+00:00:48.585 --> 00:00:53.808
+After the copy, reads can come from memory instead of the original boot device.
+
+8
+00:00:53.808 --> 00:01:03.778
+This may let the physical media be removed, reduce media wear, improve read-heavy performance after startup, or make recovery work more convenient.
+
+9
+00:01:03.778 --> 00:01:12.245
+The costs are real. Copying the image into RAM can make initial boot slower. It consumes memory before applications even start.
+
+10
+00:01:12.245 --> 00:01:17.151
+A large desktop live image may not fit comfortably on low-memory systems.
+
+11
+00:01:17.151 --> 00:01:25.697
+If the writable layer is also in RAM, package installs, browser caches, logs, and user activity can increase memory use quickly.
+
+12
+00:01:25.697 --> 00:01:35.983
+If persistence is not configured, changes disappear at shutdown. Distribution support matters. One live distribution may support a simple boot option.
+
+13
+00:01:35.983 --> 00:01:40.969
+Another may require a different parameter or may not support the workflow.
+
+14
+00:01:40.969 --> 00:01:51.255
+Secure boot, graphics drivers, encrypted volumes, Wi-Fi firmware, vendor laptops, and unusual storage controllers can all complicate the experience.
+
+15
+00:01:51.255 --> 00:01:59.960
+Do not assume one tested boot line applies everywhere. The safe path is to test with a noncritical machine or virtual machine first.
+
+16
+00:01:59.960 --> 00:02:07.556
+Confirm that the system actually copied what you expected into RAM. Confirm whether the boot media can be removed.
+
+17
+00:02:07.556 --> 00:02:17.131
+Check available memory after boot and under workload. Decide whether anything needs to persist, such as downloaded tools, logs, or user files.
+
+18
+00:02:17.131 --> 00:02:25.518
+A live-to-RAM boot can be excellent for recovery and lab use, but only when the memory and persistence behavior match the task.

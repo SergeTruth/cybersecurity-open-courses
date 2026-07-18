@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Booting Linux from RAM Means",
+  "graphicAlt": "Conceptual visual of Linux running from memory with volatile and persistent paths separated.",
+  "narration": "Booting Linux from RAM is not one single feature. It is a family of designs where some part of the running system is backed by memory instead of ordinary persistent storage. In one design, a live image is copied into RAM during boot, so the system can run with less dependence on the USB drive, optical media, or network source that started it. In another design, the base root filesystem is read-only, and a writable tmpfs overlay records session changes in RAM. In another, the initramfs stages early boot work in memory before the final root filesystem is mounted. Some systems go further and make the whole root effectively volatile, so each reboot returns to a clean state.\n\nThe appeal is practical. RAM-backed reads can be fast after the system is loaded. Disk writes can be reduced, which helps low-wear media and lab images. A live session can be portable. A kiosk, classroom, training machine, or recovery environment can reset cleanly after each boot. A test machine can be changed freely because the changes disappear unless they are deliberately saved.\n\nThe warning is just as important: RAM is temporary. If the system reboots, loses power, crashes, or runs out of memory, RAM-only changes are gone. That can be a feature when the goal is clean rollback, but it can be a disaster if the learner expected logs, configuration, updates, or user data to persist.\n\nGood RAM-boot design starts with a clear goal. Are you trying to remove dependence on the boot device after startup? Reduce writes to storage? Build a disposable lab workstation? Keep a read-only base image with a temporary writable layer? Test software in a clean environment? Each goal points to a different pattern and a different persistence plan. Avoid treating RAM booting as automatically faster, safer, or more private. It is an engineering choice with tradeoffs that must match the workload, hardware, distribution, and recovery plan.",
+  "narrationPoints": [
+    "RAM-backed Linux booting has several patterns.",
+    "Some designs copy a live system into memory.",
+    "Some designs use a writable RAM overlay.",
+    "RAM-backed changes are usually temporary.",
+    "Good design starts with a clear goal."
+  ]
+};

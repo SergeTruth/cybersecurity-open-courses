@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Hunting for Engineering and Configuration Changes",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Engineering and configuration hunts focus on privileged activity that can alter control-system behavior. Relevant evidence may come from engineering workstations, controller logs, project repositories, remote sessions, file systems, removable-media records, and formal change management.\n\nStart with approved work. Identify maintenance windows, assigned engineers, target assets, expected project versions, tools, and change tickets. Then compare observed connections, files, controller mode changes, downloads, and configuration exports with that authorization.\n\nController logic or parameter changes deserve careful handling because legitimate updates are common and operationally significant. Firmware work may also change network behavior or logging. Hunters should verify vendor guidance, project records, backups, and engineering approval rather than judging a change from one event.\n\nUnauthorized project-file movement can include copies to unapproved systems, removable media, shared folders, or remote sessions. The concern may be integrity, confidentiality, or uncontrolled versioning. Preserve file metadata and repository history where available without opening or altering production project files unnecessarily.\n\nDistinguish suspicious activity from troubleshooting, emergency repair, commissioning, and routine maintenance. Operators and control engineers can confirm whether the process state and observed work align. Security teams can correlate identity, endpoint, network, and change evidence.\n\nDocument the exact artifact, source, destination, account, time, approved version, and process impact. If escalation is required, preserve known-good backups and coordinate response authority. Unplanned rollback, isolation, or controller reload can create serious operational risk.",
+  "narrationPoints": [
+    "Engineering and configuration hunts focus on privileged activity that can alter control-system behavior.",
+    "Relevant evidence may come from engineering workstations, controller logs, project repositories, remote sessions, file systems, removable-media records, and formal...",
+    "Identify maintenance windows, assigned engineers, target assets, expected project versions, tools, and change tickets.",
+    "Then compare observed connections, files, controller mode changes, downloads, and configuration exports with that authorization.",
+    "Controller logic or parameter changes deserve careful handling because legitimate updates are common and operationally significant.",
+    "Firmware work may also change network behavior or logging."
+  ]
+};

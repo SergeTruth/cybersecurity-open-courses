@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.094
+Containers often receive configuration through environment variables, mounted files, orchestration settings, or external configuration services.
+
+2
+00:00:10.094 --> 00:00:17.004
+Secrets may include API keys, database passwords, certificates, tokens, and application credentials.
+
+3
+00:00:17.004 --> 00:00:22.128
+The central rule is simple: secrets should not be baked into container images.
+
+4
+00:00:22.128 --> 00:00:29.892
+Images may be stored, copied, cached, scanned, shared, or reused long after the original deployment context changes.
+
+5
+00:00:29.892 --> 00:00:33.930
+Secret delivery should be separate from image construction.
+
+6
+00:00:33.930 --> 00:00:43.635
+Runtime secret mounts, managed secret stores, short-lived credentials, and rotation workflows are more durable patterns than hardcoded values.
+
+7
+00:00:43.635 --> 00:00:47.828
+Secret rotation concepts should be planned before an incident.
+
+8
+00:00:47.828 --> 00:00:59.164
+If a key leaks, teams need to know which workloads use it, how to replace it, how to restart or reload affected containers, and how to verify that old credentials no longer work.
+
+9
+00:00:59.164 --> 00:01:01.959
+Logs are another data protection concern.
+
+10
+00:01:01.959 --> 00:01:12.984
+Applications can accidentally write passwords, tokens, request bodies, connection strings, or sensitive customer data to stdout, stderr, or sidecar logging paths.
+
+11
+00:01:12.984 --> 00:01:21.913
+Container platforms make log collection convenient, which means sensitive data can spread quickly into centralized logging systems.
+
+12
+00:01:21.913 --> 00:01:28.823
+Logging should preserve operational value without turning every log pipeline into a secret repository.
+
+13
+00:01:28.823 --> 00:01:31.308
+Persistent data needs its own design.
+
+14
+00:01:31.308 --> 00:01:37.442
+Volumes, backups, snapshots, and database connections may outlive individual containers.
+
+15
+00:01:37.442 --> 00:01:44.585
+Encryption at rest and in transit, at a high level, protects data when stored and when moving across networks.
+
+16
+00:01:44.585 --> 00:01:56.153
+Configuration should be separated from images so the same artifact can move between environments safely while environment-specific secrets and settings remain controlled.

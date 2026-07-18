@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Response, Communication, and Governance",
+  "graphicAlt": "Conceptual visual of response workflow with evidence preservation, escalation, uncertainty, communication, and governance.",
+  "narration": "A counter-deception response begins with preservation and containment of harm. Preserve relevant evidence before systems rotate logs, messages are deleted, tickets are modified, or links are shared further. At the same time, avoid amplifying the questionable claim. Do not forward sensitive artifacts broadly just because they seem important. Use approved channels, need-to-know sharing, and clear handling labels when privacy, legal, human resources, or investigative concerns may apply.\n\nVerification should use trusted channels and defined ownership. If the claim involves identity, use identity and access management records. If it involves a vendor, use procurement or vendor management contacts. If it involves a security incident, use the incident command structure. If it involves potential fraud, use the fraud or risk process. The analyst does not need to own every decision. The analyst needs to route the question to the right owner with the right evidence and uncertainty.\n\nCommunication should separate facts, assumptions, and judgments. Facts are observed records or preserved artifacts. Assumptions are working beliefs that may be tested. Judgments are analytic conclusions based on the current evidence. A useful update might say what was claimed, which artifacts were preserved, which sources were checked, what was corroborated, what remains unknown, what confidence level is appropriate, and what decision is needed next.\n\nGovernance makes the practice repeatable. Playbooks should define escalation paths, evidence handling, privacy boundaries, chain of custody expectations, confidence language, approval workflows, and after-action review. Metrics should reward timely verification and good documentation, not just fast closure. After each meaningful review, improve the playbook: which signal mattered, which source helped, which step caused delay, and which control would make the next decision cleaner.",
+  "narrationPoints": [
+    "Preserve evidence and avoid amplifying harm.",
+    "Verify through trusted channels.",
+    "Separate facts, assumptions, and judgments.",
+    "Escalate using defined ownership paths.",
+    "Governance makes counter-deception repeatable."
+  ]
+};

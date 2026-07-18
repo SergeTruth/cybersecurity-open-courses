@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.922
+A safe RAM-boot design routine starts with the goal. Do you want a live system that can run after boot media is removed? A resettable lab machine?
+
+2
+00:00:09.922 --> 00:00:16.949
+A kiosk that returns to a clean state? A low-wear system that reduces writes? A recovery environment?
+
+3
+00:00:16.949 --> 00:00:24.969
+Name the goal first, because the goal determines the pattern and the persistence design. Next, choose the pattern.
+
+4
+00:00:24.969 --> 00:00:33.899
+Live-to-RAM designs copy a base image into memory. Overlay designs combine a read-only lower layer with a writable upper layer.
+
+5
+00:00:33.899 --> 00:00:44.399
+Selected volatile paths move only certain directories into tmpfs. Hybrid designs keep chosen data persistent while allowing other changes to reset.
+
+6
+00:00:44.399 --> 00:00:51.675
+Avoid copying commands without understanding which pattern they implement. Understand the boot path.
+
+7
+00:00:51.675 --> 00:01:04.821
+Firmware starts the machine, the bootloader loads the kernel and initramfs, early user space prepares devices and filesystems, and the system eventually switches to the root filesystem.
+
+8
+00:01:04.821 --> 00:01:12.676
+RAM-backed designs often affect that early path, so distribution details matter. Estimate RAM and volatility.
+
+9
+00:01:12.676 --> 00:01:21.357
+The base image, overlay, cache, desktop, applications, containers, browser activity, and updates all compete for memory.
+
+10
+00:01:21.357 --> 00:01:24.995
+Decide what disappears at reboot and what survives.
+
+11
+00:01:24.995 --> 00:01:33.760
+Plan /home, logs, package state, configuration, updates, SSH keys, and application data deliberately. Build in a lab first.
+
+12
+00:01:33.760 --> 00:01:44.591
+Test boot, workload, memory pressure, shutdown, reboot, update behavior, persistence, and recovery. Keep recovery media. Keep a known-good boot entry.
+
+13
+00:01:44.591 --> 00:01:50.709
+Back up important configuration. Document exactly what changed and how to roll it back.
+
+14
+00:01:50.709 --> 00:02:00.383
+Only then consider using the design on a daily or production-like system. RAM booting is not magic and not one feature. It is a design choice.
+
+15
+00:02:00.383 --> 00:02:07.824
+When the design matches the workload and includes a recovery plan, it can be useful, clean, and reversible.
+
+16
+00:02:07.824 --> 00:02:12.041
+When it is improvised on a primary machine, it can be fragile.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.934
+Safe implementation begins away from your primary system.
+
+2
+00:00:03.934 --> 00:00:10.778
+Use a virtual machine, spare disk, lab laptop, external drive, or other recoverable test environment.
+
+3
+00:00:10.778 --> 00:00:17.387
+RAM-backed boot designs often touch early boot, root filesystem layout, mounts, and persistence.
+
+4
+00:00:17.387 --> 00:00:26.434
+A small mistake can leave a system unable to boot or can make changes disappear unexpectedly. Testing in a lab keeps learning reversible.
+
+5
+00:00:26.434 --> 00:00:31.312
+Before changing a real system, back up important data and configuration.
+
+6
+00:00:31.312 --> 00:00:44.372
+That includes bootloader configuration, initramfs configuration, fstab, crypttab, recovery keys, important files, and any distribution-specific configuration that affects root mounting.
+
+7
+00:00:44.372 --> 00:00:50.666
+Keep recovery media available. Keep a known-good boot entry so you can return to a working path.
+
+8
+00:00:50.666 --> 00:01:01.759
+If disk encryption, secure boot, vendor firmware, hybrid graphics, Wi-Fi firmware, or special storage drivers are involved, treat them as compatibility variables.
+
+9
+00:01:01.759 --> 00:01:10.255
+Troubleshooting should be methodical. Check the kernel command line that actually booted. Verify which initramfs was loaded.
+
+10
+00:01:10.255 --> 00:01:17.493
+Read boot logs and journal output when available. Confirm the root filesystem source. Inspect mount points.
+
+11
+00:01:17.493 --> 00:01:24.416
+Check which layer is writable and where the upper layer lives. Confirm whether tmpfs size limits are set.
+
+12
+00:01:24.416 --> 00:01:31.576
+Compare expected persistence with what actually survived reboot. Common failures come from assumptions.
+
+13
+00:01:31.576 --> 00:01:40.859
+A driver needed for storage may be missing from initramfs. A root path may be wrong. A boot parameter may not be supported by the distribution.
+
+14
+00:01:40.859 --> 00:01:48.412
+The system may not have enough RAM for the root image plus workload. A persistent mount may not appear early enough.
+
+15
+00:01:48.412 --> 00:01:54.234
+A laptop may behave differently from a virtual machine because of firmware or graphics.
+
+16
+00:01:54.234 --> 00:02:03.753
+Do not troubleshoot by randomly editing boot files on a primary machine. Change one thing at a time, keep notes, and preserve a working fallback.
+
+17
+00:02:03.753 --> 00:02:07.293
+A safe RAM-boot project is not just a clever boot line.
+
+18
+00:02:07.293 --> 00:02:13.745
+It is a tested design with recovery media, backups, known-good boot entries, and documentation.

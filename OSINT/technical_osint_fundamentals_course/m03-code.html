@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Record DNS Evidence | Technical OSINT Fundamentals</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="technical-osint-fundamentals-course"><main id="main-content" class="main-content"><div class="wrap"><section id="module-meta" data-module="6" data-total="19" aria-labelledby="module-title">
+  <header class="card title-card"><p class="meta">Technical OSINT Fundamentals</p><h1 id="module-title">Code Examples: Record DNS Evidence</h1><p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p></header>
+  <section class="card code-card" aria-labelledby="code-example-title"><h2 id="code-example-title">Code Examples</h2>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Capture Common DNS Record Types</h3>
+      <pre class="code-block" data-lang="shell"><code>records=&quot;A AAAA CNAME MX TXT&quot;
+
+while read -r name; do
+  test -z &quot;$name&quot; &amp;&amp; continue
+  for type in $records; do
+    dig +time=3 +tries=1 +noall +answer &quot;$name&quot; &quot;$type&quot;
+  done
+done &lt; scope_hostnames.txt &gt; dns-observations.txt</code></pre>
+    </article>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Tag DNS Records with Source and Collection Mode</h3>
+      <pre class="code-block" data-lang="python"><code>from datetime import datetime, timezone
+import json
+
+
+def dns_observation(name: str, record_type: str, value: str, source: str) -&gt; dict[str, str]:
+    return {
+        &quot;name&quot;: name,
+        &quot;record_type&quot;: record_type,
+        &quot;value&quot;: value,
+        &quot;source&quot;: source,
+        &quot;collection_mode&quot;: &quot;current-authoritative-lookup&quot;,
+        &quot;observed_at&quot;: datetime.now(timezone.utc).isoformat(),
+    }
+
+
+records = [
+    dns_observation(&quot;www.example.org&quot;, &quot;CNAME&quot;, &quot;example-cdn.net.&quot;, &quot;dig&quot;),
+    dns_observation(&quot;example.org&quot;, &quot;MX&quot;, &quot;10 mail.example.org.&quot;, &quot;dig&quot;),
+]
+
+print(json.dumps(records, indent=2))</code></pre>
+    </article>
+  </section>
+  <nav class="nav module-nav" aria-label="Module navigation">
+    <a id="previous-module" class="btn secondary" href="m03.html">Previous</a>
+    <a id="next-module" class="btn" href="m04.html">Next</a>
+  </nav>
+</section></div></main>
+<script id="course-modules-data" type="application/json">
+[
+  {
+    "label": "1. What Is Technical OSINT?",
+    "title": "What Is Technical OSINT?",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Scope and Record Technical OSINT",
+    "title": "Code Examples: Scope and Record Technical OSINT",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Domains and Naming",
+    "title": "Domains and Naming",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Work with Domains and Names",
+    "title": "Code Examples: Work with Domains and Names",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. DNS and Infrastructure Clues",
+    "title": "DNS and Infrastructure Clues",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Record DNS Evidence",
+    "title": "Code Examples: Record DNS Evidence",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. IP Addresses, Hosting, and Cloud Context",
+    "title": "IP Addresses, Hosting, and Cloud Context",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Interpret Address and Hosting Context",
+    "title": "Code Examples: Interpret Address and Hosting Context",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Certificates and Web Metadata",
+    "title": "Certificates and Web Metadata",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Capture Certificate and Web Metadata",
+    "title": "Code Examples: Capture Certificate and Web Metadata",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Public Code, Packages, and Artifacts",
+    "title": "Public Code, Packages, and Artifacts",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Review Public Artifacts Safely",
+    "title": "Code Examples: Review Public Artifacts Safely",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Correlation and Relationship Mapping",
+    "title": "Correlation and Relationship Mapping",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Correlate Evidence with Confidence",
+    "title": "Code Examples: Correlate Evidence with Confidence",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Risk Interpretation",
+    "title": "Defensive Risk Interpretation",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Turn Signals into Defensive Review Items",
+    "title": "Code Examples: Turn Signals into Defensive Review Items",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Assemble a Responsible OSINT Summary",
+    "title": "Code Examples: Assemble a Responsible OSINT Summary",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+</script>
+<script src="scorm-wrapper.js"></script><script src="quiz-engine.js"></script><script src="navigation.js"></script><script src="audio-controls.js"></script><script src="base.js"></script></body></html>

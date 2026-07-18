@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Interpret Address and Hosting Context | Technical OSINT Fundamentals</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="technical-osint-fundamentals-course"><main id="main-content" class="main-content"><div class="wrap"><section id="module-meta" data-module="8" data-total="19" aria-labelledby="module-title">
+  <header class="card title-card"><p class="meta">Technical OSINT Fundamentals</p><h1 id="module-title">Code Examples: Interpret Address and Hosting Context</h1><p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p></header>
+  <section class="card code-card" aria-labelledby="code-example-title"><h2 id="code-example-title">Code Examples</h2>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Join DNS Answers to Provider Notes</h3>
+      <pre class="code-block" data-lang="python"><code>import csv
+
+
+provider_by_netblock = {
+    &quot;93.184.216.0/24&quot;: &quot;example public provider&quot;,
+    &quot;203.0.113.0/24&quot;: &quot;documentation network&quot;,
+}
+
+
+def provider_for(address: str) -&gt; str:
+    import ipaddress
+
+    ip = ipaddress.ip_address(address)
+    for network, provider in provider_by_netblock.items():
+      if ip in ipaddress.ip_network(network):
+          return provider
+    return &quot;unknown from current notes&quot;
+
+
+with open(&quot;hosting-context.csv&quot;, &quot;w&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as output:
+    writer = csv.DictWriter(output, fieldnames=[&quot;hostname&quot;, &quot;address&quot;, &quot;provider&quot;, &quot;limitation&quot;])
+    writer.writeheader()
+    writer.writerow({
+        &quot;hostname&quot;: &quot;www.example.org&quot;,
+        &quot;address&quot;: &quot;93.184.216.34&quot;,
+        &quot;provider&quot;: provider_for(&quot;93.184.216.34&quot;),
+        &quot;limitation&quot;: &quot;provider context does not prove application control&quot;,
+    })</code></pre>
+    </article>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Represent Geolocation as an Estimate</h3>
+      <pre class="code-block" data-lang="json"><code>{
+  &quot;address&quot;: &quot;93.184.216.34&quot;,
+  &quot;geo_sources&quot;: [
+    {
+      &quot;source&quot;: &quot;provider-a&quot;,
+      &quot;country&quot;: &quot;US&quot;,
+      &quot;observed_at&quot;: &quot;2026-06-28T15:00:00Z&quot;
+    },
+    {
+      &quot;source&quot;: &quot;provider-b&quot;,
+      &quot;country&quot;: &quot;US&quot;,
+      &quot;observed_at&quot;: &quot;2026-06-28T15:02:00Z&quot;
+    }
+  ],
+  &quot;report_language&quot;: &quot;Geolocation sources estimate this address in the US.&quot;,
+  &quot;limitation&quot;: &quot;This does not identify a physical server position or responsible party.&quot;
+}</code></pre>
+    </article>
+  </section>
+  <nav class="nav module-nav" aria-label="Module navigation">
+    <a id="previous-module" class="btn secondary" href="m04.html">Previous</a>
+    <a id="next-module" class="btn" href="m05.html">Next</a>
+  </nav>
+</section></div></main>
+<script id="course-modules-data" type="application/json">
+[
+  {
+    "label": "1. What Is Technical OSINT?",
+    "title": "What Is Technical OSINT?",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Scope and Record Technical OSINT",
+    "title": "Code Examples: Scope and Record Technical OSINT",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Domains and Naming",
+    "title": "Domains and Naming",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Work with Domains and Names",
+    "title": "Code Examples: Work with Domains and Names",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. DNS and Infrastructure Clues",
+    "title": "DNS and Infrastructure Clues",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Record DNS Evidence",
+    "title": "Code Examples: Record DNS Evidence",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. IP Addresses, Hosting, and Cloud Context",
+    "title": "IP Addresses, Hosting, and Cloud Context",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Interpret Address and Hosting Context",
+    "title": "Code Examples: Interpret Address and Hosting Context",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Certificates and Web Metadata",
+    "title": "Certificates and Web Metadata",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Capture Certificate and Web Metadata",
+    "title": "Code Examples: Capture Certificate and Web Metadata",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Public Code, Packages, and Artifacts",
+    "title": "Public Code, Packages, and Artifacts",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Review Public Artifacts Safely",
+    "title": "Code Examples: Review Public Artifacts Safely",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Correlation and Relationship Mapping",
+    "title": "Correlation and Relationship Mapping",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Correlate Evidence with Confidence",
+    "title": "Code Examples: Correlate Evidence with Confidence",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Risk Interpretation",
+    "title": "Defensive Risk Interpretation",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Turn Signals into Defensive Review Items",
+    "title": "Code Examples: Turn Signals into Defensive Review Items",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Assemble a Responsible OSINT Summary",
+    "title": "Code Examples: Assemble a Responsible OSINT Summary",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+</script>
+<script src="scorm-wrapper.js"></script><script src="quiz-engine.js"></script><script src="navigation.js"></script><script src="audio-controls.js"></script><script src="base.js"></script></body></html>

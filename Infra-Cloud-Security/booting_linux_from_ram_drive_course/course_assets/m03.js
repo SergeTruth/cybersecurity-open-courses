@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "RAM, tmpfs, initramfs, and Volatility",
+  "graphicAlt": "Conceptual visual of tmpfs, initramfs, RAM pressure, and volatile storage.",
+  "narration": "tmpfs is a memory-backed filesystem commonly used for temporary storage on Linux. Files stored in tmpfs live in virtual memory. Depending on system configuration, pressure, and swap behavior, tmpfs pages may interact with swap, but the important design idea is that tmpfs is not ordinary persistent disk storage. It is useful for temporary files, runtime state, caches, and writable layers that do not need to survive reboot.\n\nInitramfs is different but related to memory-backed booting. It is an early boot environment loaded into memory with the kernel. The initramfs can contain tools and scripts needed before the final root filesystem is ready. In RAM-boot designs, initramfs logic may copy images, prepare overlays, load drivers, mount devices, or decide which filesystem becomes the real root.\n\nRAM-backed storage competes with the rest of the system. A root image copied into RAM, a tmpfs upper layer, browser memory, desktop graphics, containers, package updates, build tools, file cache, and applications all share finite memory. A system that boots successfully with no workload may fail under realistic use. A desktop with a browser, GPU stack, and development tools has different pressure than a kiosk running one application.\n\nVolatility is the defining tradeoff. If changes live only in RAM, they disappear when the system reboots, crashes, loses power, or discards the tmpfs layer. That can be excellent for clean labs and kiosks. It can also lose logs, package updates, SSH host keys, machine identity, browser profiles, and user documents if persistence was not designed.\n\nBefore committing to any design, measure. Watch memory use after boot, under real workload, during updates, and during shutdown. Consider whether swap is present and whether swap changes the privacy or performance expectations. Test low-memory behavior. Document what is volatile, what is persistent, and what happens when RAM pressure rises. A RAM-backed system is only reliable if its memory budget matches the workload.",
+  "narrationPoints": [
+    "tmpfs stores files in virtual memory.",
+    "initramfs supports early boot work.",
+    "RAM-backed files compete with workloads.",
+    "Volatile changes disappear on reboot.",
+    "Memory sizing must be tested."
+  ]
+};

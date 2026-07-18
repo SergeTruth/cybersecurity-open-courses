@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Capture Certificate and Web Metadata | Technical OSINT Fundamentals</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="technical-osint-fundamentals-course"><main id="main-content" class="main-content"><div class="wrap"><section id="module-meta" data-module="10" data-total="19" aria-labelledby="module-title">
+  <header class="card title-card"><p class="meta">Technical OSINT Fundamentals</p><h1 id="module-title">Code Examples: Capture Certificate and Web Metadata</h1><p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p></header>
+  <section class="card code-card" aria-labelledby="code-example-title"><h2 id="code-example-title">Code Examples</h2>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Collect Certificate Transparency Names for Scope Review</h3>
+      <pre class="code-block" data-lang="shell"><code># Replace example.org only with an approved domain from the case scope.
+domain=&quot;example.org&quot;
+curl --silent --get &quot;https://crt.sh/&quot; \
+  --data-urlencode &quot;q=%.$domain&quot; \
+  --data-urlencode &quot;output=json&quot; \
+  --max-time 15 &gt; &quot;ct-$domain.json&quot; </code></pre>
+    </article>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Extract Unique Hostnames from CT Results</h3>
+      <pre class="code-block" data-lang="python"><code>import json
+
+
+with open(&quot;ct-example.org.json&quot;, encoding=&quot;utf-8&quot;) as source:
+    entries = json.load(source)
+
+names: set[str] = set()
+for entry in entries:
+    for name in str(entry.get(&quot;name_value&quot;, &quot;&quot;)).splitlines():
+        normalized = name.lower().lstrip(&quot;*.&quot;).rstrip(&quot;.&quot;)
+        if normalized.endswith(&quot;.example.org&quot;):
+            names.add(normalized)
+
+for name in sorted(names):
+    print(name)</code></pre>
+    </article>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Preserve Header and Redirect Context</h3>
+      <pre class="code-block" data-lang="shell"><code>url=&quot;https://www.example.org/&quot;
+stamp=&quot;$(date -u +%Y%m%dT%H%M%SZ)&quot;
+
+curl --silent --show-error --location --head \
+  --max-redirs 5 \
+  --max-time 10 \
+  --dump-header &quot;headers-$stamp.txt&quot; \
+  --output /dev/null \
+  &quot;$url&quot; </code></pre>
+    </article>
+  </section>
+  <nav class="nav module-nav" aria-label="Module navigation">
+    <a id="previous-module" class="btn secondary" href="m05.html">Previous</a>
+    <a id="next-module" class="btn" href="m06.html">Next</a>
+  </nav>
+</section></div></main>
+<script id="course-modules-data" type="application/json">
+[
+  {
+    "label": "1. What Is Technical OSINT?",
+    "title": "What Is Technical OSINT?",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Scope and Record Technical OSINT",
+    "title": "Code Examples: Scope and Record Technical OSINT",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Domains and Naming",
+    "title": "Domains and Naming",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Work with Domains and Names",
+    "title": "Code Examples: Work with Domains and Names",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. DNS and Infrastructure Clues",
+    "title": "DNS and Infrastructure Clues",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Record DNS Evidence",
+    "title": "Code Examples: Record DNS Evidence",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. IP Addresses, Hosting, and Cloud Context",
+    "title": "IP Addresses, Hosting, and Cloud Context",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Interpret Address and Hosting Context",
+    "title": "Code Examples: Interpret Address and Hosting Context",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Certificates and Web Metadata",
+    "title": "Certificates and Web Metadata",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Capture Certificate and Web Metadata",
+    "title": "Code Examples: Capture Certificate and Web Metadata",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Public Code, Packages, and Artifacts",
+    "title": "Public Code, Packages, and Artifacts",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Review Public Artifacts Safely",
+    "title": "Code Examples: Review Public Artifacts Safely",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Correlation and Relationship Mapping",
+    "title": "Correlation and Relationship Mapping",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Correlate Evidence with Confidence",
+    "title": "Code Examples: Correlate Evidence with Confidence",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Risk Interpretation",
+    "title": "Defensive Risk Interpretation",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Turn Signals into Defensive Review Items",
+    "title": "Code Examples: Turn Signals into Defensive Review Items",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Assemble a Responsible OSINT Summary",
+    "title": "Code Examples: Assemble a Responsible OSINT Summary",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+</script>
+<script src="scorm-wrapper.js"></script><script src="quiz-engine.js"></script><script src="navigation.js"></script><script src="audio-controls.js"></script><script src="base.js"></script></body></html>

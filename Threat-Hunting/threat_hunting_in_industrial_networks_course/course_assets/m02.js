@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Understanding the Industrial Environment",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "A productive industrial hunt starts with environment knowledge. Asset inventory should identify systems, locations, owners, functions, criticality, and expected communication. A network address becomes meaningful when the hunter knows it is an HMI, controller, historian, engineering workstation, or remote-access gateway.\n\nA Purdue-style architecture can organize field, control, supervisory, site-operations, industrial-DMZ, and enterprise functions. It is a reference rather than a perfect map. Hunters need the real zones, conduits, serial and wireless paths, vendor connections, and services crossing each boundary.\n\nPLCs and RTUs execute or support control. HMIs and SCADA platforms provide operator visibility and supervisory authority. Historians preserve process trends. Engineering workstations hold privileged programming tools. Remote-access systems connect support personnel to selected assets. Each role changes the significance of observed activity.\n\nNormal behavior includes expected peers, protocols, timing, commands, user roles, and process modes. Startup, shutdown, failover, batch transitions, maintenance, and seasonal operation may all produce different patterns. A hunt based on one quiet baseline can misclassify legitimate change.\n\nAsset criticality and dependency shape scope. Unexpected traffic toward a controller may deserve different handling from the same traffic toward a reporting server. Hunters should know which systems preserve safety, control, visibility, redundancy, and recovery.\n\nOperators and engineers supply context that telemetry cannot. They can validate work orders, explain process faults, identify unusual equipment behavior, and advise safe escalation. Hunters should document assumptions and gaps rather than treating incomplete inventory or architecture as certainty.",
+  "narrationPoints": [
+    "A productive industrial hunt starts with environment knowledge.",
+    "Asset inventory should identify systems, locations, owners, functions, criticality, and expected communication.",
+    "A network address becomes meaningful when the hunter knows it is an HMI, controller, historian, engineering workstation, or remote-access gateway.",
+    "A Purdue-style architecture can organize field, control, supervisory, site-operations, industrial-DMZ, and enterprise functions.",
+    "It is a reference rather than a perfect map.",
+    "Hunters need the real zones, conduits, serial and wireless paths, vendor connections, and services crossing each boundary."
+  ]
+};

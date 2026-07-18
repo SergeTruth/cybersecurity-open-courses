@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Ollama Operations Means",
+  "graphicAlt": "Preview bullet summary visual for what Ollama operations means.",
+  "narration": "Ollama operations is the practical discipline of running local or private model-serving workflows in a reliable, understandable, and supportable way. It is about more than running a model once from a command line. A useful environment needs clear ownership, known runtime assumptions, predictable model management, and a support path when something behaves differently than expected.\n\nOperators need to understand the model lifecycle, runtime configuration, storage location, hardware limits, service behavior, API usage, and user expectations. A local AI setup can improve privacy and control because work stays closer to the team. At the same time, responsibility also moves closer to the team. The organization now needs to think about updates, disk use, memory pressure, service availability, and access boundaries.\n\nA good Ollama environment should not become a collection of mystery workstations and shared servers. It should have documented assumptions: who owns it, which models are approved, where model files live, how the service starts, who can reach it, and what logs or metrics are used for troubleshooting. These details are what make experimentation safe enough to grow into shared use.\n\nThe goal is a repeatable operating model. Teams should be able to experiment, support internal applications, and run private AI workflows without losing track of model versions, runtime settings, resource needs, or security expectations.\n\nThat operating model does not have to be complicated. A short runbook, a model inventory, a known support owner, and a few resource checks can make the difference between a useful local AI service and a fragile one-off setup. The discipline is to make important assumptions visible before users depend on them.",
+  "narrationPoints": [
+    "Ollama operations is the practical discipline of running local or private model-serving workflows in a reliable, understandable, and supportable way.",
+    "Operators need to understand the model lifecycle, runtime configuration, storage location, hardware limits, service behavior, API usage, and user...",
+    "A good Ollama environment should not become a collection of mystery workstations and shared servers.",
+    "The goal is a repeatable operating model.",
+    "That operating model does not have to be complicated."
+  ]
+};

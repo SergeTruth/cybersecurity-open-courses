@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Observability, Logging, and Troubleshooting",
+  "graphicAlt": "Preview bullet summary visual for observability, logging, and troubleshooting.",
+  "narration": "Operators need enough visibility to distinguish service problems, model problems, client problems, and hardware problems. When a local AI workflow fails, the visible symptom may be vague: a slow response, a missing model, an application timeout, or a user report that the tool feels different. Troubleshooting is much easier when the environment has a simple operating picture.\n\nUseful troubleshooting starts with service status, logs, model inventory, storage availability, and resource utilization. Is the service running? Is the expected model present? Is there enough disk space? Is memory under pressure? Is CPU or GPU utilization unusually high? Did a configuration value change? These basic checks can explain many issues before teams start changing application code or model settings.\n\nSlow responses may come from model loading, insufficient memory, long prompts, high concurrency, CPU or GPU pressure, thermal throttling, or client-side expectations. Failed pulls or missing models may point to connectivity, permissions, naming, storage, or environment configuration issues. A troubleshooting checklist can reduce repeated support work and help new operators build confidence.\n\nLogging should support investigation without creating a data leak. Logs may reveal service errors, model loading behavior, configuration problems, or integration failures. They should not casually store secrets, credentials, personal data, confidential prompts, or sensitive outputs. The best troubleshooting practice is to gather enough evidence to act while still respecting privacy and data boundaries.",
+  "narrationPoints": [
+    "Operators need enough visibility to distinguish service problems, model problems, client problems, and hardware problems.",
+    "Useful troubleshooting starts with service status, logs, model inventory, storage availability, and resource utilization.",
+    "Slow responses may come from model loading, insufficient memory, long prompts, high concurrency, CPU or GPU pressure, thermal throttling, or...",
+    "Logging should support investigation without creating a data leak."
+  ]
+};

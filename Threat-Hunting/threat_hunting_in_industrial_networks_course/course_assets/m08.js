@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Documenting and Operationalizing Hunts",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "A hunt plan records the hypothesis, rationale, scope, time range, assets, data sources, expected behavior, reviewers, safety constraints, and completion criteria. This structure makes the work repeatable and prevents the investigation from expanding without purpose.\n\nPreserve evidence references, searches, observations, and decisions as the hunt progresses. Findings should distinguish facts from interpretation and assign a confidence level based on coverage and source quality. Record disconfirming evidence and unresolved gaps, not only observations that fit the theory.\n\nEscalation paths should identify security, operations, engineering, site leadership, and incident-response contacts. High-consequence findings may require rapid coordination, but response authority should remain clear. Documentation helps teams act without improvising around sensitive systems.\n\nOperationalize repeatable findings. A reliable pattern may become a detection, dashboard, watchlist, or recurring review. Document required fields, thresholds, exclusions, asset context, investigation steps, and ownership so the output can be maintained after the original hunt.\n\nHunts also improve foundational data. Update asset inventory when new systems or dependencies are validated. Record blind spots, repair collection gaps, improve time and identity mapping, and add process or maintenance enrichment that made the hunt possible.\n\nClose each hunt with the result, confidence, affected assets, evidence, operational explanation, actions, and follow-up owner. Measure value through decisions and improvements, not the number of searches performed. A well-documented inconclusive hunt can still reveal exactly what visibility the program needs next.",
+  "narrationPoints": [
+    "A hunt plan records the hypothesis, rationale, scope, time range, assets, data sources, expected behavior, reviewers, safety constraints, and completion criteria.",
+    "This structure makes the work repeatable and prevents the investigation from expanding without purpose.",
+    "Preserve evidence references, searches, observations, and decisions as the hunt progresses.",
+    "Findings should distinguish facts from interpretation and assign a confidence level based on coverage and source quality.",
+    "Record disconfirming evidence and unresolved gaps, not only observations that fit the theory.",
+    "Escalation paths should identify security, operations, engineering, site leadership, and incident-response contacts."
+  ]
+};

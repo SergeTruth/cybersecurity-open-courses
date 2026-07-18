@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "OT Telemetry for Hunting",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Passive network telemetry often gives hunters broad visibility without actively querying sensitive devices. It can show assets, peers, protocols, timing, and communication across trust boundaries. Protocol-aware sources may add sessions, reads, writes, commands, errors, or engineering operations.\n\nFirewall, VPN, jump-host, and vendor-access logs describe boundary connections, identities, source systems, approvals, destinations, and session duration. HMI and engineering-workstation records may add logons, processes, project access, file activity, removable media, and connections to controllers.\n\nHistorian data connects cyber observations to physical behavior. Trends, alarms, setpoints, and equipment state can show whether a technical event coincided with an operational change. Authentication events add account lifecycle, failed access, privilege, and unusual user timing.\n\nController change records, project repositories, and management tools may report downloads, mode changes, firmware work, or configuration differences. These records are valuable when network traffic is encrypted or when the hunt concerns local engineering activity.\n\nEvery source has blind spots. Passive sensors miss unobserved segments, serial devices behind gateways, dormant assets, and local actions. Endpoint logging may be incomplete. Historians may show an effect without identifying who initiated it. Inconsistent clocks or asset names make correlation unreliable.\n\nBefore hunting, document coverage, time synchronization, retention, field quality, and source ownership. Protect sensitive telemetry and preserve original evidence. A strong hunt combines complementary sources, states what the data can and cannot prove, and adjusts confidence when visibility is incomplete.",
+  "narrationPoints": [
+    "Passive network telemetry often gives hunters broad visibility without actively querying sensitive devices.",
+    "It can show assets, peers, protocols, timing, and communication across trust boundaries.",
+    "Protocol-aware sources may add sessions, reads, writes, commands, errors, or engineering operations.",
+    "Firewall, VPN, jump-host, and vendor-access logs describe boundary connections, identities, source systems, approvals, destinations, and session duration.",
+    "HMI and engineering-workstation records may add logons, processes, project access, file activity, removable media, and connections to controllers.",
+    "Historian data connects cyber observations to physical behavior."
+  ]
+};

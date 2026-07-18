@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Social Engineering and Impersonation Defense",
+  "graphicAlt": "Conceptual visual of impersonation defense using trusted channels, approvals, callback procedures, and reporting.",
+  "narration": "Social engineering succeeds when a request feels normal enough to obey and urgent enough not to examine. Impersonation may appear as a message, call, ticket, collaboration request, vendor contact, executive instruction, help desk interaction, account recovery scenario, or plausible pretext. The defensive posture is consistent: treat pressure and authority as reasons to verify through trusted channels, not as reasons to skip verification.\n\nTrusted channels are channels the organization has already approved for verification. That may mean a known directory entry, an established callback number, an identity provider workflow, a ticketing system, a manager approval path, or a vendor contact method already recorded in procurement systems. The important point is that the verification path should not be supplied only by the suspicious request itself. A new phone number, fresh chat account, forwarded thread, or unusual contact path should not become the authority for approving itself.\n\nApproval workflows reduce single-person risk. Sensitive changes, payments, access grants, credential resets, data exports, exception approvals, and emergency actions should have separation of duties where the risk justifies it. The workflow should record who requested the action, who approved it, what evidence was reviewed, what uncertainty remained, and which policy or exception path applied. This protects the organization and the employee who is being pressured.\n\nReporting should be easy and blame-free. People hesitate to report when they fear punishment for almost clicking, almost approving, or asking a question that feels obvious. A good reporting culture treats early reporting as a control. Analysts can then preserve artifacts, identify related telemetry, warn affected teams through approved communication, and improve playbooks. Verification protects both people and systems because it turns individual suspicion into a shared process.",
+  "narrationPoints": [
+    "Social engineering often uses pressure and authority.",
+    "Impersonation should be checked through trusted channels.",
+    "Approval workflows reduce single-person risk.",
+    "Reporting should be easy and blame-free.",
+    "Verification protects both people and systems."
+  ]
+};

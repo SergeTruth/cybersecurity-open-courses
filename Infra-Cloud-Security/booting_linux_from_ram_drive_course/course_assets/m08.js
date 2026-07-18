@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Safety, Recovery, and Troubleshooting",
+  "graphicAlt": "Conceptual visual of safe testing with backups, recovery media, and a known-good boot entry.",
+  "narration": "Safe implementation begins away from your primary system. Use a virtual machine, spare disk, lab laptop, external drive, or other recoverable test environment. RAM-backed boot designs often touch early boot, root filesystem layout, mounts, and persistence. A small mistake can leave a system unable to boot or can make changes disappear unexpectedly. Testing in a lab keeps learning reversible.\n\nBefore changing a real system, back up important data and configuration. That includes bootloader configuration, initramfs configuration, fstab, crypttab, recovery keys, important files, and any distribution-specific configuration that affects root mounting. Keep recovery media available. Keep a known-good boot entry so you can return to a working path. If disk encryption, secure boot, vendor firmware, hybrid graphics, Wi-Fi firmware, or special storage drivers are involved, treat them as compatibility variables.\n\nTroubleshooting should be methodical. Check the kernel command line that actually booted. Verify which initramfs was loaded. Read boot logs and journal output when available. Confirm the root filesystem source. Inspect mount points. Check which layer is writable and where the upper layer lives. Confirm whether tmpfs size limits are set. Compare expected persistence with what actually survived reboot.\n\nCommon failures come from assumptions. A driver needed for storage may be missing from initramfs. A root path may be wrong. A boot parameter may not be supported by the distribution. The system may not have enough RAM for the root image plus workload. A persistent mount may not appear early enough. A laptop may behave differently from a virtual machine because of firmware or graphics.\n\nDo not troubleshoot by randomly editing boot files on a primary machine. Change one thing at a time, keep notes, and preserve a working fallback. A safe RAM-boot project is not just a clever boot line. It is a tested design with recovery media, backups, known-good boot entries, and documentation.",
+  "narrationPoints": [
+    "Test RAM-boot designs away from primary systems.",
+    "Keep backups and recovery media.",
+    "Keep a known-good boot entry.",
+    "Verify command line, mounts, and writable layers.",
+    "Many failures come from assumptions."
+  ]
+};

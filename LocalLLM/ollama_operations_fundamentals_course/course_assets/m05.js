@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "API and Application Integration Basics",
+  "graphicAlt": "Preview bullet summary visual for API and application integration basics.",
+  "narration": "When applications call Ollama, they should treat it as a service boundary. It has request behavior, latency, errors, model availability, capacity limits, and operational assumptions. Even if the service is running locally, it can still be unavailable, slow, overloaded, misconfigured, or missing the model an application expects.\n\nAPI clients need timeouts, error handling, predictable model selection, and clear assumptions about streaming or non-streaming behavior. A tool that works during a manual test may behave differently when multiple users are active or when a model needs to load before responding. Applications should avoid fragile assumptions about response timing, model availability, or unlimited concurrency.\n\nTeams should decide how model names, prompts, options, and user context are passed to the service. If a model name is hardcoded in several applications, replacing or retiring that model becomes harder. If prompt options are scattered across clients, support teams may not know which behavior users are seeing. A stable integration layer can make model selection and defaults easier to manage.\n\nLocal APIs still need operational discipline when they support shared tools or business workflows. Clear integration boundaries help separate application bugs from runtime, model, storage, and infrastructure issues. They also give operators a place to document expectations for timeouts, retries, request size, streaming, and failure behavior.\n\nApplication teams should also decide what user context is appropriate to send. A local service can still receive sensitive prompts, file excerpts, or retrieved context. Integration code should keep data handling intentional, avoid unnecessary logging, and make it clear which workflow owns each request.",
+  "narrationPoints": [
+    "When applications call Ollama, they should treat it as a service boundary.",
+    "API clients need timeouts, error handling, predictable model selection, and clear assumptions about streaming or non-streaming behavior.",
+    "Teams should decide how model names, prompts, options, and user context are passed to the service.",
+    "Local APIs still need operational discipline when they support shared tools or business workflows.",
+    "Application teams should also decide what user context is appropriate to send."
+  ]
+};

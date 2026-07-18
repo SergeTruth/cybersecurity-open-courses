@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "A06: Vulnerable and Outdated Components",
+  "graphicAlt": "Graphic for A06: Vulnerable and Outdated Components",
+  "narration": "Third-party dependencies are part of the application risk surface. Teams need visibility into which packages, frameworks, images, and services are used and where they are deployed. Unsupported software becomes difficult to defend because fixes may no longer be available.\n\nEnd-of-life frameworks, runtimes, plugins, and operating systems should be replaced or isolated according to risk. Supply chain risk includes vulnerable packages, malicious updates, compromised build tools, and untrusted images. SaaS teams should govern package sources and build processes as part of system operations.\n\nDependency tracking supports timely response when new vulnerabilities are announced. Remediation decisions should consider exploitability, exposure, compensating controls, and customer impact. Maintain software inventory and ownership.\n\nUse patch management and dependency scanning. Prioritize remediation based on risk and exposure. Selected SOC 2 mappings for this topic include CC7.1 - Vulnerability management; CC8.1 - Change management.",
+  "narrationPoints": [
+    "Third-party dependencies are part of the application risk surface. Teams need visibility into which packages, frameworks, images, and services are used and where they are deployed. Unsupported software becomes difficult to defend because fixes may no longer be available.",
+    "End-of-life frameworks, runtimes, plugins, and operating systems should be replaced or isolated according to risk. Supply chain risk includes vulnerable packages, malicious updates, compromised build tools, and untrusted images. SaaS teams should govern package sources and build processes as part of system operations.",
+    "Dependency tracking supports timely response when new vulnerabilities are announced. Remediation decisions should consider exploitability, exposure, compensating controls, and customer impact. Maintain software inventory and ownership.",
+    "Use patch management and dependency scanning. Prioritize remediation based on risk and exposure. Selected SOC 2 mappings for this topic include CC7.1 - Vulnerability management; CC8.1 - Change management."
+  ]
+};

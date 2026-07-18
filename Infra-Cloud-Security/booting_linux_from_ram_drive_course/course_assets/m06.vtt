@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.562
+Overlay-style designs are a useful way to understand many RAM-backed systems. The lower layer holds the base system.
+
+2
+00:00:07.562 --> 00:00:15.582
+It may be a read-only filesystem image, an immutable snapshot, or a mounted root that should not be changed during normal use.
+
+3
+00:00:15.582 --> 00:00:24.289
+The upper layer records writes. When the system presents a merged view, applications see what looks like a normal writable filesystem.
+
+4
+00:00:24.289 --> 00:00:33.225
+Reads can come from the lower layer unless a file has been changed in the upper layer. If the upper layer is tmpfs, writes are stored in memory.
+
+5
+00:00:33.225 --> 00:00:36.204
+That makes the session flexible but volatile.
+
+6
+00:00:36.204 --> 00:00:46.057
+A user can change files, install a package temporarily, modify configuration, or create logs during the session, and those changes can vanish at reboot.
+
+7
+00:00:46.057 --> 00:00:56.521
+This is useful when the goal is a resettable workstation, kiosk, classroom lab, training environment, or controlled analysis sandbox at a safe conceptual level.
+
+8
+00:00:56.521 --> 00:01:04.923
+It can also protect the base system from routine writes. The merged view is convenient, but it can hide important design questions.
+
+9
+00:01:04.923 --> 00:01:11.645
+Which paths are in the overlay? Which paths are mounted separately? Do logs persist? Does /home persist?
+
+10
+00:01:11.645 --> 00:01:18.442
+Are machine identity files, SSH host keys, package databases, or application state expected to survive?
+
+11
+00:01:18.442 --> 00:01:27.150
+If the upper layer fills memory, what fails first? If updates are installed into the temporary layer, do they disappear at the next boot?
+
+12
+00:01:27.150 --> 00:01:35.170
+Persistence must be deliberate. A design might mount /home from persistent storage while keeping the system root volatile.
+
+13
+00:01:35.170 --> 00:01:40.211
+It might send logs to a remote server. It might provide an explicit save action.
+
+14
+00:01:40.211 --> 00:01:45.557
+It might update the read-only base image through a separate maintenance workflow.
+
+15
+00:01:45.557 --> 00:01:51.973
+Without these decisions, the system may appear to work until a reboot removes something important.
+
+16
+00:01:51.973 --> 00:02:00.604
+OverlayFS and similar designs are powerful because they separate base state from session state. They are also easy to misunderstand.
+
+17
+00:02:00.604 --> 00:02:08.701
+Always test the actual writable layer, verify mounts, inspect what changes after a reboot, and document which data survives.

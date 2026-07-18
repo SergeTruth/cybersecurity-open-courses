@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Verifying Digital Artifacts and Context",
+  "graphicAlt": "Conceptual visual of digital artifact verification using provenance, timestamps, context, and corroborating sources.",
+  "narration": "Digital artifacts feel concrete, but they still need context. A screenshot, log excerpt, alert, file name, message header, ticket note, or threat intelligence indicator may be useful evidence, yet each one is also a representation of something else. It may be filtered, cropped, transformed, copied, exported, summarized, or separated from surrounding events. Counter-deception asks how the artifact was collected and what it can actually prove.\n\nProvenance should be captured early. Analysts should record the source system, collector, collection time, time range, query or view used, and any transformation applied. Timestamps deserve special care because systems may use local time, UTC, different time zones, clock drift, ingestion delay, or display formatting that hides precision. A timeline built from mixed sources should explain those differences before drawing a conclusion from sequence.\n\nScreenshots and logs are common sources of confusion. A screenshot can preserve useful visual context, but it can omit browser state, account context, surrounding messages, or later changes in the system of record. A log line can confirm that an event was recorded, but it may not explain intent, user identity, session ownership, or whether related events were excluded by the query. The artifact supports only the claim it actually supports.\n\nWhere possible, corroborate with independent telemetry or records. A suspicious account change might be checked against identity logs, approval tickets, device telemetry, and administrator actions. A claimed external indicator might be checked against original reporting, internal observations, and relevant time windows. Preserve evidence before drawing conclusions, maintain chain of custody for sensitive material, and document uncertainty plainly. Verification is strongest when artifact, context, and decision are tied together.",
+  "narrationPoints": [
+    "Digital artifacts need provenance and context.",
+    "Screenshots and logs can be incomplete or misleading.",
+    "Timestamps and collection methods matter.",
+    "Corroborate artifacts with independent sources when possible.",
+    "Preserve evidence before drawing conclusions."
+  ]
+};

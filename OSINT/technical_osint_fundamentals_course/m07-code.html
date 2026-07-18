@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Correlate Evidence with Confidence | Technical OSINT Fundamentals</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="technical-osint-fundamentals-course"><main id="main-content" class="main-content"><div class="wrap"><section id="module-meta" data-module="14" data-total="19" aria-labelledby="module-title">
+  <header class="card title-card"><p class="meta">Technical OSINT Fundamentals</p><h1 id="module-title">Code Examples: Correlate Evidence with Confidence</h1><p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p></header>
+  <section class="card code-card" aria-labelledby="code-example-title"><h2 id="code-example-title">Code Examples</h2>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Build Nodes and Edges from Evidence Records</h3>
+      <pre class="code-block" data-lang="python"><code>import json
+
+
+nodes: set[tuple[str, str]] = set()
+edges: list[dict[str, str]] = []
+
+with open(&quot;evidence.jsonl&quot;, encoding=&quot;utf-8&quot;) as source:
+    for line in source:
+        record = json.loads(line)
+        observable = record[&quot;observable&quot;]
+        source_name = record[&quot;source&quot;]
+        nodes.add((&quot;observable&quot;, observable))
+        nodes.add((&quot;source&quot;, source_name))
+        edges.append({
+            &quot;from&quot;: observable,
+            &quot;to&quot;: source_name,
+            &quot;relationship&quot;: &quot;observed in&quot;,
+            &quot;observed_at&quot;: record[&quot;observed_at&quot;],
+            &quot;confidence&quot;: record[&quot;confidence&quot;],
+        })
+
+print(json.dumps({&quot;nodes&quot;: sorted(nodes), &quot;edges&quot;: edges}, indent=2))</code></pre>
+    </article>
+    <article class="code-snippet">
+      <h3 class="code-snippet-title">Sort Relationships into a Timeline</h3>
+      <pre class="code-block" data-lang="python"><code>import csv
+from datetime import datetime
+
+
+with open(&quot;relationships.csv&quot;, encoding=&quot;utf-8&quot;) as source:
+    rows = list(csv.DictReader(source))
+
+rows.sort(key=lambda row: datetime.fromisoformat(row[&quot;observed_at&quot;].replace(&quot;Z&quot;, &quot;+00:00&quot;)))
+
+for row in rows:
+    print(
+        row[&quot;observed_at&quot;],
+        row[&quot;subject&quot;],
+        row[&quot;relationship&quot;],
+        row[&quot;object&quot;],
+        row[&quot;source&quot;],
+        sep=&quot;\t&quot;,
+    )</code></pre>
+    </article>
+  </section>
+  <nav class="nav module-nav" aria-label="Module navigation">
+    <a id="previous-module" class="btn secondary" href="m07.html">Previous</a>
+    <a id="next-module" class="btn" href="m08.html">Next</a>
+  </nav>
+</section></div></main>
+<script id="course-modules-data" type="application/json">
+[
+  {
+    "label": "1. What Is Technical OSINT?",
+    "title": "What Is Technical OSINT?",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Scope and Record Technical OSINT",
+    "title": "Code Examples: Scope and Record Technical OSINT",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Domains and Naming",
+    "title": "Domains and Naming",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Work with Domains and Names",
+    "title": "Code Examples: Work with Domains and Names",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. DNS and Infrastructure Clues",
+    "title": "DNS and Infrastructure Clues",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Record DNS Evidence",
+    "title": "Code Examples: Record DNS Evidence",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. IP Addresses, Hosting, and Cloud Context",
+    "title": "IP Addresses, Hosting, and Cloud Context",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Interpret Address and Hosting Context",
+    "title": "Code Examples: Interpret Address and Hosting Context",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Certificates and Web Metadata",
+    "title": "Certificates and Web Metadata",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Capture Certificate and Web Metadata",
+    "title": "Code Examples: Capture Certificate and Web Metadata",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Public Code, Packages, and Artifacts",
+    "title": "Public Code, Packages, and Artifacts",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Review Public Artifacts Safely",
+    "title": "Code Examples: Review Public Artifacts Safely",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. Correlation and Relationship Mapping",
+    "title": "Correlation and Relationship Mapping",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Correlate Evidence with Confidence",
+    "title": "Code Examples: Correlate Evidence with Confidence",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Risk Interpretation",
+    "title": "Defensive Risk Interpretation",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Turn Signals into Defensive Review Items",
+    "title": "Code Examples: Turn Signals into Defensive Review Items",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "title": "Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Assemble a Responsible OSINT Summary",
+    "title": "Code Examples: Assemble a Responsible OSINT Summary",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "title": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+</script>
+<script src="scorm-wrapper.js"></script><script src="quiz-engine.js"></script><script src="navigation.js"></script><script src="audio-controls.js"></script><script src="base.js"></script></body></html>

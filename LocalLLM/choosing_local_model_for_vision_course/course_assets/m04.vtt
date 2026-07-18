@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.277
+Quantization stores model values at reduced precision to lower memory use and often improve practical speed.
+
+00:00:07.277 --> 00:00:14.139
+Labels such as Q4, Q5, and Q8 describe broad precision families, though exact methods vary.
+
+00:00:14.139 --> 00:00:20.168
+Lower precision fits smaller hardware but can affect output quality differently across models.
+
+00:00:20.168 --> 00:00:24.950
+Higher precision is not automatically better in an operational test.
+
+00:00:24.950 --> 00:00:31.396
+The referenced benchmark observed that Q8 did not always outperform Q4 for every model.
+
+00:00:31.396 --> 00:00:39.921
+A larger quantization may consume more memory, reduce headroom, and trigger slower offloading without delivering a meaningful quality gain.
+
+00:00:39.921 --> 00:00:45.950
+Image-token budgets and preprocessing settings affect how much visual detail reaches the model.
+
+00:00:45.950 --> 00:00:50.732
+Too little visual capacity may lose small text or objects.
+
+00:00:50.732 --> 00:00:58.010
+More tokens increase memory and latency and may not help if the source image is poor.
+
+00:00:58.010 --> 00:01:05.287
+Batch size, prompt-processing settings, context length, GPU offload, thread count, and cache choices also change performance.
+
+00:01:05.287 --> 00:01:12.148
+Compare models under documented settings rather than treating the model name as the whole configuration.
+
+00:01:12.148 --> 00:01:14.851
+Local runners such as llama.
+
+00:01:14.851 --> 00:01:23.376
+cpp, Ollama, LM Studio, and other tools may use different backends, model files, prompt templates, defaults, and vision adapters.
+
+00:01:23.376 --> 00:01:27.326
+Runtime version can alter speed, compatibility, and output.
+
+00:01:27.326 --> 00:01:35.435
+Test a small matrix of sensible settings, record memory and completion, and keep one reproducible configuration per candidate.
+
+00:01:35.435 --> 00:01:43.544
+Choose the lowest-cost setting that meets task quality and stability rather than assuming the largest file is safest.

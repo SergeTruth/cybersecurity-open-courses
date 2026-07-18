@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.485
+Several RAM-backed Linux patterns appear in real systems. The first is live media copied into RAM.
+
+2
+00:00:06.485 --> 00:00:11.017
+A live distribution often starts from a compressed read-only image.
+
+3
+00:00:11.017 --> 00:00:16.720
+With the right distribution support, that image may be copied into memory during boot.
+
+4
+00:00:16.720 --> 00:00:21.955
+After loading, the system can run with fewer reads from the original boot media.
+
+5
+00:00:21.955 --> 00:00:31.331
+This is useful for portable environments, recovery sessions, and machines where the boot device should be removed or used less after startup.
+
+6
+00:00:31.331 --> 00:00:40.082
+A second pattern uses a read-only base image with a writable RAM-backed overlay. The lower layer contains the base operating system.
+
+7
+00:00:40.082 --> 00:00:49.146
+The upper layer records changes. A merged view looks writable to the running system. If the upper layer is tmpfs, changes vanish at reboot.
+
+8
+00:00:49.146 --> 00:00:56.178
+This is common in live systems and can also be useful in kiosks, labs, and systems that should reset cleanly.
+
+9
+00:00:56.178 --> 00:00:59.615
+A third pattern makes only selected paths volatile.
+
+10
+00:00:59.615 --> 00:01:12.117
+For example, temporary caches, selected logs, browser caches, package download caches, or scratch directories may live in tmpfs while the rest of the installed system remains persistent.
+
+11
+00:01:12.117 --> 00:01:20.164
+This is less dramatic than a full RAM root, but often easier to support and recover. A fourth pattern is a full volatile root.
+
+12
+00:01:20.164 --> 00:01:29.931
+This is more aggressive. The whole working root may reset every boot, with persistence only through deliberately mounted paths or save mechanisms.
+
+13
+00:01:29.931 --> 00:01:37.666
+It can suit training machines, clean-room workflows, and controlled appliances, but it requires careful planning.
+
+14
+00:01:37.666 --> 00:01:40.244
+A fifth pattern is hybrid persistence.
+
+15
+00:01:40.244 --> 00:01:50.870
+The base may be read-only, the running changes may be temporary, but /home, selected configuration, machine identity, logs, or explicit snapshots may persist.
+
+16
+00:01:50.870 --> 00:01:58.840
+Hybrid systems usually match real operational needs better than pure volatility. The right pattern depends on the goal.
+
+17
+00:01:58.840 --> 00:02:10.638
+Reducing disk writes, creating a disposable session, improving read-heavy boot media behavior, protecting a base image, and supporting recovery all lead to different designs.
+
+18
+00:02:10.638 --> 00:02:15.717
+Start with the use case, not with a command copied from another distribution.

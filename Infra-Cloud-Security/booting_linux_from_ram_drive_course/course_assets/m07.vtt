@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.746
+Planning starts with the workload and the RAM budget. Count more than the base image.
+
+2
+00:00:05.746 --> 00:00:21.202
+Include the kernel, initramfs, root image, writable overlay, file cache, desktop environment, graphics stack, browsers, containers, development tools, package operations, and the applications the system actually runs.
+
+3
+00:00:21.202 --> 00:00:30.508
+A design that looks fine immediately after boot may fail when a browser opens many tabs or when a package update writes thousands of files.
+
+4
+00:00:30.508 --> 00:00:40.057
+Next, decide what must persist. User data is the obvious category, but it is not the only one. Logs may be needed for troubleshooting or audit.
+
+5
+00:00:40.057 --> 00:00:47.421
+Configuration may need to survive across boots. Package databases and updates may need a maintenance path.
+
+6
+00:00:47.421 --> 00:01:00.449
+SSH host keys, machine identity, VPN profiles, certificates, browser profiles, application caches, containers, virtual machine images, and local databases all need explicit decisions.
+
+7
+00:01:00.449 --> 00:01:09.108
+If a value should survive, decide where and how. If it should not survive, document that too. Updates are often the hardest part.
+
+8
+00:01:09.108 --> 00:01:16.958
+If the base system is read-only and changes land in a RAM overlay, ordinary package updates may disappear at reboot.
+
+9
+00:01:16.958 --> 00:01:22.946
+That may be acceptable for a disposable live session, but not for a managed workstation.
+
+10
+00:01:22.946 --> 00:01:35.004
+Possible strategies include rebuilding the base image, snapshotting a known-good state, maintaining a persistent writable layer, or applying updates in a maintenance boot.
+
+11
+00:01:35.004 --> 00:01:41.882
+Each strategy has tradeoffs in complexity, rollback, and testing. Logs deserve special attention.
+
+12
+00:01:41.882 --> 00:01:49.084
+RAM-only logs are useful for a clean reset, but poor for diagnosing a failure that happened before reboot.
+
+13
+00:01:49.084 --> 00:01:58.876
+Persistent local logs can consume storage and reveal activity. Remote logs can preserve evidence without writing heavily to the local system.
+
+14
+00:01:58.876 --> 00:02:03.084
+Choose intentionally. Measure under realistic conditions.
+
+15
+00:02:03.084 --> 00:02:13.199
+Boot the system, run the expected workload, simulate updates, fill caches, restart services, and watch memory pressure. Test shutdown and reboot.
+
+16
+00:02:13.199 --> 00:02:21.453
+Confirm what persists and what resets. Document RAM assumptions, persistent mounts, update steps, and rollback steps.
+
+17
+00:02:21.453 --> 00:02:25.338
+RAM-backed systems reward planning and punish guesses.

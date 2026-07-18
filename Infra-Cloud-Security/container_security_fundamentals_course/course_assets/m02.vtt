@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.215
+A container threat model starts with the application, but it does not end there.
+
+2
+00:00:05.215 --> 00:00:23.428
+Application code, base images, dependencies, build systems, registries, runtime configuration, host operating systems, runtimes, orchestrators, cloud platforms, identities, service accounts, secrets, and environment variables all contribute to the attack surface.
+
+3
+00:00:23.428 --> 00:00:29.032
+Each layer can introduce risk, and each layer can also provide useful control points.
+
+4
+00:00:29.032 --> 00:00:35.103
+Container isolation is useful, but it should not be treated as a complete security boundary.
+
+5
+00:00:35.103 --> 00:00:46.545
+Containers commonly share the host kernel, may have network reachability to internal services, may mount volumes, and may run with identities that can access other systems.
+
+6
+00:00:46.545 --> 00:00:58.687
+A hardened configuration can reduce risk, while a privileged container, broad host mount, weak secret handling, or excessive service account permission can greatly increase impact.
+
+7
+00:00:58.687 --> 00:01:02.656
+Shared responsibility is practical, not just contractual.
+
+8
+00:01:02.656 --> 00:01:11.918
+Developers influence application code, dependency choices, Dockerfiles, build context, and whether secrets are accidentally included.
+
+9
+00:01:11.918 --> 00:01:20.247
+Platform teams influence runtime defaults, orchestration policy, namespaces, network controls, and deployment patterns.
+
+10
+00:01:20.247 --> 00:01:26.395
+Security teams help define policy, review risk, monitor behavior, and respond to incidents.
+
+11
+00:01:26.395 --> 00:01:30.676
+Operations teams keep infrastructure healthy and recoverable.
+
+12
+00:01:30.676 --> 00:01:35.891
+Cloud providers or hosting teams secure the underlying services they operate.
+
+13
+00:01:35.891 --> 00:01:40.250
+Good container security programs make responsibility explicit.
+
+14
+00:01:40.250 --> 00:01:52.158
+Someone must own image provenance, registry access, pipeline approvals, runtime configuration, patch and rebuild workflows, secrets rotation, logging, and incident response.
+
+15
+00:01:52.158 --> 00:01:56.595
+When ownership is vague, security gaps often appear between teams.
+
+16
+00:01:56.595 --> 00:02:07.647
+The container may run successfully, but nobody is accountable for whether it was built from trusted inputs, deployed with least privilege, or monitored after release.

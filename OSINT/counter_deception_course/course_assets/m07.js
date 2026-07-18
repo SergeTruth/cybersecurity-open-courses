@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Deception in Incidents, Fraud, and Threat Intelligence",
+  "graphicAlt": "Conceptual visual of deception-aware review across incidents, fraud, and threat intelligence.",
+  "narration": "Counter-deception shows up differently across security and risk workflows. In incident response, the team may see incomplete telemetry, noisy indicators, conflicting timelines, or signals that appear meaningful before the broader context is understood. A single artifact can pull the investigation toward one explanation while other evidence is still missing. Incident analysts should preserve the artifact, map the claim it supports, and test whether independent telemetry supports the same story.\n\nFraud review adds identity, authorization, and intent questions. A transaction, account change, support interaction, or document may be real while the authority behind it is uncertain. Reviewers should distinguish account control from human identity, approval from legitimacy, and possession of information from authorization to use it. They should also be careful with people-centered conclusions, because poor collection or ambiguous context can harm legitimate users.\n\nThreat intelligence requires sourcing discipline. Claims about actors, tools, infrastructure, campaigns, or targeting can be useful, but they vary widely in provenance and confidence. Analysts should look for original sourcing, collection context, date ranges, definitions, and corroboration with internal telemetry. An indicator may be valid in one context and irrelevant in another. Attribution language should be especially cautious when evidence is indirect.\n\nNot every inconsistency proves deception. Logging gaps, translation issues, redaction, ingestion delay, and ordinary process failures can all create strange-looking evidence. Counter-deception is not a license to overclaim. It is a method for deciding what confidence is justified. Clear language such as confirmed, assessed, plausible, uncorroborated, inconsistent, or unknown helps leaders understand the difference between evidence, judgment, and uncertainty.",
+  "narrationPoints": [
+    "Incidents can include misleading or incomplete signals.",
+    "Fraud review requires careful identity and evidence checks.",
+    "Threat intelligence claims need sourcing and corroboration.",
+    "Not every inconsistency proves deception.",
+    "Confidence language prevents overclaiming."
+  ]
+};

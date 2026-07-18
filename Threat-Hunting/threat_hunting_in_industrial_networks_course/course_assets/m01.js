@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Is Industrial Threat Hunting?",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Industrial threat hunting is the proactive, defensive search for suspicious or unexplained activity in OT and ICS environments. Hunters do not wait for a confirmed alert. They begin with a focused question, examine available evidence, and determine whether the environment contains activity that existing monitoring missed or did not explain.\n\nAlert response starts with a generated signal. Hunting starts with a hypothesis, such as whether remote support reached an unexpected controller or whether engineering activity occurred outside an approved window. A hunt may discover a security event, an operational fault, a policy gap, or incomplete telemetry.\n\nOT hunting differs from ordinary enterprise hunting because technical evidence has physical and operational meaning. A communication change may affect production, safety, reliability, or process integrity. The same behavior can be legitimate maintenance in one context and concerning in another.\n\nHunts should be careful and evidence-driven. Use existing logs and passive telemetry where possible. Define scope, data sources, time range, owners, and stop conditions. Do not send unplanned probes, commands, or configuration changes to sensitive systems merely to create evidence.\n\nOperators and engineers are analytical partners. They explain process modes, maintenance, equipment behavior, and safe escalation. Security hunters contribute investigative structure and cross-source correlation. Together they can distinguish unexplained activity from known work or process failure.\n\nThe goal is not disruption or proving a dramatic theory. It is better visibility, earlier detection, and safer decisions. A successful hunt can confirm the hypothesis, disprove it, identify a coverage gap, improve inventory, or produce a new detection that protects future operations.",
+  "narrationPoints": [
+    "Industrial threat hunting is the proactive, defensive search for suspicious or unexplained activity in OT and ICS environments.",
+    "Hunters do not wait for a confirmed alert.",
+    "They begin with a focused question, examine available evidence, and determine whether the environment contains activity that existing monitoring missed or did not...",
+    "Alert response starts with a generated signal.",
+    "Hunting starts with a hypothesis, such as whether remote support reached an unexpected controller or whether engineering activity occurred outside an approved window.",
+    "A hunt may discover a security event, an operational fault, a policy gap, or incomplete telemetry."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.984
+tmpfs is a memory-backed filesystem commonly used for temporary storage on Linux. Files stored in tmpfs live in virtual memory.
+
+2
+00:00:08.984 --> 00:00:22.044
+Depending on system configuration, pressure, and swap behavior, tmpfs pages may interact with swap, but the important design idea is that tmpfs is not ordinary persistent disk storage.
+
+3
+00:00:22.044 --> 00:00:29.863
+It is useful for temporary files, runtime state, caches, and writable layers that do not need to survive reboot.
+
+4
+00:00:29.863 --> 00:00:38.930
+Initramfs is different but related to memory-backed booting. It is an early boot environment loaded into memory with the kernel.
+
+5
+00:00:38.930 --> 00:00:45.501
+The initramfs can contain tools and scripts needed before the final root filesystem is ready.
+
+6
+00:00:45.501 --> 00:00:56.232
+In RAM-boot designs, initramfs logic may copy images, prepare overlays, load drivers, mount devices, or decide which filesystem becomes the real root.
+
+7
+00:00:56.232 --> 00:01:00.225
+RAM-backed storage competes with the rest of the system.
+
+8
+00:01:00.225 --> 00:01:13.035
+A root image copied into RAM, a tmpfs upper layer, browser memory, desktop graphics, containers, package updates, build tools, file cache, and applications all share finite memory.
+
+9
+00:01:13.035 --> 00:01:18.608
+A system that boots successfully with no workload may fail under realistic use.
+
+10
+00:01:18.608 --> 00:01:27.010
+A desktop with a browser, GPU stack, and development tools has different pressure than a kiosk running one application.
+
+11
+00:01:27.010 --> 00:01:29.671
+Volatility is the defining tradeoff.
+
+12
+00:01:29.671 --> 00:01:37.990
+If changes live only in RAM, they disappear when the system reboots, crashes, loses power, or discards the tmpfs layer.
+
+13
+00:01:37.990 --> 00:01:41.317
+That can be excellent for clean labs and kiosks.
+
+14
+00:01:41.317 --> 00:01:51.382
+It can also lose logs, package updates, SSH host keys, machine identity, browser profiles, and user documents if persistence was not designed.
+
+15
+00:01:51.382 --> 00:02:00.532
+Before committing to any design, measure. Watch memory use after boot, under real workload, during updates, and during shutdown.
+
+16
+00:02:00.532 --> 00:02:09.516
+Consider whether swap is present and whether swap changes the privacy or performance expectations. Test low-memory behavior.
+
+17
+00:02:09.516 --> 00:02:15.755
+Document what is volatile, what is persistent, and what happens when RAM pressure rises.
+
+18
+00:02:15.755 --> 00:02:21.328
+A RAM-backed system is only reliable if its memory budget matches the workload.

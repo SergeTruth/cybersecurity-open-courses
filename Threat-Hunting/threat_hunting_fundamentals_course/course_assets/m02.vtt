@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.009
+A useful hunt begins with a clear question. The question does not need to be perfect, but it should give the analyst a direction.
+
+2
+00:00:08.009 --> 00:00:12.693
+Random log searching tends to produce either noise or confirmation bias.
+
+3
+00:00:12.693 --> 00:00:23.497
+A defensive question gives the hunt a boundary: what behavior are we looking for, where could it appear, which data source should show it, and what would count as evidence?
+
+4
+00:00:23.497 --> 00:00:32.186
+Practical hunt questions often come from known operational concerns. Are users authenticating from impossible or unusual locations?
+
+5
+00:00:32.186 --> 00:00:39.892
+Are endpoints running suspicious parent-child process chains, such as a document reader launching a scripting engine?
+
+6
+00:00:39.892 --> 00:00:48.581
+Are privileged accounts being used outside normal patterns? Are systems making unusual DNS requests or outbound network connections?
+
+7
+00:00:48.581 --> 00:00:54.550
+Are cloud administrative actions happening from unfamiliar identities or source networks?
+
+8
+00:00:54.550 --> 00:01:03.918
+Each of these questions can be investigated defensively without teaching exploitation or unauthorized activity. A good hunt question is scoped.
+
+9
+00:01:03.918 --> 00:01:12.380
+Scope includes the environment, such as corporate endpoints, production servers, cloud workloads, or a specific identity tenant.
+
+10
+00:01:12.380 --> 00:01:19.256
+It includes the time window, such as the last seven days or the first twenty-four hours after a policy change.
+
+11
+00:01:19.256 --> 00:01:27.264
+It includes the data source, such as authentication logs, endpoint process events, DNS telemetry, proxy logs, or EDR events.
+
+12
+00:01:27.264 --> 00:01:29.607
+It also includes expected evidence.
+
+13
+00:01:29.607 --> 00:01:40.033
+If the question is about unusual authentication, the expected evidence may include user, source IP, geolocation, device, timestamp, and authentication result.
+
+14
+00:01:40.033 --> 00:01:43.735
+The hunting mindset is careful and curious, not dramatic.
+
+15
+00:01:43.735 --> 00:01:50.233
+Hunters look for patterns, compare against baselines, and ask what benign explanations might exist.
+
+16
+00:01:50.233 --> 00:01:56.882
+A privileged account used at midnight may be suspicious, but it may also be a scheduled maintenance task.
+
+17
+00:01:56.882 --> 00:02:03.757
+A workstation resolving a rare domain may be suspicious, but it may also be a legitimate vendor application.
+
+18
+00:02:03.757 --> 00:02:09.952
+The goal is to separate unusual from suspicious by adding context. Write down assumptions early.
+
+19
+00:02:09.952 --> 00:02:14.712
+If the hunt assumes endpoint telemetry covers all workstations, say that.
+
+20
+00:02:14.712 --> 00:02:20.605
+If the hunt excludes mobile devices or retained logs only go back fourteen days, say that too.
+
+21
+00:02:20.605 --> 00:02:27.481
+These notes help reviewers understand the strength of the conclusion. They also help future hunts improve.
+
+22
+00:02:27.481 --> 00:02:33.827
+The best beginner habit is to turn every hunt idea into a question that can be answered with evidence.
+
+23
+00:02:33.827 --> 00:02:46.747
+Instead of saying, maybe there is lateral movement, ask: did any user account authenticate to more servers than usual during the last week, and do those events align with normal administrative activity?
+
+24
+00:02:46.747 --> 00:02:55.587
+That kind of question gives the analyst a path from curiosity to scoped investigation. A strong question also makes collaboration easier.
+
+25
+00:02:55.587 --> 00:03:03.293
+One analyst can review the scope, another can check the query, and a third can validate results against business context.
+
+26
+00:03:03.293 --> 00:03:07.524
+If the question is vague, each person may imagine a different hunt.
+
+27
+00:03:07.524 --> 00:03:14.626
+If the question is written clearly, the team can improve it, repeat it, and compare the outcome with later hunts.
