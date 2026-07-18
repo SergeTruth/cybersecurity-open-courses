@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.588
+FluentValidation is commonly used in C# applications when validation rules become richer than simple attributes.
+
+2
+00:00:07.588 --> 00:00:18.042
+It lets teams define validators in code, compose reusable rules, express conditional validation, and keep request validation close to application behavior.
+
+3
+00:00:18.042 --> 00:00:23.617
+This can make complex contracts easier to read than a long set of attributes on a model.
+
+4
+00:00:23.617 --> 00:00:31.206
+The important benefit is consistency: a request shape should have one clear validator that all entry points can use.
+
+5
+00:00:31.206 --> 00:00:38.020
+Centralized validators reduce duplication, but they should not become a dumping ground for every rule.
+
+6
+00:00:38.020 --> 00:00:43.673
+Request validation should answer whether the input is shaped correctly for a use case.
+
+7
+00:00:43.673 --> 00:00:49.480
+Domain validation should answer whether the operation is allowed by the business model.
+
+8
+00:00:49.480 --> 00:01:04.115
+Service-layer validation sits between those concerns and is especially important when work can be triggered by controllers, minimal APIs, background jobs, scheduled tasks, message consumers, or internal service calls.
+
+9
+00:01:04.115 --> 00:01:08.219
+Validation gaps often appear when only controllers validate.
+
+10
+00:01:08.219 --> 00:01:12.400
+A background job may call the same service with data from a queue.
+
+11
+00:01:12.400 --> 00:01:15.265
+An integration test may seed data directly.
+
+12
+00:01:15.265 --> 00:01:17.898
+An internal API may bypass an MVC filter.
+
+13
+00:01:17.898 --> 00:01:27.423
+If the service layer assumes every caller already validated perfectly, invalid data can reach business-critical logic from a less obvious path.
+
+14
+00:01:27.423 --> 00:01:31.449
+Shared validators and domain invariants help close that gap.
+
+15
+00:01:31.449 --> 00:01:34.624
+Maintainability matters as applications grow.
+
+16
+00:01:34.624 --> 00:01:42.909
+Validators should be named clearly, covered by tests, and organized around use cases rather than broad persistence entities.
+
+17
+00:01:42.909 --> 00:01:51.195
+Reusable rules are helpful when they represent real shared policy, such as email format, tenant identifiers, or money limits.
+
+18
+00:01:51.195 --> 00:01:56.460
+They are harmful when abstraction hides context-specific business decisions.
+
+19
+00:01:56.460 --> 00:02:03.739
+Good validation code is boring in the best way: obvious, explicit, and easy to update when the contract changes.

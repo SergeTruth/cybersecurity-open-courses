@@ -1,0 +1,117 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.527
+Security controls must be part of the execution path, not only advisory text inside a prompt.
+
+2
+00:00:07.527 --> 00:00:16.465
+A prompt can tell a model to be careful, but executable policy determines whether a tool call is allowed,
+
+3
+00:00:16.465 --> 00:00:25.403
+which data can be reached, whether a credential is exposed, and when a human must approve the next step.
+
+4
+00:00:25.403 --> 00:00:28.695
+Reliable security is enforced by the harness.
+
+5
+00:00:28.695 --> 00:00:34.811
+Defense in depth for AI loops includes least-privilege identities, sandboxed execution, tool allowlists,
+
+6
+00:00:34.811 --> 00:00:39.985
+structured input validation, output validation, data classification, secret isolation, network restrictions,
+
+7
+00:00:39.985 --> 00:00:44.690
+policy enforcement, human approval gates, audit logging, and emergency termination.
+
+8
+00:00:44.690 --> 00:00:47.042
+These controls overlap by design.
+
+9
+00:00:47.042 --> 00:00:55.509
+If one layer fails or a model proposes an unsafe action, another layer should still restrict the effect.
+
+10
+00:00:55.509 --> 00:01:02.565
+Monitoring helps detect problems, but it should not be the only protection against preventable damage.
+
+11
+00:01:02.565 --> 00:01:05.388
+Prompt injection is a control-boundary problem.
+
+12
+00:01:05.388 --> 00:01:13.385
+Retrieved documents, source files, web pages, logs, emails, and tool responses may contain text that attempts to
+
+13
+00:01:13.385 --> 00:01:14.796
+redirect the model.
+
+14
+00:01:14.796 --> 00:01:23.264
+That text should be treated as untrusted task data unless the system explicitly recognizes it as authorized instruction.
+
+15
+00:01:23.264 --> 00:01:29.379
+Stable system policy and the task contract should outrank content encountered during execution.
+
+16
+00:01:29.379 --> 00:01:34.554
+Tool outputs must not grant new permissions or rewrite approval policy.
+
+17
+00:01:34.554 --> 00:01:39.728
+A document cannot authorize the loop to expand its network access.
+
+18
+00:01:39.728 --> 00:01:43.021
+A test log cannot permit credential retrieval.
+
+19
+00:01:43.021 --> 00:01:47.255
+A source file comment cannot override the task contract.
+
+20
+00:01:47.255 --> 00:01:51.489
+Instruction authority should be represented in the system design,
+
+21
+00:01:51.489 --> 00:01:56.193
+not inferred from whichever text appears most recently in context.
+
+22
+00:01:56.193 --> 00:01:59.956
+Approval gates should provide useful context to reviewers.
+
+23
+00:01:59.956 --> 00:02:04.660
+Before production deployment, destructive data changes, credential use, external communications,
+
+24
+00:02:04.660 --> 00:02:09.365
+financial transactions, access-control changes, expanded tool boundaries, unfamiliar downloaded code,
+
+25
+00:02:09.365 --> 00:02:15.480
+or consequential publication, the reviewer needs the proposed action, expected effect, supporting evidence,
+
+26
+00:02:15.480 --> 00:02:18.773
+affected resources, reversibility, and consequences of rejection.
+
+27
+00:02:18.773 --> 00:02:23.948
+In the coding example, the loop can prepare a deployment recommendation,
+
+28
+00:02:23.948 --> 00:02:27.711
+but it cannot obtain production credentials or deploy.
+
+29
+00:02:27.711 --> 00:02:34.767
+A loop must never be able to grant itself greater authority by producing persuasive text.

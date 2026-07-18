@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.307
+Formatting APIs often look harmless because the program is constructing a string from known pieces.
+
+2
+00:00:06.307 --> 00:00:18.028
+The risk appears when the destination is fixed-size, one input component is longer than expected, or the caller assumes that a formatted buffer is complete without checking the result.
+
+3
+00:00:18.028 --> 00:00:22.169
+Size-aware formatting is the starting point, not the finish line.
+
+4
+00:00:22.169 --> 00:00:29.049
+When formatting into a buffer, the code should pass the destination capacity and check what the API reports.
+
+5
+00:00:29.049 --> 00:00:33.444
+If the output was truncated, the program needs a deliberate response.
+
+6
+00:00:33.444 --> 00:00:37.840
+Sometimes truncation is acceptable for a human-readable status field.
+
+7
+00:00:37.840 --> 00:00:44.656
+Sometimes it changes the meaning of a path, identifier, or protocol value and must be treated as a failure.
+
+8
+00:00:44.656 --> 00:00:49.688
+Formatting return values should be checked before the resulting buffer is used.
+
+9
+00:00:49.688 --> 00:00:57.715
+If the operation fails or reports that the output did not fit, later code should not proceed as though the full string exists.
+
+10
+00:00:57.715 --> 00:01:01.983
+A good migration turns silent assumptions into visible error paths.
+
+11
+00:01:01.983 --> 00:01:04.340
+Input conversion has a similar shape.
+
+12
+00:01:04.340 --> 00:01:14.150
+scanf-style input needs field widths for string destinations, conversion count checks, and careful handling when input does not match the expected format.
+
+13
+00:01:14.150 --> 00:01:22.304
+Without those checks, the code may accept partial data or leave previous values unchanged while appearing to parse successfully.
+
+14
+00:01:22.304 --> 00:01:28.420
+Numeric conversion should detect invalid input, range errors, leftover characters, and overflow.
+
+15
+00:01:28.420 --> 00:01:37.020
+A robust parser distinguishes a clean value from a value with trailing junk, a value outside the destination type, and a missing value.
+
+16
+00:01:37.020 --> 00:01:44.218
+That distinction matters because accepting partial or ambiguous input can make downstream behavior unpredictable.
+
+17
+00:01:44.218 --> 00:01:47.531
+Safer formatting and conversion are about contracts.
+
+18
+00:01:47.531 --> 00:01:49.060
+What format is accepted?
+
+19
+00:01:49.060 --> 00:01:50.398
+What size is allowed?
+
+20
+00:01:50.398 --> 00:01:52.054
+What does truncation mean?
+
+21
+00:01:52.054 --> 00:01:54.411
+What happens when input is malformed?
+
+22
+00:01:54.411 --> 00:02:00.590
+The code should answer those questions explicitly so tests and reviewers can verify the behavior.

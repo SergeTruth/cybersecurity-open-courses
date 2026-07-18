@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.481
+Binary input is easy to underestimate because it does not announce itself in words.
+
+2
+00:00:05.481 --> 00:00:16.310
+A file, packet, firmware image, database page, or custom record may appear to be just a sequence of bytes, but those bytes usually represent structured information.
+
+3
+00:00:16.310 --> 00:00:25.819
+They may encode headers, field lengths, offsets, counts, flags, checksums, records, embedded strings, and commands that later code will rely on.
+
+4
+00:00:25.819 --> 00:00:30.639
+In C, the program does not get automatic protection from a binary format.
+
+5
+00:00:30.639 --> 00:00:42.591
+The compiler will not know whether a length is reasonable, whether an offset points inside the input, whether a field was truncated, or whether a count would overflow an allocation.
+
+6
+00:00:42.591 --> 00:00:49.986
+The parser has to make those checks explicitly before it treats bytes as fields, records, objects, or decisions.
+
+7
+00:00:49.986 --> 00:00:55.203
+The consequences of weak binary validation are not limited to security defects.
+
+8
+00:00:55.203 --> 00:01:06.627
+Malformed or incomplete data can crash a process, corrupt internal state, cause excessive allocation, produce misleading output, or make later diagnostics almost impossible.
+
+9
+00:01:06.627 --> 00:01:19.965
+A parser that works only for perfect input is not robust enough for real systems, because real systems see partial transfers, old versions, damaged files, unexpected producers, and operational mistakes.
+
+10
+00:01:19.965 --> 00:01:23.927
+Many binary parser failures begin with a small act of trust.
+
+11
+00:01:23.927 --> 00:01:28.219
+Code trusts a declared size before checking that the bytes exist.
+
+12
+00:01:28.219 --> 00:01:31.587
+It trusts an offset before checking the full range.
+
+13
+00:01:31.587 --> 00:01:35.549
+It trusts a layout before considering alignment and padding.
+
+14
+00:01:35.549 --> 00:01:38.784
+It trusts a count before checking multiplication.
+
+15
+00:01:38.784 --> 00:01:41.294
+Defensive parsing reverses that order.
+
+16
+00:01:41.294 --> 00:01:47.765
+The program first confirms that the input satisfies the format rule, and only then uses the value.
+
+17
+00:01:47.765 --> 00:01:55.424
+A useful mindset is to treat every byte as untrusted until the specific rule that gives it meaning has been checked.
+
+18
+00:01:55.424 --> 00:01:58.726
+That does not mean the code has to be complicated.
+
+19
+00:01:58.726 --> 00:02:02.490
+It means validation is deliberate, local, and reviewable.
+
+20
+00:02:02.490 --> 00:02:14.508
+Good binary parsing makes the contract visible: what must be present, what values are acceptable, what relationships must hold, and how the parser fails when the contract is not met.

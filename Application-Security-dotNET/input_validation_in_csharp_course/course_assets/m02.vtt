@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.923
+In ASP.
+
+2
+00:00:00.923 --> 00:00:06.229
+NET Core, trust boundaries show up wherever request data enters the application.
+
+3
+00:00:06.229 --> 00:00:16.148
+Request bodies, query strings, route parameters, headers, cookies, JSON payloads, XML payloads, and form posts all arrive from a less trusted context.
+
+4
+00:00:16.148 --> 00:00:22.684
+Even when framework features bind those values into objects, the original source is still external.
+
+5
+00:00:22.684 --> 00:00:32.604
+The application must decide which fields are allowed, which formats are acceptable, and which values are meaningful for the operation being performed.
+
+6
+00:00:32.604 --> 00:00:35.526
+File uploads deserve a boundary of their own.
+
+7
+00:00:35.526 --> 00:00:43.369
+The file name, extension, declared content type, size, metadata, and content may all be user-controlled or misleading.
+
+8
+00:00:43.369 --> 00:00:56.211
+A safe design does not trust the original filename as a storage path, does not treat an extension as proof of content, and does not allow a large or malformed upload to consume resources without limits.
+
+9
+00:00:56.211 --> 00:01:02.670
+Validation should happen before storage, processing, scanning, or business workflow decisions.
+
+10
+00:01:02.670 --> 00:01:06.746
+Server-side and background systems have less obvious inputs.
+
+11
+00:01:06.746 --> 00:01:16.511
+Environment variables and configuration files often arrive as strings and may be missing, malformed, or set for a different deployment environment.
+
+12
+00:01:16.511 --> 00:01:20.049
+Message queues can carry stale or malformed messages.
+
+13
+00:01:20.049 --> 00:01:25.431
+Database records may contain legacy values that no longer match the current model.
+
+14
+00:01:25.431 --> 00:01:29.507
+Third-party API responses can drift after an upstream change.
+
+15
+00:01:29.507 --> 00:01:32.044
+Internal does not always mean trusted.
+
+16
+00:01:32.044 --> 00:01:38.042
+A useful review habit is to list where data crosses a system, process, or ownership boundary.
+
+17
+00:01:38.042 --> 00:01:44.348
+For each boundary, ask what the receiving code assumes and where those assumptions are enforced.
+
+18
+00:01:44.348 --> 00:01:56.190
+The answer should be visible in code: DTOs for external contracts, validators for accepted values, parsing routines for conversions, and service-layer rules for business meaning.
+
+19
+00:01:56.190 --> 00:02:00.880
+Clear boundaries make validation maintainable instead of accidental.

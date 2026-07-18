@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.995
+Arrays represent contiguous elements, but C does not automatically preserve array length in every expression.
+
+2
+00:00:06.995 --> 00:00:12.296
+When an array is passed to a function, it often decays to a pointer to its first element.
+
+3
+00:00:12.296 --> 00:00:18.629
+The callee may receive an address without receiving the capacity information needed for safe access.
+
+4
+00:00:18.629 --> 00:00:27.611
+Pointer arithmetic is defined only within the same array object, including the one-past-the-end position for comparison or loop termination.
+
+5
+00:00:27.611 --> 00:00:33.502
+The one-past pointer is useful as a boundary marker, but it is not a valid object to dereference.
+
+6
+00:00:33.502 --> 00:00:39.540
+Moving a pointer outside the array object loses the defined relationship the language provides.
+
+7
+00:00:39.540 --> 00:00:42.779
+Element counts and byte counts must not be confused.
+
+8
+00:00:42.779 --> 00:00:48.228
+A count of characters, integers, structure elements, or bytes means different things.
+
+9
+00:00:48.228 --> 00:00:56.696
+Conversions between element counts and byte sizes should be reviewed for arithmetic overflow, object size, and destination capacity.
+
+10
+00:00:56.696 --> 00:01:03.838
+Bounds checks should be based on the destination capacity, the current length, and the operation being performed.
+
+11
+00:01:03.838 --> 00:01:09.286
+A copy, append, parse, transform, or null-termination step may need different checks.
+
+12
+00:01:09.286 --> 00:01:15.250
+The fact that a source buffer is a certain size does not prove that the destination can receive it.
+
+13
+00:01:15.250 --> 00:01:20.846
+Function contracts should carry capacity and length together when buffers are involved.
+
+14
+00:01:20.846 --> 00:01:30.124
+They should also specify whether a pointer may be null, whether the buffer is mutable, whether the length includes a terminator, and who owns the data.
+
+15
+00:01:30.124 --> 00:01:34.174
+Those details make array reasoning visible instead of implicit.

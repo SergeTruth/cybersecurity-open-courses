@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.241
+C strings are arrays of characters terminated by a null character.
+
+2
+00:00:04.241 --> 00:00:13.367
+That convention is powerful and simple, but it also means that string operations depend on a terminator being present within the valid bounds.
+
+3
+00:00:13.367 --> 00:00:18.058
+A character array that holds bytes is not automatically a valid C string.
+
+4
+00:00:18.058 --> 00:00:25.963
+A buffer filled from a file, socket, device, parser, or fixed-width record may contain character data without a terminator.
+
+5
+00:00:25.963 --> 00:00:28.533
+It may also contain embedded null bytes.
+
+6
+00:00:28.533 --> 00:00:38.173
+Treating that region as a C string without checking its bounds can cause a function to read past the intended data while searching for the terminator.
+
+7
+00:00:38.173 --> 00:00:41.643
+The strlen function assumes a terminator can be found.
+
+8
+00:00:41.643 --> 00:00:49.612
+It does not know the capacity of the underlying buffer unless the data itself contains a null character before the boundary.
+
+9
+00:00:49.612 --> 00:00:57.452
+If the data may be unterminated, use length-aware logic that receives the valid buffer length and stops within that range.
+
+10
+00:00:57.452 --> 00:01:04.971
+Copying into fixed-size buffers requires space for the terminator when the destination is meant to become a C string.
+
+11
+00:01:04.971 --> 00:01:11.654
+A destination with capacity N can hold at most N minus one ordinary characters plus the null terminator.
+
+12
+00:01:11.654 --> 00:01:19.623
+Off-by-one mistakes around this rule are common because the content length and storage capacity are close but not identical.
+
+13
+00:01:19.623 --> 00:01:25.728
+Truncation can be safer than writing past the destination, but it must be handled deliberately.
+
+14
+00:01:25.728 --> 00:01:31.383
+A truncated name, path, identifier, token, or message may no longer mean the same thing.
+
+15
+00:01:31.383 --> 00:01:39.288
+The function should report truncation or make it clear that shortened output is an acceptable result for that specific use.
+
+16
+00:01:39.288 --> 00:01:46.099
+Length-limited operations are useful only when their parameters are correct and their results are checked.
+
+17
+00:01:46.099 --> 00:01:54.454
+Prefer APIs and helper functions that keep destination capacity, source length, resulting length, and terminator behavior visible.
+
+18
+00:01:54.454 --> 00:01:59.852
+String safety is buffer safety plus terminator rules, not a separate magic category.

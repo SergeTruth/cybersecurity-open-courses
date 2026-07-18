@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.643
+Dynamically allocated buffers do not remove the need for bounds checking.
+
+2
+00:00:04.643 --> 00:00:10.368
+They can grow, but only when the program explicitly tracks count, capacity, and ownership.
+
+3
+00:00:10.368 --> 00:00:16.029
+A heap buffer with unclear capacity is no safer than a local array with unclear capacity.
+
+4
+00:00:16.029 --> 00:00:21.182
+The difference is lifetime and resizing behavior, not automatic bounds knowledge.
+
+5
+00:00:21.182 --> 00:00:24.108
+Capacity growth should avoid integer overflow.
+
+6
+00:00:24.108 --> 00:00:35.303
+Doubling a capacity, adding a record size, reserving space for a terminator, or growing by a requested length all involve arithmetic that can exceed the range of the size type.
+
+7
+00:00:35.303 --> 00:00:41.664
+Check the arithmetic before allocating so the new capacity actually represents the intended storage.
+
+8
+00:00:41.664 --> 00:00:48.407
+The realloc function should be handled carefully because failure leaves the original allocation unchanged.
+
+9
+00:00:48.407 --> 00:00:57.566
+Assigning the result directly back to the only pointer can lose the ability to free or continue using the original buffer when the resize fails.
+
+10
+00:00:57.566 --> 00:01:06.090
+A common defensive pattern is to assign the result to a temporary pointer, check it, and then update the buffer state only on success.
+
+11
+00:01:06.090 --> 00:01:09.843
+Appending requires checking available space before writing.
+
+12
+00:01:09.843 --> 00:01:15.504
+If capacity is insufficient, the code should grow the buffer safely or reject the append.
+
+13
+00:01:15.504 --> 00:01:18.366
+After success, update the count consistently.
+
+14
+00:01:18.366 --> 00:01:24.918
+After failure, preserve the old count, old capacity, and old contents according to the buffer contract.
+
+15
+00:01:24.918 --> 00:01:28.926
+Initialization and cleanup should preserve valid program state.
+
+16
+00:01:28.926 --> 00:01:34.269
+A dynamic buffer object should start with known pointer, count, and capacity values.
+
+17
+00:01:34.269 --> 00:01:39.421
+Cleanup should free owned storage and reset metadata if the object may be reused.
+
+18
+00:01:39.421 --> 00:01:45.846
+Error paths should not leave a buffer with a pointer from one allocation and a capacity from another.
+
+19
+00:01:45.846 --> 00:01:48.326
+Ownership and lifetime should be clear.
+
+20
+00:01:48.326 --> 00:01:57.104
+The code should state who allocates, who grows, who frees, and whether callers may keep pointers into the buffer across growth operations.
+
+21
+00:01:57.104 --> 00:02:03.592
+Reallocation can move storage, so retained interior pointers may become stale after a successful grow.
+
+22
+00:02:03.592 --> 00:02:09.254
+A bounds-safe design treats resize as both a capacity event and a pointer-lifetime event.

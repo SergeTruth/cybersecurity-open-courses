@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Object Representation, Padding, and Initialization",
+  "graphicAlt": "Bullet summary graphic for Object Representation, Padding, and Initialization.",
+  "narration": "Objects are represented by bytes, but not every byte has the same meaning to portable C code. The bytes that represent a value are subject to the type, representation, padding, and initialization state of the object. Reading or copying bytes without understanding those rules can produce fragile behavior.\n\nStructures may include padding bytes that are not part of any logical field value. Padding can exist between fields or at the end of a structure. Those bytes may not be initialized when the logical fields are assigned, and they can make raw byte comparison of structures misleading even when the field values are equal.\n\nUninitialized storage can contain indeterminate data. Reading uninitialized values can produce undefined behavior or unreliable results depending on the type and context. Initialization should be deliberate before comparing, hashing, serializing, logging, or copying structures into longer-lived storage.\n\nSerialization formats should define fields explicitly rather than assuming the in-memory layout is portable. Field order, integer size, byte order, padding, alignment, and representation can vary across platforms and compilers. A file or network format should not depend on an incidental local layout unless that layout is deliberately specified and controlled.\n\nAvoid logging or transmitting raw object memory. It may include padding, stale data, or sensitive values that are not part of the logical field set. Defensive C treats representation bytes as a boundary that needs an explicit format, explicit initialization, and explicit review.",
+  "narrationPoints": [
+    "The bytes that represent a value are subject to the type, representation, padding, and initialization state of the object.",
+    "Structures may include padding bytes that are not part of any logical field value.",
+    "Reading uninitialized values can produce undefined behavior or unreliable results depending on the type and context.",
+    "A file or network format should not depend on an incidental local layout unless that layout is deliberately specified and controlled.",
+    "Defensive C treats representation bytes as a boundary that needs an explicit format, explicit initialization, and explicit review."
+  ]
+};

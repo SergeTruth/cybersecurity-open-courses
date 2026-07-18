@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Allocation Lifetimes and Valid States",
+  "graphicAlt": "Bullet summary graphic for Allocation Lifetimes and Valid States.",
+  "narration": "A dynamic allocation has a lifecycle. Before allocation, there is no object. After a successful allocation, there is storage. After initialization, there may be a valid object according to the program's invariants. Later, ownership may transfer, cleanup may run, and the object becomes invalid for use.\n\nFailed allocations need careful handling. If allocation fails and returns no object, cleanup code should not treat the failed result as an owned initialized object. The surrounding function may still need to release earlier allocations, but it should do so based on tracked state rather than assumptions.\n\nPartially initialized objects are especially important. A structure may have its first member allocated, its second member initialized, and its third member still absent. Cleanup should release only the members that were successfully initialized and owned. That requires state to be clear enough for the destroy path to distinguish valid fields from untouched fields.\n\nOwnership transfer is another state change. Once a caller transfers an object to a container or another API, the caller should no longer treat the allocation as something it must free. If the transfer only happens on success, the failure path must say whether the caller still owns the object.\n\nAfter cleanup, the object is no longer valid. A pointer variable may still contain an address-like value, but the lifetime has ended. Code should not inspect fields, log contents, compare contents, or call another destroy routine on the same allocation after release.\n\nState clarity prevents duplicate cleanup. When the code can identify failed, allocated, initialized, partially initialized, transferred, freed, and invalid states, each branch can make release decisions based on facts rather than habit.",
+  "narrationPoints": [
+    "Later, ownership may transfer, cleanup may run, and the object becomes invalid for use.",
+    "If allocation fails and returns no object, cleanup code should not treat the failed result as an owned initialized object.",
+    "Cleanup should release only the members that were successfully initialized and owned.",
+    "If the transfer only happens on success, the failure path must say whether the caller still owns the object.",
+    "A pointer variable may still contain an address-like value, but the lifetime has ended."
+  ]
+};

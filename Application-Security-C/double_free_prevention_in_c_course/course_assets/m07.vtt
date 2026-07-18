@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.979
+Compound objects make double-free prevention more challenging because ownership can be nested.
+
+2
+00:00:05.979 --> 00:00:12.966
+A structure may own a name buffer, a dynamic array, a set of child objects, and a handle managed by another component.
+
+3
+00:00:12.966 --> 00:00:19.521
+Each member needs a cleanup rule, and those rules need to be consistent with the object's construction path.
+
+4
+00:00:19.521 --> 00:00:23.339
+An ownership map is a simple way to reason about nested cleanup.
+
+5
+00:00:23.339 --> 00:00:30.470
+For each field, identify whether the object owns it, borrows it, points into another object, or treats it as optional.
+
+6
+00:00:30.470 --> 00:00:39.762
+That map can live in documentation, comments, naming conventions, or the destroy function's structure, but reviewers need to be able to reconstruct it.
+
+7
+00:00:39.762 --> 00:00:43.076
+Arrays of pointers need per-element ownership rules.
+
+8
+00:00:43.076 --> 00:00:45.669
+Does the array own each pointed-to object?
+
+9
+00:00:45.669 --> 00:00:49.054
+Are some elements borrowed? Are null elements allowed?
+
+10
+00:00:49.054 --> 00:00:53.448
+If insertion fails halfway through, which elements should be released?
+
+11
+00:00:53.448 --> 00:00:58.851
+Without clear answers, cleanup can either leak members or release the same member twice.
+
+12
+00:00:58.851 --> 00:01:02.957
+Partially constructed compound objects need selective teardown.
+
+13
+00:01:02.957 --> 00:01:13.401
+If the first three fields are initialized and the fourth fails, cleanup should release the first three according to their ownership rules and leave untouched fields alone.
+
+14
+00:01:13.401 --> 00:01:17.291
+Initialization order and cleanup order should be predictable.
+
+15
+00:01:17.291 --> 00:01:22.117
+Destroy functions should free only memory owned by the object being destroyed.
+
+16
+00:01:22.117 --> 00:01:31.338
+They should not free borrowed data, shared external storage, or pointers owned by containers elsewhere unless the ownership map says that is their job.
+
+17
+00:01:31.338 --> 00:01:35.372
+Hidden cleanup side effects make double-free review much harder.
+
+18
+00:01:35.372 --> 00:01:49.058
+For linked, tree-like, or nested structures, keep the explanation high level and contract-based: who owns children, who unlinks nodes, who destroys stored values, and whether traversal cleanup can revisit the same object.
+
+19
+00:01:49.058 --> 00:01:53.668
+Predictable ownership order is more important than clever teardown logic.

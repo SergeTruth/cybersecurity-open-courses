@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.625
+Many buffer overflows come from confusing capacity with current length.
+
+2
+00:00:04.625 --> 00:00:07.101
+Capacity is the total space available.
+
+3
+00:00:07.101 --> 00:00:10.749
+Length is how much meaningful data is currently present.
+
+4
+00:00:10.749 --> 00:00:19.935
+A buffer with capacity for one hundred bytes may currently contain ten bytes, and a function that appends data needs to consider both values.
+
+5
+00:00:19.935 --> 00:00:25.667
+Off-by-one errors often happen when code forgets space for a terminating null character.
+
+6
+00:00:25.667 --> 00:00:30.358
+A C string needs storage for the content and storage for the terminator.
+
+7
+00:00:30.358 --> 00:00:37.850
+If a buffer has room for sixteen bytes total, it cannot safely hold a sixteen-character C string plus a terminator.
+
+8
+00:00:37.850 --> 00:00:43.843
+C strings require correct null termination, and not every byte sequence is a valid C string.
+
+9
+00:00:43.843 --> 00:00:53.289
+Data from a network record, file block, device buffer, or binary protocol may contain embedded null bytes or may not include a terminator at all.
+
+10
+00:00:53.289 --> 00:00:59.218
+Treating arbitrary bytes as a C string can make later operations read beyond intended data.
+
+11
+00:00:59.218 --> 00:01:01.758
+Unchecked input can exceed assumptions.
+
+12
+00:01:01.758 --> 00:01:14.396
+Values from files, sockets, environment variables, command-line arguments, devices, or other processes may be longer than expected, may use a different encoding, or may omit expected delimiters.
+
+13
+00:01:14.396 --> 00:01:21.237
+Upstream validation is helpful only when the current code can rely on it and that reliance is documented.
+
+14
+00:01:21.237 --> 00:01:26.058
+Truncation should be handled as a meaningful result, not silently ignored.
+
+15
+00:01:26.058 --> 00:01:31.725
+Sometimes truncation is acceptable if the code records it and preserves a valid output.
+
+16
+00:01:31.725 --> 00:01:34.396
+Sometimes it must be treated as an error.
+
+17
+00:01:34.396 --> 00:01:39.999
+The dangerous habit is pretending a shortened value is the same as the complete value.
+
+18
+00:01:39.999 --> 00:01:48.728
+Buffer safety requires clear contracts about input size, output capacity, resulting length, terminator behavior, and failure behavior.
+
+19
+00:01:48.728 --> 00:01:57.067
+Those contracts should be visible at function boundaries, not hidden in comments far away from the copy or formatting operation.

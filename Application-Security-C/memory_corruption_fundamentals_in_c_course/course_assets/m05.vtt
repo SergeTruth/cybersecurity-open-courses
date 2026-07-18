@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.090
+Heap memory requires clear ownership and cleanup responsibility.
+
+2
+00:00:04.090 --> 00:00:10.928
+A dynamically allocated object should have an owner, a documented lifetime, and a predictable release path.
+
+3
+00:00:10.928 --> 00:00:18.660
+Without those rules, the codebase can accumulate stale pointers, leaks, duplicated cleanup, and confusing error behavior.
+
+4
+00:00:18.660 --> 00:00:23.581
+A use-after-free occurs when code accesses memory after it has been released.
+
+5
+00:00:23.581 --> 00:00:32.655
+The pointer value may still be stored in a variable, structure, callback context, or cache, but the allocation no longer belongs to that code.
+
+6
+00:00:32.655 --> 00:00:42.177
+Defensive cleanup often sets pointers to null after release when reuse is possible, but the deeper fix is clear ownership and avoiding stale aliases.
+
+7
+00:00:42.177 --> 00:00:47.672
+A double-free occurs when code attempts to release the same allocation more than once.
+
+8
+00:00:47.672 --> 00:00:58.536
+This can happen when two components believe they own the same pointer, when an error path falls through into shared cleanup, or when ownership transfer is not documented.
+
+9
+00:00:58.536 --> 00:01:04.735
+Cleanup should be centralized where practical and state should make repeated release less likely.
+
+10
+00:01:04.735 --> 00:01:09.463
+Memory leaks happen when ownership is lost and cleanup becomes impossible.
+
+11
+00:01:09.463 --> 00:01:19.816
+Leaks may not corrupt memory immediately, but they can degrade reliability over time, exhaust resources, and obscure which component is responsible for an object.
+
+12
+00:01:19.816 --> 00:01:27.420
+Error paths are especially important because allocations often happen before all later operations are known to succeed.
+
+13
+00:01:27.420 --> 00:01:30.232
+The realloc function needs careful handling.
+
+14
+00:01:30.232 --> 00:01:35.408
+If it fails, the original allocation remains valid and still needs to be managed.
+
+15
+00:01:35.408 --> 00:01:41.543
+Assigning the result directly over the only pointer can lose the original allocation on failure.
+
+16
+00:01:41.543 --> 00:01:48.509
+A safer pattern uses a temporary pointer, checks the result, and updates the buffer state only after success.
+
+17
+00:01:48.509 --> 00:01:52.535
+Cleanup paths should leave program state predictable and valid.
+
+18
+00:01:52.535 --> 00:01:54.963
+On success, ownership should be clear.
+
+19
+00:01:54.963 --> 00:02:01.609
+On failure, partially initialized objects should be either cleaned up or returned in a documented state.
+
+20
+00:02:01.609 --> 00:02:09.341
+The next caller or cleanup routine should not have to guess which pointers are live and which have already been released.

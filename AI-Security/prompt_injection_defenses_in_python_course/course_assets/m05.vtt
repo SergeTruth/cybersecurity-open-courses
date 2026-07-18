@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.554
+Authentication establishes who the user or service is.
+
+2
+00:00:03.554 --> 00:00:08.697
+Authorization decides what that identity may read, write, request, or trigger.
+
+3
+00:00:08.697 --> 00:00:13.461
+In AI applications, both remain ordinary application responsibilities.
+
+4
+00:00:13.461 --> 00:00:23.368
+The model should not decide whether a user can access a document, retrieve a tenant's data, invoke a tool, or approve a workflow based only on generated text.
+
+5
+00:00:23.368 --> 00:00:31.536
+Python code and identity systems should enforce those decisions before context is assembled and before actions are performed.
+
+6
+00:00:31.536 --> 00:00:35.091
+Object-level authorization is especially important.
+
+7
+00:00:35.091 --> 00:00:42.653
+A user may be allowed to use an assistant but not allowed to access every record the assistant can technically retrieve.
+
+8
+00:00:42.653 --> 00:00:53.392
+Retrieval filters should include user identity, session context, tenant, organization, role, document classification, and resource ownership where appropriate.
+
+9
+00:00:53.392 --> 00:01:03.148
+If the user could not access the object through the normal application, the AI path should not expose it through a summary, citation, answer, or tool call.
+
+10
+00:01:03.148 --> 00:01:08.215
+Data minimization and purpose limitation reduce both exposure and confusion.
+
+11
+00:01:08.215 --> 00:01:16.912
+The application should send only the data needed for the approved task, and only for a purpose the user and organization have authorized.
+
+12
+00:01:16.912 --> 00:01:30.449
+Secrets, credentials, private keys, tokens, source code, customer information, and regulated data should not be included in prompts or retrieved context unless the flow is explicitly approved and controlled.
+
+13
+00:01:30.449 --> 00:01:35.062
+Retrieved content should never be allowed to expand what data it can see.
+
+14
+00:01:35.062 --> 00:01:38.087
+Model output should not approve its own access.
+
+15
+00:01:38.087 --> 00:01:48.297
+If the model says it needs a restricted document or a powerful tool, that request should go through the same authorization and approval path as any other request.
+
+16
+00:01:48.297 --> 00:01:52.002
+This separation is the heart of prompt injection defense.
+
+17
+00:01:52.002 --> 00:02:01.682
+The model may propose, explain, summarize, or ask for clarification, but the application decides what data is available and which actions are allowed.

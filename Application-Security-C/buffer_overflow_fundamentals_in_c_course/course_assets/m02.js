@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Buffers, Bounds, and C Memory Basics",
+  "graphicAlt": "Bullet summary graphic for Buffers, Bounds, and C Memory Basics.",
+  "narration": "A buffer is a contiguous region intended to hold a specific amount of data. It may hold bytes, characters, records, integers, structures, or other elements. Whatever it holds, the buffer has finite capacity. Safe code must know that capacity before writing or reading through a boundary-sensitive operation.\n\nC arrays do not automatically carry runtime capacity information into every expression or function call. Inside the scope where an array is declared, the compiler may know its size. Once the array is passed to a function as a pointer, that size information is no longer automatically available through the pointer alone.\n\nArray-to-pointer decay can hide the original size of a buffer. A function receiving a pointer often cannot tell whether it points to one element, ten elements, or a larger region. That is why safe C interfaces commonly pass capacity or length alongside the pointer.\n\nPointer arithmetic must stay within the valid object or array boundary. Element counts and byte counts are not interchangeable. A buffer that holds ten integers does not have the same byte capacity as a buffer that holds ten characters. Reviewers need to know which unit a length represents.\n\nA safe buffer operation needs three pieces of information: the destination capacity, the intended number of elements or bytes to process, and the resulting length. If any of those are missing or guessed, the operation is harder to review and easier to misuse.\n\nExternal input should never be assumed to fit into a fixed buffer. Files, sockets, devices, arguments, environment values, and records from other systems may all exceed local assumptions. Defensive code checks the available space before copying, formatting, parsing, or appending.",
+  "narrationPoints": [
+    "Safe code must know that capacity before writing or reading through a boundary-sensitive operation.",
+    "Once the array is passed to a function as a pointer, that size information is no longer automatically available through the pointer alone.",
+    "Pointer arithmetic must stay within the valid object or array boundary.",
+    "If any of those are missing or guessed, the operation is harder to review and easier to misuse.",
+    "External input should never be assumed to fit into a fixed buffer."
+  ]
+};

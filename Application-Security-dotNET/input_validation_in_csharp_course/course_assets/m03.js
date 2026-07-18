@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Defining Expected Data",
+  "graphicAlt": "Blank placeholder image for Defining Expected Data.",
+  "narration": "Validation starts before code runs. Teams need a clear definition of expected data: which fields are required, which fields are optional, how long strings may be, which numeric ranges are valid, which formats are accepted, and which values belong to a controlled set. C# types express some of that contract, but they do not express every rule. A string property says little about length, allowed characters, business meaning, or whether the value should be present for a specific operation.\n\nNullable reference types help make intent visible, but they are not a complete validation strategy. They can show that a value should not be null in well-typed code, and they can reduce accidental null handling mistakes. External input still needs runtime checks because deserialization, model binding, configuration, and reflection-based frameworks can produce missing or unexpected values. Nullable annotations should support validation, not replace it.\n\nCommon data categories each need their own rules. GUIDs should be parsed and checked for allowed use, not just accepted because they have a GUID shape. Dates and times need format, range, time zone, and ordering rules. Enums should be constrained to intended values, especially when numeric binding can produce values outside normal business options. Collections need limits, item validation, duplicate rules, and sometimes cross-item constraints.\n\nThe strongest contracts combine structure with meaning. A request may contain a valid start date and a valid end date, but the end date still needs to be after the start date. A quantity may be an integer, but it may exceed an inventory or policy limit. A field may be optional in one workflow and required in another. Defining these expectations before processing data makes validators easier to test and business logic easier to trust.",
+  "narrationPoints": [
+    "Validation starts before code runs.",
+    "Teams need a clear definition of expected data: which fields are required, which fields are optional, how long strings may be, which numeric ranges.",
+    "C# types express some of that contract, but they do not express every rule.",
+    "A string property says little about length, allowed characters, business meaning, or whether the value should be present for a specific operation.",
+    "Nullable reference types help make intent visible, but they are not a complete validation strategy.",
+    "They can show that a value should not be null in well-typed code, and they can reduce accidental null handling mistakes."
+  ]
+};

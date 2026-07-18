@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.366
+Validation starts before code runs.
+
+2
+00:00:02.366 --> 00:00:17.174
+Teams need a clear definition of expected data: which fields are required, which fields are optional, how long strings may be, which numeric ranges are valid, which formats are accepted, and which values belong to a controlled set.
+
+3
+00:00:17.174 --> 00:00:21.906
+C# types express some of that contract, but they do not express every rule.
+
+4
+00:00:21.906 --> 00:00:31.447
+A string property says little about length, allowed characters, business meaning, or whether the value should be present for a specific operation.
+
+5
+00:00:31.447 --> 00:00:37.934
+Nullable reference types help make intent visible, but they are not a complete validation strategy.
+
+6
+00:00:37.934 --> 00:00:45.567
+They can show that a value should not be null in well-typed code, and they can reduce accidental null handling mistakes.
+
+7
+00:00:45.567 --> 00:00:57.092
+External input still needs runtime checks because deserialization, model binding, configuration, and reflection-based frameworks can produce missing or unexpected values.
+
+8
+00:00:57.092 --> 00:01:01.367
+Nullable annotations should support validation, not replace it.
+
+9
+00:01:01.367 --> 00:01:04.573
+Common data categories each need their own rules.
+
+10
+00:01:04.573 --> 00:01:10.984
+GUIDs should be parsed and checked for allowed use, not just accepted because they have a GUID shape.
+
+11
+00:01:10.984 --> 00:01:15.258
+Dates and times need format, range, time zone, and ordering rules.
+
+12
+00:01:15.258 --> 00:01:23.960
+Enums should be constrained to intended values, especially when numeric binding can produce values outside normal business options.
+
+13
+00:01:23.960 --> 00:01:30.524
+Collections need limits, item validation, duplicate rules, and sometimes cross-item constraints.
+
+14
+00:01:30.524 --> 00:01:34.264
+The strongest contracts combine structure with meaning.
+
+15
+00:01:34.264 --> 00:01:41.515
+A request may contain a valid start date and a valid end date, but the end date still needs to be after the start date.
+
+16
+00:01:41.515 --> 00:01:46.323
+A quantity may be an integer, but it may exceed an inventory or policy limit.
+
+17
+00:01:46.323 --> 00:01:50.369
+A field may be optional in one workflow and required in another.
+
+18
+00:01:50.369 --> 00:01:58.154
+Defining these expectations before processing data makes validators easier to test and business logic easier to trust.

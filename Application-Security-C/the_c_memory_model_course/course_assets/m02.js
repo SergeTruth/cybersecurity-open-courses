@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Objects, Bytes, and Storage Duration",
+  "graphicAlt": "Bullet summary graphic for Objects, Bytes, and Storage Duration.",
+  "narration": "In C, an object is a region of data storage that can represent values. Objects have size, alignment requirements, storage duration, lifetime, and type-related access rules. A pointer value, an array element, a structure object, a static variable, and allocated storage all need to be reasoned about as objects or storage that may contain objects.\n\nStorage duration describes how long storage exists. Automatic storage is commonly associated with block scope and stack-like lifetime, but it is safer to reason in language terms rather than relying only on stack diagrams. Static storage exists for the duration of the program. Thread storage is associated with a thread. Allocated storage comes from allocation functions and must be released deliberately.\n\nStorage duration tells you when the storage may exist, but it does not make every use safe. A pointer can point outside an object, be misaligned for the intended type, refer to storage whose lifetime has ended, or be used through an incompatible type. The existence of storage is only one part of valid access.\n\nStatic storage can simplify lifetime reasoning because the storage lasts for the program duration, but it can also introduce shared-state concerns, initialization-order questions, and thread-safety review needs. Allocated storage provides flexible lifetime, but the program must define ownership, cleanup, and failure behavior.\n\nA practical review asks what object exists here, how large it is, how it is aligned, how long its storage lasts, when its lifetime begins and ends, and which code is allowed to access it. Those questions are more reliable than assuming memory is safe because an address is non-null or because a previous test run succeeded.",
+  "narrationPoints": [
+    "Objects have size, alignment requirements, storage duration, lifetime, and type-related access rules.",
+    "Allocated storage comes from allocation functions and must be released deliberately.",
+    "Storage duration tells you when the storage may exist, but it does not make every use safe.",
+    "Allocated storage provides flexible lifetime, but the program must define ownership, cleanup.",
+    "A practical review asks what object exists here, how large it is, how it is aligned, how long its storage lasts."
+  ]
+};

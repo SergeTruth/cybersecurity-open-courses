@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.907
+Integer sizes and allocation math are part of memory safety.
+
+2
+00:00:03.907 --> 00:00:08.399
+Buffers are finite, and the values that describe them are finite too.
+
+3
+00:00:08.399 --> 00:00:16.863
+When code calculates a size, an offset, a count, or a capacity, that arithmetic must match the object that will be accessed later.
+
+4
+00:00:16.863 --> 00:00:20.314
+Allocation math must distinguish bytes from elements.
+
+5
+00:00:20.314 --> 00:00:26.369
+An element count multiplied by the size of each element produces a byte count for allocation.
+
+6
+00:00:26.369 --> 00:00:31.969
+A byte count is not the same as an index count, a string length, or a structure count.
+
+7
+00:00:31.969 --> 00:00:35.680
+Naming and helper functions should make the unit visible.
+
+8
+00:00:35.680 --> 00:00:38.870
+Multiplication for allocation sizes can overflow.
+
+9
+00:00:38.870 --> 00:00:45.381
+Addition can also overflow when code adds a header, terminator, alignment padding, or trailing data.
+
+10
+00:00:45.381 --> 00:00:51.371
+If the arithmetic wraps or truncates, the allocation may be smaller than later code expects.
+
+11
+00:00:51.371 --> 00:00:56.124
+Check the arithmetic before calling allocation functions or copying data.
+
+12
+00:00:56.124 --> 00:01:01.919
+Signed and unsigned comparisons can produce surprising results when values are converted.
+
+13
+00:01:01.919 --> 00:01:07.713
+A negative index or length should be rejected before it is converted to an unsigned size.
+
+14
+00:01:07.713 --> 00:01:11.815
+A wrapped size should not be trusted as a large valid capacity.
+
+15
+00:01:11.815 --> 00:01:16.243
+Defensive code validates both the type range and the business range.
+
+16
+00:01:16.243 --> 00:01:20.930
+Structure layout, padding, and alignment should not be guessed casually.
+
+17
+00:01:20.930 --> 00:01:25.879
+The compiler controls layout according to the platform, ABI, and type rules.
+
+18
+00:01:25.879 --> 00:01:39.096
+Code that serializes, copies, or overlays structures should be careful about what bytes are meaningful, what padding may exist, and whether the external representation truly matches the in-memory object.
+
+19
+00:01:39.096 --> 00:01:43.458
+Casts should not be used to hide type, size, or ownership problems.
+
+20
+00:01:43.458 --> 00:01:53.485
+A cast can request a conversion, but it does not prove the value fits, the pointer is aligned, the lifetime is valid, or the destination owns the storage.
+
+21
+00:01:53.485 --> 00:01:59.801
+When a cast appears near memory access, reviewers should ask what contract makes the access safe.

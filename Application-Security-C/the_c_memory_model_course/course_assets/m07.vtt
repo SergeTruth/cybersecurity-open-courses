@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.744
+Dynamic allocation creates storage whose lifetime is controlled by allocation and deallocation calls.
+
+2
+00:00:06.744 --> 00:00:13.261
+malloc allocates uninitialized storage, while calloc initializes allocated storage to zero bytes.
+
+3
+00:00:13.261 --> 00:00:20.005
+Neither call removes the need to construct valid object state before the program reads from that storage.
+
+4
+00:00:20.005 --> 00:00:24.476
+Every allocation needs a clear owner and a matching release strategy.
+
+5
+00:00:24.476 --> 00:00:32.053
+The owner might be the caller, the callee, a container object, or a cleanup routine, but the contract should be visible.
+
+6
+00:00:32.053 --> 00:00:40.010
+Allocation failure must also be handled safely because a null result or partial initialization can change the cleanup path.
+
+7
+00:00:40.010 --> 00:00:44.177
+realloc deserves special attention because it can move storage.
+
+8
+00:00:44.177 --> 00:00:49.406
+If it succeeds, old pointers and aliases may no longer designate the live storage.
+
+9
+00:00:49.406 --> 00:00:52.740
+If it fails, the original allocation remains valid.
+
+10
+00:00:52.740 --> 00:01:02.667
+Assigning realloc directly to the original pointer can lose the only reference to the original allocation if the call fails, so review patterns carefully.
+
+11
+00:01:02.667 --> 00:01:06.910
+Allocation size calculations must be checked before allocation.
+
+12
+00:01:06.910 --> 00:01:15.776
+Multiplication, addition, and element-size conversions can overflow size_t and produce a smaller allocation than the program expects.
+
+13
+00:01:15.776 --> 00:01:22.520
+Defensive code calculates sizes in a way that makes overflow checks explicit before memory is requested.
+
+14
+00:01:22.520 --> 00:01:28.431
+After free, the object's lifetime has ended, and pointers that designate it must not be used.
+
+15
+00:01:28.431 --> 00:01:34.417
+Setting one pointer to null may help local cleanup clarity, but it does not update every alias.
+
+16
+00:01:34.417 --> 00:01:42.298
+Cleanup code should handle partial initialization and multiple failure paths without leaks or double-release behavior.

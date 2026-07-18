@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Symmetric Encryption and AEAD",
+  "graphicAlt": "Draft visual summary for Symmetric Encryption and AEAD",
+  "narration": "Symmetric encryption uses shared secret keys. The same key, or closely related secret material managed by the library or protocol, is used to protect and recover data. This makes symmetric encryption efficient, but it also means every party that can decrypt must be trusted to hold the relevant secret appropriately.\n\nModern application designs often prefer authenticated encryption with associated data, commonly called AEAD, when the goal is to protect data confidentiality and detect unauthorized modification. The authentication part matters because ciphertext should not be treated as trustworthy simply because it is encrypted. The application needs to know whether protected data was altered or used in the wrong context.\n\nNonce and initialization-value handling must follow the library rules exactly. Some modes require uniqueness. Some require unpredictable values. Some libraries generate or manage the value for the caller. The application should not substitute a convenient counter, timestamp, random-looking string, or reused value unless that pattern is explicitly supported and reviewed.\n\nAssociated data can bind context to protected data without encrypting that context. For example, a record type, version, tenant identifier, or protocol state can be authenticated so the protected data is only accepted in the intended setting. This is useful, but only when the context is chosen deliberately and verified consistently.\n\nEncryption does not replace validation or authorization. After decryption and authentication succeed, the application still needs to parse the plaintext safely, validate fields, enforce permissions, and handle malformed or unexpected content. Cryptography can protect a channel or object, but application logic must still decide what the data means.\n\nReviewers should look for clear key purpose, approved AEAD usage where appropriate, correct nonce handling, authenticated context, return-value checks, and safe behavior on verification failure. If any of those pieces are unclear, the encryption design is incomplete.",
+  "narrationPoints": [
+    "Symmetric encryption uses shared secret keys.",
+    "Modern application designs often prefer authenticated.",
+    "Nonce and initialization-value handling must follow.",
+    "Associated data can bind context to protected data.",
+    "Encryption does not replace validation or authorization.",
+    "Reviewers should look for clear key purpose."
+  ]
+};

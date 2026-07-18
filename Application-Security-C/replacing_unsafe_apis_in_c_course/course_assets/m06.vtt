@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.930
+Unsafe API replacement is not limited to strings and memory.
+
+2
+00:00:03.930 --> 00:00:09.891
+File, path, environment, and process APIs also create boundaries that need clear contracts.
+
+3
+00:00:09.891 --> 00:00:21.681
+A call that opens a file, reads an environment variable, creates a temporary file, or launches another process can carry security and reliability assumptions that are easy to miss.
+
+4
+00:00:21.681 --> 00:00:28.821
+File and path APIs become risky when user-controlled strings influence filesystem access without constraints.
+
+5
+00:00:28.821 --> 00:00:39.170
+A safer design defines trusted directories, allowed file names, expected file types, permissions, and whether symbolic links or relative paths are acceptable.
+
+6
+00:00:39.170 --> 00:00:44.738
+Replacing one file API with another does not help if the path policy remains unclear.
+
+7
+00:00:44.738 --> 00:00:49.781
+Temporary file creation should avoid predictable names and broad permissions.
+
+8
+00:00:49.781 --> 00:00:58.100
+The code should use platform-supported mechanisms that create the file safely rather than building a name and opening it later.
+
+9
+00:00:58.100 --> 00:01:04.519
+The directory, permissions, cleanup behavior, and error handling should all be part of the review.
+
+10
+00:01:04.519 --> 00:01:12.903
+Environment variables should be treated as untrusted process input unless the deployment boundary provides a stronger guarantee.
+
+11
+00:01:12.903 --> 00:01:22.204
+They may be missing, malformed, inherited unexpectedly, or set differently across service managers, shells, containers, and test environments.
+
+12
+00:01:22.204 --> 00:01:29.148
+Code should validate environment-derived values before using them for paths, sizes, modes, or credentials.
+
+13
+00:01:29.148 --> 00:01:34.453
+Process launch APIs require careful command construction and environment control.
+
+14
+00:01:34.453 --> 00:01:45.064
+Ambiguous shell-style construction, uncontrolled inherited environment state, and broad file descriptor inheritance can create behavior the caller did not intend.
+
+15
+00:01:45.064 --> 00:01:52.859
+Safer process launch code passes arguments as structured values where supported and gives the child only what it needs.
+
+16
+00:01:52.859 --> 00:01:59.213
+Platform-specific safer APIs should be used deliberately and documented when portability matters.
+
+17
+00:01:59.213 --> 00:02:12.248
+A cross-platform project may need a small abstraction, but that abstraction should make access intent, path rules, permissions, and failure behavior explicit rather than hiding important differences.

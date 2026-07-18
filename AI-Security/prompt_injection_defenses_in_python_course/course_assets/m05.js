@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Application-Enforced Authorization and Data Controls",
+  "graphicAlt": "Blank placeholder image for a lesson on application-enforced authorization and data controls.",
+  "narration": "Authentication establishes who the user or service is. Authorization decides what that identity may read, write, request, or trigger. In AI applications, both remain ordinary application responsibilities. The model should not decide whether a user can access a document, retrieve a tenant's data, invoke a tool, or approve a workflow based only on generated text. Python code and identity systems should enforce those decisions before context is assembled and before actions are performed.\n\nObject-level authorization is especially important. A user may be allowed to use an assistant but not allowed to access every record the assistant can technically retrieve. Retrieval filters should include user identity, session context, tenant, organization, role, document classification, and resource ownership where appropriate. If the user could not access the object through the normal application, the AI path should not expose it through a summary, citation, answer, or tool call.\n\nData minimization and purpose limitation reduce both exposure and confusion. The application should send only the data needed for the approved task, and only for a purpose the user and organization have authorized. Secrets, credentials, private keys, tokens, source code, customer information, and regulated data should not be included in prompts or retrieved context unless the flow is explicitly approved and controlled. Retrieved content should never be allowed to expand what data it can see.\n\nModel output should not approve its own access. If the model says it needs a restricted document or a powerful tool, that request should go through the same authorization and approval path as any other request. This separation is the heart of prompt injection defense. The model may propose, explain, summarize, or ask for clarification, but the application decides what data is available and which actions are allowed.",
+  "narrationPoints": [
+    "Authentication establishes who the user or service is.",
+    "Authorization decides what that identity may read, write, request, or trigger.",
+    "In AI applications, both remain ordinary application responsibilities.",
+    "The model should not decide whether a user can access a document, retrieve a tenant's data, invoke a tool, or approve a workflow based only on generated text.",
+    "Python code and identity systems should enforce those decisions before context is assembled and before actions are performed.",
+    "Object-level authorization is especially important."
+  ]
+};

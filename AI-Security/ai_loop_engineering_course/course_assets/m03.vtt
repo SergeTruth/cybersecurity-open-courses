@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.721
+A dependable loop needs explicit state.
+
+2
+00:00:02.721 --> 00:00:05.896
+A growing conversation transcript is not enough.
+
+3
+00:00:05.896 --> 00:00:10.884
+Transcripts are useful records, but they are not structured control data.
+
+4
+00:00:10.884 --> 00:00:16.326
+They can bury the current objective, mix stale assumptions with fresh evidence,
+
+5
+00:00:16.326 --> 00:00:19.047
+and make recovery difficult after interruption.
+
+6
+00:00:19.047 --> 00:00:26.304
+State is the application-maintained record that tells the loop where it is and what has happened.
+
+7
+00:00:26.304 --> 00:00:31.746
+It is the part operators can query without rereading every generated sentence.
+
+8
+00:00:31.746 --> 00:00:38.548
+Useful state fields include a task identifier, current status, current objective or subtask, completed actions,
+
+9
+00:00:38.548 --> 00:00:44.898
+pending actions, evidence collected, files or records changed, errors encountered, retry counts, budget consumed,
+
+10
+00:00:44.898 --> 00:00:48.526
+approval status, last meaningful progress, and terminal reason.
+
+11
+00:00:48.526 --> 00:00:52.607
+These fields do not all belong in every prompt.
+
+12
+00:00:52.607 --> 00:00:58.956
+They belong in the harness so the application can reason about progress and safety.
+
+13
+00:00:58.956 --> 00:01:01.224
+State is different from context.
+
+14
+00:01:01.224 --> 00:01:04.852
+State is the structured record the application maintains.
+
+15
+00:01:04.852 --> 00:01:10.748
+Context is the selected information supplied to the model for a particular iteration.
+
+16
+00:01:10.748 --> 00:01:18.457
+A good loop selects the minimum useful context from state, source artifacts, recent observations, and stable policy.
+
+17
+00:01:18.457 --> 00:01:27.074
+Copying the entire state and history into every call is expensive and can make important facts harder to find.
+
+18
+00:01:27.074 --> 00:01:32.063
+Selective context also keeps obsolete attempts from competing with current evidence.
+
+19
+00:01:32.063 --> 00:01:34.784
+The control flow should be explicit.
+
+20
+00:01:34.784 --> 00:01:37.958
+Load the task contract and current state.
+
+21
+00:01:37.958 --> 00:01:39.319
+Construct focused context.
+
+22
+00:01:39.319 --> 00:01:41.586
+Request one proposed next action.
+
+23
+00:01:41.586 --> 00:01:44.761
+Validate that proposal against schema and policy.
+
+24
+00:01:44.761 --> 00:01:46.575
+Execute one approved action.
+
+25
+00:01:46.575 --> 00:01:50.657
+Normalize and record the observation. Evaluate progress. Update state.
+
+26
+00:01:50.657 --> 00:01:53.378
+Then continue, pause, escalate, or terminate.
+
+27
+00:01:53.378 --> 00:01:59.727
+Each iteration should produce a defined state transition, not just another paragraph of output.
+
+28
+00:01:59.727 --> 00:02:02.448
+Durable state supports resumability and governance.
+
+29
+00:02:02.448 --> 00:02:08.797
+If a coding loop pauses after editing two files and running one failing test,
+
+30
+00:02:08.797 --> 00:02:16.507
+it should resume from a checkpoint without repeating every earlier action or assuming external conditions stayed fixed.
+
+31
+00:02:16.507 --> 00:02:23.309
+Engineers should be able to see the test command, failing tests, edited files, current hypothesis,
+
+32
+00:02:23.309 --> 00:02:30.112
+previous repair attempt, remaining budget, and stop reason without reconstructing the run from free-form text.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.102
+Memory safety in C depends on explicit engineering discipline.
+
+2
+00:00:04.102 --> 00:00:19.319
+The language gives direct access to memory, but the program must preserve the rules that make that access meaningful: which object is being accessed, how large it is, who owns it, how long it lives, and which operations are valid.
+
+3
+00:00:19.319 --> 00:00:23.222
+Track size, lifetime, ownership, and valid ranges together.
+
+4
+00:00:23.222 --> 00:00:28.846
+A pointer should travel with the bounds and ownership facts that make it safe to use.
+
+5
+00:00:28.846 --> 00:00:32.749
+A buffer should distinguish count, capacity, and byte size.
+
+6
+00:00:32.749 --> 00:00:38.571
+A dynamically allocated object should have a clear owner and a predictable cleanup path.
+
+7
+00:00:38.571 --> 00:00:42.805
+Validate before reading, writing, copying, resizing, or freeing.
+
+8
+00:00:42.805 --> 00:00:46.179
+Check indexes and ranges before pointer arithmetic.
+
+9
+00:00:46.179 --> 00:00:48.826
+Check allocation math before allocating.
+
+10
+00:00:48.826 --> 00:00:53.324
+Check lifetime and ownership before retaining or releasing pointers.
+
+11
+00:00:53.324 --> 00:01:00.999
+Treat strings as bounded buffers with terminator rules rather than assuming every character array is a valid string.
+
+12
+00:01:00.999 --> 00:01:04.836
+Finally, use tools, tests, and reviews as layered support.
+
+13
+00:01:04.836 --> 00:01:16.546
+Compiler warnings, static analysis, sanitizers, assertions, boundary tests, and robustness testing all help, but they work best when APIs are clear and contracts are reviewable.
+
+14
+00:01:16.546 --> 00:01:24.883
+Prefer maintainable designs over clever assumptions, and make memory decisions visible enough for the next developer to trust.

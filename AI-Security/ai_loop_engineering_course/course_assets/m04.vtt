@@ -1,0 +1,121 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.686
+Tools turn model output into effects.
+
+2
+00:00:02.686 --> 00:00:07.611
+A model response by itself may only propose, summarize, or explain.
+
+3
+00:00:07.611 --> 00:00:14.775
+A tool can read files, modify code, query a database, send a message, or change infrastructure.
+
+4
+00:00:14.775 --> 00:00:20.596
+That difference is why tool design belongs at the center of loop engineering.
+
+5
+00:00:20.596 --> 00:00:25.968
+The moment a tool executes, an abstract action intent becomes operational behavior.
+
+6
+00:00:25.968 --> 00:00:29.998
+Treat tool design as an application programming interface problem.
+
+7
+00:00:29.998 --> 00:00:36.266
+Each tool should have a narrow purpose, clear name, structured input schema, validated arguments,
+
+8
+00:00:36.266 --> 00:00:40.743
+defined preconditions, defined outputs, bounded side effects, meaningful error responses,
+
+9
+00:00:40.743 --> 00:00:42.534
+and auditable execution records.
+
+10
+00:00:42.534 --> 00:00:48.802
+A vague tool such as "run anything" gives the model a large action surface.
+
+11
+00:00:48.802 --> 00:00:56.414
+A tool such as "run approved repository tests" is easier to reason about and safer to authorize.
+
+12
+00:00:56.414 --> 00:01:02.234
+The interface should make the safe action easy and the unsafe action impossible.
+
+13
+00:01:02.234 --> 00:01:07.607
+Least-capability design gives the loop only the tools required for the task.
+
+14
+00:01:07.607 --> 00:01:10.294
+Separate read operations from write operations.
+
+15
+00:01:10.294 --> 00:01:12.532
+Separate draft generation from publication.
+
+16
+00:01:12.532 --> 00:01:16.562
+Separate a deployment recommendation from the authority to deploy.
+
+17
+00:01:16.562 --> 00:01:24.621
+A loop that can inspect a repository and propose a patch does not automatically need access to secrets,
+
+18
+00:01:24.621 --> 00:01:28.203
+production systems, unrelated directories, or arbitrary outbound communication.
+
+19
+00:01:28.203 --> 00:01:32.232
+Tool output is an observation, not automatically trusted truth.
+
+20
+00:01:32.232 --> 00:01:35.814
+Results may be incomplete, stale, malformed, or adversarial.
+
+21
+00:01:35.814 --> 00:01:43.873
+A file, log, email, web page, or test output may contain text that attempts to redirect the model.
+
+22
+00:01:43.873 --> 00:01:48.350
+The loop should normalize observations, validate their structure, preserve provenance,
+
+23
+00:01:48.350 --> 00:01:54.619
+and treat embedded instructions as data unless they come from an authorized instruction source.
+
+24
+00:01:54.619 --> 00:01:55.962
+Idempotency also matters.
+
+25
+00:01:55.962 --> 00:02:03.126
+An idempotent action can be repeated without creating duplicate records or applying the same effect twice.
+
+26
+00:02:03.126 --> 00:02:11.185
+When an operation is not idempotent, the loop should record a unique operation identifier and check whether the
+
+27
+00:02:11.185 --> 00:02:13.871
+action already occurred before retrying it.
+
+28
+00:02:13.871 --> 00:02:19.692
+In the coding loop, bounded tools might list repository files, read selected files,
+
+29
+00:02:19.692 --> 00:02:25.064
+apply a patch inside the repository, and run an approved test command.
+
+30
+00:02:25.064 --> 00:02:29.542
+Reliability comes from ensuring only valid, bounded actions can execute.

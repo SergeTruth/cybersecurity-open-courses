@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.705
+Bounds errors happen when code reads from or writes to memory outside the intended object.
+
+2
+00:00:05.705 --> 00:00:14.833
+The object may be an array, a dynamically allocated buffer, a structure field, a local workspace, or a region described by a pointer and length.
+
+3
+00:00:14.833 --> 00:00:21.425
+The safety question is always the same: is this access inside the valid range for this object right now.
+
+4
+00:00:21.425 --> 00:00:25.356
+Out-of-bounds reads access memory outside the intended object.
+
+5
+00:00:25.356 --> 00:00:32.265
+They may return unrelated data, stale data, padding, or bytes that happen to be nearby in a particular build.
+
+6
+00:00:32.265 --> 00:00:41.330
+Even when a read does not crash, it can corrupt program logic by feeding later code a value that was never part of the intended input or state.
+
+7
+00:00:41.330 --> 00:00:45.323
+Out-of-bounds writes modify memory outside the intended object.
+
+8
+00:00:45.323 --> 00:00:52.993
+That can corrupt adjacent state, break data structures, disturb length fields, invalidate pointers, or crash the program.
+
+9
+00:00:52.993 --> 00:01:01.677
+A write beyond the intended region is especially dangerous because it changes the program's future behavior, not just the current result.
+
+10
+00:01:01.677 --> 00:01:08.270
+Off-by-one errors often come from incorrect loop conditions, endpoint confusion, or terminator handling.
+
+11
+00:01:08.270 --> 00:01:13.214
+For a zero-based array with count elements, valid indexes are less than count.
+
+12
+00:01:13.214 --> 00:01:18.349
+A condition that permits index equal to count steps one element beyond the array.
+
+13
+00:01:18.349 --> 00:01:25.448
+Strings add another common boundary: space for the content is not the same as space for content plus terminator.
+
+14
+00:01:25.448 --> 00:01:29.949
+Lengths, indexes, offsets, and capacities must be validated before use.
+
+15
+00:01:29.949 --> 00:01:35.527
+A start offset can be valid while the range from start through start plus length is not.
+
+16
+00:01:35.527 --> 00:01:40.535
+A length can describe one buffer while code accidentally applies it to another.
+
+17
+00:01:40.535 --> 00:01:45.035
+A capacity can describe total space while count describes current data.
+
+18
+00:01:45.035 --> 00:01:47.698
+Defensive code keeps those facts separate.
+
+19
+00:01:47.698 --> 00:01:51.945
+Check ranges before performing pointer arithmetic or memory access.
+
+20
+00:01:51.945 --> 00:01:59.805
+It is easier to reason about offsets and lengths as values first, then derive a pointer after the operation is known to fit.
+
+21
+00:01:59.805 --> 00:02:05.954
+A reviewed helper for repeated range checks can make this pattern consistent across the codebase.

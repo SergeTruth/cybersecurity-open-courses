@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Read Then Parse Exactly | Secure Input Handling in C++</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="8"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C++</p>
+        <h1 id="module-title">Code Examples: Read Then Parse Exactly</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">C++ Code Examples</h2>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Read a Line and Enforce the Policy Limit</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;cstddef&gt;
+#include &lt;istream&gt;
+#include &lt;optional&gt;
+#include &lt;string&gt;
+
+std::optional&lt;std::string&gt; read_required_line(std::istream&amp; input, std::size_t max_length) {
+    std::string line;
+
+    if (!std::getline(input, line)) {
+        return std::nullopt;
+    }
+    if (line.empty() || line.size() &gt; max_length) {
+        return std::nullopt;
+    }
+    if (line.find(&#x27;\0&#x27;) != std::string::npos) {
+        return std::nullopt;
+    }
+
+    return line;
+}</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Reject Partial Parses and Trailing Data</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;optional&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+
+struct UserLimit {
+    std::string name;
+    int limit;
+};
+
+std::optional&lt;UserLimit&gt; parse_user_limit(const std::string&amp; line) {
+    std::istringstream stream(line);
+    UserLimit parsed{};
+    std::string trailing;
+
+    if (!(stream &gt;&gt; parsed.name &gt;&gt; parsed.limit)) {
+        return std::nullopt;
+    }
+    if (stream &gt;&gt; trailing) {
+        return std::nullopt;
+    }
+    if (parsed.name.size() &gt; 31 || parsed.limit &lt; 1 || parsed.limit &gt; 100) {
+        return std::nullopt;
+    }
+
+    return parsed;
+}</code></pre>
+        </article>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m04.html">Previous</a>
+        <a id="next-module" class="btn" href="m05.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Matters in C++",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Validate Before Use",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding Input Sources and Trust Boundaries",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Check Each Input Source",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Strings, Buffers, and Lifetime Safety",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Preserve Length and Lifetime",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input and Parsing Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Read Then Parse Exactly",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Conversion and Range Validation",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Convert and Check Ranges",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Containers, Indexes, and Resource Limits",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Bound Containers and Indexes",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. File, Path, and Structured Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Validate Paths and Formats",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling, Testing, and Tooling",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Make Rejection Paths Explicit",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Combine the Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

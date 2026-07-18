@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.835
+C++ string handling is safer than raw character arrays in many situations, but the details still matter.
+
+2
+00:00:06.835 --> 00:00:11.660
+std::string owns its contents and tracks length, which avoids many null-termination assumptions.
+
+3
+00:00:11.660 --> 00:00:16.485
+A character array may still require explicit capacity tracking and careful termination.
+
+4
+00:00:16.485 --> 00:00:23.321
+A C API may expect a null-terminated string, while modern C++ code may operate on length-aware data.
+
+5
+00:00:23.321 --> 00:00:27.743
+Mixing those worlds without a clear boundary can reintroduce classic bugs.
+
+6
+00:00:27.743 --> 00:00:32.568
+std::string_view is powerful because it can refer to existing text without copying.
+
+7
+00:00:32.568 --> 00:00:38.600
+It is also easy to misuse because it does not own the data it references.
+
+8
+00:00:38.600 --> 00:00:51.064
+If a string_view points into a temporary string, a resized string, a destroyed buffer, or memory owned by a parser that has moved on, later use may become a lifetime bug.
+
+9
+00:00:51.064 --> 00:00:54.281
+Treat string_view as a borrowed view.
+
+10
+00:00:54.281 --> 00:01:02.724
+It should not outlive the data behind it, and it should not be stored casually unless ownership and lifetime are obvious.
+
+11
+00:01:02.724 --> 00:01:05.941
+Secure input handling preserves length with data.
+
+12
+00:01:05.941 --> 00:01:11.570
+Do not assume a buffer is a C string just because it contains characters.
+
+13
+00:01:11.570 --> 00:01:19.612
+Do not assume text has no embedded null bytes unless the format forbids them and the code checks that rule.
+
+14
+00:01:19.612 --> 00:01:25.241
+Be explicit about encoding assumptions, especially when input crosses platforms, APIs, or user interfaces.
+
+15
+00:01:25.241 --> 00:01:37.705
+The safest pattern is to know whether data is owned or borrowed, how long it is, what encoding it uses, and whether the next API expects length-aware data or null-terminated text.

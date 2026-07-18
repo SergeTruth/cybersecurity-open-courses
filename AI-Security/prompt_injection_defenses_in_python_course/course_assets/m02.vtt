@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.292
+A defensible AI application architecture names the major sources of instruction, data, identity, and action.
+
+2
+00:00:07.292 --> 00:00:09.541
+Users provide messages and goals.
+
+3
+00:00:09.541 --> 00:00:13.575
+System and developer instructions define trusted behavior.
+
+4
+00:00:13.575 --> 00:00:24.978
+Retrieved documents, uploaded files, web pages, emails, tickets, tool responses, model outputs, logs, and memory provide information with different levels of authority.
+
+5
+00:00:24.978 --> 00:00:33.821
+If those sources are mixed together without labels or controls, the model may treat low-trust content as if it were application policy.
+
+6
+00:00:33.821 --> 00:00:43.207
+Trust boundaries exist wherever data, instructions, identity, credentials, or control moves between components with different authority.
+
+7
+00:00:43.207 --> 00:00:45.766
+A user's message crosses one boundary.
+
+8
+00:00:45.766 --> 00:00:48.326
+A retrieved document crosses another.
+
+9
+00:00:48.326 --> 00:00:50.498
+A tool response crosses another.
+
+10
+00:00:50.498 --> 00:00:57.402
+Model output crossing into a database update, email, ticket, or API call crosses a high-impact boundary.
+
+11
+00:00:57.402 --> 00:01:07.098
+These boundaries are where Python code should validate context, enforce permissions, constrain tools, and decide whether human review is needed.
+
+12
+00:01:07.098 --> 00:01:08.805
+Authority levels matter.
+
+13
+00:01:08.805 --> 00:01:16.562
+Trusted configuration can define system rules, allowed tools, data sources, user roles, and approval requirements.
+
+14
+00:01:16.562 --> 00:01:27.034
+Untrusted content can provide evidence, facts, user intent, or business context, but it should not be allowed to grant itself permissions or rewrite the rules.
+
+15
+00:01:27.034 --> 00:01:29.749
+A document can say what the document says.
+
+16
+00:01:29.749 --> 00:01:36.808
+It should not be able to decide who may read other documents, call a tool, change a workflow, or bypass review.
+
+17
+00:01:36.808 --> 00:01:41.307
+The practical design goal is to make security decisions reviewable.
+
+18
+00:01:41.307 --> 00:01:56.045
+A reviewer should be able to find where prompts are assembled, where retrieved content is labeled, where authorization checks happen, where tools are invoked, where outputs are validated, and where audit events are written.
+
+19
+00:01:56.045 --> 00:02:01.863
+When those decisions are hidden inside free-form model text, they are difficult to test.
+
+20
+00:02:01.863 --> 00:02:07.913
+When they are enforced in application structure, they become normal engineering controls.

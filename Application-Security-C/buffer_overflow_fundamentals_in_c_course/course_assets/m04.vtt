@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.616
+Buffer overflow risk can occur with automatic, allocated, static, or global storage.
+
+2
+00:00:05.616 --> 00:00:14.841
+The storage location changes lifetime, initialization, sharing, and cleanup behavior, but it does not remove the need for bounds checking.
+
+3
+00:00:14.841 --> 00:00:21.193
+Automatic buffers, often called stack-like local buffers, live for the duration of their scope.
+
+4
+00:00:21.193 --> 00:00:27.477
+They are convenient for small temporary work, but their capacity is fixed at declaration time.
+
+5
+00:00:27.477 --> 00:00:34.964
+Code that writes into them still needs to know the intended maximum data size and handle oversized input safely.
+
+6
+00:00:34.964 --> 00:00:40.580
+Heap buffers depend on allocation size, ownership, lifetime, and cleanup discipline.
+
+7
+00:00:40.580 --> 00:00:46.731
+A heap allocation may be sized from input, a file header, a message field, or a calculation.
+
+8
+00:00:46.731 --> 00:00:53.416
+If that size is wrong, unchecked, or later confused with another length, the buffer contract breaks.
+
+9
+00:00:53.416 --> 00:00:57.360
+Static and global buffers can create shared-state concerns.
+
+10
+00:00:57.360 --> 00:01:04.447
+They may be reused across calls, accessed by multiple functions, or touched by concurrent execution paths.
+
+11
+00:01:04.447 --> 00:01:12.803
+A fixed global buffer can appear convenient while making ownership, current length, and thread access harder to reason about.
+
+12
+00:01:12.803 --> 00:01:21.361
+Defensive review should focus on capacity, lifetime, ownership, thread access, and error handling rather than storage mythology.
+
+13
+00:01:21.361 --> 00:01:26.441
+The question is not whether a buffer lives in one storage region or another.
+
+14
+00:01:26.441 --> 00:01:32.325
+The question is whether every operation respects the finite region it is allowed to use.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.228
+Small project-specific wrappers can make unsafe API migration more maintainable.
+
+2
+00:00:05.228 --> 00:00:16.729
+When many call sites need the same buffer checks, truncation policy, path validation, or return-value handling, a wrapper can centralize the rule and make future review easier.
+
+3
+00:00:16.729 --> 00:00:19.800
+A good wrapper makes the contract more visible.
+
+4
+00:00:19.800 --> 00:00:29.079
+It should expose destination capacity, current used length where relevant, ownership expectations, truncation behavior, and failure reporting.
+
+5
+00:00:29.079 --> 00:00:37.705
+The caller should be able to tell whether the operation completed, whether data was truncated, and who owns any returned allocation.
+
+6
+00:00:37.705 --> 00:00:41.887
+A wrapper that hides errors can be worse than the original call.
+
+7
+00:00:41.887 --> 00:00:51.558
+If it silently truncates data, swallows conversion failures, or returns a partial result without a clear status, it creates a false sense of safety.
+
+8
+00:00:51.558 --> 00:00:55.283
+The purpose of a wrapper is not to make errors disappear.
+
+9
+00:00:55.283 --> 00:00:58.616
+It is to make errors consistent and hard to ignore.
+
+10
+00:00:58.616 --> 00:01:04.693
+Structured buffer types can help keep pointer, capacity, used length, and ownership together.
+
+11
+00:01:04.693 --> 00:01:11.228
+They reduce the chance that a function receives a pointer from one buffer and the size from another.
+
+12
+00:01:11.228 --> 00:01:17.632
+They also make repeated operations easier to reason about because the same fields travel together.
+
+13
+00:01:17.632 --> 00:01:21.683
+Helpers should stay simple enough for reviewers to understand.
+
+14
+00:01:21.683 --> 00:01:27.434
+A large reusable framework can become another opaque layer, especially in legacy C code.
+
+15
+00:01:27.434 --> 00:01:39.392
+For most migrations, small focused helpers are better: one for bounded formatting, one for validated numeric conversion, one for safe file creation, or one for buffer append behavior.
+
+16
+00:01:39.392 --> 00:01:42.006
+The wrapper design should include tests.
+
+17
+00:01:42.006 --> 00:01:50.697
+Normal input, boundary input, truncation, allocation failure where practical, invalid arguments, and cleanup paths should be covered.
+
+18
+00:01:50.697 --> 00:01:56.774
+A wrapper becomes trustworthy when its contract is documented, tested, and used consistently.

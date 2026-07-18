@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.010
+Defensive deallocation patterns make cleanup behavior boring and reviewable.
+
+2
+00:00:05.010 --> 00:00:08.251
+Start by initializing ownership fields before use.
+
+3
+00:00:08.251 --> 00:00:16.281
+A null pointer, count value, state flag, or ownership marker should have a defined meaning before any cleanup path can observe it.
+
+4
+00:00:16.281 --> 00:00:20.407
+That helps failure paths release only what was actually acquired.
+
+5
+00:00:20.407 --> 00:00:22.912
+Separate owned data from borrowed data.
+
+6
+00:00:22.912 --> 00:00:28.142
+If a structure stores both, naming and comments should make the difference visible.
+
+7
+00:00:28.142 --> 00:00:33.078
+For example, an owned copy has different cleanup behavior from a borrowed view.
+
+8
+00:00:33.078 --> 00:00:37.646
+A destroy function should not have to guess which case applies for a field.
+
+9
+00:00:37.646 --> 00:00:40.151
+Destroy behavior should be consistent.
+
+10
+00:00:40.151 --> 00:00:48.844
+A destroy function should document what it frees, what it leaves alone, what state it expects, and whether the caller may pass a null pointer.
+
+11
+00:00:48.844 --> 00:00:55.695
+If repeated calls are valid for a particular cleanup helper, say so and implement that behavior deliberately.
+
+12
+00:00:55.695 --> 00:00:58.863
+If repeated calls are not valid, document that too.
+
+13
+00:00:58.863 --> 00:01:01.884
+Avoid hidden frees and surprising side effects.
+
+14
+00:01:01.884 --> 00:01:09.177
+A function that sounds like it only removes an item from a container should document whether it also destroys the item.
+
+15
+00:01:09.177 --> 00:01:17.944
+A setter that replaces a field should document whether it frees the previous value, borrows the new value, or takes ownership of the new value.
+
+16
+00:01:17.944 --> 00:01:20.449
+The strongest pattern is explicitness.
+
+17
+00:01:20.449 --> 00:01:28.700
+Cleanup helpers, state transitions, and ownership names should make it hard for one allocation to be released from two authorities.
+
+18
+00:01:28.700 --> 00:01:35.330
+Defensive deallocation is less about clever code and more about code whose cleanup story is easy to verify.

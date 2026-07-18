@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What AI Agent Security Patterns Mean",
+  "graphicAlt": "Illustration for a lesson introducing AI agent security patterns in Python.",
+  "narration": "AI agent security patterns are the engineering controls that keep model-driven automation bounded, understandable, and accountable. In Python, an agent is not just a model call. It is an application that may reason over context, retrieve data, remember prior interactions, call tools, and sometimes take actions in other systems. That means agent security is about the whole system around the model: identity, data access, credentials, tool permissions, storage, logging, monitoring, and the business workflow the agent can affect.\n\nIt helps to distinguish common terms. A chatbot primarily responds to user messages. An assistant may combine conversation with retrieval or simple tools. A workflow agent may plan steps across systems. An autonomous loop may continue working until a stop condition is reached. A tool-calling application lets model output request specific functions. A traditional API service exposes deterministic application behavior. These categories overlap, but the risk increases as the system gains memory, tool access, autonomy, and write-capable actions.\n\nAgent security is not only model safety. Ordinary Python application security still applies: authentication, authorization, secret handling, network controls, input validation, output validation, safe error handling, dependency review, logging, and incident response. Agents add a new pressure point because natural-language content can influence data access, tool selection, external communication, or business actions. The model may sound confident, but confidence is not authorization and language is not a security boundary.\n\nSecure agents should be designed as controlled systems, not trusted coworkers with unlimited authority. The application should decide which tools exist, which users can use them, which data can be retrieved, which actions require approval, what gets logged, how failures are handled, and when work must stop. The pattern is model-assisted automation under application control. That posture preserves usefulness while reducing the chance that a generated plan turns into unsafe behavior.",
+  "narrationPoints": [
+    "AI agent security patterns are the engineering controls.",
+    "distinguish common terms.",
+    "Agent security is not only model safety.",
+    "Secure agents should be designed as controlled systems.",
+    "An autonomous loop may continue working until a stop.",
+    "Ordinary Python application security still applies."
+  ]
+};

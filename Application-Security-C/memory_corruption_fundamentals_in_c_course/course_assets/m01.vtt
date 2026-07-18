@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.249
+Memory corruption means code accesses, modifies, or interprets memory outside the program's intended rules.
+
+2
+00:00:07.249 --> 00:00:20.122
+In C, those rules include which object owns the storage, how large the object is, how long it remains alive, which type is being used to access it, and which code is responsible for cleanup.
+
+3
+00:00:20.122 --> 00:00:28.184
+When one of those assumptions is wrong, the program may keep running while its internal state is no longer trustworthy.
+
+4
+00:00:28.184 --> 00:00:30.962
+C gives developers direct memory control.
+
+5
+00:00:30.962 --> 00:00:40.041
+That control is useful for systems software, embedded work, runtime libraries, parsers, drivers, and performance-sensitive components.
+
+6
+00:00:40.041 --> 00:00:47.832
+It also means the language does not automatically enforce every size, lifetime, ownership, or type rule at runtime.
+
+7
+00:00:47.832 --> 00:00:51.694
+The code has to carry and check those facts deliberately.
+
+8
+00:00:51.694 --> 00:01:02.127
+The impact of memory corruption can range from a crash to incorrect results, corrupted records, lost state, accidental data exposure, or security defects.
+
+9
+00:01:02.127 --> 00:01:09.038
+The safest way to frame the issue is as an engineering reliability problem with security consequences.
+
+10
+00:01:09.038 --> 00:01:16.694
+If code reads or writes the wrong memory, later decisions may be based on data that no longer represents reality.
+
+11
+00:01:16.694 --> 00:01:22.723
+Many memory corruption problems begin as ordinary mistakes rather than dramatic failures.
+
+12
+00:01:22.723 --> 00:01:24.891
+A loop runs one element too far.
+
+13
+00:01:24.891 --> 00:01:27.872
+A pointer outlives the object it referenced.
+
+14
+00:01:27.872 --> 00:01:29.770
+A string lacks a terminator.
+
+15
+00:01:29.770 --> 00:01:33.360
+A buffer grows but its capacity field is not updated.
+
+16
+00:01:33.360 --> 00:01:37.425
+A cleanup path frees something twice or forgets who owns it.
+
+17
+00:01:37.425 --> 00:01:39.390
+These are reviewable defects.
+
+18
+00:01:39.390 --> 00:01:45.284
+Defensive C programming means treating memory assumptions as explicit design decisions.
+
+19
+00:01:45.284 --> 00:01:53.008
+Size, lifetime, ownership, type, valid range, and cleanup behavior should be visible in interfaces and code paths.
+
+20
+00:01:53.008 --> 00:02:03.374
+This course focuses on prevention, detection, maintainability, and responsible engineering habits that make memory defects easier to find before release.

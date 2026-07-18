@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "RAG and Document Safety Controls",
+  "graphicAlt": "Blank placeholder image for a lesson on RAG and document safety controls.",
+  "narration": "Retrieval augmented generation brings external documents into model context. The pipeline may ingest files, chunk text, attach metadata, create embeddings, store vectors, rank results, and insert selected passages into a prompt. Each step must preserve provenance and authorization. If a document's access rules are lost during ingestion or indexing, the retrieval system may later expose content to users who should not see it.\n\nAccess-control metadata should travel with the document and its chunks. Tenant, organization, project, classification, owner, source system, timestamp, retention status, and deletion status can all matter. Retrieval should filter before content enters the prompt, not after the model has already seen it. Tenant separation and object-level checks help prevent one user's question from retrieving another user's content through a shared index.\n\nRetrieved instructions and retrieved evidence should be separated. A policy document may be evidence about a policy. A support ticket may be evidence about a case. A random document should not be able to become a system instruction because it contains imperative language. Source attribution, citations, document age, and confidence signals help users evaluate whether an answer is grounded in appropriate evidence.\n\nRAG systems also need safe behavior when evidence is insufficient, stale, conflicting, or suspicious. The application should be able to decline to answer, ask for clarification, show uncertainty, or escalate to a human rather than inventing certainty. Ranking and context selection should be monitored because retrieval failures can turn into confident but unsupported answers. Safety comes from the full retrieval lifecycle, not only from the final prompt.",
+  "narrationPoints": [
+    "Retrieval augmented generation brings external documents into model context.",
+    "The pipeline may ingest files, chunk text, attach metadata, create embeddings, store vectors, rank results, and insert selected passages into a prompt.",
+    "Each step must preserve provenance and authorization.",
+    "If a document's access rules are lost during ingestion or indexing, the retrieval system may later expose content to users who should not see it.",
+    "Access-control metadata should travel with the document and its chunks.",
+    "Tenant, organization, project, classification, owner, source system, timestamp, retention status, and deletion status can all matter."
+  ]
+};

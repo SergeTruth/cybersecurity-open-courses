@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.026
+Safe binary parsing in C begins with a simple rule: treat binary input as untrusted until the relevant format rules have been checked.
+
+2
+00:00:09.026 --> 00:00:15.761
+A byte does not become a length, offset, count, flag, record, or command just because it is present.
+
+3
+00:00:15.761 --> 00:00:21.891
+The parser gives it meaning only after validating that it belongs to the expected contract.
+
+4
+00:00:21.891 --> 00:00:26.134
+Explicit decoding is one of the strongest habits you can build.
+
+5
+00:00:26.134 --> 00:00:29.906
+Decode exact integer widths and byte order deliberately.
+
+6
+00:00:29.906 --> 00:00:33.004
+Avoid blind casts from raw bytes to C structs.
+
+7
+00:00:33.004 --> 00:00:37.585
+Keep file or protocol layout separate from internal trusted objects.
+
+8
+00:00:37.585 --> 00:00:47.216
+That separation improves portability, makes validation easier to review, and reduces accidental dependence on compiler or architecture details.
+
+9
+00:00:47.216 --> 00:00:59.543
+The most important values to validate are the ones that influence memory and control flow: lengths, offsets, counts, numeric ranges, section boundaries, and cross-field relationships.
+
+10
+00:00:59.543 --> 00:01:04.594
+Check arithmetic before allocation, indexing, copying, or pointer movement.
+
+11
+00:01:04.594 --> 00:01:12.610
+A valid start offset is not enough; the full range must be valid, and the calculation that finds the end must not wrap.
+
+12
+00:01:12.610 --> 00:01:16.449
+Parser failure should be ordinary, safe, and predictable.
+
+13
+00:01:16.449 --> 00:01:23.252
+Invalid input should not produce partial trusted state, excessive resource use, or confusing cleanup.
+
+14
+00:01:23.252 --> 00:01:32.278
+A strong parser fails closed, releases what it owns, and reports enough context for debugging without depending on unsafe assumptions.
+
+15
+00:01:32.278 --> 00:01:34.366
+Finally, use layers of support.
+
+16
+00:01:34.366 --> 00:01:42.785
+Unit tests, corpus tests, fuzzing, sanitizers, static analysis, and disciplined review all catch different kinds of mistakes.
+
+17
+00:01:42.785 --> 00:01:48.915
+None of them replaces careful design, but together they make parser behavior more reliable.
+
+18
+00:01:48.915 --> 00:01:56.054
+Binary-safe C is not one trick; it is a habit of making every assumption visible, validated, and testable.

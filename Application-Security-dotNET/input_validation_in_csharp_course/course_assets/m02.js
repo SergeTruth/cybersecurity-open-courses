@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "C# Input Sources and Trust Boundaries",
+  "graphicAlt": "Blank placeholder image for C# Input Sources and Trust Boundaries.",
+  "narration": "In ASP.NET Core, trust boundaries show up wherever request data enters the application. Request bodies, query strings, route parameters, headers, cookies, JSON payloads, XML payloads, and form posts all arrive from a less trusted context. Even when framework features bind those values into objects, the original source is still external. The application must decide which fields are allowed, which formats are acceptable, and which values are meaningful for the operation being performed.\n\nFile uploads deserve a boundary of their own. The file name, extension, declared content type, size, metadata, and content may all be user-controlled or misleading. A safe design does not trust the original filename as a storage path, does not treat an extension as proof of content, and does not allow a large or malformed upload to consume resources without limits. Validation should happen before storage, processing, scanning, or business workflow decisions.\n\nServer-side and background systems have less obvious inputs. Environment variables and configuration files often arrive as strings and may be missing, malformed, or set for a different deployment environment. Message queues can carry stale or malformed messages. Database records may contain legacy values that no longer match the current model. Third-party API responses can drift after an upstream change. Internal does not always mean trusted.\n\nA useful review habit is to list where data crosses a system, process, or ownership boundary. For each boundary, ask what the receiving code assumes and where those assumptions are enforced. The answer should be visible in code: DTOs for external contracts, validators for accepted values, parsing routines for conversions, and service-layer rules for business meaning. Clear boundaries make validation maintainable instead of accidental.",
+  "narrationPoints": [
+    "In ASP.NET Core, trust boundaries show up wherever request data enters the application.",
+    "Request bodies, query strings, route parameters, headers, cookies, JSON payloads, XML payloads, and form posts all arrive from a less trusted context.",
+    "Even when framework features bind those values into objects, the original source is still external.",
+    "The application must decide which fields are allowed, which formats are acceptable, and which values are meaningful for the operation being performed.",
+    "File uploads deserve a boundary of their own.",
+    "The file name, extension, declared content type, size, metadata, and content may all be user-controlled or misleading."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Binary-Safe C Habits",
+  "graphicAlt": "Bullet summary graphic for Course Summary: Binary-Safe C Habits.",
+  "narration": "Safe binary parsing in C begins with a simple rule: treat binary input as untrusted until the relevant format rules have been checked. A byte does not become a length, offset, count, flag, record, or command just because it is present. The parser gives it meaning only after validating that it belongs to the expected contract.\n\nExplicit decoding is one of the strongest habits you can build. Decode exact integer widths and byte order deliberately. Avoid blind casts from raw bytes to C structs. Keep file or protocol layout separate from internal trusted objects. That separation improves portability, makes validation easier to review, and reduces accidental dependence on compiler or architecture details.\n\nThe most important values to validate are the ones that influence memory and control flow: lengths, offsets, counts, numeric ranges, section boundaries, and cross-field relationships. Check arithmetic before allocation, indexing, copying, or pointer movement. A valid start offset is not enough; the full range must be valid, and the calculation that finds the end must not wrap.\n\nParser failure should be ordinary, safe, and predictable. Invalid input should not produce partial trusted state, excessive resource use, or confusing cleanup. A strong parser fails closed, releases what it owns, and reports enough context for debugging without depending on unsafe assumptions.\n\nFinally, use layers of support. Unit tests, corpus tests, fuzzing, sanitizers, static analysis, and disciplined review all catch different kinds of mistakes. None of them replaces careful design, but together they make parser behavior more reliable. Binary-safe C is not one trick; it is a habit of making every assumption visible, validated, and testable.",
+  "narrationPoints": [
+    "Safe binary parsing in C begins with a simple rule: treat binary input as untrusted until the relevant format rules have been checked.",
+    "Keep file or protocol layout separate from internal trusted objects.",
+    "The most important values to validate are the ones that influence memory and control flow: lengths, offsets, counts, numeric ranges.",
+    "Invalid input should not produce partial trusted state, excessive resource use.",
+    "None of them replaces careful design, but together they make parser behavior more reliable."
+  ]
+};

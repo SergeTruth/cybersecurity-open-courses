@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.611
+Integer mistakes can turn a seemingly correct buffer check into an unsafe operation.
+
+2
+00:00:05.611 --> 00:00:12.425
+Sizes, lengths, indexes, offsets, counts, and allocation requests are usually represented as integers.
+
+3
+00:00:12.425 --> 00:00:16.299
+If those integers are wrong, the buffer decision is wrong.
+
+4
+00:00:16.299 --> 00:00:24.115
+Size calculations often involve multiplication, addition, casts, signed and unsigned conversion, and boundary checks.
+
+5
+00:00:24.115 --> 00:00:31.730
+A calculation may combine an element count, element size, terminator space, header size, or alignment requirement.
+
+6
+00:00:31.730 --> 00:00:35.604
+Each step should be reviewed before the result is trusted.
+
+7
+00:00:35.604 --> 00:00:41.282
+Allocation size calculations must be checked for overflow before memory is allocated.
+
+8
+00:00:41.282 --> 00:00:49.632
+If a calculated size wraps or is truncated into a smaller type, the program may allocate less memory than later code expects.
+
+9
+00:00:49.632 --> 00:00:56.446
+The later copy or formatting operation may then write beyond the allocation that was actually created.
+
+10
+00:00:56.446 --> 00:01:01.456
+Signed and unsigned conversions can change comparisons and boundary checks.
+
+11
+00:01:01.456 --> 00:01:05.197
+A negative value may become a very large unsigned value.
+
+12
+00:01:05.197 --> 00:01:09.271
+A large unsigned value may not fit into a signed destination.
+
+13
+00:01:09.271 --> 00:01:16.218
+These conversions should be deliberate, validated, and close to the boundary where the decision is made.
+
+14
+00:01:16.218 --> 00:01:22.097
+Numeric validation belongs before allocation, indexing, pointer arithmetic, and copying.
+
+15
+00:01:22.097 --> 00:01:32.451
+Negative values, huge values, maximum values, zero, one, and near-boundary values should be included in tests because they often reveal hidden assumptions.
+
+16
+00:01:32.451 --> 00:01:40.801
+Use appropriate types for sizes and indexes, such as size_t where appropriate, while still validating conversions and limits.
+
+17
+00:01:40.801 --> 00:01:47.147
+A type choice helps express intent, but it does not replace range checks or careful arithmetic.

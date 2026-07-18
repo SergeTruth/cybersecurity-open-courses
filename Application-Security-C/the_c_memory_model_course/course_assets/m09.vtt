@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.247
+The C memory model includes rules for shared memory between threads.
+
+2
+00:00:04.247 --> 00:00:14.644
+A data race occurs when multiple threads access the same memory location concurrently, at least one access modifies it, and the accesses are not properly synchronized.
+
+3
+00:00:14.644 --> 00:00:17.353
+Data races can produce undefined behavior.
+
+4
+00:00:17.353 --> 00:00:23.137
+Mutexes and other synchronization mechanisms protect shared state and establish ordering.
+
+5
+00:00:23.137 --> 00:00:33.680
+They are often the clearest choice when a shared invariant involves more than one object, more than one field, or a sequence of operations that must be understood together.
+
+6
+00:00:33.680 --> 00:00:40.123
+_Atomic types and atomic operations provide language-level tools for shared data when used correctly.
+
+7
+00:00:40.123 --> 00:00:50.081
+Atomics can be useful for counters, flags, references, and carefully designed coordination, but they do not remove the need to define invariants and ownership.
+
+8
+00:00:50.081 --> 00:00:55.499
+Atomic access to one variable does not automatically make a larger data structure safe.
+
+9
+00:00:55.499 --> 00:01:02.235
+Memory order controls how operations are ordered around atomic accesses and should be chosen deliberately.
+
+10
+00:01:02.235 --> 00:01:09.117
+Stronger ordering can be easier to reason about, while weaker ordering requires careful proof of correctness.
+
+11
+00:01:09.117 --> 00:01:13.437
+Teams should prefer designs that reviewers can explain and maintain.
+
+12
+00:01:13.437 --> 00:01:17.830
+volatile is not a general-purpose thread synchronization mechanism.
+
+13
+00:01:17.830 --> 00:01:24.859
+It may be relevant for certain special interactions, but it should not be used as a substitute for atomics or locks.
+
+14
+00:01:24.859 --> 00:01:32.693
+Concurrent C should be designed around ownership, invariants, synchronization policy, and reviewable shared-state rules.

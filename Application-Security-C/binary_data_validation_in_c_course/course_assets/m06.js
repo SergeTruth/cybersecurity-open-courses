@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Struct Layout, Alignment, and Serialization Traps",
+  "graphicAlt": "Bullet summary graphic for Struct Layout, Alignment, and Serialization Traps.",
+  "narration": "It is tempting to cast a buffer of bytes to a C struct and start reading fields. That shortcut often looks tidy in a prototype, but it is a poor default for robust binary parsing. Raw bytes belong to the file or protocol format. C structs belong to the compiler, target architecture, ABI, alignment rules, and options used to build the program.\n\nA C struct may contain padding between fields or at the end. That padding is not necessarily present in the file format. The compiler may align fields differently on different targets. A packed struct option may reduce padding, but it can also create unaligned accesses and portability concerns. Even when a cast appears to work on one machine, it may encode assumptions that were never part of the format contract.\n\nUnaligned access is another trap. Some platforms tolerate it with a performance cost. Others may fault or behave differently. A parser that depends on direct unaligned loads from arbitrary byte buffers is harder to port and harder to reason about.\n\nThe safer pattern is to decode packed data field by field. Read the exact bytes required for each field, apply the format's byte order, check the resulting value, and only then store it in an internal representation. The internal representation can use normal C structs, but those structs represent trusted parser state after validation, not a direct view of untrusted bytes.\n\nExplicit decoding also helps review. A reviewer can see where the length was checked, where the integer width was chosen, where endianness was handled, and where unsupported values were rejected. That visibility is difficult to achieve when parsing is hidden behind a cast.",
+  "narrationPoints": [
+    "C structs belong to the compiler, target architecture, ABI, alignment rules, and options used to build the program.",
+    "A packed struct option may reduce padding, but it can also create unaligned accesses and portability concerns.",
+    "A parser that depends on direct unaligned loads from arbitrary byte buffers is harder to port and harder to reason about.",
+    "The internal representation can use normal C structs, but those structs represent trusted parser state after validation.",
+    "A reviewer can see where the length was checked, where the integer width was chosen, where endianness was handled."
+  ]
+};

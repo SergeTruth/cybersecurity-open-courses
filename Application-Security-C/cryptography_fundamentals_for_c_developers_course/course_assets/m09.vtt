@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.219
+Cryptographic primitives need protocol context.
+
+2
+00:00:03.219 --> 00:00:15.719
+A correct encryption call, MAC calculation, or signature verification can still be misused if the application does not define message purpose, identity, ordering, freshness, and authorization.
+
+3
+00:00:15.719 --> 00:00:21.483
+The primitive provides a property; the protocol decides how that property is interpreted.
+
+4
+00:00:21.483 --> 00:00:25.675
+Context binding helps prevent confusion between different uses.
+
+5
+00:00:25.675 --> 00:00:36.229
+A signed message should identify what was signed, which version of the format is in use, which application or tenant context applies, and which key purpose is expected.
+
+6
+00:00:36.229 --> 00:00:42.966
+AEAD associated data and structured metadata can help bind protected data to the setting where it is valid.
+
+7
+00:00:42.966 --> 00:00:46.559
+Replay prevention needs explicit design at a high level.
+
+8
+00:00:46.559 --> 00:00:58.312
+If an old valid message should not be accepted again, the protocol needs a way to recognize freshness, ordering, session scope, or one-time use according to the application requirement.
+
+9
+00:00:58.312 --> 00:01:03.776
+Cryptographic validity alone does not always mean a message is current or authorized.
+
+10
+00:01:03.776 --> 00:01:06.770
+Versioning and configuration require review.
+
+11
+00:01:06.770 --> 00:01:15.378
+Applications need a plan for retiring old behavior, adding new algorithms or formats, and rejecting unsupported combinations safely.
+
+12
+00:01:15.378 --> 00:01:25.109
+Algorithm agility should make maintenance possible without allowing unreviewed or weaker configurations to appear through compatibility shortcuts.
+
+13
+00:01:25.109 --> 00:01:29.301
+Transport security does not replace application authorization.
+
+14
+00:01:29.301 --> 00:01:41.727
+A TLS connection, signed message, or authenticated object can establish important facts, but the application still needs to decide whether the identified party may perform the requested action.
+
+15
+00:01:41.727 --> 00:01:48.763
+Keep cryptographic verification and authorization linked, but do not collapse them into the same assumption.
+
+16
+00:01:48.763 --> 00:01:52.880
+Reviewers should read the protocol, not only the function calls.
+
+17
+00:01:52.880 --> 00:01:55.575
+What is authenticated? What is encrypted?
+
+18
+00:01:55.575 --> 00:01:58.644
+What identities are bound? What can be replayed?
+
+19
+00:01:58.644 --> 00:02:02.013
+What versions are accepted? What happens on failure?
+
+20
+00:02:02.013 --> 00:02:08.525
+Clear answers turn cryptography from a collection of primitives into a maintainable security design.

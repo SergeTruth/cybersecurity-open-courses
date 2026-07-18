@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.435
+C does not evaluate every subexpression in the intuitive left-to-right order developers may assume.
+
+2
+00:00:06.435 --> 00:00:11.973
+Sequencing rules define when side effects are complete relative to other evaluations.
+
+3
+00:00:11.973 --> 00:00:21.476
+If an expression modifies an object and reads or modifies it again without defined sequencing, the program can leave the defined rules of the language.
+
+4
+00:00:21.476 --> 00:00:26.190
+Compact expressions can be appealing, but they are often harder to review.
+
+5
+00:00:26.190 --> 00:00:34.571
+A statement that increments, indexes, assigns, calls a function, and reads a value in one expression may hide ordering assumptions.
+
+6
+00:00:34.571 --> 00:00:40.483
+Security-sensitive C code benefits from clear statements where each side effect is visible.
+
+7
+00:00:40.483 --> 00:00:51.707
+Undefined behavior can also come from out-of-bounds access, invalid pointer use, signed overflow, invalid shifts, uninitialized reads, lifetime violations, and data races.
+
+8
+00:00:51.707 --> 00:00:58.292
+The common theme is that the implementation is not required to preserve the result a developer expected.
+
+9
+00:00:58.292 --> 00:01:04.054
+Optimizers can assume undefined behavior does not happen and transform code accordingly.
+
+10
+00:01:04.054 --> 00:01:10.265
+That means a program may appear stable with one compiler flag and behave differently with another.
+
+11
+00:01:10.265 --> 00:01:17.673
+The correct response is not to fight the optimizer, but to write code whose assumptions are inside the language rules.
+
+12
+00:01:17.673 --> 00:01:28.449
+Defensive review favors simple sequencing, checked arithmetic, clear lifetime boundaries, explicit initialization, and small expressions with one obvious purpose.
+
+13
+00:01:28.449 --> 00:01:33.762
+Readability is not just style; it is a way to make memory-model assumptions visible.

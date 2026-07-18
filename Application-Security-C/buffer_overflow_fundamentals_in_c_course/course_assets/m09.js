@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Code Review and Production Readiness",
+  "graphicAlt": "Bullet summary graphic for Code Review and Production Readiness.",
+  "narration": "Buffer safety review should be systematic and repeatable. Review where input enters, where lengths are calculated, where memory is allocated, where data is copied, where formatting happens, and where strings are terminated. These are the points where assumptions become memory behavior.\n\nReview every buffer contract. Who owns the buffer. How large is it. How much meaningful data does it currently contain. Is it a C string or a byte region. What happens on failure. Does the function preserve a valid output state. The answers should be visible in the interface and surrounding code.\n\nCheck error paths, cleanup paths, partial writes, truncation behavior, and logging. A function that works on the success path can still leave a partially updated buffer, stale length field, missing terminator, or confusing status value when something fails halfway through.\n\nReview third-party library boundaries and assumptions about field sizes, protocol sizes, terminator behavior, allocation ownership, and returned lengths. A library may be safe under its own contract while the calling code misuses that contract or ignores an important result.\n\nProduction diagnostics should not expose raw memory, secrets, internal paths, or sensitive data. Diagnostic output should identify safe context such as operation name, failure category, size category, and correlation ID without dumping arbitrary memory or private content.\n\nDefects found in production should feed back into coding standards, checklists, tests, and safer interfaces. The mature response to a buffer defect is not only a local patch. It is improving the habits that allowed the defect to survive review.",
+  "narrationPoints": [
+    "Review where input enters, where lengths are calculated, where memory is allocated, where data is copied, where formatting happens.",
+    "Check error paths, cleanup paths, partial writes, truncation behavior, and logging.",
+    "Review third-party library boundaries and assumptions about field sizes, protocol sizes, terminator behavior, allocation ownership.",
+    "Diagnostic output should identify safe context such as operation name, failure category, size category.",
+    "Defects found in production should feed back into coding standards, checklists, tests, and safer interfaces."
+  ]
+};

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.352
+Safe binary validation starts before individual fields are decoded.
+
+2
+00:00:04.352 --> 00:00:12.731
+The parser needs a reliable view of how many bytes are actually available and how much capacity exists in the destination buffer.
+
+3
+00:00:12.731 --> 00:00:23.709
+File size, message length, and transport metadata are useful inputs, but they should not be treated as proof that a future read will deliver exactly that amount of data.
+
+4
+00:00:23.709 --> 00:00:26.957
+Many C APIs can return fewer bytes than requested.
+
+5
+00:00:26.957 --> 00:00:36.635
+A partial read may be normal at end of file, may reflect an interrupted operation, or may indicate that data arrived in smaller pieces than expected.
+
+6
+00:00:36.635 --> 00:00:41.831
+The important rule is simple: do not use bytes that have not actually been read.
+
+7
+00:00:41.831 --> 00:00:51.770
+Check the return value, update the number of available bytes, and treat missing data as a validation failure rather than a surprising internal condition.
+
+8
+00:00:51.770 --> 00:00:56.187
+Field readers should verify that enough bytes remain before reading.
+
+9
+00:00:56.187 --> 00:01:05.086
+If a header requires four bytes for a magic value and two bytes for a version, the parser checks those limits before touching the memory.
+
+10
+00:01:05.086 --> 00:01:10.672
+The same pattern applies to arrays, records, optional sections, and nested structures.
+
+11
+00:01:10.672 --> 00:01:18.726
+A helper such as a cursor with a current position and remaining length can make these checks consistent and easier to audit.
+
+12
+00:01:18.726 --> 00:01:22.104
+Buffer capacity and data length are different facts.
+
+13
+00:01:22.104 --> 00:01:24.897
+Capacity is how much storage was allocated.
+
+14
+00:01:24.897 --> 00:01:28.080
+Data length is how much valid input was received.
+
+15
+00:01:28.080 --> 00:01:36.979
+Mixing them leads to code that reads uninitialized bytes, parses stale data, or believes a buffer is complete because it is large enough.
+
+16
+00:01:36.979 --> 00:01:40.162
+Keep those values separate in names and in logic.
+
+17
+00:01:40.162 --> 00:01:42.240
+End-of-input should be ordinary.
+
+18
+00:01:42.240 --> 00:01:50.489
+A truncated file or short message is not an exceptional mystery; it is one of the most common invalid inputs a parser will see.
+
+19
+00:01:50.489 --> 00:01:59.518
+Handling it cleanly means returning a clear validation failure, avoiding partial object construction, and leaving caller state predictable.
+
+20
+00:01:59.518 --> 00:02:05.299
+Finally, binary data is not text unless the format says it is text and defines the rules.
+
+21
+00:02:05.299 --> 00:02:11.730
+A byte sequence may contain zeros, invalid encodings, embedded separators, or no terminator at all.
+
+22
+00:02:11.730 --> 00:02:22.837
+If a field is later treated as a C string, the parser must verify length, encoding expectations if relevant, and termination or create a safe terminated copy deliberately.

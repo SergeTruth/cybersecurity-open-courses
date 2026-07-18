@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.859
+Defensive parser design is mostly about ordering and state.
+
+2
+00:00:03.859 --> 00:00:07.783
+A strong parser does not rush from bytes to trusted objects.
+
+3
+00:00:07.783 --> 00:00:20.144
+It works in stages: identify the input, validate the structural contract, decode fields into safe internal types, and only then let business logic or higher-level processing use the result.
+
+4
+00:00:20.144 --> 00:00:25.638
+This staged approach prevents partially validated input from becoming trusted state.
+
+5
+00:00:25.638 --> 00:00:37.738
+If the parser allocates objects, fills tables, or updates global state before the required checks are complete, a later validation failure may leave the program in an awkward condition.
+
+6
+00:00:37.738 --> 00:00:45.194
+It is better to keep untrusted parsing state separate until the parser has enough confidence to commit the result.
+
+7
+00:00:45.194 --> 00:00:47.810
+Simple parser state is easier to secure.
+
+8
+00:00:47.810 --> 00:01:00.041
+A cursor with a current offset and remaining length, explicit section boundaries, and clear ownership of allocations are easier to review than a parser that mutates many shared variables.
+
+9
+00:01:00.041 --> 00:01:06.189
+The goal is not to make every parser tiny; the goal is to make each transition understandable.
+
+10
+00:01:06.189 --> 00:01:08.739
+Failure behavior should be predictable.
+
+11
+00:01:08.739 --> 00:01:19.138
+When required validation does not pass, the parser should fail closed: no trusted object, no partial success, no accidental continuation with guessed defaults.
+
+12
+00:01:19.138 --> 00:01:27.183
+The error can be descriptive enough for debugging, but it should not require the caller to understand half-built internals.
+
+13
+00:01:27.183 --> 00:01:29.668
+Cleanup is part of validation quality.
+
+14
+00:01:29.668 --> 00:01:38.433
+If parsing allocates memory, opens resources, or builds temporary structures, the failure path must release what it owns exactly once.
+
+15
+00:01:38.433 --> 00:01:40.264
+Resource limits also matter.
+
+16
+00:01:40.264 --> 00:01:45.496
+Malformed input should not force excessive allocation, recursion, or processing.
+
+17
+00:01:45.496 --> 00:01:53.672
+Bounds on sizes, nesting depth, record counts, and work performed are practical controls for reliability as well as security.

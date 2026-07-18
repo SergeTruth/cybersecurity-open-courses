@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.064
+Many C# validation failures begin as conversion assumptions.
+
+2
+00:00:04.064 --> 00:00:16.027
+TryParse patterns for int, decimal, DateTime, DateTimeOffset, Guid, and enums give applications a way to handle invalid input without treating ordinary bad data as an exception path.
+
+3
+00:00:16.027 --> 00:00:19.324
+A failed parse can become a clear validation error.
+
+4
+00:00:19.324 --> 00:00:22.698
+A successful parse, however, is only the first step.
+
+5
+00:00:22.698 --> 00:00:28.296
+The parsed value still needs range, context, and business checks before it is trusted.
+
+6
+00:00:28.296 --> 00:00:35.274
+Culture-specific parsing matters because numbers and dates are represented differently across locales.
+
+7
+00:00:35.274 --> 00:00:40.795
+A comma can be a thousands separator in one culture and a decimal separator in another.
+
+8
+00:00:40.795 --> 00:00:45.320
+Date strings can swap month and day depending on format expectations.
+
+9
+00:00:45.320 --> 00:00:54.291
+For APIs, invariant or explicitly documented formats are usually safer than accepting whatever the server culture happens to interpret.
+
+10
+00:00:54.291 --> 00:01:01.346
+For user-facing forms, the application should be explicit about accepted formats and normalize carefully.
+
+11
+00:01:01.346 --> 00:01:03.570
+Enums deserve special attention.
+
+12
+00:01:03.570 --> 00:01:12.159
+Binding a numeric value into an enum can produce a value that is technically representable but not intended by the business workflow.
+
+13
+00:01:12.159 --> 00:01:17.450
+Flags enums can also allow combinations that are invalid for a particular action.
+
+14
+00:01:17.450 --> 00:01:22.511
+Validation should check that the enum value is defined and allowed in context.
+
+15
+00:01:22.511 --> 00:01:26.191
+Treat enum parsing as the beginning of a rule, not the end.
+
+16
+00:01:26.191 --> 00:01:29.719
+Overflow and range checks are part of safe conversion.
+
+17
+00:01:29.719 --> 00:01:34.166
+A value can parse as a decimal and still be too large for a transaction.
+
+18
+00:01:34.166 --> 00:01:37.847
+An integer can parse and still be outside a safe page size.
+
+19
+00:01:37.847 --> 00:01:42.218
+A DateTimeOffset can parse and still be too far in the past or future.
+
+20
+00:01:42.218 --> 00:01:52.724
+Safe parsing asks three questions: can the value be converted, is it within acceptable technical limits, and does it make sense for the operation being performed.

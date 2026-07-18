@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Parser Design and Failure Behavior",
+  "graphicAlt": "Bullet summary graphic for Defensive Parser Design and Failure Behavior.",
+  "narration": "Defensive parser design is mostly about ordering and state. A strong parser does not rush from bytes to trusted objects. It works in stages: identify the input, validate the structural contract, decode fields into safe internal types, and only then let business logic or higher-level processing use the result.\n\nThis staged approach prevents partially validated input from becoming trusted state. If the parser allocates objects, fills tables, or updates global state before the required checks are complete, a later validation failure may leave the program in an awkward condition. It is better to keep untrusted parsing state separate until the parser has enough confidence to commit the result.\n\nSimple parser state is easier to secure. A cursor with a current offset and remaining length, explicit section boundaries, and clear ownership of allocations are easier to review than a parser that mutates many shared variables. The goal is not to make every parser tiny; the goal is to make each transition understandable.\n\nFailure behavior should be predictable. When required validation does not pass, the parser should fail closed: no trusted object, no partial success, no accidental continuation with guessed defaults. The error can be descriptive enough for debugging, but it should not require the caller to understand half-built internals.\n\nCleanup is part of validation quality. If parsing allocates memory, opens resources, or builds temporary structures, the failure path must release what it owns exactly once. Resource limits also matter. Malformed input should not force excessive allocation, recursion, or processing. Bounds on sizes, nesting depth, record counts, and work performed are practical controls for reliability as well as security.",
+  "narrationPoints": [
+    "Defensive parser design is mostly about ordering and state.",
+    "If the parser allocates objects, fills tables, or updates global state before the required checks are complete.",
+    "A cursor with a current offset and remaining length, explicit section boundaries.",
+    "When required validation does not pass, the parser should fail closed: no trusted object, no partial success.",
+    "If parsing allocates memory, opens resources, or builds temporary structures, the failure path must release what it owns exactly once."
+  ]
+};

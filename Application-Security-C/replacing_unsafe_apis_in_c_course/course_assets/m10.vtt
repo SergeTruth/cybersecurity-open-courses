@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.404
+Replacing unsafe APIs in C begins with understanding the data contract at each call site.
+
+2
+00:00:06.404 --> 00:00:08.995
+What are the source and destination?
+
+3
+00:00:08.995 --> 00:00:10.938
+How large can the input be?
+
+4
+00:00:10.938 --> 00:00:13.312
+What is the destination capacity?
+
+5
+00:00:13.312 --> 00:00:18.709
+Is the data a C string, raw bytes, a path, a number, or a process argument?
+
+6
+00:00:18.709 --> 00:00:22.307
+What owns the memory, and what happens on failure?
+
+7
+00:00:22.307 --> 00:00:29.359
+Prefer APIs and helper patterns that require explicit sizes, clear ownership, and checked results.
+
+8
+00:00:29.359 --> 00:00:37.706
+A safer function is only useful when the caller supplies the correct capacity and responds to the status it returns.
+
+9
+00:00:37.706 --> 00:00:46.126
+Treat truncation, conversion failure, partial I/O, and allocation failure as normal engineering cases, not surprises.
+
+10
+00:00:46.126 --> 00:00:53.034
+Keep string, memory, file, path, environment, and process behavior within documented boundaries.
+
+11
+00:00:53.034 --> 00:00:57.567
+Do not rely on comments or current test data to enforce limits.
+
+12
+00:00:57.567 --> 00:01:02.388
+Make boundaries visible in code, tests, wrappers, and review notes.
+
+13
+00:01:02.388 --> 00:01:10.735
+Use warnings, static analysis, sanitizers, code search, banned API lists, tests, and peer review as layered support.
+
+14
+00:01:10.735 --> 00:01:21.385
+None of those tools replaces design judgment, but together they help teams find risky patterns, prevent regressions, and measure migration progress.
+
+15
+00:01:21.385 --> 00:01:24.048
+The final habit is steady governance.
+
+16
+00:01:24.048 --> 00:01:32.467
+Make unsafe API usage visible, prioritize the riskiest contexts, document exceptions, and reduce the count over time.
+
+17
+00:01:32.467 --> 00:01:39.159
+A successful migration leaves the code easier to reason about, not merely quieter to compile.

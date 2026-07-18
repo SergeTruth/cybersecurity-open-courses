@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.385
+Instruction hierarchy is a way to express which instructions have higher authority.
+
+2
+00:00:05.385 --> 00:00:11.742
+System and developer instructions are trusted configuration controlled by the application owner.
+
+3
+00:00:11.742 --> 00:00:16.004
+User goals describe what the user wants within allowed boundaries.
+
+4
+00:00:16.004 --> 00:00:22.660
+Retrieved evidence, uploaded files, tool outputs, and other external content should be treated as data.
+
+5
+00:00:22.660 --> 00:00:31.635
+This hierarchy helps the model behave sensibly, but it is also a design reminder for developers: do not let lower-trust content become policy.
+
+6
+00:00:31.635 --> 00:00:36.346
+Context design is the process of assembling the model input deliberately.
+
+7
+00:00:36.346 --> 00:00:47.564
+A secure Python application should separate instructions from content, label sources, preserve provenance metadata, and keep each piece of context scoped to the current task.
+
+8
+00:00:47.564 --> 00:00:57.661
+The application should avoid invisible authority in retrieved text, such as placing untrusted document text next to trusted policy without clear separation.
+
+9
+00:00:57.661 --> 00:01:02.821
+The model and the user both benefit when the context explains what came from where.
+
+10
+00:01:02.821 --> 00:01:05.438
+Context minimization is part of defense.
+
+11
+00:01:05.438 --> 00:01:08.579
+More context is not always safer or more accurate.
+
+12
+00:01:08.579 --> 00:01:20.321
+Extra documents, stale history, unrelated tool outputs, and broad memory can increase exposure and create more opportunities for irrelevant or misleading text to influence behavior.
+
+13
+00:01:20.321 --> 00:01:29.819
+The application should include only the information needed for the approved task, filtered by the user's permissions and the purpose of the workflow.
+
+14
+00:01:29.819 --> 00:01:35.577
+Clear prompting can reduce confusion, but it is not a reliable security boundary by itself.
+
+15
+00:01:35.577 --> 00:01:48.515
+A system instruction may say that untrusted content cannot change rules, but the Python application still needs to enforce authorization, retrieval access, tool permission, and approval requirements.
+
+16
+00:01:48.515 --> 00:01:53.227
+Security-critical rules should be represented in code and policy checks.
+
+17
+00:01:53.227 --> 00:01:57.340
+Prompt wording should support those controls, not replace them.

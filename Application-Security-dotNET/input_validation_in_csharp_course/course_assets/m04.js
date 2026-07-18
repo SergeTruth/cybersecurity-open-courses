@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "ASP.NET Core Model Binding and Validation",
+  "graphicAlt": "Blank placeholder image for ASP.NET Core Model Binding and Validation.",
+  "narration": "ASP.NET Core model binding maps incoming request values into action parameters, DTOs, view models, and other objects. It is a powerful convenience because controllers can work with structured data instead of manually reading every request field. The convenience can also hide risk. Bound objects may contain default values, missing values, conversion failures, or fields the client should never have been allowed to set. Model binding is a starting point, not a security guarantee.\n\nDataAnnotations provide attribute-based validation for common rules such as Required, StringLength, Range, RegularExpression, and custom validation attributes. These can be effective for simple request contracts and are easy for reviewers to see on DTOs or view models. ModelState then represents the binding and validation state of the request model. In many API configurations, invalid model state can be handled automatically with a structured error response before the action logic runs.\n\nSafe validation errors should be useful without revealing internal details. A client can be told that a required field is missing, a value is too long, or a format is invalid. The response should not expose stack traces, database schema details, secrets, or internal object graphs. Consistent error handling also helps legitimate clients fix requests and helps monitoring distinguish normal invalid input from unusual patterns.\n\nModel binding and validation should not be confused with authorization. A model may be perfectly valid and still represent an action the user is not allowed to perform. A user ID, tenant ID, role field, or approval state should not be trusted simply because it was bound successfully. Use DTOs that expose only client-controlled fields, validate the request shape, then enforce authorization and business rules against trusted server-side state.",
+  "narrationPoints": [
+    "ASP.NET Core model binding maps incoming request values into action parameters, DTOs, view models, and other objects.",
+    "It is a powerful convenience because controllers can work with structured data instead of manually reading every request field.",
+    "The convenience can also hide risk.",
+    "Bound objects may contain default values, missing values, conversion failures, or fields the client should never have been allowed to set.",
+    "Model binding is a starting point, not a security guarantee.",
+    "DataAnnotations provide attribute-based validation for common rules such as Required, StringLength, Range, RegularExpression, and custom validation attributes."
+  ]
+};

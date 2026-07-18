@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Memory Corruption Means",
+  "graphicAlt": "Bullet summary graphic for What Memory Corruption Means.",
+  "narration": "Memory corruption means code accesses, modifies, or interprets memory outside the program's intended rules. In C, those rules include which object owns the storage, how large the object is, how long it remains alive, which type is being used to access it, and which code is responsible for cleanup. When one of those assumptions is wrong, the program may keep running while its internal state is no longer trustworthy.\n\nC gives developers direct memory control. That control is useful for systems software, embedded work, runtime libraries, parsers, drivers, and performance-sensitive components. It also means the language does not automatically enforce every size, lifetime, ownership, or type rule at runtime. The code has to carry and check those facts deliberately.\n\nThe impact of memory corruption can range from a crash to incorrect results, corrupted records, lost state, accidental data exposure, or security defects. The safest way to frame the issue is as an engineering reliability problem with security consequences. If code reads or writes the wrong memory, later decisions may be based on data that no longer represents reality.\n\nMany memory corruption problems begin as ordinary mistakes rather than dramatic failures. A loop runs one element too far. A pointer outlives the object it referenced. A string lacks a terminator. A buffer grows but its capacity field is not updated. A cleanup path frees something twice or forgets who owns it. These are reviewable defects.\n\nDefensive C programming means treating memory assumptions as explicit design decisions. Size, lifetime, ownership, type, valid range, and cleanup behavior should be visible in interfaces and code paths. This course focuses on prevention, detection, maintainability, and responsible engineering habits that make memory defects easier to find before release.",
+  "narrationPoints": [
+    "Memory corruption means code accesses, modifies, or interprets memory outside the program's intended rules.",
+    "The code has to carry and check those facts deliberately.",
+    "The impact of memory corruption can range from a crash to incorrect results, corrupted records, lost state, accidental data exposure.",
+    "Many memory corruption problems begin as ordinary mistakes rather than dramatic failures.",
+    "Defensive C programming means treating memory assumptions as explicit design decisions."
+  ]
+};

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.399
+Ownership is the first control for preventing double-free defects.
+
+2
+00:00:04.399 --> 00:00:12.666
+Every dynamically allocated object needs a clear cleanup authority: the code that is responsible for releasing it exactly once.
+
+3
+00:00:12.666 --> 00:00:19.340
+If that authority is vague, every caller, callee, and container becomes a possible second cleanup path.
+
+4
+00:00:19.340 --> 00:00:25.484
+Caller-owned memory means the caller keeps release responsibility after passing the pointer.
+
+5
+00:00:25.484 --> 00:00:34.509
+Callee-owned memory means the receiving function owns cleanup, either because it created the object or because ownership was transferred.
+
+6
+00:00:34.509 --> 00:00:43.687
+A borrowed reference allows temporary use, but it does not give the borrower permission to free or retain the object beyond the agreed lifetime.
+
+7
+00:00:43.687 --> 00:00:50.133
+Ownership should be visible in API names, comments, data structure layout, and review conventions.
+
+8
+00:00:50.133 --> 00:00:58.097
+Function names such as create, destroy, attach, detach, borrow, clone, or release can help when they are used consistently.
+
+9
+00:00:58.097 --> 00:01:06.516
+Documentation should explain whether the function consumes a pointer, stores it, returns a new allocation, or simply observes it.
+
+10
+00:01:06.516 --> 00:01:09.398
+Data structures also need ownership design.
+
+11
+00:01:09.398 --> 00:01:14.479
+A field may own a buffer, borrow an external value, or point into another object.
+
+12
+00:01:14.479 --> 00:01:20.016
+Those cases should not look identical in the code if they have different cleanup rules.
+
+13
+00:01:20.016 --> 00:01:23.657
+Naming and comments can make the difference reviewable.
+
+14
+00:01:23.657 --> 00:01:27.373
+A useful review question is simple: who frees this object?
+
+15
+00:01:27.373 --> 00:01:31.241
+If two answers seem possible, the design is not clear enough.
+
+16
+00:01:31.241 --> 00:01:34.957
+If no answer is visible, the design is not complete enough.
+
+17
+00:01:34.957 --> 00:01:39.356
+Double-free prevention begins when cleanup authority is explicit.

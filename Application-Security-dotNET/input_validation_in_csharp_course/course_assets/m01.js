@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Input Validation Matters in C#",
+  "graphicAlt": "Blank placeholder image for Why Input Validation Matters in C#.",
+  "narration": "C# gives developers a strong type system, mature framework support, and excellent tooling, but none of that proves external data is safe. A web request, a file upload, a queue message, a command-line argument, a desktop form, a database row, or a third-party API response can still contain values the application did not expect. The compiler helps you reason about code you wrote. It does not certify that runtime data from outside the application satisfies security, format, or business rules.\n\nInput validation is the boundary between untrusted data and trusted application logic. At that boundary, the application decides what shape, size, format, range, and meaning it is willing to accept. Once data passes that check, downstream code can work with a clearer contract. Without that boundary, invalid values drift into persistence, authorization decisions, file operations, commands, and business workflows where the cost of a mistake is much higher.\n\nValidation is related to sanitization, parsing, normalization, and output encoding, but those ideas are not interchangeable. Parsing converts a string or payload into a typed value. Normalization brings equivalent representations into a consistent form. Sanitization may remove or transform unwanted content for a specific use. Output encoding protects a value when it is rendered into a target context. Validation decides whether the input should be accepted in the first place.\n\nThe practical goal is predictable behavior. C# applications should not simply hope that model binding, JSON deserialization, or a compiled property type makes data trustworthy. They should enforce rules at clear boundaries, fail safely when input is invalid, and pass only well-understood values into sensitive operations. That is what turns strong typing from a developer convenience into part of a broader defensive design.",
+  "narrationPoints": [
+    "C# gives developers a strong type system, mature framework support, and excellent tooling, but none of that proves external data is safe.",
+    "A web request, a file upload, a queue message, a command-line argument, a desktop form, a database row, or a third-party API response can.",
+    "The compiler helps you reason about code you wrote.",
+    "It does not certify that runtime data from outside the application satisfies security, format, or business rules.",
+    "Input validation is the boundary between untrusted data and trusted application logic.",
+    "At that boundary, the application decides what shape, size, format, range, and meaning it is willing to accept."
+  ]
+};

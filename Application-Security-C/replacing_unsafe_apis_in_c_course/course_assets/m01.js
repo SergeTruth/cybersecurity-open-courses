@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Unsafe APIs Persist in C",
+  "graphicAlt": "Bullet summary graphic for Why Unsafe APIs Persist in C.",
+  "narration": "Unsafe API usage in C rarely exists because a team intentionally wanted fragile code. It usually survives through history. Large codebases carry old examples forward. Portability habits persist long after platforms change. Older coding standards may have treated certain functions as normal. A developer under schedule pressure may copy a familiar pattern without revisiting the assumptions behind it.\n\nSome C APIs are risky because they do not require the caller to provide a destination size. Others make truncation hard to notice, depend on null-terminated input without proving that termination exists, or return information that callers frequently ignore. The dangerous part is not only the function name. It is the easy path toward unchecked assumptions.\n\nReplacing an unsafe API is therefore not just a mechanical name substitution. The surrounding data contract matters. A call site has a source, a destination, a length expectation, an ownership rule, and a failure path. If those details are unclear, a safer-looking replacement can preserve the same bug or introduce a new behavior change.\n\nA safer replacement still needs correct buffer sizes, return-value checks, and deliberate failure handling. A bounded function called with the wrong bound is not safer in practice. A formatting function that reports truncation is only useful if the caller checks that report and decides what the program should do next.\n\nThe goal of migration is to improve both security and reliability while preserving intended behavior. That means understanding normal inputs, boundary cases, old compatibility assumptions, and what should happen when the new code rejects something the old code accepted. Good API replacement is careful engineering, not a find-and-replace exercise.",
+  "narrationPoints": [
+    "Unsafe API usage in C rarely exists because a team intentionally wanted fragile code.",
+    "Some C APIs are risky because they do not require the caller to provide a destination size.",
+    "A call site has a source, a destination, a length expectation, an ownership rule, and a failure path.",
+    "A safer replacement still needs correct buffer sizes, return-value checks, and deliberate failure handling.",
+    "Understanding normal inputs, boundary cases, old compatibility assumptions, and what should happen."
+  ]
+};

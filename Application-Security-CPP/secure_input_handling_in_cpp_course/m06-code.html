@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Bound Containers and Indexes | Secure Input Handling in C++</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="12"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C++</p>
+        <h1 id="module-title">Code Examples: Bound Containers and Indexes</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">C++ Code Examples</h2>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Validate Indexes Before Container Access</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;cstddef&gt;
+#include &lt;optional&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+struct Account {
+    std::string name;
+    bool enabled;
+};
+
+std::optional&lt;Account&gt; get_account(const std::vector&lt;Account&gt;&amp; accounts, std::size_t index) {
+    if (index &gt;= accounts.size()) {
+        return std::nullopt;
+    }
+
+    return accounts[index];
+}</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Reject Input That Would Grow Containers Too Far</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;cstddef&gt;
+#include &lt;optional&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+
+struct LogRecord {
+    std::string user;
+    std::string action;
+};
+
+bool append_limited(std::vector&lt;LogRecord&gt;&amp; records, LogRecord next) {
+    constexpr std::size_t max_records = 5000;
+    constexpr std::size_t max_field_length = 80;
+
+    if (records.size() &gt;= max_records) {
+        return false;
+    }
+    if (next.user.empty() || next.user.size() &gt; max_field_length ||
+        next.action.empty() || next.action.size() &gt; max_field_length) {
+        return false;
+    }
+
+    records.push_back(std::move(next));
+    return true;
+}</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Limit Nesting Before Recursive Parsing</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;optional&gt;
+#include &lt;string_view&gt;
+
+bool nesting_depth_allowed(std::string_view json_like_text) {
+    constexpr int max_depth = 20;
+    int depth = 0;
+
+    for (char ch : json_like_text) {
+        if (ch == &#x27;{&#x27; || ch == &#x27;[&#x27;) {
+            if (++depth &gt; max_depth) {
+                return false;
+            }
+        } else if (ch == &#x27;}&#x27; || ch == &#x27;]&#x27;) {
+            if (depth == 0) {
+                return false;
+            }
+            --depth;
+        }
+    }
+
+    return depth == 0;
+}</code></pre>
+        </article>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m06.html">Previous</a>
+        <a id="next-module" class="btn" href="m07.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Matters in C++",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Validate Before Use",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding Input Sources and Trust Boundaries",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Check Each Input Source",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Strings, Buffers, and Lifetime Safety",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Preserve Length and Lifetime",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input and Parsing Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Read Then Parse Exactly",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Conversion and Range Validation",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Convert and Check Ranges",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Containers, Indexes, and Resource Limits",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Bound Containers and Indexes",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. File, Path, and Structured Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Validate Paths and Formats",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling, Testing, and Tooling",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Make Rejection Paths Explicit",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Combine the Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

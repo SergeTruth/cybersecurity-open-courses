@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Tools, Agents, and Action Safety",
+  "graphicAlt": "Blank placeholder image for a lesson on tools, agents, and action safety.",
+  "narration": "Tool calling and function calling allow an AI system to request capabilities from Python code or external services. A tool might read a record, search documents, create a ticket, send email, update a calendar, query a database, call an API, inspect code, or interact with an approved browser workflow. Tools are useful because they connect language to real work. They are risky because untrusted content may influence which tool is requested and with what arguments.\n\nRead-only tools and write-capable tools need different levels of control. Read-only tools can still leak sensitive information, especially when retrieval or identity checks are weak. Write-capable tools can change systems, send communications, approve access, modify data, trigger workflows, or affect external services. Least privilege, scoped credentials, allowlisted tools, allowlisted actions, rate limits, quotas, and audit trails keep tool access bounded.\n\nArgument validation is a critical guardrail. The application should validate resource identifiers, tenant context, destination addresses, message recipients, file names, requested operations, sizes, formats, and business intent before a tool executes. Safe defaults should prefer no action over ambiguous action. Dry-run behavior can show what would happen without making the change. Approval gates should be used for high-impact actions where a person or trusted policy must review the proposed operation.\n\nUntrusted content should not be able to trigger sensitive tools through the model. A retrieved document can suggest an action, but it should not authorize that action. A user can request a task, but the application must still verify permissions. An agent can plan, but the application should enforce boundaries, budgets, stop conditions, and review points. The safe pattern is model-assisted action under application control.",
+  "narrationPoints": [
+    "Tool calling and function calling allow an AI system to request capabilities from Python code or external services.",
+    "A tool might read a record, search documents, create a ticket, send email, update a calendar, query a database, call an API, inspect code, or interact with an...",
+    "Tools are useful because they connect language to real work.",
+    "They are risky because untrusted content may influence which tool is requested and with what arguments.",
+    "Read-only tools and write-capable tools need different levels of control.",
+    "Read-only tools can still leak sensitive information, especially when retrieval or identity checks are weak."
+  ]
+};

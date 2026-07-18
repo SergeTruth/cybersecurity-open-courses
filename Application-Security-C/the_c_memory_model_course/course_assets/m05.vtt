@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.737
+Objects are represented by bytes, but not every byte has the same meaning to portable C code.
+
+2
+00:00:05.737 --> 00:00:13.486
+The bytes that represent a value are subject to the type, representation, padding, and initialization state of the object.
+
+3
+00:00:13.486 --> 00:00:19.224
+Reading or copying bytes without understanding those rules can produce fragile behavior.
+
+4
+00:00:19.224 --> 00:00:24.365
+Structures may include padding bytes that are not part of any logical field value.
+
+5
+00:00:24.365 --> 00:00:28.165
+Padding can exist between fields or at the end of a structure.
+
+6
+00:00:28.165 --> 00:00:38.969
+Those bytes may not be initialized when the logical fields are assigned, and they can make raw byte comparison of structures misleading even when the field values are equal.
+
+7
+00:00:38.969 --> 00:00:42.545
+Uninitialized storage can contain indeterminate data.
+
+8
+00:00:42.545 --> 00:00:50.071
+Reading uninitialized values can produce undefined behavior or unreliable results depending on the type and context.
+
+9
+00:00:50.071 --> 00:00:58.938
+Initialization should be deliberate before comparing, hashing, serializing, logging, or copying structures into longer-lived storage.
+
+10
+00:00:58.938 --> 00:01:06.016
+Serialization formats should define fields explicitly rather than assuming the in-memory layout is portable.
+
+11
+00:01:06.016 --> 00:01:13.691
+Field order, integer size, byte order, padding, alignment, and representation can vary across platforms and compilers.
+
+12
+00:01:13.691 --> 00:01:22.110
+A file or network format should not depend on an incidental local layout unless that layout is deliberately specified and controlled.
+
+13
+00:01:22.110 --> 00:01:25.240
+Avoid logging or transmitting raw object memory.
+
+14
+00:01:25.240 --> 00:01:31.350
+It may include padding, stale data, or sensitive values that are not part of the logical field set.
+
+15
+00:01:31.350 --> 00:01:39.769
+Defensive C treats representation bytes as a boundary that needs an explicit format, explicit initialization, and explicit review.

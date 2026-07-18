@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Dynamic Allocation, realloc, and Lifetime Transitions",
+  "graphicAlt": "Bullet summary graphic for Dynamic Allocation, realloc, and Lifetime Transitions.",
+  "narration": "Dynamic allocation creates storage whose lifetime is controlled by allocation and deallocation calls. malloc allocates uninitialized storage, while calloc initializes allocated storage to zero bytes. Neither call removes the need to construct valid object state before the program reads from that storage.\n\nEvery allocation needs a clear owner and a matching release strategy. The owner might be the caller, the callee, a container object, or a cleanup routine, but the contract should be visible. Allocation failure must also be handled safely because a null result or partial initialization can change the cleanup path.\n\nrealloc deserves special attention because it can move storage. If it succeeds, old pointers and aliases may no longer designate the live storage. If it fails, the original allocation remains valid. Assigning realloc directly to the original pointer can lose the only reference to the original allocation if the call fails, so review patterns carefully.\n\nAllocation size calculations must be checked before allocation. Multiplication, addition, and element-size conversions can overflow size_t and produce a smaller allocation than the program expects. Defensive code calculates sizes in a way that makes overflow checks explicit before memory is requested.\n\nAfter free, the object's lifetime has ended, and pointers that designate it must not be used. Setting one pointer to null may help local cleanup clarity, but it does not update every alias. Cleanup code should handle partial initialization and multiple failure paths without leaks or double-release behavior.",
+  "narrationPoints": [
+    "Dynamic allocation creates storage whose lifetime is controlled by allocation and deallocation calls. malloc allocates uninitialized storage.",
+    "Allocation failure must also be handled safely because a null result or partial initialization can change the cleanup path.",
+    "Assigning realloc directly to the original pointer can lose the only reference to the original allocation if the call fails.",
+    "Defensive code calculates sizes in a way that makes overflow checks explicit before memory is requested.",
+    "After free, the object's lifetime has ended, and pointers that designate it must not be used."
+  ]
+};

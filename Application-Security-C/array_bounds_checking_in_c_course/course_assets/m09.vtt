@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.525
+Tooling helps find bounds defects earlier, but it does not replace clear contracts.
+
+2
+00:00:05.525 --> 00:00:13.912
+Compiler warnings, static analysis, sanitizers, assertions, and boundary-focused tests all see different parts of the problem.
+
+3
+00:00:13.912 --> 00:00:22.565
+The strongest practice is to combine them with APIs that carry size information and code review that traces how that size is used.
+
+4
+00:00:22.565 --> 00:00:34.281
+Compiler warnings can catch suspicious patterns such as signed and unsigned comparisons, array bounds concerns, truncation, ignored return values, and questionable conversions.
+
+5
+00:00:34.281 --> 00:00:43.334
+Warnings should be treated as review items, especially when a warning appears near indexing, copying, formatting, or parser advancement.
+
+6
+00:00:43.334 --> 00:00:48.725
+Static analysis can identify risky flows and suspicious indexes across functions.
+
+7
+00:00:48.725 --> 00:00:58.177
+It can follow input-derived lengths, offsets, pointer parameters, and capacity values through code paths that are tedious to inspect manually.
+
+8
+00:00:58.177 --> 00:01:05.899
+Static analysis is most useful when the codebase has consistent naming and helper patterns that make intent visible.
+
+9
+00:01:05.899 --> 00:01:10.958
+Runtime sanitizers can expose out-of-bounds reads and writes during testing.
+
+10
+00:01:10.958 --> 00:01:23.938
+They are especially valuable when tests cover empty buffers, single-element buffers, maximum accepted sizes, one-past-boundary values, malformed records, missing terminators, and resize failures.
+
+11
+00:01:23.938 --> 00:01:28.398
+A sanitizer finding should become both a fix and a regression test.
+
+12
+00:01:28.398 --> 00:01:31.992
+Assertions can document invariants during development.
+
+13
+00:01:31.992 --> 00:01:42.310
+They can express assumptions such as index less than count, count no greater than capacity, terminator space available, or offset plus length within range.
+
+14
+00:01:42.310 --> 00:01:51.363
+Assertions are not a substitute for runtime validation of external input, but they make internal assumptions visible and easier to test.
+
+15
+00:01:51.363 --> 00:01:57.952
+Fuzzing and boundary-focused tests can exercise unusual sizes and inputs at a safe defensive level.
+
+16
+00:01:57.952 --> 00:02:04.143
+The goal is to find crashes, unexpected behavior, and missing rejection paths before release.
+
+17
+00:02:04.143 --> 00:02:11.864
+Code review should then connect those findings back to API contracts, helper functions, and documented bounds rules.

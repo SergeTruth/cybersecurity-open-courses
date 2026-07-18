@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.213
+A useful review skill is learning to recognize risky API patterns before focusing on any single function name.
+
+2
+00:00:07.213 --> 00:00:14.557
+Missing size arguments are one of the clearest warning signs when a function writes into caller-provided memory.
+
+3
+00:00:14.557 --> 00:00:21.638
+If the callee cannot know the destination capacity, safety depends entirely on assumptions outside the call.
+
+4
+00:00:21.638 --> 00:00:24.589
+Fixed-size buffers deserve the same scrutiny.
+
+5
+00:00:24.589 --> 00:00:32.457
+A fixed buffer can be perfectly acceptable when the maximum input size is enforced before the copy or conversion occurs.
+
+6
+00:00:32.457 --> 00:00:41.309
+It becomes risky when the maximum is only implied by a comment, guessed from a protocol, or assumed because current test data is small.
+
+7
+00:00:41.309 --> 00:00:44.850
+Unchecked return values are another recurring problem.
+
+8
+00:00:44.850 --> 00:00:54.620
+Many APIs communicate truncation, failed conversion, short reads, incomplete writes, allocation failure, or invalid input through their return value.
+
+9
+00:00:54.620 --> 00:01:02.882
+If the caller ignores that signal, the next line of code may operate on incomplete or invalid data while appearing to succeed.
+
+10
+00:01:02.882 --> 00:01:08.652
+Implicit null-termination assumptions can turn bounded data into unsafe string handling.
+
+11
+00:01:08.652 --> 00:01:17.176
+A buffer read from a file, socket, environment entry, or binary record may have a known byte count without being a valid C string.
+
+12
+00:01:17.176 --> 00:01:24.913
+Passing that buffer to string-only routines before establishing termination and length can create unreliable behavior.
+
+13
+00:01:24.913 --> 00:01:28.651
+Ownership and lifetime rules also belong in the contract.
+
+14
+00:01:28.651 --> 00:01:30.028
+Who owns the pointer?
+
+15
+00:01:30.028 --> 00:01:31.339
+Who frees it?
+
+16
+00:01:31.339 --> 00:01:33.765
+How long is the returned value valid?
+
+17
+00:01:33.765 --> 00:01:35.929
+Can it point to internal storage?
+
+18
+00:01:35.929 --> 00:01:37.568
+Can the caller modify it?
+
+19
+00:01:37.568 --> 00:01:44.519
+Ambiguity here can lead to leaks, stale pointers, double cleanup, or use of data after its valid lifetime.
+
+20
+00:01:44.519 --> 00:01:50.879
+Code review should identify the contract around each pointer, buffer, length, and returned value.
+
+21
+00:01:50.879 --> 00:01:56.649
+The safest call sites make capacity, used length, ownership, and error behavior visible.
+
+22
+00:01:56.649 --> 00:02:03.600
+When those details are hidden, the first task is to reveal the contract before choosing a replacement API.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.864
+Bounds-safe C depends on carrying size information correctly.
+
+2
+00:00:03.864 --> 00:00:15.710
+A pointer alone usually does not tell a function how many elements are valid, how much capacity remains, or whether the data is meant to be a byte region, an element array, or a C string.
+
+3
+00:00:15.710 --> 00:00:18.687
+The size contract must travel with the pointer.
+
+4
+00:00:18.687 --> 00:00:24.958
+When a function reads from a buffer, it needs to know how many elements or bytes are valid to read.
+
+5
+00:00:24.958 --> 00:00:29.899
+When a function writes to a buffer, it needs to know the destination capacity.
+
+6
+00:00:29.899 --> 00:00:34.713
+When a function appends, it needs both the current count and total capacity.
+
+7
+00:00:34.713 --> 00:00:40.351
+These are different facts, and merging them into one vague parameter makes review harder.
+
+8
+00:00:40.351 --> 00:00:42.885
+Count and capacity should stay separate.
+
+9
+00:00:42.885 --> 00:00:46.812
+Count describes how much meaningful data is currently present.
+
+10
+00:00:46.812 --> 00:00:49.916
+Capacity describes how much storage is available.
+
+11
+00:00:49.916 --> 00:00:55.934
+A buffer can have capacity for one thousand bytes while currently holding only a short message.
+
+12
+00:00:55.934 --> 00:01:03.916
+Append logic needs both numbers, and failure behavior should update neither unless the operation succeeds in a documented way.
+
+13
+00:01:03.916 --> 00:01:05.183
+Units matter.
+
+14
+00:01:05.183 --> 00:01:12.784
+A length in bytes is not the same as a count of int elements, structure elements, or characters in a multibyte encoding.
+
+15
+00:01:12.784 --> 00:01:17.725
+Function names, parameter names, and documentation should make the unit clear.
+
+16
+00:01:17.725 --> 00:01:25.263
+A code review should not require guessing whether a value named size means bytes, elements, capacity, or current count.
+
+17
+00:01:25.263 --> 00:01:31.661
+Avoid APIs that accept a raw pointer but not a valid length when the function needs bounds knowledge.
+
+18
+00:01:31.661 --> 00:01:36.095
+For simple internal helpers, passing pointer plus count may be enough.
+
+19
+00:01:36.095 --> 00:01:46.294
+For repeated patterns, a small structured buffer type can keep pointer, count, and capacity together so they are updated consistently and reviewed as one object.
+
+20
+00:01:46.294 --> 00:01:49.588
+Good size propagation also supports maintainability.
+
+21
+00:01:49.588 --> 00:01:59.470
+When the next developer changes a parser, extends a record, or moves a copy into a helper function, the needed bounds information should already be present.
+
+22
+00:01:59.470 --> 00:02:06.374
+The safest API is often the one that makes the correct data flow natural and the incorrect data flow awkward.

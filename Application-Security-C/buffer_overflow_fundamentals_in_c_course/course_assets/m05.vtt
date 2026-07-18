@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.594
+String and memory APIs must be reviewed in terms of destination capacity, source length, expected result, and terminator behavior.
+
+2
+00:00:08.594 --> 00:00:12.230
+The name of the function is not enough to prove safety.
+
+3
+00:00:12.230 --> 00:00:17.056
+The caller must pass the right arguments and handle the result correctly.
+
+4
+00:00:17.056 --> 00:00:21.485
+Functions that include a size parameter are not automatically safe.
+
+5
+00:00:21.485 --> 00:00:30.873
+A size parameter might mean destination capacity, maximum bytes to copy, maximum characters to read, or some other limit depending on the API.
+
+6
+00:00:30.873 --> 00:00:37.616
+Passing the source length when the API expects destination capacity can still produce unsafe behavior.
+
+7
+00:00:37.616 --> 00:00:45.748
+Review calls that copy strings, concatenate strings, format output, copy memory, parse records, or build protocol messages.
+
+8
+00:00:45.748 --> 00:00:57.779
+For each call, ask what destination is being written, how large it is, how much source data is available, what output is expected, and how the function reports truncation or failure.
+
+9
+00:00:57.779 --> 00:01:02.738
+Format strings should be controlled by the program, not by untrusted input.
+
+10
+00:01:02.738 --> 00:01:11.332
+Formatting functions interpret the format string as instructions, so untrusted data should be passed as data under a fixed format.
+
+11
+00:01:11.332 --> 00:01:16.422
+This is a general defensive habit for output routines, logs, and diagnostics.
+
+12
+00:01:16.422 --> 00:01:21.380
+Output buffers should have explicit capacity and clear truncation behavior.
+
+13
+00:01:21.380 --> 00:01:31.826
+If the result is too long, the code should know whether it failed, shortened the result, left a valid terminator, or produced an output that must not be used.
+
+14
+00:01:31.826 --> 00:01:36.453
+Silent truncation can create confusing behavior and downstream errors.
+
+15
+00:01:36.453 --> 00:01:42.800
+Avoid storing or logging raw memory when it may include uninitialized, stale, or sensitive data.
+
+16
+00:01:42.800 --> 00:01:46.171
+Diagnostic output should be deliberate and bounded.
+
+17
+00:01:46.171 --> 00:01:57.410
+Application-specific wrappers or helper functions can help when they make contracts clearer and are reviewed, but they should not hide uncertainty behind a friendly name.

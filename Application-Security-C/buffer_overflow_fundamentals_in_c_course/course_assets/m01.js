@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Buffer Overflows Matter",
+  "graphicAlt": "Bullet summary graphic for Why Buffer Overflows Matter.",
+  "narration": "A buffer overflow happens when code writes more data to a buffer than the buffer can hold, or writes outside the intended buffer area. In C, this is a memory-safety problem because the language gives programs direct access to memory while relying on the developer to preserve boundaries.\n\nBuffer overflows are not only input-validation problems. Input validation helps, but buffer safety also depends on destination capacity, current length, string termination, integer calculations, pointer lifetime, function contracts, compiler behavior, and error handling. A program can validate that input looks reasonable and still copy it into the wrong-sized buffer.\n\nConsequences can include corrupted data, crashes, unreliable behavior, availability failures, and serious security exposure. The practical defensive goal is to prevent out-of-bounds reads and writes before they reach production, not to hope that testing catches every timing, platform, or input variation.\n\nSecure C development requires design review, defensive coding, compiler support, static analysis, sanitizer testing, boundary testing, code review, and production-safe diagnostics. Each layer catches a different kind of mistake. None of them replaces the need for clear buffer contracts.\n\nThis course focuses on prevention. We will discuss how buffer mistakes arise, how to review code for them, how to design safer interfaces, and how to use tooling and tests to find defects earlier. The aim is responsible engineering: code that knows how much space it has, how much data it holds, and what should happen when input does not fit.",
+  "narrationPoints": [
+    "A buffer overflow happens when code writes more data to a buffer than the buffer can hold, or writes outside the intended buffer area.",
+    "Input validation helps, but buffer safety also depends on destination capacity, current length, string termination, integer calculations.",
+    "Consequences can include corrupted data, crashes, unreliable behavior, availability failures, and serious security exposure.",
+    "Secure C development requires design review, defensive coding, compiler support, static analysis, sanitizer testing.",
+    "We will discuss how buffer mistakes arise, how to review code for them, how to design safer interfaces."
+  ]
+};

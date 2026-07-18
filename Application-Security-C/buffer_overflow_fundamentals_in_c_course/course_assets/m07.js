@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Interfaces and Safer Design Patterns",
+  "graphicAlt": "Bullet summary graphic for Defensive Interfaces and Safer Design Patterns.",
+  "narration": "Safer C interfaces make buffer rules visible. A function that operates on a buffer should not require the caller or reviewer to guess how much space is available, how much data is currently present, or what happens when the output does not fit.\n\nFunctions that write to buffers should receive capacity information explicitly. Functions that read from buffers should receive the current length or a clearly defined terminator contract. If both reading and writing happen, the interface should make both sides of the contract visible.\n\nOwnership, destination capacity, source length, and return status should be clear in the function contract. The caller should know who owns allocated memory, whether the output buffer remains valid after failure, and how to detect truncation or rejection.\n\nPrefer designs that validate once at a boundary and preserve validated size information through the workflow. If a parser validates a record length, later code should not discard that length and rediscover it through unsafe assumptions. Carry the verified size along with the data.\n\nAvoid APIs that require the caller to remember hidden assumptions. Narrow parsing functions, structured records, bounded copies, explicit result codes, centralized validation, and small helper functions can all improve reviewability when they reduce ambiguity.\n\nDesign error paths so the output buffer is either valid, empty, or clearly marked as unusable. A partially written buffer with unclear state can be as dangerous to maintainability as an unchecked copy. The safer pattern is to make both success and failure states explicit.",
+  "narrationPoints": [
+    "A function that operates on a buffer should not require the caller or reviewer to guess how much space is available.",
+    "Functions that read from buffers should receive the current length or a clearly defined terminator contract.",
+    "Ownership, destination capacity, source length, and return status should be clear in the function contract.",
+    "If a parser validates a record length, later code should not discard that length and rediscover it through unsafe assumptions.",
+    "Design error paths so the output buffer is either valid, empty."
+  ]
+};

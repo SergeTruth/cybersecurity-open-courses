@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.031
+Binary formats usually define numeric fields with exact widths and byte order.
+
+2
+00:00:05.031 --> 00:00:13.480
+A field may be a 16-bit unsigned little-endian value, a 32-bit big-endian length, or a signed value with a specific interpretation.
+
+3
+00:00:13.480 --> 00:00:22.831
+The parser should decode those fields explicitly from bytes rather than relying on whatever layout happens to exist on the host running the code.
+
+4
+00:00:22.831 --> 00:00:25.089
+Endianness is part of the contract.
+
+5
+00:00:25.089 --> 00:00:32.312
+If the format says a value is little-endian, the parser assembles it as little-endian even on a big-endian host.
+
+6
+00:00:32.312 --> 00:00:38.633
+If the format says big-endian, the parser assembles it as big-endian even on a little-endian host.
+
+7
+00:00:38.633 --> 00:00:44.889
+Explicit decoding avoids accidental portability defects and makes the code's assumptions visible.
+
+8
+00:00:44.889 --> 00:00:46.888
+Signedness needs the same care.
+
+9
+00:00:46.888 --> 00:00:57.143
+A value read as unsigned may later be converted to signed, compared against signed limits, or used in an expression where integer promotion changes the result.
+
+10
+00:00:57.143 --> 00:00:59.529
+Those conversions can change meaning.
+
+11
+00:00:59.529 --> 00:01:09.268
+Defensive code chooses types intentionally, checks ranges before conversion, and avoids using negative or wrapped values as sizes, indexes, or offsets.
+
+12
+00:01:09.268 --> 00:01:16.427
+Overflow checks are essential whenever parsed numbers drive allocation, indexing, copying, or pointer movement.
+
+13
+00:01:16.427 --> 00:01:20.297
+Multiplying a count by an element size is a classic example.
+
+14
+00:01:20.297 --> 00:01:29.262
+The individual count may be within range, and the element size may be reasonable, but the product may not fit the type used for allocation.
+
+15
+00:01:29.262 --> 00:01:35.905
+The calculation should be checked before it becomes a size passed to memory management or a loop bound.
+
+16
+00:01:35.905 --> 00:01:42.548
+The parser should also reject values that cannot be represented safely in the types it uses internally.
+
+17
+00:01:42.548 --> 00:01:53.318
+If the format allows a 64-bit length but the implementation can only handle sizes that fit in size_t on the current platform, that limit must be enforced deliberately.
+
+18
+00:01:53.318 --> 00:01:57.575
+Clear implementation limits are better than accidental wraparound.

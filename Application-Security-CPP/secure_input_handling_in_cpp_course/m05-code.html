@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Examples: Convert and Check Ranges | Secure Input Handling in C++</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure-input-handling-in-cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="19"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Secure Input Handling in C++</p>
+        <h1 id="module-title">Code Examples: Convert and Check Ranges</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card code-card" aria-labelledby="code-example-title">
+        <h2 id="code-example-title">C++ Code Examples</h2>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Parse an Integer Token with from_chars</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;charconv&gt;
+#include &lt;optional&gt;
+#include &lt;string_view&gt;
+#include &lt;system_error&gt;
+
+std::optional&lt;unsigned short&gt; parse_port(std::string_view text) {
+    unsigned int value = 0;
+    const char* first = text.data();
+    const char* last = first + text.size();
+    auto [ptr, ec] = std::from_chars(first, last, value);
+
+    if (ec != std::errc{} || ptr != last) {
+        return std::nullopt;
+    }
+    if (value &lt; 1 || value &gt; 65535) {
+        return std::nullopt;
+    }
+
+    return static_cast&lt;unsigned short&gt;(value);
+}</code></pre>
+        </article>
+        <article class="code-snippet">
+          <h3 class="code-snippet-title">Check Size Math Before Allocation</h3>
+          <pre class="code-block" data-lang="cpp"><code>#include &lt;cstddef&gt;
+#include &lt;limits&gt;
+#include &lt;optional&gt;
+#include &lt;vector&gt;
+
+struct Record {
+    unsigned int id;
+    unsigned int flags;
+};
+
+std::optional&lt;std::vector&lt;Record&gt;&gt; allocate_records(std::size_t count) {
+    constexpr std::size_t max_records = 100000;
+    constexpr std::size_t max_bytes = 8 * 1024 * 1024;
+
+    if (count &gt; max_records) {
+        return std::nullopt;
+    }
+    if (count &gt; std::numeric_limits&lt;std::size_t&gt;::max() / sizeof(Record)) {
+        return std::nullopt;
+    }
+    if (count * sizeof(Record) &gt; max_bytes) {
+        return std::nullopt;
+    }
+
+    return std::vector&lt;Record&gt;(count);
+}</code></pre>
+        </article>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m05.html">Previous</a>
+        <a id="next-module" class="btn" href="m06.html">Next</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "1. Why Input Handling Matters in C++",
+    "href": "m01.html"
+  },
+  {
+    "label": "2. Code Examples: Validate Before Use",
+    "href": "m01-code.html"
+  },
+  {
+    "label": "3. Understanding Input Sources and Trust Boundaries",
+    "href": "m02.html"
+  },
+  {
+    "label": "4. Code Examples: Check Each Input Source",
+    "href": "m02-code.html"
+  },
+  {
+    "label": "5. Strings, Buffers, and Lifetime Safety",
+    "href": "m03.html"
+  },
+  {
+    "label": "6. Code Examples: Preserve Length and Lifetime",
+    "href": "m03-code.html"
+  },
+  {
+    "label": "7. Safer Text Input and Parsing Patterns",
+    "href": "m04.html"
+  },
+  {
+    "label": "8. Code Examples: Read Then Parse Exactly",
+    "href": "m04-code.html"
+  },
+  {
+    "label": "9. Numeric Conversion and Range Validation",
+    "href": "m05.html"
+  },
+  {
+    "label": "10. Code Examples: Convert and Check Ranges",
+    "href": "m05-code.html"
+  },
+  {
+    "label": "11. Containers, Indexes, and Resource Limits",
+    "href": "m06.html"
+  },
+  {
+    "label": "12. Code Examples: Bound Containers and Indexes",
+    "href": "m06-code.html"
+  },
+  {
+    "label": "13. File, Path, and Structured Input",
+    "href": "m07.html"
+  },
+  {
+    "label": "14. Code Examples: Validate Paths and Formats",
+    "href": "m07-code.html"
+  },
+  {
+    "label": "15. Defensive Error Handling, Testing, and Tooling",
+    "href": "m08.html"
+  },
+  {
+    "label": "16. Code Examples: Make Rejection Paths Explicit",
+    "href": "m08-code.html"
+  },
+  {
+    "label": "17. Course Summary and Key Takeaways",
+    "href": "m09.html"
+  },
+  {
+    "label": "18. Code Examples: Combine the Validation Pattern",
+    "href": "m09-code.html"
+  },
+  {
+    "label": "19. Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.052
+A loop needs a way to decide whether an action improved the task state.
+
+2
+00:00:06.052 --> 00:00:09.943
+Without evaluation, the system may produce activity without progress.
+
+3
+00:00:09.943 --> 00:00:14.698
+It might rewrite the same file several times, generate longer explanations,
+
+4
+00:00:14.698 --> 00:00:20.750
+or run tools that do not move the task closer to a terminal condition.
+
+5
+00:00:20.750 --> 00:00:25.505
+Evaluation is the feedback signal that separates useful iteration from noise.
+
+6
+00:00:25.505 --> 00:00:27.666
+Different tasks need different evaluators.
+
+7
+00:00:27.666 --> 00:00:32.421
+Deterministic checks include compiler results, schema validation, test suites, policy decisions,
+
+8
+00:00:32.421 --> 00:00:35.447
+reference comparisons, reconciled totals, and programmatic assertions.
+
+9
+00:00:35.447 --> 00:00:41.932
+Human review may be necessary when the judgment involves risk, product intent, or business meaning.
+
+10
+00:00:41.932 --> 00:00:49.280
+Model-based grading can help assess qualities such as clarity or relevance, but it needs a rubric, examples,
+
+11
+00:00:49.280 --> 00:00:51.442
+calibration, and periodic human review.
+
+12
+00:00:51.442 --> 00:00:56.197
+A score without a tested rubric is just another generated claim.
+
+13
+00:00:56.197 --> 00:00:59.223
+Prefer deterministic evidence when it is available.
+
+14
+00:00:59.223 --> 00:01:07.004
+A passing test, valid configuration, or policy engine result usually gives a clearer signal than asking the same
+
+15
+00:01:07.004 --> 00:01:10.030
+model whether its own output looks correct.
+
+16
+00:01:10.030 --> 00:01:16.947
+The component that generated an artifact should not be treated as the only authority certifying it.
+
+17
+00:01:16.947 --> 00:01:23.863
+Separation may come from deterministic checks, different context, an independent evaluator role, or a human reviewer.
+
+18
+00:01:23.863 --> 00:01:26.889
+Repair should respond to specific failure evidence.
+
+19
+00:01:26.889 --> 00:01:32.509
+Capture the failed criterion, preserve the relevant observation, form a concrete repair hypothesis,
+
+20
+00:01:32.509 --> 00:01:40.290
+make the smallest justified change, rerun the relevant evaluation, and compare the new result with the previous state.
+
+21
+00:01:40.290 --> 00:01:46.774
+If the same failure repeats without new evidence, the loop should stop, narrow the task,
+
+22
+00:01:46.774 --> 00:01:49.368
+or escalate rather than regenerate randomly.
+
+23
+00:01:49.368 --> 00:01:55.852
+That stop protects good partial work and prevents uncertainty from being hidden behind more output.
+
+24
+00:01:55.852 --> 00:02:01.472
+In the coding example, a failing test is not just a red mark.
+
+25
+00:02:01.472 --> 00:02:03.201
+It is an observation.
+
+26
+00:02:03.201 --> 00:02:10.118
+The next iteration should inspect the related code, propose a specific cause, apply a narrow patch,
+
+27
+00:02:10.118 --> 00:02:14.440
+and rerun the targeted test before running the full suite.
+
+28
+00:02:14.440 --> 00:02:21.789
+Randomly rewriting the entire feature can destroy working behavior and make cause and effect impossible to trace.
+
+29
+00:02:21.789 --> 00:02:27.841
+The quality of evaluation determines whether the loop learns, stalls, or becomes falsely confident.

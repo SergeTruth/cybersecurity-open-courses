@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Instruction Hierarchy and Context Design",
+  "graphicAlt": "Blank placeholder image for a lesson on instruction hierarchy and context design.",
+  "narration": "Instruction hierarchy is a way to express which instructions have higher authority. System and developer instructions are trusted configuration controlled by the application owner. User goals describe what the user wants within allowed boundaries. Retrieved evidence, uploaded files, tool outputs, and other external content should be treated as data. This hierarchy helps the model behave sensibly, but it is also a design reminder for developers: do not let lower-trust content become policy.\n\nContext design is the process of assembling the model input deliberately. A secure Python application should separate instructions from content, label sources, preserve provenance metadata, and keep each piece of context scoped to the current task. The application should avoid invisible authority in retrieved text, such as placing untrusted document text next to trusted policy without clear separation. The model and the user both benefit when the context explains what came from where.\n\nContext minimization is part of defense. More context is not always safer or more accurate. Extra documents, stale history, unrelated tool outputs, and broad memory can increase exposure and create more opportunities for irrelevant or misleading text to influence behavior. The application should include only the information needed for the approved task, filtered by the user's permissions and the purpose of the workflow.\n\nClear prompting can reduce confusion, but it is not a reliable security boundary by itself. A system instruction may say that untrusted content cannot change rules, but the Python application still needs to enforce authorization, retrieval access, tool permission, and approval requirements. Security-critical rules should be represented in code and policy checks. Prompt wording should support those controls, not replace them.",
+  "narrationPoints": [
+    "Instruction hierarchy is a way to express which instructions have higher authority.",
+    "System and developer instructions are trusted configuration controlled by the application owner.",
+    "User goals describe what the user wants within allowed boundaries.",
+    "Retrieved evidence, uploaded files, tool outputs, and other external content should be treated as data.",
+    "This hierarchy helps the model behave sensibly, but it is also a design reminder for developers: do not let lower-trust content become policy.",
+    "Context design is the process of assembling the model input deliberately."
+  ]
+};

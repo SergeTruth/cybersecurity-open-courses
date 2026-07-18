@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.942
+The core rule of bounds-safe C is direct: check before access.
+
+2
+00:00:03.942 --> 00:00:07.184
+Validate an index before using it to read or write.
+
+3
+00:00:07.184 --> 00:00:12.716
+Validate a range before copying, appending, parsing, formatting, or advancing a cursor.
+
+4
+00:00:12.716 --> 00:00:21.553
+The validation should happen before pointer arithmetic or array access, not after the program has already stepped outside the valid region.
+
+5
+00:00:21.553 --> 00:00:25.940
+A single index check is not enough when an operation touches a range.
+
+6
+00:00:25.940 --> 00:00:30.518
+The code should validate both the start offset and the requested length.
+
+7
+00:00:30.518 --> 00:00:37.066
+A start offset may be in range while the range from start through start plus length exceeds the buffer.
+
+8
+00:00:37.066 --> 00:00:43.360
+Addition used for range checks should also be reviewed so the calculation itself does not overflow.
+
+9
+00:00:43.360 --> 00:00:48.002
+Avoid performing pointer arithmetic before confirming the range is valid.
+
+10
+00:00:48.002 --> 00:00:58.365
+Creating a pointer far outside the object and then checking it later can make the code difficult to reason about and may already violate C's object boundary rules.
+
+11
+00:00:58.365 --> 00:01:06.185
+Prefer checking offsets and lengths as integer values first, then deriving the pointer once the range is known to be valid.
+
+12
+00:01:06.185 --> 00:01:10.572
+Repeated bounds logic is a good candidate for small helper functions.
+
+13
+00:01:10.572 --> 00:01:21.507
+A helper that checks whether a range is within a buffer, appends only when capacity allows, or validates an index before returning a pointer can reduce copy-paste mistakes.
+
+14
+00:01:21.507 --> 00:01:28.247
+The helper's contract should be precise: accepted units, allowed ranges, output state, and failure result.
+
+15
+00:01:28.247 --> 00:01:31.108
+Failure behavior should be explicit and safe.
+
+16
+00:01:31.108 --> 00:01:43.760
+If the requested read or write is out of range, the function should return an error, reject the input, leave the output unchanged, or reset the output to a known safe state according to its contract.
+
+17
+00:01:43.760 --> 00:01:50.690
+A partially updated buffer with ambiguous count can create a second defect after the original bounds failure.
+
+18
+00:01:50.690 --> 00:01:52.978
+Good range checks are also readable.
+
+19
+00:01:52.978 --> 00:02:04.868
+The next reviewer should be able to see what object is protected, which size belongs to that object, which operation is being authorized, and what happens when the operation does not fit.
+
+20
+00:02:04.868 --> 00:02:07.983
+That clarity is as important as the check itself.
