@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Spoofing Effects and Warning Signs",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Spoofing may present differently from simple signal loss because the receiver can report a position or time that appears valid. Warning signs are therefore inconsistencies among the map, visual scene, compass, route, telemetry, and expected movement.\n\nExamples include an apparent jump while the aircraft is visibly stable, impossible speed or location, a map track that leaves the observed route, an unexpected home point, or navigation commands that do not fit the crew's view.\n\nCompass and G N S S disagreement may indicate several problems, including magnetic interference, calibration issues, sensor faults, reflected signals, or a navigation anomaly. Treat the mismatch as reduced confidence, not immediate proof of spoofing.\n\nTelemetry inconsistency matters over time. Compare commanded movement, groundspeed, direction, altitude source, visual references, and logged position. Preserve screenshots or notes only when doing so does not distract from safe control.\n\nIndependent time or location references can strengthen review after landing. They should come from trusted systems with known provenance, not from another display that quietly depends on the same receiver or data source.\n\nConfirmation is difficult from one receiver and one symptom. High-confidence attribution may require specialized equipment, independent receivers, broader reports, technical expertise, and regulatory investigation outside the pilot's role.\n\nOperationally, distrust position-dependent automation when cues conflict. Simplify the mission, maintain visual control, use trained manual or degraded-mode procedures, move toward a safe landing area, and report the incident without overstating the cause.",
+  "narrationPoints": [
+    "Spoofing may present differently from simple signal loss because the receiver can report a position or time that appears valid.",
+    "Warning signs are therefore inconsistencies among the map, visual scene, compass, route, telemetry, and expected movement.",
+    "Examples include an apparent jump while the aircraft is visibly stable, impossible speed or location, a map track that leaves the observed route, an.",
+    "Compass and G N S S disagreement may indicate several problems, including magnetic interference, calibration issues, sensor faults, reflected signals, or a navigation anomaly.",
+    "Treat the mismatch as reduced confidence, not immediate proof of spoofing.",
+    "Telemetry inconsistency matters over time."
+  ]
+};

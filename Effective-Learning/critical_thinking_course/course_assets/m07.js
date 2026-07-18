@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Decision-Making Under Uncertainty",
+  "graphicAlt": "Blank white placeholder image for module 7, Decision-Making Under Uncertainty.",
+  "narration": "Critical thinking is often needed most when information is incomplete. Waiting for perfect certainty can be impossible, but acting without enough thought can be costly. Decision-making under uncertainty asks how much we know, how much we do not know, what risks matter, and whether more analysis would meaningfully improve the choice.\n\nProbability is a practical way to express uncertainty. You do not need complex math for the basic habit to help. Saying something is possible is less useful than estimating whether it is unlikely, plausible, likely, or highly likely. That level of clarity helps teams decide whether to gather more evidence, add a control, run an experiment, or move forward.\n\nTradeoffs are unavoidable. A faster decision may preserve momentum but increase the chance of error. A slower decision may improve confidence but miss an opportunity. Reversibility matters. If a choice can be rolled back or tested cheaply, it may not need the same level of analysis as a commitment that locks in cost, architecture, risk, or public trust.\n\nOpportunity cost is the value of what is given up when one option is chosen over another. If a team spends its limited time investigating one hypothesis, it is not investigating another. If an organization chooses a highly customized tool, it may give up simplicity or maintainability. Critical thinking keeps these costs visible rather than pretending that preferred options have no downside.\n\nPre-mortems and decision records are practical tools. A pre-mortem imagines a future failure and asks what might have caused it. A decision record captures the frame, evidence, assumptions, tradeoffs, and reasoning behind a choice. Together, they help teams act under uncertainty while preserving a trail for review and learning.",
+  "narrationPoints": [
+    "Critical thinking is often needed most when information is incomplete.",
+    "Waiting for perfect certainty can be impossible, but acting without enough thought can be costly.",
+    "Decision-making under uncertainty asks how much we know, how much we do not know, what risks matter, and whether more analysis would meaningfully improve the choice.",
+    "Probability is a practical way to express uncertainty.",
+    "You do not need complex math for the basic habit to help.",
+    "Saying something is possible is less useful than estimating whether it is unlikely, plausible, likely, or highly likely."
+  ]
+};

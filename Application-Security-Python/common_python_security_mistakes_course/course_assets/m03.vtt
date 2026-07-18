@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:12.723
+Python applications often connect user-controlled data to powerful interpreters: database engines, operating system shells, template engines, expression evaluators, and plugin systems.
+
+2
+00:00:12.723 --> 00:00:15.671
+The mistake is not using these capabilities.
+
+3
+00:00:15.671 --> 00:00:22.808
+The mistake is allowing untrusted or poorly constrained data to influence instructions rather than values.
+
+4
+00:00:22.808 --> 00:00:31.108
+When code builds commands or queries as strings, it becomes harder to prove that data remains data and control remains control.
+
+5
+00:00:31.108 --> 00:00:38.866
+For databases, safer patterns include parameterized queries, prepared statements, and careful use of ORM features.
+
+6
+00:00:38.866 --> 00:00:43.986
+An ORM can reduce risk, but it does not make every query pattern safe by default.
+
+7
+00:00:43.986 --> 00:00:51.589
+Raw query escape hatches, dynamic filters, string-built clauses, and flexible search features still need review.
+
+8
+00:00:51.589 --> 00:00:59.347
+The stable principle is to use APIs that separate query structure from data, then review any exception with extra care.
+
+9
+00:00:59.347 --> 00:01:02.372
+Command execution needs the same discipline.
+
+10
+00:01:02.372 --> 00:01:09.432
+Many tasks are safer when handled by Python libraries instead of shelling out to operating system commands.
+
+11
+00:01:09.432 --> 00:01:21.301
+When subprocess behavior is required, developers should understand the difference between passing controlled argument lists and invoking a shell that interprets a command line.
+
+12
+00:01:21.301 --> 00:01:25.800
+Untrusted values should not be allowed to become command structure.
+
+13
+00:01:25.800 --> 00:01:34.722
+Allowlists, constrained options, safe working directories, clear timeouts, and careful error handling are part of defensive design.
+
+14
+00:01:34.722 --> 00:01:44.962
+Dynamic execution features such as eval, exec, dynamic imports, plugin loading, and server-side template evaluation should be rare and heavily reviewed.
+
+15
+00:01:44.962 --> 00:01:52.797
+They can be useful in constrained systems, but they increase the cost of reasoning about security and maintainability.
+
+16
+00:01:52.797 --> 00:02:02.262
+If a feature needs dynamic behavior, prefer narrow interfaces, explicit allowlists, data-driven configuration, and safe evaluation models.
+
+17
+00:02:02.262 --> 00:02:07.847
+Clever code is not valuable if the team cannot secure it, test it, and explain it later.

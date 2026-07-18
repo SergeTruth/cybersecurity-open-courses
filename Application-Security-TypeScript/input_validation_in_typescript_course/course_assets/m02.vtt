@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.156
+A trust boundary is any point where data moves from a less trusted context into code that wants to make decisions.
+
+2
+00:00:07.156 --> 00:00:14.236
+In a TypeScript web service, the obvious boundary is the API request body, but it is only one part of the picture.
+
+3
+00:00:14.236 --> 00:00:19.946
+Query parameters, route parameters, headers, and cookies all arrive as external input.
+
+4
+00:00:19.946 --> 00:00:30.833
+They may be missing, duplicated, incorrectly encoded, too long, or intentionally shaped to trigger edge cases in routing, authorization, logging, or database access.
+
+5
+00:00:30.833 --> 00:00:34.030
+Browser-side TypeScript has its own boundaries.
+
+6
+00:00:34.030 --> 00:00:42.252
+Values from localStorage and sessionStorage should not be treated as trusted just because the application wrote them earlier.
+
+7
+00:00:42.252 --> 00:00:51.693
+A user can edit them, an extension can change them, and an older version of the application may have stored a shape the current code no longer expects.
+
+8
+00:00:51.693 --> 00:01:02.732
+WebSocket messages and postMessage events also deserve careful checks because they often carry loosely structured data between contexts that can change independently.
+
+9
+00:01:02.732 --> 00:01:07.299
+Server-side code has boundaries that are easy to forget during review.
+
+10
+00:01:07.299 --> 00:01:16.283
+Environment variables are strings, even when the application expects numbers, booleans, URLs, feature flags, or comma-separated lists.
+
+11
+00:01:16.283 --> 00:01:20.242
+JSON files and configuration files can be stale or malformed.
+
+12
+00:01:20.242 --> 00:01:24.581
+Third-party SDK responses can change after an upstream API update.
+
+13
+00:01:24.581 --> 00:01:34.250
+Even internal queues and event streams should be validated at the consumer, because producer bugs and schema drift eventually happen in real systems.
+
+14
+00:01:34.250 --> 00:01:42.167
+The practical habit is to identify every place where unknown data enters typed code and put a narrow validation layer there.
+
+15
+00:01:42.167 --> 00:01:47.039
+That does not mean scattering checks randomly throughout the application.
+
+16
+00:01:47.039 --> 00:01:57.013
+It means recognizing boundaries, naming them in code, and converting inputs into well-defined internal objects as early as the design reasonably allows.
+
+17
+00:01:57.013 --> 00:02:07.519
+The result is clearer code: downstream functions can depend on validated shapes instead of repeating defensive checks or silently accepting unsafe assumptions.

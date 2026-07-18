@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.274
+TypeScript gives developers a much better way to describe application data, but it does not make outside data safe by itself.
+
+2
+00:00:08.274 --> 00:00:18.125
+A request body, a cookie, a message from a browser tab, or a record loaded from storage can still contain values that do not match the type you expected.
+
+3
+00:00:18.125 --> 00:00:27.818
+The compiler can help you reason about your own code, but it cannot force a remote client or a third-party service to send honest, well-formed data.
+
+4
+00:00:27.818 --> 00:00:33.807
+The key detail is that TypeScript types are erased when the code is compiled to JavaScript.
+
+5
+00:00:33.807 --> 00:00:41.135
+Interfaces, type aliases, and annotations guide the compiler and the editor, but they are not runtime checks.
+
+6
+00:00:41.135 --> 00:00:49.646
+When the application is actually running, a value that was declared as a User, Order, or Settings object is just JavaScript data.
+
+7
+00:00:49.646 --> 00:00:58.078
+If that value came from outside the trusted codebase, the application needs explicit runtime validation before relying on it.
+
+8
+00:00:58.078 --> 00:01:03.200
+External input shows up in more places than teams usually list during design.
+
+9
+00:01:03.200 --> 00:01:04.776
+Browsers submit forms.
+
+10
+00:01:04.776 --> 00:01:05.801
+APIs send JSON.
+
+11
+00:01:05.801 --> 00:01:07.140
+Files are uploaded.
+
+12
+00:01:07.140 --> 00:01:08.874
+Queues deliver messages.
+
+13
+00:01:08.874 --> 00:01:11.869
+Environment variables configure services.
+
+14
+00:01:11.869 --> 00:01:17.385
+Local storage, session storage, and cookies can be changed by users or extensions.
+
+15
+00:01:17.385 --> 00:01:21.640
+Partner SDKs may return unexpected shapes when versions drift.
+
+16
+00:01:21.640 --> 00:01:30.702
+Each of those sources is a boundary where the program should move carefully from untrusted runtime values into typed application logic.
+
+17
+00:01:30.702 --> 00:01:35.588
+A healthy TypeScript validation strategy treats validation as a bridge.
+
+18
+00:01:35.588 --> 00:01:42.444
+On one side of the bridge, data is unknown because it came from a source the application does not control.
+
+19
+00:01:42.444 --> 00:01:49.064
+On the other side, the program has domain objects that are safe enough to use for business decisions.
+
+20
+00:01:49.064 --> 00:01:55.919
+Validation, parsing, normalization, and clear error handling are what make that bridge trustworthy.
+
+21
+00:01:55.919 --> 00:02:03.721
+Without that step, TypeScript can create a false sense of confidence around data the runtime never actually checked.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Review, and Maintainability",
+  "graphicAlt": "Draft visual summarizing testing, review, and maintainability.",
+  "narration": "Secure shell scripting is not only about individual syntax choices. It is also about maintainability. A script that is small, readable, and reviewed is easier to operate safely than a clever one-liner that only the original author understands. Clear function names, simple control flow, and direct comments about risky assumptions help future maintainers see what the script is supposed to do.\n\nStatic review tools such as ShellCheck can catch many common mistakes: unquoted variables, suspicious test expressions, unused variables, unsafe loops, and portability issues. Tools are helpful, but they do not replace human review. A reviewer still needs to ask whether the script should perform the action, what permissions it needs, what input it accepts, what happens on failure, and whether it might expose sensitive data.\n\nTesting should include edge cases that scripts often mishandle. Use filenames with spaces. Test missing files, permission failures, empty directories, unexpected environment variables, failed commands, and interrupted operations. If a script supports a dry-run mode, test that the dry run matches the intended real behavior. Review scripts before running them as privileged users or placing them into scheduled automation.\n\nDocumentation does not need to be long, but it should be useful. Record dependencies, required permissions, expected environment variables, safe invocation patterns, and rollback or cleanup expectations. Avoid cleverness in production automation. The best script is not the shortest one; it is the one a tired operator can review, run, and troubleshoot without guessing.",
+  "narrationPoints": [
+    "Secure shell scripting is not only about individual syntax choices.",
+    "It is also about maintainability.",
+    "A script that is small, readable, and reviewed is easier to operate safely than a clever one-liner that only the original author understands.",
+    "Clear function names, simple control flow, and direct comments about risky assumptions help future maintainers see what the script is supposed to do.",
+    "Static review tools such as ShellCheck can catch many common mistakes: unquoted variables, suspicious test expressions, unused variables, unsafe loops, and portability issues.",
+    "Tools are helpful, but they do not replace human review."
+  ]
+};

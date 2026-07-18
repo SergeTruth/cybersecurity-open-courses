@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Validating Domain Objects and Business Rules",
+  "graphicAlt": "Blank placeholder image for Validating Domain Objects and Business Rules.",
+  "narration": "Transport validation answers the question, can this payload be understood as the request shape for this endpoint. Domain validation answers a deeper question: does this request make sense for the business operation. Required fields, optional fields, enums, nested objects, arrays, IDs, dates, and monetary values all need structural checks, but structure alone is not enough. A value can be well formed and still violate an important rule.\n\nConsider dates, money, and identifiers. A date string may parse correctly but represent a time outside the allowed window. A monetary amount may be numeric but have too many decimal places, use the wrong currency, or exceed a policy limit. An ID may match a UUID format but refer to a record the user is not allowed to touch. Validation should separate format checks from authorization and business checks while making sure all of them occur before the operation changes state.\n\nCross-field validation is where many bugs hide. A start date should come before an end date. A discount should be compatible with the selected plan. A shipping method should be valid for the destination. An array should not exceed a safe size, contain duplicates when uniqueness is required, or mix incompatible item types. These rules usually belong near the domain service or domain object because they describe what the operation means, not just how JSON is shaped.\n\nA strong TypeScript design uses validated transport objects as inputs to domain construction, not as the domain model itself. The transport layer can reject malformed or unexpected input. The domain layer can enforce invariants that must always be true inside the application. Keeping those concerns separate makes code easier to test and review. It also helps prevent a change in an API contract from accidentally weakening a core rule about money, identity, ownership, or workflow state.",
+  "narrationPoints": [
+    "Transport validation answers the question, can this payload be understood as the request shape for this endpoint.",
+    "Domain validation answers a deeper question: does this request make sense for the business operation.",
+    "Required fields, optional fields, enums, nested objects, arrays, IDs, dates, and monetary values all need structural checks, but structure alone is not enough.",
+    "A value can be well formed and still violate an important rule.",
+    "Consider dates, money, and identifiers.",
+    "A date string may parse correctly but represent a time outside the allowed window."
+  ]
+};

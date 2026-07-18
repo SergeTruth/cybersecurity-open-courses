@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.663
+File names should always be treated as untrusted input.
+
+2
+00:00:03.663 --> 00:00:18.783
+A user-supplied name may contain path separators, reserved device names, control characters, confusing Unicode, excessive length, misleading extensions, or values that look safe in one operating system and unsafe in another.
+
+3
+00:00:18.783 --> 00:00:23.849
+The displayed name and the storage name should usually be separate concerns.
+
+4
+00:00:23.849 --> 00:00:29.071
+A system can preserve an original name as metadata without trusting it as a path.
+
+5
+00:00:29.071 --> 00:00:35.150
+Path traversal is the risk that input influences file access outside an intended directory.
+
+6
+00:00:35.150 --> 00:00:45.126
+Absolute paths, relative paths, dot-dot segments, encoded separators, symlinks, and platform-specific behavior can all complicate path handling.
+
+7
+00:00:45.126 --> 00:00:54.089
+Canonicalization concepts can help, but canonicalization must be paired with a containment check against an approved base directory.
+
+8
+00:00:54.089 --> 00:00:59.077
+The final resolved location should remain where the application intended.
+
+9
+00:00:59.077 --> 00:01:03.675
+Extension checks and content type claims are useful hints, not proof.
+
+10
+00:01:03.675 --> 00:01:06.481
+A browser-provided MIME type can be wrong.
+
+11
+00:01:06.481 --> 00:01:10.144
+A file extension can be misleading or user-controlled.
+
+12
+00:01:10.144 --> 00:01:15.288
+A document can contain active content even when the extension looks familiar.
+
+13
+00:01:15.288 --> 00:01:27.836
+Secure validation should use an allowlist of file categories, size limits, content inspection where appropriate, and format-specific checks rather than trusting a single metadata field.
+
+14
+00:01:27.836 --> 00:01:30.252
+Metadata should be constrained too.
+
+15
+00:01:30.252 --> 00:01:42.644
+Reject unexpected content types, unsupported extensions, suspicious names, excessive lengths, missing required fields, invalid timestamps, and values that do not match the workflow.
+
+16
+00:01:42.644 --> 00:01:49.191
+Validation should happen before storage decisions, parsing decisions, logging, or publication.
+
+17
+00:01:49.191 --> 00:01:57.453
+The earlier the application converts messy file input into controlled metadata, the easier the rest of the workflow becomes.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Assumptions, Context, and Framing",
+  "graphicAlt": "Blank white placeholder image for module 3, Assumptions, Context, and Framing.",
+  "narration": "Assumptions are beliefs or conditions that reasoning depends on. Some are explicit, such as assuming a budget limit or a deadline. Others are hidden, such as assuming users will behave a certain way, a data source is complete, or a team will adopt a new process without resistance. Critical thinking asks what are we assuming before the group commits to a conclusion.\n\nProblem framing determines what information is noticed and what solutions seem reasonable. If a system outage is framed only as an engineering mistake, the team may focus on individual performance. If it is framed as a resilience problem, the team may examine architecture, monitoring, handoff, runbooks, and workload. The frame does not decide the answer, but it shapes where attention goes.\n\nScope and definitions are part of framing. A team discussing secure design needs to agree whether it means code quality, identity controls, threat modeling, supply chain risk, deployment configuration, or all of those. Without shared definitions, people may appear aligned while defending different conclusions. Clear definitions reduce false agreement and make disagreement more useful.\n\nContext can change the meaning of evidence. A process that works in a small team may fail at enterprise scale. A control that is reasonable in a low-risk environment may be inadequate for regulated data. Incentives, stakeholders, constraints, history, and timing all affect what counts as a practical answer. Critical thinkers look at the environment around the claim, not only the claim itself.\n\nBefore committing, ask several framing questions. What problem are we actually trying to solve? What is inside and outside scope? Who is affected? What incentives are at work? What would change our interpretation? These questions help prevent a team from solving a simplified version of the problem while the real conditions remain untouched.",
+  "narrationPoints": [
+    "Assumptions are beliefs or conditions that reasoning depends on.",
+    "Some are explicit, such as assuming a budget limit or a deadline.",
+    "Others are hidden, such as assuming users will behave a certain way, a data source is complete, or a team will adopt a new process without resistance.",
+    "Critical thinking asks what are we assuming before the group commits to a conclusion.",
+    "Problem framing determines what information is noticed and what solutions seem reasonable.",
+    "If a system outage is framed only as an engineering mistake, the team may focus on individual performance."
+  ]
+};

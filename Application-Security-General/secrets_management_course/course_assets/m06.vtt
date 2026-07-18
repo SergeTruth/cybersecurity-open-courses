@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.512
+Applications need secrets at the moment they connect, sign, decrypt, or authenticate.
+
+2
+00:00:05.512 --> 00:00:13.036
+The delivery pattern should make the secret available to the authorized workload without spreading it into places that
+
+3
+00:00:13.036 --> 00:00:14.824
+are hard to control.
+
+4
+00:00:14.824 --> 00:00:21.454
+Common patterns include fetching a secret at startup, retrieving it at runtime through a secret manager,
+
+5
+00:00:21.454 --> 00:00:27.190
+mounting it into a container through an orchestrator, using a platform-managed identity,
+
+6
+00:00:27.190 --> 00:00:30.691
+or receiving a short-lived token from a trusted broker.
+
+7
+00:00:30.691 --> 00:00:33.149
+Runtime access can reduce hardcoding.
+
+8
+00:00:33.149 --> 00:00:36.576
+Instead of storing a database password in source code,
+
+9
+00:00:36.576 --> 00:00:42.014
+the application can read it from an approved secret manager using a workload identity.
+
+10
+00:00:42.014 --> 00:00:48.867
+Instead of placing a cloud key in a deployment manifest, the workload can use managed identity or federation.
+
+11
+00:00:48.867 --> 00:00:54.454
+These approaches keep static secrets out of code and make access policy easier to manage,
+
+12
+00:00:54.454 --> 00:00:59.520
+but they still require careful configuration, monitoring, and error handling.
+
+13
+00:00:59.520 --> 00:01:05.479
+Environment variables are common because they are easy for platforms and pipelines to inject.
+
+14
+00:01:05.479 --> 00:01:09.725
+They can be acceptable in some environments, but they are not magic.
+
+15
+00:01:09.725 --> 00:01:16.504
+Depending on the platform, environment values may appear in process inspection, crash dumps, debug pages,
+
+16
+00:01:16.504 --> 00:01:20.452
+support bundles, logs, metrics, or administrative consoles.
+
+17
+00:01:20.452 --> 00:01:22.836
+If a team uses environment variables,
+
+18
+00:01:22.836 --> 00:01:30.285
+it should understand where those values can travel and should avoid dumping the environment during troubleshooting.
+
+19
+00:01:30.285 --> 00:01:32.520
+CI/CD pipelines need special care.
+
+20
+00:01:32.520 --> 00:01:39.224
+Pipeline variables should be scoped to the minimum project, branch, environment, and job that needs them.
+
+21
+00:01:39.224 --> 00:01:45.109
+Logs should be masked, but masking is not enough if a tool writes the value to a file or artifact.
+
+22
+00:01:45.109 --> 00:01:52.111
+Protected branches, approvals, environment gates, and short-lived deployment credentials can reduce risk.
+
+23
+00:01:52.111 --> 00:01:57.847
+Pull requests from untrusted contexts should not receive production deployment secrets.
+
+24
+00:01:57.847 --> 00:02:01.721
+Containers and images introduce another delivery boundary.
+
+25
+00:02:01.721 --> 00:02:06.414
+A secret used during build should not be preserved in the final image layer.
+
+26
+00:02:06.414 --> 00:02:12.969
+A runtime secret should not be copied into the application directory or included in a diagnostic bundle.
+
+27
+00:02:12.969 --> 00:02:16.321
+Mounted secrets should have tight file permissions,
+
+28
+00:02:16.321 --> 00:02:23.696
+and applications should read them intentionally rather than recursively printing configuration for convenience.
+
+29
+00:02:23.696 --> 00:02:27.644
+Applications themselves must be designed not to leak secrets.
+
+30
+00:02:27.644 --> 00:02:33.976
+Do not log authorization headers, raw tokens, private keys, passwords, or full connection strings.
+
+31
+00:02:33.976 --> 00:02:36.583
+Do not return secrets in error responses.
+
+32
+00:02:36.583 --> 00:02:39.116
+Do not cache secrets longer than needed.
+
+33
+00:02:39.116 --> 00:02:43.586
+Do not include secrets in telemetry attributes or exception messages.
+
+34
+00:02:43.586 --> 00:02:49.992
+Good delivery gets the secret to the workload; good application behavior keeps it from leaving again.

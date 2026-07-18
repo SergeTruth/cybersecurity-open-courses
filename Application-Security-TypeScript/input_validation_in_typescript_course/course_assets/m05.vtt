@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.117
+Web and API input should be validated at the point where the application first interprets it.
+
+2
+00:00:06.117 --> 00:00:16.470
+For REST endpoints, that often means validating the request body, route parameters, query string, headers, and cookies before calling business services.
+
+3
+00:00:16.470 --> 00:00:25.803
+For GraphQL, variables and custom scalar values need the same kind of attention, even though the framework provides some structural checks.
+
+4
+00:00:25.803 --> 00:00:35.449
+For forms, validation should account for required fields, length limits, formats, and the difference between an empty value and a missing value.
+
+5
+00:00:35.449 --> 00:00:38.351
+File-related input deserves special care.
+
+6
+00:00:38.351 --> 00:00:53.487
+The file content may be handled elsewhere, but metadata such as filename, declared MIME type, size, extension, and user-supplied description can still affect storage paths, logging, authorization, and downstream workflows.
+
+7
+00:00:53.487 --> 00:00:57.017
+Authentication-related inputs are also sensitive.
+
+8
+00:00:57.017 --> 00:01:12.231
+Tokens, session identifiers, redirect targets, user IDs, tenant IDs, and role-related claims should be checked against expected formats and verified against trusted server-side state before they influence access decisions.
+
+9
+00:01:12.231 --> 00:01:22.270
+Middleware is useful for broad, repeated validation such as JSON body size, content type, authentication header shape, and common parameter parsing.
+
+10
+00:01:22.270 --> 00:01:28.074
+Endpoint-level validation is still needed because each endpoint has its own contract.
+
+11
+00:01:28.074 --> 00:01:38.818
+A profile update, a billing change, and an administrative action may all accept JSON, but they should not accept the same fields or the same combinations of values.
+
+12
+00:01:38.818 --> 00:01:46.034
+Validation should be specific enough to prevent accidental over-posting and intentional field injection.
+
+13
+00:01:46.034 --> 00:01:54.190
+Error responses should help legitimate clients correct their requests without giving away unnecessary internal detail.
+
+14
+00:01:54.190 --> 00:02:01.641
+It is reasonable to say that a field is missing, a value is invalid, or a payload does not match the expected schema.
+
+15
+00:02:01.641 --> 00:02:10.973
+It is usually not reasonable to return stack traces, raw database errors, secret configuration values, or detailed internal object models.
+
+16
+00:02:10.973 --> 00:02:21.483
+Good API validation makes bad input predictable: reject early, explain safely, log responsibly, and keep business logic focused on already-validated data.

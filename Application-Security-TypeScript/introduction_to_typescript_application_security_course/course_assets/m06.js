@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "API Handlers, Error Handling, and Logging",
+  "graphicAlt": "Draft visual summary for API Handlers, Error Handling, and Logging",
+  "narration": "API handlers are important security boundaries in TypeScript applications. A handler receives request data, parses it, validates it, applies authorization, performs work, handles failures, and returns a response. The order matters. Validation and authorization should happen before database writes, state transitions, file operations, or calls to downstream services that assume trusted inputs.\n\nGood error handling preserves application invariants. If a request fails validation, a downstream service times out, or a database operation does not complete, the application should avoid leaving partial state behind. Consistent result types, domain errors, and well-defined failure paths can make it easier for callers and reviewers to understand what happened.\n\nError responses should be useful without exposing sensitive internals. Callers may need to know that input was invalid, authorization failed, a resource was not found, or a temporary failure occurred. They do not need stack traces, secrets, tokens, internal queries, private configuration, or implementation details. Safe responses support recovery while limiting unnecessary exposure.\n\nLogging needs the same discipline. Structured logs, correlation IDs, and operational events help teams understand production behavior. But logs are often copied into dashboards, tickets, alerts, and long-term storage. Sensitive values should be redacted or omitted. API clients also need defensive behavior: validate responses, handle timeouts, define retry rules, and avoid blind trust in third-party data.\n\nConsistency matters across handlers. If one endpoint returns detailed validation errors and another returns vague failures, callers may build fragile behavior. If one path logs request bodies and another redacts them, sensitive data handling becomes difficult to audit. Shared error and logging helpers can keep safety expectations steady across services and teams.",
+  "narrationPoints": [
+    "API handlers are important security boundaries in TypeScript applications.",
+    "Good error handling preserves application invariants.",
+    "Error responses should be useful without exposing sensitive internals.",
+    "Logging needs the same discipline.",
+    "Consistency matters across handlers."
+  ]
+};

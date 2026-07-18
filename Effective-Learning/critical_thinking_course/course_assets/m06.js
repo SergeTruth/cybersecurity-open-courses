@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Source Evaluation and Information Quality",
+  "graphicAlt": "Blank white placeholder image for module 6, Source Evaluation and Information Quality.",
+  "narration": "Critical thinking depends on information quality. A source may sound polished, confident, or popular and still be weak. Source evaluation asks who produced the information, what expertise they have, what evidence they provide, what incentives may influence them, and what uncertainty remains. The point is not to distrust everything. It is to assign confidence in proportion to support.\n\nCredibility is not only about status. Expertise should match the topic. A person may be highly qualified in one area and unreliable in another. Incentives matter because sources may be selling, defending, simplifying, persuading, or trying to win attention. Conflicts of interest do not automatically make information false, but they should shape how carefully the claim is checked.\n\nPrimary sources are closer to the original evidence, data, event, or official statement. Secondary sources interpret, summarize, or comment on primary material. Both can be useful. Primary sources reduce distance from the evidence, while secondary sources may provide context or explanation. Critical thinkers know which kind they are using and avoid treating interpretation as if it were the original record.\n\nData quality matters. Ask how the data was collected, what the sample represents, what might be missing, and whether the measure actually supports the claim. At a high level, sample size affects reliability, but size alone does not fix biased collection or poor measurement. Cherry-picking occurs when only convenient evidence is shown while conflicting evidence is ignored.\n\nAI-generated material deserves the same discipline. Fluent output can be useful for drafting, summarizing, brainstorming, or comparing possibilities, but fluency is not truth. AI output can be incomplete, unsupported, outdated, or wrong. Treat it as material to examine, not as authority. Verify important claims against appropriate sources before relying on them.",
+  "narrationPoints": [
+    "Critical thinking depends on information quality.",
+    "A source may sound polished, confident, or popular and still be weak.",
+    "Source evaluation asks who produced the information, what expertise they have, what evidence they provide, what incentives may influence them, and what uncertainty...",
+    "The point is not to distrust everything.",
+    "It is to assign confidence in proportion to support.",
+    "Credibility is not only about status."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Type Safety Versus Runtime Trust",
+  "graphicAlt": "Draft visual summary for Type Safety Versus Runtime Trust",
+  "narration": "TypeScript type checking happens before the application runs. That is valuable, but it is not the same as runtime trust. A type declaration can say that a request has an email field, a role field, or a count field. It cannot prove that a JSON body, URL parameter, database record, local storage value, third-party response, message event, or environment variable actually has the expected value at runtime.\n\nDefensive TypeScript code treats external data as unknown first. unknown is useful because it forces code to narrow and validate before use. Boundary parsing should convert untrusted data into validated application types. After parsing, the rest of the code can work with a stronger type that represents a value the application has checked.\n\nUnsafe type escapes need care. any, unchecked type assertions, overly broad generics, and non-null assertions can silence the compiler at exactly the moment the team needs feedback. Sometimes an assertion is reasonable near a well-tested framework boundary, but it should be local, justified, and easy to review.\n\nSchema validation, parsing functions, discriminated unions, narrow types, and explicit conversion functions all help make trust transitions deliberate. The point is not to create busywork. The point is to separate what the outside world claims from what the application has verified. A TypeScript type is a promise made by code. Runtime validation is how outside data earns that promise.\n\nThis pattern should be consistent across the application. A route handler, worker event, configuration loader, and API client should all have a clear place where raw values become trusted values. When the boundary is hidden or skipped, later code may look safe because it has strong TypeScript types, while the actual runtime value has never been checked. Consistent boundary parsing makes reviews faster and makes tests easier to place for every input path.",
+  "narrationPoints": [
+    "TypeScript type checking happens before the application runs.",
+    "Defensive TypeScript code treats external data as unknown first.",
+    "Unsafe type escapes need care.",
+    "Schema validation, parsing functions, discriminated unions, narrow types, and explicit conversion functions all help make trust transitions...",
+    "This pattern should be consistent across the application."
+  ]
+};

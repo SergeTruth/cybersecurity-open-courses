@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.372
+File names and paths should always be treated as untrusted input.
+
+2
+00:00:04.372 --> 00:00:14.229
+A user-supplied filename may include unexpected characters, reserved names, long values, misleading extensions, or path traversal sequences.
+
+3
+00:00:14.229 --> 00:00:20.509
+Path traversal is the risk that input influences file access outside the intended directory.
+
+4
+00:00:20.509 --> 00:00:33.308
+Defensive code should generate safe storage names, resolve paths against an approved base directory, and verify that the final path remains within that directory before reading or writing.
+
+5
+00:00:33.308 --> 00:00:41.416
+Upload validation should include size limits, allowed content categories, and careful handling of declared metadata.
+
+6
+00:00:41.416 --> 00:00:48.253
+A content type header and a file extension are useful hints, but neither proves what the file contains.
+
+7
+00:00:48.253 --> 00:00:55.884
+Depending on the application, additional content inspection, scanning, or processing isolation may be needed.
+
+8
+00:00:55.884 --> 00:01:05.503
+Even when content is not immediately processed, metadata should be validated before it reaches logs, UI, search indexes, or workflow systems.
+
+9
+00:01:05.503 --> 00:01:08.364
+Structured input brings its own concerns.
+
+10
+00:01:08.364 --> 00:01:16.155
+JSON schema concepts can help define expected shapes, reject extra fields, and constrain nested objects or arrays.
+
+11
+00:01:16.155 --> 00:01:25.297
+XML parsing should be configured defensively at a high level, especially around external entity processing and resource consumption.
+
+12
+00:01:25.297 --> 00:01:38.810
+CSV files should be treated as structured but messy input: rows may be missing columns, fields may be quoted strangely, and spreadsheet-oriented content may need special care before export or display.
+
+13
+00:01:38.810 --> 00:01:42.865
+Unsafe deserialization assumptions are a recurring theme.
+
+14
+00:01:42.865 --> 00:01:48.747
+Deserializing data into an object does not prove it is safe, authorized, or meaningful.
+
+15
+00:01:48.747 --> 00:01:59.161
+The resulting object should still be validated, especially if it controls file access, commands, permissions, pricing, workflow state, or persistence.
+
+16
+00:01:59.161 --> 00:02:09.733
+The safer pattern is to parse into a limited DTO, validate the DTO, then map intentionally into domain objects or commands that express only allowed behavior.

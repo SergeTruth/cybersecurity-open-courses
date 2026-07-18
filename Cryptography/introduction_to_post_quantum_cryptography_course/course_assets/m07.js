@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Engineering and Operational Challenges",
+  "graphicAlt": "Instructional illustration for Engineering and Operational Challenges.",
+  "narration": "Post-quantum migration has real engineering consequences. Some algorithms use larger keys, larger signatures, or larger messages than teams are used to handling. That can affect bandwidth, storage, packet sizes, certificate chains, handshake behavior, logging volume, database columns, message queues, and embedded protocols. Even when the cryptography is correct, surrounding systems may assume older sizes or timing patterns and fail in unexpected ways.\n\nPerformance must be measured in the environment that matters. A developer workstation benchmark is useful, but it is not the same as a busy API gateway, a constrained device, a high-volume signing service, a hardware-backed key operation, or a remote site with limited bandwidth. Teams should test latency, CPU, memory, concurrency, certificate validation paths, key generation, signing throughput, and failure modes under realistic load.\n\nLegacy and embedded systems are often the hardest part. Industrial devices, network appliances, fielded products, long-lived firmware, and older operating systems may not support new algorithms quickly. Cloud and SaaS dependencies introduce another layer: customers may have to wait for provider support, review roadmap claims, update integrations, and verify that configuration options are actually available. Procurement and vendor management become part of the technical migration.\n\nOperations teams also need updated observability. Monitoring, alerts, asset inventory, vulnerability management, configuration review, and incident response playbooks may need to understand new protocol options and failure states. A strong program involves architecture, engineering, security, operations, procurement, compliance, and vendor management. PQC adoption is not just choosing an algorithm; it is making sure the whole system can run, be monitored, and be supported after the change.",
+  "narrationPoints": [
+    "Post-quantum migration has real engineering consequences.",
+    "Performance must be measured in the environment that matters.",
+    "Legacy and embedded systems are often the hardest part.",
+    "Operations teams also need updated observability."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Common C# Validation Failures",
+  "graphicAlt": "Blank placeholder image for Common C# Validation Failures.",
+  "narration": "One common failure is trusting client-side validation. Browser checks and frontend form rules improve usability, but clients can be bypassed, modified, or out of date. The server must validate as the authority. Another common failure is binding directly to persistence models. When an Entity Framework entity or database-facing model is exposed as an input model, clients may be able to set fields such as role, owner ID, tenant ID, status, or audit values that should be controlled by the server.\n\nOverposting, also called mass assignment, happens when user-supplied fields are copied into properties that should not be user-controlled. DTOs reduce this risk by defining exactly what the client may send for a specific operation. Mapping should be intentional rather than automatic for sensitive fields. Reviewers should pay close attention to object spread equivalents, generic update helpers, patch endpoints, and any code that copies request properties into persistence objects.\n\nValidation is one layer, not the whole defense. SQL injection should be addressed primarily with parameterized queries or safe ORM patterns, not by hoping validation rejected every dangerous string. Command injection risk should be addressed by avoiding shell execution when possible and by using safe process APIs and strict argument handling. Path traversal should be addressed with safe path resolution and directory containment checks, not filename filtering alone.\n\nBusiness logic validation gaps can be more damaging than simple format errors. A request can be well formed but still violate ownership, payment limits, workflow state, approval requirements, or tenant boundaries. Strong validation programs connect input checks, authorization checks, domain invariants, safe APIs, and tests. The result is not a single giant validator. It is a layered design where each part enforces the rules it is responsible for.",
+  "narrationPoints": [
+    "One common failure is trusting client-side validation.",
+    "Browser checks and frontend form rules improve usability, but clients can be bypassed, modified, or out of date.",
+    "The server must validate as the authority.",
+    "Another common failure is binding directly to persistence models.",
+    "When an Entity Framework entity or database-facing model is exposed as an input model, clients may be able to set fields such as role.",
+    "Overposting, also called mass assignment, happens when user-supplied fields are copied into properties that should not be user-controlled."
+  ]
+};

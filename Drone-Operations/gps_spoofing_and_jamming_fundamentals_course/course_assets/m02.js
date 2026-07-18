@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "How GNSS Supports Drone Operations",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "A drone can use G N S S position to stabilize over the ground, display location, navigate, record tracks, and support automated behavior. These capabilities make operation easier, but they also create dependencies that operators must understand.\n\nPosition hold compares the calculated location with the desired location and commands corrections. If the position solution becomes inaccurate, the aircraft may drift, correct in the wrong direction, or switch to a less automated mode depending on its design.\n\nReturn-to-home relies on a recorded home point, current position, route assumptions, altitude strategy, navigation sensors, and an available recovery area. A valid-looking map icon does not guarantee that every assumption remains correct.\n\nWaypoint missions and geofencing depend on position and stored map or rule data. Navigation anomalies can disrupt a route, pause a mission, trigger failsafes, or place the displayed path at odds with what the crew sees.\n\nFlight logs, imagery metadata, and timestamps may inherit satellite-derived data. A navigation problem can therefore affect later mapping, event reconstruction, geotagging, or evidence even when the aircraft lands safely.\n\nTiming dependency can be less visible than position dependency. If a system uses satellite time to align records, a bad time solution may create misleading event order even when the map still appears reasonable.\n\nOperators should know which functions require satellite navigation, what degraded modes look like, how the aircraft signals reduced confidence, and which manual skills and visual references remain available. Automation supports judgment; it does not replace it.",
+  "narrationPoints": [
+    "A drone can use G N S S position to stabilize over the ground, display location, navigate, record tracks, and support automated behavior.",
+    "These capabilities make operation easier, but they also create dependencies that operators must understand.",
+    "Position hold compares the calculated location with the desired location and commands corrections.",
+    "If the position solution becomes inaccurate, the aircraft may drift, correct in the wrong direction, or switch to a less automated mode depending on.",
+    "Return-to-home relies on a recorded home point, current position, route assumptions, altitude strategy, navigation sensors, and an available recovery area.",
+    "A valid-looking map icon does not guarantee that every assumption remains correct."
+  ]
+};

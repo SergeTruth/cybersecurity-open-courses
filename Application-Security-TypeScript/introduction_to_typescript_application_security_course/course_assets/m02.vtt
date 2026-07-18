@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.132
+TypeScript type checking happens before the application runs.
+
+2
+00:00:04.132 --> 00:00:07.729
+That is valuable, but it is not the same as runtime trust.
+
+3
+00:00:07.729 --> 00:00:13.468
+A type declaration can say that a request has an email field, a role field, or a count field.
+
+4
+00:00:13.468 --> 00:00:26.018
+It cannot prove that a JSON body, URL parameter, database record, local storage value, third-party response, message event, or environment variable actually has the expected value at runtime.
+
+5
+00:00:26.018 --> 00:00:30.303
+Defensive TypeScript code treats external data as unknown first.
+
+6
+00:00:30.303 --> 00:00:35.124
+unknown is useful because it forces code to narrow and validate before use.
+
+7
+00:00:35.124 --> 00:00:40.557
+Boundary parsing should convert untrusted data into validated application types.
+
+8
+00:00:40.557 --> 00:00:48.056
+After parsing, the rest of the code can work with a stronger type that represents a value the application has checked.
+
+9
+00:00:48.056 --> 00:00:50.046
+Unsafe type escapes need care.
+
+10
+00:00:50.046 --> 00:00:59.917
+any, unchecked type assertions, overly broad generics, and non-null assertions can silence the compiler at exactly the moment the team needs feedback.
+
+11
+00:00:59.917 --> 00:01:08.411
+Sometimes an assertion is reasonable near a well-tested framework boundary, but it should be local, justified, and easy to review.
+
+12
+00:01:08.411 --> 00:01:18.665
+Schema validation, parsing functions, discriminated unions, narrow types, and explicit conversion functions all help make trust transitions deliberate.
+
+13
+00:01:18.665 --> 00:01:20.961
+The point is not to create busywork.
+
+14
+00:01:20.961 --> 00:01:27.006
+The point is to separate what the outside world claims from what the application has verified.
+
+15
+00:01:27.006 --> 00:01:29.761
+A TypeScript type is a promise made by code.
+
+16
+00:01:29.761 --> 00:01:33.587
+Runtime validation is how outside data earns that promise.
+
+17
+00:01:33.587 --> 00:01:37.413
+This pattern should be consistent across the application.
+
+18
+00:01:37.413 --> 00:01:46.290
+A route handler, worker event, configuration loader, and API client should all have a clear place where raw values become trusted values.
+
+19
+00:01:46.290 --> 00:01:56.467
+When the boundary is hidden or skipped, later code may look safe because it has strong TypeScript types, while the actual runtime value has never been checked.
+
+20
+00:01:56.467 --> 00:02:03.125
+Consistent boundary parsing makes reviews faster and makes tests easier to place for every input path.

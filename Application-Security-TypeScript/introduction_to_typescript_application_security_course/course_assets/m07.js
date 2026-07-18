@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Dependencies, Build Configuration, and Supply Chain Hygiene",
+  "graphicAlt": "Draft visual summary for Dependencies, Build Configuration, and Supply Chain Hygiene",
+  "narration": "TypeScript applications often rely on large dependency trees. A small package choice can bring transitive dependencies, package scripts, build behavior, maintenance risk, and update obligations. Before adding a package, teams should ask who owns it, whether it is maintained, what it does during install or build, how often it changes, and whether the project already has an acceptable alternative.\n\nLockfiles and controlled versions are important because dependency resolution affects what code actually runs. Transitive dependencies matter too. A direct dependency may look simple while pulling in many other packages. Security review should include package scripts, generated artifacts, abandoned packages, vulnerability tracking, and the process for updating dependencies safely.\n\nBuild configuration is another security surface. TypeScript compiler settings, strictness, linting, unused code rules, bundler behavior, source maps, debug flags, environment-specific builds, and package metadata all affect what is shipped and how maintainable the application is. Build options can accidentally expose internals, include development-only behavior, or hide assumptions that should be reviewed.\n\nSecure defaults and repeatable builds help. Compiler and lint settings should reinforce safe patterns instead of normalizing unsafe casts or ignored errors. Build profiles should make environment differences explicit. Dependency and build changes should be reviewed, documented, and tested so security-relevant choices are visible rather than hidden in tooling.\n\nSupply chain hygiene is also an ownership problem. A team should know who reviews new packages, who responds to dependency alerts, who updates lockfiles, and who decides when a risky dependency should be replaced. Without clear ownership, dependency risk can quietly become nobody's job. With clear ownership, updates become planned maintenance rather than surprise work during a release.",
+  "narrationPoints": [
+    "TypeScript applications often rely on large dependency trees.",
+    "Lockfiles and controlled versions are important because dependency resolution affects what code actually runs.",
+    "Build configuration is another security surface.",
+    "Secure defaults and repeatable builds help.",
+    "Supply chain hygiene is also an ownership problem."
+  ]
+};

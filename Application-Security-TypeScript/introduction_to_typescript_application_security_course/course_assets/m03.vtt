@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.765
+Secure TypeScript applications need data models that describe more than property names.
+
+2
+00:00:05.765 --> 00:00:13.654
+A request model, response model, DTO, domain object, or configuration object should make important assumptions visible.
+
+3
+00:00:13.654 --> 00:00:16.688
+Which fields are required? Which are optional?
+
+4
+00:00:16.688 --> 00:00:20.557
+Which values are allowed? Which strings have length limits?
+
+5
+00:00:20.557 --> 00:00:24.426
+Which numbers have bounds? Which dates need normalization?
+
+6
+00:00:24.426 --> 00:00:29.129
+Validation should happen close to the boundary and before sensitive use.
+
+7
+00:00:29.129 --> 00:00:39.141
+Request data should be checked before authorization decisions, database queries, file operations, workflow state changes, or downstream service calls.
+
+8
+00:00:39.141 --> 00:00:46.424
+A client-controlled field should not become trusted simply because the frontend was also written in TypeScript.
+
+9
+00:00:46.424 --> 00:00:49.610
+The server still needs to verify what it receives.
+
+10
+00:00:49.610 --> 00:00:52.340
+There are different layers of validation.
+
+11
+00:00:52.340 --> 00:00:56.133
+Shape validation checks whether the structure is present.
+
+12
+00:00:56.133 --> 00:01:05.843
+Meaning validation checks whether values make sense: a status is allowed, a date is valid, an array is not too large, or a string is in the expected format.
+
+13
+00:01:05.843 --> 00:01:13.201
+Permission validation asks whether the current user or system context is allowed to use that value for this action.
+
+14
+00:01:13.201 --> 00:01:16.235
+Default values and normalization also matter.
+
+15
+00:01:16.235 --> 00:01:23.062
+Trimming, case handling, date parsing, enum conversion, and empty-field handling should be consistent.
+
+16
+00:01:23.062 --> 00:01:30.799
+Validation errors should be predictable enough for callers to respond, but they should not reveal sensitive internals.
+
+17
+00:01:30.799 --> 00:01:39.143
+Good data models preserve application invariants by rejecting or normalizing data before it reaches code that assumes it is safe.
+
+18
+00:01:39.143 --> 00:01:43.619
+Validation should also be connected to the domain, not only to syntax.
+
+19
+00:01:43.619 --> 00:01:47.563
+A number can be a number and still be outside the allowed range.
+
+20
+00:01:47.563 --> 00:01:51.887
+A string can be present and still be too long for a downstream system.
+
+21
+00:01:51.887 --> 00:01:57.349
+An identifier can have the right format and still belong to a different user or tenant.
+
+22
+00:01:57.349 --> 00:02:04.327
+Secure data modeling keeps those distinctions visible across handlers, services, and storage boundaries.

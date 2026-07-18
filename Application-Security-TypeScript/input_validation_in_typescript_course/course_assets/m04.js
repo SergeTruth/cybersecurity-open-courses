@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Schema Validation Patterns",
+  "graphicAlt": "Blank placeholder image for Schema Validation Patterns.",
+  "narration": "Schema validation gives teams a repeatable way to describe runtime expectations. In TypeScript projects, common choices include Zod, Joi, Yup, and Ajv with JSON Schema. The best choice depends on the application, the ecosystem, and whether schemas need to be shared with non-TypeScript services. The important engineering decision is not the brand of library; it is having a consistent validation pattern that is easy to review, test, and use at every important boundary.\n\nGood schema use is more than checking that a field exists. It should distinguish parsing from validating. Parsing takes an unknown input and returns either a known, typed result or a clear failure. Along the way, the schema may normalize values, apply defaults, reject extra properties, coerce carefully chosen primitives, or preserve strictness where coercion would be unsafe. The output should be a shape that downstream code can trust without reinterpreting the original raw payload.\n\nOne advantage of TypeScript-oriented schema tools is that they can infer compile-time types from runtime schemas. That alignment reduces duplicate definitions and helps prevent the type from promising something the validator does not enforce. Shared schemas can also help client and server code agree on request and response shapes. Even then, the server must validate independently because client code can be bypassed, modified, or pinned to an older version.\n\nSchema drift is the quiet failure mode. It happens when TypeScript interfaces, runtime validators, API documentation, tests, and business expectations move out of sync. Teams reduce drift by placing schemas close to the boundary they protect, deriving types from schemas when practical, reviewing validation changes with API changes, and testing invalid inputs as deliberately as valid ones. The goal is a single defensible path from raw input to trusted data.",
+  "narrationPoints": [
+    "Schema validation gives teams a repeatable way to describe runtime expectations.",
+    "In TypeScript projects, common choices include Zod, Joi, Yup, and Ajv with JSON Schema.",
+    "The best choice depends on the application, the ecosystem, and whether schemas need to be shared with non-TypeScript services.",
+    "The important engineering decision is not the brand of library; it is having a consistent validation pattern that is easy to review, test, and.",
+    "Good schema use is more than checking that a field exists.",
+    "It should distinguish parsing from validating."
+  ]
+};

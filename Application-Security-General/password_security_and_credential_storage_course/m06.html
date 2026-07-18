@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credential Storage Architecture | Password Security and Credential Storage</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="password_security_and_credential_storage">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="6"
+        data-total="10"
+        data-audio="m06"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta">Password Security and Credential Storage</p>
+        <h1 id="module-title">Credential Storage Architecture</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <figure class="card graphic-card">
+        <img
+          class="module-graphic"
+          src="course_assets/m06.png"
+          alt="Blank placeholder image for Credential Storage Architecture."
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+        >
+      </figure>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m05.html">Previous</a>
+        <a id="next-module" class="btn" href="m07.html">Next</a>
+      </nav>
+
+      <section class="card narration-card" aria-labelledby="narration-title">
+        <h2 id="narration-title">Narration</h2>
+        <div class="narration-text">
+          <p>Credential storage design starts with the user table or identity store. The system should store a password verifier, not the password itself. Useful fields often include the encoded password hash, algorithm identifier, parameter metadata, version information, timestamps, and account state needed for authentication workflows. The goal is to store enough information to verify and migrate credentials without storing unnecessary credential material.</p>
+          <p>Version metadata supports migration. Over time, teams may move from one algorithm to another or increase cost parameters. Rehashing on login is a common strategy: after a successful authentication, the system detects that the stored verifier uses older parameters and replaces it with a new verifier generated from the presented password. This allows gradual migration without forcing every user through a reset on the same day.</p>
+          <p>Credential databases and backups should be protected as sensitive assets. Access should be limited to the services and administrators that truly need it. Backups should receive the same or stronger protection as the primary store because an attacker with old hashes can still attempt offline guessing. Analytics exports, support tools, and reporting queries should avoid copying credential fields into secondary systems.</p>
+          <p>Design should assume compromise is possible. If the database is stolen, unique salts and strong password hashing slow offline attacks. If the application secret is also exposed, pepper-based protections may be lost. If logs contain plaintext passwords, hashing no longer helps those users. Credential storage architecture is therefore a layered design: minimize stored material, protect access, support migration, and plan for breach response.</p>
+        </div>
+      </section>
+      </section>
+    </div>
+  </main>
+
+  <script id="course-modules-data" type="application/json">
+    [
+  {
+    "label": "Module 1: Why Password Security Still Matters",
+    "href": "m01.html"
+  },
+  {
+    "label": "Module 2: Password Handling Principles",
+    "href": "m02.html"
+  },
+  {
+    "label": "Module 3: Password Hashing Fundamentals",
+    "href": "m03.html"
+  },
+  {
+    "label": "Module 4: Modern Password Hashing Algorithms",
+    "href": "m04.html"
+  },
+  {
+    "label": "Module 5: Salts, Peppers, and Secret Management",
+    "href": "m05.html"
+  },
+  {
+    "label": "Module 6: Credential Storage Architecture",
+    "href": "m06.html"
+  },
+  {
+    "label": "Module 7: Authentication Flow Defenses",
+    "href": "m07.html"
+  },
+  {
+    "label": "Module 8: Testing, Review, and Operations",
+    "href": "m08.html"
+  },
+  {
+    "label": "Module 9: Course Summary",
+    "href": "m09.html"
+  },
+  {
+    "label": "Final Quiz",
+    "href": "m10.html"
+  }
+]
+  </script>
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="navigation.js"></script>
+  <script src="audio-controls.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

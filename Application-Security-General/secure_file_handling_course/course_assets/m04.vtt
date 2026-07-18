@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.768
+Storage location matters.
+
+2
+00:00:01.768 --> 00:00:11.071
+Sensitive uploads should often be stored outside the web root or in private object storage so they cannot be fetched directly by guessing a path.
+
+3
+00:00:11.071 --> 00:00:16.145
+Public storage should be reserved for files intentionally meant to be public.
+
+4
+00:00:16.145 --> 00:00:23.986
+Even then, publication should be a deliberate step, not the default result of receiving a file from a user or integration.
+
+5
+00:00:23.986 --> 00:00:30.290
+Separating upload, processing, quarantine, and published areas reduces accidental exposure.
+
+6
+00:00:30.290 --> 00:00:34.749
+An uploaded file can land in an intake area with limited permissions.
+
+7
+00:00:34.749 --> 00:00:39.285
+A scanner or processor can move accepted files into a processing area.
+
+8
+00:00:39.285 --> 00:00:42.360
+Files awaiting review can remain quarantined.
+
+9
+00:00:42.360 --> 00:00:47.204
+Published files can be placed in an area designed for controlled download.
+
+10
+00:00:47.204 --> 00:00:52.508
+This separation lets permissions and monitoring match the file's current state.
+
+11
+00:00:52.508 --> 00:00:55.506
+Least-privilege permissions are essential.
+
+12
+00:00:55.506 --> 00:01:01.964
+The web application may need write access to an upload area, but it may not need execute permissions.
+
+13
+00:01:01.964 --> 00:01:10.805
+A processing worker may need read access to intake files and write access to output files, but not broad access to every tenant's storage.
+
+14
+00:01:10.805 --> 00:01:20.492
+Cloud object storage policies should clearly distinguish private buckets, public buckets, service identities, and human administrative access.
+
+15
+00:01:20.492 --> 00:01:25.335
+Tenant separation and access control should be built into storage design.
+
+16
+00:01:25.335 --> 00:01:29.410
+Do not let a client-supplied path decide where an object lands.
+
+17
+00:01:29.410 --> 00:01:33.638
+Do not rely on predictable file names as the access control model.
+
+18
+00:01:33.638 --> 00:01:49.168
+Store server-controlled identifiers, ownership metadata, tenant context, classification, processing state, and retention information so that every later download, share, or delete operation can be authorized against trusted data.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.300
+Before planning a migration, teams need to understand what cryptography is doing in each place.
+
+2
+00:00:06.300 --> 00:00:13.378
+Key establishment is about helping two parties arrive at shared secret material over an untrusted network.
+
+3
+00:00:13.378 --> 00:00:17.967
+A key encapsulation mechanism, or KEM, is one way to support that role.
+
+4
+00:00:17.967 --> 00:00:31.267
+Conceptually, one party creates protected key material that another party can recover with the right private information, allowing both sides to derive a shared secret for later symmetric encryption.
+
+5
+00:00:31.267 --> 00:00:34.067
+Digital signatures play a different role.
+
+6
+00:00:34.067 --> 00:00:42.467
+A signature lets a verifier check that data was signed by the holder of a private key and that the signed data has not been modified.
+
+7
+00:00:42.467 --> 00:00:54.912
+That supports authentication, integrity, software update trust, code signing, certificate authorities, secure boot chains, identity tokens, document signing, and device enrollment.
+
+8
+00:00:54.912 --> 00:00:58.878
+Signatures do not automatically provide confidentiality.
+
+9
+00:00:58.878 --> 00:01:03.078
+They answer questions about origin and integrity, not secrecy.
+
+10
+00:01:03.078 --> 00:01:07.590
+These roles appear in many systems that practitioners use every day.
+
+11
+00:01:07.590 --> 00:01:12.878
+TLS uses key establishment and authentication to protect web sessions and APIs.
+
+12
+00:01:12.878 --> 00:01:16.690
+VPNs and SSH use public-key mechanisms for remote access.
+
+13
+00:01:16.690 --> 00:01:20.034
+Software updates and packages rely on signatures.
+
+14
+00:01:20.034 --> 00:01:22.601
+Certificates bind keys to identities.
+
+15
+00:01:22.601 --> 00:01:33.101
+Secure email, device authentication, identity platforms, and firmware signing all depend on cryptographic roles that may have to change at different speeds.
+
+16
+00:01:33.101 --> 00:01:38.623
+Replacing one algorithm is therefore rarely a simple find-and-replace operation.
+
+17
+00:01:38.623 --> 00:01:44.923
+A KEM change can affect protocol negotiation, message size, performance, and library support.
+
+18
+00:01:44.923 --> 00:01:54.412
+A signature change can affect certificate formats, chain sizes, hardware security module behavior, storage, logging, and verification code.
+
+19
+00:01:54.412 --> 00:01:59.779
+The lesson is practical: identify the role first, then choose the migration path.
+
+20
+00:01:59.779 --> 00:02:06.857
+A team that treats all cryptography as one category will miss dependencies and create avoidable surprises.

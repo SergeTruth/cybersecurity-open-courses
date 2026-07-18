@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:00.979
+A Node.
+
+2
+00:00:00.979 --> 00:00:08.074
+js application's attack surface begins where untrusted data crosses into trusted application logic.
+
+3
+00:00:08.074 --> 00:00:23.651
+Request handlers, routes, controllers, middleware, body parsers, file upload handlers, cookies, headers, query strings, route parameters, and API payloads all shape what the application believes about the outside world.
+
+4
+00:00:23.651 --> 00:00:30.583
+Each boundary deserves an explicit decision about validation, authorization, and error handling.
+
+5
+00:00:30.583 --> 00:00:33.438
+The runtime surface is broader than HTTP.
+
+6
+00:00:33.438 --> 00:00:40.533
+Environment variables may contain secrets, feature flags, URLs, and deployment-specific behavior.
+
+7
+00:00:40.533 --> 00:00:47.710
+File system access can expose paths, temporary files, uploads, generated reports, and configuration.
+
+8
+00:00:47.710 --> 00:00:55.784
+Child processes can turn a small input-handling mistake into a system-level risk if command construction is unsafe.
+
+9
+00:00:55.784 --> 00:01:01.819
+Network calls can expose internal services when outbound requests are not controlled.
+
+10
+00:01:01.819 --> 00:01:06.468
+Data stores and third-party integrations also extend the surface.
+
+11
+00:01:06.468 --> 00:01:20.658
+Database queries, object storage, queues, caches, background jobs, webhooks, payment APIs, identity providers, and notification systems all receive or produce data that may affect security decisions.
+
+12
+00:01:20.658 --> 00:01:27.590
+A background job may run outside the normal request path but still process user-controlled content.
+
+13
+00:01:27.590 --> 00:01:33.544
+Logs may look passive, yet they can expose sensitive information if treated casually.
+
+14
+00:01:33.544 --> 00:01:37.948
+A useful mental model is to trace every path from input to effect.
+
+15
+00:01:37.948 --> 00:01:39.498
+Where does data enter?
+
+16
+00:01:39.498 --> 00:01:40.884
+What transforms it?
+
+17
+00:01:40.884 --> 00:01:42.760
+What policy checks happen?
+
+18
+00:01:42.760 --> 00:01:44.554
+What service receives it?
+
+19
+00:01:44.554 --> 00:01:45.614
+What is logged?
+
+20
+00:01:45.614 --> 00:01:47.327
+What happens on failure?
+
+21
+00:01:47.327 --> 00:01:50.344
+This view keeps the conversation grounded.
+
+22
+00:01:50.344 --> 00:01:53.851
+Security is not only about one route or one library.
+
+23
+00:01:53.851 --> 00:01:57.277
+It is about how trust moves through the whole Node.
+
+24
+00:01:57.277 --> 00:01:58.255
+js service.

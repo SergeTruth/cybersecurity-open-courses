@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.102
+The main lesson is simple: TypeScript helps structure code, but runtime validation is still required for external input.
+
+2
+00:00:08.102 --> 00:00:15.732
+Types improve the developer experience and catch many mistakes before deployment, yet they disappear at runtime.
+
+3
+00:00:15.732 --> 00:00:25.172
+Any value that crosses a trust boundary should be treated as unknown until the application has checked its shape, format, limits, and context.
+
+4
+00:00:25.172 --> 00:00:30.678
+That mindset prevents static types from being confused with security validation.
+
+5
+00:00:30.678 --> 00:00:34.296
+Strong validation starts by identifying boundaries.
+
+6
+00:00:34.296 --> 00:00:48.928
+Request bodies, parameters, headers, cookies, browser storage, WebSocket messages, postMessage events, environment variables, configuration files, queues, files, and SDK responses can all carry surprising data.
+
+7
+00:00:48.928 --> 00:00:55.614
+At those boundaries, schemas and guards should parse unknown values into trusted internal objects.
+
+8
+00:00:55.614 --> 00:01:04.660
+Libraries such as Zod, Joi, Yup, and Ajv can help, especially when teams keep schemas, inferred types, tests, and API contracts aligned.
+
+9
+00:01:04.660 --> 00:01:09.773
+Good validation also distinguishes transport shape from business meaning.
+
+10
+00:01:09.773 --> 00:01:17.482
+A payload may be structurally valid while still violating ownership, workflow, date, money, or cross-field rules.
+
+11
+00:01:17.482 --> 00:01:22.123
+Transport validators should reject malformed and unexpected input.
+
+12
+00:01:22.123 --> 00:01:28.258
+Domain validation should protect invariants that must remain true inside the application.
+
+13
+00:01:28.258 --> 00:01:37.226
+That separation makes the code easier to reason about and reduces the chance that an API convenience becomes a business logic weakness.
+
+14
+00:01:37.226 --> 00:01:39.743
+Finally, validation needs evidence.
+
+15
+00:01:39.743 --> 00:01:50.362
+Negative tests, boundary tests, malformed input tests, contract tests, and focused code review questions all help confirm that the rules work under pressure.
+
+16
+00:01:50.362 --> 00:01:57.127
+Safe error responses and careful logging make failures useful without exposing unnecessary detail.
+
+17
+00:01:57.127 --> 00:02:03.106
+In practical TypeScript engineering, the goal is not to validate everything everywhere.
+
+18
+00:02:03.106 --> 00:02:10.342
+The goal is to make runtime data trustworthy before it reaches the typed application logic that matters most.

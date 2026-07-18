@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.762
+One common failure is trusting client-side validation.
+
+2
+00:00:03.762 --> 00:00:11.207
+Browser checks and frontend form rules improve usability, but clients can be bypassed, modified, or out of date.
+
+3
+00:00:11.207 --> 00:00:14.028
+The server must validate as the authority.
+
+4
+00:00:14.028 --> 00:00:18.496
+Another common failure is binding directly to persistence models.
+
+5
+00:00:18.496 --> 00:00:32.759
+When an Entity Framework entity or database-facing model is exposed as an input model, clients may be able to set fields such as role, owner ID, tenant ID, status, or audit values that should be controlled by the server.
+
+6
+00:00:32.759 --> 00:00:42.242
+Overposting, also called mass assignment, happens when user-supplied fields are copied into properties that should not be user-controlled.
+
+7
+00:00:42.242 --> 00:00:48.277
+DTOs reduce this risk by defining exactly what the client may send for a specific operation.
+
+8
+00:00:48.277 --> 00:00:53.292
+Mapping should be intentional rather than automatic for sensitive fields.
+
+9
+00:00:53.292 --> 00:01:05.361
+Reviewers should pay close attention to object spread equivalents, generic update helpers, patch endpoints, and any code that copies request properties into persistence objects.
+
+10
+00:01:05.361 --> 00:01:08.496
+Validation is one layer, not the whole defense.
+
+11
+00:01:08.496 --> 00:01:18.684
+SQL injection should be addressed primarily with parameterized queries or safe ORM patterns, not by hoping validation rejected every dangerous string.
+
+12
+00:01:18.684 --> 00:01:28.402
+Command injection risk should be addressed by avoiding shell execution when possible and by using safe process APIs and strict argument handling.
+
+13
+00:01:28.402 --> 00:01:36.867
+Path traversal should be addressed with safe path resolution and directory containment checks, not filename filtering alone.
+
+14
+00:01:36.867 --> 00:01:42.117
+Business logic validation gaps can be more damaging than simple format errors.
+
+15
+00:01:42.117 --> 00:01:51.208
+A request can be well formed but still violate ownership, payment limits, workflow state, approval requirements, or tenant boundaries.
+
+16
+00:01:51.208 --> 00:01:58.889
+Strong validation programs connect input checks, authorization checks, domain invariants, safe APIs, and tests.
+
+17
+00:01:58.889 --> 00:02:01.710
+The result is not a single giant validator.
+
+18
+00:02:01.710 --> 00:02:06.883
+It is a layered design where each part enforces the rules it is responsible for.

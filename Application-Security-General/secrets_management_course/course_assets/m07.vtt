@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.875
+Secrets need lifecycle operations after they are created.
+
+2
+00:00:03.875 --> 00:00:07.518
+Rotation means replacing an old secret with a new value.
+
+3
+00:00:07.518 --> 00:00:11.548
+Expiration means a secret stops working after a defined time.
+
+4
+00:00:11.548 --> 00:00:15.114
+Revocation means invalidating a secret immediately,
+
+5
+00:00:15.114 --> 00:00:19.764
+often during incident response or when access is no longer authorized.
+
+6
+00:00:19.764 --> 00:00:26.895
+These operations are related, but they are not identical, and mature teams understand when each one applies.
+
+7
+00:00:26.895 --> 00:00:29.840
+Planned rotation is a maintenance activity.
+
+8
+00:00:29.840 --> 00:00:34.878
+A team may rotate database passwords, API keys, certificates, signing keys,
+
+9
+00:00:34.878 --> 00:00:39.295
+or service account credentials on a schedule or after a role change.
+
+10
+00:00:39.295 --> 00:00:42.628
+Planned rotation should be documented and tested.
+
+11
+00:00:42.628 --> 00:00:49.216
+The procedure should identify dependencies, update the secret manager, roll applications safely,
+
+12
+00:00:49.216 --> 00:00:55.649
+verify service health, and remove the old value only after dependent systems are using the new one.
+
+13
+00:00:55.649 --> 00:00:57.897
+Emergency rotation is different.
+
+14
+00:00:57.897 --> 00:01:04.640
+If exposure is suspected, the first priority is to reduce risk while keeping critical services stable.
+
+15
+00:01:04.640 --> 00:01:12.313
+The safe response is to confirm scope, revoke or rotate the exposed value, update affected services, check for reuse,
+
+16
+00:01:12.313 --> 00:01:18.591
+review logs for unusual access, notify responsible stakeholders, and document what happened.
+
+17
+00:01:18.591 --> 00:01:25.256
+Do not spend time debating whether the exposed value was probably used before you make it stop working.
+
+18
+00:01:25.256 --> 00:01:28.822
+Dual-secret rollout is a common reliability pattern.
+
+19
+00:01:28.822 --> 00:01:35.022
+A service may temporarily accept both an old and a new secret while clients move to the new value.
+
+20
+00:01:35.022 --> 00:01:38.122
+After verification, the old value is disabled.
+
+21
+00:01:38.122 --> 00:01:42.075
+This pattern can reduce downtime, but it must be time-bound.
+
+22
+00:01:42.075 --> 00:01:47.113
+If both secrets remain valid indefinitely, the rotation did not reduce risk;
+
+23
+00:01:47.113 --> 00:01:50.136
+it doubled the number of working credentials.
+
+24
+00:01:50.136 --> 00:01:55.096
+Rotation can break systems when ownership and dependency mapping are weak.
+
+25
+00:01:55.096 --> 00:02:00.367
+A secret might be used by a scheduled job, a backup process, a legacy integration,
+
+26
+00:02:00.367 --> 00:02:05.404
+or a manual runbook that is not obvious from the main application repository.
+
+27
+00:02:05.404 --> 00:02:10.210
+That is why inventory, audit logs, and dependency documentation matter.
+
+28
+00:02:10.210 --> 00:02:15.480
+The better a team understands where a secret is used, the safer rotation becomes.
+
+29
+00:02:15.480 --> 00:02:19.743
+The best systems make rotation routine rather than frightening.
+
+30
+00:02:19.743 --> 00:02:27.804
+Short-lived credentials, managed identity, automated certificate renewal, versioned secret managers, health checks,
+
+31
+00:02:27.804 --> 00:02:31.214
+and rollback-aware deployment practices all help.
+
+32
+00:02:31.214 --> 00:02:33.772
+Rotation is not only about compliance.
+
+33
+00:02:33.772 --> 00:02:35.632
+It is a recovery muscle.
+
+34
+00:02:35.632 --> 00:02:42.297
+A team that can rotate calmly during normal operations is better prepared when a real exposure occurs.

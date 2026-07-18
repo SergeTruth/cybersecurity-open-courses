@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Test and Debug with Evidence",
+  "graphicAlt": "A debugging loop connecting failing test output, logs, a reproducible example, a focused code change, and a new regression test.",
+  "narration": "Tests convert expectations into executable evidence. A generated feature is not complete because the assistant says it is complete, and it is not complete merely because one demonstration works. A demo shows that one path succeeded once. Engineering validation asks what else could happen and how the software behaves when conditions change.\n\nThe right validation depends on the change. Static analysis checks source code without running it. Formatting and linting catch style and common mistakes. Unit tests exercise small pieces of logic. Integration tests check how components work together. Type checking, build validation, manual behavior checks, logs, and runtime observations all reveal different kinds of evidence. A parser needs malformed-input tests. A user interface needs keyboard and accessibility checks. A database change may need migration and rollback testing.\n\nWhen something fails, give the assistant evidence rather than frustration. Useful debugging context includes the exact command that was run, the relevant error message, the expected behavior, the observed behavior, the smallest reproducible input, recent code changes, and environment details such as operating system or dependency versions. \"It still does not work\" leaves too many possibilities open.\n\nReproduce the failure before changing code. If the problem cannot be repeated, you may be solving the wrong issue or treating a symptom as the cause. Once the failure is understood, create a regression test if the project allows it. A regression test fails for the original bug and passes after the fix, preserving the lesson learned for future changes.\n\nEvidence does not make judgment unnecessary. Tests can be incomplete, stale, or even wrong. Passing tests show that tested conditions passed; they do not prove every requirement, security property, or operating environment is correct. The disciplined workflow is to make expectations executable where practical, debug from observed facts, and expand the evidence when uncertainty remains.",
+  "narrationPoints": [
+    "Completion claims require evidence.",
+    "Different changes need different validation methods.",
+    "Exact commands, errors, and reproducible inputs improve debugging.",
+    "Failures should be reproduced before code is changed.",
+    "Regression tests preserve fixes.",
+    "Passing tests do not prove untested behavior."
+  ]
+};

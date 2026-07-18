@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.555
+Transport validation answers the question, can this payload be understood as the request shape for this endpoint.
+
+2
+00:00:07.555 --> 00:00:14.332
+Domain validation answers a deeper question: does this request make sense for the business operation.
+
+3
+00:00:14.332 --> 00:00:25.003
+Required fields, optional fields, enums, nested objects, arrays, IDs, dates, and monetary values all need structural checks, but structure alone is not enough.
+
+4
+00:00:25.003 --> 00:00:29.053
+A value can be well formed and still violate an important rule.
+
+5
+00:00:29.053 --> 00:00:31.779
+Consider dates, money, and identifiers.
+
+6
+00:00:31.779 --> 00:00:37.154
+A date string may parse correctly but represent a time outside the allowed window.
+
+7
+00:00:37.154 --> 00:00:44.631
+A monetary amount may be numeric but have too many decimal places, use the wrong currency, or exceed a policy limit.
+
+8
+00:00:44.631 --> 00:00:49.850
+An ID may match a UUID format but refer to a record the user is not allowed to touch.
+
+9
+00:00:49.850 --> 00:00:59.975
+Validation should separate format checks from authorization and business checks while making sure all of them occur before the operation changes state.
+
+10
+00:00:59.975 --> 00:01:03.169
+Cross-field validation is where many bugs hide.
+
+11
+00:01:03.169 --> 00:01:05.973
+A start date should come before an end date.
+
+12
+00:01:05.973 --> 00:01:09.634
+A discount should be compatible with the selected plan.
+
+13
+00:01:09.634 --> 00:01:13.217
+A shipping method should be valid for the destination.
+
+14
+00:01:13.217 --> 00:01:21.084
+An array should not exceed a safe size, contain duplicates when uniqueness is required, or mix incompatible item types.
+
+15
+00:01:21.084 --> 00:01:30.508
+These rules usually belong near the domain service or domain object because they describe what the operation means, not just how JSON is shaped.
+
+16
+00:01:30.508 --> 00:01:38.842
+A strong TypeScript design uses validated transport objects as inputs to domain construction, not as the domain model itself.
+
+17
+00:01:38.842 --> 00:01:42.971
+The transport layer can reject malformed or unexpected input.
+
+18
+00:01:42.971 --> 00:01:48.812
+The domain layer can enforce invariants that must always be true inside the application.
+
+19
+00:01:48.812 --> 00:01:53.408
+Keeping those concerns separate makes code easier to test and review.
+
+20
+00:01:53.408 --> 00:02:02.755
+It also helps prevent a change in an API contract from accidentally weakening a core rule about money, identity, ownership, or workflow state.

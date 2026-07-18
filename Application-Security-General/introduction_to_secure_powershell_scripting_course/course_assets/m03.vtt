@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:13.077
+PowerShell scripts receive input from many places: parameters, files, environment variables, pipeline input, scheduled task arguments, configuration data, and external service responses.
+
+2
+00:00:13.077 --> 00:00:16.010
+Internal does not automatically mean safe.
+
+3
+00:00:16.010 --> 00:00:23.222
+A script may be called by another automation job, a help desk technician, a CI pipeline, or a monitoring tool.
+
+4
+00:00:23.222 --> 00:00:30.038
+Defensive scripts treat input as untrusted until it is checked against the script's actual contract.
+
+5
+00:00:30.038 --> 00:00:34.635
+Parameter validation attributes are a useful first line of defense.
+
+6
+00:00:34.635 --> 00:00:38.122
+ValidateSet restricts a parameter to known values.
+
+7
+00:00:38.122 --> 00:00:43.512
+ValidatePattern can enforce a format when a regular expression is appropriate.
+
+8
+00:00:43.512 --> 00:00:46.523
+ValidateRange can constrain numeric input.
+
+9
+00:00:46.523 --> 00:00:50.169
+Mandatory parameters make required values explicit.
+
+10
+00:00:50.169 --> 00:00:56.113
+Type constraints help PowerShell convert and reject values before the script body runs.
+
+11
+00:00:56.113 --> 00:01:00.552
+These features make valid use easier and invalid use more obvious.
+
+12
+00:01:00.552 --> 00:01:02.058
+Safe defaults matter.
+
+13
+00:01:02.058 --> 00:01:10.934
+A script that defaults to every server, every mailbox, every tenant, or every directory can do too much when a caller forgets a filter.
+
+14
+00:01:10.934 --> 00:01:18.860
+Prefer narrow defaults, explicit confirmation for broad operations, and clear parameter names that describe scope.
+
+15
+00:01:18.860 --> 00:01:28.450
+Where possible, use ShouldProcess and WhatIf support for scripts that make changes so operators can preview intended work before applying it.
+
+16
+00:01:28.450 --> 00:01:32.571
+Avoid assumptions about interactive users or trusted input.
+
+17
+00:01:32.571 --> 00:01:38.436
+Automation may run unattended, receive pipeline objects, or consume generated files.
+
+18
+00:01:38.436 --> 00:01:52.940
+Validate not only type and format, but also meaning: does the user name exist, is the path inside the expected location, is the target environment allowed, and is the requested action appropriate for the caller's role.
+
+19
+00:01:52.940 --> 00:01:59.281
+Strong parameters turn scripts from loose command wrappers into safer administrative tools.

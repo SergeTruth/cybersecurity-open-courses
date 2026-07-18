@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Runtime Types Versus Compile-Time Types",
+  "graphicAlt": "Blank placeholder image for Runtime Types Versus Compile-Time Types.",
+  "narration": "Type annotations, interfaces, and type aliases describe what a value should look like to the TypeScript compiler. They improve autocomplete, refactoring, and static analysis, but they do not inspect values when the program runs. This distinction matters most at trust boundaries. A function parameter typed as CreateUserRequest is only safe when every caller is already trusted or when the value has already passed a runtime validation step before it reached that function.\n\nFor external data, unknown is usually a safer starting point than any. The unknown type forces the code to prove something before using the value. You cannot directly access properties, call methods, or pass the value into typed business logic until narrowing occurs. By contrast, any tells the compiler to stop helping. It can let a malformed object move through the application looking legitimate until a runtime error or security issue appears much later.\n\nType guards and narrowing are useful tools when they are backed by real checks. A guard can confirm that a value is an object, that a property is present, that a string matches an expected format, or that an enum value is one of the allowed options. Once the guard succeeds, TypeScript can narrow the type and make the rest of the code easier to write. The important part is that the guard must actually validate the runtime conditions the program depends on.\n\nType assertions are different. Writing a value as User tells the compiler how to treat that value, but it does not validate the data. Assertions can be appropriate at well-understood boundaries, but they are dangerous when used to silence uncertainty at an input boundary. The safer pattern is to accept external values as unknown, validate or parse them with explicit runtime logic, and only then construct trusted domain objects that typed application code can rely on.",
+  "narrationPoints": [
+    "Type annotations, interfaces, and type aliases describe what a value should look like to the TypeScript compiler.",
+    "They improve autocomplete, refactoring, and static analysis, but they do not inspect values when the program runs.",
+    "This distinction matters most at trust boundaries.",
+    "A function parameter typed as CreateUserRequest is only safe when every caller is already trusted or when the value has already passed a runtime.",
+    "For external data, unknown is usually a safer starting point than any.",
+    "The unknown type forces the code to prove something before using the value."
+  ]
+};

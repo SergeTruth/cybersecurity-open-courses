@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.377
+A TLS handshake is the setup conversation that lets two endpoints agree on how to protect the session.
+
+2
+00:00:06.377 --> 00:00:17.557
+At a high level, the client and server negotiate protocol options, authenticate the server, establish shared session keys, and then use those keys to protect application data.
+
+3
+00:00:17.557 --> 00:00:31.962
+The details vary by TLS version and configuration, but the practical roles are stable: authentication answers who the peer is, key establishment creates shared key material, and symmetric protection carries the bulk traffic.
+
+4
+00:00:31.962 --> 00:00:37.140
+Server authentication usually depends on certificates and certificate chains.
+
+5
+00:00:37.140 --> 00:00:44.868
+A certificate binds a public key to a name or identity, and the client evaluates a chain of trust back to a trusted authority.
+
+6
+00:00:44.868 --> 00:00:57.923
+That chain may involve certificate authorities, intermediate certificates, operating system trust stores, browser policy, enterprise inspection devices, and application-specific trust decisions.
+
+7
+00:00:57.923 --> 00:01:04.150
+Changing signature algorithms or certificate formats can therefore affect more than one server.
+
+8
+00:01:04.150 --> 00:01:07.151
+Key establishment solves a different problem.
+
+9
+00:01:07.151 --> 00:01:11.728
+It helps the endpoints derive session keys that protect the connection.
+
+10
+00:01:11.728 --> 00:01:19.006
+Digital signatures help prove identity and integrity; they do not by themselves encrypt all application traffic.
+
+11
+00:01:19.006 --> 00:01:24.783
+Symmetric encryption and integrity protection then protect the data after the handshake.
+
+12
+00:01:24.783 --> 00:01:36.863
+Forward secrecy concepts add another important property: compromise of a long-term key should not automatically expose older captured sessions when the protocol is configured correctly.
+
+13
+00:01:36.863 --> 00:01:48.192
+Client authentication is another TLS use case, often seen in mutual TLS for service-to-service traffic, administrative interfaces, device identity, or partner integrations.
+
+14
+00:01:48.192 --> 00:02:00.647
+Because TLS roles are layered together, changing cryptography can affect clients, servers, proxies, libraries, certificate issuance, compliance evidence, monitoring, and troubleshooting.
+
+15
+00:02:00.647 --> 00:02:09.200
+Migration planning starts by asking what role the cryptography plays in each connection, not by assuming every TLS use case is the same.

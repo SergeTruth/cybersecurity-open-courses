@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.044
+Frontend TypeScript can make browser code more organized, but it does not automatically make rendering safe.
+
+2
+00:00:07.044 --> 00:00:13.483
+Framework escaping, safe templating, and predictable component patterns are important defenses.
+
+3
+00:00:13.483 --> 00:00:21.587
+Developers should be careful with APIs that insert raw HTML, manually manipulate the DOM, or build URLs from untrusted values.
+
+4
+00:00:21.587 --> 00:00:26.587
+If a framework provides safe rendering conventions, use them intentionally.
+
+5
+00:00:26.587 --> 00:00:28.708
+Browser storage also needs care.
+
+6
+00:00:28.708 --> 00:00:36.964
+Values placed in local storage, session storage, IndexedDB, or other browser-accessible locations can be read by browser code.
+
+7
+00:00:36.964 --> 00:00:40.297
+Sensitive data should not be stored there casually.
+
+8
+00:00:40.297 --> 00:00:54.006
+Cookies, tokens, session state, and framework authentication helpers need to be understood at a high level so teams know which values are accessible to browser code and which are protected by server-side controls.
+
+9
+00:00:54.006 --> 00:00:59.081
+Client-side checks can improve usability, but they are not final enforcement.
+
+10
+00:00:59.081 --> 00:01:06.656
+Route guards, hidden buttons, disabled controls, and client-side role checks can guide a user through the interface.
+
+11
+00:01:06.656 --> 00:01:11.958
+They should not be the only thing protecting backend data or sensitive operations.
+
+12
+00:01:11.958 --> 00:01:19.002
+The server must enforce authorization because server-side code is the trusted place to make those decisions.
+
+13
+00:01:19.002 --> 00:01:21.881
+Other browser security settings matter too.
+
+14
+00:01:21.881 --> 00:01:32.561
+Content security policy, CSRF protections, secure cookie options, same-site behavior, and framework defaults should be reviewed in the context of the application.
+
+15
+00:01:32.561 --> 00:01:44.756
+The practical habit is to let TypeScript clarify frontend state while relying on secure rendering, framework-aware configuration, and trusted server enforcement for security decisions.
+
+16
+00:01:44.756 --> 00:01:50.513
+Frontend code should also avoid placing sensitive assumptions in scattered components.
+
+17
+00:01:50.513 --> 00:01:59.602
+A shared helper for safe URL creation, a small wrapper for trusted rendering patterns, or documented storage rules can reduce inconsistency.
+
+18
+00:01:59.602 --> 00:02:08.767
+The safer pattern is to make the secure path easy for ordinary feature work, not something every component has to rediscover during each change.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Planning and Resilience",
+  "graphicAlt": "Blank course graphic placeholder",
+  "narration": "Preflight resilience begins with checking navigation status, home point, compass or heading consistency, maps, warnings, firmware state, and expected flight modes according to approved procedures. An unexplained anomaly before launch is a reason to stop.\n\nPlan a simple route that can be understood visually. Maintain visual line of sight as required and appropriate, identify stable landmarks, and avoid placing the aircraft where loss of automated position would immediately threaten people or obstacles.\n\nManual-control readiness means training for the aircraft's degraded behavior in authorized safe conditions, understanding mode changes, and knowing the controls without improvisation during an incident. It does not mean experimenting with interference.\n\nUse conservative automation. Verify each waypoint, route boundary, home point, return setting, and emergency area. Define abort criteria for navigation warnings, cue disagreement, drifting, mode changes, unexpected route behavior, or low confidence.\n\nIdentify landing areas along the mission, not only at the launch point. Consider wind, terrain, people, property, access, and battery. A nearby controlled landing may be safer than a long automated return through uncertain navigation.\n\nDocument the plan, warnings, receiver status, visual references, settings, and crew roles. Resilience comes from independent cues, practiced decisions, and preserved margin, not from assuming that more automation will overcome unreliable inputs.\n\nRehearse decisions through checklists and tabletop discussion using hypothetical warnings. Crews can practice communication, automation disengagement, landing selection, and reporting without transmitting interference or creating risk to real navigation systems.",
+  "narrationPoints": [
+    "Preflight resilience begins with checking navigation status, home point, compass or heading consistency, maps, warnings, firmware state, and expected flight modes according to approved.",
+    "An unexplained anomaly before launch is a reason to stop.",
+    "Plan a simple route that can be understood visually.",
+    "Maintain visual line of sight as required and appropriate, identify stable landmarks, and avoid placing the aircraft where loss of automated position would immediately.",
+    "Manual-control readiness means training for the aircraft's degraded behavior in authorized safe conditions, understanding mode changes, and knowing the controls without improvisation during an.",
+    "It does not mean experimenting with interference."
+  ]
+};

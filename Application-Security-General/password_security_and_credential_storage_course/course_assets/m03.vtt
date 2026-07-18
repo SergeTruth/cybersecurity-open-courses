@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.006
+Password hashing is different from encryption.
+
+2
+00:00:03.006 --> 00:00:06.231
+Encryption is reversible when the key is available.
+
+3
+00:00:06.231 --> 00:00:10.703
+Password storage should not require recovering the original password.
+
+4
+00:00:10.703 --> 00:00:13.635
+Instead, the system stores a one-way verifier.
+
+5
+00:00:13.635 --> 00:00:25.878
+During login, the presented password is processed through the same password hashing scheme, and the result is compared to the stored verifier using the algorithm's expected verification routine.
+
+6
+00:00:25.878 --> 00:00:28.443
+Salts are a core part of password hashing.
+
+7
+00:00:28.443 --> 00:00:33.135
+A salt is a unique value generated for each password and stored with the hash.
+
+8
+00:00:33.135 --> 00:00:41.199
+It ensures that two users with the same password do not have the same stored verifier, and it frustrates precomputed lookup tables.
+
+9
+00:00:41.199 --> 00:00:42.519
+Salts are not secret.
+
+10
+00:00:42.519 --> 00:00:45.671
+Their value comes from uniqueness and correct use.
+
+11
+00:00:45.671 --> 00:00:49.923
+A system that uses the same salt everywhere loses most of the benefit.
+
+12
+00:00:49.923 --> 00:00:52.268
+Work factors are another key concept.
+
+13
+00:00:52.268 --> 00:00:58.939
+Password hashing should be deliberately expensive so that offline guessing is costly if hashes are stolen.
+
+14
+00:00:58.939 --> 00:01:05.097
+Fast general-purpose hashes are not appropriate because attackers can test guesses very quickly.
+
+15
+00:01:05.097 --> 00:01:10.962
+Purpose-built password hashing algorithms let teams tune cost over time as hardware changes.
+
+16
+00:01:10.962 --> 00:01:17.780
+That tuning must be practical enough for normal authentication while expensive enough to slow bulk guessing.
+
+17
+00:01:17.780 --> 00:01:21.445
+Password hashes should still be treated as sensitive data.
+
+18
+00:01:21.445 --> 00:01:26.577
+A hash is not the plaintext password, but it is a target for offline attack if stolen.
+
+19
+00:01:26.577 --> 00:01:35.813
+Database access, backups, analytics exports, support tools, and incident response workflows should treat stored credential material carefully.
+
+20
+00:01:35.813 --> 00:01:37.793
+Strong hashing reduces damage.
+
+21
+00:01:37.793 --> 00:01:41.825
+It does not make the credential database safe to expose casually.

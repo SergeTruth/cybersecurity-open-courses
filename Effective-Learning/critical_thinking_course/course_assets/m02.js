@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Claims, Questions, and Evidence",
+  "graphicAlt": "Blank white placeholder image for module 2, Claims, Questions, and Evidence.",
+  "narration": "A critical thinking process often starts with a simple question: what is the claim? A claim is what someone is asserting. It may be a factual statement, an interpretation, a prediction, a recommendation, or a judgment about value. Before evaluating evidence, make sure the claim is visible. Many arguments become tangled because people are actually discussing different claims while using the same words.\n\nFacts, interpretations, opinions, predictions, and recommendations need different treatment. A fact claim asks whether something is true. An interpretation explains what the facts mean. An opinion expresses a preference or judgment. A prediction estimates what will happen. A recommendation says what should be done. Each can be useful, but each requires a different kind of support.\n\nOnce the claim is clear, ask what would need to be true for the claim to hold. This question exposes the logic of the argument. If someone says a new tool will reduce incident response time, what assumptions are built in? Does the team have capacity to deploy it? Will alerts improve or multiply? Does the claim depend on training, integration, process change, or vendor data that has not been verified?\n\nEvidence quality matters. Relevant evidence connects directly to the claim. Sufficient evidence is enough to support the strength of the conclusion. Missing evidence should reduce confidence. Repetition is not evidence by itself. Confidence is not evidence by itself. A dashboard, case study, anecdote, or expert statement may help, but each should be judged by source, method, context, and fit to the actual decision.\n\nBurden of proof also matters. The stronger or more consequential the claim, the more support it should require. A low-risk hypothesis may only need enough evidence to justify a small experiment. A high-stakes operational change deserves stronger evidence, clearer assumptions, and review. Strong conclusions require more than volume, fluency, or certainty.",
+  "narrationPoints": [
+    "A critical thinking process often starts with a simple question: what is the claim?",
+    "A claim is what someone is asserting.",
+    "It may be a factual statement, an interpretation, a prediction, a recommendation, or a judgment about value.",
+    "Before evaluating evidence, make sure the claim is visible.",
+    "Many arguments become tangled because people are actually discussing different claims while using the same words.",
+    "Facts, interpretations, opinions, predictions, and recommendations need different treatment."
+  ]
+};

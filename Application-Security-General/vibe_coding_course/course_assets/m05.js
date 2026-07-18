@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Read and Verify Generated Code",
+  "graphicAlt": "A layered code review diagram showing patch scope, architecture, implementation details, explanation verification, and final human approval.",
+  "narration": "Generated code should be reviewed as carefully as code written by a teammate. The speed of generation does not reduce the need for engineering judgment. In fact, speed can make review more important, because a large amount of plausible code can arrive before the developer has built a mental model of what changed.\n\nBegin with the scope of the patch. Which files changed? Were unexpected files added? Did dependencies, generated artifacts, or configuration files appear? Did the assistant remove working behavior while solving the visible task? Scope review answers a basic question: is this the change you asked for, or did the patch expand beyond the approved boundary? This first pass often catches the highest-risk surprises before line-by-line review begins.\n\nNext, review the design. The code should belong in the correct layer, reuse existing abstractions, preserve established interfaces, and remain no more complicated than the task requires. A small feature should not introduce a framework, a global state system, or a new service boundary unless there is a clear reason. Architecture mistakes can be harder to fix than syntax mistakes.\n\nThen inspect the implementation details. Check input validation, error handling, boundary conditions, resource cleanup, names, comments, and duplicated logic. Ask whether bad input, empty data, timeouts, permission failures, or partial writes have been considered. If the assistant explains a change, compare the explanation with the actual code. A confident explanation can still describe what the code was intended to do rather than what it really does.\n\nReading generated code also protects your own understanding. A project can appear to advance quickly while the human gradually loses the ability to explain its behavior. Review is the moment when generated output becomes an intentional engineering decision. If you cannot explain a change, simplify it, ask for clarification, or reject it before it becomes part of the codebase.",
+  "narrationPoints": [
+    "AI-generated code deserves teammate-level review.",
+    "Patch scope should match the approved task.",
+    "Architecture review comes before line-level details.",
+    "Validation, errors, boundaries, and cleanup need inspection.",
+    "Explanations must be checked against the actual implementation.",
+    "Review preserves human understanding of the system."
+  ]
+};

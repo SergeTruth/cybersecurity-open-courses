@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Cognitive Bias and Thinking Traps",
+  "graphicAlt": "Blank white placeholder image for module 5, Cognitive Bias and Thinking Traps.",
+  "narration": "Bias is not a moral failure or proof that someone is careless. In critical thinking, bias means a predictable judgment tendency that can shape how people notice evidence, interpret it, and decide what to do. Because bias is common, the useful question is not who has bias. The useful question is what process helps us reduce avoidable distortion.\n\nConfirmation bias is the tendency to favor information that supports an existing belief or hypothesis. In security work, an analyst may focus on evidence that confirms an early theory about an incident. In leadership, a manager may notice examples that support a view about a team while missing contrary evidence. The countermeasure is to ask what evidence would change our mind and what alternative explanation also fits the facts.\n\nAnchoring makes an initial number, diagnosis, or opinion exert too much influence. Availability makes recent or vivid examples feel more likely than they are. Overconfidence makes people stop checking too early. Sunk cost makes it hard to abandon a weak path because time, money, or reputation has already been invested. Motivated reasoning pulls analysis toward the answer people want to be true.\n\nGroupthink adds social pressure. Teams may avoid disagreement because they want harmony, speed, or approval from senior people. A group can become confident because everyone is repeating the same assumption, not because the evidence is strong. That is why structured review is valuable. It gives permission to surface alternatives before commitment becomes expensive.\n\nBias reduction does not require perfect rationality. Practical methods include checklists, independent review, alternative hypotheses, pre-mortems, explicit assumptions, and evidence checks. The goal is not to remove human judgment. The goal is to support judgment with habits that make reasoning more visible and correctable.",
+  "narrationPoints": [
+    "Bias is not a moral failure or proof that someone is careless.",
+    "In critical thinking, bias means a predictable judgment tendency that can shape how people notice evidence, interpret it, and decide what to do.",
+    "Because bias is common, the useful question is not who has bias.",
+    "The useful question is what process helps us reduce avoidable distortion.",
+    "Confirmation bias is the tendency to favor information that supports an existing belief or hypothesis.",
+    "In security work, an analyst may focus on evidence that confirms an early theory about an incident."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Secure Data Models and Validation",
+  "graphicAlt": "Draft visual summary for Secure Data Models and Validation",
+  "narration": "Secure TypeScript applications need data models that describe more than property names. A request model, response model, DTO, domain object, or configuration object should make important assumptions visible. Which fields are required? Which are optional? Which values are allowed? Which strings have length limits? Which numbers have bounds? Which dates need normalization?\n\nValidation should happen close to the boundary and before sensitive use. Request data should be checked before authorization decisions, database queries, file operations, workflow state changes, or downstream service calls. A client-controlled field should not become trusted simply because the frontend was also written in TypeScript. The server still needs to verify what it receives.\n\nThere are different layers of validation. Shape validation checks whether the structure is present. Meaning validation checks whether values make sense: a status is allowed, a date is valid, an array is not too large, or a string is in the expected format. Permission validation asks whether the current user or system context is allowed to use that value for this action.\n\nDefault values and normalization also matter. Trimming, case handling, date parsing, enum conversion, and empty-field handling should be consistent. Validation errors should be predictable enough for callers to respond, but they should not reveal sensitive internals. Good data models preserve application invariants by rejecting or normalizing data before it reaches code that assumes it is safe.\n\nValidation should also be connected to the domain, not only to syntax. A number can be a number and still be outside the allowed range. A string can be present and still be too long for a downstream system. An identifier can have the right format and still belong to a different user or tenant. Secure data modeling keeps those distinctions visible across handlers, services, and storage boundaries.",
+  "narrationPoints": [
+    "Secure TypeScript applications need data models that describe more than property names.",
+    "Validation should happen close to the boundary and before sensitive use.",
+    "There are different layers of validation.",
+    "Default values and normalization also matter.",
+    "Validation should also be connected to the domain, not only to syntax."
+  ]
+};

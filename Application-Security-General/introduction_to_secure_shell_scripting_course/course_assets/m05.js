@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Permissions, Secrets, and Sensitive Data",
+  "graphicAlt": "Draft visual summarizing permissions, secrets, and sensitive data.",
+  "narration": "Scripts frequently run in places with more authority than the author first imagines: cron jobs, CI/CD runners, administrative shells, containers, jump boxes, deployment systems, and maintenance tasks. They may inherit credentials, service accounts, mounted volumes, or permissions from the environment. A script that is harmless as a normal user can be dangerous when run as an administrator or automation account.\n\nLeast privilege should apply to the user running the script, the files it creates, and the services it can modify. Sensitive output files should be created with restrictive permissions and appropriate ownership. A script should not require broad write access to directories it does not manage. If it only needs to read one configuration file or update one destination, the runtime environment should reflect that narrow purpose where practical.\n\nSecrets need careful handling. Avoid hard-coding tokens, passwords, keys, or credentials in scripts. Avoid printing secrets with echo, placing them in command-line arguments where they may appear in process listings, or leaving them in shell history. Environment variables can be useful delivery mechanisms, but they are still sensitive and can leak through logs, debug output, child processes, or crash reports.\n\nUse approved secret-management or secure runtime injection mechanisms where available. Separate ordinary configuration from sensitive values. When logging, record that a credential was present or missing without printing the credential itself. Secure shell scripting treats secrets as operational hazards: necessary sometimes, but always controlled, minimized, and handled with deliberate redaction.",
+  "narrationPoints": [
+    "Scripts frequently run in places with more authority than the author first imagines: cron jobs, CI/CD runners, administrative shells, containers, jump boxes, deployment systems.",
+    "They may inherit credentials, service accounts, mounted volumes, or permissions from the environment.",
+    "A script that is harmless as a normal user can be dangerous when run as an administrator or automation account.",
+    "Least privilege should apply to the user running the script, the files it creates, and the services it can modify.",
+    "Sensitive output files should be created with restrictive permissions and appropriate ownership.",
+    "A script should not require broad write access to directories it does not manage."
+  ]
+};

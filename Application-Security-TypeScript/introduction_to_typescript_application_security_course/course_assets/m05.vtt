@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.310
+Authentication and authorization are related, but they answer different questions.
+
+2
+00:00:05.310 --> 00:00:08.147
+Authentication asks who the user or caller is.
+
+3
+00:00:08.147 --> 00:00:11.420
+Authorization asks what that caller is allowed to do.
+
+4
+00:00:11.420 --> 00:00:19.639
+A TypeScript type can model a user, role, claim, tenant, or request context, but the type alone does not prove that an action is allowed.
+
+5
+00:00:19.639 --> 00:00:23.422
+Sensitive checks should happen in trusted server-side code.
+
+6
+00:00:23.422 --> 00:00:32.223
+API handlers, service functions, middleware, and domain services should verify that the current caller can perform the requested operation.
+
+7
+00:00:32.223 --> 00:00:40.734
+This includes route-level checks, object-level permission checks, tenant boundaries, ownership rules, and capability requirements.
+
+8
+00:00:40.734 --> 00:00:45.389
+It is not enough for the frontend to hide a button or mark a route as protected.
+
+9
+00:00:45.389 --> 00:00:49.026
+Authorization logic should be consistent and reviewable.
+
+10
+00:00:49.026 --> 00:00:54.118
+Scattered checks make it harder to know whether every sensitive path is protected.
+
+11
+00:00:54.118 --> 00:01:03.283
+Many applications benefit from shared helpers, policy functions, middleware, or service-layer methods that make permission decisions explicit.
+
+12
+00:01:03.283 --> 00:01:09.611
+The right structure depends on the framework, but the security goal is the same: avoid surprising gaps.
+
+13
+00:01:09.611 --> 00:01:13.612
+Session-aware code should avoid assumptions that are too broad.
+
+14
+00:01:13.612 --> 00:01:17.176
+A logged-in user may not be allowed to access every object.
+
+15
+00:01:17.176 --> 00:01:21.176
+An administrator in one tenant may not have authority in another.
+
+16
+00:01:21.176 --> 00:01:25.977
+A background job may have different permissions than an interactive request.
+
+17
+00:01:25.977 --> 00:01:33.542
+Deny-by-default behavior, least privilege, and tests for access-control edge cases help keep those assumptions honest.
+
+18
+00:01:33.542 --> 00:01:42.925
+TypeScript can make these checks easier to review by modeling request contexts, authenticated principals, roles, capabilities, and resource owners.
+
+19
+00:01:42.925 --> 00:01:47.144
+Those models are helpful only when they are tied to real enforcement.
+
+20
+00:01:47.144 --> 00:01:58.637
+Sensitive operations should make the required permission visible at the call site or service boundary, so reviewers can see both the action and the rule protecting it before data changes.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "TypeScript Security Mindset",
+  "graphicAlt": "Draft visual summary for TypeScript Security Mindset",
+  "narration": "TypeScript can help developers build safer applications by making intent clearer. Types can describe the shape of a request object, the values a function expects, the roles a component understands, or the result a service should return. That clarity improves code review and catches many mistakes earlier. But TypeScript does not automatically make an application secure.\n\nThe important reason is that TypeScript types are not available as runtime proof. Data from a browser form, a JSON request body, local storage, a database, a third-party API, a message queue, or an environment variable can still be missing, malformed, outdated, or inappropriate for the current action. The application must validate and enforce trust at runtime.\n\nTypeScript applications also run in different places. Browser code handles rendering and user interaction. Node.js services, serverless functions, and backend APIs handle data access, secrets, sessions, and authorization. Shared packages can influence many consuming applications. Each runtime has its own trust boundaries and responsibilities.\n\nA secure TypeScript mindset asks where trust enters the system, where data becomes validated, where authorization is enforced, and where sensitive information is handled. The goal is not to write the most complex types possible. The goal is to make risky assumptions visible, reviewable, and testable so safe behavior becomes the normal path. Teams should also document these decisions so new maintainers can understand which code is trusted, which data is checked, and which framework controls must stay enabled during maintenance.",
+  "narrationPoints": [
+    "TypeScript can help developers build safer applications by making intent clearer.",
+    "The important reason is that TypeScript types are not available as runtime proof.",
+    "TypeScript applications also run in different places.",
+    "A secure TypeScript mindset asks where trust enters the system, where data becomes validated, where authorization is enforced, and where sensitive..."
+  ]
+};

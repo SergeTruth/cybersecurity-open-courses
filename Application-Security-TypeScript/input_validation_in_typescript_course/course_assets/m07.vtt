@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.629
+The most common failure is trusting TypeScript types for runtime data.
+
+2
+00:00:04.629 --> 00:00:12.885
+A request body annotated as AdminUpdateRequest is still whatever the client sent until runtime validation proves otherwise.
+
+3
+00:00:12.885 --> 00:00:21.681
+Unsafe any and broad type assertions make this worse by removing compiler pressure at the exact places where discipline is needed most.
+
+4
+00:00:21.681 --> 00:00:32.868
+During review, any use of any, unknown-to-specific casts, or large assertions near an input boundary should raise a simple question: where was this data actually checked.
+
+5
+00:00:32.868 --> 00:00:35.877
+Mass assignment is another frequent problem.
+
+6
+00:00:35.877 --> 00:00:43.207
+It occurs when user-controlled fields are copied into an object that has properties the user should not control.
+
+7
+00:00:43.207 --> 00:00:50.459
+In TypeScript, this can look deceptively clean because object spread and partial update types are convenient.
+
+8
+00:00:50.459 --> 00:01:05.582
+Validation should reject unexpected fields, map allowed fields intentionally, and keep server-controlled properties such as role, ownerId, tenantId, approval status, and audit fields out of user-controlled assignment paths.
+
+9
+00:01:05.582 --> 00:01:15.457
+Prototype pollution, path traversal, command injection risks, and unsafe deserialization patterns all become more likely when validation is vague.
+
+10
+00:01:15.457 --> 00:01:22.633
+At a high level, prototype pollution involves unsafe object handling that can influence inherited behavior.
+
+11
+00:01:22.633 --> 00:01:30.580
+Path traversal involves treating user input as part of a filesystem path without strict constraints and safe resolution.
+
+12
+00:01:30.580 --> 00:01:37.369
+Command injection risk appears when unchecked strings influence shell commands or process execution.
+
+13
+00:01:37.369 --> 00:01:45.548
+Defensive validation does not make dangerous APIs safe by magic, but it narrows the inputs and supports safer design choices.
+
+14
+00:01:45.548 --> 00:01:49.097
+Frontend and backend validation gaps are also common.
+
+15
+00:01:49.097 --> 00:01:56.890
+A React form may prevent invalid input in normal use, but an attacker or tester can send requests directly to the backend.
+
+16
+00:01:56.890 --> 00:02:00.207
+A mobile client may lag behind the server contract.
+
+17
+00:02:00.207 --> 00:02:03.988
+A partner integration may omit fields after a deployment.
+
+18
+00:02:03.988 --> 00:02:06.997
+The backend should validate as the authority.
+
+19
+00:02:06.997 --> 00:02:09.929
+The frontend should validate for usability.
+
+20
+00:02:09.929 --> 00:02:18.184
+Treating those as separate responsibilities prevents a friendly user experience from being mistaken for a security control.

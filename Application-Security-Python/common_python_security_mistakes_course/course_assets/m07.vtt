@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.124
+Files are security boundaries.
+
+2
+00:00:02.124 --> 00:00:10.853
+Uploaded files, generated reports, temporary files, archives, configuration files, and imported data sets all deserve caution.
+
+3
+00:00:10.853 --> 00:00:16.516
+A filename supplied by a user or partner system should not be treated as a trusted path.
+
+4
+00:00:16.516 --> 00:00:21.943
+A content type supplied by a client should not be treated as proof of file contents.
+
+5
+00:00:21.943 --> 00:00:29.493
+File size, extension, storage location, permissions, cleanup behavior, and downstream processing all matter.
+
+6
+00:00:29.493 --> 00:00:36.650
+Path handling mistakes often begin with string concatenation and assumptions about where a file will land.
+
+7
+00:00:36.650 --> 00:00:48.919
+Defensive code uses safe path APIs, normalizes paths carefully, constrains access to intended directories, avoids writing into executable locations, and treats archives with care.
+
+8
+00:00:48.919 --> 00:00:57.728
+Archive extraction risks at a high level include unexpected paths, large expanded content, and files that affect later processing.
+
+9
+00:00:57.728 --> 00:01:03.862
+Temporary files also need safe creation, permissions, lifecycle management, and cleanup.
+
+10
+00:01:03.862 --> 00:01:05.829
+Parsing is another boundary.
+
+11
+00:01:05.829 --> 00:01:13.772
+JSON is familiar, but parsed JSON is still untrusted data until validated for the expected schema and business meaning.
+
+12
+00:01:13.772 --> 00:01:22.109
+YAML and XML parsers can have security-sensitive options, depending on how they are configured and what features they allow.
+
+13
+00:01:22.109 --> 00:01:34.299
+The durable lesson is to choose parsers deliberately, use safe modes where available, disable unnecessary features, enforce size limits, and validate parsed structures before use.
+
+14
+00:01:34.299 --> 00:01:38.546
+Unsafe deserialization deserves special attention in Python.
+
+15
+00:01:38.546 --> 00:01:44.366
+Pickle is designed for Python object serialization, not for accepting untrusted data.
+
+16
+00:01:44.366 --> 00:01:52.782
+Loading serialized objects from untrusted or poorly controlled sources can create dangerous behavior depending on context.
+
+17
+00:01:52.782 --> 00:01:57.815
+Safer designs prefer data formats with clear schemas and limited behavior.
+
+18
+00:01:57.815 --> 00:02:07.804
+When file handling, parsing, or deserialization touches user-controlled input, treat it as a high-value review area rather than ordinary plumbing.

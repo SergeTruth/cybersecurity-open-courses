@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.958
+A secret is any value that grants access, proves identity, protects data, signs a message,
+
+2
+00:00:05.958 --> 00:00:08.467
+or allows one system to trust another.
+
+3
+00:00:08.467 --> 00:00:15.209
+The obvious examples are passwords, API keys, OAuth tokens, private keys, SSH keys, TLS private keys,
+
+4
+00:00:15.209 --> 00:00:22.421
+database credentials, cloud access keys, webhook signing secrets, encryption keys, session signing keys,
+
+5
+00:00:22.421 --> 00:00:24.695
+and service account credentials.
+
+6
+00:00:24.695 --> 00:00:30.653
+These values need special handling because possession can be enough to perform an action.
+
+7
+00:00:30.653 --> 00:00:36.611
+Some secrets are easy to recognize because they look random or are labeled as credentials.
+
+8
+00:00:36.611 --> 00:00:39.276
+Others are hidden inside a larger value.
+
+9
+00:00:39.276 --> 00:00:45.234
+A database connection string may include a username, password, hostname, database name,
+
+10
+00:00:45.234 --> 00:00:47.586
+and driver settings all in one line.
+
+11
+00:00:47.586 --> 00:00:50.252
+A storage URL may include a signed token.
+
+12
+00:00:50.252 --> 00:00:56.523
+A configuration object may include both harmless settings and a value that authorizes access.
+
+13
+00:00:56.523 --> 00:01:02.089
+Treating the whole object as ordinary configuration can expose the sensitive part.
+
+14
+00:01:02.089 --> 00:01:03.971
+Context matters.
+
+15
+00:01:03.971 --> 00:01:06.479
+A hostname by itself may not be secret.
+
+16
+00:01:06.479 --> 00:01:09.067
+A public certificate may not be secret.
+
+17
+00:01:09.067 --> 00:01:12.202
+A username may not be secret in one environment.
+
+18
+00:01:12.202 --> 00:01:18.866
+But the combination of a host, user, password, database name, and environment can become sensitive.
+
+19
+00:01:18.866 --> 00:01:24.275
+A token that looks like a harmless random string may allow production deployment.
+
+20
+00:01:24.275 --> 00:01:31.566
+A private key may be useful only with the matching account, but if that account controls signing or decryption,
+
+21
+00:01:31.566 --> 00:01:33.448
+the impact can be serious.
+
+22
+00:01:33.448 --> 00:01:37.132
+Classification helps teams choose the right controls.
+
+23
+00:01:37.132 --> 00:01:43.247
+One useful approach is to classify by scope, environment, privilege, lifetime, and impact.
+
+24
+00:01:43.247 --> 00:01:45.756
+Scope asks what the secret can access.
+
+25
+00:01:45.756 --> 00:01:52.576
+Environment asks whether it belongs to development, test, staging, production, or a shared platform.
+
+26
+00:01:52.576 --> 00:02:00.024
+Privilege asks whether the secret can read, write, administer, deploy, sign, decrypt, or manage other secrets.
+
+27
+00:02:00.024 --> 00:02:05.198
+Lifetime asks whether it is long-lived, short-lived, rotating, or one-time.
+
+28
+00:02:05.198 --> 00:02:08.412
+Impact asks what would happen if it were exposed.
+
+29
+00:02:08.412 --> 00:02:13.900
+Not every secret needs the same handling, but every secret needs an owner and a plan.
+
+30
+00:02:13.900 --> 00:02:20.799
+A low-privilege development token may require different response steps than a production signing key.
+
+31
+00:02:20.799 --> 00:02:26.051
+A short-lived workload identity token may be safer than a permanent shared key.
+
+32
+00:02:26.051 --> 00:02:33.969
+A certificate private key may require coordination with infrastructure, application owners, and external partners.
+
+33
+00:02:33.969 --> 00:02:40.162
+These differences are why inventory and classification are practical tools, not paperwork.
+
+34
+00:02:40.162 --> 00:02:44.239
+When in doubt, treat access-bearing values conservatively.
+
+35
+00:02:44.239 --> 00:02:49.883
+Use clearly fake examples in training, such as EXAMPLE_API_KEY or REDACTED_SECRET,
+
+36
+00:02:49.883 --> 00:02:57.017
+and avoid putting realistic-looking tokens into documents, tests, screenshots, or sample repositories.
+
+37
+00:02:57.017 --> 00:03:02.897
+The habit you want is simple: if a value could let a person or system cross a trust boundary,
+
+38
+00:03:02.897 --> 00:03:05.876
+handle it as a secret until proven otherwise.

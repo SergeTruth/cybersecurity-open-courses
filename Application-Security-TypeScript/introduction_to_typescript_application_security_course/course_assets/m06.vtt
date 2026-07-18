@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.150
+API handlers are important security boundaries in TypeScript applications.
+
+2
+00:00:05.150 --> 00:00:14.437
+A handler receives request data, parses it, validates it, applies authorization, performs work, handles failures, and returns a response.
+
+3
+00:00:14.437 --> 00:00:26.767
+The order matters. Validation and authorization should happen before database writes, state transitions, file operations, or calls to downstream services that assume trusted inputs.
+
+4
+00:00:26.767 --> 00:00:30.513
+Good error handling preserves application invariants.
+
+5
+00:00:30.513 --> 00:00:41.438
+If a request fails validation, a downstream service times out, or a database operation does not complete, the application should avoid leaving partial state behind.
+
+6
+00:00:41.438 --> 00:00:51.115
+Consistent result types, domain errors, and well-defined failure paths can make it easier for callers and reviewers to understand what happened.
+
+7
+00:00:51.115 --> 00:00:55.953
+Error responses should be useful without exposing sensitive internals.
+
+8
+00:00:55.953 --> 00:01:04.459
+Callers may need to know that input was invalid, authorization failed, a resource was not found, or a temporary failure occurred.
+
+9
+00:01:04.459 --> 00:01:12.341
+They do not need stack traces, secrets, tokens, internal queries, private configuration, or implementation details.
+
+10
+00:01:12.341 --> 00:01:17.101
+Safe responses support recovery while limiting unnecessary exposure.
+
+11
+00:01:17.101 --> 00:01:19.442
+Logging needs the same discipline.
+
+12
+00:01:19.442 --> 00:01:26.310
+Structured logs, correlation IDs, and operational events help teams understand production behavior.
+
+13
+00:01:26.310 --> 00:01:31.850
+But logs are often copied into dashboards, tickets, alerts, and long-term storage.
+
+14
+00:01:31.850 --> 00:01:35.050
+Sensitive values should be redacted or omitted.
+
+15
+00:01:35.050 --> 00:01:44.570
+API clients also need defensive behavior: validate responses, handle timeouts, define retry rules, and avoid blind trust in third-party data.
+
+16
+00:01:44.570 --> 00:01:47.146
+Consistency matters across handlers.
+
+17
+00:01:47.146 --> 00:01:55.418
+If one endpoint returns detailed validation errors and another returns vague failures, callers may build fragile behavior.
+
+18
+00:01:55.418 --> 00:02:02.675
+If one path logs request bodies and another redacts them, sensitive data handling becomes difficult to audit.
+
+19
+00:02:02.675 --> 00:02:09.074
+Shared error and logging helpers can keep safety expectations steady across services and teams.
