@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "How High Fits Among FedRAMP Baselines",
+  "graphicAlt": "Instructional illustration for How High Fits Among FedRAMP Baselines.",
+  "narration": "FedRAMP baselines are often discussed conceptually as Low, tailored low-impact SaaS approaches, Moderate, and High. Lower-impact paths are intended for use cases with limited adverse effects. Moderate addresses more serious federal risk and is common for many cloud services. High is reserved for use cases where the potential consequences are severe enough to require stronger expectations for implementation, evidence, resilience, and operations.\n\nHigh differs from Moderate in the level of risk it is meant to address. It is not just more paperwork. It affects the expected maturity of controls, the rigor of assessment, the depth of evidence, the attention to privileged access, the handling of dependencies, and the ability to continue or recover operations under stress. The baseline has architectural and operational consequences, not just compliance consequences.\n\nOrganizations should avoid choosing High only for market positioning. Pursuing a High baseline can shape product design, staffing, automation, documentation, customer commitments, and long-term operations. If the service does not need High for its federal use case, those commitments can become misaligned. If the service truly does need High, the organization must be prepared for the discipline that follows.\n\nHigh baseline planning should involve product, engineering, security, compliance, operations, customer, and business stakeholders. The choice affects roadmap decisions, evidence generation, support models, recovery expectations, monitoring depth, and shared responsibility language. When the baseline is chosen thoughtfully, it becomes a realistic operating target. When it is chosen casually, it becomes a source of risk.",
+  "narrationPoints": [
+    "FedRAMP baselines are often discussed conceptually as Low, tailored low-impact SaaS approaches, Moderate, and High.",
+    "High differs from Moderate in the level of risk it is meant to address.",
+    "Organizations should avoid choosing High only for market positioning.",
+    "High baseline planning should involve product, engineering, security, compliance, operations, customer, and business stakeholders."
+  ]
+};

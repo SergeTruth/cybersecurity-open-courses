@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A10: Server-Side Request Forgery",
+  "graphicAlt": "Graphic for A10: Server-Side Request Forgery",
+  "narration": "Internal network abuse occurs when user-controlled input influences a server-side request. Features such as URL previews, webhook testing, file import, and document conversion may reach systems that attackers cannot access directly. Metadata service attacks are common in cloud environments. If a workload can reach metadata endpoints, attackers may attempt to obtain temporary credentials or environmental details. Trust boundary violations happen when applications treat user-supplied destinations as safe. URL allowlists, protocol restrictions, DNS handling, and redirect controls must be designed carefully.\n\nSSRF defenses work best when application validation is paired with network segmentation, egress filtering, boundary protection, and monitoring for unusual server-initiated traffic. Use network segmentation and boundary protection. Restrict destinations with URL allowlists where possible. Apply egress filtering and monitor unusual server-initiated requests. Selected CMMC mappings for this topic include SC.L2-3.13.1 - Boundary protection; AC.L2-3.1.3 - Information flow control.",
+  "narrationPoints": [
+    "Internal network abuse occurs when user-controlled input influences a server-side request. Features such as URL previews, webhook testing, file import, and document conversion may reach systems that attackers cannot access directly. Metadata service attacks are common in cloud environments. If a workload can reach metadata endpoints, attackers may attempt to obtain temporary credentials or environmental details. Trust boundary violations happen when applications treat user-supplied destinations as safe. URL allowlists, protocol restrictions, DNS handling, and redirect controls must be designed carefully.",
+    "SSRF defenses work best when application validation is paired with network segmentation, egress filtering, boundary protection, and monitoring for unusual server-initiated traffic. Use network segmentation and boundary protection. Restrict destinations with URL allowlists where possible. Apply egress filtering and monitor unusual server-initiated requests. Selected CMMC mappings for this topic include SC.L2-3.13.1 - Boundary protection; AC.L2-3.1.3 - Information flow control.",
+    "Internal network abuse occurs when user-controlled input influences a server-side request.",
+    "Features such as URL previews, webhook testing, file import, and document conversion may reach systems that attackers cannot access directly.",
+    "Metadata service attacks are common in cloud environments.",
+    "If a workload can reach metadata endpoints, attackers may attempt to obtain temporary credentials or environmental details.",
+    "Trust boundary violations happen when applications treat user-supplied destinations as safe."
+  ]
+};

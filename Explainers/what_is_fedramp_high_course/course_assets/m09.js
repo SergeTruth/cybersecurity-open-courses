@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Instructional illustration for Course Summary and Key Takeaways.",
+  "narration": "FedRAMP High is a baseline for cloud services supporting high-impact federal use cases where security failures could have severe or catastrophic adverse effects. It connects impact categorization to stronger security expectations, engineering implementation, assessment evidence, authorization support, and continuous monitoring. High is demanding because the mission and data risk are demanding.\n\nThe most important ideas are impact, scope, responsibility, evidence, resilience, and operations. Impact explains why High is appropriate. Scope defines the cloud service offering and its dependencies. Responsibility clarifies what the provider, customer, platform, and inherited services handle. Evidence supports assessment conclusions. Resilience and operations show whether the service can sustain its security posture over time.\n\nSuccess depends on disciplined engineering and honest documentation. Strong identity controls, privileged access management, segmentation, logging, monitoring, vulnerability management, change control, recovery planning, and secure development practices all matter. Documentation must match the live system. Inherited controls must be traceable. Customer responsibilities must be clear. Unsupported claims are not enough for high-impact risk.\n\nThe goal is not simply to pass a review or claim a stronger label. The goal is to help federal stakeholders make informed risk decisions about high-impact cloud services. A strong High program gives those stakeholders a credible picture of the system boundary, control implementation, evidence, known risks, remediation work, resilience posture, and continuing monitoring discipline.",
+  "narrationPoints": [
+    "FedRAMP High is a baseline for cloud services supporting high-impact federal use cases where security failures could have severe or catastrophic...",
+    "The most important ideas are impact, scope, responsibility, evidence, resilience, and operations.",
+    "Success depends on disciplined engineering and honest documentation.",
+    "The goal is not simply to pass a review or claim a stronger label."
+  ]
+};

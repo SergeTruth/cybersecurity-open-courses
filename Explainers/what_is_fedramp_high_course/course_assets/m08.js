@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Continuous Monitoring and High-Impact Operations",
+  "graphicAlt": "Instructional illustration for Continuous Monitoring and High-Impact Operations.",
+  "narration": "FedRAMP High is an ongoing operational commitment, not a one-time documentation project. After authorization support work, the system continues to change. Vulnerabilities are discovered, configurations drift, staff roles change, incidents occur, dependencies evolve, and new features may alter the boundary. Continuous monitoring is the discipline that keeps security posture visible as the live system changes.\n\nContinuous monitoring includes vulnerability management, configuration drift detection, change management, incident reporting expectations at a high level, periodic evidence updates, risk tracking, plans of action and milestones, resilience monitoring, privileged activity review, security metrics, and operational ownership. The details may evolve, but the principle is durable: risk must be watched, reported, and managed over time.\n\nHigh-impact operations require stronger attention to resilience. Teams should understand backup and recovery expectations, dependency failure modes, monitoring coverage, escalation paths, and how critical services continue or recover during disruption. Resilience does not replace access control, incident response, or vulnerability management. It complements them by reducing the chance that a failure becomes a severe mission disruption.\n\nContinuous monitoring also supports federal trust. Authorizing officials and agency customers need confidence that the provider can identify problems, communicate risk, remediate weaknesses, and keep control evidence current. A High baseline raises the stakes for that trust because the consequences of failure are more serious. The operating model needs to show sustained discipline, not a single successful assessment moment.",
+  "narrationPoints": [
+    "FedRAMP High is an ongoing operational commitment, not a one-time documentation project.",
+    "Continuous monitoring includes vulnerability management, configuration drift detection, change management, incident reporting expectations at a...",
+    "High-impact operations require stronger attention to resilience.",
+    "Continuous monitoring also supports federal trust."
+  ]
+};

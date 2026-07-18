@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A09: Security Logging and Monitoring Failures",
+  "graphicAlt": "Graphic for A09: Security Logging and Monitoring Failures",
+  "narration": "Missing logs prevent teams from reconstructing important events. Applications should capture authentication activity, authorization failures, administrative actions, sensitive data access, configuration changes, and high-risk workflow events. Poor monitoring leaves teams with telemetry they do not review, alerts they do not trust, or events that cannot be correlated across systems. Monitoring must support timely analysis and response. Delayed detection increases attacker dwell time and impact. Without alerting and review, compromise, insider abuse, and data access anomalies may continue unnoticed.\n\nInsufficient alerting and log protection can harm both incident response and audit readiness. Logs need retention, integrity, review ownership, and clear escalation paths. Centralize logs across applications, identity systems, infrastructure, and cloud services. Integrate telemetry with SIEM or monitoring workflows. Create alerting and review processes for high-risk events. Selected CMMC mappings for this topic include AU.L2-3.3.1 - Audit logging; AU.L2-3.3.2 - Log review.",
+  "narrationPoints": [
+    "Missing logs prevent teams from reconstructing important events. Applications should capture authentication activity, authorization failures, administrative actions, sensitive data access, configuration changes, and high-risk workflow events. Poor monitoring leaves teams with telemetry they do not review, alerts they do not trust, or events that cannot be correlated across systems. Monitoring must support timely analysis and response. Delayed detection increases attacker dwell time and impact. Without alerting and review, compromise, insider abuse, and data access anomalies may continue unnoticed.",
+    "Insufficient alerting and log protection can harm both incident response and audit readiness. Logs need retention, integrity, review ownership, and clear escalation paths. Centralize logs across applications, identity systems, infrastructure, and cloud services. Integrate telemetry with SIEM or monitoring workflows. Create alerting and review processes for high-risk events. Selected CMMC mappings for this topic include AU.L2-3.3.1 - Audit logging; AU.L2-3.3.2 - Log review.",
+    "Missing logs prevent teams from reconstructing important events.",
+    "Applications should capture authentication activity, authorization failures, administrative actions, sensitive data access, configuration changes, and high-risk workflow events.",
+    "Poor monitoring leaves teams with telemetry they do not review, alerts they do not trust, or events that cannot be correlated across systems.",
+    "Monitoring must support timely analysis and response.",
+    "Delayed detection increases attacker dwell time and impact."
+  ]
+};

@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A05: Security Misconfiguration",
+  "graphicAlt": "Graphic for A05: Security Misconfiguration",
+  "narration": "Default credentials, sample accounts, and vendor defaults are common attack targets. Any default identity, password, token, or administrative path should be removed, changed, or tightly controlled before production use. Open cloud storage and permissive access policies can expose sensitive records, exports, backups, logs, or artifacts. Cloud configuration must be treated as part of application security. Excessive services increase attack surface. Every enabled service, plugin, port, feature flag, debug endpoint, and administrative function should have a documented purpose and owner.\n\nInsecure defaults and debug interfaces may reveal stack traces, paths, secrets, environment details, and internal architecture. Diagnostic information belongs in protected logs, not public responses. Use hardened baselines for applications, systems, containers, and cloud services. Manage configuration through reviewed and repeatable processes. Apply least functionality by disabling unnecessary services and features. Selected CMMC mappings for this topic include CM.L2-3.4.1 - Baseline configurations; CM.L2-3.4.2 - Secure configurations.",
+  "narrationPoints": [
+    "Default credentials, sample accounts, and vendor defaults are common attack targets. Any default identity, password, token, or administrative path should be removed, changed, or tightly controlled before production use. Open cloud storage and permissive access policies can expose sensitive records, exports, backups, logs, or artifacts. Cloud configuration must be treated as part of application security. Excessive services increase attack surface. Every enabled service, plugin, port, feature flag, debug endpoint, and administrative function should have a documented purpose and owner.",
+    "Insecure defaults and debug interfaces may reveal stack traces, paths, secrets, environment details, and internal architecture. Diagnostic information belongs in protected logs, not public responses. Use hardened baselines for applications, systems, containers, and cloud services. Manage configuration through reviewed and repeatable processes. Apply least functionality by disabling unnecessary services and features. Selected CMMC mappings for this topic include CM.L2-3.4.1 - Baseline configurations; CM.L2-3.4.2 - Secure configurations.",
+    "Default credentials, sample accounts, and vendor defaults are common attack targets.",
+    "Any default identity, password, token, or administrative path should be removed, changed, or tightly controlled before production use.",
+    "Open cloud storage and permissive access policies can expose sensitive records, exports, backups, logs, or artifacts.",
+    "Cloud configuration must be treated as part of application security.",
+    "Excessive services increase attack surface."
+  ]
+};

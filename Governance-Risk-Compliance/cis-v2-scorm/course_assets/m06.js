@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A05: Security Misconfiguration",
+  "graphicAlt": "Graphic for A05: Security Misconfiguration",
+  "narration": "Default credentials matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Open cloud resources matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Unnecessary services matters because applications often enforce identity, access, data handling, business workflows, and service integrations.\n\nDebug configurations matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Secure baselines Hardening standards Configuration management Selected CIS Controls mappings for this topic include Control 4 - Secure Configuration of Enterprise Assets and Software; 4.1 - Establish secure configurations; 4.2 - Maintain secure configurations; 4.8 - Uninstall or disable unnecessary services.",
+  "narrationPoints": [
+    "Default credentials matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Open cloud resources matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Unnecessary services matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Debug configurations matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Secure baselines Hardening standards Configuration management Selected CIS Controls mappings for this topic include Control 4 - Secure Configuration of Enterprise Assets and Software; 4.1 - Establish secure configurations; 4.2 - Maintain secure configurations; 4.8 - Uninstall or disable unnecessary services.",
+    "Default credentials matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines.",
+    "Open cloud resources matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Unnecessary services matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Debug configurations matters because applications often enforce identity, access, data handling, business workflows, and service integrations."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "System Boundary, Dependencies, and Shared Responsibility",
+  "graphicAlt": "Instructional illustration for System Boundary, Dependencies, and Shared Responsibility.",
+  "narration": "A High baseline effort depends on a precise system boundary. The boundary identifies the cloud service offering in scope, including application components, infrastructure, data stores, identity services, administrative interfaces, network paths, monitoring tools, operational processes, and supporting services. If the boundary is unclear, the team cannot reliably explain which controls apply, which evidence is relevant, or who owns each responsibility.\n\nDependencies deserve special attention in high-impact environments. External services, third-party tools, inherited platform capabilities, support systems, build pipelines, logging services, and backup locations can all affect risk. A dependency may provide a control the service relies on, or it may introduce a weakness that needs mitigation. Either way, it must be visible and supportable in the evidence story.\n\nPrivileged administration paths are especially important. Teams need to know who can administer the service, how administrative access is authenticated, how privileges are approved and reviewed, how actions are logged, and how emergency access is handled. The same applies to customer-managed responsibilities. If customers must configure users, data handling, network access, or integrations securely, those responsibilities should be plain and traceable.\n\nUnclear dependencies create evidence gaps and risk misunderstandings. A provider may assume the platform handles a requirement while the platform scope does not cover the provider's use case. A customer may assume a protection is automatic when it requires configuration. For High, these misunderstandings can be unacceptable because the consequences of failure are serious. Boundary clarity is part of risk control.",
+  "narrationPoints": [
+    "A High baseline effort depends on a precise system boundary.",
+    "Dependencies deserve special attention in high-impact environments.",
+    "Privileged administration paths are especially important.",
+    "Unclear dependencies create evidence gaps and risk misunderstandings."
+  ]
+};

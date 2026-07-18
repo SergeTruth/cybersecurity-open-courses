@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A09: Security Logging and Monitoring Failures",
+  "graphicAlt": "Graphic for A09: Security Logging and Monitoring Failures",
+  "narration": "Missing audit logs matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Poor monitoring matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Delayed detection matters because applications often enforce identity, access, data handling, business workflows, and service integrations.\n\nInsufficient alerting matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Centralized logging SIEM integration Security alerting Selected CIS Controls mappings for this topic include Control 8 - Audit Log Management; Control 13 - Network Monitoring and Defense; 8.1 - Establish audit logging process; 8.2 - Collect audit logs; 13.7 - Monitor network traffic.",
+  "narrationPoints": [
+    "Missing audit logs matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Poor monitoring matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Delayed detection matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Insufficient alerting matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Centralized logging SIEM integration Security alerting Selected CIS Controls mappings for this topic include Control 8 - Audit Log Management; Control 13 - Network Monitoring and Defense; 8.1 - Establish audit logging process; 8.2 - Collect audit logs; 13.7 - Monitor network traffic.",
+    "Missing audit logs matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines.",
+    "Poor monitoring matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Delayed detection matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Insufficient alerting matters because applications often enforce identity, access, data handling, business workflows, and service integrations."
+  ]
+};

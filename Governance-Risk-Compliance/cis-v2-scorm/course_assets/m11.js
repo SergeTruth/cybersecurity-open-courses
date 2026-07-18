@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A10: Server-Side Request Forgery (SSRF)",
+  "graphicAlt": "Graphic for A10: Server-Side Request Forgery (SSRF)",
+  "narration": "Internal network abuse matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Cloud metadata exploitation matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Trust boundary violations matters because applications often enforce identity, access, data handling, business workflows, and service integrations.\n\nNetwork segmentation URL allowlists Egress filtering Selected CIS Controls mappings for this topic include Control 12 - Network Infrastructure Management; Control 13 - Network Monitoring and Defense; 12.3 - Secure network architecture; 12.8 - Separate production environments; 13.1 - Centralize security event alerting.",
+  "narrationPoints": [
+    "Internal network abuse matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Cloud metadata exploitation matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Trust boundary violations matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Network segmentation URL allowlists Egress filtering Selected CIS Controls mappings for this topic include Control 12 - Network Infrastructure Management; Control 13 - Network Monitoring and Defense; 12.3 - Secure network architecture; 12.8 - Separate production environments; 13.1 - Centralize security event alerting.",
+    "Internal network abuse matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines.",
+    "Cloud metadata exploitation matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Trust boundary violations matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Network segmentation URL allowlists Egress filtering Selected CIS Controls mappings for this topic include Control 12 - Network Infrastructure Management; Control 13 - Network Monitoring and Defense; 12."
+  ]
+};

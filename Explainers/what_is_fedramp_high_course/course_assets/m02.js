@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "High Impact and Mission Risk",
+  "graphicAlt": "Instructional illustration for High Impact and Mission Risk.",
+  "narration": "High impact starts with confidentiality, integrity, and availability. Confidentiality is about preventing unauthorized disclosure. Integrity is about preventing improper modification or loss of trust in information and processing. Availability is about making sure the service and data remain usable when needed. A high-impact context exists when a failure in one or more of these areas could cause severe or catastrophic adverse effects.\n\nHigh-impact cloud services may handle sensitive unclassified federal data, support mission-critical operations, affect public trust, influence privacy outcomes, or support activities where disruption can cascade into major operational or financial harm. In some contexts, protection-of-life considerations or essential public services may be part of the risk picture. The baseline should reflect the federal mission and data risk, not the provider's preferred sales position.\n\nService dependency matters. A system that looks ordinary in isolation can become high impact if many agency workflows depend on it, if outages have wide consequences, or if the service acts as a critical platform for other systems. Data sensitivity also matters, but availability and integrity can be just as important. A high-impact decision should consider the whole mission context rather than a single data label.\n\nThe engineering implication is that High cannot be treated as a documentation exercise. Severe consequences require stronger attention to architecture, access control, monitoring, response, recovery, dependency management, and operational maturity. Teams should be able to explain not only what controls exist, but why those controls are suitable for the mission risk the service supports.",
+  "narrationPoints": [
+    "High impact starts with confidentiality, integrity, and availability.",
+    "High-impact cloud services may handle sensitive unclassified federal data, support mission-critical operations, affect public trust, influence...",
+    "Service dependency matters.",
+    "The engineering implication is that High cannot be treated as a documentation exercise."
+  ]
+};

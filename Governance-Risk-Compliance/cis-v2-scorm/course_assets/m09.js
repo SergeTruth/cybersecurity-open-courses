@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A08: Software and Data Integrity Failures",
+  "graphicAlt": "Graphic for A08: Software and Data Integrity Failures",
+  "narration": "CI/CD compromise matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Unsigned code matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Insecure deserialization matters because applications often enforce identity, access, data handling, business workflows, and service integrations.\n\nBuild pipeline attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Code signing Integrity verification Secure CI/CD controls Selected CIS Controls mappings for this topic include Control 16 - Application Software Security; 16.11 - Protect application code repositories; 16.12 - Separate development/test/production environments.",
+  "narrationPoints": [
+    "CI/CD compromise matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. Unsigned code matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Insecure deserialization matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Build pipeline attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Code signing Integrity verification Secure CI/CD controls Selected CIS Controls mappings for this topic include Control 16 - Application Software Security; 16.11 - Protect application code repositories; 16.12 - Separate development/test/production environments.",
+    "CI/CD compromise matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines.",
+    "Unsigned code matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Insecure deserialization matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Build pipeline attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations."
+  ]
+};

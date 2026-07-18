@@ -1,0 +1,14 @@
+window.COURSE_MODULE = {
+  "title": "A07: Identification and Authentication Failures",
+  "graphicAlt": "Graphic for A07: Identification and Authentication Failures",
+  "narration": "Weak passwords matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. MFA failures matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Session management matters because applications often enforce identity, access, data handling, business workflows, and service integrations.\n\nCredential attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Multi-factor authentication Secure password policies Secure session handling Selected CIS Controls mappings for this topic include Control 5 - Account Management; Control 6 - Access Control Management; 5.2 - Use unique passwords; 6.3 - Require MFA; 6.7 - Manage authentication systems.",
+  "narrationPoints": [
+    "Weak passwords matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines. MFA failures matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Session management matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Credential attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations. Multi-factor authentication Secure password policies Secure session handling Selected CIS Controls mappings for this topic include Control 5 - Account Management; Control 6 - Access Control Management; 5.2 - Use unique passwords; 6.3 - Require MFA; 6.7 - Manage authentication systems.",
+    "Weak passwords matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Teams should evaluate this issue across user-facing features, APIs, administrative tools, cloud services, and delivery pipelines.",
+    "MFA failures matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Session management matters because applications often enforce identity, access, data handling, business workflows, and service integrations.",
+    "Credential attacks matters because applications often enforce identity, access, data handling, business workflows, and service integrations."
+  ]
+};
