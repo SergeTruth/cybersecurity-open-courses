@@ -1,49 +1,49 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.059
+00:00:00.200 --> 00:00:03.160
 Model storage should balance control with startup performance.
 
-00:00:04.059 --> 00:00:10.254
+00:00:03.380 --> 00:00:09.300
 A managed repository can hold approved model versions, checksums, licenses, and configuration metadata.
 
-00:00:10.254 --> 00:00:19.441
+00:00:09.520 --> 00:00:17.280
 Workers can copy approved artifacts into local SSD caches so inference does not depend on sustained access to shared storage.
 
-00:00:19.441 --> 00:00:29.054
+00:00:17.500 --> 00:00:25.020
 Define cache size, eviction policy, and how a worker verifies that its local copy matches the version advertised to the router.
 
-00:00:29.054 --> 00:00:34.822
+00:00:25.240 --> 00:00:29.560
 Use explicit version identifiers rather than a mutable label such as latest.
 
-00:00:34.822 --> 00:00:41.018
+00:00:29.780 --> 00:00:35.780
 Model weights, quantization, tokenizer, prompt template, runtime, and serving parameters together influence behavior.
 
-00:00:41.018 --> 00:00:48.495
+00:00:36.000 --> 00:00:41.200
 Record that combination so results can be reproduced and a problematic release can be rolled back.
 
-00:00:48.495 --> 00:00:56.827
+00:00:41.420 --> 00:00:49.340
 Stage model changes on limited capacity, run representative evaluations, and promote only after functional and performance checks pass.
 
-00:00:56.827 --> 00:01:00.459
+00:00:49.560 --> 00:00:52.680
 Separate model artifacts from private operational data.
 
-00:01:00.459 --> 00:01:09.645
+00:00:52.900 --> 00:01:02.420
 Prompts, outputs, uploaded files, embeddings, vector indexes, and logs can contain sensitive information even when the model weights are public.
 
-00:01:09.645 --> 00:01:15.840
+00:01:02.640 --> 00:01:09.280
 Apply access controls, retention schedules, encryption, and backup policies according to data classification.
 
-00:01:15.840 --> 00:01:23.745
+00:01:09.500 --> 00:01:15.100
 Avoid placing private data in a broadly readable model share simply because every worker can access it.
 
-00:01:23.745 --> 00:01:32.076
+00:01:15.320 --> 00:01:26.120
 Back up what cannot be recreated: configuration, routing policy, secrets references, evaluation results, metadata, and authorized private datasets.
 
-00:01:32.076 --> 00:01:40.408
+00:01:26.340 --> 00:01:32.020
 Large public model files may be restored from trusted sources if their exact versions and hashes are recorded.
 
-00:01:40.408 --> 00:01:45.749
+00:01:32.240 --> 00:01:36.800
 Test restoration rather than equating a completed backup job with recoverability.
 
-00:01:45.749 --> 00:01:55.790
+00:01:37.020 --> 00:01:44.700
 Storage design succeeds when a new or recovered node can obtain the right model safely, start predictably, and avoid exposing unrelated data.
