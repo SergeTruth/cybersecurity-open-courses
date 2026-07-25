@@ -1,49 +1,79 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:07.259
-The context window is the token budget available for instructions, conversation history, retrieved material, and generated output.
+00:00:00.000 --> 00:00:04.830
+The context window is the token budget available for instructions, conversation history,
 
-00:00:07.259 --> 00:00:11.380
+00:00:04.830 --> 00:00:06.715
+retrieved material, and generated output.
+
+00:00:06.715 --> 00:00:10.240
 Increasing the configured maximum does not automatically improve answers.
 
-00:00:11.380 --> 00:00:18.247
-Longer prompts require more prompt ingestion work and expand the key-value cache that stores attention state.
+00:00:10.240 --> 00:00:14.360
+Longer prompts require more prompt ingestion work and expand the key-value cache that
 
-00:00:18.247 --> 00:00:25.506
-The result can be higher memory use, a longer delay before output, and less capacity for concurrency.
+00:00:14.360 --> 00:00:15.540
+stores attention state.
 
-00:00:25.506 --> 00:00:28.842
+00:00:15.540 --> 00:00:18.760
+The result can be higher memory use, a longer delay before output,
+
+00:00:18.760 --> 00:00:20.590
+and less capacity for concurrency.
+
+00:00:20.590 --> 00:00:23.135
 Prompt processing and generation are different phases.
 
-00:00:28.842 --> 00:00:34.139
+00:00:23.135 --> 00:00:26.500
 Measure prompt tokens per second as well as output tokens per second.
 
-00:00:34.139 --> 00:00:41.006
-A retrieval workflow may spend most of its time ingesting documents even when generation is fast.
+00:00:26.500 --> 00:00:30.785
+A retrieval workflow may spend most of its time ingesting documents even when generation
 
-00:00:41.006 --> 00:00:48.658
-Reusing cached prompt state can help in supported workflows, but cache behavior and memory cost vary by runtime.
+00:00:30.785 --> 00:00:31.205
+is fast.
 
-00:00:48.658 --> 00:00:55.918
-For long documents, remove repeated headers, irrelevant sections, and low-value history before sending text to the model.
+00:00:31.205 --> 00:00:34.060
+Reusing cached prompt state can help in supported workflows,
 
-00:00:55.918 --> 00:01:03.569
-Retrieval-augmented generation should select the smallest set of relevant passages rather than filling the entire context by default.
+00:00:34.060 --> 00:00:36.650
+but cache behavior and memory cost vary by runtime.
 
-00:01:03.569 --> 00:01:09.259
+00:00:36.650 --> 00:00:39.885
+For long documents, remove repeated headers, irrelevant sections,
+
+00:00:39.885 --> 00:00:42.615
+and low-value history before sending text to the model.
+
+00:00:42.615 --> 00:00:46.680
+Retrieval-augmented generation should select the smallest set of relevant passages rather
+
+00:00:46.680 --> 00:00:48.870
+than filling the entire context by default.
+
+00:00:48.870 --> 00:00:53.380
 Better chunking, ranking, and prompt structure can improve both speed and answer quality.
 
-00:01:09.259 --> 00:01:16.519
-Reserve output space so a large input does not leave the model unable to complete its response.
+00:00:53.380 --> 00:00:57.560
+Reserve output space so a large input does not leave the model unable to complete its
 
-00:01:16.519 --> 00:01:21.424
+00:00:57.560 --> 00:00:58.140
+response.
+
+00:00:58.140 --> 00:01:01.850
 Set context length to the demonstrated requirement and monitor cache growth.
 
-00:01:21.424 --> 00:01:24.367
+00:01:01.850 --> 00:01:04.055
 Test short, normal, and worst-case prompts.
 
-00:01:24.367 --> 00:01:33.588
-If performance collapses only on extreme inputs, control input size or use a separate batch workflow instead of penalizing every interactive request.
+00:01:04.055 --> 00:01:06.380
+If performance collapses only on extreme inputs,
 
-00:01:33.588 --> 00:01:38.886
+00:01:06.380 --> 00:01:10.330
+control input size or use a separate batch workflow instead of penalizing every
+
+00:01:10.330 --> 00:01:11.510
+interactive request.
+
+00:01:11.510 --> 00:01:15.520
 Context is a resource to manage, not a capacity target to maximize.

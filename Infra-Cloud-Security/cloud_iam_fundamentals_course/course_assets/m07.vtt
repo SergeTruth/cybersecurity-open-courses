@@ -1,125 +1,154 @@
 WEBVTT
 
-1
-00:00:00,000 --> 00:00:07,609
-Some cloud permissions are risky because they allow a principal to create, modify, or impersonate other identities.
+00:00:00.200 --> 00:00:04.600
+Some cloud permissions are risky because they allow a principal to create, modify,
 
-2
-00:00:07,609 --> 00:00:10,914
+00:00:04.820 --> 00:00:07.140
+or impersonate other identities.
+
+00:00:07.360 --> 00:00:10.080
 The danger is not always obvious from the role name.
 
-3
-00:00:10,914 --> 00:00:21,904
-A principal may not be labeled administrator, but if it can attach policies, create access keys, update trust relationships, pass roles, impersonate service accounts,
+00:00:10.300 --> 00:00:14.060
+A principal may not be labeled administrator, but if it can attach policies,
 
-4
-00:00:21,904 --> 00:00:29,052
-or modify deployment automation, it may be able to reach more privilege than the visible assignment suggests.
+00:00:14.280 --> 00:00:20.200
+create access keys, update trust relationships, pass roles, impersonate service accounts,
 
-5
-00:00:29,052 --> 00:00:32,665
+00:00:20.420 --> 00:00:22.580
+or modify deployment automation,
+
+00:00:22.800 --> 00:00:26.400
+it may be able to reach more privilege than the visible assignment suggests.
+
+00:00:26.620 --> 00:00:29.340
 Defensive IAM review should look for permission paths.
 
-6
-00:00:32,665 --> 00:00:35,508
+00:00:29.560 --> 00:00:32.200
 Can this identity grant itself more access?
 
-7
-00:00:35,508 --> 00:00:38,736
+00:00:32.420 --> 00:00:34.900
 Can it change a role that another workload trusts?
 
-8
-00:00:38,736 --> 00:00:45,653
-Can it edit a function, startup script, container image, or pipeline that runs with stronger permissions?
+00:00:35.120 --> 00:00:38.960
+Can it edit a function, startup script, container image,
 
-9
-00:00:45,653 --> 00:00:48,805
+00:00:39.180 --> 00:00:41.740
+or pipeline that runs with stronger permissions?
+
+00:00:41.960 --> 00:00:44.440
 Can it create credentials for another identity?
 
-10
-00:00:48,805 --> 00:00:51,725
+00:00:44.660 --> 00:00:47.140
 Can it disable logging or security controls?
 
-11
-00:00:51,725 --> 00:00:56,798
+00:00:47.360 --> 00:00:51.760
 These questions are design and review questions, not instructions for abuse.
 
-12
-00:00:56,798 --> 00:00:59,949
+00:00:51.980 --> 00:00:55.260
 They help teams find paths that need guardrails.
 
-13
-00:00:59,949 --> 00:01:02,716
+00:00:55.480 --> 00:00:57.720
 Deployment systems deserve special care.
 
-14
-00:01:02,716 --> 00:01:10,863
-A CI/CD pipeline may be able to update infrastructure, deploy functions, modify containers, or change cloud configuration.
+00:00:57.940 --> 00:01:03.140
+A CI/CD pipeline may be able to update infrastructure, deploy functions,
 
-15
-00:01:10,863 --> 00:01:22,776
-If that pipeline has broad permissions, then anyone who can change the pipeline definition, build artifact, or deployment script may indirectly influence privileged cloud actions.
+00:01:03.360 --> 00:01:06.560
+modify containers, or change cloud configuration.
 
-16
-00:01:22,776 --> 00:01:30,461
-Secure design separates duties, scopes deployment roles, reviews pipeline access, and monitors sensitive changes.
+00:01:06.780 --> 00:01:08.940
+If that pipeline has broad permissions,
 
-17
-00:01:30,461 --> 00:01:33,152
+00:01:09.160 --> 00:01:12.920
+then anyone who can change the pipeline definition, build artifact,
+
+00:01:13.140 --> 00:01:16.900
+or deployment script may indirectly influence privileged cloud actions.
+
+00:01:17.120 --> 00:01:22.240
+Secure design separates duties, scopes deployment roles, reviews pipeline access,
+
+00:01:22.460 --> 00:01:24.700
+and monitors sensitive changes.
+
+00:01:24.920 --> 00:01:27.400
 The practical goal is to reduce surprise.
 
-18
-00:01:33,152 --> 00:01:38,839
+00:01:27.620 --> 00:01:32.500
 IAM review should not stop at role names like reader, developer, operator, or deployer.
 
-19
-00:01:38,839 --> 00:01:48,677
-It should examine sensitive actions, trust relationships, impersonation, role passing, policy changes, credential creation, and logging changes.
+00:01:32.720 --> 00:01:37.760
+It should examine sensitive actions, trust relationships, impersonation, role passing,
 
-20
-00:01:48,677 --> 00:02:00,513
-When risky paths are necessary, they should be documented, approved, monitored, and constrained so that legitimate administration does not become uncontrolled privilege growth.
+00:01:37.980 --> 00:01:41.660
+policy changes, credential creation, and logging changes.
 
-21
-00:02:00,513 --> 00:02:04,817
+00:01:41.880 --> 00:01:47.320
+When risky paths are necessary, they should be documented, approved, monitored,
+
+00:01:47.540 --> 00:01:51.940
+and constrained so that legitimate administration does not become uncontrolled privilege
+
+00:01:52.160 --> 00:01:52.960
+growth.
+
+00:01:53.180 --> 00:01:56.700
 Risky permission paths are often found at the edges between teams.
 
-22
-00:02:04,817 --> 00:02:12,503
-A developer may not be a cloud administrator, but may edit a pipeline that uses an administrator-like deployment role.
+00:01:56.920 --> 00:01:59.480
+A developer may not be a cloud administrator,
 
-23
-00:02:12,503 --> 00:02:19,036
-A support identity may not own policies, but may be able to create keys for a powerful service account.
+00:01:59.700 --> 00:02:03.300
+but may edit a pipeline that uses an administrator-like deployment role.
 
-24
-00:02:19,036 --> 00:02:24,877
-A function editor may not own data directly, but may change code that runs with data access.
+00:02:03.520 --> 00:02:05.920
+A support identity may not own policies,
 
-25
-00:02:24,877 --> 00:02:29,334
+00:02:06.140 --> 00:02:09.420
+but may be able to create keys for a powerful service account.
+
+00:02:09.640 --> 00:02:12.120
+A function editor may not own data directly,
+
+00:02:12.340 --> 00:02:15.300
+but may change code that runs with data access.
+
+00:02:15.520 --> 00:02:20.320
 These indirect paths deserve the same seriousness as direct grants.
 
-26
-00:02:29,334 --> 00:02:44,245
-Defensive controls can include permission boundaries, approval workflows, restricted role passing, separate deployment roles, policy review, protected branches, mandatory code review, and alerts on sensitive IAM changes.
+00:02:20.540 --> 00:02:24.380
+Defensive controls can include permission boundaries, approval workflows,
 
-27
-00:02:44,245 --> 00:02:47,857
+00:02:24.600 --> 00:02:29.640
+restricted role passing, separate deployment roles, policy review, protected branches,
+
+00:02:29.860 --> 00:02:33.620
+mandatory code review, and alerts on sensitive IAM changes.
+
+00:02:33.840 --> 00:02:36.800
 The exact control depends on the platform and workflow.
 
-28
-00:02:47,857 --> 00:02:54,236
-The important habit is to ask how privilege can move, not only where privilege appears to sit today.
+00:02:37.020 --> 00:02:40.060
+The important habit is to ask how privilege can move,
 
-29
-00:02:54,236 --> 00:02:57,849
+00:02:40.280 --> 00:02:42.440
+not only where privilege appears to sit today.
+
+00:02:42.660 --> 00:02:46.580
 Logging and alerting help make risky paths manageable.
 
-30
-00:02:57,849 --> 00:03:04,305
-A permission may be necessary for a deployment platform, but sensitive use should still be visible.
+00:02:46.800 --> 00:02:49.680
+A permission may be necessary for a deployment platform,
 
-31
-00:03:04,305 --> 00:03:17,832
-Alerts on policy attachment, trust changes, key creation, role passing, impersonation, and security logging changes give defenders a chance to spot unexpected behavior before it becomes a larger incident.
+00:02:49.900 --> 00:02:52.140
+but sensitive use should still be visible.
+
+00:02:52.360 --> 00:02:58.600
+Alerts on policy attachment, trust changes, key creation, role passing, impersonation,
+
+00:02:58.820 --> 00:03:03.700
+and security logging changes give defenders a chance to spot unexpected behavior before it
+
+00:03:03.920 --> 00:03:05.840
+becomes a larger incident.

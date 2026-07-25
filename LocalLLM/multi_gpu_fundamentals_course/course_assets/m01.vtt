@@ -1,58 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.890
+00:00:00.000 --> 00:00:04.830
 A multi-GPU AI system uses more than one graphics processor for compute.
 
-00:00:05.890 --> 00:00:16.143
-The GPUs may live in one workstation, connect through supported external or server designs, or operate in separate machines coordinated by software.
+00:00:04.830 --> 00:00:06.635
+The GPUs may live in one workstation,
 
-00:00:16.143 --> 00:00:19.851
+00:00:06.635 --> 00:00:09.470
+connect through supported external or server designs,
+
+00:00:09.470 --> 00:00:12.023
+or operate in separate machines coordinated by software.
+
+00:00:12.023 --> 00:00:15.620
 Gaming multi-GPU historically focused on rendering frames.
 
-00:00:19.851 --> 00:00:23.996
+00:00:15.620 --> 00:00:19.335
 Compute multi-GPU divides numerical work or independent jobs.
 
-00:00:23.996 --> 00:00:32.940
-Language-model inference may split one model, place different models on different devices, or route separate requests to separate GPUs.
+00:00:19.335 --> 00:00:23.240
+Language-model inference may split one model, place different models on different devices,
 
-00:00:32.940 --> 00:00:38.393
+00:00:23.240 --> 00:00:26.210
+or route separate requests to separate GPUs.
+
+00:00:26.210 --> 00:00:29.770
 Multiple GPUs do not automatically behave like one simple larger GPU.
 
-00:00:38.393 --> 00:00:44.283
+00:00:29.770 --> 00:00:34.055
 Each device has its own memory, compute, thermal limits, and connection path.
 
-00:00:44.283 --> 00:00:50.173
+00:00:34.055 --> 00:00:37.275
 Software must explicitly decide how model data and work move among them.
 
-00:00:50.173 --> 00:00:58.244
+00:00:37.275 --> 00:00:41.910
 One use case is capacity: fitting a model or context that does not fit on one device.
 
-00:00:58.244 --> 00:01:02.825
+00:00:41.910 --> 00:00:44.880
 Another is throughput: processing more independent jobs or users.
 
-00:01:02.825 --> 00:01:10.460
-A third is pipeline separation, such as placing vision encoding and text generation on different resources.
+00:00:44.880 --> 00:00:46.410
+A third is pipeline separation,
 
-00:01:10.460 --> 00:01:14.168
+00:00:46.410 --> 00:00:50.495
+such as placing vision encoding and text generation on different resources.
+
+00:00:50.495 --> 00:00:52.696
 These goals have different architectures and metrics.
 
-00:01:14.168 --> 00:01:18.749
+00:00:52.696 --> 00:00:55.875
 Splitting one request may add synchronization and transfer delay.
 
-00:01:18.749 --> 00:01:25.948
-Running independent requests can scale more cleanly but does not help one oversized model fit.
+00:00:55.875 --> 00:00:59.680
+Running independent requests can scale more cleanly but does not help one oversized model
 
-00:01:25.948 --> 00:01:33.583
-Multi-GPU is worthwhile when a measured workload justifies power, heat, cost, configuration, monitoring, and failure complexity.
+00:00:59.680 --> 00:01:00.495
+fit.
 
-00:01:33.583 --> 00:01:41.218
-Start by stating whether the requirement is larger-model capacity, single-request speed, concurrency, batch throughput, or experimentation.
+00:01:00.495 --> 00:01:04.420
+Multi-GPU is worthwhile when a measured workload justifies power, heat, cost,
 
-00:01:41.218 --> 00:01:44.054
+00:01:04.420 --> 00:01:07.000
+configuration, monitoring, and failure complexity.
+
+00:01:07.000 --> 00:01:11.040
+Start by stating whether the requirement is larger-model capacity, single-request speed,
+
+00:01:11.040 --> 00:01:13.600
+concurrency, batch throughput, or experimentation.
+
+00:01:13.600 --> 00:01:15.120
 Also define the failure domain.
 
-00:01:44.054 --> 00:01:52.125
-One split model may stop when either GPU fails, while separate model replicas may preserve partial service.
+00:01:15.120 --> 00:01:17.280
+One split model may stop when either GPU fails,
 
-00:01:52.125 --> 00:01:56.270
+00:01:17.280 --> 00:01:20.419
+while separate model replicas may preserve partial service.
+
+00:01:20.419 --> 00:01:23.700
 More devices increase options, but architecture determines resilience.

@@ -1,69 +1,100 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:07.562
-Overlay-style designs are a useful way to understand many RAM-backed systems. The lower layer holds the base system.
+00:00:00.200 --> 00:00:05.240
+Overlay-style designs are a useful way to understand many RAM-backed systems. The lower
 
-2
-00:00:07.562 --> 00:00:15.582
-It may be a read-only filesystem image, an immutable snapshot, or a mounted root that should not be changed during normal use.
+00:00:05.460 --> 00:00:07.060
+layer holds the base system.
 
-3
-00:00:15.582 --> 00:00:24.289
-The upper layer records writes. When the system presents a merged view, applications see what looks like a normal writable filesystem.
+00:00:07.280 --> 00:00:10.960
+It may be a read-only filesystem image, an immutable snapshot,
 
-4
-00:00:24.289 --> 00:00:33.225
-Reads can come from the lower layer unless a file has been changed in the upper layer. If the upper layer is tmpfs, writes are stored in memory.
+00:00:11.180 --> 00:00:14.460
+or a mounted root that should not be changed during normal use.
 
-5
-00:00:33.225 --> 00:00:36.204
+00:00:14.680 --> 00:00:18.520
+The upper layer records writes. When the system presents a merged view,
+
+00:00:18.740 --> 00:00:22.180
+applications see what looks like a normal writable filesystem.
+
+00:00:22.400 --> 00:00:27.040
+Reads can come from the lower layer unless a file has been changed in the upper layer. If
+
+00:00:27.260 --> 00:00:29.980
+the upper layer is tmpfs,
+
+00:00:30.200 --> 00:00:31.720
+writes are stored in memory.
+
+00:00:31.940 --> 00:00:34.340
 That makes the session flexible but volatile.
 
-6
-00:00:36.204 --> 00:00:46.057
-A user can change files, install a package temporarily, modify configuration, or create logs during the session, and those changes can vanish at reboot.
+00:00:34.560 --> 00:00:39.440
+A user can change files, install a package temporarily, modify configuration,
 
-7
-00:00:46.057 --> 00:00:56.521
-This is useful when the goal is a resettable workstation, kiosk, classroom lab, training environment, or controlled analysis sandbox at a safe conceptual level.
+00:00:39.660 --> 00:00:44.300
+or create logs during the session, and those changes can vanish at reboot.
 
-8
-00:00:56.521 --> 00:01:04.923
-It can also protect the base system from routine writes. The merged view is convenient, but it can hide important design questions.
+00:00:44.520 --> 00:00:49.560
+This is useful when the goal is a resettable workstation, kiosk, classroom lab,
 
-9
-00:01:04.923 --> 00:01:11.645
-Which paths are in the overlay? Which paths are mounted separately? Do logs persist? Does /home persist?
+00:00:49.780 --> 00:00:54.740
+training environment, or controlled analysis sandbox at a safe conceptual level.
 
-10
-00:01:11.645 --> 00:01:18.442
-Are machine identity files, SSH host keys, package databases, or application state expected to survive?
+00:00:54.960 --> 00:00:59.440
+It can also protect the base system from routine writes. The merged view is convenient,
 
-11
-00:01:18.442 --> 00:01:27.150
-If the upper layer fills memory, what fails first? If updates are installed into the temporary layer, do they disappear at the next boot?
+00:00:59.660 --> 00:01:02.140
+but it can hide important design questions.
 
-12
-00:01:27.150 --> 00:01:35.170
-Persistence must be deliberate. A design might mount /home from persistent storage while keeping the system root volatile.
+00:01:02.360 --> 00:01:07.800
+Which paths are in the overlay? Which paths are mounted separately? Do logs persist? Does
 
-13
-00:01:35.170 --> 00:01:40.211
+00:01:08.020 --> 00:01:09.300
+/home persist?
+
+00:01:09.520 --> 00:01:14.080
+Are machine identity files, SSH host keys, package databases,
+
+00:01:14.300 --> 00:01:16.700
+or application state expected to survive?
+
+00:01:16.920 --> 00:01:18.680
+If the upper layer fills memory,
+
+00:01:18.900 --> 00:01:22.660
+what fails first? If updates are installed into the temporary layer,
+
+00:01:22.880 --> 00:01:24.320
+do they disappear at the next boot?
+
+00:01:24.540 --> 00:01:29.580
+Persistence must be deliberate. A design might mount /home from persistent storage while
+
+00:01:29.800 --> 00:01:31.640
+keeping the system root volatile.
+
+00:01:31.860 --> 00:01:36.740
 It might send logs to a remote server. It might provide an explicit save action.
 
-14
-00:01:40.211 --> 00:01:45.557
+00:01:36.960 --> 00:01:40.800
 It might update the read-only base image through a separate maintenance workflow.
 
-15
-00:01:45.557 --> 00:01:51.973
-Without these decisions, the system may appear to work until a reboot removes something important.
+00:01:41.020 --> 00:01:42.700
+Without these decisions,
 
-16
-00:01:51.973 --> 00:02:00.604
-OverlayFS and similar designs are powerful because they separate base state from session state. They are also easy to misunderstand.
+00:01:42.920 --> 00:01:46.520
+the system may appear to work until a reboot removes something important.
 
-17
-00:02:00.604 --> 00:02:08.701
-Always test the actual writable layer, verify mounts, inspect what changes after a reboot, and document which data survives.
+00:01:46.740 --> 00:01:51.540
+OverlayFS and similar designs are powerful because they separate base state from session
+
+00:01:51.760 --> 00:01:54.640
+state. They are also easy to misunderstand.
+
+00:01:54.860 --> 00:02:00.540
+Always test the actual writable layer, verify mounts, inspect what changes after a reboot,
+
+00:02:00.760 --> 00:02:03.160
+and document which data survives.

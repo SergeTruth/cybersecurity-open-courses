@@ -1,46 +1,88 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:06.484
-FP32 uses 32-bit floating-point values and has been a common training and reference precision.
+00:00:00.222 --> 00:00:04.975
+FP32 uses 32-bit floating-point values and has been a common training and reference
 
-00:00:06.484 --> 00:00:13.387
-FP16 uses half as many bits, reducing memory and taking advantage of supported accelerator operations.
+00:00:04.975 --> 00:00:05.493
+precision.
 
-00:00:13.387 --> 00:00:23.636
-BF16 also uses 16 bits but allocates them differently, preserving a broad numerical range that is useful in training and some inference workflows.
+00:00:05.493 --> 00:00:07.310
+FP16 uses half as many bits,
 
-00:00:23.636 --> 00:00:28.866
+00:00:07.310 --> 00:00:11.481
+reducing memory and taking advantage of supported accelerator operations.
+
+00:00:11.481 --> 00:00:14.730
+BF16 also uses 16 bits but allocates them differently,
+
+00:00:14.730 --> 00:00:18.630
+preserving a broad numerical range that is useful in training and some inference
+
+00:00:18.630 --> 00:00:19.510
+workflows.
+
+00:00:19.510 --> 00:00:22.781
 Hardware support determines whether a precision provides an actual speed benefit.
 
-00:00:28.866 --> 00:00:35.768
-INT8 represents quantized values with 8-bit integers, often with per-tensor, per-channel, or grouped scale information.
+00:00:22.781 --> 00:00:27.508
+INT8 represents quantized values with 8-bit integers, often with per-tensor, per-channel,
 
-00:00:35.768 --> 00:00:46.018
-Four-bit and lower-bit weight formats reduce storage further, but the nominal bit count does not include every scale, lookup, alignment, or metadata cost.
+00:00:27.508 --> 00:00:30.083
+or grouped scale information.
 
-00:00:46.018 --> 00:00:52.502
-Actual file and loaded sizes are therefore larger than parameters multiplied by bits alone.
+00:00:30.083 --> 00:00:31.760
+Four-bit and lower-bit weight formats reduce storage further,
 
-00:00:52.502 --> 00:00:55.640
+00:00:31.760 --> 00:00:35.740
+but the nominal bit count does not include every scale, lookup, alignment,
+
+00:00:35.740 --> 00:00:36.880
+or metadata cost.
+
+00:00:36.880 --> 00:00:40.885
+Actual file and loaded sizes are therefore larger than parameters multiplied by bits
+
+00:00:40.885 --> 00:00:41.590
+alone.
+
+00:00:41.590 --> 00:00:43.430
 Weights are the learned model parameters.
 
-00:00:55.640 --> 00:01:00.451
+00:00:43.430 --> 00:00:46.309
 Activations are intermediate values produced while the model processes input.
 
-00:01:00.451 --> 00:01:09.445
-A system may store weights at low precision while computing activations or selected layers at higher precision to preserve quality.
+00:00:46.309 --> 00:00:50.635
+A system may store weights at low precision while computing activations or selected layers
 
-00:01:09.445 --> 00:01:17.603
-The key-value cache has its own format and memory cost, which grows with context length and active sequences.
+00:00:50.635 --> 00:00:52.560
+at higher precision to preserve quality.
 
-00:01:17.603 --> 00:01:20.322
+00:00:52.560 --> 00:00:55.140
+The key-value cache has its own format and memory cost,
+
+00:00:55.140 --> 00:00:58.380
+which grows with context length and active sequences.
+
+00:00:58.380 --> 00:00:59.675
 Precision affects more than size.
 
-00:01:20.322 --> 00:01:25.969
-It changes numerical resolution, supported kernels, memory traffic, and sometimes output behavior.
+00:00:59.675 --> 00:01:02.830
+It changes numerical resolution, supported kernels, memory traffic,
 
-00:01:25.969 --> 00:01:32.454
-Lower is not automatically faster if the hardware or runtime lacks an efficient implementation.
+00:01:02.830 --> 00:01:04.710
+and sometimes output behavior.
 
-00:01:32.454 --> 00:01:42.285
-Treat labels such as 4-bit as a starting description, then inspect the quantization method, runtime support, measured memory, speed, and task quality.
+00:01:04.710 --> 00:01:08.200
+Lower is not automatically faster if the hardware or runtime lacks an efficient
+
+00:01:08.200 --> 00:01:09.120
+implementation.
+
+00:01:09.120 --> 00:01:11.570
+Treat labels such as 4-bit as a starting description,
+
+00:01:11.570 --> 00:01:15.570
+then inspect the quantization method, runtime support, measured memory, speed,
+
+00:01:15.570 --> 00:01:16.360
+and task quality.

@@ -1,55 +1,76 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.441
+00:00:00.000 --> 00:00:04.060
 The Linux GPU stack includes several layers that have to line up.
 
-00:00:04.441 --> 00:00:09.907
+00:00:04.060 --> 00:00:07.615
 Kernel modules provide low-level driver functionality inside the running kernel.
 
-00:00:09.907 --> 00:00:12.709
+00:00:07.615 --> 00:00:09.680
 Firmware may be required by the hardware.
 
-00:00:12.709 --> 00:00:18.380
+00:00:09.680 --> 00:00:14.000
 User-space driver libraries provide interfaces that applications and runtimes call.
 
-00:00:18.380 --> 00:00:25.759
-Display drivers may support monitors and desktops, while compute runtimes support GPU-accelerated workloads.
+00:00:14.000 --> 00:00:16.420
+Display drivers may support monitors and desktops,
 
-00:00:25.759 --> 00:00:33.480
-Package managers install and update many of these pieces, but AI workloads often depend on more than one package.
+00:00:16.420 --> 00:00:20.260
+while compute runtimes support GPU-accelerated workloads.
 
-00:00:33.480 --> 00:00:37.170
+00:00:20.260 --> 00:00:22.755
+Package managers install and update many of these pieces,
+
+00:00:22.755 --> 00:00:25.580
+but AI workloads often depend on more than one package.
+
+00:00:25.580 --> 00:00:27.823
 Kernel headers may be needed to build a driver module.
 
-00:00:37.170 --> 00:00:42.089
+00:00:27.823 --> 00:00:31.696
 DKMS, at a high level, helps rebuild kernel modules when kernels change.
 
-00:00:42.089 --> 00:00:45.984
+00:00:31.696 --> 00:00:35.140
 Device nodes expose GPU hardware to user-space processes.
 
-00:00:45.984 --> 00:00:51.791
+00:00:35.140 --> 00:00:39.300
 Permissions determine which users, services, and containers can access those devices.
 
-00:00:51.791 --> 00:00:57.394
+00:00:39.300 --> 00:00:43.780
 A working desktop display does not automatically mean compute workloads are ready.
 
-00:00:57.394 --> 00:01:09.215
-Likewise, a headless inference server may not need a full desktop stack, but it still needs the right kernel support, firmware, user-space libraries, and runtime interfaces.
+00:00:43.780 --> 00:00:46.780
+Likewise, a headless inference server may not need a full desktop stack,
 
-00:01:09.215 --> 00:01:16.594
-The exact package names vary by distribution and vendor, but the architectural responsibilities are similar.
+00:00:46.780 --> 00:00:50.630
+but it still needs the right kernel support, firmware, user-space libraries,
 
-00:01:16.594 --> 00:01:21.035
+00:00:50.630 --> 00:00:51.980
+and runtime interfaces.
+
+00:00:51.980 --> 00:00:54.550
+The exact package names vary by distribution and vendor,
+
+00:00:54.550 --> 00:00:57.725
+but the architectural responsibilities are similar.
+
+00:00:57.725 --> 00:01:00.375
 Understanding these layers makes troubleshooting less mysterious.
 
-00:01:21.035 --> 00:01:26.023
+00:01:00.375 --> 00:01:03.944
 If the GPU is not visible, look at hardware detection and kernel modules.
 
-00:01:26.023 --> 00:01:33.129
-If the driver is loaded but an AI library fails, look at user-space libraries and runtime compatibility.
+00:01:03.944 --> 00:01:06.660
+If the driver is loaded but an AI library fails,
 
-00:01:33.129 --> 00:01:40.508
-If containers cannot see the GPU, look at device exposure, container runtime configuration, and permissions.
+00:01:06.660 --> 00:01:09.540
+look at user-space libraries and runtime compatibility.
 
-00:01:40.508 --> 00:01:43.651
+00:01:09.540 --> 00:01:12.480
+If containers cannot see the GPU, look at device exposure,
+
+00:01:12.480 --> 00:01:15.340
+container runtime configuration, and permissions.
+
+00:01:15.340 --> 00:01:17.300
 AI acceleration depends on the complete stack.

@@ -1,61 +1,82 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.153
-Local LLM load balancing means placing one stable endpoint in front of several independently running model-serving servers.
+00:00:00.430 --> 00:00:04.380
+Local LLM load balancing means placing one stable endpoint in front of several
 
-2
-00:00:08.153 --> 00:00:15.239
-Each backend still has its own runtime, model files, memory limits, network address, logs, and failure modes.
+00:00:04.380 --> 00:00:06.700
+independently running model-serving servers.
 
-3
-00:00:15.239 --> 00:00:18.897
+00:00:06.700 --> 00:00:11.180
+Each backend still has its own runtime, model files, memory limits, network address, logs,
+
+00:00:11.180 --> 00:00:12.180
+and failure modes.
+
+00:00:12.180 --> 00:00:14.795
 The load balancer does not make those systems disappear.
 
-4
-00:00:18.897 --> 00:00:27.735
-It decides which available backend should receive an incoming request, while clients continue to call one predictable service address.
+00:00:14.795 --> 00:00:17.800
+It decides which available backend should receive an incoming request,
 
-5
-00:00:27.735 --> 00:00:37.184
-That is different from distributed inference, model parallelism, or a true cluster designed to split one inference job across multiple machines.
+00:00:17.800 --> 00:00:21.000
+while clients continue to call one predictable service address.
 
-6
-00:00:37.184 --> 00:00:40.765
+00:00:21.000 --> 00:00:23.855
+That is different from distributed inference, model parallelism,
+
+00:00:23.855 --> 00:00:27.675
+or a true cluster designed to split one inference job across multiple machines.
+
+00:00:27.675 --> 00:00:30.920
 A normal load balancer sends one request to one backend.
 
-7
-00:00:40.765 --> 00:00:48.613
-Specialized distributed inference can divide work across compute resources, but it requires specific runtime support.
+00:00:30.920 --> 00:00:34.640
+Specialized distributed inference can divide work across compute resources,
 
-8
-00:00:48.613 --> 00:00:56.842
-In this course, the focus is practical routing across local inference endpoints, not combining machines into one larger model.
+00:00:34.640 --> 00:00:36.620
+but it requires specific runtime support.
 
-9
-00:00:56.842 --> 00:01:00.881
+00:00:36.620 --> 00:00:40.220
+In this course, the focus is practical routing across local inference endpoints,
+
+00:00:40.220 --> 00:00:42.680
+not combining machines into one larger model.
+
+00:00:42.680 --> 00:00:46.075
 The most important expectation is latency versus throughput.
 
-10
-00:01:00.881 --> 00:01:06.519
+00:00:46.075 --> 00:00:50.600
 Latency is the delay for one request, such as time to first token and total response time.
 
-11
-00:01:06.519 --> 00:01:10.405
+00:00:50.600 --> 00:00:52.660
 Throughput is how much work the service completes over time.
 
-12
-00:01:10.405 --> 00:01:22.673
-Two servers can increase total throughput when several requests are active, but they usually do not make a single response twice as fast because one backend is still generating that response.
+00:00:52.660 --> 00:00:55.725
+Two servers can increase total throughput when several requests are active,
 
-13
-00:01:22.673 --> 00:01:33.874
-Load balancing is useful for labs, coding assistants, chat UIs, batch jobs, and small team environments because it gives tools one endpoint while the backend pool can change.
+00:00:55.725 --> 00:00:59.510
+but they usually do not make a single response twice as fast because one backend is still
 
-14
-00:01:33.874 --> 00:01:37.531
+00:00:59.510 --> 00:01:01.120
+generating that response.
+
+00:01:01.120 --> 00:01:05.030
+Load balancing is useful for labs, coding assistants, chat UIs, batch jobs,
+
+00:01:05.030 --> 00:01:09.280
+and small team environments because it gives tools one endpoint while the backend pool can
+
+00:01:09.280 --> 00:01:09.840
+change.
+
+00:01:09.840 --> 00:01:12.635
 Used well, it improves availability and spreads demand.
 
-15
-00:01:37.531 --> 00:01:48.732
-Used poorly, it can hide overload, route requests to incompatible models, break streaming behavior, or expose a sensitive local inference service without proper controls.
+00:01:12.635 --> 00:01:16.030
+Used poorly, it can hide overload, route requests to incompatible models,
+
+00:01:16.030 --> 00:01:17.360
+break streaming behavior,
+
+00:01:17.360 --> 00:01:20.840
+or expose a sensitive local inference service without proper controls.

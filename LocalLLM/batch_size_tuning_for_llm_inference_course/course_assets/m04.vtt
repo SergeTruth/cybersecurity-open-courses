@@ -1,85 +1,88 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.686
+00:00:00.510 --> 00:00:04.500
 Different runtimes use different names, but several concepts appear again and again.
 
-2
-00:00:05.686 --> 00:00:10.515
+00:00:04.500 --> 00:00:07.900
 Batch size describes how much work the runtime tries to process together.
 
-3
-00:00:10.515 --> 00:00:17.057
-Microbatch size breaks larger work into smaller chunks so the runtime can fit within memory limits.
+00:00:07.900 --> 00:00:12.130
+Microbatch size breaks larger work into smaller chunks so the runtime can fit within
 
-4
-00:00:17.057 --> 00:00:24.924
-Maximum batch tokens may limit the total number of prompt or generation tokens being processed across active requests.
+00:00:12.130 --> 00:00:13.115
+memory limits.
 
-5
-00:00:24.924 --> 00:00:31.466
-Maximum concurrent sequences controls how many active conversations or requests can be in flight.
+00:00:13.115 --> 00:00:17.195
+Maximum batch tokens may limit the total number of prompt or generation tokens being
 
-6
-00:00:31.466 --> 00:00:36.451
+00:00:17.195 --> 00:00:19.165
+processed across active requests.
+
+00:00:19.165 --> 00:00:23.300
+Maximum concurrent sequences controls how many active conversations or requests can be in
+
+00:00:23.300 --> 00:00:23.890
+flight.
+
+00:00:23.890 --> 00:00:27.300
 Context length controls how much prompt and history each request can carry.
 
-7
-00:00:36.451 --> 00:00:41.047
+00:00:27.300 --> 00:00:30.800
 Thread count affects CPU execution and support work around the model.
 
-8
-00:00:41.047 --> 00:00:47.278
-GPU layers or GPU offload settings decide how much of the model runs on the GPU instead of the CPU.
+00:00:30.800 --> 00:00:35.910
+GPU layers or GPU offload settings decide how much of the model runs on the GPU instead of
 
-9
-00:00:47.278 --> 00:00:52.340
+00:00:35.910 --> 00:00:36.575
+the CPU.
+
+00:00:36.575 --> 00:00:40.095
 Parallelism settings may affect how work is split across devices or streams.
 
-10
-00:00:52.340 --> 00:00:54.833
+00:00:40.095 --> 00:00:42.100
 The confusing part is that names vary.
 
-11
-00:00:54.833 --> 00:00:57.792
+00:00:42.100 --> 00:00:44.920
 One runtime may expose n_batch and n_ubatch.
 
-12
-00:00:57.792 --> 00:01:04.569
-Another may talk about max batch tokens, continuous batching, slots, sequences, or scheduler limits.
+00:00:44.920 --> 00:00:48.685
+Another may talk about max batch tokens, continuous batching, slots, sequences,
 
-13
-00:01:04.569 --> 00:01:09.398
+00:00:48.685 --> 00:00:49.790
+or scheduler limits.
+
+00:00:49.790 --> 00:00:53.425
 Do not assume two settings are identical just because they sound similar.
 
-14
-00:01:09.398 --> 00:01:14.616
+00:00:53.425 --> 00:00:56.895
 Documentation, release notes, and measurement are part of the tuning process.
 
-15
-00:01:14.616 --> 00:01:25.754
-A useful mental model is to ask what each setting controls: memory footprint, concurrency, prompt processing, decode scheduling, CPU support work, or GPU utilization.
+00:00:56.895 --> 00:01:01.495
+A useful mental model is to ask what each setting controls: memory footprint, concurrency,
 
-16
-00:01:25.754 --> 00:01:34.166
-Once you know what kind of constraint a setting touches, you can make smaller changes and interpret the result more confidently.
+00:01:01.495 --> 00:01:06.000
+prompt processing, decode scheduling, CPU support work, or GPU utilization.
 
-17
-00:01:34.166 --> 00:01:39.073
+00:01:06.000 --> 00:01:08.225
+Once you know what kind of constraint a setting touches,
+
+00:01:08.225 --> 00:01:11.085
+you can make smaller changes and interpret the result more confidently.
+
+00:01:11.085 --> 00:01:14.155
 The setting name matters less than understanding the behavior it changes.
 
-18
-00:01:39.073 --> 00:01:44.058
+00:01:14.155 --> 00:01:18.100
 When a runtime exposes many knobs, resist the urge to turn all of them at once.
 
-19
-00:01:44.058 --> 00:01:52.314
-Start with the settings that define the workload boundary: context length, concurrency, and maximum prompt or batch tokens.
+00:01:18.100 --> 00:01:22.140
+Start with the settings that define the workload boundary: context length, concurrency,
 
-20
-00:01:52.314 --> 00:01:56.909
+00:01:22.140 --> 00:01:23.950
+and maximum prompt or batch tokens.
+
+00:01:23.950 --> 00:01:27.195
 Then tune the settings that affect how the work is divided internally.
 
-21
-00:01:56.909 --> 00:02:01.972
+00:01:27.195 --> 00:01:30.890
 That order makes failures easier to interpret and rollback easier to manage.

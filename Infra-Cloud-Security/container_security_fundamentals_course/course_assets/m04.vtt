@@ -1,61 +1,88 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.401
+00:00:00.200 --> 00:00:03.640
 Build security determines what enters the container supply chain.
 
-2
-00:00:04.401 --> 00:00:18.375
-Dockerfiles and similar build definitions should be reviewed for base image choices, package installation patterns, user configuration, copied files, exposed ports, entry points, and build-time assumptions.
+00:00:03.860 --> 00:00:08.020
+Dockerfiles and similar build definitions should be reviewed for base image choices,
 
-3
-00:00:18.375 --> 00:00:32.427
-Build context control matters because accidental inclusion of source trees, credentials, configuration files, or temporary artifacts can place sensitive material inside an image or expose it to the build system.
+00:00:08.240 --> 00:00:12.960
+package installation patterns, user configuration, copied files, exposed ports,
 
-4
-00:00:32.427 --> 00:00:37.599
+00:00:13.180 --> 00:00:15.820
+entry points, and build-time assumptions.
+
+00:00:16.040 --> 00:00:20.840
+Build context control matters because accidental inclusion of source trees, credentials,
+
+00:00:21.060 --> 00:00:22.580
+configuration files,
+
+00:00:22.800 --> 00:00:28.320
+or temporary artifacts can place sensitive material inside an image or expose it to the
+
+00:00:28.540 --> 00:00:29.580
+build system.
+
+00:00:29.800 --> 00:00:34.280
 Reproducible build concepts help teams understand and trust their artifacts.
 
-5
-00:00:37.599 --> 00:00:47.327
-Dependency pinning, controlled package sources, deterministic build steps, and clear artifact naming make it easier to investigate what changed.
+00:00:34.500 --> 00:00:38.580
+Dependency pinning, controlled package sources, deterministic build steps,
 
-6
-00:00:47.327 --> 00:00:58.522
-Multi-stage builds separate build-time dependencies from smaller runtime artifacts, reducing the amount of tooling and intermediate content that ships to production.
+00:00:38.800 --> 00:00:42.240
+and clear artifact naming make it easier to investigate what changed.
 
-7
-00:00:58.522 --> 00:01:04.776
-The runtime image should contain what is needed to run, not everything needed to compile or test.
+00:00:42.460 --> 00:00:46.780
+Multi-stage builds separate build-time dependencies from smaller runtime artifacts,
 
-8
-00:01:04.776 --> 00:01:07.864
+00:00:47.000 --> 00:00:51.160
+reducing the amount of tooling and intermediate content that ships to production.
+
+00:00:51.380 --> 00:00:54.180
+The runtime image should contain what is needed to run,
+
+00:00:54.400 --> 00:00:56.400
+not everything needed to compile or test.
+
+00:00:56.620 --> 00:00:59.100
 Secrets during build are a common failure path.
 
-9
-00:01:07.864 --> 00:01:20.989
-Credentials used to fetch private dependencies, publish artifacts, or access registries should not be baked into image layers, printed in logs, or stored in build arguments that become visible later.
+00:00:59.320 --> 00:01:03.240
+Credentials used to fetch private dependencies, publish artifacts,
 
-10
-00:01:20.989 --> 00:01:28.864
-CI/CD systems should provide secure secret injection patterns and limit who can read or modify pipeline configuration.
+00:01:03.460 --> 00:01:08.020
+or access registries should not be baked into image layers, printed in logs,
 
-11
-00:01:28.864 --> 00:01:32.416
+00:01:08.240 --> 00:01:11.200
+or stored in build arguments that become visible later.
+
+00:01:11.420 --> 00:01:16.300
+CI/CD systems should provide secure secret injection patterns and limit who can read or
+
+00:01:16.520 --> 00:01:18.600
+modify pipeline configuration.
+
+00:01:18.820 --> 00:01:21.140
 The build system is part of the production trust chain.
 
-12
-00:01:32.416 --> 00:01:43.456
-Pipeline protections include branch protections, required review, artifact integrity checks, automated scanning, registry publishing controls, and policy gates.
+00:01:21.360 --> 00:01:24.880
+Pipeline protections include branch protections, required review,
 
-13
-00:01:43.456 --> 00:01:46.313
+00:01:25.100 --> 00:01:29.340
+artifact integrity checks, automated scanning, registry publishing controls,
+
+00:01:29.560 --> 00:01:31.160
+and policy gates.
+
+00:01:31.380 --> 00:01:33.940
 The point is not to make every build painful.
 
-14
-00:01:46.313 --> 00:01:55.346
-The point is to prevent untrusted code, leaked secrets, unreviewed artifacts, or known risky images from moving quietly into production.
+00:01:34.160 --> 00:01:39.120
+The point is to prevent untrusted code, leaked secrets, unreviewed artifacts,
 
-15
-00:01:55.346 --> 00:01:59.901
+00:01:39.340 --> 00:01:42.780
+or known risky images from moving quietly into production.
+
+00:01:43.000 --> 00:01:46.440
 Build security gives runtime security a trustworthy starting point.

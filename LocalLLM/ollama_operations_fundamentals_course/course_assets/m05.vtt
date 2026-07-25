@@ -1,65 +1,85 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.818
+00:00:00.000 --> 00:00:04.000
 When applications call Ollama, they should treat it as a service boundary.
 
-2
-00:00:04.818 --> 00:00:12.083
-It has request behavior, latency, errors, model availability, capacity limits, and operational assumptions.
+00:00:04.000 --> 00:00:08.000
+It has request behavior, latency, errors, model availability, capacity limits,
 
-3
-00:00:12.083 --> 00:00:21.642
-Even if the service is running locally, it can still be unavailable, slow, overloaded, misconfigured, or missing the model an application expects.
+00:00:08.000 --> 00:00:10.000
+and operational assumptions.
 
-4
-00:00:21.642 --> 00:00:30.818
-API clients need timeouts, error handling, predictable model selection, and clear assumptions about streaming or non-streaming behavior.
+00:00:10.000 --> 00:00:14.000
+Even if the service is running locally, it can still be unavailable, slow, overloaded,
 
-5
-00:00:30.818 --> 00:00:39.766
-A tool that works during a manual test may behave differently when multiple users are active or when a model needs to load before responding.
+00:00:14.000 --> 00:00:17.000
+misconfigured, or missing the model an application expects.
 
-6
-00:00:39.766 --> 00:00:47.566
-Applications should avoid fragile assumptions about response timing, model availability, or unlimited concurrency.
+00:00:17.000 --> 00:00:21.000
+API clients need timeouts, error handling, predictable model selection,
 
-7
-00:00:47.566 --> 00:00:53.913
-Teams should decide how model names, prompts, options, and user context are passed to the service.
+00:00:21.000 --> 00:00:23.000
+and clear assumptions about streaming or non-streaming behavior.
 
-8
-00:00:53.913 --> 00:01:00.566
-If a model name is hardcoded in several applications, replacing or retiring that model becomes harder.
+00:00:23.000 --> 00:00:27.100
+A tool that works during a manual test may behave differently when multiple users are
 
-9
-00:01:00.566 --> 00:01:07.525
-If prompt options are scattered across clients, support teams may not know which behavior users are seeing.
+00:00:27.100 --> 00:00:30.280
+active or when a model needs to load before responding.
 
-10
-00:01:07.525 --> 00:01:12.878
+00:00:30.280 --> 00:00:34.520
+Applications should avoid fragile assumptions about response timing, model availability,
+
+00:00:34.520 --> 00:00:36.000
+or unlimited concurrency.
+
+00:00:36.000 --> 00:00:38.890
+Teams should decide how model names, prompts, options,
+
+00:00:38.890 --> 00:00:41.000
+and user context are passed to the service.
+
+00:00:41.000 --> 00:00:43.500
+If a model name is hardcoded in several applications,
+
+00:00:43.500 --> 00:00:45.995
+replacing or retiring that model becomes harder.
+
+00:00:45.995 --> 00:00:48.180
+If prompt options are scattered across clients,
+
+00:00:48.180 --> 00:00:50.995
+support teams may not know which behavior users are seeing.
+
+00:00:50.995 --> 00:00:55.000
 A stable integration layer can make model selection and defaults easier to manage.
 
-11
-00:01:12.878 --> 00:01:19.378
-Local APIs still need operational discipline when they support shared tools or business workflows.
+00:00:55.000 --> 00:00:58.371
+Local APIs still need operational discipline when they support shared tools or business
 
-12
-00:01:19.378 --> 00:01:27.255
-Clear integration boundaries help separate application bugs from runtime, model, storage, and infrastructure issues.
+00:00:58.371 --> 00:00:58.947
+workflows.
 
-13
-00:01:27.255 --> 00:01:35.667
-They also give operators a place to document expectations for timeouts, retries, request size, streaming, and failure behavior.
+00:00:58.947 --> 00:01:03.500
+Clear integration boundaries help separate application bugs from runtime, model, storage,
 
-14
-00:01:35.667 --> 00:01:40.791
+00:01:03.500 --> 00:01:05.000
+and infrastructure issues.
+
+00:01:05.000 --> 00:01:08.590
+They also give operators a place to document expectations for timeouts, retries,
+
+00:01:08.590 --> 00:01:11.280
+request size, streaming, and failure behavior.
+
+00:01:11.280 --> 00:01:15.000
 Application teams should also decide what user context is appropriate to send.
 
-15
-00:01:40.791 --> 00:01:46.679
+00:01:15.000 --> 00:01:19.280
 A local service can still receive sensitive prompts, file excerpts, or retrieved context.
 
-16
-00:01:46.679 --> 00:01:55.550
-Integration code should keep data handling intentional, avoid unnecessary logging, and make it clear which workflow owns each request.
+00:01:19.280 --> 00:01:23.000
+Integration code should keep data handling intentional, avoid unnecessary logging,
+
+00:01:23.000 --> 00:01:26.000
+and make it clear which workflow owns each request.

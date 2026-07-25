@@ -1,52 +1,76 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:06.045
+00:00:00.256 --> 00:00:05.670
 GPU offload moves model layers or operations from CPU execution to an accelerator.
 
-00:00:06.045 --> 00:00:12.089
+00:00:05.670 --> 00:00:08.950
 Full offload is usually fastest when the model and cache fit in VRAM.
 
-00:00:12.089 --> 00:00:20.635
-Partial offload can make a larger model usable, but each remaining CPU stage and data transfer can reduce speed.
+00:00:08.950 --> 00:00:11.265
+Partial offload can make a larger model usable,
 
-00:00:20.635 --> 00:00:27.096
-Increase offload while watching VRAM headroom and stability rather than setting the maximum blindly.
+00:00:11.265 --> 00:00:14.640
+but each remaining CPU stage and data transfer can reduce speed.
 
-00:00:27.096 --> 00:00:31.890
+00:00:14.640 --> 00:00:18.650
+Increase offload while watching VRAM headroom and stability rather than setting the
+
+00:00:18.650 --> 00:00:19.580
+maximum blindly.
+
+00:00:19.580 --> 00:00:22.620
 Batch settings affect how much prompt work is processed together.
 
-00:00:31.890 --> 00:00:39.602
-Larger batches may improve accelerator utilization and prompt throughput but consume more memory and can increase latency.
+00:00:22.620 --> 00:00:26.705
+Larger batches may improve accelerator utilization and prompt throughput but consume more
 
-00:00:39.602 --> 00:00:48.982
-Thread count affects CPU-side work; using every logical thread is not always fastest because memory bandwidth, scheduling, and background tasks matter.
+00:00:26.705 --> 00:00:28.390
+memory and can increase latency.
 
-00:00:48.982 --> 00:00:52.942
+00:00:28.390 --> 00:00:30.225
+Thread count affects CPU-side work;
+
+00:00:30.225 --> 00:00:34.395
+using every logical thread is not always fastest because memory bandwidth, scheduling,
+
+00:00:34.395 --> 00:00:35.865
+and background tasks matter.
+
+00:00:35.865 --> 00:00:38.055
 Test a small range around the runtime default.
 
-00:00:52.942 --> 00:00:58.570
+00:00:38.055 --> 00:00:41.490
 Select the backend that is genuinely supported by the hardware and build.
 
-00:00:58.570 --> 00:01:01.279
+00:00:41.490 --> 00:00:43.916
 CUDA commonly accelerates NVIDIA devices.
 
-00:01:01.279 --> 00:01:09.825
-ROCm supports compatible AMD configurations, Vulkan can provide cross-vendor acceleration, Metal supports Apple platforms, and CPU fallback preserves portability.
+00:00:43.916 --> 00:00:48.880
+ROCm supports compatible AMD configurations, Vulkan can provide cross-vendor acceleration,
 
-00:01:09.825 --> 00:01:13.785
+00:00:48.880 --> 00:00:52.540
+Metal supports Apple platforms, and CPU fallback preserves portability.
+
+00:00:52.540 --> 00:00:55.205
 Confirm the active backend in logs and utilization.
 
-00:01:13.785 --> 00:01:18.996
+00:00:55.205 --> 00:00:58.121
 A successful launch may still be running mostly on the CPU.
 
-00:01:18.996 --> 00:01:23.373
+00:00:58.121 --> 00:01:01.690
 Defaults aim for broad compatibility, not every machine's optimum.
 
-00:01:23.373 --> 00:01:28.584
+00:01:01.690 --> 00:01:06.049
 Context length, cache format, offload, batch, threads, and memory mapping interact.
 
-00:01:28.584 --> 00:01:37.130
-Record a baseline, change one setting, rerun the same workload, and keep only improvements that preserve quality and reliability.
+00:01:06.049 --> 00:01:09.075
+Record a baseline, change one setting, rerun the same workload,
 
-00:01:37.130 --> 00:01:44.008
-Tuning should reduce a measured constraint, not create a mysterious collection of copied command-line flags.
+00:01:09.075 --> 00:01:11.795
+and keep only improvements that preserve quality and reliability.
+
+00:01:11.795 --> 00:01:13.720
+Tuning should reduce a measured constraint,
+
+00:01:13.720 --> 00:01:17.040
+not create a mysterious collection of copied command-line flags.

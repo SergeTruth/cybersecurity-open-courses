@@ -1,46 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:16.512
-A typical LLM API architecture includes clients, an API gateway or reverse proxy, an application backend, an inference server, a model runtime, model files, a tokenizer, compute resources, queues, caches, logs, monitoring, and storage.
+00:00:00.000 --> 00:00:05.690
+A typical LLM API architecture includes clients, an API gateway or reverse proxy,
 
-00:00:16.512 --> 00:00:26.489
-Not every system needs every component on day one, but each component represents a responsibility that becomes important as the service grows.
+00:00:05.690 --> 00:00:10.520
+an application backend, an inference server, a model runtime, model files, a tokenizer,
 
-00:00:26.489 --> 00:00:31.197
+00:00:10.520 --> 00:00:14.520
+compute resources, queues, caches, logs, monitoring, and storage.
+
+00:00:14.520 --> 00:00:16.610
+Not every system needs every component on day one,
+
+00:00:16.610 --> 00:00:20.740
+but each component represents a responsibility that becomes important as the service
+
+00:00:20.740 --> 00:00:21.235
+grows.
+
+00:00:21.235 --> 00:00:24.400
 Requests usually begin in application code or a user-facing client.
 
-00:00:31.197 --> 00:00:40.331
-The request may pass through a gateway or reverse proxy that handles TLS, routing, authentication, rate limits, and policy checks.
+00:00:24.400 --> 00:00:28.500
+The request may pass through a gateway or reverse proxy that handles TLS, routing,
 
-00:00:40.331 --> 00:00:49.185
-The application backend may add business context, retrieve documents, apply authorization, format messages, or select a model.
+00:00:28.500 --> 00:00:31.105
+authentication, rate limits, and policy checks.
 
-00:00:49.185 --> 00:00:56.773
-The inference server then passes the prepared request to a runtime that loads the model and produces output.
+00:00:31.105 --> 00:00:36.000
+The application backend may add business context, retrieve documents, apply authorization,
 
-00:00:56.773 --> 00:01:05.275
-The model runtime depends on model files, tokenizer information, CPU resources, GPU resources, memory, and configuration.
+00:00:36.000 --> 00:00:37.860
+format messages, or select a model.
 
-00:01:05.275 --> 00:01:07.734
+00:00:37.860 --> 00:00:41.715
+The inference server then passes the prepared request to a runtime that loads the model
+
+00:00:41.715 --> 00:00:42.760
+and produces output.
+
+00:00:42.760 --> 00:00:47.550
+The model runtime depends on model files, tokenizer information, CPU resources,
+
+00:00:47.550 --> 00:00:49.833
+GPU resources, memory, and configuration.
+
+00:00:49.833 --> 00:00:51.880
 Queues can smooth bursts of demand.
 
-00:01:07.734 --> 00:01:12.372
+00:00:51.880 --> 00:00:55.061
 Caches may reduce repeated work for embeddings or common requests.
 
-00:01:12.372 --> 00:01:19.679
-Logs and metrics provide visibility into latency, errors, token use, queue depth, and resource pressure.
+00:00:55.061 --> 00:00:59.450
+Logs and metrics provide visibility into latency, errors, token use, queue depth,
 
-00:01:19.679 --> 00:01:26.916
-Storage may hold prompts, outputs, embeddings, configuration, or audit records depending on the design.
+00:00:59.450 --> 00:01:00.680
+and resource pressure.
 
-00:01:26.916 --> 00:01:30.078
+00:01:00.680 --> 00:01:03.635
+Storage may hold prompts, outputs, embeddings, configuration,
+
+00:01:03.635 --> 00:01:05.880
+or audit records depending on the design.
+
+00:01:05.880 --> 00:01:07.965
 Good architecture makes request flow visible.
 
-00:01:30.078 --> 00:01:37.175
-Teams should be able to explain how a prompt moves from caller to model and how the response returns.
+00:01:07.965 --> 00:01:11.460
+Teams should be able to explain how a prompt moves from caller to model and how the
 
-00:01:37.175 --> 00:01:49.400
-They should know where authentication happens, where user authorization is checked, where sensitive data may be logged, where timeouts apply, and where failures are reported.
+00:01:11.460 --> 00:01:12.920
+response returns.
 
-00:01:49.400 --> 00:01:54.951
+00:01:12.920 --> 00:01:15.955
+They should know where authentication happens, where user authorization is checked,
+
+00:01:15.955 --> 00:01:20.160
+where sensitive data may be logged, where timeouts apply, and where failures are reported.
+
+00:01:20.160 --> 00:01:24.320
 An LLM API is an application service, not a single model file with a port open.

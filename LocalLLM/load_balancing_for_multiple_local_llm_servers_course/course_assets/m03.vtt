@@ -1,73 +1,85 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.166
+00:00:00.490 --> 00:00:02.810
 Local LLM workloads vary widely.
 
-2
-00:00:02.166 --> 00:00:06.654
+00:00:02.810 --> 00:00:05.760
 Interactive chat is latency-sensitive because a person is waiting.
 
-3
-00:00:06.654 --> 00:00:13.153
-Coding agents may issue many sequential calls while reading files, proposing edits, and retrying.
+00:00:05.760 --> 00:00:09.715
+Coding agents may issue many sequential calls while reading files, proposing edits,
 
-4
-00:00:13.153 --> 00:00:17.717
+00:00:09.715 --> 00:00:10.450
+and retrying.
+
+00:00:10.450 --> 00:00:14.205
 Batch summarization can tolerate longer waits but may create bursts.
 
-5
-00:00:17.717 --> 00:00:20.657
+00:00:14.205 --> 00:00:16.280
 Document analysis stresses context length.
 
-6
-00:00:20.657 --> 00:00:24.912
+00:00:16.280 --> 00:00:19.480
 Embedding jobs may use different models and endpoints entirely.
 
-7
-00:00:24.912 --> 00:00:29.864
+00:00:19.480 --> 00:00:23.080
 Short requests and long-context requests create different routing needs.
 
-8
-00:00:29.864 --> 00:00:32.262
+00:00:23.080 --> 00:00:24.880
 A quick prompt may finish in seconds.
 
-9
-00:00:32.262 --> 00:00:38.761
-A large document prompt may spend significant time in prompt processing before generation begins.
+00:00:24.880 --> 00:00:29.190
+A large document prompt may spend significant time in prompt processing before generation
 
-10
-00:00:38.761 --> 00:00:48.819
-If those requests are treated as identical, one backend can become clogged with long jobs while another could have served short interactive work quickly.
+00:00:29.190 --> 00:00:29.720
+begins.
 
-11
-00:00:48.819 --> 00:00:53.384
+00:00:29.720 --> 00:00:31.680
+If those requests are treated as identical,
+
+00:00:31.680 --> 00:00:35.200
+one backend can become clogged with long jobs while another could have served short
+
+00:00:35.200 --> 00:00:36.355
+interactive work quickly.
+
+00:00:36.355 --> 00:00:39.920
 Concurrency turns simple user behavior into real capacity pressure.
 
-12
-00:00:53.384 --> 00:01:03.906
-Several people may each think they are making one request, while the service sees overlapping prompt processing, token generation, and streaming connections.
+00:00:39.920 --> 00:00:42.520
+Several people may each think they are making one request,
 
-13
-00:01:03.906 --> 00:01:08.780
+00:00:42.520 --> 00:00:45.925
+while the service sees overlapping prompt processing, token generation,
+
+00:00:45.925 --> 00:00:47.285
+and streaming connections.
+
+00:00:47.285 --> 00:00:51.120
 A coding assistant or tool-using agent may keep a backend busy for minutes.
 
-14
-00:01:08.780 --> 00:01:15.588
-Routing should consider how much work each server can accept before queueing or rejecting new requests.
+00:00:51.120 --> 00:00:55.160
+Routing should consider how much work each server can accept before queueing or rejecting
 
-15
-00:01:15.588 --> 00:01:18.528
+00:00:55.160 --> 00:00:56.155
+new requests.
+
+00:00:56.155 --> 00:00:58.185
 Session continuity and retries also matter.
 
-16
-00:01:18.528 --> 00:01:24.718
-Stateless clients send full context with each request and can route to any compatible backend.
+00:00:58.185 --> 00:01:02.297
+Stateless clients send full context with each request and can route to any compatible
 
-17
-00:01:24.718 --> 00:01:31.449
-Other workflows rely on cache behavior, temporary state, or tool context and may need sticky sessions.
+00:01:02.297 --> 00:01:02.866
+backend.
 
-18
-00:01:31.449 --> 00:01:40.578
-Retries can improve reliability after a backend failure, but blind retries are risky when a request triggered actions or external tool use.
+00:01:02.866 --> 00:01:05.980
+Other workflows rely on cache behavior, temporary state,
+
+00:01:05.980 --> 00:01:08.285
+or tool context and may need sticky sessions.
+
+00:01:08.285 --> 00:01:11.380
+Retries can improve reliability after a backend failure,
+
+00:01:11.380 --> 00:01:15.560
+but blind retries are risky when a request triggered actions or external tool use.

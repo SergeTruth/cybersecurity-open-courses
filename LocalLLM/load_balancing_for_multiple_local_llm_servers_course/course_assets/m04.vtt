@@ -1,69 +1,67 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:03.549
+00:00:00.194 --> 00:00:03.340
 Round-robin routing sends requests to backends in turn.
 
-2
-00:00:03.549 --> 00:00:07.467
+00:00:03.340 --> 00:00:06.140
 It is simple and can work when servers and requests are similar.
 
-3
-00:00:07.467 --> 00:00:10.646
+00:00:06.140 --> 00:00:08.980
 Local LLM environments often are not that uniform.
 
-4
-00:00:10.646 --> 00:00:18.261
-One server may have a stronger GPU, another may have a smaller model, and a third may already be busy with long-context work.
+00:00:08.980 --> 00:00:12.330
+One server may have a stronger GPU, another may have a smaller model,
 
-5
-00:00:18.261 --> 00:00:22.475
+00:00:12.330 --> 00:00:15.036
+and a third may already be busy with long-context work.
+
+00:00:15.036 --> 00:00:18.339
 Round-robin is easy to start with, but it is not capacity awareness.
 
-6
-00:00:22.475 --> 00:00:29.055
-Least-connections routing sends new work toward the backend with fewer active connections or requests.
+00:00:18.339 --> 00:00:22.400
+Least-connections routing sends new work toward the backend with fewer active connections
 
-7
-00:00:29.055 --> 00:00:33.047
+00:00:22.400 --> 00:00:23.070
+or requests.
+
+00:00:23.070 --> 00:00:26.035
 That can be better than round-robin, but it still needs caution.
 
-8
-00:00:33.047 --> 00:00:37.631
+00:00:26.035 --> 00:00:29.193
 One long generation can consume more resources than several short calls.
 
-9
-00:00:37.631 --> 00:00:42.215
+00:00:29.193 --> 00:00:32.890
 A streaming client may hold a connection open while tokens arrive slowly.
 
-10
-00:00:42.215 --> 00:00:46.207
+00:00:32.890 --> 00:00:35.700
 Connection count is a signal, not a complete performance model.
 
-11
-00:00:46.207 --> 00:00:51.382
+00:00:35.700 --> 00:00:39.340
 Weighted routing lets stronger or lighter-loaded backends receive more traffic.
 
-12
-00:00:51.382 --> 00:01:01.807
-Health-check-based routing prevents traffic from going to servers that are down, still loading a model, repeatedly failing, or not ready for the requested workload.
+00:00:39.340 --> 00:00:42.640
+Health-check-based routing prevents traffic from going to servers that are down,
 
-13
-00:01:01.807 --> 00:01:10.309
-Good health checks are more than checking whether a port is open; they should reflect whether the backend can actually serve the request.
+00:00:42.640 --> 00:00:46.560
+still loading a model, repeatedly failing, or not ready for the requested workload.
 
-14
-00:01:10.309 --> 00:01:19.329
-More mature setups add model-aware routing, endpoint-aware routing, queues, failover, request timeouts, retry policies, and backpressure.
+00:00:46.560 --> 00:00:49.280
+Good health checks are more than checking whether a port is open;
 
-15
-00:01:19.329 --> 00:01:24.947
+00:00:49.280 --> 00:00:52.195
+they should reflect whether the backend can actually serve the request.
+
+00:00:52.195 --> 00:00:56.885
+More mature setups add model-aware routing, endpoint-aware routing, queues, failover,
+
+00:00:56.885 --> 00:00:59.097
+request timeouts, retry policies, and backpressure.
+
+00:00:59.097 --> 00:01:03.575
 Model-aware routing confirms that the requested model or capability exists on a backend.
 
-16
-00:01:24.947 --> 00:01:30.049
+00:01:03.575 --> 00:01:07.315
 Backpressure tells clients the service is busy instead of allowing slow failure.
 
-17
-00:01:30.049 --> 00:01:35.815
+00:01:07.315 --> 00:01:12.000
 The routing strategy should reflect real capacity, model availability, and workload type.

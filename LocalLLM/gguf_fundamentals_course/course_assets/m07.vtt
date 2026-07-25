@@ -1,58 +1,88 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:07.774
-Performance issues in local inference often fall into two categories: slow prompt processing and slow generation.
+00:00:00.550 --> 00:00:04.265
+Performance issues in local inference often fall into two categories:
 
-00:00:07.774 --> 00:00:12.796
+00:00:04.265 --> 00:00:06.680
+slow prompt processing and slow generation.
+
+00:00:06.680 --> 00:00:10.585
 Prompt processing is the work of reading and embedding the input context.
 
-00:00:12.796 --> 00:00:15.892
+00:00:10.585 --> 00:00:12.469
 Generation is the token-by-token output step.
 
-00:00:15.892 --> 00:00:23.185
-A setup may load quickly but generate slowly, or handle short prompts well but struggle with long context.
+00:00:12.469 --> 00:00:14.670
+A setup may load quickly but generate slowly,
 
-00:00:23.185 --> 00:00:26.693
+00:00:14.670 --> 00:00:17.720
+or handle short prompts well but struggle with long context.
+
+00:00:17.720 --> 00:00:19.850
 Knowing which phase is slow helps narrow the cause.
 
-00:00:26.693 --> 00:00:30.202
+00:00:19.850 --> 00:00:22.320
 Memory pressure is one of the most common problems.
 
-00:00:30.202 --> 00:00:35.775
+00:00:22.320 --> 00:00:26.809
 A model, quantization, or context length may exceed available VRAM or system RAM.
 
-00:00:35.775 --> 00:00:41.003
+00:00:26.809 --> 00:00:30.770
 GPU offload settings may be too aggressive, causing failures or instability.
 
-00:00:41.003 --> 00:00:43.893
+00:00:30.770 --> 00:00:33.340
 CPU-only execution may work but feel slow.
 
-00:00:43.893 --> 00:00:48.708
+00:00:33.340 --> 00:00:36.920
 Disk speed can affect model loading time, especially with large files.
 
-00:00:48.708 --> 00:00:56.620
-Batch size and thread settings can help, but they should be adjusted carefully and tested with the actual workload.
+00:00:36.920 --> 00:00:38.520
+Batch size and thread settings can help,
 
-00:00:56.620 --> 00:01:03.569
-Sampling settings affect output behavior and can be mistaken for performance or model quality issues.
+00:00:38.520 --> 00:00:41.805
+but they should be adjusted carefully and tested with the actual workload.
 
-00:01:03.569 --> 00:01:11.549
-Temperature, top-p, repetition controls, and related options influence how deterministic or varied the output feels.
+00:00:41.805 --> 00:00:45.945
+Sampling settings affect output behavior and can be mistaken for performance or model
 
-00:01:11.549 --> 00:01:21.869
-If results seem rambling, repetitive, or inconsistent, the issue may be sampling configuration, prompt formatting, model fit, or quantization quality.
+00:00:45.945 --> 00:00:46.850
+quality issues.
 
-00:01:21.869 --> 00:01:26.753
+00:00:46.850 --> 00:00:49.240
+Temperature, top-p, repetition controls,
+
+00:00:49.240 --> 00:00:53.280
+and related options influence how deterministic or varied the output feels.
+
+00:00:53.280 --> 00:00:56.150
+If results seem rambling, repetitive, or inconsistent,
+
+00:00:56.150 --> 00:00:59.655
+the issue may be sampling configuration, prompt formatting, model fit,
+
+00:00:59.655 --> 00:01:00.700
+or quantization quality.
+
+00:01:00.700 --> 00:01:03.850
 Troubleshooting should separate runtime settings from model capability.
 
-00:01:26.753 --> 00:01:37.073
-A practical troubleshooting loop starts with a known compatible runtime, a trusted model file, conservative context length, and a documented baseline.
+00:01:03.850 --> 00:01:07.355
+A practical troubleshooting loop starts with a known compatible runtime,
 
-00:01:37.073 --> 00:01:44.916
-Then change one variable at a time: quantization, GPU offload, thread count, context length, or sampling settings.
+00:01:07.355 --> 00:01:11.090
+a trusted model file, conservative context length, and a documented baseline.
 
-00:01:44.916 --> 00:01:48.080
+00:01:11.090 --> 00:01:15.230
+Then change one variable at a time: quantization, GPU offload, thread count,
+
+00:01:15.230 --> 00:01:17.439
+context length, or sampling settings.
+
+00:01:17.439 --> 00:01:19.840
 Compare memory use, speed, and output quality.
 
-00:01:48.080 --> 00:01:54.822
-This disciplined approach is slower than random tweaking, but it produces knowledge you can reuse.
+00:01:19.840 --> 00:01:22.135
+This disciplined approach is slower than random tweaking,
+
+00:01:22.135 --> 00:01:24.020
+but it produces knowledge you can reuse.

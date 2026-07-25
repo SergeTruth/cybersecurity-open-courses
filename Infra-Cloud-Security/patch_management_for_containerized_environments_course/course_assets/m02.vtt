@@ -1,58 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.197
+00:00:00.200 --> 00:00:04.360
 A container image is assembled from build instructions and filesystem layers.
 
-00:00:05.197 --> 00:00:12.057
-The base image may provide an operating system, a minimal distribution, or a language-specific runtime.
+00:00:04.580 --> 00:00:08.500
+The base image may provide an operating system, a minimal distribution,
 
-00:00:12.057 --> 00:00:16.423
+00:00:08.720 --> 00:00:10.880
+or a language-specific runtime.
+
+00:00:11.100 --> 00:00:15.660
 Later layers add packages, application dependencies, configuration, and code.
 
-00:00:16.423 --> 00:00:19.541
+00:00:15.880 --> 00:00:17.880
 Patch scope begins with those inputs.
 
-00:00:19.541 --> 00:00:23.491
+00:00:18.100 --> 00:00:20.980
 Operating-system packages may be inherited from the base.
 
-00:00:23.491 --> 00:00:28.272
+00:00:21.200 --> 00:00:25.520
 Language runtimes and package managers introduce their own release cycles.
 
-00:00:28.272 --> 00:00:34.716
-Application libraries can be installed directly, pulled transitively, or copied from another build stage.
+00:00:25.740 --> 00:00:29.580
+Application libraries can be installed directly, pulled transitively,
 
-00:00:34.716 --> 00:00:39.497
+00:00:29.800 --> 00:00:31.960
+or copied from another build stage.
+
+00:00:32.180 --> 00:00:35.300
 The container build file defines how the artifact is created.
 
-00:00:39.497 --> 00:00:47.189
-Pinning, repository configuration, build stages, copied files, and cleanup all affect what remains in the final image.
+00:00:35.520 --> 00:00:40.240
+Pinning, repository configuration, build stages, copied files,
 
-00:00:47.189 --> 00:00:55.296
-Updating a package in one layer does not help if an older vulnerable copy is still present elsewhere.
+00:00:40.460 --> 00:00:43.900
+and cleanup all affect what remains in the final image.
 
-00:00:55.296 --> 00:00:57.583
+00:00:44.120 --> 00:00:49.400
+Updating a package in one layer does not help if an older vulnerable copy is still present
+
+00:00:49.620 --> 00:00:50.420
+elsewhere.
+
+00:00:50.640 --> 00:00:52.640
 Shared ancestry creates fan-out.
 
-00:00:57.583 --> 00:01:08.185
-Many teams may build from the same organization base image or dependency set, so one vulnerable component can appear in dozens of application images.
+00:00:52.860 --> 00:00:56.780
+Many teams may build from the same organization base image or dependency set,
 
-00:01:08.185 --> 00:01:14.629
-A base-image fix reduces risk only after dependent images are rebuilt, promoted, and redeployed.
+00:00:57.000 --> 00:01:00.840
+so one vulnerable component can appear in dozens of application images.
 
-00:01:14.629 --> 00:01:18.995
+00:01:01.060 --> 00:01:05.700
+A base-image fix reduces risk only after dependent images are rebuilt, promoted,
+
+00:01:05.920 --> 00:01:07.680
+and redeployed.
+
+00:01:07.900 --> 00:01:12.300
 Tags can move, while digests identify exact image content.
 
-00:01:18.995 --> 00:01:27.518
-Patch records should connect source revision, base digest, dependency inventory, build provenance, image digest, registry location, and deployed workload.
+00:01:12.520 --> 00:01:17.400
+Patch records should connect source revision, base digest, dependency inventory,
 
-00:01:27.518 --> 00:01:32.299
+00:01:17.620 --> 00:01:22.900
+build provenance, image digest, registry location, and deployed workload.
+
+00:01:23.120 --> 00:01:26.080
 This chain lets teams prove which version is actually running.
 
-00:01:32.299 --> 00:01:38.744
+00:01:26.300 --> 00:01:31.020
 Minimize image contents and maintain a software bill of materials to make scope visible.
 
-00:01:38.744 --> 00:01:44.356
+00:01:31.240 --> 00:01:37.080
 Removing unused tools and packages reduces both attack surface and remediation workload.
 
-00:01:44.356 --> 00:01:53.295
-The objective is not simply a newer tag; it is a reproducible image whose vulnerable components were replaced or removed.
+00:01:37.300 --> 00:01:39.780
+The objective is not simply a newer tag;
+
+00:01:40.000 --> 00:01:44.320
+it is a reproducible image whose vulnerable components were replaced or removed.

@@ -1,105 +1,145 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.125
+00:00:00.250 --> 00:00:03.160
 Threat hunting depends on available, trustworthy telemetry.
 
-2
-00:00:04.125 --> 00:00:10.740
-A hunter can only reason from evidence that exists, is accessible, and can be interpreted correctly.
+00:00:03.160 --> 00:00:06.105
+A hunter can only reason from evidence that exists, is accessible,
 
-3
-00:00:10.740 --> 00:00:22.958
-The best hypothesis will fail if the required data was never collected, is retained for too short a period, or lacks the fields needed to identify users, hosts, commands, or destinations.
+00:00:06.105 --> 00:00:07.775
+and can be interpreted correctly.
 
-4
-00:00:22.958 --> 00:00:28.484
+00:00:07.775 --> 00:00:11.070
+The best hypothesis will fail if the required data was never collected,
+
+00:00:11.070 --> 00:00:15.360
+is retained for too short a period, or lacks the fields needed to identify users, hosts,
+
+00:00:15.360 --> 00:00:16.840
+commands, or destinations.
+
+00:00:16.840 --> 00:00:20.840
 This is why telemetry review is part of the hunt, not a separate administrative task.
 
-5
-00:00:28.484 --> 00:00:41.948
-Common data sources include endpoint process events, authentication logs, DNS logs, proxy and firewall logs, EDR telemetry, cloud control-plane logs, identity-provider logs, and email security logs.
+00:00:20.840 --> 00:00:25.470
+Common data sources include endpoint process events, authentication logs, DNS logs,
 
-6
-00:00:41.948 --> 00:00:51.365
-Endpoint process events help answer questions about parent-child process chains, command lines, file execution, and persistence behavior.
+00:00:25.470 --> 00:00:30.560
+proxy and firewall logs, EDR telemetry, cloud control-plane logs, identity-provider logs,
 
-7
-00:00:51.365 --> 00:01:00.003
-Authentication logs help answer questions about account use, source locations, device changes, and failed or successful access.
+00:00:30.560 --> 00:00:31.890
+and email security logs.
 
-8
-00:01:00.003 --> 00:01:05.451
+00:00:31.890 --> 00:00:35.805
+Endpoint process events help answer questions about parent-child process chains,
+
+00:00:35.805 --> 00:00:38.765
+command lines, file execution, and persistence behavior.
+
+00:00:38.765 --> 00:00:42.715
+Authentication logs help answer questions about account use, source locations,
+
+00:00:42.715 --> 00:00:45.400
+device changes, and failed or successful access.
+
+00:00:45.400 --> 00:00:49.600
 DNS and proxy logs help answer questions about domains and outbound destinations.
 
-9
-00:01:05.451 --> 00:01:13.934
-Cloud control-plane logs show administrative actions such as role changes, key creation, storage access, or unusual API calls.
+00:00:49.600 --> 00:00:53.930
+Cloud control-plane logs show administrative actions such as role changes, key creation,
 
-10
-00:01:13.934 --> 00:01:23.117
-Data quality matters as much as data presence. Missing fields can make a useful query impossible. Clock drift can make a timeline look wrong.
+00:00:53.930 --> 00:00:56.120
+storage access, or unusual API calls.
 
-11
-00:01:23.117 --> 00:01:30.900
-Inconsistent hostnames can split one asset into several identities. NAT can cause many systems to share one source IP.
+00:00:56.120 --> 00:01:00.375
+Data quality matters as much as data presence. Missing fields can make a useful query
 
-12
-00:01:30.900 --> 00:01:39.928
-Short log retention can hide the start of an activity chain. Noisy event volume can bury relevant events under routine software behavior.
+00:01:00.375 --> 00:01:03.150
+impossible. Clock drift can make a timeline look wrong.
 
-13
-00:01:39.928 --> 00:01:48.877
-A hunt should account for these issues instead of pretending the data is perfect. Trust also has layers. An endpoint agent may be offline.
+00:01:03.150 --> 00:01:07.600
+Inconsistent hostnames can split one asset into several identities. NAT can cause many
 
-14
-00:01:48.877 --> 00:01:55.415
-A cloud log may be delayed. A firewall log may show connection metadata without application detail.
+00:01:07.600 --> 00:01:09.190
+systems to share one source IP.
 
-15
-00:01:55.415 --> 00:02:00.707
+00:01:09.190 --> 00:01:13.579
+Short log retention can hide the start of an activity chain. Noisy event volume can bury
+
+00:01:13.579 --> 00:01:15.675
+relevant events under routine software behavior.
+
+00:01:15.675 --> 00:01:19.720
+A hunt should account for these issues instead of pretending the data is perfect. Trust
+
+00:01:19.720 --> 00:01:22.320
+also has layers. An endpoint agent may be offline.
+
+00:01:22.320 --> 00:01:26.320
+A cloud log may be delayed. A firewall log may show connection metadata without
+
+00:01:26.320 --> 00:01:27.475
+application detail.
+
+00:01:27.475 --> 00:01:31.440
 An identity log may show a successful sign-in but not what the user did afterward.
 
-16
-00:02:00.707 --> 00:02:05.843
+00:01:31.440 --> 00:01:35.010
 Hunters should understand what each source can prove and what it cannot prove.
 
-17
-00:02:05.843 --> 00:02:15.105
-A proxy log may show that a system connected to a domain, but it may not prove which process made the request unless endpoint data is correlated.
+00:01:35.010 --> 00:01:37.620
+A proxy log may show that a system connected to a domain,
 
-18
-00:02:15.105 --> 00:02:17.751
+00:01:37.620 --> 00:01:41.818
+but it may not prove which process made the request unless endpoint data is correlated.
+
+00:01:41.818 --> 00:01:43.790
 Telemetry gaps are valid hunt findings.
 
-19
-00:02:17.751 --> 00:02:28.568
-If the hunt cannot answer a question because DNS logs are missing from a network segment or cloud administrative logs are not retained long enough, document that gap.
+00:01:43.790 --> 00:01:48.060
+If the hunt cannot answer a question because DNS logs are missing from a network segment
 
-20
-00:02:28.568 --> 00:02:35.728
-That outcome can drive logging improvements, retention changes, parsing fixes, or new detection coverage.
+00:01:48.060 --> 00:01:50.845
+or cloud administrative logs are not retained long enough,
 
-21
-00:02:35.728 --> 00:02:49.503
-A beginner threat hunter should build a habit of asking three telemetry questions before querying: what source should show this behavior, what fields do I need, and what limitations could weaken my conclusion?
+00:01:50.845 --> 00:01:51.630
+document that gap.
 
-22
-00:02:49.503 --> 00:02:55.262
+00:01:51.630 --> 00:01:55.540
+That outcome can drive logging improvements, retention changes, parsing fixes,
+
+00:01:55.540 --> 00:01:56.735
+or new detection coverage.
+
+00:01:56.735 --> 00:02:00.680
+A beginner threat hunter should build a habit of asking three telemetry questions before
+
+00:02:00.680 --> 00:02:01.200
+querying:
+
+00:02:01.200 --> 00:02:04.030
+what source should show this behavior, what fields do I need,
+
+00:02:04.030 --> 00:02:06.370
+and what limitations could weaken my conclusion?
+
+00:02:06.370 --> 00:02:10.320
 That habit keeps the investigation grounded in evidence and prevents overconfidence.
 
-23
-00:02:55.262 --> 00:03:00.010
+00:02:10.320 --> 00:02:13.805
 Telemetry review should also include access and privacy expectations.
 
-24
-00:03:00.010 --> 00:03:09.427
-Hunters should use approved data sources, follow retention and handling rules, and avoid collecting more information than the hunt requires.
+00:02:13.805 --> 00:02:17.510
+Hunters should use approved data sources, follow retention and handling rules,
 
-25
-00:03:09.427 --> 00:03:14.329
+00:02:17.510 --> 00:02:20.425
+and avoid collecting more information than the hunt requires.
+
+00:02:20.425 --> 00:02:23.760
 Good hunting respects both security needs and responsible data handling.
 
-26
-00:03:14.329 --> 00:03:22.112
-The point is to answer the defensive question with enough evidence, not to expose unrelated user or business activity.
+00:02:23.760 --> 00:02:26.840
+The point is to answer the defensive question with enough evidence,
+
+00:02:26.840 --> 00:02:29.440
+not to expose unrelated user or business activity.

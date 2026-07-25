@@ -1,85 +1,94 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:07.310
-Batch size tuning for LLM inference is about matching the model, runtime, hardware, context length, and workload.
+00:00:00.000 --> 00:00:04.720
+Batch size tuning for LLM inference is about matching the model, runtime, hardware,
 
-2
-00:00:07.310 --> 00:00:10.174
+00:00:04.720 --> 00:00:06.190
+context length, and workload.
+
+00:00:06.190 --> 00:00:08.480
 It is not a contest to maximize every setting.
 
-3
-00:00:10.174 --> 00:00:17.861
-A larger value can improve throughput in one situation and damage latency, memory stability, or reliability in another.
+00:00:08.480 --> 00:00:12.150
+A larger value can improve throughput in one situation and damage latency,
 
-4
-00:00:17.861 --> 00:00:22.760
+00:00:12.150 --> 00:00:14.720
+memory stability, or reliability in another.
+
+00:00:14.720 --> 00:00:17.980
 The right setting is the one that supports the way the system is actually used.
 
-5
-00:00:22.760 --> 00:00:26.754
+00:00:17.980 --> 00:00:20.931
 The most important distinction is between prefill and decode.
 
-6
-00:00:26.754 --> 00:00:30.070
+00:00:20.931 --> 00:00:23.715
 Prefill processes the prompt and existing context.
 
-7
-00:00:30.070 --> 00:00:31.879
+00:00:23.715 --> 00:00:24.960
 Decode produces new tokens.
 
-8
-00:00:31.879 --> 00:00:38.284
-Batch settings, prompt length, concurrency, and memory pressure affect those phases differently.
+00:00:24.960 --> 00:00:26.850
+Batch settings, prompt length, concurrency,
 
-9
-00:00:38.284 --> 00:00:46.876
-That is why first-token latency, tokens per second, total response time, and requests per second all tell different parts of the story.
+00:00:26.850 --> 00:00:29.210
+and memory pressure affect those phases differently.
 
-10
-00:00:46.876 --> 00:00:50.493
+00:00:29.210 --> 00:00:32.450
+That is why first-token latency, tokens per second, total response time,
+
+00:00:32.450 --> 00:00:35.560
+and requests per second all tell different parts of the story.
+
+00:00:35.560 --> 00:00:38.280
 Good tuning is measured, conservative, and repeatable.
 
-11
-00:00:50.493 --> 00:00:52.603
+00:00:38.280 --> 00:00:39.880
 Start with a realistic workload.
 
-12
-00:00:52.603 --> 00:00:54.412
+00:00:39.880 --> 00:00:41.240
 Change one setting at a time.
 
-13
-00:00:54.412 --> 00:00:59.311
+00:00:41.240 --> 00:00:45.040
 Track memory, utilization, temperature, errors, latency, and throughput.
 
-14
-00:00:59.311 --> 00:01:06.922
-Keep enough headroom for normal variation, because a configuration that barely survives a test can fail under real use.
+00:00:45.040 --> 00:00:46.770
+Keep enough headroom for normal variation,
 
-15
-00:01:06.922 --> 00:01:11.746
+00:00:46.770 --> 00:00:50.700
+because a configuration that barely survives a test can fail under real use.
+
+00:00:50.700 --> 00:00:54.520
 For local interactive systems, prioritize responsiveness and stability.
 
-16
-00:01:11.746 --> 00:01:18.604
-For API serving, balance user latency with total throughput, fairness, queue behavior, and backpressure.
+00:00:54.520 --> 00:00:58.770
+For API serving, balance user latency with total throughput, fairness, queue behavior,
 
-17
-00:01:18.604 --> 00:01:23.879
+00:00:58.770 --> 00:00:59.706
+and backpressure.
+
+00:00:59.706 --> 00:01:03.920
 In both cases, document the settings that work for each model and hardware profile.
 
-18
-00:01:23.879 --> 00:01:30.436
-The goal is reliable inference that feels predictable, observable, and appropriate for the workload.
+00:01:03.920 --> 00:01:06.820
+The goal is reliable inference that feels predictable, observable,
 
-19
-00:01:30.436 --> 00:01:36.615
-The durable lesson is that inference tuning is operational engineering, not a magic number hunt.
+00:01:06.820 --> 00:01:08.710
+and appropriate for the workload.
 
-20
-00:01:36.615 --> 00:01:42.418
-The same model can need different settings on a laptop, a workstation, and a shared service.
+00:01:08.710 --> 00:01:11.730
+The durable lesson is that inference tuning is operational engineering,
 
-21
-00:01:42.418 --> 00:01:53.798
-What carries across environments is the method: define the workload, measure the phases, control memory pressure, and keep the system observable enough to explain its behavior.
+00:01:11.730 --> 00:01:13.570
+not a magic number hunt.
+
+00:01:13.570 --> 00:01:16.390
+The same model can need different settings on a laptop, a workstation,
+
+00:01:16.390 --> 00:01:17.480
+and a shared service.
+
+00:01:17.480 --> 00:01:21.330
+What carries across environments is the method: define the workload, measure the phases,
+
+00:01:21.330 --> 00:01:25.280
+control memory pressure, and keep the system observable enough to explain its behavior.

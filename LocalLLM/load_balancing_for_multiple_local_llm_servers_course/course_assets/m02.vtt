@@ -1,69 +1,79 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:01.984
+00:00:00.000 --> 00:00:03.010
 A local LLM server is a stack.
 
-2
-00:00:01.984 --> 00:00:07.440
+00:00:03.010 --> 00:00:07.136
 Hardware provides CPU, GPU, VRAM, system memory, disk, and network capacity.
 
-3
-00:00:07.440 --> 00:00:13.722
+00:00:07.136 --> 00:00:11.800
 A runtime loads the model file, prepares prompts, manages context, and generates tokens.
 
-4
-00:00:13.722 --> 00:00:20.005
+00:00:11.800 --> 00:00:16.600
 An API layer receives requests from chat clients, coding assistants, scripts, or agents.
 
-5
-00:00:20.005 --> 00:00:27.280
-Load balancing works only when each layer is understood well enough to predict what a backend can handle.
+00:00:16.600 --> 00:00:20.245
+Load balancing works only when each layer is understood well enough to predict what a
 
-6
-00:00:27.280 --> 00:00:29.512
+00:00:20.245 --> 00:00:21.255
+backend can handle.
+
+00:00:21.255 --> 00:00:22.830
 The model file shapes capacity.
 
-7
-00:00:29.512 --> 00:00:38.026
-Size, format, quantization level, context capability, and runtime compatibility affect memory use and response speed.
+00:00:22.830 --> 00:00:25.750
+Size, format, quantization level, context capability,
 
-8
-00:00:38.026 --> 00:00:46.210
-A smaller quantized model may fit on modest hardware, while a larger model may require more VRAM and longer load times.
+00:00:25.750 --> 00:00:29.000
+and runtime compatibility affect memory use and response speed.
 
-9
-00:00:46.210 --> 00:00:54.890
-A long context setting can help with document analysis, but it can also increase prompt processing time and memory pressure.
+00:00:29.000 --> 00:00:31.860
+A smaller quantized model may fit on modest hardware,
 
-10
-00:00:54.890 --> 00:01:08.282
-Most clients interact with local servers through HTTP APIs, often using concepts similar to cloud LLM APIs: model names, chat-style request bodies, streaming chunks, and structured errors.
+00:00:31.860 --> 00:00:35.125
+while a larger model may require more VRAM and longer load times.
 
-11
-00:01:08.282 --> 00:01:11.506
+00:00:35.125 --> 00:00:37.970
+A long context setting can help with document analysis,
+
+00:00:37.970 --> 00:00:41.315
+but it can also increase prompt processing time and memory pressure.
+
+00:00:41.315 --> 00:00:44.455
+Most clients interact with local servers through HTTP APIs,
+
+00:00:44.455 --> 00:00:49.860
+often using concepts similar to cloud LLM APIs: model names, chat-style request bodies,
+
+00:00:49.860 --> 00:00:52.435
+streaming chunks, and structured errors.
+
+00:00:52.435 --> 00:00:54.075
 Compatibility is helpful but not guaranteed.
 
-12
-00:01:11.506 --> 00:01:18.450
-Endpoint paths, request fields, headers, authentication behavior, and error formats can differ.
+00:00:54.075 --> 00:00:56.980
+Endpoint paths, request fields, headers, authentication behavior,
 
-13
-00:01:18.450 --> 00:01:22.831
+00:00:56.980 --> 00:00:58.280
+and error formats can differ.
+
+00:00:58.280 --> 00:01:01.515
 A load balancer must preserve the behavior the client expects.
 
-14
-00:01:22.831 --> 00:01:25.394
+00:01:01.515 --> 00:01:03.040
 Streaming is especially important.
 
-15
-00:01:25.394 --> 00:01:36.471
-Many interfaces expect partial output while the model is still generating, so the backend, proxy, and load balancer must avoid buffering the entire response.
+00:01:03.040 --> 00:01:07.280
+Many interfaces expect partial output while the model is still generating, so the backend,
 
-16
-00:01:36.471 --> 00:01:40.356
+00:01:07.280 --> 00:01:10.600
+proxy, and load balancer must avoid buffering the entire response.
+
+00:01:10.600 --> 00:01:13.240
 Each backend should also be monitored as its own system.
 
-17
-00:01:40.356 --> 00:01:50.607
-A server with a different model, smaller context window, older runtime, or weaker GPU may need different routing rules instead of equal treatment.
+00:01:13.240 --> 00:01:17.170
+A server with a different model, smaller context window, older runtime,
+
+00:01:17.170 --> 00:01:20.150
+or weaker GPU may need different routing rules instead of equal treatment.

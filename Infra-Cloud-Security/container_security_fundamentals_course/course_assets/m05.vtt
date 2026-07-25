@@ -1,61 +1,82 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.368
+00:00:00.200 --> 00:00:04.440
 Runtime hardening is about reducing what a container can access or change when it runs.
 
-2
-00:00:05.368 --> 00:00:16.987
-A practical starting point is running as a non-root user where possible, because root inside a container can increase impact when paired with weak runtime configuration or host exposure.
+00:00:04.660 --> 00:00:09.220
+A practical starting point is running as a non-root user where possible,
 
-3
-00:00:16.987 --> 00:00:25.150
-Container user identity should be intentional, documented, and compatible with the application’s filesystem and process needs.
+00:00:09.440 --> 00:00:13.680
+because root inside a container can increase impact when paired with weak runtime
 
-4
-00:00:25.150 --> 00:00:36.990
-Least privilege also means dropping unnecessary capabilities, limiting writable paths, using read-only filesystem concepts when practical, and avoiding broad host namespace exposure.
+00:00:13.900 --> 00:00:16.220
+configuration or host exposure.
 
-5
-00:00:36.990 --> 00:00:40.961
+00:00:16.440 --> 00:00:19.720
+Container user identity should be intentional, documented,
+
+00:00:19.940 --> 00:00:23.460
+and compatible with the application’s filesystem and process needs.
+
+00:00:23.680 --> 00:00:28.640
+Least privilege also means dropping unnecessary capabilities, limiting writable paths,
+
+00:00:28.860 --> 00:00:31.900
+using read-only filesystem concepts when practical,
+
+00:00:32.120 --> 00:00:34.840
+and avoiding broad host namespace exposure.
+
+00:00:35.060 --> 00:00:38.980
 Security profiles at a high level can restrict system behavior.
 
-6
-00:00:40.961 --> 00:00:47.065
-Resource limits help reduce the impact of runaway or abusive workloads on shared infrastructure.
+00:00:39.200 --> 00:00:43.520
+Resource limits help reduce the impact of runaway or abusive workloads on shared
 
-7
-00:00:47.065 --> 00:00:54.492
-These controls are most useful when they become defaults rather than special hardening applied only to a few workloads.
+00:00:43.740 --> 00:00:44.780
+infrastructure.
 
-8
-00:00:54.492 --> 00:01:02.802
-Privileged containers are high-risk because they may grant broad access to host-level capabilities or sensitive system functions.
+00:00:45.000 --> 00:00:49.400
+These controls are most useful when they become defaults rather than special hardening
 
-9
-00:01:02.802 --> 00:01:05.008
+00:00:49.620 --> 00:00:51.540
+applied only to a few workloads.
+
+00:00:51.760 --> 00:00:56.400
+Privileged containers are high-risk because they may grant broad access to host-level
+
+00:00:56.620 --> 00:00:59.100
+capabilities or sensitive system functions.
+
+00:00:59.320 --> 00:01:01.720
 Host path mounts also require care.
 
-10
-00:01:05.008 --> 00:01:13.391
-Mounting the container runtime socket, system directories, or sensitive host paths can blur the boundary between container and host.
+00:01:01.940 --> 00:01:04.980
+Mounting the container runtime socket, system directories,
 
-11
-00:01:13.391 --> 00:01:20.745
-Some workloads legitimately need deeper host access, but those exceptions should be rare, documented, and reviewed.
+00:01:05.200 --> 00:01:09.200
+or sensitive host paths can blur the boundary between container and host.
 
-12
-00:01:20.745 --> 00:01:25.893
+00:01:09.420 --> 00:01:14.700
+Some workloads legitimately need deeper host access, but those exceptions should be rare,
+
+00:01:14.920 --> 00:01:17.320
+documented, and reviewed.
+
+00:01:17.540 --> 00:01:21.380
 Hardening should be tested with the application, not guessed into place at the end.
 
-13
-00:01:25.893 --> 00:01:36.850
-Teams need to know which files must be writable, which ports are needed, which processes are expected, which capabilities are required, and what resource limits are realistic.
+00:01:21.600 --> 00:01:25.280
+Teams need to know which files must be writable, which ports are needed,
 
-14
-00:01:36.850 --> 00:01:39.792
+00:01:25.500 --> 00:01:29.420
+which processes are expected, which capabilities are required,
+
+00:01:29.640 --> 00:01:31.640
+and what resource limits are realistic.
+
+00:01:31.860 --> 00:01:34.660
 The secure target is not an unusable container.
 
-15
-00:01:39.792 --> 00:01:44.645
+00:01:34.880 --> 00:01:39.280
 It is a container that has enough access to perform its purpose and little else.

@@ -1,77 +1,103 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.664
+00:00:00.000 --> 00:00:02.509
 Batch size tuning is bounded by hardware.
 
-2
-00:00:02.664 --> 00:00:11.265
-GPU VRAM is usually the first constraint people notice because model weights, runtime buffers, and the KV cache all compete for space.
+00:00:02.509 --> 00:00:06.145
+GPU VRAM is usually the first constraint people notice because model weights,
 
-3
-00:00:11.265 --> 00:00:21.693
-System RAM matters too, especially when the model is partially offloaded, when the runtime uses CPU memory for staging, or when the machine falls back to swapping.
+00:00:06.145 --> 00:00:09.460
+runtime buffers, and the KV cache all compete for space.
 
-4
-00:00:21.693 --> 00:00:27.858
-Once swapping begins, performance can collapse even if the process does not crash immediately.
+00:00:09.460 --> 00:00:12.430
+System RAM matters too, especially when the model is partially offloaded,
 
-5
-00:00:27.858 --> 00:00:33.034
+00:00:12.430 --> 00:00:16.960
+when the runtime uses CPU memory for staging, or when the machine falls back to swapping.
+
+00:00:16.960 --> 00:00:18.215
+Once swapping begins,
+
+00:00:18.215 --> 00:00:21.560
+performance can collapse even if the process does not crash immediately.
+
+00:00:21.560 --> 00:00:24.885
 Memory bandwidth and compute utilization are just as important as raw capacity.
 
-6
-00:00:33.034 --> 00:00:38.590
+00:00:24.885 --> 00:00:29.734
 A GPU with enough VRAM may still be underused if the runtime cannot feed it efficiently.
 
-7
-00:00:38.590 --> 00:00:44.527
-A CPU-only setup may be limited by memory bandwidth, thread scheduling, and cache behavior.
+00:00:29.734 --> 00:00:33.495
+A CPU-only setup may be limited by memory bandwidth, thread scheduling,
 
-8
-00:00:44.527 --> 00:00:52.443
-Integrated GPUs share memory with the system, so aggressive settings can affect both inference and the rest of the machine.
+00:00:33.495 --> 00:00:34.465
+and cache behavior.
 
-9
-00:00:52.443 --> 00:00:59.978
-Context length has a direct impact because longer conversations and larger documents require more attention state.
+00:00:34.465 --> 00:00:36.715
+Integrated GPUs share memory with the system,
 
-10
-00:00:59.978 --> 00:01:07.894
-The KV cache stores intermediate state that lets generation continue without reprocessing the entire context every time.
+00:00:36.715 --> 00:00:40.345
+so aggressive settings can affect both inference and the rest of the machine.
 
-11
-00:01:07.894 --> 00:01:10.406
+00:00:40.345 --> 00:00:44.350
+Context length has a direct impact because longer conversations and larger documents
+
+00:00:44.350 --> 00:00:45.620
+require more attention state.
+
+00:00:45.620 --> 00:00:49.940
+The KV cache stores intermediate state that lets generation continue without reprocessing
+
+00:00:49.940 --> 00:00:51.540
+the entire context every time.
+
+00:00:51.540 --> 00:00:53.650
 That cache is useful, but it is not free.
 
-12
-00:01:10.406 --> 00:01:18.169
-More concurrent sequences, longer contexts, and larger batch-related settings can increase memory pressure quickly.
+00:00:53.650 --> 00:00:55.884
+More concurrent sequences, longer contexts,
 
-13
-00:01:18.169 --> 00:01:30.500
-Oversized batch settings can look attractive because they promise more parallelism, but they can also cause out-of-memory errors, runtime instability, high latency, or slower throughput.
+00:00:55.884 --> 00:00:59.430
+and larger batch-related settings can increase memory pressure quickly.
 
-14
-00:01:30.500 --> 00:01:37.350
-The practical goal is to find a setting that keeps the hardware busy without pushing it into a fragile state.
+00:00:59.430 --> 00:01:03.230
+Oversized batch settings can look attractive because they promise more parallelism,
 
-15
-00:01:37.350 --> 00:01:44.505
-Stable headroom matters, especially for systems that need to run for hours instead of surviving one benchmark.
+00:01:03.230 --> 00:01:06.935
+but they can also cause out-of-memory errors, runtime instability, high latency,
 
-16
-00:01:44.505 --> 00:01:49.148
+00:01:06.935 --> 00:01:07.960
+or slower throughput.
+
+00:01:07.960 --> 00:01:11.750
+The practical goal is to find a setting that keeps the hardware busy without pushing it
+
+00:01:11.750 --> 00:01:13.080
+into a fragile state.
+
+00:01:13.080 --> 00:01:14.110
+Stable headroom matters,
+
+00:01:14.110 --> 00:01:17.890
+especially for systems that need to run for hours instead of surviving one benchmark.
+
+00:01:17.890 --> 00:01:21.210
 This is why a stable configuration usually leaves deliberate headroom.
 
-17
-00:01:49.148 --> 00:01:58.967
-A machine that reports just enough free VRAM during a clean test may fail when the prompt is longer, another process opens, or concurrent requests arrive.
+00:01:21.210 --> 00:01:25.190
+A machine that reports just enough free VRAM during a clean test may fail when the prompt
 
-18
-00:01:58.967 --> 00:02:01.098
+00:01:25.190 --> 00:01:25.750
+is longer,
+
+00:01:25.750 --> 00:01:29.220
+another process opens, or concurrent requests arrive.
+
+00:01:29.220 --> 00:01:30.490
 Headroom is not wasted capacity.
 
-19
-00:02:01.098 --> 00:02:08.329
-It is the margin that keeps inference predictable when real operating conditions are less tidy than a benchmark.
+00:01:30.490 --> 00:01:34.140
+It is the margin that keeps inference predictable when real operating conditions are less
+
+00:01:34.140 --> 00:01:35.240
+tidy than a benchmark.

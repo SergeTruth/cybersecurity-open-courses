@@ -1,77 +1,103 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.157
+00:00:00.000 --> 00:00:03.980
 Batch-related problems often show up as memory failures first.
 
-2
-00:00:04.157 --> 00:00:16.859
-Out-of-memory errors, excessive swapping, process crashes, or sudden latency spikes are signs that the configuration may be too aggressive for the model, context length, or concurrency level.
+00:00:03.980 --> 00:00:06.920
+Out-of-memory errors, excessive swapping, process crashes,
 
-3
-00:00:16.859 --> 00:00:25.866
-Reduce the workload dimensions one at a time: batch size, microbatch size, context length, maximum concurrent sequences, or prompt size.
+00:00:06.920 --> 00:00:10.720
+or sudden latency spikes are signs that the configuration may be too aggressive for the
 
-4
-00:00:25.866 --> 00:00:29.715
+00:00:10.720 --> 00:00:11.090
+model,
+
+00:00:11.090 --> 00:00:13.155
+context length, or concurrency level.
+
+00:00:13.155 --> 00:00:18.160
+Reduce the workload dimensions one at a time: batch size, microbatch size, context length,
+
+00:00:18.160 --> 00:00:20.765
+maximum concurrent sequences, or prompt size.
+
+00:00:20.765 --> 00:00:23.800
 Slow prompt ingestion points toward prefill constraints.
 
-5
-00:00:29.715 --> 00:00:36.335
-Test with a shorter prompt, then with the realistic long prompt, and compare prompt processing speed.
+00:00:23.800 --> 00:00:26.420
+Test with a shorter prompt, then with the realistic long prompt,
 
-6
-00:00:36.335 --> 00:00:43.649
-Slow generation points toward decode behavior, memory bandwidth, device utilization, or thermal throttling.
+00:00:26.420 --> 00:00:28.375
+and compare prompt processing speed.
 
-7
-00:00:43.649 --> 00:00:50.885
-High first-token latency may come from a long prefill phase, a queue, or a scheduler waiting to assemble a batch.
+00:00:28.375 --> 00:00:32.670
+Slow generation points toward decode behavior, memory bandwidth, device utilization,
 
-8
-00:00:50.885 --> 00:01:00.123
-Uneven GPU utilization can mean the runtime is not feeding the device efficiently, but it can also mean the workload is too small to keep it busy.
+00:00:32.670 --> 00:00:34.160
+or thermal throttling.
 
-9
-00:01:00.123 --> 00:01:07.051
-CPU utilization can reveal bottlenecks around tokenization, sampling, scheduling, or partial offload.
+00:00:34.160 --> 00:00:37.250
+High first-token latency may come from a long prefill phase, a queue,
 
-10
-00:01:07.051 --> 00:01:09.745
+00:00:37.250 --> 00:00:39.675
+or a scheduler waiting to assemble a batch.
+
+00:00:39.675 --> 00:00:43.640
+Uneven GPU utilization can mean the runtime is not feeding the device efficiently,
+
+00:00:43.640 --> 00:00:46.312
+but it can also mean the workload is too small to keep it busy.
+
+00:00:46.312 --> 00:00:50.560
+CPU utilization can reveal bottlenecks around tokenization, sampling, scheduling,
+
+00:00:50.560 --> 00:00:51.485
+or partial offload.
+
+00:00:51.485 --> 00:00:53.560
 Temperature and power limits matter too.
 
-11
-00:01:09.745 --> 00:01:16.366
-A system that begins fast and then slows down may be thermally constrained rather than poorly batched.
+00:00:53.560 --> 00:00:57.390
+A system that begins fast and then slows down may be thermally constrained rather than
 
-12
-00:01:16.366 --> 00:01:20.292
+00:00:57.390 --> 00:00:58.760
+poorly batched.
+
+00:00:58.760 --> 00:01:01.480
 Be careful not to blame batch settings for unrelated issues.
 
-13
-00:01:20.292 --> 00:01:28.606
-Output quality problems are often caused by sampling parameters, prompts, model choice, or retrieval quality, not batch size.
+00:01:01.480 --> 00:01:05.555
+Output quality problems are often caused by sampling parameters, prompts, model choice,
 
-14
-00:01:28.606 --> 00:01:32.994
+00:01:05.555 --> 00:01:07.490
+or retrieval quality, not batch size.
+
+00:01:07.490 --> 00:01:11.320
 A model that is simply too large for the hardware may never tune well.
 
-15
-00:01:32.994 --> 00:01:42.925
-Troubleshooting works best when you separate resource failures, latency problems, throughput limits, and model behavior into different hypotheses.
+00:01:11.320 --> 00:01:14.430
+Troubleshooting works best when you separate resource failures, latency problems,
 
-16
-00:01:42.925 --> 00:01:50.392
-A good troubleshooting habit is to reduce the system to a known-good baseline before chasing exotic explanations.
+00:01:14.430 --> 00:01:17.165
+throughput limits, and model behavior into different hypotheses.
 
-17
-00:01:50.392 --> 00:01:57.089
-Use a smaller context, lower concurrency, conservative batch settings, and a representative prompt.
+00:01:17.165 --> 00:01:21.595
+A good troubleshooting habit is to reduce the system to a known-good baseline before
 
-18
-00:01:57.089 --> 00:02:00.707
+00:01:21.595 --> 00:01:23.240
+chasing exotic explanations.
+
+00:01:23.240 --> 00:01:26.785
+Use a smaller context, lower concurrency, conservative batch settings,
+
+00:01:26.785 --> 00:01:27.880
+and a representative prompt.
+
+00:01:27.880 --> 00:01:30.635
 If stability returns, increase one dimension at a time.
 
-19
-00:02:00.707 --> 00:02:08.329
-If stability does not return, the issue may be model compatibility, drivers, hardware health, or the runtime itself.
+00:01:30.635 --> 00:01:34.435
+If stability does not return, the issue may be model compatibility, drivers,
+
+00:01:34.435 --> 00:01:36.230
+hardware health, or the runtime itself.

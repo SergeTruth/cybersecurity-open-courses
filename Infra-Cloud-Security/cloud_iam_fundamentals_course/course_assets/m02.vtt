@@ -1,141 +1,166 @@
 WEBVTT
 
-1
-00:00:00,000 --> 00:00:05,056
+00:00:00.200 --> 00:00:04.600
 A principal is an identity that can request access to a cloud resource or API.
 
-2
-00:00:05,056 --> 00:00:17,458
-Common building blocks include users, groups, roles, service accounts, managed identities, workload identities, applications, API keys, access tokens, and temporary credentials.
+00:00:04.820 --> 00:00:10.260
+Common building blocks include users, groups, roles, service accounts, managed identities,
 
-3
-00:00:17,458 --> 00:00:20,301
+00:00:10.480 --> 00:00:16.880
+workload identities, applications, API keys, access tokens, and temporary credentials.
+
+00:00:17.100 --> 00:00:19.180
 Different providers use different names.
 
-4
-00:00:20,301 --> 00:00:33,730
-AWS roles, Azure managed identities, and Google Cloud service accounts are not identical, but they all represent a basic idea: something is being authenticated and then authorized to perform actions.
+00:00:19.400 --> 00:00:25.000
+AWS roles, Azure managed identities, and Google Cloud service accounts are not identical,
 
-5
-00:00:33,730 --> 00:00:38,391
+00:00:25.220 --> 00:00:27.380
+but they all represent a basic idea:
+
+00:00:27.600 --> 00:00:31.600
+something is being authenticated and then authorized to perform actions.
+
+00:00:31.820 --> 00:00:35.340
 Human identities and non-human identities need different controls.
 
-6
-00:00:38,391 --> 00:00:48,344
-A person may sign in through a browser or command-line tool using a federated identity provider, multi-factor authentication, and role assumption.
+00:00:35.560 --> 00:00:40.040
+A person may sign in through a browser or command-line tool using a federated identity
 
-7
-00:00:48,344 --> 00:00:57,587
-A workload may run inside a virtual machine, container, serverless function, Kubernetes pod, CI/CD pipeline, or deployment automation.
+00:00:40.260 --> 00:00:41.140
+provider,
 
-8
-00:00:57,587 --> 00:01:05,328
-It may need to read a secret, write logs, publish an artifact, deploy infrastructure, or call another cloud service.
+00:00:41.360 --> 00:00:44.560
+multi-factor authentication, and role assumption.
 
-9
-00:01:05,328 --> 00:01:09,436
+00:00:44.780 --> 00:00:49.500
+A workload may run inside a virtual machine, container, serverless function,
+
+00:00:49.720 --> 00:00:53.800
+Kubernetes pod, CI/CD pipeline, or deployment automation.
+
+00:00:54.020 --> 00:00:59.460
+It may need to read a secret, write logs, publish an artifact, deploy infrastructure,
+
+00:00:59.680 --> 00:01:01.520
+or call another cloud service.
+
+00:01:01.740 --> 00:01:05.260
 The security design should reflect the identity type and job.
 
-10
-00:01:09,436 --> 00:01:14,965
+00:01:05.480 --> 00:01:10.200
 Every identity should have a purpose, owner, lifecycle, and permission boundary.
 
-11
-00:01:14,965 --> 00:01:17,098
+00:01:10.420 --> 00:01:12.500
 Purpose explains why it exists.
 
-12
-00:01:17,098 --> 00:01:23,497
-Ownership explains who reviews it, approves changes, and responds when something looks wrong.
+00:01:12.720 --> 00:01:15.840
+Ownership explains who reviews it, approves changes,
 
-13
-00:01:23,497 --> 00:01:28,710
+00:01:16.060 --> 00:01:18.620
+and responds when something looks wrong.
+
+00:01:18.840 --> 00:01:23.800
 Lifecycle explains when it should be created, rotated, disabled, or deleted.
 
-14
-00:01:28,710 --> 00:01:37,321
-A permission boundary or equivalent guardrail limits what the identity can do, even if a policy or role assignment changes later.
+00:01:24.020 --> 00:01:28.020
+A permission boundary or equivalent guardrail limits what the identity can do,
 
-15
-00:01:37,321 --> 00:01:41,744
+00:01:28.240 --> 00:01:31.040
+even if a policy or role assignment changes later.
+
+00:01:31.260 --> 00:01:34.620
 These details prevent stale identities from becoming quiet risk.
 
-16
-00:01:41,744 --> 00:01:43,482
+00:01:34.840 --> 00:01:36.440
 Credentials also differ.
 
-17
-00:01:43,482 --> 00:01:51,302
-Long-lived access keys and static secrets are operationally risky because they can be copied, forgotten, or leaked.
+00:01:36.660 --> 00:01:41.220
+Long-lived access keys and static secrets are operationally risky because they can be
 
-18
-00:01:51,302 --> 00:02:01,809
-Temporary credentials, managed identity mechanisms, workload identity federation, and short-lived tokens reduce that risk when implemented correctly.
+00:01:41.440 --> 00:01:42.320
+copied,
 
-19
-00:02:01,809 --> 00:02:04,731
+00:01:42.540 --> 00:01:44.300
+forgotten, or leaked.
+
+00:01:44.520 --> 00:01:49.560
+Temporary credentials, managed identity mechanisms, workload identity federation,
+
+00:01:49.780 --> 00:01:53.060
+and short-lived tokens reduce that risk when implemented correctly.
+
+00:01:53.280 --> 00:01:55.760
 The goal is not merely to create identities.
 
-20
-00:02:04,731 --> 00:02:12,315
-The goal is to make each identity understandable, owned, scoped, auditable, and removable when its purpose ends.
+00:01:55.980 --> 00:02:01.340
+The goal is to make each identity understandable, owned, scoped, auditable,
 
-21
-00:02:12,315 --> 00:02:15,949
+00:02:01.560 --> 00:02:04.200
+and removable when its purpose ends.
+
+00:02:04.420 --> 00:02:07.460
 Human identities usually follow people and job roles.
 
-22
-00:02:15,949 --> 00:02:21,083
+00:02:07.680 --> 00:02:13.200
 They need onboarding, role changes, offboarding, MFA, and periodic review.
 
-23
-00:02:21,083 --> 00:02:24,717
+00:02:13.420 --> 00:02:16.460
 Non-human identities follow systems and automation.
 
-24
-00:02:24,717 --> 00:02:32,932
-They need owners, rotation or short-lived credentials, clear deployment context, and removal when the workload retires.
+00:02:16.680 --> 00:02:21.720
+They need owners, rotation or short-lived credentials, clear deployment context,
 
-25
-00:02:32,932 --> 00:02:43,043
-Treating both categories the same leads to mistakes: humans get permanent machine keys, or workloads inherit human-style administrator privileges.
+00:02:21.940 --> 00:02:24.500
+and removal when the workload retires.
 
-26
-00:02:43,043 --> 00:02:44,781
+00:02:24.720 --> 00:02:29.520
+Treating both categories the same leads to mistakes: humans get permanent machine keys,
+
+00:02:29.740 --> 00:02:33.180
+or workloads inherit human-style administrator privileges.
+
+00:02:33.400 --> 00:02:35.240
 Naming and metadata help.
 
-27
-00:02:44,781 --> 00:02:51,812
-An identity name, tag, label, description, or owner field should tell a reviewer what the identity is for.
+00:02:35.460 --> 00:02:39.380
+An identity name, tag, label, description,
 
-28
-00:02:51,812 --> 00:03:00,343
-If a service account called temp-admin has existed for two years and no one knows what it runs, that is not only untidy; it is a risk.
+00:02:39.600 --> 00:02:42.640
+or owner field should tell a reviewer what the identity is for.
 
-29
-00:03:00,343 --> 00:03:06,347
+00:02:42.860 --> 00:02:47.580
+If a service account called temp-admin has existed for two years and no one knows what it
+
+00:02:47.800 --> 00:02:48.760
+runs,
+
+00:02:48.980 --> 00:02:51.780
+that is not only untidy; it is a risk.
+
+00:02:52.000 --> 00:02:57.360
 Identity inventory is the foundation for access review, incident response, and cleanup.
 
-30
-00:03:06,347 --> 00:03:10,533
+00:02:57.580 --> 00:03:01.340
 Reviews should ask whether an identity still matches reality.
 
-31
-00:03:10,533 --> 00:03:13,219
+00:03:01.560 --> 00:03:03.480
 Does the group still represent the team?
 
-32
-00:03:13,219 --> 00:03:16,063
+00:03:03.700 --> 00:03:05.860
 Does the role still match the application?
 
-33
-00:03:16,063 --> 00:03:17,880
+00:03:06.080 --> 00:03:07.760
 Is the API key still needed?
 
-34
-00:03:17,880 --> 00:03:20,171
+00:03:07.980 --> 00:03:09.820
 Is the token issuer still trusted?
 
-35
-00:03:20,171 --> 00:03:29,571
-IAM drift often comes from identities that were correct when created but were never revisited after projects, teams, and workloads changed.
+00:03:10.040 --> 00:03:14.440
+IAM drift often comes from identities that were correct when created but were never
+
+00:03:14.660 --> 00:03:16.580
+revisited after projects,
+
+00:03:16.800 --> 00:03:19.120
+teams, and workloads changed.

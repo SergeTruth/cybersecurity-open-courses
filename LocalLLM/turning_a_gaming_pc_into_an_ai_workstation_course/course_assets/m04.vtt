@@ -1,58 +1,91 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.064
+00:00:00.490 --> 00:00:05.000
 Acceleration support determines whether local AI feels interactive or merely possible.
 
-00:00:05.064 --> 00:00:11.343
-NVIDIA hardware commonly uses CUDA, a mature compute platform supported by many AI runtimes.
+00:00:05.000 --> 00:00:07.120
+NVIDIA hardware commonly uses CUDA,
 
-00:00:11.343 --> 00:00:21.674
-AMD workflows may use ROCm where the operating system and GPU are supported, while Vulkan backends can provide broader cross-vendor acceleration for compatible tools.
+00:00:07.120 --> 00:00:10.260
+a mature compute platform supported by many AI runtimes.
 
-00:00:21.674 --> 00:00:30.789
-Support varies by model, driver, runtime build, and operating system, so a GPU brand alone does not guarantee a working path.
+00:00:10.260 --> 00:00:14.135
+AMD workflows may use ROCm where the operating system and GPU are supported,
 
-00:00:30.789 --> 00:00:34.232
+00:00:14.135 --> 00:00:18.678
+while Vulkan backends can provide broader cross-vendor acceleration for compatible tools.
+
+00:00:18.678 --> 00:00:22.340
+Support varies by model, driver, runtime build, and operating system,
+
+00:00:22.340 --> 00:00:25.480
+so a GPU brand alone does not guarantee a working path.
+
+00:00:25.480 --> 00:00:27.185
 Think of the stack as a chain.
 
-00:00:34.232 --> 00:00:38.486
+00:00:27.185 --> 00:00:30.075
 The operating system recognizes the GPU through its driver.
 
-00:00:38.486 --> 00:00:43.145
+00:00:30.075 --> 00:00:33.450
 The runtime must be compiled for a compatible acceleration backend.
 
-00:00:43.145 --> 00:00:49.829
-That backend must support the GPU architecture and the numerical formats used by the model.
+00:00:33.450 --> 00:00:37.540
+That backend must support the GPU architecture and the numerical formats used by the
 
-00:00:49.829 --> 00:00:59.755
-If any link is incompatible, the application may fail to load, silently run on the CPU, or offload only part of the workload.
+00:00:37.540 --> 00:00:38.050
+model.
 
-00:00:59.755 --> 00:01:08.060
-Confirm acceleration through runtime logs and GPU utilization rather than assuming that installation success means the GPU is active.
+00:00:38.050 --> 00:00:42.760
+If any link is incompatible, the application may fail to load, silently run on the CPU,
 
-00:01:08.060 --> 00:01:17.580
-GPU offload places model layers or operations on the graphics processor while retaining the remainder in system memory and on the CPU.
+00:00:42.760 --> 00:00:44.360
+or offload only part of the workload.
 
-00:01:17.580 --> 00:01:22.644
+00:00:44.360 --> 00:00:48.600
+Confirm acceleration through runtime logs and GPU utilization rather than assuming that
+
+00:00:48.600 --> 00:00:51.245
+installation success means the GPU is active.
+
+00:00:51.245 --> 00:00:55.445
+GPU offload places model layers or operations on the graphics processor while retaining
+
+00:00:55.445 --> 00:00:57.760
+the remainder in system memory and on the CPU.
+
+00:00:57.760 --> 00:01:00.560
 Full offload is usually faster when the model fits in VRAM.
 
-00:01:22.644 --> 00:01:29.734
-Partial offload can make a larger model usable, but data movement and CPU computation reduce speed.
+00:01:00.560 --> 00:01:02.935
+Partial offload can make a larger model usable,
 
-00:01:29.734 --> 00:01:37.633
-CPU-only inference remains a valuable fallback for troubleshooting, embeddings, and smaller models, though interactive generation is typically slower.
+00:01:02.935 --> 00:01:05.761
+but data movement and CPU computation reduce speed.
 
-00:01:37.633 --> 00:01:39.456
+00:01:05.761 --> 00:01:09.250
+CPU-only inference remains a valuable fallback for troubleshooting, embeddings,
+
+00:01:09.250 --> 00:01:12.400
+and smaller models, though interactive generation is typically slower.
+
+00:01:12.400 --> 00:01:14.110
 Version discipline matters.
 
-00:01:39.456 --> 00:01:44.115
+00:01:14.110 --> 00:01:18.175
 Record the known-good GPU driver, acceleration runtime, and application build.
 
-00:01:44.115 --> 00:01:47.559
+00:01:18.175 --> 00:01:19.920
 Do not update every layer at once.
 
-00:01:47.559 --> 00:01:54.648
-When a change is necessary, verify one representative model before modifying the rest of the environment.
+00:01:19.920 --> 00:01:21.155
+When a change is necessary,
 
-00:01:54.648 --> 00:02:04.169
-A slightly older stable stack that consistently uses acceleration is more useful than a newer combination whose compatibility has not been proven.
+00:01:21.155 --> 00:01:25.020
+verify one representative model before modifying the rest of the environment.
+
+00:01:25.020 --> 00:01:28.990
+A slightly older stable stack that consistently uses acceleration is more useful than a
+
+00:01:28.990 --> 00:01:32.160
+newer combination whose compatibility has not been proven.

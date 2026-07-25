@@ -1,49 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:06.612
-Model weights, visual components, context buffers, image tokens, and runtime overhead all consume memory.
+00:00:00.000 --> 00:00:04.070
+Model weights, visual components, context buffers, image tokens,
 
-00:00:06.612 --> 00:00:14.076
-Available VRAM or unified memory often determines which model and quantization can run without heavy offloading.
+00:00:04.070 --> 00:00:06.370
+and runtime overhead all consume memory.
 
-00:00:14.076 --> 00:00:19.835
+00:00:06.370 --> 00:00:10.920
+Available VRAM or unified memory often determines which model and quantization can run
+
+00:00:10.920 --> 00:00:12.100
+without heavy offloading.
+
+00:00:12.100 --> 00:00:16.019
 System RAM still matters when weights or caches spill beyond accelerator memory.
 
-00:00:19.835 --> 00:00:24.314
+00:00:16.019 --> 00:00:19.900
 NVIDIA GPUs have broad local-inference support across many runtimes.
 
-00:00:24.314 --> 00:00:29.646
+00:00:19.900 --> 00:00:23.995
 AMD support depends more on operating system, backend, and model format.
 
-00:00:29.646 --> 00:00:42.655
-Apple Silicon uses unified memory shared by CPU and GPU, which can make larger models practical but also means the operating system and applications compete for the same pool.
+00:00:23.995 --> 00:00:27.490
+Apple Silicon uses unified memory shared by CPU and GPU,
 
-00:00:42.655 --> 00:00:50.120
-CPU inference is widely available but may be too slow for larger models or frequent images.
+00:00:27.490 --> 00:00:30.640
+which can make larger models practical but also means the operating system and
 
-00:00:50.120 --> 00:00:55.879
+00:00:30.640 --> 00:00:32.405
+applications compete for the same pool.
+
+00:00:32.405 --> 00:00:36.420
+CPU inference is widely available but may be too slow for larger models or frequent
+
+00:00:36.420 --> 00:00:37.016
+images.
+
+00:00:37.016 --> 00:00:41.330
 A GPU or accelerator improves throughput when the runtime supports it correctly.
 
-00:00:55.879 --> 00:01:02.490
-Measure actual utilization; unsupported operations can fall back to the CPU and change performance.
+00:00:41.330 --> 00:00:42.800
+Measure actual utilization;
 
-00:01:02.490 --> 00:01:13.794
-Hardware tiers such as 4 to 8 gigabytes, 12 to 16 gigabytes, and 24 gigabytes or more are useful planning categories, not permanent model recommendations.
+00:00:42.800 --> 00:00:46.615
+unsupported operations can fall back to the CPU and change performance.
 
-00:01:13.794 --> 00:01:17.846
+00:00:46.615 --> 00:00:50.000
+Hardware tiers such as 4 to 8 gigabytes, 12 to 16 gigabytes,
+
+00:00:50.000 --> 00:00:53.000
+and 24 gigabytes or more are useful planning categories,
+
+00:00:53.000 --> 00:00:54.800
+not permanent model recommendations.
+
+00:00:54.800 --> 00:00:57.800
 Smaller tiers favor compact models and lower quantization.
 
-00:01:17.846 --> 00:01:22.325
+00:00:57.800 --> 00:01:00.800
 Larger tiers support more capacity, but still need headroom.
 
-00:01:22.325 --> 00:01:29.790
-Larger models can improve some tasks while increasing latency, power, and failure risk under memory pressure.
+00:01:00.800 --> 00:01:04.100
+Larger models can improve some tasks while increasing latency, power,
 
-00:01:29.790 --> 00:01:35.548
+00:01:04.100 --> 00:01:06.000
+and failure risk under memory pressure.
+
+00:01:06.000 --> 00:01:09.418
 Concurrency and image size can matter more than a single prompt benchmark.
 
-00:01:35.548 --> 00:01:43.013
-Shortlist configurations that fit comfortably, then test speed, memory, temperature, power, and completion under representative load.
+00:01:09.418 --> 00:01:13.400
+Shortlist configurations that fit comfortably, then test speed, memory, temperature,
 
-00:01:43.013 --> 00:01:50.478
-The right size is the smallest configuration that meets quality and reliability needs with operational headroom.
+00:01:13.400 --> 00:01:15.800
+power, and completion under representative load.
+
+00:01:15.800 --> 00:01:19.815
+The right size is the smallest configuration that meets quality and reliability needs with
+
+00:01:19.815 --> 00:01:21.000
+operational headroom.

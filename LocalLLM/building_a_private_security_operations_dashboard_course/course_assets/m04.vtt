@@ -1,55 +1,91 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:09.565
-A practical private dashboard can run on a local server, workstation, or small cluster, depending on scale and availability needs.
+00:00:00.000 --> 00:00:05.030
+A practical private dashboard can run on a local server, workstation, or small cluster,
 
-00:00:09.565 --> 00:00:16.016
-Collectors or agents receive events from cameras, endpoints, network tools, sensors, and applications.
+00:00:05.030 --> 00:00:07.220
+depending on scale and availability needs.
 
-00:00:16.016 --> 00:00:21.133
+00:00:07.220 --> 00:00:11.170
+Collectors or agents receive events from cameras, endpoints, network tools, sensors,
+
+00:00:11.170 --> 00:00:11.940
+and applications.
+
+00:00:11.940 --> 00:00:15.455
 APIs support controlled integration when direct collection is not appropriate.
 
-00:00:21.133 --> 00:00:27.139
+00:00:15.455 --> 00:00:19.565
 A message queue can buffer events and separate producers from downstream processing.
 
-00:00:27.139 --> 00:00:33.145
+00:00:19.565 --> 00:00:23.445
 This helps absorb bursts and lets services recover without immediately losing data.
 
-00:00:33.145 --> 00:00:45.380
-A database or event store retains normalized records, while larger artifacts such as video clips may use separate storage paths with tighter access and retention controls.
+00:00:23.445 --> 00:00:26.205
+A database or event store retains normalized records,
 
-00:00:45.380 --> 00:00:50.496
+00:00:26.205 --> 00:00:30.430
+while larger artifacts such as video clips may use separate storage paths with tighter
+
+00:00:30.430 --> 00:00:32.260
+access and retention controls.
+
+00:00:32.260 --> 00:00:35.720
 Event normalization maps different source formats into a consistent structure.
 
-00:00:50.496 --> 00:00:58.282
-Common fields may include event time, source, category, severity, confidence, asset, location, status, and evidence link.
+00:00:35.720 --> 00:00:40.400
+Common fields may include event time, source, category, severity, confidence, asset,
 
-00:00:58.282 --> 00:01:06.957
-Preserve the original record or a reference to it so normalization does not erase details needed for investigation.
+00:00:40.400 --> 00:00:42.303
+location, status, and evidence link.
 
-00:01:06.957 --> 00:01:13.853
-The dashboard frontend should query controlled services rather than connect directly to every source.
+00:00:42.303 --> 00:00:46.545
+Preserve the original record or a reference to it so normalization does not erase details
 
-00:01:13.853 --> 00:01:21.639
-This reduces credential sprawl and creates one place to enforce authorization, pagination, filtering, and audit logging.
+00:00:46.545 --> 00:00:48.080
+needed for investigation.
 
-00:01:21.639 --> 00:01:27.645
+00:00:48.080 --> 00:00:51.880
+The dashboard frontend should query controlled services rather than connect directly to
+
+00:00:51.880 --> 00:00:53.200
+every source.
+
+00:00:53.200 --> 00:00:57.335
+This reduces credential sprawl and creates one place to enforce authorization, pagination,
+
+00:00:57.335 --> 00:00:59.150
+filtering, and audit logging.
+
+00:00:59.150 --> 00:01:03.000
 Service accounts and API keys should have narrow privileges and protected storage.
 
-00:01:27.645 --> 00:01:35.876
-Design the flow from collection through review: source, collector, queue, normalizer, store, dashboard, notification, and analyst action.
+00:01:03.000 --> 00:01:07.150
+Design the flow from collection through review: source, collector, queue, normalizer,
 
-00:01:35.876 --> 00:01:44.106
-At each step, identify what happens during delay, duplication, malformed input, storage failure, or loss of connectivity.
+00:01:07.150 --> 00:01:10.120
+store, dashboard, notification, and analyst action.
 
-00:01:44.106 --> 00:01:47.888
+00:01:10.120 --> 00:01:14.150
+At each step, identify what happens during delay, duplication, malformed input,
+
+00:01:14.150 --> 00:01:16.585
+storage failure, or loss of connectivity.
+
+00:01:16.585 --> 00:01:19.760
 Event identifiers and timestamps help prevent confusion.
 
-00:01:47.888 --> 00:01:53.004
+00:01:19.760 --> 00:01:23.595
 Privacy-aware architecture keeps sensitive content close to its legitimate purpose.
 
-00:01:53.004 --> 00:02:03.015
-Store clips separately from ordinary alert metadata, limit thumbnails where possible, minimize personal data, encrypt appropriate paths, and avoid public exposure.
+00:01:23.595 --> 00:01:28.170
+Store clips separately from ordinary alert metadata, limit thumbnails where possible,
 
-00:02:03.015 --> 00:02:10.800
-Architecture should make safe handling the default rather than relying on every user to remember policy.
+00:01:28.170 --> 00:01:32.730
+minimize personal data, encrypt appropriate paths, and avoid public exposure.
+
+00:01:32.730 --> 00:01:35.940
+Architecture should make safe handling the default rather than relying on every user to
+
+00:01:35.940 --> 00:01:36.680
+remember policy.

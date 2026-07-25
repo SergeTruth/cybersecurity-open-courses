@@ -1,52 +1,76 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.058
+00:00:00.400 --> 00:00:02.160
 Begin with the complete memory budget.
 
-00:00:03.058 --> 00:00:08.562
+00:00:02.160 --> 00:00:06.220
 The quantized weights must fit alongside runtime buffers and the key-value cache.
 
-00:00:08.562 --> 00:00:13.658
+00:00:06.220 --> 00:00:10.080
 The cache grows with context length, active sequences, and model architecture.
 
-00:00:13.658 --> 00:00:16.308
+00:00:10.080 --> 00:00:11.960
 Batch settings add temporary pressure.
 
-00:00:16.308 --> 00:00:22.220
+00:00:11.960 --> 00:00:16.170
 Leave headroom instead of selecting a file whose size nearly equals available VRAM.
 
-00:00:22.220 --> 00:00:27.316
+00:00:16.170 --> 00:00:20.115
 Full GPU offload is often fastest when supported and memory allows.
 
-00:00:27.316 --> 00:00:38.936
-Partial offload places some layers on the GPU and leaves the rest on the CPU, which can enable a larger model but increase transfer and CPU work.
+00:00:20.115 --> 00:00:24.000
+Partial offload places some layers on the GPU and leaves the rest on the CPU,
 
-00:00:38.936 --> 00:00:46.070
-CPU-only inference remains practical for smaller quantized models when system RAM and memory bandwidth are sufficient.
+00:00:24.000 --> 00:00:27.398
+which can enable a larger model but increase transfer and CPU work.
 
-00:00:46.070 --> 00:00:54.428
-Unified-memory systems share capacity between CPU and GPU, so the model competes with the operating system and other applications.
+00:00:27.398 --> 00:00:31.400
+CPU-only inference remains practical for smaller quantized models when system RAM and
 
-00:00:54.428 --> 00:00:59.117
+00:00:31.400 --> 00:00:33.050
+memory bandwidth are sufficient.
+
+00:00:33.050 --> 00:00:36.440
+Unified-memory systems share capacity between CPU and GPU,
+
+00:00:36.440 --> 00:00:39.805
+so the model competes with the operating system and other applications.
+
+00:00:39.805 --> 00:00:43.040
 Context can change a successful startup into an allocation failure.
 
-00:00:59.117 --> 00:01:03.806
+00:00:43.040 --> 00:00:45.895
 Test the configured maximum as well as a normal prompt.
 
-00:01:03.806 --> 00:01:09.717
-Measure time to first token, prompt-processing speed, generation speed, VRAM, RAM, and stability.
+00:00:45.895 --> 00:00:50.070
+Measure time to first token, prompt-processing speed, generation speed, VRAM, RAM,
 
-00:01:09.717 --> 00:01:19.298
-A model that barely fits may run slowly, prevent other applications from using the GPU, or fail when a long document arrives.
+00:00:50.070 --> 00:00:50.880
+and stability.
 
-00:01:19.298 --> 00:01:22.356
+00:00:50.880 --> 00:00:55.400
+A model that barely fits may run slowly, prevent other applications from using the GPU,
+
+00:00:55.400 --> 00:00:57.360
+or fail when a long document arrives.
+
+00:00:57.360 --> 00:00:59.370
 Optimize for the actual service envelope.
 
-00:01:22.356 --> 00:01:32.752
-A smaller or slightly more compressed model that remains fully accelerated with context headroom may outperform a higher-precision version that spills into system memory.
+00:00:59.370 --> 00:01:03.235
+A smaller or slightly more compressed model that remains fully accelerated with context
 
-00:01:32.752 --> 00:01:39.480
-Conversely, if both fit comfortably, higher precision may offer better quality with little operational cost.
+00:01:03.235 --> 00:01:07.295
+headroom may outperform a higher-precision version that spills into system memory.
 
-00:01:39.480 --> 00:01:44.984
-Hardware fit determines which comparison is meaningful; measurements determine which option wins.
+00:01:07.295 --> 00:01:09.120
+Conversely, if both fit comfortably,
+
+00:01:09.120 --> 00:01:12.809
+higher precision may offer better quality with little operational cost.
+
+00:01:12.809 --> 00:01:15.370
+Hardware fit determines which comparison is meaningful;
+
+00:01:15.370 --> 00:01:17.170
+measurements determine which option wins.
