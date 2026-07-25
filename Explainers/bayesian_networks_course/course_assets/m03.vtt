@@ -1,121 +1,130 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.422
-The graph in a Bayesian network is a directed acyclic graph, often shortened to DAG. Directed means the edges have arrow direction.
+00:00:00.000 --> 00:00:03.435
+The graph in a Bayesian network is a directed acyclic graph,
 
-2
-00:00:08.422 --> 00:00:13.782
+00:00:03.435 --> 00:00:07.000
+often shortened to DAG. Directed means the edges have arrow direction.
+
+00:00:07.000 --> 00:00:10.595
 Acyclic means the arrows cannot form a loop that returns to the same node.
 
-3
-00:00:13.782 --> 00:00:21.822
+00:00:10.595 --> 00:00:14.760
 If an arrow points from A to B, A is a parent of B, and B is a child of A.
 
-4
-00:00:21.822 --> 00:00:26.033
+00:00:14.760 --> 00:00:18.560
 Ancestors are nodes that can reach a variable through directed paths.
 
-5
-00:00:26.033 --> 00:00:31.010
+00:00:18.560 --> 00:00:21.305
 Descendants are nodes that can be reached from a variable through directed paths.
 
-6
-00:00:31.010 --> 00:00:33.690
+00:00:21.305 --> 00:00:23.235
 A path is a connection through edges.
 
-7
-00:00:33.690 --> 00:00:35.987
+00:00:23.235 --> 00:00:25.420
 A directed path follows arrow direction.
 
-8
-00:00:35.987 --> 00:00:38.667
+00:00:25.420 --> 00:00:27.325
 These graph words are not just vocabulary.
 
-9
-00:00:38.667 --> 00:00:41.346
+00:00:27.325 --> 00:00:29.641
 They define how the model organizes dependencies.
 
-10
-00:00:41.346 --> 00:00:47.472
-A Bayesian network assumes that each variable is conditionally independent of its non-descendants given its parents.
+00:00:29.641 --> 00:00:33.400
+A Bayesian network assumes that each variable is conditionally independent of its
 
-11
-00:00:47.472 --> 00:00:56.660
-In plain language, once a node's direct parents are known, other non-descendant variables should not add information about that node, according to the network
+00:00:33.400 --> 00:00:35.305
+non-descendants given its parents.
 
-12
-00:00:56.660 --> 00:00:57.043
+00:00:35.305 --> 00:00:37.950
+In plain language, once a node's direct parents are known,
+
+00:00:37.950 --> 00:00:41.170
+other non-descendant variables should not add information about that node,
+
+00:00:41.170 --> 00:00:42.200
+according to the network
+
+00:00:42.200 --> 00:00:42.895
 structure.
 
-13
-00:00:57.043 --> 00:00:59.340
+00:00:42.895 --> 00:00:45.160
 Three common patterns help build intuition.
 
-14
-00:00:59.340 --> 00:01:03.168
+00:00:45.160 --> 00:00:48.040
 In a chain, A influences B, and B influences C.
 
-15
-00:01:03.168 --> 00:01:10.059
-Information can often flow along the chain, but observing the middle variable can block some of that flow.
+00:00:48.040 --> 00:00:50.230
+Information can often flow along the chain,
 
-16
-00:01:10.059 --> 00:01:13.505
+00:00:50.230 --> 00:00:52.920
+but observing the middle variable can block some of that flow.
+
+00:00:52.920 --> 00:00:55.355
 In a fork, A influences both B and C.
 
-17
-00:01:13.505 --> 00:01:17.333
+00:00:55.355 --> 00:00:58.181
 The shared parent can explain why the children are related.
 
-18
-00:01:17.333 --> 00:01:22.310
+00:00:58.181 --> 00:01:01.005
 If the parent is known, the children may become independent in the model.
 
-19
-00:01:22.310 --> 00:01:23.841
+00:01:01.005 --> 00:01:02.315
 A collider works differently.
 
-20
-00:01:23.841 --> 00:01:26.138
+00:01:02.315 --> 00:01:03.960
 A and B both influence C.
 
-21
-00:01:26.138 --> 00:01:31.498
+00:01:03.960 --> 00:01:08.120
 Before observing C, information may not flow between A and B through that structure.
 
-22
-00:01:31.498 --> 00:01:38.389
-But if C is observed, or a descendant of C is observed, information can connect the alternative explanations.
+00:01:08.120 --> 00:01:10.680
+But if C is observed, or a descendant of C is observed,
 
-23
-00:01:38.389 --> 00:01:44.132
-D-separation is the formal method for determining when paths are open or blocked by observations.
+00:01:10.680 --> 00:01:13.740
+information can connect the alternative explanations.
 
-24
-00:01:44.132 --> 00:01:47.577
+00:01:13.740 --> 00:01:17.590
+D-separation is the formal method for determining when paths are open or blocked by
+
+00:01:17.590 --> 00:01:18.400
+observations.
+
+00:01:18.400 --> 00:01:20.755
 You do not need to perform complex proofs here.
 
-25
-00:01:47.577 --> 00:01:52.937
-The key point is that graph structure encodes conditional independence assumptions that affect inference.
+00:01:20.755 --> 00:01:24.580
+The key point is that graph structure encodes conditional independence assumptions that
 
-26
-00:01:52.937 --> 00:01:58.680
-These assumptions should be treated as model claims, not facts handed down by the software.
+00:01:24.580 --> 00:01:25.640
+affect inference.
 
-27
-00:01:58.680 --> 00:02:07.868
-If a domain expert says two variables are still related after their modeled parents are known, the graph may need another parent, another edge,
+00:01:25.640 --> 00:01:27.800
+These assumptions should be treated as model claims,
 
-28
-00:02:07.868 --> 00:02:09.399
+00:01:27.800 --> 00:01:29.440
+not facts handed down by the software.
+
+00:01:29.440 --> 00:01:33.850
+If a domain expert says two variables are still related after their modeled parents are
+
+00:01:33.850 --> 00:01:34.085
+known,
+
+00:01:34.085 --> 00:01:36.340
+the graph may need another parent, another edge,
+
+00:01:36.340 --> 00:01:37.795
 or another hidden variable.
 
-29
-00:02:09.399 --> 00:02:16.673
-If data suggests a dependency but the domain story is weak, the team should investigate before accepting the relationship.
+00:01:37.795 --> 00:01:40.425
+If data suggests a dependency but the domain story is weak,
 
-30
-00:02:16.673 --> 00:02:23.564
-Conditional independence is powerful because it simplifies the joint distribution, but it must be credible for the problem.
+00:01:40.425 --> 00:01:43.648
+the team should investigate before accepting the relationship.
+
+00:01:43.648 --> 00:01:47.240
+Conditional independence is powerful because it simplifies the joint distribution,
+
+00:01:47.240 --> 00:01:48.680
+but it must be credible for the problem.

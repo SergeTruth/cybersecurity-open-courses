@@ -1,58 +1,31 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.951
+00:00:00.200 --> 00:00:04.520
 Logs are central to Linux forensics, but their location and completeness vary.
 
-00:00:05.951 --> 00:00:12.785
-Traditional syslog-style files may appear under /var/log, with files such as syslog, messages, auth.
+00:00:04.740 --> 00:00:18.100
+Traditional syslog-style files may appear under /var/log, with files such as syslog, messages, auth.log, secure, kern.log, daemon.log, and service-specific logs depending on the distribution.
 
-00:00:12.785 --> 00:00:14.768
-log, secure, kern.
+00:00:18.320 --> 00:00:30.800
+Authentication logs are often critical because they can show SSH activity, sudo use, failed logins, successful sessions, and account-related events. Systems that use systemd may also store events in the systemd journal.
 
-00:00:14.768 --> 00:00:16.311
-log, daemon.
-
-00:00:16.311 --> 00:00:20.499
-log, and service-specific logs depending on the distribution.
-
-00:00:20.499 --> 00:00:29.978
-Authentication logs are often critical because they can show SSH activity, sudo use, failed logins, successful sessions, and account-related events.
-
-00:00:29.978 --> 00:00:35.929
-Systems that use systemd may also store events in the systemd journal.
-
-00:00:35.929 --> 00:00:46.289
+00:00:31.020 --> 00:00:40.460
 The journal can be reviewed with journalctl, and it may contain service starts, authentication messages, kernel messages, application output, and boot history.
 
-00:00:46.289 --> 00:00:53.563
-Analysts should understand whether the journal is persistent or volatile on the system being examined.
+00:00:40.680 --> 00:00:51.320
+Analysts should understand whether the journal is persistent or volatile on the system being examined. If journal data is not persisted across reboots, important history may be unavailable.
 
-00:00:53.563 --> 00:00:59.955
-If journal data is not persisted across reboots, important history may be unavailable.
+00:00:51.540 --> 00:01:02.020
+Application logs can be just as important as operating system logs. Web servers may record requests, response codes, user agents, source addresses, and errors.
 
-00:00:59.955 --> 00:01:05.466
-Application logs can be just as important as operating system logs.
+00:01:02.240 --> 00:01:13.760
+Databases, containers, VPN services, identity agents, management tools, and custom applications may all keep their own records. Cron logs may reveal scheduled job activity.
 
-00:01:05.466 --> 00:01:11.858
-Web servers may record requests, response codes, user agents, source addresses, and errors.
+00:01:13.980 --> 00:01:26.140
+Package manager logs may show software installation, updates, or removal. Log rotation matters because older logs may be compressed, renamed, archived, or deleted according to retention settings.
 
-00:01:11.858 --> 00:01:20.014
-Databases, containers, VPN services, identity agents, management tools, and custom applications may all keep their own records.
+00:01:26.360 --> 00:01:38.680
+Missing logs do not automatically prove tampering, but they are worth explaining. Analysts should note gaps, unexpected truncation, permission changes, unusual timestamps, and inconsistencies between sources.
 
-00:01:20.014 --> 00:01:23.761
-Cron logs may reveal scheduled job activity.
-
-00:01:23.761 --> 00:01:28.831
-Package manager logs may show software installation, updates, or removal.
-
-00:01:28.831 --> 00:01:36.986
-Log rotation matters because older logs may be compressed, renamed, archived, or deleted according to retention settings.
-
-00:01:36.986 --> 00:01:42.938
-Missing logs do not automatically prove tampering, but they are worth explaining.
-
-00:01:42.938 --> 00:01:49.771
-Analysts should note gaps, unexpected truncation, permission changes, unusual timestamps, and inconsistencies between sources.
-
-00:01:49.771 --> 00:01:58.367
+00:01:38.900 --> 00:01:44.820
 The strongest log analysis compares multiple sources instead of relying on one perfect record that may not exist.
