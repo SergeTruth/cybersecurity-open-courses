@@ -1,61 +1,46 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:07.691
+00:00:00.200 --> 00:00:05.800
 A C program can receive input through many different routes, and each route has its own failure modes.
 
-2
-00:00:07.691 --> 00:00:16.664
+00:00:06.020 --> 00:00:12.900
 Standard input may be typed by a person, pasted from a terminal, redirected from a file, or streamed from another process.
 
-3
-00:00:16.664 --> 00:00:23.927
+00:00:13.120 --> 00:00:19.520
 Command-line arguments may be missing, reordered, extremely long, or encoded in ways the program did not expect.
 
-4
-00:00:23.927 --> 00:00:32.046
+00:00:19.740 --> 00:00:27.180
 Environment variables can be controlled by the process launcher and may influence paths, modes, credentials, configuration, or library behavior.
 
-5
-00:00:32.046 --> 00:00:38.455
+00:00:27.400 --> 00:00:31.160
 None of these sources should be used just because they appear close to the program.
 
-6
-00:00:38.455 --> 00:00:41.873
+00:00:31.380 --> 00:00:34.580
 Files and configuration files are common input boundaries.
 
-7
-00:00:41.873 --> 00:00:50.846
+00:00:34.800 --> 00:00:41.840
 They may be stale, partially written, replaced between checks, or edited by a user who does not understand the expected format.
 
-8
-00:00:50.846 --> 00:01:01.528
+00:00:42.060 --> 00:00:51.420
 Sockets add timing, framing, and partial-read problems: the program may receive only part of a message, multiple messages at once, or data that never completes.
 
-9
-00:01:01.528 --> 00:01:07.082
+00:00:51.640 --> 00:00:58.040
 Binary protocols and device input introduce byte order, alignment, versioning, and hardware-specific assumptions.
 
-10
-00:01:07.082 --> 00:01:16.910
+00:00:58.260 --> 00:01:06.420
 Inter-process communication and library callbacks can be especially subtle because the data may feel internal even when it crossed a trust boundary earlier.
 
-11
-00:01:16.910 --> 00:01:21.182
+00:01:06.640 --> 00:01:10.960
 For every source, establish a small contract before parsing deeply.
 
-12
-00:01:21.182 --> 00:01:31.010
+00:01:11.180 --> 00:01:20.220
 Decide the maximum size, expected encoding, allowed characters or byte ranges, termination rules, ownership of memory, and what counts as a complete message.
 
-13
-00:01:31.010 --> 00:01:42.546
+00:01:20.440 --> 00:01:30.520
 Decide whether the input is text or binary, whether it can contain embedded null bytes, and whether it is allowed to reference files, indexes, counts, or offsets.
 
-14
-00:01:42.546 --> 00:01:46.392
+00:01:30.740 --> 00:01:33.380
 These assumptions should be enforced close to the boundary.
 
-15
-00:01:46.392 --> 00:01:52.801
+00:01:33.600 --> 00:01:38.800
 When a boundary is explicit, downstream code can operate on validated facts instead of guesses.

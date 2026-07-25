@@ -1,43 +1,43 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.680
+00:00:00.200 --> 00:00:05.240
 Canonicalization means converting data into a standard representation before making decisions.
 
-00:00:05.680 --> 00:00:15.903
+00:00:05.460 --> 00:00:16.260
 Normalization is closely related and often includes handling encoding, Unicode forms, whitespace, case, path separators, URL decoding, and other representation details.
 
-00:00:15.903 --> 00:00:29.762
+00:00:16.480 --> 00:00:26.480
 These steps matter because the same logical value can appear in multiple forms, and security decisions can fail when validation checks one form but the application later uses another.
 
-00:00:29.762 --> 00:00:33.170
+00:00:26.700 --> 00:00:29.500
 Encoding and decoding deserve special care.
 
-00:00:33.170 --> 00:00:39.758
+00:00:29.720 --> 00:00:38.520
 Data may arrive URL-encoded, HTML-encoded, base64-encoded, Unicode-normalized, escaped, or nested inside another format.
 
-00:00:39.758 --> 00:00:49.982
+00:00:38.740 --> 00:00:45.620
 Repeated decoding can be risky because a value may look harmless in one representation and become meaningful after another decoding step.
 
-00:00:49.982 --> 00:00:56.570
+00:00:45.840 --> 00:00:52.560
 Applications should have a clear, consistent order for decoding, normalizing, parsing, and validating.
 
-00:00:56.570 --> 00:01:00.433
+00:00:52.780 --> 00:00:55.580
 Path and URL handling are common examples.
 
-00:01:00.433 --> 00:01:12.474
+00:00:55.800 --> 00:01:07.240
 A filename or path may contain mixed separators, dot segments, encoded characters, unusual whitespace, case differences, or Unicode characters that look similar to expected characters.
 
-00:01:12.474 --> 00:01:20.425
+00:01:07.460 --> 00:01:14.340
 A URL may contain encoded hostnames, redirects, fragments, or query parameters that change meaning after parsing.
 
-00:01:20.425 --> 00:01:26.105
+00:01:14.560 --> 00:01:18.640
 Validate the parsed and normalized structure, not just the raw text.
 
-00:01:26.105 --> 00:01:31.330
+00:01:18.860 --> 00:01:22.860
 The key risk is validating one representation and using another.
 
-00:01:31.330 --> 00:01:41.100
+00:01:23.080 --> 00:01:29.240
 If an application validates a raw string but a downstream library decodes it again, the decision may no longer apply.
 
-00:01:41.100 --> 00:01:52.232
+00:01:29.460 --> 00:01:40.660
 A safer design normalizes data before security decisions, uses well-tested parsers, stores structured values where possible, and avoids hand-rolled transformations for complex formats.

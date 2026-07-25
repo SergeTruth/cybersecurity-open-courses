@@ -1,49 +1,37 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.042
+00:00:00.200 --> 00:00:04.840
 Tools help detect double-free risks, but they do not replace ownership design.
 
-2
-00:00:05.042 --> 00:00:14.598
+00:00:05.060 --> 00:00:13.460
 Compiler warnings can draw attention to suspicious control flow, ignored return values, inconsistent types, and cleanup paths that deserve review.
 
-3
-00:00:14.598 --> 00:00:18.661
+00:00:13.680 --> 00:00:17.360
 They are signals that the contract may be unclear or incomplete.
 
-4
-00:00:18.661 --> 00:00:29.045
+00:00:17.580 --> 00:00:26.940
 Static analysis can flag suspicious ownership paths, repeated release patterns, missing null checks, leaks, and failure paths that do not match the success path.
 
-5
-00:00:29.045 --> 00:00:36.043
+00:00:27.160 --> 00:00:33.560
 Analysis works best when code expresses ownership and state clearly enough for a tool and a reviewer to follow.
 
-6
-00:00:36.043 --> 00:00:47.857
+00:00:33.780 --> 00:00:44.260
 Runtime diagnostics such as AddressSanitizer-style checks, debug allocators, and leak detection can reveal memory-management defects during tests that exercise the relevant path.
 
-7
-00:00:47.857 --> 00:00:57.338
+00:00:44.480 --> 00:00:52.320
 A diagnostic finding should lead back to the ownership contract: who believed they owned the allocation, and why did the code permit a second release?
 
-8
-00:00:57.338 --> 00:01:13.441
+00:00:52.540 --> 00:01:06.380
 Tests should cover success, validation failure, allocation failure, partial construction failure, container insertion failure, ownership transfer, repeated cleanup attempts where the API permits them, and destroy behavior for optional members.
 
-9
-00:01:13.441 --> 00:01:20.063
+00:01:06.600 --> 00:01:11.640
 Regression tests should be added when cleanup bugs are fixed so the corrected contract remains visible.
 
-10
-00:01:20.063 --> 00:01:23.599
+00:01:11.860 --> 00:01:14.740
 Code review is the place where design and evidence meet.
 
-11
-00:01:23.599 --> 00:01:34.811
+00:01:14.960 --> 00:01:25.600
 Reviewers should trace each allocation from creation to transfer to cleanup, ask whether aliases remain valid, and verify that each branch releases owned memory exactly once.
 
-12
-00:01:34.811 --> 00:01:39.250
+00:01:25.820 --> 00:01:29.820
 Tools reveal symptoms; review confirms the intended lifetime model.

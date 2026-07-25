@@ -1,77 +1,97 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.699
-Template, code, and expression injection risks appear when untrusted input can influence executable logic rather than plain content.
+00:00:00.540 --> 00:00:00.820
+Template, code,
 
-2
-00:00:08.699 --> 00:00:20.046
-Server-side template engines, expression evaluators, dynamic imports, plugin systems, and JavaScript evaluation features can all create sensitive interpretation points.
+00:00:00.820 --> 00:00:05.975
+and expression injection risks appear when untrusted input can influence executable logic
 
-3
-00:00:20.046 --> 00:00:28.670
-The core question is whether the user controls data, or whether the user controls something the runtime treats as code or instructions.
+00:00:05.975 --> 00:00:07.040
+rather than plain content.
 
-4
-00:00:28.670 --> 00:00:37.596
-JavaScript offers powerful dynamic features, including eval-style behavior and constructors that can treat strings as executable code.
+00:00:07.040 --> 00:00:12.040
+Server-side template engines, expression evaluators, dynamic imports, plugin systems,
 
-5
-00:00:37.596 --> 00:00:41.681
+00:00:12.040 --> 00:00:16.040
+and JavaScript evaluation features can all create sensitive interpretation points.
+
+00:00:16.040 --> 00:00:18.040
+The core question is whether the user controls data,
+
+00:00:18.040 --> 00:00:22.245
+or whether the user controls something the runtime treats as code or instructions.
+
+00:00:22.245 --> 00:00:24.030
+JavaScript offers powerful dynamic features,
+
+00:00:24.030 --> 00:00:28.000
+including eval-style behavior and constructors that can treat strings as executable code.
+
+00:00:28.000 --> 00:00:31.040
 These features are rarely appropriate for ordinary user input.
 
-6
-00:00:41.681 --> 00:00:50.682
-Even when they seem convenient for rules, formulas, or customization, they can create a path where untrusted text changes program behavior.
+00:00:31.040 --> 00:00:34.040
+Even when they seem convenient for rules, formulas, or customization,
 
-7
-00:00:50.682 --> 00:00:58.549
-Safer designs use explicit configuration, constrained rule formats, or purpose-built parsers with limited capability.
+00:00:34.040 --> 00:00:38.040
+they can create a path where untrusted text changes program behavior.
 
-8
-00:00:58.549 --> 00:01:00.895
+00:00:38.040 --> 00:00:41.440
+Safer designs use explicit configuration, constrained rule formats,
+
+00:00:41.440 --> 00:00:44.240
+or purpose-built parsers with limited capability.
+
+00:00:44.240 --> 00:00:46.040
 Template engines also require care.
 
-9
-00:01:00.895 --> 00:01:07.022
-Rendering user content with a template is different from allowing users to define the template.
+00:00:46.040 --> 00:00:49.440
+Rendering user content with a template is different from allowing users to define the
 
-10
-00:01:07.022 --> 00:01:16.477
-If users can supply template syntax, expressions, or partials, the application must treat that as a high-risk design and apply strong constraints.
+00:00:49.440 --> 00:00:50.040
+template.
 
-11
-00:01:16.477 --> 00:01:25.404
-Sandbox claims should be reviewed skeptically because sandboxes often have assumptions, escape conditions, or dependency limitations.
+00:00:50.040 --> 00:00:53.040
+If users can supply template syntax, expressions, or partials,
 
-12
-00:01:25.404 --> 00:01:31.228
+00:00:53.040 --> 00:00:57.005
+the application must treat that as a high-risk design and apply strong constraints.
+
+00:00:57.005 --> 00:01:00.750
+Sandbox claims should be reviewed skeptically because sandboxes often have assumptions,
+
+00:01:00.750 --> 00:01:02.927
+escape conditions, or dependency limitations.
+
+00:01:02.927 --> 00:01:07.040
 Dependencies matter because libraries may interpret strings in ways that are not obvious.
 
-13
-00:01:31.228 --> 00:01:37.885
-A validation library, markdown renderer, expression engine, or template helper may have its own rules.
+00:01:07.040 --> 00:01:10.540
+A validation library, markdown renderer, expression engine,
 
-14
-00:01:37.885 --> 00:01:47.265
-Reviewing dependency documentation and configuration is part of injection prevention when the dependency processes user-controlled strings.
+00:01:10.540 --> 00:01:13.000
+or template helper may have its own rules.
 
-15
-00:01:47.265 --> 00:01:49.459
+00:01:13.000 --> 00:01:17.190
+Reviewing dependency documentation and configuration is part of injection prevention when
+
+00:01:17.190 --> 00:01:19.000
+the dependency processes user-controlled strings.
+
+00:01:19.000 --> 00:01:21.040
 The safest pattern is separation.
 
-16
-00:01:49.459 --> 00:01:51.804
+00:01:21.040 --> 00:01:23.265
 User content should remain content.
 
-17
-00:01:51.804 --> 00:01:55.284
+00:01:23.265 --> 00:01:25.040
 Application logic should remain application-owned.
 
-18
-00:01:55.284 --> 00:02:02.621
-If customization is required, expose a narrow, documented set of options rather than a general-purpose language.
+00:01:25.040 --> 00:01:27.500
+If customization is required, expose a narrow,
 
-19
-00:02:02.621 --> 00:02:07.992
+00:01:27.500 --> 00:01:31.000
+documented set of options rather than a general-purpose language.
+
+00:01:31.000 --> 00:01:35.040
 That design choice prevents untrusted users from turning configuration into code.

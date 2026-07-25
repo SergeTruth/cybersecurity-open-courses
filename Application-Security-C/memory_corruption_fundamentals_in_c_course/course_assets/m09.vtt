@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:06.684
+00:00:00.200 --> 00:00:05.800
 Detection and tooling help teams find memory defects earlier, but they do not replace clear design.
 
-2
-00:00:06.684 --> 00:00:16.542
+00:00:06.020 --> 00:00:15.060
 Compiler warnings, static analysis, runtime sanitizers, assertions, boundary-focused tests, and code review all catch different kinds of mistakes.
 
-3
-00:00:16.542 --> 00:00:23.159
+00:00:15.280 --> 00:00:20.080
 The goal is to create overlapping support for the memory contracts the code is supposed to follow.
 
-4
-00:00:23.159 --> 00:00:36.326
+00:00:20.300 --> 00:00:32.860
 Compiler warnings can identify suspicious code patterns: signed and unsigned mismatches, truncation, ignored results, questionable casts, uninitialized values, and possible array bounds concerns.
 
-5
-00:00:36.326 --> 00:00:43.955
+00:00:33.080 --> 00:00:39.160
 Warning changes near memory access, allocation, copying, or cleanup deserve review rather than quick suppression.
 
-6
-00:00:43.955 --> 00:00:54.961
+00:00:39.380 --> 00:00:49.380
 Static analysis can identify risky flows, unchecked values, inconsistent assumptions, escaping pointers, lost ownership, and paths where cleanup may be incomplete.
 
-7
-00:00:54.961 --> 00:01:02.793
+00:00:49.600 --> 00:00:55.440
 Static tools are especially useful when pointer and size values move through several functions before they are used.
 
-8
-00:01:02.793 --> 00:01:06.777
+00:00:55.660 --> 00:00:59.020
 Runtime sanitizers can detect memory errors during testing.
 
-9
-00:01:06.777 --> 00:01:16.365
+00:00:59.240 --> 00:01:07.720
 They can expose out-of-bounds access, use after release, use after scope, leaks, and other issues depending on tool support and configuration.
 
-10
-00:01:16.365 --> 00:01:23.589
+00:01:07.940 --> 00:01:15.460
 They are most useful when tests exercise boundary values, error paths, resize behavior, and unusual inputs.
 
-11
-00:01:23.589 --> 00:01:27.235
+00:01:15.680 --> 00:01:18.400
 Assertions can document invariants during development.
 
-12
-00:01:27.235 --> 00:01:38.241
+00:01:18.620 --> 00:01:27.980
 They can state that count is no greater than capacity, a pointer is non-null when count is nonzero, an index is in range, or ownership has moved to a cleanup path.
 
-13
-00:01:38.241 --> 00:01:45.533
+00:01:28.200 --> 00:01:33.240
 Assertions are not a replacement for validating external input, but they make internal expectations visible.
 
-14
-00:01:45.533 --> 00:01:52.082
+00:01:33.460 --> 00:01:38.580
 Fuzzing can support robustness testing at a high level by exercising unexpected sizes and shapes.
 
-15
-00:01:52.082 --> 00:02:02.751
+00:01:38.800 --> 00:01:48.800
 Boundary tests should cover zero sizes, maximum sizes, empty strings, missing terminators, allocation failure paths, and cleanup after partial initialization.
 
-16
-00:02:02.751 --> 00:02:08.692
+00:01:49.020 --> 00:01:53.740
 Tools support engineering discipline, but review and design discipline remain necessary.

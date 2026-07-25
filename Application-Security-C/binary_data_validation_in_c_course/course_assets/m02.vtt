@@ -1,73 +1,55 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:01.933
+00:00:00.200 --> 00:00:02.120
 A binary format is a contract.
 
-2
-00:00:01.933 --> 00:00:12.437
+00:00:02.340 --> 00:00:10.660
 The producer agrees to write bytes in a certain order, with certain meanings, and the consumer agrees to interpret those bytes only when the contract is satisfied.
 
-3
-00:00:12.437 --> 00:00:22.296
+00:00:10.880 --> 00:00:19.760
 This applies whether the format is a public standard, an internal file layout, a network message, a memory snapshot, or a small structure stored on disk.
 
-4
-00:00:22.296 --> 00:00:37.761
+00:00:19.980 --> 00:00:35.020
 That contract may include a magic value that identifies the format, a header that describes the rest of the data, a version field, flags, lengths, offsets, record counts, checksums, ordering rules, and limits on what combinations are valid.
 
-5
-00:00:37.761 --> 00:00:39.823
+00:00:35.240 --> 00:00:37.080
 These are not decorative fields.
 
-6
-00:00:39.823 --> 00:00:48.136
+00:00:37.300 --> 00:00:43.780
 They are the parser's first opportunity to decide whether it is looking at the expected thing and whether it can safely continue.
 
-7
-00:00:48.136 --> 00:00:51.100
+00:00:44.000 --> 00:00:46.560
 Good validation happens before deeper parsing.
 
-8
-00:00:51.100 --> 00:01:03.021
+00:00:46.780 --> 00:00:56.860
 The parser should identify the format, confirm the version is supported, reject or deliberately ignore unsupported flags according to policy, and check that required fields are present.
 
-9
-00:01:03.021 --> 00:01:05.728
+00:00:57.080 --> 00:00:59.480
 Reserved fields deserve special attention.
 
-10
-00:01:05.728 --> 00:01:12.816
+00:00:59.700 --> 00:01:05.460
 Sometimes the safest choice is to require them to be zero so future meanings do not get misread by older code.
 
-11
-00:01:12.816 --> 00:01:19.196
+00:01:05.680 --> 00:01:11.040
 In other cases, compatibility requires ignoring them, but that should be an explicit design choice.
 
-12
-00:01:19.196 --> 00:01:25.382
+00:01:11.260 --> 00:01:15.660
 Format documentation matters because it keeps the parser from becoming a collection of folklore.
 
-13
-00:01:25.382 --> 00:01:38.914
+00:01:15.880 --> 00:01:29.080
 The documentation should define required fields, optional fields, valid ranges, byte order, alignment expectations, size limits, how records are ordered, what counts mean, and what failure behavior is expected.
 
-14
-00:01:38.914 --> 00:01:47.549
+00:01:29.300 --> 00:01:36.980
 When the documentation is thin, developers tend to infer rules from examples, and examples rarely cover malformed or borderline input.
 
-15
-00:01:47.549 --> 00:01:51.351
+00:01:37.200 --> 00:01:40.320
 The code should make its format assumptions easy to review.
 
-16
-00:01:51.351 --> 00:02:01.468
+00:01:40.540 --> 00:01:49.340
 Named constants, small validation helpers, clear error paths, and staged parsing make it easier for another engineer to trace why a value is considered safe.
 
-17
-00:02:01.468 --> 00:02:07.525
+00:01:49.560 --> 00:01:55.400
 A binary parser is not only a decoder; it is the executable expression of the format contract.
 
-18
-00:02:07.525 --> 00:02:14.549
+00:01:55.620 --> 00:02:02.420
 If that contract is hidden in casts, pointer arithmetic, and unchecked assumptions, review becomes guesswork.

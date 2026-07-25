@@ -1,61 +1,46 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.623
+00:00:00.200 --> 00:00:02.280
 Every password should have a unique salt.
 
-2
-00:00:02.623 --> 00:00:11.391
+00:00:02.500 --> 00:00:09.380
 The salt should be generated with a suitable random source and stored with the password hash or inside the algorithm's encoded hash format.
 
-3
-00:00:11.391 --> 00:00:18.285
+00:00:09.600 --> 00:00:15.360
 Salt storage is not a secret management problem because salts are expected to be available for verification.
 
-4
-00:00:18.285 --> 00:00:25.929
+00:00:15.580 --> 00:00:21.820
 The operational requirement is that salts are unique, correctly generated, and not replaced with a single shared value.
 
-5
-00:00:25.929 --> 00:00:27.353
+00:00:22.040 --> 00:00:23.560
 A pepper is different.
 
-6
-00:00:27.353 --> 00:00:33.423
+00:00:23.780 --> 00:00:28.980
 At a high level, a pepper is an application-level secret used in addition to per-password salts.
 
-7
-00:00:33.423 --> 00:00:43.540
+00:00:29.200 --> 00:00:38.720
 Because it is secret, it belongs in a secret manager, HSM-backed design, or another controlled storage mechanism rather than in the database beside the hashes.
 
-8
-00:00:43.540 --> 00:00:54.181
+00:00:38.940 --> 00:00:47.580
 A pepper can add a layer of protection when the database is stolen without the application secret, but it also introduces lifecycle and availability responsibilities.
 
-9
-00:00:54.181 --> 00:00:57.029
+00:00:47.800 --> 00:00:49.960
 Peppers should not create false confidence.
 
-10
-00:00:57.029 --> 00:01:10.293
+00:00:50.180 --> 00:01:01.380
 If the pepper is hard-coded in the application, broadly accessible to every developer, stored in the same backup set as the database, or impossible to rotate safely, the extra layer may be weaker than it appears.
 
-11
-00:01:10.293 --> 00:01:19.211
+00:01:01.600 --> 00:01:10.240
 Secret managers, HSMs, access controls, monitoring, and documented rotation procedures matter more than the label attached to the design.
 
-12
-00:01:19.211 --> 00:01:24.307
+00:01:10.460 --> 00:01:14.620
 Separating password hashes from application secrets helps incident response.
 
-13
-00:01:24.307 --> 00:01:31.801
+00:01:14.840 --> 00:01:21.640
 A database compromise, application server compromise, and secret manager compromise have different implications.
 
-14
-00:01:31.801 --> 00:01:41.618
+00:01:21.860 --> 00:01:30.100
 Teams should know which materials were exposed, what needs to be rotated, whether password resets are required, and how dependent systems will be updated.
 
-15
-00:01:41.618 --> 00:01:45.814
+00:01:30.320 --> 00:01:33.840
 Extra layers are useful only when they are operated deliberately.

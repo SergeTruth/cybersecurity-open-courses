@@ -1,73 +1,94 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.981
+00:00:00.000 --> 00:00:04.302
 Injection prevention should be visible in design, code review, and tests.
 
-2
-00:00:04.981 --> 00:00:11.939
-Reviewers should ask where untrusted data enters, where it flows, and which sensitive sinks it reaches.
+00:00:04.302 --> 00:00:07.520
+Reviewers should ask where untrusted data enters, where it flows,
 
-3
-00:00:11.939 --> 00:00:21.980
-Sensitive sinks include database queries, shell commands, templates, browser rendering, file paths, headers, URLs, parsers, and downstream APIs.
+00:00:07.520 --> 00:00:09.640
+and which sensitive sinks it reaches.
 
-4
-00:00:21.980 --> 00:00:28.543
-If data reaches one of those locations, the review should identify the context-specific control.
+00:00:09.640 --> 00:00:13.960
+Sensitive sinks include database queries, shell commands, templates, browser rendering,
 
-5
-00:00:28.543 --> 00:00:35.896
-Security-focused tests should cover schemas, negative cases, boundaries, and high-risk transformations.
+00:00:13.960 --> 00:00:17.260
+file paths, headers, URLs, parsers, and downstream APIs.
 
-6
-00:00:35.896 --> 00:00:52.263
-A test can confirm that unknown fields are rejected, that unsupported operators are not accepted, that route parameters are treated as values, that rendering paths use safe APIs, and that command execution paths only allow approved operations.
+00:00:17.260 --> 00:00:19.055
+If data reaches one of those locations,
 
-7
-00:00:52.263 --> 00:00:58.509
+00:00:19.055 --> 00:00:22.335
+the review should identify the context-specific control.
+
+00:00:22.335 --> 00:00:25.295
+Security-focused tests should cover schemas, negative cases, boundaries,
+
+00:00:25.295 --> 00:00:26.727
+and high-risk transformations.
+
+00:00:26.727 --> 00:00:29.160
+A test can confirm that unknown fields are rejected,
+
+00:00:29.160 --> 00:00:33.785
+that unsupported operators are not accepted, that route parameters are treated as values,
+
+00:00:33.785 --> 00:00:35.595
+that rendering paths use safe APIs,
+
+00:00:35.595 --> 00:00:39.200
+and that command execution paths only allow approved operations.
+
+00:00:39.200 --> 00:00:43.640
 These tests should use safe representative inputs rather than exploit payload collections.
 
-8
-00:00:58.509 --> 00:01:04.439
+00:00:43.640 --> 00:00:47.570
 Static analysis and dependency review can help, but they are not complete by themselves.
 
-9
-00:01:04.439 --> 00:01:12.583
-Tools may find string-built queries, risky process execution calls, raw HTML rendering, or unsafe evaluation patterns.
+00:00:47.570 --> 00:00:52.560
+Tools may find string-built queries, risky process execution calls, raw HTML rendering,
 
-10
-00:01:12.583 --> 00:01:20.647
-Human review is still needed to understand data flow, framework behavior, business intent, and compensating controls.
+00:00:52.560 --> 00:00:54.202
+or unsafe evaluation patterns.
 
-11
-00:01:20.647 --> 00:01:24.126
+00:00:54.202 --> 00:00:58.395
+Human review is still needed to understand data flow, framework behavior, business intent,
+
+00:00:58.395 --> 00:00:59.775
+and compensating controls.
+
+00:00:59.775 --> 00:01:01.890
 Least privilege and defense in depth reduce impact.
 
-12
-00:01:24.126 --> 00:01:29.187
+00:01:01.890 --> 00:01:05.780
 Database accounts should have only the permissions the application needs.
 
-13
-00:01:29.187 --> 00:01:32.665
+00:01:05.780 --> 00:01:07.520
 Processes should run with constrained privileges.
 
-14
-00:01:32.665 --> 00:01:39.386
-Logging and monitoring should identify suspicious validation failures without exposing secrets.
+00:01:07.520 --> 00:01:11.880
+Logging and monitoring should identify suspicious validation failures without exposing
 
-15
-00:01:39.386 --> 00:01:49.427
-Content Security Policy, safe defaults, and framework protections can add layers, but they should not be treated as permission to build unsafe sinks.
+00:01:11.880 --> 00:01:12.500
+secrets.
 
-16
-00:01:49.427 --> 00:01:52.353
+00:01:12.500 --> 00:01:16.080
+Content Security Policy, safe defaults, and framework protections can add layers,
+
+00:01:16.080 --> 00:01:19.927
+but they should not be treated as permission to build unsafe sinks.
+
+00:01:19.927 --> 00:01:21.562
 Document assumptions and sensitive sinks.
 
-17
-00:01:52.353 --> 00:02:04.687
-Future developers need to know why a field is allowlisted, why a query builder escape hatch is prohibited, why a template path rejects user content, or why a rendering helper is required.
+00:01:21.562 --> 00:01:24.008
+Future developers need to know why a field is allowlisted,
 
-18
-00:02:04.687 --> 00:02:09.510
+00:01:24.008 --> 00:01:28.370
+why a query builder escape hatch is prohibited, why a template path rejects user content,
+
+00:01:28.370 --> 00:01:30.775
+or why a rendering helper is required.
+
+00:01:30.775 --> 00:01:33.600
 Secure design becomes easier to maintain when the reasoning is visible.

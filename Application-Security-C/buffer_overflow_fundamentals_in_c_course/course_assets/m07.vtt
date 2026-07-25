@@ -1,61 +1,46 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.825
+00:00:00.200 --> 00:00:03.000
 Safer C interfaces make buffer rules visible.
 
-2
-00:00:02.825 --> 00:00:15.256
+00:00:03.220 --> 00:00:13.300
 A function that operates on a buffer should not require the caller or reviewer to guess how much space is available, how much data is currently present, or what happens when the output does not fit.
 
-3
-00:00:15.256 --> 00:00:20.215
+00:00:13.520 --> 00:00:17.440
 Functions that write to buffers should receive capacity information explicitly.
 
-4
-00:00:20.215 --> 00:00:26.995
+00:00:17.660 --> 00:00:22.860
 Functions that read from buffers should receive the current length or a clearly defined terminator contract.
 
-5
-00:00:26.995 --> 00:00:33.085
+00:00:23.080 --> 00:00:27.880
 If both reading and writing happen, the interface should make both sides of the contract visible.
 
-6
-00:00:33.085 --> 00:00:39.803
+00:00:28.100 --> 00:00:34.340
 Ownership, destination capacity, source length, and return status should be clear in the function contract.
 
-7
-00:00:39.803 --> 00:00:49.031
+00:00:34.560 --> 00:00:42.160
 The caller should know who owns allocated memory, whether the output buffer remains valid after failure, and how to detect truncation or rejection.
 
-8
-00:00:49.031 --> 00:00:55.874
+00:00:42.380 --> 00:00:47.900
 Prefer designs that validate once at a boundary and preserve validated size information through the workflow.
 
-9
-00:00:55.874 --> 00:01:03.785
+00:00:48.120 --> 00:00:54.280
 If a parser validates a record length, later code should not discard that length and rediscover it through unsafe assumptions.
 
-10
-00:01:03.785 --> 00:01:06.547
+00:00:54.500 --> 00:00:57.380
 Carry the verified size along with the data.
 
-11
-00:01:06.547 --> 00:01:10.690
+00:00:57.600 --> 00:01:01.680
 Avoid APIs that require the caller to remember hidden assumptions.
 
-12
-00:01:10.690 --> 00:01:22.807
+00:01:01.900 --> 00:01:13.180
 Narrow parsing functions, structured records, bounded copies, explicit result codes, centralized validation, and small helper functions can all improve reviewability when they reduce ambiguity.
 
-13
-00:01:22.807 --> 00:01:28.708
+00:01:13.400 --> 00:01:19.080
 Design error paths so the output buffer is either valid, empty, or clearly marked as unusable.
 
-14
-00:01:28.708 --> 00:01:35.363
+00:01:19.300 --> 00:01:25.060
 A partially written buffer with unclear state can be as dangerous to maintainability as an unchecked copy.
 
-15
-00:01:35.363 --> 00:01:39.758
+00:01:25.280 --> 00:01:30.480
 The safer pattern is to make both success and failure states explicit.

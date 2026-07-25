@@ -1,77 +1,58 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.119
+00:00:00.200 --> 00:00:05.000
 It is tempting to cast a buffer of bytes to a C struct and start reading fields.
 
-2
-00:00:05.119 --> 00:00:11.389
+00:00:05.220 --> 00:00:11.060
 That shortcut often looks tidy in a prototype, but it is a poor default for robust binary parsing.
 
-3
-00:00:11.389 --> 00:00:14.461
+00:00:11.280 --> 00:00:14.080
 Raw bytes belong to the file or protocol format.
 
-4
-00:00:14.461 --> 00:00:21.819
+00:00:14.300 --> 00:00:21.180
 C structs belong to the compiler, target architecture, ABI, alignment rules, and options used to build the program.
 
-5
-00:00:21.819 --> 00:00:25.658
+00:00:21.400 --> 00:00:25.160
 A C struct may contain padding between fields or at the end.
 
-6
-00:00:25.658 --> 00:00:29.433
+00:00:25.380 --> 00:00:28.420
 That padding is not necessarily present in the file format.
 
-7
-00:00:29.433 --> 00:00:33.464
+00:00:28.640 --> 00:00:31.920
 The compiler may align fields differently on different targets.
 
-8
-00:00:33.464 --> 00:00:40.503
+00:00:32.140 --> 00:00:38.700
 A packed struct option may reduce padding, but it can also create unaligned accesses and portability concerns.
 
-9
-00:00:40.503 --> 00:00:48.117
+00:00:38.920 --> 00:00:44.760
 Even when a cast appears to work on one machine, it may encode assumptions that were never part of the format contract.
 
-10
-00:00:48.117 --> 00:00:50.229
+00:00:44.980 --> 00:00:46.900
 Unaligned access is another trap.
 
-11
-00:00:50.229 --> 00:00:53.492
+00:00:47.120 --> 00:00:49.760
 Some platforms tolerate it with a performance cost.
 
-12
-00:00:53.492 --> 00:00:55.987
+00:00:49.980 --> 00:00:52.380
 Others may fault or behave differently.
 
-13
-00:00:55.987 --> 00:01:03.729
+00:00:52.600 --> 00:00:59.400
 A parser that depends on direct unaligned loads from arbitrary byte buffers is harder to port and harder to reason about.
 
-14
-00:01:03.729 --> 00:01:07.441
+00:00:59.620 --> 00:01:03.060
 The safer pattern is to decode packed data field by field.
 
-15
-00:01:07.441 --> 00:01:17.486
+00:01:03.280 --> 00:01:11.840
 Read the exact bytes required for each field, apply the format's byte order, check the resulting value, and only then store it in an internal representation.
 
-16
-00:01:17.486 --> 00:01:27.596
+00:01:12.060 --> 00:01:20.540
 The internal representation can use normal C structs, but those structs represent trusted parser state after validation, not a direct view of untrusted bytes.
 
-17
-00:01:27.596 --> 00:01:29.899
+00:01:20.760 --> 00:01:22.920
 Explicit decoding also helps review.
 
-18
-00:01:29.899 --> 00:01:40.009
+00:01:23.140 --> 00:01:30.980
 A reviewer can see where the length was checked, where the integer width was chosen, where endianness was handled, and where unsupported values were rejected.
 
-19
-00:01:40.009 --> 00:01:44.936
+00:01:31.200 --> 00:01:35.680
 That visibility is difficult to achieve when parsing is hidden behind a cast.

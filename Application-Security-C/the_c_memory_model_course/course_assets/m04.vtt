@@ -1,61 +1,46 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.362
+00:00:00.200 --> 00:00:05.160
 The effective type rules help define which lvalue types may be used to access an object.
 
-2
-00:00:05.362 --> 00:00:11.313
+00:00:05.380 --> 00:00:10.740
 These rules matter because C compilers use type and aliasing assumptions when optimizing code.
 
-3
-00:00:11.313 --> 00:00:19.246
+00:00:10.960 --> 00:00:18.000
 If code accesses storage through an incompatible type, the program may no longer mean what the developer intended in portable C.
 
-4
-00:00:19.246 --> 00:00:21.523
+00:00:18.220 --> 00:00:20.140
 Aliasing mistakes are often subtle.
 
-5
-00:00:21.523 --> 00:00:28.502
+00:00:20.360 --> 00:00:26.040
 Two pointers can appear to refer to the same bytes, but the language may not allow access through the chosen types.
 
-6
-00:00:28.502 --> 00:00:40.623
+00:00:26.260 --> 00:00:37.300
 Character types have special access rules for inspecting object representation, yet that does not mean arbitrary type punning is safe or that every byte sequence is a valid object of another type.
 
-7
-00:00:40.623 --> 00:00:44.222
+00:00:37.520 --> 00:00:40.400
 Alignment requirements are another part of valid access.
 
-8
-00:00:44.222 --> 00:00:48.336
+00:00:40.620 --> 00:00:44.380
 Some object types must be accessed at suitably aligned addresses.
 
-9
-00:00:48.336 --> 00:00:58.547
+00:00:44.600 --> 00:00:53.000
 Casting a pointer changes the pointer type in the source code, but it does not guarantee that the pointed-to storage is correctly aligned or valid for the target type.
 
-10
-00:00:58.547 --> 00:01:01.999
+00:00:53.220 --> 00:00:56.580
 Safer designs avoid casual pointer reinterpretation.
 
-11
-00:01:01.999 --> 00:01:06.994
+00:00:56.800 --> 00:01:01.680
 Use explicit serialization when data crosses a file, wire, or storage boundary.
 
-12
-00:01:06.994 --> 00:01:12.798
+00:01:01.900 --> 00:01:07.180
 Use byte movement where appropriate and then create real objects through well-defined APIs.
 
-13
-00:01:12.798 --> 00:01:20.511
+00:01:07.400 --> 00:01:13.800
 Keep object ownership and representation decisions separate so reviewers can see what is raw data and what is a typed object.
 
-14
-00:01:20.511 --> 00:01:35.129
+00:01:14.020 --> 00:01:26.900
 A good review asks which object is being accessed, what its effective type is, whether the access type is permitted, whether the address is suitably aligned, and whether any compiler aliasing assumption could be invalidated by the code.
 
-15
-00:01:35.129 --> 00:01:39.096
+00:01:27.120 --> 00:01:30.560
 That discipline keeps low-level code portable and reviewable.

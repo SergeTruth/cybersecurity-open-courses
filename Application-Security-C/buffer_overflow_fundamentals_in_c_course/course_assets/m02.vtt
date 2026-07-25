@@ -1,77 +1,58 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.908
+00:00:00.200 --> 00:00:04.680
 A buffer is a contiguous region intended to hold a specific amount of data.
 
-2
-00:00:04.908 --> 00:00:10.144
+00:00:04.900 --> 00:00:10.500
 It may hold bytes, characters, records, integers, structures, or other elements.
 
-3
-00:00:10.144 --> 00:00:13.416
+00:00:10.720 --> 00:00:13.680
 Whatever it holds, the buffer has finite capacity.
 
-4
-00:00:13.416 --> 00:00:19.895
+00:00:13.900 --> 00:00:18.780
 Safe code must know that capacity before writing or reading through a boundary-sensitive operation.
 
-5
-00:00:19.895 --> 00:00:26.701
+00:00:19.000 --> 00:00:24.440
 C arrays do not automatically carry runtime capacity information into every expression or function call.
 
-6
-00:00:26.701 --> 00:00:31.675
+00:00:24.660 --> 00:00:28.660
 Inside the scope where an array is declared, the compiler may know its size.
 
-7
-00:00:31.675 --> 00:00:40.706
+00:00:28.880 --> 00:00:36.160
 Once the array is passed to a function as a pointer, that size information is no longer automatically available through the pointer alone.
 
-8
-00:00:40.706 --> 00:00:44.763
+00:00:36.380 --> 00:00:39.900
 Array-to-pointer decay can hide the original size of a buffer.
 
-9
-00:00:44.763 --> 00:00:52.355
+00:00:40.120 --> 00:00:46.680
 A function receiving a pointer often cannot tell whether it points to one element, ten elements, or a larger region.
 
-10
-00:00:52.355 --> 00:00:57.917
+00:00:46.900 --> 00:00:52.100
 That is why safe C interfaces commonly pass capacity or length alongside the pointer.
 
-11
-00:00:57.917 --> 00:01:02.564
+00:00:52.320 --> 00:00:56.080
 Pointer arithmetic must stay within the valid object or array boundary.
 
-12
-00:01:02.564 --> 00:01:06.163
+00:00:56.300 --> 00:00:59.580
 Element counts and byte counts are not interchangeable.
 
-13
-00:01:06.163 --> 00:01:13.231
+00:00:59.800 --> 00:01:05.960
 A buffer that holds ten integers does not have the same byte capacity as a buffer that holds ten characters.
 
-14
-00:01:13.231 --> 00:01:16.765
+00:01:06.180 --> 00:01:09.220
 Reviewers need to know which unit a length represents.
 
-15
-00:01:16.765 --> 00:01:27.432
+00:01:09.440 --> 00:01:18.800
 A safe buffer operation needs three pieces of information: the destination capacity, the intended number of elements or bytes to process, and the resulting length.
 
-16
-00:01:27.432 --> 00:01:33.649
+00:01:19.020 --> 00:01:24.220
 If any of those are missing or guessed, the operation is harder to review and easier to misuse.
 
-17
-00:01:33.649 --> 00:01:37.968
+00:01:24.440 --> 00:01:27.800
 External input should never be assumed to fit into a fixed buffer.
 
-18
-00:01:37.968 --> 00:01:45.822
+00:01:28.020 --> 00:01:35.940
 Files, sockets, devices, arguments, environment values, and records from other systems may all exceed local assumptions.
 
-19
-00:01:45.822 --> 00:01:51.842
+00:01:36.160 --> 00:01:41.280
 Defensive code checks the available space before copying, formatting, parsing, or appending.

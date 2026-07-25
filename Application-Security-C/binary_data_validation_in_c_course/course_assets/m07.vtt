@@ -1,85 +1,64 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.042
+00:00:00.200 --> 00:00:04.680
 A binary input can pass individual field checks and still be invalid as a whole.
 
-2
-00:00:05.042 --> 00:00:13.676
+00:00:04.900 --> 00:00:12.580
 A length may be within the maximum, an offset may be inside the file, and a count may be nonzero, but the combination may not make sense.
 
-3
-00:00:13.676 --> 00:00:18.655
+00:00:12.800 --> 00:00:16.800
 Cross-field validation checks the relationships that give the format coherence.
 
-4
-00:00:18.655 --> 00:00:22.500
+00:00:17.020 --> 00:00:20.460
 Magic values and version fields are basic consistency checks.
 
-5
-00:00:22.500 --> 00:00:29.622
+00:00:20.680 --> 00:00:26.520
 They help confirm that the parser is handling the intended format and that the rest of the rules are appropriate.
 
-6
-00:00:29.622 --> 00:00:37.500
+00:00:26.740 --> 00:00:33.860
 If the magic value is wrong or the version is unsupported, continuing as if the input were familiar creates unnecessary risk.
 
-7
-00:00:37.500 --> 00:00:40.966
+00:00:34.080 --> 00:00:37.360
 Counts should match what can actually fit in the input.
 
-8
-00:00:40.966 --> 00:00:50.042
+00:00:37.580 --> 00:00:45.180
 If a table claims to contain fifty records, the parser should verify that fifty records of the expected minimum size fit in the declared region.
 
-9
-00:00:50.042 --> 00:00:54.895
+00:00:45.400 --> 00:00:49.560
 If records have variable-length fields, each record needs its own validation.
 
-10
-00:00:54.895 --> 00:00:57.290
+00:00:49.780 --> 00:00:52.100
 The count is a claim, not a guarantee.
 
-11
-00:00:57.290 --> 00:01:00.630
+00:00:52.320 --> 00:00:55.200
 Offsets should point inside the expected data region.
 
-12
-00:01:00.630 --> 00:01:10.840
+00:00:55.420 --> 00:01:05.660
 A pointer to a string table, payload, or metadata section should not silently point into a header or into unrelated data unless the format explicitly allows that.
 
-13
-00:01:10.840 --> 00:01:13.802
+00:01:05.880 --> 00:01:08.280
 Overlap rules should be documented and checked.
 
-14
-00:01:13.802 --> 00:01:17.836
+00:01:08.500 --> 00:01:12.580
 Some formats permit shared regions or references; others do not.
 
-15
-00:01:17.836 --> 00:01:21.302
+00:01:12.800 --> 00:01:15.440
 The parser should not invent that policy while running.
 
-16
-00:01:21.302 --> 00:01:25.714
+00:01:15.660 --> 00:01:19.580
 Reserved fields and unsupported flags are another form of consistency.
 
-17
-00:01:25.714 --> 00:01:35.609
+00:01:19.800 --> 00:01:28.600
 If a flag changes the meaning of later data and the parser does not support it, the parser should reject the input or follow a documented compatibility rule.
 
-18
-00:01:35.609 --> 00:01:39.642
+00:01:28.820 --> 00:01:32.340
 Ignoring unknown semantics can make later validation misleading.
 
-19
-00:01:39.642 --> 00:01:47.773
+00:01:32.560 --> 00:01:39.840
 Checksums and integrity fields can support validation, but they do not replace bounds checks, type checks, or consistency checks.
 
-20
-00:01:47.773 --> 00:01:54.579
+00:01:40.060 --> 00:01:45.580
 A checksum may show that data was not accidentally changed, but it does not prove the data is safe to parse.
 
-21
-00:01:54.579 --> 00:01:59.243
+00:01:45.800 --> 00:01:50.760
 Treat integrity verification as one layer in a broader validation process.

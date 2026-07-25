@@ -1,117 +1,88 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.925
+00:00:00.200 --> 00:00:04.280
 Production improvement requires visibility into what the loop actually did.
 
-2
-00:00:04.925 --> 00:00:15.268
+00:00:04.500 --> 00:00:10.660
 A final output alone does not explain why the loop succeeded, why it failed, or why it spent more than expected.
 
-3
-00:00:15.268 --> 00:00:21.671
+00:00:10.880 --> 00:00:18.000
 Without traces, engineers cannot diagnose inefficient context selection, unsafe proposals, unnecessary tool calls,
 
-4
-00:00:21.671 --> 00:00:26.596
+00:00:18.220 --> 00:00:22.620
 incorrect completion decisions, or policy rules that block useful work.
 
-5
-00:00:26.596 --> 00:00:31.029
+00:00:22.840 --> 00:00:25.080
 A trace is a structured record of a run.
 
-6
-00:00:31.029 --> 00:00:37.431
+00:00:25.300 --> 00:00:31.220
 It may include task metadata, model and configuration version, context references, proposed actions,
 
-7
-00:00:37.431 --> 00:00:43.834
+00:00:31.440 --> 00:00:38.320
 policy decisions, tool calls, tool results, state transitions, evaluation outcomes, human approvals, timing,
 
-8
-00:00:43.834 --> 00:00:47.282
+00:00:38.540 --> 00:00:41.340
 token and cost data, and terminal status.
 
-9
-00:00:47.282 --> 00:00:56.639
+00:00:41.560 --> 00:00:48.600
 The trace should avoid storing secrets or hidden reasoning, but it should preserve enough operational evidence to investigate behavior.
 
-10
-00:00:56.639 --> 00:01:04.027
+00:00:48.820 --> 00:00:53.220
 Good traces let teams debug the harness rather than guessing from the final answer alone.
 
-11
-00:01:04.027 --> 00:01:11.415
+00:00:53.440 --> 00:01:00.800
 Useful metrics include task success rate, valid completion rate, false completion rate, human escalation rate,
 
-12
-00:01:11.415 --> 00:01:16.833
+00:01:01.020 --> 00:01:06.780
 policy-block rate, average iterations, tool-error rate, retry rate, no-progress termination rate,
 
-13
-00:01:16.833 --> 00:01:23.728
+00:01:07.000 --> 00:01:13.080
 cost per successful task, latency, frequency of human correction, and regression rate after changes.
 
-14
-00:01:23.728 --> 00:01:26.190
+00:01:13.300 --> 00:01:15.300
 Metrics must be interpreted together.
 
-15
-00:01:26.190 --> 00:01:29.638
+00:01:15.520 --> 00:01:18.240
 Lower cost can hide more false completions.
 
-16
-00:01:29.638 --> 00:01:34.563
+00:01:18.460 --> 00:01:22.140
 Higher success can reflect an evaluator that became too permissive.
 
-17
-00:01:34.563 --> 00:01:37.518
+00:01:22.360 --> 00:01:25.240
 Representative traces should become evaluation datasets.
 
-18
-00:01:37.518 --> 00:01:44.906
+00:01:25.460 --> 00:01:33.460
 Convert successes, failures, edge cases, and security incidents into repeatable tests before changing prompts, tools,
 
-19
-00:01:44.906 --> 00:01:47.861
+00:01:33.680 --> 00:01:37.040
 models, context policy, or control logic.
 
-20
-00:01:47.861 --> 00:01:55.249
+00:01:37.260 --> 00:01:43.980
 Then change one relevant harness component, rerun the evaluation set, and compare quality, safety, cost,
 
-21
-00:01:55.249 --> 00:01:58.204
+00:01:44.200 --> 00:01:46.440
 and latency against a versioned baseline.
 
-22
-00:01:58.204 --> 00:02:03.129
+00:01:46.660 --> 00:01:50.740
 Changing several components at once makes causal analysis much harder.
 
-23
-00:02:03.129 --> 00:02:07.562
+00:01:50.960 --> 00:01:55.520
 Versioned evaluations turn anecdotes into a repeatable improvement process.
 
-24
-00:02:07.562 --> 00:02:17.905
+00:01:55.740 --> 00:02:02.380
 In the coding loop, traces may reveal that the system rereads too many files before every test or repeatedly asks for
 
-25
-00:02:17.905 --> 00:02:21.352
+00:02:02.600 --> 00:02:05.720
 broad repository context after a small failure.
 
-26
-00:02:21.352 --> 00:02:28.740
+00:02:05.940 --> 00:02:11.620
 The fix may be a narrower file-search tool, better context policy, or improved progress evaluation,
 
-27
-00:02:28.740 --> 00:02:31.203
+00:02:11.840 --> 00:02:13.760
 not simply a longer instruction.
 
-28
-00:02:31.203 --> 00:02:33.173
+00:02:13.980 --> 00:02:16.140
 Loop engineering is empirical.
 
-29
-00:02:33.173 --> 00:02:40.561
+00:02:16.360 --> 00:02:22.600
 Reliability improves when changes respond to observed failure patterns and are measured against stable criteria.

@@ -1,81 +1,61 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.502
+00:00:00.200 --> 00:00:05.800
 Unsafe API usage in C rarely exists because a team intentionally wanted fragile code.
 
-2
-00:00:05.502 --> 00:00:07.832
+00:00:06.020 --> 00:00:08.100
 It usually survives through history.
 
-3
-00:00:07.832 --> 00:00:10.615
+00:00:08.320 --> 00:00:11.200
 Large codebases carry old examples forward.
 
-4
-00:00:10.615 --> 00:00:14.176
+00:00:11.420 --> 00:00:14.780
 Portability habits persist long after platforms change.
 
-5
-00:00:14.176 --> 00:00:18.577
+00:00:15.000 --> 00:00:18.280
 Older coding standards may have treated certain functions as normal.
 
-6
-00:00:18.577 --> 00:00:25.632
+00:00:18.500 --> 00:00:24.020
 A developer under schedule pressure may copy a familiar pattern without revisiting the assumptions behind it.
 
-7
-00:00:25.632 --> 00:00:31.523
+00:00:24.240 --> 00:00:29.360
 Some C APIs are risky because they do not require the caller to provide a destination size.
 
-8
-00:00:31.523 --> 00:00:42.203
+00:00:29.580 --> 00:00:38.700
 Others make truncation hard to notice, depend on null-terminated input without proving that termination exists, or return information that callers frequently ignore.
 
-9
-00:00:42.203 --> 00:00:45.375
+00:00:38.920 --> 00:00:41.240
 The dangerous part is not only the function name.
 
-10
-00:00:45.375 --> 00:00:48.546
+00:00:41.460 --> 00:00:44.500
 It is the easy path toward unchecked assumptions.
 
-11
-00:00:48.546 --> 00:00:53.530
+00:00:44.720 --> 00:00:49.040
 Replacing an unsafe API is therefore not just a mechanical name substitution.
 
-12
-00:00:53.530 --> 00:00:55.990
+00:00:49.260 --> 00:00:51.340
 The surrounding data contract matters.
 
-13
-00:00:55.990 --> 00:01:02.528
+00:00:51.560 --> 00:00:58.600
 A call site has a source, a destination, a length expectation, an ownership rule, and a failure path.
 
-14
-00:01:02.528 --> 00:01:10.230
+00:00:58.820 --> 00:01:04.980
 If those details are unclear, a safer-looking replacement can preserve the same bug or introduce a new behavior change.
 
-15
-00:01:10.230 --> 00:01:17.156
+00:01:05.200 --> 00:01:11.200
 A safer replacement still needs correct buffer sizes, return-value checks, and deliberate failure handling.
 
-16
-00:01:17.156 --> 00:01:21.817
+00:01:11.420 --> 00:01:15.340
 A bounded function called with the wrong bound is not safer in practice.
 
-17
-00:01:21.817 --> 00:01:30.749
+00:01:15.560 --> 00:01:22.200
 A formatting function that reports truncation is only useful if the caller checks that report and decides what the program should do next.
 
-18
-00:01:30.749 --> 00:01:37.287
+00:01:22.420 --> 00:01:28.900
 The goal of migration is to improve both security and reliability while preserving intended behavior.
 
-19
-00:01:37.287 --> 00:01:48.161
+00:01:29.120 --> 00:01:38.400
 That means understanding normal inputs, boundary cases, old compatibility assumptions, and what should happen when the new code rejects something the old code accepted.
 
-20
-00:01:48.161 --> 00:01:53.145
+00:01:38.620 --> 00:01:42.940
 Good API replacement is careful engineering, not a find-and-replace exercise.

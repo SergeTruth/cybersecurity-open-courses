@@ -1,89 +1,67 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:07.213
+00:00:00.200 --> 00:00:06.600
 A useful review skill is learning to recognize risky API patterns before focusing on any single function name.
 
-2
-00:00:07.213 --> 00:00:14.557
+00:00:06.820 --> 00:00:12.340
 Missing size arguments are one of the clearest warning signs when a function writes into caller-provided memory.
 
-3
-00:00:14.557 --> 00:00:21.638
+00:00:12.560 --> 00:00:18.160
 If the callee cannot know the destination capacity, safety depends entirely on assumptions outside the call.
 
-4
-00:00:21.638 --> 00:00:24.589
+00:00:18.380 --> 00:00:21.180
 Fixed-size buffers deserve the same scrutiny.
 
-5
-00:00:24.589 --> 00:00:32.457
+00:00:21.400 --> 00:00:27.880
 A fixed buffer can be perfectly acceptable when the maximum input size is enforced before the copy or conversion occurs.
 
-6
-00:00:32.457 --> 00:00:41.309
+00:00:28.100 --> 00:00:35.460
 It becomes risky when the maximum is only implied by a comment, guessed from a protocol, or assumed because current test data is small.
 
-7
-00:00:41.309 --> 00:00:44.850
+00:00:35.680 --> 00:00:38.640
 Unchecked return values are another recurring problem.
 
-8
-00:00:44.850 --> 00:00:54.620
+00:00:38.860 --> 00:00:48.300
 Many APIs communicate truncation, failed conversion, short reads, incomplete writes, allocation failure, or invalid input through their return value.
 
-9
-00:00:54.620 --> 00:01:02.882
+00:00:48.520 --> 00:00:55.240
 If the caller ignores that signal, the next line of code may operate on incomplete or invalid data while appearing to succeed.
 
-10
-00:01:02.882 --> 00:01:08.652
+00:00:55.460 --> 00:01:00.420
 Implicit null-termination assumptions can turn bounded data into unsafe string handling.
 
-11
-00:01:08.652 --> 00:01:17.176
+00:01:00.640 --> 00:01:07.920
 A buffer read from a file, socket, environment entry, or binary record may have a known byte count without being a valid C string.
 
-12
-00:01:17.176 --> 00:01:24.913
+00:01:08.140 --> 00:01:15.100
 Passing that buffer to string-only routines before establishing termination and length can create unreliable behavior.
 
-13
-00:01:24.913 --> 00:01:28.651
+00:01:15.320 --> 00:01:19.000
 Ownership and lifetime rules also belong in the contract.
 
-14
-00:01:28.651 --> 00:01:30.028
+00:01:19.220 --> 00:01:20.740
 Who owns the pointer?
 
-15
-00:01:30.028 --> 00:01:31.339
+00:01:20.960 --> 00:01:22.000
 Who frees it?
 
-16
-00:01:31.339 --> 00:01:33.765
+00:01:22.220 --> 00:01:24.220
 How long is the returned value valid?
 
-17
-00:01:33.765 --> 00:01:35.929
+00:01:24.440 --> 00:01:26.280
 Can it point to internal storage?
 
-18
-00:01:35.929 --> 00:01:37.568
+00:01:26.500 --> 00:01:28.020
 Can the caller modify it?
 
-19
-00:01:37.568 --> 00:01:44.519
+00:01:28.240 --> 00:01:35.200
 Ambiguity here can lead to leaks, stale pointers, double cleanup, or use of data after its valid lifetime.
 
-20
-00:01:44.519 --> 00:01:50.879
+00:01:35.420 --> 00:01:40.860
 Code review should identify the contract around each pointer, buffer, length, and returned value.
 
-21
-00:01:50.879 --> 00:01:56.649
+00:01:41.080 --> 00:01:47.000
 The safest call sites make capacity, used length, ownership, and error behavior visible.
 
-22
-00:01:56.649 --> 00:02:03.600
+00:01:47.220 --> 00:01:52.980
 When those details are hidden, the first task is to reveal the contract before choosing a replacement API.

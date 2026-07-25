@@ -1,73 +1,55 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.145
+00:00:00.200 --> 00:00:03.800
 Aliasing means multiple pointers can refer to the same allocation.
 
-2
-00:00:04.145 --> 00:00:13.089
+00:00:04.020 --> 00:00:11.700
 One pointer may be the owner, another may be borrowed by a helper, another may be stored in a structure, and another may point to an element or member.
 
-3
-00:00:13.089 --> 00:00:20.216
+00:00:11.920 --> 00:00:18.480
 When cleanup happens, the allocation's lifetime ends for all of them, not just for the variable used in the free call.
 
-4
-00:00:20.216 --> 00:00:24.142
+00:00:18.700 --> 00:00:22.460
 Setting one pointer to NULL after cleanup can be useful locally.
 
-5
-00:00:24.142 --> 00:00:32.068
+00:00:22.680 --> 00:00:29.320
 It can prevent accidental reuse of that specific variable and make a simple cleanup section safer to call after partial progress.
 
-6
-00:00:32.068 --> 00:00:34.686
+00:00:29.540 --> 00:00:32.180
 However, it does not update other aliases.
 
-7
-00:00:34.686 --> 00:00:39.849
+00:00:32.400 --> 00:00:37.280
 Any copied pointer values still exist and must be governed by the lifetime contract.
 
-8
-00:00:39.849 --> 00:00:42.249
+00:00:37.500 --> 00:00:39.660
 This distinction matters in real code.
 
-9
-00:00:42.249 --> 00:00:47.194
+00:00:39.880 --> 00:00:44.040
 A structure may keep a child pointer while a temporary variable also refers to it.
 
-10
-00:00:47.194 --> 00:00:51.193
+00:00:44.260 --> 00:00:47.700
 A callback may borrow a pointer while the owner is being torn down.
 
-11
-00:00:51.193 --> 00:00:56.283
+00:00:47.920 --> 00:00:52.240
 A container may store an object and the caller may still have the original variable.
 
-12
-00:00:56.283 --> 00:00:59.992
+00:00:52.460 --> 00:00:55.900
 Nulling one variable does not resolve those relationships.
 
-13
-00:00:59.992 --> 00:01:04.646
+00:00:56.120 --> 00:00:59.560
 Pointer-to-pointer cleanup can sometimes clarify caller-visible state.
 
-14
-00:01:04.646 --> 00:01:12.500
+00:00:59.780 --> 00:01:06.580
 A destroy helper that accepts an address of the owning pointer can release the object and set the caller's owning pointer to NULL.
 
-15
-00:01:12.500 --> 00:01:19.989
+00:01:06.800 --> 00:01:12.880
 That can be a good local convention, but it should be documented and should not be treated as a substitute for alias control.
 
-16
-00:01:19.989 --> 00:01:22.825
+00:01:13.100 --> 00:01:15.580
 The reliable control is lifetime discipline.
 
-17
-00:01:22.825 --> 00:01:31.188
+00:01:15.800 --> 00:01:24.040
 Know which pointer owns the allocation, which pointers merely borrow it, when the lifetime ends, and which aliases must stop being used.
 
-18
-00:01:31.188 --> 00:01:35.551
+00:01:24.260 --> 00:01:27.860
 NULL assignment can support that discipline, but it cannot replace it.

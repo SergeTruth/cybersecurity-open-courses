@@ -1,81 +1,61 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.756
+00:00:00.200 --> 00:00:02.760
 Agent systems need a clear identity model.
 
-2
-00:00:02.756 --> 00:00:12.251
+00:00:02.980 --> 00:00:12.020
 A request may involve a human user, an application service account, delegated access to another system, a workload identity, or a tool credential.
 
-3
-00:00:12.251 --> 00:00:22.434
+00:00:12.240 --> 00:00:21.200
 The design must answer whether an action runs as the user, as the application, as a specific service account, or as a constrained delegation of user authority.
 
-4
-00:00:22.434 --> 00:00:31.622
+00:00:21.420 --> 00:00:29.020
 Without that clarity, audit trails become confusing and permissions tend to expand until the agent can do far more than the workflow requires.
 
-5
-00:00:31.622 --> 00:00:35.987
+00:00:29.240 --> 00:00:32.840
 Authorization should happen before retrieval and before tool use.
 
-6
-00:00:35.987 --> 00:00:41.653
+00:00:33.060 --> 00:00:37.700
 If a user is not allowed to read a document, the agent should not retrieve it into context.
 
-7
-00:00:41.653 --> 00:00:49.386
+00:00:37.920 --> 00:00:44.080
 If a user is not allowed to update a record, the model should not be able to reach a tool that updates it on the user's behalf.
 
-8
-00:00:49.386 --> 00:01:01.483
+00:00:44.300 --> 00:00:54.300
 Object-level access control, tenant boundaries, organization membership, role checks, and resource ownership should be enforced in Python code or trusted services outside the model.
 
-9
-00:01:01.483 --> 00:01:09.446
+00:00:54.520 --> 00:01:01.080
 Least privilege means the agent receives only the permissions, tools, data, and credentials needed for its approved task.
 
-10
-00:01:09.446 --> 00:01:20.242
+00:01:01.300 --> 00:01:10.660
 Broad credentials may feel flexible during development, but they enlarge the blast radius of misconfiguration, prompt injection, model error, or operator mistake.
 
-11
-00:01:20.242 --> 00:01:32.646
+00:01:10.880 --> 00:01:21.360
 Scoped credentials, permission narrowing, destination controls, short-lived access, read-only modes, and default-deny behavior help keep agent authority aligned with business intent.
 
-12
-00:01:32.646 --> 00:01:38.925
+00:01:21.580 --> 00:01:27.820
 Every sensitive action should verify subject, action, resource, and context outside the model.
 
-13
-00:01:38.925 --> 00:01:40.839
+00:01:28.040 --> 00:01:29.640
 Who is requesting the action?
 
-14
-00:01:40.839 --> 00:01:42.906
+00:01:29.860 --> 00:01:31.700
 What action is being requested?
 
-15
-00:01:42.906 --> 00:01:44.744
+00:01:31.920 --> 00:01:33.520
 Which resource is affected?
 
-16
-00:01:44.744 --> 00:01:47.194
+00:01:33.740 --> 00:01:36.140
 Which tenant or organization owns it?
 
-17
-00:01:47.194 --> 00:01:48.802
+00:01:36.360 --> 00:01:38.120
 What policy applies now?
 
-18
-00:01:48.802 --> 00:01:50.563
+00:01:38.340 --> 00:01:40.020
 What approval is required?
 
-19
-00:01:50.563 --> 00:01:56.152
+00:01:40.240 --> 00:01:44.640
 The model can draft or recommend, but the application should enforce these decisions.
 
-20
-00:01:56.152 --> 00:01:59.904
+00:01:44.860 --> 00:01:48.140
 That separation is the backbone of safe agent automation.

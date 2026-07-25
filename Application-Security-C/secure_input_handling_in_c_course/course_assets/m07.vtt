@@ -1,57 +1,40 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:10.474
+00:00:00.200 --> 00:00:07.240
 Structured and binary input should be parsed as a series of verified facts, not as a blob that can be cast into a structure and trusted.
 
-2
-00:00:10.474 --> 00:00:18.128
+00:00:07.460 --> 00:00:15.860
 Records, headers, magic values, version fields, lengths, counts, offsets, and flags all need validation before they influence memory access.
 
-3
-00:00:18.128 --> 00:00:28.602
+00:00:16.080 --> 00:00:22.400
 A magic value may confirm that the file is probably the expected format, but it does not prove that the rest of the file is safe.
 
-4
-00:00:28.602 --> 00:00:36.255
-A version field may select a parser, but it should also constrain which fields are legal for that version.
+00:00:22.620 --> 00:00:30.540
+A version field may select a parser, but it should also constrain which fields are legal for that version. Embedded size fields are a common source of vulnerabilities.
 
-5
-00:00:36.255 --> 00:00:39.881
-Embedded size fields are a common source of vulnerabilities.
+00:00:30.760 --> 00:00:39.240
+A file or packet can claim to contain a thousand records when the available data only holds three. A length can point beyond the end of a buffer.
 
-6
-00:00:39.881 --> 00:00:47.132
-A file or packet can claim to contain a thousand records when the available data only holds three.
-
-7
-00:00:47.132 --> 00:00:51.161
-A length can point beyond the end of a buffer.
-
-8
-00:00:51.161 --> 00:00:57.203
+00:00:39.460 --> 00:00:44.660
 An offset can point backward, overlap another region, or wrap when combined with a length.
 
-9
-00:00:57.203 --> 00:01:06.066
-Before allocating, copying, or advancing a pointer, check that each referenced region is inside the actual input and inside your configured limits.
+00:00:44.880 --> 00:00:57.200
+Before allocating, copying, or advancing a pointer, check that each referenced region is inside the actual input and inside your configured limits. Do not multiply counts by record sizes without checking overflow first.
 
-10
-00:01:06.066 --> 00:01:10.497
-Do not multiply counts by record sizes without checking overflow first.
-
-11
-00:01:10.497 --> 00:01:17.345
+00:00:57.420 --> 00:01:05.580
 Binary parsing also needs explicit decisions about byte order, alignment, optional fields, duplicate fields, and invalid combinations.
 
-12
-00:01:17.345 --> 00:01:22.985
+00:01:05.800 --> 00:01:11.160
 Checksums can help detect accidental corruption, but they do not make untrusted input trustworthy.
 
-13
-00:01:22.985 --> 00:01:30.639
+00:01:11.380 --> 00:01:19.140
 Defensive parsers separate reading from validation, maintain a clear parsing state, and reject inconsistent structures before using their contents.
 
-14
-00:01:30.639 --> 00:01:44.335
+00:01:19.360 --> 00:01:30.400
 The practical rule is simple: no memory access should depend on a length, count, offset, or type value until that value has been checked against both the format rules and the bytes actually present.
+
+00:01:30.620 --> 00:01:36.060
+The example treats its input as one complete packet, so undeclared trailing bytes are rejected.
+
+00:01:36.280 --> 00:01:47.800
+Its returned payload pointer is a borrow into the caller-owned input and remains valid only while that input stays alive and unmodified. A streaming parser would instead return the exact number of bytes consumed.

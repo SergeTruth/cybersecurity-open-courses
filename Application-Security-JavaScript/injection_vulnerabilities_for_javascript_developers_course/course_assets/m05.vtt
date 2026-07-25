@@ -1,77 +1,82 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:01.370
-Node.
+00:00:00.000 --> 00:00:05.060
+Node.js applications sometimes call external processes for image processing,
 
-2
-00:00:01.370 --> 00:00:11.264
-js applications sometimes call external processes for image processing, document conversion, system utilities, build steps, or operational scripts.
+00:00:05.060 --> 00:00:08.810
+document conversion, system utilities, build steps, or operational scripts.
 
-3
-00:00:11.264 --> 00:00:22.223
-Command injection risk appears when user-controlled input influences the command, arguments, options, environment, file paths, or working directory in an unsafe way.
+00:00:08.810 --> 00:00:12.905
+Command injection risk appears when user-controlled input influences the command,
 
-4
-00:00:22.223 --> 00:00:28.692
-The danger increases when code builds one shell string and asks the operating system to interpret it.
+00:00:12.905 --> 00:00:17.240
+arguments, options, environment, file paths, or working directory in an unsafe way.
 
-5
-00:00:28.692 --> 00:00:32.726
-A safer design starts by asking whether a shell is needed at all.
+00:00:17.240 --> 00:00:21.245
+The danger increases when code builds one shell string and asks the operating system to
 
-6
-00:00:32.726 --> 00:00:42.848
-Many tasks can be performed through libraries, platform APIs, or process execution modes that pass a fixed executable and controlled arguments separately.
+00:00:21.245 --> 00:00:25.010
+interpret it. A safer design starts by asking whether a shell is needed at all.
 
-7
-00:00:42.848 --> 00:00:47.186
-Avoiding shell interpretation removes a large class of ambiguity.
+00:00:25.010 --> 00:00:28.280
+Many tasks can be performed through libraries, platform APIs,
 
-8
-00:00:47.186 --> 00:00:53.579
-When external execution is necessary, the set of allowed operations should be narrow and explicit.
+00:00:28.280 --> 00:00:32.725
+or process execution modes that pass a fixed executable and controlled arguments
 
-9
-00:00:53.579 --> 00:00:55.405
-Argument handling matters.
+00:00:32.725 --> 00:00:36.560
+separately. Avoiding shell interpretation removes a large class of ambiguity.
 
-10
-00:00:55.405 --> 00:01:03.168
-User choices should map to allowlisted operations, file types, or options rather than becoming free-form command text.
+00:00:36.560 --> 00:00:38.640
+When external execution is necessary,
 
-11
-00:01:03.168 --> 00:01:07.735
+00:00:38.640 --> 00:00:42.560
+the set of allowed operations should be narrow and explicit. Argument handling matters.
+
+00:00:42.560 --> 00:00:45.630
+User choices should map to allowlisted operations, file types,
+
+00:00:45.630 --> 00:00:48.160
+or options rather than becoming free-form command text.
+
+00:00:48.160 --> 00:00:51.440
 File paths should be resolved carefully within intended directories.
 
-12
-00:01:07.735 --> 00:01:10.703
+00:00:51.440 --> 00:00:53.240
 Environment variables should be controlled.
 
-13
-00:01:10.703 --> 00:01:18.770
-The process should run with the least privilege practical for the task, and the working directory should not be left to chance.
+00:00:53.240 --> 00:00:56.400
+The process should run with the least privilege practical for the task,
 
-14
-00:01:18.770 --> 00:01:23.413
+00:00:56.400 --> 00:00:58.765
+and the working directory should not be left to chance.
+
+00:00:58.765 --> 00:01:02.115
 Logging should support investigation without leaking sensitive data.
 
-15
-00:01:23.413 --> 00:01:30.262
-It is useful to record which approved operation was requested, who requested it, and whether it succeeded.
+00:01:02.115 --> 00:01:06.080
+It is useful to record which approved operation was requested, who requested it,
 
-16
-00:01:30.262 --> 00:01:38.482
-It is not useful to dump secrets, full command strings containing private values, or untrusted input into logs without thought.
+00:01:06.080 --> 00:01:07.350
+and whether it succeeded.
 
-17
-00:01:38.482 --> 00:01:41.526
+00:01:07.350 --> 00:01:11.270
+It is not useful to dump secrets, full command strings containing private values,
+
+00:01:11.270 --> 00:01:13.565
+or untrusted input into logs without thought.
+
+00:01:13.565 --> 00:01:15.870
 Observability and privacy need to be balanced.
 
-18
-00:01:41.526 --> 00:01:55.606
-The defensive principle is to avoid string-built commands, separate commands from arguments, constrain what users can request, prefer safer libraries when practical, and treat process execution as a sensitive sink.
+00:01:15.870 --> 00:01:18.555
+The defensive principle is to avoid string-built commands,
 
-19
-00:01:55.606 --> 00:02:00.629
+00:01:18.555 --> 00:01:21.829
+separate commands from arguments, constrain what users can request,
+
+00:01:21.829 --> 00:01:26.400
+prefer safer libraries when practical, and treat process execution as a sensitive sink.
+
+00:01:26.400 --> 00:01:29.690
 The more powerful the command environment, the stricter the design should be.

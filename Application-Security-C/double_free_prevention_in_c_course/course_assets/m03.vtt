@@ -1,81 +1,61 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.441
+00:00:00.200 --> 00:00:02.680
 A dynamic allocation has a lifecycle.
 
-2
-00:00:02.441 --> 00:00:04.959
+00:00:02.900 --> 00:00:05.700
 Before allocation, there is no object.
 
-3
-00:00:04.959 --> 00:00:08.164
+00:00:05.920 --> 00:00:09.040
 After a successful allocation, there is storage.
 
-4
-00:00:08.164 --> 00:00:13.962
+00:00:09.260 --> 00:00:13.740
 After initialization, there may be a valid object according to the program's invariants.
 
-5
-00:00:13.962 --> 00:00:19.608
+00:00:13.960 --> 00:00:19.960
 Later, ownership may transfer, cleanup may run, and the object becomes invalid for use.
 
-6
-00:00:19.608 --> 00:00:22.431
+00:00:20.180 --> 00:00:22.740
 Failed allocations need careful handling.
 
-7
-00:00:22.431 --> 00:00:30.289
+00:00:22.960 --> 00:00:29.920
 If allocation fails and returns no object, cleanup code should not treat the failed result as an owned initialized object.
 
-8
-00:00:30.289 --> 00:00:39.292
+00:00:30.140 --> 00:00:36.860
 The surrounding function may still need to release earlier allocations, but it should do so based on tracked state rather than assumptions.
 
-9
-00:00:39.292 --> 00:00:43.107
+00:00:37.080 --> 00:00:39.800
 Partially initialized objects are especially important.
 
-10
-00:00:43.107 --> 00:00:50.507
+00:00:40.020 --> 00:00:46.100
 A structure may have its first member allocated, its second member initialized, and its third member still absent.
 
-11
-00:00:50.507 --> 00:00:56.153
+00:00:46.320 --> 00:00:50.320
 Cleanup should release only the members that were successfully initialized and owned.
 
-12
-00:00:56.153 --> 00:01:03.248
+00:00:50.540 --> 00:00:56.300
 That requires state to be clear enough for the destroy path to distinguish valid fields from untouched fields.
 
-13
-00:01:03.248 --> 00:01:06.148
+00:00:56.520 --> 00:00:58.920
 Ownership transfer is another state change.
 
-14
-00:01:06.148 --> 00:01:14.998
+00:00:59.140 --> 00:01:06.580
 Once a caller transfers an object to a container or another API, the caller should no longer treat the allocation as something it must free.
 
-15
-00:01:14.998 --> 00:01:21.864
+00:01:06.800 --> 00:01:12.720
 If the transfer only happens on success, the failure path must say whether the caller still owns the object.
 
-16
-00:01:21.864 --> 00:01:24.764
+00:01:12.940 --> 00:01:15.900
 After cleanup, the object is no longer valid.
 
-17
-00:01:24.764 --> 00:01:30.409
+00:01:16.120 --> 00:01:20.920
 A pointer variable may still contain an address-like value, but the lifetime has ended.
 
-18
-00:01:30.409 --> 00:01:39.107
+00:01:21.140 --> 00:01:28.660
 Code should not inspect fields, log contents, compare contents, or call another destroy routine on the same allocation after release.
 
-19
-00:01:39.107 --> 00:01:41.930
+00:01:28.880 --> 00:01:30.960
 State clarity prevents duplicate cleanup.
 
-20
-00:01:41.930 --> 00:01:54.748
+00:01:31.180 --> 00:01:42.860
 When the code can identify failed, allocated, initialized, partially initialized, transferred, freed, and invalid states, each branch can make release decisions based on facts rather than habit.

@@ -1,81 +1,61 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.890
+00:00:00.200 --> 00:00:04.120
 Defensive refactoring is often the practical path to better bounds checking.
 
-2
-00:00:04.890 --> 00:00:15.764
+00:00:04.340 --> 00:00:15.060
 Many C codebases contain useful legacy code with repeated indexes, magic numbers, hand-written copies, local assumptions, and APIs that predate current review standards.
 
-3
-00:00:15.764 --> 00:00:21.748
+00:00:15.280 --> 00:00:19.760
 The goal is to improve safety without pretending the whole codebase can be rewritten at once.
 
-4
-00:00:21.748 --> 00:00:28.825
+00:00:19.980 --> 00:00:26.540
 Replace magic numbers with named constants, derived sizes, or values tied to the actual object being accessed.
 
-5
-00:00:28.825 --> 00:00:34.358
+00:00:26.760 --> 00:00:31.400
 A literal number may be correct today, but it is hard to audit when the array changes.
 
-6
-00:00:34.358 --> 00:00:43.559
+00:00:31.620 --> 00:00:40.340
 A named limit or derived count communicates intent and reduces the chance that one caller updates a buffer without updating the matching check.
 
-7
-00:00:43.559 --> 00:00:47.163
+00:00:40.560 --> 00:00:43.520
 Centralize repeated bounds checks where patterns repeat.
 
-8
-00:00:47.163 --> 00:00:54.111
+00:00:43.740 --> 00:00:49.740
 If several functions validate an offset and length in the same way, a reviewed helper can reduce divergence.
 
-9
-00:00:54.111 --> 00:01:03.827
+00:00:49.960 --> 00:00:58.280
 If several functions append to the same dynamic buffer type, a single append helper can maintain count, capacity, and terminator behavior consistently.
 
-10
-00:01:03.827 --> 00:01:10.326
+00:00:58.500 --> 00:01:04.420
 Small helper functions can make checked indexing, appending, copying, and reserving easier to review.
 
-11
-00:01:10.326 --> 00:01:14.057
+00:01:04.640 --> 00:01:07.440
 The helper should not hide complexity behind a vague name.
 
-12
-00:01:14.057 --> 00:01:19.269
+00:01:07.660 --> 00:01:12.700
 It should document units, accepted ranges, output behavior, and failure handling.
 
-13
-00:01:19.269 --> 00:01:24.545
+00:01:12.920 --> 00:01:17.400
 A good helper makes the calling code shorter and the safety contract more obvious.
 
-14
-00:01:24.545 --> 00:01:29.306
+00:01:17.620 --> 00:01:21.780
 Structured buffer metadata can keep pointer, count, and capacity together.
 
-15
-00:01:29.306 --> 00:01:36.577
+00:01:22.000 --> 00:01:28.000
 That does not make code automatically safe, but it makes invalid states harder to represent and easier to detect.
 
-16
-00:01:36.577 --> 00:01:44.298
+00:01:28.220 --> 00:01:34.940
 A struct can also carry unit conventions, ownership rules, and helper functions that operate on the buffer consistently.
 
-17
-00:01:44.298 --> 00:01:47.708
+00:01:35.160 --> 00:01:38.200
 Refactor incrementally when working with legacy code.
 
-18
-00:01:47.708 --> 00:01:56.266
+00:01:38.420 --> 00:01:45.220
 Start at boundaries where input enters, where buffers are copied, where strings are formed, or where repeated review findings appear.
 
-19
-00:01:56.266 --> 00:02:00.641
+00:01:45.440 --> 00:01:49.360
 Preserve behavior with tests, then make the bounds contract clearer.
 
-20
-00:02:00.641 --> 00:02:06.625
+00:01:49.580 --> 00:01:55.660
 Small, visible improvements compound into a codebase where safe access is easier to maintain.

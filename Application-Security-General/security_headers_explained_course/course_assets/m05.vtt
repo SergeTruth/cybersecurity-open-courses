@@ -1,61 +1,46 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.426
+00:00:00.200 --> 00:00:09.720
 Content-Type tells clients what kind of content is being served, such as HTML, JSON, JavaScript, CSS, images, or file downloads.
 
-2
-00:00:08.426 --> 00:00:13.064
+00:00:09.940 --> 00:00:13.540
 Browsers use this information when deciding how to process a response.
 
-3
-00:00:13.064 --> 00:00:18.785
+00:00:13.760 --> 00:00:19.200
 If the declared type is missing, wrong, or ambiguous, browsers may try to infer the type.
 
-4
-00:00:18.785 --> 00:00:27.752
+00:00:19.420 --> 00:00:26.860
 That behavior is called MIME sniffing, and in some cases it can cause content to be interpreted more dangerously than the server intended.
 
-5
-00:00:27.752 --> 00:00:37.337
+00:00:27.080 --> 00:00:35.640
 X-Content-Type-Options: nosniff tells supporting browsers not to override certain declared content types, especially for scripts and styles.
 
-6
-00:00:37.337 --> 00:00:44.604
+00:00:35.860 --> 00:00:41.700
 This helps reduce cases where a response served with an unexpected type is still treated as executable content.
 
-7
-00:00:44.604 --> 00:00:56.354
+00:00:41.920 --> 00:00:52.960
 It is a small header, but it supports a larger discipline: serve content with accurate types, avoid ambiguous responses, and keep untrusted content away from executable contexts.
 
-8
-00:00:56.354 --> 00:00:59.368
+00:00:53.180 --> 00:00:56.380
 File downloads and uploads need special care.
 
-9
-00:00:59.368 --> 00:01:08.413
+00:00:56.600 --> 00:01:04.360
 User-supplied files should not be served from the same trusted origin in ways that allow them to execute as scripts or render as active HTML.
 
-10
-00:01:08.413 --> 00:01:14.906
+00:01:04.580 --> 00:01:09.940
 Content-Disposition can help direct browsers to treat content as an attachment when appropriate.
 
-11
-00:01:14.906 --> 00:01:26.192
+00:01:10.160 --> 00:01:20.160
 Storage names, content types, scanning, isolation, and download behavior should be designed together rather than relying on a file extension or a user-provided MIME type.
 
-12
-00:01:26.192 --> 00:01:29.439
+00:01:20.380 --> 00:01:23.660
 MIME controls do not replace content validation.
 
-13
-00:01:29.439 --> 00:01:36.319
+00:01:23.880 --> 00:01:30.120
 A malicious file can have a harmless-looking extension, and a harmless file can be mislabeled by a client.
 
-14
-00:01:36.319 --> 00:01:44.204
+00:01:30.340 --> 00:01:36.420
 The server should set accurate response headers based on trusted handling, not blindly echo client-supplied metadata.
 
-15
-00:01:44.204 --> 00:01:53.094
+00:01:36.640 --> 00:01:44.960
 For static assets, APIs, and uploads, predictable Content-Type behavior makes browser processing safer and troubleshooting easier.

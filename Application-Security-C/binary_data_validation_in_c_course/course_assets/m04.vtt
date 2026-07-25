@@ -1,73 +1,55 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.016
+00:00:00.200 --> 00:00:07.640
 Lengths, offsets, and counts are some of the most important fields in binary validation because they influence memory access.
 
-2
-00:00:08.016 --> 00:00:16.096
+00:00:07.860 --> 00:00:14.340
 They tell the parser where data begins, how much data exists, how many records to expect, or how large an allocation might be.
 
-3
-00:00:16.096 --> 00:00:23.278
+00:00:14.560 --> 00:00:20.560
 Because they come from input, they are not facts until the parser proves they make sense for the available data.
 
-4
-00:00:23.278 --> 00:00:27.061
+00:00:20.780 --> 00:00:23.900
 A common mistake is to check only the beginning of a range.
 
-5
-00:00:27.061 --> 00:00:33.217
+00:00:24.120 --> 00:00:29.560
 An offset may point inside the buffer, but the data that begins there may extend beyond the end.
 
-6
-00:00:33.217 --> 00:00:40.976
+00:00:29.780 --> 00:00:36.660
 Defensive code checks both the start and the end of the range before reading, copying, allocating, or advancing a cursor.
 
-7
-00:00:40.976 --> 00:00:50.916
+00:00:36.880 --> 00:00:45.520
 In practice, that means validating that the offset is within bounds, the length is within policy, and the expression that combines them cannot wrap around.
 
-8
-00:00:50.916 --> 00:00:53.417
+00:00:45.740 --> 00:00:48.540
 Nested data requires nested validation.
 
-9
-00:00:53.417 --> 00:01:01.112
+00:00:48.760 --> 00:00:55.240
 A top-level table may have a valid range, but each record inside that table may contain its own length or offset fields.
 
-10
-00:01:01.112 --> 00:01:07.845
+00:00:55.460 --> 00:01:00.500
 Those inner values need to be checked against the region they belong to, not only against the whole file.
 
-11
-00:01:07.845 --> 00:01:13.167
+00:01:00.720 --> 00:01:05.840
 This keeps one valid outer structure from becoming a pass for invalid inner access.
 
-12
-00:01:13.167 --> 00:01:17.656
+00:01:06.060 --> 00:01:10.220
 Range checks should happen before pointer arithmetic or memory access.
 
-13
-00:01:17.656 --> 00:01:25.223
+00:01:10.440 --> 00:01:17.000
 In C, computing an invalid pointer may already move the code outside the assumptions the compiler and platform expect.
 
-14
-00:01:25.223 --> 00:01:33.495
+00:01:17.220 --> 00:01:24.260
 Using indexes and explicit integer checks before deriving pointers is easier to reason about and less fragile under optimization.
 
-15
-00:01:33.495 --> 00:01:38.112
+00:01:24.480 --> 00:01:28.320
 Declared sizes should also be cross-checked against actual availability.
 
-16
-00:01:38.112 --> 00:01:44.012
+00:01:28.540 --> 00:01:32.940
 If a header claims there are ten records, the parser should verify that ten records can fit.
 
-17
-00:01:44.012 --> 00:01:51.643
+00:01:33.160 --> 00:01:39.080
 If an offset points to a payload, the parser should verify that the payload exists and belongs to the expected section.
 
-18
-00:01:51.643 --> 00:01:58.504
+00:01:39.300 --> 00:01:44.820
 Validation is strongest when every size-related claim is connected back to bytes that are actually present.

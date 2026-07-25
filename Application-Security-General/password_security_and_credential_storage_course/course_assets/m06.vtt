@@ -1,69 +1,52 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.698
+00:00:00.200 --> 00:00:03.800
 Credential storage design starts with the user table or identity store.
 
-2
-00:00:04.698 --> 00:00:09.242
+00:00:04.020 --> 00:00:07.860
 The system should store a password verifier, not the password itself.
 
-3
-00:00:09.242 --> 00:00:21.795
+00:00:08.080 --> 00:00:18.400
 Useful fields often include the encoded password hash, algorithm identifier, parameter metadata, version information, timestamps, and account state needed for authentication workflows.
 
-4
-00:00:21.795 --> 00:00:29.958
+00:00:18.620 --> 00:00:25.020
 The goal is to store enough information to verify and migrate credentials without storing unnecessary credential material.
 
-5
-00:00:29.958 --> 00:00:32.499
+00:00:25.240 --> 00:00:27.480
 Version metadata supports migration.
 
-6
-00:00:32.499 --> 00:00:37.967
+00:00:27.700 --> 00:00:32.580
 Over time, teams may move from one algorithm to another or increase cost parameters.
 
-7
-00:00:37.967 --> 00:00:52.138
+00:00:32.800 --> 00:00:45.040
 Rehashing on login is a common strategy: after a successful authentication, the system detects that the stored verifier uses older parameters and replaces it with a new verifier generated from the presented password.
 
-8
-00:00:52.138 --> 00:00:57.913
+00:00:45.260 --> 00:00:50.060
 This allows gradual migration without forcing every user through a reset on the same day.
 
-9
-00:00:57.913 --> 00:01:02.842
+00:00:50.280 --> 00:00:54.200
 Credential databases and backups should be protected as sensitive assets.
 
-10
-00:01:02.842 --> 00:01:08.002
+00:00:54.420 --> 00:00:58.820
 Access should be limited to the services and administrators that truly need it.
 
-11
-00:01:08.002 --> 00:01:17.629
+00:00:59.040 --> 00:01:06.320
 Backups should receive the same or stronger protection as the primary store because an attacker with old hashes can still attempt offline guessing.
 
-12
-00:01:17.629 --> 00:01:25.638
+00:01:06.540 --> 00:01:13.420
 Analytics exports, support tools, and reporting queries should avoid copying credential fields into secondary systems.
 
-13
-00:01:25.638 --> 00:01:28.641
+00:01:13.640 --> 00:01:16.040
 Design should assume compromise is possible.
 
-14
-00:01:28.641 --> 00:01:34.494
+00:01:16.260 --> 00:01:21.300
 If the database is stolen, unique salts and strong password hashing slow offline attacks.
 
-15
-00:01:34.494 --> 00:01:39.808
+00:01:21.520 --> 00:01:25.920
 If the application secret is also exposed, pepper-based protections may be lost.
 
-16
-00:01:39.808 --> 00:01:44.660
+00:01:26.140 --> 00:01:30.620
 If logs contain plaintext passwords, hashing no longer helps those users.
 
-17
-00:01:44.660 --> 00:01:54.980
+00:01:30.840 --> 00:01:39.880
 Credential storage architecture is therefore a layered design: minimize stored material, protect access, support migration, and plan for breach response.

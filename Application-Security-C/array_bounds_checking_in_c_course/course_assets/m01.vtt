@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:10.489
+00:00:00.200 --> 00:00:07.720
 Array bounds checking matters in C because the language gives developers direct control over memory while relying on code to stay inside valid object boundaries.
 
-2
-00:00:10.489 --> 00:00:19.740
+00:00:07.940 --> 00:00:16.180
 That control is one reason C remains useful for systems programming, embedded work, performance-sensitive components, and low-level libraries.
 
-3
-00:00:19.740 --> 00:00:28.080
+00:00:16.400 --> 00:00:23.840
 It also means an array access that looks ordinary can become unsafe if the index, length, offset, or capacity was misunderstood.
 
-4
-00:00:28.080 --> 00:00:32.054
+00:00:24.060 --> 00:00:27.900
 C does not automatically check every array access at runtime.
 
-5
-00:00:32.054 --> 00:00:39.025
+00:00:28.120 --> 00:00:33.480
 An expression such as an indexed read or write depends on the programmer's reasoning about the valid range.
 
-6
-00:00:39.025 --> 00:00:45.540
+00:00:33.700 --> 00:00:39.140
 If that reasoning is wrong, the program may read from or write to memory outside the intended array.
 
-7
-00:00:45.540 --> 00:00:50.296
+00:00:39.360 --> 00:00:43.920
 The result may vary by build, platform, data shape, and surrounding code.
 
-8
-00:00:50.296 --> 00:01:01.045
+00:00:44.140 --> 00:00:53.900
 Out-of-bounds reads can produce unreliable results, expose unintended data to later logic, or make decisions based on bytes that are not part of the intended object.
 
-9
-00:01:01.045 --> 00:01:07.691
+00:00:54.120 --> 00:00:59.400
 Even when the program does not crash, it may be using data that the developer never meant to consider.
 
-10
-00:01:07.691 --> 00:01:13.359
+00:00:59.620 --> 00:01:04.820
 That is enough to break validation, parsing, comparison, logging, or control decisions.
 
-11
-00:01:13.359 --> 00:01:24.499
+00:01:05.040 --> 00:01:14.080
 Out-of-bounds writes are often more damaging because they can corrupt nearby state, change a length field, disturb a pointer, break a data structure, or crash the process.
 
-12
-00:01:24.499 --> 00:01:29.451
+00:01:14.300 --> 00:01:18.940
 The safe way to discuss this in engineering terms is not to dwell on misuse.
 
-13
-00:01:29.451 --> 00:01:36.096
+00:01:19.160 --> 00:01:25.480
 It is to recognize that a single unchecked write can make the program's future behavior untrustworthy.
 
-14
-00:01:36.096 --> 00:01:50.494
+00:01:25.700 --> 00:01:39.140
 Most bounds problems begin as ordinary engineering mistakes: a wrong loop condition, a count confused with capacity, an unchecked input length, an offset added before validation, or an assumption that a terminator exists.
 
-15
-00:01:50.494 --> 00:01:56.488
+00:01:39.360 --> 00:01:45.280
 Defensive C treats indexes, lengths, offsets, and capacities as first-class design concerns.
 
-16
-00:01:56.488 --> 00:02:02.156
+00:01:45.500 --> 00:01:49.580
 The rest of this course builds habits for making those concerns visible and reviewable.

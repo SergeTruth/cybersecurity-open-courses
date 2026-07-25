@@ -1,73 +1,55 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:09.709
+00:00:00.200 --> 00:00:08.920
 Cryptographic hashes turn input into fixed-size output in a way that supports integrity checks, identifiers, and content addressing when used correctly.
 
-2
-00:00:09.709 --> 00:00:13.092
+00:00:09.140 --> 00:00:12.260
 They are useful, but they are not secret by themselves.
 
-3
-00:00:13.092 --> 00:00:20.301
+00:00:12.480 --> 00:00:18.960
 If anyone can compute the same hash over the same input, the hash does not prove that the data came from a trusted party.
 
-4
-00:00:20.301 --> 00:00:25.449
+00:00:19.180 --> 00:00:24.460
 A message authentication code, or MAC, adds a secret key to the integrity decision.
 
-5
-00:00:25.449 --> 00:00:35.526
+00:00:24.680 --> 00:00:32.600
 Parties that share the relevant secret can verify that data was produced by someone with that key and was not changed under the assumptions of the chosen primitive.
 
-6
-00:00:35.526 --> 00:00:41.116
+00:00:32.820 --> 00:00:38.420
 MAC keys should be generated, stored, scoped, and rotated like other cryptographic keys.
 
-7
-00:00:41.116 --> 00:00:43.690
+00:00:38.640 --> 00:00:40.640
 Password storage is a different problem.
 
-8
-00:00:43.690 --> 00:00:50.090
+00:00:40.860 --> 00:00:45.900
 Ordinary fast hashes are built to be efficient, which is not the goal for stored password verification.
 
-9
-00:00:50.090 --> 00:01:00.387
+00:00:46.120 --> 00:00:54.040
 Password storage should use purpose-built password hashing with salts and work factors or equivalent cost settings according to current organizational guidance.
 
-10
-00:01:00.387 --> 00:01:05.609
+00:00:54.260 --> 00:00:58.580
 Salts make stored password records unique even when users choose the same password.
 
-11
-00:01:05.609 --> 00:01:11.714
+00:00:58.800 --> 00:01:03.920
 They do not need to be secret in the same way as keys, but they do need correct generation and storage.
 
-12
-00:01:11.714 --> 00:01:19.952
+00:01:04.140 --> 00:01:10.780
 Work factors slow offline guessing at a defensive level and should be reviewed as hardware and organizational requirements change.
 
-13
-00:01:19.952 --> 00:01:22.085
+00:01:11.000 --> 00:01:12.920
 Do not choose primitives by habit.
 
-14
-00:01:22.085 --> 00:01:27.969
+00:01:13.140 --> 00:01:20.340
 A hash, MAC, password hash, digital signature, and encryption mode solve different problems.
 
-15
-00:01:27.969 --> 00:01:35.692
+00:01:20.560 --> 00:01:26.320
 Using the wrong primitive can produce output that looks cryptographic but does not provide the intended security property.
 
-16
-00:01:35.692 --> 00:01:40.106
+00:01:26.540 --> 00:01:30.300
 Reviewers should ask what property each operation is meant to provide.
 
-17
-00:01:40.106 --> 00:01:46.872
+00:01:30.520 --> 00:01:36.040
 Is the goal public integrity, keyed integrity, password verification, object identity, or something else?
 
-18
-00:01:46.872 --> 00:01:53.860
+00:01:36.260 --> 00:01:42.980
 The primitive, key handling, salt behavior, return-value checks, and storage format should match that answer.

@@ -1,69 +1,52 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:06.455
+00:00:00.200 --> 00:00:04.920
 A double-free defect happens when the same dynamically allocated object is released more than once.
 
-2
-00:00:06.455 --> 00:00:09.796
+00:00:05.140 --> 00:00:08.660
 In C, that is usually not just a single mistaken call.
 
-3
-00:00:09.796 --> 00:00:21.110
+00:00:08.880 --> 00:00:17.840
 It often reflects a deeper contract problem: more than one path believes it has cleanup authority, or ownership changed but the surrounding code did not update its assumptions.
 
-4
-00:00:21.110 --> 00:00:29.312
+00:00:18.060 --> 00:00:25.260
 These defects matter because dynamic memory is shared through pointers, structures, containers, callbacks, and error paths.
 
-5
-00:00:29.312 --> 00:00:35.007
+00:00:25.480 --> 00:00:31.240
 A pointer value can be copied many times, but the allocation it refers to has one lifetime.
 
-6
-00:00:35.007 --> 00:00:41.993
+00:00:31.460 --> 00:00:38.180
 When that lifetime ends, every remaining alias must stop acting as if the object is still valid or still owned.
 
-7
-00:00:41.993 --> 00:00:45.486
+00:00:38.400 --> 00:00:41.200
 Double-free risk appears in normal engineering work.
 
-8
-00:00:45.486 --> 00:00:48.599
+00:00:41.420 --> 00:00:44.300
 A function grows from one return path to several.
 
-9
-00:00:48.599 --> 00:00:52.017
+00:00:44.520 --> 00:00:47.720
 A partially initialized object adds another member.
 
-10
-00:00:52.017 --> 00:00:54.902
+00:00:47.940 --> 00:00:50.580
 A helper starts taking ownership on success.
 
-11
-00:00:54.902 --> 00:00:58.699
+00:00:50.800 --> 00:00:53.920
 A container insertion changes who releases a child object.
 
-12
-00:00:58.699 --> 00:01:04.091
+00:00:54.140 --> 00:00:58.620
 Without explicit rules, cleanup logic can drift into duplicated release behavior.
 
-13
-00:01:04.091 --> 00:01:06.369
+00:00:58.840 --> 00:01:01.080
 Prevention is a design discipline.
 
-14
-00:01:06.369 --> 00:01:15.253
+00:01:01.300 --> 00:01:08.500
 Developers should be able to point to the owner, the transfer rule, the valid lifetime, the cleanup authority, and the state after failure.
 
-15
-00:01:15.253 --> 00:01:20.417
+00:01:08.720 --> 00:01:12.800
 Reviewers should not have to infer those facts from a long chain of conditionals.
 
-16
-00:01:20.417 --> 00:01:29.757
+00:01:13.020 --> 00:01:22.460
 This course stays focused on defensive practice: ownership, lifetime, cleanup paths, API contracts, testing, and tool-supported validation.
 
-17
-00:01:29.757 --> 00:01:36.895
+00:01:22.680 --> 00:01:28.760
 The goal is to make memory release behavior predictable enough that one allocation has one clear cleanup story.

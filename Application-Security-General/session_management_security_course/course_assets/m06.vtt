@@ -1,77 +1,28 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.529
-Modern applications often mix traditional server sessions with token-based approaches.
+00:00:00.200 --> 00:00:12.360
+Modern applications often mix traditional server sessions with token-based approaches. A server-rendered web application may use an opaque cookie-backed session. A single-page application may call APIs with access tokens.
 
-2
-00:00:04.529 --> 00:00:09.057
-A server-rendered web application may use an opaque cookie-backed session.
+00:00:12.580 --> 00:00:20.340
+A mobile application may rely on tokens stored in platform-managed storage. Backend services may exchange credentials through an identity provider.
 
-3
-00:00:09.057 --> 00:00:13.133
-A single-page application may call APIs with access tokens.
+00:00:20.560 --> 00:00:33.200
+The architecture changes the mechanics, but the security questions stay familiar: who is this request for, what is it allowed to do, and is the session state still valid? Access tokens and refresh tokens need different handling.
 
-4
-00:00:13.133 --> 00:00:18.115
-A mobile application may rely on tokens stored in platform-managed storage.
+00:00:33.420 --> 00:00:44.780
+Access tokens are commonly short-lived credentials used to call APIs or access resources. Refresh tokens can allow the client to obtain new access tokens over time, so they are especially sensitive.
 
-5
-00:00:18.115 --> 00:00:22.190
-Backend services may exchange credentials through an identity provider.
+00:00:45.000 --> 00:00:54.360
+Their storage, rotation, revocation, and reuse detection policies matter. Developers should not assume that a token is safe just because it uses a common format.
 
-6
-00:00:22.190 --> 00:00:35.323
-The architecture changes the mechanics, but the security questions stay familiar: who is this request for, what is it allowed to do, and is the session state still valid?
+00:00:54.580 --> 00:01:07.380
+Issuer, audience, expiration, signature, scope, and relevant claims still need validation. Single-page applications, mobile applications, and APIs introduce storage and cross-origin considerations.
 
-7
-00:00:35.323 --> 00:00:38.946
-Access tokens and refresh tokens need different handling.
+00:01:07.600 --> 00:01:16.960
+Browser-accessible storage may be convenient, but it can create exposure if the application has client-side script weaknesses. Native mobile storage should use platform protections where available.
 
-8
-00:00:38.946 --> 00:00:44.834
-Access tokens are commonly short-lived credentials used to call APIs or access resources.
+00:01:17.180 --> 00:01:26.700
+APIs should validate tokens server-side and enforce authorization on every sensitive operation. Modern session management is not about choosing cookies or tokens as a slogan.
 
-9
-00:00:44.834 --> 00:00:52.985
-Refresh tokens can allow the client to obtain new access tokens over time, so they are especially sensitive.
-
-10
-00:00:52.985 --> 00:00:57.061
-Their storage, rotation, revocation, and reuse detection policies matter.
-
-11
-00:00:57.061 --> 00:01:04.307
-Developers should not assume that a token is safe just because it uses a common format.
-
-12
-00:01:04.307 --> 00:01:09.288
-Issuer, audience, expiration, signature, scope, and relevant claims still need validation.
-
-13
-00:01:09.288 --> 00:01:14.270
-Single-page applications, mobile applications, and APIs introduce storage and cross-origin considerations.
-
-14
-00:01:14.270 --> 00:01:21.968
-Browser-accessible storage may be convenient, but it can create exposure if the application has client-side script weaknesses.
-
-15
-00:01:21.968 --> 00:01:26.044
-Native mobile storage should use platform protections where available.
-
-16
-00:01:26.044 --> 00:01:31.479
-APIs should validate tokens server-side and enforce authorization on every sensitive operation.
-
-17
-00:01:31.479 --> 00:01:37.366
-Modern session management is not about choosing cookies or tokens as a slogan.
-
-18
-00:01:37.366 --> 00:01:43.706
-It is about matching the storage, lifetime, validation, and renewal model to the application?
-
-19
-00:01:43.706 --> 00:01:47.329
-s threat profile.
+00:01:26.920 --> 00:01:34.520
+It is about matching the storage, lifetime, validation, and renewal model to the application?s threat profile.

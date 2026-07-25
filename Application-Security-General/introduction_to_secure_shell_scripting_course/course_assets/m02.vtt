@@ -1,17 +1,13 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:27.528
+00:00:00.200 --> 00:00:24.200
 Shell scripting is not just placing commands into a file. The shell expands variables, splits words, evaluates quotes, expands globs, runs command substitutions, and uses exit codes to decide control flow. Many reliability and security problems come from forgetting that the shell rewrites a command line before the command actually runs. That parsing step deserves respect because it changes what arguments a tool receives.
 
-2
-00:00:27.528 --> 00:00:56.030
+00:00:24.420 --> 00:00:48.020
 Quoting is not style. It changes meaning. A quoted variable such as "$name" stays one argument, even when the value contains spaces. An unquoted variable may split into multiple arguments, or it may expand into filenames if it contains characters the shell treats specially. That is why defensive scripts quote variables unless they intentionally need splitting, and why arrays are often safer than building an argument list as one string.
 
-3
-00:00:56.030 --> 00:01:22.519
+00:00:48.240 --> 00:01:10.240
 Globbing and command substitution deserve similar care. A wildcard may match more files than expected, or no files depending on shell settings. A command substitution can hide a failure or produce output that is unsafe to treat as a path, option, or command. When a script uses the output of one command as input to another, it should be clear what format is expected and what happens when the command fails.
 
-4
-00:01:22.519 --> 00:01:45.243
+00:01:10.460 --> 00:01:29.260
 Exit codes are the shell's basic signal for success or failure. A defensive script checks important outcomes intentionally rather than assuming every command worked. Strict modes can help, but they do not replace understanding. The core habit is to know when parsing, quoting, globbing, substitution, and exit status affect the meaning of the script.

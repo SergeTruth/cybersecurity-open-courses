@@ -1,97 +1,73 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:03.217
+00:00:00.200 --> 00:00:02.760
 Common bounds mistakes are usually not mysterious.
 
-2
-00:00:03.217 --> 00:00:08.880
+00:00:02.980 --> 00:00:08.180
 They are small gaps between what the code assumes and what the data actually guarantees.
 
-3
-00:00:08.880 --> 00:00:10.746
+00:00:08.400 --> 00:00:10.400
 A loop runs one step too far.
 
-4
-00:00:10.746 --> 00:00:14.221
+00:00:10.620 --> 00:00:13.420
 A size belongs to one buffer but is used with another.
 
-5
-00:00:14.221 --> 00:00:16.859
+00:00:13.640 --> 00:00:16.680
 A negative value is accepted as an index.
 
-6
-00:00:16.859 --> 00:00:22.843
+00:00:16.900 --> 00:00:21.780
 A length from a file or message is trusted before the buffer it describes has been validated.
 
-7
-00:00:22.843 --> 00:00:25.996
+00:00:22.000 --> 00:00:24.960
 Off-by-one loop conditions are a classic example.
 
-8
-00:00:25.996 --> 00:00:31.015
+00:00:25.180 --> 00:00:30.460
 For a zero-based array with count elements, valid indexes are less than count.
 
-9
-00:00:31.015 --> 00:00:36.806
+00:00:30.680 --> 00:00:35.800
 A loop condition that allows i equal to count steps one position beyond the final element.
 
-10
-00:00:36.806 --> 00:00:49.096
+00:00:36.020 --> 00:00:46.020
 Reviewers should pay close attention to code that uses less-than-or-equal comparisons around array indexes, especially when the variable name suggests a count rather than a final valid index.
 
-11
-00:00:49.096 --> 00:00:53.665
+00:00:46.240 --> 00:00:50.960
 Negative indexes arise when signed values are not validated before use.
 
-12
-00:00:53.665 --> 00:00:59.327
+00:00:51.180 --> 00:00:57.420
 A value may come from parsing, arithmetic, a search result, a sentinel, or a conversion.
 
-13
-00:00:59.327 --> 00:01:05.698
+00:00:57.640 --> 00:01:03.080
 If negative values are not meaningful for the operation, reject them before converting or indexing.
 
-14
-00:01:05.698 --> 00:01:13.033
+00:01:03.300 --> 00:01:09.140
 Converting a negative signed value to an unsigned type can produce a very large value rather than a helpful error.
 
-15
-00:01:13.033 --> 00:01:18.438
+00:01:09.360 --> 00:01:13.840
 Unsigned wraparound can appear when subtracting sizes or computing remaining length.
 
-16
-00:01:18.438 --> 00:01:25.323
+00:01:14.060 --> 00:01:19.900
 If code subtracts a larger value from a smaller unsigned value, the result wraps within the unsigned range.
 
-17
-00:01:25.323 --> 00:01:32.916
+00:01:20.120 --> 00:01:26.040
 That wrapped result can look like a large available length unless the code first checks that the subtraction is valid.
 
-18
-00:01:32.916 --> 00:01:37.871
+00:01:26.260 --> 00:01:30.420
 Using one buffer's size to access another buffer is another everyday mistake.
 
-19
-00:01:37.871 --> 00:01:43.984
+00:01:30.640 --> 00:01:37.360
 Similar names, parallel arrays, copied code, and reused helper functions can hide the mismatch.
 
-20
-00:01:43.984 --> 00:01:52.027
+00:01:37.580 --> 00:01:44.380
 The size value should describe the exact object being accessed, and interfaces should make that relationship hard to confuse.
 
-21
-00:01:52.027 --> 00:01:54.472
+00:01:44.600 --> 00:01:46.920
 Sentinel assumptions also need review.
 
-22
-00:01:54.472 --> 00:02:01.035
+00:01:47.140 --> 00:01:53.060
 A character array is not necessarily a valid string, and a parsed region may not contain a terminator.
 
-23
-00:02:01.035 --> 00:02:09.658
+00:01:53.280 --> 00:01:59.920
 Code that walks until a sentinel should first know that the sentinel exists within the valid bounds or use a length-limited operation.
 
-24
-00:02:09.658 --> 00:02:15.192
+00:02:00.140 --> 00:02:04.700
 Bounds safety depends on facts, not on the hope that data arrives in a friendly shape.

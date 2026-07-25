@@ -1,73 +1,55 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.810
+00:00:00.200 --> 00:00:05.240
 Many cryptographic operations depend on values that are unpredictable, unique, or both.
 
-2
-00:00:05.810 --> 00:00:15.136
+00:00:05.460 --> 00:00:14.340
 Keys, salts, nonces, initialization values, and session material may look like ordinary bytes, but their security requirements are specific.
 
-3
-00:00:15.136 --> 00:00:23.851
+00:00:14.560 --> 00:00:21.760
 Using a general-purpose pseudo-random function for these values is not acceptable unless the library explicitly documents that use.
 
-4
-00:00:23.851 --> 00:00:29.890
+00:00:21.980 --> 00:00:26.140
 Cryptographically secure random sources are designed for security-sensitive generation.
 
-5
-00:00:29.890 --> 00:00:39.140
+00:00:26.360 --> 00:00:34.520
 In C applications, that usually means using the operating system, platform API, or cryptographic library function approved for this purpose.
 
-6
-00:00:39.140 --> 00:00:48.542
+00:00:34.740 --> 00:00:42.260
 The code should handle random-generation failure as a real error, because continuing with weak or missing randomness can invalidate the design.
 
-7
-00:00:48.542 --> 00:00:51.983
+00:00:42.480 --> 00:00:45.520
 Nonces and initialization values are not all secret.
 
-8
-00:00:51.983 --> 00:00:58.022
+00:00:45.740 --> 00:00:51.420
 Many require uniqueness or unpredictability according to the primitive and mode being used.
 
-9
-00:00:58.022 --> 00:01:06.431
+00:00:51.640 --> 00:00:58.600
 A nonce may be stored or transmitted with the protected data, but reuse can still be unsafe when the primitive requires uniqueness.
 
-10
-00:01:06.431 --> 00:01:11.629
+00:00:58.820 --> 00:01:02.660
 Developers should follow the library's rules rather than relying on intuition.
 
-11
-00:01:11.629 --> 00:01:22.790
+00:01:02.880 --> 00:01:12.000
 Startup assumptions matter. Embedded systems, early-boot services, containerized processes, and restricted environments may have different random-source behavior.
 
-12
-00:01:22.790 --> 00:01:30.817
+00:01:12.220 --> 00:01:19.180
 The application should use approved APIs and should make startup failures visible when secure randomness is not available.
 
-13
-00:01:30.817 --> 00:01:35.327
+00:01:19.400 --> 00:01:23.400
 Silent fallback to weaker generation is not a safe recovery strategy.
 
-14
-00:01:35.327 --> 00:01:42.513
+00:01:23.620 --> 00:01:30.580
 When the library can manage nonces, initialization values, salts, or generated keys safely, prefer that path.
 
-15
-00:01:42.513 --> 00:01:49.393
+00:01:30.800 --> 00:01:36.560
 Library-managed values reduce the chance of local mistakes and often encode the expected size and format.
 
-16
-00:01:49.393 --> 00:01:57.649
+00:01:36.780 --> 00:01:44.540
 When the application must provide values, tests should verify size, uniqueness policy, storage behavior, and error handling.
 
-17
-00:01:57.649 --> 00:02:09.727
+00:01:44.760 --> 00:01:55.960
 Reviewers should ask where every security-sensitive random or unique value comes from, how failure is handled, and whether the value is secret, unique, unpredictable, or simply a label.
 
-18
-00:02:09.727 --> 00:02:13.855
+00:01:56.180 --> 00:01:59.700
 Clear answers prevent accidental misuse of strong primitives.

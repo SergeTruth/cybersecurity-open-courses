@@ -1,55 +1,55 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.241
+00:00:00.200 --> 00:00:04.120
 Kubernetes adds orchestration boundaries and identities around containers.
 
-00:00:04.241 --> 00:00:08.928
+00:00:04.340 --> 00:00:07.620
 Pods group one or more containers with shared context.
 
-00:00:08.928 --> 00:00:10.937
+00:00:07.840 --> 00:00:09.280
 Nodes run pods.
 
-00:00:10.937 --> 00:00:14.731
+00:00:09.500 --> 00:00:12.780
 Service accounts identify workloads to the API.
 
-00:00:14.731 --> 00:00:21.650
+00:00:13.000 --> 00:00:18.920
 RBAC determines allowed API actions, while admission controls evaluate objects before they are accepted.
 
-00:00:21.650 --> 00:00:27.230
+00:00:19.140 --> 00:00:24.980
 Secrets, configuration, storage, and network policy connect workloads to other assets.
 
-00:00:27.230 --> 00:00:41.291
+00:00:25.200 --> 00:00:35.280
 The threat model should identify which secrets a pod can receive, which services it can reach, which volumes it can mount, and which API operations its service account can perform.
 
-00:00:41.291 --> 00:00:47.317
+00:00:35.500 --> 00:00:40.380
 Container escape risk connects to cluster risk through node and orchestration access.
 
-00:00:47.317 --> 00:00:53.790
+00:00:40.600 --> 00:00:45.960
 A boundary failure on one node does not automatically mean total cluster compromise.
 
-00:00:53.790 --> 00:01:01.155
+00:00:46.180 --> 00:00:53.940
 Blast radius depends on node credentials, service-account permissions, network paths, workload placement, and control-plane protections.
 
-00:01:01.155 --> 00:01:04.503
+00:00:54.160 --> 00:00:56.400
 RBAC should minimize actions and scope.
 
-00:01:04.503 --> 00:01:11.422
+00:00:56.620 --> 00:01:03.500
 Admission policies can reject privileged settings, unsafe mounts, disallowed images, or missing security requirements.
 
-00:01:11.422 --> 00:01:19.234
+00:01:03.720 --> 00:01:10.840
 Pod Security Standards provide a common baseline, but application-specific controls and justified exceptions are still necessary.
 
-00:01:19.234 --> 00:01:26.153
+00:01:11.060 --> 00:01:16.260
 Network policies and segmentation limit workload communication, though they do not replace host isolation.
 
-00:01:26.153 --> 00:01:33.965
+00:01:16.480 --> 00:01:22.320
 Namespace separation organizes resources but should not be treated as a complete hard-security boundary by itself.
 
-00:01:33.965 --> 00:01:36.866
+00:01:22.540 --> 00:01:25.020
 Multi-tenant clusters require special care.
 
-00:01:36.866 --> 00:01:51.820
+00:01:25.240 --> 00:01:39.000
 Separate workloads with different trust levels, consider dedicated nodes or clusters for high-risk boundaries, protect shared services, and test whether one tenant can affect another through identity, storage, network, or node dependencies.
 
-00:01:51.820 --> 00:01:55.615
+00:01:39.220 --> 00:01:42.100
 The architecture should make expected containment explicit.

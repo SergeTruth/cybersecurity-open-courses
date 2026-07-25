@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:08.088
+00:00:00.200 --> 00:00:07.480
 Object lifetime is the portion of execution during which an object exists and can be used according to its type and storage rules.
 
-2
-00:00:08.088 --> 00:00:12.657
+00:00:07.700 --> 00:00:12.100
 Lifetime is not the same as the continued existence of a numeric address.
 
-3
-00:00:12.657 --> 00:00:19.996
+00:00:12.320 --> 00:00:19.840
 A pointer value can be copied, stored, logged, or passed around after the object it once designated no longer exists.
 
-4
-00:00:19.996 --> 00:00:23.067
+00:00:20.060 --> 00:00:22.620
 Pointer validity is therefore a live condition.
 
-5
-00:00:23.067 --> 00:00:28.534
+00:00:22.840 --> 00:00:27.800
 A pointer is safe to use only while it designates a valid object for the intended access.
 
-6
-00:00:28.534 --> 00:00:35.349
+00:00:28.020 --> 00:00:33.620
 Dangling pointers occur when code keeps or uses a pointer after the referenced object's lifetime has ended.
 
-7
-00:00:35.349 --> 00:00:43.063
+00:00:33.840 --> 00:00:40.640
 Returning a pointer to an automatic local object is unsafe because that object's lifetime ends when the function returns.
 
-8
-00:00:43.063 --> 00:00:51.301
+00:00:40.860 --> 00:00:47.260
 Ownership is the practical engineering rule that says which code is responsible for preserving or releasing a resource or object.
 
-9
-00:00:51.301 --> 00:00:55.270
+00:00:47.480 --> 00:00:50.680
 Borrowed pointers should not outlive the object they refer to.
 
-10
-00:00:55.270 --> 00:01:03.658
+00:00:50.900 --> 00:00:57.780
 Ownership transfer should be explicit in function contracts so callers know whether they must free, retain, or stop using a pointer.
 
-11
-00:01:03.658 --> 00:01:06.355
+00:00:58.000 --> 00:01:00.560
 Cleanup paths are part of lifetime design.
 
-12
-00:01:06.355 --> 00:01:16.989
+00:01:00.780 --> 00:01:10.380
 Error handling, early returns, partial initialization, and shutdown code should make it clear when an object's lifetime ends and which pointers must no longer be used.
 
-13
-00:01:16.989 --> 00:01:24.703
+00:01:10.600 --> 00:01:16.600
 If multiple pointers designate related storage, cleanup should also make the aliasing relationship clear to reviewers.
 
-14
-00:01:24.703 --> 00:01:29.197
+00:01:16.820 --> 00:01:20.740
 The safest C interfaces communicate lifetime expectations directly.
 
-15
-00:01:29.197 --> 00:01:37.285
+00:01:20.960 --> 00:01:28.080
 They document whether a pointer is borrowed, owned, retained, optional, mutable, read-only, or valid only until the next call.
 
-16
-00:01:37.285 --> 00:01:42.303
+00:01:28.300 --> 00:01:32.300
 That documentation keeps memory safety from depending on hidden conventions.

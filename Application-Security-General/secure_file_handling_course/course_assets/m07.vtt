@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:05.521
+00:00:00.200 --> 00:00:04.680
 File processing should be defensive because parsers are part of the attack surface.
 
-2
-00:00:05.521 --> 00:00:15.318
+00:00:04.900 --> 00:00:15.620
 CSV, JSON, XML, PDF, images, archives, and office documents each have different structure, metadata, resource behavior, and parser dependencies.
 
-3
-00:00:15.318 --> 00:00:19.750
+00:00:15.840 --> 00:00:19.520
 A file that passes upload validation may still fail during parsing.
 
-4
-00:00:19.750 --> 00:00:28.381
+00:00:19.740 --> 00:00:27.100
 The processor should expect malformed input, unsupported versions, missing fields, excessive nesting, and unexpected content.
 
-5
-00:00:28.381 --> 00:00:32.346
+00:00:27.320 --> 00:00:30.680
 Archive and decompression workflows need particular care.
 
-6
-00:00:32.346 --> 00:00:42.610
+00:00:30.900 --> 00:00:41.620
 Archives may contain many files, deeply nested directories, large expanded content, unsafe paths, duplicate names, symlinks, or unexpected structures.
 
-7
-00:00:42.610 --> 00:00:54.662
+00:00:41.840 --> 00:00:51.920
 Processing should validate entries before extraction, enforce total expanded size limits, reject unsafe paths, and use temporary working directories that are cleaned up reliably.
 
-8
-00:00:54.662 --> 00:00:58.550
+00:00:52.140 --> 00:00:55.260
 Do not let archive contents decide where files are written.
 
-9
-00:00:58.550 --> 00:01:09.435
+00:00:55.480 --> 00:01:05.240
 Resource exhaustion can occur through large files, complex documents, image dimensions, nested structures, decompression ratios, or expensive parser behavior.
 
-10
-00:01:09.435 --> 00:01:18.377
+00:01:05.460 --> 00:01:13.220
 The application should set timeouts, memory limits, size limits, item count limits, and concurrency controls that match the workflow.
 
-11
-00:01:18.377 --> 00:01:28.174
+00:01:13.440 --> 00:01:20.880
 Sandboxing at a high level may be appropriate for risky parsers or untrusted document conversions, especially when third-party tools are involved.
 
-12
-00:01:28.174 --> 00:01:33.539
+00:01:21.100 --> 00:01:25.580
 Errors, logs, and generated artifacts should avoid leaking sensitive file data.
 
-13
-00:01:33.539 --> 00:01:37.661
+00:01:25.800 --> 00:01:29.240
 A parser exception should not dump private document contents.
 
-14
-00:01:37.661 --> 00:01:41.704
+00:01:29.460 --> 00:01:32.900
 A failed conversion should not leave temporary files behind.
 
-15
-00:01:41.704 --> 00:01:47.224
+00:01:33.120 --> 00:01:37.360
 A generated preview should not include hidden fields the user was not allowed to see.
 
-16
-00:01:47.224 --> 00:01:56.788
+00:01:37.580 --> 00:01:45.580
 File processing is not finished when parsing succeeds; it is finished when accepted output is stored safely and temporary material is cleaned up.

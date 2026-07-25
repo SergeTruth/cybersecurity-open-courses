@@ -1,77 +1,58 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:10.276
+00:00:00.200 --> 00:00:08.520
 Ownership transfer across APIs is a common source of double-free risk because caller and callee may silently disagree about what happened after a function call.
 
-2
-00:00:10.276 --> 00:00:13.751
+00:00:08.740 --> 00:00:11.540
 The caller may believe the callee consumed the object.
 
-3
-00:00:13.751 --> 00:00:16.471
+00:00:11.760 --> 00:00:13.920
 The callee may believe it only borrowed it.
 
-4
-00:00:16.471 --> 00:00:20.778
+00:00:14.140 --> 00:00:17.660
 Or both may believe they are responsible for cleanup after success.
 
-5
-00:00:20.778 --> 00:00:23.951
+00:00:17.880 --> 00:00:20.520
 Returned objects need documented cleanup rules.
 
-6
-00:00:23.951 --> 00:00:32.111
+00:00:20.740 --> 00:00:28.260
 If a function creates and returns a dynamic object, the caller needs to know which destroy function or allocator family applies.
 
-7
-00:00:32.111 --> 00:00:39.364
+00:00:28.480 --> 00:00:34.240
 If the returned pointer is borrowed or points to internal storage, the caller needs to know that it must not free it.
 
-8
-00:00:39.364 --> 00:00:42.009
+00:00:34.460 --> 00:00:36.700
 Output parameters need the same clarity.
 
-9
-00:00:42.009 --> 00:00:50.018
+00:00:36.920 --> 00:00:44.520
 An API may allocate a new object through an output pointer, fill a caller-owned buffer, or return an existing borrowed object.
 
-10
-00:00:50.018 --> 00:00:53.947
+00:00:44.740 --> 00:00:47.940
 The contract should explain state after success and failure.
 
-11
-00:00:53.947 --> 00:00:57.422
+00:00:48.160 --> 00:00:51.360
 If failure leaves an output pointer untouched, say so.
 
-12
-00:00:57.422 --> 00:01:02.636
+00:00:51.580 --> 00:00:56.460
 If failure may allocate partial state, cleanup responsibility must be explicit.
 
-13
-00:01:02.636 --> 00:01:05.129
+00:00:56.680 --> 00:00:58.760
 Containers are especially important.
 
-14
-00:01:05.129 --> 00:01:18.502
+00:00:58.980 --> 00:01:11.220
 Inserting an object into a list, map, queue, cache, or ownership table should define whether the container takes ownership, copies the object, borrows it, or rejects it while leaving ownership with the caller.
 
-15
-00:01:18.502 --> 00:01:21.978
+00:01:11.440 --> 00:01:14.080
 The caller's cleanup behavior depends on that answer.
 
-16
-00:01:21.978 --> 00:01:25.076
+00:01:14.300 --> 00:01:16.860
 Destroy functions should match transfer rules.
 
-17
-00:01:25.076 --> 00:01:31.573
+00:01:17.080 --> 00:01:22.600
 If an API takes ownership on success, the previous owner should stop freeing the object after success.
 
-18
-00:01:31.573 --> 00:01:36.107
+00:01:22.820 --> 00:01:26.340
 If ownership remains with the caller, the callee should not release it.
 
-19
-00:01:36.107 --> 00:01:39.582
+00:01:26.560 --> 00:01:29.600
 Transfer should be explicit enough to test and review.

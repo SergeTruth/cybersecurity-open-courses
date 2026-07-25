@@ -1,97 +1,73 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.062
+00:00:00.200 --> 00:00:04.360
 A C array is a contiguous sequence of elements of the same type.
 
-2
-00:00:04.062 --> 00:00:09.329
+00:00:04.580 --> 00:00:09.860
 If an array has ten int elements, valid element indexes run from zero through nine.
 
-3
-00:00:09.329 --> 00:00:15.422
+00:00:10.080 --> 00:00:15.440
 The array object has a fixed extent, and the code must keep reads and writes inside that extent.
 
-4
-00:00:15.422 --> 00:00:25.323
+00:00:15.660 --> 00:00:23.340
 This simple rule becomes harder to preserve when arrays are passed through functions, converted to pointers, or paired with separately stored length values.
 
-5
-00:00:25.323 --> 00:00:28.179
+00:00:23.560 --> 00:00:26.360
 Pointer arithmetic is scaled by element size.
 
-6
-00:00:28.179 --> 00:00:33.002
+00:00:26.580 --> 00:00:30.820
 Advancing an int pointer by one moves to the next int, not to the next byte.
 
-7
-00:00:33.002 --> 00:00:37.572
+00:00:31.040 --> 00:00:34.880
 Advancing a structure pointer by one moves by the size of the structure.
 
-8
-00:00:37.572 --> 00:00:45.949
+00:00:35.100 --> 00:00:41.900
 This scaling is useful, but it also means reviewers must know which type the pointer has and what object it is supposed to traverse.
 
-9
-00:00:45.949 --> 00:00:49.820
+00:00:42.120 --> 00:00:45.560
 Array names often decay to pointers when passed to functions.
 
-10
-00:00:49.820 --> 00:00:56.357
+00:00:45.780 --> 00:00:50.340
 A function parameter written to look like an array parameter is usually treated as a pointer parameter.
 
-11
-00:00:56.357 --> 00:01:04.481
+00:00:50.560 --> 00:00:57.280
 Once that decay occurs, the callee generally receives an address, not a complete array object with its original length attached.
 
-12
-00:01:04.481 --> 00:01:10.510
+00:00:57.500 --> 00:01:02.140
 The original capacity must be passed separately or represented through a surrounding structure.
 
-13
-00:01:10.510 --> 00:01:14.509
+00:01:02.360 --> 00:01:06.360
 A pointer by itself does not carry reliable bounds information.
 
-14
-00:01:14.509 --> 00:01:24.853
+00:01:06.580 --> 00:01:16.260
 It may point to the first element of an array, the middle of an array, a single object, allocated storage, a string literal, or storage owned by another component.
 
-15
-00:01:24.853 --> 00:01:31.010
+00:01:16.480 --> 00:01:21.840
 Without a valid length or contract, a callee cannot safely infer how many elements are available.
 
-16
-00:01:31.010 --> 00:01:34.817
+00:01:22.060 --> 00:01:25.340
 The sizeof operator is a frequent source of review mistakes.
 
-17
-00:01:34.817 --> 00:01:41.101
+00:01:25.560 --> 00:01:30.840
 Applied to an actual array in the same scope, sizeof can report the size of the whole array object.
 
-18
-00:01:41.101 --> 00:01:47.511
+00:01:31.060 --> 00:01:36.340
 Applied to a pointer parameter, it reports the size of the pointer itself, not the pointed-to region.
 
-19
-00:01:47.511 --> 00:01:54.492
+00:01:36.560 --> 00:01:41.920
 Code should not rely on a callee recovering an original array length with sizeof after array-to-pointer decay.
 
-20
-00:01:54.492 --> 00:01:57.221
+00:01:42.140 --> 00:01:44.860
 Defensive APIs make this behavior explicit.
 
-21
-00:01:57.221 --> 00:02:02.996
+00:01:45.080 --> 00:01:50.120
 If a function reads a buffer, pass the number of valid elements or bytes available to read.
 
-22
-00:02:02.996 --> 00:02:06.296
+00:01:50.340 --> 00:01:53.620
 If a function writes, pass the destination capacity.
 
-23
-00:02:06.296 --> 00:02:11.627
+00:01:53.840 --> 00:01:58.640
 If it appends, pass both current count and capacity or use a structured buffer type.
 
-24
-00:02:11.627 --> 00:02:14.483
+00:01:58.860 --> 00:02:01.100
 The pointer is only one part of the contract.

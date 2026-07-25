@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.711
+00:00:00.200 --> 00:00:03.720
 Bounds-safe C starts with keeping data and size information together.
 
-2
-00:00:04.711 --> 00:00:13.791
+00:00:03.940 --> 00:00:11.220
 A pointer should travel with the number of valid elements or bytes it can read, and writable storage should travel with its capacity.
 
-3
-00:00:13.791 --> 00:00:17.683
+00:00:11.440 --> 00:00:14.480
 When a function appends, it also needs the current count.
 
-4
-00:00:17.683 --> 00:00:21.916
+00:00:14.700 --> 00:00:17.980
 These facts should be part of the API, not hidden assumptions.
 
-5
-00:00:21.916 --> 00:00:23.486
+00:00:18.200 --> 00:00:19.960
 Validate before access.
 
-6
-00:00:23.486 --> 00:00:31.406
+00:00:20.180 --> 00:00:28.020
 Check indexes before reading or writing, and check ranges before copying, appending, parsing, or advancing a cursor.
 
-7
-00:00:31.406 --> 00:00:39.394
+00:00:28.240 --> 00:00:34.800
 Validate both the start offset and requested length, and avoid pointer arithmetic until the range has been confirmed.
 
-8
-00:00:39.394 --> 00:00:44.788
+00:00:35.020 --> 00:00:38.860
 Failure behavior should be explicit and should leave program state trustworthy.
 
-9
-00:00:44.788 --> 00:00:49.498
+00:00:39.080 --> 00:00:44.520
 Distinguish count, capacity, bytes, elements, and string terminators.
 
-10
-00:00:49.498 --> 00:00:53.868
+00:00:44.740 --> 00:00:48.580
 A C string is a bounded character buffer plus a terminator rule.
 
-11
-00:00:53.868 --> 00:00:59.057
+00:00:48.800 --> 00:00:54.400
 A dynamic buffer is a pointer plus count, capacity, ownership, and lifetime.
 
-12
-00:00:59.057 --> 00:01:03.290
+00:00:54.620 --> 00:00:58.700
 A loop bound is a promise about every index the loop will use.
 
-13
-00:01:03.290 --> 00:01:07.523
+00:00:58.920 --> 00:01:02.200
 Keeping those meanings separate prevents many common mistakes.
 
-14
-00:01:07.523 --> 00:01:15.238
+00:01:02.420 --> 00:01:10.500
 Finally, use review, tests, compiler diagnostics, static analysis, assertions, and sanitizers as layered support.
 
-15
-00:01:15.238 --> 00:01:20.563
+00:01:10.720 --> 00:01:15.360
 Tools catch defects earlier when APIs are clear and tests exercise boundaries.
 
-16
-00:01:20.563 --> 00:01:32.852
+00:01:15.580 --> 00:01:27.580
 The long-term habit is simple but demanding: every time code indexes, copies, appends, parses, resizes, or treats bytes as a string, ask what bounds fact makes that operation safe.

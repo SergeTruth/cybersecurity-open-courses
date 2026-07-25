@@ -1,65 +1,49 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:10.628
+00:00:00.200 --> 00:00:10.680
 Agents that can execute code, write files, browse, query databases, call APIs, or run subprocesses need stronger boundaries than agents that only draft text.
 
-2
-00:00:10.628 --> 00:00:15.943
+00:00:10.900 --> 00:00:15.380
 Sandboxing concepts help limit what agent-controlled operations can affect.
 
-3
-00:00:15.943 --> 00:00:30.775
+00:00:15.600 --> 00:00:29.840
 The exact technology depends on the environment, but the stable principle is to reduce available authority: constrain files, network destinations, credentials, execution time, output size, storage, and side effects.
 
-4
-00:00:30.775 --> 00:00:34.185
+00:00:30.060 --> 00:00:32.460
 File and workspace boundaries should be explicit.
 
-5
-00:00:34.185 --> 00:00:40.214
+00:00:32.680 --> 00:00:37.240
 A tool that reads a project directory should not automatically read every file on the host.
 
-6
-00:00:40.214 --> 00:00:44.576
+00:00:37.460 --> 00:00:41.140
 A tool that writes reports should not overwrite unrelated paths.
 
-7
-00:00:44.576 --> 00:00:53.777
+00:00:41.360 --> 00:00:49.600
 Temporary workspaces, read-only modes, allowed directories, file type limits, and cleanup rules reduce accidental or unsafe effects.
 
-8
-00:00:53.777 --> 00:01:00.994
+00:00:49.820 --> 00:00:55.740
 The agent should not receive broad filesystem access merely because one task needs a narrow file operation.
 
-9
-00:01:00.994 --> 00:01:04.643
+00:00:55.960 --> 00:00:59.480
 Network and execution boundaries matter just as much.
 
-10
-00:01:04.643 --> 00:01:15.430
+00:00:59.700 --> 00:01:08.820
 Destination allowlists, service-specific clients, request timeouts, response size limits, and rate controls help prevent uncontrolled outbound behavior.
 
-11
-00:01:15.430 --> 00:01:25.503
+00:01:09.040 --> 00:01:18.000
 Subprocess, shell, code execution, browser automation, and database query tools should be treated as high-risk capabilities at a conceptual level.
 
-12
-00:01:25.503 --> 00:01:35.973
+00:01:18.220 --> 00:01:27.420
 They need strong argument validation, isolation, observability, and review, especially when the input comes from natural language or retrieved content.
 
-13
-00:01:35.973 --> 00:01:39.066
+00:01:27.640 --> 00:01:30.280
 Secret exposure is a common boundary failure.
 
-14
-00:01:39.066 --> 00:01:48.822
+00:01:30.500 --> 00:01:39.540
 Environment variables, API keys, tokens, local credentials, and service metadata should not be casually available to agent-controlled tools.
 
-15
-00:01:48.822 --> 00:01:57.151
+00:01:39.760 --> 00:01:47.040
 If a tool needs a credential, provide the narrow credential for that tool and operation, not a general runtime secret bundle.
 
-16
-00:01:57.151 --> 00:02:08.414
+00:01:47.260 --> 00:01:57.260
 Good boundary controls make the safe path easy: least privilege, short timeouts, limited outputs, explicit destinations, and clear logs for what the agent attempted.

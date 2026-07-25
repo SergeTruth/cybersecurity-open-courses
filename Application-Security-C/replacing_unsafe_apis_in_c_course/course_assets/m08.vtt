@@ -1,93 +1,70 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:03.210
+00:00:00.200 --> 00:00:02.680
 Legacy migration should start with an inventory.
 
-2
-00:00:03.210 --> 00:00:10.364
+00:00:02.900 --> 00:00:10.100
 Code search, compiler warnings, static analysis, and manual review can identify unsafe or discouraged APIs.
 
-3
-00:00:10.364 --> 00:00:12.504
+00:00:10.320 --> 00:00:12.240
 The next step is classification.
 
-4
-00:00:12.504 --> 00:00:22.467
+00:00:12.460 --> 00:00:20.540
 A risky function in dead test code is different from the same function in a network-facing parser, installer, update workflow, or privileged service.
 
-5
-00:00:22.467 --> 00:00:25.610
+00:00:20.760 --> 00:00:24.120
 Each call site needs context before it changes.
 
-6
-00:00:25.610 --> 00:00:27.215
+00:00:24.340 --> 00:00:25.860
 What input can reach it?
 
-7
-00:00:27.215 --> 00:00:29.154
+00:00:26.080 --> 00:00:27.520
 What buffer is being written?
 
-8
-00:00:29.154 --> 00:00:30.959
+00:00:27.740 --> 00:00:29.580
 What size limit is assumed?
 
-9
-00:00:30.959 --> 00:00:34.637
+00:00:29.800 --> 00:00:33.000
 What happens today when input is too long or malformed?
 
-10
-00:00:34.637 --> 00:00:37.178
+00:00:33.220 --> 00:00:34.980
 Which callers depend on that behavior?
 
-11
-00:00:37.178 --> 00:00:46.272
+00:00:35.200 --> 00:00:42.320
 Without those answers, a replacement can accidentally preserve the weak assumption or reject input that another component still expects.
 
-12
-00:00:46.272 --> 00:00:50.484
+00:00:42.540 --> 00:00:45.900
 Mechanical replacement is tempting because it feels measurable.
 
-13
-00:00:50.484 --> 00:00:55.499
+00:00:46.120 --> 00:00:50.440
 The function name changes, the warning disappears, and the diff looks tidy.
 
-14
-00:00:55.499 --> 00:01:05.395
+00:00:50.660 --> 00:00:59.140
 But a new API called with the wrong size, an unchecked truncation result, or a mismatched ownership rule can leave the program no safer than before.
 
-15
-00:01:05.395 --> 00:01:09.140
+00:00:59.360 --> 00:01:02.800
 Migration quality is in the contract, not only the name.
 
-16
-00:01:09.140 --> 00:01:20.507
+00:01:03.020 --> 00:01:13.980
 Refactoring should update tests for normal input, boundary input, truncation, malformed values, allocation failure where practical, partial I/O, and legacy compatibility.
 
-17
-00:01:20.507 --> 00:01:28.397
+00:01:14.200 --> 00:01:20.600
 If a new path rejects data that old code accepted, tests should show that the rejection is intentional and understood.
 
-18
-00:01:28.397 --> 00:01:30.938
+00:01:20.820 --> 00:01:22.820
 Behavior changes should be documented.
 
-19
-00:01:30.938 --> 00:01:38.294
+00:01:23.040 --> 00:01:28.640
 Rejecting ambiguous input may be the right secure choice, but operators and dependent components need to know.
 
-20
-00:01:38.294 --> 00:01:44.780
+00:01:28.860 --> 00:01:33.580
 Documentation also helps future reviewers distinguish intended policy from accidental regression.
 
-21
-00:01:44.780 --> 00:01:49.527
+00:01:33.800 --> 00:01:38.440
 Incremental migration is often safer than one large unreviewed rewrite.
 
-22
-00:01:49.527 --> 00:01:58.621
+00:01:38.660 --> 00:01:46.660
 A team can migrate high-risk call sites first, introduce small helpers, add tests, measure warnings, and enforce new patterns over time.
 
-23
-00:01:58.621 --> 00:02:06.110
+00:01:46.880 --> 00:01:52.960
 Steady visible progress is usually more reliable than a single sweeping change that nobody can review carefully.

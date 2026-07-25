@@ -1,77 +1,58 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:03.050
+00:00:00.200 --> 00:00:03.000
 Symmetric encryption uses shared secret keys.
 
-2
-00:00:03.050 --> 00:00:10.750
+00:00:03.220 --> 00:00:10.340
 The same key, or closely related secret material managed by the library or protocol, is used to protect and recover data.
 
-3
-00:00:10.750 --> 00:00:20.356
+00:00:10.560 --> 00:00:18.080
 This makes symmetric encryption efficient, but it also means every party that can decrypt must be trusted to hold the relevant secret appropriately.
 
-4
-00:00:20.356 --> 00:00:33.393
+00:00:18.300 --> 00:00:30.300
 Modern application designs often prefer authenticated encryption with associated data, commonly called AEAD, when the goal is to protect data confidentiality and detect unauthorized modification.
 
-5
-00:00:33.393 --> 00:00:41.245
+00:00:30.520 --> 00:00:36.040
 The authentication part matters because ciphertext should not be treated as trustworthy simply because it is encrypted.
 
-6
-00:00:41.245 --> 00:00:47.268
+00:00:36.260 --> 00:00:41.220
 The application needs to know whether protected data was altered or used in the wrong context.
 
-7
-00:00:47.268 --> 00:00:52.528
+00:00:41.440 --> 00:00:46.560
 Nonce and initialization-value handling must follow the library rules exactly.
 
-8
-00:00:52.528 --> 00:00:54.587
+00:00:46.780 --> 00:00:48.940
 Some modes require uniqueness.
 
-9
-00:00:54.587 --> 00:00:56.950
+00:00:49.160 --> 00:00:51.400
 Some require unpredictable values.
 
-10
-00:00:56.950 --> 00:01:00.762
+00:00:51.620 --> 00:00:54.740
 Some libraries generate or manage the value for the caller.
 
-11
-00:01:00.762 --> 00:01:11.893
+00:00:54.960 --> 00:01:04.880
 The application should not substitute a convenient counter, timestamp, random-looking string, or reused value unless that pattern is explicitly supported and reviewed.
 
-12
-00:01:11.893 --> 00:01:17.382
+00:01:05.100 --> 00:01:10.540
 Associated data can bind context to protected data without encrypting that context.
 
-13
-00:01:17.382 --> 00:01:27.598
+00:01:10.760 --> 00:01:20.280
 For example, a record type, version, tenant identifier, or protocol state can be authenticated so the protected data is only accepted in the intended setting.
 
-14
-00:01:27.598 --> 00:01:33.545
+00:01:20.500 --> 00:01:25.460
 This is useful, but only when the context is chosen deliberately and verified consistently.
 
-15
-00:01:33.545 --> 00:01:37.357
+00:01:25.680 --> 00:01:28.800
 Encryption does not replace validation or authorization.
 
-16
-00:01:37.357 --> 00:01:49.707
+00:01:29.020 --> 00:01:40.540
 After decryption and authentication succeed, the application still needs to parse the plaintext safely, validate fields, enforce permissions, and handle malformed or unexpected content.
 
-17
-00:01:49.707 --> 00:01:56.569
+00:01:40.760 --> 00:01:46.600
 Cryptography can protect a channel or object, but application logic must still decide what the data means.
 
-18
-00:01:56.569 --> 00:02:09.529
+00:01:46.820 --> 00:01:58.820
 Reviewers should look for clear key purpose, approved AEAD usage where appropriate, correct nonce handling, authenticated context, return-value checks, and safe behavior on verification failure.
 
-19
-00:02:09.529 --> 00:02:14.180
+00:01:59.040 --> 00:02:03.200
 If any of those pieces are unclear, the encryption design is incomplete.

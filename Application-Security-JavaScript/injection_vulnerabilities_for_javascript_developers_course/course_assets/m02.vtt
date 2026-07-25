@@ -1,85 +1,91 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:03.538
+00:00:00.000 --> 00:00:02.840
 Injection prevention begins with trust boundaries.
 
-2
-00:00:03.538 --> 00:00:22.171
-In a JavaScript application, untrusted data can arrive through request bodies, query strings, route parameters, headers, cookies, file uploads, JSON payloads, form fields, client-side state, environment variables, message queues, webhooks, and third-party API responses.
+00:00:02.840 --> 00:00:06.720
+In a JavaScript application, untrusted data can arrive through request bodies,
 
-3
-00:00:22.171 --> 00:00:31.842
-Some of these sources feel internal, but they can still be influenced by users, integrations, deployment systems, or compromised dependencies.
+00:00:06.720 --> 00:00:11.055
+query strings, route parameters, headers, cookies, file uploads, JSON payloads,
 
-4
-00:00:31.842 --> 00:00:36.952
+00:00:11.055 --> 00:00:15.360
+form fields, client-side state, environment variables, message queues, webhooks,
+
+00:00:15.360 --> 00:00:17.100
+and third-party API responses.
+
+00:00:17.100 --> 00:00:20.530
+Some of these sources feel internal, but they can still be influenced by users,
+
+00:00:20.530 --> 00:00:23.360
+integrations, deployment systems, or compromised dependencies.
+
+00:00:23.360 --> 00:00:27.560
 The first defensive task is to identify where data enters application logic.
 
-5
-00:00:36.952 --> 00:00:40.412
+00:00:27.560 --> 00:00:30.040
 A route handler may receive parameters from the URL.
 
-6
-00:00:40.412 --> 00:00:44.028
+00:00:30.040 --> 00:00:32.285
 A background worker may receive a message from a queue.
 
-7
-00:00:44.028 --> 00:00:47.802
+00:00:32.285 --> 00:00:35.000
 A webhook handler may receive data from a partner system.
 
-8
-00:00:47.802 --> 00:00:53.070
+00:00:35.000 --> 00:00:39.320
 A frontend component may receive state from the browser or from an API response.
 
-9
-00:00:53.070 --> 00:00:59.359
-Each entry point should have a clear expectation for type, shape, length, format, and meaning.
+00:00:39.320 --> 00:00:43.120
+Each entry point should have a clear expectation for type, shape, length, format,
 
-10
-00:00:59.359 --> 00:01:03.448
+00:00:43.120 --> 00:00:43.960
+and meaning.
+
+00:00:43.960 --> 00:00:47.155
 The second task is to map where data goes before sensitive use.
 
-11
-00:01:03.448 --> 00:01:13.433
-A value may be validated in one layer, transformed in another, stored in a database, later rendered into HTML, and finally passed into a downstream API.
+00:00:47.155 --> 00:00:51.300
+A value may be validated in one layer, transformed in another, stored in a database,
 
-12
-00:01:13.433 --> 00:01:18.858
+00:00:51.300 --> 00:00:55.630
+later rendered into HTML, and finally passed into a downstream API.
+
+00:00:55.630 --> 00:00:59.117
 Controls that were appropriate at entry may not be sufficient for a later context.
 
-13
-00:01:18.858 --> 00:01:25.619
-Data flow review helps teams see when a value crosses from one interpreter or trust level into another.
+00:00:59.117 --> 00:01:03.495
+Data flow review helps teams see when a value crosses from one interpreter or trust level
 
-14
-00:01:25.619 --> 00:01:30.572
+00:01:03.495 --> 00:01:04.730
+into another.
+
+00:01:04.730 --> 00:01:08.480
 JavaScript applications often blur server and client responsibilities.
 
-15
-00:01:30.572 --> 00:01:39.221
-Client-side validation improves user experience, but it does not protect the server because clients can be modified or bypassed.
+00:01:08.480 --> 00:01:10.500
+Client-side validation improves user experience,
 
-16
-00:01:39.221 --> 00:01:44.488
+00:01:10.500 --> 00:01:14.555
+but it does not protect the server because clients can be modified or bypassed.
+
+00:01:14.555 --> 00:01:18.045
 Server-side validation and safe server-side construction remain necessary.
 
-17
-00:01:44.488 --> 00:01:52.744
-Similarly, data that is safe for a database is not automatically safe for HTML, JSON embedded in a page, or a command argument.
+00:01:18.045 --> 00:01:21.910
+Similarly, data that is safe for a database is not automatically safe for HTML,
 
-18
-00:01:52.744 --> 00:01:56.989
+00:01:21.910 --> 00:01:24.440
+JSON embedded in a page, or a command argument.
+
+00:01:24.440 --> 00:01:27.720
 A practical data flow map does not need to be perfect to be useful.
 
-19
-00:01:56.989 --> 00:02:01.864
+00:01:27.720 --> 00:01:31.440
 List the entry points, transformations, sensitive sinks, and controls.
 
-20
-00:02:01.864 --> 00:02:07.682
+00:01:31.440 --> 00:01:35.710
 Then review the places where assumptions are weak or where data moves between contexts.
 
-21
-00:02:07.682 --> 00:02:12.792
+00:01:35.710 --> 00:01:39.320
 That map becomes the foundation for secure design, code review, and testing.

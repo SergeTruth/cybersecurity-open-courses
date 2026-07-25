@@ -1,17 +1,13 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:27.836
+00:00:00.200 --> 00:00:24.920
 Many scripts are written as if every command succeeds. Real systems are less polite. Files are missing, permissions change, disks fill, services restart, networks fail, and dependencies behave differently after an upgrade. A defensive script identifies which outcomes matter, checks them, and stops when continuing would be unsafe. Silent failure is often worse than loud failure because it leaves operators with false confidence.
 
-2
-00:00:27.836 --> 00:00:55.478
+00:00:25.140 --> 00:00:48.980
 Strict mode options such as set -e, set -u, and pipefail can help catch common failures, but they are not magic. They have tradeoffs, exceptions, and interactions that need review. A script should not simply turn on strict options and stop thinking. Important operations still need deliberate checks, meaningful messages, and cleanup logic. The question is not only whether a command failed, but what the script should do next.
 
-3
-00:00:55.478 --> 00:01:19.559
+00:00:49.200 --> 00:01:09.760
 Temporary state deserves special attention. A script that creates temporary files, lock files, partial outputs, or working directories should clean them up after success, failure, timeout, or interruption. Traps can help run cleanup steps when a script exits, but the cleanup should be narrow and intentional. Removing the wrong file during error handling is its own risk.
 
-4
-00:01:19.559 --> 00:01:44.676
+00:01:09.980 --> 00:01:31.500
 Rerunnable scripts are often safer when practical. If a deployment, backup, or processing script can be restarted without corrupting state, operators have more room to recover. Clear precondition checks, staged changes, backups, and actionable failure messages reduce the chance of partial changes becoming a larger incident. Defensive error handling makes failure visible and manageable.

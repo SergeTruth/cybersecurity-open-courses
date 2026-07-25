@@ -1,69 +1,52 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.219
+00:00:00.200 --> 00:00:04.360
 Storage duration and object lifetime are central to memory-safe C.
 
-2
-00:00:04.219 --> 00:00:12.082
+00:00:04.580 --> 00:00:11.220
 An object is safe to access only while its lifetime is active and only through operations that respect its type and bounds.
 
-3
-00:00:12.082 --> 00:00:20.520
+00:00:11.440 --> 00:00:18.400
 A pointer may still contain an address after an object has gone away, but the program no longer has a valid object at that lifetime.
 
-4
-00:00:20.520 --> 00:00:24.419
+00:00:18.620 --> 00:00:22.060
 Automatic objects usually live for a block or function scope.
 
-5
-00:00:24.419 --> 00:00:34.135
+00:00:22.280 --> 00:00:30.760
 Local variables, local arrays, and local structures are convenient for temporary work, but their lifetime ends when execution leaves the relevant scope.
 
-6
-00:00:34.135 --> 00:00:43.149
+00:00:30.980 --> 00:00:38.420
 Returning a pointer to such an object, or storing that address for later use, creates a pointer to storage whose intended lifetime has ended.
 
-7
-00:00:43.149 --> 00:00:46.473
+00:00:38.640 --> 00:00:41.440
 Static objects live for the duration of the program.
 
-8
-00:00:46.473 --> 00:00:54.399
+00:00:41.660 --> 00:00:48.380
 They can be appropriate for constants, shared state, or long-lived tables, but long lifetime is not the same as safe access.
 
-9
-00:00:54.399 --> 00:01:02.581
+00:00:48.600 --> 00:00:55.640
 Static storage can still create data races, hidden dependencies, stale state, or confusing ownership if the contract is unclear.
 
-10
-00:01:02.581 --> 00:01:06.481
+00:00:55.860 --> 00:00:59.860
 Dynamically allocated objects live until explicitly released.
 
-11
-00:01:06.481 --> 00:01:13.640
+00:01:00.080 --> 00:01:06.480
 That flexibility is useful when a result must outlive a function call or when capacity is determined at runtime.
 
-12
-00:01:13.640 --> 00:01:22.845
+00:01:06.700 --> 00:01:14.540
 It also creates responsibility: someone must own the allocation, update metadata consistently, and release it exactly according to the contract.
 
-13
-00:01:22.845 --> 00:01:28.918
+00:01:14.760 --> 00:01:19.720
 Dangling pointers occur when code keeps using an address after the object's lifetime has ended.
 
-14
-00:01:28.918 --> 00:01:41.575
+00:01:19.940 --> 00:01:31.140
 This can happen after a local object goes out of scope, after dynamic storage is released, after a buffer is reallocated, or after ownership is transferred but the old owner keeps using the pointer.
 
-15
-00:01:41.575 --> 00:01:46.689
+00:01:31.360 --> 00:01:35.440
 Function contracts and cleanup logic should make lifetime and ownership visible.
 
-16
-00:01:46.689 --> 00:01:58.451
+00:01:35.660 --> 00:01:44.780
 A caller should know whether it owns returned storage, whether it may retain a borrowed pointer, whether the callee stores a pointer, and which cleanup path is responsible for release.
 
-17
-00:01:58.451 --> 00:02:02.286
+00:01:45.000 --> 00:01:48.280
 Clear lifetime rules reduce whole classes of memory defects.

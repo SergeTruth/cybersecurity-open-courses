@@ -1,77 +1,58 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.569
+00:00:00.200 --> 00:00:02.920
 Memory operations in C operate on bytes.
 
-2
-00:00:02.569 --> 00:00:11.433
+00:00:03.140 --> 00:00:11.380
 That sounds straightforward, but many bugs start when code confuses byte counts, character counts, element counts, and allocated capacity.
 
-3
-00:00:11.433 --> 00:00:16.893
+00:00:11.600 --> 00:00:16.640
 A structure array with ten elements is not ten bytes unless each element is one byte.
 
-4
-00:00:16.893 --> 00:00:22.610
+00:00:16.860 --> 00:00:21.740
 A string length does not include terminator space unless the caller adds it deliberately.
 
-5
-00:00:22.610 --> 00:00:32.373
+00:00:21.960 --> 00:00:30.040
 Before calling a memory operation, the code should know the source pointer, destination pointer, number of bytes to move, and valid size of each region.
 
-6
-00:00:32.373 --> 00:00:41.815
+00:00:30.260 --> 00:00:37.300
 If the count was computed from element size and element count, that calculation should be checked for overflow before allocation or copying occurs.
 
-7
-00:00:41.815 --> 00:00:43.549
+00:00:37.520 --> 00:00:39.120
 Overlap assumptions matter.
 
-8
-00:00:43.549 --> 00:00:48.046
+00:00:39.340 --> 00:00:43.100
 Some operations require source and destination regions not to overlap.
 
-9
-00:00:48.046 --> 00:00:53.377
+00:00:43.320 --> 00:00:47.560
 When overlap is possible, the code should use the operation designed for that case.
 
-10
-00:00:53.377 --> 00:01:02.113
+00:00:47.780 --> 00:00:54.820
 Reviewers should not rely on current data layout by accident; they should ask whether the contract forbids overlap or handles it safely.
 
-11
-00:01:02.113 --> 00:01:06.031
+00:00:55.040 --> 00:00:58.240
 Allocation math should distinguish capacity from used length.
 
-12
-00:01:06.031 --> 00:01:11.041
+00:00:58.460 --> 00:01:02.700
 A buffer may allocate space for many elements while only some are initialized.
 
-13
-00:01:11.041 --> 00:01:18.620
+00:01:02.920 --> 00:01:08.680
 A helper that receives both capacity and used length can make it harder to read or write outside the meaningful range.
 
-14
-00:01:18.620 --> 00:01:24.080
+00:01:08.900 --> 00:01:13.140
 That same helper can check whether appending or copying would exceed available space.
 
-15
-00:01:24.080 --> 00:01:26.649
+00:01:13.360 --> 00:01:15.440
 Clearing memory also deserves attention.
 
-16
-00:01:26.649 --> 00:01:37.055
+00:01:15.660 --> 00:01:23.740
 When buffers contain sensitive values, the project should use a reliable library or platform-supported clearing mechanism where compiler optimization is relevant.
 
-17
-00:01:37.055 --> 00:01:47.203
+00:01:23.960 --> 00:01:31.720
 For ordinary buffers, cleanup still needs to match ownership and lifetime rules so that callers do not free the same allocation twice or leak it indefinitely.
 
-18
-00:01:47.203 --> 00:01:54.333
+00:01:31.940 --> 00:01:40.500
 A clear buffer contract defines pointer, capacity, used length, element count, ownership, and failure behavior.
 
-19
-00:01:54.333 --> 00:02:05.124
+00:01:40.720 --> 00:01:49.440
 Small helper functions can centralize these checks so that reviewers see the same pattern repeatedly instead of revalidating fragile size arithmetic at every call site.

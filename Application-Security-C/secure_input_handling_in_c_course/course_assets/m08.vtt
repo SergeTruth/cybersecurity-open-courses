@@ -1,65 +1,34 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:04.928
-Secure input handling depends on what happens when input is wrong.
+00:00:00.200 --> 00:00:13.400
+Secure input handling depends on what happens when input is wrong. Fail closed means the program rejects, stops, or falls back to a safe state when a required check fails. It does not continue with partially initialized data.
 
-2
-00:00:04.928 --> 00:00:13.439
-Fail closed means the program rejects, stops, or falls back to a safe state when a required check fails.
+00:00:13.620 --> 00:00:21.540
+It does not guess a default that changes the security meaning of the request. It does not log an error and keep processing as if validation succeeded.
 
-3
-00:00:13.439 --> 00:00:17.023
-It does not continue with partially initialized data.
+00:00:21.760 --> 00:00:32.480
+Consistent error returns make this easier because callers can handle one clear failure path instead of many ambiguous outcomes. Cleanup paths deserve the same attention as success paths.
 
-4
-00:00:17.023 --> 00:00:23.295
-It does not guess a default that changes the security meaning of the request.
+00:00:32.700 --> 00:00:45.740
+A parser that allocates memory, opens files, locks resources, or builds partial objects must release them correctly when validation fails. The cleanup code should avoid leaks, double frees, and use-after-free behavior.
 
-5
-00:00:23.295 --> 00:00:29.119
-It does not log an error and keep processing as if validation succeeded.
-
-6
-00:00:29.119 --> 00:00:37.631
-Consistent error returns make this easier because callers can handle one clear failure path instead of many ambiguous outcomes.
-
-7
-00:00:37.631 --> 00:00:41.662
-Cleanup paths deserve the same attention as success paths.
-
-8
-00:00:41.662 --> 00:00:50.622
-A parser that allocates memory, opens files, locks resources, or builds partial objects must release them correctly when validation fails.
-
-9
-00:00:50.622 --> 00:00:55.550
-The cleanup code should avoid leaks, double frees, and use-after-free behavior.
-
-10
-00:00:55.550 --> 00:01:03.613
+00:00:45.960 --> 00:00:53.880
 Logging is useful, but log messages should not expose secrets, raw tokens, private paths, or unbounded attacker-controlled text.
 
-11
-00:01:03.613 --> 00:01:09.437
+00:00:54.100 --> 00:00:59.060
 Error messages should help operators diagnose problems without becoming another input handling problem.
 
-12
-00:01:09.437 --> 00:01:25.117
-Testing should include the inputs real programs actually receive: empty input, maximum-length input, one byte over the limit, missing terminators, malformed encodings, invalid numbers, huge counts, negative values, truncated records, duplicate fields, and random data.
+00:00:59.280 --> 00:01:12.720
+Testing should include the inputs real programs actually receive: empty input, maximum-length input, one byte over the limit, missing terminators, malformed encodings, invalid numbers, huge counts, negative values,
 
-13
-00:01:25.117 --> 00:01:28.700
-Unit tests are good for known boundaries.
+00:01:12.940 --> 00:01:24.220
+truncated records, duplicate fields, and random data. Unit tests are good for known boundaries. Fuzzing is valuable because it explores combinations humans do not think to write by hand.
 
-14
-00:01:28.700 --> 00:01:35.420
-Fuzzing is valuable because it explores combinations humans do not think to write by hand.
-
-15
-00:01:35.420 --> 00:01:45.276
+00:01:24.440 --> 00:01:35.560
 Compiler warnings, sanitizers, and static analysis add another layer by surfacing memory errors, undefined behavior, suspicious conversions, and boundary mistakes during development.
 
-16
-00:01:45.276 --> 00:01:52.444
+00:01:35.780 --> 00:01:41.780
 The point of testing malformed input is to prove that rejection is as engineered as acceptance.
+
+00:01:42.000 --> 00:01:52.240
+The example uses assert as a compact regression-test mechanism and therefore must be compiled without NDEBUG; production validation must never depend on assertions that can be compiled out.

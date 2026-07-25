@@ -1,85 +1,64 @@
 WEBVTT
 
-1
-00:00:00.000 --> 00:00:02.348
+00:00:00.200 --> 00:00:02.440
 C strings rely on a null terminator.
 
-2
-00:00:02.348 --> 00:00:08.021
+00:00:02.660 --> 00:00:07.540
 That convention means a string operation often walks memory until it finds a zero byte.
 
-3
-00:00:08.021 --> 00:00:14.933
+00:00:07.760 --> 00:00:13.280
 If the terminator is missing inside the valid buffer, the operation may continue beyond the intended data.
 
-4
-00:00:14.933 --> 00:00:19.302
+00:00:13.500 --> 00:00:17.020
 A character buffer is therefore not automatically a valid C string.
 
-5
-00:00:19.302 --> 00:00:26.345
+00:00:17.240 --> 00:00:23.320
 Data from a file, socket, device, fixed-width record, or parser may contain characters without a terminator.
 
-6
-00:00:26.345 --> 00:00:28.953
+00:00:23.540 --> 00:00:26.020
 It may also contain embedded null bytes.
 
-7
-00:00:28.953 --> 00:00:37.169
+00:00:26.240 --> 00:00:33.120
 Code should be clear about whether it is handling a bounded byte region, a character array, or a properly terminated C string.
 
-8
-00:00:37.169 --> 00:00:40.886
+00:00:33.340 --> 00:00:36.220
 Treating all three as the same thing creates bounds risk.
 
-9
-00:00:40.886 --> 00:00:44.408
+00:00:36.440 --> 00:00:39.240
 The strlen function assumes a terminator can be found.
 
-10
-00:00:44.408 --> 00:00:52.037
+00:00:39.460 --> 00:00:44.820
 It does not receive capacity information unless the calling code provides a separate bound through another mechanism.
 
-11
-00:00:52.037 --> 00:00:58.362
+00:00:45.040 --> 00:00:50.800
 If the data may be unterminated, use length-aware logic that stops within the known valid region.
 
-12
-00:00:58.362 --> 00:01:03.775
+00:00:51.020 --> 00:00:55.500
 Copies into fixed-size buffers must account for available space and the terminator.
 
-13
-00:01:03.775 --> 00:01:10.883
+00:00:55.720 --> 00:01:01.880
 A destination with capacity N can hold at most N minus one ordinary characters when the result is a C string.
 
-14
-00:01:10.883 --> 00:01:17.078
+00:01:02.100 --> 00:01:08.260
 Copying exactly N characters and then adding a terminator requires N plus one bytes of storage.
 
-15
-00:01:17.078 --> 00:01:23.272
+00:01:08.480 --> 00:01:13.440
 Truncation can be safer than writing past the destination, but it must be handled deliberately.
 
-16
-00:01:23.272 --> 00:01:28.880
+00:01:13.660 --> 00:01:19.340
 A truncated file name, identifier, message, or path may no longer mean the same thing.
 
-17
-00:01:28.880 --> 00:01:36.249
+00:01:19.560 --> 00:01:25.480
 The function should report truncation or document that shortened output is acceptable for the specific operation.
 
-18
-00:01:36.249 --> 00:01:41.075
+00:01:25.700 --> 00:01:29.940
 Prefer length-aware operations and explicit termination where appropriate.
 
-19
-00:01:41.075 --> 00:01:45.052
+00:01:30.160 --> 00:01:33.040
 The important habit is not trusting a friendly function name.
 
-20
-00:01:45.052 --> 00:01:51.899
+00:01:33.260 --> 00:01:39.420
 Review destination capacity, source length, resulting length, terminator behavior, and failure reporting.
 
-21
-00:01:51.899 --> 00:01:56.399
+00:01:39.640 --> 00:01:43.320
 String safety is bounded-buffer safety with an extra terminator rule.
