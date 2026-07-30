@@ -1,76 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.080
-Quantization lowers numerical precision so a model uses less memory and often runs more
+00:00:00.100 --> 00:00:04.490
+Quantization lowers numerical precision so a model uses less memory and often
 
-00:00:05.080 --> 00:00:06.500
-practically on local hardware.
+00:00:04.490 --> 00:00:06.685
+runs more practically on local hardware.
 
-00:00:06.500 --> 00:00:09.995
+00:00:06.685 --> 00:00:10.344
 Labels such as Q2 through Q8 describe broad precision levels,
 
-00:00:09.995 --> 00:00:12.000
+00:00:10.344 --> 00:00:12.905
 but exact schemes and model behavior differ.
 
-00:00:12.000 --> 00:00:16.190
-Lower-bit quantization generally reduces file and memory size while increasing the chance
+00:00:12.905 --> 00:00:18.393
+Lower-bit quantization generally reduces file and memory size while increasing the chance of quality loss.
 
-00:00:16.190 --> 00:00:17.000
-of quality loss.
+00:00:18.393 --> 00:00:23.515
+Higher precision uses more resources and is not automatically better for every task, runtime,
 
-00:00:17.000 --> 00:00:21.200
-Higher precision uses more resources and is not automatically better for every task,
+00:00:23.515 --> 00:00:24.247
+or machine.
 
-00:00:21.200 --> 00:00:24.067
-runtime, or machine. Test the actual file.
+00:00:24.247 --> 00:00:25.710
+Test the actual file.
 
-00:00:24.067 --> 00:00:29.530
-G G U F is a common local model format for llama.cpp-compatible runtimes.
+00:00:25.710 --> 00:00:30.100
+G G U F is a common local model format for llama.
 
-00:00:29.530 --> 00:00:32.950
-Compatibility depends on architecture, runtime version, tokenizer, prompt template,
+00:00:30.100 --> 00:00:30.832
+cpp-compatible runtimes.
 
-00:00:32.950 --> 00:00:36.460
-metadata, and acceleration backend, not only the file extension.
+00:00:30.832 --> 00:00:34.491
+Compatibility depends on architecture, runtime version, tokenizer, prompt template, metadata,
 
-00:00:36.460 --> 00:00:40.500
+00:00:34.491 --> 00:00:37.417
+and acceleration backend, not only the file extension.
+
+00:00:37.417 --> 00:00:41.076
 Memory fit includes model weights, key-value cache, context, batch settings,
 
-00:00:40.500 --> 00:00:44.500
+00:00:41.076 --> 00:00:44.369
 concurrent sessions, runtime overhead, display use, and other applications.
 
-00:00:44.500 --> 00:00:47.985
+00:00:44.369 --> 00:00:48.393
 File size is therefore not a complete VRAM or unified-memory estimate.
 
-00:00:47.985 --> 00:00:51.160
-Some runtimes allow different cache precision or memory strategies,
+00:00:48.393 --> 00:00:52.784
+Some runtimes allow different cache precision or memory strategies, creating another quality,
 
-00:00:51.160 --> 00:00:54.500
-creating another quality, compatibility, and capacity tradeoff.
+00:00:52.784 --> 00:00:54.247
+compatibility, and capacity tradeoff.
 
-00:00:54.500 --> 00:00:58.170
-Treat those settings as part of the tested configuration instead of assuming model
+00:00:54.247 --> 00:00:58.637
+Treat those settings as part of the tested configuration instead of assuming
 
-00:00:58.170 --> 00:01:00.195
-quantization tells the whole story.
+00:00:58.637 --> 00:01:00.832
+model quantization tells the whole story.
 
-00:01:00.195 --> 00:01:04.500
+00:01:00.832 --> 00:01:06.686
 Partial GPU offload can run some layers on the accelerator and leave others on the CPU.
 
-00:01:04.500 --> 00:01:08.500
-This may make a larger model load, but transfer and CPU work can reduce speed.
+00:01:06.686 --> 00:01:09.247
+This may make a larger model load,
 
-00:01:08.500 --> 00:01:11.500
+00:01:09.247 --> 00:01:12.174
+but transfer and CPU work can reduce speed.
+
+00:01:12.174 --> 00:01:15.467
 A technically successful load is not an operational success.
 
-00:01:11.500 --> 00:01:15.590
+00:01:15.467 --> 00:01:19.125
 Avoid configurations that consume nearly all available memory, swap heavily,
 
-00:01:15.590 --> 00:01:18.492
+00:01:19.125 --> 00:01:22.418
 crash on long prompts, or throttle under sustained work.
 
-00:01:18.492 --> 00:01:21.520
+00:01:22.418 --> 00:01:25.345
 Compare several quantizations and sizes with realistic context,
 
-00:01:21.520 --> 00:01:23.500
+00:01:25.345 --> 00:01:27.540
 then preserve a margin for stability.

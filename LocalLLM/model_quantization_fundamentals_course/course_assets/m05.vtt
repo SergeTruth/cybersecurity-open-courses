@@ -1,82 +1,79 @@
 WEBVTT
 
-00:00:00.400 --> 00:00:07.140
-Local quantized model names often include labels such as Q2, Q3, Q4, Q5, Q6, or Q8.
+00:00:00.100 --> 00:00:05.268
+Local quantized model names often include labels such as Q2, Q3, Q4, Q5, Q6,
 
-00:00:07.140 --> 00:00:10.800
+00:00:05.268 --> 00:00:06.007
+or Q8.
+
+00:00:06.007 --> 00:00:10.436
 At a high level, the number indicates the approximate weight precision family:
 
-00:00:10.800 --> 00:00:14.000
+00:00:10.436 --> 00:00:14.128
 lower levels use less memory and usually accept more approximation,
 
-00:00:14.000 --> 00:00:17.520
+00:00:14.128 --> 00:00:17.820
 while higher levels retain more information and require more space.
 
-00:00:17.520 --> 00:00:19.750
+00:00:17.820 --> 00:00:20.034
 Suffixes identify specific methods, group sizes,
 
-00:00:19.750 --> 00:00:23.570
-or mixed-precision choices and are meaningful only in the context of that format and
+00:00:20.034 --> 00:00:25.572
+or mixed-precision choices and are meaningful only in the context of that format and runtime.
 
-00:00:23.570 --> 00:00:24.160
-runtime.
+00:00:25.572 --> 00:00:30.002
+Q4 variants are often a practical starting point because they provide substantial
 
-00:00:24.160 --> 00:00:28.355
-Q4 variants are often a practical starting point because they provide substantial memory
+00:00:30.002 --> 00:00:34.062
+memory savings while preserving useful quality for many models and tasks.
 
-00:00:28.355 --> 00:00:31.600
-savings while preserving useful quality for many models and tasks.
-
-00:00:31.600 --> 00:00:33.280
+00:00:34.062 --> 00:00:36.647
 That is a heuristic, not a guarantee.
 
-00:00:33.280 --> 00:00:35.920
-A particular architecture may respond differently,
+00:00:36.647 --> 00:00:41.446
+A particular architecture may respond differently, two Q4 methods may not behave identically,
 
-00:00:35.920 --> 00:00:38.200
-two Q4 methods may not behave identically,
-
-00:00:38.200 --> 00:00:42.210
+00:00:41.446 --> 00:00:46.614
 and a coding or reasoning task may reveal losses that casual conversation does not.
 
-00:00:42.210 --> 00:00:45.080
+00:00:46.614 --> 00:00:49.936
 Q2 and Q3 can make otherwise inaccessible models fit,
 
-00:00:45.080 --> 00:00:48.040
+00:00:49.936 --> 00:00:52.151
 but aggressive compression increases quality risk.
 
-00:00:48.040 --> 00:00:52.000
+00:00:52.151 --> 00:00:56.581
 Q5 and Q6 consume more memory and may preserve behavior more closely.
 
-00:00:52.000 --> 00:00:55.860
-Q8 often approaches the memory cost of higher precision while remaining useful when
+00:00:56.581 --> 00:01:01.011
+Q8 often approaches the memory cost of higher precision while remaining useful
 
-00:00:55.860 --> 00:00:58.595
-quality is prioritized and hardware has room.
+00:01:01.011 --> 00:01:03.964
+when quality is prioritized and hardware has room.
 
-00:00:58.595 --> 00:01:02.785
-Speed does not increase monotonically as bits decrease; kernel efficiency, offload,
+00:01:03.964 --> 00:01:08.763
+Speed does not increase monotonically as bits decrease; kernel efficiency, offload, memory fit,
 
-00:01:02.785 --> 00:01:05.065
-memory fit, and hardware support all matter.
+00:01:08.763 --> 00:01:10.609
+and hardware support all matter.
 
-00:01:05.065 --> 00:01:07.280
+00:01:10.609 --> 00:01:12.824
 Choose candidates around the hardware boundary.
 
-00:01:07.280 --> 00:01:08.930
+00:01:12.824 --> 00:01:15.039
 If Q5 fits with context headroom,
 
-00:01:08.930 --> 00:01:12.440
+00:01:15.039 --> 00:01:19.100
 compare it with Q4 rather than assuming the smaller one wins.
 
-00:01:12.440 --> 00:01:14.090
+00:01:19.100 --> 00:01:22.053
 If only Q3 fits fully on the GPU,
 
-00:01:14.090 --> 00:01:18.010
+00:01:22.053 --> 00:01:26.852
 compare its quality and speed with a smaller model at Q4 or Q5.
 
-00:01:18.010 --> 00:01:22.520
+00:01:26.852 --> 00:01:31.282
 Quantization level is one decision among model family, parameter count, context, runtime,
 
-00:01:22.520 --> 00:01:23.120
+00:01:31.282 --> 00:01:32.020
 and workload.

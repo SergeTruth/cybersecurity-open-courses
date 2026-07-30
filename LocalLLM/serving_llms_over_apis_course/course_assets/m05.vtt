@@ -1,85 +1,79 @@
 WEBVTT
 
-00:00:00.090 --> 00:00:05.140
-LLM API endpoints should require authentication because the service consumes resources and
+00:00:00.100 --> 00:00:06.199
+LLM API endpoints should require authentication because the service consumes resources and may process sensitive data.
 
-00:00:05.140 --> 00:00:06.865
-may process sensitive data.
-
-00:00:06.865 --> 00:00:09.350
+00:00:06.199 --> 00:00:08.487
 API keys, service tokens, workload identity,
 
-00:00:09.350 --> 00:00:14.130
+00:00:08.487 --> 00:00:12.680
 or user-bound credentials can identify which caller is making a request.
 
-00:00:14.130 --> 00:00:15.080
+00:00:12.680 --> 00:00:14.586
 Authentication alone is not enough.
 
-00:00:15.080 --> 00:00:19.015
+00:00:14.586 --> 00:00:19.542
 A valid caller may still need limits on models, tenants, data sources, tools,
 
-00:00:19.015 --> 00:00:22.175
+00:00:19.542 --> 00:00:21.829
 request size, rate, or allowed operations.
 
-00:00:22.175 --> 00:00:24.015
+00:00:21.829 --> 00:00:24.879
 Authorization should be part of the application design,
 
-00:00:24.015 --> 00:00:25.515
+00:00:24.879 --> 00:00:27.547
 not an afterthought in the model prompt.
 
-00:00:25.515 --> 00:00:29.240
-A user should only be able to submit prompts against data and functions they are allowed
+00:00:27.547 --> 00:00:32.122
+A user should only be able to submit prompts against data and
 
-00:00:29.240 --> 00:00:30.200
-to access.
+00:00:32.122 --> 00:00:34.409
+functions they are allowed to access.
 
-00:00:30.200 --> 00:00:33.990
+00:00:34.409 --> 00:00:38.603
 Tenant separation matters when the same service supports multiple customers, teams,
 
-00:00:33.990 --> 00:00:34.720
+00:00:38.603 --> 00:00:39.365
 or workspaces.
 
-00:00:34.720 --> 00:00:38.290
+00:00:39.365 --> 00:00:43.558
 Least privilege also applies to applications that call the LLM service.
 
-00:00:38.290 --> 00:00:42.435
-A small internal tool should not automatically receive broad access to every model and
+00:00:43.558 --> 00:00:49.277
+A small internal tool should not automatically receive broad access to every model and dataset.
 
-00:00:42.435 --> 00:00:43.100
-dataset.
-
-00:00:43.100 --> 00:00:46.280
+00:00:49.277 --> 00:00:52.708
 Exposure control is especially important for private inference endpoints.
 
-00:00:46.280 --> 00:00:50.675
+00:00:52.708 --> 00:00:56.139
 Local-only binding, LAN access, reverse proxies, TLS, network segmentation,
 
-00:00:50.675 --> 00:00:53.675
+00:00:56.139 --> 00:00:59.951
 and firewall rules all influence who can reach the service.
 
-00:00:53.675 --> 00:00:57.995
-A model endpoint that seems harmless on localhost can become a risk if it is accidentally
+00:00:59.951 --> 00:01:04.525
+A model endpoint that seems harmless on localhost can become a risk
 
-00:00:57.995 --> 00:01:01.800
-bound to all interfaces or exposed through a misconfigured proxy.
+00:01:04.525 --> 00:01:09.100
+if it is accidentally bound to all interfaces or exposed through a
 
-00:01:01.800 --> 00:01:05.885
+00:01:09.100 --> 00:01:09.862
+misconfigured proxy.
+
+00:01:09.862 --> 00:01:13.293
 Avoid unnecessary internet exposure for experimental or private services.
 
-00:01:05.885 --> 00:01:08.750
+00:01:13.293 --> 00:01:17.487
 Operational teams should know where credentials live, how they are rotated,
 
-00:01:08.750 --> 00:01:11.190
+00:01:17.487 --> 00:01:20.917
 how callers are revoked, and how usage is audited.
 
-00:01:11.190 --> 00:01:12.620
-Default keys, shared tokens,
+00:01:20.917 --> 00:01:25.111
+Default keys, shared tokens, and undocumented service accounts create accountability problems.
 
-00:01:12.620 --> 00:01:15.907
-and undocumented service accounts create accountability problems.
-
-00:01:15.907 --> 00:01:20.540
+00:01:25.111 --> 00:01:29.304
 Strong API boundaries help prevent unauthorized resource use, accidental data exposure,
 
-00:01:20.540 --> 00:01:24.250
+00:01:29.304 --> 00:01:34.260
 and uncontrolled access to models that may be expensive or sensitive to operate.

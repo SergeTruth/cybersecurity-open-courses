@@ -1,85 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.815
-Load balancing multiple local LLM servers can improve total request throughput,
+00:00:00.100 --> 00:00:05.203
+Load balancing multiple local LLM servers can improve total request throughput, availability,
 
-00:00:04.815 --> 00:00:06.740
-availability, and workflow flexibility.
+00:00:05.203 --> 00:00:06.478
+and workflow flexibility.
 
-00:00:06.740 --> 00:00:11.300
+00:00:06.478 --> 00:00:12.432
 It gives tools one stable endpoint while backend servers can be added, removed, repaired,
 
-00:00:11.300 --> 00:00:12.000
+00:00:12.432 --> 00:00:13.282
 or resized.
 
-00:00:12.000 --> 00:00:13.700
+00:00:13.282 --> 00:00:15.408
 The durable expectation is simple:
 
-00:00:13.700 --> 00:00:17.570
+00:00:15.408 --> 00:00:19.235
 ordinary load balancing routes requests across independently running endpoints;
 
-00:00:17.570 --> 00:00:21.740
+00:00:19.235 --> 00:00:24.338
 it does not automatically combine machines into one faster single inference session.
 
-00:00:21.740 --> 00:00:24.505
+00:00:24.338 --> 00:00:27.740
 A reliable setup depends on understanding each backend.
 
-00:00:24.505 --> 00:00:29.210
+00:00:27.740 --> 00:00:31.992
 Hardware resources, model files, runtime settings, context length, API compatibility,
 
-00:00:29.210 --> 00:00:32.100
+00:00:31.992 --> 00:00:35.394
 streaming behavior, and failure modes all shape capacity.
 
-00:00:32.100 --> 00:00:33.850
+00:00:35.394 --> 00:00:37.520
 Routing should reflect that reality.
 
-00:00:33.850 --> 00:00:37.345
-Round-robin may be enough for similar servers, while weighted, least-connections,
+00:00:37.520 --> 00:00:42.197
+Round-robin may be enough for similar servers, while weighted, least-connections, health-check,
 
-00:00:37.345 --> 00:00:39.220
-health-check, model-aware, queue-based,
+00:00:42.197 --> 00:00:46.450
+model-aware, queue-based, and failover strategies become important as workloads diverge.
 
-00:00:39.220 --> 00:00:42.360
-and failover strategies become important as workloads diverge.
-
-00:00:42.360 --> 00:00:44.580
+00:00:46.450 --> 00:00:49.001
 Workload awareness keeps the service usable.
 
-00:00:44.580 --> 00:00:49.020
+00:00:49.001 --> 00:00:52.828
 Interactive chat, coding agents, batch summarization, document analysis, embeddings,
 
-00:00:49.020 --> 00:00:53.240
+00:00:52.828 --> 00:00:57.080
 long-context requests, and tool-using workflows have different latency, state, retry,
 
-00:00:53.240 --> 00:00:54.460
+00:00:57.080 --> 00:00:58.356
 and concurrency needs.
 
-00:00:54.460 --> 00:00:57.480
+00:00:58.356 --> 00:01:02.608
 Sticky sessions may matter when state or cache behavior matters.
 
-00:00:57.480 --> 00:01:00.560
+00:01:02.608 --> 00:01:06.435
 Stateless requests may route freely to any compatible backend.
 
-00:01:00.560 --> 00:01:02.935
+00:01:06.435 --> 00:01:08.986
 Operations and security complete the design.
 
-00:01:02.935 --> 00:01:05.925
-Measure real workloads, monitor the gateway and every backend,
+00:01:08.986 --> 00:01:14.940
+Measure real workloads, monitor the gateway and every backend, watch queue growth and failures,
 
-00:01:05.925 --> 00:01:08.610
-watch queue growth and failures, preserve streaming behavior,
+00:01:14.940 --> 00:01:19.617
+preserve streaming behavior, and troubleshoot mismatches in model names, runtime versions,
 
-00:01:08.610 --> 00:01:13.235
-and troubleshoot mismatches in model names, runtime versions, endpoints, and timeouts.
+00:01:19.617 --> 00:01:20.893
+endpoints, and timeouts.
 
-00:01:13.235 --> 00:01:17.140
-Protect local LLM endpoints because they may process sensitive prompts, documents,
+00:01:20.893 --> 00:01:26.421
+Protect local LLM endpoints because they may process sensitive prompts, documents, source code,
 
-00:01:17.140 --> 00:01:18.630
-source code, and tool outputs.
+00:01:26.421 --> 00:01:27.696
+and tool outputs.
 
-00:01:18.630 --> 00:01:23.020
+00:01:27.696 --> 00:01:32.799
 The goal is a practical local inference service that is measured, reliable,
 
-00:01:23.020 --> 00:01:23.600
+00:01:32.799 --> 00:01:34.500
 and safe to use.

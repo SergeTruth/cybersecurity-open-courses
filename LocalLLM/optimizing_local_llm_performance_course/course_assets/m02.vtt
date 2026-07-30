@@ -1,82 +1,76 @@
 WEBVTT
 
-00:00:00.183 --> 00:00:02.555
+00:00:00.100 --> 00:00:02.294
 VRAM often sets the first boundary.
 
-00:00:02.555 --> 00:00:04.600
+00:00:02.294 --> 00:00:04.854
 It must hold model weights, runtime overhead,
 
-00:00:04.600 --> 00:00:07.295
+00:00:04.854 --> 00:00:07.780
 and the key-value cache used by active context.
 
-00:00:07.295 --> 00:00:09.470
+00:00:07.780 --> 00:00:11.071
 When the model fits completely on a supported GPU,
 
-00:00:09.470 --> 00:00:12.200
+00:00:11.071 --> 00:00:13.631
 generation usually benefits from high memory bandwidth.
 
-00:00:12.200 --> 00:00:15.760
+00:00:13.631 --> 00:00:18.386
 If only part fits, the runtime may split work between GPU and CPU,
 
-00:00:15.760 --> 00:00:18.120
+00:00:18.386 --> 00:00:20.214
 increasing transfers and slowing output.
 
-00:00:18.120 --> 00:00:22.454
+00:00:20.214 --> 00:00:25.700
 A model that consumes nearly all VRAM can fail as context or batch size grows.
 
-00:00:22.454 --> 00:00:26.755
+00:00:25.700 --> 00:00:28.991
 CPU performance matters for tokenization, prompt processing, unsupported layers,
 
-00:00:26.755 --> 00:00:28.200
+00:00:28.991 --> 00:00:30.089
 and CPU-only inference.
 
-00:00:28.200 --> 00:00:30.590
+00:00:30.089 --> 00:00:33.014
 System RAM must hold the operating system, runtime,
 
-00:00:30.590 --> 00:00:33.820
+00:00:33.014 --> 00:00:37.403
 model data that does not fit on the GPU, and other applications.
 
-00:00:33.820 --> 00:00:38.040
+00:00:37.403 --> 00:00:41.791
 Heavy paging to disk can make a configuration technically functional but unusable.
 
-00:00:38.040 --> 00:00:40.460
+00:00:41.791 --> 00:00:44.717
 Storage speed affects model loading and cache operations,
 
-00:00:40.460 --> 00:00:44.560
+00:00:44.717 --> 00:00:50.203
 though it does not usually control token generation after the working set is in memory.
 
-00:00:44.560 --> 00:00:49.070
-PCI Express bandwidth matters when model data moves repeatedly between system memory and a
+00:00:50.203 --> 00:00:56.054
+PCI Express bandwidth matters when model data moves repeatedly between system memory and a discrete GPU.
 
-00:00:49.070 --> 00:00:49.890
-discrete GPU.
-
-00:00:49.890 --> 00:00:53.450
+00:00:56.054 --> 00:00:59.711
 Unified-memory systems share one memory pool between CPU and GPU,
 
-00:00:53.450 --> 00:00:57.280
+00:00:59.711 --> 00:01:03.369
 reducing some transfers but sharing bandwidth and capacity across both.
 
-00:00:57.280 --> 00:01:00.740
+00:01:03.369 --> 00:01:06.660
 Neither architecture removes limits; each changes where they appear.
 
-00:01:00.740 --> 00:01:03.590
-Observe clocks, utilization, temperature, power, memory,
+00:01:06.660 --> 00:01:11.049
+Observe clocks, utilization, temperature, power, memory, and storage during the real workload.
 
-00:01:03.590 --> 00:01:05.350
-and storage during the real workload.
-
-00:01:05.350 --> 00:01:09.120
+00:01:11.049 --> 00:01:15.803
 Cooling or power limits can reduce sustained clocks after an initially fast run.
 
-00:01:09.120 --> 00:01:12.310
+00:01:15.803 --> 00:01:18.729
 Background processes can consume RAM or GPU resources.
 
-00:01:12.310 --> 00:01:15.785
+00:01:18.729 --> 00:01:21.654
 Upgrade only after evidence identifies the constrained stage.
 
-00:01:15.785 --> 00:01:20.180
+00:01:21.654 --> 00:01:26.774
 More RAM will not fix a fully GPU-resident model limited by GPU memory bandwidth,
 
-00:01:20.180 --> 00:01:24.212
+00:01:26.774 --> 00:01:32.260
 and a faster GPU will not fix a workload stalled on storage or thermal throttling.

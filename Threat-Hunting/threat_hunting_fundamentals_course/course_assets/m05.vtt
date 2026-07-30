@@ -1,157 +1,154 @@
 WEBVTT
 
-00:00:00.240 --> 00:00:04.555
-Frameworks such as MITRE ATT&CK help hunters reason about adversary behavior in a
+00:00:00.100 --> 00:00:05.670
+Frameworks such as MITRE ATT&CK help hunters reason about adversary behavior in a structured way.
 
-00:00:04.555 --> 00:00:05.465
-structured way.
-
-00:00:05.465 --> 00:00:09.085
+00:00:05.670 --> 00:00:07.898
 ATT&CK organizes tactics, techniques, and procedures.
 
-00:00:09.085 --> 00:00:13.200
+00:00:07.898 --> 00:00:11.611
 Tactics describe the adversary objective, such as persistence, defense evasion,
 
-00:00:13.200 --> 00:00:15.955
+00:00:11.611 --> 00:00:13.839
 credential access, discovery, or lateral movement.
 
-00:00:15.955 --> 00:00:20.000
-Techniques describe how that objective may be attempted. Procedures describe specific
+00:00:13.839 --> 00:00:16.810
+Techniques describe how that objective may be attempted.
 
-00:00:20.000 --> 00:00:21.950
-observed ways a technique was carried out.
+00:00:16.810 --> 00:00:20.523
+Procedures describe specific observed ways a technique was carried out.
 
-00:00:21.950 --> 00:00:25.640
+00:00:20.523 --> 00:00:24.608
 Hunters use this structure to turn threat knowledge into defensive questions.
 
-00:00:25.640 --> 00:00:29.185
+00:00:24.608 --> 00:00:29.435
 A key hunting principle is to look for behavior, not only known indicators.
 
-00:00:29.185 --> 00:00:34.320
-An indicator of compromise, or IOC, is often a specific value: a file hash, domain,
+00:00:29.435 --> 00:00:34.634
+An indicator of compromise, or IOC, is often a specific value: a file hash,
 
-00:00:34.320 --> 00:00:37.640
-IP address, email sender, registry path, or command string.
+00:00:34.634 --> 00:00:38.347
+domain, IP address, email sender, registry path, or command string.
 
-00:00:37.640 --> 00:00:40.500
-IOCs can be useful, especially for scoping known activity,
+00:00:38.347 --> 00:00:43.546
+IOCs can be useful, especially for scoping known activity, but they can change quickly.
 
-00:00:40.500 --> 00:00:44.320
-but they can change quickly. Behavioral evidence focuses on what the activity does.
+00:00:43.546 --> 00:00:46.517
+Behavioral evidence focuses on what the activity does.
 
-00:00:44.320 --> 00:00:49.360
+00:00:46.517 --> 00:00:50.230
 For example, encoded command execution, unusual persistence locations, discovery commands,
 
-00:00:49.360 --> 00:00:50.650
+00:00:50.230 --> 00:00:51.344
 credential access signals,
 
-00:00:50.650 --> 00:00:54.890
+00:00:51.344 --> 00:00:57.285
 and lateral movement patterns may be visible even when the exact hash or domain is new.
 
-00:00:54.890 --> 00:00:59.115
-Behavioral hunting does not require offensive instructions. The defender asks what
+00:00:57.285 --> 00:00:59.885
+Behavioral hunting does not require offensive instructions.
 
-00:00:59.115 --> 00:01:02.000
-telemetry would show if a category of activity occurred.
+00:00:59.885 --> 00:01:04.712
+The defender asks what telemetry would show if a category of activity occurred.
 
-00:01:02.000 --> 00:01:04.300
+00:01:04.712 --> 00:01:07.683
 If the question is about encoded command execution,
 
-00:01:04.300 --> 00:01:08.110
-the hunter may look for process events where scripting engines launch with suspicious
+00:01:07.683 --> 00:01:13.253
+the hunter may look for process events where scripting engines launch with suspicious command-line patterns.
 
-00:01:08.110 --> 00:01:09.170
-command-line patterns.
-
-00:01:09.170 --> 00:01:11.445
+00:01:13.253 --> 00:01:15.852
 If the question is about unusual persistence,
 
-00:01:11.445 --> 00:01:15.440
-the hunter may look for new startup entries or scheduled tasks outside known software
+00:01:15.852 --> 00:01:21.793
+the hunter may look for new startup entries or scheduled tasks outside known software deployment tools.
 
-00:01:15.440 --> 00:01:16.270
-deployment tools.
-
-00:01:16.270 --> 00:01:18.250
+00:01:21.793 --> 00:01:24.393
 If the question is about discovery behavior,
 
-00:01:18.250 --> 00:01:22.800
+00:01:24.393 --> 00:01:29.220
 the hunter may look for endpoints issuing many system or directory enumeration commands.
 
-00:01:22.800 --> 00:01:26.958
-If the question is about lateral movement, the hunter may look for unusual remote logons,
+00:01:29.220 --> 00:01:31.819
+If the question is about lateral movement,
 
-00:01:26.958 --> 00:01:29.470
-administrative shares, or service creation events.
+00:01:31.819 --> 00:01:35.533
+the hunter may look for unusual remote logons, administrative shares,
 
-00:01:29.470 --> 00:01:32.315
+00:01:35.533 --> 00:01:37.018
+or service creation events.
+
+00:01:37.018 --> 00:01:39.617
 Mapping behavior to telemetry prevents shallow searches.
 
-00:01:32.315 --> 00:01:34.810
+00:01:39.617 --> 00:01:42.588
 Instead of searching for one suspicious string everywhere,
 
-00:01:34.810 --> 00:01:38.410
+00:01:42.588 --> 00:01:47.415
 the hunter asks which data source should contain the behavior, which fields matter,
 
-00:01:38.410 --> 00:01:40.190
+00:01:47.415 --> 00:01:50.015
 and which baseline would make it unusual.
 
-00:01:40.190 --> 00:01:44.840
-Endpoint telemetry may show process relationships. Authentication logs may show account
+00:01:50.015 --> 00:01:52.243
+Endpoint telemetry may show process relationships.
 
-00:01:44.840 --> 00:01:48.010
-movement. DNS and proxy logs may show external communication.
+00:01:52.243 --> 00:01:54.471
+Authentication logs may show account movement.
 
-00:01:48.010 --> 00:01:51.730
-Cloud control-plane logs may show administrative behavior. The mapping links the
+00:01:54.471 --> 00:01:57.441
+DNS and proxy logs may show external communication.
 
-00:01:51.730 --> 00:01:54.480
-hypothesis to evidence. There is still room for IOCs.
+00:01:57.441 --> 00:02:00.041
+Cloud control-plane logs may show administrative behavior.
 
-00:01:54.480 --> 00:01:57.450
+00:02:00.041 --> 00:02:02.640
+The mapping links the hypothesis to evidence.
+
+00:02:02.640 --> 00:02:04.868
+There is still room for IOCs.
+
+00:02:04.868 --> 00:02:08.581
 If a credible report names a domain, hash, or certificate,
 
-00:01:57.450 --> 00:01:59.990
+00:02:08.581 --> 00:02:12.295
 a hunter can search for that value to scope exposure.
 
-00:01:59.990 --> 00:02:04.200
-The important distinction is that IOC matching often answers whether a known artifact
+00:02:12.295 --> 00:02:17.493
+The important distinction is that IOC matching often answers whether a known artifact appeared,
 
-00:02:04.200 --> 00:02:04.680
-appeared,
-
-00:02:04.680 --> 00:02:09.030
+00:02:17.493 --> 00:02:22.321
 while behavior hunting asks whether a class of suspicious activity may be present.
 
-00:02:09.030 --> 00:02:11.610
-Mature hunts often combine both. For beginners,
+00:02:22.321 --> 00:02:24.177
+Mature hunts often combine both.
 
-00:02:11.610 --> 00:02:16.125
-ATT&CK is most useful as a thinking aid. Do not treat it as a checklist to run
+00:02:24.177 --> 00:02:27.891
+For beginners, ATT&CK is most useful as a thinking aid.
 
-00:02:16.125 --> 00:02:16.850
-mechanically.
+00:02:27.891 --> 00:02:31.604
+Do not treat it as a checklist to run mechanically.
 
-00:02:16.850 --> 00:02:21.280
+00:02:31.604 --> 00:02:35.689
 Use it to frame defensible questions, identify likely telemetry, document assumptions,
 
-00:02:21.280 --> 00:02:24.650
+00:02:35.689 --> 00:02:39.402
 and produce detection ideas that survive beyond one temporary indicator.
 
-00:02:24.650 --> 00:02:27.685
+00:02:39.402 --> 00:02:42.744
 Behavior mapping also helps explain findings to other teams.
 
-00:02:27.685 --> 00:02:29.565
+00:02:42.744 --> 00:02:45.343
 Instead of saying a query looked strange,
 
-00:02:29.565 --> 00:02:32.419
+00:02:45.343 --> 00:02:49.428
 the hunter can say the activity aligns with a discovery pattern,
 
-00:02:32.419 --> 00:02:35.230
+00:02:49.428 --> 00:02:52.770
 a credential access signal, or a lateral movement concern,
 
-00:02:35.230 --> 00:02:36.950
+00:02:52.770 --> 00:02:54.998
 and then show the supporting telemetry.
 
-00:02:36.950 --> 00:02:40.320
+00:02:54.998 --> 00:02:58.340
 That language connects evidence to risk without overstating certainty.

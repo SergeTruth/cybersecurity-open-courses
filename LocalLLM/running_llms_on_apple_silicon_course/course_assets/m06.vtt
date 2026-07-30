@@ -1,85 +1,79 @@
 WEBVTT
 
-00:00:00.560 --> 00:00:04.675
-Performance tuning starts by separating prompt processing speed from token generation
+00:00:00.100 --> 00:00:04.546
+Performance tuning starts by separating prompt processing speed from token generation speed.
 
-00:00:04.675 --> 00:00:05.360
-speed.
-
-00:00:05.360 --> 00:00:08.120
+00:00:04.546 --> 00:00:08.251
 Prompt processing is the work of reading the input context.
 
-00:00:08.120 --> 00:00:10.955
+00:00:08.251 --> 00:00:11.585
 Token generation is the step-by-step creation of the answer.
 
-00:00:10.955 --> 00:00:14.505
+00:00:11.585 --> 00:00:16.402
 A system may feel fast with short prompts but slow with long documents.
 
-00:00:14.505 --> 00:00:18.605
+00:00:16.402 --> 00:00:21.218
 Measuring both phases helps identify whether the issue is context size, model size,
 
-00:00:18.605 --> 00:00:21.155
+00:00:21.218 --> 00:00:23.070
 runtime settings, or hardware limits.
 
-00:00:21.155 --> 00:00:23.480
+00:00:23.070 --> 00:00:26.034
 Context window size has a direct operational cost.
 
-00:00:23.480 --> 00:00:26.960
+00:00:26.034 --> 00:00:29.369
 Larger context can help document analysis and long conversations,
 
-00:00:26.960 --> 00:00:29.576
+00:00:29.369 --> 00:00:32.333
 but it increases memory use and processing time.
 
-00:00:29.576 --> 00:00:31.110
+00:00:32.333 --> 00:00:34.926
 Larger models are not always better either.
 
-00:00:31.110 --> 00:00:36.020
-A model that barely fits may swap memory, run slowly, or become unstable under real use.
+00:00:34.926 --> 00:00:38.631
+A model that barely fits may swap memory, run slowly,
 
-00:00:36.020 --> 00:00:39.755
-A slightly smaller model with a sensible context setting may produce a better user
+00:00:38.631 --> 00:00:40.854
+or become unstable under real use.
 
-00:00:39.755 --> 00:00:40.595
-experience.
+00:00:40.854 --> 00:00:46.411
+A slightly smaller model with a sensible context setting may produce a better user experience.
 
-00:00:40.595 --> 00:00:43.370
+00:00:46.411 --> 00:00:48.634
 GPU acceleration, batch concepts, thread settings,
 
-00:00:43.370 --> 00:00:46.120
+00:00:48.634 --> 00:00:50.857
 and runtime parameters can influence performance,
 
-00:00:46.120 --> 00:00:48.920
+00:00:50.857 --> 00:00:54.562
 but changing too many settings at once makes troubleshooting harder.
 
-00:00:48.920 --> 00:00:52.580
-Establish a baseline with a known model, known prompt, context length,
+00:00:54.562 --> 00:00:59.749
+Establish a baseline with a known model, known prompt, context length, and runtime version.
 
-00:00:52.580 --> 00:00:53.760
-and runtime version.
-
-00:00:53.760 --> 00:00:55.250
+00:00:59.749 --> 00:01:02.343
 Then change one variable at a time.
 
-00:00:55.250 --> 00:00:59.395
+00:01:02.343 --> 00:01:06.789
 Record the effect on load time, prompt processing, generation speed, memory pressure,
 
-00:00:59.395 --> 00:01:00.980
+00:01:06.789 --> 00:01:07.900
 and output quality.
 
-00:01:00.980 --> 00:01:03.400
+00:01:07.900 --> 00:01:10.864
 Thermal throttling and memory pressure are practical realities.
 
-00:01:03.400 --> 00:01:07.325
+00:01:10.864 --> 00:01:15.680
 A laptop under sustained load may reduce performance to manage heat and battery.
 
-00:01:07.325 --> 00:01:10.885
+00:01:15.680 --> 00:01:19.756
 A system under memory pressure may slow down or become unstable.
 
-00:01:10.885 --> 00:01:14.560
+00:01:19.756 --> 00:01:23.461
 Monitor disk, memory, temperature, and service behavior during real workloads.
 
-00:01:14.560 --> 00:01:16.695
+00:01:23.461 --> 00:01:26.054
 The best tuning process is measured, repeatable,
 
-00:01:16.695 --> 00:01:19.810
+00:01:26.054 --> 00:01:30.500
 and tied to the task rather than chasing the largest possible numbers.

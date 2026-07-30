@@ -1,64 +1,67 @@
 WEBVTT
 
-00:00:00.380 --> 00:00:04.560
-Quantization stores model values at reduced precision to lower memory use and often
+00:00:00.100 --> 00:00:06.016
+Quantization stores model values at reduced precision to lower memory use and often improve practical speed.
 
-00:00:04.560 --> 00:00:09.880
-improve practical speed. Labels such as Q4, Q5, and Q8 describe broad precision families,
+00:00:06.016 --> 00:00:10.084
+Labels such as Q4, Q5, and Q8 describe broad precision families,
 
-00:00:09.880 --> 00:00:11.560
+00:00:10.084 --> 00:00:11.563
 though exact methods vary.
 
-00:00:11.560 --> 00:00:15.945
-Lower precision fits smaller hardware but can affect output quality differently across
+00:00:11.563 --> 00:00:16.370
+Lower precision fits smaller hardware but can affect output quality differently across models.
 
-00:00:15.945 --> 00:00:19.180
-models. Higher precision is not automatically better in an operational test.
+00:00:16.370 --> 00:00:20.068
+Higher precision is not automatically better in an operational test.
 
-00:00:19.180 --> 00:00:23.720
+00:00:20.068 --> 00:00:25.245
 The referenced benchmark observed that Q8 did not always outperform Q4 for every model.
 
-00:00:23.720 --> 00:00:26.750
+00:00:25.245 --> 00:00:28.573
 A larger quantization may consume more memory, reduce headroom,
 
-00:00:26.750 --> 00:00:30.600
+00:00:28.573 --> 00:00:32.271
 and trigger slower offloading without delivering a meaningful quality gain.
 
-00:00:30.600 --> 00:00:34.750
-Image-token budgets and preprocessing settings affect how much visual detail reaches the
+00:00:32.271 --> 00:00:37.078
+Image-token budgets and preprocessing settings affect how much visual detail reaches the model.
 
-00:00:34.750 --> 00:00:38.040
-model. Too little visual capacity may lose small text or objects.
+00:00:37.078 --> 00:00:40.776
+Too little visual capacity may lose small text or objects.
 
-00:00:38.040 --> 00:00:42.120
+00:00:40.776 --> 00:00:46.692
 More tokens increase memory and latency and may not help if the source image is poor.
 
-00:00:42.120 --> 00:00:46.270
+00:00:46.692 --> 00:00:50.390
 Batch size, prompt-processing settings, context length, GPU offload, thread count,
 
-00:00:46.270 --> 00:00:48.518
+00:00:50.390 --> 00:00:52.608
 and cache choices also change performance.
 
-00:00:48.518 --> 00:00:52.360
-Compare models under documented settings rather than treating the model name as the whole
+00:00:52.608 --> 00:00:58.155
+Compare models under documented settings rather than treating the model name as the whole configuration.
 
-00:00:52.360 --> 00:00:56.328
-configuration. Local runners such as llama.cpp, Ollama, LM Studio,
+00:00:58.155 --> 00:01:00.004
+Local runners such as llama.
 
-00:00:56.328 --> 00:01:00.630
-and other tools may use different backends, model files, prompt templates, defaults,
+00:01:00.004 --> 00:01:04.811
+cpp, Ollama, LM Studio, and other tools may use different backends, model files,
 
-00:01:00.630 --> 00:01:04.535
-and vision adapters. Runtime version can alter speed, compatibility, and output.
+00:01:04.811 --> 00:01:07.030
+prompt templates, defaults, and vision adapters.
 
-00:01:04.535 --> 00:01:07.990
+00:01:07.030 --> 00:01:09.988
+Runtime version can alter speed, compatibility, and output.
+
+00:01:09.988 --> 00:01:14.056
 Test a small matrix of sensible settings, record memory and completion,
 
-00:01:07.990 --> 00:01:10.560
+00:01:14.056 --> 00:01:16.644
 and keep one reproducible configuration per candidate.
 
-00:01:10.560 --> 00:01:14.515
-Choose the lowest-cost setting that meets task quality and stability rather than assuming
+00:01:16.644 --> 00:01:21.081
+Choose the lowest-cost setting that meets task quality and stability rather than
 
-00:01:14.515 --> 00:01:15.880
-the largest file is safest.
+00:01:21.081 --> 00:01:23.300
+assuming the largest file is safest.

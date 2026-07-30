@@ -1,88 +1,73 @@
 WEBVTT
 
-00:00:00.222 --> 00:00:04.975
-FP32 uses 32-bit floating-point values and has been a common training and reference
+00:00:00.100 --> 00:00:05.392
+FP32 uses 32-bit floating-point values and has been a common training and reference precision.
 
-00:00:04.975 --> 00:00:05.493
-precision.
-
-00:00:05.493 --> 00:00:07.310
+00:00:05.392 --> 00:00:07.660
 FP16 uses half as many bits,
 
-00:00:07.310 --> 00:00:11.481
+00:00:07.660 --> 00:00:11.063
 reducing memory and taking advantage of supported accelerator operations.
 
-00:00:11.481 --> 00:00:14.730
+00:00:11.063 --> 00:00:14.465
 BF16 also uses 16 bits but allocates them differently,
 
-00:00:14.730 --> 00:00:18.630
-preserving a broad numerical range that is useful in training and some inference
+00:00:14.465 --> 00:00:19.757
+preserving a broad numerical range that is useful in training and some inference workflows.
 
-00:00:18.630 --> 00:00:19.510
-workflows.
-
-00:00:19.510 --> 00:00:22.781
+00:00:19.757 --> 00:00:23.915
 Hardware support determines whether a precision provides an actual speed benefit.
 
-00:00:22.781 --> 00:00:27.508
+00:00:23.915 --> 00:00:28.073
 INT8 represents quantized values with 8-bit integers, often with per-tensor, per-channel,
 
-00:00:27.508 --> 00:00:30.083
+00:00:28.073 --> 00:00:29.585
 or grouped scale information.
 
-00:00:30.083 --> 00:00:31.760
+00:00:29.585 --> 00:00:32.610
 Four-bit and lower-bit weight formats reduce storage further,
 
-00:00:31.760 --> 00:00:35.740
+00:00:32.610 --> 00:00:37.146
 but the nominal bit count does not include every scale, lookup, alignment,
 
-00:00:35.740 --> 00:00:36.880
+00:00:37.146 --> 00:00:38.280
 or metadata cost.
 
-00:00:36.880 --> 00:00:40.885
-Actual file and loaded sizes are therefore larger than parameters multiplied by bits
+00:00:38.280 --> 00:00:43.572
+Actual file and loaded sizes are therefore larger than parameters multiplied by bits alone.
 
-00:00:40.885 --> 00:00:41.590
-alone.
-
-00:00:41.590 --> 00:00:43.430
+00:00:43.572 --> 00:00:45.840
 Weights are the learned model parameters.
 
-00:00:43.430 --> 00:00:46.309
+00:00:45.840 --> 00:00:49.620
 Activations are intermediate values produced while the model processes input.
 
-00:00:46.309 --> 00:00:50.635
-A system may store weights at low precision while computing activations or selected layers
+00:00:49.620 --> 00:00:54.157
+A system may store weights at low precision while computing activations or
 
-00:00:50.635 --> 00:00:52.560
-at higher precision to preserve quality.
+00:00:54.157 --> 00:00:57.181
+selected layers at higher precision to preserve quality.
 
-00:00:52.560 --> 00:00:55.140
+00:00:57.181 --> 00:01:00.961
 The key-value cache has its own format and memory cost,
 
-00:00:55.140 --> 00:00:58.380
+00:01:00.961 --> 00:01:03.985
 which grows with context length and active sequences.
 
-00:00:58.380 --> 00:00:59.675
+00:01:03.985 --> 00:01:05.875
 Precision affects more than size.
 
-00:00:59.675 --> 00:01:02.830
+00:01:05.875 --> 00:01:08.899
 It changes numerical resolution, supported kernels, memory traffic,
 
-00:01:02.830 --> 00:01:04.710
+00:01:08.899 --> 00:01:10.411
 and sometimes output behavior.
 
-00:01:04.710 --> 00:01:08.200
-Lower is not automatically faster if the hardware or runtime lacks an efficient
+00:01:10.411 --> 00:01:15.704
+Lower is not automatically faster if the hardware or runtime lacks an efficient implementation.
 
-00:01:08.200 --> 00:01:09.120
-implementation.
+00:01:15.704 --> 00:01:20.996
+Treat labels such as 4-bit as a starting description, then inspect the quantization method,
 
-00:01:09.120 --> 00:01:11.570
-Treat labels such as 4-bit as a starting description,
-
-00:01:11.570 --> 00:01:15.570
-then inspect the quantization method, runtime support, measured memory, speed,
-
-00:01:15.570 --> 00:01:16.360
-and task quality.
+00:01:20.996 --> 00:01:24.020
+runtime support, measured memory, speed, and task quality.

@@ -1,94 +1,94 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:03.740
+00:00:00.100 --> 00:00:03.930
 Identity design should be part of MCP planning from the start.
 
-00:00:03.740 --> 00:00:07.760
-An integration may act as the user, as the application, or as a service account.
+00:00:03.930 --> 00:00:07.411
+An integration may act as the user, as the application,
 
-00:00:07.760 --> 00:00:11.660
+00:00:07.411 --> 00:00:09.152
+or as a service account.
+
+00:00:09.152 --> 00:00:12.285
 Those choices affect auditability, least privilege, and user expectations.
 
-00:00:11.660 --> 00:00:14.130
+00:00:12.285 --> 00:00:14.722
 User identity answers who requested the work.
 
-00:00:14.130 --> 00:00:17.535
+00:00:14.722 --> 00:00:18.551
 Application identity answers which host or product is making the call.
 
-00:00:17.535 --> 00:00:20.975
+00:00:18.551 --> 00:00:22.033
 Service identity answers what backend component is performing the integration.
 
-00:00:20.975 --> 00:00:24.695
+00:00:22.033 --> 00:00:25.862
 Good design keeps these identities distinct enough to reason about authorization.
 
-00:00:24.695 --> 00:00:29.280
-Delegated access is a common pattern where an application acts on behalf of a user within
+00:00:25.862 --> 00:00:30.040
+Delegated access is a common pattern where an application acts on behalf
 
-00:00:29.280 --> 00:00:30.180
-defined limits.
+00:00:30.040 --> 00:00:32.129
+of a user within defined limits.
 
-00:00:30.180 --> 00:00:33.200
+00:00:32.129 --> 00:00:34.914
 Service accounts may be appropriate for system-level workflows,
 
-00:00:33.200 --> 00:00:35.153
+00:00:34.914 --> 00:00:37.699
 but they should be narrowly scoped and monitored.
 
-00:00:35.153 --> 00:00:39.595
+00:00:37.699 --> 00:00:42.225
 Secrets and tokens should be protected from prompts, logs, and unnecessary tool exposure.
 
-00:00:39.595 --> 00:00:41.620
+00:00:42.225 --> 00:00:44.314
 Least privilege means each server, tool,
 
-00:00:41.620 --> 00:00:44.860
+00:00:44.314 --> 00:00:48.143
 or credential receives only the permissions needed for its intended use,
 
-00:00:44.860 --> 00:00:46.995
+00:00:48.143 --> 00:00:50.928
 in the intended context, for the intended users.
 
-00:00:46.995 --> 00:00:49.800
+00:00:50.928 --> 00:00:54.061
 Consent and user approval are different from model preference.
 
-00:00:49.800 --> 00:00:51.295
+00:00:54.061 --> 00:00:56.150
 A model may propose an action,
 
-00:00:51.295 --> 00:00:54.865
-but the application should verify whether the action is allowed and whether the user
+00:00:56.150 --> 00:01:01.720
+but the application should verify whether the action is allowed and whether the user intended it.
 
-00:00:54.865 --> 00:00:55.540
-intended it.
-
-00:00:55.540 --> 00:00:59.760
+00:01:01.720 --> 00:01:05.202
 For low-risk read-only requests, policy may allow execution without interruption.
 
-00:00:59.760 --> 00:01:01.220
+00:01:05.202 --> 00:01:06.246
 For higher-impact actions,
 
-00:01:01.220 --> 00:01:04.033
+00:01:06.246 --> 00:01:10.424
 the user may need a clear approval prompt showing what will happen.
 
-00:01:04.033 --> 00:01:06.020
+00:01:10.424 --> 00:01:12.861
 Approval should be specific enough to matter,
 
-00:01:06.020 --> 00:01:08.560
+00:01:12.861 --> 00:01:15.646
 not a vague blanket acceptance of future activity.
 
-00:01:08.560 --> 00:01:10.715
+00:01:15.646 --> 00:01:17.735
 Tenant and workspace boundaries also matter.
 
-00:01:10.715 --> 00:01:14.770
-A user in one workspace should not gain access to another workspace because a tool or
+00:01:17.735 --> 00:01:21.912
+A user in one workspace should not gain access to another workspace
 
-00:01:14.770 --> 00:01:16.300
-resource is broadly connected.
+00:01:21.912 --> 00:01:24.698
+because a tool or resource is broadly connected.
 
-00:01:16.300 --> 00:01:20.380
+00:01:24.698 --> 00:01:27.831
 A model-generated action request should not bypass application authorization.
 
-00:01:20.380 --> 00:01:24.070
+00:01:27.831 --> 00:01:32.357
 MCP integrations should not rely on the model as the final permission system.
 
-00:01:24.070 --> 00:01:27.510
+00:01:32.357 --> 00:01:37.230
 The stable rule is simple: the model can help decide what might be useful,
 
-00:01:27.510 --> 00:01:31.540
+00:01:37.230 --> 00:01:41.060
 but identity-aware application logic and downstream policy decide what is allowed.

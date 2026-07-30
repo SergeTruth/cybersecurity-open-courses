@@ -1,97 +1,94 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.735
+00:00:00.100 --> 00:00:01.486
 API serving introduces concurrency.
 
-00:00:02.735 --> 00:00:04.770
+00:00:01.486 --> 00:00:04.258
 Instead of one user waiting on one response,
 
-00:00:04.770 --> 00:00:08.415
+00:00:04.258 --> 00:00:08.415
 the system may receive many requests with different prompt lengths, generation limits,
 
-00:00:08.415 --> 00:00:09.480
+00:00:08.415 --> 00:00:09.108
 and urgency.
 
-00:00:09.480 --> 00:00:13.040
+00:00:09.108 --> 00:00:13.613
 Batch tuning becomes a scheduling problem as much as a raw performance problem.
 
-00:00:13.040 --> 00:00:16.790
-The service has to decide how many requests to accept, how much work to group together,
+00:00:13.613 --> 00:00:17.077
+The service has to decide how many requests to accept,
 
-00:00:16.790 --> 00:00:18.838
-and when to apply backpressure.
+00:00:17.077 --> 00:00:20.889
+how much work to group together, and when to apply backpressure.
 
-00:00:18.838 --> 00:00:21.970
+00:00:20.889 --> 00:00:24.007
 Continuous batching and dynamic batching are common serving ideas.
 
-00:00:21.970 --> 00:00:22.715
+00:00:24.007 --> 00:00:25.393
 At a high level,
 
-00:00:22.715 --> 00:00:26.760
-they let the runtime group active requests in ways that improve hardware utilization while
+00:00:25.393 --> 00:00:29.551
+they let the runtime group active requests in ways that improve hardware
 
-00:00:26.760 --> 00:00:28.930
-requests arrive and finish at different times.
+00:00:29.551 --> 00:00:32.669
+utilization while requests arrive and finish at different times.
 
-00:00:28.930 --> 00:00:32.480
+00:00:32.669 --> 00:00:36.480
 This can improve throughput, but it does not remove latency tradeoffs.
 
-00:00:32.480 --> 00:00:35.405
+00:00:36.480 --> 00:00:39.945
 Users still care about queue delay, first-token latency, and timeouts.
 
-00:00:35.405 --> 00:00:37.610
+00:00:39.945 --> 00:00:41.677
 Concurrency limits, maximum prompt size,
 
-00:00:37.610 --> 00:00:41.820
-and maximum generated tokens are part of batch tuning because they shape the work entering
+00:00:41.677 --> 00:00:45.835
+and maximum generated tokens are part of batch tuning because they shape
 
-00:00:41.820 --> 00:00:42.520
-the system.
+00:00:45.835 --> 00:00:47.567
+the work entering the system.
 
-00:00:42.520 --> 00:00:46.560
+00:00:47.567 --> 00:00:52.418
 Without limits, a few very large prompts can consume memory and delay everyone else.
 
-00:00:46.560 --> 00:00:47.234
+00:00:52.418 --> 00:00:53.111
 Fairness matters.
 
-00:00:47.234 --> 00:00:51.235
-A service should avoid letting one request pattern dominate the queue or make normal
+00:00:53.111 --> 00:00:57.269
+A service should avoid letting one request pattern dominate the queue or
 
-00:00:51.235 --> 00:00:53.130
-interactive requests feel unreliable.
+00:00:57.269 --> 00:00:59.348
+make normal interactive requests feel unreliable.
 
-00:00:53.130 --> 00:00:55.305
+00:00:59.348 --> 00:01:01.080
 Operational controls complete the picture.
 
-00:00:55.305 --> 00:00:58.063
+00:01:01.080 --> 00:01:03.852
 Rate limiting protects the service from demand spikes.
 
-00:00:58.063 --> 00:01:02.410
+00:01:03.852 --> 00:01:08.356
 Backpressure tells clients to slow down instead of silently building an unhealthy queue.
 
-00:01:02.410 --> 00:01:06.385
-Monitoring should show queue depth, active sequences, token rates, errors,
+00:01:08.356 --> 00:01:12.860
+Monitoring should show queue depth, active sequences, token rates, errors, and resource use.
 
-00:01:06.385 --> 00:01:07.280
-and resource use.
-
-00:01:07.280 --> 00:01:09.600
+00:01:12.860 --> 00:01:15.632
 The best throughput configuration is not just fast;
 
-00:01:09.600 --> 00:01:12.470
+00:01:15.632 --> 00:01:18.404
 it is understandable and recoverable when demand changes.
 
-00:01:12.470 --> 00:01:15.735
+00:01:18.404 --> 00:01:21.522
 For API platforms, define the service promise before tuning.
 
-00:01:15.735 --> 00:01:18.755
+00:01:21.522 --> 00:01:24.987
 Decide whether the priority is low latency for interactive users,
 
-00:01:18.755 --> 00:01:21.970
+00:01:24.987 --> 00:01:28.798
 high throughput for batch jobs, or a controlled balance between both.
 
-00:01:21.970 --> 00:01:25.900
+00:01:28.798 --> 00:01:32.956
 Those goals lead to different queue limits, timeout values, and batching choices.
 
-00:01:25.900 --> 00:01:29.440
+00:01:32.956 --> 00:01:37.460
 Without that service promise, a faster benchmark can still produce a worse product.

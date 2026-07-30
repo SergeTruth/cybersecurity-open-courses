@@ -1,97 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.040
+00:00:00.100 --> 00:00:04.456
 Retrieval is the decision layer that chooses what evidence reaches the model.
 
-00:00:04.040 --> 00:00:08.100
+00:00:04.456 --> 00:00:09.538
 A RAG system usually cannot send the entire knowledge base into the context window.
 
-00:00:08.100 --> 00:00:12.235
+00:00:09.538 --> 00:00:14.256
 It selects a limited set of chunks using query processing, filters, similarity search,
 
-00:00:12.235 --> 00:00:16.240
+00:00:14.256 --> 00:00:17.523
 keyword matching, ranking, reranking, source rules, and context limits.
 
-00:00:16.240 --> 00:00:19.280
+00:00:17.523 --> 00:00:20.427
 Those decisions strongly influence answer quality and safety.
 
-00:00:19.280 --> 00:00:23.225
+00:00:20.427 --> 00:00:24.420
 Retrieval should be constrained by user permissions, tenant scope, workflow purpose,
 
-00:00:23.225 --> 00:00:25.355
+00:00:24.420 --> 00:00:26.235
 source eligibility, and freshness requirements.
 
-00:00:25.355 --> 00:00:29.245
-A user should not receive a chunk just because it is semantically similar when the source
+00:00:26.235 --> 00:00:30.591
+A user should not receive a chunk just because it is semantically
 
-00:00:29.245 --> 00:00:30.030
-is restricted,
+00:00:30.591 --> 00:00:32.769
+similar when the source is restricted,
 
-00:00:30.030 --> 00:00:32.240
+00:00:32.769 --> 00:00:34.947
 expired, or outside the approved workflow.
 
-00:00:32.240 --> 00:00:34.200
+00:00:34.947 --> 00:00:37.487
 More retrieved text is not always better.
 
-00:00:34.200 --> 00:00:36.840
-Too much context can crowd out important evidence,
+00:00:37.487 --> 00:00:42.206
+Too much context can crowd out important evidence, introduce stale or conflicting material,
 
-00:00:36.840 --> 00:00:39.505
-introduce stale or conflicting material, increase cost,
+00:00:42.206 --> 00:00:45.473
+increase cost, and make the answer harder to steer.
 
-00:00:39.505 --> 00:00:41.680
-and make the answer harder to steer.
-
-00:00:41.680 --> 00:00:46.080
+00:00:45.473 --> 00:00:49.103
 Retrieval design should consider top-k choices, relevance thresholds, duplicate handling,
 
-00:00:46.080 --> 00:00:50.540
+00:00:49.103 --> 00:00:53.459
 source diversity, freshness preferences, and no-answer behavior when the evidence is weak.
 
-00:00:50.540 --> 00:00:52.690
+00:00:53.459 --> 00:00:56.000
 Context assembly is also an architectural boundary.
 
-00:00:52.690 --> 00:00:56.665
+00:00:56.000 --> 00:00:59.630
 The final prompt should separate trusted system instructions, application policy,
 
-00:00:56.665 --> 00:00:58.890
+00:00:59.630 --> 00:01:01.444
 user requests, and retrieved evidence.
 
-00:00:58.890 --> 00:01:02.590
-Retrieved chunks should be labeled as source material rather than treated as system
+00:01:01.444 --> 00:01:06.526
+Retrieved chunks should be labeled as source material rather than treated as system policy.
 
-00:01:02.590 --> 00:01:03.120
-policy.
+00:01:06.526 --> 00:01:11.245
+That separation helps the model use evidence without confusing it with higher-priority rules.
 
-00:01:03.120 --> 00:01:07.205
-That separation helps the model use evidence without confusing it with higher-priority
-
-00:01:07.205 --> 00:01:07.955
-rules.
-
-00:01:07.955 --> 00:01:11.160
+00:01:11.245 --> 00:01:14.875
 A mature private RAG system makes retrieval observable and tunable.
 
-00:01:11.160 --> 00:01:14.380
+00:01:14.875 --> 00:01:19.957
 Engineers should be able to see which chunks were considered, which filters were applied,
 
-00:01:14.380 --> 00:01:15.930
+00:01:19.957 --> 00:01:21.772
 why certain sources were selected,
 
-00:01:15.930 --> 00:01:18.715
+00:01:21.772 --> 00:01:25.401
 and whether the answer was grounded in the retrieved material.
 
-00:01:18.715 --> 00:01:21.040
+00:01:25.401 --> 00:01:28.305
 Retrieval settings should be reviewed as requirements change.
 
-00:01:21.040 --> 00:01:24.590
-A workflow that supports exploratory research may need different ranking,
+00:01:28.305 --> 00:01:32.661
+A workflow that supports exploratory research may need different ranking, source diversity,
 
-00:01:24.590 --> 00:01:25.474
-source diversity,
-
-00:01:25.474 --> 00:01:29.280
-and no-answer behavior than a workflow used for policy guidance or customer-facing
-
-00:01:29.280 --> 00:01:29.640
-support.
+00:01:32.661 --> 00:01:37.380
+and no-answer behavior than a workflow used for policy guidance or customer-facing support.

@@ -1,103 +1,100 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.980
+00:00:00.100 --> 00:00:03.467
 Batch-related problems often show up as memory failures first.
 
-00:00:03.980 --> 00:00:06.920
+00:00:03.467 --> 00:00:05.712
 Out-of-memory errors, excessive swapping, process crashes,
 
-00:00:06.920 --> 00:00:10.720
-or sudden latency spikes are signs that the configuration may be too aggressive for the
+00:00:05.712 --> 00:00:11.699
+or sudden latency spikes are signs that the configuration may be too aggressive for the model,
 
-00:00:10.720 --> 00:00:11.090
-model,
-
-00:00:11.090 --> 00:00:13.155
+00:00:11.699 --> 00:00:13.570
 context length, or concurrency level.
 
-00:00:13.155 --> 00:00:18.160
+00:00:13.570 --> 00:00:18.808
 Reduce the workload dimensions one at a time: batch size, microbatch size, context length,
 
-00:00:18.160 --> 00:00:20.765
+00:00:18.808 --> 00:00:21.053
 maximum concurrent sequences, or prompt size.
 
-00:00:20.765 --> 00:00:23.800
+00:00:21.053 --> 00:00:23.672
 Slow prompt ingestion points toward prefill constraints.
 
-00:00:23.800 --> 00:00:26.420
+00:00:23.672 --> 00:00:27.788
 Test with a shorter prompt, then with the realistic long prompt,
 
-00:00:26.420 --> 00:00:28.375
+00:00:27.788 --> 00:00:29.658
 and compare prompt processing speed.
 
-00:00:28.375 --> 00:00:32.670
+00:00:29.658 --> 00:00:33.400
 Slow generation points toward decode behavior, memory bandwidth, device utilization,
 
-00:00:32.670 --> 00:00:34.160
+00:00:33.400 --> 00:00:34.523
 or thermal throttling.
 
-00:00:34.160 --> 00:00:37.250
+00:00:34.523 --> 00:00:39.012
 High first-token latency may come from a long prefill phase, a queue,
 
-00:00:37.250 --> 00:00:39.675
+00:00:39.012 --> 00:00:42.006
 or a scheduler waiting to assemble a batch.
 
-00:00:39.675 --> 00:00:43.640
+00:00:42.006 --> 00:00:46.870
 Uneven GPU utilization can mean the runtime is not feeding the device efficiently,
 
-00:00:43.640 --> 00:00:46.312
+00:00:46.870 --> 00:00:52.108
 but it can also mean the workload is too small to keep it busy.
 
-00:00:46.312 --> 00:00:50.560
+00:00:52.108 --> 00:00:55.475
 CPU utilization can reveal bottlenecks around tokenization, sampling, scheduling,
 
-00:00:50.560 --> 00:00:51.485
+00:00:55.475 --> 00:00:56.598
 or partial offload.
 
-00:00:51.485 --> 00:00:53.560
+00:00:56.598 --> 00:00:58.843
 Temperature and power limits matter too.
 
-00:00:53.560 --> 00:00:57.390
-A system that begins fast and then slows down may be thermally constrained rather than
+00:00:58.843 --> 00:01:03.333
+A system that begins fast and then slows down may be thermally
 
-00:00:57.390 --> 00:00:58.760
-poorly batched.
+00:01:03.333 --> 00:01:05.204
+constrained rather than poorly batched.
 
-00:00:58.760 --> 00:01:01.480
+00:01:05.204 --> 00:01:08.945
 Be careful not to blame batch settings for unrelated issues.
 
-00:01:01.480 --> 00:01:05.555
+00:01:08.945 --> 00:01:13.435
 Output quality problems are often caused by sampling parameters, prompts, model choice,
 
-00:01:05.555 --> 00:01:07.490
+00:01:13.435 --> 00:01:15.680
 or retrieval quality, not batch size.
 
-00:01:07.490 --> 00:01:11.320
+00:01:15.680 --> 00:01:20.918
 A model that is simply too large for the hardware may never tune well.
 
-00:01:11.320 --> 00:01:14.430
+00:01:20.918 --> 00:01:24.660
 Troubleshooting works best when you separate resource failures, latency problems,
 
-00:01:14.430 --> 00:01:17.165
+00:01:24.660 --> 00:01:27.653
 throughput limits, and model behavior into different hypotheses.
 
-00:01:17.165 --> 00:01:21.595
-A good troubleshooting habit is to reduce the system to a known-good baseline before
+00:01:27.653 --> 00:01:32.143
+A good troubleshooting habit is to reduce the system to a known-good
 
-00:01:21.595 --> 00:01:23.240
-chasing exotic explanations.
+00:01:32.143 --> 00:01:34.014
+baseline before chasing exotic explanations.
 
-00:01:23.240 --> 00:01:26.785
+00:01:34.014 --> 00:01:37.381
 Use a smaller context, lower concurrency, conservative batch settings,
 
-00:01:26.785 --> 00:01:27.880
+00:01:37.381 --> 00:01:38.878
 and a representative prompt.
 
-00:01:27.880 --> 00:01:30.635
+00:01:38.878 --> 00:01:42.245
 If stability returns, increase one dimension at a time.
 
-00:01:30.635 --> 00:01:34.435
-If stability does not return, the issue may be model compatibility, drivers,
+00:01:42.245 --> 00:01:47.483
+If stability does not return, the issue may be model compatibility, drivers, hardware health,
 
-00:01:34.435 --> 00:01:36.230
-hardware health, or the runtime itself.
+00:01:47.483 --> 00:01:48.980
+or the runtime itself.

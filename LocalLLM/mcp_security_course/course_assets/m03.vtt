@@ -1,97 +1,91 @@
 WEBVTT
 
-00:00:00.470 --> 00:00:04.495
+00:00:00.100 --> 00:00:04.956
 Threat modeling an MCP system means separating the instruction path, the data path,
 
-00:00:04.495 --> 00:00:05.760
+00:00:04.956 --> 00:00:06.450
 and the action path.
 
-00:00:05.760 --> 00:00:09.760
+00:00:06.450 --> 00:00:10.185
 The instruction path includes user prompts, system instructions, tool descriptions,
 
-00:00:09.760 --> 00:00:13.220
+00:00:10.185 --> 00:00:13.920
 prompt templates, and external content that may influence model behavior.
 
-00:00:13.220 --> 00:00:17.695
+00:00:13.920 --> 00:00:18.029
 The data path includes resources, files, retrieval results, tool responses, logs,
 
-00:00:17.695 --> 00:00:19.380
+00:00:18.029 --> 00:00:19.149
 and downstream records.
 
-00:00:19.380 --> 00:00:22.835
+00:00:19.149 --> 00:00:24.005
 The action path includes tool calls that can read, write, send, modify, approve,
 
-00:00:22.835 --> 00:00:25.140
+00:00:24.005 --> 00:00:26.246
 or trigger activity in other systems.
 
-00:00:25.140 --> 00:00:28.810
-Prompt injection is a high-level risk where untrusted instructions influence model
+00:00:26.246 --> 00:00:30.729
+Prompt injection is a high-level risk where untrusted instructions influence model behavior
 
-00:00:28.810 --> 00:00:31.520
-behavior in a way the system did not intend.
+00:00:30.729 --> 00:00:33.717
+in a way the system did not intend.
 
-00:00:31.520 --> 00:00:35.170
-Indirect prompt injection is especially relevant because the model may read external
+00:00:33.717 --> 00:00:39.320
+Indirect prompt injection is especially relevant because the model may read external content from documents,
 
-00:00:35.170 --> 00:00:36.470
-content from documents,
-
-00:00:36.470 --> 00:00:41.520
+00:00:39.320 --> 00:00:43.055
 tickets, web pages, emails, repositories, or resources exposed through MCP.
 
-00:00:41.520 --> 00:00:43.435
+00:00:43.055 --> 00:00:46.043
 The training point is not to memorize payloads.
 
-00:00:43.435 --> 00:00:47.625
-The stable lesson is that external content should be treated as data with provenance and
+00:00:46.043 --> 00:00:52.019
+The stable lesson is that external content should be treated as data with provenance and policy,
 
-00:00:47.625 --> 00:00:47.910
-policy,
-
-00:00:47.910 --> 00:00:51.395
+00:00:52.019 --> 00:00:55.381
 not as trusted instructions that can override application rules.
 
-00:00:51.395 --> 00:00:53.160
+00:00:55.381 --> 00:00:57.622
 Tool metadata can also create risk.
 
-00:00:53.160 --> 00:00:57.370
-A malicious or misleading tool description may shape when the model chooses a tool or what
+00:00:57.622 --> 00:01:02.104
+A malicious or misleading tool description may shape when the model chooses
 
-00:00:57.370 --> 00:00:58.375
-arguments it sends.
+00:01:02.104 --> 00:01:04.719
+a tool or what arguments it sends.
 
-00:00:58.375 --> 00:01:01.600
+00:01:04.719 --> 00:01:08.454
 Overbroad permissions can turn a narrow task into broad access.
 
-00:01:01.600 --> 00:01:05.330
-Confused deputy risk appears when a component with legitimate authority is tricked into
+00:01:08.454 --> 00:01:12.936
+Confused deputy risk appears when a component with legitimate authority is tricked
 
-00:01:05.330 --> 00:01:07.821
-using that authority for an unintended purpose.
+00:01:12.936 --> 00:01:15.924
+into using that authority for an unintended purpose.
 
-00:01:07.821 --> 00:01:10.700
+00:01:15.924 --> 00:01:18.913
 Supply-chain risk appears when a server, dependency, package,
 
-00:01:10.700 --> 00:01:13.640
+00:01:18.913 --> 00:01:21.901
 or installation path is trusted without enough review.
 
-00:01:13.640 --> 00:01:17.920
+00:01:21.901 --> 00:01:27.130
 A practical MCP threat model asks three blunt questions: what can the agent read,
 
-00:01:17.920 --> 00:01:19.920
+00:01:27.130 --> 00:01:30.492
 what can it call, and what can it change?
 
-00:01:19.920 --> 00:01:23.090
-Then it tests the answers against misuse scenarios such as data leakage,
+00:01:30.492 --> 00:01:35.721
+Then it tests the answers against misuse scenarios such as data leakage, unauthorized actions,
 
-00:01:23.090 --> 00:01:27.775
-unauthorized actions, stale or untrusted resources, malicious server registration,
+00:01:35.721 --> 00:01:39.456
+stale or untrusted resources, malicious server registration, over-trusting model output,
 
-00:01:27.775 --> 00:01:29.940
-over-trusting model output, and approval bypass.
+00:01:39.456 --> 00:01:40.577
+and approval bypass.
 
-00:01:29.940 --> 00:01:34.504
+00:01:40.577 --> 00:01:44.685
 The resulting controls should live outside the model: authorization checks, allowlists,
 
-00:01:34.504 --> 00:01:37.520
+00:01:44.685 --> 00:01:47.300
 validation, approvals, isolation, logging, and incident response.

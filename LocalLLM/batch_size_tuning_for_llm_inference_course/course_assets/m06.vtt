@@ -1,91 +1,88 @@
 WEBVTT
 
-00:00:00.510 --> 00:00:04.120
+00:00:00.100 --> 00:00:03.629
 Local interactive inference has a different personality than server tuning.
 
-00:00:04.120 --> 00:00:07.960
+00:00:03.629 --> 00:00:08.569
 The user is usually waiting directly in front of the machine, so responsiveness matters.
 
-00:00:07.960 --> 00:00:09.860
+00:00:08.569 --> 00:00:10.333
 A coding assistant, research helper,
 
-00:00:09.860 --> 00:00:13.450
+00:00:10.333 --> 00:00:13.861
 or document analysis workflow may tolerate modest total response time,
 
-00:00:13.450 --> 00:00:17.800
+00:00:13.861 --> 00:00:19.154
 but it feels broken if the first token takes too long or generation stutters badly.
 
-00:00:17.800 --> 00:00:21.080
+00:00:19.154 --> 00:00:23.036
 For this environment, conservative settings are often the right starting point.
 
-00:00:21.080 --> 00:00:24.620
-Choose a batch size and microbatch size that leave memory headroom for the operating
+00:00:23.036 --> 00:00:28.329
+Choose a batch size and microbatch size that leave memory headroom for the operating system,
 
-00:00:24.620 --> 00:00:25.225
-system,
-
-00:00:25.225 --> 00:00:27.280
+00:00:28.329 --> 00:00:30.093
 editor, browser, and other tools.
 
-00:00:27.280 --> 00:00:29.300
+00:00:30.093 --> 00:00:32.210
 If the workload uses long-context prompts,
 
-00:00:29.300 --> 00:00:32.520
+00:00:32.210 --> 00:00:35.033
 test with realistic documents instead of short demos.
 
-00:00:32.520 --> 00:00:36.470
+00:00:35.033 --> 00:00:39.973
 Long prompts can make a configuration that looked stable suddenly feel slow or fragile.
 
-00:00:36.470 --> 00:00:38.745
+00:00:39.973 --> 00:00:42.090
 Balance prompt speed against smooth generation.
 
-00:00:38.745 --> 00:00:41.770
+00:00:42.090 --> 00:00:46.324
 A larger batch setting may speed up ingestion of a long prompt,
 
-00:00:41.770 --> 00:00:45.650
+00:00:46.324 --> 00:00:50.206
 but if it causes memory pressure, thermal throttling, or uneven generation,
 
-00:00:45.650 --> 00:00:47.315
+00:00:50.206 --> 00:00:52.323
 the user experience may be worse.
 
-00:00:47.315 --> 00:00:51.270
-A smaller setting that streams reliably can be better for interactive work than a larger
+00:00:52.323 --> 00:00:56.557
+A smaller setting that streams reliably can be better for interactive work
 
-00:00:51.270 --> 00:00:54.272
-setting that wins one benchmark and then causes pauses.
+00:00:56.557 --> 00:01:00.791
+than a larger setting that wins one benchmark and then causes pauses.
 
-00:00:54.272 --> 00:00:57.960
+00:01:00.791 --> 00:01:04.320
 Document stable settings by model, quantization, context length, and runtime.
 
-00:00:57.960 --> 00:00:59.630
+00:01:04.320 --> 00:01:06.437
 A 7B model, a 13B model,
 
-00:00:59.630 --> 00:01:04.160
+00:01:06.437 --> 00:01:11.024
 and a larger mixture model can behave very differently on the same hardware.
 
-00:01:04.160 --> 00:01:06.220
+00:01:11.024 --> 00:01:13.847
 Treat each configuration as its own operating profile.
 
-00:01:06.220 --> 00:01:10.390
+00:01:13.847 --> 00:01:18.787
 The result should be boring in the best way: predictable startup, predictable memory use,
 
-00:01:10.390 --> 00:01:11.955
+00:01:18.787 --> 00:01:20.199
 and predictable response behavior.
 
-00:01:11.955 --> 00:01:15.160
+00:01:20.199 --> 00:01:23.374
 Local users also notice interruptions that aggregate metrics hide.
 
-00:01:15.160 --> 00:01:17.425
+00:01:23.374 --> 00:01:25.844
 A benchmark may report an acceptable average,
 
-00:01:17.425 --> 00:01:21.960
+00:01:25.844 --> 00:01:30.784
 while the actual assistant pauses at awkward times or makes the editor feel sluggish.
 
-00:01:21.960 --> 00:01:23.930
+00:01:30.784 --> 00:01:32.549
 Treat subjective responsiveness as evidence,
 
-00:01:23.930 --> 00:01:27.940
-then connect it back to measurements such as first-token latency, memory headroom,
+00:01:32.549 --> 00:01:37.489
+then connect it back to measurements such as first-token latency, memory headroom, CPU load,
 
-00:01:27.940 --> 00:01:30.020
-CPU load, and sustained token rate.
+00:01:37.489 --> 00:01:38.900
+and sustained token rate.

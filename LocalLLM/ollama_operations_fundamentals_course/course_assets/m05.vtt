@@ -1,85 +1,85 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.000
+00:00:00.100 --> 00:00:04.681
 When applications call Ollama, they should treat it as a service boundary.
 
-00:00:04.000 --> 00:00:08.000
+00:00:04.681 --> 00:00:08.498
 It has request behavior, latency, errors, model availability, capacity limits,
 
-00:00:08.000 --> 00:00:10.000
+00:00:08.498 --> 00:00:09.643
 and operational assumptions.
 
-00:00:10.000 --> 00:00:14.000
+00:00:09.643 --> 00:00:14.988
 Even if the service is running locally, it can still be unavailable, slow, overloaded,
 
-00:00:14.000 --> 00:00:17.000
+00:00:14.988 --> 00:00:18.041
 misconfigured, or missing the model an application expects.
 
-00:00:17.000 --> 00:00:21.000
+00:00:18.041 --> 00:00:21.477
 API clients need timeouts, error handling, predictable model selection,
 
-00:00:21.000 --> 00:00:23.000
+00:00:21.477 --> 00:00:24.531
 and clear assumptions about streaming or non-streaming behavior.
 
-00:00:23.000 --> 00:00:27.100
-A tool that works during a manual test may behave differently when multiple users are
+00:00:24.531 --> 00:00:29.112
+A tool that works during a manual test may behave differently when
 
-00:00:27.100 --> 00:00:30.280
-active or when a model needs to load before responding.
+00:00:29.112 --> 00:00:33.692
+multiple users are active or when a model needs to load before
 
-00:00:30.280 --> 00:00:34.520
+00:00:33.692 --> 00:00:34.342
+responding.
+
+00:00:34.342 --> 00:00:38.160
 Applications should avoid fragile assumptions about response timing, model availability,
 
-00:00:34.520 --> 00:00:36.000
+00:00:38.160 --> 00:00:39.305
 or unlimited concurrency.
 
-00:00:36.000 --> 00:00:38.890
+00:00:39.305 --> 00:00:42.359
 Teams should decide how model names, prompts, options,
 
-00:00:38.890 --> 00:00:41.000
+00:00:42.359 --> 00:00:45.413
 and user context are passed to the service.
 
-00:00:41.000 --> 00:00:43.500
+00:00:45.413 --> 00:00:48.848
 If a model name is hardcoded in several applications,
 
-00:00:43.500 --> 00:00:45.995
+00:00:48.848 --> 00:00:51.520
 replacing or retiring that model becomes harder.
 
-00:00:45.995 --> 00:00:48.180
+00:00:51.520 --> 00:00:54.193
 If prompt options are scattered across clients,
 
-00:00:48.180 --> 00:00:50.995
+00:00:54.193 --> 00:00:58.010
 support teams may not know which behavior users are seeing.
 
-00:00:50.995 --> 00:00:55.000
+00:00:58.010 --> 00:01:02.972
 A stable integration layer can make model selection and defaults easier to manage.
 
-00:00:55.000 --> 00:00:58.371
-Local APIs still need operational discipline when they support shared tools or business
+00:01:02.972 --> 00:01:08.317
+Local APIs still need operational discipline when they support shared tools or business workflows.
 
-00:00:58.371 --> 00:00:58.947
-workflows.
-
-00:00:58.947 --> 00:01:03.500
+00:01:08.317 --> 00:01:12.516
 Clear integration boundaries help separate application bugs from runtime, model, storage,
 
-00:01:03.500 --> 00:01:05.000
+00:01:12.516 --> 00:01:13.661
 and infrastructure issues.
 
-00:01:05.000 --> 00:01:08.590
-They also give operators a place to document expectations for timeouts, retries,
+00:01:13.661 --> 00:01:19.005
+They also give operators a place to document expectations for timeouts, retries, request size,
 
-00:01:08.590 --> 00:01:11.280
-request size, streaming, and failure behavior.
+00:01:19.005 --> 00:01:20.532
+streaming, and failure behavior.
 
-00:01:11.280 --> 00:01:15.000
+00:01:20.532 --> 00:01:25.113
 Application teams should also decide what user context is appropriate to send.
 
-00:01:15.000 --> 00:01:19.280
+00:01:25.113 --> 00:01:30.075
 A local service can still receive sensitive prompts, file excerpts, or retrieved context.
 
-00:01:19.280 --> 00:01:23.000
+00:01:30.075 --> 00:01:33.893
 Integration code should keep data handling intentional, avoid unnecessary logging,
 
-00:01:23.000 --> 00:01:26.000
+00:01:33.893 --> 00:01:37.060
 and make it clear which workflow owns each request.

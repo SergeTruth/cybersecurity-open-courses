@@ -1,73 +1,73 @@
 WEBVTT
 
-00:00:00.500 --> 00:00:03.375
+00:00:00.100 --> 00:00:03.313
 Capacity planning should begin with measurements from each backend.
 
-00:00:03.375 --> 00:00:07.660
+00:00:03.313 --> 00:00:07.598
 Useful signals include prompt processing speed, generation speed, time to first token,
 
-00:00:07.660 --> 00:00:13.210
+00:00:07.598 --> 00:00:12.239
 total response time, active requests, queue length, CPU use, GPU use, VRAM pressure,
 
-00:00:13.210 --> 00:00:15.050
+00:00:12.239 --> 00:00:14.024
 memory pressure, and failure rate.
 
-00:00:15.050 --> 00:00:18.660
+00:00:14.024 --> 00:00:19.023
 Tokens per second is useful, but it does not describe the whole user experience.
 
-00:00:18.660 --> 00:00:20.520
+00:00:19.023 --> 00:00:20.451
 Context length changes performance.
 
-00:00:20.520 --> 00:00:24.625
-A long document prompt can consume far more memory and processing time than a short chat
+00:00:20.451 --> 00:00:24.735
+A long document prompt can consume far more memory and processing time
 
-00:00:24.625 --> 00:00:25.084
-message.
+00:00:24.735 --> 00:00:26.520
+than a short chat message.
 
-00:00:25.084 --> 00:00:29.150
-A service may benchmark well with small prompts and then struggle with real document
+00:00:26.520 --> 00:00:30.805
+A service may benchmark well with small prompts and then struggle with
 
-00:00:29.150 --> 00:00:30.930
-analysis or coding-agent sessions.
+00:00:30.805 --> 00:00:32.947
+real document analysis or coding-agent sessions.
 
-00:00:30.930 --> 00:00:34.780
-Testing should include the actual types of work the load-balanced endpoint is expected to
+00:00:32.947 --> 00:00:38.302
+Testing should include the actual types of work the load-balanced endpoint is expected to serve.
 
-00:00:34.780 --> 00:00:35.190
-serve.
-
-00:00:35.190 --> 00:00:37.985
+00:00:38.302 --> 00:00:41.159
 Concurrency limits protect the service from slow collapse.
 
-00:00:37.985 --> 00:00:41.825
-Every backend reaches a point where adding more simultaneous requests makes everyone wait
+00:00:41.159 --> 00:00:45.443
+Every backend reaches a point where adding more simultaneous requests makes everyone
 
-00:00:41.825 --> 00:00:43.380
-longer or causes failures.
+00:00:45.443 --> 00:00:47.228
+wait longer or causes failures.
 
-00:00:43.380 --> 00:00:47.535
+00:00:47.228 --> 00:00:51.869
 Runtime batching and parallelism can help in some environments, but they need measurement.
 
-00:00:47.535 --> 00:00:51.400
-More concurrency is not automatically better if it increases time to first token or causes
+00:00:51.869 --> 00:00:56.154
+More concurrency is not automatically better if it increases time to first
 
-00:00:51.400 --> 00:00:52.660
-out-of-memory behavior.
+00:00:56.154 --> 00:00:57.939
+token or causes out-of-memory behavior.
 
-00:00:52.660 --> 00:00:54.295
+00:00:57.939 --> 00:00:59.724
 Warm and cold states matter.
 
-00:00:54.295 --> 00:00:58.360
+00:00:59.724 --> 00:01:05.437
 A model already loaded in memory can respond much faster than one being read from disk.
 
-00:00:58.360 --> 00:01:01.130
+00:01:05.437 --> 00:01:09.007
 A freshly restarted server may be online but not ready.
 
-00:01:01.130 --> 00:01:05.105
+00:01:09.007 --> 00:01:12.577
 Capacity planning should combine benchmark data with representative workloads: chat,
 
-00:01:05.105 --> 00:01:08.540
+00:01:12.577 --> 00:01:15.790
 coding assistants, batch jobs, long contexts, and mixed traffic.
 
-00:01:08.540 --> 00:01:12.880
-The goal is to know when to route, queue, shed load, or ask clients to retry later.
+00:01:15.790 --> 00:01:19.718
+The goal is to know when to route, queue, shed load,
+
+00:01:19.718 --> 00:01:21.860
+or ask clients to retry later.

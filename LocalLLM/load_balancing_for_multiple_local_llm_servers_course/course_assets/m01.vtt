@@ -1,82 +1,82 @@
 WEBVTT
 
-00:00:00.430 --> 00:00:04.380
-Local LLM load balancing means placing one stable endpoint in front of several
+00:00:00.100 --> 00:00:04.225
+Local LLM load balancing means placing one stable endpoint in front of
 
-00:00:04.380 --> 00:00:06.700
-independently running model-serving servers.
+00:00:04.225 --> 00:00:05.943
+several independently running model-serving servers.
 
-00:00:06.700 --> 00:00:11.180
+00:00:05.943 --> 00:00:10.755
 Each backend still has its own runtime, model files, memory limits, network address, logs,
 
-00:00:11.180 --> 00:00:12.180
+00:00:10.755 --> 00:00:11.786
 and failure modes.
 
-00:00:12.180 --> 00:00:14.795
+00:00:11.786 --> 00:00:14.880
 The load balancer does not make those systems disappear.
 
-00:00:14.795 --> 00:00:17.800
+00:00:14.880 --> 00:00:18.317
 It decides which available backend should receive an incoming request,
 
-00:00:17.800 --> 00:00:21.000
+00:00:18.317 --> 00:00:21.410
 while clients continue to call one predictable service address.
 
-00:00:21.000 --> 00:00:23.855
+00:00:21.410 --> 00:00:24.160
 That is different from distributed inference, model parallelism,
 
-00:00:23.855 --> 00:00:27.675
+00:00:24.160 --> 00:00:28.628
 or a true cluster designed to split one inference job across multiple machines.
 
-00:00:27.675 --> 00:00:30.920
+00:00:28.628 --> 00:00:32.066
 A normal load balancer sends one request to one backend.
 
-00:00:30.920 --> 00:00:34.640
+00:00:32.066 --> 00:00:35.159
 Specialized distributed inference can divide work across compute resources,
 
-00:00:34.640 --> 00:00:36.620
+00:00:35.159 --> 00:00:37.221
 but it requires specific runtime support.
 
-00:00:36.620 --> 00:00:40.220
+00:00:37.221 --> 00:00:41.346
 In this course, the focus is practical routing across local inference endpoints,
 
-00:00:40.220 --> 00:00:42.680
+00:00:41.346 --> 00:00:43.752
 not combining machines into one larger model.
 
-00:00:42.680 --> 00:00:46.075
+00:00:43.752 --> 00:00:46.502
 The most important expectation is latency versus throughput.
 
-00:00:46.075 --> 00:00:50.600
-Latency is the delay for one request, such as time to first token and total response time.
+00:00:46.502 --> 00:00:48.908
+Latency is the delay for one request,
 
-00:00:50.600 --> 00:00:52.660
+00:00:48.908 --> 00:00:52.345
+such as time to first token and total response time.
+
+00:00:52.345 --> 00:00:55.782
 Throughput is how much work the service completes over time.
 
-00:00:52.660 --> 00:00:55.725
+00:00:55.782 --> 00:00:59.563
 Two servers can increase total throughput when several requests are active,
 
-00:00:55.725 --> 00:00:59.510
-but they usually do not make a single response twice as fast because one backend is still
+00:00:59.563 --> 00:01:03.687
+but they usually do not make a single response twice as fast
 
-00:00:59.510 --> 00:01:01.120
-generating that response.
+00:01:03.687 --> 00:01:06.437
+because one backend is still generating that response.
 
-00:01:01.120 --> 00:01:05.030
+00:01:06.437 --> 00:01:10.562
 Load balancing is useful for labs, coding assistants, chat UIs, batch jobs,
 
-00:01:05.030 --> 00:01:09.280
-and small team environments because it gives tools one endpoint while the backend pool can
+00:01:10.562 --> 00:01:16.061
+and small team environments because it gives tools one endpoint while the backend pool can change.
 
-00:01:09.280 --> 00:01:09.840
-change.
-
-00:01:09.840 --> 00:01:12.635
+00:01:16.061 --> 00:01:18.811
 Used well, it improves availability and spreads demand.
 
-00:01:12.635 --> 00:01:16.030
+00:01:18.811 --> 00:01:22.592
 Used poorly, it can hide overload, route requests to incompatible models,
 
-00:01:16.030 --> 00:01:17.360
+00:01:22.592 --> 00:01:23.623
 break streaming behavior,
 
-00:01:17.360 --> 00:01:20.840
+00:01:23.623 --> 00:01:27.060
 or expose a sensitive local inference service without proper controls.

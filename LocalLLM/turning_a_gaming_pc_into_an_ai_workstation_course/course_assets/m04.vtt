@@ -1,91 +1,85 @@
 WEBVTT
 
-00:00:00.490 --> 00:00:05.000
+00:00:00.100 --> 00:00:03.997
 Acceleration support determines whether local AI feels interactive or merely possible.
 
-00:00:05.000 --> 00:00:07.120
-NVIDIA hardware commonly uses CUDA,
+00:00:03.997 --> 00:00:08.956
+NVIDIA hardware commonly uses CUDA, a mature compute platform supported by many AI runtimes.
 
-00:00:07.120 --> 00:00:10.260
-a mature compute platform supported by many AI runtimes.
-
-00:00:10.260 --> 00:00:14.135
+00:00:08.956 --> 00:00:13.561
 AMD workflows may use ROCm where the operating system and GPU are supported,
 
-00:00:14.135 --> 00:00:18.678
+00:00:13.561 --> 00:00:17.458
 while Vulkan backends can provide broader cross-vendor acceleration for compatible tools.
 
-00:00:18.678 --> 00:00:22.340
+00:00:17.458 --> 00:00:21.000
 Support varies by model, driver, runtime build, and operating system,
 
-00:00:22.340 --> 00:00:25.480
+00:00:21.000 --> 00:00:24.897
 so a GPU brand alone does not guarantee a working path.
 
-00:00:25.480 --> 00:00:27.185
+00:00:24.897 --> 00:00:27.377
 Think of the stack as a chain.
 
-00:00:27.185 --> 00:00:30.075
+00:00:27.377 --> 00:00:30.565
 The operating system recognizes the GPU through its driver.
 
-00:00:30.075 --> 00:00:33.450
+00:00:30.565 --> 00:00:34.107
 The runtime must be compiled for a compatible acceleration backend.
 
-00:00:33.450 --> 00:00:37.540
-That backend must support the GPU architecture and the numerical formats used by the
+00:00:34.107 --> 00:00:39.421
+That backend must support the GPU architecture and the numerical formats used by the model.
 
-00:00:37.540 --> 00:00:38.050
-model.
+00:00:39.421 --> 00:00:43.318
+If any link is incompatible, the application may fail to load,
 
-00:00:38.050 --> 00:00:42.760
-If any link is incompatible, the application may fail to load, silently run on the CPU,
+00:00:43.318 --> 00:00:47.569
+silently run on the CPU, or offload only part of the workload.
 
-00:00:42.760 --> 00:00:44.360
-or offload only part of the workload.
-
-00:00:44.360 --> 00:00:48.600
+00:00:47.569 --> 00:00:51.820
 Confirm acceleration through runtime logs and GPU utilization rather than assuming that
 
-00:00:48.600 --> 00:00:51.245
+00:00:51.820 --> 00:00:54.299
 installation success means the GPU is active.
 
-00:00:51.245 --> 00:00:55.445
-GPU offload places model layers or operations on the graphics processor while retaining
+00:00:54.299 --> 00:00:58.550
+GPU offload places model layers or operations on the graphics processor while
 
-00:00:55.445 --> 00:00:57.760
-the remainder in system memory and on the CPU.
+00:00:58.550 --> 00:01:02.093
+retaining the remainder in system memory and on the CPU.
 
-00:00:57.760 --> 00:01:00.560
+00:01:02.093 --> 00:01:05.989
 Full offload is usually faster when the model fits in VRAM.
 
-00:01:00.560 --> 00:01:02.935
+00:01:05.989 --> 00:01:08.823
 Partial offload can make a larger model usable,
 
-00:01:02.935 --> 00:01:05.761
+00:01:08.823 --> 00:01:11.657
 but data movement and CPU computation reduce speed.
 
-00:01:05.761 --> 00:01:09.250
+00:01:11.657 --> 00:01:14.846
 CPU-only inference remains a valuable fallback for troubleshooting, embeddings,
 
-00:01:09.250 --> 00:01:12.400
+00:01:14.846 --> 00:01:18.034
 and smaller models, though interactive generation is typically slower.
 
-00:01:12.400 --> 00:01:14.110
+00:01:18.034 --> 00:01:19.097
 Version discipline matters.
 
-00:01:14.110 --> 00:01:18.175
+00:01:19.097 --> 00:01:22.639
 Record the known-good GPU driver, acceleration runtime, and application build.
 
-00:01:18.175 --> 00:01:19.920
+00:01:22.639 --> 00:01:25.119
 Do not update every layer at once.
 
-00:01:19.920 --> 00:01:21.155
+00:01:25.119 --> 00:01:26.890
 When a change is necessary,
 
-00:01:21.155 --> 00:01:25.020
+00:01:26.890 --> 00:01:30.787
 verify one representative model before modifying the rest of the environment.
 
-00:01:25.020 --> 00:01:28.990
-A slightly older stable stack that consistently uses acceleration is more useful than a
+00:01:30.787 --> 00:01:35.038
+A slightly older stable stack that consistently uses acceleration is more useful
 
-00:01:28.990 --> 00:01:32.160
-newer combination whose compatibility has not been proven.
+00:01:35.038 --> 00:01:38.580
+than a newer combination whose compatibility has not been proven.

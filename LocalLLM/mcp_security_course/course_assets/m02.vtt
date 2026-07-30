@@ -1,106 +1,100 @@
 WEBVTT
 
-00:00:00.550 --> 00:00:03.160
+00:00:00.100 --> 00:00:03.093
 Security work starts with mapping the MCP environment.
 
-00:00:03.160 --> 00:00:07.840
-The diagram should show the AI host application, MCP client, MCP servers, tools,
+00:00:03.093 --> 00:00:08.331
+The diagram should show the AI host application, MCP client, MCP servers, tools, resources,
 
-00:00:07.840 --> 00:00:12.480
-resources, prompt templates, user identity, service identity, downstream APIs,
+00:00:08.331 --> 00:00:12.073
+prompt templates, user identity, service identity, downstream APIs, local files,
 
-00:00:12.480 --> 00:00:15.380
-local files, cloud services, secrets, and tokens.
+00:00:12.073 --> 00:00:13.944
+cloud services, secrets, and tokens.
 
-00:00:15.380 --> 00:00:19.560
-It should distinguish local servers from remote servers because local execution and remote
+00:00:13.944 --> 00:00:18.434
+It should distinguish local servers from remote servers because local execution and
 
-00:00:19.560 --> 00:00:21.850
-service access create different risk profiles.
+00:00:18.434 --> 00:00:21.053
+remote service access create different risk profiles.
 
-00:00:21.850 --> 00:00:25.300
+00:00:21.053 --> 00:00:25.542
 A local server may touch files or processes on the user's machine,
 
-00:00:25.300 --> 00:00:28.760
+00:00:25.542 --> 00:00:29.658
 while a remote server may rely on network trust, tenant isolation,
 
-00:00:28.760 --> 00:00:30.250
+00:00:29.658 --> 00:00:31.155
 and external service controls.
 
-00:00:30.250 --> 00:00:34.480
+00:00:31.155 --> 00:00:35.645
 A useful architecture diagram shows data flow, authority flow, and action flow.
 
-00:00:34.480 --> 00:00:38.905
-Data flow answers what information enters the model context, tool arguments, logs,
+00:00:35.645 --> 00:00:40.509
+Data flow answers what information enters the model context, tool arguments, logs, resources,
 
-00:00:38.905 --> 00:00:41.165
-resources, and downstream services.
+00:00:40.509 --> 00:00:41.631
+and downstream services.
 
-00:00:41.165 --> 00:00:44.520
+00:00:41.631 --> 00:00:46.495
 Authority flow answers which identity or token is used when a tool acts.
 
-00:00:44.520 --> 00:00:48.635
-Action flow answers what can be read, written, sent, created, deleted, approved,
+00:00:46.495 --> 00:00:51.733
+Action flow answers what can be read, written, sent, created, deleted, approved, or changed.
 
-00:00:48.635 --> 00:00:49.240
-or changed.
-
-00:00:49.240 --> 00:00:50.889
+00:00:51.733 --> 00:00:54.352
 These flows do not always line up.
 
-00:00:50.889 --> 00:00:53.880
+00:00:54.352 --> 00:00:58.842
 A user may ask a question, the model may propose an action,
 
-00:00:53.880 --> 00:00:57.580
-and a tool may execute under a service account with broader permissions than the user
+00:00:58.842 --> 00:01:04.829
+and a tool may execute under a service account with broader permissions than the user expected.
 
-00:00:57.580 --> 00:00:58.120
-expected.
-
-00:00:58.120 --> 00:01:02.960
+00:01:04.829 --> 00:01:09.318
 Trust boundaries appear between user input, model output, tool metadata, tool execution,
 
-00:01:02.960 --> 00:01:05.240
+00:01:09.318 --> 00:01:11.189
 external content, and downstream systems.
 
-00:01:05.240 --> 00:01:07.380
+00:01:11.189 --> 00:01:13.434
 User input is not automatically safe.
 
-00:01:07.380 --> 00:01:09.740
+00:01:13.434 --> 00:01:15.679
 Model output is not automatically authorized.
 
-00:01:09.740 --> 00:01:14.075
+00:01:15.679 --> 00:01:20.917
 Tool descriptions are not neutral; they influence how the model thinks about tool use.
 
-00:01:14.075 --> 00:01:17.800
+00:01:20.917 --> 00:01:24.285
 External resources may contain stale, misleading, or hostile instructions.
 
-00:01:17.800 --> 00:01:20.200
+00:01:24.285 --> 00:01:26.904
 Downstream systems may enforce their own policies,
 
-00:01:20.200 --> 00:01:25.000
+00:01:26.904 --> 00:01:32.142
 but the MCP application still decides what to request and what context to expose.
 
-00:01:25.000 --> 00:01:27.680
+00:01:32.142 --> 00:01:34.387
 Architecture visibility prevents vague risk discussions.
 
-00:01:27.680 --> 00:01:29.540
+00:01:34.387 --> 00:01:37.380
 Instead of saying an agent can use tools,
 
-00:01:29.540 --> 00:01:33.360
+00:01:37.380 --> 00:01:42.618
 the team can say which host connects to which servers, which tools are available,
 
-00:01:33.360 --> 00:01:37.120
+00:01:42.618 --> 00:01:47.108
 which resources are exposed, which credentials are used, and where approvals happen.
 
-00:01:37.120 --> 00:01:41.160
+00:01:47.108 --> 00:01:50.850
 That clarity supports least privilege, monitoring, incident response, and governance.
 
-00:01:41.160 --> 00:01:44.220
+00:01:50.850 --> 00:01:55.339
 Without it, teams end up trusting the model, the tool, the server,
 
-00:01:44.220 --> 00:01:46.415
+00:01:55.339 --> 00:01:58.333
 and the user interface as one blended boundary,
 
-00:01:46.415 --> 00:01:49.600
+00:01:58.333 --> 00:02:01.700
 which is exactly what MCP security needs to avoid.

@@ -1,76 +1,67 @@
 WEBVTT
 
-00:00:00.414 --> 00:00:04.435
-Quantization lowers the numerical precision used for model weights and sometimes other
+00:00:00.100 --> 00:00:05.392
+Quantization lowers the numerical precision used for model weights and sometimes other data.
 
-00:00:04.435 --> 00:00:05.000
-data.
-
-00:00:05.000 --> 00:00:07.145
+00:00:05.392 --> 00:00:07.835
 It reduces memory and bandwidth pressure,
 
-00:00:07.145 --> 00:00:11.000
+00:00:07.835 --> 00:00:12.720
 making local inference practical on hardware that cannot support the original precision.
 
-00:00:11.000 --> 00:00:15.000
+00:00:12.720 --> 00:00:18.826
 The savings can improve model loading and allow more layers to remain on an accelerator,
 
-00:00:15.000 --> 00:00:18.000
-but scales, metadata, activations, runtime buffers,
+00:00:18.826 --> 00:00:23.711
+but scales, metadata, activations, runtime buffers, and context cache still consume memory.
 
-00:00:18.000 --> 00:00:20.240
-and context cache still consume memory.
-
-00:00:20.240 --> 00:00:23.016
+00:00:23.711 --> 00:00:26.561
 Precision labels describe tradeoffs, not guaranteed outcomes.
 
-00:00:23.016 --> 00:00:27.695
+00:00:26.561 --> 00:00:31.039
 FP16, BF16, INT8, and low-bit formats require compatible hardware and runtimes.
 
-00:00:27.695 --> 00:00:31.195
+00:00:31.039 --> 00:00:34.703
 GGUF and safetensors are containers used in different workflows;
 
-00:00:31.195 --> 00:00:34.000
+00:00:34.703 --> 00:00:37.553
 neither extension alone establishes quality or precision.
 
-00:00:34.000 --> 00:00:37.960
+00:00:37.553 --> 00:00:41.624
 Tokenizers, templates, architecture metadata, and model revisions must remain compatible.
 
-00:00:37.960 --> 00:00:40.005
+00:00:41.624 --> 00:00:44.066
 Q4 is often a useful baseline,
 
-00:00:40.005 --> 00:00:43.000
+00:00:44.066 --> 00:00:48.137
 while lower levels favor fit and higher levels favor fidelity.
 
-00:00:43.000 --> 00:00:48.440
-The right choice depends on model architecture, available VRAM or RAM, context, batch,
+00:00:48.137 --> 00:00:53.836
+The right choice depends on model architecture, available VRAM or RAM, context, batch, offload,
 
-00:00:48.440 --> 00:00:50.985
-offload, kernel support, and task sensitivity.
+00:00:53.836 --> 00:00:55.872
+kernel support, and task sensitivity.
 
-00:00:50.985 --> 00:00:54.340
-A model that barely fits may run worse than a smaller or more compact option with
+00:00:55.872 --> 00:01:00.757
+A model that barely fits may run worse than a smaller or
 
-00:00:54.340 --> 00:00:54.960
-headroom.
+00:01:00.757 --> 00:01:02.792
+more compact option with headroom.
 
-00:00:54.960 --> 00:00:56.046
+00:01:02.792 --> 00:01:04.014
 Choose through testing.
 
-00:00:56.046 --> 00:00:59.150
+00:01:04.014 --> 00:01:08.492
 Compare several variants with the same runtime, prompts, settings, and hardware.
 
-00:00:59.150 --> 00:01:02.960
+00:01:08.492 --> 00:01:12.970
 Measure speed and memory, evaluate factual and task quality, repeat trials,
 
-00:01:02.960 --> 00:01:04.000
+00:01:12.970 --> 00:01:14.598
 and record the configuration.
 
-00:01:04.000 --> 00:01:08.210
-Quantization succeeds when it preserves the quality required by the workload while
+00:01:14.598 --> 00:01:20.297
+Quantization succeeds when it preserves the quality required by the workload while delivering stable,
 
-00:01:08.210 --> 00:01:09.000
-delivering stable,
-
-00:01:09.000 --> 00:01:11.000
+00:01:20.297 --> 00:01:22.740
 maintainable performance on the target system.

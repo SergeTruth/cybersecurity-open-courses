@@ -1,88 +1,94 @@
 WEBVTT
 
-00:00:00.510 --> 00:00:04.000
+00:00:00.100 --> 00:00:04.585
 Identity is one of the most important design choices in an MCP system.
 
-00:00:04.000 --> 00:00:08.000
-A user may ask for an action, the AI host may decide how to assist,
+00:00:04.585 --> 00:00:07.001
+A user may ask for an action,
 
-00:00:08.000 --> 00:00:12.000
+00:00:07.001 --> 00:00:09.761
+the AI host may decide how to assist,
+
+00:00:09.761 --> 00:00:14.591
 an MCP server may expose the tool, and a downstream API may enforce permissions.
 
-00:00:12.000 --> 00:00:15.000
+00:00:14.591 --> 00:00:18.042
 Those layers should not be collapsed into one vague identity.
 
-00:00:15.000 --> 00:00:18.000
+00:00:18.042 --> 00:00:20.457
 User authorization is different from application authorization.
 
-00:00:18.000 --> 00:00:20.955
+00:00:20.457 --> 00:00:23.907
 A service account is different from a delegated user token.
 
-00:00:20.955 --> 00:00:23.955
+00:00:23.907 --> 00:00:27.013
 A model-generated request is different from verified user intent.
 
-00:00:23.955 --> 00:00:28.987
+00:00:27.013 --> 00:00:31.843
 Delegated access lets an application act on behalf of a user within defined limits.
 
-00:00:28.987 --> 00:00:32.560
+00:00:31.843 --> 00:00:34.603
 OAuth-style concepts such as scopes, audience, token lifetime,
 
-00:00:32.560 --> 00:00:36.000
+00:00:34.603 --> 00:00:38.744
 and consent are useful mental models even when the exact implementation varies.
 
-00:00:36.000 --> 00:00:38.955
+00:00:38.744 --> 00:00:41.504
 Scope should describe what an integration can do.
 
-00:00:38.955 --> 00:00:41.215
+00:00:41.504 --> 00:00:44.609
 Audience should constrain where a token can be used.
 
-00:00:41.215 --> 00:00:45.000
+00:00:44.609 --> 00:00:48.405
 Consent should make the user or administrator aware of meaningful access.
 
-00:00:45.000 --> 00:00:47.887
+00:00:48.405 --> 00:00:51.510
 Token lifetime should limit exposure if credentials are mishandled.
 
-00:00:47.887 --> 00:00:50.955
+00:00:51.510 --> 00:00:53.925
 Careless token passthrough can blur trust boundaries.
 
-00:00:50.955 --> 00:00:54.000
+00:00:53.925 --> 00:00:57.721
 If a powerful user token is passed through multiple components, tools,
 
-00:00:54.000 --> 00:00:56.000
+00:00:57.721 --> 00:00:59.446
 or servers without clear policy,
 
-00:00:56.000 --> 00:01:00.150
-components may gain access they do not need and users may not understand what is being
+00:00:59.446 --> 00:01:03.586
+components may gain access they do not need and users may not
 
-00:01:00.150 --> 00:01:00.955
-authorized.
+00:01:03.586 --> 00:01:05.311
+understand what is being authorized.
 
-00:01:00.955 --> 00:01:04.000
+00:01:05.311 --> 00:01:08.417
 Safer designs separate user intent from model-generated action requests,
 
-00:01:04.000 --> 00:01:08.000
+00:01:08.417 --> 00:01:12.902
 issue narrowly scoped credentials where possible, keep secrets out of prompts and logs,
 
-00:01:08.000 --> 00:01:10.955
+00:01:12.902 --> 00:01:16.007
 and enforce authorization at the application or service boundary.
 
-00:01:10.955 --> 00:01:15.000
+00:01:16.007 --> 00:01:20.493
 MCP tools should not gain permission merely because a model asks for them.
 
-00:01:15.000 --> 00:01:19.000
-The model can propose an action, but policy must decide whether the action is allowed.
+00:01:20.493 --> 00:01:22.563
+The model can propose an action,
 
-00:01:19.000 --> 00:01:21.955
+00:01:22.563 --> 00:01:25.668
+but policy must decide whether the action is allowed.
+
+00:01:25.668 --> 00:01:28.429
 High-impact actions should require explicit consent or approval.
 
-00:01:21.955 --> 00:01:25.000
-Permission checks should consider the user, the tool, the resource,
+00:01:28.429 --> 00:01:32.914
+Permission checks should consider the user, the tool, the resource, the requested operation,
 
-00:01:25.000 --> 00:01:29.215
-the requested operation, the data sensitivity, and the current context.
+00:01:32.914 --> 00:01:35.329
+the data sensitivity, and the current context.
 
-00:01:29.215 --> 00:01:31.000
+00:01:35.329 --> 00:01:37.400
 Consent is not a decorative prompt;
 
-00:01:31.000 --> 00:01:33.910
+00:01:37.400 --> 00:01:41.540
 it is a control that helps connect user intent to authorized action.

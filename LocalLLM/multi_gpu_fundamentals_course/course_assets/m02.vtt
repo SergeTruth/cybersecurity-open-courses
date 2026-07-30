@@ -1,88 +1,67 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.440
+00:00:00.100 --> 00:00:04.693
 Model splitting can distribute weights across devices so a larger model fits.
 
-00:00:04.440 --> 00:00:07.320
+00:00:04.693 --> 00:00:08.137
 Layer splitting assigns groups of layers to different GPUs.
 
-00:00:07.320 --> 00:00:10.960
-Other parallel methods divide operations more tightly and may require frequent
+00:00:08.137 --> 00:00:12.730
+Other parallel methods divide operations more tightly and may require frequent communication.
 
-00:00:10.960 --> 00:00:12.375
-communication.
-
-00:00:12.375 --> 00:00:13.560
+00:00:12.730 --> 00:00:14.644
 Independent placement can be simpler:
 
-00:00:13.560 --> 00:00:17.395
+00:00:14.644 --> 00:00:19.237
 one GPU serves a general model while another serves code, vision, embeddings,
 
-00:00:17.395 --> 00:00:19.230
+00:00:19.237 --> 00:00:21.150
 or a second user queue.
 
-00:00:19.230 --> 00:00:21.220
-Failure and performance remain more isolated,
+00:00:21.150 --> 00:00:26.508
+Failure and performance remain more isolated, but each workload must fit its assigned device.
 
-00:00:21.220 --> 00:00:23.560
-but each workload must fit its assigned device.
+00:00:26.508 --> 00:00:32.249
+Serving multiple users often benefits from replicas or request routing rather than splitting every request.
 
-00:00:23.560 --> 00:00:27.110
-Serving multiple users often benefits from replicas or request routing rather than
+00:00:32.249 --> 00:00:36.459
+This can increase throughput and availability while preserving predictable single-GPU behavior.
 
-00:00:27.110 --> 00:00:28.600
-splitting every request.
-
-00:00:28.600 --> 00:00:32.435
-This can increase throughput and availability while preserving predictable single-GPU
-
-00:00:32.435 --> 00:00:33.100
-behavior.
-
-00:00:33.100 --> 00:00:36.440
+00:00:36.459 --> 00:00:39.904
 It also requires queueing, load balancing, and capacity controls.
 
-00:00:36.440 --> 00:00:40.540
+00:00:39.904 --> 00:00:44.114
 Batch workloads can process several documents, images, or prompts in parallel.
 
-00:00:40.540 --> 00:00:44.095
+00:00:44.114 --> 00:00:47.176
 Vision-and-text pipelines may assign image processing, language generation,
 
-00:00:44.095 --> 00:00:47.060
+00:00:47.176 --> 00:00:50.238
 and post-processing according to device capability and memory.
 
-00:00:47.060 --> 00:00:50.915
-Tradeoffs include motherboard and chassis constraints, power, heat, fan noise,
+00:00:50.238 --> 00:00:54.831
+Tradeoffs include motherboard and chassis constraints, power, heat, fan noise, purchase cost,
 
-00:00:50.915 --> 00:00:55.300
-purchase cost, idle consumption, software support, driver compatibility, monitoring,
+00:00:54.831 --> 00:00:58.275
+idle consumption, software support, driver compatibility, monitoring, and recovery.
 
-00:00:55.300 --> 00:00:56.355
-and recovery.
-
-00:00:56.355 --> 00:00:59.909
+00:00:58.275 --> 00:01:03.251
 Adding a second GPU can expose a weak power supply or airflow design.
 
-00:00:59.909 --> 00:01:04.430
-Define success numerically: required model and context, users, requests per minute,
+00:01:03.251 --> 00:01:07.843
+Define success numerically: required model and context, users, requests per minute, latency,
 
-00:01:04.430 --> 00:01:08.210
-latency, throughput, memory margin, power budget, uptime, and cost.
+00:01:07.843 --> 00:01:10.905
+throughput, memory margin, power budget, uptime, and cost.
 
-00:01:08.210 --> 00:01:09.255
-Without that baseline,
+00:01:10.905 --> 00:01:15.881
+Without that baseline, multi-GPU becomes an expensive experiment with no clear pass condition.
 
-00:01:09.255 --> 00:01:13.055
-multi-GPU becomes an expensive experiment with no clear pass condition.
-
-00:01:13.055 --> 00:01:15.820
+00:01:15.881 --> 00:01:18.177
 Separate memory-capacity need from compute-throughput need.
 
-00:01:15.820 --> 00:01:20.079
-Adding VRAM through splitting may allow a model to run while leaving generation limited by
+00:01:18.177 --> 00:01:24.301
+Adding VRAM through splitting may allow a model to run while leaving generation limited by transfers,
 
-00:01:20.079 --> 00:01:20.581
-transfers,
-
-00:01:20.581 --> 00:01:23.480
+00:01:24.301 --> 00:01:26.980
 synchronization, or the least capable participating device.

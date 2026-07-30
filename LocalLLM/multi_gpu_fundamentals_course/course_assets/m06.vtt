@@ -1,76 +1,76 @@
 WEBVTT
 
-00:00:00.430 --> 00:00:02.480
+00:00:00.100 --> 00:00:02.491
 Tokens per second measures generation rate,
 
-00:00:02.480 --> 00:00:05.195
+00:00:02.491 --> 00:00:04.882
 while prompt-processing speed measures input evaluation.
 
-00:00:05.195 --> 00:00:08.670
+00:00:04.882 --> 00:00:09.266
 Time to first token and end-to-end latency matter for interactive use.
 
-00:00:08.670 --> 00:00:11.090
+00:00:09.266 --> 00:00:12.055
 Throughput matters for batches and multiple users.
 
-00:00:11.090 --> 00:00:14.570
+00:00:12.055 --> 00:00:15.642
 Splitting one model can increase capacity without increasing speed.
 
-00:00:14.570 --> 00:00:17.740
+00:00:15.642 --> 00:00:19.228
 Each token may cross device boundaries or require synchronization.
 
-00:00:17.740 --> 00:00:19.500
+00:00:19.228 --> 00:00:20.822
 If communication dominates compute,
 
-00:00:19.500 --> 00:00:22.515
+00:00:20.822 --> 00:00:25.206
 adding a GPU can leave performance unchanged or make it worse.
 
-00:00:22.515 --> 00:00:27.605
+00:00:25.206 --> 00:00:29.988
 PCI Express bandwidth and topology affect movement among CPU memory and GPUs.
 
-00:00:27.605 --> 00:00:30.313
+00:00:29.988 --> 00:00:33.574
 Devices may share lanes or connect through different paths.
 
-00:00:30.313 --> 00:00:34.240
+00:00:33.574 --> 00:00:37.559
 Fast peer-to-peer features are hardware, platform, driver, and runtime dependent.
 
-00:00:34.240 --> 00:00:38.655
+00:00:37.559 --> 00:00:41.943
 GPU utilization should be interpreted with memory, clocks, power, temperature, transfer,
 
-00:00:38.655 --> 00:00:39.320
+00:00:41.943 --> 00:00:43.139
 and queue data.
 
-00:00:39.320 --> 00:00:44.080
-One GPU at low utilization may be waiting for another device or for communication rather
+00:00:43.139 --> 00:00:47.921
+One GPU at low utilization may be waiting for another device or
 
-00:00:44.080 --> 00:00:44.795
-than lacking work.
+00:00:47.921 --> 00:00:50.312
+for communication rather than lacking work.
 
-00:00:44.795 --> 00:00:47.731
+00:00:50.312 --> 00:00:53.500
 Thermal throttling and power limits reduce sustained performance.
 
-00:00:47.731 --> 00:00:49.760
+00:00:53.500 --> 00:00:56.289
 Test long enough to reach stable temperatures.
 
-00:00:49.760 --> 00:00:53.910
+00:00:56.289 --> 00:01:01.868
 A short benchmark after a cold boot can hide airflow imbalance and power behavior.
 
-00:00:53.910 --> 00:00:58.800
+00:01:01.868 --> 00:01:06.252
 Measure the intended workload: model, quantization, context, batch, users, prompt length,
 
-00:00:58.800 --> 00:01:00.118
+00:01:06.252 --> 00:01:07.846
 output, and service layer.
 
-00:01:00.118 --> 00:01:04.140
+00:01:07.846 --> 00:01:11.432
 Compare single GPU, different splits, replicas, and separate-job placement.
 
-00:01:04.140 --> 00:01:07.230
+00:01:11.432 --> 00:01:14.620
 Multi-GPU earns its complexity only through measured benefit.
 
-00:01:07.230 --> 00:01:10.190
+00:01:14.620 --> 00:01:17.410
 Report variability and percentiles, not only averages.
 
-00:01:10.190 --> 00:01:13.130
+00:01:17.410 --> 00:01:20.598
 Synchronization stalls, model loading, cache growth, queue bursts,
 
-00:01:13.130 --> 00:01:18.080
+00:01:20.598 --> 00:01:25.380
 and thermal behavior may create occasional long responses that dominate user experience.

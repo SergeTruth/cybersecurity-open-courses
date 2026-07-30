@@ -1,145 +1,136 @@
 WEBVTT
 
-00:00:00.120 --> 00:00:03.200
+00:00:00.100 --> 00:00:03.545
 Querying is where a hunt hypothesis becomes an evidence search.
 
-00:00:03.200 --> 00:00:07.260
+00:00:03.545 --> 00:00:08.367
 The exact syntax depends on the SIEM, data lake, EDR console, or log platform,
 
-00:00:07.260 --> 00:00:09.515
+00:00:08.367 --> 00:00:10.089
 but the thinking is provider-neutral.
 
-00:00:09.515 --> 00:00:13.268
+00:00:10.089 --> 00:00:14.223
 Start with the behavior, identify the required fields, select the data source,
 
-00:00:13.268 --> 00:00:14.560
+00:00:14.223 --> 00:00:15.600
 define the time window,
 
-00:00:14.560 --> 00:00:18.460
+00:00:15.600 --> 00:00:20.767
 and write a query or filter that returns enough context to reason about the event.
 
-00:00:18.460 --> 00:00:22.845
-A good query is not just a string that produces results. It is a documented test of a hunt
+00:00:20.767 --> 00:00:24.556
+A good query is not just a string that produces results.
 
-00:00:22.845 --> 00:00:23.270
-idea.
+00:00:24.556 --> 00:00:27.656
+It is a documented test of a hunt idea.
 
-00:00:23.270 --> 00:00:26.510
+00:00:27.656 --> 00:00:31.445
 Pivots help the analyst move from one clue to related evidence.
 
-00:00:26.510 --> 00:00:30.480
-A host-to-user pivot asks which identities were active on a system around a time of
+00:00:31.445 --> 00:00:36.957
+A host-to-user pivot asks which identities were active on a system around a time of interest.
 
-00:00:30.480 --> 00:00:31.090
-interest.
+00:00:36.957 --> 00:00:42.123
+A user-to-source-IP pivot asks where an account authenticated from and whether that location is normal.
 
-00:00:31.090 --> 00:00:35.260
-A user-to-source-IP pivot asks where an account authenticated from and whether that
+00:00:42.123 --> 00:00:45.223
+A process-to-parent-process pivot asks what launched a suspicious command.
 
-00:00:35.260 --> 00:00:36.285
-location is normal.
+00:00:45.223 --> 00:00:48.324
+A domain-to-DNS-clients pivot asks which systems resolved a destination.
 
-00:00:36.285 --> 00:00:40.095
-A process-to-parent-process pivot asks what launched a suspicious command. A
+00:00:48.324 --> 00:00:51.079
+A hash-to-endpoints pivot asks where a file appeared.
 
-00:00:40.095 --> 00:00:43.920
-domain-to-DNS-clients pivot asks which systems resolved a destination.
+00:00:51.079 --> 00:00:54.868
+An alert-to-timeline pivot asks what happened before and after a signal.
 
-00:00:43.920 --> 00:00:48.340
-A hash-to-endpoints pivot asks where a file appeared. An alert-to-timeline pivot asks what
+00:00:54.868 --> 00:00:58.313
+Each pivot should have a purpose tied to the hypothesis.
 
-00:00:48.340 --> 00:00:50.010
-happened before and after a signal.
+00:00:58.313 --> 00:01:01.413
+Noise reduction is necessary, but it can be dangerous.
 
-00:00:50.010 --> 00:00:54.190
-Each pivot should have a purpose tied to the hypothesis. Noise reduction is necessary,
+00:01:01.413 --> 00:01:04.857
+Large environments produce routine administrative tools, software updates, cloud automation,
 
-00:00:54.190 --> 00:00:55.315
-but it can be dangerous.
+00:01:04.857 --> 00:01:09.335
+service accounts, vulnerability scanners, and user behavior that may look odd in isolation.
 
-00:00:55.315 --> 00:00:58.890
-Large environments produce routine administrative tools, software updates,
-
-00:00:58.890 --> 00:01:01.915
-cloud automation, service accounts, vulnerability scanners,
-
-00:01:01.915 --> 00:01:04.360
-and user behavior that may look odd in isolation.
-
-00:01:04.360 --> 00:01:08.460
+00:01:09.335 --> 00:01:13.469
 Filters help remove known benign patterns, but over-filtering can hide the signal.
 
-00:01:08.460 --> 00:01:10.425
-If you exclude all administrative accounts,
+00:01:13.469 --> 00:01:17.602
+If you exclude all administrative accounts, you may miss compromised administrator activity.
 
-00:01:10.425 --> 00:01:12.810
-you may miss compromised administrator activity.
-
-00:01:12.810 --> 00:01:16.235
+00:01:17.602 --> 00:01:22.080
 If you exclude all internal tools, you may miss misuse of those tools.
 
-00:01:16.235 --> 00:01:20.620
+00:01:22.080 --> 00:01:26.902
 A better approach is to filter deliberately and document why each exclusion is reasonable.
 
-00:01:20.620 --> 00:01:22.650
+00:01:26.902 --> 00:01:28.969
 Baselines are useful for reducing noise.
 
-00:01:22.650 --> 00:01:26.720
-Instead of asking whether a process ever runs, ask whether it runs on this host type,
+00:01:28.969 --> 00:01:31.725
+Instead of asking whether a process ever runs,
 
-00:01:26.720 --> 00:01:29.280
-under this parent, by this user, during this time window.
+00:01:31.725 --> 00:01:36.547
+ask whether it runs on this host type, under this parent, by this user,
 
-00:01:29.280 --> 00:01:31.860
+00:01:36.547 --> 00:01:37.925
+during this time window.
+
+00:01:37.925 --> 00:01:41.025
 Instead of asking whether a domain is rare globally,
 
-00:01:31.860 --> 00:01:35.050
+00:01:41.025 --> 00:01:45.159
 ask whether it is rare for this business unit or endpoint group.
 
-00:01:35.050 --> 00:01:36.505
-Baselines are not perfect proof,
+00:01:45.159 --> 00:01:49.292
+Baselines are not perfect proof, but they help separate ordinary from unusual.
 
-00:01:36.505 --> 00:01:40.090
-but they help separate ordinary from unusual. Save queries and assumptions.
+00:01:49.292 --> 00:01:50.670
+Save queries and assumptions.
 
-00:01:40.090 --> 00:01:42.320
+00:01:50.670 --> 00:01:53.425
 A hunt should be repeatable by another analyst.
 
-00:01:42.320 --> 00:01:46.550
+00:01:53.425 --> 00:01:57.903
 Save the query text, data source, time window, filters, field names, known exclusions,
 
-00:01:46.550 --> 00:01:47.735
+00:01:57.903 --> 00:01:58.937
 and any limitations.
 
-00:01:47.735 --> 00:01:49.620
+00:01:58.937 --> 00:02:02.037
 If a field name changes or a parser breaks,
 
-00:01:49.620 --> 00:01:52.360
+00:02:02.037 --> 00:02:05.481
 future reviewers need to know what the query depended on.
 
-00:01:52.360 --> 00:01:56.720
-The beginner mistake is to treat querying as the hunt itself. Querying is a tool.
+00:02:05.481 --> 00:02:09.270
+The beginner mistake is to treat querying as the hunt itself.
 
-00:01:56.720 --> 00:01:59.860
+00:02:09.270 --> 00:02:10.648
+Querying is a tool.
+
+00:02:10.648 --> 00:02:14.782
 The hunt is the structured process of asking a question, collecting evidence,
 
-00:01:59.860 --> 00:02:02.270
-pivoting carefully, reducing noise responsibly,
+00:02:14.782 --> 00:02:18.571
+pivoting carefully, reducing noise responsibly, and documenting what the evidence supports.
 
-00:02:02.270 --> 00:02:04.185
-and documenting what the evidence supports.
-
-00:02:04.185 --> 00:02:07.480
+00:02:18.571 --> 00:02:22.015
 Provider-neutral thinking helps when teams use more than one tool.
 
-00:02:07.480 --> 00:02:11.045
+00:02:22.015 --> 00:02:26.149
 One SIEM may call a field process_name, another may call it image,
 
-00:02:11.045 --> 00:02:14.240
+00:02:26.149 --> 00:02:30.626
 and an EDR console may show the same concept in a different panel.
 
-00:02:14.240 --> 00:02:17.950
-The hunter should understand the concept behind the field. That understanding makes the
+00:02:30.626 --> 00:02:33.727
+The hunter should understand the concept behind the field.
 
-00:02:17.950 --> 00:02:20.760
-hunt portable and reduces dependence on memorized syntax.
+00:02:33.727 --> 00:02:37.860
+That understanding makes the hunt portable and reduces dependence on memorized syntax.

@@ -1,79 +1,79 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.040
+00:00:00.100 --> 00:00:03.615
 Local inference is frequently constrained by memory capacity and bandwidth.
 
-00:00:04.040 --> 00:00:08.610
-A full-precision language model may exceed the VRAM of a consumer GPU or the system RAM of
+00:00:03.615 --> 00:00:07.834
+A full-precision language model may exceed the VRAM of a consumer GPU
 
-00:00:08.610 --> 00:00:10.060
-a small computer.
+00:00:07.834 --> 00:00:10.646
+or the system RAM of a small computer.
 
-00:00:10.060 --> 00:00:11.710
+00:00:10.646 --> 00:00:12.404
 Quantization reduces the weight footprint,
 
-00:00:11.710 --> 00:00:15.305
+00:00:12.404 --> 00:00:16.974
 allowing a larger parameter count or more operating headroom on the same hardware.
 
-00:00:15.305 --> 00:00:18.770
+00:00:16.974 --> 00:00:20.490
 That headroom matters because the runtime, context cache, operating system,
 
-00:00:18.770 --> 00:00:21.085
+00:00:20.490 --> 00:00:22.599
 and other applications also need memory.
 
-00:00:21.085 --> 00:00:22.340
+00:00:22.599 --> 00:00:23.653
 Fit changes performance.
 
-00:00:22.340 --> 00:00:24.810
+00:00:23.653 --> 00:00:26.817
 When a quantized model remains entirely on the GPU,
 
-00:00:24.810 --> 00:00:28.230
+00:00:26.817 --> 00:00:29.981
 generation can avoid repeated transfers to slower system memory.
 
-00:00:28.230 --> 00:00:29.245
+00:00:29.981 --> 00:00:31.036
 On CPU-only systems,
 
-00:00:29.245 --> 00:00:33.375
+00:00:31.036 --> 00:00:35.958
 smaller weights reduce RAM demand and the amount of data moved through memory channels.
 
-00:00:33.375 --> 00:00:36.915
+00:00:35.958 --> 00:00:40.176
 Loading and startup can improve because fewer bytes are read from storage.
 
-00:00:36.915 --> 00:00:39.680
+00:00:40.176 --> 00:00:42.637
 These benefits vary with hardware and runtime;
 
-00:00:39.680 --> 00:00:42.920
+00:00:42.637 --> 00:00:46.152
 compact values still have to be unpacked and processed efficiently.
 
-00:00:42.920 --> 00:00:46.640
+00:00:46.152 --> 00:00:50.722
 Quantization expands practical choice, but it does not make every large model sensible.
 
-00:00:46.640 --> 00:00:49.460
-A heavily compressed model may fit while responding slowly,
+00:00:50.722 --> 00:00:55.293
+A heavily compressed model may fit while responding slowly, leaving little context headroom,
 
-00:00:49.460 --> 00:00:52.625
-leaving little context headroom, or losing too much task quality.
+00:00:55.293 --> 00:00:57.402
+or losing too much task quality.
 
-00:00:52.625 --> 00:00:57.030
-A smaller model at a healthier precision may be faster and more accurate for a specific
+00:00:57.402 --> 00:01:01.620
+A smaller model at a healthier precision may be faster and more
 
-00:00:57.030 --> 00:00:57.796
-job.
+00:01:01.620 --> 00:01:03.378
+accurate for a specific job.
 
-00:00:57.796 --> 00:01:01.240
+00:01:03.378 --> 00:01:07.245
 Capability depends on model design and training, not parameter count alone.
 
-00:01:01.240 --> 00:01:05.640
+00:01:07.245 --> 00:01:11.815
 Think in terms of a complete resource budget: weights, context, cache, batch, runtime,
 
-00:01:05.640 --> 00:01:06.775
+00:01:11.815 --> 00:01:12.870
 and concurrent work.
 
-00:01:06.775 --> 00:01:10.115
+00:01:12.870 --> 00:01:17.440
 Select a quantization that fits with margin and test it on real prompts.
 
-00:01:10.115 --> 00:01:13.240
+00:01:17.440 --> 00:01:21.658
 The purpose is not to squeeze the largest possible file through startup.
 
-00:01:13.240 --> 00:01:17.640
+00:01:21.658 --> 00:01:26.580
 It is to make useful local AI responsive, stable, and affordable on available hardware.

@@ -1,82 +1,70 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.070
+00:00:00.100 --> 00:00:03.126
 Model weights, visual components, context buffers, image tokens,
 
-00:00:04.070 --> 00:00:06.370
+00:00:03.126 --> 00:00:05.395
 and runtime overhead all consume memory.
 
-00:00:06.370 --> 00:00:10.920
-Available VRAM or unified memory often determines which model and quantization can run
+00:00:05.395 --> 00:00:11.446
+Available VRAM or unified memory often determines which model and quantization can run without heavy offloading.
 
-00:00:10.920 --> 00:00:12.100
-without heavy offloading.
-
-00:00:12.100 --> 00:00:16.019
+00:00:11.446 --> 00:00:15.985
 System RAM still matters when weights or caches spill beyond accelerator memory.
 
-00:00:16.019 --> 00:00:19.900
+00:00:15.985 --> 00:00:19.389
 NVIDIA GPUs have broad local-inference support across many runtimes.
 
-00:00:19.900 --> 00:00:23.995
+00:00:19.389 --> 00:00:23.549
 AMD support depends more on operating system, backend, and model format.
 
-00:00:23.995 --> 00:00:27.490
+00:00:23.549 --> 00:00:27.331
 Apple Silicon uses unified memory shared by CPU and GPU,
 
-00:00:27.490 --> 00:00:30.640
-which can make larger models practical but also means the operating system and
+00:00:27.331 --> 00:00:31.870
+which can make larger models practical but also means the operating system
 
-00:00:30.640 --> 00:00:32.405
-applications compete for the same pool.
+00:00:31.870 --> 00:00:34.517
+and applications compete for the same pool.
 
-00:00:32.405 --> 00:00:36.420
-CPU inference is widely available but may be too slow for larger models or frequent
+00:00:34.517 --> 00:00:40.569
+CPU inference is widely available but may be too slow for larger models or frequent images.
 
-00:00:36.420 --> 00:00:37.016
-images.
-
-00:00:37.016 --> 00:00:41.330
+00:00:40.569 --> 00:00:45.107
 A GPU or accelerator improves throughput when the runtime supports it correctly.
 
-00:00:41.330 --> 00:00:42.800
+00:00:45.107 --> 00:00:46.242
 Measure actual utilization;
 
-00:00:42.800 --> 00:00:46.615
+00:00:46.242 --> 00:00:50.402
 unsupported operations can fall back to the CPU and change performance.
 
-00:00:46.615 --> 00:00:50.000
+00:00:50.402 --> 00:00:54.941
 Hardware tiers such as 4 to 8 gigabytes, 12 to 16 gigabytes,
 
-00:00:50.000 --> 00:00:53.000
-and 24 gigabytes or more are useful planning categories,
+00:00:54.941 --> 00:00:59.858
+and 24 gigabytes or more are useful planning categories, not permanent model recommendations.
 
-00:00:53.000 --> 00:00:54.800
-not permanent model recommendations.
-
-00:00:54.800 --> 00:00:57.800
+00:00:59.858 --> 00:01:02.883
 Smaller tiers favor compact models and lower quantization.
 
-00:00:57.800 --> 00:01:00.800
+00:01:02.883 --> 00:01:06.287
 Larger tiers support more capacity, but still need headroom.
 
-00:01:00.800 --> 00:01:04.100
+00:01:06.287 --> 00:01:10.069
 Larger models can improve some tasks while increasing latency, power,
 
-00:01:04.100 --> 00:01:06.000
+00:01:10.069 --> 00:01:12.339
 and failure risk under memory pressure.
 
-00:01:06.000 --> 00:01:09.418
+00:01:12.339 --> 00:01:16.877
 Concurrency and image size can matter more than a single prompt benchmark.
 
-00:01:09.418 --> 00:01:13.400
-Shortlist configurations that fit comfortably, then test speed, memory, temperature,
+00:01:16.877 --> 00:01:21.038
+Shortlist configurations that fit comfortably, then test speed, memory, temperature, power,
 
-00:01:13.400 --> 00:01:15.800
-power, and completion under representative load.
+00:01:21.038 --> 00:01:22.929
+and completion under representative load.
 
-00:01:15.800 --> 00:01:19.815
-The right size is the smallest configuration that meets quality and reliability needs with
-
-00:01:19.815 --> 00:01:21.000
-operational headroom.
+00:01:22.929 --> 00:01:28.980
+The right size is the smallest configuration that meets quality and reliability needs with operational headroom.

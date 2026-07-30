@@ -1,88 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.300
+00:00:00.100 --> 00:00:03.204
 Model storage should balance control with startup performance.
 
-00:00:03.300 --> 00:00:07.300
+00:00:03.204 --> 00:00:07.084
 A managed repository can hold approved model versions, checksums, licenses,
 
-00:00:07.300 --> 00:00:08.835
+00:00:07.084 --> 00:00:08.248
 and configuration metadata.
 
-00:00:08.835 --> 00:00:13.475
-Workers can copy approved artifacts into local SSD caches so inference does not depend on
+00:00:08.248 --> 00:00:12.905
+Workers can copy approved artifacts into local SSD caches so inference does
 
-00:00:13.475 --> 00:00:15.400
-sustained access to shared storage.
+00:00:12.905 --> 00:00:16.009
+not depend on sustained access to shared storage.
 
-00:00:15.400 --> 00:00:17.600
+00:00:16.009 --> 00:00:17.949
 Define cache size, eviction policy,
 
-00:00:17.600 --> 00:00:21.385
-and how a worker verifies that its local copy matches the version advertised to the
+00:00:17.949 --> 00:00:24.157
+and how a worker verifies that its local copy matches the version advertised to the router.
 
-00:00:21.385 --> 00:00:21.900
-router.
-
-00:00:21.900 --> 00:00:25.800
+00:00:24.157 --> 00:00:28.813
 Use explicit version identifiers rather than a mutable label such as latest.
 
-00:00:25.800 --> 00:00:29.135
+00:00:28.813 --> 00:00:31.529
 Model weights, quantization, tokenizer, prompt template, runtime,
 
-00:00:29.135 --> 00:00:31.649
+00:00:31.529 --> 00:00:33.857
 and serving parameters together influence behavior.
 
-00:00:31.649 --> 00:00:35.875
-Record that combination so results can be reproduced and a problematic release can be
+00:00:33.857 --> 00:00:40.066
+Record that combination so results can be reproduced and a problematic release can be rolled back.
 
-00:00:35.875 --> 00:00:36.500
-rolled back.
-
-00:00:36.500 --> 00:00:40.500
+00:00:40.066 --> 00:00:43.558
 Stage model changes on limited capacity, run representative evaluations,
 
-00:00:40.500 --> 00:00:43.600
+00:00:43.558 --> 00:00:47.050
 and promote only after functional and performance checks pass.
 
-00:00:43.600 --> 00:00:46.365
+00:00:47.050 --> 00:00:49.766
 Separate model artifacts from private operational data.
 
-00:00:46.365 --> 00:00:49.850
+00:00:49.766 --> 00:00:52.482
 Prompts, outputs, uploaded files, embeddings, vector indexes,
 
-00:00:49.850 --> 00:00:53.695
+00:00:52.482 --> 00:00:57.526
 and logs can contain sensitive information even when the model weights are public.
 
-00:00:53.695 --> 00:00:56.620
+00:00:57.526 --> 00:00:59.854
 Apply access controls, retention schedules, encryption,
 
-00:00:56.620 --> 00:00:59.400
+00:00:59.854 --> 00:01:02.571
 and backup policies according to data classification.
 
-00:00:59.400 --> 00:01:03.575
-Avoid placing private data in a broadly readable model share simply because every worker
+00:01:02.571 --> 00:01:07.227
+Avoid placing private data in a broadly readable model share simply because
 
-00:01:03.575 --> 00:01:04.464
-can access it.
+00:01:07.227 --> 00:01:09.167
+every worker can access it.
 
-00:01:04.464 --> 00:01:09.200
+00:01:09.167 --> 00:01:13.435
 Back up what cannot be recreated: configuration, routing policy, secrets references,
 
-00:01:09.200 --> 00:01:12.464
+00:01:13.435 --> 00:01:16.151
 evaluation results, metadata, and authorized private datasets.
 
-00:01:12.464 --> 00:01:16.600
-Large public model files may be restored from trusted sources if their exact versions and
+00:01:16.151 --> 00:01:20.807
+Large public model files may be restored from trusted sources if their
 
-00:01:16.600 --> 00:01:17.800
-hashes are recorded.
+00:01:20.807 --> 00:01:23.135
+exact versions and hashes are recorded.
 
-00:01:17.800 --> 00:01:22.105
+00:01:23.135 --> 00:01:27.404
 Test restoration rather than equating a completed backup job with recoverability.
 
-00:01:22.105 --> 00:01:26.295
+00:01:27.404 --> 00:01:33.224
 Storage design succeeds when a new or recovered node can obtain the right model safely,
 
-00:01:26.295 --> 00:01:29.500
+00:01:33.224 --> 00:01:35.940
 start predictably, and avoid exposing unrelated data.

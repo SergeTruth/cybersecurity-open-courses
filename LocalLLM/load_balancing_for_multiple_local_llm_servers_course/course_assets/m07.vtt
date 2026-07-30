@@ -1,70 +1,73 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.615
+00:00:00.100 --> 00:00:02.333
 A load balancer can improve reliability,
 
-00:00:02.615 --> 00:00:05.720
+00:00:02.333 --> 00:00:06.054
 but it can also hide problems until users feel them.
 
-00:00:05.720 --> 00:00:08.970
+00:00:06.054 --> 00:00:10.892
 Health checks should reflect real readiness: the process is alive, the API responds,
 
-00:00:08.970 --> 00:00:13.400
-the needed model is available, and recent requests are not failing at an unhealthy rate.
+00:00:10.892 --> 00:00:12.753
+the needed model is available,
 
-00:00:13.400 --> 00:00:17.800
+00:00:12.753 --> 00:00:16.474
+and recent requests are not failing at an unhealthy rate.
+
+00:00:16.474 --> 00:00:22.056
 A server with an open port but constant generation timeouts is not a healthy target.
 
-00:00:17.800 --> 00:00:19.840
+00:00:22.056 --> 00:00:25.034
 Monitor both the front endpoint and every backend.
 
-00:00:19.840 --> 00:00:23.610
+00:00:25.034 --> 00:00:29.127
 At the gateway, track request volume, response times, status codes, timeouts,
 
-00:00:23.610 --> 00:00:25.785
+00:00:29.127 --> 00:00:30.616
 streaming interruptions, and queues.
 
-00:00:25.785 --> 00:00:29.675
-On each backend, track resource pressure, active requests, model-loaded status,
+00:00:30.616 --> 00:00:35.081
+On each backend, track resource pressure, active requests, model-loaded status, runtime errors,
 
-00:00:29.675 --> 00:00:32.145
-runtime errors, restarts, and failures.
+00:00:35.081 --> 00:00:36.198
+restarts, and failures.
 
-00:00:32.145 --> 00:00:35.920
+00:00:36.198 --> 00:00:41.036
 Without backend visibility, you may know the service is slow without knowing why.
 
-00:00:35.920 --> 00:00:38.015
+00:00:41.036 --> 00:00:43.269
 Many troubleshooting problems come from mismatches.
 
-00:00:38.015 --> 00:00:41.620
+00:00:43.269 --> 00:00:47.734
 A backend may run a different runtime version, expose a different endpoint,
 
-00:00:41.620 --> 00:00:45.400
+00:00:47.734 --> 00:00:52.944
 use a different quantization, or map the same model name to a different file.
 
-00:00:45.400 --> 00:00:47.400
+00:00:52.944 --> 00:00:55.549
 A proxy may strip a required header.
 
-00:00:47.400 --> 00:00:49.800
+00:00:55.549 --> 00:00:58.154
 A timeout between layers may interrupt streaming.
 
-00:00:49.800 --> 00:00:52.520
+00:00:58.154 --> 00:01:01.504
 Load balancing increases the need to keep assumptions consistent.
 
-00:00:52.520 --> 00:00:55.275
+00:01:01.504 --> 00:01:04.109
 Failover and retries should match the workload.
 
-00:00:55.275 --> 00:00:57.560
+00:01:04.109 --> 00:01:07.086
 Retrying before a response starts may be safe.
 
-00:00:57.560 --> 00:01:00.280
+00:01:07.086 --> 00:01:10.063
 Retrying after streaming begins may confuse the client.
 
-00:01:00.280 --> 00:01:03.600
+00:01:10.063 --> 00:01:14.156
 Retrying an agent request that performed tool actions can duplicate work.
 
-00:01:03.600 --> 00:01:08.120
+00:01:14.156 --> 00:01:17.878
 Simple dashboards showing backend health, model availability, active requests, failures,
 
-00:01:08.120 --> 00:01:11.800
+00:01:17.878 --> 00:01:23.460
 and queue growth are enough to tell whether load balancing is helping or hiding trouble.

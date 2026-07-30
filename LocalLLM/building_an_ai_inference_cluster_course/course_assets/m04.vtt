@@ -1,100 +1,88 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:02.694
+00:00:00.100 --> 00:00:03.736
 Size each worker for the models it will serve.
 
-00:00:02.694 --> 00:00:05.456
+00:00:03.736 --> 00:00:06.160
 GPU architecture determines supported acceleration features,
 
-00:00:05.456 --> 00:00:09.814
+00:00:06.160 --> 00:00:11.008
 while VRAM determines whether model weights, context cache, and runtime overhead fit.
 
-00:00:09.814 --> 00:00:12.612
+00:00:11.008 --> 00:00:14.240
 More GPUs do not create shared memory automatically.
 
-00:00:12.612 --> 00:00:16.704
+00:00:14.240 --> 00:00:19.896
 A runtime must support tensor or pipeline parallelism to divide one model across devices,
 
-00:00:16.704 --> 00:00:19.896
+00:00:19.896 --> 00:00:22.724
 and cross-device communication may become the bottleneck.
 
-00:00:19.896 --> 00:00:23.464
-Replicating a model on separate GPUs is often simpler when the goal is concurrent
+00:00:22.724 --> 00:00:28.784
+Replicating a model on separate GPUs is often simpler when the goal is concurrent capacity.
 
-00:00:23.464 --> 00:00:23.991
-capacity.
-
-00:00:23.991 --> 00:00:27.272
+00:00:28.784 --> 00:00:31.612
 CPUs handle tokenization, request processing, data movement,
 
-00:00:27.272 --> 00:00:28.856
+00:00:31.612 --> 00:00:33.632
 and services that surround inference.
 
-00:00:28.856 --> 00:00:31.359
-System RAM must accommodate model loading, caches,
+00:00:33.632 --> 00:00:38.480
+System RAM must accommodate model loading, caches, and non-GPU components without swapping.
 
-00:00:31.359 --> 00:00:33.473
-and non-GPU components without swapping.
-
-00:00:33.473 --> 00:00:37.001
+00:00:38.480 --> 00:00:42.924
 Use fast local SSD storage for active model copies when possible;
 
-00:00:37.001 --> 00:00:41.098
-repeatedly loading large models over a shared network can delay startup and turn storage
+00:00:42.924 --> 00:00:47.772
+repeatedly loading large models over a shared network can delay startup and
 
-00:00:41.098 --> 00:00:42.747
-into a cluster-wide dependency.
+00:00:47.772 --> 00:00:50.196
+turn storage into a cluster-wide dependency.
 
-00:00:42.747 --> 00:00:44.810
+00:00:50.196 --> 00:00:52.216
 Network design follows traffic patterns.
 
-00:00:44.810 --> 00:00:49.282
+00:00:52.216 --> 00:00:57.064
 Small text prompts may use little bandwidth, but model distribution, multimodal inputs,
 
-00:00:49.282 --> 00:00:52.720
+00:00:57.064 --> 00:01:00.700
 logging, backups, and distributed inference can move substantial data.
 
-00:00:52.720 --> 00:00:54.349
+00:01:00.700 --> 00:01:02.720
 Measure both bandwidth and latency.
 
-00:00:54.349 --> 00:00:58.191
+00:01:02.720 --> 00:01:06.356
 Choose switches with enough nonblocking capacity, appropriate port speeds,
 
-00:00:58.191 --> 00:01:00.965
+00:01:06.356 --> 00:01:09.184
 and management features for segmentation and monitoring.
 
-00:01:00.965 --> 00:01:04.507
+00:01:09.184 --> 00:01:13.628
 A fast link cannot compensate for an oversubscribed switch, poor cabling,
 
-00:01:04.507 --> 00:01:08.185
+00:01:13.628 --> 00:01:17.668
 or a design that transfers model state unnecessarily between nodes.
 
-00:01:08.185 --> 00:01:09.844
+00:01:17.668 --> 00:01:19.284
 Account for physical infrastructure.
 
-00:01:09.844 --> 00:01:14.270
+00:01:19.284 --> 00:01:23.324
 Confirm power circuits, outlet distribution, power-supply headroom, heat removal, airflow,
 
-00:01:14.270 --> 00:01:16.353
+00:01:23.324 --> 00:01:25.748
 and noise before installing dense compute.
 
-00:01:16.353 --> 00:01:19.248
+00:01:25.748 --> 00:01:28.576
 Rack systems improve serviceability and cable management,
 
-00:01:19.248 --> 00:01:22.106
+00:01:28.576 --> 00:01:32.616
 while desktop systems can be economical for a small lab.
 
-00:01:22.106 --> 00:01:25.888
-Consumer hardware may offer strong performance per dollar but usually has fewer
+00:01:32.616 --> 00:01:37.868
+Consumer hardware may offer strong performance per dollar but usually has fewer remote-management,
 
-00:01:25.888 --> 00:01:26.892
-remote-management,
-
-00:01:26.892 --> 00:01:29.326
+00:01:37.868 --> 00:01:39.888
 redundancy, validation, and support features.
 
-00:01:29.326 --> 00:01:34.390
-Document those tradeoffs rather than assuming low purchase cost means low operational
-
-00:01:34.390 --> 00:01:34.400
-cost.
+00:01:39.888 --> 00:01:45.140
+Document those tradeoffs rather than assuming low purchase cost means low operational cost.

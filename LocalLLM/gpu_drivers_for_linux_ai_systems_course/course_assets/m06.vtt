@@ -1,82 +1,79 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.080
+00:00:00.100 --> 00:00:01.958
 Containers can simplify application dependencies,
 
-00:00:03.080 --> 00:00:05.495
+00:00:01.958 --> 00:00:05.301
 but they do not remove host GPU driver requirements.
 
-00:00:05.495 --> 00:00:09.500
+00:00:05.301 --> 00:00:10.131
 The host still needs the right driver, kernel modules, device nodes, and permissions.
 
-00:00:09.500 --> 00:00:13.380
-The container runtime then exposes GPU devices and compatible libraries into the
+00:00:10.131 --> 00:00:14.960
+The container runtime then exposes GPU devices and compatible libraries into the container.
 
-00:00:13.380 --> 00:00:13.955
-container.
-
-00:00:13.955 --> 00:00:17.500
+00:00:14.960 --> 00:00:19.418
 If the host stack is broken, the container cannot magically repair it.
 
-00:00:17.500 --> 00:00:18.475
+00:00:19.418 --> 00:00:20.533
 For NVIDIA systems,
 
-00:00:18.475 --> 00:00:23.010
-the NVIDIA Container Toolkit is commonly used at a high level to make GPUs available to
+00:00:20.533 --> 00:00:24.991
+the NVIDIA Container Toolkit is commonly used at a high level to
 
-00:00:23.010 --> 00:00:23.479
-containers.
+00:00:24.991 --> 00:00:26.848
+make GPUs available to containers.
 
-00:00:23.479 --> 00:00:27.820
+00:00:26.848 --> 00:00:30.935
 ROCm container workflows have their own considerations around devices, groups, libraries,
 
-00:00:27.820 --> 00:00:28.995
+00:00:30.935 --> 00:00:32.050
 and supported images.
 
-00:00:28.995 --> 00:00:29.710
+00:00:32.050 --> 00:00:33.164
 In both cases,
 
-00:00:29.710 --> 00:00:34.105
-the container image must be compatible with the host driver and the runtime expectations
+00:00:33.164 --> 00:00:37.622
+the container image must be compatible with the host driver and the
 
-00:00:34.105 --> 00:00:35.685
-of the AI application.
+00:00:37.622 --> 00:00:39.851
+runtime expectations of the AI application.
 
-00:00:35.685 --> 00:00:39.960
+00:00:39.851 --> 00:00:43.938
 Container failures often come from missing runtime configuration, missing device access,
 
-00:00:39.960 --> 00:00:43.000
+00:00:43.938 --> 00:00:46.538
 permissions, incorrect image selection, or version mismatch.
 
-00:00:43.000 --> 00:00:47.110
-A container might run successfully but still use the CPU if the application cannot see the
+00:00:46.538 --> 00:00:50.996
+A container might run successfully but still use the CPU if the
 
-00:00:47.110 --> 00:00:48.000
-GPU libraries.
+00:00:50.996 --> 00:00:53.225
+application cannot see the GPU libraries.
 
-00:00:48.000 --> 00:00:51.500
+00:00:53.225 --> 00:00:57.312
 Validation should happen inside the container, not only on the host.
 
-00:00:51.500 --> 00:00:55.475
+00:00:57.312 --> 00:01:02.513
 The question is whether the workload sees and uses acceleration where it actually runs.
 
-00:00:55.475 --> 00:00:59.505
+00:01:02.513 --> 00:01:06.600
 Good container practice includes documenting the host driver, container runtime settings,
 
-00:00:59.505 --> 00:01:04.000
+00:01:06.600 --> 00:01:09.943
 image tags, environment variables, mounted devices, and validation output.
 
-00:01:04.000 --> 00:01:06.000
+00:01:09.943 --> 00:01:12.172
 Pin known-good images for stable systems.
 
-00:01:06.000 --> 00:01:06.930
+00:01:12.172 --> 00:01:12.915
 Update deliberately.
 
-00:01:06.930 --> 00:01:09.500
+00:01:12.915 --> 00:01:15.516
 Containers make AI applications easier to package,
 
-00:01:09.500 --> 00:01:14.000
-but GPU access remains a contract between host driver, runtime configuration,
+00:01:15.516 --> 00:01:20.345
+but GPU access remains a contract between host driver, runtime configuration, image contents,
 
-00:01:14.000 --> 00:01:16.000
-image contents, and application code.
+00:01:20.345 --> 00:01:21.460
+and application code.

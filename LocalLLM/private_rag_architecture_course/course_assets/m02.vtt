@@ -1,103 +1,94 @@
 WEBVTT
 
-00:00:00.430 --> 00:00:03.720
+00:00:00.100 --> 00:00:04.369
 Source ingestion is the first architectural control point in private RAG.
 
-00:00:03.720 --> 00:00:08.260
+00:00:04.369 --> 00:00:08.639
 The system may ingest files, wikis, knowledge bases, tickets, source repositories,
 
-00:00:08.260 --> 00:00:11.455
-policy libraries, transcripts, shared drives, structured records,
+00:00:08.639 --> 00:00:12.908
+policy libraries, transcripts, shared drives, structured records, or other internal sources.
 
-00:00:11.455 --> 00:00:12.830
-or other internal sources.
-
-00:00:12.830 --> 00:00:17.020
+00:00:12.908 --> 00:00:17.954
 Each source arrives with its own owner, permission model, quality level, update pattern,
 
-00:00:17.020 --> 00:00:19.190
+00:00:17.954 --> 00:00:19.506
 retention expectation, and sensitivity.
 
-00:00:19.190 --> 00:00:23.300
-A private RAG pipeline should not flatten those differences into one uncontrolled pile of
+00:00:19.506 --> 00:00:25.328
+A private RAG pipeline should not flatten those differences into one uncontrolled pile of text.
 
-00:00:23.300 --> 00:00:23.720
-text.
+00:00:25.328 --> 00:00:29.986
+During ingestion, the system should preserve the source system, document owner, classification,
 
-00:00:23.720 --> 00:00:27.730
-During ingestion, the system should preserve the source system, document owner,
+00:00:29.986 --> 00:00:33.867
+access rules, ingestion date, modified date, retention status, lifecycle state,
 
-00:00:27.730 --> 00:00:31.880
-classification, access rules, ingestion date, modified date, retention status,
+00:00:33.867 --> 00:00:35.031
+and deletion expectations.
 
-00:00:31.880 --> 00:00:34.240
-lifecycle state, and deletion expectations.
-
-00:00:34.240 --> 00:00:35.700
+00:00:35.031 --> 00:00:36.972
 Those details are not paperwork.
 
-00:00:35.700 --> 00:00:38.265
+00:00:36.972 --> 00:00:40.853
 They are the data controls that later retrieval depends on.
 
-00:00:38.265 --> 00:00:40.535
+00:00:40.853 --> 00:00:42.794
 Boundaries also exist inside content.
 
-00:00:40.535 --> 00:00:45.130
+00:00:42.794 --> 00:00:46.675
 A document may contain sections, tables, appendices, exceptions, regional instructions,
 
-00:00:45.130 --> 00:00:47.675
+00:00:46.675 --> 00:00:48.616
 tenant-specific clauses, or archived material.
 
-00:00:47.675 --> 00:00:51.085
+00:00:48.616 --> 00:00:52.497
 A shared repository may mix public guidance with restricted notes.
 
-00:00:51.085 --> 00:00:53.880
+00:00:52.497 --> 00:00:55.990
 A policy library may contain current and retired versions.
 
-00:00:53.880 --> 00:00:57.530
-Ingestion should keep those distinctions visible enough for chunking, filtering,
+00:00:55.990 --> 00:01:00.648
+Ingestion should keep those distinctions visible enough for chunking, filtering, and review.
 
-00:00:57.530 --> 00:00:58.060
-and review.
-
-00:00:58.060 --> 00:01:01.760
+00:01:00.648 --> 00:01:04.917
 Data normalization is useful when it makes content searchable and consistent.
 
-00:01:01.760 --> 00:01:05.070
+00:01:04.917 --> 00:01:08.410
 Boundary loss is dangerous when it removes ownership, classification,
 
-00:01:05.070 --> 00:01:07.125
+00:01:08.410 --> 00:01:11.904
 or the meaning of where a statement came from.
 
-00:01:07.125 --> 00:01:10.585
-The goal is to prepare content for retrieval without stripping away the rules that made
+00:01:11.904 --> 00:01:16.561
+The goal is to prepare content for retrieval without stripping away the
 
-00:01:10.585 --> 00:01:12.050
-the original source governable.
+00:01:16.561 --> 00:01:19.278
+rules that made the original source governable.
 
-00:01:12.050 --> 00:01:14.308
+00:01:19.278 --> 00:01:21.995
 Private RAG starts by respecting source systems.
 
-00:01:14.308 --> 00:01:18.230
+00:01:21.995 --> 00:01:25.100
 If a document is expired, confidential, tenant-specific, archived,
 
-00:01:18.230 --> 00:01:22.480
+00:01:25.100 --> 00:01:29.757
 or restricted before ingestion, it should remain recognizable as such after ingestion.
 
-00:01:22.480 --> 00:01:25.460
+00:01:29.757 --> 00:01:33.251
 Carrying that meaning forward makes retrieval safer, review easier,
 
-00:01:25.460 --> 00:01:27.330
+00:01:33.251 --> 00:01:35.191
 and deletion workflows more reliable.
 
-00:01:27.330 --> 00:01:29.185
+00:01:35.191 --> 00:01:37.520
 Treat ingestion as a governed handoff.
 
-00:01:29.185 --> 00:01:32.760
+00:01:37.520 --> 00:01:42.566
 Before content enters the RAG pipeline, the team should know who approved it,
 
-00:01:32.760 --> 00:01:35.440
+00:01:42.566 --> 00:01:45.282
 what connector touched it, what transformations occurred,
 
-00:01:35.440 --> 00:01:38.720
+00:01:45.282 --> 00:01:49.940
 and what evidence would be needed to remove or correct it later.

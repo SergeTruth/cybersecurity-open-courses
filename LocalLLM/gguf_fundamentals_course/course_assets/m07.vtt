@@ -1,88 +1,82 @@
 WEBVTT
 
-00:00:00.550 --> 00:00:04.265
+00:00:00.100 --> 00:00:03.772
 Performance issues in local inference often fall into two categories:
 
-00:00:04.265 --> 00:00:06.680
+00:00:03.772 --> 00:00:05.976
 slow prompt processing and slow generation.
 
-00:00:06.680 --> 00:00:10.585
+00:00:05.976 --> 00:00:10.382
 Prompt processing is the work of reading and embedding the input context.
 
-00:00:10.585 --> 00:00:12.469
+00:00:10.382 --> 00:00:12.586
 Generation is the token-by-token output step.
 
-00:00:12.469 --> 00:00:14.670
+00:00:12.586 --> 00:00:15.524
 A setup may load quickly but generate slowly,
 
-00:00:14.670 --> 00:00:17.720
+00:00:15.524 --> 00:00:19.196
 or handle short prompts well but struggle with long context.
 
-00:00:17.720 --> 00:00:19.850
+00:00:19.196 --> 00:00:22.501
 Knowing which phase is slow helps narrow the cause.
 
-00:00:19.850 --> 00:00:22.320
+00:00:22.501 --> 00:00:25.806
 Memory pressure is one of the most common problems.
 
-00:00:22.320 --> 00:00:26.809
+00:00:25.806 --> 00:00:30.580
 A model, quantization, or context length may exceed available VRAM or system RAM.
 
-00:00:26.809 --> 00:00:30.770
+00:00:30.580 --> 00:00:34.620
 GPU offload settings may be too aggressive, causing failures or instability.
 
-00:00:30.770 --> 00:00:33.340
+00:00:34.620 --> 00:00:37.190
 CPU-only execution may work but feel slow.
 
-00:00:33.340 --> 00:00:36.920
+00:00:37.190 --> 00:00:41.230
 Disk speed can affect model loading time, especially with large files.
 
-00:00:36.920 --> 00:00:38.520
+00:00:41.230 --> 00:00:43.800
 Batch size and thread settings can help,
 
-00:00:38.520 --> 00:00:41.805
+00:00:43.800 --> 00:00:48.207
 but they should be adjusted carefully and tested with the actual workload.
 
-00:00:41.805 --> 00:00:45.945
-Sampling settings affect output behavior and can be mistaken for performance or model
+00:00:48.207 --> 00:00:53.715
+Sampling settings affect output behavior and can be mistaken for performance or model quality issues.
 
-00:00:45.945 --> 00:00:46.850
-quality issues.
-
-00:00:46.850 --> 00:00:49.240
+00:00:53.715 --> 00:00:55.184
 Temperature, top-p, repetition controls,
 
-00:00:49.240 --> 00:00:53.280
+00:00:55.184 --> 00:00:59.224
 and related options influence how deterministic or varied the output feels.
 
-00:00:53.280 --> 00:00:56.150
-If results seem rambling, repetitive, or inconsistent,
+00:00:59.224 --> 00:01:03.998
+If results seem rambling, repetitive, or inconsistent, the issue may be sampling configuration,
 
-00:00:56.150 --> 00:00:59.655
-the issue may be sampling configuration, prompt formatting, model fit,
+00:01:03.998 --> 00:01:06.568
+prompt formatting, model fit, or quantization quality.
 
-00:00:59.655 --> 00:01:00.700
-or quantization quality.
-
-00:01:00.700 --> 00:01:03.850
+00:01:06.568 --> 00:01:09.506
 Troubleshooting should separate runtime settings from model capability.
 
-00:01:03.850 --> 00:01:07.355
-A practical troubleshooting loop starts with a known compatible runtime,
+00:01:09.506 --> 00:01:14.647
+A practical troubleshooting loop starts with a known compatible runtime, a trusted model file,
 
-00:01:07.355 --> 00:01:11.090
-a trusted model file, conservative context length, and a documented baseline.
+00:01:14.647 --> 00:01:17.218
+conservative context length, and a documented baseline.
 
-00:01:11.090 --> 00:01:15.230
-Then change one variable at a time: quantization, GPU offload, thread count,
+00:01:17.218 --> 00:01:22.359
+Then change one variable at a time: quantization, GPU offload, thread count, context length,
 
-00:01:15.230 --> 00:01:17.439
-context length, or sampling settings.
+00:01:22.359 --> 00:01:23.461
+or sampling settings.
 
-00:01:17.439 --> 00:01:19.840
+00:01:23.461 --> 00:01:26.032
 Compare memory use, speed, and output quality.
 
-00:01:19.840 --> 00:01:22.135
+00:01:26.032 --> 00:01:28.969
 This disciplined approach is slower than random tweaking,
 
-00:01:22.135 --> 00:01:24.020
+00:01:28.969 --> 00:01:31.540
 but it produces knowledge you can reuse.

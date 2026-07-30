@@ -1,127 +1,124 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.065
-A practical threat hunting workflow starts with a defensive question. What behavior are
+00:00:00.100 --> 00:00:04.061
+A practical threat hunting workflow starts with a defensive question.
 
-00:00:04.065 --> 00:00:04.780
-you looking for,
+00:00:04.061 --> 00:00:09.607
+What behavior are you looking for, and why does it matter to the environment?
 
-00:00:04.780 --> 00:00:06.550
-and why does it matter to the environment?
+00:00:09.607 --> 00:00:15.549
+The question should be narrow enough to investigate and broad enough to produce useful learning.
 
-00:00:06.550 --> 00:00:10.080
-The question should be narrow enough to investigate and broad enough to produce useful
+00:00:15.549 --> 00:00:21.094
+From there, define scope: business unit, asset group, identity set, cloud account, time window,
 
-00:00:10.080 --> 00:00:10.580
-learning.
+00:00:21.094 --> 00:00:22.283
+and data sources.
 
-00:00:10.580 --> 00:00:14.800
-From there, define scope: business unit, asset group, identity set, cloud account,
+00:00:22.283 --> 00:00:26.244
+Scope keeps the work bounded and makes conclusions more honest.
 
-00:00:14.800 --> 00:00:16.320
-time window, and data sources.
+00:00:26.244 --> 00:00:27.828
+Next, write a hypothesis.
 
-00:00:16.320 --> 00:00:20.880
-Scope keeps the work bounded and makes conclusions more honest. Next, write a hypothesis.
+00:00:27.828 --> 00:00:32.582
+A good hypothesis names suspected behavior, affected assets or identities, required telemetry,
 
-00:00:20.880 --> 00:00:24.990
-A good hypothesis names suspected behavior, affected assets or identities,
+00:00:32.582 --> 00:00:34.562
+expected observations, and decision criteria.
 
-00:00:24.990 --> 00:00:28.745
-required telemetry, expected observations, and decision criteria.
+00:00:34.562 --> 00:00:36.147
+It should be testable.
 
-00:00:28.745 --> 00:00:31.210
-It should be testable. It should also be allowed to fail.
+00:00:36.147 --> 00:00:38.920
+It should also be allowed to fail.
 
-00:00:31.210 --> 00:00:35.240
-A rejected hypothesis can still be valuable if it was tested carefully and documented
+00:00:38.920 --> 00:00:44.861
+A rejected hypothesis can still be valuable if it was tested carefully and documented clearly.
 
-00:00:35.240 --> 00:00:37.205
-clearly. Then identify telemetry.
+00:00:44.861 --> 00:00:46.050
+Then identify telemetry.
 
-00:00:37.205 --> 00:00:41.090
+00:00:46.050 --> 00:00:49.615
 Decide which endpoint, identity, DNS, proxy, firewall, EDR, cloud,
 
-00:00:41.090 --> 00:00:43.140
+00:00:49.615 --> 00:00:52.388
 or email data should show the behavior.
 
-00:00:43.140 --> 00:00:46.845
+00:00:52.388 --> 00:00:56.349
 Check retention, field quality, timestamps, host naming, and known gaps.
 
-00:00:46.845 --> 00:00:48.480
-If the data cannot answer the question,
+00:00:56.349 --> 00:01:01.895
+If the data cannot answer the question, document that limitation and refine the hunt.
 
-00:00:48.480 --> 00:00:52.060
-document that limitation and refine the hunt. Query and pivot deliberately.
+00:01:01.895 --> 00:01:03.479
+Query and pivot deliberately.
 
-00:00:52.060 --> 00:00:54.060
+00:01:03.479 --> 00:01:06.648
 Start with the behavior, not a random search.
 
-00:00:54.060 --> 00:00:58.050
+00:01:06.648 --> 00:01:11.797
 Pivot from host to user, user to source IP, process to parent process,
 
-00:00:58.050 --> 00:01:00.250
+00:01:11.797 --> 00:01:14.570
 domain to DNS clients, hash to endpoints,
 
-00:01:00.250 --> 00:01:04.085
+00:01:14.570 --> 00:01:19.324
 or alert to surrounding timeline when the pivot helps test the hypothesis.
 
-00:01:04.085 --> 00:01:08.325
-Reduce noise, but do not filter so aggressively that the signal disappears. Save queries,
+00:01:19.324 --> 00:01:24.077
+Reduce noise, but do not filter so aggressively that the signal disappears.
 
-00:01:08.325 --> 00:01:10.565
-assumptions, exclusions, and time windows.
+00:01:24.077 --> 00:01:26.850
+Save queries, assumptions, exclusions, and time windows.
 
-00:01:10.565 --> 00:01:14.805
-Validate before concluding. Compare against baselines, asset roles, user context,
+00:01:26.850 --> 00:01:28.038
+Validate before concluding.
 
-00:01:14.805 --> 00:01:17.130
-business explanations, and related events.
+00:01:28.038 --> 00:01:31.603
+Compare against baselines, asset roles, user context, business explanations,
 
-00:01:17.130 --> 00:01:21.675
+00:01:31.603 --> 00:01:32.792
+and related events.
+
+00:01:32.792 --> 00:01:37.545
 Use careful language: unusual, suspicious, malicious, and confirmed are not the same.
 
-00:01:21.675 --> 00:01:25.675
+00:01:37.545 --> 00:01:41.902
 Escalate to incident response when the evidence meets your organization's criteria,
 
-00:01:25.675 --> 00:01:28.085
+00:01:41.902 --> 00:01:45.468
 and preserve the evidence needed for responders to act.
 
-00:01:28.085 --> 00:01:30.555
+00:01:45.468 --> 00:01:48.240
 Finally, document the outcome and improve defenses.
 
-00:01:30.555 --> 00:01:35.620
+00:01:48.240 --> 00:01:53.390
 A hunt can produce new detection logic, tuned alerts, improved logging, updated playbooks,
 
-00:01:35.620 --> 00:01:39.280
+00:01:53.390 --> 00:01:56.559
 documented gaps, asset context, or threat intelligence feedback.
 
-00:01:39.280 --> 00:01:41.840
+00:01:56.559 --> 00:02:00.124
 Threat hunting is not random searching or alert chasing.
 
-00:01:41.840 --> 00:01:45.900
-It is structured investigation that turns questions into evidence and evidence into
+00:02:00.124 --> 00:02:06.066
+It is structured investigation that turns questions into evidence and evidence into stronger security operations.
 
-00:01:45.900 --> 00:01:47.520
-stronger security operations.
+00:02:06.066 --> 00:02:09.235
+For a beginner, the checklist is intentionally simple.
 
-00:01:47.520 --> 00:01:51.670
-For a beginner, the checklist is intentionally simple. Question, scope, hypothesis,
+00:02:09.235 --> 00:02:12.800
+Question, scope, hypothesis, telemetry, query, pivot, validate, document, improve.
 
-00:01:51.670 --> 00:01:54.685
-telemetry, query, pivot, validate, document, improve.
+00:02:12.800 --> 00:02:16.365
+If a hunt feels confusing, return to that sequence.
 
-00:01:54.685 --> 00:01:55.875
-If a hunt feels confusing,
+00:02:16.365 --> 00:02:21.514
+The workflow does not remove analyst judgment, but it gives judgment a structure.
 
-00:01:55.875 --> 00:01:59.180
-return to that sequence. The workflow does not remove analyst judgment,
-
-00:01:59.180 --> 00:02:00.720
-but it gives judgment a structure.
-
-00:02:00.720 --> 00:02:01.460
+00:02:21.514 --> 00:02:22.307
 Over time,
 
-00:02:01.460 --> 00:02:06.080
+00:02:22.307 --> 00:02:27.060
 that structure helps a SOC turn individual curiosity into repeatable defensive capability.

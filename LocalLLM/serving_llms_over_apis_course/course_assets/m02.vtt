@@ -1,82 +1,82 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.690
+00:00:00.100 --> 00:00:04.985
 A typical LLM API architecture includes clients, an API gateway or reverse proxy,
 
-00:00:05.690 --> 00:00:10.520
+00:00:04.985 --> 00:00:09.871
 an application backend, an inference server, a model runtime, model files, a tokenizer,
 
-00:00:10.520 --> 00:00:14.520
+00:00:09.871 --> 00:00:12.877
 compute resources, queues, caches, logs, monitoring, and storage.
 
-00:00:14.520 --> 00:00:16.610
+00:00:12.877 --> 00:00:16.260
 Not every system needs every component on day one,
 
-00:00:16.610 --> 00:00:20.740
-but each component represents a responsibility that becomes important as the service
+00:00:16.260 --> 00:00:21.145
+but each component represents a responsibility that becomes important as the service grows.
 
-00:00:20.740 --> 00:00:21.235
-grows.
-
-00:00:21.235 --> 00:00:24.400
+00:00:21.145 --> 00:00:24.903
 Requests usually begin in application code or a user-facing client.
 
-00:00:24.400 --> 00:00:28.500
+00:00:24.903 --> 00:00:30.165
 The request may pass through a gateway or reverse proxy that handles TLS, routing,
 
-00:00:28.500 --> 00:00:31.105
+00:00:30.165 --> 00:00:32.419
 authentication, rate limits, and policy checks.
 
-00:00:31.105 --> 00:00:36.000
+00:00:32.419 --> 00:00:36.553
 The application backend may add business context, retrieve documents, apply authorization,
 
-00:00:36.000 --> 00:00:37.860
+00:00:36.553 --> 00:00:38.808
 format messages, or select a model.
 
-00:00:37.860 --> 00:00:41.715
-The inference server then passes the prepared request to a runtime that loads the model
+00:00:38.808 --> 00:00:43.318
+The inference server then passes the prepared request to a runtime that
 
-00:00:41.715 --> 00:00:42.760
-and produces output.
+00:00:43.318 --> 00:00:45.573
+loads the model and produces output.
 
-00:00:42.760 --> 00:00:47.550
-The model runtime depends on model files, tokenizer information, CPU resources,
+00:00:45.573 --> 00:00:50.458
+The model runtime depends on model files, tokenizer information, CPU resources, GPU resources,
 
-00:00:47.550 --> 00:00:49.833
-GPU resources, memory, and configuration.
+00:00:50.458 --> 00:00:51.585
+memory, and configuration.
 
-00:00:49.833 --> 00:00:51.880
+00:00:51.585 --> 00:00:53.840
 Queues can smooth bursts of demand.
 
-00:00:51.880 --> 00:00:55.061
+00:00:53.840 --> 00:00:57.598
 Caches may reduce repeated work for embeddings or common requests.
 
-00:00:55.061 --> 00:00:59.450
+00:00:57.598 --> 00:01:02.108
 Logs and metrics provide visibility into latency, errors, token use, queue depth,
 
-00:00:59.450 --> 00:01:00.680
+00:01:02.108 --> 00:01:03.235
 and resource pressure.
 
-00:01:00.680 --> 00:01:03.635
+00:01:03.235 --> 00:01:05.866
 Storage may hold prompts, outputs, embeddings, configuration,
 
-00:01:03.635 --> 00:01:05.880
+00:01:05.866 --> 00:01:08.497
 or audit records depending on the design.
 
-00:01:05.880 --> 00:01:07.965
+00:01:08.497 --> 00:01:10.752
 Good architecture makes request flow visible.
 
-00:01:07.965 --> 00:01:11.460
-Teams should be able to explain how a prompt moves from caller to model and how the
+00:01:10.752 --> 00:01:15.261
+Teams should be able to explain how a prompt moves from caller
 
-00:01:11.460 --> 00:01:12.920
-response returns.
+00:01:15.261 --> 00:01:17.892
+to model and how the response returns.
 
-00:01:12.920 --> 00:01:15.955
+00:01:17.892 --> 00:01:22.026
 They should know where authentication happens, where user authorization is checked,
 
-00:01:15.955 --> 00:01:20.160
+00:01:22.026 --> 00:01:27.287
 where sensitive data may be logged, where timeouts apply, and where failures are reported.
 
-00:01:20.160 --> 00:01:24.320
-An LLM API is an application service, not a single model file with a port open.
+00:01:27.287 --> 00:01:29.918
+An LLM API is an application service,
+
+00:01:29.918 --> 00:01:33.300
+not a single model file with a port open.

@@ -1,112 +1,103 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.490
-Batch size tuning for inference is the practice of choosing how much work the runtime
+00:00:00.100 --> 00:00:04.080
+Batch size tuning for inference is the practice of choosing how much
 
-00:00:04.490 --> 00:00:07.725
-should process together when it serves prompts and generates tokens.
+00:00:04.080 --> 00:00:08.060
+work the runtime should process together when it serves prompts and generates
 
-00:00:07.725 --> 00:00:11.975
-It sounds simple, but it sits at the intersection of model size, context length, memory,
+00:00:08.060 --> 00:00:08.710
+tokens.
 
-00:00:11.975 --> 00:00:13.580
-hardware, and user expectations.
+00:00:08.710 --> 00:00:13.354
+It sounds simple, but it sits at the intersection of model size, context length,
 
-00:00:13.580 --> 00:00:14.720
+00:00:13.354 --> 00:00:15.012
+memory, hardware, and user expectations.
+
+00:00:15.012 --> 00:00:16.007
 In practical terms,
 
-00:00:14.720 --> 00:00:18.400
+00:00:16.007 --> 00:00:19.987
 batch settings decide whether the system handles one request at a time,
 
-00:00:18.400 --> 00:00:19.610
+00:00:19.987 --> 00:00:21.645
 groups pieces of work together,
 
-00:00:19.610 --> 00:00:22.460
+00:00:21.645 --> 00:00:25.294
 or keeps multiple active requests moving through the model at once.
 
-00:00:22.460 --> 00:00:24.320
+00:00:25.294 --> 00:00:27.615
 This is different from training batch size.
 
-00:00:24.320 --> 00:00:27.990
-During training, a batch is tied to examples, loss calculation, gradients,
+00:00:27.615 --> 00:00:32.259
+During training, a batch is tied to examples, loss calculation, gradients, and weight updates.
 
-00:00:27.990 --> 00:00:28.880
-and weight updates.
-
-00:00:28.880 --> 00:00:31.555
+00:00:32.259 --> 00:00:34.912
 During inference, the model weights are already fixed.
 
-00:00:31.555 --> 00:00:33.100
+00:00:34.912 --> 00:00:36.239
 The question becomes operational:
 
-00:00:33.100 --> 00:00:36.880
-how can the runtime use available compute efficiently while still returning useful
+00:00:36.239 --> 00:00:40.882
+how can the runtime use available compute efficiently while still returning useful responses quickly?
 
-00:00:36.880 --> 00:00:37.780
-responses quickly?
+00:00:40.882 --> 00:00:44.862
+A setting that makes sense for training documentation may not translate directly
 
-00:00:37.780 --> 00:00:42.020
-A setting that makes sense for training documentation may not translate directly to a chat
+00:00:44.862 --> 00:00:47.516
+to a chat server or a local assistant.
 
-00:00:42.020 --> 00:00:43.610
-server or a local assistant.
-
-00:00:43.610 --> 00:00:46.830
+00:00:47.516 --> 00:00:50.832
 It also helps to separate prompt processing from token generation.
 
-00:00:46.830 --> 00:00:48.050
+00:00:50.832 --> 00:00:52.491
 When a prompt is submitted,
 
-00:00:48.050 --> 00:00:52.300
+00:00:52.491 --> 00:00:57.134
 the runtime has to process the existing context before the first new token appears.
 
-00:00:52.300 --> 00:00:54.960
+00:00:57.134 --> 00:00:59.788
 After that, generation usually happens step by step.
 
-00:00:54.960 --> 00:00:57.270
+00:00:59.788 --> 00:01:02.109
 Batch settings can affect these phases differently,
 
-00:00:57.270 --> 00:01:01.120
-so a configuration that improves prompt ingestion may not produce the smoothest streaming
+00:01:02.109 --> 00:01:06.753
+so a configuration that improves prompt ingestion may not produce the smoothest streaming response.
 
-00:01:01.120 --> 00:01:01.560
-response.
-
-00:01:01.560 --> 00:01:03.590
+00:01:06.753 --> 00:01:09.074
 The right answer depends on the workload.
 
-00:01:03.590 --> 00:01:08.250
+00:01:09.074 --> 00:01:13.054
 A single-user local coding assistant usually values responsiveness and stable memory use.
 
-00:01:08.250 --> 00:01:11.980
-A multi-user API service may accept slightly more latency if it can increase total
+00:01:13.054 --> 00:01:18.030
+A multi-user API service may accept slightly more latency if it can increase total throughput.
 
-00:01:11.980 --> 00:01:12.760
-throughput.
+00:01:18.030 --> 00:01:23.336
+There is no universal best batch size because the best operating point changes with model architecture,
 
-00:01:12.760 --> 00:01:17.055
-There is no universal best batch size because the best operating point changes with model
-
-00:01:17.055 --> 00:01:17.540
-architecture,
-
-00:01:17.540 --> 00:01:21.640
+00:01:23.336 --> 00:01:26.321
 quantization, runtime, hardware, prompt length, concurrency, and reliability goals.
 
-00:01:21.640 --> 00:01:24.965
+00:01:26.321 --> 00:01:31.628
 A practical way to think about this is to start with the user experience you want,
 
-00:01:24.965 --> 00:01:27.255
+00:01:31.628 --> 00:01:33.950
 then work backward to the runtime settings.
 
-00:01:27.255 --> 00:01:28.720
+00:01:33.950 --> 00:01:36.271
 If the system is a private assistant,
 
-00:01:28.720 --> 00:01:31.685
+00:01:36.271 --> 00:01:39.588
 the tuning target may be quick feedback and steady streaming.
 
-00:01:31.685 --> 00:01:35.535
-If it is an internal API, the target may be more completed requests per minute.
+00:01:39.588 --> 00:01:41.578
+If it is an internal API,
 
-00:01:35.535 --> 00:01:39.280
+00:01:41.578 --> 00:01:44.563
+the target may be more completed requests per minute.
+
+00:01:44.563 --> 00:01:49.220
 Batch size is only meaningful when it is tied to one of those operating goals.

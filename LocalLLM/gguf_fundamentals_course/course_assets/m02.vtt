@@ -1,79 +1,73 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.640
+00:00:00.100 --> 00:00:03.841
 A local model file contains model weights, usually stored as tensors.
 
-00:00:04.640 --> 00:00:07.810
-Tensors are structured arrays of numbers that represent what the model learned during
+00:00:03.841 --> 00:00:09.282
+Tensors are structured arrays of numbers that represent what the model learned during training or fine-tuning.
 
-00:00:07.810 --> 00:00:09.440
-training or fine-tuning.
-
-00:00:09.440 --> 00:00:11.334
+00:00:09.282 --> 00:00:11.663
 Those numbers are not useful in isolation.
 
-00:00:11.334 --> 00:00:15.710
+00:00:11.663 --> 00:00:16.084
 The runtime has to know the model architecture, tensor names, tensor shapes, precision,
 
-00:00:15.710 --> 00:00:19.550
+00:00:16.084 --> 00:00:20.505
 and layout so it can map the file contents into the correct computation.
 
-00:00:19.550 --> 00:00:22.560
+00:00:20.505 --> 00:00:24.586
 Metadata turns a model file into something a runtime can reason about.
 
-00:00:22.560 --> 00:00:26.750
-It can describe architecture information, context length, tokenizer details,
+00:00:24.586 --> 00:00:28.327
+It can describe architecture information, context length, tokenizer details, quantization type,
 
-00:00:26.750 --> 00:00:31.355
-quantization type, special tokens, model family, and sometimes prompt formatting hints.
+00:00:28.327 --> 00:00:31.387
+special tokens, model family, and sometimes prompt formatting hints.
 
-00:00:31.355 --> 00:00:34.240
+00:00:31.387 --> 00:00:36.148
 This is why a model file is more than a single blob of numbers.
 
-00:00:34.240 --> 00:00:38.060
-It is a package of data and instructions that helps the runtime load and use the model
+00:00:36.148 --> 00:00:40.229
+It is a package of data and instructions that helps the runtime
 
-00:00:38.060 --> 00:00:39.335
-consistently.
+00:00:40.229 --> 00:00:42.270
+load and use the model consistently.
 
-00:00:39.335 --> 00:00:43.960
+00:00:42.270 --> 00:00:47.031
 Tokenizer data is especially important because models do not process text as raw words.
 
-00:00:43.960 --> 00:00:47.860
+00:00:47.031 --> 00:00:51.452
 Text is broken into tokens, and generated tokens are converted back into text.
 
-00:00:47.860 --> 00:00:49.450
-The vocabulary, special tokens,
+00:00:51.452 --> 00:00:56.213
+The vocabulary, special tokens, and tokenizer behavior need to match what the model expects.
 
-00:00:49.450 --> 00:00:52.280
-and tokenizer behavior need to match what the model expects.
-
-00:00:52.280 --> 00:00:53.470
+00:00:56.213 --> 00:00:57.914
 If the tokenizer is wrong,
 
-00:00:53.470 --> 00:00:57.470
+00:00:57.914 --> 00:01:02.335
 prompt text may be represented differently than the model was trained to understand,
 
-00:00:57.470 --> 00:00:59.660
+00:01:02.335 --> 00:01:05.055
 which can lead to weak or unexpected output.
 
-00:00:59.660 --> 00:01:02.865
+00:01:05.055 --> 00:01:08.796
 Runtime compatibility depends on both the file and the inference engine.
 
-00:01:02.865 --> 00:01:07.570
-A GGUF file may be valid, but an older runtime might not support a newer architecture,
+00:01:08.796 --> 00:01:10.837
+A GGUF file may be valid,
 
-00:01:07.570 --> 00:01:09.860
-metadata field, or quantization type.
+00:01:10.837 --> 00:01:14.918
+but an older runtime might not support a newer architecture, metadata field,
 
-00:01:09.860 --> 00:01:10.220
-Likewise,
+00:01:14.918 --> 00:01:15.938
+or quantization type.
 
-00:01:10.220 --> 00:01:14.640
-a runtime may support the architecture but require specific settings to perform well.
+00:01:15.938 --> 00:01:20.699
+Likewise, a runtime may support the architecture but require specific settings to perform well.
 
-00:01:14.640 --> 00:01:18.455
+00:01:20.699 --> 00:01:24.780
 Local inference is a combination of model file, runtime capability, hardware fit,
 
-00:01:18.455 --> 00:01:19.520
+00:01:24.780 --> 00:01:25.460
 and configuration.

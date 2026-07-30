@@ -1,148 +1,154 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:03.980
-A useful hunt begins with a clear question. The question does not need to be perfect,
+00:00:00.100 --> 00:00:02.788
+A useful hunt begins with a clear question.
 
-00:00:03.980 --> 00:00:05.930
+00:00:02.788 --> 00:00:05.475
+The question does not need to be perfect,
+
+00:00:05.475 --> 00:00:08.163
 but it should give the analyst a direction.
 
-00:00:05.930 --> 00:00:09.129
+00:00:08.163 --> 00:00:11.859
 Random log searching tends to produce either noise or confirmation bias.
 
-00:00:09.129 --> 00:00:13.385
+00:00:11.859 --> 00:00:16.562
 A defensive question gives the hunt a boundary: what behavior are we looking for,
 
-00:00:13.385 --> 00:00:17.325
-where could it appear, which data source should show it, and what would count as evidence?
+00:00:16.562 --> 00:00:19.922
+where could it appear, which data source should show it,
 
-00:00:17.325 --> 00:00:20.710
-Practical hunt questions often come from known operational concerns. Are users
+00:00:19.922 --> 00:00:21.938
+and what would count as evidence?
 
-00:00:20.710 --> 00:00:23.515
-authenticating from impossible or unusual locations?
+00:00:21.938 --> 00:00:24.961
+Practical hunt questions often come from known operational concerns.
 
-00:00:23.515 --> 00:00:26.400
+00:00:24.961 --> 00:00:27.649
+Are users authenticating from impossible or unusual locations?
+
+00:00:27.649 --> 00:00:30.001
 Are endpoints running suspicious parent-child process chains,
 
-00:00:26.400 --> 00:00:30.080
+00:00:30.001 --> 00:00:33.025
 such as a document reader launching a scripting engine?
 
-00:00:30.080 --> 00:00:33.110
-Are privileged accounts being used outside normal patterns? Are systems making unusual DNS
+00:00:33.025 --> 00:00:35.712
+Are privileged accounts being used outside normal patterns?
 
-00:00:33.110 --> 00:00:35.350
-requests or outbound network connections?
+00:00:35.712 --> 00:00:39.072
+Are systems making unusual DNS requests or outbound network connections?
 
-00:00:35.350 --> 00:00:39.655
+00:00:39.072 --> 00:00:42.768
 Are cloud administrative actions happening from unfamiliar identities or source networks?
 
-00:00:39.655 --> 00:00:43.645
-Each of these questions can be investigated defensively without teaching exploitation or
+00:00:42.768 --> 00:00:47.471
+Each of these questions can be investigated defensively without teaching exploitation or unauthorized activity.
 
-00:00:43.645 --> 00:00:46.705
-unauthorized activity. A good hunt question is scoped.
+00:00:47.471 --> 00:00:49.487
+A good hunt question is scoped.
 
-00:00:46.705 --> 00:00:50.115
+00:00:49.487 --> 00:00:52.847
 Scope includes the environment, such as corporate endpoints, production servers,
 
-00:00:50.115 --> 00:00:52.575
+00:00:52.847 --> 00:00:55.198
 cloud workloads, or a specific identity tenant.
 
-00:00:52.575 --> 00:00:53.920
+00:00:55.198 --> 00:00:56.878
 It includes the time window,
 
-00:00:53.920 --> 00:00:58.135
+00:00:56.878 --> 00:01:01.918
 such as the last seven days or the first twenty-four hours after a policy change.
 
-00:00:58.135 --> 00:01:02.140
+00:01:01.918 --> 00:01:05.949
 It includes the data source, such as authentication logs, endpoint process events,
 
-00:01:02.140 --> 00:01:04.965
+00:01:05.949 --> 00:01:08.301
 DNS telemetry, proxy logs, or EDR events.
 
-00:01:04.965 --> 00:01:06.465
+00:01:08.301 --> 00:01:09.981
 It also includes expected evidence.
 
-00:01:06.465 --> 00:01:11.160
+00:01:09.981 --> 00:01:14.348
 If the question is about unusual authentication, the expected evidence may include user,
 
-00:01:11.160 --> 00:01:15.365
+00:01:14.348 --> 00:01:17.036
 source IP, geolocation, device, timestamp, and authentication result.
 
-00:01:15.365 --> 00:01:18.460
+00:01:17.036 --> 00:01:20.060
 The hunting mindset is careful and curious, not dramatic.
 
-00:01:18.460 --> 00:01:20.645
+00:01:20.060 --> 00:01:22.412
 Hunters look for patterns, compare against baselines,
 
-00:01:20.645 --> 00:01:22.960
+00:01:22.412 --> 00:01:24.763
 and ask what benign explanations might exist.
 
-00:01:22.960 --> 00:01:25.400
+00:01:24.763 --> 00:01:27.787
 A privileged account used at midnight may be suspicious,
 
-00:01:25.400 --> 00:01:27.680
+00:01:27.787 --> 00:01:30.811
 but it may also be a scheduled maintenance task.
 
-00:01:27.680 --> 00:01:30.330
+00:01:30.811 --> 00:01:33.835
 A workstation resolving a rare domain may be suspicious,
 
-00:01:30.330 --> 00:01:33.130
+00:01:33.835 --> 00:01:36.858
 but it may also be a legitimate vendor application.
 
-00:01:33.130 --> 00:01:37.640
-The goal is to separate unusual from suspicious by adding context. Write down assumptions
+00:01:36.858 --> 00:01:40.554
+The goal is to separate unusual from suspicious by adding context.
 
-00:01:37.640 --> 00:01:38.080
-early.
+00:01:40.554 --> 00:01:41.898
+Write down assumptions early.
 
-00:01:38.080 --> 00:01:41.525
+00:01:41.898 --> 00:01:45.593
 If the hunt assumes endpoint telemetry covers all workstations, say that.
 
-00:01:41.525 --> 00:01:45.620
+00:01:45.593 --> 00:01:50.297
 If the hunt excludes mobile devices or retained logs only go back fourteen days,
 
-00:01:45.620 --> 00:01:46.655
+00:01:50.297 --> 00:01:51.305
 say that too.
 
-00:01:46.655 --> 00:01:49.750
-These notes help reviewers understand the strength of the conclusion. They also help
+00:01:51.305 --> 00:01:54.664
+These notes help reviewers understand the strength of the conclusion.
 
-00:01:49.750 --> 00:01:50.920
-future hunts improve.
+00:01:54.664 --> 00:01:56.680
+They also help future hunts improve.
 
-00:01:50.920 --> 00:01:54.730
-The best beginner habit is to turn every hunt idea into a question that can be answered
+00:01:56.680 --> 00:02:00.712
+The best beginner habit is to turn every hunt idea into a
 
-00:01:54.730 --> 00:01:55.772
-with evidence.
+00:02:00.712 --> 00:02:03.064
+question that can be answered with evidence.
 
-00:01:55.772 --> 00:01:58.245
+00:02:03.064 --> 00:02:06.087
 Instead of saying, maybe there is lateral movement, ask:
 
-00:01:58.245 --> 00:02:01.830
+00:02:06.087 --> 00:02:10.791
 did any user account authenticate to more servers than usual during the last week,
 
-00:02:01.830 --> 00:02:05.105
+00:02:10.791 --> 00:02:13.814
 and do those events align with normal administrative activity?
 
-00:02:05.105 --> 00:02:09.090
-That kind of question gives the analyst a path from curiosity to scoped investigation. A
+00:02:13.814 --> 00:02:18.518
+That kind of question gives the analyst a path from curiosity to scoped investigation.
 
-00:02:09.090 --> 00:02:11.755
-strong question also makes collaboration easier.
+00:02:18.518 --> 00:02:20.870
+A strong question also makes collaboration easier.
 
-00:02:11.755 --> 00:02:14.330
+00:02:20.870 --> 00:02:24.565
 One analyst can review the scope, another can check the query,
 
-00:02:14.330 --> 00:02:17.310
+00:02:24.565 --> 00:02:27.589
 and a third can validate results against business context.
 
-00:02:17.310 --> 00:02:20.360
+00:02:27.589 --> 00:02:31.621
 If the question is vague, each person may imagine a different hunt.
 
-00:02:20.360 --> 00:02:22.970
+00:02:31.621 --> 00:02:35.988
 If the question is written clearly, the team can improve it, repeat it,
 
-00:02:22.970 --> 00:02:24.960
+00:02:35.988 --> 00:02:38.340
 and compare the outcome with later hunts.
