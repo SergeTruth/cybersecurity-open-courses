@@ -1,97 +1,76 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.800
-The two building-block categories most relevant to TLS migration are key establishment and
+00:00:00.100 --> 00:00:06.170
+The two building-block categories most relevant to TLS migration are key establishment and digital signatures.
 
-00:00:04.800 --> 00:00:05.739
-digital signatures.
-
-00:00:05.739 --> 00:00:07.890
+00:00:06.170 --> 00:00:08.598
 A key encapsulation mechanism, or KEM,
 
-00:00:07.890 --> 00:00:12.160
+00:00:08.598 --> 00:00:13.049
 helps two parties establish shared secret material over an untrusted channel.
 
-00:00:12.160 --> 00:00:16.180
+00:00:13.049 --> 00:00:17.905
 In post-quantum planning, ML-KEM is the main KEM concept teams will encounter.
 
-00:00:16.180 --> 00:00:18.270
+00:00:17.905 --> 00:00:21.142
 It is intended for key establishment use cases,
 
-00:00:18.270 --> 00:00:22.020
+00:00:21.142 --> 00:00:24.784
 not for signing certificates or authenticating software by itself.
 
-00:00:22.020 --> 00:00:23.760
+00:00:24.784 --> 00:00:27.212
 Digital signatures solve a different problem.
 
-00:00:23.760 --> 00:00:27.785
-They help a verifier confirm that data was signed by the holder of a private key and that
+00:00:27.212 --> 00:00:32.067
+They help a verifier confirm that data was signed by the holder
 
-00:00:27.785 --> 00:00:29.275
-the signed data has not changed.
+00:00:32.067 --> 00:00:36.923
+of a private key and that the signed data has not changed.
 
-00:00:29.275 --> 00:00:34.815
-ML-DSA and SLH-DSA are post-quantum digital signature concepts practitioners may see in
+00:00:36.923 --> 00:00:42.993
+ML-DSA and SLH-DSA are post-quantum digital signature concepts practitioners may see in discussions about certificates,
 
-00:00:34.815 --> 00:00:36.200
-discussions about certificates,
-
-00:00:36.200 --> 00:00:40.315
+00:00:42.993 --> 00:00:46.230
 code signing, identity, service authentication, and long-term verification.
 
-00:00:40.315 --> 00:00:44.080
+00:00:46.230 --> 00:00:51.491
 They are not interchangeable with KEMs because they answer a different security question.
 
-00:00:44.080 --> 00:00:45.520
+00:00:51.491 --> 00:00:53.514
 That distinction matters for TLS.
 
-00:00:45.520 --> 00:00:49.415
+00:00:53.514 --> 00:00:58.370
 A deployment may experiment with post-quantum or hybrid key establishment before the
 
-00:00:49.415 --> 00:00:53.380
+00:00:58.370 --> 00:01:01.607
 broader certificate ecosystem is ready for post-quantum signatures.
 
-00:00:53.380 --> 00:00:56.980
-Post-quantum certificates and certificate chains introduce separate compatibility
+00:01:01.607 --> 00:01:05.249
+Post-quantum certificates and certificate chains introduce separate compatibility concerns,
 
-00:00:56.980 --> 00:00:57.440
-concerns,
-
-00:00:57.440 --> 00:01:02.255
+00:01:05.249 --> 00:01:09.700
 such as signature size, chain size, client support, certificate authority readiness,
 
-00:01:02.255 --> 00:01:05.150
-browser behavior, operating system trust, embedded devices,
+00:01:09.700 --> 00:01:14.151
+browser behavior, operating system trust, embedded devices, and enterprise inspection tools.
 
-00:01:05.150 --> 00:01:07.520
-and enterprise inspection tools.
-
-00:01:07.520 --> 00:01:10.060
+00:01:14.151 --> 00:01:17.793
 One migration track does not automatically solve the other.
 
-00:01:10.060 --> 00:01:13.840
+00:01:17.793 --> 00:01:21.840
 Teams should use standards-based algorithms through mature libraries and protocols.
 
-00:01:13.840 --> 00:01:18.175
-Custom TLS cryptography is dangerous because security depends on more than the algorithm
+00:01:21.840 --> 00:01:27.505
+Custom TLS cryptography is dangerous because security depends on more than the algorithm name.
 
-00:01:18.175 --> 00:01:18.920
-name.
+00:01:27.505 --> 00:01:31.956
+It depends on negotiation behavior, transcript binding, downgrade resistance, error handling,
 
-00:01:18.920 --> 00:01:22.590
-It depends on negotiation behavior, transcript binding, downgrade resistance,
+00:01:31.956 --> 00:01:34.788
+implementation quality, side-channel considerations, interoperability, and maintenance.
 
-00:01:22.590 --> 00:01:26.830
-error handling, implementation quality, side-channel considerations, interoperability,
-
-00:01:26.830 --> 00:01:27.760
-and maintenance.
-
-00:01:27.760 --> 00:01:32.440
+00:01:34.788 --> 00:01:39.644
 The practical advice is simple: do not design private post-quantum TLS constructions.
 
-00:01:32.440 --> 00:01:35.025
-Track reputable standards work, use maintained libraries,
-
-00:01:35.025 --> 00:01:36.680
-and test in realistic environments.
+00:01:39.644 --> 00:01:44.500
+Track reputable standards work, use maintained libraries, and test in realistic environments.

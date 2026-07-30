@@ -1,97 +1,88 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.915
-A TLS handshake is the setup conversation that lets two endpoints agree on how to protect
+00:00:00.100 --> 00:00:04.599
+A TLS handshake is the setup conversation that lets two endpoints agree
 
-00:00:04.915 --> 00:00:05.940
-the session.
+00:00:04.599 --> 00:00:06.849
+on how to protect the session.
 
-00:00:05.940 --> 00:00:09.025
-At a high level, the client and server negotiate protocol options,
+00:00:06.849 --> 00:00:12.098
+At a high level, the client and server negotiate protocol options, authenticate the server,
 
-00:00:09.025 --> 00:00:12.140
-authenticate the server, establish shared session keys,
+00:00:12.098 --> 00:00:16.973
+establish shared session keys, and then use those keys to protect application data.
 
-00:00:12.140 --> 00:00:14.580
-and then use those keys to protect application data.
-
-00:00:14.580 --> 00:00:19.915
+00:00:16.973 --> 00:00:22.222
 The details vary by TLS version and configuration, but the practical roles are stable:
 
-00:00:19.915 --> 00:00:23.420
+00:00:22.222 --> 00:00:26.721
 authentication answers who the peer is, key establishment creates shared key material,
 
-00:00:23.420 --> 00:00:25.780
+00:00:26.721 --> 00:00:29.346
 and symmetric protection carries the bulk traffic.
 
-00:00:25.780 --> 00:00:29.220
+00:00:29.346 --> 00:00:32.720
 Server authentication usually depends on certificates and certificate chains.
 
-00:00:29.220 --> 00:00:31.990
+00:00:32.720 --> 00:00:36.845
 A certificate binds a public key to a name or identity,
 
-00:00:31.990 --> 00:00:35.640
+00:00:36.845 --> 00:00:41.719
 and the client evaluates a chain of trust back to a trusted authority.
 
-00:00:35.640 --> 00:00:38.995
+00:00:41.719 --> 00:00:44.719
 That chain may involve certificate authorities, intermediate certificates,
 
-00:00:38.995 --> 00:00:43.160
+00:00:44.719 --> 00:00:48.093
 operating system trust stores, browser policy, enterprise inspection devices,
 
-00:00:43.160 --> 00:00:45.865
+00:00:48.093 --> 00:00:49.593
 and application-specific trust decisions.
 
-00:00:45.865 --> 00:00:49.840
-Changing signature algorithms or certificate formats can therefore affect more than one
+00:00:49.593 --> 00:00:54.467
+Changing signature algorithms or certificate formats can therefore affect more than one server.
 
-00:00:49.840 --> 00:00:50.600
-server.
-
-00:00:50.600 --> 00:00:51.880
+00:00:54.467 --> 00:00:56.717
 Key establishment solves a different problem.
 
-00:00:51.880 --> 00:00:55.090
+00:00:56.717 --> 00:01:00.841
 It helps the endpoints derive session keys that protect the connection.
 
-00:00:55.090 --> 00:00:57.625
+00:01:00.841 --> 00:01:03.466
 Digital signatures help prove identity and integrity;
 
-00:00:57.625 --> 00:01:00.620
+00:01:03.466 --> 00:01:06.840
 they do not by themselves encrypt all application traffic.
 
-00:01:00.620 --> 00:01:04.640
+00:01:06.840 --> 00:01:11.340
 Symmetric encryption and integrity protection then protect the data after the handshake.
 
-00:01:04.640 --> 00:01:07.385
+00:01:11.340 --> 00:01:13.964
 Forward secrecy concepts add another important property:
 
-00:01:07.385 --> 00:01:11.450
-compromise of a long-term key should not automatically expose older captured sessions when
+00:01:13.964 --> 00:01:18.464
+compromise of a long-term key should not automatically expose older captured sessions
 
-00:01:11.450 --> 00:01:13.665
-the protocol is configured correctly.
+00:01:18.464 --> 00:01:20.714
+when the protocol is configured correctly.
 
-00:01:13.665 --> 00:01:16.110
+00:01:20.714 --> 00:01:23.338
 Client authentication is another TLS use case,
 
-00:01:16.110 --> 00:01:20.615
+00:01:23.338 --> 00:01:27.088
 often seen in mutual TLS for service-to-service traffic, administrative interfaces,
 
-00:01:20.615 --> 00:01:22.725
+00:01:27.088 --> 00:01:28.962
 device identity, or partner integrations.
 
-00:01:22.725 --> 00:01:27.090
+00:01:28.962 --> 00:01:33.462
 Because TLS roles are layered together, changing cryptography can affect clients, servers,
 
-00:01:27.090 --> 00:01:30.830
-proxies, libraries, certificate issuance, compliance evidence, monitoring,
+00:01:33.462 --> 00:01:36.836
+proxies, libraries, certificate issuance, compliance evidence, monitoring, and troubleshooting.
 
-00:01:30.830 --> 00:01:32.205
-and troubleshooting.
-
-00:01:32.205 --> 00:01:35.820
+00:01:36.836 --> 00:01:41.711
 Migration planning starts by asking what role the cryptography plays in each connection,
 
-00:01:35.820 --> 00:01:38.310
+00:01:41.711 --> 00:01:45.460
 not by assuming every TLS use case is the same.

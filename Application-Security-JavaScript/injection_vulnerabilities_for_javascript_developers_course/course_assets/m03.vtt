@@ -1,97 +1,88 @@
 WEBVTT
 
-00:00:00.328 --> 00:00:04.640
-SQL injection occurs when application input is used to construct a database query
+00:00:00.100 --> 00:00:05.411
+SQL injection occurs when application input is used to construct a database query unsafely,
 
-00:00:04.640 --> 00:00:05.680
-unsafely,
-
-00:00:05.680 --> 00:00:07.590
+00:00:05.411 --> 00:00:08.066
 allowing the input to alter query meaning.
 
-00:00:07.590 --> 00:00:08.950
+00:00:08.066 --> 00:00:09.204
 For JavaScript developers,
 
-00:00:08.950 --> 00:00:13.195
-the highest-value prevention pattern is to avoid building SQL by combining strings with
+00:00:09.204 --> 00:00:14.894
+the highest-value prevention pattern is to avoid building SQL by combining strings with untrusted values.
 
-00:00:13.195 --> 00:00:14.400
-untrusted values.
-
-00:00:14.400 --> 00:00:17.600
+00:00:14.894 --> 00:00:18.309
 The preferred control is parameterized queries or prepared statements,
 
-00:00:17.600 --> 00:00:20.100
+00:00:18.309 --> 00:00:21.723
 where values are passed separately from the query structure.
 
-00:00:20.100 --> 00:00:24.300
-Query builders and ORMs can reduce risk, but they should not be treated as magic shields.
+00:00:21.723 --> 00:00:24.378
+Query builders and ORMs can reduce risk,
 
-00:00:24.300 --> 00:00:28.960
-Many libraries are safe for common patterns and unsafe when developers drop into raw query
+00:00:24.378 --> 00:00:27.792
+but they should not be treated as magic shields.
 
-00:00:28.960 --> 00:00:29.690
-fragments,
+00:00:27.792 --> 00:00:33.862
+Many libraries are safe for common patterns and unsafe when developers drop into raw query fragments,
 
-00:00:29.690 --> 00:00:32.485
+00:00:33.862 --> 00:00:36.517
 dynamic clauses, custom sorting, or handwritten filters.
 
-00:00:32.485 --> 00:00:35.100
+00:00:36.517 --> 00:00:40.311
 The assessment question is not whether an ORM is present.
 
-00:00:35.100 --> 00:00:39.200
-The question is whether untrusted values can influence query structure rather than being
+00:00:40.311 --> 00:00:46.380
+The question is whether untrusted values can influence query structure rather than being bound as values.
 
-00:00:39.200 --> 00:00:40.245
-bound as values.
-
-00:00:40.245 --> 00:00:42.000
+00:00:46.380 --> 00:00:48.277
 Dynamic features need careful design.
 
-00:00:42.000 --> 00:00:44.365
+00:00:48.277 --> 00:00:50.174
 Sorting, filtering, pagination, search fields,
 
-00:00:44.365 --> 00:00:48.380
+00:00:50.174 --> 00:00:55.864
 and report builders often require parts of a query to change based on user choices.
 
-00:00:48.380 --> 00:00:51.500
+00:00:55.864 --> 00:01:00.037
 These are places where allowlists are more appropriate than free-form input.
 
-00:00:51.500 --> 00:00:55.400
-For example, a client can be allowed to select from known field names or directions,
+00:01:00.037 --> 00:01:00.795
+For example,
 
-00:00:55.400 --> 00:00:58.655
+00:01:00.795 --> 00:01:05.727
+a client can be allowed to select from known field names or directions,
+
+00:01:05.727 --> 00:01:09.520
 while the application maps those choices to controlled query components.
 
-00:00:58.655 --> 00:01:02.200
+00:01:09.520 --> 00:01:13.693
 Input validation helps, but it does not replace safe query construction.
 
-00:01:02.200 --> 00:01:05.900
-Validation can reject values that do not match business expectations,
+00:01:13.693 --> 00:01:18.625
+Validation can reject values that do not match business expectations, reduce accidental errors,
 
-00:01:05.900 --> 00:01:08.500
-reduce accidental errors, and improve type safety.
+00:01:18.625 --> 00:01:20.142
+and improve type safety.
 
-00:01:08.500 --> 00:01:11.485
+00:01:20.142 --> 00:01:22.418
 Parameterization addresses the database interpretation problem.
 
-00:01:11.485 --> 00:01:15.615
+00:01:22.418 --> 00:01:26.970
 Least-privileged database accounts add another layer by limiting what the application can
 
-00:01:15.615 --> 00:01:17.090
+00:01:26.970 --> 00:01:29.246
 do if a query path fails.
 
-00:01:17.090 --> 00:01:19.885
+00:01:29.246 --> 00:01:32.281
 Strong SQL injection prevention is boring by design.
 
-00:01:19.885 --> 00:01:24.000
+00:01:32.281 --> 00:01:36.074
 Use parameterized APIs, constrain dynamic query structure to known choices,
 
-00:01:24.000 --> 00:01:27.395
+00:01:36.074 --> 00:01:39.489
 avoid raw string-built queries, review escape hatches in ORMs,
 
-00:01:27.395 --> 00:01:30.800
-and test high-risk paths such as search, filters, sort controls,
-
-00:01:30.800 --> 00:01:32.500
-and administrative reporting.
+00:01:39.489 --> 00:01:44.420
+and test high-risk paths such as search, filters, sort controls, and administrative reporting.

@@ -1,97 +1,88 @@
 WEBVTT
 
-00:00:00.540 --> 00:00:00.820
+00:00:00.100 --> 00:00:00.916
 Template, code,
 
-00:00:00.820 --> 00:00:05.975
-and expression injection risks appear when untrusted input can influence executable logic
+00:00:00.916 --> 00:00:07.442
+and expression injection risks appear when untrusted input can influence executable logic rather than plain content.
 
-00:00:05.975 --> 00:00:07.040
-rather than plain content.
-
-00:00:07.040 --> 00:00:12.040
+00:00:07.442 --> 00:00:11.113
 Server-side template engines, expression evaluators, dynamic imports, plugin systems,
 
-00:00:12.040 --> 00:00:16.040
+00:00:11.113 --> 00:00:15.192
 and JavaScript evaluation features can all create sensitive interpretation points.
 
-00:00:16.040 --> 00:00:18.040
+00:00:15.192 --> 00:00:18.862
 The core question is whether the user controls data,
 
-00:00:18.040 --> 00:00:22.245
+00:00:18.862 --> 00:00:24.165
 or whether the user controls something the runtime treats as code or instructions.
 
-00:00:22.245 --> 00:00:24.030
+00:00:24.165 --> 00:00:26.204
 JavaScript offers powerful dynamic features,
 
-00:00:24.030 --> 00:00:28.000
+00:00:26.204 --> 00:00:31.099
 including eval-style behavior and constructors that can treat strings as executable code.
 
-00:00:28.000 --> 00:00:31.040
+00:00:31.099 --> 00:00:34.770
 These features are rarely appropriate for ordinary user input.
 
-00:00:31.040 --> 00:00:34.040
+00:00:34.770 --> 00:00:38.848
 Even when they seem convenient for rules, formulas, or customization,
 
-00:00:34.040 --> 00:00:38.040
+00:00:38.848 --> 00:00:43.335
 they can create a path where untrusted text changes program behavior.
 
-00:00:38.040 --> 00:00:41.440
+00:00:43.335 --> 00:00:46.598
 Safer designs use explicit configuration, constrained rule formats,
 
-00:00:41.440 --> 00:00:44.240
+00:00:46.598 --> 00:00:49.045
 or purpose-built parsers with limited capability.
 
-00:00:44.240 --> 00:00:46.040
+00:00:49.045 --> 00:00:51.085
 Template engines also require care.
 
-00:00:46.040 --> 00:00:49.440
-Rendering user content with a template is different from allowing users to define the
+00:00:51.085 --> 00:00:57.203
+Rendering user content with a template is different from allowing users to define the template.
 
-00:00:49.440 --> 00:00:50.040
-template.
-
-00:00:50.040 --> 00:00:53.040
+00:00:57.203 --> 00:01:00.874
 If users can supply template syntax, expressions, or partials,
 
-00:00:53.040 --> 00:00:57.005
+00:01:00.874 --> 00:01:06.176
 the application must treat that as a high-risk design and apply strong constraints.
 
-00:00:57.005 --> 00:01:00.750
+00:01:06.176 --> 00:01:10.663
 Sandbox claims should be reviewed skeptically because sandboxes often have assumptions,
 
-00:01:00.750 --> 00:01:02.927
+00:01:10.663 --> 00:01:12.702
 escape conditions, or dependency limitations.
 
-00:01:02.927 --> 00:01:07.040
+00:01:12.702 --> 00:01:18.005
 Dependencies matter because libraries may interpret strings in ways that are not obvious.
 
-00:01:07.040 --> 00:01:10.540
+00:01:18.005 --> 00:01:20.860
 A validation library, markdown renderer, expression engine,
 
-00:01:10.540 --> 00:01:13.000
+00:01:20.860 --> 00:01:24.123
 or template helper may have its own rules.
 
-00:01:13.000 --> 00:01:17.190
-Reviewing dependency documentation and configuration is part of injection prevention when
+00:01:24.123 --> 00:01:30.649
+Reviewing dependency documentation and configuration is part of injection prevention when the dependency processes user-controlled strings.
 
-00:01:17.190 --> 00:01:19.000
-the dependency processes user-controlled strings.
-
-00:01:19.000 --> 00:01:21.040
+00:01:30.649 --> 00:01:32.688
 The safest pattern is separation.
 
-00:01:21.040 --> 00:01:23.265
+00:01:32.688 --> 00:01:34.728
 User content should remain content.
 
-00:01:23.265 --> 00:01:25.040
+00:01:34.728 --> 00:01:36.767
 Application logic should remain application-owned.
 
-00:01:25.040 --> 00:01:27.500
+00:01:36.767 --> 00:01:39.622
 If customization is required, expose a narrow,
 
-00:01:27.500 --> 00:01:31.000
+00:01:39.622 --> 00:01:43.293
 documented set of options rather than a general-purpose language.
 
-00:01:31.000 --> 00:01:35.040
+00:01:43.293 --> 00:01:47.780
 That design choice prevents untrusted users from turning configuration into code.

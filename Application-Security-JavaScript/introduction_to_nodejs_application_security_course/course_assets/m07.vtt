@@ -1,73 +1,76 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.110
-File handling deserves special care because file names, paths, content type claims,
+00:00:00.100 --> 00:00:05.378
+File handling deserves special care because file names, paths, content type claims, archives,
 
-00:00:05.110 --> 00:00:09.000
-archives, and metadata can all be influenced by users or external systems.
+00:00:05.378 --> 00:00:09.845
+and metadata can all be influenced by users or external systems.
 
-00:00:09.000 --> 00:00:12.000
+00:00:09.845 --> 00:00:14.311
 A file upload feature should treat the uploaded file as untrusted.
 
-00:00:12.000 --> 00:00:16.000
-The application should control storage location, generated names, size limits,
+00:00:14.311 --> 00:00:19.183
+The application should control storage location, generated names, size limits, allowed types,
 
-00:00:16.000 --> 00:00:18.090
-allowed types, scanning or review requirements,
+00:00:19.183 --> 00:00:20.807
+scanning or review requirements,
 
-00:00:18.090 --> 00:00:22.000
+00:00:20.807 --> 00:00:24.868
 and access permissions rather than trusting client-provided names or headers.
 
-00:00:22.000 --> 00:00:26.000
+00:00:24.868 --> 00:00:29.740
 Path traversal occurs when input influences file access outside an intended directory.
 
-00:00:26.000 --> 00:00:28.830
+00:00:29.740 --> 00:00:35.018
 The defensive idea is to avoid using raw user input as a path,
 
-00:00:28.830 --> 00:00:33.000
+00:00:35.018 --> 00:00:38.672
 normalize and constrain paths carefully, use allowlists where possible,
 
-00:00:33.000 --> 00:00:36.210
+00:00:38.672 --> 00:00:41.921
 and separate public files from private internal storage.
 
-00:00:36.210 --> 00:00:39.640
-Temporary files should have predictable lifecycle management so sensitive data does not
+00:00:41.921 --> 00:00:48.417
+Temporary files should have predictable lifecycle management so sensitive data does not remain longer than intended.
 
-00:00:39.640 --> 00:00:40.863
-remain longer than intended.
+00:00:48.417 --> 00:00:49.067
+Node.
 
-00:00:40.863 --> 00:00:45.000
-Node.js can launch child processes, but unsafe command construction is dangerous.
+00:00:49.067 --> 00:00:53.533
+js can launch child processes, but unsafe command construction is dangerous.
 
-00:00:45.000 --> 00:00:47.963
+00:00:53.533 --> 00:00:57.187
 User-controlled input should not be concatenated into shell commands.
 
-00:00:47.963 --> 00:00:51.190
+00:00:57.187 --> 00:01:00.436
 Prefer APIs that pass arguments without shell interpretation,
 
-00:00:51.190 --> 00:00:55.870
+00:01:00.436 --> 00:01:04.902
 restrict what operations are allowed, and apply operating system permissions, timeouts,
 
-00:00:55.870 --> 00:00:57.000
+00:01:04.902 --> 00:01:06.120
 and resource limits.
 
-00:00:57.000 --> 00:01:00.810
-The application should not rely on one validation check as the only barrier before a
+00:01:06.120 --> 00:01:10.992
+The application should not rely on one validation check as the only
 
-00:01:00.810 --> 00:01:04.120
-system-level effect. Server-side request forgery, or SSRF,
+00:01:10.992 --> 00:01:13.022
+barrier before a system-level effect.
 
-00:01:04.120 --> 00:01:09.000
+00:01:13.022 --> 00:01:15.053
+Server-side request forgery, or SSRF,
+
+00:01:15.053 --> 00:01:20.737
 is a risk when server-side URL fetching can be influenced to access unintended resources.
 
-00:01:09.000 --> 00:01:13.115
-The service may be able to reach internal networks, cloud metadata endpoints,
+00:01:20.737 --> 00:01:26.421
+The service may be able to reach internal networks, cloud metadata endpoints, admin panels,
 
-00:01:13.115 --> 00:01:16.000
-admin panels, or services that users cannot reach directly.
+00:01:26.421 --> 00:01:29.263
+or services that users cannot reach directly.
 
-00:01:16.000 --> 00:01:20.000
+00:01:29.263 --> 00:01:32.918
 Safe outbound request controls include allowlists, URL parsing discipline,
 
-00:01:20.000 --> 00:01:24.000
+00:01:32.918 --> 00:01:37.140
 network egress restrictions, timeouts, response limits, and careful handling of redirects.

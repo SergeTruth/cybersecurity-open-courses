@@ -1,82 +1,79 @@
 WEBVTT
 
-00:00:00.433 --> 00:00:05.260
+00:00:00.100 --> 00:00:05.077
 NoSQL injection is less about SQL syntax and more about unsafe query structure.
 
-00:00:05.260 --> 00:00:08.740
+00:00:05.077 --> 00:00:08.140
 In document databases, search systems, and JSON-driven APIs,
 
-00:00:08.740 --> 00:00:12.820
+00:00:08.140 --> 00:00:11.203
 user-controlled objects can sometimes influence operators, filters, selectors,
 
-00:00:12.820 --> 00:00:16.320
+00:00:11.203 --> 00:00:15.414
 or nested conditions if they are passed directly into query construction.
 
-00:00:16.320 --> 00:00:20.495
+00:00:15.414 --> 00:00:20.774
 The risk is that the application accepts more structure or behavior than it intended.
 
-00:00:20.495 --> 00:00:24.261
+00:00:20.774 --> 00:00:25.369
 JavaScript developers should pay attention to JSON body parsing and object shape.
 
-00:00:24.261 --> 00:00:29.195
-A request body may look like ordinary data, but it can contain nested objects, arrays,
+00:00:25.369 --> 00:00:30.729
+A request body may look like ordinary data, but it can contain nested objects,
 
-00:00:29.195 --> 00:00:32.615
-unexpected types, or fields that the route did not intend to expose.
+00:00:30.729 --> 00:00:35.706
+arrays, unexpected types, or fields that the route did not intend to expose.
 
-00:00:32.615 --> 00:00:36.955
+00:00:35.706 --> 00:00:40.683
 If application code passes that structure directly into a query, update, or filter,
 
-00:00:36.955 --> 00:00:39.221
+00:00:40.683 --> 00:00:44.129
 the user may influence more than a simple value.
 
-00:00:39.221 --> 00:00:41.687
+00:00:44.129 --> 00:00:47.191
 Schema validation and type checking are important here.
 
-00:00:41.687 --> 00:00:45.440
-Define the expected shape of input, reject unknown fields where appropriate,
+00:00:47.191 --> 00:00:52.169
+Define the expected shape of input, reject unknown fields where appropriate, constrain types,
 
-00:00:45.440 --> 00:00:47.335
-constrain types, set length limits,
+00:00:52.169 --> 00:00:56.380
+set length limits, and map accepted fields into application-owned query objects.
 
-00:00:47.335 --> 00:00:50.520
-and map accepted fields into application-owned query objects.
-
-00:00:50.520 --> 00:00:53.520
+00:00:56.380 --> 00:01:00.974
 This is different from simply checking that the request is valid JSON.
 
-00:00:53.520 --> 00:00:56.315
+00:01:00.974 --> 00:01:04.420
 JSON syntax only proves the input can be parsed,
 
-00:00:56.315 --> 00:00:58.491
+00:01:04.420 --> 00:01:07.100
 not that it represents an authorized query.
 
-00:00:58.491 --> 00:01:02.408
+00:01:07.100 --> 00:01:10.929
 Allowlisting fields and operators is especially important for filtering APIs.
 
-00:01:02.408 --> 00:01:05.960
+00:01:10.929 --> 00:01:15.906
 A client may be allowed to filter by status, owner, or creation date,
 
-00:01:05.960 --> 00:01:09.200
+00:01:15.906 --> 00:01:19.734
 but not by arbitrary internal fields or special query operators.
 
-00:01:09.200 --> 00:01:13.140
-The application should translate approved client choices into controlled query behavior
+00:01:19.734 --> 00:01:24.329
+The application should translate approved client choices into controlled query behavior rather
 
-00:01:13.140 --> 00:01:15.730
-rather than treating the request body as the query itself.
+00:01:24.329 --> 00:01:27.774
+than treating the request body as the query itself.
 
-00:01:15.730 --> 00:01:18.760
+00:01:27.774 --> 00:01:30.454
 Mass assignment and over-posting are related concerns.
 
-00:01:18.760 --> 00:01:23.090
+00:01:30.454 --> 00:01:36.197
 If a JavaScript API accepts an entire object and writes or queries with it directly,
 
-00:01:23.090 --> 00:01:26.215
+00:01:36.197 --> 00:01:40.409
 clients may provide fields the developer did not intend to honor.
 
-00:01:26.215 --> 00:01:29.800
+00:01:40.409 --> 00:01:44.237
 The safer pattern is to validate intent, construct explicit objects,
 
-00:01:29.800 --> 00:01:32.160
+00:01:44.237 --> 00:01:47.300
 and make the allowed behavior visible in code.

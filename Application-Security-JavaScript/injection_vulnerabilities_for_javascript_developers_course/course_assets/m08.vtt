@@ -1,94 +1,91 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.302
+00:00:00.100 --> 00:00:04.474
 Injection prevention should be visible in design, code review, and tests.
 
-00:00:04.302 --> 00:00:07.520
+00:00:04.474 --> 00:00:08.450
 Reviewers should ask where untrusted data enters, where it flows,
 
-00:00:07.520 --> 00:00:09.640
+00:00:08.450 --> 00:00:10.836
 and which sensitive sinks it reaches.
 
-00:00:09.640 --> 00:00:13.960
+00:00:10.836 --> 00:00:14.813
 Sensitive sinks include database queries, shell commands, templates, browser rendering,
 
-00:00:13.960 --> 00:00:17.260
+00:00:14.813 --> 00:00:17.994
 file paths, headers, URLs, parsers, and downstream APIs.
 
-00:00:17.260 --> 00:00:19.055
+00:00:17.994 --> 00:00:20.777
 If data reaches one of those locations,
 
-00:00:19.055 --> 00:00:22.335
+00:00:20.777 --> 00:00:23.561
 the review should identify the context-specific control.
 
-00:00:22.335 --> 00:00:25.295
+00:00:23.561 --> 00:00:26.742
 Security-focused tests should cover schemas, negative cases, boundaries,
 
-00:00:25.295 --> 00:00:26.727
+00:00:26.742 --> 00:00:27.935
 and high-risk transformations.
 
-00:00:26.727 --> 00:00:29.160
+00:00:27.935 --> 00:00:31.513
 A test can confirm that unknown fields are rejected,
 
-00:00:29.160 --> 00:00:33.785
+00:00:31.513 --> 00:00:36.683
 that unsupported operators are not accepted, that route parameters are treated as values,
 
-00:00:33.785 --> 00:00:35.595
+00:00:36.683 --> 00:00:39.069
 that rendering paths use safe APIs,
 
-00:00:35.595 --> 00:00:39.200
+00:00:39.069 --> 00:00:42.647
 and that command execution paths only allow approved operations.
 
-00:00:39.200 --> 00:00:43.640
+00:00:42.647 --> 00:00:47.419
 These tests should use safe representative inputs rather than exploit payload collections.
 
-00:00:43.640 --> 00:00:47.570
+00:00:47.419 --> 00:00:52.986
 Static analysis and dependency review can help, but they are not complete by themselves.
 
-00:00:47.570 --> 00:00:52.560
+00:00:52.986 --> 00:00:57.758
 Tools may find string-built queries, risky process execution calls, raw HTML rendering,
 
-00:00:52.560 --> 00:00:54.202
+00:00:57.758 --> 00:00:59.348
 or unsafe evaluation patterns.
 
-00:00:54.202 --> 00:00:58.395
+00:00:59.348 --> 00:01:04.517
 Human review is still needed to understand data flow, framework behavior, business intent,
 
-00:00:58.395 --> 00:00:59.775
+00:01:04.517 --> 00:01:05.710
 and compensating controls.
 
-00:00:59.775 --> 00:01:01.890
+00:01:05.710 --> 00:01:08.891
 Least privilege and defense in depth reduce impact.
 
-00:01:01.890 --> 00:01:05.780
+00:01:08.891 --> 00:01:12.868
 Database accounts should have only the permissions the application needs.
 
-00:01:05.780 --> 00:01:07.520
+00:01:12.868 --> 00:01:15.254
 Processes should run with constrained privileges.
 
-00:01:07.520 --> 00:01:11.880
-Logging and monitoring should identify suspicious validation failures without exposing
+00:01:15.254 --> 00:01:19.628
+Logging and monitoring should identify suspicious validation failures without exposing secrets.
 
-00:01:11.880 --> 00:01:12.500
-secrets.
-
-00:01:12.500 --> 00:01:16.080
+00:01:19.628 --> 00:01:24.002
 Content Security Policy, safe defaults, and framework protections can add layers,
 
-00:01:16.080 --> 00:01:19.927
+00:01:24.002 --> 00:01:28.773
 but they should not be treated as permission to build unsafe sinks.
 
-00:01:19.927 --> 00:01:21.562
+00:01:28.773 --> 00:01:30.762
 Document assumptions and sensitive sinks.
 
-00:01:21.562 --> 00:01:24.008
+00:01:30.762 --> 00:01:34.738
 Future developers need to know why a field is allowlisted,
 
-00:01:24.008 --> 00:01:28.370
-why a query builder escape hatch is prohibited, why a template path rejects user content,
+00:01:34.738 --> 00:01:37.919
+why a query builder escape hatch is prohibited,
 
-00:01:28.370 --> 00:01:30.775
-or why a rendering helper is required.
+00:01:37.919 --> 00:01:43.486
+why a template path rejects user content, or why a rendering helper is required.
 
-00:01:30.775 --> 00:01:33.600
+00:01:43.486 --> 00:01:47.860
 Secure design becomes easier to maintain when the reasoning is visible.

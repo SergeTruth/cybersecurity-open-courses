@@ -1,118 +1,109 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.440
-For discrete variables, Bayesian networks often use conditional probability tables,
+00:00:00.100 --> 00:00:04.128
+For discrete variables, Bayesian networks often use conditional probability tables, or CPTs.
 
-00:00:04.440 --> 00:00:08.110
-or CPTs. A discrete variable has a set of named states, such as true
+00:00:04.128 --> 00:00:08.827
+A discrete variable has a set of named states, such as true or false,
 
-00:00:08.110 --> 00:00:10.660
-or false, high or low, working or failed.
+00:00:08.827 --> 00:00:10.840
+high or low, working or failed.
 
-00:00:10.660 --> 00:00:13.990
+00:00:10.840 --> 00:00:15.204
 A root node has no parents, so it uses a prior probability distribution.
 
-00:00:13.990 --> 00:00:16.750
+00:00:15.204 --> 00:00:18.224
 For example, Weather might have probabilities for sunny, cloudy,
 
-00:00:16.750 --> 00:00:18.945
+00:00:18.224 --> 00:00:20.574
 and rainy before considering any parent variable.
 
-00:00:18.945 --> 00:00:22.040
+00:00:20.574 --> 00:00:23.595
 A child node has probabilities conditioned on its parents.
 
-00:00:22.040 --> 00:00:25.520
+00:00:23.595 --> 00:00:27.958
 Suppose a simple network has Weather and Sprinkler as parents of Wet Ground.
 
-00:00:25.520 --> 00:00:28.680
-The probability of Wet Ground depends on whether the weather is rainy and whether the
+00:00:27.958 --> 00:00:31.986
+The probability of Wet Ground depends on whether the weather is rainy
 
-00:00:28.680 --> 00:00:30.105
-sprinkler is on.
+00:00:31.986 --> 00:00:33.999
+and whether the sprinkler is on.
 
-00:00:30.105 --> 00:00:33.935
+00:00:33.999 --> 00:00:39.034
 The CPT for Wet Ground has a row for each relevant combination of parent states.
 
-00:00:33.935 --> 00:00:36.580
+00:00:39.034 --> 00:00:41.719
 Each row should form a valid probability distribution.
 
-00:00:36.580 --> 00:00:37.590
+00:00:41.719 --> 00:00:43.062
 In a true-or-false row,
 
-00:00:37.590 --> 00:00:41.199
+00:00:43.062 --> 00:00:47.425
 the probability of true plus the probability of false should sum to one.
 
-00:00:41.199 --> 00:00:44.920
+00:00:47.425 --> 00:00:51.453
 The graph lets the joint probability distribution be factored into local terms.
 
-00:00:44.920 --> 00:00:47.005
+00:00:51.453 --> 00:00:54.138
 One compact way to write the idea is:
 
-00:00:47.005 --> 00:00:50.490
-the probability of all variables together equals the product of each variable's
+00:00:54.138 --> 00:00:59.508
+the probability of all variables together equals the product of each variable's probability given its parents.
 
-00:00:50.490 --> 00:00:52.080
-probability given its parents.
+00:00:59.508 --> 00:01:04.207
+In words, instead of building one enormous table that lists every possible state combination,
 
-00:00:52.080 --> 00:00:52.590
-In words,
-
-00:00:52.590 --> 00:00:56.480
-instead of building one enormous table that lists every possible state combination,
-
-00:00:56.480 --> 00:00:59.790
+00:01:04.207 --> 00:01:07.563
 the Bayesian network breaks the model into smaller local relationships.
 
-00:00:59.790 --> 00:01:03.260
+00:01:07.563 --> 00:01:11.255
 That is one reason Bayesian networks are useful for practical modeling.
 
-00:01:03.260 --> 00:01:05.040
+00:01:11.255 --> 00:01:12.933
 Factorization is not magic compression.
 
-00:01:05.040 --> 00:01:07.840
+00:01:12.933 --> 00:01:16.290
 It depends on the conditional independence assumptions in the graph.
 
-00:01:07.840 --> 00:01:11.790
+00:01:16.290 --> 00:01:20.989
 If the graph leaves out an important dependency, the factorized model can be misleading.
 
-00:01:11.790 --> 00:01:12.320
-Also,
+00:01:20.989 --> 00:01:23.674
+Also, not every Bayesian network uses simple CPTs.
 
-00:01:12.320 --> 00:01:16.580
-not every Bayesian network uses simple CPTs. Continuous or hybrid networks may use
+00:01:23.674 --> 00:01:26.359
+Continuous or hybrid networks may use Gaussian distributions,
 
-00:01:16.580 --> 00:01:17.750
-Gaussian distributions,
-
-00:01:17.750 --> 00:01:21.710
+00:01:26.359 --> 00:01:29.044
 regression-style conditional models, or other local probability distributions.
 
-00:01:21.710 --> 00:01:25.710
+00:01:29.044 --> 00:01:33.072
 The core idea remains the same: local distributions, organized by the graph,
 
-00:01:25.710 --> 00:01:27.720
+00:01:33.072 --> 00:01:34.750
 define the larger probabilistic model.
 
-00:01:27.720 --> 00:01:30.760
+00:01:34.750 --> 00:01:37.770
 In practice, CPT design is often a modeling bottleneck.
 
-00:01:30.760 --> 00:01:33.085
+00:01:37.770 --> 00:01:41.127
 Too many parents can create a table with many rows,
 
-00:01:33.085 --> 00:01:35.940
+00:01:41.127 --> 00:01:44.148
 and each row needs probability values that mean something.
 
-00:01:35.940 --> 00:01:38.535
+00:01:44.148 --> 00:01:46.161
 Modelers sometimes simplify states, combine variables,
 
-00:01:38.535 --> 00:01:42.075
+00:01:46.161 --> 00:01:49.518
 or use structured conditional distributions to keep the model manageable.
 
-00:01:42.075 --> 00:01:44.395
+00:01:49.518 --> 00:01:52.874
 The goal is not to make the largest possible table.
 
-00:01:44.395 --> 00:01:48.075
-The goal is to represent the relationships at the level of detail needed for the reasoning
+00:01:52.874 --> 00:01:56.902
+The goal is to represent the relationships at the level of detail
 
-00:01:48.075 --> 00:01:48.580
-question.
+00:01:56.902 --> 00:01:58.580
+needed for the reasoning question.

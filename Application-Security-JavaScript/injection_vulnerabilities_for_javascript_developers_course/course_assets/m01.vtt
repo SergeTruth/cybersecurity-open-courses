@@ -1,88 +1,88 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.425
+00:00:00.100 --> 00:00:04.788
 Injection happens when untrusted input changes the meaning of something the application
 
-00:00:04.425 --> 00:00:06.810
+00:00:04.788 --> 00:00:07.522
 sends to an interpreter or downstream system.
 
-00:00:06.810 --> 00:00:10.765
-That something might be a database query, command, document, template, script, URL,
+00:00:07.522 --> 00:00:12.601
+That something might be a database query, command, document, template, script, URL, header,
 
-00:00:10.765 --> 00:00:13.180
-header, protocol message, or API request.
+00:00:12.601 --> 00:00:14.554
+protocol message, or API request.
 
-00:00:13.180 --> 00:00:16.140
+00:00:14.554 --> 00:00:18.461
 The security failure is not simply that input was accepted.
 
-00:00:16.140 --> 00:00:19.755
-The failure is that data was allowed to become instructions or structure in a context
+00:00:18.461 --> 00:00:23.149
+The failure is that data was allowed to become instructions or structure
 
-00:00:19.755 --> 00:00:21.240
-where it should have remained data.
+00:00:23.149 --> 00:00:26.664
+in a context where it should have remained data.
 
-00:00:21.240 --> 00:00:24.840
-JavaScript and Node.js applications encounter many interpreters.
+00:00:26.664 --> 00:00:27.836
+JavaScript and Node.
 
-00:00:24.840 --> 00:00:29.430
+00:00:27.836 --> 00:00:29.790
+js applications encounter many interpreters.
+
+00:00:29.790 --> 00:00:34.477
 A backend may build SQL queries, NoSQL queries, shell commands, template output,
 
-00:00:29.430 --> 00:00:34.150
+00:00:34.477 --> 00:00:38.384
 JSON documents, URLs, HTTP headers, and messages to downstream APIs.
 
-00:00:34.150 --> 00:00:39.145
+00:00:38.384 --> 00:00:43.853
 A frontend may render HTML, set attributes, build URLs, update the DOM, parse JSON,
 
-00:00:39.145 --> 00:00:41.625
+00:00:43.853 --> 00:00:46.197
 and interact with browser security rules.
 
-00:00:41.625 --> 00:00:46.060
+00:00:46.197 --> 00:00:51.666
 Each context has its own rules for what characters, types, structures, and APIs mean.
 
-00:00:46.060 --> 00:00:48.800
+00:00:51.666 --> 00:00:54.401
 This is why injection prevention is context-specific.
 
-00:00:48.800 --> 00:00:52.400
+00:00:54.401 --> 00:00:58.698
 Input validation checks whether data has the shape the application expects.
 
-00:00:52.400 --> 00:00:55.495
+00:00:58.698 --> 00:01:01.433
 Parameterization keeps values separate from query structure.
 
-00:00:55.495 --> 00:00:58.960
+00:01:01.433 --> 00:01:05.339
 Output encoding makes data safe for a specific rendering context.
 
-00:00:58.960 --> 00:01:02.215
+00:01:05.339 --> 00:01:09.636
 Escaping may be useful only when it matches the exact interpreter.
 
-00:01:02.215 --> 00:01:05.280
+00:01:09.636 --> 00:01:12.761
 Safe API design avoids string-built instructions when possible.
 
-00:01:05.280 --> 00:01:07.940
+00:01:12.761 --> 00:01:16.277
 These controls are related, but they are not interchangeable.
 
-00:01:07.940 --> 00:01:12.170
-A common mistake is trying to memorize dangerous inputs instead of understanding sensitive
+00:01:16.277 --> 00:01:21.746
+A common mistake is trying to memorize dangerous inputs instead of understanding sensitive sinks.
 
-00:01:12.170 --> 00:01:16.140
-sinks. The safer mental model is to ask where untrusted data enters, where it flows,
+00:01:21.746 --> 00:01:27.216
+The safer mental model is to ask where untrusted data enters, where it flows,
 
-00:01:16.140 --> 00:01:17.640
+00:01:27.216 --> 00:01:29.169
 and where it is interpreted.
 
-00:01:17.640 --> 00:01:22.400
+00:01:29.169 --> 00:01:34.638
 If the data reaches a database, shell, template engine, browser, file path, URL, header,
 
-00:01:22.400 --> 00:01:26.960
+00:01:34.638 --> 00:01:39.716
 or external API, the developer must choose a control appropriate to that destination.
 
-00:01:26.960 --> 00:01:30.480
+00:01:39.716 --> 00:01:45.186
 The goal is simple to state and demanding to implement: keep data as data.
 
-00:01:30.480 --> 00:01:34.680
-JavaScript developers prevent injection by designing application boundaries so untrusted
+00:01:45.186 --> 00:01:51.045
+JavaScript developers prevent injection by designing application boundaries so untrusted input cannot change command meaning,
 
-00:01:34.680 --> 00:01:36.340
-input cannot change command meaning,
-
-00:01:36.340 --> 00:01:40.960
+00:01:51.045 --> 00:01:53.780
 query structure, document structure, or executable logic.
