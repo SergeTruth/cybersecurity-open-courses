@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.173
+YAML is often chosen because it is readable and pleasant for
+configuration.
+
+2
+00:00:04.173 --> 00:00:08.803
+That flexibility is useful, but it also creates security and reliability
+concerns.
+
+3
+00:00:08.803 --> 00:00:16.889
+YAML can support richer features than many teams need, including tags,
+anchors, aliases, complex types, and implementation-specific behavior.
+
+4
+00:00:16.889 --> 00:00:21.389
+Secure Python code should accept only the YAML features required for the
+use case.
+
+5
+00:00:21.389 --> 00:00:23.019
+Safe loader concepts matter.
+
+6
+00:00:23.019 --> 00:00:33.909
+When YAML comes from an untrusted or lightly trusted source, the parser
+should be configured to load ordinary data rather than construct arbitrary
+application objects or interpret broad behavior.
+
+7
+00:00:33.909 --> 00:00:43.039
+The important principle is simple: parsing a document should not silently
+become object construction, privileged configuration, or executable
+program behavior.
+
+8
+00:00:43.039 --> 00:00:48.712
+Configuration files and user-submitted YAML should not be treated the same
+just because both are YAML.
+
+9
+00:00:48.712 --> 00:00:52.886
+A reviewed deployment configuration may be allowed to set runtime options.
+
+10
+00:00:52.886 --> 00:00:58.559
+A customer-uploaded policy file or workflow description should be
+constrained to an explicit schema.
+
+11
+00:00:58.559 --> 00:01:05.667
+The application should separate trusted configuration from user data, and
+it should avoid broad loaders for untrusted content.
+
+12
+00:01:05.667 --> 00:01:08.014
+Keep YAML schemas simple and predictable.
+
+13
+00:01:08.014 --> 00:01:16.361
+Limit accepted features where practical, document expected keys, reject or
+ignore unsupported features intentionally, and validate after parsing.
+
+14
+00:01:16.361 --> 00:01:18.578
+YAML is not dangerous because it is YAML.
+
+15
+00:01:18.578 --> 00:01:28.360
+Risk appears when flexible parsing is combined with unclear trust, broad
+loaders, complex features, and configuration decisions that the
+application did not intend to expose.

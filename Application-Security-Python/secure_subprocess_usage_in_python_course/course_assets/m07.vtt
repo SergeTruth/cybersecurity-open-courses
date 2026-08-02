@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.254
+Timeouts are essential because child processes do not always finish
+quickly or predictably.
+
+2
+00:00:05.254 --> 00:00:11.837
+A process may hang, wait for input, slow down under load, produce too much
+output, or depend on an unavailable service.
+
+3
+00:00:11.837 --> 00:00:17.357
+Without a timeout, a web request, worker slot, or scheduled job can remain
+occupied indefinitely.
+
+4
+00:00:17.357 --> 00:00:22.611
+Timeouts turn unbounded execution into an operational decision the
+application can handle.
+
+5
+00:00:22.611 --> 00:00:25.271
+Output management also affects availability.
+
+6
+00:00:25.271 --> 00:00:36.310
+If a process produces more output than expected, captures are too large,
+or streams are not handled correctly, the parent process can consume
+memory, block, or lose useful diagnostic information.
+
+7
+00:00:36.310 --> 00:00:42.628
+The application should decide whether output is captured, streamed,
+limited, stored, redacted, or discarded.
+
+8
+00:00:42.628 --> 00:00:48.147
+Standard output and standard error should be treated as potentially
+sensitive until classified.
+
+9
+00:00:48.147 --> 00:00:52.869
+Exit codes and check behavior should be translated into safe application
+outcomes.
+
+10
+00:00:52.869 --> 00:01:00.650
+Some failures are expected business problems, some are dependency
+failures, some are timeouts, and some are unexpected internal errors.
+
+11
+00:01:00.650 --> 00:01:08.763
+User-facing responses should avoid raw command strings, sensitive
+arguments, full internal output, and unnecessary implementation detail.
+
+12
+00:01:08.763 --> 00:01:15.413
+Internal logs can preserve safe diagnostic context, correlation IDs,
+operation names, durations, and reason codes.
+
+13
+00:01:15.413 --> 00:01:21.864
+Resource controls and retry behavior prevent subprocess failures from
+becoming denial-of-service conditions.
+
+14
+00:01:21.864 --> 00:01:29.445
+Concurrency limits, queue limits, output limits, cancellation behavior,
+and process termination rules should be part of the design.
+
+15
+00:01:29.445 --> 00:01:38.755
+Retrying a failed child process may be appropriate for transient failures,
+but repeated execution can duplicate work, amplify outages, or leave
+partial artifacts.
+
+16
+00:01:38.755 --> 00:01:42.280
+Failure should be predictable, observable, and recoverable.

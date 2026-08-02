@@ -1,0 +1,92 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.752
+Least privilege means a database account has only the access needed for
+its approved purpose.
+
+2
+00:00:04.752 --> 00:00:14.797
+A public web application may need to read and write specific tables, but
+it usually should not create schemas, manage users, change permissions,
+disable audit settings, or read unrelated data sets.
+
+3
+00:00:14.797 --> 00:00:17.203
+A reporting process may need read-only access.
+
+4
+00:00:17.203 --> 00:00:21.414
+A migration job may need schema-change privileges for a short operational
+window.
+
+5
+00:00:21.414 --> 00:00:25.624
+Administrative credentials should not live inside normal application
+runtimes.
+
+6
+00:00:25.624 --> 00:00:27.669
+Separate accounts make intent visible.
+
+7
+00:00:27.669 --> 00:00:35.790
+Read-only, read-write, migration, reporting, maintenance, and
+administrative identities should not be treated as cosmetic labels on the
+same broad access.
+
+8
+00:00:35.790 --> 00:00:41.384
+Their privileges should reflect what the workload is allowed to do, and
+their use should be observable in logs.
+
+9
+00:00:41.384 --> 00:00:52.752
+When an application account performs an unexpected schema change, connects
+from an unexpected environment, or touches data outside its purpose, that
+should stand out rather than blend into normal administrator activity.
+
+10
+00:00:52.752 --> 00:00:55.158
+Environment separation is equally important.
+
+11
+00:00:55.158 --> 00:01:03.038
+Development, staging, and production should use different credentials,
+different databases or schemas as appropriate, and different access
+policies.
+
+12
+00:01:03.038 --> 00:01:08.813
+A local script should not accidentally point at production because a
+copied environment file had a real endpoint.
+
+13
+00:01:08.813 --> 00:01:11.399
+CI jobs should not inherit developer credentials.
+
+14
+00:01:11.399 --> 00:01:16.512
+Staging data should not create privacy risk simply because it feels less
+important than production.
+
+15
+00:01:16.512 --> 00:01:20.061
+Separation reduces blast radius and makes mistakes easier to detect.
+
+16
+00:01:20.061 --> 00:01:25.414
+Modern platforms may also support workload identity, short-lived tokens,
+or managed service accounts.
+
+17
+00:01:25.414 --> 00:01:34.317
+Those patterns can reduce the need for long-lived static passwords, but
+they do not remove the need for database permissions, environment
+boundaries, and rotation planning.
+
+18
+00:01:34.317 --> 00:01:43.640
+The principle is stable: the connection identity should match the
+application purpose, carry only necessary privileges, and be revocable
+without guessing which systems will break.

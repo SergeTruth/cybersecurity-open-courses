@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Mutual TLS and Service Identity",
+  "graphicAlt": "In mutual TLS, server and client each present distinct certificates and validate separate trust chains; the authenticated service identity then enters an application authorization gate.",
+  "narration": "Mutual TLS, often called mTLS, is a pattern where both sides of a connection present certificates. A client validates the server identity, and the server also validates the client certificate. This can strengthen service identity in service-to-service communication, device communication, workload identity, or controlled partner integrations. It is most useful when both ends are managed and certificate lifecycle can be operated reliably.\n\nClient certificates require their own trust model. The server needs a trust store or validation policy for client certificates, and the application needs a way to map a validated certificate to an application identity or service role. That mapping should be explicit. A certificate may establish that a workload or device is known, but the application still needs to decide which resources and actions that identity is authorized to use.\n\nmTLS can improve identity assurance, but it does not automatically authorize every requested action. Least privilege still matters. A service with a valid client certificate should not necessarily call every internal endpoint, read every tenant record, or perform administrative operations. Application authorization, request validation, auditing, and monitoring remain necessary even when the transport layer establishes strong service identity.\n\nOperational complexity is real. Certificates expire, keys need protection, trust stores change, clients are provisioned and deprovisioned, and incidents may require revocation or rotation. mTLS should be used with clear ownership, documented renewal processes, monitoring, and incident response. When operated well, it can strengthen service identity. When operated casually, it can create fragile dependencies and confusing outages.",
+  "narrationPoints": [
+    "Mutual TLS, often called mTLS, is a pattern where both sides of a connection present certificates.",
+    "Client certificates require their own trust model.",
+    "mTLS can improve identity assurance, but it does not automatically authorize every requested action.",
+    "mTLS should be used with clear ownership, documented renewal processes, monitoring, and incident response.",
+    "A client validates the server identity, and the server also validates the client certificate.",
+    "Application authorization, request validation, auditing, and monitoring remain necessary even when the transport layer establishes strong service identity."
+  ]
+};

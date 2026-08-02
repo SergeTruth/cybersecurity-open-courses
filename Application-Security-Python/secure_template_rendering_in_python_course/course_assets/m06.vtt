@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:12.454
+User-generated content includes comments, profiles, tickets, documentation
+fields, CMS content, product descriptions, knowledge-base articles, and
+other text that people or external systems can influence.
+
+2
+00:00:12.454 --> 00:00:17.201
+Some applications need only plain text, which should usually be rendered
+as text.
+
+3
+00:00:17.201 --> 00:00:21.261
+Others need markdown, limited formatting, links, or richer content.
+
+4
+00:00:21.261 --> 00:00:28.348
+The first security decision is the content policy: what formatting is
+allowed, for whom, and in which rendering contexts.
+
+5
+00:00:28.348 --> 00:00:34.196
+Sanitization at a high level means preserving approved formatting while
+removing unsafe behavior.
+
+6
+00:00:34.196 --> 00:00:39.701
+It should rely on vetted libraries and clear allowlists rather than ad hoc
+string replacement.
+
+7
+00:00:39.701 --> 00:00:47.957
+Browser parsing is complicated, and simple replacement rules tend to miss
+malformed input, encoded forms, context changes, or new features.
+
+8
+00:00:47.957 --> 00:00:54.975
+A maintainable policy defines allowed elements, allowed attributes, URL
+rules, and where sanitized output may be used.
+
+9
+00:00:54.975 --> 00:00:58.553
+Storing raw versus sanitized content is a real design choice.
+
+10
+00:00:58.553 --> 00:01:03.783
+Raw content can be reprocessed if the policy changes, but it must not be
+casually rendered.
+
+11
+00:01:03.783 --> 00:01:09.081
+Sanitized content can simplify display, but policy changes may require re-
+sanitization.
+
+12
+00:01:09.081 --> 00:01:11.970
+Some systems store both with strict access rules.
+
+13
+00:01:11.970 --> 00:01:18.989
+Whatever the choice, teams need to know which version is shown in
+templates, emails, previews, exports, and admin views.
+
+14
+00:01:18.989 --> 00:01:23.117
+Rich content also needs ownership, moderation, and lifecycle review.
+
+15
+00:01:23.117 --> 00:01:28.208
+A markdown feature added for internal documentation may later be exposed
+to customers.
+
+16
+00:01:28.208 --> 00:01:32.062
+A product description field may later appear in an email campaign.
+
+17
+00:01:32.062 --> 00:01:35.571
+A support ticket may later be rendered in an admin dashboard.
+
+18
+00:01:35.571 --> 00:01:42.520
+Secure rendering treats rich content as a continuing trust boundary, not a
+one-time cleanup at the moment data is saved.

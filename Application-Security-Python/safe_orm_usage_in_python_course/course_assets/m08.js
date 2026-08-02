@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, Monitoring, and Review",
+  "graphicAlt": "Operational lifecycle diagram for Testing, Logging, Monitoring, and Review, showing request DTO, authorization-aware repository, ORM session, tenant filter, database, and minimized response model; labeled arrows identify query and object-authorization boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Testing ORM safety means testing both data correctness and security boundaries. Unit tests can cover data-access functions, dynamic filter mappings, serializer field lists, and validation helpers. Integration tests can confirm that ORM queries, raw SQL paths, migrations, and transactions behave correctly against a representative database. Authorization tests should verify model access for normal users, privileged users, tenants, organizations, and denied cases.\n\nNegative tests are especially valuable for dynamic filters and unsafe fields. They can confirm that unsupported sort fields are rejected, that clients cannot write read-only attributes, that cross-tenant access fails, and that generic serializers do not expose sensitive relationships. Regression tests should be added after query fixes so a future feature does not reintroduce overbroad access or unsafe query construction.\n\nSafe query logging supports investigation without exposing secrets or sensitive data. Logs should avoid credentials, tokens, raw connection strings, unnecessary personal data, and sensitive query values. Correlation identifiers, high-level event categories, and controlled audit fields are usually more useful than dumping entire queries with all values. Monitoring unusual database access patterns, large exports, repeated denied access, and unexpected admin queries can help identify problems earlier.\n\nCode review questions should follow the ORM boundary. Does this query use safe APIs? Are dynamic choices allowlisted? Is authorization included before records are returned or changed? Are tenant filters present? Are create and update fields explicit? Does serialization minimize exposure? Are raw SQL and migrations reviewed? ORM safety must be maintained as models, relationships, APIs, reports, and background jobs evolve.",
+  "narrationPoints": [
+    "Testing ORM safety means testing both data correctness and security boundaries.",
+    "Negative tests are especially valuable for dynamic filters and unsafe fields.",
+    "Logs should avoid credentials, tokens, raw connection strings, unnecessary personal data, and sensitive query values.",
+    "Is authorization included before records are returned or changed?",
+    "Are dynamic choices allowlisted?",
+    "Are raw SQL and migrations reviewed?"
+  ]
+};

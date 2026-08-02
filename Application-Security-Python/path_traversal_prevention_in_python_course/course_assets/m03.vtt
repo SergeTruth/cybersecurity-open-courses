@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.152
+Safe path construction starts from a trusted base directory or storage
+root chosen by the application, not from a complete path supplied by a
+user.
+
+2
+00:00:08.152 --> 00:00:15.243
+The application should combine trusted configuration with controlled
+identifiers or approved names using path-aware APIs.
+
+3
+00:00:15.243 --> 00:00:19.153
+String concatenation is fragile because path values have structure.
+
+4
+00:00:19.153 --> 00:00:28.565
+Separators, relative segments, absolute forms, drive or root indicators,
+encoding differences, and platform behavior can all change how a final
+path is interpreted.
+
+5
+00:00:28.565 --> 00:00:35.325
+Canonicalization is the process of resolving a path into a consistent form
+so it can be compared or checked more reliably.
+
+6
+00:00:35.325 --> 00:00:41.753
+At a high level, teams often normalize a path, resolve relative meaning,
+and compare the result to an approved base.
+
+7
+00:00:41.753 --> 00:00:46.923
+This can help identify whether the final path remains inside the intended
+storage location.
+
+8
+00:00:46.923 --> 00:00:50.833
+Canonicalization is useful, but it is not a complete design by itself.
+
+9
+00:00:50.833 --> 00:00:55.141
+It must be paired with clear storage policy, allowlists, and
+authorization.
+
+10
+00:00:55.141 --> 00:01:05.811
+A base-directory containment check asks a simple question: after the path
+is resolved according to the platform and storage model, is the final
+location still inside the approved directory?
+
+11
+00:01:05.811 --> 00:01:14.029
+That check should happen before sensitive reads or writes, and the code
+should handle missing files, invalid names, and permission errors safely.
+
+12
+00:01:14.029 --> 00:01:19.464
+A safe failure should not expose internal paths or automatically fall back
+to a broader location.
+
+13
+00:01:19.464 --> 00:01:24.567
+Path APIs are preferable to ad hoc text manipulation because they
+represent paths as paths.
+
+14
+00:01:24.567 --> 00:01:26.224
+They still require judgment.
+
+15
+00:01:26.224 --> 00:01:37.756
+Developers must understand whether links are followed, when resolution
+touches the filesystem, how errors are handled, and whether a later
+operation can target something different from what was checked.
+
+16
+00:01:37.756 --> 00:01:46.040
+Safe path construction is a pattern: trusted base, controlled input, path-
+aware joining, resolved containment, authorization, and careful use.

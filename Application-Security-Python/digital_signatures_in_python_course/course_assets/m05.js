@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Verification Workflows and Failure Handling",
+  "graphicAlt": "Decision diagram for Verification Workflows and Failure Handling, showing signer, protected private key, message bytes, signature, and verifier public key; labeled arrows identify signing and verification boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Verification checks a signature against expected data and an expected public key under an accepted algorithm. The word expected is important. A verifier should know who the signer is supposed to be, where the key comes from, which algorithms are allowed, what data representation is verified, and what context must be true. Merely finding some public key that validates a signature is not a safe trust model.\n\nVerification must happen before signed content is trusted. A webhook should not trigger side effects before its signature and context are checked. A token should not grant access before signature, issuer, audience, expiration, and intended use are validated as appropriate. A signed configuration should not be loaded into privileged behavior until the expected signer and content representation are verified.\n\nFailure handling should be fail closed. If verification cannot be completed safely, the content should be rejected or handled as untrusted. Applications should reject unsigned content when a signature is required, reject incorrectly signed content, avoid partial verification mistakes, and avoid falling back to a weaker path for convenience. Error messages should be controlled so attackers do not learn sensitive key or policy details.\n\nVerification success is not the end of the decision. The application still needs input validation, schema checks, authorization, freshness checks, replay protections where appropriate, and business rules. Logs should record useful verification failures and policy decisions without exposing private keys, tokens, or unnecessary signed content. A strong verifier is strict, boring, observable, and hard to bypass accidentally.",
+  "narrationPoints": [
+    "Verification checks a signature against expected data and an expected public key under an accepted algorithm.",
+    "A webhook should not trigger side effects before its signature and context are checked.",
+    "A signed configuration should not be loaded into privileged behavior until the expected signer and content representation are verified.",
+    "Verification success is not the end of the decision.",
+    "Logs should record useful verification failures and policy decisions without exposing private keys, tokens, or unnecessary signed content.",
+    "Failure handling should be fail closed."
+  ]
+};

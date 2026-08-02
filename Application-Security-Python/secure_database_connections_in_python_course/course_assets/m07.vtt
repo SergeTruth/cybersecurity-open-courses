@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.362
+Python database access often sits behind a framework or ORM.
+
+2
+00:00:03.362 --> 00:00:17.007
+Django centralizes many database settings, SQLAlchemy-style engines
+collect driver and pool configuration, and Flask or FastAPI applications
+commonly assemble a data layer with dependency injection, sessions, or
+request lifecycle hooks.
+
+3
+00:00:17.007 --> 00:00:21.556
+Those abstractions are helpful, but they do not guarantee secure
+configuration.
+
+4
+00:00:21.556 --> 00:00:30.521
+Reviewers should still confirm how secrets are loaded, whether TLS
+expectations are enforced, which account is used, and how connections are
+opened and closed.
+
+5
+00:00:30.521 --> 00:00:35.992
+ORMs can make common workflows safer and more maintainable, yet they also
+provide escape hatches.
+
+6
+00:00:35.992 --> 00:00:44.364
+Raw SQL, dynamic filters, custom connection options, and multiple engine
+definitions may bypass the assumptions used in the rest of the
+application.
+
+7
+00:00:44.364 --> 00:00:54.516
+A secure connection standard should apply consistently whether code uses a
+high-level model, a migration tool, an async driver, a reporting query, or
+a lower-level database cursor.
+
+8
+00:00:54.516 --> 00:01:00.647
+Migrations need special handling because they often require privileges
+normal runtime code should not have.
+
+9
+00:01:00.647 --> 00:01:08.689
+Schema changes, index creation, data backfills, and administrative
+maintenance can require broader authority and longer execution windows.
+
+10
+00:01:08.689 --> 00:01:12.908
+That does not mean the web application should run forever with those
+powers.
+
+11
+00:01:12.908 --> 00:01:22.268
+Migration credentials, deployment jobs, approval processes, and audit logs
+should make privileged database changes intentional, time-bounded, and
+attributable.
+
+12
+00:01:22.268 --> 00:01:28.663
+Background jobs, scheduled tasks, notebooks, and data scripts frequently
+become exceptions to secure patterns.
+
+13
+00:01:28.663 --> 00:01:36.046
+They may be written quickly, run with copied connection strings, skip TLS
+options, log full errors, or use production data casually.
+
+14
+00:01:36.046 --> 00:01:40.726
+Treat every code path that connects to the database as part of the
+security boundary.
+
+15
+00:01:40.726 --> 00:01:50.680
+The same expectations for secret handling, environment separation, least
+privilege, logging hygiene, and safe failure behavior should follow the
+data wherever it is accessed.

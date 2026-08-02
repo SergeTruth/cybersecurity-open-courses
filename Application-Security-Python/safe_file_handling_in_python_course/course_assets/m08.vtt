@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.002
+Safe logging of file operations helps teams investigate behavior without
+leaking the very data they are trying to protect.
+
+2
+00:00:07.002 --> 00:00:16.494
+Useful events may include uploads, downloads, access denied decisions,
+deletions, parser failures, scan results, retention actions, and
+administrative changes.
+
+3
+00:00:16.494 --> 00:00:27.535
+Logs should include correlation IDs and operation status where useful, but
+they should avoid unnecessary file contents, secrets, tokens, regulated
+data, and sensitive personal information.
+
+4
+00:00:27.535 --> 00:00:31.642
+Audit events are especially useful for security-sensitive workflows.
+
+5
+00:00:31.642 --> 00:00:40.124
+A file deletion, privileged download, failed authorization check, upload
+rejection, or parser failure may be important during incident response.
+
+6
+00:00:40.124 --> 00:00:51.098
+Logging should be privacy-aware and role-aware: enough detail to support
+investigation and accountability, not so much detail that logs become a
+second uncontrolled copy of sensitive files.
+
+7
+00:00:51.098 --> 00:00:54.195
+Testing should include more than happy-path uploads.
+
+8
+00:00:54.195 --> 00:01:07.188
+Boundary tests, invalid names, unexpected extensions, oversized files,
+empty files, parser failures, unauthorized downloads, deleted files,
+concurrent operations, cleanup behavior, and access control checks all
+matter.
+
+9
+00:01:07.188 --> 00:01:16.950
+Path handling tests should confirm that file operations stay inside
+intended directories without using offensive payload examples in course
+material or documentation.
+
+10
+00:01:16.950 --> 00:01:19.306
+Code review should ask direct questions.
+
+11
+00:01:19.306 --> 00:01:20.989
+Where did this path come from?
+
+12
+00:01:20.989 --> 00:01:22.403
+Who chose this filename?
+
+13
+00:01:22.403 --> 00:01:24.423
+What base directory constrains it?
+
+14
+00:01:24.423 --> 00:01:26.712
+What permissions does the process have?
+
+15
+00:01:26.712 --> 00:01:28.597
+What parser handles the content?
+
+16
+00:01:28.597 --> 00:01:30.011
+What happens on failure?
+
+17
+00:01:30.011 --> 00:01:34.319
+Is the file served back to users, and if so, where is authorization
+enforced?
+
+18
+00:01:34.319 --> 00:01:42.600
+Static analysis, dependency review, and secure coding standards can help,
+but file handling must remain testable, reviewable, and observable.

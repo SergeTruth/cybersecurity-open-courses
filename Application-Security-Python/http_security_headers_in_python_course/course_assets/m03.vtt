@@ -1,0 +1,94 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.330
+HTTPS is the foundation for browser transport protection.
+
+2
+00:00:03.330 --> 00:00:08.858
+It helps protect data in transit and gives the browser a basis for
+stronger security expectations.
+
+3
+00:00:08.858 --> 00:00:22.845
+Many other controls assume secure transport: Secure cookies, trusted
+redirects, service worker behavior, modern browser APIs, and sensitive
+form submissions all depend on the application being served over a
+properly configured secure channel.
+
+4
+00:00:22.845 --> 00:00:26.574
+Headers can support this model, but they do not replace TLS itself.
+
+5
+00:00:26.574 --> 00:00:34.900
+Strict-Transport-Security, commonly called HSTS, tells browsers to use
+HTTPS for a site under defined rules after the browser has seen the
+policy.
+
+6
+00:00:34.900 --> 00:00:39.762
+That can help reduce accidental downgrade behavior and mixed transport
+assumptions.
+
+7
+00:00:39.762 --> 00:00:44.824
+HSTS needs careful rollout because browsers remember the policy for the
+configured time.
+
+8
+00:00:44.824 --> 00:00:55.413
+Subdomain coverage and preload concepts can broaden the effect, so teams
+should understand domain ownership, legacy hosts, and operational
+readiness before using aggressive settings.
+
+9
+00:00:55.413 --> 00:01:00.409
+Local development, staging, and production often have different transport
+realities.
+
+10
+00:01:00.409 --> 00:01:05.204
+Developers may test with local HTTP while production uses TLS behind a
+reverse proxy.
+
+11
+00:01:05.204 --> 00:01:11.731
+The Python application may see a proxied request and need to understand
+forwarded protocol information correctly.
+
+12
+00:01:11.731 --> 00:01:20.390
+If the application and proxy disagree about whether a request is secure,
+cookies, redirects, generated links, and origin checks can behave
+incorrectly.
+
+13
+00:01:20.390 --> 00:01:25.718
+Transport assumptions should be documented and validated in production-
+like environments.
+
+14
+00:01:25.718 --> 00:01:31.246
+Transport-related headers do not replace authentication, authorization, or
+input validation.
+
+15
+00:01:31.246 --> 00:01:36.041
+HTTPS protects the channel; it does not decide whether the user may
+perform an action.
+
+16
+00:01:36.041 --> 00:01:40.970
+HSTS encourages secure transport; it does not fix unsafe templates or
+exposed secrets.
+
+17
+00:01:40.970 --> 00:01:46.831
+Secure cookies align session behavior with HTTPS; they do not make session
+contents safe by themselves.
+
+18
+00:01:46.831 --> 00:01:51.160
+Transport controls are essential, but they are one layer in a broader
+design.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.328
+Context-aware output encoding means handling data according to the browser
+context where it will be placed.
+
+2
+00:00:06.328 --> 00:00:13.274
+HTML body text, attribute values, URLs, JavaScript strings, JSON
+responses, and CSS each need appropriate treatment.
+
+3
+00:00:13.274 --> 00:00:18.639
+A safe Python application does not ask whether data has been escaped in a
+vague general sense.
+
+4
+00:00:18.639 --> 00:00:23.454
+It asks whether the data has been handled correctly for this exact output
+location.
+
+5
+00:00:23.454 --> 00:00:31.501
+Template autoescaping helps reduce risk in common HTML contexts,
+especially when developers use standard variable insertion patterns.
+
+6
+00:00:31.501 --> 00:00:34.527
+But autoescaping is not a license to ignore context.
+
+7
+00:00:34.527 --> 00:00:42.299
+Attributes, URLs, script-adjacent data, and client-side use can require
+additional constraints or different rendering patterns.
+
+8
+00:00:42.299 --> 00:00:49.521
+Developers should avoid raw or unsafe rendering shortcuts unless the
+content has a reviewed reason and a controlled policy.
+
+9
+00:00:49.521 --> 00:00:58.394
+Input validation alone does not reliably prevent XSS because validation
+usually happens before the application knows every future rendering
+context.
+
+10
+00:00:58.394 --> 00:01:04.515
+A display name may pass a length check and character policy, yet still
+need encoding when placed into HTML.
+
+11
+00:01:04.515 --> 00:01:09.674
+A search term may be valid input, yet still require safe handling when
+reflected in a page.
+
+12
+00:01:09.674 --> 00:01:14.144
+Validation is useful, but output safety is decided at the point of
+rendering.
+
+13
+00:01:14.144 --> 00:01:17.033
+JSON response safety deserves its own attention.
+
+14
+00:01:17.033 --> 00:01:21.435
+Returning data as JSON does not automatically make every frontend use
+safe.
+
+15
+00:01:21.435 --> 00:01:27.831
+Browser code may insert values into text nodes, attributes, URLs,
+templates, or markup-building functions.
+
+16
+00:01:27.831 --> 00:01:36.360
+Backend and frontend teams should agree on data contracts and safe
+rendering practices so API data remains data throughout the path to the
+browser.

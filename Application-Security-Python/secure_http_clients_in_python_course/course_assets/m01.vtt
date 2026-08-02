@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.056
+Secure HTTP client usage means treating outbound requests from Python as
+security-sensitive application behavior.
+
+2
+00:00:07.056 --> 00:00:17.921
+A Python service may call partner APIs, internal services, identity
+providers, storage endpoints, webhook targets, billing systems, metadata
+services, or monitoring endpoints.
+
+3
+00:00:17.921 --> 00:00:24.342
+Those calls can carry credentials, user data, business instructions, and
+assumptions about remote trust.
+
+4
+00:00:24.342 --> 00:00:27.729
+When a client sends a request, it is not just moving bytes.
+
+5
+00:00:27.729 --> 00:00:33.303
+It is making a decision about where to connect, what to reveal, what to
+accept, and how to react.
+
+6
+00:00:33.303 --> 00:00:38.383
+An HTTP client is different from a browser client, an API server, a proxy,
+or a gateway.
+
+7
+00:00:38.383 --> 00:00:42.475
+A browser enforces browser security rules and runs in a user context.
+
+8
+00:00:42.475 --> 00:00:50.448
+A Python HTTP client runs on the server side or inside automation, often
+with internal network reachability and service credentials.
+
+9
+00:00:50.448 --> 00:00:53.764
+An API server receives and validates inbound requests.
+
+10
+00:00:53.764 --> 00:00:57.010
+A proxy or gateway may route, inspect, or apply policy.
+
+11
+00:00:57.010 --> 00:01:03.431
+The Python client still needs its own safe request construction, response
+validation, and error handling.
+
+12
+00:01:03.431 --> 00:01:09.428
+Outbound requests can affect confidentiality, integrity, availability, and
+business workflows.
+
+13
+00:01:09.428 --> 00:01:22.340
+A client might expose tokens in logs, send data to the wrong destination,
+trust an unexpected response, retry a state-changing request, follow a
+redirect across a boundary, or wait indefinitely for a slow dependency.
+
+14
+00:01:22.340 --> 00:01:26.291
+A successful HTTP response only proves that something responded.
+
+15
+00:01:26.291 --> 00:01:33.347
+It does not prove that the destination was approved, the endpoint identity
+was verified, or the response is safe to use.
+
+16
+00:01:33.347 --> 00:01:40.332
+Secure HTTP client behavior should be designed as part of application
+architecture, not scattered as one-off calls.
+
+17
+00:01:40.332 --> 00:01:52.679
+Teams should define approved destinations, transport requirements,
+authentication patterns, timeout and retry behavior, redirect rules,
+parsing expectations, logging rules, and monitoring signals.
+
+18
+00:01:52.679 --> 00:02:01.640
+The goal is predictable outbound communication where credentials, data,
+and trust decisions are visible enough to review and safe enough to
+operate.

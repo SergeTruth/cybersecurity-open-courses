@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.034
+Python tracebacks are valuable during development because they show where
+failure occurred and how execution reached that point.
+
+2
+00:00:07.034 --> 00:00:18.376
+They can include file paths, module names, function names, line numbers,
+framework internals, dependency behavior, variable representations, and
+sometimes sensitive values embedded in exception messages.
+
+3
+00:00:18.376 --> 00:00:24.839
+That detail helps developers fix issues, but it is rarely appropriate for
+production users or unauthenticated clients.
+
+4
+00:00:24.839 --> 00:00:29.972
+Debug mode and interactive debugger features are particularly sensitive in
+web applications.
+
+5
+00:00:29.972 --> 00:00:37.892
+Development tools may show exception pages, local variables, environment
+details, request data, configuration hints, or interactive controls.
+
+6
+00:00:37.892 --> 00:00:43.342
+Those features are intended for trusted local diagnostics, not public or
+semi-public environments.
+
+7
+00:00:43.342 --> 00:00:51.072
+Production systems should use safe defaults that prevent raw tracebacks
+and interactive debugging interfaces from reaching untrusted users.
+
+8
+00:00:51.072 --> 00:00:54.938
+Environment separation keeps diagnostic behavior in its proper place.
+
+9
+00:00:54.938 --> 00:00:58.803
+Local development can be verbose because the audience is the developer.
+
+10
+00:00:58.803 --> 00:01:04.822
+Staging may need more detail than production, but it can still contain
+sensitive data or external integrations.
+
+11
+00:01:04.822 --> 00:01:15.658
+Production should send limited responses while preserving controlled
+internal diagnostics in logs, traces, crash reports, or error reporting
+systems with appropriate access control and redaction.
+
+12
+00:01:15.658 --> 00:01:19.967
+Framework-provided error handlers are helpful when configured
+deliberately.
+
+13
+00:01:19.967 --> 00:01:26.050
+Flask, Django, FastAPI, ASGI servers, worker frameworks, and task queues
+each have ways to shape error handling.
+
+14
+00:01:26.050 --> 00:01:30.992
+The durable principle is to verify the deployed behavior, not just assume
+defaults are safe.
+
+15
+00:01:30.992 --> 00:01:39.800
+Production-like tests should confirm that raw tracebacks, debug pages,
+unsafe headers, and internal exception text are not exposed through normal
+failure paths.

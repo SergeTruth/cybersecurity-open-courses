@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing application event, field allowlist, recursive redactor, structured log sink, restricted viewer, and retention boundary; labeled arrows identify safe telemetry flow and blocked sensitive fields and the point where unsafe input or behavior is rejected.",
+  "narration": "Safe logging in Python provides useful operational and security visibility without turning logs into a sensitive-data leak. The practice applies across web frameworks, APIs, command-line tools, background jobs, data pipelines, notebooks, and internal services. Logs help teams debug, support users, investigate incidents, meet audit needs, and monitor system health, but they must be designed with confidentiality, integrity, privacy, and operational usefulness in mind.\n\nStrong logging design starts with intentional event selection. Log the events that answer real operational and security questions. Prefer structured fields over ambiguous free text. Use safe identifiers, event names, outcomes, reason codes, request IDs, and correlation IDs. Avoid full request bodies and broad object dumps by default. Exclude secrets, tokens, credentials, private keys, reset links, full sensitive connection strings, and unnecessary personal data.\n\nSafe logging also depends on controls around the logging pipeline. Use appropriate log levels, protect exception detail, redact and mask sensitive values, handle untrusted data safely, preserve timestamp and source integrity, limit access, define retention, and treat exports as sensitive artifacts. Logs should be trustworthy enough to support investigation without blindly trusting every user-controlled field.\n\nThe final takeaway is practical: logs are part of the security architecture. They should help teams operate Python systems safely, not create a second data store full of secrets and private information. Test logging behavior, review representative samples, monitor important signals, and respond quickly if sensitive data appears. Useful, trustworthy, privacy-aware logging is a durable engineering habit.",
+  "narrationPoints": [
+    "Safe logging in Python provides useful operational and security visibility without turning logs into a sensitive-data leak.",
+    "Strong logging design starts with intentional event selection.",
+    "Avoid full request bodies and broad object dumps by default.",
+    "Safe logging also depends on controls around the logging pipeline.",
+    "Test logging behavior, review representative samples, monitor important signals, and respond quickly if sensitive data appears.",
+    "Prefer structured fields over ambiguous free text."
+  ]
+};

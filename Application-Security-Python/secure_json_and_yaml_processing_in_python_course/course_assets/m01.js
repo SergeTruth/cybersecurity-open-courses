@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why JSON and YAML Processing Is Security-Relevant",
+  "graphicAlt": "Untrusted JSON and YAML enter a layered boundary of byte limits, safe decoding, complexity budgets, exact schemas, type normalization, explicit mapping, private errors, and approved output.",
+  "narration": "JSON and YAML are ordinary formats, but they often sit directly on security boundaries. Python applications use them for API requests, configuration files, automation, CI/CD pipelines, cloud tooling, infrastructure definitions, message queues, and data pipelines. When structured data changes program behavior, permissions, routing, storage, or deployment settings, parsing becomes more than a convenience feature.\n\nStructured data is still input. It may come from users, uploaded files, repositories, webhooks, third-party systems, service responses, generated machine output, or internal automation. Some sources are more trusted than others, but trust should be explicit. A file being readable or a request being syntactically valid does not prove that the content is safe for the application.\n\nParsing, validation, deserialization, object mapping, configuration loading, and business rule enforcement are different steps. Parsing turns bytes or text into a structure. Validation checks whether that structure matches expected rules. Object mapping places data into program objects. Business rules decide whether the result is meaningful and allowed. Skipping these distinctions creates fragile code.\n\nValid JSON or valid YAML does not mean safe data. Risk themes include unsafe loaders, unexpected types, oversized input, confusing numeric behavior, sensitive data exposure, mass assignment, configuration mistakes, and parser resource pressure. Secure processing means treating structured data as untrusted until it has been parsed safely, validated explicitly, bounded, mapped carefully, and used only for its intended purpose.",
+  "narrationPoints": [
+    "JSON and YAML are ordinary formats, but they often sit directly on security boundaries.",
+    "Some sources are more trusted than others, but trust should be explicit.",
+    "Parsing, validation, deserialization, object mapping, configuration loading, and business rule enforcement are different steps.",
+    "Valid JSON or valid YAML does not mean safe data.",
+    "Python applications use them for API requests, configuration files, automation, CI/CD pipelines, cloud tooling, infrastructure definitions, message queues, and data pipelines.",
+    "A file being readable or a request being syntactically valid does not prove that the content is safe for the application."
+  ]
+};

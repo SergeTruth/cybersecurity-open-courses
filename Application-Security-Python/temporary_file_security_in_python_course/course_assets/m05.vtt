@@ -1,0 +1,94 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.424
+Temporary directory selection is part of the security design.
+
+2
+00:00:03.424 --> 00:00:09.175
+A per-application temporary directory can be easier to reason about than a
+broad shared system location.
+
+3
+00:00:09.175 --> 00:00:13.439
+In some systems, per-user, per-tenant, or per-job isolation is
+appropriate.
+
+4
+00:00:13.439 --> 00:00:18.220
+The right choice depends on deployment, sensitivity, runtime identity, and
+workflow.
+
+5
+00:00:18.220 --> 00:00:26.168
+What matters is that the location is intentional and that only appropriate
+principals can read, write, modify, or delete the artifacts inside it.
+
+6
+00:00:26.168 --> 00:00:32.952
+Permissions and ownership influence whether temporary files are
+confidential and whether their integrity can be trusted.
+
+7
+00:00:32.952 --> 00:00:36.699
+Directory permissions determine who can create or replace entries.
+
+8
+00:00:36.699 --> 00:00:39.930
+File permissions determine who can read or modify content.
+
+9
+00:00:39.930 --> 00:00:43.161
+Runtime identity determines which process owns the files.
+
+10
+00:00:43.161 --> 00:00:46.133
+Umask and platform defaults may affect new file modes.
+
+11
+00:00:46.133 --> 00:00:53.434
+Teams do not need to memorize every platform rule to apply the principle:
+verify that permissions match the sensitivity and workflow.
+
+12
+00:00:53.434 --> 00:01:00.153
+Containers and serverless platforms can make temporary storage feel
+isolated, but assumptions should still be reviewed.
+
+13
+00:01:00.153 --> 00:01:05.193
+Containers may have mounted volumes, shared nodes, writable layers, or
+sidecar processes.
+
+14
+00:01:05.193 --> 00:01:12.365
+Serverless runtimes may reuse execution environments or retain temporary
+data longer than a single function call in some designs.
+
+15
+00:01:12.365 --> 00:01:19.602
+Short-lived infrastructure is useful, but it is not a substitute for
+sensitive-data minimization, controlled paths, and cleanup.
+
+16
+00:01:19.602 --> 00:01:23.607
+Lifecycle management means temporary files exist only as long as needed.
+
+17
+00:01:23.607 --> 00:01:28.712
+Cleanup should happen after success, failure, cancellation, timeout, and
+exception paths.
+
+18
+00:01:28.712 --> 00:01:36.724
+Deletion failures should be observable enough for operations to respond
+before disk usage or sensitive artifact accumulation becomes a problem.
+
+19
+00:01:36.724 --> 00:01:41.634
+Retention should be deliberate when temporary outputs must remain for
+later processing.
+
+20
+00:01:41.634 --> 00:01:45.640
+The absence of cleanup is a design decision, even when nobody intended it.

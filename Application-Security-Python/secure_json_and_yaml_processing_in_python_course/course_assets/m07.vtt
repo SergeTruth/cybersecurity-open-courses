@@ -1,0 +1,68 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.863
+Parser robustness is about availability as well as correctness.
+
+2
+00:00:03.863 --> 00:00:13.978
+Large payloads, deeply nested data, repeated structures, expensive
+conversions, and complex YAML features can consume memory, CPU, time,
+storage, or recursion depth.
+
+3
+00:00:13.978 --> 00:00:21.354
+A parser that behaves correctly for small examples may still be unsafe if
+it accepts unbounded input in a production service.
+
+4
+00:00:21.354 --> 00:00:24.585
+Resource controls should be chosen near the boundary.
+
+5
+00:00:24.585 --> 00:00:37.791
+API gateways, web frameworks, queues, file upload handlers, and
+application code may all provide places to enforce request body limits,
+file size limits, message size limits, timeout behavior, and nesting
+expectations.
+
+6
+00:00:37.791 --> 00:00:43.621
+The controls should be documented and tested so developers know where
+oversized data is rejected.
+
+7
+00:00:43.621 --> 00:00:52.120
+Streaming and incremental processing can be appropriate for intentionally
+large JSON data, but they are design choices, not automatic fixes.
+
+8
+00:00:52.120 --> 00:00:58.091
+Streaming still needs validation strategy, error handling, partial failure
+behavior, and limits.
+
+9
+00:00:58.091 --> 00:01:07.363
+YAML is often better kept small and configuration-oriented, because broad
+flexibility and deeply nested structures can become difficult to reason
+about.
+
+10
+00:01:07.363 --> 00:01:09.470
+Fail-safe error handling matters.
+
+11
+00:01:09.470 --> 00:01:19.234
+Malformed, oversized, unsupported, or resource-intensive input should not
+crash the service, leak internals, leave partial state, or create
+confusing retries.
+
+12
+00:01:19.234 --> 00:01:26.821
+Good parser error paths return controlled messages, record useful
+operational events, and avoid treating failure as success.
+
+13
+00:01:26.821 --> 00:01:32.440
+Robust parsing makes the system predictable when inputs are ugly, not only
+when they are ideal.

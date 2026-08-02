@@ -1,0 +1,92 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.821
+Authentication and authorization are different.
+
+2
+00:00:02.821 --> 00:00:05.051
+Authentication identifies the caller.
+
+3
+00:00:05.051 --> 00:00:08.134
+Authorization decides what the caller may access or do.
+
+4
+00:00:08.134 --> 00:00:15.087
+ORM access must include authorization because a query can be technically
+safe and still return data the caller should not see.
+
+5
+00:00:15.087 --> 00:00:22.237
+Every sensitive data operation should verify the subject, action,
+resource, and context before returning or changing records.
+
+6
+00:00:22.237 --> 00:00:25.254
+Object-level authorization is central to ORM safety.
+
+7
+00:00:25.254 --> 00:00:29.649
+A user may be allowed to access a path or endpoint, but not every record
+behind it.
+
+8
+00:00:29.649 --> 00:00:37.455
+Queries should filter by the current user, role, tenant, organization,
+project, permission, workflow state, or ownership as appropriate.
+
+9
+00:00:37.455 --> 00:00:43.489
+List endpoints are especially important because overbroad queries can
+quietly expose many records at once.
+
+10
+00:00:43.489 --> 00:00:48.540
+Detail endpoints, updates, deletes, and exports need the same resource-
+specific checks.
+
+11
+00:00:48.540 --> 00:00:54.116
+Tenant and organization boundaries should be built into query patterns
+rather than added by memory.
+
+12
+00:00:54.116 --> 00:01:00.478
+Multi-tenant applications need consistent filters so one tenant cannot
+read or modify another tenant's records.
+
+13
+00:01:00.478 --> 00:01:05.201
+Support and administrative access should have explicit rules, logging, and
+review.
+
+14
+00:01:05.201 --> 00:01:09.858
+Hidden buttons, hidden routes, and client-side filtering are not access
+controls.
+
+15
+00:01:09.858 --> 00:01:14.647
+Server-side ORM queries should return only what the current context is
+allowed to see.
+
+16
+00:01:14.647 --> 00:01:18.779
+Preventing overbroad queries is partly architecture and partly testing.
+
+17
+00:01:18.779 --> 00:01:25.076
+Sensitive repository functions should require context, not allow callers
+to fetch everything and filter later.
+
+18
+00:01:25.076 --> 00:01:32.095
+Tests should confirm denied cases, cross-tenant isolation, role limits,
+object ownership, and administrative exceptions.
+
+19
+00:01:32.095 --> 00:01:40.360
+When authorization-aware filters are embedded in the data-access layer,
+developers are less likely to forget them in new routes, jobs, and
+reports.

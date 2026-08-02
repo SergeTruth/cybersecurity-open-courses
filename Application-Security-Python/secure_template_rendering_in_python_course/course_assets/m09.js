@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "A rendering defense map joins trusted template source, narrow helpers, autoescaping, context-aware URL and JSON handling, rich-text sanitization, CSP, regression tests, code review, and remediation.",
+  "narration": "Secure template rendering in Python means treating templates as trusted presentation logic and untrusted data as values that must be safely rendered for the correct context. Django templates, Jinja templates, Flask views, FastAPI template rendering, admin pages, emails, reports, dashboards, and internal tools all create output that users or browsers may interpret. Every one of those paths deserves a clear rendering rule.\n\nStrong designs use autoescaping, context-aware output handling, careful rich-content policies, safe helper functions, trusted template sources, response minimization, testing, review, and remediation. Escaping, sanitization, validation, and browser defenses are different controls. They should support one another rather than be treated as interchangeable. The exact framework may change, but the trust-boundary questions remain stable.\n\nFramework protections are valuable, but developers can weaken them through unsafe filters, raw rendering, untrusted template sources, broad helper functions, or poorly handled user-generated content. Stored data can become dangerous later when it is rendered in a new context. Internal tools can expose powerful users to unsafe output. Emails and reports can reuse fields in ways the original feature did not anticipate.\n\nThe goal is to make safe rendering routine, unsafe rendering rare and reviewable, and browser-facing output predictable and maintainable. When teams track data flow, preserve autoescaping, encode for context, define content policies, restrict dynamic rendering, test risky paths, and remediate root causes, template rendering becomes a controlled part of application security rather than a hidden source of risk.",
+  "narrationPoints": [
+    "Every one of those paths deserves a clear rendering rule.",
+    "The exact framework may change, but the trust-boundary questions remain stable.",
+    "Stored data can become dangerous later when it is rendered in a new context.",
+    "The goal is to make safe rendering routine, unsafe rendering rare and reviewable, and browser-facing output predictable and maintainable.",
+    "Emails and reports can reuse fields in ways the original feature did not anticipate.",
+    "Strong designs use autoescaping, context-aware output handling, careful rich-content policies, safe helper functions, trusted template sources, response minimization, testing, review, and remediation."
+  ]
+};

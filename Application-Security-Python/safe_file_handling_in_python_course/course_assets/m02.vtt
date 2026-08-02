@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:13.206
+Python applications may receive file-related values from many places:
+user-supplied filenames, uploaded files, command-line arguments,
+configuration, API requests, archive member names, generated filenames,
+and database records.
+
+2
+00:00:13.206 --> 00:00:15.418
+Each source has a different trust level.
+
+3
+00:00:15.418 --> 00:00:24.656
+A value that looks like a normal filename may still contain unexpected
+separators, encodings, reserved names, confusing characters, or context-
+dependent behavior.
+
+4
+00:00:24.656 --> 00:00:28.039
+Absolute and relative paths should be handled deliberately.
+
+5
+00:00:28.039 --> 00:00:34.740
+A safe design usually defines a base directory or allowlisted storage
+location, then constrains operations to that area.
+
+6
+00:00:34.740 --> 00:00:42.741
+Canonicalization concepts help the application reason about the final
+resolved location before opening, writing, serving, or deleting a file.
+
+7
+00:00:42.741 --> 00:00:50.288
+The stable principle is not to trust a path string until the application
+has confirmed where it leads and whether that location is allowed.
+
+8
+00:00:50.288 --> 00:00:56.598
+Generated server-side filenames are often safer than storing user-provided
+names directly as filesystem names.
+
+9
+00:00:56.598 --> 00:01:03.819
+The original filename can be preserved as metadata for display when
+needed, but storage names should avoid relying on user control.
+
+10
+00:01:03.819 --> 00:01:12.537
+Extensions may be useful for user experience or routing, but they should
+not be the only control for content trust, parser choice, or authorization
+decisions.
+
+11
+00:01:12.537 --> 00:01:20.083
+Symbolic links and mounted directories deserve attention at a high level
+because they can make a path behave differently than it appears.
+
+12
+00:01:20.083 --> 00:01:28.735
+The application should constrain file access to intended directories and
+intended operations, and it should avoid letting callers choose arbitrary
+paths.
+
+13
+00:01:28.735 --> 00:01:34.200
+Safe path design is about reducing ambiguity before a file operation
+reaches the operating system.

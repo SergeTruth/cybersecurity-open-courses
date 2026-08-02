@@ -1,0 +1,79 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:11.872
+HTTP clients often authenticate with API keys, bearer tokens, signed
+tokens, OAuth-style client credentials, service accounts, workload
+identities, mutual TLS, or other service-specific mechanisms.
+
+2
+00:00:11.872 --> 00:00:16.785
+These credentials determine what the Python application can do in the
+remote system.
+
+3
+00:00:16.785 --> 00:00:26.611
+They should be treated as high-value secrets with controlled storage,
+limited access, safe injection into runtime configuration, rotation plans,
+and clear ownership.
+
+4
+00:00:26.611 --> 00:00:31.455
+Least privilege applies to API credentials just as it applies to database
+accounts.
+
+5
+00:00:31.455 --> 00:00:37.937
+A reporting integration should not have broad administrative permissions
+if it only reads approved summaries.
+
+6
+00:00:37.937 --> 00:00:42.918
+A notification worker should not share the credential used by deployment
+automation.
+
+7
+00:00:42.918 --> 00:00:48.377
+Development, staging, and production should use separate credentials with
+separate scopes.
+
+8
+00:00:48.377 --> 00:00:53.289
+If one credential is exposed, the blast radius should be understandable
+and limited.
+
+9
+00:00:53.289 --> 00:01:02.774
+Secrets should be kept out of URLs, logs, traces, exception messages,
+debug output, process environments when unnecessary, support bundles, and
+broad telemetry.
+
+10
+00:01:02.774 --> 00:01:10.757
+Authentication headers, signed values, cookies, reset links, callback
+secrets, and sensitive query parameters all deserve redaction.
+
+11
+00:01:10.757 --> 00:01:19.013
+A logging statement that helps during development can become a long-lived
+exposure once it reaches centralized logging or a ticketing system.
+
+12
+00:01:19.013 --> 00:01:25.086
+Authenticating to a remote service does not prove that every response is
+safe or authorized for every use.
+
+13
+00:01:25.086 --> 00:01:33.069
+The remote service may return partial data, an error, stale content, an
+unexpected schema, or a result that the current user should not see.
+
+14
+00:01:33.069 --> 00:01:39.960
+Python code still needs local authorization, response validation, and safe
+handling of denied or ambiguous outcomes.
+
+15
+00:01:39.960 --> 00:01:44.600
+Credentials establish access; they do not remove application
+responsibility.

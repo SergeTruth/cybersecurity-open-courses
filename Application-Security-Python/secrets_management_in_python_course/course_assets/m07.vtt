@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.806
+Automation expands the places secrets can appear.
+
+2
+00:00:02.806 --> 00:00:13.116
+CI/CD systems, deployment scripts, container builds, infrastructure-as-
+code pipelines, notebooks, data workflows, scheduled jobs, and test
+environments may all need credentials.
+
+3
+00:00:13.116 --> 00:00:21.990
+The risk is that a secret used for one short operation gets copied into
+logs, images, caches, artifacts, debug output, or long-lived variables
+with broad access.
+
+4
+00:00:21.990 --> 00:00:27.733
+Automation should retrieve secrets securely and keep them out of durable
+artifacts whenever possible.
+
+5
+00:00:27.733 --> 00:00:30.343
+Build-time and runtime secrets are different.
+
+6
+00:00:30.343 --> 00:00:35.237
+A build may need a temporary credential to fetch a private dependency or
+sign an artifact.
+
+7
+00:00:35.237 --> 00:00:39.609
+A runtime service may need a database password or API token while serving
+users.
+
+8
+00:00:39.609 --> 00:00:44.568
+Secrets used during builds should not be baked into container images or
+compiled outputs.
+
+9
+00:00:44.568 --> 00:00:51.420
+Container images may be stored, pulled, scanned, cached, shared, and
+reused well beyond the intended runtime environment.
+
+10
+00:00:51.420 --> 00:00:54.291
+CI/CD secret variables should be scoped carefully.
+
+11
+00:00:54.291 --> 00:00:58.663
+Not every branch, pull request, or job should receive production
+credentials.
+
+12
+00:00:58.663 --> 00:01:02.709
+Deployment credentials should be separated by environment and purpose.
+
+13
+00:01:02.709 --> 00:01:10.148
+Infrastructure-as-code should reference secrets without embedding secret
+values directly in repository files or generated plans.
+
+14
+00:01:10.148 --> 00:01:16.999
+Test environments should use test secrets with limited access rather than
+production credentials copied for convenience.
+
+15
+00:01:16.999 --> 00:01:20.914
+Notebooks and data workflows deserve the same discipline as services.
+
+16
+00:01:20.914 --> 00:01:24.503
+Exploratory Python code often grows into scheduled automation.
+
+17
+00:01:24.503 --> 00:01:30.637
+A token pasted into a notebook can end up in version history, shared
+storage, output cells, or exported reports.
+
+18
+00:01:30.637 --> 00:01:40.360
+The safe pattern is to use approved secret retrieval, keep outputs clean,
+limit access, and treat automation as production-like when it touches real
+systems or sensitive data.

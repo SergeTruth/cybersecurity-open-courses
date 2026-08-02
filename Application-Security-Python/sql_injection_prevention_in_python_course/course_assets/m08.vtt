@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.535
+Testing should cover the data-access paths that matter most.
+
+2
+00:00:03.535 --> 00:00:10.604
+Unit tests can exercise repository functions, query builders, validation
+helpers, and mapping logic for dynamic fields.
+
+3
+00:00:10.604 --> 00:00:18.829
+Integration tests can confirm that ORM paths, raw SQL paths, and
+transaction behavior work as intended with a real or representative
+database.
+
+4
+00:00:18.829 --> 00:00:27.258
+Negative tests can confirm that unsupported filters, invalid identifiers,
+and unauthorized resource access are rejected safely at a high level.
+
+5
+00:00:27.258 --> 00:00:39.833
+Code review should look for unsafe string-built SQL, raw query escape
+hatches, dynamic identifiers, custom expressions, stored procedures that
+build dynamic SQL, and places where authorization filters are missing.
+
+6
+00:00:39.833 --> 00:00:42.756
+Reviewers do not need attack payloads to find risk.
+
+7
+00:00:42.756 --> 00:00:55.467
+They need to understand whether untrusted data can influence SQL
+structure, whether values are parameterized, whether dynamic choices are
+allowlisted, and whether the query respects the current caller's
+permissions.
+
+8
+00:00:55.467 --> 00:01:03.896
+Static analysis, dependency review, scanner findings, and driver updates
+can support the program, but they do not replace engineering judgment.
+
+9
+00:01:03.896 --> 00:01:10.150
+A scanner may flag a string-building pattern that is harmless, or miss a
+dynamic query hidden behind a helper.
+
+10
+00:01:10.150 --> 00:01:13.141
+Dependency changes can alter APIs or safe defaults.
+
+11
+00:01:13.141 --> 00:01:21.774
+Teams should triage findings based on data flow, database capability,
+exposure, and business impact, then add regression tests for confirmed
+fixes.
+
+12
+00:01:21.774 --> 00:01:32.514
+Remediation should replace unsafe dynamic SQL with parameterized values,
+allowlisted identifiers, safer ORM patterns, narrower helper functions,
+and clearer authorization checks.
+
+13
+00:01:32.514 --> 00:01:37.816
+It should also consider database account permissions, error behavior,
+logging, and tests.
+
+14
+00:01:37.816 --> 00:01:40.535
+The best fix is not only removing one risky line.
+
+15
+00:01:40.535 --> 00:01:47.400
+It is changing the local pattern so future features, reports, filters, and
+APIs naturally use safe query construction.

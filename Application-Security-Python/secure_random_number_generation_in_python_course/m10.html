@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure_random_number_generation_in_python">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;: &quot;D&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;C&quot;, &quot;q04&quot;: &quot;A&quot;, &quot;q05&quot;: &quot;D&quot;, &quot;q06&quot;: &quot;C&quot;, &quot;q07&quot;: &quot;B&quot;, &quot;q08&quot;: &quot;B&quot;, &quot;q09&quot;: &quot;D&quot;, &quot;q10&quot;: &quot;A&quot;, &quot;q11&quot;: &quot;B&quot;, &quot;q12&quot;: &quot;C&quot;, &quot;q13&quot;: &quot;C&quot;, &quot;q14&quot;: &quot;B&quot;, &quot;q15&quot;: &quot;A&quot;, &quot;q16&quot;: &quot;D&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. What is the main security goal of secure random number generation?</legend>
+            <label><input type="radio" name="q01" value="A" required> A. Producing values with no repeated characters, even if an attacker can reproduce the sequence.</label>
+            <label><input type="radio" name="q01" value="B" required> B. Making every generated value globally unique without storage checks or collision handling.</label>
+            <label><input type="radio" name="q01" value="C" required> C. Generating strings that look complex to users while remaining deterministic for operational debugging.</label>
+            <label><input type="radio" name="q01" value="D" required> D. Producing security values with enough entropy to remain computationally unpredictable to an attacker.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>2. Why should Python&#x27;s general random module not be used for security tokens?</legend>
+            <label><input type="radio" name="q02" value="A" required> A. It serves simulation and may become predictable when an attacker learns its seed or generator state.</label>
+            <label><input type="radio" name="q02" value="B" required> B. The module draws too slowly from the operating system and therefore cannot create enough token bytes.</label>
+            <label><input type="radio" name="q02" value="C" required> C. The module encrypts its output with a fixed key, and token predictability begins when that key is disclosed.</label>
+            <label><input type="radio" name="q02" value="D" required> D. The module produces floating-point values that are incompatible with reset and session token encodings.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>3. What is entropy at a high level?</legend>
+            <label><input type="radio" name="q03" value="A" required> A. Encoded token length determines entropy without reference to the random source or alphabet.</label>
+            <label><input type="radio" name="q03" value="B" required> B. Independent random generation provides collision-free values for the lifetime of the system.</label>
+            <label><input type="radio" name="q03" value="C" required> C. The unpredictable information available to a secure generator when it produces a random value.</label>
+            <label><input type="radio" name="q03" value="D" required> D. A secret seed stored beside a pseudorandom generator so administrators can recreate every value.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>4. Which Python module is generally intended for generating security-sensitive random values at a high level?</legend>
+            <label><input type="radio" name="q04" value="A" required> A. Python&#x27;s secrets module, which is designed for security-sensitive random values.</label>
+            <label><input type="radio" name="q04" value="B" required> B. random, provided each process calls seed with the current time before creating a token.</label>
+            <label><input type="radio" name="q04" value="C" required> C. uuid formatting with hyphens proves cryptographic unpredictability.</label>
+            <label><input type="radio" name="q04" value="D" required> D. hashlib, because hashing a username and timestamp creates fresh entropy for every request.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>5. Why are deterministic seeds useful in tests but dangerous for secrets?</legend>
+            <label><input type="radio" name="q05" value="A" required> A. Repeatable output is harmless when test seeds contain at least 128 characters and are kept out of logs.</label>
+            <label><input type="radio" name="q05" value="B" required> B. A deterministic seed improves secret rotation because every service can regenerate previous bearer values.</label>
+            <label><input type="radio" name="q05" value="C" required> C. Production secrets remain unpredictable when the seed is an environment name combined with process start time.</label>
+            <label><input type="radio" name="q05" value="D" required> D. Repeatable output supports controlled tests but destroys the unpredictability required for production secrets.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>6. What is a password reset token?</legend>
+            <label><input type="radio" name="q06" value="A" required> A. A permanent account identifier that is public and remains valid after a password change.</label>
+            <label><input type="radio" name="q06" value="B" required> B. A password hash salt sent to a user so the server can recover the original password.</label>
+            <label><input type="radio" name="q06" value="C" required> C. A bearer value authorizing one password reset while its lifetime and one-time-use rules hold.</label>
+            <label><input type="radio" name="q06" value="D" required> D. A short diagnostic code whose only purpose is correlating a reset error in application logs.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>7. Why should reset tokens have expiration?</legend>
+            <label><input type="radio" name="q07" value="A" required> A. Expiration increases entropy in the token bytes after issuance, making short tokens resistant to guessing.</label>
+            <label><input type="radio" name="q07" value="B" required> B. Expiration limits how long a stolen or disclosed reset token remains usable after it is issued.</label>
+            <label><input type="radio" name="q07" value="C" required> C. An expired token no longer needs one-time-use enforcement because timestamp checks prevent every replay.</label>
+            <label><input type="radio" name="q07" value="D" required> D. Long expiration is safer because it reduces how often the random generator must issue new values.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>8. What should logs avoid storing?</legend>
+            <label><input type="radio" name="q08" value="A" required> A. Treat token digests, salts, and nonces as secrets that must stay out of operational records.</label>
+            <label><input type="radio" name="q08" value="B" required> B. Generated secrets, reset links, session identifiers, API keys, or cryptographic key material.</label>
+            <label><input type="radio" name="q08" value="C" required> C. Only full cryptographic keys are sensitive; session identifiers and reset links are safe after URL encoding.</label>
+            <label><input type="radio" name="q08" value="D" required> D. Generated credentials may be logged once at issuance because later redaction prevents replay.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>9. What is a salt used for in password hashing?</legend>
+            <label><input type="radio" name="q09" value="A" required> A. Making the password reversible when the same user signs in from a different device.</label>
+            <label><input type="radio" name="q09" value="B" required> B. Providing a secret pepper that must be identical for every account and stored beside each verifier.</label>
+            <label><input type="radio" name="q09" value="C" required> C. Preventing password guessing by increasing iteration count without needing a password-hashing algorithm.</label>
+            <label><input type="radio" name="q09" value="D" required> D. Making identical passwords produce different stored verifiers when used correctly.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>10. Do salts normally need to be secret?</legend>
+            <label><input type="radio" name="q10" value="A" required> A. No. Password-hashing salts generally require uniqueness, not confidentiality.</label>
+            <label><input type="radio" name="q10" value="B" required> B. Yes; disclosure of a salt lets an attacker immediately derive the original password without guessing.</label>
+            <label><input type="radio" name="q10" value="C" required> C. Yes; salts must be encrypted with the password hash so identical passwords remain indistinguishable.</label>
+            <label><input type="radio" name="q10" value="D" required> D. No; salts require unpredictability only, and reusing one salt for every account is acceptable.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>11. What is a nonce at a high level?</legend>
+            <label><input type="radio" name="q11" value="A" required> A. A secret value that must be reused for every message so the receiver can identify the encryption key.</label>
+            <label><input type="radio" name="q11" value="B" required> B. A value used once or uniquely in a cryptographic context, depending on the protocol requirements.</label>
+            <label><input type="radio" name="q11" value="C" required> C. A password-hashing value whose primary requirement is secrecy rather than uniqueness.</label>
+            <label><input type="radio" name="q11" value="D" required> D. A timestamp that may repeat whenever two encrypted messages contain different plaintext.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>12. Why is nonce reuse risky in some cryptographic contexts?</legend>
+            <label><input type="radio" name="q12" value="A" required> A. Nonce reuse changes ciphertext lengths but leaves confidentiality and integrity intact.</label>
+            <label><input type="radio" name="q12" value="B" required> B. A fresh authentication tag compensates for nonce reuse in every modern authenticated-encryption scheme.</label>
+            <label><input type="radio" name="q12" value="C" required> C. It can undermine the security assumptions of the cryptographic scheme.</label>
+            <label><input type="radio" name="q12" value="D" required> D. Reusing a nonce is safe when it was originally generated with secrets rather than random.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>13. What is modulo bias at a high level?</legend>
+            <label><input type="radio" name="q13" value="A" required> A. A collision where two random tokens are identical even though the generator is perfectly uniform.</label>
+            <label><input type="radio" name="q13" value="B" required> B. A problem caused by URL-safe base64 using fewer printable characters than hexadecimal encoding.</label>
+            <label><input type="radio" name="q13" value="C" required> C. Range mapping is biased when some possible outputs receive a higher probability than others.</label>
+            <label><input type="radio" name="q13" value="D" required> D. A requirement that random values be sorted before mapping them into an allowed range.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>14. Why should token length be chosen intentionally?</legend>
+            <label><input type="radio" name="q14" value="A" required> A. Encoded character count directly equals entropy bits, independent of alphabet and discarded values.</label>
+            <label><input type="radio" name="q14" value="B" required> B. Length affects guessing resistance, collision probability, usability, and storage or transport behavior.</label>
+            <label><input type="radio" name="q14" value="C" required> C. A four-byte default is sufficient for authentication when the token is transmitted only over TLS.</label>
+            <label><input type="radio" name="q14" value="D" required> D. Longer tokens eliminate expiration, one-time-use, rate limiting, storage protection, and collision checks.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>15. What is a common code review concern for secure randomness?</legend>
+            <label><input type="radio" name="q15" value="A" required> A. Use of non-security random APIs for secrets, tokens, session identifiers, keys, or reset links.</label>
+            <label><input type="radio" name="q15" value="B" required> B. Use deterministic random for secret-bearing tests because it provides stronger production behavior.</label>
+            <label><input type="radio" name="q15" value="C" required> C. Calls to os.urandom are unsafe unless their bytes are first hashed with the current timestamp.</label>
+            <label><input type="radio" name="q15" value="D" required> D. Security tokens are safe with random when the code never calls seed explicitly in the same function.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>16. Which statement best summarizes secure random number generation in Python?</legend>
+            <label><input type="radio" name="q16" value="A" required> A. Security tokens should use deterministic seeds for testability, while expiration and hashing compensate for predictable output in production.</label>
+            <label><input type="radio" name="q16" value="B" required> B. A sufficiently long encoding can turn timestamps, counters, usernames, or random-module output into cryptographic entropy without an operating-system source.</label>
+            <label><input type="radio" name="q16" value="C" required> C. Secure generation alone guarantees one-time use, confidentiality in logs, collision-free storage, correct nonce rules, and revocation after issuance.</label>
+            <label><input type="radio" name="q16" value="D" required> D. Security-sensitive values should be generated with appropriate secure APIs, sufficient unpredictability, safe lifecycle controls, and careful logging.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="m09.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

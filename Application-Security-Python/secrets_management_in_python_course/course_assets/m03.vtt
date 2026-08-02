@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.420
+Separating configuration from code is a good principle because
+applications need different settings in local development, testing,
+staging, and production.
+
+2
+00:00:08.420 --> 00:00:13.063
+Secrets should not be compiled into source files or committed alongside
+business logic.
+
+3
+00:00:13.063 --> 00:00:15.106
+But separation by itself is not enough.
+
+4
+00:00:15.106 --> 00:00:24.578
+A value moved from code into an environment variable can still be exposed
+if the environment is broadly readable, logged, dumped during crashes, or
+copied into deployment metadata.
+
+5
+00:00:24.578 --> 00:00:31.017
+Environment variables are common because they are easy for frameworks,
+containers, and deployment platforms to provide.
+
+6
+00:00:31.017 --> 00:00:35.660
+They can be useful for passing secret references or runtime values into a
+Python process.
+
+7
+00:00:35.660 --> 00:00:43.399
+Their limitation is that they are not automatically encrypted, access-
+controlled, rotated, audited, or protected from every form of inspection.
+
+8
+00:00:43.399 --> 00:00:47.733
+Treat them as one delivery mechanism, not a complete secrets management
+strategy.
+
+9
+00:00:47.733 --> 00:00:51.757
+Configuration should distinguish secret values from non-secret settings.
+
+10
+00:00:51.757 --> 00:00:56.338
+A feature flag, public hostname, timeout, or display name may not need
+secret handling.
+
+11
+00:00:56.338 --> 00:00:59.248
+A token, password, private key, or signing secret does.
+
+12
+00:00:59.248 --> 00:01:06.801
+Configuration validation should check that required secrets are present,
+values are well formed, and unsafe fallback behavior is not allowed.
+
+13
+00:01:06.801 --> 00:01:14.973
+A Python application should fail safely when a required secret is missing
+or invalid, rather than silently using a weak default or a development
+credential.
+
+14
+00:01:14.973 --> 00:01:17.450
+Secret loading boundaries should be explicit.
+
+15
+00:01:17.450 --> 00:01:25.250
+The application should know when secrets are read, which component can
+read them, how they are cached, and whether reload is possible after
+rotation.
+
+16
+00:01:25.250 --> 00:01:33.670
+Per-environment access should prevent a development system from reading
+production secrets and prevent a staging service from using production
+credentials.
+
+17
+00:01:33.670 --> 00:01:37.880
+Clear boundaries make deployment safer and make incident response much
+faster.

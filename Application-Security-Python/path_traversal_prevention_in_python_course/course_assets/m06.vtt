@@ -1,0 +1,79 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.896
+Archive handling deserves special review because an archive is a
+collection of file-related instructions.
+
+2
+00:00:05.896 --> 00:00:12.496
+Entries may include names, directories, metadata, permissions, or link-
+like behavior depending on the format and tool.
+
+3
+00:00:12.496 --> 00:00:25.377
+Safe extraction should validate each entry, choose a trusted extraction
+destination, enforce containment, avoid unexpected overwrite behavior, and
+treat extracted content as untrusted until it has passed the rest of the
+application?
+
+4
+00:00:25.377 --> 00:00:26.402
+s policy.
+
+5
+00:00:26.402 --> 00:00:32.426
+Symbolic links, shortcuts, hard links, and mounted paths can affect where
+a file operation ultimately points.
+
+6
+00:00:32.426 --> 00:00:40.821
+The details vary by platform and deployment, but the design concern is
+stable: a path that looked safe during validation may refer somewhere else
+when used.
+
+7
+00:00:40.821 --> 00:00:52.933
+Teams should understand whether their APIs follow links, whether storage
+directories can contain links, and whether untrusted users can create or
+influence link-like objects inside locations the application processes.
+
+8
+00:00:52.933 --> 00:01:00.623
+Temporary files are security-relevant because they often handle uploads,
+generated reports, exports, conversions, or intermediate data.
+
+9
+00:01:00.623 --> 00:01:07.416
+Predictable names, shared directories, broad permissions, incomplete
+cleanup, and accidental reuse can create exposure.
+
+10
+00:01:07.416 --> 00:01:18.823
+Safer patterns use framework or platform helpers that create unpredictable
+names with appropriate permissions, keep temporary data in approved
+locations, and clean up consistently after success or failure.
+
+11
+00:01:18.823 --> 00:01:23.565
+Time-of-check and time-of-use concerns appear when validation and use are
+separated.
+
+12
+00:01:23.565 --> 00:01:30.614
+A file may be replaced, moved, linked, deleted, or modified between the
+moment code checks it and the moment code opens or serves it.
+
+13
+00:01:30.614 --> 00:01:33.113
+Concurrent workers can make this more likely.
+
+14
+00:01:33.113 --> 00:01:41.957
+Sensitive file workflows should minimize gaps, control permissions, avoid
+trusting mutable paths, and prefer stable storage records or handles where
+possible.
+
+15
+00:01:41.957 --> 00:01:44.520
+Sequencing matters as much as the check itself.

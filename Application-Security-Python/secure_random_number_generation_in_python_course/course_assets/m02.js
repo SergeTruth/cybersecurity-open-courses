@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Randomness, Pseudorandomness, and Entropy",
+  "graphicAlt": "A comparison shows unpredictable operating-system entropy on one side and a seeded pseudorandom sequence on the other, with an attacker reproducing the deterministic sequence after learning state.",
+  "narration": "Randomness is about uncertainty. Pseudorandomness comes from deterministic algorithms that produce output that may look random, but is generated from internal state and sometimes a seed. Deterministic pseudorandom output can be useful for repeatable tests, simulations, and controlled experiments. It is dangerous for secrets when the seed or internal state can be known, guessed, or influenced.\n\nEntropy is unpredictability available to the system at a high level. Operating systems collect uncertainty from multiple sources and provide randomness facilities intended for security-sensitive use. Cryptographically secure pseudorandom number generators take that entropy and produce values suitable for keys, tokens, and other security purposes when used correctly. Developers do not usually need to build these systems; they need to call the right interface.\n\nRepeatability is a feature in tests and a liability in secret generation. A deterministic seed can make a sequence of values repeat, which is excellent when a unit test needs stable behavior. The same repeatability is unacceptable for password reset tokens, session identifiers, API keys, or cryptographic keys. Production security should not depend on test seeds, sample values, or predictable defaults.\n\nThe security question is not whether a value looks random in a log or seems hard for a human to remember. The question is whether an attacker with knowledge of the application, timing, environment, and generation method can predict or search the value. Secure randomness assumes the design may be inspected and still requires values to remain unpredictable.",
+  "narrationPoints": [
+    "Deterministic pseudorandom output can be useful for repeatable tests, simulations, and controlled experiments.",
+    "Developers do not usually need to build these systems; they need to call the right interface.",
+    "The same repeatability is unacceptable for password reset tokens, session identifiers, API keys, or cryptographic keys.",
+    "Secure randomness assumes the design may be inspected and still requires values to remain unpredictable.",
+    "Operating systems collect uncertainty from multiple sources and provide randomness facilities intended for security-sensitive use.",
+    "Production security should not depend on test seeds, sample values, or predictable defaults."
+  ]
+};

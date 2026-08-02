@@ -1,0 +1,91 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.578
+Webhook security is the practice of safely receiving and processing event-
+driven HTTP callbacks between systems.
+
+2
+00:00:06.578 --> 00:00:13.022
+A provider sends an event to a consumer when something happens, and the
+consumer decides what to do with that event.
+
+3
+00:00:13.022 --> 00:00:25.574
+In Python, webhook handlers may live in Flask, Django, FastAPI, serverless
+functions, background workers, queues, automation scripts, payment
+integrations, identity workflows, CI/CD systems, or SaaS integrations.
+
+4
+00:00:25.574 --> 00:00:31.414
+The implementation may look like a small route, but it often sits on top
+of important business behavior.
+
+5
+00:00:31.414 --> 00:00:34.636
+A webhook is different from a normal API request pattern.
+
+6
+00:00:34.636 --> 00:00:38.328
+With polling, your application asks another system for updates.
+
+7
+00:00:38.328 --> 00:00:42.087
+With an incoming webhook, another system calls your application.
+
+8
+00:00:42.087 --> 00:00:46.853
+With an outgoing webhook, your application calls a subscriber when an
+event occurs.
+
+9
+00:00:46.853 --> 00:00:55.646
+Message queues and event streams can provide more durable event delivery
+models, but webhooks remain common because HTTP callbacks are easy to
+integrate.
+
+10
+00:00:55.646 --> 00:00:58.935
+Their simplicity is exactly why security design matters.
+
+11
+00:00:58.935 --> 00:01:03.768
+Webhooks are security-sensitive because they can trigger behavior
+automatically.
+
+12
+00:01:03.768 --> 00:01:13.165
+A single event might create an account, mark an invoice as paid, disable
+access, update a ticket, start a build, change a subscription, or notify a
+downstream service.
+
+13
+00:01:13.165 --> 00:01:19.743
+The endpoint receiving the event is often public, and a request reaching
+that endpoint is not trustworthy by itself.
+
+14
+00:01:19.743 --> 00:01:29.208
+The handler must establish source, integrity, freshness, expected event
+type, payload shape, authorization context, and business meaning before it
+changes state.
+
+15
+00:01:29.208 --> 00:01:33.034
+Secure webhook design covers more than the first validation check.
+
+16
+00:01:33.034 --> 00:01:45.586
+It includes source validation, signature verification, shared-secret
+protection, payload validation, idempotency, replay resistance, retry-safe
+processing, careful logging, monitoring, and incident response.
+
+17
+00:01:45.586 --> 00:01:50.755
+The best designs centralize these decisions so every handler does not
+invent its own rules.
+
+18
+00:01:50.755 --> 00:01:57.400
+A webhook endpoint should be treated as a small integration system, not as
+a casual route that happens to receive JSON.

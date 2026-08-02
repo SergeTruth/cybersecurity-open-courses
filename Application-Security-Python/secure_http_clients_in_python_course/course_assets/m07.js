@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Response Validation and Safe Parsing",
+  "graphicAlt": "A streamed response passes status, media-type, actual-byte, strict JSON, exact-schema, and business-rule gates before a small validated account object is returned.",
+  "narration": "Response validation is necessary even when the remote service is authenticated and transport is encrypted. The response can still be malformed, oversized, stale, missing fields, using an unexpected content type, or inconsistent with the business rules of the application. The Python client should treat the response as input from another system and validate it before using it to update records, make decisions, display data, or trigger workflow.\n\nStatus codes and content types should be interpreted deliberately. A success status should not be the only check. The content type should match the parser. A JSON response should have expected fields and types. XML, YAML, CSV, archive, or binary responses require additional caution based on how they will be parsed and stored. Error responses should be handled safely without exposing remote details or assuming the request can be retried automatically.\n\nResponse size limits and read timeouts protect availability. A remote system may return far more data than expected, stream slowly, or never finish sending. The client should know how much data is reasonable and how long it is willing to wait. If a response is cached, the cache key, expiration, privacy level, and invalidation behavior should match the data sensitivity and user context.\n\nBusiness-rule validation is as important as schema validation. A response may have the right fields but refer to the wrong tenant, an unexpected account, an unauthorized state transition, or a value outside the current user?s permission. Secure clients do not blindly trust remote systems to enforce every local rule. They validate the response against the application?s own purpose before acting on it.",
+  "narrationPoints": [
+    "Response validation is necessary even when the remote service is authenticated and transport is encrypted.",
+    "Error responses should be handled safely without exposing remote details or assuming the request can be retried automatically.",
+    "A remote system may return far more data than expected, stream slowly, or never finish sending.",
+    "Secure clients do not blindly trust remote systems to enforce every local rule.",
+    "The client should know how much data is reasonable and how long it is willing to wait.",
+    "XML, YAML, CSV, archive, or binary responses require additional caution based on how they will be parsed and stored."
+  ]
+};

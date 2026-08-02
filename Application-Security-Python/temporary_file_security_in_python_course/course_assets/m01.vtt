@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.759
+Temporary file security means treating short-lived files and directories
+as real storage with real security impact.
+
+2
+00:00:06.759 --> 00:00:20.278
+Python applications create temporary artifacts during uploads, report
+generation, document conversion, archive handling, image processing,
+tests, data pipelines, background jobs, command-line tools, and subprocess
+workflows.
+
+3
+00:00:20.278 --> 00:00:29.336
+These files may exist for seconds or minutes, but while they exist they
+can contain sensitive data, control application behavior, or affect later
+processing.
+
+4
+00:00:29.336 --> 00:00:37.380
+Temporary files are different from caches, logs, uploads, working
+directories, and persistent storage, but the boundaries often overlap.
+
+5
+00:00:37.380 --> 00:00:40.827
+A temporary upload may later become a permanent attachment.
+
+6
+00:00:40.827 --> 00:00:43.058
+A report may be staged before download.
+
+7
+00:00:43.058 --> 00:00:46.302
+A converted image may be passed through several workers.
+
+8
+00:00:46.302 --> 00:00:49.141
+A temporary directory may hold archive contents.
+
+9
+00:00:49.141 --> 00:00:54.752
+Because temporary files sit between steps, teams sometimes treat them as
+harmless scratch space.
+
+10
+00:00:54.752 --> 00:00:56.577
+That habit is where risk begins.
+
+11
+00:00:56.577 --> 00:01:07.257
+A temporary file can contain user content, personal data, generated
+documents, intermediate outputs, private business records, decrypted data,
+credentials, or operational details.
+
+12
+00:01:07.257 --> 00:01:18.815
+It can also affect integrity if another process can modify it,
+availability if cleanup fails and disk fills, and auditability if nobody
+can explain where a sensitive artifact came from or why it remained.
+
+13
+00:01:18.815 --> 00:01:24.561
+Short lifetime reduces exposure only when creation, access, and deletion
+are actually controlled.
+
+14
+00:01:24.561 --> 00:01:28.549
+Secure temporary storage should be designed rather than improvised.
+
+15
+00:01:28.549 --> 00:01:46.529
+The application should choose safe APIs, avoid manual predictable names,
+use controlled directories, apply appropriate permissions, minimize
+sensitive data written to disk, handle cleanup after success and failure,
+and test file workflows that involve uploads, archives, subprocesses, and
+background jobs.
+
+16
+00:01:46.529 --> 00:01:48.692
+Temporary does not mean unimportant.
+
+17
+00:01:48.692 --> 00:01:52.680
+It means the lifecycle should be deliberately short and well managed.

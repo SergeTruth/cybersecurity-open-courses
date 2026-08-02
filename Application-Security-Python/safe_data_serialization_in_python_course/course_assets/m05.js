@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Python Object Serialization Risks",
+  "graphicAlt": "Decision diagram for Python Object Serialization Risks, showing untrusted bytes, bounded parser, schema validator, typed data, and rejected object-construction path; labeled arrows identify parse, validation, and trust transitions and the point where unsafe input or behavior is rejected.",
+  "narration": "Object serialization tries to preserve application objects rather than just data values. In Python, pickle and similar object reconstruction mechanisms are powerful because they can represent Python-specific objects and relationships. That power is exactly why they require careful boundaries. Untrusted serialized objects should not be loaded as if they were ordinary data.\n\nThe risk is not limited to one library name. The broad concern is class loading, object construction, hidden side effects, and application behavior that happens during deserialization. If input can influence what object is constructed or how reconstruction occurs, the application may be giving external data more authority than intended. Defensive design avoids automatic object reconstruction for untrusted data.\n\nTrusted internal data is different from external data, but the trust decision should be documented. A cache entry written and read by the same service in a controlled environment has a different risk profile than a file uploaded by a user or a message accepted from a partner. Even internal object serialization should consider versioning, freshness, data sensitivity, and what happens if storage is modified or replayed.\n\nSigned data or integrity-protected data does not automatically make object behavior safe. It may show that the data came from an expected source or was not changed, but the content can still be stale, malformed for the current version, excessive, unauthorized for this operation, or unsafe to load through an object reconstruction mechanism. Object deserialization should be minimized, isolated, explicitly justified, and carefully reviewed.",
+  "narrationPoints": [
+    "Object serialization tries to preserve application objects rather than just data values.",
+    "Untrusted serialized objects should not be loaded as if they were ordinary data.",
+    "The broad concern is class loading, object construction, hidden side effects, and application behavior that happens during deserialization.",
+    "Defensive design avoids automatic object reconstruction for untrusted data.",
+    "Even internal object serialization should consider versioning, freshness, data sensitivity, and what happens if storage is modified or replayed.",
+    "Object deserialization should be minimized, isolated, explicitly justified, and carefully reviewed."
+  ]
+};

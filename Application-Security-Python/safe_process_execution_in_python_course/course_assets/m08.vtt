@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.830
+Standard output and standard error are data streams that may contain
+useful results, diagnostic details, sensitive information, or unexpectedly
+large content.
+
+2
+00:00:09.830 --> 00:00:16.527
+Applications should decide whether output is captured, streamed, limited,
+stored, displayed, or discarded.
+
+3
+00:00:16.527 --> 00:00:24.647
+A child process may include internal paths, input fragments, tokens,
+configuration details, or downstream error messages in output.
+
+4
+00:00:24.647 --> 00:00:29.349
+Safe handling treats output as potentially sensitive until it is
+classified.
+
+5
+00:00:29.349 --> 00:00:33.908
+Exit codes and errors should be translated into safe application behavior.
+
+6
+00:00:33.908 --> 00:00:40.818
+A nonzero exit may mean invalid input, dependency failure, timeout,
+resource exhaustion, or an internal problem.
+
+7
+00:00:40.818 --> 00:00:46.944
+Users and clients usually need a safe message and possibly a correlation
+ID, not a raw diagnostic dump.
+
+8
+00:00:46.944 --> 00:00:54.424
+Operators need structured logs that identify the approved operation,
+outcome, component, duration, and safe reason code.
+
+9
+00:00:54.424 --> 00:00:57.701
+High-impact execution may also require audit events.
+
+10
+00:00:57.701 --> 00:01:00.692
+Testing should cover allowed and rejected paths.
+
+11
+00:01:00.692 --> 00:01:16.435
+Tests can verify that only approved operations run, untrusted values do
+not control command structure, invalid paths are rejected, timeouts work,
+output is limited, secrets are not logged, authorization happens before
+execution, and error paths fail safely.
+
+12
+00:01:16.435 --> 00:01:25.554
+Code review should ask what input can influence the executable, arguments,
+environment, working directory, files, privileges, and output handling.
+
+13
+00:01:25.554 --> 00:01:30.469
+Monitoring should watch for unusual process activity without exposing
+secrets.
+
+14
+00:01:30.469 --> 00:01:43.576
+Useful signals include repeated rejected attempts, unexpected failures,
+long-running jobs, timeouts, unusual volumes of output, new operation
+types, high concurrency, and execution from unexpected components.
+
+15
+00:01:43.576 --> 00:01:54.760
+If unsafe execution behavior or leaked output is discovered, teams should
+contain the workflow, rotate exposed secrets if needed, review logs, fix
+the design, and add regression tests.

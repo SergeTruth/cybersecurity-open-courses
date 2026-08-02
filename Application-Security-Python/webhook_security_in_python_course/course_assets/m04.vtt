@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.411
+Webhook signatures are used to check integrity and authenticity at a high
+level.
+
+2
+00:00:04.411 --> 00:00:11.805
+A provider signs some representation of the request, often with a shared
+secret and an HMAC, or sometimes with an asymmetric key scheme.
+
+3
+00:00:11.805 --> 00:00:17.383
+The consumer recomputes or verifies the signature and compares it with the
+value received in a header.
+
+4
+00:00:17.383 --> 00:00:24.777
+If the verification fails, the handler should not trust the payload, parse
+it for business decisions, or perform state-changing work.
+
+5
+00:00:24.777 --> 00:00:27.112
+The exact signed representation matters.
+
+6
+00:00:27.112 --> 00:00:34.247
+Many signature schemes sign the raw request body, a timestamp plus body,
+selected headers, or a canonicalized form of the request.
+
+7
+00:00:34.247 --> 00:00:46.376
+If the Python framework parses JSON, normalizes whitespace, changes
+encoding, or reads the body before verification in a way that changes the
+bytes being checked, valid events may fail or invalid assumptions may
+creep in.
+
+8
+00:00:46.376 --> 00:00:51.954
+Handlers should follow the provider's signing contract and verify the
+exact data the scheme expects.
+
+9
+00:00:51.954 --> 00:00:54.224
+Shared signing secrets are credentials.
+
+10
+00:00:54.224 --> 00:01:03.435
+They should be stored in an approved secret store or secure configuration
+path, separated by environment, scoped to the specific integration, and
+rotated when needed.
+
+11
+00:01:03.435 --> 00:01:08.559
+They should not appear in code, notebooks, traces, error messages, logs,
+or support bundles.
+
+12
+00:01:08.559 --> 00:01:17.639
+Rotation often requires a transition period where old and new secrets are
+both accepted safely, with clear telemetry showing which secret version
+verified an event.
+
+13
+00:01:17.639 --> 00:01:19.780
+Verification code should fail safely.
+
+14
+00:01:19.780 --> 00:01:32.752
+It should select the expected signature header deliberately, reject
+missing or malformed signature metadata, use timing-safe comparison
+concepts where appropriate, and avoid returning detailed validation
+internals to the caller.
+
+15
+00:01:32.752 --> 00:01:37.876
+Signature verification proves that the request matches the signing scheme
+and secret or key.
+
+16
+00:01:37.876 --> 00:01:44.103
+It does not prove that the event is fresh, authorized for the local
+tenant, structurally valid, or safe to process.
+
+17
+00:01:44.103 --> 00:01:45.400
+Those checks come next.

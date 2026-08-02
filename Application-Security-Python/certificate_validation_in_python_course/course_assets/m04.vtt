@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.202
+Hostname validation checks that the certificate matches the service the
+client intended to reach.
+
+2
+00:00:05.202 --> 00:00:13.749
+If the Python application connects to a configured service name, the
+certificate should identify that service name according to the applicable
+validation rules.
+
+3
+00:00:13.749 --> 00:00:18.641
+This is different from simply proving that the certificate chains to some
+trusted authority.
+
+4
+00:00:18.641 --> 00:00:24.091
+A trusted authority can issue many certificates, and the client needs the
+one for the expected endpoint.
+
+5
+00:00:24.091 --> 00:00:27.869
+Subject alternative names are central in modern certificate identity.
+
+6
+00:00:27.869 --> 00:00:34.620
+DNS names, service names, wildcard certificates, and IP address
+certificates each have specific operational considerations.
+
+7
+00:00:34.620 --> 00:00:40.875
+Wildcards can simplify management in some designs, but they broaden the
+set of names covered by one key and certificate.
+
+8
+00:00:40.875 --> 00:00:50.226
+IP address certificates and internal service names require careful
+planning so clients validate the identity they actually expect instead of
+relying on network location alone.
+
+9
+00:00:50.226 --> 00:00:55.057
+Proxies, gateways, and load balancers can change where certificate
+identity is presented.
+
+10
+00:00:55.057 --> 00:00:59.392
+A client may connect to a gateway name while the gateway routes to a
+backend service.
+
+11
+00:00:59.392 --> 00:01:02.675
+A service mesh may terminate and re-establish TLS internally.
+
+12
+00:01:02.675 --> 00:01:05.276
+A database proxy may present its own certificate.
+
+13
+00:01:05.276 --> 00:01:09.983
+These architectures can be safe, but the expected service identity should
+be documented.
+
+14
+00:01:09.983 --> 00:01:14.504
+The certificate name should match the boundary the client is intentionally
+trusting.
+
+15
+00:01:14.504 --> 00:01:18.281
+Certificate name mismatches should be treated as meaningful failures.
+
+16
+00:01:18.281 --> 00:01:25.651
+Local development may use test names or local-only certificates, but those
+exceptions should not normalize insecure production behavior.
+
+17
+00:01:25.651 --> 00:01:33.702
+Hostname validation matters even when transport is encrypted because it
+tells the client whether the encrypted connection is with the intended
+service.
+
+18
+00:01:33.702 --> 00:01:39.400
+Service identity should be based on expected names and trust anchors, not
+only on private network placement.

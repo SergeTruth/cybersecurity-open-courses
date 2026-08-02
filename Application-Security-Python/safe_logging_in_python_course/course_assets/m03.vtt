@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.373
+Sensitive data in logs should be treated as an exposure risk.
+
+2
+00:00:03.373 --> 00:00:12.237
+Obvious examples include passwords, API keys, bearer tokens, refresh
+tokens, session identifiers, reset links, private keys, and full
+connection strings.
+
+3
+00:00:12.237 --> 00:00:28.046
+Less obvious examples include payment data, health data, government
+identifiers, email addresses, phone numbers, customer-specific record
+names, tenant identifiers, internal account references, file paths, and
+business data that can reveal how a system or customer operates.
+
+4
+00:00:28.046 --> 00:00:32.213
+The safest pattern is to avoid logging sensitive values in the first
+place.
+
+5
+00:00:32.213 --> 00:00:37.240
+Redaction and masking are useful controls, but they should not be the only
+line of defense.
+
+6
+00:00:37.240 --> 00:00:41.208
+A blocklist that looks for known secret names may miss a new token field.
+
+7
+00:00:41.208 --> 00:00:44.979
+A broad object dump may include nested values that nobody expected.
+
+8
+00:00:44.979 --> 00:00:48.551
+An exception string from a library may include a connection URL.
+
+9
+00:00:48.551 --> 00:00:55.496
+Allowlist-oriented logging is usually safer because the code chooses known
+safe fields instead of copying entire objects.
+
+10
+00:00:55.496 --> 00:01:01.978
+Redaction removes or replaces sensitive values before they reach logs,
+traces, alerts, error reports, or tickets.
+
+11
+00:01:01.978 --> 00:01:10.445
+Masking may preserve a small safe portion of a value, such as a suffix
+used for support correlation, but only when that partial value is truly
+acceptable.
+
+12
+00:01:10.445 --> 00:01:20.631
+Hashing or tokenizing identifiers can help in some designs, but teams
+should understand whether the transformed value can still be linked back
+to individuals, tenants, or accounts.
+
+13
+00:01:20.631 --> 00:01:22.086
+Redaction needs testing.
+
+14
+00:01:22.086 --> 00:01:28.767
+It is not enough to say the logger redacts secrets if nobody has exercised
+the failure paths that produce real log events.
+
+15
+00:01:28.767 --> 00:01:37.366
+Tests should include authentication failures, validation errors, exception
+paths, dependency failures, and representative structured log records.
+
+16
+00:01:37.366 --> 00:01:44.840
+Safe logging is strongest when sensitive values are excluded before
+logging and redaction catches mistakes that still slip through.

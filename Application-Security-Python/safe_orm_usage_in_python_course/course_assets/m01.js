@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Safe ORM Usage Means",
+  "graphicAlt": "Diagram for What Safe ORM Usage Means, showing request DTO, authorization-aware repository, ORM session, tenant filter, database, and minimized response model; labeled arrows identify query and object-authorization boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Object-relational mappers, or ORMs, help Python developers map application objects to database records and query APIs. They are common in Django applications, SQLAlchemy-style data layers, Flask services, FastAPI services, scripts, internal tools, background jobs, and data pipelines. An ORM can make database access more expressive and maintainable, but it is still a security boundary because it decides what data is read, changed, serialized, and exposed.\n\nSafe ORM usage means understanding the difference between models, query APIs, raw SQL, migrations, validation, authorization, and database permissions. A model describes an application-facing representation of data. A query API builds database operations. Raw SQL may bypass safer abstractions. Migrations change structure and data. Validation checks input. Authorization decides who may access which resource. Database permissions limit what the application account can do. Each layer has its own job.\n\nORMs reduce some risk, especially when developers use safe query APIs and parameter binding instead of assembling query strings. But they do not automatically make database access secure. Developers can bypass safe paths, expose sensitive fields through generic serializers, forget tenant filters, accept too many writable fields, build dynamic query fragments unsafely, or run raw SQL without enough review. The ORM is a tool, not a guarantee.\n\nSafe ORM usage must cover query construction, model design, access control, serialization, transactions, migrations, logging, and review. Developers should know when they are using normal safe ORM paths and when they are leaving them. The goal is predictable, testable data access that preserves business rules and security boundaries as the application grows.",
+  "narrationPoints": [
+    "Object-relational mappers, or ORMs, help Python developers map application objects to database records and query APIs.",
+    "Database permissions limit what the application account can do.",
+    "The ORM is a tool, not a guarantee.",
+    "Developers should know when they are using normal safe ORM paths and when they are leaving them.",
+    "Raw SQL may bypass safer abstractions.",
+    "Each layer has its own job."
+  ]
+};

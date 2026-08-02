@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "APIs, JavaScript, JSON, and Frontend Integration",
+  "graphicAlt": "A Django json_script element and a JSON API response keep data separate from executable markup, while frontend safe-text APIs replace innerHTML for profile values.",
+  "narration": "Many Python backends do not render full HTML pages, but they still influence browser safety through APIs. An API may return user-controlled names, descriptions, comments, search results, filenames, error messages, or rich content. If a browser client later places those values into the page unsafely, the risk still belongs to the overall application. Backend and frontend security cannot be separated at the API boundary.\n\nA safer frontend pattern separates data from markup. Untrusted data should be inserted through safe text-oriented rendering paths or framework defaults rather than raw HTML insertion. If the application needs rich content, it should use a content policy and vetted sanitization path. Client-side rendering should be reviewed the same way server-side templates are reviewed: where does the data come from, and what browser context receives it?\n\nContent type correctness and response minimization also matter. APIs should send responses with the intended content type and return only the fields the caller needs. An API that exposes internal flags, raw markup, debugging fields, or unnecessary user data increases the chance that some downstream client will render or use a field incorrectly. Minimizing responses reduces both privacy and browser-rendering risk.\n\nCORS and CSRF interact with browser-facing APIs, but they do not replace XSS prevention. CORS controls which browser origins can make certain cross-origin requests under browser rules. CSRF protections help validate state-changing browser requests made with credentials. XSS prevention focuses on keeping untrusted data out of executable or unsafe rendering paths. A secure SPA or hybrid app needs all of the relevant controls working together.",
+  "narrationPoints": [
+    "An API may return user-controlled names, descriptions, comments, search results, filenames, error messages, or rich content.",
+    "Untrusted data should be inserted through safe text-oriented rendering paths or framework defaults rather than raw HTML insertion.",
+    "APIs should send responses with the intended content type and return only the fields the caller needs.",
+    "CORS and CSRF interact with browser-facing APIs, but they do not replace XSS prevention.",
+    "Many Python backends do not render full HTML pages, but they still influence browser safety through APIs.",
+    "XSS prevention focuses on keeping untrusted data out of executable or unsafe rendering paths."
+  ]
+};

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.136
+Exceptions are normal signals that something failed.
+
+2
+00:00:03.136 --> 00:00:12.341
+A validation rule rejected input, a dependency timed out, a file was
+missing, a database call failed, or a caller tried to do something they
+were not allowed to do.
+
+3
+00:00:12.341 --> 00:00:15.682
+None of those events is automatically a security problem.
+
+4
+00:00:15.682 --> 00:00:25.910
+The security problem appears when the application responds to failure by
+exposing details that should have stayed inside the system or inside
+controlled operational channels.
+
+5
+00:00:25.910 --> 00:00:40.092
+Unsafe exception handling can reveal stack traces, file paths, framework
+versions, object names, database messages, environment hints, usernames,
+tenant identifiers, tokens, connection strings, configuration values, and
+business rules.
+
+6
+00:00:40.092 --> 00:00:49.569
+In Python, this matters across web frameworks, APIs, command-line tools,
+scheduled jobs, notebooks, background workers, data pipelines, and
+internal services.
+
+7
+00:00:49.569 --> 00:00:57.615
+Every place that catches, prints, logs, wraps, returns, or suppresses an
+exception can change what information leaves the trust boundary.
+
+8
+00:00:57.615 --> 00:00:59.796
+A useful design separates audiences.
+
+9
+00:00:59.796 --> 00:01:05.524
+Users and external clients need clear, limited messages that help them
+recover or report a problem.
+
+10
+00:01:05.524 --> 00:01:09.069
+Developers and operators need enough detail to investigate.
+
+11
+00:01:09.069 --> 00:01:11.933
+Security teams may need audit records and alerts.
+
+12
+00:01:11.933 --> 00:01:17.729
+Logs, traces, crash reports, and monitoring tools may need different
+levels of diagnostic context.
+
+13
+00:01:17.729 --> 00:01:21.615
+The mistake is treating one message as suitable for every audience.
+
+14
+00:01:21.615 --> 00:01:26.729
+Safe failure behavior protects confidentiality, integrity, availability,
+and trust.
+
+15
+00:01:26.729 --> 00:01:37.911
+It avoids leaking internals, avoids granting access when a decision cannot
+be made safely, avoids hiding serious failures, and avoids turning
+operational logs into a second data exposure path.
+
+16
+00:01:37.911 --> 00:01:40.024
+The goal is not to hide every failure.
+
+17
+00:01:40.024 --> 00:01:47.320
+The goal is to communicate appropriately, preserve useful diagnostics, and
+prevent errors from becoming information leaks.

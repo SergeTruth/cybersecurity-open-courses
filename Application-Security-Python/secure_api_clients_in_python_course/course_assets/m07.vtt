@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.118
+Destination control protects both data and credentials.
+
+2
+00:00:03.118 --> 00:00:08.655
+A secure client should know which schemes, hosts, ports, and paths are
+allowed for a given integration.
+
+3
+00:00:08.655 --> 00:00:16.928
+HTTPS should be the normal expectation for sensitive API communication,
+and TLS certificate validation and hostname validation should remain
+enabled.
+
+4
+00:00:16.928 --> 00:00:26.219
+Disabling verification may make a connection work temporarily, but it
+weakens the client's ability to confirm that it is communicating with the
+intended trusted endpoint.
+
+5
+00:00:26.219 --> 00:00:29.464
+Name resolution and address behavior matter at a high level.
+
+6
+00:00:29.464 --> 00:00:33.982
+A configured host can resolve differently across environments, networks,
+or time.
+
+7
+00:00:33.982 --> 00:00:44.673
+Some applications need to consider private address ranges, loopback
+addresses, metadata services, internal-only destinations, and public
+endpoints when accepting destination-related input.
+
+8
+00:00:44.673 --> 00:00:54.601
+The defensive principle is simple: do not allow untrusted input to decide
+where sensitive requests or credentials are sent without validation
+against an approved destination policy.
+
+9
+00:00:54.601 --> 00:00:56.956
+Redirects should be handled deliberately.
+
+10
+00:00:56.956 --> 00:01:01.283
+A redirect can move a request from one host, scheme, or trust boundary to
+another.
+
+11
+00:01:01.283 --> 00:01:12.674
+Clients need to decide whether redirects are allowed, which methods can
+follow them, whether authorization headers or other sensitive headers
+should be preserved, and what destination changes are acceptable.
+
+12
+00:01:12.674 --> 00:01:18.592
+Blindly following redirects can leak metadata or credentials and can make
+audit trails harder to understand.
+
+13
+00:01:18.592 --> 00:01:20.756
+Proxies are also part of the trust model.
+
+14
+00:01:20.756 --> 00:01:29.665
+Python clients and underlying libraries may use explicit proxy settings,
+environment-driven proxy settings, service mesh behavior, or platform
+egress controls.
+
+15
+00:01:29.665 --> 00:01:36.411
+Those mechanisms can be useful for inspection, routing, and policy
+enforcement, but they should be expected and documented.
+
+16
+00:01:36.411 --> 00:01:45.320
+A secure client avoids surprising proxy behavior for sensitive calls and
+logs enough destination and error context to support operations without
+exposing secrets.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.466
+TLS can be layered over sockets to protect data in transit and validate
+endpoint identity when configured correctly.
+
+2
+00:00:06.466 --> 00:00:16.393
+In Python, TLS contexts and related library features define how
+certificates are validated, which trust anchors are used, and whether the
+client or server presents certificates.
+
+3
+00:00:16.393 --> 00:00:23.447
+The details may vary by library and platform, but the core idea is stable:
+encryption should be paired with identity validation.
+
+4
+00:00:23.447 --> 00:00:30.566
+Client-side TLS validation should include server certificate validation
+and hostname validation for sensitive connections.
+
+5
+00:00:30.566 --> 00:00:37.358
+A client should verify that the certificate chains to a trusted authority
+and matches the service name it intended to reach.
+
+6
+00:00:37.358 --> 00:00:45.914
+Disabling verification or accepting any certificate may make a connection
+succeed, but it removes the identity assurance that TLS is supposed to
+provide.
+
+7
+00:00:45.914 --> 00:00:49.832
+Local development exceptions should not become production defaults.
+
+8
+00:00:49.832 --> 00:00:54.078
+Servers need private key protection and certificate lifecycle management.
+
+9
+00:00:54.078 --> 00:00:59.302
+Private keys should not appear in source code, logs, support bundles, or
+broadly shared files.
+
+10
+00:00:59.302 --> 00:01:01.523
+Certificates expire and need rotation.
+
+11
+00:01:01.523 --> 00:01:08.511
+A socket service should have an owner for certificate renewal, trust-store
+changes, and incident response if a key is exposed.
+
+12
+00:01:08.511 --> 00:01:12.952
+TLS failure handling should be safe, observable, and free of sensitive
+leakage.
+
+13
+00:01:12.952 --> 00:01:17.981
+TLS does not replace application authentication, authorization, or message
+validation.
+
+14
+00:01:17.981 --> 00:01:26.733
+Mutual TLS can strengthen service identity by having both sides present
+certificates, but the application must still decide which actions a peer
+may perform.
+
+15
+00:01:26.733 --> 00:01:32.872
+A valid certificate does not make every command safe, every resource
+accessible, or every message well formed.
+
+16
+00:01:32.872 --> 00:01:37.640
+TLS protects the transport boundary; the protocol still needs application
+controls.

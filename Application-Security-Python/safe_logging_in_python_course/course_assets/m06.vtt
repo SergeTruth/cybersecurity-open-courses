@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.148
+Logs influence investigations, alerts, audits, reports, and sometimes
+automated decisions.
+
+2
+00:00:05.148 --> 00:00:06.864
+That means logs need integrity.
+
+3
+00:00:06.864 --> 00:00:12.584
+They should reflect what the application observed without allowing
+untrusted data to reshape the record.
+
+4
+00:00:12.584 --> 00:00:21.100
+If user-controlled text is written directly into free-form log lines, it
+may confuse interpretation, break parsing, imitate another event, or hide
+context.
+
+5
+00:00:21.100 --> 00:00:23.451
+The concern is not a payload demonstration.
+
+6
+00:00:23.451 --> 00:00:27.010
+The concern is that logs are records, and records can be distorted.
+
+7
+00:00:27.010 --> 00:00:34.192
+Structured logging is a strong defensive pattern because untrusted values
+become fields rather than pieces of the log format itself.
+
+8
+00:00:34.192 --> 00:00:42.771
+Newlines, delimiters, quoting, encoding, and formatting should be handled
+by the logging system or serializer instead of handcrafted string
+concatenation.
+
+9
+00:00:42.771 --> 00:00:49.762
+Safe logs make it clear which fields came from users, which came from the
+application, and which came from trusted infrastructure.
+
+10
+00:00:49.762 --> 00:00:52.177
+Timestamp and source integrity also matter.
+
+11
+00:00:52.177 --> 00:01:00.757
+Investigators need to know when an event occurred, which service produced
+it, which environment it came from, and whether clocks are reasonably
+synchronized.
+
+12
+00:01:00.757 --> 00:01:05.523
+In distributed Python systems, a request may pass through several services
+and workers.
+
+13
+00:01:05.523 --> 00:01:11.497
+Consistent timestamps, source fields, and correlation IDs help reconstruct
+what happened without guessing.
+
+14
+00:01:11.497 --> 00:01:15.120
+They also make unusual gaps or impossible sequences easier to spot.
+
+15
+00:01:15.120 --> 00:01:19.696
+Protecting logs from unauthorized modification or deletion is part of safe
+logging.
+
+16
+00:01:19.696 --> 00:01:31.072
+Append-only storage, tamper-evident designs, restricted write permissions,
+controlled administrative access, backups, and separation between
+producers and log administrators can all help at a high level.
+
+17
+00:01:31.072 --> 00:01:41.240
+Teams should not blindly trust every logged field, especially fields
+derived from untrusted input, but the logging pipeline itself should be
+trustworthy enough to support investigation.

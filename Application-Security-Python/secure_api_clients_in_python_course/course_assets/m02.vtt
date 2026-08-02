@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.042
+Every API client should have an explicit trust model.
+
+2
+00:00:03.042 --> 00:00:13.116
+Internal APIs, external APIs, partner APIs, cloud APIs, identity APIs,
+webhook callbacks, service-to-service calls, gateways, and proxies all
+move data across boundaries.
+
+3
+00:00:13.116 --> 00:00:19.945
+The boundary may be between applications, business units, networks,
+tenants, vendors, regions, or privilege levels.
+
+4
+00:00:19.945 --> 00:00:29.478
+A secure design names those boundaries so the client can apply the right
+controls at the point where data, identity, credentials, destination, or
+assumptions change.
+
+5
+00:00:29.478 --> 00:00:33.602
+Configured endpoints are different from user-supplied destinations.
+
+6
+00:00:33.602 --> 00:00:44.623
+A client that always calls a known service from configuration has a
+narrower risk profile than a client that accepts a URL, host, tenant
+endpoint, webhook target, or callback address from input.
+
+7
+00:00:44.623 --> 00:00:47.463
+Environment-specific endpoints also need care.
+
+8
+00:00:47.463 --> 00:00:57.604
+Development, staging, production, and disaster recovery may use different
+destinations, but each environment should still define what is allowed and
+what data may flow there.
+
+9
+00:00:57.604 --> 00:01:01.458
+Internal APIs should not be trusted only because they are internal.
+
+10
+00:01:01.458 --> 00:01:10.383
+Internal services can be misconfigured, overexposed, compromised, called
+from unexpected paths, or given broader access than their callers should
+have.
+
+11
+00:01:10.383 --> 00:01:20.659
+A service-to-service request still needs authentication, authorization,
+request validation, response validation, and monitoring appropriate to the
+impact of the operation.
+
+12
+00:01:20.659 --> 00:01:25.798
+Network location can support a control model, but it should not be the
+whole control model.
+
+13
+00:01:25.798 --> 00:01:29.314
+Good architecture also defines ownership and failure modes.
+
+14
+00:01:29.314 --> 00:01:39.455
+Someone should own the integration, the credentials, the data contract,
+the allowed destinations, the retry policy, the logging expectations, and
+the incident response path.
+
+15
+00:01:39.455 --> 00:01:49.462
+The design should explain what happens when the remote service is slow,
+unavailable, returns malformed data, changes a contract, denies access, or
+produces partial results.
+
+16
+00:01:49.462 --> 00:01:54.600
+Those choices affect security because they shape what the application does
+under stress.

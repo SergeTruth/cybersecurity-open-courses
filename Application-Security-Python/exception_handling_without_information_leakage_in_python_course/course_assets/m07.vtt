@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.911
+API error contracts should be consistent and intentionally limited.
+
+2
+00:00:03.911 --> 00:00:10.275
+Clients benefit from stable response shapes, safe error codes, appropriate
+statuses, and request identifiers.
+
+3
+00:00:10.275 --> 00:00:18.759
+They do not need raw Python exception objects, database driver messages,
+framework tracebacks, internal hostnames, or third-party response bodies.
+
+4
+00:00:18.759 --> 00:00:26.913
+A safe API boundary translates internal failure into application-level
+meaning while preserving detailed diagnostics in controlled systems.
+
+5
+00:00:26.913 --> 00:00:32.945
+Background jobs and queues need special attention because failure may not
+have an immediate user response.
+
+6
+00:00:32.945 --> 00:00:39.176
+A worker might process a message, call a database, contact a third-party
+API, write a file, and retry on failure.
+
+7
+00:00:39.176 --> 00:00:46.600
+Its exceptions can end up in queue metadata, retry dashboards, logs, dead-
+letter stores, alert payloads, and operational tickets.
+
+8
+00:00:46.600 --> 00:00:54.489
+Those destinations should not receive secrets or unredacted downstream
+content simply because the failure happened outside a web request.
+
+9
+00:00:54.489 --> 00:00:58.731
+Third-party and downstream failures should not be passed through blindly.
+
+10
+00:00:58.731 --> 00:01:08.674
+A payment provider, identity service, database driver, object storage API,
+webhook endpoint, or internal service may return messages meant for
+developers or administrators.
+
+11
+00:01:08.674 --> 00:01:16.165
+The Python application should translate those details into safe client
+responses and log only the context needed for investigation.
+
+12
+00:01:16.165 --> 00:01:22.263
+This reduces leakage and keeps dependency-specific behavior from becoming
+part of the public API contract.
+
+13
+00:01:22.263 --> 00:01:26.307
+Retryable and non-retryable errors should be separated at a high level.
+
+14
+00:01:26.307 --> 00:01:35.521
+Timeouts, rate limits, temporary network failures, validation errors,
+authorization failures, and permanent business conflicts require different
+responses.
+
+15
+00:01:35.521 --> 00:01:44.204
+If exception handling treats them all the same, it may retry unsafe work,
+hide abuse signals, leak downstream detail, or create confusing client
+behavior.
+
+16
+00:01:44.204 --> 00:01:49.640
+Good failure design makes dependency problems understandable internally
+and safe externally.

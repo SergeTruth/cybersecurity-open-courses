@@ -1,0 +1,76 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.993
+Deployment platforms make environment variables easy to set, but they also
+create new lifecycle questions.
+
+2
+00:00:05.993 --> 00:00:14.330
+Containers, serverless functions, managed runtimes, CI/CD systems, and job
+runners may all provide ways to inject variables at build time or runtime.
+
+3
+00:00:14.330 --> 00:00:17.587
+Build-time values and runtime values should be separated.
+
+4
+00:00:17.587 --> 00:00:24.101
+A value needed only when the application runs should not be baked into an
+image, cache, artifact, package, or build log.
+
+5
+00:00:24.101 --> 00:00:28.139
+CI/CD secret variables deserve the same hygiene as application secrets.
+
+6
+00:00:28.139 --> 00:00:36.282
+Pipeline jobs often have access to source code, build output, deployment
+permissions, package registries, test systems, and cloud environments.
+
+7
+00:00:36.282 --> 00:00:43.381
+A misconfigured job can print secrets, pass them to untrusted tools, store
+them in artifacts, or reuse them across environments.
+
+8
+00:00:43.381 --> 00:00:48.071
+Least privilege for pipeline access reduces the impact of mistakes and
+compromises.
+
+9
+00:00:48.071 --> 00:00:50.481
+Per-environment separation is essential.
+
+10
+00:00:50.481 --> 00:00:55.888
+Development, staging, testing, and production should not share the same
+secrets or broad access.
+
+11
+00:00:55.888 --> 00:01:02.402
+A variable named the same way across environments should still point to
+different values with different permissions.
+
+12
+00:01:02.402 --> 00:01:11.325
+Deployment configuration should make it difficult for a staging job to use
+production credentials or for a production service to inherit a debug-
+oriented value.
+
+13
+00:01:11.325 --> 00:01:20.966
+Runtime secret injection can be useful when it avoids long-lived values in
+images and source code, but it still requires access control, redaction,
+rotation, and monitoring.
+
+14
+00:01:20.966 --> 00:01:29.434
+Teams should understand who can set variables, who can read them, where
+they are stored, how they are audited, and how they are replaced during an
+incident.
+
+15
+00:01:29.434 --> 00:01:34.840
+Build systems and deployment platforms are part of the secret-handling
+boundary, not outside it.

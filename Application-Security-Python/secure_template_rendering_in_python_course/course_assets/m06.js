@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "User-Generated Content, Markdown, and Rich Text",
+  "graphicAlt": "Markdown becomes HTML, then passes an allowlist sanitizer for elements, attributes, and HTTPS protocols; raw rich text, javascript links, event attributes, and unknown elements are removed.",
+  "narration": "User-generated content includes comments, profiles, tickets, documentation fields, CMS content, product descriptions, knowledge-base articles, and other text that people or external systems can influence. Some applications need only plain text, which should usually be rendered as text. Others need markdown, limited formatting, links, or richer content. The first security decision is the content policy: what formatting is allowed, for whom, and in which rendering contexts.\n\nSanitization at a high level means preserving approved formatting while removing unsafe behavior. It should rely on vetted libraries and clear allowlists rather than ad hoc string replacement. Browser parsing is complicated, and simple replacement rules tend to miss malformed input, encoded forms, context changes, or new features. A maintainable policy defines allowed elements, allowed attributes, URL rules, and where sanitized output may be used.\n\nStoring raw versus sanitized content is a real design choice. Raw content can be reprocessed if the policy changes, but it must not be casually rendered. Sanitized content can simplify display, but policy changes may require re-sanitization. Some systems store both with strict access rules. Whatever the choice, teams need to know which version is shown in templates, emails, previews, exports, and admin views.\n\nRich content also needs ownership, moderation, and lifecycle review. A markdown feature added for internal documentation may later be exposed to customers. A product description field may later appear in an email campaign. A support ticket may later be rendered in an admin dashboard. Secure rendering treats rich content as a continuing trust boundary, not a one-time cleanup at the moment data is saved.",
+  "narrationPoints": [
+    "Some applications need only plain text, which should usually be rendered as text.",
+    "A maintainable policy defines allowed elements, allowed attributes, URL rules, and where sanitized output may be used.",
+    "Raw content can be reprocessed if the policy changes, but it must not be casually rendered.",
+    "A markdown feature added for internal documentation may later be exposed to customers.",
+    "The first security decision is the content policy: what formatting is allowed, for whom, and in which rendering contexts.",
+    "Sanitization at a high level means preserving approved formatting while removing unsafe behavior."
+  ]
+};

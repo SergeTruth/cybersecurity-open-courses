@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "YAML, XML, and Advanced Format Features",
+  "graphicAlt": "Boundary map for YAML, XML, and Advanced Format Features, showing untrusted bytes, bounded parser, schema validator, typed data, and rejected object-construction path; labeled arrows identify parse, validation, and trust transitions and the point where unsafe input or behavior is rejected.",
+  "narration": "Advanced format features create risk when they are enabled without a matching need. YAML can support tags, anchors, aliases, references, metadata, and application-specific construction behavior. XML can involve parser configuration, schemas, namespaces, entity handling, and external resource behavior. These features may be useful in controlled systems, but they should not be accepted casually from untrusted input.\n\nYAML safe loader concepts are about loading ordinary data rather than broadly constructing application objects. For untrusted or lightly trusted YAML, the parser should accept a simple and predictable subset whenever practical. Configuration files and user-submitted YAML should not receive the same authority unless the source, review process, and intended behavior justify it.\n\nXML parser settings can influence security and availability. External resource access, entity handling, expansion behavior, validation mode, namespace processing, and resource limits all deserve review at a high level. The defensive goal is not to memorize every parser option. The goal is to choose parser behavior deliberately, disable unnecessary features, and constrain resource use.\n\nFlexible formats need explicit expectations. If tags, aliases, external references, schema features, or metadata are not required, do not enable them by default. If they are required, document the reason, validate the structure, bound resource use, and test unsupported or malformed cases. Advanced features should be treated as design decisions, not incidental parser defaults.",
+  "narrationPoints": [
+    "Advanced format features create risk when they are enabled without a matching need.",
+    "YAML safe loader concepts are about loading ordinary data rather than broadly constructing application objects.",
+    "Configuration files and user-submitted YAML should not receive the same authority unless the source, review process, and intended behavior justify it.",
+    "The defensive goal is not to memorize every parser option.",
+    "If tags, aliases, external references, schema features, or metadata are not required, do not enable them by default.",
+    "Flexible formats need explicit expectations."
+  ]
+};

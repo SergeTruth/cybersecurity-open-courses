@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.920
+Certificate validation asks whether the certificate presented by a service
+chains to a trusted authority under the expected rules.
+
+2
+00:00:06.920 --> 00:00:12.419
+Hostname validation asks whether the certificate matches the service name
+the client intended to reach.
+
+3
+00:00:12.419 --> 00:00:15.075
+Both checks are needed for sensitive connections.
+
+4
+00:00:15.075 --> 00:00:18.041
+Encryption alone does not answer the identity question.
+
+5
+00:00:18.041 --> 00:00:23.169
+A client can encrypt traffic to the wrong endpoint if identity validation
+is weakened or disabled.
+
+6
+00:00:23.169 --> 00:00:27.432
+Validation also includes expiration, issuer trust, and name mismatch
+handling.
+
+7
+00:00:27.432 --> 00:00:35.279
+If a certificate is expired, issued by an untrusted authority, or
+presented for a different name, the client should treat that as a
+meaningful failure.
+
+8
+00:00:35.279 --> 00:00:40.098
+Production code should not turn those failures into silent warnings or
+insecure fallbacks.
+
+9
+00:00:40.098 --> 00:00:46.091
+A certificate error is often an operational problem, but it is also a
+security signal that deserves investigation.
+
+10
+00:00:46.091 --> 00:00:49.613
+Development and production behavior should be clearly separated.
+
+11
+00:00:49.613 --> 00:01:01.166
+Local test certificates, private development roots, and temporary
+endpoints may be acceptable in controlled development workflows, but those
+exceptions should not become general-purpose helpers used in production.
+
+12
+00:01:01.166 --> 00:01:08.333
+The code and deployment process should make it hard to accidentally
+disable verification for real users, real credentials, or real data.
+
+13
+00:01:08.333 --> 00:01:13.152
+Certificate pinning can be useful in some narrow designs, but it has
+operational tradeoffs.
+
+14
+00:01:13.152 --> 00:01:21.184
+Pinning can make some unexpected trust changes visible, yet it can also
+break services during normal certificate rotation if it is not managed
+carefully.
+
+15
+00:01:21.184 --> 00:01:28.228
+The durable principle is to validate the endpoint identity through a trust
+model that the team understands, monitors, and can operate.
+
+16
+00:01:28.228 --> 00:01:32.120
+TLS validation failures should not be bypassed casually for convenience.

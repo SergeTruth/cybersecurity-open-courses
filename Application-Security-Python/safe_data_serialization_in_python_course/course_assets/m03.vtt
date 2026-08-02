@@ -1,0 +1,106 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.077
+Format selection is a security decision because formats make different
+behavior easy.
+
+2
+00:00:05.077 --> 00:00:08.644
+JSON is widely used for APIs and interoperable data exchange.
+
+3
+00:00:08.644 --> 00:00:11.800
+YAML is often used for human-readable configuration.
+
+4
+00:00:11.800 --> 00:00:15.367
+XML appears in document-oriented systems and integrations.
+
+5
+00:00:15.367 --> 00:00:17.425
+CSV is common for tabular exchange.
+
+6
+00:00:17.425 --> 00:00:22.365
+Binary and schema-based formats can support compact messages and strong
+contracts.
+
+7
+00:00:22.365 --> 00:00:29.637
+Object serialization formats can preserve Python-specific structures, but
+they are usually a poor fit for untrusted input.
+
+8
+00:00:29.637 --> 00:00:34.645
+Safer design often favors simple data formats over automatic object
+reconstruction.
+
+9
+00:00:34.645 --> 00:00:43.289
+A plain data format encourages the application to parse values, validate a
+schema, and explicitly decide how those values map into program behavior.
+
+10
+00:00:43.289 --> 00:00:50.972
+Object serialization can blur that boundary by combining input data with
+class loading, object construction, and hidden behavior.
+
+11
+00:00:50.972 --> 00:00:57.421
+That may be acceptable for controlled internal persistence, but it should
+not be the default for external data.
+
+12
+00:00:57.421 --> 00:00:59.068
+Every format has tradeoffs.
+
+13
+00:00:59.068 --> 00:01:01.949
+Readability helps humans review configuration.
+
+14
+00:01:01.949 --> 00:01:05.379
+Interoperability helps different systems exchange data.
+
+15
+00:01:05.379 --> 00:01:07.232
+Strictness reduces ambiguity.
+
+16
+00:01:07.232 --> 00:01:09.564
+Performance matters for large systems.
+
+17
+00:01:09.564 --> 00:01:11.759
+Schema support improves validation.
+
+18
+00:01:11.759 --> 00:01:17.865
+Security depends on safe parser settings, bounded input, minimal features,
+and explicit expectations.
+
+19
+00:01:17.865 --> 00:01:24.931
+There is no universally perfect format; the right choice depends on source
+trust, use case, and operational constraints.
+
+20
+00:01:24.931 --> 00:01:28.842
+When in doubt, choose the least powerful format that meets the need.
+
+21
+00:01:28.842 --> 00:01:36.182
+If the application only needs records or configuration values, do not
+choose a format that reconstructs application objects.
+
+22
+00:01:36.182 --> 00:01:41.190
+If the application only needs a narrow set of fields, reject broad dynamic
+structures.
+
+23
+00:01:41.190 --> 00:01:49.560
+Format choice should make the safe path easy: parse ordinary data,
+validate it, normalize it, authorize its use, and handle errors
+predictably.

@@ -1,0 +1,83 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.243
+Safe error handling keeps database internals away from users while
+preserving enough detail for trusted operators and developers.
+
+2
+00:00:07.243 --> 00:00:16.168
+Production responses should not expose detailed database errors, query
+text, connection strings, table names, credentials, stack traces, or
+sensitive values.
+
+3
+00:00:16.168 --> 00:00:25.222
+A user can receive a controlled failure message and a correlation ID while
+logs capture the information needed for investigation under appropriate
+access controls.
+
+4
+00:00:25.222 --> 00:00:30.007
+Logging can help teams detect problems, but database logs can also leak
+sensitive data.
+
+5
+00:00:30.007 --> 00:00:37.962
+Query logging may include values, identifiers, tokens, credentials,
+personal data, or business-sensitive terms if it is enabled without care.
+
+6
+00:00:37.962 --> 00:00:45.205
+Teams should decide what is logged, who can access those logs, how long
+they are retained, and whether sensitive fields are redacted.
+
+7
+00:00:45.205 --> 00:00:52.189
+Debug behavior should be different from production behavior and should not
+accidentally follow a deployment into production.
+
+8
+00:00:52.189 --> 00:00:56.910
+Operational visibility should include audit events and anomaly detection
+concepts.
+
+9
+00:00:56.910 --> 00:01:08.551
+Unusual database access patterns, repeated query failures, unexpected
+report usage, large exports, permission denials, or changes to data-access
+code may all be worth monitoring depending on the application.
+
+10
+00:01:08.551 --> 00:01:14.307
+Correlation IDs can connect user-facing errors to server logs without
+exposing internals to the caller.
+
+11
+00:01:14.307 --> 00:01:19.610
+Good observability helps investigation without turning logs into another
+sensitive database.
+
+12
+00:01:19.610 --> 00:01:21.615
+Secrets deserve special attention.
+
+13
+00:01:21.615 --> 00:01:30.604
+Database credentials, connection strings, API tokens, and administrative
+passwords should not appear in error pages, logs, metrics, traces, or
+support exports.
+
+14
+00:01:30.604 --> 00:01:35.713
+A secure Python application treats operational outputs as part of the data
+exposure surface.
+
+15
+00:01:35.713 --> 00:01:37.394
+The goal is not silent failure.
+
+16
+00:01:37.394 --> 00:01:44.120
+The goal is useful visibility with controlled disclosure, so teams can
+diagnose safely when database behavior goes wrong.

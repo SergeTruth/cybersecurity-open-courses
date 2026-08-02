@@ -1,0 +1,106 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.569
+Good logging begins with the questions the team needs to answer.
+
+2
+00:00:03.569 --> 00:00:05.618
+Did authentication succeed or fail?
+
+3
+00:00:05.618 --> 00:00:06.676
+Was access denied?
+
+4
+00:00:06.676 --> 00:00:08.857
+Did an administrator change a setting?
+
+5
+00:00:08.857 --> 00:00:13.418
+Did a payment, order, approval, deployment, or sensitive state change
+complete?
+
+6
+00:00:13.418 --> 00:00:15.070
+Did validation reject input?
+
+7
+00:00:15.070 --> 00:00:16.524
+Did a dependency time out?
+
+8
+00:00:16.524 --> 00:00:19.168
+Did a background job retry or fail permanently?
+
+9
+00:00:19.168 --> 00:00:21.878
+Did rate limiting or abuse protection activate?
+
+10
+00:00:21.878 --> 00:00:28.752
+Logs should support concrete operational and security questions rather
+than collect data simply because it is available.
+
+11
+00:00:28.752 --> 00:00:31.925
+Security-relevant events deserve intentional design.
+
+12
+00:00:31.925 --> 00:00:44.681
+Authentication events, authorization decisions, sensitive state changes,
+administrative actions, account recovery, data export, permission changes,
+key lifecycle events, and unusual failure patterns should be visible.
+
+13
+00:00:44.681 --> 00:00:53.869
+These events should describe who or what acted at an appropriate level,
+which component handled the event, what outcome occurred, and what safe
+reason code applies.
+
+14
+00:00:53.869 --> 00:00:57.306
+They should not require full sensitive payloads to be useful.
+
+15
+00:00:57.306 --> 00:01:02.461
+Request and response metadata can be valuable, but full request bodies are
+risky by default.
+
+16
+00:01:02.461 --> 00:01:11.649
+Bodies may contain credentials, tokens, personal data, health information,
+payment details, private messages, documents, or customer-specific
+business data.
+
+17
+00:01:11.649 --> 00:01:13.764
+Response bodies may contain the same.
+
+18
+00:01:13.764 --> 00:01:21.563
+If a team needs payload logging for a narrow troubleshooting case, it
+should be time-bounded, access-controlled, redacted, and reviewed.
+
+19
+00:01:21.563 --> 00:01:25.066
+The normal logging path should assume payloads are sensitive.
+
+20
+00:01:25.066 --> 00:01:27.974
+Deciding what to log is also deciding what not to log.
+
+21
+00:01:27.974 --> 00:01:33.923
+Logs should answer operational questions without becoming a shadow
+database of user content and secrets.
+
+22
+00:01:33.923 --> 00:01:41.723
+A concise structured event with a safe identifier, outcome, component, and
+correlation ID is often more useful than a large free-text dump.
+
+23
+00:01:41.723 --> 00:01:48.200
+The best logging designs make investigation easier while reducing how much
+sensitive data must be protected later.

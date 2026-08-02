@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Key Management and Rotation",
+  "graphicAlt": "Control-flow diagram for Key Management and Rotation, showing signer, protected private key, message bytes, signature, and verifier public key; labeled arrows identify signing and verification boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Key management is often the hardest part of signature systems. Private keys must be generated safely, stored securely, protected by access control, monitored for use, and kept out of source code, logs, images, notebooks, and broad configuration. Managed key services and hardware-backed key protection concepts can reduce exposure by keeping private key operations inside a controlled boundary, but they still require ownership and policy.\n\nEnvironment separation matters. A development signing key should not be trusted for production releases. A staging webhook key should not authorize production events. Service accounts, CI/CD systems, and runtime workloads should have least-privilege access to only the signing keys they need. Human access to signing keys should be limited, reviewed, and logged, especially for high-impact systems such as package signing, authentication tokens, or financial workflows.\n\nKey inventory gives teams a map of what exists. It should identify key purpose, owner, environment, accepted algorithms, storage location, public key distribution path, rotation expectations, consumers, and incident response procedures. Key identifiers help verifiers select keys, but the inventory and trust policy explain why a key should be trusted. Without inventory, rotation and emergency replacement become slow and error-prone.\n\nRotation, revocation, expiration, emergency replacement, and dual-key rollout concepts should be planned before a key is exposed or expires. Verifiers may need to accept old and new keys during transition. Tokens or messages signed with an old key may remain valid for a short period. A compromised key may require immediate revocation and cleanup. Signature safety is not only a library call; it is a lifecycle process.",
+  "narrationPoints": [
+    "Key management is often the hardest part of signature systems.",
+    "A staging webhook key should not authorize production events.",
+    "Key inventory gives teams a map of what exists.",
+    "Without inventory, rotation and emergency replacement become slow and error-prone.",
+    "Tokens or messages signed with an old key may remain valid for a short period.",
+    "Signature safety is not only a library call; it is a lifecycle process."
+  ]
+};

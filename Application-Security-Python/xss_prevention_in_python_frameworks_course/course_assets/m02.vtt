@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.010
+Browsers interpret content according to context.
+
+2
+00:00:03.010 --> 00:00:09.240
+HTML body text, HTML attributes, URLs, JavaScript strings, JSON data, and
+CSS each have different rules.
+
+3
+00:00:09.240 --> 00:00:22.470
+The same string can be harmless in one context and unsafe in another
+because the browser is not simply displaying characters; it is parsing a
+document with rules for markup, navigation, scripting, styling, and data
+exchange.
+
+4
+00:00:22.470 --> 00:00:26.530
+Secure rendering begins by knowing which context receives the data.
+
+5
+00:00:26.530 --> 00:00:39.620
+Untrusted data can come from many places: user profiles, comments, support
+tickets, uploaded files, search terms, third-party APIs, logs, markdown,
+rich text editors, administrative fields, and system integrations.
+
+6
+00:00:39.620 --> 00:00:42.420
+Internal does not automatically mean trusted.
+
+7
+00:00:42.420 --> 00:00:53.690
+A support note entered by an employee, a value imported from a partner, or
+a log message shown in an admin portal can still cross into a browser
+context and affect users if it is rendered unsafely.
+
+8
+00:00:53.690 --> 00:00:59.220
+Server-side rendering and client-side rendering move the trust boundary in
+different ways.
+
+9
+00:00:59.220 --> 00:01:03.140
+A Django or Jinja template may combine data with HTML on the server.
+
+10
+00:01:03.140 --> 00:01:07.690
+A FastAPI or Django API may return JSON that a frontend uses to update the
+page.
+
+11
+00:01:07.690 --> 00:01:09.090
+A hybrid app may do both.
+
+12
+00:01:09.090 --> 00:01:17.980
+In every case, data crosses from Python backend to browser frontend, and
+the team needs to understand how the final browser-visible output is
+created.
+
+13
+00:01:17.980 --> 00:01:24.630
+Developers should track where data came from, where it is stored, how it
+is transformed, and where it is rendered.
+
+14
+00:01:24.630 --> 00:01:34.220
+A value that is validated for length during input may later be used in an
+attribute, a URL, a script-adjacent context, a rich-text area, or a
+client-side component.
+
+15
+00:01:34.220 --> 00:01:41.640
+XSS prevention becomes much easier when trust boundaries are visible and
+each rendering path has an intentional safety rule.

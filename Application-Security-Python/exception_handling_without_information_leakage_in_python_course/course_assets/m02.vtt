@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.310
+Error handling should be part of the application architecture, not a
+scattering of one-off try and except blocks.
+
+2
+00:00:06.310 --> 00:00:21.493
+A Python service normally has several layers that can shape errors:
+request validation, domain logic, framework middleware, route handlers,
+database drivers, background workers, queues, logging libraries, tracing
+tools, alerting pipelines, and user interface code.
+
+3
+00:00:21.493 --> 00:00:27.211
+Each layer can translate detail safely or accidentally pass sensitive
+information to the wrong place.
+
+4
+00:00:27.211 --> 00:00:29.708
+Trust boundaries define who should see what.
+
+5
+00:00:29.708 --> 00:00:32.075
+User input crosses into application code.
+
+6
+00:00:32.075 --> 00:00:34.243
+Application code calls dependencies.
+
+7
+00:00:34.243 --> 00:00:36.478
+Framework handlers prepare responses.
+
+8
+00:00:36.478 --> 00:00:38.976
+Logs and traces flow to centralized systems.
+
+9
+00:00:38.976 --> 00:00:45.548
+Developers, administrators, support staff, and external clients have
+different roles and different need-to-know.
+
+10
+00:00:45.548 --> 00:00:55.276
+A safe architecture routes diagnostic detail toward controlled internal
+channels while sending users a stable, limited explanation and a reference
+identifier when useful.
+
+11
+00:00:55.276 --> 00:01:00.271
+Expected and unexpected errors should be handled differently, but both
+need discipline.
+
+12
+00:01:00.271 --> 00:01:06.055
+Validation errors can often tell a user what field needs correction
+without exposing internal schemas.
+
+13
+00:01:06.055 --> 00:01:11.905
+Authentication and authorization failures should avoid revealing extra
+account or permission detail.
+
+14
+00:01:11.905 --> 00:01:19.003
+Dependency, database, file, queue, and third-party failures should usually
+be translated into application-level messages.
+
+15
+00:01:19.003 --> 00:01:24.393
+Background job failures need durable records because there may be no user
+waiting for a response.
+
+16
+00:01:24.393 --> 00:01:27.745
+Centralizing error behavior makes secure defaults easier.
+
+17
+00:01:27.745 --> 00:01:39.050
+Teams can define standard response shapes, exception classes, log fields,
+redaction rules, retry boundaries, and alerting signals in one pattern
+instead of relying on every developer to remember them.
+
+18
+00:01:39.050 --> 00:01:42.468
+That does not eliminate local judgment, but it reduces drift.
+
+19
+00:01:42.468 --> 00:01:48.120
+When failure behavior is designed intentionally, it is easier to review,
+test, monitor, and improve.

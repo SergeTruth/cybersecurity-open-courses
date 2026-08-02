@@ -1,0 +1,83 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.756
+Python developers may encounter RSA, ECDSA, EdDSA, and post-quantum
+signature concepts at a high level.
+
+2
+00:00:05.756 --> 00:00:08.408
+Algorithm names matter, but they are not enough.
+
+3
+00:00:08.408 --> 00:00:16.752
+Safe use depends on current vetted libraries, platform requirements,
+organizational policy, parameter choices, key handling, and protocol
+context.
+
+4
+00:00:16.752 --> 00:00:26.712
+A once-common example may become obsolete or inappropriate as guidance
+changes, so durable designs rely on maintained libraries and reviewable
+policy rather than copied snippets.
+
+5
+00:00:26.712 --> 00:00:31.110
+High-level cryptographic APIs are safer than assembling primitives
+manually.
+
+6
+00:00:31.110 --> 00:00:40.165
+A mature library should guide developers toward appropriate signing and
+verification operations, handle important format details, and avoid low-
+level footguns.
+
+7
+00:00:40.165 --> 00:00:48.767
+Developers should not design custom signature schemes, combine primitives
+by intuition, or adjust parameters without understanding the security
+impact.
+
+8
+00:00:48.767 --> 00:00:52.583
+Custom cryptography tends to fail quietly before it fails obviously.
+
+9
+00:00:52.583 --> 00:00:57.046
+Signing and verification code should be separated from ordinary business
+logic.
+
+10
+00:00:57.046 --> 00:01:05.842
+A route handler, webhook receiver, package verifier, or token parser
+should call a central verification path rather than reimplementing checks
+in many places.
+
+11
+00:01:05.842 --> 00:01:14.251
+Centralization makes it easier to enforce algorithm restrictions, key
+selection, error handling, logging, context validation, and future
+migration.
+
+12
+00:01:14.251 --> 00:01:17.484
+It also helps reviewers inspect the actual trust boundary.
+
+13
+00:01:17.484 --> 00:01:20.007
+Safe implementation is intentionally plain.
+
+14
+00:01:20.007 --> 00:01:30.032
+The code should make clear what is signed, how the key is selected, which
+algorithms are accepted, how errors fail closed, and what context must be
+checked before the content is trusted.
+
+15
+00:01:30.032 --> 00:01:34.171
+Libraries reduce risk, but they do not remove engineering responsibility.
+
+16
+00:01:34.171 --> 00:01:41.480
+Developers still need to choose the right abstraction and apply it
+consistently across Python services, scripts, and integrations.

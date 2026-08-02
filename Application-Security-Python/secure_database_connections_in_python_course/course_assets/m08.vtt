@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.845
+Secure database connectivity should be testable.
+
+2
+00:00:02.845 --> 00:00:15.615
+Tests can confirm that required configuration is present, malformed
+secrets fail safely, production code does not accept development-only TLS
+shortcuts, and environment-specific settings do not point to the wrong
+database.
+
+3
+00:00:15.615 --> 00:00:20.709
+Rotation readiness can be tested through controlled secret changes and
+restart behavior.
+
+4
+00:00:20.709 --> 00:00:29.575
+Dependency review should include database drivers, ORM versions, and
+configuration defaults that affect authentication, TLS, pooling, or error
+behavior.
+
+5
+00:00:29.575 --> 00:00:34.538
+Logging should help operators understand connection health without
+exposing secrets.
+
+6
+00:00:34.538 --> 00:00:48.366
+Safe logs can record error categories, connection source, service
+identity, environment, timing, correlation identifiers, and whether a
+failure was authentication-related, network-related, certificate-related,
+or permission-related.
+
+7
+00:00:48.366 --> 00:00:56.901
+Unsafe logs include passwords, tokens, private keys, full sensitive DSNs,
+certificate material, and large query payloads containing sensitive data.
+
+8
+00:00:56.901 --> 00:01:00.077
+Redaction should be deliberate and tested, not assumed.
+
+9
+00:01:00.077 --> 00:01:03.319
+Monitoring should make unusual database access visible.
+
+10
+00:01:03.319 --> 00:01:17.743
+Useful signals include failed logins, unexpected client sources, new
+accounts, privilege errors, disabled TLS where it is expected, unusual
+connection counts, repeated connection failures, and application accounts
+performing surprising operations.
+
+11
+00:01:17.743 --> 00:01:25.418
+Database audit logs, application telemetry, secret-store access logs, and
+platform logs all contribute different pieces of evidence.
+
+12
+00:01:25.418 --> 00:01:30.248
+Monitoring is strongest when teams know which identities and access paths
+are normal.
+
+13
+00:01:30.248 --> 00:01:35.078
+Incident response planning turns connection security into recoverable
+operations.
+
+14
+00:01:35.078 --> 00:01:51.089
+If a credential, token, private key, or connection string is exposed,
+teams should be able to identify affected systems, revoke or rotate
+access, recycle pools, redeploy workloads, validate that old access no
+longer works, review logs for suspicious activity, and prevent recurrence.
+
+15
+00:01:51.089 --> 00:01:56.250
+The response should avoid panic changes that create outages or leave stale
+sessions behind.
+
+16
+00:01:56.250 --> 00:02:01.080
+Connection security must be observable without leaking the very secrets it
+protects.

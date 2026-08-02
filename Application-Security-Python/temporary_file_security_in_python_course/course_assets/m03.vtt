@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.940
+Python provides vetted tempfile abstractions because temporary file
+creation is more subtle than choosing a convenient name.
+
+2
+00:00:06.940 --> 00:00:16.450
+At a high level, the tempfile module can create temporary files, temporary
+directories, named files, and automatically managed objects with generated
+unpredictable names.
+
+3
+00:00:16.450 --> 00:00:22.425
+These APIs exist to avoid common mistakes around collisions, permissions,
+cleanup, and shared directories.
+
+4
+00:00:22.425 --> 00:00:27.116
+They should usually be preferred over handcrafted filenames in a temporary
+location.
+
+5
+00:00:27.116 --> 00:00:30.393
+Context-managed cleanup is one of the most useful patterns.
+
+6
+00:00:30.393 --> 00:00:38.425
+A context manager can create a temporary file or directory for a bounded
+block of work and remove it when the block ends, including many failure
+cases.
+
+7
+00:00:38.425 --> 00:00:41.124
+That does not remove the need for design judgment.
+
+8
+00:00:41.124 --> 00:00:52.240
+The application still needs to decide where temporary storage should live,
+what permissions are appropriate, how much data may be written, whether
+the data is sensitive, and what happens if cleanup fails.
+
+9
+00:00:52.240 --> 00:00:54.489
+Choosing the right abstraction matters.
+
+10
+00:00:54.489 --> 00:00:59.308
+A temporary file may fit when a single stream of data needs to be passed
+to a library or tool.
+
+11
+00:00:59.308 --> 00:01:06.955
+A temporary directory may fit when a workflow needs multiple related
+files, extracted archive contents, or separate input and output paths.
+
+12
+00:01:06.955 --> 00:01:10.103
+Text and binary modes should match the data being handled.
+
+13
+00:01:10.103 --> 00:01:17.750
+Automatically managed unnamed files may be useful for some workflows,
+while named files may be required when another component needs a path.
+
+14
+00:01:17.750 --> 00:01:19.999
+Safe defaults still require careful use.
+
+15
+00:01:19.999 --> 00:01:36.191
+A temporary file API can generate a safer name, but it cannot decide
+whether a user is authorized to process the data, whether sensitive
+content should be written to disk, whether a subprocess should receive the
+path, whether logs should include metadata, or how long a report should
+remain available.
+
+16
+00:01:36.191 --> 00:01:42.360
+Vetted APIs reduce dangerous mechanics, while application design controls
+trust, sensitivity, and lifecycle.

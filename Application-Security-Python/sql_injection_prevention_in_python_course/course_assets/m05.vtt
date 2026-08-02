@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.619
+Some applications need dynamic query behavior.
+
+2
+00:00:02.619 --> 00:00:07.537
+Users may choose a report column, sort order, search field, date range, or
+optional filter.
+
+3
+00:00:07.537 --> 00:00:10.474
+Administrators may configure dashboards or exports.
+
+4
+00:00:10.474 --> 00:00:15.839
+These requirements are normal, but they should not give callers direct
+control over SQL structure.
+
+5
+00:00:15.839 --> 00:00:23.759
+Parameterization protects data values; it does not turn arbitrary table
+names, column names, operators, or query fragments into safe structure.
+
+6
+00:00:23.759 --> 00:00:26.250
+Identifiers should be allowlisted or mapped.
+
+7
+00:00:26.250 --> 00:00:32.892
+If a user selects a sort field, the application can map that choice to one
+of a fixed set of known internal column expressions.
+
+8
+00:00:32.892 --> 00:00:38.194
+If a report supports several views, the application can choose among
+predefined query templates.
+
+9
+00:00:38.194 --> 00:00:41.834
+If direction is configurable, it can be limited to a small known set.
+
+10
+00:00:41.834 --> 00:00:46.880
+This pattern preserves functionality while keeping SQL structure under
+developer control.
+
+11
+00:00:46.880 --> 00:00:49.818
+Stored procedures require the same careful thinking.
+
+12
+00:00:49.818 --> 00:00:55.885
+A stored procedure can centralize database behavior and enforce
+consistency, but it is not automatically safe.
+
+13
+00:00:55.885 --> 00:01:03.550
+If the procedure builds dynamic SQL from parameters without constraints,
+the risk has moved into the database layer rather than disappeared.
+
+14
+00:01:03.550 --> 00:01:14.152
+Teams should review stored procedures, database functions, and report
+builders with the same question they ask in Python: which parts are
+structure, which parts are values, and who controls them?
+
+15
+00:01:14.152 --> 00:01:20.347
+Search features, optional filters, and administrative tools are common
+places for dynamic SQL to grow gradually.
+
+16
+00:01:20.347 --> 00:01:27.245
+A small reporting feature may start with one safe filter and later gain
+configurable fields, operators, grouping, and exports.
+
+17
+00:01:27.245 --> 00:01:32.610
+Each added option should have an approved representation rather than raw
+user-controlled syntax.
+
+18
+00:01:32.610 --> 00:01:37.400
+Dynamic SQL can be safe, but only when its design is explicit,
+constrained, and reviewed.

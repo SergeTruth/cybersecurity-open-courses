@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.313
+Secure subprocess usage in Python means launching external programs only
+when necessary and doing so with explicit trust boundaries.
+
+2
+00:00:07.313 --> 00:00:22.709
+The application should know which executable will run, which arguments are
+data, whether a shell is involved, which directory is used, which files
+are accessible, which environment values are passed, which identity is
+used, how long the process may run, and how output will be handled.
+
+3
+00:00:22.709 --> 00:00:31.049
+Strong designs avoid shell interpretation, separate executables from
+structured arguments, and map user choices to allowlisted internal
+operations.
+
+4
+00:00:31.049 --> 00:00:44.648
+They validate inputs, constrain paths and working directories, minimize
+inherited environment state, protect secrets, control standard input and
+output, apply least privilege, set timeouts, and translate errors into
+safe user-facing behavior.
+
+5
+00:00:44.648 --> 00:00:48.369
+Each control reduces ambiguity around what the child process can do.
+
+6
+00:00:48.369 --> 00:00:56.901
+Subprocess security connects to file handling, secrets management,
+authorization, safe logging, deployment design, monitoring, and incident
+response.
+
+7
+00:00:56.901 --> 00:00:59.275
+A subprocess call is not just a utility line.
+
+8
+00:00:59.275 --> 00:01:04.920
+It can reach across application boundaries into the operating system and
+surrounding infrastructure.
+
+9
+00:01:04.920 --> 00:01:11.976
+That is why review should include successful execution, rejected inputs,
+failure modes, output handling, and cleanup behavior.
+
+10
+00:01:11.976 --> 00:01:22.048
+The practical goal is predictable, reviewable, least-privilege process
+execution that supports business needs without turning Python applications
+into unsafe command interfaces.
+
+11
+00:01:22.048 --> 00:01:23.780
+Prefer libraries when they fit.
+
+12
+00:01:23.780 --> 00:01:28.527
+When subprocess is necessary, keep the code explicit, narrow, observable,
+and tested.
+
+13
+00:01:28.527 --> 00:01:32.440
+That discipline makes automation safer and easier to operate over time.

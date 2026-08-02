@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Mutual TLS and Client Certificate Validation",
+  "graphicAlt": "Control-flow diagram for Mutual TLS and Client Certificate Validation, showing Python client, TLS endpoint, certificate chain, hostname, and trust store; labeled arrows identify accepted and rejected validation paths and the point where unsafe input or behavior is rejected.",
+  "narration": "Mutual TLS, often shortened to mTLS, is a pattern where both sides of a connection may present certificates. The client validates the server certificate, and the server validates the client certificate. This can strengthen service identity for service-to-service communication, device identity, workload identity, controlled partner integrations, or other environments where both endpoints are managed.\n\nClient certificate validation requires its own trust configuration. The server needs to know which client certificate authorities or trust anchors are approved. The application also needs to map certificate information to an application identity at a high level. A certificate may establish that a workload, device, or service is known, but the application still has to decide what that identity is allowed to do.\n\nmTLS does not automatically authorize every action. A known service should not necessarily access every endpoint, tenant, operation, or administrative function. Least privilege still applies after identity is established. Application policy must enforce permissions, resource access, business rules, and auditability. Transport identity can be a strong signal, but it is not a complete authorization system by itself.\n\nOperational lifecycle matters for client certificates. Certificates expire, keys need protection, client identities are provisioned and deprovisioned, trust stores change, and incidents may require rotation or revocation. Logs can record safe client-certificate events such as identity category, issuer, validation outcome, and correlation identifiers, but they should avoid private keys, secrets, or excessive certificate material. mTLS is powerful when operated deliberately.",
+  "narrationPoints": [
+    "Mutual TLS, often shortened to mTLS, is a pattern where both sides of a connection may present certificates.",
+    "Client certificate validation requires its own trust configuration.",
+    "A known service should not necessarily access every endpoint, tenant, operation, or administrative function.",
+    "Application policy must enforce permissions, resource access, business rules, and auditability.",
+    "mTLS does not automatically authorize every action.",
+    "mTLS is powerful when operated deliberately."
+  ]
+};

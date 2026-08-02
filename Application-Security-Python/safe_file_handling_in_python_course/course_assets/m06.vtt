@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.720
+Temporary files are often used for uploads, transformations, exports,
+reports, image processing, archive handling, and background jobs.
+
+2
+00:00:07.720 --> 00:00:18.942
+They may feel less important because they are not intended to last, but
+temporary files can contain sensitive data, collide with other processes,
+persist unexpectedly, or be accessed by unintended users.
+
+3
+00:00:18.942 --> 00:00:22.121
+They deserve the same security review as permanent files.
+
+4
+00:00:22.121 --> 00:00:33.084
+Safe temporary file creation concepts include using APIs that avoid
+predictable names, setting appropriate permissions, choosing the right
+directory, and ensuring cleanup happens deliberately.
+
+5
+00:00:33.084 --> 00:00:39.246
+Shared temporary directories require extra care because other users or
+processes may operate in the same space.
+
+6
+00:00:39.246 --> 00:00:44.696
+Predictable names and loose permissions can create confusion, collisions,
+or unintended access.
+
+7
+00:00:44.696 --> 00:00:49.301
+Concurrent workers and background jobs make lifecycle management more
+important.
+
+8
+00:00:49.301 --> 00:00:53.907
+A worker may create temporary files while processing several requests in
+parallel.
+
+9
+00:00:53.907 --> 00:00:55.529
+A job may fail before cleanup.
+
+10
+00:00:55.529 --> 00:00:58.643
+A retry may encounter leftovers from a previous attempt.
+
+11
+00:00:58.643 --> 00:01:08.049
+Cleanup should be observable enough that operators can detect
+accumulation, and it should be safe enough that cleanup does not delete
+files outside the intended work area.
+
+12
+00:01:08.049 --> 00:01:11.941
+Working directory assumptions are another common source of mistakes.
+
+13
+00:01:11.941 --> 00:01:19.661
+Python code may behave differently depending on where a process is
+started, which container path is mounted, or which scheduler runs the job.
+
+14
+00:01:19.661 --> 00:01:25.823
+File operations should use explicit, intended locations rather than
+relying on the current working directory.
+
+15
+00:01:25.823 --> 00:01:32.440
+Sensitive temporary data should not be left behind for debugging unless
+there is a controlled retention and access plan.

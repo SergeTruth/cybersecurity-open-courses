@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.118
+Safe process execution means launching external programs from Python only
+when there is a clear reason, and doing it in a way that is constrained,
+reviewable, and recoverable.
+
+2
+00:00:10.118 --> 00:00:23.449
+Python applications often start child processes from web applications,
+APIs, command-line tools, automation scripts, data pipelines, background
+workers, scheduled jobs, build tools, and internal administrative
+utilities.
+
+3
+00:00:23.449 --> 00:00:30.491
+The pattern is powerful, but it reaches outside normal Python control and
+asks the operating system to run something else.
+
+4
+00:00:30.491 --> 00:00:38.968
+Process execution is different from calling a Python library, using a
+system API, or scheduling a background job inside an application
+framework.
+
+5
+00:00:38.968 --> 00:00:44.984
+A library call usually stays inside the process and follows the runtime
+permissions of the application.
+
+6
+00:00:44.984 --> 00:00:56.264
+A child process may interpret arguments differently, inherit environment
+variables, read and write files, use network access, produce output, or
+continue running after the parent has moved on.
+
+7
+00:00:56.264 --> 00:01:00.845
+Those differences create a security boundary that deserves design
+attention.
+
+8
+00:01:00.845 --> 00:01:05.562
+The risks affect confidentiality, integrity, availability, and
+auditability.
+
+9
+00:01:05.562 --> 00:01:18.551
+A child process may receive secrets it does not need, read files outside
+the intended workspace, write output to an unsafe location, run too long,
+consume too many resources, or expose internal details through logs and
+errors.
+
+10
+00:01:18.551 --> 00:01:28.806
+If untrusted input influences command structure, file paths, environment
+variables, or options, the application can become an unsafe interface to
+operating system behavior.
+
+11
+00:01:28.806 --> 00:01:37.215
+The safest design is often to avoid external process execution entirely
+when a trusted library or platform feature can perform the work directly.
+
+12
+00:01:37.215 --> 00:01:59.160
+When a process is genuinely needed, the design should be explicit: choose
+the executable from trusted configuration, pass arguments as structured
+values, avoid shell interpretation, validate inputs for the approved
+operation, control the environment, limit privileges, set timeouts, handle
+output carefully, and log enough to investigate without exposing sensitive
+data.

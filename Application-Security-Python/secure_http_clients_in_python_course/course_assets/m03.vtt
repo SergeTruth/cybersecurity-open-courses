@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.638
+Safe request construction starts with knowing the approved purpose of the
+call.
+
+2
+00:00:04.638 --> 00:00:11.731
+The method, URL, query parameters, headers, body, content type, and
+credentials should all match a specific API contract.
+
+3
+00:00:11.731 --> 00:00:17.119
+A request that sends every available field for convenience may leak more
+data than necessary.
+
+4
+00:00:17.119 --> 00:00:25.167
+A request that accepts user-controlled headers or body fields without
+validation may change how a remote system interprets the operation.
+
+5
+00:00:25.167 --> 00:00:31.578
+URLs and headers should be built with structured APIs and controlled
+values instead of unsafe string assembly.
+
+6
+00:00:31.578 --> 00:00:35.739
+Query parameters should be encoded as parameters, not pasted into text.
+
+7
+00:00:35.739 --> 00:00:41.127
+Header names and values should come from known configuration or carefully
+validated inputs.
+
+8
+00:00:41.127 --> 00:00:45.969
+Request bodies should have explicit shapes, size expectations, and content
+types.
+
+9
+00:00:45.969 --> 00:00:51.835
+JSON, form data, and file uploads each need clear handling rules based on
+the remote service contract.
+
+10
+00:00:51.835 --> 00:00:56.473
+Credentials should usually not be placed in URLs because URLs are copied
+widely.
+
+11
+00:00:56.473 --> 00:01:06.021
+They may appear in logs, monitoring tools, reverse proxies, referrers,
+browser history in some workflows, support artifacts, exception messages,
+or screenshots.
+
+12
+00:01:06.021 --> 00:01:16.456
+Secrets belong in controlled authentication mechanisms appropriate for the
+API, and logs should redact tokens, keys, signed values, session
+identifiers, and sensitive headers.
+
+13
+00:01:16.456 --> 00:01:21.504
+The request should carry only the credentials and data needed for the
+approved purpose.
+
+14
+00:01:21.504 --> 00:01:24.368
+Validation is still important for outbound data.
+
+15
+00:01:24.368 --> 00:01:31.871
+Before sending request fields, the application should verify type, shape,
+length, format, allowed values, and business intent.
+
+16
+00:01:31.871 --> 00:01:36.372
+A remote API is not a substitute for local authorization or data
+minimization.
+
+17
+00:01:36.372 --> 00:01:47.080
+If a user is not allowed to trigger a transfer, send a file, look up a
+resource, or call a partner operation, the Python client should never
+construct the outbound request in the first place.

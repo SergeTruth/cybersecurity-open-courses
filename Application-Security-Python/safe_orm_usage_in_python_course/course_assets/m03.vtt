@@ -1,0 +1,79 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.636
+Safe query APIs are one of the main reasons developers use ORMs.
+
+2
+00:00:03.636 --> 00:00:14.131
+Filtering by values, creating records, updating fields, deleting records,
+joining relationships, and paginating results can often be expressed
+without hand-built SQL strings.
+
+3
+00:00:14.131 --> 00:00:18.521
+The ORM or database driver can bind values separately from query
+structure.
+
+4
+00:00:18.521 --> 00:00:24.695
+That separation is what prevents ordinary data values from being
+interpreted as database command syntax.
+
+5
+00:00:24.695 --> 00:00:28.194
+Parameter binding remains important even when using an ORM.
+
+6
+00:00:28.194 --> 00:00:37.386
+When developers stay within normal value-based filter methods and prepared
+statement concepts, the data layer can pass values safely to the database
+driver.
+
+7
+00:00:37.386 --> 00:00:47.264
+When developers build raw fragments, concatenate conditions, or insert
+user-controlled strings into query methods that expect structure, they may
+leave the safe path.
+
+8
+00:00:47.264 --> 00:00:52.752
+Safe ORM use depends on knowing which API accepts values and which API
+accepts query structure.
+
+9
+00:00:52.752 --> 00:00:57.142
+SELECT, INSERT, UPDATE, and DELETE operations all need safe construction.
+
+10
+00:00:57.142 --> 00:01:07.638
+Bulk operations deserve special care because they can affect many records
+and may bypass model hooks, validation paths, or per-object checks
+depending on the ORM and usage pattern.
+
+11
+00:01:07.638 --> 00:01:09.833
+Query composition also needs review.
+
+12
+00:01:09.833 --> 00:01:19.779
+A helper that adds filters, joins, or conditions should preserve parameter
+binding and authorization assumptions, not quietly replace them with
+unsafe string assembly.
+
+13
+00:01:19.779 --> 00:01:28.766
+The safest standard is simple: use structured ORM APIs for values, use
+parameters for raw SQL values, and avoid mixing untrusted data into query
+structure.
+
+14
+00:01:28.766 --> 00:01:38.438
+If a feature genuinely needs dynamic structure, such as selecting a sort
+column or report field, that decision belongs in an allowlisted mapping,
+not in raw user input.
+
+15
+00:01:38.438 --> 00:01:43.240
+Safe query construction should be the default behavior in every data-
+access path.

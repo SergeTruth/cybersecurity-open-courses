@@ -1,0 +1,76 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.759
+Temporary file security must cover the whole pipeline, not just the file
+creation call.
+
+2
+00:00:04.759 --> 00:00:19.358
+Upload processing, image conversion, document rendering, archive
+extraction, report generation, batch jobs, file handoff between services,
+cloud storage staging, and subprocess workflows all create opportunities
+for temporary data to move between components.
+
+3
+00:00:19.358 --> 00:00:25.211
+A safe first file does not guarantee a safe pipeline if later steps copy,
+rename, log, or expose the artifact.
+
+4
+00:00:25.211 --> 00:00:33.186
+Upload and archive workflows are especially sensitive because the
+application receives content and metadata from outside the trusted
+boundary.
+
+5
+00:00:33.186 --> 00:00:45.148
+Temporary staging should use application-controlled locations and names,
+enforce size and type expectations, and keep extracted or transformed
+content isolated until it is validated and authorized for the next step.
+
+6
+00:00:45.148 --> 00:00:53.444
+Archive handling should validate entries and extraction destinations
+conceptually without relying on user-supplied paths to define storage
+layout.
+
+7
+00:00:53.444 --> 00:00:55.824
+Subprocess integration also needs review.
+
+8
+00:00:55.824 --> 00:01:02.834
+A child process may read a temporary input file, write an output file,
+generate diagnostic text, or leave partial results behind.
+
+9
+00:01:02.834 --> 00:01:09.523
+The parent Python code should control the paths, working directory,
+environment, timeout, output handling, and cleanup.
+
+10
+00:01:09.523 --> 00:01:17.562
+The subprocess should receive only the files it needs, and logs should
+avoid exposing private file contents or sensitive paths from command
+output.
+
+11
+00:01:17.562 --> 00:01:22.578
+Transactions and rollback behavior matter when temporary files support
+business actions.
+
+12
+00:01:22.578 --> 00:01:30.231
+If a report generation job fails halfway through, the application should
+know whether partial output exists and whether it is safe to delete.
+
+13
+00:01:30.231 --> 00:01:36.277
+If an upload succeeds but metadata storage fails, the temporary file
+should not remain orphaned indefinitely.
+
+14
+00:01:36.277 --> 00:01:43.480
+Pipelines need cleanup after success, failure, cancellation, and retry so
+temporary artifacts do not become permanent surprises.

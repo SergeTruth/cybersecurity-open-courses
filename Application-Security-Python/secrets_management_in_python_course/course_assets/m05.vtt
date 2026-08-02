@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.268
+Secrets should be accessed through application identity, not through broad
+human credentials whenever possible.
+
+2
+00:00:06.268 --> 00:00:16.567
+A Python service, scheduled job, data pipeline, or background worker
+should have a clear service account, workload identity, or runtime
+identity that can be granted only the access it needs.
+
+3
+00:00:16.567 --> 00:00:22.707
+This makes secret access reviewable and limits the blast radius if one
+workload is misconfigured or compromised.
+
+4
+00:00:22.707 --> 00:00:28.847
+Least privilege means each application or workload receives only the
+secrets required for its approved purpose.
+
+5
+00:00:28.847 --> 00:00:31.982
+Avoid broad wildcard access to entire secret namespaces.
+
+6
+00:00:31.982 --> 00:00:37.802
+A reporting job should not read payment processor credentials if it only
+needs a read-only analytics token.
+
+7
+00:00:37.802 --> 00:00:41.640
+A staging application should not read production database passwords.
+
+8
+00:00:41.640 --> 00:00:48.548
+A tenant-specific service should not receive customer secrets outside its
+boundary unless the design explicitly requires it.
+
+9
+00:00:48.548 --> 00:00:51.363
+CI/CD and developer access need special attention.
+
+10
+00:00:51.363 --> 00:01:00.765
+Build systems may need deployment credentials or secret references, but
+they should not automatically expose every production secret to every
+branch, job, or contributor.
+
+11
+00:01:00.765 --> 00:01:12.471
+Repository permissions, branch protections at a high level, approval
+workflows, and environment-specific access help prevent secrets from
+becoming available in places where code is less trusted or less reviewed.
+
+12
+00:01:12.471 --> 00:01:16.500
+Least privilege is maintained through review, not set once and forgotten.
+
+13
+00:01:16.500 --> 00:01:21.489
+Secrets should have owners, purpose, environment, allowed consumers, and
+review cadence.
+
+14
+00:01:21.489 --> 00:01:25.007
+High-impact secrets may need approval before access is granted.
+
+15
+00:01:25.007 --> 00:01:27.822
+When a service is retired, access should be removed.
+
+16
+00:01:27.822 --> 00:01:31.276
+When responsibilities change, permissions should be updated.
+
+17
+00:01:31.276 --> 00:01:37.800
+The application should access only the secrets it needs for the task it
+performs, and evidence should support that claim.

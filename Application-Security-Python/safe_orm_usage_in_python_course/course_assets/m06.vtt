@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.739
+Mass assignment, also called over-posting, happens when request data is
+allowed to populate model fields more broadly than intended.
+
+2
+00:00:07.739 --> 00:00:16.428
+A client may submit fields such as role, owner, tenant, price, status,
+approval flag, or audit metadata that should be controlled by server-side
+logic.
+
+3
+00:00:16.428 --> 00:00:24.711
+If create or update paths blindly copy request dictionaries into model
+instances, the application can lose control over sensitive attributes.
+
+4
+00:00:24.711 --> 00:00:29.259
+The safest create and update paths use explicit allowlists of writable
+fields.
+
+5
+00:00:29.259 --> 00:00:38.899
+Read-only fields, derived fields, ownership fields, workflow fields, and
+administrative fields should be set by trusted server-side logic rather
+than client input.
+
+6
+00:00:38.899 --> 00:00:42.089
+Different actions may have different writable fields.
+
+7
+00:00:42.089 --> 00:00:51.458
+A profile update, admin edit, account recovery flow, and import job should
+not automatically share the same field permissions just because they use
+the same model.
+
+8
+00:00:51.458 --> 00:00:56.413
+Serialization can expose sensitive data when it mirrors model structure
+too closely.
+
+9
+00:00:56.413 --> 00:01:04.831
+Generic serializers, debug views, nested relationships, and automatic API
+responses may return fields the caller does not need or should not see.
+
+10
+00:01:04.831 --> 00:01:07.479
+Response minimization is a security control.
+
+11
+00:01:07.479 --> 00:01:15.218
+Serializers should be designed around use cases, caller permissions, and
+audience, not only around what fields exist in the database.
+
+12
+00:01:15.218 --> 00:01:18.137
+Nested relationships deserve special attention.
+
+13
+00:01:18.137 --> 00:01:27.709
+Returning a project may accidentally include owner details, billing
+records, tokens, internal notes, or cross-tenant relationships if
+serialization is too broad.
+
+14
+00:01:27.709 --> 00:01:32.597
+Create, update, and serialize paths should be intentionally designed and
+reviewed.
+
+15
+00:01:32.597 --> 00:01:34.905
+The ORM model is not the public contract.
+
+16
+00:01:34.905 --> 00:01:40.200
+It is an internal representation that must be mediated before data crosses
+a trust boundary.

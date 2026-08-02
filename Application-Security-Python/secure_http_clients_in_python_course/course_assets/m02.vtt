@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.031
+Every outbound HTTP request crosses a trust boundary.
+
+2
+00:00:03.031 --> 00:00:11.464
+The Python application chooses a destination, resolves a name, opens a
+connection, sends headers and data, and accepts a response from another
+system.
+
+3
+00:00:11.464 --> 00:00:19.371
+That destination may be a configured internal service, a partner API, an
+identity provider, a storage endpoint, or a user-selected callback.
+
+4
+00:00:19.371 --> 00:00:25.498
+The security question is who can influence the destination and whether the
+application is allowed to reach it.
+
+5
+00:00:25.498 --> 00:00:29.122
+Untrusted input should not freely choose network destinations.
+
+6
+00:00:29.122 --> 00:00:42.431
+User-supplied URLs, callback addresses, file fetch targets, webhook
+destinations, or database-stored endpoint fields may appear legitimate
+while still sending the server toward an unintended public, private, or
+sensitive location.
+
+7
+00:00:42.431 --> 00:00:51.392
+A safer pattern is to map user choices to approved destination records,
+allowlisted hosts, expected schemes, known ports, and reviewed service
+configuration.
+
+8
+00:00:51.392 --> 00:00:58.046
+Destination checks need to account for name resolution, redirects,
+proxies, and environment behavior at a high level.
+
+9
+00:00:58.046 --> 00:01:00.616
+A host name may resolve differently over time.
+
+10
+00:01:00.616 --> 00:01:02.197
+A proxy may change the route.
+
+11
+00:01:02.197 --> 00:01:05.558
+A redirect may move the request to a different host or scheme.
+
+12
+00:01:05.558 --> 00:01:08.918
+Private and public address spaces may carry different risk.
+
+13
+00:01:08.918 --> 00:01:16.824
+The application should define what is allowed before a request starts and
+verify that automatic behavior does not silently cross boundaries.
+
+14
+00:01:16.824 --> 00:01:22.095
+Outbound request control reduces accidental exposure of internal services
+and credentials.
+
+15
+00:01:22.095 --> 00:01:23.940
+It also improves observability.
+
+16
+00:01:23.940 --> 00:01:31.056
+When a Python service is expected to contact only known systems, logs and
+alerts can identify unusual destinations more easily.
+
+17
+00:01:31.056 --> 00:01:34.284
+Destination control is not about disabling integration.
+
+18
+00:01:34.284 --> 00:01:40.280
+It is about making integration explicit, reviewable, and aligned with the
+business purpose of the feature.

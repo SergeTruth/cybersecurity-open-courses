@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.524
+Code review should identify every place the application generates
+security-sensitive values.
+
+2
+00:00:05.524 --> 00:00:17.718
+Reviewers should ask what the value is used for, whether it grants access,
+which API generates it, how much unpredictability is needed, how it is
+encoded, where it is stored, how long it lives, and whether it is logged.
+
+3
+00:00:17.718 --> 00:00:25.128
+Use of non-secure random APIs for tokens, keys, session identifiers, or
+reset links should be treated as a high-priority concern.
+
+4
+00:00:25.128 --> 00:00:30.854
+Static analysis at a high level can help find suspicious calls, but it
+does not replace design review.
+
+5
+00:00:30.854 --> 00:00:38.803
+A scanner may find use of a non-security random function, but it may not
+understand whether a particular identifier is security-sensitive.
+
+6
+00:00:38.803 --> 00:00:46.551
+Unit tests can verify behavior, length, encoding, expiration, uniqueness
+expectations in ordinary operation, and failure handling.
+
+7
+00:00:46.551 --> 00:00:53.220
+They should not attempt to prove the actual quality of cryptographic
+randomness through fragile statistical tests.
+
+8
+00:00:53.220 --> 00:01:00.496
+Logs should avoid generated secrets, reset links, session identifiers, API
+keys, cryptographic keys, and full bearer tokens.
+
+9
+00:01:00.496 --> 00:01:07.367
+Logging the first few characters of a secret may still create risk
+depending on the token format and operational context.
+
+10
+00:01:07.367 --> 00:01:09.860
+Redaction should be deliberate and tested.
+
+11
+00:01:09.860 --> 00:01:19.156
+Monitoring should focus on suspicious token use, repeated failed attempts,
+unexpected reset activity, duplicate generation signals, and use after
+revocation.
+
+12
+00:01:19.156 --> 00:01:24.815
+When predictable or exposed random values are discovered, the fix is often
+more than changing code.
+
+13
+00:01:24.815 --> 00:01:34.247
+Existing tokens may need revocation, keys may need rotation, sessions may
+need invalidation, reset links may need expiration, and affected systems
+may need review.
+
+14
+00:01:34.247 --> 00:01:40.579
+Incident response should assess scope, preserve evidence, communicate with
+owners, and prevent recurrence.
+
+15
+00:01:40.579 --> 00:01:46.440
+Randomness-related bugs often require both remediation in code and cleanup
+of values already issued.

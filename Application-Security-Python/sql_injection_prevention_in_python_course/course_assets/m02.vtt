@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.894
+SQL injection prevention starts by identifying where data comes from.
+
+2
+00:00:03.894 --> 00:00:18.172
+Untrusted data can include form fields, path parameters, query parameters,
+JSON bodies, headers, cookies, uploaded files, imported CSV or spreadsheet
+data, third-party API responses, administrative fields, and values copied
+from logs or support tickets.
+
+3
+00:00:18.172 --> 00:00:24.013
+Some sources look internal, but that does not automatically make them safe
+for use in database operations.
+
+4
+00:00:24.013 --> 00:00:28.101
+Data often flows from user input to application logic to database queries.
+
+5
+00:00:28.101 --> 00:00:35.954
+A route receives a search term, a report tool receives a sort option, an
+import job reads a spreadsheet value, or an API receives a filter request.
+
+6
+00:00:35.954 --> 00:00:39.329
+Each value should be understood before it influences a query.
+
+7
+00:00:39.329 --> 00:00:41.795
+Is it a data value that belongs in a parameter?
+
+8
+00:00:41.795 --> 00:00:44.716
+Is it a constrained choice that maps to a known column?
+
+9
+00:00:44.716 --> 00:00:48.220
+Is it business context derived from the authenticated subject?
+
+10
+00:00:48.220 --> 00:00:49.778
+Those distinctions matter.
+
+11
+00:00:49.778 --> 00:00:52.893
+Stored data can become risky later when reused in a query.
+
+12
+00:00:52.893 --> 00:01:00.421
+A value saved as a display label today might become a filter, report name,
+export parameter, or administrative search field months later.
+
+13
+00:01:00.421 --> 00:01:06.457
+Treating stored data as automatically trusted can recreate the same
+problem in a different part of the system.
+
+14
+00:01:06.457 --> 00:01:15.478
+Teams should track whether data is user-controlled, partner-controlled,
+operator-provided, or system-derived before letting it influence database
+behavior.
+
+15
+00:01:15.478 --> 00:01:18.658
+Internal tools and background jobs need query safety too.
+
+16
+00:01:18.658 --> 00:01:24.953
+They may run with broader database permissions, process large datasets, or
+bypass normal request-path controls.
+
+17
+00:01:24.953 --> 00:01:34.104
+A data pipeline, maintenance script, customer support console, or
+analytics job can still mix untrusted values into database commands if
+developers take shortcuts.
+
+18
+00:01:34.104 --> 00:01:39.880
+Safe query construction should be a property of the data-access layer, not
+only the public web interface.

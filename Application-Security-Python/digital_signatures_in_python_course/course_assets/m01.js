@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Digital Signatures Mean",
+  "graphicAlt": "Diagram for What Digital Signatures Mean, showing signer, protected private key, message bytes, signature, and verifier public key; labeled arrows identify signing and verification boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Digital signatures are cryptographic mechanisms for verifying authenticity and integrity. Authenticity means the signature can be checked against an expected signer or key. Integrity means the signed data has not changed since it was signed. In Python systems, signatures may appear in API requests, webhooks, tokens, software packages, configuration files, documents, logs, and service-to-service messages. The signature gives evidence about a key and a specific representation of data, not a blanket guarantee that everything is safe.\n\nSigning is different from encryption, hashing, and message authentication codes. Encryption protects confidentiality by making data unreadable without the right key. Hashing creates a digest but does not prove who created it. A MAC can provide integrity and authenticity with a shared secret. A digital signature typically uses a private key to sign and a public key to verify, which allows verification without sharing the signing secret with every verifier.\n\nA signature can prove that a particular private key produced a signature over particular data under a chosen scheme. It cannot prove that the signed action is authorized, that the data is correct, that the signer meant the business outcome, that the message is fresh, or that the application should skip validation. Signed data still needs input validation, authorization, business-rule checks, and context review before the application acts on it.\n\nThe safest way to think about signatures is through a trust model. Who is allowed to sign? Which public keys are trusted? What exact data is signed? How is the public key distributed? What happens when a key rotates or is exposed? What context, timestamp, audience, or purpose must be checked? Digital signatures are useful when the signing key, signed data, and trust decision are explicit.",
+  "narrationPoints": [
+    "Digital signatures are cryptographic mechanisms for verifying authenticity and integrity.",
+    "The signature gives evidence about a key and a specific representation of data, not a blanket guarantee that everything is safe.",
+    "Hashing creates a digest but does not prove who created it.",
+    "The safest way to think about signatures is through a trust model.",
+    "Digital signatures are useful when the signing key, signed data, and trust decision are explicit.",
+    "How is the public key distributed?"
+  ]
+};

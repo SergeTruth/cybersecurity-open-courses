@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, Monitoring, and Operations",
+  "graphicAlt": "Operational lifecycle diagram for Testing, Logging, Monitoring, and Operations, showing signer, protected private key, message bytes, signature, and verifier public key; labeled arrows identify signing and verification boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Signature systems need tests that cover more than the happy path. Unit tests should verify signing and verification behavior for expected data. Negative tests should cover modified messages, wrong keys, unsupported algorithms, malformed signatures, missing signatures, expired tokens, incorrect audiences, and replay-related cases at a high level. The goal is to prove that bad inputs fail closed without producing unsafe side effects.\n\nDependency review matters because signature systems rely on cryptographic libraries, token libraries, certificate tooling, and integration code. Obsolete examples, unsupported parameters, permissive defaults, and stale dependencies can create quiet risk. Reviewers should inspect not only whether a signature function is called, but whether key selection, context checks, failure handling, and operational assumptions are correct.\n\nLogging should support investigation without exposing private keys, tokens, secrets, or unnecessary signed content. Useful logs may include verification failure type, expected issuer, key identifier, request identifier, timestamp window result, and policy outcome. Sensitive values should be redacted or omitted. Monitoring can alert on unusual signing activity, spikes in verification failures, repeated replay-like attempts, expired key use, or unexpected key identifiers.\n\nOperations need playbooks. If a private key is exposed, who revokes it? Which systems trust the corresponding public key? Which tokens, packages, webhook messages, or configuration files may be affected? How are consumers notified? How is evidence preserved? Signature systems need operational ownership because failures often require coordinated key replacement, token invalidation, package reissue, integration review, and communication.",
+  "narrationPoints": [
+    "Signature systems need tests that cover more than the happy path.",
+    "Dependency review matters because signature systems rely on cryptographic libraries, token libraries, certificate tooling, and integration code.",
+    "Logging should support investigation without exposing private keys, tokens, secrets, or unnecessary signed content.",
+    "If a private key is exposed, who revokes it?",
+    "Sensitive values should be redacted or omitted.",
+    "How is evidence preserved?"
+  ]
+};

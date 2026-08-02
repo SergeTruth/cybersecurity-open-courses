@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing request DTO, authorization-aware repository, ORM session, tenant filter, database, and minimized response model; labeled arrows identify query and object-authorization boundaries and the point where unsafe input or behavior is rejected.",
+  "narration": "Safe ORM usage in Python means using ORM features to build maintainable data access while preserving security boundaries. ORMs make models and queries easier to express, but they do not replace design judgment. Developers still need to understand data flow, query structure, authorization, tenant isolation, serialization, migrations, transactions, logging, and review.\n\nStrong patterns use safe query APIs, parameter binding, constrained dynamic queries, authorization-aware filters, tenant isolation, mass assignment controls, response minimization, reviewed raw SQL, transaction discipline, testing, logging, and monitoring. Each pattern supports a different part of the data-access lifecycle. Together, they make it harder for a new route, report, import job, or serializer to accidentally expose or corrupt data.\n\nORMs reduce some risks, but they do not replace secure design, authorization, least privilege, or code review. Leaving safe ORM paths, accepting arbitrary dynamic filters, serializing entire model graphs, forgetting tenant filters, or using broad writable fields can create serious security issues even when no obvious raw SQL string exists. Safe usage depends on knowing both what the ORM protects and what it does not.\n\nThe goal is predictable, testable, maintainable database access that protects data as applications grow. When teams make data-access patterns explicit, keep dynamic behavior constrained, enforce authorization close to queries, minimize responses, review advanced features, and test denied cases, ORM usage becomes a strong foundation for secure Python applications rather than a hidden source of risk.",
+  "narrationPoints": [
+    "Safe ORM usage in Python means using ORM features to build maintainable data access while preserving security boundaries.",
+    "ORMs make models and queries easier to express, but they do not replace design judgment.",
+    "Each pattern supports a different part of the data-access lifecycle.",
+    "Together, they make it harder for a new route, report, import job, or serializer to accidentally expose or corrupt data.",
+    "Safe usage depends on knowing both what the ORM protects and what it does not.",
+    "The goal is predictable, testable, maintainable database access that protects data as applications grow."
+  ]
+};

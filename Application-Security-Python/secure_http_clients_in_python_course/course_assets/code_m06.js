@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Redirects, Proxies, and Cross-Boundary Behavior through concrete, reviewable Python controls.",
+  "codeExamples": [
+    {
+      "title": "Revalidate every redirect authority",
+      "language": "python",
+      "blurb": "Each redirect hop rejects credentials, alternate ports, fragments, and unapproved hosts before another request is sent, and intermediate responses are closed.",
+      "code": "from urllib.parse import urljoin, urlsplit\n\nAPPROVED_API_HOSTS = {\"api.example.com\", \"api-backup.example.com\"}\n\ndef get_approved_redirects(session, url: str):\n    for _ in range(4):\n        target = urlsplit(url)\n        try:\n            port = target.port\n        except ValueError as error:\n            raise ValueError(\"invalid redirect authority\") from error\n        if (\n            target.scheme != \"https\" or target.hostname not in APPROVED_API_HOSTS\n            or target.username is not None or target.password is not None\n            or port not in {None, 443} or target.fragment\n        ):\n            raise ValueError(\"redirect destination rejected\")\n        response = session.get(url, allow_redirects=False, timeout=(3, 8))\n        if not response.is_redirect:\n            return response\n        try:\n            url = urljoin(url, response.headers[\"Location\"])\n        finally:\n            response.close()\n    raise RuntimeError(\"redirect limit exceeded\")\n"
+    },
+    {
+      "title": "Disable ambient proxy inheritance for a direct API client",
+      "language": "python",
+      "blurb": "The session ignores process proxy variables and accepts no caller-selected proxy, keeping the production route under application policy.",
+      "code": "import requests\n\ndef direct_api_session() -> requests.Session:\n    session = requests.Session()\n    session.trust_env = False\n    session.proxies.clear()\n    session.headers.update({\"Accept\": \"application/json\", \"User-Agent\": \"orders-service/1\"})\n    return session\n\ndef fetch_direct(session: requests.Session, path: str):\n    approved_paths = {\"health\": \"/v1/health\", \"status\": \"/v1/status\"}\n    if path not in approved_paths:\n        raise ValueError(\"API operation rejected\")\n    return session.get(\n        \"https://api.example.com\" + approved_paths[path],\n        allow_redirects=False,\n        timeout=(2, 5),\n        proxies={\"http\": None, \"https\": None},\n    )\n"
+    }
+  ]
+};

@@ -1,0 +1,96 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.669
+Testing ORM safety means testing both data correctness and security
+boundaries.
+
+2
+00:00:04.669 --> 00:00:11.571
+Unit tests can cover data-access functions, dynamic filter mappings,
+serializer field lists, and validation helpers.
+
+3
+00:00:11.571 --> 00:00:20.029
+Integration tests can confirm that ORM queries, raw SQL paths, migrations,
+and transactions behave correctly against a representative database.
+
+4
+00:00:20.029 --> 00:00:27.405
+Authorization tests should verify model access for normal users,
+privileged users, tenants, organizations, and denied cases.
+
+5
+00:00:27.405 --> 00:00:31.939
+Negative tests are especially valuable for dynamic filters and unsafe
+fields.
+
+6
+00:00:31.939 --> 00:00:44.119
+They can confirm that unsupported sort fields are rejected, that clients
+cannot write read-only attributes, that cross-tenant access fails, and
+that generic serializers do not expose sensitive relationships.
+
+7
+00:00:44.119 --> 00:00:52.103
+Regression tests should be added after query fixes so a future feature
+does not reintroduce overbroad access or unsafe query construction.
+
+8
+00:00:52.103 --> 00:00:57.179
+Safe query logging supports investigation without exposing secrets or
+sensitive data.
+
+9
+00:00:57.179 --> 00:01:04.148
+Logs should avoid credentials, tokens, raw connection strings, unnecessary
+personal data, and sensitive query values.
+
+10
+00:01:04.148 --> 00:01:13.013
+Correlation identifiers, high-level event categories, and controlled audit
+fields are usually more useful than dumping entire queries with all
+values.
+
+11
+00:01:13.013 --> 00:01:21.809
+Monitoring unusual database access patterns, large exports, repeated
+denied access, and unexpected admin queries can help identify problems
+earlier.
+
+12
+00:01:21.809 --> 00:01:24.922
+Code review questions should follow the ORM boundary.
+
+13
+00:01:24.922 --> 00:01:26.614
+Does this query use safe APIs?
+
+14
+00:01:26.614 --> 00:01:28.576
+Are dynamic choices allowlisted?
+
+15
+00:01:28.576 --> 00:01:32.433
+Is authorization included before records are returned or changed?
+
+16
+00:01:32.433 --> 00:01:34.057
+Are tenant filters present?
+
+17
+00:01:34.057 --> 00:01:36.290
+Are create and update fields explicit?
+
+18
+00:01:36.290 --> 00:01:38.591
+Does serialization minimize exposure?
+
+19
+00:01:38.591 --> 00:01:40.688
+Are raw SQL and migrations reviewed?
+
+20
+00:01:40.688 --> 00:01:46.440
+ORM safety must be maintained as models, relationships, APIs, reports, and
+background jobs evolve.

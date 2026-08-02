@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Input Validation, Allowlists, and Argument Safety",
+  "graphicAlt": "User choices map to a closed set of operations and fixed flags before a validated job identifier becomes one operand; unknown modes and option-shaped values take rejection arrows.",
+  "narration": "Secure subprocess design begins by identifying which values can influence execution. User-controlled filenames, mode selections, command options, uploaded file metadata, configuration values, database-stored task parameters, third-party API data, queue messages, and scheduled job inputs may all shape what a child process does. A value does not become trusted simply because it passed through a database or job runner before reaching subprocess code.\n\nAllowlists help the application define what it is prepared to run safely. An allowlist might include approved executables, approved modes, approved flags, approved file types, approved directories, or approved operation names. The user chooses from business concepts, and the application maps that choice to known internal arguments. This prevents direct user control over command names, privileged flags, execution targets, or option combinations.\n\nValidation should confirm type, length, range, format, and business intent for the approved operation. A value that is acceptable as a label may not be acceptable as a filename. A value that is acceptable for one tool mode may be unsafe or meaningless for another. Validation should reject unexpected options rather than trying to detect every possible unsafe pattern. Positive constraints are easier to reason about than broad blocklists.\n\nValidation supports safe subprocess APIs, but it does not replace them. A validated value can still cause harm if it is placed into shell syntax, run with excessive privileges, used as an unconstrained path, or logged with secrets. Think of validation as one layer. It narrows what the application accepts, while structured arguments, controlled paths, controlled environments, authorization, and least privilege limit what the child process can do.",
+  "narrationPoints": [
+    "A value does not become trusted simply because it passed through a database or job runner before reaching subprocess code.",
+    "The user chooses from business concepts, and the application maps that choice to known internal arguments.",
+    "A value that is acceptable for one tool mode may be unsafe or meaningless for another.",
+    "Validation supports safe subprocess APIs, but it does not replace them.",
+    "A value that is acceptable as a label may not be acceptable as a filename.",
+    "Validation should confirm type, length, range, format, and business intent for the approved operation."
+  ]
+};

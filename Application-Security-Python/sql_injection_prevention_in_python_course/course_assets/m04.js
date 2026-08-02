@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "ORM and Query Builder Safety",
+  "graphicAlt": "SQLAlchemy expression objects and a Django tenant-owner queryset contrast with raw text escape hatches, showing parameter binding does not automatically provide object authorization.",
+  "narration": "ORMs and query builders can reduce SQL injection risk by giving developers structured APIs for common database operations. Django's ORM, SQLAlchemy, and other Python data layers can express model queries, filters, joins, ordering, pagination, inserts, and updates without hand-building raw SQL strings. When used correctly, these abstractions keep most data values separate from query structure and make data access easier to review.\n\nORMs do not make unsafe query construction impossible. Most mature data layers provide escape hatches for raw SQL, custom expressions, dynamic filters, text fragments, or database-specific behavior. Those features may be necessary, but they should be treated as higher-risk review points. Developers should understand when they are leaving the safe ORM path and what responsibilities return to them when they do.\n\nDynamic filtering, sorting, and pagination deserve careful design. A filter value is usually data and can flow through normal ORM mechanisms. A column name, sort direction, table name, or expression is SQL structure and should not be taken directly from user input. The safe pattern is to map user-facing choices to approved internal fields or query fragments. This keeps flexibility while preventing callers from controlling query syntax.\n\nReviewing generated SQL at a high level can help teams understand what an ORM is doing, especially for complex reports, annotations, joins, or performance tuning. The goal is not to distrust the ORM, but to know where query structure comes from and whether tenant filters, object authorization, and safe parameter handling remain intact. ORMs are powerful safety tools when developers stay within their safe patterns and review the exceptions.",
+  "narrationPoints": [
+    "ORMs and query builders can reduce SQL injection risk by giving developers structured APIs for common database operations.",
+    "Most mature data layers provide escape hatches for raw SQL, custom expressions, dynamic filters, text fragments, or database-specific behavior.",
+    "The safe pattern is to map user-facing choices to approved internal fields or query fragments.",
+    "ORMs are powerful safety tools when developers stay within their safe patterns and review the exceptions.",
+    "A filter value is usually data and can flow through normal ORM mechanisms.",
+    "Developers should understand when they are leaving the safe ORM path and what responsibilities return to them when they do."
+  ]
+};

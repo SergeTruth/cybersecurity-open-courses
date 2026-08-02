@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.859
+Python provides multiple subprocess patterns because not every external
+program has the same lifecycle.
+
+2
+00:00:05.859 --> 00:00:12.433
+A simple bounded command may fit a run-style helper that starts the
+program, waits for completion, and returns a result.
+
+3
+00:00:12.433 --> 00:00:16.339
+A longer-lived interaction may require a lower-level process object.
+
+4
+00:00:16.339 --> 00:00:19.659
+The secure choice is not about memorizing one favorite call.
+
+5
+00:00:19.659 --> 00:00:25.127
+It is about matching the API to the task, output needs, timeout
+requirements, and failure behavior.
+
+6
+00:00:25.127 --> 00:00:31.897
+Return codes and check behavior matter because they determine how the
+parent application interprets success and failure.
+
+7
+00:00:31.897 --> 00:00:41.076
+A child process may finish successfully, fail with a known validation
+problem, fail because a dependency is unavailable, or stop because the
+application timed it out.
+
+8
+00:00:41.076 --> 00:00:50.385
+The Python code should translate those outcomes into safe application
+behavior instead of treating every failure as success or exposing raw
+diagnostic detail to users.
+
+9
+00:00:50.385 --> 00:00:55.267
+Standard input, standard output, and standard error are also part of the
+security model.
+
+10
+00:00:55.267 --> 00:00:58.326
+Input passed to a child process can influence behavior.
+
+11
+00:00:58.326 --> 00:01:04.380
+Output may contain normal results, warnings, internal paths, sensitive
+values, or unexpectedly large data.
+
+12
+00:01:04.380 --> 00:01:08.872
+Error streams may include details intended for operators, not external
+clients.
+
+13
+00:01:08.872 --> 00:01:17.074
+Text and byte handling should be explicit enough that the application does
+not accidentally corrupt data, misread output, or log sensitive content.
+
+14
+00:01:17.074 --> 00:01:20.589
+Subprocess code should be simple, explicit, and easy to review.
+
+15
+00:01:20.589 --> 00:01:35.366
+Reviewers should be able to identify which executable runs, which
+arguments are passed, whether a shell is involved, which directory is
+used, which environment variables are inherited, how long the process may
+run, how output is handled, and what happens when it fails.
+
+16
+00:01:35.366 --> 00:01:41.160
+If those answers are hidden in string assembly or scattered configuration,
+the design is harder to trust.

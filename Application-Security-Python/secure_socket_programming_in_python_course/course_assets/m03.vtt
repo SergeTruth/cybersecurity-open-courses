@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.411
+TCP is stream-oriented.
+
+2
+00:00:01.411 --> 00:00:05.577
+It provides an ordered byte stream, not application message boundaries.
+
+3
+00:00:05.577 --> 00:00:14.110
+That means one receive operation may contain part of a message, exactly
+one message, or pieces of multiple messages depending on timing and
+buffering.
+
+4
+00:00:14.110 --> 00:00:18.948
+Assuming that one receive call equals one complete message is unsafe and
+unreliable.
+
+5
+00:00:18.948 --> 00:00:23.920
+The application protocol must define how the receiver knows when a message
+is complete.
+
+6
+00:00:23.920 --> 00:00:28.086
+UDP is message-oriented at a lower level, but it has different tradeoffs.
+
+7
+00:00:28.086 --> 00:00:34.737
+Messages may be lost, duplicated, reordered, or arrive from unexpected
+sources depending on the design and network.
+
+8
+00:00:34.737 --> 00:00:46.496
+UDP can be appropriate for some workloads, but the application has to
+account for duplicate messages, replay considerations at a high level,
+size limits, and validation of peer identity and message content.
+
+9
+00:00:46.496 --> 00:00:49.721
+The transport does not remove protocol responsibility.
+
+10
+00:00:49.721 --> 00:00:52.140
+Data framing defines message boundaries.
+
+11
+00:00:52.140 --> 00:00:56.373
+Length-prefix framing can state how many bytes belong to the next message.
+
+12
+00:00:56.373 --> 00:00:59.732
+Delimiter-based framing can mark the end of a text message.
+
+13
+00:00:59.732 --> 00:01:04.167
+Fixed-size records, binary formats, and text protocols each have
+tradeoffs.
+
+14
+00:01:04.167 --> 00:01:14.178
+Whatever the design, the receiver should enforce maximum sizes, handle
+incomplete data, reject malformed frames, and avoid waiting forever for a
+message that never finishes.
+
+15
+00:01:14.178 --> 00:01:17.134
+Encoding and decoding are also security-relevant.
+
+16
+00:01:17.134 --> 00:01:21.502
+A byte stream must become structured data before business logic can trust
+it.
+
+17
+00:01:21.502 --> 00:01:28.154
+Text encodings, binary fields, numeric ranges, command names, and optional
+values should be validated explicitly.
+
+18
+00:01:28.154 --> 00:01:31.983
+Protocol parsers should fail predictably when input is malformed.
+
+19
+00:01:31.983 --> 00:01:39.240
+A clear framing and validation model prevents accidental trust in
+incomplete, oversized, ambiguous, or unexpected messages.

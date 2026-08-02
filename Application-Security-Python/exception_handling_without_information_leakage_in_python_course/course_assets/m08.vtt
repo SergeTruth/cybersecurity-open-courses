@@ -1,0 +1,98 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.605
+Exception safety should be tested directly.
+
+2
+00:00:02.605 --> 00:00:07.814
+Unit tests can exercise known error cases and confirm that handlers return
+safe messages.
+
+3
+00:00:07.814 --> 00:00:22.072
+Integration tests can verify web pages, API responses, CLI output, and
+background job records under validation failures, authentication failures,
+authorization failures, database outages, file errors, timeouts, and
+third-party failures.
+
+4
+00:00:22.072 --> 00:00:28.036
+Production-like configuration tests should confirm that tracebacks and
+debug pages are not exposed.
+
+5
+00:00:28.036 --> 00:00:30.641
+Code review should ask practical questions.
+
+6
+00:00:30.641 --> 00:00:33.451
+Does this handler return a raw exception string?
+
+7
+00:00:33.451 --> 00:00:38.112
+Does a log call include request bodies, headers, tokens, or connection
+strings?
+
+8
+00:00:38.112 --> 00:00:41.402
+Does a broad except block hide a failed permission check?
+
+9
+00:00:41.402 --> 00:00:44.419
+Does a dependency error reach the client unchanged?
+
+10
+00:00:44.419 --> 00:00:46.269
+Are correlation IDs available?
+
+11
+00:00:46.269 --> 00:00:49.011
+Are custom exception types used consistently?
+
+12
+00:00:49.011 --> 00:00:50.656
+Are redaction rules tested?
+
+13
+00:00:50.656 --> 00:00:57.100
+These questions keep review focused on failure paths that often receive
+less attention than successful paths.
+
+14
+00:00:57.100 --> 00:01:00.596
+Monitoring should treat unusual error patterns as signals.
+
+15
+00:01:00.596 --> 00:01:17.664
+Repeated failures, spikes in authentication errors, unexpected
+authorization denials, new exception types, dependency timeouts, redaction
+failures, or sudden increases in debug-like responses may indicate a
+reliability issue, an attack attempt, a misconfiguration, or a data
+exposure.
+
+16
+00:01:17.664 --> 00:01:26.369
+Good monitoring connects application logs, traces, security alerts, and
+operational dashboards without requiring sensitive data in every record.
+
+17
+00:01:26.369 --> 00:01:32.950
+When a response, log, trace, alert, or report exposes sensitive
+information, remediation should be deliberate.
+
+18
+00:01:32.950 --> 00:01:38.365
+Assess what was exposed, where it was stored, who could access it, and how
+long it was retained.
+
+19
+00:01:38.365 --> 00:01:47.962
+Rotate or revoke exposed secrets when appropriate, remove or restrict
+affected records where feasible, fix the handler or redaction path, and
+add regression tests.
+
+20
+00:01:47.962 --> 00:01:52.760
+Exception handling improves when every leak becomes feedback for safer
+defaults.

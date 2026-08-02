@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.381
+Safe process execution in Python means launching external programs only
+when necessary and doing so with explicit trust boundaries.
+
+2
+00:00:07.381 --> 00:00:22.013
+The application should know who requested the work, which operation is
+approved, which executable will run, which arguments are data, which files
+may be touched, which environment values are passed, which account is
+used, and how success or failure will be handled.
+
+3
+00:00:22.013 --> 00:00:27.566
+Without that clarity, process execution can quietly become an unsafe
+operating-system interface.
+
+4
+00:00:27.566 --> 00:00:36.711
+The strongest designs avoid shell interpretation, separate executable
+paths from structured arguments, and map user choices to allowlisted
+internal operations.
+
+5
+00:00:36.711 --> 00:00:43.112
+They validate inputs for type, format, length, range, and business intent,
+but they do not rely on validation alone.
+
+6
+00:00:43.112 --> 00:00:55.131
+They also constrain file paths, set working directories deliberately, use
+safe temporary files, minimize inherited environment variables, protect
+secrets, and avoid placing sensitive values in arguments or logs.
+
+7
+00:00:55.131 --> 00:00:57.744
+Runtime controls complete the security story.
+
+8
+00:00:57.744 --> 00:01:07.020
+Child processes should run with least privilege, appropriate isolation,
+limited filesystem and network access, timeouts, output limits, and
+concurrency controls.
+
+9
+00:01:07.020 --> 00:01:16.818
+Logs should preserve enough evidence for operations and security review
+without exposing secrets, sensitive arguments, private file contents, or
+excessive internal detail.
+
+10
+00:01:16.818 --> 00:01:21.325
+Tests and monitoring should cover failure paths, not just successful
+execution.
+
+11
+00:01:21.325 --> 00:01:25.898
+The practical takeaway is simple: treat process execution as a security
+boundary.
+
+12
+00:01:25.898 --> 00:01:29.490
+Prefer libraries or platform APIs when they can do the job safely.
+
+13
+00:01:29.490 --> 00:01:35.304
+When external execution is necessary, make it predictable, constrained,
+observable, and recoverable.
+
+14
+00:01:35.304 --> 00:01:41.640
+That approach supports business automation without turning Python
+applications into broad command interfaces.

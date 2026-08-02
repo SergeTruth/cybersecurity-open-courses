@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Exposure Paths and Leakage Risks",
+  "graphicAlt": "Sequence diagram for Exposure Paths and Leakage Risks, showing developer shell, Python process, deployment platform, child process, and secret store; labeled arrows identify configuration flow and exposure paths and the point where unsafe input or behavior is rejected.",
+  "narration": "Environment variables can spread into places developers do not expect. They may appear in shell history, process environments, debug pages, stack traces, logs, crash reports, metrics, support bundles, notebooks, container inspection metadata, CI/CD output, build logs, screenshots, or documentation. The exact exposure path depends on the operating system, runtime, framework, deployment platform, and tooling, which is why secrets in environment variables still require careful handling.\n\nLogging is a common leakage path. A configuration object may be printed during startup. An exception may include a connection string. A debugging helper may dump the process environment. A test failure may include environment values in CI output. A notebook may preserve cells and outputs long after an experiment is done. Safe logging should avoid secrets, tokens, passwords, private keys, full sensitive connection strings, and unnecessary sensitive configuration values.\n\nChild processes introduce another exposure path because inherited environment values may be visible to programs that do not need them. A subprocess, worker, build step, or helper tool may receive secrets intended only for the parent application. If that child process logs diagnostics, crashes, invokes other tools, or writes metadata, inherited values may spread further. Environment inheritance should be treated as a deliberate choice, not an invisible default.\n\nThe right response is layered. Minimize which secrets are placed in environment variables. Restrict who can view runtime configuration. Redact sensitive values in logs and error reports. Avoid dumping environment dictionaries. Use safe defaults for debug behavior. Rotate exposed secrets when needed. Monitor for accidental leaks. Environment variables are useful, but they should never be treated as a private vault by default.",
+  "narrationPoints": [
+    "Environment variables can spread into places developers do not expect.",
+    "A notebook may preserve cells and outputs long after an experiment is done.",
+    "If that child process logs diagnostics, crashes, invokes other tools, or writes metadata, inherited values may spread further.",
+    "Environment variables are useful, but they should never be treated as a private vault by default.",
+    "Restrict who can view runtime configuration.",
+    "Monitor for accidental leaks."
+  ]
+};

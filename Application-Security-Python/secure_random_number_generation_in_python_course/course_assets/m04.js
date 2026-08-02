@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Tokens, Reset Links, and Session Identifiers",
+  "graphicAlt": "Thirty-two random bytes become a URL-safe reset token; the raw token travels once to the user while only a domain-separated digest, expiry, and used flag reach storage.",
+  "narration": "Security tokens are often bearer-like values. Whoever presents the value within the intended rules may be able to reset a password, verify an email address, join a workspace, access an API, submit a form, or continue a session. That means token generation must consider unpredictability, uniqueness, lifetime, storage, revocation, and logging together. A token is not just a random string; it is temporary authority.\n\nPassword reset tokens, email verification tokens, session identifiers, CSRF tokens at a high level, invitation links, and API keys all have different risk profiles. Some should be one-time use. Some need short expiration. Some need revocation. Some should be stored only as a verifier or hash so database exposure does not reveal active tokens directly. The generation method should match the token's power and lifetime.\n\nLength and encoding matter because they affect guessing resistance, usability, storage, and transport. URL-safe encodings may be appropriate for links. Human-entered codes may need a smaller character set, but shorter user-friendly codes usually need stronger lifecycle controls, such as expiration, throttling, and attempt limits. The right answer depends on how the token is used and how much harm misuse could cause.\n\nToken presence does not replace authorization. A valid reset token may allow a password reset, but it should not automatically grant full account access before the workflow is complete. A valid session identifier authenticates session state, but the application still needs authorization for protected resources. Secure tokens provide a trustworthy handle for a workflow; they do not remove the need for policy.",
+  "narrationPoints": [
+    "A token is not just a random string; it is temporary authority.",
+    "Some should be stored only as a verifier or hash so database exposure does not reveal active tokens directly.",
+    "The right answer depends on how the token is used and how much harm misuse could cause.",
+    "A valid session identifier authenticates session state, but the application still needs authorization for protected resources.",
+    "Secure tokens provide a trustworthy handle for a workflow; they do not remove the need for policy.",
+    "Length and encoding matter because they affect guessing resistance, usability, storage, and transport."
+  ]
+};

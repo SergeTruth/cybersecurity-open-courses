@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.047
+Received bytes should be treated as untrusted input.
+
+2
+00:00:03.047 --> 00:00:12.999
+A socket parser should enforce message size limits, field types, numeric
+ranges, allowed commands, expected state, and business rules before data
+reaches sensitive logic.
+
+3
+00:00:12.999 --> 00:00:20.243
+The parser should reject invalid messages predictably and avoid revealing
+unnecessary internal details in error responses.
+
+4
+00:00:20.243 --> 00:00:22.680
+Input validation is not only for web forms.
+
+5
+00:00:22.680 --> 00:00:25.253
+It is fundamental to every network protocol.
+
+6
+00:00:25.253 --> 00:00:30.669
+Unsafe deserialization and overly flexible parsing are common design
+hazards at a high level.
+
+7
+00:00:30.669 --> 00:00:39.538
+If a protocol accepts complex objects, expression-like data, or
+dynamically interpreted content from a peer, the application has to
+understand the risk.
+
+8
+00:00:39.538 --> 00:00:45.835
+Simpler formats with explicit fields and allowlisted commands are easier
+to validate, log, and reason about.
+
+9
+00:00:45.835 --> 00:00:49.490
+The protocol should make unsafe behavior difficult to express.
+
+10
+00:00:49.490 --> 00:00:51.792
+Resource limits protect availability.
+
+11
+00:00:51.792 --> 00:01:01.271
+A peer may send oversized messages, send data slowly, open many
+connections, trigger expensive parsing paths, or create backpressure
+through slow reads and writes.
+
+12
+00:01:01.271 --> 00:01:09.463
+The server and client should define limits for message size, connection
+count, memory use, CPU-intensive operations, and time spent waiting.
+
+13
+00:01:09.463 --> 00:01:12.238
+These controls are not only performance tuning.
+
+14
+00:01:12.238 --> 00:01:15.150
+They define how the protocol behaves under stress.
+
+15
+00:01:15.150 --> 00:01:18.332
+Safe error responses should be consistent and limited.
+
+16
+00:01:18.332 --> 00:01:28.826
+The peer can be told that a message is invalid, unauthorized, too large,
+or unsupported without receiving stack traces, secrets, internal object
+names, or detailed parser internals.
+
+17
+00:01:28.826 --> 00:01:32.617
+Logging can preserve safe diagnostic information for operators.
+
+18
+00:01:32.617 --> 00:01:42.840
+A well-designed parser fails closed, preserves resources, and gives
+legitimate clients enough information to recover without helping untrusted
+peers map the implementation.

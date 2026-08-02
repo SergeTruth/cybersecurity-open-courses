@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.068
+Input validation is an important supporting control.
+
+2
+00:00:03.068 --> 00:00:09.937
+It checks type, range, length, format, allowed values, and business rules
+before data reaches deeper application logic.
+
+3
+00:00:09.937 --> 00:00:17.940
+Validation can reject impossible dates, oversized strings, unsupported
+choices, invalid identifiers, and inconsistent workflow states.
+
+4
+00:00:17.940 --> 00:00:20.408
+It improves clarity and reduces ambiguity.
+
+5
+00:00:20.408 --> 00:00:26.477
+But validation should support safe query construction, not replace
+parameterized queries or safe ORM use.
+
+6
+00:00:26.477 --> 00:00:30.879
+Authorization must happen before database operations expose or change
+data.
+
+7
+00:00:30.879 --> 00:00:39.882
+A query can be perfectly parameterized and still return records the caller
+should not see if the application forgets tenant boundaries or object-
+level checks.
+
+8
+00:00:39.882 --> 00:00:45.684
+Secure database access combines safe query construction with resource-
+level permission decisions.
+
+9
+00:00:45.684 --> 00:00:53.287
+The application should know who the caller is, what action is requested,
+which resource is affected, and whether the context allows it.
+
+10
+00:00:53.287 --> 00:00:56.355
+Least privilege reduces damage when something fails.
+
+11
+00:00:56.355 --> 00:01:01.824
+The database account used by an application should have only the
+permissions needed for its role.
+
+12
+00:01:01.824 --> 00:01:05.292
+A reporting service may need read access but not write access.
+
+13
+00:01:05.292 --> 00:01:10.828
+A background job may need access to a specific schema but not
+administrative database privileges.
+
+14
+00:01:10.828 --> 00:01:16.096
+Separating accounts by function can limit impact and make unusual behavior
+easier to notice.
+
+15
+00:01:16.096 --> 00:01:21.032
+Validation, authorization, and least privilege are not substitutes for
+safe queries.
+
+16
+00:01:21.032 --> 00:01:24.700
+They are layers that reduce risk around safe query construction.
+
+17
+00:01:24.700 --> 00:01:34.704
+If a developer mixes untrusted data into SQL structure, validation may
+miss a future context, authorization may occur too late, and a privileged
+account may amplify the problem.
+
+18
+00:01:34.704 --> 00:01:42.840
+A strong design uses all of these controls together: validate inputs,
+enforce access, use least privilege, and build queries safely by default.

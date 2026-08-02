@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Testing, and Review",
+  "graphicAlt": "Operational lifecycle diagram for Logging, Testing, and Review, showing upload stream, quarantine directory, content validator, private storage, authorization gate, and download response; labeled arrows identify file lifecycle and isolation controls and the point where unsafe input or behavior is rejected.",
+  "narration": "Safe logging of file operations helps teams investigate behavior without leaking the very data they are trying to protect. Useful events may include uploads, downloads, access denied decisions, deletions, parser failures, scan results, retention actions, and administrative changes. Logs should include correlation IDs and operation status where useful, but they should avoid unnecessary file contents, secrets, tokens, regulated data, and sensitive personal information.\n\nAudit events are especially useful for security-sensitive workflows. A file deletion, privileged download, failed authorization check, upload rejection, or parser failure may be important during incident response. Logging should be privacy-aware and role-aware: enough detail to support investigation and accountability, not so much detail that logs become a second uncontrolled copy of sensitive files.\n\nTesting should include more than happy-path uploads. Boundary tests, invalid names, unexpected extensions, oversized files, empty files, parser failures, unauthorized downloads, deleted files, concurrent operations, cleanup behavior, and access control checks all matter. Path handling tests should confirm that file operations stay inside intended directories without using offensive payload examples in course material or documentation.\n\nCode review should ask direct questions. Where did this path come from? Who chose this filename? What base directory constrains it? What permissions does the process have? What parser handles the content? What happens on failure? Is the file served back to users, and if so, where is authorization enforced? Static analysis, dependency review, and secure coding standards can help, but file handling must remain testable, reviewable, and observable.",
+  "narrationPoints": [
+    "Safe logging of file operations helps teams investigate behavior without leaking the very data they are trying to protect.",
+    "A file deletion, privileged download, failed authorization check, upload rejection, or parser failure may be important during incident response.",
+    "Static analysis, dependency review, and secure coding standards can help, but file handling must remain testable, reviewable, and observable.",
+    "Code review should ask direct questions.",
+    "What base directory constrains it?",
+    "What happens on failure?"
+  ]
+};

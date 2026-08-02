@@ -1,0 +1,104 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.759
+HTTP headers can be set close to application code or farther out in the
+delivery path.
+
+2
+00:00:04.759 --> 00:00:07.575
+A Django project may use middleware and settings.
+
+3
+00:00:07.575 --> 00:00:12.334
+A Flask application may use response helpers, decorators, or after-request
+hooks.
+
+4
+00:00:12.334 --> 00:00:17.764
+A FastAPI service may use middleware, route-level response handling, or
+dependency patterns.
+
+5
+00:00:17.764 --> 00:00:26.813
+Infrastructure may also add or override headers through reverse proxies,
+load balancers, API gateways, static hosting layers, or content delivery
+networks.
+
+6
+00:00:26.813 --> 00:00:32.109
+Global headers are useful for consistent defaults, but not every response
+has the same needs.
+
+7
+00:00:32.109 --> 00:00:39.617
+HTML pages, JSON APIs, file downloads, static assets, redirects, admin
+pages, and error responses may require different policies.
+
+8
+00:00:39.617 --> 00:00:45.583
+Route-level or response-specific headers can be appropriate when they
+express a deliberate exception.
+
+9
+00:00:45.583 --> 00:00:54.565
+The risk is fragmentation: if every route invents its own policy, teams
+can end up with missing, duplicated, conflicting, or environment-specific
+behavior.
+
+10
+00:00:54.565 --> 00:00:56.710
+Header ownership should be explicit.
+
+11
+00:00:56.710 --> 00:01:04.486
+If the application sets one policy and the proxy overwrites it, the final
+browser-visible result may not match what developers reviewed.
+
+12
+00:01:04.486 --> 00:01:08.776
+If both layers add similar headers, conflicts can make behavior confusing.
+
+13
+00:01:08.776 --> 00:01:15.077
+If only production infrastructure sets the headers, local and staging
+review may miss important differences.
+
+14
+00:01:15.077 --> 00:01:20.775
+Ownership should define who sets the baseline, who approves exceptions,
+and how changes are tested.
+
+15
+00:01:20.775 --> 00:01:24.194
+A practical Python header program starts with an inventory.
+
+16
+00:01:24.194 --> 00:01:27.277
+Which headers are emitted by application middleware?
+
+17
+00:01:27.277 --> 00:01:30.025
+Which are added by proxies or hosting platforms?
+
+18
+00:01:30.025 --> 00:01:31.433
+Which responses differ?
+
+19
+00:01:31.433 --> 00:01:33.109
+Which environments diverge?
+
+20
+00:01:33.109 --> 00:01:39.276
+Once that map exists, teams can define stable defaults, document
+exceptions, and create regression checks.
+
+21
+00:01:39.276 --> 00:01:42.896
+The key is not whether headers come from code or infrastructure.
+
+22
+00:01:42.896 --> 00:01:47.320
+The key is whether the final response policy is intentional and
+maintainable.

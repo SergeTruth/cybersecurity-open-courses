@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe Parsing and Validation",
+  "graphicAlt": "Sequence diagram for Safe Parsing and Validation, showing untrusted bytes, bounded parser, schema validator, typed data, and rejected object-construction path; labeled arrows identify parse, validation, and trust transitions and the point where unsafe input or behavior is rejected.",
+  "narration": "Parsing and validation solve different problems. Parsing converts serialized bytes or text into a data structure. Validation checks whether that structure matches expected rules and intent. A parser may accept a document because the syntax is valid, while the application should still reject it because required fields are missing, types are wrong, values are out of range, relationships are invalid, or the operation is not allowed.\n\nSchema validation should define expected fields, required fields, allowed fields, types, ranges, formats, and relationships. For example, a message may require an identifier, a timestamp, an action, and a list of items. Validation should decide whether unknown fields are rejected, ignored, or allowed for compatibility. That decision should be intentional because unexpected fields can indicate client error, version mismatch, probing, or an attempt to control behavior the application did not intend to expose.\n\nType normalization should happen before sensitive use. Strings may need trimming, identifiers may need canonical form, numbers may need range checks, timestamps may need timezone handling, and enumerations may need exact allowed values. Normalization should reduce ambiguity, not hide invalid input. If a field can mean too many things, downstream code becomes harder to secure and harder to test.\n\nValidation should happen close to the trust boundary and produce safe errors. Developers and legitimate clients need enough information to correct input. Unauthorized users should not receive secrets, stack traces, internal paths, parser internals, or configuration details. Strong parsing and validation make failure modes predictable, reviewable, and testable before deserialized data reaches sensitive code.",
+  "narrationPoints": [
+    "Parsing converts serialized bytes or text into a data structure.",
+    "Schema validation should define expected fields, required fields, allowed fields, types, ranges, formats, and relationships.",
+    "Normalization should reduce ambiguity, not hide invalid input.",
+    "Developers and legitimate clients need enough information to correct input.",
+    "Strong parsing and validation make failure modes predictable, reviewable, and testable before deserialized data reaches sensitive code.",
+    "Type normalization should happen before sensitive use."
+  ]
+};

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.363
+Exception taxonomy helps separate safe business outcomes from low-level
+implementation detail.
+
+2
+00:00:05.363 --> 00:00:12.768
+A domain exception might represent a validation failure, a permission
+decision, a missing resource, a conflict, or a dependency outage.
+
+3
+00:00:12.768 --> 00:00:20.685
+Lower-level exceptions from drivers, libraries, databases, files, or
+network clients can be wrapped into these application-level categories.
+
+4
+00:00:20.685 --> 00:00:26.878
+This preserves internal diagnostic value while giving response handlers a
+safe vocabulary for users and clients.
+
+5
+00:00:26.878 --> 00:00:29.112
+Broad exception handling needs caution.
+
+6
+00:00:29.112 --> 00:00:37.220
+Catching every exception and returning success can hide failed security
+checks, incomplete transactions, skipped cleanup, or inconsistent state.
+
+7
+00:00:37.220 --> 00:00:41.306
+Catching every exception and returning the raw message can leak internals.
+
+8
+00:00:41.306 --> 00:00:54.968
+The better pattern is to catch errors at meaningful boundaries, handle
+known cases deliberately, let truly unexpected failures reach centralized
+handling, and make sure sensitive actions do not proceed when
+prerequisites cannot be evaluated safely.
+
+9
+00:00:54.968 --> 00:01:02.183
+Fail-safe behavior means the application avoids granting access or taking
+sensitive action when it cannot make the decision safely.
+
+10
+00:01:02.183 --> 00:01:07.162
+If authorization data cannot be loaded, the safe answer is not to allow
+the action by default.
+
+11
+00:01:07.162 --> 00:01:11.248
+If validation fails, the safe answer is not to continue with guessed
+values.
+
+12
+00:01:11.248 --> 00:01:16.675
+If a dependency response is ambiguous, the application should avoid
+treating it as trusted success.
+
+13
+00:01:16.675 --> 00:01:20.633
+Exception handling should preserve security decisions, not erase them.
+
+14
+00:01:20.633 --> 00:01:23.634
+Cleanup and resource handling are part of safe failure.
+
+15
+00:01:23.634 --> 00:01:33.593
+Finally blocks, context managers, transaction boundaries, connection
+closing, file cleanup, and rollback behavior help prevent leaks, locks,
+partial writes, and stale resources.
+
+16
+00:01:33.593 --> 00:01:39.211
+Retry boundaries should be clear so transient failures do not become
+duplicate actions or hidden loops.
+
+17
+00:01:39.211 --> 00:01:47.000
+Well-structured exception handling makes failure explicit, bounded, and
+observable without turning every exception into a data disclosure.

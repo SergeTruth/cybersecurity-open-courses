@@ -1,0 +1,74 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.804
+Python HTTP clients often handle TLS verification by default, but secure
+usage still requires deliberate client design.
+
+2
+00:00:06.804 --> 00:00:19.817
+The code should use HTTPS for sensitive API calls, rely on appropriate
+certificate bundles or trust stores, set explicit timeouts, handle errors
+safely, and avoid weakening verification to make a failing request appear
+successful.
+
+3
+00:00:19.817 --> 00:00:25.102
+Defaults are helpful, but production-sensitive behavior should be visible
+enough to review.
+
+4
+00:00:25.102 --> 00:00:28.207
+Destination control and TLS validation work together.
+
+5
+00:00:28.207 --> 00:00:38.644
+A client should know which service it intended to reach, which scheme is
+acceptable, which host is approved, and whether redirects are allowed to
+move the request across trust boundaries.
+
+6
+00:00:38.644 --> 00:00:45.250
+If a redirect changes the destination, sensitive headers or tokens should
+not be sent blindly to a different endpoint.
+
+7
+00:00:45.250 --> 00:00:49.874
+The transport may be encrypted, but the destination still needs to be
+appropriate.
+
+8
+00:00:49.874 --> 00:00:53.573
+Credentials and TLS settings should be handled with the same care.
+
+9
+00:00:53.573 --> 00:01:02.226
+API tokens, authorization headers, cookies, client certificate keys, and
+sensitive request bodies should not be logged or placed in URLs when
+avoidable.
+
+10
+00:01:02.226 --> 00:01:09.559
+Certificate errors should be reported to controlled operational channels
+without exposing secrets or internal details to users.
+
+11
+00:01:09.559 --> 00:01:13.258
+A safe client protects the connection and the data carried over it.
+
+12
+00:01:13.258 --> 00:01:22.044
+HTTP client security combines TLS validation, destination control,
+credential protection, response validation, retry discipline, and logging
+hygiene.
+
+13
+00:01:22.044 --> 00:01:29.706
+A valid certificate does not prove that a response follows the API
+contract or that the current user is authorized to use the returned data.
+
+14
+00:01:29.706 --> 00:01:38.360
+Secure clients verify transport identity, send only necessary data, parse
+responses carefully, and fail in ways that are observable without being
+leaky.

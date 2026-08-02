@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.351
+SDKs can improve consistency, but they do not eliminate responsibility.
+
+2
+00:00:04.351 --> 00:00:21.335
+Official and third-party SDKs may handle authentication, signing,
+pagination, retries, serialization, and endpoint construction, yet the
+application still owns credential scope, business authorization, data
+minimization, response handling, version pinning, and monitoring.
+
+3
+00:00:21.335 --> 00:00:32.775
+Dependency review should consider package source, maintenance, transitive
+dependencies, configuration defaults, deprecation plans, and how the SDK
+exposes security-sensitive options.
+
+4
+00:00:32.775 --> 00:00:35.512
+Testing should cover more than the happy path.
+
+5
+00:00:35.512 --> 00:00:54.180
+API client tests should exercise authentication failure, authorization
+failure, malformed responses, unexpected content types, oversized
+responses, timeouts, connection failures, rate limits, retries, pagination
+boundaries, duplicate records, redirects, unavailable services, and
+contract changes.
+
+6
+00:00:54.180 --> 00:01:02.883
+Mocked and staged API testing can both help, as long as tests do not teach
+the code to trust unrealistic responses or ignore important failure modes.
+
+7
+00:01:02.883 --> 00:01:05.971
+Logging must be useful without becoming a data leak.
+
+8
+00:01:05.971 --> 00:01:18.112
+Outbound requests and responses may contain tokens, credentials, sensitive
+headers, full URLs with query parameters, private payloads, regulated
+data, and response bodies that should not be retained.
+
+9
+00:01:18.112 --> 00:01:27.165
+Safe logging uses redaction, event names, correlation identifiers, timing,
+destination identity, status categories, and high-impact audit events.
+
+10
+00:01:27.165 --> 00:01:33.762
+The point is to support troubleshooting and accountability while limiting
+exposure in long-lived log stores.
+
+11
+00:01:33.762 --> 00:01:37.271
+Monitoring and incident response complete the lifecycle.
+
+12
+00:01:37.271 --> 00:01:49.343
+Watch for unusual destinations, authentication failures, authorization
+errors, retry storms, latency changes, quota exhaustion, error spikes,
+unexpected redirects, and changes in response shape.
+
+13
+00:01:49.343 --> 00:01:59.800
+If credentials, requests, or responses are exposed, teams need a path to
+revoke or rotate credentials, assess data exposure, review logs, notify
+owners, and improve controls.
+
+14
+00:01:59.800 --> 00:02:03.800
+Secure API clients are maintained systems, not one-time snippets.

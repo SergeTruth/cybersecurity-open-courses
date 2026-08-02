@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.148
+Parameterized queries are the primary prevention pattern for raw SQL.
+
+2
+00:00:04.148 --> 00:00:11.613
+The core idea is simple: SQL structure is defined by the developer, and
+data values are passed separately to the database driver.
+
+3
+00:00:11.613 --> 00:00:18.941
+The database driver or prepared statement mechanism then treats those
+values as data, not as syntax that changes the command.
+
+4
+00:00:18.941 --> 00:00:24.747
+This separation is more reliable than trying to clean or manually rewrite
+values into a safe string.
+
+5
+00:00:24.747 --> 00:00:31.176
+Placeholders and parameter binding vary across database drivers and
+libraries, but the principle is stable.
+
+6
+00:00:31.176 --> 00:00:35.600
+The application supplies a query shape and a separate collection of
+values.
+
+7
+00:00:35.600 --> 00:00:39.264
+The driver binds those values through the database interface.
+
+8
+00:00:39.264 --> 00:00:47.006
+Developers should follow the parameter style required by the chosen
+library rather than inventing string formatting conventions.
+
+9
+00:00:47.006 --> 00:00:55.302
+If a value came from a request, import, partner response, or stored field,
+it should normally flow through binding rather than concatenation.
+
+10
+00:00:55.302 --> 00:01:00.002
+Parameterized queries apply to SELECT, INSERT, UPDATE, and DELETE
+operations.
+
+11
+00:01:00.002 --> 00:01:02.906
+They are not only for login checks or search boxes.
+
+12
+00:01:02.906 --> 00:01:09.611
+Any operation that includes external or variable values should use the
+safe parameter mechanism for those values.
+
+13
+00:01:09.611 --> 00:01:17.630
+This includes identifiers used as lookup values, timestamps, status
+values, tenant IDs, account IDs, text fields, and numeric filters.
+
+14
+00:01:17.630 --> 00:01:22.952
+The safest standard is that raw SQL without parameters should be unusual
+and easy to review.
+
+15
+00:01:22.952 --> 00:01:28.828
+Escaping is not the preferred primary defense because it is context-
+dependent and easy to get wrong.
+
+16
+00:01:28.828 --> 00:01:34.013
+Different databases, encodings, settings, and query contexts can behave
+differently.
+
+17
+00:01:34.013 --> 00:01:39.128
+Parameterization delegates value handling to the database driver in the
+intended way.
+
+18
+00:01:39.128 --> 00:01:51.640
+Developers still need to review SQL structure, dynamic identifiers, and
+authorization, but parameter binding removes a large class of mistakes
+where data values are accidentally interpreted as part of a command.

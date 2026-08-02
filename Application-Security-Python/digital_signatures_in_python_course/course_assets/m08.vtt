@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.673
+Signature systems need tests that cover more than the happy path.
+
+2
+00:00:03.673 --> 00:00:08.148
+Unit tests should verify signing and verification behavior for expected
+data.
+
+3
+00:00:08.148 --> 00:00:20.103
+Negative tests should cover modified messages, wrong keys, unsupported
+algorithms, malformed signatures, missing signatures, expired tokens,
+incorrect audiences, and replay-related cases at a high level.
+
+4
+00:00:20.103 --> 00:00:24.978
+The goal is to prove that bad inputs fail closed without producing unsafe
+side effects.
+
+5
+00:00:24.978 --> 00:00:33.527
+Dependency review matters because signature systems rely on cryptographic
+libraries, token libraries, certificate tooling, and integration code.
+
+6
+00:00:33.527 --> 00:00:40.006
+Obsolete examples, unsupported parameters, permissive defaults, and stale
+dependencies can create quiet risk.
+
+7
+00:00:40.006 --> 00:00:50.157
+Reviewers should inspect not only whether a signature function is called,
+but whether key selection, context checks, failure handling, and
+operational assumptions are correct.
+
+8
+00:00:50.157 --> 00:00:56.970
+Logging should support investigation without exposing private keys,
+tokens, secrets, or unnecessary signed content.
+
+9
+00:00:56.970 --> 00:01:05.652
+Useful logs may include verification failure type, expected issuer, key
+identifier, request identifier, timestamp window result, and policy
+outcome.
+
+10
+00:01:05.652 --> 00:01:08.390
+Sensitive values should be redacted or omitted.
+
+11
+00:01:08.390 --> 00:01:17.807
+Monitoring can alert on unusual signing activity, spikes in verification
+failures, repeated replay-like attempts, expired key use, or unexpected
+key identifiers.
+
+12
+00:01:17.807 --> 00:01:19.410
+Operations need playbooks.
+
+13
+00:01:19.410 --> 00:01:21.814
+If a private key is exposed, who revokes it?
+
+14
+00:01:21.814 --> 00:01:24.686
+Which systems trust the corresponding public key?
+
+15
+00:01:24.686 --> 00:01:29.428
+Which tokens, packages, webhook messages, or configuration files may be
+affected?
+
+16
+00:01:29.428 --> 00:01:31.031
+How are consumers notified?
+
+17
+00:01:31.031 --> 00:01:32.567
+How is evidence preserved?
+
+18
+00:01:32.567 --> 00:01:43.320
+Signature systems need operational ownership because failures often
+require coordinated key replacement, token invalidation, package reissue,
+integration review, and communication.

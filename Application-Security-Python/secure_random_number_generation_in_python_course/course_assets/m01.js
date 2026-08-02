@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Secure Randomness Matters",
+  "graphicAlt": "An operating-system entropy source feeds security tokens, salts, nonces, and keys through purpose-specific APIs; the deterministic random module branches only toward simulations and tests.",
+  "narration": "Secure random number generation is the source of unpredictability for many security controls. Python applications use random values for password reset links, session identifiers, API keys, CSRF tokens, invitation links, cryptographic keys, salts, nonces, and one-time codes. If those values can be guessed, repeated, or predicted, the surrounding security design may fail even when the rest of the code appears well built.\n\nRandomness for simulation is different from randomness for security. A simulation, game, sampling routine, or test may need values that are statistically useful or repeatable. A security token needs values that an attacker cannot predict before they are generated and cannot feasibly guess afterward. The visual appearance of randomness is not enough. The important question is whether the value is unpredictable to someone trying to misuse it.\n\nPredictable values can undermine otherwise strong designs. A password reset system with good email handling still fails if reset tokens are guessable. A session system with secure cookies still fails if identifiers are predictable. A cryptographic scheme can be weakened by nonce reuse or poor key generation. Secure randomness must be considered during design, implementation, deployment, and review, not added as a small detail at the end.\n\nPython developers should use vetted APIs instead of inventing randomness schemes. Custom approaches based on time, process identifiers, counters, usernames, predictable seeds, or mixed strings are not reliable security designs. Secure randomness is a dependency, just like authentication or cryptography. It deserves central patterns, code review, safe logging, and operational ownership.",
+  "narrationPoints": [
+    "Secure random number generation is the source of unpredictability for many security controls.",
+    "A simulation, game, sampling routine, or test may need values that are statistically useful or repeatable.",
+    "A password reset system with good email handling still fails if reset tokens are guessable.",
+    "Custom approaches based on time, process identifiers, counters, usernames, predictable seeds, or mixed strings are not reliable security designs.",
+    "The important question is whether the value is unpredictable to someone trying to misuse it.",
+    "A security token needs values that an attacker cannot predict before they are generated and cannot feasibly guess afterward."
+  ]
+};

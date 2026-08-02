@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Context-Aware Output Encoding",
+  "graphicAlt": "The same attack string is shown in an HTML text node, href attribute, script string, and CSS value; only the control matched to each browser parser blocks execution.",
+  "narration": "Context-aware output encoding means handling data according to the browser context where it will be placed. HTML body text, attribute values, URLs, JavaScript strings, JSON responses, and CSS each need appropriate treatment. A safe Python application does not ask whether data has been escaped in a vague general sense. It asks whether the data has been handled correctly for this exact output location.\n\nTemplate autoescaping helps reduce risk in common HTML contexts, especially when developers use standard variable insertion patterns. But autoescaping is not a license to ignore context. Attributes, URLs, script-adjacent data, and client-side use can require additional constraints or different rendering patterns. Developers should avoid raw or unsafe rendering shortcuts unless the content has a reviewed reason and a controlled policy.\n\nInput validation alone does not reliably prevent XSS because validation usually happens before the application knows every future rendering context. A display name may pass a length check and character policy, yet still need encoding when placed into HTML. A search term may be valid input, yet still require safe handling when reflected in a page. Validation is useful, but output safety is decided at the point of rendering.\n\nJSON response safety deserves its own attention. Returning data as JSON does not automatically make every frontend use safe. Browser code may insert values into text nodes, attributes, URLs, templates, or markup-building functions. Backend and frontend teams should agree on data contracts and safe rendering practices so API data remains data throughout the path to the browser.",
+  "narrationPoints": [
+    "Context-aware output encoding means handling data according to the browser context where it will be placed.",
+    "Template autoescaping helps reduce risk in common HTML contexts, especially when developers use standard variable insertion patterns.",
+    "A search term may be valid input, yet still require safe handling when reflected in a page.",
+    "Browser code may insert values into text nodes, attributes, URLs, templates, or markup-building functions.",
+    "HTML body text, attribute values, URLs, JavaScript strings, JSON responses, and CSS each need appropriate treatment.",
+    "A safe Python application does not ask whether data has been escaped in a vague general sense."
+  ]
+};

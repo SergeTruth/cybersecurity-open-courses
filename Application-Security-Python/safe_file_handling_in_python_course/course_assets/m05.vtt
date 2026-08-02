@@ -1,0 +1,76 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.115
+Least privilege for file access means the application process should have
+only the file and directory permissions needed for its intended work.
+
+2
+00:00:08.115 --> 00:00:17.759
+If a Python service only needs to write uploads into one storage area, it
+should not have broad write access to application code, secrets, backups,
+or unrelated tenant data.
+
+3
+00:00:17.759 --> 00:00:23.812
+Permissions become especially important when several services, workers, or
+users share infrastructure.
+
+4
+00:00:23.812 --> 00:00:26.139
+Storage location is a security decision.
+
+5
+00:00:26.139 --> 00:00:38.910
+Private storage, public storage, local filesystem paths, cloud object
+storage at a high level, container volumes, mounted directories, backup
+paths, and temporary work areas all have different exposure and lifecycle
+rules.
+
+6
+00:00:38.910 --> 00:00:42.102
+Publicly reachable paths should not be used as a default.
+
+7
+00:00:42.102 --> 00:00:46.958
+Sensitive files should be stored where access can be authorized, logged,
+and revoked.
+
+8
+00:00:46.958 --> 00:00:52.146
+Uploads should be separated from application code and from secrets or
+configuration files.
+
+9
+00:00:52.146 --> 00:00:57.600
+Tenant or user data should be separated logically, and sometimes
+physically, depending on risk.
+
+10
+00:00:57.600 --> 00:01:02.788
+A mistake in one part of the system should not automatically expose every
+other user's files.
+
+11
+00:01:02.788 --> 00:01:09.639
+Storage design should reduce blast radius if a file is mishandled, a
+worker is compromised, or a permissions rule is wrong.
+
+12
+00:01:09.639 --> 00:01:13.297
+Backups and replicas need the same attention as primary storage.
+
+13
+00:01:13.297 --> 00:01:19.882
+A file removed from the application may still exist in backups, object
+versions, logs, exports, or derived previews.
+
+14
+00:01:19.882 --> 00:01:25.003
+Secrets files and configuration files should have stricter access than
+ordinary content.
+
+15
+00:01:25.003 --> 00:01:32.120
+Strong storage design gives teams a clear answer to who can read, write,
+list, delete, restore, and audit each category of file.

@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.940
+Logs and observability tools are essential for troubleshooting, security
+review, incident response, and reliability.
+
+2
+00:00:06.940 --> 00:00:11.454
+They are also common places where sensitive information quietly
+accumulates.
+
+3
+00:00:11.454 --> 00:00:23.851
+An exception handler that avoids leaking detail to a browser may still
+write secrets, tokens, session identifiers, reset links, private keys,
+connection strings, or unnecessary personal data into centralized logs.
+
+4
+00:00:23.851 --> 00:00:30.723
+Once collected, that data may be searchable, replicated, retained, and
+visible to more people than the original system.
+
+5
+00:00:30.723 --> 00:00:34.698
+Structured logging can help when teams choose fields intentionally.
+
+6
+00:00:34.698 --> 00:00:45.074
+Safe fields may include timestamp, service name, environment, request ID,
+user or tenant reference at an appropriate level, error category,
+exception type, and sanitized context.
+
+7
+00:00:45.074 --> 00:00:55.113
+Unsafe fields include raw request bodies, full headers, authorization
+values, cookies, passwords, private keys, full database URLs, and verbose
+downstream error payloads.
+
+8
+00:00:55.113 --> 00:01:00.435
+The key is to log facts that support investigation without copying
+sensitive data by default.
+
+9
+00:01:00.435 --> 00:01:04.073
+Redaction and masking should be designed as reusable controls.
+
+10
+00:01:04.073 --> 00:01:11.956
+A redaction filter can remove or transform sensitive values before they
+reach logs, traces, alerts, crash reports, or ticketing systems.
+
+11
+00:01:11.956 --> 00:01:16.066
+But redaction is not a reason to log everything and hope filters catch it.
+
+12
+00:01:16.066 --> 00:01:24.690
+Teams should minimize what is logged, apply allowlists for safe fields
+when possible, and test the failure paths that historically produce messy
+data.
+
+13
+00:01:24.690 --> 00:01:27.520
+Centralized logging adds its own trust boundary.
+
+14
+00:01:27.520 --> 00:01:33.112
+Retention, access control, export behavior, search permissions, and
+incident handling matter.
+
+15
+00:01:33.112 --> 00:01:39.243
+A log platform can become a valuable evidence source or a second leak
+depending on configuration and habits.
+
+16
+00:01:39.243 --> 00:01:50.360
+Good exception logging should preserve diagnostic value internally while
+reducing the chance that operational data becomes a long-lived collection
+of secrets and sensitive user information.

@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.076
+File contents are untrusted input.
+
+2
+00:00:02.076 --> 00:00:10.380
+JSON, CSV, XML, YAML, images, PDFs, office documents, and custom formats
+each require parsers with different assumptions and failure modes.
+
+3
+00:00:10.380 --> 00:00:16.192
+A file may be malformed, oversized, misleading, or crafted in ways that
+stress a parser or workflow.
+
+4
+00:00:16.192 --> 00:00:25.534
+Safe design chooses parsers deliberately, limits resources, validates
+expected structure, and handles parse failures without exposing sensitive
+details.
+
+5
+00:00:25.534 --> 00:00:27.956
+Deserialization deserves special care.
+
+6
+00:00:27.956 --> 00:00:38.197
+Python's pickle format is powerful but should not be used with untrusted
+data because loading data can influence object creation and dangerous
+behavior depending on context.
+
+7
+00:00:38.197 --> 00:00:47.400
+YAML and XML parser safety concepts also matter because parser defaults
+and features can create risk if they process untrusted content without
+constraints.
+
+8
+00:00:47.400 --> 00:00:54.735
+The safest parser is the one appropriate for the data, configured for the
+trust boundary, and reviewed for expected behavior.
+
+9
+00:00:54.735 --> 00:01:07.744
+Archive extraction should be reviewed carefully because archives can
+contain many files, nested paths, unexpected names, large content,
+duplicate entries, metadata, and compression behavior that affects
+extraction.
+
+10
+00:01:07.744 --> 00:01:16.601
+The application should decide which members are allowed, where extraction
+may occur, how much data may be expanded, and what happens to rejected
+files.
+
+11
+00:01:16.601 --> 00:01:21.306
+Extraction is not just reading one file; it is creating many filesystem
+effects.
+
+12
+00:01:21.306 --> 00:01:24.143
+Metadata can carry security and privacy impact.
+
+13
+00:01:24.143 --> 00:01:28.780
+Image metadata and EXIF concepts may reveal device, time, or location
+details.
+
+14
+00:01:28.780 --> 00:01:33.347
+Document metadata may expose authors, comments, paths, or revision
+history.
+
+15
+00:01:33.347 --> 00:01:39.436
+Decompression and resource exhaustion concepts matter when small inputs
+expand into large workloads.
+
+16
+00:01:39.436 --> 00:01:46.840
+Parsing should be isolated, limited, validated, logged appropriately, and
+tied to the specific business purpose of the file.

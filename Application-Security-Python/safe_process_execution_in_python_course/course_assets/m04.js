@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Input Validation and Allowlisted Operations",
+  "graphicAlt": "Sequence diagram for Input Validation and Allowlisted Operations, showing validated operation, fixed executable, argument vector, minimal environment, bounded child process, and captured result; labeled arrows identify process launch and termination controls and the point where unsafe input or behavior is rejected.",
+  "narration": "Input validation for process execution should support a specific approved operation. It should check type, format, length, range, allowed values, and business intent. A value that is valid as a display label may not be valid as a file identifier. A value that is valid for one processing mode may be unsafe in another. Validation should be close enough to the operation that reviewers can see why a value is acceptable.\n\nAllowlists are stronger than attempts to detect every unsafe input. The application can define approved commands, approved subcommands or modes, approved file types, approved directories, approved identifiers, and approved option combinations. User choices can then be mapped to those internal values. This design reduces the chance that a user-supplied flag, executable name, target path, or option changes the meaning of the operation.\n\nConfiguration-driven allowlists can help teams manage legitimate variation, but the configuration itself must be trusted and reviewed. If an administrator can add a new operation, the approval process should consider the executable, arguments, permissions, input files, output files, environment, logging, and rollback behavior. An allowlist is not just a list of strings. It is a policy describing which operations the application is prepared to run safely.\n\nValidation does not replace safe process APIs or least privilege. A validated argument can still be dangerous if it is placed into shell syntax, run as an overpowered account, used as an unconstrained path, or logged with secrets. Think of validation as one layer in a larger design. It narrows what the application accepts, while safe APIs, storage controls, authorization, environment minimization, and privilege boundaries limit what can happen even when something goes wrong.",
+  "narrationPoints": [
+    "Input validation for process execution should support a specific approved operation.",
+    "A value that is valid for one processing mode may be unsafe in another.",
+    "Allowlists are stronger than attempts to detect every unsafe input.",
+    "User choices can then be mapped to those internal values.",
+    "An allowlist is not just a list of strings.",
+    "Think of validation as one layer in a larger design."
+  ]
+};

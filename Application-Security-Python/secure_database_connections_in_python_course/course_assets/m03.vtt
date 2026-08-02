@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.954
+Connection strings and DSNs describe how a Python application should reach
+a database.
+
+2
+00:00:04.954 --> 00:00:16.001
+They may include hostnames, ports, database names, usernames, passwords,
+tokens, certificate paths, private key references, driver options, timeout
+values, pool settings, and TLS behavior.
+
+3
+00:00:16.001 --> 00:00:24.168
+Even when a connection string does not contain the password directly, it
+may reveal internal endpoints or reference access-enabling material.
+
+4
+00:00:24.168 --> 00:00:28.855
+Treat connection configuration as sensitive unless there is a clear reason
+not to.
+
+5
+00:00:28.855 --> 00:00:32.872
+Hardcoded credentials are a durable source of risk because code moves.
+
+6
+00:00:32.872 --> 00:00:41.240
+It moves through repositories, forks, package artifacts, container images,
+logs, code review tools, backups, laptops, CI systems, and examples.
+
+7
+00:00:41.240 --> 00:00:46.663
+Once a database password or private key is committed, removal from the
+latest file is not enough.
+
+8
+00:00:46.663 --> 00:00:51.082
+Teams may need revocation, rotation, artifact cleanup, and incident
+review.
+
+9
+00:00:51.082 --> 00:00:59.919
+The better pattern is to centralize secret access so application code
+reads configuration from controlled sources without embedding long-lived
+secrets.
+
+10
+00:00:59.919 --> 00:01:04.405
+Environment variables are common and can be reasonable, but they are not
+magic.
+
+11
+00:01:04.405 --> 00:01:15.518
+They may appear in process listings, crash reports, debug pages, shell
+history, deployment metadata, CI logs, notebooks, or container inspection
+output depending on the platform and practices.
+
+12
+00:01:15.518 --> 00:01:29.042
+Managed secret stores can improve access control, rotation workflows,
+auditing, and separation between configuration and code, but they still
+require good permissions, safe retrieval, caching discipline, and clear
+failure behavior.
+
+13
+00:01:29.042 --> 00:01:36.339
+Secure secret handling should be boring in the best way: centralized,
+reviewable, easy to rotate, and hard to accidentally leak.
+
+14
+00:01:36.339 --> 00:01:40.958
+Applications should fail closed when required secrets are missing or
+malformed.
+
+15
+00:01:40.958 --> 00:01:47.319
+Logs and exceptions should never print passwords, tokens, private keys, or
+full sensitive connection strings.
+
+16
+00:01:47.319 --> 00:01:57.160
+Development credentials should be clearly separated from production, and
+test fixtures should avoid teaching developers that fake-looking secrets
+belong in source code.

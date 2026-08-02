@@ -1,0 +1,74 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.914
+Object serialization tries to preserve application objects rather than
+just data values.
+
+2
+00:00:04.914 --> 00:00:13.084
+In Python, pickle and similar object reconstruction mechanisms are
+powerful because they can represent Python-specific objects and
+relationships.
+
+3
+00:00:13.084 --> 00:00:16.275
+That power is exactly why they require careful boundaries.
+
+4
+00:00:16.275 --> 00:00:20.615
+Untrusted serialized objects should not be loaded as if they were ordinary
+data.
+
+5
+00:00:20.615 --> 00:00:22.913
+The risk is not limited to one library name.
+
+6
+00:00:22.913 --> 00:00:30.700
+The broad concern is class loading, object construction, hidden side
+effects, and application behavior that happens during deserialization.
+
+7
+00:00:30.700 --> 00:00:39.061
+If input can influence what object is constructed or how reconstruction
+occurs, the application may be giving external data more authority than
+intended.
+
+8
+00:00:39.061 --> 00:00:43.337
+Defensive design avoids automatic object reconstruction for untrusted
+data.
+
+9
+00:00:43.337 --> 00:00:48.762
+Trusted internal data is different from external data, but the trust
+decision should be documented.
+
+10
+00:00:48.762 --> 00:00:57.953
+A cache entry written and read by the same service in a controlled
+environment has a different risk profile than a file uploaded by a user or
+a message accepted from a partner.
+
+11
+00:00:57.953 --> 00:01:05.994
+Even internal object serialization should consider versioning, freshness,
+data sensitivity, and what happens if storage is modified or replayed.
+
+12
+00:01:05.994 --> 00:01:10.973
+Signed data or integrity-protected data does not automatically make object
+behavior safe.
+
+13
+00:01:10.973 --> 00:01:24.440
+It may show that the data came from an expected source or was not changed,
+but the content can still be stale, malformed for the current version,
+excessive, unauthorized for this operation, or unsafe to load through an
+object reconstruction mechanism.
+
+14
+00:01:24.440 --> 00:01:30.120
+Object deserialization should be minimized, isolated, explicitly
+justified, and carefully reviewed.

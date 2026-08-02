@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.953
+A signature is over bytes, so the first design question is exactly what
+data is being signed.
+
+2
+00:00:04.953 --> 00:00:13.057
+Human-readable content, JSON-like structures, files, request bodies,
+headers, timestamps, and metadata can all be represented in multiple ways.
+
+3
+00:00:13.057 --> 00:00:18.267
+If the signer and verifier do not agree on the exact byte representation,
+verification may fail.
+
+4
+00:00:18.267 --> 00:00:22.576
+Worse, the application may verify one representation while acting on
+another.
+
+5
+00:00:22.576 --> 00:00:28.301
+Canonicalization is the process of making data representation consistent
+before signing or verifying.
+
+6
+00:00:28.301 --> 00:00:36.276
+It can involve field ordering, whitespace, character encoding,
+normalization, timestamp format, metadata selection, and message
+boundaries.
+
+7
+00:00:36.276 --> 00:00:42.965
+Structured data is especially tricky because two documents may appear
+equivalent to a person but produce different bytes.
+
+8
+00:00:42.965 --> 00:00:47.275
+The signing workflow should remove ambiguity before the signature is
+created.
+
+9
+00:00:47.275 --> 00:00:48.819
+Message boundaries matter.
+
+10
+00:00:48.819 --> 00:00:56.730
+A system should know whether it signs only the body, selected headers, a
+timestamp, a request path, a method, a file digest, or a complete
+envelope.
+
+11
+00:00:56.730 --> 00:01:00.589
+Detached signatures keep the signature separate from the signed data.
+
+12
+00:01:00.589 --> 00:01:04.641
+Attached signature concepts bundle signature material with the content.
+
+13
+00:01:04.641 --> 00:01:11.266
+Both can be valid patterns, but the application must understand what is
+protected and what remains outside the signature.
+
+14
+00:01:11.266 --> 00:01:14.675
+Signing the wrong representation can create trust confusion.
+
+15
+00:01:14.675 --> 00:01:19.435
+If a webhook signs only part of a request, unsigned fields may still
+influence behavior.
+
+16
+00:01:19.435 --> 00:01:26.188
+If a token signs claims but the application trusts external parameters
+too, the signature may not protect the full decision.
+
+17
+00:01:26.188 --> 00:01:35.000
+A good signing workflow documents the protected data, the unprotected
+context, and the business checks that happen after cryptographic
+verification succeeds.

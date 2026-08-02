@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Autoescaping and Context-Aware Output",
+  "graphicAlt": "Jinja autoescaping transforms attacker-shaped text inside an HTML node, while a separate URL validator guards an href attribute and tojson handles a script data value.",
+  "narration": "Autoescaping is a framework feature that helps encode template variables so they are less likely to be interpreted as markup in common output contexts. It is a strong default, especially for ordinary HTML body text. But secure output handling is context-aware. HTML body text, HTML attributes, URLs, JavaScript strings, JSON, and CSS each have different browser parsing rules and may require different constraints or rendering patterns.\n\nEscaping and sanitization are related but different. Escaping encodes data for a particular output context so the browser treats it as data rather than markup or behavior. Sanitization applies a content policy, often to rich content, by preserving allowed formatting while removing or neutralizing unsafe parts. Input validation is also different: it limits what the application accepts, but it does not automatically make every future rendering context safe.\n\nDisabling or bypassing escaping should require explicit review. Marking content as safe, using raw filters, returning prebuilt markup from helpers, or building template fragments dynamically can all change the security meaning of a template. Sometimes an application truly needs trusted markup, but that should come from a reviewed source with a clear policy. Convenience is not a good reason to weaken a rendering boundary.\n\nThe practical rule is to handle output at the point of rendering. Ask what context the value enters, whether the value is trusted for that context, whether framework autoescaping still applies, whether a vetted sanitizer is needed, and whether the response exposes more data than necessary. This discipline keeps secure rendering durable even as templates, APIs, and frontend behavior evolve.",
+  "narrationPoints": [
+    "Autoescaping is a framework feature that helps encode template variables so they are less likely to be interpreted as markup in common output contexts.",
+    "Sanitization applies a content policy, often to rich content, by preserving allowed formatting while removing or neutralizing unsafe parts.",
+    "Sometimes an application truly needs trusted markup, but that should come from a reviewed source with a clear policy.",
+    "The practical rule is to handle output at the point of rendering.",
+    "Escaping encodes data for a particular output context so the browser treats it as data rather than markup or behavior.",
+    "Convenience is not a good reason to weaken a rendering boundary."
+  ]
+};

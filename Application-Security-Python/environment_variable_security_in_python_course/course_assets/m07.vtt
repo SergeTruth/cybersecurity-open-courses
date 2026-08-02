@@ -1,0 +1,76 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.480
+When Python launches a child process, relevant environment values may be
+inherited unless the application controls them explicitly.
+
+2
+00:00:07.480 --> 00:00:13.780
+This matters for subprocess usage, worker processes, build helpers, data
+tools, and administrative utilities.
+
+3
+00:00:13.780 --> 00:00:25.591
+A child process may not need the parent application database password,
+token, signing key, proxy setting, or service configuration, yet it may
+receive those values by default if the environment is copied broadly.
+
+4
+00:00:25.591 --> 00:00:30.906
+Some environment variables influence runtime behavior rather than simply
+providing secrets.
+
+5
+00:00:30.906 --> 00:00:33.793
+PATH-like variables can affect executable lookup.
+
+6
+00:00:33.793 --> 00:00:37.665
+Python path and runtime settings can influence imports and behavior.
+
+7
+00:00:37.665 --> 00:00:41.536
+Proxy and network-related values can change outbound connectivity.
+
+8
+00:00:41.536 --> 00:00:45.079
+Locale and encoding settings can influence parsing and output.
+
+9
+00:00:45.079 --> 00:00:53.347
+These values may be legitimate, but they should be understood because they
+can change what code runs, where traffic goes, and how data is
+interpreted.
+
+10
+00:00:53.347 --> 00:00:58.925
+Constructing an explicit environment for subprocesses is often safer than
+inheriting everything.
+
+11
+00:00:58.925 --> 00:01:06.143
+The application can pass only the variables needed for the approved task
+and omit unrelated secrets or behavior-changing values.
+
+12
+00:01:06.143 --> 00:01:16.117
+If a child process needs a secret, the design should consider whether
+there is a narrower channel, shorter-lived credential, or service-specific
+identity that reduces exposure.
+
+13
+00:01:16.117 --> 00:01:27.600
+Avoid placing secrets in command arguments when possible because arguments
+may appear in process listings, diagnostics, job metadata, logs, crash
+output, or monitoring systems depending on the platform.
+
+14
+00:01:27.600 --> 00:01:33.308
+Environment variables can have similar exposure paths, so they should not
+be treated casually either.
+
+15
+00:01:33.308 --> 00:01:40.920
+The practical standard is least data, least privilege, least inheritance,
+and clear review of what the child process actually receives.

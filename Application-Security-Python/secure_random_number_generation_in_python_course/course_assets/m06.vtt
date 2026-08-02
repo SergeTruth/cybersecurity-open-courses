@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.017
+Random value length should be selected intentionally.
+
+2
+00:00:03.017 --> 00:00:11.170
+Longer values can increase guessing resistance and reduce collision risk,
+but they may affect storage, URLs, human handling, and support workflows.
+
+3
+00:00:11.170 --> 00:00:20.478
+Shorter values may be easier for users to type, but they usually need
+additional controls such as expiration, throttling, attempt limits,
+monitoring, and narrow purpose.
+
+4
+00:00:20.478 --> 00:00:24.908
+Copying an example length without understanding the use case is a common
+mistake.
+
+5
+00:00:24.908 --> 00:00:27.732
+Encoding changes how random bytes are represented.
+
+6
+00:00:27.732 --> 00:00:33.574
+Hex, base64-style encodings, URL-safe encodings, and human-friendly
+character sets all have tradeoffs.
+
+7
+00:00:33.574 --> 00:00:35.115
+Some encodings are compact.
+
+8
+00:00:35.115 --> 00:00:36.976
+Some are easier to paste into URLs.
+
+9
+00:00:36.976 --> 00:00:38.838
+Some avoid ambiguous characters.
+
+10
+00:00:38.838 --> 00:00:41.470
+Encoding is not the source of security by itself.
+
+11
+00:00:41.470 --> 00:00:48.146
+The underlying unpredictability and the number of possible values matter
+more than whether the output looks complicated.
+
+12
+00:00:48.146 --> 00:00:55.336
+Modulo bias at a high level occurs when a method maps random values into a
+range in a way that makes some outputs more likely than others.
+
+13
+00:00:55.336 --> 00:01:02.911
+This can happen when developers take a random number and reduce it with a
+simple remainder operation without considering the distribution.
+
+14
+00:01:02.911 --> 00:01:11.064
+The safer approach is to use library functions designed to choose
+uniformly from a range or character set, especially for security-sensitive
+values.
+
+15
+00:01:11.064 --> 00:01:20.501
+Predictable prefixes, truncation mistakes, and fixed patterns can reduce
+effective strength or leak information about purpose, environment, tenant,
+or generation time.
+
+16
+00:01:20.501 --> 00:01:25.251
+Prefixes may be useful for operations, but they should not be counted as
+secret entropy.
+
+17
+00:01:25.251 --> 00:01:30.836
+If a token includes a readable label, the random part still needs enough
+unpredictability for the risk.
+
+18
+00:01:30.836 --> 00:01:37.320
+Design the format deliberately, then test lifecycle behavior rather than
+trying to test randomness quality directly.

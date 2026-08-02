@@ -1,0 +1,95 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.104
+Local development and production have different needs.
+
+2
+00:00:03.104 --> 00:00:06.726
+Tests often use deterministic data so failures can be reproduced.
+
+3
+00:00:06.726 --> 00:00:13.775
+Production secrets, tokens, session identifiers, and keys must not depend
+on deterministic test seeds or copied sample values.
+
+4
+00:00:13.775 --> 00:00:16.814
+A test helper that sets a seed is useful in the test suite.
+
+5
+00:00:16.814 --> 00:00:21.147
+The same pattern used in production token generation is a serious design
+error.
+
+6
+00:00:21.147 --> 00:00:28.390
+Containers, virtual machines, serverless functions, and short-lived
+processes at a high level introduce operational questions.
+
+7
+00:00:28.390 --> 00:00:30.977
+How does the process obtain system randomness?
+
+8
+00:00:30.977 --> 00:00:32.594
+What happens during startup?
+
+9
+00:00:32.594 --> 00:00:35.763
+Are images cloned with generated secrets already inside?
+
+10
+00:00:35.763 --> 00:00:40.548
+Are deployment scripts creating keys once per environment or once per
+container image?
+
+11
+00:00:40.548 --> 00:00:43.717
+Does concurrency create duplicate generation concerns?
+
+12
+00:00:43.717 --> 00:00:47.468
+These are design and deployment questions, not just code questions.
+
+13
+00:00:47.468 --> 00:00:52.189
+Load-balanced applications must generate values safely across multiple
+instances.
+
+14
+00:00:52.189 --> 00:00:57.362
+Two servers should not accidentally share a deterministic seed that causes
+duplicate tokens.
+
+15
+00:00:57.362 --> 00:01:03.506
+Environment separation should prevent development, staging, and production
+from sharing generated secrets.
+
+16
+00:01:03.506 --> 00:01:09.908
+Secret generation during deployment should have ownership, auditability,
+storage, rotation, and rollback plans.
+
+17
+00:01:09.908 --> 00:01:14.629
+A generated value becomes an operational asset as soon as another system
+depends on it.
+
+18
+00:01:14.629 --> 00:01:19.415
+Operational ownership matters because generated secrets and tokens have
+lifecycles.
+
+19
+00:01:19.415 --> 00:01:27.434
+Someone should know how values are created, where they are stored, how
+long they live, how they are revoked, and how they are rotated after
+exposure.
+
+20
+00:01:27.434 --> 00:01:38.040
+Secure randomness is not only an implementation detail; it is connected to
+configuration, deployment, incident response, and the reliability of
+authentication and cryptographic workflows.

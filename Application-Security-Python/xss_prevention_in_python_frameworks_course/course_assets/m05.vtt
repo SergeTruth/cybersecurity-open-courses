@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.489
+User-generated content includes comments, profiles, descriptions, support
+tickets, forum posts, markdown, rich text, uploaded files, and CMS-style
+fields.
+
+2
+00:00:09.489 --> 00:00:11.913
+Some of this content should be plain text.
+
+3
+00:00:11.913 --> 00:00:16.485
+Some applications need limited formatting, links, lists, or embedded
+media.
+
+4
+00:00:16.485 --> 00:00:25.628
+The first security decision is the content policy: what formatting is
+actually allowed, who can create it, who can view it, and which contexts
+will render it.
+
+5
+00:00:25.628 --> 00:00:32.554
+Sanitization at a high level means preserving useful allowed content while
+removing or neutralizing unsafe content.
+
+6
+00:00:32.554 --> 00:00:37.957
+It should rely on vetted libraries and clear policies rather than ad hoc
+string replacement.
+
+7
+00:00:37.957 --> 00:00:45.853
+Browser parsing is complex, and simple replacements tend to miss contexts,
+encodings, malformed input, or future rendering changes.
+
+8
+00:00:45.853 --> 00:00:53.611
+A durable approach defines allowed elements, allowed attributes, URL
+rules, and output handling rules in one maintainable policy.
+
+9
+00:00:53.611 --> 00:00:57.628
+Storing raw versus sanitized content is an architectural decision.
+
+10
+00:00:57.628 --> 00:01:06.148
+Storing raw content can allow reprocessing if the policy changes, but it
+requires strict controls around where raw content is viewed or exported.
+
+11
+00:01:06.148 --> 00:01:12.866
+Storing sanitized content can simplify rendering, but policy changes may
+require re-sanitization or migration.
+
+12
+00:01:12.866 --> 00:01:16.191
+Some applications store both with careful access rules.
+
+13
+00:01:16.191 --> 00:01:21.247
+The important point is to make the choice deliberately and document the
+consequences.
+
+14
+00:01:21.247 --> 00:01:27.412
+Rich content should be reviewed whenever policy, libraries, templates, or
+frontend rendering changes.
+
+15
+00:01:27.412 --> 00:01:32.122
+A sanitized field may be safe for one page and unsafe if reused in another
+context.
+
+16
+00:01:32.122 --> 00:01:38.009
+Markdown conversion, preview features, imports, and admin editing can all
+create alternate paths.
+
+17
+00:01:38.009 --> 00:01:44.520
+The safest teams treat rich content as a long-lived trust boundary, not as
+a one-time cleanup step at input time.

@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.292
+Webhook tests should cover more than a valid happy path.
+
+2
+00:00:03.292 --> 00:00:24.094
+Useful tests include accepted valid signatures, rejected invalid
+signatures, missing signature headers, stale timestamps, duplicate event
+identifiers, unsupported event types, malformed payloads, oversized
+payloads, wrong content types, tenant-boundary failures, authorization
+failures, retry scenarios, and idempotent reprocessing.
+
+3
+00:00:24.094 --> 00:00:30.327
+These tests give teams confidence that the handler fails safely when
+integration assumptions are wrong.
+
+4
+00:00:30.327 --> 00:00:34.740
+Logging should support operations without exposing sensitive material.
+
+5
+00:00:34.740 --> 00:00:44.965
+Webhook logs may include event names, provider identifiers, local
+correlation identifiers, validation outcome, processing status, latency,
+and safe error categories.
+
+6
+00:00:44.965 --> 00:00:56.802
+They should avoid shared secrets, tokens, signatures, full sensitive
+payloads, unnecessary personal data, raw authorization headers, and
+anything that would make replay or impersonation easier.
+
+7
+00:00:56.802 --> 00:01:01.915
+Redaction should be part of the logging design, not an afterthought after
+an incident.
+
+8
+00:01:01.915 --> 00:01:05.487
+Monitoring should make abnormal webhook behavior visible.
+
+9
+00:01:05.487 --> 00:01:19.565
+Track failed validations, unknown event types, invalid signatures, stale
+events, duplicate rates, processing delays, queue depth, retry storms,
+downstream failures, unusually high event volume, and sudden drops in
+expected events.
+
+10
+00:01:19.565 --> 00:01:28.320
+Good monitoring helps distinguish provider outages, integration bugs,
+credential problems, malicious traffic, and local processing failures.
+
+11
+00:01:28.320 --> 00:01:33.923
+Without telemetry, webhook systems can silently lose events or repeat
+actions for a long time.
+
+12
+00:01:33.923 --> 00:01:40.787
+Incident response should include exposed secrets, unsafe processing, data
+leakage, and incorrect state changes.
+
+13
+00:01:40.787 --> 00:01:53.044
+Teams need a plan to rotate or revoke signing secrets, coordinate with
+providers, pause or throttle processing, replay or reconcile events
+safely, review logs, assess data impact, and add regression tests.
+
+14
+00:01:53.044 --> 00:01:57.246
+After an incident, the durable improvement is not only a fixed handler.
+
+15
+00:01:57.246 --> 00:02:04.040
+It is clearer ownership, better validation, safer logging, stronger
+monitoring, and documented recovery steps.

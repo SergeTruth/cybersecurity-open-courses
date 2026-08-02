@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.287
+Temporary file workflows cross trust boundaries just like permanent
+storage.
+
+2
+00:00:04.287 --> 00:00:07.422
+Trusted application code may create a staging directory.
+
+3
+00:00:07.422 --> 00:00:13.693
+User input may influence file names, upload metadata, archive entries,
+report parameters, or processing options.
+
+4
+00:00:13.693 --> 00:00:16.700
+A background job may read a file created by a web request.
+
+5
+00:00:16.700 --> 00:00:20.219
+A subprocess may consume an input file and produce an output file.
+
+6
+00:00:20.219 --> 00:00:27.322
+Each transition matters because the application is moving data between
+subjects, processes, directories, and lifecycle states.
+
+7
+00:00:27.322 --> 00:00:32.760
+A useful risk model asks who can create, read, modify, delete, or
+influence each temporary artifact.
+
+8
+00:00:32.760 --> 00:00:35.384
+On a developer machine, the answer may be simple.
+
+9
+00:00:35.384 --> 00:00:41.718
+On a shared host, container node, CI runner, job queue, or multi-tenant
+platform, the answer can be more complicated.
+
+10
+00:00:41.718 --> 00:00:51.828
+Operating system permissions, runtime identity, mounted volumes, container
+boundaries, serverless temporary storage, and cleanup behavior all affect
+who can interact with the file.
+
+11
+00:00:51.828 --> 00:00:56.499
+Temporary workflows should preserve the same trust boundaries as permanent
+storage.
+
+12
+00:00:56.499 --> 00:01:04.049
+If a user is not authorized to read a document after it is stored
+permanently, they should not be able to read it while it is staged
+temporarily.
+
+13
+00:01:04.049 --> 00:01:06.417
+If one tenant cannot access another tenant?
+
+14
+00:01:06.417 --> 00:01:12.495
+s report in the final system, the temporary processing area should not mix
+those reports under weak assumptions.
+
+15
+00:01:12.495 --> 00:01:18.062
+Temporary storage should not become a bypass around application
+authorization or tenant separation.
+
+16
+00:01:18.062 --> 00:01:21.709
+Risk modeling also clarifies where validation and logging belong.
+
+17
+00:01:21.709 --> 00:01:29.003
+Uploaded content, generated reports, archive entries, and subprocess
+output should be treated according to source and sensitivity.
+
+18
+00:01:29.003 --> 00:01:34.570
+Logs should identify useful operational events without copying private
+contents or sensitive paths.
+
+19
+00:01:34.570 --> 00:01:43.400
+The goal is to make the temporary workflow visible enough to operate while
+keeping the files themselves constrained to the principals and processes
+that need them.

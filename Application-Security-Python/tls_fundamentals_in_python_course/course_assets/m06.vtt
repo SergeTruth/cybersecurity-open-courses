@@ -1,0 +1,92 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.095
+Many Python web applications run behind application servers, reverse
+proxies, load balancers, or managed platforms that handle TLS termination.
+
+2
+00:00:08.095 --> 00:00:13.859
+TLS termination is the point where protected traffic is decrypted and
+handed to another layer or service.
+
+3
+00:00:13.859 --> 00:00:18.522
+Some architectures terminate at the edge and use a separate trusted path
+internally.
+
+4
+00:00:18.522 --> 00:00:20.724
+Others re-encrypt traffic to backends.
+
+5
+00:00:20.724 --> 00:00:24.286
+Teams should know which model they use and who owns each boundary.
+
+6
+00:00:24.286 --> 00:00:26.877
+TLS deployment affects application behavior.
+
+7
+00:00:26.877 --> 00:00:32.446
+Secure cookies should align with HTTPS behavior so session data is not
+exposed over weaker transport.
+
+8
+00:00:32.446 --> 00:00:37.627
+HSTS concepts can help browsers prefer secure connections for a site when
+deployed correctly.
+
+9
+00:00:37.627 --> 00:00:45.399
+Trusted proxy headers should be handled carefully because the Python
+application may rely on forwarded scheme, host, or client information.
+
+10
+00:00:45.399 --> 00:00:50.515
+The application should not trust spoofable headers unless the proxy
+boundary is controlled.
+
+11
+00:00:50.515 --> 00:00:54.919
+Development certificates and production certificates should not be
+confused.
+
+12
+00:00:54.919 --> 00:00:58.481
+Local development may use test certificates or local endpoints.
+
+13
+00:00:58.481 --> 00:01:05.281
+Production certificates require ownership, renewal, deployment
+coordination, private key protection, and monitoring.
+
+14
+00:01:05.281 --> 00:01:12.664
+Admin panels and internal services deserve particular attention because
+teams sometimes assume limited network exposure is enough.
+
+15
+00:01:12.664 --> 00:01:19.723
+Sensitive server endpoints should still have clear transport,
+authentication, authorization, and monitoring expectations.
+
+16
+00:01:19.723 --> 00:01:27.948
+Terminating TLS does not remove the need for authentication,
+authorization, secure session management, safe input handling, or response
+security.
+
+17
+00:01:27.948 --> 00:01:31.640
+TLS protects the communication path to a point in the architecture.
+
+18
+00:01:31.640 --> 00:01:35.461
+Application policy decides who can do what after the request arrives.
+
+19
+00:01:35.461 --> 00:01:46.600
+Server-side TLS configuration should have clear ownership between
+application, infrastructure, and operations teams so renewal, incidents,
+and configuration changes do not fall through the cracks.

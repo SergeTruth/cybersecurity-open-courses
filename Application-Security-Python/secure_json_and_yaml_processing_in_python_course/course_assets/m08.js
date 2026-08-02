@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Output, Logging, Storage, and Review",
+  "graphicAlt": "Validated public fields flow to JSON output while credentials and internal state remain behind a privacy boundary; error logs retain only parser, source, and finite rejection category.",
+  "narration": "Secure processing continues after input is accepted. When Python serializes JSON or YAML for responses, files, logs, queues, or downstream services, the application should consider what data is being exposed and who can read it. Parsed structures may contain secrets, tokens, credentials, personal data, regulated data, internal identifiers, or configuration details that should not be echoed broadly.\n\nSafe error messages and logging require balance. Logs should support troubleshooting, investigation, and audit, but they should avoid unnecessary sensitive content. User-facing errors should help correct input without exposing internals. Audit events are useful for configuration changes, validation failures, administrative imports, schema migrations, and unexpected parser errors, especially when those events affect privileged behavior.\n\nTrusted configuration deserves review and integrity thinking. Version control review, change approval, ownership, and integrity checks at a high level help protect configuration files that affect deployment or runtime behavior. If configuration is generated, imported, or synchronized, the process should preserve reviewability. A safe application can explain which configuration source won and why.\n\nTesting and review should cover invalid types, missing fields, extra fields, oversized inputs, nesting limits, unsupported YAML features, unsafe object mapping, sensitive logging, and unauthorized configuration keys. Static analysis and dependency review can help identify risky parser use or outdated libraries. Structured data handling should be observable, testable, and maintainable because it is a recurring security boundary.",
+  "narrationPoints": [
+    "Parsed structures may contain secrets, tokens, credentials, personal data, regulated data, internal identifiers, or configuration details that should not be echoed broadly.",
+    "Logs should support troubleshooting, investigation, and audit, but they should avoid unnecessary sensitive content.",
+    "A safe application can explain which configuration source won and why.",
+    "Structured data handling should be observable, testable, and maintainable because it is a recurring security boundary.",
+    "Static analysis and dependency review can help identify risky parser use or outdated libraries.",
+    "User-facing errors should help correct input without exposing internals."
+  ]
+};

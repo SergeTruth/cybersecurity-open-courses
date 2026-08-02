@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.567
+Structured logging records events as consistent fields rather than only
+free-text sentences.
+
+2
+00:00:05.567 --> 00:00:15.465
+A useful event may include an event name, timestamp, severity, component,
+environment, request ID, correlation ID, outcome, reason code, and safe
+contextual metadata.
+
+3
+00:00:15.465 --> 00:00:27.425
+In Python, the exact logging library or observability platform may change,
+but the design principle remains stable: predictable fields make logs
+easier to search, alert on, review, protect, and automate.
+
+4
+00:00:27.425 --> 00:00:32.236
+Event names should describe what happened at a level that supports
+investigation.
+
+5
+00:00:32.236 --> 00:00:45.295
+For example, an authentication failure, permission denial, export started,
+export completed, admin setting changed, background job failed, dependency
+timeout, or rate limit triggered event each tells a different story.
+
+6
+00:00:45.295 --> 00:00:49.351
+A generic message such as something went wrong provides little value.
+
+7
+00:00:49.351 --> 00:00:54.781
+A structured event can preserve meaning without copying sensitive payloads
+into the record.
+
+8
+00:00:54.781 --> 00:00:57.186
+Identifiers should be chosen carefully.
+
+9
+00:00:57.186 --> 00:01:06.053
+Request IDs and correlation IDs help connect logs across services and
+user-facing errors without exposing internal stack traces or sensitive
+details.
+
+10
+00:01:06.053 --> 00:01:14.095
+User, account, or tenant identifiers may be appropriate in some logs, but
+teams should choose forms that respect privacy and access needs.
+
+11
+00:01:14.095 --> 00:01:18.356
+Sometimes an internal stable identifier is better than an email address.
+
+12
+00:01:18.356 --> 00:01:24.748
+Sometimes even a tenant identifier should be limited to audit or security
+logs with stricter access controls.
+
+13
+00:01:24.748 --> 00:01:31.416
+Free text still has a place, especially for human-readable context, but it
+should not be the only source of meaning.
+
+14
+00:01:31.416 --> 00:01:37.052
+Free-text-only logs are harder to parse, harder to redact reliably, and
+easier to misinterpret.
+
+15
+00:01:37.052 --> 00:01:43.238
+Structured event design turns logs into operational records rather than a
+stream of improvised messages.
+
+16
+00:01:43.238 --> 00:01:49.080
+That consistency is what makes monitoring, access control, retention, and
+review more manageable.

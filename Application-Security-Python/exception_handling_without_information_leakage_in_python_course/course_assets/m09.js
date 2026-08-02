@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing request handler, exception mapper, safe response, protected diagnostic log, and correlation identifier; labeled arrows identify public and internal error paths and the point where unsafe input or behavior is rejected.",
+  "narration": "Exception handling without information leakage means separating safe user-facing communication from controlled internal diagnostics. Python applications need to fail in ways that help legitimate users, developers, operators, and security teams without exposing stack traces, secrets, tokens, file paths, connection strings, internal object names, or downstream implementation details to the wrong audience.\n\nStrong designs use intentional error architecture. They define trust boundaries, centralize common handling, use safe response shapes, avoid raw tracebacks in production, control debug behavior, use correlation IDs, protect logs, redact sensitive values, and preserve enough diagnostic context for investigation. They also treat APIs, CLI tools, background workers, notebooks, queues, and third-party integrations as part of the same failure-handling surface.\n\nSafe exception handling supports security and operations at the same time. It does not mean suppressing every error or making failures impossible to debug. It means routing the right level of detail to the right audience, preventing sensitive information from becoming public, preserving security decisions under failure, and making incidents recoverable through useful logs, monitoring, and response procedures.\n\nThe practical takeaway is to review failure paths with the same seriousness as successful paths. Test production-like settings. Look for raw exception output. Verify redaction. Watch for broad exception swallowing. Translate downstream failures safely. Monitor unusual patterns. When leakage occurs, remediate the exposure and improve the pattern. Good exception handling turns failure into controlled information, not accidental disclosure.",
+  "narrationPoints": [
+    "Exception handling without information leakage means separating safe user-facing communication from controlled internal diagnostics.",
+    "The practical takeaway is to review failure paths with the same seriousness as successful paths.",
+    "When leakage occurs, remediate the exposure and improve the pattern.",
+    "Strong designs use intentional error architecture.",
+    "Look for raw exception output.",
+    "Translate downstream failures safely."
+  ]
+};

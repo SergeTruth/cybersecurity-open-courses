@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.119
+Verification checks a signature against expected data and an expected
+public key under an accepted algorithm.
+
+2
+00:00:06.119 --> 00:00:07.877
+The word expected is important.
+
+3
+00:00:07.877 --> 00:00:17.707
+A verifier should know who the signer is supposed to be, where the key
+comes from, which algorithms are allowed, what data representation is
+verified, and what context must be true.
+
+4
+00:00:17.707 --> 00:00:22.263
+Merely finding some public key that validates a signature is not a safe
+trust model.
+
+5
+00:00:22.263 --> 00:00:25.583
+Verification must happen before signed content is trusted.
+
+6
+00:00:25.583 --> 00:00:30.401
+A webhook should not trigger side effects before its signature and context
+are checked.
+
+7
+00:00:30.401 --> 00:00:37.496
+A token should not grant access before signature, issuer, audience,
+expiration, and intended use are validated as appropriate.
+
+8
+00:00:37.496 --> 00:00:45.113
+A signed configuration should not be loaded into privileged behavior until
+the expected signer and content representation are verified.
+
+9
+00:00:45.113 --> 00:00:47.326
+Failure handling should be fail closed.
+
+10
+00:00:47.326 --> 00:00:52.859
+If verification cannot be completed safely, the content should be rejected
+or handled as untrusted.
+
+11
+00:00:52.859 --> 00:01:04.251
+Applications should reject unsigned content when a signature is required,
+reject incorrectly signed content, avoid partial verification mistakes,
+and avoid falling back to a weaker path for convenience.
+
+12
+00:01:04.251 --> 00:01:09.459
+Error messages should be controlled so attackers do not learn sensitive
+key or policy details.
+
+13
+00:01:09.459 --> 00:01:12.323
+Verification success is not the end of the decision.
+
+14
+00:01:12.323 --> 00:01:21.046
+The application still needs input validation, schema checks,
+authorization, freshness checks, replay protections where appropriate, and
+business rules.
+
+15
+00:01:21.046 --> 00:01:28.923
+Logs should record useful verification failures and policy decisions
+without exposing private keys, tokens, or unnecessary signed content.
+
+16
+00:01:28.923 --> 00:01:33.480
+A strong verifier is strict, boring, observable, and hard to bypass
+accidentally.

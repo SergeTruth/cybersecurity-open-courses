@@ -1,0 +1,70 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.502
+Path traversal prevention in Python protects file operations from
+untrusted path influence.
+
+2
+00:00:05.502 --> 00:00:14.649
+The central design principle is simple: users should not directly control
+where the application reads, writes, serves, deletes, extracts, or copies
+files.
+
+3
+00:00:14.649 --> 00:00:25.585
+Python code should treat filenames, path parameters, upload metadata,
+archive entries, database-stored references, and generated file names
+according to their source and trust level.
+
+4
+00:00:25.585 --> 00:00:40.853
+Strong designs use trusted base directories, path-aware APIs,
+canonicalization, base-directory containment checks, opaque identifiers,
+allowlisted storage records, generated storage names, and clear separation
+between display names and storage names.
+
+5
+00:00:40.853 --> 00:00:52.545
+They also enforce authorization before file access, protect tenant
+boundaries, use framework and storage helpers deliberately, and avoid
+leaking internal paths through responses, logs, or errors.
+
+6
+00:00:52.545 --> 00:00:55.984
+File safety depends on environment details as well as code.
+
+7
+00:00:55.984 --> 00:01:07.882
+Operating system behavior, symbolic links, archive formats, temporary
+files, mounted volumes, containers, serverless runtimes, object storage
+keys, proxies, and web servers can all affect outcomes.
+
+8
+00:01:07.882 --> 00:01:13.178
+A design that is safe in one deployment can become fragile if assumptions
+are undocumented.
+
+9
+00:01:13.178 --> 00:01:18.061
+File workflows should be explicit enough to review and test as the
+platform changes.
+
+10
+00:01:18.061 --> 00:01:22.669
+The goal is predictable, authorized, auditable, and constrained file
+access.
+
+11
+00:01:22.669 --> 00:01:30.234
+Good prevention reduces the chance of exposing private files, secrets,
+logs, source code, customer data, or internal artifacts.
+
+12
+00:01:30.234 --> 00:01:33.811
+It also makes incidents easier to investigate and remediate.
+
+13
+00:01:33.811 --> 00:01:41.720
+Treat file access as a security boundary, not a convenience string
+operation, and the application becomes safer and easier to maintain.

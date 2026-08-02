@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Temporary Files and Working Directories",
+  "graphicAlt": "Boundary map for Temporary Files and Working Directories, showing upload stream, quarantine directory, content validator, private storage, authorization gate, and download response; labeled arrows identify file lifecycle and isolation controls and the point where unsafe input or behavior is rejected.",
+  "narration": "Temporary files are often used for uploads, transformations, exports, reports, image processing, archive handling, and background jobs. They may feel less important because they are not intended to last, but temporary files can contain sensitive data, collide with other processes, persist unexpectedly, or be accessed by unintended users. They deserve the same security review as permanent files.\n\nSafe temporary file creation concepts include using APIs that avoid predictable names, setting appropriate permissions, choosing the right directory, and ensuring cleanup happens deliberately. Shared temporary directories require extra care because other users or processes may operate in the same space. Predictable names and loose permissions can create confusion, collisions, or unintended access.\n\nConcurrent workers and background jobs make lifecycle management more important. A worker may create temporary files while processing several requests in parallel. A job may fail before cleanup. A retry may encounter leftovers from a previous attempt. Cleanup should be observable enough that operators can detect accumulation, and it should be safe enough that cleanup does not delete files outside the intended work area.\n\nWorking directory assumptions are another common source of mistakes. Python code may behave differently depending on where a process is started, which container path is mounted, or which scheduler runs the job. File operations should use explicit, intended locations rather than relying on the current working directory. Sensitive temporary data should not be left behind for debugging unless there is a controlled retention and access plan.",
+  "narrationPoints": [
+    "Temporary files are often used for uploads, transformations, exports, reports, image processing, archive handling, and background jobs.",
+    "Shared temporary directories require extra care because other users or processes may operate in the same space.",
+    "Concurrent workers and background jobs make lifecycle management more important.",
+    "Working directory assumptions are another common source of mistakes.",
+    "File operations should use explicit, intended locations rather than relying on the current working directory.",
+    "A job may fail before cleanup."
+  ]
+};

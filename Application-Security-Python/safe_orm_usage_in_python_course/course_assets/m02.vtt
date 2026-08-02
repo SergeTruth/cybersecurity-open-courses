@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.110
+ORM models are application-facing representations of database tables,
+records, and relationships.
+
+2
+00:00:06.110 --> 00:00:14.256
+They can make domain concepts visible in code: users, tenants,
+organizations, projects, invoices, messages, files, roles, and events.
+
+3
+00:00:14.256 --> 00:00:17.346
+Model design should reflect more than column names.
+
+4
+00:00:17.346 --> 00:00:26.546
+It should capture ownership, sensitivity, lifecycle, relationships, and
+business rules that affect how data is created, changed, queried, and
+exposed.
+
+5
+00:00:26.546 --> 00:00:30.689
+Data flowing into models can come from trusted and untrusted sources.
+
+6
+00:00:30.689 --> 00:00:42.417
+Request bodies, form fields, API payloads, uploaded files, imported
+spreadsheets, partner responses, administrative edits, and background jobs
+may all influence model values or query choices.
+
+7
+00:00:42.417 --> 00:00:46.912
+Stored data can later be reused in queries, reports, exports, or
+templates.
+
+8
+00:00:46.912 --> 00:00:51.617
+A value should not become trusted merely because it has been saved to a
+database.
+
+9
+00:00:51.617 --> 00:00:54.004
+Validation boundaries should be clear.
+
+10
+00:00:54.004 --> 00:00:59.693
+Some rules belong at the request or form layer because they depend on the
+action being performed.
+
+11
+00:00:59.693 --> 00:01:03.977
+Some rules belong near the model because they protect data consistency.
+
+12
+00:01:03.977 --> 00:01:11.842
+Some rules belong in the service or repository layer because they combine
+identity, permissions, workflow state, and persistence.
+
+13
+00:01:11.842 --> 00:01:19.497
+Teams should be able to explain which layer enforces which assumption
+instead of hoping the ORM enforces everything implicitly.
+
+14
+00:01:19.497 --> 00:01:25.115
+Service and repository layer concepts can help keep database access
+explicit and reviewable.
+
+15
+00:01:25.115 --> 00:01:40.986
+Instead of scattering complex queries across views, jobs, serializers, and
+admin actions, teams can centralize sensitive operations in named
+functions that include validation, authorization, tenant filtering,
+transaction behavior, and logging expectations.
+
+16
+00:01:40.986 --> 00:01:48.360
+The exact architecture can vary, but safe ORM design makes important data
+flows easy to find and hard to bypass accidentally.

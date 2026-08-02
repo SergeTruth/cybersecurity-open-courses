@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Template Safety in Django, Flask, and FastAPI",
+  "graphicAlt": "Django and Flask select fixed templates with autoescaping and ordinary string context; mark_safe, raw HTML filters, caller template source, and concatenated markup sit on rejected branches.",
+  "narration": "Django templates and Jinja-based templates used in Flask and other Python applications provide autoescaping concepts that are valuable when used consistently. FastAPI applications may also render templates, even when the framework is commonly associated with APIs. In all cases, the safe path is to use the framework's normal variable rendering behavior and avoid treating untrusted data as already-safe markup.\n\nMarking content as safe is a powerful operation and should be rare. It can bypass escaping and allow content to enter the browser as markup-like output. Sometimes applications intentionally render trusted rich content, but that should be backed by a clear content policy, vetted sanitization, and review. A helper, filter, macro, or template include that disables escaping can create risk far beyond the line where it appears.\n\nTemplate safety also applies to error pages and administrative templates. Developers sometimes assume internal screens are low risk, but admin portals often display logs, imported records, support messages, user profile fields, filenames, and partner data. These values may be untrusted even if they are viewed only by employees. Internal tools still deserve safe rendering because they often carry powerful sessions and sensitive workflows.\n\nFramework protections help, but they can be weakened by unsafe patterns. Reviewers should look for disabled escaping, raw HTML insertion, custom filters that return markup, helpers that concatenate template fragments, and places where URLs or attributes are built from untrusted values without clear constraints. The goal is not to avoid templates. The goal is to make safe template use routine and unsafe exceptions easy to spot.",
+  "narrationPoints": [
+    "FastAPI applications may also render templates, even when the framework is commonly associated with APIs.",
+    "Marking content as safe is a powerful operation and should be rare.",
+    "Internal tools still deserve safe rendering because they often carry powerful sessions and sensitive workflows.",
+    "The goal is to make safe template use routine and unsafe exceptions easy to spot.",
+    "A helper, filter, macro, or template include that disables escaping can create risk far beyond the line where it appears.",
+    "Django templates and Jinja-based templates used in Flask and other Python applications provide autoescaping concepts that are valuable when used consistently."
+  ]
+};

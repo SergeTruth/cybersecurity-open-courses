@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.245
+Certificate validation failures should fail safely or follow a documented
+secure error path.
+
+2
+00:00:05.245 --> 00:00:11.474
+A hostname mismatch, expired certificate, untrusted issuer, or purpose
+mismatch is not just an inconvenience.
+
+3
+00:00:11.474 --> 00:00:15.145
+It means the client cannot confirm the trust decision it expected.
+
+4
+00:00:15.145 --> 00:00:25.177
+User-facing errors should be limited and clear, while internal logs can
+capture safe diagnostic detail for operators without exposing secrets or
+sensitive certificate material.
+
+5
+00:00:25.177 --> 00:00:28.979
+Logging should make validation observable without becoming a leak.
+
+6
+00:00:28.979 --> 00:00:38.159
+Useful fields include service name, environment, safe error category,
+validation outcome, certificate expiration warning, dependency name, and
+correlation ID.
+
+7
+00:00:38.159 --> 00:00:44.781
+Logs should avoid private keys, tokens, credentials, full sensitive
+payloads, and unnecessary certificate details.
+
+8
+00:00:44.781 --> 00:00:51.730
+Structured logging helps teams monitor trends and investigate incidents
+without dumping raw internals to broad audiences.
+
+9
+00:00:51.730 --> 00:00:54.353
+Testing should cover expected trust behavior.
+
+10
+00:00:54.353 --> 00:01:04.712
+Tests can verify hostname mismatch handling, expired or untrusted
+certificate behavior at a high level, development versus production
+settings, and safe errors when validation fails.
+
+11
+00:01:04.712 --> 00:01:16.317
+Dependency and library review should confirm that clients, drivers,
+runtimes, and container images use maintained TLS behavior and that
+validation exceptions do not creep into shared production code paths.
+
+12
+00:01:16.317 --> 00:01:19.595
+Monitoring and incident response complete the lifecycle.
+
+13
+00:01:19.595 --> 00:01:27.004
+Teams should monitor certificate expiration, handshake failures,
+validation errors, renewal failures, and configuration drift.
+
+14
+00:01:27.004 --> 00:01:41.428
+If a private key is exposed, a certificate is misissued, or unsafe
+validation settings are discovered, incident response should identify
+affected services, rotate or revoke material as appropriate, review logs,
+fix configuration, and add regression tests.
+
+15
+00:01:41.428 --> 00:01:46.280
+Certificate validation must remain observable without weakening the trust
+decision.

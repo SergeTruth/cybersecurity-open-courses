@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "A protocol review board connects controlled bind and destination choices, framing, parser limits, concurrency caps, TLS identity, command authorization, cleanup, logs, tests, and monitoring.",
+  "narration": "Secure socket programming in Python means treating network peers, messages, endpoints, timing, and resource use as security-relevant design choices. Low-level sockets provide flexibility for clients, servers, custom protocols, internal services, IoT integrations, daemons, proxies, background workers, and legacy systems. That flexibility removes many safety rails that higher-level protocols and frameworks often provide.\n\nStrong designs define protocols clearly, validate all received data, constrain client destinations, choose server binding carefully, use explicit framing, enforce authentication and authorization, apply timeouts and resource limits, protect credentials, validate TLS, and log safely. A connected socket is only a communication path. It is not proof that the peer is trusted, the message is complete, or the action is authorized.\n\nOperational discipline matters as much as code discipline. Socket services need ownership, monitoring, alerting, certificate lifecycle management, safe shutdown behavior, error handling, and incident response. Tests should cover partial reads, malformed messages, oversized inputs, timeout paths, TLS failures, and authorization decisions. The protocol should be maintainable under normal operation and understandable when something goes wrong.\n\nThe goal is predictable, least-privilege, observable network communication that can fail safely and be maintained over time. When teams make trust boundaries, framing, validation, and resource limits explicit, socket programming becomes less mysterious and far safer to operate in real Python systems.",
+  "narrationPoints": [
+    "Secure socket programming in Python means treating network peers, messages, endpoints, timing, and resource use as security-relevant design choices.",
+    "A connected socket is only a communication path.",
+    "Tests should cover partial reads, malformed messages, oversized inputs, timeout paths, TLS failures, and authorization decisions.",
+    "The goal is predictable, least-privilege, observable network communication that can fail safely and be maintained over time.",
+    "Socket services need ownership, monitoring, alerting, certificate lifecycle management, safe shutdown behavior, error handling, and incident response.",
+    "The protocol should be maintainable under normal operation and understandable when something goes wrong."
+  ]
+};

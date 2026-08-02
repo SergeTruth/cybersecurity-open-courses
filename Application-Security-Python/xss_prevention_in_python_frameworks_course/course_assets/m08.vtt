@@ -1,0 +1,67 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.049
+Code review for XSS prevention should follow data into browser contexts.
+
+2
+00:00:04.049 --> 00:00:11.885
+Reviewers can ask where untrusted data enters, where it is stored, which
+templates or API responses expose it, and how the frontend renders it.
+
+3
+00:00:11.885 --> 00:00:24.750
+Useful review focuses include unsafe rendering shortcuts, disabled
+escaping, raw HTML insertion, unreviewed template filters, rich-content
+handling, URL construction, error pages, admin screens, and client-side
+DOM updates.
+
+4
+00:00:24.750 --> 00:00:30.757
+Tests should verify escaping and sanitization behavior for the fields and
+rendering paths that matter most.
+
+5
+00:00:30.757 --> 00:00:42.512
+Unit and integration tests can check that known risky fields remain text,
+that rich-content policies preserve allowed formatting while removing
+unsafe content, and that templates continue using safe defaults.
+
+6
+00:00:42.512 --> 00:00:51.197
+Regression tests are especially useful after template refactors, frontend
+rewrites, sanitization library updates, or changes in how API data is
+rendered.
+
+7
+00:00:51.197 --> 00:01:00.535
+Logging should support investigation without collecting unnecessary
+browser-side secrets, credentials, tokens, session data, or sensitive
+personal information.
+
+8
+00:01:00.535 --> 00:01:08.568
+Client-side errors and CSP reports can help identify rendering problems,
+but they should be handled as potentially sensitive operational data.
+
+9
+00:01:08.568 --> 00:01:17.057
+Monitoring unusual client-side errors or policy reports can reveal broken
+rendering paths, misconfigured defenses, or unexpected frontend behavior.
+
+10
+00:01:17.057 --> 00:01:22.020
+Remediation should address the root rendering path rather than only the
+visible symptom.
+
+11
+00:01:22.020 --> 00:01:34.623
+That may mean restoring autoescaping, replacing unsafe raw insertion,
+adding a content policy, re-sanitizing stored content, narrowing API
+responses, updating tests, or reviewing related templates that use the
+same helper.
+
+12
+00:01:34.623 --> 00:01:41.480
+XSS prevention requires continuous review because templates, APIs,
+frontend code, and content policies change over time.

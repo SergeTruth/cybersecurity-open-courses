@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.890
+Parsing and validation solve different problems.
+
+2
+00:00:02.890 --> 00:00:06.586
+Parsing converts serialized bytes or text into a data structure.
+
+3
+00:00:06.586 --> 00:00:11.022
+Validation checks whether that structure matches expected rules and
+intent.
+
+4
+00:00:11.022 --> 00:00:24.732
+A parser may accept a document because the syntax is valid, while the
+application should still reject it because required fields are missing,
+types are wrong, values are out of range, relationships are invalid, or
+the operation is not allowed.
+
+5
+00:00:24.732 --> 00:00:32.125
+Schema validation should define expected fields, required fields, allowed
+fields, types, ranges, formats, and relationships.
+
+6
+00:00:32.125 --> 00:00:37.367
+For example, a message may require an identifier, a timestamp, an action,
+and a list of items.
+
+7
+00:00:37.367 --> 00:00:43.282
+Validation should decide whether unknown fields are rejected, ignored, or
+allowed for compatibility.
+
+8
+00:00:43.282 --> 00:00:54.304
+That decision should be intentional because unexpected fields can indicate
+client error, version mismatch, probing, or an attempt to control behavior
+the application did not intend to expose.
+
+9
+00:00:54.304 --> 00:00:57.530
+Type normalization should happen before sensitive use.
+
+10
+00:00:57.530 --> 00:01:08.014
+Strings may need trimming, identifiers may need canonical form, numbers
+may need range checks, timestamps may need timezone handling, and
+enumerations may need exact allowed values.
+
+11
+00:01:08.014 --> 00:01:11.710
+Normalization should reduce ambiguity, not hide invalid input.
+
+12
+00:01:11.710 --> 00:01:17.087
+If a field can mean too many things, downstream code becomes harder to
+secure and harder to test.
+
+13
+00:01:17.087 --> 00:01:21.523
+Validation should happen close to the trust boundary and produce safe
+errors.
+
+14
+00:01:21.523 --> 00:01:25.958
+Developers and legitimate clients need enough information to correct
+input.
+
+15
+00:01:25.958 --> 00:01:33.082
+Unauthorized users should not receive secrets, stack traces, internal
+paths, parser internals, or configuration details.
+
+16
+00:01:33.082 --> 00:01:41.080
+Strong parsing and validation make failure modes predictable, reviewable,
+and testable before deserialized data reaches sensitive code.

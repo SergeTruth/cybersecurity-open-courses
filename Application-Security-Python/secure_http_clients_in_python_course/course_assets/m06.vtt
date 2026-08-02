@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.786
+Redirects can change where a request goes after the client has already
+started an operation.
+
+2
+00:00:04.786 --> 00:00:10.677
+Some redirects are expected, such as a service moving from one endpoint to
+another within the same trust boundary.
+
+3
+00:00:10.677 --> 00:00:14.174
+Others may cross to a different host, scheme, port, or network zone.
+
+4
+00:00:14.174 --> 00:00:22.580
+A secure HTTP client should define whether redirects are allowed, which
+destinations are acceptable, and how many redirects are reasonable for the
+integration.
+
+5
+00:00:22.580 --> 00:00:26.569
+Sensitive headers and credentials need special handling across redirects.
+
+6
+00:00:26.569 --> 00:00:32.705
+A token intended for one service should not be sent to a different
+destination merely because a response pointed there.
+
+7
+00:00:32.705 --> 00:00:37.491
+Depending on the client and configuration, headers may be preserved,
+stripped, or changed.
+
+8
+00:00:37.491 --> 00:00:44.854
+Teams should understand the behavior of their HTTP client and avoid
+assuming that automatic redirect handling is safe for every integration.
+
+9
+00:00:44.854 --> 00:00:47.615
+Proxy configuration can also be security-relevant.
+
+10
+00:00:47.615 --> 00:00:59.458
+Corporate proxies, service meshes, API gateways, environment-driven proxy
+variables, and deployment routing can affect where requests travel, who
+can observe metadata, which certificates are used, and how failures
+appear.
+
+11
+00:00:59.458 --> 00:01:06.637
+A Python application should know whether proxy behavior is part of the
+intended architecture or accidental inherited environment state.
+
+12
+00:01:06.637 --> 00:01:10.564
+Proxy settings can be helpful, but they should be visible enough for
+review.
+
+13
+00:01:10.564 --> 00:01:16.025
+Connection reuse, cookies, and cross-environment behavior deserve
+attention in non-browser clients.
+
+14
+00:01:16.025 --> 00:01:22.345
+Connection pooling can improve performance, but credentials, destinations,
+and TLS expectations should remain clear.
+
+15
+00:01:22.345 --> 00:01:26.886
+Cookies may appear in some HTTP client workflows even though the client is
+not a browser.
+
+16
+00:01:26.886 --> 00:01:32.224
+A staging configuration should not accidentally send production tokens
+through a development proxy.
+
+17
+00:01:32.224 --> 00:01:38.360
+Cross-boundary behavior should be reviewed whenever requests move between
+environments, services, or trust zones.

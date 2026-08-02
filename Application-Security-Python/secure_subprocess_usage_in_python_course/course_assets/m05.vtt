@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.677
+Executable path selection should be deliberate.
+
+2
+00:00:02.677 --> 00:00:11.854
+If lookup behavior is ambiguous, the application may run a different
+program than intended because of path configuration, deployment layout, or
+inherited environment.
+
+3
+00:00:11.854 --> 00:00:19.247
+A safer pattern is to choose executables from trusted configuration, known
+installation locations, or tightly controlled allowlists.
+
+4
+00:00:19.247 --> 00:00:22.943
+The goal is to remove guesswork about which program actually starts.
+
+5
+00:00:22.943 --> 00:00:26.194
+Working directories shape how relative paths are resolved.
+
+6
+00:00:26.194 --> 00:00:33.332
+If a subprocess inherits a surprising current directory, the same argument
+can read or write a different file than reviewers expect.
+
+7
+00:00:33.332 --> 00:00:39.004
+Sensitive workflows should set the working directory intentionally or
+avoid relying on relative paths.
+
+8
+00:00:39.004 --> 00:00:47.863
+Input and output locations should be built from trusted base directories
+using path-aware APIs, with containment checks when local filesystem
+access is involved.
+
+9
+00:00:47.863 --> 00:00:51.240
+Temporary files often connect Python code to child processes.
+
+10
+00:00:51.240 --> 00:00:56.658
+They may contain uploads, reports, transformed data, extracted content, or
+intermediate results.
+
+11
+00:00:56.658 --> 00:01:04.624
+Predictable names, shared temporary directories, weak permissions,
+incomplete cleanup, and concurrent reuse can create exposure or confusion.
+
+12
+00:01:04.624 --> 00:01:12.336
+Safer designs use platform helpers that create unpredictable names with
+appropriate permissions and clean up after both success and failure.
+
+13
+00:01:12.336 --> 00:01:15.459
+File permissions should match the child process purpose.
+
+14
+00:01:15.459 --> 00:01:22.533
+A conversion task should not need access to source code, deployment
+secrets, unrelated customer files, or broad host directories.
+
+15
+00:01:22.533 --> 00:01:26.166
+A report generator should write only to approved output locations.
+
+16
+00:01:26.166 --> 00:01:37.000
+Subprocess security and file handling security are tightly connected
+because arguments often point to files, and child processes may trust
+those paths without understanding the application policy.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.859
+JSON is a data format, not an authorization mechanism and not a business
+rule engine.
+
+2
+00:00:04.859 --> 00:00:11.428
+A JSON document can represent strings, numbers, booleans, null values,
+arrays, objects, and nested structures.
+
+3
+00:00:11.428 --> 00:00:13.892
+That structure still needs expectations.
+
+4
+00:00:13.892 --> 00:00:22.514
+The application should know which fields are required, which fields are
+optional, which fields are allowed, and what each value is permitted to
+mean.
+
+5
+00:00:22.514 --> 00:00:23.814
+Shape and type matter.
+
+6
+00:00:23.814 --> 00:00:27.509
+A value that should be a list should not silently become a string.
+
+7
+00:00:27.509 --> 00:00:32.779
+A field that should contain a small positive integer should not accept an
+arbitrary number.
+
+8
+00:00:32.779 --> 00:00:38.595
+Numeric range and precision assumptions can affect identifiers, money,
+counters, and timestamps.
+
+9
+00:00:38.595 --> 00:00:45.712
+Character encoding expectations also matter when data moves between
+clients, logs, databases, and downstream services.
+
+10
+00:00:45.712 --> 00:00:49.818
+JSON processing should include size limits and nesting expectations.
+
+11
+00:00:49.818 --> 00:00:57.072
+Large payloads, deeply nested objects, or repeated structures can consume
+memory, CPU, and time before business logic runs.
+
+12
+00:00:57.072 --> 00:01:00.562
+Some applications should reject oversized requests early.
+
+13
+00:01:00.562 --> 00:01:05.420
+Others may need streaming or incremental processing for intentionally
+large data.
+
+14
+00:01:05.420 --> 00:01:10.074
+The key is to choose deliberately rather than allowing any structure by
+default.
+
+15
+00:01:10.074 --> 00:01:13.564
+After parsing, validate the schema and the business intent.
+
+16
+00:01:13.564 --> 00:01:20.749
+Duplicate keys, unknown fields, extra nesting, surprising nulls, and
+unexpected arrays can all lead to confused behavior.
+
+17
+00:01:20.749 --> 00:01:28.139
+Rejecting unknown fields may be appropriate for strict APIs, while
+versioned compatibility may require a different strategy.
+
+18
+00:01:28.139 --> 00:01:32.040
+Either way, the code should make the decision visible and testable.

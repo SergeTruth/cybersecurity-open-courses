@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.052
+The best file workflows often avoid user-controlled paths altogether.
+
+2
+00:00:04.052 --> 00:00:11.227
+Instead of accepting a path, the application accepts an opaque file ID,
+report ID, attachment ID, or storage record identifier.
+
+3
+00:00:11.227 --> 00:00:20.660
+The application then looks up a trusted record that contains the approved
+storage location, owner, tenant, lifecycle state, content type, and
+authorization context.
+
+4
+00:00:20.660 --> 00:00:23.516
+The user chooses the resource, not the server path.
+
+5
+00:00:23.516 --> 00:00:26.041
+Allowlisted identifiers reduce ambiguity.
+
+6
+00:00:26.041 --> 00:00:30.624
+A safe identifier has a known format and maps to a record the application
+controls.
+
+7
+00:00:30.624 --> 00:00:36.802
+Generated storage names reduce the chance that a display name can
+influence directories or backend behavior.
+
+8
+00:00:36.802 --> 00:00:42.980
+Users may still choose friendly display names, but those names should be
+metadata, not storage instructions.
+
+9
+00:00:42.980 --> 00:00:49.956
+Separating display names from storage names also makes it easier to rename
+files without moving them or weakening controls.
+
+10
+00:00:49.956 --> 00:00:53.277
+Storage abstraction helps when the backing store changes.
+
+11
+00:00:53.277 --> 00:01:00.053
+A file may live on a local disk, mounted volume, object storage service,
+document store, or generated report repository.
+
+12
+00:01:00.053 --> 00:01:06.895
+The application should expose a consistent storage policy rather than leak
+filesystem layout into routes and templates.
+
+13
+00:01:06.895 --> 00:01:15.664
+A well-designed storage layer can enforce allowed locations, safe naming,
+metadata validation, and consistent access checks across frameworks and
+jobs.
+
+14
+00:01:15.664 --> 00:01:21.709
+Allowlists should be used where names, extensions, content categories, or
+storage areas are constrained.
+
+15
+00:01:21.709 --> 00:01:28.485
+A broad blocklist of dangerous-looking names is brittle because file
+systems and storage services have many edge cases.
+
+16
+00:01:28.485 --> 00:01:35.926
+A narrow allowlist for expected identifiers, generated names, approved
+extensions, and known storage records is easier to review.
+
+17
+00:01:35.926 --> 00:01:41.240
+The practical goal is to make unsafe paths impossible to express through
+the public interface.

@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.681
+Pagination is more than a convenience feature.
+
+2
+00:00:02.681 --> 00:00:12.737
+Page-based and cursor-based retrieval can create partial results,
+duplicate records, missing records, inconsistent ordering, or stale views
+when data changes during a scan.
+
+3
+00:00:12.737 --> 00:00:22.658
+A secure client should define how it detects completion, handles empty
+pages, limits total records, preserves ordering assumptions, and resumes
+safely after interruption.
+
+4
+00:00:22.658 --> 00:00:27.820
+Poor pagination can cause security decisions to be based on incomplete or
+duplicated data.
+
+5
+00:00:27.820 --> 00:00:30.904
+Rate limits and quotas shape safe behavior under load.
+
+6
+00:00:30.904 --> 00:00:40.825
+A client should understand how the API signals throttling, whether retry-
+after guidance is available, and what limits apply by tenant, credential,
+endpoint, or time period.
+
+7
+00:00:40.825 --> 00:00:46.792
+Ignoring rate limits can create outages, unexpected cost, blocked
+credentials, or noisy failure loops.
+
+8
+00:00:46.792 --> 00:00:54.099
+Treat rate-limit handling as part of the integration contract, especially
+when the API supports important business workflows.
+
+9
+00:00:54.099 --> 00:00:55.976
+Retries need strict discipline.
+
+10
+00:00:55.976 --> 00:01:02.411
+Connection timeouts, read timeouts, transient errors, and ambiguous
+outcomes should be handled deliberately.
+
+11
+00:01:02.411 --> 00:01:09.182
+Retrying every failure forever can amplify incidents, duplicate actions,
+flood dependencies, or hide real problems.
+
+12
+00:01:09.182 --> 00:01:20.645
+Bounded retries, backoff, jitter concepts, circuit-breaking patterns, and
+clear failure reporting help the application recover without turning a
+dependency problem into a wider operational issue.
+
+13
+00:01:20.645 --> 00:01:23.662
+Idempotency is critical when API calls change state.
+
+14
+00:01:23.662 --> 00:01:33.785
+If a request creates a charge, opens a ticket, approves access, sends a
+message, provisions a resource, or records a decision, the client must
+avoid unintended duplicate effects.
+
+15
+00:01:33.785 --> 00:01:42.432
+Idempotency keys, operation identifiers, state checks, and clear
+reconciliation behavior help repeated requests represent one intended
+operation.
+
+16
+00:01:42.432 --> 00:01:51.080
+Timeout ambiguity is the hard case: the client may not know whether the
+remote side completed the action, so the design must account for that
+uncertainty.

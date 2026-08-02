@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.485
+Certificate validation is the process of deciding whether a presented
+certificate should be trusted for a specific connection and purpose.
+
+2
+00:00:07.485 --> 00:00:18.870
+Python developers encounter that decision in HTTP clients, APIs, webhooks,
+database connections, message brokers, service-to-service calls, command-
+line tools, automation scripts, and background workers.
+
+3
+00:00:18.870 --> 00:00:25.915
+The mechanics may be handled by a library, driver, or platform, but the
+application still depends on the result of the trust decision.
+
+4
+00:00:25.915 --> 00:00:27.991
+It helps to separate related concepts.
+
+5
+00:00:27.991 --> 00:00:30.004
+Encryption protects data in transit.
+
+6
+00:00:30.004 --> 00:00:32.646
+TLS provides a secure transport protocol family.
+
+7
+00:00:32.646 --> 00:00:35.036
+Certificates support identity validation.
+
+8
+00:00:35.036 --> 00:00:40.320
+Hostname validation checks that the certificate matches the service the
+client intended to reach.
+
+9
+00:00:40.320 --> 00:00:45.729
+Authentication and authorization at the application layer decide who is
+calling and what they may do.
+
+10
+00:00:45.729 --> 00:00:51.642
+Certificate validation supports trust in the transport endpoint, but it
+does not replace application policy.
+
+11
+00:00:51.642 --> 00:00:56.171
+Encrypted communication without identity validation can create false
+confidence.
+
+12
+00:00:56.171 --> 00:01:02.838
+A client may have an encrypted channel, but to the wrong endpoint or to an
+endpoint that is not trusted for the intended purpose.
+
+13
+00:01:02.838 --> 00:01:06.612
+A connection that succeeds is not automatically a trusted connection.
+
+14
+00:01:06.612 --> 00:01:15.607
+It may have skipped verification, accepted the wrong name, relied on a
+development trust setting, or ignored a certificate error that should have
+stopped the operation.
+
+15
+00:01:15.607 --> 00:01:21.960
+Certificate validation should be explicit enough to review, test, and
+monitor in security-sensitive Python systems.
+
+16
+00:01:21.960 --> 00:01:31.961
+Teams should know which trust stores are used, which names are expected,
+what happens on failure, how private or self-signed certificates are
+handled, and who owns certificate lifecycle.
+
+17
+00:01:31.961 --> 00:01:34.980
+The goal is not to become a certificate authority expert.
+
+18
+00:01:34.980 --> 00:01:38.440
+The goal is to make trust decisions predictable and recoverable.

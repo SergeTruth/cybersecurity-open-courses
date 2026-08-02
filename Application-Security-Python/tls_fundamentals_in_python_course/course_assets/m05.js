@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secure TLS for Python HTTP Clients",
+  "graphicAlt": "A verified SSLContext is attached to HTTPX with timeouts, bounded pools, disabled redirects, and no ambient proxy; the request authority gate permits only the inventory service.",
+  "narration": "Python HTTP clients often handle TLS verification by default, but secure usage still requires deliberate client design. The code should use HTTPS for sensitive API calls, rely on appropriate certificate bundles or trust stores, set explicit timeouts, handle errors safely, and avoid weakening verification to make a failing request appear successful. Defaults are helpful, but production-sensitive behavior should be visible enough to review.\n\nDestination control and TLS validation work together. A client should know which service it intended to reach, which scheme is acceptable, which host is approved, and whether redirects are allowed to move the request across trust boundaries. If a redirect changes the destination, sensitive headers or tokens should not be sent blindly to a different endpoint. The transport may be encrypted, but the destination still needs to be appropriate.\n\nCredentials and TLS settings should be handled with the same care. API tokens, authorization headers, cookies, client certificate keys, and sensitive request bodies should not be logged or placed in URLs when avoidable. Certificate errors should be reported to controlled operational channels without exposing secrets or internal details to users. A safe client protects the connection and the data carried over it.\n\nHTTP client security combines TLS validation, destination control, credential protection, response validation, retry discipline, and logging hygiene. A valid certificate does not prove that a response follows the API contract or that the current user is authorized to use the returned data. Secure clients verify transport identity, send only necessary data, parse responses carefully, and fail in ways that are observable without being leaky.",
+  "narrationPoints": [
+    "Python HTTP clients often handle TLS verification by default, but secure usage still requires deliberate client design.",
+    "The transport may be encrypted, but the destination still needs to be appropriate.",
+    "Certificate errors should be reported to controlled operational channels without exposing secrets or internal details to users.",
+    "HTTP client security combines TLS validation, destination control, credential protection, response validation, retry discipline, and logging hygiene.",
+    "Defaults are helpful, but production-sensitive behavior should be visible enough to review.",
+    "A safe client protects the connection and the data carried over it."
+  ]
+};

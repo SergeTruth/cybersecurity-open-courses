@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Deployment, Testing, and Operational Concerns",
+  "graphicAlt": "Production randomness remains connected to the operating system while a unit test injects a small deterministic draw function locally; no global seed or generated secret reaches logs.",
+  "narration": "Local development and production have different needs. Tests often use deterministic data so failures can be reproduced. Production secrets, tokens, session identifiers, and keys must not depend on deterministic test seeds or copied sample values. A test helper that sets a seed is useful in the test suite. The same pattern used in production token generation is a serious design error.\n\nContainers, virtual machines, serverless functions, and short-lived processes at a high level introduce operational questions. How does the process obtain system randomness? What happens during startup? Are images cloned with generated secrets already inside? Are deployment scripts creating keys once per environment or once per container image? Does concurrency create duplicate generation concerns? These are design and deployment questions, not just code questions.\n\nLoad-balanced applications must generate values safely across multiple instances. Two servers should not accidentally share a deterministic seed that causes duplicate tokens. Environment separation should prevent development, staging, and production from sharing generated secrets. Secret generation during deployment should have ownership, auditability, storage, rotation, and rollback plans. A generated value becomes an operational asset as soon as another system depends on it.\n\nOperational ownership matters because generated secrets and tokens have lifecycles. Someone should know how values are created, where they are stored, how long they live, how they are revoked, and how they are rotated after exposure. Secure randomness is not only an implementation detail; it is connected to configuration, deployment, incident response, and the reliability of authentication and cryptographic workflows.",
+  "narrationPoints": [
+    "Production secrets, tokens, session identifiers, and keys must not depend on deterministic test seeds or copied sample values.",
+    "Containers, virtual machines, serverless functions, and short-lived processes at a high level introduce operational questions.",
+    "A generated value becomes an operational asset as soon as another system depends on it.",
+    "Operational ownership matters because generated secrets and tokens have lifecycles.",
+    "A test helper that sets a seed is useful in the test suite.",
+    "The same pattern used in production token generation is a serious design error."
+  ]
+};

@@ -1,0 +1,74 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.984
+Predictable temporary names create avoidable risk.
+
+2
+00:00:02.984 --> 00:00:14.985
+If a name is based on a timestamp, process ID, user name, original upload
+name, or simple counter, another process may collide with it, infer
+sensitive context, or interfere with the workflow in shared environments.
+
+3
+00:00:14.985 --> 00:00:23.339
+Generated unpredictable names from vetted APIs reduce that risk because
+the application is not inventing names through ad hoc string construction.
+
+4
+00:00:23.339 --> 00:00:30.566
+Atomic creation is important because temporary files often exist in
+directories that other processes can observe or influence.
+
+5
+00:00:30.566 --> 00:00:39.716
+The safe pattern is to create the file in a way that confirms the
+application owns a new file rather than checking whether a name is
+available and then opening it later.
+
+6
+00:00:39.716 --> 00:00:46.081
+A time-of-check and time-of-use concern arises when the filesystem state
+can change between validation and use.
+
+7
+00:00:46.081 --> 00:00:51.651
+The lesson is conceptual: avoid designs that assume paths remain unchanged
+after a separate check.
+
+8
+00:00:51.651 --> 00:00:56.159
+Path safety matters whenever temporary paths include user-influenced
+values.
+
+9
+00:00:56.159 --> 00:01:00.469
+The application should avoid direct user control over temporary locations.
+
+10
+00:01:00.469 --> 00:01:07.232
+If a workflow needs to relate a temporary artifact to a user-facing name,
+separate the display name from the storage name.
+
+11
+00:01:07.232 --> 00:01:20.029
+Build paths from trusted base directories, use path-aware APIs, apply
+canonicalization and containment checks where appropriate, and handle
+invalid paths with safe errors rather than fallback behavior that broadens
+access.
+
+12
+00:01:20.029 --> 00:01:27.455
+Symbolic links and hard links require awareness because a path may not
+always refer to an ordinary file in the way a developer expects.
+
+13
+00:01:27.455 --> 00:01:38.329
+The specific behavior depends on operating system and API choices, but the
+stable principle is to control who can create entries in temporary
+directories and to use APIs that create files safely.
+
+14
+00:01:38.329 --> 00:01:44.760
+File creation should be controlled by the application, not negotiated
+through names supplied by untrusted input.

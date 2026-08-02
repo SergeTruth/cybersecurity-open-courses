@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "TCP, UDP, and Data Framing",
+  "graphicAlt": "A TCP byte stream arrives in uneven chunks and is reassembled into a four-byte length header plus one bounded frame; a separate UDP datagram with a truncation flag is rejected.",
+  "narration": "TCP is stream-oriented. It provides an ordered byte stream, not application message boundaries. That means one receive operation may contain part of a message, exactly one message, or pieces of multiple messages depending on timing and buffering. Assuming that one receive call equals one complete message is unsafe and unreliable. The application protocol must define how the receiver knows when a message is complete.\n\nUDP is message-oriented at a lower level, but it has different tradeoffs. Messages may be lost, duplicated, reordered, or arrive from unexpected sources depending on the design and network. UDP can be appropriate for some workloads, but the application has to account for duplicate messages, replay considerations at a high level, size limits, and validation of peer identity and message content. The transport does not remove protocol responsibility.\n\nData framing defines message boundaries. Length-prefix framing can state how many bytes belong to the next message. Delimiter-based framing can mark the end of a text message. Fixed-size records, binary formats, and text protocols each have tradeoffs. Whatever the design, the receiver should enforce maximum sizes, handle incomplete data, reject malformed frames, and avoid waiting forever for a message that never finishes.\n\nEncoding and decoding are also security-relevant. A byte stream must become structured data before business logic can trust it. Text encodings, binary fields, numeric ranges, command names, and optional values should be validated explicitly. Protocol parsers should fail predictably when input is malformed. A clear framing and validation model prevents accidental trust in incomplete, oversized, ambiguous, or unexpected messages.",
+  "narrationPoints": [
+    "The application protocol must define how the receiver knows when a message is complete.",
+    "Messages may be lost, duplicated, reordered, or arrive from unexpected sources depending on the design and network.",
+    "Length-prefix framing can state how many bytes belong to the next message.",
+    "A clear framing and validation model prevents accidental trust in incomplete, oversized, ambiguous, or unexpected messages.",
+    "Text encodings, binary fields, numeric ranges, command names, and optional values should be validated explicitly.",
+    "Assuming that one receive call equals one complete message is unsafe and unreliable."
+  ]
+};

@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.632
+Security tokens are often bearer-like values.
+
+2
+00:00:02.632 --> 00:00:12.504
+Whoever presents the value within the intended rules may be able to reset
+a password, verify an email address, join a workspace, access an API,
+submit a form, or continue a session.
+
+3
+00:00:12.504 --> 00:00:19.809
+That means token generation must consider unpredictability, uniqueness,
+lifetime, storage, revocation, and logging together.
+
+4
+00:00:19.809 --> 00:00:23.231
+A token is not just a random string; it is temporary authority.
+
+5
+00:00:23.231 --> 00:00:32.511
+Password reset tokens, email verification tokens, session identifiers,
+CSRF tokens at a high level, invitation links, and API keys all have
+different risk profiles.
+
+6
+00:00:32.511 --> 00:00:34.090
+Some should be one-time use.
+
+7
+00:00:34.090 --> 00:00:35.670
+Some need short expiration.
+
+8
+00:00:35.670 --> 00:00:36.920
+Some need revocation.
+
+9
+00:00:36.920 --> 00:00:42.909
+Some should be stored only as a verifier or hash so database exposure does
+not reveal active tokens directly.
+
+10
+00:00:42.909 --> 00:00:46.660
+The generation method should match the token's power and lifetime.
+
+11
+00:00:46.660 --> 00:00:52.583
+Length and encoding matter because they affect guessing resistance,
+usability, storage, and transport.
+
+12
+00:00:52.583 --> 00:00:55.347
+URL-safe encodings may be appropriate for links.
+
+13
+00:00:55.347 --> 00:01:05.614
+Human-entered codes may need a smaller character set, but shorter user-
+friendly codes usually need stronger lifecycle controls, such as
+expiration, throttling, and attempt limits.
+
+14
+00:01:05.614 --> 00:01:10.286
+The right answer depends on how the token is used and how much harm misuse
+could cause.
+
+15
+00:01:10.286 --> 00:01:12.984
+Token presence does not replace authorization.
+
+16
+00:01:12.984 --> 00:01:20.618
+A valid reset token may allow a password reset, but it should not
+automatically grant full account access before the workflow is complete.
+
+17
+00:01:20.618 --> 00:01:27.923
+A valid session identifier authenticates session state, but the
+application still needs authorization for protected resources.
+
+18
+00:01:27.923 --> 00:01:33.320
+Secure tokens provide a trustworthy handle for a workflow; they do not
+remove the need for policy.

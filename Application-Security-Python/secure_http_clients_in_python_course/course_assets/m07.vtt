@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.040
+Response validation is necessary even when the remote service is
+authenticated and transport is encrypted.
+
+2
+00:00:06.040 --> 00:00:15.298
+The response can still be malformed, oversized, stale, missing fields,
+using an unexpected content type, or inconsistent with the business rules
+of the application.
+
+3
+00:00:15.298 --> 00:00:24.949
+The Python client should treat the response as input from another system
+and validate it before using it to update records, make decisions, display
+data, or trigger workflow.
+
+4
+00:00:24.949 --> 00:00:28.757
+Status codes and content types should be interpreted deliberately.
+
+5
+00:00:28.757 --> 00:00:31.252
+A success status should not be the only check.
+
+6
+00:00:31.252 --> 00:00:33.549
+The content type should match the parser.
+
+7
+00:00:33.549 --> 00:00:36.570
+A JSON response should have expected fields and types.
+
+8
+00:00:36.570 --> 00:00:43.004
+XML, YAML, CSV, archive, or binary responses require additional caution
+based on how they will be parsed and stored.
+
+9
+00:00:43.004 --> 00:00:50.160
+Error responses should be handled safely without exposing remote details
+or assuming the request can be retried automatically.
+
+10
+00:00:50.160 --> 00:00:53.640
+Response size limits and read timeouts protect availability.
+
+11
+00:00:53.640 --> 00:00:58.892
+A remote system may return far more data than expected, stream slowly, or
+never finish sending.
+
+12
+00:00:58.892 --> 00:01:03.488
+The client should know how much data is reasonable and how long it is
+willing to wait.
+
+13
+00:01:03.488 --> 00:01:11.564
+If a response is cached, the cache key, expiration, privacy level, and
+invalidation behavior should match the data sensitivity and user context.
+
+14
+00:01:11.564 --> 00:01:15.175
+Business-rule validation is as important as schema validation.
+
+15
+00:01:15.175 --> 00:01:24.038
+A response may have the right fields but refer to the wrong tenant, an
+unexpected account, an unauthorized state transition, or a value outside
+the current user?
+
+16
+00:01:24.038 --> 00:01:25.088
+s permission.
+
+17
+00:01:25.088 --> 00:01:29.487
+Secure clients do not blindly trust remote systems to enforce every local
+rule.
+
+18
+00:01:29.487 --> 00:01:32.442
+They validate the response against the application?
+
+19
+00:01:32.442 --> 00:01:34.280
+s own purpose before acting on it.

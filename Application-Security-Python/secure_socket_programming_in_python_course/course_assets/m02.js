@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Network Trust Boundaries and Protocol Design",
+  "graphicAlt": "Processes on separate hosts connect through DNS, routing, firewall, TCP or UDP, TLS, and an application protocol, with a trust decision and failure boundary labeled at each layer.",
+  "narration": "Socket programs need a clear trust model. A client and server may run on the same host, across a private network, across the public internet, or through proxies and gateways. A peer may be an internal service, an external partner, an unmanaged device, or a process controlled by a user. Network location can influence risk, but it should not be treated as proof of trust by itself.\n\nThe data arriving on a socket is bytes from another endpoint. Those bytes are not automatically a trusted protocol message. The application has to decide how to interpret them, which state the connection is in, whether the peer is authenticated, whether the requested operation is authorized, and how to handle unexpected input. A useful protocol treats incoming bytes as untrusted until they are framed, parsed, validated, and matched to an allowed action.\n\nProtocol design should be explicit. A socket service should define message boundaries, versioning expectations, authentication steps, command names or message types, allowed states, error behavior, and close behavior. Informal assumptions such as the client always sends this first or the internal peer never sends malformed data tend to break as systems evolve. A protocol state machine, even a simple one, makes expectations visible.\n\nAuthentication and authorization are separate from connection establishment. A connected peer is not automatically allowed to perform sensitive actions. After the connection is established, the application still needs to identify the peer at an appropriate level and enforce permissions per command, message, tenant, device, or resource. Internal services should follow the same principle. A private network can reduce exposure, but it does not replace application trust decisions.",
+  "narrationPoints": [
+    "Network location can influence risk, but it should not be treated as proof of trust by itself.",
+    "A useful protocol treats incoming bytes as untrusted until they are framed, parsed, validated, and matched to an allowed action.",
+    "A protocol state machine, even a simple one, makes expectations visible.",
+    "A private network can reduce exposure, but it does not replace application trust decisions.",
+    "A peer may be an internal service, an external partner, an unmanaged device, or a process controlled by a user.",
+    "The data arriving on a socket is bytes from another endpoint."
+  ]
+};

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.301
+Django templates and Jinja-based templates used in Flask and other Python
+applications provide autoescaping concepts that are valuable when used
+consistently.
+
+2
+00:00:09.301 --> 00:00:15.434
+FastAPI applications may also render templates, even when the framework is
+commonly associated with APIs.
+
+3
+00:00:15.434 --> 00:00:23.792
+In all cases, the safe path is to use the framework's normal variable
+rendering behavior and avoid treating untrusted data as already-safe
+markup.
+
+4
+00:00:23.792 --> 00:00:27.566
+Marking content as safe is a powerful operation and should be rare.
+
+5
+00:00:27.566 --> 00:00:32.351
+It can bypass escaping and allow content to enter the browser as markup-
+like output.
+
+6
+00:00:32.351 --> 00:00:41.181
+Sometimes applications intentionally render trusted rich content, but that
+should be backed by a clear content policy, vetted sanitization, and
+review.
+
+7
+00:00:41.181 --> 00:00:48.055
+A helper, filter, macro, or template include that disables escaping can
+create risk far beyond the line where it appears.
+
+8
+00:00:48.055 --> 00:00:52.369
+Template safety also applies to error pages and administrative templates.
+
+9
+00:00:52.369 --> 00:01:03.018
+Developers sometimes assume internal screens are low risk, but admin
+portals often display logs, imported records, support messages, user
+profile fields, filenames, and partner data.
+
+10
+00:01:03.018 --> 00:01:07.062
+These values may be untrusted even if they are viewed only by employees.
+
+11
+00:01:07.062 --> 00:01:13.599
+Internal tools still deserve safe rendering because they often carry
+powerful sessions and sensitive workflows.
+
+12
+00:01:13.599 --> 00:01:17.778
+Framework protections help, but they can be weakened by unsafe patterns.
+
+13
+00:01:17.778 --> 00:01:31.730
+Reviewers should look for disabled escaping, raw HTML insertion, custom
+filters that return markup, helpers that concatenate template fragments,
+and places where URLs or attributes are built from untrusted values
+without clear constraints.
+
+14
+00:01:31.730 --> 00:01:33.684
+The goal is not to avoid templates.
+
+15
+00:01:33.684 --> 00:01:38.200
+The goal is to make safe template use routine and unsafe exceptions easy
+to spot.

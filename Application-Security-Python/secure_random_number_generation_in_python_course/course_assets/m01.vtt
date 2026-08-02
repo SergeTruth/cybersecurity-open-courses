@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.514
+Secure random number generation is the source of unpredictability for many
+security controls.
+
+2
+00:00:05.514 --> 00:00:16.201
+Python applications use random values for password reset links, session
+identifiers, API keys, CSRF tokens, invitation links, cryptographic keys,
+salts, nonces, and one-time codes.
+
+3
+00:00:16.201 --> 00:00:24.574
+If those values can be guessed, repeated, or predicted, the surrounding
+security design may fail even when the rest of the code appears well
+built.
+
+4
+00:00:24.574 --> 00:00:28.658
+Randomness for simulation is different from randomness for security.
+
+5
+00:00:28.658 --> 00:00:34.853
+A simulation, game, sampling routine, or test may need values that are
+statistically useful or repeatable.
+
+6
+00:00:34.853 --> 00:00:42.068
+A security token needs values that an attacker cannot predict before they
+are generated and cannot feasibly guess afterward.
+
+7
+00:00:42.068 --> 00:00:44.995
+The visual appearance of randomness is not enough.
+
+8
+00:00:44.995 --> 00:00:50.305
+The important question is whether the value is unpredictable to someone
+trying to misuse it.
+
+9
+00:00:50.305 --> 00:00:53.845
+Predictable values can undermine otherwise strong designs.
+
+10
+00:00:53.845 --> 00:00:59.086
+A password reset system with good email handling still fails if reset
+tokens are guessable.
+
+11
+00:00:59.086 --> 00:01:03.783
+A session system with secure cookies still fails if identifiers are
+predictable.
+
+12
+00:01:03.783 --> 00:01:08.208
+A cryptographic scheme can be weakened by nonce reuse or poor key
+generation.
+
+13
+00:01:08.208 --> 00:01:15.832
+Secure randomness must be considered during design, implementation,
+deployment, and review, not added as a small detail at the end.
+
+14
+00:01:15.832 --> 00:01:20.665
+Python developers should use vetted APIs instead of inventing randomness
+schemes.
+
+15
+00:01:20.665 --> 00:01:29.310
+Custom approaches based on time, process identifiers, counters, usernames,
+predictable seeds, or mixed strings are not reliable security designs.
+
+16
+00:01:29.310 --> 00:01:33.871
+Secure randomness is a dependency, just like authentication or
+cryptography.
+
+17
+00:01:33.871 --> 00:01:38.840
+It deserves central patterns, code review, safe logging, and operational
+ownership.

@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.234
+Upload workflows should control where files are stored from the beginning.
+
+2
+00:00:04.234 --> 00:00:14.621
+The application should choose the destination, generate or approve the
+storage name, apply size limits, capture safe metadata, and avoid trusting
+the user-provided filename as a path.
+
+3
+00:00:14.621 --> 00:00:19.847
+Content type and extension checks can support policy, but they should not
+be the only control.
+
+4
+00:00:19.847 --> 00:00:25.735
+Upload handling should assume filenames and metadata are untrusted even
+when the user is authenticated.
+
+5
+00:00:25.735 --> 00:00:29.308
+Download endpoints require authorization before file access.
+
+6
+00:00:29.308 --> 00:00:35.924
+The application should verify the current subject, action, resource, and
+context before opening or serving content.
+
+7
+00:00:35.924 --> 00:00:46.046
+A route that accepts a file identifier should confirm that the file
+exists, belongs to the expected tenant or organization, is in a
+downloadable state, and is available to the caller.
+
+8
+00:00:46.046 --> 00:00:51.338
+Hiding links in the user interface does not replace server-side object-
+level access control.
+
+9
+00:00:51.338 --> 00:00:54.911
+Tenant and organization boundaries are central to file safety.
+
+10
+00:00:54.911 --> 00:01:01.130
+In multi-tenant systems, a correct path operation can still be a security
+failure if it returns another tenant?
+
+11
+00:01:01.130 --> 00:01:02.188
+s file.
+
+12
+00:01:02.188 --> 00:01:10.127
+Storage records should include ownership or tenancy information, and
+access checks should use that information close to the file operation.
+
+13
+00:01:10.127 --> 00:01:17.537
+Background jobs, exports, previews, thumbnails, and generated reports
+should follow the same boundary rules as direct downloads.
+
+14
+00:01:17.537 --> 00:01:22.896
+File serving should use framework or storage helpers deliberately when
+they match the use case.
+
+15
+00:01:22.896 --> 00:01:33.216
+Helpers can handle common response behavior, headers, streaming, range
+requests, and safe storage integration, but they do not automatically
+solve authorization or storage design.
+
+16
+00:01:33.216 --> 00:01:37.120
+Avoid exposing internal paths in responses, logs, or error messages.
+
+17
+00:01:37.120 --> 00:01:42.280
+A safe download tells the user what they are allowed to receive, not how
+the server is laid out.

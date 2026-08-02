@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.850
+Reading and writing files safely starts with intentional operations.
+
+2
+00:00:03.850 --> 00:00:10.780
+Python makes file access easy, so reviewers should look for explicit
+modes, clear encoding choices, and predictable behavior.
+
+3
+00:00:10.780 --> 00:00:13.989
+Text files and binary files should be handled differently.
+
+4
+00:00:13.989 --> 00:00:18.031
+A script that reads structured text should define encoding expectations.
+
+5
+00:00:18.031 --> 00:00:24.448
+A service that handles images, documents, or archives should treat them as
+binary until a specific parser is selected.
+
+6
+00:00:24.448 --> 00:00:28.234
+Context managers help ensure files are closed even when errors occur.
+
+7
+00:00:28.234 --> 00:00:35.036
+They do not make the operation secure by themselves, but they reduce
+resource leaks and make lifecycle easier to reason about.
+
+8
+00:00:35.036 --> 00:00:44.212
+Error handling should distinguish expected conditions, such as missing
+files or permission failures, from unexpected faults that require logging
+and investigation.
+
+9
+00:00:44.212 --> 00:00:48.319
+User-facing errors should not expose sensitive paths or internal details.
+
+10
+00:00:48.319 --> 00:00:51.656
+Write behavior should avoid accidental overwrite or append.
+
+11
+00:00:51.656 --> 00:00:55.891
+When a file should be newly created, the code should express that
+expectation.
+
+12
+00:00:55.891 --> 00:01:03.014
+When updating a file, atomic write concepts can reduce the chance of
+partial or corrupted output if a process fails halfway through.
+
+13
+00:01:03.014 --> 00:01:08.340
+Large files should be streamed or bounded rather than loaded entirely into
+memory without limits.
+
+14
+00:01:08.340 --> 00:01:11.677
+File size limits protect both performance and availability.
+
+15
+00:01:11.677 --> 00:01:16.682
+Race condition concepts matter at a high level when the code checks a file
+and later acts on it.
+
+16
+00:01:16.682 --> 00:01:24.125
+The state may change between the check and the operation, especially in
+shared directories, concurrent workers, or multi-user systems.
+
+17
+00:01:24.125 --> 00:01:34.200
+The stable practice is to minimize assumptions between decision and
+action, use safe APIs where possible, and design file operations so they
+are predictable, bounded, and recoverable.

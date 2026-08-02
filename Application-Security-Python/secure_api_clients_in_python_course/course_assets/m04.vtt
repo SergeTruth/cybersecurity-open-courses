@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.073
+Safe request construction means building method, path, query parameters,
+headers, body, content type, and optional file uploads through controlled
+patterns.
+
+2
+00:00:09.073 --> 00:00:19.471
+The client should know which HTTP methods are allowed for each operation,
+which path shapes are expected, which headers are required, and which
+fields can appear in JSON or form payloads.
+
+3
+00:00:19.471 --> 00:00:29.339
+Dynamic assembly is sometimes necessary, but untrusted input should not
+freely control URLs, header names, authentication material, request
+methods, or protocol behavior.
+
+4
+00:00:29.339 --> 00:00:32.849
+Validation should happen before data leaves the application.
+
+5
+00:00:32.849 --> 00:00:37.883
+Check type, shape, length, format, allowed values, tenant context, and
+business intent.
+
+6
+00:00:37.883 --> 00:00:51.725
+If a user-controlled field becomes part of a query parameter, body field,
+file name, metadata value, or downstream action, the client should enforce
+the contract locally rather than assuming the remote API will reject
+unsafe or unintended values.
+
+7
+00:00:51.725 --> 00:00:56.692
+Remote validation is useful, but it is not a substitute for protecting
+your own workflow.
+
+8
+00:00:56.692 --> 00:01:00.732
+Data minimization is a security control, not only a privacy preference.
+
+9
+00:01:00.732 --> 00:01:04.441
+Clients should send only the data needed for the approved purpose.
+
+10
+00:01:04.441 --> 00:01:11.063
+Avoid forwarding complete local records when the remote service only needs
+an identifier, status, or specific field.
+
+11
+00:01:11.063 --> 00:01:17.488
+Avoid including secrets, internal notes, debug fields, unnecessary user
+attributes, or unrelated payload data.
+
+12
+00:01:17.488 --> 00:01:25.766
+Minimization reduces exposure if the destination logs requests, has
+broader access, is misconfigured, or later changes how it uses received
+data.
+
+13
+00:01:25.766 --> 00:01:31.727
+Request signing and canonicalization concepts can be useful for some APIs,
+but they require consistency.
+
+14
+00:01:31.727 --> 00:01:39.409
+The client should be clear about exactly what is signed, how timestamps or
+nonces are used, and how retries interact with signed requests.
+
+15
+00:01:39.409 --> 00:01:46.363
+Even when a library handles signing, callers should avoid modifying signed
+headers or paths after the signature is created.
+
+16
+00:01:46.363 --> 00:01:52.920
+The practical goal is predictable requests whose security meaning matches
+the operation the application intended.

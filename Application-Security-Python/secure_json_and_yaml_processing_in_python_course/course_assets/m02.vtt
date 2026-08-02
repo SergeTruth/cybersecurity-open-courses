@@ -1,0 +1,64 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.165
+Before parsing JSON or YAML, understand where it came from and what
+authority it should have.
+
+2
+00:00:05.165 --> 00:00:16.090
+API request bodies, uploaded files, webhooks, queue messages, third-party
+responses, user-edited files, and generated machine output should usually
+be treated as untrusted until validated.
+
+3
+00:00:16.090 --> 00:00:20.989
+Even internal services can produce stale, malformed, incomplete, or
+unexpected data.
+
+4
+00:00:20.989 --> 00:00:23.969
+Configuration files need a separate trust decision.
+
+5
+00:00:23.969 --> 00:00:34.033
+A deployment-owned configuration file may be trusted enough to control
+application behavior, while a user-submitted YAML file should not be
+allowed to control the same settings.
+
+6
+00:00:34.033 --> 00:00:40.389
+The format may look identical, but the source, owner, review process,
+freshness, and intended use are different.
+
+7
+00:00:40.389 --> 00:00:42.310
+Security comes from that context.
+
+8
+00:00:42.310 --> 00:00:53.036
+CI/CD inputs, cloud metadata, service responses, and environment-generated
+configuration deserve care because they often influence build, deployment,
+routing, or credential behavior.
+
+9
+00:00:53.036 --> 00:00:59.128
+A Python application should not automatically treat data as safe merely
+because it arrived from automation.
+
+10
+00:00:59.128 --> 00:01:04.623
+Automation can be misconfigured, compromised, stale, or used outside the
+original assumptions.
+
+11
+00:01:04.623 --> 00:01:14.555
+A practical trust-boundary review asks who controls the data, who reviews
+it, how fresh it is, how large it may be, what schema it should follow,
+and what code will do after parsing.
+
+12
+00:01:14.555 --> 00:01:25.480
+When these questions are answered before implementation, developers can
+choose appropriate parsers, limits, validation, logging, and authorization
+checks instead of relying on broad trust.

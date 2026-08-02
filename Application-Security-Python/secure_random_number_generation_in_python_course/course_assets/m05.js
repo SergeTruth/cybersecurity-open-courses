@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Keys, Salts, Nonces, and Initialization Values",
+  "graphicAlt": "Four cryptographic values are compared: a unique password salt, a secret key, a twelve-byte AES-GCM nonce, and an initialization value whose size and reuse rules come from its algorithm.",
+  "narration": "Cryptographic keys are secret values that require strong randomness. A key should not be derived from timestamps, usernames, predictable strings, or ordinary test random functions. If a key is weak or exposed, the algorithm name may not matter. Secure key generation should normally be handled by vetted cryptographic libraries, key management systems, or platform services that understand the requirements of the protocol.\n\nSalts are different from keys. In password hashing, a salt helps ensure that the same password does not produce the same stored verifier across accounts when used correctly. Salts normally require uniqueness rather than secrecy, and they are usually stored with the password verifier. A salt should not be treated as the main application secret, and a salt does not replace password hashing cost or rate limiting.\n\nNonces and initialization values depend on protocol requirements. Some values must be unique. Some must be unpredictable. Some must never repeat with the same key. Misunderstanding this distinction can break cryptographic assumptions. Reuse can be dangerous in some contexts, even if the value is not secret. This is why routine application development should avoid assembling cryptographic modes manually.\n\nDevelopers should rely on high-level cryptographic APIs that manage randomness requirements correctly. If a library asks the application to supply a nonce, key, or initialization value, developers should understand exactly what property is required and how reuse is prevented. Custom cryptographic construction is not appropriate for ordinary application work. The safer pattern is to choose libraries that reduce the number of dangerous choices the application must make.",
+  "narrationPoints": [
+    "A key should not be derived from timestamps, usernames, predictable strings, or ordinary test random functions.",
+    "Salts normally require uniqueness rather than secrecy, and they are usually stored with the password verifier.",
+    "Reuse can be dangerous in some contexts, even if the value is not secret.",
+    "The safer pattern is to choose libraries that reduce the number of dangerous choices the application must make.",
+    "Developers should rely on high-level cryptographic APIs that manage randomness requirements correctly.",
+    "Custom cryptographic construction is not appropriate for ordinary application work."
+  ]
+};

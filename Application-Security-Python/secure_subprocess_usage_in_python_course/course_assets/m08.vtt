@@ -1,0 +1,78 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.628
+Subprocesses should run with the least privilege needed for the approved
+task.
+
+2
+00:00:04.628 --> 00:00:10.568
+They should not run as administrator or root-equivalent accounts simply
+because that is convenient.
+
+3
+00:00:10.568 --> 00:00:24.176
+Service accounts, workload identities, containers, restricted runtimes,
+sandboxing concepts, read-only filesystems, constrained volumes, and
+limited network access can reduce damage if a child process behaves
+unexpectedly.
+
+4
+00:00:24.176 --> 00:00:28.182
+The exact mechanism changes by platform, but the principle does not.
+
+5
+00:00:28.182 --> 00:00:31.497
+Logging should support review without leaking secrets.
+
+6
+00:00:31.497 --> 00:00:43.171
+Useful records include the approved operation name, component,
+environment, caller context at an appropriate level, correlation ID,
+duration, timeout status, exit category, and safe reason code.
+
+7
+00:00:43.171 --> 00:00:52.565
+Logs should avoid raw sensitive arguments, credentials, tokens, private
+file contents, full environment dumps, full internal output, and
+unnecessary paths.
+
+8
+00:00:52.565 --> 00:00:56.156
+High-impact subprocess activity may also need audit events.
+
+9
+00:00:56.156 --> 00:00:59.334
+Testing should include more than the successful path.
+
+10
+00:00:59.334 --> 00:01:12.389
+Tests can verify approved operations, rejected inputs, shell avoidance,
+path containment, environment minimization, timeout behavior, output
+limits, error translation, authorization checks, and logging redaction.
+
+11
+00:01:12.389 --> 00:01:21.023
+Code review should ask who can influence the executable, arguments,
+working directory, files, environment, streams, privileges, and lifecycle.
+
+12
+00:01:21.023 --> 00:01:23.924
+Those questions expose hidden trust boundaries.
+
+13
+00:01:23.924 --> 00:01:37.669
+Monitoring should watch for unusual subprocess behavior: repeated
+failures, rejected attempts, unexpected operation names, long-running
+jobs, timeouts, high concurrency, large output, or execution from
+unexpected components.
+
+14
+00:01:37.669 --> 00:01:48.859
+If unsafe behavior or leaked output is discovered, teams should contain
+the workflow, rotate exposed secrets when needed, review logs and
+artifacts, fix the design, and add regression tests.
+
+15
+00:01:48.859 --> 00:01:52.520
+Secure subprocess usage must be maintained as systems evolve.

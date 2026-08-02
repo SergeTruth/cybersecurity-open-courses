@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.087
+Child processes may inherit environment variables from the parent Python
+process unless the application controls the environment explicitly.
+
+2
+00:00:08.087 --> 00:00:20.054
+That inherited state can include API keys, tokens, passwords, connection
+strings, private key paths, proxy settings, debug flags, cloud
+configuration, feature flags, executable search paths, and library paths.
+
+3
+00:00:20.054 --> 00:00:25.182
+Even when the child program is trusted, it rarely needs everything the
+parent process knows.
+
+4
+00:00:25.182 --> 00:00:29.522
+A safer pattern is to construct an explicit environment for the approved
+task.
+
+5
+00:00:29.522 --> 00:00:36.491
+Pass only the variables needed for that operation, and avoid letting
+untrusted input change behavior-affecting variables.
+
+6
+00:00:36.491 --> 00:00:46.222
+This makes subprocess behavior more predictable and reduces blast radius
+if the child process fails, logs its environment, spawns another tool, or
+writes diagnostic output.
+
+7
+00:00:46.222 --> 00:00:50.102
+Environment minimization is both a security control and a review aid.
+
+8
+00:00:50.102 --> 00:00:55.427
+Secrets should not be placed in command arguments unless there is a
+carefully justified reason.
+
+9
+00:00:55.427 --> 00:01:05.421
+Depending on the operating system and tooling, arguments may appear in
+process listings, monitoring systems, job metadata, crash output, logs,
+diagnostics, or support bundles.
+
+10
+00:01:05.421 --> 00:01:08.840
+Standard input can also be risky when it is captured or logged.
+
+11
+00:01:08.840 --> 00:01:15.481
+The stable principle is to provide the least sensitive material necessary
+through the narrowest appropriate channel.
+
+12
+00:01:15.481 --> 00:01:19.229
+Inherited user permissions matter as much as inherited variables.
+
+13
+00:01:19.229 --> 00:01:24.620
+A subprocess normally runs with the parent process identity or a
+configured execution identity.
+
+14
+00:01:24.620 --> 00:01:30.538
+If that identity has broad filesystem, network, or secret-store access,
+the child process may have it too.
+
+15
+00:01:30.538 --> 00:01:39.480
+Secure subprocess usage treats identity, permissions, environment, and
+configuration as part of the command contract instead of invisible
+background state.

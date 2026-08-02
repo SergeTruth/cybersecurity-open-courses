@@ -1,0 +1,83 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.623
+Certificate validation is a set of checks, not a single certificate exists
+decision.
+
+2
+00:00:04.623 --> 00:00:20.291
+A client checks whether the certificate chains to an issuer it trusts,
+whether signatures are valid at a high level, whether the certificate is
+within its valid time window, whether the name matches the intended
+service, and whether the certificate is appropriate for the expected
+purpose.
+
+3
+00:00:20.291 --> 00:00:23.437
+Skipping any of these concepts can weaken the trust model.
+
+4
+00:00:23.437 --> 00:00:27.739
+Time checks matter because certificates have not-before and not-after
+dates.
+
+5
+00:00:27.739 --> 00:00:31.977
+A certificate can be too new, expired, or outside an expected rotation
+period.
+
+6
+00:00:31.977 --> 00:00:34.738
+Expiration is not just administrative paperwork.
+
+7
+00:00:34.738 --> 00:00:37.050
+It is part of how trust is bounded over time.
+
+8
+00:00:37.050 --> 00:00:42.444
+Python services should not ignore expired certificates simply because a
+dependency is important.
+
+9
+00:00:42.444 --> 00:00:46.810
+Instead, teams need renewal processes, monitoring, and safe failure
+behavior.
+
+10
+00:00:46.810 --> 00:00:52.846
+Issuer trust and certificate policy concepts matter because not every
+authority is trusted for every purpose.
+
+11
+00:00:52.846 --> 00:00:59.588
+Publicly trusted certificates, private certificate authorities, and
+environment-specific roots have different roles.
+
+12
+00:00:59.588 --> 00:01:07.165
+Local trust configuration can add approved private roots, but that
+decision should be documented and limited to the intended environment.
+
+13
+00:01:07.165 --> 00:01:13.843
+A certificate from the wrong issuer or wrong trust anchor should not be
+accepted just because it is technically well formed.
+
+14
+00:01:13.843 --> 00:01:23.603
+Revocation concepts such as certificate revocation lists and online status
+checks exist to address certificates that should no longer be trusted
+before their normal expiration.
+
+15
+00:01:23.603 --> 00:01:31.308
+Different clients and environments handle revocation differently, so teams
+should understand their practical risk and platform behavior.
+
+16
+00:01:31.308 --> 00:01:39.720
+The stable lesson is that validation is a bundle of trust decisions:
+chain, issuer, dates, name, purpose, policy, and local configuration all
+contribute.

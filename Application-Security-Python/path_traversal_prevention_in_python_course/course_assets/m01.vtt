@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.962
+Path traversal prevention is about controlling how a Python application
+decides which files and directories it may access.
+
+2
+00:00:06.962 --> 00:00:12.863
+The risk appears when untrusted input influences a file operation in a way
+the application did not intend.
+
+3
+00:00:12.863 --> 00:00:24.533
+That can happen in web applications, APIs, command-line tools, upload
+systems, download endpoints, report generators, static file handlers,
+background workers, data pipelines, and maintenance scripts.
+
+4
+00:00:24.533 --> 00:00:30.898
+Any code path that reads, writes, copies, deletes, extracts, or serves
+files has a filesystem security boundary.
+
+5
+00:00:30.898 --> 00:00:37.993
+File access is not the same as authorization, storage policy, or operating
+system permissions, although all of them interact.
+
+6
+00:00:37.993 --> 00:00:41.308
+A user may be allowed to download one report but not another.
+
+7
+00:00:41.308 --> 00:00:47.408
+A process may have operating system permission to read a directory that
+the application should never expose.
+
+8
+00:00:47.408 --> 00:00:55.166
+A framework helper may serve files safely when used as intended, while
+direct file reads can bypass the policy the team thought was in place.
+
+9
+00:00:55.166 --> 00:00:57.884
+Secure design needs all of these layers to agree.
+
+10
+00:00:57.884 --> 00:01:00.669
+The damage from unsafe file access can be serious.
+
+11
+00:01:00.669 --> 00:01:14.196
+Depending on the application and deployment, unintended file access may
+expose configuration data, source code, logs, uploaded user files,
+generated reports, database backups, internal artifacts, credentials, or
+application secrets.
+
+12
+00:01:14.196 --> 00:01:19.102
+It may also allow writes to locations that change application behavior or
+corrupt data.
+
+13
+00:01:19.102 --> 00:01:26.263
+The exact impact depends on the environment, which is why prevention
+should not rely on guessing which files might be sensitive.
+
+14
+00:01:26.263 --> 00:01:31.766
+The strongest prevention starts with design: do not let users directly
+control filesystem paths.
+
+15
+00:01:31.766 --> 00:01:38.861
+Let users select objects, documents, reports, or display names, while the
+application controls storage names and locations.
+
+16
+00:01:38.861 --> 00:01:43.105
+Safe file access should be explicit, constrained, reviewable, and tested.
+
+17
+00:01:43.105 --> 00:01:52.520
+The goal is predictable file behavior where every access is authorized,
+contained inside approved locations, and understandable during review or
+incident response.

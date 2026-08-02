@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.272
+Database connections usually cross several trust boundaries before a query
+reaches storage.
+
+2
+00:00:05.272 --> 00:00:11.598
+Application code runs inside a process, container, serverless function,
+virtual machine, or managed platform.
+
+3
+00:00:11.598 --> 00:00:17.067
+It loads configuration from files, environment variables, service
+discovery, or a secret store.
+
+4
+00:00:17.067 --> 00:00:27.875
+It talks through a driver or ORM, over a network path that may include
+private addressing, proxies, connection brokers, load balancers, service
+mesh components, or managed database endpoints.
+
+5
+00:00:27.875 --> 00:00:32.026
+Each layer can strengthen the design or quietly expand the attack surface.
+
+6
+00:00:32.026 --> 00:00:40.066
+A useful architecture review starts by documenting who can connect, from
+where, with which identity, through which route, and for what purpose.
+
+7
+00:00:40.066 --> 00:00:45.337
+Local development, staging, and production should not collapse into the
+same access pattern.
+
+8
+00:00:45.337 --> 00:00:58.978
+A notebook used for analysis, a migration job, a web API, and a background
+queue worker may all connect to the same database family, but they should
+not automatically share the same credentials, privileges, network path, or
+logging expectations.
+
+9
+00:00:58.978 --> 00:01:03.459
+Internal network location is helpful, but it is not a complete security
+control.
+
+10
+00:01:03.459 --> 00:01:09.983
+Systems inside private networks can still be compromised, misconfigured,
+overprivileged, or incorrectly routed.
+
+11
+00:01:09.983 --> 00:01:21.779
+A database endpoint that only accepts traffic from an application subnet
+is safer than one exposed broadly, but the application identity, database
+account, TLS expectations, and permission model still matter.
+
+12
+00:01:21.779 --> 00:01:27.380
+Treat private networking as one control in a layered design, not as proof
+that the connection is safe.
+
+13
+00:01:27.380 --> 00:01:30.675
+Trust-boundary documentation also improves operations.
+
+14
+00:01:30.675 --> 00:01:41.152
+When a credential is exposed, teams need to know which applications use
+it, which environments are affected, which pools may retain active
+sessions, and which logs can confirm revocation.
+
+15
+00:01:41.152 --> 00:01:48.137
+When a database service changes endpoints or certificate chains, teams
+need to know which clients validate those endpoints.
+
+16
+00:01:48.137 --> 00:01:54.200
+Clear connection architecture turns emergency response from guesswork into
+a rehearsed, bounded process.

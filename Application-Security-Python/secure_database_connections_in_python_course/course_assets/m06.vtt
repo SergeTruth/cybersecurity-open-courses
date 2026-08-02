@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.168
+Connection pools improve performance by reusing established database
+connections, but they also create lifecycle questions.
+
+2
+00:00:07.168 --> 00:00:14.534
+A pool has a size, a maximum overflow behavior, an idle policy, a
+connection lifetime, and a way to detect stale or broken connections.
+
+3
+00:00:14.534 --> 00:00:18.677
+If those settings are too loose, a service can exhaust database resources.
+
+4
+00:00:18.677 --> 00:00:22.754
+If they are too tight, a traffic spike can turn into unnecessary failures.
+
+5
+00:00:22.754 --> 00:00:28.870
+Either outcome can become security-relevant when availability and
+controlled access are part of the system?
+
+6
+00:00:28.870 --> 00:00:29.923
+s risk model.
+
+7
+00:00:29.923 --> 00:00:33.868
+Pools also interact with credential rotation and permission changes.
+
+8
+00:00:33.868 --> 00:00:44.522
+If a password, token, certificate, or database role changes, existing
+pooled connections may continue to behave according to their previous
+session state until they are closed or refreshed.
+
+9
+00:00:44.522 --> 00:00:53.137
+Teams should understand how their framework, driver, and deployment
+platform handle reconnects, pool recycling, health checks, and graceful
+restarts.
+
+10
+00:00:53.137 --> 00:00:57.083
+Rotation is not complete just because a secret value changed in a store.
+
+11
+00:00:57.083 --> 00:01:00.042
+Timeouts and retries are not just reliability knobs.
+
+12
+00:01:00.042 --> 00:01:05.764
+A missing connection timeout can cause request threads or workers to hang
+until capacity is exhausted.
+
+13
+00:01:05.764 --> 00:01:13.129
+Aggressive retry loops can amplify database outages, repeat non-idempotent
+work, or create sudden bursts after partial recovery.
+
+14
+00:01:13.129 --> 00:01:20.824
+Safer retry behavior uses bounded attempts, backoff, clear error handling,
+and awareness of whether an operation can be safely repeated.
+
+15
+00:01:20.824 --> 00:01:25.362
+Fail-fast and fail-safe behavior should be designed, not improvised under
+load.
+
+16
+00:01:25.362 --> 00:01:31.346
+Connection leaks deserve special attention in scripts, workers, and less
+frequently reviewed code paths.
+
+17
+00:01:31.346 --> 00:01:38.383
+A web framework may manage request-scoped sessions, while a data job or
+notebook may leave connections open unintentionally.
+
+18
+00:01:38.383 --> 00:01:44.367
+Secure operations depend on knowing who is connected, why they are
+connected, and when sessions should end.
+
+19
+00:01:44.367 --> 00:01:53.640
+Pool settings, timeout defaults, cleanup practices, and monitoring should
+support that visibility instead of hiding resource exhaustion until users
+are affected.

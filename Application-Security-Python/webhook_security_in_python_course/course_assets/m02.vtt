@@ -1,0 +1,91 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:14.285
+A webhook architecture has several parts: the provider that emits events,
+the consumer endpoint that receives them, any public callback URL,
+internal handlers, gateways or reverse proxies, queues, background jobs,
+databases, and downstream actions.
+
+2
+00:00:14.285 --> 00:00:16.677
+Each part has a different responsibility.
+
+3
+00:00:16.677 --> 00:00:19.201
+The provider asserts that an event occurred.
+
+4
+00:00:19.201 --> 00:00:22.856
+The receiving endpoint validates and acknowledges the request.
+
+5
+00:00:22.856 --> 00:00:27.639
+Internal processing decides what the event means for local state and
+business rules.
+
+6
+00:00:27.639 --> 00:00:33.353
+Trust boundaries appear wherever identity, data, credentials, network
+path, or authority changes.
+
+7
+00:00:33.353 --> 00:00:44.848
+A request crosses from the provider's environment into your public
+endpoint, through a proxy or gateway, into Python application code, and
+possibly into a queue, database, worker, or downstream API call.
+
+8
+00:00:44.848 --> 00:00:50.827
+Headers, payloads, signatures, secrets, timestamps, and event identifiers
+all cross these boundaries.
+
+9
+00:00:50.827 --> 00:00:57.804
+A secure design identifies where each value becomes trusted, what proof is
+required, and what happens when proof is missing.
+
+10
+00:00:57.804 --> 00:01:00.993
+Environment separation is another important boundary.
+
+11
+00:01:00.993 --> 00:01:04.315
+Test and production events should not be interchangeable.
+
+12
+00:01:04.315 --> 00:01:13.816
+A staging webhook endpoint should not update production records, and a
+production event should not be accepted by a test handler simply because
+the shape looks familiar.
+
+13
+00:01:13.816 --> 00:01:21.656
+Endpoint names, credentials, signing secrets, event types, allowed
+providers, and data classification should be clear per environment.
+
+14
+00:01:21.656 --> 00:01:27.436
+When teams blur those boundaries, webhook failures can become data
+integrity or compliance problems.
+
+15
+00:01:27.436 --> 00:01:31.224
+Webhook security decisions should be centralized and reviewable.
+
+16
+00:01:31.224 --> 00:01:41.057
+Ownership should be explicit: who owns the integration, the endpoint, the
+signing secret, the allowed event list, the processing job, the data
+mapping, and the incident path.
+
+17
+00:01:41.057 --> 00:01:47.900
+Central validation middleware, helper functions, or framework-specific
+utilities can help make behavior consistent.
+
+18
+00:01:47.900 --> 00:01:57.800
+Without that structure, each webhook route may interpret signatures,
+timestamps, errors, retries, and logs differently, which makes the whole
+system harder to reason about.

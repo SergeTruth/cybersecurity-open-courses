@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.756
+Least privilege means the child process runs with only the permissions
+needed for its approved purpose.
+
+2
+00:00:05.756 --> 00:00:11.316
+It should not run as an administrator or root-equivalent account simply
+because that is convenient.
+
+3
+00:00:11.316 --> 00:00:22.893
+A background converter, report generator, build helper, or automation task
+usually does not need broad filesystem access, broad network access, user
+management permissions, or access to unrelated secrets.
+
+4
+00:00:22.893 --> 00:00:28.060
+The execution identity should match the operation, not the most powerful
+account available.
+
+5
+00:00:28.060 --> 00:00:31.592
+Isolation can reduce damage if a process behaves unexpectedly.
+
+6
+00:00:31.592 --> 00:00:43.104
+At a high level, isolation may involve service accounts, workload
+identity, containers, sandboxing, read-only filesystems, restricted
+volumes, limited network access, or separate worker environments.
+
+7
+00:00:43.104 --> 00:00:49.972
+These controls vary by platform, but the goal is durable: limit what the
+child process can see, change, contact, and persist.
+
+8
+00:00:49.972 --> 00:00:54.746
+Isolation should be reviewed along with the application code that starts
+the process.
+
+9
+00:00:54.746 --> 00:00:57.101
+Resource controls protect availability.
+
+10
+00:00:57.101 --> 00:01:08.874
+A child process that runs forever, produces unlimited output, opens too
+many files, consumes too much CPU or memory, or starts too many concurrent
+jobs can affect the parent application and shared infrastructure.
+
+11
+00:01:08.874 --> 00:01:17.312
+Timeouts, output size limits, concurrency controls, queue limits,
+cancellation behavior, and process termination rules should be part of the
+design.
+
+12
+00:01:17.312 --> 00:01:22.675
+Reliability settings are security-relevant when they prevent denial-of-
+service conditions.
+
+13
+00:01:22.675 --> 00:01:25.226
+Termination and cleanup need clear behavior.
+
+14
+00:01:25.226 --> 00:01:36.084
+If a process times out, the application should know whether child work
+stopped, whether temporary files remain, whether partial output is safe to
+discard, and whether the operation can be retried.
+
+15
+00:01:36.084 --> 00:01:42.952
+If the process is connected to a business transaction, the application
+should avoid treating ambiguous failure as success.
+
+16
+00:01:42.952 --> 00:01:46.680
+Safe execution controls not only what starts, but also how it stops.

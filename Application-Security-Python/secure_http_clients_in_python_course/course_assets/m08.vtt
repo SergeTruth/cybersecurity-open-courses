@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.669
+HTTP client resilience begins with timeouts.
+
+2
+00:00:02.669 --> 00:00:08.008
+Connection timeouts prevent a client from waiting indefinitely to
+establish a connection.
+
+3
+00:00:08.008 --> 00:00:12.320
+Read timeouts prevent a client from hanging while a remote service stalls.
+
+4
+00:00:12.320 --> 00:00:18.754
+Retries can help with transient failures, but they need limits, backoff,
+and an understanding of idempotency.
+
+5
+00:00:18.754 --> 00:00:27.309
+A retry that repeats a state-changing operation can create duplicate work,
+incorrect charges, repeated notifications, or inconsistent records.
+
+6
+00:00:27.309 --> 00:00:32.443
+Safe logging should make outbound behavior observable without leaking
+sensitive data.
+
+7
+00:00:32.443 --> 00:00:41.135
+Logs can include dependency name, operation name, status category,
+duration, timeout status, retry count, correlation ID, and safe error
+category.
+
+8
+00:00:41.135 --> 00:00:50.991
+They should avoid tokens, credentials, authorization headers, full
+sensitive URLs, private payloads, unnecessary response bodies, and raw
+downstream error content.
+
+9
+00:00:50.991 --> 00:00:55.851
+Redaction should apply consistently to logs, traces, alerts, and support
+bundles.
+
+10
+00:00:55.851 --> 00:00:58.383
+Testing should cover more than happy paths.
+
+11
+00:00:58.383 --> 00:01:16.179
+Good tests exercise destination validation, TLS failure handling at a high
+level, redirect policy, proxy assumptions where relevant, timeouts,
+unavailable services, malformed responses, oversized responses, unexpected
+content types, authentication failures, safe parsing, and logging
+redaction.
+
+12
+00:01:16.179 --> 00:01:23.981
+Controlled test doubles or fake endpoints can make these behaviors
+reliable to verify without depending on fragile external systems.
+
+13
+00:01:23.981 --> 00:01:35.480
+Monitoring should surface unusual destinations, authentication failures,
+error spikes, latency changes, retry storms, certificate errors, redirect
+anomalies, and unexpected response sizes.
+
+14
+00:01:35.480 --> 00:01:49.374
+If credentials, requests, or responses are exposed, incident response
+should assess what leaked, rotate or revoke secrets when appropriate,
+contain affected integrations, review logs, fix the client behavior, and
+add regression tests.
+
+15
+00:01:49.374 --> 00:01:53.960
+HTTP client security has to remain observable without becoming noisy or
+leaky.

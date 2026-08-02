@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.275
+TLS commonly supports three goals: confidentiality, integrity, and
+endpoint authentication for data in transit.
+
+2
+00:00:06.275 --> 00:00:10.630
+Confidentiality helps keep network observers from reading protected
+traffic.
+
+3
+00:00:10.630 --> 00:00:15.368
+Integrity helps detect certain kinds of tampering while data moves between
+endpoints.
+
+4
+00:00:15.368 --> 00:00:24.974
+Endpoint authentication helps a client verify that it is communicating
+with the expected service identity, and in some designs helps a server
+verify the client identity as well.
+
+5
+00:00:24.974 --> 00:00:29.264
+TLS trust boundaries appear wherever communication crosses between
+systems.
+
+6
+00:00:29.264 --> 00:00:33.106
+A browser connecting to a Python web application crosses one boundary.
+
+7
+00:00:33.106 --> 00:00:36.308
+A Python service calling another service crosses another.
+
+8
+00:00:36.308 --> 00:00:40.022
+A worker connecting to a database or message broker crosses another.
+
+9
+00:00:40.022 --> 00:00:44.056
+Internal versus external location matters, but it is not the same as
+trust.
+
+10
+00:00:44.056 --> 00:00:51.356
+A private network can reduce exposure, yet the identity of the endpoint
+still matters when sensitive data or credentials are involved.
+
+11
+00:00:51.356 --> 00:00:57.952
+Real architectures often include reverse proxies, load balancers,
+gateways, service meshes, and application servers.
+
+12
+00:00:57.952 --> 00:01:04.547
+TLS may terminate at an edge component, continue to a backend service, or
+be re-established between internal components.
+
+13
+00:01:04.547 --> 00:01:16.842
+Teams should know where TLS starts and ends, which component owns
+certificates and keys, which headers carry original request information,
+and whether backend traffic still needs transport protection based on the
+risk model.
+
+14
+00:01:16.842 --> 00:01:24.590
+TLS should be considered alongside authentication, authorization, logging,
+monitoring, deployment architecture, and incident response.
+
+15
+00:01:24.590 --> 00:01:34.323
+It protects the transport path, but it does not decide whether a user is
+allowed to access a record, whether a webhook payload is fresh, or whether
+an internal service is trustworthy.
+
+16
+00:01:34.323 --> 00:01:37.653
+Internal network location alone should not be proof of trust.
+
+17
+00:01:37.653 --> 00:01:42.840
+Secure systems combine validated transport with clear application and
+operational controls.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "File Upload Safety",
+  "graphicAlt": "Sequence diagram for File Upload Safety, showing upload stream, quarantine directory, content validator, private storage, authorization gate, and download response; labeled arrows identify file lifecycle and isolation controls and the point where unsafe input or behavior is rejected.",
+  "narration": "Accepting a file is different from trusting it. Uploads cross a major trust boundary because the client supplies content, metadata, and often a suggested name. A safe upload design defines size limits, file type expectations, ownership, storage location, access control, retention, and downstream processing before files are accepted. The upload endpoint should be treated as a controlled intake process, not a casual write to disk.\n\nContent type and extension checks are not enough by themselves. A browser, client, or caller may provide misleading metadata, and file contents may not match the label. The application should validate content for its intended use, choose parsers carefully, and avoid assuming that a familiar extension proves safety. Server-generated filenames reduce the risk created by user-controlled storage names.\n\nUploaded files should usually be stored outside executable paths and outside application code directories. That reduces the chance that uploaded content is treated as code, templates, public static content, or directly executable material. Quarantine concepts, malware scanning at a high level, and delayed promotion workflows can be useful when files need additional inspection before they become available to users or downstream systems.\n\nDownload authorization is just as important as upload validation. A file existing on the server does not mean the requester is allowed to access it. The application should check ownership, role, tenant, or business rule before serving content. Retention and deletion rules should also be explicit so sensitive uploads are not kept longer than needed or left behind after accounts, cases, or workflows close.",
+  "narrationPoints": [
+    "Accepting a file is different from trusting it.",
+    "A safe upload design defines size limits, file type expectations, ownership, storage location, access control, retention, and downstream processing before files are accepted.",
+    "Content type and extension checks are not enough by themselves.",
+    "Server-generated filenames reduce the risk created by user-controlled storage names.",
+    "Download authorization is just as important as upload validation.",
+    "The application should check ownership, role, tenant, or business rule before serving content."
+  ]
+};

@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.881
+A certificate is a statement that binds a name or identity to a public key
+under a trust model.
+
+2
+00:00:04.881 --> 00:00:09.256
+The matching private key is held by the service or subject that owns that
+identity.
+
+3
+00:00:09.256 --> 00:00:13.884
+When a Python client connects to a remote service, the service presents a
+certificate.
+
+4
+00:00:13.884 --> 00:00:21.047
+The client then needs to decide whether the certificate is valid for the
+service being contacted and for the purpose of the connection.
+
+5
+00:00:21.047 --> 00:00:24.027
+Certificate authorities make that decision scalable.
+
+6
+00:00:24.027 --> 00:00:26.499
+A root certificate represents a trust anchor.
+
+7
+00:00:26.499 --> 00:00:30.810
+Intermediate certificates connect end-entity certificates back to that
+root.
+
+8
+00:00:30.810 --> 00:00:37.911
+The certificate chain is the sequence that lets a client determine whether
+an endpoint certificate is linked to a trusted authority.
+
+9
+00:00:37.911 --> 00:00:42.665
+The trust store is the set of roots or trust anchors the client accepts
+during validation.
+
+10
+00:00:42.665 --> 00:00:48.434
+If the chain does not lead to a trusted anchor, the client should not
+treat the endpoint as trusted by default.
+
+11
+00:00:48.434 --> 00:00:49.892
+Names and purposes matter.
+
+12
+00:00:49.892 --> 00:00:56.549
+Certificates may include subject names and subject alternative names that
+identify the service or identity at a high level.
+
+13
+00:00:56.549 --> 00:01:03.332
+Certificates may also include intended purposes or key usage concepts that
+describe what the certificate is meant to support.
+
+14
+00:01:03.332 --> 00:01:07.833
+Expiration dates define the window in which the certificate is expected to
+be valid.
+
+15
+00:01:07.833 --> 00:01:13.793
+Trust depends on the chain, the name, the purpose, and timing, not simply
+on the existence of a certificate file.
+
+16
+00:01:13.793 --> 00:01:18.040
+Private key exposure can undermine the identity represented by a
+certificate.
+
+17
+00:01:18.040 --> 00:01:25.648
+If an attacker or unauthorized party obtains the private key, they may be
+able to impersonate or sign for that identity depending on the system.
+
+18
+00:01:25.648 --> 00:01:33.509
+Private keys should not appear in repositories, logs, support bundles,
+broadly shared file systems, container images, or casual documentation.
+
+19
+00:01:33.509 --> 00:01:38.200
+Certificate validation relies on the assumption that the private key
+remains private.

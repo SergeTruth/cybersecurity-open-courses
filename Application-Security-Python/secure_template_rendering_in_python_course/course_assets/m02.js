@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Template Trust Boundaries and Data Flow",
+  "graphicAlt": "Template files, loaders, helper functions, application data, user content, translations, and third-party values cross distinct trust boundaries before the rendered page enters a browser.",
+  "narration": "A useful starting point is to separate trusted templates from untrusted data. Templates written and reviewed by the application team are intended presentation logic. Data may come from users, databases, uploaded files, third-party APIs, logs, diagnostics, administrative fields, translation files, markdown, rich text, or service integrations. Some sources feel internal, but that does not automatically make them safe for every browser context.\n\nData often flows from request to storage to template to browser. A user enters a profile description, a support team updates an administrative note, a partner API sends a display name, or a log entry is shown in an operations dashboard. The original input path may validate length or format, but the later rendering path decides whether the value is safe in HTML, an attribute, a URL, a script-adjacent structure, an email, or a document export.\n\nStored content can become risky later when it is rendered in a new context or shown to a new audience. A field created for plain text may later be reused inside a link title. A markdown field may later appear in an email. A diagnostic message may later be included in an admin table. Secure rendering requires teams to track not only what data is accepted, but also where it will be displayed and who will see it.\n\nDevelopers should document sensitive rendering paths the same way they document sensitive APIs. Which templates display user-controlled data? Which pages are viewed by administrators? Which fields support rich content? Which helpers return markup? Which exports or emails reuse web content? These questions make trust boundaries visible and help reviewers find places where data may have crossed from safe value into unsafe presentation behavior.",
+  "narrationPoints": [
+    "Some sources feel internal, but that does not automatically make them safe for every browser context.",
+    "Data often flows from request to storage to template to browser.",
+    "A field created for plain text may later be reused inside a link title.",
+    "Developers should document sensitive rendering paths the same way they document sensitive APIs.",
+    "A useful starting point is to separate trusted templates from untrusted data.",
+    "Templates written and reviewed by the application team are intended presentation logic."
+  ]
+};

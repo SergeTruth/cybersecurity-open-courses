@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:11.623
+Publicly trusted certificates work well for many internet-facing services,
+but internal systems often use private certificate authorities, privately
+issued certificates, or self-signed development certificates.
+
+2
+00:00:11.623 --> 00:00:13.985
+These patterns are not automatically wrong.
+
+3
+00:00:13.985 --> 00:00:23.060
+They become risky when trust is improvised, undocumented, copied across
+environments, or handled by disabling validation instead of configuring
+approved trust anchors.
+
+4
+00:00:23.060 --> 00:00:24.801
+Private PKI requires ownership.
+
+5
+00:00:24.801 --> 00:00:37.108
+Someone must decide which private roots are trusted, where trust stores
+are configured, who can issue certificates, how names are assigned, how
+private keys are protected, how certificates are rotated, and how
+incidents are handled.
+
+6
+00:00:37.108 --> 00:00:45.810
+Adding a private root to a Python client or runtime should be an
+intentional environment decision, not a convenience copied from one
+developer machine to production.
+
+7
+00:00:45.810 --> 00:00:49.913
+Self-signed and development certificates should be scoped to their
+purpose.
+
+8
+00:00:49.913 --> 00:00:53.642
+Local development may need a certificate that is not publicly trusted.
+
+9
+00:00:53.642 --> 00:00:55.818
+Test environments may use private roots.
+
+10
+00:00:55.818 --> 00:01:00.169
+Production should have a clear trust model and avoid inheriting local
+exceptions.
+
+11
+00:01:00.169 --> 00:01:07.690
+Development convenience should not train teams to ignore certificate
+warnings or to treat validation failure as a routine obstacle to bypass.
+
+12
+00:01:07.690 --> 00:01:16.205
+Certificate pinning can narrow trust in some designs by restricting
+acceptance to a specific certificate or key identity, but it carries
+operational tradeoffs.
+
+13
+00:01:16.205 --> 00:01:23.167
+Rotation, emergency replacement, platform migration, or certificate
+renewal can break clients if pins are not managed carefully.
+
+14
+00:01:23.167 --> 00:01:29.880
+Pinning should be used with a lifecycle plan, not as a quick substitute
+for understanding trust stores and hostname validation.

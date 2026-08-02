@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.362
+A listening socket is an exposure decision.
+
+2
+00:00:02.362 --> 00:00:09.194
+Binding to loopback can make a service local-only, while binding to a
+broader interface can make it reachable from other hosts.
+
+3
+00:00:09.194 --> 00:00:15.898
+Ports, firewall rules, container networking, host networking, and load
+balancer configuration all shape who can connect.
+
+4
+00:00:15.898 --> 00:00:20.558
+Development listeners and production services should not share casual
+assumptions.
+
+5
+00:00:20.558 --> 00:00:26.560
+Every listening socket should have a clear owner, purpose, exposure model,
+access model, and monitoring path.
+
+6
+00:00:26.560 --> 00:00:30.199
+Connection acceptance and backlog behavior affect availability.
+
+7
+00:00:30.199 --> 00:00:38.882
+A server that accepts unlimited connections or lets idle clients remain
+forever can exhaust file descriptors, memory, worker threads, or event-
+loop capacity.
+
+8
+00:00:38.882 --> 00:00:45.458
+Backlog settings, per-client timeouts, connection limits, and graceful
+close behavior should be chosen deliberately.
+
+9
+00:00:45.458 --> 00:00:51.204
+The server should treat resource management as part of security because
+availability is one of the system?
+
+10
+00:00:51.204 --> 00:00:52.481
+s security properties.
+
+11
+00:00:52.481 --> 00:00:55.610
+Authentication should happen before sensitive actions.
+
+12
+00:00:55.610 --> 00:01:02.696
+A peer that can open a socket should not automatically read data, change
+state, run commands, or access tenant-specific resources.
+
+13
+00:01:02.696 --> 00:01:08.251
+Authorization should be enforced per command or message, not only at the
+moment the connection starts.
+
+14
+00:01:08.251 --> 00:01:16.232
+If a long-lived connection changes state, the server should keep
+authorization decisions aligned with the current peer, resource, and
+operation.
+
+15
+00:01:16.232 --> 00:01:21.084
+Rate limiting, throttling, and safe shutdown behavior help keep the
+service manageable.
+
+16
+00:01:21.084 --> 00:01:30.852
+A server should handle malformed messages, unexpected disconnects, slow
+clients, and repeated failures without leaking sensitive details or
+leaving shared state inconsistent.
+
+17
+00:01:30.852 --> 00:01:42.600
+Operational logs should show connection lifecycle, safe peer identifiers
+where appropriate, protocol errors, authentication outcomes, and resource
+pressure without turning raw payloads into permanent records.

@@ -1,0 +1,79 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.877
+Socket clients should control where they connect.
+
+2
+00:00:02.877 --> 00:00:11.843
+A configured endpoint, approved service record, or allowlisted destination
+is usually safer than accepting arbitrary hosts and ports from untrusted
+input.
+
+3
+00:00:11.843 --> 00:00:19.270
+User-supplied destinations can send a server-side client toward unintended
+public, private, internal, or sensitive locations.
+
+4
+00:00:19.270 --> 00:00:28.035
+DNS and name resolution behavior may change over time, so destination
+policy should be expressed at the application level rather than left to
+convenience.
+
+5
+00:00:28.035 --> 00:00:32.117
+Connection timeouts, read timeouts, and write timeouts are essential.
+
+6
+00:00:32.117 --> 00:00:39.343
+A client that waits indefinitely can tie up workers, command-line jobs,
+automation tasks, or background processing capacity.
+
+7
+00:00:39.343 --> 00:00:43.558
+A slow or unavailable peer should not be able to consume resources
+forever.
+
+8
+00:00:43.558 --> 00:00:52.323
+Timeouts should match the business purpose of the operation and should
+produce safe, observable failure behavior rather than ambiguous partial
+success.
+
+9
+00:00:52.323 --> 00:00:54.264
+Retries and backoff require care.
+
+10
+00:00:54.264 --> 00:01:05.705
+Retrying a connection may help with transient network issues, but repeated
+attempts can amplify outages, overload a dependency, or duplicate state-
+changing work if the protocol is not designed for it.
+
+11
+00:01:05.705 --> 00:01:12.931
+A client should know whether an operation is safe to retry, how many
+attempts are reasonable, and how failure should be reported.
+
+12
+00:01:12.931 --> 00:01:17.481
+Retry behavior is part of the protocol contract, not just a reliability
+setting.
+
+13
+00:01:17.481 --> 00:01:26.246
+Client logging should avoid exposing credentials, connection strings,
+tokens, private addresses where sensitive, raw payloads, and protocol
+secrets.
+
+14
+00:01:26.246 --> 00:01:34.142
+Logs can still record safe destination identifiers, operation names,
+connection outcomes, timeouts, retry counts, and correlation IDs.
+
+15
+00:01:34.142 --> 00:01:42.840
+A secure client validates where it connects, how long it waits, what it
+sends, what it accepts from the peer, and how failures become operational
+evidence.

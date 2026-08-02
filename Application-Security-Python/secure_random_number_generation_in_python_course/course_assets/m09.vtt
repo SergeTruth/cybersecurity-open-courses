@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.288
+Secure random number generation in Python is about using unpredictable
+values for security-sensitive purposes and keeping deterministic
+randomness out of secret generation.
+
+2
+00:00:10.288 --> 00:00:22.823
+Values such as tokens, reset links, session identifiers, API keys,
+cryptographic keys, salts, and nonces may look like small implementation
+details, but they often carry access, identity, or cryptographic meaning.
+
+3
+00:00:22.823 --> 00:00:25.889
+If they can be predicted, the larger control can fail.
+
+4
+00:00:25.889 --> 00:00:36.722
+Strong designs use appropriate Python APIs, vetted cryptographic
+libraries, sufficient entropy, intentional length and encoding, safe token
+lifecycle controls, and careful logging.
+
+5
+00:00:36.722 --> 00:00:41.559
+The general random module is useful for non-security work, simulations,
+and tests.
+
+6
+00:00:41.559 --> 00:00:47.282
+Security-sensitive values should use interfaces intended for cryptographic
+unpredictability.
+
+7
+00:00:47.282 --> 00:00:52.323
+API choice should be centralized and reviewed when values grant access or
+protect data.
+
+8
+00:00:52.323 --> 00:00:58.660
+Salts, nonces, keys, initialization values, session identifiers, and
+tokens have different requirements.
+
+9
+00:00:58.660 --> 00:01:01.657
+Salts usually need uniqueness rather than secrecy.
+
+10
+00:01:01.657 --> 00:01:04.042
+Keys need strong secrecy and randomness.
+
+11
+00:01:04.042 --> 00:01:08.402
+Nonces may need uniqueness or unpredictability depending on the protocol.
+
+12
+00:01:08.402 --> 00:01:15.011
+Tokens need unpredictability, storage controls, expiration, revocation,
+and authorization-aware workflows.
+
+13
+00:01:15.011 --> 00:01:20.870
+Understanding the purpose of each value is more important than making
+every string look complicated.
+
+14
+00:01:20.870 --> 00:01:23.254
+The goal is not to make values look random.
+
+15
+00:01:23.254 --> 00:01:31.225
+The goal is to make security-sensitive values unpredictable, correctly
+scoped, safely stored, reviewable, and recoverable if exposed.
+
+16
+00:01:31.225 --> 00:01:43.080
+Durable secure randomness comes from safe APIs, clear design decisions,
+deterministic testing boundaries, deployment discipline, privacy-aware
+logging, monitoring, and incident response planning.

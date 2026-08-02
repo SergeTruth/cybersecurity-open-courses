@@ -1,0 +1,92 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.939
+Webhook receivers often need to acknowledge quickly.
+
+2
+00:00:02.939 --> 00:00:06.964
+Providers may expect a timely response and retry when the consumer is
+slow.
+
+3
+00:00:06.964 --> 00:00:13.098
+A common pattern is to validate the request, record the event, and place
+work on a queue for background processing.
+
+4
+00:00:13.098 --> 00:00:17.443
+This separates the public HTTP acknowledgement path from slower business
+work.
+
+5
+00:00:17.443 --> 00:00:26.707
+The handler can remain small and predictable while workers perform
+retries, database updates, notifications, or downstream API calls with
+better operational controls.
+
+6
+00:00:26.707 --> 00:00:29.327
+Queueing does not remove security obligations.
+
+7
+00:00:29.327 --> 00:00:38.911
+Validation should happen before enqueueing enough information to trust the
+event, or the queued record should clearly preserve an untrusted state
+until validation completes.
+
+8
+00:00:38.911 --> 00:00:46.641
+Workers need the same tenant mapping, authorization checks, idempotency
+records, and payload validation expectations as synchronous code.
+
+9
+00:00:46.641 --> 00:00:55.331
+A queue can improve reliability, but it can also spread unsafe assumptions
+if the event is treated as trusted merely because it reached internal
+infrastructure.
+
+10
+00:00:55.331 --> 00:00:57.120
+Transaction boundaries matter.
+
+11
+00:00:57.120 --> 00:01:05.745
+If the handler writes a deduplication record, updates a database, and
+triggers a downstream action, the order and atomicity of those steps
+affect correctness.
+
+12
+00:01:05.745 --> 00:01:11.751
+Inbox and outbox pattern concepts can help preserve durable state about
+received events and outgoing actions.
+
+13
+00:01:11.751 --> 00:01:17.438
+Dead-letter queues can help operators inspect events that cannot be
+processed after repeated attempts.
+
+14
+00:01:17.438 --> 00:01:23.635
+These patterns are not just reliability tools; they reduce the chance of
+hidden data loss or repeated side effects.
+
+15
+00:01:23.635 --> 00:01:27.213
+Ordering, partial failure, and backpressure should be explicit.
+
+16
+00:01:27.213 --> 00:01:34.433
+Some providers do not guarantee event order, and even when order is
+intended, retries and parallel workers can rearrange processing.
+
+17
+00:01:34.433 --> 00:01:40.695
+A secure system should avoid assuming that every event arrives once, in
+order, and with all dependencies available.
+
+18
+00:01:40.695 --> 00:01:49.320
+Backpressure controls, worker limits, retry bounds, and monitoring help
+the application remain stable when event volume spikes or downstream
+services fail.

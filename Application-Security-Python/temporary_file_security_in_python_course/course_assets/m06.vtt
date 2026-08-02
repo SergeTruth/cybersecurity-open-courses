@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.656
+Temporary files should be treated as sensitive whenever their contents or
+metadata are sensitive.
+
+2
+00:00:05.656 --> 00:00:18.179
+Uploads, generated documents, exports, reports, converted media, decrypted
+intermediate data, personal data, regulated records, credentials,
+certificates, and private keys can all appear in temporary workflows.
+
+3
+00:00:18.179 --> 00:00:26.191
+The fact that the file is temporary does not reduce the impact if the
+wrong user, process, log bundle, backup, or support artifact receives it.
+
+4
+00:00:26.191 --> 00:00:29.423
+Sensitive-data minimization is the strongest control.
+
+5
+00:00:29.423 --> 00:00:35.684
+If a workflow can process data in memory safely and reliably, it may not
+need to write sensitive content to disk.
+
+6
+00:00:35.684 --> 00:00:47.197
+If disk staging is required, write the smallest necessary data, store it
+in an approved location, restrict permissions, avoid unnecessary copies,
+and remove it as soon as the workflow no longer needs it.
+
+7
+00:00:47.197 --> 00:00:53.526
+Avoid writing secrets to temporary files unless there is a carefully
+justified design and a clear cleanup path.
+
+8
+00:00:53.526 --> 00:01:00.663
+Encryption at rest can help in some architectures, but it is not a reason
+to ignore lifecycle, permissions, or exposure paths.
+
+9
+00:01:00.663 --> 00:01:08.675
+A temporary file can still be exposed through logs, crash reports, support
+bundles, debug output, backups, snapshots, or copied artifacts.
+
+10
+00:01:08.675 --> 00:01:12.446
+Filenames and directory names can also reveal sensitive context.
+
+11
+00:01:12.446 --> 00:01:18.976
+Avoid putting secrets, personal identifiers, tenant names, or private
+business terms into temporary filenames.
+
+12
+00:01:18.976 --> 00:01:28.133
+Privacy-aware temporary storage asks not only who can read the file, but
+also who can infer meaning from its existence, name, location, metadata,
+and lifecycle.
+
+13
+00:01:28.133 --> 00:01:32.038
+A report staged for one customer should not reveal itself to another.
+
+14
+00:01:32.038 --> 00:01:36.011
+A processing failure should not preserve private data indefinitely.
+
+15
+00:01:36.011 --> 00:01:43.080
+Temporary storage should support the business workflow without becoming an
+unmanaged side channel for sensitive content.

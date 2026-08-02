@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing untrusted bytes, bounded parser, schema validator, typed data, and rejected object-construction path; labeled arrows identify parse, validation, and trust transitions and the point where unsafe input or behavior is rejected.",
+  "narration": "Safe data serialization in Python means treating serialized data as a security boundary, not merely a convenience format. Data that can be stored, transmitted, queued, cached, or exchanged can also carry mistaken assumptions across systems. Deserialization should never mean automatic trust. It should mean controlled parsing followed by validation, normalization, authorization where needed, and safe use.\n\nStrong designs choose appropriate formats, parse with safe settings, validate explicit schemas, avoid unsafe object reconstruction, control advanced features, and bound resource use. JSON, YAML, XML, CSV, binary formats, and object serialization all have legitimate uses, but their trust boundaries and parser behavior must match the application context.\n\nDeserialization safety depends on source trust, parser behavior, expected structure, business intent, integrity, authenticity, versioning, authorization, and operational context. Integrity and authenticity help establish evidence about source and tampering, but they do not make data automatically valid or safe for every purpose. Compatibility and freshness also need explicit handling as systems evolve.\n\nThe goal is not avoiding serialization. The goal is making data exchange explicit, bounded, validated, reviewable, and safe for the systems that depend on it. When teams minimize sensitive data, log carefully, test boundary cases, review object serialization, and choose simple formats when possible, serialization becomes a reliable engineering practice rather than an invisible security risk.",
+  "narrationPoints": [
+    "Safe data serialization in Python means treating serialized data as a security boundary, not merely a convenience format.",
+    "Strong designs choose appropriate formats, parse with safe settings, validate explicit schemas, avoid unsafe object reconstruction, control advanced features, and bound resource use.",
+    "Deserialization safety depends on source trust, parser behavior, expected structure, business intent, integrity, authenticity, versioning, authorization, and operational context.",
+    "Compatibility and freshness also need explicit handling as systems evolve.",
+    "The goal is making data exchange explicit, bounded, validated, reviewable, and safe for the systems that depend on it.",
+    "The goal is not avoiding serialization."
+  ]
+};

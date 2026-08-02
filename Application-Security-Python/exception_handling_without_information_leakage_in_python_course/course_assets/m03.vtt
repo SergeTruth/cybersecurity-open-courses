@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.826
+User-facing error messages should be clear enough to support legitimate
+recovery and limited enough to avoid exposing internal detail.
+
+2
+00:00:07.826 --> 00:00:17.877
+A message can say that a request could not be completed, that input needs
+correction, that access is not available, or that support should be
+contacted with a request identifier.
+
+3
+00:00:17.877 --> 00:00:28.739
+It usually should not include raw exception strings, stack traces,
+connection strings, file paths, internal object names, table names, secret
+values, or full downstream service messages.
+
+4
+00:00:28.739 --> 00:00:31.639
+Sensitive operations often need generic wording.
+
+5
+00:00:31.639 --> 00:00:39.937
+Login, password reset, account recovery, invitation, token refresh, and
+access-denied flows can reveal more than intended if they say too much.
+
+6
+00:00:39.937 --> 00:00:49.449
+At a high level, wording that distinguishes nonexistent users, wrong
+passwords, missing factors, disabled accounts, or tenant membership can
+support enumeration.
+
+7
+00:00:49.449 --> 00:00:57.477
+The safe approach is to help legitimate users proceed without teaching
+outsiders how identity and authorization decisions are structured.
+
+8
+00:00:57.477 --> 00:00:59.501
+APIs need the same care as web pages.
+
+9
+00:00:59.501 --> 00:01:07.596
+A JSON response can have a consistent shape, an appropriate status, a safe
+error code, a safe message, and a correlation or request identifier.
+
+10
+00:01:07.596 --> 00:01:13.263
+That response should be stable enough for clients to handle but should not
+become a diagnostic dump.
+
+11
+00:01:13.263 --> 00:01:23.045
+Command-line tools and internal utilities also deserve review because
+their output may end up in terminals, shared logs, CI output, tickets,
+notebooks, or chat messages.
+
+12
+00:01:23.045 --> 00:01:25.946
+Good user-facing errors are boring in the best way.
+
+13
+00:01:25.946 --> 00:01:34.311
+They acknowledge failure, avoid blame, offer safe next steps, and give
+support or engineering a way to locate internal detail without exposing
+it.
+
+14
+00:01:34.311 --> 00:01:40.990
+A correlation ID is especially useful because it lets a user report a
+problem while the team consults controlled logs.
+
+15
+00:01:40.990 --> 00:01:45.240
+The message helps the user recover without helping someone map the system.

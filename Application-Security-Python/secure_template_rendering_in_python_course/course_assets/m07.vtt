@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.338
+Template injection is a risk that appears when untrusted input is treated
+as template code rather than ordinary data.
+
+2
+00:00:06.338 --> 00:00:14.147
+At a high level, server-side template injection involves a server-side
+template engine interpreting user-influenced text as template logic.
+
+3
+00:00:14.147 --> 00:00:19.333
+Client-side template injection follows a similar concern in browser-side
+rendering systems.
+
+4
+00:00:19.333 --> 00:00:25.862
+This course avoids attack details, but the defensive lesson is clear:
+template source should be trusted and controlled.
+
+5
+00:00:25.862 --> 00:00:29.447
+A safe design separates template authors from application users.
+
+6
+00:00:29.447 --> 00:00:35.272
+Application developers, reviewed content editors, or controlled build
+processes may provide templates.
+
+7
+00:00:35.272 --> 00:00:40.138
+Ordinary users, partners, imported data, and request parameters should
+provide values.
+
+8
+00:00:40.138 --> 00:00:49.420
+When these roles are blurred, the rendering engine may expose behavior,
+data, helper functions, or environment capabilities that were never meant
+for untrusted control.
+
+9
+00:00:49.420 --> 00:00:58.894
+Sandboxing concepts can reduce risk in specialized systems, but they have
+limitations and should not be treated as permission to execute arbitrary
+untrusted template logic.
+
+10
+00:00:58.894 --> 00:01:01.967
+Rendering environments should follow least privilege.
+
+11
+00:01:01.967 --> 00:01:09.777
+Helpers, globals, filters, file access, network access, and sensitive
+objects should be restricted to what the rendering task actually needs.
+
+12
+00:01:09.777 --> 00:01:15.410
+The safest approach is still prevention: do not turn untrusted strings
+into executable template logic.
+
+13
+00:01:15.410 --> 00:01:24.820
+Trying to filter dangerous template syntax after the fact is fragile
+because template languages are expressive and rendering behavior changes
+across engines and versions.
+
+14
+00:01:24.820 --> 00:01:33.846
+Defensive code should avoid user-controlled template source, avoid broad
+helper exposure, and review any dynamic rendering feature as a high-risk
+design decision.
+
+15
+00:01:33.846 --> 00:01:37.431
+Untrusted template execution is not ordinary string formatting.
+
+16
+00:01:37.431 --> 00:01:41.080
+It is a boundary that requires explicit architecture and controls.

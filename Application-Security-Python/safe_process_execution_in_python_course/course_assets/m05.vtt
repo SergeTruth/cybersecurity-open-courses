@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.880
+File handling and process execution are closely connected because many
+child processes read input files, write output files, inspect directories,
+or create temporary artifacts.
+
+2
+00:00:09.880 --> 00:00:19.631
+A safe design builds paths from trusted base directories, uses path-aware
+APIs, validates identifiers, and checks that resolved file access remains
+inside approved locations.
+
+3
+00:00:19.631 --> 00:00:26.993
+User-facing display names should be separated from storage names so a
+friendly label does not become an instruction to the filesystem.
+
+4
+00:00:26.993 --> 00:00:32.869
+Working directory control matters because relative paths are interpreted
+relative to a current location.
+
+5
+00:00:32.869 --> 00:00:41.199
+If the working directory is inherited accidentally or controlled
+indirectly, the same argument may point at different files in different
+deployments.
+
+6
+00:00:41.199 --> 00:00:45.655
+A secure design sets the working directory intentionally or avoids relying
+on it.
+
+7
+00:00:45.655 --> 00:00:52.758
+The process should only see the files and directories needed for the
+approved operation, not broad application or host locations.
+
+8
+00:00:52.758 --> 00:01:00.314
+Temporary files deserve care because they often hold uploads, transformed
+data, reports, exports, or intermediate processing results.
+
+9
+00:01:00.314 --> 00:01:09.031
+Predictable temporary names, shared directories, weak permissions,
+incomplete cleanup, and reuse across concurrent jobs can create exposure
+or confusion.
+
+10
+00:01:09.031 --> 00:01:19.815
+Safer patterns use platform helpers that create unpredictable names with
+appropriate permissions, keep temporary files in approved locations, and
+clean up during both success and failure paths.
+
+11
+00:01:19.815 --> 00:01:23.948
+Permissions on input and output files should match the risk of the
+workflow.
+
+12
+00:01:23.948 --> 00:01:33.506
+A child process should not need access to source code, production
+configuration, private keys, unrelated customer data, or broad system
+directories to perform a narrow task.
+
+13
+00:01:33.506 --> 00:01:39.124
+File access should be explicit enough that code review can identify what
+the process can read and write.
+
+14
+00:01:39.124 --> 00:01:45.000
+This is one reason process execution should be treated as an architecture
+decision, not just a utility call.

@@ -1,0 +1,83 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.928
+A Python application should know which environment variables are required,
+optional, sensitive, and dangerous to trust blindly.
+
+2
+00:00:06.928 --> 00:00:14.044
+Non-secret configuration might identify the deployment environment, choose
+a region, set a timeout, or enable a controlled feature.
+
+3
+00:00:14.044 --> 00:00:21.034
+Sensitive configuration may include credentials, tokens, signing material,
+database access details, or private key references.
+
+4
+00:00:21.034 --> 00:00:27.214
+Mixing these categories makes it harder to apply the right access
+controls, logging rules, and rotation procedures.
+
+5
+00:00:27.214 --> 00:00:29.898
+Trust boundaries depend on who controls the value.
+
+6
+00:00:29.898 --> 00:00:36.888
+Operator-controlled variables may be set by deployment tooling, secret
+stores, infrastructure configuration, or CI/CD systems.
+
+7
+00:00:36.888 --> 00:00:43.629
+User-controlled values may flow indirectly through job parameters,
+notebooks, generated configuration, or stored records.
+
+8
+00:00:43.629 --> 00:00:47.998
+A value that arrives in an environment variable is not automatically
+trustworthy.
+
+9
+00:00:47.998 --> 00:00:53.054
+Teams should understand the source, precedence, and approval path for each
+important setting.
+
+10
+00:00:53.054 --> 00:00:56.799
+Configuration sources and precedence can become security-relevant.
+
+11
+00:00:56.799 --> 00:01:04.664
+A local file, process environment, deployment platform, secret store,
+command-line option, or framework default may all compete to define a
+value.
+
+12
+00:01:04.664 --> 00:01:12.653
+If precedence is unclear, a development setting can override a production
+expectation, or a missing secret can silently fall back to an unsafe
+default.
+
+13
+00:01:12.653 --> 00:01:17.147
+Configuration behavior should be visible enough that reviewers can reason
+about it.
+
+14
+00:01:17.147 --> 00:01:21.329
+Secret values should be minimized and separated from ordinary
+configuration.
+
+15
+00:01:21.329 --> 00:01:32.314
+A secret manager or managed platform secret feature may be appropriate for
+sensitive values, while environment variables may carry references or
+short-lived injected values depending on the architecture.
+
+16
+00:01:32.314 --> 00:01:41.240
+The stable principle is to reduce how many places secrets live, limit who
+can set or read them, and make it easy to rotate them without guessing
+which systems depend on them.

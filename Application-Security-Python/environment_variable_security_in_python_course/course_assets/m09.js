@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing developer shell, Python process, deployment platform, child process, and secret store; labeled arrows identify configuration flow and exposure paths and the point where unsafe input or behavior is rejected.",
+  "narration": "Environment variable security in Python means treating runtime configuration as controlled input to the application. Environment variables can configure frameworks, services, jobs, notebooks, containers, serverless functions, and CI/CD pipelines. They are useful because they separate runtime behavior from source code, but they are not automatically private, validated, or safe. Sensitive values still need deliberate protection.\n\nStrong designs separate secrets from ordinary configuration, validate environment values at startup, avoid unsafe defaults, and centralize configuration loading. They classify variables by purpose and sensitivity, minimize which values contain secrets, and document who owns them. They prevent missing or invalid settings from silently weakening authentication, authorization, TLS validation, logging, or debug behavior.\n\nSecure operations include local development hygiene, CI/CD safety, deployment separation, child-process environment control, logging redaction, rotation, monitoring, and incident response. Development secrets should not grant production access. Build-time and runtime values should be separated. Child processes should receive only what they need. Logs and support artifacts should not become secret archives.\n\nThe goal is predictable, reviewable, recoverable configuration that supports secure Python behavior across the lifecycle. Environment variables are a useful configuration mechanism, not a complete secrets management strategy by themselves. Used carefully, they can support clean deployments. Used carelessly, they can spread secrets and weaken controls in places teams do not expect.",
+  "narrationPoints": [
+    "Environment variable security in Python means treating runtime configuration as controlled input to the application.",
+    "Strong designs separate secrets from ordinary configuration, validate environment values at startup, avoid unsafe defaults, and centralize configuration loading.",
+    "Logs and support artifacts should not become secret archives.",
+    "Environment variables are a useful configuration mechanism, not a complete secrets management strategy by themselves.",
+    "Development secrets should not grant production access.",
+    "Used carefully, they can support clean deployments."
+  ]
+};

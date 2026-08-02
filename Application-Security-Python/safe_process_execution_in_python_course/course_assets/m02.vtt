@@ -1,0 +1,88 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.469
+A safe design starts by identifying who or what can influence each part of
+a process execution request.
+
+2
+00:00:05.469 --> 00:00:17.744
+User-controlled input may appear as form fields, API parameters, file
+names, uploaded files, task identifiers, database-stored parameters,
+configuration values, queue messages, scheduled job inputs, or third-party
+data.
+
+3
+00:00:17.744 --> 00:00:25.884
+Some values look internal because they came from a database or queue, but
+they may have originated from a user or external system earlier in the
+workflow.
+
+4
+00:00:25.884 --> 00:00:29.700
+Different pieces of an execution request have different sensitivity.
+
+5
+00:00:29.700 --> 00:00:32.625
+The executable name or path decides what program runs.
+
+6
+00:00:32.625 --> 00:00:34.788
+Arguments decide what the program does.
+
+7
+00:00:34.788 --> 00:00:39.112
+The working directory can change which files are visible by relative
+reference.
+
+8
+00:00:39.112 --> 00:00:42.483
+Environment variables can change behavior or expose secrets.
+
+9
+00:00:42.483 --> 00:00:46.617
+Input files and output locations can affect confidentiality and integrity.
+
+10
+00:00:46.617 --> 00:00:49.415
+Timeouts and resource limits affect availability.
+
+11
+00:00:49.415 --> 00:00:51.895
+Logs and error handling affect auditability.
+
+12
+00:00:51.895 --> 00:00:59.463
+Untrusted data should not control executable names, shell syntax, command
+structure, privileged options, or sensitive target locations.
+
+13
+00:00:59.463 --> 00:01:05.060
+The application should map a user intent to a small set of internal
+operations that are already approved.
+
+14
+00:01:05.060 --> 00:01:11.483
+For example, a user may choose a report format or processing mode, while
+the code maps that choice to known safe behavior.
+
+15
+00:01:11.483 --> 00:01:15.617
+The user should not be writing the command line through an application
+field.
+
+16
+00:01:15.617 --> 00:01:19.687
+Trust-boundary documentation makes review and incident response easier.
+
+17
+00:01:19.687 --> 00:01:33.042
+A reviewer should be able to see which inputs are trusted, which are
+validated, which are constrained by allowlists, which files may be
+touched, which account runs the process, which environment variables are
+passed, and which outputs are captured.
+
+18
+00:01:33.042 --> 00:01:39.720
+Without that map, process execution tends to grow through convenience
+until nobody knows which parts are user-influenced.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe YAML Parsing Principles",
+  "graphicAlt": "A YAML token stream passes size, alias, and token counters into safe_load, followed by an explicit application schema; arbitrary tags and object constructors stop before construction.",
+  "narration": "YAML is often chosen because it is readable and pleasant for configuration. That flexibility is useful, but it also creates security and reliability concerns. YAML can support richer features than many teams need, including tags, anchors, aliases, complex types, and implementation-specific behavior. Secure Python code should accept only the YAML features required for the use case.\n\nSafe loader concepts matter. When YAML comes from an untrusted or lightly trusted source, the parser should be configured to load ordinary data rather than construct arbitrary application objects or interpret broad behavior. The important principle is simple: parsing a document should not silently become object construction, privileged configuration, or executable program behavior.\n\nConfiguration files and user-submitted YAML should not be treated the same just because both are YAML. A reviewed deployment configuration may be allowed to set runtime options. A customer-uploaded policy file or workflow description should be constrained to an explicit schema. The application should separate trusted configuration from user data, and it should avoid broad loaders for untrusted content.\n\nKeep YAML schemas simple and predictable. Limit accepted features where practical, document expected keys, reject or ignore unsupported features intentionally, and validate after parsing. YAML is not dangerous because it is YAML. Risk appears when flexible parsing is combined with unclear trust, broad loaders, complex features, and configuration decisions that the application did not intend to expose.",
+  "narrationPoints": [
+    "YAML can support richer features than many teams need, including tags, anchors, aliases, complex types, and implementation-specific behavior.",
+    "The important principle is simple: parsing a document should not silently become object construction, privileged configuration, or executable program behavior.",
+    "Configuration files and user-submitted YAML should not be treated the same just because both are YAML.",
+    "Limit accepted features where practical, document expected keys, reject or ignore unsupported features intentionally, and validate after parsing.",
+    "Secure Python code should accept only the YAML features required for the use case.",
+    "A customer-uploaded policy file or workflow description should be constrained to an explicit schema."
+  ]
+};

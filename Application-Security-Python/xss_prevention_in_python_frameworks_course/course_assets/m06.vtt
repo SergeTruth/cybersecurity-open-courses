@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.102
+Many Python backends do not render full HTML pages, but they still
+influence browser safety through APIs.
+
+2
+00:00:06.102 --> 00:00:13.575
+An API may return user-controlled names, descriptions, comments, search
+results, filenames, error messages, or rich content.
+
+3
+00:00:13.575 --> 00:00:20.499
+If a browser client later places those values into the page unsafely, the
+risk still belongs to the overall application.
+
+4
+00:00:20.499 --> 00:00:24.613
+Backend and frontend security cannot be separated at the API boundary.
+
+5
+00:00:24.613 --> 00:00:27.698
+A safer frontend pattern separates data from markup.
+
+6
+00:00:27.698 --> 00:00:35.445
+Untrusted data should be inserted through safe text-oriented rendering
+paths or framework defaults rather than raw HTML insertion.
+
+7
+00:00:35.445 --> 00:00:41.204
+If the application needs rich content, it should use a content policy and
+vetted sanitization path.
+
+8
+00:00:41.204 --> 00:00:50.460
+Client-side rendering should be reviewed the same way server-side
+templates are reviewed: where does the data come from, and what browser
+context receives it?
+
+9
+00:00:50.460 --> 00:00:54.299
+Content type correctness and response minimization also matter.
+
+10
+00:00:54.299 --> 00:01:00.195
+APIs should send responses with the intended content type and return only
+the fields the caller needs.
+
+11
+00:01:00.195 --> 00:01:10.617
+An API that exposes internal flags, raw markup, debugging fields, or
+unnecessary user data increases the chance that some downstream client
+will render or use a field incorrectly.
+
+12
+00:01:10.617 --> 00:01:14.867
+Minimizing responses reduces both privacy and browser-rendering risk.
+
+13
+00:01:14.867 --> 00:01:20.009
+CORS and CSRF interact with browser-facing APIs, but they do not replace
+XSS prevention.
+
+14
+00:01:20.009 --> 00:01:25.700
+CORS controls which browser origins can make certain cross-origin requests
+under browser rules.
+
+15
+00:01:25.700 --> 00:01:30.910
+CSRF protections help validate state-changing browser requests made with
+credentials.
+
+16
+00:01:30.910 --> 00:01:36.395
+XSS prevention focuses on keeping untrusted data out of executable or
+unsafe rendering paths.
+
+17
+00:01:36.395 --> 00:01:40.920
+A secure SPA or hybrid app needs all of the relevant controls working
+together.

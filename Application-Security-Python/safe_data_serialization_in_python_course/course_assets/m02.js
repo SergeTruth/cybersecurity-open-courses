@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Trust Boundaries and Data Sources",
+  "graphicAlt": "Flowchart for Trust Boundaries and Data Sources, showing untrusted bytes, bounded parser, schema validator, typed data, and rejected object-construction path; labeled arrows identify parse, validation, and trust transitions and the point where unsafe input or behavior is rejected.",
+  "narration": "Before deserializing data, identify the source. User-submitted data, uploaded files, API request bodies, webhooks, queue messages, cache entries, database fields, configuration files, partner feeds, third-party API responses, generated machine output, and internal service messages all deserve different trust decisions. The format may be the same, but the surrounding control and risk are not.\n\nTrusted configuration and untrusted content should be separated clearly. A reviewed deployment configuration file may be allowed to change runtime behavior. A user-uploaded file or partner feed should usually be treated as data that must fit a narrow schema. A queue message from another internal service may be more trusted than public input, but it can still be malformed, stale, replayed, or produced by a compromised or misconfigured component.\n\nSource, owner, freshness, sensitivity, and intended use should be known before deserialization. Source tells you where the data came from. Owner tells you who can change it. Freshness tells you whether it may be stale or replayed. Sensitivity tells you how carefully it should be stored and logged. Intended use tells you what the application is allowed to do with it. These questions guide parser settings, validation rules, storage, and access controls.\n\nA durable rule is to trust by design, not by accident. If code treats every cache entry, database field, service message, and configuration blob as safe merely because it is internal, mistakes become hard to find. Clear boundaries make secure review easier. Reviewers can see which data is untrusted, which data is trusted configuration, and which data needs validation before it influences important behavior.",
+  "narrationPoints": [
+    "The format may be the same, but the surrounding control and risk are not.",
+    "A user-uploaded file or partner feed should usually be treated as data that must fit a narrow schema.",
+    "Source tells you where the data came from.",
+    "Intended use tells you what the application is allowed to do with it.",
+    "Reviewers can see which data is untrusted, which data is trusted configuration, and which data needs validation before it influences important behavior.",
+    "Clear boundaries make secure review easier."
+  ]
+};

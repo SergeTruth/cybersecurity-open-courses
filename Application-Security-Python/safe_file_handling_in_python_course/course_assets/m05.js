@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Permissions, Storage Locations, and Isolation",
+  "graphicAlt": "Decision diagram for Permissions, Storage Locations, and Isolation, showing upload stream, quarantine directory, content validator, private storage, authorization gate, and download response; labeled arrows identify file lifecycle and isolation controls and the point where unsafe input or behavior is rejected.",
+  "narration": "Least privilege for file access means the application process should have only the file and directory permissions needed for its intended work. If a Python service only needs to write uploads into one storage area, it should not have broad write access to application code, secrets, backups, or unrelated tenant data. Permissions become especially important when several services, workers, or users share infrastructure.\n\nStorage location is a security decision. Private storage, public storage, local filesystem paths, cloud object storage at a high level, container volumes, mounted directories, backup paths, and temporary work areas all have different exposure and lifecycle rules. Publicly reachable paths should not be used as a default. Sensitive files should be stored where access can be authorized, logged, and revoked.\n\nUploads should be separated from application code and from secrets or configuration files. Tenant or user data should be separated logically, and sometimes physically, depending on risk. A mistake in one part of the system should not automatically expose every other user's files. Storage design should reduce blast radius if a file is mishandled, a worker is compromised, or a permissions rule is wrong.\n\nBackups and replicas need the same attention as primary storage. A file removed from the application may still exist in backups, object versions, logs, exports, or derived previews. Secrets files and configuration files should have stricter access than ordinary content. Strong storage design gives teams a clear answer to who can read, write, list, delete, restore, and audit each category of file.",
+  "narrationPoints": [
+    "Least privilege for file access means the application process should have only the file and directory permissions needed for its intended work.",
+    "Publicly reachable paths should not be used as a default.",
+    "Tenant or user data should be separated logically, and sometimes physically, depending on risk.",
+    "Storage design should reduce blast radius if a file is mishandled, a worker is compromised, or a permissions rule is wrong.",
+    "Secrets files and configuration files should have stricter access than ordinary content.",
+    "Storage location is a security decision."
+  ]
+};

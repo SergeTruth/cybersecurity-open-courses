@@ -1,0 +1,79 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.391
+SQL injection prevention in Python depends on keeping untrusted data out
+of SQL structure and using safe database access patterns consistently.
+
+2
+00:00:08.391 --> 00:00:16.849
+The core pattern is separation: developers control the command structure,
+and data values flow through parameter binding or safe ORM mechanisms.
+
+3
+00:00:16.849 --> 00:00:24.012
+This applies across Flask, Django, FastAPI, scripts, internal tools, APIs,
+background jobs, reports, and data pipelines.
+
+4
+00:00:24.012 --> 00:00:36.496
+Strong defenses use parameterized queries, safe ORM patterns, careful
+dynamic SQL design, allowlisted identifiers, input validation,
+authorization, least privilege, safe errors, testing, logging, and review.
+
+5
+00:00:36.496 --> 00:00:39.020
+Each control answers a different question.
+
+6
+00:00:39.020 --> 00:00:41.135
+Parameterization protects values.
+
+7
+00:00:41.135 --> 00:00:43.454
+Allowlists protect dynamic structure.
+
+8
+00:00:43.454 --> 00:00:45.159
+Validation clarifies input.
+
+9
+00:00:45.159 --> 00:00:47.274
+Authorization protects resources.
+
+10
+00:00:47.274 --> 00:00:49.116
+Least privilege limits damage.
+
+11
+00:00:49.116 --> 00:00:52.936
+Logging and tests keep the behavior observable and maintainable.
+
+12
+00:00:52.936 --> 00:00:58.189
+ORMs, frameworks, and scanners help, but they do not replace secure design
+and code review.
+
+13
+00:00:58.189 --> 00:01:10.195
+Developers still need to recognize when they leave a safe ORM path, when
+raw SQL is introduced, when stored procedures build dynamic commands, and
+when administrative tools or background jobs take shortcuts.
+
+14
+00:01:10.195 --> 00:01:17.971
+The highest-risk query is often not the obvious public route; it may be a
+report, import, export, or maintenance task with broad access.
+
+15
+00:01:17.971 --> 00:01:27.453
+The goal is to make safe query construction routine, unsafe query
+construction rare and reviewable, and database access predictable,
+testable, and maintainable.
+
+16
+00:01:27.453 --> 00:01:42.120
+When teams understand data flow, constrain dynamic structure, parameterize
+values, enforce authorization, and review exceptions, SQL injection
+prevention becomes a normal part of Python engineering rather than an
+emergency cleanup after a finding.

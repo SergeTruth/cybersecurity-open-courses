@@ -1,0 +1,94 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.851
+Secure API client usage means writing Python code that makes outbound
+calls in a controlled, observable, and least-privilege way.
+
+2
+00:00:07.851 --> 00:00:17.328
+The client may call an internal service, a cloud API, an identity
+provider, a payment processor, a partner platform, a data service, or an
+automation endpoint.
+
+3
+00:00:17.328 --> 00:00:21.147
+The security question is not only whether the request succeeds.
+
+4
+00:00:21.147 --> 00:00:32.746
+It is whether the client protects credentials, constrains destinations,
+sends appropriate data, validates responses, handles failure safely, and
+avoids creating unsafe automated actions.
+
+5
+00:00:32.746 --> 00:00:46.750
+Python API clients appear in many places: FastAPI services, Flask and
+Django applications, command-line tools, one-off scripts, CI jobs, data
+pipelines, notebooks, background workers, scheduled tasks, and service
+integrations.
+
+6
+00:00:46.750 --> 00:00:52.549
+Those contexts have different lifetimes and operating models, but they
+share the same core risk.
+
+7
+00:00:52.549 --> 00:01:02.804
+A small outbound request can move sensitive data, trigger workflow
+changes, spend money, update records, open tickets, create accounts, or
+change infrastructure state.
+
+8
+00:01:02.804 --> 00:01:04.431
+It helps to separate terms.
+
+9
+00:01:04.431 --> 00:01:06.199
+An API client sends requests.
+
+10
+00:01:06.199 --> 00:01:09.028
+An API server receives and processes requests.
+
+11
+00:01:09.028 --> 00:01:12.069
+An SDK wraps an API in a language-specific package.
+
+12
+00:01:12.069 --> 00:01:16.101
+A wrapper may be a local convenience layer around requests or an SDK.
+
+13
+00:01:16.101 --> 00:01:20.344
+A gateway or proxy can route, authenticate, log, or transform traffic.
+
+14
+00:01:20.344 --> 00:01:25.083
+A browser client runs in a user's browser with different security
+constraints.
+
+15
+00:01:25.083 --> 00:01:29.397
+Confusing these roles often leads to misplaced trust and weak controls.
+
+16
+00:01:29.397 --> 00:01:38.238
+Secure clients should be centralized, reviewed, tested, logged, and
+monitored rather than scattered as isolated request calls across a
+codebase.
+
+17
+00:01:38.238 --> 00:01:48.422
+Centralization makes it easier to enforce timeouts, TLS validation,
+destination allowlists, credential handling, retry policy, redaction, and
+response validation.
+
+18
+00:01:48.422 --> 00:01:51.959
+It also makes operational incidents easier to understand.
+
+19
+00:01:51.959 --> 00:01:59.880
+When every feature invents its own outbound behavior, security assumptions
+become hard to find and even harder to fix consistently.

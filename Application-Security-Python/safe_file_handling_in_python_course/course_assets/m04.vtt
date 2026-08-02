@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.657
+Accepting a file is different from trusting it.
+
+2
+00:00:02.657 --> 00:00:08.966
+Uploads cross a major trust boundary because the client supplies content,
+metadata, and often a suggested name.
+
+3
+00:00:08.966 --> 00:00:19.061
+A safe upload design defines size limits, file type expectations,
+ownership, storage location, access control, retention, and downstream
+processing before files are accepted.
+
+4
+00:00:19.061 --> 00:00:24.441
+The upload endpoint should be treated as a controlled intake process, not
+a casual write to disk.
+
+5
+00:00:24.441 --> 00:00:28.027
+Content type and extension checks are not enough by themselves.
+
+6
+00:00:28.027 --> 00:00:33.872
+A browser, client, or caller may provide misleading metadata, and file
+contents may not match the label.
+
+7
+00:00:33.872 --> 00:00:42.307
+The application should validate content for its intended use, choose
+parsers carefully, and avoid assuming that a familiar extension proves
+safety.
+
+8
+00:00:42.307 --> 00:00:47.288
+Server-generated filenames reduce the risk created by user-controlled
+storage names.
+
+9
+00:00:47.288 --> 00:00:53.465
+Uploaded files should usually be stored outside executable paths and
+outside application code directories.
+
+10
+00:00:53.465 --> 00:01:01.036
+That reduces the chance that uploaded content is treated as code,
+templates, public static content, or directly executable material.
+
+11
+00:01:01.036 --> 00:01:12.393
+Quarantine concepts, malware scanning at a high level, and delayed
+promotion workflows can be useful when files need additional inspection
+before they become available to users or downstream systems.
+
+12
+00:01:12.393 --> 00:01:16.179
+Download authorization is just as important as upload validation.
+
+13
+00:01:16.179 --> 00:01:20.629
+A file existing on the server does not mean the requester is allowed to
+access it.
+
+14
+00:01:20.629 --> 00:01:26.075
+The application should check ownership, role, tenant, or business rule
+before serving content.
+
+15
+00:01:26.075 --> 00:01:35.240
+Retention and deletion rules should also be explicit so sensitive uploads
+are not kept longer than needed or left behind after accounts, cases, or
+workflows close.

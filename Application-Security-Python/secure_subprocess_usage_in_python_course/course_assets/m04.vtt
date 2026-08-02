@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.024
+Secure subprocess design begins by identifying which values can influence
+execution.
+
+2
+00:00:05.024 --> 00:00:19.486
+User-controlled filenames, mode selections, command options, uploaded file
+metadata, configuration values, database-stored task parameters, third-
+party API data, queue messages, and scheduled job inputs may all shape
+what a child process does.
+
+3
+00:00:19.486 --> 00:00:26.479
+A value does not become trusted simply because it passed through a
+database or job runner before reaching subprocess code.
+
+4
+00:00:26.479 --> 00:00:30.689
+Allowlists help the application define what it is prepared to run safely.
+
+5
+00:00:30.689 --> 00:00:39.787
+An allowlist might include approved executables, approved modes, approved
+flags, approved file types, approved directories, or approved operation
+names.
+
+6
+00:00:39.787 --> 00:00:45.965
+The user chooses from business concepts, and the application maps that
+choice to known internal arguments.
+
+7
+00:00:45.965 --> 00:00:52.755
+This prevents direct user control over command names, privileged flags,
+execution targets, or option combinations.
+
+8
+00:00:52.755 --> 00:00:58.797
+Validation should confirm type, length, range, format, and business intent
+for the approved operation.
+
+9
+00:00:58.797 --> 00:01:02.871
+A value that is acceptable as a label may not be acceptable as a filename.
+
+10
+00:01:02.871 --> 00:01:07.692
+A value that is acceptable for one tool mode may be unsafe or meaningless
+for another.
+
+11
+00:01:07.692 --> 00:01:13.802
+Validation should reject unexpected options rather than trying to detect
+every possible unsafe pattern.
+
+12
+00:01:13.802 --> 00:01:17.944
+Positive constraints are easier to reason about than broad blocklists.
+
+13
+00:01:17.944 --> 00:01:22.086
+Validation supports safe subprocess APIs, but it does not replace them.
+
+14
+00:01:22.086 --> 00:01:31.116
+A validated value can still cause harm if it is placed into shell syntax,
+run with excessive privileges, used as an unconstrained path, or logged
+with secrets.
+
+15
+00:01:31.116 --> 00:01:33.017
+Think of validation as one layer.
+
+16
+00:01:33.017 --> 00:01:43.880
+It narrows what the application accepts, while structured arguments,
+controlled paths, controlled environments, authorization, and least
+privilege limit what the child process can do.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Certificate Validation Means",
+  "graphicAlt": "Diagram for What Certificate Validation Means, showing Python client, TLS endpoint, certificate chain, hostname, and trust store; labeled arrows identify accepted and rejected validation paths and the point where unsafe input or behavior is rejected.",
+  "narration": "Certificate validation is the process of deciding whether a presented certificate should be trusted for a specific connection and purpose. Python developers encounter that decision in HTTP clients, APIs, webhooks, database connections, message brokers, service-to-service calls, command-line tools, automation scripts, and background workers. The mechanics may be handled by a library, driver, or platform, but the application still depends on the result of the trust decision.\n\nIt helps to separate related concepts. Encryption protects data in transit. TLS provides a secure transport protocol family. Certificates support identity validation. Hostname validation checks that the certificate matches the service the client intended to reach. Authentication and authorization at the application layer decide who is calling and what they may do. Certificate validation supports trust in the transport endpoint, but it does not replace application policy.\n\nEncrypted communication without identity validation can create false confidence. A client may have an encrypted channel, but to the wrong endpoint or to an endpoint that is not trusted for the intended purpose. A connection that succeeds is not automatically a trusted connection. It may have skipped verification, accepted the wrong name, relied on a development trust setting, or ignored a certificate error that should have stopped the operation.\n\nCertificate validation should be explicit enough to review, test, and monitor in security-sensitive Python systems. Teams should know which trust stores are used, which names are expected, what happens on failure, how private or self-signed certificates are handled, and who owns certificate lifecycle. The goal is not to become a certificate authority expert. The goal is to make trust decisions predictable and recoverable.",
+  "narrationPoints": [
+    "Certificate validation is the process of deciding whether a presented certificate should be trusted for a specific connection and purpose.",
+    "Authentication and authorization at the application layer decide who is calling and what they may do.",
+    "Encrypted communication without identity validation can create false confidence.",
+    "A connection that succeeds is not automatically a trusted connection.",
+    "The goal is to make trust decisions predictable and recoverable.",
+    "Certificates support identity validation."
+  ]
+};

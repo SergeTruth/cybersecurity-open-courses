@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.524
+Webhook payloads should be treated as untrusted input until they are
+validated.
+
+2
+00:00:04.524 --> 00:00:12.043
+Signature verification may confirm source and integrity, but it does not
+make every field meaningful, authorized, current, or safe.
+
+3
+00:00:12.043 --> 00:00:24.618
+The handler should check content type, size limits, expected event type,
+required fields, optional fields, unknown fields, data types, identifiers,
+timestamps, and nested structure before the payload influences state.
+
+4
+00:00:24.618 --> 00:00:28.278
+JSON schema concepts can help make these expectations explicit.
+
+5
+00:00:28.278 --> 00:00:30.939
+Event-type allowlists are especially useful.
+
+6
+00:00:30.939 --> 00:00:39.057
+A single webhook endpoint may receive many possible events, but the
+application should process only the event types it intentionally supports.
+
+7
+00:00:39.057 --> 00:00:49.702
+Unknown or unsupported events should be logged at an appropriate level and
+acknowledged or rejected according to the integration design, without
+falling through into generic processing.
+
+8
+00:00:49.702 --> 00:00:57.154
+When event contracts change, schema validation and tests should make the
+change visible rather than quietly accepting new meaning.
+
+9
+00:00:57.154 --> 00:01:00.614
+Business logic safety requires authoritative local checks.
+
+10
+00:01:00.614 --> 00:01:11.526
+Do not trust client-controlled prices, roles, permissions, account status,
+approval decisions, tenant identifiers, or entitlement changes simply
+because they appear in a verified payload.
+
+11
+00:01:11.526 --> 00:01:17.448
+Use the event as a signal, then look up authoritative local or provider
+state when the action is important.
+
+12
+00:01:17.448 --> 00:01:25.166
+Confirm that the event maps to the expected tenant, organization, account,
+resource, and workflow state before changing local records.
+
+13
+00:01:25.166 --> 00:01:30.489
+Authorization-aware processing keeps provider identity separate from
+business authority.
+
+14
+00:01:30.489 --> 00:01:36.743
+A provider may be trusted to send an event, but the event still needs to
+be allowed for the specific local context.
+
+15
+00:01:36.743 --> 00:01:42.997
+For example, an event about one account should not affect another account
+because an identifier was ambiguous.
+
+16
+00:01:42.997 --> 00:01:50.582
+A subscription event should not grant access until the local system has
+confirmed the relationship, status, and expected transition.
+
+17
+00:01:50.582 --> 00:01:55.240
+Verified data still needs validation, authorization, and business-rule
+checks.

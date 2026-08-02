@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Browser Defenses and Security Headers",
+  "graphicAlt": "A per-response nonce appears in both the script-src CSP and intended script tag; object-src, base-uri, frame-ancestors, nosniff, referrer, cache, and permissions policies add browser layers.",
+  "narration": "Content Security Policy, or CSP, is best understood as defense in depth. It can restrict where scripts and other resources may load or execute from, and it can reduce the impact of certain unsafe rendering mistakes. Concepts such as script source restrictions, nonces, and hashes can support a stricter browser execution model. CSP is powerful, but it should support secure coding rather than replace it.\n\nAvoiding unsafe inline script patterns makes CSP and safe rendering easier to maintain. Applications that mix data, markup, and script behavior throughout templates are harder to protect and harder to review. A cleaner design separates static scripts from data, passes data through safe formats, and minimizes dynamic browser execution. The less the application depends on inline behavior, the easier it is to reason about browser safety.\n\nOther security headers and cookie attributes can reduce impact or support safer browser behavior. They may help with framing, MIME handling, transport expectations, or session exposure depending on the application. These controls are useful, but they are not substitutes for context-aware output handling, safe template defaults, careful content policies, and review of frontend code.\n\nCSP reporting and monitoring can provide useful signals, especially during rollout or after frontend changes. Reports should be handled carefully because they can be noisy and may include sensitive context. Teams should use reporting to learn where policy and application behavior diverge, not as proof that all rendering is safe. Browser defenses are strongest when paired with clean templates, safe APIs, and regression tests.",
+  "narrationPoints": [
+    "Concepts such as script source restrictions, nonces, and hashes can support a stricter browser execution model.",
+    "The less the application depends on inline behavior, the easier it is to reason about browser safety.",
+    "Other security headers and cookie attributes can reduce impact or support safer browser behavior.",
+    "CSP reporting and monitoring can provide useful signals, especially during rollout or after frontend changes.",
+    "Reports should be handled carefully because they can be noisy and may include sensitive context.",
+    "Applications that mix data, markup, and script behavior throughout templates are harder to protect and harder to review."
+  ]
+};

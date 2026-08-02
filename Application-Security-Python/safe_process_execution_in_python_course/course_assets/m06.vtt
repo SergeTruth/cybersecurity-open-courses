@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.825
+Child processes often inherit environment variables from the parent
+process unless the application deliberately controls that behavior.
+
+2
+00:00:07.825 --> 00:00:17.558
+This can expose credentials, tokens, connection strings, proxy settings,
+path variables, debug flags, cloud configuration, or feature flags to code
+that does not need them.
+
+3
+00:00:17.558 --> 00:00:24.923
+Even when the child process is trusted, minimizing inherited environment
+reduces blast radius and makes behavior easier to review.
+
+4
+00:00:24.923 --> 00:00:28.014
+A safer pattern is explicit environment construction.
+
+5
+00:00:28.014 --> 00:00:34.458
+The application decides which variables the child process needs for the
+approved task and passes only those values.
+
+6
+00:00:34.458 --> 00:00:43.401
+If a secret is required, the design should consider whether it can be
+provided through a safer mechanism than a broad inherited environment or a
+command argument.
+
+7
+00:00:43.401 --> 00:00:50.503
+Secrets should not appear in logs, user-facing errors, process listings,
+shell history, crash output, or monitoring records.
+
+8
+00:00:50.503 --> 00:00:53.265
+Arguments are not always a safe place for secrets.
+
+9
+00:00:53.265 --> 00:01:03.261
+Depending on the platform and tooling, command arguments may be visible in
+diagnostics, process inspection, crash reports, job metadata, audit logs,
+or operational dashboards.
+
+10
+00:01:03.261 --> 00:01:06.417
+Environment variables can have similar exposure risks.
+
+11
+00:01:06.417 --> 00:01:14.769
+The stable principle is to provide the least secret material necessary,
+through the narrowest appropriate channel, for the shortest practical
+time.
+
+12
+00:01:14.769 --> 00:01:17.399
+Path-related environment values also matter.
+
+13
+00:01:17.399 --> 00:01:27.329
+Variables that influence executable lookup, library loading, configuration
+discovery, proxy behavior, or temporary locations can change what a child
+process runs or reaches.
+
+14
+00:01:27.329 --> 00:01:31.669
+The application should avoid letting untrusted input shape those
+variables.
+
+15
+00:01:31.669 --> 00:01:39.560
+Safe process execution includes controlling the environment as part of the
+command contract, not treating it as invisible background state.

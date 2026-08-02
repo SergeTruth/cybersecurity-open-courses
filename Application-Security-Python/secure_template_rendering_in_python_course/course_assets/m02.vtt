@@ -1,0 +1,91 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.490
+A useful starting point is to separate trusted templates from untrusted
+data.
+
+2
+00:00:04.490 --> 00:00:09.661
+Templates written and reviewed by the application team are intended
+presentation logic.
+
+3
+00:00:09.661 --> 00:00:20.274
+Data may come from users, databases, uploaded files, third-party APIs,
+logs, diagnostics, administrative fields, translation files, markdown,
+rich text, or service integrations.
+
+4
+00:00:20.274 --> 00:00:26.125
+Some sources feel internal, but that does not automatically make them safe
+for every browser context.
+
+5
+00:00:26.125 --> 00:00:29.798
+Data often flows from request to storage to template to browser.
+
+6
+00:00:29.798 --> 00:00:39.459
+A user enters a profile description, a support team updates an
+administrative note, a partner API sends a display name, or a log entry is
+shown in an operations dashboard.
+
+7
+00:00:39.459 --> 00:00:51.297
+The original input path may validate length or format, but the later
+rendering path decides whether the value is safe in HTML, an attribute, a
+URL, a script-adjacent structure, an email, or a document export.
+
+8
+00:00:51.297 --> 00:00:56.943
+Stored content can become risky later when it is rendered in a new context
+or shown to a new audience.
+
+9
+00:00:56.943 --> 00:01:00.889
+A field created for plain text may later be reused inside a link title.
+
+10
+00:01:00.889 --> 00:01:03.474
+A markdown field may later appear in an email.
+
+11
+00:01:03.474 --> 00:01:06.944
+A diagnostic message may later be included in an admin table.
+
+12
+00:01:06.944 --> 00:01:14.155
+Secure rendering requires teams to track not only what data is accepted,
+but also where it will be displayed and who will see it.
+
+13
+00:01:14.155 --> 00:01:19.802
+Developers should document sensitive rendering paths the same way they
+document sensitive APIs.
+
+14
+00:01:19.802 --> 00:01:22.592
+Which templates display user-controlled data?
+
+15
+00:01:22.592 --> 00:01:25.041
+Which pages are viewed by administrators?
+
+16
+00:01:25.041 --> 00:01:27.082
+Which fields support rich content?
+
+17
+00:01:27.082 --> 00:01:28.782
+Which helpers return markup?
+
+18
+00:01:28.782 --> 00:01:31.232
+Which exports or emails reuse web content?
+
+19
+00:01:31.232 --> 00:01:40.280
+These questions make trust boundaries visible and help reviewers find
+places where data may have crossed from safe value into unsafe
+presentation behavior.

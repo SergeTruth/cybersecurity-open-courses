@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.796
+API clients often authenticate with API keys, bearer tokens, signed
+tokens, OAuth client credentials, service accounts, workload identity, or
+mutual TLS.
+
+2
+00:00:08.796 --> 00:00:12.168
+These mechanisms differ, but they all represent authority.
+
+3
+00:00:12.168 --> 00:00:21.559
+A client credential may allow data reads, administrative changes, billing
+activity, account creation, infrastructure changes, or access to regulated
+information.
+
+4
+00:00:21.559 --> 00:00:28.305
+Treating credentials as ordinary strings is a common root cause of
+exposure, overuse, and difficult incident response.
+
+5
+00:00:28.305 --> 00:00:31.347
+Credential protection starts with storage and scope.
+
+6
+00:00:31.347 --> 00:00:36.968
+Secrets should live in an approved secret store or platform identity
+mechanism whenever practical.
+
+7
+00:00:36.968 --> 00:00:48.144
+They should not be hardcoded, committed to repositories, pasted into
+notebooks, embedded in URLs, printed in traces, placed in support bundles,
+or casually inherited through process environments.
+
+8
+00:00:48.144 --> 00:00:57.601
+Rotation should be possible without code changes, and each credential
+should have a clear owner, purpose, environment, permission set, and
+expiration or review cycle.
+
+9
+00:00:57.601 --> 00:01:02.032
+Least privilege matters because API credentials are often used by
+automation.
+
+10
+00:01:02.032 --> 00:01:05.868
+A token for a reporting job should not be able to administer accounts.
+
+11
+00:01:05.868 --> 00:01:08.976
+A credential for staging should not work in production.
+
+12
+00:01:08.976 --> 00:01:13.341
+A client that needs one endpoint should not receive broad platform
+authority.
+
+13
+00:01:13.341 --> 00:01:24.054
+Scopes, roles, service-account permissions, audience restrictions, token
+lifetime, and network constraints can reduce blast radius when a
+credential is misused or accidentally exposed.
+
+14
+00:01:24.054 --> 00:01:29.279
+Authenticating to an API does not remove the need for local authorization
+or response checks.
+
+15
+00:01:29.279 --> 00:01:35.363
+A successful token exchange proves that the client presented acceptable
+credentials to the remote service.
+
+16
+00:01:35.363 --> 00:01:46.936
+It does not prove that the current user is allowed to trigger the
+operation, that the requested object belongs to the right tenant, that the
+response is safe to store, or that the workflow action is appropriate.
+
+17
+00:01:46.936 --> 00:01:48.920
+Local business rules still matter.

@@ -1,0 +1,75 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.392
+Transport protection matters because database traffic can include
+credentials, session setup, query text, result data, metadata, and
+operational signals.
+
+2
+00:00:08.392 --> 00:00:15.790
+Depending on architecture, that traffic may cross hosts, subnets, cloud
+network boundaries, proxies, or managed service infrastructure.
+
+3
+00:00:15.790 --> 00:00:24.618
+TLS can help protect confidentiality and integrity in transit, but only
+when it is configured to validate the endpoint rather than merely wrapping
+bytes in encryption.
+
+4
+00:00:24.618 --> 00:00:28.596
+Server certificate validation is the part many teams accidentally weaken.
+
+5
+00:00:28.596 --> 00:00:37.299
+The application should verify that the database endpoint presents a
+certificate chaining to a trusted authority and matching the expected
+identity for the service.
+
+6
+00:00:37.299 --> 00:00:50.603
+If the client accepts any certificate, disables hostname checks, or treats
+validation errors as development noise that follows the code into
+production, encryption may no longer prove that the application is talking
+to the intended database endpoint.
+
+7
+00:00:50.603 --> 00:00:55.452
+Certificate authority trust and hostname validation should be explicit
+enough for review.
+
+8
+00:00:55.452 --> 00:01:03.036
+Some deployments rely on public trust stores, some rely on private
+authorities, and some managed database services publish their own
+guidance.
+
+9
+00:01:03.036 --> 00:01:08.134
+The stable principle is that production clients should not silently trust
+arbitrary endpoints.
+
+10
+00:01:08.134 --> 00:01:16.464
+Client certificates can also be used in some designs to authenticate the
+application, but their private keys must be protected like other high-
+value secrets.
+
+11
+00:01:16.464 --> 00:01:20.629
+Development and production settings should not be casually
+interchangeable.
+
+12
+00:01:20.629 --> 00:01:30.451
+Local development may use test certificates, local containers, or
+temporary endpoints, but those exceptions should be visibly scoped and
+prevented from becoming production defaults.
+
+13
+00:01:30.451 --> 00:01:42.760
+Transport encryption is strongest when paired with endpoint identity
+validation, least-privilege database accounts, protected private keys, and
+monitoring that can identify clients using unsafe or unexpected connection
+modes.

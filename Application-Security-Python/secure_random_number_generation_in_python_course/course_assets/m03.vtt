@@ -1,0 +1,82 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.293
+Python provides different randomness interfaces for different purposes.
+
+2
+00:00:04.293 --> 00:00:11.603
+The general random module is useful for simulations, sampling, games,
+shuffling, non-security choices, and repeatable tests.
+
+3
+00:00:11.603 --> 00:00:17.305
+It is not intended for passwords, tokens, keys, reset links, session
+identifiers, or other secrets.
+
+4
+00:00:17.305 --> 00:00:24.548
+Using it in security-sensitive code creates risk because its design goals
+are not the same as cryptographic unpredictability.
+
+5
+00:00:24.548 --> 00:00:29.914
+The secrets module is a high-level interface intended for security-
+sensitive random values.
+
+6
+00:00:29.914 --> 00:00:36.353
+It helps developers generate tokens, choose from character sets, and work
+with randomness suitable for secrets.
+
+7
+00:00:36.353 --> 00:00:38.835
+System randomness concepts, including os.
+
+8
+00:00:38.835 --> 00:00:44.804
+urandom and SystemRandom at a high level, rely on operating system
+facilities designed for security use.
+
+9
+00:00:44.804 --> 00:00:52.652
+The exact implementation details can change, but the selection principle
+remains stable: choose the API based on the purpose of the value.
+
+10
+00:00:52.652 --> 00:00:56.810
+Security-sensitive generation should be centralized where practical.
+
+11
+00:00:56.810 --> 00:01:02.444
+If every route or utility function chooses its own randomness method,
+mistakes become hard to find.
+
+12
+00:01:02.444 --> 00:01:09.352
+A shared helper can express the approved pattern for reset tokens,
+invitation links, API keys, and internal identifiers.
+
+13
+00:01:09.352 --> 00:01:17.066
+Centralization also makes it easier to adjust length, encoding, storage,
+expiration, and logging behavior when requirements change.
+
+14
+00:01:17.066 --> 00:01:21.090
+Code review should treat randomness API choice as a security decision.
+
+15
+00:01:21.090 --> 00:01:28.535
+Reviewers should ask whether the value grants access, proves identity,
+protects cryptography, or controls a sensitive workflow.
+
+16
+00:01:28.535 --> 00:01:36.114
+If yes, non-security random APIs, predictable seeds, counters, timestamps,
+and custom string mixing should be treated as concerns.
+
+17
+00:01:36.114 --> 00:01:41.480
+Safe selection is not about memorizing every function; it is about
+matching the API to the risk.

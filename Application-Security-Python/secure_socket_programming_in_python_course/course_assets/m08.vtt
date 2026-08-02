@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.076
+Socket programs often handle concurrency through threads, processes,
+asynchronous runtimes, event loops, or a combination of patterns.
+
+2
+00:00:08.076 --> 00:00:15.399
+Concurrency creates questions about shared state, per-connection
+isolation, cleanup, cancellation, and race conditions.
+
+3
+00:00:15.399 --> 00:00:20.258
+A parser or connection handler should not let one peer corrupt state used
+by another.
+
+4
+00:00:20.258 --> 00:00:27.308
+Authentication state, authorization decisions, buffers, counters, and
+temporary data should be scoped deliberately.
+
+5
+00:00:27.308 --> 00:00:31.688
+Graceful error handling keeps the service understandable during failure.
+
+6
+00:00:31.688 --> 00:00:39.901
+A connection may close unexpectedly, a peer may send partial data, a TLS
+handshake may fail, a parser may reject a message, or a timeout may fire.
+
+7
+00:00:39.901 --> 00:00:47.292
+The application should close resources, preserve useful operational
+evidence, and avoid leaving shared state inconsistent.
+
+8
+00:00:47.292 --> 00:00:51.262
+Error paths deserve the same review as successful message handling.
+
+9
+00:00:51.262 --> 00:00:54.957
+Structured logging helps operations without leaking secrets.
+
+10
+00:00:54.957 --> 00:01:06.934
+Useful fields can include connection IDs, correlation IDs, service name,
+safe peer category, protocol version, message type, outcome, timeout
+status, authentication result, and resource-limit events.
+
+11
+00:01:06.934 --> 00:01:13.915
+Logs should avoid secrets, tokens, credentials, private keys, raw
+sensitive payloads, and excessive internal detail.
+
+12
+00:01:13.915 --> 00:01:18.090
+The goal is observability, not permanent storage of protocol contents.
+
+13
+00:01:18.090 --> 00:01:21.170
+Testing and monitoring complete the security story.
+
+14
+00:01:21.170 --> 00:01:30.546
+Tests should cover framing, malformed messages, partial reads, timeouts,
+connection failures, authorization, resource limits, and TLS validation
+behavior.
+
+15
+00:01:30.546 --> 00:01:39.580
+Monitoring should watch connection counts, error spikes, unusual peers,
+repeated failures, slow clients, resource exhaustion, and certificate
+issues.
+
+16
+00:01:39.580 --> 00:01:50.120
+If socket services expose data or unsafe behavior, incident response
+should include containment, credential rotation when needed, log review,
+remediation, and regression tests.

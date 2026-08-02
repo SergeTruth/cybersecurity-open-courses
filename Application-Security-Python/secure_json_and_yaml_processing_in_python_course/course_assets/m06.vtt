@@ -1,0 +1,64 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.606
+Mapping JSON or YAML into Python objects is convenient, but it can become
+risky when input fields are treated as trusted program state.
+
+2
+00:00:07.606 --> 00:00:15.348
+Mass assignment, also called over-posting in many contexts, happens when
+input can set fields the application did not intend to expose.
+
+3
+00:00:15.348 --> 00:00:20.262
+The issue is not the mapping library; it is the lack of an allowlist and a
+clear boundary.
+
+4
+00:00:20.262 --> 00:00:34.734
+User-controlled structured data should not be able to change internal
+state, permissions, feature flags, file paths, URLs, command options,
+runtime settings, or deployment behavior unless that is the explicit
+purpose and the value has been validated.
+
+5
+00:00:34.734 --> 00:00:41.062
+A safe design separates public input models from internal domain models
+and privileged configuration models.
+
+6
+00:00:41.062 --> 00:00:47.389
+Configuration injection at a high level means structured input influences
+configuration in unintended ways.
+
+7
+00:00:47.389 --> 00:00:55.669
+A field might change a destination URL, enable a feature, select a file
+path, alter logging behavior, modify permissions, or change how a job
+runs.
+
+8
+00:00:55.669 --> 00:00:58.159
+These values require more than type checks.
+
+9
+00:00:58.159 --> 00:01:04.150
+They need allowlisted keys, safe defaults, business validation, and
+authorization where appropriate.
+
+10
+00:01:04.150 --> 00:01:08.660
+Applications should not blindly turn structured input into trusted
+behavior.
+
+11
+00:01:08.660 --> 00:01:16.065
+Prefer narrow constructors, explicit field mapping, immutable defaults
+where useful, and reviewable configuration surfaces.
+
+12
+00:01:16.065 --> 00:01:25.960
+When a new key is added, the team should understand who can set it, what
+it controls, how it is validated, how it is logged, and what happens if it
+is missing or maliciously shaped.

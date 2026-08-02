@@ -1,0 +1,83 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.276
+Socket programs need a clear trust model.
+
+2
+00:00:02.276 --> 00:00:09.430
+A client and server may run on the same host, across a private network,
+across the public internet, or through proxies and gateways.
+
+3
+00:00:09.430 --> 00:00:15.414
+A peer may be an internal service, an external partner, an unmanaged
+device, or a process controlled by a user.
+
+4
+00:00:15.414 --> 00:00:20.487
+Network location can influence risk, but it should not be treated as proof
+of trust by itself.
+
+5
+00:00:20.487 --> 00:00:23.804
+The data arriving on a socket is bytes from another endpoint.
+
+6
+00:00:23.804 --> 00:00:27.250
+Those bytes are not automatically a trusted protocol message.
+
+7
+00:00:27.250 --> 00:00:38.502
+The application has to decide how to interpret them, which state the
+connection is in, whether the peer is authenticated, whether the requested
+operation is authorized, and how to handle unexpected input.
+
+8
+00:00:38.502 --> 00:00:45.591
+A useful protocol treats incoming bytes as untrusted until they are
+framed, parsed, validated, and matched to an allowed action.
+
+9
+00:00:45.591 --> 00:00:47.607
+Protocol design should be explicit.
+
+10
+00:00:47.607 --> 00:00:57.948
+A socket service should define message boundaries, versioning
+expectations, authentication steps, command names or message types,
+allowed states, error behavior, and close behavior.
+
+11
+00:00:57.948 --> 00:01:05.817
+Informal assumptions such as the client always sends this first or the
+internal peer never sends malformed data tend to break as systems evolve.
+
+12
+00:01:05.817 --> 00:01:09.850
+A protocol state machine, even a simple one, makes expectations visible.
+
+13
+00:01:09.850 --> 00:01:14.337
+Authentication and authorization are separate from connection
+establishment.
+
+14
+00:01:14.337 --> 00:01:18.565
+A connected peer is not automatically allowed to perform sensitive
+actions.
+
+15
+00:01:18.565 --> 00:01:28.840
+After the connection is established, the application still needs to
+identify the peer at an appropriate level and enforce permissions per
+command, message, tenant, device, or resource.
+
+16
+00:01:28.840 --> 00:01:31.767
+Internal services should follow the same principle.
+
+17
+00:01:31.767 --> 00:01:36.840
+A private network can reduce exposure, but it does not replace application
+trust decisions.

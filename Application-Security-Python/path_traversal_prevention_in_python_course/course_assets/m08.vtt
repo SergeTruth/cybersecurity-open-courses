@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.940
+Path traversal prevention should be tested at the level of the design.
+
+2
+00:00:03.940 --> 00:00:12.821
+Unit tests can cover path construction, identifier validation, base-
+directory containment, missing files, invalid names, and storage adapter
+behavior.
+
+3
+00:00:12.821 --> 00:00:22.236
+Integration tests can exercise upload and download endpoints, object-level
+authorization, tenant boundaries, generated reports, and background file
+workflows.
+
+4
+00:00:22.236 --> 00:00:30.716
+Negative tests should confirm that unsafe path-shaped inputs are rejected
+or treated as ordinary data without demonstrating offensive techniques.
+
+5
+00:00:30.716 --> 00:00:34.656
+Code review should follow file-related data from entry to operation.
+
+6
+00:00:34.656 --> 00:00:40.666
+Reviewers should ask where the filename, ID, archive entry, storage key,
+or temporary location came from.
+
+7
+00:00:40.666 --> 00:00:55.823
+They should check whether the application controls the base directory,
+whether containment is enforced, whether authorization happens before
+access, whether framework helpers are used correctly, and whether errors
+avoid leaking sensitive paths or file contents.
+
+8
+00:00:55.823 --> 00:00:59.229
+Review should include jobs and scripts, not only web routes.
+
+9
+00:00:59.229 --> 00:01:03.903
+Logging and monitoring should support investigation without creating new
+leaks.
+
+10
+00:01:03.903 --> 00:01:11.849
+Logs may record safe event names, file IDs, storage areas, tenant context,
+authorization outcomes, error categories, and correlation IDs.
+
+11
+00:01:11.849 --> 00:01:19.061
+They should avoid secrets, tokens, credentials, private file contents,
+full sensitive paths, and unnecessary customer data.
+
+12
+00:01:19.061 --> 00:01:28.476
+Monitoring can watch for unusual file access errors, repeated denied
+downloads, unexpected archive failures, or access attempts outside normal
+workflow patterns.
+
+13
+00:01:28.476 --> 00:01:31.548
+If files are exposed, remediation should be concrete.
+
+14
+00:01:31.548 --> 00:01:36.222
+Identify which files, users, tenants, logs, and storage locations were
+affected.
+
+15
+00:01:36.222 --> 00:01:38.826
+Revoke or rotate exposed secrets when needed.
+
+16
+00:01:38.826 --> 00:01:42.298
+Disable unsafe routes or workflows while fixes are prepared.
+
+17
+00:01:42.298 --> 00:01:49.310
+Redesign storage references, add containment checks, strengthen
+authorization, clean up logs, and add regression tests.
+
+18
+00:01:49.310 --> 00:01:55.720
+Prevention must be maintained as file workflows, frameworks, storage
+services, and deployment layouts evolve.

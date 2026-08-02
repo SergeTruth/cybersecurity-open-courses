@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "Summary diagram for Course Summary and Key Takeaways, showing Python response pipeline, reverse proxy, browser, document, iframe, cache, and cookie jar; labeled arrows identify where browser security policies are enforced and the point where unsafe input or behavior is rejected.",
+  "narration": "HTTP security headers in Python help guide browser behavior and reduce exposure when combined with secure application design. They can support transport safety, content execution constraints, framing control, MIME clarity, referrer privacy, browser permission limits, cookie protection, and cache safety. They are most valuable when the final browser-visible response policy is intentional across application code and infrastructure.\n\nStrong header programs define ownership, apply consistent defaults, and document exceptions. They protect HTTPS assumptions with careful transport policy. They use CSP to support safer frontend execution. They resist unsafe framing where embedding is not expected. They reduce content-type confusion, limit unnecessary referrer detail, narrow browser feature access, protect session cookies, and prevent sensitive responses from being cached in unintended places.\n\nHeaders are not magic shields. They must be tested, monitored, documented, and aligned with the application's architecture. A policy that conflicts with real behavior will be weakened. A policy nobody owns will drift. A header added only in one environment may create false confidence. A secure Python delivery path makes header behavior reviewable from development through staging and production.\n\nThe goal is repeatable, maintainable browser-side defense in depth across Python applications and deployment environments. When teams inventory responses, choose safe defaults, coordinate application and proxy ownership, roll out changes carefully, monitor reports, and revisit policies as applications change, headers become a practical part of secure engineering rather than decorative configuration.",
+  "narrationPoints": [
+    "HTTP security headers in Python help guide browser behavior and reduce exposure when combined with secure application design.",
+    "Strong header programs define ownership, apply consistent defaults, and document exceptions.",
+    "A header added only in one environment may create false confidence.",
+    "A secure Python delivery path makes header behavior reviewable from development through staging and production.",
+    "Headers are not magic shields.",
+    "A policy nobody owns will drift."
+  ]
+};

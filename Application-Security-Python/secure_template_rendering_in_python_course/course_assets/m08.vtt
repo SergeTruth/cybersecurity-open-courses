@@ -1,0 +1,72 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.867
+Template review should follow untrusted data into output contexts.
+
+2
+00:00:03.867 --> 00:00:16.402
+Reviewers can ask which templates render user-controlled fields, which
+helpers return markup, which filters affect escaping, and which pages
+display logs, translated text, rich content, emails, reports, or admin
+data.
+
+3
+00:00:16.402 --> 00:00:27.537
+Searching for disabled escaping, unsafe filters, raw HTML insertion,
+untrusted template strings, risky helpers, and unclear rich-content
+handling can reveal the most important review targets.
+
+4
+00:00:27.537 --> 00:00:35.405
+Tests should verify that known risky fields and reusable components
+continue to escape, sanitize, or reject untrusted content correctly.
+
+5
+00:00:35.405 --> 00:00:42.406
+Regression tests are valuable for stored content because a value saved
+months ago can become unsafe when a template changes.
+
+6
+00:00:42.406 --> 00:00:49.607
+Teams should test emails, error pages, admin pages, reports, and reusable
+components, not only the main customer-facing page.
+
+7
+00:00:49.607 --> 00:00:52.274
+Rendering safety belongs to every output path.
+
+8
+00:00:52.274 --> 00:00:56.274
+Logging should support investigation without creating new exposure.
+
+9
+00:00:56.274 --> 00:01:02.608
+Logs should avoid secrets, credentials, tokens, session values, and
+unnecessary sensitive rendered content.
+
+10
+00:01:02.608 --> 00:01:09.742
+Monitoring client-side errors and suspicious rendering failures can help
+identify broken templates or unexpected content.
+
+11
+00:01:09.742 --> 00:01:16.543
+At the same time, reports and logs may contain user-controlled fields, so
+operational tools must render them safely too.
+
+12
+00:01:16.543 --> 00:01:19.677
+Remediation should fix the underlying rendering path.
+
+13
+00:01:19.677 --> 00:01:35.479
+That may mean restoring autoescaping, replacing raw insertion, narrowing
+helper behavior, sanitizing rich content with a reviewed policy, re-
+sanitizing stored content, reducing response fields, updating tests, or
+reviewing related templates that share the same component.
+
+14
+00:01:35.479 --> 00:01:41.480
+Template security requires continuous review as features, content types,
+and frontend behavior evolve.

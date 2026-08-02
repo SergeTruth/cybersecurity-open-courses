@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.808
+Cryptographic keys are secret values that require strong randomness.
+
+2
+00:00:03.808 --> 00:00:09.901
+A key should not be derived from timestamps, usernames, predictable
+strings, or ordinary test random functions.
+
+3
+00:00:09.901 --> 00:00:13.138
+If a key is weak or exposed, the algorithm name may not matter.
+
+4
+00:00:13.138 --> 00:00:22.976
+Secure key generation should normally be handled by vetted cryptographic
+libraries, key management systems, or platform services that understand
+the requirements of the protocol.
+
+5
+00:00:22.976 --> 00:00:24.626
+Salts are different from keys.
+
+6
+00:00:24.626 --> 00:00:32.243
+In password hashing, a salt helps ensure that the same password does not
+produce the same stored verifier across accounts when used correctly.
+
+7
+00:00:32.243 --> 00:00:38.272
+Salts normally require uniqueness rather than secrecy, and they are
+usually stored with the password verifier.
+
+8
+00:00:38.272 --> 00:00:45.000
+A salt should not be treated as the main application secret, and a salt
+does not replace password hashing cost or rate limiting.
+
+9
+00:00:45.000 --> 00:00:48.681
+Nonces and initialization values depend on protocol requirements.
+
+10
+00:00:48.681 --> 00:00:50.141
+Some values must be unique.
+
+11
+00:00:50.141 --> 00:00:51.665
+Some must be unpredictable.
+
+12
+00:00:51.665 --> 00:00:53.823
+Some must never repeat with the same key.
+
+13
+00:00:53.823 --> 00:00:57.885
+Misunderstanding this distinction can break cryptographic assumptions.
+
+14
+00:00:57.885 --> 00:01:01.693
+Reuse can be dangerous in some contexts, even if the value is not secret.
+
+15
+00:01:01.693 --> 00:01:07.151
+This is why routine application development should avoid assembling
+cryptographic modes manually.
+
+16
+00:01:07.151 --> 00:01:12.927
+Developers should rely on high-level cryptographic APIs that manage
+randomness requirements correctly.
+
+17
+00:01:12.927 --> 00:01:22.257
+If a library asks the application to supply a nonce, key, or
+initialization value, developers should understand exactly what property
+is required and how reuse is prevented.
+
+18
+00:01:22.257 --> 00:01:26.954
+Custom cryptographic construction is not appropriate for ordinary
+application work.
+
+19
+00:01:26.954 --> 00:01:32.920
+The safer pattern is to choose libraries that reduce the number of
+dangerous choices the application must make.

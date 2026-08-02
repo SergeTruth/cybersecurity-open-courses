@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Framing, Embedding, and Clickjacking Resistance",
+  "graphicAlt": "Decision diagram for Framing, Embedding, and Clickjacking Resistance, showing Python response pipeline, reverse proxy, browser, document, iframe, cache, and cookie jar; labeled arrows identify where browser security policies are enforced and the point where unsafe input or behavior is rejected.",
+  "narration": "Clickjacking at a high level is a user-interface redress risk where a user may be tricked into interacting with an application in an unintended embedding context. Framing controls help the browser decide where a page may be embedded. Modern policies often use CSP frame-ancestors concepts, while legacy frame-control headers may still appear in older compatibility designs. The durable lesson is to make embedding policy explicit.\n\nNot every page should have the same framing rule. Many applications should prevent framing entirely. Some dashboards, partner portals, reporting surfaces, or embedded widgets may need controlled embedding by expected sites. Internal tools may need even stricter treatment because their users often have powerful sessions. The right policy depends on business needs, user workflows, and which pages perform sensitive actions.\n\nFraming controls should be tested across expected embedding scenarios. A policy that blocks a legitimate partner integration may be removed under pressure. A policy that allows broad embedding may fail to protect sensitive interfaces. Teams should document where embedding is expected, which origins are allowed, which pages should never be framed, and how exceptions are approved. This keeps security policy aligned with product behavior.\n\nFraming headers are not a complete access-control model. They do not replace authentication, authorization, CSRF protection, or confirmation steps for high-risk actions. They reduce a browser-side risk by controlling presentation context. A secure design combines framing policy with server-side permission checks, safe session behavior, clear UI flows, and monitoring for unusual administrative or sensitive activity.",
+  "narrationPoints": [
+    "Framing controls help the browser decide where a page may be embedded.",
+    "Not every page should have the same framing rule.",
+    "Internal tools may need even stricter treatment because their users often have powerful sessions.",
+    "A policy that blocks a legitimate partner integration may be removed under pressure.",
+    "Teams should document where embedding is expected, which origins are allowed, which pages should never be framed, and how exceptions are approved.",
+    "Many applications should prevent framing entirely."
+  ]
+};

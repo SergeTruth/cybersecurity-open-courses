@@ -1,0 +1,91 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.296
+Replay risk exists when a previously valid event is reused outside its
+intended time or context.
+
+2
+00:00:05.296 --> 00:00:10.396
+A signature may still match an old payload, especially if the signing
+secret has not changed.
+
+3
+00:00:10.396 --> 00:00:20.856
+Freshness controls such as timestamps, bounded acceptance windows, event
+identifiers, request identifiers, or nonce concepts help the consumer
+decide whether an event is plausible now.
+
+4
+00:00:20.856 --> 00:00:25.760
+These controls reduce the chance that old events can be accepted as new
+business signals.
+
+5
+00:00:25.760 --> 00:00:28.702
+Freshness and idempotency are related but separate.
+
+6
+00:00:28.702 --> 00:00:33.213
+Freshness asks whether an event should still be accepted based on time or
+context.
+
+7
+00:00:33.213 --> 00:00:41.125
+Idempotency asks whether processing the same intended event more than once
+creates the same outcome without unwanted duplicate side effects.
+
+8
+00:00:41.125 --> 00:00:46.617
+A handler can reject stale events and still need idempotency for
+legitimate duplicate deliveries.
+
+9
+00:00:46.617 --> 00:00:51.782
+Conversely, deduplication alone does not prove that a very old event
+should still be honored.
+
+10
+00:00:51.782 --> 00:00:54.528
+Duplicate delivery is normal in webhook systems.
+
+11
+00:00:54.528 --> 00:01:04.269
+Providers often retry when they do not receive a timely success response,
+and networks can fail after the provider has sent the event but before it
+receives the acknowledgement.
+
+12
+00:01:04.269 --> 00:01:07.473
+Exactly-once delivery is rarely a practical assumption.
+
+13
+00:01:07.473 --> 00:01:22.118
+Python handlers should use event identifiers, idempotency keys,
+deduplication records, state checks, or transaction-aware processing to
+avoid duplicate charges, repeated approvals, duplicate tickets, repeated
+messages, or conflicting state transitions.
+
+14
+00:01:22.118 --> 00:01:24.080
+Timeout ambiguity is the hard case.
+
+15
+00:01:24.080 --> 00:01:30.618
+If a worker times out while processing an event, the application may not
+know whether the downstream action completed.
+
+16
+00:01:30.618 --> 00:01:35.587
+A secure design defines reconciliation behavior, durable records, and safe
+retry rules.
+
+17
+00:01:35.587 --> 00:01:40.686
+Handlers should be able to resume or ignore work based on recorded state
+rather than guesses.
+
+18
+00:01:40.686 --> 00:01:46.440
+The goal is to make repeated delivery safe while still ensuring legitimate
+events are not silently lost.

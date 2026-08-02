@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply File Paths, Working Directories, and Temporary Files with reviewable Python controls.",
+  "codeExamples": [
+    {
+      "title": "Inspect a document with bounded child output",
+      "language": "python",
+      "blurb": "The child receives bounded input, and its standard output is streamed under a hard byte ceiling with cleanup on every exceptional path.",
+      "code": "import subprocess\nfrom tempfile import TemporaryFile\nfrom threading import Thread\n\ndef inspect_document(content: bytes, maximum_output: int = 1_000_000) -> bytes:\n    if len(content) > 5_000_000:\n        raise ValueError(\"document exceeds inspection limit\")\n    with TemporaryFile() as input_file:\n        input_file.write(content)\n        input_file.seek(0)\n        process = subprocess.Popen(\n            [\"/usr/local/bin/document-inspector\", \"--input\", \"-\", \"--output\", \"json\"],\n            stdin=input_file,\n            stdout=subprocess.PIPE,\n            stderr=subprocess.DEVNULL,\n        )\n        output = bytearray()\n        reader_error: list[Exception] = []\n\n        def read_output() -> None:\n            assert process.stdout is not None\n            while chunk := process.stdout.read(64 * 1024):\n                if len(output) + len(chunk) > maximum_output:\n                    reader_error.append(ValueError(\"inspector output exceeded its limit\"))\n                    process.kill()\n                    return\n                output.extend(chunk)\n\n        reader = Thread(target=read_output, daemon=True)\n        reader.start()\n        try:\n            return_code = process.wait(timeout=15)\n            reader.join(timeout=2)\n            if reader.is_alive():\n                raise RuntimeError(\"inspector output reader did not finish\")\n            if reader_error:\n                raise reader_error[0]\n            if return_code != 0:\n                raise RuntimeError(\"document inspection failed\")\n            return bytes(output)\n        finally:\n            if process.poll() is None:\n                process.kill()\n            process.wait()\n            reader.join(timeout=2)\n"
+    },
+    {
+      "title": "Create and confine a quiet child workspace",
+      "language": "python",
+      "blurb": "The converter receives bounded input, emits no captured diagnostic stream, and the parent bounds the generated output file before reading it.",
+      "code": "from pathlib import Path\nfrom tempfile import TemporaryDirectory\nimport subprocess\n\ndef convert_thumbnail(image: bytes, maximum_output: int = 2_000_000) -> bytes:\n    if len(image) > 10_000_000:\n        raise ValueError(\"image input is too large\")\n    with TemporaryDirectory(prefix=\"thumbnail-\") as directory:\n        workspace = Path(directory)\n        (workspace / \"input.png\").write_bytes(image)\n        subprocess.run(\n            [\"/usr/bin/convert\", \"input.png\", \"-resize\", \"256x256>\", \"output.png\"],\n            cwd=workspace,\n            env={\"PATH\": \"/usr/bin:/bin\"},\n            stdout=subprocess.DEVNULL,\n            stderr=subprocess.DEVNULL,\n            timeout=20,\n            check=True,\n        )\n        output = workspace / \"output.png\"\n        if not output.is_file() or output.stat().st_size > maximum_output:\n            raise ValueError(\"thumbnail output rejected\")\n        data = output.read_bytes()\n        if len(data) > maximum_output:\n            raise ValueError(\"thumbnail grew beyond its limit\")\n        return data\n"
+    }
+  ]
+};

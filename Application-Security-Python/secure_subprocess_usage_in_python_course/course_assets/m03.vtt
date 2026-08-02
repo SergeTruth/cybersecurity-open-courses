@@ -1,0 +1,70 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.957
+Shell interpretation is one of the most important subprocess boundaries.
+
+2
+00:00:03.957 --> 00:00:11.243
+A shell treats text as instructions with features such as parsing,
+expansion, redirection, chaining, variables, and pattern matching.
+
+3
+00:00:11.243 --> 00:00:18.277
+Those features are useful for interactive administration, but they are
+risky when application data can influence the command text.
+
+4
+00:00:18.277 --> 00:00:25.061
+The safer default is direct execution with the shell disabled, especially
+when any value may come from a user or external system.
+
+5
+00:00:25.061 --> 00:00:28.452
+Direct execution separates the executable from its arguments.
+
+6
+00:00:28.452 --> 00:00:35.738
+The application chooses a program from trusted configuration or an
+approved allowlist, then passes each argument as a structured value.
+
+7
+00:00:35.738 --> 00:00:39.569
+This makes it much harder for ordinary data to become command structure.
+
+8
+00:00:39.569 --> 00:00:46.227
+It also makes code review more straightforward because reviewers can see
+which parts are the command and which parts are data.
+
+9
+00:00:46.227 --> 00:00:53.576
+String-built command lines are fragile because they mix command syntax,
+options, file paths, and untrusted values into one piece of text.
+
+10
+00:00:53.576 --> 00:01:00.108
+Escaping and quoting rules vary across shells and platforms, and the
+safest answer is usually to avoid needing those rules.
+
+11
+00:01:00.108 --> 00:01:11.727
+When developers reach for shell conveniences such as pipelines, globbing,
+variable expansion, or redirection, they should ask whether Python APIs or
+explicit process handling can provide the same result more safely.
+
+12
+00:01:11.727 --> 00:01:19.076
+There are cases where shell features are genuinely required, but they
+should be treated as exceptions that need justification and review.
+
+13
+00:01:19.076 --> 00:01:27.995
+The operation should be narrow, inputs should be mapped to approved
+choices, secrets should not be placed into command text, and the runtime
+should use least privilege.
+
+14
+00:01:27.995 --> 00:01:35.720
+Avoiding shell interpretation does not solve every subprocess risk, but it
+removes a large class of unintended parsing behavior from the design.
