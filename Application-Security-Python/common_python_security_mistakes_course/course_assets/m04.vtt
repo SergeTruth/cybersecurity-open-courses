@@ -1,73 +1,89 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:05.225
-Authentication and authorization are related, but they are not the same control.
+00:00:00.000 --> 00:00:04.403
+Authentication and authorization are related, but they are not the same
+control.
 
 2
-00:00:05.225 --> 00:00:08.860
+00:00:04.403 --> 00:00:07.465
 Authentication verifies who or what is making a request.
 
 3
-00:00:08.860 --> 00:00:16.735
-Authorization decides whether that authenticated subject is allowed to perform a specific action on a specific resource.
+00:00:07.465 --> 00:00:14.101
+Authorization decides whether that authenticated subject is allowed to
+perform a specific action on a specific resource.
 
 4
-00:00:16.735 --> 00:00:21.657
-A common mistake is treating a logged-in session as permission to do too much.
+00:00:14.101 --> 00:00:18.248
+A common mistake is treating a logged-in session as permission to do too
+much.
 
 5
-00:00:21.657 --> 00:00:30.289
-Another is checking for a broad administrator flag when the real decision should be narrower and tied to the operation being requested.
+00:00:18.248 --> 00:00:25.522
+Another is checking for a broad administrator flag when the real decision
+should be narrower and tied to the operation being requested.
 
 6
-00:00:30.289 --> 00:00:33.848
+00:00:25.522 --> 00:00:28.521
 Object-level authorization is especially important.
 
 7
-00:00:33.848 --> 00:00:46.115
-A Python API may check that a user is authenticated before loading a record, file, project, tenant, or report, but still fail to verify that this user is allowed to access that particular object.
+00:00:28.521 --> 00:00:38.857
+A Python API may check that a user is authenticated before loading a
+record, file, project, tenant, or report, but still fail to verify that
+this user is allowed to access that particular object.
 
 8
-00:00:46.115 --> 00:00:48.917
+00:00:38.857 --> 00:00:41.218
 Tenant boundaries need the same attention.
 
 9
-00:00:48.917 --> 00:00:59.215
-A user from one organization should not be able to reach another organization's data simply because an identifier, route, or background job path accepts a value.
+00:00:41.218 --> 00:00:49.896
+A user from one organization should not be able to reach another
+organization's data simply because an identifier, route, or background job
+path accepts a value.
 
 10
-00:00:59.215 --> 00:01:06.636
-Client-side checks, hidden buttons, and hidden routes are usability features, not sufficient security controls.
+00:00:49.896 --> 00:00:56.149
+Client-side checks, hidden buttons, and hidden routes are usability
+features, not sufficient security controls.
 
 11
-00:01:06.636 --> 00:01:11.936
-Clients can be modified, requests can be replayed, and APIs can be called directly.
+00:00:56.149 --> 00:01:00.615
+Clients can be modified, requests can be replayed, and APIs can be called
+directly.
 
 12
-00:01:11.936 --> 00:01:16.631
+00:01:00.615 --> 00:01:04.571
 Sensitive checks should be enforced server-side and close to the action.
 
 13
-00:01:16.631 --> 00:01:27.611
-Export operations, bulk updates, administrative tools, background jobs, and support workflows need authorization review just as much as ordinary user interface paths.
+00:01:04.571 --> 00:01:13.823
+Export operations, bulk updates, administrative tools, background jobs,
+and support workflows need authorization review just as much as ordinary
+user interface paths.
 
 14
-00:01:27.611 --> 00:01:30.716
+00:01:13.823 --> 00:01:16.439
 Session behavior also creates subtle mistakes.
 
 15
-00:01:30.716 --> 00:01:41.392
-Unsafe assumptions about session lifetime, account recovery, role changes, token handling, logout, and device trust can undermine otherwise sound access control.
+00:01:16.439 --> 00:01:25.435
+Unsafe assumptions about session lifetime, account recovery, role changes,
+token handling, logout, and device trust can undermine otherwise sound
+access control.
 
 16
-00:01:41.392 --> 00:01:46.087
+00:01:25.435 --> 00:01:29.391
 Tokens and session identifiers should be handled as sensitive material.
 
 17
-00:01:46.087 --> 00:01:52.827
-When privileges change, the application should have a clear story for what happens to existing sessions.
+00:01:29.391 --> 00:01:35.070
+When privileges change, the application should have a clear story for what
+happens to existing sessions.
 
 18
-00:01:52.827 --> 00:02:01.383
-Every sensitive action should verify whether the current caller is allowed to perform that specific operation at that specific time.
+00:01:35.070 --> 00:01:42.280
+Every sensitive action should verify whether the current caller is allowed
+to perform that specific operation at that specific time.

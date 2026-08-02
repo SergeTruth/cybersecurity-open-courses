@@ -1,43 +1,70 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.541
-Python applications often sit behind frameworks such as Flask, Django, and FastAPI.
+1
+00:00:00.000 --> 00:00:04.893
+Python applications often sit behind frameworks such as Flask, Django, and
+FastAPI.
 
-00:00:05.541 --> 00:00:12.723
-Those frameworks receive request bodies, query strings, path parameters, headers, cookies, form fields, and uploaded files.
+2
+00:00:04.893 --> 00:00:12.233
+Those frameworks receive request bodies, query strings, path parameters,
+headers, cookies, form fields, and uploaded files.
 
-00:00:12.723 --> 00:00:18.263
+3
+00:00:12.233 --> 00:00:15.902
 Each of those values can be controlled or influenced by a client.
 
-00:00:18.263 --> 00:00:27.087
-The application should validate what the server receives, not what the browser or API documentation suggested a client should send.
+4
+00:00:15.902 --> 00:00:23.514
+The application should validate what the server receives, not what the
+browser or API documentation suggested a client should send.
 
-00:00:27.087 --> 00:00:36.322
-JSON payloads are common in Python APIs, but JSON parsing only tells the application that the payload is syntactically valid JSON.
+5
+00:00:23.514 --> 00:00:30.989
+JSON payloads are common in Python APIs, but JSON parsing only tells the
+application that the payload is syntactically valid JSON.
 
-00:00:36.322 --> 00:00:48.429
-It does not prove that required fields exist, that values have safe lengths, that nested objects match expectations, or that the data is authorized for the current user.
+6
+00:00:30.989 --> 00:00:40.640
+It does not prove that required fields exist, that values have safe
+lengths, that nested objects match expectations, or that the data is
+authorized for the current user.
 
-00:00:48.429 --> 00:00:52.328
+7
+00:00:40.640 --> 00:00:43.290
 Query strings and headers have the same issue.
 
-00:00:52.328 --> 00:00:56.637
+8
+00:00:43.290 --> 00:00:47.164
 They may parse correctly while still violating application rules.
 
-00:00:56.637 --> 00:01:00.536
+9
+00:00:47.164 --> 00:00:50.630
 Python programs also process input outside web frameworks.
 
-00:01:00.536 --> 00:01:10.591
-Command-line arguments, environment variables, configuration files, YAML, XML, CSV, database records, message queues, and scheduled job payloads all carry data across trust boundaries.
+10
+00:00:50.630 --> 00:01:01.639
+Command-line arguments, environment variables, configuration files, YAML,
+XML, CSV, database records, message queues, and scheduled job payloads all
+carry data across trust boundaries.
 
-00:01:10.591 --> 00:01:23.519
-A batch job or internal admin script may feel safer than a public endpoint, but it can still process malformed imports, stale records, or data from a compromised upstream system.
+11
+00:01:01.639 --> 00:01:11.765
+A batch job or internal admin script may feel safer than a public
+endpoint, but it can still process malformed imports, stale records, or
+data from a compromised upstream system.
 
-00:01:23.519 --> 00:01:27.829
+12
+00:01:11.765 --> 00:01:15.910
 A practical validation strategy begins by inventorying input sources.
 
-00:01:27.829 --> 00:01:41.578
-For each source, ask who controls the data, how it is encoded, how it is parsed, what structure is expected, what business rule applies, and where the value will be used next.
+13
+00:01:15.910 --> 00:01:25.697
+For each source, ask who controls the data, how it is encoded, how it is
+parsed, what structure is expected, what business rule applies, and where
+the value will be used next.
 
-00:01:41.578 --> 00:01:49.991
-That map helps the team place validation close to the boundary and avoid treating internal plumbing as automatically trustworthy.
+14
+00:01:25.697 --> 00:01:33.240
+That map helps the team place validation close to the boundary and avoid
+treating internal plumbing as automatically trustworthy.
