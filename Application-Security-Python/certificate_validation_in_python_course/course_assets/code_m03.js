@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Reject certificates outside their validity window",
       "language": "python",
-      "blurb": "The check parses the peer certificate dates and rejects certificates that are not currently valid.",
-      "code": "import ssl\nfrom datetime import datetime, timezone\n\ndef require_current_certificate(peer_certificate: dict, now: datetime) -> None:\n    not_before = datetime.fromtimestamp(\n        ssl.cert_time_to_seconds(peer_certificate[\"notBefore\"]), timezone.utc\n    )\n    not_after = datetime.fromtimestamp(\n        ssl.cert_time_to_seconds(peer_certificate[\"notAfter\"]), timezone.utc\n    )\n    if not not_before <= now <= not_after:\n        raise ssl.SSLCertVerificationError(\"certificate is not currently valid\")\n"
+      "blurb": "The check parses the peer certificate dates and compares them with the application host's current UTC time rather than a caller-selected instant.",
+      "code": "import ssl\nfrom datetime import datetime, timezone\n\ndef require_current_certificate(peer_certificate: dict) -> None:\n    now = datetime.now(timezone.utc)\n    not_before = datetime.fromtimestamp(\n        ssl.cert_time_to_seconds(peer_certificate[\"notBefore\"]), timezone.utc\n    )\n    not_after = datetime.fromtimestamp(\n        ssl.cert_time_to_seconds(peer_certificate[\"notAfter\"]), timezone.utc\n    )\n    if not not_before <= now <= not_after:\n        raise ssl.SSLCertVerificationError(\"certificate is not currently valid\")\n"
     },
     {
       "title": "Constrain certificate purposes",

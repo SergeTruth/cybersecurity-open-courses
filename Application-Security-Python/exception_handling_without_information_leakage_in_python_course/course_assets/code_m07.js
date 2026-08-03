@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Map downstream timeouts without echoing details",
       "language": "python",
-      "blurb": "A third-party timeout becomes a bounded service error and an internal metric instead of a raw upstream response.",
-      "code": "import requests\n\nclass DependencyUnavailable(Exception):\n    pass\n\ndef fetch_risk_score(session: requests.Session, customer_id: str, metrics):\n    try:\n        response = session.get(\n            \"https://risk.example/v1/scores\", params={\"customer\": customer_id}, timeout=(2, 4)\n        )\n        response.raise_for_status()\n        return response.json()\n    except (requests.Timeout, requests.ConnectionError):\n        metrics.increment(\"risk_dependency_unavailable\")\n        raise DependencyUnavailable(\"risk service unavailable\") from None\n"
+      "blurb": "Transport, HTTP, and parse failures become bounded service errors and internal metrics instead of raw upstream details.",
+      "code": "import requests\n\nclass DependencyUnavailable(Exception):\n    pass\n\ndef fetch_risk_score(session: requests.Session, customer_id: str, metrics):\n    try:\n        response = session.get(\n            \"https://risk.example/v1/scores\", params={\"customer\": customer_id}, timeout=(2, 4)\n        )\n        response.raise_for_status()\n    except requests.RequestException:\n        metrics.increment(\"risk_dependency_unavailable\")\n        raise DependencyUnavailable(\"risk service unavailable\") from None\n\n    try:\n        return response.json()\n    except ValueError:\n        metrics.increment(\"risk_dependency_invalid_response\")\n        raise DependencyUnavailable(\"risk service unavailable\") from None\n"
     },
     {
       "title": "Record a failed background job safely",

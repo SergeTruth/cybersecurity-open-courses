@@ -11,8 +11,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Keep traceback detail in a restricted sink",
       "language": "python",
-      "blurb": "The exception is recorded by the server logger while the caller sees only a stable service-unavailable response.",
-      "code": "import logging\n\nlog = logging.getLogger(\"worker\")\n\ndef perform_work(operation):\n    try:\n        return operation()\n    except Exception:\n        log.exception(\"worker_operation_failed\")\n        raise RuntimeError(\"operation unavailable\") from None\n"
+      "blurb": "The server records a sanitized traceback summary while the caller sees only a stable service-unavailable response.",
+      "code": "import logging\nimport traceback\nfrom pathlib import Path\n\nlog = logging.getLogger(\"worker\")\n\ndef traceback_summary(error: BaseException) -> list[dict[str, object]]:\n    frames = traceback.extract_tb(error.__traceback__)[-8:]\n    return [\n        {\n            \"file\": Path(frame.filename).name,\n            \"line\": frame.lineno,\n            \"function\": frame.name[:80],\n        }\n        for frame in frames\n    ]\n\ndef perform_work(operation):\n    try:\n        return operation()\n    except Exception as error:\n        log.error(\n            \"worker_operation_failed\",\n            extra={\n                \"exception_type\": type(error).__name__,\n                \"traceback\": traceback_summary(error),\n            },\n        )\n        raise RuntimeError(\"operation unavailable\") from None\n"
     }
   ]
 };

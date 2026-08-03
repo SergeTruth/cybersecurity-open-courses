@@ -422,12 +422,16 @@
 
   var meta;
   var connected = false;
+  var hosted = false;
+  var learnerScope = "preview";
+  var learnerScoped = false;
   var state = {
     module: 1,
     total: 1,
     completed: [],
     quizPassed: false,
-    quizStatus: "in progress"
+    quizStatus: "in progress",
+    updatedAt: 0
   };
 
   function text(id, value) {
@@ -452,7 +456,21 @@
   }
 
   function storageKey() {
-    return (document.body.dataset.courseId || "course") + ":progress";
+    var moduleId = ("0" + moduleNumber()).slice(-2);
+    return (document.body.dataset.courseId || "course") + ":sco:m" + moduleId + ":progress:" + learnerScope;
+  }
+
+  function stateStorage() {
+    return hosted && !learnerScoped ? window.sessionStorage : window.localStorage;
+  }
+
+  function identityToken(value) {
+    var hash = 2166136261;
+    for (var index = 0; index < value.length; index += 1) {
+      hash ^= value.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return ("00000000" + (hash >>> 0).toString(16)).slice(-8);
   }
 
   function defaultState() {
@@ -461,47 +479,125 @@
       total: totalModules(),
       completed: [],
       quizPassed: false,
-      quizStatus: "in progress"
+      quizStatus: "in progress",
+      updatedAt: 0
     };
   }
 
   function parseState(value) {
     try {
       var parsed = JSON.parse(value || "{}");
-      if (!Array.isArray(parsed.completed)) parsed.completed = [];
-      parsed.quizPassed = parsed.quizPassed === true;
-      parsed.quizStatus = parsed.quizStatus || (parsed.quizPassed ? "passed" : "in progress");
-      return parsed;
+      var current = moduleNumber();
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+      if (Number(parsed.module) !== current) return null;
+      return {
+        module: current,
+        total: totalModules(),
+        completed: Array.isArray(parsed.completed) && parsed.completed.indexOf(current) !== -1 ? [current] : [],
+        quizPassed: parsed.quizPassed === true,
+        quizStatus: parsed.quizStatus === "passed" || parsed.quizStatus === "failed" ? parsed.quizStatus : "in progress",
+        updatedAt: Number.isFinite(parsed.updatedAt) && parsed.updatedAt >= 0 ? parsed.updatedAt : 0
+      };
     } catch (error) {
-      return defaultState();
+      return null;
+    }
+  }
+
+  function localState() {
+    try {
+      return parseState(stateStorage().getItem(storageKey()) || "");
+    } catch (error) {
+      return null;
     }
   }
 
   function loadState() {
-    var saved = "";
-    if (connected) saved = SCORM.getValue("cmi.suspend_data");
-    if (!saved) {
-      try {
-        saved = localStorage.getItem(storageKey()) || "";
-      } catch (error) {
-        saved = "";
-      }
+    var local = localState();
+    var lms = null;
+    var lmsRead = false;
+
+    if (connected) {
+      if (typeof SCORM.clearLastError === "function") SCORM.clearLastError();
+      var saved = SCORM.getValue("cmi.suspend_data");
+      lmsRead = !SCORM.getLastError || !SCORM.getLastError();
+      lms = (saved ? parseState(saved) : null) || defaultState();
     }
-    state = saved ? parseState(saved) : defaultState();
-    state.module = moduleNumber();
-    state.total = totalModules();
+
+    if (connected && lmsRead) {
+      state = learnerScoped && local && local.updatedAt > lms.updatedAt ? local : lms;
+    } else {
+      state = local || defaultState();
+    }
+    return { lmsRead: lmsRead, local: Boolean(local) };
   }
 
   function saveState() {
+    state.updatedAt = Date.now();
     var serialized = JSON.stringify(state);
+    var localSaved = false;
     try {
-      localStorage.setItem(storageKey(), serialized);
+      stateStorage().setItem(storageKey(), serialized);
+      localSaved = true;
     } catch (error) {
       // LMS persistence remains available when local storage is blocked.
     }
-    if (!connected) return;
-    SCORM.setValue("cmi.core.lesson_location", String(moduleNumber()));
-    SCORM.setValue("cmi.suspend_data", serialized);
+
+    var lmsSaved = false;
+    if (connected) {
+      var locationSaved = SCORM.setValue("cmi.core.lesson_location", String(moduleNumber()));
+      var suspendSaved = SCORM.setValue("cmi.suspend_data", serialized);
+      lmsSaved = locationSaved && suspendSaved;
+    }
+    return { local: localSaved, lms: lmsSaved };
+  }
+
+  function errorSuffix() {
+    if (!window.SCORM || typeof SCORM.getLastError !== "function") return "";
+    var error = SCORM.getLastError();
+    return error && /^\d{1,8}$/.test(error.code) && error.code !== "0"
+      ? " (LMS error " + error.code + ")"
+      : "";
+  }
+
+  function reportPersistenceFailure(localSaved) {
+    setProgress("not saved");
+    if (hosted) {
+      text(
+        "lms-message",
+        "LMS progress could not be saved" + errorSuffix() + "." +
+          (localSaved ? " A local recovery copy is available." : " Please keep this window open and contact support.")
+      );
+    } else {
+      text("lms-message", "Preview progress could not be saved in this browser.");
+    }
+    return false;
+  }
+
+  function reportPersistenceSuccess(value) {
+    setProgress(value);
+    if (connected) text("lms-message", "Connected to LMS. Progress saved.");
+    if (window.SCORM && typeof SCORM.clearLastError === "function") SCORM.clearLastError();
+    return true;
+  }
+
+  function readLearnerScope() {
+    if (!connected) {
+      learnerScope = hosted ? "lms-session" : "preview";
+      learnerScoped = false;
+      return;
+    }
+
+    if (typeof SCORM.clearLastError === "function") SCORM.clearLastError();
+    var learnerId = SCORM.getValue("cmi.core.student_id");
+    var readFailed = typeof SCORM.getLastError === "function" && SCORM.getLastError();
+    if (!readFailed && learnerId) {
+      learnerScope = "learner-" + identityToken(learnerId);
+      learnerScoped = true;
+    } else {
+      learnerScope = "lms-session";
+      learnerScoped = false;
+    }
+    if (typeof SCORM.clearLastError === "function") SCORM.clearLastError();
   }
 
   function recordModuleView() {
@@ -513,47 +609,70 @@
       state.completed.sort(function (a, b) { return a - b; });
     }
 
-    setProgress("completed");
+    if (window.SCORM && typeof SCORM.clearLastError === "function") SCORM.clearLastError();
     if (connected) {
       var status = SCORM.getValue("cmi.core.lesson_status");
-      if (status !== "passed" && status !== "completed") {
-        SCORM.setValue("cmi.core.lesson_status", "incomplete");
+      var statusReadFailed = typeof SCORM.getLastError === "function" && SCORM.getLastError();
+      var statusSaved = !statusReadFailed;
+      if (statusSaved && status !== "passed" && status !== "completed") {
+        statusSaved = SCORM.setValue("cmi.core.lesson_status", "completed");
       }
-      saveState();
-      SCORM.commit();
-    } else {
-      saveState();
+      var saved = saveState();
+      var committed = SCORM.commit();
+      if (statusSaved && saved.lms && committed) {
+        return reportPersistenceSuccess("completed");
+      }
+      return reportPersistenceFailure(saved.local);
     }
+
+    var previewSaved = saveState();
+    if (hosted) return reportPersistenceFailure(previewSaved.local);
+    if (!previewSaved.local) return reportPersistenceFailure(false);
+    setProgress("completed");
     return true;
   }
 
   function recordQuizResult(passed) {
     state.quizPassed = Boolean(passed);
     state.quizStatus = passed ? "passed" : "failed";
-    setProgress(state.quizStatus);
-    saveState();
+    var saved = saveState();
+    if (!connected) {
+      if (hosted || !saved.local) {
+        reportPersistenceFailure(saved.local);
+      } else {
+        setProgress(state.quizStatus);
+      }
+    }
+    return saved;
   }
 
   function connect() {
+    hosted = Boolean(window.SCORM && typeof SCORM.isHosted === "function" && SCORM.isHosted());
     connected = Boolean(window.SCORM && SCORM.initialize());
+    if (connected) hosted = true;
     text(
       "lms-message",
       connected
         ? "Connected to LMS."
-        : "LMS API not found. Running in preview mode."
+        : hosted
+          ? "LMS detected, but the course could not connect. Progress has not been saved to the LMS."
+          : "LMS API not found. Running in preview mode."
     );
 
-    loadState();
+    readLearnerScope();
+    var loaded = loadState();
 
     if (isQuiz()) {
+      if (window.SCORM && typeof SCORM.clearLastError === "function") SCORM.clearLastError();
       var quizStatus = connected ? SCORM.getValue("cmi.core.lesson_status") : state.quizStatus;
       if (quizStatus === "passed" || quizStatus === "failed") {
         state.quizPassed = quizStatus === "passed";
         state.quizStatus = quizStatus;
       }
       setProgress(state.quizStatus);
-      saveState();
-      if (connected) SCORM.commit();
+      if (connected && (!loaded.lmsRead || (typeof SCORM.getLastError === "function" && SCORM.getLastError()))) {
+        text("lms-message", "Connected to LMS, but saved progress could not be loaded. Local recovery state is being used when available.");
+      }
       return;
     }
 
@@ -659,8 +778,11 @@
     getModule: moduleNumber,
     getTotal: totalModules,
     isConnected: function () { return connected; },
+    isHosted: function () { return hosted; },
     isQuiz: isQuiz,
     recordQuizResult: recordQuizResult,
+    reportPersistenceFailure: reportPersistenceFailure,
+    reportPersistenceSuccess: reportPersistenceSuccess,
     setProgress: setProgress
   };
 })();

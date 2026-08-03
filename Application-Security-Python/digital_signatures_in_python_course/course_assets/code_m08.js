@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Test that modified data is rejected",
       "language": "python",
       "blurb": "The regression proves that changing one byte invalidates the signature while the original message still verifies.",
-      "code": "from cryptography.exceptions import InvalidSignature\n\ndef assert_tampering_fails(public_key, message: bytes, signature: bytes) -> None:\n    public_key.verify(signature, message)\n    changed = message[:-1] + bytes([message[-1] ^ 1])\n    try:\n        public_key.verify(signature, changed)\n    except InvalidSignature:\n        return\n    raise AssertionError(\"modified message passed signature verification\")\n"
+      "code": "from cryptography.exceptions import InvalidSignature\n\ndef assert_tampering_fails(public_key, message: bytes, signature: bytes) -> None:\n    public_key.verify(signature, message)\n    changed = b\"\\x00\" if not message else message[:-1] + bytes([message[-1] ^ 1])\n    try:\n        public_key.verify(signature, changed)\n    except InvalidSignature:\n        return\n    raise AssertionError(\"modified message passed signature verification\")\n"
     }
   ]
 };

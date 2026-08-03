@@ -9,10 +9,10 @@ window.COURSE_CODE_MODULE = {
       "code": "class InsufficientFunds(Exception):\n    pass\n\ndef transfer_funds(ledger, source: str, target: str, amount: int) -> dict[str, str]:\n    try:\n        ledger.transfer(source, target, amount)\n    except InsufficientFunds:\n        return {\"status\": \"declined\", \"reason\": \"insufficient_funds\"}\n    return {\"status\": \"accepted\"}\n"
     },
     {
-      "title": "Roll back a transaction before translating failure",
+      "title": "Roll back without masking the original failure",
       "language": "python",
-      "blurb": "The context manager preserves the original exception, guarantees rollback, and commits only after the protected operation succeeds.",
-      "code": "from contextlib import contextmanager\n\n@contextmanager\ndef transaction(session):\n    try:\n        yield session\n    except BaseException:\n        session.rollback()\n        raise\n    else:\n        session.commit()\n"
+      "blurb": "The context manager attempts rollback and records a bounded rollback failure without replacing the original exception.",
+      "code": "from contextlib import contextmanager\n\n@contextmanager\ndef transaction(session, logger):\n    try:\n        yield session\n    except BaseException:\n        try:\n            session.rollback()\n        except Exception as rollback_error:\n            try:\n                logger.error(\n                    \"transaction_rollback_failed\",\n                    extra={\"error_type\": type(rollback_error).__name__},\n                )\n            except Exception:\n                pass\n        raise\n    else:\n        session.commit()\n"
     }
   ]
 };
