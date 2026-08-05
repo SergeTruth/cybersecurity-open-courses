@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.575
+A concurrent data structure needs a correctness contract before it needs a clever implementation.
+
+2
+00:00:04.575 --> 00:00:12.419
+The contract answers simple questions that become urgent under load: who owns the structure, which threads may read it, which threads may modify it,
+
+3
+00:00:12.419 --> 00:00:16.341
+and what a caller is allowed to keep after an operation returns.
+
+4
+00:00:16.341 --> 00:00:20.263
+If the contract is vague, each caller fills in the blanks differently.
+
+5
+00:00:20.263 --> 00:00:22.877
+One caller may assume a reference remains valid.
+
+6
+00:00:22.877 --> 00:00:25.818
+Another may assume a lookup and erase cannot interleave.
+
+7
+00:00:25.818 --> 00:00:31.047
+A third may combine operations that were only designed to be safe one at a time.
+
+8
+00:00:31.047 --> 00:00:32.681
+Ownership boundaries are especially important.
+
+9
+00:00:32.681 --> 00:00:35.296
+Sometimes a structure owns every object it stores.
+
+10
+00:00:35.296 --> 00:00:37.584
+Sometimes it only indexes objects owned elsewhere.
+
+11
+00:00:37.584 --> 00:00:40.852
+Sometimes it returns shared ownership, snapshots, or short-lived views.
+
+12
+00:00:40.852 --> 00:00:45.754
+Each model can be valid, but it must be documented and enforced by the API.
+
+13
+00:00:45.754 --> 00:00:50.656
+A design that returns a pointer to internal state also transfers responsibility to the caller.
+
+14
+00:00:50.656 --> 00:00:58.500
+That may be acceptable only when the caller receives a scoped guard, a shared ownership handle, or another mechanism that makes the lifetime rule
+
+15
+00:00:58.500 --> 00:00:58.827
+visible.
+
+16
+00:00:58.827 --> 00:01:01.114
+Invariants often span more than one field.
+
+17
+00:01:01.114 --> 00:01:10.265
+A container may be paired with a size counter, a map may be paired with a reverse index, and a cache may be paired with timestamps and eviction
+
+18
+00:01:10.265 --> 00:01:10.592
+metadata.
+
+19
+00:01:10.592 --> 00:01:15.167
+Protecting only the obvious container is not enough if related fields can change separately.
+
+20
+00:01:15.167 --> 00:01:19.743
+The contract should identify which lock, ownership rule, or synchronization boundary protects each invariant.
+
+21
+00:01:19.743 --> 00:01:23.338
+Good tests and code review then have something concrete to verify.
+
+22
+00:01:23.338 --> 00:01:28.240
+Defensive design turns concurrency from a set of private assumptions into a shared engineering agreement.

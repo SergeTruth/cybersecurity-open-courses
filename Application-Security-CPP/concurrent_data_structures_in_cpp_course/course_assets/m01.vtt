@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.506
+Concurrent data structures appear anywhere multiple threads, tasks, or asynchronous workers share access to state.
+
+2
+00:00:05.506 --> 00:00:12.479
+They may look like ordinary containers, queues, maps, caches, registries, pools, or tables, but the operating conditions are different.
+
+3
+00:00:12.479 --> 00:00:19.453
+In single-threaded code, a caller can often assume that a container stays unchanged while an operation is running.
+
+4
+00:00:19.453 --> 00:00:26.427
+Under concurrency, another thread may be reading, inserting, erasing, shutting down, or replacing related state at the same time.
+
+5
+00:00:26.427 --> 00:00:31.565
+That change matters because a data structure is more than memory that holds values.
+
+6
+00:00:31.565 --> 00:00:37.071
+It also has invariants: relationships that must remain true for the structure to be correct.
+
+7
+00:00:37.071 --> 00:00:41.476
+A queue may require its size counter to match the stored items.
+
+8
+00:00:41.476 --> 00:00:46.247
+A cache may require its index, eviction list, and lifetime policy to agree.
+
+9
+00:00:46.247 --> 00:00:52.487
+A registry may require that a name, handle, and object remain linked until all users are done.
+
+10
+00:00:52.487 --> 00:00:59.828
+If different threads update those pieces without a shared rule, the program can drift into states that no caller expected.
+
+11
+00:00:59.828 --> 00:01:03.131
+Defensive C++ engineering treats these structures as explicit boundaries.
+
+12
+00:01:03.131 --> 00:01:11.573
+The design should say who owns the state, which operations are safe concurrently, which operations require exclusive access, and when objects may be
+
+13
+00:01:11.573 --> 00:01:11.940
+destroyed.
+
+14
+00:01:11.940 --> 00:01:14.509
+This is not only a performance topic.
+
+15
+00:01:14.509 --> 00:01:20.749
+Broken synchronization can cause reliability failures, data corruption, incorrect authorization decisions, resource exhaustion, and hard-to-repeat
+
+16
+00:01:20.749 --> 00:01:21.850
+crashes during shutdown.
+
+17
+00:01:21.850 --> 00:01:30.292
+The goal of this course is to build a practical roadmap: protect invariants, manage lifetimes, prefer clear APIs, and verify the design with
+
+18
+00:01:30.292 --> 00:01:31.760
+diagnostics, tests, and review.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.066
+Use-after-free-like defects are not limited to heap deletion.
+
+2
+00:00:04.066 --> 00:00:08.132
+Containers can invalidate iterators, references, pointers, and views into their storage.
+
+3
+00:00:08.132 --> 00:00:16.633
+After invalidation, the old access may still look like a normal value, but it no longer refers to a valid element or buffer.
+
+4
+00:00:16.633 --> 00:00:19.960
+That makes container mutation a common lifetime review point.
+
+5
+00:00:19.960 --> 00:00:21.808
+Reallocation is a familiar example.
+
+6
+00:00:21.808 --> 00:00:29.570
+Growing a std::vector or std::string may move elements to new storage, invalidating pointers and references into the old buffer.
+
+7
+00:00:29.570 --> 00:00:37.332
+Erase operations can invalidate iterators and references to erased elements, and sometimes to elements after the erased position depending on the
+
+8
+00:00:37.332 --> 00:00:37.702
+container.
+
+9
+00:00:37.702 --> 00:00:42.137
+Resizing can destroy elements, change buffers, or alter assumptions about valid ranges.
+
+10
+00:00:42.137 --> 00:00:43.986
+Views require the same care.
+
+11
+00:00:43.986 --> 00:00:48.791
+A std::span or std::string_view does not own the data it describes.
+
+12
+00:00:48.791 --> 00:00:56.923
+If the source container, string, or array is destroyed or modified in a way that invalidates storage, the view can become stale.
+
+13
+00:00:56.923 --> 00:01:03.576
+A view that is stored in an object or returned from a function should trigger a lifetime review.
+
+14
+00:01:03.576 --> 00:01:09.120
+Different containers provide different stability guarantees, so avoid carrying assumptions from one type to another.
+
+15
+00:01:09.120 --> 00:01:17.622
+A node-based container may keep some references stable across operations that would invalidate a vector reference, but erased elements are still gone.
+
+16
+00:01:17.622 --> 00:01:22.796
+A deque, map, vector, string, and unordered container each have their own invalidation rules.
+
+17
+00:01:22.796 --> 00:01:27.232
+The secure habit is to check the rule at the mutation point.
+
+18
+00:01:27.232 --> 00:01:30.559
+Prevention starts by keeping access and mutation close together.
+
+19
+00:01:30.559 --> 00:01:33.146
+Avoid long-lived references into mutable containers.
+
+20
+00:01:33.146 --> 00:01:38.690
+Prefer indexes or stable identifiers when appropriate, and revalidate after operations that may invalidate access.
+
+21
+00:01:38.690 --> 00:01:42.387
+Document invalidation assumptions when an API returns views or iterators.
+
+22
+00:01:42.387 --> 00:01:49.040
+In code review, ask what happens to every outstanding pointer, reference, iterator, or view after each container mutation.

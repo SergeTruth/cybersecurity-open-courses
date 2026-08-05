@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.870
+Raw pointers and references are not automatically unsafe.
+
+2
+00:00:02.870 --> 00:00:04.663
+They are ordinary C++ tools.
+
+3
+00:00:04.663 --> 00:00:07.533
+They become risky when their meaning is unclear.
+
+4
+00:00:07.533 --> 00:00:15.425
+In modern C++ code, a raw pointer should usually communicate non-owning access unless the project has an explicit and consistently enforced
+
+5
+00:00:15.425 --> 00:00:15.784
+convention.
+
+6
+00:00:15.784 --> 00:00:17.577
+References also depend on lifetime.
+
+7
+00:00:17.577 --> 00:00:25.828
+A reference cannot be reseated and is not null in normal use, but it still refers to an object that must remain alive.
+
+8
+00:00:25.828 --> 00:00:33.720
+A reference member, cached reference, or reference captured by a callable can become a lifetime problem when the referenced object ends first.
+
+9
+00:00:33.720 --> 00:00:37.307
+Storing borrowed access is more demanding than using it briefly.
+
+10
+00:00:37.307 --> 00:00:43.046
+A function parameter that is used only during the call is usually easier to reason about.
+
+11
+00:00:43.046 --> 00:00:51.297
+A member variable, global cache, callback capture, or deferred task that stores a pointer or reference needs a stronger contract because the owner
+
+12
+00:00:51.297 --> 00:00:53.091
+must remain valid for longer.
+
+13
+00:00:53.091 --> 00:00:55.602
+Function signatures should make ownership expectations clear.
+
+14
+00:00:55.602 --> 00:00:59.189
+Passing by value can communicate independent ownership of a copy.
+
+15
+00:00:59.189 --> 00:01:03.135
+Passing by reference can communicate required borrowed access during the call.
+
+16
+00:01:03.135 --> 00:01:08.516
+Passing a pointer can communicate optional or non-owning access when the convention is clear.
+
+17
+00:01:08.516 --> 00:01:12.103
+Transferring ownership should use a type that says so directly.
+
+18
+00:01:12.103 --> 00:01:17.484
+Good API contracts state whether the callee owns, borrows, stores, or merely observes a value.
+
+19
+00:01:17.484 --> 00:01:26.093
+They also state whether null is permitted, whether the value may be retained after return, and what object is responsible for keeping it alive.
+
+20
+00:01:26.093 --> 00:01:29.680
+That contract turns hidden lifetime assumptions into reviewable engineering decisions.

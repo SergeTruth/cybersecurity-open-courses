@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.633
+Many buffer problems begin when code confuses related but different ideas: size, capacity, byte count, element count, current length, required output
+
+2
+00:00:07.633 --> 00:00:09.087
+length, and remaining space.
+
+3
+00:00:09.087 --> 00:00:14.903
+Safe string and byte handling starts by naming the unit and checking it before memory operations.
+
+4
+00:00:14.903 --> 00:00:19.992
+Do not assume input is safely null-terminated unless the API contract proves it.
+
+5
+00:00:19.992 --> 00:00:29.443
+If a function receives a pointer to characters from an external source, a file, a protocol, or legacy code, it should also know the valid range.
+
+6
+00:00:29.443 --> 00:00:35.259
+A missing terminator should lead to a safe failure path, not a search past the buffer.
+
+7
+00:00:35.259 --> 00:00:38.894
+Binary data should not be handled as a C string.
+
+8
+00:00:38.894 --> 00:00:45.074
+A byte buffer may contain zero bytes, fixed-width fields, compressed data, encoded records, or partial messages.
+
+9
+00:00:45.074 --> 00:00:49.799
+It should be processed with explicit lengths and format rules, not text conventions.
+
+10
+00:00:49.799 --> 00:00:53.071
+Encoded text can change length during conversion or normalization.
+
+11
+00:00:53.071 --> 00:00:57.069
+A buffer sized for one encoding may not fit another representation.
+
+12
+00:00:57.069 --> 00:01:03.976
+Output sizing should be calculated before transformation, and the code should define what happens when output does not fit.
+
+13
+00:01:03.976 --> 00:01:07.611
+Truncation is a policy decision, not a default safety strategy.
+
+14
+00:01:07.611 --> 00:01:11.246
+Shortening a display string may be acceptable if reported clearly.
+
+15
+00:01:11.246 --> 00:01:15.608
+Shortening a path, identifier, configuration value, or serialized record may change meaning.
+
+16
+00:01:15.608 --> 00:01:21.787
+Use explicit output limits and return a clear error, exception, or reported truncation according to project policy.
+
+17
+00:01:21.787 --> 00:01:29.421
+Reviewers should look for hidden assumptions: missing terminators, reused size values, wrong units, text functions applied to binary data, and output
+
+18
+00:01:29.421 --> 00:01:32.329
+buffers that are assumed to be large enough.
+
+19
+00:01:32.329 --> 00:01:35.600
+Clear representation rules prevent many defects before tests run.

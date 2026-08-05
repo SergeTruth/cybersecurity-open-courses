@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.169
+C++ teams should use well-reviewed cryptographic libraries, approved platform APIs, or organization-approved modules rather than implementing
+
+2
+00:00:07.169 --> 00:00:08.364
+cryptographic primitives themselves.
+
+3
+00:00:08.364 --> 00:00:11.550
+Homemade cryptography tends to fail in subtle places.
+
+4
+00:00:11.550 --> 00:00:18.720
+Correct padding, randomness, authentication, key handling, compatibility, side-effect behavior, error reporting, and long-term maintenance are all
+
+5
+00:00:18.720 --> 00:00:19.118
+difficult.
+
+6
+00:00:19.118 --> 00:00:23.101
+A small-looking implementation can carry years of hidden assumptions.
+
+7
+00:00:23.101 --> 00:00:25.491
+Library selection is an engineering decision.
+
+8
+00:00:25.491 --> 00:00:32.262
+Review whether the library is maintained, documented, supported on your target platforms, and aligned with organizational policy.
+
+9
+00:00:32.262 --> 00:00:38.236
+Look for safe defaults, clear APIs, supported algorithms, versioning guidance, and a realistic upgrade path.
+
+10
+00:00:38.236 --> 00:00:42.219
+The best crypto integration code is often small and boring.
+
+11
+00:00:42.219 --> 00:00:49.786
+It calls approved APIs, checks return values, separates key management from business logic, rejects failed validation, and keeps configuration
+
+12
+00:00:49.786 --> 00:00:51.380
+visible enough for review.
+
+13
+00:00:51.380 --> 00:00:53.371
+Error handling must be explicit.
+
+14
+00:00:53.371 --> 00:01:01.735
+A failed encryption, failed verification, failed random generation, or failed certificate check should not be silently ignored or converted into a
+
+15
+00:01:01.735 --> 00:01:02.532
+success path.
+
+16
+00:01:02.532 --> 00:01:08.108
+Wrapping a library can be useful when the wrapper narrows choices and enforces policy.
+
+17
+00:01:08.108 --> 00:01:16.472
+It becomes risky when it hides errors, invents new protocols, or makes it hard to tell which primitive is being used.
+
+18
+00:01:16.472 --> 00:01:20.455
+The goal is not to make every developer a cryptographer.
+
+19
+00:01:20.455 --> 00:01:26.429
+The goal is to make cryptographic use predictable, maintainable, policy-aligned, and easy to review.
+
+20
+00:01:26.429 --> 00:01:33.200
+A practical wrapper might expose only approved operations, require callers to supply context, and centralize error mapping.
+
+21
+00:01:33.200 --> 00:01:37.980
+It should not bury algorithm selection in configuration that reviewers never see.
+
+22
+00:01:37.980 --> 00:01:40.370
+Teams should also plan for updates.
+
+23
+00:01:40.370 --> 00:01:44.751
+Cryptographic guidance changes, libraries deprecate old modes, and platform requirements shift.
+
+24
+00:01:44.751 --> 00:01:50.327
+Code that isolates approved use cleanly is easier to upgrade without rewriting business logic.
+
+25
+00:01:50.327 --> 00:01:51.920
+Keep that path intentional.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.163
+Queues are one of the most common ways to connect concurrent parts of a program.
+
+2
+00:00:05.163 --> 00:00:06.196
+Producers create work.
+
+3
+00:00:06.196 --> 00:00:07.229
+Consumers receive work.
+
+4
+00:00:07.229 --> 00:00:11.359
+The queue is the boundary where ownership, pacing, and shutdown rules meet.
+
+5
+00:00:11.359 --> 00:00:16.523
+A safe queue is not just a container with a lock around push and pop.
+
+6
+00:00:16.523 --> 00:00:25.128
+It is a coordination object, and its API should define what happens when the queue is empty, full, closing, cancelled, or destroyed while threads are
+
+7
+00:00:25.128 --> 00:00:25.473
+waiting.
+
+8
+00:00:25.473 --> 00:00:29.603
+Condition variables are useful for this pattern, but they require careful habits.
+
+9
+00:00:29.603 --> 00:00:36.143
+Wait operations should use predicates that describe the protected state, such as work being available or shutdown being requested.
+
+10
+00:00:36.143 --> 00:00:40.274
+Notifications should correspond to state changes made while holding the associated lock.
+
+11
+00:00:40.274 --> 00:00:47.159
+Shutdown should be represented explicitly so waiting consumers can wake, observe that no more work will arrive, and exit cleanly.
+
+12
+00:00:47.159 --> 00:00:54.387
+Without a clear shutdown state, programs often rely on timing, sentinel values, or thread interruption assumptions that are difficult to maintain.
+
+13
+00:00:54.387 --> 00:00:57.141
+Bounded queues are also a defensive design tool.
+
+14
+00:00:57.141 --> 00:01:01.616
+An unbounded queue can hide overload until memory, latency, or downstream resources fail.
+
+15
+00:01:01.616 --> 00:01:10.566
+A bounded queue forces the design to choose a backpressure policy: block, fail fast, drop according to a documented rule, or shed work at a higher
+
+16
+00:01:10.566 --> 00:01:10.910
+layer.
+
+17
+00:01:10.910 --> 00:01:17.450
+The queue should also define who owns each work item after it is accepted and what happens during cancellation.
+
+18
+00:01:17.450 --> 00:01:25.367
+Testing should cover empty and full states, many producers, many consumers, repeated start and stop cycles, and clean destruction while no thread is
+
+19
+00:01:25.367 --> 00:01:26.400
+left waiting indefinitely.

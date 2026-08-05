@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.565
+Array bounds safety is not a single feature.
+
+2
+00:00:03.565 --> 00:00:09.804
+It is a disciplined engineering habit across design, implementation, testing, review, build, and release.
+
+3
+00:00:09.804 --> 00:00:17.381
+The roadmap begins by preserving the information that makes access valid: size, range, ownership, mutability, and lifetime.
+
+4
+00:00:17.381 --> 00:00:27.631
+Prefer containers, bounded views, and range-aware access when they fit the design. std::array, std::vector, std::string, std::span, iterator ranges,
+
+5
+00:00:27.631 --> 00:00:33.424
+and standard algorithms can reduce manual tracking and make intent easier to review.
+
+6
+00:00:33.424 --> 00:00:37.881
+Raw pointer interfaces should be narrow, justified, and clearly documented.
+
+7
+00:00:37.881 --> 00:00:39.218
+Validate before access.
+
+8
+00:00:39.218 --> 00:00:49.022
+Indexes, offsets, lengths, counts, and subranges should be checked as complete range decisions, especially when they come from external input or are
+
+9
+00:00:49.022 --> 00:00:50.805
+derived from multiple fields.
+
+10
+00:00:50.805 --> 00:00:56.153
+A valid start value does not prove the full range is valid.
+
+11
+00:00:56.153 --> 00:00:57.935
+Improve legacy code incrementally.
+
+12
+00:00:57.935 --> 00:01:05.066
+Prioritize code that handles external formats, crosses trust boundaries, manages memory, or mixes offsets and lengths.
+
+13
+00:01:05.066 --> 00:01:11.751
+Add regression tests, wrap unsafe interfaces, replace unclear range logic, and document assumptions that remain.
+
+14
+00:01:11.751 --> 00:01:15.316
+Finally, reinforce the process with tools and governance.
+
+15
+00:01:15.316 --> 00:01:23.338
+Boundary tests, sanitizers, compiler diagnostics, hardened library modes, release verification, and code review all make defects visible earlier.
+
+16
+00:01:23.338 --> 00:01:28.240
+Revisit exceptions as the codebase, compiler, platform, and team practices evolve.

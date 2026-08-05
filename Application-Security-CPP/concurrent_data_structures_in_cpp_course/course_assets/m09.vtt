@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.001
+Concurrent data structures need several forms of evidence.
+
+2
+00:00:03.001 --> 00:00:10.502
+ThreadSanitizer can reveal many data races, and it should be part of the engineering toolkit when the platform allows it.
+
+3
+00:00:10.502 --> 00:00:15.378
+But a clean sanitizer run does not prove that the design is correct.
+
+4
+00:00:15.378 --> 00:00:24.755
+A program can be free of low-level data races and still violate a higher-level invariant, return stale access, mishandle shutdown, leak resources, or
+
+5
+00:00:24.755 --> 00:00:25.881
+starve important work.
+
+6
+00:00:25.881 --> 00:00:29.631
+Diagnostics help, but they do not replace a clear contract.
+
+7
+00:00:29.631 --> 00:00:34.132
+Testing should cover lifecycle and boundary behavior, not only the common path.
+
+8
+00:00:34.132 --> 00:00:40.509
+Empty structures, full structures, repeated start and stop cycles, cancellation, producer shutdown, consumer shutdown, eviction, replacement, and
+
+9
+00:00:40.509 --> 00:00:42.759
+destruction under load all deserve attention.
+
+10
+00:00:42.759 --> 00:00:50.261
+Stress tests can increase the chance of exposing timing-sensitive defects, especially when combined with randomized operation mixes and invariant
+
+11
+00:00:50.261 --> 00:00:50.636
+checks.
+
+12
+00:00:50.636 --> 00:00:58.513
+Logging and metrics can also help identify queue growth, lock contention, unusually long waits, or unexpected cleanup delays in real deployments.
+
+13
+00:00:58.513 --> 00:01:01.513
+Performance review is valuable when it is disciplined.
+
+14
+00:01:01.513 --> 00:01:09.765
+Benchmark the behavior that matters, including contention levels and realistic workloads, but do not use speed as a reason to weaken semantics
+
+15
+00:01:09.765 --> 00:01:11.266
+without documenting the risk.
+
+16
+00:01:11.266 --> 00:01:19.892
+Code review should ask direct questions: which lock protects which data, what can a caller retain, what happens during shutdown, how are objects
+
+17
+00:01:19.892 --> 00:01:24.018
+reclaimed, and which tests would fail if the invariant were broken?
+
+18
+00:01:24.018 --> 00:01:31.145
+Concurrent data structure safety is maintained through design, diagnostics, testing, review, and continuing governance as the structure gains new
+
+19
+00:01:31.145 --> 00:01:31.520
+users.

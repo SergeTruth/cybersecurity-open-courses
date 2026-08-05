@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.046
+Atomic code needs practical validation and deliberate review.
+
+2
+00:00:03.046 --> 00:00:10.661
+Concurrency defects may depend on scheduling, optimization, hardware behavior, and load, so tests should focus on invariants and boundary behavior
+
+3
+00:00:10.661 --> 00:00:12.946
+rather than only one observed interleaving.
+
+4
+00:00:12.946 --> 00:00:17.896
+ThreadSanitizer is useful where available for detecting data races during instrumented test execution.
+
+5
+00:00:17.896 --> 00:00:26.653
+It does not prove every memory-ordering decision correct, but it can reveal weak synchronization assumptions and plain shared access that should be
+
+6
+00:00:26.653 --> 00:00:27.034
+reviewed.
+
+7
+00:00:27.034 --> 00:00:34.269
+Unit tests should exercise state transitions, repeated start and stop cycles, shutdown while work is pending, readiness publication, counter
+
+8
+00:00:34.269 --> 00:00:35.792
+boundaries, and error paths.
+
+9
+00:00:35.792 --> 00:00:41.503
+Stress tests can add coverage, but focused tests make the intended contract easier to protect.
+
+10
+00:00:41.503 --> 00:00:47.976
+Static analysis, compiler warnings, code review checklists, and CI configurations can all help keep atomic code visible.
+
+11
+00:00:47.976 --> 00:00:56.734
+For review-sensitive code, it may be useful to require an explicit note explaining why atomics were chosen and what ordering is required.
+
+12
+00:00:56.734 --> 00:00:58.638
+Review questions should be concrete.
+
+13
+00:00:58.638 --> 00:01:00.541
+What does this atomic represent?
+
+14
+00:01:00.541 --> 00:01:01.684
+Who writes it?
+
+15
+00:01:01.684 --> 00:01:02.826
+Who reads it?
+
+16
+00:01:02.826 --> 00:01:04.730
+Is there a larger invariant?
+
+17
+00:01:04.730 --> 00:01:07.395
+What memory ordering is used and why?
+
+18
+00:01:07.395 --> 00:01:11.203
+Can object lifetime end while another thread observes the value?
+
+19
+00:01:11.203 --> 00:01:14.249
+Also ask whether a mutex would be clearer.
+
+20
+00:01:14.249 --> 00:01:23.006
+A small critical section can be easier to test and maintain than a compact atomic protocol whose correctness depends on subtle ordering assumptions.
+
+21
+00:01:23.006 --> 00:01:26.814
+Tools support design judgment, but they do not replace it.
+
+22
+00:01:26.814 --> 00:01:33.668
+The strongest atomic code is narrow, named, documented, tested, and understandable by the team that must maintain it.
+
+23
+00:01:33.668 --> 00:01:39.760
+That combination makes future changes safer because reviewers can tell which assumptions must not be broken.

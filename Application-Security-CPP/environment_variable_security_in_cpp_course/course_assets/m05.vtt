@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.200
+Environment variables are often used for secrets because deployment systems, containers, and CI platforms can inject them conveniently.
+
+2
+00:00:07.200 --> 00:00:08.800
+That convenience has risk.
+
+3
+00:00:08.800 --> 00:00:16.800
+Credentials, tokens, API keys, database passwords, signing material, and connection strings should be treated as sensitive even when they arrive
+
+4
+00:00:16.800 --> 00:00:18.800
+through a familiar deployment workflow.
+
+5
+00:00:18.800 --> 00:00:26.000
+Depending on platform and configuration, environment values may be visible through process inspection tools, service configuration, crash reports,
+
+6
+00:00:26.000 --> 00:00:30.400
+diagnostic dumps, shell history, CI output, or inherited child process environments.
+
+7
+00:00:30.400 --> 00:00:37.600
+The details vary, but the engineering lesson is stable: avoid assuming that environment storage is private by default.
+
+8
+00:00:37.600 --> 00:00:42.000
+Secrets should not be printed, dumped, or included in exception messages.
+
+9
+00:00:42.000 --> 00:00:49.200
+Logs should identify that a sensitive setting is missing, malformed, expired, or inaccessible without including the value itself.
+
+10
+00:00:49.200 --> 00:00:52.800
+Redaction should happen before data reaches broad log sinks.
+
+11
+00:00:52.800 --> 00:00:58.800
+Debug tooling should also be reviewed so it does not accidentally expose full process configuration.
+
+12
+00:00:58.800 --> 00:01:01.600
+Prefer managed secret delivery mechanisms where available.
+
+13
+00:01:01.600 --> 00:01:10.000
+When environment variables are used for secrets, restrict access to the process, minimize copying, support rotation and revocation, and avoid passing
+
+14
+00:01:10.000 --> 00:01:13.200
+secret values to child processes unless explicitly required.
+
+15
+00:01:13.200 --> 00:01:19.600
+Secret handling is not only about storage; it is about every place the value can travel.
+
+16
+00:01:19.600 --> 00:01:24.400
+Operationally, teams should rehearse what happens when an environment-delivered secret changes.
+
+17
+00:01:24.400 --> 00:01:33.600
+The application should reload or restart cleanly, errors should not reveal the old or new value, and dependent child processes should not keep
+
+18
+00:01:33.600 --> 00:01:36.400
+receiving stale credentials longer than policy allows.

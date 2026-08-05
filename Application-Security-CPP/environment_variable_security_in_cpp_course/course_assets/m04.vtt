@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.279
+Environment variables are strings until the application validates and converts them.
+
+2
+00:00:04.279 --> 00:00:13.227
+A value that is supposed to represent a boolean, integer, timeout, byte limit, path, URL, enumeration, or feature flag must be parsed carefully.
+
+3
+00:00:13.227 --> 00:00:20.618
+The code should define accepted formats instead of accepting every spelling that happens to work in a quick test.
+
+4
+00:00:20.618 --> 00:00:24.897
+Validation should cover range, units, allowed values, and relationships between settings.
+
+5
+00:00:24.897 --> 00:00:28.009
+A timeout may need a minimum and maximum.
+
+6
+00:00:28.009 --> 00:00:31.900
+A path may need to stay inside an allowed location.
+
+7
+00:00:31.900 --> 00:00:35.790
+A debug setting may be incompatible with a production profile.
+
+8
+00:00:35.790 --> 00:00:39.680
+A feature flag may require another setting to be present.
+
+9
+00:00:39.680 --> 00:00:44.348
+These relationships should be checked before the value becomes trusted runtime state.
+
+10
+00:00:44.348 --> 00:00:46.682
+Defaults should be conservative and documented.
+
+11
+00:00:46.682 --> 00:00:50.573
+Missing or malformed values should not silently become unsafe behavior.
+
+12
+00:00:50.573 --> 00:00:53.685
+Sometimes the safest response is to refuse startup.
+
+13
+00:00:53.685 --> 00:00:56.019
+Sometimes a secure default is appropriate.
+
+14
+00:00:56.019 --> 00:01:03.021
+Unknown values should also be handled deliberately because they may indicate typos, unsupported deployment profiles, or stale automation.
+
+15
+00:01:03.021 --> 00:01:08.856
+After validation, application code should use typed trusted state instead of repeatedly interpreting raw strings.
+
+16
+00:01:08.856 --> 00:01:14.692
+Clear validation errors help operators fix configuration problems, but diagnostics should avoid printing sensitive values.
+
+17
+00:01:14.692 --> 00:01:20.138
+This boundary is where the environment stops being untrusted text and becomes deliberate configuration.
+
+18
+00:01:20.138 --> 00:01:22.472
+Be especially careful with convenience parsing.
+
+19
+00:01:22.472 --> 00:01:31.809
+Accepting every non-empty string as true, truncating large numbers, or treating parse failure as zero can turn a typo into an unsafe mode.
+
+20
+00:01:31.809 --> 00:01:39.200
+Prefer explicit accepted spellings, checked numeric conversion, clear unit handling, and failure paths that do not relax security controls.

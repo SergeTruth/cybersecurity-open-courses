@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.496
+A process environment usually comes from whatever launched the program.
+
+2
+00:00:03.496 --> 00:00:12.237
+That might be an interactive shell, a service manager, a container runtime, a CI runner, a scheduled task, an installer, a parent process, or a
+
+3
+00:00:12.237 --> 00:00:12.936
+deployment platform.
+
+4
+00:00:12.936 --> 00:00:19.229
+The trust level of each value depends on who controls that launch path and how changes are approved.
+
+5
+00:00:19.229 --> 00:00:25.872
+This matters because environment variables can look like internal configuration even when they are supplied from outside the application.
+
+6
+00:00:25.872 --> 00:00:32.515
+A value injected by a protected deployment system may deserve different trust than one inherited from an interactive shell.
+
+7
+00:00:32.515 --> 00:00:39.157
+A service account may receive a carefully curated environment, while a local developer run may include many unrelated values.
+
+8
+00:00:39.157 --> 00:00:40.905
+Child processes add another boundary.
+
+9
+00:00:40.905 --> 00:00:46.150
+Unless the program constructs a controlled environment, a child may inherit values from its parent.
+
+10
+00:00:46.150 --> 00:00:53.841
+That can accidentally pass configuration, secrets, search paths, debug flags, or library options to tools that were never meant to receive them.
+
+11
+00:00:53.841 --> 00:00:57.687
+Inheritance should be a deliberate choice rather than a default assumption.
+
+12
+00:00:57.687 --> 00:01:05.029
+Security-sensitive applications should document which environment variables are allowed, where they are expected to come from, and which sources are
+
+13
+00:01:05.029 --> 00:01:06.777
+trusted enough to affect behavior.
+
+14
+00:01:06.777 --> 00:01:14.119
+That documentation helps code review, operations, and incident response because the team can reason about environment influence as a visible contract.
+
+15
+00:01:14.119 --> 00:01:22.860
+A useful review question is, "who could set this value before the process starts?" The answer may be a developer, a service operator, a container
+
+16
+00:01:22.860 --> 00:01:25.307
+manifest, a CI job, or another executable.
+
+17
+00:01:25.307 --> 00:01:31.600
+Once the owner is clear, the team can decide whether the value needs stricter validation, approval, or sanitization.

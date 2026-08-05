@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.766
+Numeric discipline is central to binary protocol security.
+
+2
+00:00:02.766 --> 00:00:12.446
+Protocol fields should be described with fixed-width types such as 16-bit, 32-bit, or 64-bit values, but the byte width alone does not say whether
+
+3
+00:00:12.446 --> 00:00:14.866
+the value is safe for application logic.
+
+4
+00:00:14.866 --> 00:00:22.126
+A field may decode correctly while still being too large for a buffer, allocation, array index, version number, or item count.
+
+5
+00:00:22.126 --> 00:00:23.509
+Endianness should be explicit.
+
+6
+00:00:23.509 --> 00:00:31.460
+A parser should know whether a field is big-endian, little-endian, or otherwise defined by the protocol, then convert it before interpretation.
+
+7
+00:00:31.460 --> 00:00:40.103
+That conversion should happen at the boundary, so later code works with host values and does not need to guess how the bytes were encoded.
+
+8
+00:00:40.103 --> 00:00:42.523
+Signedness and narrowing conversions deserve careful review.
+
+9
+00:00:42.523 --> 00:00:50.820
+A negative value interpreted as a size, or a large unsigned value narrowed into a smaller type, can change control flow and resource decisions.
+
+10
+00:00:50.820 --> 00:00:57.389
+The parser should check ranges before converting and should reject values that do not fit the intended application meaning.
+
+11
+00:00:57.389 --> 00:01:00.154
+Derived calculations are another common source of mistakes.
+
+12
+00:01:00.154 --> 00:01:07.414
+Header length plus body length, count times element size, offset plus size, and nested record totals should be checked before use.
+
+13
+00:01:07.414 --> 00:01:15.020
+The code should avoid undefined behavior and overflow during the check itself, which often means using helper functions or wider intermediate types
+
+14
+00:01:15.020 --> 00:01:16.057
+for size calculations.
+
+15
+00:01:16.057 --> 00:01:19.514
+The review habit is to ask what every number means.
+
+16
+00:01:19.514 --> 00:01:24.700
+Is it a byte count, element count, offset, index, enum, version, timestamp, or flag set?
+
+17
+00:01:24.700 --> 00:01:32.306
+Once the meaning is clear, validation can be precise and the parser can reject values before they affect memory, state, or policy.
+
+18
+00:01:32.306 --> 00:01:36.800
+Clear naming and narrow helper APIs make those checks easier to repeat consistently.

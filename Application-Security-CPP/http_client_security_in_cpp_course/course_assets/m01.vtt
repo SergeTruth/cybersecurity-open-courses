@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.660
+An outbound HTTP client may look like ordinary plumbing, but in a C++ application it is often a security boundary.
+
+2
+00:00:07.660 --> 00:00:16.086
+The client decides where data is sent, how the destination is authenticated, which credentials are attached, how redirects are handled, how responses
+
+3
+00:00:16.086 --> 00:00:21.448
+are parsed, and what happens when the remote service is slow, unavailable, or unexpected.
+
+4
+00:00:21.448 --> 00:00:26.427
+That boundary matters because outbound requests connect local application state to external systems.
+
+5
+00:00:26.427 --> 00:00:32.938
+A request may carry sensitive records, service tokens, cookies, client certificates, tenant identifiers, or internal workflow data.
+
+6
+00:00:32.938 --> 00:00:39.066
+A response may influence business state, update caches, trigger processing, or become input to a parser.
+
+7
+00:00:39.066 --> 00:00:46.726
+Even when the remote service is owned by the same organization, the client still crosses a trust and availability boundary.
+
+8
+00:00:46.726 --> 00:00:50.173
+Secure HTTP client design makes the important choices explicit.
+
+9
+00:00:50.173 --> 00:00:52.471
+The intended destination should be clear.
+
+10
+00:00:52.471 --> 00:00:55.535
+TLS and endpoint identity rules should be documented.
+
+11
+00:00:55.535 --> 00:00:58.599
+Credentials should come from approved secret handling mechanisms.
+
+12
+00:00:58.599 --> 00:01:02.429
+Request construction should preserve structure instead of splicing text casually.
+
+13
+00:01:02.429 --> 00:01:06.642
+Response handling should use validation, size limits, and predictable error behavior.
+
+14
+00:01:06.642 --> 00:01:08.557
+The defensive goal is reviewability.
+
+15
+00:01:08.557 --> 00:01:18.132
+A maintainer should be able to inspect an HTTP client and understand what service it contacts, what data it sends, what trust policy it applies,
+
+16
+00:01:18.132 --> 00:01:21.962
+which failures stop the operation, and what diagnostics are recorded.
+
+17
+00:01:21.962 --> 00:01:31.154
+Treating the client as a boundary keeps those decisions visible and turns network behavior into something the team can test, monitor, and govern over
+
+18
+00:01:31.154 --> 00:01:31.920
+time safely.

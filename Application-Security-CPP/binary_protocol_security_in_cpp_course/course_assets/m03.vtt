@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.801
+Safe binary parsing is explicit.
+
+2
+00:00:01.801 --> 00:00:09.727
+A parser should avoid directly casting a byte buffer into a C++ struct and treating the result as a valid protocol object.
+
+3
+00:00:09.727 --> 00:00:17.653
+That shortcut can depend on compiler layout, padding, alignment, object lifetime, and platform details that are not necessarily part of the protocol.
+
+4
+00:00:17.653 --> 00:00:20.535
+It may also hide where validation should occur.
+
+5
+00:00:20.535 --> 00:00:22.697
+A reviewable parser reads fields deliberately.
+
+6
+00:00:22.697 --> 00:00:27.741
+Before reading each field, it checks that enough bytes remain inside the current frame.
+
+7
+00:00:27.741 --> 00:00:37.107
+It advances a cursor in a visible way, converts raw bytes into fixed-width values with known endianness, and validates the result before using it for
+
+8
+00:00:37.107 --> 00:00:39.269
+offsets, counts, allocation, or state changes.
+
+9
+00:00:39.269 --> 00:00:45.033
+If a helper reads from the cursor, the helper should make failure and cursor movement obvious.
+
+10
+00:00:45.033 --> 00:00:48.996
+Separating raw input from trusted parsed objects keeps the design clearer.
+
+11
+00:00:48.996 --> 00:00:50.437
+Raw bytes remain untrusted.
+
+12
+00:00:50.437 --> 00:00:52.239
+Parsed fields are intermediate values.
+
+13
+00:00:52.239 --> 00:00:58.723
+Trusted application objects are created only after required fields, lengths, ranges, versions, and state rules have been checked.
+
+14
+00:00:58.723 --> 00:01:04.488
+This separation prevents partially parsed data from leaking into business logic as if it were complete.
+
+15
+00:01:04.488 --> 00:01:07.370
+Offsets and derived ranges need the same discipline.
+
+16
+00:01:07.370 --> 00:01:16.016
+A parser should prove that offset plus size stays within the current message, that nested records do not overlap unexpectedly, and that the cursor
+
+17
+00:01:16.016 --> 00:01:17.818
+cannot move past the boundary.
+
+18
+00:01:17.818 --> 00:01:23.222
+Hidden pointer arithmetic, unchecked indexing, and implicit cursor mutation make those proofs hard to review.
+
+19
+00:01:23.222 --> 00:01:26.824
+The best parsing code is often plain rather than clever.
+
+20
+00:01:26.824 --> 00:01:31.868
+Each read says what it needs, what it produced, and what validation happened next.
+
+21
+00:01:31.868 --> 00:01:34.750
+That makes binary protocol behavior testable and maintainable.
+
+22
+00:01:34.750 --> 00:01:43.036
+It also gives reviewers a direct path through the code: frame validation, field extraction, range checks, state checks, and finally construction of a
+
+23
+00:01:43.036 --> 00:01:45.918
+trusted object that application logic may use safely.
+
+24
+00:01:45.918 --> 00:01:48.080
+Boring code is a strength here.

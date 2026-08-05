@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.478
+Buffer overflow prevention still matters because C++ gives engineers direct control over memory, layout, object lifetime, and performance-sensitive
+
+2
+00:00:07.478 --> 00:00:07.872
+behavior.
+
+3
+00:00:07.872 --> 00:00:09.446
+That control is valuable.
+
+4
+00:00:09.446 --> 00:00:14.169
+It lets teams build fast libraries, device software, services, engines, and infrastructure.
+
+5
+00:00:14.169 --> 00:00:19.679
+It also means the program is responsible for respecting object boundaries and valid storage.
+
+6
+00:00:19.679 --> 00:00:23.222
+A buffer mistake is not only a security concern.
+
+7
+00:00:23.222 --> 00:00:32.274
+Writing past the end of a buffer, reading beyond valid storage, or trusting an incorrect length can corrupt state, damage data integrity, break
+
+8
+00:00:32.274 --> 00:00:34.636
+reliability, and make later maintenance harder.
+
+9
+00:00:34.636 --> 00:00:40.539
+The problem often starts as an ordinary engineering mistake rather than an obviously dangerous decision.
+
+10
+00:00:40.539 --> 00:00:43.688
+Prevention starts before the copy or write operation.
+
+11
+00:00:43.688 --> 00:00:51.560
+Teams need designs that preserve bounds information, express ownership, keep lifetimes clear, and avoid pointer-only APIs where better abstractions
+
+12
+00:00:51.560 --> 00:00:51.953
+fit.
+
+13
+00:00:51.953 --> 00:00:59.432
+When the design loses length, capacity, or ownership context, every later caller has to reconstruct the contract from memory.
+
+14
+00:00:59.432 --> 00:01:03.761
+Compiler and library defenses help, but they cannot rescue unsafe assumptions.
+
+15
+00:01:03.761 --> 00:01:09.271
+Stack protection, fortified library checks, sanitizers, warnings, and hardened release profiles are valuable layers.
+
+16
+00:01:09.271 --> 00:01:16.356
+They work best when the code already uses safer C++ practices and when teams verify the final build.
+
+17
+00:01:16.356 --> 00:01:19.898
+The main theme of this course is layered prevention.
+
+18
+00:01:19.898 --> 00:01:23.047
+Use modern C++ containers and views where appropriate.
+
+19
+00:01:23.047 --> 00:01:25.802
+Validate input sizes before allocation or copying.
+
+20
+00:01:25.802 --> 00:01:28.163
+Treat strings and byte buffers differently.
+
+21
+00:01:28.163 --> 00:01:29.344
+Test edge cases.
+
+22
+00:01:29.344 --> 00:01:30.131
+Harden releases.
+
+23
+00:01:30.131 --> 00:01:33.280
+Then confirm that the shipped artifact matches policy.

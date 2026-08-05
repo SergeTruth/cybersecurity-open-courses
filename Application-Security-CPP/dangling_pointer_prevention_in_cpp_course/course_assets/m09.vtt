@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.489
+Lifetime defects can be intermittent because stale access may appear to work until timing, allocation layout, compiler settings, or container
+
+2
+00:00:07.489 --> 00:00:08.238
+behavior changes.
+
+3
+00:00:08.238 --> 00:00:10.859
+That makes ordinary happy-path testing insufficient.
+
+4
+00:00:10.859 --> 00:00:13.480
+Tests need to exercise lifecycle boundaries directly.
+
+5
+00:00:13.480 --> 00:00:17.224
+Sanitizers can reveal memory lifetime defects during development and CI.
+
+6
+00:00:17.224 --> 00:00:26.211
+They can make invalid access visible close to the operation that triggers it, which is far easier to debug than a later corrupted state.
+
+7
+00:00:26.211 --> 00:00:31.453
+These tools do not replace design, but they provide valuable feedback while tests run.
+
+8
+00:00:31.453 --> 00:00:37.070
+Debug iterator modes, hardened library settings, compiler diagnostics, and static analysis can add useful coverage.
+
+9
+00:00:37.070 --> 00:00:43.810
+They may catch invalid container access, suspicious lifetime patterns, or dangerous captures before the issue appears in production.
+
+10
+00:00:43.810 --> 00:00:48.678
+Tool settings should be documented so developers know which builds provide which checks.
+
+11
+00:00:48.678 --> 00:00:54.669
+Tests should cover destruction order, container mutation, move operations, callback cancellation, asynchronous completion, observer removal, and
+
+12
+00:00:54.669 --> 00:00:55.418
+error paths.
+
+13
+00:00:55.418 --> 00:01:00.286
+These are the situations where access often outlives the object it depends on.
+
+14
+00:01:00.286 --> 00:01:04.404
+Boundary lifecycle tests are just as important as boundary value tests.
+
+15
+00:01:04.404 --> 00:01:11.519
+Tool findings should become tracked engineering defects with an owner, a fix, a regression test, and follow-up review.
+
+16
+00:01:11.519 --> 00:01:13.766
+Suppressions should be rare and documented.
+
+17
+00:01:13.766 --> 00:01:20.880
+A team gets stronger lifetime safety when diagnostics become part of normal delivery rather than a separate cleanup campaign.

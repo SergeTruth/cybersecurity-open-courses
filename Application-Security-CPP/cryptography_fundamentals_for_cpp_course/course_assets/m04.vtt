@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.376
+Symmetric encryption uses the same secret key for protecting data and later recovering it.
+
+2
+00:00:05.376 --> 00:00:13.824
+It is common for stored records, local files, service messages, and other cases where both sides are allowed to share a secret.
+
+3
+00:00:13.824 --> 00:00:16.128
+Confidentiality alone is not always enough.
+
+4
+00:00:16.128 --> 00:00:22.656
+If encrypted data can be modified without detection, the application may process data it should not trust.
+
+5
+00:00:22.656 --> 00:00:29.568
+Modern designs usually prefer authenticated encryption so confidentiality and integrity are handled together by a library-supported mode.
+
+6
+00:00:29.568 --> 00:00:32.256
+Authenticated encryption can also use associated data.
+
+7
+00:00:32.256 --> 00:00:37.248
+Associated data is not encrypted, but it is bound to the authentication result.
+
+8
+00:00:37.248 --> 00:00:45.696
+This can be useful for context such as version, tenant, purpose, record identifier, or protocol metadata that must match the protected content.
+
+9
+00:00:45.696 --> 00:00:48.768
+The application should reject unauthenticated data before use.
+
+10
+00:00:48.768 --> 00:00:54.912
+Do not parse, deserialize, route, or act on protected content until the library reports successful authentication.
+
+11
+00:00:54.912 --> 00:01:02.208
+Failure should be treated as a normal security-relevant outcome, not as an exceptional path that is rarely tested.
+
+12
+00:01:02.208 --> 00:01:06.432
+Unique nonces or IVs may be required by the chosen mode.
+
+13
+00:01:06.432 --> 00:01:12.576
+The application should follow the library documentation exactly and make nonce policy visible in code review.
+
+14
+00:01:12.576 --> 00:01:17.568
+Avoid assembling encryption and authentication manually unless an approved design explicitly requires it.
+
+15
+00:01:17.568 --> 00:01:22.944
+Combining primitives safely is subtle, and mature libraries already provide modes that reduce misuse.
+
+16
+00:01:22.944 --> 00:01:31.008
+A reviewable symmetric-encryption design identifies the key source, nonce strategy, associated data, failure behavior, and the exact point where data
+
+17
+00:01:31.008 --> 00:01:33.312
+becomes trusted enough for application use.
+
+18
+00:01:33.312 --> 00:01:36.768
+It should also identify what is intentionally not encrypted.
+
+19
+00:01:36.768 --> 00:01:43.680
+Associated data, headers, and routing fields may remain visible, so the design should confirm that visibility is acceptable.
+
+20
+00:01:43.680 --> 00:01:51.360
+Operationally, encryption code should be tested with valid data, modified data, wrong context, missing keys, and version transitions so failure
+
+21
+00:01:51.360 --> 00:01:53.280
+handling is not improvised later.

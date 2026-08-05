@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.980
+Binary protocol code needs resource limits because malformed or unexpected input can otherwise consume memory, CPU, file handles, queue space, or
+
+2
+00:00:07.980 --> 00:00:08.740
+session state.
+
+3
+00:00:08.740 --> 00:00:15.960
+Limits should cover maximum message size, maximum field length, maximum element count, maximum nesting depth, decompression output where relevant,
+
+4
+00:00:15.960 --> 00:00:20.520
+recursion, allocation budgets, per-peer rate, and total time spent on parsing.
+
+5
+00:00:20.520 --> 00:00:23.180
+Malformed input should lead to predictable failure.
+
+6
+00:00:23.180 --> 00:00:29.260
+The parser should distinguish incomplete messages, invalid messages, unsupported versions, unauthenticated messages, and resource-exceeded messages
+
+7
+00:00:29.260 --> 00:00:31.920
+when that distinction helps operations or policy.
+
+8
+00:00:31.920 --> 00:00:41.800
+It should not continue reading beyond the current frame, spin in a loop, grow buffers without a cap, or leave the session in a confusing partial
+
+9
+00:00:41.800 --> 00:00:42.180
+state.
+
+10
+00:00:42.180 --> 00:00:45.220
+Preserving invariants is the heart of safe failure.
+
+11
+00:00:45.220 --> 00:00:53.200
+If a message is rejected, previously trusted state should remain valid, partially created objects should be released, and callbacks or downstream
+
+12
+00:00:53.200 --> 00:00:56.240
+actions should not run as if parsing succeeded.
+
+13
+00:00:56.240 --> 00:01:03.840
+For streaming protocols, the implementation should also define whether the connection can resynchronize or must be closed after specific error
+
+14
+00:01:03.840 --> 00:01:04.220
+categories.
+
+15
+00:01:04.220 --> 00:01:08.020
+Logging should help operations without storing sensitive raw data unnecessarily.
+
+16
+00:01:08.020 --> 00:01:15.620
+Counters and categories such as invalid length, unsupported version, bad state, authentication failure, and resource limit reached are often more
+
+17
+00:01:15.620 --> 00:01:17.900
+useful than dumping the original bytes.
+
+18
+00:01:17.900 --> 00:01:23.220
+When samples are needed for controlled debugging, access, retention, and redaction should be deliberate.
+
+19
+00:01:23.220 --> 00:01:26.640
+A parser that fails safely is easier to operate.
+
+20
+00:01:26.640 --> 00:01:34.240
+It rejects bad input, releases resources, records safe diagnostics, and keeps the rest of the application in a known state.
+
+21
+00:01:34.240 --> 00:01:42.980
+These behaviors should be verified under load as well as in unit tests, because resource pressure often reveals cleanup and timeout assumptions that
+
+22
+00:01:42.980 --> 00:01:46.400
+ordinary valid-message tests miss in practice and staging.

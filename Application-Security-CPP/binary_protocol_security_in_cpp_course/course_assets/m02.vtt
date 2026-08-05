@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.074
+Framing is the first parsing decision.
+
+2
+00:00:02.074 --> 00:00:10.717
+Before a parser can interpret fields, it needs to know where a message starts, where it ends, and how much data is required to continue.
+
+3
+00:00:10.717 --> 00:00:12.791
+Some protocols use fixed-size headers.
+
+4
+00:00:12.791 --> 00:00:18.669
+Others use length-prefixed records, streaming records, nested sections, or a mixture of fixed and variable data.
+
+5
+00:00:18.669 --> 00:00:25.583
+A safe parser does not assume that one file read, socket read, or device read contains exactly one complete message.
+
+6
+00:00:25.583 --> 00:00:33.189
+Input may arrive in pieces, multiple records may be batched together, and a partial header may need to wait for more bytes.
+
+7
+00:00:33.189 --> 00:00:36.300
+Framing logic should distinguish incomplete data from invalid data.
+
+8
+00:00:36.300 --> 00:00:39.757
+Incomplete data means the parser needs more bytes within policy.
+
+9
+00:00:39.757 --> 00:00:44.597
+Invalid data means the parser should reject the record and preserve a safe state.
+
+10
+00:00:44.597 --> 00:00:46.671
+Length fields are untrusted until checked.
+
+11
+00:00:46.671 --> 00:00:51.511
+A length value should be validated before allocation, buffering, copying, decompression, or nested parsing.
+
+12
+00:00:51.511 --> 00:00:58.771
+The parser should compare the declared length against bytes actually available, maximum record size, maximum message size, and any state-specific
+
+13
+00:00:58.771 --> 00:00:59.117
+policy.
+
+14
+00:00:59.117 --> 00:01:04.649
+It should also check derived values, such as header length plus body length, before using them.
+
+15
+00:01:04.649 --> 00:01:12.600
+Good framing code tracks three questions: how many bytes are available, how many bytes are required, and whether continuing would exceed a limit.
+
+16
+00:01:12.600 --> 00:01:15.711
+That makes boundary handling boring in the best way.
+
+17
+00:01:15.711 --> 00:01:21.589
+The parser either waits for more data, rejects the message, or proceeds with a clearly bounded frame.
+
+18
+00:01:21.589 --> 00:01:28.503
+This also improves observability because failures can be classified as truncated input, invalid length, unsupported record type, or resource limit
+
+19
+00:01:28.503 --> 00:01:32.651
+reached instead of one vague parse error during troubleshooting and support escalation.
+
+20
+00:01:32.651 --> 00:01:36.800
+That precision helps teams fix the right layer quickly and safely now.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.495
+RAII connects resource management to object lifetime.
+
+2
+00:00:02.495 --> 00:00:06.773
+When an owning object is constructed, it acquires or represents a resource.
+
+3
+00:00:06.773 --> 00:00:10.695
+When that owning object is destroyed, its destructor releases the resource.
+
+4
+00:00:10.695 --> 00:00:16.399
+This pattern makes cleanup predictable and reduces the need for manual cleanup scattered across every branch.
+
+5
+00:00:16.399 --> 00:00:18.181
+std::unique_ptr expresses exclusive ownership.
+
+6
+00:00:18.181 --> 00:00:24.955
+It is a good fit when one object or scope is responsible for keeping a dynamically allocated object alive.
+
+7
+00:00:24.955 --> 00:00:27.807
+Moving a unique pointer transfers that responsibility visibly.
+
+8
+00:00:27.807 --> 00:00:31.015
+That makes ownership changes easier to see during review.
+
+9
+00:00:31.015 --> 00:00:32.798
+std::shared_ptr expresses shared ownership.
+
+10
+00:00:32.798 --> 00:00:38.145
+It is appropriate when multiple owners truly need to keep the same object alive independently.
+
+11
+00:00:38.145 --> 00:00:42.423
+The tradeoff is that shared ownership can make destruction timing less obvious.
+
+12
+00:00:42.423 --> 00:00:47.771
+If it is used casually, it may hide a design question rather than answer it.
+
+13
+00:00:47.771 --> 00:00:52.405
+std::weak_ptr supports non-owning observation of an object managed by shared ownership.
+
+14
+00:00:52.405 --> 00:00:58.465
+It lets code check whether the object is still available before use without extending lifetime by itself.
+
+15
+00:00:58.465 --> 00:01:03.813
+This is useful for caches, callbacks, registries, and observer relationships where ownership should remain elsewhere.
+
+16
+00:01:03.813 --> 00:01:06.665
+Smart pointers are not a substitute for design.
+
+17
+00:01:06.665 --> 00:01:08.804
+They should reflect real ownership relationships.
+
+18
+00:01:08.804 --> 00:01:13.795
+Replacing every raw pointer with shared ownership can make a system harder to understand.
+
+19
+00:01:13.795 --> 00:01:22.707
+The right question is not which smart pointer looks safer, but who should own the object and how long observers are allowed to use it.
+
+20
+00:01:22.707 --> 00:01:25.916
+Manual delete paths should be minimized and reviewed carefully.
+
+21
+00:01:25.916 --> 00:01:32.689
+When manual cleanup remains, the code should have clear single ownership, predictable failure behavior, and tests around destruction order.
+
+22
+00:01:32.689 --> 00:01:37.680
+RAII wrappers can often isolate older cleanup patterns while the surrounding design is modernized.

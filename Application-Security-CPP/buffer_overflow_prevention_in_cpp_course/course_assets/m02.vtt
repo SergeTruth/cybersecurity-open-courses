@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.424
+A buffer is not just a pointer.
+
+2
+00:00:02.424 --> 00:00:07.271
+It has storage, capacity, current length, element type, lifetime, ownership, and valid access rules.
+
+3
+00:00:07.271 --> 00:00:11.425
+Safe buffer design keeps those facts visible for as long as possible.
+
+4
+00:00:11.425 --> 00:00:16.619
+When they are separated, mistakes become much easier to write and much harder to review.
+
+5
+00:00:16.619 --> 00:00:21.812
+Raw pointers and C-style arrays often lose important context when passed across function boundaries.
+
+6
+00:00:21.812 --> 00:00:30.814
+A callee may know where data starts, but not how much storage exists, how much data is initialized, who owns the storage, or whether the pointer
+
+7
+00:00:30.814 --> 00:00:32.891
+points to one element or many.
+
+8
+00:00:32.891 --> 00:00:35.661
+That missing context is where boundary mistakes grow.
+
+9
+00:00:35.661 --> 00:00:39.123
+Null termination is not the same as a verified length.
+
+10
+00:00:39.123 --> 00:00:44.663
+A C-style string convention depends on a terminator being present before the valid storage ends.
+
+11
+00:00:44.663 --> 00:00:50.202
+If code assumes termination without knowing the buffer capacity, it may read beyond the intended range.
+
+12
+00:00:50.202 --> 00:00:53.319
+Text interfaces should define length and encoding expectations clearly.
+
+13
+00:00:53.319 --> 00:00:56.435
+Byte buffers and character strings require different handling rules.
+
+14
+00:00:56.435 --> 00:01:00.935
+Binary data may contain zero bytes and should not be treated as text.
+
+15
+00:01:00.935 --> 00:01:03.359
+Encoded text may change length when converted.
+
+16
+00:01:03.359 --> 00:01:09.591
+A destination that is large enough for characters in one representation may not be large enough after transformation.
+
+17
+00:01:09.591 --> 00:01:12.361
+Safe APIs preserve ownership and bounds across boundaries.
+
+18
+00:01:12.361 --> 00:01:17.554
+Containers, spans, string types, buffer objects, and explicit length parameters all help maintain the contract.
+
+19
+00:01:17.554 --> 00:01:23.440
+The goal is to make valid access rules obvious to the caller, the callee, tests, and reviewers.

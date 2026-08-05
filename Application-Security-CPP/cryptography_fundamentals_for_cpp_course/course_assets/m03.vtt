@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.826
+Cryptographic strength depends heavily on the values around the algorithm.
+
+2
+00:00:03.826 --> 00:00:12.245
+Secret keys, public keys, salts, initialization values, IVs, nonces, and random values all have different purposes, and confusing them can weaken a
+
+3
+00:00:12.245 --> 00:00:12.627
+design.
+
+4
+00:00:12.627 --> 00:00:14.158
+Keys are sensitive assets.
+
+5
+00:00:14.158 --> 00:00:20.663
+They need clear ownership, approved generation, controlled storage, rotation policy, access limits, and deletion or retirement behavior.
+
+6
+00:00:20.663 --> 00:00:25.255
+A strong algorithm cannot compensate for exposed or poorly managed key material.
+
+7
+00:00:25.255 --> 00:00:29.464
+Cryptographic randomness should come from approved library or operating-system facilities.
+
+8
+00:00:29.464 --> 00:00:36.734
+General-purpose pseudo-random functions are not appropriate for key generation, nonces that require unpredictability, or other security-sensitive
+
+9
+00:00:36.734 --> 00:00:40.178
+values unless an approved cryptographic API is providing them.
+
+10
+00:00:40.178 --> 00:00:42.856
+Salts, IVs, and nonces are not interchangeable.
+
+11
+00:00:42.856 --> 00:00:47.065
+A salt supports uniqueness in password hashing or related derivation contexts.
+
+12
+00:00:47.065 --> 00:00:50.892
+An IV or nonce may support a specific encryption mode.
+
+13
+00:00:50.892 --> 00:00:58.545
+Some values must be unique, some must be unpredictable, and some can be public but still must follow strict rules.
+
+14
+00:00:58.545 --> 00:01:03.136
+Nonce reuse can be security-critical depending on the algorithm and mode.
+
+15
+00:01:03.136 --> 00:01:08.111
+The application should not rely on informal memory of what was used before.
+
+16
+00:01:08.111 --> 00:01:13.468
+It should have a clear generation and persistence strategy suitable for the library API.
+
+17
+00:01:13.468 --> 00:01:16.146
+Key lifecycle decisions belong in the design.
+
+18
+00:01:16.146 --> 00:01:25.330
+Define where keys come from, how they rotate, which components can read them, how old data remains accessible, and how failures are handled during
+
+19
+00:01:25.330 --> 00:01:25.712
+transition.
+
+20
+00:01:25.712 --> 00:01:35.278
+The safe habit is to treat randomness and key material as first-class design elements, not incidental parameters passed into a crypto call at the
+
+21
+00:01:35.278 --> 00:01:36.044
+last moment.
+
+22
+00:01:36.044 --> 00:01:39.487
+Reviewers should also look for accidental reuse across environments.
+
+23
+00:01:39.487 --> 00:01:45.992
+Development, test, staging, and production should not share sensitive key material just because it makes deployment easier.
+
+24
+00:01:45.992 --> 00:01:52.880
+Clear ownership makes recovery safer when a key must be rotated, retired, or replaced after an operational incident.

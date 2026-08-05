@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.923
+RAII, Resource Acquisition Is Initialization, is the preferred C++ model for reliable cleanup.
+
+2
+00:00:04.923 --> 00:00:10.224
+The resource is tied to an object's lifetime, and the destructor releases it.
+
+3
+00:00:10.224 --> 00:00:17.798
+That means cleanup happens during normal control flow, early returns, exceptions, and partial failure paths without requiring every branch to
+
+4
+00:00:17.798 --> 00:00:19.692
+remember a manual release step.
+
+5
+00:00:19.692 --> 00:00:23.478
+Smart pointers are RAII tools when they express real ownership.
+
+6
+00:00:23.478 --> 00:00:28.401
+Use std::unique_ptr when one owner controls a dynamically allocated object or resource.
+
+7
+00:00:28.401 --> 00:00:32.946
+It makes ownership transfer explicit through moves and avoids raw owning pointers.
+
+8
+00:00:32.946 --> 00:00:36.354
+Use std::shared_ptr only when shared lifetime is intentional.
+
+9
+00:00:36.354 --> 00:00:41.277
+Shared ownership can be appropriate, but it also makes destruction timing less obvious.
+
+10
+00:00:41.277 --> 00:00:48.472
+std::weak_ptr is useful when code needs to observe an object managed by shared ownership without keeping it alive.
+
+11
+00:00:48.472 --> 00:00:55.667
+It helps avoid reference cycles and supports callback or cache designs where the observer should handle the target disappearing.
+
+12
+00:00:55.667 --> 00:01:01.726
+It does not replace ownership design; it depends on a clear shared ownership model around it.
+
+13
+00:01:01.726 --> 00:01:03.619
+RAII is broader than memory.
+
+14
+00:01:03.619 --> 00:01:11.571
+File descriptors, sockets, locks, handles, mapped regions, and custom library resources can all be wrapped so cleanup happens in a destructor.
+
+15
+00:01:11.571 --> 00:01:15.737
+That consistency matters because lifetime bugs often appear on error paths.
+
+16
+00:01:15.737 --> 00:01:24.068
+When cleanup is automatic, reviewers can focus on ownership relationships instead of chasing every exit branch for a missing release or double
+
+17
+00:01:24.068 --> 00:01:24.447
+release.
+
+18
+00:01:24.447 --> 00:01:28.612
+Smart pointers help prevent use-after-free only when used honestly.
+
+19
+00:01:28.612 --> 00:01:36.186
+Passing raw pointers from get() to long-lived storage, overusing shared ownership, hiding release operations, or creating cycles can reintroduce
+
+20
+00:01:36.186 --> 00:01:36.943
+lifetime risk.
+
+21
+00:01:36.943 --> 00:01:44.138
+The review habit is to ask whether each pointer type matches the real relationship: owns, shares, observes, or borrows.
+
+22
+00:01:44.138 --> 00:01:49.440
+When the type tells the truth, stale access is easier to find and prevent.

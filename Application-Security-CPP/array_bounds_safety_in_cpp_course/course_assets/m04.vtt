@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.787
+Many array defects come from ordinary loop logic.
+
+2
+00:00:02.787 --> 00:00:05.226
+A termination condition uses the wrong comparison.
+
+3
+00:00:05.226 --> 00:00:08.362
+A loop assumes there is at least one element.
+
+4
+00:00:08.362 --> 00:00:12.194
+The last valid element is confused with the count of elements.
+
+5
+00:00:12.194 --> 00:00:14.982
+A size is captured before a container changes.
+
+6
+00:00:14.982 --> 00:00:18.466
+These are everyday mistakes, which is exactly why patterns matter.
+
+7
+00:00:18.466 --> 00:00:21.253
+Off-by-one errors usually appear near boundaries.
+
+8
+00:00:21.253 --> 00:00:27.176
+Zero elements, one element, exactly the maximum allowed size, and just-beyond-limit values deserve explicit attention.
+
+9
+00:00:27.176 --> 00:00:35.887
+A loop that works for a typical middle-sized collection may still be wrong for an empty range or a range with one valid item.
+
+10
+00:00:35.887 --> 00:00:39.371
+Range-based loops and standard algorithms reduce unnecessary index handling.
+
+11
+00:00:39.371 --> 00:00:44.597
+If the code only needs to visit each element, an index may not be needed.
+
+12
+00:00:44.597 --> 00:00:52.610
+Removing the index removes the need to reason about start value, end value, increment, signedness, and whether the index still belongs to the
+
+13
+00:00:52.610 --> 00:00:53.307
+accessed container.
+
+14
+00:00:53.307 --> 00:00:59.579
+When indexing is required, check the index before access and keep it tied to the container being accessed.
+
+15
+00:00:59.579 --> 00:01:06.199
+Avoid deriving an index from one container and applying it to another unless the relationship is explicit and validated.
+
+16
+00:01:06.199 --> 00:01:11.773
+If a function accepts an index, its contract should state the valid range and failure behavior.
+
+17
+00:01:11.773 --> 00:01:14.212
+Signed and unsigned interactions deserve careful review.
+
+18
+00:01:14.212 --> 00:01:19.787
+Container sizes often use unsigned types, while application indexes, deltas, or parsed values may be signed.
+
+19
+00:01:19.787 --> 00:01:25.361
+A negative value should be rejected before it crosses into an unsigned size or index path.
+
+20
+00:01:25.361 --> 00:01:28.497
+Clear conversion points make the code easier to trust.
+
+21
+00:01:28.497 --> 00:01:31.633
+Good iteration code is boring in the best way.
+
+22
+00:01:31.633 --> 00:01:39.298
+It makes the range obvious, handles empty input deliberately, avoids hidden conversion surprises, and uses named helper functions when the range rule
+
+23
+00:01:39.298 --> 00:01:41.040
+is important enough to repeat.

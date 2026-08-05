@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.274
+Stack protection and object-size checks are examples of compiler-assisted defenses.
+
+2
+00:00:04.274 --> 00:00:09.616
+They are intended to detect certain unsafe memory patterns or make some failures visible earlier.
+
+3
+00:00:09.616 --> 00:00:16.383
+They are useful, but they should be understood as safety nets rather than permission to write unclear buffer code.
+
+4
+00:00:16.383 --> 00:00:22.437
+Stack protectors commonly add a guard value to selected stack frames and check that value before returning.
+
+5
+00:00:22.437 --> 00:00:27.780
+If the value changed unexpectedly, the program can stop before continuing with corrupted stack state.
+
+6
+00:00:27.780 --> 00:00:32.766
+Which functions are protected depends on compiler mode, local objects, optimization, and platform support.
+
+7
+00:00:32.766 --> 00:00:39.889
+Object-size analysis lets a compiler reason about the size of some objects at compile time or in optimized code.
+
+8
+00:00:39.889 --> 00:00:45.587
+Fortified library behavior can use that information to add checks around selected memory and string operations.
+
+9
+00:00:45.587 --> 00:00:51.285
+These checks can catch some mismatched copy sizes and unsafe buffer patterns during testing or runtime.
+
+10
+00:00:51.285 --> 00:00:52.354
+The limits matter.
+
+11
+00:00:52.354 --> 00:00:56.271
+Stack protection does not cover every object or every memory bug.
+
+12
+00:00:56.271 --> 00:01:00.901
+Object-size checks are strongest when the compiler can see the object boundary.
+
+13
+00:01:00.901 --> 00:01:06.600
+Inlined code, optimization level, library choices, and build mode all influence what protection is actually emitted.
+
+14
+00:01:06.600 --> 00:01:08.737
+The secure engineering response is layered.
+
+15
+00:01:08.737 --> 00:01:13.010
+Prefer containers, spans, string types, RAII, explicit capacities, and checked helper functions.
+
+16
+00:01:13.010 --> 00:01:16.572
+Then enable compiler-supported checks as additional evidence and defense.
+
+17
+00:01:16.572 --> 00:01:22.270
+The better the code expresses ownership and size, the more useful compiler analysis tends to be.
+
+18
+00:01:22.270 --> 00:01:25.832
+Release builds should be inspected to confirm protections are active.
+
+19
+00:01:25.832 --> 00:01:29.393
+Review build commands, generated logs, and binary properties where appropriate.
+
+20
+00:01:29.393 --> 00:01:36.160
+A team should be able to show that the intended hardening settings were used for the artifact that ships.

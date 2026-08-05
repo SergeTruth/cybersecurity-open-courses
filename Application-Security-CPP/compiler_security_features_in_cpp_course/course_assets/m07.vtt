@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.800
+Security is affected not only by compiler flags, but also by runtime library and standard library configuration.
+
+2
+00:00:06.800 --> 00:00:14.000
+Debug runtimes, checked iterators, hardened library modes, bounds-related checks, and allocator diagnostics can expose assumptions that ordinary
+
+3
+00:00:14.000 --> 00:00:16.000
+release settings may not show.
+
+4
+00:00:16.000 --> 00:00:24.000
+Checked iterators and debug runtime modes can catch invalid iterator use, container misuse, mismatched allocation behavior, and other defects during
+
+5
+00:00:24.000 --> 00:00:24.400
+development.
+
+6
+00:00:24.400 --> 00:00:32.800
+They are often too expensive or too behavior-changing for all production builds, but they provide valuable evidence in test profiles.
+
+7
+00:00:32.800 --> 00:00:41.200
+Safer C++ abstractions reduce reliance on low-level manual memory handling. `std::span`, `std::string`, `std::vector`, smart pointers, RAII wrappers,
+
+8
+00:00:41.200 --> 00:00:46.000
+and range-based operations can make ownership and bounds easier to review.
+
+9
+00:00:46.000 --> 00:00:51.600
+Library hardening works best when the code already uses abstractions that carry useful information.
+
+10
+00:00:51.600 --> 00:00:55.200
+Build profiles should balance safety checks, performance, and compatibility.
+
+11
+00:00:55.200 --> 00:00:58.000
+Development and sanitizer profiles can be stricter.
+
+12
+00:00:58.000 --> 00:01:01.200
+Staging can mirror production while adding selected diagnostics.
+
+13
+00:01:01.200 --> 00:01:06.800
+Release profiles should be intentional and verified against risk, performance requirements, and platform support.
+
+14
+00:01:06.800 --> 00:01:10.000
+The important habit is to document the tradeoff.
+
+15
+00:01:10.000 --> 00:01:14.800
+If a hardened library mode is enabled only in testing, say why.
+
+16
+00:01:14.800 --> 00:01:21.600
+If a release build disables a check for performance or compatibility, record the rationale and compensating controls.
+
+17
+00:01:21.600 --> 00:01:24.400
+Governance turns configuration into an engineering decision.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.761
+Modern C++ provides abstractions that reduce exposure to manual buffer mistakes.
+
+2
+00:00:03.761 --> 00:00:09.573
+These abstractions do not make every defect impossible, but they carry more information than raw pointers alone.
+
+3
+00:00:09.573 --> 00:00:15.727
+They also make code easier to review because ownership, size, and lifetime are often visible in the type.
+
+4
+00:00:15.727 --> 00:00:21.198
+`std::array` is useful for fixed-size storage where the size is part of the type.
+
+5
+00:00:21.198 --> 00:00:25.984
+It works well when capacity is known at compile time and should not change.
+
+6
+00:00:25.984 --> 00:00:31.796
+Reviewers can see that the object owns its storage and that the number of elements is stable.
+
+7
+00:00:31.796 --> 00:00:34.532
+`std::vector` is useful for dynamic contiguous storage.
+
+8
+00:00:34.532 --> 00:00:41.712
+It manages allocation and deallocation through RAII, carries its size and capacity, and supports operations that keep storage ownership inside the
+
+9
+00:00:41.712 --> 00:00:42.053
+container.
+
+10
+00:00:42.053 --> 00:00:46.840
+Code still needs range checks and invalidation awareness, but manual allocation pressure is lower.
+
+11
+00:00:46.840 --> 00:00:50.259
+`std::string` should generally be used for owned text data.
+
+12
+00:00:50.259 --> 00:00:53.336
+It keeps length with the characters and manages storage.
+
+13
+00:00:53.336 --> 00:01:02.909
+It is not a binary buffer, and it does not remove the need to understand encoding or output limits, but it is clearer than a raw character pointer
+
+14
+00:01:02.909 --> 00:01:03.935
+for ordinary text.
+
+15
+00:01:03.935 --> 00:01:07.012
+`std::span` is useful for bounded non-owning views.
+
+16
+00:01:07.012 --> 00:01:11.457
+It lets an API accept a view of contiguous data without taking ownership.
+
+17
+00:01:11.457 --> 00:01:18.295
+Because it carries a pointer and length together, it is usually easier to review than separate pointer and count parameters.
+
+18
+00:01:18.295 --> 00:01:21.030
+The owner still has to outlive the span.
+
+19
+00:01:21.030 --> 00:01:23.081
+RAII keeps ownership and lifetime clear.
+
+20
+00:01:23.081 --> 00:01:27.526
+Containers, smart pointers, and small wrapper types release resources when objects leave scope.
+
+21
+00:01:27.526 --> 00:01:33.680
+Buffer safety improves when the code does not rely on every branch manually releasing or resizing storage correctly.

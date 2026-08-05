@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.705
+A data race happens when multiple threads access the same mutable object without proper synchronization and at least one access modifies it.
+
+2
+00:00:07.705 --> 00:00:13.660
+In C++, that is not merely a surprising result; it can make the program's behavior undefined.
+
+3
+00:00:13.660 --> 00:00:16.462
+Plain variables are not safe thread coordination mechanisms.
+
+4
+00:00:16.462 --> 00:00:25.218
+A worker reading a plain boolean while another thread writes it, or several threads incrementing a plain counter, may appear to work during one test
+
+5
+00:00:25.218 --> 00:00:28.720
+run and fail under different scheduling, optimization, or hardware behavior.
+
+6
+00:00:28.720 --> 00:00:32.923
+std::atomic provides operations with defined concurrent behavior for the atomic object.
+
+7
+00:00:32.923 --> 00:00:41.329
+A load, store, exchange, fetch operation, or compare-and-exchange can be performed by multiple threads without creating a data race on that object.
+
+8
+00:00:41.329 --> 00:00:46.233
+The design question comes first: does the state need to be shared at all?
+
+9
+00:00:46.233 --> 00:00:53.238
+Immutable data, thread confinement, ownership transfer, and message passing often reduce the need for shared mutation and make review simpler.
+
+10
+00:00:53.238 --> 00:00:56.740
+An atomic variable should not hide a larger unsynchronized invariant.
+
+11
+00:00:56.740 --> 00:01:03.045
+If an atomic flag says a buffer is ready, the buffer's lifetime and publication rules still matter.
+
+12
+00:01:03.045 --> 00:01:08.298
+If an atomic counter relates to a container, the container may still need separate protection.
+
+13
+00:01:08.298 --> 00:01:10.750
+Each atomic should have a clear purpose.
+
+14
+00:01:10.750 --> 00:01:19.856
+Naming, comments, and nearby code should explain whether it is a stop signal, a readiness marker, a metrics value, a generation count, or part of a
+
+15
+00:01:19.856 --> 00:01:20.557
+state machine.
+
+16
+00:01:20.557 --> 00:01:27.562
+The safe habit is to reduce shared mutable state first, then make the remaining shared values explicit, narrow, and reviewable.
+
+17
+00:01:27.562 --> 00:01:36.318
+That habit prevents atomics from becoming a cosmetic fix for a design that still allows unrelated threads to mutate the same logical state without a
+
+18
+00:01:36.318 --> 00:01:37.019
+shared contract.
+
+19
+00:01:37.019 --> 00:01:38.069
+Make sharing intentional.
+
+20
+00:01:38.069 --> 00:01:39.120
+Keep it visible.

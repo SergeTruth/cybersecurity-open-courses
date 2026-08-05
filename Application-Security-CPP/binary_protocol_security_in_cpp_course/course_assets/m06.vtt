@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.136
+Parsing and trusting are different decisions.
+
+2
+00:00:02.136 --> 00:00:11.035
+A parser may successfully extract a header, version, length, and body, but that does not prove who sent the message, whether it was changed in
+
+3
+00:00:11.035 --> 00:00:17.798
+transit, whether it belongs to the current session, or whether it is safe to process in the current state.
+
+4
+00:00:17.798 --> 00:00:24.561
+When binary messages cross trust boundaries or affect sensitive state, the design may need transport security, message authentication, signatures,
+
+5
+00:00:24.561 --> 00:00:28.120
+sequence numbers, timestamps, or freshness checks according to system requirements.
+
+6
+00:00:28.120 --> 00:00:35.240
+The right control depends on the environment and threat model, but the implementation should use approved cryptographic libraries, TLS where
+
+7
+00:00:35.240 --> 00:00:38.443
+appropriate, or platform mechanisms rather than custom cryptographic logic.
+
+8
+00:00:38.443 --> 00:00:42.359
+Integrity checks should happen before sensitive use when policy requires them.
+
+9
+00:00:42.359 --> 00:00:50.546
+That does not always mean before every byte is parsed, because the parser may need a bounded envelope to locate the integrity data.
+
+10
+00:00:50.546 --> 00:00:58.733
+It does mean that the application should not act on fields, allocate large resources based on trusted meaning, or change sensitive state until
+
+11
+00:00:58.733 --> 00:01:01.224
+required authenticity and integrity conditions are satisfied.
+
+12
+00:01:01.224 --> 00:01:07.631
+Repeated valid messages can still be unsafe if the protocol does not define freshness, idempotency, or sequence behavior.
+
+13
+00:01:07.631 --> 00:01:15.818
+A payment instruction, state transition, or command may need a sequence number, nonce, timestamp window, or server-side record showing it has already
+
+14
+00:01:15.818 --> 00:01:16.530
+been handled.
+
+15
+00:01:16.530 --> 00:01:21.158
+Those rules should be part of the protocol contract, not a side note.
+
+16
+00:01:21.158 --> 00:01:25.429
+A defensive design keeps authentication, integrity, and replay controls visible in review.
+
+17
+00:01:25.429 --> 00:01:33.616
+The parser extracts structure, the validation layer checks policy, and the application acts only after the message is both well-formed and trusted
+
+18
+00:01:33.616 --> 00:01:35.040
+for the current context.

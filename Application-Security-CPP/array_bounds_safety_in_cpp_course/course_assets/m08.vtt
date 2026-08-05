@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.327
+Many teams inherit C++ code with raw arrays, pointer arithmetic, manual buffer management, and unclear ownership.
+
+2
+00:00:06.327 --> 00:00:09.886
+The right response is not usually a full rewrite.
+
+3
+00:00:09.886 --> 00:00:15.026
+Bounds safety improves through focused, incremental changes that reduce risk while preserving behavior.
+
+4
+00:00:15.026 --> 00:00:16.608
+Start with priority paths.
+
+5
+00:00:16.608 --> 00:00:23.726
+Externally reachable parsers, file importers, protocol handlers, serialization code, plugin boundaries, boundary-heavy loops, and code that mixes
+
+6
+00:00:23.726 --> 00:00:26.098
+offsets and lengths deserve early attention.
+
+7
+00:00:26.098 --> 00:00:30.843
+These paths are where unclear bounds assumptions can have the broadest impact.
+
+8
+00:00:30.843 --> 00:00:33.611
+Add regression tests before behavior-sensitive changes.
+
+9
+00:00:33.611 --> 00:00:39.938
+Legacy code often contains undocumented compatibility behavior, and tests give the team confidence to refactor safely.
+
+10
+00:00:39.938 --> 00:00:46.265
+Boundary tests around empty input, exact sizes, truncated data, and near-limit ranges are especially useful.
+
+11
+00:00:46.265 --> 00:00:48.638
+Wrap unsafe interfaces before replacing internals.
+
+12
+00:00:48.638 --> 00:00:55.755
+A small adapter can validate inputs, preserve length with data, and provide a bounded view to newer code.
+
+13
+00:00:55.755 --> 00:01:03.269
+That wrapper becomes a controlled boundary while the implementation is gradually moved toward containers, spans, and clearer range objects.
+
+14
+00:01:03.269 --> 00:01:06.827
+Replace pointer arithmetic with clearer range logic where practical.
+
+15
+00:01:06.827 --> 00:01:15.922
+Instead of moving pointers through a buffer without visible context, keep a view of remaining data or use helper functions that validate subranges.
+
+16
+00:01:15.922 --> 00:01:23.040
+Document assumptions that cannot yet be removed and add follow-up work when the surrounding design is ready.

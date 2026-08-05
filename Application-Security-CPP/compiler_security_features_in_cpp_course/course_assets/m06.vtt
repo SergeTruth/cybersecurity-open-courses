@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.150
+Sanitizers are development and CI tools that help expose defects while tests run.
+
+2
+00:00:05.150 --> 00:00:13.468
+They are especially useful because many memory, lifetime, undefined behavior, leak, and threading issues can stay hidden during normal tests unless
+
+3
+00:00:13.468 --> 00:00:15.449
+runtime instrumentation makes them visible.
+
+4
+00:00:15.449 --> 00:00:22.183
+AddressSanitizer focuses on memory access problems such as out-of-bounds access and use-after-lifetime patterns.
+
+5
+00:00:22.183 --> 00:00:25.352
+UndefinedBehaviorSanitizer highlights operations that violate C++ language rules.
+
+6
+00:00:25.352 --> 00:00:27.333
+LeakSanitizer helps identify memory leaks.
+
+7
+00:00:27.333 --> 00:00:30.502
+ThreadSanitizer can reveal data races and synchronization problems.
+
+8
+00:00:30.502 --> 00:00:32.483
+Each serves a different purpose.
+
+9
+00:00:32.483 --> 00:00:41.197
+Sanitizer findings should be treated as real engineering defects unless a team has a documented, reviewed reason to classify a specific finding
+
+10
+00:00:41.197 --> 00:00:41.594
+differently.
+
+11
+00:00:41.594 --> 00:00:45.951
+Ignoring sanitizer output teaches the team to distrust its own evidence.
+
+12
+00:00:45.951 --> 00:00:48.724
+Triage should be prompt, owned, and visible.
+
+13
+00:00:48.724 --> 00:00:51.497
+Dedicated CI jobs make sanitizer coverage repeatable.
+
+14
+00:00:51.497 --> 00:00:59.815
+Some teams run sanitizer builds on every pull request for selected targets, while others use scheduled jobs or focused test suites.
+
+15
+00:00:59.815 --> 00:01:09.719
+The right schedule depends on build time and project risk, but the work should be part of the workflow rather than a rare manual event.
+
+16
+00:01:09.719 --> 00:01:13.284
+Sanitizer builds are not usually production hardening by default.
+
+17
+00:01:13.284 --> 00:01:17.245
+They can change performance, memory layout, runtime dependencies, and behavior.
+
+18
+00:01:17.245 --> 00:01:21.206
+Their primary role is defect discovery during development and testing.
+
+19
+00:01:21.206 --> 00:01:25.168
+Release hardening is a separate build profile with different goals.
+
+20
+00:01:25.168 --> 00:01:29.129
+Sanitizer value depends on meaningful tests and realistic execution paths.
+
+21
+00:01:29.129 --> 00:01:31.506
+Instrumentation only observes code that runs.
+
+22
+00:01:31.506 --> 00:01:38.240
+Boundary tests, parser tests, integration tests, concurrency tests, and representative workloads make sanitizer results far more useful.

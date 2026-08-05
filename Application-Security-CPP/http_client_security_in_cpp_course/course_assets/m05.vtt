@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.790
+HTTP clients often carry authentication material: API keys, bearer tokens, authorization headers, cookies, client certificates, refresh tokens,
+
+2
+00:00:06.790 --> 00:00:09.187
+service credentials, or signed request metadata.
+
+3
+00:00:09.187 --> 00:00:17.575
+These values connect the local application to remote authority, so they should be handled as secrets rather than ordinary configuration strings.
+
+4
+00:00:17.575 --> 00:00:21.569
+Credentials should come from approved configuration and secret-management mechanisms.
+
+5
+00:00:21.569 --> 00:00:27.960
+Hardcoded keys, debug defaults, copied sample tokens, and shared service credentials make review and rotation harder.
+
+6
+00:00:27.960 --> 00:00:38.345
+A secure design identifies where the credential is stored, who can read it, how it is deployed, how it is rotated, and which environment or service
+
+7
+00:00:38.345 --> 00:00:39.543
+it belongs to.
+
+8
+00:00:39.543 --> 00:00:40.342
+Scope matters.
+
+9
+00:00:40.342 --> 00:00:45.135
+Tokens and service identities should grant only the operations the client needs.
+
+10
+00:00:45.135 --> 00:00:48.331
+Development, staging, and production credentials should be separated.
+
+11
+00:00:48.331 --> 00:00:53.523
+Credentials for unrelated services should not be reused just because it is convenient.
+
+12
+00:00:53.523 --> 00:01:01.512
+Expiration and rotation behavior should be planned so the application handles renewal or replacement without exposing values or failing unpredictably.
+
+13
+00:01:01.512 --> 00:01:05.107
+Cookies require the same care in non-browser clients.
+
+14
+00:01:05.107 --> 00:01:13.495
+A client that stores or forwards cookies should have a clear policy for which domains, paths, lifetimes, and services are involved.
+
+15
+00:01:13.495 --> 00:01:19.886
+Accidental credential forwarding can turn a simple redirect or shared client object into a security problem.
+
+16
+00:01:19.886 --> 00:01:22.682
+Logging is a common place for mistakes.
+
+17
+00:01:22.682 --> 00:01:30.271
+Authorization headers, cookies, bearer tokens, private keys, signed request material, and sensitive response data should not appear in logs,
+
+18
+00:01:30.271 --> 00:01:33.067
+exceptions, crash reports, traces, or support bundles.
+
+19
+00:01:33.067 --> 00:01:40.656
+Useful diagnostics can record safe categories, endpoint labels, status classes, timing, and correlation IDs without exposing the credential itself.
+
+20
+00:01:40.656 --> 00:01:50.642
+The goal is to make support possible while keeping secret values out of durable records that many people and systems may later access during normal
+
+21
+00:01:50.642 --> 00:01:51.840
+production operations safely.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.864
+Atomics are valuable, but they are specialized tools.
+
+2
+00:00:02.864 --> 00:00:11.099
+An atomic object can be accessed concurrently without creating a data race on that object, yet that property does not automatically protect a
+
+3
+00:00:11.099 --> 00:00:12.531
+higher-level data structure.
+
+4
+00:00:12.531 --> 00:00:21.124
+If a cache has a map, a size counter, and an eviction list, making one counter atomic does not keep the whole cache consistent.
+
+5
+00:00:21.124 --> 00:00:28.643
+The design still needs a clear invariant and a synchronization strategy that protects the relationship among all relevant pieces of state.
+
+6
+00:00:28.643 --> 00:00:31.865
+Lock-free designs raise the review burden even further.
+
+7
+00:00:31.865 --> 00:00:36.161
+The phrase lock-free does not mean simple, safe, or always faster.
+
+8
+00:00:36.161 --> 00:00:40.100
+It describes progress properties under certain conditions, not overall design quality.
+
+9
+00:00:40.100 --> 00:00:46.544
+Memory ordering decisions affect what one thread is allowed to observe from another, and mistakes can be subtle.
+
+10
+00:00:46.544 --> 00:00:54.063
+Even experienced teams can struggle to reason about these choices without a small scope, strong documentation, targeted tests, and specialized review.
+
+11
+00:00:54.063 --> 00:00:59.433
+A defensive organization should ask why lock-free behavior is required before accepting the complexity.
+
+12
+00:00:59.433 --> 00:01:01.582
+Is there a measured contention problem?
+
+13
+00:01:01.582 --> 00:01:06.594
+Is a blocking lock unacceptable for a specific real-time or low-latency requirement?
+
+14
+00:01:06.594 --> 00:01:11.249
+Is there a mature library or platform primitive that already solves the problem?
+
+15
+00:01:11.249 --> 00:01:18.767
+In many systems, a straightforward mutex, sharded lock design, immutable snapshot, or message-passing boundary is safer and easier to maintain.
+
+16
+00:01:18.767 --> 00:01:25.570
+When atomics or lock-free structures are used, document the invariant, memory ordering assumptions, reclamation strategy, supported operations, and
+
+17
+00:01:25.570 --> 00:01:27.360
+test evidence in one place.

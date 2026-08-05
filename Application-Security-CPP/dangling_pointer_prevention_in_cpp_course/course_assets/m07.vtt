@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.047
+Dangling pointer prevention is often an API and class design problem.
+
+2
+00:00:04.047 --> 00:00:10.670
+A function or constructor that accepts a pointer, reference, view, or callback is also accepting a lifetime relationship.
+
+3
+00:00:10.670 --> 00:00:14.349
+The signature should make that relationship as obvious as practical.
+
+4
+00:00:14.349 --> 00:00:17.293
+Avoid storing borrowed pointers or references by default.
+
+5
+00:00:17.293 --> 00:00:26.859
+If a class stores an observer to an external object, the owner must outlive the observing class or the observer must have a way to verify
+
+6
+00:00:26.859 --> 00:00:27.963
+availability before use.
+
+7
+00:00:27.963 --> 00:00:33.482
+That relationship should be documented, tested, and visible in the member type or constructor contract.
+
+8
+00:00:33.482 --> 00:00:36.057
+Member variables should distinguish ownership from observation.
+
+9
+00:00:36.057 --> 00:00:43.048
+Values and RAII members own their state directly. std::unique_ptr expresses exclusive dynamic ownership. std::shared_ptr expresses shared ownership
+
+10
+00:00:43.048 --> 00:00:51.510
+when the design truly requires it. std::weak_ptr, handles, identifiers, and raw non-owning observers can express observation when paired with a clear
+
+11
+00:00:51.510 --> 00:00:51.878
+owner.
+
+12
+00:00:51.878 --> 00:00:58.501
+Stable handles or registries can be useful when objects need identity across moves, container mutation, or subsystem boundaries.
+
+13
+00:00:58.501 --> 00:01:02.180
+A handle should have defined validity rules and failure behavior.
+
+14
+00:01:02.180 --> 00:01:06.596
+It should not merely hide a raw pointer behind a different name.
+
+15
+00:01:06.596 --> 00:01:08.803
+Make lifetime assumptions testable and reviewable.
+
+16
+00:01:08.803 --> 00:01:18.369
+A reader should be able to tell whether a function stores access beyond the call, whether a class owns its dependencies, and what happens when the
+
+17
+00:01:18.369 --> 00:01:19.473
+owner goes away.
+
+18
+00:01:19.473 --> 00:01:25.360
+When those answers are not visible, the design deserves another pass before implementation spreads the ambiguity.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.884
+An object is valid only during its lifetime.
+
+2
+00:00:02.884 --> 00:00:10.815
+That lifetime may be tied to automatic storage in a scope, dynamic allocation, container ownership, static storage, a resource manager, or a
+
+3
+00:00:10.815 --> 00:00:12.257
+higher-level object graph.
+
+4
+00:00:12.257 --> 00:00:18.025
+Once the lifetime ends, old access paths to that object no longer have a valid target.
+
+5
+00:00:18.025 --> 00:00:20.188
+Ownership answers the question of responsibility.
+
+6
+00:00:20.188 --> 00:00:26.316
+Who keeps the object alive, who may transfer it, and who destroys it when work is complete?
+
+7
+00:00:26.316 --> 00:00:33.887
+A program is easier to review when ownership has one clear answer or a deliberately shared answer with a documented policy.
+
+8
+00:00:33.887 --> 00:00:35.689
+Borrowing answers a different question.
+
+9
+00:00:35.689 --> 00:00:39.655
+Who may temporarily observe or use an object without owning it?
+
+10
+00:00:39.655 --> 00:00:44.702
+Borrowed access is useful and common, but it must remain shorter than the owner.
+
+11
+00:00:44.702 --> 00:00:51.191
+A borrowed pointer, reference, iterator, span, or string view should not silently become a long-lived object dependency.
+
+12
+00:00:51.191 --> 00:00:54.435
+Scope exits, destruction, movement, and temporaries all affect lifetime.
+
+13
+00:00:54.435 --> 00:00:57.319
+A local object ends when its scope ends.
+
+14
+00:00:57.319 --> 00:01:02.366
+A moved-from object remains alive but may no longer contain the expected value.
+
+15
+00:01:02.366 --> 00:01:05.971
+A temporary may disappear sooner than a stored view expects.
+
+16
+00:01:05.971 --> 00:01:10.658
+These rules matter because code often stores access paths separately from the owner.
+
+17
+00:01:10.658 --> 00:01:14.984
+Lifetime safety starts by making ownership and borrowing visible in code structure.
+
+18
+00:01:14.984 --> 00:01:20.391
+Values, RAII members, smart pointers, spans, references, callbacks, and handles should each communicate their role.
+
+19
+00:01:20.391 --> 00:01:26.880
+When that meaning is unclear, reviewers should ask whether the object will still be alive at every use.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.472
+Callbacks and asynchronous work are lifetime-sensitive because they separate the time access is captured from the time access is used.
+
+2
+00:00:07.472 --> 00:00:13.521
+A method may register a callback, queue work, start a thread, or capture this in a lambda.
+
+3
+00:00:13.521 --> 00:00:19.213
+The original object may be destroyed before that work runs, leaving the callback with stale access.
+
+4
+00:00:19.213 --> 00:00:23.839
+Capturing this is not automatically wrong, but it requires a visible lifetime guarantee.
+
+5
+00:00:23.839 --> 00:00:27.753
+The owner might guarantee that the callback is unregistered before destruction.
+
+6
+00:00:27.753 --> 00:00:32.022
+The queued work might own the object for the duration of execution.
+
+7
+00:00:32.022 --> 00:00:37.715
+Or the callback might use weak observation and do nothing if the target no longer exists.
+
+8
+00:00:37.715 --> 00:00:41.273
+The important point is that the policy must be explicit.
+
+9
+00:00:41.273 --> 00:00:45.187
+Keeping an object alive is different from making it thread-safe.
+
+10
+00:00:45.187 --> 00:00:51.947
+A std::shared_ptr can prevent destruction while work runs, but it does not protect mutable state from data races.
+
+11
+00:00:51.947 --> 00:00:56.929
+Concurrent designs still need synchronization, immutability, thread confinement, message passing, or another clear strategy.
+
+12
+00:00:56.929 --> 00:01:01.554
+Use-after-free prevention and thread-safety design have to be reviewed together.
+
+13
+00:01:01.554 --> 00:01:04.045
+Delayed execution also changes where cleanup belongs.
+
+14
+00:01:04.045 --> 00:01:10.449
+Destructors should not assume that merely dropping a handle stops every pending operation unless the API guarantees it.
+
+15
+00:01:10.449 --> 00:01:15.786
+Joining threads, draining queues, unregistering callbacks, canceling timers, and waiting for completion are ownership decisions.
+
+16
+00:01:15.786 --> 00:01:20.056
+Each one should have a clear owner and a tested shutdown sequence.
+
+17
+00:01:20.056 --> 00:01:22.191
+Cancellation and shutdown paths deserve tests.
+
+18
+00:01:22.191 --> 00:01:26.105
+What happens when work is pending and the owner is destroyed?
+
+19
+00:01:26.105 --> 00:01:28.595
+Can a callback run after unregistration begins?
+
+20
+00:01:28.595 --> 00:01:32.865
+Are stored raw pointers still valid when a background job wakes up?
+
+21
+00:01:32.865 --> 00:01:38.558
+Safe async code defines ownership, cancellation, and synchronization rules before relying on callbacks to behave well.
+
+22
+00:01:38.558 --> 00:01:41.760
+Treat shutdown as normal behavior, not an exceptional corner.

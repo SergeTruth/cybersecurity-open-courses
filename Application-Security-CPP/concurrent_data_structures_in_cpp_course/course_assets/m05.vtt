@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.827
+Maps, caches, registries, and lookup tables are deceptively difficult under concurrency because they combine several responsibilities.
+
+2
+00:00:05.827 --> 00:00:15.296
+A single operation may look like a read, but the structure may also refresh timestamps, promote an item in an eviction list, insert a missing value,
+
+3
+00:00:15.296 --> 00:00:16.753
+or remove stale entries.
+
+4
+00:00:16.753 --> 00:00:23.673
+The first design question is whether reads are truly read-only and what lifetime guarantee a successful lookup provides.
+
+5
+00:00:23.673 --> 00:00:32.778
+Returning a direct reference to an internal object can be unsafe if another thread may erase or replace that object immediately after the lock is
+
+6
+00:00:32.778 --> 00:00:33.142
+released.
+
+7
+00:00:33.142 --> 00:00:39.698
+Reader-writer locks can help read-heavy workloads, but they do not remove the need for clear invariants.
+
+8
+00:00:39.698 --> 00:00:45.889
+Shared access is only safe while operations are actually read-only with respect to every protected field.
+
+9
+00:00:45.889 --> 00:00:53.174
+If a lookup updates metrics, cache ordering, or lazy initialization state, it may require exclusive access or a different design.
+
+10
+00:00:53.174 --> 00:01:01.914
+Immutable snapshots are often simpler: a reader receives an owned value, a copy of relevant data, or a shared immutable view that remains valid
+
+11
+00:01:01.914 --> 00:01:03.371
+independent of later mutation.
+
+12
+00:01:03.371 --> 00:01:05.921
+Caches add resource governance to the problem.
+
+13
+00:01:05.921 --> 00:01:10.655
+Size limits, eviction rules, stale-entry handling, and refresh behavior should be explicit.
+
+14
+00:01:10.655 --> 00:01:18.668
+Without those rules, a cache can become an availability risk by growing without bound, serving data beyond its intended lifetime, or destroying
+
+15
+00:01:18.668 --> 00:01:21.581
+entries while other threads still depend on them.
+
+16
+00:01:21.581 --> 00:01:23.402
+Defensive APIs avoid surprising callers.
+
+17
+00:01:23.402 --> 00:01:30.686
+They document whether returned values are copies, shared handles, scoped access objects, or temporary observations, and they test replacement and
+
+18
+00:01:30.686 --> 00:01:33.600
+eviction paths as carefully as successful lookup paths.

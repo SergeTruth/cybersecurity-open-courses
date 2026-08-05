@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.329
+Atomics do not automatically solve lifetime safety.
+
+2
+00:00:02.329 --> 00:00:10.646
+A thread may safely read an atomic flag and still access an object that has already been destroyed if ownership and shutdown were not designed
+
+3
+00:00:10.646 --> 00:00:10.978
+together.
+
+4
+00:00:10.978 --> 00:00:12.642
+Publication is a common hazard.
+
+5
+00:00:12.642 --> 00:00:20.959
+If one thread stores a pointer, reference, or readiness flag for another thread to observe, the design must ensure that the pointed-to object is
+
+6
+00:00:20.959 --> 00:00:26.614
+fully initialized, visible under the intended ordering, and alive for the entire period readers may use it.
+
+7
+00:00:26.614 --> 00:00:31.272
+Shared ownership can help in some designs, but it is not a universal answer.
+
+8
+00:00:31.272 --> 00:00:35.596
+It changes lifetime management and may introduce its own coordination and cleanup questions.
+
+9
+00:00:35.596 --> 00:00:38.923
+Raw pointers and captured references require even more explicit boundaries.
+
+10
+00:00:38.923 --> 00:00:40.586
+Background workers need clear ownership.
+
+11
+00:00:40.586 --> 00:00:47.573
+A detached worker that watches an atomic stop flag may still outlive the buffer, logger, queue, or owning object it uses.
+
+12
+00:00:47.573 --> 00:00:52.563
+Joining or cooperative cancellation gives the owner a chance to synchronize shutdown with object lifetime.
+
+13
+00:00:52.563 --> 00:00:56.222
+Shutdown flags are review-sensitive because they coordinate behavior across threads.
+
+14
+00:00:56.222 --> 00:01:01.212
+The flag should be paired with notification, wake-up, cancellation, or join policy as appropriate.
+
+15
+00:01:01.212 --> 00:01:07.533
+A thread that never checks the flag, or checks it only after a long wait, may still stall cleanup.
+
+16
+00:01:07.533 --> 00:01:08.864
+Object destruction order matters.
+
+17
+00:01:08.864 --> 00:01:15.185
+If an atomic is part of an object, readers must not continue using it after the object is destroyed.
+
+18
+00:01:15.185 --> 00:01:20.175
+If the atomic points to other state, that other state needs its own lifetime guarantee.
+
+19
+00:01:20.175 --> 00:01:23.502
+The safe habit is to design synchronization and lifetime together.
+
+20
+00:01:23.502 --> 00:01:29.490
+Atomic visibility answers what a thread can see; ownership rules answer whether the thing being seen still exists.
+
+21
+00:01:29.490 --> 00:01:34.480
+Both answers must be true at the same time for the design to be reliable.

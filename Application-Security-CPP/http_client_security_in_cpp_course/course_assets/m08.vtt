@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.633
+Reliable failure behavior is part of HTTP client security.
+
+2
+00:00:03.633 --> 00:00:11.303
+A client without timeouts can tie up threads, sockets, memory, and user workflows while waiting for a remote system.
+
+3
+00:00:11.303 --> 00:00:16.148
+Set connection timeouts, read timeouts, and where appropriate, a total operation deadline.
+
+4
+00:00:16.148 --> 00:00:20.992
+Cancellation should be available when the caller no longer needs the result.
+
+5
+00:00:20.992 --> 00:00:22.203
+Retries need policy.
+
+6
+00:00:22.203 --> 00:00:25.029
+Retrying a safe lookup may improve resilience.
+
+7
+00:00:25.029 --> 00:00:31.892
+Retrying a non-idempotent operation can duplicate effects, increase load, or make the failure harder to understand.
+
+8
+00:00:31.892 --> 00:00:39.562
+Retry rules should consider method semantics, request body replay, remote service guidance, backoff, jitter, maximum attempts, and whether a
+
+9
+00:00:39.562 --> 00:00:43.599
+circuit-breaker style control is needed at a higher layer.
+
+10
+00:00:43.599 --> 00:00:46.425
+Error classification helps both security and operations.
+
+11
+00:00:46.425 --> 00:00:53.287
+DNS failure, TLS validation failure, authentication failure, timeout, protocol error, response validation failure, and application-level rejection
+
+12
+00:00:53.287 --> 00:00:56.517
+should not all collapse into one vague result.
+
+13
+00:00:56.517 --> 00:01:02.976
+The caller needs enough information to choose a safe response without exposing internal details or secrets.
+
+14
+00:01:02.976 --> 00:01:05.398
+Observability should record useful, safe context.
+
+15
+00:01:05.398 --> 00:01:12.665
+Endpoint labels, status categories, timing, retry counts, validation outcomes, correlation identifiers, and sanitized error classes can help teams
+
+16
+00:01:12.665 --> 00:01:13.068
+troubleshoot.
+
+17
+00:01:13.068 --> 00:01:21.546
+Authorization headers, cookies, tokens, request bodies with sensitive data, private keys, and sensitive response fields should stay out of logs and
+
+18
+00:01:21.546 --> 00:01:21.950
+traces.
+
+19
+00:01:21.950 --> 00:01:24.372
+A well-designed client fails predictably.
+
+20
+00:01:24.372 --> 00:01:33.253
+It stops when trust checks fail, limits resource use, avoids uncontrolled retry storms, and gives maintainers enough safe evidence to understand what
+
+21
+00:01:33.253 --> 00:01:33.657
+happened.
+
+22
+00:01:33.657 --> 00:01:42.134
+That evidence should support dashboards, alerts, and incident review without turning logs into a secondary store of sensitive request or response
+
+23
+00:01:42.134 --> 00:01:44.960
+data or credentials for later exposure risk.

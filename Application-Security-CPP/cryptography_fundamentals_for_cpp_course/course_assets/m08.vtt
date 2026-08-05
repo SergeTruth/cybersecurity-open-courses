@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.266
+Crypto misuse usually comes from using a reasonable-looking tool for the wrong goal, using an approved library incorrectly, or ignoring a failure
+
+2
+00:00:09.266 --> 00:00:11.280
+result that should stop processing.
+
+3
+00:00:11.280 --> 00:00:17.726
+Common review findings include encryption without authentication, nonce reuse, weak randomness, accepting unauthenticated data, custom trust
+
+4
+00:00:17.726 --> 00:00:22.157
+decisions, logging keys, hardcoded secrets, stale libraries, and inconsistent error handling.
+
+5
+00:00:22.157 --> 00:00:25.783
+Testing should verify application behavior, not reprove the mathematics.
+
+6
+00:00:25.783 --> 00:00:35.049
+Use known-good library behavior, then test that the application passes the right inputs, checks return values, rejects invalid or corrupted data, and
+
+7
+00:00:35.049 --> 00:00:37.466
+does not continue after verification fails.
+
+8
+00:00:37.466 --> 00:00:39.480
+Failure paths need deliberate coverage.
+
+9
+00:00:39.480 --> 00:00:45.926
+Corrupted ciphertext, wrong associated data, invalid signatures, expired certificates, missing keys, unavailable random sources, and configuration
+
+10
+00:00:45.926 --> 00:00:49.149
+mistakes should all lead to predictable, safe outcomes.
+
+11
+00:00:49.149 --> 00:00:57.609
+Code review should identify key ownership, nonce policy, algorithm or mode selection, trust anchors, library return-value handling, and the boundary
+
+12
+00:00:57.609 --> 00:01:00.429
+where data becomes trusted enough to process.
+
+13
+00:01:00.429 --> 00:01:03.249
+Dependency maintenance is part of crypto safety.
+
+14
+00:01:03.249 --> 00:01:08.486
+Track library versions, supported algorithms, deprecation guidance, platform updates, and organizational policy changes.
+
+15
+00:01:08.486 --> 00:01:11.709
+A once-acceptable configuration may need revision later.
+
+16
+00:01:11.709 --> 00:01:16.140
+Crypto code should be small enough that these checks are practical.
+
+17
+00:01:16.140 --> 00:01:24.197
+If the logic is spread across many layers or hidden behind vague wrappers, important trust decisions become harder to review.
+
+18
+00:01:24.197 --> 00:01:27.017
+Review should also include configuration and deployment.
+
+19
+00:01:27.017 --> 00:01:36.686
+The code may call the right API, but a weak key source, disabled validation mode, stale dependency, or permissive runtime setting can still weaken
+
+20
+00:01:36.686 --> 00:01:37.491
+the boundary.
+
+21
+00:01:37.491 --> 00:01:40.311
+Good tests assert that failures stay failures.
+
+22
+00:01:40.311 --> 00:01:47.563
+They should verify that the application does not quietly fall back to unprotected behavior when cryptographic operations fail.
+
+23
+00:01:47.563 --> 00:01:52.800
+That makes misuse visible during ordinary engineering work instead of during production recovery.

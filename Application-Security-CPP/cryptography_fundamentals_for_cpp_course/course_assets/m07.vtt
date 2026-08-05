@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.979
+C++ programs often handle keys, tokens, credentials, private keys, seed material, decrypted records, and other sensitive values.
+
+2
+00:00:06.979 --> 00:00:13.547
+Treat these as assets with their own lifecycle, not ordinary strings passed through the program freely.
+
+3
+00:00:13.547 --> 00:00:15.189
+Minimize lifetime and exposure.
+
+4
+00:00:15.189 --> 00:00:23.810
+Keep secrets in memory only as long as needed, avoid unnecessary copies, and avoid passing sensitive values through broad logging, formatting,
+
+5
+00:00:23.810 --> 00:00:25.862
+exception, telemetry, or debugging paths.
+
+6
+00:00:25.862 --> 00:00:28.736
+Logs and crash dumps deserve special attention.
+
+7
+00:00:28.736 --> 00:00:36.946
+A helpful diagnostic message can become a sensitive-data exposure if it includes tokens, keys, decrypted content, or configuration secrets.
+
+8
+00:00:36.946 --> 00:00:41.051
+Error messages should identify the failure without revealing protected values.
+
+9
+00:00:41.051 --> 00:00:43.104
+Configuration access should be controlled.
+
+10
+00:00:43.104 --> 00:00:48.851
+Hardcoded secrets, world-readable configuration files, and broad environment exposure are all review findings.
+
+11
+00:00:48.851 --> 00:00:54.598
+Prefer approved secret-management systems, platform secure storage, or managed identity mechanisms where available.
+
+12
+00:00:54.598 --> 00:00:58.293
+Memory cleanup in C++ is nuanced and platform-dependent.
+
+13
+00:00:58.293 --> 00:01:06.503
+Clearing a buffer can reduce exposure in some situations, but compilers, copies, allocator behavior, paging, dumps, and library internals can
+
+14
+00:01:06.503 --> 00:01:07.734
+complicate the story.
+
+15
+00:01:07.734 --> 00:01:11.429
+Do not overpromise what one wipe call can guarantee.
+
+16
+00:01:11.429 --> 00:01:13.481
+Least privilege and auditability matter.
+
+17
+00:01:13.481 --> 00:01:21.281
+Limit which components can read secrets, rotate them according to policy, and record access or configuration changes where appropriate.
+
+18
+00:01:21.281 --> 00:01:29.491
+Good secret handling makes the safe path ordinary: narrow access, short lifetime, no accidental logging, approved storage, and clear operational
+
+19
+00:01:29.491 --> 00:01:29.902
+ownership.
+
+20
+00:01:29.902 --> 00:01:31.954
+API boundaries deserve special care.
+
+21
+00:01:31.954 --> 00:01:41.807
+A function that accepts a token, key, or decrypted record should avoid broad copies and should document who is responsible for clearing or retaining
+
+22
+00:01:41.807 --> 00:01:42.628
+the value.
+
+23
+00:01:42.628 --> 00:01:51.659
+When complete secrecy cannot be guaranteed, reduce exposure and make remaining risk explicit so operators know how to protect hosts, dumps, backups,
+
+24
+00:01:51.659 --> 00:01:52.480
+and logs.

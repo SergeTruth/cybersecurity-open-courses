@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.766
+Many modern C++ lifetime defects involve non-owning views and temporary objects. std::string_view and std::span are excellent tools when the
+
+2
+00:00:07.766 --> 00:00:09.531
+underlying storage outlives the view.
+
+3
+00:00:09.531 --> 00:00:16.591
+They are dangerous when the view is stored or returned without a clear guarantee that the referenced data remains alive.
+
+4
+00:00:16.591 --> 00:00:19.415
+A view should be understood as borrowed access.
+
+5
+00:00:19.415 --> 00:00:23.298
+It does not own the characters, elements, or bytes it describes.
+
+6
+00:00:23.298 --> 00:00:32.476
+If the source is a temporary string, a local vector, a transformed buffer, or data inside a container that may later reallocate, the view can outlive
+
+7
+00:00:32.476 --> 00:00:34.947
+the data unless the design prevents it.
+
+8
+00:00:34.947 --> 00:00:38.124
+References to temporaries and returned references require close review.
+
+9
+00:00:38.124 --> 00:00:44.125
+Some C++ lifetime extension rules are helpful, but they do not make every reference safe to store.
+
+10
+00:00:44.125 --> 00:00:51.538
+A function should not return a reference, pointer, span, or string view to data whose lifetime ends with the function call.
+
+11
+00:00:51.538 --> 00:00:56.480
+Callbacks, lambdas, and asynchronous work make lifetime reasoning harder because execution may happen later.
+
+12
+00:00:56.480 --> 00:01:03.893
+Capturing a local variable by reference is safe only while the referenced object remains alive and the callback cannot run afterward.
+
+13
+00:01:03.893 --> 00:01:07.423
+Deferred execution should prefer owned captures or explicit lifetime coordination.
+
+14
+00:01:07.423 --> 00:01:15.895
+When lifetime is uncertain, prefer owned data, shared ownership when truly required, weak observation with a check before use, or a design that makes
+
+15
+00:01:15.895 --> 00:01:16.601
+coordination visible.
+
+16
+00:01:16.601 --> 00:01:19.778
+Borrowed views are safest when used briefly and locally.
+
+17
+00:01:19.778 --> 00:01:24.720
+The longer a borrowed view is stored, the stronger its contract needs to be.

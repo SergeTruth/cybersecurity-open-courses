@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.969
+Compiler and linker settings influence the final binary, not just the source code.
+
+2
+00:00:04.969 --> 00:00:13.378
+Release hardening includes how the executable is laid out, which sections are writable or executable, how relocations are handled, and whether the
+
+3
+00:00:13.378 --> 00:00:16.818
+operating system can apply its own protection mechanisms effectively.
+
+4
+00:00:16.818 --> 00:00:24.080
+Position-independent executables support address-space randomization by allowing the operating system to place the executable at varied locations.
+
+5
+00:00:24.080 --> 00:00:29.813
+This is a release-build property that depends on compiler, linker, platform, and packaging choices.
+
+6
+00:00:29.813 --> 00:00:35.164
+Teams should verify it in the delivered artifact, not only in the build script.
+
+7
+00:00:35.164 --> 00:00:38.604
+Memory permission hardening aims to reduce unnecessary executable regions.
+
+8
+00:00:38.604 --> 00:00:45.867
+For example, a stack or data region should not be executable unless a platform-specific design explicitly requires it.
+
+9
+00:00:45.867 --> 00:00:51.982
+Linker options and platform defaults can influence these properties, so release review should include binary inspection.
+
+10
+00:00:51.982 --> 00:00:56.951
+Relocation hardening concepts focus on making dynamic linking behavior less permissive after startup.
+
+11
+00:00:56.951 --> 00:01:04.978
+The exact options vary across platforms and toolchains, but the security intent is consistent: reduce mutable runtime surfaces where the platform
+
+12
+00:01:04.978 --> 00:01:06.124
+supports doing so.
+
+13
+00:01:06.124 --> 00:01:08.036
+The defensive lesson is verification.
+
+14
+00:01:08.036 --> 00:01:12.240
+A CMake option, project property, or wiki entry is not enough.
+
+15
+00:01:12.240 --> 00:01:17.973
+Review the compiler commands, linker commands, CI build logs, packaging process, and final binary properties.
+
+16
+00:01:17.973 --> 00:01:22.560
+The artifact that ships is the thing that needs to match policy.

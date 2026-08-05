@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.133
+Atomics and mutexes solve different problems.
+
+2
+00:00:02.133 --> 00:00:09.596
+Atomics are useful for simple independent state, such as a stop flag, readiness flag, metrics counter, or tightly designed state transition.
+
+3
+00:00:09.596 --> 00:00:12.440
+Mutexes are often clearer when protecting compound invariants.
+
+4
+00:00:12.440 --> 00:00:21.681
+If several fields must be read or updated together, a container and its metadata must stay consistent, or ownership changes need to be observed as a
+
+5
+00:00:21.681 --> 00:00:26.656
+transaction, a small critical section may be easier to reason about than several atomics.
+
+6
+00:00:26.656 --> 00:00:29.855
+Using atomics everywhere can make code harder to review.
+
+7
+00:00:29.855 --> 00:00:36.608
+A class with many atomic fields may look synchronized, but the relationships among those fields may still be unclear.
+
+8
+00:00:36.608 --> 00:00:41.229
+The design can become a set of independent updates with no obvious invariant.
+
+9
+00:00:41.229 --> 00:00:43.006
+Performance assumptions should be challenged.
+
+10
+00:00:43.006 --> 00:00:46.915
+Lock-free does not automatically mean faster, safer, or more maintainable.
+
+11
+00:00:46.915 --> 00:00:50.470
+Contention, retry loops, cache effects, and team expertise all matter.
+
+12
+00:00:50.470 --> 00:00:51.891
+Mutexes also communicate intent.
+
+13
+00:00:51.891 --> 00:00:56.867
+A lock around a protected block says that the block preserves a shared invariant.
+
+14
+00:00:56.867 --> 00:01:02.554
+That can be more readable than a custom atomic protocol when the invariant spans multiple values.
+
+15
+00:01:02.554 --> 00:01:05.753
+The secure engineering choice is the clearest correct synchronization.
+
+16
+00:01:05.753 --> 00:01:10.373
+If an atomic makes the state transition simple and testable, use it deliberately.
+
+17
+00:01:10.373 --> 00:01:14.283
+If a mutex makes the invariant obvious, prefer the boring design.
+
+18
+00:01:14.283 --> 00:01:17.837
+During review, ask whether the atomic value is truly independent.
+
+19
+00:01:17.837 --> 00:01:25.301
+If the answer depends on another object, pointer, buffer, or lifecycle rule, consider whether the code needs a broader synchronization boundary.
+
+20
+00:01:25.301 --> 00:01:31.343
+This keeps the synchronization choice aligned with the invariant instead of with a preference for one primitive.
+
+21
+00:01:31.343 --> 00:01:33.120
+Correctness should lead the choice.

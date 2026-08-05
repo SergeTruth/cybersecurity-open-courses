@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.159
+Dangling access is not limited to manual allocation and manual deletion.
+
+2
+00:00:04.159 --> 00:00:11.344
+Containers can invalidate pointers, references, and iterators when they grow, shrink, erase elements, clear contents, or otherwise rearrange storage.
+
+3
+00:00:11.344 --> 00:00:17.016
+A pointer to an element may become invalid even while the container itself remains alive.
+
+4
+00:00:17.016 --> 00:00:19.663
+std::vector reallocation is a common example.
+
+5
+00:00:19.663 --> 00:00:24.578
+When a vector needs more capacity, it may move elements into new storage.
+
+6
+00:00:24.578 --> 00:00:31.006
+Pointers, references, and iterators that pointed into the old storage no longer refer to the current elements.
+
+7
+00:00:31.006 --> 00:00:35.544
+Code that stores those observers across a mutation must be reviewed carefully.
+
+8
+00:00:35.544 --> 00:00:39.703
+Erase and clear operations also matter because they end element lifetimes.
+
+9
+00:00:39.703 --> 00:00:44.619
+An iterator or reference to an erased element should not be used later.
+
+10
+00:00:44.619 --> 00:00:52.560
+Mutation while iterating deserves a deliberate pattern that updates iterators according to the container's rules and avoids keeping stale observers.
+
+11
+00:00:52.560 --> 00:00:54.828
+Different containers have different invalidation rules.
+
+12
+00:00:54.828 --> 00:01:01.257
+Some provide more stable node addresses for certain operations, while others prioritize contiguous storage or compact layout.
+
+13
+00:01:01.257 --> 00:01:06.550
+The choice of container should reflect both performance needs and lifetime requirements for observers.
+
+14
+00:01:06.550 --> 00:01:11.466
+When long-lived observers are required, stable ownership may be a better design.
+
+15
+00:01:11.466 --> 00:01:18.272
+That could mean owning objects separately and storing identifiers, handles, or smart pointers according to the lifecycle policy.
+
+16
+00:01:18.272 --> 00:01:24.701
+The important point is to separate stable identity from temporary container layout when observers outlive ordinary mutations.
+
+17
+00:01:24.701 --> 00:01:26.969
+Tests should cover mutation during observation.
+
+18
+00:01:26.969 --> 00:01:34.154
+Push, reserve, erase, clear, resize, sort, and replacement operations can all reveal whether stored access paths are still valid.
+
+19
+00:01:34.154 --> 00:01:40.960
+Reviewers should pay special attention to code that caches element addresses or iterators and later mutates the container.

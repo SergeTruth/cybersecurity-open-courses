@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.911
+Many practical atomic uses involve flags, counters, and small state machines.
+
+2
+00:00:03.911 --> 00:00:11.023
+These patterns can be safe and readable when each value has a defined purpose and the surrounding lifecycle is clear.
+
+3
+00:00:11.023 --> 00:00:15.646
+Stop flags are common, but the flag is only one part of shutdown.
+
+4
+00:00:15.646 --> 00:00:24.180
+A worker must check the flag at appropriate points, stop accepting or processing work according to policy, release resources safely, and be joined or
+
+5
+00:00:24.180 --> 00:00:26.313
+otherwise managed before referenced state disappears.
+
+6
+00:00:26.313 --> 00:00:28.091
+Readiness flags imply publication rules.
+
+7
+00:00:28.091 --> 00:00:37.692
+If one thread initializes data and then marks it ready, reviewers need to know how the data is published, which ordering is used, and how long the
+
+8
+00:00:37.692 --> 00:00:39.470
+data remains valid for readers.
+
+9
+00:00:39.470 --> 00:00:41.604
+Metrics counters may have different requirements.
+
+10
+00:00:41.604 --> 00:00:49.071
+A counter used only for approximate telemetry may not need the same ordering as a flag used to coordinate object visibility.
+
+11
+00:00:49.071 --> 00:00:51.916
+That distinction should be intentional rather than accidental.
+
+12
+00:00:51.916 --> 00:00:55.472
+Atomic state machines should define valid states and allowed transitions.
+
+13
+00:00:55.472 --> 00:01:01.161
+Prefer named states over magic integers, and keep the transition logic close to the atomic value.
+
+14
+00:01:01.161 --> 00:01:05.428
+If many unrelated states accumulate, a dedicated synchronized object may be clearer.
+
+15
+00:01:05.428 --> 00:01:10.051
+Compare-and-exchange can enforce state transitions, but retry behavior must be understandable.
+
+16
+00:01:10.051 --> 00:01:18.229
+Reviewers should know what happens when another thread changes the value first and whether the operation should retry, return, or report a state
+
+17
+00:01:18.229 --> 00:01:18.585
+mismatch.
+
+18
+00:01:18.585 --> 00:01:20.718
+Keep atomic coordination narrow and testable.
+
+19
+00:01:20.718 --> 00:01:28.541
+The best atomic state is small enough that a reviewer can list the readers, writers, transitions, ordering assumptions, and shutdown behavior without
+
+20
+00:01:28.541 --> 00:01:29.964
+reconstructing the whole program.
+
+21
+00:01:29.964 --> 00:01:36.364
+If the list becomes long, split the state, name the protocol, or use a higher-level synchronization mechanism.
+
+22
+00:01:36.364 --> 00:01:38.853
+Small protocols are easier to test repeatedly.
+
+23
+00:01:38.853 --> 00:01:39.920
+Name them clearly.

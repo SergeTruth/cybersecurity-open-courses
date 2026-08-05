@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.818
+Many buffer defects are only visible under specific sizes, encodings, input order, or error paths.
+
+2
+00:00:05.818 --> 00:00:13.962
+A normal-path test with comfortable values may miss the boundary where capacity, length, and output size no longer line up.
+
+3
+00:00:13.962 --> 00:00:17.065
+Prevention requires tests that deliberately exercise those edges.
+
+4
+00:00:17.065 --> 00:00:19.780
+Sanitizers are useful development and CI tools.
+
+5
+00:00:19.780 --> 00:00:22.883
+AddressSanitizer can expose invalid memory access during tests.
+
+6
+00:00:22.883 --> 00:00:27.537
+UndefinedBehaviorSanitizer can reveal language-rule violations that affect size and pointer reasoning.
+
+7
+00:00:27.537 --> 00:00:32.191
+Other runtime checks may help depending on compiler, platform, and build profile.
+
+8
+00:00:32.191 --> 00:00:39.948
+Edge-size tests should include empty input, one element, exact capacity, one past capacity, maximum supported size, truncated input, invalid
+
+9
+00:00:39.948 --> 00:00:42.662
+encoding, and output that does not fit.
+
+10
+00:00:42.662 --> 00:00:50.031
+These tests should verify not only that the code rejects bad input, but also that it preserves safe state.
+
+11
+00:00:50.031 --> 00:00:55.073
+Defensive fuzzing can exercise parsers and input handlers by exploring unusual input combinations.
+
+12
+00:00:55.073 --> 00:01:02.830
+Keep the workflow prevention-focused: find failures, reduce them to useful regression cases, fix the underlying assumption, and add coverage.
+
+13
+00:01:02.830 --> 00:01:06.321
+The goal is robust handling, not demonstration of harm.
+
+14
+00:01:06.321 --> 00:01:12.138
+Findings should become tracked engineering defects with owners, fixes, regression tests, and follow-up review.
+
+15
+00:01:12.138 --> 00:01:18.732
+A sanitizer report or fuzz finding is not noise just because it appears in a test build.
+
+16
+00:01:18.732 --> 00:01:22.222
+It is evidence that an assumption should be corrected.
+
+17
+00:01:22.222 --> 00:01:23.773
+Coverage quality determines confidence.
+
+18
+00:01:23.773 --> 00:01:26.876
+Sanitizers and fuzzing only observe code that runs.
+
+19
+00:01:26.876 --> 00:01:34.245
+Meaningful test harnesses inside the existing project, representative inputs, and CI integration make the results repeatable and useful without
+
+20
+00:01:34.245 --> 00:01:36.960
+turning testing into a one-time event.

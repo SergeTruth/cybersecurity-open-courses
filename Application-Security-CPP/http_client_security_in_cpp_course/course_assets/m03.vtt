@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.434
+HTTPS security depends on both encryption and endpoint authentication.
+
+2
+00:00:03.434 --> 00:00:12.593
+A C++ HTTP client should validate the certificate chain, verify that the certificate matches the intended hostname, and use a trust store that is
+
+3
+00:00:12.593 --> 00:00:14.119
+appropriate for the environment.
+
+4
+00:00:14.119 --> 00:00:20.225
+Encryption without the correct endpoint identity check does not provide the trust decision most applications expect.
+
+5
+00:00:20.225 --> 00:00:23.278
+Validation failures should stop the operation by default.
+
+6
+00:00:23.278 --> 00:00:29.765
+Expired certificates, untrusted issuers, hostname mismatches, incomplete chains, and unsupported trust configuration are signals that the client
+
+7
+00:00:29.765 --> 00:00:31.673
+cannot confidently identify the endpoint.
+
+8
+00:00:31.673 --> 00:00:38.542
+The safe response is predictable failure, clear diagnostics, and an operational path for fixing the configuration or certificate.
+
+9
+00:00:38.542 --> 00:00:40.831
+Trust-store selection should be intentional.
+
+10
+00:00:40.831 --> 00:00:44.266
+Some applications rely on the operating system trust store.
+
+11
+00:00:44.266 --> 00:00:50.753
+Others use a private PKI, a managed certificate bundle, or mutual TLS for service-to-service identity.
+
+12
+00:00:50.753 --> 00:00:56.477
+Each choice needs ownership, update policy, environment separation, and tests that confirm the expected behavior.
+
+13
+00:00:56.477 --> 00:01:02.582
+Development certificates can be useful during local work, but development convenience must not become production policy.
+
+14
+00:01:02.582 --> 00:01:05.635
+Client certificates and private keys are authentication material.
+
+15
+00:01:05.635 --> 00:01:13.267
+They should be stored and loaded through approved mechanisms, protected with appropriate filesystem or secret-store controls, rotated when required,
+
+16
+00:01:13.267 --> 00:01:16.702
+and kept out of logs, traces, and support artifacts.
+
+17
+00:01:16.702 --> 00:01:21.662
+The same care applies to passphrases or configuration values used to access them.
+
+18
+00:01:21.662 --> 00:01:30.439
+The practical habit is simple: keep TLS validation on, document the trust model, test both successful and failed validation paths, and make endpoint
+
+19
+00:01:30.439 --> 00:01:33.110
+identity part of the client review checklist.
+
+20
+00:01:33.110 --> 00:01:38.834
+Teams should also record who owns certificates, trust bundles, renewal automation, and emergency replacement procedures.
+
+21
+00:01:38.834 --> 00:01:47.611
+When the trust model is written down, operations teams can fix certificate problems without asking developers to weaken the client, and reviewers can
+
+22
+00:01:47.611 --> 00:01:54.480
+confirm that local test shortcuts are not present in production configuration or shared release settings anywhere by mistake.

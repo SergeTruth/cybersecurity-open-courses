@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.267
+Atomic operations are tools for safe communication between threads.
+
+2
+00:00:03.267 --> 00:00:11.617
+They give C++ programs defined behavior when multiple threads access a specific atomic object, which is very different from relying on a plain
+
+3
+00:00:11.617 --> 00:00:14.158
+variable and hoping the timing works out.
+
+4
+00:00:14.158 --> 00:00:16.336
+That definition is narrow on purpose.
+
+5
+00:00:16.336 --> 00:00:25.049
+An atomic prevents data races on the atomic object itself when used correctly, but it does not automatically make a class, container, subsystem, or
+
+6
+00:00:25.049 --> 00:00:26.501
+object graph thread-safe.
+
+7
+00:00:26.501 --> 00:00:30.131
+Larger relationships still need ownership rules, synchronization, and lifetime design.
+
+8
+00:00:30.131 --> 00:00:34.125
+Atomics matter because concurrent behavior affects reliability, availability, and safe cleanup.
+
+9
+00:00:34.125 --> 00:00:39.207
+A stop flag that is not observed correctly may leave work running too long.
+
+10
+00:00:39.207 --> 00:00:45.742
+A readiness flag that is not paired with proper publication rules may let another thread observe incomplete state.
+
+11
+00:00:45.742 --> 00:00:49.372
+A counter may look harmless but still carry operational decisions.
+
+12
+00:00:49.372 --> 00:00:56.269
+The most appropriate uses are simple shared values: flags, counters, and small state transitions where the meaning is clear.
+
+13
+00:00:56.269 --> 00:01:03.167
+When the code needs to protect multiple fields or preserve a compound invariant, another synchronization mechanism may be clearer.
+
+14
+00:01:03.167 --> 00:01:07.523
+A useful habit is to treat every atomic as a small contract.
+
+15
+00:01:07.523 --> 00:01:09.338
+What value does it represent?
+
+16
+00:01:09.338 --> 00:01:10.427
+Who writes it?
+
+17
+00:01:10.427 --> 00:01:11.516
+Who reads it?
+
+18
+00:01:11.516 --> 00:01:14.058
+What other state does it coordinate with?
+
+19
+00:01:14.058 --> 00:01:15.873
+What lifetime assumptions are required?
+
+20
+00:01:15.873 --> 00:01:19.503
+Atomic code is powerful, but it should not feel mysterious.
+
+21
+00:01:19.503 --> 00:01:24.949
+Secure C++ favors concurrent designs that reviewers can explain, test, and maintain under production pressure.
+
+22
+00:01:24.949 --> 00:01:31.120
+If the explanation depends on hidden timing assumptions, the design needs more structure before it is ready.

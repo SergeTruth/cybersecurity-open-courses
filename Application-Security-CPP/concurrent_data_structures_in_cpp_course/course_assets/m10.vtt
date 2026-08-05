@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.857
+A practical roadmap for concurrent data structures begins with restraint.
+
+2
+00:00:03.857 --> 00:00:06.557
+Minimize shared mutable state where you can.
+
+3
+00:00:06.557 --> 00:00:12.728
+Prefer ownership boundaries, message passing, immutable snapshots, or local state when those patterns meet the need.
+
+4
+00:00:12.728 --> 00:00:17.356
+When shared state is necessary, define the contract before choosing the implementation.
+
+5
+00:00:17.356 --> 00:00:26.227
+State who owns the structure, which operations are safe concurrently, what invariants must be protected, and what a caller may retain after each
+
+6
+00:00:26.227 --> 00:00:26.998
+operation returns.
+
+7
+00:00:26.998 --> 00:00:30.470
+Simple synchronized designs are often the strongest first answer.
+
+8
+00:00:30.470 --> 00:00:39.726
+A standard container behind a mutex, exposed through a narrow RAII-friendly wrapper, can be clear, maintainable, and secure when the operation set is
+
+9
+00:00:39.726 --> 00:00:40.498
+well chosen.
+
+10
+00:00:40.498 --> 00:00:43.969
+Queues need explicit shutdown, cancellation, ownership transfer, and backpressure.
+
+11
+00:00:43.969 --> 00:00:48.597
+Maps and caches need lifetime-aware lookup, replacement, eviction, and size policy.
+
+12
+00:00:48.597 --> 00:00:57.082
+APIs should avoid leaking raw internal access unless the synchronization and lifetime window remain visible through a scoped object or owned handle.
+
+13
+00:00:57.082 --> 00:01:05.567
+Use atomics and lock-free structures only when a real requirement justifies the extra complexity and the team can support specialized review.
+
+14
+00:01:05.567 --> 00:01:10.581
+Treat memory reclamation as a first-class design issue, not as cleanup detail.
+
+15
+00:01:10.581 --> 00:01:17.524
+Then verify the structure with ThreadSanitizer where possible, stress tests, lifecycle tests, invariant checks, performance measurements, and focused
+
+16
+00:01:17.524 --> 00:01:18.295
+code review.
+
+17
+00:01:18.295 --> 00:01:20.609
+Concurrency assumptions age as code evolves.
+
+18
+00:01:20.609 --> 00:01:25.623
+Revisit the contract when new callers, new workloads, or new shutdown paths appear.
+
+19
+00:01:25.623 --> 00:01:34.109
+Secure concurrent C++ is less about one magic primitive and more about disciplined boundaries, clear lifetimes, and evidence that the design still
+
+20
+00:01:34.109 --> 00:01:34.880
+matches reality.

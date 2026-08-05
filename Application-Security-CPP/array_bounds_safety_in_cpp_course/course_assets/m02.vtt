@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.489
+A pointer is not the same thing as a bounded array.
+
+2
+00:00:03.489 --> 00:00:12.054
+A pointer may identify an element or the beginning of a range, but it does not inherently tell the callee how many elements are valid, where the
+
+3
+00:00:12.054 --> 00:00:17.446
+range starts, where it ends, who owns the storage, or how long the object will remain alive.
+
+4
+00:00:17.446 --> 00:00:21.253
+Raw arrays often lose useful information when they cross a function boundary.
+
+5
+00:00:21.253 --> 00:00:29.817
+In many expressions, an array decays to a pointer, and the extent that was visible at the declaration site is no longer present in the parameter type.
+
+6
+00:00:29.817 --> 00:00:34.893
+The receiving function may know an address, but not the valid range that address belongs to.
+
+7
+00:00:34.893 --> 00:00:39.651
+Pointer arithmetic can be legitimate in low-level C++ code, but it raises review difficulty.
+
+8
+00:00:39.651 --> 00:00:47.264
+A calculation may be correct only if several earlier assumptions are true: the pointer belongs to the right object, the offset was checked, the
+
+9
+00:00:47.264 --> 00:00:51.387
+resulting position is within the same range, and the lifetime has not ended.
+
+10
+00:00:51.387 --> 00:00:53.291
+Those assumptions should not be invisible.
+
+11
+00:00:53.291 --> 00:00:55.828
+Bounds and lifetime must be reasoned about together.
+
+12
+00:00:55.828 --> 00:01:03.758
+A range that was valid yesterday is not valid after the container reallocated, the owner was destroyed, or a view outlived the data it observes.
+
+13
+00:01:03.758 --> 00:01:08.834
+A safe interface should make ownership and borrowing relationships clear enough that callers can preserve them.
+
+14
+00:01:08.834 --> 00:01:13.275
+Defensive code keeps range information attached to the data for as long as practical.
+
+15
+00:01:13.275 --> 00:01:20.253
+Containers, spans, iterators with clear begin and end rules, and small domain objects can all carry more meaning than a pointer alone.
+
+16
+00:01:20.253 --> 00:01:25.329
+The goal is to reduce places where size context is discarded and later reconstructed by hand.
+
+17
+00:01:25.329 --> 00:01:31.990
+During review, look for function signatures that accept pointer-only parameters, pointer plus loosely named integer parameters, or offsets that are
+
+18
+00:01:31.990 --> 00:01:33.893
+not tied to a visible range.
+
+19
+00:01:33.893 --> 00:01:39.920
+Those are signs that the code may be depending on an unwritten contract rather than a checked, testable one.

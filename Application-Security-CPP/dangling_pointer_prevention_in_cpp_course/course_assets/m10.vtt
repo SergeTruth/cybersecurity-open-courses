@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.464
+Dangling pointer prevention begins with ownership.
+
+2
+00:00:02.464 --> 00:00:13.140
+Before optimizing pointer usage or changing storage strategy, clarify who owns each object, who may borrow it, who may store access to it, and who is
+
+3
+00:00:13.140 --> 00:00:14.372
+responsible for destruction.
+
+4
+00:00:14.372 --> 00:00:18.067
+When ownership is clear, many lifetime decisions become simpler.
+
+5
+00:00:18.067 --> 00:00:20.531
+Use RAII to make cleanup predictable.
+
+6
+00:00:20.531 --> 00:00:22.995
+Use values when ownership is simple.
+
+7
+00:00:22.995 --> 00:00:25.869
+Use std::unique_ptr for exclusive dynamic ownership.
+
+8
+00:00:25.869 --> 00:00:36.134
+Use std::shared_ptr only when shared ownership is truly part of the design, and use std::weak_ptr when observation should not keep an object alive.
+
+9
+00:00:36.134 --> 00:00:39.009
+Keep borrowed access short, local, and explicit.
+
+10
+00:00:39.009 --> 00:00:45.989
+Raw pointers, references, spans, string views, iterators, and handles are useful, but they depend on the owner.
+
+11
+00:00:45.989 --> 00:00:54.201
+A borrowed value should not be stored or scheduled for later use unless the lifetime relationship is visible and tested.
+
+12
+00:00:54.201 --> 00:00:58.307
+Treat containers, temporaries, callbacks, captures, and asynchronous work with care.
+
+13
+00:00:58.307 --> 00:01:00.361
+Container mutation can invalidate observers.
+
+14
+00:01:00.361 --> 00:01:02.414
+Views can outlive their storage.
+
+15
+00:01:02.414 --> 00:01:04.877
+Captured references can outlive local variables.
+
+16
+00:01:04.877 --> 00:01:10.215
+Deferred work can run after the expected owner has changed state or ended.
+
+17
+00:01:10.215 --> 00:01:14.322
+Finally, reinforce the design with tests, diagnostics, review, and governance.
+
+18
+00:01:14.322 --> 00:01:20.481
+Use sanitizers, debug library modes, compiler diagnostics, and lifecycle-focused tests in development and CI.
+
+19
+00:01:20.481 --> 00:01:22.534
+Review lifetime-sensitive code deliberately.
+
+20
+00:01:22.534 --> 00:01:26.640
+Document remaining assumptions and revisit them as the codebase evolves.

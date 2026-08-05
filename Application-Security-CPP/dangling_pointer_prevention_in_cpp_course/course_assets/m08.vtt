@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.276
+Many teams inherit C++ code with raw allocation, manual cleanup, pointer caches, unclear ownership, and object graphs that are difficult to reason
+
+2
+00:00:08.276 --> 00:00:08.652
+about.
+
+3
+00:00:08.652 --> 00:00:11.285
+The safest improvement path is usually incremental.
+
+4
+00:00:11.285 --> 00:00:14.671
+Start by understanding the existing lifecycle before changing it.
+
+5
+00:00:14.671 --> 00:00:16.928
+Map creators, owners, observers, and destroyers.
+
+6
+00:00:16.928 --> 00:00:24.828
+Identify which component creates each object, which component is responsible for keeping it alive, which code merely observes it, and where
+
+7
+00:00:24.828 --> 00:00:25.580
+destruction happens.
+
+8
+00:00:25.580 --> 00:00:31.599
+This map often reveals places where ownership is implied by convention rather than expressed in code.
+
+9
+00:00:31.599 --> 00:00:33.856
+Replace ownership paths before observer paths.
+
+10
+00:00:33.856 --> 00:00:41.004
+If a raw pointer actually owns an object, move that ownership into RAII or a smart pointer type first.
+
+11
+00:00:41.004 --> 00:00:49.656
+Once ownership is clear, non-owning observers can be shortened, replaced with references for call-only access, or converted to weak observation or
+
+12
+00:00:49.656 --> 00:00:51.161
+stable handles where needed.
+
+13
+00:00:51.161 --> 00:00:56.804
+Add RAII wrappers around manual cleanup when direct modernization is too large for one change.
+
+14
+00:00:56.804 --> 00:01:03.575
+A wrapper can centralize release behavior, prevent duplicate cleanup paths, and give tests a more predictable lifecycle boundary.
+
+15
+00:01:03.575 --> 00:01:08.089
+This is often a practical bridge between legacy code and safer design.
+
+16
+00:01:08.089 --> 00:01:11.099
+Regression tests are important before behavior-sensitive changes.
+
+17
+00:01:11.099 --> 00:01:16.365
+Lifetime defects can depend on destruction order, mutation timing, callback scheduling, and move operations.
+
+18
+00:01:16.365 --> 00:01:23.889
+Tests should cover the lifecycles that the refactor is meant to preserve, then add cases that verify safer failure behavior.
+
+19
+00:01:23.889 --> 00:01:26.522
+Document assumptions that cannot be removed immediately.
+
+20
+00:01:26.522 --> 00:01:30.660
+Prioritize externally reachable, asynchronous, high-churn, and ownership-heavy paths first.
+
+21
+00:01:30.660 --> 00:01:38.560
+Each refactor should leave the codebase easier to reason about than it was before, even if some legacy conventions remain temporarily.

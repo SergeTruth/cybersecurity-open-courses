@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.804
+Use-after-free prevention is a design activity, but tooling helps catch mistakes earlier.
+
+2
+00:00:05.804 --> 00:00:10.780
+AddressSanitizer can detect many memory lifetime and access errors during instrumented execution.
+
+3
+00:00:10.780 --> 00:00:13.682
+UndefinedBehaviorSanitizer can help with related undefined behavior.
+
+4
+00:00:13.682 --> 00:00:20.315
+Compiler warnings, static analysis, and focused diagnostics can point reviewers toward suspicious ownership or invalidation patterns.
+
+5
+00:00:20.315 --> 00:00:24.876
+Tools only observe the paths that are built, instrumented, and exercised.
+
+6
+00:00:24.876 --> 00:00:29.851
+A sanitizer run that passes does not prove every lifetime is safe.
+
+7
+00:00:29.851 --> 00:00:36.070
+Tests should target lifecycle-sensitive scenarios: object destruction, container mutation, error exits, cancellation, unregistration, ownership
+
+8
+00:00:36.070 --> 00:00:38.972
+handoff, and callback execution after shutdown begins.
+
+9
+00:00:38.972 --> 00:00:46.435
+Regression tests are especially valuable when fixing a stale access bug so the same pattern does not return.
+
+10
+00:00:46.435 --> 00:00:49.337
+Code review should ask practical lifetime questions.
+
+11
+00:00:49.337 --> 00:00:50.996
+Who owns this object?
+
+12
+00:00:50.996 --> 00:00:55.142
+Can any pointer, reference, iterator, view, or callback outlive it?
+
+13
+00:00:55.142 --> 00:00:58.044
+Can a container modification invalidate stored access?
+
+14
+00:00:58.044 --> 00:01:00.946
+Does a moved object still get used?
+
+15
+00:01:00.946 --> 00:01:03.849
+Is .release() followed by an immediate owner?
+
+16
+00:01:03.849 --> 00:01:05.922
+Are raw pointer boundaries documented?
+
+17
+00:01:05.922 --> 00:01:10.068
+These questions turn lifetime safety into a repeatable review habit.
+
+18
+00:01:10.068 --> 00:01:12.970
+Prioritize tests that exercise the boring edges.
+
+19
+00:01:12.970 --> 00:01:22.091
+Destroy objects while work is pending, resize containers after taking views, move owners before callbacks run, and force failure paths that usually
+
+20
+00:01:22.091 --> 00:01:23.335
+receive less attention.
+
+21
+00:01:23.335 --> 00:01:29.968
+These scenarios are valuable because lifetime bugs often hide in cleanup and rarely used recovery logic.
+
+22
+00:01:29.968 --> 00:01:33.700
+Make the test describe the lifetime rule it protects.
+
+23
+00:01:33.700 --> 00:01:38.675
+Findings should be treated as engineering defects, not one-off cleanup chores.
+
+24
+00:01:38.675 --> 00:01:44.479
+Track them, add tests, improve API contracts, and consider whether similar patterns exist elsewhere.
+
+25
+00:01:44.479 --> 00:01:49.040
+Tools support judgment, but clear ownership design remains the strongest defense.

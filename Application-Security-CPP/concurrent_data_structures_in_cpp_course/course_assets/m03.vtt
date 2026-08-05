@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.677
+Many dependable concurrent data structures begin with a modest pattern: a standard C++ container, a mutex, and a wrapper that exposes a narrow set of
+
+2
+00:00:08.677 --> 00:00:09.371
+safe operations.
+
+3
+00:00:09.371 --> 00:00:13.883
+This approach is not glamorous, but it is often the right starting point.
+
+4
+00:00:13.883 --> 00:00:17.354
+Standard containers give you mature behavior for storage and lookup.
+
+5
+00:00:17.354 --> 00:00:19.089
+The mutex supplies mutual exclusion.
+
+6
+00:00:19.089 --> 00:00:25.684
+The wrapper ties those two ideas together so callers cannot accidentally touch the container without following the synchronization rule.
+
+7
+00:00:25.684 --> 00:00:29.502
+The wrapper should protect complete state transitions, not just individual variables.
+
+8
+00:00:29.502 --> 00:00:35.749
+For example, a push operation on a queue may update storage, size information, and a condition variable predicate.
+
+9
+00:00:35.749 --> 00:00:39.220
+A cache insert may update the map and eviction metadata.
+
+10
+00:00:39.220 --> 00:00:45.121
+Locking around one line at a time can still leave gaps where another thread observes inconsistent state.
+
+11
+00:00:45.121 --> 00:00:53.798
+A good wrapper decides which operations are meaningful, performs them while the appropriate lock is held, and returns results in a form that does not
+
+12
+00:00:53.798 --> 00:00:57.963
+require callers to keep using internal references after the lock is released.
+
+13
+00:00:57.963 --> 00:01:01.086
+RAII lock types are a major advantage in C++.
+
+14
+00:01:01.086 --> 00:01:07.681
+They make the lock lifetime visible in the local scope, and they release automatically during early returns or exceptions.
+
+15
+00:01:07.681 --> 00:01:12.887
+That reduces the risk of forgotten unlocks and makes cleanup paths easier to reason about.
+
+16
+00:01:12.887 --> 00:01:20.176
+The design still needs discipline: avoid holding locks while calling unknown callbacks, performing slow I/O, or acquiring unrelated locks in
+
+17
+00:01:20.176 --> 00:01:20.870
+inconsistent order.
+
+18
+00:01:20.870 --> 00:01:28.853
+When a simple synchronized wrapper meets the requirement, it is usually easier to test, review, and maintain than a custom low-level concurrency
+
+19
+00:01:28.853 --> 00:01:29.200
+design.

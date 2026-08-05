@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.575
+HTTP responses are input.
+
+2
+00:00:01.575 --> 00:00:09.843
+A successful connection or a 200 status code does not automatically make the response safe, complete, correctly typed, or semantically trusted.
+
+3
+00:00:09.843 --> 00:00:18.111
+The client should validate status codes, content type, expected schema, character encoding, and application-level meaning before using a response to
+
+4
+00:00:18.111 --> 00:00:19.292
+update internal state.
+
+5
+00:00:19.292 --> 00:00:21.654
+Resource limits belong in response handling.
+
+6
+00:00:21.654 --> 00:00:28.347
+A response body can be larger than expected, arrive slowly, use compression, or contain nested structured data.
+
+7
+00:00:28.347 --> 00:00:35.434
+Clients should set maximum response sizes where practical, prefer streaming for large downloads, constrain decompression behavior, and avoid
+
+8
+00:00:35.434 --> 00:00:37.009
+buffering entire bodies blindly.
+
+9
+00:00:37.009 --> 00:00:42.521
+Allocation decisions should happen after the client has enough information to bound the work.
+
+10
+00:00:42.521 --> 00:00:44.883
+Parsing should be structured and defensive.
+
+11
+00:00:44.883 --> 00:00:51.577
+Use maintained parsers for JSON, XML, headers, archives, or other formats instead of ad hoc text slicing.
+
+12
+00:00:51.577 --> 00:00:59.057
+Validate required fields, numeric ranges, enum values, version fields, and cross-field relationships before converting remote data into trusted
+
+13
+00:00:59.057 --> 00:00:59.845
+application objects.
+
+14
+00:00:59.845 --> 00:01:03.782
+Parser failures should leave the application in a known state.
+
+15
+00:01:03.782 --> 00:01:05.750
+File downloads need special policy.
+
+16
+00:01:05.750 --> 00:01:13.231
+The client should define allowed content types, destination paths, overwrite behavior, temporary file handling, size limits, integrity checks where
+
+17
+00:01:13.231 --> 00:01:16.381
+required by policy, and cleanup for partial files.
+
+18
+00:01:16.381 --> 00:01:22.680
+A failed or cancelled download should not leave confusing artifacts that later code treats as complete.
+
+19
+00:01:22.680 --> 00:01:28.192
+The safe mental model is consistent: responses come from outside the local trust boundary.
+
+20
+00:01:28.192 --> 00:01:36.460
+Read them with limits, parse them with maintained components, validate their meaning, and only then use them in trusted application flows.
+
+21
+00:01:36.460 --> 00:01:44.334
+Include failure cases in tests, especially oversized bodies, unexpected content types, invalid encodings, partial downloads, and remote data that is
+
+22
+00:01:44.334 --> 00:01:50.240
+well-formed but outside the application contract or current service version expectations and limits clearly.

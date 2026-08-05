@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.963
+Choosing an HTTP library is an engineering and governance decision.
+
+2
+00:00:03.963 --> 00:00:11.890
+A maintained library or approved platform API gives the team documented behavior, security updates, TLS support, timeout controls, proxy handling,
+
+3
+00:00:11.890 --> 00:00:15.061
+redirect policy, streaming options, and known platform compatibility.
+
+4
+00:00:15.061 --> 00:00:20.610
+That is a stronger foundation than ad hoc socket code or custom protocol parsing.
+
+5
+00:00:20.610 --> 00:00:23.780
+The selection process should include security-relevant questions.
+
+6
+00:00:23.780 --> 00:00:28.933
+Does the library perform certificate-chain validation and hostname verification through supported mechanisms?
+
+7
+00:00:28.933 --> 00:00:33.292
+Can callers control redirects, proxy use, request limits, and response streaming?
+
+8
+00:00:33.292 --> 00:00:37.256
+Are timeouts available for connect, read, and total operation deadlines?
+
+9
+00:00:37.256 --> 00:00:43.597
+Is the library actively maintained, and does the team know how updates are reviewed and deployed?
+
+10
+00:00:43.597 --> 00:00:47.164
+Configuration visibility matters as much as the library choice.
+
+11
+00:00:47.164 --> 00:00:53.902
+A wrapper can help standardize timeouts, logging, allowed destinations, retry behavior, and error handling across a codebase.
+
+12
+00:00:53.902 --> 00:01:00.243
+That wrapper should make security-sensitive behavior easier to review, not hide it behind vague defaults.
+
+13
+00:01:00.243 --> 00:01:09.359
+Reviewers should still be able to see whether validation is enabled, which trust store is used, and how redirects or proxies are treated.
+
+14
+00:01:09.359 --> 00:01:11.737
+Library ownership should also be explicit.
+
+15
+00:01:11.737 --> 00:01:18.079
+Someone needs to track versions, supported platforms, deprecations, release notes, and compatibility with the application build.
+
+16
+00:01:18.079 --> 00:01:25.213
+Network code often becomes long-lived infrastructure, so update policy and test coverage are part of secure design.
+
+17
+00:01:25.213 --> 00:01:31.158
+A mature client stack keeps teams focused on application policy instead of reimplementing protocol details.
+
+18
+00:01:31.158 --> 00:01:39.085
+Use the library for protocol structure, transport support, and parsing primitives, then configure it deliberately for the application’s trust,
+
+19
+00:01:39.085 --> 00:01:40.670
+reliability, and observability needs.
+
+20
+00:01:40.670 --> 00:01:48.993
+The review should also cover how the library behaves on each supported platform, because certificate stores, proxy settings, and networking defaults
+
+21
+00:01:48.993 --> 00:01:52.560
+may vary between desktop, server, container, and embedded deployments.

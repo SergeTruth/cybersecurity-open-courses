@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.665
+Legacy APIs and low-level boundaries often use raw pointers, output parameters, pointer-to-pointer patterns, custom allocation routines, and raw
+
+2
+00:00:07.665 --> 00:00:08.030
+handles.
+
+3
+00:00:08.030 --> 00:00:12.774
+These interfaces are not automatically unsafe, but they make ownership harder to see.
+
+4
+00:00:12.774 --> 00:00:18.979
+Use-after-free prevention requires translating those conventions into clear C++ lifetime rules as soon as practical.
+
+5
+00:00:18.979 --> 00:00:24.089
+Document who allocates, who frees, who may store access, and what happens on failure.
+
+6
+00:00:24.089 --> 00:00:31.753
+If a C API returns a raw pointer that must be released by a specific function, wrap it in RAII immediately.
+
+7
+00:00:31.753 --> 00:00:37.958
+A std::unique_ptr with a correct custom deleter or a small dedicated wrapper can make cleanup predictable.
+
+8
+00:00:37.958 --> 00:00:45.258
+If the API only borrows access during a call, do not let that raw pointer escape into long-lived storage.
+
+9
+00:00:45.258 --> 00:00:52.557
+Smart pointer boundary operations deserve special review. .get() provides temporary borrowed access and should not create a hidden owner. .release()
+
+10
+00:00:52.557 --> 00:00:59.857
+gives up ownership without deleting the object, so another clear owner must take responsibility immediately. .reset() replaces or clears ownership
+
+11
+00:00:59.857 --> 00:01:03.142
+and can invalidate existing borrows into the old object.
+
+12
+00:01:03.142 --> 00:01:07.522
+Ownership transfer should be atomic from the reader's point of view.
+
+13
+00:01:07.522 --> 00:01:17.011
+If a raw pointer is released on one line and adopted later, an exception, early return, or maintenance edit can leave the object unmanaged or leave
+
+14
+00:01:17.011 --> 00:01:18.106
+old borrowers confused.
+
+15
+00:01:18.106 --> 00:01:25.771
+Prefer constructing the receiving owner immediately, or wrap the legacy call in one small function that cannot be misused by callers.
+
+16
+00:01:25.771 --> 00:01:27.961
+Keep unsafe conventions at the edge.
+
+17
+00:01:27.961 --> 00:01:35.260
+Convert raw ownership into RAII, convert nullable or output patterns into clearer local abstractions, and test success and cleanup paths.
+
+18
+00:01:35.260 --> 00:01:42.560
+The safest boundary is one where future maintainers can tell exactly who owns the object before and after every call.

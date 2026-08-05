@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.150
+Modern C++ gives teams better choices than manual arrays for many designs.
+
+2
+00:00:04.150 --> 00:00:11.414
+Containers and views do not make every mistake impossible, but they keep size, ownership, and valid range closer to the data.
+
+3
+00:00:11.414 --> 00:00:14.526
+That makes ordinary code easier to write and review.
+
+4
+00:00:14.526 --> 00:00:18.677
+Use std::array when fixed-size storage is part of the design.
+
+5
+00:00:18.677 --> 00:00:23.865
+The number of elements is visible in the type, and the object owns its storage.
+
+6
+00:00:23.865 --> 00:00:31.820
+This is useful for small fixed tables, embedded records, and compile-time-sized buffers where changing the extent should be a deliberate design
+
+7
+00:00:31.820 --> 00:00:32.166
+change.
+
+8
+00:00:32.166 --> 00:00:34.587
+Use std::vector for dynamic contiguous storage.
+
+9
+00:00:34.587 --> 00:00:42.542
+It manages allocation and deallocation through RAII, carries size and capacity, and gives APIs a clear way to accept or return owned sequences.
+
+10
+00:00:42.542 --> 00:00:48.767
+Code still needs range checks when indexing, but it no longer has to manually track the allocation lifetime.
+
+11
+00:00:48.767 --> 00:00:56.376
+Use std::span for bounded non-owning views when an API needs to read or modify existing contiguous storage without taking ownership.
+
+12
+00:00:56.376 --> 00:01:01.564
+A span keeps pointer and length together, which is usually more reviewable than separate parameters.
+
+13
+00:01:01.564 --> 00:01:06.752
+The owner still has to outlive the view, so lifetime remains part of the contract.
+
+14
+00:01:06.752 --> 00:01:10.903
+Prefer range-aware operations and standard algorithms when they express the intent.
+
+15
+00:01:10.903 --> 00:01:19.203
+If the code can iterate over a range directly, transform a container, or use begin and end consistently, it often avoids unnecessary manual index
+
+16
+00:01:19.203 --> 00:01:19.549
+calculations.
+
+17
+00:01:19.549 --> 00:01:25.429
+The fewer manual bounds calculations a function contains, the fewer opportunities there are to get them wrong.
+
+18
+00:01:25.429 --> 00:01:30.271
+The larger design point is that the API shape should communicate ownership and size.
+
+19
+00:01:30.271 --> 00:01:39.264
+A caller should be able to see whether a function owns data, borrows data, changes data, requires a specific extent, or operates on a flexible range.
+
+20
+00:01:39.264 --> 00:01:43.760
+That visibility makes bounds safety part of the interface rather than an afterthought.

@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.887
+Destination control is central to HTTP client security.
+
+2
+00:00:02.887 --> 00:00:07.578
+The URL in code or configuration is not always the final network destination.
+
+3
+00:00:07.578 --> 00:00:10.826
+Redirects can change the scheme, host, port, or path.
+
+4
+00:00:10.826 --> 00:00:13.713
+Proxy settings can route traffic through another component.
+
+5
+00:00:13.713 --> 00:00:17.682
+DNS resolution can map a name to different addresses over time.
+
+6
+00:00:17.682 --> 00:00:20.930
+Each layer should be considered in the client policy.
+
+7
+00:00:20.930 --> 00:00:22.734
+Redirect behavior should be explicit.
+
+8
+00:00:22.734 --> 00:00:25.621
+Some clients should not follow redirects at all.
+
+9
+00:00:25.621 --> 00:00:31.395
+Others may allow a small number of redirects within the same host or approved service boundary.
+
+10
+00:00:31.395 --> 00:00:37.890
+Credential forwarding across redirects needs careful review because an authorization header, cookie, client certificate context, or sensitive request
+
+11
+00:00:37.890 --> 00:00:41.499
+body may no longer be appropriate after the destination changes.
+
+12
+00:00:41.499 --> 00:00:43.664
+Proxy configuration is also security-relevant.
+
+13
+00:00:43.664 --> 00:00:47.994
+A proxy may be required for enterprise egress, inspection, or network policy.
+
+14
+00:00:47.994 --> 00:00:51.963
+It may also be supplied through environment settings or deployment configuration.
+
+15
+00:00:51.963 --> 00:00:59.902
+The application should define which proxy sources it trusts, how proxy credentials are protected, and whether sensitive service traffic may use a
+
+16
+00:00:59.902 --> 00:01:00.263
+proxy.
+
+17
+00:01:00.263 --> 00:01:04.233
+Applications that accept user-controlled URLs need a clear destination model.
+
+18
+00:01:04.233 --> 00:01:06.759
+Some features should only call approved services.
+
+19
+00:01:06.759 --> 00:01:10.728
+Some should accept only preconfigured endpoint names rather than arbitrary URLs.
+
+20
+00:01:10.728 --> 00:01:17.223
+Where a destination allowlist is used, it should consider scheme, hostname, port, and any service-specific path requirements.
+
+21
+00:01:17.223 --> 00:01:19.389
+The key habit is bounded behavior.
+
+22
+00:01:19.389 --> 00:01:25.884
+Redirect counts, allowed schemes, credential forwarding, proxy use, and destination selection should be visible in code and tests.
+
+23
+00:01:25.884 --> 00:01:29.853
+That makes the client easier to operate and safer to change.
+
+24
+00:01:29.853 --> 00:01:37.071
+It also prevents configuration drift from becoming invisible policy, because reviewers can compare the intended destination model with what the
+
+25
+00:01:37.071 --> 00:01:41.040
+running application will actually allow in each environment before release review.

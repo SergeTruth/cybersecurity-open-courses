@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.665
+Atomic operations come in a few common families.
+
+2
+00:00:02.665 --> 00:00:05.663
+Loads read the current value of an atomic object.
+
+3
+00:00:05.663 --> 00:00:08.329
+Stores publish a new value to that object.
+
+4
+00:00:08.329 --> 00:00:11.993
+These operations are the foundation for simple flags and status values.
+
+5
+00:00:11.993 --> 00:00:17.323
+Exchange replaces the value and returns the previous value as one atomic operation for that object.
+
+6
+00:00:17.323 --> 00:00:24.986
+It can be useful when code needs to claim or reset a simple state while learning what state was present before the change.
+
+7
+00:00:24.986 --> 00:00:29.650
+Fetch-add and fetch-sub style operations support counters and similar independent numeric updates.
+
+8
+00:00:29.650 --> 00:00:37.312
+They are useful for telemetry, simple reference-like counts, and sequence numbers, but the meaning of the count still needs a clear policy.
+
+9
+00:00:37.312 --> 00:00:39.644
+Compare-and-exchange is more review-sensitive.
+
+10
+00:00:39.644 --> 00:00:45.307
+It checks whether the atomic currently has an expected value, and if so, writes a desired value.
+
+11
+00:00:45.307 --> 00:00:51.970
+If the value is different, the expected value may be updated and the caller must decide what to do next.
+
+12
+00:00:51.970 --> 00:00:58.633
+Loops around compare-and-exchange need careful review because retry behavior can hide assumptions about progress, valid states, and contention.
+
+13
+00:00:58.633 --> 00:01:03.963
+This course keeps that discussion at a conceptual level rather than building advanced lock-free structures.
+
+14
+00:01:03.963 --> 00:01:09.294
+Read-modify-write operations are atomic for the target object, not for the surrounding business logic.
+
+15
+00:01:09.294 --> 00:01:16.290
+If a transition also depends on a container, pointer, timestamp, or object lifetime, additional synchronization or design structure may still be
+
+16
+00:01:16.290 --> 00:01:16.623
+required.
+
+17
+00:01:16.623 --> 00:01:18.622
+Good atomic operation use is readable.
+
+18
+00:01:18.622 --> 00:01:26.284
+The operation should match the state being represented, and reviewers should be able to tell why a load, store, exchange, fetch operation, or
+
+19
+00:01:26.284 --> 00:01:27.950
+compare-and-exchange was chosen.
+
+20
+00:01:27.950 --> 00:01:33.280
+When that choice is not obvious, prefer a named helper or a more explicit synchronization boundary.

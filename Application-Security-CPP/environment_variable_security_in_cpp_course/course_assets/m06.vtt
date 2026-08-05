@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.697
+Inherited environment variables become more important when a program runs with elevated privileges, acts as a service, launches helper processes,
+
+2
+00:00:07.697 --> 00:00:10.391
+processes sensitive data, or crosses user boundaries.
+
+3
+00:00:10.391 --> 00:00:16.934
+In those situations, trusting ambient environment state can make policy depend on whoever controlled the launch context.
+
+4
+00:00:16.934 --> 00:00:23.091
+Some variables influence behavior indirectly through libraries, loaders, search paths, localization, temporary directories, diagnostics, or runtime
+
+5
+00:00:23.091 --> 00:00:23.476
+frameworks.
+
+6
+00:00:23.476 --> 00:00:30.788
+The application code may never read those variables directly, yet its dependencies or tools may still respond to them.
+
+7
+00:00:30.788 --> 00:00:36.176
+Security-sensitive processes need an explicit environment policy rather than broad inheritance by habit.
+
+8
+00:00:36.176 --> 00:00:41.564
+Sanitization means deciding which variables are approved and what to do with everything else.
+
+9
+00:00:41.564 --> 00:00:48.877
+A program might ignore unapproved values, clear them before sensitive work, or construct a minimal environment for child processes.
+
+10
+00:00:48.877 --> 00:00:55.419
+The exact approach depends on platform and application role, but the decision should be deliberate and testable.
+
+11
+00:00:55.419 --> 00:01:01.192
+Environment policy should be reviewed with the same care as file permissions or network access.
+
+12
+00:01:01.192 --> 00:01:06.580
+Document allowed variables, trusted sources, default behavior, and sensitive contexts where inheritance is restricted.
+
+13
+00:01:06.580 --> 00:01:14.662
+The goal is least privilege for configuration influence: only the values that are expected and validated should affect security-sensitive behavior.
+
+14
+00:01:14.662 --> 00:01:20.435
+Sanitization should be implemented close to the boundary where privilege changes or sensitive work begins.
+
+15
+00:01:20.435 --> 00:01:28.132
+Waiting until later in the call path can leave libraries, diagnostics, or helper code exposed to ambient values during initialization.
+
+16
+00:01:28.132 --> 00:01:33.520
+A small allowlist is easier to explain, test, and audit than a large denylist.

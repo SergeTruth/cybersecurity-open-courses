@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.635
+Use-after-free prevention starts with ownership.
+
+2
+00:00:02.635 --> 00:00:10.163
+An owner controls an object's lifetime: it creates the object, decides when lifetime ends, and is responsible for cleanup.
+
+3
+00:00:10.163 --> 00:00:13.551
+Borrowed access temporarily uses an object owned somewhere else.
+
+4
+00:00:13.551 --> 00:00:16.939
+Observation refers to an object without controlling its lifetime.
+
+5
+00:00:16.939 --> 00:00:20.327
+Ownership transfer moves responsibility from one owner to another.
+
+6
+00:00:20.327 --> 00:00:23.715
+These roles need to be visible in the design.
+
+7
+00:00:23.715 --> 00:00:28.985
+When a borrower stores access longer than the owner expects, the design becomes fragile.
+
+8
+00:00:28.985 --> 00:00:37.642
+The original call may be safe, but the stored pointer, reference, iterator, or view can become stale after destruction, reset, movement, or container
+
+9
+00:00:37.642 --> 00:00:38.019
+modification.
+
+10
+00:00:38.019 --> 00:00:46.677
+That is why lifetime contracts should appear in API signatures, class members, factory functions, and code review notes rather than only in tribal
+
+11
+00:00:46.677 --> 00:00:47.053
+memory.
+
+12
+00:00:47.053 --> 00:00:50.064
+Modern C++ gives useful vocabulary for these contracts.
+
+13
+00:00:50.064 --> 00:00:52.699
+A value member usually means direct ownership.
+
+14
+00:00:52.699 --> 00:00:55.334
+A std::unique_ptr communicates exclusive dynamic ownership.
+
+15
+00:00:55.334 --> 00:00:57.969
+A std::shared_ptr communicates intentional shared lifetime.
+
+16
+00:00:57.969 --> 00:01:02.110
+A std::weak_ptr observes a shared object without keeping it alive.
+
+17
+00:01:02.110 --> 00:01:08.133
+References and raw pointers can represent borrowed access when their lifetime rules are clear and local.
+
+18
+00:01:08.133 --> 00:01:11.144
+The most helpful designs make destruction timing unsurprising.
+
+19
+00:01:11.144 --> 00:01:16.790
+Constructors establish valid ownership, destructors release resources, and moves leave old objects in documented states.
+
+20
+00:01:16.790 --> 00:01:21.684
+Factory functions should return owning values or smart pointers when they create resources.
+
+21
+00:01:21.684 --> 00:01:26.577
+Member variables should not hide whether they own or merely observe another object.
+
+22
+00:01:26.577 --> 00:01:32.977
+The fewer hidden lifetime agreements a reader must remember, the less room there is for stale access.
+
+23
+00:01:32.977 --> 00:01:41.634
+Reviewers should ask: who owns this object, when can it be destroyed, who may borrow it, and can any access outlive the owner?
+
+24
+00:01:41.634 --> 00:01:46.904
+If those answers are hard to find, the code is already difficult to trust.
+
+25
+00:01:46.904 --> 00:01:53.680
+Clear ownership does not eliminate every bug, but it removes the ambiguity that allows stale access to hide.

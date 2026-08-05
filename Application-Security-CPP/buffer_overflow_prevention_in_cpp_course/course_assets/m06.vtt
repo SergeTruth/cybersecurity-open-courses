@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.729
+Untrusted or variable-length input should be validated before allocation, parsing, copying, formatting, or transformation.
+
+2
+00:00:05.729 --> 00:00:11.840
+A length field in a file, message, request, or configuration value is a claim, not proof.
+
+3
+00:00:11.840 --> 00:00:16.423
+The program should check that claim against supported limits and available data.
+
+4
+00:00:16.423 --> 00:00:19.861
+Reasonable maximum sizes are part of defensive resource control.
+
+5
+00:00:19.861 --> 00:00:28.263
+A format may be able to express very large lengths, but the product still needs a maximum it is willing to process.
+
+6
+00:00:28.263 --> 00:00:33.228
+That maximum should consider memory use, CPU time, service expectations, and failure behavior.
+
+7
+00:00:33.228 --> 00:00:35.138
+Size arithmetic deserves careful review.
+
+8
+00:00:35.138 --> 00:00:37.048
+Multiplication can overflow before allocation.
+
+9
+00:00:37.048 --> 00:00:41.631
+Adding a terminator, header, or alignment padding can exceed a supported maximum.
+
+10
+00:00:41.631 --> 00:00:48.124
+Converting between bytes, characters, elements, and protocol units can change meaning if the code is not explicit.
+
+11
+00:00:48.124 --> 00:00:51.179
+Separate parsing, validation, and memory operations where practical.
+
+12
+00:00:51.179 --> 00:00:54.235
+First read enough to understand the claimed size.
+
+13
+00:00:54.235 --> 00:00:57.290
+Then validate it against maximums and remaining input.
+
+14
+00:00:57.290 --> 00:00:59.964
+Only then allocate, copy, or transform data.
+
+15
+00:00:59.964 --> 00:01:03.783
+This structure makes review easier and reduces partial-state problems.
+
+16
+00:01:03.783 --> 00:01:07.221
+A violated size assumption should be a safe failure.
+
+17
+00:01:07.221 --> 00:01:13.332
+Reject the input, preserve the previous state, clean up temporary resources, and report a bounded diagnostic.
+
+18
+00:01:13.332 --> 00:01:20.970
+Do not proceed with a smaller allocation or a guessed length simply because the normal path expected a different value.
+
+19
+00:01:20.970 --> 00:01:29.373
+Tests and reviews should cover zero sizes, one less than maximum, exact maximum, one more than maximum, conversion boundaries, empty input, truncated
+
+20
+00:01:29.373 --> 00:01:31.283
+input, and repeated small fragments.
+
+21
+00:01:31.283 --> 00:01:34.720
+Boundary cases are where many buffer assumptions become visible.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.739
+Raw pointers and references are not automatically unsafe.
+
+2
+00:00:02.739 --> 00:00:05.478
+They become risky when their role is unclear.
+
+3
+00:00:05.478 --> 00:00:10.956
+In modern C++, a raw pointer should usually mean non-owning access, not responsibility for deletion.
+
+4
+00:00:10.956 --> 00:00:15.749
+A reference is often clearer when the object is required and cannot be null.
+
+5
+00:00:15.749 --> 00:00:21.569
+A raw pointer can be useful when missing data is meaningful or when interfacing with older APIs.
+
+6
+00:00:21.569 --> 00:00:24.650
+Borrowed access must stay within the owner's lifetime.
+
+7
+00:00:24.650 --> 00:00:29.443
+That is easy to verify when a function uses a parameter immediately and returns.
+
+8
+00:00:29.443 --> 00:00:38.345
+It becomes harder when a pointer escapes: stored in a member, returned to a caller, captured by a lambda, placed into a container, or passed to
+
+9
+00:00:38.345 --> 00:00:39.030
+asynchronous work.
+
+10
+00:00:39.030 --> 00:00:45.192
+Review pointer escape carefully because it often turns a local borrow into a long-lived stale access risk.
+
+11
+00:00:45.192 --> 00:00:46.904
+Returned references deserve special attention.
+
+12
+00:00:46.904 --> 00:00:53.751
+Returning a reference to a local object is invalid because the local object's lifetime ends when the function returns.
+
+13
+00:00:53.751 --> 00:00:58.545
+Returning a reference into a container may be valid only until the container changes.
+
+14
+00:00:58.545 --> 00:01:04.022
+Returning a view into temporary data can look efficient while quietly extending access beyond the source.
+
+15
+00:01:04.022 --> 00:01:05.734
+Const does not solve lifetime.
+
+16
+00:01:05.734 --> 00:01:14.293
+A const pointer or reference may prevent mutation through that access path, but it can still refer to an object that has already been destroyed.
+
+17
+00:01:14.293 --> 00:01:16.690
+Lifetime validity and mutability are separate questions.
+
+18
+00:01:16.690 --> 00:01:19.429
+Good APIs make borrowing short, explicit, and boring.
+
+19
+00:01:19.429 --> 00:01:24.564
+If the callee may store access, say so and specify who keeps the object alive.
+
+20
+00:01:24.564 --> 00:01:27.303
+If null is allowed, describe what it means.
+
+21
+00:01:27.303 --> 00:01:30.042
+If ownership is transferred, use an owning type.
+
+22
+00:01:30.042 --> 00:01:35.520
+Use-after-free prevention depends on separating ownership from temporary access and making that separation visible.

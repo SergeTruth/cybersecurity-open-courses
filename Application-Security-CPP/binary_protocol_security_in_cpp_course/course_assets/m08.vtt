@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.310
+Binary protocol safety depends on continuous validation work.
+
+2
+00:00:03.310 --> 00:00:11.170
+Unit tests should cover valid messages, minimum and maximum sizes, boundary values, optional fields, missing fields, truncated messages, oversized
+
+3
+00:00:11.170 --> 00:00:16.135
+fields, invalid versions, invalid state transitions, authentication failures, and resource-limit decisions.
+
+4
+00:00:16.135 --> 00:00:19.031
+These tests make the protocol contract executable.
+
+5
+00:00:19.031 --> 00:00:22.341
+Regression tests are especially valuable for parser fixes.
+
+6
+00:00:22.341 --> 00:00:32.683
+When a bug is found, the team should add a test that captures the expected safe behavior so the same assumption does not return later.
+
+7
+00:00:32.683 --> 00:00:42.199
+Boundary cases should include lengths around limits, offsets near frame edges, counts of zero and one, maximum supported counts, and nested data at
+
+8
+00:00:42.199 --> 00:00:43.026
+allowed depth.
+
+9
+00:00:43.026 --> 00:00:49.232
+Fuzzing has a defensive role: it exercises parser robustness and memory safety under varied inputs.
+
+10
+00:00:49.232 --> 00:00:57.093
+It should be integrated as a way to find crashes, sanitizer findings, hangs, unexpected allocations, and inconsistent error handling.
+
+11
+00:00:57.093 --> 00:01:03.712
+AddressSanitizer, UndefinedBehaviorSanitizer, compiler warnings, static analysis, and coverage-guided testing can all strengthen confidence when they
+
+12
+00:01:03.712 --> 00:01:05.367
+fit the build system.
+
+13
+00:01:05.367 --> 00:01:07.022
+Observability completes the loop.
+
+14
+00:01:07.022 --> 00:01:14.469
+Production systems should expose safe counters for rejected messages, parse error categories, version mismatches, resource-limit rejections, failed
+
+15
+00:01:14.469 --> 00:01:17.365
+authentication or integrity checks, and unusual rates.
+
+16
+00:01:17.365 --> 00:01:23.570
+These signals help teams spot compatibility problems, client rollouts, corrupted data sources, or operational pressure.
+
+17
+00:01:23.570 --> 00:01:25.639
+Review questions should be concrete.
+
+18
+00:01:25.639 --> 00:01:27.294
+Where are lengths checked?
+
+19
+00:01:27.294 --> 00:01:28.535
+Are offsets bounded?
+
+20
+00:01:28.535 --> 00:01:30.190
+What state is required?
+
+21
+00:01:30.190 --> 00:01:31.845
+Which versions are accepted?
+
+22
+00:01:31.845 --> 00:01:33.913
+When is a message trusted?
+
+23
+00:01:33.913 --> 00:01:35.568
+What resources are capped?
+
+24
+00:01:35.568 --> 00:01:39.705
+The best reviews connect code structure, tests, and operational signals.
+
+25
+00:01:39.705 --> 00:01:48.393
+When those three sources agree, teams can change protocol code with more confidence and detect regressions earlier, before unexpected input reaches
+
+26
+00:01:48.393 --> 00:01:49.221
+production environments.
+
+27
+00:01:49.221 --> 00:01:55.840
+Review should include parser code, caller expectations, parsed objects, error handling, and operational behavior during maintenance.

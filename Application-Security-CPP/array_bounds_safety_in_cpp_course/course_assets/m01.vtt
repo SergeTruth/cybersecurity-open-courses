@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.661
+Array bounds safety matters because arrays and contiguous storage are central to practical C++ programming.
+
+2
+00:00:05.661 --> 00:00:12.077
+They appear in parsers, protocol handlers, file processing, graphics code, numerical libraries, embedded systems, databases, networking components,
+
+3
+00:00:12.077 --> 00:00:13.586
+and performance-sensitive services.
+
+4
+00:00:13.586 --> 00:00:21.512
+The language gives engineers powerful control over memory layout and access, but that control comes with responsibility for staying inside the
+
+5
+00:00:21.512 --> 00:00:22.266
+intended range.
+
+6
+00:00:22.266 --> 00:00:25.663
+A bounds mistake is not only a security concern.
+
+7
+00:00:25.663 --> 00:00:33.966
+Reading or writing outside the intended range can corrupt data, produce wrong results, damage stability, hide defects until production, or make a
+
+8
+00:00:33.966 --> 00:00:35.475
+codebase harder to maintain.
+
+9
+00:00:35.475 --> 00:00:43.023
+The symptom may appear far away from the original mistake, which makes prevention much cheaper than investigation after the fact.
+
+10
+00:00:43.023 --> 00:00:47.930
+Valid array access depends on several facts staying true at the same time.
+
+11
+00:00:47.930 --> 00:00:50.949
+The index must refer to an existing element.
+
+12
+00:00:50.949 --> 00:00:53.590
+The length must describe the right unit.
+
+13
+00:00:53.590 --> 00:00:56.987
+The range must belong to the object being accessed.
+
+14
+00:00:56.987 --> 00:00:59.251
+The object must still be alive.
+
+15
+00:00:59.251 --> 00:01:04.535
+When any of those assumptions are lost, code that looks ordinary can become unreliable.
+
+16
+00:01:04.535 --> 00:01:09.819
+Prevention starts in design, not in a final check added near a risky operation.
+
+17
+00:01:09.819 --> 00:01:17.367
+Good designs preserve bounds and lifetime information, prefer clear ownership, and avoid interfaces that require callers to remember hidden range
+
+18
+00:01:17.367 --> 00:01:17.744
+rules.
+
+19
+00:01:17.744 --> 00:01:24.160
+The more context the type and API carry, the less every reviewer has to reconstruct from memory.
+
+20
+00:01:24.160 --> 00:01:26.424
+The course theme is layered engineering.
+
+21
+00:01:26.424 --> 00:01:29.443
+Prefer containers and bounded views where they fit.
+
+22
+00:01:29.443 --> 00:01:32.462
+Validate indexes, offsets, lengths, and subranges before access.
+
+23
+00:01:32.462 --> 00:01:33.595
+Test edge cases.
+
+24
+00:01:33.595 --> 00:01:37.369
+Use sanitizers, compiler diagnostics, and hardened library modes during development.
+
+25
+00:01:37.369 --> 00:01:41.520
+Then verify that release practices support the same bounds-safety goals.

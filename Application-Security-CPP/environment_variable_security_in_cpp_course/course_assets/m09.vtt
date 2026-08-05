@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.668
+Environment-driven behavior should be tested directly.
+
+2
+00:00:02.668 --> 00:00:09.910
+Tests should cover missing variables, malformed values, empty strings, invalid booleans, out-of-range numbers, unsafe paths, conflicting settings,
+
+3
+00:00:09.910 --> 00:00:12.578
+secret redaction, and production versus development behavior.
+
+4
+00:00:12.578 --> 00:00:18.677
+A codebase that only tests the default environment can miss failures that appear immediately during deployment.
+
+5
+00:00:18.677 --> 00:00:22.488
+Logging should help diagnose configuration problems without printing sensitive values.
+
+6
+00:00:22.488 --> 00:00:30.874
+It is useful to report that a required variable is missing, that a value failed validation, or that a fallback was selected.
+
+7
+00:00:30.874 --> 00:00:38.878
+It is not safe to dump the full environment or echo secret variables into broad logs, crash reports, or CI artifacts.
+
+8
+00:00:38.878 --> 00:00:45.358
+CI systems need special attention because they often contain environment variables used for credentials, deployment, or signing.
+
+9
+00:00:45.358 --> 00:00:51.837
+Build scripts should avoid echoing secret values, and test artifacts should not capture process environments by default.
+
+10
+00:00:51.837 --> 00:00:54.505
+Secret redaction should be verified, not assumed.
+
+11
+00:00:54.505 --> 00:00:57.174
+Code review should include environment contract changes.
+
+12
+00:00:57.174 --> 00:01:02.891
+Adding a new environment variable can alter application security behavior, deployment requirements, and operational procedures.
+
+13
+00:01:02.891 --> 00:01:12.039
+Reviewers should ask who controls the value, how it is validated, whether it is sensitive, whether it reaches child processes, and how operators will
+
+14
+00:01:12.039 --> 00:01:13.944
+know what value is active.
+
+15
+00:01:13.944 --> 00:01:18.518
+Governance does not need to be heavy, but it should be consistent.
+
+16
+00:01:18.518 --> 00:01:22.711
+Track environment variables in documentation, configuration schemas, deployment manifests, and runbooks.
+
+17
+00:01:22.711 --> 00:01:31.859
+When a value changes meaning, becomes sensitive, or starts affecting a new process boundary, treat that as a visible change that deserves review and
+
+18
+00:01:31.859 --> 00:01:32.240
+tests.

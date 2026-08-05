@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.571
+Safe atomic use begins with minimizing shared mutable state.
+
+2
+00:00:03.571 --> 00:00:13.492
+If data can be immutable, thread-confined, moved through a queue, or protected by ownership transfer, the design may not need an atomic at all.
+
+3
+00:00:13.492 --> 00:00:16.269
+Use atomics for simple, well-defined coordination.
+
+4
+00:00:16.269 --> 00:00:23.809
+Flags, counters, and small state transitions should have clear meanings, named states where appropriate, and known readers and writers.
+
+5
+00:00:23.809 --> 00:00:28.571
+Prefer simple memory ordering unless there is a clear reason not to.
+
+6
+00:00:28.571 --> 00:00:32.142
+Sequential consistency is often the easiest default to review.
+
+7
+00:00:32.142 --> 00:00:36.904
+Relaxed ordering and custom acquire-release protocols should be documented and justified.
+
+8
+00:00:36.904 --> 00:00:38.888
+Use mutexes for compound invariants.
+
+9
+00:00:38.888 --> 00:00:48.015
+If correctness depends on several fields, a container relationship, ownership handoff, or a transaction-like update, a lock may make the design safer
+
+10
+00:00:48.015 --> 00:00:49.205
+and more readable.
+
+11
+00:00:49.205 --> 00:00:51.983
+Review lifetime and shutdown together with synchronization.
+
+12
+00:00:51.983 --> 00:00:57.935
+Atomic visibility does not keep objects alive, stop detached work, or guarantee cleanup by itself.
+
+13
+00:00:57.935 --> 00:00:59.522
+Finally, test the boundaries.
+
+14
+00:00:59.522 --> 00:01:02.300
+Exercise state transitions, shutdown, publication, and contention.
+
+15
+00:01:02.300 --> 00:01:08.649
+Atomic code is security-sensitive because small synchronization mistakes can affect integrity, availability, and safe cleanup.
+
+16
+00:01:08.649 --> 00:01:14.601
+These habits keep atomic operations as precise tools rather than vague promises of thread safety.
+
+17
+00:01:14.601 --> 00:01:18.173
+They also make maintenance reviews faster and more dependable.
+
+18
+00:01:18.173 --> 00:01:19.760
+That matters in production.

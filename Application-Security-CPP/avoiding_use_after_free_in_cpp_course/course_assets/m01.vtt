@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.735
+Use-after-free is a lifetime safety defect.
+
+2
+00:00:02.735 --> 00:00:10.941
+It happens when code accesses an object, memory region, pointer, reference, iterator, or view after the object behind that access is no longer alive.
+
+3
+00:00:10.941 --> 00:00:16.069
+The name often makes people think only of explicit delete , but the pattern is broader.
+
+4
+00:00:16.069 --> 00:00:20.856
+Any stale access after valid lifetime has ended can create unreliable and unsafe behavior.
+
+5
+00:00:20.856 --> 00:00:23.933
+In C++, stale access can come from many places.
+
+6
+00:00:23.933 --> 00:00:27.694
+A raw pointer can remain after an owner destroys the object.
+
+7
+00:00:27.694 --> 00:00:31.113
+A reference can outlive the local variable it referred to.
+
+8
+00:00:31.113 --> 00:00:34.874
+A container operation can invalidate iterators or pointers into its storage.
+
+9
+00:00:34.874 --> 00:00:38.634
+A std::string_view can survive longer than the string it views.
+
+10
+00:00:38.634 --> 00:00:43.763
+A callback or background task can run after the object it captured has been destroyed.
+
+11
+00:00:43.763 --> 00:00:47.182
+The defensive concern is that the code still looks ordinary.
+
+12
+00:00:47.182 --> 00:00:49.233
+The pointer may be non-null.
+
+13
+00:00:49.233 --> 00:00:51.627
+The reference may have a familiar name.
+
+14
+00:00:51.627 --> 00:00:54.362
+The iterator may still compare like a value.
+
+15
+00:00:54.362 --> 00:00:57.097
+None of that proves the object is valid.
+
+16
+00:00:57.097 --> 00:01:02.225
+Safe engineering requires reasoning about object lifetime, not just whether an address or handle exists.
+
+17
+00:01:02.225 --> 00:01:05.302
+Attackers and production failures both benefit from confusion here.
+
+18
+00:01:05.302 --> 00:01:14.192
+Freed storage may be reused for different data, so a stale access can read the wrong object, corrupt a new object, or drive control flow through
+
+19
+00:01:14.192 --> 00:01:16.243
+assumptions that are no longer true.
+
+20
+00:01:16.243 --> 00:01:19.662
+Preventing use-after-free improves reliability, maintainability, and security review.
+
+21
+00:01:19.662 --> 00:01:23.765
+The goal is not to memorize every possible invalidation rule in isolation.
+
+22
+00:01:23.765 --> 00:01:31.971
+The goal is to design code where ownership is explicit, borrowed access is short-lived, cleanup is predictable, and later work cannot quietly use
+
+23
+00:01:31.971 --> 00:01:33.680
+objects that have already ended.

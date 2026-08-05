@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.318
+Buffer overflow prevention is often an API design problem.
+
+2
+00:00:03.318 --> 00:00:09.216
+A function that accepts only a raw pointer gives callers and reviewers very little safety information.
+
+3
+00:00:09.216 --> 00:00:15.113
+The pointer may refer to one object, an array, output storage, optional data, or legacy ownership.
+
+4
+00:00:15.113 --> 00:00:18.431
+The API should not force every caller to guess.
+
+5
+00:00:18.431 --> 00:00:24.329
+Where raw buffers are unavoidable, pair them with explicit length or capacity parameters and clear contracts.
+
+6
+00:00:24.329 --> 00:00:27.647
+Say whether the length is in bytes or elements.
+
+7
+00:00:27.647 --> 00:00:30.964
+Say whether the function reads, writes, appends, or formats.
+
+8
+00:00:30.964 --> 00:00:35.019
+Say whether the function may partially write output when it fails.
+
+9
+00:00:35.019 --> 00:00:41.654
+Prefer APIs that return owned values, accept containers, or use bounded views when those choices fit the design.
+
+10
+00:00:41.654 --> 00:00:47.183
+Returning a `std::string`, `std::vector`, or domain-specific buffer object can make ownership clear.
+
+11
+00:00:47.183 --> 00:00:50.501
+Accepting `std::span` can make a borrowed range clear.
+
+12
+00:00:50.501 --> 00:00:52.713
+These choices reduce pointer-only ambiguity.
+
+13
+00:00:52.713 --> 00:00:55.662
+Define what happens when output does not fit.
+
+14
+00:00:55.662 --> 00:01:03.771
+The policy might be an error return, an exception, truncation with explicit reporting, or a caller-provided retry with the required size.
+
+15
+00:01:03.771 --> 00:01:08.563
+The important point is that the function does not silently produce ambiguous output.
+
+16
+00:01:08.563 --> 00:01:14.461
+Ambiguous API contracts become long-term security debt because every caller must preserve a hidden rule.
+
+17
+00:01:14.461 --> 00:01:20.359
+Safer APIs make the valid call easy, the invalid call harder, and the failure behavior visible.
+
+18
+00:01:20.359 --> 00:01:25.520
+They are easier to test because the boundary conditions are part of the contract.

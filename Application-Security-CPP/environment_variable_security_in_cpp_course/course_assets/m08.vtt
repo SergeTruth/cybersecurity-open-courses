@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.812
+Environment behavior is not identical across platforms.
+
+2
+00:00:02.812 --> 00:00:10.444
+Windows, Linux, macOS, containers, system services, desktop launches, CI runners, and embedded deployments can differ in case sensitivity, encoding,
+
+3
+00:00:10.444 --> 00:00:14.862
+variable size, inheritance behavior, service configuration, and exposure through inspection tooling.
+
+4
+00:00:14.862 --> 00:00:20.887
+Portable code should not rely on assumptions that are only true in one launch model.
+
+5
+00:00:20.887 --> 00:00:23.297
+Deployment systems often shape the environment.
+
+6
+00:00:23.297 --> 00:00:27.314
+Containers and orchestration platforms commonly inject configuration through environment variables.
+
+7
+00:00:27.314 --> 00:00:30.929
+Service managers may supply a controlled set of values.
+
+8
+00:00:30.929 --> 00:00:35.347
+CI systems may expose secret variables to build or test steps.
+
+9
+00:00:35.347 --> 00:00:40.971
+Desktop launches may inherit a user session in ways that differ from server processes.
+
+10
+00:00:40.971 --> 00:00:43.381
+These differences affect validation and operations.
+
+11
+00:00:43.381 --> 00:00:48.603
+A variable name that is distinct on one platform may collide on another.
+
+12
+00:00:48.603 --> 00:00:50.611
+Encoding differences can affect parsing.
+
+13
+00:00:50.611 --> 00:00:53.021
+Size limits can affect large values.
+
+14
+00:00:53.021 --> 00:00:57.439
+Process inspection behavior can change how sensitive environment values are exposed.
+
+15
+00:00:57.439 --> 00:01:03.063
+The application should document the environments it supports and test the ones that matter.
+
+16
+00:01:03.063 --> 00:01:09.490
+The defensive habit is to normalize policy where possible and isolate platform-specific details where necessary.
+
+17
+00:01:09.490 --> 00:01:16.720
+Centralized environment loading helps because platform differences are handled in one place rather than leaking into business logic.
+
+18
+00:01:16.720 --> 00:01:21.941
+Portability work should include realistic launch scenarios, not only local command-line runs.
+
+19
+00:01:21.941 --> 00:01:28.770
+Test the service account, container image, scheduled job, installer path, and CI job that production actually uses.
+
+20
+00:01:28.770 --> 00:01:36.000
+Each launch path can add, remove, rename, or expose variables in ways that change both reliability and security.

@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.340
+Public-key cryptography uses different roles for public and private keys.
+
+2
+00:00:04.340 --> 00:00:09.865
+A public key can be distributed broadly, while the private key must remain protected.
+
+3
+00:00:09.865 --> 00:00:13.811
+The security value depends on keeping that role separation intact.
+
+4
+00:00:13.811 --> 00:00:21.702
+Digital signatures provide authenticity and integrity for signed data when verification is performed correctly and the verifying code trusts the
+
+5
+00:00:21.702 --> 00:00:24.070
+right public key or certificate chain.
+
+6
+00:00:24.070 --> 00:00:27.227
+A signature does not by itself provide confidentiality.
+
+7
+00:00:27.227 --> 00:00:29.594
+Trust is the central engineering question.
+
+8
+00:00:29.594 --> 00:00:32.356
+Where does the public key come from?
+
+9
+00:00:32.356 --> 00:00:38.275
+Is it pinned, configured, distributed by an update system, or validated through a certificate chain?
+
+10
+00:00:38.275 --> 00:00:41.432
+How does the application respond when verification fails?
+
+11
+00:00:41.432 --> 00:00:42.616
+Certificates add policy.
+
+12
+00:00:42.616 --> 00:00:50.113
+Validation may include chain building, trust store selection, hostname checks, expiration handling, revocation or policy checks where applicable, and
+
+13
+00:00:50.113 --> 00:00:52.875
+clear behavior for development versus production environments.
+
+14
+00:00:52.875 --> 00:00:57.216
+TLS should normally be handled by mature libraries or platform stacks.
+
+15
+00:00:57.216 --> 00:01:02.740
+Custom protocol code is rarely the right place to make low-level trust decisions.
+
+16
+00:01:02.740 --> 00:01:07.870
+Application code should configure the library correctly and avoid weakening validation for convenience.
+
+17
+00:01:07.870 --> 00:01:11.421
+Temporary validation shortcuts have a habit of becoming permanent.
+
+18
+00:01:11.421 --> 00:01:18.129
+If a test environment needs special trust configuration, make it explicit, isolated, and difficult to ship accidentally.
+
+19
+00:01:18.129 --> 00:01:26.415
+A reviewable public-key design names the trust source, verification operation, accepted identities, failure behavior, and maintenance path for key or
+
+20
+00:01:26.415 --> 00:01:27.205
+certificate changes.
+
+21
+00:01:27.205 --> 00:01:29.572
+Private keys also need lifecycle control.
+
+22
+00:01:29.572 --> 00:01:37.464
+Limit access, rotate according to policy, and make signing or certificate operations auditable enough that unusual use can be investigated.
+
+23
+00:01:37.464 --> 00:01:44.961
+When C++ code integrates with TLS, prefer configuring the established stack over inventing custom identity checks in application logic.
+
+24
+00:01:44.961 --> 00:01:49.696
+This keeps trust policy centralized, documented, and easier to maintain across platforms.
+
+25
+00:01:49.696 --> 00:01:50.880
+Review it regularly.

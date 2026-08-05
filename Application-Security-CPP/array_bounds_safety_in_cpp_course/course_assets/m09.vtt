@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.575
+Array bounds defects often appear only at edge sizes and failure paths.
+
+2
+00:00:04.575 --> 00:00:12.201
+Tests should cover zero elements, one element, expected maximums, just-below and just-above limits, empty input, truncated input, inconsistent
+
+3
+00:00:12.201 --> 00:00:16.395
+lengths, and indexes near the beginning and end of a range.
+
+4
+00:00:16.395 --> 00:00:20.971
+AddressSanitizer can help reveal memory access defects while tests exercise the code.
+
+5
+00:00:20.971 --> 00:00:25.165
+UndefinedBehaviorSanitizer can reveal behavior that the program should not rely on.
+
+6
+00:00:25.165 --> 00:00:33.172
+These tools are most useful in development and continuous integration, where the extra checks can run before a defect reaches users.
+
+7
+00:00:33.172 --> 00:00:36.222
+Compiler warnings and static diagnostics add another layer.
+
+8
+00:00:36.222 --> 00:00:43.085
+Warnings can flag suspicious conversions, signed and unsigned comparisons, array indexing concerns, unreachable conditions, and other code patterns
+
+9
+00:00:43.085 --> 00:00:43.848
+worth review.
+
+10
+00:00:43.848 --> 00:00:49.948
+A useful warning policy explains which findings are required to fix and how exceptions are documented.
+
+11
+00:00:49.948 --> 00:00:55.286
+Hardened library modes and debug iterators can catch invalid range assumptions in some builds.
+
+12
+00:00:55.286 --> 00:01:04.056
+They are not a substitute for safe design, and they may not match production performance settings, but they give teams valuable feedback when
+
+13
+00:01:04.056 --> 00:01:06.343
+integrated into test and CI pipelines.
+
+14
+00:01:06.343 --> 00:01:08.250
+Tools need process around them.
+
+15
+00:01:08.250 --> 00:01:17.019
+A sanitizer report, warning, or boundary test failure should become a tracked engineering defect with an owner, fix, regression test, and follow-up
+
+16
+00:01:17.019 --> 00:01:17.401
+review.
+
+17
+00:01:17.401 --> 00:01:23.120
+Bounds-safety checks become stronger when they are repeatable, visible, and part of normal delivery.
