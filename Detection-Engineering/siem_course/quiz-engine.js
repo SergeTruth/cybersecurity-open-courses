@@ -21,26 +21,53 @@
   }
 
   function reportToLms(results, score, passed) {
-    if (!window.SCORM || !SCORM.isAvailable()) return;
+    var runtime = window.CourseRuntime;
+    var connected = Boolean(runtime && runtime.isConnected());
+    var hosted = Boolean(runtime && runtime.isHosted());
+    var outcome = { attempted: connected, hosted: hosted, lms: false, local: false };
+
+    if (!connected) {
+      if (runtime) {
+        var localResult = runtime.recordQuizResult(passed);
+        outcome.local = Boolean(localResult && localResult.local);
+      }
+      return outcome;
+    }
+
+    if (typeof SCORM.clearLastError === "function") SCORM.clearLastError();
+    outcome.lms = true;
+
+    function write(key, value) {
+      var saved = SCORM.setValue(key, value);
+      outcome.lms = saved && outcome.lms;
+    }
 
     results.forEach(function (result, index) {
       var prefix = "cmi.interactions." + index;
-      SCORM.setValue(prefix + ".id", result.id);
-      SCORM.setValue(prefix + ".type", "choice");
-      SCORM.setValue(prefix + ".student_response", result.response);
-      SCORM.setValue(prefix + ".correct_responses.0.pattern", result.answer);
-      SCORM.setValue(prefix + ".result", result.correct ? "correct" : "wrong");
+      write(prefix + ".id", result.id);
+      write(prefix + ".type", "choice");
+      write(prefix + ".student_response", result.response);
+      write(prefix + ".correct_responses.0.pattern", result.answer);
+      write(prefix + ".result", result.correct ? "correct" : "wrong");
     });
 
-    SCORM.setValue("cmi.core.score.min", "0");
-    SCORM.setValue("cmi.core.score.max", "100");
-    SCORM.setValue("cmi.core.score.raw", String(score));
-    SCORM.setValue("cmi.core.lesson_status", passed ? "passed" : "failed");
-    if (window.CourseRuntime) {
-      SCORM.setValue("cmi.core.lesson_location", String(CourseRuntime.getModule()));
-      CourseRuntime.recordQuizResult(passed);
+    write("cmi.core.score.min", "0");
+    write("cmi.core.score.max", "100");
+    write("cmi.core.score.raw", String(score));
+    write("cmi.core.lesson_status", passed ? "passed" : "failed");
+
+    var runtimeResult = runtime.recordQuizResult(passed);
+    outcome.local = Boolean(runtimeResult && runtimeResult.local);
+    outcome.lms = Boolean(runtimeResult && runtimeResult.lms) && outcome.lms;
+
+    var committed = SCORM.commit();
+    outcome.lms = committed && outcome.lms;
+    if (outcome.lms) {
+      runtime.reportPersistenceSuccess(passed ? "passed" : "failed");
+    } else {
+      runtime.reportPersistenceFailure(outcome.local);
     }
-    SCORM.commit();
+    return outcome;
   }
 
   function grade(form) {
@@ -71,10 +98,12 @@
       resultElement.focus();
     }
 
-    if (window.CourseRuntime && (!window.SCORM || !SCORM.isAvailable())) {
-      CourseRuntime.recordQuizResult(passed);
+    var persistence = reportToLms(results, score, passed);
+    if (resultElement && persistence && ((persistence.hosted && !persistence.lms) || (!persistence.hosted && !persistence.local))) {
+      resultElement.textContent += persistence.hosted
+        ? " LMS progress was not saved."
+        : " Progress could not be saved in this browser.";
     }
-    reportToLms(results, score, passed);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
