@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Signed, Unsigned, and Conversion Hazards",
+  "graphicAlt": "Conversion diagram showing negative and too-wide signed values rejected by representability checks before entering unsigned wire counts or container indexes.",
+  "narration": "Many integer defects appear when a value crosses a type boundary. C++ has well-defined rules for promotions and conversions, but those rules are not always the same as the business rule or safety rule the code intended. A value can compile cleanly while changing meaning at the boundary.\n\nImplicit conversions deserve special attention. A smaller type can be promoted before arithmetic. A signed value can be compared with an unsigned value. A result can be assigned into a narrower type. These operations can be legal C++, but still surprising to a reviewer who is reading for domain intent rather than language mechanics.\n\nSigned and unsigned comparisons are a common source of confusion. A guard that seems to reject negative values may not behave as expected if conversion occurs before comparison. A loop counter, container size, or sentinel value can become difficult to reason about when signedness changes from one expression to the next.\n\nNarrowing conversions should be explicit and justified. Before converting a large integer into a smaller type, or a signed integer into an unsigned type, the code should check that the destination can represent the value and that the value is valid for the domain. A successful cast does not prove the conversion was safe.\n\nTeams can reduce mistakes by using conversion helpers, strong typedefs, wrapper functions, or project-standard checked conversion utilities. The goal is not ceremony for its own sake. The goal is to make boundary-crossing decisions visible, testable, and easy to search during review.",
+  "narrationPoints": [
+    "Many integer defects appear when a value crosses a type boundary.",
+    "A smaller type can be promoted before arithmetic.",
+    "A guard that seems to reject negative values may not behave as expected if conversion occurs before comparison.",
+    "A loop counter, container size, or sentinel value can become difficult to reason about when signedness changes from one expression to the next.",
+    "Before converting a large integer into a smaller type, or a signed integer into an unsigned type, the code should check that the destination can represent the value and that the value is valid for the domain.",
+    "Teams can reduce mistakes by using conversion helpers, strong typedefs, wrapper functions, or project-standard checked conversion utilities."
+  ]
+};

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.678
+Iterator, reference, and pointer invalidation is one of the most important standard-library safety topics.
+
+2
+00:00:05.678 --> 00:00:12.493
+Containers make ownership easier, but access into a container is still governed by each container's mutation rules.
+
+3
+00:00:12.493 --> 00:00:19.685
+Operations such as insert, erase, resize, reserve, clear, and reallocation can invalidate iterators, references, pointers, and non-owning views.
+
+4
+00:00:19.685 --> 00:00:27.256
+The exact rules vary by container and operation, so reviewers should check the specific contract rather than relying on memory.
+
+5
+00:00:27.256 --> 00:00:31.042
+A vector reallocation can make existing pointers and references stale.
+
+6
+00:00:31.042 --> 00:00:36.342
+Erasing from a sequence can invalidate the erased element and sometimes elements after it.
+
+7
+00:00:36.342 --> 00:00:39.370
+Clearing a container invalidates access to its elements.
+
+8
+00:00:39.370 --> 00:00:43.156
+Strings can have similar issues when their internal buffer changes.
+
+9
+00:00:43.156 --> 00:00:45.427
+Long-lived access is review-sensitive.
+
+10
+00:00:45.427 --> 00:00:53.756
+Cached iterators, references stored in member variables, pointers into vectors or strings, and views returned to callers all require a clear lifetime
+
+11
+00:00:53.756 --> 00:00:54.134
+story.
+
+12
+00:00:54.134 --> 00:00:59.056
+If the source container can mutate, the cached access may stop being safe.
+
+13
+00:00:59.056 --> 00:01:00.570
+Erase loops deserve care.
+
+14
+00:01:00.570 --> 00:01:10.034
+Code should use the iterator returned by erase when that is the appropriate pattern, or rebuild the range in a way that makes invalidation obvious.
+
+15
+00:01:10.034 --> 00:01:14.577
+Hidden assumptions in loop updates are a common source of maintenance defects.
+
+16
+00:01:14.577 --> 00:01:18.741
+The safe habit is to discard or refresh access after mutation.
+
+17
+00:01:18.741 --> 00:01:25.176
+When code mutates a container, ask which existing iterators, references, pointers, spans, or string_views are still valid.
+
+18
+00:01:25.176 --> 00:01:29.341
+If the answer is uncertain, shorten the lifetime of that access.
+
+19
+00:01:29.341 --> 00:01:34.641
+Tests can help catch invalidation mistakes, especially with debug iterators or sanitizers where available.
+
+20
+00:01:34.641 --> 00:01:41.076
+But the design should make invalidation assumptions visible enough that reviewers can reason about them before runtime.
+
+21
+00:01:41.076 --> 00:01:46.755
+APIs should avoid returning long-lived access into containers unless the lifetime contract is simple.
+
+22
+00:01:46.755 --> 00:01:55.840
+Returning an index, key, copied value, or short-lived view may be safer than returning a reference that callers might store across later mutations.

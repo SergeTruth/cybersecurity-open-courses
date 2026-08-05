@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.530
+Logging is production code, and production code has performance and reliability consequences.
+
+2
+00:00:04.530 --> 00:00:13.591
+A log call can allocate memory, format strings, acquire locks, write to disk, send data to an agent, or block behind a slow sink.
+
+3
+00:00:13.591 --> 00:00:21.141
+Synchronous logging is simple to reason about, but it can add latency or stall work if the destination is slow.
+
+4
+00:00:21.141 --> 00:00:28.314
+Asynchronous logging can reduce direct latency, but it introduces queues, buffering, shutdown behavior, and backpressure decisions that must be
+
+5
+00:00:28.314 --> 00:00:28.692
+designed.
+
+6
+00:00:28.692 --> 00:00:30.957
+Repeated errors can create log storms.
+
+7
+00:00:30.957 --> 00:00:40.395
+A tight loop that logs every failure, a noisy retry path, or many threads reporting the same condition can consume CPU, disk, network bandwidth, and
+
+8
+00:00:40.395 --> 00:00:41.150
+operator attention.
+
+9
+00:00:41.150 --> 00:00:44.170
+Rate limiting, aggregation, and sampling may be appropriate.
+
+10
+00:00:44.170 --> 00:00:47.568
+Thread safety matters in C++ logging libraries and wrappers.
+
+11
+00:00:47.568 --> 00:00:52.476
+Shared sinks, formatter state, buffers, and locks need clear ownership and concurrency behavior.
+
+12
+00:00:52.476 --> 00:00:59.649
+Lock contention in a hot path can become a performance problem even when each individual log call looks small.
+
+13
+00:00:59.649 --> 00:01:01.536
+Plan for unavailable log sinks.
+
+14
+00:01:01.536 --> 00:01:09.464
+The application should define whether to drop logs, buffer temporarily, apply backpressure, switch to a fallback destination, or fail closed for
+
+15
+00:01:09.464 --> 00:01:10.974
+special audit-sensitive paths.
+
+16
+00:01:10.974 --> 00:01:13.617
+The policy should be intentional and documented.
+
+17
+00:01:13.617 --> 00:01:16.260
+Logging failures should not corrupt application state.
+
+18
+00:01:16.260 --> 00:01:22.677
+If a log write fails, the error-handling path should preserve invariants and avoid recursive logging loops.
+
+19
+00:01:22.677 --> 00:01:27.208
+Monitoring should make logging health visible without causing another burst of events.
+
+20
+00:01:27.208 --> 00:01:31.738
+Excessive logging can weaken availability and make important events harder to find.
+
+21
+00:01:31.738 --> 00:01:40.421
+Safe logging balances detail, cost, and signal so operators receive useful information when the system is healthy and when it is under pressure.
+
+22
+00:01:40.421 --> 00:01:44.574
+Performance review should include both the call site and the pipeline.
+
+23
+00:01:44.574 --> 00:01:52.879
+Formatting work in a hot path, queue growth in an async logger, collector delays, and storage quotas can all affect production behavior.
+
+24
+00:01:52.879 --> 00:01:54.767
+Concurrency review should include shutdown.
+
+25
+00:01:54.767 --> 00:01:59.297
+Threads may still be writing events while buffers flush or sinks close.
+
+26
+00:01:59.297 --> 00:02:04.960
+A safe design defines ordering, ownership, and what happens to queued records during controlled shutdown.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.182
+Iterator validity and thread safety are related concerns, but they are not the same concern.
+
+2
+00:00:05.182 --> 00:00:12.782
+A container can provide valid iterators in single-threaded code and still be unsafe when another thread mutates the container during traversal.
+
+3
+00:00:12.782 --> 00:00:20.382
+The iterator may have been valid at the start of the loop and become invalid because concurrent code changed the underlying range.
+
+4
+00:00:20.382 --> 00:00:23.145
+Shared ownership does not automatically solve this problem.
+
+5
+00:00:23.145 --> 00:00:32.127
+A shared pointer to a container can keep the container object alive, but it does not by itself synchronize access to the container's elements or
+
+6
+00:00:32.127 --> 00:00:32.818
+internal structure.
+
+7
+00:00:32.818 --> 00:00:38.691
+Safe concurrent traversal requires an explicit synchronization strategy, immutable snapshots, message passing, or another design that controls
+
+8
+00:00:38.691 --> 00:00:39.036
+mutation.
+
+9
+00:00:39.036 --> 00:00:41.800
+Async callbacks and worker tasks deserve special attention.
+
+10
+00:00:41.800 --> 00:00:48.018
+They may capture iterators, references, views, or spans and use them after the owning component has moved on.
+
+11
+00:00:48.018 --> 00:00:54.927
+Shutdown and cancellation paths are especially risky because containers may be cleared while deferred work is still queued or running.
+
+12
+00:00:54.927 --> 00:00:58.382
+Defensive code documents the concurrency rule near the data structure.
+
+13
+00:00:58.382 --> 00:01:07.018
+It should be clear who may read, who may mutate, what lock or ownership rule applies, and whether iterators can be retained across callbacks or
+
+14
+00:01:07.018 --> 00:01:07.709
+thread boundaries.
+
+15
+00:01:07.709 --> 00:01:11.509
+Hidden concurrency assumptions are hard to test and harder to debug.
+
+16
+00:01:11.509 --> 00:01:14.618
+When in doubt, prefer designs that shorten iterator lifetime.
+
+17
+00:01:14.618 --> 00:01:22.564
+Complete traversal while the synchronization rule is active, copy the data needed by the worker, or pass stable identifiers that can be validated
+
+18
+00:01:22.564 --> 00:01:23.600
+when work executes.

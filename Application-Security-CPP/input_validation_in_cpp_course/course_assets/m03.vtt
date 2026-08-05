@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.543
+Parsing and validation should be deliberate steps.
+
+2
+00:00:02.543 --> 00:00:06.176
+Parsing turns raw text or bytes into a structured value.
+
+3
+00:00:06.176 --> 00:00:10.536
+Validation decides whether that value is acceptable for the program's contract.
+
+4
+00:00:10.536 --> 00:00:16.713
+In C++, those steps are often close together, but it is useful to keep the responsibilities distinct.
+
+5
+00:00:16.713 --> 00:00:22.163
+Every parse result should report success or failure in a way the caller must handle.
+
+6
+00:00:22.163 --> 00:00:29.792
+A clear result object, std::optional, expected-style return type, status code, or exception policy can all work when used consistently.
+
+7
+00:00:29.792 --> 00:00:34.516
+The important point is that failure is visible and cannot be accidentally ignored.
+
+8
+00:00:34.516 --> 00:00:36.332
+Partial parses deserve special attention.
+
+9
+00:00:36.332 --> 00:00:44.325
+A conversion that reads a leading number and leaves trailing characters can make the program accept something other than the intended value.
+
+10
+00:00:44.325 --> 00:00:51.955
+A parser should report how much input was consumed or otherwise reject extra content that does not belong to the contract.
+
+11
+00:00:51.955 --> 00:00:53.408
+Avoid silent fallback behavior.
+
+12
+00:00:53.408 --> 00:01:02.491
+Defaulting a failed parse to zero, an empty string, the first enum value, or a permissive mode can hide invalid input and move uncertainty deeper
+
+13
+00:01:02.491 --> 00:01:03.581
+into the program.
+
+14
+00:01:03.581 --> 00:01:09.031
+Defaults should be intentional and limited to cases where the contract says absence is allowed.
+
+15
+00:01:09.031 --> 00:01:12.301
+Keep raw input separate from parsed and trusted values.
+
+16
+00:01:12.301 --> 00:01:15.571
+Use names and types that make the distinction obvious.
+
+17
+00:01:15.571 --> 00:01:18.478
+For example, raw_count_text and validated_count communicate different states.
+
+18
+00:01:18.478 --> 00:01:23.927
+That discipline helps reviewers find places where a raw value might be used too early.
+
+19
+00:01:23.927 --> 00:01:25.744
+Finally, make parse failures testable.
+
+20
+00:01:25.744 --> 00:01:31.921
+Unit tests should cover invalid text, trailing content, missing fields, wrong delimiters, duplicate values, and boundary cases.
+
+21
+00:01:31.921 --> 00:01:37.734
+A validation system is stronger when failure cases are ordinary, documented behavior rather than rare surprises.
+
+22
+00:01:37.734 --> 00:01:41.367
+Parsing code should also avoid mixing diagnostics with acceptance decisions.
+
+23
+00:01:41.367 --> 00:01:47.180
+A clear error can explain what failed, while the caller still receives an unmistakable rejected result.
+
+24
+00:01:47.180 --> 00:01:49.360
+That separation keeps recovery paths predictable.

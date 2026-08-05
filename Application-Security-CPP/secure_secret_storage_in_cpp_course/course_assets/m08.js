@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Least Privilege, Access Control, and Rotation",
+  "graphicAlt": "Secret-lifecycle diagram for Least Privilege, Access Control, and Rotation, connecting an opaque provider reference to least-privilege retrieval, bounded in-memory use, protected storage, rotation, revocation, safe telemetry, and incident recovery.",
+  "narration": "The safest secret is narrowly scoped and easy to replace. Applications should receive only the secrets they need for the work they perform. A component that reads from a queue does not need broad database administration credentials. A service in a test environment should not receive production signing material. Least privilege limits the blast radius of mistakes and makes secret use easier to reason about during review.\n\nAccess control should be based on service identity, workload identity, deployment policy, or another approved mechanism rather than informal conventions. The secret store should know which application or role can request which secret. Audit logs should record access decisions and administrative actions without revealing secret values. Permission changes should be reviewed with the same care as code changes. Break-glass access should be exceptional, controlled, time-limited, and reviewed after use.\n\nRotation and revocation need to be routine, not emergency-only. A team should know how to replace a secret, deploy the new value, verify dependent systems, retire the old value, and recover if the rollout fails. Shorter-lived credentials can reduce exposure, but only if refresh and failure behavior are reliable. Revocation matters when a secret is no longer trusted, a service is decommissioned, or an employee or automation path no longer needs access. Tested workflows turn secret replacement from a crisis into normal maintenance.",
+  "narrationPoints": [
+    "Least privilege limits the blast radius of mistakes and makes secret use easier to reason about during review.",
+    "Access control should be based on service identity, workload identity, deployment policy, or another approved mechanism rather than informal conventions.",
+    "Audit logs should record access decisions and administrative actions without revealing secret values.",
+    "Shorter-lived credentials can reduce exposure, but only if refresh and failure behavior are reliable.",
+    "A team should know how to replace a secret, deploy the new value, verify dependent systems, retire the old value, and recover if the rollout fails.",
+    "Revocation matters when a secret is no longer trusted, a service is decommissioned, or an employee or automation path no longer needs access."
+  ]
+};

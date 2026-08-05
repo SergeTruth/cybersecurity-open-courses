@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Iterator Basics, Ranges, and Sentinels",
+  "graphicAlt": "Range diagram with begin designating the first element, end as a non-dereferenceable sentinel, and a valid half-open traversal advancing only while current differs from end.",
+  "narration": "A common C++ range is described by a beginning position and an ending boundary. The beginning points to the first element if one exists. The end is usually a past-the-end iterator. That end value is useful for comparison, but it does not represent an element that code may read or write.\n\nThis distinction matters in every loop. Code may compare an iterator with the end boundary to decide whether traversal should continue. Code may increment an iterator only when that operation is valid for the range and iterator category. Code may dereference an iterator only when it refers to a real current element. Dereferencing the past-the-end marker is a correctness defect.\n\nIterator pairs should come from the same container or range. A begin iterator from one vector and an end iterator from another do not describe a valid range. The same principle applies to custom ranges and standard algorithms: the boundaries must belong together, and the code should make that relationship clear enough for review.\n\nModern C++ also supports sentinel-based ranges where the end marker may have a different type from the iterator. This is common in range-oriented designs and can support flexible traversal. The safety model remains the same. Know where traversal starts, know how it stops, and know exactly when dereference is valid.\n\nClear boundaries improve defensive engineering. When code names the range, keeps begin and end values near each other, and avoids hidden boundary changes, reviewers can reason about the loop without reconstructing the container state from scattered clues.",
+  "narrationPoints": [
+    "A common C++ range is described by a beginning position and an ending boundary.",
+    "Code may compare an iterator with the end boundary to decide whether traversal should continue.",
+    "Code may increment an iterator only when that operation is valid for the range and iterator category.",
+    "The same principle applies to custom ranges and standard algorithms: the boundaries must belong together, and the code should make that relationship clear enough for review.",
+    "Modern C++ also supports sentinel-based ranges where the end marker may have a different type from the iterator.",
+    "When code names the range, keeps begin and end values near each other, and avoids hidden boundary changes, reviewers can reason about the loop without reconstructing the container state from scattered clues."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Reliable Validation Habits",
+  "graphicAlt": "Summary pipeline linking explicit contracts, exact parsing, canonical representation limits, structured schemas, resource ceilings, safe rejection, and boundary-focused regression evidence.",
+  "narration": "Reliable C++ input validation starts at trust boundaries. Identify where external data enters, define what is acceptable, and keep raw input separate from trusted internal values. A clear boundary makes the rest of the program easier to reason about.\n\nDefine expected shape, type, range, units, length, count, and resource limits before accepting data. Parse deliberately, check success, detect partial parses, and avoid silent fallback behavior. A value that parsed still needs to satisfy the domain contract.\n\nTreat numeric conversions, text canonicalization, structured formats, and externally influenced sizes as review-sensitive. Validate the representation the program will actually use, and convert accepted input into narrow internal domain objects.\n\nFail safely when validation rejects data. Preserve invariants, clean up temporary resources, provide appropriate user-facing errors, and keep internal diagnostics useful without exposing sensitive implementation details or excessive raw input.\n\nUse tests, defensive fuzzing, static analysis, sanitizers, compiler warnings, CI checks, and code review to keep validation behavior reliable over time. Validation is not a one-time gate. It is a durable engineering habit that protects parsing, typing, bounds, resources, and maintainability.\n\nThe durable habit is consistency. The same boundary rules should appear in code, tests, review checklists, and operational expectations. When the contract stays visible, validation remains reliable as the codebase changes.",
+  "narrationPoints": [
+    "Reliable C++ input validation starts at trust boundaries.",
+    "Define expected shape, type, range, units, length, count, and resource limits before accepting data.",
+    "Validate the representation the program will actually use, and convert accepted input into narrow internal domain objects.",
+    "Preserve invariants, clean up temporary resources, provide appropriate user-facing errors, and keep internal diagnostics useful without exposing sensitive implementation details or excessive raw input.",
+    "Use tests, defensive fuzzing, static analysis, sanitizers, compiler warnings, CI checks, and code review to keep validation behavior reliable over time.",
+    "The same boundary rules should appear in code, tests, review checklists, and operational expectations."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.603
+C++ file handling should lean on RAII.
+
+2
+00:00:02.603 --> 00:00:11.157
+File stream objects, scoped handle wrappers, and custom resource owners make cleanup part of object lifetime instead of a checklist repeated in every
+
+3
+00:00:11.157 --> 00:00:11.529
+branch.
+
+4
+00:00:11.529 --> 00:00:17.851
+When a function returns early, throws, or rejects malformed input, owned file resources should still close predictably.
+
+5
+00:00:17.851 --> 00:00:20.454
+RAII does not mean errors stop mattering.
+
+6
+00:00:20.454 --> 00:00:23.801
+For input, a close failure may not affect much.
+
+7
+00:00:23.801 --> 00:00:28.636
+For output, flushing or closing can be part of the operation's correctness.
+
+8
+00:00:28.636 --> 00:00:37.189
+If the program must know that data reached the destination according to its durability requirements, that result needs to be checked through the
+
+9
+00:00:37.189 --> 00:00:40.164
+appropriate API and reflected in the error model.
+
+10
+00:00:40.164 --> 00:00:44.255
+Error handling should preserve useful state and useful information without oversharing.
+
+11
+00:00:44.255 --> 00:00:48.346
+Developer diagnostics may need a category, operation name, and correlation identifier.
+
+12
+00:00:48.346 --> 00:00:50.949
+User-facing messages usually need less detail.
+
+13
+00:00:50.949 --> 00:00:57.271
+Sensitive paths, file contents, credentials, and internal system layout should not leak through routine errors or logs.
+
+14
+00:00:57.271 --> 00:01:00.618
+Redaction should happen before data reaches broad log sinks.
+
+15
+00:01:00.618 --> 00:01:05.081
+Cleanup policy should cover success, failure, parsing errors, exceptions, cancellation, and shutdown.
+
+16
+00:01:05.081 --> 00:01:12.519
+Temporary files may need removal, output files may need preservation for investigation, and locks or handles may need deterministic release.
+
+17
+00:01:12.519 --> 00:01:17.725
+The secure engineering goal is not simply to make the compiler accept the code.
+
+18
+00:01:17.725 --> 00:01:22.560
+It is to make resource ownership and failure behavior boring, predictable, and reviewable.

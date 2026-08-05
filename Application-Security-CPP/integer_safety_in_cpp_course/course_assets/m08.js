@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Sanitizers, and Compiler Diagnostics",
+  "graphicAlt": "Boundary-test table showing zero, maximum, and first-overflow cases executed with explicit return codes alongside compiler warnings and runtime sanitizer diagnostics.",
+  "narration": "Integer defects often hide until the code sees edge values. Tests that use only typical values can miss the behavior that matters most. Boundary tests should cover zero, one, expected maximums, expected minimums, just-below and just-above limits, negative values where relevant, and combinations that stress unit conversions.\n\nCompiler warnings can reveal risky conversions, narrowing, sign comparisons, uninitialized values, suspicious arithmetic, and unreachable assumptions. A warning policy is most useful when it is consistent across development and continuous integration. Teams should decide which warnings are required, which are advisory, and how exceptions are documented.\n\nSanitizers can reveal undefined behavior and selected arithmetic mistakes while tests exercise the code. They are especially useful in development and CI builds where extra runtime checking is acceptable. They do not replace design or review, because they only observe paths that tests execute, but they can turn hidden assumptions into visible defects.\n\nStatic analysis and code scanning can add another layer by finding patterns that tests may not cover. These tools are most effective when findings are triaged with engineering judgment. Suppression should be deliberate, documented, and revisited rather than used to silence inconvenient reports.\n\nThe process matters as much as the tools. A sanitizer report, warning, static finding, or boundary test failure should become a tracked engineering defect with an owner, fix, regression test, and follow-up review. Integer safety improves when tool feedback changes the codebase instead of becoming background noise.",
+  "narrationPoints": [
+    "Tests that use only typical values can miss the behavior that matters most.",
+    "Teams should decide which warnings are required, which are advisory, and how exceptions are documented.",
+    "A warning policy is most useful when it is consistent across development and continuous integration.",
+    "Sanitizers can reveal undefined behavior and selected arithmetic mistakes while tests exercise the code.",
+    "Suppression should be deliberate, documented, and revisited rather than used to silence inconvenient reports.",
+    "A sanitizer report, warning, static finding, or boundary test failure should become a tracked engineering defect with an owner, fix, regression test, and follow-up review."
+  ]
+};

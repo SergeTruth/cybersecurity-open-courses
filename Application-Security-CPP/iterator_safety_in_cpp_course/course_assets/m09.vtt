@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.537
+Iterator defects often appear only under boundary conditions or specific mutation patterns.
+
+2
+00:00:04.537 --> 00:00:09.831
+A loop may work for a typical container and fail for an empty one.
+
+3
+00:00:09.831 --> 00:00:15.125
+It may process a middle element correctly but mishandle the first or last element.
+
+4
+00:00:15.125 --> 00:00:19.284
+It may pass tests until insertion causes a vector to reallocate.
+
+5
+00:00:19.284 --> 00:00:26.468
+Tests should cover empty ranges, single-element ranges, end conditions, erase while iterating, insertion during traversal, container growth, clear
+
+6
+00:00:26.468 --> 00:00:29.493
+operations, stored iterators, view lifetimes, and shutdown paths.
+
+7
+00:00:29.493 --> 00:00:37.434
+Mutation-heavy code deserves direct tests because the risk is usually in the transition from one valid state to the next.
+
+8
+00:00:37.434 --> 00:00:42.728
+Debug iterator modes in standard library implementations can detect many invalid operations during development.
+
+9
+00:00:42.728 --> 00:00:50.290
+They are not a substitute for understanding the rules, but they provide valuable feedback when code compares unrelated iterators, dereferences
+
+10
+00:00:50.290 --> 00:00:53.693
+invalid positions, or uses iterators after a container change.
+
+11
+00:00:53.693 --> 00:01:00.121
+These builds may be slower, which is why they are often used in development or CI configurations.
+
+12
+00:01:00.121 --> 00:01:05.037
+Sanitizers can reveal related memory access problems, lifetime issues, and undefined behavior symptoms.
+
+13
+00:01:05.037 --> 00:01:11.086
+Compiler warnings, static analysis, assertions, logging, and crash diagnostics can also point to suspicious traversal patterns.
+
+14
+00:01:11.086 --> 00:01:16.380
+The strongest approach layers these tools instead of expecting one diagnostic to catch everything.
+
+15
+00:01:16.380 --> 00:01:22.808
+When a tool finds an iterator defect, treat it as an engineering defect, not a flaky test.
+
+16
+00:01:22.808 --> 00:01:28.480
+Capture the boundary condition, add regression coverage, and review nearby code for the same pattern.

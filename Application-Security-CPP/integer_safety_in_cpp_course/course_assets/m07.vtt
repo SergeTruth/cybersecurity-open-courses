@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.616
+Many integer defects are API design defects.
+
+2
+00:00:02.616 --> 00:00:12.334
+A function parameter named size, length, count, offset, or limit may look clear to the original author, but the next caller may not know the unit,
+
+3
+00:00:12.334 --> 00:00:14.951
+valid range, ownership rule, or failure behavior.
+
+4
+00:00:14.951 --> 00:00:18.688
+The API should make those facts as visible as possible.
+
+5
+00:00:18.688 --> 00:00:22.426
+Avoid casually mixing counts, bytes, indexes, capacities, offsets, and timeouts.
+
+6
+00:00:22.426 --> 00:00:27.659
+If two values have different units, the code should not make them look interchangeable.
+
+7
+00:00:27.659 --> 00:00:35.508
+Domain-specific wrapper types, clearer names, and small validation functions can help maintain the distinction without making ordinary code hard to
+
+8
+00:00:35.508 --> 00:00:35.881
+read.
+
+9
+00:00:35.881 --> 00:00:41.488
+Checked arithmetic helpers are useful for operations that influence allocation, indexing, serialization, or resource limits.
+
+10
+00:00:41.488 --> 00:00:48.216
+A helper can centralize the precondition check and return a result that forces the caller to handle failure.
+
+11
+00:00:48.216 --> 00:00:53.822
+This reduces repeated hand-written checks and gives reviewers a familiar pattern to look for.
+
+12
+00:00:53.822 --> 00:00:58.307
+Explicit failure behavior is safer than silent truncation or ambiguous sentinel values.
+
+13
+00:00:58.307 --> 00:01:08.025
+If a conversion cannot be represented, if a calculation exceeds the allowed range, or if output does not fit, the API should say how callers learn
+
+14
+00:01:08.025 --> 00:01:08.773
+that fact.
+
+15
+00:01:08.773 --> 00:01:15.501
+Return values, exceptions, optional results, status objects, or project-standard error handling can all work when applied consistently.
+
+16
+00:01:15.501 --> 00:01:18.491
+Good APIs make risky decisions easy to find.
+
+17
+00:01:18.491 --> 00:01:24.097
+Conversions, unit changes, range narrowing, and size calculations should not be hidden in long expressions.
+
+18
+00:01:24.097 --> 00:01:32.320
+When the code shows intent directly, reviewers can focus on whether the rule is correct instead of reverse-engineering the numeric path.

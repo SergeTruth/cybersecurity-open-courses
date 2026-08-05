@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.935
+Security-sensitive code should use trusted libraries rather than custom cryptography, custom secret-storage mechanisms, or custom security protocols.
+
+2
+00:00:07.935 --> 00:00:17.539
+The value of a trusted library is not only the implementation; it is documentation, maintenance, test coverage, platform support, and a path for
+
+3
+00:00:17.539 --> 00:00:19.210
+updates when guidance changes.
+
+4
+00:00:19.210 --> 00:00:21.716
+Library APIs still require careful integration.
+
+5
+00:00:21.716 --> 00:00:28.397
+The caller must pass correct sizes, encodings, object lifetimes, algorithm identifiers, handles, contexts, and error destinations.
+
+6
+00:00:28.397 --> 00:00:37.167
+A strong library cannot protect a program from ignoring return values, truncating inputs, mixing units, or using an object after cleanup.
+
+7
+00:00:37.167 --> 00:00:40.925
+Dependencies should be inventoried and reviewed for security impact.
+
+8
+00:00:40.925 --> 00:00:49.278
+Teams should know which libraries are used, which versions are shipped, which features are enabled, and what update process applies.
+
+9
+00:00:49.278 --> 00:00:55.542
+This matters for cryptography, parsing, compression, serialization, networking, and any component that handles untrusted input.
+
+10
+00:00:55.542 --> 00:01:02.223
+Secrets should not be hardcoded, logged, embedded in test fixtures, or passed unnecessarily across process boundaries.
+
+11
+00:01:02.223 --> 00:01:08.487
+C++ applications often connect library use with configuration, credentials, environment variables, files, and child processes.
+
+12
+00:01:08.487 --> 00:01:13.499
+Those surrounding paths deserve the same care as the library call itself.
+
+13
+00:01:13.499 --> 00:01:21.016
+Wrappers can help centralize safe API use, but they should not hide errors or make security behavior ambiguous.
+
+14
+00:01:21.016 --> 00:01:26.444
+A good wrapper narrows choices, records policy, checks status, and makes misuse harder.
+
+15
+00:01:26.444 --> 00:01:32.709
+A poor wrapper swallows failure or obscures which algorithm, mode, or configuration is actually active.
+
+16
+00:01:32.709 --> 00:01:39.390
+Documentation should state which libraries, algorithms, versions, and platform assumptions are part of the security design.
+
+17
+00:01:39.390 --> 00:01:47.325
+That information helps reviewers, operators, and future maintainers decide whether a dependency update, platform change, or policy revision affects
+
+18
+00:01:47.325 --> 00:01:48.160
+the application.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.584
+Not all iterators support the same operations.
+
+2
+00:00:02.584 --> 00:00:04.799
+Some are single-pass input iterators.
+
+3
+00:00:04.799 --> 00:00:08.121
+Some are forward iterators that support multi-pass traversal.
+
+4
+00:00:08.121 --> 00:00:09.228
+Some are bidirectional.
+
+5
+00:00:09.228 --> 00:00:11.443
+Some are random-access or contiguous.
+
+6
+00:00:11.443 --> 00:00:18.087
+The operations that are safe and efficient depend on the category and on the range behind the iterator.
+
+7
+00:00:18.087 --> 00:00:22.516
+A common mistake is to treat every iterator like a vector iterator.
+
+8
+00:00:22.516 --> 00:00:30.268
+Subtraction, indexing, jumping forward by an arbitrary distance, or assuming constant-time movement may be valid for random-access iterators and
+
+9
+00:00:30.268 --> 00:00:32.114
+invalid or expensive for others.
+
+10
+00:00:32.114 --> 00:00:38.389
+Repeated traversal may be safe for a forward range and unsafe for a single-pass input range.
+
+11
+00:00:38.389 --> 00:00:41.342
+Generic code should express its iterator requirements clearly.
+
+12
+00:00:41.342 --> 00:00:48.355
+In modern C++, concepts can state that an algorithm needs a forward iterator, random-access range, or contiguous range.
+
+13
+00:00:48.355 --> 00:00:54.261
+In older code, template structure, function names, documentation, assertions, and tests can still make requirements visible.
+
+14
+00:00:54.261 --> 00:00:55.738
+Clear constraints protect callers.
+
+15
+00:00:55.738 --> 00:01:04.596
+If a function accepts any iterator but internally assumes random access, the problem may not appear until a different container or range is used.
+
+16
+00:01:04.596 --> 00:01:07.919
+That is a maintainability hazard and a correctness risk.
+
+17
+00:01:07.919 --> 00:01:11.979
+Defensive APIs make the required traversal behavior part of the contract.
+
+18
+00:01:11.979 --> 00:01:14.563
+Iterator category awareness also helps performance review.
+
+19
+00:01:14.563 --> 00:01:19.731
+Code that repeatedly advances through a linked structure may be correct but unexpectedly costly.
+
+20
+00:01:19.731 --> 00:01:24.160
+Safety and performance both improve when traversal assumptions match the actual range.

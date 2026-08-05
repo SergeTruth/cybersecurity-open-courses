@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure C++ Habits",
+  "graphicAlt": "Course summary showing untrusted input moving through owned storage, bounded operations, safe failures, synchronized state, reviewed providers, and release-effective verification.",
+  "narration": "Secure C++ depends on safer abstractions, explicit ownership, validated input, and predictable failure behavior. The language gives developers many levels of control. The secure habit is to use the higher-level, clearer option when it fits and reserve low-level handling for places where the contract is documented and reviewed.\n\nPrefer RAII, standard containers, clear types, and trusted libraries over manual resource and buffer handling when practical. These tools reduce repetitive cleanup and size bookkeeping, but they still require developers to understand lifetimes, invalidation rules, and error behavior.\n\nTreat non-owning views, raw pointers, and references as contracts that need lifetime and bounds clarity. A span or string_view can make a view length visible, but it does not own the storage. A raw pointer may be fine as a borrowed parameter, but it should not leave readers guessing about ownership.\n\nValidate before parsing deeply, allocating, copying, dispatching, or changing state. Clear validation rules and explicit failure paths make code easier to test and safer to maintain. This is especially important at files, networks, IPC, configuration, environment, and user-interface boundaries.\n\nLimit shared mutable state and review synchronization and lifetime across threads. Then use warnings, sanitizers, static analysis, tests, fuzzing at a high level, and code review as layered support. Secure C++ is not one feature or one tool. It is a steady practice of making assumptions explicit and keeping the codebase reviewable over time.",
+  "narrationPoints": [
+    "Secure C++ depends on safer abstractions, explicit ownership, validated input, and predictable failure behavior.",
+    "The secure habit is to use the higher-level, clearer option when it fits and reserve low-level handling for places where the contract is documented and reviewed.",
+    "Prefer RAII, standard containers, clear types, and trusted libraries over manual resource and buffer handling when practical.",
+    "Treat non-owning views, raw pointers, and references as contracts that need lifetime and bounds clarity.",
+    "Clear validation rules and explicit failure paths make code easier to test and safer to maintain.",
+    "Then use warnings, sanitizers, static analysis, tests, fuzzing at a high level, and code review as layered support."
+  ]
+};

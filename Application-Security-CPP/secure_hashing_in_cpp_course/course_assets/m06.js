@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Input Canonicalization and Data Boundaries",
+  "graphicAlt": "Hashing workflow for Input Canonicalization and Data Boundaries, tracing canonical input through an approved cryptographic provider to versioned digest metadata, bounded verification, and a documented acceptance or migration decision.",
+  "narration": "Hash functions operate on exact bytes. Two inputs that look equivalent to a user may hash differently because of encoding, line endings, whitespace, field order, case normalization, compression, metadata, or binary representation. The reverse problem also appears in systems integration: two components may believe they are verifying the same object while one hashes a serialized message and the other hashes a normalized view.\n\nDefensive hashing defines the data boundary before calling the hash function. Is the digest over file content only, or does it include metadata? Is it over a byte-for-byte network message, a canonical JSON representation, a normalized string, or a compressed payload? Where does decoding happen? Which character encoding is expected? These details should not be left to incidental behavior in helper functions. Boundary rules should be close to the API so callers cannot accidentally hash a different representation.\n\nCanonicalization should happen before hashing, and the rules should be documented and tested. Tests should include equivalent-looking inputs, invalid encodings, unexpected field order, platform line endings, and boundary cases such as empty values. The goal is not to make every input look the same. The goal is to ensure that security decisions are based on the exact bytes the design intended to protect or compare. When two services participate in the same workflow, they should share the same canonicalization contract rather than relying on local defaults.",
+  "narrationPoints": [
+    "Two inputs that look equivalent to a user may hash differently because of encoding, line endings, whitespace, field order, case normalization, compression, metadata, or binary representation.",
+    "Boundary rules should be close to the API so callers cannot accidentally hash a different representation.",
+    "Defensive hashing defines the data boundary before calling the hash function.",
+    "Canonicalization should happen before hashing, and the rules should be documented and tested.",
+    "When two services participate in the same workflow, they should share the same canonicalization contract rather than relying on local defaults.",
+    "Tests should include equivalent-looking inputs, invalid encodings, unexpected field order, platform line endings, and boundary cases such as empty values."
+  ]
+};

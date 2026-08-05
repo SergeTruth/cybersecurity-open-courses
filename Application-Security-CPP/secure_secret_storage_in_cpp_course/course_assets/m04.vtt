@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.032
+Most teams should use approved secret storage mechanisms instead of inventing their own.
+
+2
+00:00:05.032 --> 00:00:13.160
+Depending on the environment, the right answer may be an operating-system credential store, a managed vault, an orchestrator secret mechanism,
+
+3
+00:00:13.160 --> 00:00:17.804
+hardware-backed storage, an encrypted configuration system, or a vetted cryptographic library.
+
+4
+00:00:17.804 --> 00:00:25.545
+The product name is less important than the engineering principle: centralize protection, enforce access control, support rotation, and make secret
+
+5
+00:00:25.545 --> 00:00:26.319
+access auditable.
+
+6
+00:00:26.319 --> 00:00:32.899
+Custom storage schemes are risky because secret storage combines cryptography, permissions, platform behavior, deployment policy, logging, backup,
+
+7
+00:00:32.899 --> 00:00:34.060
+and operational recovery.
+
+8
+00:00:34.060 --> 00:00:43.736
+A homegrown encrypted file format can still fail if the key is stored beside the ciphertext, if permissions are broad, if rotation is impossible, or
+
+9
+00:00:43.736 --> 00:00:46.059
+if error handling encourages unsafe fallbacks.
+
+10
+00:00:46.059 --> 00:00:51.477
+Approved stores reduce that burden by giving teams reviewed behavior and established operational patterns.
+
+11
+00:00:51.477 --> 00:00:56.896
+C++ applications can still benefit from a small internal wrapper around the approved mechanism.
+
+12
+00:00:56.896 --> 00:01:04.637
+The wrapper can provide a stable interface, hide platform differences, centralize error handling, and make call sites easier to review.
+
+13
+00:01:04.637 --> 00:01:10.056
+It should not become a second secret store or a place to bypass policy.
+
+14
+00:01:10.056 --> 00:01:12.765
+Keep the wrapper simple, documented, and owned.
+
+15
+00:01:12.765 --> 00:01:20.893
+When deployment platforms change, the implementation can adapt while the application code continues to ask for secrets through the same reviewed
+
+16
+00:01:20.893 --> 00:01:21.280
+boundary.

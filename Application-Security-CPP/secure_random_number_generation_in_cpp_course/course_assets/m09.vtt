@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.713
+Weak RNG problems often enter through convenience.
+
+2
+00:00:02.713 --> 00:00:06.977
+A developer adds a timestamp seed to make a warning disappear.
+
+3
+00:00:06.977 --> 00:00:09.690
+A test hook remains enabled outside tests.
+
+4
+00:00:09.690 --> 00:00:15.503
+A general-purpose PRNG is reused for a security token because it is already nearby.
+
+5
+00:00:15.503 --> 00:00:21.317
+A generated secret is printed to logs during troubleshooting and the log path becomes permanent.
+
+6
+00:00:21.317 --> 00:00:27.906
+These changes may look small in review, but they can change the security meaning of a value.
+
+7
+00:00:27.906 --> 00:00:36.433
+Code review should flag custom RNGs, fixed seeds, time-based seeds, counters used as security randomness, modulo mapping for bounded values, unsafe
+
+8
+00:00:36.433 --> 00:00:39.534
+fallback behavior, and random values printed to logs.
+
+9
+00:00:39.534 --> 00:00:48.836
+Reviewers should also ask whether the call site has identified the value's purpose: token, key, nonce, IV, salt, challenge, or non-security random
+
+10
+00:00:48.836 --> 00:00:49.223
+choice.
+
+11
+00:00:49.223 --> 00:00:56.200
+Dependency review should confirm that cryptographic libraries and platform APIs are maintained, appropriate for the deployment environment, and
+
+12
+00:00:56.200 --> 00:00:58.138
+configured according to organizational policy.
+
+13
+00:00:58.138 --> 00:01:02.401
+Operational governance keeps these decisions from living only in individual memory.
+
+14
+00:01:02.401 --> 00:01:09.378
+Document approved RNG sources, security-sensitive use cases, test-only sources, configuration rules, logging restrictions, and ownership for
+
+15
+00:01:09.378 --> 00:01:10.153
+dependency updates.
+
+16
+00:01:10.153 --> 00:01:18.680
+Monitoring should focus on safe signals, such as configuration drift, error rates from RNG wrappers, or unexpected use of disabled weak modes,
+
+17
+00:01:18.680 --> 00:01:20.230
+without exposing generated secrets.
+
+18
+00:01:20.230 --> 00:01:24.494
+When weak patterns are found, treat them as tracked engineering defects.
+
+19
+00:01:24.494 --> 00:01:29.920
+Secure randomness is not a one-time utility selection; it is a lifecycle commitment.

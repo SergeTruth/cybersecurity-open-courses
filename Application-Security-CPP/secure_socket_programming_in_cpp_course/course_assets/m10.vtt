@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.708
+A secure socket roadmap begins with the trust boundary.
+
+2
+00:00:03.708 --> 00:00:09.063
+Treat network input as untrusted, even when it arrives from an expected component.
+
+3
+00:00:09.063 --> 00:00:16.066
+Define the protocol contract clearly: message framing, allowed commands, encoding, size limits, version behavior, authentication expectations, and
+
+4
+00:00:16.066 --> 00:00:17.302
+safe failure behavior.
+
+5
+00:00:17.302 --> 00:00:23.893
+TCP byte streams and datagram protocols each need explicit handling that matches their real delivery semantics.
+
+6
+00:00:23.893 --> 00:00:26.365
+Exposure and lifecycle decisions come next.
+
+7
+00:00:26.365 --> 00:00:34.604
+Bind only where the service needs to be reachable, document ports and deployment assumptions, and make service discovery behavior intentional.
+
+8
+00:00:34.604 --> 00:00:40.783
+Represent socket ownership with RAII so cleanup is reliable across normal completion and error paths.
+
+9
+00:00:40.783 --> 00:00:48.198
+Accept loops, cancellation, shutdown, and cross-platform handle rules should be part of the design rather than afterthoughts.
+
+10
+00:00:48.198 --> 00:00:53.142
+Reliable I/O and defensive parsing are the middle of the roadmap.
+
+11
+00:00:53.142 --> 00:00:57.261
+Handle partial reads, partial writes, blocking behavior, disconnects, and timeouts.
+
+12
+00:00:57.261 --> 00:01:03.028
+Validate lengths, counts, encodings, identifiers, and message structure before allocating or making business decisions.
+
+13
+00:01:03.028 --> 00:01:10.855
+Apply resource limits, bounded queues, connection limits, request limits, and backpressure so the service can fail gracefully under pressure.
+
+14
+00:01:10.855 --> 00:01:14.975
+Finally, protect the channel, observe safely, and verify the design.
+
+15
+00:01:14.975 --> 00:01:21.978
+Use approved TLS libraries with certificate and hostname validation when sensitive data or untrusted networks are involved.
+
+16
+00:01:21.978 --> 00:01:25.686
+Log useful events without exposing secrets or private payloads.
+
+17
+00:01:25.686 --> 00:01:30.629
+Test malformed input, disconnects, partial I/O, timeouts, TLS failures, and shutdown.
+
+18
+00:01:30.629 --> 00:01:39.280
+Review socket code as security-sensitive because network-facing behavior often becomes part of the application's reliability and security surface.

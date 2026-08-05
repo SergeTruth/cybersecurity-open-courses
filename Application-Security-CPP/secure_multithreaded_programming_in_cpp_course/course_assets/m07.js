@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Condition Variables, Queues, and Coordination",
+  "graphicAlt": "Concurrent execution diagram for Condition Variables, Queues, and Coordination, showing worker lanes around protected shared state, scoped synchronization, cancellation and shutdown paths, plus a deterministic test checkpoint for the shared invariant.",
+  "narration": "Condition variables are coordination tools, not just notification channels. They work with a mutex and a shared condition, such as a queue becoming non-empty, a shutdown flag being set, or capacity becoming available.\n\nA wait should use a predicate. The predicate describes the actual condition that allows progress and is checked while holding the correct lock. This pattern handles spurious wakeups and also handles notifications that happen before a thread starts waiting.\n\nProducer-consumer queues are a common example. The queue contents, size, capacity policy, and shutdown state should be protected consistently. A consumer should not wake merely because a notification occurred; it should wake because the predicate says work is available or shutdown has been requested.\n\nAvoid busy waiting and timing assumptions. Sleeping for a short duration and hoping another thread has finished is fragile under load, on slower systems, during debugging, and in virtualized environments. Explicit coordination is more reviewable and more reliable.\n\nBounded queues can support reliability. If input can arrive faster than workers process it, an unbounded queue can turn a temporary spike into memory pressure. A capacity policy gives the system a predictable behavior when resources are constrained.\n\nNotification discipline matters. Decide when to notify one waiter, when to notify all, and how shutdown signals are delivered. A shutdown path should wake threads that might otherwise wait forever.\n\nReview coordination code by identifying the mutex, the predicate, the shared state, the notification points, and the shutdown behavior. If those pieces are clear, condition-variable code becomes much easier to maintain.",
+  "narrationPoints": [
+    "The predicate describes the actual condition that allows progress and is checked while holding the correct lock.",
+    "The queue contents, size, capacity policy, and shutdown state should be protected consistently.",
+    "Explicit coordination is more reviewable and more reliable.",
+    "If input can arrive faster than workers process it, an unbounded queue can turn a temporary spike into memory pressure.",
+    "A shutdown path should wake threads that might otherwise wait forever.",
+    "Review coordination code by identifying the mutex, the predicate, the shared state, the notification points, and the shutdown behavior."
+  ]
+};

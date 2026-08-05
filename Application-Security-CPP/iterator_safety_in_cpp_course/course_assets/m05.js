@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Prefer Algorithms, Ranges, and Clear Intent",
+  "graphicAlt": "Ranges pipeline showing a read-only source filtered by order-ID validation and copied into an owned result that remains valid after the source is cleared.",
+  "narration": "Standard algorithms and range-based code can reduce manual iterator management. A simple range-based loop often communicates traversal better than explicit begin, end, increment, and dereference operations. Algorithms such as find, count, sort, transform, copy, and remove-style patterns can make the code's intent more direct.\n\nClear intent is a safety feature. When a reviewer sees a standard algorithm, the operation is usually easier to reason about than a hand-written loop with several branches and manual iterator movement. The standard library also concentrates many traversal details in well-tested components, which reduces the amount of custom logic the team must inspect.\n\nThis does not mean algorithms remove all responsibility. Developers still need to understand container invalidation, lifetimes, comparator requirements, iterator categories, and ownership. A range view can still refer to data that must stay alive. An algorithm can still be given the wrong boundaries. An erase-remove pattern still requires the container operation that actually removes elements.\n\nThe defensive recommendation is practical: use manual iterator arithmetic when it is truly needed, and make it obvious why it is needed. For ordinary traversal, filtering, searching, transformation, and ordering, prefer idioms that state the operation directly.\n\nReadable traversal helps future maintainers. The next engineer can focus on the policy, predicate, or transformation instead of reverse-engineering loop mechanics. That makes iterator safety easier to sustain over time.",
+  "narrationPoints": [
+    "Algorithms such as find, count, sort, transform, copy, and remove-style patterns can make the code's intent more direct.",
+    "The standard library also concentrates many traversal details in well-tested components, which reduces the amount of custom logic the team must inspect.",
+    "Developers still need to understand container invalidation, lifetimes, comparator requirements, iterator categories, and ownership.",
+    "An erase-remove pattern still requires the container operation that actually removes elements.",
+    "For ordinary traversal, filtering, searching, transformation, and ordering, prefer idioms that state the operation directly.",
+    "The next engineer can focus on the policy, predicate, or transformation instead of reverse-engineering loop mechanics."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Platform CSPRNGs and Approved Libraries",
+  "graphicAlt": "Random-generation pipeline for Platform CSPRNGs and Approved Libraries, leading from an approved operating-system entropy source through failure checks and unbiased mapping to a typed security artifact with documented size, purpose, and reuse rules.",
+  "narration": "Modern operating systems provide random sources intended for security-sensitive use, and approved cryptographic libraries often provide portable abstractions over those sources. In real C++ projects, the best engineering choice is usually not to scatter platform-specific calls throughout the codebase. A small reviewed wrapper can centralize the approved source, error handling, byte-generation behavior, and documentation. Call sites then ask for security random bytes or formatted values without reimplementing the policy each time.\n\nHand-rolled security random generators should be treated with deep skepticism. A custom RNG is rarely justified, and when it is, it requires specialized cryptographic design and review. Most application teams should spend their energy choosing maintained platform or library interfaces, using them correctly, and preventing weak fallback paths. The wrapper should make unsupported behavior obvious. For example, if a platform source cannot provide randomness, the failure should not quietly turn into a timestamp-seeded deterministic engine.\n\nApproved libraries also come with operational responsibilities. Dependencies must be maintained, configured correctly, and reviewed when platform support changes. The team should document which RNG interface is approved, which values must use it, how failures are reported, and which test-only sources are allowed in non-production contexts. Centralization is not about hiding security decisions; it is about making them consistent, inspectable, and harder to accidentally bypass.",
+  "narrationPoints": [
+    "A small reviewed wrapper can centralize the approved source, error handling, byte-generation behavior, and documentation.",
+    "Most application teams should spend their energy choosing maintained platform or library interfaces, using them correctly, and preventing weak fallback paths.",
+    "A custom RNG is rarely justified, and when it is, it requires specialized cryptographic design and review.",
+    "Hand-rolled security random generators should be treated with deep skepticism.",
+    "Dependencies must be maintained, configured correctly, and reviewed when platform support changes.",
+    "The team should document which RNG interface is approved, which values must use it, how failures are reported, and which test-only sources are allowed in non-production contexts."
+  ]
+};

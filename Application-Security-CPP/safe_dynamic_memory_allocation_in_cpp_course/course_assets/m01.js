@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Dynamic Memory Safety Matters",
+  "graphicAlt": "Allocation lifecycle diagram tracing validated size, construction, exclusive ownership, bounded use, and destruction, with failure branches for overflow, excessive allocation, leaks, stale access, and incomplete initialization.",
+  "narration": "Dynamic memory allocation lets C++ programs create objects and buffers whose size or lifetime is not known at compile time. That flexibility is useful in parsers, services, embedded software, desktop applications, libraries, and performance-sensitive systems. It lets software adapt to input, workload, configuration, and resource availability.\n\nThat flexibility also creates responsibility. If ownership is unclear, memory can remain allocated after it is no longer needed. If cleanup happens too early, later code may continue using stale access. If size calculations are wrong, the program may request too little memory, too much memory, or a shape of memory that does not match the data being stored.\n\nDynamic allocation is safest when the lifecycle is designed before the first allocation happens. The code should identify who owns the object, who may borrow it, whether ownership can transfer, whether sharing is required, and what cleanup rule applies. Those answers should be visible in types, APIs, and class design.\n\nManual memory management should be minimized. Modern C++ provides values, containers, RAII wrappers, and smart pointers that keep cleanup tied to object lifetime. These tools reduce repeated manual cleanup paths and make ownership easier to review.\n\nThe course theme is preventive engineering. Safe allocation starts with ownership, lifetime, size validation, initialization, cleanup, failure handling, resource limits, diagnostics, and review. Cleanup after the fact is much harder than designing the lifecycle clearly from the beginning.",
+  "narrationPoints": [
+    "Dynamic memory allocation lets C++ programs create objects and buffers whose size or lifetime is not known at compile time.",
+    "If size calculations are wrong, the program may request too little memory, too much memory, or a shape of memory that does not match the data being stored.",
+    "If ownership is unclear, memory can remain allocated after it is no longer needed.",
+    "Dynamic allocation is safest when the lifecycle is designed before the first allocation happens.",
+    "Modern C++ provides values, containers, RAII wrappers, and smart pointers that keep cleanup tied to object lifetime.",
+    "Safe allocation starts with ownership, lifetime, size validation, initialization, cleanup, failure handling, resource limits, diagnostics, and review."
+  ]
+};

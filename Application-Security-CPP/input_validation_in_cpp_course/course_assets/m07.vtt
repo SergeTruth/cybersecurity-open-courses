@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.668
+Validation is also a resource-control mechanism.
+
+2
+00:00:02.668 --> 00:00:12.197
+Untrusted input can influence how much memory the program allocates, how long it loops, how many records it stores, how deeply it recurses, and how
+
+3
+00:00:12.197 --> 00:00:13.721
+much work it schedules.
+
+4
+00:00:13.721 --> 00:00:17.151
+Reasonable limits should be part of the input contract.
+
+5
+00:00:17.151 --> 00:00:22.868
+Set maximum lengths, item counts, nesting depth, allocation budgets, and processing limits before accepting data.
+
+6
+00:00:22.868 --> 00:00:30.491
+A design that loads everything into memory may be fine for small trusted files but inappropriate for larger external inputs.
+
+7
+00:00:30.491 --> 00:00:34.303
+Streaming, chunking, and early rejection can keep resource use predictable.
+
+8
+00:00:34.303 --> 00:00:36.208
+Failure behavior should be controlled.
+
+9
+00:00:36.208 --> 00:00:43.831
+When input is malformed, oversized, inconsistent, or unsupported, the program should return a clear failure result, clean up temporary resources,
+
+10
+00:00:43.831 --> 00:00:47.643
+preserve object invariants, and avoid leaving partially trusted state behind.
+
+11
+00:00:47.643 --> 00:00:49.548
+Error messages need different audiences.
+
+12
+00:00:49.548 --> 00:00:53.741
+User-facing messages should be useful without revealing sensitive implementation details.
+
+13
+00:00:53.741 --> 00:01:01.745
+Internal logs can include more diagnostic context, but they should still avoid unsafe logging practices such as recording unnecessary secrets or
+
+14
+00:01:01.745 --> 00:01:02.888
+enormous raw values.
+
+15
+00:01:02.888 --> 00:01:05.556
+Validation failures should not be exceptional mysteries.
+
+16
+00:01:05.556 --> 00:01:08.605
+They are expected outcomes at a trust boundary.
+
+17
+00:01:08.605 --> 00:01:15.847
+Code should handle them through documented paths, and monitoring should distinguish normal invalid input from unusual patterns that deserve
+
+18
+00:01:15.847 --> 00:01:16.609
+operational attention.
+
+19
+00:01:16.609 --> 00:01:19.277
+The goal is predictable behavior under pressure.
+
+20
+00:01:19.277 --> 00:01:27.662
+When limits are explicit, invalid or oversized input consumes bounded memory and time, cleanup remains reliable, and the program keeps its internal
+
+21
+00:01:27.662 --> 00:01:28.425
+assumptions intact.
+
+22
+00:01:28.425 --> 00:01:31.855
+Resource policies should be reviewed with operations in mind.
+
+23
+00:01:31.855 --> 00:01:40.240
+A limit should have a reason, a failure response, and a signal that maintainers can observe when legitimate workloads approach that limit.

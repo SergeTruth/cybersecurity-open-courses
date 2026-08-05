@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.679
+Log data may include untrusted input, and that input should be handled as carefully as any other boundary value.
+
+2
+00:00:06.679 --> 00:00:16.170
+A string that is safe for display in one place may not be safe as a log field, a line-oriented record, or a downstream search value.
+
+3
+00:00:16.170 --> 00:00:22.497
+Newlines, tabs, terminal control characters, unusual encodings, and very long values can make log records confusing or misleading.
+
+4
+00:00:22.497 --> 00:00:28.824
+Defensive logging encodes or escapes control characters and stores values in a form that preserves the record structure.
+
+5
+00:00:28.824 --> 00:00:30.582
+Bound external values before logging.
+
+6
+00:00:30.582 --> 00:00:35.152
+A username, file name, header value, or parser error can be unexpectedly large.
+
+7
+00:00:35.152 --> 00:00:41.830
+Truncation should be explicit and visible, such as recording that a value was shortened rather than silently losing context.
+
+8
+00:00:41.830 --> 00:00:44.642
+Canonicalization matters when logs are used for comparison.
+
+9
+00:00:44.642 --> 00:00:53.430
+If the program normalizes case, trims whitespace, or resolves a path-like value before making a decision, logs should make clear whether the raw or
+
+10
+00:00:53.430 --> 00:00:55.188
+canonical form is being recorded.
+
+11
+00:00:55.188 --> 00:00:57.297
+Separate raw input from trusted fields.
+
+12
+00:00:57.297 --> 00:01:02.570
+A field named user_message should not be confused with an event name or trusted status.
+
+13
+00:01:02.570 --> 00:01:09.248
+Stable labels should come from code, while external data should be bounded, encoded, and stored under clearly named fields.
+
+14
+00:01:09.248 --> 00:01:13.467
+The defensive principle is to treat log output as a data format.
+
+15
+00:01:13.467 --> 00:01:15.927
+It has structure, consumers, and integrity expectations.
+
+16
+00:01:15.927 --> 00:01:20.497
+Preserving that structure helps maintainers trust what they see during troubleshooting and review.
+
+17
+00:01:20.497 --> 00:01:25.418
+Integrity also depends on consistent encoding between the application, log library, collector, and viewer.
+
+18
+00:01:25.418 --> 00:01:32.800
+If each layer handles special characters differently, an event that looked safe when written may become confusing when searched or exported.

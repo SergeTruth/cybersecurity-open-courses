@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.806
+Sockets are resources with lifecycles.
+
+2
+00:00:01.806 --> 00:00:06.141
+They are created, configured, connected or accepted, used, shut down, and closed.
+
+3
+00:00:06.141 --> 00:00:10.114
+In C++, that lifecycle should be represented clearly in ownership types.
+
+4
+00:00:10.114 --> 00:00:19.867
+A socket handle that is passed around as an unadorned integer or platform handle is easy to leak, close twice, or keep alive longer than the protocol
+
+5
+00:00:19.867 --> 00:00:20.589
+state allows.
+
+6
+00:00:20.589 --> 00:00:22.756
+RAII wrappers are a strong default.
+
+7
+00:00:22.756 --> 00:00:29.619
+The object that owns a descriptor or handle closes it when the object leaves scope, including on error paths.
+
+8
+00:00:29.619 --> 00:00:37.205
+That does not remove the need for protocol-level shutdown, but it prevents cleanup from depending on scattered manual close calls.
+
+9
+00:00:37.205 --> 00:00:43.707
+Move-only ownership can make it clear which part of the program is responsible for a live connection.
+
+10
+00:00:43.707 --> 00:00:46.596
+Cross-platform code needs to respect platform differences.
+
+11
+00:00:46.596 --> 00:00:53.821
+POSIX descriptors and Windows socket handles have different types and setup rules, and Windows networking may require library initialization and
+
+12
+00:00:53.821 --> 00:00:54.182
+cleanup.
+
+13
+00:00:54.182 --> 00:00:59.961
+These details should be hidden behind a small, tested abstraction rather than repeated throughout business logic.
+
+14
+00:00:59.961 --> 00:01:03.212
+The abstraction should make invalid or closed states explicit.
+
+15
+00:01:03.212 --> 00:01:08.630
+Connection lifecycles also include accept loops, cancellation, normal completion, protocol errors, authentication failures, and shutdown.
+
+16
+00:01:08.630 --> 00:01:17.299
+A service should know how to stop accepting new connections, how to finish or cancel current work, and when a connection should be closed.
+
+17
+00:01:17.299 --> 00:01:23.440
+Predictable cleanup protects availability because it keeps resource use understandable even when clients disconnect or behave unexpectedly.

@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.318
+Safe logging starts with data minimization.
+
+2
+00:00:02.318 --> 00:00:10.433
+A log should contain the information needed for a defined operational purpose, not every value that happens to be in scope.
+
+3
+00:00:10.433 --> 00:00:14.684
+The easiest sensitive log to manage is the one never written.
+
+4
+00:00:14.684 --> 00:00:17.002
+Secrets do not belong in logs.
+
+5
+00:00:17.002 --> 00:00:23.571
+Passwords, API keys, tokens, session identifiers, private keys, authorization headers, signing material, recovery codes, and sensitive configuration
+
+6
+00:00:23.571 --> 00:00:27.822
+values should be excluded or represented through carefully designed safe markers.
+
+7
+00:00:27.822 --> 00:00:30.913
+Personal and regulated data require the same discipline.
+
+8
+00:00:30.913 --> 00:00:38.255
+Names, addresses, account details, device identifiers, location information, health or financial data, and other regulated fields should be minimized
+
+9
+00:00:38.255 --> 00:00:39.414
+according to policy.
+
+10
+00:00:39.414 --> 00:00:44.437
+Even when one field looks harmless, logs can aggregate context across many events.
+
+11
+00:00:44.437 --> 00:00:51.006
+Avoid logging full objects, raw request bodies, large records, memory dumps, or broad exception details without review.
+
+12
+00:00:51.006 --> 00:00:59.894
+These shortcuts can turn diagnostic storage into a sensitive data store that is copied, indexed, retained, and viewed by more people than the
+
+13
+00:00:59.894 --> 00:01:00.666
+original system.
+
+14
+00:01:00.666 --> 00:01:04.144
+Redaction should happen before data reaches the log sink.
+
+15
+00:01:04.144 --> 00:01:11.486
+Once sensitive data is written to a local file, queue, agent, collector, or search system, removal becomes much harder.
+
+16
+00:01:11.486 --> 00:01:16.123
+Treat redaction as part of event construction, not a later cleanup wish.
+
+17
+00:01:16.123 --> 00:01:19.601
+Internal paths and implementation details should also be limited.
+
+18
+00:01:19.601 --> 00:01:26.942
+Maintainers need enough context to investigate, but logs should not reveal unnecessary local directory layouts, internal topology, or configuration
+
+19
+00:01:26.942 --> 00:01:30.034
+details to audiences that do not need them.
+
+20
+00:01:30.034 --> 00:01:40.467
+A useful review question is: if this log line were copied into a ticket, retained for a year, or viewed by another operations team, would the data
+
+21
+00:01:40.467 --> 00:01:41.626
+still be appropriate?
+
+22
+00:01:41.626 --> 00:01:44.717
+If not, redesign the event before shipping it.
+
+23
+00:01:44.717 --> 00:01:49.741
+For C++ code, be especially cautious with helper functions that stringify entire objects.
+
+24
+00:01:49.741 --> 00:01:55.537
+A convenience operator or serializer may include fields the caller did not intend to expose.
+
+25
+00:01:55.537 --> 00:02:00.560
+Safe logging should choose fields deliberately instead of relying on broad object formatting.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.211
+Standard algorithms and range-based code can reduce manual iterator management.
+
+2
+00:00:04.211 --> 00:00:10.719
+A simple range-based loop often communicates traversal better than explicit begin, end, increment, and dereference operations.
+
+3
+00:00:10.719 --> 00:00:18.375
+Algorithms such as find, count, sort, transform, copy, and remove-style patterns can make the code's intent more direct.
+
+4
+00:00:18.375 --> 00:00:20.672
+Clear intent is a safety feature.
+
+5
+00:00:20.672 --> 00:00:30.242
+When a reviewer sees a standard algorithm, the operation is usually easier to reason about than a hand-written loop with several branches and manual
+
+6
+00:00:30.242 --> 00:00:31.007
+iterator movement.
+
+7
+00:00:31.007 --> 00:00:39.429
+The standard library also concentrates many traversal details in well-tested components, which reduces the amount of custom logic the team must
+
+8
+00:00:39.429 --> 00:00:39.812
+inspect.
+
+9
+00:00:39.812 --> 00:00:42.874
+This does not mean algorithms remove all responsibility.
+
+10
+00:00:42.874 --> 00:00:48.234
+Developers still need to understand container invalidation, lifetimes, comparator requirements, iterator categories, and ownership.
+
+11
+00:00:48.234 --> 00:00:52.827
+A range view can still refer to data that must stay alive.
+
+12
+00:00:52.827 --> 00:00:56.273
+An algorithm can still be given the wrong boundaries.
+
+13
+00:00:56.273 --> 00:01:01.249
+An erase-remove pattern still requires the container operation that actually removes elements.
+
+14
+00:01:01.249 --> 00:01:09.671
+The defensive recommendation is practical: use manual iterator arithmetic when it is truly needed, and make it obvious why it is needed.
+
+15
+00:01:09.671 --> 00:01:15.413
+For ordinary traversal, filtering, searching, transformation, and ordering, prefer idioms that state the operation directly.
+
+16
+00:01:15.413 --> 00:01:17.327
+Readable traversal helps future maintainers.
+
+17
+00:01:17.327 --> 00:01:23.835
+The next engineer can focus on the policy, predicate, or transformation instead of reverse-engineering loop mechanics.
+
+18
+00:01:23.835 --> 00:01:27.280
+That makes iterator safety easier to sustain over time.

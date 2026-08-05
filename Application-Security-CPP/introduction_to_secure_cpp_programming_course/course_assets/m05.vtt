@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.451
+External input should be treated as untrusted until the program validates it.
+
+2
+00:00:04.451 --> 00:00:11.129
+Input can arrive through files, sockets, command-line arguments, environment variables, IPC, configuration, serialized data, plugin interfaces, or
+
+3
+00:00:11.129 --> 00:00:11.871
+user interfaces.
+
+4
+00:00:11.871 --> 00:00:14.838
+Some of it may be malformed by accident.
+
+5
+00:00:14.838 --> 00:00:19.290
+Some of it may reflect old versions, partial writes, or incompatible producers.
+
+6
+00:00:19.290 --> 00:00:22.257
+Good parsers validate structure before relying on it.
+
+7
+00:00:22.257 --> 00:00:26.338
+That includes lengths, counts, offsets, versions, flags, encodings, and state transitions.
+
+8
+00:00:26.338 --> 00:00:32.644
+If a message says it contains ten records, the parser should confirm that ten records actually fit.
+
+9
+00:00:32.644 --> 00:00:40.063
+If an offset points into a buffer, the parser should confirm that the pointed-to range exists before using it.
+
+10
+00:00:40.063 --> 00:00:42.289
+Numeric conversion deserves its own care.
+
+11
+00:00:42.289 --> 00:00:46.741
+Code should detect invalid input, range errors, overflow, underflow, and leftover characters.
+
+12
+00:00:46.741 --> 00:00:52.305
+A partial parse can be dangerous when the program treats it as a clean value.
+
+13
+00:00:52.305 --> 00:00:58.982
+Strong parsing returns both the converted value and a clear status about whether the entire input met expectations.
+
+14
+00:00:58.982 --> 00:01:03.434
+Validation should occur before allocation, copying, indexing, dispatch, or state-changing operations.
+
+15
+00:01:03.434 --> 00:01:11.966
+For example, a length from input should not be used to allocate a huge buffer before checking whether the length is within policy.
+
+16
+00:01:11.966 --> 00:01:17.901
+A type field should not dispatch to a handler before the surrounding structure has been validated.
+
+17
+00:01:17.901 --> 00:01:21.611
+Failure behavior should be explicit, safe, and easy to test.
+
+18
+00:01:21.611 --> 00:01:31.255
+A parser can reject a record, return an error object, close a connection, skip an optional field, or enter a recovery path, but it should not
+
+19
+00:01:31.255 --> 00:01:33.852
+continue with stale data or guessed defaults.
+
+20
+00:01:33.852 --> 00:01:38.304
+Logs should explain what category of validation failed without exposing sensitive content.
+
+21
+00:01:38.304 --> 00:01:40.158
+Secure parsing is repeatable engineering.
+
+22
+00:01:40.158 --> 00:01:45.352
+Define the accepted format, validate before trust, represent failures clearly, and test boundary cases.
+
+23
+00:01:45.352 --> 00:01:52.400
+Reviewers should ask which inputs are trusted, which are merely parsed, and which are allowed to change program state.

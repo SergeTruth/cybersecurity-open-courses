@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.883
+Modern operating systems provide random sources intended for security-sensitive use, and approved cryptographic libraries often provide portable
+
+2
+00:00:06.883 --> 00:00:08.412
+abstractions over those sources.
+
+3
+00:00:08.412 --> 00:00:15.678
+In real C++ projects, the best engineering choice is usually not to scatter platform-specific calls throughout the codebase.
+
+4
+00:00:15.678 --> 00:00:21.796
+A small reviewed wrapper can centralize the approved source, error handling, byte-generation behavior, and documentation.
+
+5
+00:00:21.796 --> 00:00:28.297
+Call sites then ask for security random bytes or formatted values without reimplementing the policy each time.
+
+6
+00:00:28.297 --> 00:00:32.503
+Hand-rolled security random generators should be treated with deep skepticism.
+
+7
+00:00:32.503 --> 00:00:39.003
+A custom RNG is rarely justified, and when it is, it requires specialized cryptographic design and review.
+
+8
+00:00:39.003 --> 00:00:46.269
+Most application teams should spend their energy choosing maintained platform or library interfaces, using them correctly, and preventing weak
+
+9
+00:00:46.269 --> 00:00:47.033
+fallback paths.
+
+10
+00:00:47.033 --> 00:00:49.710
+The wrapper should make unsupported behavior obvious.
+
+11
+00:00:49.710 --> 00:00:57.740
+For example, if a platform source cannot provide randomness, the failure should not quietly turn into a timestamp-seeded deterministic engine.
+
+12
+00:00:57.740 --> 00:01:00.417
+Approved libraries also come with operational responsibilities.
+
+13
+00:01:00.417 --> 00:01:05.006
+Dependencies must be maintained, configured correctly, and reviewed when platform support changes.
+
+14
+00:01:05.006 --> 00:01:14.183
+The team should document which RNG interface is approved, which values must use it, how failures are reported, and which test-only sources are
+
+15
+00:01:14.183 --> 00:01:16.095
+allowed in non-production contexts.
+
+16
+00:01:16.095 --> 00:01:23.360
+Centralization is not about hiding security decisions; it is about making them consistent, inspectable, and harder to accidentally bypass.

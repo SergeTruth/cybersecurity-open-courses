@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.929
+Hash usage changes over time.
+
+2
+00:00:01.929 --> 00:00:07.716
+Algorithms become deprecated, compliance requirements change, libraries are replaced, and stored digest formats need migration.
+
+3
+00:00:07.716 --> 00:00:13.116
+A secure design should assume that today's approved choice may need to evolve.
+
+4
+00:00:13.116 --> 00:00:20.060
+Versioned formats help systems recognize which algorithm and parameters were used without guessing from length or surrounding context.
+
+5
+00:00:20.060 --> 00:00:25.847
+They also make failure cases clearer when a service encounters data it no longer supports.
+
+6
+00:00:25.847 --> 00:00:29.705
+Compatibility windows should be intentional and time-bounded where possible.
+
+7
+00:00:29.705 --> 00:00:38.964
+A system may need to read an old digest format while writing a new one, but that should not silently preserve weak policy forever.
+
+8
+00:00:38.964 --> 00:00:46.293
+Migration behavior should be tested with old values, new values, invalid encodings, unsupported algorithms, wrong lengths, and failed upgrades.
+
+9
+00:00:46.293 --> 00:00:51.694
+Operational teams should know how to measure migration progress and remove legacy support safely.
+
+10
+00:00:51.694 --> 00:00:56.709
+Dashboards or reports can track remaining legacy records without exposing sensitive input data.
+
+11
+00:00:56.709 --> 00:01:03.653
+Code review should flag deprecated algorithms, custom hash wrappers, unclear encoding, weak or unexplained digest lengths, unsafe truncation,
+
+12
+00:01:03.653 --> 00:01:08.668
+password misuse, missing salts, and plain hashes used where authenticated integrity is required.
+
+13
+00:01:08.668 --> 00:01:13.298
+Dependency review should confirm that cryptographic libraries are maintained and configured correctly.
+
+14
+00:01:13.298 --> 00:01:18.699
+Governance keeps the same mistakes from returning under new helper names or compatibility flags.
+
+15
+00:01:18.699 --> 00:01:26.800
+Architecture notes should record the approved patterns so new services do not need to rediscover the rules during a rushed integration.

@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.016
+Good validation starts before parsing code is written.
+
+2
+00:00:03.016 --> 00:00:10.932
+The team should define what the program expects to accept: required fields, optional fields, value types, valid ranges, units, lengths, counts,
+
+3
+00:00:10.932 --> 00:00:13.948
+enum-like values, formats, and relationships between fields.
+
+4
+00:00:13.948 --> 00:00:17.717
+Without that contract, validation becomes a collection of scattered guesses.
+
+5
+00:00:17.717 --> 00:00:21.487
+Narrow acceptance is easier to reason about than broad acceptance.
+
+6
+00:00:21.487 --> 00:00:27.518
+When possible, prefer allowlists: known commands, known modes, known field names, known units, and known formats.
+
+7
+00:00:27.518 --> 00:00:34.681
+A broad rule that accepts whatever appears convenient today often becomes hard to review after the input format grows.
+
+8
+00:00:34.681 --> 00:00:35.434
+Shape matters.
+
+9
+00:00:35.434 --> 00:00:39.958
+A configuration entry might require a name, a timeout, and a mode.
+
+10
+00:00:39.958 --> 00:00:42.974
+An external record might require exactly three fields.
+
+11
+00:00:42.974 --> 00:00:48.251
+A command-line option might require a single value and no extra trailing text.
+
+12
+00:00:48.251 --> 00:00:56.544
+Required fields should be present, optional fields should have defined defaults, and unexpected fields should be treated according to a clear policy.
+
+13
+00:00:56.544 --> 00:00:59.560
+Type and range matter as much as syntax.
+
+14
+00:00:59.560 --> 00:01:09.738
+A value may parse as a number but still be invalid because it is negative, too large, in the wrong unit, outside a business rule, or inconsistent
+
+15
+00:01:09.738 --> 00:01:10.869
+with another count.
+
+16
+00:01:10.869 --> 00:01:18.031
+A string may match a general pattern but still be too long for a downstream storage or display rule.
+
+17
+00:01:18.031 --> 00:01:19.539
+Validation should reject ambiguity.
+
+18
+00:01:19.539 --> 00:01:27.455
+Wrong units, duplicate fields, inconsistent counts, empty values where emptiness is not meaningful, and extra values that the program does not
+
+19
+00:01:27.455 --> 00:01:30.094
+understand should not quietly become accepted behavior.
+
+20
+00:01:30.094 --> 00:01:34.241
+After validation succeeds, convert the input into a narrow internal type.
+
+21
+00:01:34.241 --> 00:01:40.649
+A validated port number, bounded size, known mode, or canonical identifier communicates more than a raw string.
+
+22
+00:01:40.649 --> 00:01:45.549
+That typed representation reduces repeated checks and makes later code easier to review.
+
+23
+00:01:45.549 --> 00:01:48.565
+This upfront definition also helps teams discuss compatibility.
+
+24
+00:01:48.565 --> 00:01:52.712
+If a field is allowed for future use, document that policy.
+
+25
+00:01:52.712 --> 00:01:59.120
+If unknown fields are rejected, make that behavior consistent so callers do not rely on accidental acceptance.

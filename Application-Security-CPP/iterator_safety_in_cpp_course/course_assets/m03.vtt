@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.293
+Iterator validity depends heavily on the container and the operation being performed.
+
+2
+00:00:04.293 --> 00:00:07.513
+A std::vector or std::string stores elements contiguously.
+
+3
+00:00:07.513 --> 00:00:13.237
+When it grows and needs more capacity, it may reallocate and move elements to new storage.
+
+4
+00:00:13.237 --> 00:00:18.604
+Iterators, references, and pointers that referred to the old storage may no longer be valid.
+
+5
+00:00:18.604 --> 00:00:21.466
+Erase operations are another common source of defects.
+
+6
+00:00:21.466 --> 00:00:24.328
+Removing an element ends that element's lifetime.
+
+7
+00:00:24.328 --> 00:00:30.410
+Depending on the container, iterators at the erased element, and sometimes iterators after it, may be invalidated.
+
+8
+00:00:30.410 --> 00:00:36.134
+Clearing a container invalidates access to its contained elements because those elements are no longer present.
+
+9
+00:00:36.134 --> 00:00:38.280
+Other containers have different stability properties.
+
+10
+00:00:38.280 --> 00:00:43.289
+Lists are designed so many insert and erase operations preserve iterators to other elements.
+
+11
+00:00:43.289 --> 00:00:47.224
+Associative containers such as maps and sets have their own rules.
+
+12
+00:00:47.224 --> 00:00:50.802
+Deques have rules that differ from both vectors and lists.
+
+13
+00:00:50.802 --> 00:00:54.737
+Custom containers and third-party ranges may add their own contracts.
+
+14
+00:00:54.737 --> 00:00:59.030
+The lesson is not to pretend that one invalidation rule applies everywhere.
+
+15
+00:00:59.030 --> 00:01:06.186
+The defensive habit is to check the specific container contract before storing iterators, reusing iterators after mutation, or passing iterators
+
+16
+00:01:06.186 --> 00:01:08.690
+across functions that may change the container.
+
+17
+00:01:08.690 --> 00:01:11.552
+Code review should call out those assumptions explicitly.
+
+18
+00:01:11.552 --> 00:01:15.487
+A practical pattern is to keep iterator lifetimes short around mutation.
+
+19
+00:01:15.487 --> 00:01:24.431
+If code needs a stable identity, a key, index with validation, or owning handle may communicate the intent more clearly than a long-lived iterator.
+
+20
+00:01:24.431 --> 00:01:29.440
+That decision should be made with the container's actual stability rules in mind.

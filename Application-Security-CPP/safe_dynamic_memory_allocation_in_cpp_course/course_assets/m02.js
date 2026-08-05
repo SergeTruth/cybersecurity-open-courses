@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Prefer Values, Containers, and RAII",
+  "graphicAlt": "Design comparison showing stack values and standard containers handling lifetime automatically, an RAII wrapper pairing acquisition with destruction, and a raw allocation path requiring more manual safety obligations.",
+  "narration": "Modern C++ code should not reach for raw dynamic allocation first. Many objects can be owned directly as values, stored as members, returned by value, or placed in standard containers. Value ownership often provides the simplest lifecycle because construction and destruction follow scope and object lifetime.\n\nStandard containers reduce the need for raw dynamic arrays. std::vector manages dynamic contiguous storage. std::string manages text storage. std::array handles fixed-size storage. Other containers express different access and stability tradeoffs. These types carry size and ownership information that raw allocation does not provide by itself.\n\nRAII is the central design principle. A resource is acquired or represented by an object, and the object's destructor releases the resource. This makes cleanup predictable across normal execution, early returns, and exceptions according to project policy. It also makes cleanup behavior easier to test.\n\nStandard library and project-specific RAII types reduce manual allocation paths. Instead of repeating allocation, validation, cleanup, and error handling in every function, the code can concentrate lifecycle rules in a small number of well-reviewed types.\n\nSimpler ownership is easier to secure, test, and review. If a value or container expresses the lifecycle, choose that before adding a pointer. If dynamic allocation is necessary, use a type that communicates ownership rather than forcing reviewers to infer it from comments or call order.",
+  "narrationPoints": [
+    "Value ownership often provides the simplest lifecycle because construction and destruction follow scope and object lifetime.",
+    "Standard containers reduce the need for raw dynamic arrays. std::vector manages dynamic contiguous storage. std::string manages text storage.",
+    "A resource is acquired or represented by an object, and the object's destructor releases the resource.",
+    "Instead of repeating allocation, validation, cleanup, and error handling in every function, the code can concentrate lifecycle rules in a small number of well-reviewed types.",
+    "If dynamic allocation is necessary, use a type that communicates ownership rather than forcing reviewers to infer it from comments or call order.",
+    "Simpler ownership is easier to secure, test, and review."
+  ]
+};

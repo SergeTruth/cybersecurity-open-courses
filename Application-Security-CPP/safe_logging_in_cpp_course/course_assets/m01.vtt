@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.277
+Logging is an operational safety feature.
+
+2
+00:00:02.277 --> 00:00:04.934
+Developers use logs to understand unexpected behavior.
+
+3
+00:00:04.934 --> 00:00:07.971
+Operators use them to monitor health and capacity.
+
+4
+00:00:07.971 --> 00:00:13.285
+Responders use them to reconstruct timelines and confirm whether systems are behaving as intended.
+
+5
+00:00:13.285 --> 00:00:17.460
+At the same time, logging is a security-sensitive design decision.
+
+6
+00:00:17.460 --> 00:00:25.431
+A log event can reveal secrets, collect unnecessary personal data, expose internal paths, or preserve implementation details long after the original
+
+7
+00:00:25.431 --> 00:00:26.569
+request is gone.
+
+8
+00:00:26.569 --> 00:00:31.883
+Logs can also become unreliable if they are noisy, inconsistent, or unavailable during failure.
+
+9
+00:00:31.883 --> 00:00:36.438
+Safe logging is not about logging as little as possible by default.
+
+10
+00:00:36.438 --> 00:00:38.336
+It is about logging intentionally.
+
+11
+00:00:38.336 --> 00:00:45.927
+Each event should have a purpose: debugging a class of failures, supporting operations, measuring reliability, meeting audit needs, or helping
+
+12
+00:00:45.927 --> 00:00:47.066
+maintainers investigate responsibly.
+
+13
+00:00:47.066 --> 00:00:48.204
+Controlled detail matters.
+
+14
+00:00:48.204 --> 00:00:54.277
+A useful event identifies what happened, where it happened, and how it can be correlated safely.
+
+15
+00:00:54.277 --> 00:01:02.628
+It should avoid dumping raw objects, large request bodies, or sensitive values simply because those values are available at the call site.
+
+16
+00:01:02.628 --> 00:01:07.182
+C++ systems often run close to resources, concurrency, and lower-level libraries.
+
+17
+00:01:07.182 --> 00:01:12.496
+Logging must therefore be reliable under pressure, safe during cleanup, and careful with formatting.
+
+18
+00:01:12.496 --> 00:01:16.292
+A logging call should not destabilize an already failing path.
+
+19
+00:01:16.292 --> 00:01:18.569
+Review logs as security-sensitive output.
+
+20
+00:01:18.569 --> 00:01:27.679
+Ask whether the event helps a real operational need, whether fields are safe, whether access and retention are governed, and whether the message will
+
+21
+00:01:27.679 --> 00:01:30.336
+remain understandable when systems are under stress.
+
+22
+00:01:30.336 --> 00:01:32.993
+A mature logging strategy also defines ownership.
+
+23
+00:01:32.993 --> 00:01:42.102
+Teams should know who approves new event fields, who responds to noisy alerts, and who decides when diagnostic detail should be reduced, masked, or
+
+24
+00:01:42.102 --> 00:01:44.000
+retained for a shorter period.

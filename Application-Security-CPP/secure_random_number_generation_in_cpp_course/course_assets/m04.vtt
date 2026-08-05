@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.805
+Seeding determines the starting state of many pseudo-random generators.
+
+2
+00:00:03.805 --> 00:00:08.372
+If the seed is predictable, the generated sequence may also be predictable.
+
+3
+00:00:08.372 --> 00:00:15.602
+That is why timestamps, process identifiers, counters, small integers, build numbers, configuration constants, and fixed values are not appropriate
+
+4
+00:00:15.602 --> 00:00:16.363
+security seeds.
+
+5
+00:00:16.363 --> 00:00:23.973
+They may look variable during normal testing, but they often have far less uncertainty than a security-sensitive design requires.
+
+6
+00:00:23.973 --> 00:00:25.876
+Repeated seeds create another problem.
+
+7
+00:00:25.876 --> 00:00:31.204
+A deterministic generator started from the same seed can produce the same sequence again.
+
+8
+00:00:31.204 --> 00:00:34.248
+In test code, that behavior can be useful.
+
+9
+00:00:34.248 --> 00:00:43.000
+In production security code, it can create repeated identifiers, repeated token patterns, or values that are easier to reason about than the system
+
+10
+00:00:43.000 --> 00:00:43.761
+owner intended.
+
+11
+00:00:43.761 --> 00:00:47.947
+Trying to combine several weak inputs manually rarely fixes the issue.
+
+12
+00:00:47.947 --> 00:00:54.035
+Manual entropy assembly is difficult to evaluate, and future maintenance can quietly remove or weaken assumptions.
+
+13
+00:00:54.035 --> 00:01:00.124
+Security-sensitive systems should rely on trusted entropy sources and CSPRNGs rather than improvising seed material.
+
+14
+00:01:00.124 --> 00:01:01.646
+Error handling matters too.
+
+15
+00:01:01.646 --> 00:01:09.257
+If the required source is unavailable or fails, the program should fail explicitly or follow a documented safe failure path.
+
+16
+00:01:09.257 --> 00:01:16.106
+Silent fallback to a deterministic generator, a fixed seed, or a timestamp seed is a serious design smell.
+
+17
+00:01:16.106 --> 00:01:23.717
+Treat seed handling like security configuration: review it, centralize it where practical, document the approved behavior, and make weak modes
+
+18
+00:01:23.717 --> 00:01:26.000
+visible before they can reach production.

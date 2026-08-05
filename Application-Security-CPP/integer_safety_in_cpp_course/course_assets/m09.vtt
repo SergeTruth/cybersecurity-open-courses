@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.172
+Most organizations already have integer-heavy legacy code.
+
+2
+00:00:03.172 --> 00:00:06.741
+Improving it does not require stopping all feature work.
+
+3
+00:00:06.741 --> 00:00:07.931
+It requires prioritization.
+
+4
+00:00:07.931 --> 00:00:15.466
+Start with paths where integers influence memory allocation, buffer bounds, parser state, loop limits, permissions, quota decisions, resource limits,
+
+5
+00:00:15.466 --> 00:00:17.845
+persistence formats, and cross-platform behavior.
+
+6
+00:00:17.845 --> 00:00:21.414
+During review, look for values whose domain is unclear.
+
+7
+00:00:21.414 --> 00:00:27.759
+A plain int might represent an index, byte count, status code, timeout, offset, or business identifier.
+
+8
+00:00:27.759 --> 00:00:35.293
+Replacing unclear types with domain-appropriate types, clearer aliases, wrapper objects, or named constants can reduce guesswork for future
+
+9
+00:00:35.293 --> 00:00:35.690
+maintainers.
+
+10
+00:00:35.690 --> 00:00:38.466
+Add range checks before behavior-sensitive conversions.
+
+11
+00:00:38.466 --> 00:00:47.190
+If a value is parsed from outside the process, loaded from storage, received from another component, or derived from user-controlled configuration,
+
+12
+00:00:47.190 --> 00:00:49.966
+the conversion point should not be casual.
+
+13
+00:00:49.966 --> 00:00:55.121
+The code should show why the destination type can safely represent the value.
+
+14
+00:00:55.121 --> 00:00:58.690
+Refactoring should be incremental and protected by regression tests.
+
+15
+00:00:58.690 --> 00:01:03.845
+For a risky size calculation, add tests around current behavior before changing it.
+
+16
+00:01:03.845 --> 00:01:09.793
+Then wrap the calculation, add checked arithmetic, clarify units, and verify that callers handle failure.
+
+17
+00:01:09.793 --> 00:01:13.759
+Small changes are easier to review and safer to deploy.
+
+18
+00:01:13.759 --> 00:01:16.138
+Some assumptions cannot be removed immediately.
+
+19
+00:01:16.138 --> 00:01:26.448
+When that happens, document the assumption near the code, link it to a follow-up item if appropriate, and add tests or diagnostics that make future
+
+20
+00:01:26.448 --> 00:01:27.241
+changes safer.
+
+21
+00:01:27.241 --> 00:01:32.000
+Legacy improvement is a steady engineering practice, not a one-time cleanup.

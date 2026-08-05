@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.678
+Numeric input is a common source of subtle validation defects.
+
+2
+00:00:03.678 --> 00:00:09.195
+A number can parse successfully and still be unsafe or meaningless for the intended use.
+
+3
+00:00:09.195 --> 00:00:15.815
+Counts, offsets, indexes, lengths, capacities, timeouts, and allocation sizes all need domain checks before they influence program behavior.
+
+4
+00:00:15.815 --> 00:00:18.757
+Signed and unsigned boundaries should be reviewed carefully.
+
+5
+00:00:18.757 --> 00:00:24.274
+A negative value may become a very large value if it is converted without checking.
+
+6
+00:00:24.274 --> 00:00:28.687
+A large unsigned value may not fit in a signed target type.
+
+7
+00:00:28.687 --> 00:00:33.468
+A value that fits in one platform type may not fit in another.
+
+8
+00:00:33.468 --> 00:00:35.675
+Validation should happen before narrowing conversions.
+
+9
+00:00:35.675 --> 00:00:41.928
+Externally influenced sizes should be bounded before allocation, loop bounds, copy operations, indexing, slicing, and buffer growth.
+
+10
+00:00:41.928 --> 00:00:47.444
+A count is not ready for use simply because it was represented as an integer.
+
+11
+00:00:47.444 --> 00:00:52.226
+It must be within the range the program can process safely and reasonably.
+
+12
+00:00:52.226 --> 00:00:54.432
+Derived calculations need overflow-aware thinking.
+
+13
+00:00:54.432 --> 00:01:04.362
+If the program multiplies a record count by an item size, adds a header length, or converts units, the derived value may exceed the target type even
+
+14
+00:01:04.362 --> 00:01:07.305
+when each input value looks acceptable by itself.
+
+15
+00:01:07.305 --> 00:01:09.144
+Validate both inputs and results.
+
+16
+00:01:09.144 --> 00:01:14.293
+Indexes and offsets should be checked against the actual container or record being used.
+
+17
+00:01:14.293 --> 00:01:20.545
+An index that is valid for one array length may be invalid after filtering, decoding, or truncation.
+
+18
+00:01:20.545 --> 00:01:24.591
+Keep the validated value close to the object it applies to.
+
+19
+00:01:24.591 --> 00:01:28.268
+The review question is simple: what will this number control?
+
+20
+00:01:28.268 --> 00:01:35.624
+If it controls memory, iteration, selection, timing, or resource use, validate the range, unit, type, conversion, and derived calculations before
+
+21
+00:01:35.624 --> 00:01:36.360
+trusting it.
+
+22
+00:01:36.360 --> 00:01:42.980
+Use numeric parsing APIs that let the program distinguish successful conversion, out-of-range values, and leftover input.
+
+23
+00:01:42.980 --> 00:01:49.600
+Then preserve the checked type when possible instead of repeatedly converting the same raw value in different locations.

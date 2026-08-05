@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.318
+Filesystems are not simple string maps.
+
+2
+00:00:02.318 --> 00:00:09.657
+A path may involve symbolic links, hard links, mount points, junctions, case-insensitive matching, different path separators, inherited permissions,
+
+3
+00:00:09.657 --> 00:00:12.747
+network storage, or metadata that changes over time.
+
+4
+00:00:12.747 --> 00:00:18.927
+A path that looked acceptable during one check may not refer to the same target later.
+
+5
+00:00:18.927 --> 00:00:26.652
+Links are especially important for security-sensitive file handling because they separate the path text from the object ultimately accessed.
+
+6
+00:00:26.652 --> 00:00:33.991
+Metadata can help a program reason about a file, but it should be treated as evidence, not absolute truth.
+
+7
+00:00:33.991 --> 00:00:40.558
+File size, owner, timestamps, type, and permissions can change between operations if another actor controls the location.
+
+8
+00:00:40.558 --> 00:00:48.670
+When the distinction matters, use platform APIs that check or open the target in a way that matches the intended guarantee.
+
+9
+00:00:48.670 --> 00:00:50.987
+Platform differences deserve explicit design attention.
+
+10
+00:00:50.987 --> 00:00:57.554
+Case sensitivity, reserved names, path length behavior, permission models, rename behavior, sharing rules, and durability guarantees vary.
+
+11
+00:00:57.554 --> 00:01:02.189
+Code that is safe on one filesystem may be incomplete on another.
+
+12
+00:01:02.189 --> 00:01:09.528
+Portable C++ can use standard library abstractions for many tasks, but security-sensitive behavior sometimes requires documented platform-specific
+
+13
+00:01:09.528 --> 00:01:09.914
+handling.
+
+14
+00:01:09.914 --> 00:01:11.845
+The safer habit is humility.
+
+15
+00:01:11.845 --> 00:01:13.004
+Document filesystem assumptions.
+
+16
+00:01:13.004 --> 00:01:14.549
+Keep path policy centralized.
+
+17
+00:01:14.549 --> 00:01:18.412
+Avoid pretending that a string comparison captures every target decision.
+
+18
+00:01:18.412 --> 00:01:25.365
+Where the platform provides a more precise operation, use it through a small wrapper with a clear contract.
+
+19
+00:01:25.365 --> 00:01:30.000
+Tests should include the platforms and filesystem behaviors the product actually supports.

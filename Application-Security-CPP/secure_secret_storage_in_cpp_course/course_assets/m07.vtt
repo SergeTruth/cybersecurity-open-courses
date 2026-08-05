@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.627
+File-based secret storage is sometimes unavoidable.
+
+2
+00:00:02.627 --> 00:00:08.257
+Local agents, appliances, legacy systems, offline tools, and embedded deployments may need secrets on disk.
+
+3
+00:00:08.257 --> 00:00:12.385
+When that happens, the file becomes part of the security boundary.
+
+4
+00:00:12.385 --> 00:00:18.390
+It needs a controlled location, strict ownership, narrow permissions, documented platform assumptions, and predictable backup behavior.
+
+5
+00:00:18.390 --> 00:00:24.019
+A secret file in a convenient shared directory is rarely a good long-term design.
+
+6
+00:00:24.019 --> 00:00:29.649
+Encryption at rest can help, but it does not solve the whole problem by itself.
+
+7
+00:00:29.649 --> 00:00:36.779
+If the decryption key is stored next to the encrypted secret, access to one often implies access to both.
+
+8
+00:00:36.779 --> 00:00:40.908
+Key management, key separation, service identity, and access control remain central.
+
+9
+00:00:40.908 --> 00:00:48.789
+Teams should also consider backups, deployment artifacts, support bundles, temporary files, and old versions that may preserve secrets long after the
+
+10
+00:00:48.789 --> 00:00:50.290
+current file is replaced.
+
+11
+00:00:50.290 --> 00:00:53.293
+C++ file handling should account for platform details.
+
+12
+00:00:53.293 --> 00:00:55.920
+Permissions can be inherited in surprising ways.
+
+13
+00:00:55.920 --> 00:01:00.423
+Symlinks or path confusion can undermine assumptions about where data is written.
+
+14
+00:01:00.423 --> 00:01:02.675
+Temporary files can remain after failure.
+
+15
+00:01:02.675 --> 00:01:05.302
+Cleanup paths may be skipped during crashes.
+
+16
+00:01:05.302 --> 00:01:11.307
+Defensive file handling uses controlled directories, explicit permissions, careful error handling, and review of deployment behavior.
+
+17
+00:01:11.307 --> 00:01:16.561
+When a platform secret store is available, prefer it over inventing a file format.
+
+18
+00:01:16.561 --> 00:01:21.440
+When files are required, treat them as sensitive operational assets with lifecycle rules.

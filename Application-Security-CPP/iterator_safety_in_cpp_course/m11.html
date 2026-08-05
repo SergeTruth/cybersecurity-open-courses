@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="iterator_safety_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;:&quot;a&quot;,&quot;q2&quot;:&quot;b&quot;,&quot;q3&quot;:&quot;c&quot;,&quot;q4&quot;:&quot;d&quot;,&quot;q5&quot;:&quot;c&quot;,&quot;q6&quot;:&quot;d&quot;,&quot;q7&quot;:&quot;b&quot;,&quot;q8&quot;:&quot;a&quot;,&quot;q9&quot;:&quot;c&quot;,&quot;q10&quot;:&quot;b&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. Why does iterator safety matter in C++?</legend>
+            <label><input type="radio" name="q1" value="a"> Invalid iterators can cause undefined behavior, corruption, or incorrect security decisions.</label>
+            <label><input type="radio" name="q1" value="b"> Iterator defects are limited to slower traversal and cannot affect memory safety.</label>
+            <label><input type="radio" name="q1" value="c"> Standard containers keep every iterator valid through all possible mutations.</label>
+            <label><input type="radio" name="q1" value="d"> Iterator validation is automatic whenever a loop compares against end.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>2. Why should a past-the-end iterator not be dereferenced?</legend>
+            <label><input type="radio" name="q2" value="a"> It may be read once but cannot be incremented after that read.</label>
+            <label><input type="radio" name="q2" value="b"> It is a sentinel position and does not designate an element.</label>
+            <label><input type="radio" name="q2" value="c"> It is valid only when the container currently contains no elements.</label>
+            <label><input type="radio" name="q2" value="d"> It designates a hidden default element supplied by the container.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>3. Why should iterator pairs belong to the same range?</legend>
+            <label><input type="radio" name="q3" value="a"> The standard relocates unrelated containers so their iterators become comparable.</label>
+            <label><input type="radio" name="q3" value="b"> Iterator values carry enough container identity to make all cross-range operations safe.</label>
+            <label><input type="radio" name="q3" value="c"> Comparing or subtracting unrelated iterators can violate the operation's preconditions.</label>
+            <label><input type="radio" name="q3" value="d"> Two iterators may form a range whenever their value types are identical.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>4. How can container mutation affect iterators?</legend>
+            <label><input type="radio" name="q4" value="a"> Mutation changes element values but never affects iterator validity.</label>
+            <label><input type="radio" name="q4" value="b"> Only clearing a container can invalidate an iterator into its storage.</label>
+            <label><input type="radio" name="q4" value="c"> An iterator stays valid whenever its referenced element was not directly edited.</label>
+            <label><input type="radio" name="q4" value="d"> Insertion, erasure, reallocation, or rehashing may invalidate selected iterators.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>5. What is a safer approach when erasing while iterating?</legend>
+            <label><input type="radio" name="q5" value="a"> Restart with the same cached end iterator after every container mutation.</label>
+            <label><input type="radio" name="q5" value="b"> Store a pointer to the erased element so traversal can continue from it.</label>
+            <label><input type="radio" name="q5" value="c"> Use the successor returned by erase and advance exactly once per iteration.</label>
+            <label><input type="radio" name="q5" value="d"> Increment the old iterator after erase because it still records the next offset.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>6. Why can algorithms and range-based loops reduce iterator risk?</legend>
+            <label><input type="radio" name="q6" value="a"> Algorithms automatically add synchronization around shared container access.</label>
+            <label><input type="radio" name="q6" value="b"> They guarantee that mutation during traversal cannot invalidate references.</label>
+            <label><input type="radio" name="q6" value="c"> A range-based loop permits erasing from any container without special rules.</label>
+            <label><input type="radio" name="q6" value="d"> They express traversal intent and centralize correct boundary handling.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>7. Why do views and borrowed ranges require lifetime awareness?</legend>
+            <label><input type="radio" name="q7" value="a"> Every C++ range materializes an owned container before iteration begins.</label>
+            <label><input type="radio" name="q7" value="b"> A view may borrow storage and can dangle when its source owner disappears.</label>
+            <label><input type="radio" name="q7" value="c"> Borrowed ranges extend temporary object lifetime until the iterator is destroyed.</label>
+            <label><input type="radio" name="q7" value="d"> Views retain shared ownership of all source elements by language rule.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>8. Why should generic code respect iterator category requirements?</legend>
+            <label><input type="radio" name="q8" value="a"> Operations such as subtraction or indexing require stronger iterator capabilities.</label>
+            <label><input type="radio" name="q8" value="b"> Concept constraints affect diagnostics but not which expressions are valid.</label>
+            <label><input type="radio" name="q8" value="c"> A forward iterator can be treated as random access after a bounds check.</label>
+            <label><input type="radio" name="q8" value="d"> All iterator categories support constant-time indexing and reverse movement.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>9. Why are iterator validity and thread safety separate concerns?</legend>
+            <label><input type="radio" name="q9" value="a"> Thread safety matters only for iterators returned by concurrent containers.</label>
+            <label><input type="radio" name="q9" value="b"> Iterator validity implies the underlying element is synchronized automatically.</label>
+            <label><input type="radio" name="q9" value="c"> A valid iterator can still race with another thread mutating the container.</label>
+            <label><input type="radio" name="q9" value="d"> A mutex is unnecessary when a container mutation preserves iterator addresses.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>10. How do debug iterators, sanitizers, tests, and review help?</legend>
+            <label><input type="radio" name="q10" value="a"> Debug iterators should replace explicit negative tests in release configurations.</label>
+            <label><input type="radio" name="q10" value="b"> They expose invalidation, boundary, lifetime, and concurrency assumptions through different checks.</label>
+            <label><input type="radio" name="q10" value="c"> Sanitizers prove iterator pairs always refer to the same logical range.</label>
+            <label><input type="radio" name="q10" value="d"> Review is unnecessary after one standard-library implementation passes tests.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

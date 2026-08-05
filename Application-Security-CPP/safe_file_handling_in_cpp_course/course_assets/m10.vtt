@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.300
+Safe file handling is a roadmap, not a single library call.
+
+2
+00:00:04.300 --> 00:00:06.646
+Start by treating paths as input.
+
+3
+00:00:06.646 --> 00:00:10.946
+Define allowed locations for reading, writing, temporary files, and output replacement.
+
+4
+00:00:10.946 --> 00:00:15.246
+Centralize that policy so callers do not invent local string checks.
+
+5
+00:00:15.246 --> 00:00:19.937
+Validate paths and file contents separately because they answer different safety questions.
+
+6
+00:00:19.937 --> 00:00:23.847
+Open files with the narrowest mode that fits the operation.
+
+7
+00:00:23.847 --> 00:00:29.320
+Read defensively with size limits, streaming when appropriate, and clear text or binary expectations.
+
+8
+00:00:29.320 --> 00:00:34.402
+Parse structure before trusting meaning, and pass only validated data into business logic.
+
+9
+00:00:34.402 --> 00:00:41.047
+When writing, plan for partial failure, intentional truncation, careful permissions, and late errors during flush or close.
+
+10
+00:00:41.047 --> 00:00:47.302
+Temporary files should be created with race-resistant patterns and cleaned up through a clear lifecycle.
+
+11
+00:00:47.302 --> 00:00:53.166
+Symlinks, metadata, permissions, and platform differences should be documented instead of treated as invisible details.
+
+12
+00:00:53.166 --> 00:00:59.030
+RAII should carry routine cleanup, while error handling preserves invariants and avoids leaking sensitive information.
+
+13
+00:00:59.030 --> 00:01:00.985
+Finally, make file safety reviewable.
+
+14
+00:01:00.985 --> 00:01:02.158
+Log with restraint.
+
+15
+00:01:02.158 --> 00:01:05.676
+Test missing, malformed, large, restricted, and platform-specific cases.
+
+16
+00:01:05.676 --> 00:01:08.412
+Ask who controls each path and file.
+
+17
+00:01:08.412 --> 00:01:10.367
+Ask what happens on failure.
+
+18
+00:01:10.367 --> 00:01:15.840
+Good file handling is durable because its assumptions are visible, narrow, and continuously checked.

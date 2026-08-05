@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.290
+Log levels should communicate operational meaning.
+
+2
+00:00:02.290 --> 00:00:04.961
+Debug events help developers inspect detailed behavior.
+
+3
+00:00:04.961 --> 00:00:07.633
+Info events record normal, meaningful state changes.
+
+4
+00:00:07.633 --> 00:00:10.686
+Warnings identify unusual conditions that may need attention.
+
+5
+00:00:10.686 --> 00:00:15.647
+Error events represent failed operations, and critical-style events mark urgent system impact.
+
+6
+00:00:15.647 --> 00:00:19.845
+The level should not be chosen only by convenience or habit.
+
+7
+00:00:19.845 --> 00:00:23.280
+If every event is an error, operators lose signal.
+
+8
+00:00:23.280 --> 00:00:28.242
+If important failures are buried at a verbose level, responders may miss them.
+
+9
+00:00:28.242 --> 00:00:31.295
+A level policy helps teams interpret logs consistently.
+
+10
+00:00:31.295 --> 00:00:34.348
+Events also need stable names and component context.
+
+11
+00:00:34.348 --> 00:00:40.073
+A clear event name, component, operation, and outcome make logs easier to query and review.
+
+12
+00:00:40.073 --> 00:00:45.416
+Stable fields are better than slightly different free-text messages scattered across the codebase.
+
+13
+00:00:45.416 --> 00:00:46.942
+Safe correlation is valuable.
+
+14
+00:00:46.942 --> 00:00:54.957
+Request IDs, correlation IDs, operation IDs, tenant-safe identifiers, or non-sensitive object IDs can connect related events without revealing raw
+
+15
+00:00:54.957 --> 00:00:55.720
+sensitive data.
+
+16
+00:00:55.720 --> 00:01:00.681
+The identifier should be designed for investigation, not copied blindly from untrusted input.
+
+17
+00:01:00.681 --> 00:01:04.498
+Avoid vague messages such as operation failed with no context.
+
+18
+00:01:04.498 --> 00:01:08.696
+Also avoid noisy repetition that floods storage and hides important events.
+
+19
+00:01:08.696 --> 00:01:13.657
+Repeated failures may need rate limiting, aggregation, or a summary event with counters.
+
+20
+00:01:13.657 --> 00:01:16.710
+The goal is useful context without over-collection.
+
+21
+00:01:16.710 --> 00:01:25.107
+A maintainer should be able to understand what happened and where to investigate next, while sensitive data, raw inputs, and unnecessary internals
+
+22
+00:01:25.107 --> 00:01:27.015
+remain out of the record.
+
+23
+00:01:27.015 --> 00:01:29.686
+Context should also be stable across releases.
+
+24
+00:01:29.686 --> 00:01:35.793
+If field names, event names, or status values change casually, dashboards and incident playbooks lose reliability.
+
+25
+00:01:35.793 --> 00:01:39.609
+Treat the event schema as part of the operational interface.
+
+26
+00:01:39.609 --> 00:01:46.860
+When a message needs more detail, prefer adding a reviewed structured field over stuffing more prose into the text.
+
+27
+00:01:46.860 --> 00:01:51.440
+That keeps the event searchable and makes future privacy review much easier.

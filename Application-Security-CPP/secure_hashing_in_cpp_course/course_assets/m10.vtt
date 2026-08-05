@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.779
+A secure hashing roadmap begins with purpose.
+
+2
+00:00:02.779 --> 00:00:08.336
+Define what the hash is expected to prove before choosing an algorithm or format.
+
+3
+00:00:08.336 --> 00:00:16.672
+Is it a file fingerprint, an integrity check, a password verifier, an authenticated tag, a cache key, or a compatibility marker?
+
+4
+00:00:16.672 --> 00:00:21.832
+Each answer points to different security properties, libraries, storage formats, and review questions.
+
+5
+00:00:21.832 --> 00:00:27.786
+Writing that purpose down is small work, but it prevents years of ambiguous helper reuse.
+
+6
+00:00:27.786 --> 00:00:30.962
+Use approved algorithms, platform APIs, and vetted libraries.
+
+7
+00:00:30.962 --> 00:00:34.932
+Keep wrappers thin, documented, and specific to the intended construction.
+
+8
+00:00:34.932 --> 00:00:38.504
+Do not use general-purpose hashes for password storage.
+
+9
+00:00:38.504 --> 00:00:46.840
+Use password hashing or key-derivation mechanisms for password verifiers, and use HMAC or another approved authentication mechanism when origin and
+
+10
+00:00:46.840 --> 00:00:48.031
+integrity both matter.
+
+11
+00:00:48.031 --> 00:00:53.588
+Canonicalize inputs before hashing so the digest covers the exact bytes the design intends.
+
+12
+00:00:53.588 --> 00:00:58.352
+Stream large data safely, check read errors, and define what is covered.
+
+13
+00:00:58.352 --> 00:01:05.894
+Store digest metadata clearly, encode consistently, avoid accidental truncation, and compare digests with appropriate validation and timing-safe APIs
+
+14
+00:01:05.894 --> 00:01:06.687
+when needed.
+
+15
+00:01:06.687 --> 00:01:09.863
+Plan migration away from weak or legacy algorithms.
+
+16
+00:01:09.863 --> 00:01:13.833
+Test boundary cases, old formats, invalid values, and failure paths.
+
+17
+00:01:13.833 --> 00:01:20.184
+Review code, dependencies, stored formats, and configuration together because hashing decisions often span all of them.
+
+18
+00:01:20.184 --> 00:01:23.756
+Make ownership of those decisions explicit, documented, and reviewable.
+
+19
+00:01:23.756 --> 00:01:27.329
+Secure hashing is not just calling a hash function.
+
+20
+00:01:27.329 --> 00:01:33.680
+It is choosing the right construction for the security goal and governing that choice over time.

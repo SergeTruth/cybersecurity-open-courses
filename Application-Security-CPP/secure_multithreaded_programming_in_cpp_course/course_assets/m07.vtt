@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.218
+Condition variables are coordination tools, not just notification channels.
+
+2
+00:00:03.218 --> 00:00:12.155
+They work with a mutex and a shared condition, such as a queue becoming non-empty, a shutdown flag being set, or capacity becoming available.
+
+3
+00:00:12.155 --> 00:00:14.300
+A wait should use a predicate.
+
+4
+00:00:14.300 --> 00:00:20.377
+The predicate describes the actual condition that allows progress and is checked while holding the correct lock.
+
+5
+00:00:20.377 --> 00:00:26.097
+This pattern handles spurious wakeups and also handles notifications that happen before a thread starts waiting.
+
+6
+00:00:26.097 --> 00:00:28.600
+Producer-consumer queues are a common example.
+
+7
+00:00:28.600 --> 00:00:33.247
+The queue contents, size, capacity policy, and shutdown state should be protected consistently.
+
+8
+00:00:33.247 --> 00:00:41.827
+A consumer should not wake merely because a notification occurred; it should wake because the predicate says work is available or shutdown has been
+
+9
+00:00:41.827 --> 00:00:42.185
+requested.
+
+10
+00:00:42.185 --> 00:00:44.330
+Avoid busy waiting and timing assumptions.
+
+11
+00:00:44.330 --> 00:00:52.552
+Sleeping for a short duration and hoping another thread has finished is fragile under load, on slower systems, during debugging, and in virtualized
+
+12
+00:00:52.552 --> 00:00:52.910
+environments.
+
+13
+00:00:52.910 --> 00:00:55.770
+Explicit coordination is more reviewable and more reliable.
+
+14
+00:00:55.770 --> 00:00:57.558
+Bounded queues can support reliability.
+
+15
+00:00:57.558 --> 00:01:04.707
+If input can arrive faster than workers process it, an unbounded queue can turn a temporary spike into memory pressure.
+
+16
+00:01:04.707 --> 00:01:09.355
+A capacity policy gives the system a predictable behavior when resources are constrained.
+
+17
+00:01:09.355 --> 00:01:10.428
+Notification discipline matters.
+
+18
+00:01:10.428 --> 00:01:16.148
+Decide when to notify one waiter, when to notify all, and how shutdown signals are delivered.
+
+19
+00:01:16.148 --> 00:01:20.080
+A shutdown path should wake threads that might otherwise wait forever.
+
+20
+00:01:20.080 --> 00:01:26.872
+Review coordination code by identifying the mutex, the predicate, the shared state, the notification points, and the shutdown behavior.
+
+21
+00:01:26.872 --> 00:01:31.520
+If those pieces are clear, condition-variable code becomes much easier to maintain.

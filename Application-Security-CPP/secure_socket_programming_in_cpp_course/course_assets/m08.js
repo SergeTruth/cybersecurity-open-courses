@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Timeouts, Backpressure, and Availability",
+  "graphicAlt": "Client-service connection diagram for Timeouts, Backpressure, and Availability, showing exposure policy, handle ownership, partial I/O, exact protocol framing, TLS peer authentication, resource budgets, shutdown, and payload-free operational events.",
+  "narration": "Secure socket programs must think about availability. A peer may connect and stop sending, send slowly, send too much, keep many connections open, or cause queues to grow. The program does not need to assume hostile intent to need defenses; ordinary network failures and overloaded clients can create the same symptoms. Predictable resource use is a security property.\n\nTimeouts define how long the program will wait for progress. Connect timeouts prevent a client from hanging indefinitely while establishing a connection. Read and write timeouts keep stalled operations from occupying threads or event-loop state forever. Idle timeouts close connections that are no longer making useful progress. These values should match the protocol and product expectations rather than being arbitrary constants.\n\nBackpressure keeps one side of the system from overwhelming another. Bounded buffers, bounded queues, connection limits, request limits, and work scheduling rules help the program reject or slow work before memory and thread pools are exhausted. Without backpressure, a network-facing component can accept more data than downstream processing can handle, and the failure may appear far from the socket code.\n\nAvailability controls should be observable and tested. Operators need to know when limits are reached, when timeouts occur, and whether rejection behavior is expected. The goal is not aggressive disconnection. The goal is graceful failure under pressure, with cleanup that releases resources and leaves the service in a known state.",
+  "narrationPoints": [
+    "The program does not need to assume hostile intent to need defenses; ordinary network failures and overloaded clients can create the same symptoms.",
+    "A peer may connect and stop sending, send slowly, send too much, keep many connections open, or cause queues to grow.",
+    "Read and write timeouts keep stalled operations from occupying threads or event-loop state forever.",
+    "Connect timeouts prevent a client from hanging indefinitely while establishing a connection.",
+    "Bounded buffers, bounded queues, connection limits, request limits, and work scheduling rules help the program reject or slow work before memory and thread pools are exhausted.",
+    "Operators need to know when limits are reached, when timeouts occur, and whether rejection behavior is expected."
+  ]
+};

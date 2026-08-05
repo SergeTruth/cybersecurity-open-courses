@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.775
+Standard-library operations participate in failure paths.
+
+2
+00:00:02.775 --> 00:00:10.305
+Insertion, allocation, copying, moving, hashing, comparison, and element construction can fail depending on the operation and the types involved.
+
+3
+00:00:10.305 --> 00:00:14.665
+Secure use includes preserving invariants when those operations do not complete.
+
+4
+00:00:14.665 --> 00:00:18.233
+Prepare work before committing visible state when consistency matters.
+
+5
+00:00:18.233 --> 00:00:25.367
+Build temporary containers, validate new data, and then swap or move into place through a clear commit point.
+
+6
+00:00:25.367 --> 00:00:28.935
+This pattern helps preserve existing state if preparation fails.
+
+7
+00:00:28.935 --> 00:00:31.313
+Shared mutable containers still need synchronization.
+
+8
+00:00:31.313 --> 00:00:38.844
+The standard library does not turn an unsynchronized shared vector, map, or string into a safe concurrent data structure.
+
+9
+00:00:38.844 --> 00:00:44.789
+Threads need a clear ownership model, locks, message passing, immutable snapshots, or another documented strategy.
+
+10
+00:00:44.789 --> 00:00:47.167
+Iterator invalidation and concurrency can interact.
+
+11
+00:00:47.167 --> 00:00:54.698
+One thread mutating a container while another holds an iterator or view is a design that needs explicit synchronization.
+
+12
+00:00:54.698 --> 00:01:00.247
+Read-only sharing should still define who owns the lifetime of the underlying data.
+
+13
+00:01:00.247 --> 00:01:01.040
+Tooling helps.
+
+14
+00:01:01.040 --> 00:01:08.175
+Compiler warnings, sanitizers, debug iterator modes where available, static analysis, and library diagnostics can expose invalid access, lifetime
+
+15
+00:01:08.175 --> 00:01:10.156
+mistakes, and boundary issues earlier.
+
+16
+00:01:10.156 --> 00:01:13.724
+These tools are strongest when paired with targeted tests.
+
+17
+00:01:13.724 --> 00:01:20.858
+Tests should cover boundary sizes, empty containers, invalid indexes, mutation during iteration, container growth, erased elements, moved objects,
+
+18
+00:01:20.858 --> 00:01:22.047
+and failure paths.
+
+19
+00:01:22.047 --> 00:01:27.200
+Regression tests should be added when a lifetime or invalidation defect is fixed.
+
+20
+00:01:27.200 --> 00:01:31.164
+Code review should treat standard-library assumptions as security-sensitive.
+
+21
+00:01:31.164 --> 00:01:37.505
+Ask whether any iterator, reference, pointer, view, index, or size assumption can become invalid before use.
+
+22
+00:01:37.505 --> 00:01:40.676
+Also ask whether input can drive unbounded growth.
+
+23
+00:01:40.676 --> 00:01:48.604
+Review workflow should include the specific standard-library operation, not just the container type. push_back, erase, reserve, sort, insert, and
+
+24
+00:01:48.604 --> 00:01:51.775
+rehash each have different lifetime and failure implications.
+
+25
+00:01:51.775 --> 00:01:54.549
+Naming those operations makes review more precise.
+
+26
+00:01:54.549 --> 00:01:58.513
+Concurrency review should also cover ownership of views and iterators.
+
+27
+00:01:58.513 --> 00:02:09.611
+A lock that protects the container during lookup is not enough if a caller stores a view and uses it after the lock is released and another thread
+
+28
+00:02:09.611 --> 00:02:10.800
+mutates the source.

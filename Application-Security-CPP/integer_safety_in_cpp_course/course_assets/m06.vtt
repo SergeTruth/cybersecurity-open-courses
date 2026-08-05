@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.075
+Numeric input from files, protocols, command lines, environment variables, configuration, APIs, databases, and user interfaces should be treated as
+
+2
+00:00:07.075 --> 00:00:09.681
+untrusted until it is parsed and validated.
+
+3
+00:00:09.681 --> 00:00:16.011
+The fact that a field contains digits does not prove that it is meaningful for the program.
+
+4
+00:00:16.011 --> 00:00:20.852
+The value still needs syntax checks, range checks, unit checks, and domain checks.
+
+5
+00:00:20.852 --> 00:00:29.788
+A useful pattern is to parse into a type large enough to evaluate the value safely, then validate before converting into the application type.
+
+6
+00:00:29.788 --> 00:00:39.097
+For example, an external field might be parsed into a wider signed type so the code can detect negative values, overly large values, empty fields,
+
+7
+00:00:39.097 --> 00:00:42.448
+malformed text, and unsupported units before narrowing the result.
+
+8
+00:00:42.448 --> 00:00:46.171
+Validation should reject values that do not fit the domain.
+
+9
+00:00:46.171 --> 00:00:53.618
+That includes negative counts, unexpectedly huge limits, numbers with the wrong unit, missing fields, duplicated fields, partially parsed values, and
+
+10
+00:00:53.618 --> 00:00:57.342
+values that are individually valid but inconsistent with related fields.
+
+11
+00:00:57.342 --> 00:01:03.300
+The correct maximum is usually an application rule, not simply the maximum of the C++ type.
+
+12
+00:01:03.300 --> 00:01:05.534
+Separate parsing, validation, conversion, and use.
+
+13
+00:01:05.534 --> 00:01:11.864
+When those steps are mixed together, it becomes harder to see which assumptions have already been checked.
+
+14
+00:01:11.864 --> 00:01:20.800
+A clean sequence makes it easier to test failures, log useful diagnostics, and avoid using a partly validated value in a memory-sensitive calculation.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secret Types, Scope, and Lifecycle",
+  "graphicAlt": "Secret-lifecycle diagram for Secret Types, Scope, and Lifecycle, connecting an opaque provider reference to least-privilege retrieval, bounded in-memory use, protected storage, rotation, revocation, safe telemetry, and incident recovery.",
+  "narration": "Different secrets deserve different handling. Passwords, API keys, access tokens, refresh tokens, private keys, certificates, database connection strings, signing keys, encryption keys, session secrets, and service credentials all carry different risk. A short-lived access token is not the same as a long-lived signing key. A local development credential is not the same as a production database credential. Treating all of them as generic configuration values hides important security decisions.\n\nClassification should answer practical questions. What does this secret allow? Which system owns it? Which application component needs it? Which environment is it valid in? How long should it live? Who can rotate it? What happens if it is suspected to be exposed? A secret with broad privileges and a long lifetime needs stronger storage, tighter access control, and more deliberate monitoring than a narrowly scoped temporary credential.\n\nThe lifecycle matters because secret handling is rarely static. Values are created, delivered, loaded, used, refreshed, rotated, revoked, archived in some systems, and eventually deleted. Planning those steps before an emergency reduces improvisation later. Documentation should connect the secret type to its approved store, delivery path, runtime owner, rotation process, and incident response expectation. That gives developers and operators a shared model rather than leaving every caller to guess.",
+  "narrationPoints": [
+    "Treating all of them as generic configuration values hides important security decisions.",
+    "Passwords, API keys, access tokens, refresh tokens, private keys, certificates, database connection strings, signing keys, encryption keys, session secrets, and service credentials all carry different risk.",
+    "A secret with broad privileges and a long lifetime needs stronger storage, tighter access control, and more deliberate monitoring than a narrowly scoped temporary credential.",
+    "Documentation should connect the secret type to its approved store, delivery path, runtime owner, rotation process, and incident response expectation.",
+    "The lifecycle matters because secret handling is rarely static.",
+    "Values are created, delivered, loaded, used, refreshed, rotated, revoked, archived in some systems, and eventually deleted."
+  ]
+};

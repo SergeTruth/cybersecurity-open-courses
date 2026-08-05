@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Digest Storage, Encoding, and Comparison",
+  "graphicAlt": "Hashing workflow for Digest Storage, Encoding, and Comparison, tracing canonical input through an approved cryptographic provider to versioned digest metadata, bounded verification, and a documented acceptance or migration decision.",
+  "narration": "Digests are binary values, but they are often encoded as hex or base64 for files, configuration, protocols, logs, databases, or user interfaces. Encoding changes representation, not underlying security strength. A digest can be correct as bytes and still fail verification because one system expects uppercase hex, another expects lowercase hex, and a third includes whitespace or separators. Formats need to be explicit.\n\nTruncation must be deliberate and justified by the use case. Accidental truncation can remove security margin or create confusing compatibility behavior. Stored digest formats should include enough context to know the algorithm, output length, and any relevant parameters. This is especially important when systems may need to support older and newer formats during migration. A self-describing format also makes operational audits and future upgrades less error-prone.\n\nComparison deserves attention. Validate length and encoding before comparing values, and fail safely when the format is invalid. For sensitive comparisons, use approved timing-safe comparison functions where appropriate instead of ordinary string comparisons that may exit early. Not every digest comparison has the same sensitivity, but review should make the choice intentional. Digest handling is part of the security boundary because storage, parsing, and comparison determine what the program actually trusts. Clear errors for malformed digests are useful, but they should not reveal secret material or encourage fallback to a weaker format.",
+  "narrationPoints": [
+    "Digests are binary values, but they are often encoded as hex or base64 for files, configuration, protocols, logs, databases, or user interfaces.",
+    "Stored digest formats should include enough context to know the algorithm, output length, and any relevant parameters.",
+    "Validate length and encoding before comparing values, and fail safely when the format is invalid.",
+    "Digest handling is part of the security boundary because storage, parsing, and comparison determine what the program actually trusts.",
+    "Not every digest comparison has the same sensitivity, but review should make the choice intentional.",
+    "For sensitive comparisons, use approved timing-safe comparison functions where appropriate instead of ordinary string comparisons that may exit early."
+  ]
+};

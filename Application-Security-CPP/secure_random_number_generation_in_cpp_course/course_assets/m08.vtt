@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.551
+Secure randomness and repeatable tests pull in different directions.
+
+2
+00:00:03.551 --> 00:00:07.497
+Tests often need deterministic behavior so failures can be reproduced.
+
+3
+00:00:07.497 --> 00:00:09.470
+Production security values need unpredictability.
+
+4
+00:00:09.470 --> 00:00:15.389
+A good design separates the random source interface from the code that consumes random values.
+
+5
+00:00:15.389 --> 00:00:24.465
+The consuming code can be tested with a deterministic source in a controlled test context, while production wiring uses the approved CSPRNG source
+
+6
+00:00:24.465 --> 00:00:26.043
+and rejects weak modes.
+
+7
+00:00:26.043 --> 00:00:28.016
+This separation should be intentional.
+
+8
+00:00:28.016 --> 00:00:34.330
+Test hooks, fixed seeds, debug generators, and deterministic modes must not be reachable accidentally in production.
+
+9
+00:00:34.330 --> 00:00:40.249
+Build configuration, dependency injection, feature flags, and environment-specific wiring should make the difference clear.
+
+10
+00:00:40.249 --> 00:00:48.930
+If a test source is available, name it as test-only and restrict it to test binaries or explicitly controlled test configuration.
+
+11
+00:00:48.930 --> 00:00:54.454
+Avoid designs where a missing production dependency silently causes a fallback to deterministic behavior.
+
+12
+00:00:54.454 --> 00:00:58.795
+Tests should verify both the consumer logic and the production boundary.
+
+13
+00:00:58.795 --> 00:01:06.292
+Consumer tests can check formatting, length, rejection of invalid ranges, collision handling paths, and error propagation using deterministic inputs.
+
+14
+00:01:06.292 --> 00:01:15.368
+Integration or configuration tests can verify that production code uses the approved source and that weak sources are not enabled in release settings.
+
+15
+00:01:15.368 --> 00:01:18.919
+This gives the team reproducibility without weakening operational security.
+
+16
+00:01:18.919 --> 00:01:27.600
+The design goal is not random behavior in every test; it is clear separation between deterministic test evidence and unpredictable production values.

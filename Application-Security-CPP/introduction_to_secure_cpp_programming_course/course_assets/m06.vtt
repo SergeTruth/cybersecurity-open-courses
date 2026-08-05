@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.544
+C++ programs use different error-handling styles.
+
+2
+00:00:02.544 --> 00:00:03.998
+Some rely on exceptions.
+
+3
+00:00:03.998 --> 00:00:10.176
+Some use return values, status objects, expected-like types, error codes, callbacks, or combinations of these patterns.
+
+4
+00:00:10.176 --> 00:00:14.174
+The security question is not which style sounds best in isolation.
+
+5
+00:00:14.174 --> 00:00:19.263
+The question is whether failure leaves the program in a predictable and valid state.
+
+6
+00:00:19.263 --> 00:00:22.534
+RAII can simplify cleanup during exceptions and early returns.
+
+7
+00:00:22.534 --> 00:00:31.983
+If a lock, file, temporary allocation, or handle is owned by an object with a destructor, cleanup does not depend on every error path remembering a
+
+8
+00:00:31.983 --> 00:00:33.073
+manual release call.
+
+9
+00:00:33.073 --> 00:00:37.798
+That makes secure cleanup easier to review and less vulnerable to future edits.
+
+10
+00:00:37.798 --> 00:00:39.615
+Partial initialization should be visible.
+
+11
+00:00:39.615 --> 00:00:44.340
+An object that failed to initialize should not pretend to be fully usable.
+
+12
+00:00:44.340 --> 00:00:52.336
+Constructors, factory functions, status-returning initialization, and invariant checks should make it clear when an object is ready and when it is
+
+13
+00:00:52.336 --> 00:00:52.699
+not.
+
+14
+00:00:52.699 --> 00:00:58.878
+A half-ready object can cause later code to make decisions based on missing or stale state.
+
+15
+00:00:58.878 --> 00:01:04.330
+Error handling should avoid continuing with stale data, partial output, invalid pointers, or untrusted defaults.
+
+16
+00:01:04.330 --> 00:01:10.145
+A failed parse should not leave old values active unless that behavior is deliberate and documented.
+
+17
+00:01:10.145 --> 00:01:13.416
+A failed write should not be logged as success.
+
+18
+00:01:13.416 --> 00:01:17.414
+A failed security check should not silently choose a permissive fallback.
+
+19
+00:01:17.414 --> 00:01:21.411
+Diagnostics should provide useful context without exposing secrets or misleading operators.
+
+20
+00:01:21.411 --> 00:01:26.136
+A good log can identify the operation, component, status category, and recovery path.
+
+21
+00:01:26.136 --> 00:01:32.315
+It should not dump credentials, sensitive data, or internal state that does not belong in operational records.
+
+22
+00:01:32.315 --> 00:01:34.495
+Safe failure is a design property.
+
+23
+00:01:34.495 --> 00:01:40.310
+Decide what each component guarantees after failure, test those paths, and keep cleanup automatic where practical.
+
+24
+00:01:40.310 --> 00:01:49.033
+Review should trace not only the successful path but also the path where input is bad, allocation fails, a dependency is unavailable, or concurrent
+
+25
+00:01:49.033 --> 00:01:49.760
+shutdown begins.

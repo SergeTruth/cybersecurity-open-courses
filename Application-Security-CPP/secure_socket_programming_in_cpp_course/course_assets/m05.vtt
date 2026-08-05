@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.254
+Socket I/O is rarely as simple as one send and one receive.
+
+2
+00:00:04.254 --> 00:00:09.162
+A read can return fewer bytes than requested, even when the connection is still healthy.
+
+3
+00:00:09.162 --> 00:00:12.107
+A write can accept only part of a buffer.
+
+4
+00:00:12.107 --> 00:00:17.343
+Operations can block, time out, be interrupted, fail, or report that the peer closed the connection.
+
+5
+00:00:17.343 --> 00:00:22.251
+Secure code treats each of these outcomes as expected behavior, not as strange edge cases.
+
+6
+00:00:22.251 --> 00:00:24.541
+TCP does not preserve application message boundaries.
+
+7
+00:00:24.541 --> 00:00:33.376
+If a protocol says a message has a header and a body, the application must collect enough bytes for the header, validate the length, then collect the
+
+8
+00:00:33.376 --> 00:00:34.685
+body within defined limits.
+
+9
+00:00:34.685 --> 00:00:41.557
+Using whatever bytes happen to be available as if they were a complete message leads to parsing errors and inconsistent state.
+
+10
+00:00:41.557 --> 00:00:45.156
+The safer design has explicit read states and clear maximum sizes.
+
+11
+00:00:45.156 --> 00:00:46.792
+Writes need the same care.
+
+12
+00:00:46.792 --> 00:00:55.954
+A send operation may write only a prefix of the data, so the code must track what remains and decide whether to continue, wait, time out, or close
+
+13
+00:00:55.954 --> 00:00:56.609
+the connection.
+
+14
+00:00:56.609 --> 00:01:02.826
+If the program uses nonblocking I/O or an event loop, partial progress must be represented in connection state.
+
+15
+00:01:02.826 --> 00:01:08.061
+That state should be bounded so slow or stalled peers cannot grow memory use without limit.
+
+16
+00:01:08.061 --> 00:01:09.043
+Return values matter.
+
+17
+00:01:09.043 --> 00:01:15.587
+Defensive code checks them, handles disconnects cleanly, avoids using incomplete data, and preserves safe state when an operation stops halfway.
+
+18
+00:01:15.587 --> 00:01:21.150
+Buffers should have explicit bounds, and conversions from length fields to allocation sizes should be reviewed carefully.
+
+19
+00:01:21.150 --> 00:01:27.040
+Partial I/O handling is not only about correctness; it is a core part of secure network programming.

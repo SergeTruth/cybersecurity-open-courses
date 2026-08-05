@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: An Integer Safety Roadmap",
+  "graphicAlt": "Integer-safety review map highlighting mixed-sign comparisons, external lengths, allocation arithmetic, narrowing APIs, counters, indexes, and tests at every numeric boundary.",
+  "narration": "Integer safety in C++ is a practical engineering discipline. The roadmap begins with meaning. Know what each numeric value represents, what unit it uses, what range is valid, and what should happen when the value is outside that range. The type should support the domain rather than obscure it.\n\nChoose integer types deliberately. Use fixed-width types when representation matters. Use size_t where object and container sizes require it, but avoid casual mixing with signed values. Treat signedness and range as design decisions that affect portability, review, and failure behavior.\n\nValidate before converting, calculating, allocating, indexing, or copying. External values should be parsed and checked before use. Arithmetic should have preconditions. Size calculations should make units visible and should confirm that the result is representable and acceptable for the application.\n\nUse APIs and code patterns that preserve intent. Clear contracts, domain-specific types, checked arithmetic helpers, explicit conversion functions, and consistent error handling make integer decisions easier to review. They also make invalid assumptions easier to test.\n\nFinally, make integer safety part of normal delivery. Add boundary tests. Enable useful warnings. Run sanitizer and diagnostic builds where they fit. Prioritize reviews in code that affects memory, bounds, permissions, and resource limits. Document remaining assumptions and revisit them as the codebase, compiler, and platform evolve.",
+  "narrationPoints": [
+    "Know what each numeric value represents, what unit it uses, what range is valid, and what should happen when the value is outside that range.",
+    "Treat signedness and range as design decisions that affect portability, review, and failure behavior.",
+    "Use size_t where object and container sizes require it, but avoid casual mixing with signed values.",
+    "Size calculations should make units visible and should confirm that the result is representable and acceptable for the application.",
+    "Clear contracts, domain-specific types, checked arithmetic helpers, explicit conversion functions, and consistent error handling make integer decisions easier to review.",
+    "Prioritize reviews in code that affects memory, bounds, permissions, and resource limits."
+  ]
+};

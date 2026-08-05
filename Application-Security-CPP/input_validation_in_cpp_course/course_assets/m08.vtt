@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.994
+A validation workflow should make accepted and rejected behavior visible.
+
+2
+00:00:03.994 --> 00:00:11.184
+Tests should include ordinary valid inputs, invalid inputs, boundary values, malformed structures, missing fields, duplicate fields, wrong units,
+
+3
+00:00:11.184 --> 00:00:15.178
+large counts, edge indexes, unusual text, and resource-limit cases.
+
+4
+00:00:15.178 --> 00:00:17.175
+Negative tests are especially important.
+
+5
+00:00:17.175 --> 00:00:20.770
+They confirm that invalid input remains outside trusted state.
+
+6
+00:00:20.770 --> 00:00:28.758
+When a validation defect is fixed, add a regression test that describes the intended contract, not just the old symptom.
+
+7
+00:00:28.758 --> 00:00:33.152
+Over time, the test suite becomes executable documentation for the boundary.
+
+8
+00:00:33.152 --> 00:00:38.744
+Defensive fuzzing can help at a high level when applied to parsers and validators.
+
+9
+00:00:38.744 --> 00:00:47.930
+The goal is not spectacle; it is to explore unexpected combinations and confirm that the program fails cleanly, preserves invariants, and does not
+
+10
+00:00:47.930 --> 00:00:49.128
+consume unreasonable resources.
+
+11
+00:00:49.128 --> 00:00:51.525
+Code review should ask consistent questions.
+
+12
+00:00:51.525 --> 00:00:53.123
+Where does input enter?
+
+13
+00:00:53.123 --> 00:00:57.117
+What shape, type, range, encoding, and resource limits are expected?
+
+14
+00:00:57.117 --> 00:00:58.714
+Is parse success checked?
+
+15
+00:00:58.714 --> 00:01:00.312
+Are partial parses rejected?
+
+16
+00:01:00.312 --> 00:01:02.709
+Are raw and trusted values separated?
+
+17
+00:01:02.709 --> 00:01:05.505
+Are numeric conversions and derived sizes reviewed?
+
+18
+00:01:05.505 --> 00:01:08.700
+Tooling helps, but it does not replace design.
+
+19
+00:01:08.700 --> 00:01:14.292
+Compiler warnings, sanitizers, static analysis, and CI checks can identify risky patterns and regressions.
+
+20
+00:01:14.292 --> 00:01:19.884
+They are most valuable when the team has already made the validation contract explicit.
+
+21
+00:01:19.884 --> 00:01:21.082
+Ownership also matters.
+
+22
+00:01:21.082 --> 00:01:28.671
+Each input boundary should have a clear maintainer, documented expectations, and tests that run as part of normal development.
+
+23
+00:01:28.671 --> 00:01:34.662
+Validation quality improves when it is treated as ordinary engineering work instead of emergency cleanup.
+
+24
+00:01:34.662 --> 00:01:42.251
+During review, it helps to trace one accepted input and one rejected input from entry point to final decision.
+
+25
+00:01:42.251 --> 00:01:49.840
+That exercise often reveals missing parse checks, repeated conversions, unclear logging, or trusted values that were never clearly created.

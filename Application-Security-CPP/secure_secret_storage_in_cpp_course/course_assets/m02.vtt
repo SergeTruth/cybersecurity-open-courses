@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.983
+Different secrets deserve different handling.
+
+2
+00:00:01.983 --> 00:00:09.120
+Passwords, API keys, access tokens, refresh tokens, private keys, certificates, database connection strings, signing keys, encryption keys, session
+
+3
+00:00:09.120 --> 00:00:12.293
+secrets, and service credentials all carry different risk.
+
+4
+00:00:12.293 --> 00:00:18.241
+A short-lived access token is not the same as a long-lived signing key.
+
+5
+00:00:18.241 --> 00:00:23.396
+A local development credential is not the same as a production database credential.
+
+6
+00:00:23.396 --> 00:00:28.154
+Treating all of them as generic configuration values hides important security decisions.
+
+7
+00:00:28.154 --> 00:00:30.137
+Classification should answer practical questions.
+
+8
+00:00:30.137 --> 00:00:32.120
+What does this secret allow?
+
+9
+00:00:32.120 --> 00:00:33.706
+Which system owns it?
+
+10
+00:00:33.706 --> 00:00:35.688
+Which application component needs it?
+
+11
+00:00:35.688 --> 00:00:38.068
+Which environment is it valid in?
+
+12
+00:00:38.068 --> 00:00:40.050
+How long should it live?
+
+13
+00:00:40.050 --> 00:00:41.637
+Who can rotate it?
+
+14
+00:00:41.637 --> 00:00:45.205
+What happens if it is suspected to be exposed?
+
+15
+00:00:45.205 --> 00:00:53.929
+A secret with broad privileges and a long lifetime needs stronger storage, tighter access control, and more deliberate monitoring than a narrowly
+
+16
+00:00:53.929 --> 00:00:55.119
+scoped temporary credential.
+
+17
+00:00:55.119 --> 00:00:58.688
+The lifecycle matters because secret handling is rarely static.
+
+18
+00:00:58.688 --> 00:01:05.032
+Values are created, delivered, loaded, used, refreshed, rotated, revoked, archived in some systems, and eventually deleted.
+
+19
+00:01:05.032 --> 00:01:08.601
+Planning those steps before an emergency reduces improvisation later.
+
+20
+00:01:08.601 --> 00:01:16.532
+Documentation should connect the secret type to its approved store, delivery path, runtime owner, rotation process, and incident response expectation.
+
+21
+00:01:16.532 --> 00:01:22.480
+That gives developers and operators a shared model rather than leaving every caller to guess.

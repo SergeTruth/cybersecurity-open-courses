@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safer APIs and Code Patterns",
+  "graphicAlt": "Domain-type diagram wrapping byte counts behind a checked factory and overflow-aware addition so callers cannot mix them freely with unrelated primitive integers.",
+  "narration": "Many integer defects are API design defects. A function parameter named size, length, count, offset, or limit may look clear to the original author, but the next caller may not know the unit, valid range, ownership rule, or failure behavior. The API should make those facts as visible as possible.\n\nAvoid casually mixing counts, bytes, indexes, capacities, offsets, and timeouts. If two values have different units, the code should not make them look interchangeable. Domain-specific wrapper types, clearer names, and small validation functions can help maintain the distinction without making ordinary code hard to read.\n\nChecked arithmetic helpers are useful for operations that influence allocation, indexing, serialization, or resource limits. A helper can centralize the precondition check and return a result that forces the caller to handle failure. This reduces repeated hand-written checks and gives reviewers a familiar pattern to look for.\n\nExplicit failure behavior is safer than silent truncation or ambiguous sentinel values. If a conversion cannot be represented, if a calculation exceeds the allowed range, or if output does not fit, the API should say how callers learn that fact. Return values, exceptions, optional results, status objects, or project-standard error handling can all work when applied consistently.\n\nGood APIs make risky decisions easy to find. Conversions, unit changes, range narrowing, and size calculations should not be hidden in long expressions. When the code shows intent directly, reviewers can focus on whether the rule is correct instead of reverse-engineering the numeric path.",
+  "narrationPoints": [
+    "A function parameter named size, length, count, offset, or limit may look clear to the original author, but the next caller may not know the unit, valid range, ownership rule, or failure behavior.",
+    "If two values have different units, the code should not make them look interchangeable.",
+    "Checked arithmetic helpers are useful for operations that influence allocation, indexing, serialization, or resource limits.",
+    "If a conversion cannot be represented, if a calculation exceeds the allowed range, or if output does not fit, the API should say how callers learn that fact.",
+    "Explicit failure behavior is safer than silent truncation or ambiguous sentinel values.",
+    "Conversions, unit changes, range narrowing, and size calculations should not be hidden in long expressions."
+  ]
+};

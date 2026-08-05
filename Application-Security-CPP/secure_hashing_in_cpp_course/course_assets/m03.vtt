@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.449
+C++ applications should not implement custom cryptographic hash algorithms.
+
+2
+00:00:03.449 --> 00:00:10.348
+Correct cryptography depends on the algorithm design, the implementation, the library configuration, platform behavior, updates, side conditions, and
+
+3
+00:00:10.348 --> 00:00:10.732
+review.
+
+4
+00:00:10.732 --> 00:00:19.547
+A digest function may look simple from the outside, but reproducing a secure and maintainable implementation is not a good use of application
+
+5
+00:00:19.547 --> 00:00:20.313
+engineering time.
+
+6
+00:00:20.313 --> 00:00:25.296
+Use approved cryptographic libraries, platform APIs, or internal wrappers maintained by the organization.
+
+7
+00:00:25.296 --> 00:00:31.045
+Algorithm selection should follow project policy, compliance needs, interoperability requirements, and the specific use case.
+
+8
+00:00:31.045 --> 00:00:40.244
+A file integrity digest, a stored password verifier, and an authenticated message tag should not all be forced through the same helper just because
+
+9
+00:00:40.244 --> 00:00:41.393
+they produce bytes.
+
+10
+00:00:41.393 --> 00:00:45.609
+Good wrappers make the intended construction explicit and reduce accidental misuse.
+
+11
+00:00:45.609 --> 00:00:50.209
+They also give maintainers one place to update defaults when policy changes.
+
+12
+00:00:50.209 --> 00:00:52.508
+Dependency versions and build configuration matter.
+
+13
+00:00:52.508 --> 00:01:00.557
+A correct call site can still inherit risk from an outdated library, disabled provider, unsupported platform mode, or inconsistent encoding choice.
+
+14
+00:01:00.557 --> 00:01:08.223
+Centralized wrappers can help by defining algorithm names, output formats, error handling, migration behavior, and test vectors in one place.
+
+15
+00:01:08.223 --> 00:01:10.905
+The wrapper should stay thin and reviewable.
+
+16
+00:01:10.905 --> 00:01:17.421
+It should guide teams toward approved use, not hide risky decisions behind a vague function named hash.
+
+17
+00:01:17.421 --> 00:01:24.320
+Reviewers should be able to see which construction is being used and why it matches the security goal.

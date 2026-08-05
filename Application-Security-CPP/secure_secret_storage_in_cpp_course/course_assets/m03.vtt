@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.568
+Source code, header files, test data, build scripts, container images, binaries, installers, documentation, and crash reports are poor places to
+
+2
+00:00:07.568 --> 00:00:08.325
+store secrets.
+
+3
+00:00:08.325 --> 00:00:11.730
+Even a private repository is not a secret store.
+
+4
+00:00:11.730 --> 00:00:20.811
+It may be cloned to many machines, backed up, indexed, scanned by tools, mirrored for builds, shared with vendors, or preserved in long-lived
+
+5
+00:00:20.811 --> 00:00:21.190
+artifacts.
+
+6
+00:00:21.190 --> 00:00:27.244
+Once a secret enters that ecosystem, the team often loses precise control over where copies exist.
+
+7
+00:00:27.244 --> 00:00:34.812
+Embedded secrets are especially troublesome in compiled C++ software because they can travel with binaries, packages, firmware images, or installers.
+
+8
+00:00:34.812 --> 00:00:43.893
+Removing the line from the current source file is not enough if the value remains in source history, build logs, debug symbols, test fixtures,
+
+9
+00:00:43.893 --> 00:00:45.785
+release artifacts, or deployment caches.
+
+10
+00:00:45.785 --> 00:00:54.110
+In many cases the correct response includes rotating or revoking the secret, cleaning known artifacts, and reviewing how it entered the workflow.
+
+11
+00:00:54.110 --> 00:00:55.623
+Prevention should be layered.
+
+12
+00:00:55.623 --> 00:01:03.569
+Use secret scanning, code review, pre-commit controls where available, safe example values, and test fixtures that never reuse production credentials.
+
+13
+00:01:03.569 --> 00:01:06.596
+Documentation should show dummy examples, not real tokens.
+
+14
+00:01:06.596 --> 00:01:09.245
+Build systems should avoid printing secret values.
+
+15
+00:01:09.245 --> 00:01:15.678
+Developers should know the approved way to request and inject secrets for local, test, and production environments.
+
+16
+00:01:15.678 --> 00:01:19.840
+A small amount of process saves a large amount of cleanup.

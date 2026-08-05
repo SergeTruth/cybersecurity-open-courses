@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.638
+Writing files safely requires planning for partial failure.
+
+2
+00:00:02.638 --> 00:00:09.894
+A write may fail because permissions changed, storage filled, a process was interrupted, the destination moved, encoding failed, or the system shut
+
+3
+00:00:09.894 --> 00:00:10.553
+down unexpectedly.
+
+4
+00:00:10.553 --> 00:00:17.149
+If the program assumes that a write either fully succeeds or never changes anything, it may leave corrupted state behind.
+
+5
+00:00:17.149 --> 00:00:18.469
+Truncation should be intentional.
+
+6
+00:00:18.469 --> 00:00:26.384
+Opening an existing file in a mode that clears it before new data is safely available can turn a recoverable failure into data loss.
+
+7
+00:00:26.384 --> 00:00:34.958
+For many update workflows, a temporary-write-then-replace pattern is safer at a high level: write the new contents to a separate file, check the
+
+8
+00:00:34.958 --> 00:00:40.565
+result, and then replace the old file using the most appropriate operation for the platform and filesystem.
+
+9
+00:00:40.565 --> 00:00:45.182
+The exact durability and atomicity details vary, so document what the application relies on.
+
+10
+00:00:45.182 --> 00:00:48.810
+Sensitive output needs careful permissions from the moment it is created.
+
+11
+00:00:48.810 --> 00:00:53.427
+It is weaker to create broadly readable data and try to restrict it later.
+
+12
+00:00:53.427 --> 00:00:57.384
+Output paths should still pass the same path policy as input paths.
+
+13
+00:00:57.384 --> 00:01:03.651
+A program should also avoid mixing trusted generated output with caller-controlled filenames unless the policy clearly allows it.
+
+14
+00:01:03.651 --> 00:01:06.289
+Correctness may depend on errors that appear late.
+
+15
+00:01:06.289 --> 00:01:07.938
+Stream writes can buffer data.
+
+16
+00:01:07.938 --> 00:01:12.885
+Flush and close operations can reveal failures after the main write call appeared to succeed.
+
+17
+00:01:12.885 --> 00:01:20.470
+When durable output matters, check the relevant outcomes, report failure safely, and leave the application in a state that can be retried or
+
+18
+00:01:20.470 --> 00:01:20.800
+recovered.

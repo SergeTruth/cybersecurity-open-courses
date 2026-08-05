@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.903
+File contents should be treated as input, even when the file lives in a location the application controls.
+
+2
+00:00:06.903 --> 00:00:14.189
+Files can be stale, malformed, truncated, oversized, partially written, copied from another version, or changed by an administrative process.
+
+3
+00:00:14.189 --> 00:00:19.941
+A trusted path does not automatically make the contents valid for the current program state.
+
+4
+00:00:19.941 --> 00:00:23.776
+Size limits should come before loading whole files into memory.
+
+5
+00:00:23.776 --> 00:00:27.611
+Small configuration files and large data files deserve different strategies.
+
+6
+00:00:27.611 --> 00:00:33.747
+If a file may be large or externally influenced, prefer streaming or chunked processing where practical.
+
+7
+00:00:33.747 --> 00:00:40.266
+When the program does load a complete file, the maximum expected size should be explicit and justified.
+
+8
+00:00:40.266 --> 00:00:42.950
+That protects reliability as much as security.
+
+9
+00:00:42.950 --> 00:00:45.635
+Text and binary files need different assumptions.
+
+10
+00:00:45.635 --> 00:00:50.237
+Text processing should define encoding expectations and how invalid text is handled.
+
+11
+00:00:50.237 --> 00:00:54.839
+Binary processing should define exact structure, versioning, length fields, and numeric boundaries.
+
+12
+00:00:54.839 --> 00:01:02.892
+Parsing should detect incomplete or extra data according to the format contract rather than quietly accepting whatever was convenient to read.
+
+13
+00:01:02.892 --> 00:01:04.809
+A maintainable design separates responsibilities.
+
+14
+00:01:04.809 --> 00:01:08.261
+First read bytes or text from an approved file.
+
+15
+00:01:08.261 --> 00:01:09.411
+Then parse structure.
+
+16
+00:01:09.411 --> 00:01:13.246
+Then validate meaning: ranges, required fields, relationships, and resource limits.
+
+17
+00:01:13.246 --> 00:01:17.081
+Only after those checks should the data enter business logic.
+
+18
+00:01:17.081 --> 00:01:23.600
+That separation makes tests sharper and reviews easier because each layer has a clear question to answer.

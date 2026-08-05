@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.128
+Many secret exposures happen through secondary systems rather than the primary secret store.
+
+2
+00:00:05.128 --> 00:00:13.016
+Logs, exception messages, telemetry, debug output, CI console output, crash dumps, memory dumps, test snapshots, screenshots, and support bundles can
+
+3
+00:00:13.016 --> 00:00:14.594
+all reveal sensitive values.
+
+4
+00:00:14.594 --> 00:00:24.455
+A C++ service may correctly load a secret from a vault and then accidentally print it while formatting a startup error or serializing a configuration
+
+5
+00:00:24.455 --> 00:00:25.638
+object for diagnostics.
+
+6
+00:00:25.638 --> 00:00:31.949
+Error messages should identify missing, invalid, expired, or inaccessible secret configuration without printing the secret itself.
+
+7
+00:00:31.949 --> 00:00:38.655
+Logging frameworks should support redaction, and secret-bearing types should avoid default string conversion that exposes values.
+
+8
+00:00:38.655 --> 00:00:43.388
+Tests should use dummy values, isolated test credentials, or mock secret providers.
+
+9
+00:00:43.388 --> 00:00:51.277
+CI systems should mask sensitive variables and avoid publishing artifacts that contain generated configuration files or runtime dumps with secret
+
+10
+00:00:51.277 --> 00:00:51.671
+material.
+
+11
+00:00:51.671 --> 00:00:55.221
+Incident response should be planned before an exposure occurs.
+
+12
+00:00:55.221 --> 00:01:03.504
+If a secret may have been disclosed, the response usually includes rotation, revocation where applicable, cleanup of affected artifacts, and review
+
+13
+00:01:03.504 --> 00:01:05.871
+of the path that leaked it.
+
+14
+00:01:05.871 --> 00:01:11.787
+The team should ask whether logging rules, tests, review, or deployment policy need to change.
+
+15
+00:01:11.787 --> 00:01:20.070
+The response should also identify owners for follow-up work, because cleanup often spans application code, build systems, artifact storage, and
+
+16
+00:01:20.070 --> 00:01:20.859
+operational runbooks.
+
+17
+00:01:20.859 --> 00:01:25.987
+Treat the incident as a lifecycle failure, not only a one-line bug.
+
+18
+00:01:25.987 --> 00:01:30.720
+A disciplined response prevents the same pattern from recurring in another subsystem.

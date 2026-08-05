@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.785
+Secure multithreaded C++ begins with reducing shared mutable state.
+
+2
+00:00:03.785 --> 00:00:10.935
+Prefer immutable data, ownership transfer, thread confinement, or message passing when those patterns make the design simpler.
+
+3
+00:00:10.935 --> 00:00:14.300
+When state must be shared, protect invariants consistently.
+
+4
+00:00:14.300 --> 00:00:23.553
+Use RAII lock wrappers, keep critical sections focused, document which mutex protects which data, and define lock ordering before nested locks become
+
+5
+00:00:23.553 --> 00:00:23.973
+normal.
+
+6
+00:00:23.973 --> 00:00:26.076
+Treat atomics as specialized tools.
+
+7
+00:00:26.076 --> 00:00:32.805
+They can be excellent for simple coordination, but they do not automatically protect larger object relationships.
+
+8
+00:00:32.805 --> 00:00:37.852
+Prefer the synchronization mechanism that the team can explain, review, and maintain.
+
+9
+00:00:37.852 --> 00:00:40.376
+Own thread lifetime and shutdown behavior.
+
+10
+00:00:40.376 --> 00:00:48.367
+Join threads before referenced state disappears, be cautious with detachment, use cooperative cancellation where practical, and make sure waiting
+
+11
+00:00:48.367 --> 00:00:50.470
+threads are notified during shutdown.
+
+12
+00:00:50.470 --> 00:00:53.835
+Use condition variables with predicates, not timing guesses.
+
+13
+00:00:53.835 --> 00:00:58.882
+Bound queues when resource limits matter, and make producer-consumer behavior explicit.
+
+14
+00:00:58.882 --> 00:01:00.564
+Finally, validate the design.
+
+15
+00:01:00.564 --> 00:01:03.929
+Test shutdown, contention, boundaries, and repeated lifecycle transitions.
+
+16
+00:01:03.929 --> 00:01:11.920
+Use tools such as ThreadSanitizer where available, and review concurrent code as security-sensitive because defects can affect integrity,
+
+17
+00:01:11.920 --> 00:01:14.023
+availability, cleanup, and operational trust.
+
+18
+00:01:14.023 --> 00:01:16.546
+These habits also make maintenance safer.
+
+19
+00:01:16.546 --> 00:01:23.275
+New contributors can extend concurrent code with confidence when ownership, synchronization, and shutdown rules are visible.
+
+20
+00:01:23.275 --> 00:01:26.640
+That is the practical standard for secure concurrency.

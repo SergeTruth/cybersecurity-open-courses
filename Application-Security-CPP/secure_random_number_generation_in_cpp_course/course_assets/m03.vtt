@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.939
+The C++ standard library includes useful random facilities, especially in the <random> header.
+
+2
+00:00:04.939 --> 00:00:07.218
+The library separates engines from distributions.
+
+3
+00:00:07.218 --> 00:00:09.118
+Engines generate sequences of values.
+
+4
+00:00:09.118 --> 00:00:16.336
+Distributions map those values into a shape or range, such as a uniform integer range or a normal distribution.
+
+5
+00:00:16.336 --> 00:00:25.074
+This design is flexible and powerful for many non-security workloads, but it is easy to misunderstand the boundary between useful randomness and
+
+6
+00:00:25.074 --> 00:00:25.834
+security randomness.
+
+7
+00:00:25.834 --> 00:00:28.493
+Most standard engines are deterministic once seeded.
+
+8
+00:00:28.493 --> 00:00:32.672
+That includes common engines used for simulations and general randomized behavior.
+
+9
+00:00:32.672 --> 00:00:37.991
+Determinism is not a defect in those tools; it is part of their design.
+
+10
+00:00:37.991 --> 00:00:45.589
+The limitation is that deterministic engines should not be treated as cryptographic random sources for tokens, keys, secrets, or other
+
+11
+00:00:45.589 --> 00:00:46.729
+security-sensitive values.
+
+12
+00:00:46.729 --> 00:00:55.467
+A distribution can make output fit a requested range, but it does not create entropy and does not make a deterministic engine unpredictable.
+
+13
+00:00:55.467 --> 00:00:57.367
+std::random_device deserves careful treatment.
+
+14
+00:00:57.367 --> 00:01:01.546
+On some implementations it may be backed by a nondeterministic source.
+
+15
+00:01:01.546 --> 00:01:04.205
+On others, behavior and suitability can vary.
+
+16
+00:01:04.205 --> 00:01:12.183
+Portable security-sensitive C++ code should not assume that std::random_device alone is the approved answer for every platform and deployment.
+
+17
+00:01:12.183 --> 00:01:19.781
+Teams should define an approved CSPRNG interface based on operating-system facilities or maintained cryptographic libraries, then use that interface
+
+18
+00:01:19.781 --> 00:01:21.681
+consistently at security call sites.
+
+19
+00:01:21.681 --> 00:01:26.240
+The standard tools remain valuable, but their role should match their guarantees.

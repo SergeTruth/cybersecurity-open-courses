@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Symlinks, Metadata, and Platform Differences",
+  "graphicAlt": "Filesystem object diagram contrasting path text with the opened descriptor, then checking symlink status, file type, ownership, permissions, link count, device boundaries, and platform-specific no-follow behavior.",
+  "narration": "Filesystems are not simple string maps. A path may involve symbolic links, hard links, mount points, junctions, case-insensitive matching, different path separators, inherited permissions, network storage, or metadata that changes over time. A path that looked acceptable during one check may not refer to the same target later.\n\nLinks are especially important for security-sensitive file handling because they separate the path text from the object ultimately accessed. Metadata can help a program reason about a file, but it should be treated as evidence, not absolute truth. File size, owner, timestamps, type, and permissions can change between operations if another actor controls the location. When the distinction matters, use platform APIs that check or open the target in a way that matches the intended guarantee.\n\nPlatform differences deserve explicit design attention. Case sensitivity, reserved names, path length behavior, permission models, rename behavior, sharing rules, and durability guarantees vary. Code that is safe on one filesystem may be incomplete on another. Portable C++ can use standard library abstractions for many tasks, but security-sensitive behavior sometimes requires documented platform-specific handling.\n\nThe safer habit is humility. Document filesystem assumptions. Keep path policy centralized. Avoid pretending that a string comparison captures every target decision. Where the platform provides a more precise operation, use it through a small wrapper with a clear contract. Tests should include the platforms and filesystem behaviors the product actually supports.",
+  "narrationPoints": [
+    "A path that looked acceptable during one check may not refer to the same target later.",
+    "Links are especially important for security-sensitive file handling because they separate the path text from the object ultimately accessed.",
+    "Metadata can help a program reason about a file, but it should be treated as evidence, not absolute truth.",
+    "File size, owner, timestamps, type, and permissions can change between operations if another actor controls the location.",
+    "Case sensitivity, reserved names, path length behavior, permission models, rename behavior, sharing rules, and durability guarantees vary.",
+    "Where the platform provides a more precise operation, use it through a small wrapper with a clear contract."
+  ]
+};

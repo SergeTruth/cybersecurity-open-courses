@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Writing, Updating, and Replacing Files",
+  "graphicAlt": "Atomic replacement timeline showing private staging creation, bounded writing, flush and file synchronization, close, rename over the target, parent-directory synchronization, and distinct pre-commit and durability-uncertain failures.",
+  "narration": "Writing files safely requires planning for partial failure. A write may fail because permissions changed, storage filled, a process was interrupted, the destination moved, encoding failed, or the system shut down unexpectedly. If the program assumes that a write either fully succeeds or never changes anything, it may leave corrupted state behind.\n\nTruncation should be intentional. Opening an existing file in a mode that clears it before new data is safely available can turn a recoverable failure into data loss. For many update workflows, a temporary-write-then-replace pattern is safer at a high level: write the new contents to a separate file, check the result, and then replace the old file using the most appropriate operation for the platform and filesystem. The exact durability and atomicity details vary, so document what the application relies on.\n\nSensitive output needs careful permissions from the moment it is created. It is weaker to create broadly readable data and try to restrict it later. Output paths should still pass the same path policy as input paths. A program should also avoid mixing trusted generated output with caller-controlled filenames unless the policy clearly allows it.\n\nCorrectness may depend on errors that appear late. Stream writes can buffer data. Flush and close operations can reveal failures after the main write call appeared to succeed. When durable output matters, check the relevant outcomes, report failure safely, and leave the application in a state that can be retried or recovered.",
+  "narrationPoints": [
+    "A write may fail because permissions changed, storage filled, a process was interrupted, the destination moved, encoding failed, or the system shut down unexpectedly.",
+    "Opening an existing file in a mode that clears it before new data is safely available can turn a recoverable failure into data loss.",
+    "Output paths should still pass the same path policy as input paths.",
+    "A program should also avoid mixing trusted generated output with caller-controlled filenames unless the policy clearly allows it.",
+    "Flush and close operations can reveal failures after the main write call appeared to succeed.",
+    "When durable output matters, check the relevant outcomes, report failure safely, and leave the application in a state that can be retried or recovered."
+  ]
+};

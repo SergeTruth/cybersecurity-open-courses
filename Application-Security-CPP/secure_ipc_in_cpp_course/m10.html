@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure_ipc_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;D&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;D&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. Why is IPC security-sensitive?</legend>
+            <label><input type="radio" name="q01" value="A" required> IPC connects processes that may differ in trust, privilege, identity, state, and data handling.</label>
+            <label><input type="radio" name="q01" value="B"> Processes on the same host can generally share trust because the operating system contains them.</label>
+            <label><input type="radio" name="q01" value="C"> Serializing a local message also transfers the sender's authority to the receiving process.</label>
+            <label><input type="radio" name="q01" value="D"> Endpoint permissions make application-level message validation a secondary reliability concern.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>2. What should influence IPC mechanism selection?</legend>
+            <label><input type="radio" name="q02" value="A" required> The mechanism with the smallest boundary surface contains the strongest authorization guarantees.</label>
+            <label><input type="radio" name="q02" value="B"> Reliable delivery avoids the need to define message validation and unsuccessful-delivery semantics.</label>
+            <label><input type="radio" name="q02" value="C"> Mechanism selection should consider identity, permissions, validation, reliability, limits, and platform behavior.</label>
+            <label><input type="radio" name="q02" value="D"> Performance measurements can select the process-path mechanism before identity requirements are established.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>3. Why is caller identity important?</legend>
+            <label><input type="radio" name="q03" value="A" required> The local endpoint path identifies a caller strongly enough for operation-level authorization.</label>
+            <label><input type="radio" name="q03" value="B"> A connected on-device process should inherit the server authority exposed by that endpoint.</label>
+            <label><input type="radio" name="q03" value="C"> Authenticating the peer makes validation of its subsequent message fields optional.</label>
+            <label><input type="radio" name="q03" value="D"> The server may need to decide whether a connected process is allowed to perform a requested operation.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>4. What is least privilege in an IPC design?</legend>
+            <label><input type="radio" name="q04" value="A" required> Endpoint membership grants each caller the same commands to simplify policy review.</label>
+            <label><input type="radio" name="q04" value="B"> Expose only the operations and authority each caller needs.</label>
+            <label><input type="radio" name="q04" value="C"> A single process-wide capability is safer over operation-specific authorization state.</label>
+            <label><input type="radio" name="q04" value="D"> Least privilege is satisfied when the message-boundary mechanism blocks remote network connections.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>5. Why should IPC messages include clear contracts?</legend>
+            <label><input type="radio" name="q05" value="A" required> A documented message layout prevents malformed fields from reaching the receiver.</label>
+            <label><input type="radio" name="q05" value="B"> Endpoint permissions establish message type and version after the connection succeeds.</label>
+            <label><input type="radio" name="q05" value="C"> The receiver needs to validate type, version, required fields, sizes, ranges, and supported behavior before trusted use.</label>
+            <label><input type="radio" name="q05" value="D"> Receivers may accept unknown fields so future senders can extend privileged operations.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>6. Which parsing habit is safest for IPC message data?</legend>
+            <label><input type="radio" name="q06" value="A" required> Validate lengths and remaining bytes before reading or allocating.</label>
+            <label><input type="radio" name="q06" value="B"> A receiver may allocate from a declared length before checking it when the sender is local.</label>
+            <label><input type="radio" name="q06" value="C"> Casting received storage into an application structure preserves the sender’s object representation.</label>
+            <label><input type="radio" name="q06" value="D"> Deep parsing should complete before the receiver checks the outer message boundary.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>7. Why are transferred handles or descriptors review-sensitive?</legend>
+            <label><input type="radio" name="q07" value="A" required> Transferred handles are metadata whose authority is retained by the sending process.</label>
+            <label><input type="radio" name="q07" value="B"> Descriptor lifetime ends with the message-boundary message in cases where the receiver retains its result.</label>
+            <label><input type="radio" name="q07" value="C"> The operating system reclaims transferred resources without receiver-side cleanup ownership.</label>
+            <label><input type="radio" name="q07" value="D"> Transferred handles can carry authority over files, memory, processes, devices, or services.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>8. What should IPC failure handling preserve?</legend>
+            <label><input type="radio" name="q08" value="A" required> Disconnect cleanup may leave a partially applied privileged operation for the next request.</label>
+            <label><input type="radio" name="q08" value="B"> Invariants, cleanup guarantees, authorization decisions, and predictable state after disconnects or malformed messages.</label>
+            <label><input type="radio" name="q08" value="C"> Queue growth is primarily a performance issue when messages come from authenticated peers.</label>
+            <label><input type="radio" name="q08" value="D"> Malformed input can be logged and skipped without restoring the affected application invariant.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>9. Which test is useful for IPC security?</legend>
+            <label><input type="radio" name="q09" value="A" required> Completed end-to-end requests adequately exercise the parser when both programs share a repository.</label>
+            <label><input type="radio" name="q09" value="B"> API-focused tests exercise the same identity and resource boundaries as process-path tests.</label>
+            <label><input type="radio" name="q09" value="C"> Throughput testing supplies stronger security review support over malformed sequencing cases.</label>
+            <label><input type="radio" name="q09" value="D"> Malformed, unauthorized, oversized, out-of-order, timeout, and shutdown cases.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>10. Which review question best supports secure IPC?</legend>
+            <label><input type="radio" name="q10" value="A" required> Who can connect, what authority do they receive, how are messages validated, and how are resources and failures bounded?</label>
+            <label><input type="radio" name="q10" value="B"> Membership in the same host process group is sufficient authorization for every exposed IPC operation.</label>
+            <label><input type="radio" name="q10" value="C"> Privileged actions may begin before full validation when rollback support is available.</label>
+            <label><input type="radio" name="q10" value="D"> Transferred handles need no ownership rules when both programs use RAII internally.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

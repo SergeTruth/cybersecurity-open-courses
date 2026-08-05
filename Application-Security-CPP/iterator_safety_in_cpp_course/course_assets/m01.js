@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Iterator Safety Matters",
+  "graphicAlt": "Iterator-safety overview showing range boundaries, invalidation events, borrowed lifetimes, iterator categories, concurrent mutation, and diagnostics surrounding a container traversal.",
+  "narration": "Iterators are one of the main ways C++ connects algorithms to data. They let code walk through vectors, strings, maps, sets, lists, custom containers, and range views with a common vocabulary. That vocabulary is powerful because it separates traversal from the exact container implementation. It also comes with rules that code must respect.\n\nAn iterator is not a permanent permission slip to access an element. It is meaningful only while the range, element, and traversal state remain valid. A container mutation can invalidate it. A temporary range can disappear. A stored iterator can outlive the object it refers to. A loop can accidentally step to the end and then dereference a marker that is not an element.\n\nIterator defects can produce crashes, incorrect results, skipped elements, repeated processing, corrupted application state, and undefined behavior. In security-conscious engineering, those are not minor style problems. They are reliability and correctness risks that can weaken defensive controls, confuse auditing, and make incidents harder to diagnose.\n\nSafe iterator use starts with a preventive mindset. Keep range boundaries clear. Know when mutation changes validity. Treat stored or reused iterators as design decisions, not conveniences. Prefer traversal patterns that are easy to review. Iterator safety is part of normal defensive C++ work because it protects the assumptions that algorithms rely on.\n\nThe goal of this course is not to memorize every corner of the standard library. The practical goal is to recognize the situations where iterator validity is at risk and to build habits that make those risks visible in code, tests, diagnostics, and review.",
+  "narrationPoints": [
+    "Iterators are one of the main ways C++ connects algorithms to data.",
+    "An iterator is not a permanent permission slip to access an element.",
+    "Iterator defects can produce crashes, incorrect results, skipped elements, repeated processing, corrupted application state, and undefined behavior.",
+    "Iterator safety is part of normal defensive C++ work because it protects the assumptions that algorithms rely on.",
+    "Safe iterator use starts with a preventive mindset.",
+    "The practical goal is to recognize the situations where iterator validity is at risk and to build habits that make those risks visible in code, tests, diagnostics, and review."
+  ]
+};

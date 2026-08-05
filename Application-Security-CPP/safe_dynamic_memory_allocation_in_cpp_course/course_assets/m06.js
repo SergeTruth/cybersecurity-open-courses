@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Deallocation, Destruction, and Error Paths",
+  "graphicAlt": "Cleanup flowchart pairing each allocator or external resource with its matching release operation, while RAII owners cover normal return, early validation failure, exception unwinding, and ownership transfer.",
+  "narration": "Cleanup must be correct on every path, not only the happy path. Early returns, exceptions, validation failures, partial construction, and ownership transfer all complicate manual cleanup. A design that depends on remembering a cleanup call in every branch is fragile.\n\nAllocation and deallocation mechanisms must match at a defensive engineering level. Memory and resources should be released using the corresponding mechanism expected by the allocator, library, or resource owner. Mixing mechanisms can violate lifecycle contracts and make review difficult.\n\nAvoid double cleanup and stale ownership assumptions. Flags that claim ownership, comments that describe transfer, and raw pointers that sometimes own and sometimes borrow are all warning signs. The type system should carry as much ownership meaning as practical.\n\nDestructors and RAII wrappers should enforce cleanup discipline. If a wrapper owns a resource, its destructor should release it once. Move behavior should transfer ownership clearly. Copy behavior should be disabled or defined intentionally based on the resource.\n\nRAII reduces fragile manual cleanup logic because cleanup follows object lifetime. Error paths become easier to reason about when local owners release resources automatically and class members clean up in reverse construction order. Reviewers can focus on ownership boundaries rather than every branch.\n\nCleanup review should include ownership transfer points. A function that hands a resource to another owner should not also release it later. A function that borrows a resource should not silently become responsible for cleanup. Clear transfer points prevent error paths from relying on stale assumptions.",
+  "narrationPoints": [
+    "Early returns, exceptions, validation failures, partial construction, and ownership transfer all complicate manual cleanup.",
+    "Memory and resources should be released using the corresponding mechanism expected by the allocator, library, or resource owner.",
+    "The type system should carry as much ownership meaning as practical.",
+    "If a wrapper owns a resource, its destructor should release it once.",
+    "RAII reduces fragile manual cleanup logic because cleanup follows object lifetime.",
+    "A function that hands a resource to another owner should not also release it later."
+  ]
+};

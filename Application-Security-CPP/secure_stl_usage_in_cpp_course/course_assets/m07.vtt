@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.697
+Associative containers can make lookup logic safer and clearer.
+
+2
+00:00:03.697 --> 00:00:12.734
+A map, set, unordered_map, or unordered_set can express that the program is organizing data by key instead of scanning ad hoc structures.
+
+3
+00:00:12.734 --> 00:00:15.610
+That clarity depends on correct key semantics.
+
+4
+00:00:15.610 --> 00:00:18.074
+Ordered containers rely on comparator behavior.
+
+5
+00:00:18.074 --> 00:00:25.879
+At a practical level, the comparator must provide a consistent ordering so the container can maintain its internal structure.
+
+6
+00:00:25.879 --> 00:00:32.452
+If ordering depends on changing external state or inconsistent rules, lookup and insertion behavior becomes unreliable.
+
+7
+00:00:32.452 --> 00:00:35.738
+Unordered containers rely on hash and equality consistency.
+
+8
+00:00:35.738 --> 00:00:39.846
+Values considered equal should behave consistently with the hash policy.
+
+9
+00:00:39.846 --> 00:00:46.007
+If equality and hashing disagree, lookups may fail in surprising ways and review becomes difficult.
+
+10
+00:00:46.007 --> 00:00:49.704
+Externally influenced keys and item counts need resource limits.
+
+11
+00:00:49.704 --> 00:00:55.045
+A service that stores every distinct key it receives can grow without bound.
+
+12
+00:00:55.045 --> 00:01:00.795
+Limits, quotas, expiration, aggregation, or rejection policies may be needed before data is inserted.
+
+13
+00:01:00.795 --> 00:01:04.903
+Reserve behavior, load factors, and rehashing affect resources and invalidation.
+
+14
+00:01:04.903 --> 00:01:10.243
+Reserving space can improve predictability, but it should be based on validated sizes.
+
+15
+00:01:10.243 --> 00:01:13.530
+Rehashing can invalidate iterators and change performance characteristics.
+
+16
+00:01:13.530 --> 00:01:16.405
+Key design should also minimize sensitive data.
+
+17
+00:01:16.405 --> 00:01:21.745
+Storing raw external identifiers as keys may create privacy, retention, or logging concerns.
+
+18
+00:01:21.745 --> 00:01:27.496
+A safer internal key representation can make lookup behavior clearer while reducing unnecessary exposure.
+
+19
+00:01:27.496 --> 00:01:30.372
+Review lookup structures for correctness and pressure.
+
+20
+00:01:30.372 --> 00:01:40.230
+Ask what can create entries, how many entries are allowed, when entries are removed, whether key comparison is stable, and how the container behaves
+
+21
+00:01:40.230 --> 00:01:41.873
+under expected production load.
+
+22
+00:01:41.873 --> 00:01:45.981
+Do not let convenience turn associative containers into unbounded registries.
+
+23
+00:01:45.981 --> 00:01:53.786
+If entries represent sessions, requests, files, users, or external records, define expiration, eviction, ownership, and monitoring rules that match
+
+24
+00:01:53.786 --> 00:01:55.840
+the system's reliability goals.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Untrusted Input and Log Integrity",
+  "graphicAlt": "Log-integrity comparison showing attacker text with newlines and control bytes encoded into one field, preventing forged records, terminal control sequences, delimiter injection, and uncontrolled metric-cardinality labels.",
+  "narration": "Log data may include untrusted input, and that input should be handled as carefully as any other boundary value. A string that is safe for display in one place may not be safe as a log field, a line-oriented record, or a downstream search value.\n\nNewlines, tabs, terminal control characters, unusual encodings, and very long values can make log records confusing or misleading. Defensive logging encodes or escapes control characters and stores values in a form that preserves the record structure.\n\nBound external values before logging. A username, file name, header value, or parser error can be unexpectedly large. Truncation should be explicit and visible, such as recording that a value was shortened rather than silently losing context.\n\nCanonicalization matters when logs are used for comparison. If the program normalizes case, trims whitespace, or resolves a path-like value before making a decision, logs should make clear whether the raw or canonical form is being recorded.\n\nSeparate raw input from trusted fields. A field named user_message should not be confused with an event name or trusted status. Stable labels should come from code, while external data should be bounded, encoded, and stored under clearly named fields.\n\nThe defensive principle is to treat log output as a data format. It has structure, consumers, and integrity expectations. Preserving that structure helps maintainers trust what they see during troubleshooting and review.\n\nIntegrity also depends on consistent encoding between the application, log library, collector, and viewer. If each layer handles special characters differently, an event that looked safe when written may become confusing when searched or exported.",
+  "narrationPoints": [
+    "Log data may include untrusted input, and that input should be handled as carefully as any other boundary value.",
+    "Defensive logging encodes or escapes control characters and stores values in a form that preserves the record structure.",
+    "A username, file name, header value, or parser error can be unexpectedly large.",
+    "A field named user_message should not be confused with an event name or trusted status.",
+    "Preserving that structure helps maintainers trust what they see during troubleshooting and review.",
+    "Integrity also depends on consistent encoding between the application, log library, collector, and viewer."
+  ]
+};

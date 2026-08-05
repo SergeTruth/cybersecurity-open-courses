@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.252
+Many iterator bugs appear when code modifies a container while traversing it.
+
+2
+00:00:04.252 --> 00:00:10.984
+The code may erase an element and then increment an iterator that no longer refers to a valid position.
+
+3
+00:00:10.984 --> 00:00:14.528
+It may insert into a vector and accidentally cause reallocation.
+
+4
+00:00:14.528 --> 00:00:20.197
+It may remove the first or last element and forget that the loop boundary has changed.
+
+5
+00:00:20.197 --> 00:00:23.032
+Safe mutation logic should make iterator validity visible.
+
+6
+00:00:23.032 --> 00:00:26.929
+Erase operations often return an iterator to the next valid position.
+
+7
+00:00:26.929 --> 00:00:32.599
+When the container contract provides that return value, use it instead of incrementing the invalidated iterator.
+
+8
+00:00:32.599 --> 00:00:38.977
+Keep the loop structure simple enough that a reviewer can tell which iterator is valid after each branch.
+
+9
+00:00:38.977 --> 00:00:41.812
+Sometimes the best solution is two-phase processing.
+
+10
+00:00:41.812 --> 00:00:46.064
+First traverse the container and collect decisions, keys, indexes, or work items.
+
+11
+00:00:46.064 --> 00:00:48.544
+Then apply modifications in a separate step.
+
+12
+00:00:48.544 --> 00:00:54.922
+This can be clearer than mixing traversal, filtering, insertion, erasure, logging, and side effects inside one complicated loop.
+
+13
+00:00:54.922 --> 00:01:02.717
+Tests should cover the cases where mutation code usually breaks: empty containers, one-element containers, removal of the first element, removal of
+
+14
+00:01:02.717 --> 00:01:07.678
+the last element, repeated removal, no-op traversal, and insertion that forces capacity growth.
+
+15
+00:01:07.678 --> 00:01:09.450
+Boundary tests are not busywork.
+
+16
+00:01:09.450 --> 00:01:11.930
+They are how iterator assumptions become visible.
+
+17
+00:01:11.930 --> 00:01:17.599
+In defensive C++ review, ask whether every mutation path leaves the next iterator state well defined.
+
+18
+00:01:17.599 --> 00:01:22.560
+If the answer requires a long explanation, the code may need a clearer structure.

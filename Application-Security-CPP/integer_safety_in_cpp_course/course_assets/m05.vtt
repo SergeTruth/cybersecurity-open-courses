@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.369
+Integer mistakes become especially important when they affect memory and buffer handling.
+
+2
+00:00:04.369 --> 00:00:11.286
+Allocation sizes, copy lengths, indexes, offsets, string lengths, serialized record sizes, and capacity checks all depend on numeric calculations.
+
+3
+00:00:11.286 --> 00:00:21.116
+A wrong number in one of these paths can make later code believe it has more room than it really has, or less data than it needs.
+
+4
+00:00:21.116 --> 00:00:23.665
+The first defense is naming the unit.
+
+5
+00:00:23.665 --> 00:00:30.582
+Byte count, element count, character count, code point count, capacity, current length, remaining length, and serialized length are not
+
+6
+00:00:30.582 --> 00:00:30.946
+interchangeable.
+
+7
+00:00:30.946 --> 00:00:35.679
+A calculation that is correct for one unit may be incorrect for another.
+
+8
+00:00:35.679 --> 00:00:41.141
+Code should make unit changes explicit instead of relying on nearby comments or caller memory.
+
+9
+00:00:41.141 --> 00:00:44.781
+Multiplication is a frequent source of mistakes in size calculation.
+
+10
+00:00:44.781 --> 00:00:50.242
+A request for count times element size can exceed the representable range before allocation begins.
+
+11
+00:00:50.242 --> 00:00:56.432
+If the wrapped or truncated value is used, the program may allocate a smaller object than intended.
+
+12
+00:00:56.432 --> 00:01:00.801
+The calculation must be checked before the result controls memory-sensitive behavior.
+
+13
+00:01:00.801 --> 00:01:03.349
+Defensive maximums are part of size safety.
+
+14
+00:01:03.349 --> 00:01:11.723
+Even if a value fits in the machine type, it may be too large for the application, service, tenant, device, or file format.
+
+15
+00:01:11.723 --> 00:01:15.364
+Reasonable caps help protect reliability and make error handling predictable.
+
+16
+00:01:15.364 --> 00:01:19.004
+They also give reviewers a concrete policy to compare against.
+
+17
+00:01:19.004 --> 00:01:24.830
+Before allocation, copying, formatting, indexing, parsing, or serialization, verify the size math and the domain rule.
+
+18
+00:01:24.830 --> 00:01:33.567
+The code should be able to answer what the value represents, what maximum is acceptable, whether any multiplication or addition was checked, and what
+
+19
+00:01:33.567 --> 00:01:36.480
+happens if the requested operation is too large.

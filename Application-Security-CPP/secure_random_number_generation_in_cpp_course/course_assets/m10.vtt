@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.812
+A secure RNG roadmap begins by identifying which values are security-sensitive.
+
+2
+00:00:04.812 --> 00:00:13.635
+Tokens, keys, nonces, IVs, salts, challenges, and identifiers can have very different requirements, so name the use case before choosing the source.
+
+3
+00:00:13.635 --> 00:00:20.052
+If the value must be unpredictable, use an operating-system CSPRNG or an approved cryptographic library.
+
+4
+00:00:20.052 --> 00:00:26.468
+Do not substitute deterministic engines, fixed seeds, timestamps, counters, or hand-rolled entropy for security randomness.
+
+5
+00:00:26.468 --> 00:00:30.478
+Centralize RNG access behind a small reviewed interface where practical.
+
+6
+00:00:30.478 --> 00:00:37.296
+That interface should define the approved source, error handling, formatting helpers, bounded value behavior, and production restrictions.
+
+7
+00:00:37.296 --> 00:00:45.717
+Keep deterministic sources available only for controlled tests, and design the consuming code so it can be tested without weakening production
+
+8
+00:00:45.717 --> 00:00:46.118
+behavior.
+
+9
+00:00:46.118 --> 00:00:53.738
+When output is mapped into a range or encoded as text, preserve the required entropy and avoid biased transformations.
+
+10
+00:00:53.738 --> 00:00:57.347
+Finally, make secure randomness part of normal engineering governance.
+
+11
+00:00:57.347 --> 00:00:59.352
+Avoid logging sensitive generated values.
+
+12
+00:00:59.352 --> 00:01:03.363
+Review call sites, dependencies, platform behavior, configuration, and test hooks.
+
+13
+00:01:03.363 --> 00:01:06.571
+Document what is approved and what is prohibited.
+
+14
+00:01:06.571 --> 00:01:12.987
+Revisit the design when a product adds a new token, protocol, platform, dependency, or deployment mode.
+
+15
+00:01:12.987 --> 00:01:23.414
+A useful team habit is to treat every new random value as a design decision until its purpose, source, format, lifetime, and review owner are clear.
+
+16
+00:01:23.414 --> 00:01:33.039
+Secure random generation is not a last-minute utility call; it is a design responsibility that protects boundaries users rarely see but deeply depend
+
+17
+00:01:33.039 --> 00:01:33.440
+on.

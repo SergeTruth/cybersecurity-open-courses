@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.383
+Inter-process communication is more than a convenient way to move bytes between local processes.
+
+2
+00:00:05.383 --> 00:00:15.430
+In C++ systems, IPC often connects a desktop user interface to a service, a host process to a helper, a broker to a contained worker, or two services
+
+3
+00:00:15.430 --> 00:00:16.865
+owned by different teams.
+
+4
+00:00:16.865 --> 00:00:20.813
+That communication can cross important trust, privilege, session, and lifecycle boundaries.
+
+5
+00:00:20.813 --> 00:00:22.966
+Local does not automatically mean trusted.
+
+6
+00:00:22.966 --> 00:00:31.578
+A caller may run as a different user, in a different session, with different permissions, inside a container, or at a different integrity level.
+
+7
+00:00:31.578 --> 00:00:36.960
+It may also be outdated, misconfigured, interrupted, or sending messages the receiver did not expect.
+
+8
+00:00:36.960 --> 00:00:43.419
+Treating every local peer as friendly makes the IPC endpoint harder to review and harder to operate safely.
+
+9
+00:00:43.419 --> 00:00:52.390
+Secure IPC design starts by defining who may connect, what each caller is allowed to request, what message shapes are accepted, and how authority is
+
+10
+00:00:52.390 --> 00:00:53.826
+attached to each operation.
+
+11
+00:00:53.826 --> 00:01:01.361
+The server should validate messages before trusted use, check permissions close to the boundary, and avoid assuming that connection success means
+
+12
+00:01:01.361 --> 00:01:02.079
+operation success.
+
+13
+00:01:02.079 --> 00:01:04.591
+Failure behavior is part of the boundary.
+
+14
+00:01:04.591 --> 00:01:09.973
+Peers can disconnect, send partial messages, time out, restart, or fail during a sensitive operation.
+
+15
+00:01:09.973 --> 00:01:17.868
+A mature IPC design preserves invariants, releases resources, records safe diagnostics, and leaves the application in a known state when the peer
+
+16
+00:01:17.868 --> 00:01:19.662
+does not behave as expected.
+
+17
+00:01:19.662 --> 00:01:26.480
+Review should cover both normal message flow and the strange local conditions that appear during upgrades, restarts, and crashes.

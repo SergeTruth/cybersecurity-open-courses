@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.510
+A common C++ range is described by a beginning position and an ending boundary.
+
+2
+00:00:04.510 --> 00:00:07.732
+The beginning points to the first element if one exists.
+
+3
+00:00:07.732 --> 00:00:10.632
+The end is usually a past-the-end iterator.
+
+4
+00:00:10.632 --> 00:00:17.075
+That end value is useful for comparison, but it does not represent an element that code may read or write.
+
+5
+00:00:17.075 --> 00:00:19.008
+This distinction matters in every loop.
+
+6
+00:00:19.008 --> 00:00:23.841
+Code may compare an iterator with the end boundary to decide whether traversal should continue.
+
+7
+00:00:23.841 --> 00:00:29.318
+Code may increment an iterator only when that operation is valid for the range and iterator category.
+
+8
+00:00:29.318 --> 00:00:33.828
+Code may dereference an iterator only when it refers to a real current element.
+
+9
+00:00:33.828 --> 00:00:37.050
+Dereferencing the past-the-end marker is a correctness defect.
+
+10
+00:00:37.050 --> 00:00:40.271
+Iterator pairs should come from the same container or range.
+
+11
+00:00:40.271 --> 00:00:46.070
+A begin iterator from one vector and an end iterator from another do not describe a valid range.
+
+12
+00:00:46.070 --> 00:00:53.158
+The same principle applies to custom ranges and standard algorithms: the boundaries must belong together, and the code should make that relationship
+
+13
+00:00:53.158 --> 00:00:54.447
+clear enough for review.
+
+14
+00:00:54.447 --> 00:01:00.568
+Modern C++ also supports sentinel-based ranges where the end marker may have a different type from the iterator.
+
+15
+00:01:00.568 --> 00:01:04.434
+This is common in range-oriented designs and can support flexible traversal.
+
+16
+00:01:04.434 --> 00:01:06.367
+The safety model remains the same.
+
+17
+00:01:06.367 --> 00:01:11.200
+Know where traversal starts, know how it stops, and know exactly when dereference is valid.
+
+18
+00:01:11.200 --> 00:01:12.811
+Clear boundaries improve defensive engineering.
+
+19
+00:01:12.811 --> 00:01:20.543
+When code names the range, keeps begin and end values near each other, and avoids hidden boundary changes, reviewers can reason about the loop
+
+20
+00:01:20.543 --> 00:01:23.120
+without reconstructing the container state from scattered clues.

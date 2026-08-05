@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Hash Properties and Security Expectations",
+  "graphicAlt": "Hashing workflow for Hash Properties and Security Expectations, tracing canonical input through an approved cryptographic provider to versioned digest metadata, bounded verification, and a documented acceptance or migration decision.",
+  "narration": "A hash function maps input bytes to a fixed-size digest. It is deterministic, which means the same input bytes produce the same digest every time. That determinism is useful for verification, indexing, and comparison, but it also means the exact input boundary matters. If two systems hash different bytes, they are not verifying the same thing, even if the human-readable content looks similar.\n\nCryptographic hash functions are evaluated against several properties. Preimage resistance means it should be difficult to find an input that produces a chosen digest. Second-preimage resistance means it should be difficult to find a different input with the same digest as a known input. Collision resistance means it should be difficult to find any two distinct inputs with the same digest. These properties support different security goals, so the design should name which property matters for the decision being made.\n\nDigest length also matters. Longer digests usually provide a larger security margin for guessing and collision-related concerns, while truncation reduces that margin. Algorithm strength changes over time as research, standards, and operational experience evolve. Deprecated algorithms should not be used for new security designs, and legacy use should have a migration plan. Good engineering documentation says which algorithm is used, why it is appropriate, what digest length is stored, what input representation is covered, and what compatibility rules apply.",
+  "narrationPoints": [
+    "If two systems hash different bytes, they are not verifying the same thing, even if the human-readable content looks similar.",
+    "Second-preimage resistance means it should be difficult to find a different input with the same digest as a known input.",
+    "Preimage resistance means it should be difficult to find an input that produces a chosen digest.",
+    "Deprecated algorithms should not be used for new security designs, and legacy use should have a migration plan.",
+    "Good engineering documentation says which algorithm is used, why it is appropriate, what digest length is stored, what input representation is covered, and what compatibility rules apply.",
+    "Longer digests usually provide a larger security margin for guessing and collision-related concerns, while truncation reduces that margin."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, and Review Practices",
+  "graphicAlt": "File-security test matrix covering traversal, symlinks, hard links, replacement races, permission errors, oversized input, short I/O, disk-full behavior, cleanup failures, and redacted operational logging.",
+  "narration": "File-handling code needs tests that look like real filesystem work, not only ideal success cases. Useful scenarios include missing files, empty files, oversized files, malformed files, truncated inputs, read-only directories, permission failures, unusual encodings, existing destinations, and cleanup after interrupted workflows. Where practical, include platform-specific path behavior in the test plan instead of assuming every filesystem behaves the same.\n\nFailure cases deserve special attention because they often combine several concerns. A parser may reject a file after it has opened a handle. A writer may fail after creating a temporary file. A replacement may succeed but a later cleanup may not. Tests should describe the expected state after failure: which files remain, which outputs are trustworthy, and what the application reports.\n\nLogging should support diagnosis without becoming a disclosure channel. Avoid routine logs that include sensitive paths, full file contents, credentials, private data, or internal directory layout. Prefer structured events with operation categories, safe identifiers, and redacted fields. User-facing messages and operator diagnostics can have different detail levels.\n\nCode review should ask practical questions. Which paths are allowed? Who controls this file? Are contents validated separately from path policy? Are permissions narrow? Can a different process change the target? Is cleanup reliable across early returns and exceptions? Are platform assumptions documented? A review checklist turns file safety from personal intuition into repeatable engineering practice.",
+  "narrationPoints": [
+    "Useful scenarios include missing files, empty files, oversized files, malformed files, truncated inputs, read-only directories, permission failures, unusual encodings, existing destinations, and cleanup after interrupted workflows.",
+    "A parser may reject a file after it has opened a handle.",
+    "Tests should describe the expected state after failure: which files remain, which outputs are trustworthy, and what the application reports.",
+    "Avoid routine logs that include sensitive paths, full file contents, credentials, private data, or internal directory layout.",
+    "Prefer structured events with operation categories, safe identifiers, and redacted fields.",
+    "A review checklist turns file safety from personal intuition into repeatable engineering practice."
+  ]
+};

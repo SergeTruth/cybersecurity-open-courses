@@ -1,0 +1,109 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.112
+Structured logging records events as stable fields rather than only free-form text.
+
+2
+00:00:05.112 --> 00:00:12.191
+A C++ service might record an event name, component, operation, outcome, duration, safe identifier, and bounded error category.
+
+3
+00:00:12.191 --> 00:00:14.944
+Downstream tools can query those fields reliably.
+
+4
+00:00:14.944 --> 00:00:17.303
+Consistent schemas make logs more useful.
+
+5
+00:00:17.303 --> 00:00:25.561
+If one component writes request_id, another writes correlation, and another hides the same value in a message string, investigations become slower
+
+6
+00:00:25.561 --> 00:00:27.134
+and automation becomes brittle.
+
+7
+00:00:27.134 --> 00:00:30.280
+Shared field names and event conventions reduce ambiguity.
+
+8
+00:00:30.280 --> 00:00:33.033
+Message construction should be safe by design.
+
+9
+00:00:33.033 --> 00:00:36.572
+Prefer fixed templates with values passed as separate fields.
+
+10
+00:00:36.572 --> 00:00:45.617
+This keeps trusted labels separate from untrusted or variable data and reduces the chance that formatting rules change the meaning of the event.
+
+11
+00:00:45.617 --> 00:00:49.156
+Do not treat untrusted text as a format string.
+
+12
+00:00:49.156 --> 00:00:53.875
+In C and C++ style formatting APIs, the format string controls interpretation.
+
+13
+00:00:53.875 --> 00:01:00.167
+Keep format templates constant and reviewed, and pass variable values through typed formatting or structured fields.
+
+14
+00:01:00.167 --> 00:01:04.493
+Avoid ad hoc concatenation that mixes trusted labels with raw values.
+
+15
+00:01:04.493 --> 00:01:09.998
+Concatenated strings are harder to parse, harder to redact, and easier to make inconsistent.
+
+16
+00:01:09.998 --> 00:01:13.538
+Structured fields make review and downstream processing more predictable.
+
+17
+00:01:13.538 --> 00:01:17.077
+Structured logging does not automatically make every event safe.
+
+18
+00:01:17.077 --> 00:01:21.010
+Field selection, redaction, bounds, encoding, and access control still matter.
+
+19
+00:01:21.010 --> 00:01:26.515
+The benefit is that the event's shape is easier to inspect and govern.
+
+20
+00:01:26.515 --> 00:01:32.807
+A well-constructed event should be readable by humans, processable by tools, and reviewable by maintainers.
+
+21
+00:01:32.807 --> 00:01:39.099
+That combination supports debugging, monitoring, compliance, and privacy goals without turning logs into uncontrolled text dumps.
+
+22
+00:01:39.099 --> 00:01:42.245
+Type-safe formatting is part of that discipline.
+
+23
+00:01:42.245 --> 00:01:47.750
+Prefer APIs that separate templates from values and make formatting failures visible during development.
+
+24
+00:01:47.750 --> 00:01:53.256
+Avoid designs where a runtime string can accidentally control how other values are interpreted.
+
+25
+00:01:53.256 --> 00:01:56.009
+Structured fields also help reduce unnecessary duplication.
+
+26
+00:01:56.009 --> 00:02:04.660
+Instead of repeating component, outcome, duration, and identifier text inside every message, store them once as fields and let the message summarize
+
+27
+00:02:04.660 --> 00:02:05.840
+the event clearly.

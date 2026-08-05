@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.443
+Every dynamic allocation needs a clear owner.
+
+2
+00:00:02.443 --> 00:00:06.631
+Ownership means responsibility for keeping the object alive and eventually releasing it.
+
+3
+00:00:06.631 --> 00:00:08.725
+Without that responsibility, cleanup becomes accidental.
+
+4
+00:00:08.725 --> 00:00:12.563
+With too many apparent owners, cleanup timing becomes hard to predict.
+
+5
+00:00:12.563 --> 00:00:14.657
+Borrowed access is different from ownership.
+
+6
+00:00:14.657 --> 00:00:22.684
+A function may receive a reference, pointer, span, or view to use temporarily while the caller remains responsible for the object's lifetime.
+
+7
+00:00:22.684 --> 00:00:28.616
+Borrowed access should not imply cleanup responsibility, and it should not be stored beyond the lifetime contract.
+
+8
+00:00:28.616 --> 00:00:31.408
+Ownership transfer should be visible in the API.
+
+9
+00:00:31.408 --> 00:00:36.643
+If a function takes responsibility for an allocated object, the signature should show that transfer.
+
+10
+00:00:36.643 --> 00:00:42.925
+If a function creates an object and hands responsibility to the caller, the return type should express that.
+
+11
+00:00:42.925 --> 00:00:46.414
+Hidden transfer rules are a common source of fragile maintenance.
+
+12
+00:00:46.414 --> 00:00:48.159
+Shared lifetime requires deliberate design.
+
+13
+00:00:48.159 --> 00:00:54.790
+Multiple owners can be appropriate, but shared ownership means the object remains alive until the last owner releases it.
+
+14
+00:00:54.790 --> 00:01:01.770
+Reviewers need to understand who may extend lifetime, what resources are retained, and how cycles or shutdown delays are prevented.
+
+15
+00:01:01.770 --> 00:01:07.702
+Unclear ownership can lead to leaks, stale access, double cleanup attempts, and hard-to-maintain error paths.
+
+16
+00:01:07.702 --> 00:01:15.380
+These problems often come from APIs that mix raw pointers, flags, output parameters, and comments instead of expressing lifecycle directly in types.
+
+17
+00:01:15.380 --> 00:01:25.849
+A useful review habit is to ask who creates the object, who owns it, who may observe it, who may store access to it, who may transfer it, and who
+
+18
+00:01:25.849 --> 00:01:26.547
+destroys it.
+
+19
+00:01:26.547 --> 00:01:32.480
+If the answer is not obvious, the design needs more clarity before the allocation becomes widely used.

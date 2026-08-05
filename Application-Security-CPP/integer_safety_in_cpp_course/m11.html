@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="integer_safety_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;:&quot;c&quot;,&quot;q2&quot;:&quot;b&quot;,&quot;q3&quot;:&quot;a&quot;,&quot;q4&quot;:&quot;d&quot;,&quot;q5&quot;:&quot;d&quot;,&quot;q6&quot;:&quot;a&quot;,&quot;q7&quot;:&quot;c&quot;,&quot;q8&quot;:&quot;b&quot;,&quot;q9&quot;:&quot;d&quot;,&quot;q10&quot;:&quot;a&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. Why does integer safety matter in C++ applications?</legend>
+            <label><input type="radio" name="q1" value="a"> Integer behavior matters only for mathematical applications using floating-point data.</label>
+            <label><input type="radio" name="q1" value="b"> All integer overflow is trapped automatically by conforming C++ implementations.</label>
+            <label><input type="radio" name="q1" value="c"> Integer errors can corrupt bounds, allocation sizes, state, and authorization decisions.</label>
+            <label><input type="radio" name="q1" value="d"> Unsigned types remove every security risk involving counts and memory sizes.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>2. Why is type range a design concern?</legend>
+            <label><input type="radio" name="q2" value="a"> Type range matters only when serializing values to a network protocol.</label>
+            <label><input type="radio" name="q2" value="b"> The chosen type must represent every valid value and reject invalid conversions.</label>
+            <label><input type="radio" name="q2" value="c"> A type is suitable whenever its name includes the word unsigned.</label>
+            <label><input type="radio" name="q2" value="d"> The widest built-in integer type is always the clearest domain representation.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>3. Why should signed and unsigned values not be mixed casually?</legend>
+            <label><input type="radio" name="q3" value="a"> Usual conversions can reinterpret negatives or change comparison and arithmetic behavior.</label>
+            <label><input type="radio" name="q3" value="b"> Unsigned comparison semantics are identical to signed semantics for all inputs.</label>
+            <label><input type="radio" name="q3" value="c"> The compiler always rejects expressions that mix signed and unsigned operands.</label>
+            <label><input type="radio" name="q3" value="d"> Converting a negative signed value to unsigned produces a validation error.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>4. What should happen before a narrowing conversion?</legend>
+            <label><input type="radio" name="q4" value="a"> Perform the cast first, then compare the narrowed value with the original.</label>
+            <label><input type="radio" name="q4" value="b"> Use static_cast because explicit syntax guarantees the value cannot change.</label>
+            <label><input type="radio" name="q4" value="c"> Narrow freely when the destination is unsigned and therefore nonnegative.</label>
+            <label><input type="radio" name="q4" value="d"> Prove the source value is representable and permitted by the destination contract.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>5. Why can unsigned wraparound still be unsafe for program logic?</legend>
+            <label><input type="radio" name="q5" value="a"> Unsigned overflow is detected through a standard exception on every platform.</label>
+            <label><input type="radio" name="q5" value="b"> Wraparound affects cryptographic code but not application control flow.</label>
+            <label><input type="radio" name="q5" value="c"> Defined wraparound means the resulting business value is always acceptable.</label>
+            <label><input type="radio" name="q5" value="d"> Defined modular arithmetic can still violate sizes, quotas, counters, and state machines.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>6. Why are size calculations security-sensitive?</legend>
+            <label><input type="radio" name="q6" value="a"> Overflow can produce an allocation smaller than subsequent indexed writes expect.</label>
+            <label><input type="radio" name="q6" value="b"> A final maximum check detects overflow even after the computed size wrapped.</label>
+            <label><input type="radio" name="q6" value="c"> Allocation APIs independently recover the original count after arithmetic wraps.</label>
+            <label><input type="radio" name="q6" value="d"> Multiplication is safe whenever both operands fit their individual types.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>7. How should external numeric input be handled before use?</legend>
+            <label><input type="radio" name="q7" value="a"> Accept a numeric prefix and ignore trailing bytes supplied by the caller.</label>
+            <label><input type="radio" name="q7" value="b"> Convert directly with atoi because failure and zero are intentionally identical.</label>
+            <label><input type="radio" name="q7" value="c"> Parse the entire representation, enforce range, then convert or calculate safely.</label>
+            <label><input type="radio" name="q7" value="d"> Store text in size_t first so negative input is rejected automatically.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>8. What should an integer-related API contract identify?</legend>
+            <label><input type="radio" name="q8" value="a"> The optimizer level that produced the fastest successful benchmark result.</label>
+            <label><input type="radio" name="q8" value="b"> Units, valid range, failure behavior, and arithmetic or conversion guarantees.</label>
+            <label><input type="radio" name="q8" value="c"> An assurance that callers may ignore the function's reported overflow state.</label>
+            <label><input type="radio" name="q8" value="d"> Only the primitive return type because callers infer every range from it.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>9. Why are compiler warnings and sanitizers useful?</legend>
+            <label><input type="radio" name="q9" value="a"> Sanitizers make unsigned modular arithmetic trap in every optimized release build.</label>
+            <label><input type="radio" name="q9" value="b"> They replace the need for explicit integer preconditions and negative tests.</label>
+            <label><input type="radio" name="q9" value="c"> Warnings prove that every externally supplied value satisfies business policy.</label>
+            <label><input type="radio" name="q9" value="d"> They expose suspicious conversions and runtime arithmetic paths missed in review.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question">
+            <legend>10. Which legacy paths should integer-safety review prioritize?</legend>
+            <label><input type="radio" name="q10" value="a"> Untrusted lengths, narrow APIs, mixed-sign comparisons, indexes, and allocation arithmetic.</label>
+            <label><input type="radio" name="q10" value="b"> Only calculations that already caused a crash in a production environment.</label>
+            <label><input type="radio" name="q10" value="c"> Formatting code first because integer output cannot influence later operations.</label>
+            <label><input type="radio" name="q10" value="d"> Paths using fixed-width types last because those types prevent every overflow.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe Size Calculations for Memory and Buffers",
+  "graphicAlt": "Allocation formula diagram validating header, element count, element width, multiplication, addition, and an eight-megabyte ceiling before reserving memory.",
+  "narration": "Integer mistakes become especially important when they affect memory and buffer handling. Allocation sizes, copy lengths, indexes, offsets, string lengths, serialized record sizes, and capacity checks all depend on numeric calculations. A wrong number in one of these paths can make later code believe it has more room than it really has, or less data than it needs.\n\nThe first defense is naming the unit. Byte count, element count, character count, code point count, capacity, current length, remaining length, and serialized length are not interchangeable. A calculation that is correct for one unit may be incorrect for another. Code should make unit changes explicit instead of relying on nearby comments or caller memory.\n\nMultiplication is a frequent source of mistakes in size calculation. A request for count times element size can exceed the representable range before allocation begins. If the wrapped or truncated value is used, the program may allocate a smaller object than intended. The calculation must be checked before the result controls memory-sensitive behavior.\n\nDefensive maximums are part of size safety. Even if a value fits in the machine type, it may be too large for the application, service, tenant, device, or file format. Reasonable caps help protect reliability and make error handling predictable. They also give reviewers a concrete policy to compare against.\n\nBefore allocation, copying, formatting, indexing, parsing, or serialization, verify the size math and the domain rule. The code should be able to answer what the value represents, what maximum is acceptable, whether any multiplication or addition was checked, and what happens if the requested operation is too large.",
+  "narrationPoints": [
+    "Allocation sizes, copy lengths, indexes, offsets, string lengths, serialized record sizes, and capacity checks all depend on numeric calculations.",
+    "Integer mistakes become especially important when they affect memory and buffer handling.",
+    "Code should make unit changes explicit instead of relying on nearby comments or caller memory.",
+    "A request for count times element size can exceed the representable range before allocation begins.",
+    "Even if a value fits in the machine type, it may be too large for the application, service, tenant, device, or file format.",
+    "Before allocation, copying, formatting, indexing, parsing, or serialization, verify the size math and the domain rule."
+  ]
+};

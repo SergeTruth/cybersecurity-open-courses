@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.222
+Atomics are specialized synchronization tools for simple shared state.
+
+2
+00:00:03.222 --> 00:00:09.309
+They are commonly used for flags, counters, reference-like coordination, state transitions, and low-level concurrency utilities.
+
+3
+00:00:09.309 --> 00:00:13.605
+Used carefully, they can prevent data races on the atomic object itself.
+
+4
+00:00:13.605 --> 00:00:19.333
+The important limitation is that an atomic field does not automatically make a larger object safe.
+
+5
+00:00:19.333 --> 00:00:28.642
+If two fields must change together, or if a container and a status flag form one invariant, making only one field atomic may leave the relationship
+
+6
+00:00:28.642 --> 00:00:29.000
+unprotected.
+
+7
+00:00:29.000 --> 00:00:31.148
+Mutexes protect invariants across multiple operations.
+
+8
+00:00:31.148 --> 00:00:34.728
+Atomics protect individual atomic operations and carefully designed coordination patterns.
+
+9
+00:00:34.728 --> 00:00:43.321
+Choosing between them should be based on the shape of the state, not on an assumption that atomics are always faster or more advanced.
+
+10
+00:00:43.321 --> 00:00:45.827
+Memory ordering should be treated with humility.
+
+11
+00:00:45.827 --> 00:00:50.481
+The default sequentially consistent ordering is generally easier for teams to reason about.
+
+12
+00:00:50.481 --> 00:00:58.000
+Weaker ordering can be correct, but it requires a clear proof, strong justification, careful review, and maintainers who understand the contract.
+
+13
+00:00:58.000 --> 00:01:02.654
+Atomic code is often compact, which can make it deceptively hard to review.
+
+14
+00:01:02.654 --> 00:01:09.098
+A compare-exchange loop, generation counter, or cancellation flag may carry important assumptions about visibility, progress, and ownership.
+
+15
+00:01:09.098 --> 00:01:12.679
+Use higher-level synchronization when it makes the design clearer.
+
+16
+00:01:12.679 --> 00:01:20.555
+A simple mutex and condition variable may be safer than a custom atomic protocol if more engineers can understand and maintain it.
+
+17
+00:01:20.555 --> 00:01:28.432
+A defensible atomic design names what the atomic value represents, what transitions are allowed, what other data it coordinates with, and what
+
+18
+00:01:28.432 --> 00:01:30.580
+memory-ordering assumptions are being made.
+
+19
+00:01:30.580 --> 00:01:34.160
+Without that explanation, atomic code should be considered review-sensitive.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.199
+Allocation safety depends on more than calling the right allocation mechanism.
+
+2
+00:00:04.199 --> 00:00:07.635
+Size values need to be trusted only after validation.
+
+3
+00:00:07.635 --> 00:00:14.507
+Counts, lengths, dimensions, element sizes, and serialized fields should be checked before they influence allocation, indexing, copying, or
+
+4
+00:00:14.507 --> 00:00:14.889
+construction.
+
+5
+00:00:14.889 --> 00:00:16.798
+Size arithmetic deserves explicit review.
+
+6
+00:00:16.798 --> 00:00:25.197
+Multiplication, addition, and unit conversion can exceed the representable range or produce a value that does not match the intended object layout.
+
+7
+00:00:25.197 --> 00:00:29.778
+Check arithmetic before allocating, especially when external input controls counts or lengths.
+
+8
+00:00:29.778 --> 00:00:32.832
+Prefer containers over manually allocated arrays when possible.
+
+9
+00:00:32.832 --> 00:00:36.650
+A container keeps size, capacity, ownership, and cleanup behavior together.
+
+10
+00:00:36.650 --> 00:00:44.667
+That is easier to review than a raw pointer plus a separate length value that must stay correct through every branch.
+
+11
+00:00:44.667 --> 00:00:45.813
+Initialization discipline matters.
+
+12
+00:00:45.813 --> 00:00:51.157
+Allocated storage should become a valid object before it is exposed to other code.
+
+13
+00:00:51.157 --> 00:00:58.411
+Constructors, factories, and RAII wrappers should establish invariants before callbacks, output parameters, global state, or other observers can see
+
+14
+00:00:58.411 --> 00:00:59.175
+the object.
+
+15
+00:00:59.175 --> 00:01:01.465
+Partially constructed resources should not escape.
+
+16
+00:01:01.465 --> 00:01:07.955
+If construction fails halfway through, cleanup should happen inside the owner that knows what has been initialized.
+
+17
+00:01:07.955 --> 00:01:13.300
+Other code should not receive an object that requires guessing which parts are valid.
+
+18
+00:01:13.300 --> 00:01:17.118
+Define failure behavior when allocation or construction cannot safely complete.
+
+19
+00:01:17.118 --> 00:01:26.281
+The policy might be an error return, an exception, a rejected request, a smaller operation, or a fail-closed path according to project standards.
+
+20
+00:01:26.281 --> 00:01:30.480
+What matters is that incomplete construction does not create ambiguous ownership.

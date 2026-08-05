@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.523
+A plain hash can tell you whether bytes match an expected digest, but only when the expected digest is already trusted.
+
+2
+00:00:07.523 --> 00:00:13.613
+It does not prove who created the digest or whether the digest came from an authorized source.
+
+3
+00:00:13.613 --> 00:00:22.568
+For example, a public file fingerprint can help detect accidental corruption or mismatch, but it is not the same as authenticating a message from a
+
+4
+00:00:22.568 --> 00:00:23.285
+trusted party.
+
+5
+00:00:23.285 --> 00:00:29.375
+When origin and integrity both matter, systems usually need an approved message authentication mechanism such as HMAC.
+
+6
+00:00:29.375 --> 00:00:34.032
+HMAC uses a secret key with a hash construction in a standardized way.
+
+7
+00:00:34.032 --> 00:00:38.689
+That secret key must be stored, rotated, and protected like other application secrets.
+
+8
+00:00:38.689 --> 00:00:45.137
+The design question is not whether the code can append a secret to data and hash the result.
+
+9
+00:00:45.137 --> 00:00:50.152
+The design question is whether the security goal requires a vetted keyed authentication construction.
+
+10
+00:00:50.152 --> 00:00:53.018
+Do not invent custom hash-plus-secret formats.
+
+11
+00:00:53.018 --> 00:00:59.466
+Small changes in ordering, encoding, length handling, or key reuse can create avoidable risk and make review difficult.
+
+12
+00:00:59.466 --> 00:01:06.631
+Use approved APIs and document what is authenticated: the exact bytes, the algorithm, the key identity, and the verification rules.
+
+13
+00:01:06.631 --> 00:01:14.154
+Plain hashes still have a valid place for fingerprints and non-authenticated integrity checks, but keyed authentication belongs in a separate,
+
+14
+00:01:14.154 --> 00:01:14.870
+explicit path.
+
+15
+00:01:14.870 --> 00:01:20.960
+That separation helps operators rotate keys, audit access, and distinguish public integrity metadata from trusted authentication decisions.

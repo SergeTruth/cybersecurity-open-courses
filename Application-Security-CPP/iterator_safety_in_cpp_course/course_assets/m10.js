@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: An Iterator Safety Roadmap",
+  "graphicAlt": "Summary map connecting half-open ranges, mutation rules, ownership of views, category constraints, synchronized snapshots, and release-effective iterator regressions.",
+  "narration": "Iterator safety can be summarized as a practical roadmap. Start by keeping ranges clear. A traversal should have an understandable beginning, an understandable boundary, and a clear rule for when dereference is valid. Past-the-end iterators and sentinels are boundaries, not elements.\n\nNext, respect the container's invalidation rules. Mutation can change which iterators, references, and pointers remain usable. Erase, insert, clear, reallocation, and container-specific operations should be reviewed with the actual container contract in mind. Do not carry old assumptions from one container into another.\n\nStructure traversal and mutation so the next valid state is obvious. Use returned iterators after erase operations when appropriate. Consider collect-then-modify patterns when they make the logic safer. Prefer standard algorithms, ranges, and range-based loops when they communicate intent and reduce manual iterator handling.\n\nTreat lifetimes and categories as part of the contract. Views, borrowed ranges, temporary objects, stored iterators, and async work all require ownership reasoning. Generic code should express whether it needs input, forward, bidirectional, random-access, or contiguous behavior.\n\nFinally, verify the assumptions. Use boundary tests, debug iterator modes, sanitizers, stricter diagnostic builds, and code review. Iterator safety is not a special ceremony. It is a normal part of secure C++ engineering: make assumptions visible, keep lifetimes honest, and test the paths where validity changes.",
+  "narrationPoints": [
+    "A traversal should have an understandable beginning, an understandable boundary, and a clear rule for when dereference is valid.",
+    "Erase, insert, clear, reallocation, and container-specific operations should be reviewed with the actual container contract in mind.",
+    "Prefer standard algorithms, ranges, and range-based loops when they communicate intent and reduce manual iterator handling.",
+    "Views, borrowed ranges, temporary objects, stored iterators, and async work all require ownership reasoning.",
+    "Generic code should express whether it needs input, forward, bidirectional, random-access, or contiguous behavior.",
+    "Use boundary tests, debug iterator modes, sanitizers, stricter diagnostic builds, and code review."
+  ]
+};

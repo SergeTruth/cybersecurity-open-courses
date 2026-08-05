@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.211
+Failure paths are where logging is most useful and most risky.
+
+2
+00:00:04.211 --> 00:00:11.484
+Exceptions, error codes, failed parsing, rejected authentication, unexpected states, and cleanup failures all create pressure to record more detail.
+
+3
+00:00:11.484 --> 00:00:13.781
+Safe logging keeps that detail controlled.
+
+4
+00:00:13.781 --> 00:00:16.460
+Separate user-facing errors from internal diagnostics.
+
+5
+00:00:16.460 --> 00:00:21.820
+A user-facing message may say that an operation failed or input was invalid.
+
+6
+00:00:21.820 --> 00:00:28.327
+Internal logs may include component names, safe identifiers, operation context, and error categories that help maintainers investigate.
+
+7
+00:00:28.327 --> 00:00:30.241
+Even internal logs need limits.
+
+8
+00:00:30.241 --> 00:00:37.897
+Do not include raw secrets, full request bodies, sensitive records, or broad object dumps just because an exception was caught.
+
+9
+00:00:37.897 --> 00:00:43.256
+Exception messages from libraries should be reviewed before they are logged in production contexts.
+
+10
+00:00:43.256 --> 00:00:45.553
+Logging should not destabilize cleanup paths.
+
+11
+00:00:45.553 --> 00:00:50.912
+Destructors and stack unwinding paths should avoid operations that can throw or block unpredictably.
+
+12
+00:00:50.912 --> 00:00:58.185
+If cleanup itself can fail, the project should define how that condition is reported without hiding the original failure.
+
+13
+00:00:58.185 --> 00:00:59.334
+Preserve diagnostic usefulness.
+
+14
+00:00:59.334 --> 00:01:05.841
+Record what operation failed, where it happened, a safe correlation value, and enough classification to support triage.
+
+15
+00:01:05.841 --> 00:01:11.201
+Avoid replacing a meaningful original error with a vague logging failure or secondary exception.
+
+16
+00:01:11.201 --> 00:01:14.646
+The boundary question is: who should see this detail?
+
+17
+00:01:14.646 --> 00:01:16.943
+Maintainers may need structured diagnostic context.
+
+18
+00:01:16.943 --> 00:01:20.388
+Users and external callers usually need a safe summary.
+
+19
+00:01:20.388 --> 00:01:23.833
+Good logging design serves both audiences without mixing them.
+
+20
+00:01:23.833 --> 00:01:28.809
+Exception-heavy code should also avoid logging the same failure at every layer.
+
+21
+00:01:28.809 --> 00:01:32.254
+Repeated logging can create noise and duplicate sensitive context.
+
+22
+00:01:32.254 --> 00:01:39.145
+Decide which boundary records the diagnostic event and which layers add structured context or simply propagate the error.
+
+23
+00:01:39.145 --> 00:01:43.738
+When cleanup fails, record the cleanup issue without losing the primary error.
+
+24
+00:01:43.738 --> 00:01:52.160
+A secondary diagnostic should help maintainers understand the full sequence while preserving the original cause and keeping secrets out of the event.

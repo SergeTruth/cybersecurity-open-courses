@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.487
+Text validation is more complex than checking whether a string is nonempty.
+
+2
+00:00:04.487 --> 00:00:13.086
+The program has to know what encoding it expects, how invalid byte sequences are handled, which characters are allowed, what length means, and
+
+3
+00:00:13.086 --> 00:00:16.077
+whether comparisons are case-sensitive or locale-sensitive.
+
+4
+00:00:16.077 --> 00:00:19.068
+Different components can interpret the same text differently.
+
+5
+00:00:19.068 --> 00:00:24.302
+One layer may preserve whitespace, another may trim it, and another may fold case.
+
+6
+00:00:24.302 --> 00:00:29.537
+One component may treat two representations as equivalent while another treats them as different.
+
+7
+00:00:29.537 --> 00:00:33.649
+Validation should happen on the form the program will actually use.
+
+8
+00:00:33.649 --> 00:00:38.510
+Canonicalization means converting input into a consistent representation before comparison or policy decisions.
+
+9
+00:00:38.510 --> 00:00:45.988
+That can include trimming where appropriate, normalizing case for identifiers that are case-insensitive, applying a documented Unicode or locale
+
+10
+00:00:45.988 --> 00:00:50.474
+policy, or resolving a path-like value through a defensive, approved API.
+
+11
+00:00:50.474 --> 00:00:52.344
+Whitespace rules should be explicit.
+
+12
+00:00:52.344 --> 00:01:00.569
+Leading spaces, trailing spaces, tabs, line endings, empty strings, and visually similar values can create confusion if each component makes its own
+
+13
+00:01:00.569 --> 00:01:00.943
+decision.
+
+14
+00:01:00.943 --> 00:01:05.056
+Decide whether whitespace is meaningful, normalized, or rejected for each field.
+
+15
+00:01:05.056 --> 00:01:07.673
+Path-like values should remain boundary-controlled.
+
+16
+00:01:07.673 --> 00:01:13.281
+Treat them as structured inputs with expected base locations, allowed forms, and canonical comparison rules.
+
+17
+00:01:13.281 --> 00:01:21.133
+Keep this defensive: the goal is to ensure the program works with the intended canonical value, not a differently interpreted string.
+
+18
+00:01:21.133 --> 00:01:26.741
+After text is validated and canonicalized, store the accepted representation separately from the raw string.
+
+19
+00:01:26.741 --> 00:01:36.462
+Reviewers should be able to identify which string is raw input, which one is canonical, and which one is safe for the program's specific use.
+
+20
+00:01:36.462 --> 00:01:42.070
+Be especially careful when values pass between libraries, operating system APIs, databases, and user interfaces.
+
+21
+00:01:42.070 --> 00:01:48.800
+Each layer may have its own comparison and normalization rules, so centralizing the accepted text policy reduces disagreement.

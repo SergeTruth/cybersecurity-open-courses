@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.858
+Temporary files are useful for staging output, processing intermediate data, or exchanging information with another component.
+
+2
+00:00:05.858 --> 00:00:10.252
+They also create reliability and security risk when their lifecycle is vague.
+
+3
+00:00:10.252 --> 00:00:18.673
+A temporary file can accumulate after failure, be readable by the wrong principal, collide with another process, or be mistaken for trusted output
+
+4
+00:00:18.673 --> 00:00:19.039
+later.
+
+5
+00:00:19.039 --> 00:00:24.531
+Avoid predictable names in shared writable locations unless a platform API provides safe creation semantics.
+
+6
+00:00:24.531 --> 00:00:30.024
+The fragile pattern is to check whether a name exists and then open it later.
+
+7
+00:00:30.024 --> 00:00:32.953
+Between those two operations, filesystem state can change.
+
+8
+00:00:32.953 --> 00:00:36.614
+Another process may create, remove, replace, or link a target.
+
+9
+00:00:36.614 --> 00:00:46.866
+This time-of-check/time-of-use issue is best handled by using APIs or workflows that create a new file atomically rather than relying on a separate
+
+10
+00:00:46.866 --> 00:00:47.232
+precheck.
+
+11
+00:00:47.232 --> 00:00:49.795
+Temporary files should still live under policy.
+
+12
+00:00:49.795 --> 00:00:57.118
+The application should know which directory is allowed, which permissions are appropriate, and whether the file may contain sensitive data.
+
+13
+00:00:57.118 --> 00:01:02.244
+If temporary contents are sensitive, cleanup and access control matter from creation through deletion.
+
+14
+00:01:02.244 --> 00:01:09.933
+If temporary contents are part of a replacement workflow, the relationship between the temporary file and final destination should be documented.
+
+15
+00:01:09.933 --> 00:01:13.228
+RAII and scoped lifecycle management help keep cleanup reliable.
+
+16
+00:01:13.228 --> 00:01:20.917
+A wrapper can close handles and remove temporary files on error paths, while still allowing intentional preservation for diagnostics when policy
+
+17
+00:01:20.917 --> 00:01:21.283
+permits.
+
+18
+00:01:21.283 --> 00:01:28.240
+The important review question is simple: what happens to the temporary file during success, failure, exception, cancellation, and shutdown?

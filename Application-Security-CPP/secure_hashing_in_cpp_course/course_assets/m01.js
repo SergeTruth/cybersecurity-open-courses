@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Secure Hashing Matters",
+  "graphicAlt": "Hashing workflow for Why Secure Hashing Matters, tracing canonical input through an approved cryptographic provider to versioned digest metadata, bounded verification, and a documented acceptance or migration decision.",
+  "narration": "Hashing appears in many C++ systems, but it does not always mean the same thing. A hash may identify a file, verify that downloaded content has not changed, store a password verifier, support a signature workflow, create a cache key, compare structured data, or protect integrity metadata. Those use cases sound related because they all produce a digest, yet their security expectations can be very different.\n\nThe first defensive habit is to separate ordinary hashing from cryptographic hashing. A fast hash for an unordered container or cache lookup is useful, but it is not designed to protect security decisions. A cryptographic hash can be useful for a file fingerprint, but it is still not the right answer for password storage or keyed message authentication. Hashing is also not encryption. A digest is not meant to be decrypted back into the original input.\n\nSecure hashing starts with purpose. Before choosing an algorithm, a library, an output length, or a storage format, the team should know what the digest is expected to prove. Is it a fingerprint, a password verifier, an authenticated integrity check, a compatibility marker, or a non-security identifier? The answer affects error handling, storage, comparison, migration, and incident response. Once the purpose is clear, C++ code can use approved libraries, documented wrappers, and reviewable formats instead of treating hashing as a generic utility call.",
+  "narrationPoints": [
+    "A hash may identify a file, verify that downloaded content has not changed, store a password verifier, support a signature workflow, create a cache key, compare structured data, or protect integrity metadata.",
+    "A fast hash for an unordered container or cache lookup is useful, but it is not designed to protect security decisions.",
+    "A cryptographic hash can be useful for a file fingerprint, but it is still not the right answer for password storage or keyed message authentication.",
+    "The first defensive habit is to separate ordinary hashing from cryptographic hashing.",
+    "Before choosing an algorithm, a library, an output length, or a storage format, the team should know what the digest is expected to prove.",
+    "Once the purpose is clear, C++ code can use approved libraries, documented wrappers, and reviewable formats instead of treating hashing as a generic utility call."
+  ]
+};

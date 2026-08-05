@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.232
+Network input should not become trusted just because it arrives on an expected port or appears to come from an expected component.
+
+2
+00:00:08.232 --> 00:00:12.348
+A secure design treats the protocol boundary as a formal contract.
+
+3
+00:00:12.348 --> 00:00:20.581
+The contract should define how messages are framed, which commands are allowed, which field types and encodings are valid, how versions are
+
+4
+00:00:20.581 --> 00:00:24.323
+negotiated, what authentication is expected, and how errors are reported.
+
+5
+00:00:24.323 --> 00:00:28.065
+TCP is a byte stream, not an application message API.
+
+6
+00:00:28.065 --> 00:00:34.426
+One receive operation may return part of a message, multiple messages, or no complete message at all.
+
+7
+00:00:34.426 --> 00:00:41.910
+The application or protocol library must know how to identify a complete frame before it parses fields or makes decisions.
+
+8
+00:00:41.910 --> 00:00:49.394
+Datagram-oriented designs such as UDP have different assumptions: each datagram has boundaries, but delivery, ordering, and size behavior require
+
+9
+00:00:49.394 --> 00:00:50.516
+separate design choices.
+
+10
+00:00:50.516 --> 00:00:53.510
+Ambiguous parsing is a security and reliability risk.
+
+11
+00:00:53.510 --> 00:01:00.994
+If two components interpret the same bytes differently, the system can make inconsistent decisions about identity, authorization, size, or state.
+
+12
+00:01:00.994 --> 00:01:07.729
+The safest protocols define length limits, allowed encodings, ordering rules, version behavior, and rejection behavior in one place.
+
+13
+00:01:07.729 --> 00:01:12.968
+That definition should be testable, not just implied by whichever parser was written first.
+
+14
+00:01:12.968 --> 00:01:18.206
+Invalid, incomplete, oversized, unexpected, or out-of-order data should fail safely and consistently.
+
+15
+00:01:18.206 --> 00:01:25.316
+A defensive protocol parser releases temporary resources, avoids partial state commits, and returns clear errors without leaking unnecessary internal
+
+16
+00:01:25.316 --> 00:01:25.690
+detail.
+
+17
+00:01:25.690 --> 00:01:32.800
+The goal is predictable behavior under imperfect network conditions, because imperfect conditions are the normal case for socket programs.

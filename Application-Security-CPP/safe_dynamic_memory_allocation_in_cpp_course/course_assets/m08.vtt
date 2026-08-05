@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.286
+Some C++ systems use custom allocators, memory pools, arenas, or std::pmr to improve performance, locality, determinism, or integration with platform
+
+2
+00:00:08.286 --> 00:00:08.680
+constraints.
+
+3
+00:00:08.680 --> 00:00:15.388
+These tools can be valuable, but they change lifetime assumptions and should be treated as design decisions.
+
+4
+00:00:15.388 --> 00:00:18.939
+Pools and arenas need clear reset and ownership rules.
+
+5
+00:00:18.939 --> 00:00:22.490
+A pool reset may invalidate many objects at once.
+
+6
+00:00:22.490 --> 00:00:25.252
+An arena may make individual deallocation impossible.
+
+7
+00:00:25.252 --> 00:00:29.987
+A monotonic allocation strategy may retain memory until a larger scope ends.
+
+8
+00:00:29.987 --> 00:00:34.327
+Code using these strategies must know which lifetime is being chosen.
+
+9
+00:00:34.327 --> 00:00:38.667
+std::pmr can centralize allocation strategy for standard-library-compatible types.
+
+10
+00:00:38.667 --> 00:00:47.348
+That can make allocation behavior more consistent, but it also means the memory resource's lifetime must outlive the objects using it.
+
+11
+00:00:47.348 --> 00:00:51.293
+The allocation strategy and object lifecycle must be reviewed together.
+
+12
+00:00:51.293 --> 00:00:53.661
+Performance choices should not obscure safety.
+
+13
+00:00:53.661 --> 00:00:59.974
+An optimization that hides ownership, cleanup, or thread-safety rules can make future defects more likely.
+
+14
+00:00:59.974 --> 00:01:04.314
+Specialized allocation should make the intended lifetime clearer, not less visible.
+
+15
+00:01:04.314 --> 00:01:06.681
+Specialized allocators need documentation and review.
+
+16
+00:01:06.681 --> 00:01:16.151
+State who owns the allocator or pool, when memory is released, whether the strategy is thread-safe, what happens on exhaustion, and how diagnostics
+
+17
+00:01:16.151 --> 00:01:16.940
+observe usage.
+
+18
+00:01:16.940 --> 00:01:21.280
+Tests should include realistic lifecycle scenarios, not only fast-path allocation.

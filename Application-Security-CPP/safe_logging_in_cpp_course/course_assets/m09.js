@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Safe Logging Habits",
+  "graphicAlt": "Logging review checklist connecting event design, data minimization, structured encoding, untrusted-input handling, bounded records, concurrency, failure behavior, access control, retention, monitoring, and regression tests.",
+  "narration": "Safe logging in C++ begins with purpose. Log events should support debugging, operations, monitoring, response, or audit needs. If an event has no clear purpose, it is harder to justify the cost and data risk.\n\nMinimize sensitive data. Avoid secrets, tokens, session identifiers, raw request bodies, full object dumps, unnecessary personal data, and excessive implementation details. Redact before data reaches the sink, and treat logs as a possible sensitive data store.\n\nPrefer structured events with stable names and safe fields. Use fixed templates, keep untrusted values separate, encode or escape control characters, and bound long values. Log output should preserve record integrity for humans and tools.\n\nHandle diagnostics safely during failure. Separate user-facing errors from internal logs, keep logging safe during cleanup, and avoid hiding the original failure behind a secondary logging problem. Reliability matters as much as content.\n\nFinally, govern logs after they are written. Protect access, define retention, separate environments, review redaction policy, and treat logging changes as security-sensitive engineering work. Logs are both a safety tool and a data responsibility.\n\nThe lasting habit is intentionality. Before adding a log line, decide who needs it, what decision it supports, what data it contains, how it behaves under load, and how long the resulting record should live.",
+  "narrationPoints": [
+    "Log events should support debugging, operations, monitoring, response, or audit needs.",
+    "Avoid secrets, tokens, session identifiers, raw request bodies, full object dumps, unnecessary personal data, and excessive implementation details.",
+    "Use fixed templates, keep untrusted values separate, encode or escape control characters, and bound long values.",
+    "Separate user-facing errors from internal logs, keep logging safe during cleanup, and avoid hiding the original failure behind a secondary logging problem.",
+    "Protect access, define retention, separate environments, review redaction policy, and treat logging changes as security-sensitive engineering work.",
+    "Before adding a log line, decide who needs it, what decision it supports, what data it contains, how it behaves under load, and how long the resulting record should live."
+  ]
+};

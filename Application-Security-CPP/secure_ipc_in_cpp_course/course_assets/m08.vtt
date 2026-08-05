@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.713
+Secure IPC needs validation workflow beyond the happy path.
+
+2
+00:00:03.713 --> 00:00:10.727
+Logging should capture safe operational signals: connection events, peer category, message type, validation failure category, authorization denial,
+
+3
+00:00:10.727 --> 00:00:13.615
+timeout, resource-limit rejection, disconnect, and restart.
+
+4
+00:00:13.615 --> 00:00:21.453
+Logs should avoid secrets, sensitive message bodies, tokens, personal data, and raw data that support teams do not need.
+
+5
+00:00:21.453 --> 00:00:23.929
+Monitoring should make local communication visible.
+
+6
+00:00:23.929 --> 00:00:32.180
+Queue growth, repeated invalid messages, unexpected clients, stuck workers, crash loops, long request duration, and resource-limit rejections can all
+
+7
+00:00:32.180 --> 00:00:34.656
+indicate compatibility problems or operational pressure.
+
+8
+00:00:34.656 --> 00:00:42.082
+The goal is not to collect every byte; it is to know when the IPC boundary is unhealthy.
+
+9
+00:00:42.082 --> 00:00:49.095
+Testing should include permissions, malformed messages, unsupported versions, boundary sizes, partial reads, out-of-order messages, timeouts,
+
+10
+00:00:49.095 --> 00:00:50.746
+cancellation, shutdown, and compatibility.
+
+11
+00:00:50.746 --> 00:00:59.410
+Parser-like IPC boundaries benefit from defensive fuzzing, sanitizers, static analysis, compiler warnings, and CI checks where they fit the codebase.
+
+12
+00:00:59.410 --> 00:01:03.948
+Each fixed parser or lifecycle bug should gain a regression test.
+
+13
+00:01:03.948 --> 00:01:06.011
+Reviews should ask concrete questions.
+
+14
+00:01:06.011 --> 00:01:07.248
+Who can connect?
+
+15
+00:01:07.248 --> 00:01:08.899
+How is identity verified?
+
+16
+00:01:08.899 --> 00:01:10.549
+Which operations are authorized?
+
+17
+00:01:10.549 --> 00:01:12.199
+Where are messages validated?
+
+18
+00:01:12.199 --> 00:01:13.850
+What sizes are bounded?
+
+19
+00:01:13.850 --> 00:01:15.500
+Can handles be transferred?
+
+20
+00:01:15.500 --> 00:01:17.150
+How are locks used?
+
+21
+00:01:17.150 --> 00:01:19.625
+What happens when a peer disappears?
+
+22
+00:01:19.625 --> 00:01:24.989
+The best IPC reviews connect endpoint policy, code structure, tests, and operational signals.
+
+23
+00:01:24.989 --> 00:01:34.890
+This workflow also supports incident response because teams can map a log category back to a contract rule, a permission decision, or a resource
+
+24
+00:01:34.890 --> 00:01:36.541
+limit instead of guessing.
+
+25
+00:01:36.541 --> 00:01:45.617
+Over time, those records clearly show whether the IPC boundary is stable or repeatedly failing in the same category across releases, upgrades,
+
+26
+00:01:45.617 --> 00:01:47.680
+service changes, and platform changes.

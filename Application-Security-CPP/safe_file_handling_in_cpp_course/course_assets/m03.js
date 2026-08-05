@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Opening Files Safely",
+  "graphicAlt": "Descriptor-opening sequence showing validated intent, directory-relative lookup, no-follow and exclusive flags, immediate metadata verification, least-privilege mode, and rejection when the opened object differs from policy.",
+  "narration": "Opening a file is a security-sensitive decision because the open operation chooses what the program is allowed to do. Read, write, append, create, truncate, and exclusive-create modes have different consequences. A safe design uses the narrowest mode that fits the intended operation. Reading a configuration file should not require write access. Appending to a log should not accidentally truncate existing data. Creating a new output should not silently overwrite a file that should have been preserved.\n\nPermissions and access rights matter at the same boundary. Sensitive output should not be created with broad permissions just because the default is convenient. A service account should not need access to directories it never legitimately uses. Least privilege keeps file mistakes smaller and makes review more concrete.\n\nExistence checks followed by later opens can be fragile if another process can modify the target directory. The defensive idea is not to memorize every platform flag in this course, but to recognize the check-then-use assumption. If correctness depends on the file not changing between operations, the code should use an API or workflow that enforces that assumption as closely as the platform allows.\n\nAlways handle open failure deliberately. Failure may be normal: a file is missing, permissions are narrow, a directory is unavailable, or a path policy rejected the request. Good code reports enough context for diagnosis without leaking sensitive paths or internal details. It also documents who may modify the location being opened.",
+  "narrationPoints": [
+    "Opening a file is a security-sensitive decision because the open operation chooses what the program is allowed to do.",
+    "Creating a new output should not silently overwrite a file that should have been preserved.",
+    "A safe design uses the narrowest mode that fits the intended operation.",
+    "Least privilege keeps file mistakes smaller and makes review more concrete.",
+    "If correctness depends on the file not changing between operations, the code should use an API or workflow that enforces that assumption as closely as the platform allows.",
+    "Failure may be normal: a file is missing, permissions are narrow, a directory is unavailable, or a path policy rejected the request."
+  ]
+};

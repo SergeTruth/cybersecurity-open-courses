@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Entropy, Seeding, and Predictability",
+  "graphicAlt": "Random-generation pipeline for Entropy, Seeding, and Predictability, leading from an approved operating-system entropy source through failure checks and unbiased mapping to a typed security artifact with documented size, purpose, and reuse rules.",
+  "narration": "Seeding determines the starting state of many pseudo-random generators. If the seed is predictable, the generated sequence may also be predictable. That is why timestamps, process identifiers, counters, small integers, build numbers, configuration constants, and fixed values are not appropriate security seeds. They may look variable during normal testing, but they often have far less uncertainty than a security-sensitive design requires.\n\nRepeated seeds create another problem. A deterministic generator started from the same seed can produce the same sequence again. In test code, that behavior can be useful. In production security code, it can create repeated identifiers, repeated token patterns, or values that are easier to reason about than the system owner intended. Trying to combine several weak inputs manually rarely fixes the issue. Manual entropy assembly is difficult to evaluate, and future maintenance can quietly remove or weaken assumptions.\n\nSecurity-sensitive systems should rely on trusted entropy sources and CSPRNGs rather than improvising seed material. Error handling matters too. If the required source is unavailable or fails, the program should fail explicitly or follow a documented safe failure path. Silent fallback to a deterministic generator, a fixed seed, or a timestamp seed is a serious design smell. Treat seed handling like security configuration: review it, centralize it where practical, document the approved behavior, and make weak modes visible before they can reach production.",
+  "narrationPoints": [
+    "If the seed is predictable, the generated sequence may also be predictable.",
+    "Manual entropy assembly is difficult to evaluate, and future maintenance can quietly remove or weaken assumptions.",
+    "Treat seed handling like security configuration: review it, centralize it where practical, document the approved behavior, and make weak modes visible before they can reach production.",
+    "Security-sensitive systems should rely on trusted entropy sources and CSPRNGs rather than improvising seed material.",
+    "If the required source is unavailable or fails, the program should fail explicitly or follow a documented safe failure path.",
+    "Silent fallback to a deterministic generator, a fixed seed, or a timestamp seed is a serious design smell."
+  ]
+};

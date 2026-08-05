@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Resource Limits and Allocation Failure",
+  "graphicAlt": "Resource-budget gauge showing per-operation and system ceilings checked before allocation, predictable failure without partial ownership, bounded retries, operator-visible pressure metrics, and rejection of attacker-controlled oversized requests.",
+  "narration": "Safe dynamic allocation also means handling memory pressure and resource limits. External size values from files, protocols, APIs, configuration, command-line arguments, and user input should be treated as untrusted until validated. A number that parses successfully may still be far outside the application's acceptable range.\n\nApply reasonable maximums before allocation. The maximum should come from product requirements, service limits, device capacity, tenant policy, or data format rules, not just from the largest value a type can represent. A value can fit in a size type and still be unreasonable for the system.\n\nDefine behavior for allocation failure and memory pressure. Depending on project policy, the program might return an error, throw, reject the request, degrade gracefully, shed work, or fail closed. The important point is that failure behavior is predictable and does not leave partial ownership behind.\n\nLarge allocations can affect availability and stability even when they do not violate memory safety. They can increase latency, trigger paging, starve other work, or cause cascading failures. Defensive resource limits are part of secure engineering because they preserve predictable operation.\n\nSystems should fail safely when limits are exceeded. Error messages should be useful to operators without exposing sensitive internals. Cleanup should release any partial resources. Monitoring should make repeated allocation pressure visible so teams can tune limits and investigate abnormal workloads.",
+  "narrationPoints": [
+    "Safe dynamic allocation also means handling memory pressure and resource limits.",
+    "The maximum should come from product requirements, service limits, device capacity, tenant policy, or data format rules, not just from the largest value a type can represent.",
+    "Define behavior for allocation failure and memory pressure.",
+    "The important point is that failure behavior is predictable and does not leave partial ownership behind.",
+    "Defensive resource limits are part of secure engineering because they preserve predictable operation.",
+    "Monitoring should make repeated allocation pressure visible so teams can tune limits and investigate abnormal workloads."
+  ]
+};

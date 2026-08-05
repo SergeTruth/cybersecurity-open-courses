@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.388
+Once a secret is loaded, it becomes runtime data.
+
+2
+00:00:03.388 --> 00:00:08.659
+In C++, that means developers should think about copies, conversions, ownership, lifetime, and diagnostics.
+
+3
+00:00:08.659 --> 00:00:13.929
+Ordinary strings and containers are useful, but they are not automatically secure secret containers.
+
+4
+00:00:13.929 --> 00:00:22.588
+A value may be copied during parsing, moved through temporary objects, formatted into an error message, captured in a lambda, retained in a
+
+5
+00:00:22.588 --> 00:00:25.976
+long-lived configuration object, or included in a dump.
+
+6
+00:00:25.976 --> 00:00:29.741
+The safest copy is the one that was never made.
+
+7
+00:00:29.741 --> 00:00:31.624
+Practical handling starts with scope.
+
+8
+00:00:31.624 --> 00:00:41.035
+Load secrets as late as reasonable, keep them close to the component that needs them, avoid broad ownership, and release references as soon as the
+
+9
+00:00:41.035 --> 00:00:42.918
+operation no longer needs them.
+
+10
+00:00:42.918 --> 00:00:47.812
+Avoid debug prints and generic serialization of objects that may contain secret fields.
+
+11
+00:00:47.812 --> 00:00:52.706
+Be careful with conversions between byte buffers, strings, string views, and logging frameworks.
+
+12
+00:00:52.706 --> 00:00:57.224
+A harmless-looking helper can accidentally widen lifetime or create another copy.
+
+13
+00:00:57.224 --> 00:00:59.482
+Memory clearing is a nuanced topic.
+
+14
+00:00:59.482 --> 00:01:06.635
+Compiler optimization, allocator behavior, copies, moves, small-string optimization, and temporary values can make simple clearing less reliable than
+
+15
+00:01:06.635 --> 00:01:07.388
+it appears.
+
+16
+00:01:07.388 --> 00:01:12.659
+Do not overpromise that every byte can always be erased in ordinary application code.
+
+17
+00:01:12.659 --> 00:01:20.188
+Where high assurance is required, use approved secure-memory facilities, platform APIs, or vetted library types designed for that purpose.
+
+18
+00:01:20.188 --> 00:01:27.718
+The baseline for most teams is still valuable: minimize duplication, avoid logging, keep lifetimes short, document expectations, and review code
+
+19
+00:01:27.718 --> 00:01:29.600
+paths that handle sensitive values.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.266
+Generating secure bytes is only part of the task.
+
+2
+00:00:03.266 --> 00:00:10.525
+Applications often need a bounded integer, an alphanumeric token, a URL-safe string, a filename component, or an encoded identifier.
+
+3
+00:00:10.525 --> 00:00:15.605
+The transformation from raw bytes to the final representation must preserve the security requirement.
+
+4
+00:00:15.605 --> 00:00:23.590
+A common mistake is naive modulo mapping, where a larger random value is reduced into a smaller range with the percent operator.
+
+5
+00:00:23.590 --> 00:00:30.848
+If the source range does not divide evenly into the target range, some outputs can become more likely than others.
+
+6
+00:00:30.848 --> 00:00:38.106
+Bias may not matter for every non-security use, but security-sensitive values should avoid avoidable bias and entropy loss.
+
+7
+00:00:38.106 --> 00:00:41.010
+Truncating an encoded string can also be misleading.
+
+8
+00:00:41.010 --> 00:00:49.720
+The number of visible characters is not the same thing as the amount of retained entropy unless the encoding and truncation method are understood.
+
+9
+00:00:49.720 --> 00:00:51.172
+Character sets matter too.
+
+10
+00:00:51.172 --> 00:00:57.704
+Some formats exclude ambiguous characters for usability, while others require a specific alphabet for protocol or storage compatibility.
+
+11
+00:00:57.704 --> 00:01:02.785
+When possible, use approved library functions that already handle bounded values and encodings correctly.
+
+12
+00:01:02.785 --> 00:01:10.043
+When a project owns the formatting layer, reviewers should confirm the target entropy, range mapping approach, character set, length, collision
+
+13
+00:01:10.043 --> 00:01:11.495
+expectations, and storage constraints.
+
+14
+00:01:11.495 --> 00:01:14.035
+The implementation should be boring and centralized.
+
+15
+00:01:14.035 --> 00:01:19.479
+A token generator should not make each call site reinvent encoding, truncation, and range selection.
+
+16
+00:01:19.479 --> 00:01:24.560
+Consistency keeps security properties easier to reason about and makes future audits more effective.

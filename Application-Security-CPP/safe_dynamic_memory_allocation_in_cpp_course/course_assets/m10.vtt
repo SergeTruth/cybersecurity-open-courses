@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.101
+Safe dynamic allocation starts with choosing the simplest ownership model that fits.
+
+2
+00:00:05.101 --> 00:00:06.802
+Prefer values when possible.
+
+3
+00:00:06.802 --> 00:00:09.353
+Prefer standard containers for dynamic sequences.
+
+4
+00:00:09.353 --> 00:00:12.754
+Use RAII to tie cleanup to object lifetime.
+
+5
+00:00:12.754 --> 00:00:19.556
+Use smart pointers when dynamic ownership is necessary and the ownership relationship needs to be explicit.
+
+6
+00:00:19.556 --> 00:00:22.106
+Validate sizes before allocating or constructing.
+
+7
+00:00:22.106 --> 00:00:28.908
+External counts, lengths, dimensions, and element sizes should be checked against domain limits and arithmetic boundaries.
+
+8
+00:00:28.908 --> 00:00:38.261
+Objects should be initialized before they are exposed, and partially constructed resources should remain under the control of the owner that can
+
+9
+00:00:38.261 --> 00:00:39.537
+clean them up.
+
+10
+00:00:39.537 --> 00:00:42.512
+Define cleanup, failure, and resource-limit behavior.
+
+11
+00:00:42.512 --> 00:00:45.913
+Cleanup must work on normal and error paths.
+
+12
+00:00:45.913 --> 00:00:48.464
+Allocation and deallocation mechanisms must match.
+
+13
+00:00:48.464 --> 00:00:51.440
+Resource pressure should produce predictable failure behavior.
+
+14
+00:00:51.440 --> 00:00:56.116
+Large or untrusted requests should meet clear maximums before allocation begins.
+
+15
+00:00:56.116 --> 00:00:57.817
+Document specialized allocation strategies.
+
+16
+00:00:57.817 --> 00:01:07.170
+Custom allocators, pools, arenas, and std::pmr designs can be useful, but they need explicit lifetime, reset, exhaustion, and thread-safety rules.
+
+17
+00:01:07.170 --> 00:01:11.846
+Performance optimization should make lifecycle more intentional, not harder to understand.
+
+18
+00:01:11.846 --> 00:01:14.822
+Finally, test, review, and revisit allocation assumptions.
+
+19
+00:01:14.822 --> 00:01:20.348
+Use sanitizers, diagnostics, static analysis, boundary tests, cleanup tests, and lifecycle-focused reviews.
+
+20
+00:01:20.348 --> 00:01:27.150
+Safe dynamic allocation is not one feature; it is disciplined design across the full object lifecycle.
+
+21
+00:01:27.150 --> 00:01:29.276
+The practical goal is consistency.
+
+22
+00:01:29.276 --> 00:01:38.204
+New code should avoid introducing unclear ownership, and legacy code should move steadily toward types and APIs that express lifecycle directly.
+
+23
+00:01:38.204 --> 00:01:42.880
+Each improvement should make the next review easier than the last.

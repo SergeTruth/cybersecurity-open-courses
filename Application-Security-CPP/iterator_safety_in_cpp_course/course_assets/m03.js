@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Container Invalidation Rules",
+  "graphicAlt": "Vector timeline showing push_back reallocating storage, invalidating an earlier iterator, and code reacquiring the selected job by stable identifier before reading it.",
+  "narration": "Iterator validity depends heavily on the container and the operation being performed. A std::vector or std::string stores elements contiguously. When it grows and needs more capacity, it may reallocate and move elements to new storage. Iterators, references, and pointers that referred to the old storage may no longer be valid.\n\nErase operations are another common source of defects. Removing an element ends that element's lifetime. Depending on the container, iterators at the erased element, and sometimes iterators after it, may be invalidated. Clearing a container invalidates access to its contained elements because those elements are no longer present.\n\nOther containers have different stability properties. Lists are designed so many insert and erase operations preserve iterators to other elements. Associative containers such as maps and sets have their own rules. Deques have rules that differ from both vectors and lists. Custom containers and third-party ranges may add their own contracts.\n\nThe lesson is not to pretend that one invalidation rule applies everywhere. The defensive habit is to check the specific container contract before storing iterators, reusing iterators after mutation, or passing iterators across functions that may change the container. Code review should call out those assumptions explicitly.\n\nA practical pattern is to keep iterator lifetimes short around mutation. If code needs a stable identity, a key, index with validation, or owning handle may communicate the intent more clearly than a long-lived iterator. That decision should be made with the container's actual stability rules in mind.",
+  "narrationPoints": [
+    "Iterator validity depends heavily on the container and the operation being performed.",
+    "Depending on the container, iterators at the erased element, and sometimes iterators after it, may be invalidated.",
+    "Clearing a container invalidates access to its contained elements because those elements are no longer present.",
+    "Lists are designed so many insert and erase operations preserve iterators to other elements.",
+    "The defensive habit is to check the specific container contract before storing iterators, reusing iterators after mutation, or passing iterators across functions that may change the container.",
+    "If code needs a stable identity, a key, index with validation, or owning handle may communicate the intent more clearly than a long-lived iterator."
+  ]
+};

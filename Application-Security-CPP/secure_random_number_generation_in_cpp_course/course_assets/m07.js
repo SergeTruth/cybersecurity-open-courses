@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Range Mapping, Bias, and Formatting",
+  "graphicAlt": "Random-generation pipeline for Range Mapping, Bias, and Formatting, leading from an approved operating-system entropy source through failure checks and unbiased mapping to a typed security artifact with documented size, purpose, and reuse rules.",
+  "narration": "Generating secure bytes is only part of the task. Applications often need a bounded integer, an alphanumeric token, a URL-safe string, a filename component, or an encoded identifier. The transformation from raw bytes to the final representation must preserve the security requirement. A common mistake is naive modulo mapping, where a larger random value is reduced into a smaller range with the percent operator. If the source range does not divide evenly into the target range, some outputs can become more likely than others.\n\nBias may not matter for every non-security use, but security-sensitive values should avoid avoidable bias and entropy loss. Truncating an encoded string can also be misleading. The number of visible characters is not the same thing as the amount of retained entropy unless the encoding and truncation method are understood. Character sets matter too. Some formats exclude ambiguous characters for usability, while others require a specific alphabet for protocol or storage compatibility.\n\nWhen possible, use approved library functions that already handle bounded values and encodings correctly. When a project owns the formatting layer, reviewers should confirm the target entropy, range mapping approach, character set, length, collision expectations, and storage constraints. The implementation should be boring and centralized. A token generator should not make each call site reinvent encoding, truncation, and range selection. Consistency keeps security properties easier to reason about and makes future audits more effective.",
+  "narrationPoints": [
+    "Applications often need a bounded integer, an alphanumeric token, a URL-safe string, a filename component, or an encoded identifier.",
+    "Bias may not matter for every non-security use, but security-sensitive values should avoid avoidable bias and entropy loss.",
+    "When a project owns the formatting layer, reviewers should confirm the target entropy, range mapping approach, character set, length, collision expectations, and storage constraints.",
+    "A token generator should not make each call site reinvent encoding, truncation, and range selection.",
+    "When possible, use approved library functions that already handle bounded values and encodings correctly.",
+    "Consistency keeps security properties easier to reason about and makes future audits more effective."
+  ]
+};

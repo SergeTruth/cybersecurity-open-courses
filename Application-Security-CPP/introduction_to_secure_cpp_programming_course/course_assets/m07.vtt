@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.543
+Concurrency adds risk because multiple threads or asynchronous tasks can observe and modify state at the same time.
+
+2
+00:00:06.543 --> 00:00:14.904
+A design that is clear in single-threaded code may become fragile when callbacks, futures, thread pools, signal paths, or background workers enter
+
+3
+00:00:14.904 --> 00:00:15.631
+the picture.
+
+4
+00:00:15.631 --> 00:00:18.539
+Data races in C++ can create undefined behavior.
+
+5
+00:00:18.539 --> 00:00:25.809
+That means the program result is not merely hard to predict; the language rules no longer provide the normal guarantees.
+
+6
+00:00:25.809 --> 00:00:33.079
+For secure engineering, this matters because a data race near validation state, authorization state, object lifetime, or resource cleanup can
+
+7
+00:00:33.079 --> 00:00:35.624
+undermine assumptions that other code depends on.
+
+8
+00:00:35.624 --> 00:00:39.622
+Shared ownership should be minimized and documented where it is unavoidable.
+
+9
+00:00:39.622 --> 00:00:46.529
+Immutable data, message passing, clear task boundaries, and ownership transfer can reduce the amount of state that needs synchronization.
+
+10
+00:00:46.529 --> 00:00:54.890
+When mutable state is shared, the code should define who can access it, under what lock or atomic rule, and for how long.
+
+11
+00:00:54.890 --> 00:00:57.798
+Synchronization choices should match the data being protected.
+
+12
+00:00:57.798 --> 00:01:02.887
+Locks can protect complex invariants but can also introduce deadlocks if ordering is unclear.
+
+13
+00:01:02.887 --> 00:01:08.340
+Atomics can be appropriate for narrow state but are not a universal replacement for locks.
+
+14
+00:01:08.340 --> 00:01:13.429
+Queues and task systems can isolate ownership but require clear shutdown and backpressure behavior.
+
+15
+00:01:13.429 --> 00:01:18.518
+Object lifetime becomes especially important when work crosses threads, callbacks, futures, or asynchronous APIs.
+
+16
+00:01:18.518 --> 00:01:23.607
+A callback that captures a reference may run after the referenced object is gone.
+
+17
+00:01:23.607 --> 00:01:27.242
+A background task may outlive the object that launched it.
+
+18
+00:01:27.242 --> 00:01:31.241
+Shutdown paths should define cancellation, joining, ownership release, and error reporting.
+
+19
+00:01:31.241 --> 00:01:35.966
+Review should trace shared data, synchronization, ownership transfer, shutdown behavior, and error paths.
+
+20
+00:01:35.966 --> 00:01:39.601
+The goal is not to make every component lock-heavy.
+
+21
+00:01:39.601 --> 00:01:43.600
+The goal is to make shared state intentional, bounded, and testable.

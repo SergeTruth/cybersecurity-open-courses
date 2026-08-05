@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.932
+Standard algorithms can reduce handwritten loop mistakes by expressing intent directly.
+
+2
+00:00:03.932 --> 00:00:12.510
+A call to find_if, all_of, transform, copy_if, sort, or remove_if can be easier to review than a custom loop with several counters and branches.
+
+3
+00:00:12.510 --> 00:00:17.157
+Algorithms are only as safe as the ranges and functions passed to them.
+
+4
+00:00:17.157 --> 00:00:24.663
+Iterator ranges should be valid, should refer to the intended data, and should remain stable for the duration of the algorithm.
+
+5
+00:00:24.663 --> 00:00:28.238
+Mismatched ranges or invalidated iterators break the algorithm's assumptions.
+
+6
+00:00:28.238 --> 00:00:30.382
+Predicates should be clear and controlled.
+
+7
+00:00:30.382 --> 00:00:38.246
+A predicate used for filtering or searching should not unexpectedly mutate unrelated state, invalidate the range, or depend on unstable external data.
+
+8
+00:00:38.246 --> 00:00:42.178
+Hidden side effects make algorithm behavior harder to review and test.
+
+9
+00:00:42.178 --> 00:00:45.395
+Comparators are especially important for sorting and ordered containers.
+
+10
+00:00:45.395 --> 00:00:47.182
+They need consistent ordering behavior.
+
+11
+00:00:47.182 --> 00:00:54.688
+If comparison rules change during use or contradict each other, the resulting order can become unreliable and difficult to reason about.
+
+12
+00:00:54.688 --> 00:00:59.335
+Mutation during algorithms should be intentional and compatible with the algorithm's contract.
+
+13
+00:00:59.335 --> 00:01:07.914
+If the callable changes the same container being traversed, reviewers should treat that as a high-risk design and look for a simpler structure.
+
+14
+00:01:07.914 --> 00:01:10.058
+Prefer readable algorithm use over cleverness.
+
+15
+00:01:10.058 --> 00:01:16.850
+A clear loop may be better than a dense chain of calls that hides lifetime, mutation, or range assumptions.
+
+16
+00:01:16.850 --> 00:01:21.497
+Standard algorithms are tools for clarity, not a contest to eliminate every loop.
+
+17
+00:01:21.497 --> 00:01:27.573
+Tests should include empty ranges, single-element ranges, boundary sizes, duplicate values, and invalid or unusual inputs.
+
+18
+00:01:27.573 --> 00:01:32.220
+Those cases often reveal assumptions that a normal successful run does not exercise.
+
+19
+00:01:32.220 --> 00:01:35.794
+When algorithms operate over multiple ranges, make the relationship explicit.
+
+20
+00:01:35.794 --> 00:01:44.730
+The second range should be at least as long as the operation expects, and that expectation should be validated or represented by a safer abstraction
+
+21
+00:01:44.730 --> 00:01:46.160
+before the algorithm runs.

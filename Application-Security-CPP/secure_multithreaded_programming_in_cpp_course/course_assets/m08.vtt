@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.295
+Multithreaded C++ needs both design review and practical validation.
+
+2
+00:00:03.295 --> 00:00:09.153
+Tools cannot prove every concurrency property, but they can reveal defects that ordinary tests may miss.
+
+3
+00:00:09.153 --> 00:00:13.913
+ThreadSanitizer is useful where available for detecting data races during instrumented test execution.
+
+4
+00:00:13.913 --> 00:00:22.333
+AddressSanitizer can also help with lifetime-adjacent issues that become visible in concurrent code, such as use after object destruction on a path
+
+5
+00:00:22.333 --> 00:00:24.164
+that testing happens to exercise.
+
+6
+00:00:24.164 --> 00:00:29.656
+Static analysis, compiler warnings, debug iterator modes, and code review checklists all add useful coverage.
+
+7
+00:00:29.656 --> 00:00:32.951
+Tests should include deterministic unit tests around synchronization boundaries.
+
+8
+00:00:32.951 --> 00:00:40.639
+Exercise empty queues, full queues, cancellation, shutdown while work is pending, repeated start and stop cycles, and contention on shared state.
+
+9
+00:00:40.639 --> 00:00:45.765
+Stress tests are useful, but they should complement focused tests rather than replace them.
+
+10
+00:00:45.765 --> 00:00:48.694
+Logging in concurrent code must also be reviewed.
+
+11
+00:00:48.694 --> 00:00:57.115
+Log calls should not introduce races, hold locks for long periods, call back into components while locks are held, or expose sensitive data.
+
+12
+00:00:57.115 --> 00:01:01.508
+Logs should contain enough context to reconstruct behavior without overwhelming the system.
+
+13
+00:01:01.508 --> 00:01:03.339
+Review questions should be concrete.
+
+14
+00:01:03.339 --> 00:01:04.803
+What state is shared?
+
+15
+00:01:04.803 --> 00:01:05.902
+What protects it?
+
+16
+00:01:05.902 --> 00:01:07.732
+Which mutex protects which invariant?
+
+17
+00:01:07.732 --> 00:01:09.563
+Can callbacks outlive their targets?
+
+18
+00:01:09.563 --> 00:01:11.760
+Can shutdown race with pending work?
+
+19
+00:01:11.760 --> 00:01:14.323
+Can lock order create a wait cycle?
+
+20
+00:01:14.323 --> 00:01:17.252
+Are atomics coordinating more than they safely describe?
+
+21
+00:01:17.252 --> 00:01:25.672
+CI checks can run sanitizer-enabled builds, targeted concurrency tests, static analysis, and warnings-as-errors for code that is practical to cover
+
+22
+00:01:25.672 --> 00:01:26.405
+that way.
+
+23
+00:01:26.405 --> 00:01:31.164
+The goal is to make race-sensitive code visible during normal engineering workflow.
+
+24
+00:01:31.164 --> 00:01:34.459
+Tools support design judgment; they do not replace it.
+
+25
+00:01:34.459 --> 00:01:42.880
+The best results come from code that has clear ownership and synchronization first, then uses tools to catch mistakes before they reach production.

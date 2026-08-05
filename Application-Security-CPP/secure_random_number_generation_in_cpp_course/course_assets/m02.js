@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Security Randomness vs Ordinary Randomness",
+  "graphicAlt": "Random-generation pipeline for Security Randomness vs Ordinary Randomness, leading from an approved operating-system entropy source through failure checks and unbiased mapping to a typed security artifact with documented size, purpose, and reuse rules.",
+  "narration": "Ordinary pseudo-random generators are useful engineering tools. They support simulations, games, randomized tests, sampling, load balancing, scheduling experiments, and reproducible bug investigations. In those contexts, determinism can be a feature. If a test fails with a particular seed, the team can run the same seed again and reproduce the sequence. If a simulation needs a controlled comparison, a known generator state helps make results repeatable.\n\nSecurity randomness has a different goal. A security value should be difficult to predict, even when an observer knows the algorithm family, understands the application, and has seen other generated values. Repeatability, which is helpful in a test, is dangerous when the value protects a token, key, challenge, or session. A generator that is excellent for simulation can still be the wrong tool for a security boundary because it was never designed to withstand prediction.\n\nA practical question helps keep the decision grounded: does this value need fairness, repeatability, or unpredictability? Fairness may point to a distribution. Repeatability may point to a deterministic test source. Unpredictability points to a cryptographically secure source such as a platform CSPRNG or an approved cryptographic library. API names can be misleading without context. The safe approach is to label the use case first, then select the random source that matches the requirement.",
+  "narrationPoints": [
+    "If a test fails with a particular seed, the team can run the same seed again and reproduce the sequence.",
+    "A security value should be difficult to predict, even when an observer knows the algorithm family, understands the application, and has seen other generated values.",
+    "A generator that is excellent for simulation can still be the wrong tool for a security boundary because it was never designed to withstand prediction.",
+    "Repeatability, which is helpful in a test, is dangerous when the value protects a token, key, challenge, or session.",
+    "The safe approach is to label the use case first, then select the random source that matches the requirement.",
+    "A practical question helps keep the decision grounded: does this value need fairness, repeatability, or unpredictability."
+  ]
+};

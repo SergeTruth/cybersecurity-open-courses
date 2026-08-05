@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.499
+std::string owns its character data and tracks its length.
+
+2
+00:00:03.499 --> 00:00:07.698
+That makes it safer and clearer than many raw character-buffer patterns.
+
+3
+00:00:07.698 --> 00:00:13.646
+But string safety still depends on lifetime, mutation, indexing, encoding assumptions, and the APIs used around it.
+
+4
+00:00:13.646 --> 00:00:17.145
+std::string_view is a non-owning view into character data.
+
+5
+00:00:17.145 --> 00:00:21.344
+It is useful because it avoids unnecessary copies and carries a length.
+
+6
+00:00:21.344 --> 00:00:26.942
+It does not extend the lifetime of the string, buffer, or temporary object it refers to.
+
+7
+00:00:26.942 --> 00:00:30.441
+If the source disappears, the view becomes unsafe to use.
+
+8
+00:00:30.441 --> 00:00:33.940
+std::span provides a non-owning view over contiguous elements.
+
+9
+00:00:33.940 --> 00:00:37.789
+Like string_view, it preserves a length and helps express a range.
+
+10
+00:00:37.789 --> 00:00:41.288
+Also like string_view, it does not own the underlying storage.
+
+11
+00:00:41.288 --> 00:00:47.586
+A span into a vector is only valid while the vector's relevant storage remains valid and unmoved.
+
+12
+00:00:47.586 --> 00:00:49.335
+Length-preserving APIs are valuable.
+
+13
+00:00:49.335 --> 00:00:55.983
+A string_view or span can represent data that contains embedded zero bytes or values that are not null-terminated.
+
+14
+00:00:55.983 --> 00:01:00.882
+Code should not accidentally pass such data to APIs that expect a different representation.
+
+15
+00:01:00.882 --> 00:01:04.381
+Views should usually be short-lived parameters or local variables.
+
+16
+00:01:04.381 --> 00:01:11.029
+Storing them in objects, returning them from factories, or caching them across mutations requires a clear source lifetime guarantee.
+
+17
+00:01:11.029 --> 00:01:13.828
+Views into temporary strings are especially review-sensitive.
+
+18
+00:01:13.828 --> 00:01:15.578
+Source mutation can invalidate views.
+
+19
+00:01:15.578 --> 00:01:22.925
+Appending to a string, resizing a vector, reserving capacity, clearing storage, or moving an owning object can change where data lives.
+
+20
+00:01:22.925 --> 00:01:26.774
+Existing views, pointers, and references may no longer describe valid data.
+
+21
+00:01:26.774 --> 00:01:35.522
+The review question is simple: who owns the data, how long does it live, and can it move or change before the view is used?
+
+22
+00:01:35.522 --> 00:01:41.120
+If those answers are not obvious, prefer an owning type or shorten the view's lifetime.

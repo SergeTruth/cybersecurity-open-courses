@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="safe_dynamic_memory_allocation_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;B&quot;,&quot;q06&quot;:&quot;D&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;C&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;C&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. Why does dynamic memory allocation require ownership discipline?</legend>
+            <label><input type="radio" name="q01" value="A" required> It records enough metadata to choose the eventual cleanup site.</label>
+            <label><input type="radio" name="q01" value="B"> Dynamic allocations need a clear owner for lifetime, transfer and cleanup.</label>
+            <label><input type="radio" name="q01" value="C"> It makes the first borrower responsible for releasing the allocation after use.</label>
+            <label><input type="radio" name="q01" value="D"> It uses the requested byte count to determine which scope owns the object.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>2. Why are values, containers, and RAII preferred before manual allocation?</legend>
+            <label><input type="radio" name="q02" value="A" required> They prevent allocation failure through reservation of the maximum possible size.</label>
+            <label><input type="radio" name="q02" value="B"> Value types conceal lifecycle decisions and remove the need for user review.</label>
+            <label><input type="radio" name="q02" value="C"> Values and containers make ownership easier to enforce through automatic cleanup.</label>
+            <label><input type="radio" name="q02" value="D"> RAII converts dynamic storage into stack storage during compilation.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>3. What does ownership mean for allocated memory?</legend>
+            <label><input type="radio" name="q03" value="A" required> Permission to modify the object through a temporary reference.</label>
+            <label><input type="radio" name="q03" value="B"> Knowledge of the allocation line where the object originated.</label>
+            <label><input type="radio" name="q03" value="C"> Object validity extends through process termination.</label>
+            <label><input type="radio" name="q03" value="D"> Responsibility for the object&#x27;s lifetime, transfer and timely release.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>4. Why should borrowed access not imply cleanup responsibility?</legend>
+            <label><input type="radio" name="q04" value="A" required> Borrowing is temporary use, not responsibility for cleanup.</label>
+            <label><input type="radio" name="q04" value="B"> Borrowers release the object after the final read operation.</label>
+            <label><input type="radio" name="q04" value="C"> Borrowing creates a second owner whose lifetime matches the original owner.</label>
+            <label><input type="radio" name="q04" value="D"> Temporary access keeps the object alive even after its owner is destroyed.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>5. When is std::unique_ptr appropriate?</legend>
+            <label><input type="radio" name="q05" value="A" required> Several unrelated components must independently decide when destruction occurs.</label>
+            <label><input type="radio" name="q05" value="B"> When dynamic ownership is exclusive and transfer should be explicit.</label>
+            <label><input type="radio" name="q05" value="C"> Callees need nullable views for the duration of one operation.</label>
+            <label><input type="radio" name="q05" value="D"> Allocation should survive after the last explicit owner leaves scope.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>6. Why should allocation-size calculations be validated before allocation?</legend>
+            <label><input type="radio" name="q06" value="A" required> It widens arithmetic before evaluating each requested size.</label>
+            <label><input type="radio" name="q06" value="B"> Successful allocation proves the earlier element-count calculation was valid.</label>
+            <label><input type="radio" name="q06" value="C"> Post-allocation bounds checks can repair a wrapped byte-count calculation.</label>
+            <label><input type="radio" name="q06" value="D"> Successful allocation still requires validated size arithmetic and policy limits.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>7. Why must cleanup work across error paths and exceptions?</legend>
+            <label><input type="radio" name="q07" value="A" required> Every path must keep partially acquired resources, ownership and cleanup consistent.</label>
+            <label><input type="radio" name="q07" value="B"> Exception propagation releases raw allocations created earlier in the function.</label>
+            <label><input type="radio" name="q07" value="C"> It postpones cleanup and leaves the object available to a later successful operation.</label>
+            <label><input type="radio" name="q07" value="D"> Partially acquired resources become harmless when the primary operation fails.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>8. Why should external size values be treated as untrusted before allocation?</legend>
+            <label><input type="radio" name="q08" value="A" required> Consuming the first valid digits makes a numeric string safe.</label>
+            <label><input type="radio" name="q08" value="B"> Allocating first reveals the actual capacity before policy evaluation.</label>
+            <label><input type="radio" name="q08" value="C"> Sizes from outside the application may be malformed, excessive, inconsistent or disallowed.</label>
+            <label><input type="radio" name="q08" value="D"> It enforces the application&#x27;s per-request availability budget.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>9. Why do custom allocators and memory pools need documented lifetime rules?</legend>
+            <label><input type="radio" name="q09" value="A" required> Pool allocation gives each object an independent destruction schedule.</label>
+            <label><input type="radio" name="q09" value="B"> The allocator policy changes object validity, release timing and exhaustion behavior.</label>
+            <label><input type="radio" name="q09" value="C"> Custom allocators preserve ordinary ownership semantics without documentation.</label>
+            <label><input type="radio" name="q09" value="D"> Arena reset invalidates unused storage while retaining every live object.</label>
+          </fieldset>
+
+                              <fieldset class="quiz-question">
+            <legend>10. How do sanitizers and tests help find dynamic allocation defects?</legend>
+            <label><input type="radio" name="q10" value="A" required> Sanitizer success establishes that future allocation requests will fit memory.</label>
+            <label><input type="radio" name="q10" value="B"> Test instrumentation replaces explicit ownership and cleanup contracts.</label>
+            <label><input type="radio" name="q10" value="C"> Sanitizers expose cleanup, lifetime, allocation and boundary failures during testing.</label>
+            <label><input type="radio" name="q10" value="D"> Boundary tests prove allocation behavior for every supported platform profile.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

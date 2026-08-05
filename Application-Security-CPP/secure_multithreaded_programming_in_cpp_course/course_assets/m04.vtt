@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.329
+Deadlock is an availability and reliability risk.
+
+2
+00:00:02.329 --> 00:00:10.312
+It can occur when threads wait on each other in a cycle, often because different code paths acquire the same locks in different orders.
+
+3
+00:00:10.312 --> 00:00:15.967
+Once that cycle forms, progress may stop even though every individual lock operation looks reasonable in isolation.
+
+4
+00:00:15.967 --> 00:00:19.959
+Lock ordering is a design convention that prevents many nested-lock problems.
+
+5
+00:00:19.959 --> 00:00:27.942
+If a component sometimes needs two or more locks, define the order in which they must be acquired and review code against that order.
+
+6
+00:00:27.942 --> 00:00:33.930
+std::scoped_lock can help acquire multiple mutexes safely, but the larger design still needs a clear ownership model.
+
+7
+00:00:33.930 --> 00:00:36.258
+Blocking work inside critical sections increases risk.
+
+8
+00:00:36.258 --> 00:00:43.909
+Network calls, file I/O, callbacks into other components, long computations, waits on other subsystems, and logging that can block all extend the
+
+9
+00:00:43.909 --> 00:00:46.238
+time other threads are unable to proceed.
+
+10
+00:00:46.238 --> 00:00:48.234
+Keep critical sections small and deliberate.
+
+11
+00:00:48.234 --> 00:00:53.889
+Copy the data needed for longer work, release the lock, then perform the slower operation when possible.
+
+12
+00:00:53.889 --> 00:00:58.546
+This reduces contention and makes it easier to reason about which invariants are protected.
+
+13
+00:00:58.546 --> 00:01:03.868
+Timeouts can be useful for operational behavior, but they are not a substitute for sound design.
+
+14
+00:01:03.868 --> 00:01:12.849
+A timeout may help a thread recover or report a problem, but it does not explain why lock acquisition became risky or whether shared state is still
+
+15
+00:01:12.849 --> 00:01:13.182
+consistent.
+
+16
+00:01:13.182 --> 00:01:14.845
+Shutdown paths deserve special attention.
+
+17
+00:01:14.845 --> 00:01:24.492
+If one thread is trying to stop workers while another waits on a lock held by a worker that is waiting for shutdown, the service can stall at exactly
+
+18
+00:01:24.492 --> 00:01:26.155
+the moment reliability matters most.
+
+19
+00:01:26.155 --> 00:01:30.480
+Review deadlock risk by tracing lock order, blocking calls, callbacks, and shutdown interactions.
+
+20
+00:01:30.480 --> 00:01:36.800
+The goal is not only to avoid permanent waits, but to keep the system responsive under contention and failure.

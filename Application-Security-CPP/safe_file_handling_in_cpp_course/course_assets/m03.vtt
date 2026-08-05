@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.999
+Opening a file is a security-sensitive decision because the open operation chooses what the program is allowed to do.
+
+2
+00:00:06.999 --> 00:00:11.199
+Read, write, append, create, truncate, and exclusive-create modes have different consequences.
+
+3
+00:00:11.199 --> 00:00:15.398
+A safe design uses the narrowest mode that fits the intended operation.
+
+4
+00:00:15.398 --> 00:00:18.548
+Reading a configuration file should not require write access.
+
+5
+00:00:18.548 --> 00:00:22.047
+Appending to a log should not accidentally truncate existing data.
+
+6
+00:00:22.047 --> 00:00:27.297
+Creating a new output should not silently overwrite a file that should have been preserved.
+
+7
+00:00:27.297 --> 00:00:30.446
+Permissions and access rights matter at the same boundary.
+
+8
+00:00:30.446 --> 00:00:35.696
+Sensitive output should not be created with broad permissions just because the default is convenient.
+
+9
+00:00:35.696 --> 00:00:40.245
+A service account should not need access to directories it never legitimately uses.
+
+10
+00:00:40.245 --> 00:00:44.095
+Least privilege keeps file mistakes smaller and makes review more concrete.
+
+11
+00:00:44.095 --> 00:00:50.044
+Existence checks followed by later opens can be fragile if another process can modify the target directory.
+
+12
+00:00:50.044 --> 00:00:57.393
+The defensive idea is not to memorize every platform flag in this course, but to recognize the check-then-use assumption.
+
+13
+00:00:57.393 --> 00:01:05.792
+If correctness depends on the file not changing between operations, the code should use an API or workflow that enforces that assumption as closely
+
+14
+00:01:05.792 --> 00:01:07.192
+as the platform allows.
+
+15
+00:01:07.192 --> 00:01:08.942
+Always handle open failure deliberately.
+
+16
+00:01:08.942 --> 00:01:16.641
+Failure may be normal: a file is missing, permissions are narrow, a directory is unavailable, or a path policy rejected the request.
+
+17
+00:01:16.641 --> 00:01:21.540
+Good code reports enough context for diagnosis without leaking sensitive paths or internal details.
+
+18
+00:01:21.540 --> 00:01:25.040
+It also documents who may modify the location being opened.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "C++ Random Facilities and Their Limits",
+  "graphicAlt": "Random-generation pipeline for C++ Random Facilities and Their Limits, leading from an approved operating-system entropy source through failure checks and unbiased mapping to a typed security artifact with documented size, purpose, and reuse rules.",
+  "narration": "The C++ standard library includes useful random facilities, especially in the <random> header. The library separates engines from distributions. Engines generate sequences of values. Distributions map those values into a shape or range, such as a uniform integer range or a normal distribution. This design is flexible and powerful for many non-security workloads, but it is easy to misunderstand the boundary between useful randomness and security randomness.\n\nMost standard engines are deterministic once seeded. That includes common engines used for simulations and general randomized behavior. Determinism is not a defect in those tools; it is part of their design. The limitation is that deterministic engines should not be treated as cryptographic random sources for tokens, keys, secrets, or other security-sensitive values. A distribution can make output fit a requested range, but it does not create entropy and does not make a deterministic engine unpredictable.\n\nstd::random_device deserves careful treatment. On some implementations it may be backed by a nondeterministic source. On others, behavior and suitability can vary. Portable security-sensitive C++ code should not assume that std::random_device alone is the approved answer for every platform and deployment. Teams should define an approved CSPRNG interface based on operating-system facilities or maintained cryptographic libraries, then use that interface consistently at security call sites. The standard tools remain valuable, but their role should match their guarantees.",
+  "narrationPoints": [
+    "The C++ standard library includes useful random facilities, especially in the <random> header.",
+    "Distributions map those values into a shape or range, such as a uniform integer range or a normal distribution.",
+    "The limitation is that deterministic engines should not be treated as cryptographic random sources for tokens, keys, secrets, or other security-sensitive values.",
+    "The standard tools remain valuable, but their role should match their guarantees.",
+    "Portable security-sensitive C++ code should not assume that std::random_device alone is the approved answer for every platform and deployment.",
+    "Teams should define an approved CSPRNG interface based on operating-system facilities or maintained cryptographic libraries, then use that interface consistently at security call sites."
+  ]
+};

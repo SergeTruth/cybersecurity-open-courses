@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.341
+IPC message bodies may be text, binary records, structured objects, or streamed data.
+
+2
+00:00:05.341 --> 00:00:10.682
+Whatever the format, parsing code should be designed as security-critical C++ code.
+
+3
+00:00:10.682 --> 00:00:15.613
+A valid frame only proves that bytes were received in some shape.
+
+4
+00:00:15.613 --> 00:00:22.186
+It does not prove that the message is semantically valid, authorized, compatible, or affordable to process.
+
+5
+00:00:22.186 --> 00:00:25.062
+Length fields and boundaries need strict checks.
+
+6
+00:00:25.062 --> 00:00:29.171
+Validate declared sizes before reading, buffering, copying, decompressing, or allocating.
+
+7
+00:00:29.171 --> 00:00:38.210
+Track how many bytes are available, how many are required, and whether continuing would exceed message, record, nesting, queue, or per-connection
+
+8
+00:00:38.210 --> 00:00:38.621
+limits.
+
+9
+00:00:38.621 --> 00:00:46.838
+A parser should distinguish incomplete data, which may need more bytes within policy, from invalid data, which should be rejected.
+
+10
+00:00:46.838 --> 00:00:49.714
+Avoid treating raw bytes as application objects.
+
+11
+00:00:49.714 --> 00:00:58.753
+Direct casts into C++ structures can depend on layout, padding, alignment, lifetime, and endianness assumptions that are not necessarily part of the
+
+12
+00:00:58.753 --> 00:00:59.574
+IPC contract.
+
+13
+00:00:59.574 --> 00:01:08.202
+Convert bytes into typed values deliberately, check remaining bytes before every read, and validate ranges before using values as counts, offsets,
+
+14
+00:01:08.202 --> 00:01:09.846
+indexes, or allocation sizes.
+
+15
+00:01:09.846 --> 00:01:12.722
+Resource limits protect both availability and correctness.
+
+16
+00:01:12.722 --> 00:01:18.885
+Bound message size, nesting depth, expansion behavior, queue growth, active requests, and memory per client.
+
+17
+00:01:18.885 --> 00:01:25.869
+When parsing fails, preserve invariants, release partial resources, and avoid leaving the connection in a confusing state.
+
+18
+00:01:25.869 --> 00:01:31.210
+Safe serialization is not just about decoding successfully; it is about failing predictably.
+
+19
+00:01:31.210 --> 00:01:39.017
+Tests should cover truncated messages, oversized records, invalid encodings, unsupported versions, slow streams, and repeated parse failures so the
+
+20
+00:01:39.017 --> 00:01:42.714
+receiver’s resource policy is exercised under realistic pressure.
+
+21
+00:01:42.714 --> 00:01:51.753
+Monitoring should confirm that rejected data does not grow memory or queues over time during long-running sessions, retries, load tests, repeated
+
+22
+00:01:51.753 --> 00:01:55.040
+restarts, reconnect storms, and client churn too often.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.461
+Secure socket programs must think about availability.
+
+2
+00:00:02.461 --> 00:00:09.842
+A peer may connect and stop sending, send slowly, send too much, keep many connections open, or cause queues to grow.
+
+3
+00:00:09.842 --> 00:00:17.927
+The program does not need to assume hostile intent to need defenses; ordinary network failures and overloaded clients can create the same symptoms.
+
+4
+00:00:17.927 --> 00:00:20.388
+Predictable resource use is a security property.
+
+5
+00:00:20.388 --> 00:00:23.903
+Timeouts define how long the program will wait for progress.
+
+6
+00:00:23.903 --> 00:00:28.121
+Connect timeouts prevent a client from hanging indefinitely while establishing a connection.
+
+7
+00:00:28.121 --> 00:00:33.394
+Read and write timeouts keep stalled operations from occupying threads or event-loop state forever.
+
+8
+00:00:33.394 --> 00:00:37.261
+Idle timeouts close connections that are no longer making useful progress.
+
+9
+00:00:37.261 --> 00:00:42.182
+These values should match the protocol and product expectations rather than being arbitrary constants.
+
+10
+00:00:42.182 --> 00:00:45.697
+Backpressure keeps one side of the system from overwhelming another.
+
+11
+00:00:45.697 --> 00:00:53.430
+Bounded buffers, bounded queues, connection limits, request limits, and work scheduling rules help the program reject or slow work before memory and
+
+12
+00:00:53.430 --> 00:00:54.836
+thread pools are exhausted.
+
+13
+00:00:54.836 --> 00:01:02.921
+Without backpressure, a network-facing component can accept more data than downstream processing can handle, and the failure may appear far from the
+
+14
+00:01:02.921 --> 00:01:03.624
+socket code.
+
+15
+00:01:03.624 --> 00:01:06.085
+Availability controls should be observable and tested.
+
+16
+00:01:06.085 --> 00:01:12.061
+Operators need to know when limits are reached, when timeouts occur, and whether rejection behavior is expected.
+
+17
+00:01:12.061 --> 00:01:14.170
+The goal is not aggressive disconnection.
+
+18
+00:01:14.170 --> 00:01:21.200
+The goal is graceful failure under pressure, with cleanup that releases resources and leaves the service in a known state.

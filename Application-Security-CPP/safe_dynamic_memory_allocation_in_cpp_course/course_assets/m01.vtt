@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.798
+Dynamic memory allocation lets C++ programs create objects and buffers whose size or lifetime is not known at compile time.
+
+2
+00:00:07.798 --> 00:00:14.037
+That flexibility is useful in parsers, services, embedded software, desktop applications, libraries, and performance-sensitive systems.
+
+3
+00:00:14.037 --> 00:00:18.326
+It lets software adapt to input, workload, configuration, and resource availability.
+
+4
+00:00:18.326 --> 00:00:20.275
+That flexibility also creates responsibility.
+
+5
+00:00:20.275 --> 00:00:25.734
+If ownership is unclear, memory can remain allocated after it is no longer needed.
+
+6
+00:00:25.734 --> 00:00:30.413
+If cleanup happens too early, later code may continue using stale access.
+
+7
+00:00:30.413 --> 00:00:40.941
+If size calculations are wrong, the program may request too little memory, too much memory, or a shape of memory that does not match the data being
+
+8
+00:00:40.941 --> 00:00:41.331
+stored.
+
+9
+00:00:41.331 --> 00:00:46.790
+Dynamic allocation is safest when the lifecycle is designed before the first allocation happens.
+
+10
+00:00:46.790 --> 00:00:56.147
+The code should identify who owns the object, who may borrow it, whether ownership can transfer, whether sharing is required, and what cleanup rule
+
+11
+00:00:56.147 --> 00:00:56.537
+applies.
+
+12
+00:00:56.537 --> 00:01:00.826
+Those answers should be visible in types, APIs, and class design.
+
+13
+00:01:00.826 --> 00:01:03.166
+Manual memory management should be minimized.
+
+14
+00:01:03.166 --> 00:01:09.794
+Modern C++ provides values, containers, RAII wrappers, and smart pointers that keep cleanup tied to object lifetime.
+
+15
+00:01:09.794 --> 00:01:14.863
+These tools reduce repeated manual cleanup paths and make ownership easier to review.
+
+16
+00:01:14.863 --> 00:01:17.203
+The course theme is preventive engineering.
+
+17
+00:01:17.203 --> 00:01:23.831
+Safe allocation starts with ownership, lifetime, size validation, initialization, cleanup, failure handling, resource limits, diagnostics, and review.
+
+18
+00:01:23.831 --> 00:01:29.680
+Cleanup after the fact is much harder than designing the lifecycle clearly from the beginning.

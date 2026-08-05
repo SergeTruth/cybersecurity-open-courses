@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.460
+Mutexes remain one of the most practical tools for protecting shared C++ state.
+
+2
+00:00:04.460 --> 00:00:13.038
+A mutex should guard a specific invariant: a relationship among fields, a container and its metadata, a queue and its shutdown flag, or another piece
+
+3
+00:00:13.038 --> 00:00:15.782
+of shared state that must be observed consistently.
+
+4
+00:00:15.782 --> 00:00:22.644
+RAII lock wrappers make mutex use safer. std::lock_guard, std::unique_lock, and std::scoped_lock tie lock release to scope exit.
+
+5
+00:00:22.644 --> 00:00:27.447
+That matters when a function returns early, throws an exception, or grows over time.
+
+6
+00:00:27.447 --> 00:00:33.966
+Manual lock and unlock calls are fragile because every future path must remember to release the lock exactly once.
+
+7
+00:00:33.966 --> 00:00:36.711
+The lock scope should be easy to see.
+
+8
+00:00:36.711 --> 00:00:40.485
+Keep critical sections focused on reading or updating the protected state.
+
+9
+00:00:40.485 --> 00:00:47.004
+Avoid placing unrelated formatting, slow computation, callbacks, or blocking work inside the lock unless the design clearly requires it.
+
+10
+00:00:47.004 --> 00:00:49.062
+Document which mutex protects which data.
+
+11
+00:00:49.062 --> 00:00:57.640
+The most maintainable pattern is often a private mutex near the data it protects, with methods that preserve the invariant while the lock is held.
+
+12
+00:00:57.640 --> 00:01:01.757
+Comments can help when a class has more than one synchronization domain.
+
+13
+00:01:01.757 --> 00:01:04.158
+Avoid accessing protected data outside the lock.
+
+14
+00:01:04.158 --> 00:01:10.677
+Even a single convenience read can weaken the whole design if another thread may update the same object concurrently.
+
+15
+00:01:10.677 --> 00:01:17.539
+If an unlocked read is intentional, it should have a clearly justified policy, such as immutable data or atomic state.
+
+16
+00:01:17.539 --> 00:01:26.459
+Review should ask what must be true while the lock is held, what can happen if an exception occurs, and whether callers can observe half-updated
+
+17
+00:01:26.459 --> 00:01:26.802
+state.
+
+18
+00:01:26.802 --> 00:01:29.890
+Clarity is usually more valuable than clever locking patterns.
+
+19
+00:01:29.890 --> 00:01:38.468
+A good mutex design gives maintainers a small proof to check: acquire the right lock, update the invariant, release through RAII, and leave no hidden
+
+20
+00:01:38.468 --> 00:01:39.840
+path around the protection.

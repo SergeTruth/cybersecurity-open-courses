@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.633
+Container selection is a security and maintainability decision, not only a performance detail.
+
+2
+00:00:04.633 --> 00:00:12.473
+The container communicates how data is owned, how it grows, how callers access it, and what kinds of invalidation reviewers should expect.
+
+3
+00:00:12.473 --> 00:00:16.393
+std::vector is often the right default for dynamic contiguous storage.
+
+4
+00:00:16.393 --> 00:00:20.313
+It has simple ownership, cache-friendly iteration, and clear size behavior.
+
+5
+00:00:20.313 --> 00:00:27.440
+It also reallocates as it grows, so pointers, references, and iterators into the vector can become invalid after some operations.
+
+6
+00:00:27.440 --> 00:00:32.073
+std::array is useful when the size is fixed and known by design.
+
+7
+00:00:32.073 --> 00:00:40.982
+The fixed size can make bounds and lifetime easier to review. std::deque may fit designs that need growth at both ends or different stability
+
+8
+00:00:40.982 --> 00:00:44.189
+properties, but its own iterator rules still need attention.
+
+9
+00:00:44.189 --> 00:00:51.673
+Associative containers such as maps and sets can make lookup rules explicit, while unordered containers can make key-based lookup efficient.
+
+10
+00:00:51.673 --> 00:00:56.662
+Their safety depends on correct key design, comparator behavior, hashing, equality, and resource limits.
+
+11
+00:00:56.662 --> 00:00:58.444
+Element ownership should be deliberate.
+
+12
+00:00:58.444 --> 00:01:00.938
+Storing values is often simpler and clearer.
+
+13
+00:01:00.938 --> 00:01:07.353
+Storing unique_ptr, shared_ptr, or other owning objects can be appropriate, but it changes lifetime, sharing, and review questions.
+
+14
+00:01:07.353 --> 00:01:13.055
+A container of raw owning pointers is usually a sign that ownership needs a clearer type.
+
+15
+00:01:13.055 --> 00:01:16.618
+Growth and memory pressure should be part of the contract.
+
+16
+00:01:16.618 --> 00:01:24.102
+If input can influence item count, reserve behavior, or element size, the code needs limits before storage grows without a boundary.
+
+17
+00:01:24.102 --> 00:01:29.447
+Choose the container that makes the expected access pattern and lifetime easiest to reason about.
+
+18
+00:01:29.447 --> 00:01:35.862
+The safest choice is often the one that turns design assumptions into visible code rather than hidden convention.
+
+19
+00:01:35.862 --> 00:01:38.000
+Container choice also affects API clarity.
+
+20
+00:01:38.000 --> 00:01:41.920
+A function that accepts a span communicates a contiguous borrowed range.
+
+21
+00:01:41.920 --> 00:01:46.553
+A function that accepts a vector by value communicates ownership transfer or copying.
+
+22
+00:01:46.553 --> 00:01:50.116
+A function that accepts a map communicates lookup by key.
+
+23
+00:01:50.116 --> 00:01:52.255
+These choices help reviewers understand intent.
+
+24
+00:01:52.255 --> 00:01:56.887
+When the container choice feels awkward, it may reveal a deeper design question.
+
+25
+00:01:56.887 --> 00:02:05.084
+Perhaps the data should be streamed instead of stored, capped instead of unbounded, or converted into a narrower domain type before entering shared
+
+26
+00:02:05.084 --> 00:02:05.440
+state.

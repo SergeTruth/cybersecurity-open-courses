@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.525
+Bounds safety starts with choosing the right representation.
+
+2
+00:00:02.525 --> 00:00:09.786
+Standard containers such as vector, array, and string are usually easier to reason about than raw arrays because they carry size information and
+
+3
+00:00:09.786 --> 00:00:10.418
+manage storage.
+
+4
+00:00:10.418 --> 00:00:16.100
+They are not magic shields, but they reduce the amount of handwritten bookkeeping that developers must get right.
+
+5
+00:00:16.100 --> 00:00:20.835
+When code must work near low-level buffers, it should track size and capacity explicitly.
+
+6
+00:00:20.835 --> 00:00:22.729
+Capacity is how much storage exists.
+
+7
+00:00:22.729 --> 00:00:26.202
+Size or used length is how much meaningful data is present.
+
+8
+00:00:26.202 --> 00:00:31.253
+Confusing those values can lead to reading uninitialized data, overwriting memory, or truncating information without noticing.
+
+9
+00:00:31.253 --> 00:00:34.725
+Range checks should happen before indexing, copying, parsing, or converting data.
+
+10
+00:00:34.725 --> 00:00:37.251
+A check after the access is too late.
+
+11
+00:00:37.251 --> 00:00:45.143
+Reviewers should look for how an index was derived, whether it can be negative or wrap through conversion, whether the container can change size, and
+
+12
+00:00:45.143 --> 00:00:48.299
+whether the check still applies at the point of use.
+
+13
+00:00:48.299 --> 00:00:54.929
+Non-owning view types such as span and string_view are useful because they pair a pointer-like view with a length.
+
+14
+00:00:54.929 --> 00:00:58.401
+But they do not extend the lifetime of the referenced data.
+
+15
+00:00:58.401 --> 00:01:06.609
+A string_view returned from a temporary string, or a span stored beyond the lifetime of the array it views, can become a clean-looking lifetime bug.
+
+16
+00:01:06.609 --> 00:01:08.503
+C-style strings require special discipline.
+
+17
+00:01:08.503 --> 00:01:13.870
+They depend on null termination, but many data sources provide byte ranges rather than valid C strings.
+
+18
+00:01:13.870 --> 00:01:21.762
+Before using string-only operations, the code should know that the data is terminated, that the terminator is within bounds, and that binary data is
+
+19
+00:01:21.762 --> 00:01:23.340
+not being treated as text.
+
+20
+00:01:23.340 --> 00:01:27.444
+Secure review should distinguish owning containers, borrowed views, raw buffers, and string data.
+
+21
+00:01:27.444 --> 00:01:29.654
+Each has different lifetime and bounds rules.
+
+22
+00:01:29.654 --> 00:01:38.809
+The goal is not to forbid low-level code; it is to make low-level assumptions explicit and keep them out of places where a safer abstraction would do
+
+23
+00:01:38.809 --> 00:01:39.440
+the job.

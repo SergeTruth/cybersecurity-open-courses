@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.750
+The requested title uses STL, and many developers still use that term in everyday conversation.
+
+2
+00:00:05.750 --> 00:00:13.416
+Modern teams often talk more broadly about the C++ standard library, including containers, strings, views, spans, algorithms, smart pointers, and
+
+3
+00:00:13.416 --> 00:00:14.182
+filesystem utilities.
+
+4
+00:00:14.182 --> 00:00:19.165
+This course uses STL as shorthand while focusing on practical standard-library use.
+
+5
+00:00:19.165 --> 00:00:25.682
+The standard library is a major safety improvement over manual arrays, manual memory management, and handwritten algorithms.
+
+6
+00:00:25.682 --> 00:00:31.431
+Containers manage storage, strings preserve length, algorithms express intent, and wrappers can make ownership clearer.
+
+7
+00:00:31.431 --> 00:00:34.881
+These abstractions give reviewers more structure to reason about.
+
+8
+00:00:34.881 --> 00:00:38.331
+But the library does not automatically make code safe.
+
+9
+00:00:38.331 --> 00:00:41.781
+A vector can still be indexed out of range.
+
+10
+00:00:41.781 --> 00:00:45.231
+A string_view can still outlive the string it observes.
+
+11
+00:00:45.231 --> 00:00:48.680
+An iterator can still become invalid after a mutation.
+
+12
+00:00:48.680 --> 00:00:53.280
+A comparator can still violate the rules an ordered container depends on.
+
+13
+00:00:53.280 --> 00:00:56.730
+Secure STL usage means respecting each abstraction's contract.
+
+14
+00:00:56.730 --> 00:01:02.863
+The important questions are lifetime, bounds, ownership, invalidation, resource growth, exception behavior, and thread-safety assumptions.
+
+15
+00:01:02.863 --> 00:01:07.462
+Those questions do not disappear just because the code uses standard types.
+
+16
+00:01:07.462 --> 00:01:12.445
+A good review does not ask only whether a standard container is present.
+
+17
+00:01:12.445 --> 00:01:21.645
+It asks whether the chosen type makes the intended access pattern clear, whether sizes and indexes are validated, whether views are short-lived, and
+
+18
+00:01:21.645 --> 00:01:23.561
+whether mutations invalidate cached access.
+
+19
+00:01:23.561 --> 00:01:31.228
+The goal is defensive engineering: use standard-library tools to reduce manual mistakes, then combine them with explicit contracts, tests,
+
+20
+00:01:31.228 --> 00:01:33.144
+sanitizers, static analysis, and review.
+
+21
+00:01:33.144 --> 00:01:38.894
+A useful mindset is to treat every standard-library type as an abstraction with rules.
+
+22
+00:01:38.894 --> 00:01:46.560
+The more important the data or boundary, the more clearly those rules should appear in naming, API shape, and tests.

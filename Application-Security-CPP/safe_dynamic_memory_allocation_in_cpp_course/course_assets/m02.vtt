@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.353
+Modern C++ code should not reach for raw dynamic allocation first.
+
+2
+00:00:04.353 --> 00:00:11.871
+Many objects can be owned directly as values, stored as members, returned by value, or placed in standard containers.
+
+3
+00:00:11.871 --> 00:00:18.203
+Value ownership often provides the simplest lifecycle because construction and destruction follow scope and object lifetime.
+
+4
+00:00:18.203 --> 00:00:26.117
+Standard containers reduce the need for raw dynamic arrays. std::vector manages dynamic contiguous storage. std::string manages text storage.
+
+5
+00:00:26.117 --> 00:00:28.491
+std::array handles fixed-size storage.
+
+6
+00:00:28.491 --> 00:00:31.657
+Other containers express different access and stability tradeoffs.
+
+7
+00:00:31.657 --> 00:00:37.593
+These types carry size and ownership information that raw allocation does not provide by itself.
+
+8
+00:00:37.593 --> 00:00:39.967
+RAII is the central design principle.
+
+9
+00:00:39.967 --> 00:00:46.694
+A resource is acquired or represented by an object, and the object's destructor releases the resource.
+
+10
+00:00:46.694 --> 00:00:52.630
+This makes cleanup predictable across normal execution, early returns, and exceptions according to project policy.
+
+11
+00:00:52.630 --> 00:00:55.796
+It also makes cleanup behavior easier to test.
+
+12
+00:00:55.796 --> 00:01:00.149
+Standard library and project-specific RAII types reduce manual allocation paths.
+
+13
+00:01:00.149 --> 00:01:08.459
+Instead of repeating allocation, validation, cleanup, and error handling in every function, the code can concentrate lifecycle rules in a small
+
+14
+00:01:08.459 --> 00:01:10.437
+number of well-reviewed types.
+
+15
+00:01:10.437 --> 00:01:13.999
+Simpler ownership is easier to secure, test, and review.
+
+16
+00:01:13.999 --> 00:01:19.539
+If a value or container expresses the lifecycle, choose that before adding a pointer.
+
+17
+00:01:19.539 --> 00:01:28.640
+If dynamic allocation is necessary, use a type that communicates ownership rather than forcing reviewers to infer it from comments or call order.

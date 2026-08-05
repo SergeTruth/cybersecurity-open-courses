@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.964
+Ordinary pseudo-random generators are useful engineering tools.
+
+2
+00:00:02.964 --> 00:00:08.521
+They support simulations, games, randomized tests, sampling, load balancing, scheduling experiments, and reproducible bug investigations.
+
+3
+00:00:08.521 --> 00:00:11.484
+In those contexts, determinism can be a feature.
+
+4
+00:00:11.484 --> 00:00:18.894
+If a test fails with a particular seed, the team can run the same seed again and reproduce the sequence.
+
+5
+00:00:18.894 --> 00:00:24.451
+If a simulation needs a controlled comparison, a known generator state helps make results repeatable.
+
+6
+00:00:24.451 --> 00:00:26.674
+Security randomness has a different goal.
+
+7
+00:00:26.674 --> 00:00:35.194
+A security value should be difficult to predict, even when an observer knows the algorithm family, understands the application, and has seen other
+
+8
+00:00:35.194 --> 00:00:35.935
+generated values.
+
+9
+00:00:35.935 --> 00:00:42.974
+Repeatability, which is helpful in a test, is dangerous when the value protects a token, key, challenge, or session.
+
+10
+00:00:42.974 --> 00:00:51.865
+A generator that is excellent for simulation can still be the wrong tool for a security boundary because it was never designed to withstand
+
+11
+00:00:51.865 --> 00:00:52.236
+prediction.
+
+12
+00:00:52.236 --> 00:00:58.163
+A practical question helps keep the decision grounded: does this value need fairness, repeatability, or unpredictability?
+
+13
+00:00:58.163 --> 00:01:00.386
+Fairness may point to a distribution.
+
+14
+00:01:00.386 --> 00:01:03.350
+Repeatability may point to a deterministic test source.
+
+15
+00:01:03.350 --> 00:01:09.648
+Unpredictability points to a cryptographically secure source such as a platform CSPRNG or an approved cryptographic library.
+
+16
+00:01:09.648 --> 00:01:12.241
+API names can be misleading without context.
+
+17
+00:01:12.241 --> 00:01:19.280
+The safe approach is to label the use case first, then select the random source that matches the requirement.

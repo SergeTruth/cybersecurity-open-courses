@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.782
+Secret storage and secret delivery are connected.
+
+2
+00:00:02.782 --> 00:00:11.525
+A secret may be protected in a vault but still exposed when it is passed to an application through an unsafe channel.
+
+3
+00:00:11.525 --> 00:00:18.281
+C++ applications often receive configuration from files, environment variables, command-line arguments, service managers, container platforms, CI
+
+4
+00:00:18.281 --> 00:00:21.063
+systems, deployment pipelines, or runtime injection mechanisms.
+
+5
+00:00:21.063 --> 00:00:24.640
+Each path has different visibility, inheritance, and logging behavior.
+
+6
+00:00:24.640 --> 00:00:31.396
+Command-line secrets can be visible to process inspection tools, service metadata, shell history, or diagnostic collection.
+
+7
+00:00:31.396 --> 00:00:40.139
+Environment variables are convenient, but they may be inherited by child processes, copied into crash reports, or surfaced by debugging and support
+
+8
+00:00:40.139 --> 00:00:40.537
+tooling.
+
+9
+00:00:40.537 --> 00:00:45.703
+Configuration files require strict permissions, controlled paths, integrity checks, and careful backup behavior.
+
+10
+00:00:45.703 --> 00:00:54.049
+CI and deployment systems can provide safer injection when configured correctly, but they can also leak values through console output, build
+
+11
+00:00:54.049 --> 00:00:56.434
+artifacts, or overly broad project permissions.
+
+12
+00:00:56.434 --> 00:01:03.985
+Applications should document which delivery mechanisms are approved for each environment and reject unsafe alternatives in production where possible.
+
+13
+00:01:03.985 --> 00:01:07.959
+The delivery path should match the secret type and platform.
+
+14
+00:01:07.959 --> 00:01:16.702
+Local development may use a different controlled mechanism than production, but it should not train developers to paste real credentials into source
+
+15
+00:01:16.702 --> 00:01:18.292
+files or command lines.
+
+16
+00:01:18.292 --> 00:01:25.445
+Clear startup diagnostics can report that a required secret is missing or inaccessible without printing the value itself.
+
+17
+00:01:25.445 --> 00:01:33.394
+Deployment reviews should also confirm that secrets are not copied into images, templates, or generated configuration that outlives the intended
+
+18
+00:01:33.394 --> 00:01:33.791
+release.
+
+19
+00:01:33.791 --> 00:01:38.560
+That combination of approved delivery, redaction, and explicit failure reduces accidental exposure.

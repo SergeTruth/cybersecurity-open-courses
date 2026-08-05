@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: STL Safety Habits",
+  "graphicAlt": "C++ container safety diagram for Course Summary: STL Safety Habits, linking ownership and lifetime to bounds, invalidation, algorithm contracts, bounded growth, synchronization, and exception-safe commit behavior.",
+  "narration": "Secure STL usage starts with using standard-library abstractions deliberately. Prefer containers, strings, views, spans, algorithms, and wrappers when they make ownership, bounds, and intent clearer than manual memory and ad hoc loops.\n\nContainer choice should support the expected access pattern, lifetime, size behavior, and ownership model. Store values or smart pointers intentionally. Bound externally influenced growth before it affects memory, iteration, or lookup structures.\n\nRespect lifetime, bounds, and invalidation. Validate indexes, counts, offsets, and lengths before use. Do not confuse size with capacity. Refresh or discard iterators, references, pointers, and views after mutations that can invalidate them.\n\nKeep views and iterators review-sensitive. string_view and span are powerful because they preserve length and avoid copies, but they do not own data. They should not outlive or outlast mutation of their source.\n\nFinally, combine library use with testing and tooling. Use clear algorithms, consistent comparators, explicit synchronization for shared mutable containers, sanitizers, debug modes where available, static analysis, and code review. Standard-library design reduces risk, but secure C++ still depends on disciplined use.\n\nThe durable habit is explicitness. Choose the abstraction intentionally, document the assumptions that matter, and make failure, growth, lifetime, and invalidation behavior visible enough that the next maintainer can keep the code safe.",
+  "narrationPoints": [
+    "Prefer containers, strings, views, spans, algorithms, and wrappers when they make ownership, bounds, and intent clearer than manual memory and ad hoc loops.",
+    "Container choice should support the expected access pattern, lifetime, size behavior, and ownership model.",
+    "Refresh or discard iterators, references, pointers, and views after mutations that can invalidate them.",
+    "Keep views and iterators review-sensitive. string_view and span are powerful because they preserve length and avoid copies, but they do not own data.",
+    "Standard-library design reduces risk, but secure C++ still depends on disciplined use.",
+    "Choose the abstraction intentionally, document the assumptions that matter, and make failure, growth, lifetime, and invalidation behavior visible enough that the next maintainer can keep the code safe."
+  ]
+};

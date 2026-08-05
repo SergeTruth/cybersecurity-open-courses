@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.569
+Some IPC designs transfer more than data.
+
+2
+00:00:02.569 --> 00:00:09.540
+They pass operating-system handles, file descriptors, shared-memory objects, memory mappings, temporary file references, named resources, or other
+
+3
+00:00:09.540 --> 00:00:10.641
+capability-bearing values.
+
+4
+00:00:10.641 --> 00:00:19.081
+Those transfers are review-sensitive because the receiver may gain access to a file, device, process object, memory region, event, or resource that
+
+5
+00:00:19.081 --> 00:00:19.814
+carries authority.
+
+6
+00:00:19.814 --> 00:00:22.016
+A handle is not harmless metadata.
+
+7
+00:00:22.016 --> 00:00:31.923
+The contract should define what the handle refers to, which permissions it carries, who owns it, who may duplicate it, who may close it, and how long
+
+8
+00:00:31.923 --> 00:00:33.024
+it remains valid.
+
+9
+00:00:33.024 --> 00:00:39.262
+The receiver should not assume that a transferred resource is safe merely because the sender is local.
+
+10
+00:00:39.262 --> 00:00:42.931
+Access rights, expected type, size, and lifetime still need validation.
+
+11
+00:00:42.931 --> 00:00:45.133
+Shared memory needs especially clear rules.
+
+12
+00:00:45.133 --> 00:00:51.371
+Both sides need agreement on mapping size, layout, synchronization, read and write permissions, initialization state, and cleanup.
+
+13
+00:00:51.371 --> 00:00:55.774
+A size stored in shared memory should not be trusted without bounds.
+
+14
+00:00:55.774 --> 00:01:03.479
+A writer should not be able to change data while a reader assumes it is stable unless the protocol defines synchronization.
+
+15
+00:01:03.479 --> 00:01:06.048
+Shutdown and failure are part of ownership.
+
+16
+00:01:06.048 --> 00:01:11.919
+A peer may exit while the other side still has a mapping, descriptor, or outstanding operation.
+
+17
+00:01:11.919 --> 00:01:18.891
+The design should prevent stale access from becoming normal behavior, release resources deterministically, and define whether the remaining process
+
+18
+00:01:18.891 --> 00:01:21.092
+may continue using a transferred capability.
+
+19
+00:01:21.092 --> 00:01:25.129
+The secure habit is to document resources as carefully as messages.
+
+20
+00:01:25.129 --> 00:01:34.669
+Who can read, who can write, who can close, what size is valid, what synchronization is required, and what happens when either side fails should all
+
+21
+00:01:34.669 --> 00:01:35.403
+be explicit.
+
+22
+00:01:35.403 --> 00:01:43.108
+Reviewers should also look at how resources cross privilege boundaries, how duplicate handles are tracked, and whether cleanup still happens when
+
+23
+00:01:43.108 --> 00:01:44.943
+requests are cancelled or retried.
+
+24
+00:01:44.943 --> 00:01:50.080
+Ownership tests should include normal completion, denial, timeout, duplicate transfer, and peer exit paths.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.943
+Integer safety matters because numeric values sit inside nearly every important C++ decision.
+
+2
+00:00:04.943 --> 00:00:11.787
+They describe buffer sizes, container indexes, loop limits, offsets, counts, identifiers, permissions, protocol fields, timestamps, retry limits, and
+
+3
+00:00:11.787 --> 00:00:12.548
+resource caps.
+
+4
+00:00:12.548 --> 00:00:19.011
+Because integers look ordinary, teams can underestimate how much control flow and memory behavior depends on them.
+
+5
+00:00:19.011 --> 00:00:23.194
+A small numeric mistake can change the meaning of a program.
+
+6
+00:00:23.194 --> 00:00:27.757
+A conversion can turn a negative value into a very large count.
+
+7
+00:00:27.757 --> 00:00:32.700
+A multiplication can produce a result that does not represent the intended size.
+
+8
+00:00:32.700 --> 00:00:34.981
+A subtraction can move past zero.
+
+9
+00:00:34.981 --> 00:00:42.205
+A comparison between signed and unsigned values can make a guard look correct while it checks the wrong condition.
+
+10
+00:00:42.205 --> 00:00:45.247
+These defects are rarely about one isolated operator.
+
+11
+00:00:45.247 --> 00:00:50.190
+They usually come from unclear assumptions about domain, range, unit, and failure behavior.
+
+12
+00:00:50.190 --> 00:00:58.175
+One function treats a value as a byte count, another as an element count, and a third as a signed offset.
+
+13
+00:00:58.175 --> 00:01:03.118
+The code still compiles, but the contract has become hard to reason about.
+
+14
+00:01:03.118 --> 00:01:05.779
+Prevention starts by making numeric intent visible.
+
+15
+00:01:05.779 --> 00:01:06.920
+Choose types deliberately.
+
+16
+00:01:06.920 --> 00:01:09.582
+Validate external values before relying on them.
+
+17
+00:01:09.582 --> 00:01:12.624
+Check arithmetic preconditions before calculating sizes or indexes.
+
+18
+00:01:12.624 --> 00:01:17.186
+Convert only after confirming that the destination type can represent the value.
+
+19
+00:01:17.186 --> 00:01:22.129
+Make failure behavior explicit instead of letting invalid values drift through the system.
+
+20
+00:01:22.129 --> 00:01:26.312
+Tools help, but tools work best inside a disciplined engineering process.
+
+21
+00:01:26.312 --> 00:01:32.395
+Compiler diagnostics, static analysis, sanitizers, boundary tests, and code review can all reveal integer defects earlier.
+
+22
+00:01:32.395 --> 00:01:40.000
+They are strongest when the team already treats numeric values as part of secure design, not as incidental implementation detail.

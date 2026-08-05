@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.798
+Every network message should be parsed defensively.
+
+2
+00:00:02.798 --> 00:00:09.592
+Length fields, counts, offsets, command names, identifiers, encodings, and nested structures all require validation before allocation, copying,
+
+3
+00:00:09.592 --> 00:00:11.191
+indexing, or business logic.
+
+4
+00:00:11.191 --> 00:00:20.383
+A parser should assume that input can be incomplete, inconsistent, or intentionally outside the normal range, and it should reject that input before
+
+5
+00:00:20.383 --> 00:00:21.981
+it affects application state.
+
+6
+00:00:21.981 --> 00:00:23.580
+Validation should be specific.
+
+7
+00:00:23.580 --> 00:00:25.978
+A maximum message size protects memory.
+
+8
+00:00:25.978 --> 00:00:28.776
+A maximum header count protects parser work.
+
+9
+00:00:28.776 --> 00:00:32.373
+A maximum nesting depth protects recursive or structured formats.
+
+10
+00:00:32.373 --> 00:00:37.968
+Type checks, range checks, encoding checks, and version checks make the protocol contract executable.
+
+11
+00:00:37.968 --> 00:00:42.764
+If a field is optional, the parser should define the default behavior.
+
+12
+00:00:42.764 --> 00:00:47.560
+If a field is required, absence should fail in a controlled way.
+
+13
+00:00:47.560 --> 00:00:49.158
+Resource limits protect availability.
+
+14
+00:00:49.158 --> 00:00:57.951
+A program can be correct for one request and still fail under many slow connections, many queued jobs, or many oversized messages.
+
+15
+00:00:57.951 --> 00:01:06.344
+Limits on connection count, queued work, request size, parse depth, retained buffers, and per-peer rate can keep resource use predictable.
+
+16
+00:01:06.344 --> 00:01:11.939
+The limits should be observable so operators can distinguish normal pressure from configuration problems.
+
+17
+00:01:11.939 --> 00:01:14.737
+Parsing should be separated from business logic.
+
+18
+00:01:14.737 --> 00:01:21.131
+Raw network bytes should become validated structures before they influence authorization, routing, storage, or state transitions.
+
+19
+00:01:21.131 --> 00:01:26.327
+Malformed input should release temporary resources and avoid detailed responses that expose internals.
+
+20
+00:01:26.327 --> 00:01:34.320
+This separation makes code review easier because reviewers can see where trust changes from untrusted input to validated protocol data.

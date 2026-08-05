@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.479
+Thread lifetime is a core part of secure concurrent design.
+
+2
+00:00:03.479 --> 00:00:09.393
+A thread should have a clear owner, a clear unit of work, and a clear shutdown path.
+
+3
+00:00:09.393 --> 00:00:16.003
+If the code cannot explain who is responsible for stopping and joining a thread, cleanup risk is already present.
+
+4
+00:00:16.003 --> 00:00:20.525
+A std::thread must be joined or otherwise handled according to its contract.
+
+5
+00:00:20.525 --> 00:00:28.179
+Joining gives the owning code a synchronization point and helps ensure that referenced objects are still alive while the thread uses them.
+
+6
+00:00:28.179 --> 00:00:34.093
+std::jthread, when available, improves this pattern by joining in its destructor and supporting cooperative stop requests.
+
+7
+00:00:34.093 --> 00:00:35.832
+Detached threads are review-sensitive.
+
+8
+00:00:35.832 --> 00:00:42.442
+Detaching removes the easy join point and makes lifetime, shutdown, error reporting, and resource cleanup harder to reason about.
+
+9
+00:00:42.442 --> 00:00:48.704
+It may be appropriate in narrow designs, but it should not be the default escape from ownership complexity.
+
+10
+00:00:48.704 --> 00:00:51.835
+Captured this is a common source of lifetime risk.
+
+11
+00:00:51.835 --> 00:01:00.532
+A background task that stores a pointer or reference to an object must not run after that object is destroyed unless ownership has been transferred
+
+12
+00:01:00.532 --> 00:01:02.272
+or lifetime is intentionally extended.
+
+13
+00:01:02.272 --> 00:01:04.359
+Cancellation should be cooperative and explicit.
+
+14
+00:01:04.359 --> 00:01:10.273
+Threads should check stop flags, stop tokens, queue shutdown states, or other documented signals at appropriate points.
+
+15
+00:01:10.273 --> 00:01:14.100
+Forced assumptions about when a thread will stop make cleanup brittle.
+
+16
+00:01:14.100 --> 00:01:17.231
+Thread pools and background workers need the same discipline.
+
+17
+00:01:17.231 --> 00:01:25.232
+Work items should not outlive the data they reference, and shutdown should stop accepting new work, notify waiting workers, drain or cancel pending
+
+18
+00:01:25.232 --> 00:01:28.015
+work according to policy, and join worker threads.
+
+19
+00:01:28.015 --> 00:01:33.234
+Review lifetime by following references, captures, buffers, callbacks, and ownership transfers across the thread boundary.
+
+20
+00:01:33.234 --> 00:01:38.800
+Secure cleanup depends on knowing which objects remain valid until each thread is done with them.

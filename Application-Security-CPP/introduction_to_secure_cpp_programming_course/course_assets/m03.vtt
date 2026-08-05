@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.953
+Ownership answers the question of who is responsible for a resource.
+
+2
+00:00:03.953 --> 00:00:10.781
+That resource might be memory, a file handle, a socket, a lock, a cryptographic context, or a temporary object.
+
+3
+00:00:10.781 --> 00:00:14.734
+Lifetime answers when that object or resource is valid to use.
+
+4
+00:00:14.734 --> 00:00:19.765
+Many C++ security and reliability issues are really ownership and lifetime issues in disguise.
+
+5
+00:00:19.765 --> 00:00:22.640
+RAII helps by tying cleanup to object lifetime.
+
+6
+00:00:22.640 --> 00:00:25.874
+A file wrapper closes the file in its destructor.
+
+7
+00:00:25.874 --> 00:00:29.827
+A lock guard releases the lock when the guard leaves scope.
+
+8
+00:00:29.827 --> 00:00:33.421
+A container releases its allocation when the container is destroyed.
+
+9
+00:00:33.421 --> 00:00:40.249
+This pattern makes cleanup happen during normal returns, early returns, and exceptions without duplicating cleanup code across every path.
+
+10
+00:00:40.249 --> 00:00:45.639
+Smart pointers can express ownership more clearly than raw pointers when dynamic ownership is needed.
+
+11
+00:00:45.639 --> 00:00:47.436
+A unique_ptr communicates single ownership.
+
+12
+00:00:47.436 --> 00:00:53.545
+A shared_ptr communicates shared ownership, though it should not be used just to avoid thinking about design.
+
+13
+00:00:53.545 --> 00:00:57.858
+A weak_ptr can break cycles or observe shared ownership without extending lifetime.
+
+14
+00:00:57.858 --> 00:01:01.811
+Move semantics allow ownership to transfer from one object to another.
+
+15
+00:01:01.811 --> 00:01:06.483
+That is powerful, but reviewers should know what state remains after a move.
+
+16
+00:01:06.483 --> 00:01:15.467
+Moved-from objects are still valid for operations allowed by their type, but the program should not assume they retain their old value unless the
+
+17
+00:01:15.467 --> 00:01:16.904
+type explicitly promises it.
+
+18
+00:01:16.904 --> 00:01:22.295
+Raw pointers and references still have a place as non-owning views or interoperability boundaries.
+
+19
+00:01:22.295 --> 00:01:27.326
+The important rule is that non-owning access must not outlive the owned object.
+
+20
+00:01:27.326 --> 00:01:35.950
+Passing a reference into a callback, storing a pointer in a long-lived object, or launching asynchronous work with borrowed data all deserve careful
+
+21
+00:01:35.950 --> 00:01:36.669
+lifetime review.
+
+22
+00:01:36.669 --> 00:01:42.419
+RAII and smart pointers reduce risk, but they do not remove the need for design clarity.
+
+23
+00:01:42.419 --> 00:01:49.966
+Secure C++ code should make ownership visible in types, keep borrowing short and obvious, and treat dangling references, stale pointers, unclear
+
+24
+00:01:49.966 --> 00:01:53.200
+shared ownership, and cleanup during failure as review priorities.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Avoiding Hardcoded and Embedded Secrets",
+  "graphicAlt": "Secret-lifecycle diagram for Avoiding Hardcoded and Embedded Secrets, connecting an opaque provider reference to least-privilege retrieval, bounded in-memory use, protected storage, rotation, revocation, safe telemetry, and incident recovery.",
+  "narration": "Source code, header files, test data, build scripts, container images, binaries, installers, documentation, and crash reports are poor places to store secrets. Even a private repository is not a secret store. It may be cloned to many machines, backed up, indexed, scanned by tools, mirrored for builds, shared with vendors, or preserved in long-lived artifacts. Once a secret enters that ecosystem, the team often loses precise control over where copies exist.\n\nEmbedded secrets are especially troublesome in compiled C++ software because they can travel with binaries, packages, firmware images, or installers. Removing the line from the current source file is not enough if the value remains in source history, build logs, debug symbols, test fixtures, release artifacts, or deployment caches. In many cases the correct response includes rotating or revoking the secret, cleaning known artifacts, and reviewing how it entered the workflow.\n\nPrevention should be layered. Use secret scanning, code review, pre-commit controls where available, safe example values, and test fixtures that never reuse production credentials. Documentation should show dummy examples, not real tokens. Build systems should avoid printing secret values. Developers should know the approved way to request and inject secrets for local, test, and production environments. A small amount of process saves a large amount of cleanup.",
+  "narrationPoints": [
+    "Source code, header files, test data, build scripts, container images, binaries, installers, documentation, and crash reports are poor places to store secrets.",
+    "In many cases the correct response includes rotating or revoking the secret, cleaning known artifacts, and reviewing how it entered the workflow.",
+    "Embedded secrets are especially troublesome in compiled C++ software because they can travel with binaries, packages, firmware images, or installers.",
+    "Removing the line from the current source file is not enough if the value remains in source history, build logs, debug symbols, test fixtures, release artifacts, or deployment caches.",
+    "Use secret scanning, code review, pre-commit controls where available, safe example values, and test fixtures that never reuse production credentials.",
+    "Developers should know the approved way to request and inject secrets for local, test, and production environments."
+  ]
+};

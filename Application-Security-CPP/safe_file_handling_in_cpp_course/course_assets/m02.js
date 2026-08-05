@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "File Paths, Trust Boundaries, and Allowed Locations",
+  "graphicAlt": "Path-boundary diagram showing an untrusted relative name passing component validation into an application-owned root, while absolute paths, parent traversal, alternate separators, and uncontrolled locations are rejected.",
+  "narration": "A file path is input. Treat it as untrusted unless it is fully controlled by the application and cannot be influenced by users, configuration, environment, plugins, or other processes. Path validation is different from content validation. A path answers where the program may operate. File contents answer what data the program may accept after the file is opened and read.\n\nSafe designs usually start by defining allowed locations. Which directory may the application read from? Which directory may it write to? Are temporary files allowed in a shared location? Are absolute paths ever acceptable? Which locations are always out of scope? These decisions should be part of a central path policy, not scattered string checks in every caller.\n\nNormalization can make path strings easier to compare by resolving syntactic details such as redundant separators or simple relative components. But a normalized string does not automatically prove that the final target is safe. Canonical path checks can help enforce boundaries because they consider how the filesystem resolves a path, but they still require care with platform behavior, links, permissions, and timing.\n\nThe practical habit is to accept paths only through a narrow boundary. Convert the caller's input into an application-approved location, reject ambiguity, and keep the resulting path object close to the policy that approved it. When reviewers see one path authority rather than many local string checks, file handling becomes easier to test and maintain.",
+  "narrationPoints": [
+    "File contents answer what data the program may accept after the file is opened and read.",
+    "Treat it as untrusted unless it is fully controlled by the application and cannot be influenced by users, configuration, environment, plugins, or other processes.",
+    "Safe designs usually start by defining allowed locations.",
+    "Canonical path checks can help enforce boundaries because they consider how the filesystem resolves a path, but they still require care with platform behavior, links, permissions, and timing.",
+    "When reviewers see one path authority rather than many local string checks, file handling becomes easier to test and maintain.",
+    "The practical habit is to accept paths only through a narrow boundary."
+  ]
+};

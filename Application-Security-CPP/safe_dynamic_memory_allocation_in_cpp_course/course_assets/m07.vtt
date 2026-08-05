@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.181
+Safe dynamic allocation also means handling memory pressure and resource limits.
+
+2
+00:00:04.181 --> 00:00:11.783
+External size values from files, protocols, APIs, configuration, command-line arguments, and user input should be treated as untrusted until
+
+3
+00:00:11.783 --> 00:00:12.163
+validated.
+
+4
+00:00:12.163 --> 00:00:17.864
+A number that parses successfully may still be far outside the application's acceptable range.
+
+5
+00:00:17.864 --> 00:00:19.765
+Apply reasonable maximums before allocation.
+
+6
+00:00:19.765 --> 00:00:28.127
+The maximum should come from product requirements, service limits, device capacity, tenant policy, or data format rules, not just from the largest
+
+7
+00:00:28.127 --> 00:00:30.027
+value a type can represent.
+
+8
+00:00:30.027 --> 00:00:35.729
+A value can fit in a size type and still be unreasonable for the system.
+
+9
+00:00:35.729 --> 00:00:38.769
+Define behavior for allocation failure and memory pressure.
+
+10
+00:00:38.769 --> 00:00:46.751
+Depending on project policy, the program might return an error, throw, reject the request, degrade gracefully, shed work, or fail closed.
+
+11
+00:00:46.751 --> 00:00:52.833
+The important point is that failure behavior is predictable and does not leave partial ownership behind.
+
+12
+00:00:52.833 --> 00:00:58.534
+Large allocations can affect availability and stability even when they do not violate memory safety.
+
+13
+00:00:58.534 --> 00:01:03.475
+They can increase latency, trigger paging, starve other work, or cause cascading failures.
+
+14
+00:01:03.475 --> 00:01:08.416
+Defensive resource limits are part of secure engineering because they preserve predictable operation.
+
+15
+00:01:08.416 --> 00:01:11.457
+Systems should fail safely when limits are exceeded.
+
+16
+00:01:11.457 --> 00:01:15.638
+Error messages should be useful to operators without exposing sensitive internals.
+
+17
+00:01:15.638 --> 00:01:17.919
+Cleanup should release any partial resources.
+
+18
+00:01:17.919 --> 00:01:24.000
+Monitoring should make repeated allocation pressure visible so teams can tune limits and investigate abnormal workloads.

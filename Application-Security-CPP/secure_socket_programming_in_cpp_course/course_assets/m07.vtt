@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.364
+Raw sockets do not provide confidentiality, integrity, or peer authentication by themselves.
+
+2
+00:00:04.364 --> 00:00:11.638
+If data crosses an untrusted network or carries sensitive information, a secure-channel mechanism such as TLS is usually required.
+
+3
+00:00:11.638 --> 00:00:14.912
+The defensive goal is not to design custom cryptography.
+
+4
+00:00:14.912 --> 00:00:22.549
+The goal is to use approved libraries, safe defaults, and clear policy so the channel provides the protection the application expects.
+
+5
+00:00:22.549 --> 00:00:23.640
+Certificate validation matters.
+
+6
+00:00:23.640 --> 00:00:32.733
+A client should verify that the certificate chain is trusted, that the certificate is valid for the current time and policy, and that the hostname
+
+7
+00:00:32.733 --> 00:00:35.642
+matches the service identity it intended to reach.
+
+8
+00:00:35.642 --> 00:00:43.644
+Disabling certificate checks for convenience is a serious production risk because it can turn an encrypted connection into a connection with no
+
+9
+00:00:43.644 --> 00:00:44.735
+reliable peer authentication.
+
+10
+00:00:44.735 --> 00:00:46.917
+Server-side policy matters as well.
+
+11
+00:00:46.917 --> 00:00:52.736
+Supported protocol versions, certificate configuration, private key handling, client authentication requirements, and library update practices should
+
+12
+00:00:52.736 --> 00:00:54.191
+be owned and reviewed.
+
+13
+00:00:54.191 --> 00:01:00.374
+These settings should follow organizational policy and current platform guidance rather than being copied from old examples.
+
+14
+00:01:00.374 --> 00:01:03.647
+Development exceptions should be visibly separated from production configuration.
+
+15
+00:01:03.647 --> 00:01:05.466
+TLS errors should fail safely.
+
+16
+00:01:05.466 --> 00:01:13.103
+A certificate failure, handshake failure, policy mismatch, or hostname mismatch should not silently downgrade the connection or continue as if the
+
+17
+00:01:13.103 --> 00:01:14.194
+channel were secure.
+
+18
+00:01:14.194 --> 00:01:18.922
+Diagnostics should be useful for operators without printing secrets or private key material.
+
+19
+00:01:18.922 --> 00:01:26.560
+Secure channels are part of the protocol contract, so tests and release reviews should verify that validation behavior is still active.

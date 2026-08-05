@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.064
+Choosing an IPC mechanism is a security and maintainability decision, not just a performance choice.
+
+2
+00:00:06.064 --> 00:00:14.149
+Named pipes, local sockets, message queues, platform messaging APIs, RPC-style frameworks, shared memory, and helper processes each make different
+
+3
+00:00:14.149 --> 00:00:14.554
+tradeoffs.
+
+4
+00:00:14.554 --> 00:00:21.831
+The right answer depends on trust boundaries, identity support, permission controls, message shape, reliability, observability, platform support, and
+
+5
+00:00:21.831 --> 00:00:22.639
+failure behavior.
+
+6
+00:00:22.639 --> 00:00:24.660
+Start with the trust model.
+
+7
+00:00:24.660 --> 00:00:34.767
+If the receiver needs to know who connected, choose a mechanism that can expose reliable peer identity or can be combined with a strong authorization
+
+8
+00:00:34.767 --> 00:00:35.172
+layer.
+
+9
+00:00:35.172 --> 00:00:42.853
+If callers need different permissions, the endpoint should support clear access policy instead of relying on broad global state.
+
+10
+00:00:42.853 --> 00:00:47.704
+If messages are complex, the mechanism should make framing and validation straightforward.
+
+11
+00:00:47.704 --> 00:00:49.725
+Performance features need extra discipline.
+
+12
+00:00:49.725 --> 00:00:57.002
+Shared memory can reduce copies, but it requires explicit bounds, synchronization, mapping size validation, lifetime rules, and cleanup.
+
+13
+00:00:57.002 --> 00:01:03.470
+Streaming mechanisms are flexible, but they need framing, maximum message sizes, partial-read handling, and backpressure.
+
+14
+00:01:03.470 --> 00:01:09.535
+Helper processes can improve containment, but they need startup, shutdown, restart, and health-check behavior.
+
+15
+00:01:09.535 --> 00:01:10.343
+Reviewability matters.
+
+16
+00:01:10.343 --> 00:01:19.237
+An IPC API that makes identity, permissions, framing, limits, and errors visible is usually safer than one that hides those decisions behind
+
+17
+00:01:19.237 --> 00:01:19.641
+convenience.
+
+18
+00:01:19.641 --> 00:01:30.961
+The team should be able to explain why the mechanism was chosen, what it protects, what it does not protect, and how it behaves when the peer is
+
+19
+00:01:30.961 --> 00:01:32.982
+slow, unauthorized, incompatible, or gone.
+
+20
+00:01:32.982 --> 00:01:36.216
+Mechanism choice should also consider deployment and operations.
+
+21
+00:01:36.216 --> 00:01:40.259
+Can the endpoint be configured safely on every supported platform?
+
+22
+00:01:40.259 --> 00:01:42.280
+Can administrators reason about permissions?
+
+23
+00:01:42.280 --> 00:01:47.940
+Can support staff distinguish startup failure from permission denial, version mismatch, or resource pressure?
+
+24
+00:01:47.940 --> 00:01:53.600
+Those questions often decide whether an IPC design remains maintainable after release and upgrades.

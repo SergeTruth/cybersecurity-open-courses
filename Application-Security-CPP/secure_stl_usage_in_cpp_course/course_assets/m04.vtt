@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.650
+Standard containers reduce many manual memory mistakes, but they do not make every access bounds-checked.
+
+2
+00:00:05.650 --> 00:00:13.419
+A container-backed design still needs clear size discipline, especially when indexes, counts, offsets, or lengths come from outside the trusted part
+
+3
+00:00:13.419 --> 00:00:14.478
+of the program.
+
+4
+00:00:14.478 --> 00:00:21.188
+size() tells you how many elements are present. capacity() tells you how much storage may be available without reallocating.
+
+5
+00:00:21.188 --> 00:00:22.953
+Capacity is not initialized data.
+
+6
+00:00:22.953 --> 00:00:27.191
+Code that treats capacity as available elements is making an unsafe assumption.
+
+7
+00:00:27.191 --> 00:00:31.428
+operator[] can be appropriate when the surrounding logic has already proven bounds.
+
+8
+00:00:31.428 --> 00:00:37.785
+The problem is not the operator itself; the problem is hiding an assumption that no reviewer can verify.
+
+9
+00:00:37.785 --> 00:00:43.788
+When uncertainty remains, checked access such as at() or an explicit guard can make the contract clearer.
+
+10
+00:00:43.788 --> 00:00:48.379
+Externally influenced sizes should be validated before allocation, indexing, copying, slicing, or transformation.
+
+11
+00:00:48.379 --> 00:00:57.207
+A parsed number may fit in a type but still be too large for a container, too expensive to process, or inconsistent with another field.
+
+12
+00:00:57.207 --> 00:00:59.326
+Signed and unsigned comparisons deserve review.
+
+13
+00:00:59.326 --> 00:01:05.329
+Container sizes are commonly represented with unsigned types, while parsed inputs and loop indexes may be signed.
+
+14
+00:01:05.329 --> 00:01:10.626
+Conversions should happen only after checking that values are nonnegative and within the intended range.
+
+15
+00:01:10.626 --> 00:01:13.098
+Iterator ranges are another form of bounds.
+
+16
+00:01:13.098 --> 00:01:22.279
+A half-open range should come from the same container or a clearly related view, and the end iterator should really be reachable from the begin
+
+17
+00:01:22.279 --> 00:01:22.632
+iterator.
+
+18
+00:01:22.632 --> 00:01:26.517
+Mismatched ranges can make an algorithm's contract impossible to satisfy.
+
+19
+00:01:26.517 --> 00:01:30.048
+The defensive habit is to state the precondition before access.
+
+20
+00:01:30.048 --> 00:01:39.229
+If code indexes, copies, reserves, or loops based on a value, reviewers should see where that value was checked and what limit the program is willing
+
+21
+00:01:39.229 --> 00:01:39.935
+to support.
+
+22
+00:01:39.935 --> 00:01:42.760
+Size discipline is also a resource-control practice.
+
+23
+00:01:42.760 --> 00:01:49.470
+Reserving or resizing a container based on input can allocate large amounts of memory before any element is processed.
+
+24
+00:01:49.470 --> 00:01:55.120
+Validate both the raw size and any derived size calculation before asking a container to grow.

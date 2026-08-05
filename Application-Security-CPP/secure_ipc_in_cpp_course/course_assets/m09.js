@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure IPC Habits",
+  "graphicAlt": "Interprocess communication diagram for Course Summary: Secure IPC Habits, with separate caller and service trust zones connected by an authenticated, length-bounded message channel and explicit authorization, cleanup, and failure controls.",
+  "narration": "Secure IPC starts with a boundary mindset. Local communication can cross user, session, privilege, service, container, and lifecycle boundaries, so connection success should never automatically become operation authority. Choose IPC mechanisms that make identity, permissions, validation, and failure behavior reviewable.\n\nValidate every message before trust. Define message types, versions, required fields, sizes, ranges, state requirements, and unsupported behavior. Convert accepted messages into narrow internal types, and authorize each sensitive operation close to the boundary.\n\nBound resources deliberately. Limit message size, queue growth, active requests, processing time, shared-memory mappings, handle transfer, and per-connection memory. Treat handles and descriptors as capabilities with ownership, cleanup, and permission rules.\n\nFinally, design for failure and test it. Cover malformed, unauthorized, oversized, incomplete, duplicate, out-of-order, timeout, cancellation, disconnect, and shutdown cases. Log safe categories without exposing secrets. Review IPC changes as security-critical because they connect local authority, parsing, concurrency, resources, and operating-system behavior. These habits keep local communication understandable as systems grow from one helper process into a larger multi-process architecture. They also make future platform changes, permission changes, and helper-process redesigns easier to assess before release, deployment, maintenance, support, audits, ownership transfer, and team handoffs later safely.",
+  "narrationPoints": [
+    "Choose IPC mechanisms that make identity, permissions, validation, and failure behavior reviewable.",
+    "Define message types, versions, required fields, sizes, ranges, state requirements, and unsupported behavior.",
+    "Convert accepted messages into narrow internal types, and authorize each sensitive operation close to the boundary.",
+    "Treat handles and descriptors as capabilities with ownership, cleanup, and permission rules.",
+    "Limit message size, queue growth, active requests, processing time, shared-memory mappings, handle transfer, and per-connection memory.",
+    "Review IPC changes as security-critical because they connect local authority, parsing, concurrency, resources, and operating-system behavior."
+  ]
+};

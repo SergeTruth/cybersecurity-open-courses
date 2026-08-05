@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Errors, Tests, and Incident Response",
+  "graphicAlt": "Secret-lifecycle diagram for Logging, Errors, Tests, and Incident Response, connecting an opaque provider reference to least-privilege retrieval, bounded in-memory use, protected storage, rotation, revocation, safe telemetry, and incident recovery.",
+  "narration": "Many secret exposures happen through secondary systems rather than the primary secret store. Logs, exception messages, telemetry, debug output, CI console output, crash dumps, memory dumps, test snapshots, screenshots, and support bundles can all reveal sensitive values. A C++ service may correctly load a secret from a vault and then accidentally print it while formatting a startup error or serializing a configuration object for diagnostics.\n\nError messages should identify missing, invalid, expired, or inaccessible secret configuration without printing the secret itself. Logging frameworks should support redaction, and secret-bearing types should avoid default string conversion that exposes values. Tests should use dummy values, isolated test credentials, or mock secret providers. CI systems should mask sensitive variables and avoid publishing artifacts that contain generated configuration files or runtime dumps with secret material.\n\nIncident response should be planned before an exposure occurs. If a secret may have been disclosed, the response usually includes rotation, revocation where applicable, cleanup of affected artifacts, and review of the path that leaked it. The team should ask whether logging rules, tests, review, or deployment policy need to change. The response should also identify owners for follow-up work, because cleanup often spans application code, build systems, artifact storage, and operational runbooks. Treat the incident as a lifecycle failure, not only a one-line bug. A disciplined response prevents the same pattern from recurring in another subsystem.",
+  "narrationPoints": [
+    "Logs, exception messages, telemetry, debug output, CI console output, crash dumps, memory dumps, test snapshots, screenshots, and support bundles can all reveal sensitive values.",
+    "Error messages should identify missing, invalid, expired, or inaccessible secret configuration without printing the secret itself.",
+    "Logging frameworks should support redaction, and secret-bearing types should avoid default string conversion that exposes values.",
+    "Tests should use dummy values, isolated test credentials, or mock secret providers.",
+    "The team should ask whether logging rules, tests, review, or deployment policy need to change.",
+    "Treat the incident as a lifecycle failure, not only a one-line bug."
+  ]
+};

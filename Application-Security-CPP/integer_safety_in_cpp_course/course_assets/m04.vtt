@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.920
+Safe arithmetic often means checking whether an operation is valid before performing it.
+
+2
+00:00:04.920 --> 00:00:09.462
+Addition, subtraction, multiplication, division, shifts, and unit conversions can all have preconditions.
+
+3
+00:00:09.462 --> 00:00:17.031
+If the result cannot be represented or does not make sense for the domain, the operation should not quietly continue.
+
+4
+00:00:17.031 --> 00:00:20.815
+Signed overflow must not be treated as acceptable program behavior.
+
+5
+00:00:20.815 --> 00:00:25.357
+It can invalidate assumptions that the optimizer, reviewer, and maintainer rely on.
+
+6
+00:00:25.357 --> 00:00:33.305
+A defensive design checks maximum and minimum boundaries before performing an operation that could exceed them, especially when the result controls
+
+7
+00:00:33.305 --> 00:00:34.818
+allocation, indexing, or limits.
+
+8
+00:00:34.818 --> 00:00:41.252
+Unsigned arithmetic has defined wraparound behavior, but that does not automatically make it safe for application logic.
+
+9
+00:00:41.252 --> 00:00:51.471
+A counter that wraps, a subtraction that moves from zero to a large value, or a size calculation that rolls over can still produce a wrong decision.
+
+10
+00:00:51.471 --> 00:00:55.255
+Defined arithmetic is not the same as domain-valid arithmetic.
+
+11
+00:00:55.255 --> 00:00:57.526
+Subtraction and multiplication deserve special care.
+
+12
+00:00:57.526 --> 00:01:02.446
+Subtraction can underflow when a value is already at or below a boundary.
+
+13
+00:01:02.446 --> 00:01:11.529
+Multiplication is common in size calculations, such as element count times element size, and it can exceed the type range before any allocation or
+
+14
+00:01:11.529 --> 00:01:12.286
+copy happens.
+
+15
+00:01:12.286 --> 00:01:16.828
+Division also has edge cases, including zero divisors and minimum signed values.
+
+16
+00:01:16.828 --> 00:01:21.369
+Functions should define what happens when a result cannot be represented safely.
+
+17
+00:01:21.369 --> 00:01:27.803
+The policy might be an error return, an optional result, an exception, or rejecting the input earlier.
+
+18
+00:01:27.803 --> 00:01:29.317
+What matters is consistency.
+
+19
+00:01:29.317 --> 00:01:33.858
+Silent truncation, wraparound, or partial progress should not be the accidental behavior.
+
+20
+00:01:33.858 --> 00:01:36.129
+Testing should include near-limit arithmetic.
+
+21
+00:01:36.129 --> 00:01:44.077
+Values around zero, one, maximums, minimums, expected domain caps, and unit conversion boundaries are more revealing than ordinary middle-of-range
+
+22
+00:01:44.077 --> 00:01:44.455
+values.
+
+23
+00:01:44.455 --> 00:01:48.240
+Good tests verify both successful calculations and safe failure paths.

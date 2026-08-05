@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.506
+Caller identity is central to secure IPC.
+
+2
+00:00:02.506 --> 00:00:11.456
+A server may need to know which user, service account, session, container, or process context is connected before it can safely decide what work to
+
+3
+00:00:11.456 --> 00:00:11.814
+perform.
+
+4
+00:00:11.814 --> 00:00:18.974
+Where the platform provides peer credentials, endpoint permissions, access control lists, or service identity information, the IPC layer should use
+
+5
+00:00:18.974 --> 00:00:21.480
+those signals deliberately and document their limits.
+
+6
+00:00:21.480 --> 00:00:23.628
+Authentication and authorization are separate decisions.
+
+7
+00:00:23.628 --> 00:00:28.282
+Allowing a process to connect does not mean every requested operation is allowed.
+
+8
+00:00:28.282 --> 00:00:36.874
+A status query, a read-only request, an administrative operation, and a request that touches another user’s data may all require different checks.
+
+9
+00:00:36.874 --> 00:00:43.676
+Operation-level authorization keeps sensitive actions from inheriting authority merely because the pipe, socket, or queue accepted a connection.
+
+10
+00:00:43.676 --> 00:00:45.824
+Least privilege should shape the interface.
+
+11
+00:00:45.824 --> 00:00:54.058
+Expose only the commands each caller needs, pass scoped capabilities instead of broad host access, and avoid ambient authority hidden in global state.
+
+12
+00:00:54.058 --> 00:01:01.218
+A helper process should not receive the power to perform every operation just because one workflow needs a narrow function.
+
+13
+00:01:01.218 --> 00:01:07.662
+Boundaries such as user, session, tenant, project, desktop, service, and privilege level should be represented in the design.
+
+14
+00:01:07.662 --> 00:01:13.748
+Checks should happen close to the IPC boundary and again near sensitive resource use when context matters.
+
+15
+00:01:13.748 --> 00:01:20.192
+Safe defaults should deny unknown callers, unsupported operations, and requests that cannot be tied to a permitted authority.
+
+16
+00:01:20.192 --> 00:01:24.130
+Permission checks should be testable, not implied by comments or naming.
+
+17
+00:01:24.130 --> 00:01:33.796
+Include cases for the right user, the wrong user, a service account, a stale client, and a caller that can connect but lacks authority for a specific
+
+18
+00:01:33.796 --> 00:01:34.154
+operation.
+
+19
+00:01:34.154 --> 00:01:40.240
+Good diagnostics should explain the category of denial without exposing sensitive context to the caller or logs.

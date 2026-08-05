@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.593
+Password storage is not the same as hashing a file.
+
+2
+00:00:03.593 --> 00:00:07.545
+Passwords are often human-chosen and lower entropy than random keys.
+
+3
+00:00:07.545 --> 00:00:15.449
+A fast general cryptographic hash can be excellent for fingerprints while still being the wrong construction for stored passwords because speed helps
+
+4
+00:00:15.449 --> 00:00:16.527
+large-scale guessing.
+
+5
+00:00:16.527 --> 00:00:22.275
+Password storage needs mechanisms designed for that purpose, not an ordinary digest wrapped in local conventions.
+
+6
+00:00:22.275 --> 00:00:26.945
+Approved password hashing or key-derivation mechanisms use salts and configurable cost parameters.
+
+7
+00:00:26.945 --> 00:00:33.053
+A salt helps ensure that identical passwords do not produce identical stored values across accounts or systems.
+
+8
+00:00:33.053 --> 00:00:40.598
+Work factors and memory cost are intended to make verification acceptable for the legitimate service while making bulk guessing more expensive.
+
+9
+00:00:40.598 --> 00:00:47.065
+Those parameters should be stored with the verifier so they can be upgraded over time as policy changes.
+
+10
+00:00:47.065 --> 00:00:50.298
+C++ applications should keep password handling narrow and careful.
+
+11
+00:00:50.298 --> 00:00:54.609
+Do not log passwords, password-derived values, reset secrets, or verification material.
+
+12
+00:00:54.609 --> 00:00:57.484
+Keep storage formats versioned enough to support migration.
+
+13
+00:00:57.484 --> 00:01:05.388
+Separate password verifier logic from general hashing utilities so a developer cannot accidentally choose a fast digest because the helper was easy
+
+14
+00:01:05.388 --> 00:01:06.106
+to call.
+
+15
+00:01:06.106 --> 00:01:12.214
+Review should ask whether salts are generated correctly, parameters are current, and upgrade behavior has been tested.
+
+16
+00:01:12.214 --> 00:01:19.040
+The verification path should also handle legacy records deliberately so old formats do not remain accepted forever by accident.

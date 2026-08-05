@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.368
+Hashing appears in many C++ systems, but it does not always mean the same thing.
+
+2
+00:00:05.368 --> 00:00:13.957
+A hash may identify a file, verify that downloaded content has not changed, store a password verifier, support a signature workflow, create a cache
+
+3
+00:00:13.957 --> 00:00:16.820
+key, compare structured data, or protect integrity metadata.
+
+4
+00:00:16.820 --> 00:00:23.620
+Those use cases sound related because they all produce a digest, yet their security expectations can be very different.
+
+5
+00:00:23.620 --> 00:00:27.914
+The first defensive habit is to separate ordinary hashing from cryptographic hashing.
+
+6
+00:00:27.914 --> 00:00:35.430
+A fast hash for an unordered container or cache lookup is useful, but it is not designed to protect security decisions.
+
+7
+00:00:35.430 --> 00:00:44.377
+A cryptographic hash can be useful for a file fingerprint, but it is still not the right answer for password storage or keyed message authentication.
+
+8
+00:00:44.377 --> 00:00:46.166
+Hashing is also not encryption.
+
+9
+00:00:46.166 --> 00:00:50.818
+A digest is not meant to be decrypted back into the original input.
+
+10
+00:00:50.818 --> 00:00:52.608
+Secure hashing starts with purpose.
+
+11
+00:00:52.608 --> 00:01:01.197
+Before choosing an algorithm, a library, an output length, or a storage format, the team should know what the digest is expected to prove.
+
+12
+00:01:01.197 --> 00:01:07.996
+Is it a fingerprint, a password verifier, an authenticated integrity check, a compatibility marker, or a non-security identifier?
+
+13
+00:01:07.996 --> 00:01:11.933
+The answer affects error handling, storage, comparison, migration, and incident response.
+
+14
+00:01:11.933 --> 00:01:20.164
+Once the purpose is clear, C++ code can use approved libraries, documented wrappers, and reviewable formats instead of treating hashing as a generic
+
+15
+00:01:20.164 --> 00:01:20.880
+utility call.

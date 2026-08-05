@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.663
+Integer safety starts with understanding what a type can represent.
+
+2
+00:00:03.663 --> 00:00:08.059
+An integer type is not just a small box for a number.
+
+3
+00:00:08.059 --> 00:00:12.821
+It carries a range, a signedness rule, conversion behavior, and sometimes portability assumptions.
+
+4
+00:00:12.821 --> 00:00:18.682
+When a value crosses an API boundary, those details can determine whether the result is meaningful.
+
+5
+00:00:18.682 --> 00:00:21.246
+Signed and unsigned types serve different purposes.
+
+6
+00:00:21.246 --> 00:00:28.939
+Signed types can represent values below zero, which may be appropriate for deltas, offsets, or states where negative values have meaning.
+
+7
+00:00:28.939 --> 00:00:34.434
+Unsigned types represent nonnegative ranges, which can be useful for sizes and bit-oriented values.
+
+8
+00:00:34.434 --> 00:00:37.731
+Problems appear when the code treats signedness as cosmetic.
+
+9
+00:00:37.731 --> 00:00:46.522
+Fixed-width types such as std::uint32_t or std::int64_t are helpful when a format, protocol, file, or cross-platform boundary requires a specific
+
+10
+00:00:46.522 --> 00:00:46.888
+representation.
+
+11
+00:00:46.888 --> 00:00:48.720
+They make storage expectations clearer.
+
+12
+00:00:48.720 --> 00:00:56.779
+They should still be paired with domain rules because the largest representable value is often much larger than the largest acceptable value.
+
+13
+00:00:56.779 --> 00:00:59.343
+Other integer types have platform-dependent widths.
+
+14
+00:00:59.343 --> 00:01:04.838
+Plain int, long, and related aliases can vary across compilers, operating systems, and build targets.
+
+15
+00:01:04.838 --> 00:01:09.600
+Code that assumes one width may behave differently when moved to another environment.
+
+16
+00:01:09.600 --> 00:01:13.263
+Portability-sensitive code should name representation and range expectations explicitly.
+
+17
+00:01:13.263 --> 00:01:17.659
+size_t is the standard type for object sizes and many container sizes.
+
+18
+00:01:17.659 --> 00:01:23.886
+It is useful and necessary, but it can create review challenges when mixed casually with signed values.
+
+19
+00:01:23.886 --> 00:01:27.916
+A negative signed value converted to size_t no longer looks negative.
+
+20
+00:01:27.916 --> 00:01:32.678
+Code should avoid casual mixing and should check range before crossing that boundary.
+
+21
+00:01:32.678 --> 00:01:36.707
+The main design habit is to treat range limits as requirements.
+
+22
+00:01:36.707 --> 00:01:46.964
+Ask what the value means, what unit it uses, what minimum and maximum are valid for the domain, and what should happen when the value is outside that
+
+23
+00:01:46.964 --> 00:01:47.331
+range.
+
+24
+00:01:47.331 --> 00:01:51.360
+The chosen type should support that contract instead of hiding it.

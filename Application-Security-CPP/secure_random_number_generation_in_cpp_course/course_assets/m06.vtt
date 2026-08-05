@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.966
+Different security values have different requirements, so a secure RNG policy should not treat every random-looking value as the same thing.
+
+2
+00:00:07.966 --> 00:00:13.759
+Tokens and session identifiers need enough unpredictability that they cannot be guessed in any practical way.
+
+3
+00:00:13.759 --> 00:00:19.914
+They also need careful handling after generation: limited lifetime, appropriate storage, controlled logging, and clear invalidation behavior.
+
+4
+00:00:19.914 --> 00:00:27.517
+A strong random token can still be mishandled if it is copied into logs or retained longer than the design expects.
+
+5
+00:00:27.517 --> 00:00:32.586
+Keys require approved generation workflows, storage protections, access control, rotation plans, and destruction rules.
+
+6
+00:00:32.586 --> 00:00:37.655
+Nonces and initialization vectors have requirements that depend on the cryptographic construction being used.
+
+7
+00:00:37.655 --> 00:00:41.276
+Some require uniqueness, some require unpredictability, and some require both.
+
+8
+00:00:41.276 --> 00:00:48.155
+Salts are usually not secrets, but they still need to be generated correctly for the scheme that uses them.
+
+9
+00:00:48.155 --> 00:00:55.034
+Challenges, correlation identifiers, and temporary names may have still different requirements based on whether guessing them has security impact.
+
+10
+00:00:55.034 --> 00:01:00.103
+The safe lesson is to understand the use case before implementing the call site.
+
+11
+00:01:00.103 --> 00:01:06.621
+Follow the requirements of the chosen cryptographic library, protocol, or organizational standard rather than inventing a local recipe.
+
+12
+00:01:06.621 --> 00:01:16.034
+Document what the value is for, how much randomness is required, whether uniqueness matters, how it is encoded, how long it lives, and whether it can
+
+13
+00:01:16.034 --> 00:01:17.121
+appear in telemetry.
+
+14
+00:01:17.121 --> 00:01:24.000
+That documentation gives reviewers a concrete basis for judging whether the chosen random source and handling rules are appropriate.

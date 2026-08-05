@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.131
+Hash functions operate on exact bytes.
+
+2
+00:00:02.131 --> 00:00:09.589
+Two inputs that look equivalent to a user may hash differently because of encoding, line endings, whitespace, field order, case normalization,
+
+3
+00:00:09.589 --> 00:00:11.364
+compression, metadata, or binary representation.
+
+4
+00:00:11.364 --> 00:00:19.532
+The reverse problem also appears in systems integration: two components may believe they are verifying the same object while one hashes a serialized
+
+5
+00:00:19.532 --> 00:00:22.373
+message and the other hashes a normalized view.
+
+6
+00:00:22.373 --> 00:00:26.280
+Defensive hashing defines the data boundary before calling the hash function.
+
+7
+00:00:26.280 --> 00:00:30.541
+Is the digest over file content only, or does it include metadata?
+
+8
+00:00:30.541 --> 00:00:37.644
+Is it over a byte-for-byte network message, a canonical JSON representation, a normalized string, or a compressed payload?
+
+9
+00:00:37.644 --> 00:00:39.064
+Where does decoding happen?
+
+10
+00:00:39.064 --> 00:00:40.840
+Which character encoding is expected?
+
+11
+00:00:40.840 --> 00:00:45.102
+These details should not be left to incidental behavior in helper functions.
+
+12
+00:00:45.102 --> 00:00:50.784
+Boundary rules should be close to the API so callers cannot accidentally hash a different representation.
+
+13
+00:00:50.784 --> 00:00:55.400
+Canonicalization should happen before hashing, and the rules should be documented and tested.
+
+14
+00:00:55.400 --> 00:01:02.503
+Tests should include equivalent-looking inputs, invalid encodings, unexpected field order, platform line endings, and boundary cases such as empty
+
+15
+00:01:02.503 --> 00:01:02.858
+values.
+
+16
+00:01:02.858 --> 00:01:06.765
+The goal is not to make every input look the same.
+
+17
+00:01:06.765 --> 00:01:14.222
+The goal is to ensure that security decisions are based on the exact bytes the design intended to protect or compare.
+
+18
+00:01:14.222 --> 00:01:21.680
+When two services participate in the same workflow, they should share the same canonicalization contract rather than relying on local defaults.

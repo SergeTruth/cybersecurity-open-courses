@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.715
+Iterator safety can be summarized as a practical roadmap.
+
+2
+00:00:03.715 --> 00:00:05.779
+Start by keeping ranges clear.
+
+3
+00:00:05.779 --> 00:00:13.622
+A traversal should have an understandable beginning, an understandable boundary, and a clear rule for when dereference is valid.
+
+4
+00:00:13.622 --> 00:00:17.750
+Past-the-end iterators and sentinels are boundaries, not elements.
+
+5
+00:00:17.750 --> 00:00:20.639
+Next, respect the container's invalidation rules.
+
+6
+00:00:20.639 --> 00:00:24.767
+Mutation can change which iterators, references, and pointers remain usable.
+
+7
+00:00:24.767 --> 00:00:32.197
+Erase, insert, clear, reallocation, and container-specific operations should be reviewed with the actual container contract in mind.
+
+8
+00:00:32.197 --> 00:00:36.325
+Do not carry old assumptions from one container into another.
+
+9
+00:00:36.325 --> 00:00:40.866
+Structure traversal and mutation so the next valid state is obvious.
+
+10
+00:00:40.866 --> 00:00:44.168
+Use returned iterators after erase operations when appropriate.
+
+11
+00:00:44.168 --> 00:00:48.709
+Consider collect-then-modify patterns when they make the logic safer.
+
+12
+00:00:48.709 --> 00:00:55.726
+Prefer standard algorithms, ranges, and range-based loops when they communicate intent and reduce manual iterator handling.
+
+13
+00:00:55.726 --> 00:00:59.441
+Treat lifetimes and categories as part of the contract.
+
+14
+00:00:59.441 --> 00:01:05.220
+Views, borrowed ranges, temporary objects, stored iterators, and async work all require ownership reasoning.
+
+15
+00:01:05.220 --> 00:01:11.412
+Generic code should express whether it needs input, forward, bidirectional, random-access, or contiguous behavior.
+
+16
+00:01:11.412 --> 00:01:13.063
+Finally, verify the assumptions.
+
+17
+00:01:13.063 --> 00:01:18.429
+Use boundary tests, debug iterator modes, sanitizers, stricter diagnostic builds, and code review.
+
+18
+00:01:18.429 --> 00:01:21.319
+Iterator safety is not a special ceremony.
+
+19
+00:01:21.319 --> 00:01:30.400
+It is a normal part of secure C++ engineering: make assumptions visible, keep lifetimes honest, and test the paths where validity changes.

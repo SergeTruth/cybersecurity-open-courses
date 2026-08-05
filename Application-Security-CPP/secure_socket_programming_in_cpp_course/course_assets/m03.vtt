@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.027
+A service's bind address determines who can reach it.
+
+2
+00:00:04.027 --> 00:00:08.456
+Binding to loopback is very different from binding to every interface.
+
+3
+00:00:08.456 --> 00:00:16.108
+IPv4, IPv6, wildcard addresses, public interfaces, local-only services, container networking, and service discovery can all change the actual
+
+4
+00:00:16.108 --> 00:00:17.718
+exposure of a listener.
+
+5
+00:00:17.718 --> 00:00:22.551
+Defensive socket programming starts by making that exposure an explicit deployment decision.
+
+6
+00:00:22.551 --> 00:00:29.799
+For local control planes, development-only services, or process-to-process helpers, loopback may be the correct default.
+
+7
+00:00:29.799 --> 00:00:37.853
+For services that must accept remote clients, the bind address, port, firewall expectation, and authentication model should be documented together.
+
+8
+00:00:37.853 --> 00:00:45.907
+A listener should not become externally reachable just because a default address was convenient during development or because the deployment
+
+9
+00:00:45.907 --> 00:00:47.517
+environment changed around it.
+
+10
+00:00:47.517 --> 00:00:49.933
+Clients also need careful address handling.
+
+11
+00:00:49.933 --> 00:00:57.182
+DNS and address resolution can fail, return multiple answers, return IPv4 or IPv6 addresses, or change over time.
+
+12
+00:00:57.182 --> 00:01:06.041
+A client should handle these outcomes safely and avoid assuming that a name or resolved address automatically has the intended trust level.
+
+13
+00:01:06.041 --> 00:01:14.095
+Connection policy, certificate hostname checks, and service identity decisions should be based on defined rules rather than casual string comparisons.
+
+14
+00:01:14.095 --> 00:01:19.330
+Ports, listeners, and service-discovery behavior belong in operational documentation and release review.
+
+15
+00:01:19.330 --> 00:01:26.175
+The safest design exposes only the required interface, limits unnecessary listeners, and provides clear configuration for operators.
+
+16
+00:01:26.175 --> 00:01:35.035
+Exposure control is not a substitute for authentication or encryption, but it reduces accidental reachability and makes the security model easier to
+
+17
+00:01:35.035 --> 00:01:35.840
+reason about.
