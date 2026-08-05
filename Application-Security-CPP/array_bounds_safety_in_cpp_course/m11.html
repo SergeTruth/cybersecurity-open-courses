@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="array_bounds_safety_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;B&quot;,&quot;q03&quot;:&quot;C&quot;,&quot;q04&quot;:&quot;D&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;C&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>1. Why does array bounds safety matter in C++?</legend>
+            <label><input type="radio" name="q01" value="A" required> Bounds defects affect reliability but cannot influence confidentiality or control flow.</label>
+            <label><input type="radio" name="q01" value="B"> Modern C++ checks every subscript automatically, even through raw pointers and iterators.</label>
+            <label><input type="radio" name="q01" value="C"> Array safety matters only for fixed arrays allocated directly on the stack.</label>
+            <label><input type="radio" name="q01" value="D"> Invalid range access can corrupt data, crash processes, or expose adjacent memory.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>2. Why is a pointer alone not enough to describe a safe range?</legend>
+            <label><input type="radio" name="q02" value="A" required> A non-null pointer proves that every following element belongs to one live allocation.</label>
+            <label><input type="radio" name="q02" value="B"> A pointer lacks inherent extent, ownership, and lifetime information for the range.</label>
+            <label><input type="radio" name="q02" value="C"> Pointer arithmetic carries the original array length into each derived pointer value.</label>
+            <label><input type="radio" name="q02" value="D"> A pointer identifies its allocation boundary through the platform's virtual-memory metadata.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>3. Why can array decay create review risk?</legend>
+            <label><input type="radio" name="q03" value="A" required> Decay copies all array elements into dynamic storage before the function call begins.</label>
+            <label><input type="radio" name="q03" value="B"> Decay preserves the extent through the pointer type but hides only the element type.</label>
+            <label><input type="radio" name="q03" value="C"> Decay converts an array to a pointer and discards its visible element count.</label>
+            <label><input type="radio" name="q03" value="D"> Decay prevents a function from reading any element beyond the first array position.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>4. How do std::array, std::vector, and std::span help bounds safety?</legend>
+            <label><input type="radio" name="q04" value="A" required> These abstractions make unchecked operator[] perform mandatory runtime validation in every build.</label>
+            <label><input type="radio" name="q04" value="B"> A span owns its elements and extends their lifetime until the span is destroyed.</label>
+            <label><input type="radio" name="q04" value="C"> A vector prevents iterator invalidation when insertion reallocates its underlying storage.</label>
+            <label><input type="radio" name="q04" value="D"> Containers and spans keep fixed, dynamic, or view bounds near the data.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>5. Why do off-by-one errors often happen in loop logic?</legend>
+            <label><input type="radio" name="q05" value="A" required> Manual bounds and increments often mishandle empty, final, or one-element cases.</label>
+            <label><input type="radio" name="q05" value="B"> Off-by-one defects occur because the last valid index always equals the element count.</label>
+            <label><input type="radio" name="q05" value="C"> Range-based loops create an extra iteration after processing the final element.</label>
+            <label><input type="radio" name="q05" value="D"> An inclusive upper bound is always safer because it explicitly names the final position.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>6. Why must start and length be validated together?</legend>
+            <label><input type="radio" name="q06" value="A" required> Validating the requested length alone proves that any starting offset is inside the range.</label>
+            <label><input type="radio" name="q06" value="B"> The offset may be valid while the requested length still exceeds remaining data.</label>
+            <label><input type="radio" name="q06" value="C"> Offset and length can be added first because unsigned overflow produces a safe rejection.</label>
+            <label><input type="radio" name="q06" value="D"> A nonzero length guarantees that a subrange contains at least one valid element.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>7. How should external indexes and lengths be treated?</legend>
+            <label><input type="radio" name="q07" value="A" required> A syntactically valid integer is safe to use as an index without comparing bounds.</label>
+            <label><input type="radio" name="q07" value="B"> Converting an external length to size_t rejects every negative or oversized representation.</label>
+            <label><input type="radio" name="q07" value="C"> Treat external indexes as untrusted and validate parsing, consistency, and range before use.</label>
+            <label><input type="radio" name="q07" value="D"> File and network lengths become trusted after the surrounding message checksum succeeds.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>8. What should safer array API contracts define?</legend>
+            <label><input type="radio" name="q08" value="A" required> A safe array API needs only a non-null pointer precondition for each buffer.</label>
+            <label><input type="radio" name="q08" value="B"> Returning an iterator eliminates the need to document invalidation and lifetime rules.</label>
+            <label><input type="radio" name="q08" value="C"> Output buffers can omit capacity when the caller knows the expected result size.</label>
+            <label><input type="radio" name="q08" value="D"> Define valid ranges, units, ownership, output capacity, and failure behavior for callers.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>9. Why are sanitizers and boundary tests useful?</legend>
+            <label><input type="radio" name="q09" value="A" required> A clean sanitizer run statically proves every index expression is valid for all inputs.</label>
+            <label><input type="radio" name="q09" value="B"> Boundary tests should omit empty ranges because production arrays always contain data.</label>
+            <label><input type="radio" name="q09" value="C"> Sanitizers and edge tests expose exercised range mistakes and preserve corrected behavior.</label>
+            <label><input type="radio" name="q09" value="D"> Compiler warnings replace runtime tests when APIs use standard containers exclusively.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>10. Why should legacy array code be refactored incrementally with regression tests?</legend>
+            <label><input type="radio" name="q10" value="A" required> Small, tested adapters preserve behavior while bounded interfaces replace legacy calls incrementally.</label>
+            <label><input type="radio" name="q10" value="B"> A complete one-step rewrite is required because adapters cannot enforce any bounds contract.</label>
+            <label><input type="radio" name="q10" value="C"> Regression tests should be removed during refactoring so old unsafe behavior is not preserved.</label>
+            <label><input type="radio" name="q10" value="D"> Legacy pointer APIs become safe once parameter names include buffer and length.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

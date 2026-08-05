@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: HTTP Client Safety Habits",
+  "graphicAlt": "HTTP review map connecting endpoint identity, request encoding, credential scope, redirect revalidation, response budgets, error categories, cleanup, and operational telemetry.",
+  "narration": "Secure HTTP clients begin with mature building blocks. Use maintained libraries or approved platform APIs, keep TLS certificate and hostname validation enabled, and document the trust-store and endpoint identity model. Treat development trust settings as separate from production policy.\n\nBuild requests deliberately. Use structured APIs for URLs, headers, bodies, and encodings. Keep trusted configuration separate from external input. Validate any user-controlled destination before use, and make redirect, proxy, and credential-forwarding behavior explicit.\n\nProtect authentication material. API keys, bearer tokens, cookies, client certificates, private keys, and signed request material should come from approved secret mechanisms, have narrow scope, and stay out of logs and support artifacts. Plan expiration, rotation, and environment separation before the first incident.\n\nTreat responses as untrusted input and operations as bounded work. Validate status, content type, shape, and meaning. Limit response size, decompression, buffering, redirects, retries, and total duration. Log enough safe context to operate the system, and review HTTP client code as the place where network behavior, credentials, parsing, and reliability meet. These habits keep outbound integrations understandable as services, environments, dependencies, and security requirements evolve across the lifetime of the application and its supporting infrastructure in production systems and team ownership records.",
+  "narrationPoints": [
+    "Use maintained libraries or approved platform APIs, keep TLS certificate and hostname validation enabled, and document the trust-store and endpoint identity model.",
+    "Validate any user-controlled destination before use, and make redirect, proxy, and credential-forwarding behavior explicit.",
+    "API keys, bearer tokens, cookies, client certificates, private keys, and signed request material should come from approved secret mechanisms, have narrow scope, and stay out of logs and support artifacts.",
+    "Log enough safe context to operate the system, and review HTTP client code as the place where network behavior, credentials, parsing, and reliability meet.",
+    "Treat responses as untrusted input and operations as bounded work.",
+    "Limit response size, decompression, buffering, redirects, retries, and total duration."
+  ]
+};

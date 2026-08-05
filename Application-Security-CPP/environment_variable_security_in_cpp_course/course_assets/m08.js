@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Platform and Deployment Differences",
+  "graphicAlt": "Cross-platform comparison showing case-sensitive POSIX names and case-insensitive Windows names converging on a portable duplicate-name and value-size validation policy.",
+  "narration": "Environment behavior is not identical across platforms. Windows, Linux, macOS, containers, system services, desktop launches, CI runners, and embedded deployments can differ in case sensitivity, encoding, variable size, inheritance behavior, service configuration, and exposure through inspection tooling. Portable code should not rely on assumptions that are only true in one launch model.\n\nDeployment systems often shape the environment. Containers and orchestration platforms commonly inject configuration through environment variables. Service managers may supply a controlled set of values. CI systems may expose secret variables to build or test steps. Desktop launches may inherit a user session in ways that differ from server processes.\n\nThese differences affect validation and operations. A variable name that is distinct on one platform may collide on another. Encoding differences can affect parsing. Size limits can affect large values. Process inspection behavior can change how sensitive environment values are exposed. The application should document the environments it supports and test the ones that matter.\n\nThe defensive habit is to normalize policy where possible and isolate platform-specific details where necessary. Centralized environment loading helps because platform differences are handled in one place rather than leaking into business logic.\n\nPortability work should include realistic launch scenarios, not only local command-line runs. Test the service account, container image, scheduled job, installer path, and CI job that production actually uses. Each launch path can add, remove, rename, or expose variables in ways that change both reliability and security.",
+  "narrationPoints": [
+    "Portable code should not rely on assumptions that are only true in one launch model.",
+    "Desktop launches may inherit a user session in ways that differ from server processes.",
+    "The application should document the environments it supports and test the ones that matter.",
+    "Centralized environment loading helps because platform differences are handled in one place rather than leaking into business logic.",
+    "Test the service account, container image, scheduled job, installer path, and CI job that production actually uses.",
+    "Portability work should include realistic launch scenarios, not only local command-line runs."
+  ]
+};

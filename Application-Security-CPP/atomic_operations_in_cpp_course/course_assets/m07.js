@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Lifetime, Publication, and Shutdown Hazards",
+  "graphicAlt": "A worker shutdown timeline keeps the published object alive until all readers observe the stop flag, finish access, and join.",
+  "narration": "Atomics do not automatically solve lifetime safety. A thread may safely read an atomic flag and still access an object that has already been destroyed if ownership and shutdown were not designed together.\n\nPublication is a common hazard. If one thread stores a pointer, reference, or readiness flag for another thread to observe, the design must ensure that the pointed-to object is fully initialized, visible under the intended ordering, and alive for the entire period readers may use it.\n\nShared ownership can help in some designs, but it is not a universal answer. It changes lifetime management and may introduce its own coordination and cleanup questions. Raw pointers and captured references require even more explicit boundaries.\n\nBackground workers need clear ownership. A detached worker that watches an atomic stop flag may still outlive the buffer, logger, queue, or owning object it uses. Joining or cooperative cancellation gives the owner a chance to synchronize shutdown with object lifetime.\n\nShutdown flags are review-sensitive because they coordinate behavior across threads. The flag should be paired with notification, wake-up, cancellation, or join policy as appropriate. A thread that never checks the flag, or checks it only after a long wait, may still stall cleanup.\n\nObject destruction order matters. If an atomic is part of an object, readers must not continue using it after the object is destroyed. If the atomic points to other state, that other state needs its own lifetime guarantee.\n\nThe safe habit is to design synchronization and lifetime together. Atomic visibility answers what a thread can see; ownership rules answer whether the thing being seen still exists.\n\nBoth answers must be true at the same time for the design to be reliable.",
+  "narrationPoints": [
+    "A thread may safely read an atomic flag and still access an object that has already been destroyed if ownership and shutdown were not designed together.",
+    "Raw pointers and captured references require even more explicit boundaries.",
+    "Joining or cooperative cancellation gives the owner a chance to synchronize shutdown with object lifetime.",
+    "A thread that never checks the flag, or checks it only after a long wait, may still stall cleanup.",
+    "If the atomic points to other state, that other state needs its own lifetime guarantee.",
+    "Both answers must be true at the same time for the design to be reliable."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Protocol State, Versions, and Compatibility",
+  "graphicAlt": "A protocol state machine negotiates supported versions and allows only message types valid for the authenticated session's current state.",
+  "narration": "Binary protocols are not only collections of fields. Many protocols also have state. A message may be valid only during setup, only after authentication, only after a capability was negotiated, or only before a stream has closed. A parser that checks shape but ignores state can accept messages at times when the application contract does not allow them.\n\nState machines should be explicit enough to test. The implementation should define allowed transitions, required prior messages, terminal states, retry behavior, and cleanup on failure. When state changes happen in scattered code, reviewers have a harder time confirming that invalid sequences are rejected and that partial state is cleaned up.\n\nVersioning adds another layer. Binary protocols often evolve over years, so parsers should be clear about which versions, flags, optional fields, and feature combinations they understand. Unsupported versions should fail safely with useful diagnostics. Unknown fields may be ignored, rejected, or preserved depending on the contract, but that behavior should be deliberate rather than accidental.\n\nReserved fields are a design choice, not filler. A protocol might require them to be zero, preserve them for forwarding, or reject them when set. Whatever the rule is, tests should lock it down so later compatibility work does not silently weaken validation.\n\nCompatibility should help evolution without accepting undefined behavior. A secure parser can support old and new message forms, but it should still enforce framing, lengths, numeric ranges, state rules, and authentication requirements for every supported version. Version tests should include both accepted and rejected cases, so maintainers can extend the protocol without guessing which historical behavior is still required in deployed systems and long-lived clients. Compatibility must remain explicit and testable over time.",
+  "narrationPoints": [
+    "Binary protocols are not only collections of fields.",
+    "State machines should be explicit enough to test.",
+    "Binary protocols often evolve over years, so parsers should be clear about which versions, flags, optional fields, and feature combinations they understand.",
+    "Reserved fields are a design choice, not filler.",
+    "Compatibility should help evolution without accepting undefined behavior.",
+    "Compatibility must remain explicit and testable over time."
+  ]
+};

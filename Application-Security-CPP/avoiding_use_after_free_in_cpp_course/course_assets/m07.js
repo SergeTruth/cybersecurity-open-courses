@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Legacy Boundaries and Ownership Transfer",
+  "graphicAlt": "A legacy C handle enters a unique_ptr with a custom deleter and crosses an ownership-transfer boundary exactly once.",
+  "narration": "Legacy APIs and low-level boundaries often use raw pointers, output parameters, pointer-to-pointer patterns, custom allocation routines, and raw handles. These interfaces are not automatically unsafe, but they make ownership harder to see. Use-after-free prevention requires translating those conventions into clear C++ lifetime rules as soon as practical.\n\nDocument who allocates, who frees, who may store access, and what happens on failure. If a C API returns a raw pointer that must be released by a specific function, wrap it in RAII immediately. A std::unique_ptr with a correct custom deleter or a small dedicated wrapper can make cleanup predictable. If the API only borrows access during a call, do not let that raw pointer escape into long-lived storage.\n\nSmart pointer boundary operations deserve special review. .get() provides temporary borrowed access and should not create a hidden owner. .release() gives up ownership without deleting the object, so another clear owner must take responsibility immediately. .reset() replaces or clears ownership and can invalidate existing borrows into the old object.\n\nOwnership transfer should be atomic from the reader's point of view. If a raw pointer is released on one line and adopted later, an exception, early return, or maintenance edit can leave the object unmanaged or leave old borrowers confused. Prefer constructing the receiving owner immediately, or wrap the legacy call in one small function that cannot be misused by callers.\n\nKeep unsafe conventions at the edge. Convert raw ownership into RAII, convert nullable or output patterns into clearer local abstractions, and test success and cleanup paths. The safest boundary is one where future maintainers can tell exactly who owns the object before and after every call.",
+  "narrationPoints": [
+    "Legacy APIs and low-level boundaries often use raw pointers, output parameters, pointer-to-pointer patterns, custom allocation routines, and raw handles.",
+    "Document who allocates, who frees, who may store access, and what happens on failure.",
+    "A std::unique_ptr with a correct custom deleter or a small dedicated wrapper can make cleanup predictable.",
+    "Ownership transfer should be atomic from the reader's point of view.",
+    "Prefer constructing the receiving owner immediately, or wrap the legacy call in one small function that cannot be misused by callers.",
+    "The safest boundary is one where future maintainers can tell exactly who owns the object before and after every call."
+  ]
+};

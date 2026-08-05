@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Compiler Security Features Matter",
+  "graphicAlt": "A defense-in-depth stack layers warnings, runtime checks, exploit mitigations, sanitizers, tests, and artifact verification around C++ application code.",
+  "narration": "C++ gives engineers direct control over memory, object lifetime, ABI boundaries, layout, and performance-sensitive behavior. That control is one reason C++ remains important in systems software, embedded products, high-performance services, tooling, games, and infrastructure. It also means that mistakes in ownership, bounds, initialization, concurrency, or build configuration can become serious reliability and security defects.\n\nCompiler security features help reduce risk in several ways. Some diagnostics identify risky code before it ships. Some options insert runtime checks. Some influence how the final binary is laid out. Some help the operating system enforce stronger memory permissions. Others make unintended control-flow changes harder to turn into reliable behavior.\n\nThese features are not magic. They do not make unsafe buffer handling acceptable. They do not replace RAII, bounds-aware APIs, clear ownership, code review, testing, or dependency management. A hardened build profile is part of defense in depth, not a substitute for secure C++ design.\n\nThe practical habit is to treat compiler and linker hardening as engineering policy. Teams should know which features are enabled, why they are enabled, which platforms support them, which exceptions exist, and how the delivered binary is verified. A flag written in documentation does not help if it never reaches the release build.\n\nCompiler features work best as a layered system: strong warnings, static analysis, sanitizer builds, safer C++ abstractions, hardened release profiles, binary verification, and recurring governance. The goal is not to memorize every flag. The goal is to define the security intent and prove the build matches it.",
+  "narrationPoints": [
+    "C++ gives engineers direct control over memory, object lifetime, ABI boundaries, layout, and performance-sensitive behavior.",
+    "Some diagnostics identify risky code before it ships.",
+    "Others make unintended control-flow changes harder to turn into reliable behavior.",
+    "The practical habit is to treat compiler and linker hardening as engineering policy.",
+    "Compiler features work best as a layered system: strong warnings, static analysis, sanitizer builds, safer C++ abstractions, hardened release profiles, binary verification, and recurring governance.",
+    "The goal is to define the security intent and prove the build matches it."
+  ]
+};

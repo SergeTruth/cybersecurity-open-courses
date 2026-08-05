@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Mutex-Protected Containers and RAII Wrappers",
+  "graphicAlt": "A mutex-protected collection exposes push, erase, and snapshot operations while the underlying vector and its iterators remain private.",
+  "narration": "Many dependable concurrent data structures begin with a modest pattern: a standard C++ container, a mutex, and a wrapper that exposes a narrow set of safe operations. This approach is not glamorous, but it is often the right starting point. Standard containers give you mature behavior for storage and lookup. The mutex supplies mutual exclusion. The wrapper ties those two ideas together so callers cannot accidentally touch the container without following the synchronization rule.\n\nThe wrapper should protect complete state transitions, not just individual variables. For example, a push operation on a queue may update storage, size information, and a condition variable predicate. A cache insert may update the map and eviction metadata. Locking around one line at a time can still leave gaps where another thread observes inconsistent state. A good wrapper decides which operations are meaningful, performs them while the appropriate lock is held, and returns results in a form that does not require callers to keep using internal references after the lock is released.\n\nRAII lock types are a major advantage in C++. They make the lock lifetime visible in the local scope, and they release automatically during early returns or exceptions. That reduces the risk of forgotten unlocks and makes cleanup paths easier to reason about. The design still needs discipline: avoid holding locks while calling unknown callbacks, performing slow I/O, or acquiring unrelated locks in inconsistent order. When a simple synchronized wrapper meets the requirement, it is usually easier to test, review, and maintain than a custom low-level concurrency design.",
+  "narrationPoints": [
+    "Many dependable concurrent data structures begin with a modest pattern: a standard C++ container, a mutex, and a wrapper that exposes a narrow set of safe operations.",
+    "The wrapper ties those two ideas together so callers cannot accidentally touch the container without following the synchronization rule.",
+    "For example, a push operation on a queue may update storage, size information, and a condition variable predicate.",
+    "Locking around one line at a time can still leave gaps where another thread observes inconsistent state.",
+    "RAII lock types are a major advantage in C++.",
+    "When a simple synchronized wrapper meets the requirement, it is usually easier to test, review, and maintain than a custom low-level concurrency design."
+  ]
+};

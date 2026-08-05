@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Raw Pointers, References, and Borrowed Access",
+  "graphicAlt": "A safe accessor returns an owned byte snapshot, while a rejected design returns a span that outlives its unique owner.",
+  "narration": "Raw pointers and references are not automatically unsafe. They become risky when their role is unclear. In modern C++, a raw pointer should usually mean non-owning access, not responsibility for deletion. A reference is often clearer when the object is required and cannot be null. A raw pointer can be useful when missing data is meaningful or when interfacing with older APIs.\n\nBorrowed access must stay within the owner's lifetime. That is easy to verify when a function uses a parameter immediately and returns. It becomes harder when a pointer escapes: stored in a member, returned to a caller, captured by a lambda, placed into a container, or passed to asynchronous work. Review pointer escape carefully because it often turns a local borrow into a long-lived stale access risk.\n\nReturned references deserve special attention. Returning a reference to a local object is invalid because the local object's lifetime ends when the function returns. Returning a reference into a container may be valid only until the container changes. Returning a view into temporary data can look efficient while quietly extending access beyond the source.\n\nConst does not solve lifetime. A const pointer or reference may prevent mutation through that access path, but it can still refer to an object that has already been destroyed. Lifetime validity and mutability are separate questions.\n\nGood APIs make borrowing short, explicit, and boring. If the callee may store access, say so and specify who keeps the object alive. If null is allowed, describe what it means. If ownership is transferred, use an owning type. Use-after-free prevention depends on separating ownership from temporary access and making that separation visible.",
+  "narrationPoints": [
+    "Raw pointers and references are not automatically unsafe.",
+    "A raw pointer can be useful when missing data is meaningful or when interfacing with older APIs.",
+    "Returning a reference to a local object is invalid because the local object's lifetime ends when the function returns.",
+    "Returning a view into temporary data can look efficient while quietly extending access beyond the source.",
+    "If the callee may store access, say so and specify who keeps the object alive.",
+    "Use-after-free prevention depends on separating ownership from temporary access and making that separation visible."
+  ]
+};

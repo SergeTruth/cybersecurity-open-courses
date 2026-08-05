@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Atomics and Lock-Free Structures at a Safe Level",
+  "graphicAlt": "A single-producer single-consumer ring buffer labels acquire and release operations, reserved slots, and the invariant that distinguishes full from empty.",
+  "narration": "Atomics are valuable, but they are specialized tools. An atomic object can be accessed concurrently without creating a data race on that object, yet that property does not automatically protect a higher-level data structure. If a cache has a map, a size counter, and an eviction list, making one counter atomic does not keep the whole cache consistent. The design still needs a clear invariant and a synchronization strategy that protects the relationship among all relevant pieces of state.\n\nLock-free designs raise the review burden even further. The phrase lock-free does not mean simple, safe, or always faster. It describes progress properties under certain conditions, not overall design quality. Memory ordering decisions affect what one thread is allowed to observe from another, and mistakes can be subtle. Even experienced teams can struggle to reason about these choices without a small scope, strong documentation, targeted tests, and specialized review.\n\nA defensive organization should ask why lock-free behavior is required before accepting the complexity. Is there a measured contention problem? Is a blocking lock unacceptable for a specific real-time or low-latency requirement? Is there a mature library or platform primitive that already solves the problem? In many systems, a straightforward mutex, sharded lock design, immutable snapshot, or message-passing boundary is safer and easier to maintain. When atomics or lock-free structures are used, document the invariant, memory ordering assumptions, reclamation strategy, supported operations, and test evidence in one place.",
+  "narrationPoints": [
+    "Atomics are valuable, but they are specialized tools.",
+    "If a cache has a map, a size counter, and an eviction list, making one counter atomic does not keep the whole cache consistent.",
+    "The phrase lock-free does not mean simple, safe, or always faster.",
+    "Even experienced teams can struggle to reason about these choices without a small scope, strong documentation, targeted tests, and specialized review.",
+    "Is there a mature library or platform primitive that already solves the problem?",
+    "When atomics or lock-free structures are used, document the invariant, memory ordering assumptions, reclamation strategy, supported operations, and test evidence in one place."
+  ]
+};

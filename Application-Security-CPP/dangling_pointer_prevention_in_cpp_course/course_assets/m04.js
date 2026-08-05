@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "RAII and Smart Pointer Ownership",
+  "graphicAlt": "Smart-pointer lifecycle showing shared ownership ending, weak_ptr expiration, lock failure, and a safe absent result.",
+  "narration": "RAII connects resource management to object lifetime. When an owning object is constructed, it acquires or represents a resource. When that owning object is destroyed, its destructor releases the resource. This pattern makes cleanup predictable and reduces the need for manual cleanup scattered across every branch.\n\nstd::unique_ptr expresses exclusive ownership. It is a good fit when one object or scope is responsible for keeping a dynamically allocated object alive. Moving a unique pointer transfers that responsibility visibly. That makes ownership changes easier to see during review.\n\nstd::shared_ptr expresses shared ownership. It is appropriate when multiple owners truly need to keep the same object alive independently. The tradeoff is that shared ownership can make destruction timing less obvious. If it is used casually, it may hide a design question rather than answer it.\n\nstd::weak_ptr supports non-owning observation of an object managed by shared ownership. It lets code check whether the object is still available before use without extending lifetime by itself. This is useful for caches, callbacks, registries, and observer relationships where ownership should remain elsewhere.\n\nSmart pointers are not a substitute for design. They should reflect real ownership relationships. Replacing every raw pointer with shared ownership can make a system harder to understand. The right question is not which smart pointer looks safer, but who should own the object and how long observers are allowed to use it.\n\nManual delete paths should be minimized and reviewed carefully. When manual cleanup remains, the code should have clear single ownership, predictable failure behavior, and tests around destruction order. RAII wrappers can often isolate older cleanup patterns while the surrounding design is modernized.",
+  "narrationPoints": [
+    "RAII connects resource management to object lifetime.",
+    "std::unique_ptr expresses exclusive ownership.",
+    "It is appropriate when multiple owners truly need to keep the same object alive independently.",
+    "It lets code check whether the object is still available before use without extending lifetime by itself.",
+    "Replacing every raw pointer with shared ownership can make a system harder to understand.",
+    "RAII wrappers can often isolate older cleanup patterns while the surrounding design is modernized."
+  ]
+};

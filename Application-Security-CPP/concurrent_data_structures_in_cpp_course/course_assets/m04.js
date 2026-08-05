@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Concurrent Queues and Producer-Consumer Patterns",
+  "graphicAlt": "A bounded producer-consumer queue combines capacity, condition-variable predicates, backpressure, close state, and draining consumers.",
+  "narration": "Queues are one of the most common ways to connect concurrent parts of a program. Producers create work. Consumers receive work. The queue is the boundary where ownership, pacing, and shutdown rules meet. A safe queue is not just a container with a lock around push and pop. It is a coordination object, and its API should define what happens when the queue is empty, full, closing, cancelled, or destroyed while threads are waiting.\n\nCondition variables are useful for this pattern, but they require careful habits. Wait operations should use predicates that describe the protected state, such as work being available or shutdown being requested. Notifications should correspond to state changes made while holding the associated lock. Shutdown should be represented explicitly so waiting consumers can wake, observe that no more work will arrive, and exit cleanly. Without a clear shutdown state, programs often rely on timing, sentinel values, or thread interruption assumptions that are difficult to maintain.\n\nBounded queues are also a defensive design tool. An unbounded queue can hide overload until memory, latency, or downstream resources fail. A bounded queue forces the design to choose a backpressure policy: block, fail fast, drop according to a documented rule, or shed work at a higher layer. The queue should also define who owns each work item after it is accepted and what happens during cancellation. Testing should cover empty and full states, many producers, many consumers, repeated start and stop cycles, and clean destruction while no thread is left waiting indefinitely.",
+  "narrationPoints": [
+    "Queues are one of the most common ways to connect concurrent parts of a program.",
+    "A safe queue is not just a container with a lock around push and pop.",
+    "Notifications should correspond to state changes made while holding the associated lock.",
+    "Without a clear shutdown state, programs often rely on timing, sentinel values, or thread interruption assumptions that are difficult to maintain.",
+    "A bounded queue forces the design to choose a backpressure policy: block, fail fast, drop according to a documented rule, or shed work at a higher layer.",
+    "Testing should cover empty and full states, many producers, many consumers, repeated start and stop cycles, and clean destruction while no thread is left waiting indefinitely."
+  ]
+};

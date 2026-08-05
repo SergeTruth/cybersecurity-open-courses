@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="avoiding_use_after_free_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;B&quot;}'
+        >
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>1. What is use-after-free?</legend>
+            <label><input type="radio" name="q01" value="A" required> Use-after-free means reading allocated storage before its constructor has completed.</label>
+            <label><input type="radio" name="q01" value="B"> Use-after-free occurs whenever a pointer is null before a conditional check.</label>
+            <label><input type="radio" name="q01" value="C"> Use-after-free describes retaining unused live memory until normal process shutdown.</label>
+            <label><input type="radio" name="q01" value="D"> Use-after-free accesses an object in memory after its lifetime has ended.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>2. What is the first defense against use-after-free?</legend>
+            <label><input type="radio" name="q02" value="A" required> Define ownership and lifetime so destruction cannot reliably precede any permitted access.</label>
+            <label><input type="radio" name="q02" value="B"> Use raw pointers everywhere so each caller can independently decide when to delete.</label>
+            <label><input type="radio" name="q02" value="C"> Add null checks after dereferences because deallocation always changes aliases to null.</label>
+            <label><input type="radio" name="q02" value="D"> Increase allocation sizes so freed objects remain mapped for a longer period.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>3. What does borrowed access mean?</legend>
+            <label><input type="radio" name="q03" value="A" required> A borrowed pointer shares deletion responsibility equally with the object's primary owner.</label>
+            <label><input type="radio" name="q03" value="B"> Borrowed access permits use without ownership only within a guaranteed live interval.</label>
+            <label><input type="radio" name="q03" value="C"> Borrowing automatically extends lifetime until the final raw pointer leaves scope.</label>
+            <label><input type="radio" name="q03" value="D"> A borrow remains valid after container mutation because it does not own the element.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>4. When is a reference often clearer than a pointer?</legend>
+            <label><input type="radio" name="q04" value="A" required> A reference is preferred when the callee must delete the object before returning.</label>
+            <label><input type="radio" name="q04" value="B"> References carry runtime ownership counts that prevent the referent from being destroyed.</label>
+            <label><input type="radio" name="q04" value="C"> A reference is clearer when a required live object cannot be absent or reseated.</label>
+            <label><input type="radio" name="q04" value="D"> References remain valid after the referred container relocates the underlying element.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>5. Why can container modification create lifetime risk?</legend>
+            <label><input type="radio" name="q05" value="A" required> Mutation can erase or relocate elements and invalidate outstanding aliases.</label>
+            <label><input type="radio" name="q05" value="B"> Container iterators own their elements and therefore prevent erase or reallocation.</label>
+            <label><input type="radio" name="q05" value="C"> Only explicit clear operations invalidate aliases; insertion preserves every address.</label>
+            <label><input type="radio" name="q05" value="D"> Reserve guarantees that no future operation can invalidate any reference to the vector.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>6. How does RAII help prevent use-after-free?</legend>
+            <label><input type="radio" name="q06" value="A" required> RAII ties resource release to owner lifetime and makes transfer explicit.</label>
+            <label><input type="radio" name="q06" value="B"> RAII keeps all raw aliases valid after the owning wrapper has been destroyed.</label>
+            <label><input type="radio" name="q06" value="C"> RAII requires callers to invoke cleanup manually on every exceptional path.</label>
+            <label><input type="radio" name="q06" value="D"> Shared ownership is mandatory for every RAII resource, including local unique state.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>7. Why are callbacks and async work lifetime-sensitive?</legend>
+            <label><input type="radio" name="q07" value="A" required> A callback invocation always completes before the registration function can return.</label>
+            <label><input type="radio" name="q07" value="B"> Callbacks may execute after the creating scope ends, so captured lifetimes need ownership.</label>
+            <label><input type="radio" name="q07" value="C"> Capturing a raw this pointer causes the callback system to extend object lifetime.</label>
+            <label><input type="radio" name="q07" value="D"> Cancellation immediately destroys callback state even while another thread executes it.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>8. Why is .release() on a std::unique_ptr review-sensitive?</legend>
+            <label><input type="radio" name="q08" value="A" required> release destroys the managed object and returns a null pointer for confirmation.</label>
+            <label><input type="radio" name="q08" value="B"> release converts unique ownership into automatic shared ownership across all aliases.</label>
+            <label><input type="radio" name="q08" value="C"> Calling release is equivalent to reset because both invoke the configured deleter.</label>
+            <label><input type="radio" name="q08" value="D"> release transfers responsibility without destroying the object, so a new owner is required.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>9. What is a useful role for AddressSanitizer?</legend>
+            <label><input type="radio" name="q09" value="A" required> AddressSanitizer prevents all objects from being freed while raw pointers still exist.</label>
+            <label><input type="radio" name="q09" value="B"> AddressSanitizer proves asynchronous lifetime correctness without executing callback paths.</label>
+            <label><input type="radio" name="q09" value="C"> AddressSanitizer can detect exercised stale accesses and report allocation history.</label>
+            <label><input type="radio" name="q09" value="D"> AddressSanitizer makes invalidated container iterators safe by retaining old storage.</label>
+          </fieldset>
+
+          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+            <legend>10. Which review question best supports use-after-free prevention?</legend>
+            <label><input type="radio" name="q10" value="A" required> Ask whether the pointer is non-null, because non-null values prove live storage.</label>
+            <label><input type="radio" name="q10" value="B"> Ask who owns the object and whether every borrow ends before destruction or invalidation.</label>
+            <label><input type="radio" name="q10" value="C"> Ask whether deletion occurs in one source file, regardless of outstanding aliases.</label>
+            <label><input type="radio" name="q10" value="D"> Ask whether shared_ptr is used anywhere, because that guarantees all lifetime contracts.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

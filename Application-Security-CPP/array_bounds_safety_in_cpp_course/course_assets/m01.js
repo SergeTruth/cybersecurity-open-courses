@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Array Bounds Safety Matters",
+  "graphicAlt": "A contiguous array is drawn with valid indexes inside its boundary and two invalid accesses crossing into adjacent control data and unrelated objects.",
+  "narration": "Array bounds safety matters because arrays and contiguous storage are central to practical C++ programming. They appear in parsers, protocol handlers, file processing, graphics code, numerical libraries, embedded systems, databases, networking components, and performance-sensitive services. The language gives engineers powerful control over memory layout and access, but that control comes with responsibility for staying inside the intended range.\n\nA bounds mistake is not only a security concern. Reading or writing outside the intended range can corrupt data, produce wrong results, damage stability, hide defects until production, or make a codebase harder to maintain. The symptom may appear far away from the original mistake, which makes prevention much cheaper than investigation after the fact.\n\nValid array access depends on several facts staying true at the same time. The index must refer to an existing element. The length must describe the right unit. The range must belong to the object being accessed. The object must still be alive. When any of those assumptions are lost, code that looks ordinary can become unreliable.\n\nPrevention starts in design, not in a final check added near a risky operation. Good designs preserve bounds and lifetime information, prefer clear ownership, and avoid interfaces that require callers to remember hidden range rules. The more context the type and API carry, the less every reviewer has to reconstruct from memory.\n\nThe course theme is layered engineering. Prefer containers and bounded views where they fit. Validate indexes, offsets, lengths, and subranges before access. Test edge cases. Use sanitizers, compiler diagnostics, and hardened library modes during development. Then verify that release practices support the same bounds-safety goals.",
+  "narrationPoints": [
+    "Array bounds safety matters because arrays and contiguous storage are central to practical C++ programming.",
+    "Reading or writing outside the intended range can corrupt data, produce wrong results, damage stability, hide defects until production, or make a codebase harder to maintain.",
+    "The index must refer to an existing element.",
+    "Prevention starts in design, not in a final check added near a risky operation.",
+    "Prefer containers and bounded views where they fit.",
+    "Then verify that release practices support the same bounds-safety goals."
+  ]
+};

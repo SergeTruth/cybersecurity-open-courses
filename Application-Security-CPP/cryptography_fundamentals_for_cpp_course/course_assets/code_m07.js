@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "The application initializes OpenSSL secure memory at startup, and each move-only secret verifies that its allocation really came from that heap.",
+  "codeExamples": [
+    {
+      "title": "Require application-owned OpenSSL secure-heap initialization",
+      "language": "cpp",
+      "blurb": "Startup fails if another component initialized the process-global secure heap, and allocation fails unless OpenSSL confirms secure-heap backing.",
+      "code": "#include <cstddef>\n#include <new>\n#include <span>\n#include <stdexcept>\n#include <utility>\n#include <openssl/crypto.h>\n\nvoid initialize_application_secure_heap(std::size_t heap_bytes,\n                                        std::size_t minimum_allocation) {\n    if (heap_bytes < 64 * 1024 ||\n        minimum_allocation < 16 ||\n        minimum_allocation > heap_bytes) {\n        throw std::invalid_argument(\"secure heap policy\");\n    }\n    if (CRYPTO_secure_malloc_initialized() != 0) {\n        throw std::runtime_error(\n            \"secure heap was initialized outside application startup\");\n    }\n    if (CRYPTO_secure_malloc_init(heap_bytes, minimum_allocation) != 1 ||\n        CRYPTO_secure_malloc_initialized() == 0) {\n        throw std::runtime_error(\"secure heap initialization failed\");\n    }\n}\n\nclass SecureBytes {\npublic:\n    explicit SecureBytes(std::size_t size) : size_(validate(size)) {\n        if (CRYPTO_secure_malloc_initialized() == 0) {\n            throw std::runtime_error(\"secure heap is unavailable\");\n        }\n        data_ = static_cast<unsigned char*>(OPENSSL_secure_malloc(size_));\n        if (!data_) throw std::bad_alloc();\n        if (CRYPTO_secure_allocated(data_) == 0) {\n            OPENSSL_clear_free(data_, size_);\n            data_ = nullptr;\n            throw std::runtime_error(\"secret was not allocated securely\");\n        }\n    }\n\n    ~SecureBytes() {\n        if (data_) OPENSSL_secure_clear_free(data_, size_);\n    }\n\n    SecureBytes(const SecureBytes&) = delete;\n    SecureBytes& operator=(const SecureBytes&) = delete;\n    SecureBytes(SecureBytes&& other) noexcept\n        : data_(std::exchange(other.data_, nullptr)),\n          size_(std::exchange(other.size_, 0)) {}\n\n    std::span<unsigned char> bytes() noexcept { return {data_, size_}; }\n    std::size_t size() const noexcept { return size_; }\n    bool is_secure_heap_backed() const noexcept {\n        return data_ && CRYPTO_secure_allocated(data_) != 0;\n    }\n\nprivate:\n    static std::size_t validate(std::size_t size) {\n        if (size == 0 || size > 4096) {\n            throw std::length_error(\"secret size\");\n        }\n        return size;\n    }\n\n    unsigned char* data_{};\n    std::size_t size_{};\n};\n"
+    },
+    {
+      "title": "Test validation, verified secure allocation, and move ownership",
+      "language": "cpp",
+      "blurb": "The regression proves that ordinary-heap fallback is not accepted and that only one object frees the secure allocation.",
+      "code": "int test_secure_bytes_requires_verified_secure_heap() {\n    try {\n        SecureBytes unavailable(32);\n        return 1;\n    } catch (const std::runtime_error&) {\n    }\n\n    try {\n        SecureBytes rejected(5000);\n        return 2;\n    } catch (const std::length_error&) {\n    }\n\n    initialize_application_secure_heap(1024 * 1024, 32);\n    SecureBytes original(32);\n    if (!original.is_secure_heap_backed()) return 3;\n    SecureBytes moved(std::move(original));\n    if (original.size() != 0) return 4;\n    if (!moved.is_secure_heap_backed() || moved.size() != 32) return 5;\n    return 0;\n}\n"
+    }
+  ]
+};

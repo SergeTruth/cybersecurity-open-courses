@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Binary Protocols as Trust Boundaries",
+  "graphicAlt": "A network byte stream crosses a trust boundary into a staged parser that separates framing, syntax, semantics, authentication, and authorization decisions.",
+  "narration": "Binary protocols are compact interfaces that often sit close to files, sockets, devices, plugins, services, and embedded systems. Their fields may look precise, but the bytes are still untrusted until the application has parsed and validated them. A message can influence allocation size, state transitions, authentication decisions, resource use, and downstream business logic.\n\nIn C++, this code is especially review-sensitive. Binary parsing commonly works with byte buffers, offsets, integer conversions, lifetimes, and ownership. Small assumptions about field size, alignment, endianness, or message completeness can change how the program reads memory or decides what state comes next. The safest design keeps those assumptions visible rather than hidden inside clever helpers.\n\nSecure binary protocol handling begins with a clear contract. The contract should define which messages are accepted, what every field means, which sizes are allowed, which state is required, and what happens on failure. It should also separate parsing from trust. Extracting a structured value does not automatically prove that the message is authentic, authorized, fresh, or safe to act on.\n\nA defensive parser makes boundaries explicit. It knows the current frame, the remaining bytes, the allowed limits, and the state in which a message is valid. That clarity makes the code easier to test, review, monitor, and maintain as the protocol evolves. It also helps teams explain failures without depending on hidden parsing behavior or tribal knowledge during incidents and post-release reviews. Clear contracts turn byte handling into engineering policy.",
+  "narrationPoints": [
+    "Binary protocols are compact interfaces that often sit close to files, sockets, devices, plugins, services, and embedded systems.",
+    "A message can influence allocation size, state transitions, authentication decisions, resource use, and downstream business logic.",
+    "Small assumptions about field size, alignment, endianness, or message completeness can change how the program reads memory or decides what state comes next.",
+    "The safest design keeps those assumptions visible rather than hidden inside clever helpers.",
+    "The contract should define which messages are accepted, what every field means, which sizes are allowed, which state is required, and what happens on failure.",
+    "Clear contracts turn byte handling into engineering policy."
+  ]
+};

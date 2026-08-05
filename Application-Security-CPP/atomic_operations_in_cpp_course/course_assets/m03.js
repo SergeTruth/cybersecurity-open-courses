@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Atomic Loads, Stores, and Read-Modify-Write",
+  "graphicAlt": "An atomic counter shows load, store, fetch_add, and compare_exchange operations, including the observed value returned by a failed comparison.",
+  "narration": "Atomic operations come in a few common families. Loads read the current value of an atomic object. Stores publish a new value to that object. These operations are the foundation for simple flags and status values.\n\nExchange replaces the value and returns the previous value as one atomic operation for that object. It can be useful when code needs to claim or reset a simple state while learning what state was present before the change.\n\nFetch-add and fetch-sub style operations support counters and similar independent numeric updates. They are useful for telemetry, simple reference-like counts, and sequence numbers, but the meaning of the count still needs a clear policy.\n\nCompare-and-exchange is more review-sensitive. It checks whether the atomic currently has an expected value, and if so, writes a desired value. If the value is different, the expected value may be updated and the caller must decide what to do next.\n\nLoops around compare-and-exchange need careful review because retry behavior can hide assumptions about progress, valid states, and contention. This course keeps that discussion at a conceptual level rather than building advanced lock-free structures.\n\nRead-modify-write operations are atomic for the target object, not for the surrounding business logic. If a transition also depends on a container, pointer, timestamp, or object lifetime, additional synchronization or design structure may still be required.\n\nGood atomic operation use is readable. The operation should match the state being represented, and reviewers should be able to tell why a load, store, exchange, fetch operation, or compare-and-exchange was chosen.\n\nWhen that choice is not obvious, prefer a named helper or a more explicit synchronization boundary.",
+  "narrationPoints": [
+    "Atomic operations come in a few common families.",
+    "Stores publish a new value to that object.",
+    "Fetch-add and fetch-sub style operations support counters and similar independent numeric updates.",
+    "Loops around compare-and-exchange need careful review because retry behavior can hide assumptions about progress, valid states, and contention.",
+    "If a transition also depends on a container, pointer, timestamp, or object lifetime, additional synchronization or design structure may still be required.",
+    "When that choice is not obvious, prefer a named helper or a more explicit synchronization boundary."
+  ]
+};

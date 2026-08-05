@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Refactoring Legacy Buffer Code",
+  "graphicAlt": "A legacy char-pointer formatter is isolated behind a size-aware adapter and replaced with bounded formatting and explicit truncation handling.",
+  "narration": "Many teams inherit older C++ code with raw buffers, C-style strings, custom allocation, and unclear ownership. Prevention does not require a complete rewrite on day one. It requires a plan that improves the highest-risk areas without destabilizing behavior the product still depends on.\n\nPrioritize externally reachable and parser-heavy paths. File importers, protocol handlers, serialization code, string formatting, command processing, and boundary-heavy glue code are good places to start because they often receive variable-length data and translate it into internal state.\n\nWrap risky legacy APIs behind safer interfaces. A wrapper can centralize length validation, capacity checks, encoding rules, and error behavior. It can also give new code a better contract while older internals are refactored gradually.\n\nReplace manual memory management incrementally. A raw dynamic array may become a `std::vector`. A pointer and length pair may become a span at the boundary. A custom string buffer may become a string or a small domain-specific buffer object. Each change should have a clear behavior-preservation goal.\n\nRegression tests are essential before changing buffer code. Tests should capture intended behavior for normal input, boundary sizes, truncation policy, failure paths, and malformed data. When tests exist, refactoring becomes a controlled engineering activity instead of a leap of faith.\n\nDocument remaining risk. If a legacy interface cannot be changed yet, record its contract, validation expectations, owners, and planned replacement path. Incremental improvement works best when the remaining work is visible.",
+  "narrationPoints": [
+    "Many teams inherit older C++ code with raw buffers, C-style strings, custom allocation, and unclear ownership.",
+    "File importers, protocol handlers, serialization code, string formatting, command processing, and boundary-heavy glue code are good places to start because they often receive variable-length data and translate it into internal state.",
+    "A pointer and length pair may become a span at the boundary.",
+    "Each change should have a clear behavior-preservation goal.",
+    "When tests exist, refactoring becomes a controlled engineering activity instead of a leap of faith.",
+    "Incremental improvement works best when the remaining work is visible."
+  ]
+};

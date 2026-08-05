@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe String and Byte Handling",
+  "graphicAlt": "A text path distinguishes counted strings from null-terminated C strings, and a byte path treats embedded zero values as ordinary data.",
+  "narration": "Many buffer problems begin when code confuses related but different ideas: size, capacity, byte count, element count, current length, required output length, and remaining space. Safe string and byte handling starts by naming the unit and checking it before memory operations.\n\nDo not assume input is safely null-terminated unless the API contract proves it. If a function receives a pointer to characters from an external source, a file, a protocol, or legacy code, it should also know the valid range. A missing terminator should lead to a safe failure path, not a search past the buffer.\n\nBinary data should not be handled as a C string. A byte buffer may contain zero bytes, fixed-width fields, compressed data, encoded records, or partial messages. It should be processed with explicit lengths and format rules, not text conventions.\n\nEncoded text can change length during conversion or normalization. A buffer sized for one encoding may not fit another representation. Output sizing should be calculated before transformation, and the code should define what happens when output does not fit.\n\nTruncation is a policy decision, not a default safety strategy. Shortening a display string may be acceptable if reported clearly. Shortening a path, identifier, configuration value, or serialized record may change meaning. Use explicit output limits and return a clear error, exception, or reported truncation according to project policy.\n\nReviewers should look for hidden assumptions: missing terminators, reused size values, wrong units, text functions applied to binary data, and output buffers that are assumed to be large enough. Clear representation rules prevent many defects before tests run.",
+  "narrationPoints": [
+    "Many buffer problems begin when code confuses related but different ideas: size, capacity, byte count, element count, current length, required output length, and remaining space.",
+    "If a function receives a pointer to characters from an external source, a file, a protocol, or legacy code, it should also know the valid range.",
+    "A byte buffer may contain zero bytes, fixed-width fields, compressed data, encoded records, or partial messages.",
+    "Output sizing should be calculated before transformation, and the code should define what happens when output does not fit.",
+    "Shortening a path, identifier, configuration value, or serialized record may change meaning.",
+    "Clear representation rules prevent many defects before tests run."
+  ]
+};

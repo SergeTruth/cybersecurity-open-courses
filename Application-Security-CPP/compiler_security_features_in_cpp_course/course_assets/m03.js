@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Stack Protection and Object Size Checks",
+  "graphicAlt": "A stack frame places a compiler canary before control data while fortified object-size checks reject a copy larger than the known destination.",
+  "narration": "Stack protection and object-size checks are examples of compiler-assisted defenses. They are intended to detect certain unsafe memory patterns or make some failures visible earlier. They are useful, but they should be understood as safety nets rather than permission to write unclear buffer code.\n\nStack protectors commonly add a guard value to selected stack frames and check that value before returning. If the value changed unexpectedly, the program can stop before continuing with corrupted stack state. Which functions are protected depends on compiler mode, local objects, optimization, and platform support.\n\nObject-size analysis lets a compiler reason about the size of some objects at compile time or in optimized code. Fortified library behavior can use that information to add checks around selected memory and string operations. These checks can catch some mismatched copy sizes and unsafe buffer patterns during testing or runtime.\n\nThe limits matter. Stack protection does not cover every object or every memory bug. Object-size checks are strongest when the compiler can see the object boundary. Inlined code, optimization level, library choices, and build mode all influence what protection is actually emitted.\n\nThe secure engineering response is layered. Prefer containers, spans, string types, RAII, explicit capacities, and checked helper functions. Then enable compiler-supported checks as additional evidence and defense. The better the code expresses ownership and size, the more useful compiler analysis tends to be.\n\nRelease builds should be inspected to confirm protections are active. Review build commands, generated logs, and binary properties where appropriate. A team should be able to show that the intended hardening settings were used for the artifact that ships.",
+  "narrationPoints": [
+    "Stack protection and object-size checks are examples of compiler-assisted defenses.",
+    "Which functions are protected depends on compiler mode, local objects, optimization, and platform support.",
+    "Stack protection does not cover every object or every memory bug.",
+    "Inlined code, optimization level, library choices, and build mode all influence what protection is actually emitted.",
+    "The better the code expresses ownership and size, the more useful compiler analysis tends to be.",
+    "A team should be able to show that the intended hardening settings were used for the artifact that ships."
+  ]
+};

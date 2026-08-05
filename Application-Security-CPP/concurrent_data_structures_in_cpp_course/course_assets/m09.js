@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Diagnostics, and Performance Review",
+  "graphicAlt": "A concurrency test matrix combines invariant assertions, deterministic shutdown cases, stress workloads, ThreadSanitizer, and performance measurements.",
+  "narration": "Concurrent data structures need several forms of evidence. ThreadSanitizer can reveal many data races, and it should be part of the engineering toolkit when the platform allows it. But a clean sanitizer run does not prove that the design is correct. A program can be free of low-level data races and still violate a higher-level invariant, return stale access, mishandle shutdown, leak resources, or starve important work. Diagnostics help, but they do not replace a clear contract.\n\nTesting should cover lifecycle and boundary behavior, not only the common path. Empty structures, full structures, repeated start and stop cycles, cancellation, producer shutdown, consumer shutdown, eviction, replacement, and destruction under load all deserve attention. Stress tests can increase the chance of exposing timing-sensitive defects, especially when combined with randomized operation mixes and invariant checks. Logging and metrics can also help identify queue growth, lock contention, unusually long waits, or unexpected cleanup delays in real deployments.\n\nPerformance review is valuable when it is disciplined. Benchmark the behavior that matters, including contention levels and realistic workloads, but do not use speed as a reason to weaken semantics without documenting the risk. Code review should ask direct questions: which lock protects which data, what can a caller retain, what happens during shutdown, how are objects reclaimed, and which tests would fail if the invariant were broken? Concurrent data structure safety is maintained through design, diagnostics, testing, review, and continuing governance as the structure gains new users.",
+  "narrationPoints": [
+    "Concurrent data structures need several forms of evidence.",
+    "But a clean sanitizer run does not prove that the design is correct.",
+    "Testing should cover lifecycle and boundary behavior, not only the common path.",
+    "Stress tests can increase the chance of exposing timing-sensitive defects, especially when combined with randomized operation mixes and invariant checks.",
+    "Benchmark the behavior that matters, including contention levels and realistic workloads, but do not use speed as a reason to weaken semantics without documenting the risk.",
+    "Concurrent data structure safety is maintained through design, diagnostics, testing, review, and continuing governance as the structure gains new users."
+  ]
+};

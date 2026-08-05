@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Numeric Fields, Endianness, and Type Conversion",
+  "graphicAlt": "Big-endian bytes are assembled into fixed-width integers, checked against application ranges, and converted only after representation validation.",
+  "narration": "Numeric discipline is central to binary protocol security. Protocol fields should be described with fixed-width types such as 16-bit, 32-bit, or 64-bit values, but the byte width alone does not say whether the value is safe for application logic. A field may decode correctly while still being too large for a buffer, allocation, array index, version number, or item count.\n\nEndianness should be explicit. A parser should know whether a field is big-endian, little-endian, or otherwise defined by the protocol, then convert it before interpretation. That conversion should happen at the boundary, so later code works with host values and does not need to guess how the bytes were encoded.\n\nSignedness and narrowing conversions deserve careful review. A negative value interpreted as a size, or a large unsigned value narrowed into a smaller type, can change control flow and resource decisions. The parser should check ranges before converting and should reject values that do not fit the intended application meaning.\n\nDerived calculations are another common source of mistakes. Header length plus body length, count times element size, offset plus size, and nested record totals should be checked before use. The code should avoid undefined behavior and overflow during the check itself, which often means using helper functions or wider intermediate types for size calculations.\n\nThe review habit is to ask what every number means. Is it a byte count, element count, offset, index, enum, version, timestamp, or flag set? Once the meaning is clear, validation can be precise and the parser can reject values before they affect memory, state, or policy. Clear naming and narrow helper APIs make those checks easier to repeat consistently.",
+  "narrationPoints": [
+    "Numeric discipline is central to binary protocol security.",
+    "A field may decode correctly while still being too large for a buffer, allocation, array index, version number, or item count.",
+    "The parser should check ranges before converting and should reject values that do not fit the intended application meaning.",
+    "Header length plus body length, count times element size, offset plus size, and nested record totals should be checked before use.",
+    "Is it a byte count, element count, offset, index, enum, version, timestamp, or flag set?",
+    "Clear naming and narrow helper APIs make those checks easier to repeat consistently."
+  ]
+};

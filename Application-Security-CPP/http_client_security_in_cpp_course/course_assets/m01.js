@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "HTTP Clients as Security Boundaries",
+  "graphicAlt": "Outbound trust-boundary diagram showing application data and credentials entering an HTTP transport, crossing DNS and TLS, then returning as untrusted bounded response bytes.",
+  "narration": "An outbound HTTP client may look like ordinary plumbing, but in a C++ application it is often a security boundary. The client decides where data is sent, how the destination is authenticated, which credentials are attached, how redirects are handled, how responses are parsed, and what happens when the remote service is slow, unavailable, or unexpected.\n\nThat boundary matters because outbound requests connect local application state to external systems. A request may carry sensitive records, service tokens, cookies, client certificates, tenant identifiers, or internal workflow data. A response may influence business state, update caches, trigger processing, or become input to a parser. Even when the remote service is owned by the same organization, the client still crosses a trust and availability boundary.\n\nSecure HTTP client design makes the important choices explicit. The intended destination should be clear. TLS and endpoint identity rules should be documented. Credentials should come from approved secret handling mechanisms. Request construction should preserve structure instead of splicing text casually. Response handling should use validation, size limits, and predictable error behavior.\n\nThe defensive goal is reviewability. A maintainer should be able to inspect an HTTP client and understand what service it contacts, what data it sends, what trust policy it applies, which failures stop the operation, and what diagnostics are recorded. Treating the client as a boundary keeps those decisions visible and turns network behavior into something the team can test, monitor, and govern over time safely.",
+  "narrationPoints": [
+    "An outbound HTTP client may look like ordinary plumbing, but in a C++ application it is often a security boundary.",
+    "Even when the remote service is owned by the same organization, the client still crosses a trust and availability boundary.",
+    "Response handling should use validation, size limits, and predictable error behavior.",
+    "Secure HTTP client design makes the important choices explicit.",
+    "Treating the client as a boundary keeps those decisions visible and turns network behavior into something the team can test, monitor, and govern over time safely.",
+    "A maintainer should be able to inspect an HTTP client and understand what service it contacts, what data it sends, what trust policy it applies, which failures stop the operation, and what diagnostics are recorded."
+  ]
+};

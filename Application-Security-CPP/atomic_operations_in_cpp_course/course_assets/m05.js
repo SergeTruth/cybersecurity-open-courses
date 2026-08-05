@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Atomics Versus Mutexes",
+  "graphicAlt": "A decision panel sends simple independent counters to atomics and multi-field invariants to a mutex-protected critical section.",
+  "narration": "Atomics and mutexes solve different problems. Atomics are useful for simple independent state, such as a stop flag, readiness flag, metrics counter, or tightly designed state transition.\n\nMutexes are often clearer when protecting compound invariants. If several fields must be read or updated together, a container and its metadata must stay consistent, or ownership changes need to be observed as a transaction, a small critical section may be easier to reason about than several atomics.\n\nUsing atomics everywhere can make code harder to review. A class with many atomic fields may look synchronized, but the relationships among those fields may still be unclear. The design can become a set of independent updates with no obvious invariant.\n\nPerformance assumptions should be challenged. Lock-free does not automatically mean faster, safer, or more maintainable. Contention, retry loops, cache effects, and team expertise all matter.\n\nMutexes also communicate intent. A lock around a protected block says that the block preserves a shared invariant. That can be more readable than a custom atomic protocol when the invariant spans multiple values.\n\nThe secure engineering choice is the clearest correct synchronization. If an atomic makes the state transition simple and testable, use it deliberately. If a mutex makes the invariant obvious, prefer the boring design.\n\nDuring review, ask whether the atomic value is truly independent. If the answer depends on another object, pointer, buffer, or lifecycle rule, consider whether the code needs a broader synchronization boundary.\n\nThis keeps the synchronization choice aligned with the invariant instead of with a preference for one primitive.\n\nCorrectness should lead the choice.",
+  "narrationPoints": [
+    "Atomics are useful for simple independent state, such as a stop flag, readiness flag, metrics counter, or tightly designed state transition.",
+    "Using atomics everywhere can make code harder to review.",
+    "The design can become a set of independent updates with no obvious invariant.",
+    "A lock around a protected block says that the block preserves a shared invariant.",
+    "If an atomic makes the state transition simple and testable, use it deliberately.",
+    "If the answer depends on another object, pointer, buffer, or lifecycle rule, consider whether the code needs a broader synchronization boundary."
+  ]
+};

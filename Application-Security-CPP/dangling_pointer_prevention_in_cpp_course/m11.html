@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="dangling_pointer_prevention_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;: &quot;B&quot;,&quot;q02&quot;: &quot;A&quot;,&quot;q03&quot;: &quot;C&quot;,&quot;q04&quot;: &quot;D&quot;,&quot;q05&quot;: &quot;B&quot;,&quot;q06&quot;: &quot;A&quot;,&quot;q07&quot;: &quot;C&quot;,&quot;q08&quot;: &quot;A&quot;,&quot;q09&quot;: &quot;B&quot;,&quot;q10&quot;: &quot;D&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. What makes a pointer, reference, iterator, or view dangling?</legend>
+            <label><input type="radio" name="q01" value="A" required> It points to a heap object with a dynamically allocated name during ordinary runtime access.</label>
+            <label><input type="radio" name="q01" value="B"> It refers through an access path whose object or range is no longer valid.</label>
+            <label><input type="radio" name="q01" value="C"> It is used only during a single function invocation.</label>
+            <label><input type="radio" name="q01" value="D"> It refers to any object that lacks shared ownership.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>2. Why are ownership and borrowing different concepts?</legend>
+            <label><input type="radio" name="q02" value="A" required> Ownership controls lifetime responsibility; borrowing grants temporary access without that responsibility.</label>
+            <label><input type="radio" name="q02" value="B"> Borrowing destroys the referenced object when the current function returns automatically.</label>
+            <label><input type="radio" name="q02" value="C"> Ownership applies only to values allocated on the heap.</label>
+            <label><input type="radio" name="q02" value="D"> Borrowing and ownership are interchangeable terms in modern C++.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>3. Why do references still require lifetime reasoning?</legend>
+            <label><input type="radio" name="q03" value="A" required> A reference owns and destroys the object it names.</label>
+            <label><input type="radio" name="q03" value="B"> Binding a reference extends every source object's lifetime indefinitely.</label>
+            <label><input type="radio" name="q03" value="C"> A reference still depends on another object remaining alive for every access.</label>
+            <label><input type="radio" name="q03" value="D"> References cannot be retained inside an object or callback in valid programs.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>4. When is std::unique_ptr usually more appropriate than shared ownership?</legend>
+            <label><input type="radio" name="q04" value="A" required> Use unique_ptr when every subsystem must extend the object's lifetime independently.</label>
+            <label><input type="radio" name="q04" value="B"> Use unique_ptr for dynamic objects that intentionally have no owner.</label>
+            <label><input type="radio" name="q04" value="C"> Use unique_ptr when ownership should remain implicit to callers.</label>
+            <label><input type="radio" name="q04" value="D"> Use unique_ptr when one clear owner controls a dynamic object's lifetime.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>5. Why should std::shared_ptr not be used to hide unclear ownership?</legend>
+            <label><input type="radio" name="q05" value="A" required> Shared pointers prevent lifetime defects even when ownership relationships are undocumented by design.</label>
+            <label><input type="radio" name="q05" value="B"> Shared ownership can obscure destruction timing and responsibility when the model is unclear.</label>
+            <label><input type="radio" name="q05" value="C"> Shared ownership means no component needs to understand destruction behavior.</label>
+            <label><input type="radio" name="q05" value="D"> Shared pointers should be reserved for compile-time constant objects.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>6. How can container reallocation invalidate stored references?</legend>
+            <label><input type="radio" name="q06" value="A" required> Reallocation may move elements, invalidating observers that still refer to old storage.</label>
+            <label><input type="radio" name="q06" value="B"> Reallocation preserves every iterator by updating its address internally.</label>
+            <label><input type="radio" name="q06" value="C"> Only container destruction can invalidate references to elements in all standard containers.</label>
+            <label><input type="radio" name="q06" value="D"> Reallocation changes capacity metadata but never moves existing elements.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>7. Why do std::string_view and std::span require lifetime awareness?</legend>
+            <label><input type="radio" name="q07" value="A" required> They copy source bytes into an internal allocation when constructed.</label>
+            <label><input type="radio" name="q07" value="B"> They safely extend the lifetime of any temporary source object.</label>
+            <label><input type="radio" name="q07" value="C"> They borrow storage and require that storage to remain valid for the whole use.</label>
+            <label><input type="radio" name="q07" value="D"> They are valid only when their source has static storage duration after construction completes.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>8. Why can callbacks and lambdas create lifetime bugs?</legend>
+            <label><input type="radio" name="q08" value="A" required> Deferred callbacks may run after referenced or captured objects have been destroyed.</label>
+            <label><input type="radio" name="q08" value="B"> Callbacks always take ownership of every object they mention until execution finishes.</label>
+            <label><input type="radio" name="q08" value="C"> Lambda captures cannot safely store values for asynchronous work.</label>
+            <label><input type="radio" name="q08" value="D"> Registering a callback prevents its target component from being destroyed.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>9. How do sanitizers and debug library modes help with lifetime defects?</legend>
+            <label><input type="radio" name="q09" value="A" required> They replace ownership design and manual code review.</label>
+            <label><input type="radio" name="q09" value="B"> They reveal invalid accesses when tests execute the relevant lifetime paths.</label>
+            <label><input type="radio" name="q09" value="C"> They prove no lifetime defect can occur in untested executions conclusively.</label>
+            <label><input type="radio" name="q09" value="D"> They inspect documentation rather than runtime memory behavior.</label>
+          </fieldset>
+
+                                                  <fieldset class="quiz-question">
+            <legend>10. Why should legacy lifetime refactoring begin with ownership mapping?</legend>
+            <label><input type="radio" name="q10" value="A" required> Convert every raw pointer to shared_ptr before investigating ownership.</label>
+            <label><input type="radio" name="q10" value="B"> Rewrite the component before recording its existing lifetime relationships.</label>
+            <label><input type="radio" name="q10" value="C"> Skip regression tests because ownership mapping proves the refactor correct before release.</label>
+            <label><input type="radio" name="q10" value="D"> Map who creates, owns, observes, and destroys each object before changing lifecycles.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

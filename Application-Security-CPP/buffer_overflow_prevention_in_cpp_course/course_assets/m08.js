@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Sanitizers, and Fuzzing for Prevention",
+  "graphicAlt": "Fuzz cases and edge tests exercise zero capacity, exact fit, one-byte short, embedded nulls, and oversized declarations under sanitizers.",
+  "narration": "Many buffer defects are only visible under specific sizes, encodings, input order, or error paths. A normal-path test with comfortable values may miss the boundary where capacity, length, and output size no longer line up. Prevention requires tests that deliberately exercise those edges.\n\nSanitizers are useful development and CI tools. AddressSanitizer can expose invalid memory access during tests. UndefinedBehaviorSanitizer can reveal language-rule violations that affect size and pointer reasoning. Other runtime checks may help depending on compiler, platform, and build profile.\n\nEdge-size tests should include empty input, one element, exact capacity, one past capacity, maximum supported size, truncated input, invalid encoding, and output that does not fit. These tests should verify not only that the code rejects bad input, but also that it preserves safe state.\n\nDefensive fuzzing can exercise parsers and input handlers by exploring unusual input combinations. Keep the workflow prevention-focused: find failures, reduce them to useful regression cases, fix the underlying assumption, and add coverage. The goal is robust handling, not demonstration of harm.\n\nFindings should become tracked engineering defects with owners, fixes, regression tests, and follow-up review. A sanitizer report or fuzz finding is not noise just because it appears in a test build. It is evidence that an assumption should be corrected.\n\nCoverage quality determines confidence. Sanitizers and fuzzing only observe code that runs. Meaningful test harnesses inside the existing project, representative inputs, and CI integration make the results repeatable and useful without turning testing into a one-time event.",
+  "narrationPoints": [
+    "Many buffer defects are only visible under specific sizes, encodings, input order, or error paths.",
+    "AddressSanitizer can expose invalid memory access during tests.",
+    "Other runtime checks may help depending on compiler, platform, and build profile.",
+    "Keep the workflow prevention-focused: find failures, reduce them to useful regression cases, fix the underlying assumption, and add coverage.",
+    "Findings should become tracked engineering defects with owners, fixes, regression tests, and follow-up review.",
+    "Meaningful test harnesses inside the existing project, representative inputs, and CI integration make the results repeatable and useful without turning testing into a one-time event."
+  ]
+};

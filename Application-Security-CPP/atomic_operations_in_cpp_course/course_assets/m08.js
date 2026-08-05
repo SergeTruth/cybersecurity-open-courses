@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Tooling, and Code Review",
+  "graphicAlt": "A review workflow combines invariant documentation, stress tests, ThreadSanitizer, platform testing, and explicit memory-order justification.",
+  "narration": "Atomic code needs practical validation and deliberate review. Concurrency defects may depend on scheduling, optimization, hardware behavior, and load, so tests should focus on invariants and boundary behavior rather than only one observed interleaving.\n\nThreadSanitizer is useful where available for detecting data races during instrumented test execution. It does not prove every memory-ordering decision correct, but it can reveal weak synchronization assumptions and plain shared access that should be reviewed.\n\nUnit tests should exercise state transitions, repeated start and stop cycles, shutdown while work is pending, readiness publication, counter boundaries, and error paths. Stress tests can add coverage, but focused tests make the intended contract easier to protect.\n\nStatic analysis, compiler warnings, code review checklists, and CI configurations can all help keep atomic code visible. For review-sensitive code, it may be useful to require an explicit note explaining why atomics were chosen and what ordering is required.\n\nReview questions should be concrete. What does this atomic represent? Who writes it? Who reads it? Is there a larger invariant? What memory ordering is used and why? Can object lifetime end while another thread observes the value?\n\nAlso ask whether a mutex would be clearer. A small critical section can be easier to test and maintain than a compact atomic protocol whose correctness depends on subtle ordering assumptions.\n\nTools support design judgment, but they do not replace it. The strongest atomic code is narrow, named, documented, tested, and understandable by the team that must maintain it.\n\nThat combination makes future changes safer because reviewers can tell which assumptions must not be broken.",
+  "narrationPoints": [
+    "Atomic code needs practical validation and deliberate review.",
+    "ThreadSanitizer is useful where available for detecting data races during instrumented test execution.",
+    "Stress tests can add coverage, but focused tests make the intended contract easier to protect.",
+    "Can object lifetime end while another thread observes the value?",
+    "A small critical section can be easier to test and maintain than a compact atomic protocol whose correctness depends on subtle ordering assumptions.",
+    "The strongest atomic code is narrow, named, documented, tested, and understandable by the team that must maintain it."
+  ]
+};

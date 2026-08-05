@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Use-After-Free Means",
+  "graphicAlt": "An object lifetime ends at deallocation while a raw pointer continues to a later dereference, marking the gap where use-after-free occurs.",
+  "narration": "Use-after-free is a lifetime safety defect. It happens when code accesses an object, memory region, pointer, reference, iterator, or view after the object behind that access is no longer alive. The name often makes people think only of explicit delete , but the pattern is broader. Any stale access after valid lifetime has ended can create unreliable and unsafe behavior.\n\nIn C++, stale access can come from many places. A raw pointer can remain after an owner destroys the object. A reference can outlive the local variable it referred to. A container operation can invalidate iterators or pointers into its storage. A std::string_view can survive longer than the string it views. A callback or background task can run after the object it captured has been destroyed.\n\nThe defensive concern is that the code still looks ordinary. The pointer may be non-null. The reference may have a familiar name. The iterator may still compare like a value. None of that proves the object is valid. Safe engineering requires reasoning about object lifetime, not just whether an address or handle exists.\n\nAttackers and production failures both benefit from confusion here. Freed storage may be reused for different data, so a stale access can read the wrong object, corrupt a new object, or drive control flow through assumptions that are no longer true.\n\nPreventing use-after-free improves reliability, maintainability, and security review. The goal is not to memorize every possible invalidation rule in isolation. The goal is to design code where ownership is explicit, borrowed access is short-lived, cleanup is predictable, and later work cannot quietly use objects that have already ended.",
+  "narrationPoints": [
+    "The name often makes people think only of explicit delete , but the pattern is broader.",
+    "A raw pointer can remain after an owner destroys the object.",
+    "A std::string_view can survive longer than the string it views.",
+    "None of that proves the object is valid.",
+    "Freed storage may be reused for different data, so a stale access can read the wrong object, corrupt a new object, or drive control flow through assumptions that are no longer true.",
+    "The goal is to design code where ownership is explicit, borrowed access is short-lived, cleanup is predictable, and later work cannot quietly use objects that have already ended."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Callbacks, Async Work, and Concurrency",
+  "graphicAlt": "An asynchronous task captures shared immutable state, while the originating scope exits without invalidating the task's later access.",
+  "narration": "Callbacks and asynchronous work are lifetime-sensitive because they separate the time access is captured from the time access is used. A method may register a callback, queue work, start a thread, or capture this in a lambda. The original object may be destroyed before that work runs, leaving the callback with stale access.\n\nCapturing this is not automatically wrong, but it requires a visible lifetime guarantee. The owner might guarantee that the callback is unregistered before destruction. The queued work might own the object for the duration of execution. Or the callback might use weak observation and do nothing if the target no longer exists. The important point is that the policy must be explicit.\n\nKeeping an object alive is different from making it thread-safe. A std::shared_ptr can prevent destruction while work runs, but it does not protect mutable state from data races. Concurrent designs still need synchronization, immutability, thread confinement, message passing, or another clear strategy. Use-after-free prevention and thread-safety design have to be reviewed together.\n\nDelayed execution also changes where cleanup belongs. Destructors should not assume that merely dropping a handle stops every pending operation unless the API guarantees it. Joining threads, draining queues, unregistering callbacks, canceling timers, and waiting for completion are ownership decisions. Each one should have a clear owner and a tested shutdown sequence.\n\nCancellation and shutdown paths deserve tests. What happens when work is pending and the owner is destroyed? Can a callback run after unregistration begins? Are stored raw pointers still valid when a background job wakes up? Safe async code defines ownership, cancellation, and synchronization rules before relying on callbacks to behave well. Treat shutdown as normal behavior, not an exceptional corner.",
+  "narrationPoints": [
+    "Callbacks and asynchronous work are lifetime-sensitive because they separate the time access is captured from the time access is used.",
+    "The owner might guarantee that the callback is unregistered before destruction.",
+    "The important point is that the policy must be explicit.",
+    "Use-after-free prevention and thread-safety design have to be reviewed together.",
+    "Each one should have a clear owner and a tested shutdown sequence.",
+    "Treat shutdown as normal behavior, not an exceptional corner."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Sanitizers for Development and CI",
+  "graphicAlt": "Separate ASan, UBSan, and ThreadSanitizer builds exercise tests and feed reports into development rather than substituting for release mitigations.",
+  "narration": "Sanitizers are development and CI tools that help expose defects while tests run. They are especially useful because many memory, lifetime, undefined behavior, leak, and threading issues can stay hidden during normal tests unless runtime instrumentation makes them visible.\n\nAddressSanitizer focuses on memory access problems such as out-of-bounds access and use-after-lifetime patterns. UndefinedBehaviorSanitizer highlights operations that violate C++ language rules. LeakSanitizer helps identify memory leaks. ThreadSanitizer can reveal data races and synchronization problems. Each serves a different purpose.\n\nSanitizer findings should be treated as real engineering defects unless a team has a documented, reviewed reason to classify a specific finding differently. Ignoring sanitizer output teaches the team to distrust its own evidence. Triage should be prompt, owned, and visible.\n\nDedicated CI jobs make sanitizer coverage repeatable. Some teams run sanitizer builds on every pull request for selected targets, while others use scheduled jobs or focused test suites. The right schedule depends on build time and project risk, but the work should be part of the workflow rather than a rare manual event.\n\nSanitizer builds are not usually production hardening by default. They can change performance, memory layout, runtime dependencies, and behavior. Their primary role is defect discovery during development and testing. Release hardening is a separate build profile with different goals.\n\nSanitizer value depends on meaningful tests and realistic execution paths. Instrumentation only observes code that runs. Boundary tests, parser tests, integration tests, concurrency tests, and representative workloads make sanitizer results far more useful.",
+  "narrationPoints": [
+    "Sanitizers are development and CI tools that help expose defects while tests run.",
+    "UndefinedBehaviorSanitizer highlights operations that violate C++ language rules.",
+    "Ignoring sanitizer output teaches the team to distrust its own evidence.",
+    "The right schedule depends on build time and project risk, but the work should be part of the workflow rather than a rare manual event.",
+    "Release hardening is a separate build profile with different goals.",
+    "Boundary tests, parser tests, integration tests, concurrency tests, and representative workloads make sanitizer results far more useful."
+  ]
+};

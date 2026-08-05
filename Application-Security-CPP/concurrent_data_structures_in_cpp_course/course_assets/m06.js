@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Iterators, References, and Snapshot Semantics",
+  "graphicAlt": "A snapshot remains stable after unlocking because it owns copied elements, unlike an iterator or reference into concurrently mutable storage.",
+  "narration": "Iterators, references, pointers, spans, and views are lifetime-sensitive even before concurrency enters the picture. A container operation can invalidate an iterator. A vector reallocation can move elements. An erase can destroy the object behind a reference. In concurrent code, these risks become easier to trigger because the caller holding the access and the caller mutating the container may be running at the same time. A method that returns internal access can accidentally require every caller to understand the container's invalidation and locking rules perfectly.\n\nSafer APIs try to prevent stale access by construction. One option is to return an owned copy of the requested data. Another is to return an immutable snapshot that represents a point-in-time view. A third is to return a scoped access object that keeps a lock or lifetime token associated with the data until the access object is destroyed. The right choice depends on cost, freshness, and lifetime needs, but the API should make the rule obvious in normal use.\n\nSnapshot semantics are especially useful when a caller needs to iterate. Instead of holding a lock while arbitrary caller code walks internal state, the structure can build a list of stable values or handles and release the lock before the caller processes them. That reduces lock duration and avoids exposing internal mutation details. When snapshots are expensive, document the tradeoff and measure it honestly. The key defensive principle is that comments alone should not be the only thing preventing stale iterator or reference use. Prefer return types and access patterns that guide callers toward correct behavior.",
+  "narrationPoints": [
+    "Iterators, references, pointers, spans, and views are lifetime-sensitive even before concurrency enters the picture.",
+    "In concurrent code, these risks become easier to trigger because the caller holding the access and the caller mutating the container may be running at the same time.",
+    "Another is to return an immutable snapshot that represents a point-in-time view.",
+    "The right choice depends on cost, freshness, and lifetime needs, but the API should make the rule obvious in normal use.",
+    "When snapshots are expensive, document the tradeoff and measure it honestly.",
+    "Prefer return types and access patterns that guide callers toward correct behavior."
+  ]
+};
