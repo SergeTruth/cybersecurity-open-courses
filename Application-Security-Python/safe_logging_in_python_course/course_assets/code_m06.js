@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Neutralize control characters in legacy text logs",
       "language": "python",
-      "blurb": "When a text sink is unavoidable, CR, LF, tab, and other controls are escaped and the field is bounded.",
-      "code": "def safe_log_text(value: object, maximum: int = 200) -> str:\n    text = str(value)[:maximum]\n    pieces = []\n    for character in text:\n        code = ord(character)\n        pieces.append(character if code >= 0x20 and not 0x7F <= code <= 0x9F else f\"\\\\u{code:04x}\")\n    return \"\".join(pieces)\n"
+      "blurb": "When a text sink is unavoidable, C0/C1 controls, Unicode line and paragraph separators, and format controls such as bidi overrides are escaped while the field is bounded.",
+      "code": "import unicodedata\n\nESCAPED_CATEGORIES = {\"Cc\", \"Cf\", \"Zl\", \"Zp\"}\n\ndef escaped_codepoint(character: str) -> str:\n    code = ord(character)\n    return f\"\\\\u{code:04x}\" if code <= 0xFFFF else f\"\\\\U{code:08x}\"\n\ndef safe_log_text(value: object, maximum: int = 200) -> str:\n    text = str(value)[:maximum]\n    pieces = []\n    for character in text:\n        if unicodedata.category(character) in ESCAPED_CATEGORIES:\n            pieces.append(escaped_codepoint(character))\n        else:\n            pieces.append(character)\n    return \"\".join(pieces)\n"
     },
     {
       "title": "Write one JSON object per event",

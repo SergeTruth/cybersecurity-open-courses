@@ -3,10 +3,10 @@ window.COURSE_CODE_MODULE = {
   "codeIntro": "These examples apply Permissions, Storage Locations, and Isolation with reviewable Python controls.",
   "codeExamples": [
     {
-      "title": "Create a private file with explicit permissions",
+      "title": "Create a private POSIX file with explicit permissions",
       "language": "python",
-      "blurb": "The low-level open uses exclusive creation, no final symlink following, and owner-only mode from the first filesystem operation.",
-      "code": "from pathlib import Path\nimport os\n\ndef create_private_file(path: Path, content: bytes) -> None:\n    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, \"O_NOFOLLOW\", 0)\n    descriptor = os.open(path, flags, 0o600)\n    with os.fdopen(descriptor, \"wb\") as output:\n        output.write(content)\n        output.flush()\n        os.fsync(output.fileno())\n"
+      "blurb": "The POSIX example fails closed unless directory descriptors and O_NOFOLLOW are available, then uses exclusive creation and verifies owner-only permissions on the opened descriptor before writing.",
+      "code": "import os\nimport stat\n\ndef create_private_file(directory_fd: int, stored_name: str, content: bytes) -> None:\n    if not hasattr(os, \"O_NOFOLLOW\") or os.open not in os.supports_dir_fd:\n        raise NotImplementedError(\"secure private-file creation requires POSIX dir_fd and O_NOFOLLOW\")\n    if not stored_name or os.path.basename(stored_name) != stored_name:\n        raise ValueError(\"stored name must be one path component\")\n    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW\n    descriptor = os.open(stored_name, flags, 0o600, dir_fd=directory_fd)\n    try:\n        info = os.fstat(descriptor)\n        if not stat.S_ISREG(info.st_mode) or (info.st_mode & 0o077) != 0:\n            raise ValueError(\"private file permissions rejected\")\n        with os.fdopen(descriptor, \"wb\") as output:\n            descriptor = -1\n            output.write(content)\n            output.flush()\n            os.fsync(output.fileno())\n    finally:\n        if descriptor >= 0:\n            os.close(descriptor)\n"
     },
     {
       "title": "Separate tenant storage namespaces",

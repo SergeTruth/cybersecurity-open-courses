@@ -7,6 +7,7 @@ window.COURSE_MODULE = {
     "Strong validation starts with clear contracts.",
     "Safe libraries and framework validators can reduce mistakes.",
     "The goal is predictable, safe application behavior.",
-    "Validate container and value types before set or dictionary membership so every rejection is controlled."
+    "Validate container and value types before set or dictionary membership so every rejection is controlled.",
+    "Apply raw string limits before normalization and revalidate the normalized result before authorization or persistence."
   ]
 };

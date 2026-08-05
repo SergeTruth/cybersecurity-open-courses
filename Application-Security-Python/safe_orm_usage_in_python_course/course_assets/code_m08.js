@@ -1,18 +1,18 @@
 window.COURSE_CODE_MODULE = {
   "title": "Code Examples",
-  "codeIntro": "These examples apply Testing, Logging, Monitoring, and Review with reviewable Python controls.",
+  "codeIntro": "Requires Python 3.10+, SQLAlchemy 2.x with an appropriate DBAPI driver, and pytest 9.x for the test example. These examples apply Testing, Logging, Monitoring, and Review with reviewable Python controls.",
   "codeExamples": [
     {
-      "title": "Test cross-tenant mutation denial",
+      "title": "Test authorized and cross-tenant mutations",
       "language": "python",
-      "blurb": "The regression attempts an update with a valid object identifier under the wrong tenant and confirms no row changes.",
-      "code": "def test_update_cannot_cross_tenant(session, repositories, tenant_a, tenant_b, account_a):\n    changed = repositories.accounts(tenant_b.id).update_profile(\n        account_id=account_a.id,\n        subject_id=\"member-b\",\n        changes={\"display_name\": \"changed\"},\n    )\n    session.expire_all()\n    assert changed is False\n    assert account_a.display_name != \"changed\"\n"
+      "blurb": "Save this as test_authorization.py and run it with function-scoped pytest fixtures that give each test its own active outer transaction and repositories bound to that session. The allowed-path test also proves the object-ID predicate by reloading an unrelated account in the same tenant, while the denial test proves cross-tenant isolation. Both verify that repository code did not commit, replace, or roll back the fixture-owned transaction.",
+      "code": "# Run with: python -m pytest -q test_authorization.py\ndef test_update_succeeds_within_tenant(\n    session,\n    repositories,\n    tenant_b,\n    profile_editor_b,\n    account_b,\n    other_account_b,\n):\n    assert account_b.tenant_id == tenant_b.id\n    assert other_account_b.tenant_id == tenant_b.id\n    assert other_account_b.id != account_b.id\n    assert profile_editor_b.tenant_id == tenant_b.id\n\n    allowed_name = \"same-tenant-change\"\n    original_other_name = other_account_b.display_name\n    assert account_b.display_name != allowed_name\n    assert original_other_name != allowed_name\n    outer_transaction = session.get_transaction()\n    assert outer_transaction is not None and outer_transaction.is_active\n\n    tenant_b_accounts = repositories.accounts(tenant_b.id)\n    changed = tenant_b_accounts.update_profile(\n        account_id=account_b.id,\n        subject_id=profile_editor_b.id,\n        changes={\"display_name\": allowed_name},\n    )\n    assert session.get_transaction() is outer_transaction\n    assert outer_transaction.is_active\n    session.flush()\n    session.expire(account_b)\n    session.expire(other_account_b)\n    assert changed is True\n    assert account_b.display_name == allowed_name\n    assert other_account_b.display_name == original_other_name\n\ndef test_update_cannot_cross_tenant(\n    session, repositories, tenant_a, tenant_b, profile_editor_b, account_a\n):\n    assert tenant_a.id != tenant_b.id\n    assert account_a.tenant_id == tenant_a.id\n    assert profile_editor_b.tenant_id == tenant_b.id\n\n    denied_name = \"cross-tenant-change\"\n    original_name = account_a.display_name\n    assert original_name != denied_name\n    outer_transaction = session.get_transaction()\n    assert outer_transaction is not None and outer_transaction.is_active\n\n    tenant_b_accounts = repositories.accounts(tenant_b.id)\n    changed = tenant_b_accounts.update_profile(\n        account_id=account_a.id,\n        subject_id=profile_editor_b.id,\n        changes={\"display_name\": denied_name},\n    )\n    assert session.get_transaction() is outer_transaction\n    assert outer_transaction.is_active\n    # Flush before expiration so expire() cannot discard a pending mutation.\n    session.flush()\n    session.expire(account_a)\n    assert changed is False\n    assert account_a.display_name == original_name\n"
     },
     {
-      "title": "Disable sensitive SQL parameter logging",
+      "title": "Suppress SQLAlchemy parameter rendering",
       "language": "python",
-      "blurb": "Engine configuration keeps statement telemetry available while preventing bound credential and personal-data values from entering logs.",
-      "code": "from sqlalchemy import create_engine\n\ndef production_engine(database_url: str):\n    return create_engine(\n        database_url,\n        echo=False,\n        hide_parameters=True,\n        pool_pre_ping=True,\n        pool_recycle=900,\n    )\n"
+      "blurb": "hide_parameters suppresses SQLAlchemy's own INFO and StatementError parameter formatting; database errors, drivers, and custom telemetry still need separate sanitization.",
+      "code": "from sqlalchemy import create_engine\n\ndef production_engine(database_url: str):\n    return create_engine(\n        database_url,\n        echo=False,\n        hide_parameters=True,  # Does not sanitize DBAPI or database error text.\n        pool_pre_ping=True,\n        pool_recycle=900,\n    )\n"
     }
   ]
 };

@@ -4,7 +4,11 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Code Example: Testing Boundaries",
       "language": "python",
-      "code": String.raw`import pytest
+      "code": String.raw`# Requires Python 3.10+ and pytest 9.x:
+# python -m pip install "pytest>=9,<10"
+# Save this example as test_validation.py, then run:
+# python -m pytest -q test_validation.py
+import pytest
 
 
 class ValidationError(ValueError):

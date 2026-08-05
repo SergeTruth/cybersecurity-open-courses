@@ -7,6 +7,7 @@ window.COURSE_MODULE = {
     "Flask applications often require explicit request parsing and validation choices.",
     "File metadata deserves special attention.",
     "Validation error messages should be useful without revealing unnecessary internals.",
-    "Validate normalized text and use runtime timezone data rather than a regex that only resembles an IANA name."
+    "Validate normalized text and use runtime timezone data rather than a regex that only resembles an IANA name.",
+    "Require an explicit JSON Content-Type, decode network JSON as UTF-8, and turn parser-limit failures into controlled validation responses."
   ]
 };

@@ -6,7 +6,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Map user actions to reviewed commands",
       "language": "python",
       "blurb": "The request can select only a known operation; it never supplies an executable, flag, or command fragment directly.",
-      "code": "COMMANDS = {\n    \"status\": (\"/usr/bin/systemctl\", \"is-active\", \"example-worker.service\"),\n    \"version\": (\"/usr/local/bin/example-worker\", \"--version\"),\n}\n\ndef command_for(action: str) -> tuple[str, ...]:\n    try:\n        return COMMANDS[action]\n    except KeyError:\n        raise PermissionError(\"process operation is not approved\") from None\n"
+      "code": "COMMANDS = {\n    \"status\": (\"/usr/bin/systemctl\", \"is-active\", \"example-worker.service\"),\n    \"version\": (\"/usr/local/bin/example-worker\", \"--version\"),\n}\n\ndef command_for(action: str) -> tuple[str, ...]:\n    if not isinstance(action, str):\n        raise PermissionError(\"process operation is not approved\")\n    try:\n        return COMMANDS[action]\n    except KeyError:\n        raise PermissionError(\"process operation is not approved\") from None\n"
     },
     {
       "title": "Stop option parsing before a user value",

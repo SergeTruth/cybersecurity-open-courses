@@ -4,11 +4,14 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Code Example: Runtime Model Validation",
       "language": "python",
-      "code": String.raw`from pydantic import BaseModel, ConfigDict, EmailStr, Field, ValidationError
+      "code": String.raw`# Requires Python 3.10+ and Pydantic 2.x with its email extra:
+# python -m pip install "pydantic[email]>=2,<3"
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, ValidationError
 
 
 class Registration(BaseModel):
-    model_config = ConfigDict(extra="forbid", strict=True)
+    # A boundary value must not become invalid after successful validation.
+    model_config = ConfigDict(extra="forbid", strict=True, frozen=True)
 
     email: EmailStr
     age: int = Field(ge=13, le=120)

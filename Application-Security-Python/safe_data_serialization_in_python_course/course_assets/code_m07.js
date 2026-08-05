@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Authenticate a serialized cache record",
       "language": "python",
-      "blurb": "An application-owned key verifies the exact stored bytes before parsing, while freshness and schema remain separate checks.",
-      "code": "import hashlib\nimport hmac\n\ndef verified_cache_bytes(key: bytes, payload: bytes, supplied_tag: bytes) -> bytes:\n    if len(payload) > 1_000_000 or len(supplied_tag) != hashlib.sha256().digest_size:\n        raise ValueError(\"cache record shape rejected\")\n    expected = hmac.digest(key, b\"cache-record-v1\\x00\" + payload, \"sha256\")\n    if not hmac.compare_digest(expected, supplied_tag):\n        raise ValueError(\"cache record integrity check failed\")\n    return payload\n"
+      "blurb": "A required application-owned 32-byte-or-longer key verifies the exact stored bytes before parsing, while freshness and schema remain separate checks.",
+      "code": "import hashlib\nimport hmac\n\ndef verified_cache_bytes(key: bytes, payload: bytes, supplied_tag: bytes) -> bytes:\n    if not isinstance(key, bytes) or len(key) < 32:\n        raise ValueError(\"HMAC key is not configured safely\")\n    if not isinstance(payload, bytes) or not isinstance(supplied_tag, bytes):\n        raise TypeError(\"cache record inputs must be bytes\")\n    if len(payload) > 1_000_000 or len(supplied_tag) != hashlib.sha256().digest_size:\n        raise ValueError(\"cache record shape rejected\")\n    expected = hmac.digest(key, b\"cache-record-v1\\x00\" + payload, \"sha256\")\n    if not hmac.compare_digest(expected, supplied_tag):\n        raise ValueError(\"cache record integrity check failed\")\n    return payload\n"
     },
     {
       "title": "Migrate and validate a supported settings version",

@@ -4,7 +4,9 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Code Example: Validating at the Boundary",
       "language": "python",
-      "code": String.raw`from dataclasses import dataclass
+      "code": String.raw`# Course examples require Python 3.10 or newer.
+import unicodedata
+from dataclasses import dataclass
 
 
 class ValidationError(ValueError):
@@ -20,6 +22,8 @@ class Signup:
 def normalize_email(value: object) -> str:
     if type(value) is not str:
         raise ValidationError("email is required")
+    if len(value) > 254 or not value.isascii():
+        raise ValidationError("email failed a basic address sanity check")
 
     email = value.strip()
     if (
@@ -27,8 +31,7 @@ def normalize_email(value: object) -> str:
         or email.count("@") != 1
         or any(
             character.isspace()
-            or ord(character) < 32
-            or ord(character) == 127
+            or unicodedata.category(character) in {"Cc", "Cs", "Zl", "Zp"}
             for character in email
         )
     ):
@@ -44,8 +47,14 @@ def normalize_email(value: object) -> str:
     ):
         raise ValidationError("email failed a basic address sanity check")
 
+    # This lightweight example is intentionally ASCII-only. Use a dedicated
+    # SMTPUTF8 and IDNA-aware validator when internationalized mail is allowed.
     # Preserve the local part; this application normalizes only the domain.
-    return f"{local_part}@{domain.lower()}"
+    normalized_domain = domain.lower()
+    normalized_email = f"{local_part}@{normalized_domain}"
+    if len(normalized_domain) > 253 or len(normalized_email) > 254:
+        raise ValidationError("email failed a basic address sanity check")
+    return normalized_email
 
 
 def parse_signup(raw: object) -> Signup:

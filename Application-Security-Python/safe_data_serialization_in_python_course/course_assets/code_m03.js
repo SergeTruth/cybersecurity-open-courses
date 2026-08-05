@@ -5,14 +5,14 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Serialize a versioned JSON envelope",
       "language": "python",
-      "blurb": "The producer emits plain data with an explicit version and rejects non-finite numbers that JSON consumers handle inconsistently.",
-      "code": "import json\n\ndef serialize_order(order_id: str, total_cents: int) -> bytes:\n    if not order_id or not 0 <= total_cents <= 100_000_000:\n        raise ValueError(\"order fields rejected\")\n    envelope = {\"version\": 1, \"order_id\": order_id, \"total_cents\": total_cents}\n    return json.dumps(envelope, allow_nan=False, separators=(\",\", \":\")).encode(\"utf-8\")\n"
+      "blurb": "The producer emits plain data with an explicit version, exact runtime type checks, and non-finite-number rejection.",
+      "code": "import json\n\ndef serialize_order(order_id: str, total_cents: int) -> bytes:\n    if type(order_id) is not str or not 1 <= len(order_id) <= 64:\n        raise ValueError(\"order_id is invalid\")\n    if type(total_cents) is not int or not 0 <= total_cents <= 100_000_000:\n        raise ValueError(\"total_cents is invalid\")\n    envelope = {\"version\": 1, \"order_id\": order_id, \"total_cents\": total_cents}\n    return json.dumps(envelope, allow_nan=False, separators=(\",\", \":\")).encode(\"utf-8\")\n"
     },
     {
       "title": "Select a parser by trusted media type",
       "language": "python",
-      "blurb": "The application maps an allowlisted Content-Type to a parser rather than accepting a class or decoder name from input.",
-      "code": "import json\nimport tomllib\n\nPARSERS = {\n    \"application/json\": lambda raw: json.loads(raw.decode(\"utf-8\")),\n    \"application/toml\": lambda raw: tomllib.loads(raw.decode(\"utf-8\")),\n}\n\ndef parse_document(media_type: str, raw: bytes):\n    if len(raw) > 262_144:\n        raise ValueError(\"serialized document is too large\")\n    try:\n        parser = PARSERS[media_type]\n    except KeyError:\n        raise ValueError(\"serialization format is not supported\") from None\n    return parser(raw)\n"
+      "blurb": "The application maps an allowlisted Content-Type to a parser rather than accepting a class or decoder name from input. The JSON branch uses strict parsing so duplicate fields and non-finite numbers are rejected at the boundary.",
+      "code": "import json\nimport tomllib\n\ndef unique_object(pairs):\n    value = {}\n    for key, item in pairs:\n        if key in value:\n            raise ValueError(f\"duplicate JSON field: {key}\")\n        value[key] = item\n    return value\n\ndef strict_json_loads(raw: bytes):\n    return json.loads(\n        raw.decode(\"utf-8\"),\n        object_pairs_hook=unique_object,\n        parse_constant=lambda token: (_ for _ in ()).throw(ValueError(f\"invalid number: {token}\")),\n    )\n\nPARSERS = {\n    \"application/json\": strict_json_loads,\n    \"application/toml\": lambda raw: tomllib.loads(raw.decode(\"utf-8\")),\n}\n\ndef parse_document(media_type: str, raw: bytes):\n    if len(raw) > 262_144:\n        raise ValueError(\"serialized document is too large\")\n    try:\n        parser = PARSERS[media_type]\n    except KeyError:\n        raise ValueError(\"serialization format is not supported\") from None\n    return parser(raw)\n"
     }
   ]
 };

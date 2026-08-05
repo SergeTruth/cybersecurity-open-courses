@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Map an opaque identifier through an authorized record",
       "language": "python",
-      "blurb": "The caller supplies a UUID, while tenant ownership and the application-generated storage key come from the database.",
-      "code": "from uuid import UUID\n\ndef storage_key_for_download(repository, tenant_id: str, supplied_id: str) -> str:\n    file_id = UUID(supplied_id)\n    record = repository.find_file(file_id=file_id, tenant_id=tenant_id)\n    if record is None or record.status != \"available\":\n        raise FileNotFoundError(\"file is unavailable\")\n    if \"/\" in record.storage_key or \"\\\\\" in record.storage_key:\n        raise RuntimeError(\"invalid stored key\")\n    return record.storage_key\n"
+      "blurb": "The caller supplies a UUID, while tenant ownership and the application-generated storage key come from the database and are revalidated as one portable storage component before use.",
+      "code": "from uuid import UUID\nimport re\n\nSAFE_STORAGE_KEY = re.compile(r\"[A-Za-z0-9][A-Za-z0-9._-]{0,127}\\Z\")\nWINDOWS_RESERVED = {\n    \"CON\", \"PRN\", \"AUX\", \"NUL\",\n    *(f\"COM{number}\" for number in range(1, 10)),\n    *(f\"LPT{number}\" for number in range(1, 10)),\n}\n\ndef validated_storage_key(value: str) -> str:\n    if not isinstance(value, str) or not SAFE_STORAGE_KEY.fullmatch(value):\n        raise RuntimeError(\"invalid stored key\")\n    basename = value.split(\".\", 1)[0].upper()\n    if basename in WINDOWS_RESERVED or value[-1] in {\".\", \" \"}:\n        raise RuntimeError(\"invalid stored key\")\n    return value\n\ndef storage_key_for_download(repository, tenant_id: str, supplied_id: str) -> str:\n    file_id = UUID(supplied_id)\n    record = repository.find_file(file_id=file_id, tenant_id=tenant_id)\n    if record is None or record.status != \"available\":\n        raise FileNotFoundError(\"file is unavailable\")\n    return validated_storage_key(record.storage_key)\n"
     },
     {
       "title": "Construct object-store keys from trusted segments",

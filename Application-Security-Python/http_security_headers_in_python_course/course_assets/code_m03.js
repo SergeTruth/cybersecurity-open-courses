@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Apply HSTS only on verified HTTPS responses",
       "language": "python",
-      "blurb": "The middleware trusts a deployment-provided secure flag and adds HSTS to HTTPS responses, including errors.",
-      "code": "HSTS = \"max-age=31536000; includeSubDomains\"\n\ndef add_transport_policy(response, request_is_secure: bool):\n    if request_is_secure:\n        response.headers[\"Strict-Transport-Security\"] = HSTS\n    return response\n"
+      "blurb": "The middleware trusts a deployment-provided secure flag and adds a conservative host-only HSTS baseline to HTTPS responses, including errors.",
+      "code": "HSTS = \"max-age=31536000\"\n\ndef add_transport_policy(response, request_is_secure: bool):\n    if request_is_secure:\n        response.headers[\"Strict-Transport-Security\"] = HSTS\n    return response\n"
     },
     {
       "title": "Validate an HSTS rollout policy",

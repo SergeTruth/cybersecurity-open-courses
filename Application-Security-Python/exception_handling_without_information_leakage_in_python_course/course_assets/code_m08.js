@@ -11,8 +11,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Monitor failure categories instead of messages",
       "language": "python",
-      "blurb": "Metrics use a finite exception-to-category mapping so attacker-controlled messages cannot create labels or leak into dashboards.",
-      "code": "ERROR_CATEGORIES = {\n    TimeoutError: \"timeout\",\n    PermissionError: \"denied\",\n    ValueError: \"invalid_input\",\n}\n\ndef observe_failure(metrics, error: Exception) -> None:\n    category = next(\n        (name for kind, name in ERROR_CATEGORIES.items() if isinstance(error, kind)),\n        \"internal\",\n    )\n    metrics.increment(\"operation_failure\", tags={\"category\": category})\n"
+      "blurb": "Metrics use application-specific exception classes and finite labels; the helper reports telemetry failure without replacing the primary error path.",
+      "code": "class DependencyTimedOut(Exception):\n    pass\n\nclass AuthorizationDenied(Exception):\n    pass\n\nclass InvalidRequest(Exception):\n    pass\n\nERROR_CATEGORIES = {\n    DependencyTimedOut: \"timeout\",\n    AuthorizationDenied: \"denied\",\n    InvalidRequest: \"invalid_input\",\n}\n\ndef observe_failure(metrics, error: Exception) -> bool:\n    category = next(\n        (name for kind, name in ERROR_CATEGORIES.items() if isinstance(error, kind)),\n        \"internal\",\n    )\n    try:\n        metrics.increment(\"operation_failure\", tags={\"category\": category})\n    except Exception:\n        return False\n    return True\n"
     }
   ]
 };
