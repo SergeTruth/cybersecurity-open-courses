@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "narration": "FedRAMP baselines define security control expectations for cloud service offerings based on impact and use case. They connect federal cloud risk to implementation, evidence, assessment, authorization support, and continuous monitoring. A baseline is not a marketing label and not a guarantee of perfect security. It is a structured starting point for demonstrating that a cloud service is protected and operated appropriately for federal use.\n\nImpact thinking is the foundation. Confidentiality, integrity, and availability help teams understand what kind of harm could result from a security incident. Low, tailored low-impact, Moderate, and High concepts help align security expectations with data sensitivity, mission impact, service complexity, and agency use. The right baseline should reflect system risk, not convenience or prestige.\n\nBaselines are grounded in NIST control concepts but applied through the realities of cloud architecture. Shared responsibility, inherited controls, customer responsibilities, control implementation statements, and evidence boundaries all matter. Two services under the same baseline can look different because their architectures, service models, dependencies, and operating processes are different. The baseline tells teams what to address; the system design determines how it is addressed.\n\nThe practical takeaway is simple: baseline work is operational work. It requires honest scope, real control implementation, assessable documentation, evidence from actual workflows, vulnerability management, incident readiness, change awareness, and continuous monitoring. The goal is not to collect paperwork. The goal is to help agencies make informed risk decisions about cloud services that are documented, tested, monitored, and operated for their federal mission context.",
+  "narrationPoints": [
+    "FedRAMP baselines define security control expectations for cloud service offerings based on impact and use case.",
+    "Impact thinking is the foundation.",
+    "Baselines are grounded in NIST control concepts but applied through the realities of cloud architecture.",
+    "The practical takeaway is simple: baseline work is operational work."
+  ],
+  "graphicAlt": "Blank course placeholder for module 9."
+};
