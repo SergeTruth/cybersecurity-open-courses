@@ -8,9 +8,43 @@
     return element;
   }
 
-  function unavailable(link) {
-    var href = link.getAttribute("href") || "";
-    return !href || href === "#" || href.indexOf("{{") !== -1;
+  function isModuleHref(href) {
+    return /^(?:\.\/)?m\d{2}\.html(?:[?#].*)?$/i.test(href || "");
+  }
+
+  function isLmsHosted() {
+    if (!window.SCORM) return false;
+    if (typeof SCORM.isHosted === "function") return SCORM.isHosted();
+    return typeof SCORM.isAvailable === "function" && SCORM.isAvailable();
+  }
+
+  function enablePreviewNavigation() {
+    var links = document.querySelectorAll(".module-nav a");
+    Array.prototype.forEach.call(links, function (link) {
+      var previewHref = link.getAttribute("data-preview-href") || "";
+      if (!isModuleHref(previewHref)) {
+        link.remove();
+        return;
+      }
+      link.setAttribute("href", previewHref);
+    });
+  }
+
+  function disableScoNavigation() {
+    var moduleNavigation = document.querySelectorAll(".module-nav, .course-nav-pane");
+    Array.prototype.forEach.call(moduleNavigation, function (navigation) {
+      navigation.remove();
+    });
+
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      while (target && target.nodeType === 1 && target.tagName !== "A") {
+        target = target.parentNode;
+      }
+      if (target && target.tagName === "A" && isModuleHref(target.getAttribute("href"))) {
+        event.preventDefault();
+      }
+    }, true);
   }
 
   function fallbackModules() {
@@ -26,21 +60,34 @@
     return modules;
   }
 
-  function courseModules() {
-    var source = document.getElementById("course-modules-data");
-    if (!source) return fallbackModules();
-    try {
-      var modules = JSON.parse(source.textContent);
-      return Array.isArray(modules) && modules.length ? modules : fallbackModules();
-    } catch (error) {
-      return fallbackModules();
-    }
+  function normalizeModules(value) {
+    if (value && Array.isArray(value.modules)) value = value.modules;
+    return Array.isArray(value)
+      ? value.filter(function (moduleItem) { return moduleItem && moduleItem.href; })
+      : [];
   }
 
-  function addSidebar() {
+  function scriptModules() {
+    return normalizeModules(window.COURSE_MODULES);
+  }
+
+  function courseModules() {
+    var modules = scriptModules();
+    return Promise.resolve(modules.length ? modules : fallbackModules());
+  }
+
+  function notifyNavigationReady() {
+    if (typeof window.CustomEvent !== "function") return;
+    document.dispatchEvent(new CustomEvent("course:navigation-ready"));
+  }
+
+  function addSidebar(modules) {
     var main = document.querySelector("main.main-content");
     var wrap = main ? main.querySelector(".wrap") : null;
-    if (!main || !wrap || main.querySelector(".course-nav-pane")) return;
+    if (!main || !wrap || main.querySelector(".course-nav-pane")) {
+      notifyNavigationReady();
+      return;
+    }
 
     var pane = createElement("aside", "course-nav-pane card");
     pane.setAttribute("aria-label", "Course modules");
@@ -51,7 +98,7 @@
     var list = createElement("ul", "course-nav-list");
     var currentPage = (window.location.pathname.split("/").pop() || "m01.html").toLowerCase();
 
-    courseModules().forEach(function (moduleItem) {
+    modules.forEach(function (moduleItem) {
       if (!moduleItem || !moduleItem.href) return;
       var item = createElement("li", "course-nav-item");
       var link = createElement("a", "course-nav-link", moduleItem.label || moduleItem.title || moduleItem.href);
@@ -69,14 +116,17 @@
     pane.appendChild(navigation);
     main.classList.add("course-layout");
     main.insertBefore(pane, wrap);
+    notifyNavigationReady();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    addSidebar();
+    if (isLmsHosted()) {
+      disableScoNavigation();
+      notifyNavigationReady();
+      return;
+    }
 
-    var links = document.querySelectorAll(".module-nav a");
-    Array.prototype.forEach.call(links, function (link) {
-      if (unavailable(link)) link.remove();
-    });
+    enablePreviewNavigation();
+    courseModules().then(addSidebar);
   });
 })();

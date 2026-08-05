@@ -8,9 +8,43 @@
     return element;
   }
 
-  function unavailable(link) {
-    var href = link.getAttribute("href") || "";
-    return !href || href === "#" || href.indexOf("{{") !== -1;
+  function isModuleHref(href) {
+    return /^(?:\.\/)?m\d{2}\.html(?:[?#].*)?$/i.test(href || "");
+  }
+
+  function isLmsHosted() {
+    if (!window.SCORM) return false;
+    if (typeof SCORM.isHosted === "function") return SCORM.isHosted();
+    return typeof SCORM.isAvailable === "function" && SCORM.isAvailable();
+  }
+
+  function enablePreviewNavigation() {
+    var links = document.querySelectorAll(".module-nav a");
+    Array.prototype.forEach.call(links, function (link) {
+      var previewHref = link.getAttribute("data-preview-href") || "";
+      if (!isModuleHref(previewHref)) {
+        link.remove();
+        return;
+      }
+      link.setAttribute("href", previewHref);
+    });
+  }
+
+  function disableScoNavigation() {
+    var moduleNavigation = document.querySelectorAll(".module-nav, .course-nav-pane");
+    Array.prototype.forEach.call(moduleNavigation, function (navigation) {
+      navigation.remove();
+    });
+
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      while (target && target.nodeType === 1 && target.tagName !== "A") {
+        target = target.parentNode;
+      }
+      if (target && target.tagName === "A" && isModuleHref(target.getAttribute("href"))) {
+        event.preventDefault();
+      }
+    }, true);
   }
 
   function fallbackModules() {
@@ -26,25 +60,10 @@
     return modules;
   }
 
-  function cleanModuleLabel(value) {
-    return String(value || "")
-      .replace(/^\s*(?:module\s*)?\d{1,3}\s*[\.\):\-–—]\s*/i, "")
-      .replace(/^\s*m\d{1,3}\s*[\):\-–—]\s*/i, "")
-      .trim();
-  }
-
   function normalizeModules(value) {
     if (value && Array.isArray(value.modules)) value = value.modules;
     return Array.isArray(value)
-      ? value
-        .filter(function (moduleItem) { return moduleItem && moduleItem.href; })
-        .map(function (moduleItem) {
-          var label = cleanModuleLabel(moduleItem.label || moduleItem.title || moduleItem.href);
-          return {
-            label: label || moduleItem.href,
-            href: moduleItem.href
-          };
-        })
+      ? value.filter(function (moduleItem) { return moduleItem && moduleItem.href; })
       : [];
   }
 
@@ -82,8 +101,7 @@
     modules.forEach(function (moduleItem) {
       if (!moduleItem || !moduleItem.href) return;
       var item = createElement("li", "course-nav-item");
-      var label = cleanModuleLabel(moduleItem.label || moduleItem.title || "") || moduleItem.href;
-      var link = createElement("a", "course-nav-link", label);
+      var link = createElement("a", "course-nav-link", moduleItem.label || moduleItem.title || moduleItem.href);
       link.href = moduleItem.href;
       if (moduleItem.href.toLowerCase() === currentPage) {
         link.classList.add("current");
@@ -102,11 +120,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    courseModules().then(addSidebar);
+    if (isLmsHosted()) {
+      disableScoNavigation();
+      notifyNavigationReady();
+      return;
+    }
 
-    var links = document.querySelectorAll(".module-nav a");
-    Array.prototype.forEach.call(links, function (link) {
-      if (unavailable(link)) link.remove();
-    });
+    enablePreviewNavigation();
+    courseModules().then(addSidebar);
   });
 })();

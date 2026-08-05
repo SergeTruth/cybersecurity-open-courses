@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Working Memory, Long-Term Memory, and Schemas",
+  "narration": "Working memory is limited mental workspace. It is where learners hold new facts, compare steps, interpret diagrams, follow explanations, and decide what to do next. When the material is unfamiliar, even simple-looking tasks can consume a lot of working memory because every element feels separate. The learner must hold the terms, relationships, steps, and goal in mind at the same time.\n\nLong-term memory is different. It holds organized knowledge that can be brought back and used. Schemas, or mental structures, help people understand information as meaningful patterns rather than isolated pieces. A schema might represent how a troubleshooting process works, how a paragraph supports an argument, how a network request flows, or how a safety procedure should unfold. Schemas make complex information easier to use.\n\nExpertise reduces working memory demand because experts have organized patterns available in long-term memory. A beginner may see ten separate details. An expert may see one familiar configuration with two unusual exceptions. This does not mean experts have unlimited working memory. It means they can chunk information more effectively because prior knowledge gives the new information structure.\n\nInstruction should therefore help learners build usable schemas over time. That means defining important concepts, showing concrete examples, connecting related ideas, and giving learners practice that strengthens the structure. Beginners often need more support because they have fewer schemas to lean on. As learners gain experience, the design can shift from explaining every relationship to helping them apply and refine what they already know.",
+  "narrationPoints": [
+    "Working memory is limited mental workspace.",
+    "Long-term memory is different.",
+    "Expertise reduces working memory demand because experts have organized patterns available in long-term memory.",
+    "Instruction should therefore help learners build usable schemas over time."
+  ],
+  "graphicAlt": "Blank white placeholder image for module 2, Working Memory, Long-Term Memory, and Schemas."
+};
