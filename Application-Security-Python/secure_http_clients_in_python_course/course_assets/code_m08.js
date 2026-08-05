@@ -5,8 +5,8 @@ window.COURSE_CODE_MODULE = {
     {
       "title": "Retry only bounded idempotent HTTP operations",
       "language": "python",
-      "blurb": "The adapter retries GET requests for a finite set of transient statuses with backoff while keeping ambient proxy routing outside the client.",
-      "code": "import requests\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\ndef resilient_read_session() -> requests.Session:\n    retry = Retry(\n        total=3,\n        connect=2,\n        read=2,\n        status=2,\n        backoff_factor=0.2,\n        status_forcelist={429, 502, 503, 504},\n        allowed_methods={\"GET\"},\n        respect_retry_after_header=True,\n    )\n    session = requests.Session()\n    session.trust_env = False\n    session.proxies.clear()\n    session.mount(\"https://\", HTTPAdapter(max_retries=retry, pool_connections=4, pool_maxsize=8))\n    return session\n"
+      "blurb": "The adapter retries GET requests for a finite set of transient statuses with backoff while keeping ambient proxy routing and non-HTTPS requests outside the client.",
+      "code": "import requests\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\nclass HTTPSOnlySession(requests.Session):\n    def request(self, method, url, **kwargs):\n        if not isinstance(url, str) or not url.startswith(\"https://\"):\n            raise ValueError(\"HTTPS URL required\")\n        return super().request(method, url, **kwargs)\n\ndef resilient_read_session() -> requests.Session:\n    retry = Retry(\n        total=3,\n        connect=2,\n        read=2,\n        status=2,\n        backoff_factor=0.2,\n        status_forcelist={429, 502, 503, 504},\n        allowed_methods={\"GET\"},\n        respect_retry_after_header=True,\n    )\n    session = HTTPSOnlySession()\n    session.trust_env = False\n    session.proxies.clear()\n    session.adapters.pop(\"http://\", None)\n    session.mount(\"https://\", HTTPAdapter(max_retries=retry, pool_connections=4, pool_maxsize=8))\n    return session\n"
     },
     {
       "title": "Record bounded outbound-request telemetry",
