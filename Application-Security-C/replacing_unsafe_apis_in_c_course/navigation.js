@@ -8,9 +8,43 @@
     return element;
   }
 
-  function unavailable(link) {
-    var href = link.getAttribute("href") || "";
-    return !href || href === "#" || href.indexOf("{{") !== -1;
+  function isModuleHref(href) {
+    return /^(?:\.\/)?m\d{2}\.html(?:[?#].*)?$/i.test(href || "");
+  }
+
+  function isLmsHosted() {
+    if (!window.SCORM) return false;
+    if (typeof SCORM.isHosted === "function") return SCORM.isHosted();
+    return typeof SCORM.isAvailable === "function" && SCORM.isAvailable();
+  }
+
+  function enablePreviewNavigation() {
+    var links = document.querySelectorAll(".module-nav a");
+    Array.prototype.forEach.call(links, function (link) {
+      var previewHref = link.getAttribute("data-preview-href") || "";
+      if (!isModuleHref(previewHref)) {
+        link.remove();
+        return;
+      }
+      link.setAttribute("href", previewHref);
+    });
+  }
+
+  function disableScoNavigation() {
+    var moduleNavigation = document.querySelectorAll(".module-nav, .course-nav-pane");
+    Array.prototype.forEach.call(moduleNavigation, function (navigation) {
+      navigation.remove();
+    });
+
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      while (target && target.nodeType === 1 && target.tagName !== "A") {
+        target = target.parentNode;
+      }
+      if (target && target.tagName === "A" && isModuleHref(target.getAttribute("href"))) {
+        event.preventDefault();
+      }
+    }, true);
   }
 
   function fallbackModules() {
@@ -86,11 +120,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    courseModules().then(addSidebar);
+    if (isLmsHosted()) {
+      disableScoNavigation();
+      notifyNavigationReady();
+      return;
+    }
 
-    var links = document.querySelectorAll(".module-nav a");
-    Array.prototype.forEach.call(links, function (link) {
-      if (unavailable(link)) link.remove();
-    });
+    enablePreviewNavigation();
+    courseModules().then(addSidebar);
   });
 })();

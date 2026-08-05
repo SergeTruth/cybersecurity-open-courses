@@ -36,10 +36,14 @@
     var audioBase = meta && meta.dataset.audio;
     var narration = document.querySelector(".narration-card");
     var header = document.querySelector(".title-card");
+    var graphic = document.querySelector(".graphic-card");
+    var codeExamples = document.querySelector(".code-example-card");
     if (!audioBase || !narration) return;
 
     var narrationVisible = readPreference("narrationVisible", "true") === "true";
     var headerVisible = readPreference("headerVisible", "true") === "true";
+    var imageVisible = readPreference("imageVisible", "true") === "true";
+    var codeExamplesVisible = readPreference("codeExamplesVisible", "true") === "true";
     var captionsVisible = readPreference("captionsVisible", "false") === "true";
     var playbackRate = Number(readPreference("playbackRate", "1")) || 1;
     var captionCues = [];
@@ -104,6 +108,18 @@
     if (header) {
       if (!header.id) header.id = "course-title-card";
       headerButton.setAttribute("aria-controls", header.id);
+    }
+    var imageButton = button(imageVisible ? "Hide Image" : "Show Image", "btn secondary");
+    imageButton.setAttribute("aria-expanded", String(imageVisible));
+    if (graphic) {
+      if (!graphic.id) graphic.id = "module-graphic-card";
+      imageButton.setAttribute("aria-controls", graphic.id);
+    }
+    var codeExamplesButton = button(codeExamplesVisible ? "Hide Code Examples" : "Show Code Examples", "btn secondary");
+    codeExamplesButton.setAttribute("aria-expanded", String(codeExamplesVisible));
+    if (codeExamples) {
+      if (!codeExamples.id) codeExamples.id = "module-code-example-card";
+      codeExamplesButton.setAttribute("aria-controls", codeExamples.id);
     }
 
     var captions = document.createElement("div");
@@ -198,15 +214,39 @@
     controls.appendChild(ccButton);
     controls.appendChild(narrationButton);
     controls.appendChild(headerButton);
+    if (graphic) controls.appendChild(imageButton);
+    controls.appendChild(codeExamplesButton);
     card.appendChild(audio);
     card.appendChild(controls);
     card.appendChild(captions);
-    narration.parentNode.insertBefore(card, narration);
+    if (codeExamples && codeExamples.parentNode === narration.parentNode) {
+      codeExamples.parentNode.insertBefore(card, codeExamples.nextSibling);
+    } else {
+      narration.parentNode.insertBefore(card, narration);
+    }
 
     narration.classList.toggle("hidden", !narrationVisible);
     if (header) header.classList.toggle("title-card-hidden", !headerVisible);
+    if (graphic) graphic.classList.toggle("hidden", !imageVisible);
+    if (codeExamples) codeExamples.classList.toggle("code-example-card-user-hidden", !codeExamplesVisible);
     audio.playbackRate = playbackRate;
     setTrackMode();
+
+    function graphicAvailable() {
+      return Boolean(graphic && graphic.dataset.graphicAvailable === "true");
+    }
+
+    function syncImageButton() {
+      if (!graphic) return;
+      imageButton.classList.toggle("hidden", !graphicAvailable());
+      imageButton.disabled = !graphicAvailable();
+      imageButton.setAttribute("aria-hidden", String(!graphicAvailable()));
+    }
+
+    syncImageButton();
+    document.addEventListener("course:graphic-ready", function () {
+      syncImageButton();
+    });
 
     speed.addEventListener("change", function () {
       audio.playbackRate = Number(speed.value);
@@ -227,6 +267,23 @@
       headerButton.textContent = headerVisible ? "Hide Header" : "Show Header";
       headerButton.setAttribute("aria-expanded", String(headerVisible));
       savePreference("headerVisible", headerVisible);
+    });
+
+    imageButton.addEventListener("click", function () {
+      if (!graphicAvailable()) return;
+      imageVisible = !imageVisible;
+      if (graphic) graphic.classList.toggle("hidden", !imageVisible);
+      imageButton.textContent = imageVisible ? "Hide Image" : "Show Image";
+      imageButton.setAttribute("aria-expanded", String(imageVisible));
+      savePreference("imageVisible", imageVisible);
+    });
+
+    codeExamplesButton.addEventListener("click", function () {
+      codeExamplesVisible = !codeExamplesVisible;
+      if (codeExamples) codeExamples.classList.toggle("code-example-card-user-hidden", !codeExamplesVisible);
+      codeExamplesButton.textContent = codeExamplesVisible ? "Hide Code Examples" : "Show Code Examples";
+      codeExamplesButton.setAttribute("aria-expanded", String(codeExamplesVisible));
+      savePreference("codeExamplesVisible", codeExamplesVisible);
     });
 
     ccButton.addEventListener("click", function () {
