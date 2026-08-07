@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Authorization, Tenant Isolation, and Field Exposure",
+  "graphicAlt": "Security diagram for ORM Security Patterns in Node.js, Authorization, Tenant Isolation, and Field Exposure, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "Authentication identifies the caller; authorization decides what records, fields, and actions the caller may access. ORMs do not automatically know the application's business authorization rules. Every protected read, create, update, delete, export, aggregation, relation traversal, background job, report, or administrative operation should enforce authorization. Logged in is not the same as allowed to access this specific record.\n\nObject-level authorization must verify access to the specific record or document. If a user requests an invoice, document, project, or case by ID, the ORM query should not search only by ID. It should also enforce the caller's organization, tenant, ownership, or role context. Multi-tenant applications should apply tenant boundaries server-side and should not trust client-supplied tenant IDs. Authorization conditions should be included consistently in queries, updates, deletes, aggregations, exports, and background jobs.\n\nField exposure is part of authorization. Use select, projection, include, populate, serialization, DTOs, and response shaping intentionally to avoid returning internal or sensitive fields. A user record may be safe to reference but unsafe to return in full. Avoid returning raw ORM model objects directly when they contain password hashes, reset tokens, API keys, internal notes, security flags, billing details, audit-only fields, or privileged relationships. Admin tools, support workflows, reporting jobs, and exports need explicit authorization models too.",
+  "narrationPoints": [
+    "Every protected read, create, update, delete, export, aggregation, relation traversal, background job, report, or administrative operation should enforce authorization.",
+    "Multi-tenant applications should apply tenant boundaries server-side and should not trust client-supplied tenant IDs.",
+    "Avoid returning raw ORM model objects directly when they contain password hashes, reset tokens, API keys, internal notes, security flags, billing details, audit-only fields, or privileged relationships.",
+    "Object-level authorization must verify access to the specific record or document.",
+    "It should also enforce the caller's organization, tenant, ownership, or role context.",
+    "Authorization conditions should be included consistently in queries, updates, deletes, aggregations, exports, and background jobs."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Connection Strings, Secrets, and Configuration Sources",
+  "graphicAlt": "Trust-boundary map for Connection Strings, Secrets, and Configuration Sources in Secure Database Connections in Node.js, with distinct caller, application, platform, and external-service zones connected only through labeled validation and authorization checkpoints.",
+  "narration": "Connection configuration often looks like ordinary setup, but it carries authority and routing information. A database URL may include usernames, passwords, hosts, ports, database names, authentication sources, TLS options, pooling settings, timeouts, retry behavior, and driver-specific flags. Private keys, client certificates, CA bundles, service tokens, and cloud credentials may travel beside it. These values should be treated as secrets or sensitive configuration, not as harmless strings.\n\nDo not store production connection strings or credentials in source code, committed environment files, frontend bundles, Docker images, build artifacts, logs, tickets, screenshots, or public documentation. Use approved secrets management, protected CI/CD variables, orchestrator secrets, cloud secret services, or controlled runtime injection mechanisms. Environment variables are a common delivery mechanism, but they do not by themselves provide rotation, auditability, access control, or protection from careless logging.\n\nSeparate development, test, staging, preview, production, migration, reporting, and runtime credentials where appropriate. Document required connection variables with safe examples that do not contain real secrets. Avoid dumping full process.env or full database URLs during startup and error handling. A single copied production URL can move powerful access into a developer laptop, a broad CI job, or a log file. Good configuration discipline keeps connection authority where it belongs.",
+  "narrationPoints": [
+      "These values should be treated as secrets or sensitive configuration, not as harmless strings.",
+      "Use approved secrets management, protected CI/CD variables, orchestrator secrets, cloud secret services, or controlled runtime injection mechanisms.",
+      "Document required connection variables with safe examples that do not contain real secrets.",
+      "Do not store production connection strings or credentials in source code, committed environment files, frontend bundles, Docker images, build artifacts, logs, tickets, screenshots, or public documentation.",
+      "Connection configuration often looks like ordinary setup, but it carries authority and routing information.",
+      "Good configuration discipline keeps connection authority where it belongs."
+  ]
+};

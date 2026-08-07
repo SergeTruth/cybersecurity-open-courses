@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="secure_random_numbers_in_nodejs">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-salt="c01-13-reviewed"
+          data-answer-checks='{&quot;q01&quot;:&quot;e017814b&quot;,&quot;q02&quot;:&quot;fcf341bc&quot;,&quot;q03&quot;:&quot;6813f8a6&quot;,&quot;q04&quot;:&quot;b0311595&quot;,&quot;q05&quot;:&quot;43a4591c&quot;,&quot;q06&quot;:&quot;61801b20&quot;,&quot;q07&quot;:&quot;2cc8789a&quot;,&quot;q08&quot;:&quot;ede65404&quot;,&quot;q09&quot;:&quot;8a1adfc9&quot;,&quot;q10&quot;:&quot;30760078&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. Why do secure random values matter in Node.js applications?</legend>
+                      <label><input type="radio" name="q01" value="A" required> A. Secure randomness matters primarily for encryption keys; identifiers, sessions, and reset links need uniqueness rather than unpredictability.</label>
+                      <label><input type="radio" name="q01" value="B"> B. Unpredictable values establish authorization by making protected object identifiers difficult for an attacker to enumerate.</label>
+                      <label><input type="radio" name="q01" value="C"> C. Secure random values protect sessions, reset flows, API keys, CSRF defenses, OAuth state, nonces, IVs, and other trust boundaries.</label>
+                      <label><input type="radio" name="q01" value="D"> D. Randomness prevents token disclosure because independently generated values cannot be copied from logs or network traffic.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>2. What is the difference between uniqueness and unpredictability?</legend>
+                      <label><input type="radio" name="q02" value="A" required> A. A value may be unique yet predictable; bearer secrets require unpredictability in addition to avoiding collisions.</label>
+                      <label><input type="radio" name="q02" value="B"> B. Uniqueness implies unpredictability when the value never appeared in the application's database before.</label>
+                      <label><input type="radio" name="q02" value="C"> C. Predictable one-time values remain viable when the server invalidates each value after a successful check.</label>
+                      <label><input type="radio" name="q02" value="D"> D. Cryptographic generation removes the need for collision checks because unpredictability also guarantees uniqueness.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>3. Why should Math.random not be used for reset tokens or API keys?</legend>
+                      <label><input type="radio" name="q03" value="A" required> A. Hashing Math.random output with SHA-256 turns a reset value into an unpredictable one.</label>
+                      <label><input type="radio" name="q03" value="B"> B. Math.random is not designed to provide cryptographic unpredictability for reset tokens or API keys.</label>
+                      <label><input type="radio" name="q03" value="C"> C. Combining Math.random with a timestamp contributes independent entropy to a short-lived reset link.</label>
+                      <label><input type="radio" name="q03" value="D"> D. Math.random is suitable for API keys when the key also includes a unique account identifier and an expiration time.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>4. When is crypto.randomBytes appropriate?</legend>
+                      <label><input type="radio" name="q04" value="A" required> A. crypto.randomBytes receives a bit count, so a 256-bit secret requires randomBytes(256).</label>
+                      <label><input type="radio" name="q04" value="B"> B. randomBytes suits identifiers, while key-generation APIs should derive keys deterministically from account data.</label>
+                      <label><input type="radio" name="q04" value="C"> C. Base64url encoding increases entropy and turns shorter byte arrays into equivalents of longer arrays.</label>
+                      <label><input type="radio" name="q04" value="D"> D. Use crypto.randomBytes when tokens, keys, salts, or other secret material require strong random bytes from Node.js.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>5. Why is crypto.randomInt preferred over modulo mapping for bounded secure integers?</legend>
+                      <label><input type="radio" name="q05" value="A" required> A. randomInt is preferred because modulo reduction is unbiased when the maximum is smaller than one random byte.</label>
+                      <label><input type="radio" name="q05" value="B"> B. crypto.randomInt avoids common modulo-mapping bias so results in the requested integer range are equally likely.</label>
+                      <label><input type="radio" name="q05" value="C"> C. randomInt renders short verification codes resistant to guessing without expiration or attempt limits.</label>
+                      <label><input type="radio" name="q05" value="D"> D. randomInt includes the upper bound, which avoids losing the last possible value during secure range selection.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>6. Why do short numeric verification codes need controls beyond random generation?</legend>
+                      <label><input type="radio" name="q06" value="A" required> A. Short numeric codes have limited search space and need expiration, rate limits, attempt limits, monitoring, and account context.</label>
+                      <label><input type="radio" name="q06" value="B"> B. A six-digit code is secure by itself when generated with randomInt because cryptographic randomness prevents exhaustive guessing.</label>
+                      <label><input type="radio" name="q06" value="C"> C. Long expiration improves numeric-code security by reducing the number of codes a user must request during retries.</label>
+                      <label><input type="radio" name="q06" value="D"> D. Hashing a numeric code before storage expands its online search space enough to remove account-level attempt limits.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>7. Which statement about salts, nonces, and IVs is most accurate?</legend>
+                      <label><input type="radio" name="q07" value="A" required> A. Salts, nonces, and IVs are interchangeable random prefixes as long as each contains at least 128 bits.</label>
+                      <label><input type="radio" name="q07" value="B"> B. Salts, nonces, and IVs serve different purposes and must follow the selected algorithm or construction's requirements.</label>
+                      <label><input type="radio" name="q07" value="C"> C. Nonces and IVs must be secret, while salts may be stored in cleartext beside a password hash.</label>
+                      <label><input type="radio" name="q07" value="D"> D. A shared application-wide random value can serve as a salt, nonce, and IV when operations use different keys.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>8. Why should random UUIDs not replace server-side authorization?</legend>
+                      <label><input type="radio" name="q08" value="A" required> A. A version 4 UUID provides object authorization because another valid identifier is infeasible to guess.</label>
+                      <label><input type="radio" name="q08" value="B"> B. Random identifiers act as access credentials because enumeration of another object's identifier is impractical.</label>
+                      <label><input type="radio" name="q08" value="C"> C. A random UUID may be hard to guess, but it does not prove that a caller may access the referenced object.</label>
+                      <label><input type="radio" name="q08" value="D"> D. Adding a tenant prefix to a UUID confirms both tenant membership and permission for the object.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>9. Why must generated tokens and secrets be redacted from logs?</legend>
+                      <label><input type="radio" name="q09" value="A" required> A. Generated tokens and secrets must be redacted because logs are durable, searchable, broadly accessible, and copied into other systems.</label>
+                      <label><input type="radio" name="q09" value="B"> B. Logging a token digest alongside the full token is safe when operators need to correlate failed authentication requests.</label>
+                      <label><input type="radio" name="q09" value="C"> C. Short-lived secrets may be logged because they expire before log indexing and long-term archival complete.</label>
+                      <label><input type="radio" name="q09" value="D"> D. Generated values contain no personal data, so logging them does not create a meaningful exposure path.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>10. What should a secure randomness review workflow include?</legend>
+                      <label><input type="radio" name="q10" value="A" required> A. Review that node:crypto is imported and values appear random; encoding, lifecycle, storage, and abuse controls are separate concerns.</label>
+                      <label><input type="radio" name="q10" value="B"> B. Review statistical distributions from production tokens; statistical tests show unpredictability and safe secret handling.</label>
+                      <label><input type="radio" name="q10" value="C"> C. Review byte lengths and collision rates; algorithm-specific nonce rules, logs, rotation, and compromise procedures can use defaults.</label>
+                      <label><input type="radio" name="q10" value="D"> D. Review each value's purpose, API, entropy, encoding, storage, expiry, logging, monitoring, and incident-response behavior.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

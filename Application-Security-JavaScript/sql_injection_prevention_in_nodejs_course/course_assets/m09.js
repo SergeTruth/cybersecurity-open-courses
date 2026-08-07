@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Code Review, and CI/CD Workflow",
+  "graphicAlt": "Left-to-right security workflow for Testing, Code Review, and CI/CD Workflow in SQL Injection Prevention in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "SQL injection prevention needs to be repeatable in normal engineering work. A useful pull request review asks where SQL is constructed, which values are bound, what dynamic structure is allowlisted, which database account runs the query, what happens on error, and how authorization and tenant boundaries are enforced. Review route handlers, service layers, repositories, query helpers, ORM raw calls, reporting jobs, migrations, seed scripts, and administrative tools.\n\nTests should cover expected query behavior and rejected behavior. Exercise dynamic filters, unsupported sort fields, invalid pagination, tenant boundaries, object-level authorization, and error handling. A test does not need to demonstrate an exploit to be useful. It can verify that unsupported structure is rejected, that values are passed through parameter binding, and that the response stays safe when the database returns an error. Tests make the contract visible to future reviewers.\n\nCI/CD can support the workflow with linting, static analysis, secret scanning, dependency checks, security-focused tests, and targeted review rules around raw SQL. These tools help, but they do not replace design review. A scanner may not understand business authorization, tenant isolation, or whether a dynamic report field is properly mapped. Treat automation as a force multiplier for human review, and use recurring findings to improve shared helpers, standards, and developer guidance.",
+  "narrationPoints": [
+      "A useful pull request review asks where SQL is constructed, which values are bound, what dynamic structure is allowlisted, which database account runs the query, what happens on error, and how authorization and tenant boundaries are enforced.",
+      "It can verify that unsupported structure is rejected, that values are passed through parameter binding, and that the response stays safe when the database returns an error.",
+      "CI/CD can support the workflow with linting, static analysis, secret scanning, dependency checks, security-focused tests, and targeted review rules around raw SQL.",
+      "SQL injection prevention needs to be repeatable in normal engineering work.",
+      "A test does not need to demonstrate an exploit to be useful.",
+      "These tools help, but they do not replace design review."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Output Safety, Errors, and Data Exposure",
+  "graphicAlt": "Security diagram for REST API Security in NodeJS, Output Safety, Errors, and Data Exposure, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "APIs should return only the data required for the caller and use case. Excessive data exposure often comes from convenience: the database object is already available, so the handler returns it. That can expose password hashes, reset tokens, internal identifiers, secret flags, billing metadata, administrative notes, or fields that belong to another role. Response models, serializers, and explicit field selection turn output shaping into a security boundary.\n\nErrors deserve the same discipline. A useful API can return consistent status codes and error formats without revealing stack traces, SQL details, internal paths, secrets, token contents, dependency names, or implementation internals. Clients need enough information to handle the failure, while operators need enough detail to investigate. Those are different audiences. External responses should be safe and stable; internal logs can preserve deeper diagnostics with access control and redaction.\n\nOutput safety also includes consistency. If an API returns different details for unauthorized, missing, or invalid objects, it may reveal more than intended. If validation errors echo sensitive input, logs or responses can become exposure points. If debug behavior differs by environment, production may accidentally reveal internals. The practical pattern is to define response shapes, define error shapes, avoid raw database objects, and review what sensitive workflows return under both success and failure.",
+  "narrationPoints": [
+    "Excessive data exposure often comes from convenience: the database object is already available, so the handler returns it.",
+    "A useful API can return consistent status codes and error formats without revealing stack traces, SQL details, internal paths, secrets, token contents, dependency names, or implementation internals.",
+    "If validation errors echo sensitive input, logs or responses can become exposure points.",
+    "Response models, serializers, and explicit field selection turn output shaping into a security boundary.",
+    "APIs should return only the data required for the caller and use case.",
+    "The practical pattern is to define response shapes, define error shapes, avoid raw database objects, and review what sensitive workflows return under both success and failure."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Rotation, Expiration, and Least Privilege",
+  "graphicAlt": "Two-path comparison for Rotation, Expiration, and Least Privilege in Secrets Management in Node.js: an unsafe flow bypasses the relevant control, while the approved flow passes through enforcement, bounded processing, and an auditable outcome.",
+  "narration": "Rotation is an engineering capability, not just a calendar reminder. Every important secret should have an owner, purpose, scope, creation date, rotation expectation, and decommissioning criteria. Shorter-lived credentials reduce the window of exposure, but they require automation and operational readiness. A team that has never rotated a database password, JWT signing key, session secret, webhook secret, or npm token may discover during an incident that rotation breaks production.\n\nSafe rotation often requires a staged pattern: create a new secret, deploy consumers that can use it, validate behavior, retire the old secret, verify the old secret no longer works, and monitor for errors. Some secrets rotate transparently. Others need key overlap, phased rollout, backward compatibility, or rollback planning. Signing keys, session secrets, webhook secrets, database credentials, and third-party integration tokens may each need different procedures.\n\nLeast privilege limits damage when rotation is not fast enough. Separate read-only, write, administrative, deployment, migration, production, staging, local development, and reporting privileges where possible. Remove unused secrets when services, developers, vendors, integrations, or workflows change. Expiration and decommissioning matter because old credentials are easy to forget and hard to defend. The best rotation plan is tested before the emergency, not invented during the first hour of an incident.",
+  "narrationPoints": [
+      "A team that has never rotated a database password, JWT signing key, session secret, webhook secret, or npm token may discover during an incident that rotation breaks production.",
+      "Safe rotation often requires a staged pattern: create a new secret, deploy consumers that can use it, validate behavior, retire the old secret, verify the old secret no longer works, and monitor for errors.",
+      "Least privilege limits damage when rotation is not fast enough.",
+      "Signing keys, session secrets, webhook secrets, database credentials, and third-party integration tokens may each need different procedures.",
+      "Every important secret should have an owner, purpose, scope, creation date, rotation expectation, and decommissioning criteria.",
+      "Shorter-lived credentials reduce the window of exposure, but they require automation and operational readiness."
+  ]
+};

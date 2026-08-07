@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safer Design with Identifiers and Allowlists",
+  "graphicAlt": "Security diagram for Path Traversal Prevention in Node.js, Safer Design with Identifiers and Allowlists, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "The strongest pattern is to avoid giving callers a path-shaped control when they only need to choose from known resources. A route such as download invoice by invoice ID is easier to secure than a route that accepts a filesystem path. The application can look up the invoice record, verify the requester can access it, and retrieve the server-controlled storage location. The user selects a business object, not a file path.\n\nUse application-controlled identifiers, database records, manifests, or object metadata to map public choices to internal storage. Store the real location separately from the user-facing identifier. Generated server-side storage names reduce ambiguity, collision risk, and dependence on user-supplied filenames. Original filenames can be preserved as display metadata when needed, but they should not become filesystem paths or object storage keys.\n\nAllowlists should represent business choices, not just string filters. Known report types, approved template names, tenant-scoped file IDs, export formats, file categories, or storage buckets are easier to reason about than arbitrary path strings. If the workflow only supports monthly reports, let the user choose an allowed report type and date range. If the workflow only supports known templates, use a controlled template key. Prevention becomes simpler when the input is a choice within a designed domain rather than a raw path.",
+  "narrationPoints": [
+    "The strongest pattern is to avoid giving callers a path-shaped control when they only need to choose from known resources.",
+    "Original filenames can be preserved as display metadata when needed, but they should not become filesystem paths or object storage keys.",
+    "Known report types, approved template names, tenant-scoped file IDs, export formats, file categories, or storage buckets are easier to reason about than arbitrary path strings.",
+    "Prevention becomes simpler when the input is a choice within a designed domain rather than a raw path.",
+    "Allowlists should represent business choices, not just string filters.",
+    "The application can look up the invoice record, verify the requester can access it, and retrieve the server-controlled storage location."
+  ]
+};

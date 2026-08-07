@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why SQL Injection Prevention Matters",
+  "graphicAlt": "Lifecycle sequence for Why SQL Injection Prevention Matters in SQL Injection Prevention in Node.js, tracing creation, validation, use, failure handling, cleanup, and verification while highlighting the component responsible at every transition.",
+  "narration": "SQL injection prevention starts with a simple idea: data must not be allowed to change the meaning of a database query. A Node.js API may begin with one search endpoint, one report filter, or one administrative export that seems harmless. Later the same construction pattern spreads into background jobs, tenant exports, billing lookups, authentication checks, and service integrations. When the application mixes untrusted values into SQL structure, a routine business feature becomes a security boundary failure.\n\nThe consequences are not limited to reading records that should be private. SQL injection can lead to unauthorized data access, data modification, broken tenant isolation, authentication bypass, destructive changes, fraud, audit gaps, and long incident response work. The root problem is not that SQL exists or that Node.js is unsafe. The root problem is letting values supplied by users, partners, files, queues, or other systems become executable query structure.\n\nA safer design keeps the application in control of query shape. The application decides which table, column, operation, filter, and sort behavior are allowed. User-provided values are passed separately as data, validated according to business rules, and bound through safe database APIs. This course focuses on that engineering habit: control the structure, bind the values, constrain dynamic behavior, and review every query path where that boundary could blur.",
+  "narrationPoints": [
+      "SQL injection prevention starts with a simple idea: data must not be allowed to change the meaning of a database query.",
+      "SQL injection can lead to unauthorized data access, data modification, broken tenant isolation, authentication bypass, destructive changes, fraud, audit gaps, and long incident response work.",
+      "User-provided values are passed separately as data, validated according to business rules, and bound through safe database APIs.",
+      "A safer design keeps the application in control of query shape.",
+      "When the application mixes untrusted values into SQL structure, a routine business feature becomes a security boundary failure.",
+      "Later the same construction pattern spreads into background jobs, tenant exports, billing lookups, authentication checks, and service integrations."
+  ]
+};

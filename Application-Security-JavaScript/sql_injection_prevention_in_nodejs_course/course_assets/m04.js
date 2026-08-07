@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "ORMs, Query Builders, and Raw SQL Boundaries",
+  "graphicAlt": "Layered architecture view of ORMs, Query Builders, and Raw SQL Boundaries for SQL Injection Prevention in Node.js, placing the protected asset at the center and surrounding it with identity, validation, resource, lifecycle, and monitoring controls.",
+  "narration": "ORMs and query builders can make safe database access easier. Common lookup, insert, update, and relationship operations are often parameterized by default, and higher-level APIs reduce the amount of handwritten SQL that developers need to maintain. That is useful, but it is not a security warranty. SQL injection risk depends on how the API is used, especially when the code leaves the normal model methods and starts building raw fragments.\n\nReview raw query APIs, literal expressions, dynamic where clauses, custom order clauses, report builders, migration scripts, seed scripts, and background jobs with care. These areas often exist because the ordinary ORM path was not flexible enough. They may be necessary, but they need the same discipline as direct driver calls: bind values, map structural choices, keep dynamic SQL small, and document why the raw boundary exists. Generated SQL should still enforce authorization, tenant boundaries, and business rules.\n\nThe useful review question is not simply, do we use an ORM. The better question is, where can untrusted data influence SQL structure, and how is that influence controlled. A team may use an ORM safely for normal account lookups and still introduce risk through one complex analytics report. Treat raw SQL escape hatches as high-value review points, not because they are always wrong, but because they bypass many of the guardrails developers assume are present.",
+  "narrationPoints": [
+      "ORMs and query builders can make safe database access easier.",
+      "Generated SQL should still enforce authorization, tenant boundaries, and business rules.",
+      "Treat raw SQL escape hatches as high-value review points, not because they are always wrong, but because they bypass many of the guardrails developers assume are present.",
+      "Review raw query APIs, literal expressions, dynamic where clauses, custom order clauses, report builders, migration scripts, seed scripts, and background jobs with care.",
+      "Common lookup, insert, update, and relationship operations are often parameterized by default, and higher-level APIs reduce the amount of handwritten SQL that developers need to maintain.",
+      "They may be necessary, but they need the same discipline as direct driver calls: bind values, map structural choices, keep dynamic SQL small, and document why the raw boundary exists."
+  ]
+};

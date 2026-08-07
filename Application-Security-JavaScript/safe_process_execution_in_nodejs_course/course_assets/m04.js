@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Avoiding Shell Injection and Argument Injection",
+  "graphicAlt": "Lifecycle sequence for Avoiding Shell Injection and Argument Injection in Safe Process Execution in Node.js, tracing creation, validation, use, failure handling, cleanup, and verification while highlighting the component responsible at every transition.",
+  "narration": "The application should choose the command. The user should not. Avoid building shell command strings from user-controlled or externally influenced input. If a process must run, hardcode or allowlist the executable and pass arguments as separate structured values. That separation matters because it keeps the command decision in application code and treats user input as data for a specific purpose rather than as text to be interpreted by a shell.\n\nArgument injection can still matter when the executable is fixed. A user-supplied value may not start a new command, but it can still change the behavior of the intended command if it becomes an unexpected flag, output location, network target, file selector, or mode setting. Validate each argument according to its purpose: type, length, format, range, allowed values, and relationship to the business workflow. Allowlisted choices such as approved formats or known operation names are easier to review than arbitrary strings.\n\nEscaping is fragile and platform-specific, so it should not be the main design. Quoting rules vary by shell and operating system, and small changes can invalidate assumptions. End-of-options delimiters can help with some tools when the command supports them, but they are not a complete security model. Prefer designs where untrusted input never becomes shell syntax, executable names, flags, working directories, environment keys, or output paths.",
+  "narrationPoints": [
+      "If a process must run, hardcode or allowlist the executable and pass arguments as separate structured values.",
+      "Validate each argument according to its purpose: type, length, format, range, allowed values, and relationship to the business workflow.",
+      "Prefer designs where untrusted input never becomes shell syntax, executable names, flags, working directories, environment keys, or output paths.",
+      "Avoid building shell command strings from user-controlled or externally influenced input.",
+      "Argument injection can still matter when the executable is fixed.",
+      "That separation matters because it keeps the command decision in application code and treats user input as data for a specific purpose rather than as text to be interpreted by a shell."
+  ]
+};

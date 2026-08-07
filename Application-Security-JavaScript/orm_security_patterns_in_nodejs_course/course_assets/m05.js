@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Injection Prevention, Raw SQL, and Unsafe Query Boundaries",
+  "graphicAlt": "Security diagram for ORM Security Patterns in Node.js, Injection Prevention, Raw SQL, and Unsafe Query Boundaries, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "ORM model operations commonly help separate query structure from ordinary values. That is useful, but it is not magic. Teams often use safe model operations for most code, then introduce raw SQL, literal expressions, unsafe fragments, dynamic where clauses, dynamic order clauses, or database-specific features for reports, performance tuning, migrations, or complex filters. Those escape hatches deserve a higher review standard because they can bypass safer abstractions.\n\nParameterized queries and prepared statements are the primary defense for SQL values. Do not concatenate untrusted values into SQL strings, and do not place untrusted values directly into JavaScript template literals that become SQL. Parameter binding applies to values; it does not safely replace arbitrary SQL identifiers such as table names, column names, sort directions, operators, joins, or SQL fragments. Dynamic SQL structure should be mapped through allowlists controlled by the application.\n\nReview raw query use in API routes, workers, scripts, reports, migrations, seed jobs, and admin tooling. Treat NoSQL-style query objects and ODM filters with the same mindset: untrusted objects should not be allowed to change query meaning. The central lesson is consistent across ORMs, query builders, and ODMs. The application controls the query structure, user input becomes validated values, and any dynamic structure is narrow, justified, mapped, tested, and easy to review.",
+  "narrationPoints": [
+    "Teams often use safe model operations for most code, then introduce raw SQL, literal expressions, unsafe fragments, dynamic where clauses, dynamic order clauses, or database-specific features for reports, performance tuning, migrations, or complex filters.",
+    "Dynamic SQL structure should be mapped through allowlists controlled by the application.",
+    "Treat NoSQL-style query objects and ODM filters with the same mindset: untrusted objects should not be allowed to change query meaning.",
+    "The application controls the query structure, user input becomes validated values, and any dynamic structure is narrow, justified, mapped, tested, and easy to review.",
+    "ORM model operations commonly help separate query structure from ordinary values.",
+    "Review raw query use in API routes, workers, scripts, reports, migrations, seed jobs, and admin tooling."
+  ]
+};

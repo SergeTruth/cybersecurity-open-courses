@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Environment Variables and Runtime Delivery",
+  "graphicAlt": "Layered architecture view of Environment Variables and Runtime Delivery for Secrets Management in Node.js, placing the protected asset at the center and surrounding it with identity, validation, resource, lifecycle, and monitoring controls.",
+  "narration": "It helps to separate three questions: where the secret is stored, how the secret is delivered, and how the application uses it. Environment variables are a common way to deliver configuration into a Node.js process, often through process.env. That does not make environment variables a complete secrets management system. They are a delivery mechanism, not a full answer for access control, rotation, auditing, or safe logging.\n\nRuntime delivery has its own risks. Secrets may be visible to processes, debugging tools, crash reports, container inspection, dashboards, support tooling, shell history, or accidental logs. Applications should read secrets through approved startup or runtime mechanisms without printing them. Avoid placing secrets in command-line arguments, URLs, frontend bundles, source maps, public config objects, generated static files, or client-visible code. Frontend JavaScript cannot safely contain secrets because it is delivered to users.\n\nContainers and serverless environments need careful design. Secrets should be injected at runtime or through approved platform mechanisms, not baked into images, static build artifacts, or long-lived deployment packages. Rotatable designs make it possible to change credentials without rebuilding everything or redeploying unrelated artifacts. A server-side secret should stay server-side, be scoped to the workload that needs it, and be used without becoming part of the application's public surface.",
+  "narrationPoints": [
+      "Environment variables are a common way to deliver configuration into a Node.js process, often through process.env.",
+      "Avoid placing secrets in command-line arguments, URLs, frontend bundles, source maps, public config objects, generated static files, or client-visible code.",
+      "Secrets should be injected at runtime or through approved platform mechanisms, not baked into images, static build artifacts, or long-lived deployment packages.",
+      "A server-side secret should stay server-side, be scoped to the workload that needs it, and be used without becoming part of the application's public surface.",
+      "Applications should read secrets through approved startup or runtime mechanisms without printing them.",
+      "That does not make environment variables a complete secrets management system."
+  ]
+};

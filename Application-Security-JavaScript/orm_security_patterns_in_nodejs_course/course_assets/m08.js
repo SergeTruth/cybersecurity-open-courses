@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Connections, Secrets, Migrations, and Database Privileges",
+  "graphicAlt": "Security diagram for ORM Security Patterns in Node.js, Connections, Secrets, Migrations, and Database Privileges, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "ORM security includes the workflows around the database, not only the query calls. Connection configuration often includes database URLs, usernames, passwords, hosts, TLS options, pool settings, retry behavior, and deployment assumptions. Do not store production connection strings or credentials in source code, committed environment files, frontend bundles, Docker images, logs, tickets, screenshots, or public documentation. Use approved secrets management or protected deployment variables for production credentials.\n\nSeparate development, test, staging, production, migration, reporting, CI/CD, and application runtime credentials where appropriate. Runtime accounts should use least privilege. Migration credentials may need broader privileges than runtime credentials, so they should be protected and used through controlled deployment workflows. Seed scripts and maintenance scripts can create privileged accounts, expose data, or modify security-critical records, which makes them part of the security review surface.\n\nProduction migrations should be reviewed, repeatable, and operationally visible. A migration can change authorization behavior by adding defaults, removing constraints, modifying relationships, or changing fields that control identity and ownership. Connection pooling and client lifecycle choices affect reliability and can create operational risk when mismanaged. Backups, exports, replicas, and restored environments should be protected as sensitive data stores. The database workflow is part of the product's security boundary.",
+  "narrationPoints": [
+    "Use approved secrets management or protected deployment variables for production credentials.",
+    "Migration credentials may need broader privileges than runtime credentials, so they should be protected and used through controlled deployment workflows.",
+    "Backups, exports, replicas, and restored environments should be protected as sensitive data stores.",
+    "ORM security includes the workflows around the database, not only the query calls.",
+    "Connection configuration often includes database URLs, usernames, passwords, hosts, TLS options, pool settings, retry behavior, and deployment assumptions.",
+    "The database workflow is part of the product's security boundary."
+  ]
+};

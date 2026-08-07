@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe Reads, Writes, Temporary Files, and Race Conditions",
+  "graphicAlt": "Lifecycle sequence for Safe Reads, Writes, Temporary Files, and Race Conditions in Safe File Handling in Node.js, tracing creation, validation, use, failure handling, cleanup, and verification while highlighting the component responsible at every transition.",
+  "narration": "Many file bugs are timing and state bugs. The application checks one thing, then later uses a path or file that may no longer be the same. Avoid separate check-then-use patterns when the file could change between the check and the operation. Be careful with symlinks, hard links, rename operations, concurrent requests, and assumptions that a path still points to the same file later. File workflows that seem correct under one request can behave differently under concurrency.\n\nRead and write only within approved locations. Use safe temporary directories and generated temporary names for intermediate work. Clean up temporary files after success, failure, timeout, or cancellation. Generated reports should not collide with one another, and file replacement should avoid exposing partially written output. Atomic write or replace patterns can be useful when readers should see either the old complete file or the new complete file, not a half-written version.\n\nWritable locations should be narrow and intentional. Do not write user-controlled data into executable directories, source directories, dependency directories, or public web roots unless the design explicitly requires public static content and has compensating controls. A local development shortcut can become a production exposure when the same path layout ships to a server or container. Review who can write, what can be written, and which code later reads or serves the result.",
+  "narrationPoints": [
+      "Avoid separate check-then-use patterns when the file could change between the check and the operation.",
+      "Generated reports should not collide with one another, and file replacement should avoid exposing partially written output.",
+      "Do not write user-controlled data into executable directories, source directories, dependency directories, or public web roots unless the design explicitly requires public static content and has compensating controls.",
+      "Use safe temporary directories and generated temporary names for intermediate work.",
+      "Clean up temporary files after success, failure, timeout, or cancellation.",
+      "Atomic write or replace patterns can be useful when readers should see either the old complete file or the new complete file, not a half-written version."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Error Handling, and Secret Redaction",
+  "graphicAlt": "Lifecycle sequence for Logging, Error Handling, and Secret Redaction in Secrets Management in Node.js, tracing creation, validation, use, failure handling, cleanup, and verification while highlighting the component responsible at every transition.",
+  "narration": "Logs, traces, metrics, error reports, screenshots, support bundles, debugging sessions, and crash dumps can become secondary secret stores. Logging is valuable, but careless logging can turn a small issue into a larger breach. Applications should not log passwords, tokens, cookies, authorization headers, session IDs, reset links, private keys, database URLs, cloud credentials, webhook secrets, OAuth codes, or full connection strings.\n\nRedaction should happen before data leaves the application boundary where possible. Structured logging helps because it allows teams to choose safe fields instead of dumping entire objects. Useful diagnostics usually need request IDs, event type, service name, environment, outcome, error category, and sanitized metadata. They do not need full headers, full request bodies, process.env, failed connection URLs, or raw third-party payloads containing credentials.\n\nError responses should not expose secret values, environment variables, internal configuration, stack traces, deployment details, or support-only debugging output. Monitoring tools and log platforms need access controls, retention limits, and incident response procedures because they may still contain sensitive operational data. Redaction rules need maintenance as new headers, fields, tokens, and integrations are added. Test common error paths to confirm secrets are not printed when things fail.",
+  "narrationPoints": [
+      "Applications should not log passwords, tokens, cookies, authorization headers, session IDs, reset links, private keys, database URLs, cloud credentials, webhook secrets, OAuth codes, or full connection strings.",
+      "Useful diagnostics usually need request IDs, event type, service name, environment, outcome, error category, and sanitized metadata.",
+      "Error responses should not expose secret values, environment variables, internal configuration, stack traces, deployment details, or support-only debugging output.",
+      "Monitoring tools and log platforms need access controls, retention limits, and incident response procedures because they may still contain sensitive operational data.",
+      "Test common error paths to confirm secrets are not printed when things fail.",
+      "Logs, traces, metrics, error reports, screenshots, support bundles, debugging sessions, and crash dumps can become secondary secret stores."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Process Execution Architecture and Trust Boundaries",
+  "graphicAlt": "Trust-boundary map for Process Execution Architecture and Trust Boundaries in Safe Process Execution in Node.js, with distinct caller, application, platform, and external-service zones connected only through labeled validation and authorization checkpoints.",
+  "narration": "Review should start with a map, not a grep for one API name. Identify every place the application starts an external program, shell command, script, worker, CLI tool, npm script, build step, or child Node.js process. That includes route handlers, background workers, scheduled jobs, administrative tools, CI scripts, deployment automation, file conversion pipelines, archive processors, scanning jobs, and local maintenance utilities that later become production code.\n\nNext, map the input sources that can influence execution. Values may come from route parameters, request bodies, uploaded filenames, database records, queue messages, webhook payloads, configuration, environment variables, admin form fields, or metadata produced by another service. A value is not automatically trusted because it came from a database or queue. If it originally came from a user or external system, it still crosses a trust boundary when it reaches process execution.\n\nFor each workflow, define who can trigger execution, which executable is allowed, which arguments are allowed, where it runs, what environment it receives, what files it can read or write, what network access it has, and what happens if it fails or hangs. A user-triggered conversion job, service-triggered scanner, scheduled backup, administrative maintenance command, and build-time npm script may all need different controls. The security model should match the business purpose, not a generic helper function.",
+  "narrationPoints": [
+      "Identify every place the application starts an external program, shell command, script, worker, CLI tool, npm script, build step, or child Node.js process.",
+      "If it originally came from a user or external system, it still crosses a trust boundary when it reaches process execution.",
+      "The security model should match the business purpose, not a generic helper function.",
+      "Values may come from route parameters, request bodies, uploaded filenames, database records, queue messages, webhook payloads, configuration, environment variables, admin form fields, or metadata produced by another service.",
+      "Next, map the input sources that can influence execution.",
+      "A value is not automatically trusted because it came from a database or queue."
+  ]
+};

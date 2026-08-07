@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why REST API Security Matters",
+  "graphicAlt": "Security diagram for REST API Security in NodeJS, Why REST API Security Matters, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "A REST API endpoint often begins as a small internal feature. A developer adds a route to return account data, update a profile, create an invoice, or export a report. Later, that same endpoint becomes part of a production workflow, is called by mobile clients, sits behind a reverse proxy, uses an external identity provider, and connects to databases and automation. What looked like a simple route and some JSON is now an interface to authority, data, and business logic.\n\nREST APIs expose application behavior over the network. Security failures commonly involve authentication gaps, weak authorization, missing object-level checks, unsafe input handling, excessive data exposure, resource abuse, dependency risk, and misconfiguration. NodeJS APIs add their own operational shape: Express-style routing, middleware stacks, JSON parsers, npm packages, async database access, reverse proxies, external identity providers, and CI/CD deployment patterns. Each layer can strengthen the boundary or quietly weaken it.\n\nThe goal of this course is practical defensive engineering. REST API security is not one middleware package, one scanner, or one checklist item. A secure API makes behavior explicit, limited, validated, observable, and testable. It defines what each endpoint may do, who may call it, which objects may be accessed, what data may enter, what data may leave, how errors are handled, how resources are protected, and how teams detect when behavior changes.",
+  "narrationPoints": [
+    "A REST API endpoint often begins as a small internal feature.",
+    "Security failures commonly involve authentication gaps, weak authorization, missing object-level checks, unsafe input handling, excessive data exposure, resource abuse, dependency risk, and misconfiguration.",
+    "REST API security is not one middleware package, one scanner, or one checklist item.",
+    "A secure API makes behavior explicit, limited, validated, observable, and testable.",
+    "NodeJS APIs add their own operational shape: Express-style routing, middleware stacks, JSON parsers, npm packages, async database access, reverse proxies, external identity providers, and CI/CD deployment patterns.",
+    "It defines what each endpoint may do, who may call it, which objects may be accessed, what data may enter, what data may leave, how errors are handled, how resources are protected, and how teams detect when behavior changes."
+  ]
+};

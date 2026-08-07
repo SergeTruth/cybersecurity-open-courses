@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Parameterized Queries and Prepared Statements",
+  "graphicAlt": "Left-to-right security workflow for Parameterized Queries and Prepared Statements in SQL Injection Prevention in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "Parameterized queries are the primary defense for ordinary SQL values. The application writes a fixed SQL statement shape and passes values separately through placeholders and a parameter list. PostgreSQL-style clients often use numbered placeholders, while MySQL-style clients commonly use question-mark placeholders. The syntax differs by driver, but the security goal is the same: the database driver or server treats the supplied value as data, not as part of the SQL language.\n\nThis pattern should be used consistently across reads, writes, updates, deletes, reports, and administrative queries. Avoid string concatenation with request values. Avoid template literals that insert untrusted values directly into SQL. Avoid helper functions that appear to sanitize a value and then place it into a query string. Safe code should make it obvious which parts of the statement are application-controlled and which parts are bound values supplied separately to the driver.\n\nParameterization is powerful, but it is not magic. It is designed for values such as account identifiers, dates, statuses, names, amounts, and search text. It does not safely replace arbitrary SQL identifiers, table names, column names, sort directions, operators, or join logic. Those structural choices need allowlists and application-controlled mappings. A mature review checks both sides: ordinary values are parameterized, and dynamic structure is constrained rather than pasted into the query.",
+  "narrationPoints": [
+      "Parameterized queries are the primary defense for ordinary SQL values.",
+      "This pattern should be used consistently across reads, writes, updates, deletes, reports, and administrative queries.",
+      "A mature review checks both sides: ordinary values are parameterized, and dynamic structure is constrained rather than pasted into the query.",
+      "Avoid helper functions that appear to sanitize a value and then place it into a query string.",
+      "Safe code should make it obvious which parts of the statement are application-controlled and which parts are bound values supplied separately to the driver.",
+      "The syntax differs by driver, but the security goal is the same: the database driver or server treats the supplied value as data, not as part of the SQL language."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Argument Handling and Input Validation",
+  "graphicAlt": "Trust-boundary map for Argument Handling and Input Validation in Secure Child Process Usage in Node.js, with distinct caller, application, platform, and external-service zones connected only through labeled validation and authorization checkpoints.",
+  "narration": "Safe argument handling separates the command from the data passed to it. The user may choose a supported operation, but the application should map that choice to known arguments. For example, a user might select an approved output format from a short list, while the application converts that selection into a controlled argument. The user should not provide raw flags, arbitrary paths, executable names, output locations, working directories, or environment variables.\n\nValidate every externally influenced argument according to its purpose. Check type, length, range, format, allowed values, and relationship to the business workflow. Use allowlists for modes, formats, report types, output types, operation names, and file categories. When file paths or filenames are involved, prefer server-generated names and controlled storage locations. Treat uploaded filenames and original filenames as untrusted metadata, not as command arguments or filesystem destinations.\n\nArgument injection can matter even when the executable is fixed. A value may not start a new command, but it may become an unexpected option, flag, operand, URL, file selector, or output path that changes the behavior of the intended tool. Fail closed when values are unsupported. The review question is not only whether a command string can be broken. It is whether any caller can change the child process behavior beyond the business action they are authorized to request.",
+  "narrationPoints": [
+      "Safe argument handling separates the command from the data passed to it.",
+      "Validate every externally influenced argument according to its purpose.",
+      "A value may not start a new command, but it may become an unexpected option, flag, operand, URL, file selector, or output path that changes the behavior of the intended tool.",
+      "The user should not provide raw flags, arbitrary paths, executable names, output locations, working directories, or environment variables.",
+      "For example, a user might select an approved output format from a short list, while the application converts that selection into a controlled argument.",
+      "Use allowlists for modes, formats, report types, output types, operation names, and file categories."
+  ]
+};

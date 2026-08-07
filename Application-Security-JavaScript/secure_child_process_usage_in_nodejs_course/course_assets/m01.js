@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Child Process Security Matters",
+  "graphicAlt": "Lifecycle sequence for Why Child Process Security Matters in Secure Child Process Usage in Node.js, tracing creation, validation, use, failure handling, cleanup, and verification while highlighting the component responsible at every transition.",
+  "narration": "Node.js applications often start child processes for legitimate reasons. A service may call an image conversion tool, generate a PDF, inspect an archive, run a scanner, invoke Git, execute an npm script, hand work to a background processor, or integrate with an internal CLI. These features can be useful, but they move the application from JavaScript logic into operating system behavior. That is a major security boundary.\n\nThe issue is not that child_process exists. The issue is allowing untrusted data and broad runtime authority to shape what runs and what it can access. A child process may inherit filesystem access, network access, environment variables, credentials, standard streams, temporary directories, and process privileges from the parent Node.js application. In production, a feature that worked safely with a test filename may suddenly handle uploaded filenames, user-selected options, CI/CD secrets, container permissions, larger files, and concurrent workloads.\n\nSecure child process usage starts with design. When a library, platform API, or service interface can meet the requirement safely, avoid starting an external process. When a child process is necessary, make the executable, arguments, environment, working directory, input, output, timeout, privileges, and cleanup behavior explicit. Security is not one escaping function, one API choice, or one wrapper. It is a controlled workflow that remains reviewable as the application grows.",
+  "narrationPoints": [
+      "Node.js applications often start child processes for legitimate reasons.",
+      "A child process may inherit filesystem access, network access, environment variables, credentials, standard streams, temporary directories, and process privileges from the parent Node.js application.",
+      "When a child process is necessary, make the executable, arguments, environment, working directory, input, output, timeout, privileges, and cleanup behavior explicit.",
+      "In production, a feature that worked safely with a test filename may suddenly handle uploaded filenames, user-selected options, CI/CD secrets, container permissions, larger files, and concurrent workloads.",
+      "The issue is not that child_process exists.",
+      "When a library, platform API, or service interface can meet the requirement safely, avoid starting an external process."
+  ]
+};

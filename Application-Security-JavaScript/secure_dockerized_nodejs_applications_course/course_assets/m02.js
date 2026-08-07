@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Container Architecture, Trust Boundaries, and Responsibilities",
+  "graphicAlt": "Trust-boundary map for Container Architecture, Trust Boundaries, and Responsibilities in Secure Dockerized Node.js Applications, with distinct caller, application, platform, and external-service zones connected only through labeled validation and authorization checkpoints.",
+  "narration": "A Dockerized Node.js application includes application source, generated build output, the Node.js runtime, npm packages, operating system libraries, configuration files, entrypoint behavior, and image metadata. Some of that content is created by developers, some comes from base images, some comes from package registries, and some is injected during build or deployment. Secure review starts by knowing what is inside the container and what remains outside it.\n\nTrust boundaries exist across the full path from local development to production. A developer workstation may build a test image. CI may produce the release image. A registry stores and distributes that image. A deployment host or orchestrator pulls it. Runtime networks connect it to databases, queues, caches, identity providers, secret stores, monitoring tools, and users. Each stage has different permissions, assumptions, and evidence. A weakness in one stage can affect the artifact that runs in another.\n\nResponsibilities are shared. Developers influence Dockerfile design, dependency choices, runtime behavior, and logging. Platform teams influence base image standards, registries, runtime policy, network controls, and secret delivery. CI/CD owners control build permissions and release gates. Operations teams monitor running services and respond to incidents. A secure design should identify who can build images, push images, deploy images, read secrets, change runtime policy, and access logs. Ambiguity is where unsafe defaults tend to survive.",
+  "narrationPoints": [
+      "A Dockerized Node.js application includes application source, generated build output, the Node.js runtime, npm packages, operating system libraries, configuration files, entrypoint behavior, and image metadata.",
+      "Runtime networks connect it to databases, queues, caches, identity providers, secret stores, monitoring tools, and users.",
+      "A secure design should identify who can build images, push images, deploy images, read secrets, change runtime policy, and access logs.",
+      "Trust boundaries exist across the full path from local development to production.",
+      "Secure review starts by knowing what is inside the container and what remains outside it.",
+      "Developers influence Dockerfile design, dependency choices, runtime behavior, and logging."
+  ]
+};

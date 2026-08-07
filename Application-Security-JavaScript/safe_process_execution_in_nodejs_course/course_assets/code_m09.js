@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Testing, Logging, Monitoring, and Code Review through distinct, reviewable JavaScript security boundaries.",
+  "codeExamples": [
+    {
+      "title": "Emit bounded process-execution telemetry",
+      "language": "javascript",
+      "blurb": "Telemetry records a logical operation, exit classification, signal, duration bucket, and output-size buckets without logging arguments or child output.",
+      "code": "const operations = new Set([\"pdf-info\", \"image-info\", \"json-format\"]);\nconst signalName = /^SIG[A-Z0-9]{2,12}$/;\nconst maximumDurationMs = 24 * 60 * 60 * 1000;\nconst maximumObservedOutputBytes = 1024 * 1024 * 1024;\n\nfunction validByteCount(value) {\n  return Number.isSafeInteger(value) && value >= 0 &&\n    value <= maximumObservedOutputBytes;\n}\n\nexport function processMetric(operation, result, elapsedMs) {\n  const code = result?.code;\n  const signal = result?.signal;\n  const stdoutBytes = result?.stdoutBytes;\n  const stderrBytes = result?.stderrBytes;\n  const exited = Number.isSafeInteger(code) && code >= 0 && code <= 255 &&\n    signal == null;\n  const signaled = code === null && typeof signal === \"string\" &&\n    signalName.test(signal);\n  if (!operations.has(operation) || (!exited && !signaled) ||\n      !validByteCount(stdoutBytes) || !validByteCount(stderrBytes) ||\n      !Number.isSafeInteger(elapsedMs) || elapsedMs < 0 ||\n      elapsedMs > maximumDurationMs) {\n    throw new TypeError(\"validated process telemetry required\");\n  }\n  return Object.freeze({\n    event: \"process_execution\",\n    operation,\n    outcome: signaled ? \"signaled\" : code === 0 ? \"success\" : \"failed\",\n    signal: signaled ? signal : \"none\",\n    duration: elapsedMs < 1000 ? \"lt1s\" :\n      elapsedMs < 5000 ? \"lt5s\" : \"gte5s\",\n    stdout: stdoutBytes < 4096 ? \"lt4k\" : \"gte4k\",\n    stderr: stderrBytes < 4096 ? \"lt4k\" : \"gte4k\"\n  });\n}\n"
+    },
+    {
+      "title": "Test that shell mode and executable substitution are impossible",
+      "language": "javascript",
+      "blurb": "The regression records spawn and proves the exact catalog executable and prefix are preserved while the malicious value remains one data argument.",
+      "code": "import test from \"node:test\";\nimport assert from \"node:assert/strict\";\n\nexport function registerSafeSpawnTest(runTool, expectedTool) {\n  const expectedFile = expectedTool?.file;\n  const suppliedArguments = expectedTool?.arguments;\n  const argumentCount = Array.isArray(suppliedArguments)\n    ? suppliedArguments.length : -1;\n  const expectedArguments = argumentCount >= 0 && argumentCount <= 32\n    ? Object.freeze(Array.from(\n      { length: argumentCount }, (_, index) => suppliedArguments[index]\n    )) : null;\n  if (typeof runTool !== \"function\" || typeof expectedFile !== \"string\" ||\n      !expectedArguments || expectedArguments.some((argument) =>\n        typeof argument !== \"string\" || Buffer.byteLength(argument, \"utf8\") > 4096)) {\n    throw new TypeError(\"approved tool expectation required\");\n  }\n  test(\"metacharacters remain data\", async () => {\n    const attack = \"report; touch /tmp/pwned\";\n    let call;\n    const spawn = (file, args, options) => {\n      call = { file, args, options };\n      return { code: 0 };\n    };\n    await runTool(spawn, attack);\n    assert.equal(call.file, expectedFile);\n    assert.deepEqual(call.args, [...expectedArguments, attack]);\n    assert.equal(call.options.shell, false);\n  });\n}\n"
+    }
+  ]
+};

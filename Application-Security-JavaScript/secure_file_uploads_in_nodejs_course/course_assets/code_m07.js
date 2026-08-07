@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Access Control, Downloads, and Metadata Protection through distinct, reviewable JavaScript security boundaries.",
+  "codeExamples": [
+    {
+      "title": "Authorize an uploaded object download by subject",
+      "language": "javascript",
+      "blurb": "The catalog query binds object, tenant, and subject authorization before returning a server-owned storage key and safe response metadata.",
+      "code": "const downloadableTypes = new Set([\"image/png\", \"image/jpeg\", \"application/pdf\"]);\nconst identityPattern = /^[A-Za-z0-9](?:[A-Za-z0-9_-]{0,126}[A-Za-z0-9])?$/;\n\nfunction validIdentity(value) {\n  return typeof value === \"string\" && identityPattern.test(value);\n}\n\nexport async function uploadDownloadRecord(catalog, objectId, auth) {\n  const subjectId = auth?.subjectId;\n  const tenantId = auth?.tenantId;\n  const rawFindAvailableCapability = catalog?.findAvailableForSubject;\n  const findAvailable = typeof rawFindAvailableCapability === \"function\"\n    ? rawFindAvailableCapability.bind(catalog)\n    : null;\n  if (typeof objectId !== \"string\" || !/^[a-f0-9]{32}$/.test(objectId) ||\n      !validIdentity(subjectId) || !validIdentity(tenantId) || !findAvailable) return null;\n  const record = await findAvailable(Object.freeze({ objectId, tenantId, subjectId }));\n  if (!record) return null;\n  const storageKey = record.storageKey;\n  const detectedType = record.detectedType;\n  const displayName = record.displayName;\n  if (typeof storageKey !== \"string\" || storageKey !== \"objects/\" + objectId ||\n      typeof detectedType !== \"string\" || !downloadableTypes.has(detectedType) ||\n      typeof displayName !== \"string\" || displayName.length < 1 ||\n      Buffer.byteLength(displayName, \"utf8\") > 480 ||\n      Array.from(displayName).length > 120 || displayName.toWellFormed() !== displayName ||\n      displayName !== displayName.normalize(\"NFC\") ||\n      /[\\u0000-\\u001f\\u007f\\\\/]/.test(displayName)) {\n    throw new Error(\"download metadata invalid\");\n  }\n  return Object.freeze({ storageKey, mediaType: detectedType, displayName });\n}\n"
+    },
+    {
+      "title": "Return fixed download headers for untrusted content",
+      "language": "javascript",
+      "blurb": "The response forces attachment behavior, applies nosniff, and combines an ASCII filename fallback with a bounded RFC 5987 UTF-8 parameter.",
+      "code": "const MAXIMUM_DOWNLOAD_NAME_BYTES = 4096;\n\nfunction encodeRfc5987(value) {\n  return encodeURIComponent(value).replace(/[\\'()*]/g, (character) =>\n    \"%\" + character.charCodeAt(0).toString(16).toUpperCase());\n}\n\nexport function uploadDownloadHeaders(record) {\n  const displayName = record?.displayName;\n  const suppliedName = typeof displayName === \"string\" ? displayName : \"download\";\n  if (Buffer.byteLength(suppliedName, \"utf8\") > MAXIMUM_DOWNLOAD_NAME_BYTES) {\n    throw new RangeError(\"download filename exceeds input limit\");\n  }\n  const raw = suppliedName.toWellFormed();\n  const sanitized = raw.normalize(\"NFC\").replace(/[\\u0000-\\u001f\\u007f\"\\\\/]/g, \"_\");\n  const clean = Array.from(sanitized).slice(0, 120).join(\"\") || \"download\";\n  const ascii = clean.replace(/[^\\x20-\\x7e]/g, \"_\");\n  const disposition = 'attachment; filename=\"' + ascii +\n    '\"; filename*=UTF-8\\'\\'' + encodeRfc5987(clean);\n  return Object.freeze({\n    \"content-type\": \"application/octet-stream\",\n    \"x-content-type-options\": \"nosniff\",\n    \"content-disposition\": disposition,\n    \"cache-control\": \"private, no-store\"\n  });\n}\n"
+    }
+  ]
+};

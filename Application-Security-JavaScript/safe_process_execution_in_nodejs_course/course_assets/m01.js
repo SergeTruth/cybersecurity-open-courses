@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Process Execution Security Matters",
+  "graphicAlt": "Layered architecture view of Why Process Execution Security Matters for Safe Process Execution in Node.js, placing the protected asset at the center and surrounding it with identity, validation, resource, lifecycle, and monitoring controls.",
+  "narration": "Node.js applications sometimes need to start external programs. A service may convert uploaded images, generate PDFs, inspect archives, run a trusted internal scanner, invoke Git, call a deployment tool, create backups, or launch a worker process. Those capabilities are powerful because they move beyond JavaScript code and into operating system behavior. That makes process execution a security boundary, not just a convenience API.\n\nThe risk is not simply using child_process. The risk is letting untrusted data influence what runs, how it runs, where it runs, and what it can access. A process usually inherits the filesystem access, network access, environment variables, credentials, and privileges available to the Node.js process unless the design constrains them. That can turn a small validation mistake into command injection, argument confusion, secret exposure, resource exhaustion, unsafe output handling, or a process that keeps running after the request that started it is gone.\n\nThe safest design is often to avoid external commands altogether and use a platform API, service API, or well-maintained library that fits the business need. When external execution is necessary, make the executable, arguments, environment, working directory, privileges, input, output, timeout, and cleanup behavior explicit. Safe process execution is not one escaping function or one wrapper. It is a bounded workflow with reviewable assumptions and operational controls.",
+  "narrationPoints": [
+      "That makes process execution a security boundary, not just a convenience API.",
+      "A process usually inherits the filesystem access, network access, environment variables, credentials, and privileges available to the Node.js process unless the design constrains them.",
+      "The safest design is often to avoid external commands altogether and use a platform API, service API, or well-maintained library that fits the business need.",
+      "That can turn a small validation mistake into command injection, argument confusion, secret exposure, resource exhaustion, unsafe output handling, or a process that keeps running after the request that started it is gone.",
+      "The risk is not simply using child_process.",
+      "Safe process execution is not one escaping function or one wrapper."
+  ]
+};

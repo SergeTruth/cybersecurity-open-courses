@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Timeouts, Resource Limits, and Process Lifecycle",
+  "graphicAlt": "Layered architecture view of Timeouts, Resource Limits, and Process Lifecycle for Safe Process Execution in Node.js, placing the protected asset at the center and surrounding it with identity, validation, resource, lifecycle, and monitoring controls.",
+  "narration": "Command injection is not the only process execution risk. A safe executable with safe arguments can still cause an outage if it hangs, consumes CPU, allocates memory, fills disk, produces unbounded output, or is triggered too often. Treat execution as a lifecycle: start, monitor, finish, fail, cancel, clean up, and record evidence. The workflow should define what happens when the process exits normally, exits with an error, fails to spawn, times out, receives a signal, or is abandoned by the request that started it.\n\nUse timeouts, cancellation, process termination, output limits, concurrency limits, queue limits, and backpressure. Avoid long-running or synchronous process execution in request paths unless the design is clearly bounded and the tradeoff is understood. Expensive work often belongs in a background worker or job queue where retries, timeouts, monitoring, and resource allocation can be controlled without tying up web server request handling.\n\nCleanup must be reliable across success and failure. Close streams and handles, remove temporary files, clean generated artifacts, and avoid detached or orphaned processes unless there is a documented operational need. Monitor process failures, timeouts, queue growth, resource usage, and repeated rejection patterns. Availability is part of security because a process execution feature can become an easy path to exhausting shared resources if it is left unbounded.",
+  "narrationPoints": [
+      "Treat execution as a lifecycle: start, monitor, finish, fail, cancel, clean up, and record evidence.",
+      "Use timeouts, cancellation, process termination, output limits, concurrency limits, queue limits, and backpressure.",
+      "Monitor process failures, timeouts, queue growth, resource usage, and repeated rejection patterns.",
+      "Avoid long-running or synchronous process execution in request paths unless the design is clearly bounded and the tradeoff is understood.",
+      "Expensive work often belongs in a background worker or job queue where retries, timeouts, monitoring, and resource allocation can be controlled without tying up web server request handling.",
+      "Availability is part of security because a process execution feature can become an easy path to exhausting shared resources if it is left unbounded."
+  ]
+};

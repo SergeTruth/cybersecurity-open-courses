@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Errors, Logging, Monitoring, and Sensitive Diagnostics through distinct, reviewable JavaScript security boundaries.",
+  "codeExamples": [
+    {
+      "title": "Map connection failures to secret-safe diagnostics",
+      "language": "javascript",
+      "blurb": "The mapper returns an approved code, retry classification, and deployment label without exposing hosts, usernames, passwords, certificates, or driver messages.",
+      "code": "const deployments = new Set([\"development\", \"staging\", \"production\"]);\nconst categories = new Map([\n  [\"ECONNREFUSED\", [\"DB_UNAVAILABLE\", true]],\n  [\"ETIMEDOUT\", [\"DB_TIMEOUT\", true]],\n  [\"28P01\", [\"DB_AUTHENTICATION_FAILED\", false]],\n  [\"CERT_HAS_EXPIRED\", [\"DB_CERTIFICATE_INVALID\", false]]\n]);\n\nfunction safeErrorCode(error) {\n  try { return typeof error?.code === \"string\" ? error.code : undefined; }\n  catch { return undefined; }\n}\n\nexport function databaseConnectionDiagnostic(error, deployment) {\n  if (typeof deployment !== \"string\" || !deployments.has(deployment)) {\n    throw new TypeError(\"approved deployment label required\");\n  }\n  const [code, retryable] = categories.get(safeErrorCode(error)) ?? [\"DB_CONNECTION_FAILED\", false];\n  return Object.freeze({ event: \"database_connection_failed\", deployment, code, retryable });\n}\n"
+    },
+    {
+      "title": "Probe readiness through a cancellable deadline",
+      "language": "javascript",
+      "blurb": "A trusted probe receives an abort signal and fixed SELECT contract; after a response deadline, the helper refuses to report an ordinary result until cancellation has settled.",
+      "code": "const MAXIMUM_READINESS_TIMEOUT_MS = 5000;\nconst FINAL_READINESS_SETTLEMENT_MS = 1000;\n\nasync function boundedSettlement(promise, timeoutMs) {\n  let timer;\n  try {\n    return await Promise.race([\n      promise.then((value) => ({ status: \"settled\", value })),\n      new Promise((resolve) => {\n        timer = setTimeout(() => resolve({ status: \"timeout\" }), timeoutMs);\n      })\n    ]);\n  } finally { clearTimeout(timer); }\n}\n\nexport async function databaseReadiness(runProbe, timeoutMs = 1000) {\n  if (!Number.isSafeInteger(timeoutMs) ||\n      timeoutMs < 100 || timeoutMs > MAXIMUM_READINESS_TIMEOUT_MS) {\n    throw new RangeError(\"readiness deadline invalid\");\n  }\n  if (typeof runProbe !== \"function\") {\n    throw new TypeError(\"cancellable readiness probe required\");\n  }\n  const controller = new AbortController();\n  const outcome = Promise.resolve().then(() => runProbe({\n    text: \"SELECT 1\",\n    queryTimeoutMs: timeoutMs,\n    signal: controller.signal\n  })).then(\n    () => ({ kind: \"ready\" }),\n    () => ({ kind: \"failed\" })\n  );\n  let timer;\n  const deadline = new Promise((resolve) => {\n    timer = setTimeout(() => resolve({ kind: \"timeout\" }), timeoutMs);\n  });\n  try {\n    const winner = await Promise.race([outcome, deadline]);\n    if (winner.kind !== \"timeout\") {\n      const ready = winner.kind === \"ready\";\n      return { status: ready ? 200 : 503, body: { ready } };\n    }\n    controller.abort();\n    const settlement = await boundedSettlement(outcome, FINAL_READINESS_SETTLEMENT_MS);\n    if (settlement.status !== \"settled\") {\n      throw new AggregateError([\n        new Error(\"readiness deadline exceeded\"),\n        new Error(\"database probe did not settle after cancellation\")\n      ], \"readiness probe lifecycle failed\");\n    }\n    return { status: 503, body: { ready: false } };\n  } finally { clearTimeout(timer); }\n}\n"
+    }
+  ]
+};

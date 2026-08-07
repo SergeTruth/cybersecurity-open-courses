@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Filenames, Metadata, and File Type Decisions",
+  "graphicAlt": "Two-path comparison for Filenames, Metadata, and File Type Decisions in Safe File Handling in Node.js: an unsafe flow bypasses the relevant control, while the approved flow passes through enforcement, bounded processing, and an auditable outcome.",
+  "narration": "Filenames are often overloaded. The same user-supplied name may be used for display, storage, routing, download headers, audit logs, and file type decisions. Those are different purposes and should not be collapsed into one trusted value. Treat original filenames as untrusted display metadata. Generate server-side filenames, object keys, or IDs for storage, and preserve the original name only when there is a business need to show it later.\n\nFilename safety includes length limits, character expectations, display handling, and context-specific encoding. Watch for confusing Unicode, hidden-file patterns, reserved names, double extensions, separators, and values that create problems in headers or HTML. Restrict displayed filename characters where appropriate, and avoid reflecting filenames into responses without careful handling. A safe storage name and a sanitized display name solve different problems; teams often need both.\n\nFile type decisions should also be explicit. Extensions and Content-Type headers are useful hints, but they are not trustworthy by themselves because clients can control them. Use allowlists for the file types required by the business function, and validate with multiple signals where appropriate: extension, declared type, file signature, parser behavior, and expected structure. Metadata such as uploader, tenant ID, storage key, scan status, processing result, and original filename may be sensitive depending on the business context.",
+  "narrationPoints": [
+      "The same user-supplied name may be used for display, storage, routing, download headers, audit logs, and file type decisions.",
+      "Restrict displayed filename characters where appropriate, and avoid reflecting filenames into responses without careful handling.",
+      "Use allowlists for the file types required by the business function, and validate with multiple signals where appropriate: extension, declared type, file signature, parser behavior, and expected structure.",
+      "Generate server-side filenames, object keys, or IDs for storage, and preserve the original name only when there is a business need to show it later.",
+      "Metadata such as uploader, tenant ID, storage key, scan status, processing result, and original filename may be sensitive depending on the business context.",
+      "File type decisions should also be explicit."
+  ]
+};

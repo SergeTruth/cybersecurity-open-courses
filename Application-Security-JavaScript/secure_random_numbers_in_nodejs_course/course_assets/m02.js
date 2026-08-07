@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Randomness Concepts for Developers",
+  "graphicAlt": "Security diagram for Secure Random Numbers in Node.js, Randomness Concepts for Developers, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "For secret random values, predictability is the central concern. The question is not whether a value looks random to a human. The question is whether someone else can guess it before it expires, before it is revoked, or before it becomes useless. Attackers do not need to understand every bit of a system if the generated value is short, biased, reused, leaked, or based on a predictable source such as a timestamp.\n\nEntropy is the practical measure of uncertainty. A value with more entropy has more possible outcomes and is harder to guess. Developers do not need heavy math to use this idea well. A six-digit numeric code has a very different guessing profile than a long random token encoded for a URL. The shorter value may still be acceptable for a specific flow, but only when expiration, attempt limits, monitoring, and abuse controls are part of the design.\n\nUniqueness and unpredictability are different properties. A database sequence can be unique but easy to predict. A public correlation ID may only need uniqueness so logs and traces can be joined together. A session token needs unpredictability because possession of the token may grant access. A salt usually needs uniqueness rather than secrecy. A nonce may require strict non-reuse for a particular key and algorithm.\n\nRandom values can fail in several ways: bad generation, too little length, biased mapping into a range, accidental reuse, unsafe storage, or disclosure through logs and client responses. Secure randomness should therefore be reviewed as part of application design. The team should be able to explain what property the value needs, how it is generated, how long it lives, where it is stored, and what happens if it is exposed.",
+  "narrationPoints": [
+    "For secret random values, predictability is the central concern.",
+    "The shorter value may still be acceptable for a specific flow, but only when expiration, attempt limits, monitoring, and abuse controls are part of the design.",
+    "A session token needs unpredictability because possession of the token may grant access.",
+    "Secure randomness should therefore be reviewed as part of application design.",
+    "A nonce may require strict non-reuse for a particular key and algorithm.",
+    "The team should be able to explain what property the value needs, how it is generated, how long it lives, where it is stored, and what happens if it is exposed."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Runtime Input Validation and Query Construction",
+  "graphicAlt": "Security diagram for ORM Security Patterns in Node.js, Runtime Input Validation and Query Construction, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "ORMs often generate types, but runtime data still arrives from outside the type system. HTTP request bodies, query strings, route parameters, webhook payloads, queue messages, uploaded filenames, files, and admin forms need validation before they shape data access. A public API should not allow callers to submit arbitrary ORM filters, nested query objects, relation includes, selected fields, or raw projection settings. The application should accept narrow business-level input and map it to a controlled query.\n\nValidation should cover expected fields, types, lengths, ranges, enum values, date ranges, pagination values, identifiers, and supported filters. Validate business meaning, not just syntactic shape. If users can sort a list, let them choose from supported sort choices and map those choices to known columns or fields. If users can filter reports, define the allowed filter names, operators, and value types. Client-side validation improves usability, but server-side validation is the control.\n\nKeep dynamic query construction small, centralized, and easy to review. Use allowlisted mappings for dynamic filters, sort fields, sort directions, relation includes, selected fields, projections, pagination behavior, and report options. Validation supports security, but it does not replace authorization. A valid record ID still needs an object-level access check. A valid tenant value still needs server-side tenant context. The pattern is deliberate mapping: business request in, controlled ORM query out.",
+  "narrationPoints": [
+    "HTTP request bodies, query strings, route parameters, webhook payloads, queue messages, uploaded filenames, files, and admin forms need validation before they shape data access.",
+    "Client-side validation improves usability, but server-side validation is the control.",
+    "Validation supports security, but it does not replace authorization.",
+    "The application should accept narrow business-level input and map it to a controlled query.",
+    "A public API should not allow callers to submit arbitrary ORM filters, nested query objects, relation includes, selected fields, or raw projection settings.",
+    "Validation should cover expected fields, types, lengths, ranges, enum values, date ranges, pagination values, identifiers, and supported filters."
+  ]
+};

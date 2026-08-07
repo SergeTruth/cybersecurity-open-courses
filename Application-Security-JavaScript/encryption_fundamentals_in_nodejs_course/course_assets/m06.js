@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Key Management and Envelope Encryption",
+  "graphicAlt": "Security diagram for Encryption Fundamentals in Node.js, Key Management and Envelope Encryption, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "Key management is often the hardest part of encryption. A strong algorithm with a copied key in Git is a weak system. Keys need owners, purpose, scope, creation dates, storage locations, access policies, rotation expectations, and decommissioning rules. Those details may sound administrative, but they determine who can decrypt data and how the team responds when something goes wrong.\n\nEncryption keys should not be hardcoded in source code, committed environment files, frontend bundles, Docker images, tickets, screenshots, or logs. Production systems should use approved secret-management systems, key-management services, HSM-backed systems, or controlled deployment mechanisms where appropriate. Key access should be logged and reviewed because key use is often equivalent to data access.\n\nEnvelope encryption is a common scalable pattern. A data key encrypts the actual data. A key-encryption key protects the data key. This allows systems to use different data keys per record, file, tenant, service, or purpose while managing a smaller set of higher-level protecting keys. The pattern can reduce blast radius, but it also adds metadata, key versioning, recovery, and rotation complexity.\n\nRotation needs planning before the first incident. A system may need key identifiers, staged rollout, rewrapping data keys, re-encrypting stored data, dual-read logic, and validation that older records remain decryptable. Losing keys can mean losing data, so backup and recovery procedures must be formal. Encryption without key management is not finished; it is only a pile of ciphertext waiting for an operational problem.",
+  "narrationPoints": [
+    "Key management is often the hardest part of encryption.",
+    "Production systems should use approved secret-management systems, key-management services, HSM-backed systems, or controlled deployment mechanisms where appropriate.",
+    "A key-encryption key protects the data key.",
+    "Encryption without key management is not finished; it is only a pile of ciphertext waiting for an operational problem.",
+    "Encryption keys should not be hardcoded in source code, committed environment files, frontend bundles, Docker images, tickets, screenshots, or logs.",
+    "Key access should be logged and reviewed because key use is often equivalent to data access."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Streams, Size Limits, Resource Controls, and Cleanup",
+  "graphicAlt": "Left-to-right security workflow for Streams, Size Limits, Resource Controls, and Cleanup in Safe File Handling in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "Safe file handling includes availability. A file operation can be correct from an authorization perspective and still be unsafe if it exhausts memory, fills disk, consumes file descriptors, overwhelms workers, or blocks downstream services. Avoid loading large or untrusted files fully into memory unless the use case and limits justify it. Use streaming approaches where appropriate, with backpressure and error handling that closes resources reliably.\n\nApply limits where work begins and where expensive processing happens. Use file size limits, request body limits, file count limits, timeout controls, concurrency limits, storage quotas, and queue backpressure. Handle partial reads, partial writes, aborted requests, failed transfers, retries, and duplicate jobs. A robust workflow defines what happens when a client disconnects, a stream errors, a disk fills, an object store call fails, or a worker is restarted during processing.\n\nCleanup is not housekeeping after the fact; it is part of the design. Abandoned temporary files, failed exports, stale cache entries, expired generated files, orphaned object-store keys, and old processing artifacts should be removed according to documented rules. Monitor storage growth and file-processing failures so cleanup problems are visible before they become outages or exposure risks. The safest systems make resource boundaries and cleanup behavior observable.",
+  "narrationPoints": [
+      "Avoid loading large or untrusted files fully into memory unless the use case and limits justify it.",
+      "Use file size limits, request body limits, file count limits, timeout controls, concurrency limits, storage quotas, and queue backpressure.",
+      "Monitor storage growth and file-processing failures so cleanup problems are visible before they become outages or exposure risks.",
+      "Abandoned temporary files, failed exports, stale cache entries, expired generated files, orphaned object-store keys, and old processing artifacts should be removed according to documented rules.",
+      "A file operation can be correct from an authorization perspective and still be unsafe if it exhausts memory, fills disk, consumes file descriptors, overwhelms workers, or blocks downstream services.",
+      "The safest systems make resource boundaries and cleanup behavior observable."
+  ]
+};

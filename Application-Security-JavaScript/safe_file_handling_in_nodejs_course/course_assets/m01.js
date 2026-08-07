@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why File Handling Security Matters",
+  "graphicAlt": "Left-to-right security workflow for Why File Handling Security Matters in Safe File Handling in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "File handling often starts as ordinary utility code. A Node.js application adds a report download, then later adds uploads, previews, exports, temporary processing, generated PDFs, cached data, object storage, and background workers. What began as a few calls to the filesystem becomes a security boundary because those calls decide what can be read, written, moved, deleted, streamed, transformed, archived, and served to users.\n\nUnsafe file handling can expose source code, secrets, customer records, logs, configuration, system files, or files belonging to another tenant. The risk is not limited to path traversal. File handling can fail through unsafe filenames, broad writable directories, symlink surprises, race conditions, oversized files, stale temporary data, public exposure, weak download authorization, and metadata leakage. Each mistake may look small, but file operations often sit close to sensitive data and persistent storage.\n\nThe goal is to make file access intentional, bounded, least-privileged, observable, and testable. Safe file handling is not solved by one call to path.normalize, one middleware package, or one scanner. It requires design decisions about where files may live, which operations are allowed, who can perform them, how paths are checked, how resources are limited, what is logged, and how failures are handled. This course focuses on defensive engineering and review, not exploit demonstrations.",
+  "narrationPoints": [
+      "File handling often starts as ordinary utility code.",
+      "Unsafe file handling can expose source code, secrets, customer records, logs, configuration, system files, or files belonging to another tenant.",
+      "Safe file handling is not solved by one call to path.normalize, one middleware package, or one scanner.",
+      "File handling can fail through unsafe filenames, broad writable directories, symlink surprises, race conditions, oversized files, stale temporary data, public exposure, weak download authorization, and metadata leakage.",
+      "It requires design decisions about where files may live, which operations are allowed, who can perform them, how paths are checked, how resources are limited, what is logged, and how failures are handled.",
+      "The goal is to make file access intentional, bounded, least-privileged, observable, and testable."
+  ]
+};

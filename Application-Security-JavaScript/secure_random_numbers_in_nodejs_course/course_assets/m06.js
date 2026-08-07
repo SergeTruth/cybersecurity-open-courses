@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Random Integers, Ranges, and Bias",
+  "graphicAlt": "Security diagram for Secure Random Numbers in Node.js, Random Integers, Ranges, and Bias, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "Applications often need a random value inside a bounded range. A verification code may need six digits. A recovery flow may select one phrase from an allowlist. A system may need to choose a shard, a temporary filename suffix, or a short invite code. The risky part is that mapping random output into a range can introduce bias if the mapping is done incorrectly.\n\nModulo bias is the common example. If the size of the random source does not divide evenly by the size of the target range, some outcomes can become slightly more likely than others. For ordinary non-security behavior, that difference may not matter. For security-sensitive values, avoidable bias can reduce effective protection and make review harder. The safest approach is to use an API that already handles bounded secure integers correctly.\n\nIn Node.js, crypto.randomInt is the right default for security-sensitive bounded integer choices. It is clearer than combining random bytes with modulo, multiplication, rounding, or string slicing. Those hand-rolled patterns tend to hide assumptions about range size, encoding, rejection, and length. They also invite future changes that accidentally shrink the search space or make some outcomes easier to guess.\n\nShort numeric codes need special attention because they have limited entropy by design. They may be necessary for usability, but generation alone is not enough. A six-digit code should usually be short lived, rate limited, attempt limited, monitored, and tied to a specific purpose and account context. Human-entered codes are a product and abuse-control design, not just a random-number problem.",
+  "narrationPoints": [
+    "The risky part is that mapping random output into a range can introduce bias if the mapping is done incorrectly.",
+    "For security-sensitive values, avoidable bias can reduce effective protection and make review harder.",
+    "It is clearer than combining random bytes with modulo, multiplication, rounding, or string slicing.",
+    "A six-digit code should usually be short lived, rate limited, attempt limited, monitored, and tied to a specific purpose and account context.",
+    "Applications often need a random value inside a bounded range.",
+    "If the size of the random source does not divide evenly by the size of the target range, some outcomes can become slightly more likely than others."
+  ]
+};

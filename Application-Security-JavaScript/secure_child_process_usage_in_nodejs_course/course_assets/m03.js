@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Understanding child_process APIs",
+  "graphicAlt": "Left-to-right security workflow for Understanding child_process APIs in Secure Child Process Usage in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "Node.js provides several child_process APIs, and the choice affects both security and operations. exec runs a command through a shell, so shell parsing, quoting rules, metacharacters, expansion behavior, command chaining, redirects, and platform differences become part of the security model. That is especially risky when any part of the command string is externally influenced. The shell is powerful precisely because it interprets strings.\n\nexecFile runs a specified executable directly by default and is often easier to reason about when shell features are not required. spawn is useful for long-running processes, streaming output, and passing structured arguments. fork starts another Node.js module and can create an IPC channel. Synchronous variants block the event loop and can create availability problems in server request paths because one expensive operation can delay unrelated users.\n\nNo child_process API is automatically secure by itself. Fixed executables and structured argument arrays are easier to review than shell strings, but they still need authorization, input validation, minimal environment inheritance, controlled working directories, timeouts, output limits, cleanup, and least privilege. API choice is one layer. The safer design is the one where command behavior is explicit, bounded, and tied to the business workflow.",
+  "narrationPoints": [
+      "Node.js provides several child_process APIs, and the choice affects both security and operations.",
+      "Synchronous variants block the event loop and can create availability problems in server request paths because one expensive operation can delay unrelated users.",
+      "Fixed executables and structured argument arrays are easier to review than shell strings, but they still need authorization, input validation, minimal environment inheritance, controlled working directories, timeouts, output limits, cleanup, and least privilege.",
+      "No child_process API is automatically secure by itself.",
+      "The safer design is the one where command behavior is explicit, bounded, and tied to the business workflow.",
+      "exec runs a command through a shell, so shell parsing, quoting rules, metacharacters, expansion behavior, command chaining, redirects, and platform differences become part of the security model."
+  ]
+};

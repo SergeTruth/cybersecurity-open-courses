@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Malware Scanning, Content Processing, and Quarantine",
+  "graphicAlt": "Trust-boundary map for Malware Scanning, Content Processing, and Quarantine in Secure File Uploads in Node.js, with distinct caller, application, platform, and external-service zones connected only through labeled validation and authorization checkpoints.",
+  "narration": "Malware scanning is useful, but it is not perfect proof that a file is safe. It is one layer in a larger workflow. Higher-risk file types may need to be accepted into quarantine, scanned, validated, processed, and then released. The application should track scanning status and avoid making files available by default when scanning or processing fails. A clear status model helps users, operators, and support teams understand whether a file is pending, rejected, quarantined, released, or removed.\n\nContent processing introduces additional risk. Image resizing, document conversion, archive extraction, optical character recognition, metadata extraction, preview generation, and search indexing all execute parsers and libraries against untrusted content. Run processing with least privilege, timeouts, resource limits, isolated workers, and narrow filesystem access where appropriate. Avoid processing files with broad application identities or privileged access to unrelated storage, databases, or internal services.\n\nArchive handling and expensive processing need explicit limits. Consider file counts, nesting, expansion size, paths inside archives, processing time, memory use, and failure cleanup. If a scanner or converter is unavailable, the safe default is usually to hold or reject the file rather than silently release it. Scanning results, processing status, exceptions, and release decisions should be recorded for audit and operations without logging file contents or sensitive data.",
+  "narrationPoints": [
+      "The application should track scanning status and avoid making files available by default when scanning or processing fails.",
+      "Run processing with least privilege, timeouts, resource limits, isolated workers, and narrow filesystem access where appropriate.",
+      "Scanning results, processing status, exceptions, and release decisions should be recorded for audit and operations without logging file contents or sensitive data.",
+      "Higher-risk file types may need to be accepted into quarantine, scanned, validated, processed, and then released.",
+      "Avoid processing files with broad application identities or privileged access to unrelated storage, databases, or internal services.",
+      "Archive handling and expensive processing need explicit limits."
+  ]
+};

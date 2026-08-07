@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Input Validation and Business Rules",
+  "graphicAlt": "Two-path comparison for Input Validation and Business Rules in SQL Injection Prevention in Node.js: an unsafe flow bypasses the relevant control, while the approved flow passes through enforcement, bounded processing, and an auditable outcome.",
+  "narration": "Input validation supports SQL injection prevention, but it does not replace parameterization. Validation answers whether a value is legitimate for a specific field: the expected type, length, format, range, enum choice, date window, page size, identifier format, and required presence. Parameterization answers whether that value will be treated as data rather than SQL. Both questions matter, and they solve different problems.\n\nValidate values before they influence query logic. Parse numeric IDs as numbers when appropriate, validate UUIDs as UUIDs, constrain date ranges, cap page sizes, reject unknown filter fields, and treat client-side validation as a usability feature rather than a control. Denylist filtering and keyword stripping are fragile because they try to guess what dangerous text looks like. A better design defines what the application supports and rejects everything outside that contract.\n\nEscaping should also be handled carefully. It is database-specific, easy to apply inconsistently, and often unnecessary when a driver supports parameterized queries. A valid email address should still be bound as a value. A valid status should still be selected from an allowed set. A sort field should still be mapped rather than trusted. Good validation reduces ambiguity and protects business assumptions; safe query construction prevents validated data from becoming executable structure.",
+  "narrationPoints": [
+      "Input validation supports SQL injection prevention, but it does not replace parameterization.",
+      "Parse numeric IDs as numbers when appropriate, validate UUIDs as UUIDs, constrain date ranges, cap page sizes, reject unknown filter fields, and treat client-side validation as a usability feature rather than a control.",
+      "Good validation reduces ambiguity and protects business assumptions; safe query construction prevents validated data from becoming executable structure.",
+      "Validation answers whether a value is legitimate for a specific field: the expected type, length, format, range, enum choice, date window, page size, identifier format, and required presence.",
+      "It is database-specific, easy to apply inconsistently, and often unnecessary when a driver supports parameterized queries.",
+      "A better design defines what the application supports and rejects everything outside that contract."
+  ]
+};

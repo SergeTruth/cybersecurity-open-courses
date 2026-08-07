@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "Security diagram for REST API Security in NodeJS, Course Summary and Practical Checklist, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "REST API security in NodeJS is a design, implementation, deployment, and operations discipline. Define API trust boundaries and sensitive operations before treating routes as ordinary plumbing. Authenticate consistently and validate tokens correctly. Enforce authorization per function and per object. Validate input, prevent mass assignment, return only appropriate data, and handle errors safely. Protect resources with limits, timeouts, pagination, and endpoint-aware abuse controls.\n\nConfiguration and operations are part of the same security story. CORS, headers, reverse proxies, HTTPS, cookies, production settings, secrets, dependencies, logging, and monitoring all affect whether the API behaves safely. Dependency scanning, rate limiting, authentication middleware, and npm audit each help with a piece of the problem, but none of them replaces thoughtful server-side enforcement of identity, authorization, data contracts, and business rules.\n\nA practical first week improvement plan can be simple. Identify the highest-risk endpoints: account changes, role changes, exports, payments, invitations, file access, authentication flows, and destructive actions. Review object-level authorization for those endpoints. Add or tighten schema validation and allowlisted update fields. Review CORS and production configuration. Protect secrets. Add rate limits to sensitive flows. Improve security logging so the team can answer who accessed what, what was denied, and when behavior changed.",
+  "narrationPoints": [
+    "Validate input, prevent mass assignment, return only appropriate data, and handle errors safely.",
+    "Dependency scanning, rate limiting, authentication middleware, and npm audit each help with a piece of the problem, but none of them replaces thoughtful server-side enforcement of identity, authorization, data contracts, and business rules.",
+    "Identify the highest-risk endpoints: account changes, role changes, exports, payments, invitations, file access, authentication flows, and destructive actions.",
+    "CORS, headers, reverse proxies, HTTPS, cookies, production settings, secrets, dependencies, logging, and monitoring all affect whether the API behaves safely.",
+    "Protect resources with limits, timeouts, pagination, and endpoint-aware abuse controls.",
+    "Configuration and operations are part of the same security story."
+  ]
+};

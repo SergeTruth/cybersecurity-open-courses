@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secret Storage and Access Control",
+  "graphicAlt": "Left-to-right security workflow for Secret Storage and Access Control in Secrets Management in Node.js: untrusted input crosses a labeled boundary, a validating component enforces policy, and only a verified result reaches the protected resource.",
+  "narration": "A secret manager centralizes storage, access control, auditing, delivery, and rotation. It may be a cloud secret service, a vault system, a key management service, CI/CD protected secret storage, or an orchestrator secret mechanism. The vendor name is less important than the security properties: secrets should be encrypted at rest, protected in transit, scoped to the systems that need them, and access decisions should be logged and reviewable.\n\nLeast privilege applies to secrets just like it applies to database accounts and cloud roles. Applications, developers, CI jobs, deployment jobs, support tools, and background services should only access the secrets they need. Separate access by environment, application, tenant, role, workflow, and operational need where appropriate. Production secrets should not be broadly readable by every developer, every repository, every CI job, or every service account simply because that is easier to configure.\n\nCentralization helps because it reduces copies, creates a control point, supports review, and makes rotation more realistic. It is not magic. A secret manager with broad policies can still expose everything. A well-stored secret can still leak if it is copied into a log, baked into an image, pasted into a ticket, or printed during startup. Secret storage is different from secret usage. The full lifecycle still has to be designed and reviewed.",
+  "narrationPoints": [
+      "It may be a cloud secret service, a vault system, a key management service, CI/CD protected secret storage, or an orchestrator secret mechanism.",
+      "Applications, developers, CI jobs, deployment jobs, support tools, and background services should only access the secrets they need.",
+      "Centralization helps because it reduces copies, creates a control point, supports review, and makes rotation more realistic.",
+      "The vendor name is less important than the security properties: secrets should be encrypted at rest, protected in transit, scoped to the systems that need them, and access decisions should be logged and reviewable.",
+      "A secret manager centralizes storage, access control, auditing, delivery, and rotation.",
+      "Separate access by environment, application, tenant, role, workflow, and operational need where appropriate."
+  ]
+};

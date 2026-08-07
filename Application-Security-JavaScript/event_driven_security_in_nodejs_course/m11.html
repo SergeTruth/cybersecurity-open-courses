@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-course-id="event_driven_security_in_nodejs">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <p class="meta" data-course-title-target>Loading course title...</p>
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+        <p class="status"><span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span></p>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-salt="c01-2-reviewed"
+          data-answer-checks='{&quot;q01&quot;:&quot;0387fa97&quot;,&quot;q02&quot;:&quot;87f09925&quot;,&quot;q03&quot;:&quot;1a25152c&quot;,&quot;q04&quot;:&quot;d6740285&quot;,&quot;q05&quot;:&quot;c0d2b449&quot;,&quot;q06&quot;:&quot;1c63b4bc&quot;,&quot;q07&quot;:&quot;b9d57501&quot;,&quot;q08&quot;:&quot;e64301e7&quot;,&quot;q09&quot;:&quot;aec88d95&quot;,&quot;q10&quot;:&quot;21d2a356&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. Why do event-driven Node.js systems require workflow-level security review?</legend>
+                      <label><input type="radio" name="q01" value="A" required> A. Security spans producers, brokers, consumers, retries, replay, failures, and business effects.</label>
+                      <label><input type="radio" name="q01" value="B"> B. A secure handler covers the boundary because the queue platform isolates producers, retries, and replay tooling from business state.</label>
+                      <label><input type="radio" name="q01" value="C"> C. Workflow review is needed only for events crossing the public internet; internal messaging inherits the deployment trust boundary.</label>
+                      <label><input type="radio" name="q01" value="D"> D. The consumer owns the complete security boundary once the messaging system accepted an event.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>2. Why should messages from queues or brokers not automatically be trusted?</legend>
+                      <label><input type="radio" name="q02" value="A" required> A. Broker authentication identifies the connected producer, so consumers can trust that producer's payload fields.</label>
+                      <label><input type="radio" name="q02" value="B"> B. Persisting a message establishes its provenance, leaving transport metadata as the main remaining trust concern.</label>
+                      <label><input type="radio" name="q02" value="C"> C. Messages on an internal topic inherit the topic's trust level, making per-message authorization redundant.</label>
+                      <label><input type="radio" name="q02" value="D"> D. Brokers only transport messages; payloads may still remain malformed, stale, unauthorized, or user-controlled.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>3. Why do event schemas and versioning matter?</legend>
+                      <label><input type="radio" name="q03" value="A" required> A. A version number lets consumers skip field validation because incompatible payloads will carry a different number.</label>
+                      <label><input type="radio" name="q03" value="B"> B. Versioned schemas define consumer contracts and can change validation, authorization, or business assumptions.</label>
+                      <label><input type="radio" name="q03" value="C"> C. Event evolution is safe when new fields are optional, even if field meaning changes authorization decisions.</label>
+                      <label><input type="radio" name="q03" value="D"> D. Consumers should infer event versions from available fields so producers do not need an explicit contract.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>4. How should producer and consumer permissions be designed?</legend>
+                      <label><input type="radio" name="q04" value="A" required> A. A producer with publish access should also receive replay permission so it can recover its own failed deliveries.</label>
+                      <label><input type="radio" name="q04" value="B"> B. Grant least privilege separately for publishing, consuming, inspecting, replaying, deleting, and administering events.</label>
+                      <label><input type="radio" name="q04" value="C"> C. Applications in the same environment may reuse topic permissions because deployment isolation supplies the remaining boundary.</label>
+                      <label><input type="radio" name="q04" value="D"> D. Consumer permissions can be encoded in an event.source field because producers are responsible for setting it correctly.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>5. Why do webhook signatures and replay protection matter for external events?</legend>
+                      <label><input type="radio" name="q05" value="A" required> A. A webhook signature prevents replay, so timestamp windows and durable delivery IDs add no protection.</label>
+                      <label><input type="radio" name="q05" value="B"> B. The receiver may parse and reserialize JSON before verification because property order does not affect signatures.</label>
+                      <label><input type="radio" name="q05" value="C"> C. Verify webhook signatures over raw bytes and enforce freshness plus replay protection.</label>
+                      <label><input type="radio" name="q05" value="D"> D. A valid HTTPS connection and provider label establish the webhook's origin.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>6. Why is idempotency important for retries and duplicate messages?</legend>
+                      <label><input type="radio" name="q06" value="A" required> A. Idempotency means recording an event ID before work begins, even if the protected action later fails and must retry.</label>
+                      <label><input type="radio" name="q06" value="B"> B. A process-local Set is enough for complete idempotency because a queue sends retries to the same worker process.</label>
+                      <label><input type="radio" name="q06" value="C"> C. Idempotency prevents normal duplicate delivery and retries from applying the same business effect more than once.</label>
+                      <label><input type="radio" name="q06" value="D"> D. Consumers can acknowledge duplicates without checking business state when an event carries any nonempty ID.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>7. Why can dead-letter queues become sensitive data stores?</legend>
+                      <label><input type="radio" name="q07" value="A" required> A. Dead-letter queues can retain customer data, workflow details, credentials, or other sensitive fields from failed events.</label>
+                      <label><input type="radio" name="q07" value="B"> B. Dead-letter queues contain only error metadata because brokers remove the original payload after delivery fails.</label>
+                      <label><input type="radio" name="q07" value="C"> C. Rejection by the normal consumer means the broker's ordinary retention and access policy is appropriate for the dead-letter copy.</label>
+                      <label><input type="radio" name="q07" value="D"> D. Keeping dead letters for the maximum retention period increases replay fidelity and incident investigation.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>8. Why should events avoid carrying secrets and unnecessary sensitive data?</legend>
+                      <label><input type="radio" name="q08" value="A" required> A. Events may carry workload credentials when queue storage is encrypted because consumers need convenient access.</label>
+                      <label><input type="radio" name="q08" value="B"> B. Redacting the primary topic resolves secret exposure even when retry and dead-letter routes retain full payloads.</label>
+                      <label><input type="radio" name="q08" value="C"> C. Data minimization applies only to external webhooks; internal events remain inside one internal process.</label>
+                      <label><input type="radio" name="q08" value="D"> D. Events should minimize sensitive data because brokers, retries, logs, traces, dead letters, and support tools create copies.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>9. What should observability capture without logging sensitive payloads?</legend>
+                      <label><input type="radio" name="q09" value="A" required> A. Capture complete event payloads and authorization headers so operators can diagnose every failed business decision.</label>
+                      <label><input type="radio" name="q09" value="B"> B. Use customer and event identifiers as unbounded metric labels because they provide precise per-message visibility.</label>
+                      <label><input type="radio" name="q09" value="C"> C. Capture bounded IDs, types, authenticated producers, consumers, outcomes, timing, retries, and safe correlation fields.</label>
+                      <label><input type="radio" name="q09" value="D"> D. Record only completed consumer processing, since validation and authorization failures are expected operational noise.</label>
+                    </fieldset>
+
+
+                                                                                          <fieldset class="quiz-question">
+                      <legend>10. What belongs in a practical event-driven security review workflow?</legend>
+                      <label><input type="radio" name="q10" value="A" required> A. Review consumer source code and messaging uptime; producers, replay tools, dead-letter access, and runbooks are separate concerns.</label>
+                      <label><input type="radio" name="q10" value="B"> B. Review event schemas and signature algorithms; least privilege and idempotency follow from managed brokers.</label>
+                      <label><input type="radio" name="q10" value="C"> C. Review normal delivery paths in production; duplicate, stale, malformed, and compromised-source scenarios belong only in incident response.</label>
+                      <label><input type="radio" name="q10" value="D"> D. Review event flows, schemas, authenticated principals, authorization, webhooks, idempotency, failure paths, payloads, telemetry, and response plans.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js"></script>
+</body>
+</html>

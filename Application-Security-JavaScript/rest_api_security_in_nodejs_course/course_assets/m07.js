@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Resource Protection, Rate Limiting, and Abuse Controls",
+  "graphicAlt": "Security diagram for REST API Security in NodeJS, Resource Protection, Rate Limiting, and Abuse Controls, showing the protected asset, trust boundary, enforcing component, and verification path with arrows from untrusted input to controlled output.",
+  "narration": "REST APIs consume resources: CPU, memory, database capacity, storage, third-party API quota, email and SMS budget, background worker time, and operator attention. Availability and cost are part of security because abusive or accidental traffic can prevent legitimate work. Body size limits, pagination limits, timeout controls, concurrency controls, and endpoint-aware rate limits help the API behave predictably under pressure.\n\nNot every endpoint needs the same protection. A simple read endpoint has a different risk profile than password reset, account creation, invitation sending, checkout, coupon use, export, expensive search, file upload, or a route that calls a paid third-party service. Sensitive business flows often need controls based on identity, IP address, API key, tenant, endpoint, request pattern, and risk level. A single global limit rarely captures those differences.\n\nRate limiting is useful, but it is not a complete abuse-prevention strategy. It should be paired with authentication quality, authorization, validation, fraud and abuse signals where appropriate, monitoring, backpressure, and clear failure behavior. The API should avoid letting retries, large exports, or expensive queries amplify incidents. The engineering goal is to protect users, business workflows, dependencies, and operating budget while keeping legitimate clients able to recover from normal transient failures.",
+  "narrationPoints": [
+    "Body size limits, pagination limits, timeout controls, concurrency controls, and endpoint-aware rate limits help the API behave predictably under pressure.",
+    "Sensitive business flows often need controls based on identity, IP address, API key, tenant, endpoint, request pattern, and risk level.",
+    "It should be paired with authentication quality, authorization, validation, fraud and abuse signals where appropriate, monitoring, backpressure, and clear failure behavior.",
+    "Rate limiting is useful, but it is not a complete abuse-prevention strategy.",
+    "The API should avoid letting retries, large exports, or expensive queries amplify incidents.",
+    "The engineering goal is to protect users, business workflows, dependencies, and operating budget while keeping legitimate clients able to recover from normal transient failures."
+  ]
+};
