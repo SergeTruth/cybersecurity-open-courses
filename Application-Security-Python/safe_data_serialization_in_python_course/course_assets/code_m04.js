@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Validate required fields and exact types",
       "language": "python",
       "blurb": "Unknown fields, missing fields, Boolean-as-integer values, and out-of-range quantities are rejected explicitly.",
-      "code": "def validate_order(value: object) -> dict[str, object]:\n    if not isinstance(value, dict) or set(value) != {\"order_id\", \"quantity\"}:\n        raise ValueError(\"order fields do not match the schema\")\n    if not isinstance(value[\"order_id\"], str) or not 1 <= len(value[\"order_id\"]) <= 64:\n        raise ValueError(\"order_id is invalid\")\n    quantity = value[\"quantity\"]\n    if type(quantity) is not int or not 1 <= quantity <= 100:\n        raise ValueError(\"quantity is invalid\")\n    return value\n"
+      "code": "def validate_order(value: object) -> dict[str, object]:\n    if not isinstance(value, dict) or set(value) != {\"order_id\", \"quantity\"}:\n        raise ValueError(\"order fields do not match the schema\")\n    order_id = value[\"order_id\"]\n    quantity = value[\"quantity\"]\n    if not isinstance(order_id, str) or not 1 <= len(order_id) <= 64:\n        raise ValueError(\"order_id is invalid\")\n    if type(quantity) is not int or not 1 <= quantity <= 100:\n        raise ValueError(\"quantity is invalid\")\n    return {\"order_id\": order_id, \"quantity\": quantity}\n"
     }
   ]
 };

@@ -6,7 +6,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Issue a host-only secure session cookie",
       "language": "python",
       "blurb": "The cookie omits Domain, scopes Path, blocks script access, requires HTTPS, and limits cross-site sending.",
-      "code": "def set_session_cookie(response, session_id: str) -> None:\n    response.set_cookie(\n        \"__Host-session\",\n        session_id,\n        secure=True,\n        httponly=True,\n        samesite=\"Lax\",\n        path=\"/\",\n        max_age=1800,\n    )\n"
+      "code": "import re\n\nSESSION_ID = re.compile(r\"[A-Za-z0-9_-]{32,128}\\Z\")\n\ndef set_session_cookie(response, session_id: str) -> None:\n    if not isinstance(session_id, str) or SESSION_ID.fullmatch(session_id) is None:\n        raise ValueError(\"session identifier rejected\")\n    response.set_cookie(\n        \"__Host-session\",\n        session_id,\n        secure=True,\n        httponly=True,\n        samesite=\"Lax\",\n        path=\"/\",\n        max_age=1800,\n    )\n"
     },
     {
       "title": "Prevent caching of sensitive responses",

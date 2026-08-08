@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Log opaque file decisions",
       "language": "python",
       "blurb": "The audit event records identifiers and outcomes without copying user paths, filenames, URLs, or file contents.",
-      "code": "def record_file_decision(audit, *, file_id: str, tenant_id: str, allowed: bool, reason: str) -> None:\n    allowed_reasons = {\"owner\", \"shared\", \"not_found\", \"denied\", \"invalid_identifier\"}\n    audit.info(\n        \"file_access_decision\",\n        extra={\n            \"file_id\": file_id,\n            \"tenant_id\": tenant_id,\n            \"outcome\": \"allowed\" if allowed else \"rejected\",\n            \"reason\": reason if reason in allowed_reasons else \"internal\",\n        },\n    )\n"
+      "code": "import re\n\nOPAQUE_ID = re.compile(r\"[A-Za-z0-9][A-Za-z0-9._-]{0,63}\", re.ASCII)\nALLOWED_REASONS = {\"owner\", \"shared\", \"not_found\", \"denied\", \"invalid_identifier\"}\n\ndef record_file_decision(\n    audit, *, file_id: str, tenant_id: str, allowed: bool, reason: str\n) -> None:\n    if (\n        type(file_id) is not str\n        or OPAQUE_ID.fullmatch(file_id) is None\n        or type(tenant_id) is not str\n        or OPAQUE_ID.fullmatch(tenant_id) is None\n        or type(allowed) is not bool\n        or type(reason) is not str\n    ):\n        raise TypeError(\"validated file-decision evidence required\")\n    audit.info(\n        \"file_access_decision\",\n        extra={\n            \"file_id\": file_id,\n            \"tenant_id\": tenant_id,\n            \"outcome\": \"allowed\" if allowed else \"rejected\",\n            \"reason\": reason if reason in ALLOWED_REASONS else \"internal\",\n        },\n    )\n"
     }
   ]
 };

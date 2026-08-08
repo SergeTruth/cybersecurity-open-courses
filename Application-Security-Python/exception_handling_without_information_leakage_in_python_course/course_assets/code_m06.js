@@ -6,7 +6,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Catch only an expected business exception",
       "language": "python",
       "blurb": "The transfer maps an insufficient-funds outcome but lets programming errors and infrastructure failures propagate to central handling.",
-      "code": "class InsufficientFunds(Exception):\n    pass\n\ndef transfer_funds(ledger, source: str, target: str, amount: int) -> dict[str, str]:\n    try:\n        ledger.transfer(source, target, amount)\n    except InsufficientFunds:\n        return {\"status\": \"declined\", \"reason\": \"insufficient_funds\"}\n    return {\"status\": \"accepted\"}\n"
+      "code": "import re\n\nACCOUNT_ID = re.compile(r\"acct_[A-Za-z0-9_-]{8,64}\\Z\")\nMAX_TRANSFER_CENTS = 1_000_000_000\n\nclass InsufficientFunds(Exception):\n    pass\n\ndef transfer_funds(ledger, source: str, target: str, amount: int) -> dict[str, str]:\n    if (\n        not isinstance(source, str)\n        or ACCOUNT_ID.fullmatch(source) is None\n        or not isinstance(target, str)\n        or ACCOUNT_ID.fullmatch(target) is None\n        or source == target\n    ):\n        raise ValueError(\"transfer account identifier rejected\")\n    if type(amount) is not int or not 1 <= amount <= MAX_TRANSFER_CENTS:\n        raise ValueError(\"transfer amount rejected\")\n    transfer = ledger.transfer\n    if not callable(transfer):\n        raise TypeError(\"ledger transfer capability required\")\n    try:\n        transfer(source, target, amount)\n    except InsufficientFunds:\n        return {\"status\": \"declined\", \"reason\": \"insufficient_funds\"}\n    return {\"status\": \"accepted\"}\n"
     },
     {
       "title": "Roll back without masking the original failure",

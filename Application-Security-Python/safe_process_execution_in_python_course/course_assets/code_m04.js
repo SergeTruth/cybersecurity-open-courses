@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Stop option parsing before a user value",
       "language": "python",
       "blurb": "The fixed double-dash marker prevents a filename beginning with a hyphen from becoming a tool option.",
-      "code": "import subprocess\n\ndef hash_file(filename: str) -> str:\n    if \"\\x00\" in filename:\n        raise ValueError(\"filename contains NUL\")\n    result = subprocess.run(\n        [\"/usr/bin/sha256sum\", \"--\", filename],\n        text=True,\n        capture_output=True,\n        timeout=10,\n        check=True,\n    )\n    return result.stdout.split(maxsplit=1)[0]\n"
+      "code": "import re\nimport subprocess\n\nSHA256 = re.compile(r\"[0-9a-f]{64}\", re.ASCII)\nMAX_PATH_TEXT_LENGTH = 4096\n\ndef hash_file(filename: str) -> str:\n    if (\n        type(filename) is not str\n        or not 1 <= len(filename) <= MAX_PATH_TEXT_LENGTH\n        or \"\\x00\" in filename\n    ):\n        raise ValueError(\"filename rejected\")\n    result = subprocess.run(\n        [\"/usr/bin/sha256sum\", \"--\", filename],\n        text=True,\n        capture_output=True,\n        timeout=10,\n        check=True,\n        env={\"PATH\": \"/usr/bin:/bin\", \"LANG\": \"C\"},\n    )\n    digest = result.stdout.split(maxsplit=1)[0]\n    if SHA256.fullmatch(digest) is None:\n        raise RuntimeError(\"sha256sum returned invalid output\")\n    return digest\n"
     }
   ]
 };

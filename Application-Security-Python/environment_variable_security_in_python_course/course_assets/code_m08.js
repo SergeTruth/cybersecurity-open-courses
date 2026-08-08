@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Test that a child cannot inherit a secret",
       "language": "python",
       "blurb": "The regression launches a Python child with the production environment builder and asserts that a sentinel secret is absent.",
-      "code": "import json\nimport subprocess\nimport sys\n\ndef assert_secret_not_inherited(build_environment) -> None:\n    parent = {\"APP_ENV\": \"test\", \"DATABASE_PASSWORD\": \"sentinel-secret\"}\n    child = subprocess.run(\n        [sys.executable, \"-c\", \"import os,json; print(json.dumps(dict(os.environ)))\"],\n        env=build_environment(parent),\n        text=True,\n        capture_output=True,\n        timeout=5,\n        check=True,\n    )\n    assert \"sentinel-secret\" not in child.stdout\n"
+      "code": "import subprocess\nimport sys\n\ndef assert_secret_not_inherited(build_environment) -> None:\n    parent = {\"APP_ENV\": \"test\", \"DATABASE_PASSWORD\": \"sentinel-secret\"}\n    child = subprocess.run(\n        [sys.executable, \"-c\", \"import os,json; print(json.dumps(dict(os.environ)))\"],\n        env=build_environment(parent),\n        text=True,\n        capture_output=True,\n        timeout=5,\n        check=True,\n    )\n    assert \"sentinel-secret\" not in child.stdout\n"
     }
   ]
 };

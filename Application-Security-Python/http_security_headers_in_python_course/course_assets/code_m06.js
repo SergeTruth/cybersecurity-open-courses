@@ -12,7 +12,7 @@ window.COURSE_CODE_MODULE = {
       "title": "Isolate a cross-origin application",
       "language": "python",
       "blurb": "The document and its resources receive compatible COOP, COEP, and CORP policies after the deployment is reviewed for breakage.",
-      "code": "def add_cross_origin_isolation(response, resource_kind: str):\n    if resource_kind == \"document\":\n        response.headers[\"Cross-Origin-Opener-Policy\"] = \"same-origin\"\n        response.headers[\"Cross-Origin-Embedder-Policy\"] = \"require-corp\"\n    else:\n        response.headers[\"Cross-Origin-Resource-Policy\"] = \"same-site\"\n    return response\n"
+      "code": "def add_cross_origin_isolation(response, resource_kind: str):\n    if resource_kind == \"document\":\n        response.headers[\"Cross-Origin-Opener-Policy\"] = \"same-origin\"\n        response.headers[\"Cross-Origin-Embedder-Policy\"] = \"require-corp\"\n    elif resource_kind in {\"font\", \"image\", \"script\", \"style\"}:\n        response.headers[\"Cross-Origin-Resource-Policy\"] = \"same-site\"\n    else:\n        raise ValueError(\"resource kind rejected\")\n    return response\n"
     }
   ]
 };
