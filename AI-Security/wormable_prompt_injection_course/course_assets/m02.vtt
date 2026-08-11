@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Direct prompt injection happens when the user-facing prompt itself attempts
+to steer the model away from the intended task.
+
+2
+00:00:06.660 --> 00:00:10.580
+The application receives the instruction directly from the person using the
+interface.
+
+3
+00:00:10.660 --> 00:00:20.340
+That is serious, but the trust boundary is easier to see: the user input is
+untrusted and should not be allowed to override the system’s role, policy,
+or authorization model.
+
+4
+00:00:20.420 --> 00:00:25.540
+Indirect prompt injection is different. The attacker does not need direct
+access to the prompt box.
+
+5
+00:00:25.620 --> 00:00:37.460
+Instead, instructions are embedded in external content that the model later
+processes: a web page, document, email, ticket, repository file, search
+result, or tool output.
+
+6
+00:00:37.540 --> 00:00:50.180
+NIST describes this class as adversaries exploiting LLM-integrated
+applications by injecting prompts into data likely to be retrieved. OWASP
+similarly treats external content as a prompt injection source.
+
+7
+00:00:50.260 --> 00:00:57.700
+Jailbreaking overlaps with prompt injection but is not the same category. A
+jailbreak tries to defeat model behavior or safety constraints.
+
+8
+00:00:57.780 --> 00:01:06.020
+Prompt injection is broader: it manipulates the application workflow by
+mixing instructions and data. RAG poisoning targets retrieval content or
+indexes.
+
+9
+00:01:06.100 --> 00:01:15.140
+Tool-output injection targets data returned from an external tool. Wormable
+propagation appears when those influences can move onward to another
+AI-enabled surface.
+
+10
+00:01:15.220 --> 00:01:17.140
+That distinction matters for defense.
+
+11
+00:01:17.220 --> 00:01:24.580
+If an organization treats prompt injection as only a bad chat message, it
+will miss the systems where no user typed the malicious content.
+
+12
+00:01:24.660 --> 00:01:32.500
+A document processor may retrieve untrusted text. An agent may parse a web
+page. A support assistant may summarize inbound email.
+
+13
+00:01:32.580 --> 00:01:36.260
+A workflow bot may read comments and write follow-up tasks.
+
+14
+00:01:36.340 --> 00:01:45.140
+The practical question is always: where can untrusted content enter, what
+can the model see, what can it influence, and what downstream systems may
+consume its output?
+
+15
+00:01:45.220 --> 00:01:49.620
+Wormable prompt injection is the risk that those answers form a loop or
+chain.

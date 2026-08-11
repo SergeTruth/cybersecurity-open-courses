@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.340
+Wormable prompt injection is not just a stronger phrase for ordinary prompt
+injection. It describes a propagation risk in connected AI systems.
+
+2
+00:00:08.420 --> 00:00:20.500
+A model sees untrusted content, treats part of that content as instruction,
+and then helps move the influence into another system, user workflow, memory
+store, retrieval corpus, connector, or agent.
+
+3
+00:00:20.580 --> 00:00:27.300
+The important feature is not clever wording. The important feature is an
+application path that lets malicious influence travel.
+
+4
+00:00:27.380 --> 00:00:36.180
+The Morris-II research made this risk concrete. It studied adversarial
+self-replicating prompts in GenAI ecosystems that use retrieval-augmented
+generation.
+
+5
+00:00:36.260 --> 00:00:42.740
+The paper describes a computer-worm-like chain reaction where a prompt can
+trigger indirect prompt injections across connected applications.
+
+6
+00:00:42.820 --> 00:00:51.140
+That research is a warning about architecture, not an invitation to build
+payloads. In this course, we discuss the mechanics only at a defensive
+level.
+
+7
+00:00:51.220 --> 00:00:56.420
+Wormability requires several conditions. There must be untrusted content
+that an AI system processes.
+
+8
+00:00:56.500 --> 00:01:03.060
+There must be enough authority for the system to produce output, take
+action, update memory, or write to a shared surface.
+
+9
+00:01:03.140 --> 00:01:07.380
+There must be a path by which that output reaches another model-enabled
+workflow.
+
+10
+00:01:07.460 --> 00:01:13.140
+And there must be weak enough trust boundaries that the downstream system
+may treat the propagated content as instruction.
+
+11
+00:01:13.220 --> 00:01:16.420
+That means the risk lives outside the model as much as inside it.
+
+12
+00:01:16.500 --> 00:01:31.860
+Email assistants, shared document summarizers, RAG systems, ticket triage
+tools, browser agents, chat connectors, and workflow automations can all
+create spread paths if they copy, summarize, forward, store, or act on
+untrusted text without strong controls.
+
+13
+00:01:31.940 --> 00:01:41.380
+The defensive goal is to break the chain. A system should assume that
+retrieved documents, tool results, emails, comments, and web pages may
+contain hostile instructions.
+
+14
+00:01:41.460 --> 00:01:49.540
+The application must keep data separate from authority, restrict actions,
+preserve provenance, and prevent untrusted content from becoming a command
+channel.

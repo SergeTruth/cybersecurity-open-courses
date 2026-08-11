@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.500
+Model-only filtering is not enough for wormable prompt injection. Filters
+can help, but NIST and OWASP both emphasize that current mitigations do not
+provide perfect prevention.
+
+2
+00:00:10.580 --> 00:00:19.700
+The stronger posture is system-level defense: assume untrusted content may
+contain instructions, and design the application so those instructions do
+not gain authority.
+
+3
+00:00:19.780 --> 00:00:30.260
+The first boundary is instruction versus data. System policy, developer
+instructions, user intent, retrieved evidence, tool output, and memory
+should not be treated as equal sources of authority.
+
+4
+00:00:30.340 --> 00:00:39.380
+The application should explicitly label and structure those categories. It
+should also validate model outputs before they reach tools, files, messages,
+or business decisions.
+
+5
+00:00:39.460 --> 00:00:42.260
+The second boundary is observation versus action.
+
+6
+00:00:42.340 --> 00:00:49.620
+A model may need to read untrusted content to summarize or classify it, but
+that does not mean it should act on instructions found inside that content.
+
+7
+00:00:49.700 --> 00:00:54.660
+High-impact actions should require deterministic checks, user confirmation,
+or policy approval.
+
+8
+00:00:54.740 --> 00:01:00.500
+A secure workflow can let the model draft an action while preventing it from
+executing the action without authorization.
+
+9
+00:01:00.580 --> 00:01:08.100
+The third boundary is context isolation. Separate tasks, tenants, users, and
+trust levels should not share uncontrolled memory.
+
+10
+00:01:08.180 --> 00:01:18.820
+Content from one workspace should not quietly become instructions for
+another. If memory is used, it needs provenance, expiration, review, and a
+way to quarantine suspicious entries.
+
+11
+00:01:18.900 --> 00:01:26.660
+The same principle applies to summaries, drafts, extracted action items, and
+generated labels that may later be retrieved as facts.
+
+12
+00:01:26.740 --> 00:01:39.620
+Useful controls include source allowlists, retrieval filters, output
+schemas, destination allowlists, egress limits, rate limits, canary content,
+audit logs, and connector-specific permissions.
+
+13
+00:01:39.700 --> 00:01:44.020
+None of these is a silver bullet. Together they make the system less
+brittle.
+
+14
+00:01:44.100 --> 00:01:50.420
+The goal is layered containment: when a model misreads untrusted text, the
+application should still preserve control.
+
+15
+00:01:50.500 --> 00:01:56.660
+Express as many safety decisions as possible in deterministic application
+code, where they can be tested and audited.

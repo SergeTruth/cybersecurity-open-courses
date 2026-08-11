@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Wormable prompt injection becomes more serious when the model is part of an
+agent.
+
+2
+00:00:04.900 --> 00:00:12.980
+An agent may plan steps, call tools, browse, send messages, edit records,
+update files, or trigger workflows.
+
+3
+00:00:13.060 --> 00:00:19.860
+The model is no longer only generating text for a human to read. It may be
+influencing operations across connected systems.
+
+4
+00:00:19.940 --> 00:00:32.180
+The core design mistake is excessive agency. If the agent has broad
+credentials, broad tool access, write permissions, and unattended execution,
+prompt injection can become an authorization problem.
+
+5
+00:00:32.260 --> 00:00:37.460
+The model may not understand the security boundary, but the application
+still gave it a way to cross that boundary.
+
+6
+00:00:37.540 --> 00:00:44.660
+OWASP emphasizes least privilege and human approval for high-risk actions
+because the surrounding system must compensate for model uncertainty.
+
+7
+00:00:44.740 --> 00:00:49.220
+A connector should be treated like an API surface, not like a harmless
+convenience feature.
+
+8
+00:00:49.300 --> 00:01:01.220
+Email, calendar, storage, source control, ticketing, CRM, cloud, chat, and
+browser connectors all carry different consequences. Reading a page is not
+the same as sending a message.
+
+9
+00:01:01.300 --> 00:01:07.860
+Drafting a recommendation is not the same as submitting a transaction.
+Permission scopes should reflect those differences.
+
+10
+00:01:07.940 --> 00:01:18.260
+Blast radius can be reduced with separate identities, narrow tokens,
+allowlisted tools, action-specific policies, rate limits, destination
+controls, and approval gates.
+
+11
+00:01:18.340 --> 00:01:25.380
+A low-risk summarization task should not run with the same authority as a
+workflow that can message customers or change production configuration.
+
+12
+00:01:25.460 --> 00:01:30.340
+When possible, split read, draft, and execute privileges into different
+steps.
+
+13
+00:01:30.420 --> 00:01:37.700
+Review connector permissions by use case, not by product category, because
+the same connector may be low risk in one workflow and high risk in another.
+
+14
+00:01:37.780 --> 00:01:47.380
+The safest agent designs assume the model can be influenced by untrusted
+context. They place meaningful controls around what the model can observe,
+decide, and do.
+
+15
+00:01:47.460 --> 00:01:53.220
+That is how a prompt injection becomes a contained error instead of a
+cross-system propagation event.
+
+16
+00:01:53.300 --> 00:02:01.380
+The goal is not to remove useful automation; it is to make automation
+proportional to the trustworthiness of its inputs and the consequence of its
+actions.
