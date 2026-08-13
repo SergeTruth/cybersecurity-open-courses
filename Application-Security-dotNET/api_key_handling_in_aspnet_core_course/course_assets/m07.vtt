@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.679
+API keys need a lifecycle.
+
+2
+00:00:01.679 --> 00:00:10.331
+Issuance should record owner, purpose, environment, scope, creation time, display behavior, approval path, and expected rotation path.
+
+3
+00:00:10.331 --> 00:00:17.627
+A key should not appear in production without a record that explains why it exists and who is responsible for it.
+
+4
+00:00:17.627 --> 00:00:20.403
+Keys should be shown only when appropriate.
+
+5
+00:00:20.403 --> 00:00:27.506
+Many systems use display-once behavior for newly generated secrets so the full value is not retrievable later.
+
+6
+00:00:27.506 --> 00:00:32.994
+That pattern reduces unnecessary exposure and encourages secure storage by the owner.
+
+7
+00:00:32.994 --> 00:00:39.063
+If a system allows full retrieval later, the risk should be explicitly accepted and protected.
+
+8
+00:00:39.063 --> 00:00:41.517
+Rotation should allow safe transition.
+
+9
+00:00:41.517 --> 00:00:48.813
+In many systems, that means allowing overlapping old and new keys for a limited period while clients are updated.
+
+10
+00:00:48.813 --> 00:00:51.977
+The overlap window should be visible and bounded.
+
+11
+00:00:51.977 --> 00:00:58.950
+Operators should be able to tell which clients are still using the old key and when it is safe to remove it.
+
+12
+00:00:58.950 --> 00:01:02.824
+Revocation should be fast enough for the risk of the system.
+
+13
+00:01:02.824 --> 00:01:06.698
+Some keys can be disabled manually during normal operations.
+
+14
+00:01:06.698 --> 00:01:11.993
+Others require near-real-time propagation across gateways, instances, and regions.
+
+15
+00:01:11.993 --> 00:01:18.321
+The right design depends on what the key can access and how quickly the organization must respond.
+
+16
+00:01:18.321 --> 00:01:24.196
+Expiration reduces stale credential risk but must be balanced with operational reliability.
+
+17
+00:01:24.196 --> 00:01:30.330
+Short lifetimes can force better hygiene but may break integrations if owners are not prepared.
+
+18
+00:01:30.330 --> 00:01:36.852
+Long lifetimes reduce maintenance pressure but increase the chance that forgotten keys remain active.
+
+19
+00:01:36.852 --> 00:01:47.441
+Compromise response should include disabling the key, identifying usage, notifying owners, rotating dependent systems, reviewing logs, and documenting what changed.
+
+20
+00:01:47.441 --> 00:01:55.189
+Stale keys, orphaned keys, test keys, and unused integration keys should be cleaned up through a regular review process.

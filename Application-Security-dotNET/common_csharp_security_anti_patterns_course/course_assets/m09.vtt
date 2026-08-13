@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.701
+Logs and diagnostics often expose what source code avoided exposing.
+
+2
+00:00:04.701 --> 00:00:10.785
+A team may carefully protect a token in memory and then print it during troubleshooting.
+
+3
+00:00:10.785 --> 00:00:18.045
+A controller may avoid returning sensitive fields while telemetry captures them in a structured property.
+
+4
+00:00:18.045 --> 00:00:21.916
+Operational output is part of the data handling surface.
+
+5
+00:00:21.916 --> 00:00:36.712
+Sensitive data can leak through structured logs, HTTP logs, exception messages, stack traces, telemetry, traces, metrics labels, crash dumps, health checks, debug pages, support tickets, screenshots, and CI output.
+
+6
+00:00:36.712 --> 00:00:45.630
+These systems often have different retention, access control, search, export, and sharing behavior than the application database.
+
+7
+00:00:45.630 --> 00:00:57.453
+Do not log passwords, tokens, API keys, connection strings, authorization headers, cookies, reset links, raw personal data, raw financial data, or full sensitive payloads.
+
+8
+00:00:57.453 --> 00:01:07.063
+When sensitive details are needed for a controlled investigation, use an approved evidence process rather than routine application logging.
+
+9
+00:01:07.063 --> 00:01:10.174
+Error responses should be useful but limited.
+
+10
+00:01:10.174 --> 00:01:20.821
+They should not reveal internal paths, schema details, stack traces, secret names, tenant identifiers, provider configuration, or raw exception internals.
+
+11
+00:01:20.821 --> 00:01:27.251
+The user-facing response and the operator diagnostic record should serve different audiences.
+
+12
+00:01:27.251 --> 00:01:31.261
+Redaction should be designed and tested before production.
+
+13
+00:01:31.261 --> 00:01:43.982
+It should cover structured properties, message templates, exception details, HTTP headers, request bodies, response bodies, background job payloads, and dependency logs where relevant.
+
+14
+00:01:43.982 --> 00:01:50.550
+A redaction policy that exists only as a code comment will not protect the system consistently.
+
+15
+00:01:50.550 --> 00:02:02.234
+Useful logging preserves safe context: correlation ID, operation name, failure category, safe resource identifier, environment, dependency category, timing, and outcome.
+
+16
+00:02:02.234 --> 00:02:12.605
+Production diagnostics should be access-controlled, environment-scoped, retained appropriately, and periodically reviewed for sensitive data exposure.

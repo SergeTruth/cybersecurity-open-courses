@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.268
+Connection strings should be treated as sensitive configuration.
+
+2
+00:00:04.268 --> 00:00:16.006
+Even when a string does not visibly contain a password, it can reveal internal database names, provider details, routing assumptions, managed identity use, or service topology.
+
+3
+00:00:16.006 --> 00:00:21.408
+It may also enable access through platform identity or integrated authentication.
+
+4
+00:00:21.408 --> 00:00:27.477
+Database credentials and service accounts should be scoped to the application's real needs.
+
+5
+00:00:27.477 --> 00:00:36.480
+A runtime application usually should not share the same access as migrations, administrators, reporting jobs, or emergency maintenance.
+
+6
+00:00:36.480 --> 00:00:41.282
+Separate identities make ownership and least privilege easier to review.
+
+7
+00:00:41.282 --> 00:00:45.217
+Certificates and private keys represent trust and identity.
+
+8
+00:00:45.217 --> 00:00:53.954
+A certificate reference such as ExampleCertificateName may identify the material used to authenticate a service or establish trust.
+
+9
+00:00:53.954 --> 00:01:03.157
+The private key behind that reference must be protected, access-controlled, rotated according to policy, and kept out of logs and exports.
+
+10
+00:01:03.157 --> 00:01:06.959
+Signing keys and encryption keys are high-impact secrets.
+
+11
+00:01:06.959 --> 00:01:11.360
+Signing material can determine whether data or tokens are trusted.
+
+12
+00:01:11.360 --> 00:01:16.229
+Encryption material can protect confidentiality or unlock protected data.
+
+13
+00:01:16.229 --> 00:01:24.899
+These secrets require ownership, rotation plans, backup or recovery decisions, and careful separation from unrelated environments.
+
+14
+00:01:24.899 --> 00:01:30.767
+API keys, service tokens, and webhook secrets often act as bearer-style access material.
+
+15
+00:01:30.767 --> 00:01:35.903
+Whoever can present the value may be treated as authorized by another system.
+
+16
+00:01:35.903 --> 00:01:44.639
+That makes accidental display, logging, browser exposure, support exports, or reuse across unrelated environments especially risky.
+
+17
+00:01:44.639 --> 00:01:47.974
+Different secret types require different handling.
+
+18
+00:01:47.974 --> 00:01:59.512
+Authentication secrets, encryption material, signing material, integration credentials, and storage access each have different rotation, backup, scope, and monitoring needs.
+
+19
+00:01:59.512 --> 00:02:06.181
+Avoid custom cryptographic handling and prefer platform-supported mechanisms and reviewed libraries.

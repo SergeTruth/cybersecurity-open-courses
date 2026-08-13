@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Middleware Order and Endpoint Scope",
+  "graphicAlt": "Bullet summary graphic for Middleware Order and Endpoint Scope.",
+  "narration": "Middleware order affects whether rate limiting applies as intended. In ASP.NET Core, routing, authentication, authorization, rate limiting, and endpoint mapping all contribute to the request path. Endpoint-specific rate-limiting APIs need the pipeline to identify endpoint metadata before the limiter decides which policy to apply.\n\nThe relationship between routing, authentication, authorization, rate limiting, and endpoint mapping should be deliberate. Some policies may need endpoint information. Some partition keys may use authenticated identity. Some endpoints may require authorization before expensive work begins. Teams should understand which context the limiter uses and whether that context exists at the point where the middleware runs.\n\nGlobal limits and endpoint-specific limits serve different purposes. A global limit can provide a broad safety floor. Endpoint-specific policies can reflect the actual cost and purpose of a route. A report endpoint, upload endpoint, login endpoint, search endpoint, and health check probably should not all be treated as equivalent work.\n\nEndpoint scope should be easy to review. Minimal API groups, controller attributes, route conventions, and named policies can make rate-limit intent visible. Reviewers should be able to tell which endpoints are limited, which policy applies, and why a given endpoint differs from others.\n\nDisabling or overriding rate limits should be rare, documented, and reviewed. There may be legitimate operational endpoints or internal workflows that need special behavior, but exceptions should have an owner, reason, environment scope, and review date. An exception without ownership becomes a long-term blind spot.",
+  "narrationPoints": [
+    "In ASP.NET Core, routing, authentication, authorization, rate limiting, and endpoint mapping all contribute to the request path.",
+    "The relationship between routing, authentication, authorization, rate limiting, and endpoint mapping should be deliberate.",
+    "A report endpoint, upload endpoint, login endpoint, search endpoint, and health check probably should not all be treated as equivalent work.",
+    "Reviewers should be able to tell which endpoints are limited, which policy applies, and why a given endpoint differs from others.",
+    "Disabling or overriding rate limits should be rare, documented, and reviewed."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Building an XSS-Resistant ASP.NET Core Workflow",
+  "graphicAlt": "Bullet summary graphic for Course Summary: Building an XSS-Resistant ASP.NET Core Workflow.",
+  "narration": "An XSS-resistant ASP.NET Core workflow starts by tracking untrusted or unreviewed data from entry to rendering. Forms, APIs, files, databases, CMS fields, partner feeds, support messages, and operational logs may all provide content that later appears in a browser. Knowing where that content moves helps teams make the right rendering decision at the right time.\n\nUse Razor and ASP.NET Core defaults correctly. Standard encoded output is a strong baseline for normal text display. Avoid unsafe escape hatches unless there is a specific reviewed need for trusted markup. When markup is allowed, document the source of trust, the sanitizer or policy involved, and every display path that depends on it.\n\nEncode for the destination context. HTML text, attributes, URLs, scripts, styles, JSON, and client-side rendering are not interchangeable. Prefer framework-supported helpers, serializers, and binding patterns over custom string handling. When a safer design avoids a risky context entirely, choose the safer design.\n\nTreat rich text, JavaScript clients, APIs, UI dependencies, shared components, and legacy views as review targets. These areas often sit at the boundary between data and browser structure. Clear contracts between backend and frontend teams reduce assumptions about whether a field is plain text, a URL, an identifier, or approved rich content.\n\nFinally, keep protections active through documentation, testing, dependency review, CSP and browser-side controls, operational monitoring, and ongoing maintenance. XSS prevention is not a one-time cleanup. It is a set of ordinary engineering habits that make safe rendering easier to preserve as the application changes.",
+  "narrationPoints": [
+    "An XSS-resistant ASP.NET Core workflow starts by tracking untrusted or unreviewed data from entry to rendering.",
+    "Avoid unsafe escape hatches unless there is a specific reviewed need for trusted markup.",
+    "Prefer framework-supported helpers, serializers, and binding patterns over custom string handling.",
+    "Treat rich text, JavaScript clients, APIs, UI dependencies, shared components, and legacy views as review targets.",
+    "Finally, keep protections active through documentation, testing, dependency review, CSP and browser-side controls, operational monitoring, and ongoing maintenance."
+  ]
+};

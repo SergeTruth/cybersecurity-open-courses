@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.712
+Rate limits and request controls must be validated through safe load testing and operational review.
+
+2
+00:00:06.712 --> 00:00:11.411
+Local development values should not silently become production limits.
+
+3
+00:00:11.411 --> 00:00:22.217
+A limit that feels fine with a few test requests may be too strict for real users, too loose for expensive endpoints, or misaligned with upstream infrastructure.
+
+4
+00:00:22.217 --> 00:00:29.735
+Gateways, reverse proxies, CDNs, ingress controllers, web application firewalls, hosting platforms, and the ASP.
+
+5
+00:00:29.735 --> 00:00:32.151
+NET Core app may all enforce limits.
+
+6
+00:00:32.151 --> 00:00:35.910
+Teams should decide which layer owns each limit and why.
+
+7
+00:00:35.910 --> 00:00:39.199
+The edge may be better for broad traffic shaping.
+
+8
+00:00:39.199 --> 00:00:44.770
+The application may be better for user, tenant, route, or business-aware decisions.
+
+9
+00:00:44.770 --> 00:00:47.522
+Both can be useful when they are aligned.
+
+10
+00:00:47.522 --> 00:01:02.759
+Monitoring signals should include limit rejections, queue pressure, latency, request body rejection, timeout trends, endpoint hotspots, tenant hotspots, concurrency saturation, backend saturation, and downstream service errors.
+
+11
+00:01:02.759 --> 00:01:08.061
+These signals help teams distinguish a useful control from a misconfigured one.
+
+12
+00:01:08.061 --> 00:01:12.021
+Tuning limits should not hide service reliability problems.
+
+13
+00:01:12.021 --> 00:01:26.520
+If an endpoint constantly hits limits because it is too slow or too expensive, the answer may be optimization, caching, workflow redesign, capacity planning, or background processing rather than only stricter limits.
+
+14
+00:01:26.520 --> 00:01:31.419
+Rate limiting should protect the system, not conceal poor service health.
+
+15
+00:01:31.419 --> 00:01:33.366
+Exception governance matters.
+
+16
+00:01:33.366 --> 00:01:38.132
+Some clients, tenants, routes, or environments may need special limits.
+
+17
+00:01:38.132 --> 00:01:43.904
+Exceptions should have an owner, reason, duration, review date, and environment scope.
+
+18
+00:01:43.904 --> 00:01:50.348
+Temporary exceptions should not become permanent policy because no one remembers why they exist.
+
+19
+00:01:50.348 --> 00:01:55.180
+Production governance turns request controls into an operating practice.
+
+20
+00:01:55.180 --> 00:02:06.390
+Limits should be documented, reviewed during releases, tested safely, observed in dashboards, and revisited as user behavior, endpoint cost, and infrastructure change.

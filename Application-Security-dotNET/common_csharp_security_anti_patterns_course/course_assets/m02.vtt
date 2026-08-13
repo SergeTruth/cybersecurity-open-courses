@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.702
+Hardcoded secrets are one of the most common and avoidable C# security anti-patterns.
+
+2
+00:00:05.702 --> 00:00:15.496
+Secrets include passwords, connection strings, API keys, tokens, certificates, private keys, signing keys, storage keys, and provider credentials.
+
+3
+00:00:15.496 --> 00:00:21.936
+They are not ordinary configuration values because exposure can grant access or undermine trust.
+
+4
+00:00:21.936 --> 00:00:36.627
+Secrets should not appear in source code, committed appsettings files, sample projects, test fixtures, screenshots, documentation, logs, CI output, deployment artifacts, support tickets, or copied troubleshooting notes.
+
+5
+00:00:36.627 --> 00:00:44.342
+Those locations are replicated, indexed, retained, and shared in ways that are difficult to control after the fact.
+
+6
+00:00:44.342 --> 00:00:49.105
+Development-only convenience must not become production secret storage.
+
+7
+00:00:49.105 --> 00:01:01.850
+A local secret file, a temporary environment variable, or a shared test credential may be acceptable inside a controlled development workflow, but that does not make it a production pattern.
+
+8
+00:01:01.850 --> 00:01:08.223
+Production secrets need access control, inventory, ownership, rotation, and operational review.
+
+9
+00:01:08.223 --> 00:01:10.303
+Environment separation matters.
+
+10
+00:01:10.303 --> 00:01:20.231
+Development, test, staging, production, and customer-specific deployments should not casually share credentials or security-sensitive configuration.
+
+11
+00:01:20.231 --> 00:01:28.952
+Shared secrets increase blast radius, make testing less trustworthy, and make rotation harder when one environment needs a change.
+
+12
+00:01:28.952 --> 00:01:41.161
+Configuration drift occurs when production behavior differs from reviewed expectations because settings were copied, overridden, forgotten, or changed outside the normal review path.
+
+13
+00:01:41.161 --> 00:01:51.961
+A secure code path can behave unsafely if the deployed configuration disables a control, points to the wrong service, or uses a broader credential than intended.
+
+14
+00:01:51.961 --> 00:02:06.384
+Safer habits include controlled secret stores, managed identity where appropriate, environment-aware configuration, documented ownership, rotation schedules, redaction rules, startup validation, and periodic review.
+
+15
+00:02:06.384 --> 00:02:15.574
+The key habit is treating configuration as part of the security design rather than a pile of values that only matters at deployment time.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.334
+The ASP.
+
+2
+00:00:01.334 --> 00:00:05.068
+NET Core request pipeline is a security control surface.
+
+3
+00:00:05.068 --> 00:00:12.938
+Every request flows through middleware before it reaches an endpoint, and each component can change what happens next.
+
+4
+00:00:12.938 --> 00:00:28.410
+Routing, HTTPS redirection, exception handling, authentication, authorization, endpoint mapping, static files, CORS, antiforgery behavior, and custom middleware should be understood as part of one flow rather than isolated settings.
+
+5
+00:00:28.410 --> 00:00:33.345
+Middleware order matters because some decisions depend on earlier context.
+
+6
+00:00:33.345 --> 00:00:38.747
+Routing must identify endpoint metadata before endpoint authorization can use it.
+
+7
+00:00:38.747 --> 00:00:44.282
+Authentication must establish the user before authorization evaluates access rules.
+
+8
+00:00:44.282 --> 00:00:49.617
+Exception handling must produce controlled responses without exposing internals.
+
+9
+00:00:49.617 --> 00:00:55.619
+Endpoint mapping must not create unexpected paths around the protections the team expects.
+
+10
+00:00:55.619 --> 00:00:58.821
+Development behavior should stay in development.
+
+11
+00:00:58.821 --> 00:01:13.426
+Detailed error pages, verbose diagnostics, local identity assumptions, permissive origins, relaxed certificate behavior, or test-only endpoints can help during local work, but they should not become production behavior.
+
+12
+00:01:13.426 --> 00:01:25.563
+Production should use controlled errors, secure transport expectations, explicit endpoint protection, and logging that helps operators without revealing sensitive details to callers.
+
+13
+00:01:25.563 --> 00:01:29.831
+Secure transport assumptions also belong in the pipeline review.
+
+14
+00:01:29.831 --> 00:01:36.834
+Applications commonly sit behind reverse proxies, load balancers, ingress controllers, or cloud services.
+
+15
+00:01:36.834 --> 00:01:47.037
+The application should be configured so it understands forwarded headers, HTTPS expectations, and redirect behavior in the actual deployment environment.
+
+16
+00:01:47.037 --> 00:01:52.706
+Otherwise a setting that worked locally may not match how production traffic arrives.
+
+17
+00:01:52.706 --> 00:01:55.240
+Endpoint protection should be visible.
+
+18
+00:01:55.240 --> 00:02:05.644
+MVC controllers, Razor Pages, Minimal APIs, endpoint groups, health checks, static assets, and administrative surfaces should have intentional access rules.
+
+19
+00:02:05.644 --> 00:02:16.314
+Reviewers should be able to tell which endpoints are public, which require authentication, which require policies, and which are limited to operational systems.
+
+20
+00:02:16.314 --> 00:02:23.517
+The practical review question is, what happens to a request from arrival to endpoint execution and response.
+
+21
+00:02:23.517 --> 00:02:28.852
+If the team cannot describe that path, security behavior may depend on accident.
+
+22
+00:02:28.852 --> 00:02:37.788
+A coordinated request pipeline makes access decisions, error behavior, transport assumptions, and routing easier to test and maintain.

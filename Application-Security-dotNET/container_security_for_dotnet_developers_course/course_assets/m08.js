@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Image Supply Chain, Vulnerabilities, and SBOMs",
+  "graphicAlt": "Bullet summary graphic for Image Supply Chain, Vulnerabilities, and SBOMs.",
+  "narration": "Container image security depends on the supply chain as well as runtime settings. A production image can include base layers, .NET runtime components, NuGet packages, native libraries, operating system packages, build tools used earlier in the pipeline, CI actions, and application code. Each layer and dependency has ownership and update implications.\n\nImage scanning should be part of the pipeline, but findings need triage. Teams should review severity, affected layer, reachable component, deployment exposure, available fix, and compensating controls. The goal is not to ignore findings or accept every result blindly; it is to create a response process that is fast, evidence-based, and repeatable.\n\nSBOMs help teams understand what is inside an image. They support vulnerability response, customer requests, incident review, license review, and rebuild planning. An SBOM is most useful when it is generated consistently, stored with the image or release, and connected to the team that owns the application.\n\nOld images can contain old base layers even when the application code has not changed. Regular rebuilds are important because a rebuild can pick up patched base image layers and refreshed dependencies. Pinning versions improves repeatability, but it must be paired with an update workflow so pins do not become permanent drift.\n\nTrusted registries, image signatures, provenance metadata, least-privilege registry access, and cleanup of stale images should all be reviewed. The registry is part of production. Teams should know who can publish images, who can pull them, how tags are promoted, how rollbacks work, and how retired images are removed from active use.",
+  "narrationPoints": [
+    "Container image security depends on the supply chain as well as runtime settings.",
+    "Image scanning should be part of the pipeline, but findings need triage.",
+    "An SBOM is most useful when it is generated consistently, stored with the image or release, and connected to the team that owns the application.",
+    "Regular rebuilds are important because a rebuild can pick up patched base image layers and refreshed dependencies.",
+    "Trusted registries, image signatures, provenance metadata, least-privilege registry access, and cleanup of stale images should all be reviewed."
+  ]
+};

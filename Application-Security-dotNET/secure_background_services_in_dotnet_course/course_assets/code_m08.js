@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Data Handling, Files, and External Integrations' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Create a bounded request to one worker integration",
+      "language": "csharp",
+      "blurb": "The factory validates canonical job and tenant identifiers, serializes a small DTO, enforces the actual UTF-8 body ceiling, targets one fixed HTTPS origin and path, and sets JSON content without accepting a caller-selected URL or header.",
+      "code": "using System.Net.Http.Headers;\nusing System.Text.Json;\n\npublic static class WorkerIntegrationRequest\n{\n    public static HttpRequestMessage Create(string jobId, string tenantId)\n    {\n        if (!IsIdentifier(jobId) || !IsIdentifier(tenantId))\n            throw new ArgumentException(\"Worker integration request rejected.\");\n        var body = JsonSerializer.SerializeToUtf8Bytes(new { jobId, tenantId });\n        if (body.Length > 2 * 1024) throw new InvalidOperationException(\"Worker request body exceeded policy.\");\n        var request = new HttpRequestMessage(\n            HttpMethod.Post,\n            new Uri(\"https://processor.example.com/v1/jobs\", UriKind.Absolute));\n        request.Content = new ByteArrayContent(body);\n        request.Content.Headers.ContentType = new MediaTypeHeaderValue(\"application/json\");\n        return request;\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    },
+    {
+      "title": "Represent a worker artifact without exposing a file path",
+      "language": "csharp",
+      "blurb": "The artifact factory validates tenant, object, media type, size, and lowercase SHA-256 evidence, derives a storage key from canonical identifiers, and returns no caller-supplied filesystem path or arbitrary storage metadata.",
+      "code": "public sealed class JobArtifactReference\n{\n    private JobArtifactReference(\n        string tenantId,\n        string objectId,\n        string storageKey,\n        string mediaType,\n        long byteLength,\n        string sha256)\n    {\n        TenantId = tenantId;\n        ObjectId = objectId;\n        StorageKey = storageKey;\n        MediaType = mediaType;\n        ByteLength = byteLength;\n        Sha256 = sha256;\n    }\n\n    public string TenantId { get; }\n    public string ObjectId { get; }\n    public string StorageKey { get; }\n    public string MediaType { get; }\n    public long ByteLength { get; }\n    public string Sha256 { get; }\n\n    public static JobArtifactReference Create(\n        string tenantId,\n        string objectId,\n        string mediaType,\n        long byteLength,\n        string sha256)\n    {\n        if (!IsIdentifier(tenantId) || !IsIdentifier(objectId) ||\n            mediaType is not (\"application/pdf\" or \"image/png\") ||\n            byteLength is < 1 or > 20 * 1024 * 1024 || sha256 is not { Length: 64 } ||\n            !sha256.All(character => char.IsAsciiDigit(character) || character is >= 'a' and <= 'f'))\n        {\n            throw new ArgumentException(\"Job artifact rejected.\");\n        }\n        return new JobArtifactReference(\n            tenantId, objectId, $\"artifacts/{tenantId}/{objectId}\", mediaType, byteLength, sha256);\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    }
+  ]
+};

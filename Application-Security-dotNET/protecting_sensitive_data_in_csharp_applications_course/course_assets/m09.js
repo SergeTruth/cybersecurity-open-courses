@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Privacy Review, Retention, and Incident Readiness",
+  "graphicAlt": "Bullet summary graphic for Testing, Privacy Review, Retention, and Incident Readiness.",
+  "narration": "Test data can create real risk when production data is copied into lower environments. Development, testing, demos, training, and troubleshooting environments often have broader access, weaker monitoring, relaxed change control, and more experimental tooling than production. Real data should not move there casually.\n\nPrefer synthetic, masked, tokenized, or minimized datasets. Test logs, screenshots, fixtures, snapshots, exported databases, and CI artifacts should not contain real sensitive data unless that use is explicitly governed. A useful test dataset should support engineering work without creating a second production data estate.\n\nRetention should be intentional. Keep sensitive data only as long as needed for business, legal, operational, or security reasons. Deletion workflows should consider databases, files, caches, queues, logs, backups, analytics stores, search indexes, and derived records. A row deleted from the main database may still exist in several operational copies.\n\nPrivacy and security review should confirm data categories, purposes, flows, access rules, retention, redaction, and incident procedures. That review should happen before release and again when features add new data, new integrations, new exports, or new support workflows.\n\nIncident readiness should include evidence preservation, containment, notification paths, owner identification, credential rotation, data impact review, and follow-up remediation. Sensitive data protection is stronger when the team already knows who makes decisions and where the data might be.",
+  "narrationPoints": [
+    "Development, testing, demos, training, and troubleshooting environments often have broader access, weaker monitoring, relaxed change control, and more experimental tooling than production.",
+    "A useful test dataset should support engineering work without creating a second production data estate.",
+    "Keep sensitive data only as long as needed for business, legal, operational, or security reasons.",
+    "Incident readiness should include evidence preservation, containment, notification paths, owner identification, credential rotation, data impact review, and follow-up remediation.",
+    "Sensitive data protection is stronger when the team already knows who makes decisions and where the data might be."
+  ]
+};

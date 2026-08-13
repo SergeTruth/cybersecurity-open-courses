@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.862
+A Dockerfile is part of the application security surface because it decides what enters the image and what remains available at runtime.
+
+2
+00:00:08.862 --> 00:00:21.191
+It also affects repeatability, build provenance, package restore behavior, user identity, working directory, file permissions, environment variables, and operational expectations.
+
+3
+00:00:21.191 --> 00:00:26.122
+Multi-stage builds help separate build activity from production runtime.
+
+4
+00:00:26.122 --> 00:00:33.597
+The build stage can use an SDK image to restore packages, compile code, run allowed build steps, and publish output.
+
+5
+00:00:33.597 --> 00:00:40.840
+The runtime stage can then copy only the published application and the runtime dependencies needed to operate.
+
+6
+00:00:40.840 --> 00:00:45.078
+That separation reduces unnecessary content in the final image.
+
+7
+00:00:45.078 --> 00:00:48.931
+The build context deserves the same care as source control.
+
+8
+00:00:48.931 --> 00:01:00.721
+A . dockerignore file should exclude secrets, local configuration, test data, build output, temporary files, user-specific files, and anything else the image build does not need.
+
+9
+00:01:00.721 --> 00:01:07.116
+Sending less context to the builder reduces accidental exposure and makes builds easier to audit.
+
+10
+00:01:07.116 --> 00:01:09.967
+Build-time secrets need special handling.
+
+11
+00:01:09.967 --> 00:01:18.521
+Ordinary build arguments and build-time environment variables can be recorded in image history, layers, logs, or cache metadata.
+
+12
+00:01:18.521 --> 00:01:29.155
+If a build truly needs access to a private feed or signing material, use platform-supported build-secret mechanisms and review what appears in logs and artifacts.
+
+13
+00:01:29.155 --> 00:01:42.254
+The final image should not contain package caches, test output, source code, local development files, package feed credentials, signing keys, or extra tools that are not part of production operation.
+
+14
+00:01:42.254 --> 00:01:48.727
+CI logs should avoid tokens, connection strings, private feed credentials, and signing material.
+
+15
+00:01:48.727 --> 00:01:56.279
+The build pipeline should produce a runtime image that is small enough to inspect and predictable enough to rebuild.

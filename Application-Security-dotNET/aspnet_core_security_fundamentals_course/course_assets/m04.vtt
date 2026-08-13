@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.669
+Authorization answers the question, what is this identity allowed to do.
+
+2
+00:00:04.669 --> 00:00:05.965
+In ASP.
+
+3
+00:00:05.965 --> 00:00:12.644
+NET Core, authorization can be role-based, claim-based, policy-based, resource-based, or a combination.
+
+4
+00:00:12.644 --> 00:00:15.562
+The right model depends on the business rule.
+
+5
+00:00:15.562 --> 00:00:21.268
+A good access-control design should be easy to explain and easy to locate during review.
+
+6
+00:00:21.268 --> 00:00:29.827
+Roles can be useful when they map to real responsibilities, such as an administrator, support operator, approver, or tenant manager.
+
+7
+00:00:29.827 --> 00:00:38.646
+They become too coarse when one role is expected to capture every record-level, tenant-level, workflow-level, and action-level decision.
+
+8
+00:00:38.646 --> 00:00:43.963
+Broad roles are easy to apply but hard to reason about when the application grows.
+
+9
+00:00:43.963 --> 00:00:52.457
+Claims describe attributes about the identity, such as an organization, tenant relationship, assurance level, or permission marker.
+
+10
+00:00:52.457 --> 00:00:57.644
+Claims are useful inputs to decisions, but they should be interpreted carefully.
+
+11
+00:00:57.644 --> 00:01:07.176
+A claim usually tells the application something about the caller; it does not automatically prove access to every resource referenced by a request.
+
+12
+00:01:07.176 --> 00:01:11.196
+Policies let teams define reusable authorization requirements.
+
+13
+00:01:11.196 --> 00:01:19.236
+They can combine roles, claims, authentication scheme expectations, custom checks, and other requirements into a named rule.
+
+14
+00:01:19.236 --> 00:01:32.075
+Policies are helpful because endpoint declarations become more readable and because reviewers can inspect the policy implementation instead of chasing repeated logic across controllers and handlers.
+
+15
+00:01:32.075 --> 00:01:37.587
+Resource-based authorization is important when access depends on the specific object.
+
+16
+00:01:37.587 --> 00:01:41.477
+A user may be allowed to view reports, but not every report.
+
+17
+00:01:41.477 --> 00:01:47.313
+A tenant administrator may approve one tenant's request, but not another tenant's request.
+
+18
+00:01:47.313 --> 00:01:57.752
+Resource checks may require loading the resource, verifying ownership, checking workflow state, and then making an authorization decision close to the operation.
+
+19
+00:01:57.752 --> 00:02:00.605
+Access rules must be enforced on the server.
+
+20
+00:02:00.605 --> 00:02:08.840
+Hiding a button, disabling a menu item, or omitting a link can improve the user experience, but it is not the security control.
+
+21
+00:02:08.840 --> 00:02:21.160
+MVC actions, Razor Pages, controllers, APIs, Minimal APIs, background/admin surfaces, and operational endpoints should have server-side protection that matches the sensitivity of the action.

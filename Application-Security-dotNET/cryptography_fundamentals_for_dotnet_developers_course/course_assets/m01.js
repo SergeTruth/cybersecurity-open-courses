@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What Cryptography Does and Does Not Solve",
+  "graphicAlt": "Bullet summary graphic for What Cryptography Does and Does Not Solve.",
+  "narration": "Cryptography helps provide specific security properties in specific contexts. It can support confidentiality, integrity, authenticity, and non-repudiation when the surrounding design is sound. It can protect data in transit, protect stored values, verify that data has not changed, or help prove that a trusted holder of a private key signed a value.\n\nCryptography does not replace authorization, input validation, secure architecture, patching, monitoring, logging discipline, or operational ownership. An encrypted field can still be exposed after decryption. A signed token can still be accepted by the wrong API if audience checks are weak. A strong algorithm can still fail when keys are copied into source control or logs.\n\nThe first engineering question should be what security property do we need. Do we need confidentiality, integrity, authenticity, password verification, transport protection, tamper detection, or proof of origin. That question comes before choosing an algorithm. The strongest-sounding algorithm is not useful if it solves the wrong problem.\n\nDevelopers should use standard, maintained libraries and reviewed protocols rather than designing custom cryptography. The hard parts are often not the mathematical primitive alone. They include mode selection, nonce handling, key storage, rotation, certificate validation, compatibility, error behavior, and operational recovery.\n\nA practical crypto review follows the data. What is protected, who needs access, where are the keys, which system validates the result, what happens during rotation, and what operational artifacts might expose the protected data. Cryptography is strongest when it is part of a complete engineering design.",
+  "narrationPoints": [
+    "Cryptography helps provide specific security properties in specific contexts.",
+    "Cryptography does not replace authorization, input validation, secure architecture, patching, monitoring, logging discipline, or operational ownership.",
+    "The first engineering question should be what security property do we need.",
+    "Developers should use standard, maintained libraries and reviewed protocols rather than designing custom cryptography.",
+    "Cryptography is strongest when it is part of a complete engineering design."
+  ]
+};

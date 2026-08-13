@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.513
+Background services are common data movement points.
+
+2
+00:00:03.513 --> 00:00:15.067
+They import files, export reports, synchronize records, transform data, generate documents, call external APIs, update storage, and move work between queues and databases.
+
+3
+00:00:15.067 --> 00:00:26.147
+Because they often connect multiple systems, they can accidentally become places where normal validation, authorization, privacy, and retention rules are forgotten.
+
+4
+00:00:26.147 --> 00:00:33.444
+Files, serialized data, CSV rows, documents, and third-party responses should be treated as untrusted input.
+
+5
+00:00:33.444 --> 00:00:48.781
+A worker may receive an ExampleImportJob from a trusted scheduling system, but the file it processes may still contain unexpected rows, missing fields, unsupported versions, or records that do not belong to the expected tenant.
+
+6
+00:00:48.781 --> 00:00:52.700
+Parsing success is not proof that the data is safe to use.
+
+7
+00:00:52.700 --> 00:01:00.808
+Safe data handling includes database updates, imports, exports, report generation, file processing, and synchronization.
+
+8
+00:01:00.808 --> 00:01:16.347
+The worker should validate inputs, preserve tenant and ownership context, apply object-level authorization where appropriate, use controlled storage locations, and keep server-generated identifiers separate from user-facing names.
+
+9
+00:01:16.347 --> 00:01:21.685
+Long-running jobs should not create shortcuts around the normal business rules.
+
+10
+00:01:21.685 --> 00:01:26.820
+Protect sensitive data during processing, storage, export, and transmission.
+
+11
+00:01:26.820 --> 00:01:38.846
+Temporary files, generated reports, intermediate artifacts, failed-job snapshots, and support bundles can contain personal data, business-sensitive data, or internal identifiers.
+
+12
+00:01:38.846 --> 00:01:48.575
+They need retention limits, access control, secure transfer where appropriate, and deletion or archival rules that match the data's sensitivity.
+
+13
+00:01:48.575 --> 00:01:58.169
+Service-to-service calls and third-party integrations should use least privilege, clear timeouts, safe retry behavior, and scoped credentials.
+
+14
+00:01:58.169 --> 00:02:06.615
+A background service should not use a broad credential for convenience when a narrower identity or API permission would work.
+
+15
+00:02:06.615 --> 00:02:17.020
+External calls also need failure handling because partial success across databases, queues, storage, and APIs is a normal background-processing challenge.
+
+16
+00:02:17.020 --> 00:02:27.424
+The practical rule is simple: background services do not get to skip validation, authorization, or privacy rules because they run outside the web request.
+
+17
+00:02:27.424 --> 00:02:32.357
+They may need different mechanisms, but the same security intent applies.
+
+18
+00:02:32.357 --> 00:02:41.275
+If a user could not do something directly, the worker should not do it for that user without an approved workflow and audit context.

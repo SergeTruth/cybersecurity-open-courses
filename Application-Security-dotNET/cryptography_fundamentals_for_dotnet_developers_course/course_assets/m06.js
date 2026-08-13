@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Randomness, Nonces, IDs, and Key Generation",
+  "graphicAlt": "Bullet summary graphic for Randomness, Nonces, IDs, and Key Generation.",
+  "narration": "Cryptographic randomness is required for keys, salts, nonces, reset tokens, API keys, session identifiers, and other security-sensitive values. These values often need to be difficult to predict or unique in ways that ordinary business identifiers are not.\n\nGeneral-purpose random number generators are not appropriate for cryptographic values. They may be designed for simulation, testing, games, or distribution quality rather than unpredictability. .NET developers should use cryptographically secure random APIs for security-sensitive randomness.\n\nNonces and IVs may need uniqueness, unpredictability, or both depending on the algorithm and mode. The application must follow the requirement for the chosen construction. Treating all nonces as interchangeable is a review problem because different algorithms make different assumptions.\n\nSalts do not need to be secret, but they should be unique where required. A salt helps ensure that identical passwords or values do not result in identical verifiers in password hashing and related designs. The value of the salt comes from proper generation and storage, not from secrecy.\n\nKey generation should use sufficient entropy and should not be based on words, timestamps, predictable IDs, or manual keyboard mashing. A key that is easy to guess or reproduce undermines the rest of the cryptographic design.\n\nA practical randomness review asks what property is needed for each value: unpredictability, uniqueness, stable identity, or correlation. The generation method should match that property and use maintained .NET APIs rather than improvised string construction.",
+  "narrationPoints": [
+    "Cryptographic randomness is required for keys, salts, nonces, reset tokens, API keys, session identifiers, and other security-sensitive values.",
+    ".NET developers should use cryptographically secure random APIs for security-sensitive randomness.",
+    "A salt helps ensure that identical passwords or values do not result in identical verifiers in password hashing and related designs.",
+    "Key generation should use sufficient entropy and should not be based on words, timestamps, predictable IDs, or manual keyboard mashing.",
+    "The generation method should match that property and use maintained .NET APIs rather than improvised string construction."
+  ]
+};

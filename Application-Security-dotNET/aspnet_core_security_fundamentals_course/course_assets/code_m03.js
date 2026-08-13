@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Authentication Fundamentals' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Configure a bounded server-side authentication cookie",
+      "language": "csharp",
+      "blurb": "The cookie configuration fixes the scheme, requires HTTPS, prevents script access, uses strict same-site handling, disables sliding renewal, bounds lifetime, and suppresses redirect-based API ambiguity.",
+      "code": "using Microsoft.AspNetCore.Authentication.Cookies;\n\npublic static class BrowserAuthentication\n{\n    public static IServiceCollection AddBrowserAuthentication(\n        this IServiceCollection services)\n    {\n        ArgumentNullException.ThrowIfNull(services);\n        services\n            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)\n            .AddCookie(options =>\n            {\n                options.Cookie.Name = \"__Host-orders-session\";\n                options.Cookie.HttpOnly = true;\n                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;\n                options.Cookie.SameSite = SameSiteMode.Strict;\n                options.Cookie.Path = \"/\";\n                options.SlidingExpiration = false;\n                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);\n                options.Events.OnRedirectToLogin = context =>\n                {\n                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;\n                    return Task.CompletedTask;\n                };\n                options.Events.OnRedirectToAccessDenied = context =>\n                {\n                    context.Response.StatusCode = StatusCodes.Status403Forbidden;\n                    return Task.CompletedTask;\n                };\n            });\n        return services;\n    }\n}\n"
+    },
+    {
+      "title": "Snapshot one authenticated subject and tenant identity",
+      "language": "csharp",
+      "blurb": "The closed factory requires an authenticated principal, exactly one canonical subject and tenant claim, rejects ambiguity, and copies the validated immutable strings into application-owned identity state.",
+      "code": "using System.Security.Claims;\n\npublic sealed class AuthenticatedIdentity\n{\n    private AuthenticatedIdentity(string subjectId, string tenantId)\n    {\n        SubjectId = subjectId;\n        TenantId = tenantId;\n    }\n\n    public string SubjectId { get; }\n    public string TenantId { get; }\n\n    public static AuthenticatedIdentity From(ClaimsPrincipal principal)\n    {\n        ArgumentNullException.ThrowIfNull(principal);\n        if (principal.Identity?.IsAuthenticated != true)\n            throw new UnauthorizedAccessException(\"Authentication required.\");\n\n        var subjects = principal.FindAll(\"sub\").Select(claim => claim.Value).Take(2).ToArray();\n        var tenants = principal.FindAll(\"tenant_id\").Select(claim => claim.Value).Take(2).ToArray();\n        if (subjects.Length != 1 || tenants.Length != 1 ||\n            !IsIdentifier(subjects[0]) || !IsIdentifier(tenants[0]))\n        {\n            throw new UnauthorizedAccessException(\"Identity claims rejected.\");\n        }\n        return new AuthenticatedIdentity(subjects[0], tenants[0]);\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) &&\n        value.Length <= 64 &&\n        value.All(character =>\n            char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    }
+  ]
+};

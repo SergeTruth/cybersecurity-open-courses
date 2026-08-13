@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.693
+Background services often encounter duplicate messages, retries, delayed processing, partial failures, and interrupted operations.
+
+2
+00:00:08.693 --> 00:00:11.970
+A queue may deliver the same work more than once.
+
+3
+00:00:11.970 --> 00:00:16.116
+A database update may succeed while a notification call fails.
+
+4
+00:00:16.116 --> 00:00:21.132
+A worker may stop after writing a file but before marking the job complete.
+
+5
+00:00:21.132 --> 00:00:25.077
+Secure and reliable design assumes these conditions happen.
+
+6
+00:00:25.077 --> 00:00:32.032
+Idempotency means designing an operation so repeated processing does not cause unsafe duplicate effects.
+
+7
+00:00:32.032 --> 00:00:43.400
+An ExampleJobId, idempotency key, state machine, unique constraint, or processed-record marker can help the worker determine whether the intended change already happened.
+
+8
+00:00:43.400 --> 00:00:46.410
+The goal is not only to avoid duplicate work.
+
+9
+00:00:46.410 --> 00:00:54.167
+It is to avoid duplicate state transitions, duplicate exports, duplicate notifications, and confusing audit records.
+
+10
+00:00:54.167 --> 00:00:56.708
+Retry policies need limits and review.
+
+11
+00:00:56.708 --> 00:01:00.587
+Retrying a temporary dependency failure may be reasonable.
+
+12
+00:01:00.587 --> 00:01:06.003
+Retrying a permanently invalid message wastes resources and hides the real issue.
+
+13
+00:01:06.003 --> 00:01:13.359
+Retrying a non-idempotent action can create repeated effects if the worker cannot tell what already succeeded.
+
+14
+00:01:13.359 --> 00:01:20.849
+Use explicit ExampleRetryPolicy settings for delay, maximum attempts, retryable conditions, and failure routing.
+
+15
+00:01:20.849 --> 00:01:23.791
+Non-idempotent actions require special care.
+
+16
+00:01:23.791 --> 00:01:33.889
+Payments, state transitions, notifications, exports, report publication, and external API calls may have side effects outside the worker's transaction.
+
+17
+00:01:33.889 --> 00:01:42.516
+Before retrying, the worker needs a way to determine whether the action already completed or whether it is safe to attempt again.
+
+18
+00:01:42.516 --> 00:01:47.933
+When that cannot be proven, manual review may be safer than automatic repetition.
+
+19
+00:01:47.933 --> 00:01:52.012
+Poison messages and dead-letter queues support safe handling.
+
+20
+00:01:52.012 --> 00:01:59.635
+A message that repeatedly fails validation or processing should not loop forever and starve the rest of the queue.
+
+21
+00:01:59.635 --> 00:02:15.417
+A dead-letter or review workflow should preserve enough safe context for troubleshooting: ExampleJobId, message type, failure category, timestamp, retry count, and correlation ID, while avoiding sensitive content where it is not needed.
+
+22
+00:02:15.417 --> 00:02:21.837
+Transaction boundaries, compensation, and recovery planning should be designed before incidents.
+
+23
+00:02:21.837 --> 00:02:32.537
+Job state transitions should be recorded clearly: received, validated, authorized, processing, completed, failed, dead-lettered, canceled, or manually reviewed.
+
+24
+00:02:32.537 --> 00:02:41.163
+Those states help operators understand what happened and help auditors distinguish safe retries from repeated unintended effects.

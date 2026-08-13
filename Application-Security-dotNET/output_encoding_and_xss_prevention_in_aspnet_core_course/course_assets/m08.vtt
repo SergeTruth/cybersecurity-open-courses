@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.716
+Validation, sanitization, and encoding are related controls, but they do different jobs.
+
+2
+00:00:05.716 --> 00:00:08.249
+Confusing them creates fragile designs.
+
+3
+00:00:08.249 --> 00:00:13.120
+Input validation decides whether data is acceptable for a business purpose.
+
+4
+00:00:13.120 --> 00:00:17.212
+Output encoding prepares data for a specific rendering context.
+
+5
+00:00:17.212 --> 00:00:21.759
+Sanitization transforms rich content by applying an allow-list policy.
+
+6
+00:00:21.759 --> 00:00:25.461
+Each control belongs in a different part of the workflow.
+
+7
+00:00:25.461 --> 00:00:38.451
+Input validation should answer questions such as: is this field present when required, within the expected length, in an allowed format, within a valid range, and meaningful for the current operation.
+
+8
+00:00:38.451 --> 00:00:48.714
+Validation improves data quality and prevents inappropriate states, but valid business data can still be unsafe if it is rendered in the wrong output context.
+
+9
+00:00:48.714 --> 00:00:52.286
+Output encoding is tied to where the data is displayed.
+
+10
+00:00:52.286 --> 00:01:02.873
+Text shown in an HTML body, an attribute, a URL component, a client-side data structure, or another browser-interpreted destination may require different handling.
+
+11
+00:01:02.873 --> 00:01:08.913
+Encoding should happen close to rendering, because the destination context is clearest there.
+
+12
+00:01:08.913 --> 00:01:10.732
+Sanitization is specialized.
+
+13
+00:01:10.732 --> 00:01:16.188
+It is used when the application intentionally permits some markup or rich structure.
+
+14
+00:01:16.188 --> 00:01:23.787
+The sanitizer's job is to allow only approved structures and remove or transform everything else according to policy.
+
+15
+00:01:23.787 --> 00:01:32.621
+Sanitization should be based on mature, reviewed tooling and should not be treated as a universal substitute for context-aware encoding.
+
+16
+00:01:32.621 --> 00:01:36.778
+Canonicalization and normalization support consistent decisions.
+
+17
+00:01:36.778 --> 00:01:44.182
+Before comparing identifiers, names, paths, or state values, the application may need a consistent representation.
+
+18
+00:01:44.182 --> 00:01:52.236
+That helps validation and authorization decisions, but it still does not replace safe rendering when the value is displayed.
+
+19
+00:01:52.236 --> 00:02:02.174
+Blocking suspicious input alone is fragile because dangerous interpretation depends on context and because applications reuse content in multiple places.
+
+20
+00:02:02.174 --> 00:02:16.528
+A clear design assigns responsibilities: validate data for business use, store it with known meaning, sanitize only when rich content is intentionally allowed, and encode for the rendering context where the value appears.

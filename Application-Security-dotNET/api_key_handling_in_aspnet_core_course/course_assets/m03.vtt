@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.139
+API keys should be transmitted only over HTTPS in production.
+
+2
+00:00:04.139 --> 00:00:12.825
+Transport security helps protect credential-bearing requests in transit and helps clients communicate with the intended service.
+
+3
+00:00:12.825 --> 00:00:19.408
+If a request contains a key, the route between client and service should be treated as sensitive.
+
+4
+00:00:19.408 --> 00:00:25.176
+Dedicated request headers are usually easier to handle safely than query-string keys.
+
+5
+00:00:25.176 --> 00:00:31.283
+Headers can be targeted by authentication handlers, gateway rules, and redaction policies.
+
+6
+00:00:31.283 --> 00:00:41.123
+Query strings are part of URLs, and URLs are copied, cached, logged, bookmarked, screenshotted, and sent through many tools in normal operations.
+
+7
+00:00:41.123 --> 00:00:44.652
+Query-string keys create unnecessary exposure paths.
+
+8
+00:00:44.652 --> 00:00:57.070
+URLs may appear in browser history, server logs, reverse proxy logs, referrer headers, analytics tools, support tickets, copied links, crash reports, sample requests, and screenshots.
+
+9
+00:00:57.070 --> 00:01:03.245
+Even when the application itself is careful, surrounding tooling may preserve the full URL.
+
+10
+00:01:03.245 --> 00:01:14.917
+Keys should not be placed in frontend JavaScript, public HTML, mobile app assets, downloadable configuration, or public repositories when they grant server-side privileges.
+
+11
+00:01:14.917 --> 00:01:21.703
+Anything delivered to users or packaged into public assets should be assumed visible to those users.
+
+12
+00:01:21.703 --> 00:01:29.303
+Diagnostics, traces, crash dumps, screenshots, and sample requests should be treated as possible exposure paths.
+
+13
+00:01:29.303 --> 00:01:35.207
+A key can leave the intended trust boundary through ordinary troubleshooting artifacts.
+
+14
+00:01:35.207 --> 00:01:40.229
+That is why redaction and support workflows need review before production.
+
+15
+00:01:40.229 --> 00:01:46.268
+Do not log full request headers, URLs, query strings, or bodies without redaction review.
+
+16
+00:01:46.268 --> 00:01:53.190
+Logs should help operators understand behavior while avoiding full credentials and sensitive payloads.
+
+17
+00:01:53.190 --> 00:02:00.858
+The safest log design records identifiers, outcomes, and correlation context rather than raw credential material.

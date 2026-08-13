@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.436
+Raw API keys should be treated like passwords or bearer credentials.
+
+2
+00:00:04.436 --> 00:00:10.306
+If someone can read the raw key, they may be able to use it wherever that key is accepted.
+
+3
+00:00:10.306 --> 00:00:19.830
+That is why keys do not belong in source code, ordinary appsettings files, public configuration, documentation, sample projects, or support notes.
+
+4
+00:00:19.830 --> 00:00:23.940
+Development secret storage is not production secret management.
+
+5
+00:00:23.940 --> 00:00:38.551
+Developer tools can keep local work from becoming hardcoded configuration, but production secrets should use environment-appropriate secret stores, managed platforms, deployment identity, or controlled configuration systems.
+
+6
+00:00:38.551 --> 00:00:45.009
+Production storage needs access control, rotation support, auditability, and operational ownership.
+
+7
+00:00:45.009 --> 00:00:53.946
+For inbound client API keys, prefer storing a non-reversible verifier such as a strong hash, plus a separate lookup identifier or prefix.
+
+8
+00:00:53.946 --> 00:01:03.470
+This lets the system identify a candidate key record and validate the presented value without retaining every full raw secret in ordinary storage.
+
+9
+00:01:03.470 --> 00:01:10.384
+A key prefix or identifier is useful for lookup, display, support, and rotation, but it is not the secret.
+
+10
+00:01:10.384 --> 00:01:16.907
+Prefixes should help humans and systems find the right record without granting access by themselves.
+
+11
+00:01:16.907 --> 00:01:23.887
+Support tooling should display enough to identify the key record, not enough to reconstruct or use the key.
+
+12
+00:01:23.887 --> 00:01:27.344
+Generated keys need enough entropy for their purpose.
+
+13
+00:01:27.344 --> 00:01:40.651
+The generation process should be owned and consistent, and keys should be distinguishable from ordinary text so teams can recognize their type, environment, or issuer without exposing the secret material.
+
+14
+00:01:40.651 --> 00:01:45.087
+Validation behavior should avoid unnecessary information disclosure.
+
+15
+00:01:45.087 --> 00:01:54.024
+Candidate keys should be compared carefully, failures should be consistent, and logs should record safe identifiers rather than raw keys.
+
+16
+00:01:54.024 --> 00:01:58.916
+The user-facing response should not reveal which part of validation failed.
+
+17
+00:01:58.916 --> 00:02:01.264
+Plan for multi-instance deployments.
+
+18
+00:02:01.264 --> 00:02:11.962
+Validation data, caches, revocation state, and rotation windows need to behave consistently across application instances, regions, gateways, and background workers.
+
+19
+00:02:11.962 --> 00:02:19.138
+A key that is revoked in one place should not remain active elsewhere because state was cached without a plan.

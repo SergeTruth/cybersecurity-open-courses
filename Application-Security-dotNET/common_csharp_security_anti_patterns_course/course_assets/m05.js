@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Output, Serialization, and Injection Mistakes",
+  "graphicAlt": "Bullet summary graphic for Output, Serialization, and Injection Mistakes.",
+  "narration": "Output handling is a security boundary, not only presentation logic. Data that was harmless in one context can become unsafe in another context if it is placed into HTML, JavaScript, JSON, XML, CSV, templates, emails, logs, reports, or error pages without the right shaping and encoding.\n\nRazor and serializers provide helpful defaults, but unsafe contexts still require review. Raw HTML rendering, direct insertion into JavaScript, unsafe attribute construction, manually built JSON, manually built XML, CSV exports, document templates, and custom error pages can all create risk when untrusted data or sensitive internal fields are inserted without a clear rule.\n\nValidation does not replace output encoding. A value can be valid for storage and still need encoding for the output context. Output encoding does not replace authorization either. A value that is correctly encoded may still be data the caller should not receive.\n\nDomain models should not automatically become request or response contracts. Domain objects often contain internal flags, audit notes, administrative fields, tenant identifiers, navigation properties, secrets, and implementation details. Returning them directly can expose fields that were never intended for a caller or client.\n\nDTOs, response models, and view models help shape output intentionally. They let the application choose which fields are exposed, rename values for the contract, hide internal details, and avoid accidental serialization of related objects. They also make review easier because the boundary is visible.\n\nSerialization settings deserve review when sensitive data is involved. Polymorphic behavior, ignored fields, reference handling, custom converters, naming policies, and default value handling can change what enters or leaves the application. Treat output shape as part of the design, not a passive side effect of object structure.",
+  "narrationPoints": [
+    "Output handling is a security boundary, not only presentation logic.",
+    "Razor and serializers provide helpful defaults, but unsafe contexts still require review.",
+    "A value can be valid for storage and still need encoding for the output context.",
+    "DTOs, response models, and view models help shape output intentionally.",
+    "Treat output shape as part of the design, not a passive side effect of object structure."
+  ]
+};

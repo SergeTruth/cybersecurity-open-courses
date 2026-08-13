@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Review, Testing, Dependencies, and Legacy Code' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Assert exact HTML text-context encoding",
+      "language": "csharp",
+      "blurb": "The regression recalculates output with the platform HtmlEncoder, rejects nulls and oversized fixtures, and compares ordinally. It catches raw-output regressions for quotes, angle brackets, ampersands, and future representative Unicode cases.",
+      "code": "using System.Text.Encodings.Web;\n\npublic static class HtmlTextEncodingContract\n{\n    public static void AssertEncoded(string input, string rendered)\n    {\n        ArgumentNullException.ThrowIfNull(input);\n        ArgumentNullException.ThrowIfNull(rendered);\n        if (input.Length > 4_000 || rendered.Length > 24_000)\n            throw new ArgumentException(\"Encoding fixture size rejected.\");\n        var expected = HtmlEncoder.Default.Encode(input);\n        if (!string.Equals(expected, rendered, StringComparison.Ordinal))\n            throw new InvalidOperationException(\"HTML text encoding contract failed.\");\n    }\n}\n"
+    },
+    {
+      "title": "Inventory legacy browser sinks for bounded remediation",
+      "language": "csharp",
+      "blurb": "The plan owns a bounded, duplicate-free list of validated source locations and closed sink categories, orders it deterministically, and records no user content. Review can then replace Raw, innerHTML, and script-concatenation sites deliberately.",
+      "code": "using System.Collections.ObjectModel;\n\npublic enum LegacyBrowserSink { RazorRaw, InnerHtml, ScriptConcatenation }\npublic sealed record LegacySinkFinding(string RelativeFile, int Line, LegacyBrowserSink Sink);\n\npublic sealed class BrowserSinkRemediationPlan\n{\n    private readonly ReadOnlyCollection<LegacySinkFinding> _findings;\n\n    private BrowserSinkRemediationPlan(LegacySinkFinding[] findings) =>\n        _findings = Array.AsReadOnly(findings);\n\n    public IReadOnlyList<LegacySinkFinding> Findings => _findings;\n\n    public static BrowserSinkRemediationPlan Create(IEnumerable<LegacySinkFinding> findings)\n    {\n        ArgumentNullException.ThrowIfNull(findings);\n        var snapshot = findings.Take(101).ToArray();\n        if (snapshot.Length is < 1 or > 100 || snapshot.Any(finding =>\n                finding is null || !IsRelativeSource(finding.RelativeFile) ||\n                finding.Line is < 1 or > 1_000_000 || !Enum.IsDefined(finding.Sink)) ||\n            snapshot.Select(finding => (finding.RelativeFile, finding.Line))\n                .Distinct().Count() != snapshot.Length)\n        {\n            throw new ArgumentException(\"Browser sink inventory rejected.\", nameof(findings));\n        }\n        Array.Sort(snapshot, (left, right) =>\n        {\n            var file = string.Compare(left.RelativeFile, right.RelativeFile, StringComparison.Ordinal);\n            return file != 0 ? file : left.Line.CompareTo(right.Line);\n        });\n        return new BrowserSinkRemediationPlan(snapshot);\n    }\n\n    private static bool IsRelativeSource(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 160 && !Path.IsPathRooted(value) &&\n        value.IndexOf('\\\\', StringComparison.Ordinal) < 0 &&\n        value.Split('/').All(segment => segment.Length > 0 && segment is not \".\" and not \"..\" &&\n            segment.All(character => char.IsAsciiLetterOrDigit(character) ||\n                character is '-' or '_' or '.'));\n}\n"
+    }
+  ]
+};

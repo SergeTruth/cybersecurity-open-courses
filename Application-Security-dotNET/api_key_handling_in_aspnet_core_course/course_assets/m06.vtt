@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.873
+A valid API key should not automatically mean full access.
+
+2
+00:00:03.873 --> 00:00:08.749
+Authentication establishes that the request presented a known credential.
+
+3
+00:00:08.749 --> 00:00:12.756
+Authorization decides what that credential is allowed to do.
+
+4
+00:00:12.756 --> 00:00:16.362
+Keeping those decisions separate is essential for ASP.
+
+5
+00:00:16.362 --> 00:00:22.172
+NET Core APIs that support multiple clients, tenants, environments, or operation types.
+
+6
+00:00:22.172 --> 00:00:28.183
+API keys should be scoped to a purpose, environment, tenant, client, or allowed operation.
+
+7
+00:00:28.183 --> 00:00:33.125
+A reporting integration may need read access to a narrow set of endpoints.
+
+8
+00:00:33.125 --> 00:00:37.933
+A deployment automation key may need a specific administrative function.
+
+9
+00:00:37.933 --> 00:00:40.805
+A partner key may need one tenant boundary.
+
+10
+00:00:40.805 --> 00:00:44.211
+Broad keys should be rare, approved, and monitored.
+
+11
+00:00:44.211 --> 00:00:50.155
+Server-side authorization must enforce endpoint, method, resource, and tenant boundaries.
+
+12
+00:00:50.155 --> 00:00:57.033
+A client-supplied tenant identifier should be checked against trusted key metadata or server-side data.
+
+13
+00:00:57.033 --> 00:01:04.513
+The caller should not be able to choose a tenant or privilege boundary merely by sending a value in the request.
+
+14
+00:01:04.513 --> 00:01:12.126
+Key metadata can help decide allowed operations, rate limits, data boundaries, expiration, owner, and review path.
+
+15
+00:01:12.126 --> 00:01:21.409
+That metadata should be managed as part of the key lifecycle and used consistently by authorization logic, monitoring, and support tooling.
+
+16
+00:01:21.409 --> 00:01:29.490
+Administrative, export, payment, configuration, destructive, and high-cost operations need explicit authorization review.
+
+17
+00:01:29.490 --> 00:01:35.434
+These operations can have broad business impact, create cost, or change production state.
+
+18
+00:01:35.434 --> 00:01:39.508
+They should not be covered only by a generic valid-key check.
+
+19
+00:01:39.508 --> 00:01:45.118
+API keys may identify an application or integration rather than an individual human.
+
+20
+00:01:45.118 --> 00:01:48.123
+That affects accountability and audit design.
+
+21
+00:01:48.123 --> 00:01:58.741
+Logs and records should make it clear which key, owner, client, tenant, or integration performed an action and what human approval path applies where required.

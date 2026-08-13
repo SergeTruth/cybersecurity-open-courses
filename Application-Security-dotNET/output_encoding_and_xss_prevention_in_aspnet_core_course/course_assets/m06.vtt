@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.472
+API output may be safe as data and still become unsafe when a browser client renders it incorrectly.
+
+2
+00:00:06.472 --> 00:00:07.766
+An ASP.
+
+3
+00:00:07.766 --> 00:00:14.756
+NET Core API can return a display name, comment, product description, or support message as structured JSON.
+
+4
+00:00:14.756 --> 00:00:24.722
+The risk appears when a browser client treats that string as markup or inserts it into a context that interprets it as browser structure rather than data.
+
+5
+00:00:24.722 --> 00:00:27.570
+Keep data and markup responsibilities clear.
+
+6
+00:00:27.570 --> 00:00:32.230
+The server should return well-structured data with clear field meanings.
+
+7
+00:00:32.230 --> 00:00:41.290
+The client should render that data using safe DOM APIs, safe framework binding patterns, and components that keep text separate from markup.
+
+8
+00:00:41.290 --> 00:00:49.315
+When the server sends pre-rendered fragments or the client turns strings into markup, the boundary becomes harder to review.
+
+9
+00:00:49.315 --> 00:00:54.299
+Avoid client-side shortcuts that turn untrusted strings into rendered markup.
+
+10
+00:00:54.299 --> 00:01:02.842
+This includes convenience helpers, wrapper components, legacy utilities, or template patterns that treat content as already trusted.
+
+11
+00:01:02.842 --> 00:01:11.902
+If a feature truly needs rich content, use a reviewed rich text path rather than scattering one-off rendering decisions across the frontend.
+
+12
+00:01:11.902 --> 00:01:18.698
+Server-rendered pages, single-page applications, and hybrid applications have different rendering models.
+
+13
+00:01:18.698 --> 00:01:25.687
+A value may be rendered once by Razor, later hydrated into client state, then displayed again by JavaScript.
+
+14
+00:01:25.687 --> 00:01:28.276
+Each display point needs a safe pattern.
+
+15
+00:01:28.276 --> 00:01:34.165
+It is not enough to say the server encoded it once if the client later changes the context.
+
+16
+00:01:34.165 --> 00:01:39.149
+Review templating boundaries where API values become visible browser content.
+
+17
+00:01:39.149 --> 00:01:48.468
+Look at table components, notification systems, markdown display, comment views, profile fields, search results, error messages, and CMS blocks.
+
+18
+00:01:48.468 --> 00:01:55.716
+These are common places where data is meant to be visible and where teams may accidentally mix data with markup.
+
+19
+00:01:55.716 --> 00:01:59.470
+API and frontend teams should share rendering assumptions.
+
+20
+00:01:59.470 --> 00:02:13.967
+API documentation should identify which fields are plain text, which fields are identifiers, which fields are URLs, which fields may contain approved rich content, and which fields are never intended to be rendered directly.
+
+21
+00:02:13.967 --> 00:02:17.074
+Clear contracts reduce guesswork in client code.

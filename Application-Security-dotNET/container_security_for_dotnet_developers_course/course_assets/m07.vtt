@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.775
+Many production . NET containers run under an orchestrator such as Kubernetes, Azure Container Apps, Docker Swarm, or another platform.
+
+2
+00:00:08.775 --> 00:00:16.416
+Even when platform teams own the cluster, developers should understand the controls that shape application behavior.
+
+3
+00:00:16.416 --> 00:00:19.442
+The app and the platform settings need to agree.
+
+4
+00:00:19.442 --> 00:00:27.309
+Security context settings can define user identity, privilege behavior, filesystem settings, and capability handling.
+
+5
+00:00:27.309 --> 00:00:41.607
+Where applicable, settings such as runAsNonRoot, runAsUser, allowPrivilegeEscalation, capabilities, privileged mode, and readOnlyRootFilesystem should be reviewed against what the application actually requires.
+
+6
+00:00:41.607 --> 00:00:47.507
+Resource requests and limits protect platform stability and application predictability.
+
+7
+00:00:47.507 --> 00:00:50.079
+Requests help the scheduler place work.
+
+8
+00:00:50.079 --> 00:00:55.526
+Limits help prevent one workload from consuming capacity that other workloads need.
+
+9
+00:00:55.526 --> 00:01:04.225
+. NET applications should be tested under realistic memory and CPU constraints so failures are understandable rather than surprising.
+
+10
+00:01:04.225 --> 00:01:14.060
+Service accounts, RBAC, namespaces, network policies, secrets, config maps, admission controls, and image pull policies all affect runtime security.
+
+11
+00:01:14.060 --> 00:01:19.506
+A workload should receive only the platform permissions and network access it needs.
+
+12
+00:01:19.506 --> 00:01:25.936
+Configuration and secret objects should have clear ownership, review, and rotation expectations.
+
+13
+00:01:25.936 --> 00:01:41.671
+Probes need careful design. Liveness and readiness probes should help the platform route traffic and recover unhealthy instances, but they should not hide dependency failures, trigger unnecessary restart loops, or expose detailed internals.
+
+14
+00:01:41.671 --> 00:01:49.614
+Applications should behave predictably under restricted pod settings and should not require broad host access by default.

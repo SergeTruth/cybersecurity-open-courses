@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.670
+Partitioning lets different users, tenants, clients, routes, or other groups have separate counters.
+
+2
+00:00:06.670 --> 00:00:12.806
+Without partitioning, one busy client can consume a shared limit and affect unrelated users.
+
+3
+00:00:12.806 --> 00:00:21.076
+With partitioning, a policy can be fairer because it tracks request flow against a meaningful identity or workload category.
+
+4
+00:00:21.076 --> 00:00:30.347
+Possible partition keys include authenticated user, tenant ID, API key, client application, route group, host, or a network-derived signal.
+
+5
+00:00:30.347 --> 00:00:31.881
+Each key has tradeoffs.
+
+6
+00:00:31.881 --> 00:00:35.149
+A user key may work well for signed-in workflows.
+
+7
+00:00:35.149 --> 00:00:40.018
+A tenant key may protect shared backend capacity in multi-tenant systems.
+
+8
+00:00:40.018 --> 00:00:44.419
+A route key may separate expensive endpoints from cheap endpoints.
+
+9
+00:00:44.419 --> 00:00:48.488
+An API key may represent a client application or integration.
+
+10
+00:00:48.488 --> 00:00:53.690
+Partition keys should be stable, meaningful, privacy-aware, and hard to spoof.
+
+11
+00:00:53.690 --> 00:00:58.359
+If the key changes frequently, the limit may not represent real usage.
+
+12
+00:00:58.359 --> 00:01:03.228
+If the key is too broad, unrelated callers may interfere with each other.
+
+13
+00:01:03.228 --> 00:01:09.230
+If the key contains sensitive data, logs and metrics may expose information unnecessarily.
+
+14
+00:01:09.230 --> 00:01:14.232
+If the key is easy to forge, the policy may not protect the intended group.
+
+15
+00:01:14.232 --> 00:01:17.634
+A single global counter can punish unrelated users.
+
+16
+00:01:17.634 --> 00:01:25.904
+For example, one tenant's high-volume reporting activity should not necessarily consume all capacity for every other tenant.
+
+17
+00:01:25.904 --> 00:01:36.109
+Fairness is especially important when backend resources are shared, such as databases, queues, search indexes, storage accounts, or third-party services.
+
+18
+00:01:36.109 --> 00:01:41.778
+Unauthenticated requests require special care because identity may be weak or absent.
+
+19
+00:01:41.778 --> 00:01:54.784
+Public endpoints may rely on route, host, client application, network-derived signals, or other context, but those keys should be treated as lower confidence than a strong authenticated identity.
+
+20
+00:01:54.784 --> 00:02:01.453
+The policy should reflect that uncertainty and avoid storing unnecessary personal or sensitive data.
+
+21
+00:02:01.453 --> 00:02:06.522
+The practical design question is, who or what should be protected from whom.
+
+22
+00:02:06.522 --> 00:02:09.457
+Good partitioning makes that answer visible.
+
+23
+00:02:09.457 --> 00:02:18.927
+It turns rate limiting from one global throttle into a fairness and resource-protection policy that matches the application's real boundaries.

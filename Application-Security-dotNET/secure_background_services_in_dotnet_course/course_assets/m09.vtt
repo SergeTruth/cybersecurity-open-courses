@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.151
+Structured logging makes background services understandable.
+
+2
+00:00:04.151 --> 00:00:18.401
+Useful fields include ExampleJobId, ExampleWorkerName, message ID, ExampleCorrelationId, ExampleTenantId where safe, operation name, state transition, attempt count, duration, outcome, and failure category.
+
+3
+00:00:18.401 --> 00:00:27.048
+These fields help operators follow work across queues, databases, services, and logs without recording raw sensitive content.
+
+4
+00:00:27.048 --> 00:00:35.349
+Workers should avoid logging secrets, tokens, message bodies, file contents, personal data, and sensitive business data.
+
+5
+00:00:35.349 --> 00:00:48.354
+Background services often process large inputs and sensitive records, so broad object logging can create a second copy of the data in log systems, dashboards, exports, or support channels.
+
+6
+00:00:48.354 --> 00:00:53.542
+Prefer stable identifiers, safe categories, counts, and correlation values.
+
+7
+00:00:53.542 --> 00:01:09.314
+Monitoring should cover health checks, readiness signals, liveness signals, queue depth, processing rate, failure rate, retry counts, dead-letter counts, oldest message age, active job duration, and downstream dependency health.
+
+8
+00:01:09.314 --> 00:01:18.031
+These signals tell teams whether the worker is alive, whether it is keeping up, and whether failures are isolated or systemic.
+
+9
+00:01:18.031 --> 00:01:31.381
+Audit events are important for high-impact jobs, administrative actions, exports, sensitive data processing, permission changes, cross-tenant operations, repair tasks, and manual interventions.
+
+10
+00:01:31.381 --> 00:01:45.978
+An audit record should capture who or what initiated the work, which object or tenant was affected, what decision was made, when it happened, and what the outcome was, without copying unnecessary sensitive data.
+
+11
+00:01:45.978 --> 00:01:51.512
+Alerting should focus on meaningful patterns rather than every isolated failure.
+
+12
+00:01:51.512 --> 00:01:54.832
+A single transient error may not require a page.
+
+13
+00:01:54.832 --> 00:02:07.076
+A growing queue, repeated validation failures, rising dead-letter counts, unexpected cross-tenant scope, stuck jobs, or repeated failures after deployment may deserve attention.
+
+14
+00:02:07.076 --> 00:02:10.189
+Alert routing should include clear ownership.
+
+15
+00:02:10.189 --> 00:02:17.176
+Incident response readiness depends on runbooks, dashboards, operational ownership, and review loops.
+
+16
+00:02:17.176 --> 00:02:29.005
+Teams should know how to pause a worker, drain a queue, inspect failed jobs safely, preserve evidence, retry approved work, roll back a deployment, and communicate impact.
+
+17
+00:02:29.005 --> 00:02:37.929
+After incidents and false positives, update logging, metrics, alerts, and documentation so the next response is faster and safer.

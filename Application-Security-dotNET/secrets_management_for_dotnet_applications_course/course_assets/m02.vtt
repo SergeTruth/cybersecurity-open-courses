@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.841
+The first step in secrets management is knowing what counts as a secret.
+
+2
+00:00:04.841 --> 00:00:06.185
+Common .
+
+3
+00:00:06.185 --> 00:00:21.850
+NET secret categories include connection strings, database credentials, API keys, certificates, private keys, signing keys, encryption keys, access tokens, refresh tokens, webhook secrets, storage credentials, and service identities.
+
+4
+00:00:21.850 --> 00:00:25.548
+A value does not need to look dramatic to be important.
+
+5
+00:00:25.548 --> 00:00:29.515
+Some values are sensitive even when they are not passwords.
+
+6
+00:00:29.515 --> 00:00:35.767
+A connection string may reveal internal names, trust assumptions, or a managed identity path.
+
+7
+00:00:35.767 --> 00:00:39.599
+A certificate name may point to important trust material.
+
+8
+00:00:39.599 --> 00:00:44.978
+A tenant identifier such as ExampleTenantId may affect routing or authorization.
+
+9
+00:00:44.978 --> 00:00:50.827
+A feature mode may change security behavior even if it does not grant access by itself.
+
+10
+00:00:50.827 --> 00:00:54.256
+Secret references are different from secret values.
+
+11
+00:00:54.256 --> 00:01:03.198
+A configuration key that says to use ExampleCertificateName or ExampleStorageAccount may be safe to document when it is only a label.
+
+12
+00:01:03.198 --> 00:01:09.652
+The actual certificate, signing key, storage credential, or token belongs in a protected system.
+
+13
+00:01:09.652 --> 00:01:15.568
+Mixing references and values makes reviews harder and accidental disclosure more likely.
+
+14
+00:01:15.568 --> 00:01:27.401
+Each secret should have inventory data: owning team, application, environment, purpose, allowed readers, rotation expectations, expiration if applicable, and emergency contact.
+
+15
+00:01:27.401 --> 00:01:35.065
+Without ownership, secrets become permanent background dependencies that nobody feels responsible for maintaining.
+
+16
+00:01:35.065 --> 00:01:46.428
+Unmanaged secrets often hide in old appsettings files, scripts, documents, tickets, screenshots, pasted chat messages, sample projects, and forgotten test configuration.
+
+17
+00:01:46.428 --> 00:01:52.008
+These locations are not designed for lifecycle control, access review, or rotation.
+
+18
+00:01:52.008 --> 00:01:57.588
+Cleanup should include collaboration tools and documentation, not only source code.
+
+19
+00:01:57.588 --> 00:02:01.689
+Sensitive configuration should be reviewed alongside secrets.
+
+20
+00:02:01.689 --> 00:02:14.060
+A setting that disables a security check, points to a test integration, changes token validation behavior, or relaxes diagnostics can create risk even if it is not itself a credential.
+
+21
+00:02:14.060 --> 00:02:19.976
+The inventory should capture both access-granting secrets and high-impact configuration.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:15.197
+Secrets commonly leak through places that were intended to help troubleshooting: logs, exceptions, stack traces, telemetry, traces, health checks, crash dumps, screenshots, support bundles, debug pages, and diagnostic endpoints.
+
+2
+00:00:15.197 --> 00:00:21.396
+These channels often have broader access and longer retention than the original secret store.
+
+3
+00:00:21.396 --> 00:00:24.795
+Redaction and filtering reduce accidental exposure.
+
+4
+00:00:24.795 --> 00:00:35.526
+Applications should avoid logging request headers, connection strings, tokens, keys, certificates, provider-specific credentials, and full configuration objects.
+
+5
+00:00:35.526 --> 00:00:44.991
+Structured logging can capture safe categories, source names, validation outcomes, and correlation identifiers without printing secret values.
+
+6
+00:00:44.991 --> 00:00:51.589
+Full configuration dumps are risky because sensitive values and ordinary settings sit side by side.
+
+7
+00:00:51.589 --> 00:00:59.188
+Even if a dump is meant for authorized operators, it can be copied into tickets, chat, email, or support packages.
+
+8
+00:00:59.188 --> 00:01:05.653
+Diagnostics should be designed to answer operational questions without revealing access material.
+
+9
+00:01:05.653 --> 00:01:09.186
+Development and production diagnostics should differ.
+
+10
+00:01:09.186 --> 00:01:13.918
+Developers may need more detail locally, using development-only values.
+
+11
+00:01:13.918 --> 00:01:19.983
+Production should provide safe user messages, protected operator logs, and correlation IDs.
+
+12
+00:01:19.983 --> 00:01:25.649
+A development diagnostic feature should not become a production endpoint by accident.
+
+13
+00:01:25.649 --> 00:01:29.181
+Support and troubleshooting workflows deserve review.
+
+14
+00:01:29.181 --> 00:01:36.713
+Screen sharing, screenshots, exported logs, support bundles, and incident notes can all capture sensitive values.
+
+15
+00:01:36.713 --> 00:01:45.045
+Teams should define what may be collected, how it is redacted, where it is stored, who can access it, and when it is deleted.
+
+16
+00:01:45.045 --> 00:01:47.911
+Exposure prevention is not only about code.
+
+17
+00:01:47.911 --> 00:01:57.642
+It is about habits, tooling, documentation, and operational guardrails that keep secrets from appearing in places where they cannot be controlled.

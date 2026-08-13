@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.423
+Disabling certificate validation is a dangerous anti-pattern, even when it begins as a local testing shortcut.
+
+2
+00:00:07.423 --> 00:00:14.170
+Certificate validation is part of how the application confirms service identity and transport trust.
+
+3
+00:00:14.170 --> 00:00:18.084
+Removing that check changes the meaning of the connection.
+
+4
+00:00:18.084 --> 00:00:29.960
+Temporary trust-all callbacks, broad certificate exceptions, or environment flags can drift into production when they are copied, forgotten, or treated as harmless scaffolding.
+
+5
+00:00:29.960 --> 00:00:36.506
+Development trust decisions should be scoped, documented, and separated from production behavior.
+
+6
+00:00:36.506 --> 00:00:40.015
+Outbound HTTP clients need deliberate configuration.
+
+7
+00:00:40.015 --> 00:00:51.756
+Lifetimes, timeouts, cancellation, retry behavior, base addresses, default headers, credentials, proxy settings, and logging rules all affect reliability and confidentiality.
+
+8
+00:00:51.756 --> 00:00:56.884
+External calls are part of the application boundary, not plumbing to ignore.
+
+9
+00:00:56.884 --> 00:01:04.037
+Creating and disposing HttpClient instances casually can create connection and socket-management problems.
+
+10
+00:01:04.037 --> 00:01:15.441
+Reusing clients incorrectly can also cause problems, such as leaking headers, cookies, bearer values, tenant context, or base address assumptions across unrelated calls.
+
+11
+00:01:15.441 --> 00:01:21.244
+The safer habit is to use a reviewed client factory or service-specific client design.
+
+12
+00:01:21.244 --> 00:01:26.103
+Retries and fan-out should not amplify load against downstream services.
+
+13
+00:01:26.103 --> 00:01:32.918
+A retry policy that looks reasonable in isolation can become harmful when many requests fail at once.
+
+14
+00:01:32.918 --> 00:01:41.150
+Bound concurrency, add cancellation, apply timeouts, and make retry behavior appropriate for the dependency and operation.
+
+15
+00:01:41.150 --> 00:01:52.217
+External service errors should be handled predictably without exposing secrets, tokens, URLs with credentials, raw sensitive payloads, or internal provider details.
+
+16
+00:01:52.217 --> 00:02:01.529
+Logs should capture safe context: dependency name, operation category, status category, correlation ID, latency, retry count, and outcome.

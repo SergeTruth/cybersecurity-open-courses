@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.195
+Authentication answers the question, who is making this request.
+
+2
+00:00:04.195 --> 00:00:05.506
+In ASP.
+
+3
+00:00:05.506 --> 00:00:09.963
+NET Core, authentication usually happens through configured schemes.
+
+4
+00:00:09.963 --> 00:00:12.454
+A browser application may use cookies.
+
+5
+00:00:12.454 --> 00:00:14.355
+An API may use bearer tokens.
+
+6
+00:00:14.355 --> 00:00:18.222
+An enterprise application may rely on an external provider.
+
+7
+00:00:18.222 --> 00:00:26.546
+A single application can support more than one scheme, but the team should understand which endpoints use which scheme and why.
+
+8
+00:00:26.546 --> 00:00:38.017
+Cookie authentication is common for server-rendered browser applications because the browser can send the authentication cookie automatically with requests to the application.
+
+9
+00:00:38.017 --> 00:00:43.785
+Bearer tokens are common for APIs because clients can present a token with each request.
+
+10
+00:00:43.785 --> 00:00:52.044
+External providers can centralize identity, federation, multifactor enrollment, account lifecycle, or organizational policies.
+
+11
+00:00:52.044 --> 00:00:55.321
+Each model has different operational expectations.
+
+12
+00:00:55.321 --> 00:00:56.632
+ASP.
+
+13
+00:00:56.632 --> 00:01:00.761
+NET Core Identity is a framework option for account management.
+
+14
+00:01:00.761 --> 00:01:08.889
+It can support users, password workflows, claims, roles, sign-in, token generation, account confirmation, and related flows.
+
+15
+00:01:08.889 --> 00:01:21.474
+It is useful when the application owns accounts directly, but teams still need to configure it carefully, review lifecycle paths, and decide how it fits with organizational identity practices.
+
+16
+00:01:21.474 --> 00:01:23.834
+Authentication is not authorization.
+
+17
+00:01:23.834 --> 00:01:29.930
+A signed-in user is identified, but identification does not answer what that user may access.
+
+18
+00:01:29.930 --> 00:01:39.303
+The application still needs access rules for endpoints, records, tenant data, administrative workflows, exports, and state-changing operations.
+
+19
+00:01:39.303 --> 00:01:44.481
+Treating login as blanket permission is one of the most common design mistakes.
+
+20
+00:01:44.481 --> 00:01:48.545
+Engineering mistakes often come from trusting state too early.
+
+21
+00:01:48.545 --> 00:01:52.674
+A page that shows a login form does not protect every endpoint.
+
+22
+00:01:52.674 --> 00:01:57.131
+A local development identity does not represent production identity.
+
+23
+00:01:57.131 --> 00:02:00.736
+A username in a request value is not proof of identity.
+
+24
+00:02:00.736 --> 00:02:04.735
+A remembered session may not match current risk expectations.
+
+25
+00:02:04.735 --> 00:02:11.748
+Authentication state should come from the configured authentication system, not from informal request data.
+
+26
+00:02:11.748 --> 00:02:15.419
+Logout and session behavior also need production review.
+
+27
+00:02:15.419 --> 00:02:29.577
+Teams should understand cookie lifetime, sliding expiration, revocation expectations, sign-out behavior, external provider logout where relevant, and what happens when roles or claims change during an active session.
+
+28
+00:02:29.577 --> 00:02:34.493
+The user's identity lifecycle continues after the first successful sign-in.

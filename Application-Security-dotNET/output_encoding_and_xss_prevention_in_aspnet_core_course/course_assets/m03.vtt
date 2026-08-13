@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.946
+Razor's default behavior is one of the most important safety features in ASP.
+
+2
+00:00:04.946 --> 00:00:06.231
+NET Core views.
+
+3
+00:00:06.231 --> 00:00:13.233
+When normal string values are rendered in standard Razor output, the framework encodes them for HTML display.
+
+4
+00:00:13.233 --> 00:00:20.813
+That means a display name, comment, status message, or product label is treated as text rather than browser structure.
+
+5
+00:00:20.813 --> 00:00:28.971
+This default is valuable because it protects ordinary display code without requiring every developer to remember a manual step.
+
+6
+00:00:28.971 --> 00:00:34.432
+Framework defaults are strongest when teams stay inside the intended rendering model.
+
+7
+00:00:34.432 --> 00:00:46.059
+Standard Razor expressions, tag helpers, view models, and framework-supported rendering patterns give the runtime enough information to handle values appropriately for common cases.
+
+8
+00:00:46.059 --> 00:00:52.290
+Problems usually appear when code steps outside that model without a clear reason or review path.
+
+9
+00:00:52.290 --> 00:00:54.281
+Escape hatches need discipline.
+
+10
+00:00:54.281 --> 00:01:07.129
+Raw output helpers, manually assembled markup, broad helper methods that return already-rendered content, and code that combines untrusted strings with browser structure can bypass normal protections.
+
+11
+00:01:07.129 --> 00:01:16.957
+Some applications have legitimate reasons to render trusted markup, but those cases should be narrow, documented, and tied to a reviewed source of trust.
+
+12
+00:01:16.957 --> 00:01:27.171
+Shared layouts, partial views, view components, tag helpers, and reusable display helpers can either preserve safety or weaken it across the whole application.
+
+13
+00:01:27.171 --> 00:01:31.796
+A small unsafe shortcut inside a shared component can affect many pages.
+
+14
+00:01:31.796 --> 00:01:38.670
+Conversely, a well-designed helper can make safe display easier and reduce repeated decisions across teams.
+
+15
+00:01:38.670 --> 00:01:41.560
+Trusted markup should be rare and controlled.
+
+16
+00:01:41.560 --> 00:01:55.436
+If the application accepts or stores content that is intended to contain markup, the team should know where that content comes from, what controls are applied, who can create or approve it, and where it is displayed.
+
+17
+00:01:55.436 --> 00:02:01.795
+Treat intentional markup rendering as a special capability, not as a casual formatting convenience.
+
+18
+00:02:01.795 --> 00:02:09.825
+A strong review habit is to search for places that bypass default encoding or construct markup outside normal Razor patterns.
+
+19
+00:02:09.825 --> 00:02:20.296
+Those locations should have a clear explanation, tests or review notes where appropriate, and an owner who understands the lifecycle of the content being rendered.

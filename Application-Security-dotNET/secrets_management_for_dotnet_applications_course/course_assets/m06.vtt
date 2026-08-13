@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.889
+Build and release pipelines often handle powerful secrets.
+
+2
+00:00:03.889 --> 00:00:17.031
+CI/CD variables, service connections, deployment credentials, signing material, package publishing credentials, storage access, and cloud identities can all influence what ships and where it runs.
+
+3
+00:00:17.031 --> 00:00:21.725
+Pipeline configuration is part of the application's security boundary.
+
+4
+00:00:21.725 --> 00:00:25.413
+Separate build-time and runtime secrets where possible.
+
+5
+00:00:25.413 --> 00:00:33.929
+A build may need access to package feeds or signing systems, while the running application may need database or storage access.
+
+6
+00:00:33.929 --> 00:00:42.579
+Keeping those responsibilities separate reduces the chance that an artifact, log, or test report carries runtime secrets forward.
+
+7
+00:00:42.579 --> 00:00:52.033
+Container images, image layers, build arguments, deployment manifests, generated files, and release bundles should not contain secret values.
+
+8
+00:00:52.033 --> 00:00:59.945
+Once a secret is baked into an artifact, it can be copied through registries, caches, backups, and developer machines.
+
+9
+00:00:59.945 --> 00:01:05.980
+Prefer runtime injection through approved secret mechanisms or workload identity patterns.
+
+10
+00:01:05.980 --> 00:01:10.942
+Pipeline variables and service connections need access control and review.
+
+11
+00:01:10.942 --> 00:01:17.983
+A pipeline identity should have only the rights required to build, test, deploy, or sign the application.
+
+12
+00:01:17.983 --> 00:01:26.230
+Production deployment credentials should not be available to every branch, every contributor, or every test job by default.
+
+13
+00:01:26.230 --> 00:01:32.131
+Container and orchestrator secrets are useful, but they still require lifecycle control.
+
+14
+00:01:32.131 --> 00:01:45.072
+Teams should understand who can read them, how they are mounted or exposed, how rotation works, what appears in logs, and whether application code or sidecars cache values longer than expected.
+
+15
+00:01:45.072 --> 00:01:49.632
+Production secret changes should require approval and communication.
+
+16
+00:01:49.632 --> 00:01:59.355
+A rotated ExampleApiKey or replaced ExampleCertificateName may require coordinated deployment, staged rollout, monitoring, and rollback planning.
+
+17
+00:01:59.355 --> 00:02:03.981
+Secret changes are operational changes, not just configuration edits.

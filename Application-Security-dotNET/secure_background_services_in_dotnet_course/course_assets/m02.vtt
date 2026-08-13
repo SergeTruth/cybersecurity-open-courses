@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.097
+NET hosted services, Worker Services, IHostedService, and BackgroundService provide a common way to run work outside the direct request path.
+
+2
+00:00:09.097 --> 00:00:15.548
+At a conceptual level, they give the application a startup phase, a running phase, and a stop phase.
+
+3
+00:00:15.548 --> 00:00:26.645
+Those phases matter for security because they determine when configuration is loaded, when dependencies are created, when work begins, and how gracefully the service stops.
+
+4
+00:00:26.645 --> 00:00:32.967
+Startup should validate required configuration and fail clearly when the worker cannot run safely.
+
+5
+00:00:32.967 --> 00:00:44.322
+Execution should be predictable: a queue consumer should process known message types, a timer should run on an understood interval, and a polling loop should have clear limits.
+
+6
+00:00:44.322 --> 00:00:53.612
+Shutdown should respect cancellation and avoid leaving files, records, messages, or external operations in ambiguous states when the host stops.
+
+7
+00:00:53.612 --> 00:00:58.902
+Dependency injection lifetimes deserve special attention in long-running services.
+
+8
+00:00:58.902 --> 00:01:07.160
+A singleton worker that accidentally holds onto scoped services can create stale state, concurrency problems, or resource leaks.
+
+9
+00:01:07.160 --> 00:01:13.031
+A worker that creates scopes intentionally for each unit of work is easier to reason about.
+
+10
+00:01:13.031 --> 00:01:22.450
+The lifecycle of database contexts, HTTP clients, repositories, validators, and transaction objects should match the unit of work being processed.
+
+11
+00:01:22.450 --> 00:01:28.257
+Scheduling, timers, polling loops, queue consumers, and recurring jobs all need ownership.
+
+12
+00:01:28.257 --> 00:01:38.966
+A timer that overlaps with itself, a loop that runs without delay, or a consumer that prefetches more work than it can safely process can create operational pressure.
+
+13
+00:01:38.966 --> 00:01:41.547
+These are not only performance concerns.
+
+14
+00:01:41.547 --> 00:01:47.224
+They affect reliability, auditing, and the ability to recover when something goes wrong.
+
+15
+00:01:47.224 --> 00:01:51.805
+Separating orchestration from business logic can improve reviewability.
+
+16
+00:01:51.805 --> 00:01:57.160
+The worker can own scheduling, message receipt, cancellation, retries, and logging.
+
+17
+00:01:57.160 --> 00:02:02.579
+A separate service can own validation, authorization checks, and business decisions.
+
+18
+00:02:02.579 --> 00:02:14.643
+That division makes it easier to test the business behavior without reproducing the whole hosted-service runtime and easier to review the worker mechanics without reading all domain code.
+
+19
+00:02:14.643 --> 00:02:18.385
+Avoid hidden global state and unclear execution ownership.
+
+20
+00:02:18.385 --> 00:02:29.933
+Workers should document what starts them, what input they consume, which identity they use, what data they touch, how concurrency is controlled, and who responds when alerts fire.
+
+21
+00:02:29.933 --> 00:02:36.836
+Before production deployment, reviewers should be able to explain the execution boundary in plain language.

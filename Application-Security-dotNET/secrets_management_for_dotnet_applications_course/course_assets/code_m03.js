@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Local Development and Developer Workflows' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Register local user secrets only in Development",
+      "language": "csharp",
+      "blurb": "The extension refuses non-development hosts, uses the framework user-secrets provider tied to one marker assembly, requires the configured store, and disables runtime reload so production deployments cannot silently inherit this developer workflow.",
+      "code": "using Microsoft.Extensions.Configuration;\nusing Microsoft.Extensions.Hosting;\n\npublic static class DeveloperSecretRegistration\n{\n    private const string UserSecretsId = \"orders-api-development-8f6400f1\";\n\n    public static IConfigurationBuilder AddReviewedDeveloperSecrets(\n        this IConfigurationBuilder builder,\n        IHostEnvironment environment)\n    {\n        ArgumentNullException.ThrowIfNull(builder);\n        ArgumentNullException.ThrowIfNull(environment);\n        if (!environment.IsDevelopment())\n            throw new InvalidOperationException(\"Developer secrets are disabled outside Development.\");\n\n        return builder.AddUserSecrets(UserSecretsId, reloadOnChange: false);\n    }\n}\n"
+    },
+    {
+      "title": "Reject secret-bearing files from a tracked repository set",
+      "language": "csharp",
+      "blurb": "The guard consumes a bounded set of canonical repository-relative paths, rejects controls and traversal, and fails on environment files, private keys, certificates with private material, and user-secret files before a commit is approved.",
+      "code": "public static class TrackedSecretFileGuard\n{\n    private const int MaximumTrackedPaths = 100_000;\n\n    public static void AssertSafe(IEnumerable<string> trackedPaths)\n    {\n        ArgumentNullException.ThrowIfNull(trackedPaths);\n        var count = 0;\n        foreach (var rawPath in trackedPaths)\n        {\n            count++;\n            if (count > MaximumTrackedPaths)\n                throw new InvalidOperationException(\"Tracked path evidence exceeded its limit.\");\n            if (string.IsNullOrEmpty(rawPath) || rawPath.Length > 512 ||\n                rawPath.Any(char.IsControl) || Path.IsPathRooted(rawPath))\n            {\n                throw new InvalidOperationException(\"Tracked path evidence rejected.\");\n            }\n\n            var path = rawPath.Replace('\\\\', '/');\n            var segments = path.Split('/', StringSplitOptions.None);\n            if (segments.Any(segment => segment.Length == 0 || segment is \".\" or \"..\"))\n                throw new InvalidOperationException(\"Tracked path evidence rejected.\");\n\n            var fileName = segments[^1];\n            var extension = Path.GetExtension(fileName);\n            if (fileName.Equals(\".env\", StringComparison.OrdinalIgnoreCase) ||\n                fileName.StartsWith(\".env.\", StringComparison.OrdinalIgnoreCase) ||\n                fileName.Equals(\"secrets.json\", StringComparison.OrdinalIgnoreCase) ||\n                extension.Equals(\".pem\", StringComparison.OrdinalIgnoreCase) ||\n                extension.Equals(\".key\", StringComparison.OrdinalIgnoreCase) ||\n                extension.Equals(\".pfx\", StringComparison.OrdinalIgnoreCase) ||\n                extension.Equals(\".p12\", StringComparison.OrdinalIgnoreCase))\n            {\n                throw new InvalidOperationException(\"Secret-bearing file is tracked.\");\n            }\n        }\n    }\n}\n"
+    }
+  ]
+};

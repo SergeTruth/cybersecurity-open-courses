@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.387
+Local development needs convenience, but it should not depend on production secrets.
+
+2
+00:00:05.387 --> 00:00:07.568
+Developers may need to run an ASP.
+
+3
+00:00:07.568 --> 00:00:13.789
+NET Core app, connect to a local database, exercise an integration, or debug a background worker.
+
+4
+00:00:13.789 --> 00:00:20.908
+Those workflows should use development-scoped credentials and safe sample values rather than production access.
+
+5
+00:00:20.908 --> 00:00:22.191
+.
+
+6
+00:00:22.191 --> 00:00:30.914
+NET user secrets are useful for local development, especially when a developer needs values outside source-controlled appsettings files.
+
+7
+00:00:30.914 --> 00:00:33.415
+They are not a production secret store.
+
+8
+00:00:33.415 --> 00:00:39.828
+They do not replace a managed secret system, access review, runtime identity, or deployment control.
+
+9
+00:00:39.828 --> 00:00:43.677
+Treat them as a developer convenience with a narrow purpose.
+
+10
+00:00:43.677 --> 00:00:48.615
+Local environment variables and local configuration files still require care.
+
+11
+00:00:48.615 --> 00:00:55.029
+They can leak through shell history, terminal screenshots, scripts, logs, or copied project folders.
+
+12
+00:00:55.029 --> 00:01:05.355
+Development values should be clearly separated from production values, and documentation should explain where developers are expected to put local-only settings.
+
+13
+00:01:05.355 --> 00:01:15.873
+Sample projects, demos, training code, and automated tests should use harmless placeholders such as ExampleApiKey, ExampleConnectionString, or ExampleWebhookSecret.
+
+14
+00:01:15.873 --> 00:01:20.042
+Real production secrets should never be required to run examples.
+
+15
+00:01:20.042 --> 00:01:25.108
+Test credentials should be scoped to test systems and easy to rotate or revoke.
+
+16
+00:01:25.108 --> 00:01:29.213
+Developer onboarding and offboarding are part of secret hygiene.
+
+17
+00:01:29.213 --> 00:01:36.140
+New developers should receive access through approved groups or systems, not through copied secrets in chat.
+
+18
+00:01:36.140 --> 00:01:44.798
+Departing developers should lose access through identity and group changes rather than forcing teams to hunt for scattered credentials.
+
+19
+00:01:44.798 --> 00:01:54.226
+Accidental commits can be reduced through ignore files, review habits, secret scanning, pre-commit checks, clear templates, and team documentation.
+
+20
+00:01:54.226 --> 00:01:59.421
+Prevention works best when the safe path is obvious and the unsafe path is noisy.

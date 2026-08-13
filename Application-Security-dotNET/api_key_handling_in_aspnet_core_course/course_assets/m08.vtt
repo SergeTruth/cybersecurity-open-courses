@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.439
+Logs should support security operations without exposing secrets.
+
+2
+00:00:04.439 --> 00:00:14.888
+A useful log record can identify the key record, owner, client, endpoint, result code, tenant, rate-limit decision, and correlation ID where appropriate.
+
+3
+00:00:14.888 --> 00:00:19.191
+It does not need the full key or raw sensitive request content.
+
+4
+00:00:19.191 --> 00:00:27.113
+Never log full API keys, provider tokens, secrets, raw sensitive payloads, or unredacted credential-bearing headers.
+
+5
+00:00:27.113 --> 00:00:36.469
+Redaction should be tested across application logs, reverse proxy logs, structured logging, tracing, error handling, and support tooling.
+
+6
+00:00:36.469 --> 00:00:40.977
+A key can appear in more places than the application team expects.
+
+7
+00:00:40.977 --> 00:00:55.728
+Monitoring should cover failed validation, denied access, excessive request rates, unusual endpoint usage, new geography, unexpected user agents, tenant anomalies, key use after rotation, and access after revocation.
+
+8
+00:00:55.728 --> 00:01:02.626
+These signals help operators distinguish normal integration behavior from activity that needs review.
+
+9
+00:01:02.626 --> 00:01:10.411
+Rate limits and quotas should align with key scope, client type, endpoint cost, tenant plan, and backend capacity.
+
+10
+00:01:10.411 --> 00:01:17.855
+A low-cost read endpoint, a high-cost report, and a workflow-changing operation may require different limits.
+
+11
+00:01:17.855 --> 00:01:23.251
+Limits should support reliability and fairness while preserving legitimate use.
+
+12
+00:01:23.251 --> 00:01:28.646
+Alerting should distinguish suspicious behavior from normal operational spikes.
+
+13
+00:01:28.646 --> 00:01:35.953
+A scheduled partner job, a batch import, or a deployment event may create predictable increases in traffic.
+
+14
+00:01:35.953 --> 00:01:44.900
+Good alert design combines rate, endpoint, owner, tenant, outcome, and historical context rather than reacting to raw volume alone.
+
+15
+00:01:44.900 --> 00:01:48.315
+The defensive goal is visibility without exposure.
+
+16
+00:01:48.315 --> 00:02:01.564
+Teams should be able to answer which key was used, what it tried to do, whether it was allowed, how often it happened, and who owns the integration without disclosing the secret material itself.

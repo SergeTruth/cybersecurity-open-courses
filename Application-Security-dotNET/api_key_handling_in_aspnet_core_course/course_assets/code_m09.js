@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Client-Side and Third-Party Integration Mistakes' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Return API-key metadata without returning key material",
+      "language": "csharp",
+      "blurb": "The mapper accepts a validated internal record, copies only bounded non-secret primitives, and returns an immutable DTO with no digest, raw key, or secret-bearing extension fields.",
+      "code": "using System.Security.Cryptography;\n\npublic sealed class InternalApiKeyRecord\n{\n    private readonly byte[] _digest;\n\n    private InternalApiKeyRecord(\n        string id,\n        string displayPrefix,\n        DateTimeOffset expiresAt,\n        bool revoked,\n        byte[] digest)\n    {\n        Id = id;\n        DisplayPrefix = displayPrefix;\n        ExpiresAt = expiresAt;\n        Revoked = revoked;\n        _digest = digest;\n    }\n\n    public string Id { get; }\n    public string DisplayPrefix { get; }\n    public DateTimeOffset ExpiresAt { get; }\n    public bool Revoked { get; }\n\n    public bool MatchesDigest(ReadOnlySpan<byte> digest) =>\n        digest.Length == _digest.Length &&\n        CryptographicOperations.FixedTimeEquals(digest, _digest);\n\n    public static InternalApiKeyRecord Create(\n        string id,\n        string displayPrefix,\n        DateTimeOffset expiresAt,\n        bool revoked,\n        ReadOnlySpan<byte> digest)\n    {\n        if (!ApiKeyRecordIdentifier.IsValid(id) ||\n            displayPrefix is not { Length: 12 } ||\n            displayPrefix.Any(character =>\n                !char.IsAsciiLetterOrDigit(character) && character is not '_') ||\n            digest.Length != 32)\n        {\n            throw new ArgumentException(\"API-key record rejected.\");\n        }\n        return new InternalApiKeyRecord(\n            id, displayPrefix, expiresAt, revoked, digest.ToArray());\n    }\n}\n\npublic sealed record ApiKeyView(\n    string Id,\n    string DisplayPrefix,\n    DateTimeOffset ExpiresAt,\n    bool Revoked);\n\npublic static class ApiKeyResponseMapper\n{\n    public static ApiKeyView ToView(InternalApiKeyRecord record)\n    {\n        ArgumentNullException.ThrowIfNull(record);\n        return new ApiKeyView(record.Id, record.DisplayPrefix, record.ExpiresAt, record.Revoked);\n    }\n}\n\ninternal static class ApiKeyRecordIdentifier\n{\n    public static bool IsValid(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    },
+    {
+      "title": "Follow redirects only within one approved HTTPS origin",
+      "language": "csharp",
+      "blurb": "The manual redirect policy rejects relative, credential-bearing, alternate-port, downgrade, and cross-host destinations so an API-key header is never forwarded to a different origin.",
+      "code": "public static class ApiKeyRedirectPolicy\n{\n    public static bool CanForwardCredential(Uri original, Uri destination)\n    {\n        if (original is null || destination is null) return false;\n        return IsHttpsOrigin(original) &&\n               IsHttpsOrigin(destination) &&\n               string.Equals(original.IdnHost, destination.IdnHost, StringComparison.OrdinalIgnoreCase) &&\n               original.Port == destination.Port;\n    }\n\n    private static bool IsHttpsOrigin(Uri value) =>\n        value is { IsAbsoluteUri: true } &&\n        value.Scheme == Uri.UriSchemeHttps &&\n        string.IsNullOrEmpty(value.UserInfo) &&\n        (value.IsDefaultPort || value.Port == 443);\n}\n"
+    }
+  ]
+};

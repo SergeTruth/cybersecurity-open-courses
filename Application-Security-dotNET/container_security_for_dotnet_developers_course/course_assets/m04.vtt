@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.673
+Containers should run with the least privilege needed for the application to operate.
+
+2
+00:00:05.673 --> 00:00:17.718
+Running as root inside the container can make mistakes more consequential, especially when writable paths, mounted volumes, broad capabilities, or host integrations are involved.
+
+3
+00:00:17.718 --> 00:00:21.370
+A non-root runtime user is a practical default for many .
+
+4
+00:00:21.370 --> 00:00:25.955
+NET services. Moving to non-root is not only a single Dockerfile line.
+
+5
+00:00:25.955 --> 00:00:35.824
+File ownership, working directories, temporary directories, upload locations, log behavior, certificate access, and bind mounts all need review.
+
+6
+00:00:35.824 --> 00:00:44.295
+The application should know where it is allowed to write, and those locations should be intentionally created and permissioned.
+
+7
+00:00:44.295 --> 00:00:50.589
+Privileged containers and broad Linux capabilities should be rare, documented, and reviewed.
+
+8
+00:00:50.589 --> 00:00:58.904
+Many . NET web applications do not need extra capabilities, host namespace access, device mounts, or broad filesystem access.
+
+9
+00:00:58.904 --> 00:01:05.509
+Reducing runtime privilege helps make production behavior more predictable and easier to operate.
+
+10
+00:01:05.509 --> 00:01:12.892
+Read-only root filesystems can reduce accidental writes and make unexpected filesystem changes more visible.
+
+11
+00:01:12.892 --> 00:01:23.460
+They also require planning. An application may still need writable locations for temporary files, uploads, caches, logs, diagnostics, or framework features.
+
+12
+00:01:23.460 --> 00:01:28.434
+Those paths should be explicit and separate from the application binaries.
+
+13
+00:01:28.434 --> 00:01:40.557
+Capabilities, seccomp, AppArmor, SELinux, user namespaces, and runtime security options may be owned by a platform team, but developers should understand their application impact.
+
+14
+00:01:40.557 --> 00:01:53.690
+Application code should not assume it can install tools at runtime, write anywhere in the container, change filesystem state casually, or depend on permissions that production policy does not grant.

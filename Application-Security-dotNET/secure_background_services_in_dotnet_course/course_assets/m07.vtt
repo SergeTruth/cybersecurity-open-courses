@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.834
+Cancellation tokens are cooperative signals that let a .
+
+2
+00:00:03.834 --> 00:00:05.682
+NET worker stop gracefully.
+
+3
+00:00:05.682 --> 00:00:15.952
+They are especially important for services that may be processing files, queue messages, database updates, or external calls when the host shuts down.
+
+4
+00:00:15.952 --> 00:00:24.921
+A worker that ignores cancellation may delay deployment, hold locks, abandon partial work, or make shutdown behavior unpredictable.
+
+5
+00:00:24.921 --> 00:00:28.207
+Graceful shutdown should match the unit of work.
+
+6
+00:00:28.207 --> 00:00:32.794
+Some operations can stop quickly and leave the job for later retry.
+
+7
+00:00:32.794 --> 00:00:41.831
+Others need to finish a small critical section, record state, release a lease, close a file, or update a message visibility timeout.
+
+8
+00:00:41.831 --> 00:00:50.594
+The worker should have a clear policy so operators know what happens during deployments, restarts, failures, and scaling events.
+
+9
+00:00:50.594 --> 00:00:52.854
+Timeouts protect slow operations.
+
+10
+00:00:52.854 --> 00:01:03.055
+Database queries, HTTP calls, storage operations, file processing, and long-running jobs should have reasonable limits based on the business process.
+
+11
+00:01:03.055 --> 00:01:10.449
+Without timeouts, one dependency problem can tie up worker threads, connections, leases, and queue capacity.
+
+12
+00:01:10.449 --> 00:01:15.994
+A timeout is not just an operations setting; it is a resource protection control.
+
+13
+00:01:15.994 --> 00:01:23.251
+Concurrency limits, rate limits, batch sizes, queue prefetching, and bounded work protect shared capacity.
+
+14
+00:01:23.251 --> 00:01:25.853
+More parallelism is not always better.
+
+15
+00:01:25.853 --> 00:01:34.000
+A worker that consumes too many messages at once can overwhelm databases, downstream APIs, storage accounts, or memory.
+
+16
+00:01:34.000 --> 00:01:42.284
+Bounded processing lets teams reason about worst-case behavior and protects other services that share the same resources.
+
+17
+00:01:42.284 --> 00:01:48.514
+Avoid unbounded loops, unbounded memory use, uncontrolled parallelism, and runaway retries.
+
+18
+00:01:48.514 --> 00:01:52.690
+These patterns turn ordinary failures into broader incidents.
+
+19
+00:01:52.690 --> 00:02:02.412
+Backpressure and load management help the worker slow down, reject work, delay work, or route failures when downstream systems cannot keep up.
+
+20
+00:02:02.412 --> 00:02:06.520
+Long-running behavior should be observable and controllable.
+
+21
+00:02:06.520 --> 00:02:16.105
+Operators should be able to see queue depth, active jobs, running duration, retry counts, cancellation events, resource use, and stuck work.
+
+22
+00:02:16.105 --> 00:02:23.636
+They should also know how to pause, drain, restart, or scale workers safely when production conditions change.

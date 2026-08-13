@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.858
+Cross-site scripting prevention starts with output context.
+
+2
+00:00:03.858 --> 00:00:11.116
+A value is not risky only because it came from a user, and it is not safe only because it came from a database.
+
+3
+00:00:11.116 --> 00:00:17.132
+The key question is where that value will be rendered and how the browser will interpret it.
+
+4
+00:00:17.132 --> 00:00:31.648
+Display names, comments, product descriptions, support messages, CMS fields, and imported text can all be harmless as plain text and risky when they are placed into a browser-interpreted context without the right handling.
+
+5
+00:00:31.648 --> 00:00:32.955
+ASP.
+
+6
+00:00:32.955 --> 00:00:36.813
+NET Core developers should think in rendering destinations.
+
+7
+00:00:36.813 --> 00:00:46.621
+Plain HTML body text, HTML attributes, URLs, script data, style data, JSON delivered to a client, and client-side templating all have different rules.
+
+8
+00:00:46.621 --> 00:00:56.168
+A value that is safe to show as visible text may not be safe to place into another context without a framework-supported pattern for that context.
+
+9
+00:00:56.168 --> 00:00:57.476
+Razor and ASP.
+
+10
+00:00:57.476 --> 00:00:59.699
+NET Core provide helpful defaults.
+
+11
+00:00:59.699 --> 00:01:08.723
+Normal string output in Razor is encoded for HTML display, which is a strong baseline when teams stay inside the intended rendering model.
+
+12
+00:01:08.723 --> 00:01:21.081
+The risk increases when code bypasses those defaults, builds markup manually, mixes data with structure, or pushes server values into client-side code without a clear context-aware pattern.
+
+13
+00:01:21.081 --> 00:01:24.089
+XSS prevention is not a single magic function.
+
+14
+00:01:24.089 --> 00:01:39.520
+It is a repeatable engineering habit: identify untrusted or unreviewed data, understand where it will appear, choose the safest rendering model, apply context-appropriate encoding, and review any place that intentionally renders markup.
+
+15
+00:01:39.520 --> 00:01:45.536
+This keeps prevention tied to the actual browser behavior rather than to vague trust labels.
+
+16
+00:01:45.536 --> 00:01:49.067
+The practical goal is to make safe rendering ordinary.
+
+17
+00:01:49.067 --> 00:02:00.052
+Teams should know which helpers are approved, which escape hatches require review, which components can render rich text, and where server data becomes browser content.
+
+18
+00:02:00.052 --> 00:02:07.833
+When those decisions are explicit, output encoding becomes part of normal development instead of a late security patch.

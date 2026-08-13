@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Classification, Minimization, and Data Flow Mapping",
+  "graphicAlt": "Bullet summary graphic for Classification, Minimization, and Data Flow Mapping.",
+  "narration": "Data classification helps teams decide which controls are required for each kind of data. Practical categories may include public, internal, confidential, regulated, credential, customer, tenant, and security-sensitive data. The category does not need to be perfect to be useful. It needs to guide design decisions consistently.\n\nData minimization means collecting, storing, copying, and displaying only what is needed for a specific purpose. If a feature only needs a customer reference, it may not need a full customer profile. If a log event only needs a correlation ID and a coarse outcome, it should not carry the full request payload.\n\nData flow mapping makes sensitive data visible. It should identify where data enters the application, where it is transformed, where it is stored, where it leaves, and which systems or people can access it. A useful map includes clients, servers, databases, caches, queues, third-party services, logging systems, analytics systems, exports, and support workflows.\n\nTrust boundaries should be visible. Data crossing from browser to server, server to database, service to queue, application to log pipeline, or support tool to export file may need different controls. The boundary is where validation, authorization, redaction, encryption, and retention decisions become concrete.\n\nAvoid broad domain objects, DTOs, logs, exports, and telemetry events that carry more fields than necessary. A model built for internal business logic may contain fields that should never be returned to a client, copied to analytics, or included in a support ticket. Classification and minimization should happen early enough to shape those contracts before deployment.",
+  "narrationPoints": [
+    "Data classification helps teams decide which controls are required for each kind of data.",
+    "If a log event only needs a correlation ID and a coarse outcome, it should not carry the full request payload.",
+    "Data crossing from browser to server, server to database, service to queue, application to log pipeline, or support tool to export file may need different controls.",
+    "The boundary is where validation, authorization, redaction, encryption, and retention decisions become concrete.",
+    "Classification and minimization should happen early enough to shape those contracts before deployment."
+  ]
+};

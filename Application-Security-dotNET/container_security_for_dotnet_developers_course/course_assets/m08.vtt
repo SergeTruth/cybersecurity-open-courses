@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.400
+Container image security depends on the supply chain as well as runtime settings.
+
+2
+00:00:05.400 --> 00:00:08.373
+A production image can include base layers, .
+
+3
+00:00:08.373 --> 00:00:19.251
+NET runtime components, NuGet packages, native libraries, operating system packages, build tools used earlier in the pipeline, CI actions, and application code.
+
+4
+00:00:19.251 --> 00:00:23.633
+Each layer and dependency has ownership and update implications.
+
+5
+00:00:23.633 --> 00:00:28.407
+Image scanning should be part of the pipeline, but findings need triage.
+
+6
+00:00:28.407 --> 00:00:37.407
+Teams should review severity, affected layer, reachable component, deployment exposure, available fix, and compensating controls.
+
+7
+00:00:37.407 --> 00:00:47.032
+The goal is not to ignore findings or accept every result blindly; it is to create a response process that is fast, evidence-based, and repeatable.
+
+8
+00:00:47.032 --> 00:00:50.475
+SBOMs help teams understand what is inside an image.
+
+9
+00:00:50.475 --> 00:00:58.145
+They support vulnerability response, customer requests, incident review, license review, and rebuild planning.
+
+10
+00:00:58.145 --> 00:01:07.535
+An SBOM is most useful when it is generated consistently, stored with the image or release, and connected to the team that owns the application.
+
+11
+00:01:07.535 --> 00:01:13.170
+Old images can contain old base layers even when the application code has not changed.
+
+12
+00:01:13.170 --> 00:01:20.839
+Regular rebuilds are important because a rebuild can pick up patched base image layers and refreshed dependencies.
+
+13
+00:01:20.839 --> 00:01:29.134
+Pinning versions improves repeatability, but it must be paired with an update workflow so pins do not become permanent drift.
+
+14
+00:01:29.134 --> 00:01:38.994
+Trusted registries, image signatures, provenance metadata, least-privilege registry access, and cleanup of stale images should all be reviewed.
+
+15
+00:01:38.994 --> 00:01:41.342
+The registry is part of production.
+
+16
+00:01:41.342 --> 00:01:51.437
+Teams should know who can publish images, who can pull them, how tags are promoted, how rollbacks work, and how retired images are removed from active use.

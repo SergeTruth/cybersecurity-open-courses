@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Rotation, Revocation, and Secret Lifecycle Management",
+  "graphicAlt": "Bullet summary graphic for Rotation, Revocation, and Secret Lifecycle Management.",
+  "narration": "Every secret has a lifecycle: creation, storage, use, rotation, expiration, revocation, replacement, and retirement. If a team only thinks about the moment a value is created, the secret can become permanent infrastructure that nobody knows how to replace safely.\n\nEvery secret should have an owner and a purpose. Ownership answers who approves access, who rotates the value, who responds to suspected exposure, and who decides when it can be retired. Purpose answers why the secret exists and which systems should depend on it.\n\nRotation schedules should reflect risk, system capability, and operational constraints. Some secrets rotate automatically. Others require coordinated application deployment, downstream notification, or staged acceptance of two values. The team should understand the rotation model before an emergency forces a rushed change.\n\nStaged rollout patterns can reduce downtime during replacement. At a high level, a system may temporarily accept an old and new value while clients move over, or it may deploy a new reference before revoking the old one. The exact pattern depends on the platform and integration, but the principle is planned transition instead of surprise replacement.\n\nEmergency revocation after suspected exposure should be rehearsed conceptually. Teams should know how to contain use, rotate or revoke the value, redeploy affected services, update dependent systems, monitor for failures, and communicate to stakeholders without exposing additional sensitive details.\n\nOld credentials must be removed from applications, pipelines, secret stores, documentation, scripts, support notes, and dependent systems. Retired secrets should not linger as fallback values. Permanent unmanaged credentials are a sign that lifecycle management has broken down.",
+  "narrationPoints": [
+    "Purpose answers why the secret exists and which systems should depend on it.",
+    "The team should understand the rotation model before an emergency forces a rushed change.",
+    "The exact pattern depends on the platform and integration, but the principle is planned transition instead of surprise replacement.",
+    "Emergency revocation after suspected exposure should be rehearsed conceptually.",
+    "Permanent unmanaged credentials are a sign that lifecycle management has broken down."
+  ]
+};

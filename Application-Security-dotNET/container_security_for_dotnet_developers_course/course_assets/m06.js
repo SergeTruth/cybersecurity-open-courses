@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Network Exposure, Ports, TLS, and Service Boundaries",
+  "graphicAlt": "Bullet summary graphic for Network Exposure, Ports, TLS, and Service Boundaries.",
+  "narration": "Container networking can make services easy to connect, but easy connectivity is not the same as trust. Exposed ports, published ports, service discovery names, ingress rules, load balancers, and reverse proxies define who can reach the application and which path a request follows before it reaches ASP.NET Core.\n\nA .NET service should clearly distinguish public APIs, admin paths, internal management endpoints, health endpoints, metrics, and user-facing traffic. Those paths may need different authentication, authorization, rate limits, logging, and response detail. A single container image may run in many environments, so exposure should be defined by deployment policy and application behavior together.\n\nTLS termination and proxy configuration affect application security decisions. Forwarded headers, authentication cookies, redirect behavior, secure headers, CORS, CSRF protections, client IP handling, and absolute URL generation can all depend on how ingress and reverse proxy settings are configured. Developers should know which headers are trusted and where TLS is terminated.\n\nHealth checks should verify readiness without exposing sensitive details. They should tell the platform whether the service can receive traffic, not reveal configuration values, dependency secrets, internal paths, or detailed exception information. Network location alone should never be the only reason a caller is trusted to access data or actions.",
+  "narrationPoints": [
+    "Exposed ports, published ports, service discovery names, ingress rules, load balancers, and reverse proxies define who can reach the application and which path a request follows before it reaches ASP.NET Core.",
+    "A single container image may run in many environments, so exposure should be defined by deployment policy and application behavior together.",
+    "A .NET service should clearly distinguish public APIs, admin paths, internal management endpoints, health endpoints, metrics, and user-facing traffic.",
+    "Developers should know which headers are trusted and where TLS is terminated.",
+    "Network location alone should never be the only reason a caller is trusted to access data or actions."
+  ]
+};

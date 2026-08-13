@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.418
+Encryption and data protection controls should be selected based on the security property needed and the workflow.
+
+2
+00:00:07.418 --> 00:00:16.274
+Data in transit, recoverable stored data, framework payloads, passwords, and application secrets all have different protection needs.
+
+3
+00:00:16.274 --> 00:00:20.059
+One control should not be stretched to solve every problem.
+
+4
+00:00:20.059 --> 00:00:25.433
+Use TLS for data in transit rather than trying to build custom transport protection.
+
+5
+00:00:25.433 --> 00:00:37.242
+Use ASP. NET Core Data Protection for appropriate protected framework and application payloads such as cookies, antiforgery tokens, reset tokens, and short-lived protected values.
+
+6
+00:00:37.242 --> 00:00:45.038
+Use maintained cryptography APIs and platform services instead of custom algorithms or copied cryptographic snippets.
+
+7
+00:00:45.038 --> 00:00:47.007
+Passwords are a separate case.
+
+8
+00:00:47.007 --> 00:00:51.397
+Passwords should use password hashing, not reversible encryption.
+
+9
+00:00:51.397 --> 00:00:58.966
+A password hashing design verifies the submitted password without storing a value that is meant to be recovered later.
+
+10
+00:00:58.966 --> 00:01:05.098
+That is a different goal from protecting a value that the application must decrypt or unprotect.
+
+11
+00:01:05.098 --> 00:01:13.348
+Field-level encryption, database encryption, disk encryption, and application-level protection solve different problems.
+
+12
+00:01:13.348 --> 00:01:17.587
+Database or disk encryption may protect storage media or backups.
+
+13
+00:01:17.587 --> 00:01:21.675
+Field-level encryption may limit exposure of selected values.
+
+14
+00:01:21.675 --> 00:01:26.519
+Application-level protection may control who can recover a value and when.
+
+15
+00:01:26.519 --> 00:01:31.969
+Each choice affects search, indexing, rotation, backup, recovery, and operations.
+
+16
+00:01:31.969 --> 00:01:40.826
+Key management matters. Keys need secure generation, storage, access control, rotation, revocation, backup, and compromise response.
+
+17
+00:01:40.826 --> 00:01:53.012
+The long-term strength of encryption depends not only on the algorithm, but on who can access the keys, how keys are monitored, and how the organization responds when key material must change.

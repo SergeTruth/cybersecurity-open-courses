@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.746
+Queue messages, event data, job parameters, scheduled job metadata, imported files, and database-driven work items are inputs to background services.
+
+2
+00:00:09.746 --> 00:00:18.445
+They may arrive from internal code, partner systems, administrative tools, scheduled processes, or older versions of the application.
+
+3
+00:00:18.445 --> 00:00:25.182
+The worker should not treat them as safe merely because they arrived through a familiar queue or table.
+
+4
+00:00:25.182 --> 00:00:28.780
+An ExampleQueueMessage should have a documented schema.
+
+5
+00:00:28.780 --> 00:00:38.395
+Required fields, optional fields, version information, identifiers, tenant context, expected producer, and allowed operation names should be clear.
+
+6
+00:00:38.395 --> 00:00:47.617
+When a worker receives the message, it should validate the size, structure, required values, version, and business meaning before processing.
+
+7
+00:00:47.617 --> 00:00:50.103
+Parsing is not the same as acceptance.
+
+8
+00:00:50.103 --> 00:00:54.943
+Internal queues can carry stale, duplicate, incorrect, or incomplete work.
+
+9
+00:00:54.943 --> 00:01:05.016
+Messages may be delayed during an outage, replayed after a retry, delivered out of order, produced by old code, or left behind after a partial deployment.
+
+10
+00:01:05.016 --> 00:01:14.500
+A worker should be prepared for messages that no longer match current state or that refer to records that have changed since the job was created.
+
+11
+00:01:14.500 --> 00:01:18.097
+Message ownership and tenant context need verification.
+
+12
+00:01:18.097 --> 00:01:22.087
+A message containing ExampleTenantId is not enough by itself.
+
+13
+00:01:22.087 --> 00:01:31.637
+The worker should confirm that the referenced record, file, report, or job belongs to the expected tenant and that the operation is still allowed.
+
+14
+00:01:31.637 --> 00:01:42.494
+Background services often run under service identities, so they must preserve the business authorization context instead of assuming service access equals permission.
+
+15
+00:01:42.494 --> 00:01:49.951
+Replay, duplicate delivery, out-of-order messages, stale messages, and expired work should be handled defensively.
+
+16
+00:01:49.951 --> 00:01:58.323
+A message may need a unique ExampleJobId, created timestamp, expiration policy, state check, version check, and idempotency key.
+
+17
+00:01:58.323 --> 00:02:05.583
+The exact design depends on the queue and business process, but the worker should not rely on perfect delivery.
+
+18
+00:02:05.583 --> 00:02:10.751
+Keep parsing, validation, authorization, and processing responsibilities clear.
+
+19
+00:02:10.751 --> 00:02:20.823
+That separation gives reviewers a place to ask: did we understand the message, did it match the contract, is it still allowed, and what did we do with it.
+
+20
+00:02:20.823 --> 00:02:27.430
+Blending those steps into one block of code makes background work harder to test and harder to trust.

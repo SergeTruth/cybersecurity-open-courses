@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Logging, Telemetry, Exceptions, and Redaction' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Log a closed database diagnostic without connection data",
+      "language": "csharp",
+      "blurb": "The factory admits fixed operation and outcome categories, a canonical non-secret database alias, and a finite bounded duration; the immutable event has no field capable of carrying a connection string, password, query text, or exception message.",
+      "code": "public enum DatabaseOperation\n{\n    Connect,\n    Query,\n    RotateCredential\n}\n\npublic enum DatabaseOutcome\n{\n    Succeeded,\n    Rejected,\n    Failed\n}\n\npublic sealed class DatabaseDiagnostic\n{\n    private DatabaseDiagnostic(\n        DatabaseOperation operation,\n        DatabaseOutcome outcome,\n        string databaseAlias,\n        long elapsedMilliseconds)\n    {\n        Operation = operation;\n        Outcome = outcome;\n        DatabaseAlias = databaseAlias;\n        ElapsedMilliseconds = elapsedMilliseconds;\n    }\n\n    public DatabaseOperation Operation { get; }\n    public DatabaseOutcome Outcome { get; }\n    public string DatabaseAlias { get; }\n    public long ElapsedMilliseconds { get; }\n\n    public static DatabaseDiagnostic Create(\n        DatabaseOperation operation,\n        DatabaseOutcome outcome,\n        string databaseAlias,\n        long elapsedMilliseconds)\n    {\n        if (!Enum.IsDefined(operation) || !Enum.IsDefined(outcome) ||\n            !IsIdentifier(databaseAlias) || elapsedMilliseconds is < 0 or > 3_600_000)\n        {\n            throw new ArgumentException(\"Database diagnostic rejected.\");\n        }\n        return new DatabaseDiagnostic(operation, outcome, databaseAlias, elapsedMilliseconds);\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 48 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    },
+    {
+      "title": "Derive a stable nonreversible telemetry token with an application key",
+      "language": "csharp",
+      "blurb": "The derivation validates a canonical bounded identifier and a 256-bit application-owned HMAC key, emits a compact Base64URL correlation token, and clears the temporary digest instead of placing the source identifier in telemetry.",
+      "code": "using System.Security.Cryptography;\nusing System.Text;\nusing Microsoft.AspNetCore.WebUtilities;\n\npublic static class PrivacyTelemetryToken\n{\n    public static string Derive(string identifier, ReadOnlySpan<byte> telemetryKey)\n    {\n        if (!IsIdentifier(identifier))\n            throw new ArgumentException(\"Telemetry identifier rejected.\", nameof(identifier));\n        if (telemetryKey.Length != 32)\n            throw new ArgumentException(\"A 256-bit telemetry key is required.\", nameof(telemetryKey));\n\n        var input = Encoding.UTF8.GetBytes(identifier);\n        Span<byte> digest = stackalloc byte[SHA256.HashSizeInBytes];\n        try\n        {\n            HMACSHA256.HashData(telemetryKey, input, digest);\n            return WebEncoders.Base64UrlEncode(digest[..16]);\n        }\n        finally\n        {\n            CryptographicOperations.ZeroMemory(input);\n            CryptographicOperations.ZeroMemory(digest);\n        }\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 128 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    }
+  ]
+};

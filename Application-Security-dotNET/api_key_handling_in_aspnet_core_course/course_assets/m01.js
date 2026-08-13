@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "API Keys as Security-Sensitive Credentials",
+  "graphicAlt": "Bullet summary graphic for API Keys as Security-Sensitive Credentials.",
+  "narration": "API keys are credentials, not harmless configuration strings. In an ASP.NET Core application, a key may represent a client application, service, tenant, partner integration, automation job, deployment environment, or operational workflow. Treating a key as ordinary text usually leads to weak storage, careless logging, and unclear ownership.\n\nA valid key may unlock cost, data access, operational actions, or privileged integrations. Even when a key does not identify a human user, it can still authorize work, consume paid services, reach internal APIs, trigger workflows, or access tenant-specific data. The business impact depends on what the receiving service allows the key to do.\n\nAPI keys are often weaker than user authentication when used alone. They usually lack user presence, multi-factor assurance, session context, device context, and strong identity proof. That does not make them useless. It means they need lifecycle controls, narrow scope, monitoring, and clear accountability.\n\nGood API key handling covers generation, storage, transmission, validation, authorization, logging, rotation, revocation, expiration, and incident response. The work is not finished when the application can check whether a string matches. The system also needs to know who owns the key, what it is for, how it is limited, and how it can be replaced.\n\nThe practical mindset is to treat every API key as a credential with a lifecycle. If a developer, operator, support analyst, or auditor cannot answer who owns a key, where it is stored, what it permits, and how it can be revoked, the design needs more structure.",
+  "narrationPoints": [
+    "Treating a key as ordinary text usually leads to weak storage, careless logging, and unclear ownership.",
+    "Even when a key does not identify a human user, it can still authorize work, consume paid services, reach internal APIs, trigger workflows, or access tenant-specific data.",
+    "API keys are often weaker than user authentication when used alone.",
+    "Good API key handling covers generation, storage, transmission, validation, authorization, logging, rotation, revocation, expiration, and incident response.",
+    "Treat every API key as a credential with a lifecycle."
+  ]
+};

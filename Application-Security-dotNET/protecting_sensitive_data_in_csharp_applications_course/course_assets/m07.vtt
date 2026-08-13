@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.751
+APIs should control what they return as carefully as what they accept.
+
+2
+00:00:04.751 --> 00:00:17.071
+A C# application may validate incoming data well and still expose too much through response objects, error payloads, exported files, debug endpoints, or generated documentation.
+
+3
+00:00:17.071 --> 00:00:19.970
+Output design is a sensitive data control.
+
+4
+00:00:19.970 --> 00:00:31.243
+DTOs and response models help prevent accidental exposure of internal fields, flags, tokens, secrets, audit notes, administrative data, or unrelated tenant data.
+
+5
+00:00:31.243 --> 00:00:39.939
+A response contract should represent the specific client need, not everything available on a domain object or database entity.
+
+6
+00:00:39.939 --> 00:00:44.126
+Model binding and deserialization produce untrusted input.
+
+7
+00:00:44.126 --> 00:00:48.313
+Bound data still needs validation and authorization checks.
+
+8
+00:00:48.313 --> 00:01:00.472
+A client-supplied user ID, tenant ID, role flag, price, status, or internal reference should be verified against trusted server-side data before it affects state or visibility.
+
+9
+00:01:00.472 --> 00:01:08.283
+Over-posting and over-sharing can occur when domain models are reused directly as request or response contracts.
+
+10
+00:01:08.283 --> 00:01:22.696
+JSON serialization settings, debug endpoints, OpenAPI documentation, error payloads, exported files, and pagination metadata can reveal more than intended if they are generated from broad internal objects.
+
+11
+00:01:22.696 --> 00:01:32.601
+Browser storage, hidden fields, query strings, mobile app storage, and client-side logs should not hold secrets or authoritative permissions.
+
+12
+00:01:32.601 --> 00:01:42.908
+A client can help display data and collect input, but server-side policy must decide what data is allowed to leave and what submitted values are trusted.

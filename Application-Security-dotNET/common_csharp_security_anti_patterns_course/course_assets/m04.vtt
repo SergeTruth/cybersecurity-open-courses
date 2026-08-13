@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.291
+Authentication identifies a caller.
+
+2
+00:00:02.291 --> 00:00:05.303
+Authorization decides what that caller may do.
+
+3
+00:00:05.303 --> 00:00:09.296
+A common anti-pattern is treating those as the same decision.
+
+4
+00:00:09.296 --> 00:00:20.163
+A logged-in user is not automatically allowed to view every record, change every setting, export every report, or perform every action reachable from the application.
+
+5
+00:00:20.163 --> 00:00:22.978
+UI hiding is not server-side authorization.
+
+6
+00:00:22.978 --> 00:00:36.856
+Hidden buttons, disabled fields, route names, JavaScript checks, obscured links, and frontend state can improve user experience, but they do not enforce access at the point where data is read or state is changed.
+
+7
+00:00:36.856 --> 00:00:40.784
+The server must make the decision using trusted information.
+
+8
+00:00:40.784 --> 00:00:48.640
+Client-supplied user IDs, account IDs, tenant IDs, object IDs, roles, scopes, and flags are not authority by themselves.
+
+9
+00:00:48.640 --> 00:01:00.554
+They are input that must be checked against authenticated identity, server-side state, resource ownership, tenant membership, subscription status, record status, and business policy.
+
+10
+00:01:00.554 --> 00:01:06.773
+Resource-based authorization is often required when access depends on the object being touched.
+
+11
+00:01:06.773 --> 00:01:10.374
+The question is not only whether the caller has a role.
+
+12
+00:01:10.374 --> 00:01:23.205
+It may be whether the caller owns this record, belongs to this tenant, is assigned to this case, has approval for this transaction, or is allowed to act while the workflow is in its current state.
+
+13
+00:01:23.205 --> 00:01:31.584
+Administrative, export, financial, destructive, configuration, support, and impersonation workflows need explicit policy review.
+
+14
+00:01:31.584 --> 00:01:40.618
+These paths are often less frequently used than ordinary user workflows, which makes accidental gaps easier to miss during manual testing.
+
+15
+00:01:40.618 --> 00:01:46.444
+A safer habit is to put authorization near the server-side action and make it reviewable.
+
+16
+00:01:46.444 --> 00:01:55.937
+Controllers, handlers, services, policies, resource checks, and data filters should show where the decision happens and what information it uses.
+
+17
+00:01:55.937 --> 00:02:00.847
+Reviewers should not have to trust that the UI prevented an unsafe request.

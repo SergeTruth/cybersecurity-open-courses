@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.579
+API key validation should be consistent and reviewable.
+
+2
+00:00:03.579 --> 00:00:16.791
+The application should have a clear pattern for extracting the key, identifying the candidate client, validating the credential, attaching the caller identity, and producing predictable failure behavior.
+
+3
+00:00:16.791 --> 00:00:22.453
+Reviewers should not need to inspect every endpoint to discover a different local rule.
+
+4
+00:00:22.453 --> 00:00:27.464
+Custom authentication handlers can integrate API key validation with the ASP.
+
+5
+00:00:27.464 --> 00:00:30.783
+NET Core authentication and authorization pipeline.
+
+6
+00:00:30.783 --> 00:00:43.865
+That can make API-key callers behave like other authenticated principals, allowing endpoint metadata, named policies, route groups, and authorization attributes to participate in the same review model.
+
+7
+00:00:43.865 --> 00:00:52.911
+Middleware, endpoint filters, action filters, gateway enforcement, or service-specific checks may also be useful depending on architecture.
+
+8
+00:00:52.911 --> 00:00:55.514
+A gateway can protect a broad perimeter.
+
+9
+00:00:55.514 --> 00:00:57.922
+Middleware can centralize extraction.
+
+10
+00:00:57.922 --> 00:01:01.241
+Filters can support endpoint-specific requirements.
+
+11
+00:01:01.241 --> 00:01:04.495
+Service checks can verify resource-specific rules.
+
+12
+00:01:04.495 --> 00:01:09.311
+The right pattern depends on where identity and policy should be enforced.
+
+13
+00:01:09.311 --> 00:01:14.908
+What teams should avoid is scattered ad hoc checks hidden inside individual endpoints.
+
+14
+00:01:14.908 --> 00:01:24.670
+Repeated local string comparisons, inconsistent header names, different error responses, and endpoint-specific logging choices are difficult to audit.
+
+15
+00:01:24.670 --> 00:01:28.510
+They also make rotation, revocation, and monitoring harder.
+
+16
+00:01:28.510 --> 00:01:32.415
+Authentication identifies the calling client or integration.
+
+17
+00:01:32.415 --> 00:01:35.409
+Authorization decides what that caller may do.
+
+18
+00:01:35.409 --> 00:01:42.893
+A valid API key should establish identity or client context, but it should not automatically grant every operation.
+
+19
+00:01:42.893 --> 00:01:49.727
+Endpoint metadata, route groups, named policies, and clear conventions help keep that separation visible.
+
+20
+00:01:49.727 --> 00:01:58.252
+Authentication failure behavior should be predictable and should not reveal unnecessary detail about whether a specific key exists.
+
+21
+00:01:58.252 --> 00:02:09.121
+The response should be safe for clients, while protected logs can record enough context for operators to understand validation outcomes without storing the key itself.

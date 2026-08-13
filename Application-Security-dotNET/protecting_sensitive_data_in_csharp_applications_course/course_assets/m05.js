@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Databases, Files, Caches, Queues, and Backups",
+  "graphicAlt": "Bullet summary graphic for Databases, Files, Caches, Queues, and Backups.",
+  "narration": "Sensitive data often exists in more places than the primary database. It may appear in object storage, generated files, caches, queues, event streams, dead-letter stores, backups, snapshots, search indexes, analytics stores, exports, and support downloads. Each copy extends the protection problem.\n\nDatabases need least-privilege access, schema review, tenant-boundary enforcement, encryption decisions, backup handling, and administrative access control. Application accounts should have the permissions they need, not broad ownership by default. Tenant and customer boundaries should be enforced by trusted server-side logic and data design.\n\nFiles and object storage need their own review. Names, metadata, folder structure, access control, retention, content safety scanning workflow, download rules, and separation from executable application content all matter. A file export may contain more sensitive information than the screen that generated it.\n\nCaches can expose sensitive data if entries are too broad, too long-lived, shared across tenants, or visible to unintended operators. Queues and event streams should avoid unnecessary sensitive fields because messages may be copied, retried, retained, dead-lettered, inspected, or consumed by multiple services.\n\nBackups, snapshots, exports, search indexes, analytics stores, and data lakes need the same classification and retention review as production data. Deletion and retention requirements should account for copies, derived data, operational stores, and restore procedures, not just the original row in the primary database.",
+  "narrationPoints": [
+    "Sensitive data often exists in more places than the primary database.",
+    "Tenant and customer boundaries should be enforced by trusted server-side logic and data design.",
+    "Files and object storage need their own review.",
+    "Queues and event streams should avoid unnecessary sensitive fields because messages may be copied, retried, retained, dead-lettered, inspected, or consumed by multiple services.",
+    "Deletion and retention requirements should account for copies, derived data, operational stores, and restore procedures, not just the original row in the primary database."
+  ]
+};

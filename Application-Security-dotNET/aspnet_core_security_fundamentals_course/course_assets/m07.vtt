@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.487
+Configuration is part of the security boundary in ASP.
+
+2
+00:00:03.487 --> 00:00:04.779
+NET Core.
+
+3
+00:00:04.779 --> 00:00:22.733
+Appsettings files, environment variables, user secrets, command-line settings, deployment variables, cloud configuration, and external secret stores can affect identity, cookies, logging, Data Protection, database access, feature flags, CORS, diagnostics, and endpoint behavior.
+
+4
+00:00:22.733 --> 00:00:27.770
+A configuration mistake can change the security posture without a code change.
+
+5
+00:00:27.770 --> 00:00:33.001
+Development secret storage is not the same as production-grade secret protection.
+
+6
+00:00:33.001 --> 00:00:40.170
+User secrets can keep local development values out of source files, but they are not a production secret store.
+
+7
+00:00:40.170 --> 00:00:53.861
+Production secrets need managed storage, access control, rotation, auditability, operational ownership, and deployment practices that keep secret values away from repositories, logs, tickets, and build artifacts.
+
+8
+00:00:53.861 --> 00:00:57.090
+Secrets should not be committed to source control.
+
+9
+00:00:57.090 --> 00:01:03.096
+Repositories are copied, cached, mirrored, reviewed, backed up, and sometimes shared broadly.
+
+10
+00:01:03.096 --> 00:01:09.103
+A secret committed once can remain in history even after it is removed from the current file.
+
+11
+00:01:09.103 --> 00:01:18.402
+Configuration review should look for connection strings, API keys, tokens, certificates, signing material, and private endpoints before release.
+
+12
+00:01:18.402 --> 00:01:19.694
+ASP.
+
+13
+00:01:19.694 --> 00:01:25.958
+NET Core Data Protection provides services used to protect cookies, tokens, and application data.
+
+14
+00:01:25.958 --> 00:01:32.869
+Conceptually, it uses managed keys so protected data can later be read by the application when appropriate.
+
+15
+00:01:32.869 --> 00:01:44.171
+Teams do not need to invent their own protection mechanism for framework features, but they do need to understand where keys are stored and how they behave across deployments.
+
+16
+00:01:44.171 --> 00:01:47.658
+Key persistence matters in multi-instance deployments.
+
+17
+00:01:47.658 --> 00:01:55.472
+If each instance has incompatible keys, one instance may not read protected cookies, tokens, or data produced by another.
+
+18
+00:01:55.472 --> 00:02:03.997
+Key rotation also needs planning so old protected data can remain readable for the required period while new data uses current keys.
+
+19
+00:02:03.997 --> 00:02:10.262
+The right key storage depends on the hosting environment, but it should be explicit and reviewed.
+
+20
+00:02:10.262 --> 00:02:15.428
+Configuration and key handling should be tested in production-like environments.
+
+21
+00:02:15.428 --> 00:02:22.016
+Local behavior can hide problems because one developer machine is not the same as a scaled deployment.
+
+22
+00:02:22.016 --> 00:02:33.188
+Review how settings are loaded, how missing settings fail, how secrets are referenced without being printed, and how Data Protection keys are shared, rotated, and protected.

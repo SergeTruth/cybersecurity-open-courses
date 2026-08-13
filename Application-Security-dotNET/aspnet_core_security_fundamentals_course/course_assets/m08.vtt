@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.883
+APIs need explicit authentication and authorization rules.
+
+2
+00:00:03.883 --> 00:00:21.689
+Whether the application uses controllers, Minimal APIs, endpoint groups, or a mix, reviewers should be able to see which endpoints are public, which require an authenticated caller, which require a policy, and which are intended only for internal or operational use.
+
+3
+00:00:21.689 --> 00:00:27.312
+Security rules should not be hidden in assumptions about routes or network location.
+
+4
+00:00:27.312 --> 00:00:32.065
+Minimal APIs and endpoint groups can be organized so rules are visible.
+
+5
+00:00:32.065 --> 00:00:42.441
+Grouping related endpoints, applying shared authorization metadata, and keeping high-risk operations separate from public endpoints can make review easier.
+
+6
+00:00:42.441 --> 00:00:51.211
+Controllers and Razor Pages benefit from the same discipline: consistent attributes, clear policy names, and documented exceptions.
+
+7
+00:00:51.211 --> 00:00:56.165
+DTOs help prevent over-posting and accidental binding of sensitive fields.
+
+8
+00:00:56.165 --> 00:01:02.457
+A request type should represent the fields the caller is allowed to supply for that operation.
+
+9
+00:01:02.457 --> 00:01:15.779
+It should not expose internal flags, tenant ownership, approval status, pricing decisions, administrative fields, or server-controlled properties simply because those fields exist on a domain object.
+
+10
+00:01:15.779 --> 00:01:18.523
+Responses should be shaped intentionally.
+
+11
+00:01:18.523 --> 00:01:31.041
+Return the data the caller needs, use consistent error handling, avoid internal exception detail, and choose status codes that reflect the outcome without revealing unnecessary internals.
+
+12
+00:01:31.041 --> 00:01:37.133
+A safe API contract is stable, minimal, and understandable to both consumers and reviewers.
+
+13
+00:01:37.133 --> 00:01:42.355
+Rate-limit thinking and abuse resistance belong in API design at a high level.
+
+14
+00:01:42.355 --> 00:01:50.589
+Teams should consider expensive operations, repeated failures, large requests, dependency pressure, and operational limits.
+
+15
+00:01:50.589 --> 00:02:00.362
+The exact implementation may vary, but the application should not assume every client behaves politely or every dependency has unlimited capacity.
+
+16
+00:02:00.362 --> 00:02:03.910
+Service-to-service trust should be handled carefully.
+
+17
+00:02:03.910 --> 00:02:06.521
+Network location alone is not identity.
+
+18
+00:02:06.521 --> 00:02:17.432
+A request from an internal network, private subnet, service mesh, or known host still needs a clear identity and authorization model appropriate for the operation.
+
+19
+00:02:17.432 --> 00:02:23.189
+Internal APIs often handle sensitive data and deserve the same clarity as public APIs.

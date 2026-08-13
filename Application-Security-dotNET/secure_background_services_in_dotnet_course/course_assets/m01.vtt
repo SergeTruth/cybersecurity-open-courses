@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.786
+Background services are automated workloads that run without direct user interaction.
+
+2
+00:00:05.786 --> 00:00:07.148
+In .
+
+3
+00:00:07.148 --> 00:00:23.077
+NET systems they may appear as Worker Services, hosted services, queue consumers, scheduled tasks, import jobs, cleanup jobs, report generators, email senders, notification services, synchronization workers, and maintenance processes.
+
+4
+00:00:23.077 --> 00:00:29.339
+Because they are not always visible in the web request path, they are easy to underestimate.
+
+5
+00:00:29.339 --> 00:00:32.471
+Many workers have access to sensitive systems.
+
+6
+00:00:32.471 --> 00:00:45.337
+A single ExampleWorkerName may read from queues, update databases, write files, call APIs, generate reports, move data to storage, send notifications, and use secrets or service identities.
+
+7
+00:00:45.337 --> 00:00:51.940
+That makes background processing part of the application's security boundary, not a side feature.
+
+8
+00:00:51.940 --> 00:00:57.317
+The fact that the work happens later or off-screen does not make it lower risk.
+
+9
+00:00:57.317 --> 00:01:03.852
+Web request security and background processing security are related, but they are not identical.
+
+10
+00:01:03.852 --> 00:01:11.000
+A web request usually has an immediate user, a request context, a response, and a short execution window.
+
+11
+00:01:11.000 --> 00:01:22.504
+A background job may run minutes later, retry several times, process batched data, operate under a service identity, or continue after the original user session is gone.
+
+12
+00:01:22.504 --> 00:01:28.971
+That means authorization, tenant context, logging, and failure behavior need deliberate design.
+
+13
+00:01:28.971 --> 00:01:32.852
+Hidden automation creates risk when ownership is unclear.
+
+14
+00:01:32.852 --> 00:01:43.471
+If no team owns the worker contract, retry behavior, permissions, data retention, alerting, or operational runbook, failures can become hard to investigate.
+
+15
+00:01:43.471 --> 00:01:52.388
+A job might silently skip records, repeat a state change, retain temporary files, or process stale data long before anyone notices.
+
+16
+00:01:52.388 --> 00:01:56.337
+Secure background service work is normal engineering work.
+
+17
+00:01:56.337 --> 00:02:03.552
+It begins in design, where teams define boundaries, inputs, permissions, data handling, and failure modes.
+
+18
+00:02:03.552 --> 00:02:09.747
+It continues in implementation, deployment, monitoring, incident response, and maintenance.
+
+19
+00:02:09.747 --> 00:02:17.916
+The practical goal is to make workers predictable, reviewable, observable, and limited to the access they actually need.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Durable Secrets Management Workflow",
+  "graphicAlt": "Bullet summary graphic for Course Summary: Durable Secrets Management Workflow.",
+  "narration": "Durable secrets management for .NET applications is a repeatable engineering workflow. Start by identifying secrets and sensitive configuration. Inventory each value by owner, purpose, environment, access path, rotation expectation, and operational impact.\n\nKeep secret values out of source code, ordinary appsettings files, logs, build artifacts, screenshots, support bundles, tickets, and chat messages. Use harmless placeholders such as ExampleApiKey or ExampleConnectionString in documentation and examples, and keep real values in systems designed for secret lifecycle control.\n\nUse appropriate secret stores and runtime identities. Centralize retrieval logic, validate required configuration without printing values, handle missing secrets safely, and use least privilege for applications, developers, operators, pipelines, and service identities.\n\nMaintain the lifecycle. Plan rotation before emergencies, revoke exposed values promptly, remove old credentials from dependent systems, audit secret access, monitor unusual patterns, and review access periodically. Secret safety decays when ownership and review disappear.\n\nThe practical message is straightforward: secrets are part of the application architecture. Treat them as owned, reviewed, monitored dependencies. When teams make secret handling ordinary and durable, .NET applications become easier to operate securely over time.",
+  "narrationPoints": [
+    "Durable secrets management for .NET applications is a repeatable engineering workflow.",
+    "Keep secret values out of source code, ordinary appsettings files, logs, build artifacts, screenshots, support bundles, tickets, and chat messages.",
+    "Centralize retrieval logic, validate required configuration without printing values, handle missing secrets safely, and use least privilege for applications, developers, operators, pipelines, and service identities.",
+    "Plan rotation before emergencies, revoke exposed values promptly, remove old credentials from dependent systems, audit secret access, monitor unusual patterns, and review access periodically.",
+    "When teams make secret handling ordinary and durable, .NET applications become easier to operate securely over time."
+  ]
+};

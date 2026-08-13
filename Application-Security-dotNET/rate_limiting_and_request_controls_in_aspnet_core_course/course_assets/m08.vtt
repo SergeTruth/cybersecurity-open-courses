@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.892
+Upload paths and large request bodies need explicit limits.
+
+2
+00:00:03.892 --> 00:00:08.378
+Body size limits may be global, endpoint-specific, or host-specific.
+
+3
+00:00:08.378 --> 00:00:21.044
+A public profile image upload, an internal import endpoint, a document submission workflow, and a machine-to-machine data feed should not automatically share the same request body assumptions.
+
+4
+00:00:21.044 --> 00:00:25.331
+Large bodies can consume memory, disk, CPU, and backend capacity.
+
+5
+00:00:25.331 --> 00:00:32.192
+Buffering, temporary storage, scanning, parsing, transformation, and downstream processing all add cost.
+
+6
+00:00:32.192 --> 00:00:38.921
+Even when the server eventually rejects a request, the path to that rejection can still use resources.
+
+7
+00:00:38.921 --> 00:00:42.945
+Controls should be placed early enough to protect the system.
+
+8
+00:00:42.945 --> 00:00:46.111
+Request decompression deserves defensive review.
+
+9
+00:00:46.111 --> 00:00:50.729
+Compressed bodies may be smaller on the wire than after decompression.
+
+10
+00:00:50.729 --> 00:00:56.732
+The application should still constrain decompressed size through endpoint or server limits.
+
+11
+00:00:56.732 --> 00:01:06.693
+The risk is not only storage size; it is also CPU time, memory pressure, parser behavior, and the downstream systems that receive the expanded content.
+
+12
+00:01:06.693 --> 00:01:12.564
+Decompression-bomb risk should be handled conceptually as a resource-consumption concern.
+
+13
+00:01:12.564 --> 00:01:21.602
+The defensive response is to define size limits, timeouts, safe decompression behavior, endpoint scope, monitoring, and failure handling.
+
+14
+00:01:21.602 --> 00:01:29.452
+The course does not need construction details to teach the engineering lesson: expanded content still needs boundaries.
+
+15
+00:01:29.452 --> 00:01:42.711
+File upload controls should include size, type, storage location, generated server-side names, scanning or review workflow where appropriate, retention rules, authorization, and business justification.
+
+16
+00:01:42.711 --> 00:01:50.957
+Uploaded files should be processed by a documented workflow, not by a generic endpoint that accepts anything for convenience.
+
+17
+00:01:50.957 --> 00:01:55.311
+The practical baseline is to make large-request behavior explicit.
+
+18
+00:01:55.311 --> 00:02:08.372
+Know which endpoints accept large bodies, why they need them, where data is buffered, which limits apply, how failures are reported, and which logs or metrics tell operators when limits are reached.

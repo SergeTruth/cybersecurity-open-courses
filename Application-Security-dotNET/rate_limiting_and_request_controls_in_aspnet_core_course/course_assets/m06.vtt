@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.789
+When a request exceeds a limit, the application should respond predictably.
+
+2
+00:00:04.789 --> 00:00:11.814
+The response should communicate that the request was limited without exposing sensitive implementation detail.
+
+3
+00:00:11.814 --> 00:00:21.584
+Clients should be able to distinguish a limit response from an ambiguous application failure, and operators should be able to see which policy triggered.
+
+4
+00:00:21.584 --> 00:00:25.288
+Retry guidance can be useful when it is clear and minimal.
+
+5
+00:00:25.288 --> 00:00:30.333
+A client may need to know whether waiting before another request is reasonable.
+
+6
+00:00:30.333 --> 00:00:34.867
+That guidance should be consistent with the policy and user experience.
+
+7
+00:00:34.867 --> 00:00:41.509
+It should not reveal internal capacity details or create a noisy contract that the team cannot maintain.
+
+8
+00:00:41.509 --> 00:00:46.490
+Queueing can smooth short bursts, but queued requests still consume resources.
+
+9
+00:00:46.490 --> 00:00:52.365
+A queue may hold memory, threads, connection slots, request context, or downstream capacity.
+
+10
+00:00:52.365 --> 00:01:00.539
+If a queue is unbounded or poorly configured, it can turn a short traffic spike into long latency and confusing client behavior.
+
+11
+00:01:00.539 --> 00:01:03.540
+Queue limits should be bounded and intentional.
+
+12
+00:01:03.540 --> 00:01:13.502
+Teams should decide whether queueing is appropriate for a given endpoint, how long users can reasonably wait, and what should happen when the queue is full.
+
+13
+00:01:13.502 --> 00:01:20.974
+For some endpoints, quick rejection is more honest than making users wait for work that is unlikely to complete soon.
+
+14
+00:01:20.974 --> 00:01:26.721
+Logging should capture limit events without exposing secrets or sensitive request content.
+
+15
+00:01:26.721 --> 00:01:35.342
+Useful fields can include policy name, endpoint, route group, safe partition category, status, queue state, correlation ID, and timing.
+
+16
+00:01:35.342 --> 00:01:43.835
+Avoid logging tokens, credentials, request bodies, uploaded file contents, or private identifiers that are not needed for operations.
+
+17
+00:01:43.835 --> 00:01:48.050
+Good rejection behavior is part of user experience and operations.
+
+18
+00:01:48.050 --> 00:01:55.777
+It protects the system, tells clients what happened, and gives operators enough signal to tune policies without guessing.

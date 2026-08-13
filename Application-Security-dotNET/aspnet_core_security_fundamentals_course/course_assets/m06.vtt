@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.398
+ASP.
+
+2
+00:00:01.398 --> 00:00:08.249
+NET Core applications should treat input as untrusted even when it comes from authenticated users.
+
+3
+00:00:08.249 --> 00:00:21.252
+Input includes route values, query strings, form fields, JSON bodies, headers, cookies, files, claims, database records, queue messages, configuration, and responses from other services.
+
+4
+00:00:21.252 --> 00:00:30.270
+Authentication may identify the caller, but it does not make every value correct, authorized, or safe for the intended operation.
+
+5
+00:00:30.270 --> 00:00:35.303
+Model validation should reflect expected shape, type, size, and meaning.
+
+6
+00:00:35.303 --> 00:00:44.881
+A field may need a maximum length, allowed format, numeric range, required status, supported value set, or relationship to another field.
+
+7
+00:00:44.881 --> 00:00:48.236
+Server-side validation is the enforcement point.
+
+8
+00:00:48.236 --> 00:00:56.765
+Client-side validation improves usability and reduces accidental mistakes, but it can be changed, skipped, or out of date.
+
+9
+00:00:56.765 --> 00:01:00.330
+Output encoding is the partner of input validation.
+
+10
+00:01:00.330 --> 00:01:10.747
+Razor's default encoding behavior helps reduce XSS risk when teams keep the defaults and let the framework encode values for the destination context.
+
+11
+00:01:10.747 --> 00:01:24.029
+Problems appear when code renders untrusted content as raw HTML, mixes data into script or attribute contexts without the right helper, or assumes that previously stored content is now safe.
+
+12
+00:01:24.029 --> 00:01:26.685
+JSON and API output also need shaping.
+
+13
+00:01:26.685 --> 00:01:32.208
+Responses should include fields the caller needs, not the entire domain object.
+
+14
+00:01:32.208 --> 00:01:43.673
+Error responses should be consistent and useful without exposing stack traces, internal paths, tokens, connection strings, personal data, or implementation details.
+
+15
+00:01:43.673 --> 00:01:47.378
+Response contracts are part of the security boundary.
+
+16
+00:01:47.378 --> 00:01:50.524
+File upload handling deserves careful limits.
+
+17
+00:01:50.524 --> 00:02:02.478
+Review allowed types, size limits, storage location, generated server-side names, authorization, scanning or review processes where appropriate, and downstream processing.
+
+18
+00:02:02.478 --> 00:02:09.049
+The original filename should be treated as display data, not as a trusted storage instruction.
+
+19
+00:02:09.049 --> 00:02:17.718
+The practical pattern is to validate on input, authorize before action, encode on output, and keep error details controlled.
+
+20
+00:02:17.718 --> 00:02:28.414
+These decisions should be visible in code review and covered by tests for ordinary invalid input, boundary values, missing fields, and unexpected states.

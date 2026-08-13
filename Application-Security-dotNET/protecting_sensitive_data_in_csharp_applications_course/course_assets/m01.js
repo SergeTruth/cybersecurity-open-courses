@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Sensitive Data as an Application Design Concern",
+  "graphicAlt": "Bullet summary graphic for Sensitive Data as an Application Design Concern.",
+  "narration": "Sensitive data protection is an application design concern, not only a compliance concern. A C# application makes decisions every day about what it collects, stores, returns, logs, caches, exports, and keeps. Those decisions shape both user trust and operational risk.\n\nSensitive data can include personal data, credentials, tokens, API keys, connection strings, financial data, customer data, regulated records, tenant data, internal business data, security findings, internal hostnames, and operational metadata. Sensitivity depends on context, business use, legal obligations, customer expectations, and what an unauthorized person could do with the information.\n\nC# applications can expose sensitive data through source code, configuration, APIs, logs, exceptions, databases, files, caches, queues, backups, exports, and client-side behavior. A field may be safe in one context and risky in another. A customer identifier in a database may be expected; the same identifier in a public log stream or browser error message may not be.\n\nThe goal is to know what data exists, where it flows, who can access it, how long it lives, and how it is protected. That means sensitive data review belongs in design discussions, code review, infrastructure decisions, support workflows, and incident planning.\n\nGood protection is not last-minute cleanup. It starts with deliberate data boundaries, least privilege, retention choices, redaction, safe serialization, key management, and operational ownership. The earlier those choices are visible, the easier they are to build and maintain.",
+  "narrationPoints": [
+    "Sensitive data protection is an application design concern, not only a compliance concern.",
+    "Sensitive data can include personal data, credentials, tokens, API keys, connection strings, financial data, customer data, regulated records, tenant data, internal business data, security findings, internal hostnames, and operational metadata.",
+    "C# applications can expose sensitive data through source code, configuration, APIs, logs, exceptions, databases, files, caches, queues, backups, exports, and client-side behavior.",
+    "Sensitive data review belongs in design discussions, code review, infrastructure decisions, and support workflows.",
+    "The earlier those choices are visible, the easier they are to build and maintain."
+  ]
+};

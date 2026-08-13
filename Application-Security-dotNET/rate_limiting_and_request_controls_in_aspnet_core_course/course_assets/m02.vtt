@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.282
+ASP.
+
+2
+00:00:01.282 --> 00:00:06.793
+NET Core includes rate-limiting middleware for defining and applying request policies.
+
+3
+00:00:06.793 --> 00:00:13.842
+At a high level, teams can configure global behavior, named policies, and endpoint-specific policy attachment.
+
+4
+00:00:13.842 --> 00:00:23.262
+The important design question is not only whether rate limiting exists, but whether the policy matches the endpoint and the users who depend on it.
+
+5
+00:00:23.262 --> 00:00:28.710
+Global policies can be useful when the entire application needs a basic safety floor.
+
+6
+00:00:28.710 --> 00:00:34.029
+They can also become too blunt if the application has very different request types.
+
+7
+00:00:34.029 --> 00:00:48.896
+An inexpensive read endpoint, authentication endpoint, expensive search, upload path, report generator, tenant API, and public API may all deserve different limits because they create different load and user experience expectations.
+
+8
+00:00:48.896 --> 00:00:51.716
+Named policies make intent easier to review.
+
+9
+00:00:51.716 --> 00:01:02.482
+A policy name should describe the relationship it protects, such as an API client policy, an authenticated user policy, a report-generation policy, or an upload policy.
+
+10
+00:01:02.482 --> 00:01:09.467
+Reviewers should be able to connect the policy to endpoint cost, expected traffic, and operational ownership.
+
+11
+00:01:09.467 --> 00:01:17.541
+Endpoint-specific policy attachment is often helpful because the rate-limit decision appears near the route or endpoint group.
+
+12
+00:01:17.541 --> 00:01:22.284
+Minimal APIs, controllers, and route groups can make policy scope visible.
+
+13
+00:01:22.284 --> 00:01:32.729
+That visibility matters during code review because a future developer should understand why an endpoint has a stricter or looser policy than neighboring endpoints.
+
+14
+00:01:32.729 --> 00:01:36.831
+Configuration values should be reviewable and environment-aware.
+
+15
+00:01:36.831 --> 00:01:40.483
+Local development limits may be relaxed for productivity.
+
+16
+00:01:40.483 --> 00:01:42.919
+Staging may need test-friendly values.
+
+17
+00:01:42.919 --> 00:01:49.519
+Production should reflect real capacity, user experience, tenant fairness, and infrastructure behavior.
+
+18
+00:01:49.519 --> 00:01:54.005
+Limits should not be hidden constants that no one owns or understands.
+
+19
+00:01:54.005 --> 00:01:58.235
+Rate limiting is most useful when it is paired with observability.
+
+20
+00:01:58.235 --> 00:02:10.987
+Teams should be able to see when a policy is triggered, which endpoint was involved, which partition was affected, and whether the limit is protecting the system or masking a deeper capacity problem.

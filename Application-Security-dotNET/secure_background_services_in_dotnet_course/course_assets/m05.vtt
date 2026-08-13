@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.816
+Background work still needs access control.
+
+2
+00:00:02.816 --> 00:00:14.145
+A worker may not have an interactive user at the moment it runs, but it often acts on behalf of a user, a tenant, an administrator, a scheduled policy, or a service process.
+
+3
+00:00:14.145 --> 00:00:22.986
+The application should know which category applies because it affects authorization, audit records, error handling, and accountability.
+
+4
+00:00:22.986 --> 00:00:27.308
+Authentication and authorization are different in worker contexts.
+
+5
+00:00:27.308 --> 00:00:33.529
+A service identity proves which workload is calling a database, queue, storage account, or API.
+
+6
+00:00:33.529 --> 00:00:42.567
+Authorization decides whether this specific operation should occur on this specific object for this specific requester, tenant, or policy.
+
+7
+00:00:42.567 --> 00:00:47.937
+A valid ExampleServiceIdentity should not automatically mean every job is allowed.
+
+8
+00:00:47.937 --> 00:00:54.878
+Object-level authorization matters for records, files, reports, exports, jobs, and administrative actions.
+
+9
+00:00:54.878 --> 00:00:59.790
+A worker may be allowed to generate reports, but not every tenant's report.
+
+10
+00:00:59.790 --> 00:01:07.190
+It may be allowed to process imports, but only for jobs that are approved and still owned by the expected tenant.
+
+11
+00:01:07.190 --> 00:01:12.363
+Access checks should follow the object and operation, not only the worker role.
+
+12
+00:01:12.363 --> 00:01:15.114
+Tenant boundaries deserve explicit checks.
+
+13
+00:01:15.114 --> 00:01:18.715
+A tenant identifier in a message is a claim, not proof.
+
+14
+00:01:18.715 --> 00:01:28.538
+The worker should verify ownership against authoritative data and preserve tenant context throughout processing, storage, logging, and external calls.
+
+15
+00:01:28.538 --> 00:01:37.445
+Cross-tenant operations, support actions, migrations, and repairs should receive stronger review because mistakes can affect many users.
+
+16
+00:01:37.445 --> 00:01:42.356
+User-initiated jobs and system-initiated jobs need different audit context.
+
+17
+00:01:42.356 --> 00:01:49.691
+A user-initiated ExampleImportJob should preserve the requester, approver if needed, tenant, job ID, and reason.
+
+18
+00:01:49.691 --> 00:01:56.632
+A system-initiated cleanup job should preserve the service identity, policy, schedule, and affected scope.
+
+19
+00:01:56.632 --> 00:02:01.413
+Audit trails should explain why the worker acted, not only that it acted.
+
+20
+00:02:01.413 --> 00:02:07.438
+Privileged workers should not perform actions that the requester was not allowed to trigger.
+
+21
+00:02:07.438 --> 00:02:17.261
+This is the defensive version of a confused-deputy problem: a trusted worker can unintentionally lend its broader access to a lower-privilege request.
+
+22
+00:02:17.261 --> 00:02:26.495
+Administrative, support, cleanup, migration, and repair jobs should be reviewed as high-impact paths with clear approval, scope, and logging.

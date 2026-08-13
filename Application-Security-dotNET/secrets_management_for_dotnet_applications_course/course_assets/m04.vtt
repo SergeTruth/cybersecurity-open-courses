@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.796
+External secret stores and platform-managed secret systems centralize protection, access control, auditing, and rotation.
+
+2
+00:00:07.796 --> 00:00:15.979
+They give teams a better place to store values than source code, ordinary configuration files, deployment notes, or build logs.
+
+3
+00:00:15.979 --> 00:00:20.875
+The goal is not just to move a secret; the goal is to control its lifecycle.
+
+4
+00:00:20.875 --> 00:00:25.708
+Runtime identity patterns reduce the need to distribute static credentials.
+
+5
+00:00:25.708 --> 00:00:37.821
+Managed identities, workload identities, service principals, and platform identity features can let a running application prove who it is and request only the secrets it is allowed to use.
+
+6
+00:00:37.821 --> 00:00:44.006
+This keeps the trust relationship closer to the runtime environment and away from copied values.
+
+7
+00:00:44.006 --> 00:00:45.295
+A .
+
+8
+00:00:45.295 --> 00:00:52.575
+NET application should retrieve secrets without hardcoding values into source code or ordinary appsettings files.
+
+9
+00:00:52.575 --> 00:01:02.820
+Configuration can reference the name of a secret, the logical purpose of a secret, or the provider to use, while the actual value remains in a protected store.
+
+10
+00:01:02.820 --> 00:01:09.714
+For example, the application might reference ExampleSigningKeyName without exposing the signing key itself.
+
+11
+00:01:09.714 --> 00:01:11.518
+Secret caching needs design.
+
+12
+00:01:11.518 --> 00:01:18.863
+Caching can reduce latency and dependency pressure, but it affects freshness, rotation behavior, and availability.
+
+13
+00:01:18.863 --> 00:01:22.471
+A long cache may keep using an old value after rotation.
+
+14
+00:01:22.471 --> 00:01:26.208
+A short cache may increase dependency on the secret store.
+
+15
+00:01:26.208 --> 00:01:31.105
+The right choice depends on risk, performance, and operational expectations.
+
+16
+00:01:31.105 --> 00:01:36.066
+Fail-safe behavior matters when a required secret is missing or inaccessible.
+
+17
+00:01:36.066 --> 00:01:48.179
+If the application cannot retrieve a required database credential, signing key reference, or integration secret, it should fail clearly rather than silently switching to an unsafe default.
+
+18
+00:01:48.179 --> 00:01:53.462
+Startup validation can confirm required references without printing secret values.
+
+19
+00:01:53.462 --> 00:01:57.328
+Secret retrieval logic should be centralized and reviewable.
+
+20
+00:01:57.328 --> 00:02:05.382
+Scattered calls to secret stores make it hard to understand access patterns, caching, error handling, and audit expectations.
+
+21
+00:02:05.382 --> 00:02:11.503
+A clear abstraction or configuration layer helps developers use approved patterns consistently.

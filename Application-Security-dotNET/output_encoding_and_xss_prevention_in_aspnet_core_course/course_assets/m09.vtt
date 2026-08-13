@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.472
+Code review for XSS prevention should focus on rendering decisions.
+
+2
+00:00:04.472 --> 00:00:17.088
+Raw output, manually assembled markup, broad display helpers, custom encoders, rich text rendering, markdown rendering, CMS display, and client-side DOM shortcuts deserve special attention.
+
+3
+00:00:17.088 --> 00:00:27.567
+Reviewers do not need offensive payload examples to ask the right question: what context is this value rendered into, and which approved pattern protects it?
+
+4
+00:00:27.567 --> 00:00:30.704
+Shared components multiply risk and protection.
+
+5
+00:00:30.704 --> 00:00:41.651
+Layouts, partial views, view components, tag helpers, reusable table components, notification components, form helpers, and display templates may affect many pages.
+
+6
+00:00:41.651 --> 00:00:44.989
+A safe shared helper can reduce repeated mistakes.
+
+7
+00:00:44.989 --> 00:00:49.928
+An unsafe shared helper can spread risky rendering across the application.
+
+8
+00:00:49.928 --> 00:00:52.932
+Dependencies are part of the rendering model.
+
+9
+00:00:52.932 --> 00:01:06.148
+UI packages, rich text editors, markdown renderers, sanitizers, template engines, client-side frameworks, and server-side helpers should be reviewed for maintenance, configuration, and approved use.
+
+10
+00:01:06.148 --> 00:01:16.427
+A dependency that handles content should have an owner, an update path, and a clear understanding of which safety guarantees it does and does not provide.
+
+11
+00:01:16.427 --> 00:01:20.099
+Legacy code often contains older rendering assumptions.
+
+12
+00:01:20.099 --> 00:01:32.981
+It may have hand-built markup, helper methods that predate current framework conventions, broad trusted-content flags, or views that combine server data with client code in hard-to-review ways.
+
+13
+00:01:32.981 --> 00:01:42.526
+Migration should move those areas toward Razor defaults, context-aware helpers, operation-specific view models, and documented rich text paths.
+
+14
+00:01:42.526 --> 00:01:47.265
+Testing can support prevention without becoming payload-heavy training.
+
+15
+00:01:47.265 --> 00:01:56.143
+Tests can verify that ordinary display names, comments, descriptions, and support messages are rendered as text in expected contexts.
+
+16
+00:01:56.143 --> 00:02:09.359
+They can also cover rich text policies, component behavior, and regression cases from previous defects using safe fixtures and assertions about rendered structure rather than exploit demonstrations.
+
+17
+00:02:09.359 --> 00:02:12.029
+Logging and diagnostics need review too.
+
+18
+00:02:12.029 --> 00:02:22.175
+Applications sometimes preserve raw user content in logs, error pages, debug panels, or support exports and later render that content in internal tools.
+
+19
+00:02:22.175 --> 00:02:29.784
+Logs should provide useful context without becoming a place where untrusted content is reinterpreted by a browser.
+
+20
+00:02:29.784 --> 00:02:34.790
+Defensive review includes both customer-facing pages and operational views.

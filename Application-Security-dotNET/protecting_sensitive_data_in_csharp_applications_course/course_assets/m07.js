@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "APIs, Serialization, DTOs, and Client Exposure",
+  "graphicAlt": "Bullet summary graphic for APIs, Serialization, DTOs, and Client Exposure.",
+  "narration": "APIs should control what they return as carefully as what they accept. A C# application may validate incoming data well and still expose too much through response objects, error payloads, exported files, debug endpoints, or generated documentation. Output design is a sensitive data control.\n\nDTOs and response models help prevent accidental exposure of internal fields, flags, tokens, secrets, audit notes, administrative data, or unrelated tenant data. A response contract should represent the specific client need, not everything available on a domain object or database entity.\n\nModel binding and deserialization produce untrusted input. Bound data still needs validation and authorization checks. A client-supplied user ID, tenant ID, role flag, price, status, or internal reference should be verified against trusted server-side data before it affects state or visibility.\n\nOver-posting and over-sharing can occur when domain models are reused directly as request or response contracts. JSON serialization settings, debug endpoints, OpenAPI documentation, error payloads, exported files, and pagination metadata can reveal more than intended if they are generated from broad internal objects.\n\nBrowser storage, hidden fields, query strings, mobile app storage, and client-side logs should not hold secrets or authoritative permissions. A client can help display data and collect input, but server-side policy must decide what data is allowed to leave and what submitted values are trusted.",
+  "narrationPoints": [
+    "A C# application may validate incoming data well and still expose too much through response objects, error payloads, exported files, debug endpoints, or generated documentation.",
+    "DTOs and response models help prevent accidental exposure of internal fields, flags, tokens, secrets, audit notes, administrative data, or unrelated tenant data.",
+    "Bound data still needs validation and authorization checks.",
+    "Over-posting and over-sharing can occur when domain models are reused directly as request or response contracts.",
+    "Browser storage, hidden fields, query strings, mobile app storage, and client-side logs should not hold secrets or authoritative permissions."
+  ]
+};

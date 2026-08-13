@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Configuration, Secrets, and Runtime Identity' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Bind a worker to reviewed runtime identity",
+      "language": "csharp",
+      "blurb": "The profile admits one application-owned service name, production-like environments, canonical managed-identity and queue identifiers, and no password, token, or connection string fields. The immutable values can be compared with actual host configuration at startup.",
+      "code": "public sealed class WorkerRuntimeProfile\n{\n    private WorkerRuntimeProfile(\n        string serviceName,\n        string environment,\n        string managedIdentityClientId,\n        string queueName)\n    {\n        ServiceName = serviceName;\n        Environment = environment;\n        ManagedIdentityClientId = managedIdentityClientId;\n        QueueName = queueName;\n    }\n\n    public string ServiceName { get; }\n    public string Environment { get; }\n    public string ManagedIdentityClientId { get; }\n    public string QueueName { get; }\n\n    public static WorkerRuntimeProfile Create(\n        string serviceName,\n        string environment,\n        string managedIdentityClientId,\n        string queueName)\n    {\n        if (serviceName != \"orders-worker\" || environment is not (\"Staging\" or \"Production\") ||\n            !IsIdentifier(managedIdentityClientId) || !IsIdentifier(queueName))\n        {\n            throw new ArgumentException(\"Worker runtime profile rejected.\");\n        }\n        return new WorkerRuntimeProfile(\n            serviceName, environment, managedIdentityClientId, queueName);\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    },
+    {
+      "title": "Own and clear a worker secret at a narrow boundary",
+      "language": "csharp",
+      "blurb": "The owner copies a nonempty bounded secret, exposes only a callback-scoped read-only span, rejects use after disposal, clears its private buffer exactly once, and never converts the secret to an immutable string.",
+      "code": "using System.Security.Cryptography;\n\npublic sealed class WorkerSecret : IDisposable\n{\n    private readonly object _sync = new();\n    private readonly byte[] _value;\n    private bool _disposed;\n\n    private WorkerSecret(byte[] value) => _value = value;\n\n    public static WorkerSecret CopyFrom(ReadOnlySpan<byte> value)\n    {\n        if (value.Length is < 1 or > 64 * 1024)\n            throw new ArgumentException(\"Worker secret size rejected.\", nameof(value));\n        return new WorkerSecret(value.ToArray());\n    }\n\n    public TResult Use<TResult>(ReadOnlySpanFunc<TResult> operation)\n    {\n        ArgumentNullException.ThrowIfNull(operation);\n        byte[] copy;\n        lock (_sync)\n        {\n            ObjectDisposedException.ThrowIf(_disposed, this);\n            copy = _value.ToArray();\n        }\n        try\n        {\n            return operation(copy);\n        }\n        finally\n        {\n            CryptographicOperations.ZeroMemory(copy);\n        }\n    }\n\n    public void Dispose()\n    {\n        lock (_sync)\n        {\n            if (_disposed) return;\n            CryptographicOperations.ZeroMemory(_value);\n            _disposed = true;\n        }\n    }\n}\n\npublic delegate TResult ReadOnlySpanFunc<TResult>(ReadOnlySpan<byte> value);\n"
+    }
+  ]
+};

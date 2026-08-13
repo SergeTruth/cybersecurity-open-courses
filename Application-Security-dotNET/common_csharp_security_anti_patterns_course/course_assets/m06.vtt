@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.420
+Deserialization should treat input as data, not as permission to choose application behavior.
+
+2
+00:00:06.420 --> 00:00:13.461
+A parser or serializer may turn bytes into objects, but the application still owns the trust decision.
+
+3
+00:00:13.461 --> 00:00:23.471
+Input from users, queues, files, partners, caches, or external services should be mapped into expected contracts and validated for the operation.
+
+4
+00:00:23.471 --> 00:00:28.234
+A dangerous anti-pattern is letting untrusted input select concrete .
+
+5
+00:00:28.234 --> 00:00:34.861
+NET types, handler classes, formatter types, command names, plugin names, or reflection targets.
+
+6
+00:00:34.861 --> 00:00:38.865
+That design gives data too much influence over code paths.
+
+7
+00:00:38.865 --> 00:00:46.182
+The safer approach is to map input to known, allowed message types and handlers under application control.
+
+8
+00:00:46.182 --> 00:00:55.570
+Legacy or dangerous serialization mechanisms for untrusted data should be replaced or isolated behind a reviewed compatibility boundary.
+
+9
+00:00:55.570 --> 00:01:07.720
+Binary formats, type name handling, polymorphic deserialization, reflection-based activation, and plugin loading all require explicit trust boundaries and documented ownership.
+
+10
+00:01:07.720 --> 00:01:18.903
+Prefer narrow DTOs, fixed contracts, allowlisted message types, schema validation where appropriate, and maintained serializers configured for the intended model.
+
+11
+00:01:18.903 --> 00:01:28.015
+A narrow contract makes it easier to see what data is accepted, which fields are required, and which values are ignored or rejected.
+
+12
+00:01:28.015 --> 00:01:32.640
+Loaded assemblies and plugins are code, not harmless configuration.
+
+13
+00:01:32.640 --> 00:01:44.238
+If a system can load executable components, the design needs signing, source control, release governance, access control, operational monitoring, and rollback planning.
+
+14
+00:01:44.238 --> 00:01:48.104
+Treat plugin loading as a deployment and trust decision.
+
+15
+00:01:48.104 --> 00:01:50.313
+Failure messages should be safe.
+
+16
+00:01:50.313 --> 00:02:00.253
+Deserialization errors should not expose internal type names, assembly names, file paths, secrets, or raw sensitive payloads to broad audiences.
+
+17
+00:02:00.253 --> 00:02:10.608
+Logs should capture safe context such as message type category, workflow, correlation ID, and failure reason without disclosing unnecessary internals.

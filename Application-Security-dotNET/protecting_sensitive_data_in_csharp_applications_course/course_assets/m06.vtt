@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.482
+Diagnostics are one of the most common places sensitive data leaks.
+
+2
+00:00:04.482 --> 00:00:23.195
+Structured logging, HTTP logging, request and response bodies, exception messages, stack traces, telemetry properties, metrics labels, distributed traces, crash dumps, screenshots, and support tickets can all carry values that were never meant for broad operational access.
+
+3
+00:00:23.195 --> 00:00:34.675
+Do not log passwords, tokens, API keys, connection strings, authorization headers, cookies, reset links, raw payment data, raw personal data, or full sensitive payloads.
+
+4
+00:00:34.675 --> 00:00:46.784
+Even when logs are access-controlled, they are usually copied, indexed, retained, exported, searched, and viewed by more systems and people than the primary application database.
+
+5
+00:00:46.784 --> 00:00:53.625
+Redaction should be designed before production, not improvised after sensitive data appears in logs.
+
+6
+00:00:53.625 --> 00:00:59.679
+Decide which fields are suppressed, masked, tokenized, or replaced with safe references.
+
+7
+00:00:59.679 --> 00:01:12.260
+Review framework logging, middleware, HTTP clients, exception handling, and third-party telemetry integrations because they may capture data outside normal application logging code.
+
+8
+00:01:12.260 --> 00:01:22.717
+Troubleshooting value can be preserved with safe identifiers, correlation IDs, coarse categories, safe endpoint names, event types, and redacted fields.
+
+9
+00:01:22.717 --> 00:01:28.772
+Operators usually need to know what failed, where it failed, and how to correlate the event.
+
+10
+00:01:28.772 --> 00:01:31.524
+They rarely need raw sensitive payloads.
+
+11
+00:01:31.524 --> 00:01:41.903
+Error responses should be useful without exposing stack traces, internal paths, database details, secret names, tenant details, or raw sensitive values.
+
+12
+00:01:41.903 --> 00:01:51.731
+Log retention, access control, export behavior, and support procedures should match the sensitivity of the data that might appear in diagnostics.
