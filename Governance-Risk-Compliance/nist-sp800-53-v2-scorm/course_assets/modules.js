@@ -46,5 +46,9 @@ window.COURSE_MODULES = [
   {
     "label": "Course Summary and Compliance Context",
     "href": "m12.html"
+  },
+  {
+    "label": "Final Quiz",
+    "href": "m13.html"
   }
 ];
