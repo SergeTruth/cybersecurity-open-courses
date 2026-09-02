@@ -214,15 +214,30 @@
     controls.appendChild(ccButton);
     controls.appendChild(narrationButton);
     controls.appendChild(headerButton);
-    controls.appendChild(imageButton);
+    if (graphic) controls.appendChild(imageButton);
     controls.appendChild(codeExamplesButton);
+    card.appendChild(captions);
     card.appendChild(audio);
     card.appendChild(controls);
-    card.appendChild(captions);
-    var playerInsertTarget = codeExamples && codeExamples.parentNode === narration.parentNode
-      ? codeExamples
-      : narration;
-    narration.parentNode.insertBefore(card, playerInsertTarget);
+    if (codeExamples && codeExamples.parentNode === narration.parentNode) {
+      codeExamples.parentNode.insertBefore(card, codeExamples.nextSibling);
+    } else {
+      narration.parentNode.insertBefore(card, narration);
+    }
+
+    document.body.classList.add("narration-dock-active");
+
+    function updateDockHeight() {
+      var height = Math.ceil(card.getBoundingClientRect().height);
+      document.documentElement.style.setProperty("--narration-dock-height", height + "px");
+    }
+
+    if (typeof window.ResizeObserver === "function") {
+      card.dockResizeObserver = new window.ResizeObserver(updateDockHeight);
+      card.dockResizeObserver.observe(card);
+    }
+    window.addEventListener("resize", updateDockHeight);
+    updateDockHeight();
 
     narration.classList.toggle("hidden", !narrationVisible);
     if (header) header.classList.toggle("title-card-hidden", !headerVisible);
@@ -230,6 +245,22 @@
     if (codeExamples) codeExamples.classList.toggle("code-example-card-user-hidden", !codeExamplesVisible);
     audio.playbackRate = playbackRate;
     setTrackMode();
+
+    function graphicAvailable() {
+      return Boolean(graphic && graphic.dataset.graphicAvailable === "true");
+    }
+
+    function syncImageButton() {
+      if (!graphic) return;
+      imageButton.classList.toggle("hidden", !graphicAvailable());
+      imageButton.disabled = !graphicAvailable();
+      imageButton.setAttribute("aria-hidden", String(!graphicAvailable()));
+    }
+
+    syncImageButton();
+    document.addEventListener("course:graphic-ready", function () {
+      syncImageButton();
+    });
 
     speed.addEventListener("change", function () {
       audio.playbackRate = Number(speed.value);
@@ -253,6 +284,7 @@
     });
 
     imageButton.addEventListener("click", function () {
+      if (!graphicAvailable()) return;
       imageVisible = !imageVisible;
       if (graphic) graphic.classList.toggle("hidden", !imageVisible);
       imageButton.textContent = imageVisible ? "Hide Image" : "Show Image";
