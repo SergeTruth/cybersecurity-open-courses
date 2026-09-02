@@ -706,6 +706,73 @@
       updateGraphicState(expanded);
     }
 
+    function fullscreenElement() {
+      return document.fullscreenElement || document.webkitFullscreenElement || null;
+    }
+
+    function fullscreenRequest() {
+      return card.requestFullscreen || card.webkitRequestFullscreen || null;
+    }
+
+    function fullscreenExit() {
+      return document.exitFullscreen || document.webkitExitFullscreen || null;
+    }
+
+    var usingFullscreen = false;
+
+    function expandGraphic() {
+      var request = fullscreenRequest();
+      setExpanded(card, true);
+      if (!request) return;
+
+      try {
+        var result = request.call(card);
+        if (result && typeof result.then === "function") {
+          result.then(function () {
+            usingFullscreen = true;
+            setExpanded(card, true);
+          }, function () {
+            // Keep the existing iframe-sized overlay as a fallback.
+            usingFullscreen = false;
+          });
+        } else {
+          usingFullscreen = true;
+        }
+      } catch (error) {
+        // Keep the existing iframe-sized overlay as a fallback.
+        usingFullscreen = false;
+      }
+    }
+
+    function collapseGraphic() {
+      var exit = fullscreenExit();
+      if (fullscreenElement() === card && exit) {
+        try {
+          var result = exit.call(document);
+          if (result && typeof result.catch === "function") {
+            result.catch(function () {
+              usingFullscreen = false;
+              setExpanded(card, false);
+            });
+          }
+          return;
+        } catch (error) {
+          usingFullscreen = false;
+        }
+      }
+      setExpanded(card, false);
+    }
+
+    function syncFullscreenState() {
+      if (fullscreenElement() === card) {
+        usingFullscreen = true;
+        setExpanded(card, true);
+      } else if (usingFullscreen) {
+        usingFullscreen = false;
+        setExpanded(card, false);
+      }
+    }
+
     function showGraphic() {
       card.classList.remove("graphic-card-hidden");
       graphic.removeAttribute("aria-hidden");
@@ -714,7 +781,7 @@
     }
 
     function hideGraphic() {
-      setExpanded(card, false);
+      collapseGraphic();
       card.classList.add("graphic-card-hidden");
       graphic.setAttribute("aria-hidden", "true");
       notifyGraphic(false);
@@ -722,7 +789,11 @@
 
     function toggle() {
       if (card.classList.contains("graphic-card-hidden")) return;
-      setExpanded(card, !card.classList.contains("is-expanded"));
+      if (fullscreenElement() === card || card.classList.contains("is-expanded")) {
+        collapseGraphic();
+      } else {
+        expandGraphic();
+      }
     }
 
     graphic.addEventListener("click", toggle);
@@ -732,7 +803,7 @@
         toggle();
       } else if (event.key === "Escape") {
         if (card && card.classList.contains("is-expanded")) {
-          setExpanded(card, false);
+          collapseGraphic();
         }
       }
     });
@@ -740,9 +811,12 @@
     document.addEventListener("keydown", function (event) {
       if (event.key !== "Escape") return;
       if (card && card.classList.contains("is-expanded")) {
-        setExpanded(card, false);
+        collapseGraphic();
       }
     });
+
+    document.addEventListener("fullscreenchange", syncFullscreenState);
+    document.addEventListener("webkitfullscreenchange", syncFullscreenState);
 
     graphic.addEventListener("load", function () {
       if (graphic.naturalWidth > 0) {
