@@ -215,15 +215,29 @@
     controls.appendChild(narrationButton);
     controls.appendChild(headerButton);
     if (graphic) controls.appendChild(imageButton);
-    if (codeExamples) controls.appendChild(codeExamplesButton);
+    controls.appendChild(codeExamplesButton);
+    card.appendChild(captions);
     card.appendChild(audio);
     card.appendChild(controls);
-    card.appendChild(captions);
     if (codeExamples && codeExamples.parentNode === narration.parentNode) {
       codeExamples.parentNode.insertBefore(card, codeExamples.nextSibling);
     } else {
       narration.parentNode.insertBefore(card, narration);
     }
+
+    document.body.classList.add("narration-dock-active");
+
+    function updateDockHeight() {
+      var height = Math.ceil(card.getBoundingClientRect().height);
+      document.documentElement.style.setProperty("--narration-dock-height", height + "px");
+    }
+
+    if (typeof window.ResizeObserver === "function") {
+      card.dockResizeObserver = new window.ResizeObserver(updateDockHeight);
+      card.dockResizeObserver.observe(card);
+    }
+    window.addEventListener("resize", updateDockHeight);
+    updateDockHeight();
 
     narration.classList.toggle("hidden", !narrationVisible);
     if (header) header.classList.toggle("title-card-hidden", !headerVisible);
