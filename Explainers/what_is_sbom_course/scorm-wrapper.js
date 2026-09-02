@@ -1,11 +1,23 @@
 (function () {
   "use strict";
 
+  function isSCORM12API(candidate) {
+    return Boolean(
+      candidate &&
+      typeof candidate.LMSInitialize === "function" &&
+      typeof candidate.LMSGetValue === "function" &&
+      typeof candidate.LMSSetValue === "function" &&
+      typeof candidate.LMSCommit === "function" &&
+      typeof candidate.LMSFinish === "function" &&
+      typeof candidate.LMSGetLastError === "function"
+    );
+  }
+
   function findAPI(win) {
     var attempts = 0;
     while (win && attempts < 500) {
       try {
-        if (win.API) return win.API;
+        if (isSCORM12API(win.API)) return win.API;
         if (win.parent === win) break;
         win = win.parent;
       } catch (error) {
@@ -60,24 +72,54 @@
   }
 
   function succeeded(value) {
-    return value === "true" || value === true;
+    return value === "true" || value === true || value === "1" || value === 1;
+  }
+
+  function sessionIsUsable() {
+    var status = invoke("LMSGetValue", ["cmi.core.lesson_status"]);
+    if (status.called && errorCode() === "0") return true;
+
+    var learner = invoke("LMSGetValue", ["cmi.core.student_id"]);
+    var learnerValue = learner.value === null || learner.value === undefined
+      ? ""
+      : String(learner.value);
+    return learner.called && learnerValue !== "" && learnerValue !== "false";
+  }
+
+  function mutationSucceeded(method, result) {
+    var code = errorCode();
+    var ok = (result.called && succeeded(result.value)) || code === "0";
+    if (!ok) rememberFailure(method, code);
+    return ok;
   }
 
   function initialize() {
     if (initialized) return true;
     if (!discover()) return false;
+
+    // Every document in a multi-SCO package must call LMSInitialize so
+    // Moodle updates its private SCO id from scorm_current_node. If the
+    // previous document did not finish in time, Moodle returns 101 after it
+    // has selected and initialized the newly requested SCO; that case is
+    // attached below.
     var result = invoke("LMSInitialize", [""]);
     initialized = result.called && succeeded(result.value);
-    if (!initialized) rememberFailure("LMSInitialize");
+    if (!initialized) {
+      var initCode = errorCode();
+      if (initCode === "101" || sessionIsUsable()) {
+        initialized = true;
+        lastError = null;
+        return true;
+      }
+      rememberFailure("LMSInitialize", initCode);
+    }
     return initialized;
   }
 
   function setValue(key, value) {
     if (!initialize()) return false;
     var result = invoke("LMSSetValue", [key, String(value)]);
-    var ok = result.called && succeeded(result.value);
-    if (!ok) rememberFailure("LMSSetValue");
-    return ok;
+    return mutationSucceeded("LMSSetValue", result);
   }
 
   function getValue(key) {
@@ -99,17 +141,14 @@
   function commit() {
     if (!initialize()) return false;
     var result = invoke("LMSCommit", [""]);
-    var ok = result.called && succeeded(result.value);
-    if (!ok) rememberFailure("LMSCommit");
-    return ok;
+    return mutationSucceeded("LMSCommit", result);
   }
 
   function terminate() {
     if (!initialized || !api) return false;
     var committed = commit();
     var result = invoke("LMSFinish", [""]);
-    var finished = result.called && succeeded(result.value);
-    if (!finished) rememberFailure("LMSFinish");
+    var finished = mutationSucceeded("LMSFinish", result);
     initialized = false;
     api = null;
     return committed && finished;
