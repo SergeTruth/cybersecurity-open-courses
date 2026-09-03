@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:11.457
+Serialization is the process of turning application objects into a data format that can be transported, stored, cached, logged, displayed, or handed to another system.
+
+2
+00:00:11.457 --> 00:00:12.829
+In .
+
+3
+00:00:12.829 --> 00:00:27.099
+NET applications, serialization appears in API responses, request bodies, queue messages, distributed caches, cookies, session values, configuration files, imports, exports, logs, telemetry, and integrations.
+
+4
+00:00:27.099 --> 00:00:30.941
+Because it is so common, it can start to feel invisible.
+
+5
+00:00:30.941 --> 00:00:34.577
+Secure engineering begins by making it visible again.
+
+6
+00:00:34.577 --> 00:00:41.712
+Deserialization is the reverse path: the application turns external data back into an object it can use.
+
+7
+00:00:41.712 --> 00:00:51.454
+That object may look familiar, strongly typed, and convenient, but the data did not become trustworthy simply because a serializer created a .
+
+8
+00:00:51.454 --> 00:00:52.826
+NET object.
+
+9
+00:00:52.826 --> 00:01:09.017
+If the data crossed a browser, API, queue, file system, database, cache, partner system, administrator tool, or support workflow, the application still needs to treat it as untrusted until it has been validated for the current decision.
+
+10
+00:01:09.017 --> 00:01:13.271
+Secure serialization is about preserving intent at boundaries.
+
+11
+00:01:13.271 --> 00:01:20.131
+A serialized ExampleOrderMessage should contain only the fields the consumer is supposed to receive.
+
+12
+00:01:20.131 --> 00:01:28.638
+An ExampleCustomerDto should represent a deliberate contract, not a full domain object that happens to be easy to serialize.
+
+13
+00:01:28.638 --> 00:01:35.842
+An ExampleApiResponse should reveal what the caller needs, not every property the server happens to know.
+
+14
+00:01:35.842 --> 00:01:39.204
+Convenience features can hide important behavior.
+
+15
+00:01:39.204 --> 00:01:53.336
+A serializer may populate setters, apply default values, convert types, ignore unknown data, include fields that were not meant for an external audience, or use type information in ways that deserve review.
+
+16
+00:01:53.336 --> 00:02:01.569
+None of those features are automatically wrong, but they should be understood before they become production assumptions.
+
+17
+00:02:01.569 --> 00:02:04.931
+The practical goal is not to avoid serialization.
+
+18
+00:02:04.931 --> 00:02:06.303
+Modern .
+
+19
+00:02:06.303 --> 00:02:07.675
+NET systems need it.
+
+20
+00:02:07.675 --> 00:02:28.188
+The goal is to design serialization paths as part of normal engineering: identify trust boundaries, use explicit contracts, validate deserialized data, protect sensitive output, review special serializer features, test malformed and incompatible data, and keep legacy patterns on a remediation plan.

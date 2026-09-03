@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.278
+XML signatures can help verify that selected XML content has not changed and that it was signed by an expected key or certificate.
+
+2
+00:00:08.278 --> 00:00:15.983
+That can be important in identity workflows, business document exchange, regulated submissions, and partner integrations.
+
+3
+00:00:15.983 --> 00:00:22.733
+The value of a signature depends on exactly what was signed and how the application interprets the result.
+
+4
+00:00:22.733 --> 00:00:26.299
+Signature verification is not the same as authorization.
+
+5
+00:00:26.299 --> 00:00:45.657
+A valid signature may establish integrity or origin according to the trust model, but the application must still decide whether the signer is allowed to perform the requested action, whether the data is current, whether the account or partner is active, and whether the document satisfies business rules.
+
+6
+00:00:45.657 --> 00:00:54.445
+The application should confirm that the expected content was signed, not merely that a Signature element exists somewhere in the document.
+
+7
+00:00:54.445 --> 00:01:05.907
+Signed and unsigned content can appear in the same document, so the trust decision must be tied to the specific elements, references, and business fields the application relies on.
+
+8
+00:01:05.907 --> 00:01:15.968
+Review canonicalization, reference handling, certificate trust, signing key ownership, expiration expectations, revocation expectations, and algorithm policy.
+
+9
+00:01:15.968 --> 00:01:25.710
+These topics can be subtle, so XML signature workflows should be treated as security-sensitive integration points with clear ownership and test coverage.
+
+10
+00:01:25.710 --> 00:01:30.359
+Avoid trusting unsigned fields just because they are near signed content.
+
+11
+00:01:30.359 --> 00:01:45.833
+If a field drives routing, payment, entitlement, identity, or authorization, the team should know whether that field is inside the verified signed portion and whether it still needs schema validation and business validation after verification.
+
+12
+00:01:45.833 --> 00:01:49.144
+Errors during verification should be handled safely.
+
+13
+00:01:49.144 --> 00:02:03.471
+A failed signature check should produce a clear business failure and safe operational logging without exposing sensitive XML, private keys, certificate store details, internal paths, or full diagnostics to the wrong audience.

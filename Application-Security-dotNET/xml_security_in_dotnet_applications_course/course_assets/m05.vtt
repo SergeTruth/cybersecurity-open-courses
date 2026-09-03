@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.794
+Schema validation helps a .
+
+2
+00:00:01.794 --> 00:00:05.049
+NET application enforce an expected XML contract.
+
+3
+00:00:05.049 --> 00:00:14.549
+It can confirm required elements, data types, order, occurrence rules, and structural expectations before business logic consumes the document.
+
+4
+00:00:14.549 --> 00:00:23.716
+That makes validation useful, especially for partner integrations and file-based workflows where format drift can create operational risk.
+
+5
+00:00:23.716 --> 00:00:26.905
+The schema itself is part of the trust boundary.
+
+6
+00:00:26.905 --> 00:00:34.744
+A safe design uses schemas from trusted, controlled sources that the application owner manages or explicitly approves.
+
+7
+00:00:34.744 --> 00:00:44.443
+The application should not accept arbitrary schema locations from an untrusted document and then use those locations to drive validation behavior.
+
+8
+00:00:44.443 --> 00:00:48.230
+Imports, includes, and schema location hints need review.
+
+9
+00:00:48.230 --> 00:00:59.257
+They can be helpful in complex XML ecosystems, but they should not become a path for untrusted input to influence where the application retrieves validation material.
+
+10
+00:00:59.257 --> 00:01:07.362
+Keep schema files versioned, reviewed, and deployed through the same governance path as application configuration or code.
+
+11
+00:01:07.362 --> 00:01:13.939
+Validation does not replace authorization, authentication, parser configuration, or business rules.
+
+12
+00:01:13.939 --> 00:01:26.827
+A document can be structurally valid and still represent an unauthorized action, an impossible state, a duplicate request, a stale partner version, or a value the business process should reject.
+
+13
+00:01:26.827 --> 00:01:30.879
+Schema validation is one layer, not the final trust decision.
+
+14
+00:01:30.879 --> 00:01:33.802
+Schema validation errors need safe handling.
+
+15
+00:01:33.802 --> 00:01:42.638
+Detailed messages can expose internal file paths, schema names, source locations, document structure, and sometimes sensitive values.
+
+16
+00:01:42.638 --> 00:01:55.260
+Production responses should be concise, while logs should capture enough safe context for troubleshooting without recording raw sensitive XML or internal implementation detail unnecessarily.
+
+17
+00:01:55.260 --> 00:01:57.585
+Schema lifecycle matters over time.
+
+18
+00:01:57.585 --> 00:02:08.347
+Teams should know who owns a schema, how versions are introduced, how compatibility is tested, how partner changes are approved, and how old versions are retired.
+
+19
+00:02:08.347 --> 00:02:14.990
+Trusted contracts are not only parser inputs; they are operational agreements that need maintenance.

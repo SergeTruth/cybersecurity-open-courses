@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:12.294
+Configuration values should not appear in user-facing errors, logs, telemetry, traces, health checks, crash reports, screenshots, or support bundles when those values are sensitive.
+
+2
+00:00:12.294 --> 00:00:24.113
+This includes connection strings, tokens, headers, keys, certificate material, provider-specific secrets, internal paths, and sometimes database names or account identifiers.
+
+3
+00:00:24.113 --> 00:00:28.799
+Diagnostics should separate user visibility from operator visibility.
+
+4
+00:00:28.799 --> 00:00:32.467
+Users need safe error messages and support references.
+
+5
+00:00:32.467 --> 00:00:43.674
+Authorized operators may need more detail, but that detail should be protected, redacted, retained appropriately, and limited to people with a real operational need.
+
+6
+00:00:43.674 --> 00:00:46.527
+Structured logging and redaction can help.
+
+7
+00:00:46.527 --> 00:00:57.463
+Logs can capture setting categories, configuration source names, validation outcomes, correlation IDs, and safe state transitions without printing secret values.
+
+8
+00:00:57.463 --> 00:01:04.663
+Avoid logging entire configuration objects because safe and sensitive values often sit next to each other.
+
+9
+00:01:04.663 --> 00:01:09.553
+Health checks and status pages are useful, but they can expose too much.
+
+10
+00:01:09.553 --> 00:01:17.636
+A health endpoint may reveal provider names, dependency status, internal routes, storage names, or environment details.
+
+11
+00:01:17.636 --> 00:01:25.175
+Decide what is safe for public, internal, and operator-only audiences, and configure each endpoint accordingly.
+
+12
+00:01:25.175 --> 00:01:28.775
+Development and production diagnostics should differ.
+
+13
+00:01:28.775 --> 00:01:31.628
+Detailed local errors can help developers.
+
+14
+00:01:31.628 --> 00:01:40.118
+Production diagnostics should prioritize safe user messages, protected logs, monitoring signals, and correlation identifiers.
+
+15
+00:01:40.118 --> 00:01:45.756
+Copying development diagnostic behavior into production creates avoidable exposure.
+
+16
+00:01:45.756 --> 00:01:49.967
+Correlation IDs support investigation without leaking secrets.
+
+17
+00:01:49.967 --> 00:02:00.156
+They let support teams and operators connect user reports to protected logs while keeping sensitive configuration values out of user-visible channels.
+
+18
+00:02:00.156 --> 00:02:04.367
+Good diagnostics are useful because they are bounded and safe.

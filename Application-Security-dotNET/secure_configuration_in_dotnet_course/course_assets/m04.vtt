@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.767
+Secrets are high-risk configuration values.
+
+2
+00:00:02.767 --> 00:00:14.415
+They include database credentials, API keys, certificates, private keys, signing keys, encryption keys, service tokens, storage credentials, webhook secrets, and connection strings.
+
+3
+00:00:14.415 --> 00:00:23.939
+Even harmless placeholder names such as ExampleApiKey or ExampleConnectionString should remind teams to keep real values out of ordinary code paths.
+
+4
+00:00:23.939 --> 00:00:33.399
+Secret values should not be stored in source code, appsettings files, build logs, crash dumps, screenshots, support bundles, or ordinary telemetry.
+
+5
+00:00:33.399 --> 00:00:40.800
+These locations are copied, searched, retained, and shared in ways that make accidental disclosure hard to contain.
+
+6
+00:00:40.800 --> 00:00:47.235
+Secret handling should assume that convenience copies will eventually escape their original context.
+
+7
+00:00:47.235 --> 00:00:57.210
+Use supported secret-management mechanisms, managed identities, deployment secrets, platform secret stores, or external secret providers where appropriate.
+
+8
+00:00:57.210 --> 00:01:09.051
+The best choice depends on the hosting model, but the principle is consistent: the application should receive only the access it needs, through a channel designed for sensitive values.
+
+9
+00:01:09.051 --> 00:01:12.011
+Separate secret references from secret values.
+
+10
+00:01:12.011 --> 00:01:23.209
+A configuration value may safely name ExampleCertificateName or ExampleStorageAccount when it is only a reference, while the actual key material remains in a protected store.
+
+11
+00:01:23.209 --> 00:01:28.936
+This distinction helps teams document configuration without publishing the secret itself.
+
+12
+00:01:28.936 --> 00:01:36.015
+Secret rotation, ownership, access control, and emergency revocation should be planned before they are needed.
+
+13
+00:01:36.015 --> 00:01:47.406
+Teams should know who owns each secret, which applications use it, which identities can read it, how it rotates, how it can be revoked, and how to recover if a value is exposed.
+
+14
+00:01:47.406 --> 00:01:53.005
+Treat connection strings as sensitive even when they do not visibly contain a password.
+
+15
+00:01:53.005 --> 00:01:59.054
+They can reveal internal names, provider details, account relationships, or trust assumptions.
+
+16
+00:01:59.054 --> 00:02:08.321
+In many environments they also enable access through managed identity or integrated authentication, so they still deserve protection and review.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.685
+DbContext lifetime should match the application pattern.
+
+2
+00:00:03.685 --> 00:00:05.001
+In many ASP.
+
+3
+00:00:05.001 --> 00:00:14.739
+NET Core applications, a scoped DbContext per request is a normal starting point because it keeps change tracking and unit-of-work behavior bounded.
+
+4
+00:00:14.739 --> 00:00:27.242
+Background jobs, batch operations, and long-running processes may need different patterns, but those patterns should be intentional rather than accidental reuse of a request-oriented design.
+
+5
+00:00:27.242 --> 00:00:32.374
+Configuration should differ across development, test, staging, and production.
+
+6
+00:00:32.374 --> 00:00:37.638
+Development may need local databases, detailed diagnostics, and disposable data.
+
+7
+00:00:37.638 --> 00:00:48.693
+Production needs protected credentials, stable provider settings, controlled logging, safe retry behavior, and permission boundaries that reflect real operational risk.
+
+8
+00:00:48.693 --> 00:00:52.904
+Environment-specific settings should be explicit and reviewable.
+
+9
+00:00:52.904 --> 00:01:00.800
+Connection strings, database credentials, certificates, managed identities, and service principals are sensitive assets.
+
+10
+00:01:00.800 --> 00:01:15.408
+They should be managed through approved secret-management and deployment mechanisms, not hardcoded in source, committed to ordinary configuration files, printed in logs, captured in screenshots, or exposed in build output.
+
+11
+00:01:15.408 --> 00:01:20.014
+A leaked connection string can become direct access to sensitive data.
+
+12
+00:01:20.014 --> 00:01:25.278
+Database provider configuration and EF Core service registration deserve review.
+
+13
+00:01:25.278 --> 00:01:39.162
+Retry settings, command timeouts, detailed errors, sensitive data logging, lazy loading behavior, connection pooling, migrations configuration, and provider-specific options all influence security or operations.
+
+14
+00:01:39.162 --> 00:01:45.150
+Defaults are useful, but teams should know which settings are active in production and why.
+
+15
+00:01:45.150 --> 00:01:49.296
+Debug-oriented database settings should stay out of production.
+
+16
+00:01:49.296 --> 00:02:04.825
+Detailed exception output, sensitive value logging, broad local permissions, automatic destructive behavior, and sample connection strings may be helpful during development, but they are inappropriate for real users and production data.
+
+17
+00:02:04.825 --> 00:02:10.747
+Release review should include EF Core configuration, not only controller and service code.
+
+18
+00:02:10.747 --> 00:02:14.761
+Different activities may need different database permissions.
+
+19
+00:02:14.761 --> 00:02:22.262
+Runtime access, migrations, reporting, maintenance, and administration do not necessarily require the same rights.
+
+20
+00:02:22.262 --> 00:02:35.159
+Separating those responsibilities where appropriate makes it easier to reduce blast radius and understand who or what can change data structures, read broad data, or perform privileged operations.

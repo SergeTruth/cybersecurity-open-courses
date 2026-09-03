@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.451
+XML is still common in production .
+
+2
+00:00:02.451 --> 00:00:03.852
+NET systems.
+
+3
+00:00:03.852 --> 00:00:16.459
+It appears in APIs, uploaded files, configuration, SOAP and legacy service integrations, document formats, partner exchanges, feeds, identity workflows, and queue-based processing.
+
+4
+00:00:16.459 --> 00:00:27.595
+Even when a new application is mostly JSON-based, XML often remains in the edges of the environment where old systems, vendors, and document workflows connect.
+
+5
+00:00:27.595 --> 00:00:31.728
+The security issue is that XML is not just a string format.
+
+6
+00:00:31.728 --> 00:00:44.895
+XML processors can support DTD processing, external references, schema validation, XPath queries, XSLT transformations, digital signatures, namespaces, encodings, and rich error reporting.
+
+7
+00:00:44.895 --> 00:00:54.490
+Those features are useful in the right context, but they also mean XML processing is an application behavior that deserves design review.
+
+8
+00:00:54.490 --> 00:00:58.903
+The actual risk depends on several conditions working together.
+
+9
+00:00:58.903 --> 00:01:00.864
+Where did the XML come from.
+
+10
+00:01:00.864 --> 00:01:02.334
+Which parser is used.
+
+11
+00:01:02.334 --> 00:01:04.226
+Which features are enabled.
+
+12
+00:01:04.226 --> 00:01:06.957
+Can the parser read external resources.
+
+13
+00:01:06.957 --> 00:01:13.120
+Can the input influence query expressions, schema locations, or transformation behavior.
+
+14
+00:01:13.120 --> 00:01:15.362
+What happens when parsing fails.
+
+15
+00:01:15.362 --> 00:01:19.284
+What does the application trust after parsing completes.
+
+16
+00:01:19.284 --> 00:01:22.926
+These questions matter more than the file extension.
+
+17
+00:01:22.926 --> 00:01:36.934
+A practical default is to treat XML from users, partners, vendors, uploads, queues, email, object storage, and external services as untrusted unless there is a strong, verified reason to do otherwise.
+
+18
+00:01:36.934 --> 00:01:49.891
+Signed or authenticated transport may identify a sender, but the document still needs parser controls, structure validation, and business validation before the application relies on it.
+
+19
+00:01:49.891 --> 00:01:53.883
+A secure XML baseline makes the processing path explicit.
+
+20
+00:01:53.883 --> 00:02:07.821
+It defines parser settings, resource limits, trusted schema sources, safe query patterns, restricted transformation behavior, careful signature handling, safe error handling, and operational logging.
+
+21
+00:02:07.821 --> 00:02:09.782
+The goal is not to fear XML.
+
+22
+00:02:09.782 --> 00:02:14.685
+The goal is to make XML behavior visible, constrained, and reviewable.

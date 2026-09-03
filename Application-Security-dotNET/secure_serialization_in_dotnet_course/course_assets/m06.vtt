@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.875
+XML remains useful in many .
+
+2
+00:00:01.875 --> 00:00:10.983
+NET environments, especially for established enterprise integrations, document exchange, configuration-like data, and partner workflows.
+
+3
+00:00:10.983 --> 00:00:16.943
+Its structure can be valuable, but XML processing should be treated as boundary handling.
+
+4
+00:00:16.943 --> 00:00:29.266
+Documents from users, partners, services, file shares, imports, and administrative tools should be considered untrusted until parsed, validated, and approved for the specific workflow.
+
+5
+00:00:29.266 --> 00:00:31.208
+Parser configuration matters.
+
+6
+00:00:31.208 --> 00:00:44.870
+Teams should understand which XML APIs are used, how large documents are handled, whether depth or size limits are enforced, how long parsing is allowed to run, and how resource consumption is controlled.
+
+7
+00:00:44.870 --> 00:00:54.714
+The goal is to keep parsing predictable under malformed, unexpected, or oversized documents without turning every operational issue into an outage.
+
+8
+00:00:54.714 --> 00:00:57.728
+Avoid unnecessary external resource behavior.
+
+9
+00:00:57.728 --> 00:01:06.099
+Many XML workflows only need to read the document that was supplied and validate its expected structure and business meaning.
+
+10
+00:01:06.099 --> 00:01:21.703
+If a parser or document-processing library can reach outside the document, resolve additional resources, or apply behavior that the business process does not require, that configuration deserves review and usually should be narrowed.
+
+11
+00:01:21.703 --> 00:01:25.118
+Validation should cover both structure and meaning.
+
+12
+00:01:25.118 --> 00:01:29.873
+A document can be well-formed and still wrong for the business process.
+
+13
+00:01:29.873 --> 00:01:45.008
+An ExampleImportFile may have the expected elements but reference an unsupported tenant, omit required ownership context, contain incompatible version information, or include values that are not valid for the current workflow.
+
+14
+00:01:45.008 --> 00:01:48.089
+Parsing success is not the same as acceptance.
+
+15
+00:01:48.089 --> 00:01:50.299
+Safe error handling is important.
+
+16
+00:01:50.299 --> 00:02:00.076
+Unsupported or malformed XML should produce a controlled failure path, a safe diagnostic event, and a limited response for the caller or operator.
+
+17
+00:02:00.076 --> 00:02:08.916
+Avoid exposing detailed parser internals, file paths, dependency information, or sensitive document content in user-facing messages.
+
+18
+00:02:08.916 --> 00:02:13.470
+Keep detailed diagnostics protected and useful for authorized teams.
+
+19
+00:02:13.470 --> 00:02:19.498
+Dependencies that process XML and documents should be part of application security review.
+
+20
+00:02:19.498 --> 00:02:28.739
+That includes XML readers, schema validators, transformation libraries, document libraries, import frameworks, and compatibility packages.
+
+21
+00:02:28.739 --> 00:02:37.646
+Review their configuration, update status, operational limits, and whether they are still the right fit for the data being processed.

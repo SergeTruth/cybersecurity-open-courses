@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.373
+Correct password hashing does not prevent operational exposure.
+
+2
+00:00:04.373 --> 00:00:16.164
+Passwords and password-equivalent secrets can leak before hashing, during reset, through diagnostics, in support workflows, or from systems around the identity application.
+
+3
+00:00:16.164 --> 00:00:21.396
+Those paths deserve review even when the database stores only password hashes.
+
+4
+00:00:21.396 --> 00:00:31.625
+Never log plaintext passwords, password reset tokens, recovery codes, MFA secrets, raw request bodies from login forms, or credential-bearing headers.
+
+5
+00:00:31.625 --> 00:00:41.854
+Review telemetry, exception reports, traces, support screenshots, analytics, crash dumps, request replay tools, browser storage, and test artifacts.
+
+6
+00:00:41.854 --> 00:00:48.804
+If a tool captures requests or errors, decide how sensitive fields are suppressed before production use.
+
+7
+00:00:48.804 --> 00:00:54.192
+Debug and development behavior should not silently become production behavior.
+
+8
+00:00:54.192 --> 00:01:06.608
+Verbose error pages, request dumps, local logging habits, seeded accounts, and test shortcuts can become real exposure paths when copied into deployment scripts or shared environments.
+
+9
+00:01:06.608 --> 00:01:12.777
+Production should have explicit redaction, least privilege, and monitoring expectations.
+
+10
+00:01:12.777 --> 00:01:15.978
+Secrets used by the identity system also matter.
+
+11
+00:01:15.978 --> 00:01:29.331
+Connection strings, signing keys, token-protection keys, email provider credentials, and data-protection keys should be stored outside source control and managed through approved secret storage.
+
+12
+00:01:29.331 --> 00:01:35.422
+Access to identity databases, backups, logs, and admin tools should be limited and audited.
+
+13
+00:01:35.422 --> 00:01:40.575
+Test data should not include real user passwords or realistic reused secrets.
+
+14
+00:01:40.575 --> 00:01:45.182
+Support procedures should avoid asking users to disclose passwords.
+
+15
+00:01:45.182 --> 00:01:54.084
+The safest password handling culture is one where teams do not need to see, copy, or store password material to operate the application.

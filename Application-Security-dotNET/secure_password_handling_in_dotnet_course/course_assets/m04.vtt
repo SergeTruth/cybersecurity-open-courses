@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.277
+Registration and login flows should use protected transport and deliberate server-side handling.
+
+2
+00:00:06.277 --> 00:00:09.599
+The password entry screen is only the first boundary.
+
+3
+00:00:09.599 --> 00:00:23.334
+The application should ensure that credentials are submitted to the intended endpoint, over HTTPS, and into a flow that avoids accidental logging, diagnostic capture, or unnecessary exposure in client-side behavior.
+
+4
+00:00:23.334 --> 00:00:29.684
+Identifiers such as email addresses and usernames should be normalized and validated consistently.
+
+5
+00:00:29.684 --> 00:00:37.290
+The application should decide how casing, whitespace, international characters, aliases, and uniqueness are handled.
+
+6
+00:00:37.290 --> 00:00:44.526
+That decision affects account lookup, duplicate prevention, audit logs, support workflows, and user experience.
+
+7
+00:00:44.526 --> 00:00:47.628
+It should not leak more account state than needed.
+
+8
+00:00:47.628 --> 00:00:50.581
+Login failure messages should be predictable.
+
+9
+00:00:50.581 --> 00:01:04.759
+A user needs a clear result, but the application should avoid unnecessary disclosure about whether a specific account exists, whether the password was wrong, whether the email is unconfirmed, or whether an account is disabled.
+
+10
+00:01:04.759 --> 00:01:13.325
+Account status, email confirmation, disabled accounts, and locked accounts should be handled deliberately in the application design.
+
+11
+00:01:13.325 --> 00:01:22.333
+Password verification should use the configured password hasher, not direct string comparison and not a separate ad hoc verification routine.
+
+12
+00:01:22.333 --> 00:01:37.028
+The sign-in path should establish the intended authentication session after successful verification without retaining password material in memory longer than necessary, copying it into logs, or passing it to unrelated components.
+
+13
+00:01:37.028 --> 00:01:42.640
+Failed sign-ins should be rate-limited, logged safely, and reviewed for abuse patterns.
+
+14
+00:01:42.640 --> 00:01:49.728
+The logs should support monitoring and incident response without storing passwords or excessive personal data.
+
+15
+00:01:49.728 --> 00:01:59.402
+Successful and failed authentication flows should both be observable enough for operations while preserving the confidentiality of password material.

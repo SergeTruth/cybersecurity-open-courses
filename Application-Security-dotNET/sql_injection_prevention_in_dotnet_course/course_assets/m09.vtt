@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.710
+Code review for SQL injection prevention should focus on query construction patterns.
+
+2
+00:00:05.710 --> 00:00:19.346
+String-built SQL, interpolation in command text, broad raw SQL helpers, custom query builders, reporting code, search features, export tools, and administrative utilities are all worth careful attention.
+
+3
+00:00:19.346 --> 00:00:28.146
+Reviewers do not need payload demonstrations to ask the right question: is variable data separated from database command structure?
+
+4
+00:00:28.146 --> 00:00:35.872
+Micro-ORMs and third-party data-access libraries can be safe when used correctly, but each has its own conventions.
+
+5
+00:00:35.872 --> 00:00:46.955
+Teams should understand how a library binds parameters, how it handles dynamic query options, where raw command text appears, and what patterns are approved locally.
+
+6
+00:00:46.955 --> 00:00:51.591
+Convenience wrappers should not hide unsafe construction from review.
+
+7
+00:00:51.591 --> 00:01:00.726
+Dependency review matters for database drivers, ORM packages, query-builder libraries, reporting components, and administrative tooling.
+
+8
+00:01:00.726 --> 00:01:08.989
+These dependencies influence how commands are built, how values are bound, how errors surface, and how updates are applied.
+
+9
+00:01:08.989 --> 00:01:13.624
+A data-access dependency should have an owner and a maintenance plan.
+
+10
+00:01:13.624 --> 00:01:16.378
+Legacy remediation should be prioritized.
+
+11
+00:01:16.378 --> 00:01:19.065
+Start by inventorying risky query paths.
+
+12
+00:01:19.065 --> 00:01:30.283
+Prioritize operations touching sensitive data, broad reports, administrative tools, multi-tenant boundaries, high-volume workflows, and externally reachable endpoints.
+
+13
+00:01:30.283 --> 00:01:39.285
+Replace unsafe construction with parameterized patterns, narrow query shape, and add regression coverage around the expected behavior.
+
+14
+00:01:39.285 --> 00:01:44.189
+Safe testing can be defensive without becoming payload-heavy instruction.
+
+15
+00:01:44.189 --> 00:01:57.422
+Tests can verify that common values such as customer IDs, dates, statuses, search terms, and report filters are passed through approved parameter patterns and cannot alter the intended query shape.
+
+16
+00:01:57.422 --> 00:02:03.267
+Static analysis, code review checklists, and CI checks can also help catch regressions.
+
+17
+00:02:03.267 --> 00:02:08.305
+Document approved patterns so future changes do not recreate the same risk.
+
+18
+00:02:08.305 --> 00:02:20.598
+A short guide that explains which APIs to use, how to handle dynamic filters, where raw SQL is allowed, and what review is required can save time and improve consistency across teams.

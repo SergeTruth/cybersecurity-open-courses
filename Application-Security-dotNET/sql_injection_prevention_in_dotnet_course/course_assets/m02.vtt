@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.421
+Query-influencing data can enter a .
+
+2
+00:00:02.421 --> 00:00:13.384
+NET application through route values, query strings, forms, JSON bodies, headers, files, queues, imports, logs, configuration, databases, and third-party services.
+
+3
+00:00:13.384 --> 00:00:16.411
+Some of that data is obviously user-provided.
+
+4
+00:00:16.411 --> 00:00:23.271
+Some appears later as stored records, partner data, operational metadata, or internal workflow values.
+
+5
+00:00:23.271 --> 00:00:27.441
+All of it deserves review when it influences a database query.
+
+6
+00:00:27.441 --> 00:00:31.476
+Stored or internal data should not automatically be trusted.
+
+7
+00:00:31.476 --> 00:00:44.591
+A search term saved yesterday, a report filter imported from a file, a status value received from a partner, or a configuration value supplied by deployment can still affect query behavior later.
+
+8
+00:00:44.591 --> 00:00:51.182
+Storage changes where the data lives; it does not prove the data is safe to mix into command text.
+
+9
+00:00:51.182 --> 00:01:01.742
+Trust boundaries exist between web clients, APIs, backend services, background jobs, data stores, administrators, reporting tools, and maintenance utilities.
+
+10
+00:01:01.742 --> 00:01:09.409
+Query construction is one of those boundaries because it translates application intent into database instructions.
+
+11
+00:01:09.409 --> 00:01:15.395
+That boundary should be narrow, explicit, and protected by approved data-access patterns.
+
+12
+00:01:15.395 --> 00:01:24.542
+Dynamic search, filtering, sorting, reporting, export, and administrative tools often deserve more review than simple lookup operations.
+
+13
+00:01:24.542 --> 00:01:29.922
+They tend to accept flexible options and may touch sensitive or broad data sets.
+
+14
+00:01:29.922 --> 00:01:40.684
+Flexibility is not automatically unsafe, but the application should control which query shapes are possible rather than letting callers define structure freely.
+
+15
+00:01:40.684 --> 00:01:46.669
+A practical prevention technique is mapping data flow from entry point to query boundary.
+
+16
+00:01:46.669 --> 00:01:58.372
+Identify where values enter, where they are normalized or validated, which model carries them, which service constructs the query, and which library sends it to the database.
+
+17
+00:01:58.372 --> 00:02:04.089
+This map helps reviewers distinguish parameter values from query structure decisions.
+
+18
+00:02:04.089 --> 00:02:07.855
+Data-flow mapping also helps teams find neglected paths.
+
+19
+00:02:07.855 --> 00:02:21.374
+Background imports, scheduled reports, support dashboards, and legacy admin screens may not receive the same attention as public controllers, but they can still influence important database operations.
+
+20
+00:02:21.374 --> 00:02:27.427
+Prevention is stronger when the review follows data rather than only following web routes.

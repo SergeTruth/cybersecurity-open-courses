@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Building a Safer Upload Workflow",
+  "graphicAlt": "Bullet summary graphic for Course Summary: Building a Safer Upload Workflow.",
+  "narration": "Secure file upload handling in ASP.NET Core is a repeatable engineering workflow. Start by identifying every upload entry point, including forms, APIs, imports, partner integrations, and administrative tools. Apply request, form, multipart, endpoint, file count, and business limits that match each workflow.\n\nTreat file names, paths, metadata, and content as untrusted. Generate internal storage identifiers, keep client names as display metadata when needed, avoid client-controlled paths, and store uploaded files outside executable application roots. Separate temporary, quarantined, private, public, and processed storage states.\n\nValidate file categories using business allow-lists and multiple signals. Extensions, MIME types, signatures, metadata, structure, size, and processing expectations all provide useful information, but no single signal proves a file is safe. Accepted files may still need quarantine, scanning, review, or asynchronous processing before normal use.\n\nEnforce authorization on both upload and download. Check purpose, tenant, ownership, role, and object-level access before accepting or serving files. Avoid exposing internal storage paths and make sure thumbnails, previews, processed derivatives, and temporary links do not bypass the rules for the original content.\n\nFinally, operate the pipeline. Log useful state transitions without storing sensitive contents, monitor unusual patterns and processing failures, review dependencies and storage permissions, protect secrets, and maintain cleanup and retention. A safer upload system is one the team can explain, monitor, and improve over time.",
+  "narrationPoints": [
+    "Secure file upload handling in ASP.NET Core is a repeatable engineering workflow.",
+    "Generate internal storage identifiers, keep client names as display metadata when needed, avoid client-controlled paths, and store uploaded files outside executable application roots.",
+    "Accepted files may still need quarantine, scanning, review, or asynchronous processing before normal use.",
+    "Check purpose, tenant, ownership, role, and object-level access before accepting or serving files.",
+    "A safer upload system is one the team can explain, monitor, and improve over time."
+  ]
+};

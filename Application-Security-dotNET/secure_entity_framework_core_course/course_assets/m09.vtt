@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.417
+Performance and security are connected in data-heavy applications.
+
+2
+00:00:04.417 --> 00:00:16.863
+A query that reads too broadly, loads too many related entities, exports too much data, or runs without limits can create availability and privacy problems even when it is parameterized.
+
+3
+00:00:16.863 --> 00:00:19.874
+Bounded data access is part of secure design.
+
+4
+00:00:19.874 --> 00:00:25.361
+Use pagination, filtered queries, reasonable date ranges, and bounded result sets.
+
+5
+00:00:25.361 --> 00:00:32.321
+These controls reduce accidental full-table reads, limit exposure, and protect shared database capacity.
+
+6
+00:00:32.321 --> 00:00:38.879
+They also make application behavior more predictable for users, operators, and downstream systems.
+
+7
+00:00:38.879 --> 00:00:43.362
+Be careful with includes, lazy loading, and relationship traversal.
+
+8
+00:00:43.362 --> 00:00:51.994
+Loading related data can be necessary, but it can also create unexpected data access, performance spikes, or accidental exposure.
+
+9
+00:00:51.994 --> 00:00:59.288
+Developers should understand what each query loads and whether the caller is authorized to receive that data.
+
+10
+00:00:59.288 --> 00:01:03.839
+Unbounded exports, reports, and administrative views deserve review.
+
+11
+00:01:03.839 --> 00:01:10.597
+These workflows may be legitimate, but they often touch broad data and run under privileged contexts.
+
+12
+00:01:10.597 --> 00:01:18.293
+They should have clear filters, resource limits, authorization checks, audit records, and operational expectations.
+
+13
+00:01:18.293 --> 00:01:25.118
+Timeouts, cancellation tokens, retries, and circuit-breaking behavior should be designed deliberately.
+
+14
+00:01:25.118 --> 00:01:30.605
+Retrying database operations without understanding failure mode can increase load.
+
+15
+00:01:30.605 --> 00:01:35.222
+Ignoring cancellation can waste resources after a caller disconnects.
+
+16
+00:01:35.222 --> 00:01:42.516
+Timeouts and cancellation help the application fail predictably rather than slowly consuming shared capacity.
+
+17
+00:01:42.516 --> 00:01:48.873
+Background jobs and batch operations should follow the same data access rules as request paths.
+
+18
+00:01:48.873 --> 00:01:55.900
+They need tenant context, authorization assumptions, resource limits, logging, and safe failure handling.
+
+19
+00:01:55.900 --> 00:02:03.394
+Operational resilience means failures are observable, recoverable, and safe for data integrity and availability.

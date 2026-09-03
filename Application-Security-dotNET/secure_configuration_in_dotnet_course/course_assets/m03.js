@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Environment Separation and Deployment Profiles",
+  "graphicAlt": "Bullet summary graphic for Environment Separation and Deployment Profiles.",
+  "narration": "Development, test, staging, and production should have distinct configuration expectations. Development often needs local endpoints, sample data, detailed errors, and fast feedback. Production needs controlled diagnostics, protected secrets, approved integrations, reliable identity settings, and behavior that matches user and compliance expectations.\n\nDevelopment settings should not silently travel to production. Debug behavior, detailed errors, sample accounts, mock services, local credentials, permissive policies, and temporary flags should be contained by environment-specific configuration and release review. A setting that is useful during development can be risky in a public environment.\n\nDeployment profiles and slots can act as configuration boundaries. They let teams separate staging validation from production rollout, but they also create another place where settings can drift. Slot swaps, copied profiles, and older templates should be reviewed so production does not inherit test behavior.\n\nEnvironment naming should be consistent and unambiguous. The application should not depend on unclear strings or ad hoc checks to decide whether it is running in production. If environment detection fails or is ambiguous, the safe response should not be to enable relaxed behavior.\n\nProduction configuration changes should require review and approval. Emergency edits may be necessary, but they should still be tracked, owned, and reconciled after the incident. Unreviewed temporary settings are one of the easiest ways for a secure deployment to become unsafe over time.",
+  "narrationPoints": [
+    "Production needs controlled diagnostics, protected secrets, approved integrations, reliable identity settings, and behavior that matches user and compliance expectations.",
+    "A setting that is useful during development can be risky in a public environment.",
+    "Deployment profiles and slots can act as configuration boundaries.",
+    "The application should not depend on unclear strings or ad hoc checks to decide whether it is running in production.",
+    "Unreviewed temporary settings are one of the easiest ways for a secure deployment to become unsafe over time."
+  ]
+};

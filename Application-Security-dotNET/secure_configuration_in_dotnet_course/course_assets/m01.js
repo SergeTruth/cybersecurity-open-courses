@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Secure Configuration Foundations in .NET",
+  "graphicAlt": "Bullet summary graphic for Secure Configuration Foundations in .NET.",
+  "narration": "Secure configuration in .NET is part of application security, not just application setup. Configuration controls how the application authenticates users, enforces authorization, connects to services, writes logs, handles diagnostics, protects data, exposes endpoints, and behaves in each environment. A weak setting can undermine otherwise careful code.\n\nConfiguration affects identity, networking, storage, data protection, feature behavior, error handling, and deployment safety. A setting such as ExampleFeatureFlag may change whether a workflow is available. A connection setting such as ExampleConnectionString may define which database is used. A certificate reference such as ExampleCertificateName may affect trust in a downstream integration.\n\nConfiguration also crosses trust boundaries. Developers create defaults, build systems package artifacts, deployment systems inject values, hosting platforms expose environment settings, cloud services provide identities, and operators change runtime behavior. Each handoff can preserve intended security or introduce drift.\n\nSecure defaults are important, but they still require review. A default that is safe for local development may not be safe for production. A default that was safe last year may no longer match the current deployment model. Configuration should be treated as living application behavior, not background text.\n\nConfiguration security connects reliability, privacy, and maintainability. Clear settings make systems easier to troubleshoot. Protected secrets reduce disclosure risk. Validated options prevent silent misbehavior. Documented configuration lets developers and operators understand what the running application is actually doing.",
+  "narrationPoints": [
+    "Secure configuration in .NET is part of application security, not just application setup.",
+    "A connection setting such as ExampleConnectionString may define which database is used.",
+    "Developers create defaults, build systems package artifacts, deployment systems inject values, hosting platforms expose environment settings, cloud services provide identities, and operators change runtime behavior.",
+    "Configuration should be treated as living application behavior, not background text.",
+    "Documented configuration lets developers and operators understand what the running application is actually doing."
+  ]
+};

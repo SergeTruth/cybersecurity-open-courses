@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.250
+NET and ASP.
+
+2
+00:00:01.250 --> 00:00:06.374
+NET Core use a configuration system that can combine values from multiple sources.
+
+3
+00:00:06.374 --> 00:00:20.122
+Configuration files, environment variables, development user secrets, app platform settings, command-line inputs, and secret stores can all influence runtime behavior depending on how the application is built and hosted.
+
+4
+00:00:20.122 --> 00:00:26.934
+Connection strings are commonly placed under a ConnectionStrings section and read through configuration APIs.
+
+5
+00:00:26.934 --> 00:00:30.933
+That convention is useful, but it is not a protection mechanism.
+
+6
+00:00:30.933 --> 00:00:41.244
+A value under that section is still only as safe as the source that supplied it, the people and systems that can read it, and the logs and tools that may display it.
+
+7
+00:00:41.244 --> 00:00:47.244
+Developers should understand which source wins when the same key appears in more than one place.
+
+8
+00:00:47.244 --> 00:00:48.993
+Configuration order matters.
+
+9
+00:00:48.993 --> 00:00:55.555
+A value from one source may override a file value, and a deployment setting may override a local default.
+
+10
+00:00:55.555 --> 00:01:01.742
+Review should include the expected source for each environment, not only the key name used in code.
+
+11
+00:01:01.742 --> 00:01:08.241
+Environment-specific configuration should separate development, testing, staging, and production values.
+
+12
+00:01:08.241 --> 00:01:19.364
+The goal is to make it difficult to run a local build against production data, deploy a test connection to production, or copy a shared secret across environments without review.
+
+13
+00:01:19.364 --> 00:01:24.364
+Sample configuration files should use placeholders rather than sensitive values.
+
+14
+00:01:24.364 --> 00:01:35.300
+Onboarding docs, examples, local setup scripts, and checked-in templates should teach the shape of the configuration without publishing usable credentials or internal details.
+
+15
+00:01:35.300 --> 00:01:50.610
+A secure configuration review asks where the connection string comes from, which source has precedence, who can change that source, where the value may be displayed, and how the application proves it is using the intended environment at runtime.

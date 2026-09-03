@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Sensitive Data, Privacy, and Serialization Output' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Map private account state to a minimal response contract",
+      "language": "csharp",
+      "blurb": "The mapper accepts repository state through a validated factory, retains no password hash or recovery token, and emits only the canonical account identifier, bounded display name, and coarse credential-presence flags required by the client.",
+      "code": "using System.Text;\n\npublic sealed class PrivateAccountState\n{\n    private PrivateAccountState(\n        string accountId,\n        string displayName,\n        bool hasPassword,\n        bool hasRecoveryCodes)\n    {\n        AccountId = accountId;\n        DisplayName = displayName;\n        HasPassword = hasPassword;\n        HasRecoveryCodes = hasRecoveryCodes;\n    }\n\n    public string AccountId { get; }\n    public string DisplayName { get; }\n    public bool HasPassword { get; }\n    public bool HasRecoveryCodes { get; }\n\n    public static PrivateAccountState FromRepository(\n        string accountId,\n        string displayName,\n        string? passwordHash,\n        int recoveryCodeCount)\n    {\n        if (!IsIdentifier(accountId) || !IsDisplayName(displayName) ||\n            passwordHash is { Length: > 2_048 } || recoveryCodeCount is < 0 or > 20)\n        {\n            throw new ArgumentException(\"Private account state rejected.\");\n        }\n        return new PrivateAccountState(\n            accountId, displayName, passwordHash is not null, recoveryCodeCount > 0);\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n\n    private static bool IsDisplayName(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length <= 80 &&\n        Encoding.UTF8.GetByteCount(value) <= 160 && !value.Any(char.IsControl);\n}\n\npublic sealed record PublicAccountResponse(\n    string AccountId,\n    string DisplayName,\n    bool HasPassword,\n    bool HasRecoveryCodes);\n\npublic static class PublicAccountMapper\n{\n    public static PublicAccountResponse Map(PrivateAccountState state)\n    {\n        ArgumentNullException.ThrowIfNull(state);\n        return new PublicAccountResponse(\n            state.AccountId, state.DisplayName, state.HasPassword, state.HasRecoveryCodes);\n    }\n}\n"
+    },
+    {
+      "title": "Encode spreadsheet-bound CSV cells without formula execution",
+      "language": "csharp",
+      "blurb": "The encoder applies character and UTF-8 byte ceilings, rejects controls and newlines for one-record output, prefixes cells whose first non-space character could start a spreadsheet formula, doubles quotes, and always emits one quoted data cell.",
+      "code": "using System.Text;\n\npublic static class SpreadsheetCsvCell\n{\n    public static string Encode(string value)\n    {\n        if (value is null || value.Length > 500 || Encoding.UTF8.GetByteCount(value) > 1_000 ||\n            value.Any(char.IsControl))\n        {\n            throw new ArgumentException(\"CSV cell rejected.\", nameof(value));\n        }\n\n        var firstContent = value.AsSpan().TrimStart();\n        var safe = firstContent.Length > 0 && firstContent[0] is '=' or '+' or '-' or '@'\n            ? \"'\" + value\n            : value;\n        return \"\\\"\" + safe.Replace(\"\\\"\", \"\\\"\\\"\", StringComparison.Ordinal) + \"\\\"\";\n    }\n}\n"
+    }
+  ]
+};

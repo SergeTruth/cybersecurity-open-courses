@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.902
+A secure connection string strategy includes database authorization, not only secret storage.
+
+2
+00:00:05.902 --> 00:00:12.882
+Protecting a connection string is important, but the permissions behind that connection also determine impact.
+
+3
+00:00:12.882 --> 00:00:17.768
+If a credential is exposed or misused, least privilege limits what it can do.
+
+4
+00:00:17.768 --> 00:00:24.177
+Application runtime accounts should have the minimum database permissions needed for normal behavior.
+
+5
+00:00:24.177 --> 00:00:32.807
+A web application that only reads and writes application tables should not casually use an account with broad administrative capability.
+
+6
+00:00:32.807 --> 00:00:40.042
+Reporting, background jobs, runtime operations, migrations, and administration may each need different identities.
+
+7
+00:00:40.042 --> 00:00:44.547
+Migration credentials may need more privilege than runtime credentials.
+
+8
+00:00:44.547 --> 00:00:49.370
+That does not mean the runtime app should always carry migration privileges.
+
+9
+00:00:49.370 --> 00:00:58.000
+Separating migration, administration, read-only, and runtime identities can make both day-to-day operations and incident response safer.
+
+10
+00:00:58.000 --> 00:01:04.219
+Tenant-aware systems should not rely only on connection string secrecy to protect data boundaries.
+
+11
+00:01:04.219 --> 00:01:11.961
+Tenant filters, row-level controls where appropriate, resource checks, and application authorization should work together.
+
+12
+00:01:11.961 --> 00:01:17.735
+A connection string should not be the only thing separating one tenant's data from another.
+
+13
+00:01:17.735 --> 00:01:20.083
+Provider options can affect security.
+
+14
+00:01:20.083 --> 00:01:34.171
+Encryption settings, certificate or server trust behavior, integrated authentication mode, pooling, timeout behavior, and application name can all influence confidentiality, reliability, troubleshooting, and audit records.
+
+15
+00:01:34.171 --> 00:01:37.724
+Provider options deserve the same review as credentials.
+
+16
+00:01:37.724 --> 00:01:44.578
+Avoid disabling certificate validation or using trust settings casually to make connection errors disappear.
+
+17
+00:01:44.578 --> 00:01:48.512
+A temporary connection fix can weaken service identity checks.
+
+18
+00:01:48.512 --> 00:01:57.650
+If a trust setting is needed in a controlled environment, document the scope and keep it out of production paths that require strong validation.
+
+19
+00:01:57.650 --> 00:02:03.615
+Connection pooling and long-lived application processes may affect credential rotation timing.
+
+20
+00:02:03.615 --> 00:02:10.659
+A rotated password or identity setting may not take effect immediately if existing pooled connections continue.
+
+21
+00:02:10.659 --> 00:02:17.575
+Rotation plans should account for process restarts, pool clearing, deployment waves, and background services.

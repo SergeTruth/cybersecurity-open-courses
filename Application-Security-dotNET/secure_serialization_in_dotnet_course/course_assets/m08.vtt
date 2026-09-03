@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.249
+Serialization contracts often live longer than a single release.
+
+2
+00:00:04.249 --> 00:00:07.038
+API clients may update at different times.
+
+3
+00:00:07.038 --> 00:00:09.760
+Queue messages may be delayed or retried.
+
+4
+00:00:09.760 --> 00:00:12.947
+Stored serialized data may be read months later.
+
+5
+00:00:12.947 --> 00:00:16.068
+Export files may be imported by external tools.
+
+6
+00:00:16.068 --> 00:00:21.114
+Event messages may be consumed by teams that deploy on a different schedule.
+
+7
+00:00:21.114 --> 00:00:24.500
+Secure design assumes old and new data may coexist.
+
+8
+00:00:24.500 --> 00:00:32.136
+Versioning should cover API payloads, queue messages, event messages, imports, exports, and stored serialized data.
+
+9
+00:00:32.136 --> 00:00:44.817
+A version does not need to be complicated, but producers and consumers should know which fields are required, which are optional, which are deprecated, and how unknown data should be handled.
+
+10
+00:00:44.817 --> 00:00:49.731
+Ownership should be clear so teams know who can approve a contract change.
+
+11
+00:00:49.731 --> 00:00:53.316
+Backward and forward compatibility require discipline.
+
+12
+00:00:53.316 --> 00:00:59.756
+Adding an optional field may be safe if old consumers ignore it and new consumers handle absence.
+
+13
+00:00:59.756 --> 00:01:06.462
+Renaming or removing a field can be disruptive if stored data or external clients still depend on it.
+
+14
+00:01:06.462 --> 00:01:11.907
+Changing defaults can alter behavior even when the serialized shape looks similar.
+
+15
+00:01:11.907 --> 00:01:14.297
+Compatibility needs tests, not hope.
+
+16
+00:01:14.297 --> 00:01:19.410
+Avoid unsafe shortcuts when older data no longer matches newer object models.
+
+17
+00:01:19.410 --> 00:01:27.510
+Broad acceptance, loose conversions, or hidden fallback behavior can mask a migration problem and produce ambiguous state.
+
+18
+00:01:27.510 --> 00:01:39.196
+A safer approach is to identify affected data, define migration rules, preserve enough context for diagnostics, and reject or quarantine data that cannot be interpreted safely.
+
+19
+00:01:39.196 --> 00:01:45.835
+Migration strategies for stored serialized data should be planned at a high level before deployment.
+
+20
+00:01:45.835 --> 00:01:54.998
+Teams may migrate eagerly, migrate on read, maintain a compatibility reader for a limited period, or support multiple versions explicitly.
+
+21
+00:01:54.998 --> 00:01:57.654
+Each approach has operational tradeoffs.
+
+22
+00:01:57.654 --> 00:02:02.567
+What matters is that the path is documented, tested, monitored, and owned.
+
+23
+00:02:02.567 --> 00:02:05.090
+Contract tests help prevent surprises.
+
+24
+00:02:05.090 --> 00:02:16.776
+Before deployment, test old producer to new consumer, new producer to old consumer where required, missing fields, unknown fields, deprecated fields, and incompatible versions.
+
+25
+00:02:16.776 --> 00:02:24.146
+The goal is to make compatibility behavior predictable and visible before real production data exposes the gap.

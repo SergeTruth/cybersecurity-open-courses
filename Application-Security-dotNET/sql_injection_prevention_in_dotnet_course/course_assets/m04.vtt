@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.409
+Entity Framework Core helps reduce injection risk when developers use LINQ and parameterized APIs as intended.
+
+2
+00:00:07.409 --> 00:00:15.289
+In common query patterns, EF Core translates expression trees and values into provider-supported database operations.
+
+3
+00:00:15.289 --> 00:00:23.977
+That is a strong baseline for many applications, especially compared with handwritten command text assembled from request values.
+
+4
+00:00:23.977 --> 00:00:29.971
+EF Core does not remove the need for authorization, validation, data shaping, and review.
+
+5
+00:00:29.971 --> 00:00:35.831
+A query can be safely parameterized and still return records the caller should not see.
+
+6
+00:00:35.831 --> 00:00:40.208
+A model can be mapped correctly and still expose too many fields.
+
+7
+00:00:40.208 --> 00:00:46.068
+A filter can be syntactically safe and still allow an inappropriate business operation.
+
+8
+00:00:46.068 --> 00:00:51.456
+Injection prevention is necessary, but not the whole data-access security story.
+
+9
+00:00:51.456 --> 00:00:54.217
+Raw SQL features are higher-review areas.
+
+10
+00:00:54.217 --> 00:01:09.102
+EF Core supports raw SQL for legitimate reasons such as performance, provider-specific capabilities, or complex queries, but those features should preserve parameterization and keep variable data out of command structure.
+
+11
+00:01:09.102 --> 00:01:15.837
+A raw SQL path should have a clear reason, an owner, and review proportional to the data it touches.
+
+12
+00:01:15.837 --> 00:01:20.282
+Dynamic filtering, sorting, and projection require careful design.
+
+13
+00:01:20.282 --> 00:01:26.141
+Callers should not provide arbitrary field names, query fragments, or projection rules.
+
+14
+00:01:26.141 --> 00:01:34.762
+Instead, the application should map supported sort fields, filters, report columns, and views to approved internal query shapes.
+
+15
+00:01:34.762 --> 00:01:41.026
+This preserves flexibility for clients while keeping SQL structure under application control.
+
+16
+00:01:41.026 --> 00:01:46.010
+Separating API boundary models from persistence models can improve safety.
+
+17
+00:01:46.010 --> 00:01:50.455
+Request DTOs should express what the caller is allowed to provide.
+
+18
+00:01:50.455 --> 00:01:54.967
+Response DTOs should express what the caller is allowed to receive.
+
+19
+00:01:54.967 --> 00:02:05.070
+Database entities often contain relationships, audit fields, internal flags, or operational data that should not become external contract by accident.
+
+20
+00:02:05.070 --> 00:02:08.909
+Performance-driven query changes deserve security review.
+
+21
+00:02:08.909 --> 00:02:16.587
+Optimization work may introduce raw SQL, broader projections, caching, denormalized views, or reporting shortcuts.
+
+22
+00:02:16.587 --> 00:02:26.286
+Those changes can be valuable, but they should still preserve parameterization, authorization filters, data minimization, and tenant boundaries.

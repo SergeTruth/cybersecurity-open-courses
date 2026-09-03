@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.387
+EF Core migrations are production-impacting changes.
+
+2
+00:00:03.387 --> 00:00:09.769
+They can alter schema, constraints, indexes, relationships, defaults, permissions, and data shape.
+
+3
+00:00:09.769 --> 00:00:19.409
+A migration that works locally can still have operational and security consequences when it runs against production data and production permissions.
+
+4
+00:00:19.409 --> 00:00:22.795
+Schema changes and data transformations need review.
+
+5
+00:00:22.795 --> 00:00:37.384
+Adding a nullable field, changing an index, altering a relationship, dropping a column, widening a permission-related table, or moving tenant data can affect authorization, auditing, performance, privacy, and rollback plans.
+
+6
+00:00:37.384 --> 00:00:41.618
+Destructive operations deserve explicit review and communication.
+
+7
+00:00:41.618 --> 00:00:43.962
+Seed data can be security-sensitive.
+
+8
+00:00:43.962 --> 00:00:54.057
+Roles, users, permissions, feature flags, default settings, administrative accounts, sample tenants, and development shortcuts should be treated carefully.
+
+9
+00:00:54.057 --> 00:01:02.915
+Seed logic that is harmless in local development can be risky if it reaches staging or production without environment-specific controls.
+
+10
+00:01:02.915 --> 00:01:07.539
+Development convenience should be separated from production discipline.
+
+11
+00:01:07.539 --> 00:01:16.787
+Automatic database creation, broad local permissions, sample credentials, test data, and relaxed constraints may help developers move quickly.
+
+12
+00:01:16.787 --> 00:01:27.273
+Production migrations need change control, controlled execution identity, review, monitoring, and a plan for what happens if the migration fails partway through.
+
+13
+00:01:27.273 --> 00:01:30.530
+Permission separation is important for migrations.
+
+14
+00:01:30.530 --> 00:01:36.978
+The identity that runs schema changes may need rights that the runtime application should not have.
+
+15
+00:01:36.978 --> 00:01:44.272
+Keeping those responsibilities distinct can reduce the impact of runtime defects and make audit records clearer.
+
+16
+00:01:44.272 --> 00:01:49.222
+Rollback planning and operational communication are part of secure delivery.
+
+17
+00:01:49.222 --> 00:02:00.098
+Teams should know whether a migration is reversible, whether data loss is possible, how long it may run, what users may observe, and who is responsible for monitoring.
+
+18
+00:02:00.098 --> 00:02:05.830
+Database change control belongs in the secure software delivery process, not outside it.

@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.338
+A .
+
+2
+00:00:01.338 --> 00:00:15.992
+NET application may handle JSON, XML, binary formats, form data, configuration files, queue messages, event messages, cache entries, cookies, session values, import files, and API responses in the same overall workflow.
+
+3
+00:00:15.992 --> 00:00:23.486
+Each format has different tooling, operational expectations, compatibility concerns, and security review points.
+
+4
+00:00:23.486 --> 00:00:27.166
+The important question is not only what format is used.
+
+5
+00:00:27.166 --> 00:00:33.790
+It is where the data came from, who controls it, and what the application will do after reading it.
+
+6
+00:00:33.790 --> 00:00:44.630
+Trust boundaries exist between users, browsers, APIs, services, background jobs, databases, caches, queues, file systems, administrators, and third-party systems.
+
+7
+00:00:44.630 --> 00:00:48.578
+A value can cross more than one boundary over its lifetime.
+
+8
+00:00:48.578 --> 00:00:58.748
+An ExampleEventMessage might be created by a service, stored in a queue, retried later by a worker, archived for audit, and then read by a support tool.
+
+9
+00:00:58.748 --> 00:01:03.967
+Each step can change who can influence the data and what assumptions are safe.
+
+10
+00:01:03.967 --> 00:01:07.179
+Internal data is not automatically trusted data.
+
+11
+00:01:07.179 --> 00:01:10.592
+A cache entry may have been produced by older code.
+
+12
+00:01:10.592 --> 00:01:13.536
+A database row may contain imported content.
+
+13
+00:01:13.536 --> 00:01:18.621
+A queue message may be replayed after a deployment changed the object model.
+
+14
+00:01:18.621 --> 00:01:23.305
+A configuration file may be edited by a different operational process.
+
+15
+00:01:23.305 --> 00:01:36.018
+If serialized data affects business decisions, authorization decisions, state changes, or sensitive output, it should be validated for that use, even when it is read from an internal system.
+
+16
+00:01:36.018 --> 00:01:38.360
+Format choice should be deliberate.
+
+17
+00:01:38.360 --> 00:01:45.118
+JSON is often suitable for web APIs and service messages because it is widely supported and readable.
+
+18
+00:01:45.118 --> 00:01:50.337
+XML may be needed for established integrations or document-oriented workflows.
+
+19
+00:01:50.337 --> 00:01:59.236
+Binary formats may be appropriate in controlled internal systems, but they often require stronger ownership and migration discipline.
+
+20
+00:01:59.236 --> 00:02:05.392
+Custom formats should be rare because they increase maintenance cost and make review harder.
+
+21
+00:02:05.392 --> 00:02:07.868
+Contracts help teams avoid ambiguity.
+
+22
+00:02:07.868 --> 00:02:20.514
+A message contract should define required fields, optional fields, ownership, expected producer, expected consumer, versioning rules, and whether the data may be replayed or imported later.
+
+23
+00:02:20.514 --> 00:02:26.737
+Without that documentation, teams end up relying on tribal knowledge and serializer defaults.
+
+24
+00:02:26.737 --> 00:02:32.358
+That makes code review harder and turns simple changes into compatibility surprises.
+
+25
+00:02:32.358 --> 00:02:37.309
+Review who can create, modify, replay, import, or consume serialized data.
+
+26
+00:02:37.309 --> 00:02:44.669
+A user-created ExampleImportFile should receive different treatment from a server-created ExampleSessionValue.
+
+27
+00:02:44.669 --> 00:02:51.695
+A partner-supplied document should not inherit the trust level of the internal workflow that receives it.
+
+28
+00:02:51.695 --> 00:02:56.914
+Secure serialization depends on clear ownership and realistic trust decisions.

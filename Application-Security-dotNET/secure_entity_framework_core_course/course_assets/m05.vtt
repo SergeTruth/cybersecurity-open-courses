@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.876
+Authentication tells the application who or what is calling.
+
+2
+00:00:03.876 --> 00:00:12.016
+Authorization decides whether that identity may access a specific record, tenant, report, file, job, or administrative action.
+
+3
+00:00:12.016 --> 00:00:22.224
+EF Core queries should be designed with authorization in mind, not treated as simple data retrieval followed by a later hope that the response is appropriate.
+
+4
+00:00:22.224 --> 00:00:25.713
+Object-level authorization is critical in data access.
+
+5
+00:00:25.713 --> 00:00:30.235
+A user may be allowed to open the orders feature, but not every order.
+
+6
+00:00:30.235 --> 00:00:35.791
+A support user may view one tenant's records, but not another tenant's sensitive data.
+
+7
+00:00:35.791 --> 00:00:41.347
+A background worker may update processing state, but not ownership or approval status.
+
+8
+00:00:41.347 --> 00:00:45.805
+The query should include the relevant access rule whenever practical.
+
+9
+00:00:45.805 --> 00:00:48.777
+Tenant boundaries require careful enforcement.
+
+10
+00:00:48.777 --> 00:00:53.234
+Tenant identifiers supplied by clients should not be blindly trusted.
+
+11
+00:00:53.234 --> 00:01:03.571
+The application should derive tenant context from trusted identity, session, routing, or service context as appropriate, validate it, and apply it consistently.
+
+12
+00:01:03.571 --> 00:01:09.579
+Mistakes in multi-tenant filtering can expose data even when individual query syntax is safe.
+
+13
+00:01:09.579 --> 00:01:17.720
+Global query filters can be useful tools for tenant isolation or soft-delete behavior, but they still need review and testing.
+
+14
+00:01:17.720 --> 00:01:29.090
+Teams should understand where filters apply, where they can be intentionally bypassed, how administrative paths work, and how background jobs establish tenant or scope context.
+
+15
+00:01:29.090 --> 00:01:33.095
+A global filter is a tool, not a substitute for design review.
+
+16
+00:01:33.095 --> 00:01:38.910
+Service-layer authorization and repository or query patterns should preserve access rules.
+
+17
+00:01:38.910 --> 00:01:49.376
+If one path uses an authorization-aware query and another path retrieves the same entity directly, the application may create a bypass around its normal controls.
+
+18
+00:01:49.376 --> 00:01:55.255
+High-risk support and administrative workflows should be especially explicit and auditable.
+
+19
+00:01:55.255 --> 00:02:03.783
+Least privilege applies to users, service accounts, background workers, administrators, partner integrations, and database accounts.
+
+20
+00:02:03.783 --> 00:02:09.468
+Broad permissions can make development easier, but they increase the impact of mistakes.
+
+21
+00:02:09.468 --> 00:02:17.285
+The data access layer should make expected authority visible rather than hiding it behind generic fetch and save methods.

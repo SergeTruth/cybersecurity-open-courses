@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.385
+Production connection strings should come from controlled runtime configuration, not source code.
+
+2
+00:00:06.385 --> 00:00:19.814
+The exact platform may vary, but the principle is stable: production secrets need access control, ownership, auditability where available, availability planning, rotation support, and response procedures.
+
+3
+00:00:19.814 --> 00:00:31.729
+Cloud secret stores, Azure Key Vault, managed app settings, container secrets, orchestrator secrets, CI/CD protected variables, and platform-specific mechanisms can all play a role.
+
+4
+00:00:31.729 --> 00:00:41.076
+The right choice depends on hosting model, operational maturity, startup requirements, rotation needs, and the teams that own the environment.
+
+5
+00:00:41.076 --> 00:00:47.856
+Access to production connection strings should be limited to app identities and operators that need it.
+
+6
+00:00:47.856 --> 00:00:52.003
+Broad read access increases exposure and makes response harder.
+
+7
+00:00:52.003 --> 00:01:02.470
+Platform permissions should be reviewed like application permissions, because the people and workloads that can read secrets can influence production behavior.
+
+8
+00:01:02.470 --> 00:01:10.896
+Deployment pipelines should inject secrets securely without writing them to artifacts, logs, package output, or build summaries.
+
+9
+00:01:10.896 --> 00:01:16.096
+A pipeline that handles production configuration is part of the trusted system.
+
+10
+00:01:16.096 --> 00:01:21.560
+Its variables, logs, permissions, approvals, and rollback steps all deserve review.
+
+11
+00:01:21.560 --> 00:01:28.998
+Key Vault references and configuration providers can reduce secret sprawl when configured and governed correctly.
+
+12
+00:01:28.998 --> 00:01:41.637
+They can centralize secret storage and reduce copying, but they still require permission design, availability planning, cache behavior, versioning strategy, and incident response expectations.
+
+13
+00:01:41.637 --> 00:01:48.483
+Secret storage choices should consider startup behavior, caching, rotation, rollback, and failure modes.
+
+14
+00:01:48.483 --> 00:01:59.871
+If the secret store is temporarily unavailable, teams should understand whether the application starts, fails closed, uses cached configuration, or requires operator action.
+
+15
+00:01:59.871 --> 00:02:04.150
+That behavior should be a design decision rather than a surprise.

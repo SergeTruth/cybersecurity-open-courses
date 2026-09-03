@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure Configuration Workflow",
+  "graphicAlt": "Bullet summary graphic for Course Summary: Secure Configuration Workflow.",
+  "narration": "Secure configuration in .NET is a repeatable engineering workflow. Start by classifying settings by sensitivity and security impact. Some settings are ordinary product behavior. Others affect identity, authorization, networking, storage, logging, data protection, diagnostics, cloud access, or deployment safety.\n\nUnderstand configuration sources, precedence, and effective runtime values. A setting may come from an appsettings file, an environment variable, a command-line argument, a secret store, a cloud configuration service, or a deployment pipeline. The running application only sees the final result after provider order and overrides are applied.\n\nProtect secrets and validate options before startup. Keep real secret values out of code and logs, use supported secret stores or managed identities, separate references from values, and validate strongly typed options. Unsafe or incomplete production configuration should fail clearly rather than silently weakening behavior.\n\nReview risky toggles, hosting settings, logging, diagnostics, CI/CD variables, cloud settings, runtime identities, and middleware configuration. Development convenience should not drift into production. Emergency settings should have ownership, expiration, and follow-up.\n\nFinally, maintain configuration over time. Monitor drift, review changes, rotate secrets, keep permissions narrow, document approved values, and connect operational feedback to engineering work. Secure configuration is not a static file; it is part of how the application stays trustworthy as environments and teams change.",
+  "narrationPoints": [
+    "Secure configuration in .NET is a repeatable engineering workflow.",
+    "A setting may come from an appsettings file, an environment variable, a command-line argument, a secret store, a cloud configuration service, or a deployment pipeline.",
+    "Keep real secret values out of code and logs, use supported secret stores or managed identities, separate references from values, and validate strongly typed options.",
+    "Review risky toggles, hosting settings, logging, diagnostics, CI/CD variables, cloud settings, runtime identities, and middleware configuration.",
+    "Secure configuration is not a static file; it is part of how the application stays trustworthy as environments and teams change."
+  ]
+};

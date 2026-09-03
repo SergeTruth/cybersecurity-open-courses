@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.565
+Input validation is a supporting control for SQL injection prevention, not a replacement for parameterized queries.
+
+2
+00:00:07.565 --> 00:00:23.023
+Validation answers whether a value is acceptable for the business purpose: does the customer ID have the expected shape, is the date range reasonable, is the status one the workflow supports, and is the requested report option allowed.
+
+3
+00:00:23.023 --> 00:00:27.824
+Allow-listing is especially useful for values that influence query shape.
+
+4
+00:00:27.824 --> 00:00:36.902
+Sort fields, filter names, report columns, export options, page sizes, enum-like values, and mode switches should come from approved sets.
+
+5
+00:00:36.902 --> 00:00:45.914
+The application can map those approved names to internal query expressions without letting the caller define database structure directly.
+
+6
+00:00:45.914 --> 00:00:48.940
+Client input should not control SQL structure.
+
+7
+00:00:48.940 --> 00:00:59.990
+A caller may provide a search term, a date range, a status, or a supported sort choice, but the application should decide how those values are represented in the query.
+
+8
+00:00:59.990 --> 00:01:04.595
+The line between value and structure should be obvious in code review.
+
+9
+00:01:04.595 --> 00:01:11.502
+Paging, result limits, bounded date ranges, and controlled filters support both security and reliability.
+
+10
+00:01:11.502 --> 00:01:18.277
+They reduce accidental broad queries, avoid unnecessary exposure, and protect shared database capacity.
+
+11
+00:01:18.277 --> 00:01:27.354
+A query can be injection-resistant and still be operationally risky if it returns too much data or performs expensive work without limits.
+
+12
+00:01:27.354 --> 00:01:32.946
+Normalization and canonicalization help ensure comparisons happen on consistent data.
+
+13
+00:01:32.946 --> 00:01:44.457
+Before validating identifiers, names, states, or tenant keys, the application may need to handle casing, whitespace, culture-specific formatting, or alternate representations.
+
+14
+00:01:44.457 --> 00:01:51.890
+The goal is to make validation and authorization decisions on the representation the application actually trusts.
+
+15
+00:01:51.890 --> 00:01:57.152
+Query builders should be designed so only approved query shapes can be produced.
+
+16
+00:01:57.152 --> 00:02:01.625
+A safe builder does not expose arbitrary fragments as a convenience.
+
+17
+00:02:01.625 --> 00:02:10.505
+It accepts well-defined options, validates them, maps them to internal expressions, and preserves parameterization for variable values.
+
+18
+00:02:10.505 --> 00:02:14.189
+That makes flexibility reviewable instead of open-ended.

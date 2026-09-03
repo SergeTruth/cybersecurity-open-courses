@@ -590,8 +590,7 @@ window.TRUTHSURGE_LEARNING_PATHS = [
       "binary_data_validation_in_c_course",
       "replacing_unsafe_apis_in_c_course",
       "double_free_prevention_in_c_course",
-      "cryptography_fundamentals_for_c_developers_course",
-      "secure_input_handling_in_cpp_course"
+      "cryptography_fundamentals_for_c_developers_course"
     ],
     "prerequisites": []
   },

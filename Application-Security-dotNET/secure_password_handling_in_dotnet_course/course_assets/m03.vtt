@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.760
+Passwords should be stored as password hashes, not plaintext, reversible encryption, or fast general-purpose hashes.
+
+2
+00:00:07.760 --> 00:00:14.912
+A password hash is designed so the application can verify a password later without storing the original secret.
+
+3
+00:00:14.912 --> 00:00:22.215
+That design reduces damage if a password database is exposed, because the stored value is not the password itself.
+
+4
+00:00:22.215 --> 00:00:25.106
+Salts and work factors are central concepts.
+
+5
+00:00:25.106 --> 00:00:29.138
+A salt is unique data used when hashing an individual password.
+
+6
+00:00:29.138 --> 00:00:36.214
+Each password needs its own salt so two users with the same password do not end up with the same stored hash value.
+
+7
+00:00:36.214 --> 00:00:39.713
+A work factor controls how expensive verification is.
+
+8
+00:00:39.713 --> 00:00:50.745
+Higher work makes large-scale offline guessing more costly if hashes are exposed, while still allowing normal sign-in to complete within acceptable performance limits.
+
+9
+00:00:50.745 --> 00:00:58.733
+New ASP. NET Core applications with password-based sign-in should use framework-supported password hashing, such as ASP.
+
+10
+00:00:58.733 --> 00:01:03.222
+NET Core Identity PasswordHasher, rather than custom cryptography.
+
+11
+00:01:03.222 --> 00:01:14.101
+Password storage is easy to get wrong, and maintained framework components provide safer defaults, versioned formats, verification behavior, and migration support.
+
+12
+00:01:14.101 --> 00:01:27.263
+Conceptually, PasswordHasher<TUser> hashes the password when it is set or changed, verifies the submitted password during sign-in, and can indicate when a stored hash should be updated to a newer format.
+
+13
+00:01:27.263 --> 00:01:41.261
+Rehash-on-successful-login is a common migration idea: when a user signs in with the correct password, the application can upgrade the stored hash format without ever recovering the plaintext password from storage.
+
+14
+00:01:41.261 --> 00:01:49.782
+Low-level cryptographic primitives should not be copied into application code without a strong protocol reason and expert review.
+
+15
+00:01:49.782 --> 00:02:03.172
+The password handling decision should be boring in the best sense: use the framework, configure it deliberately, monitor performance, and plan migrations as standards and application requirements evolve.

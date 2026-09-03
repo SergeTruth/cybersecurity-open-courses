@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.432
+Stored procedures can be useful database boundaries.
+
+2
+00:00:03.432 --> 00:00:14.389
+They can centralize complex operations, reduce direct table access, support permission separation, and give database teams a clear place to review important behavior.
+
+3
+00:00:14.389 --> 00:00:20.264
+But a stored procedure is not automatically safe simply because it lives in the database.
+
+4
+00:00:20.264 --> 00:00:24.686
+Dynamic SQL inside stored procedures still needs safe construction.
+
+5
+00:00:24.686 --> 00:00:41.715
+If a procedure accepts values that influence database command structure, the same defensive questions apply: which parts are approved structure, which parts are parameter values, and how does the procedure prevent callers from controlling more than intended.
+
+6
+00:00:41.715 --> 00:00:45.742
+Parameterization remains important inside database workflows.
+
+7
+00:00:45.742 --> 00:00:49.306
+Stored procedures also need careful permission design.
+
+8
+00:00:49.306 --> 00:00:54.256
+Application accounts should not have broad database permissions by default.
+
+9
+00:00:54.256 --> 00:01:03.365
+In some architectures, procedures can expose only the operations the application needs while limiting direct access to underlying objects.
+
+10
+00:01:03.365 --> 00:01:10.758
+The right model depends on the application, but broad convenience permissions should be reviewed before release.
+
+11
+00:01:10.758 --> 00:01:18.810
+Reporting, search, export, maintenance, and administrative procedures often combine flexible input with broad data access.
+
+12
+00:01:18.810 --> 00:01:26.467
+They may run outside normal request flows, serve privileged users, or support operational needs under time pressure.
+
+13
+00:01:26.467 --> 00:01:33.662
+These procedures deserve clear ownership, parameter review, logging expectations, and least-privilege design.
+
+14
+00:01:33.662 --> 00:01:37.820
+Application and database teams share prevention responsibility.
+
+15
+00:01:37.820 --> 00:01:44.750
+Application developers understand caller context, DTOs, validation, authorization, and business workflow.
+
+16
+00:01:44.750 --> 00:01:51.219
+Database specialists understand permissions, procedure behavior, query plans, and data boundaries.
+
+17
+00:01:51.219 --> 00:01:57.423
+Safe design improves when both sides review how application values become database operations.
+
+18
+00:01:57.423 --> 00:02:03.430
+A good release process treats database objects as part of the application security surface.
+
+19
+00:02:03.430 --> 00:02:16.235
+Procedure changes, permission changes, reporting changes, and migration scripts should be reviewed with the same seriousness as controller or service-layer code that constructs queries directly.

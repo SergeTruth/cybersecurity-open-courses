@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.619
+Connection strings often leak through operational surfaces rather than through obvious source code.
+
+2
+00:00:06.619 --> 00:00:20.458
+Logs, exception messages, telemetry, distributed traces, crash dumps, SQL diagnostics, health checks, debug pages, configuration dumps, CI output, support screenshots, and ticket attachments all need review.
+
+3
+00:00:20.458 --> 00:00:29.885
+Do not log full connection strings, passwords, access tokens, shared keys, SAS tokens, credential-bearing URLs, or raw configuration objects.
+
+4
+00:00:29.885 --> 00:00:34.766
+Structured logging can make it easy to record entire objects by accident.
+
+5
+00:00:34.766 --> 00:00:40.917
+Redaction should be deliberate and tested in the places where logs are produced and shipped.
+
+6
+00:00:40.917 --> 00:00:44.995
+Redaction should preserve enough context for troubleshooting.
+
+7
+00:00:44.995 --> 00:00:53.285
+Operators may need a connection name, provider, environment, safe endpoint label, database role category, or correlation ID.
+
+8
+00:00:53.285 --> 00:00:56.361
+They do not need the credential-bearing value.
+
+9
+00:00:56.361 --> 00:01:00.974
+Good redaction keeps the diagnostic signal while removing the secret.
+
+10
+00:01:00.974 --> 00:01:11.671
+Error messages shown to users or clients should not reveal database hosts, usernames, provider details, internal network structure, or connection configuration.
+
+11
+00:01:11.671 --> 00:01:20.563
+A public error should explain the user-facing problem, while protected logs capture safe operational categories for the support team.
+
+12
+00:01:20.563 --> 00:01:25.644
+Support and incident workflows should include secret-redaction expectations.
+
+13
+00:01:25.644 --> 00:01:33.266
+Screenshots, copied terminal output, health check payloads, and support bundles should be reviewed before sharing.
+
+14
+00:01:33.266 --> 00:01:38.281
+A well-meaning support process can expose more than the application itself.
+
+15
+00:01:38.281 --> 00:01:53.123
+A practical redaction review follows the connection string through the system: configuration load, dependency injection, database provider, exception handling, telemetry, pipeline logs, support tools, and incident records.
+
+16
+00:01:53.123 --> 00:01:57.268
+Each surface should have an answer for what is safe to record.

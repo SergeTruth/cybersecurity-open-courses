@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.206
+Parameterized queries are the central defensive pattern for values supplied to SQL commands.
+
+2
+00:00:06.206 --> 00:00:10.996
+The command describes the operation the application intends to perform.
+
+3
+00:00:10.996 --> 00:00:20.440
+Parameters carry the values used by that operation, such as customer IDs, tenant IDs, date ranges, statuses, search terms, or paging values.
+
+4
+00:00:20.440 --> 00:00:26.174
+Keeping those roles separate prevents values from becoming database instruction text.
+
+5
+00:00:26.174 --> 00:00:27.523
+ADO.
+
+6
+00:00:27.523 --> 00:00:33.054
+NET and database providers support command and parameter APIs for this separation.
+
+7
+00:00:33.054 --> 00:00:45.062
+The exact classes and providers can vary, but the design principle remains the same: command text is defined by the application, and variable values are bound through parameters.
+
+8
+00:00:45.062 --> 00:00:52.212
+Reviewers should be able to see that separation without having to reason about manual string construction.
+
+9
+00:00:52.212 --> 00:00:54.033
+Type-safe handling matters.
+
+10
+00:00:54.033 --> 00:01:02.870
+Values such as identifiers, dates, numeric ranges, booleans, statuses, and enum-like options should be represented as appropriate .
+
+11
+00:01:02.870 --> 00:01:05.029
+NET types as early as practical.
+
+12
+00:01:05.029 --> 00:01:13.326
+Stronger types reduce ambiguous conversions, make validation easier, and help data-access code express intent more clearly.
+
+13
+00:01:13.326 --> 00:01:20.072
+Escaping, blacklisting, and character replacement are not reliable substitutes for parameterization.
+
+14
+00:01:20.072 --> 00:01:30.056
+They depend on assumptions about database syntax, encoding, provider behavior, future query changes, and every possible place a value might be used.
+
+15
+00:01:30.056 --> 00:01:38.488
+A safe pattern should not require every developer to predict how a database parser might interpret a manually altered string.
+
+16
+00:01:38.488 --> 00:01:45.571
+String concatenation and interpolation become risky when variable data is used to build SQL command text.
+
+17
+00:01:45.571 --> 00:01:53.868
+Even when a value looks harmless, the code pattern is difficult to audit and may be copied into less controlled situations.
+
+18
+00:01:53.868 --> 00:02:00.547
+Teams should prefer approved query APIs and helper functions that make unsafe construction unusual.
+
+19
+00:02:00.547 --> 00:02:02.908
+Consistency is part of the defense.
+
+20
+00:02:02.908 --> 00:02:15.387
+If one repository uses safe parameterized commands, another uses a micro-ORM, and a third builds SQL fragments through custom helpers, reviewers need clear local rules for each pattern.
+
+21
+00:02:15.387 --> 00:02:24.224
+Approved examples, code review checklists, and shared data-access utilities help make safe query construction the default behavior.

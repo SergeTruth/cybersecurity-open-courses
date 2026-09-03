@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.142
+Malware scanning is one layer in a broader defensive workflow.
+
+2
+00:00:04.142 --> 00:00:10.688
+It can help identify known risky content, but it should not be treated as the only upload control.
+
+3
+00:00:10.688 --> 00:00:19.439
+Limits, storage isolation, file type validation, authorization, least privilege, logging, and safe processing all remain important.
+
+4
+00:00:19.439 --> 00:00:26.252
+Quarantine is a useful state for files that have been uploaded but are not yet cleared for normal use.
+
+5
+00:00:26.252 --> 00:00:39.545
+A quarantined support attachment, invoice, image, or report may be stored in a restricted location, hidden from normal download paths, and available only to controlled processing or review workflows.
+
+6
+00:00:39.545 --> 00:00:45.624
+Asynchronous processing is often better when immediate decisions are not safe or practical.
+
+7
+00:00:45.624 --> 00:00:58.917
+The web endpoint can receive the file, assign an internal identifier, store it in a restricted state, and let background workers perform scanning, validation, thumbnailing, import parsing, or review.
+
+8
+00:00:58.917 --> 00:01:04.595
+The user interface can then show pending, accepted, rejected, or needs-review status.
+
+9
+00:01:04.595 --> 00:01:08.670
+Scanner failures and unavailable services need safe behavior.
+
+10
+00:01:08.670 --> 00:01:18.356
+If a scanner times out, returns an inconclusive result, or cannot be reached, the application should not silently promote the file to normal use.
+
+11
+00:01:18.356 --> 00:01:28.643
+The workflow should define retry rules, failure states, operator visibility, and user-facing messages that are clear without exposing sensitive internals.
+
+12
+00:01:28.643 --> 00:01:32.451
+Higher-risk workflows may need approval or review queues.
+
+13
+00:01:32.451 --> 00:01:44.474
+For example, partner-submitted documents, public-facing content, or files that affect business records may require a human or automated review step before publishing or processing.
+
+14
+00:01:44.474 --> 00:01:49.818
+Review should be tied to file state, ownership, audit records, and access rules.
+
+15
+00:01:49.818 --> 00:01:53.826
+Record file state transitions for audit and troubleshooting.
+
+16
+00:01:53.826 --> 00:02:02.443
+Uploaded, quarantined, scanning, cleared, rejected, processed, published, downloaded, deleted, and expired states can all matter.
+
+17
+00:02:02.443 --> 00:02:10.727
+Clear state records help operators understand what happened without relying on file names, storage paths, or scattered logs.

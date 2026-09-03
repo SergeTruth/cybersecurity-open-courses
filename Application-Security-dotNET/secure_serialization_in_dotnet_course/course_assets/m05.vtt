@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.459
+Polymorphic serialization and deserialization deserve higher review because they introduce decisions about which concrete type should be created.
+
+2
+00:00:09.459 --> 00:00:16.960
+That may be reasonable for a controlled set of event contracts, message types, plugin models, or document variants.
+
+3
+00:00:16.960 --> 00:00:28.572
+It becomes risky when the boundary is vague, the set of possible types is broad, or the application lets external data influence runtime type selection without a narrow contract.
+
+4
+00:00:28.572 --> 00:00:34.899
+Type metadata is sensitive because it can influence object construction and application behavior.
+
+5
+00:00:34.899 --> 00:00:43.184
+A design that includes type names, discriminators, or contract identifiers should make the allowed set explicit and reviewable.
+
+6
+00:00:43.184 --> 00:00:49.903
+The safer pattern is to define known contract types and map incoming data to those types intentionally.
+
+7
+00:00:49.903 --> 00:00:55.252
+The less safe pattern is to let untrusted data choose from a wide runtime surface.
+
+8
+00:00:55.252 --> 00:01:00.666
+When polymorphism is required, prefer explicit allow-lists of known contract types.
+
+9
+00:01:00.666 --> 00:01:10.125
+For example, an ExampleEventMessage family may include a small set of approved message kinds, each with its own DTO, validation rules, and owner.
+
+10
+00:01:10.125 --> 00:01:15.996
+The discriminator should select from that approved list, not from arbitrary runtime types.
+
+11
+00:01:15.996 --> 00:01:21.214
+The consumer should still validate the resulting object before making decisions.
+
+12
+00:01:21.214 --> 00:01:37.783
+Legacy serializers and older compatibility patterns should be treated as migration priorities, especially when they handle untrusted input, long-lived stored data, session state, queues, distributed caches, plugins, import tools, or integration messages.
+
+13
+00:01:37.783 --> 00:01:46.263
+Some patterns were designed for trusted in-process or tightly controlled environments and may not match modern service boundaries.
+
+14
+00:01:46.263 --> 00:01:50.895
+Inventory matters because teams cannot remediate what they cannot find.
+
+15
+00:01:50.895 --> 00:01:56.179
+Avoid broad compatibility shortcuts that make object graphs hard to reason about.
+
+16
+00:01:56.179 --> 00:02:06.877
+A shortcut that accepts many shapes, many versions, or many concrete types may feel convenient during a migration, but it can make validation and ownership unclear.
+
+17
+00:02:06.877 --> 00:02:14.966
+Compatibility should be designed around explicit contracts, migration steps, and measured risk rather than broad acceptance.
+
+18
+00:02:14.966 --> 00:02:25.599
+Review distributed caches, job queues, plugin systems, session state, import tools, support tools, and legacy integrations for serializer settings and assumptions.
+
+19
+00:02:25.599 --> 00:02:38.515
+Ask who writes the data, who reads it, how long it lives, which version produced it, whether it contains sensitive fields, and whether there is a plan to retire unsafe or poorly understood patterns.

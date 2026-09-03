@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.750
+Serialization is a common accidental data exposure path.
+
+2
+00:00:03.750 --> 00:00:17.677
+A property that is harmless inside a server-side domain object may be inappropriate in an API response, log entry, telemetry event, cache export, support bundle, client-side storage value, or downloaded file.
+
+3
+00:00:17.677 --> 00:00:26.918
+The risk often appears when teams serialize a convenient object without stopping to ask who will see the output and how long it will live.
+
+4
+00:00:26.918 --> 00:00:44.595
+Sensitive fields include secrets, tokens, connection strings, private keys, certificates, personal data, financial data, internal identifiers, authorization state, tenant boundaries, administrative notes, support comments, workflow flags, and operational metadata.
+
+5
+00:00:44.595 --> 00:00:52.228
+Not every field has the same sensitivity, but every serialized output should be reviewed for audience and purpose.
+
+6
+00:00:52.228 --> 00:00:57.585
+If the consumer does not need a field, the safer default is not to serialize it.
+
+7
+00:00:57.585 --> 00:01:03.276
+Use explicit DTOs, projection, ignore rules, and data minimization where appropriate.
+
+8
+00:01:03.276 --> 00:01:12.517
+Projection is especially useful because it lets code choose the output shape deliberately rather than serializing the entire object graph.
+
+9
+00:01:12.517 --> 00:01:20.284
+Ignore rules can help, but they should not become the only protection when the same object is used in many contexts.
+
+10
+00:01:20.284 --> 00:01:24.301
+Different boundaries often deserve different contract types.
+
+11
+00:01:24.301 --> 00:01:30.127
+Debug serializers, object dumps, exception handling, and diagnostics deserve attention.
+
+12
+00:01:30.127 --> 00:01:39.300
+A line added to understand an issue may capture a full object graph and send it into logs, telemetry, test artifacts, or support exports.
+
+13
+00:01:39.300 --> 00:01:42.983
+That data can spread far beyond the original code path.
+
+14
+00:01:42.983 --> 00:01:49.545
+Production diagnostics should be useful without becoming an uncontrolled copy of application data.
+
+15
+00:01:49.545 --> 00:01:55.303
+Protect serialized data at rest and in transit when it contains sensitive information.
+
+16
+00:01:55.303 --> 00:02:05.749
+That may involve transport protection, encryption at rest, access control, retention limits, redaction, secure transfer, and review before external sharing.
+
+17
+00:02:05.749 --> 00:02:15.324
+The correct controls depend on the data and audience, but the serialized copy should not be treated as less important than the original source.

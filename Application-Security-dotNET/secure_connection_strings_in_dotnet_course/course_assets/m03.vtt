@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.181
+Development workflows need convenience without normalizing unsafe secret handling.
+
+2
+00:00:05.181 --> 00:00:10.742
+Developers need to run the app locally, test database behavior, and debug configuration.
+
+3
+00:00:10.742 --> 00:00:20.220
+The safe pattern is to support local productivity while keeping sensitive values out of source code, shared samples, and long-lived support artifacts.
+
+4
+00:00:20.220 --> 00:00:21.483
+ASP.
+
+5
+00:00:21.483 --> 00:00:24.516
+NET Core Secret Manager is for development only.
+
+6
+00:00:24.516 --> 00:00:31.973
+It helps keep local secrets out of project files, but it should not be treated as encrypted production secret storage.
+
+7
+00:00:31.973 --> 00:00:38.607
+It is a developer convenience for local workflows, not a production vault or lifecycle management system.
+
+8
+00:00:38.607 --> 00:00:45.621
+Environment variables can also keep local secrets out of source code, but local machines still need protection.
+
+9
+00:00:45.621 --> 00:00:53.330
+Workstations can have terminal history, shell profiles, local logs, copied command output, screenshots, and support chats.
+
+10
+00:00:53.330 --> 00:00:58.511
+Local values should be scoped to local or development resources whenever possible.
+
+11
+00:00:58.511 --> 00:01:04.766
+Local database accounts should have limited privileges and should not reuse production credentials.
+
+12
+00:01:04.766 --> 00:01:10.137
+A developer should not need production database access to run ordinary local tooling.
+
+13
+00:01:10.137 --> 00:01:17.214
+When production access is necessary for a narrow operational task, it should follow a separate approved process.
+
+14
+00:01:17.214 --> 00:01:18.478
+appsettings.
+
+15
+00:01:18.478 --> 00:01:19.742
+Development.
+
+16
+00:01:19.742 --> 00:01:27.198
+json should not contain shared sensitive values that could be committed, copied into examples, or reused across teams.
+
+17
+00:01:27.198 --> 00:01:36.739
+If a file must show the shape of a connection setting, use placeholders and documentation that points developers to the correct local secret mechanism.
+
+18
+00:01:36.739 --> 00:01:38.003
+.
+
+19
+00:01:38.003 --> 00:01:46.027
+gitignore, sample files, onboarding docs, support runbooks, and local setup scripts should be reviewed as part of the workflow.
+
+20
+00:01:46.027 --> 00:01:54.305
+Many secret exposures happen outside the main application code path, through the supporting material that helps people run the app.

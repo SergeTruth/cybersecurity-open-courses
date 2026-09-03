@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.980
+Database errors shown to users should be safe and limited.
+
+2
+00:00:03.980 --> 00:00:13.997
+They should not expose SQL text, table names, column names, connection strings, stack traces, internal paths, tokens, or sensitive record details.
+
+3
+00:00:13.997 --> 00:00:22.299
+A user usually needs to know whether input should be corrected, a request can be retried, or support should be contacted.
+
+4
+00:00:22.299 --> 00:00:25.524
+They do not need internal database diagnostics.
+
+5
+00:00:25.524 --> 00:00:31.425
+Authorized operators need useful detail, but logs should still avoid sensitive values.
+
+6
+00:00:31.425 --> 00:00:42.334
+Structured logging can include operation names, sanitized validation outcomes, dependency names, timing, categories, correlation identifiers, and safe context.
+
+7
+00:00:42.334 --> 00:00:52.078
+It should avoid raw secrets, full connection strings, sensitive record contents, and unnecessary query text that would create disclosure risk.
+
+8
+00:00:52.078 --> 00:00:56.057
+Correlation IDs or request identifiers help investigation.
+
+9
+00:00:56.057 --> 00:01:09.711
+A suspicious validation failure, authorization denial, repeated database error, or administrative data operation may involve an API request, service-layer code, a database call, and a background job.
+
+10
+00:01:09.711 --> 00:01:16.161
+Correlation lets operators connect events without placing sensitive data into every log entry.
+
+11
+00:01:16.161 --> 00:01:32.354
+Security-relevant signals include validation failures around query options, authorization failures on data operations, repeated database errors, unusual query patterns, export activity, reporting access, and administrative data changes.
+
+12
+00:01:32.354 --> 00:01:39.352
+These signals can help teams detect problems, tune controls, and identify areas that need remediation.
+
+13
+00:01:39.352 --> 00:01:44.498
+Detection supports prevention; it does not replace safe query construction.
+
+14
+00:01:44.498 --> 00:01:50.673
+Logs can reveal that something needs attention, but they cannot make an unsafe query safe.
+
+15
+00:01:50.673 --> 00:02:03.779
+The right design prevents variable data from becoming command structure, limits database permissions, returns safe errors, and preserves enough operational context to investigate responsibly.

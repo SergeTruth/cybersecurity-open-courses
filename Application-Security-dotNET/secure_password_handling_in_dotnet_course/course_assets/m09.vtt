@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.243
+Many systems contain legacy password hashes, custom formats, weak work factors, or uncertain storage history.
+
+2
+00:00:07.243 --> 00:00:09.836
+Migration should start with inventory.
+
+3
+00:00:09.836 --> 00:00:21.501
+Identify the hash formats in use, approximate algorithm age, salt behavior, work factor, affected account population, and which applications or services verify those passwords.
+
+4
+00:00:21.501 --> 00:00:26.305
+Safe migration does not mean recovering plaintext passwords from hashes.
+
+5
+00:00:26.305 --> 00:00:36.903
+Instead, a system may rehash on successful login, force reset for high-risk accounts, stage rollout by account group, or move users through a planned recovery flow.
+
+6
+00:00:36.903 --> 00:00:46.586
+ASP. NET Core Identity-style versioned hashing supports the idea that older stored hashes can be upgraded when the user authenticates successfully.
+
+7
+00:00:46.586 --> 00:00:55.354
+Communication matters. Users should receive clear instructions when a reset is required, and support teams should know what to expect.
+
+8
+00:00:55.354 --> 00:01:04.427
+High-risk accounts, administrators, inactive users, service accounts, and accounts with unusual access may require different handling.
+
+9
+00:01:04.427 --> 00:01:09.383
+Exceptions should be documented so they do not become permanent blind spots.
+
+10
+00:01:09.383 --> 00:01:23.184
+Suspected compromise response should include containment, evidence preservation, disabling risky sessions, rotation of related secrets, forced resets where appropriate, user notification, and monitoring.
+
+11
+00:01:23.184 --> 00:01:32.486
+Related secrets may include signing keys, database credentials, email provider credentials, data-protection keys, and integration tokens.
+
+12
+00:01:32.486 --> 00:01:39.729
+Breach response should coordinate legal, compliance, security, support, and engineering responsibilities.
+
+13
+00:01:39.729 --> 00:01:45.829
+The team should document decisions, approvals, exceptions, user impact, and follow-up work.
+
+14
+00:01:45.829 --> 00:01:54.445
+Password handling is not finished when the hash format changes; it is finished when the lifecycle and response plan are maintainable.

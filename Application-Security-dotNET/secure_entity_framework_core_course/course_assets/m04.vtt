@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.506
+EF Core raw SQL features are useful in some cases, but they are higher-review areas.
+
+2
+00:00:05.506 --> 00:00:14.355
+Teams may use raw SQL for performance, complex queries, provider-specific capabilities, existing stored procedures, or reporting needs.
+
+3
+00:00:14.355 --> 00:00:24.319
+Those reasons can be valid, but raw SQL should be limited, documented, and reviewed because it moves developers closer to the database command boundary.
+
+4
+00:00:24.319 --> 00:00:30.415
+Values supplied to raw SQL APIs should be handled through safe provider-supported mechanisms.
+
+5
+00:00:30.415 --> 00:00:37.953
+The central rule remains the same: application-defined command structure should stay separate from variable values.
+
+6
+00:00:37.953 --> 00:00:46.212
+Reviewers should be able to see where values are bound, where structure is chosen, and why raw SQL is necessary for that path.
+
+7
+00:00:46.212 --> 00:00:51.456
+Dynamic filtering, sorting, reporting, and export features deserve special care.
+
+8
+00:00:51.456 --> 00:00:56.175
+They often accept flexible caller options and may touch broad data sets.
+
+9
+00:00:56.175 --> 00:01:08.564
+A safe design maps caller choices to approved internal query shapes instead of allowing arbitrary field names, expressions, fragments, or table-like choices to flow into database structure.
+
+10
+00:01:08.564 --> 00:01:15.447
+Stored procedures can provide a useful database boundary, but they are not automatic security guarantees.
+
+11
+00:01:15.447 --> 00:01:23.771
+A procedure can still contain unsafe dynamic construction, broad permissions, sensitive logging, or weak ownership assumptions.
+
+12
+00:01:23.771 --> 00:01:31.834
+The application and database teams should review procedure behavior, parameters, permissions, and operational use together.
+
+13
+00:01:31.834 --> 00:01:36.226
+Dynamic SQL inside stored procedures still requires careful design.
+
+14
+00:01:36.226 --> 00:01:49.139
+The same defensive questions apply inside the database: which parts are approved structure, which parts are values, how are values bound, who can call the procedure, and what objects can it affect.
+
+15
+00:01:49.139 --> 00:01:54.973
+The fact that logic is inside a procedure does not remove the need for safe construction.
+
+16
+00:01:54.973 --> 00:01:57.660
+Clients should not control SQL structure.
+
+17
+00:01:57.660 --> 00:02:07.165
+They may choose supported filters, statuses, ranges, or report options, but the application should translate those choices into approved queries.
+
+18
+00:02:07.165 --> 00:02:15.489
+Building query features around approved shapes gives product teams flexibility without making data access impossible to review.

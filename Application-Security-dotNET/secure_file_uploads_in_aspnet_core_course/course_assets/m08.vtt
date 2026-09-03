@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.353
+Security-relevant upload events should be logged intentionally.
+
+2
+00:00:04.353 --> 00:00:21.974
+Accepted files, rejected files, validation failures, scanning results, quarantine transitions, processing failures, downloads, deletes, publication events, and administrative actions can all help operators understand what happened during an investigation.
+
+3
+00:00:21.974 --> 00:00:26.259
+Correlation IDs or request identifiers connect related events.
+
+4
+00:00:26.259 --> 00:00:29.023
+A single upload may pass through an ASP.
+
+5
+00:00:29.023 --> 00:00:38.904
+NET Core request, temporary storage, a scan job, a metadata validation step, a thumbnail worker, a database state update, and a later download.
+
+6
+00:00:38.904 --> 00:00:45.400
+Correlation lets the team follow that chain without recording sensitive file contents in logs.
+
+7
+00:00:45.400 --> 00:00:50.859
+Logs should capture useful metadata without becoming a second copy of the file.
+
+8
+00:00:50.859 --> 00:00:59.773
+File contents, document text, private descriptions, personal data, and sensitive titles should not be written into ordinary logs.
+
+9
+00:00:59.773 --> 00:01:12.004
+Safer metadata may include internal identifiers, sanitized state transitions, size category, file category, user or tenant reference, and processing outcome according to policy.
+
+10
+00:01:12.004 --> 00:01:21.332
+Privacy-aware logging matters because file names, document titles, user identifiers, and descriptions can reveal sensitive information.
+
+11
+00:01:21.332 --> 00:01:26.308
+Even when the file content is not logged, metadata can still be private.
+
+12
+00:01:26.308 --> 00:01:32.181
+Log access, retention, exports, and support bundles should be controlled accordingly.
+
+13
+00:01:32.181 --> 00:01:47.729
+Monitoring should focus on defensive signals: unusual upload sizes, repeated validation failures, unexpected file categories, scanner timeouts, processing errors, download spikes, cleanup failures, and administrative actions.
+
+14
+00:01:47.729 --> 00:01:55.261
+These signals support operations and security review without turning monitoring into an unsafe content store.
+
+15
+00:01:55.261 --> 00:02:06.387
+Retention and cleanup policies should cover temporary files, quarantined files, rejected files, processed files, public derivatives, private originals, and logs.
+
+16
+00:02:06.387 --> 00:02:15.923
+Cleanup jobs need monitoring too; stale temporary files and forgotten quarantine stores can become long-term privacy and storage problems.

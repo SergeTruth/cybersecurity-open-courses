@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.781
+Deserialization is object construction from data that may have crossed a trust boundary.
+
+2
+00:00:05.781 --> 00:00:12.021
+The application receives text, bytes, or a structured document, and the serializer produces a .
+
+3
+00:00:12.021 --> 00:00:13.335
+NET object.
+
+4
+00:00:13.335 --> 00:00:20.758
+That object may now pass through services, validators, repositories, authorization checks, or business workflows.
+
+5
+00:00:20.758 --> 00:00:28.707
+If the object can be created in an invalid or contradictory state, the problem moves from parsing into application logic.
+
+6
+00:00:28.707 --> 00:00:36.590
+Constructors, setters, required members, nullable fields, default values, and initialization patterns all affect safety.
+
+7
+00:00:36.590 --> 00:00:47.298
+A DTO with nullable properties may be acceptable for reading partial data, but business code should not assume those values are present until validation proves it.
+
+8
+00:00:47.298 --> 00:00:51.108
+A default value may make a missing field look intentional.
+
+9
+00:00:51.108 --> 00:00:57.611
+A setter may allow state that the application would never create through its normal domain methods.
+
+10
+00:00:57.611 --> 00:01:03.523
+Avoid designs where deserialized objects can quietly represent impossible business states.
+
+11
+00:01:03.523 --> 00:01:09.961
+An ExampleOrderMessage should not be considered ready for processing merely because it was parsed.
+
+12
+00:01:09.961 --> 00:01:21.654
+It should be checked for required identifiers, ownership context, supported status values, expected version, reasonable sizes, and any business conditions needed by the workflow.
+
+13
+00:01:21.654 --> 00:01:24.544
+The result of validation should be explicit.
+
+14
+00:01:24.544 --> 00:01:28.749
+Separate parsing, validation, authorization, and business logic.
+
+15
+00:01:28.749 --> 00:01:32.822
+Parsing answers, can the data be read into the expected shape.
+
+16
+00:01:32.822 --> 00:01:37.486
+Validation answers, does the data meet the contract and business rules.
+
+17
+00:01:37.486 --> 00:01:43.069
+Authorization answers, is this actor allowed to perform this action on this resource.
+
+18
+00:01:43.069 --> 00:01:46.945
+Business logic answers, what should the application do now.
+
+19
+00:01:46.945 --> 00:01:53.186
+Combining those concerns makes it harder to review failures and easier to trust data too early.
+
+20
+00:01:53.186 --> 00:01:59.295
+Handle malformed, oversized, unexpected, incomplete, or incompatible serialized input safely.
+
+21
+00:01:59.295 --> 00:02:12.368
+Defensive behavior might include rejecting the input, recording a safe diagnostic event, returning a limited error, moving a message to a review process, or preserving a failure state for operations.
+
+22
+00:02:12.368 --> 00:02:19.988
+The exact behavior depends on the workflow, but it should not leak sensitive diagnostic detail to untrusted parties.
+
+23
+00:02:19.988 --> 00:02:26.031
+Do not assume queues, caches, files, databases, or internal tools make serialized data safe.
+
+24
+00:02:26.031 --> 00:02:37.199
+Those locations may contain old versions, imported data, corrupted records, administrative mistakes, replayed messages, or values produced by code that has since changed.
+
+25
+00:02:37.199 --> 00:02:41.337
+Validate when the data is used, not only when it first arrived.

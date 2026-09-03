@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.445
+Upload authorization answers who is allowed to submit which file for which purpose.
+
+2
+00:00:05.445 --> 00:00:11.480
+A user may be allowed to upload a profile photo but not attach documents to another account.
+
+3
+00:00:11.480 --> 00:00:16.269
+A partner may submit invoices for one tenant but not reports for another.
+
+4
+00:00:16.269 --> 00:00:22.305
+The upload workflow should enforce purpose, ownership, tenant, and role rules on the server.
+
+5
+00:00:22.305 --> 00:00:26.372
+Object-level authorization is just as important for downloads.
+
+6
+00:00:26.372 --> 00:00:30.505
+A file has an owner, tenant, case, record, or workflow context.
+
+7
+00:00:30.505 --> 00:00:43.757
+Before serving the file, the application should verify that the current user or service is allowed to access that specific object, not merely that they are logged in or have access to a general feature.
+
+8
+00:00:43.757 --> 00:00:47.627
+Private files and public files need different access rules.
+
+9
+00:00:47.627 --> 00:00:54.844
+A private support attachment should not become public because it shares a storage service with product images.
+
+10
+00:00:54.844 --> 00:01:05.471
+A public product image may be safe to cache and serve broadly, while a private document may require authenticated access, audit records, and short-lived delivery.
+
+11
+00:01:05.471 --> 00:01:12.491
+Avoid exposing internal storage paths, bucket paths, server file paths, or implementation details to users.
+
+12
+00:01:12.491 --> 00:01:20.626
+Public identifiers, opaque file IDs, or controlled download routes are usually better than leaking how storage is organized.
+
+13
+00:01:20.626 --> 00:01:27.776
+Internal paths can create coupling and reveal operational information even when the file itself is protected.
+
+14
+00:01:27.776 --> 00:01:31.844
+Download authorization should happen before content is served.
+
+15
+00:01:31.844 --> 00:01:42.930
+This applies to direct application responses, redirect-style delivery, temporary access links, object storage downloads, previews, thumbnails, and processed derivatives.
+
+16
+00:01:42.930 --> 00:01:47.916
+Derivative files should not bypass the access rules of their source content.
+
+17
+00:01:47.916 --> 00:01:54.345
+Temporary access links need expiration, revocation expectations, least privilege, and clear scope.
+
+18
+00:01:54.345 --> 00:02:03.792
+Administrative and support access should receive extra scrutiny because those workflows often combine broad visibility with operational urgency.
+
+19
+00:02:03.792 --> 00:02:08.909
+Secure downloads are part of the upload workflow, not a separate afterthought.

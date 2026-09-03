@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.241
+Secure serialization review should be concrete.
+
+2
+00:00:03.241 --> 00:00:20.344
+Look for custom converters, raw object serialization, broad model binding, polymorphic settings, type metadata, legacy binary serializers, XML parser settings, caches, queues, import and export tools, diagnostic object dumps, and support utilities.
+
+3
+00:00:20.344 --> 00:00:25.654
+These areas often hold the assumptions that ordinary feature review can miss.
+
+4
+00:00:25.654 --> 00:00:32.136
+Dependency review matters because serializers and parsers are code that process boundary data.
+
+5
+00:00:32.136 --> 00:00:33.515
+Review System.
+
+6
+00:00:33.515 --> 00:00:34.894
+Text.
+
+7
+00:00:34.894 --> 00:00:45.377
+Json options, XML libraries, document-processing components, messaging libraries, compatibility packages, cache serializers, and third-party converters.
+
+8
+00:00:45.377 --> 00:00:56.824
+Ask whether the dependency is maintained, whether its configuration is understood, whether it processes untrusted data, and whether it has access to sensitive fields.
+
+9
+00:00:56.824 --> 00:01:09.444
+Testing should include malformed input, oversized input, missing fields, unknown fields, incompatible versions, invalid states, authorization boundaries, and sensitive field exposure.
+
+10
+00:01:09.444 --> 00:01:13.099
+These tests do not need unsafe examples to be useful.
+
+11
+00:01:13.099 --> 00:01:28.064
+Defensive test data can be ordinary but unexpected: a missing ExampleTenantId, an unsupported message version, an empty required field, an overly large document, or a field that should never appear in an API response.
+
+12
+00:01:28.064 --> 00:01:30.891
+Legacy remediation starts with inventory.
+
+13
+00:01:30.891 --> 00:01:43.304
+Find where serialized data enters, where it leaves, where it is stored, which formats are used, who owns each contract, and which flows involve sensitive output or untrusted input.
+
+14
+00:01:43.304 --> 00:01:54.338
+Prioritize the highest-risk paths first: external inputs, long-lived stored data, broad type handling, sensitive outputs, and components with unclear ownership.
+
+15
+00:01:54.338 --> 00:01:57.441
+Remediation usually combines several changes.
+
+16
+00:01:57.441 --> 00:02:11.785
+Introduce DTOs, narrow contracts, add validation, document ownership, replace unsafe or poorly understood serializers, configure parsers, reduce sensitive output, add compatibility tests, and plan migrations.
+
+17
+00:02:11.785 --> 00:02:18.681
+Avoid trying to solve every legacy path in one large rewrite unless the organization can support it.
+
+18
+00:02:18.681 --> 00:02:22.129
+Incremental, owned remediation often works better.
+
+19
+00:02:22.129 --> 00:02:26.957
+Monitoring helps teams see whether serialization controls are working.
+
+20
+00:02:26.957 --> 00:02:38.749
+Track deserialization failures, unsupported versions, message rejection patterns, import errors, repeated malformed input, and unusual message volume at a defensive level.
+
+21
+00:02:38.749 --> 00:02:48.128
+These signals can reveal operational drift, broken clients, stale producers, or workflows that need better validation and documentation.

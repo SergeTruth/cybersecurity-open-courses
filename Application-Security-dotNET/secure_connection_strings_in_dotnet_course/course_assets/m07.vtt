@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.796
+EF Core applications often use connection strings at design time, migration time, seeding time, and runtime.
+
+2
+00:00:06.796 --> 00:00:12.647
+These contexts are related, but they do not always need the same identity or privilege level.
+
+3
+00:00:12.647 --> 00:00:18.688
+Treating them as one connection string can make development easier but production review weaker.
+
+4
+00:00:18.688 --> 00:00:23.973
+Design-time tooling should not require production credentials on developer machines.
+
+5
+00:00:23.973 --> 00:00:32.216
+Developers need safe ways to scaffold, test, and run migrations locally without gaining unnecessary access to production databases.
+
+6
+00:00:32.216 --> 00:00:37.124
+Local development should use local or development resources whenever possible.
+
+7
+00:00:37.124 --> 00:00:45.178
+Migration credentials may need more privilege than runtime application credentials, especially when schema changes are involved.
+
+8
+00:00:45.178 --> 00:00:48.072
+That privilege should be handled deliberately.
+
+9
+00:00:48.072 --> 00:00:56.064
+A deployment pipeline might run migrations with a controlled identity, while the application runtime identity remains narrower.
+
+10
+00:00:56.064 --> 00:01:02.293
+Automated deployment pipelines should protect migration connection strings and avoid printing them.
+
+11
+00:01:02.293 --> 00:01:10.976
+Migration output, logs, command arguments, build summaries, environment dumps, and failure reports should be reviewed for secret exposure.
+
+12
+00:01:10.976 --> 00:01:15.444
+Pipeline permissions should be limited to the environments they deploy.
+
+13
+00:01:15.444 --> 00:01:21.610
+Runtime configuration should be explicit enough that the app connects to the intended environment.
+
+14
+00:01:21.610 --> 00:01:30.671
+Test, staging, and production targets should be hard to confuse through naming, deployment approvals, platform configuration, and safety checks.
+
+15
+00:01:30.671 --> 00:01:35.075
+A misdirected migration can be more damaging than a failed deployment.
+
+16
+00:01:35.075 --> 00:01:41.053
+Seed data and database initialization should not embed secrets or sensitive connection details.
+
+17
+00:01:41.053 --> 00:01:50.932
+Initialization logic should also be reviewed for environment assumptions, logging behavior, and whether it is appropriate to run automatically in production.

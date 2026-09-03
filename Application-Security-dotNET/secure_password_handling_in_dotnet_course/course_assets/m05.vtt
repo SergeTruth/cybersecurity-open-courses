@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.042
+Password reset is a high-risk account recovery workflow because it can transfer control of an account when handled poorly.
+
+2
+00:00:08.042 --> 00:00:11.057
+A reset flow is not just a convenience feature.
+
+3
+00:00:11.057 --> 00:00:18.480
+It is an alternative path into the account, and it should be designed with the same care as primary authentication.
+
+4
+00:00:18.480 --> 00:00:25.207
+Reset tokens should be time-limited, purpose-specific, protected, and one-time use where possible.
+
+5
+00:00:25.207 --> 00:00:36.419
+A token created for password reset should not be reusable for other account actions, should expire within a defined window, and should become invalid after successful use.
+
+6
+00:00:36.419 --> 00:00:45.543
+The application should also handle repeated requests predictably so users receive help without creating unnecessary operational noise.
+
+7
+00:00:45.543 --> 00:00:49.332
+Reset links and tokens need logging and analytics review.
+
+8
+00:00:49.332 --> 00:00:57.914
+Tokens can appear in URLs, emails, browser history, support screenshots, analytics tools, reverse proxy logs, and error reports.
+
+9
+00:00:57.914 --> 00:01:01.549
+Those systems should redact or avoid sensitive values.
+
+10
+00:01:01.549 --> 00:01:07.657
+A reset token should never become a long-lived artifact in observability or support tooling.
+
+11
+00:01:07.657 --> 00:01:14.461
+Password change by an authenticated user and password reset through recovery are different workflows.
+
+12
+00:01:14.461 --> 00:01:21.420
+A signed-in user changing a known password may require current password verification and session review.
+
+13
+00:01:21.420 --> 00:01:28.147
+A recovery flow may require additional notification, token validation, and stronger audit evidence.
+
+14
+00:01:28.147 --> 00:01:33.715
+Treating the two paths separately makes policy decisions easier to test and explain.
+
+15
+00:01:33.715 --> 00:01:42.452
+After a password change or reset, review existing sessions, remembered devices, recovery codes, MFA state, and user notifications.
+
+16
+00:01:42.452 --> 00:01:45.777
+Some applications invalidate existing sessions.
+
+17
+00:01:45.777 --> 00:01:48.097
+Others apply risk-based handling.
+
+18
+00:01:48.097 --> 00:01:58.690
+User notification can help detect unwanted recovery activity, and support-assisted recovery should have clear identity verification and audit expectations.

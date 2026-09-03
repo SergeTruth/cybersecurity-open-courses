@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "MFA, Passkeys, and Passwordless Context",
+  "graphicAlt": "Bullet summary graphic for MFA, Passkeys, and Passwordless Context.",
+  "narration": "Passwords are only one authentication factor. Multi-factor authentication can reduce the risk created by password compromise, especially for administrative access, high-risk actions, sensitive accounts, and environments where password reuse or phishing risk is a serious concern.\n\nDifferent factors have different operational tradeoffs. TOTP apps, recovery codes, hardware-backed authenticators, passkeys, and external identity providers all change enrollment, support, recovery, device replacement, and audit behavior. SMS-based second factors may improve security over passwords alone, but they should be reviewed carefully and should not be treated as the strongest option.\n\nRecovery codes are secrets. They should be generated, displayed, stored, regenerated, invalidated, and audited with care. A recovery workflow that is weaker than the normal sign-in flow can become the practical path of least resistance, so account recovery should be designed alongside MFA enrollment.\n\nPasswordless and passkey approaches can reduce password-handling risk because the application may collect fewer reusable secrets. They still require lifecycle review, identity proofing choices, device recovery, logging, support procedures, and compromise response. The goal is not to declare passwords solved, but to place them in the right authentication architecture.",
+  "narrationPoints": [
+    "Multi-factor authentication can reduce the risk created by password compromise, especially for administrative access, high-risk actions, sensitive accounts, and environments where password reuse or phishing risk is a serious concern.",
+    "TOTP apps, recovery codes, hardware-backed authenticators, passkeys, and external identity providers all change enrollment, support, recovery, device replacement, and audit behavior.",
+    "A recovery workflow that is weaker than the normal sign-in flow can become the practical path of least resistance, so account recovery should be designed alongside MFA enrollment.",
+    "Passwordless and passkey approaches can reduce password-handling risk because the application may collect fewer reusable secrets.",
+    "The goal is not to declare passwords solved, but to place them in the right authentication architecture."
+  ]
+};

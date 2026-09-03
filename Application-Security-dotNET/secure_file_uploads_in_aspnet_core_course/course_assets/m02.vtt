@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.161
+Upload entry points are not limited to a single browser form.
+
+2
+00:00:04.161 --> 00:00:06.139
+Files can arrive through ASP.
+
+3
+00:00:06.139 --> 00:00:16.302
+NET Core MVC pages, minimal APIs, Web APIs, multipart requests, administrative tools, scheduled imports, partner integrations, and support workflows.
+
+4
+00:00:16.302 --> 00:00:24.350
+A secure design identifies every entry point and applies consistent rules where the same business process is involved.
+
+5
+00:00:24.350 --> 00:00:26.260
+Limits should be deliberate.
+
+6
+00:00:26.260 --> 00:00:39.356
+Request size limits, form limits, multipart limits, file count limits, endpoint-specific limits, and business limits help protect the application from accidental overload and unclear behavior.
+
+7
+00:00:39.356 --> 00:00:49.724
+A profile photo, invoice attachment, bulk import, and administrative report upload may each need different limits because they serve different purposes.
+
+8
+00:00:49.724 --> 00:00:52.998
+Streaming versus buffering is a design decision.
+
+9
+00:00:52.998 --> 00:01:00.091
+Buffering may be simpler for small files, but it can put pressure on memory, disk, or temporary storage.
+
+10
+00:01:00.091 --> 00:01:09.777
+Streaming can support larger files and early processing, but it requires careful validation, cancellation, error handling, and storage design.
+
+11
+00:01:09.777 --> 00:01:16.598
+Choose based on expected size, performance needs, validation requirements, and operational capacity.
+
+12
+00:01:16.598 --> 00:01:19.531
+Interrupted uploads should fail gracefully.
+
+13
+00:01:19.531 --> 00:01:27.579
+Timeouts and cancellation tokens help the application stop work when a client disconnects or a request exceeds policy.
+
+14
+00:01:27.579 --> 00:01:38.970
+Upload code should avoid continuing expensive processing after the caller is gone and should clean up partial temporary files when the workflow cannot safely continue.
+
+15
+00:01:38.970 --> 00:01:44.222
+Early rejection is useful when a request is clearly unsupported or oversized.
+
+16
+00:01:44.222 --> 00:01:54.522
+The application should reject files that do not match the endpoint purpose, exceed limits, or violate basic business rules before doing expensive work.
+
+17
+00:01:54.522 --> 00:02:06.253
+That said, early rejection is only the first layer; accepted files still need storage isolation, validation, scanning or review where appropriate, and authorization checks.
+
+18
+00:02:06.253 --> 00:02:11.369
+Avoid unbounded reads and memory-heavy processing of untrusted upload data.
+
+19
+00:02:11.369 --> 00:02:22.282
+A safe upload handler controls how much it reads, where data is buffered, how temporary files are managed, and what happens when validation or processing fails.
+
+20
+00:02:22.282 --> 00:02:29.854
+Those controls should apply consistently across public endpoints, internal workflows, and administrative paths.

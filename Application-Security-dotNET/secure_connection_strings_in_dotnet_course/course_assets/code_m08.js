@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Logging, Diagnostics, Exceptions, and Redaction' into concrete defensive .NET review patterns.",
+  "codeExamples": [
+    {
+      "title": "Create a low-cardinality connection diagnostic",
+      "language": "csharp",
+      "blurb": "The event factory admits closed operation, authentication-mode, and outcome categories, one application-owned endpoint alias, and a finite bounded duration; it has no field for connection strings, tokens, passwords, SQL, or exception messages.",
+      "code": "public enum ConnectionOperation { Open, Query, Rotate }\npublic enum ConnectionAuthentication { ManagedIdentity, VaultPassword }\npublic enum ConnectionOutcome { Succeeded, Rejected, Failed }\n\npublic sealed class ConnectionDiagnostic\n{\n    private ConnectionDiagnostic(\n        ConnectionOperation operation,\n        ConnectionAuthentication authentication,\n        ConnectionOutcome outcome,\n        string endpointAlias,\n        double durationMilliseconds)\n    {\n        Operation = operation;\n        Authentication = authentication;\n        Outcome = outcome;\n        EndpointAlias = endpointAlias;\n        DurationMilliseconds = durationMilliseconds;\n    }\n\n    public ConnectionOperation Operation { get; }\n    public ConnectionAuthentication Authentication { get; }\n    public ConnectionOutcome Outcome { get; }\n    public string EndpointAlias { get; }\n    public double DurationMilliseconds { get; }\n\n    public static ConnectionDiagnostic Create(\n        ConnectionOperation operation,\n        ConnectionAuthentication authentication,\n        ConnectionOutcome outcome,\n        string endpointAlias,\n        double durationMilliseconds)\n    {\n        if (!Enum.IsDefined(operation) || !Enum.IsDefined(authentication) || !Enum.IsDefined(outcome) ||\n            endpointAlias is not (\"orders-primary\" or \"orders-replica\") ||\n            !double.IsFinite(durationMilliseconds) || durationMilliseconds is < 0 or > 60_000)\n        {\n            throw new ArgumentException(\"Connection diagnostic rejected.\");\n        }\n        return new ConnectionDiagnostic(\n            operation, authentication, outcome, endpointAlias, durationMilliseconds);\n    }\n}\n"
+    },
+    {
+      "title": "Map database failures without exposing connection details",
+      "language": "csharp",
+      "blurb": "The mapper validates one public correlation identifier and maps timeout, authorization, and unexpected failures to fixed statuses and titles without forwarding provider messages, server names, database names, credentials, SQL, or stack traces.",
+      "code": "public sealed record PublicDatabaseFailure(\n    int Status,\n    string Title,\n    string CorrelationId);\n\npublic static class DatabaseFailureMapper\n{\n    public static PublicDatabaseFailure Map(Exception exception, string correlationId)\n    {\n        ArgumentNullException.ThrowIfNull(exception);\n        if (!IsIdentifier(correlationId))\n            throw new ArgumentException(\"Correlation identifier rejected.\", nameof(correlationId));\n        return exception switch\n        {\n            TimeoutException => new(503, \"Database temporarily unavailable\", correlationId),\n            UnauthorizedAccessException => new(503, \"Database temporarily unavailable\", correlationId),\n            _ => new(500, \"Internal server error\", correlationId)\n        };\n    }\n\n    private static bool IsIdentifier(string value) =>\n        !string.IsNullOrEmpty(value) && value.Length is >= 8 and <= 64 &&\n        value.All(character => char.IsAsciiLetterOrDigit(character) || character is '-' or '_');\n}\n"
+    }
+  ]
+};

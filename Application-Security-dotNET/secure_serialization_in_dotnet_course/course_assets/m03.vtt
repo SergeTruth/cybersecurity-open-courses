@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.333
+System.
+
+2
+00:00:01.333 --> 00:00:02.666
+Text.
+
+3
+00:00:02.666 --> 00:00:06.664
+Json is a common framework-supported serializer for modern .
+
+4
+00:00:06.664 --> 00:00:07.997
+NET applications.
+
+5
+00:00:07.997 --> 00:00:09.329
+It is used for ASP.
+
+6
+00:00:09.329 --> 00:00:18.592
+NET Core APIs, background services, message processing, import and export flows, configuration-like data, and service-to-service contracts.
+
+7
+00:00:18.592 --> 00:00:25.722
+Its presence in the platform is helpful because teams can rely on maintained behavior and familiar options.
+
+8
+00:00:25.722 --> 00:00:30.920
+But safe use still depends on how the application shapes data at the boundary.
+
+9
+00:00:30.920 --> 00:00:33.386
+DTOs should be intentional contracts.
+
+10
+00:00:33.386 --> 00:00:42.248
+An ExampleCustomerDto, ExampleOrderMessage, or ExampleApiResponse should contain the fields that belong at that boundary and no more.
+
+11
+00:00:42.248 --> 00:00:55.709
+Directly serializing broad domain objects can expose internal state, lifecycle flags, authorization-related fields, tenant markers, notes, or implementation details that were never meant for the caller.
+
+12
+00:00:55.709 --> 00:01:02.706
+Directly deserializing broad domain objects can also populate properties the operation should not accept.
+
+13
+00:01:02.706 --> 00:01:07.304
+After JSON deserialization, server-side validation is still required.
+
+14
+00:01:07.304 --> 00:01:10.769
+The serializer can create an object with the right .
+
+15
+00:01:10.769 --> 00:01:26.296
+NET type, but it does not know whether the ExampleTenantId belongs to the current user, whether a field is allowed for this workflow, whether a date range is business-valid, or whether an optional field is acceptable in this context.
+
+16
+00:01:26.296 --> 00:01:34.626
+Validation should happen before business decisions, authorization-sensitive decisions, persistence, or downstream processing.
+
+17
+00:01:34.626 --> 00:01:43.156
+Required fields, optional fields, defaults, unknown properties, naming policies, and type conversion assumptions deserve review.
+
+18
+00:01:43.156 --> 00:01:49.353
+A missing value might be acceptable in one version of a contract and unacceptable in another.
+
+19
+00:01:49.353 --> 00:01:54.084
+A default value might be safe for display but unsafe for state changes.
+
+20
+00:01:54.084 --> 00:02:02.014
+Unknown fields may be ignored by design, but teams should understand what that means for compatibility and diagnostics.
+
+21
+00:02:02.014 --> 00:02:04.280
+Avoid overbroad object population.
+
+22
+00:02:04.280 --> 00:02:12.676
+An update endpoint should not accept every property that exists on the server model just because JSON binding can populate it.
+
+23
+00:02:12.676 --> 00:02:25.737
+For example, fields that affect ownership, approval state, price, role, tenant, or administrative behavior should usually be assigned by server-side logic, not accepted from a general request DTO.
+
+24
+00:02:25.737 --> 00:02:28.269
+Use narrow DTOs for narrow operations.
+
+25
+00:02:28.269 --> 00:02:32.068
+Custom converters are powerful and deserve higher review.
+
+26
+00:02:32.068 --> 00:02:38.065
+A converter can change how values are read, written, normalized, interpreted, or rejected.
+
+27
+00:02:38.065 --> 00:02:42.597
+It can also create behavior that is not obvious from the DTO itself.
+
+28
+00:02:42.597 --> 00:02:53.525
+Review custom converters for scope, error handling, compatibility, validation assumptions, and whether they preserve the boundary contract rather than undermine it.

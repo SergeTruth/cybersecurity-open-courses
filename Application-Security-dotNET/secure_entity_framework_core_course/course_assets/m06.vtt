@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.842
+Entity design is part of defensive application architecture.
+
+2
+00:00:03.842 --> 00:00:08.580
+Persistence entities describe how the application stores and relates data.
+
+3
+00:00:08.580 --> 00:00:15.431
+API input models, view models, and command models describe what a caller or workflow is allowed to provide.
+
+4
+00:00:15.431 --> 00:00:23.755
+Keeping those models separate where it improves safety helps prevent external input from shaping more of the entity than intended.
+
+5
+00:00:23.755 --> 00:00:27.981
+Over-posting and unintended field updates are common design risks.
+
+6
+00:00:27.981 --> 00:00:38.674
+A request to update a customer display name should not also allow changes to account ownership, tenant ID, pricing tier, approval state, role state, or audit metadata.
+
+7
+00:00:38.674 --> 00:00:45.846
+Operation-specific models and explicit mapping make it clearer which properties can be changed by each workflow.
+
+8
+00:00:45.846 --> 00:00:50.264
+Navigation properties and relationship changes need ownership review.
+
+9
+00:00:50.264 --> 00:00:55.002
+Updating a relationship can be as sensitive as updating a scalar property.
+
+10
+00:00:55.002 --> 00:01:07.168
+A caller should not be able to attach records to another tenant, move ownership, alter membership, or change a workflow relationship simply because an entity graph can represent that change.
+
+11
+00:01:07.168 --> 00:01:08.833
+Tracking behavior matters.
+
+12
+00:01:08.833 --> 00:01:21.062
+Tracked queries are useful when the application intends to modify entities, but they also make updates easier to perform accidentally if broad object graphs are attached or mapped carelessly.
+
+13
+00:01:21.062 --> 00:01:25.417
+No-tracking queries can reduce overhead and clarify read-only paths.
+
+14
+00:01:25.417 --> 00:01:28.554
+The choice should match intent rather than habit.
+
+15
+00:01:28.554 --> 00:01:33.100
+Concurrency tokens and conflict handling are practical defensive tools.
+
+16
+00:01:33.100 --> 00:01:41.296
+They help the application notice when data changed between read and write, so updates do not silently overwrite important state.
+
+17
+00:01:41.296 --> 00:01:48.147
+Conflict handling should be designed around the business workflow, user experience, and audit expectations.
+
+18
+00:01:48.147 --> 00:01:50.773
+Protect server-owned fields deliberately.
+
+19
+00:01:50.773 --> 00:02:02.682
+Ownership, tenant identifiers, approval state, role assignments, pricing, status transitions, audit fields, and security-relevant flags should be changed only through reviewed workflows.
+
+20
+00:02:02.682 --> 00:02:11.454
+EF Core mapping is powerful, so the application must be explicit about which parts of the entity are caller-controlled and which are not.

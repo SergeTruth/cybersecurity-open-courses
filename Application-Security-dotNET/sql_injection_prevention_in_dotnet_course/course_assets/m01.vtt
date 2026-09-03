@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.959
+SQL injection prevention in .
+
+2
+00:00:01.959 --> 00:00:10.472
+NET starts with a simple defensive idea: data supplied to an application must stay data when it reaches the database boundary.
+
+3
+00:00:10.472 --> 00:00:24.390
+The risk appears when query construction allows input values, report filters, search terms, customer identifiers, order statuses, or date ranges to be interpreted as part of the database instruction itself.
+
+4
+00:00:24.390 --> 00:00:31.619
+The primary prevention strategy is safe query construction, not trying to identify every suspicious string.
+
+5
+00:00:31.619 --> 00:00:42.227
+Blocking a few characters or replacing text is fragile because business data changes, database syntax varies, and applications reuse values in many contexts.
+
+6
+00:00:42.227 --> 00:00:49.456
+The stronger pattern is to keep command text and parameter values separate through provider-supported APIs.
+
+7
+00:00:49.456 --> 00:00:50.807
+.
+
+8
+00:00:50.807 --> 00:00:53.915
+NET applications reach databases in many ways.
+
+9
+00:00:53.915 --> 00:00:55.266
+A team may use ADO.
+
+10
+00:00:55.266 --> 00:01:08.239
+NET command objects, Entity Framework Core, Dapper or another micro-ORM, stored procedures, reporting components, background jobs, import tools, administrative utilities, or migration scripts.
+
+11
+00:01:08.239 --> 00:01:14.792
+SQL injection prevention has to cover all of those paths, not only the most visible web endpoint.
+
+12
+00:01:14.792 --> 00:01:18.373
+Injection prevention is part of ordinary engineering.
+
+13
+00:01:18.373 --> 00:01:21.413
+Code review should notice query construction.
+
+14
+00:01:21.413 --> 00:01:24.319
+Tests should cover risky data-access paths.
+
+15
+00:01:24.319 --> 00:01:28.913
+Maintenance should include dependency review and legacy remediation.
+
+16
+00:01:28.913 --> 00:01:37.088
+Teams should document approved patterns so new features do not reintroduce unsafe construction after the initial cleanup.
+
+17
+00:01:37.088 --> 00:01:38.439
+Defense is layered.
+
+18
+00:01:38.439 --> 00:01:41.817
+Parameterized access prevents the central problem.
+
+19
+00:01:41.817 --> 00:01:47.290
+Least privilege reduces blast radius if an application path behaves unexpectedly.
+
+20
+00:01:47.290 --> 00:01:51.749
+Safe error handling prevents database details from reaching users.
+
+21
+00:01:51.749 --> 00:02:01.546
+Logging and monitoring help operators see unusual validation failures, repeated database errors, or administrative activity that deserves review.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:16.821
+NET applications can read configuration from appsettings files, environment-specific files, environment variables, command-line arguments, developer user secrets, external providers, cloud configuration stores, container settings, and platform services.
+
+2
+00:00:16.821 --> 00:00:23.536
+That flexibility is useful, but it means a setting may not come from the file a reviewer first opens.
+
+3
+00:00:23.536 --> 00:00:28.257
+Source order matters because later sources can override earlier values.
+
+4
+00:00:28.257 --> 00:00:33.576
+A value in an environment variable may replace a value from an appsettings file.
+
+5
+00:00:33.576 --> 00:00:36.501
+A deployment setting may override a default.
+
+6
+00:00:36.501 --> 00:00:39.958
+A command-line argument may change runtime behavior.
+
+7
+00:00:39.958 --> 00:00:45.743
+For security-sensitive settings, precedence can decide which policy is actually active.
+
+8
+00:00:45.743 --> 00:00:56.513
+Precedence matters for authentication, authorization, CORS, logging, Data Protection, connection strings, diagnostic behavior, cookie settings, and feature flags.
+
+9
+00:00:56.513 --> 00:01:05.157
+A safe value in source control is not enough if a later source can replace it with a weaker value during deployment or operations.
+
+10
+00:01:05.157 --> 00:01:09.877
+Teams should review effective configuration, not only individual files.
+
+11
+00:01:09.877 --> 00:01:15.994
+The important question is what the running application sees after all providers are applied.
+
+12
+00:01:15.994 --> 00:01:26.898
+That may require startup validation, deployment review, documented provider order, and operational visibility into approved settings without exposing secret values.
+
+13
+00:01:26.898 --> 00:01:31.552
+Local developer convenience should not become a production assumption.
+
+14
+00:01:31.552 --> 00:01:46.711
+A local ExampleApiKey placeholder, verbose logging setting, relaxed endpoint, or mock service URL may help development, but it should be clearly separated from production behavior and should fail safely if accidentally promoted.
+
+15
+00:01:46.711 --> 00:01:51.564
+Documentation helps developers and operators share the same mental model.
+
+16
+00:01:51.564 --> 00:01:59.011
+Important settings should have a clear owner, expected source, allowed values, security impact, and review path.
+
+17
+00:01:59.011 --> 00:02:05.061
+Hidden assumptions about where a value came from are a common cause of configuration drift.

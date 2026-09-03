@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.303
+The .
+
+2
+00:00:01.303 --> 00:00:05.666
+NET options pattern can make configuration explicit and reviewable.
+
+3
+00:00:05.666 --> 00:00:13.872
+Instead of scattering string lookups across the codebase, related settings can be grouped into strongly typed options classes.
+
+4
+00:00:13.872 --> 00:00:23.576
+That gives developers a clearer contract for settings such as ExampleFeatureFlag, ExampleTenantId, service endpoints, size limits, or security modes.
+
+5
+00:00:23.576 --> 00:00:31.327
+Strongly typed options help teams validate required settings, ranges, names, URLs, modes, timeouts, and feature states.
+
+6
+00:00:31.327 --> 00:00:39.989
+Validation should confirm not only that a setting exists, but that it is acceptable for the current environment and business purpose.
+
+7
+00:00:39.989 --> 00:00:46.241
+A present value can still be unsafe, misspelled, out of range, or meant for another environment.
+
+8
+00:00:46.241 --> 00:00:52.233
+Startup validation and fail-fast behavior are useful for unsafe or incomplete configuration.
+
+9
+00:00:52.233 --> 00:01:01.937
+If production requires a protected setting and the application cannot confirm it, continuing with a weak default may be worse than refusing to start.
+
+10
+00:01:01.937 --> 00:01:06.040
+A clear startup failure can prevent ambiguous runtime behavior.
+
+11
+00:01:06.040 --> 00:01:08.385
+Defaults should be chosen carefully.
+
+12
+00:01:08.385 --> 00:01:14.377
+Some settings have safe defaults, such as conservative limits or disabled optional features.
+
+13
+00:01:14.377 --> 00:01:20.694
+Other settings should not have defaults because any fallback value would hide a missing decision.
+
+14
+00:01:20.694 --> 00:01:29.356
+If the application needs a production secret, a production endpoint, or a production security mode, it should not quietly invent one.
+
+15
+00:01:29.356 --> 00:01:33.003
+Avoid ambiguous boolean flags and unclear setting names.
+
+16
+00:01:33.003 --> 00:01:39.842
+A flag such as ExampleFeatureFlag should have a name that makes the safe state and intended effect clear.
+
+17
+00:01:39.842 --> 00:01:48.699
+Vague toggles invite misunderstanding, especially when multiple teams, deployment systems, and operators interact with the same setting.
+
+18
+00:01:48.699 --> 00:01:53.258
+Typed and validated settings are easier to test, document, and review.
+
+19
+00:01:53.258 --> 00:01:55.928
+Unit tests can exercise validation rules.
+
+20
+00:01:55.928 --> 00:02:00.162
+Deployment review can compare expected values to approved ranges.
+
+21
+00:02:00.162 --> 00:02:05.698
+Operators can understand the intended behavior without reading scattered string keys.
+
+22
+00:02:05.698 --> 00:02:10.191
+The result is configuration that behaves more like maintainable code.
