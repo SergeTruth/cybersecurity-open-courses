@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.047
+Workload identity represents software
+rather than a human user.
+
+2
+00:00:04.047 --> 00:00:06.661
+A platform can associate that identity
+with
+
+3
+00:00:06.661 --> 00:00:09.181
+a virtual machine, container, serverless
+function,
+
+4
+00:00:09.181 --> 00:00:12.168
+hosted application, Kubernetes workload,
+or deployment job.
+
+5
+00:00:12.168 --> 00:00:14.968
+The identity is not itself a secret.
+
+6
+00:00:14.968 --> 00:00:17.582
+It is the principal and trust mechanism
+
+7
+00:00:17.582 --> 00:00:20.382
+through which the workload obtains usable
+credentials.
+
+8
+00:00:20.382 --> 00:00:22.622
+The common flow starts with the
+
+9
+00:00:22.622 --> 00:00:24.676
+platform establishing the workload's
+identity.
+
+10
+00:00:24.676 --> 00:00:26.916
+Application code asks a supported
+credential
+
+11
+00:00:26.916 --> 00:00:29.717
+provider for access to a target service.
+
+12
+00:00:29.717 --> 00:00:34.104
+The platform issues or brokers a
+short-lived credential, often a token.
+
+13
+00:00:34.104 --> 00:00:37.184
+The client presents that credential, or
+uses temporary
+
+14
+00:00:37.184 --> 00:00:40.451
+signing credentials, and the receiving
+service evaluates authorization.
+
+15
+00:00:40.451 --> 00:00:42.691
+The application avoids carrying a
+permanent
+
+16
+00:00:42.691 --> 00:00:45.118
+cloud key through its deployment
+configuration.
+
+17
+00:00:45.118 --> 00:00:47.545
+Examples include cloud roles, managed
+identities,
+
+18
+00:00:47.545 --> 00:00:49.692
+service accounts, and federated
+identities.
+
+19
+00:00:49.692 --> 00:00:53.519
+With OpenID Connect federation, a trusted
+issuer supplies an assertion
+
+20
+00:00:53.519 --> 00:00:57.813
+that a receiving system validates and may
+exchange for service credentials.
+
+21
+00:00:57.813 --> 00:01:01.920
+Trust must constrain the expected issuer,
+audience, and workload claims.
+
+22
+00:01:01.920 --> 00:01:04.907
+An assertion intended for one audience is
+not
+
+23
+00:01:04.907 --> 00:01:08.081
+automatically a valid access token for
+every API.
+
+24
+00:01:08.081 --> 00:01:11.255
+For Kubernetes, use workload-specific
+service accounts, narrowly scoped
+
+25
+00:01:11.255 --> 00:01:14.148
+permissions, and short-lived projected
+tokens where supported.
+
+26
+00:01:14.148 --> 00:01:17.975
+Access to cloud services requires an
+appropriate trust integration; creating
+
+27
+00:01:17.975 --> 00:01:21.896
+a Kubernetes service account alone does
+not grant cloud authority.
+
+28
+00:01:21.896 --> 00:01:24.883
+Protect the runtime and its credential
+endpoint because
+
+29
+00:01:24.883 --> 00:01:28.430
+compromised code may still obtain
+credentials as the workload.
+
+30
+00:01:28.430 --> 00:01:31.510
+Compared with permanent keys in
+environment variables, this
+
+31
+00:01:31.510 --> 00:01:34.311
+design reduces static distribution and
+developer handling.
+
+32
+00:01:34.311 --> 00:01:36.644
+Providers can renew credentials
+automatically, and
+
+33
+00:01:36.644 --> 00:01:38.698
+identity-specific audit records improve
+attribution.
+
+34
+00:01:38.698 --> 00:01:41.778
+Removing trust or permissions can stop
+future access,
+
+35
+00:01:41.778 --> 00:01:44.392
+but already issued credentials may remain
+usable
+
+36
+00:01:44.392 --> 00:01:47.565
+until expiration or until the service
+enforces revocation.
+
+37
+00:01:47.565 --> 00:01:51.579
+Short-lived does not mean harmless: tokens
+remain sensitive while valid.
+
+38
+00:01:51.579 --> 00:01:54.473
+Finally, identity establishes who is
+requesting access.
+
+39
+00:01:54.473 --> 00:01:56.713
+Narrow roles and resource permissions
+still
+
+40
+00:01:56.713 --> 00:01:59.140
+determine what that workload may do.
+

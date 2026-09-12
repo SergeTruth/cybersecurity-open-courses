@@ -1,0 +1,178 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.067
+A multipart filename describes what the
+sender called a file.
+
+2
+00:00:04.067 --> 00:00:07.294
+It should not decide where the application
+writes it.
+
+3
+00:00:07.294 --> 00:00:10.012
+Using that value as a filesystem path or
+
+4
+00:00:10.012 --> 00:00:13.239
+object storage key combines display
+metadata with storage authority.
+
+5
+00:00:13.239 --> 00:00:15.618
+The application then has to reason about
+
+6
+00:00:15.618 --> 00:00:18.250
+path separators, reserved names, control
+characters, Unicode
+
+7
+00:00:18.250 --> 00:00:21.223
+presentation, excessive length,
+collisions, and platform differences every
+
+8
+00:00:21.223 --> 00:00:23.771
+time a file is saved or retrieved.
+
+9
+00:00:23.771 --> 00:00:26.149
+Remove that dependency by generating
+storage identifiers
+
+10
+00:00:26.149 --> 00:00:28.951
+on the server, using an appropriate random
+identifier
+
+11
+00:00:28.951 --> 00:00:31.499
+mechanism such as Node's random UUID
+function.
+
+12
+00:00:31.499 --> 00:00:35.406
+Keep the original name separately only
+when the product needs it.
+
+13
+00:00:35.406 --> 00:00:39.653
+Bound that metadata, escape it for its
+rendering context, and use a
+
+14
+00:00:39.653 --> 00:00:43.899
+proper header construction library when a
+download name enters an HTTP response.
+
+15
+00:00:43.899 --> 00:00:46.617
+A name acceptable for display is not
+thereby
+
+16
+00:00:46.617 --> 00:00:49.844
+acceptable as a storage address or
+response header value.
+
+17
+00:00:49.844 --> 00:00:53.326
+An identifier should select a new object,
+while replacement should
+
+18
+00:00:53.326 --> 00:00:56.554
+be a separate authorized operation on a
+logical attachment.
+
+19
+00:00:56.554 --> 00:00:58.592
+Use exclusive creation or appropriate
+storage
+
+20
+00:00:58.592 --> 00:01:00.460
+conditions to prevent accidental
+overwrites.
+
+21
+00:01:00.460 --> 00:01:03.943
+If an extension is operationally useful,
+derive it from the
+
+22
+00:01:03.943 --> 00:01:07.170
+validated file policy rather than copying
+the sender's suffix.
+
+23
+00:01:07.170 --> 00:01:09.973
+Cleaning a filename can improve
+presentation, but it
+
+24
+00:01:09.973 --> 00:01:13.200
+should not carry the burden of controlling
+storage destinations.
+
+25
+00:01:13.200 --> 00:01:17.107
+Server generated names make the allowed
+destination much easier to review.
+
+26
+00:01:17.107 --> 00:01:19.655
+For local storage, configure a trusted
+root,
+
+27
+00:01:19.655 --> 00:01:22.457
+create only server controlled child names,
+and prevent
+
+28
+00:01:22.457 --> 00:01:25.005
+untrusted actors from modifying the
+directory structure.
+
+29
+00:01:25.005 --> 00:01:27.723
+Resolve destinations within that root and
+account for
+
+30
+00:01:27.723 --> 00:01:30.611
+links or filesystem behavior that could
+redirect writes.
+
+31
+00:01:30.611 --> 00:01:32.309
+Restrictive permissions protect temporary
+directories
+
+32
+00:01:32.309 --> 00:01:34.178
+as well as permanent storage.
+
+33
+00:01:34.178 --> 00:01:37.999
+For object storage, the server chooses the
+bucket or container and
+
+34
+00:01:37.999 --> 00:01:41.991
+key, and records the relationship to the
+authorized tenant and resource.
+
+35
+00:01:41.991 --> 00:01:45.473
+An opaque key reduces name collisions and
+guessability; it does
+
+36
+00:01:45.473 --> 00:01:49.380
+not replace access control on the object
+or its download route.
+

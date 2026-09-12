@@ -1,0 +1,206 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.432
+Start with the property the application
+needs.
+
+2
+00:00:03.432 --> 00:00:05.290
+Confidentiality, integrity, authenticity,
+and
+
+3
+00:00:05.290 --> 00:00:07.440
+password verification require appropriate
+constructions.
+
+4
+00:00:07.440 --> 00:00:09.884
+Encoding changes representation, while
+encryption protects
+
+5
+00:00:09.884 --> 00:00:12.034
+recoverable data with a key.
+
+6
+00:00:12.034 --> 00:00:14.380
+Ordinary hashing does not provide
+encryption
+
+7
+00:00:14.380 --> 00:00:17.313
+or an appropriate password verifier by
+itself.
+
+8
+00:00:17.313 --> 00:00:19.854
+Use maintained, high level cryptographic
+interfaces,
+
+9
+00:00:19.854 --> 00:00:22.591
+and prefer authenticated encryption when
+stored data
+
+10
+00:00:22.591 --> 00:00:25.133
+needs both confidentiality and tamper
+detection.
+
+11
+00:00:25.133 --> 00:00:29.238
+Keep authorization and TLS as separate
+parts of the system.
+
+12
+00:00:29.238 --> 00:00:32.562
+Generate keys and security values with
+cryptographic randomness.
+
+13
+00:00:32.562 --> 00:00:35.006
+Follow the exact nonce contract, including
+
+14
+00:00:35.006 --> 00:00:37.938
+uniqueness under the same key where
+required.
+
+15
+00:00:37.938 --> 00:00:41.164
+A nonce is not a secret key, and
+
+16
+00:00:41.164 --> 00:00:44.878
+random generation does not eliminate
+collision or operational limits.
+
+17
+00:00:44.878 --> 00:00:47.224
+Human passwords need deliberately
+expensive password
+
+18
+00:00:47.224 --> 00:00:49.375
+hashing or password based derivation.
+
+19
+00:00:49.375 --> 00:00:51.721
+Salts normally accompany the stored result
+
+20
+00:00:51.721 --> 00:00:54.262
+and are not secret encryption keys.
+
+21
+00:00:54.262 --> 00:00:56.999
+Derive subkeys from strong material only
+with
+
+22
+00:00:56.999 --> 00:00:59.932
+an appropriate construction and explicit
+purpose separation.
+
+23
+00:00:59.932 --> 00:01:03.158
+A data encryption key protects application
+content; a
+
+24
+00:01:03.158 --> 00:01:06.090
+key encryption key protects the data key.
+
+25
+00:01:06.090 --> 00:01:09.609
+Envelope encryption can keep long lived
+keys in managed
+
+26
+00:01:09.609 --> 00:01:13.324
+infrastructure while allowing scoped data
+keys and controlled rewrapping.
+
+27
+00:01:13.324 --> 00:01:16.061
+It does not prevent plaintext data keys
+
+28
+00:01:16.061 --> 00:01:18.993
+from entering application memory during
+local operations.
+
+29
+00:01:18.993 --> 00:01:21.535
+Minimize that exposure, separate
+environments, and
+
+30
+00:01:21.535 --> 00:01:24.467
+make key access narrowly authorized and
+auditable.
+
+31
+00:01:24.467 --> 00:01:26.813
+Type declarations and delivery through
+configuration
+
+32
+00:01:26.813 --> 00:01:28.964
+do not supply those controls.
+
+33
+00:01:28.964 --> 00:01:31.310
+Preserve controlled format and key version
+
+34
+00:01:31.310 --> 00:01:33.851
+metadata so historical records remain
+understandable.
+
+35
+00:01:33.851 --> 00:01:37.761
+New write rotation, re-encryption, and
+rewrapping perform different jobs.
+
+36
+00:01:37.761 --> 00:01:40.107
+Emergency compromise response must address
+exposure
+
+37
+00:01:40.107 --> 00:01:42.258
+that routine rotation cannot undo.
+
+38
+00:01:42.258 --> 00:01:45.679
+Test authentication failures, malformed
+records, nonce allocation, retired
+
+39
+00:01:45.679 --> 00:01:49.491
+key policy, and migration before depending
+on those paths.
+
+40
+00:01:49.491 --> 00:01:53.597
+A cryptographic design is not complete
+when encryption works today.
+
+41
+00:01:53.597 --> 00:01:57.116
+It is complete when the application can
+use the
+
+42
+00:01:57.116 --> 00:02:00.928
+right primitive safely, protect its keys,
+detect tampering, rotate
+
+43
+00:02:00.928 --> 00:02:04.740
+those keys, and still understand protected
+data years later.
+

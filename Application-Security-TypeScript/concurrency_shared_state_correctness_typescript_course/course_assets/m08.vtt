@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.077
+Start a concurrency review with three
+concrete facts: the
+
+2
+00:00:04.077 --> 00:00:07.268
+authoritative shared state, the invariant
+that must survive
+
+3
+00:00:07.268 --> 00:00:11.039
+each transition, and every writer that can
+affect it.
+
+4
+00:00:11.039 --> 00:00:13.263
+Include request handlers, replicas,
+workers,
+
+5
+00:00:13.263 --> 00:00:15.487
+administrative jobs, and external systems.
+
+6
+00:00:15.487 --> 00:00:17.807
+The order of statements in one
+
+7
+00:00:17.807 --> 00:00:20.708
+TypeScript function describes only one
+participant's execution.
+
+8
+00:00:20.708 --> 00:00:23.608
+Asynchronous interleaving is distinct from
+CPU parallelism.
+
+9
+00:00:23.608 --> 00:00:25.929
+One event loop can have overlapping
+
+10
+00:00:25.929 --> 00:00:28.443
+operations without executing their
+JavaScript simultaneously.
+
+11
+00:00:28.443 --> 00:00:30.763
+Process-local state and distributed shared
+state
+
+12
+00:00:30.763 --> 00:00:32.890
+therefore need different coordination
+boundaries.
+
+13
+00:00:32.890 --> 00:00:35.308
+Await permits other work to progress,
+
+14
+00:00:35.308 --> 00:00:37.822
+while Promise.all supplies no atomicity
+guarantee.
+
+15
+00:00:37.822 --> 00:00:40.529
+Prefer an atomic conditional mutation when
+the
+
+16
+00:00:40.529 --> 00:00:43.429
+storage layer can express the rule
+directly.
+
+17
+00:00:43.429 --> 00:00:45.750
+Check its result and preserve database
+
+18
+00:00:45.750 --> 00:00:47.877
+constraints that protect the invariant.
+
+19
+00:00:47.877 --> 00:00:51.841
+Application validation improves feedback
+and expresses business rules, but an
+
+20
+00:00:51.841 --> 00:00:55.515
+earlier check does not enforce a later
+shared-state transition.
+
+21
+00:00:55.515 --> 00:00:58.706
+Use transactions when related changes must
+succeed together,
+
+22
+00:00:58.706 --> 00:01:01.800
+then verify isolation, locking, and
+predicate coverage.
+
+23
+00:01:01.800 --> 00:01:04.701
+A transaction is not automatic serial
+execution.
+
+24
+00:01:04.701 --> 00:01:07.021
+Keep protected work focused and avoid
+
+25
+00:01:07.021 --> 00:01:09.922
+slow remote calls while locks are held.
+
+26
+00:01:09.922 --> 00:01:11.952
+Optimistic concurrency detects stale
+versions;
+
+27
+00:01:11.952 --> 00:01:14.079
+pessimistic locking limits conflicting
+access.
+
+28
+00:01:14.079 --> 00:01:18.914
+Comparing a version and advancing it must
+occur atomically with the write.
+
+29
+00:01:18.914 --> 00:01:21.041
+Treat retries, queue redelivery, and
+
+30
+00:01:21.041 --> 00:01:23.168
+duplicate requests as expected behavior.
+
+31
+00:01:23.168 --> 00:01:25.489
+Idempotency preserves one logical outcome
+across
+
+32
+00:01:25.489 --> 00:01:28.486
+attempts, whereas mutual exclusion
+separates overlapping work.
+
+33
+00:01:28.486 --> 00:01:31.967
+Retrying an operation is safe only when
+replay and
+
+34
+00:01:31.967 --> 00:01:35.738
+recovery semantics are defined, including
+effects in external systems.
+
+35
+00:01:35.738 --> 00:01:38.928
+Test meaningful overlap and inspect
+authoritative final state,
+
+36
+00:01:38.928 --> 00:01:42.602
+including the absence of partial effects
+from rejected attempts.
+
+37
+00:01:42.602 --> 00:01:47.147
+Types can document states and versions,
+but runtime guarantees enforce them.
+
+38
+00:01:47.147 --> 00:01:50.434
+Authorization remains a separate
+requirement for every transition.
+
+39
+00:01:50.434 --> 00:01:54.302
+Concurrency correctness comes from
+protecting the invariant at the layer
+
+40
+00:01:54.302 --> 00:01:57.879
+where competing operations actually meet,
+not from assuming the
+
+41
+00:01:57.879 --> 00:02:01.940
+operations will happen in the order the
+source code suggests.
+

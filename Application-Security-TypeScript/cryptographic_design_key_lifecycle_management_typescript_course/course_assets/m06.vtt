@@ -1,0 +1,202 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.436
+Plan how keys change before writing the
+first encrypted record.
+
+2
+00:00:04.436 --> 00:00:07.623
+A key is created, activated for specific
+uses,
+
+3
+00:00:07.623 --> 00:00:11.278
+rotated or retired, and eventually
+destroyed according to policy.
+
+4
+00:00:11.278 --> 00:00:14.840
+Retirement can stop new encryption while
+allowing historical decryption.
+
+5
+00:00:14.840 --> 00:00:17.089
+Revocation or disabling access has service
+
+6
+00:00:17.089 --> 00:00:19.901
+specific semantics and may stop required
+operations.
+
+7
+00:00:19.901 --> 00:00:22.900
+These states need explicit permissions
+rather than one
+
+8
+00:00:22.900 --> 00:00:26.462
+ambiguous flag that means different things
+to different callers.
+
+9
+00:00:26.462 --> 00:00:29.836
+Keep a versioned encrypted representation
+that can identify an
+
+10
+00:00:29.836 --> 00:00:33.397
+approved format and the key needed for
+historical data.
+
+11
+00:00:33.397 --> 00:00:35.272
+Treat stored versions as unverified
+
+12
+00:00:35.272 --> 00:00:37.334
+routing hints until authentication
+succeeds.
+
+13
+00:00:37.334 --> 00:00:39.677
+Resolve them through a controlled
+registry,
+
+14
+00:00:39.677 --> 00:00:41.739
+with purpose and environment restrictions.
+
+15
+00:00:41.739 --> 00:00:44.738
+A key identifier must not become an
+arbitrary
+
+16
+00:00:44.738 --> 00:00:47.737
+path, network address, or unrestricted
+secret lookup.
+
+17
+00:00:47.737 --> 00:00:49.987
+The registry also determines which
+historical
+
+18
+00:00:49.987 --> 00:00:52.798
+uses remain permitted and which must fail.
+
+19
+00:00:52.798 --> 00:00:55.798
+New write rotation selects a new key for
+
+20
+00:00:55.798 --> 00:00:59.359
+future records while retaining authorized
+access to older keys.
+
+21
+00:00:59.359 --> 00:01:01.796
+It does not update existing ciphertext.
+
+22
+00:01:01.796 --> 00:01:04.514
+Re-encryption migrates old records under
+new material,
+
+23
+00:01:04.514 --> 00:01:06.857
+preferably with bounded, resumable work
+and
+
+24
+00:01:06.857 --> 00:01:09.669
+conditional writes that avoid overwriting
+concurrent changes.
+
+25
+00:01:09.669 --> 00:01:11.918
+Envelope rewrapping changes protection
+around data
+
+26
+00:01:11.918 --> 00:01:14.355
+keys where the format permits it.
+
+27
+00:01:14.355 --> 00:01:18.198
+Track which operation a migration actually
+performs, verify that records
+
+28
+00:01:18.198 --> 00:01:22.603
+remain readable, and preserve recovery
+paths until the transition is complete.
+
+29
+00:01:22.603 --> 00:01:25.790
+Emergency compromise response is different
+from scheduled rotation.
+
+30
+00:01:25.790 --> 00:01:28.789
+Stopping new use does not erase copied
+keys
+
+31
+00:01:28.789 --> 00:01:31.975
+or undo exposure of historical data and
+signatures.
+
+32
+00:01:31.975 --> 00:01:34.225
+Assess affected material and decide what
+
+33
+00:01:34.225 --> 00:01:37.224
+migration, revocation, or broader response
+is necessary.
+
+34
+00:01:37.224 --> 00:01:39.473
+Re-encryption cannot retract an older
+ciphertext
+
+35
+00:01:39.473 --> 00:01:41.535
+and key already obtained together.
+
+36
+00:01:41.535 --> 00:01:44.253
+Before destroying a key, account for
+required
+
+37
+00:01:44.253 --> 00:01:47.440
+records, backups, replicas, exports, and
+recovery procedures.
+
+38
+00:01:47.440 --> 00:01:50.439
+Deleting one key entry does not prove all
+
+39
+00:01:50.439 --> 00:01:53.532
+copies are gone, and destroying the last
+usable
+
+40
+00:01:53.532 --> 00:01:56.719
+decryption key can make retained
+ciphertext permanently unreadable.
+
+41
+00:01:56.719 --> 00:01:58.968
+Lifecycle design must address both
+confidentiality
+
+42
+00:01:58.968 --> 00:02:01.780
+and the ability to recover authorized
+data.
+

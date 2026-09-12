@@ -1,0 +1,195 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.487
+A secure deserialization boundary
+establishes
+
+2
+00:00:02.487 --> 00:00:04.674
+a sequence of limited guarantees.
+
+3
+00:00:04.674 --> 00:00:07.059
+Parsing establishes that bytes or text
+
+4
+00:00:07.059 --> 00:00:10.040
+can be interpreted in the selected format.
+
+5
+00:00:10.040 --> 00:00:12.425
+Runtime validation establishes that the
+resulting
+
+6
+00:00:12.425 --> 00:00:15.008
+value satisfies an explicit input
+contract.
+
+7
+00:00:15.008 --> 00:00:19.083
+TypeScript helps maintain that contract
+inside the program, but its
+
+8
+00:00:19.083 --> 00:00:22.859
+annotations and assertions do not create
+the runtime evidence.
+
+9
+00:00:22.859 --> 00:00:25.641
+Keeping unverified input as unknown makes
+the
+
+10
+00:00:25.641 --> 00:00:28.623
+missing evidence visible without supplying
+it automatically.
+
+11
+00:00:28.623 --> 00:00:32.299
+A useful contract covers the whole value:
+required and
+
+12
+00:00:32.299 --> 00:00:35.976
+optional fields, nullability, ranges,
+formats, array contents, nested
+
+13
+00:00:35.976 --> 00:00:39.951
+objects, discriminators, and a deliberate
+policy for unknown properties.
+
+14
+00:00:39.951 --> 00:00:42.535
+If validation strips, normalizes, or
+transforms
+
+15
+00:00:42.535 --> 00:00:44.820
+input, use the returned value.
+
+16
+00:00:44.820 --> 00:00:47.205
+Intentional coercion can support a
+documented
+
+17
+00:00:47.205 --> 00:00:50.286
+interface, but conversion alone is not
+validation.
+
+18
+00:00:50.286 --> 00:00:52.671
+The accepted representation must preserve
+the
+
+19
+00:00:52.671 --> 00:00:54.758
+meaning the application expects, including
+
+20
+00:00:54.758 --> 00:00:57.540
+identifiers, boolean values, and numeric
+precision.
+
+21
+00:00:57.540 --> 00:01:01.316
+Structural validity remains separate from
+domain meaning and permission.
+
+22
+00:01:01.316 --> 00:01:05.092
+Services enforce relationships and state
+rules using trusted context.
+
+23
+00:01:05.092 --> 00:01:08.272
+Authorization establishes whether the
+actual caller may perform
+
+24
+00:01:08.272 --> 00:01:11.254
+the requested action on the actual
+resource.
+
+25
+00:01:11.254 --> 00:01:13.639
+Persistence controls protect critical
+invariants when
+
+26
+00:01:13.639 --> 00:01:15.825
+concurrent activity changes that state.
+
+27
+00:01:15.825 --> 00:01:19.998
+Map validated input into narrow
+application commands and explicit updates.
+
+28
+00:01:19.998 --> 00:01:24.073
+A transfer object describes permitted
+input; a persistence entity describes
+
+29
+00:01:24.073 --> 00:01:28.644
+far more of the system than an external
+caller should control.
+
+30
+00:01:28.644 --> 00:01:32.023
+Closed discriminators select known
+behavior under server control.
+
+31
+00:01:32.023 --> 00:01:34.408
+They do not justify arbitrary object
+
+32
+00:01:34.408 --> 00:01:37.587
+construction, dynamic loading, or
+unrestricted model hydration.
+
+33
+00:01:37.587 --> 00:01:41.662
+Resource limits protect the work required
+before and during validation,
+
+34
+00:01:41.662 --> 00:01:45.835
+because correct parsing is not the same as
+affordable parsing.
+
+35
+00:01:45.835 --> 00:01:49.015
+Test the entire route through every
+relevant entry
+
+36
+00:01:49.015 --> 00:01:52.096
+point, including rejection before
+protected side effects.
+
+37
+00:01:52.096 --> 00:01:55.872
+Keep these responsibilities identifiable
+as schemas and services evolve.
+
+38
+00:01:55.872 --> 00:01:59.450
+The safest deserialization boundary turns
+external bytes into a
+
+39
+00:01:59.450 --> 00:02:03.524
+small, validated application value—not
+into a broad object that the
+
+40
+00:02:03.524 --> 00:02:07.300
+rest of the system is expected to trust
+automatically.
+

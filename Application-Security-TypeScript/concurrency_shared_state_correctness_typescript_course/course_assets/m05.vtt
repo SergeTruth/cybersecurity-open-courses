@@ -1,0 +1,193 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.319
+Optimistic concurrency allows competing
+work and detects when
+
+2
+00:00:03.319 --> 00:00:06.315
+an update is based on an obsolete version.
+
+3
+00:00:06.315 --> 00:00:09.663
+It is useful for document editing,
+configuration changes, and
+
+4
+00:00:09.663 --> 00:00:13.011
+other operations where collisions are
+possible but relatively uncommon.
+
+5
+00:00:13.011 --> 00:00:16.007
+It does not prevent every writer from
+starting.
+
+6
+00:00:16.007 --> 00:00:18.650
+A record carries a version or revision.
+
+7
+00:00:18.650 --> 00:00:21.469
+A caller reads version twelve and submits
+an
+
+8
+00:00:21.469 --> 00:00:24.465
+update conditional on that version still
+being current.
+
+9
+00:00:24.465 --> 00:00:27.989
+The storage operation replaces the content
+and advances the version
+
+10
+00:00:27.989 --> 00:00:31.425
+together, using the expected version in
+its mutation predicate.
+
+11
+00:00:31.425 --> 00:00:34.333
+If another writer already changed the
+record, the
+
+12
+00:00:34.333 --> 00:00:37.329
+stale write cannot silently replace the
+newer content.
+
+13
+00:00:37.329 --> 00:00:39.972
+Comparison and version advancement must be
+atomic.
+
+14
+00:00:39.972 --> 00:00:42.967
+Reading the version first, writing
+content, and incrementing
+
+15
+00:00:42.967 --> 00:00:46.316
+the version in a separate statement
+recreates the race.
+
+16
+00:00:46.316 --> 00:00:48.430
+Every writer that can invalidate the
+
+17
+00:00:48.430 --> 00:00:51.073
+snapshot must participate in the version
+contract.
+
+18
+00:00:51.073 --> 00:00:53.893
+An administrative script that changes
+content without changing
+
+19
+00:00:53.893 --> 00:00:56.888
+the revision defeats the check for later
+writers.
+
+20
+00:00:56.888 --> 00:00:59.179
+Inspect the affected-row or
+conditional-write result.
+
+21
+00:00:59.179 --> 00:01:02.792
+No matching update means the expected
+state was unavailable; a
+
+22
+00:01:02.792 --> 00:01:06.844
+conflict response may be appropriate after
+considering deletion and access policy.
+
+23
+00:01:06.844 --> 00:01:09.311
+HTTP APIs can expose a strong ETag
+
+24
+00:01:09.311 --> 00:01:11.955
+and require If-Match for a conditional
+edit.
+
+25
+00:01:11.955 --> 00:01:14.069
+The server must enforce that precondition
+
+26
+00:01:14.069 --> 00:01:16.360
+at the same authoritative mutation
+boundary.
+
+27
+00:01:16.360 --> 00:01:18.475
+Returning an ETag while ignoring it
+
+28
+00:01:18.475 --> 00:01:20.765
+during writes provides no lost-update
+protection.
+
+29
+00:01:20.765 --> 00:01:23.409
+Choose conflict handling from the
+operation's meaning.
+
+30
+00:01:23.409 --> 00:01:25.611
+For a user-edited document, return a
+
+31
+00:01:25.611 --> 00:01:28.254
+conflict and support refresh or deliberate
+merge.
+
+32
+00:01:28.254 --> 00:01:31.074
+Blindly reloading the newest version and
+applying the
+
+33
+00:01:31.074 --> 00:01:34.422
+same stale whole-object replacement may
+erase someone else's work.
+
+34
+00:01:34.422 --> 00:01:38.034
+For a recalculable operation, reloading
+state and rerunning its business
+
+35
+00:01:38.034 --> 00:01:41.382
+logic can be safe if its effects are
+controlled.
+
+36
+00:01:41.382 --> 00:01:44.378
+Merge only when the data semantics support
+it.
+
+37
+00:01:44.378 --> 00:01:46.581
+Optimistic checks detect interference;
+pessimistic locks
+
+38
+00:01:46.581 --> 00:01:48.519
+restrict conflicting access while held.
+
+39
+00:01:48.519 --> 00:01:50.722
+Neither mechanism replaces authorization,
+and retries
+
+40
+00:01:50.722 --> 00:01:52.660
+still need an explicit policy.
+

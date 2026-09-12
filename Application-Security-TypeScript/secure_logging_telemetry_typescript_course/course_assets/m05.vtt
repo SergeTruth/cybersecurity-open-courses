@@ -1,0 +1,187 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.949
+Security telemetry should record events
+that help reconstruct meaningful behavior.
+
+2
+00:00:05.029 --> 00:00:07.893
+Examples include authentication success
+and failure,
+
+3
+00:00:07.973 --> 00:00:10.899
+session creation or revocation,
+authorization denial,
+
+4
+00:00:10.979 --> 00:00:14.209
+administrative operations, role changes,
+account recovery,
+
+5
+00:00:14.289 --> 00:00:16.970
+API-key lifecycle events, important data
+exports,
+
+6
+00:00:17.050 --> 00:00:20.707
+destructive operations, security-relevant
+configuration changes,
+
+7
+00:00:20.787 --> 00:00:24.505
+rate-limit enforcement, and validation
+failures that indicate abuse.
+
+8
+00:00:24.585 --> 00:00:27.632
+Successful privileged actions matter as
+much as failures;
+
+9
+00:00:27.712 --> 00:00:31.917
+an audit trail that records only denied
+operations omits changes an authorized or
+
+10
+00:00:31.997 --> 00:00:33.704
+compromised account completed.
+
+11
+00:00:33.784 --> 00:00:38.050
+Useful events identify the relevant
+dimensions without collecting entire domain
+
+12
+00:00:38.130 --> 00:00:38.617
+objects.
+
+13
+00:00:38.697 --> 00:00:42.293
+Depending on the purpose, fields may
+include an authenticated actor,
+
+14
+00:00:42.373 --> 00:00:45.664
+tenant, resource, operation, server-side
+timestamp, result,
+
+15
+00:00:45.744 --> 00:00:49.462
+request identifier, trace identifier, and
+an error or reason category.
+
+16
+00:00:49.542 --> 00:00:53.381
+Distinguish authentication failure,
+legitimate authorization denial,
+
+17
+00:00:53.461 --> 00:00:57.605
+validation rejection, dependency failure,
+and internal authorization error.
+
+18
+00:00:57.685 --> 00:01:01.891
+Collapsing them into a generic
+access-failed message weakens alerting and makes
+
+19
+00:01:01.971 --> 00:01:03.372
+outages look like attacks.
+
+20
+00:01:03.452 --> 00:01:07.779
+Keep routine high-volume behavior at an
+appropriate level so important signals are
+
+21
+00:01:07.859 --> 00:01:08.469
+not buried.
+
+22
+00:01:08.549 --> 00:01:12.937
+Correlation identifiers connect records;
+they do not prove identity or permission.
+
+23
+00:01:13.017 --> 00:01:16.613
+An inbound request ID from a standard
+header is still untrusted input.
+
+24
+00:01:16.693 --> 00:01:18.704
+Validate its syntax, bound its length,
+
+25
+00:01:18.784 --> 00:01:23.172
+and decide whether to normalize it or
+replace it with a server-generated identifier.
+
+26
+00:01:23.252 --> 00:01:27.152
+When retaining a client value is useful
+for cross-system troubleshooting,
+
+27
+00:01:27.232 --> 00:01:31.498
+consider keeping it in a separate bounded
+field while using a server-controlled ID
+
+28
+00:01:31.578 --> 00:01:33.224
+as the primary correlation key.
+
+29
+00:01:33.304 --> 00:01:37.509
+Session correlation should use an approved
+surrogate rather than the raw session
+
+30
+00:01:37.589 --> 00:01:38.260
+credential.
+
+31
+00:01:38.340 --> 00:01:40.716
+Context propagation should also be
+explicit.
+
+32
+00:01:40.796 --> 00:01:44.270
+A request-scoped child logger can bind
+approved identifiers once,
+
+33
+00:01:44.350 --> 00:01:48.495
+reducing accidental inconsistency, while
+individual events add the resource,
+
+34
+00:01:48.575 --> 00:01:49.672
+action, and outcome.
+
+35
+00:01:49.752 --> 00:01:53.957
+The bound context must come from trusted
+authentication and tenancy processing,
+
+36
+00:01:54.037 --> 00:01:56.353
+not directly from arbitrary request
+fields.
+
+37
+00:01:56.433 --> 00:02:00.516
+This pattern produces coherent evidence
+across handlers and services without
+
+38
+00:02:00.596 --> 00:02:04.923
+confusing correlation with authorization
+or expanding every log call into a dump of
+
+39
+00:02:05.003 --> 00:02:06.100
+the request context.

@@ -1,0 +1,192 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.852
+Processing can amplify both complexity and
+
+2
+00:00:02.852 --> 00:00:05.791
+resource use far beyond the upload
+request.
+
+3
+00:00:05.791 --> 00:00:08.829
+Image decoders, document parsers, archive
+extractors, media
+
+4
+00:00:08.829 --> 00:00:11.867
+converters, metadata tools, scanners, and
+indexing services
+
+5
+00:00:11.867 --> 00:00:14.807
+all interpret structures chosen by the
+sender.
+
+6
+00:00:14.807 --> 00:00:19.314
+A small compressed file can describe a
+large amount of output.
+
+7
+00:00:19.314 --> 00:00:24.214
+An image's encoded byte size does not
+bound its decoded pixel count.
+
+8
+00:00:24.214 --> 00:00:28.721
+A request limit therefore protects a
+different stage from processing limits.
+
+9
+00:00:28.721 --> 00:00:31.955
+Set budgets for the actual work:
+dimensions and
+
+10
+00:00:31.955 --> 00:00:35.483
+pixels, document pages, archive entries,
+nesting depth, decompressed
+
+11
+00:00:35.483 --> 00:00:39.206
+bytes, output size, processing time, CPU,
+and memory.
+
+12
+00:00:39.206 --> 00:00:41.656
+Enforce limits while work proceeds, not
+
+13
+00:00:41.656 --> 00:00:44.596
+only after all output has been allocated.
+
+14
+00:00:44.596 --> 00:00:47.928
+Bound concurrency and temporary disk usage
+as well.
+
+15
+00:00:47.928 --> 00:00:51.553
+When a processor times out, stop its work
+and
+
+16
+00:00:51.553 --> 00:00:54.787
+remove partial output; returning an error
+while the
+
+17
+00:00:54.787 --> 00:00:58.511
+process continues consuming resources does
+not enforce the budget.
+
+18
+00:00:58.511 --> 00:01:01.450
+Archive extraction also crosses a
+filesystem boundary.
+
+19
+00:01:01.450 --> 00:01:05.174
+Every entry must resolve inside the
+intended extraction root.
+
+20
+00:01:05.174 --> 00:01:09.583
+Entry names do not get to choose arbitrary
+destinations, and links
+
+21
+00:01:09.583 --> 00:01:14.091
+or existing directory structures must not
+redirect writes outside that root.
+
+22
+00:01:14.091 --> 00:01:17.717
+Prefer a maintained extractor with safe
+defaults, reject unsupported
+
+23
+00:01:17.717 --> 00:01:21.538
+entry types, and extract into a fresh
+restricted workspace.
+
+24
+00:01:21.538 --> 00:01:25.262
+Verify containment for each output and
+constrain total expansion.
+
+25
+00:01:25.262 --> 00:01:27.614
+Nested archives require an explicit depth
+
+26
+00:01:27.614 --> 00:01:30.162
+policy rather than unrestricted recursive
+unpacking.
+
+27
+00:01:30.162 --> 00:01:32.513
+Keep file processing libraries patched
+because
+
+28
+00:01:32.513 --> 00:01:35.453
+validation intentionally exposes parsers
+to hostile bytes.
+
+29
+00:01:35.453 --> 00:01:38.393
+Separate workers, sandboxed processes, or
+restricted containers
+
+30
+00:01:38.393 --> 00:01:41.332
+can limit the consequences of parser
+failure.
+
+31
+00:01:41.332 --> 00:01:43.782
+Use low privilege identities, restrict
+filesystem
+
+32
+00:01:43.782 --> 00:01:46.624
+access, and disable unnecessary network
+access to
+
+33
+00:01:46.624 --> 00:01:49.172
+prevent processors from reaching unrelated
+resources.
+
+34
+00:01:49.172 --> 00:01:52.405
+Isolation supplements format validation
+and resource budgets; it
+
+35
+00:01:52.405 --> 00:01:55.737
+does not decide what the feature should
+accept.
+
+36
+00:01:55.737 --> 00:01:58.873
+Treat derived outputs as new artifacts
+requiring an
+
+37
+00:01:58.873 --> 00:02:02.009
+expected format, bounded size, and
+controlled promotion.
+
+38
+00:02:02.009 --> 00:02:04.360
+Successful process exit alone should not
+
+39
+00:02:04.360 --> 00:02:07.300
+cause every generated file to become
+downloadable.
+

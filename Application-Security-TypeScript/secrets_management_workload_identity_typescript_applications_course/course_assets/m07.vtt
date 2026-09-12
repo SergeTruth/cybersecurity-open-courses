@@ -1,0 +1,196 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.433
+Well-managed credentials can still carry
+excessive authority.
+
+2
+00:00:03.433 --> 00:00:05.780
+Give each service identity the operations
+
+3
+00:00:05.780 --> 00:00:07.931
+and resources its workload requires.
+
+4
+00:00:07.931 --> 00:00:11.255
+Scope access to the relevant database,
+storage container,
+
+5
+00:00:11.255 --> 00:00:14.481
+queue, topic, secret namespace, and tenant
+boundary.
+
+6
+00:00:14.481 --> 00:00:17.414
+Separate routine application access from
+administrative operations.
+
+7
+00:00:17.414 --> 00:00:20.543
+A worker that reads one queue should not
+
+8
+00:00:20.543 --> 00:00:23.867
+inherit permission to administer the
+entire messaging service.
+
+9
+00:00:23.867 --> 00:00:27.094
+Use separate identities for workloads with
+different responsibilities,
+
+10
+00:00:27.094 --> 00:00:30.711
+and deliberately separate development,
+test, staging, and production.
+
+11
+00:00:30.711 --> 00:00:34.035
+Developer access should not automatically
+confer production authority.
+
+12
+00:00:34.035 --> 00:00:37.164
+Deployment identities may need permissions
+to release software
+
+13
+00:00:37.164 --> 00:00:40.097
+that the running application does not
+need.
+
+14
+00:00:40.097 --> 00:00:43.617
+Avoid sharing a broad production identity
+merely to simplify
+
+15
+00:00:43.617 --> 00:00:47.430
+configuration; shared authority also makes
+audit records less useful.
+
+16
+00:00:47.430 --> 00:00:50.656
+For continuous integration and deployment,
+prefer supported workload
+
+17
+00:00:50.656 --> 00:00:54.372
+federation over permanent cloud keys
+stored as pipeline variables.
+
+18
+00:00:54.372 --> 00:00:58.185
+Configure trust for the intended issuer,
+audience, repository, job
+
+19
+00:00:58.185 --> 00:01:01.998
+context, and protected environment as
+supported by the provider.
+
+20
+00:01:01.998 --> 00:01:04.833
+Restrict which workflows can request
+deployment authority,
+
+21
+00:01:04.833 --> 00:01:07.766
+especially when untrusted pull requests
+execute code.
+
+22
+00:01:07.766 --> 00:01:12.362
+Federation reduces stored keys; it does
+not make every build trustworthy.
+
+23
+00:01:12.362 --> 00:01:14.904
+Test both allowed and denied operations.
+
+24
+00:01:14.904 --> 00:01:17.250
+Confirm the application starts without
+embedded
+
+25
+00:01:17.250 --> 00:01:20.183
+production credentials and accesses only
+intended resources.
+
+26
+00:01:20.183 --> 00:01:23.312
+Verify that unrelated identities cannot
+read its secrets
+
+27
+00:01:23.312 --> 00:01:26.245
+and that cross-environment or cross-tenant
+access fails.
+
+28
+00:01:26.245 --> 00:01:27.907
+Exercise token expiration, credential
+
+29
+00:01:27.907 --> 00:01:30.254
+refresh, revocation, and dependency
+outages.
+
+30
+00:01:30.254 --> 00:01:32.600
+Check that permissions match actual
+application
+
+31
+00:01:32.600 --> 00:01:35.240
+operations, including background jobs and
+migrations.
+
+32
+00:01:35.240 --> 00:01:39.249
+Provider selection needs an integration
+check in a controlled environment:
+
+33
+00:01:39.249 --> 00:01:42.866
+observe the effective principal in service
+audit records, then
+
+34
+00:01:42.866 --> 00:01:46.972
+remove the intended identity and confirm
+failure instead of fallback.
+
+35
+00:01:46.972 --> 00:01:49.612
+Inspect logs, frontend bundles, source
+maps,
+
+36
+00:01:49.612 --> 00:01:52.154
+and image contents for confidential
+material.
+
+37
+00:01:52.154 --> 00:01:55.479
+Use synthetic test values when checking
+leakage controls.
+
+38
+00:01:55.479 --> 00:01:59.096
+Repository and pipeline secret scanning
+adds defense in depth,
+
+39
+00:01:59.096 --> 00:02:02.225
+but passing a scan does not prove secrets
+
+40
+00:02:02.225 --> 00:02:05.940
+were never exposed or that identity
+permissions are correct.
+

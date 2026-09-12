@@ -1,0 +1,187 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.748
+Deserialization converts an external
+representation into
+
+2
+00:00:02.748 --> 00:00:04.809
+values the application can inspect.
+
+3
+00:00:04.809 --> 00:00:08.369
+In TypeScript services, that boundary
+includes JSON request bodies,
+
+4
+00:00:08.369 --> 00:00:12.116
+decoded queue messages, configuration
+files, webhooks, imported records, cache
+
+5
+00:00:12.116 --> 00:00:15.769
+entries, and database JSON written by less
+trusted producers.
+
+6
+00:00:15.769 --> 00:00:19.703
+A successful conversion tells you that the
+representation was readable.
+
+7
+00:00:19.703 --> 00:00:22.701
+It does not establish that the resulting
+value
+
+8
+00:00:22.701 --> 00:00:25.511
+is an acceptable request for your
+application.
+
+9
+00:00:25.511 --> 00:00:29.071
+JSON parsing recognizes syntax and
+produces ordinary JavaScript values.
+
+10
+00:00:29.071 --> 00:00:34.035
+The result may be an object, an array, a
+primitive, or null.
+
+11
+00:00:34.035 --> 00:00:37.127
+Parsing does not require an account
+identifier, bound
+
+12
+00:00:37.127 --> 00:00:39.937
+a quantity, reject an unexpected nested
+field,
+
+13
+00:00:39.937 --> 00:00:43.122
+or establish which operation the sender
+may perform.
+
+14
+00:00:43.122 --> 00:00:45.745
+Assigning the parsed result an account
+update
+
+15
+00:00:45.745 --> 00:00:48.555
+type merely changes what the compiler
+assumes.
+
+16
+00:00:48.555 --> 00:00:50.803
+Passing that value directly to an
+
+17
+00:00:50.803 --> 00:00:53.613
+update function leaves the runtime
+boundary unverified.
+
+18
+00:00:53.613 --> 00:00:57.173
+Treat the boundary as a sequence of
+explicit decisions.
+
+19
+00:00:57.173 --> 00:00:59.234
+Limit incoming bytes before parsing.
+
+20
+00:00:59.234 --> 00:01:01.669
+Select the intended format and parser.
+
+21
+00:01:01.669 --> 00:01:04.854
+Validate the resulting value against a
+runtime schema.
+
+22
+00:01:04.854 --> 00:01:07.571
+Check domain rules using appropriate
+trusted context,
+
+23
+00:01:07.571 --> 00:01:10.662
+map accepted fields into a narrow
+application value,
+
+24
+00:01:10.662 --> 00:01:13.472
+and enforce authorization before any
+protected effect.
+
+25
+00:01:13.472 --> 00:01:17.875
+Some checks depend on one another, so
+their precise placement varies.
+
+26
+00:01:17.875 --> 00:01:20.498
+Each responsibility still needs an
+identifiable owner
+
+27
+00:01:20.498 --> 00:01:23.308
+and a rejection path that stops
+processing.
+
+28
+00:01:23.308 --> 00:01:25.743
+Authentication does not remove these
+responsibilities.
+
+29
+00:01:25.743 --> 00:01:29.303
+A signed webhook can carry an unsupported
+message version.
+
+30
+00:01:29.303 --> 00:01:32.301
+An authenticated user can submit the wrong
+type
+
+31
+00:01:32.301 --> 00:01:35.111
+or request an operation outside their
+permissions.
+
+32
+00:01:35.111 --> 00:01:39.045
+Stored data can outlive the schema that
+originally accepted it.
+
+33
+00:01:39.045 --> 00:01:42.511
+At every entry point, identify who can
+influence the
+
+34
+00:01:42.511 --> 00:01:46.071
+representation and what evidence the
+consuming code actually receives.
+
+35
+00:01:46.071 --> 00:01:49.162
+Reject malformed or unacceptable input
+with controlled errors,
+
+36
+00:01:49.162 --> 00:01:52.347
+without echoing sensitive payloads or
+allowing partial writes.
+
+37
+00:01:52.347 --> 00:01:54.970
+The useful outcome of deserialization is a
+
+38
+00:01:54.970 --> 00:01:57.780
+constrained value whose permitted uses are
+clear.
+

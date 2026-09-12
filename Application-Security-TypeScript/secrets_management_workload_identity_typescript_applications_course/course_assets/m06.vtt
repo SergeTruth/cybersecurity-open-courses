@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.775
+Rotation succeeds only when consumers
+change their behavior.
+
+2
+00:00:03.775 --> 00:00:07.629
+Updating a database password in a secret
+store does not
+
+3
+00:00:07.629 --> 00:00:11.674
+update a long-running Node.js process that
+cached the old value.
+
+4
+00:00:11.674 --> 00:00:14.950
+It may not terminate existing database
+sessions either.
+
+5
+00:00:14.950 --> 00:00:18.803
+Define how each client reacquires
+credentials and how connection pools
+
+6
+00:00:18.803 --> 00:00:22.464
+replace or drain connections when required
+by the service.
+
+7
+00:00:22.464 --> 00:00:25.257
+For short-lived tokens, use
+provider-supported refresh before
+
+8
+00:00:25.257 --> 00:00:28.147
+expiration with the platform's recommended
+safety margin.
+
+9
+00:00:28.147 --> 00:00:29.496
+Keep clocks synchronized.
+
+10
+00:00:29.496 --> 00:00:31.808
+Coordinate refreshes so concurrent
+requests do
+
+11
+00:00:31.808 --> 00:00:33.927
+not overwhelm the identity service.
+
+12
+00:00:33.927 --> 00:00:37.106
+A rejected token may justify one
+controlled refresh,
+
+13
+00:00:37.106 --> 00:00:40.767
+but permission denial should not trigger
+endless renewal attempts.
+
+14
+00:00:40.767 --> 00:00:43.271
+Distinguish authentication failure,
+authorization failure, and
+
+15
+00:00:43.271 --> 00:00:45.776
+temporary network failure in sanitized
+diagnostics.
+
+16
+00:00:45.776 --> 00:00:49.437
+For reusable credentials, some services
+support an overlap sequence:
+
+17
+00:00:49.437 --> 00:00:52.712
+activate a new credential, temporarily
+accept both versions,
+
+18
+00:00:52.712 --> 00:00:56.565
+migrate consumers, verify adoption, and
+revoke the old one.
+
+19
+00:00:56.565 --> 00:00:59.648
+Bound that overlap and track which
+consumers still
+
+20
+00:00:59.648 --> 00:01:02.538
+use the old version through safe metadata.
+
+21
+00:01:02.538 --> 00:01:05.620
+Other services support only one active
+credential or
+
+22
+00:01:05.620 --> 00:01:09.185
+manage short-lived credentials themselves,
+so the exact rollout and
+
+23
+00:01:09.185 --> 00:01:12.460
+downtime constraints must be established
+with that service.
+
+24
+00:01:12.460 --> 00:01:16.506
+Caching needs an explicit maximum age and
+a refresh strategy.
+
+25
+00:01:16.506 --> 00:01:18.914
+Rotation tests must cover running
+processes,
+
+26
+00:01:18.914 --> 00:01:21.130
+new instances, and pooled connections.
+
+27
+00:01:21.130 --> 00:01:25.079
+Confirm what revocation actually
+invalidates; changing a stored password is
+
+28
+00:01:25.079 --> 00:01:29.125
+different from ending established sessions
+or revoking an issued token.
+
+29
+00:01:29.125 --> 00:01:31.437
+An emergency compromise response may
+require
+
+30
+00:01:31.437 --> 00:01:33.556
+faster cutoff than routine rotation.
+
+31
+00:01:33.556 --> 00:01:37.891
+When an identity provider or secret store
+is unavailable, use bounded
+
+32
+00:01:37.891 --> 00:01:42.419
+retries with backoff and jitter, then
+report a clear dependency failure.
+
+33
+00:01:42.419 --> 00:01:45.502
+Continue with previously acquired
+credentials only while they
+
+34
+00:01:45.502 --> 00:01:48.392
+remain valid and policy permits their use.
+
+35
+00:01:48.392 --> 00:01:50.318
+Never substitute a hard-coded emergency
+
+36
+00:01:50.318 --> 00:01:52.437
+credential or silently broaden
+permissions.
+
+37
+00:01:52.437 --> 00:01:55.231
+Preserve availability through deliberate
+resilience design, with
+
+38
+00:01:55.231 --> 00:01:58.410
+deadlines and operational visibility,
+rather than through a
+
+39
+00:01:58.410 --> 00:02:01.300
+permanent fallback that defeats the
+identity architecture.
+

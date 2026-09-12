@@ -1,0 +1,199 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.663
+A conditional mutation joins the decision
+
+2
+00:00:02.663 --> 00:00:05.367
+and state transition at the authoritative
+store.
+
+3
+00:00:05.367 --> 00:00:07.891
+The inventory statement decrements
+quantity only for
+
+4
+00:00:07.891 --> 00:00:10.595
+the requested record while quantity is
+positive.
+
+5
+00:00:10.595 --> 00:00:13.930
+Under the database's documented atomic
+update semantics, competing writers
+
+6
+00:00:13.930 --> 00:00:17.355
+cannot both rely on an obsolete
+application-side availability check.
+
+7
+00:00:17.355 --> 00:00:20.329
+One writer succeeds; another may find no
+qualifying
+
+8
+00:00:20.329 --> 00:00:23.754
+row or encounter a concurrency error that
+needs handling.
+
+9
+00:00:23.754 --> 00:00:25.917
+The TypeScript repository must implement
+that
+
+10
+00:00:25.917 --> 00:00:27.900
+condition inside the mutation itself.
+
+11
+00:00:27.900 --> 00:00:30.784
+A method named decrementIfAvailable
+provides no guarantee if
+
+12
+00:00:30.784 --> 00:00:33.849
+its implementation first reads and then
+independently writes.
+
+13
+00:00:33.849 --> 00:00:36.012
+Inspect the generated query or storage
+
+14
+00:00:36.012 --> 00:00:38.445
+API, including transaction and consistency
+settings.
+
+15
+00:00:38.445 --> 00:00:40.248
+Parameterize inputs and validate
+quantities
+
+16
+00:00:40.248 --> 00:00:42.231
+before they reach the operation.
+
+17
+00:00:42.231 --> 00:00:43.493
+Check the result.
+
+18
+00:00:43.493 --> 00:00:47.188
+For a unique item identifier, exactly one
+changed row establishes
+
+19
+00:00:47.188 --> 00:00:50.703
+that this transition occurred, subject to
+successful transaction commit.
+
+20
+00:00:50.703 --> 00:00:54.038
+Zero means no row satisfied the predicate;
+the item
+
+21
+00:00:54.038 --> 00:00:57.643
+might be unavailable, missing, or outside
+the permitted scope.
+
+22
+00:00:57.643 --> 00:00:59.626
+Do not report success anyway.
+
+23
+00:00:59.626 --> 00:01:02.510
+Map the outcome to the application's
+intended error
+
+24
+00:01:02.510 --> 00:01:06.025
+policy, and distinguish it from
+infrastructure or serialization failures.
+
+25
+00:01:06.025 --> 00:01:09.631
+The same approach supports moving an
+approval from pending to
+
+26
+00:01:09.631 --> 00:01:13.146
+approved, claiming an eligible job,
+enforcing a quota, or
+
+27
+00:01:13.146 --> 00:01:16.931
+applying a debit only when a balance
+condition still holds.
+
+28
+00:01:16.931 --> 00:01:19.996
+The mutation must include the full
+relevant precondition.
+
+29
+00:01:19.996 --> 00:01:22.519
+Updating a counter atomically does not
+automatically
+
+30
+00:01:22.519 --> 00:01:25.223
+protect a rule involving a different
+record.
+
+31
+00:01:25.223 --> 00:01:26.846
+Constraints add authoritative guards.
+
+32
+00:01:26.846 --> 00:01:30.181
+A unique constraint can prevent duplicate
+redemption records, a
+
+33
+00:01:30.181 --> 00:01:33.515
+foreign key can enforce a required
+relationship, and a
+
+34
+00:01:33.515 --> 00:01:36.940
+supported check constraint can reject an
+invalid stored quantity.
+
+35
+00:01:36.940 --> 00:01:40.365
+Choose appropriate nullability and
+constraint semantics for the database.
+
+36
+00:01:40.365 --> 00:01:42.529
+Application validation remains valuable
+for clear
+
+37
+00:01:42.529 --> 00:01:45.233
+feedback and rules the store cannot
+express.
+
+38
+00:01:45.233 --> 00:01:47.396
+Storage enforcement protects against
+competing writers
+
+39
+00:01:47.396 --> 00:01:49.379
+that bypass an earlier check.
+
+40
+00:01:49.379 --> 00:01:53.074
+Authorization remains separate: a
+perfectly atomic transition can still be
+
+41
+00:01:53.074 --> 00:01:57.220
+performed by someone who should not be
+allowed to make it.
+

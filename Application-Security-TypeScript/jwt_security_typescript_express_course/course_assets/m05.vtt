@@ -1,0 +1,195 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.783
+Authentication middleware should provide
+one clear
+
+2
+00:00:02.783 --> 00:00:05.257
+entry point into protected Express routes.
+
+3
+00:00:05.257 --> 00:00:07.921
+Extract a token from the expected header
+
+4
+00:00:07.921 --> 00:00:10.775
+or cookie transport, reject ambiguous
+credentials, and
+
+5
+00:00:10.775 --> 00:00:13.630
+enforce configured size limits before
+expensive processing.
+
+6
+00:00:13.630 --> 00:00:16.674
+Await full verification and claim
+validation before setting
+
+7
+00:00:16.674 --> 00:00:19.909
+request authentication state or continuing
+to the route.
+
+8
+00:00:19.909 --> 00:00:23.524
+A verified payload is still an external
+data structure.
+
+9
+00:00:23.524 --> 00:00:27.140
+TypeScript interfaces and casts do not
+check runtime values.
+
+10
+00:00:27.140 --> 00:00:30.375
+If the application relies on subject,
+tenant, or
+
+11
+00:00:30.375 --> 00:00:34.370
+scopes, validate their presence, types,
+bounds, and issuer-defined meaning.
+
+12
+00:00:34.370 --> 00:00:37.415
+A scope claim may be a space-delimited
+string
+
+13
+00:00:37.415 --> 00:00:41.030
+under one profile and a different
+structure under another.
+
+14
+00:00:41.030 --> 00:00:43.314
+Accept the documented shape and normalize
+
+15
+00:00:43.314 --> 00:00:46.263
+it deliberately, rather than coercing
+arbitrary values.
+
+16
+00:00:46.263 --> 00:00:50.164
+Map accepted values into a small context,
+such as subject
+
+17
+00:00:50.164 --> 00:00:53.970
+identifier, tenant identifier, and a
+readonly list of scopes.
+
+18
+00:00:53.970 --> 00:00:57.109
+Include issuer identity when supporting
+multiple issuers, since
+
+19
+00:00:57.109 --> 00:00:59.964
+a subject need not be globally unique.
+
+20
+00:00:59.964 --> 00:01:04.340
+Do not cast the entire payload to the
+application's User model.
+
+21
+00:01:04.340 --> 00:01:07.480
+A token generally cannot guarantee every
+field, current
+
+22
+00:01:07.480 --> 00:01:11.190
+account condition, or relationship that a
+domain object represents.
+
+23
+00:01:11.190 --> 00:01:13.474
+The example shows a runtime validator
+
+24
+00:01:13.474 --> 00:01:15.567
+after cryptographic and registered-claim
+validation.
+
+25
+00:01:15.567 --> 00:01:19.943
+Its output is the only value assigned to
+the authenticated context.
+
+26
+00:01:19.943 --> 00:01:22.227
+Route code consumes that context instead
+
+27
+00:01:22.227 --> 00:01:25.081
+of repeatedly parsing the raw bearer
+token.
+
+28
+00:01:25.081 --> 00:01:28.221
+Copy only required fields, and avoid
+retaining the
+
+29
+00:01:28.221 --> 00:01:31.836
+token or arbitrary claim objects in
+request-scoped diagnostic data.
+
+30
+00:01:31.836 --> 00:01:34.500
+A readonly type documents intent but does
+
+31
+00:01:34.500 --> 00:01:37.354
+not itself enforce a runtime security
+boundary.
+
+32
+00:01:37.354 --> 00:01:40.970
+Middleware order must make failure
+terminal for protected access.
+
+33
+00:01:40.970 --> 00:01:44.300
+Missing credentials, rejected signatures,
+invalid claims, or unavailable
+
+34
+00:01:44.300 --> 00:01:47.534
+verification keys must prevent the handler
+from running.
+
+35
+00:01:47.534 --> 00:01:49.818
+Return an appropriate authentication
+response for
+
+36
+00:01:49.818 --> 00:01:52.196
+invalid credentials, and distinguish
+infrastructure outages
+
+37
+00:01:52.196 --> 00:01:54.670
+in sanitized operational reporting where
+useful.
+
+38
+00:01:54.670 --> 00:01:57.144
+Neither case creates an authenticated
+context.
+
+39
+00:01:57.144 --> 00:02:01.045
+Place authorization after authentication,
+and ensure asynchronous failures reach an
+
+40
+00:02:01.045 --> 00:02:04.660
+error handler that cannot accidentally
+resume the protected route.
+

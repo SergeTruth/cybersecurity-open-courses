@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.026
+A timeout does not reveal whether an
+operation committed.
+
+2
+00:00:04.026 --> 00:00:06.624
+The server may have completed an order
+
+3
+00:00:06.624 --> 00:00:09.408
+or credit before its response was lost.
+
+4
+00:00:09.408 --> 00:00:11.913
+Clients, proxies, queue systems, and
+workers
+
+5
+00:00:11.913 --> 00:00:14.419
+can retry; users can submit twice.
+
+6
+00:00:14.419 --> 00:00:17.945
+Treat duplicate attempts as normal input
+to the design.
+
+7
+00:00:17.945 --> 00:00:20.914
+Idempotency recognizes repeated attempts
+at the same logical
+
+8
+00:00:20.914 --> 00:00:24.069
+operation and reuses its established
+result or state.
+
+9
+00:00:24.069 --> 00:00:26.852
+Use a stable operation identifier across
+retries.
+
+10
+00:00:26.852 --> 00:00:30.564
+Scope the identifier to the authenticated
+caller or tenant and
+
+11
+00:00:30.564 --> 00:00:34.183
+operation type, and bind it to the
+request's meaning.
+
+12
+00:00:34.183 --> 00:00:36.410
+Reject reuse with incompatible input
+rather
+
+13
+00:00:36.410 --> 00:00:38.451
+than returning an unrelated result.
+
+14
+00:00:38.451 --> 00:00:42.812
+Define retention, because forgetting a key
+can permit a later duplicate.
+
+15
+00:00:42.812 --> 00:00:45.596
+The idempotency mechanism must itself
+withstand concurrency.
+
+16
+00:00:45.596 --> 00:00:49.864
+Two replicas cannot both check an
+in-memory map and then execute.
+
+17
+00:00:49.864 --> 00:00:52.091
+Use an authoritative unique constraint or
+
+18
+00:00:52.091 --> 00:00:54.875
+transactional claim so only one operation
+wins.
+
+19
+00:00:54.875 --> 00:00:57.844
+Define how concurrent callers observe
+in-progress work and
+
+20
+00:00:57.844 --> 00:01:00.628
+how completed callers receive the prior
+outcome.
+
+21
+00:01:00.628 --> 00:01:03.597
+A unique key alone does not resolve
+crashes
+
+22
+00:01:03.597 --> 00:01:06.752
+between a claim and an unrecorded side
+effect.
+
+23
+00:01:06.752 --> 00:01:10.650
+For effects entirely within one database,
+commit the deduplication record,
+
+24
+00:01:10.650 --> 00:01:14.268
+business mutation, and reusable result in
+the same transaction.
+
+25
+00:01:14.268 --> 00:01:17.238
+A queue consumer can record a message
+identifier
+
+26
+00:01:17.238 --> 00:01:20.856
+together with its business change, then
+acknowledge after commit.
+
+27
+00:01:20.856 --> 00:01:25.125
+Redelivery finds the recorded result
+instead of applying the change again.
+
+28
+00:01:25.125 --> 00:01:27.166
+External effects require another boundary.
+
+29
+00:01:27.166 --> 00:01:30.692
+A local transaction cannot atomically
+commit a remote charge.
+
+30
+00:01:30.692 --> 00:01:34.404
+Use the remote provider's supported
+idempotency contract with the same
+
+31
+00:01:34.404 --> 00:01:38.023
+stable operation identity, or a durable
+workflow with reconciliation.
+
+32
+00:01:38.023 --> 00:01:41.827
+A transactional outbox records the intent
+alongside local changes; delivery
+
+33
+00:01:41.827 --> 00:01:45.817
+can still repeat, so the destination needs
+duplicate protection too.
+
+34
+00:01:45.817 --> 00:01:48.044
+Idempotency does not mean ignoring every
+
+35
+00:01:48.044 --> 00:01:50.921
+duplicate, nor does it mean mutual
+exclusion.
+
+36
+00:01:50.921 --> 00:01:53.983
+A lock separates overlapping attempts
+while held; it
+
+37
+00:01:53.983 --> 00:01:57.137
+does not identify a retry arriving after
+release.
+
+38
+00:01:57.137 --> 00:02:00.292
+Protect the logical outcome across
+concurrent attempts, crashes,
+
+39
+00:02:00.292 --> 00:02:03.540
+and ambiguous responses, and test each
+recovery path.
+

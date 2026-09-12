@@ -1,0 +1,194 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.603
+A JSON Web Token carries claims that
+another
+
+2
+00:00:03.603 --> 00:00:06.512
+system may use to make security decisions.
+
+3
+00:00:06.512 --> 00:00:08.936
+For an Express API, receiving readable
+
+4
+00:00:08.936 --> 00:00:11.845
+claims is only the beginning of
+processing.
+
+5
+00:00:11.845 --> 00:00:14.560
+A JWT becomes trustworthy only after the
+
+6
+00:00:14.560 --> 00:00:17.663
+application verifies its cryptographic
+protection and validates every
+
+7
+00:00:17.663 --> 00:00:20.572
+claim required by the application's token
+policy.
+
+8
+00:00:20.572 --> 00:00:22.317
+Decoding alone establishes nothing.
+
+9
+00:00:22.317 --> 00:00:25.032
+An ordinary signed JWT commonly uses the
+
+10
+00:00:25.032 --> 00:00:28.038
+compact JSON Web Signature format, or JWS.
+
+11
+00:00:28.038 --> 00:00:30.559
+Its protected header, claims payload, and
+
+12
+00:00:30.559 --> 00:00:33.080
+cryptographic signature are separated by
+dots.
+
+13
+00:00:33.080 --> 00:00:35.989
+The header and payload use base64url
+encoding.
+
+14
+00:00:35.989 --> 00:00:38.608
+This makes them transportable, not
+confidential.
+
+15
+00:00:38.608 --> 00:00:42.292
+Anyone holding the token can normally read
+those sections.
+
+16
+00:00:42.292 --> 00:00:45.686
+Do not put passwords, private keys, API
+credentials,
+
+17
+00:00:45.686 --> 00:00:48.595
+or unnecessary sensitive personal data
+into claims.
+
+18
+00:00:48.595 --> 00:00:51.698
+The deliberately unsafe example decodes a
+token and
+
+19
+00:00:51.698 --> 00:00:55.383
+immediately assigns the result to the
+request's user context.
+
+20
+00:00:55.383 --> 00:00:58.873
+A decoder can parse client-supplied JSON
+without proving who
+
+21
+00:00:58.873 --> 00:01:02.558
+protected it or whether it belongs at this
+API.
+
+22
+00:01:02.558 --> 00:01:06.631
+A familiar subject or role field does not
+change that.
+
+23
+00:01:06.631 --> 00:01:09.831
+Do not use parsed claims to grant access,
+
+24
+00:01:09.831 --> 00:01:12.836
+even temporarily, while verification is
+still pending.
+
+25
+00:01:12.836 --> 00:01:14.970
+Define a complete processing boundary.
+
+26
+00:01:14.970 --> 00:01:17.685
+Extract one token from the expected
+transport
+
+27
+00:01:17.685 --> 00:01:20.594
+and enforce size and basic format limits.
+
+28
+00:01:20.594 --> 00:01:23.697
+Use a mature library to verify
+cryptographic protection
+
+29
+00:01:23.697 --> 00:01:26.993
+with trusted keys under a server-defined
+algorithm policy.
+
+30
+00:01:26.993 --> 00:01:29.612
+Validate issuer, audience, time
+restrictions, token
+
+31
+00:01:29.612 --> 00:01:31.842
+purpose, and required application claims.
+
+32
+00:01:31.842 --> 00:01:34.363
+Only then construct an authenticated
+context.
+
+33
+00:01:34.363 --> 00:01:36.690
+Authorization is a subsequent decision
+about
+
+34
+00:01:36.690 --> 00:01:38.823
+the requested operation and resource.
+
+35
+00:01:38.823 --> 00:01:43.478
+Encrypted JWTs use a different mechanism,
+JSON Web Encryption, or JWE.
+
+36
+00:01:43.478 --> 00:01:46.193
+Encryption can provide confidentiality
+within a properly
+
+37
+00:01:46.193 --> 00:01:49.005
+designed protocol, but it does not remove
+
+38
+00:01:49.005 --> 00:01:51.914
+claim validation or other required
+cryptographic checks.
+
+39
+00:01:51.914 --> 00:01:54.823
+This course focuses on signed access
+tokens.
+
+40
+00:01:54.823 --> 00:01:57.247
+Their integrity supports authentication;
+encoding alone
+
+41
+00:01:57.247 --> 00:01:59.380
+provides neither authentication nor
+secrecy.
+

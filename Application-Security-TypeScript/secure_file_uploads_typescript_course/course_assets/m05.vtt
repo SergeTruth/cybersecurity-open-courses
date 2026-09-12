@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.730
+Storage design determines what other
+systems can do with uploaded bytes.
+
+2
+00:00:04.730 --> 00:00:08.592
+Keep uploads out of application source,
+template directories, executable script
+
+3
+00:00:08.592 --> 00:00:12.178
+locations, and paths involved in module or
+configuration loading.
+
+4
+00:00:12.178 --> 00:00:15.488
+Avoid a static web directory whose
+configuration could expose
+
+5
+00:00:15.488 --> 00:00:18.982
+content immediately or interpret it in an
+unintended way.
+
+6
+00:00:18.982 --> 00:00:22.292
+Use a dedicated storage area with
+generated identifiers and
+
+7
+00:00:22.292 --> 00:00:25.787
+permissions limited to the operations each
+service actually needs.
+
+8
+00:00:25.787 --> 00:00:28.821
+A private object bucket can provide useful
+separation,
+
+9
+00:00:28.821 --> 00:00:31.947
+but it does not supply application
+authorization automatically.
+
+10
+00:00:31.947 --> 00:00:34.430
+Bucket policies, object keys, service
+credentials,
+
+11
+00:00:34.430 --> 00:00:36.821
+and signed URLs all affect access.
+
+12
+00:00:36.821 --> 00:00:39.947
+Keep unpublished objects inaccessible to
+normal download paths.
+
+13
+00:00:39.947 --> 00:00:42.614
+When public files are required, make
+publication
+
+14
+00:00:42.614 --> 00:00:45.372
+an explicit transition after validation
+and processing.
+
+15
+00:00:45.372 --> 00:00:49.050
+Services that ingest or transform content
+should not receive broad
+
+16
+00:00:49.050 --> 00:00:52.544
+access to unrelated application files or
+other tenants' objects.
+
+17
+00:00:52.544 --> 00:00:54.935
+Serving introduces a separate
+interpretation boundary.
+
+18
+00:00:54.935 --> 00:00:57.510
+Authorize the caller against the
+attachment record
+
+19
+00:00:57.510 --> 00:01:00.268
+before resolving its server owned storage
+key.
+
+20
+00:01:00.268 --> 00:01:03.946
+Choose the response content type from the
+validated classification or
+
+21
+00:01:03.946 --> 00:01:07.900
+a deliberate generic download policy, not
+the original multipart header.
+
+22
+00:01:07.900 --> 00:01:11.670
+Use attachment disposition when the
+product only needs a download,
+
+23
+00:01:11.670 --> 00:01:15.164
+and construct the display filename with
+safe header handling.
+
+24
+00:01:15.164 --> 00:01:18.475
+Add the no sniff response header to
+constrain browser
+
+25
+00:01:18.475 --> 00:01:21.969
+type guessing in the contexts where that
+header applies.
+
+26
+00:01:21.969 --> 00:01:25.003
+Attachment disposition and no sniff are
+delivery controls,
+
+27
+00:01:25.003 --> 00:01:28.130
+not guarantees that opening a file is
+harmless.
+
+28
+00:01:28.130 --> 00:01:31.072
+Intentionally inline formats need an
+appropriate active content
+
+29
+00:01:31.072 --> 00:01:33.739
+model, and higher risk untrusted content
+may
+
+30
+00:01:33.739 --> 00:01:36.865
+warrant a separate origin without the
+application's credentials.
+
+31
+00:01:36.865 --> 00:01:39.899
+Set cache policy to match confidentiality;
+a private
+
+32
+00:01:39.899 --> 00:01:43.026
+download must not become a shared cached
+response.
+
+33
+00:01:43.026 --> 00:01:45.324
+Issue download links only after
+authorization,
+
+34
+00:01:45.324 --> 00:01:47.347
+with appropriate scope and lifetime.
+
+35
+00:01:47.347 --> 00:01:50.658
+A generated storage key or an expired
+application session
+
+36
+00:01:50.658 --> 00:01:54.152
+does not necessarily revoke an already
+issued signed URL.
+
+37
+00:01:54.152 --> 00:01:57.646
+Design storage, publication, and browser
+delivery together so each
+
+38
+00:01:57.646 --> 00:02:01.140
+consumer receives only the authority
+intended for that file.
+

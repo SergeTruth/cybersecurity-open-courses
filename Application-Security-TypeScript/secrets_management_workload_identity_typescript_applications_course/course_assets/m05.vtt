@@ -1,0 +1,189 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.528
+Preventing copies is more reliable than
+cleaning them up later.
+
+2
+00:00:04.528 --> 00:00:08.077
+Keep production credentials out of source
+files, committed environment
+
+3
+00:00:08.077 --> 00:00:12.105
+files, sample configuration, fixtures,
+build scripts, and troubleshooting output.
+
+4
+00:00:12.105 --> 00:00:15.654
+Local development environment files can be
+useful, but credential-bearing
+
+5
+00:00:15.654 --> 00:00:19.299
+files belong outside version control with
+appropriate access controls.
+
+6
+00:00:19.299 --> 00:00:21.601
+Samples should name required settings
+using
+
+7
+00:00:21.601 --> 00:00:23.711
+empty values or unmistakable placeholders.
+
+8
+00:00:23.711 --> 00:00:26.108
+Environment variables are a delivery
+mechanism,
+
+9
+00:00:26.108 --> 00:00:28.602
+not a secret-management system or
+encryption.
+
+10
+00:00:28.602 --> 00:00:31.480
+Their protection depends on provisioning,
+process isolation,
+
+11
+00:00:31.480 --> 00:00:34.549
+inspection privileges, deployment tooling,
+and operational controls.
+
+12
+00:00:34.549 --> 00:00:37.042
+A child process may inherit them.
+
+13
+00:00:37.042 --> 00:00:40.303
+Crash collection and process dumps may
+capture them.
+
+14
+00:00:40.303 --> 00:00:43.756
+Review what each process receives and what
+diagnostic systems
+
+15
+00:00:43.756 --> 00:00:46.825
+retain instead of assuming either that all
+environment
+
+16
+00:00:46.825 --> 00:00:50.470
+variables are safe or that they are always
+prohibited.
+
+17
+00:00:50.470 --> 00:00:52.580
+Build systems create another boundary.
+
+18
+00:00:52.580 --> 00:00:55.649
+Container build arguments and copied files
+can expose
+
+19
+00:00:55.649 --> 00:00:59.102
+credentials in image layers, build
+records, or caches.
+
+20
+00:00:59.102 --> 00:01:01.788
+Removing a file in a later layer
+
+21
+00:01:01.788 --> 00:01:04.665
+does not erase it from earlier layers.
+
+22
+00:01:04.665 --> 00:01:08.118
+Use the build platform's supported
+ephemeral secret mechanism when
+
+23
+00:01:08.118 --> 00:01:11.667
+a build needs authentication, and ensure
+the command does
+
+24
+00:01:11.667 --> 00:01:15.311
+not copy or print the value into an
+artifact.
+
+25
+00:01:15.311 --> 00:01:17.805
+Browser JavaScript is delivered to users.
+
+26
+00:01:17.805 --> 00:01:20.874
+A frontend variable called SECRET_KEY is
+visible if
+
+27
+00:01:20.874 --> 00:01:24.231
+bundled into the application, including
+through build-time substitution.
+
+28
+00:01:24.231 --> 00:01:28.259
+Source maps and generated static files can
+expose additional content.
+
+29
+00:01:28.259 --> 00:01:31.425
+Put operations requiring confidential
+credentials behind an authenticated,
+
+30
+00:01:31.425 --> 00:01:34.973
+authorized server endpoint; validate the
+requested operation so that
+
+31
+00:01:34.973 --> 00:01:38.234
+endpoint does not become an unrestricted
+credential proxy.
+
+32
+00:01:38.234 --> 00:01:40.728
+Telemetry must follow the same boundary.
+
+33
+00:01:40.728 --> 00:01:44.085
+Do not log tokens, passwords, API keys,
+private
+
+34
+00:01:44.085 --> 00:01:47.154
+keys, authorization headers, or complete
+credential objects.
+
+35
+00:01:47.154 --> 00:01:50.319
+Prefer an allowlist of safe fields, such
+as
+
+36
+00:01:50.319 --> 00:01:53.197
+an approved key identifier or credential
+version.
+
+37
+00:01:53.197 --> 00:01:56.458
+Sanitize SDK errors and request traces
+before collection.
+
+38
+00:01:56.458 --> 00:01:59.623
+Redaction helps, but structured
+diagnostics that never accept
+
+39
+00:01:59.623 --> 00:02:02.500
+secret values are easier to reason about.
+

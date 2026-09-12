@@ -1,0 +1,182 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.672
+Error paths are a common telemetry leakage
+point because exceptions accumulate
+
+2
+00:00:04.752 --> 00:00:07.513
+context as they move through libraries and
+services.
+
+3
+00:00:07.593 --> 00:00:11.212
+An error object may expose SQL fragments,
+filenames, internal hosts,
+
+4
+00:00:11.292 --> 00:00:15.035
+URLs with query strings, upstream response
+bodies, request fragments,
+
+5
+00:00:15.115 --> 00:00:16.219
+or library metadata.
+
+6
+00:00:16.299 --> 00:00:20.532
+Logging the error alongside a complete
+Express request compounds that exposure.
+
+7
+00:00:20.612 --> 00:00:24.293
+Inspect how each logger serializes errors;
+passing an Error directly,
+
+8
+00:00:24.373 --> 00:00:28.667
+placing it under a special property, or
+spreading it may produce different fields.
+
+9
+00:00:28.747 --> 00:00:31.876
+Separate the client's response from
+internal diagnostics.
+
+10
+00:00:31.956 --> 00:00:36.251
+A caller should receive a stable status
+and message appropriate to its trust level,
+
+11
+00:00:36.331 --> 00:00:39.153
+without stack traces or internal
+dependency details.
+
+12
+00:00:39.233 --> 00:00:42.607
+Protected telemetry can retain more
+information for operators,
+
+13
+00:00:42.687 --> 00:00:45.203
+but it still follows the sensitive-data
+policy.
+
+14
+00:00:45.283 --> 00:00:48.841
+Build a deliberate error event with a
+server-controlled event name,
+
+15
+00:00:48.921 --> 00:00:52.540
+error category, request identifier,
+affected resource identifier,
+
+16
+00:00:52.620 --> 00:00:53.663
+and safe error type.
+
+17
+00:00:53.743 --> 00:00:57.977
+Include a stack trace for unexpected
+programming defects when it materially aids
+
+18
+00:00:58.057 --> 00:01:01.553
+diagnosis and when storage, access, and
+retention are controlled.
+
+19
+00:01:01.633 --> 00:01:04.824
+Expected and unexpected failures need
+different treatment.
+
+20
+00:01:04.904 --> 00:01:09.260
+Routine validation rejection or
+authorization denial generally does not require a
+
+21
+00:01:09.340 --> 00:01:11.732
+full exception stack or an error-level
+alert.
+
+22
+00:01:11.812 --> 00:01:15.248
+Dependency timeout, unavailable service,
+resource exhaustion,
+
+23
+00:01:15.328 --> 00:01:19.684
+and programming defect should have
+distinct categories because their response and
+
+24
+00:01:19.764 --> 00:01:20.991
+alerting needs differ.
+
+25
+00:01:21.071 --> 00:01:25.365
+Categorization reduces noise and makes
+rate-based detection meaningful without
+
+26
+00:01:25.445 --> 00:01:26.672
+exposing raw messages.
+
+27
+00:01:26.752 --> 00:01:31.292
+The original exception can remain
+available to tightly controlled diagnostic tooling
+
+28
+00:01:31.372 --> 00:01:32.722
+only when policy permits.
+
+29
+00:01:32.802 --> 00:01:34.335
+Review every error boundary,
+
+30
+00:01:34.415 --> 00:01:37.667
+including hosted error reporters and trace
+exception events.
+
+31
+00:01:37.747 --> 00:01:41.919
+Scrubbing only application logs does not
+protect telemetry copied by automatic
+
+32
+00:01:41.999 --> 00:01:42.980
+instrumentation.
+
+33
+00:01:43.060 --> 00:01:46.987
+Avoid recording full URLs when query
+strings can contain sensitive values,
+
+34
+00:01:47.067 --> 00:01:51.423
+and avoid upstream payloads unless a
+specific diagnostic need and protection model
+
+35
+00:01:51.503 --> 00:01:52.239
+justify them.
+
+36
+00:01:52.319 --> 00:01:56.000
+Good error telemetry answers what failed,
+where, for which operation,
+
+37
+00:01:56.080 --> 00:01:58.043
+and under which correlation context;
+
+38
+00:01:58.123 --> 00:02:01.620
+it does not reproduce the request merely
+because failure occurred.

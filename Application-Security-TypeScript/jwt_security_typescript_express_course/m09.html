@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="jwt-security-typescript-express-v1">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="9"
+        data-total="9"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Choose one answer for each of the ten questions. The passing score is 80% (8 of 10). You may revise your answers and submit again.</p>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{"q1": "A", "q2": "D", "q3": "A", "q4": "C", "q5": "B", "q6": "C", "q7": "A", "q8": "D", "q9": "B", "q10": "C"}'
+        >
+          <fieldset class="quiz-question"><legend>1. Code review finds decodeJwt(token) followed by req.user = claims. The decoder only parses the payload. What must change before the request can be authenticated?</legend>
+<label><input type="radio" name="q1" value="A" required> A. Verify cryptographic protection using trusted keys and server policy, validate required claims, then construct an authenticated context.</label>
+<label><input type="radio" name="q1" value="B" required> B. Decode the protected header as well and accept the token if it names the configured signing algorithm.</label>
+<label><input type="radio" name="q1" value="C" required> C. Check that the payload matches the TypeScript User interface and the token has the expected number of sections.</label>
+<label><input type="radio" name="q1" value="D" required> D. Require a subject and an expiration field in the decoded payload, then assign it to the request.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>2. An API accepts tokens from one configured issuer. How should it decide which signing algorithms to accept?</legend>
+<label><input type="radio" name="q2" value="A" required> A. Accept any algorithm supported by the library when the token supplies a recognized key identifier.</label>
+<label><input type="radio" name="q2" value="B" required> B. Use the header&#x27;s algorithm as policy, provided it belongs to a cryptographic family supported by the runtime.</label>
+<label><input type="radio" name="q2" value="C" required> C. Choose the widest algorithm set supported by the key service to keep future issuer migrations transparent.</label>
+<label><input type="radio" name="q2" value="D" required> D. Use a narrow server-configured allowlist and matching key types appropriate to that issuer, rejecting tokens outside that policy.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>3. A token verifies with the expected issuer&#x27;s key, but its audience identifies a different API. What should this API do?</legend>
+<label><input type="radio" name="q3" value="A" required> A. Reject it because both trusted issuer and intended audience are required parts of this API&#x27;s acceptance policy.</label>
+<label><input type="radio" name="q3" value="B" required> B. Accept it because services using the same identity provider share the issuer&#x27;s authentication boundary.</label>
+<label><input type="radio" name="q3" value="C" required> C. Accept it if its scopes include a permission name also used by the current API.</label>
+<label><input type="radio" name="q3" value="D" required> D. Accept it if its subject matches a local account and its expiration remains in the future.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>4. An access token has a recent iat claim and a jti, but omits exp. This API requires exp. Which decision is correct?</legend>
+<label><input type="radio" name="q4" value="A" required> A. Accept it with a larger clock tolerance because recent issuance compensates for the absent expiration claim.</label>
+<label><input type="radio" name="q4" value="B" required> B. Accept it once without additional state because a JWT identifier makes each token single-use.</label>
+<label><input type="radio" name="q4" value="C" required> C. Reject it: issued-at does not replace required expiration, and the identifier does not provide automatic replay prevention.</label>
+<label><input type="radio" name="q4" value="D" required> D. Accept it until the next signing-key rotation because issuance time establishes the start of a valid session.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>5. A verifier receives an unknown kid. Which response preserves its trust boundary and limits resource use?</legend>
+<label><input type="radio" name="q5" value="A" required> A. Use a key with the same identifier from another issuer&#x27;s cache to avoid interrupting valid requests.</label>
+<label><input type="radio" name="q5" value="B" required> B. Allow only a bounded refresh of the configured trusted key set, then reject authentication if no compatible key is available.</label>
+<label><input type="radio" name="q5" value="C" required> C. Try a URL derived from the key identifier when the configured key set cannot resolve it.</label>
+<label><input type="radio" name="q5" value="D" required> D. Keep a new cache entry for every received identifier and retry key retrieval until a matching key appears.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>6. A JWT header supplies a key-set URL. Which design should an Express API use for JWKS resolution?</legend>
+<label><input type="radio" name="q6" value="A" required> A. Fetch the supplied key set on each request, then accept it if one of its keys verifies the signature.</label>
+<label><input type="radio" name="q6" value="B" required> B. Use the supplied URL if it has HTTPS, because transport encryption authenticates the issuer of the token.</label>
+<label><input type="radio" name="q6" value="C" required> C. Use a trusted issuer configuration to select the HTTPS key source, with bounded caching and refresh independent of token-supplied URLs.</label>
+<label><input type="radio" name="q6" value="D" required> D. Use any key URL advertised by the token&#x27;s issuer string and cache successful verification results indefinitely.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>7. A payload passes signature and registered-claim validation. The application then casts it with payload as AuthContext. What additional work is needed?</legend>
+<label><input type="radio" name="q7" value="A" required> A. Validate required custom claim shapes and issuer-defined meanings at runtime, then map only the fields the application needs.</label>
+<label><input type="radio" name="q7" value="B" required> B. Check only that tenantId is truthy, because signed custom claims do not require their own type rules.</label>
+<label><input type="radio" name="q7" value="C" required> C. None: signature verification proves that the payload already satisfies the application&#x27;s TypeScript interface.</label>
+<label><input type="radio" name="q7" value="D" required> D. Copy the full payload into the domain User model so route handlers can inspect unexpected claims later.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>8. A requester presents a valid access token and asks for a project in another tenant. What should resource access enforce?</legend>
+<label><input type="radio" name="q8" value="A" required> A. Use the request-body tenantId because possession of a valid token authenticates all fields in the same request.</label>
+<label><input type="radio" name="q8" value="B" required> B. Accept the lookup whenever the token&#x27;s issuer is trusted, leaving tenant filtering to the frontend.</label>
+<label><input type="radio" name="q8" value="C" required> C. Retrieve the project globally and rely on the token&#x27;s read scope as permission to read any returned project.</label>
+<label><input type="radio" name="q8" value="D" required> D. Apply required scopes and object permissions, using validated tenant context or separately verified tenant membership to constrain access.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>9. A browser application uses short-lived access tokens and a longer-lived refresh token in an HttpOnly cookie. Which lifecycle design is strongest?</legend>
+<label><input type="radio" name="q9" value="A" required> A. Rotate access tokens but keep the same refresh token indefinitely, treating HttpOnly as sufficient protection against refresh misuse.</label>
+<label><input type="radio" name="q9" value="B" required> B. Use a restricted, CSRF-aware refresh flow with supported rotation or sender constraints, reuse handling, and revocation; account for outstanding access tokens after logout.</label>
+<label><input type="radio" name="q9" value="C" required> C. Allow the refresh token at ordinary API routes when access tokens expire, relying on HttpOnly for lifecycle protection.</label>
+<label><input type="radio" name="q9" value="D" required> D. Delete the browser cookie on logout and assume all copies of already-issued access tokens immediately become invalid.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>10. An authentication failure needs investigation. Which telemetry policy supports diagnosis without exposing bearer credentials?</legend>
+<label><input type="radio" name="q10" value="A" required> A. Capture refresh tokens only when HttpOnly cookies are used, since browser scripts cannot directly read those values.</label>
+<label><input type="radio" name="q10" value="B" required> B. Log complete rejected JWTs because tokens that failed this API&#x27;s policy cannot be useful elsewhere.</label>
+<label><input type="radio" name="q10" value="C" required> C. Record a request ID, failure category, and approved bounded metadata; exclude full tokens and credential headers from application, proxy, and trace output.</label>
+<label><input type="radio" name="q10" value="D" required> D. Log the Authorization header only in error reports with restricted operator access.</label>
+</fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m08.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m09.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

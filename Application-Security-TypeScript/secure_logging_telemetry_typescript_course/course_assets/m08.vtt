@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.070
+Secure telemetry begins by treating
+observability as a security-relevant data flow.
+
+2
+00:00:05.150 --> 00:00:07.967
+Define meaningful events before collecting
+fields,
+
+3
+00:00:08.047 --> 00:00:11.428
+then map only the identity, tenant,
+resource, action, outcome,
+
+4
+00:00:11.508 --> 00:00:15.639
+and correlation facts that serve an
+operational, security, or audit purpose.
+
+5
+00:00:15.719 --> 00:00:20.164
+Structured logging makes those facts
+consistent and preserves record boundaries,
+
+6
+00:00:20.244 --> 00:00:22.373
+but it does not make an unsafe value safe.
+
+7
+00:00:22.453 --> 00:00:25.708
+Logging everything in JSON is still
+indiscriminate logging.
+
+8
+00:00:25.788 --> 00:00:27.291
+Minimize before redacting.
+
+9
+00:00:27.371 --> 00:00:31.377
+Keep credentials and authentication
+material out of every telemetry path,
+
+10
+00:00:31.457 --> 00:00:34.149
+including logs, traces, and hosted error
+reports.
+
+11
+00:00:34.229 --> 00:00:38.048
+Apply deliberate policy to identifiers,
+personal data, customer text,
+
+12
+00:00:38.128 --> 00:00:40.882
+network attributes, headers, and request
+content.
+
+13
+00:00:40.962 --> 00:00:43.467
+Redaction is defense in depth for known
+fields;
+
+14
+00:00:43.547 --> 00:00:45.738
+hashing is not automatic anonymization.
+
+15
+00:00:45.818 --> 00:00:49.449
+Keep request-controlled values inside
+bounded structured fields,
+
+16
+00:00:49.529 --> 00:00:52.659
+while event names and severity remain
+server-controlled.
+
+17
+00:00:52.739 --> 00:00:56.182
+Downstream viewers and exports must render
+those fields safely.
+
+18
+00:00:56.262 --> 00:00:59.204
+Evidence is most useful when outcomes
+remain distinct.
+
+19
+00:00:59.284 --> 00:01:03.166
+Authentication failure, validation
+rejection, authorization denial,
+
+20
+00:01:03.246 --> 00:01:07.753
+infrastructure error, and successful
+privileged action convey different meaning.
+
+21
+00:01:07.833 --> 00:01:12.153
+Correlation identifiers connect related
+work but do not authenticate a subject.
+
+22
+00:01:12.233 --> 00:01:16.490
+Client-facing errors should reveal less
+than protected internal diagnostics,
+
+23
+00:01:16.570 --> 00:01:20.701
+while useful stack traces can be retained
+under suitable access and retention
+
+24
+00:01:20.781 --> 00:01:21.345
+controls.
+
+25
+00:01:21.425 --> 00:01:25.682
+Security records and disposable debug
+output may require different schemas and
+
+26
+00:01:25.762 --> 00:01:26.951
+delivery guarantees.
+
+27
+00:01:27.031 --> 00:01:29.661
+Finally, protect and test the complete
+pipeline.
+
+28
+00:01:29.741 --> 00:01:33.497
+Define who can read telemetry, how long it
+remains, how deletion works,
+
+29
+00:01:33.577 --> 00:01:35.580
+and what happens when exporters fail.
+
+30
+00:01:35.660 --> 00:01:40.167
+Bound queues, volume, and retries so
+observability cannot exhaust the application.
+
+31
+00:01:40.247 --> 00:01:44.379
+Test the actual serialized records for
+required evidence and forbidden data,
+
+32
+00:01:44.459 --> 00:01:48.341
+and verify behavior through transport and
+presentation where possible.
+
+33
+00:01:48.421 --> 00:01:53.053
+The best security telemetry reconstructs
+important behavior while refusing to become
+
+34
+00:01:53.133 --> 00:01:55.700
+a copy of the application's most sensitive
+data.

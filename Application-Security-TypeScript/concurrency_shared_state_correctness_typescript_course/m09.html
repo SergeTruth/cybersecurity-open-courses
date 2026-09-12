@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="concurrency-shared-state-correctness-typescript-v1">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="9"
+        data-total="9"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Choose one answer for each of the ten questions. The passing score is 80% (8 of 10). You may revise your answers and submit again.</p>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{"q1": "C", "q2": "B", "q3": "D", "q4": "C", "q5": "B", "q6": "D", "q7": "B", "q8": "A", "q9": "D", "q10": "A"}'
+        >
+          <fieldset class="quiz-question"><legend>1. An Express service runs ordinary JavaScript on one event-loop thread. Two requests both await database reads before updating the same account. Which conclusion is correct?</legend>
+<label><input type="radio" name="q1" value="A" required> A. The handlers are safe if each uses await rather than starting its writes with Promise.all.</label>
+<label><input type="radio" name="q1" value="B" required> B. The event loop serializes the complete request handlers, including the database work between await expressions.</label>
+<label><input type="radio" name="q1" value="C" required> C. Their asynchronous operations can interleave, and other writers may change the record between the read and the protected mutation.</label>
+<label><input type="radio" name="q1" value="D" required> D. The race requires worker threads because one JavaScript thread cannot have multiple database operations in progress.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>2. Two inventory requests each read stock=1 and later write stock=0 from that snapshot. Both return success. What does the final stock value prove?</legend>
+<label><input type="radio" name="q2" value="A" required> A. It proves only one sale occurred because the second write stored the same value as the first.</label>
+<label><input type="radio" name="q2" value="B" required> B. It does not prove correctness: two sales may have succeeded for one unit even though the stored quantity is not negative.</label>
+<label><input type="radio" name="q2" value="C" required> C. It proves both sales were safe because each request checked a positive quantity before updating it.</label>
+<label><input type="radio" name="q2" value="D" required> D. It proves the update was atomic as a business operation because the database accepted both writes.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>3. A repository changes stock with one conditional mutation: decrement only where the unique item matches and quantity is positive. What must its caller do?</legend>
+<label><input type="radio" name="q3" value="A" required> A. Return success when the query has no syntax error, because its predicate already guarantees that stock was available.</label>
+<label><input type="radio" name="q3" value="B" required> B. Read stock again and use that later value to decide whether this request performed the decrement.</label>
+<label><input type="radio" name="q3" value="C" required> C. Keep a separate application-side quantity check as the authoritative decision and ignore the mutation result.</label>
+<label><input type="radio" name="q3" value="D" required> D. Check the affected-row result and successful commit, treating no qualifying row as a failed transition rather than reporting success.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>4. A developer moves several read-and-write statements into transaction(). What is still required to establish concurrency correctness?</legend>
+<label><input type="radio" name="q4" value="A" required> A. Nothing further: a transaction automatically runs all business operations serially with respect to other transactions.</label>
+<label><input type="radio" name="q4" value="B" required> B. Put a process-local mutex around the transaction so unrelated database connections inherit the same protection.</label>
+<label><input type="radio" name="q4" value="C" required> C. Verify isolation, queries, and protected predicates; choose suitable constraints or locks and handle documented retryable transaction conflicts.</label>
+<label><input type="radio" name="q4" value="D" required> D. Only increase the transaction timeout so every concurrent operation has enough time to finish.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>5. An editor submits content based on document version 12. Which write correctly detects a stale edit?</legend>
+<label><input type="radio" name="q5" value="A" required> A. Require a version field in the TypeScript input type and let the database update the document by identifier alone.</label>
+<label><input type="radio" name="q5" value="B" required> B. Condition the content update on version 12 and advance the version in the same atomic mutation, then inspect whether it succeeded.</label>
+<label><input type="radio" name="q5" value="C" required> C. Update the content and compare its previously loaded version afterward to decide whether to report a conflict.</label>
+<label><input type="radio" name="q5" value="D" required> D. Read version 12 again, update the content unconditionally, and increment the version in a separate statement.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>6. A whole-document save fails its expected-version check. Why can automatically substituting the newest version and retrying be incorrect?</legend>
+<label><input type="radio" name="q6" value="A" required> A. The content remains authoritative because the user submitted it most recently, making only the retry delay relevant.</label>
+<label><input type="radio" name="q6" value="B" required> B. Version numbers can only be used with pessimistic locks, so the first attempt was invalid regardless of overlap.</label>
+<label><input type="radio" name="q6" value="C" required> C. An optimistic conflict means the database is unavailable, so the retry should use a different database connection only.</label>
+<label><input type="radio" name="q6" value="D" required> D. It may overwrite another writer&#x27;s meaningful changes; refresh, recompute, or merge only according to the operation&#x27;s semantics.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>7. A client times out after requesting an order and retries; a queue can also redeliver the same logical operation. What supports safe repeat processing?</legend>
+<label><input type="radio" name="q7" value="A" required> A. Generate a new operation identifier for every attempt so the server can distinguish individual network requests.</label>
+<label><input type="radio" name="q7" value="B" required> B. Reuse a stable scoped operation identifier and authoritative idempotency state, with the local business effect and reusable result committed together.</label>
+<label><input type="radio" name="q7" value="C" required> C. Retry until one response arrives and assume earlier attempts did not commit because their responses were missing.</label>
+<label><input type="radio" name="q7" value="D" required> D. Keep a completed-operation map on each application instance and clear it whenever a worker restarts.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>8. Each of three Node.js replicas protects a database update with its own in-memory mutex. Which limitation remains?</legend>
+<label><input type="radio" name="q8" value="A" required> A. The mutexes do not coordinate other replicas or direct writers; the invariant needs a guard shared at the authoritative state boundary.</label>
+<label><input type="radio" name="q8" value="B" required> B. The only remaining risk is CPU parallelism, which can be removed by running one JavaScript thread per replica.</label>
+<label><input type="radio" name="q8" value="C" required> C. The mutexes become shared automatically when all replicas connect to the same database hostname.</label>
+<label><input type="radio" name="q8" value="D" required> D. The design is sufficient if the mutex remains held until the database response reaches that replica.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>9. A coupon may be redeemed once per account. Redemption records and account credits live in the same relational database. Which design most directly enforces that invariant?</legend>
+<label><input type="radio" name="q9" value="A" required> A. Insert a unique redemption record in one transaction, then always apply the account credit in a separate transaction.</label>
+<label><input type="radio" name="q9" value="B" required> B. Acquire a distributed lease, credit the account, and trust lease expiration alone to prevent future duplicate redemptions.</label>
+<label><input type="radio" name="q9" value="C" required> C. Check for an existing redemption before crediting the account, then insert a record after the credit completes.</label>
+<label><input type="radio" name="q9" value="D" required> D. Use a unique constraint on account and coupon, and commit the winning redemption and credit together in one transaction.</label>
+</fieldset>
+
+<fieldset class="quiz-question"><legend>10. Which test best checks that concurrent reservations cannot oversell one available unit?</legend>
+<label><input type="radio" name="q10" value="A" required> A. Use barriers and separate connections to overlap attempts, await all outcomes, then verify stock, committed reservations, and absence of partial effects.</label>
+<label><input type="radio" name="q10" value="B" required> B. Start several promises through a harness that serializes them on one connection, then check only the first successful response.</label>
+<label><input type="radio" name="q10" value="C" required> C. Add a fixed sleep before each reservation and treat a passing single run as proof that no race remains.</label>
+<label><input type="radio" name="q10" value="D" required> D. Run ten reservations sequentially and verify that all successful responses have the expected HTTP status.</label>
+</fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m08.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m09.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

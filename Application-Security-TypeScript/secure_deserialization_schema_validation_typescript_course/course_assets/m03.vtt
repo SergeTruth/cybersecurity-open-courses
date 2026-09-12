@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.287
+A useful schema describes the smallest
+shape an operation needs.
+
+2
+00:00:04.287 --> 00:00:07.172
+Start with whether the top level must be
+
+3
+00:00:07.172 --> 00:00:09.968
+an object, then specify each accepted
+field.
+
+4
+00:00:09.968 --> 00:00:12.853
+Required, optional, and nullable mean
+different things.
+
+5
+00:00:12.853 --> 00:00:15.738
+A missing field can mean leave the
+existing
+
+6
+00:00:15.738 --> 00:00:18.894
+value unchanged, while null can mean clear
+it.
+
+7
+00:00:18.894 --> 00:00:22.591
+Define those meanings deliberately, and
+reject combinations the operation does
+
+8
+00:00:22.591 --> 00:00:26.378
+not support rather than relying on later
+code to guess.
+
+9
+00:00:26.378 --> 00:00:29.083
+Value constraints make the shape
+operationally meaningful.
+
+10
+00:00:29.083 --> 00:00:32.059
+Bound string lengths, require finite
+numbers within appropriate
+
+11
+00:00:32.059 --> 00:00:35.214
+ranges, and distinguish integer counts
+from fractional measurements.
+
+12
+00:00:35.214 --> 00:00:37.378
+Use explicit booleans and closed
+enumerations
+
+13
+00:00:37.378 --> 00:00:39.362
+where the contract requires them.
+
+14
+00:00:39.362 --> 00:00:41.977
+Specify identifier and date
+representations, including which
+
+15
+00:00:41.977 --> 00:00:44.682
+format checks the chosen validator
+actually enforces.
+
+16
+00:00:44.682 --> 00:00:47.387
+Constrain both array length and each
+element.
+
+17
+00:00:47.387 --> 00:00:50.453
+Apply object rules recursively, and bound
+dictionary keys,
+
+18
+00:00:50.453 --> 00:00:53.338
+value shapes, property counts, and
+permitted nesting.
+
+19
+00:00:53.338 --> 00:00:56.674
+For a profile update, the public contract
+might allow
+
+20
+00:00:56.674 --> 00:01:00.281
+an optional display name of one to one
+hundred characters
+
+21
+00:01:00.281 --> 00:01:03.707
+and an optional timezone from the
+application's supported set.
+
+22
+00:01:03.707 --> 00:01:06.412
+Decide whether an empty update is
+meaningful.
+
+23
+00:01:06.412 --> 00:01:10.019
+Neither a role nor a tenant identifier
+belongs in that
+
+24
+00:01:10.019 --> 00:01:13.445
+contract simply because the persistence
+entity has those fields.
+
+25
+00:01:13.445 --> 00:01:17.142
+Strictness means making the acceptance
+policy explicit; it does not
+
+26
+00:01:17.142 --> 00:01:20.569
+require every interface to make the same
+compatibility decision.
+
+27
+00:01:20.569 --> 00:01:24.356
+Unknown properties need a deliberate
+policy at every relevant level.
+
+28
+00:01:24.356 --> 00:01:26.339
+Rejecting them detects contract mistakes.
+
+29
+00:01:26.339 --> 00:01:28.503
+Stripping them can support compatible
+clients
+
+30
+00:01:28.503 --> 00:01:31.208
+if the application uses the stripped
+result.
+
+31
+00:01:31.208 --> 00:01:33.372
+A constrained extension area can support
+
+32
+00:01:33.372 --> 00:01:35.717
+metadata without opening the entire
+object.
+
+33
+00:01:35.717 --> 00:01:37.971
+Defaults vary between validators, so
+verify
+
+34
+00:01:37.971 --> 00:01:40.315
+the selected behavior with nested
+examples.
+
+35
+00:01:40.315 --> 00:01:43.201
+Always continue with the value returned by
+validation
+
+36
+00:01:43.201 --> 00:01:46.627
+when the validator returns an accepted or
+transformed object.
+
+37
+00:01:46.627 --> 00:01:49.873
+Calling a schema parser and then updating
+the database
+
+38
+00:01:49.873 --> 00:01:53.299
+with the original request body discards
+the boundary's result.
+
+39
+00:01:53.299 --> 00:01:56.275
+Downstream code must receive the contract
+you checked,
+
+40
+00:01:56.275 --> 00:01:58.980
+not another copy of the unverified input.
+

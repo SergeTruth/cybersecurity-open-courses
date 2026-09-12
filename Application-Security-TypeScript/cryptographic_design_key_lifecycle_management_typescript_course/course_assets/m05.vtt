@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.442
+A single long lived application key stored
+beside every encrypted record
+
+2
+00:00:04.442 --> 00:00:08.563
+creates a broad point of exposure and a
+difficult migration problem.
+
+3
+00:00:08.563 --> 00:00:12.236
+Anyone who obtains both can decrypt the
+protected data, and
+
+4
+00:00:12.236 --> 00:00:15.640
+changing that key can affect every record
+at once.
+
+5
+00:00:15.640 --> 00:00:18.507
+Separating keys from ciphertext means
+controlling their access
+
+6
+00:00:18.507 --> 00:00:21.463
+and lifecycle independently, not merely
+putting them in
+
+7
+00:00:21.463 --> 00:00:24.509
+different columns or encoding the key
+before storage.
+
+8
+00:00:24.509 --> 00:00:26.480
+Envelope encryption introduces two roles.
+
+9
+00:00:26.480 --> 00:00:30.064
+A data encryption key, or DEK, encrypts
+application data.
+
+10
+00:00:30.064 --> 00:00:33.110
+A key encryption key, or KEK, protects
+that
+
+11
+00:00:33.110 --> 00:00:36.514
+data key using an established wrapping or
+encryption mechanism.
+
+12
+00:00:36.514 --> 00:00:39.560
+The application stores ciphertext, the
+wrapped data key,
+
+13
+00:00:39.560 --> 00:00:42.606
+and the approved metadata required to
+interpret both.
+
+14
+00:00:42.606 --> 00:00:45.831
+The wrapped key may accompany the
+ciphertext because recovering
+
+15
+00:00:45.831 --> 00:00:49.236
+its plaintext requires separate authority
+to use the KEK.
+
+16
+00:00:49.236 --> 00:00:53.625
+In a common workflow, a managed service
+generates or protects a data
+
+17
+00:00:53.625 --> 00:00:57.746
+key while the long lived KEK remains
+inside controlled key infrastructure.
+
+18
+00:00:57.746 --> 00:01:00.255
+The application uses the plaintext data
+key
+
+19
+00:01:00.255 --> 00:01:03.301
+locally, stores only its protected form,
+and later
+
+20
+00:01:03.301 --> 00:01:05.988
+requests unwrapping when authorized
+processing requires decryption.
+
+21
+00:01:05.988 --> 00:01:09.393
+Plaintext data keys therefore commonly
+exist in application memory.
+
+22
+00:01:09.393 --> 00:01:12.797
+Keep their exposure short, avoid
+unnecessary copies, and never
+
+23
+00:01:12.797 --> 00:01:16.470
+write them to logs, configuration,
+databases, or temporary files.
+
+24
+00:01:16.470 --> 00:01:19.785
+Managed runtimes may retain copies, so
+releasing a reference
+
+25
+00:01:19.785 --> 00:01:23.189
+is not proof that every byte has been
+erased.
+
+26
+00:01:23.189 --> 00:01:26.504
+Separate or scoped data keys can reduce
+shared exposure,
+
+27
+00:01:26.504 --> 00:01:29.371
+while managed key services or hardware
+security modules
+
+28
+00:01:29.371 --> 00:01:32.775
+provide controlled use and audit records
+for root keys.
+
+29
+00:01:32.775 --> 00:01:36.448
+Where the format and service permit,
+rewrapping data keys can
+
+30
+00:01:36.448 --> 00:01:40.211
+change the KEK protecting them without
+re-encrypting all bulk data.
+
+31
+00:01:40.211 --> 00:01:42.451
+This is an architectural benefit, not
+
+32
+00:01:42.451 --> 00:01:45.138
+an automatic property of every encrypted
+record.
+
+33
+00:01:45.138 --> 00:01:48.184
+Envelope encryption still requires correct
+algorithms, nonce rules,
+
+34
+00:01:48.184 --> 00:01:51.051
+context binding, service authorization,
+and failure handling.
+
+35
+00:01:51.051 --> 00:01:53.201
+The hierarchy makes those responsibilities
+more
+
+36
+00:01:53.201 --> 00:01:55.620
+manageable; it does not remove them.
+

@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.831
+Cryptographic design starts with a
+security property and a trust boundary.
+
+2
+00:00:04.831 --> 00:00:08.031
+Confidentiality prevents unauthorized
+parties from learning protected data.
+
+3
+00:00:08.031 --> 00:00:09.726
+Integrity detects unauthorized changes.
+
+4
+00:00:09.726 --> 00:00:12.739
+Authenticity supplies evidence that a
+message or protected
+
+5
+00:00:12.739 --> 00:00:16.316
+value was produced by someone possessing
+the appropriate key.
+
+6
+00:00:16.316 --> 00:00:18.670
+These properties overlap in common
+constructions,
+
+7
+00:00:18.670 --> 00:00:20.741
+but they are not interchangeable.
+
+8
+00:00:20.741 --> 00:00:24.601
+Identify who may read or modify a value,
+where it
+
+9
+00:00:24.601 --> 00:00:28.272
+travels, and which components must be
+trusted with plaintext.
+
+10
+00:00:28.272 --> 00:00:30.343
+Different goals require different
+primitives.
+
+11
+00:00:30.343 --> 00:00:32.603
+Encryption supports recovery of
+confidential data
+
+12
+00:00:32.603 --> 00:00:34.674
+by an authorized key holder.
+
+13
+00:00:34.674 --> 00:00:36.745
+Authenticated encryption also detects
+tampering.
+
+14
+00:00:36.745 --> 00:00:40.511
+A message authentication code protects
+integrity and authenticity between parties
+
+15
+00:00:40.511 --> 00:00:44.182
+sharing a secret, but does not encrypt the
+message.
+
+16
+00:00:44.182 --> 00:00:47.195
+Digital signatures use a private signing
+key and
+
+17
+00:00:47.195 --> 00:00:50.302
+public verification key; the verifier must
+establish that
+
+18
+00:00:50.302 --> 00:00:53.502
+the public key belongs to the expected
+identity.
+
+19
+00:00:53.502 --> 00:00:56.515
+Password verification instead needs a
+dedicated password hash
+
+20
+00:00:56.515 --> 00:01:00.092
+so the application need not recover the
+original password.
+
+21
+00:01:00.092 --> 00:01:02.164
+Representation is another distinct
+concern.
+
+22
+00:01:02.164 --> 00:01:04.423
+Base64 and hexadecimal turn bytes into
+
+23
+00:01:04.423 --> 00:01:06.494
+convenient text without adding
+confidentiality.
+
+24
+00:01:06.494 --> 00:01:09.695
+Ordinary hashing produces a digest, not
+encrypted data,
+
+25
+00:01:09.695 --> 00:01:12.519
+and does not make predictable input
+confidential.
+
+26
+00:01:12.519 --> 00:01:16.473
+A fast hash by itself is unsuitable for
+password storage.
+
+27
+00:01:16.473 --> 00:01:19.486
+Reversibly encrypting login passwords also
+gives the application
+
+28
+00:01:19.486 --> 00:01:22.687
+a recovery capability it normally should
+not have.
+
+29
+00:01:22.687 --> 00:01:26.076
+Selecting a primitive by its convenient
+output shape can
+
+30
+00:01:26.076 --> 00:01:29.653
+therefore produce a system that solves the
+wrong problem.
+
+31
+00:01:29.653 --> 00:01:32.572
+Use mature, supported constructions
+through reviewed interfaces.
+
+32
+00:01:32.572 --> 00:01:35.396
+Avoid designing a cipher, padding scheme,
+or
+
+33
+00:01:35.396 --> 00:01:38.220
+improvised combination of encryption and
+message authentication.
+
+34
+00:01:38.220 --> 00:01:40.856
+Prefer a high level authenticated API that
+
+35
+00:01:40.856 --> 00:01:43.869
+centralizes parameters, key selection, and
+failure behavior.
+
+36
+00:01:43.869 --> 00:01:46.882
+Application encryption still needs access
+control and transport
+
+37
+00:01:46.882 --> 00:01:50.553
+protection: use TLS even when selected
+fields are encrypted.
+
+38
+00:01:50.553 --> 00:01:54.507
+Minimize what must be stored and which
+components require decryption.
+
+39
+00:01:54.507 --> 00:01:58.649
+This keeps the security goal connected to
+architecture instead of reducing
+
+40
+00:01:58.649 --> 00:02:02.980
+cryptography to an isolated call that
+happens to return unreadable bytes.
+

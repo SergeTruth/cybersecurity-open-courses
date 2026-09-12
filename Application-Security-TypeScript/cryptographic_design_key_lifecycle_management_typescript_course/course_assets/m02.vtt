@@ -1,0 +1,203 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.884
+When application data needs
+confidentiality and
+
+2
+00:00:02.884 --> 00:00:05.766
+tamper detection, use an established
+authenticated encryption
+
+3
+00:00:05.766 --> 00:00:08.349
+construction supported by a mature
+library.
+
+4
+00:00:08.349 --> 00:00:10.832
+Authenticated encryption with associated
+data, often
+
+5
+00:00:10.832 --> 00:00:13.714
+abbreviated AEAD, accepts plaintext and
+optional context
+
+6
+00:00:13.714 --> 00:00:16.297
+that needs integrity protection without
+secrecy.
+
+7
+00:00:16.297 --> 00:00:19.674
+AES GCM and ChaCha20 Poly1305 are common
+examples.
+
+8
+00:00:19.674 --> 00:00:22.854
+The engineering task is to satisfy the
+chosen
+
+9
+00:00:22.854 --> 00:00:25.735
+construction's contract, not to compare
+algorithms casually
+
+10
+00:00:25.735 --> 00:00:29.113
+or assemble equivalent behavior from lower
+level pieces.
+
+11
+00:00:29.113 --> 00:00:31.497
+Associated data can bind ciphertext to
+
+12
+00:00:31.497 --> 00:00:34.776
+a tenant, record, purpose, or schema
+version.
+
+13
+00:00:34.776 --> 00:00:38.452
+It remains visible, but a change causes
+authentication to
+
+14
+00:00:38.452 --> 00:00:42.227
+fail when the expected context is supplied
+during decryption.
+
+15
+00:00:42.227 --> 00:00:45.009
+Reconstruct that expected context from the
+authorized
+
+16
+00:00:45.009 --> 00:00:47.890
+operation and trusted records, rather than
+accepting
+
+17
+00:00:47.890 --> 00:00:50.870
+an arbitrary context supplied alongside
+the ciphertext.
+
+18
+00:00:50.870 --> 00:00:53.851
+Define a stable byte encoding for it.
+
+19
+00:00:53.851 --> 00:00:56.235
+Semantically similar objects with
+different serialization
+
+20
+00:00:56.235 --> 00:00:58.818
+can otherwise produce different
+authentication inputs.
+
+21
+00:00:58.818 --> 00:01:02.097
+Preserve the information needed to
+decrypt: an approved
+
+22
+00:01:02.097 --> 00:01:06.071
+format version, key identifier or version,
+nonce, ciphertext, and
+
+23
+00:01:06.071 --> 00:01:09.449
+authentication tag where the API exposes
+it separately.
+
+24
+00:01:09.449 --> 00:01:12.827
+A format may combine some of these fields.
+
+25
+00:01:12.827 --> 00:01:15.211
+Binary values can be encoded for
+
+26
+00:01:15.211 --> 00:01:18.291
+storage, but their encoding adds no
+protection.
+
+27
+00:01:18.291 --> 00:01:20.675
+Validate the record's structure and route
+
+28
+00:01:20.675 --> 00:01:22.861
+version metadata through controlled
+policy.
+
+29
+00:01:22.861 --> 00:01:25.245
+Stored algorithm names must not enable
+
+30
+00:01:25.245 --> 00:01:27.828
+arbitrary constructions or unexpected key
+access.
+
+31
+00:01:27.828 --> 00:01:31.604
+Authenticated decryption must either
+return verified plaintext or fail.
+
+32
+00:01:31.604 --> 00:01:34.783
+Some low level streaming APIs produce
+provisional bytes
+
+33
+00:01:34.783 --> 00:01:37.664
+before the final authentication check; do
+not
+
+34
+00:01:37.664 --> 00:01:41.042
+release those bytes to callers or side
+effects.
+
+35
+00:01:41.042 --> 00:01:45.612
+Prefer a wrapper that enforces this
+boundary and bounds record size.
+
+36
+00:01:45.612 --> 00:01:49.586
+Successful authentication does not
+establish that the requester may read
+
+37
+00:01:49.586 --> 00:01:54.255
+the record, nor does it automatically
+prove freshness or prevent replay.
+
+38
+00:01:54.255 --> 00:01:56.640
+Enforce application permissions separately
+and add
+
+39
+00:01:56.640 --> 00:01:58.826
+state rules if replay matters.
+
+40
+00:01:58.826 --> 00:02:01.210
+The result is a protected representation
+
+41
+00:02:01.210 --> 00:02:03.197
+with clear cryptographic guarantees and
+
+42
+00:02:03.197 --> 00:02:05.780
+clearly identified responsibilities
+outside those guarantees.
+

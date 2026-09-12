@@ -1,0 +1,175 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.214
+Logging is an application data flow, not a
+harmless print operation.
+
+2
+00:00:04.294 --> 00:00:07.496
+Information leaves request handlers and
+domain services,
+
+3
+00:00:07.576 --> 00:00:12.058
+passes through serializers and queues, and
+reaches storage, dashboards, alerts,
+
+4
+00:00:12.138 --> 00:00:13.291
+or external vendors.
+
+5
+00:00:13.371 --> 00:00:17.725
+That flow supports troubleshooting,
+production monitoring, abuse detection,
+
+6
+00:00:17.805 --> 00:00:22.736
+incident investigation, auditability,
+compliance evidence, and performance analysis.
+
+7
+00:00:22.816 --> 00:00:25.505
+Because it crosses trust and storage
+boundaries,
+
+8
+00:00:25.585 --> 00:00:29.299
+it deserves the same design review as an
+API or database integration.
+
+9
+00:00:29.379 --> 00:00:32.709
+Telemetry also creates a secondary copy of
+application data.
+
+10
+00:00:32.789 --> 00:00:36.503
+A single convenient object dump can
+capture authorization headers,
+
+11
+00:00:36.583 --> 00:00:40.169
+cookies, credentials, personal
+information, customer content,
+
+12
+00:00:40.249 --> 00:00:43.450
+internal identifiers, stack traces, and
+network details.
+
+13
+00:00:43.530 --> 00:00:48.013
+Those copies may be retained longer and
+exposed to more operators than the original
+
+14
+00:00:48.093 --> 00:00:48.413
+data.
+
+15
+00:00:48.493 --> 00:00:51.695
+The engineering goal is therefore not
+maximum collection.
+
+16
+00:00:51.775 --> 00:00:56.065
+A useful event preserves enough context to
+explain important behavior without
+
+17
+00:00:56.145 --> 00:01:00.819
+turning observability into an uncontrolled
+database of secrets and request content.
+
+18
+00:01:00.899 --> 00:01:03.461
+Different signals require different
+choices.
+
+19
+00:01:03.541 --> 00:01:06.935
+Application and security events describe
+discrete behavior.
+
+20
+00:01:07.015 --> 00:01:10.729
+Metrics aggregate measurements and should
+avoid unbounded labels.
+
+21
+00:01:10.809 --> 00:01:15.163
+Traces connect work across services, often
+carrying attributes at high volume.
+
+22
+00:01:15.243 --> 00:01:19.213
+Audit records may need stable schemas and
+stronger delivery, integrity,
+
+23
+00:01:19.293 --> 00:01:21.214
+retention, and access guarantees.
+
+24
+00:01:21.294 --> 00:01:24.368
+Diagnostic errors can contain deeper
+technical detail,
+
+25
+00:01:24.448 --> 00:01:27.201
+but that does not make them safe for every
+audience.
+
+26
+00:01:27.281 --> 00:01:31.699
+Treating all five as interchangeable
+produces either weak evidence or excessive
+
+27
+00:01:31.779 --> 00:01:32.356
+exposure.
+
+28
+00:01:32.436 --> 00:01:35.701
+Begin with named events and explicit
+fields: what happened,
+
+29
+00:01:35.781 --> 00:01:40.200
+who or what initiated it, which resource
+was affected, and what outcome occurred.
+
+30
+00:01:40.280 --> 00:01:44.506
+Select the minimum fields that support a
+defined operational or security use.
+
+31
+00:01:44.586 --> 00:01:48.236
+Structure them consistently, exclude or
+redact sensitive values,
+
+32
+00:01:48.316 --> 00:01:51.069
+protect the pipeline, and test the emitted
+output.
+
+33
+00:01:51.149 --> 00:01:55.120
+In TypeScript, logging a project
+identifier, actor identifier, action,
+
+34
+00:01:55.200 --> 00:01:56.672
+and outcome is reviewable.
+
+35
+00:01:56.752 --> 00:01:58.994
+Logging an entire Express request is not,
+
+36
+00:01:59.074 --> 00:02:03.620
+because future framework or request
+changes can silently expand what is collected.

@@ -1,0 +1,187 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.453
+Check-then-act separates an observation
+from the action that relies on it.
+
+2
+00:00:04.453 --> 00:00:07.290
+The inventory example reads a quantity,
+tests whether
+
+3
+00:00:07.290 --> 00:00:10.641
+it is positive, and later writes a
+calculated replacement.
+
+4
+00:00:10.641 --> 00:00:12.704
+Each individual call can succeed while
+
+5
+00:00:12.704 --> 00:00:14.939
+the overall business operation is
+incorrect.
+
+6
+00:00:14.939 --> 00:00:17.775
+With one unit available, two requests can
+both
+
+7
+00:00:17.775 --> 00:00:20.353
+read one and both decide to sell.
+
+8
+00:00:20.353 --> 00:00:23.963
+Each then writes zero based on its own
+earlier read.
+
+9
+00:00:23.963 --> 00:00:26.799
+The final quantity looks plausible, yet
+two requests
+
+10
+00:00:26.799 --> 00:00:29.377
+may have received success for one unit.
+
+11
+00:00:29.377 --> 00:00:32.300
+This is oversubscription combined with a
+lost decrement.
+
+12
+00:00:32.300 --> 00:00:35.394
+Replacing the assignment with an
+unconditional atomic decrement avoids
+
+13
+00:00:35.394 --> 00:00:38.745
+that lost update, but could drive quantity
+below zero.
+
+14
+00:00:38.745 --> 00:00:42.699
+The availability condition must be part of
+the protected transition too.
+
+15
+00:00:42.699 --> 00:00:44.933
+Lost updates are broader than inventory.
+
+16
+00:00:44.933 --> 00:00:47.770
+Two writers can read the same document
+version,
+
+17
+00:00:47.770 --> 00:00:50.778
+change different fields, and write back
+whole objects.
+
+18
+00:00:50.778 --> 00:00:54.044
+The later replacement can erase the
+earlier writer's change.
+
+19
+00:00:54.044 --> 00:00:56.966
+Stale browser forms, background jobs, and
+administrative updates
+
+20
+00:00:56.966 --> 00:01:00.317
+all participate, even when requests reach
+different service replicas.
+
+21
+00:01:00.317 --> 00:01:02.380
+Sequential happy-path tests rarely reveal
+this
+
+22
+00:01:02.380 --> 00:01:04.958
+because each writer observes the previous
+result.
+
+23
+00:01:04.958 --> 00:01:07.021
+Adding another application-level check
+merely introduces
+
+24
+00:01:07.021 --> 00:01:09.256
+another observation that can become stale.
+
+25
+00:01:09.256 --> 00:01:12.350
+An in-memory flag is also insufficient
+when another process
+
+26
+00:01:12.350 --> 00:01:15.616
+can reach the authoritative record without
+consulting that flag.
+
+27
+00:01:15.616 --> 00:01:18.366
+Keeping database calls adjacent in
+TypeScript does not
+
+28
+00:01:18.366 --> 00:01:20.944
+combine them into one atomic storage
+action.
+
+29
+00:01:20.944 --> 00:01:24.382
+Review each read-modify-write sequence by
+identifying what could change after
+
+30
+00:01:24.382 --> 00:01:27.648
+the read and which outcome would violate
+the invariant.
+
+31
+00:01:27.648 --> 00:01:29.711
+Prefer expressing the condition and
+mutation
+
+32
+00:01:29.711 --> 00:01:32.289
+together when the storage system supports
+it.
+
+33
+00:01:32.289 --> 00:01:35.125
+When several records or decisions must be
+protected,
+
+34
+00:01:35.125 --> 00:01:38.047
+use a transaction with appropriate
+isolation or locking.
+
+35
+00:01:38.047 --> 00:01:40.883
+When an earlier user edit must be
+preserved,
+
+36
+00:01:40.883 --> 00:01:43.805
+a version precondition may be the right
+control.
+
+37
+00:01:43.805 --> 00:01:46.642
+Choose the mechanism for the invariant,
+rather than
+
+38
+00:01:46.642 --> 00:01:49.220
+treating every overlap as the same
+problem.
+

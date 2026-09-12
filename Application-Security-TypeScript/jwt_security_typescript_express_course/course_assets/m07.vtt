@@ -1,0 +1,201 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.584
+A bearer token grants authority to whoever
+possesses
+
+2
+00:00:03.584 --> 00:00:06.861
+it while it remains acceptable to the
+service.
+
+3
+00:00:06.861 --> 00:00:11.005
+Short lifetime reduces exposure; it does
+not make theft harmless.
+
+4
+00:00:11.005 --> 00:00:13.511
+Use HTTPS and protect stored tokens.
+
+5
+00:00:13.511 --> 00:00:17.655
+Keep bearer credentials out of URLs, where
+browser history, proxies,
+
+6
+00:00:17.655 --> 00:00:21.510
+analytics, referrer data, and access logs
+can retain them.
+
+7
+00:00:21.510 --> 00:00:25.558
+Choose transport and browser storage for
+the application's request model.
+
+8
+00:00:25.558 --> 00:00:28.834
+Authorization headers allow explicit
+attachment to API requests.
+
+9
+00:00:28.834 --> 00:00:32.882
+JavaScript-readable storage is accessible
+to code executing in that origin.
+
+10
+00:00:32.882 --> 00:00:36.063
+HttpOnly cookies reduce direct script
+access, but browsers
+
+11
+00:00:36.063 --> 00:00:38.954
+attach cookies automatically under their
+cookie rules.
+
+12
+00:00:38.954 --> 00:00:41.845
+Use Secure, appropriate SameSite and scope
+attributes,
+
+13
+00:00:41.845 --> 00:00:44.736
+and CSRF protections suited to the
+application.
+
+14
+00:00:44.736 --> 00:00:47.049
+HttpOnly does not stop malicious in-origin
+
+15
+00:00:47.049 --> 00:00:49.170
+code from issuing authenticated requests.
+
+16
+00:00:49.170 --> 00:00:53.217
+No storage choice removes the need to
+prevent script injection.
+
+17
+00:00:53.217 --> 00:00:57.940
+Refresh tokens obtain new access tokens
+through the intended refresh flow; they
+
+18
+00:00:57.940 --> 00:01:02.373
+are not ordinary API access credentials
+and need not be JWTs.
+
+19
+00:01:02.373 --> 00:01:05.650
+They are usually longer-lived and deserve
+stronger custody.
+
+20
+00:01:05.650 --> 00:01:08.348
+Use the identity provider's supported
+client or
+
+21
+00:01:08.348 --> 00:01:11.529
+session binding, rotation, revocation, and
+reuse detection.
+
+22
+00:01:11.529 --> 00:01:14.709
+For OAuth public clients, current security
+guidance requires
+
+23
+00:01:14.709 --> 00:01:17.986
+rotation or sender-constrained refresh
+tokens to detect replay.
+
+24
+00:01:17.986 --> 00:01:21.648
+Keep refresh handling within narrowly
+defined endpoints and permissions.
+
+25
+00:01:21.648 --> 00:01:23.576
+Logout does not automatically invalidate
+
+26
+00:01:23.576 --> 00:01:25.696
+every issued stateless access token.
+
+27
+00:01:25.696 --> 00:01:28.395
+Removing the local copy and revoking
+refresh
+
+28
+00:01:28.395 --> 00:01:31.189
+access prevents some future use, while
+outstanding
+
+29
+00:01:31.189 --> 00:01:34.081
+access tokens may remain acceptable until
+expiration.
+
+30
+00:01:34.081 --> 00:01:36.490
+Depending on risk, use session records
+
+31
+00:01:36.490 --> 00:01:39.381
+or targeted revocation state for earlier
+cutoff.
+
+32
+00:01:39.381 --> 00:01:42.465
+Broad signing-key rollover is an incident
+measure only
+
+33
+00:01:42.465 --> 00:01:45.646
+when verifiers also stop trusting affected
+keys; ordinary
+
+34
+00:01:45.646 --> 00:01:48.923
+rotation with overlap does not revoke them
+immediately.
+
+35
+00:01:48.923 --> 00:01:52.778
+Never log complete JWTs, bearer headers,
+or refresh tokens.
+
+36
+00:01:52.778 --> 00:01:55.669
+Prefer request identifiers, authentication
+results, configured issuer
+
+37
+00:01:55.669 --> 00:01:58.657
+identifiers, and approved key or subject
+metadata.
+
+38
+00:01:58.657 --> 00:02:01.837
+Treat unverified header metadata as
+untrusted: bound and
+
+39
+00:02:01.837 --> 00:02:05.210
+sanitize it, and do not label it
+authenticated.
+
+40
+00:02:05.210 --> 00:02:08.583
+Review tracing, proxy logs, error
+collection, and support
+
+41
+00:02:08.583 --> 00:02:11.860
+exports so they do not silently capture
+credentials.
+

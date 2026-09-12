@@ -1,0 +1,195 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.667
+TypeScript checks relationships between
+types while
+
+2
+00:00:02.667 --> 00:00:05.014
+code is being developed and compiled.
+
+3
+00:00:05.014 --> 00:00:08.174
+Interfaces, type aliases, generic
+parameters, and type assertions
+
+4
+00:00:08.174 --> 00:00:11.604
+do not become input validators in the
+emitted JavaScript.
+
+5
+00:00:11.604 --> 00:00:14.493
+A request body asserted to be a create
+
+6
+00:00:14.493 --> 00:00:17.472
+user request can still contain missing
+fields, unexpected
+
+7
+00:00:17.472 --> 00:00:20.632
+arrays, or incompatible values when the
+service runs.
+
+8
+00:00:20.632 --> 00:00:23.611
+The assertion supplies an assumption to
+the compiler;
+
+9
+00:00:23.611 --> 00:00:26.680
+it supplies no evidence about the sender's
+data.
+
+10
+00:00:26.680 --> 00:00:31.194
+A typed function parameter has the same
+limitation at an external boundary.
+
+11
+00:00:31.194 --> 00:00:34.805
+Calling a function that accepts an account
+update does not
+
+12
+00:00:34.805 --> 00:00:38.236
+cause JavaScript to inspect the argument
+against that type.
+
+13
+00:00:38.236 --> 00:00:41.486
+A generic decoding helper is equally
+incomplete if its
+
+14
+00:00:41.486 --> 00:00:44.916
+implementation simply parses JSON and
+asserts the requested type.
+
+15
+00:00:44.916 --> 00:00:47.444
+Its convenient return signature can hide
+the
+
+16
+00:00:47.444 --> 00:00:50.423
+absence of checks from every caller,
+spreading the
+
+17
+00:00:50.423 --> 00:00:53.131
+initial assumption through otherwise
+carefully typed code.
+
+18
+00:00:53.131 --> 00:00:55.840
+Represent unverified values as unknown
+where possible.
+
+19
+00:00:55.840 --> 00:00:59.451
+That choice prevents ordinary property
+access until the program narrows
+
+20
+00:00:59.451 --> 00:01:02.972
+the value, making missing validation more
+visible during development.
+
+21
+00:01:02.972 --> 00:01:05.138
+It is a discipline enforced by
+
+22
+00:01:05.138 --> 00:01:07.576
+the compiler, not automatic runtime
+protection.
+
+23
+00:01:07.576 --> 00:01:10.284
+An unchecked assertion can still bypass
+it.
+
+24
+00:01:10.284 --> 00:01:13.624
+By contrast, any permits operations
+without useful checking and
+
+25
+00:01:13.624 --> 00:01:17.055
+can make the boundary difficult to locate
+during review.
+
+26
+00:01:17.055 --> 00:01:19.944
+Keep raw values confined to a small
+adapter
+
+27
+00:01:19.944 --> 00:01:22.652
+rather than passing them throughout the
+service.
+
+28
+00:01:22.652 --> 00:01:24.638
+Runtime schemas provide executable checks.
+
+29
+00:01:24.638 --> 00:01:27.708
+TypeScript applications use libraries such
+as Zod, Valibot,
+
+30
+00:01:27.708 --> 00:01:30.326
+and Joi, JSON Schema validators such as
+
+31
+00:01:30.326 --> 00:01:33.576
+Ajv, framework validation, or carefully
+scoped custom checks.
+
+32
+00:01:33.576 --> 00:01:35.832
+Their APIs and defaults differ, especially
+
+33
+00:01:35.832 --> 00:01:37.819
+for coercion and unknown properties.
+
+34
+00:01:37.819 --> 00:01:40.888
+Choose explicit behavior and inspect the
+accepted output.
+
+35
+00:01:40.888 --> 00:01:43.867
+Derive application input types from
+schemas when supported,
+
+36
+00:01:43.867 --> 00:01:46.936
+or maintain tests that keep separate
+definitions aligned.
+
+37
+00:01:46.936 --> 00:01:49.464
+The internal type should describe what
+validation
+
+38
+00:01:49.464 --> 00:01:52.263
+actually returns, including optional
+fields and transformations.
+
+39
+00:01:52.263 --> 00:01:55.152
+A schema and an interface that disagree
+create
+
+40
+00:01:55.152 --> 00:01:57.860
+two competing contracts at the same
+boundary.
+

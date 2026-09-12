@@ -1,0 +1,204 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.558
+Some invariants span multiple writes.
+
+2
+00:00:02.558 --> 00:00:04.803
+Reserving inventory and recording its
+reservation
+
+3
+00:00:04.803 --> 00:00:07.610
+may need to succeed or fail together.
+
+4
+00:00:07.610 --> 00:00:10.229
+A database transaction groups
+participating changes so
+
+5
+00:00:10.229 --> 00:00:12.474
+a successful commit makes the unit
+
+6
+00:00:12.474 --> 00:00:15.374
+durable, while rollback discards those
+uncommitted changes.
+
+7
+00:00:15.374 --> 00:00:17.245
+Every participating statement must
+actually
+
+8
+00:00:17.245 --> 00:00:19.303
+use the same transaction context.
+
+9
+00:00:19.303 --> 00:00:23.981
+Atomicity does not mean that all
+transactions run one at a time.
+
+10
+00:00:23.981 --> 00:00:26.974
+Isolation determines which concurrent
+effects a transaction can
+
+11
+00:00:26.974 --> 00:00:30.529
+observe and which conflicts the database
+prevents or rejects.
+
+12
+00:00:30.529 --> 00:00:33.523
+Placing ordinary reads and writes inside a
+transaction
+
+13
+00:00:33.523 --> 00:00:36.329
+does not automatically protect every
+business predicate.
+
+14
+00:00:36.329 --> 00:00:38.574
+Two transactions may make incompatible
+decisions
+
+15
+00:00:38.574 --> 00:00:41.474
+from snapshots, including decisions
+involving different rows.
+
+16
+00:00:41.474 --> 00:00:45.403
+Verify the database's isolation guarantees
+and the actual queries used.
+
+17
+00:00:45.403 --> 00:00:47.649
+Pessimistic locking can protect a known
+
+18
+00:00:47.649 --> 00:00:50.081
+resource before evaluating and modifying
+it.
+
+19
+00:00:50.081 --> 00:00:54.384
+Conflicting writers then wait or fail
+according to the database's behavior.
+
+20
+00:00:54.384 --> 00:00:57.471
+Lock the resource whose state determines
+the decision,
+
+21
+00:00:57.471 --> 00:01:00.278
+and hold protection until commit or
+rollback.
+
+22
+00:01:00.278 --> 00:01:03.271
+A row lock does not automatically protect
+missing
+
+23
+00:01:03.271 --> 00:01:07.107
+rows, arbitrary ranges, related tables, or
+an external service.
+
+24
+00:01:07.107 --> 00:01:09.446
+Broader predicates may require
+constraints, another
+
+25
+00:01:09.446 --> 00:01:11.597
+coordination record, or serializable
+isolation.
+
+26
+00:01:11.597 --> 00:01:13.655
+Locks introduce contention and deadlocks.
+
+27
+00:01:13.655 --> 00:01:16.649
+Acquire required locks in a consistent
+order where
+
+28
+00:01:16.649 --> 00:01:20.017
+possible, keep transactions focused, and
+set sensible deadlines.
+
+29
+00:01:20.017 --> 00:01:23.571
+Avoid slow external network calls while
+locks are held.
+
+30
+00:01:23.571 --> 00:01:26.565
+A rollback in the database cannot undo a
+
+31
+00:01:26.565 --> 00:01:29.184
+payment or email already accepted by
+another
+
+32
+00:01:29.184 --> 00:01:32.459
+system; those boundaries need a separate
+reliable workflow.
+
+33
+00:01:32.459 --> 00:01:34.704
+Some databases reject conflicting
+serializable transactions
+
+34
+00:01:34.704 --> 00:01:36.762
+or choose a deadlock victim.
+
+35
+00:01:36.762 --> 00:01:39.755
+Handle documented retryable failures by
+rerunning the complete
+
+36
+00:01:39.755 --> 00:01:43.404
+transaction from fresh reads, with bounded
+attempts and backoff.
+
+37
+00:01:43.404 --> 00:01:45.275
+Ensure repeated transaction execution
+cannot
+
+38
+00:01:45.275 --> 00:01:47.333
+duplicate effects outside that
+transaction.
+
+39
+00:01:47.333 --> 00:01:51.075
+A process-local mutex is not a substitute
+for these guarantees
+
+40
+00:01:51.075 --> 00:01:54.630
+when other service instances can write the
+same data.
+
+41
+00:01:54.630 --> 00:01:58.372
+Correctness comes from the selected
+database semantics and all participating
+
+42
+00:01:58.372 --> 00:02:02.020
+writers, not the presence of a transaction
+function call.
+

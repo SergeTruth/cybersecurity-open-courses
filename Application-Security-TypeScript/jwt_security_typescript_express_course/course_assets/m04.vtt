@@ -1,0 +1,188 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.739
+Verification begins with a trust
+relationship
+
+2
+00:00:02.739 --> 00:00:04.790
+established outside the incoming token.
+
+3
+00:00:04.790 --> 00:00:08.521
+A deployment may configure a public key
+directly or use
+
+4
+00:00:08.521 --> 00:00:12.159
+a trusted issuer's JSON Web Key Set,
+called JWKS.
+
+5
+00:00:12.159 --> 00:00:15.237
+Public verification keys do not need
+secrecy, but
+
+6
+00:00:15.237 --> 00:00:18.781
+their authenticity and association with
+the issuer are essential.
+
+7
+00:00:18.781 --> 00:00:22.699
+Private signing keys remain restricted to
+the issuer's signing system.
+
+8
+00:00:22.699 --> 00:00:26.056
+Configure the expected issuer and trusted
+key source through
+
+9
+00:00:26.056 --> 00:00:29.601
+application policy or trusted discovery
+anchored to that issuer.
+
+10
+00:00:29.601 --> 00:00:34.637
+A token cannot choose an arbitrary key
+endpoint merely by including a URL.
+
+11
+00:00:34.637 --> 00:00:38.461
+If multiple issuers are supported, select
+only among preconfigured trust
+
+12
+00:00:38.461 --> 00:00:42.379
+entries and subsequently validate the
+token against the selected issuer.
+
+13
+00:00:42.379 --> 00:00:44.617
+Never turn an unverified issuer string
+
+14
+00:00:44.617 --> 00:00:46.669
+into an unrestricted network destination.
+
+15
+00:00:46.669 --> 00:00:51.892
+The key identifier, kid, is a lookup hint
+within that trusted key set.
+
+16
+00:00:51.892 --> 00:00:54.411
+Treat it as bounded, untrusted metadata.
+
+17
+00:00:54.411 --> 00:00:56.649
+Do not concatenate it into filesystem
+
+18
+00:00:56.649 --> 00:00:59.727
+paths, database expressions, shell
+arguments, or URLs.
+
+19
+00:00:59.727 --> 00:01:02.898
+Avoid unlimited cache entries indexed by
+client-provided identifiers.
+
+20
+00:01:02.898 --> 00:01:05.883
+Controlled library logic should select a
+compatible candidate
+
+21
+00:01:05.883 --> 00:01:09.521
+key; the subsequent signature and claim
+checks determine acceptance.
+
+22
+00:01:09.521 --> 00:01:12.132
+Cache key sets for reliability and
+performance
+
+23
+00:01:12.132 --> 00:01:14.930
+instead of fetching them on every request.
+
+24
+00:01:14.930 --> 00:01:17.822
+Set refresh deadlines, network timeouts,
+response limits,
+
+25
+00:01:17.822 --> 00:01:20.620
+and request coalescing appropriate to the
+issuer.
+
+26
+00:01:20.620 --> 00:01:22.858
+An unknown identifier may trigger a
+
+27
+00:01:22.858 --> 00:01:25.283
+bounded refresh of the configured source.
+
+28
+00:01:25.283 --> 00:01:28.548
+If the key is still unavailable, reject
+authentication.
+
+29
+00:01:28.548 --> 00:01:30.786
+Repeated unknown identifiers must not
+create
+
+30
+00:01:30.786 --> 00:01:33.211
+unlimited outbound requests or expand
+trust.
+
+31
+00:01:33.211 --> 00:01:35.823
+Plan normal rotation by publishing new
+verification
+
+32
+00:01:35.823 --> 00:01:38.621
+material, changing the signing key, and
+retaining
+
+33
+00:01:38.621 --> 00:01:41.419
+previous keys for the intended
+token-validity overlap.
+
+34
+00:01:41.419 --> 00:01:43.844
+Retire old material according to policy.
+
+35
+00:01:43.844 --> 00:01:47.295
+During compromise, retaining a compromised
+key for normal overlap
+
+36
+00:01:47.295 --> 00:01:50.933
+may be unacceptable; coordinate its
+removal across verifier caches.
+
+37
+00:01:50.933 --> 00:01:53.918
+A key-service outage can permit use of
+already
+
+38
+00:01:53.918 --> 00:01:56.716
+trusted cached keys only within defined
+policy.
+
+39
+00:01:56.716 --> 00:02:00.260
+It never permits skipping verification or
+accepting unrelated keys.
+

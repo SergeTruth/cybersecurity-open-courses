@@ -1,0 +1,200 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.246
+Many message contracts support several
+known variants.
+
+2
+00:00:03.246 --> 00:00:05.443
+A notification request might describe
+email
+
+3
+00:00:05.443 --> 00:00:07.457
+delivery or text message delivery.
+
+4
+00:00:07.457 --> 00:00:09.745
+A discriminator identifies the variant,
+and
+
+5
+00:00:09.745 --> 00:00:12.491
+a runtime schema checks the corresponding
+fields.
+
+6
+00:00:12.491 --> 00:00:15.512
+The email variant requires its email
+destination shape;
+
+7
+00:00:15.512 --> 00:00:18.990
+the text message variant requires its
+phone destination shape.
+
+8
+00:00:18.990 --> 00:00:21.919
+Validating only that the discriminator is
+a string
+
+9
+00:00:21.919 --> 00:00:24.665
+leaves the rest of the contract
+unresolved.
+
+10
+00:00:24.665 --> 00:00:27.228
+Use a closed set of supported
+discriminator
+
+11
+00:00:27.228 --> 00:00:29.974
+values and validate the entire selected
+branch.
+
+12
+00:00:29.974 --> 00:00:33.636
+Decide how to handle fields belonging to
+another branch and
+
+13
+00:00:33.636 --> 00:00:37.114
+apply the same unknown property policy to
+nested objects.
+
+14
+00:00:37.114 --> 00:00:39.768
+After validation, a fixed switch or a
+
+15
+00:00:39.768 --> 00:00:42.515
+server maintained mapping can select the
+implementation.
+
+16
+00:00:42.515 --> 00:00:45.810
+TypeScript's discriminated unions help the
+compiler narrow each branch
+
+17
+00:00:45.810 --> 00:00:49.197
+and identify missing cases, but that
+assistance depends on
+
+18
+00:00:49.197 --> 00:00:52.675
+the runtime value having already passed
+the corresponding checks.
+
+19
+00:00:52.675 --> 00:00:56.519
+Do not let a client supplied class name,
+module path,
+
+20
+00:00:56.519 --> 00:01:00.089
+constructor name, or function name choose
+arbitrary application behavior.
+
+21
+00:01:00.089 --> 00:01:03.018
+Reflective object construction and
+automatic hydration can expose
+
+22
+00:01:03.018 --> 00:01:06.131
+operations that were never intended as
+public input.
+
+23
+00:01:06.131 --> 00:01:08.693
+Richer serialization formats that
+reconstruct object graphs
+
+24
+00:01:08.693 --> 00:01:11.440
+or special executable types require
+particular scrutiny.
+
+25
+00:01:11.440 --> 00:01:15.192
+For ordinary application requests, prefer
+data values that describe an
+
+26
+00:01:15.192 --> 00:01:18.762
+allowed operation, followed by explicit
+code that performs it.
+
+27
+00:01:18.762 --> 00:01:22.607
+Construct domain objects under server
+control after the necessary checks.
+
+28
+00:01:22.607 --> 00:01:24.987
+The discriminator itself conveys no
+authority.
+
+29
+00:01:24.987 --> 00:01:27.550
+Selecting an email variant does not
+authorize
+
+30
+00:01:27.550 --> 00:01:30.570
+contacting every destination, and
+selecting a recognized operation
+
+31
+00:01:30.570 --> 00:01:33.316
+does not establish permission to perform
+it.
+
+32
+00:01:33.316 --> 00:01:36.245
+Apply authorization and semantic rules
+after the branch
+
+33
+00:01:36.245 --> 00:01:38.992
+is understood and before its effects
+occur.
+
+34
+00:01:38.992 --> 00:01:41.646
+Versioned messages need the same
+discipline: accept
+
+35
+00:01:41.646 --> 00:01:44.392
+explicitly supported versions, validate
+their specific contracts,
+
+36
+00:01:44.392 --> 00:01:47.138
+and map them into the internal
+representation.
+
+37
+00:01:47.138 --> 00:01:49.518
+Reject unknown variants and versions
+predictably.
+
+38
+00:01:49.518 --> 00:01:52.447
+Avoid a fallback that attempts arbitrary
+loading or
+
+39
+00:01:52.447 --> 00:01:55.468
+loosely accepts a future shape, because
+that transfers
+
+40
+00:01:55.468 --> 00:01:58.580
+control of the application's behavior to
+unverified data.
+

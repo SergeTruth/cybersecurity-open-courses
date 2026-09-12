@@ -1,0 +1,182 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.316
+File classification starts with what the
+feature intends to accept.
+
+2
+00:00:04.316 --> 00:00:07.951
+An extension allowlist and the multipart
+media type can catch
+
+3
+00:00:07.951 --> 00:00:12.221
+ordinary client mistakes, but both values
+are supplied by the sender.
+
+4
+00:00:12.221 --> 00:00:16.037
+A request labeled as a PNG still carries
+arbitrary bytes.
+
+5
+00:00:16.037 --> 00:00:18.945
+Define how the service handles mismatches
+and unsupported
+
+6
+00:00:18.945 --> 00:00:21.943
+types, and reject ambiguous results rather
+than silently
+
+7
+00:00:21.943 --> 00:00:25.033
+widening the accepted formats until some
+parser succeeds.
+
+8
+00:00:25.033 --> 00:00:26.486
+Content signatures provide another
+
+9
+00:00:26.486 --> 00:00:28.485
+signal by recognizing characteristic
+bytes.
+
+10
+00:00:28.485 --> 00:00:32.211
+They identify many common formats, but do
+not describe every
+
+11
+00:00:32.211 --> 00:00:36.390
+structure in the file or prove that later
+processing is safe.
+
+12
+00:00:36.390 --> 00:00:39.752
+Use recognition by the intended parser or
+decoder, together
+
+13
+00:00:39.752 --> 00:00:43.296
+with application specific checks, to
+establish the supported representation.
+
+14
+00:00:43.296 --> 00:00:46.385
+Successful decoding is useful evidence
+about format compatibility.
+
+15
+00:00:46.385 --> 00:00:49.383
+It is not proof that embedded content,
+external
+
+16
+00:00:49.383 --> 00:00:53.018
+references, metadata, or the parser
+implementation itself are harmless.
+
+17
+00:00:53.018 --> 00:00:55.289
+For a narrow image workflow,
+canonicalization
+
+18
+00:00:55.289 --> 00:00:57.288
+can reduce what is retained.
+
+19
+00:00:57.288 --> 00:01:01.014
+Decode an explicitly supported format with
+resource limits, enforce dimensions
+
+20
+00:01:01.014 --> 00:01:05.284
+and pixel count, and encode a new
+representation under server control.
+
+21
+00:01:05.284 --> 00:01:07.646
+Retain only metadata the feature needs.
+
+22
+00:01:07.646 --> 00:01:11.008
+If the original has no business purpose,
+discard it
+
+23
+00:01:11.008 --> 00:01:14.461
+according to cleanup policy and store the
+derived image.
+
+24
+00:01:14.461 --> 00:01:18.186
+The published classification and extension
+should describe the actual output,
+
+25
+00:01:18.186 --> 00:01:22.366
+and checks must apply to the exact bytes
+selected for publication.
+
+26
+00:01:22.366 --> 00:01:25.819
+This technique is specific to the chosen
+media workflow.
+
+27
+00:01:25.819 --> 00:01:29.453
+Re-encoding an image does not create a
+universal sanitizer for
+
+28
+00:01:29.453 --> 00:01:33.178
+PDFs, office documents, archives, or every
+browser viewable format.
+
+29
+00:01:33.178 --> 00:01:35.359
+Those formats need policies for their
+
+30
+00:01:35.359 --> 00:01:37.358
+own structures and active capabilities.
+
+31
+00:01:37.358 --> 00:01:40.356
+Keep decoders and inspection libraries
+maintained, and isolate
+
+32
+00:01:40.356 --> 00:01:43.082
+complex parsing where the risk warrants
+it.
+
+33
+00:01:43.082 --> 00:01:46.081
+Malware scanning can add another layer,
+but a
+
+34
+00:01:46.081 --> 00:01:48.806
+clean result does not prove complete
+safety.
+
+35
+00:01:48.806 --> 00:01:51.805
+The acceptance decision should combine the
+business contract,
+
+36
+00:01:51.805 --> 00:01:54.531
+content evidence, resource policy, and
+intended downstream
+
+37
+00:01:54.531 --> 00:01:57.620
+use rather than depending on one
+convenient label.
+

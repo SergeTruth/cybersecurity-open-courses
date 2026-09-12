@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.734
+Ordinary JavaScript running on one Node.js
+
+2
+00:00:02.734 --> 00:00:05.155
+event loop executes synchronous sections
+sequentially.
+
+3
+00:00:05.155 --> 00:00:07.389
+That does not make an HTTP
+
+4
+00:00:07.389 --> 00:00:10.368
+request, asynchronous function, or
+business operation indivisible.
+
+5
+00:00:10.368 --> 00:00:14.092
+An Express service can have many requests
+waiting for database
+
+6
+00:00:14.092 --> 00:00:18.189
+results while timers, callbacks, and
+message handlers continue making progress.
+
+7
+00:00:18.189 --> 00:00:21.261
+An await boundary suspends one
+continuation; it does
+
+8
+00:00:21.261 --> 00:00:24.426
+not reserve the state that continuation
+previously observed.
+
+9
+00:00:24.426 --> 00:00:27.033
+Another request can change an account
+between
+
+10
+00:00:27.033 --> 00:00:29.826
+loading its balance and attempting a
+debit.
+
+11
+00:00:29.826 --> 00:00:31.874
+Await is not inherently unsafe.
+
+12
+00:00:31.874 --> 00:00:34.854
+The defect is the assumption that a
+condition
+
+13
+00:00:34.854 --> 00:00:38.391
+remains true while separate operations act
+on shared state.
+
+14
+00:00:38.391 --> 00:00:40.439
+Concurrency also crosses runtime
+boundaries.
+
+15
+00:00:40.439 --> 00:00:42.953
+Other Node.js processes, containers,
+serverless invocations,
+
+16
+00:00:42.953 --> 00:00:45.374
+queue consumers, administrative tools, and
+external
+
+17
+00:00:45.374 --> 00:00:47.794
+services can modify the same records.
+
+18
+00:00:47.794 --> 00:00:50.029
+Worker threads can execute JavaScript in
+
+19
+00:00:50.029 --> 00:00:52.449
+parallel and may share memory explicitly.
+
+20
+00:00:52.449 --> 00:00:55.894
+Asynchronous interleaving does not require
+simultaneous CPU execution, while
+
+21
+00:00:55.894 --> 00:00:59.432
+parallel execution adds another way for
+operations to overlap.
+
+22
+00:00:59.432 --> 00:01:01.759
+Begin with an invariant: a condition
+
+23
+00:01:01.759 --> 00:01:04.552
+that every permitted state transition must
+preserve.
+
+24
+00:01:04.552 --> 00:01:06.600
+Inventory must not become negative.
+
+25
+00:01:06.600 --> 00:01:09.766
+A coupon may have only one successful
+redemption.
+
+26
+00:01:09.766 --> 00:01:13.303
+An approval may leave the pending state
+only once.
+
+27
+00:01:13.303 --> 00:01:16.376
+A withdrawal must satisfy its balance
+constraint, and
+
+28
+00:01:16.376 --> 00:01:19.913
+an edit must not silently erase another
+writer's change.
+
+29
+00:01:19.913 --> 00:01:22.520
+Naming the invariant makes the correctness
+requirement
+
+30
+00:01:22.520 --> 00:01:25.313
+more precise than simply requesting a
+lock.
+
+31
+00:01:25.313 --> 00:01:28.851
+Then locate the authoritative state and
+enumerate its writers.
+
+32
+00:01:28.851 --> 00:01:31.365
+Lost updates, duplicate execution,
+oversubscription, stale
+
+33
+00:01:31.365 --> 00:01:33.320
+decisions, and conflicting transitions are
+
+34
+00:01:33.320 --> 00:01:35.740
+different failures that require different
+controls.
+
+35
+00:01:35.740 --> 00:01:38.068
+TypeScript can model states and results,
+
+36
+00:01:38.068 --> 00:01:40.861
+but types do not coordinate runtime
+operations.
+
+37
+00:01:40.861 --> 00:01:43.933
+Promise.all can observe concurrently
+started work; it does
+
+38
+00:01:43.933 --> 00:01:47.098
+not turn that work into an atomic
+operation.
+
+39
+00:01:47.098 --> 00:01:50.450
+If correctness depends on a condition
+remaining true while
+
+40
+00:01:50.450 --> 00:01:53.522
+shared state changes, the check and
+protected transition
+
+41
+00:01:53.522 --> 00:01:57.060
+must meet at the layer that owns that
+state.
+

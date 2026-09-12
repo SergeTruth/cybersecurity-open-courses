@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.115
+Cryptographic verification establishes
+that the protected token
+
+2
+00:00:03.115 --> 00:00:05.916
+content matches the expected key and
+algorithm.
+
+3
+00:00:05.916 --> 00:00:09.839
+Use a maintained JOSE or JWT library for
+this operation.
+
+4
+00:00:09.839 --> 00:00:12.080
+Application code should configure policy
+and
+
+5
+00:00:12.080 --> 00:00:14.041
+handle results, not implement signature
+
+6
+00:00:14.041 --> 00:00:16.656
+parsing, cryptographic primitives, or
+compatibility workarounds.
+
+7
+00:00:16.656 --> 00:00:19.831
+Symmetric protection, such as an HMAC,
+uses a
+
+8
+00:00:19.831 --> 00:00:23.380
+shared secret to create and verify the
+authentication code.
+
+9
+00:00:23.380 --> 00:00:25.995
+Every verifier holding that secret can
+also
+
+10
+00:00:25.995 --> 00:00:28.890
+create tokens, so distribution expands
+signing authority.
+
+11
+00:00:28.890 --> 00:00:31.131
+Use strong generated key material and
+
+12
+00:00:31.131 --> 00:00:33.652
+restricted custody, not a memorable
+password.
+
+13
+00:00:33.652 --> 00:00:35.894
+Asymmetric signing separates a private
+signing
+
+14
+00:00:35.894 --> 00:00:37.948
+key from public verification keys.
+
+15
+00:00:37.948 --> 00:00:42.244
+APIs can verify signatures without
+receiving the authority to issue tokens.
+
+16
+00:00:42.244 --> 00:00:45.045
+The verifier decides which algorithms are
+acceptable.
+
+17
+00:00:45.045 --> 00:00:48.594
+The token does not get to expand that
+policy.
+
+18
+00:00:48.594 --> 00:00:52.797
+Configure a narrow allowlist appropriate
+to the issuer and key material,
+
+19
+00:00:52.797 --> 00:00:57.092
+and ensure the selected key type matches
+the expected algorithm family.
+
+20
+00:00:57.092 --> 00:00:59.334
+Do not mix symmetric and asymmetric
+
+21
+00:00:59.334 --> 00:01:01.762
+models simply to accommodate whatever
+arrives.
+
+22
+00:01:01.762 --> 00:01:05.684
+Reject unsigned tokens at a boundary that
+requires authenticated access.
+
+23
+00:01:05.684 --> 00:01:08.859
+The JOSE header is untrusted input before
+verification.
+
+24
+00:01:08.859 --> 00:01:12.408
+Its algorithm, key identifier, and type
+fields can guide
+
+25
+00:01:12.408 --> 00:01:16.050
+controlled processing, but they do not
+independently establish trust.
+
+26
+00:01:16.050 --> 00:01:18.665
+A library may inspect those fields to
+
+27
+00:01:18.665 --> 00:01:21.466
+select an allowed operation and candidate
+key.
+
+28
+00:01:21.466 --> 00:01:23.708
+The server still owns the accepted
+
+29
+00:01:23.708 --> 00:01:26.696
+algorithm set, key source, and token
+profile.
+
+30
+00:01:26.696 --> 00:01:28.564
+Reject unsupported critical header
+requirements
+
+31
+00:01:28.564 --> 00:01:30.618
+rather than silently ignoring them.
+
+32
+00:01:30.618 --> 00:01:34.540
+The conceptual example allows one
+algorithm for a configured issuer.
+
+33
+00:01:34.540 --> 00:01:37.996
+Its exact API syntax varies by library,
+and algorithm
+
+34
+00:01:37.996 --> 00:01:41.544
+selection is only one part of the full
+verifier.
+
+35
+00:01:41.544 --> 00:01:43.879
+Review library documentation and secure
+defaults,
+
+36
+00:01:43.879 --> 00:01:46.587
+keep dependencies maintained, and test
+rejection of
+
+37
+00:01:46.587 --> 00:01:49.015
+disallowed algorithms and incompatible key
+types.
+
+38
+00:01:49.015 --> 00:01:52.844
+A successful signature check must flow
+into claim validation; it
+
+39
+00:01:52.844 --> 00:01:57.140
+must never become an automatic permission
+to enter every protected route.
+

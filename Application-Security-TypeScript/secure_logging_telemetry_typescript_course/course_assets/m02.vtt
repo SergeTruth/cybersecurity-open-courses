@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.869
+Structured events express telemetry as
+named fields rather than prose assembled by
+
+2
+00:00:04.949 --> 00:00:06.179
+string concatenation.
+
+3
+00:00:06.259 --> 00:00:08.475
+A stable event name identifies the schema.
+
+4
+00:00:08.555 --> 00:00:11.693
+Fields such as timestamp, service,
+environment, severity,
+
+5
+00:00:11.773 --> 00:00:15.588
+request or trace identifier, actor,
+tenant, resource, action, outcome,
+
+6
+00:00:15.668 --> 00:00:19.913
+and error category let downstream systems
+filter and correlate evidence without
+
+7
+00:00:19.993 --> 00:00:21.162
+brittle text parsing.
+
+8
+00:00:21.242 --> 00:00:23.027
+Not every event needs every field;
+
+9
+00:00:23.107 --> 00:00:26.430
+the schema should reflect the questions
+that event must answer.
+
+10
+00:00:26.510 --> 00:00:28.048
+For an authorization denial,
+
+11
+00:00:28.128 --> 00:00:31.574
+explicit mapping might record the
+server-controlled event name,
+
+12
+00:00:31.654 --> 00:00:35.653
+authenticated actor and tenant
+identifiers, resource type and identifier,
+
+13
+00:00:35.733 --> 00:00:37.641
+attempted action, and deny outcome.
+
+14
+00:00:37.721 --> 00:00:41.966
+This is safer to review than spreading an
+authentication object or ORM entity into
+
+15
+00:00:42.046 --> 00:00:42.662
+the logger.
+
+16
+00:00:42.742 --> 00:00:46.557
+Object spread allows unrelated fields
+added later to flow into telemetry
+
+17
+00:00:46.637 --> 00:00:47.498
+automatically.
+
+18
+00:00:47.578 --> 00:00:51.762
+Express request and response objects are
+especially hazardous because they can
+
+19
+00:00:51.842 --> 00:00:55.350
+contain headers, cookies, bodies, sockets,
+framework internals,
+
+20
+00:00:55.430 --> 00:00:56.968
+and custom middleware state.
+
+21
+00:00:57.048 --> 00:00:59.817
+TypeScript can make event construction
+consistent.
+
+22
+00:00:59.897 --> 00:01:04.204
+Discriminated event types can require an
+outcome and constrain the fields allowed
+
+23
+00:01:04.284 --> 00:01:05.453
+for each event family.
+
+24
+00:01:05.533 --> 00:01:09.471
+A helper can bind approved request context
+to a child logger or return a small
+
+25
+00:01:09.551 --> 00:01:10.966
+security-context object.
+
+26
+00:01:11.046 --> 00:01:13.200
+These types improve developer feedback,
+
+27
+00:01:13.280 --> 00:01:16.541
+but they do not validate runtime input or
+remove unsafe values.
+
+28
+00:01:16.621 --> 00:01:20.559
+A type assertion applied to a request body
+changes only the compiler's view;
+
+29
+00:01:20.639 --> 00:01:22.362
+it does not transform the object.
+
+30
+00:01:22.442 --> 00:01:24.411
+Values from requests, dependencies,
+
+31
+00:01:24.491 --> 00:01:28.921
+and deserialized messages still need
+runtime validation and deliberate selection.
+
+32
+00:01:29.001 --> 00:01:33.309
+Use explicit telemetry mapping with the
+same discipline used for database writes.
+
+33
+00:01:33.389 --> 00:01:37.019
+Define a finite vocabulary for event names
+and severity on the server.
+
+34
+00:01:37.099 --> 00:01:39.806
+Keep high-cardinality values out of metric
+labels,
+
+35
+00:01:39.886 --> 00:01:43.640
+even when those values are acceptable in
+event logs or trace attributes.
+
+36
+00:01:43.720 --> 00:01:47.720
+Document field meaning, format,
+sensitivity, and retention expectations.
+
+37
+00:01:47.800 --> 00:01:51.061
+Structured logging preserves
+machine-readable boundaries,
+
+38
+00:01:51.141 --> 00:01:55.202
+but its security comes from both the
+structure and the decision to include only
+
+39
+00:01:55.282 --> 00:01:57.620
+fields with justified investigative value.

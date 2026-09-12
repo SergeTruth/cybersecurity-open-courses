@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.636
+Broad object updates can undo careful
+boundary design.
+
+2
+00:00:03.636 --> 00:00:06.588
+Assigning a request body onto an existing
+user
+
+3
+00:00:06.588 --> 00:00:10.093
+copies whatever fields the input supplies
+into that object.
+
+4
+00:00:10.093 --> 00:00:14.336
+Spreading the body into an update object
+also propagates its fields.
+
+5
+00:00:14.336 --> 00:00:16.734
+Recursive merges, class transformation,
+automatic entity
+
+6
+00:00:16.734 --> 00:00:19.409
+hydration, and object relational mapping
+helpers can
+
+7
+00:00:19.409 --> 00:00:21.808
+extend the effect into nested structures.
+
+8
+00:00:21.808 --> 00:00:24.851
+Review the destination and the copying
+behavior, not
+
+9
+00:00:24.851 --> 00:00:27.988
+just the presence of a validation call
+nearby.
+
+10
+00:00:27.988 --> 00:00:31.862
+Define a public input contract separately
+from the persistence entity.
+
+11
+00:00:31.862 --> 00:00:34.444
+Making every entity property optional does
+not
+
+12
+00:00:34.444 --> 00:00:37.212
+decide which fields a caller should
+control.
+
+13
+00:00:37.212 --> 00:00:40.440
+Internal roles, ownership, audit fields,
+and state flags
+
+14
+00:00:40.440 --> 00:00:43.576
+should not become public update options by
+accident.
+
+15
+00:00:43.576 --> 00:00:46.159
+Build the update explicitly from validated
+fields
+
+16
+00:00:46.159 --> 00:00:48.926
+and obtain protected values from trusted
+context.
+
+17
+00:00:48.926 --> 00:00:52.431
+Preserve the intended distinction between
+omitted and null values.
+
+18
+00:00:52.431 --> 00:00:55.937
+Explicit mapping makes the allowed
+mutation visible during review.
+
+19
+00:00:55.937 --> 00:00:59.442
+Coercion is a design choice that needs
+precise rules.
+
+20
+00:00:59.442 --> 00:01:03.223
+Converting a documented numeric string can
+be appropriate, but accepting
+
+21
+00:01:03.223 --> 00:01:06.729
+ambiguous input can change meaning before
+later checks run.
+
+22
+00:01:06.729 --> 00:01:10.510
+JavaScript treats the nonempty string
+false as truthy, so a
+
+23
+00:01:10.510 --> 00:01:14.385
+general boolean conversion does not
+implement a textual boolean contract.
+
+24
+00:01:14.385 --> 00:01:16.414
+Specify accepted spellings, numeric
+ranges,
+
+25
+00:01:16.414 --> 00:01:18.535
+precision requirements, and date formats.
+
+26
+00:01:18.535 --> 00:01:22.410
+Keep identifiers as strings when numeric
+conversion would lose information.
+
+27
+00:01:22.410 --> 00:01:25.546
+Validate the normalized result and test
+rejected forms.
+
+28
+00:01:25.546 --> 00:01:27.759
+Object keys also deserve attention when
+
+29
+00:01:27.759 --> 00:01:29.789
+data passes through generic utilities.
+
+30
+00:01:29.789 --> 00:01:32.371
+JSON parsing alone does not automatically
+pollute
+
+31
+00:01:32.371 --> 00:01:35.046
+prototypes; risks can arise when later
+copying
+
+32
+00:01:35.046 --> 00:01:37.814
+or merging interprets prototype sensitive
+keys unsafely.
+
+33
+00:01:37.814 --> 00:01:40.581
+Reject unsupported keys, constrain
+legitimate dictionaries, and
+
+34
+00:01:40.581 --> 00:01:43.348
+use suitable data only structures or maps.
+
+35
+00:01:43.348 --> 00:01:46.853
+These controls complement explicit mapping
+rather than replacing it.
+
+36
+00:01:46.853 --> 00:01:49.067
+A validated transfer object should remain
+
+37
+00:01:49.067 --> 00:01:51.465
+a small description of permitted input.
+
+38
+00:01:51.465 --> 00:01:55.155
+It should not acquire the ability to
+mutate an entire
+
+39
+00:01:55.155 --> 00:01:58.660
+model merely because a helper makes that
+operation convenient.
+

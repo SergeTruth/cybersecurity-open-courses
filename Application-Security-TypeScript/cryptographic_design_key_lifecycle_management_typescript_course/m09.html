@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="cryptographic-design-key-lifecycle-management-typescript">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="9"
+        data-total="9"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer all 10 questions. A score of 80% (8 of 10) passes. You may revise your answers and submit again.</p>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{"q1": "A", "q2": "B", "q3": "C", "q4": "D", "q5": "B", "q6": "D", "q7": "D", "q8": "B", "q9": "C", "q10": "A"}'
+        >
+          <fieldset class="quiz-question"><legend>1. Code review: A sensitive value is stored using this conversion. What protection does the conversion provide?<br><code>const stored = Buffer.from(secret, &quot;utf8&quot;).toString(&quot;base64&quot;);</code></legend>
+<label><input type="radio" name="q1" value="A" required> A. It changes the byte representation to text; confidentiality requires an appropriate encryption construction and controlled keys.</label>
+<label><input type="radio" name="q1" value="B" required> B. It provides one-way verification, so it can replace a password-hashing construction for stored passwords.</label>
+<label><input type="radio" name="q1" value="C" required> C. It provides confidentiality as long as the application keeps the original UTF-8 string out of the database.</label>
+<label><input type="radio" name="q1" value="D" required> D. It provides confidentiality and integrity because decoding requires knowledge of the original encoding.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>2. An application must keep stored fields confidential and detect changes before using them. Which design meets that requirement?</legend>
+<label><input type="radio" name="q2" value="A" required> A. Use confidentiality-only encryption and accept decrypted output whenever it can be parsed as valid JSON.</label>
+<label><input type="radio" name="q2" value="B" required> B. Use a vetted AEAD interface that authenticates ciphertext and expected context before releasing plaintext.</label>
+<label><input type="radio" name="q2" value="C" required> C. Use AEAD but stream provisional plaintext to the caller before checking the final authentication result.</label>
+<label><input type="radio" name="q2" value="D" required> D. Encrypt the field and store an ordinary unkeyed hash beside it as the sole check against unauthorized modification.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>3. Several workers encrypt different records with AES-GCM under the same key. What must their nonce design ensure?</legend>
+<label><input type="radio" name="q3" value="A" required> A. Each worker starts its own counter at zero, because process isolation gives identical counter values different meanings.</label>
+<label><input type="radio" name="q3" value="B" required> B. Every nonce is secret; repeating a nonce is acceptable when the ciphertext is stored in a private database.</label>
+<label><input type="radio" name="q3" value="C" required> C. Nonces are not reused under that key, accounting for all writers, restarts, recovery, and the construction&#x27;s usage limits.</label>
+<label><input type="radio" name="q3" value="D" required> D. The key-version label changes on restart, because a new label makes the same key and nonce combination distinct.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>4. Code review: What should replace this cryptographic-key generation approach?<br><code>const keyMaterial = Math.random().toString();</code></legend>
+<label><input type="radio" name="q4" value="A" required> A. Append the current timestamp and account ID so the string is different for each application request.</label>
+<label><input type="radio" name="q4" value="B" required> B. Hash the generated string once with SHA-256 so its length and appearance match the desired key format.</label>
+<label><input type="radio" name="q4" value="C" required> C. Generate a random UUID and use its text for every cipher, because secure identifiers satisfy every key-length contract.</label>
+<label><input type="radio" name="q4" value="D" required> D. Use the algorithm&#x27;s cryptographic key-generation mechanism with the required size and protect the generated material.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>5. Which design is appropriate for storing login-password verifiers?</legend>
+<label><input type="radio" name="q5" value="A" required> A. Encrypt each password with the application&#x27;s current data key, then decrypt it during every login attempt.</label>
+<label><input type="radio" name="q5" value="B" required> B. Use a maintained password-hashing construction with fresh salts, deliberately expensive parameters, and upgradeable metadata.</label>
+<label><input type="radio" name="q5" value="C" required> C. Use HKDF directly on each password, because general-purpose key derivation and expensive password hashing serve the same role.</label>
+<label><input type="radio" name="q5" value="D" required> D. Use a fast SHA-256 digest with a fresh salt, because salt alone supplies the computational cost needed for password storage.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>6. A service needs keys for encryption and an unrelated message-authentication protocol. Which approach supports purpose separation?</legend>
+<label><input type="radio" name="q6" value="A" required> A. Derive every role from the same root with identical KDF context so lifecycle management remains simple.</label>
+<label><input type="radio" name="q6" value="B" required> B. Use one key for all roles, then change its identifier whenever a different primitive is invoked.</label>
+<label><input type="radio" name="q6" value="C" required> C. Use the same key bytes and rely on different TypeScript type aliases to isolate the cryptographic roles.</label>
+<label><input type="radio" name="q6" value="D" required> D. Use separate random keys or reviewed context-separated derivation from strong secret material, with distinct purpose labels.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>7. What is a practical benefit and limitation of envelope encryption?</legend>
+<label><input type="radio" name="q7" value="A" required> A. The KEK never leaves managed infrastructure, which means no plaintext data key can ever enter application memory.</label>
+<label><input type="radio" name="q7" value="B" required> B. The wrapped DEK lets the application decrypt data without any separately controlled key service or key authority.</label>
+<label><input type="radio" name="q7" value="C" required> C. Rotating the KEK automatically generates new DEKs and re-encrypts every existing data record without migration work.</label>
+<label><input type="radio" name="q7" value="D" required> D. A managed KEK can protect wrapped data keys while local cryptography still exposes plaintext DEKs transiently in application memory.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>8. How should encrypted records identify the format and historical key needed for decryption?</legend>
+<label><input type="radio" name="q8" value="A" required> A. Store the key&#x27;s filesystem path or secret-service URL and follow it directly whenever the record is read.</label>
+<label><input type="radio" name="q8" value="B" required> B. Store version metadata and resolve it through an approved, purpose-restricted registry; authenticate before trusting the decrypted result.</label>
+<label><input type="radio" name="q8" value="C" required> C. Omit key metadata and try every key available to the service, accepting the first result that looks like plaintext.</label>
+<label><input type="radio" name="q8" value="D" required> D. Store any algorithm name and key identifier the record supplies so decryption can discover new configurations automatically.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>9. The current encryption key changes from v1 to v2. What happens to existing v1 ciphertext?</legend>
+<label><input type="radio" name="q9" value="A" required> A. The old key can be destroyed immediately because its retirement automatically rewrites stored ciphertext and backups.</label>
+<label><input type="radio" name="q9" value="B" required> B. An alias change alone rewraps every data key and removes any exposure from copies of the old key and ciphertext.</label>
+<label><input type="radio" name="q9" value="C" required> C. It remains bound to v1 until deliberately migrated; approved historical decryption may remain available while new writes use v2.</label>
+<label><input type="radio" name="q9" value="D" required> D. Changing the current key makes v1 records decrypt with v2 because rotation preserves the logical encryption purpose.</label>
+</fieldset>
+<fieldset class="quiz-question"><legend>10. Authenticated decryption succeeds. What must happen before a remote requester receives the plaintext?</legend>
+<label><input type="radio" name="q10" value="A" required> A. Confirm the requester is authorized for the actual resource and context, and avoid exposing plaintext or key material in telemetry.</label>
+<label><input type="radio" name="q10" value="B" required> B. Return it whenever the service has KMS permission, because service key access is equivalent to every caller&#x27;s record authorization.</label>
+<label><input type="radio" name="q10" value="C" required> C. Return it if the ciphertext included a tenant ID, even when that ID has not been checked against trusted request context.</label>
+<label><input type="radio" name="q10" value="D" required> D. Return the plaintext because successful authentication of the ciphertext establishes the requester&#x27;s access rights.</label>
+</fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m08.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m09.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

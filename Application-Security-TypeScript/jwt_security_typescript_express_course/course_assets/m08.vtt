@@ -1,0 +1,197 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.820
+Treat JWT handling as a security
+
+2
+00:00:02.820 --> 00:00:05.333
+boundary with an explicit acceptance
+policy.
+
+3
+00:00:05.333 --> 00:00:08.233
+A readable payload is merely decoded
+input.
+
+4
+00:00:08.233 --> 00:00:11.423
+Base64url encoding is not encryption, and
+a successful
+
+5
+00:00:11.423 --> 00:00:14.323
+signature check is not complete token
+validation.
+
+6
+00:00:14.323 --> 00:00:17.416
+The verifier must use trusted key material
+and
+
+7
+00:00:17.416 --> 00:00:20.703
+enforce the algorithm family configured
+for the issuer.
+
+8
+00:00:20.703 --> 00:00:23.893
+Issuer and audience answer different
+questions: who issued
+
+9
+00:00:23.893 --> 00:00:27.276
+the assertion, and which recipient should
+accept it.
+
+10
+00:00:27.276 --> 00:00:28.243
+Validate both.
+
+11
+00:00:28.243 --> 00:00:31.046
+Require expiration for access tokens,
+respect not-before
+
+12
+00:00:31.046 --> 00:00:34.042
+restrictions, and use only justified clock
+tolerance.
+
+13
+00:00:34.042 --> 00:00:36.942
+Issued-at records issuance time rather
+than expiry.
+
+14
+00:00:36.942 --> 00:00:39.746
+A JWT identifier can support tracking, but
+
+15
+00:00:39.746 --> 00:00:42.646
+its presence alone does not prevent
+replay.
+
+16
+00:00:42.646 --> 00:00:44.385
+Keep token purposes distinct.
+
+17
+00:00:44.385 --> 00:00:47.962
+Access tokens belong at their intended
+APIs; refresh tokens
+
+18
+00:00:47.962 --> 00:00:51.635
+belong in the refresh flow with stronger
+lifecycle controls.
+
+19
+00:00:51.635 --> 00:00:55.695
+Other signed token classes must meet their
+own acceptance rules.
+
+20
+00:00:55.695 --> 00:00:58.885
+Key selection is also constrained:
+token-provided identifiers can
+
+21
+00:00:58.885 --> 00:01:01.688
+select candidates within trusted
+configuration, never establish
+
+22
+00:01:01.688 --> 00:01:04.975
+a new key source or trigger arbitrary
+retrieval.
+
+23
+00:01:04.975 --> 00:01:08.648
+In Express, verify first, validate
+required runtime claim shapes
+
+24
+00:01:08.648 --> 00:01:12.418
+and meanings, and then create the minimum
+authenticated context.
+
+25
+00:01:12.418 --> 00:01:15.318
+TypeScript types do not perform those
+checks.
+
+26
+00:01:15.318 --> 00:01:17.541
+Authentication precedes object, tenant,
+scope,
+
+27
+00:01:17.541 --> 00:01:19.861
+role, ownership, and business
+authorization.
+
+28
+00:01:19.861 --> 00:01:23.341
+Decide how fresh authorization state must
+be for each
+
+29
+00:01:23.341 --> 00:01:27.014
+operation instead of assuming signed
+claims remain current indefinitely.
+
+30
+00:01:27.014 --> 00:01:29.141
+Operational controls complete the design.
+
+31
+00:01:29.141 --> 00:01:32.234
+Protect browser storage and transport
+according to the
+
+32
+00:01:32.234 --> 00:01:35.521
+threat model, keep credentials out of
+telemetry, and
+
+33
+00:01:35.521 --> 00:01:39.097
+plan refresh, key rotation, revocation,
+and dependency failures.
+
+34
+00:01:39.097 --> 00:01:43.157
+Local logout is not automatic invalidation
+of all issued tokens.
+
+35
+00:01:43.157 --> 00:01:46.830
+Test rejected tokens and denied access
+alongside successful requests.
+
+36
+00:01:46.830 --> 00:01:50.310
+Trust a JWT only after the server has
+verified
+
+37
+00:01:50.310 --> 00:01:53.500
+who protected it, confirmed that it was
+issued
+
+38
+00:01:53.500 --> 00:01:57.077
+for this application and purpose,
+established that it is
+
+39
+00:01:57.077 --> 00:02:00.267
+currently valid, and translated its claims
+into the
+
+40
+00:02:00.267 --> 00:02:03.940
+minimum authenticated context needed for a
+separate authorization decision.
+

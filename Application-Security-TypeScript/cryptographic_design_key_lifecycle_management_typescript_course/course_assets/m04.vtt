@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.639
+A human password has a different
+
+2
+00:00:02.639 --> 00:00:05.313
+security profile from a randomly generated
+key.
+
+3
+00:00:05.313 --> 00:00:08.343
+Password choices have limited, uneven
+entropy, so storing
+
+4
+00:00:08.343 --> 00:00:11.373
+an ordinary fast digest leaves
+verification guesses inexpensive.
+
+5
+00:00:11.373 --> 00:00:14.226
+Password storage should use a dedicated
+construction such
+
+6
+00:00:14.226 --> 00:00:16.810
+as Argon2id or scrypt, with a fresh
+
+7
+00:00:16.810 --> 00:00:19.840
+salt for each password and deliberately
+expensive computation.
+
+8
+00:00:19.840 --> 00:00:23.406
+Select supported parameters for the
+deployment and benchmark them under
+
+9
+00:00:23.406 --> 00:00:26.792
+realistic load rather than copying an
+unexplained cost setting.
+
+10
+00:00:26.792 --> 00:00:29.288
+Salts are normally stored with the
+password
+
+11
+00:00:29.288 --> 00:00:31.962
+hash and its algorithm and cost metadata.
+
+12
+00:00:31.962 --> 00:00:36.418
+They are not secret encryption keys and do
+not encrypt the password.
+
+13
+00:00:36.418 --> 00:00:38.914
+Their purpose includes making otherwise
+identical passwords
+
+14
+00:00:38.914 --> 00:00:41.053
+have distinct stored results and
+preventing
+
+15
+00:00:41.053 --> 00:00:43.726
+useful sharing of precomputed work across
+accounts.
+
+16
+00:00:43.726 --> 00:00:45.865
+Let a maintained password hashing
+interface
+
+17
+00:00:45.865 --> 00:00:48.183
+generate and encode the required salt.
+
+18
+00:00:48.183 --> 00:00:50.322
+Preserve versioned parameters so
+successful verification
+
+19
+00:00:50.322 --> 00:00:52.996
+can trigger an upgrade when policy
+changes.
+
+20
+00:00:52.996 --> 00:00:57.095
+Password based key derivation is related
+but serves a different purpose.
+
+21
+00:00:57.095 --> 00:01:01.463
+If the application truly needs a key
+derived from a human password,
+
+22
+00:01:01.463 --> 00:01:06.454
+use a password KDF with an appropriate
+salt, work factors, and output length.
+
+23
+00:01:06.454 --> 00:01:11.267
+This does not turn a weak password into a
+high entropy random secret.
+
+24
+00:01:11.267 --> 00:01:14.119
+Password changes and recovery must be
+designed around
+
+25
+00:01:14.119 --> 00:01:17.060
+how the resulting key protects data,
+because changing
+
+26
+00:01:17.060 --> 00:01:20.090
+the password can otherwise make earlier
+ciphertext inaccessible.
+
+27
+00:01:20.090 --> 00:01:23.833
+Deriving subkeys from strong secret key
+material is another case.
+
+28
+00:01:23.833 --> 00:01:28.201
+A construction such as HKDF can produce
+context separated keys, but it
+
+29
+00:01:28.201 --> 00:01:32.657
+is not an expensive password hashing
+function and does not replace one.
+
+30
+00:01:32.657 --> 00:01:35.955
+Domain separation gives different roles
+explicit context, such as
+
+31
+00:01:35.955 --> 00:01:39.341
+encryption versus message authentication
+or one protocol versus another.
+
+32
+00:01:39.341 --> 00:01:41.481
+Use independently generated keys or a
+
+33
+00:01:41.481 --> 00:01:44.154
+reviewed derivation scheme with distinct
+purpose labels.
+
+34
+00:01:44.154 --> 00:01:45.759
+Separate environments as well.
+
+35
+00:01:45.759 --> 00:01:48.254
+Reusing one key everywhere makes unrelated
+cryptographic
+
+36
+00:01:48.254 --> 00:01:51.106
+roles share failure and lifecycle
+assumptions that the
+
+37
+00:01:51.106 --> 00:01:53.780
+application may never have intended to
+connect.
+

@@ -1,0 +1,204 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.692
+Malware scanning can reduce risk in
+document repositories,
+
+2
+00:00:03.692 --> 00:00:06.690
+enterprise attachments, and files
+exchanged between users.
+
+3
+00:00:06.690 --> 00:00:09.495
+Its usefulness depends on the threat
+model,
+
+4
+00:00:09.495 --> 00:00:12.590
+scanner coverage, definition updates, and
+operational reliability.
+
+5
+00:00:12.590 --> 00:00:16.071
+Scanners can miss threats, fail, or time
+out.
+
+6
+00:00:16.071 --> 00:00:19.553
+Treat a clean result as one check in a
+
+7
+00:00:19.553 --> 00:00:23.132
+broader acceptance policy, with a defined
+meaning and a
+
+8
+00:00:23.132 --> 00:00:26.807
+recorded result for the particular object
+that was examined.
+
+9
+00:00:26.807 --> 00:00:29.999
+When required checks happen
+asynchronously, receive into restricted
+
+10
+00:00:29.999 --> 00:00:32.900
+quarantine storage and track an explicit
+state.
+
+11
+00:00:32.900 --> 00:00:36.189
+Validate the file, perform required
+scanning or transformation,
+
+12
+00:00:36.189 --> 00:00:39.090
+then promote only after the checks
+succeed.
+
+13
+00:00:39.090 --> 00:00:41.798
+A mandatory scanner outage must leave the
+
+14
+00:00:41.798 --> 00:00:44.700
+object unavailable rather than silently
+approving it.
+
+15
+00:00:44.700 --> 00:00:47.408
+Tie results and promotion to an immutable
+
+16
+00:00:47.408 --> 00:00:50.309
+object version or another reliable content
+identity.
+
+17
+00:00:50.309 --> 00:00:53.501
+Otherwise, replacing bytes after
+inspection can separate the
+
+18
+00:00:53.501 --> 00:00:57.176
+published object from the evidence used to
+approve it.
+
+19
+00:00:57.176 --> 00:00:58.917
+Authorization continues after upload.
+
+20
+00:00:58.917 --> 00:01:02.786
+Replacing, viewing, downloading, deleting,
+and sharing an attachment each
+
+21
+00:01:02.786 --> 00:01:06.461
+require the appropriate permission for its
+resource and tenant.
+
+22
+00:01:06.461 --> 00:01:08.782
+Resolve ownership from trusted records and
+
+23
+00:01:08.782 --> 00:01:11.297
+recheck it where the operation occurs.
+
+24
+00:01:11.297 --> 00:01:13.715
+Handle retries and cleanup deliberately:
+interrupted
+
+25
+00:01:13.715 --> 00:01:16.713
+uploads, abandoned multipart sessions,
+failed processors, and
+
+26
+00:01:16.713 --> 00:01:19.228
+rejected files should not accumulate
+forever.
+
+27
+00:01:19.228 --> 00:01:22.420
+Cleanup must target only the failed
+operation's objects,
+
+28
+00:01:22.420 --> 00:01:26.095
+and its own failures need recovery or
+operational visibility.
+
+29
+00:01:26.095 --> 00:01:28.996
+Test the complete lifecycle through real
+adapters.
+
+30
+00:01:28.996 --> 00:01:31.898
+Cover oversized requests, excessive file
+counts, unsupported
+
+31
+00:01:31.898 --> 00:01:34.413
+formats, extension and content mismatches,
+malformed
+
+32
+00:01:34.413 --> 00:01:37.507
+files, filename edge cases, and
+replacement collisions.
+
+33
+00:01:37.507 --> 00:01:40.699
+Include unauthorized targets and cross
+tenant downloads, escaped
+
+34
+00:01:40.699 --> 00:01:44.471
+archive destinations, excessive expansion
+or dimensions, processor timeouts, scanner
+
+35
+00:01:44.471 --> 00:01:47.953
+failure, unsafe response types, and
+partial upload cleanup.
+
+36
+00:01:47.953 --> 00:01:50.274
+Assert that rejected or pending objects
+
+37
+00:01:50.274 --> 00:01:52.402
+are neither published nor retrievable.
+
+38
+00:01:52.402 --> 00:01:55.207
+Trace the request through parsing and
+limits,
+
+39
+00:01:55.207 --> 00:01:58.592
+authorization, validation, storage,
+processing, publication, and download.
+
+40
+00:01:58.592 --> 00:02:01.687
+This review exposes gaps that a successful
+upload
+
+41
+00:02:01.687 --> 00:02:04.492
+response cannot reveal, especially when
+background workers
+
+42
+00:02:04.492 --> 00:02:07.780
+and object storage participate in the same
+operation.
+

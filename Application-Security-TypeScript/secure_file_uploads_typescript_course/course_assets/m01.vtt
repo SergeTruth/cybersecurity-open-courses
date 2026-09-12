@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.392
+A file upload introduces untrusted content
+and untrusted
+
+2
+00:00:03.392 --> 00:00:06.104
+metadata into several parts of an
+application.
+
+3
+00:00:06.104 --> 00:00:09.177
+Receiving the HTTP request is only the
+beginning.
+
+4
+00:00:09.177 --> 00:00:11.889
+Multipart parsing separates fields and
+file streams.
+
+5
+00:00:11.889 --> 00:00:14.962
+Temporary storage or memory buffering
+holds the bytes.
+
+6
+00:00:14.962 --> 00:00:17.673
+Validation classifies them, persistence
+assigns ownership, and
+
+7
+00:00:17.673 --> 00:00:20.566
+processors may decode, transform, or scan
+them.
+
+8
+00:00:20.566 --> 00:00:22.825
+Later, a download endpoint or public
+
+9
+00:00:22.825 --> 00:00:25.537
+delivery service interprets the stored
+record again.
+
+10
+00:00:25.537 --> 00:00:28.249
+Each transition needs an explicit trust
+decision.
+
+11
+00:00:28.249 --> 00:00:31.412
+The original filename, extension, declared
+media type, and
+
+12
+00:00:31.412 --> 00:00:34.124
+claimed size all come from the sender.
+
+13
+00:00:34.124 --> 00:00:37.197
+So do the file contents, embedded
+metadata, archive
+
+14
+00:00:37.197 --> 00:00:40.722
+entry names, and any submitted tenant or
+destination identifiers.
+
+15
+00:00:40.722 --> 00:00:44.970
+Authentication identifies a caller; it
+does not make those values reliable.
+
+16
+00:00:44.970 --> 00:00:46.778
+TypeScript interfaces and assertions also
+
+17
+00:00:46.778 --> 00:00:48.766
+provide no runtime file validation.
+
+18
+00:00:48.766 --> 00:00:51.297
+Renaming a request object to a trusted
+
+19
+00:00:51.297 --> 00:00:53.828
+upload type changes the compiler's
+assumptions without
+
+20
+00:00:53.828 --> 00:00:56.540
+changing the evidence available to the
+service.
+
+21
+00:00:56.540 --> 00:01:00.155
+Writing a file buffer to a path formed
+from an
+
+22
+00:01:00.155 --> 00:01:03.951
+upload directory and the original filename
+hides several independent assumptions.
+
+23
+00:01:03.951 --> 00:01:06.934
+It assumes the filename chooses an
+acceptable destination,
+
+24
+00:01:06.934 --> 00:01:09.465
+the resulting path stays inside the
+intended
+
+25
+00:01:09.465 --> 00:01:12.628
+root, and an existing object may be
+overwritten.
+
+26
+00:01:12.628 --> 00:01:16.696
+It also assumes the full buffer fits
+safely in memory, the
+
+27
+00:01:16.696 --> 00:01:20.944
+format is permitted, and future consumers
+can handle the stored bytes.
+
+28
+00:01:20.944 --> 00:01:24.650
+A path joining function does not establish
+those guarantees, and
+
+29
+00:01:24.650 --> 00:01:28.446
+a successful write establishes none of the
+missing file checks.
+
+30
+00:01:28.446 --> 00:01:31.519
+Design the pipeline so those decisions
+remain visible.
+
+31
+00:01:31.519 --> 00:01:34.592
+Authorize the intended operation,
+constrain incoming work, validate
+
+32
+00:01:34.592 --> 00:01:37.575
+the supported file class, assign storage
+identity on
+
+33
+00:01:37.575 --> 00:01:40.739
+the server, and isolate content from
+application code.
+
+34
+00:01:40.739 --> 00:01:43.812
+Then control every later use of the bytes.
+
+35
+00:01:43.812 --> 00:01:46.071
+Temporary files need the same path,
+
+36
+00:01:46.071 --> 00:01:48.873
+permission, and cleanup discipline as
+permanent objects.
+
+37
+00:01:48.873 --> 00:01:51.766
+Public availability should be a deliberate
+state reached
+
+38
+00:01:51.766 --> 00:01:54.387
+after required checks, rather than an
+accidental
+
+39
+00:01:54.387 --> 00:01:57.460
+consequence of where an upload happened to
+land.
+

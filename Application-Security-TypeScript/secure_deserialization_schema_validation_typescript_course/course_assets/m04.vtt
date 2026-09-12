@@ -1,0 +1,196 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.689
+Structural validation establishes that a
+value
+
+2
+00:00:02.689 --> 00:00:05.061
+has the expected arrangement and
+representations.
+
+3
+00:00:05.061 --> 00:00:07.251
+Semantic validation establishes that those
+values
+
+4
+00:00:07.251 --> 00:00:09.623
+make sense for the requested operation.
+
+5
+00:00:09.623 --> 00:00:13.089
+Two individually valid dates can describe
+a reversed interval.
+
+6
+00:00:13.089 --> 00:00:15.279
+A positive integer can exceed the
+
+7
+00:00:15.279 --> 00:00:17.650
+permitted quantity for a particular
+account.
+
+8
+00:00:17.650 --> 00:00:21.117
+Two recognized options can be incompatible
+when selected together.
+
+9
+00:00:21.117 --> 00:00:24.036
+These are domain rules that require more
+than
+
+10
+00:00:24.036 --> 00:00:26.773
+successful parsing or a matching field
+type.
+
+11
+00:00:26.773 --> 00:00:30.969
+Keep the layers visible without forcing
+every rule into one schema.
+
+12
+00:00:30.969 --> 00:00:33.889
+A local refinement can express a
+relationship between
+
+13
+00:00:33.889 --> 00:00:36.625
+fields when it needs no external context.
+
+14
+00:00:36.625 --> 00:00:40.457
+Rules involving account settings, current
+resource state, or other records
+
+15
+00:00:40.457 --> 00:00:44.653
+usually belong in a service that has the
+required trusted information.
+
+16
+00:00:44.653 --> 00:00:48.029
+This separation also helps control
+database work: reject invalid
+
+17
+00:00:48.029 --> 00:00:51.404
+structure before issuing expensive
+lookups, and avoid turning a
+
+18
+00:00:51.404 --> 00:00:54.871
+reusable schema into a hidden collection
+of remote operations.
+
+19
+00:00:54.871 --> 00:00:56.878
+Authorization remains a distinct
+responsibility.
+
+20
+00:00:56.878 --> 00:00:59.432
+A project identifier can have perfect
+syntax
+
+21
+00:00:59.432 --> 00:01:02.169
+and still refer to another tenant's
+project.
+
+22
+00:01:02.169 --> 00:01:05.088
+A requested role can be a valid
+enumeration
+
+23
+00:01:05.088 --> 00:01:08.555
+member while the caller lacks permission
+to assign it.
+
+24
+00:01:08.555 --> 00:01:11.109
+Derive the actor and tenant context from
+
+25
+00:01:11.109 --> 00:01:13.846
+the authenticated session or other
+verified credentials.
+
+26
+00:01:13.846 --> 00:01:17.677
+Enforce the relevant permission against
+the actual resource and operation.
+
+27
+00:01:17.677 --> 00:01:20.323
+A schema validates a submitted claim; it
+
+28
+00:01:20.323 --> 00:01:23.059
+does not establish ownership or grant
+authority.
+
+29
+00:01:23.059 --> 00:01:25.249
+Persistence introduces another boundary
+because trusted
+
+30
+00:01:25.249 --> 00:01:27.986
+state can change between checking and
+writing.
+
+31
+00:01:27.986 --> 00:01:30.540
+An allowed state transition observed
+earlier may
+
+32
+00:01:30.540 --> 00:01:33.277
+no longer be allowed at commit time.
+
+33
+00:01:33.277 --> 00:01:36.287
+Preserve critical invariants with suitable
+database constraints, conditional
+
+34
+00:01:36.287 --> 00:01:39.936
+writes, or transactions, and handle a
+rejected commit explicitly.
+
+35
+00:01:39.936 --> 00:01:43.403
+The service should consume validated
+input, obtain permitted context,
+
+36
+00:01:43.403 --> 00:01:46.961
+apply domain rules, and commit only an
+authorized transition.
+
+37
+00:01:46.961 --> 00:01:49.697
+Keep failures controlled and stop further
+effects.
+
+38
+00:01:49.697 --> 00:01:52.617
+This layered design makes it possible to
+review
+
+39
+00:01:52.617 --> 00:01:55.718
+what the schema guarantees, what the
+service establishes,
+
+40
+00:01:55.718 --> 00:01:58.820
+and what storage must enforce under
+concurrent requests.
+

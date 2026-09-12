@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Secure Logging and Telemetry with TypeScript</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="secure-logging-telemetry-typescript">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section id="module-meta" data-module="9" data-total="9" data-quiz="true" aria-labelledby="module-title">
+        <header class="card title-card">
+          <h1 id="module-title" data-module-title-target>Final Quiz</h1>
+        </header>
+
+        <section class="card" aria-labelledby="quiz-heading">
+          <h2 id="quiz-heading">Assessment</h2>
+          <form
+            id="quiz-form"
+            class="quiz-form"
+            data-passing-score="80"
+            data-answer-key='{&quot;q1&quot;:&quot;b&quot;,&quot;q2&quot;:&quot;d&quot;,&quot;q3&quot;:&quot;a&quot;,&quot;q4&quot;:&quot;c&quot;,&quot;q5&quot;:&quot;b&quot;,&quot;q6&quot;:&quot;d&quot;,&quot;q7&quot;:&quot;a&quot;,&quot;q8&quot;:&quot;c&quot;,&quot;q9&quot;:&quot;b&quot;,&quot;q10&quot;:&quot;d&quot;}'
+          >
+            <fieldset class="quiz-question">
+              <legend>1. Why does logging an entire Express request object create unnecessary security risk?</legend>
+              <label class="quiz-choice"><input type="radio" name="q1" value="a" required> It prevents the application from assigning a request identifier.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="b"> It can serialize headers, cookies, bodies, framework internals, and future properties that were never approved for telemetry.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="c"> It makes every event impossible for a structured logger to serialize.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="d"> It removes all stack traces from unexpected errors.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>2. What is the main advantage of mapping an authorization event into explicit structured fields?</legend>
+              <label class="quiz-choice"><input type="radio" name="q2" value="a" required> Every field becomes non-sensitive as soon as it is encoded as JSON.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="b"> The event no longer needs access controls or a retention policy.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="c"> User-controlled input can safely determine the event name and severity.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="d"> Stable names and field boundaries support reliable analysis while making collected data explicit and reviewable.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>3. Why should bearer tokens normally be excluded from application telemetry?</legend>
+              <label class="quiz-choice"><input type="radio" name="q3" value="a" required> They are reusable credentials whose disclosure can enable access, while their raw value usually adds little investigative benefit.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="b"> Their presence prevents timestamps from being indexed.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="c"> They are useful only when recorded at debug severity.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="d"> They cannot be represented by TypeScript string values.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>4. Why is data minimization generally stronger than collecting arbitrary objects and relying only on redaction?</legend>
+              <label class="quiz-choice"><input type="radio" name="q4" value="a" required> Minimization automatically anonymizes every identifier that remains.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="b"> Redaction cannot be used by structured logging libraries.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="c"> Unnecessary values never enter serializers or exporters, while redaction rules can miss aliases, nesting, and newly added fields.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="d"> Minimization requires retaining all request bodies for a shorter period.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>5. Which statement accurately describes structured logging as a defense against log injection?</legend>
+              <label class="quiz-choice"><input type="radio" name="q5" value="a" required> It guarantees that every downstream dashboard renders untrusted fields safely.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="b"> It preserves clearer data boundaries, but values still require bounds and downstream consumers must encode them for their output format.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="c"> It is secure only when clients choose their own severity values.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="d"> It eliminates the need to review delimited exports and HTML log viewers.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>6. How should an API handle an inbound request ID used for telemetry correlation?</legend>
+              <label class="quiz-choice"><input type="radio" name="q6" value="a" required> Treat it as authenticated identity because it arrived in a standard header.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="b"> Use it unchanged as a globally unique key in every service.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="c"> Copy the entire header collection so investigators can choose an ID later.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="d"> Validate and bound it, and normalize or replace it according to the tracing design, often using a server-generated primary ID.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>7. Why might a successful privileged administrative operation require security telemetry?</legend>
+              <label class="quiz-choice"><input type="radio" name="q7" value="a" required> Investigations and audits may need evidence of completed high-impact changes, including actions performed by compromised authorized accounts.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="b"> Every successful operation should be emitted at the highest severity.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="c"> Success events prove that the actor's correlation ID was authentic.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="d"> Recording success removes the need to log authorization denials.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>8. Which treatment of stack traces is most appropriate?</legend>
+              <label class="quiz-choice"><input type="radio" name="q8" value="a" required> Return complete stacks to clients so they can diagnose unexpected failures.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="b"> Prohibit stacks from every environment and telemetry destination.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="c"> Retain useful stacks for unexpected defects in controlled internal diagnostics, while excluding them from routine client responses.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="d"> Attach stacks to all validation rejections at high severity.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>9. Why is ordinary centralized logging not automatically tamper-proof audit storage?</legend>
+              <label class="quiz-choice"><input type="radio" name="q9" value="a" required> Central systems cannot implement access controls or backups.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="b"> Centralization can improve collection and resist casual local alteration, but stronger integrity and delivery guarantees require explicit design and controls.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="c"> Audit records must always remain in mutable files on each application host.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="d"> A centralized system cannot retain structured events.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>10. Which test best detects accidental collection when a new secret-bearing request property is introduced?</legend>
+              <label class="quiz-choice"><input type="radio" name="q10" value="a" required> Verify only that the logger's information method was called once.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="b"> Check that the HTTP response still has the expected status code.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="c"> Confirm that a TypeScript type assertion compiles without errors.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="d"> Capture the serialized event and assert that required fields are present while the new property and its value are absent.</label>
+            </fieldset>
+
+            <button id="submit-quiz" type="submit">Submit Quiz</button>
+            <p id="quiz-result" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <nav class="nav module-nav" aria-label="Module navigation">
+          <a id="previous-module" class="btn secondary" href="#" data-preview-href="m08.html">Previous</a>
+        </nav>
+        <footer class="slide-status-footer" role="status" aria-live="polite">
+          <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+        </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m09.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

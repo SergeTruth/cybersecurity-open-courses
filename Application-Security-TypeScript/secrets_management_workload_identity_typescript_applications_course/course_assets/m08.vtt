@@ -1,0 +1,205 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.128
+Review a TypeScript application's
+credential design as a lifecycle.
+
+2
+00:00:04.128 --> 00:00:08.043
+Begin with the capabilities it needs, the
+identity that should
+
+3
+00:00:08.043 --> 00:00:11.767
+exercise them, and the resources that
+identity may reach.
+
+4
+00:00:11.767 --> 00:00:14.058
+Follow each credential from provisioning
+through
+
+5
+00:00:14.058 --> 00:00:16.827
+delivery, runtime use, renewal, and
+revocation.
+
+6
+00:00:16.827 --> 00:00:19.119
+This reveals unnecessary copies and
+authority
+
+7
+00:00:19.119 --> 00:00:21.601
+that a storage-only review can miss.
+
+8
+00:00:21.601 --> 00:00:24.084
+Treat reusable secrets as portable
+authority.
+
+9
+00:00:24.084 --> 00:00:26.757
+Eliminate permanent application keys where
+workload identity
+
+10
+00:00:26.757 --> 00:00:29.526
+is supported, and let platform credential
+providers
+
+11
+00:00:29.526 --> 00:00:32.486
+obtain and refresh narrowly scoped,
+short-lived credentials.
+
+12
+00:00:32.486 --> 00:00:34.873
+Identity establishes the requesting
+workload; authorization
+
+13
+00:00:34.873 --> 00:00:36.973
+remains a separate least-privilege
+decision.
+
+14
+00:00:36.973 --> 00:00:40.411
+A service identity is not a reason to
+grant
+
+15
+00:00:40.411 --> 00:00:44.134
+administrative access, and temporary
+credentials remain sensitive while valid.
+
+16
+00:00:44.134 --> 00:00:46.521
+For credentials that remain necessary,
+managed
+
+17
+00:00:46.521 --> 00:00:49.386
+storage controls custody without
+eliminating the secret.
+
+18
+00:00:49.386 --> 00:00:52.441
+Prefer workload identity to solve the
+store's authentication
+
+19
+00:00:52.441 --> 00:00:55.401
+bootstrap, then restrict access to
+specific secrets.
+
+20
+00:00:55.401 --> 00:00:57.788
+Environment variables deliver
+configuration; they do
+
+21
+00:00:57.788 --> 00:01:00.270
+not supply secret management by
+themselves.
+
+22
+00:01:00.270 --> 00:01:03.039
+Keep confidential values out of source
+control,
+
+23
+00:01:03.039 --> 00:01:06.190
+logs, images, build artifacts, and browser
+bundles.
+
+24
+00:01:06.190 --> 00:01:08.577
+Secret scanning detects some mistakes,
+while
+
+25
+00:01:08.577 --> 00:01:11.441
+prevention reduces the opportunities to
+make them.
+
+26
+00:01:11.441 --> 00:01:13.924
+Design rotation together with consumer
+refresh.
+
+27
+00:01:13.924 --> 00:01:16.597
+Replacing a stored value and making a
+
+28
+00:01:16.597 --> 00:01:19.462
+running process use it are distinct
+operations.
+
+29
+00:01:19.462 --> 00:01:21.944
+Bound caches, renew expiring credentials,
+and
+
+30
+00:01:21.944 --> 00:01:24.809
+account for connection pools and
+revocation behavior.
+
+31
+00:01:24.809 --> 00:01:27.959
+Use bounded failure handling when
+dependencies are unavailable,
+
+32
+00:01:27.959 --> 00:01:31.588
+without falling back to permanent or more
+privileged credentials.
+
+33
+00:01:31.588 --> 00:01:34.739
+Keep developer identity distinct from
+workload identity, and
+
+34
+00:01:34.739 --> 00:01:38.367
+separate development, test, staging,
+production, and deployment authority.
+
+35
+00:01:38.367 --> 00:01:41.518
+Verify provider precedence and the
+effective principal, then
+
+36
+00:01:41.518 --> 00:01:44.764
+test denied access as carefully as
+successful requests.
+
+37
+00:01:44.764 --> 00:01:47.819
+Assign ownership for renewal and incident
+response so
+
+38
+00:01:47.819 --> 00:01:50.684
+that the design remains operable after
+release.
+
+39
+00:01:50.684 --> 00:01:54.121
+The strongest secret is often the one the
+application
+
+40
+00:01:54.121 --> 00:01:57.176
+no longer needs because the runtime can
+prove
+
+41
+00:01:57.176 --> 00:02:00.900
+its identity and obtain narrowly scoped,
+short-lived authority instead.
+

@@ -1,0 +1,185 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.876
+Authentication identifies the requester
+under a particular token policy.
+
+2
+00:00:03.876 --> 00:00:06.008
+Authorization decides whether that
+requester may
+
+3
+00:00:06.008 --> 00:00:08.673
+perform this operation on this resource
+now.
+
+4
+00:00:08.673 --> 00:00:12.137
+A valid access token may carry subject,
+tenant, roles,
+
+5
+00:00:12.137 --> 00:00:15.068
+and scopes, but none of those facts
+automatically
+
+6
+00:00:15.068 --> 00:00:18.444
+grants access to every object reachable
+through the API.
+
+7
+00:00:18.444 --> 00:00:22.175
+Enforce permissions where the requested
+action and resource are known.
+
+8
+00:00:22.175 --> 00:00:25.018
+A read scope may allow an API operation
+
+9
+00:00:25.018 --> 00:00:28.393
+while resource ownership still restricts
+which records are visible.
+
+10
+00:00:28.393 --> 00:00:32.835
+Role checks may need to account for tenant
+membership or workflow state.
+
+11
+00:00:32.835 --> 00:00:35.766
+Apply the narrowest permissions
+appropriate to the operation,
+
+12
+00:00:35.766 --> 00:00:38.431
+including background actions triggered by
+a request.
+
+13
+00:00:38.431 --> 00:00:40.741
+Tenant scoping belongs in resource access.
+
+14
+00:00:40.741 --> 00:00:43.584
+The conceptual lookup combines the
+requested project identifier
+
+15
+00:00:43.584 --> 00:00:46.604
+with the tenant from the validated
+authentication context.
+
+16
+00:00:46.604 --> 00:00:49.446
+This prevents a lookup from treating an
+authenticated
+
+17
+00:00:49.446 --> 00:00:52.111
+request as permission to search all
+tenants.
+
+18
+00:00:52.111 --> 00:00:54.243
+The route still needs its required
+
+19
+00:00:54.243 --> 00:00:56.908
+scope and any ownership or business-rule
+checks.
+
+20
+00:00:56.908 --> 00:00:59.040
+A missing or inaccessible result should
+
+21
+00:00:59.040 --> 00:01:01.350
+use the application's consistent
+disclosure policy.
+
+22
+00:01:01.350 --> 00:01:04.193
+A signed tenant claim is usable only if
+
+23
+00:01:04.193 --> 00:01:07.035
+the trusted issuer is authorized to assert
+that
+
+24
+00:01:07.035 --> 00:01:10.055
+relationship and its meaning matches the
+application's contract.
+
+25
+00:01:10.055 --> 00:01:12.898
+A request-body tenant identifier does not
+gain authority
+
+26
+00:01:12.898 --> 00:01:15.563
+from being submitted with a valid token.
+
+27
+00:01:15.563 --> 00:01:19.205
+For users permitted to switch tenants,
+validate the selected tenant
+
+28
+00:01:19.205 --> 00:01:22.936
+against authorized membership before using
+it as a data boundary.
+
+29
+00:01:22.936 --> 00:01:25.601
+Authorization claims also have a freshness
+limit.
+
+30
+00:01:25.601 --> 00:01:28.444
+Removing a role or disabling an account
+may
+
+31
+00:01:28.444 --> 00:01:31.819
+not change claims in an already issued
+access token.
+
+32
+00:01:31.819 --> 00:01:34.395
+Short lifetimes reduce that delay, but
+critical
+
+33
+00:01:34.395 --> 00:01:36.883
+actions may require current session or
+account
+
+34
+00:01:36.883 --> 00:01:39.725
+state, revocation checks, or another
+authoritative decision.
+
+35
+00:01:39.725 --> 00:01:42.301
+Not every request needs a database call:
+
+36
+00:01:42.301 --> 00:01:45.055
+stable, low-risk permissions may tolerate
+token-bound freshness.
+
+37
+00:01:45.055 --> 00:01:47.898
+Decide the consistency requirement
+explicitly and test cross-tenant
+
+38
+00:01:47.898 --> 00:01:51.540
+access, insufficient scopes, ownership
+restrictions, and changed account state.
+

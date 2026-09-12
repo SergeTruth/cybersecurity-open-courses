@@ -1,0 +1,215 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.997
+Coordination must cover the writers that
+actually share authority.
+
+2
+00:00:03.997 --> 00:00:06.573
+An asynchronous mutex can serialize access
+to
+
+3
+00:00:06.573 --> 00:00:09.334
+a cache owned by one Node.js process.
+
+4
+00:00:09.334 --> 00:00:11.542
+Worker threads sharing memory need
+suitable
+
+5
+00:00:11.542 --> 00:00:13.383
+shared synchronization primitives or
+message-based
+
+6
+00:00:13.383 --> 00:00:15.315
+ownership; a promise-based lock in
+
+7
+00:00:15.315 --> 00:00:17.708
+one isolate is not automatically shared.
+
+8
+00:00:17.708 --> 00:00:19.916
+None of these local mechanisms coordinates
+
+9
+00:00:19.916 --> 00:00:22.677
+another container or a direct database
+writer.
+
+10
+00:00:22.677 --> 00:00:24.701
+For database state, prefer constraints,
+
+11
+00:00:24.701 --> 00:00:26.818
+conditional mutations, and suitable
+transactions.
+
+12
+00:00:26.818 --> 00:00:29.762
+A partitioned queue can serialize work for
+a
+
+13
+00:00:29.762 --> 00:00:32.707
+resource only while its consumer and
+ownership guarantees
+
+14
+00:00:32.707 --> 00:00:35.928
+hold; retries and duplicate delivery still
+need handling.
+
+15
+00:00:35.928 --> 00:00:38.965
+Identify bypass paths, including
+maintenance tools and background
+
+16
+00:00:38.965 --> 00:00:41.817
+tasks, before claiming that every writer
+participates.
+
+17
+00:00:41.817 --> 00:00:44.118
+Distributed locks can be useful, but
+
+18
+00:00:44.118 --> 00:00:46.510
+lease expiration changes what ownership
+means.
+
+19
+00:00:46.510 --> 00:00:49.087
+A paused holder can resume after its
+
+20
+00:00:49.087 --> 00:00:51.847
+lease expires and another holder starts
+working.
+
+21
+00:00:51.847 --> 00:00:54.792
+Owner identifiers and renewal rules help
+manage leases
+
+22
+00:00:54.792 --> 00:00:57.553
+but do not automatically stop stale
+writes.
+
+23
+00:00:57.553 --> 00:01:00.129
+Fencing uses ordered ownership tokens that
+the
+
+24
+00:01:00.129 --> 00:01:02.890
+protected resource checks to reject older
+holders.
+
+25
+00:01:02.890 --> 00:01:06.387
+That check must be enforced with the
+protected operation.
+
+26
+00:01:06.387 --> 00:01:08.779
+Network partitions, process failures, and
+renewal
+
+27
+00:01:08.779 --> 00:01:10.804
+failures belong in the design.
+
+28
+00:01:10.804 --> 00:01:14.668
+Prefer simpler storage guarantees when
+they express the invariant directly.
+
+29
+00:01:14.668 --> 00:01:16.693
+Tests should create overlap deliberately.
+
+30
+00:01:16.693 --> 00:01:19.638
+Start multiple attempts against the same
+resource and
+
+31
+00:01:19.638 --> 00:01:23.134
+use barriers or controlled hooks to align
+meaningful stages.
+
+32
+00:01:23.134 --> 00:01:25.067
+Use separate database connections and,
+
+33
+00:01:25.067 --> 00:01:27.183
+where relevant, separate application
+processes.
+
+34
+00:01:27.183 --> 00:01:30.128
+A test that accidentally shares one
+serialized connection
+
+35
+00:01:30.128 --> 00:01:32.889
+may exercise far less concurrency than
+production.
+
+36
+00:01:32.889 --> 00:01:37.213
+Sleeps can vary timing, but should not be
+the only mechanism.
+
+37
+00:01:37.213 --> 00:01:41.538
+Wait for all attempts to settle, then
+inspect authoritative final state.
+
+38
+00:01:41.538 --> 00:01:44.575
+For one available unit, verify the
+quantity and
+
+39
+00:01:44.575 --> 00:01:48.164
+the number of committed reservations, not
+just response codes.
+
+40
+00:01:48.164 --> 00:01:52.029
+Rejected or conflicting attempts must
+leave no unintended partial effect.
+
+41
+00:01:52.029 --> 00:01:54.789
+Test duplicate messages, stale edits,
+timeouts after
+
+42
+00:01:54.789 --> 00:01:57.642
+commit, and recovery after a worker stops.
+
+43
+00:01:57.642 --> 00:02:00.679
+Repeat targeted schedules and review
+read-check-write gaps, non-atomic
+
+44
+00:02:00.679 --> 00:02:03.531
+counters, local flags, and unguarded
+retries; a
+
+45
+00:02:03.531 --> 00:02:06.660
+passing stress run alone is not a proof.
+

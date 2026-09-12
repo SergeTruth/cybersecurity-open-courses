@@ -1,0 +1,192 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.138
+After emission, telemetry becomes
+security-sensitive stored data.
+
+2
+00:00:04.218 --> 00:00:08.411
+Protect it in transit and at rest,
+separate production from development access,
+
+3
+00:00:08.491 --> 00:00:11.081
+and grant operators, developers, support
+staff,
+
+4
+00:00:11.161 --> 00:00:13.936
+and vendors only the visibility their
+roles require.
+
+5
+00:00:14.016 --> 00:00:17.963
+Retention should balance incident and
+audit value against exposure, cost,
+
+6
+00:00:18.043 --> 00:00:19.954
+privacy, and deletion obligations.
+
+7
+00:00:20.034 --> 00:00:24.413
+Centralized append-oriented collection can
+improve availability and make casual
+
+8
+00:00:24.493 --> 00:00:26.959
+modification harder than mutable local
+files,
+
+9
+00:00:27.039 --> 00:00:31.603
+but ordinary centralized logging is not
+automatically tamper-proof or sufficient for
+
+10
+00:00:31.683 --> 00:00:33.409
+high-assurance audit evidence.
+
+11
+00:00:33.489 --> 00:00:36.511
+Design failure behavior according to event
+criticality.
+
+12
+00:00:36.591 --> 00:00:39.612
+A dropped debug event should not normally
+crash a request,
+
+13
+00:00:39.692 --> 00:00:43.639
+while a regulated or security-critical
+audit workflow may require durable
+
+14
+00:00:43.719 --> 00:00:46.617
+acknowledgement or a business-specific
+failure path.
+
+15
+00:00:46.697 --> 00:00:48.424
+Make that distinction explicit.
+
+16
+00:00:48.504 --> 00:00:52.635
+Asynchronous exporters need bounded
+queues, finite retry budgets, timeouts,
+
+17
+00:00:52.715 --> 00:00:54.997
+drop counters, and backpressure policies.
+
+18
+00:00:55.077 --> 00:00:58.777
+Unbounded buffering or infinite retries
+can turn a collector outage or
+
+19
+00:00:58.857 --> 00:01:03.173
+attacker-generated event flood into memory
+exhaustion and application failure.
+
+20
+00:01:03.253 --> 00:01:07.755
+Metrics should reveal drops and saturation
+without using unbounded user-controlled
+
+21
+00:01:07.835 --> 00:01:08.267
+labels.
+
+22
+00:01:08.347 --> 00:01:12.416
+Test the data leaving the logger, not only
+whether a logging method was called.
+
+23
+00:01:12.496 --> 00:01:16.196
+Capture the serialized output and verify
+that authorization headers,
+
+24
+00:01:16.276 --> 00:01:18.805
+cookies, secrets, unknown request
+properties,
+
+25
+00:01:18.885 --> 00:01:21.290
+and disallowed exception details are
+absent.
+
+26
+00:01:21.370 --> 00:01:24.514
+Submit values containing newlines and
+control characters,
+
+27
+00:01:24.594 --> 00:01:29.034
+then confirm they remain one structured
+field through serialization and ingestion.
+
+28
+00:01:29.114 --> 00:01:32.321
+Verify correlation identifiers are
+normalized and bounded,
+
+29
+00:01:32.401 --> 00:01:34.251
+expected event fields are present,
+
+30
+00:01:34.331 --> 00:01:38.524
+and a future secret-looking request
+property does not appear simply because the
+
+31
+00:01:38.604 --> 00:01:39.837
+request model changed.
+
+32
+00:01:39.917 --> 00:01:41.644
+Test operational semantics too.
+
+33
+00:01:41.724 --> 00:01:45.547
+Confirm a high-value audit event is
+emitted exactly once where required,
+
+34
+00:01:45.627 --> 00:01:48.156
+including retry and duplicate-delivery
+paths.
+
+35
+00:01:48.236 --> 00:01:52.367
+Simulate transport loss, full buffers,
+exporter exceptions, and rate spikes;
+
+36
+00:01:52.447 --> 00:01:56.825
+verify the application follows the
+documented policy and remains within memory and
+
+37
+00:01:56.905 --> 00:01:57.769
+latency bounds.
+
+38
+00:01:57.849 --> 00:02:02.289
+Validate access controls and retention
+configuration outside the code repository.
+
+39
+00:02:02.369 --> 00:02:05.513
+Secure telemetry is an end-to-end property
+of event design,
+
+40
+00:02:05.593 --> 00:02:09.540
+serialization, transport, storage,
+presentation, access, and deletion.
