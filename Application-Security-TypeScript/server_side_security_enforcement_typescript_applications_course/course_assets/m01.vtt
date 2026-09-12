@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.262
+A TypeScript application may present a
+carefully controlled interface,
+
+2
+00:00:04.342 --> 00:00:06.770
+but the interface is not the security
+boundary.
+
+3
+00:00:06.850 --> 00:00:10.551
+Browsers, mobile applications, desktop
+clients, JavaScript bundles,
+
+4
+00:00:10.631 --> 00:00:13.605
+and API consumers all operate outside the
+trusted server.
+
+5
+00:00:13.685 --> 00:00:17.387
+A user can inspect scripts, modify local
+storage, change hidden fields,
+
+6
+00:00:17.467 --> 00:00:21.350
+re-enable disabled buttons, construct
+requests with a command-line tool,
+
+7
+00:00:21.430 --> 00:00:24.222
+or call an endpoint without loading the
+intended page.
+
+8
+00:00:24.302 --> 00:00:28.185
+Request headers and JSON properties are
+claims about what the client wants;
+
+9
+00:00:28.265 --> 00:00:31.300
+they are not proof that the operation is
+valid or permitted.
+
+10
+00:00:31.380 --> 00:00:34.353
+Client-side TypeScript does not change
+this trust model.
+
+11
+00:00:34.433 --> 00:00:38.256
+Its types improve editor feedback and
+catch mistakes during development,
+
+12
+00:00:38.336 --> 00:00:41.006
+yet they do not make data sent over HTTP
+trustworthy.
+
+13
+00:00:41.086 --> 00:00:45.334
+Browser validation is still valuable
+because it gives prompt feedback and reduces
+
+14
+00:00:45.414 --> 00:00:46.749
+accidental bad requests.
+
+15
+00:00:46.829 --> 00:00:50.409
+Route guards and hidden controls can also
+make the interface clearer.
+
+16
+00:00:50.489 --> 00:00:51.946
+Their purpose is usability.
+
+17
+00:00:52.026 --> 00:00:56.031
+A security decision must survive when
+every client-side control is removed or
+
+18
+00:00:56.111 --> 00:00:56.718
+rewritten.
+
+19
+00:00:56.798 --> 00:01:00.075
+The durable rule is simple: the client may
+propose an operation,
+
+20
+00:01:00.155 --> 00:01:02.461
+and the server decides whether to perform
+it.
+
+21
+00:01:02.541 --> 00:01:05.150
+A purchase request can name a product and
+quantity,
+
+22
+00:01:05.230 --> 00:01:07.839
+but the server decides the price and
+availability.
+
+23
+00:01:07.919 --> 00:01:10.104
+A document request can name an identifier,
+
+24
+00:01:10.184 --> 00:01:14.493
+but the server decides whether the
+authenticated subject may access that document.
+
+25
+00:01:14.573 --> 00:01:16.757
+An approval request can express an action,
+
+26
+00:01:16.837 --> 00:01:20.417
+but the server decides whether the current
+workflow state permits it.
+
+27
+00:01:20.497 --> 00:01:22.985
+Good architecture makes this division
+visible.
+
+28
+00:01:23.065 --> 00:01:26.282
+Externally controlled data enters through
+a narrow boundary,
+
+29
+00:01:26.362 --> 00:01:30.063
+trusted identity is supplied by verified
+server-side authentication,
+
+30
+00:01:30.143 --> 00:01:34.452
+and application services apply
+authorization and business rules before protected
+
+31
+00:01:34.532 --> 00:01:35.321
+state changes.
+
+32
+00:01:35.401 --> 00:01:39.649
+Repositories and database constraints
+reinforce the same decisions where shared
+
+33
+00:01:39.729 --> 00:01:41.064
+invariants require them.
+
+34
+00:01:41.144 --> 00:01:45.452
+The practical test is whether the server
+remains correct when the request comes from
+
+35
+00:01:45.532 --> 00:01:49.780
+a completely custom client that follows
+none of the user interface's assumptions.

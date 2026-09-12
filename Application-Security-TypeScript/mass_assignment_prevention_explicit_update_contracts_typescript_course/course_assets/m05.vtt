@@ -1,0 +1,151 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.553
+Many properties should never appear in an
+ordinary object-update contract:
+
+2
+00:00:04.633 --> 00:00:07.875
+identifiers, tenant and owner links, roles
+and permissions,
+
+3
+00:00:07.955 --> 00:00:11.884
+administrative flags, account status,
+verification and approval state,
+
+4
+00:00:11.964 --> 00:00:15.331
+billing state, balances, audit fields, and
+creation metadata.
+
+5
+00:00:15.411 --> 00:00:18.092
+They are server-owned relative to that
+operation.
+
+6
+00:00:18.172 --> 00:00:20.292
+This does not mean they can never change;
+
+7
+00:00:20.372 --> 00:00:23.614
+it means a generic edit route is not
+authorized to change them.
+
+8
+00:00:23.694 --> 00:00:26.999
+Model significant changes as explicit
+application commands.
+
+9
+00:00:27.079 --> 00:00:30.633
+Role assignment, account disabling,
+project transfer, approval,
+
+10
+00:00:30.713 --> 00:00:35.140
+and tenant migration deserve dedicated
+service methods or endpoints with their own
+
+11
+00:00:35.220 --> 00:00:39.896
+authorization, prerequisites, transaction
+rules, audit records, and notifications.
+
+12
+00:00:39.976 --> 00:00:41.535
+The exact HTTP shape can vary.
+
+13
+00:00:41.615 --> 00:00:46.042
+The security benefit comes from naming the
+transition and preventing it from hiding
+
+14
+00:00:46.122 --> 00:00:48.055
+inside a bag of optional properties.
+
+15
+00:00:48.135 --> 00:00:52.313
+Give each command its own narrow input
+rather than accepting the entity type and
+
+16
+00:00:52.393 --> 00:00:54.076
+promising to use only one field.
+
+17
+00:00:54.156 --> 00:00:57.960
+A privileged operation should load the
+target under the proper tenant or
+
+18
+00:00:58.040 --> 00:01:00.971
+administrative scope, verify the caller's
+authority,
+
+19
+00:01:01.051 --> 00:01:05.104
+validate the requested transition, and
+enforce current-state invariants.
+
+20
+00:01:05.184 --> 00:01:08.613
+Ownership transfer may require acceptance
+and conflict checks.
+
+21
+00:01:08.693 --> 00:01:11.374
+Approval may require a particular workflow
+state.
+
+22
+00:01:11.454 --> 00:01:15.819
+Balance changes may need ledger operations
+rather than direct field replacement.
+
+23
+00:01:15.899 --> 00:01:19.453
+Database constraints and transactions can
+reinforce these rules,
+
+24
+00:01:19.533 --> 00:01:22.276
+but they do not decide who may invoke the
+transition.
+
+25
+00:01:22.356 --> 00:01:26.534
+Avoid blocklists that merely remove
+today's sensitive names from a broad input
+
+26
+00:01:26.614 --> 00:01:27.051
+object.
+
+27
+00:01:27.131 --> 00:01:30.124
+New fields can bypass a list nobody
+remembered to update,
+
+28
+00:01:30.204 --> 00:01:34.194
+and nested writes can expose equivalent
+capabilities under another shape.
+
+29
+00:01:34.274 --> 00:01:36.831
+Start from an allowlist specific to the
+command.
+
+30
+00:01:36.911 --> 00:01:40.839
+Ordinary property editing and privileged
+state transition are different
+
+31
+00:01:40.919 --> 00:01:44.660
+capabilities, even when both eventually
+update the same database row.

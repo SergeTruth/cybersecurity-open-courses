@@ -1,0 +1,175 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.804
+TypeScript database libraries offer
+several abstractions:
+
+2
+00:00:03.884 --> 00:00:06.679
+driver-level SQL with parameters, query
+builders,
+
+3
+00:00:06.759 --> 00:00:10.826
+object-relational mappers, tagged-template
+SQL, and stored procedures.
+
+4
+00:00:10.906 --> 00:00:15.226
+Their normal structured APIs often bind
+values safely because callers describe
+
+5
+00:00:15.306 --> 00:00:16.958
+fields and values separately.
+
+6
+00:00:17.038 --> 00:00:20.087
+That advantage is real, but it is not a
+blanket guarantee.
+
+7
+00:00:20.167 --> 00:00:24.551
+The security result depends on the exact
+method and on whether application data is
+
+8
+00:00:24.631 --> 00:00:26.664
+treated as a value or inserted as text.
+
+9
+00:00:26.744 --> 00:00:31.065
+Most mature libraries expose escape
+hatches for queries their structured model
+
+10
+00:00:31.145 --> 00:00:32.034
+cannot express.
+
+11
+00:00:32.114 --> 00:00:36.689
+Names such as raw, unsafe, literal,
+fragment, or expression deserve focused review.
+
+12
+00:00:36.769 --> 00:00:41.026
+A raw method may still support parameter
+arrays and be safe when used correctly,
+
+13
+00:00:41.106 --> 00:00:45.617
+while an unsafe interpolation helper can
+convert its argument into SQL source text.
+
+14
+00:00:45.697 --> 00:00:48.937
+Tagged templates require the same semantic
+understanding:
+
+15
+00:00:49.017 --> 00:00:51.749
+a well-designed tag can bind interpolated
+values,
+
+16
+00:00:51.829 --> 00:00:56.086
+but an ordinary JavaScript template
+literal or a special raw-fragment wrapper
+
+17
+00:00:56.166 --> 00:00:57.754
+performs text construction.
+
+18
+00:00:57.834 --> 00:01:01.392
+Syntax that looks similar can have a
+different security contract.
+
+19
+00:01:01.472 --> 00:01:05.729
+ORM-generated operations can still be
+insecure for reasons beyond injection,
+
+20
+00:01:05.809 --> 00:01:07.397
+such as missing tenant scope,
+
+21
+00:01:07.477 --> 00:01:12.115
+and injection risk returns when developers
+build predicates or raw clauses manually.
+
+22
+00:01:12.195 --> 00:01:14.673
+Stored procedures follow the same
+principle.
+
+23
+00:01:14.753 --> 00:01:18.120
+Calling a procedure with bound arguments
+may protect the call,
+
+24
+00:01:18.200 --> 00:01:22.394
+yet a procedure that concatenates those
+arguments into dynamic SQL can remain
+
+25
+00:01:22.474 --> 00:01:24.253
+vulnerable inside the database.
+
+26
+00:01:24.333 --> 00:01:27.382
+Abstraction changes where the boundary is
+implemented;
+
+27
+00:01:27.462 --> 00:01:29.178
+it does not remove the boundary.
+
+28
+00:01:29.258 --> 00:01:30.528
+For every database API,
+
+29
+00:01:30.608 --> 00:01:35.119
+consult its documentation and determine
+whether the value is bound or inserted into
+
+30
+00:01:35.199 --> 00:01:36.089
+the SQL program.
+
+31
+00:01:36.169 --> 00:01:40.553
+Prefer the structured, parameterized path
+and isolate necessary raw SQL behind a
+
+32
+00:01:40.633 --> 00:01:42.094
+small reviewed interface.
+
+33
+00:01:42.174 --> 00:01:46.050
+Make that interface accept a fixed query
+or typed operation plus values,
+
+34
+00:01:46.130 --> 00:01:49.243
+rather than an arbitrary complete fragment
+from callers.
+
+35
+00:01:49.323 --> 00:01:53.770
+This reduces the number of places where
+reviewers must reason about SQL provenance
+
+36
+00:01:53.850 --> 00:01:57.980
+and makes a later migration or library
+upgrade less likely to change security
+
+37
+00:01:58.060 --> 00:01:59.140
+behavior silently.

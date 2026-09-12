@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.092
+SSRF prevention begins by minimizing the
+network capability exposed to a requester.
+
+2
+00:00:05.172 --> 00:00:08.234
+Prefer configured integrations, fixed
+provider bases,
+
+3
+00:00:08.314 --> 00:00:11.950
+and server-controlled destination mappings
+over arbitrary URLs.
+
+4
+00:00:12.030 --> 00:00:15.283
+Authorize the caller's use of that
+integration separately.
+
+5
+00:00:15.363 --> 00:00:17.531
+When user-provided URLs are essential,
+
+6
+00:00:17.611 --> 00:00:21.757
+define a narrow operation and an explicit
+destination policy before making a
+
+7
+00:00:21.837 --> 00:00:22.539
+connection.
+
+8
+00:00:22.619 --> 00:00:24.660
+Parse with a standards-aware URL API.
+
+9
+00:00:24.740 --> 00:00:28.631
+Allow only required protocols, reject
+unwanted embedded credentials,
+
+10
+00:00:28.711 --> 00:00:31.645
+and authorize hostname and port as
+structured values.
+
+11
+00:00:31.725 --> 00:00:36.126
+These checks establish syntax and
+application policy, not the network endpoint.
+
+12
+00:00:36.206 --> 00:00:40.735
+Resolve hostnames through the intended
+connection environment and classify every
+
+13
+00:00:40.815 --> 00:00:43.940
+applicable IPv4 and IPv6 address with a
+vetted mechanism.
+
+14
+00:00:44.020 --> 00:00:47.847
+Include special-purpose and
+deployment-specific forbidden ranges,
+
+15
+00:00:47.927 --> 00:00:50.606
+and apply the same classification to IP
+literals.
+
+16
+00:00:50.686 --> 00:00:53.301
+A successful parse, trusted-looking
+hostname,
+
+17
+00:00:53.381 --> 00:00:56.762
+or authenticated caller never substitutes
+for this decision.
+
+18
+00:00:56.842 --> 00:00:58.819
+Treat every redirect as a new target.
+
+19
+00:00:58.899 --> 00:01:03.555
+Repeat protocol, hostname, port,
+resolution, and address policy before the next hop.
+
+20
+00:01:03.635 --> 00:01:07.781
+Close the DNS check-and-use gap so the
+transport connects only to an approved
+
+21
+00:01:07.861 --> 00:01:11.369
+address while preserving hostname-based
+TLS and HTTP identity.
+
+22
+00:01:11.449 --> 00:01:15.404
+Then constrain the request itself: method,
+headers, credentials, time,
+
+23
+00:01:15.484 --> 00:01:20.140
+redirect count, request body, response
+bytes, decompression, and expected content.
+
+24
+00:01:20.220 --> 00:01:23.728
+Resource controls limit abuse but do not
+validate a destination.
+
+25
+00:01:23.808 --> 00:01:25.658
+Finally, make the policy durable.
+
+26
+00:01:25.738 --> 00:01:29.118
+Route outbound operations through
+reviewable abstractions,
+
+27
+00:01:29.198 --> 00:01:32.834
+test changing destination states, log
+sanitized policy outcomes,
+
+28
+00:01:32.914 --> 00:01:36.996
+and constrain workload egress through
+firewalls, proxies, segmentation,
+
+29
+00:01:37.076 --> 00:01:38.352
+or service identities.
+
+30
+00:01:38.432 --> 00:01:42.769
+Network controls contain mistakes but
+cannot enforce business authorization;
+
+31
+00:01:42.849 --> 00:01:47.186
+application checks understand the
+operation but should not be the only barrier.
+
+32
+00:01:47.266 --> 00:01:51.157
+A secure outbound request is not defined
+by the URL the client submitted.
+
+33
+00:01:51.237 --> 00:01:55.638
+It is defined by the destination the
+server has explicitly permitted and actually
+
+34
+00:01:55.718 --> 00:01:56.420
+connects to.

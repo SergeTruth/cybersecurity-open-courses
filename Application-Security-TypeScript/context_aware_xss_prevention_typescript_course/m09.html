@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Context-Aware XSS Prevention in TypeScript</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="context-aware-xss-prevention-typescript">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section id="module-meta" data-module="9" data-total="9" data-quiz="true" aria-labelledby="module-title">
+        <header class="card title-card">
+          <h1 id="module-title" data-module-title-target>Final Quiz</h1>
+        </header>
+
+        <section class="card" aria-labelledby="quiz-heading">
+          <h2 id="quiz-heading">Assessment</h2>
+          <form
+            id="quiz-form"
+            class="quiz-form"
+            data-passing-score="80"
+            data-answer-key='{&quot;q1&quot;:&quot;a&quot;,&quot;q2&quot;:&quot;c&quot;,&quot;q3&quot;:&quot;b&quot;,&quot;q4&quot;:&quot;d&quot;,&quot;q5&quot;:&quot;c&quot;,&quot;q6&quot;:&quot;a&quot;,&quot;q7&quot;:&quot;d&quot;,&quot;q8&quot;:&quot;b&quot;,&quot;q9&quot;:&quot;c&quot;,&quot;q10&quot;:&quot;a&quot;}'
+          >
+            <fieldset class="quiz-question">
+              <legend>1. A profile message is intended to appear as ordinary text. Why is <code>textContent</code> preferable to <code>innerHTML</code>?</legend>
+              <label class="quiz-choice"><input type="radio" name="q1" value="a" required> It creates character data directly instead of asking the browser to parse the message as HTML source.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="b"> It validates that the message satisfies the application's business rules.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="c"> It sanitizes and preserves an allowlisted subset of rich markup.</label>
+              <label class="quiz-choice"><input type="radio" name="q1" value="d"> It converts every URL found in the message into a same-origin URL.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>2. Why is one generic HTML-escaping helper insufficient for values that may enter HTML, JavaScript, CSS, and URL contexts?</legend>
+              <label class="quiz-choice"><input type="radio" name="q2" value="a" required> HTML escaping is necessary only for values retrieved from a database.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="b"> Browsers automatically reverse HTML escaping before every parser runs.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="c"> Each context has different grammar and semantics, so the defense must match the parser and insertion point.</label>
+              <label class="quiz-choice"><input type="radio" name="q2" value="d"> JavaScript and CSS values become safe whenever their TypeScript type is <code>string</code>.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>3. A link destination is assigned through a DOM property that safely serializes the value. What additional decision may still be required?</legend>
+              <label class="quiz-choice"><input type="radio" name="q3" value="a" required> Whether the label text should be decoded as HTML before display.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="b"> Whether the parsed protocol, origin, and destination are permitted for that feature.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="c"> Whether the link value can be asserted as a string at compile time.</label>
+              <label class="quiz-choice"><input type="radio" name="q3" value="d"> Whether the property should be replaced with an inline event-handler attribute.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>4. Which design best avoids creating an event-handler source-code boundary?</legend>
+              <label class="quiz-choice"><input type="radio" name="q4" value="a" required> HTML-encode external data and concatenate it into an <code>onclick</code> string.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="b"> Put external data into a style attribute and read it when the event occurs.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="c"> Mark the handler string as a trusted TypeScript type.</label>
+              <label class="quiz-choice"><input type="radio" name="q4" value="d"> Register developer-authored behavior with <code>addEventListener</code> and keep external values as data.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>5. When is HTML sanitization the appropriate primary handling strategy?</legend>
+              <label class="quiz-choice"><input type="radio" name="q5" value="a" required> Whenever any user-controlled text is shown in a paragraph.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="b"> Whenever a URL query parameter needs percent encoding.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="c"> When the product intentionally accepts rich HTML and a mature parser-based sanitizer enforces a reviewed markup policy.</label>
+              <label class="quiz-choice"><input type="radio" name="q5" value="d"> When an application wants to disable template autoescaping globally.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>6. Why is normal framework interpolation generally preferable to a raw-HTML rendering escape hatch?</legend>
+              <label class="quiz-choice"><input type="radio" name="q6" value="a" required> Normal interpolation usually preserves data as text, while raw HTML deliberately creates an HTML parsing boundary that needs separate trust or sanitization.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="b"> Raw-HTML APIs cannot display legitimate formatting under any circumstances.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="c"> Framework interpolation automatically authorizes URLs and CSS values.</label>
+              <label class="quiz-choice"><input type="radio" name="q6" value="d"> Raw HTML is safe only when the value came from an authenticated user.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>7. One page needs sanitized rich text. Why should template autoescaping remain enabled elsewhere?</legend>
+              <label class="quiz-choice"><input type="radio" name="q7" value="a" required> Autoescaping is useful only for static content and does not affect variables.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="b"> Disabling it makes URL protocols safe by default.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="c"> Global disabling is required before a sanitizer can parse one field.</label>
+              <label class="quiz-choice"><input type="radio" name="q7" value="d"> A narrow rich-content exception should not remove the default protection from unrelated text insertions across the application.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>8. What does <code>const html = value as SafeHtml</code> establish at runtime?</legend>
+              <label class="quiz-choice"><input type="radio" name="q8" value="a" required> It invokes the browser's HTML sanitizer before assignment.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="b"> Nothing about content safety; a type assertion changes compiler treatment but performs no encoding, sanitization, or provenance check.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="c"> It enables Trusted Types enforcement for every document sink.</label>
+              <label class="quiz-choice"><input type="radio" name="q8" value="d"> It proves that the value originated in a server-side template.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>9. What is the correct role of a strong Content Security Policy in XSS prevention?</legend>
+              <label class="quiz-choice"><input type="radio" name="q9" value="a" required> It makes context-aware output handling unnecessary for supported browsers.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="b"> It converts untrusted strings into sanitized rich HTML.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="c"> It constrains active content and can reduce impact, but remains defense-in-depth alongside safe sinks and context-aware handling.</label>
+              <label class="quiz-choice"><input type="radio" name="q9" value="d"> It validates whether form input meets application business rules.</label>
+            </fieldset>
+
+            <fieldset class="quiz-question">
+              <legend>10. What does Trusted Types enforcement contribute to a large browser application?</legend>
+              <label class="quiz-choice"><input type="radio" name="q10" value="a" required> It can require approved typed values at covered injection sinks, concentrating risky conversions in reviewable policies without guaranteeing those policies sanitize correctly.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="b"> It automatically classifies all application data as trusted or untrusted by source.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="c"> It replaces CSP, sanitizer maintenance, and output encoding in every browser.</label>
+              <label class="quiz-choice"><input type="radio" name="q10" value="d"> It prevents JavaScript from reading any cookie, including cookies without HttpOnly.</label>
+            </fieldset>
+
+            <button id="submit-quiz" type="submit">Submit Quiz</button>
+            <p id="quiz-result" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <nav class="nav module-nav" aria-label="Module navigation">
+          <a id="previous-module" class="btn secondary" href="#" data-preview-href="m08.html">Previous</a>
+        </nav>
+        <footer class="slide-status-footer" role="status" aria-live="polite">
+          <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+        </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m09.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

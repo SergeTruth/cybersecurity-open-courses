@@ -1,0 +1,173 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.622
+Authorization caches reduce latency and
+dependency load,
+
+2
+00:00:03.702 --> 00:00:07.324
+but a cached value is evidence only under
+a defined freshness policy.
+
+3
+00:00:07.404 --> 00:00:09.714
+A cache miss, parse failure, expired
+entry,
+
+4
+00:00:09.794 --> 00:00:11.980
+or cache outage does not establish allow.
+
+5
+00:00:12.060 --> 00:00:16.181
+Replacing any of those states with a
+global default permit creates a fail-open
+
+6
+00:00:16.261 --> 00:00:16.823
+fallback.
+
+7
+00:00:16.903 --> 00:00:21.150
+The application must either obtain a
+trustworthy decision or stop the protected
+
+8
+00:00:21.230 --> 00:00:21.854
+operation.
+
+9
+00:00:21.934 --> 00:00:23.995
+Treat cache contents as security data:
+
+10
+00:00:24.075 --> 00:00:28.758
+validate their structure and prevent
+untrusted writers from manufacturing decisions.
+
+11
+00:00:28.838 --> 00:00:32.148
+Cache keys should bind the subject,
+tenant, resource, action,
+
+12
+00:00:32.228 --> 00:00:36.536
+relevant attributes, and policy version
+closely enough to prevent reuse across a
+
+13
+00:00:36.616 --> 00:00:37.740
+different decision.
+
+14
+00:00:37.820 --> 00:00:40.193
+Positive entries need explicit expiration,
+
+15
+00:00:40.273 --> 00:00:44.082
+and sensitive systems may require
+revocation events, short lifetimes,
+
+16
+00:00:44.162 --> 00:00:46.598
+or fresh evaluation for high-impact
+actions.
+
+17
+00:00:46.678 --> 00:00:48.988
+Negative caching can reduce repeated work,
+
+18
+00:00:49.068 --> 00:00:53.564
+but its lifetime also affects how quickly
+a newly granted permission becomes usable.
+
+19
+00:00:53.644 --> 00:00:56.642
+Both directions involve correctness and
+availability.
+
+20
+00:00:56.722 --> 00:00:59.469
+Stale authorization is not universally
+forbidden,
+
+21
+00:00:59.549 --> 00:01:01.672
+but it must be an explicit risk decision.
+
+22
+00:01:01.752 --> 00:01:05.499
+A limited stale window may be acceptable
+for a low-risk read when policy
+
+23
+00:01:05.579 --> 00:01:07.327
+infrastructure is unavailable.
+
+24
+00:01:07.407 --> 00:01:11.841
+The same choice may be unacceptable for
+financial changes, administrator actions,
+
+25
+00:01:11.921 --> 00:01:14.856
+or environments with strict revocation
+requirements.
+
+26
+00:01:14.936 --> 00:01:17.871
+Bound the window, document which
+operations permit it,
+
+27
+00:01:17.951 --> 00:01:22.197
+record when stale evidence was used, and
+never allow an indefinite stale permit.
+
+28
+00:01:22.277 --> 00:01:26.773
+Distinguish last-known-good configuration
+from a last-known allow for one subject
+
+29
+00:01:26.853 --> 00:01:27.602
+and resource.
+
+30
+00:01:27.682 --> 00:01:32.178
+Stable signed policy configuration may let
+an in-process evaluator continue making
+
+31
+00:01:32.258 --> 00:01:33.195
+fresh decisions.
+
+32
+00:01:33.275 --> 00:01:37.396
+A cached permit can preserve privilege
+after membership or ownership has been
+
+33
+00:01:37.476 --> 00:01:37.976
+revoked.
+
+34
+00:01:38.056 --> 00:01:41.053
+Ask what evidence still justifies this
+exact action now.
+
+35
+00:01:41.133 --> 00:01:45.754
+Improve authorization-service replication,
+local evaluation, cache availability,
+
+36
+00:01:45.834 --> 00:01:49.893
+and operational recovery without quietly
+redefining dependency failure as
+
+37
+00:01:49.973 --> 00:01:50.660
+permission.

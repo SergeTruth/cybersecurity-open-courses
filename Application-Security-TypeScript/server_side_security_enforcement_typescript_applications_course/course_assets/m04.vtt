@@ -1,0 +1,183 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.172
+After authentication, every sensitive
+operation still requires authorization.
+
+2
+00:00:05.252 --> 00:00:08.922
+The server evaluates the trusted subject,
+the requested action,
+
+3
+00:00:09.002 --> 00:00:11.471
+the target resource, and relevant context.
+
+4
+00:00:11.551 --> 00:00:15.889
+Route-level permissions may establish that
+a role can use an administrative
+
+5
+00:00:15.969 --> 00:00:20.507
+capability, but object-level rules still
+determine which particular record is
+
+6
+00:00:20.587 --> 00:00:21.321
+accessible.
+
+7
+00:00:21.401 --> 00:00:25.205
+Ownership, tenant membership, delegated
+access, workflow state,
+
+8
+00:00:25.285 --> 00:00:28.555
+and resource classification can all affect
+the decision.
+
+9
+00:00:28.635 --> 00:00:31.839
+A UUID or opaque URL may make identifiers
+harder to guess;
+
+10
+00:00:31.919 --> 00:00:33.520
+it never proves permission.
+
+11
+00:00:33.600 --> 00:00:37.271
+Whenever possible, carry access
+constraints into the data path.
+
+12
+00:00:37.351 --> 00:00:42.022
+A lookup by document ID alone can retrieve
+another tenant's record before policy is
+
+13
+00:00:42.102 --> 00:00:42.837
+considered.
+
+14
+00:00:42.917 --> 00:00:47.455
+A scoped query that includes both the
+requested ID and the trusted tenant ID makes
+
+15
+00:00:47.535 --> 00:00:50.137
+cross-tenant data ineligible for
+retrieval.
+
+16
+00:00:50.217 --> 00:00:54.155
+Similar constraints can cover owner IDs,
+organization memberships,
+
+17
+00:00:54.235 --> 00:00:57.772
+soft-deletion state, or a permitted
+collection of resources.
+
+18
+00:00:57.852 --> 00:01:01.723
+Exact syntax varies by ORM and database,
+but the principle is stable:
+
+19
+00:01:01.803 --> 00:01:03.805
+derive scope from trusted context,
+
+20
+00:01:03.885 --> 00:01:06.955
+not from a tenantId or ownerId submitted
+by the client.
+
+21
+00:01:07.035 --> 00:01:09.571
+Query scoping does not replace every
+policy.
+
+22
+00:01:09.651 --> 00:01:13.655
+A retrieved record may require an
+additional decision based on action,
+
+23
+00:01:13.735 --> 00:01:16.604
+role, delegation, sensitivity, or current
+state.
+
+24
+00:01:16.684 --> 00:01:21.222
+Put that logic in a named policy or
+application service that receives the trusted
+
+25
+00:01:21.302 --> 00:01:24.039
+AuthContext and authoritative resource
+facts.
+
+26
+00:01:24.119 --> 00:01:28.657
+Deny by default when required context is
+absent or no rule explicitly permits the
+
+27
+00:01:28.737 --> 00:01:29.204
+action.
+
+28
+00:01:29.284 --> 00:01:33.822
+This is easier to review than scattered
+checks whose success depends on handlers
+
+29
+00:01:33.902 --> 00:01:35.771
+remembering one more condition.
+
+30
+00:01:35.851 --> 00:01:39.855
+Apply authorization to the entire
+operation surface: reads, updates,
+
+31
+00:01:39.935 --> 00:01:44.873
+deletes, downloads, exports, nested
+resources, workflow actions, and bulk requests.
+
+32
+00:01:44.953 --> 00:01:47.623
+Bulk operations need each target
+constrained,
+
+33
+00:01:47.703 --> 00:01:50.172
+not merely permission to call the
+endpoint.
+
+34
+00:01:50.252 --> 00:01:54.790
+Alternate routes that reach the same
+service must receive the same enforcement.
+
+35
+00:01:54.870 --> 00:01:59.608
+A hidden edit button or client-side route
+guard can present the correct interface to
+
+36
+00:01:59.688 --> 00:02:04.427
+ordinary users, but a direct API request
+reaches the server without that interface.
+
+37
+00:02:04.507 --> 00:02:09.178
+The endpoint remains safe only when
+server-side policy independently reaches the
+
+38
+00:02:09.258 --> 00:02:11.060
+same decision on every request.

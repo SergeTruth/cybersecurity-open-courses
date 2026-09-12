@@ -1,0 +1,147 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.558
+A persistence model describes what the
+database can store.
+
+2
+00:00:03.638 --> 00:00:06.451
+A domain model describes business state
+and behavior.
+
+3
+00:00:06.531 --> 00:00:10.323
+A request contract describes exactly what
+one public operation accepts.
+
+4
+00:00:10.403 --> 00:00:14.684
+Reusing one representation for all three
+couples external capability to internal
+
+5
+00:00:14.764 --> 00:00:15.376
+structure.
+
+6
+00:00:15.456 --> 00:00:16.863
+When the database evolves,
+
+7
+00:00:16.943 --> 00:00:21.162
+an API can acquire new writable fields
+without an intentional security decision.
+
+8
+00:00:21.242 --> 00:00:25.707
+A profile-edit contract might contain only
+optional displayName and timezone fields
+
+9
+00:00:25.787 --> 00:00:29.090
+even though the user table also stores
+role, tenant membership,
+
+10
+00:00:29.170 --> 00:00:32.839
+verification state, lock status, billing
+data, and audit timestamps.
+
+11
+00:00:32.919 --> 00:00:37.078
+That narrow type communicates the
+operation's design to reviewers and callers.
+
+12
+00:00:37.158 --> 00:00:40.766
+Separate types for password change,
+administrative account update,
+
+13
+00:00:40.846 --> 00:00:45.189
+project settings, and ownership transfer
+make their different authority visible.
+
+14
+00:00:45.269 --> 00:00:48.021
+Partial of User is usually the wrong
+public contract.
+
+15
+00:00:48.101 --> 00:00:52.076
+Partial preserves every property in User
+and merely makes each one optional.
+
+16
+00:00:52.156 --> 00:00:56.254
+It answers whether a property must be
+present, not whether a caller may write it.
+
+17
+00:00:56.334 --> 00:00:58.964
+Generated ORM update types have the same
+mismatch:
+
+18
+00:00:59.044 --> 00:01:03.019
+they describe persistence operations the
+library can technically express,
+
+19
+00:01:03.099 --> 00:01:05.301
+including relations or nested mutations,
+
+20
+00:01:05.381 --> 00:01:08.928
+rather than the fields one API operation
+should delegate to a client.
+
+21
+00:01:09.008 --> 00:01:13.106
+Compile-time excess-property checks on
+some object literals are not a runtime
+
+22
+00:01:13.186 --> 00:01:15.938
+boundary and do not filter JSON parsed
+from a request.
+
+23
+00:01:16.018 --> 00:01:19.626
+Define contracts from the use case
+outward, not from the table inward.
+
+24
+00:01:19.706 --> 00:01:23.682
+A request DTO can share small value types
+with the domain where that is useful,
+
+25
+00:01:23.762 --> 00:01:26.208
+but its property set should remain
+deliberate.
+
+26
+00:01:26.288 --> 00:01:30.447
+Keep response models separate as well so
+writable input is not inferred from what
+
+27
+00:01:30.527 --> 00:01:31.383
+the API returns.
+
+28
+00:01:31.463 --> 00:01:34.643
+This separation provides a reviewable
+capability boundary:
+
+29
+00:01:34.723 --> 00:01:38.882
+developers can see which state the
+endpoint accepts before tracing validation,
+
+30
+00:01:38.962 --> 00:01:42.020
+authorization, business rules, and
+persistence mapping.

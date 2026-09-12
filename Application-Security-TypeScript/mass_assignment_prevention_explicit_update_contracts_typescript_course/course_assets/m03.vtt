@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.154
+TypeScript checks source during
+development and erases types when code is compiled.
+
+2
+00:00:05.234 --> 00:00:10.017
+A statement that casts req.body as
+UpdateProfileRequest performs no runtime parsing,
+
+3
+00:00:10.097 --> 00:00:13.135
+removes no extra keys, and proves nothing
+about values.
+
+4
+00:00:13.215 --> 00:00:17.546
+Treat an HTTP body as unknown until a
+runtime schema or equivalent validator has
+
+5
+00:00:17.626 --> 00:00:19.759
+produced a trusted application input.
+
+6
+00:00:19.839 --> 00:00:22.489
+The schema should express the actual
+operation:
+
+7
+00:00:22.569 --> 00:00:26.382
+required and optional properties, strings
+and length limits, enums,
+
+8
+00:00:26.462 --> 00:00:29.630
+nullable values, array bounds, and nested
+object shapes.
+
+9
+00:00:29.710 --> 00:00:31.972
+Libraries such as Zod, Valibot, Joi, Ajv,
+
+10
+00:00:32.052 --> 00:00:35.349
+or framework-native validators can support
+this boundary.
+
+11
+00:00:35.429 --> 00:00:37.432
+The important behavior is explicit:
+
+12
+00:00:37.512 --> 00:00:41.067
+know whether unknown properties cause
+rejection, are stripped,
+
+13
+00:00:41.147 --> 00:00:42.440
+or remain in the result,
+
+14
+00:00:42.520 --> 00:00:46.528
+and use the validated result rather than
+returning to raw req.body later.
+
+15
+00:00:46.608 --> 00:00:51.197
+Strict rejection is often useful for
+update APIs because it exposes client mistakes
+
+16
+00:00:51.277 --> 00:00:53.992
+and attempts to send fields outside the
+contract.
+
+17
+00:00:54.072 --> 00:00:57.045
+Deliberate stripping can be valid for
+compatibility,
+
+18
+00:00:57.125 --> 00:01:00.809
+but it must not create uncertainty about
+which object is persisted.
+
+19
+00:01:00.889 --> 00:01:03.152
+Neither mode replaces explicit mapping.
+
+20
+00:01:03.232 --> 00:01:06.076
+If a schema is generated from a broad
+database model,
+
+21
+00:01:06.156 --> 00:01:08.870
+or if validated data is later mixed with
+raw input,
+
+22
+00:01:08.950 --> 00:01:11.600
+the mass-assignment boundary remains too
+wide.
+
+23
+00:01:11.680 --> 00:01:14.654
+Treat coercion and defaults as contract
+behavior too;
+
+24
+00:01:14.734 --> 00:01:18.871
+an automatic conversion can create a state
+change the caller did not express
+
+25
+00:01:18.951 --> 00:01:19.468
+clearly.
+
+26
+00:01:19.548 --> 00:01:23.620
+Validation, field permission, and business
+authorization are separate.
+
+27
+00:01:23.700 --> 00:01:27.190
+Validation establishes that displayName is
+a permitted shape.
+
+28
+00:01:27.270 --> 00:01:31.795
+The operation contract establishes that
+profile editing may modify displayName.
+
+29
+00:01:31.875 --> 00:01:35.559
+Authorization establishes which profile
+this principal may edit.
+
+30
+00:01:35.639 --> 00:01:38.677
+Business rules may add state-dependent
+restrictions.
+
+31
+00:01:38.757 --> 00:01:41.601
+A database constraint can enforce some
+invariants,
+
+32
+00:01:41.681 --> 00:01:45.753
+but it does not know the endpoint's
+intended field set or caller authority.
+
+33
+00:01:45.833 --> 00:01:48.096
+Use runtime validation as the entry gate,
+
+34
+00:01:48.176 --> 00:01:51.860
+then carry only its narrow output into
+explicit application logic.

@@ -1,0 +1,171 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.924
+Node.js distinguishes between direct
+process creation and shell interpretation.
+
+2
+00:00:05.004 --> 00:00:07.621
+The exec API runs a command string through
+a shell.
+
+3
+00:00:07.701 --> 00:00:12.001
+By contrast, execFile launches the
+specified executable directly by default and
+
+4
+00:00:12.081 --> 00:00:13.950
+accepts a separate argument array.
+
+5
+00:00:14.030 --> 00:00:18.392
+Spawn also launches a command with
+discrete arguments unless its options request a
+
+6
+00:00:18.472 --> 00:00:18.846
+shell.
+
+7
+00:00:18.926 --> 00:00:22.477
+Direct execution removes the
+shell-language parser from the path,
+
+8
+00:00:22.557 --> 00:00:26.047
+so input cannot become pipelines,
+redirections, substitutions,
+
+9
+00:00:26.127 --> 00:00:28.744
+or additional shell commands through that
+layer.
+
+10
+00:00:28.824 --> 00:00:32.999
+A safer wrapper therefore specifies one
+application-controlled executable,
+
+11
+00:00:33.079 --> 00:00:36.132
+constructs an argument array, and leaves
+shell disabled.
+
+12
+00:00:36.212 --> 00:00:39.141
+This also avoids relying on complicated
+quoting rules.
+
+13
+00:00:39.221 --> 00:00:43.022
+Shell syntax varies between POSIX shells,
+Windows command processors,
+
+14
+00:00:43.102 --> 00:00:47.214
+and PowerShell, while nested tools can
+introduce additional parsing layers.
+
+15
+00:00:47.294 --> 00:00:51.780
+A string that appears correctly quoted for
+one environment may behave differently in
+
+16
+00:00:51.860 --> 00:00:52.359
+another.
+
+17
+00:00:52.439 --> 00:00:56.863
+Eliminating shell interpretation is more
+reliable than attempting to escape every
+
+18
+00:00:56.943 --> 00:00:57.940
+possible context.
+
+19
+00:00:58.020 --> 00:01:02.506
+Treat shell-enabled execution as an
+explicit security decision, not a convenience.
+
+20
+00:01:02.586 --> 00:01:05.453
+If a requirement genuinely depends on
+shell features,
+
+21
+00:01:05.533 --> 00:01:09.645
+keep the entire command structure fixed in
+trusted application code and do not
+
+22
+00:01:09.725 --> 00:01:11.532
+interpolate request data into it.
+
+23
+00:01:11.612 --> 00:01:16.223
+Prefer replacing shell pipelines with
+direct processes connected through controlled
+
+24
+00:01:16.303 --> 00:01:18.422
+streams or using an in-process library.
+
+25
+00:01:18.502 --> 00:01:20.371
+Review deployment details as well:
+
+26
+00:01:20.451 --> 00:01:24.314
+some platform-specific scripts require a
+shell or another interpreter,
+
+27
+00:01:24.394 --> 00:01:27.635
+so an API name alone does not prove how
+the program is launched.
+
+28
+00:01:27.715 --> 00:01:31.516
+Direct execution narrows risk but does not
+make arguments trustworthy.
+
+29
+00:01:31.596 --> 00:01:35.210
+The target utility may support flags that
+write files, load plugins,
+
+30
+00:01:35.290 --> 00:01:37.408
+access the network, or execute scripts.
+
+31
+00:01:37.488 --> 00:01:41.601
+Executable selection, paths, environment
+variables, privilege, lifetime,
+
+32
+00:01:41.681 --> 00:01:43.799
+and output remain security-sensitive.
+
+33
+00:01:43.879 --> 00:01:46.995
+Use execFile when bounded buffered output
+is appropriate,
+
+34
+00:01:47.075 --> 00:01:49.879
+or spawn when streaming and backpressure
+are needed.
+
+35
+00:01:49.959 --> 00:01:54.258
+In both cases, design a narrow operation
+whose allowed arguments are known before
+
+36
+00:01:54.338 --> 00:01:55.460
+any request arrives.

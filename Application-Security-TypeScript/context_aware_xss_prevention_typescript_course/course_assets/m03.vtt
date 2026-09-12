@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.134
+Output encoding represents data so a
+particular parser treats it as data rather than
+
+2
+00:00:05.214 --> 00:00:06.128
+control syntax.
+
+3
+00:00:06.208 --> 00:00:10.320
+The phrase output encoding is incomplete
+unless it names the destination.
+
+4
+00:00:10.400 --> 00:00:14.055
+HTML text, an HTML attribute, a URL
+component, JavaScript source,
+
+5
+00:00:14.135 --> 00:00:16.289
+and CSS source use different grammars.
+
+6
+00:00:16.369 --> 00:00:21.003
+A generic helper named escape or
+sanitizeString hides the decision developers most
+
+7
+00:00:21.083 --> 00:00:21.932
+need to review.
+
+8
+00:00:22.012 --> 00:00:24.884
+In an HTML text position between ordinary
+elements,
+
+9
+00:00:24.964 --> 00:00:28.097
+server templates should use their normal
+autoescaping,
+
+10
+00:00:28.177 --> 00:00:32.289
+or a context-appropriate HTML encoder when
+manual output is unavoidable.
+
+11
+00:00:32.369 --> 00:00:36.938
+Attribute values should be quoted and
+serialized through a template or DOM API that
+
+12
+00:00:37.018 --> 00:00:38.454
+understands attributes.
+
+13
+00:00:38.534 --> 00:00:42.385
+The attribute name must remain
+developer-controlled and innocuous.
+
+14
+00:00:42.465 --> 00:00:46.838
+Correct attribute serialization prevents a
+value from breaking the syntactic
+
+15
+00:00:46.918 --> 00:00:50.247
+boundary, but it does not make every
+attribute meaning safe.
+
+16
+00:00:50.327 --> 00:00:54.635
+For URLs, construct components with URL
+and URLSearchParams or an equivalent
+
+17
+00:00:54.715 --> 00:00:55.563
+URL-aware API.
+
+18
+00:00:55.643 --> 00:00:58.776
+Percent encoding preserves data within a
+URL component;
+
+19
+00:00:58.856 --> 00:01:01.793
+it is not HTML encoding, destination
+authorization,
+
+20
+00:01:01.873 --> 00:01:03.701
+or a license to accept any scheme.
+
+21
+00:01:03.781 --> 00:01:07.567
+When a generated URL is emitted into HTML
+source, both layers matter:
+
+22
+00:01:07.647 --> 00:01:10.192
+the URL must be constructed under a URL
+policy,
+
+23
+00:01:10.272 --> 00:01:14.450
+then placed through an HTML or DOM
+mechanism appropriate to that attribute.
+
+24
+00:01:14.530 --> 00:01:19.164
+Avoid putting untrusted values directly
+into executable JavaScript or CSS source.
+
+25
+00:01:19.244 --> 00:01:23.617
+Prefer JSON responses, framework state
+transfer designed for HTML embedding,
+
+26
+00:01:23.697 --> 00:01:26.961
+or runtime data binding that never creates
+a script string.
+
+27
+00:01:27.041 --> 00:01:31.675
+For dynamic presentation, assign a
+specific style property and allowlist the value
+
+28
+00:01:31.755 --> 00:01:34.692
+vocabulary rather than assemble arbitrary
+CSS text.
+
+29
+00:01:34.772 --> 00:01:38.166
+JavaScript encoding and CSS encoding are
+specialized tools,
+
+30
+00:01:38.246 --> 00:01:41.575
+not reasons to generate broad source from
+external strings.
+
+31
+00:01:41.655 --> 00:01:44.788
+HTML encoding is correct for defined HTML
+data contexts.
+
+32
+00:01:44.868 --> 00:01:48.980
+It is not a universal transform for every
+language a browser can interpret.

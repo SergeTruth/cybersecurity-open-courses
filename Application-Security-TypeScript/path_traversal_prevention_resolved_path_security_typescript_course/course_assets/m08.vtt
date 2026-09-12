@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.710
+Design the API to avoid arbitrary paths
+whenever possible.
+
+2
+00:00:03.790 --> 00:00:07.385
+Accept an object identifier, authorize it
+for the user and tenant,
+
+3
+00:00:07.465 --> 00:00:11.253
+and map trusted storage metadata to a
+fixed operation-specific root.
+
+4
+00:00:11.333 --> 00:00:15.955
+Generate internal upload names on the
+server and preserve original filenames only as
+
+5
+00:00:16.035 --> 00:00:17.640
+untrusted display metadata.
+
+6
+00:00:17.720 --> 00:00:20.352
+Opaque identifiers reduce exposed path
+syntax,
+
+7
+00:00:20.432 --> 00:00:22.551
+but they never replace access control.
+
+8
+00:00:22.631 --> 00:00:24.749
+When relative path input is necessary,
+
+9
+00:00:24.829 --> 00:00:27.076
+understand its decoded representation,
+
+10
+00:00:27.156 --> 00:00:29.596
+resolve it against an absolute trusted
+root,
+
+11
+00:00:29.676 --> 00:00:34.298
+and verify lexical containment with
+path.relative rather than a naive string prefix
+
+12
+00:00:34.378 --> 00:00:35.662
+or a search for two dots.
+
+13
+00:00:35.742 --> 00:00:38.695
+Handle parent escapes, cross-root absolute
+results,
+
+14
+00:00:38.775 --> 00:00:41.279
+and root equality according to the
+operation.
+
+15
+00:00:41.359 --> 00:00:46.110
+Normalization and resolution transform
+path syntax; they do not grant authorization.
+
+16
+00:00:46.190 --> 00:00:50.812
+Use Node's platform-aware path behavior
+and test Windows and POSIX deployments that
+
+17
+00:00:50.892 --> 00:00:52.369
+the application supports.
+
+18
+00:00:52.449 --> 00:00:55.594
+Lexical containment is not real filesystem
+containment.
+
+19
+00:00:55.674 --> 00:01:00.297
+For relevant existing objects, compare
+canonical paths obtained with fs.realpath.
+
+20
+00:01:00.377 --> 00:01:04.164
+For creation, validate the existing
+parent, generate the child name,
+
+21
+00:01:04.244 --> 00:01:05.785
+and protect that directory.
+
+22
+00:01:05.865 --> 00:01:08.818
+Symlinks, junctions, reparse points,
+links, mounts,
+
+23
+00:01:08.898 --> 00:01:12.558
+and concurrent replacement require
+deployment-specific design.
+
+24
+00:01:12.638 --> 00:01:16.618
+Reduce check-then-use gaps, operate on
+opened handles where practical,
+
+25
+00:01:16.698 --> 00:01:21.128
+and use restricted service accounts and
+filesystem permissions to limit damage.
+
+26
+00:01:21.208 --> 00:01:24.995
+Apply stricter contracts to writes,
+deletes, recursive operations,
+
+27
+00:01:25.075 --> 00:01:26.424
+and archive extraction.
+
+28
+00:01:26.504 --> 00:01:30.997
+Centralize well-documented helpers without
+hiding operation-specific policy,
+
+29
+00:01:31.077 --> 00:01:34.994
+and test path boundaries, links,
+authorization, and alternate routes.
+
+30
+00:01:35.074 --> 00:01:39.696
+The security decision belongs to the
+authorized storage boundary and the filesystem
+
+31
+00:01:39.776 --> 00:01:44.077
+target actually accessed, not to whether
+the original string looked harmless.
+
+32
+00:01:44.157 --> 00:01:47.560
+That principle keeps path validation,
+object authorization,
+
+33
+00:01:47.640 --> 00:01:51.620
+canonical resolution, and filesystem
+privilege in their correct roles.

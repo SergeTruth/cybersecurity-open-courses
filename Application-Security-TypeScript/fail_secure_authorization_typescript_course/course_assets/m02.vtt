@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.768
+When callers need to react differently to
+policy denial and evaluation failure,
+
+2
+00:00:04.848 --> 00:00:06.543
+model the outcomes explicitly.
+
+3
+00:00:06.623 --> 00:00:08.758
+A discriminated union with allow, deny,
+
+4
+00:00:08.838 --> 00:00:13.043
+and indeterminate variants gives each
+state a name and prevents undefined from
+
+5
+00:00:13.123 --> 00:00:15.320
+becoming an undocumented fourth result.
+
+6
+00:00:15.400 --> 00:00:17.723
+The protected branch should test for
+allow,
+
+7
+00:00:17.803 --> 00:00:20.063
+not merely test that the result is not
+deny.
+
+8
+00:00:20.143 --> 00:00:23.156
+An enforcement function can switch on the
+decision kind.
+
+9
+00:00:23.236 --> 00:00:24.554
+Allow returns normally.
+
+10
+00:00:24.634 --> 00:00:27.458
+Deny throws a policy-specific
+authorization error.
+
+11
+00:00:27.538 --> 00:00:31.681
+Indeterminate throws an availability or
+evaluation error while preserving a
+
+12
+00:00:31.761 --> 00:00:33.456
+sanitized cause for telemetry.
+
+13
+00:00:33.536 --> 00:00:38.119
+An exhaustive switch helps the compiler
+identify unhandled variants when developers
+
+14
+00:00:38.199 --> 00:00:39.642
+extend the internal union.
+
+15
+00:00:39.722 --> 00:00:43.928
+This improves consistency without making
+the type itself a security boundary.
+
+16
+00:00:44.008 --> 00:00:48.025
+Decision metadata can carry an evaluation
+identifier or policy version for
+
+17
+00:00:48.105 --> 00:00:51.809
+diagnostics, but clients should not
+receive sensitive rule details.
+
+18
+00:00:51.889 --> 00:00:54.274
+External policy responses are runtime
+data.
+
+19
+00:00:54.354 --> 00:00:56.928
+Validate their shape, allowed decision
+values,
+
+20
+00:00:57.008 --> 00:01:00.084
+resource and action binding, timestamps
+where relevant,
+
+21
+00:01:00.164 --> 00:01:04.809
+and any integrity or transport guarantees
+before constructing the internal decision.
+
+22
+00:01:04.889 --> 00:01:09.094
+A TypeScript assertion does not prove that
+a remote response matches the union.
+
+23
+00:01:09.174 --> 00:01:11.685
+Unknown values, missing fields, parse
+errors,
+
+24
+00:01:11.765 --> 00:01:15.657
+and mismatched request identifiers remain
+indeterminate, never allow.
+
+25
+00:01:15.737 --> 00:01:20.319
+Avoid boolean or nullable expressions
+whose permissive meaning depends on coercion.
+
+26
+00:01:20.399 --> 00:01:23.224
+Result not equal to false accepts
+undefined and null.
+
+27
+00:01:23.304 --> 00:01:27.196
+Permission result coalesced with true
+converts absence into authority.
+
+28
+00:01:27.276 --> 00:01:31.544
+Catching an exception and returning true
+converts infrastructure failure into
+
+29
+00:01:31.624 --> 00:01:32.064
+access.
+
+30
+00:01:32.144 --> 00:01:36.224
+A concise Boolean can still be safe when
+its contract is total over valid local
+
+31
+00:01:36.304 --> 00:01:38.689
+inputs and thrown failures block the
+caller.
+
+32
+00:01:38.769 --> 00:01:42.787
+The essential invariant is independent of
+syntax: exactly one recognized,
+
+33
+00:01:42.867 --> 00:01:45.189
+trusted outcome authorizes the operation,
+
+34
+00:01:45.269 --> 00:01:47.780
+and every other outcome leaves it
+unperformed.

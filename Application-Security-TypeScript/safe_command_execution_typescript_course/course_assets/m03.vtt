@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.847
+An argument array provides little
+protection if the request can choose which program
+
+2
+00:00:04.927 --> 00:00:05.591
+receives it.
+
+3
+00:00:05.671 --> 00:00:09.716
+Executable selection should come from
+application code or trusted deployment
+
+4
+00:00:09.796 --> 00:00:10.641
+configuration.
+
+5
+00:00:10.721 --> 00:00:13.136
+When an endpoint supports several
+operations,
+
+6
+00:00:13.216 --> 00:00:16.959
+accept a logical operation key and map it
+to a closed set of approved tools.
+
+7
+00:00:17.039 --> 00:00:18.126
+Reject unknown keys.
+
+8
+00:00:18.206 --> 00:00:22.493
+This expresses the actual product
+capability and prevents a client from turning one
+
+9
+00:00:22.573 --> 00:00:25.350
+endpoint into a launcher for every
+installed utility.
+
+10
+00:00:25.430 --> 00:00:28.811
+A known absolute executable path is often
+the clearest choice for a
+
+11
+00:00:28.891 --> 00:00:32.513
+security-sensitive service because it
+avoids ambiguous PATH lookup.
+
+12
+00:00:32.593 --> 00:00:36.397
+A bare program name may resolve
+differently across development machines,
+
+13
+00:00:36.477 --> 00:00:39.254
+containers, service accounts, and
+production hosts.
+
+14
+00:00:39.334 --> 00:00:43.138
+Search order can be affected by
+environment variables and platform rules,
+
+15
+00:00:43.218 --> 00:00:46.357
+and an unexpected binary with the same
+name may be found first.
+
+16
+00:00:46.437 --> 00:00:48.792
+Absolute paths are not universally
+required,
+
+17
+00:00:48.872 --> 00:00:53.098
+but the deployment must define and protect
+whatever resolution mechanism it uses.
+
+18
+00:00:53.178 --> 00:00:57.163
+Do not validate arbitrary executable
+strings by checking their characters or
+
+19
+00:00:57.243 --> 00:00:57.846
+extension.
+
+20
+00:00:57.926 --> 00:01:01.790
+A syntactically ordinary path can still
+identify an unauthorized program.
+
+21
+00:01:01.870 --> 00:01:04.829
+Instead, configure approved paths outside
+request data,
+
+22
+00:01:04.909 --> 00:01:07.323
+verify deployment ownership and
+permissions,
+
+23
+00:01:07.403 --> 00:01:09.758
+and map supported operations to those
+values.
+
+24
+00:01:09.838 --> 00:01:12.736
+If portability requires platform-specific
+locations,
+
+25
+00:01:12.816 --> 00:01:16.620
+select them from trusted configuration at
+startup and fail closed when the
+
+26
+00:01:16.700 --> 00:01:20.443
+configured executable is missing or
+outside the expected installation.
+
+27
+00:01:20.523 --> 00:01:22.817
+Avoid falling back silently to a PATH
+search.
+
+28
+00:01:22.897 --> 00:01:25.976
+Executable trust also includes
+interpreters and wrappers.
+
+29
+00:01:26.056 --> 00:01:30.403
+Launching a trusted runtime with a
+request-selected script merely moves executable
+
+30
+00:01:30.483 --> 00:01:31.932
+selection into an argument.
+
+31
+00:01:32.012 --> 00:01:36.117
+Package scripts, plugins, and
+configuration files can carry equivalent power.
+
+32
+00:01:36.197 --> 00:01:39.337
+Review every input that determines what
+code the child loads,
+
+33
+00:01:39.417 --> 00:01:41.288
+not only the first process argument.
+
+34
+00:01:41.368 --> 00:01:45.655
+A narrow launcher binds one operation to
+one approved program and a defined argument
+
+35
+00:01:45.735 --> 00:01:49.780
+grammar, making both security review and
+deployment verification tractable.

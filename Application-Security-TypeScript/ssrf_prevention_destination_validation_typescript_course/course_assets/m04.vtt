@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.710
+Hostname authorization and address
+authorization answer different questions.
+
+2
+00:00:04.790 --> 00:00:09.305
+A hostname is an application-level name;
+DNS determines candidate network addresses.
+
+3
+00:00:09.385 --> 00:00:13.655
+One name may resolve to several IPv4 and
+IPv6 results, and those results can change.
+
+4
+00:00:13.735 --> 00:00:16.420
+For a feature intended to reach the public
+Internet,
+
+5
+00:00:16.500 --> 00:00:20.893
+every address the connection may select
+must satisfy the public-destination policy
+
+6
+00:00:20.973 --> 00:00:22.681
+before any connection is opened.
+
+7
+00:00:22.761 --> 00:00:26.727
+Checking only the first answer leaves
+unchecked candidates available to the
+
+8
+00:00:26.807 --> 00:00:27.417
+transport.
+
+9
+00:00:27.497 --> 00:00:31.035
+The policy should classify parsed
+addresses, not textual prefixes.
+
+10
+00:00:31.115 --> 00:00:34.837
+At minimum, an Internet-fetching service
+normally excludes loopback,
+
+11
+00:00:34.917 --> 00:00:37.663
+private-use, link-local, multicast,
+unspecified,
+
+12
+00:00:37.743 --> 00:00:40.915
+and other special-purpose or
+deployment-forbidden ranges.
+
+13
+00:00:40.995 --> 00:00:45.327
+Production policy may also exclude
+organization-owned networks that are globally
+
+14
+00:00:45.407 --> 00:00:46.993
+numbered but still sensitive.
+
+15
+00:00:47.073 --> 00:00:50.795
+Use a well-tested IP parser and range
+classifier informed by the current
+
+16
+00:00:50.875 --> 00:00:52.888
+special-purpose address registries.
+
+17
+00:00:52.968 --> 00:00:57.178
+Account for both address families and
+equivalent forms such as IPv4-mapped IPv6.
+
+18
+00:00:57.258 --> 00:01:00.553
+Hand-maintained string tests are too easy
+to make incomplete or
+
+19
+00:01:00.633 --> 00:01:02.158
+representation-dependent.
+
+20
+00:01:02.238 --> 00:01:05.411
+IP literals need the same classification
+without a DNS query.
+
+21
+00:01:05.491 --> 00:01:09.639
+Hostnames should be resolved through the
+name-resolution path that matches the
+
+22
+00:01:09.719 --> 00:01:11.550
+eventual connection environment.
+
+23
+00:01:11.630 --> 00:01:16.145
+In Node, operating-system resolution and
+direct DNS queries are not interchangeable:
+
+24
+00:01:16.225 --> 00:01:18.116
+they can consult different sources.
+
+25
+00:01:18.196 --> 00:01:20.331
+Whichever mechanism the design selects,
+
+26
+00:01:20.411 --> 00:01:24.743
+request all applicable results and reject
+the destination if any candidate that the
+
+27
+00:01:24.823 --> 00:01:26.592
+client could use violates policy.
+
+28
+00:01:26.672 --> 00:01:31.126
+Treat no result, resolution errors, and
+malformed answers as denial, not permission.
+
+29
+00:01:31.206 --> 00:01:35.477
+A business allowlist is stronger and
+simpler when the service talks to a small known
+
+30
+00:01:35.557 --> 00:01:39.584
+set of providers, but a trusted name does
+not automatically make an unexpected
+
+31
+00:01:39.664 --> 00:01:40.396
+address safe.
+
+32
+00:01:40.476 --> 00:01:44.564
+Monitor approved names and validate their
+resolved addresses according to the
+
+33
+00:01:44.644 --> 00:01:46.657
+deployment's intended network model.
+
+34
+00:01:46.737 --> 00:01:51.008
+For a broad public-URL feature,
+classification is an explicit security boundary.
+
+35
+00:01:51.088 --> 00:01:54.748
+The decision must cover the address the
+transport can actually choose,
+
+36
+00:01:54.828 --> 00:01:57.940
+not merely the hostname that appeared in
+the original input.

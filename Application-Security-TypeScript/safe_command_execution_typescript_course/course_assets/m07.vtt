@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.848
+Make process-launching code easy to find.
+
+2
+00:00:02.928 --> 00:00:07.101
+Review direct uses of exec, execFile,
+spawn, fork, shell-enabled options,
+
+3
+00:00:07.181 --> 00:00:10.051
+wrapper libraries, and internal helper
+functions.
+
+4
+00:00:10.131 --> 00:00:13.913
+Search for command strings,
+request-controlled executable names,
+
+5
+00:00:13.993 --> 00:00:17.254
+arbitrary argument forwarding, inherited
+environments,
+
+6
+00:00:17.334 --> 00:00:19.225
+and dynamic working directories.
+
+7
+00:00:19.305 --> 00:00:22.500
+A wrapper with a reassuring name is not
+evidence of safety;
+
+8
+00:00:22.580 --> 00:00:26.558
+reviewers need to trace the final
+executable, argument array, options,
+
+9
+00:00:26.638 --> 00:00:29.442
+and data provenance at the actual launch
+boundary.
+
+10
+00:00:29.522 --> 00:00:32.131
+Review each launch as a capability
+definition.
+
+11
+00:00:32.211 --> 00:00:35.406
+Confirm that a shell is absent unless its
+use is justified,
+
+12
+00:00:35.486 --> 00:00:38.095
+the executable comes from a closed trusted
+map,
+
+13
+00:00:38.175 --> 00:00:41.305
+and structural arguments are fixed by
+application code.
+
+14
+00:00:41.385 --> 00:00:45.363
+Identify every variable operand and its
+validation and authorization.
+
+15
+00:00:45.443 --> 00:00:49.617
+Examine whether the target treats a value
+as an option, configuration path,
+
+16
+00:00:49.697 --> 00:00:52.957
+plugin, script, output location, or
+network destination.
+
+17
+00:00:53.037 --> 00:00:56.950
+Then verify path mapping, environment
+minimization, controlled cwd,
+
+18
+00:00:57.030 --> 00:01:00.356
+child privilege, timeouts, concurrency,
+output handling,
+
+19
+00:01:00.436 --> 00:01:02.327
+and client-safe error reporting.
+
+20
+00:01:02.407 --> 00:01:06.711
+Tests should verify process structure
+instead of collecting attack strings.
+
+21
+00:01:06.791 --> 00:01:11.160
+Exercise malformed values, unexpected
+punctuation, option-prefixed names,
+
+22
+00:01:11.240 --> 00:01:15.805
+oversized work items, invalid storage
+identifiers, unsupported operation keys,
+
+23
+00:01:15.885 --> 00:01:17.777
+and request attempts to add flags.
+
+24
+00:01:17.857 --> 00:01:20.987
+Assert the exact executable, argument
+boundaries, cwd,
+
+25
+00:01:21.067 --> 00:01:24.849
+and selected environment passed to a fake
+or instrumented launcher.
+
+26
+00:01:24.929 --> 00:01:28.972
+Integration tests should cover child
+failure, nonzero exits, timeouts,
+
+27
+00:01:29.052 --> 00:01:32.900
+cancellation, large stdout and stderr,
+cleanup, repeated requests,
+
+28
+00:01:32.980 --> 00:01:34.349
+and concurrency limits.
+
+29
+00:01:34.429 --> 00:01:38.407
+Run platform-specific cases wherever the
+application claims support.
+
+30
+00:01:38.487 --> 00:01:42.465
+Keep diagnostics useful without exposing
+secrets, full environments,
+
+31
+00:01:42.545 --> 00:01:45.806
+sensitive paths, or untrusted output
+directly to clients.
+
+32
+00:01:45.886 --> 00:01:50.516
+Record operation identifiers, duration,
+exit category, bounded output metadata,
+
+33
+00:01:50.596 --> 00:01:53.205
+and cancellation outcome according to
+policy.
+
+34
+00:01:53.285 --> 00:01:57.458
+Do not place raw child output into logs
+that downstream tools may interpret,
+
+35
+00:01:57.538 --> 00:02:01.907
+and never return implementation details as
+a substitute for stable API errors.
+
+36
+00:02:01.987 --> 00:02:06.291
+A narrow launcher interface plus targeted
+tests and telemetry makes security
+
+37
+00:02:06.371 --> 00:02:08.980
+behavior reviewable throughout
+refactoring.

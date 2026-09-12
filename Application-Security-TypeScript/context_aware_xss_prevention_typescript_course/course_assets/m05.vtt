@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.150
+Some products intentionally accept markup
+for formatted comments,
+
+2
+00:00:04.230 --> 00:00:07.754
+rich-text documents, article bodies, or
+controlled publishing.
+
+3
+00:00:07.834 --> 00:00:12.240
+Rendering that input with textContent
+would correctly make it inert but would also
+
+4
+00:00:12.320 --> 00:00:14.082
+remove the required formatting.
+
+5
+00:00:14.162 --> 00:00:15.987
+This is the case for sanitization:
+
+6
+00:00:16.067 --> 00:00:20.157
+parse the markup and remove or rewrite
+constructs that fall outside a defined
+
+7
+00:00:20.237 --> 00:00:21.181
+security policy.
+
+8
+00:00:21.261 --> 00:00:23.653
+Sanitization and encoding are not
+synonyms.
+
+9
+00:00:23.733 --> 00:00:28.201
+Use a mature, actively maintained HTML
+sanitizer suitable for the browser or server
+
+10
+00:00:28.281 --> 00:00:29.036
+environment.
+
+11
+00:00:29.116 --> 00:00:33.207
+Regular expressions and home-grown tag
+removal do not model the HTML parser,
+
+12
+00:00:33.287 --> 00:00:36.937
+nested content, namespaces, attributes, or
+URL behavior reliably.
+
+13
+00:00:37.017 --> 00:00:39.597
+Configure the allowed elements and
+attributes,
+
+14
+00:00:39.677 --> 00:00:42.824
+URL-bearing attributes and protocols,
+embedded content,
+
+15
+00:00:42.904 --> 00:00:45.988
+and style handling according to the
+product requirement.
+
+16
+00:00:46.068 --> 00:00:50.347
+A policy that permits more markup creates
+a larger surface and deserves stronger
+
+17
+00:00:50.427 --> 00:00:50.868
+review.
+
+18
+00:00:50.948 --> 00:00:54.472
+Treat the sanitizer result according to
+its documented contract.
+
+19
+00:00:54.552 --> 00:00:57.698
+Do not append an untrusted HTML string
+after sanitization,
+
+20
+00:00:57.778 --> 00:01:00.107
+decode it into a different representation,
+
+21
+00:01:00.187 --> 00:01:03.837
+or pass it through transformations that
+can recreate active markup.
+
+22
+00:01:03.917 --> 00:01:07.315
+Keep the sanitization boundary close to
+the HTML-parsing sink,
+
+23
+00:01:07.395 --> 00:01:10.101
+and make bypasses difficult to call
+accidentally.
+
+24
+00:01:10.181 --> 00:01:14.524
+TypeScript branding can document that only
+the wrapper should create a rich-HTML
+
+25
+00:01:14.604 --> 00:01:19.198
+value, but the runtime sanitizer and
+call-path controls provide the actual security.
+
+26
+00:01:19.278 --> 00:01:22.047
+A type assertion alone performs no
+transformation.
+
+27
+00:01:22.127 --> 00:01:26.658
+Server-side sanitization can protect
+stored content and downstream web consumers,
+
+28
+00:01:26.738 --> 00:01:30.955
+while client-side sanitization can enforce
+policy at the rendering boundary.
+
+29
+00:01:31.035 --> 00:01:32.482
+Architecture may use both,
+
+30
+00:01:32.562 --> 00:01:36.275
+especially when old stored values or
+multiple ingestion paths exist.
+
+31
+00:01:36.355 --> 00:01:40.823
+Other consumers, such as email or document
+renderers, may require their own policy.
+
+32
+00:01:40.903 --> 00:01:44.868
+Maintain the sanitizer and regression
+tests as browser behavior evolves.
+
+33
+00:01:44.948 --> 00:01:48.661
+Do not add sanitization to ordinary text
+paths: text APIs are simpler,
+
+34
+00:01:48.741 --> 00:01:52.580
+preserve the intended semantics, and avoid
+interpreting markup at all.

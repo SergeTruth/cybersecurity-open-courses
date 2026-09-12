@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.414
+The strongest path-traversal prevention
+often starts at the API design.
+
+2
+00:00:04.494 --> 00:00:08.219
+Instead of accepting a filesystem path,
+accept an object identifier.
+
+3
+00:00:08.299 --> 00:00:11.519
+An attachment endpoint can receive an
+opaque attachment ID,
+
+4
+00:00:11.599 --> 00:00:13.052
+load its storage metadata,
+
+5
+00:00:13.132 --> 00:00:16.351
+and map that record to an
+application-controlled location.
+
+6
+00:00:16.431 --> 00:00:18.704
+The client identifies the object it wants;
+
+7
+00:00:18.784 --> 00:00:21.057
+the server decides where the object lives.
+
+8
+00:00:21.137 --> 00:00:24.610
+This removes most separators, parent
+components, drive syntax,
+
+9
+00:00:24.690 --> 00:00:27.152
+and directory layout from the trust
+boundary.
+
+10
+00:00:27.232 --> 00:00:29.884
+Storage metadata should carry the root
+category,
+
+11
+00:00:29.964 --> 00:00:32.994
+server-generated relative name, tenant
+relationship,
+
+12
+00:00:33.074 --> 00:00:34.968
+and state needed for the operation.
+
+13
+00:00:35.048 --> 00:00:38.710
+The application chooses from fixed roots
+for attachments, exports,
+
+14
+00:00:38.790 --> 00:00:42.010
+or temporary objects and resolves only
+metadata it created.
+
+15
+00:00:42.090 --> 00:00:46.320
+Do not store arbitrary client paths in a
+database and later treat the database as
+
+16
+00:00:46.400 --> 00:00:47.284
+proof of safety.
+
+17
+00:00:47.364 --> 00:00:49.574
+Data can remain untrusted after storage,
+
+18
+00:00:49.654 --> 00:00:53.505
+especially when it originated in imports,
+old code, or another service.
+
+19
+00:00:53.585 --> 00:00:57.752
+Validate the mapping when it is created
+and again at the filesystem boundary as
+
+20
+00:00:57.832 --> 00:00:58.590
+appropriate.
+
+21
+00:00:58.670 --> 00:01:01.006
+Opaque IDs and UUIDs are not
+authorization.
+
+22
+00:01:01.086 --> 00:01:05.190
+A valid record may belong to another user
+or tenant, be quarantined, expired,
+
+23
+00:01:05.270 --> 00:01:07.480
+or unavailable for the requested action.
+
+24
+00:01:07.560 --> 00:01:11.853
+Load the record through trusted subject
+and tenant scope, enforce object state,
+
+25
+00:01:11.933 --> 00:01:13.069
+then derive the path.
+
+26
+00:01:13.149 --> 00:01:17.379
+Avoid returning raw storage locations in
+API responses or using path secrecy as
+
+27
+00:01:17.459 --> 00:01:18.343
+access control.
+
+28
+00:01:18.423 --> 00:01:22.022
+Separate the external display name from
+the internal storage name.
+
+29
+00:01:22.102 --> 00:01:23.744
+Uploads follow the same model.
+
+30
+00:01:23.824 --> 00:01:28.369
+Treat the original filename as untrusted
+metadata for display when the product needs
+
+31
+00:01:28.449 --> 00:01:31.733
+it, with appropriate encoding at every
+later output context.
+
+32
+00:01:31.813 --> 00:01:35.916
+Generate the stored filename on the
+server, select a controlled upload root,
+
+33
+00:01:35.996 --> 00:01:38.648
+and keep temporary and final locations
+explicit.
+
+34
+00:01:38.728 --> 00:01:42.201
+The extension and content also require
+file-upload validation,
+
+35
+00:01:42.281 --> 00:01:44.869
+but those checks do not authorize a
+destination.
+
+36
+00:01:44.949 --> 00:01:48.232
+By reducing the request to an object or
+operation identifier,
+
+37
+00:01:48.312 --> 00:01:52.669
+the service exposes a narrow storage
+capability rather than a general filesystem
+
+38
+00:01:52.749 --> 00:01:53.380
+interface.

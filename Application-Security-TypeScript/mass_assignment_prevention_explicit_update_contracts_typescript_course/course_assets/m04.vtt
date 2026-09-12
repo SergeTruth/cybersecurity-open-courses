@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.977
+The primary implementation pattern is
+simple:
+
+2
+00:00:03.057 --> 00:00:07.020
+build a new persistence update from the
+fields approved for this operation.
+
+3
+00:00:07.100 --> 00:00:09.886
+If displayName is present, copy its
+validated value.
+
+4
+00:00:09.966 --> 00:00:12.072
+If timezone is present, copy that value.
+
+5
+00:00:12.152 --> 00:00:15.743
+Then pass only the newly constructed
+object to the repository or ORM.
+
+6
+00:00:15.823 --> 00:00:18.919
+The syntax may use conditional statements,
+a small mapper,
+
+7
+00:00:18.999 --> 00:00:21.291
+or carefully written conditional spreads;
+
+8
+00:00:21.371 --> 00:00:23.971
+the security property is the explicit
+field list.
+
+9
+00:00:24.051 --> 00:00:28.572
+This mapping creates a stable boundary
+between API evolution and database evolution.
+
+10
+00:00:28.652 --> 00:00:33.110
+Adding isAdmin, billingState, or another
+sensitive column to the persistence model
+
+11
+00:00:33.190 --> 00:00:35.853
+does not make it writable through profile
+editing.
+
+12
+00:00:35.933 --> 00:00:39.586
+A developer must modify the request
+schema, mapping, authorization,
+
+13
+00:00:39.666 --> 00:00:41.957
+and tests before the new capability
+exists.
+
+14
+00:00:42.037 --> 00:00:44.452
+That friction is intentional and
+reviewable.
+
+15
+00:00:44.532 --> 00:00:48.371
+Give the mapper a narrow return type so
+compile-time review can also catch
+
+16
+00:00:48.451 --> 00:00:51.671
+accidental persistence fields in
+developer-authored code.
+
+17
+00:00:51.751 --> 00:00:55.033
+Do not derive the allowlist from all keys
+in the database model.
+
+18
+00:00:55.113 --> 00:00:59.200
+A helper that picks request properties
+using Object.keys of an entity is still
+
+19
+00:00:59.280 --> 00:01:01.200
+coupled to persistence capability.
+
+20
+00:01:01.280 --> 00:01:04.871
+Generic update utilities can be safe only
+when the caller provides an
+
+21
+00:01:04.951 --> 00:01:09.595
+operation-specific allowlist and the
+utility preserves presence and nested semantics
+
+22
+00:01:09.675 --> 00:01:10.295
+correctly.
+
+23
+00:01:10.375 --> 00:01:14.461
+For important operations, direct mapping
+is often clearer than abstraction.
+
+24
+00:01:14.541 --> 00:01:17.266
+Use the validated object's own properties
+as input,
+
+25
+00:01:17.346 --> 00:01:20.071
+and avoid re-spreading raw request data
+afterward.
+
+26
+00:01:20.151 --> 00:01:23.742
+Keep server-generated values separate:
+audit actor, tenant scope,
+
+27
+00:01:23.822 --> 00:01:25.742
+updated timestamp, workflow state,
+
+28
+00:01:25.822 --> 00:01:30.032
+and ownership should come from
+authenticated context, trusted configuration,
+
+29
+00:01:30.112 --> 00:01:31.103
+or business logic.
+
+30
+00:01:31.183 --> 00:01:33.536
+Explicit mapping is not merely data
+cleanup.
+
+31
+00:01:33.616 --> 00:01:37.703
+It is the point where a public request is
+converted into the narrow persistence
+
+32
+00:01:37.783 --> 00:01:40.260
+command the application has chosen to
+support.

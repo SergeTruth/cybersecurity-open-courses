@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.849
+Correct policy logic can still fail open
+through control flow.
+
+2
+00:00:03.929 --> 00:00:07.467
+Express-style middleware may call next
+after reporting a denial,
+
+3
+00:00:07.547 --> 00:00:11.464
+an early response may lack return, a
+promise may be started without await,
+
+4
+00:00:11.544 --> 00:00:14.324
+or an error handler may resume a route
+unexpectedly.
+
+5
+00:00:14.404 --> 00:00:18.827
+Structure the guard so every non-allow
+branch returns or throws and the only path to
+
+6
+00:00:18.907 --> 00:00:20.676
+next is after a recognized allow.
+
+7
+00:00:20.756 --> 00:00:24.926
+Avoid mixed callback and promise
+conventions that permit double completion.
+
+8
+00:00:25.006 --> 00:00:28.986
+Missing await is especially dangerous
+because a Promise object is truthy.
+
+9
+00:00:29.066 --> 00:00:33.552
+Code that tests an unresolved
+authorization promise can enter the protected branch
+
+10
+00:00:33.632 --> 00:00:35.148
+before any decision exists.
+
+11
+00:00:35.228 --> 00:00:39.714
+Enable lint rules for floating promises
+and make authorization APIs hard to misuse,
+
+12
+00:00:39.794 --> 00:00:42.637
+but retain runtime tests around the actual
+call path.
+
+13
+00:00:42.717 --> 00:00:45.624
+A compiler configuration or linter reduces
+mistakes;
+
+14
+00:00:45.704 --> 00:00:48.168
+it does not replace the enforcement
+boundary.
+
+15
+00:00:48.248 --> 00:00:52.670
+Ensure rejected promises and late
+callbacks cannot trigger a second continuation
+
+16
+00:00:52.750 --> 00:00:55.530
+after the request has already entered an
+error path.
+
+17
+00:00:55.610 --> 00:00:59.907
+Do not rely exclusively on a global route
+guard when authorization depends on the
+
+18
+00:00:59.987 --> 00:01:01.124
+resource and action.
+
+19
+00:01:01.204 --> 00:01:04.426
+Middleware can authenticate and establish
+common context.
+
+20
+00:01:04.506 --> 00:01:09.118
+Object-specific authorization often
+belongs in or near the application service that
+
+21
+00:01:09.198 --> 00:01:12.547
+has the trusted resource attributes and
+knows the side effect.
+
+22
+00:01:12.627 --> 00:01:17.113
+Sensitive services should require
+AuthContext and an explicit command rather than
+
+23
+00:01:17.193 --> 00:01:19.088
+accept an optional request object.
+
+24
+00:01:19.168 --> 00:01:23.085
+Trace every entry point: REST routes,
+GraphQL resolvers, queue workers,
+
+25
+00:01:23.165 --> 00:01:27.714
+scheduled processes, internal RPC,
+administrative tools, and background retries.
+
+26
+00:01:27.794 --> 00:01:30.827
+A job may act with a service identity or
+on behalf of a user,
+
+27
+00:01:30.907 --> 00:01:33.434
+but that authority must be explicit and
+scoped.
+
+28
+00:01:33.514 --> 00:01:37.747
+Centralize reusable policy evaluation and
+failure translation while keeping
+
+29
+00:01:37.827 --> 00:01:39.849
+operation-specific checks visible.
+
+30
+00:01:39.929 --> 00:01:44.352
+Service reuse is safe only when alternate
+callers cannot bypass the authorization
+
+31
+00:01:44.432 --> 00:01:46.580
+required by the underlying capability.

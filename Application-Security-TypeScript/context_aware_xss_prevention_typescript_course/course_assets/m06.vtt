@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.804
+Modern component frameworks and server
+template engines usually make ordinary
+
+2
+00:00:04.884 --> 00:00:06.087
+interpolation safer.
+
+3
+00:00:06.167 --> 00:00:10.534
+A value inserted as text is escaped or
+represented through structured rendering,
+
+4
+00:00:10.614 --> 00:00:13.969
+and property binding avoids much manual
+source construction.
+
+5
+00:00:14.049 --> 00:00:17.720
+Keep autoescaping enabled and use the
+framework's normal data flow.
+
+6
+00:00:17.800 --> 00:00:20.459
+These defaults eliminate many routine
+mistakes,
+
+7
+00:00:20.539 --> 00:00:23.577
+but they do not make every application
+path immune to XSS.
+
+8
+00:00:23.657 --> 00:00:27.961
+Security review should concentrate on
+places where developers step outside the
+
+9
+00:00:28.041 --> 00:00:28.547
+default.
+
+10
+00:00:28.627 --> 00:00:32.615
+Raw-HTML rendering, explicitly trusted
+values, disabled autoescaping,
+
+11
+00:00:32.695 --> 00:00:36.240
+helpers that mark strings as safe, direct
+innerHTML assignments,
+
+12
+00:00:36.320 --> 00:00:41.067
+dynamic script creation, and third-party
+widgets restore interpretation boundaries.
+
+13
+00:00:41.147 --> 00:00:45.515
+Each use needs a documented requirement, a
+trusted source or reviewed sanitizer,
+
+14
+00:00:45.595 --> 00:00:48.000
+and tests that cover later
+transformations.
+
+15
+00:00:48.080 --> 00:00:52.511
+One rich-content feature is not a reason
+to disable escaping for an entire template
+
+16
+00:00:52.591 --> 00:00:53.477
+or application.
+
+17
+00:00:53.557 --> 00:00:57.544
+Server-generated state embedded in an HTML
+response is another boundary.
+
+18
+00:00:57.624 --> 00:01:02.055
+Plain JSON serialization followed by
+arbitrary concatenation into a script block
+
+19
+00:01:02.135 --> 00:01:05.110
+should not be assumed safe for every
+embedding context.
+
+20
+00:01:05.190 --> 00:01:08.545
+Prefer the framework's supported
+state-transfer mechanism,
+
+21
+00:01:08.625 --> 00:01:13.056
+a separate JSON response, or a data
+container with documented safe serialization.
+
+22
+00:01:13.136 --> 00:01:15.035
+Hydration does not change the rule:
+
+23
+00:01:15.115 --> 00:01:19.292
+the generated document is parsed before
+application code consumes its state.
+
+24
+00:01:19.372 --> 00:01:23.803
+TypeScript helps express distinctions but
+cannot establish them by declaration.
+
+25
+00:01:23.883 --> 00:01:26.415
+Casting a string as SafeHtml,
+TrustedContent,
+
+26
+00:01:26.495 --> 00:01:30.862
+or another branded type does not encode,
+sanitize, or verify anything at runtime.
+
+27
+00:01:30.942 --> 00:01:32.461
+If a branded value is useful,
+
+28
+00:01:32.541 --> 00:01:36.909
+hide its constructor and issue it only
+through a runtime-controlled sanitizer or
+
+29
+00:01:36.989 --> 00:01:38.255
+trusted static source.
+
+30
+00:01:38.335 --> 00:01:42.702
+Review direct DOM work inside framework
+components with the same source-to-sink
+
+31
+00:01:42.782 --> 00:01:44.618
+model used outside the framework.
+
+32
+00:01:44.698 --> 00:01:48.939
+Default protections are valuable precisely
+because they narrow the risky code
+
+33
+00:01:49.019 --> 00:01:52.500
+surface; escape hatches should remain
+visible and exceptional.

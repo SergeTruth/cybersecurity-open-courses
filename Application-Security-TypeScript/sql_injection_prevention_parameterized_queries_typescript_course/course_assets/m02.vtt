@@ -1,0 +1,177 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.105
+A parameterized query gives the database
+client two distinct inputs:
+
+2
+00:00:04.185 --> 00:00:07.790
+statement text containing placeholders,
+and a collection of values.
+
+3
+00:00:07.870 --> 00:00:12.085
+The driver applies the database protocol
+or binding API so each value is handled as
+
+4
+00:00:12.165 --> 00:00:13.998
+data in its designated expression.
+
+5
+00:00:14.078 --> 00:00:17.377
+In a PostgreSQL-style client the
+placeholders may be numbered,
+
+6
+00:00:17.457 --> 00:00:20.757
+while another driver may use question
+marks, named parameters,
+
+7
+00:00:20.837 --> 00:00:22.548
+or a tagged-template interface.
+
+8
+00:00:22.628 --> 00:00:24.338
+The symbol is not the protection.
+
+9
+00:00:24.418 --> 00:00:28.695
+The protection is the API contract that
+receives structure and values separately.
+
+10
+00:00:28.775 --> 00:00:32.319
+Use this pattern for ordinary data values
+such as strings, integers,
+
+11
+00:00:32.399 --> 00:00:35.515
+booleans, dates, status values,
+foreign-key identifiers,
+
+12
+00:00:35.595 --> 00:00:39.505
+and pagination limits when the database
+supports binding in that position.
+
+13
+00:00:39.585 --> 00:00:42.945
+Preserve native types instead of
+converting every value to text.
+
+14
+00:00:43.025 --> 00:00:45.469
+Validate values for application
+correctness,
+
+15
+00:00:45.549 --> 00:00:49.154
+then pass them through the driver's
+documented parameter mechanism.
+
+16
+00:00:49.234 --> 00:00:53.267
+Some drivers describe the operation as
+prepared execution and others perform
+
+17
+00:00:53.347 --> 00:00:57.807
+protocol-level parameter binding without a
+permanently stored prepared statement;
+
+18
+00:00:57.887 --> 00:01:01.308
+the relevant security property remains
+separation from SQL text.
+
+19
+00:01:01.388 --> 00:01:03.221
+Manual escaping is a weaker design.
+
+20
+00:01:03.301 --> 00:01:07.578
+Correct quoting depends on the database
+dialect, connection settings, encoding,
+
+21
+00:01:07.658 --> 00:01:09.735
+data type, and exact syntactic context.
+
+22
+00:01:09.815 --> 00:01:13.970
+A home-grown replacement for quote
+characters cannot cover those combinations
+
+23
+00:01:14.050 --> 00:01:16.433
+reliably and often corrupts legitimate
+data.
+
+24
+00:01:16.513 --> 00:01:21.095
+Parameterization moves encoding
+responsibility to the component that understands the
+
+25
+00:01:21.175 --> 00:01:22.214
+database protocol.
+
+26
+00:01:22.294 --> 00:01:25.165
+It should be the default at every
+data-access call site,
+
+27
+00:01:25.245 --> 00:01:27.628
+including code reached only by internal
+jobs,
+
+28
+00:01:27.708 --> 00:01:31.130
+because internal values can also originate
+from imports, queues,
+
+29
+00:01:31.210 --> 00:01:32.981
+or compromised upstream systems.
+
+30
+00:01:33.061 --> 00:01:36.788
+Do not undermine binding by generating
+placeholder text from raw input.
+
+31
+00:01:36.868 --> 00:01:41.023
+For multiple values, use a documented
+array-binding feature or let trusted code
+
+32
+00:01:41.103 --> 00:01:45.380
+create the required number of placeholder
+tokens while appending each value to the
+
+33
+00:01:45.460 --> 00:01:46.682
+parameter collection.
+
+34
+00:01:46.762 --> 00:01:49.939
+Never insert the values themselves into
+that generated text.
+
+35
+00:01:50.019 --> 00:01:54.051
+Parameterization also does not make a
+query authorized or logically correct;
+
+36
+00:01:54.131 --> 00:01:55.964
+it guarantees a narrower property.
+
+37
+00:01:56.044 --> 00:02:00.260
+The supplied values cannot rewrite the SQL
+program through that binding channel.

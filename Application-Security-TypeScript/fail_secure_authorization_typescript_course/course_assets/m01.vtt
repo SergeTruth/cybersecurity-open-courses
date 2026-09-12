@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.506
+Authorization is often presented as a
+Boolean question,
+
+2
+00:00:03.586 --> 00:00:06.467
+but production evaluation has more runtime
+outcomes.
+
+3
+00:00:06.547 --> 00:00:10.242
+A policy can allow or deny, yet the
+application can also lack identity,
+
+4
+00:00:10.322 --> 00:00:12.765
+tenant, resource ownership, or object
+state.
+
+5
+00:00:12.845 --> 00:00:15.475
+A database can fail, a policy service can
+time out,
+
+6
+00:00:15.555 --> 00:00:19.000
+configuration can be malformed, or code
+can throw unexpectedly.
+
+7
+00:00:19.080 --> 00:00:23.026
+The security design must account for every
+path that reaches the protected
+
+8
+00:00:23.106 --> 00:00:23.732
+operation.
+
+9
+00:00:23.812 --> 00:00:27.820
+A variable initialized to true before an
+asynchronous policy call creates a
+
+10
+00:00:27.900 --> 00:00:28.777
+fail-open path.
+
+11
+00:00:28.857 --> 00:00:33.116
+If the call throws and a catch block
+continues, the permissive default survives.
+
+12
+00:00:33.196 --> 00:00:37.016
+Similar defects appear in comparisons such
+as result not equal to false,
+
+13
+00:00:37.096 --> 00:00:39.789
+or in a fallback that replaces undefined
+with true.
+
+14
+00:00:39.869 --> 00:00:43.940
+These patterns treat absence of a denial
+as permission even though no trusted
+
+15
+00:00:44.020 --> 00:00:46.275
+component established an allow decision.
+
+16
+00:00:46.355 --> 00:00:50.300
+Authorization must complete before any
+irreversible side effect begins;
+
+17
+00:00:50.380 --> 00:00:54.201
+a later denial cannot reliably undo an
+external call or emitted message.
+
+18
+00:00:54.281 --> 00:00:57.224
+Start protected operations in a
+non-authorized state.
+
+19
+00:00:57.304 --> 00:01:01.250
+Proceed only after the applicable policy
+returns an explicit allow for the
+
+20
+00:01:01.330 --> 00:01:04.837
+authenticated subject, resource, action,
+and relevant context.
+
+21
+00:01:04.917 --> 00:01:09.051
+A Boolean policy function can be
+appropriate when false clearly means deny and
+
+22
+00:01:09.131 --> 00:01:11.511
+exceptions propagate into a non-grant
+path.
+
+23
+00:01:11.591 --> 00:01:15.724
+More complex systems often benefit from
+representing deny and indeterminate
+
+24
+00:01:15.804 --> 00:01:17.934
+separately so failures remain visible.
+
+25
+00:01:18.014 --> 00:01:22.022
+A real policy denial and an evaluation
+failure share one security property:
+
+26
+00:01:22.102 --> 00:01:24.294
+the protected side effect does not occur.
+
+27
+00:01:24.374 --> 00:01:27.004
+They need not share the same operational
+meaning.
+
+28
+00:01:27.084 --> 00:01:31.218
+A denial may map to a forbidden or
+not-found response according to application
+
+29
+00:01:31.298 --> 00:01:35.494
+policy, while an unavailable dependency
+may produce a service-unavailable or
+
+30
+00:01:35.574 --> 00:01:37.015
+internal-error response.
+
+31
+00:01:37.095 --> 00:01:39.537
+Logging and metrics should distinguish
+them.
+
+32
+00:01:39.617 --> 00:01:44.126
+Fail-secure authorization means permission
+requires positive, trusted evidence;
+
+33
+00:01:44.206 --> 00:01:48.340
+it does not mean every technical failure
+must be mislabeled as a policy denial.

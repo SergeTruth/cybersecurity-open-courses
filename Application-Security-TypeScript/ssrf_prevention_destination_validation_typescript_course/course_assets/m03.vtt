@@ -1,0 +1,180 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.275
+When a workflow must accept a URL,
+
+2
+00:00:02.355 --> 00:00:05.842
+parse it once with a standards-aware API
+such as Node's URL class.
+
+3
+00:00:05.922 --> 00:00:10.170
+A URL is structured data: protocol,
+username, password, hostname, port, path,
+
+4
+00:00:10.250 --> 00:00:12.659
+query, and fragment have distinct
+meanings.
+
+5
+00:00:12.739 --> 00:00:16.924
+Security rules should inspect those parsed
+components rather than search the
+
+6
+00:00:17.004 --> 00:00:17.955
+original string.
+
+7
+00:00:18.035 --> 00:00:22.536
+Raw prefix tests confuse textual
+resemblance with origin identity and can approve a
+
+8
+00:00:22.616 --> 00:00:25.025
+hostname that merely contains trusted
+text.
+
+9
+00:00:25.105 --> 00:00:27.451
+Begin with an explicit protocol allowlist.
+
+10
+00:00:27.531 --> 00:00:30.067
+A web retrieval feature generally needs
+HTTPS,
+
+11
+00:00:30.147 --> 00:00:33.571
+or HTTPS and HTTP when the business
+requirement justifies both.
+
+12
+00:00:33.651 --> 00:00:35.680
+Reject every other scheme by default.
+
+13
+00:00:35.760 --> 00:00:40.451
+Also reject embedded usernames and
+passwords unless the protocol contract explicitly
+
+14
+00:00:40.531 --> 00:00:41.355
+requires them.
+
+15
+00:00:41.435 --> 00:00:44.542
+Credentials inside a URL complicate
+logging, redaction,
+
+16
+00:00:44.622 --> 00:00:46.334
+and authority interpretation.
+
+17
+00:00:46.414 --> 00:00:50.598
+Fragments are not sent in an HTTP request
+and should not influence destination
+
+18
+00:00:50.678 --> 00:00:51.122
+policy.
+
+19
+00:00:51.202 --> 00:00:53.421
+Treat the port as part of the destination.
+
+20
+00:00:53.501 --> 00:00:57.369
+An allowed hostname does not imply that
+every service port on that host is
+
+21
+00:00:57.449 --> 00:00:58.083
+permitted.
+
+22
+00:00:58.163 --> 00:01:02.093
+Normalize the absent port to the protocol
+default for policy comparison,
+
+23
+00:01:02.173 --> 00:01:05.090
+and allow only the specific ports the
+operation needs.
+
+24
+00:01:05.170 --> 00:01:09.671
+Compare hostname values exactly or apply
+one deliberately defined subdomain rule.
+
+25
+00:01:09.751 --> 00:01:14.316
+Authorizing trusted.example is different
+from authorizing every controlled child
+
+26
+00:01:14.396 --> 00:01:18.771
+beneath it, and neither rule should match
+an unrelated name that only ends with the
+
+27
+00:01:18.851 --> 00:01:19.802
+same characters.
+
+28
+00:01:19.882 --> 00:01:22.735
+Structured parsing provides useful
+normalization,
+
+29
+00:01:22.815 --> 00:01:26.492
+including case handling and
+internationalized domain processing,
+
+30
+00:01:26.572 --> 00:01:28.854
+but it is not a complete security
+decision.
+
+31
+00:01:28.934 --> 00:01:32.485
+The parser may accept an IP literal, an
+IPv6 host, an explicit port,
+
+32
+00:01:32.565 --> 00:01:36.813
+or a perfectly valid public-looking
+hostname whose DNS answers lead somewhere
+
+33
+00:01:36.893 --> 00:01:37.527
+forbidden.
+
+34
+00:01:37.607 --> 00:01:41.284
+Record the parsed, normalized components
+for the next policy steps,
+
+35
+00:01:41.364 --> 00:01:43.773
+while avoiding sensitive query data in
+logs.
+
+36
+00:01:43.853 --> 00:01:48.228
+URL parsing answers whether the input can
+be interpreted under supported syntax.
+
+37
+00:01:48.308 --> 00:01:52.492
+Destination authorization still requires
+hostname policy, DNS resolution,
+
+38
+00:01:52.572 --> 00:01:56.820
+address classification, redirect controls,
+and an approved connection path.

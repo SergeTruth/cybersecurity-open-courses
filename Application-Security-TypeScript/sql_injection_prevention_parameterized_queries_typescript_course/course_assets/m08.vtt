@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.513
+SQL injection prevention rests on a
+precise boundary.
+
+2
+00:00:03.593 --> 00:00:06.410
+Trusted application code defines the SQL
+program,
+
+3
+00:00:06.490 --> 00:00:10.485
+and externally controlled values travel
+through the database client's
+
+4
+00:00:10.565 --> 00:00:12.334
+parameter-binding mechanism.
+
+5
+00:00:12.414 --> 00:00:15.296
+Concatenation, ordinary template
+interpolation,
+
+6
+00:00:15.376 --> 00:00:19.699
+and raw fragments break that boundary when
+they insert untrusted text into the
+
+7
+00:00:19.779 --> 00:00:20.434
+statement.
+
+8
+00:00:20.514 --> 00:00:25.099
+TypeScript interfaces, browser validation,
+and authentication do not repair it.
+
+9
+00:00:25.179 --> 00:00:29.502
+Manual escaping is fragile and should not
+replace the driver's parameter API.
+
+10
+00:00:29.582 --> 00:00:34.037
+Use structured ORM and query-builder
+operations according to their documented
+
+11
+00:00:34.117 --> 00:00:38.767
+semantics, and treat raw, unsafe, literal,
+and fragment features as review points.
+
+12
+00:00:38.847 --> 00:00:43.236
+Stored procedures require the same
+discipline when they construct dynamic SQL
+
+13
+00:00:43.316 --> 00:00:44.036
+internally.
+
+14
+00:00:44.116 --> 00:00:48.308
+Ordinary values such as identifiers stored
+in columns, dates, quantities,
+
+15
+00:00:48.388 --> 00:00:50.288
+and statuses can usually be bound.
+
+16
+00:00:50.368 --> 00:00:54.233
+SQL identifiers, operators, directions,
+and clauses are structure;
+
+17
+00:00:54.313 --> 00:00:55.426
+when they must vary,
+
+18
+00:00:55.506 --> 00:00:59.436
+map a client choice to a small closed set
+of server-authored fragments.
+
+19
+00:00:59.516 --> 00:01:04.036
+Build complex searches by accumulating
+trusted predicates and parameter values
+
+20
+00:01:04.116 --> 00:01:04.836
+separately.
+
+21
+00:01:04.916 --> 00:01:09.436
+Generate placeholder positions from code
+and collections, never from raw input.
+
+22
+00:01:09.516 --> 00:01:12.333
+Give empty arrays, optional filters,
+pagination,
+
+23
+00:01:12.413 --> 00:01:14.771
+and report structure explicit semantics.
+
+24
+00:01:14.851 --> 00:01:18.912
+Keep runtime validation, authorization,
+tenant scope, workflow rules,
+
+25
+00:01:18.992 --> 00:01:22.660
+error handling, and least-privilege
+database accounts in place.
+
+26
+00:01:22.740 --> 00:01:26.736
+They complement parameterization and do
+not become substitutes for it.
+
+27
+00:01:26.816 --> 00:01:30.680
+Finally, make raw query paths easy to
+find, review, test, and monitor.
+
+28
+00:01:30.760 --> 00:01:33.773
+Verify the binding behavior of the actual
+library API,
+
+29
+00:01:33.853 --> 00:01:38.111
+test unexpected values and structural
+choices, and assert protected state.
+
+30
+00:01:38.191 --> 00:01:42.580
+A secure query remains safe when every
+external value contains unexpected data
+
+31
+00:01:42.660 --> 00:01:46.328
+because none of those values is allowed to
+rewrite the SQL program.
+
+32
+00:01:46.408 --> 00:01:50.600
+That is the engineering invariant to
+preserve across drivers, frameworks,
+
+33
+00:01:50.680 --> 00:01:53.300
+ORMs, query builders, and future
+refactoring.

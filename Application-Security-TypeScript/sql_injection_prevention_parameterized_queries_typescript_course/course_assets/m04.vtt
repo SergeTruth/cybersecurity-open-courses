@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.570
+Value placeholders normally represent data
+expressions.
+
+2
+00:00:03.650 --> 00:00:06.904
+They do not generally stand for SQL
+grammar such as a table name,
+
+3
+00:00:06.984 --> 00:00:10.299
+column name, operator, complete predicate,
+or sort direction.
+
+4
+00:00:10.379 --> 00:00:14.493
+Binding a requested column to a
+placeholder does not turn it into an identifier;
+
+5
+00:00:14.573 --> 00:00:18.502
+depending on the database, it may be
+rejected or treated as a constant value.
+
+6
+00:00:18.582 --> 00:00:22.450
+This limitation matters whenever an API
+lets a caller choose how a result is
+
+7
+00:00:22.530 --> 00:00:24.802
+ordered, grouped, projected, or searched.
+
+8
+00:00:24.882 --> 00:00:27.829
+The safe pattern is a closed
+server-controlled mapping.
+
+9
+00:00:27.909 --> 00:00:30.794
+A request may offer a choice such as name
+or created date.
+
+10
+00:00:30.874 --> 00:00:34.988
+Application code looks up that choice in a
+fixed object whose values are trusted
+
+11
+00:00:35.068 --> 00:00:37.892
+column fragments, rejects anything outside
+the keys,
+
+12
+00:00:37.972 --> 00:00:40.244
+and interpolates only the mapped fragment.
+
+13
+00:00:40.324 --> 00:00:44.315
+Sort direction can be selected through a
+separate mapping to the two intended
+
+14
+00:00:44.395 --> 00:00:44.947
+keywords.
+
+15
+00:00:45.027 --> 00:00:48.036
+Raw request text never occupies the
+structural position.
+
+16
+00:00:48.116 --> 00:00:52.352
+Interpolation is acceptable in this narrow
+case because its result came entirely
+
+17
+00:00:52.432 --> 00:00:54.704
+from application-authored alternatives.
+
+18
+00:00:54.784 --> 00:00:58.774
+Apply the same reasoning to selectable
+report columns, optional operators,
+
+19
+00:00:58.854 --> 00:01:02.354
+table partitions, aggregation choices, and
+reusable predicates.
+
+20
+00:01:02.434 --> 00:01:06.118
+Prefer redesign when a client appears to
+need arbitrary SQL structure.
+
+21
+00:01:06.198 --> 00:01:09.697
+Sometimes a library provides a dedicated
+identifier-quoting API;
+
+22
+00:01:09.777 --> 00:01:14.198
+use it only according to its documentation
+and still constrain which identifiers the
+
+23
+00:01:14.278 --> 00:01:15.813
+operation is meant to expose.
+
+24
+00:01:15.893 --> 00:01:19.699
+Generic escaping does not decide whether a
+syntactically valid column is
+
+25
+00:01:19.779 --> 00:01:22.911
+appropriate, sensitive, or available in
+the current query.
+
+26
+00:01:22.991 --> 00:01:27.166
+Keep mappings close to the query or expose
+them through a typed operation so their
+
+27
+00:01:27.246 --> 00:01:28.781
+security purpose is visible.
+
+28
+00:01:28.861 --> 00:01:32.790
+Do not accept a complete ORDER BY or WHERE
+fragment from another layer merely
+
+29
+00:01:32.870 --> 00:01:35.142
+because that layer validated it as a
+string.
+
+30
+00:01:35.222 --> 00:01:39.642
+Validation of length or characters cannot
+express the full semantics of SQL grammar.
+
+31
+00:01:39.722 --> 00:01:43.590
+The important boundary is not between
+good-looking and bad-looking text.
+
+32
+00:01:43.670 --> 00:01:48.029
+It is between a small set of trusted
+structural alternatives and untrusted text that
+
+33
+00:01:48.109 --> 00:01:49.460
+must never become syntax.

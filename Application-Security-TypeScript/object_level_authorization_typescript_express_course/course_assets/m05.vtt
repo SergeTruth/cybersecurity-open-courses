@@ -1,0 +1,185 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.609
+Authorization logic should be consistent
+enough to reuse and visible enough to
+
+2
+00:00:04.689 --> 00:00:05.118
+review.
+
+3
+00:00:05.198 --> 00:00:08.632
+Copy-pasted ownership checks drift: one
+route compares owner ID,
+
+4
+00:00:08.712 --> 00:00:11.901
+another forgets tenant ID, and a third
+treats a role as global.
+
+5
+00:00:11.981 --> 00:00:16.151
+A dedicated policy function or
+authorization service can encode the domain rule
+
+6
+00:00:16.231 --> 00:00:20.156
+once, expose a clear action such as edit
+project, and support focused tests.
+
+7
+00:00:20.236 --> 00:00:23.302
+The route or service still shows where the
+decision occurs,
+
+8
+00:00:23.382 --> 00:00:26.448
+so reviewers can see that a sensitive
+operation is guarded.
+
+9
+00:00:26.528 --> 00:00:29.717
+Place each responsibility where sufficient
+context exists.
+
+10
+00:00:29.797 --> 00:00:32.679
+Authentication middleware can establish
+the subject.
+
+11
+00:00:32.759 --> 00:00:35.396
+Parameter middleware can validate an
+identifier.
+
+12
+00:00:35.476 --> 00:00:38.481
+A repository can enforce broad tenant or
+ownership scope.
+
+13
+00:00:38.561 --> 00:00:41.749
+A service can coordinate object loading,
+policy evaluation,
+
+14
+00:00:41.829 --> 00:00:43.301
+and the business operation.
+
+15
+00:00:43.381 --> 00:00:46.509
+A policy function can evaluate the
+subject, action, object,
+
+16
+00:00:46.589 --> 00:00:48.674
+and state without depending on Express.
+
+17
+00:00:48.754 --> 00:00:53.108
+A giant global middleware usually cannot
+make a complete object decision because it
+
+18
+00:00:53.188 --> 00:00:57.603
+lacks the loaded record, delegated grants,
+workflow state, or transaction context.
+
+19
+00:00:57.683 --> 00:00:59.829
+Centralization should not become magic.
+
+20
+00:00:59.909 --> 00:01:04.079
+Names such as canEditProject or
+requireInvoiceApproval make the policy intent
+
+21
+00:01:04.159 --> 00:01:04.711
+explicit.
+
+22
+00:01:04.791 --> 00:01:08.961
+Pass both the action and relevant object
+when a generic authorization service is
+
+23
+00:01:09.041 --> 00:01:09.777
+appropriate.
+
+24
+00:01:09.857 --> 00:01:14.150
+Return a simple decision or a controlled
+denial rather than mutating the request in
+
+25
+00:01:14.230 --> 00:01:15.149
+surprising ways.
+
+26
+00:01:15.229 --> 00:01:18.173
+Keep policy functions side-effect free
+when practical,
+
+27
+00:01:18.253 --> 00:01:22.178
+and test boundary conditions such as
+tenant mismatch, expired delegation,
+
+28
+00:01:22.258 --> 00:01:24.097
+and disallowed state transitions.
+
+29
+00:01:24.177 --> 00:01:26.324
+Coordinate the decision with the effect.
+
+30
+00:01:26.404 --> 00:01:28.243
+If policy depends on mutable state,
+
+31
+00:01:28.323 --> 00:01:32.125
+another request can change that state
+between authorization and update.
+
+32
+00:01:32.205 --> 00:01:35.026
+Transactions, conditional updates, version
+checks,
+
+33
+00:01:35.106 --> 00:01:39.399
+or database constraints may be needed to
+preserve the condition through the write.
+
+34
+00:01:39.479 --> 00:01:43.894
+Also decide whether the caller receives a
+forbidden response or an existence-hiding
+
+35
+00:01:43.974 --> 00:01:45.078
+not-found response.
+
+36
+00:01:45.158 --> 00:01:47.488
+That response policy can reduce
+disclosure,
+
+37
+00:01:47.568 --> 00:01:50.266
+but both paths must be backed by the same
+real denial.
+
+38
+00:01:50.346 --> 00:01:53.965
+The important design outcome is a data
+path in which object selection,
+
+39
+00:01:54.045 --> 00:01:57.540
+explicit policy, and mutation cannot
+silently bypass one another.

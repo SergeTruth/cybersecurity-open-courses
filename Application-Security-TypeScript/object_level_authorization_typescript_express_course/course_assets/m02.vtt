@@ -1,0 +1,171 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.169
+A useful authorization model names the
+relationship being decided.
+
+2
+00:00:04.249 --> 00:00:08.234
+The inputs usually include an
+authenticated subject, a requested action,
+
+3
+00:00:08.314 --> 00:00:09.390
+and a target object.
+
+4
+00:00:09.470 --> 00:00:12.823
+The decision may also depend on ownership,
+tenant membership,
+
+5
+00:00:12.903 --> 00:00:17.394
+organization membership, role, explicit
+grants, delegated access, object state,
+
+6
+00:00:17.474 --> 00:00:20.637
+data classification, or a relationship to
+another object.
+
+7
+00:00:20.717 --> 00:00:24.892
+Different applications legitimately
+combine these facts in different ways.
+
+8
+00:00:24.972 --> 00:00:29.084
+The engineering goal is to make the
+relevant facts explicit and trustworthy.
+
+9
+00:00:29.164 --> 00:00:33.339
+A check such as req dot user dot role
+equals user confirms only a broad category.
+
+10
+00:00:33.419 --> 00:00:36.329
+It does not say whether that user may read
+this invoice.
+
+11
+00:00:36.409 --> 00:00:40.901
+A role can permit an action in principle
+while object relationships constrain where
+
+12
+00:00:40.981 --> 00:00:42.056
+the action applies.
+
+13
+00:00:42.136 --> 00:00:44.097
+An owner may read a private document.
+
+14
+00:00:44.177 --> 00:00:47.593
+Any member of the owning organization may
+read a shared project.
+
+15
+00:00:47.673 --> 00:00:51.026
+A project administrator may modify
+projects they administer.
+
+16
+00:00:51.106 --> 00:00:55.471
+A finance approver may approve invoices
+only inside the same tenant and only while
+
+17
+00:00:55.551 --> 00:00:57.322
+an invoice is awaiting approval.
+
+18
+00:00:57.402 --> 00:01:01.894
+Support personnel may view a restricted
+projection without receiving ownership or
+
+19
+00:01:01.974 --> 00:01:02.670
+edit rights.
+
+20
+00:01:02.750 --> 00:01:07.051
+Write policies in terms that match the
+domain rather than compressing them into a
+
+21
+00:01:07.131 --> 00:01:08.523
+vague is authorized flag.
+
+22
+00:01:08.603 --> 00:01:12.525
+A policy input might contain the subject
+identifier, tenant identifier,
+
+23
+00:01:12.605 --> 00:01:16.843
+trusted roles, action name, object owner,
+object tenant, project membership,
+
+24
+00:01:16.923 --> 00:01:17.936
+and current state.
+
+25
+00:01:18.016 --> 00:01:22.444
+The result should default to deny when
+required context is absent or inconsistent.
+
+26
+00:01:22.524 --> 00:01:27.015
+Explicit inputs make it possible to review
+whether a policy used client-controlled
+
+27
+00:01:27.095 --> 00:01:31.650
+values, omitted tenant scope, or confused
+a global role with an object relationship.
+
+28
+00:01:31.730 --> 00:01:34.450
+The policy also needs a defined
+enforcement point.
+
+29
+00:01:34.530 --> 00:01:37.756
+The application should know which layer
+obtains the object,
+
+30
+00:01:37.836 --> 00:01:42.012
+which layer evaluates richer rules, and
+which layer performs the side effect.
+
+31
+00:01:42.092 --> 00:01:46.077
+This prevents a route from checking one
+object while a service later acts on
+
+32
+00:01:46.157 --> 00:01:46.663
+another.
+
+33
+00:01:46.743 --> 00:01:50.349
+A clear subject-action-object model
+supports focused unit tests,
+
+34
+00:01:50.429 --> 00:01:52.516
+integration tests across identities,
+
+35
+00:01:52.596 --> 00:01:57.341
+and policy evolution without scattering
+subtly different ownership checks throughout
+
+36
+00:01:57.421 --> 00:01:58.180
+the codebase.

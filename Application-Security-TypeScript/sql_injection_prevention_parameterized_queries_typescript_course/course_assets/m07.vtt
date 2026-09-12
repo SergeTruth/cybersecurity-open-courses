@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.822
+Code review begins with high-signal
+construction patterns.
+
+2
+00:00:03.902 --> 00:00:06.649
+Search for SQL keywords inside template
+literals,
+
+3
+00:00:06.729 --> 00:00:10.179
+concatenation near query calls,
+interpolation in raw methods,
+
+4
+00:00:10.259 --> 00:00:14.603
+dynamically assembled WHERE or ORDER BY
+clauses, literal-expression helpers,
+
+5
+00:00:14.683 --> 00:00:17.685
+and generic functions that accept complete
+fragments.
+
+6
+00:00:17.765 --> 00:00:21.790
+These patterns identify places where
+values may cross into SQL structure.
+
+7
+00:00:21.870 --> 00:00:23.786
+Review wrappers as well as callers;
+
+8
+00:00:23.866 --> 00:00:28.019
+a helper named safeQuery provides no
+assurance if it concatenates arguments
+
+9
+00:00:28.099 --> 00:00:28.802
+internally.
+
+10
+00:00:28.882 --> 00:00:31.181
+Trace every query component to its source.
+
+11
+00:00:31.261 --> 00:00:35.797
+Mark fixed SQL syntax, bound values, and
+dynamic structural fragments separately.
+
+12
+00:00:35.877 --> 00:00:39.582
+Confirm that external values reach the
+driver's parameter channel.
+
+13
+00:00:39.662 --> 00:00:43.112
+When a request affects a column, operator,
+direction, or table,
+
+14
+00:00:43.192 --> 00:00:46.834
+locate the closed server-side mapping that
+produces the fragment.
+
+15
+00:00:46.914 --> 00:00:51.449
+Verify ORM raw methods and tagged-template
+semantics from library documentation.
+
+16
+00:00:51.529 --> 00:00:54.532
+Also examine tenant scope, authorization
+conditions,
+
+17
+00:00:54.612 --> 00:00:56.528
+and database-account privileges.
+
+18
+00:00:56.608 --> 00:01:00.633
+Integration tests should exercise ordinary
+and unexpected input as data.
+
+19
+00:01:00.713 --> 00:01:03.971
+Include punctuation, Unicode,
+long-but-allowed strings,
+
+20
+00:01:04.051 --> 00:01:08.267
+empty values, optional-filter
+combinations, dynamic sort choices, arrays,
+
+21
+00:01:08.347 --> 00:01:10.200
+and rejected structural choices.
+
+22
+00:01:10.280 --> 00:01:14.241
+Assert results and protected database
+state, not merely response codes.
+
+23
+00:01:14.321 --> 00:01:17.707
+Add regression tests around previously
+unsafe construction.
+
+24
+00:01:17.787 --> 00:01:22.195
+A catalog of offensive payloads is less
+reliable than proving that request values
+
+25
+00:01:22.275 --> 00:01:24.383
+never enter generated statement text.
+
+26
+00:01:24.463 --> 00:01:27.913
+Driver mocks can verify
+statement-and-parameter separation,
+
+27
+00:01:27.993 --> 00:01:32.145
+while selected real-database tests catch
+dialect and binding differences.
+
+28
+00:01:32.225 --> 00:01:35.291
+Static analysis and lint rules can flag
+raw-query calls,
+
+29
+00:01:35.371 --> 00:01:38.566
+SQL-bearing template literals, or banned
+unsafe helpers.
+
+30
+00:01:38.646 --> 00:01:42.670
+Route exceptions through explicit review
+rather than quiet suppression.
+
+31
+00:01:42.750 --> 00:01:47.030
+Keep raw SQL in a small searchable
+data-access surface and require tests for its
+
+32
+00:01:47.110 --> 00:01:47.941
+dynamic paths.
+
+33
+00:01:48.021 --> 00:01:51.407
+Automated checks will not understand every
+library contract,
+
+34
+00:01:51.487 --> 00:01:53.212
+so pair them with design review.
+
+35
+00:01:53.292 --> 00:01:57.636
+The strongest review question remains
+consistent: does this API bind the value,
+
+36
+00:01:57.716 --> 00:01:59.632
+or insert text into the SQL program?
+
+37
+00:01:59.712 --> 00:02:04.184
+Answering from implementation and
+documentation is more dependable than judging
+
+38
+00:02:04.264 --> 00:02:06.500
+whether a sample input appears harmless.

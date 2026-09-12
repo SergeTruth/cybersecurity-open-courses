@@ -1,0 +1,175 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.777
+A process can be launched with a fixed
+executable and safe argument boundaries while
+
+2
+00:00:04.857 --> 00:00:07.568
+remaining exposed through its surrounding
+context.
+
+3
+00:00:07.648 --> 00:00:10.479
+File paths determine what the utility
+reads and writes.
+
+4
+00:00:10.559 --> 00:00:14.836
+The current working directory can affect
+relative paths and automatic discovery of
+
+5
+00:00:14.916 --> 00:00:16.844
+configuration, plugins, or scripts.
+
+6
+00:00:16.924 --> 00:00:20.719
+Environment variables can change
+executable search, language runtimes,
+
+7
+00:00:20.799 --> 00:00:23.630
+credentials, proxy behavior, and tool
+configuration.
+
+8
+00:00:23.710 --> 00:00:25.879
+Treat all three as explicit launch inputs.
+
+9
+00:00:25.959 --> 00:00:30.176
+Prefer server-side identifiers that map to
+controlled files over arbitrary paths
+
+10
+00:00:30.256 --> 00:00:31.400
+submitted by clients.
+
+11
+00:00:31.480 --> 00:00:35.817
+Place inputs and outputs beneath approved
+directories with application-generated
+
+12
+00:00:35.897 --> 00:00:37.765
+names and appropriate permissions.
+
+13
+00:00:37.845 --> 00:00:40.315
+When joining a relative name to a base
+directory,
+
+14
+00:00:40.395 --> 00:00:44.190
+normalize and verify containment using
+platform-aware path operations;
+
+15
+00:00:44.270 --> 00:00:46.740
+a substring check for two dots is not
+sufficient.
+
+16
+00:00:46.820 --> 00:00:49.771
+Consider symbolic links, junctions,
+replacement races,
+
+17
+00:00:49.851 --> 00:00:51.900
+and how the target utility follows them.
+
+18
+00:00:51.980 --> 00:00:56.377
+For sensitive workflows, create private
+temporary locations and maintain ownership
+
+19
+00:00:56.457 --> 00:00:59.831
+of opened files rather than relying only
+on a preflight path check.
+
+20
+00:00:59.911 --> 00:01:03.585
+Set the working directory to a known
+application-controlled location.
+
+21
+00:01:03.665 --> 00:01:05.352
+Do not let request data choose it,
+
+22
+00:01:05.432 --> 00:01:08.685
+and do not assume the web service's
+startup directory is stable.
+
+23
+00:01:08.765 --> 00:01:13.102
+Review the utility for implicit
+configuration lookup in that directory and in parent
+
+24
+00:01:13.182 --> 00:01:14.447
+or user-home locations.
+
+25
+00:01:14.527 --> 00:01:18.804
+An absolute input path does not neutralize
+a hostile working directory when the tool
+
+26
+00:01:18.884 --> 00:01:21.776
+also discovers plugins or configuration
+relative to it.
+
+27
+00:01:21.856 --> 00:01:25.711
+Minimize the child environment to the
+variables it needs instead of blindly
+
+28
+00:01:25.791 --> 00:01:27.899
+forwarding every secret in process.env.
+
+29
+00:01:27.979 --> 00:01:32.016
+Preserve platform variables genuinely
+required for correct process startup,
+
+30
+00:01:32.096 --> 00:01:36.071
+but select them deliberately and source
+their values from trusted deployment
+
+31
+00:01:36.151 --> 00:01:36.995
+configuration.
+
+32
+00:01:37.075 --> 00:01:39.906
+Give credentials only to the operation
+that needs them,
+
+33
+00:01:39.986 --> 00:01:44.384
+and avoid placing secrets in command-line
+arguments where operating-system process
+
+34
+00:01:44.464 --> 00:01:46.150
+listings or logs may expose them.
+
+35
+00:01:46.230 --> 00:01:48.760
+Explicit paths, a controlled working
+directory,
+
+36
+00:01:48.840 --> 00:01:53.057
+and a purpose-built environment improve
+security and make behavior reproducible
+
+37
+00:01:53.137 --> 00:01:53.860
+across hosts.

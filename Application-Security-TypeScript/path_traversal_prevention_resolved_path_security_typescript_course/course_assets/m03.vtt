@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.338
+When an operation genuinely accepts a
+relative path,
+
+2
+00:00:03.418 --> 00:00:06.571
+first resolve the trusted root to an
+absolute lexical path.
+
+3
+00:00:06.651 --> 00:00:10.373
+Resolve the requested value against that
+root to produce a candidate.
+
+4
+00:00:10.453 --> 00:00:14.993
+Node's path.resolve processes segments
+from right to left until it finds an absolute
+
+5
+00:00:15.073 --> 00:00:18.605
+path, so an absolute request segment can
+replace the earlier root.
+
+6
+00:00:18.685 --> 00:00:23.163
+That behavior is useful because the later
+containment check will expose the escape,
+
+7
+00:00:23.243 --> 00:00:26.207
+but calling resolve alone does not make
+the result safe.
+
+8
+00:00:26.287 --> 00:00:30.387
+Use path.relative to express the candidate
+in relation to the resolved root.
+
+9
+00:00:30.467 --> 00:00:32.548
+A result equal to the parent component,
+
+10
+00:00:32.628 --> 00:00:36.538
+or beginning with a parent component
+followed by the platform separator,
+
+11
+00:00:36.618 --> 00:00:37.817
+represents an escape.
+
+12
+00:00:37.897 --> 00:00:41.428
+An unexpectedly absolute result also
+indicates different roots,
+
+13
+00:00:41.508 --> 00:00:43.337
+such as different Windows drives.
+
+14
+00:00:43.417 --> 00:00:46.129
+An empty result means candidate and root
+are equal.
+
+15
+00:00:46.209 --> 00:00:49.300
+Whether equality is acceptable depends on
+the operation;
+
+16
+00:00:49.380 --> 00:00:52.848
+listing a root may be intentional, while
+deleting it should fail.
+
+17
+00:00:52.928 --> 00:00:55.830
+This comparison is clearer than a naive
+string prefix.
+
+18
+00:00:55.910 --> 00:01:00.324
+A directory named files and a sibling
+named files-backup share characters but not a
+
+19
+00:01:00.404 --> 00:01:01.918
+containment relationship.
+
+20
+00:01:01.998 --> 00:01:05.341
+Appending a separator to prefix checks can
+reduce one mistake,
+
+21
+00:01:05.421 --> 00:01:09.962
+yet path.relative communicates path
+components and platform separators directly.
+
+22
+00:01:10.042 --> 00:01:13.321
+Use Node's path implementation for the
+deployment platform,
+
+23
+00:01:13.401 --> 00:01:17.500
+and do not invent universal lowercasing
+for case-insensitive filesystems.
+
+24
+00:01:17.580 --> 00:01:20.166
+Windows drive letters, UNC paths,
+backslashes,
+
+25
+00:01:20.246 --> 00:01:24.913
+and volume-specific case behavior require
+tests in the actual supported environment.
+
+26
+00:01:24.993 --> 00:01:28.210
+A reusable helper can make lexical
+containment consistent,
+
+27
+00:01:28.290 --> 00:01:30.182
+provided its contract is explicit:
+
+28
+00:01:30.262 --> 00:01:34.046
+root and candidate are resolved in the
+same intended platform context;
+
+29
+00:01:34.126 --> 00:01:36.901
+parent escapes and absolute relative
+results fail;
+
+30
+00:01:36.981 --> 00:01:38.873
+root equality is a caller decision.
+
+31
+00:01:38.953 --> 00:01:41.854
+The helper verifies syntax after lexical
+resolution.
+
+32
+00:01:41.934 --> 00:01:46.223
+It does not follow symbolic links or prove
+that the requester may access the file.
+
+33
+00:01:46.303 --> 00:01:50.339
+Callers still need object authorization,
+operation-specific rules, and,
+
+34
+00:01:50.419 --> 00:01:53.510
+where the threat model includes filesystem
+indirection,
+
+35
+00:01:53.590 --> 00:01:55.860
+canonical-path or safer-open reasoning.

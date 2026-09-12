@@ -1,0 +1,186 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.435
+A check-then-use gap appears when code
+validates or canonicalizes a path,
+
+2
+00:00:04.515 --> 00:00:08.200
+filesystem state changes, and a later call
+opens or modifies the name.
+
+3
+00:00:08.280 --> 00:00:12.777
+If another actor can replace an
+intermediate directory or link during that interval,
+
+4
+00:00:12.857 --> 00:00:15.855
+the checked pathname may no longer reach
+the same object.
+
+5
+00:00:15.935 --> 00:00:18.621
+The earlier validation was accurate at its
+moment;
+
+6
+00:00:18.701 --> 00:00:22.074
+it did not permanently bind the future
+operation to that object.
+
+7
+00:00:22.154 --> 00:00:24.277
+The first mitigation is architectural:
+
+8
+00:00:24.357 --> 00:00:28.542
+keep protected storage outside directory
+trees writable by untrusted users or
+
+9
+00:00:28.622 --> 00:00:29.996
+less-trusted processes.
+
+10
+00:00:30.076 --> 00:00:32.575
+Minimize the steps between resolution and
+use,
+
+11
+00:00:32.655 --> 00:00:36.777
+and avoid resolving the same external
+reference through separate code paths.
+
+12
+00:00:36.857 --> 00:00:39.543
+Where the runtime and operating system
+support it,
+
+13
+00:00:39.623 --> 00:00:42.371
+open with flags that reject unwanted link
+behavior,
+
+14
+00:00:42.451 --> 00:00:44.450
+use exclusive creation for new files,
+
+15
+00:00:44.530 --> 00:00:47.215
+and continue work through an already-open
+handle.
+
+16
+00:00:47.295 --> 00:00:49.232
+Understand each primitive's scope:
+
+17
+00:00:49.312 --> 00:00:52.435
+a no-follow flag may address only the
+final path component,
+
+18
+00:00:52.515 --> 00:00:54.576
+and availability differs by platform.
+
+19
+00:00:54.656 --> 00:00:59.403
+For stronger requirements, use
+platform-specific directory-handle or sandbox designs
+
+20
+00:00:59.483 --> 00:01:02.418
+rather than claiming a portable string
+check is atomic.
+
+21
+00:01:02.498 --> 00:01:04.247
+Creation needs particular care.
+
+22
+00:01:04.327 --> 00:01:07.513
+Canonicalize and authorize an existing
+controlled parent,
+
+23
+00:01:07.593 --> 00:01:09.591
+generate the final name on the server,
+
+24
+00:01:09.671 --> 00:01:12.419
+and create without overwriting an existing
+object.
+
+25
+00:01:12.499 --> 00:01:16.747
+Keep upload staging private and move into
+final storage under controlled rules.
+
+26
+00:01:16.827 --> 00:01:21.074
+Restrict the service account and
+filesystem access-control lists so a mistaken
+
+27
+00:01:21.154 --> 00:01:23.090
+target cannot reach the entire host.
+
+28
+00:01:23.170 --> 00:01:27.730
+Permissions are defense-in-depth; they do
+not excuse an application that computes an
+
+29
+00:01:27.810 --> 00:01:28.872
+unauthorized path.
+
+30
+00:01:28.952 --> 00:01:32.387
+Destructive operations require a narrower
+contract than reads.
+
+31
+00:01:32.467 --> 00:01:36.152
+Delete, overwrite, rename, recursive
+removal, archive extraction,
+
+32
+00:01:36.232 --> 00:01:40.542
+and temporary-file replacement can affect
+more than one object or erase recovery
+
+33
+00:01:40.622 --> 00:01:41.121
+options.
+
+34
+00:01:41.201 --> 00:01:45.698
+Resolve exact targets, reject root
+equality when the operation must address a child,
+
+35
+00:01:45.778 --> 00:01:48.964
+avoid broad recursive calls on
+request-derived locations,
+
+36
+00:01:49.044 --> 00:01:51.605
+and verify operation-specific
+authorization.
+
+37
+00:01:51.685 --> 00:01:55.620
+A containment helper written for
+downloading one file should not be reused
+
+38
+00:01:55.700 --> 00:01:58.136
+automatically for deleting a directory
+tree.
+
+39
+00:01:58.216 --> 00:02:02.900
+The operation, filesystem state, and
+consequences determine the required safeguards.

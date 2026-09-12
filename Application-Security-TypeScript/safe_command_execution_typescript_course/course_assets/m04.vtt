@@ -1,0 +1,182 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.319
+A direct process API preserves argument
+boundaries:
+
+2
+00:00:03.399 --> 00:00:07.597
+each array element reaches the target
+program as one argument rather than shell
+
+3
+00:00:07.677 --> 00:00:07.990
+text.
+
+4
+00:00:08.070 --> 00:00:10.702
+Application code should own the array's
+grammar.
+
+5
+00:00:10.782 --> 00:00:14.917
+It chooses fixed option names, their
+order, and which data positions may vary.
+
+6
+00:00:14.997 --> 00:00:17.002
+A client may request an output format,
+
+7
+00:00:17.082 --> 00:00:21.280
+but the server maps that choice to a known
+format value and places it after a fixed
+
+8
+00:00:21.360 --> 00:00:21.798
+option.
+
+9
+00:00:21.878 --> 00:00:26.515
+Forwarding a request-supplied string array
+would instead expose the target utility's
+
+10
+00:00:26.595 --> 00:00:28.349
+entire command-line interface.
+
+11
+00:00:28.429 --> 00:00:31.060
+Validate each variable according to its
+meaning.
+
+12
+00:00:31.140 --> 00:00:34.210
+Numeric settings need strict parsing and
+bounded ranges.
+
+13
+00:00:34.290 --> 00:00:36.734
+Format or mode choices belong to an
+allowlist.
+
+14
+00:00:36.814 --> 00:00:41.200
+Storage identifiers should map to
+controlled server paths instead of becoming raw
+
+15
+00:00:41.280 --> 00:00:42.157
+path arguments.
+
+16
+00:00:42.237 --> 00:00:45.620
+Do not assume TypeScript validates a body
+cast to a string array;
+
+17
+00:00:45.700 --> 00:00:47.768
+type assertions disappear at runtime.
+
+18
+00:00:47.848 --> 00:00:52.171
+The accepted request shape should be
+parsed from unknown data and converted into a
+
+19
+00:00:52.251 --> 00:00:55.571
+smaller internal operation before any
+arguments are created.
+
+20
+00:00:55.651 --> 00:00:58.596
+Argument separation prevents shell syntax
+injection,
+
+21
+00:00:58.676 --> 00:01:01.182
+but the target program performs another
+parse.
+
+22
+00:01:01.262 --> 00:01:04.771
+A file name beginning with a hyphen may be
+interpreted as an option.
+
+23
+00:01:04.851 --> 00:01:07.795
+Where the utility documents an
+end-of-options marker,
+
+24
+00:01:07.875 --> 00:01:09.567
+place it before operand values.
+
+25
+00:01:09.647 --> 00:01:13.970
+Otherwise use an API or invocation form
+that identifies operands unambiguously,
+
+26
+00:01:14.050 --> 00:01:17.559
+generate safe server-side file names, or
+reject ambiguous input.
+
+27
+00:01:17.639 --> 00:01:20.395
+Understand whether an option loads
+configuration,
+
+28
+00:01:20.475 --> 00:01:24.485
+writes to an arbitrary location, enables
+plugins, changes network access,
+
+29
+00:01:24.565 --> 00:01:26.194
+or interprets an input as code.
+
+30
+00:01:26.274 --> 00:01:28.655
+Keep structural choices distinct from
+data.
+
+31
+00:01:28.735 --> 00:01:33.434
+Optional behavior should select from
+application-authored argument fragments rather
+
+32
+00:01:33.514 --> 00:01:35.268
+than accept pass-through flags.
+
+33
+00:01:35.348 --> 00:01:38.794
+Fixed option-value pairs are easier to
+audit than a generic list.
+
+34
+00:01:38.874 --> 00:01:41.568
+Preserve ordering required by the target
+program,
+
+35
+00:01:41.648 --> 00:01:45.533
+and test values that resemble options even
+when they are otherwise valid.
+
+36
+00:01:45.613 --> 00:01:48.495
+The goal is not to let the client
+construct argv safely.
+
+37
+00:01:48.575 --> 00:01:52.835
+The goal is to expose a small application
+operation whose argv layout is fixed and
+
+38
+00:01:52.915 --> 00:01:55.860
+whose variable operands are validated and
+authorized.

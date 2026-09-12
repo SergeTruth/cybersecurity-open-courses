@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.967
+A relational database executes a SQL
+program and evaluates data values within that
+
+2
+00:00:05.047 --> 00:00:05.557
+program.
+
+3
+00:00:05.637 --> 00:00:10.232
+SQL injection becomes possible when
+externally controlled data is used to construct
+
+4
+00:00:10.312 --> 00:00:11.397
+the program itself.
+
+5
+00:00:11.477 --> 00:00:15.944
+In TypeScript, the dangerous boundary is
+easy to cross with string concatenation,
+
+6
+00:00:16.024 --> 00:00:20.555
+template-literal interpolation, or a
+helper that accepts a complete SQL fragment.
+
+7
+00:00:20.635 --> 00:00:24.846
+A route that inserts a request email
+directly between quote characters has not
+
+8
+00:00:24.926 --> 00:00:26.713
+merely mishandled punctuation.
+
+9
+00:00:26.793 --> 00:00:30.750
+It has allowed request data to influence
+where SQL syntax begins and ends.
+
+10
+00:00:30.830 --> 00:00:34.148
+The same defect can appear outside a
+simple WHERE comparison.
+
+11
+00:00:34.228 --> 00:00:38.503
+Applications dynamically assemble filters,
+sort clauses, selected columns,
+
+12
+00:00:38.583 --> 00:00:42.285
+table names, reporting expressions, and
+administrative commands.
+
+13
+00:00:42.365 --> 00:00:45.683
+If raw request text enters any of those
+structural positions,
+
+14
+00:00:45.763 --> 00:00:49.081
+the database may interpret part of that
+text as program logic.
+
+15
+00:00:49.161 --> 00:00:52.160
+The consequences can affect
+confidentiality, writes,
+
+16
+00:00:52.240 --> 00:00:56.005
+authentication decisions, reporting
+accuracy, and data integrity.
+
+17
+00:00:56.085 --> 00:01:00.425
+A read-only endpoint is not automatically
+low risk when its database account can
+
+18
+00:01:00.505 --> 00:01:01.717
+reach sensitive data.
+
+19
+00:01:01.797 --> 00:01:06.009
+Browser validation cannot defend this
+boundary because a client can send HTTP
+
+20
+00:01:06.089 --> 00:01:06.663
+directly.
+
+21
+00:01:06.743 --> 00:01:09.232
+Authentication also does not make input
+safe;
+
+22
+00:01:09.312 --> 00:01:13.715
+an authenticated user can submit
+unexpected data and may be limited to only part of
+
+23
+00:01:13.795 --> 00:01:14.816
+a shared database.
+
+24
+00:01:14.896 --> 00:01:17.066
+TypeScript types improve development,
+
+25
+00:01:17.146 --> 00:01:21.421
+but an external string remains a runtime
+string even if code asserts that it has a
+
+26
+00:01:21.501 --> 00:01:22.586
+trusted interface.
+
+27
+00:01:22.666 --> 00:01:26.048
+None of these controls separates the value
+from the SQL parser.
+
+28
+00:01:26.128 --> 00:01:30.468
+The durable design rule is that trusted
+application code authors SQL structure,
+
+29
+00:01:30.548 --> 00:01:34.313
+while external values are bound separately
+through the database API.
+
+30
+00:01:34.393 --> 00:01:37.839
+This keeps a value in a data position
+regardless of its contents.
+
+31
+00:01:37.919 --> 00:01:42.641
+Structural choices that cannot be ordinary
+parameters require a different treatment:
+
+32
+00:01:42.721 --> 00:01:46.039
+the server maps a limited client choice to
+a trusted fragment.
+
+33
+00:01:46.119 --> 00:01:48.608
+Secure review therefore follows
+provenance.
+
+34
+00:01:48.688 --> 00:01:53.091
+Identify which text forms the SQL program,
+determine where each part originated,
+
+35
+00:01:53.171 --> 00:01:57.510
+and ensure that untrusted values never
+become executable syntax through string
+
+36
+00:01:57.590 --> 00:01:58.420
+construction.

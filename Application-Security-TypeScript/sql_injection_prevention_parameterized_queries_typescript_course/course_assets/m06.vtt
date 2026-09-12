@@ -1,0 +1,188 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.980
+Parameterization prevents bound values
+from altering SQL syntax,
+
+2
+00:00:04.060 --> 00:00:07.174
+but a secure data operation requires
+additional decisions.
+
+3
+00:00:07.254 --> 00:00:10.979
+Runtime validation establishes whether a
+value has an acceptable type,
+
+4
+00:00:11.059 --> 00:00:13.440
+range, length, and meaning for the
+operation.
+
+5
+00:00:13.520 --> 00:00:18.038
+Authorization establishes whether the
+authenticated subject may perform that action
+
+6
+00:00:18.118 --> 00:00:19.217
+on the targeted data.
+
+7
+00:00:19.297 --> 00:00:23.388
+Business rules establish whether the
+change is permitted in the current state.
+
+8
+00:00:23.468 --> 00:00:27.559
+A parameterized query can be perfectly
+resistant to injection and still expose
+
+9
+00:00:27.639 --> 00:00:30.692
+another tenant's records or apply an
+unauthorized update.
+
+10
+00:00:30.772 --> 00:00:32.542
+Carry trusted tenant, ownership,
+
+11
+00:00:32.622 --> 00:00:36.652
+or membership scope into the query rather
+than accepting it from the request as
+
+12
+00:00:36.732 --> 00:00:37.342
+authority.
+
+13
+00:00:37.422 --> 00:00:41.819
+Validate search limits and date ranges so
+callers cannot request unreasonable work.
+
+14
+00:00:41.899 --> 00:00:44.341
+Check workflow and entitlement before
+writes.
+
+15
+00:00:44.421 --> 00:00:47.474
+These controls complement binding rather
+than replace it.
+
+16
+00:00:47.554 --> 00:00:50.729
+A validated email is still unsafe when
+concatenated into SQL,
+
+17
+00:00:50.809 --> 00:00:54.594
+and a safely bound document ID still
+requires an authorization decision.
+
+18
+00:00:54.674 --> 00:00:57.605
+Naming each control makes tests and review
+more precise.
+
+19
+00:00:57.685 --> 00:01:01.837
+Database least privilege limits
+consequences when application code or another
+
+20
+00:01:01.917 --> 00:01:02.710
+control fails.
+
+21
+00:01:02.790 --> 00:01:06.454
+Use an application account with only the
+tables, schemas, operations,
+
+22
+00:01:06.534 --> 00:01:08.610
+and procedures that the workload needs.
+
+23
+00:01:08.690 --> 00:01:11.621
+A reporting service may need read access
+without writes;
+
+24
+00:01:11.701 --> 00:01:16.036
+a narrowly scoped worker may need one
+procedure rather than broad ownership rights.
+
+25
+00:01:16.116 --> 00:01:19.657
+Avoid administrator credentials for
+routine application traffic,
+
+26
+00:01:19.737 --> 00:01:23.217
+and separate workloads when their
+privilege requirements differ.
+
+27
+00:01:23.297 --> 00:01:25.984
+Least privilege cannot remove an injection
+defect,
+
+28
+00:01:26.064 --> 00:01:29.361
+but it can reduce the data and operations
+reachable through one.
+
+29
+00:01:29.441 --> 00:01:33.470
+Handle database errors as an operational
+and information-exposure concern.
+
+30
+00:01:33.550 --> 00:01:37.458
+Return stable client messages that do not
+reveal unnecessary schema names,
+
+31
+00:01:37.538 --> 00:01:39.370
+query text, or connection details,
+
+32
+00:01:39.450 --> 00:01:43.541
+while preserving useful diagnostics in
+protected server logs with secrets and
+
+33
+00:01:43.621 --> 00:01:45.025
+sensitive values removed.
+
+34
+00:01:45.105 --> 00:01:49.318
+Hiding errors does not prevent injection
+and must not replace parameterization.
+
+35
+00:01:49.398 --> 00:01:53.183
+Together, binding, validation,
+authorization, business enforcement,
+
+36
+00:01:53.263 --> 00:01:57.415
+narrow database privileges, and
+disciplined error handling create layers with
+
+37
+00:01:57.495 --> 00:01:58.533
+distinct purposes.
+
+38
+00:01:58.613 --> 00:02:01.849
+Their separation allows each layer to be
+implemented, tested,
+
+39
+00:02:01.929 --> 00:02:06.020
+and monitored without pretending that one
+control solves every database risk.

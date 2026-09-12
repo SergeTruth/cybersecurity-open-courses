@@ -1,0 +1,184 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.718
+Validation of the initial target does not
+authorize the rest of an HTTP exchange.
+
+2
+00:00:04.798 --> 00:00:07.589
+A redirect can replace the protocol,
+hostname, port,
+
+3
+00:00:07.669 --> 00:00:09.778
+and therefore the network destination.
+
+4
+00:00:09.858 --> 00:00:14.137
+Relative locations still produce a new
+absolute target when resolved against the
+
+5
+00:00:14.217 --> 00:00:14.900
+current URL.
+
+6
+00:00:14.980 --> 00:00:18.205
+If redirects are unnecessary, disable
+automatic following.
+
+7
+00:00:18.285 --> 00:00:19.401
+If they are required,
+
+8
+00:00:19.481 --> 00:00:23.761
+bound the chain and treat every hop as a
+fresh destination decision before the next
+
+9
+00:00:23.841 --> 00:00:24.523
+connection.
+
+10
+00:00:24.603 --> 00:00:28.573
+For each redirect, resolve the Location
+value against the current URL with a
+
+11
+00:00:28.653 --> 00:00:32.995
+standards-aware parser, then repeat
+protocol, credential, hostname, port, DNS,
+
+12
+00:00:33.075 --> 00:00:33.819
+and IP policy.
+
+13
+00:00:33.899 --> 00:00:36.690
+Reject malformed locations, loops,
+excessive hops,
+
+14
+00:00:36.770 --> 00:00:39.313
+and any transition outside the feature's
+rules.
+
+15
+00:00:39.393 --> 00:00:43.487
+Do not assume that the first approved
+hostname confers trust on a later target.
+
+16
+00:00:43.567 --> 00:00:47.784
+Method changes and sensitive header
+forwarding also require deliberate client
+
+17
+00:00:47.864 --> 00:00:49.353
+behavior across redirects.
+
+18
+00:00:49.433 --> 00:00:52.348
+DNS creates another boundary between
+checking and use.
+
+19
+00:00:52.428 --> 00:00:56.708
+A design may resolve a hostname for
+validation and then pass the hostname to an HTTP
+
+20
+00:00:56.788 --> 00:00:59.145
+client that performs an independent
+lookup.
+
+21
+00:00:59.225 --> 00:01:02.636
+Those resolutions are not guaranteed to
+return the same address.
+
+22
+00:01:02.716 --> 00:01:04.639
+The defensive property is stronger:
+
+23
+00:01:04.719 --> 00:01:08.378
+the connection must use an address that
+passed the policy for that hop.
+
+24
+00:01:08.458 --> 00:01:12.738
+Achieving it may require a controlled
+lookup callback, a vetted HTTP dispatcher,
+
+25
+00:01:12.818 --> 00:01:14.927
+a proxy that enforces the same decision,
+
+26
+00:01:15.007 --> 00:01:19.100
+or another transport mechanism that binds
+approved resolution to connection
+
+27
+00:01:19.180 --> 00:01:20.049
+establishment.
+
+28
+00:01:20.129 --> 00:01:24.346
+Do not implement that binding by casually
+replacing every URL hostname with an IP
+
+29
+00:01:24.426 --> 00:01:24.922
+address.
+
+30
+00:01:25.002 --> 00:01:28.662
+HTTPS still needs the original hostname
+for server-name indication,
+
+31
+00:01:28.742 --> 00:01:31.347
+certificate verification, and virtual
+hosting,
+
+32
+00:01:31.427 --> 00:01:33.784
+and HTTP Host semantics must remain
+correct.
+
+33
+00:01:33.864 --> 00:01:38.268
+The transport should preserve those
+identity checks while constraining the socket
+
+34
+00:01:38.348 --> 00:01:39.092
+destination.
+
+35
+00:01:39.172 --> 00:01:43.265
+Network egress rules provide an
+independent backstop when library behavior,
+
+36
+00:01:43.345 --> 00:01:46.509
+races, or configuration drift defeat an
+application check.
+
+37
+00:01:46.589 --> 00:01:50.124
+Redirect validation and DNS-to-connection
+binding are distinct,
+
+38
+00:01:50.204 --> 00:01:52.127
+but both enforce the same principle:
+
+39
+00:01:52.207 --> 00:01:55.060
+authorize the destination actually used at
+every hop.

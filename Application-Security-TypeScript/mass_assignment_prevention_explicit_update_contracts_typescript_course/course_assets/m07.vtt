@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.462
+A narrow field contract does not determine
+which record a caller may change.
+
+2
+00:00:04.542 --> 00:00:07.947
+Enforce object-level scope with tenant,
+owner, administrator,
+
+3
+00:00:08.027 --> 00:00:09.389
+and current-state rules.
+
+4
+00:00:09.469 --> 00:00:13.679
+Prefer scoped lookups or updates that
+include the security boundary in the query
+
+5
+00:00:13.759 --> 00:00:17.721
+where appropriate, then apply field-level
+permission and business logic.
+
+6
+00:00:17.801 --> 00:00:22.135
+An authenticated principal can still be
+unauthorized for the target object or for a
+
+7
+00:00:22.215 --> 00:00:23.825
+particular field transition.
+
+8
+00:00:23.905 --> 00:00:28.300
+Ensure an unscoped object loaded earlier
+cannot bypass the tenant condition during
+
+9
+00:00:28.380 --> 00:00:29.123
+persistence.
+
+10
+00:00:29.203 --> 00:00:32.732
+Review the complete flow from request
+through runtime validation,
+
+11
+00:00:32.812 --> 00:00:35.970
+authorization, mapping, business logic,
+and persistence.
+
+12
+00:00:36.050 --> 00:00:39.517
+Search for direct req.body usage, object
+spread, Object.assign,
+
+13
+00:00:39.597 --> 00:00:42.940
+generic model binders, Partial of an
+entity used as a public DTO,
+
+14
+00:00:43.020 --> 00:00:45.991
+ORM-generated update inputs in controller
+signatures,
+
+15
+00:00:46.071 --> 00:00:48.548
+nested relation operations, and bulk
+updates.
+
+16
+00:00:48.628 --> 00:00:52.900
+Identify where the writable-field
+allowlist is expressed and confirm later code
+
+17
+00:00:52.980 --> 00:00:54.527
+cannot reintroduce raw data.
+
+18
+00:00:54.607 --> 00:00:58.879
+Negative tests are especially important
+because intended clients never send the
+
+19
+00:00:58.959 --> 00:01:00.878
+properties that reveal this defect.
+
+20
+00:01:00.958 --> 00:01:04.611
+Submit unknown keys, server-owned fields,
+privileged state fields,
+
+21
+00:01:04.691 --> 00:01:08.529
+nested unauthorized children, and fields
+valid on a different endpoint.
+
+22
+00:01:08.609 --> 00:01:12.572
+Test another tenant's identifier,
+unauthorized administrative actions,
+
+23
+00:01:12.652 --> 00:01:16.862
+null and omission boundaries, empty
+values, duplicate or conflicting changes,
+
+24
+00:01:16.942 --> 00:01:20.285
+and bulk requests containing at least one
+out-of-scope object.
+
+25
+00:01:20.365 --> 00:01:23.460
+Assert both the response and unchanged
+persistence state.
+
+26
+00:01:23.540 --> 00:01:26.698
+Add regression tests when models gain
+columns or relations.
+
+27
+00:01:26.778 --> 00:01:30.740
+A useful invariant is that the endpoint's
+writable set changes only when its
+
+28
+00:01:30.820 --> 00:01:32.306
+contract and mapper change.
+
+29
+00:01:32.386 --> 00:01:36.657
+Log denied privileged operations and
+authorization failures without recording
+
+30
+00:01:36.737 --> 00:01:38.161
+sensitive request bodies.
+
+31
+00:01:38.241 --> 00:01:42.885
+Least-privilege database accounts and
+constraints provide containment and invariant
+
+32
+00:01:42.965 --> 00:01:47.484
+protection, but ordinary database
+permissions rarely express field-level business
+
+33
+00:01:47.564 --> 00:01:48.678
+policy per endpoint.
+
+34
+00:01:48.758 --> 00:01:53.216
+The application service remains
+responsible for translating authenticated intent
+
+35
+00:01:53.296 --> 00:01:56.020
+into an authorized, explicit persistence
+command.

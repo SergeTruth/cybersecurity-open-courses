@@ -1,0 +1,156 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.004
+A TypeScript service may represent one
+account as incoming JSON, a request object,
+
+2
+00:00:05.084 --> 00:00:09.074
+a domain object, an ORM entity, a
+persistence update, and an API response.
+
+3
+00:00:09.154 --> 00:00:12.822
+Those representations have different
+purposes and capabilities.
+
+4
+00:00:12.902 --> 00:00:15.347
+Mass assignment, also called over-posting,
+
+5
+00:00:15.427 --> 00:00:19.609
+occurs when externally supplied properties
+cross too broadly from a request
+
+6
+00:00:19.689 --> 00:00:23.293
+representation into a sensitive model or
+persistence operation.
+
+7
+00:00:23.373 --> 00:00:27.813
+The statement that updates an account with
+data equal to req.body is deliberately
+
+8
+00:00:27.893 --> 00:00:28.343
+unsafe.
+
+9
+00:00:28.423 --> 00:00:30.868
+The problem is not unique to a particular
+ORM.
+
+10
+00:00:30.948 --> 00:00:35.324
+Object spread, Object.assign, entity
+merging, document-database operators,
+
+11
+00:00:35.404 --> 00:00:38.171
+automatic model binding, generic PATCH
+handlers,
+
+12
+00:00:38.251 --> 00:00:41.275
+and nested writes can create the same
+boundary failure.
+
+13
+00:00:41.355 --> 00:00:45.666
+The persistence tool normally performs the
+update the application requested;
+
+14
+00:00:45.746 --> 00:00:49.157
+it does not know which fields that
+endpoint intended to expose.
+
+15
+00:00:49.237 --> 00:00:53.934
+Create and upsert endpoints need the same
+discipline because server-owned defaults,
+
+16
+00:00:54.014 --> 00:00:58.132
+identifiers, and relationships can be
+over-posted before a record exists.
+
+17
+00:00:58.212 --> 00:01:01.751
+A client can submit fields that the
+visible form never contained.
+
+18
+00:01:01.831 --> 00:01:05.435
+Role, tenant identifier, owner identifier,
+verification state,
+
+19
+00:01:05.515 --> 00:01:09.182
+billing status, account balance, approval
+flags, audit metadata,
+
+20
+00:01:09.262 --> 00:01:12.094
+and workflow state may all exist in the
+stored model.
+
+21
+00:01:12.174 --> 00:01:15.777
+Hiding or disabling those controls in the
+UI is not authorization.
+
+22
+00:01:15.857 --> 00:01:17.981
+Authentication is also insufficient:
+
+23
+00:01:18.061 --> 00:01:21.986
+a user may be allowed to edit a profile
+but not to change administrative or
+
+24
+00:01:22.066 --> 00:01:24.253
+server-owned state on that same record.
+
+25
+00:01:24.333 --> 00:01:27.551
+The server must define writable fields for
+each operation.
+
+26
+00:01:27.631 --> 00:01:31.234
+Parse and validate the request against a
+narrow runtime contract,
+
+27
+00:01:31.314 --> 00:01:34.725
+authorize both the target object and the
+requested operation,
+
+28
+00:01:34.805 --> 00:01:39.566
+apply business rules, and construct the
+persistence update from approved properties.
+
+29
+00:01:39.646 --> 00:01:44.344
+New database columns should remain
+unreachable until an operation deliberately maps
+
+30
+00:01:44.424 --> 00:01:44.745
+them.
+
+31
+00:01:44.825 --> 00:01:49.201
+The durable distinction is that a request
+body describes what the client wants to
+
+32
+00:01:49.281 --> 00:01:52.820
+change; it does not define what the client
+is permitted to change.

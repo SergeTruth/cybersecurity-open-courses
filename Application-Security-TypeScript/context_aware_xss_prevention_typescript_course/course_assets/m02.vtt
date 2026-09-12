@@ -1,0 +1,147 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.293
+The easiest interpretation boundary to
+secure is one the application never creates.
+
+2
+00:00:05.373 --> 00:00:08.568
+If a profile name, status message, or
+search term is text,
+
+3
+00:00:08.648 --> 00:00:13.308
+assign it with textContent,
+createTextNode, or normal framework interpolation.
+
+4
+00:00:13.388 --> 00:00:16.050
+These APIs construct character data
+directly.
+
+5
+00:00:16.130 --> 00:00:20.457
+They do not ask the HTML parser to decide
+whether the value contains elements,
+
+6
+00:00:20.537 --> 00:00:22.667
+attributes, or executable behavior.
+
+7
+00:00:22.747 --> 00:00:24.944
+Build structure with structural APIs.
+
+8
+00:00:25.024 --> 00:00:28.419
+Create an element, attach known classes,
+populate its text,
+
+9
+00:00:28.499 --> 00:00:30.230
+and append it to a known parent.
+
+10
+00:00:30.310 --> 00:00:34.370
+This keeps developer-authored structure
+separate from external data.
+
+11
+00:00:34.450 --> 00:00:39.177
+Concatenating strings into an HTML
+fragment collapses those roles and forces every
+
+12
+00:00:39.257 --> 00:00:43.517
+inserted value to be correct for its exact
+location in the generated source.
+
+13
+00:00:43.597 --> 00:00:47.924
+One missed or differently interpreted
+insertion becomes a security defect.
+
+14
+00:00:48.004 --> 00:00:49.934
+Safe is still property-specific.
+
+15
+00:00:50.014 --> 00:00:53.742
+Assigning textContent on an ordinary
+element has text semantics,
+
+16
+00:00:53.822 --> 00:00:55.619
+but assigning href, src, style,
+
+17
+00:00:55.699 --> 00:00:59.494
+or a script-related property invokes
+different browser behavior.
+
+18
+00:00:59.574 --> 00:01:04.233
+A link label can be rendered safely as
+text while its destination still requires URL
+
+19
+00:01:04.313 --> 00:01:06.510
+parsing and protocol or origin policy.
+
+20
+00:01:06.590 --> 00:01:08.853
+Attribute names should be fixed by code.
+
+21
+00:01:08.933 --> 00:01:12.927
+A property setter is not universally safe
+merely because it is a DOM API.
+
+22
+00:01:13.007 --> 00:01:17.667
+Treat innerHTML, outerHTML,
+insertAdjacentHTML, document-writing functions,
+
+23
+00:01:17.747 --> 00:01:21.209
+and string-based HTML parsing as
+security-sensitive sinks.
+
+24
+00:01:21.289 --> 00:01:25.682
+Framework raw-HTML features create the
+same boundary under a different name.
+
+25
+00:01:25.762 --> 00:01:30.222
+Use them only when the requirement is
+genuinely to interpret HTML and a reviewed
+
+26
+00:01:30.302 --> 00:01:32.499
+sanitization path supplies the value.
+
+27
+00:01:32.579 --> 00:01:36.906
+For ordinary interfaces, state the
+semantics directly: text uses text APIs,
+
+28
+00:01:36.986 --> 00:01:41.113
+event behavior uses event listeners, URLs
+use validated URL properties,
+
+29
+00:01:41.193 --> 00:01:44.321
+and structure uses element or component
+construction.
+
+30
+00:01:44.401 --> 00:01:49.194
+Avoid converting data into source code
+when the platform already offers a structured
+
+31
+00:01:49.274 --> 00:01:49.940
+operation.

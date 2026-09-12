@@ -1,0 +1,171 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.639
+Context-aware XSS prevention starts by
+tracing untrusted data to the browser
+
+2
+00:00:04.719 --> 00:00:06.538
+operation that will interpret it.
+
+3
+00:00:06.618 --> 00:00:09.503
+For ordinary text, use textContent,
+createTextNode,
+
+4
+00:00:09.583 --> 00:00:11.527
+or normal framework interpolation.
+
+5
+00:00:11.607 --> 00:00:14.116
+For structure, create elements or
+components.
+
+6
+00:00:14.196 --> 00:00:18.460
+These APIs preserve the distinction
+between developer-authored structure and
+
+7
+00:00:18.540 --> 00:00:22.868
+external data, avoiding source-code
+construction instead of trying to repair it
+
+8
+00:00:22.948 --> 00:00:23.575
+afterward.
+
+9
+00:00:23.655 --> 00:00:26.916
+When a system must generate source, name
+the precise context.
+
+10
+00:00:26.996 --> 00:00:30.759
+HTML text and quoted attributes need their
+appropriate HTML handling.
+
+11
+00:00:30.839 --> 00:00:33.285
+URL components need URL-aware
+construction,
+
+12
+00:00:33.365 --> 00:00:37.943
+while URL-bearing properties also require
+protocol, origin, or destination policy.
+
+13
+00:00:38.023 --> 00:00:42.288
+Avoid placing external strings into
+JavaScript, CSS, or event-handler source;
+
+14
+00:00:42.368 --> 00:00:45.880
+prefer structured data, fixed handlers,
+controlled properties,
+
+15
+00:00:45.960 --> 00:00:47.277
+and allowlisted values.
+
+16
+00:00:47.357 --> 00:00:50.806
+Input validation decides whether data fits
+the business domain.
+
+17
+00:00:50.886 --> 00:00:55.151
+Output handling decides how accepted data
+is represented safely at a particular
+
+18
+00:00:55.231 --> 00:00:55.544
+sink.
+
+19
+00:00:55.624 --> 00:00:58.258
+When rich HTML is an intentional product
+feature,
+
+20
+00:00:58.338 --> 00:01:01.725
+use a maintained parsing-based sanitizer
+with a narrow policy.
+
+21
+00:01:01.805 --> 00:01:05.254
+Protect the result from later unsafe
+concatenation or decoding.
+
+22
+00:01:05.334 --> 00:01:09.473
+Framework autoescaping and structured
+rendering should remain the default,
+
+23
+00:01:09.553 --> 00:01:13.504
+while raw-HTML APIs, trust bypasses,
+disabled escaping, embedded state,
+
+24
+00:01:13.584 --> 00:01:17.724
+direct DOM manipulation, and third-party
+renderers receive focused review.
+
+25
+00:01:17.804 --> 00:01:22.131
+TypeScript types can make the boundary
+visible but cannot perform runtime safety
+
+26
+00:01:22.211 --> 00:01:23.214
+transformations.
+
+27
+00:01:23.294 --> 00:01:27.622
+Finally, verify the design across every
+source-to-sink path and add containment
+
+28
+00:01:27.702 --> 00:01:28.141
+layers.
+
+29
+00:01:28.221 --> 00:01:32.046
+Regression tests should cover server and
+client rendering, URL policy,
+
+30
+00:01:32.126 --> 00:01:34.133
+sanitization, and post-processing.
+
+31
+00:01:34.213 --> 00:01:38.541
+CSP can restrict active content, Trusted
+Types can gate covered injection sinks,
+
+32
+00:01:38.621 --> 00:01:41.945
+and HttpOnly can protect selected cookies
+from script access.
+
+33
+00:01:42.025 --> 00:01:44.220
+None replaces correct context handling.
+
+34
+00:01:44.300 --> 00:01:46.871
+Do not ask only whether a string has been
+escaped.
+
+35
+00:01:46.951 --> 00:01:49.021
+Ask what will interpret the value next,
+
+36
+00:01:49.101 --> 00:01:51.860
+and use the defense designed for that
+exact context.

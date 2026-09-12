@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.737
+Server-side enforcement begins by
+establishing who or what is making the request.
+
+2
+00:00:04.817 --> 00:00:08.872
+Authentication middleware should verify
+the session or token according to the
+
+3
+00:00:08.952 --> 00:00:12.100
+application's protocol before a privileged
+operation runs.
+
+4
+00:00:12.180 --> 00:00:15.569
+Verification includes more than decoding a
+token-shaped string.
+
+5
+00:00:15.649 --> 00:00:18.796
+The server must validate the signature or
+session reference,
+
+6
+00:00:18.876 --> 00:00:22.024
+expected issuer and audience where
+applicable, expiration,
+
+7
+00:00:22.104 --> 00:00:25.372
+and any revocation or session-state rules
+the system relies on.
+
+8
+00:00:25.452 --> 00:00:28.479
+The result should be a stable internal
+subject identifier,
+
+9
+00:00:28.559 --> 00:00:32.372
+not a display name or an arbitrary
+identifier copied from the request body.
+
+10
+00:00:32.452 --> 00:00:36.265
+From that verified identity, the server
+builds a trusted request context.
+
+11
+00:00:36.345 --> 00:00:39.977
+A TypeScript interface can represent
+fields such as user ID, tenant ID,
+
+12
+00:00:40.057 --> 00:00:44.051
+and roles, but those values must originate
+from trusted server-side sources.
+
+13
+00:00:44.131 --> 00:00:48.489
+Tenant membership, permissions, and
+feature entitlements are usually loaded from a
+
+14
+00:00:48.569 --> 00:00:52.988
+session record, identity provider mapping,
+or authoritative application database.
+
+15
+00:00:53.068 --> 00:00:54.702
+A body containing userId, role,
+
+16
+00:00:54.782 --> 00:00:57.324
+or tenantId may help describe a requested
+target,
+
+17
+00:00:57.404 --> 00:01:01.520
+but it cannot grant identity or privilege
+merely because the client supplied it.
+
+18
+00:01:01.600 --> 00:01:05.837
+A small AuthContext type gives route
+handlers and services a consistent contract.
+
+19
+00:01:05.917 --> 00:01:09.730
+Authentication middleware can attach a
+validated context to the request,
+
+20
+00:01:09.810 --> 00:01:12.715
+while downstream code accepts that context
+explicitly.
+
+21
+00:01:12.795 --> 00:01:16.972
+This is preferable to repeatedly
+interpreting headers or body properties in each
+
+22
+00:01:17.052 --> 00:01:17.536
+handler.
+
+23
+00:01:17.616 --> 00:01:21.853
+TypeScript then helps prevent accidental
+omissions and inconsistent field names
+
+24
+00:01:21.933 --> 00:01:23.022
+across the codebase.
+
+25
+00:01:23.102 --> 00:01:25.826
+It does not verify the runtime origin of
+those fields,
+
+26
+00:01:25.906 --> 00:01:29.961
+so the boundary that constructs
+AuthContext must remain narrow and auditable.
+
+27
+00:01:30.041 --> 00:01:33.733
+Authentication and authorization remain
+separate responsibilities.
+
+28
+00:01:33.813 --> 00:01:36.053
+A valid session establishes the requester;
+
+29
+00:01:36.133 --> 00:01:40.007
+it does not prove access to every tenant,
+record, or administrative action.
+
+30
+00:01:40.087 --> 00:01:44.324
+Downstream policy still needs the trusted
+subject plus the requested resource and
+
+31
+00:01:44.404 --> 00:01:45.251
+relevant state.
+
+32
+00:01:45.331 --> 00:01:49.386
+This pattern works whether the transport
+layer uses Express, Fastify, NestJS,
+
+33
+00:01:49.466 --> 00:01:52.008
+or a custom HTTP server: verify
+credentials once,
+
+34
+00:01:52.088 --> 00:01:54.267
+construct trusted context deliberately,
+
+35
+00:01:54.347 --> 00:01:58.100
+and pass that context to the code
+responsible for each security decision.

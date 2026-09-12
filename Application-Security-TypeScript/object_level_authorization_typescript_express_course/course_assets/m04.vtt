@@ -1,0 +1,167 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.731
+One strong implementation pattern is to
+make the data query express the caller's
+
+2
+00:00:04.811 --> 00:00:05.620
+allowed scope.
+
+3
+00:00:05.700 --> 00:00:09.930
+Instead of loading an arbitrary project by
+ID and hoping a later branch remembers
+
+4
+00:00:10.010 --> 00:00:14.241
+the tenant check, query for the project
+whose ID matches and whose tenant ID comes
+
+5
+00:00:14.321 --> 00:00:16.374
+from trusted authentication context.
+
+6
+00:00:16.454 --> 00:00:20.498
+A missing result then means the
+application has no accessible object for that
+
+7
+00:00:20.578 --> 00:00:21.574
+subject and scope.
+
+8
+00:00:21.654 --> 00:00:25.076
+Exact ORM method names vary, but the
+security property is stable:
+
+9
+00:00:25.156 --> 00:00:29.076
+client-controlled identity does not choose
+the authorization boundary.
+
+10
+00:00:29.156 --> 00:00:32.889
+This pattern is especially useful for
+ownership and tenant isolation.
+
+11
+00:00:32.969 --> 00:00:37.199
+Repository methods can require both the
+object identifier and an authorization
+
+12
+00:00:37.279 --> 00:00:39.892
+scope, or accept a predicate derived from
+policy.
+
+13
+00:00:39.972 --> 00:00:44.328
+Avoid generic findById helpers in
+sensitive services when they erase the security
+
+14
+00:00:44.408 --> 00:00:44.905
+context.
+
+15
+00:00:44.985 --> 00:00:49.154
+If unrestricted lookup is genuinely
+required for an administrative workflow,
+
+16
+00:00:49.234 --> 00:00:53.589
+give it a distinct, narrowly used name and
+require the stronger policy explicitly.
+
+17
+00:00:53.669 --> 00:00:56.718
+The code review should make the
+exceptional path obvious.
+
+18
+00:00:56.798 --> 00:00:58.975
+Query scoping also belongs on mutations.
+
+19
+00:00:59.055 --> 00:01:03.348
+An update or delete constrained only by
+object ID can become a write-oriented BOLA
+
+20
+00:01:03.428 --> 00:01:06.104
+even when the preceding read was scoped
+correctly.
+
+21
+00:01:06.184 --> 00:01:10.103
+Prefer a transaction or mutation predicate
+that includes the same tenant,
+
+22
+00:01:10.183 --> 00:01:12.548
+owner, membership, or version constraints.
+
+23
+00:01:12.628 --> 00:01:16.921
+Check the affected-row result and avoid
+performing a second unscoped lookup that
+
+24
+00:01:17.001 --> 00:01:18.867
+changes which record is acted upon.
+
+25
+00:01:18.947 --> 00:01:22.307
+Not every authorization rule fits into one
+database predicate.
+
+26
+00:01:22.387 --> 00:01:25.187
+Delegation, field-level views, state
+transitions,
+
+27
+00:01:25.267 --> 00:01:29.746
+and relationships spanning services may
+require loading a scoped candidate and then
+
+28
+00:01:29.826 --> 00:01:31.506
+evaluating an explicit policy.
+
+29
+00:01:31.586 --> 00:01:33.639
+The safe sequence is still deliberate:
+
+30
+00:01:33.719 --> 00:01:36.955
+establish the broadest enforceable scope
+during selection,
+
+31
+00:01:37.035 --> 00:01:40.208
+obtain the specific object, apply any
+richer action policy,
+
+32
+00:01:40.288 --> 00:01:43.523
+and perform the operation without losing
+those constraints.
+
+33
+00:01:43.603 --> 00:01:45.967
+Query scoping is not a substitute for
+policy;
+
+34
+00:01:46.047 --> 00:01:50.278
+it is a way to make common authorization
+omissions harder to express and to reduce
+
+35
+00:01:50.358 --> 00:01:53.780
+the amount of unauthorized data that
+enters application memory.

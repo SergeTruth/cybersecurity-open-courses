@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.667
+Web applications move data through several
+interpreters.
+
+2
+00:00:03.747 --> 00:00:07.040
+An HTTP value may enter a server template,
+become HTML source,
+
+3
+00:00:07.120 --> 00:00:11.553
+produce DOM nodes, flow into a URL
+property, or reach JavaScript or CSS processing.
+
+4
+00:00:11.633 --> 00:00:16.193
+Cross-site scripting occurs when untrusted
+data crosses one of those boundaries in a
+
+5
+00:00:16.273 --> 00:00:20.389
+representation the browser can interpret
+as active content instead of inert
+
+6
+00:00:20.469 --> 00:00:21.483
+application data.
+
+7
+00:00:21.563 --> 00:00:25.679
+The correct defense therefore depends on
+what will interpret the value next.
+
+8
+00:00:25.759 --> 00:00:28.419
+Reflected XSS returns request data in a
+response,
+
+9
+00:00:28.499 --> 00:00:31.096
+stored XSS persists data that is rendered
+later,
+
+10
+00:00:31.176 --> 00:00:34.976
+and DOM-based XSS is created by
+client-side data flow and browser APIs.
+
+11
+00:00:35.056 --> 00:00:37.462
+These labels describe where to
+investigate,
+
+12
+00:00:37.542 --> 00:00:40.012
+but they do not change the engineering
+method.
+
+13
+00:00:40.092 --> 00:00:44.462
+A value can be safely emitted by an API
+and become unsafe when frontend code inserts
+
+14
+00:00:44.542 --> 00:00:46.125
+it into an HTML-parsing sink.
+
+15
+00:00:46.205 --> 00:00:51.018
+Server-rendered and client-rendered paths
+both need source-to-destination analysis.
+
+16
+00:00:51.098 --> 00:00:55.912
+The assignment container.innerHTML equals
+userMessage is deliberately unsafe because
+
+17
+00:00:55.992 --> 00:00:59.348
+it asks an HTML parser to create structure
+from untrusted text.
+
+18
+00:00:59.428 --> 00:01:03.798
+Assigning the same value to textContent
+states the intended semantics directly:
+
+19
+00:01:03.878 --> 00:01:06.348
+the value becomes a text node, not HTML
+source.
+
+20
+00:01:06.428 --> 00:01:09.911
+That is stronger than trying to identify
+suspicious substrings.
+
+21
+00:01:09.991 --> 00:01:14.298
+The browser never receives an instruction
+to reinterpret the message as markup.
+
+22
+00:01:14.378 --> 00:01:17.228
+TypeScript types do not alter this runtime
+behavior;
+
+23
+00:01:17.308 --> 00:01:19.904
+a string assertion cannot make content
+trusted.
+
+24
+00:01:19.984 --> 00:01:21.251
+Use a repeatable model.
+
+25
+00:01:21.331 --> 00:01:24.497
+Identify the trust of the data and the
+exact output context.
+
+26
+00:01:24.577 --> 00:01:27.554
+Prefer an API that keeps data separate
+from source code.
+
+27
+00:01:27.634 --> 00:01:32.257
+When source generation is unavoidable,
+encode for that specific parser and location.
+
+28
+00:01:32.337 --> 00:01:35.694
+Sanitize only when the product
+intentionally permits markup,
+
+29
+00:01:35.774 --> 00:01:39.194
+then preserve the sanitizer's result
+without unsafe mutation.
+
+30
+00:01:39.274 --> 00:01:41.680
+Add browser controls as independent
+layers.
+
+31
+00:01:41.760 --> 00:01:45.370
+XSS prevention is not a single escape
+function applied everywhere.
+
+32
+00:01:45.450 --> 00:01:49.060
+It is a set of explicit decisions at every
+interpretation boundary.

@@ -1,0 +1,177 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.000
+A serious server-side failure can occur
+when an application accepts a well-formed
+
+2
+00:00:05.080 --> 00:00:07.909
+value that the client had no authority to
+determine.
+
+3
+00:00:07.989 --> 00:00:11.653
+Price, discount, balance, tax, shipping
+cost, subscription tier,
+
+4
+00:00:11.733 --> 00:00:15.912
+entitlement, approval status, inventory,
+transaction limits, ownership,
+
+5
+00:00:15.992 --> 00:00:20.492
+timestamps, and administrative flags are
+not ordinary input when the server has an
+
+6
+00:00:20.572 --> 00:00:21.858
+authoritative source.
+
+7
+00:00:21.938 --> 00:00:25.088
+Validation can prove that unitPrice is a
+positive number;
+
+8
+00:00:25.168 --> 00:00:28.125
+it cannot prove that the number is the
+permitted price.
+
+9
+00:00:28.205 --> 00:00:31.162
+Define the request around choices the
+client may make.
+
+10
+00:00:31.242 --> 00:00:34.907
+For an order, that may be product ID,
+quantity, and shipping option.
+
+11
+00:00:34.987 --> 00:00:38.394
+The server retrieves authoritative product
+and account data,
+
+12
+00:00:38.474 --> 00:00:42.331
+checks availability and entitlements,
+calculates the current price,
+
+13
+00:00:42.411 --> 00:00:43.761
+and persists the result.
+
+14
+00:00:43.841 --> 00:00:47.055
+A submitted total can help detect a stale
+checkout display,
+
+15
+00:00:47.135 --> 00:00:49.385
+but it must not become the amount charged.
+
+16
+00:00:49.465 --> 00:00:52.423
+The same model applies to workflow and
+feature access:
+
+17
+00:00:52.503 --> 00:00:57.131
+the client requests an action, while
+server-owned rules derive the resulting state.
+
+18
+00:00:57.211 --> 00:00:59.654
+Mass assignment, also called over-posting,
+
+19
+00:00:59.734 --> 00:01:04.363
+breaks this boundary by copying an
+arbitrary request body into a persistence update.
+
+20
+00:01:04.443 --> 00:01:06.950
+The visible form may expose only
+displayName,
+
+21
+00:01:07.030 --> 00:01:11.016
+yet a direct request can add role,
+tenantId, accountBalance, or isAdmin.
+
+22
+00:01:11.096 --> 00:01:15.403
+Spreading that body into a database update
+turns undocumented properties into
+
+23
+00:01:15.483 --> 00:01:16.319
+capabilities.
+
+24
+00:01:16.399 --> 00:01:18.778
+The safer pattern is an explicit
+allowlist:
+
+25
+00:01:18.858 --> 00:01:23.165
+construct an update object from the small
+set of validated fields the operation
+
+26
+00:01:23.245 --> 00:01:25.816
+permits, and set ownership, privilege,
+audit,
+
+27
+00:01:25.896 --> 00:01:28.982
+and derived values from trusted context or
+server logic.
+
+28
+00:01:29.062 --> 00:01:33.819
+Separate input models from database
+entities so transport shapes cannot accidentally
+
+29
+00:01:33.899 --> 00:01:35.571
+become persistence commands.
+
+30
+00:01:35.651 --> 00:01:39.508
+Sensitive operations may deserve
+purpose-specific service methods:
+
+31
+00:01:39.588 --> 00:01:41.902
+changing a profile name, assigning a role,
+
+32
+00:01:41.982 --> 00:01:46.675
+and transferring ownership should travel
+through different authorization and audit
+
+33
+00:01:46.755 --> 00:01:47.141
+paths.
+
+34
+00:01:47.221 --> 00:01:51.335
+Reviewers can then see which
+caller-controlled values enter an operation,
+
+35
+00:01:51.415 --> 00:01:55.273
+which values the server derives, and which
+invariants precede a write.
+
+36
+00:01:55.353 --> 00:01:59.981
+The server remains authoritative by
+limiting client input to decisions the client is
+
+37
+00:02:00.061 --> 00:02:01.540
+actually entitled to make.

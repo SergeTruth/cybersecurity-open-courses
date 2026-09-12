@@ -1,0 +1,176 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.212
+A well-structured launch still starts code
+with real capabilities.
+
+2
+00:00:04.292 --> 00:00:08.837
+By default, the child commonly inherits
+the service's operating-system identity,
+
+3
+00:00:08.917 --> 00:00:12.566
+accessible filesystem, network position,
+selected environment,
+
+4
+00:00:12.646 --> 00:00:14.502
+and configured standard streams.
+
+5
+00:00:14.582 --> 00:00:16.886
+If the parent runs with broad permissions,
+
+6
+00:00:16.966 --> 00:00:21.319
+a defect in the utility or an overly
+powerful option can have broad consequences.
+
+7
+00:00:21.399 --> 00:00:24.343
+Use the least practical privilege for the
+service and,
+
+8
+00:00:24.423 --> 00:00:28.328
+where risk warrants it, isolate the
+operation with a dedicated account,
+
+9
+00:00:28.408 --> 00:00:32.696
+constrained filesystem access, or an
+existing sandbox or container boundary.
+
+10
+00:00:32.776 --> 00:00:34.952
+Isolation must have an explicit policy;
+
+11
+00:00:35.032 --> 00:00:37.721
+a container label alone is not a
+permission model.
+
+12
+00:00:37.801 --> 00:00:39.401
+Bound the work before launch.
+
+13
+00:00:39.481 --> 00:00:42.489
+Validate file size, dimensions, duration,
+page count,
+
+14
+00:00:42.569 --> 00:00:45.258
+or other cost indicators relevant to the
+utility.
+
+15
+00:00:45.338 --> 00:00:49.690
+Limit concurrent children so request
+bursts cannot exhaust processes, memory,
+
+16
+00:00:49.770 --> 00:00:52.267
+CPU, file descriptors, or temporary
+storage.
+
+17
+00:00:52.347 --> 00:00:56.763
+Place quotas at a shared server boundary
+rather than only in one handler instance.
+
+18
+00:00:56.843 --> 00:01:01.132
+Authorization and rate limits should
+reflect that an external processor may be
+
+19
+00:01:01.212 --> 00:01:04.284
+substantially more expensive than an
+ordinary API call.
+
+20
+00:01:04.364 --> 00:01:08.845
+Use asynchronous process APIs in
+request-handling paths so the Node.js event loop
+
+21
+00:01:08.925 --> 00:01:10.717
+can continue serving other work.
+
+22
+00:01:10.797 --> 00:01:14.958
+Synchronous variants block the event loop
+until the child exits and require a
+
+23
+00:01:15.038 --> 00:01:16.702
+deliberate, bounded use case.
+
+24
+00:01:16.782 --> 00:01:18.958
+Choose output handling intentionally.
+
+25
+00:01:19.038 --> 00:01:22.879
+Exec-style APIs buffer stdout and stderr
+and enforce a maximum buffer;
+
+26
+00:01:22.959 --> 00:01:25.839
+understand that limit and treat overflow
+as failure.
+
+27
+00:01:25.919 --> 00:01:30.335
+Spawn can stream output, but the
+application must apply backpressure, byte caps,
+
+28
+00:01:30.415 --> 00:01:34.832
+and safe destinations rather than
+accumulating unbounded data in memory or logs.
+
+29
+00:01:34.912 --> 00:01:38.881
+Define a deadline with a timeout or
+AbortSignal and handle cancellation,
+
+30
+00:01:38.961 --> 00:01:41.201
+exit codes, signals, and partial output.
+
+31
+00:01:41.281 --> 00:01:45.825
+Terminating the direct child may not
+always stop descendants created by wrappers or
+
+32
+00:01:45.905 --> 00:01:50.514
+shells, so test process-tree behavior on
+supported platforms and use stronger job or
+
+33
+00:01:50.594 --> 00:01:52.578
+isolation controls when necessary.
+
+34
+00:01:52.658 --> 00:01:56.179
+Clean up temporary files on success,
+failure, and cancellation.
+
+35
+00:01:56.259 --> 00:02:00.483
+Timeouts, output bounds, and concurrency
+controls do not prevent injection;
+
+36
+00:02:00.563 --> 00:02:05.108
+they contain denial-of-service and
+operational risk after a permitted process has
+
+37
+00:02:05.188 --> 00:02:05.700
+started.

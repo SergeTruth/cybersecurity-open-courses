@@ -1,0 +1,190 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.735
+Production queries rarely remain a single
+fixed comparison.
+
+2
+00:00:03.815 --> 00:00:07.485
+Search endpoints add optional status,
+owner, date, and text filters;
+
+3
+00:00:07.565 --> 00:00:11.795
+reports select predefined groupings; bulk
+reads accept multiple identifiers;
+
+4
+00:00:11.875 --> 00:00:14.363
+and pagination introduces limits and
+offsets.
+
+5
+00:00:14.443 --> 00:00:18.299
+Complexity often causes safe code to
+regress into string concatenation.
+
+6
+00:00:18.379 --> 00:00:20.930
+The remedy is to keep two construction
+channels:
+
+7
+00:00:21.010 --> 00:00:23.373
+trusted code assembles known SQL
+fragments,
+
+8
+00:00:23.453 --> 00:00:27.497
+while every externally controlled value is
+appended to a separate parameter
+
+9
+00:00:27.577 --> 00:00:28.261
+collection.
+
+10
+00:00:28.341 --> 00:00:32.757
+For optional filters, begin with an array
+of clauses authored by the application and
+
+11
+00:00:32.837 --> 00:00:33.833
+an array of values.
+
+12
+00:00:33.913 --> 00:00:35.779
+When a validated status is present,
+
+13
+00:00:35.859 --> 00:00:39.840
+append it to the values and add a fixed
+predicate whose placeholder number is
+
+14
+00:00:39.920 --> 00:00:41.724
+derived from the new array length.
+
+15
+00:00:41.804 --> 00:00:46.220
+Repeat for each supported filter, then
+join only those trusted predicates with AND.
+
+16
+00:00:46.300 --> 00:00:48.913
+The request value never enters the clause
+string.
+
+17
+00:00:48.993 --> 00:00:52.663
+A query builder can provide the same
+separation through method calls,
+
+18
+00:00:52.743 --> 00:00:56.786
+provided raw expressions are not used to
+smuggle text past its binding layer.
+
+19
+00:00:56.866 --> 00:00:59.417
+Multi-value lookup needs deliberate
+handling.
+
+20
+00:00:59.497 --> 00:01:03.415
+Use a documented array parameter where the
+driver and database support it,
+
+21
+00:01:03.495 --> 00:01:07.352
+or have trusted code generate one
+placeholder per value and add each value
+
+22
+00:01:07.432 --> 00:01:08.116
+separately.
+
+23
+00:01:08.196 --> 00:01:10.871
+An empty list needs an explicit semantic
+decision,
+
+24
+00:01:10.951 --> 00:01:13.564
+such as returning no rows without issuing
+a query,
+
+25
+00:01:13.644 --> 00:01:17.189
+rather than producing invalid SQL or
+removing a protective filter.
+
+26
+00:01:17.269 --> 00:01:21.624
+Bound pagination values should also pass
+numeric range checks so an otherwise safe
+
+27
+00:01:21.704 --> 00:01:24.503
+query cannot request an unreasonable
+amount of work.
+
+28
+00:01:24.583 --> 00:01:29.248
+Parameterization protects syntax;
+validation protects resource and business limits.
+
+29
+00:01:29.328 --> 00:01:33.434
+As queries grow, encode each optional
+feature as a small trusted function that
+
+30
+00:01:33.514 --> 00:01:36.002
+contributes a known fragment and bound
+values.
+
+31
+00:01:36.082 --> 00:01:40.623
+Test combinations, because placeholder
+numbering, empty conditions, parentheses,
+
+32
+00:01:40.703 --> 00:01:44.248
+and joins can produce correctness defects
+even without injection.
+
+33
+00:01:44.328 --> 00:01:46.879
+Reporting features deserve special
+attention:
+
+34
+00:01:46.959 --> 00:01:50.131
+selectable columns and groupings are
+structural mappings,
+
+35
+00:01:50.211 --> 00:01:53.072
+while date ranges and search terms remain
+parameters.
+
+36
+00:01:53.152 --> 00:01:57.569
+The consistent test is whether deleting
+all parameter values would leave a complete
+
+37
+00:01:57.649 --> 00:02:00.510
+SQL program assembled solely from trusted
+fragments.
+
+38
+00:02:00.590 --> 00:02:04.571
+If so, the program structure and its data
+have remained separate throughout
+
+39
+00:02:04.651 --> 00:02:05.460
+construction.

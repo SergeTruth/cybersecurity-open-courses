@@ -1,0 +1,193 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.933
+Object-level authorization defects live in
+forbidden paths,
+
+2
+00:00:04.013 --> 00:00:07.057
+so happy-path tests cannot demonstrate
+their absence.
+
+3
+00:00:07.137 --> 00:00:11.865
+Build reusable fixtures with two users and
+objects in distinct authorization scopes.
+
+4
+00:00:11.945 --> 00:00:15.054
+Exercise reads, updates, deletes,
+downloads, exports,
+
+5
+00:00:15.134 --> 00:00:17.919
+and actions while authenticated as the
+wrong peer.
+
+6
+00:00:17.999 --> 00:00:20.525
+Repeat for the same role in different
+tenants,
+
+7
+00:00:20.605 --> 00:00:25.334
+privileged and non-privileged subjects,
+nested resources, alternate identifiers,
+
+8
+00:00:25.414 --> 00:00:26.126
+and batches.
+
+9
+00:00:26.206 --> 00:00:30.805
+Test UUIDs with known valid values because
+the control must hold after an identifier
+
+10
+00:00:30.885 --> 00:00:31.273
+leaks.
+
+11
+00:00:31.353 --> 00:00:35.822
+Represent expected decisions as an
+authorization matrix when policy has several
+
+12
+00:00:35.902 --> 00:00:38.364
+roles, relationships, actions, and states.
+
+13
+00:00:38.444 --> 00:00:40.840
+Unit tests can cover pure policy
+functions.
+
+14
+00:00:40.920 --> 00:00:45.065
+Repository tests can verify scoped
+predicates and affected-row behavior.
+
+15
+00:00:45.145 --> 00:00:49.744
+Integration tests should make real
+requests across identities and confirm both the
+
+16
+00:00:49.824 --> 00:00:51.897
+response and absence of side effects.
+
+17
+00:00:51.977 --> 00:00:55.086
+For a denied update, verify that the
+record is unchanged.
+
+18
+00:00:55.166 --> 00:00:56.720
+For a denied export or batch,
+
+19
+00:00:56.800 --> 00:01:01.464
+verify that no unauthorized item appears
+and no unintended partial mutation occurs.
+
+20
+00:01:01.544 --> 00:01:04.912
+Code review should trace each reference
+from input to effect.
+
+21
+00:01:04.992 --> 00:01:07.259
+Identify where the object ID originated,
+
+22
+00:01:07.339 --> 00:01:10.188
+what binds the object to the authenticated
+subject,
+
+23
+00:01:10.268 --> 00:01:14.673
+where tenant context came from, and
+whether the same scope reaches the mutation.
+
+24
+00:01:14.753 --> 00:01:18.833
+Check routes that address the resource by
+slug, filename, email, child ID,
+
+25
+00:01:18.913 --> 00:01:20.014
+or action endpoint.
+
+26
+00:01:20.094 --> 00:01:24.369
+Determine whether the service requires
+authorization context or treats it as
+
+27
+00:01:24.449 --> 00:01:25.032
+optional.
+
+28
+00:01:25.112 --> 00:01:26.926
+Review background jobs, caches,
+
+29
+00:01:27.006 --> 00:01:31.151
+and download generation where
+authorization can be lost after the handler.
+
+30
+00:01:31.231 --> 00:01:35.765
+Log enough structured context to
+investigate denials and suspicious cross-scope
+
+31
+00:01:35.845 --> 00:01:39.278
+attempts without copying sensitive
+contents or credentials.
+
+32
+00:01:39.358 --> 00:01:42.791
+Protect those logs according to the
+application's risk model.
+
+33
+00:01:42.871 --> 00:01:47.275
+A deliberate choice between forbidden and
+not found can limit object-existence
+
+34
+00:01:47.355 --> 00:01:48.067
+disclosure.
+
+35
+00:01:48.147 --> 00:01:50.026
+Use a consistent response policy,
+
+36
+00:01:50.106 --> 00:01:52.891
+but do not confuse the status code with
+the control.
+
+37
+00:01:52.971 --> 00:01:57.181
+Returning four oh four after an unscoped
+lookup may still expose or modify the
+
+38
+00:01:57.261 --> 00:01:58.362
+object internally.
+
+39
+00:01:58.442 --> 00:02:01.033
+The authorization decision, scoped data
+path,
+
+40
+00:02:01.113 --> 00:02:03.898
+and negative tests provide the security
+property;
+
+41
+00:02:03.978 --> 00:02:06.180
+the response code controls disclosure.

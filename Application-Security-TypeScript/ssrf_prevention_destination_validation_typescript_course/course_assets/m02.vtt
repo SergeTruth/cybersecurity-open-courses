@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.130
+The strongest destination-validation
+design is often to remove the destination from
+
+2
+00:00:05.210 --> 00:00:06.098
+client control.
+
+3
+00:00:06.178 --> 00:00:10.363
+Instead of exposing a generic fetch
+endpoint, expose the business operation.
+
+4
+00:00:10.443 --> 00:00:14.249
+A route that sends through a named
+integration, tests a stored webhook,
+
+5
+00:00:14.329 --> 00:00:18.768
+or retrieves an object from a supported
+provider lets the server select the network
+
+6
+00:00:18.848 --> 00:00:21.131
+destination from trusted configuration.
+
+7
+00:00:21.211 --> 00:00:23.241
+The client chooses an allowed action;
+
+8
+00:00:23.321 --> 00:00:26.048
+it does not receive a socket-by-proxy
+capability.
+
+9
+00:00:26.128 --> 00:00:29.870
+Server-managed integration records make
+this separation concrete.
+
+10
+00:00:29.950 --> 00:00:33.248
+A record can hold an approved base URL,
+credential reference,
+
+11
+00:00:33.328 --> 00:00:36.435
+permitted method, tenant owner, and
+operational limits.
+
+12
+00:00:36.515 --> 00:00:40.511
+The request supplies an opaque integration
+identifier and business data.
+
+13
+00:00:40.591 --> 00:00:42.430
+The application loads the record,
+
+14
+00:00:42.510 --> 00:00:45.872
+verifies that the current principal may
+use it for this action,
+
+15
+00:00:45.952 --> 00:00:48.552
+and constructs the request from trusted
+fields.
+
+16
+00:00:48.632 --> 00:00:50.852
+The identifier is not self-authorizing.
+
+17
+00:00:50.932 --> 00:00:55.371
+Guess-resistant values still require
+tenant, user, state, and operation checks.
+
+18
+00:00:55.451 --> 00:00:57.671
+Provider selection can be narrow as well.
+
+19
+00:00:57.751 --> 00:01:02.254
+A client may choose a logical provider
+name or remote object identifier while server
+
+20
+00:01:02.334 --> 00:01:04.680
+code maps that choice to a fixed API base
+URL.
+
+21
+00:01:04.760 --> 00:01:09.073
+Paths and query values can be constructed
+according to that provider's contract
+
+22
+00:01:09.153 --> 00:01:11.563
+without allowing them to replace the
+origin.
+
+23
+00:01:11.643 --> 00:01:15.956
+This approach turns a nearly unlimited
+network request into a small application
+
+24
+00:01:16.036 --> 00:01:19.334
+capability that is easier to reason about,
+test, and monitor.
+
+25
+00:01:19.414 --> 00:01:23.282
+Some products genuinely need a public-URL
+importer or preview service.
+
+26
+00:01:23.362 --> 00:01:24.948
+Treat that as an exceptional,
+
+27
+00:01:25.028 --> 00:01:28.960
+higher-risk capability and define its
+envelope before implementation:
+
+28
+00:01:29.040 --> 00:01:33.226
+protocols, ports, destination classes,
+methods, redirect count, timeouts,
+
+29
+00:01:33.306 --> 00:01:37.935
+response and decompression limits, content
+expectations, and credential behavior.
+
+30
+00:01:38.015 --> 00:01:42.138
+Even an approved destination may not be
+appropriate for every caller or every
+
+31
+00:01:42.218 --> 00:01:42.852
+operation.
+
+32
+00:01:42.932 --> 00:01:46.547
+Destination policy and application
+authorization must both pass.
+
+33
+00:01:46.627 --> 00:01:50.749
+Avoiding arbitrary URLs reduces the number
+of parser, DNS, redirect, proxy,
+
+34
+00:01:50.829 --> 00:01:53.620
+and network states that security code must
+control.

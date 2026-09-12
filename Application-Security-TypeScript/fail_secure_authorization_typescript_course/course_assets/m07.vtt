@@ -1,0 +1,173 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.051
+Authorization tests commonly prove that an
+approved user succeeds and a disallowed
+
+2
+00:00:05.131 --> 00:00:06.349
+user receives denial.
+
+3
+00:00:06.429 --> 00:00:08.800
+Fail-secure assurance adds a third family:
+
+4
+00:00:08.880 --> 00:00:11.573
+the system cannot obtain a trustworthy
+decision.
+
+5
+00:00:11.653 --> 00:00:15.370
+Exercise missing identity and tenant
+context, malformed role data,
+
+6
+00:00:15.450 --> 00:00:18.911
+object lookup failure, database
+exceptions, policy timeouts,
+
+7
+00:00:18.991 --> 00:00:22.581
+invalid response shapes, unknown decision
+values, cache misses,
+
+8
+00:00:22.661 --> 00:00:26.250
+expired entries, circuit-open behavior,
+and thrown exceptions.
+
+9
+00:00:26.330 --> 00:00:29.728
+For each case, assert the absence of the
+protected side effect.
+
+10
+00:00:29.808 --> 00:00:33.910
+An HTTP status alone is insufficient if a
+mutation occurred before the error
+
+11
+00:00:33.990 --> 00:00:34.567
+surfaced.
+
+12
+00:00:34.647 --> 00:00:38.621
+Verify database state, emitted messages,
+file changes, audit commands,
+
+13
+00:00:38.701 --> 00:00:40.944
+and calls to privileged downstream APIs.
+
+14
+00:00:41.024 --> 00:00:45.511
+For asynchronous flows, confirm background
+work was not queued and retries cannot
+
+15
+00:00:45.591 --> 00:00:47.899
+execute with lost authorization context.
+
+16
+00:00:47.979 --> 00:00:51.248
+Use controllable fakes for clocks, policy
+clients, caches,
+
+17
+00:00:51.328 --> 00:00:54.597
+and repositories so failure timing remains
+deterministic.
+
+18
+00:00:54.677 --> 00:00:59.099
+Also test cancellation and late policy
+completion so an abandoned request cannot
+
+19
+00:00:59.179 --> 00:01:01.038
+resume into the protected branch.
+
+20
+00:01:01.118 --> 00:01:03.426
+Review code from the side effect backward.
+
+21
+00:01:03.506 --> 00:01:05.877
+Identify the exact branch that performs
+it,
+
+22
+00:01:05.957 --> 00:01:08.393
+the value that exists before
+authorization,
+
+23
+00:01:08.473 --> 00:01:11.806
+and every exception or return path that
+can reach that branch.
+
+24
+00:01:11.886 --> 00:01:14.514
+Look for undefined or null interpreted as
+allow,
+
+25
+00:01:14.594 --> 00:01:18.376
+permissive fallback constants, unawaited
+checks, missing returns,
+
+26
+00:01:18.456 --> 00:01:22.750
+stale permits without limits, and
+secondary entry points that omit the policy.
+
+27
+00:01:22.830 --> 00:01:27.381
+Test new enum values and malformed remote
+data so TypeScript assumptions do not mask
+
+28
+00:01:27.461 --> 00:01:28.679
+runtime uncertainty.
+
+29
+00:01:28.759 --> 00:01:31.323
+Observe denial and indeterminate
+separately.
+
+30
+00:01:31.403 --> 00:01:35.698
+Metrics for policy latency, timeouts,
+validation failures, cache freshness,
+
+31
+00:01:35.778 --> 00:01:40.393
+and dependency health support availability
+work without weakening authorization.
+
+32
+00:01:40.473 --> 00:01:45.152
+Security logs should capture subject and
+resource references appropriate to the risk
+
+33
+00:01:45.232 --> 00:01:48.052
+while avoiding tokens and unnecessary
+policy data.
+
+34
+00:01:48.132 --> 00:01:52.363
+Alert on sustained evaluation failures and
+unexpected use of stale evidence.
+
+35
+00:01:52.443 --> 00:01:56.288
+The operational response is to restore
+trustworthy decision-making,
+
+36
+00:01:56.368 --> 00:01:58.740
+never to make access the emergency
+default.

@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.081
+Mass assignment prevention starts by
+treating a request body as untrusted intent,
+
+2
+00:00:05.161 --> 00:00:06.796
+not as a persistence command.
+
+3
+00:00:06.876 --> 00:00:10.933
+Separate request contracts from domain,
+database, and response models.
+
+4
+00:00:11.013 --> 00:00:15.856
+Partial of an entity and ORM-generated
+update types preserve persistence capability;
+
+5
+00:00:15.936 --> 00:00:20.058
+they do not define which fields a public
+operation may delegate to a caller.
+
+6
+00:00:20.138 --> 00:00:24.457
+Apply this separation to create and upsert
+operations as well as conventional
+
+7
+00:00:24.537 --> 00:00:25.060
+updates.
+
+8
+00:00:25.140 --> 00:00:28.805
+At the runtime boundary, validate the
+exact object shape, values,
+
+9
+00:00:28.885 --> 00:00:31.568
+nesting, nullability, and unknown-key
+policy.
+
+10
+00:00:31.648 --> 00:00:33.480
+Use only the validator's output.
+
+11
+00:00:33.560 --> 00:00:36.243
+Then authorize the target object and
+operation,
+
+12
+00:00:36.323 --> 00:00:38.548
+apply state-dependent business rules,
+
+13
+00:00:38.628 --> 00:00:42.357
+and construct a new persistence update
+from an explicit field list.
+
+14
+00:00:42.437 --> 00:00:45.120
+A field being optional does not make it
+writable,
+
+15
+00:00:45.200 --> 00:00:48.865
+and ownership of an object does not
+authorize every property on it.
+
+16
+00:00:48.945 --> 00:00:52.609
+Keep identifiers, tenancy, roles,
+permissions, workflow state,
+
+17
+00:00:52.689 --> 00:00:57.466
+billing, verification, balances, and audit
+metadata out of ordinary edit contracts.
+
+18
+00:00:57.546 --> 00:00:59.771
+When those values legitimately change,
+
+19
+00:00:59.851 --> 00:01:04.628
+use dedicated commands with appropriate
+authorization, invariants, transactions,
+
+20
+00:01:04.708 --> 00:01:05.820
+and audit behavior.
+
+21
+00:01:05.900 --> 00:01:10.350
+Apply the same discipline recursively to
+nested objects, relation operations,
+
+22
+00:01:10.430 --> 00:01:12.720
+bulk updates, and generic patch formats.
+
+23
+00:01:12.800 --> 00:01:14.698
+Define omitted, null, undefined,
+
+24
+00:01:14.778 --> 00:01:19.031
+and empty-value behavior instead of
+inheriting accidental framework or ORM
+
+25
+00:01:19.111 --> 00:01:19.765
+semantics.
+
+26
+00:01:19.845 --> 00:01:22.790
+Review every path from external data to
+persistence,
+
+27
+00:01:22.870 --> 00:01:27.123
+and emphasize negative tests for extra,
+privileged, nested, cross-tenant,
+
+28
+00:01:27.203 --> 00:01:28.774
+and newly added properties.
+
+29
+00:01:28.854 --> 00:01:33.434
+Database constraints and least privilege
+strengthen the design but do not replace
+
+30
+00:01:33.514 --> 00:01:35.150
+application authorization.
+
+31
+00:01:35.230 --> 00:01:36.866
+The practical test is simple:
+
+32
+00:01:36.946 --> 00:01:41.396
+if a new database property becomes
+writable through an existing endpoint merely
+
+33
+00:01:41.476 --> 00:01:45.140
+because it was added to the model, the
+update boundary is too broad.

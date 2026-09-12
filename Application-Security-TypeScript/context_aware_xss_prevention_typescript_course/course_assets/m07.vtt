@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.915
+Effective review traces source,
+transformation, and sink.
+
+2
+00:00:03.995 --> 00:00:07.744
+Sources include request values, API
+responses, database fields,
+
+3
+00:00:07.824 --> 00:00:12.109
+URL state, postMessage events, browser
+storage, and third-party content.
+
+4
+00:00:12.189 --> 00:00:16.407
+A stored field is not trusted merely
+because it came from the application's
+
+5
+00:00:16.487 --> 00:00:19.366
+database; its origin and allowed use still
+matter.
+
+6
+00:00:19.446 --> 00:00:21.723
+Identify the parser invoked at the sink,
+
+7
+00:00:21.803 --> 00:00:25.619
+then verify that every transformation
+matches that exact context.
+
+8
+00:00:25.699 --> 00:00:28.913
+Inventory HTML-parsing APIs, raw framework
+rendering,
+
+9
+00:00:28.993 --> 00:00:32.073
+dynamic script construction,
+string-to-code calls,
+
+10
+00:00:32.153 --> 00:00:36.973
+security-sensitive URL assignments, and
+template helpers that suppress escaping.
+
+11
+00:00:37.053 --> 00:00:40.133
+Review alternate paths: server and client
+rendering,
+
+12
+00:00:40.213 --> 00:00:45.101
+desktop and mobile views, previews and
+exports, initial hydration and later updates.
+
+13
+00:00:45.181 --> 00:00:49.533
+A value safely handled in one component
+can reach a different sink elsewhere.
+
+14
+00:00:49.613 --> 00:00:54.166
+Central wrappers help only when their
+names state the context and callers cannot
+
+15
+00:00:54.246 --> 00:00:56.522
+bypass the security decision casually.
+
+16
+00:00:56.602 --> 00:00:59.481
+Build regression tests around intended
+behavior.
+
+17
+00:00:59.561 --> 00:01:03.645
+Confirm that special HTML characters
+remain visible text in text paths,
+
+18
+00:01:03.725 --> 00:01:06.002
+unexpected URL protocols are rejected,
+
+19
+00:01:06.082 --> 00:01:09.764
+malformed rich content is processed under
+the sanitizer policy,
+
+20
+00:01:09.844 --> 00:01:13.928
+and raw-HTML paths accept only values
+created by the approved boundary.
+
+21
+00:01:14.008 --> 00:01:18.896
+Test client and server renderers
+separately and exercise post-processing that might
+
+22
+00:01:18.976 --> 00:01:20.315
+undo a transformation.
+
+23
+00:01:20.395 --> 00:01:25.015
+Keep fixtures focused on policy properties
+instead of accumulating an offensive
+
+24
+00:01:25.095 --> 00:01:26.032
+string catalog.
+
+25
+00:01:26.112 --> 00:01:28.589
+Add browser controls as defense-in-depth.
+
+26
+00:01:28.669 --> 00:01:33.222
+A well-designed Content Security Policy
+can constrain scripts and other active
+
+27
+00:01:33.302 --> 00:01:37.922
+resources, but it does not correct an
+unsafe sink and requires careful deployment
+
+28
+00:01:38.002 --> 00:01:38.939
+and monitoring.
+
+29
+00:01:39.019 --> 00:01:43.907
+Trusted Types enforcement can require
+approved typed values at covered DOM injection
+
+30
+00:01:43.987 --> 00:01:47.402
+sinks, concentrating risky conversions in
+named policies.
+
+31
+00:01:47.482 --> 00:01:49.959
+It does not automatically sanitize inputs;
+
+32
+00:01:50.039 --> 00:01:53.052
+an unsafe policy can still authorize
+unsafe content.
+
+33
+00:01:53.132 --> 00:01:57.819
+Evaluate browser support and rollout
+needs, and restrict who can create policies.
+
+34
+00:01:57.899 --> 00:02:02.652
+HttpOnly can prevent script access to
+selected cookies if script execution occurs,
+
+35
+00:02:02.732 --> 00:02:07.084
+but it neither prevents XSS nor protects
+every action available in the user's
+
+36
+00:02:07.164 --> 00:02:07.700
+session.

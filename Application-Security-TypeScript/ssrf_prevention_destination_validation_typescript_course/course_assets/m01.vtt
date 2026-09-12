@@ -1,0 +1,156 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.335
+Server applications make legitimate
+outbound requests for webhooks,
+
+2
+00:00:04.415 --> 00:00:08.251
+link previews, image retrieval, document
+imports, feeds, callbacks,
+
+3
+00:00:08.331 --> 00:00:10.632
+remote validation, and third-party APIs.
+
+4
+00:00:10.712 --> 00:00:13.269
+These features cross a network trust
+boundary.
+
+5
+00:00:13.349 --> 00:00:16.673
+The server often has routes, service
+identity, proxy access,
+
+6
+00:00:16.753 --> 00:00:19.565
+or credentials that the requesting client
+does not.
+
+7
+00:00:19.645 --> 00:00:22.458
+When a client can choose where that server
+connects,
+
+8
+00:00:22.538 --> 00:00:27.076
+an ordinary integration feature can become
+a general-purpose network capability.
+
+9
+00:00:27.156 --> 00:00:31.759
+The deliberately unsafe statement
+fetch(req.body.url) captures the design flaw in
+
+10
+00:00:31.839 --> 00:00:32.350
+one line.
+
+11
+00:00:32.430 --> 00:00:34.284
+Fetch is not inherently insecure,
+
+12
+00:00:34.364 --> 00:00:37.688
+and TypeScript does not change the runtime
+trust of the value.
+
+13
+00:00:37.768 --> 00:00:41.987
+A type assertion such as req.body.url as
+string says what the program expects;
+
+14
+00:00:42.067 --> 00:00:45.263
+it does not prove that the input is a
+permitted destination.
+
+15
+00:00:45.343 --> 00:00:49.306
+Successful URL parsing would prove only
+that the value has URL structure.
+
+16
+00:00:49.386 --> 00:00:52.199
+Neither step authorizes a server-side
+connection.
+
+17
+00:00:52.279 --> 00:00:55.283
+The impact is broader than returning a
+secret response.
+
+18
+00:00:55.363 --> 00:00:58.239
+A server-side request may reach an
+internal service,
+
+19
+00:00:58.319 --> 00:01:02.474
+trigger a state-changing endpoint, consume
+bandwidth or connection slots,
+
+20
+00:01:02.554 --> 00:01:05.751
+or interact with a network location that
+trusts the server.
+
+21
+00:01:05.831 --> 00:01:09.027
+The response can be hidden and the request
+can still matter.
+
+22
+00:01:09.107 --> 00:01:13.134
+Authentication of the caller does not
+solve this boundary problem either.
+
+23
+00:01:13.214 --> 00:01:16.793
+A logged-in user remains an untrusted
+source of destination data.
+
+24
+00:01:16.873 --> 00:01:20.709
+A defensible outbound operation starts
+with an application decision,
+
+25
+00:01:20.789 --> 00:01:22.131
+not a user-supplied URL.
+
+26
+00:01:22.211 --> 00:01:26.110
+Define the operation and legitimate
+destination set; parse the target;
+
+27
+00:01:26.190 --> 00:01:29.642
+enforce protocol, hostname, and port
+policy; resolve the name;
+
+28
+00:01:29.722 --> 00:01:34.452
+classify every candidate address; control
+redirects; and constrain the network path.
+
+29
+00:01:34.532 --> 00:01:38.751
+Limit methods, credentials, time, and
+response volume as separate controls.
+
+30
+00:01:38.831 --> 00:01:42.794
+The central question is not whether the
+submitted string looks like a URL.
+
+31
+00:01:42.874 --> 00:01:47.285
+It is whether the application explicitly
+permits the destination the server will
+
+32
+00:01:47.365 --> 00:01:48.260
+actually reach.

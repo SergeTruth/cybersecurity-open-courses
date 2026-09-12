@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.939
+Fail-secure authorization begins with a
+non-authorized operation and requires
+
+2
+00:00:05.019 --> 00:00:08.429
+positive, trusted evidence before any
+protected side effect.
+
+3
+00:00:08.509 --> 00:00:13.270
+Authentication establishes identity;
+authorization evaluates whether that subject
+
+4
+00:00:13.350 --> 00:00:16.824
+may perform this action on this resource
+under current context.
+
+5
+00:00:16.904 --> 00:00:20.121
+Missing identity, tenant, role, ownership,
+object state,
+
+6
+00:00:20.201 --> 00:00:23.932
+or action information cannot be replaced
+with a permissive default.
+
+7
+00:00:24.012 --> 00:00:28.258
+New actions and resources should remain
+non-grant until an applicable policy
+
+8
+00:00:28.338 --> 00:00:29.754
+explicitly handles them.
+
+9
+00:00:29.834 --> 00:00:31.442
+Represent outcomes clearly.
+
+10
+00:00:31.522 --> 00:00:35.897
+A Boolean is sufficient when its failure
+contract is unambiguous and exceptions
+
+11
+00:00:35.977 --> 00:00:36.942
+block execution.
+
+12
+00:00:37.022 --> 00:00:38.437
+Use explicit allow, deny,
+
+13
+00:00:38.517 --> 00:00:42.892
+and indeterminate variants when callers
+need to preserve operational meaning.
+
+14
+00:00:42.972 --> 00:00:46.896
+TypeScript exhaustiveness can identify
+unhandled internal variants,
+
+15
+00:00:46.976 --> 00:00:50.708
+while external policy responses still
+require runtime validation.
+
+16
+00:00:50.788 --> 00:00:55.163
+Denial and indeterminate both prevent the
+action even when they map to different
+
+17
+00:00:55.243 --> 00:00:56.272
+client responses.
+
+18
+00:00:56.352 --> 00:00:59.762
+Bound dependency deadlines and retries,
+validate responses,
+
+19
+00:00:59.842 --> 00:01:02.866
+and ensure circuit breakers end in
+non-grant behavior.
+
+20
+00:01:02.946 --> 00:01:06.291
+Cache decisions only with keys, freshness,
+policy-version,
+
+21
+00:01:06.371 --> 00:01:09.395
+and revocation behavior appropriate to the
+operation.
+
+22
+00:01:09.475 --> 00:01:12.820
+Limited stale use may be a deliberate
+availability tradeoff,
+
+23
+00:01:12.900 --> 00:01:16.374
+but cache absence and unlimited stale
+permits are not evidence.
+
+24
+00:01:16.454 --> 00:01:20.893
+Preserve the required control flow through
+middleware, services, workers, RPC,
+
+25
+00:01:20.973 --> 00:01:25.348
+and administrative paths; await decisions
+and make fall-through structurally
+
+26
+00:01:25.428 --> 00:01:26.136
+impossible.
+
+27
+00:01:26.216 --> 00:01:30.012
+Finally, test missing context, failures,
+timeouts, invalid states,
+
+28
+00:01:30.092 --> 00:01:31.314
+and cache boundaries.
+
+29
+00:01:31.394 --> 00:01:33.324
+Verify that data, messages, files,
+
+30
+00:01:33.404 --> 00:01:37.650
+and downstream calls remain untouched when
+authorization is indeterminate.
+
+31
+00:01:37.730 --> 00:01:42.105
+Observe infrastructure failure separately
+from legitimate denial so teams can
+
+32
+00:01:42.185 --> 00:01:44.758
+improve resilience without weakening
+policy.
+
+33
+00:01:44.838 --> 00:01:48.248
+When the application cannot establish that
+access is allowed,
+
+34
+00:01:48.328 --> 00:01:50.580
+uncertainty must not become permission.
