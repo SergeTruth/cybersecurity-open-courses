@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Malware Scanning, Content Processing, and Quarantine",
+  "graphicAlt": "An upload stays in quarantine while scanning, validation and isolated processing run; required checks precede release, and failures remain held or rejected.",
+  "narration": "Malware scanning can reduce risk, but it should not be treated as perfect proof that a file is safe. Scanners have coverage limits, update windows, configuration choices, and failure modes. For higher-risk uploads, the system may need a quarantine workflow: accept the file into restricted storage, record metadata, scan or validate it, process it only under controlled conditions, and release it only when the required checks complete. If scanning fails, the safe default is usually to hold or reject the file rather than publish it.\n\nContent processing introduces additional risk. Image resizing, document conversion, archive extraction, OCR, metadata extraction, thumbnail generation, preview rendering, and search indexing all involve parsers and libraries that process untrusted input. Those components should run with least privilege, timeouts, resource limits, constrained temporary directories, and isolated workers where appropriate. Avoid processing uploads with privileged application identities, broad filesystem access, production secrets, or unrestricted network access.\n\nArchive handling deserves special care because a small upload can expand into many files or large content. Defensive designs consider expansion size, nested archives, file counts, symlinks, paths, unsupported formats, and resource limits. The goal is not to teach attackers how to craft bad archives; it is to make sure the application does not assume an uploaded archive is harmless just because it passed the first intake check.\n\nScanning results, processing status, and exceptions should be recorded for audit and operations. Operators should know whether a file is pending, quarantined, released, rejected, failed processing, expired, or deleted. Logs should be useful without exposing file contents, secrets, storage credentials, private signed URLs, or unnecessary personal data. Scanning is one layer in a larger workflow that also includes validation, isolation, authorization, resource limits, and safe failure behavior.",
+  "narrationPoints": [
+    "Malware scanning can reduce risk.",
+    "Content processing introduces additional risk.",
+    "Archive handling deserves special care.",
+    "Scanning results, processing status, and exceptions should.",
+    "Those components should run with least privilege.",
+    "Avoid processing uploads with privileged application."
+  ]
+};

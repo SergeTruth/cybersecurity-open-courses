@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.521
+Safe deserialization is not complete when
+the parser returns an object.
+
+2
+00:00:03.601 --> 00:00:06.424
+The application still needs to decide
+whether the data is expected,
+
+3
+00:00:06.504 --> 00:00:08.187
+complete, authorized, and meaningful.
+
+4
+00:00:08.267 --> 00:00:10.000
+Use request DTOs, message DTOs, schemas,
+
+5
+00:00:10.080 --> 00:00:12.358
+or explicit input models to define the
+expected shape.
+
+6
+00:00:12.438 --> 00:00:15.558
+Validate required fields, types, lengths,
+ranges, formats, enum values,
+
+7
+00:00:15.638 --> 00:00:19.006
+nested structures, array sizes, and
+version fields before business logic runs.
+
+8
+00:00:19.086 --> 00:00:21.661
+A public JSON request should usually
+become a small DTO first,
+
+9
+00:00:21.741 --> 00:00:23.177
+not a fully trusted entity object.
+
+10
+00:00:23.257 --> 00:00:26.723
+A queue message should describe one
+business event with a known schema and version.
+
+11
+00:00:26.803 --> 00:00:29.329
+A file import should have clear column or
+field definitions.
+
+12
+00:00:29.409 --> 00:00:32.578
+Reject unsupported message types, unknown
+versions, malformed payloads,
+
+13
+00:00:32.658 --> 00:00:36.273
+oversized objects, unexpected structures,
+and values that do not match the workflow.
+
+14
+00:00:36.353 --> 00:00:39.523
+Validation protects application
+assumptions, not just parser stability.
+
+15
+00:00:39.603 --> 00:00:41.237
+Schema validation supports security,
+
+16
+00:00:41.317 --> 00:00:43.694
+but it does not replace authentication,
+authorization,
+
+17
+00:00:43.774 --> 00:00:46.646
+object ownership checks, tenant checks, or
+business-state checks.
+
+18
+00:00:46.726 --> 00:00:50.044
+A payload can be well formed and still
+request an action the caller is not allowed
+
+19
+00:00:50.124 --> 00:00:50.619
+to perform.
+
+20
+00:00:50.699 --> 00:00:53.720
+A message can pass schema validation and
+still refer to the wrong tenant.
+
+21
+00:00:53.800 --> 00:00:57.019
+A DTO can contain a valid status value
+that is invalid for the current workflow
+
+22
+00:00:57.099 --> 00:00:57.396
+state.
+
+23
+00:00:57.476 --> 00:00:59.853
+Business rules must be enforced after
+shape validation.
+
+24
+00:00:59.933 --> 00:01:03.103
+Avoid mass assignment by mapping only
+allowed fields into domain objects or
+
+25
+00:01:03.183 --> 00:01:04.074
+persistence models.
+
+26
+00:01:04.154 --> 00:01:07.670
+Keep public API shapes separate from
+internal domain objects when sensitive fields
+
+27
+00:01:07.750 --> 00:01:08.047
+exist.
+
+28
+00:01:08.127 --> 00:01:11.297
+Version serialized messages so producers
+and consumers can evolve safely.
+
+29
+00:01:11.377 --> 00:01:14.645
+Explicit mapping gives developers a place
+to review which external fields are
+
+30
+00:01:14.725 --> 00:01:18.340
+allowed to influence internal state and
+which fields must remain server-controlled.

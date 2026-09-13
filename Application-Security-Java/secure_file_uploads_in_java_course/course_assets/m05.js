@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Temporary Handling, Storage Isolation, and Path Safety",
+  "graphicAlt": "Isolated temporary files are cleaned up and promoted into private storage with generated identifiers before controlled access, outside code, classpath and public web-root locations.",
+  "narration": "Storage is where upload mistakes become persistent. Temporary upload locations should be isolated, access-controlled, and cleaned up reliably after success or failure. Permanent storage should avoid executable application directories, classpath locations, deployment directories, source directories, and public web roots unless public hosting is an intentional and carefully controlled design. An uploaded file should not become executable or directly reachable just because it was stored in a convenient folder.\n\nUse generated names and maintain metadata in a database when needed. If filesystem storage is used, construct paths from an application-controlled base and generated identifiers, not from user input. Java NIO path handling can help, but it must be used carefully: resolve the candidate path against the intended base, normalize or canonicalize as appropriate for the design, and confirm the result remains inside the allowed storage boundary before writing, reading, deleting, or processing the file.\n\nAvoid using untrusted input to construct filesystem paths, URLs, object keys, shell commands, archive extraction destinations, or processing locations. Object storage does not eliminate path-like thinking; keys, prefixes, bucket policies, signed URLs, lifecycle rules, and access controls still matter. A tenant identifier, object key, filename, or callback URL taken from the client should be validated and authorized before it influences storage or retrieval behavior.\n\nFiles should usually be private by default and served through controlled download routes or time-limited signed URLs when that matches the business model. Use appropriate filesystem permissions, object storage policies, lifecycle rules, retention controls, deletion behavior, and cleanup jobs. Retention and deletion are part of security because old uploads can contain sensitive data, stale malware findings, abandoned temporary files, or material that no longer has a business reason to exist.",
+  "narrationPoints": [
+    "Storage is where upload mistakes become persistent.",
+    "Use generated names and maintain metadata in a database.",
+    "Avoid using untrusted input to construct filesystem paths.",
+    "Files should usually be private by default and served.",
+    "Temporary upload locations should be isolated.",
+    "An uploaded file should not become executable or directly."
+  ]
+};

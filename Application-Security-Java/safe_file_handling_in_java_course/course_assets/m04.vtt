@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.188
+The core defensive idea is simple:
+
+2
+00:00:02.268 --> 00:00:05.529
+the application chooses the storage root
+and the business object;
+
+3
+00:00:05.609 --> 00:00:09.161
+user input must not be allowed to redirect
+the operation somewhere else.
+
+4
+00:00:09.241 --> 00:00:12.094
+Treat user-controlled path segments as
+untrusted input.
+
+5
+00:00:12.174 --> 00:00:15.609
+Avoid passing user-supplied paths directly
+to Java filesystem APIs.
+
+6
+00:00:15.689 --> 00:00:17.494
+When dynamic selection is required,
+
+7
+00:00:17.574 --> 00:00:21.708
+prefer application-controlled IDs mapped
+to metadata records over raw path input.
+
+8
+00:00:21.788 --> 00:00:23.942
+When filesystem paths must be constructed,
+
+9
+00:00:24.022 --> 00:00:27.049
+start from a fixed, application-controlled
+base directory.
+
+10
+00:00:27.129 --> 00:00:31.205
+Resolve the candidate against that base
+and verify the final result remains inside
+
+11
+00:00:31.285 --> 00:00:34.604
+the intended boundary before reading,
+writing, deleting, moving,
+
+12
+00:00:34.684 --> 00:00:35.674
+or serving the file.
+
+13
+00:00:35.754 --> 00:00:39.596
+Reject absolute paths, parent-directory
+movement, unexpected separators,
+
+14
+00:00:39.676 --> 00:00:42.413
+empty names, reserved names, unsupported
+characters,
+
+15
+00:00:42.493 --> 00:00:45.171
+and platform-specific surprises where
+appropriate.
+
+16
+00:00:45.251 --> 00:00:49.210
+Keep the accepted input format narrow
+enough that reviewers can reason about it.
+
+17
+00:00:49.290 --> 00:00:52.609
+Be careful with transformations that
+happen before the path check.
+
+18
+00:00:52.689 --> 00:00:56.532
+URL decoding, repeated decoding, Unicode
+normalization, mixed separators,
+
+19
+00:00:56.612 --> 00:00:59.057
+case handling, symbolic links, archive
+entries,
+
+20
+00:00:59.137 --> 00:01:01.582
+and mounted volumes can change how a path
+behaves.
+
+21
+00:01:01.662 --> 00:01:05.680
+Object storage keys have similar boundary
+problems even though they are not local
+
+22
+00:01:05.760 --> 00:01:06.691
+filesystem paths.
+
+23
+00:01:06.771 --> 00:01:08.576
+Prefixes, tenant IDs, object names,
+
+24
+00:01:08.656 --> 00:01:12.848
+and generated keys should be controlled
+and validated before they influence storage
+
+25
+00:01:12.928 --> 00:01:13.452
+behavior.
+
+26
+00:01:13.532 --> 00:01:17.084
+Path-boundary checks must be paired with
+object-level authorization.
+
+27
+00:01:17.164 --> 00:01:21.182
+A resolved path can be inside the correct
+base directory and still point to another
+
+28
+00:01:21.262 --> 00:01:23.590
+user's report or another tenant's
+attachment.
+
+29
+00:01:23.670 --> 00:01:27.455
+A storage key can be in the right bucket
+and still represent the wrong business
+
+30
+00:01:27.535 --> 00:01:27.943
+object.
+
+31
+00:01:28.023 --> 00:01:31.341
+Preventing traversal keeps the operation
+inside the storage area;
+
+32
+00:01:31.421 --> 00:01:34.740
+authorization decides whether this caller
+may access this object.

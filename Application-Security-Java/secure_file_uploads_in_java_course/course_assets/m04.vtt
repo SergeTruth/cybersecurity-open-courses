@@ -1,0 +1,167 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.763
+File validation is about reducing
+ambiguity.
+
+2
+00:00:02.843 --> 00:00:06.905
+Do not trust the Content-Type header by
+itself because clients can control or spoof
+
+3
+00:00:06.985 --> 00:00:07.159
+it.
+
+4
+00:00:07.239 --> 00:00:10.837
+Do not trust a file extension by itself
+because extensions can be missing,
+
+5
+00:00:10.917 --> 00:00:13.586
+misleading, doubled, or chosen to bypass a
+weak check.
+
+6
+00:00:13.666 --> 00:00:16.916
+A filename ending in .jpg does not prove
+the content is a safe image,
+
+7
+00:00:16.996 --> 00:00:20.884
+and a browser-provided MIME type does not
+prove the content is what the business
+
+8
+00:00:20.964 --> 00:00:21.428
+expects.
+
+9
+00:00:21.508 --> 00:00:25.570
+Use allowlists for the extensions and file
+types required by the specific business
+
+10
+00:00:25.650 --> 00:00:26.172
+function.
+
+11
+00:00:26.252 --> 00:00:29.676
+Then validate using multiple signals where
+appropriate: extension,
+
+12
+00:00:29.756 --> 00:00:33.179
+declared type, file signature, parser
+behavior, size expectations,
+
+13
+00:00:33.259 --> 00:00:34.594
+and content expectations.
+
+14
+00:00:34.674 --> 00:00:36.937
+The depth of inspection should match the
+risk.
+
+15
+00:00:37.017 --> 00:00:40.499
+A profile image workflow might verify
+image structure and dimensions.
+
+16
+00:00:40.579 --> 00:00:44.815
+A document upload workflow might require
+stricter scanning and processing controls.
+
+17
+00:00:44.895 --> 00:00:48.783
+Validation reduces risk, but it should not
+become an excuse to accept every file
+
+18
+00:00:48.863 --> 00:00:49.153
+type.
+
+19
+00:00:49.233 --> 00:00:51.554
+Original filenames from MultipartFile,
+Part,
+
+20
+00:00:51.634 --> 00:00:54.477
+or similar APIs are untrusted
+client-supplied metadata.
+
+21
+00:00:54.557 --> 00:00:57.923
+They may contain confusing Unicode
+characters, double extensions,
+
+22
+00:00:58.003 --> 00:01:00.556
+reserved names, path separators, very long
+values,
+
+23
+00:01:00.636 --> 00:01:04.814
+hidden-file patterns, control-like
+characters, or platform-specific surprises.
+
+24
+00:01:04.894 --> 00:01:08.318
+Do not use the original name as a
+filesystem path or object storage key.
+
+25
+00:01:08.398 --> 00:01:10.893
+Generate a server-side storage name or
+object key,
+
+26
+00:01:10.973 --> 00:01:14.803
+and store the original filename only as
+metadata when the application needs to
+
+27
+00:01:14.883 --> 00:01:15.463
+display it.
+
+28
+00:01:15.543 --> 00:01:17.400
+Displayed filenames still need care.
+
+29
+00:01:17.480 --> 00:01:20.439
+Set length limits, restrict characters
+where appropriate,
+
+30
+00:01:20.519 --> 00:01:24.001
+and escape or encode filenames before
+placing them in HTML, JSON, logs,
+
+31
+00:01:24.081 --> 00:01:25.880
+headers, templates, or audit views.
+
+32
+00:01:25.960 --> 00:01:29.035
+Preserve user-friendly names only as
+untrusted display text.
+
+33
+00:01:29.115 --> 00:01:33.003
+The safest pattern is to separate
+user-facing metadata from storage identity:
+
+34
+00:01:33.083 --> 00:01:35.056
+the user may see a cleaned original name,
+
+35
+00:01:35.136 --> 00:01:39.140
+while the system stores and retrieves the
+object through a generated identifier.

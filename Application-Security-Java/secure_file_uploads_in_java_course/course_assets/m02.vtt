@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.296
+A secure upload design starts before
+choosing a Servlet API,
+
+2
+00:00:03.376 --> 00:00:05.787
+Spring MultipartFile, storage client, or
+scanner.
+
+3
+00:00:05.867 --> 00:00:08.663
+First identify who can upload files, what
+files are allowed,
+
+4
+00:00:08.743 --> 00:00:11.264
+why the files are needed, and who can
+later access them.
+
+5
+00:00:11.344 --> 00:00:14.469
+A profile picture, resume, invoice,
+support attachment, tax form,
+
+6
+00:00:14.549 --> 00:00:18.112
+diagnostic archive, and administrative
+import file do not have the same risk
+
+7
+00:00:18.192 --> 00:00:18.630
+profile.
+
+8
+00:00:18.710 --> 00:00:21.506
+Each use case deserves its own allowed
+types, maximum sizes,
+
+9
+00:00:21.586 --> 00:00:24.765
+retention rules, scanning expectations,
+and authorization model.
+
+10
+00:00:24.845 --> 00:00:27.640
+Map the path from client to reverse proxy,
+Java application,
+
+11
+00:00:27.720 --> 00:00:31.283
+multipart parser, temporary storage,
+validation step, scanning workflow,
+
+12
+00:00:31.363 --> 00:00:34.159
+permanent storage, metadata database,
+background worker,
+
+13
+00:00:34.239 --> 00:00:35.774
+and download or preview feature.
+
+14
+00:00:35.854 --> 00:00:37.772
+That map shows where trust changes hands.
+
+15
+00:00:37.852 --> 00:00:41.360
+Browsers, API clients, load balancers,
+servlet containers, controllers,
+
+16
+00:00:41.440 --> 00:00:44.345
+temporary directories, object stores,
+scanners, databases,
+
+17
+00:00:44.425 --> 00:00:47.276
+and users all sit on different sides of
+different boundaries.
+
+18
+00:00:47.356 --> 00:00:50.864
+The design should say what each boundary
+is allowed to accept and what it must
+
+19
+00:00:50.944 --> 00:00:51.327
+verify.
+
+20
+00:00:51.407 --> 00:00:53.764
+Separate public uploads, authenticated
+uploads,
+
+21
+00:00:53.844 --> 00:00:58.010
+administrative uploads, service-to-service
+uploads, and internal processing queues.
+
+22
+00:00:58.090 --> 00:01:01.982
+An anonymous contact-form attachment is
+not the same as a privileged administrator
+
+23
+00:01:02.062 --> 00:01:03.049
+importing a CSV file.
+
+24
+00:01:03.129 --> 00:01:06.637
+A tenant-specific customer document is not
+the same as a public image asset.
+
+25
+00:01:06.717 --> 00:01:07.977
+Global rules can be useful,
+
+26
+00:01:08.057 --> 00:01:12.004
+but upload security is usually strongest
+when requirements are defined per workflow
+
+27
+00:01:12.084 --> 00:01:14.441
+rather than applied vaguely to every file
+feature.
+
+28
+00:01:14.521 --> 00:01:18.413
+Decide whether files are processed
+synchronously, asynchronously, quarantined,
+
+29
+00:01:18.493 --> 00:01:19.096
+or rejected.
+
+30
+00:01:19.176 --> 00:01:21.642
+A low-risk image may be checked and
+released quickly.
+
+31
+00:01:21.722 --> 00:01:25.450
+A higher-risk document may need to be held
+until scanning and content validation
+
+32
+00:01:25.530 --> 00:01:25.913
+finish.
+
+33
+00:01:25.993 --> 00:01:29.721
+A failed scan or failed conversion should
+not make the file available by default.
+
+34
+00:01:29.801 --> 00:01:32.487
+Documenting the lifecycle gives
+developers, reviewers,
+
+35
+00:01:32.567 --> 00:01:36.020
+and operators a shared model for
+implementing and supporting the feature.

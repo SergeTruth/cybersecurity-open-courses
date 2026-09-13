@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.976
+Native Java serialization can reconstruct
+complex object graphs from bytes.
+
+2
+00:00:04.056 --> 00:00:06.531
+That is powerful and convenient in some
+legacy designs,
+
+3
+00:00:06.611 --> 00:00:08.980
+but it is high risk when the input is not
+fully trusted.
+
+4
+00:00:09.060 --> 00:00:12.483
+Deserialization may involve class loading,
+constructor-like mechanisms,
+
+5
+00:00:12.563 --> 00:00:14.564
+readObject methods, validation callbacks,
+
+6
+00:00:14.644 --> 00:00:16.751
+and library behavior developers do not
+expect.
+
+7
+00:00:16.831 --> 00:00:18.516
+The result is not merely data parsing.
+
+8
+00:00:18.596 --> 00:00:21.334
+It is object reconstruction inside the
+application runtime.
+
+9
+00:00:21.414 --> 00:00:25.048
+The classes available on the application
+classpath affect what can happen during
+
+10
+00:00:25.128 --> 00:00:25.970
+deserialization.
+
+11
+00:00:26.050 --> 00:00:28.578
+The risk is not limited to the
+application's own classes.
+
+12
+00:00:28.658 --> 00:00:30.817
+Third-party dependencies, framework
+classes,
+
+13
+00:00:30.897 --> 00:00:34.267
+and utility libraries may define behavior
+that runs while an object graph is
+
+14
+00:00:34.347 --> 00:00:34.769
+rebuilt.
+
+15
+00:00:34.849 --> 00:00:38.587
+This is why ObjectInputStream should be
+treated as a high-risk boundary rather than
+
+16
+00:00:38.667 --> 00:00:41.564
+as a generic way to read data from
+clients, files, caches, queues,
+
+17
+00:00:41.644 --> 00:00:42.802
+or partner integrations.
+
+18
+00:00:42.882 --> 00:00:46.042
+Legacy systems may still rely on
+serialized Java objects for sessions,
+
+19
+00:00:46.122 --> 00:00:49.071
+caches, RMI-style communication, files, or
+internal protocols.
+
+20
+00:00:49.151 --> 00:00:50.994
+If that path remains, minimize exposure.
+
+21
+00:00:51.074 --> 00:00:54.392
+Authenticate the source, protect
+transport, restrict accepted classes,
+
+22
+00:00:54.472 --> 00:00:56.578
+apply size and graph limits, monitor
+failures,
+
+23
+00:00:56.658 --> 00:00:59.502
+isolate the workflow where practical, and
+document who owns it.
+
+24
+00:00:59.582 --> 00:01:03.321
+Do not allow native Java deserialization
+to quietly expand into new untrusted input
+
+25
+00:01:03.401 --> 00:01:04.928
+paths because it is easy to wire up.
+
+26
+00:01:05.008 --> 00:01:08.852
+The safest design is often to replace
+native object deserialization with constrained
+
+27
+00:01:08.932 --> 00:01:11.512
+data formats and explicit mapping to
+application models.
+
+28
+00:01:11.592 --> 00:01:13.751
+Instead of accepting a serialized object
+graph,
+
+29
+00:01:13.831 --> 00:01:17.096
+accept a narrow DTO or message schema,
+validate it, authorize the action,
+
+30
+00:01:17.176 --> 00:01:19.388
+and then construct the domain object
+internally.
+
+31
+00:01:19.468 --> 00:01:23.101
+That pattern gives the application a
+chance to decide what state is allowed before
+
+32
+00:01:23.181 --> 00:01:24.340
+rich objects are created.

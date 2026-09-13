@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Java Upload Architecture and Trust Boundaries",
+  "graphicAlt": "Public, customer and administrator upload workflows pass their own policy boundaries through a proxy and Java app, then quarantine, checks, private storage and authorized download, with metadata and an isolated worker.",
+  "narration": "A secure upload design starts before choosing a Servlet API, Spring MultipartFile, storage client, or scanner. First identify who can upload files, what files are allowed, why the files are needed, and who can later access them. A profile picture, resume, invoice, support attachment, tax form, diagnostic archive, and administrative import file do not have the same risk profile. Each use case deserves its own allowed types, maximum sizes, retention rules, scanning expectations, and authorization model.\n\nMap the path from client to reverse proxy, Java application, multipart parser, temporary storage, validation step, scanning workflow, permanent storage, metadata database, background worker, and download or preview feature. That map shows where trust changes hands. Browsers, API clients, load balancers, servlet containers, controllers, temporary directories, object stores, scanners, databases, and users all sit on different sides of different boundaries. The design should say what each boundary is allowed to accept and what it must verify.\n\nSeparate public uploads, authenticated uploads, administrative uploads, service-to-service uploads, and internal processing queues. An anonymous contact-form attachment is not the same as a privileged administrator importing a CSV file. A tenant-specific customer document is not the same as a public image asset. Global rules can be useful, but upload security is usually strongest when requirements are defined per workflow rather than applied vaguely to every file feature.\n\nDecide whether files are processed synchronously, asynchronously, quarantined, or rejected. A low-risk image may be checked and released quickly. A higher-risk document may need to be held until scanning and content validation finish. A failed scan or failed conversion should not make the file available by default. Documenting the lifecycle gives developers, reviewers, and operators a shared model for implementing and supporting the feature.",
+  "narrationPoints": [
+    "A secure upload design starts.",
+    "Map the path from client to reverse proxy.",
+    "Separate public uploads.",
+    "Decide whether files are processed synchronously.",
+    "Each use case deserves its own allowed types.",
+    "The design should say what each boundary is allowed."
+  ]
+};

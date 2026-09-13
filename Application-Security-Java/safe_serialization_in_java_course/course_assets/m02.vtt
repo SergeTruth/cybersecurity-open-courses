@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.452
+Serialization format choice should follow
+the workflow.
+
+2
+00:00:03.532 --> 00:00:07.629
+Common formats include JSON, XML, YAML,
+protocol buffers, Avro, CSV, form data,
+
+3
+00:00:07.709 --> 00:00:12.228
+Java native serialization, custom binary
+formats, and framework-specific encodings.
+
+4
+00:00:12.308 --> 00:00:16.706
+Data-only formats are generally easier to
+constrain because they describe fields and
+
+5
+00:00:16.786 --> 00:00:17.208
+values.
+
+6
+00:00:17.288 --> 00:00:21.506
+Formats or configurations that reconstruct
+arbitrary object graphs are harder to
+
+7
+00:00:21.586 --> 00:00:24.538
+reason about and usually require much
+stronger controls.
+
+8
+00:00:24.618 --> 00:00:28.414
+Trust boundaries exist between clients,
+APIs, partners, queues, caches,
+
+9
+00:00:28.494 --> 00:00:32.772
+session stores, files, databases, object
+stores, internal services, admin tools,
+
+10
+00:00:32.852 --> 00:00:34.237
+and Java application code.
+
+11
+00:00:34.317 --> 00:00:37.872
+Data can become untrusted when it crosses
+a network, comes from a user,
+
+12
+00:00:37.952 --> 00:00:41.266
+is read from a file, is pulled from a
+queue, is restored from cache,
+
+13
+00:00:41.346 --> 00:00:43.093
+or is supplied by another service.
+
+14
+00:00:43.173 --> 00:00:47.090
+A value stored in a database can still be
+untrusted if it originally came from a
+
+15
+00:00:47.170 --> 00:00:48.736
+user or external integration.
+
+16
+00:00:48.816 --> 00:00:52.371
+A useful review question is simple: who
+created this serialized data,
+
+17
+00:00:52.451 --> 00:00:56.186
+what format is it in, what code parses it,
+what objects or DTOs are created,
+
+18
+00:00:56.266 --> 00:00:57.532
+and what action follows?
+
+19
+00:00:57.612 --> 00:01:01.769
+A public request DTO should not have the
+same assumptions as an internal migration
+
+20
+00:01:01.849 --> 00:01:02.150
+file.
+
+21
+00:01:02.230 --> 00:01:06.267
+A queue message that changes account state
+should not have the same controls as a
+
+22
+00:01:06.347 --> 00:01:07.853
+low-impact analytics event.
+
+23
+00:01:07.933 --> 00:01:11.307
+Security requirements should attach to
+each serialization path,
+
+24
+00:01:11.387 --> 00:01:12.833
+not only to the library name.
+
+25
+00:01:12.913 --> 00:01:15.685
+When the application only needs a small
+request shape,
+
+26
+00:01:15.765 --> 00:01:19.802
+it usually does not need to deserialize a
+rich domain object or arbitrary class.
+
+27
+00:01:19.882 --> 00:01:22.352
+When a queue message describes a business
+event,
+
+28
+00:01:22.432 --> 00:01:24.240
+it should have a schema and version.
+
+29
+00:01:24.320 --> 00:01:28.597
+When an admin tool imports data, it should
+have clear authorization and validation.
+
+30
+00:01:28.677 --> 00:01:30.666
+Format choice, parser configuration,
+
+31
+00:01:30.746 --> 00:01:34.180
+and object mapping should all express the
+intended trust boundary.

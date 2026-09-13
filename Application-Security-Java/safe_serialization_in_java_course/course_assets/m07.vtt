@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.086
+Serialized input can be harmful even when
+it does not exploit a code path.
+
+2
+00:00:04.166 --> 00:00:07.987
+A huge payload, deeply nested structure,
+recursive reference, large array,
+
+3
+00:00:08.067 --> 00:00:10.888
+entity expansion, compressed input,
+oversized string,
+
+4
+00:00:10.968 --> 00:00:14.319
+or slow parser path can exhaust memory,
+CPU, threads, disk, queues,
+
+5
+00:00:14.399 --> 00:00:15.634
+or downstream capacity.
+
+6
+00:00:15.714 --> 00:00:18.947
+Java services have finite heap, file
+descriptors, worker pools,
+
+7
+00:00:19.027 --> 00:00:21.378
+network connections, and validation
+budgets.
+
+8
+00:00:21.458 --> 00:00:25.397
+Apply request size limits, message size
+limits, nesting limits, array limits,
+
+9
+00:00:25.477 --> 00:00:29.239
+field count limits, timeout controls,
+stream limits, queue backpressure,
+
+10
+00:00:29.319 --> 00:00:32.199
+and parser-specific safety settings where
+appropriate.
+
+11
+00:00:32.279 --> 00:00:35.218
+Avoid reading unbounded untrusted data
+fully into memory.
+
+12
+00:00:35.298 --> 00:00:37.415
+Streaming parsers can help for large data,
+
+13
+00:00:37.495 --> 00:00:40.492
+but only when validation and authorization
+can remain safe.
+
+14
+00:00:40.572 --> 00:00:43.864
+A streaming design still needs limits and
+clear failure behavior.
+
+15
+00:00:43.944 --> 00:00:47.530
+Configure XML, JSON, YAML, archive, and
+binary parsers intentionally.
+
+16
+00:00:47.610 --> 00:00:51.725
+XML entity behavior, YAML construction
+settings, JSON depth and number handling,
+
+17
+00:00:51.805 --> 00:00:54.803
+and binary format limits should be
+reviewed for the use case.
+
+18
+00:00:54.883 --> 00:00:58.880
+Failed parses and validation failures
+should not crash the service or leak stack
+
+19
+00:00:58.960 --> 00:01:02.135
+traces, parser internals, classpath
+details, internal paths,
+
+20
+00:01:02.215 --> 00:01:04.096
+or raw sensitive payloads to clients.
+
+21
+00:01:04.176 --> 00:01:07.820
+Monitor parse failures, validation
+failures, message rejection rates,
+
+22
+00:01:07.900 --> 00:01:12.133
+memory pressure, CPU spikes, repeated
+malformed payloads, and dead-letter volume.
+
+23
+00:01:12.213 --> 00:01:15.387
+Safe serialization includes availability
+and observability.
+
+24
+00:01:15.467 --> 00:01:18.994
+A service that handles invalid input
+safely gives operators evidence,
+
+25
+00:01:19.074 --> 00:01:22.660
+protects shared resources, and continues
+serving legitimate traffic.

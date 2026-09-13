@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.194
+Storage layout is a security control.
+
+2
+00:00:02.274 --> 00:00:06.034
+The Java process should run with the least
+privilege needed for its file operations.
+
+3
+00:00:06.114 --> 00:00:09.079
+Separate read-only application code from
+writable runtime data.
+
+4
+00:00:09.159 --> 00:00:12.336
+Keep secrets, configuration, logs,
+uploaded files, generated files,
+
+5
+00:00:12.416 --> 00:00:15.911
+public assets, backups, and temporary
+files in clearly separated locations.
+
+6
+00:00:15.991 --> 00:00:19.274
+Clear separation reduces the chance that a
+path bug, permission mistake,
+
+7
+00:00:19.354 --> 00:00:21.154
+or cleanup task exposes unrelated data.
+
+8
+00:00:21.234 --> 00:00:24.041
+Avoid broad filesystem permissions, broad
+container mounts,
+
+9
+00:00:24.121 --> 00:00:26.080
+or host paths that expose unnecessary
+data.
+
+10
+00:00:26.160 --> 00:00:29.443
+Production applications should not require
+write access to source code,
+
+11
+00:00:29.523 --> 00:00:33.335
+dependency directories, deployment
+directories, application-server internals,
+
+12
+00:00:33.415 --> 00:00:34.845
+or unrelated host directories.
+
+13
+00:00:34.925 --> 00:00:38.155
+If a container needs a writable volume,
+keep it specific to the workflow.
+
+14
+00:00:38.235 --> 00:00:39.400
+If an object store is used,
+
+15
+00:00:39.480 --> 00:00:42.763
+scope credentials and policies to the
+required prefixes and operations.
+
+16
+00:00:42.843 --> 00:00:45.384
+Secrets should not live in publicly served
+directories,
+
+17
+00:00:45.464 --> 00:00:48.588
+uploaded file areas, generated reports,
+logs, temporary artifacts,
+
+18
+00:00:48.668 --> 00:00:51.157
+or backup bundles that are handled like
+ordinary files.
+
+19
+00:00:51.237 --> 00:00:54.838
+Configuration and secret-management
+locations need separate access rules and
+
+20
+00:00:54.918 --> 00:00:55.977
+operational handling.
+
+21
+00:00:56.057 --> 00:00:59.710
+A file export or diagnostic bundle should
+be reviewed for accidental inclusion of
+
+22
+00:00:59.790 --> 00:01:02.067
+keys, tokens, connection strings, internal
+URLs,
+
+23
+00:01:02.147 --> 00:01:05.377
+and customer data before it becomes
+available to users or support teams.
+
+24
+00:01:05.457 --> 00:01:07.840
+Archive extraction is a special form of
+file writing.
+
+25
+00:01:07.920 --> 00:01:11.521
+Java applications often process ZIPs,
+documents, backups, and import bundles.
+
+26
+00:01:11.601 --> 00:01:14.884
+Defensive extraction validates entry
+names, paths, sizes, file counts,
+
+27
+00:01:14.964 --> 00:01:18.352
+symlinks, nested archives, and expansion
+behavior before writing output.
+
+28
+00:01:18.432 --> 00:01:20.233
+Keep the discussion at the design level:
+
+29
+00:01:20.313 --> 00:01:24.125
+extraction should happen inside a
+controlled boundary with resource limits and safe
+
+30
+00:01:24.205 --> 00:01:27.700
+failure behavior, not with broad
+filesystem access and unlimited expansion.

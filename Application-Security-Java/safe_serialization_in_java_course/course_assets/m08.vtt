@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.140
+Serialization is not only input.
+
+2
+00:00:02.220 --> 00:00:04.212
+Output serialization can leak data too.
+
+3
+00:00:04.292 --> 00:00:07.924
+A Java entity may contain password hashes,
+reset tokens, internal roles,
+
+4
+00:00:08.004 --> 00:00:11.284
+tenant IDs, audit metadata, private notes,
+service credentials,
+
+5
+00:00:11.364 --> 00:00:12.711
+or configuration details.
+
+6
+00:00:12.791 --> 00:00:15.720
+If the application serializes the entity
+directly to JSON,
+
+7
+00:00:15.800 --> 00:00:18.612
+a response can expose fields the caller
+should never see.
+
+8
+00:00:18.692 --> 00:00:22.148
+Safe output mapping is a first-class part
+of serialization security.
+
+9
+00:00:22.228 --> 00:00:24.220
+Use response DTOs, views, serializers,
+
+10
+00:00:24.300 --> 00:00:27.287
+or explicit mapping to control what leaves
+the application.
+
+11
+00:00:27.367 --> 00:00:30.530
+Avoid serializing secrets into messages,
+logs, cache entries,
+
+12
+00:00:30.610 --> 00:00:33.891
+client responses, debug dumps, support
+bundles, exported files,
+
+13
+00:00:33.971 --> 00:00:37.544
+or dead-letter stores unless there is a
+clear need and a protection plan.
+
+14
+00:00:37.624 --> 00:00:39.909
+Encryption may protect storage or
+transport,
+
+15
+00:00:39.989 --> 00:00:44.265
+but it does not replace minimization,
+authorization, redaction, and access control.
+
+16
+00:00:44.345 --> 00:00:46.454
+Logs are a common secondary exposure path.
+
+17
+00:00:46.534 --> 00:00:50.341
+Redact sensitive fields before logging
+parse errors, validation failures,
+
+18
+00:00:50.421 --> 00:00:53.584
+rejected messages, raw payload samples, or
+exception details.
+
+19
+00:00:53.664 --> 00:00:56.945
+Do not log full serialized payloads when
+they may contain secrets,
+
+20
+00:00:57.025 --> 00:01:00.539
+tokens, authorization headers, cookies,
+private URLs, credentials,
+
+21
+00:01:00.619 --> 00:01:03.138
+sensitive records, or unnecessary personal
+data.
+
+22
+00:01:03.218 --> 00:01:07.377
+A safe log should help operators
+investigate without preserving the sensitive data
+
+23
+00:01:07.457 --> 00:01:08.688
+that caused the concern.
+
+24
+00:01:08.768 --> 00:01:12.692
+Dead-letter queues, failed-message stores,
+caches, traces, object storage,
+
+25
+00:01:12.772 --> 00:01:15.525
+and support bundles can become
+sensitive-data stores.
+
+26
+00:01:15.605 --> 00:01:19.940
+Retention and deletion expectations should
+be defined for serialized sensitive data.
+
+27
+00:01:20.020 --> 00:01:23.886
+Review who can access those stores, how
+long data remains, what gets replayed,
+
+28
+00:01:23.966 --> 00:01:26.661
+and what must be rotated or remediated
+after exposure.
+
+29
+00:01:26.741 --> 00:01:30.900
+Serialization can copy data widely;
+minimization keeps that spread under control.

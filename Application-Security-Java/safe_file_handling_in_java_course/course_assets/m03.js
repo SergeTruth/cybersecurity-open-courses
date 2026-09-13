@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Java File APIs, Paths, and Boundary Thinking",
+  "graphicAlt": "A file identifier is looked up and authorized before storage access; a resolved child stays within its base directory, and raw paths are blocked.",
+  "narration": "Java gives developers several file-handling tools. Older code may use java.io.File and stream classes. Modern code often uses java.nio.file.Path and Files for filesystem operations. Frameworks may add resources, multipart abstractions, download helpers, and storage clients. These tools can join paths, resolve children, normalize segments, inspect file attributes, open streams, and move data. They are useful, but they are not security policies.\n\nPath APIs can support a safe design by making path manipulation more explicit. For example, a service can start from an application-controlled base directory, resolve a candidate name, normalize the result, and then check whether the final path remains inside the intended boundary. That is better than ad hoc string concatenation. But the path check only answers one question: whether this filesystem path is inside this base. It does not answer whether the user should access the file or whether the file belongs to the correct tenant.\n\nFilesystem behavior can vary by operating system, filesystem type, case sensitivity, symbolic links, separators, permissions, and mounted volumes. Containers add another layer because the process may see a different filesystem layout than the host. Object storage uses keys rather than local paths, but keys can still be misconstructed, overbroad, predictable, or exposed through policy mistakes. A defensive design acknowledges those differences instead of assuming every environment behaves like a developer laptop.\n\nThe safest public interface often avoids direct path control entirely. Instead of accepting a path from the user, the application can accept an application-controlled identifier, look up a file record, verify authorization, and then map that record to a known storage location. This separates user intent from storage mechanics. normalize, resolve, canonicalization, and real-path checks can help inside the implementation, but they should not be the only line of defense.",
+  "narrationPoints": [
+    "Java gives developers several file-handling tools.",
+    "Path APIs can support a safe design by making path.",
+    "Filesystem behavior can vary by operating system.",
+    "The safest public interface often avoids direct path.",
+    "But the path check only answers one question: whether.",
+    "It does not answer whether the user should access the file."
+  ]
+};

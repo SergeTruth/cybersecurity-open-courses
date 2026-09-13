@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Java Implementation Workflow, Testing, Logging, and Review",
+  "graphicAlt": "Whole-workflow review tests authorization, size limits, scanner failure and cleanup, while lifecycle events are minimized before logging and secrets are excluded.",
+  "narration": "A secure upload feature should be reviewable as a complete workflow. Review the controller, multipart configuration, authentication, authorization, size limits, storage destination, filename handling, file type validation, scanning workflow, error handling, cleanup behavior, download route, and logging together. In Java applications, that may involve Servlet Part APIs, Spring MultipartFile, JAX-RS multipart handlers, storage client libraries, reverse proxy limits, and background worker code.\n\nUse framework upload APIs carefully. Prefer streaming or bounded processing for large files rather than reading entire untrusted files into memory without limits. Keep upload handling separate from unrelated business logic where practical so security review is focused. Store generated identifiers and metadata deliberately. Make scanner failure, validation failure, storage failure, and cleanup failure visible to the application instead of burying them in generic exceptions.\n\nLogging should help operators understand the lifecycle without exposing sensitive material. Useful events include upload accepted, rejected, scanned, quarantined, released, downloaded, deleted, expired, and failed. Logs should avoid file contents, secrets, authorization headers, cookies, private signed URLs, storage credentials, full internal filesystem paths, and unnecessary personal data. A correlation ID, file record ID, tenant ID where appropriate, and safe status are usually more useful than dumping raw details.\n\nTests should cover allowed files, rejected files, size limits, unsupported types, unauthorized users, tenant boundary checks, generated filename behavior, path-boundary checks, cleanup paths, scanner failure, quarantine release, download authorization, and safe response behavior. Include upload behavior in pull request review, CI/CD checks, deployment review, operational runbooks, and incident response planning. A good Java upload implementation is not just code that accepts multipart data; it is a controlled lifecycle with evidence.",
+  "narrationPoints": [
+    "A secure upload feature should be reviewable as a complete.",
+    "Use framework upload APIs carefully.",
+    "Logging should help operators understand the lifecycle.",
+    "Tests should cover allowed files.",
+    "Keep upload handling separate from unrelated business logic.",
+    "Logs should avoid file contents."
+  ]
+};

@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.301
+Serving a file is an authorization
+decision, not just a filesystem operation.
+
+2
+00:00:04.381 --> 00:00:08.181
+Verify object-level authorization before
+serving private files, previews,
+
+3
+00:00:08.261 --> 00:00:11.083
+exports, reports, attachments, or
+generated documents.
+
+4
+00:00:11.163 --> 00:00:15.194
+Public static files and private downloads
+should use separate storage and routing
+
+5
+00:00:15.274 --> 00:00:15.792
+patterns.
+
+6
+00:00:15.872 --> 00:00:18.291
+Avoid predictable public URLs for private
+files.
+
+7
+00:00:18.371 --> 00:00:22.171
+A download route should know which
+business object is being served and why this
+
+8
+00:00:22.251 --> 00:00:23.806
+caller is allowed to receive it.
+
+9
+00:00:23.886 --> 00:00:25.268
+Response behavior matters.
+
+10
+00:00:25.348 --> 00:00:28.688
+Headers should handle content type,
+content disposition, caching,
+
+11
+00:00:28.768 --> 00:00:31.417
+and sniffing behavior appropriately for
+the use case.
+
+12
+00:00:31.497 --> 00:00:35.240
+Avoid reflecting untrusted filenames into
+headers, HTML, templates, logs,
+
+13
+00:00:35.320 --> 00:00:36.932
+or JSON without proper handling.
+
+14
+00:00:37.012 --> 00:00:40.870
+Error responses should not reveal internal
+paths, storage keys, stack traces,
+
+15
+00:00:40.950 --> 00:00:43.599
+server paths, bucket details, or sensitive
+metadata.
+
+16
+00:00:43.679 --> 00:00:47.595
+Safe responses tell the caller what they
+need to know without teaching them about
+
+17
+00:00:47.675 --> 00:00:48.654
+the storage layout.
+
+18
+00:00:48.734 --> 00:00:52.362
+Tests should cover allowed files, rejected
+paths, boundary enforcement,
+
+19
+00:00:52.442 --> 00:00:55.897
+unauthorized access, large files, cleanup
+paths, failed operations,
+
+20
+00:00:55.977 --> 00:00:59.605
+archive extraction boundaries, and
+concurrent behavior where relevant.
+
+21
+00:00:59.685 --> 00:01:02.621
+Include tests for traversal and
+authorization boundaries,
+
+22
+00:01:02.701 --> 00:01:04.544
+not just happy-path reads and writes.
+
+23
+00:01:04.624 --> 00:01:07.503
+Pull request review should ask where files
+can be read from,
+
+24
+00:01:07.583 --> 00:01:11.211
+where files can be written, who can
+retrieve them, how limits are enforced,
+
+25
+00:01:11.291 --> 00:01:13.191
+and what happens when something fails.
+
+26
+00:01:13.271 --> 00:01:16.842
+Logging should capture useful events such
+as file created, read, served,
+
+27
+00:01:16.922 --> 00:01:19.571
+rejected, deleted, expired, quarantined,
+or failed.
+
+28
+00:01:19.651 --> 00:01:22.357
+Logs should not expose file contents,
+secrets, tokens,
+
+29
+00:01:22.437 --> 00:01:26.238
+full sensitive paths, authorization
+headers, cookies, private signed URLs,
+
+30
+00:01:26.318 --> 00:01:30.061
+storage credentials, internal server
+paths, or unnecessary personal data.
+
+31
+00:01:30.141 --> 00:01:33.826
+Safe file handling should be visible in
+tests, logs, dashboards, runbooks,
+
+32
+00:01:33.906 --> 00:01:38.052
+and incident response, but without turning
+operational evidence into a new exposure
+
+33
+00:01:38.132 --> 00:01:38.420
+path.

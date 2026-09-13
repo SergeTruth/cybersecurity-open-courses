@@ -1,0 +1,156 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.105
+Filenames are often overloaded.
+
+2
+00:00:02.185 --> 00:00:05.855
+The same value may be used for display,
+storage, routing, download headers,
+
+3
+00:00:05.935 --> 00:00:07.712
+logging, and processing decisions.
+
+4
+00:00:07.792 --> 00:00:11.576
+Those are different purposes and should
+not collapse into one trusted string.
+
+5
+00:00:11.656 --> 00:00:15.383
+A user-supplied filename is untrusted
+display data, not a safe storage path.
+
+6
+00:00:15.463 --> 00:00:18.674
+Generate server-side filenames, object
+keys, or IDs for storage,
+
+7
+00:00:18.754 --> 00:00:22.882
+and preserve the original filename only as
+metadata when the application truly needs
+
+8
+00:00:22.962 --> 00:00:23.134
+it.
+
+9
+00:00:23.214 --> 00:00:26.367
+Original filenames can contain long
+values, confusing Unicode,
+
+10
+00:00:26.447 --> 00:00:29.429
+path separators, reserved names,
+hidden-file conventions,
+
+11
+00:00:29.509 --> 00:00:33.522
+double extensions, control-like
+characters, and platform-specific surprises.
+
+12
+00:00:33.602 --> 00:00:36.526
+Even when a framework exposes a convenient
+filename method,
+
+13
+00:00:36.606 --> 00:00:39.416
+the value came from the client or another
+external source.
+
+14
+00:00:39.496 --> 00:00:43.165
+Apply length limits and restrict displayed
+characters where appropriate.
+
+15
+00:00:43.245 --> 00:00:46.628
+Escape or encode filenames before placing
+them into HTML, JSON, logs,
+
+16
+00:00:46.708 --> 00:00:49.575
+response headers, templates, dashboards,
+or audit views.
+
+17
+00:00:49.655 --> 00:00:52.005
+File type decisions also need layered
+thinking.
+
+18
+00:00:52.085 --> 00:00:55.239
+Do not trust a file extension or declared
+Content-Type by itself.
+
+19
+00:00:55.319 --> 00:00:58.415
+Use allowlists for the types required by
+the business function,
+
+20
+00:00:58.495 --> 00:01:02.508
+and validate with multiple signals where
+appropriate: extension, declared type,
+
+21
+00:01:02.588 --> 00:01:05.455
+file signature, parser behavior, and
+expected structure.
+
+22
+00:01:05.535 --> 00:01:07.771
+The depth of validation should match the
+risk.
+
+23
+00:01:07.851 --> 00:01:10.718
+A public static asset workflow, a private
+report download,
+
+24
+00:01:10.798 --> 00:01:13.263
+and an archive import job all have
+different needs.
+
+25
+00:01:13.343 --> 00:01:14.662
+Metadata can be sensitive.
+
+26
+00:01:14.742 --> 00:01:18.010
+Original filename, uploader, tenant ID,
+storage key, scan status,
+
+27
+00:01:18.090 --> 00:01:20.269
+processing result, content type, file
+size,
+
+28
+00:01:20.349 --> 00:01:22.986
+and retention state can reveal business
+information.
+
+29
+00:01:23.066 --> 00:01:26.449
+Treat metadata as part of the file record,
+not as harmless decoration.
+
+30
+00:01:26.529 --> 00:01:30.256
+A safe design separates storage identity,
+display metadata, access policy,
+
+31
+00:01:30.336 --> 00:01:34.407
+and processing decisions so a mistake in
+one area does not automatically compromise
+
+32
+00:01:34.487 --> 00:01:35.060
+the others.

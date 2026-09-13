@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.029
+Storage is where upload mistakes become
+persistent.
+
+2
+00:00:03.109 --> 00:00:06.425
+Temporary upload locations should be
+isolated, access-controlled,
+
+3
+00:00:06.505 --> 00:00:08.865
+and cleaned up reliably after success or
+failure.
+
+4
+00:00:08.945 --> 00:00:12.317
+Permanent storage should avoid executable
+application directories,
+
+5
+00:00:12.397 --> 00:00:15.712
+classpath locations, deployment
+directories, source directories,
+
+6
+00:00:15.792 --> 00:00:19.333
+and public web roots unless public hosting
+is an intentional and carefully
+
+7
+00:00:19.413 --> 00:00:20.368
+controlled design.
+
+8
+00:00:20.448 --> 00:00:24.438
+An uploaded file should not become
+executable or directly reachable just because it
+
+9
+00:00:24.518 --> 00:00:26.148
+was stored in a convenient folder.
+
+10
+00:00:26.228 --> 00:00:29.487
+Use generated names and maintain metadata
+in a database when needed.
+
+11
+00:00:29.567 --> 00:00:31.028
+If filesystem storage is used,
+
+12
+00:00:31.108 --> 00:00:35.042
+construct paths from an
+application-controlled base and generated identifiers,
+
+13
+00:00:35.122 --> 00:00:36.077
+not from user input.
+
+14
+00:00:36.157 --> 00:00:39.080
+Java NIO path handling can help, but it
+must be used carefully:
+
+15
+00:00:39.160 --> 00:00:41.745
+resolve the candidate path against the
+intended base,
+
+16
+00:00:41.825 --> 00:00:44.578
+normalize or canonicalize as appropriate
+for the design,
+
+17
+00:00:44.658 --> 00:00:48.648
+and confirm the result remains inside the
+allowed storage boundary before writing,
+
+18
+00:00:48.728 --> 00:00:50.808
+reading, deleting, or processing the file.
+
+19
+00:00:50.888 --> 00:00:54.653
+Avoid using untrusted input to construct
+filesystem paths, URLs, object keys,
+
+20
+00:00:54.733 --> 00:00:58.442
+shell commands, archive extraction
+destinations, or processing locations.
+
+21
+00:00:58.522 --> 00:01:01.950
+Object storage does not eliminate
+path-like thinking; keys, prefixes,
+
+22
+00:01:02.030 --> 00:01:05.964
+bucket policies, signed URLs, lifecycle
+rules, and access controls still matter.
+
+23
+00:01:06.044 --> 00:01:08.123
+A tenant identifier, object key, filename,
+
+24
+00:01:08.203 --> 00:01:12.081
+or callback URL taken from the client
+should be validated and authorized before it
+
+25
+00:01:12.161 --> 00:01:14.240
+influences storage or retrieval behavior.
+
+26
+00:01:14.320 --> 00:01:18.254
+Files should usually be private by default
+and served through controlled download
+
+27
+00:01:18.334 --> 00:01:21.818
+routes or time-limited signed URLs when
+that matches the business model.
+
+28
+00:01:21.898 --> 00:01:25.157
+Use appropriate filesystem permissions,
+object storage policies,
+
+29
+00:01:25.237 --> 00:01:28.890
+lifecycle rules, retention controls,
+deletion behavior, and cleanup jobs.
+
+30
+00:01:28.970 --> 00:01:32.567
+Retention and deletion are part of
+security because old uploads can contain
+
+31
+00:01:32.647 --> 00:01:35.963
+sensitive data, stale malware findings,
+abandoned temporary files,
+
+32
+00:01:36.043 --> 00:01:38.740
+or material that no longer has a business
+reason to exist.

@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.807
+File security does not end when the upload
+succeeds.
+
+2
+00:00:02.887 --> 00:00:06.243
+Upload authorization and download
+authorization are separate decisions.
+
+3
+00:00:06.323 --> 00:00:08.630
+A user who can upload a document for one
+case, tenant,
+
+4
+00:00:08.710 --> 00:00:12.171
+or account should not automatically be
+able to download every file in storage.
+
+5
+00:00:12.251 --> 00:00:15.240
+Before serving a file, generating a signed
+URL, creating a preview,
+
+6
+00:00:15.320 --> 00:00:19.042
+or exposing metadata, the application
+should enforce object-level authorization
+
+7
+00:00:19.122 --> 00:00:20.381
+against the business model.
+
+8
+00:00:20.461 --> 00:00:22.663
+Avoid predictable public URLs for private
+files.
+
+9
+00:00:22.743 --> 00:00:24.316
+Storage keys, object identifiers,
+
+10
+00:00:24.396 --> 00:00:27.700
+and signed URLs need careful control
+because they can become access paths.
+
+11
+00:00:27.780 --> 00:00:30.768
+A signed URL may be appropriate for a
+short-lived private download,
+
+12
+00:00:30.848 --> 00:00:34.414
+but it should be scoped, time-limited, and
+generated only after authorization.
+
+13
+00:00:34.494 --> 00:00:37.588
+A public bucket or web root may be
+appropriate for truly public assets,
+
+14
+00:00:37.668 --> 00:00:41.128
+but it is usually a poor default for
+customer documents, support attachments,
+
+15
+00:00:41.208 --> 00:00:43.044
+tax forms, resumes, or internal imports.
+
+16
+00:00:43.124 --> 00:00:44.487
+Metadata can be sensitive too.
+
+17
+00:00:44.567 --> 00:00:48.028
+Original filename, uploader identity,
+upload time, file size, content type,
+
+18
+00:00:48.108 --> 00:00:50.624
+scan status, tenant ID, storage key,
+processing result,
+
+19
+00:00:50.704 --> 00:00:53.116
+and retention state can reveal business
+information.
+
+20
+00:00:53.196 --> 00:00:56.710
+Metadata endpoints and previews should
+follow the same authorization model as
+
+21
+00:00:56.790 --> 00:00:57.314
+downloads.
+
+22
+00:00:57.394 --> 00:01:00.645
+Do not reflect untrusted filenames into
+headers, HTML, templates, logs,
+
+23
+00:01:00.725 --> 00:01:02.665
+or JSON responses without proper handling.
+
+24
+00:01:02.745 --> 00:01:05.786
+Download responses should use appropriate
+headers for the use case,
+
+25
+00:01:05.866 --> 00:01:09.379
+including safe content disposition and
+content type behavior where relevant.
+
+26
+00:01:09.459 --> 00:01:13.235
+The application should avoid surprising
+inline rendering of untrusted content when
+
+27
+00:01:13.315 --> 00:01:14.154
+download is safer.
+
+28
+00:01:14.234 --> 00:01:17.589
+File deletion, ownership transfer,
+sharing, export, preview generation,
+
+29
+00:01:17.669 --> 00:01:20.344
+and retention should follow explicit
+authorization rules.
+
+30
+00:01:20.424 --> 00:01:22.993
+Retrieval is often where sensitive data
+exposure occurs,
+
+31
+00:01:23.073 --> 00:01:25.380
+so treat it as a first-class part of
+upload security.

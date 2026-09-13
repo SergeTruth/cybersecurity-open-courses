@@ -1,0 +1,166 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.936
+Java gives developers several
+file-handling tools.
+
+2
+00:00:03.016 --> 00:00:05.397
+Older code may use java.io.File and stream
+classes.
+
+3
+00:00:05.477 --> 00:00:09.211
+Modern code often uses java.nio.file.Path
+and Files for filesystem operations.
+
+4
+00:00:09.291 --> 00:00:12.755
+Frameworks may add resources, multipart
+abstractions, download helpers,
+
+5
+00:00:12.835 --> 00:00:13.810
+and storage clients.
+
+6
+00:00:13.890 --> 00:00:16.975
+These tools can join paths, resolve
+children, normalize segments,
+
+7
+00:00:17.055 --> 00:00:19.544
+inspect file attributes, open streams, and
+move data.
+
+8
+00:00:19.624 --> 00:00:22.006
+They are useful, but they are not security
+policies.
+
+9
+00:00:22.086 --> 00:00:25.658
+Path APIs can support a safe design by
+making path manipulation more explicit.
+
+10
+00:00:25.738 --> 00:00:29.472
+For example, a service can start from an
+application-controlled base directory,
+
+11
+00:00:29.552 --> 00:00:31.771
+resolve a candidate name, normalize the
+result,
+
+12
+00:00:31.851 --> 00:00:35.315
+and then check whether the final path
+remains inside the intended boundary.
+
+13
+00:00:35.395 --> 00:00:37.614
+That is better than ad hoc string
+concatenation.
+
+14
+00:00:37.694 --> 00:00:39.751
+But the path check only answers one
+question:
+
+15
+00:00:39.831 --> 00:00:42.104
+whether this filesystem path is inside
+this base.
+
+16
+00:00:42.184 --> 00:00:45.648
+It does not answer whether the user should
+access the file or whether the file
+
+17
+00:00:45.728 --> 00:00:47.135
+belongs to the correct tenant.
+
+18
+00:00:47.215 --> 00:00:50.354
+Filesystem behavior can vary by operating
+system, filesystem type,
+
+19
+00:00:50.434 --> 00:00:54.277
+case sensitivity, symbolic links,
+separators, permissions, and mounted volumes.
+
+20
+00:00:54.357 --> 00:00:58.038
+Containers add another layer because the
+process may see a different filesystem
+
+21
+00:00:58.118 --> 00:00:59.092
+layout than the host.
+
+22
+00:00:59.172 --> 00:01:01.445
+Object storage uses keys rather than local
+paths,
+
+23
+00:01:01.525 --> 00:01:04.448
+but keys can still be misconstructed,
+overbroad, predictable,
+
+24
+00:01:04.528 --> 00:01:06.205
+or exposed through policy mistakes.
+
+25
+00:01:06.285 --> 00:01:09.858
+A defensive design acknowledges those
+differences instead of assuming every
+
+26
+00:01:09.938 --> 00:01:12.048
+environment behaves like a developer
+laptop.
+
+27
+00:01:12.128 --> 00:01:15.430
+The safest public interface often avoids
+direct path control entirely.
+
+28
+00:01:15.510 --> 00:01:17.404
+Instead of accepting a path from the user,
+
+29
+00:01:17.484 --> 00:01:20.623
+the application can accept an
+application-controlled identifier,
+
+30
+00:01:20.703 --> 00:01:22.760
+look up a file record, verify
+authorization,
+
+31
+00:01:22.840 --> 00:01:25.221
+and then map that record to a known
+storage location.
+
+32
+00:01:25.301 --> 00:01:27.683
+This separates user intent from storage
+mechanics.
+
+33
+00:01:27.763 --> 00:01:31.497
+normalize, resolve, canonicalization, and
+real-path checks can help inside the
+
+34
+00:01:31.577 --> 00:01:34.500
+implementation, but they should not be the
+only line of defense.

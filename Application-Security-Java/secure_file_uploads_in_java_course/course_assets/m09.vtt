@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.913
+A secure upload feature should be
+reviewable as a complete workflow.
+
+2
+00:00:03.993 --> 00:00:08.229
+Review the controller, multipart
+configuration, authentication, authorization,
+
+3
+00:00:08.309 --> 00:00:12.192
+size limits, storage destination, filename
+handling, file type validation,
+
+4
+00:00:12.272 --> 00:00:15.861
+scanning workflow, error handling, cleanup
+behavior, download route,
+
+5
+00:00:15.941 --> 00:00:17.059
+and logging together.
+
+6
+00:00:17.139 --> 00:00:20.022
+In Java applications, that may involve
+Servlet Part APIs,
+
+7
+00:00:20.102 --> 00:00:24.045
+Spring MultipartFile, JAX-RS multipart
+handlers, storage client libraries,
+
+8
+00:00:24.125 --> 00:00:26.655
+reverse proxy limits, and background
+worker code.
+
+9
+00:00:26.735 --> 00:00:28.617
+Use framework upload APIs carefully.
+
+10
+00:00:28.697 --> 00:00:32.816
+Prefer streaming or bounded processing for
+large files rather than reading entire
+
+11
+00:00:32.896 --> 00:00:35.132
+untrusted files into memory without
+limits.
+
+12
+00:00:35.212 --> 00:00:39.213
+Keep upload handling separate from
+unrelated business logic where practical so
+
+13
+00:00:39.293 --> 00:00:40.705
+security review is focused.
+
+14
+00:00:40.785 --> 00:00:43.668
+Store generated identifiers and metadata
+deliberately.
+
+15
+00:00:43.748 --> 00:00:46.808
+Make scanner failure, validation failure,
+storage failure,
+
+16
+00:00:46.888 --> 00:00:50.948
+and cleanup failure visible to the
+application instead of burying them in generic
+
+17
+00:00:51.028 --> 00:00:51.675
+exceptions.
+
+18
+00:00:51.755 --> 00:00:55.991
+Logging should help operators understand
+the lifecycle without exposing sensitive
+
+19
+00:00:56.071 --> 00:00:56.601
+material.
+
+20
+00:00:56.681 --> 00:01:00.387
+Useful events include upload accepted,
+rejected, scanned, quarantined,
+
+21
+00:01:00.467 --> 00:01:03.174
+released, downloaded, deleted, expired,
+and failed.
+
+22
+00:01:03.254 --> 00:01:07.078
+Logs should avoid file contents, secrets,
+authorization headers, cookies,
+
+23
+00:01:07.158 --> 00:01:10.983
+private signed URLs, storage credentials,
+full internal filesystem paths,
+
+24
+00:01:11.063 --> 00:01:12.652
+and unnecessary personal data.
+
+25
+00:01:12.732 --> 00:01:15.850
+A correlation ID, file record ID, tenant
+ID where appropriate,
+
+26
+00:01:15.930 --> 00:01:19.166
+and safe status are usually more useful
+than dumping raw details.
+
+27
+00:01:19.246 --> 00:01:22.423
+Tests should cover allowed files, rejected
+files, size limits,
+
+28
+00:01:22.503 --> 00:01:25.798
+unsupported types, unauthorized users,
+tenant boundary checks,
+
+29
+00:01:25.878 --> 00:01:29.350
+generated filename behavior, path-boundary
+checks, cleanup paths,
+
+30
+00:01:29.430 --> 00:01:32.666
+scanner failure, quarantine release,
+download authorization,
+
+31
+00:01:32.746 --> 00:01:34.158
+and safe response behavior.
+
+32
+00:01:34.238 --> 00:01:37.356
+Include upload behavior in pull request
+review, CI/CD checks,
+
+33
+00:01:37.436 --> 00:01:41.261
+deployment review, operational runbooks,
+and incident response planning.
+
+34
+00:01:41.341 --> 00:01:45.283
+A good Java upload implementation is not
+just code that accepts multipart data;
+
+35
+00:01:45.363 --> 00:01:47.540
+it is a controlled lifecycle with
+evidence.

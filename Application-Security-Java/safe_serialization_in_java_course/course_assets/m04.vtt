@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.891
+When legacy native Java deserialization
+cannot be removed immediately,
+
+2
+00:00:03.971 --> 00:00:05.447
+filtering is damage reduction.
+
+3
+00:00:05.527 --> 00:00:09.137
+Java serialization filters, including
+ObjectInputFilter-style controls,
+
+4
+00:00:09.217 --> 00:00:10.912
+can help restrict incoming streams.
+
+5
+00:00:10.992 --> 00:00:14.000
+Useful controls may include allowed
+classes, rejected classes,
+
+6
+00:00:14.080 --> 00:00:17.416
+maximum depth, maximum array size, maximum
+references, maximum bytes,
+
+7
+00:00:17.496 --> 00:00:20.395
+and other resource limits supported by the
+runtime and design.
+
+8
+00:00:20.475 --> 00:00:23.210
+The filter should make the expected object
+graph explicit.
+
+9
+00:00:23.290 --> 00:00:25.040
+Filters should be context-specific.
+
+10
+00:00:25.120 --> 00:00:28.893
+One broad global permission to deserialize
+many classes is much less useful than a
+
+11
+00:00:28.973 --> 00:00:30.833
+narrow filter tied to a single workflow.
+
+12
+00:00:30.913 --> 00:00:34.358
+A class allowlist should answer which
+exact classes are valid here and why.
+
+13
+00:00:34.438 --> 00:00:38.321
+Reject-by-default behavior is safer than
+accepting undecided or unknown classes.
+
+14
+00:00:38.401 --> 00:00:40.862
+If a stream contains a class outside the
+expected set,
+
+15
+00:00:40.942 --> 00:00:44.606
+the safest response is usually to reject
+the input and record a safe operational
+
+16
+00:00:44.686 --> 00:00:45.069
+signal.
+
+17
+00:00:45.149 --> 00:00:48.212
+Filters reduce risk, but they do not make
+risky designs fully safe.
+
+18
+00:00:48.292 --> 00:00:51.519
+Deserialization inputs still need
+authentication, authorization,
+
+19
+00:00:51.599 --> 00:00:54.060
+size limits, monitoring, and safe failure
+behavior.
+
+20
+00:00:54.140 --> 00:00:56.273
+If a file import, session restore, cache
+read,
+
+21
+00:00:56.353 --> 00:00:59.743
+or message consumer uses object streams,
+that path should be documented,
+
+22
+00:00:59.823 --> 00:01:02.613
+tested, owned, and included in incident
+response planning.
+
+23
+00:01:02.693 --> 00:01:06.357
+Filter configuration also needs review
+when dependencies, runtime versions,
+
+24
+00:01:06.437 --> 00:01:07.859
+or serialized classes change.
+
+25
+00:01:07.939 --> 00:01:11.658
+Treat filtering as migration support
+rather than a reason to keep object streams
+
+26
+00:01:11.738 --> 00:01:12.175
+forever.
+
+27
+00:01:12.255 --> 00:01:14.990
+A good near-term plan narrows classes and
+resource limits.
+
+28
+00:01:15.070 --> 00:01:19.062
+A better long-term plan replaces untrusted
+object deserialization with constrained
+
+29
+00:01:19.142 --> 00:01:21.549
+data formats, DTOs, schemas, and explicit
+mapping.
+
+30
+00:01:21.629 --> 00:01:24.472
+Teams should know which legacy paths
+remain, why they remain,
+
+31
+00:01:24.552 --> 00:01:26.740
+and what must happen before they can be
+retired.

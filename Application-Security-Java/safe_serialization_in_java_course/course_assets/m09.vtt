@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.635
+Serialization review should be repeatable.
+
+2
+00:00:02.715 --> 00:00:06.197
+Code review should identify
+ObjectInputStream, Serializable classes,
+
+3
+00:00:06.277 --> 00:00:09.086
+readObject methods, deserialization
+filters, JSON, XML,
+
+4
+00:00:09.166 --> 00:00:12.873
+and YAML parser configuration, polymorphic
+binding, custom deserializers,
+
+5
+00:00:12.953 --> 00:00:16.267
+message DTOs, raw payload logging, and
+direct entity serialization.
+
+6
+00:00:16.347 --> 00:00:19.493
+Reviewers should ask what is being
+deserialized, who supplied it,
+
+7
+00:00:19.573 --> 00:00:23.449
+which classes or DTOs are allowed, what
+limits apply, and what happens on failure.
+
+8
+00:00:23.529 --> 00:00:26.225
+Tests should cover malformed payloads,
+unknown fields,
+
+9
+00:00:26.305 --> 00:00:29.169
+unsupported versions, oversized data,
+deeply nested data,
+
+10
+00:00:29.249 --> 00:00:32.676
+rejected classes, unauthorized messages,
+sensitive field exclusion,
+
+11
+00:00:32.756 --> 00:00:33.992
+and safe error responses.
+
+12
+00:00:34.072 --> 00:00:37.610
+Fuzzing can be useful for parsers, binary
+formats, custom deserializers,
+
+13
+00:00:37.690 --> 00:00:39.207
+and file or message boundaries.
+
+14
+00:00:39.287 --> 00:00:41.478
+These tests are not only about parser
+crashes.
+
+15
+00:00:41.558 --> 00:00:45.658
+They verify that the application rejects
+unexpected state before it becomes business
+
+16
+00:00:45.738 --> 00:00:46.244
+behavior.
+
+17
+00:00:46.324 --> 00:00:49.245
+CI/CD should run tests, dependency checks,
+secret scanning,
+
+18
+00:00:49.325 --> 00:00:50.785
+static analysis where useful,
+
+19
+00:00:50.865 --> 00:00:54.067
+and review dependency changes that affect
+serializers or parsers.
+
+20
+00:00:54.147 --> 00:00:57.405
+A new library version can change parser
+defaults, subtype handling,
+
+21
+00:00:57.485 --> 00:00:59.844
+XML behavior, YAML construction, or DTO
+mapping.
+
+22
+00:00:59.924 --> 00:01:03.968
+Dependency review matters because
+serialization behavior often lives in framework
+
+23
+00:01:04.048 --> 00:01:06.632
+integration code rather than obvious
+business logic.
+
+24
+00:01:06.712 --> 00:01:09.521
+Incident response should include affected
+parser review,
+
+25
+00:01:09.601 --> 00:01:13.027
+classpath dependency review, secret
+rotation when needed, log review,
+
+26
+00:01:13.107 --> 00:01:17.320
+message replay review, cache and
+dead-letter inspection, and remediation validation.
+
+27
+00:01:17.400 --> 00:01:20.770
+Serialization paths should have owners and
+documented expectations.
+
+28
+00:01:20.850 --> 00:01:24.165
+During an incident, someone needs to know
+which inputs were accepted,
+
+29
+00:01:24.245 --> 00:01:26.997
+which fields were logged, which messages
+can be replayed,
+
+30
+00:01:27.077 --> 00:01:29.380
+and which downstream actions may have
+occurred.

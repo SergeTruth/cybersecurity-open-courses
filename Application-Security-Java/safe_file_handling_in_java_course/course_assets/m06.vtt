@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.333
+Many file bugs are timing and state bugs.
+
+2
+00:00:02.413 --> 00:00:03.977
+The application checks one thing,
+
+3
+00:00:04.057 --> 00:00:06.699
+then later uses a path or file that may no
+longer be the same.
+
+4
+00:00:06.779 --> 00:00:08.936
+Read and write only within approved
+locations,
+
+5
+00:00:09.016 --> 00:00:12.952
+and avoid read-modify-write logic that can
+be confused by concurrent requests unless
+
+6
+00:00:13.032 --> 00:00:14.488
+the workflow is designed for it.
+
+7
+00:00:14.568 --> 00:00:17.372
+If multiple users, workers, or jobs can
+touch the same record,
+
+8
+00:00:17.452 --> 00:00:21.010
+the file operation should be coordinated
+with the application's state model.
+
+9
+00:00:21.090 --> 00:00:23.139
+Temporary files deserve deliberate design.
+
+10
+00:00:23.219 --> 00:00:26.131
+Use safe temporary directories and
+generated temporary names.
+
+11
+00:00:26.211 --> 00:00:30.039
+Java temporary-file APIs or
+platform-provided mechanisms are usually better than
+
+12
+00:00:30.119 --> 00:00:31.252
+predictable filenames.
+
+13
+00:00:31.332 --> 00:00:34.729
+Temporary locations should be isolated,
+access-controlled, monitored,
+
+14
+00:00:34.809 --> 00:00:37.828
+and cleaned up after success, failure,
+timeout, or cancellation.
+
+15
+00:00:37.908 --> 00:00:41.575
+A temporary file that persists longer than
+expected can become a data exposure or
+
+16
+00:00:41.655 --> 00:00:43.003
+storage exhaustion problem.
+
+17
+00:00:43.083 --> 00:00:46.534
+Be careful with symlinks, hard links,
+rename operations, move operations,
+
+18
+00:00:46.614 --> 00:00:49.471
+and assumptions that a path still points
+to the same file later.
+
+19
+00:00:49.551 --> 00:00:53.326
+Avoid separate check-then-use patterns
+when a file could change between the check
+
+20
+00:00:53.406 --> 00:00:54.268
+and the operation.
+
+21
+00:00:54.348 --> 00:00:57.853
+Where appropriate, use atomic write or
+replace patterns so readers do not see
+
+22
+00:00:57.933 --> 00:00:59.173
+partially written output.
+
+23
+00:00:59.253 --> 00:01:00.871
+Generated reports, cache entries,
+
+24
+00:01:00.951 --> 00:01:03.917
+and export files should avoid collisions
+and incomplete states.
+
+25
+00:01:03.997 --> 00:01:06.477
+Writable locations should be narrow and
+intentional.
+
+26
+00:01:06.557 --> 00:01:09.523
+Do not write user-controlled data into
+executable directories,
+
+27
+00:01:09.603 --> 00:01:12.946
+source directories, deployment
+directories, dependency directories,
+
+28
+00:01:13.026 --> 00:01:16.692
+classpath locations, or public web roots
+unless the design explicitly requires
+
+29
+00:01:16.772 --> 00:01:19.252
+public static content and has compensating
+controls.
+
+30
+00:01:19.332 --> 00:01:22.891
+The Java process should not need broad
+write access simply because one feature
+
+31
+00:01:22.971 --> 00:01:23.780
+generates a file.

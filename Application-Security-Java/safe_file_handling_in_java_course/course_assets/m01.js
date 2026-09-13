@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why File Handling Security Matters",
+  "graphicAlt": "Java file handling shown as a protected lifecycle, with read, write, process and serve gates around a shield and blocked access to secrets.",
+  "narration": "File handling usually begins as ordinary utility code. A Java application adds a report download, writes a temporary PDF, reads a template, moves an uploaded file, or serves a static asset. Later, the same application may add exports, archive processing, object storage, generated invoices, cached data, background workers, and private downloads. At that point, file handling is no longer just helper code. It is a security boundary that decides what data can be read, written, transformed, retained, and returned to users.\n\nUnsafe file handling can expose source code, secrets, configuration, logs, customer data, generated reports, backups, or another tenant's files. The risk can come from path traversal, unsafe filenames, excessive permissions, symbolic link surprises, race conditions, resource exhaustion, unsafe temporary files, public exposure, archive extraction mistakes, and metadata leakage. Many of these issues do not look dramatic in code review. They look like a string concatenation, a convenient directory, a missing authorization check, or a read that assumes the path is safe.\n\nJava applications use many file-related APIs and environments: java.nio.file, java.io, Servlet and Spring download endpoints, Jakarta EE services, JAX-RS resources, batch jobs, CLI tools, containers, mounted volumes, and object storage clients. Each tool can support a safe design, but no single API call is the design. A call to normalize, a framework resource helper, a filename cleanup function, or a storage bucket policy can help, but it cannot decide whether the user is authorized or whether the operation fits the business workflow.\n\nThe goal is to make file access intentional, bounded, least-privileged, observable, and testable. A reviewer should be able to answer where files come from, where they may be stored, who may read them, who may write them, what limits apply, how temporary files are cleaned up, what gets logged, and how failures are handled. This course focuses on defensive design and engineering review, not exploit demonstrations.",
+  "narrationPoints": [
+    "File handling usually begins as ordinary utility code.",
+    "Unsafe file handling can expose source code.",
+    "Java applications use many file-related APIs.",
+    "The goal is to make file access intentional.",
+    "Many of these issues do not look dramatic in code review.",
+    "They look like a string concatenation."
+  ]
+};

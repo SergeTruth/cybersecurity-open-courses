@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.557
+File upload features look simple at first.
+
+2
+00:00:02.637 --> 00:00:06.693
+A Java application accepts a profile
+image, stores it somewhere, and returns a link.
+
+3
+00:00:06.773 --> 00:00:10.144
+Over time, that same pattern often expands
+into support attachments,
+
+4
+00:00:10.224 --> 00:00:13.823
+invoices, resumes, diagnostic archives,
+identity documents, previews,
+
+5
+00:00:13.903 --> 00:00:17.788
+malware scanning, object storage, download
+links, and background processing.
+
+6
+00:00:17.868 --> 00:00:20.895
+At that point, the upload endpoint is only
+one piece of the risk.
+
+7
+00:00:20.975 --> 00:00:24.403
+The full lifecycle includes intake,
+validation, temporary handling,
+
+8
+00:00:24.483 --> 00:00:27.911
+storage, processing, access control,
+logging, retention, deletion,
+
+9
+00:00:27.991 --> 00:00:29.134
+and incident response.
+
+10
+00:00:29.214 --> 00:00:32.527
+Uploads are high-risk input paths because
+they let users, partners,
+
+11
+00:00:32.607 --> 00:00:36.663
+administrators, or integrations place
+content into the application environment.
+
+12
+00:00:36.743 --> 00:00:39.600
+A file may flow through a reverse proxy,
+servlet container,
+
+13
+00:00:39.680 --> 00:00:43.336
+multipart resolver, temporary directory,
+Java controller, object store,
+
+14
+00:00:43.416 --> 00:00:46.844
+malware scanner, image library, document
+parser, preview generator,
+
+15
+00:00:46.924 --> 00:00:48.695
+search indexer, and download route.
+
+16
+00:00:48.775 --> 00:00:50.203
+Each step can change the risk.
+
+17
+00:00:50.283 --> 00:00:53.768
+A file that was harmless during intake may
+become dangerous when parsed,
+
+18
+00:00:53.848 --> 00:00:56.819
+exposed publicly, indexed, or served with
+the wrong headers.
+
+19
+00:00:56.899 --> 00:01:00.098
+The practical risks include malicious
+content, oversized files,
+
+20
+00:01:00.178 --> 00:01:03.834
+unsafe filenames, path traversal, public
+exposure, unauthorized access,
+
+21
+00:01:03.914 --> 00:01:07.913
+metadata leakage, storage abuse, resource
+exhaustion, parser vulnerabilities,
+
+22
+00:01:07.993 --> 00:01:10.679
+unsafe post-processing, and sensitive data
+exposure.
+
+23
+00:01:10.759 --> 00:01:14.072
+Java teams may use Spring MVC, Spring
+Boot, Jakarta Servlet, JAX-RS,
+
+24
+00:01:14.152 --> 00:01:18.094
+application servers, reverse proxies,
+object storage, and background workers.
+
+25
+00:01:18.174 --> 00:01:21.259
+Those tools help, but none of them make an
+upload safe by default.
+
+26
+00:01:21.339 --> 00:01:24.424
+The goal is to accept only the files the
+business actually needs,
+
+27
+00:01:24.504 --> 00:01:26.961
+process them safely, store them in the
+right place,
+
+28
+00:01:27.041 --> 00:01:28.697
+and control who can retrieve them.
+
+29
+00:01:28.777 --> 00:01:32.548
+Secure upload handling is not one
+annotation, one filename cleanup function,
+
+30
+00:01:32.628 --> 00:01:34.627
+one antivirus scan, or one bucket policy.
+
+31
+00:01:34.707 --> 00:01:37.792
+It is a design that makes allowed use
+cases, limits, validation,
+
+32
+00:01:37.872 --> 00:01:39.986
+storage boundaries, processing behavior,
+
+33
+00:01:40.066 --> 00:01:42.580
+and operational response explicit and
+reviewable.

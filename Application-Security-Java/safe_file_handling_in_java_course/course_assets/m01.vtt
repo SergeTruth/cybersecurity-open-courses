@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.204
+File handling usually begins as ordinary
+utility code.
+
+2
+00:00:03.284 --> 00:00:06.506
+A Java application adds a report download,
+writes a temporary PDF,
+
+3
+00:00:06.586 --> 00:00:09.808
+reads a template, moves an uploaded file,
+or serves a static asset.
+
+4
+00:00:09.888 --> 00:00:13.110
+Later, the same application may add
+exports, archive processing,
+
+5
+00:00:13.190 --> 00:00:16.700
+object storage, generated invoices, cached
+data, background workers,
+
+6
+00:00:16.780 --> 00:00:17.931
+and private downloads.
+
+7
+00:00:18.011 --> 00:00:20.830
+At that point, file handling is no longer
+just helper code.
+
+8
+00:00:20.910 --> 00:00:24.247
+It is a security boundary that decides
+what data can be read, written,
+
+9
+00:00:24.327 --> 00:00:26.628
+transformed, retained, and returned to
+users.
+
+10
+00:00:26.708 --> 00:00:30.448
+Unsafe file handling can expose source
+code, secrets, configuration, logs,
+
+11
+00:00:30.528 --> 00:00:34.038
+customer data, generated reports, backups,
+or another tenant's files.
+
+12
+00:00:34.118 --> 00:00:36.880
+The risk can come from path traversal,
+unsafe filenames,
+
+13
+00:00:36.960 --> 00:00:40.297
+excessive permissions, symbolic link
+surprises, race conditions,
+
+14
+00:00:40.377 --> 00:00:43.541
+resource exhaustion, unsafe temporary
+files, public exposure,
+
+15
+00:00:43.621 --> 00:00:46.210
+archive extraction mistakes, and metadata
+leakage.
+
+16
+00:00:46.290 --> 00:00:48.994
+Many of these issues do not look dramatic
+in code review.
+
+17
+00:00:49.074 --> 00:00:52.181
+They look like a string concatenation, a
+convenient directory,
+
+18
+00:00:52.261 --> 00:00:55.656
+a missing authorization check, or a read
+that assumes the path is safe.
+
+19
+00:00:55.736 --> 00:00:58.900
+Java applications use many file-related
+APIs and environments:
+
+20
+00:00:58.980 --> 00:01:02.202
+java.nio.file, java.io, Servlet and Spring
+download endpoints,
+
+21
+00:01:02.282 --> 00:01:05.965
+Jakarta EE services, JAX-RS resources,
+batch jobs, CLI tools, containers,
+
+22
+00:01:06.045 --> 00:01:08.289
+mounted volumes, and object storage
+clients.
+
+23
+00:01:08.369 --> 00:01:11.821
+Each tool can support a safe design, but
+no single API call is the design.
+
+24
+00:01:11.901 --> 00:01:15.756
+A call to normalize, a framework resource
+helper, a filename cleanup function,
+
+25
+00:01:15.836 --> 00:01:17.562
+or a storage bucket policy can help,
+
+26
+00:01:17.642 --> 00:01:21.554
+but it cannot decide whether the user is
+authorized or whether the operation fits
+
+27
+00:01:21.634 --> 00:01:22.785
+the business workflow.
+
+28
+00:01:22.865 --> 00:01:26.432
+The goal is to make file access
+intentional, bounded, least-privileged,
+
+29
+00:01:26.512 --> 00:01:27.835
+observable, and testable.
+
+30
+00:01:27.915 --> 00:01:30.677
+A reviewer should be able to answer where
+files come from,
+
+31
+00:01:30.757 --> 00:01:33.749
+where they may be stored, who may read
+them, who may write them,
+
+32
+00:01:33.829 --> 00:01:37.339
+what limits apply, how temporary files are
+cleaned up, what gets logged,
+
+33
+00:01:37.419 --> 00:01:38.857
+and how failures are handled.
+
+34
+00:01:38.937 --> 00:01:42.102
+This course focuses on defensive design
+and engineering review,
+
+35
+00:01:42.182 --> 00:01:43.620
+not exploit demonstrations.

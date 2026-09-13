@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.960
+Safe file handling in Java starts with
+inventory.
+
+2
+00:00:03.040 --> 00:00:06.496
+Find the places where the application
+reads, writes, moves, deletes,
+
+3
+00:00:06.576 --> 00:00:10.383
+streams, archives, extracts, generates,
+transforms, uploads, downloads,
+
+4
+00:00:10.463 --> 00:00:11.342
+and serves files.
+
+5
+00:00:11.422 --> 00:00:14.292
+Classify file types by business purpose
+and sensitivity.
+
+6
+00:00:14.372 --> 00:00:17.535
+Separate public assets, private files,
+temporary files, logs,
+
+7
+00:00:17.615 --> 00:00:20.427
+configuration, backups, generated files,
+and secrets.
+
+8
+00:00:20.507 --> 00:00:24.490
+A clear map makes it much easier to see
+which paths and operations deserve tighter
+
+9
+00:00:24.570 --> 00:00:25.097
+controls.
+
+10
+00:00:25.177 --> 00:00:28.515
+Avoid passing user-controlled paths
+directly to filesystem APIs.
+
+11
+00:00:28.595 --> 00:00:32.813
+Use fixed storage boundaries and verify
+resolved paths stay inside them when dynamic
+
+12
+00:00:32.893 --> 00:00:34.064
+selection is required.
+
+13
+00:00:34.144 --> 00:00:37.424
+Prefer application-controlled IDs and
+generated storage names.
+
+14
+00:00:37.504 --> 00:00:39.964
+Treat original filenames as untrusted
+metadata.
+
+15
+00:00:40.044 --> 00:00:43.676
+Use allowlists and multiple validation
+signals for file type decisions.
+
+16
+00:00:43.756 --> 00:00:47.915
+Pair path checks with object-level
+authorization so a caller cannot access another
+
+17
+00:00:47.995 --> 00:00:51.685
+user's or tenant's file even when the path
+stays inside the base directory.
+
+18
+00:00:51.765 --> 00:00:54.928
+Run with least privilege and avoid broad
+writable directories.
+
+19
+00:00:55.008 --> 00:00:59.050
+Keep application code read-only where
+possible and place runtime data in narrow,
+
+20
+00:00:59.130 --> 00:01:00.360
+intentional locations.
+
+21
+00:01:00.440 --> 00:01:04.188
+Use streaming, limits, timeouts, quotas,
+and cleanup for resource safety.
+
+22
+00:01:04.268 --> 00:01:07.959
+Handle temporary files, partial writes,
+archive extraction, downloads,
+
+23
+00:01:08.039 --> 00:01:11.436
+and generated exports as full workflows
+with safe failure behavior.
+
+24
+00:01:11.516 --> 00:01:15.557
+Enforce authorization before private
+downloads, previews, generated exports,
+
+25
+00:01:15.637 --> 00:01:16.692
+and metadata access.
+
+26
+00:01:16.772 --> 00:01:20.052
+A practical first-week plan is direct:
+find all filesystem calls,
+
+27
+00:01:20.132 --> 00:01:22.768
+map storage directories, review path
+construction,
+
+28
+00:01:22.848 --> 00:01:26.831
+check public and private storage
+separation, confirm download authorization,
+
+29
+00:01:26.911 --> 00:01:30.718
+add size limits, review temporary-file
+cleanup, inspect archive handling,
+
+30
+00:01:30.798 --> 00:01:32.380
+remove sensitive path logging,
+
+31
+00:01:32.460 --> 00:01:35.388
+and add tests for traversal and
+authorization boundaries.
+
+32
+00:01:35.468 --> 00:01:39.100
+Then build file-handling review into pull
+requests, CI/CD, monitoring,
+
+33
+00:01:39.180 --> 00:01:42.987
+logging, runbooks, and incident response
+so the controls stay current as the
+
+34
+00:01:43.067 --> 00:01:44.180
+application evolves.

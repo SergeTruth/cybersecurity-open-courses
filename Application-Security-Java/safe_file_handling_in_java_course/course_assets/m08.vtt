@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.706
+Safe file handling includes availability.
+
+2
+00:00:02.786 --> 00:00:06.959
+A file operation can be correct from an
+authorization perspective and still unsafe
+
+3
+00:00:07.039 --> 00:00:09.960
+if it exhausts memory, fills disk, ties up
+worker threads,
+
+4
+00:00:10.040 --> 00:00:14.213
+leaks file descriptors, overwhelms a
+scanner, or saturates a downstream service.
+
+5
+00:00:14.293 --> 00:00:17.811
+File operations consume memory, CPU, disk,
+bandwidth, file handles,
+
+6
+00:00:17.891 --> 00:00:21.051
+thread pools, queues, parser capacity, and
+storage capacity.
+
+7
+00:00:21.131 --> 00:00:23.098
+Those resources need explicit limits.
+
+8
+00:00:23.178 --> 00:00:27.172
+Avoid loading large or untrusted files
+fully into memory unless the use case and
+
+9
+00:00:27.252 --> 00:00:28.206
+limits justify it.
+
+10
+00:00:28.286 --> 00:00:32.281
+Use streaming approaches where
+appropriate, with bounded buffers, timeouts,
+
+11
+00:00:32.361 --> 00:00:33.374
+and error handling.
+
+12
+00:00:33.454 --> 00:00:36.673
+Apply file size limits, request body
+limits, file count limits,
+
+13
+00:00:36.753 --> 00:00:40.867
+timeout controls, concurrency limits,
+storage quotas, and queue backpressure.
+
+14
+00:00:40.947 --> 00:00:45.001
+The right limit depends on the workflow,
+but unlimited should not be the default.
+
+15
+00:00:45.081 --> 00:00:48.002
+Handle partial reads, partial writes,
+aborted requests,
+
+16
+00:00:48.082 --> 00:00:51.182
+failed transfers, interrupted threads, and
+retry behavior.
+
+17
+00:00:51.262 --> 00:00:55.018
+Close streams and file handles reliably
+using appropriate Java patterns.
+
+18
+00:00:55.098 --> 00:00:59.033
+A file that fails halfway through
+generation, upload, download, conversion,
+
+19
+00:00:59.113 --> 00:01:02.869
+or transfer should not leave a confusing
+artifact that later code treats as
+
+20
+00:01:02.949 --> 00:01:03.485
+complete.
+
+21
+00:01:03.565 --> 00:01:07.381
+State and cleanup should reflect whether
+the operation succeeded, failed,
+
+22
+00:01:07.461 --> 00:01:09.190
+was canceled, or is still pending.
+
+23
+00:01:09.270 --> 00:01:12.489
+Cleanup is part of the feature, not
+janitorial work to add later.
+
+24
+00:01:12.569 --> 00:01:16.265
+Remove abandoned temporary files, failed
+exports, stale cache entries,
+
+25
+00:01:16.345 --> 00:01:19.624
+expired generated files, and incomplete
+processing artifacts.
+
+26
+00:01:19.704 --> 00:01:23.877
+Monitor storage growth, processing
+latency, parser failures, scanner failures,
+
+27
+00:01:23.957 --> 00:01:25.627
+queue age, and cleanup failures.
+
+28
+00:01:25.707 --> 00:01:28.509
+A healthy file system is one where
+expected files exist,
+
+29
+00:01:28.589 --> 00:01:30.437
+unexpected files are investigated,
+
+30
+00:01:30.517 --> 00:01:33.140
+and old temporary data does not quietly
+accumulate.

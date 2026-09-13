@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Serialization is how Java applications
+turn data or objects into a form that can be
+
+2
+00:00:04.660 --> 00:00:07.970
+stored, transmitted, cached, queued,
+logged, or written to disk.
+
+3
+00:00:08.050 --> 00:00:10.238
+Deserialization is the reverse operation:
+
+4
+00:00:10.318 --> 00:00:13.984
+the application reconstructs data or
+objects from that representation.
+
+5
+00:00:14.064 --> 00:00:16.783
+Those operations sound routine, and they
+are routine,
+
+6
+00:00:16.863 --> 00:00:18.992
+but they sit directly on an input
+boundary.
+
+7
+00:00:19.072 --> 00:00:21.319
+When a Java service accepts serialized
+data,
+
+8
+00:00:21.399 --> 00:00:25.183
+it is deciding what external bytes are
+allowed to become application state.
+
+9
+00:00:25.263 --> 00:00:28.041
+Modern Java systems deserialize data from
+many places.
+
+10
+00:00:28.121 --> 00:00:30.486
+A web service receives JSON from an API
+request.
+
+11
+00:00:30.566 --> 00:00:32.399
+A worker reads a message from a queue.
+
+12
+00:00:32.479 --> 00:00:33.484
+A partner sends XML.
+
+13
+00:00:33.564 --> 00:00:35.220
+A configuration tool reads YAML.
+
+14
+00:00:35.300 --> 00:00:36.896
+A session store restores state.
+
+15
+00:00:36.976 --> 00:00:39.282
+A batch job imports files from object
+storage.
+
+16
+00:00:39.362 --> 00:00:42.318
+A cache returns values created earlier by
+another service.
+
+17
+00:00:42.398 --> 00:00:43.817
+Each path may look ordinary,
+
+18
+00:00:43.897 --> 00:00:46.912
+but each one reconstructs data that code
+may trust and act on.
+
+19
+00:00:46.992 --> 00:00:50.895
+Unsafe deserialization can create many
+kinds of harm: unauthorized actions,
+
+20
+00:00:50.975 --> 00:00:54.640
+object confusion, validation bypass,
+excessive resource consumption,
+
+21
+00:00:54.720 --> 00:00:58.800
+sensitive data exposure, or execution of
+code paths the developer did not intend.
+
+22
+00:00:58.880 --> 00:01:03.078
+Native Java object serialization is
+especially sensitive when the data is not fully
+
+23
+00:01:03.158 --> 00:01:07.414
+trusted because it can rebuild complex
+object graphs and involve class behavior from
+
+24
+00:01:07.494 --> 00:01:09.446
+the application and its dependencies.
+
+25
+00:01:09.526 --> 00:01:11.004
+But ordinary JSON, XML, YAML,
+
+26
+00:01:11.084 --> 00:01:14.158
+and binary formats can also be risky when
+configured broadly.
+
+27
+00:01:14.238 --> 00:01:17.726
+The goal is to serialize intentionally and
+deserialize defensively.
+
+28
+00:01:17.806 --> 00:01:20.053
+A safe design identifies the trust
+boundary,
+
+29
+00:01:20.133 --> 00:01:22.380
+chooses a format appropriate to the use
+case,
+
+30
+00:01:22.460 --> 00:01:25.298
+constrains the allowed types, validates
+the data shape,
+
+31
+00:01:25.378 --> 00:01:28.984
+enforces authentication and authorization,
+applies resource limits,
+
+32
+00:01:29.064 --> 00:01:31.311
+avoids sensitive output leaks, logs
+safely,
+
+33
+00:01:31.391 --> 00:01:35.175
+and gives reviewers a clear way to reason
+about what data is allowed to become
+
+34
+00:01:35.255 --> 00:01:36.260
+application state.

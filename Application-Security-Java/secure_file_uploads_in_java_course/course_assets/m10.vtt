@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.537
+Secure Java upload handling starts with
+defining allowed use cases before accepting
+
+2
+00:00:04.617 --> 00:00:04.954
+files.
+
+3
+00:00:05.034 --> 00:00:08.734
+Identify who can upload, what file types
+are allowed, why the files are needed,
+
+4
+00:00:08.814 --> 00:00:12.178
+how large they can be, where they are
+stored, how long they are retained,
+
+5
+00:00:12.258 --> 00:00:14.894
+who can retrieve them, and what processing
+is required.
+
+6
+00:00:14.974 --> 00:00:19.179
+Require appropriate authentication and
+authorization for both uploads and downloads.
+
+7
+00:00:19.259 --> 00:00:22.904
+Treat file upload as a formal security
+boundary, not a convenience endpoint.
+
+8
+00:00:22.984 --> 00:00:26.796
+Configure multipart handling with explicit
+limits for file size, request size,
+
+9
+00:00:26.876 --> 00:00:30.297
+part count, memory threshold, temporary
+location, timeouts, and rate.
+
+10
+00:00:30.377 --> 00:00:34.021
+Validate file type with allowlists and
+multiple signals where appropriate.
+
+11
+00:00:34.101 --> 00:00:37.858
+Generate server-side storage names and
+treat original filenames as untrusted
+
+12
+00:00:37.938 --> 00:00:38.443
+metadata.
+
+13
+00:00:38.523 --> 00:00:41.663
+Store files outside executable, classpath,
+deployment, source,
+
+14
+00:00:41.743 --> 00:00:45.611
+and public web-root locations unless
+public access is the explicit design and the
+
+15
+00:00:45.691 --> 00:00:46.701
+controls support it.
+
+16
+00:00:46.781 --> 00:00:50.369
+Use quarantine, scanning, and isolated
+processing for higher-risk files.
+
+17
+00:00:50.449 --> 00:00:53.309
+Process untrusted content with least
+privilege, timeouts,
+
+18
+00:00:53.389 --> 00:00:57.314
+resource limits, constrained temporary
+directories, and safe failure behavior.
+
+19
+00:00:57.394 --> 00:01:01.543
+Apply object-level authorization to
+downloads, previews, signed URLs, and metadata.
+
+20
+00:01:01.623 --> 00:01:05.268
+Protect upload systems with quotas, rate
+limits, cleanup jobs, monitoring,
+
+21
+00:01:05.348 --> 00:01:07.759
+safe error responses, and operational
+ownership.
+
+22
+00:01:07.839 --> 00:01:11.035
+A practical first-week plan is clear:
+inventory upload endpoints,
+
+23
+00:01:11.115 --> 00:01:13.918
+confirm allowed types and sizes, review
+multipart limits,
+
+24
+00:01:13.998 --> 00:01:16.409
+check storage paths, verify generated
+filenames,
+
+25
+00:01:16.489 --> 00:01:19.909
+add download authorization checks, review
+logging for sensitive data,
+
+26
+00:01:19.989 --> 00:01:21.335
+test scanner failure paths,
+
+27
+00:01:21.415 --> 00:01:24.443
+and document the response path for
+suspicious or exposed files.
+
+28
+00:01:24.523 --> 00:01:28.280
+Then build upload review into pull
+requests, tests, CI/CD, deployment review,
+
+29
+00:01:28.360 --> 00:01:31.780
+and incident response so the controls stay
+current as the feature grows.

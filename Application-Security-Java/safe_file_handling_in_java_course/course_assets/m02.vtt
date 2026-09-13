@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.243
+Secure file handling starts by mapping the
+lifecycle.
+
+2
+00:00:03.323 --> 00:00:07.079
+Identify where files come from, where they
+are stored, who can access them,
+
+3
+00:00:07.159 --> 00:00:08.709
+and which code processes them.
+
+4
+00:00:08.789 --> 00:00:12.247
+A static image, customer invoice,
+temporary PDF export, server log,
+
+5
+00:00:12.327 --> 00:00:14.652
+configuration file, user-uploaded archive,
+
+6
+00:00:14.732 --> 00:00:17.534
+and generated backup should not be treated
+the same way.
+
+7
+00:00:17.614 --> 00:00:21.669
+Each has a different source, sensitivity,
+retention expectation, access rule,
+
+8
+00:00:21.749 --> 00:00:22.643
+and cleanup path.
+
+9
+00:00:22.723 --> 00:00:26.658
+Map trust boundaries between users, APIs,
+controllers, servlet containers,
+
+10
+00:00:26.738 --> 00:00:30.196
+Java services, background jobs, object
+stores, local filesystems,
+
+11
+00:00:30.276 --> 00:00:33.853
+databases, scanners, queues, reverse
+proxies, and download clients.
+
+12
+00:00:33.933 --> 00:00:37.928
+The boundary matters because a value that
+is harmless as display text can become
+
+13
+00:00:38.008 --> 00:00:41.824
+dangerous when it influences a filesystem
+path, object key, archive entry,
+
+14
+00:00:41.904 --> 00:00:43.990
+response header, or processing command.
+
+15
+00:00:44.070 --> 00:00:47.528
+The same string can have different risk
+depending on where it is used.
+
+16
+00:00:47.608 --> 00:00:50.887
+Separate application-owned files from
+user-controlled files,
+
+17
+00:00:50.967 --> 00:00:54.962
+generated files, temporary files, logs,
+configuration files, public assets,
+
+18
+00:00:55.042 --> 00:00:56.175
+backups, and secrets.
+
+19
+00:00:56.255 --> 00:00:58.163
+Storage layout is a security control.
+
+20
+00:00:58.243 --> 00:01:00.389
+If logs, secrets, uploads, public assets,
+
+21
+00:01:00.469 --> 00:01:04.643
+and temporary processing outputs all live
+near each other with broad permissions,
+
+22
+00:01:04.723 --> 00:01:06.750
+a small bug can become a larger exposure.
+
+23
+00:01:06.830 --> 00:01:11.122
+Clear separation makes code review and
+operations easier because each location has a
+
+24
+00:01:11.202 --> 00:01:11.978
+known purpose.
+
+25
+00:01:12.058 --> 00:01:15.635
+Define which operations are allowed per
+use case: read, write, append,
+
+26
+00:01:15.715 --> 00:01:19.292
+rename, delete, list, stream, transform,
+archive, extract, or serve.
+
+27
+00:01:19.372 --> 00:01:22.770
+Also define whether the files are public,
+private, tenant-scoped,
+
+28
+00:01:22.850 --> 00:01:25.414
+user-scoped, administrative, or
+internal-only.
+
+29
+00:01:25.494 --> 00:01:28.714
+Security requirements should be tied to
+the business workflow,
+
+30
+00:01:28.794 --> 00:01:30.642
+not only to the Java API being called.
+
+31
+00:01:30.722 --> 00:01:34.180
+A safe design starts with policy and then
+uses Java APIs to enforce it.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "A protected file lifecycle combines inventory, containment, authorization, resource limits, verification and cleanup across public, private and temporary storage.",
+  "narration": "Safe file handling in Java starts with inventory. Find the places where the application reads, writes, moves, deletes, streams, archives, extracts, generates, transforms, uploads, downloads, and serves files. Classify file types by business purpose and sensitivity. Separate public assets, private files, temporary files, logs, configuration, backups, generated files, and secrets. A clear map makes it much easier to see which paths and operations deserve tighter controls.\n\nAvoid passing user-controlled paths directly to filesystem APIs. Use fixed storage boundaries and verify resolved paths stay inside them when dynamic selection is required. Prefer application-controlled IDs and generated storage names. Treat original filenames as untrusted metadata. Use allowlists and multiple validation signals for file type decisions. Pair path checks with object-level authorization so a caller cannot access another user's or tenant's file even when the path stays inside the base directory.\n\nRun with least privilege and avoid broad writable directories. Keep application code read-only where possible and place runtime data in narrow, intentional locations. Use streaming, limits, timeouts, quotas, and cleanup for resource safety. Handle temporary files, partial writes, archive extraction, downloads, and generated exports as full workflows with safe failure behavior. Enforce authorization before private downloads, previews, generated exports, and metadata access.\n\nA practical first-week plan is direct: find all filesystem calls, map storage directories, review path construction, check public and private storage separation, confirm download authorization, add size limits, review temporary-file cleanup, inspect archive handling, remove sensitive path logging, and add tests for traversal and authorization boundaries. Then build file-handling review into pull requests, CI/CD, monitoring, logging, runbooks, and incident response so the controls stay current as the application evolves.",
+  "narrationPoints": [
+    "Safe file handling in Java starts with inventory.",
+    "Avoid passing user-controlled paths directly to filesystem.",
+    "Run with least privilege and avoid broad writable.",
+    "A practical first-week plan is direct: find all filesystem.",
+    "Use fixed storage boundaries and verify resolved paths stay.",
+    "Use allowlists and multiple validation signals for file."
+  ]
+};
