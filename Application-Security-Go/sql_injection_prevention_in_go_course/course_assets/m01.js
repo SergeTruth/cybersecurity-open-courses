@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "SQL Injection Prevention in Go Services",
+  "graphicAlt": "Trusted SQL structure and runtime values enter separate driver-binding ports; unsafe query-text assembly is shown as a prohibited alternative.",
+  "narration": "SQL injection prevention is a practical engineering responsibility for any Go service that talks to a relational database. The risk appears when data that a caller can influence becomes part of the SQL command text that the database interprets. That caller-influenced data may come directly from a request, or it may arrive after moving through another service, a file, a queue, or an internal workflow.\n\nGo helps developers avoid many programming mistakes. The language has static types, explicit errors, clear control flow, and strong standard libraries. Those strengths do not automatically protect SQL text. The database receives a command at runtime, interprets its structure, and applies values according to the API and driver behavior used by the application. If the program assembles command text unsafely, Go's type system cannot make that command safe after the fact.\n\nThe main prevention habit is separation. SQL structure should be chosen by trusted application code. Runtime values should travel as parameters or bound arguments through APIs that preserve that separation. When reviewers can see that structure and values are handled differently, unsafe query construction becomes easier to spot and easier to fix.\n\nA Go service should treat HTTP inputs, JSON bodies, path values, background jobs, imports, admin tools, and service-to-service data as untrusted until the relevant boundary has handled them safely. Internal data can still carry risk if it originally came from a user or outside system. The goal is not to fear SQL. The goal is to make safe query construction the ordinary path that developers naturally follow.",
+  "narrationPoints": [
+    "SQL injection prevention is a practical engineering responsibility for any Go service that talks to a relational database.",
+    "Go helps developers avoid many programming mistakes.",
+    "The main prevention habit is separation.",
+    "A Go service should treat HTTP inputs, JSON bodies, path values, background jobs, imports, admin tools, and service-to-service data as untrusted..."
+  ]
+};

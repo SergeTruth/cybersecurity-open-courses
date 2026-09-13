@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Secure HTTP and Service Boundaries",
+  "graphicAlt": "Early limits, identity, resource authorization, work and safe responses remain visible in the handler alongside shared middleware and deliberate CORS.",
+  "narration": "Go's HTTP ecosystem is practical and direct, which makes service boundaries easier to see. A handler receives a request, checks method and content type, enforces size limits, parses input, authenticates the caller, authorizes the action, performs work, logs useful events, and returns a response. Security improves when that order is consistent across the application.\n\nRequest limits should happen early. Servers and handlers need sensible read and write timeouts, maximum header sizes where appropriate, body size limits, content-type checks, and bounded parsing. Without limits, a service can spend too much memory, CPU, or time before reaching the business logic.\n\nAuthentication and authorization should be separate in the design. Authentication identifies the caller. Authorization decides whether that caller may perform the action on the requested resource. Middleware can help with shared concerns, but resource-level decisions often need trusted data loaded by the handler or service layer.\n\nMiddleware is useful for consistent logging, recovery, request IDs, size limits, security headers where relevant, and common policy checks. It should remain understandable. A reviewer should be able to tell which controls run for a route and which controls must still happen in the handler.\n\nCORS should be deliberate and narrow for browser-facing APIs. Safe error responses should help callers recover without exposing stack traces, internal queries, private configuration, or sensitive identifiers. Service-to-service boundaries should document ownership, expected callers, authentication method, authorization rule, and data contract. When those boundaries are written down, new routes and clients can be reviewed against an existing pattern instead of inventing trust rules each time.",
+  "narrationPoints": [
+    "Go's HTTP ecosystem is practical and direct, which makes service boundaries easier to see.",
+    "Request limits should happen early.",
+    "Authentication and authorization should be separate in the design.",
+    "Middleware is useful for consistent logging, recovery, request IDs, size limits, security headers where relevant, and common policy checks.",
+    "CORS should be deliberate and narrow for browser-facing APIs."
+  ]
+};

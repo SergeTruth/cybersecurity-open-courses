@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.033
+Go makes concurrent programming
+approachable with goroutines, channels, context,
+
+2
+00:00:04.113 --> 00:00:05.536
+and synchronization primitives.
+
+3
+00:00:05.616 --> 00:00:08.855
+Those tools are powerful, but they still
+need security-relevant discipline.
+
+4
+00:00:08.935 --> 00:00:11.536
+Concurrency bugs often appear first as
+reliability problems,
+
+5
+00:00:11.616 --> 00:00:14.413
+yet they can become security problems when
+they cause data mix-ups,
+
+6
+00:00:14.493 --> 00:00:16.848
+stuck workers, unbounded resource use,
+failed cleanup,
+
+7
+00:00:16.928 --> 00:00:18.744
+or unpredictable authorization behavior.
+
+8
+00:00:18.824 --> 00:00:21.768
+Context propagation is one of the most
+important habits in Go services.
+
+9
+00:00:21.848 --> 00:00:24.939
+A request context can carry cancellation
+and deadlines through handlers,
+
+10
+00:00:25.019 --> 00:00:28.111
+database calls, outbound HTTP calls,
+queues, and background operations.
+
+11
+00:00:28.191 --> 00:00:31.430
+When work continues after the caller is
+gone, the service may waste resources,
+
+12
+00:00:31.510 --> 00:00:34.454
+hold locks, or write results that no
+longer belong to an active request.
+
+13
+00:00:34.534 --> 00:00:36.546
+Long-running work should have clear
+ownership.
+
+14
+00:00:36.626 --> 00:00:39.374
+Goroutines and workers need shutdown
+paths, cancellation rules,
+
+15
+00:00:39.454 --> 00:00:41.564
+timeout behavior, and cleanup
+responsibilities.
+
+16
+00:00:41.644 --> 00:00:44.932
+Hidden background activity can make
+incidents hard to understand and can leave
+
+17
+00:00:45.012 --> 00:00:46.582
+resources open longer than expected.
+
+18
+00:00:46.662 --> 00:00:49.851
+Files, network connections, database rows,
+locks, temporary directories,
+
+19
+00:00:49.931 --> 00:00:52.532
+and worker queues all need predictable
+lifecycle management.
+
+20
+00:00:52.612 --> 00:00:54.624
+Shared state should be protected
+deliberately.
+
+21
+00:00:54.704 --> 00:00:58.090
+Mutexes, channels, atomic values, and
+immutable data patterns each have a place,
+
+22
+00:00:58.170 --> 00:01:01.163
+but the choice should be documented enough
+for reviewers to understand.
+
+23
+00:01:01.243 --> 00:01:04.384
+Secure Go applications should fail
+predictably under load, cancellation,
+
+24
+00:01:04.464 --> 00:01:05.347
+and partial failure.
+
+25
+00:01:05.427 --> 00:01:07.979
+Testing concurrency behavior is not only
+about performance.
+
+26
+00:01:08.059 --> 00:01:11.543
+It is about preserving trust decisions and
+data boundaries when the service is under
+
+27
+00:01:11.623 --> 00:01:12.065
+pressure.
+
+28
+00:01:12.145 --> 00:01:15.187
+Resource limits belong in the design, not
+only in production dashboards.
+
+29
+00:01:15.267 --> 00:01:18.309
+Bound queue sizes, request deadlines,
+upload processing, worker pools,
+
+30
+00:01:18.389 --> 00:01:21.334
+and outbound calls according to the
+service's real responsibilities.
+
+31
+00:01:21.414 --> 00:01:23.475
+When work is bounded and cancellation is
+honored,
+
+32
+00:01:23.555 --> 00:01:26.891
+incidents are easier to contain and
+security checks are less likely to be skipped
+
+33
+00:01:26.971 --> 00:01:28.100
+under operational stress.

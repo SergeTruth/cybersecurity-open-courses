@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.226
+Data often crosses several boundaries
+before a Go application trusts it.
+
+2
+00:00:04.306 --> 00:00:08.092
+A value may move from a request into a
+handler, from a handler into a service,
+
+3
+00:00:08.172 --> 00:00:12.199
+from a service into a database, and later
+from the database back into a response.
+
+4
+00:00:12.279 --> 00:00:16.425
+Each transition is a chance to preserve or
+lose important assumptions about type,
+
+5
+00:00:16.505 --> 00:00:18.489
+ownership, encoding, and allowed use.
+
+6
+00:00:18.569 --> 00:00:21.874
+For database work, prefer safe APIs that
+separate code from data.
+
+7
+00:00:21.954 --> 00:00:26.281
+Parameterized operations and query
+builders can help keep data values distinct from
+
+8
+00:00:26.361 --> 00:00:27.262
+query structure.
+
+9
+00:00:27.342 --> 00:00:31.429
+The application should validate data
+before storage and before downstream use,
+
+10
+00:00:31.509 --> 00:00:35.716
+because stored data may later appear in
+reports, messages, exports, or responses.
+
+11
+00:00:35.796 --> 00:00:39.221
+A field that was harmless in one context
+may be sensitive in another.
+
+12
+00:00:39.301 --> 00:00:43.087
+Serialization and deserialization are also
+trust-boundary operations.
+
+13
+00:00:43.167 --> 00:00:46.172
+JSON, XML, CSV, protocol buffers, message
+queue payloads,
+
+14
+00:00:46.252 --> 00:00:50.098
+and third-party responses should be
+decoded according to clear contracts.
+
+15
+00:00:50.178 --> 00:00:53.303
+Unknown fields, oversized payloads,
+unexpected encodings,
+
+16
+00:00:53.383 --> 00:00:56.448
+and partially valid records should be
+handled predictably.
+
+17
+00:00:56.528 --> 00:01:01.036
+Avoid letting convenience decoding
+silently create broad, trusted application state.
+
+18
+00:01:01.116 --> 00:01:03.039
+File handling deserves the same care.
+
+19
+00:01:03.119 --> 00:01:06.124
+Validate expected file size, type,
+location, and purpose.
+
+20
+00:01:06.204 --> 00:01:08.968
+Avoid trusting user-provided names as
+storage paths.
+
+21
+00:01:09.048 --> 00:01:11.212
+Keep temporary file cleanup predictable.
+
+22
+00:01:11.292 --> 00:01:14.236
+Treat uploads, configuration files,
+exported archives,
+
+23
+00:01:14.316 --> 00:01:16.600
+and generated files as data with a
+lifecycle.
+
+24
+00:01:16.680 --> 00:01:20.947
+A defensive Go application keeps data
+contracts clear as information moves between
+
+25
+00:01:21.027 --> 00:01:23.070
+storage, memory, files, and responses.
+
+26
+00:01:23.150 --> 00:01:26.876
+Data security often depends on context, so
+preserve that context in code.
+
+27
+00:01:26.956 --> 00:01:30.803
+A value that is safe for an internal
+identifier may not be safe for a file name,
+
+28
+00:01:30.883 --> 00:01:32.926
+log field, export, or external API call.
+
+29
+00:01:33.006 --> 00:01:37.153
+Naming internal types clearly, separating
+storage models from response models,
+
+30
+00:01:37.233 --> 00:01:41.259
+and documenting important transformations
+help teams avoid accidental trust
+
+31
+00:01:41.339 --> 00:01:41.940
+expansion.

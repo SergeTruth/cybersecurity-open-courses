@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.153
+Go's explicit errors are useful,
+
+2
+00:00:02.233 --> 00:00:05.067
+but API security depends on how those
+errors are handled.
+
+3
+00:00:05.147 --> 00:00:09.222
+Internal errors may include database
+details, downstream service information,
+
+4
+00:00:09.302 --> 00:00:12.313
+file paths, configuration names, or
+implementation clues.
+
+5
+00:00:12.393 --> 00:00:16.172
+Clients need useful failure information,
+but they do not need stack traces,
+
+6
+00:00:16.252 --> 00:00:19.617
+raw queries, secrets, tokens, cookies, or
+private configuration.
+
+7
+00:00:19.697 --> 00:00:23.181
+A secure API maps internal failures to
+safe client-facing responses.
+
+8
+00:00:23.261 --> 00:00:26.863
+Validation errors, authentication
+failures, authorization denials,
+
+9
+00:00:26.943 --> 00:00:28.950
+missing records, dependency timeouts,
+
+10
+00:00:29.030 --> 00:00:33.223
+and unexpected internal failures should
+have consistent status codes and response
+
+11
+00:00:33.303 --> 00:00:33.716
+shapes.
+
+12
+00:00:33.796 --> 00:00:37.988
+The response should help a legitimate
+caller recover without exposing details that
+
+13
+00:00:38.068 --> 00:00:39.308
+belong in internal logs.
+
+14
+00:00:39.388 --> 00:00:42.340
+Logging and observability should support
+investigation.
+
+15
+00:00:42.420 --> 00:00:46.317
+Structured logs, request IDs, correlation
+IDs, route names, caller context,
+
+16
+00:00:46.397 --> 00:00:49.822
+timing, and outcome fields can help
+operators understand behavior.
+
+17
+00:00:49.902 --> 00:00:53.209
+Security-relevant events may include
+authentication outcomes,
+
+18
+00:00:53.289 --> 00:00:57.127
+authorization denials, sensitive state
+changes, administrative actions,
+
+19
+00:00:57.207 --> 00:01:00.159
+validation spikes, and unusual
+resource-control events.
+
+20
+00:01:00.239 --> 00:01:03.309
+Redaction is essential because logs rarely
+stay in one place.
+
+21
+00:01:03.389 --> 00:01:07.404
+They may flow into dashboards, alerting
+systems, tickets, long-term archives,
+
+22
+00:01:07.484 --> 00:01:08.665
+and third-party tools.
+
+23
+00:01:08.745 --> 00:01:12.642
+Raw request bodies, API keys, passwords,
+tokens, cookies, private user data,
+
+24
+00:01:12.722 --> 00:01:15.379
+and sensitive records should not be logged
+casually.
+
+25
+00:01:15.459 --> 00:01:17.762
+Good observability is controlled, not
+blind.
+
+26
+00:01:17.842 --> 00:01:20.204
+Log enough to detect and investigate
+problems,
+
+27
+00:01:20.284 --> 00:01:23.531
+but avoid recording data that creates a
+second exposure channel.
+
+28
+00:01:23.611 --> 00:01:26.741
+Document what is logged, what is redacted,
+who can access logs,
+
+29
+00:01:26.821 --> 00:01:29.478
+and how long sensitive operational data is
+retained.
+
+30
+00:01:29.558 --> 00:01:33.632
+Teams should also separate user-facing
+error language from internal diagnostic
+
+31
+00:01:33.712 --> 00:01:34.125
+detail.
+
+32
+00:01:34.205 --> 00:01:37.807
+A wrapped internal error can help
+engineers find the source of a failure,
+
+33
+00:01:37.887 --> 00:01:40.898
+while the HTTP response remains stable and
+safe for clients.
+
+34
+00:01:40.978 --> 00:01:45.289
+That separation keeps operations useful
+without exposing implementation details or
+
+35
+00:01:45.369 --> 00:01:47.140
+sensitive context unnecessarily.

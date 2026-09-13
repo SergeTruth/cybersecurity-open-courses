@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.141
+Input handling is one of the most
+important trust boundaries in a Go application.
+
+2
+00:00:04.221 --> 00:00:07.755
+HTTP parameters, JSON bodies, form values,
+headers, cookies, CLI arguments,
+
+3
+00:00:07.835 --> 00:00:11.155
+files, environment variables, message
+queue events, database records,
+
+4
+00:00:11.235 --> 00:00:14.769
+and data from other services can all be
+missing, malformed, stale, oversized,
+
+5
+00:00:14.849 --> 00:00:16.723
+or inappropriate for the current action.
+
+6
+00:00:16.803 --> 00:00:18.463
+A safe pattern is to parse before use.
+
+7
+00:00:18.543 --> 00:00:21.702
+Code should define expected formats,
+allowed values, length limits,
+
+8
+00:00:21.782 --> 00:00:24.781
+numeric bounds, array sizes, content
+types, and required fields.
+
+9
+00:00:24.861 --> 00:00:27.966
+Parsing should happen close to the
+boundary, before business logic,
+
+10
+00:00:28.046 --> 00:00:29.867
+database operations, file operations,
+
+11
+00:00:29.947 --> 00:00:32.410
+authorization decisions that depend on
+request data,
+
+12
+00:00:32.490 --> 00:00:33.989
+or calls to downstream services.
+
+13
+00:00:34.069 --> 00:00:35.676
+Validation has more than one layer.
+
+14
+00:00:35.756 --> 00:00:38.754
+Shape validation asks whether the data is
+present and well formed.
+
+15
+00:00:38.834 --> 00:00:42.047
+Meaning validation asks whether the value
+is allowed for the workflow.
+
+16
+00:00:42.127 --> 00:00:45.822
+Permission validation asks whether the
+current caller may use that value for this
+
+17
+00:00:45.902 --> 00:00:46.277
+action.
+
+18
+00:00:46.357 --> 00:00:48.177
+A path, account ID, tenant ID, file name,
+
+19
+00:00:48.257 --> 00:00:51.845
+or status value may have a valid format
+and still be wrong for the current caller.
+
+20
+00:00:51.925 --> 00:00:53.156
+Normalization needs care.
+
+21
+00:00:53.236 --> 00:00:56.503
+Trimming whitespace, changing case,
+decoding values, cleaning paths,
+
+22
+00:00:56.583 --> 00:01:00.438
+parsing dates, and translating encodings
+should be done consistently so validation
+
+23
+00:01:00.518 --> 00:01:02.606
+and later use agree about what the value
+means.
+
+24
+00:01:02.686 --> 00:01:06.167
+For files and paths, code should be
+especially clear about base directories,
+
+25
+00:01:06.247 --> 00:01:08.603
+allowed names, and which operations are
+permitted.
+
+26
+00:01:08.683 --> 00:01:10.878
+Rejection behavior should also be
+predictable.
+
+27
+00:01:10.958 --> 00:01:12.939
+Callers need safe, understandable errors,
+
+28
+00:01:13.019 --> 00:01:16.714
+while logs should help operators
+investigate without recording sensitive input
+
+29
+00:01:16.794 --> 00:01:17.544
+unnecessarily.
+
+30
+00:01:17.624 --> 00:01:21.211
+Consistent validation makes failures
+easier to handle and reduces surprising
+
+31
+00:01:21.291 --> 00:01:23.540
+behavior between endpoints, jobs, and
+services.

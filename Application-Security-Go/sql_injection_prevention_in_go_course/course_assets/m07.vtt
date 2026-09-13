@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.778
+Safe query construction is the first line
+of defense,
+
+2
+00:00:02.858 --> 00:00:04.832
+but it should be paired with damage
+reduction.
+
+3
+00:00:04.912 --> 00:00:06.785
+Software changes, configuration changes,
+
+4
+00:00:06.865 --> 00:00:09.295
+and unusual feature paths can introduce
+mistakes later.
+
+5
+00:00:09.375 --> 00:00:12.919
+Least privilege makes those mistakes less
+costly by limiting what the application
+
+6
+00:00:12.999 --> 00:00:14.518
+account can do inside the database.
+
+7
+00:00:14.598 --> 00:00:18.192
+A runtime service account should have only
+the permissions needed for the service's
+
+8
+00:00:18.272 --> 00:00:18.829
+normal work.
+
+9
+00:00:18.909 --> 00:00:22.554
+A read-only reporting endpoint should not
+use credentials that can modify unrelated
+
+10
+00:00:22.634 --> 00:00:22.988
+tables.
+
+11
+00:00:23.068 --> 00:00:26.308
+A background worker that updates a small
+set of records should not need broad
+
+12
+00:00:26.388 --> 00:00:27.653
+administrative privileges.
+
+13
+00:00:27.733 --> 00:00:29.303
+When roles match responsibilities,
+
+14
+00:00:29.383 --> 00:00:32.926
+an unsafe query path has fewer
+opportunities to affect data outside its legitimate
+
+15
+00:00:33.006 --> 00:00:33.310
+scope.
+
+16
+00:00:33.390 --> 00:00:36.427
+Migration roles, maintenance roles,
+support roles, analytics roles,
+
+17
+00:00:36.507 --> 00:00:39.443
+and runtime application roles should be
+separated where practical.
+
+18
+00:00:39.523 --> 00:00:42.915
+The account that creates tables or changes
+schema should not be the same account
+
+19
+00:00:42.995 --> 00:00:44.413
+used by a public request handler.
+
+20
+00:00:44.493 --> 00:00:47.682
+Production roles should also be distinct
+from development and test roles,
+
+21
+00:00:47.762 --> 00:00:50.496
+because convenience permissions often grow
+during local work.
+
+22
+00:00:50.576 --> 00:00:53.866
+Permissions are not a replacement for
+parameterized queries or allowlisted
+
+23
+00:00:53.946 --> 00:00:54.452
+structure.
+
+24
+00:00:54.532 --> 00:00:55.798
+They are a containment layer.
+
+25
+00:00:55.878 --> 00:00:57.194
+They also improve operations:
+
+26
+00:00:57.274 --> 00:01:00.615
+unusual permission errors can reveal that
+a code path is trying to do something
+
+27
+00:01:00.695 --> 00:01:02.366
+outside its expected responsibility.
+
+28
+00:01:02.446 --> 00:01:04.876
+When teams design database permissions
+intentionally,
+
+29
+00:01:04.956 --> 00:01:07.790
+they create another reviewable boundary
+around the application.
+
+30
+00:01:07.870 --> 00:01:10.199
+Damage reduction is most useful when it is
+documented.
+
+31
+00:01:10.279 --> 00:01:12.405
+Developers should know which role a
+service uses,
+
+32
+00:01:12.485 --> 00:01:13.903
+which tables it can read or write,
+
+33
+00:01:13.983 --> 00:01:16.311
+and which operational tasks require
+elevated access.
+
+34
+00:01:16.391 --> 00:01:19.733
+Clear ownership keeps least privilege from
+becoming a mystery that slows down
+
+35
+00:01:19.813 --> 00:01:20.420
+maintenance.

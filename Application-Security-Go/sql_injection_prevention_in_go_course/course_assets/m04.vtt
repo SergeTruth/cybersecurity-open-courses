@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.588
+Real applications often need dynamic
+queries.
+
+2
+00:00:02.668 --> 00:00:04.600
+A search page may include optional
+filters.
+
+3
+00:00:04.680 --> 00:00:06.403
+A dashboard may sort by several fields.
+
+4
+00:00:06.483 --> 00:00:09.094
+A reporting feature may switch between
+known report modes.
+
+5
+00:00:09.174 --> 00:00:11.262
+Pagination may change limit and offset
+values.
+
+6
+00:00:11.342 --> 00:00:12.595
+Dynamic behavior is normal,
+
+7
+00:00:12.675 --> 00:00:16.330
+but it needs a design that keeps caller
+choices from becoming arbitrary SQL syntax.
+
+8
+00:00:16.410 --> 00:00:19.438
+The first rule is that dynamic values
+should still be parameterized.
+
+9
+00:00:19.518 --> 00:00:22.076
+If a user selects a status, a date range,
+or a numeric limit,
+
+10
+00:00:22.156 --> 00:00:25.080
+the selected value should travel as a
+parameter after validation.
+
+11
+00:00:25.160 --> 00:00:28.867
+The fact that a query is assembled
+conditionally does not change the value-handling
+
+12
+00:00:28.947 --> 00:00:29.208
+rule.
+
+13
+00:00:29.288 --> 00:00:30.280
+Values remain values.
+
+14
+00:00:30.360 --> 00:00:31.821
+Dynamic structure is different.
+
+15
+00:00:31.901 --> 00:00:34.773
+Column names, sort directions, table
+choices, selected fields,
+
+16
+00:00:34.853 --> 00:00:36.680
+and report modes are part of the SQL
+shape.
+
+17
+00:00:36.760 --> 00:00:40.363
+Those decisions should come from
+controlled allowlists selected by application
+
+18
+00:00:40.443 --> 00:00:40.756
+logic.
+
+19
+00:00:40.836 --> 00:00:42.402
+A caller can request a known option,
+
+20
+00:00:42.482 --> 00:00:45.093
+and the application maps that option to a
+trusted fragment.
+
+21
+00:00:45.173 --> 00:00:47.418
+The caller should not provide the fragment
+itself.
+
+22
+00:00:47.498 --> 00:00:49.899
+Optional filters can be built from small
+known pieces.
+
+23
+00:00:49.979 --> 00:00:53.321
+For example, an application can maintain a
+set of approved filter builders,
+
+24
+00:00:53.401 --> 00:00:56.272
+each responsible for adding a known
+condition and its arguments.
+
+25
+00:00:56.352 --> 00:00:58.388
+This keeps the allowed query shapes
+explicit.
+
+26
+00:00:58.468 --> 00:01:01.392
+It also gives reviewers a concrete place
+to inspect limits, joins,
+
+27
+00:01:01.472 --> 00:01:04.030
+filter combinations, and
+performance-sensitive paths.
+
+28
+00:01:04.110 --> 00:01:06.460
+Search and pagination also need
+reliability limits.
+
+29
+00:01:06.540 --> 00:01:09.881
+Clear maximum page sizes, supported sort
+fields, bounded search behavior,
+
+30
+00:01:09.961 --> 00:01:13.773
+and predictable empty-result handling
+protect both security and service stability.
+
+31
+00:01:13.853 --> 00:01:16.724
+Safe dynamic query design is not about
+eliminating flexibility.
+
+32
+00:01:16.804 --> 00:01:19.780
+It is about making flexibility visible,
+controlled, and testable.

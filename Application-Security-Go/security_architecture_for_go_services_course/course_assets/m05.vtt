@@ -1,0 +1,177 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.226
+Secure architecture starts by knowing what
+data the service handles and why that
+
+2
+00:00:04.306 --> 00:00:04.964
+data matters.
+
+3
+00:00:05.044 --> 00:00:08.058
+A Go service may process public records,
+internal business data,
+
+4
+00:00:08.138 --> 00:00:11.316
+personal information, credentials, tokens,
+session identifiers,
+
+5
+00:00:11.396 --> 00:00:13.752
+configuration values, and operational
+metadata.
+
+6
+00:00:13.832 --> 00:00:17.559
+Each category deserves a handling rule
+that engineers can understand and apply.
+
+7
+00:00:17.639 --> 00:00:20.488
+Secrets, tokens, keys, session
+identifiers, personal data,
+
+8
+00:00:20.568 --> 00:00:24.185
+and business-sensitive records should not
+be treated like ordinary strings.
+
+9
+00:00:24.265 --> 00:00:27.717
+They may need restricted logging, limited
+serialization, narrow access,
+
+10
+00:00:27.797 --> 00:00:29.770
+careful storage, and explicit ownership.
+
+11
+00:00:29.850 --> 00:00:33.412
+The code should make sensitive data paths
+visible instead of relying on every
+
+12
+00:00:33.492 --> 00:00:35.191
+developer to remember hidden rules.
+
+13
+00:00:35.271 --> 00:00:38.504
+Configuration should separate safe
+defaults from sensitive values.
+
+14
+00:00:38.584 --> 00:00:41.981
+A timeout default or feature flag default
+is different from a signing key,
+
+15
+00:00:42.061 --> 00:00:44.089
+database password, or service credential.
+
+16
+00:00:44.169 --> 00:00:47.895
+Required configuration should be validated
+before the service starts handling
+
+17
+00:00:47.975 --> 00:00:51.702
+traffic, so missing or malformed values
+fail clearly during startup rather than
+
+18
+00:00:51.782 --> 00:00:52.878
+during a user workflow.
+
+19
+00:00:52.958 --> 00:00:54.821
+Logging is a common data-handling risk.
+
+20
+00:00:54.901 --> 00:00:57.367
+Logs should support operations and
+investigations,
+
+21
+00:00:57.447 --> 00:01:00.735
+but they should not leak secrets,
+credentials, tokens, personal data,
+
+22
+00:01:00.815 --> 00:01:01.911
+or sensitive payloads.
+
+23
+00:01:01.991 --> 00:01:05.059
+Useful logs often include stable
+identifiers, event categories,
+
+24
+00:01:05.139 --> 00:01:07.057
+request correlation, dependency names,
+
+25
+00:01:07.137 --> 00:01:09.877
+and failure reasons without recording
+entire raw objects.
+
+26
+00:01:09.957 --> 00:01:12.368
+Encryption responsibilities should also be
+clear.
+
+27
+00:01:12.448 --> 00:01:15.407
+The architecture should identify what is
+protected in transit,
+
+28
+00:01:15.487 --> 00:01:18.775
+what is protected at rest, and which
+platform, database, service mesh,
+
+29
+00:01:18.855 --> 00:01:21.650
+load balancer, or application component
+owns each control.
+
+30
+00:01:21.730 --> 00:01:24.196
+If the responsibility is assumed but not
+documented,
+
+31
+00:01:24.276 --> 00:01:27.016
+teams can miss gaps during migration or
+incident response.
+
+32
+00:01:27.096 --> 00:01:30.165
+Data handling rules should be visible in
+code review, deployment,
+
+33
+00:01:30.245 --> 00:01:31.505
+and operational runbooks.
+
+34
+00:01:31.585 --> 00:01:34.435
+Reviewers should know when sensitive
+fields are introduced.
+
+35
+00:01:34.515 --> 00:01:37.583
+Operators should know where secrets come
+from and how they rotate.
+
+36
+00:01:37.663 --> 00:01:40.677
+Developers should know which response
+models are safe to expose.
+
+37
+00:01:40.757 --> 00:01:44.100
+Secure data handling is a lifecycle
+practice, not a single library call.

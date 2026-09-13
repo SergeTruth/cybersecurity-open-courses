@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.827
+Authentication and authorization are
+related, but they answer different questions.
+
+2
+00:00:03.907 --> 00:00:06.322
+Authentication identifies a user, service,
+job, or workload.
+
+3
+00:00:06.402 --> 00:00:08.316
+Authorization decides what that identity
+may do.
+
+4
+00:00:08.396 --> 00:00:10.629
+In a Go service, authentication may happen
+in middleware,
+
+5
+00:00:10.709 --> 00:00:13.762
+but permission checks still need to be
+close enough to the sensitive action that
+
+6
+00:00:13.842 --> 00:00:15.482
+reviewers can see what is being protected.
+
+7
+00:00:15.562 --> 00:00:17.932
+Middleware can attach trusted identity
+context to a request,
+
+8
+00:00:18.012 --> 00:00:21.293
+but route handlers and service functions
+should not assume that every authenticated
+
+9
+00:00:21.373 --> 00:00:22.512
+caller has every permission.
+
+10
+00:00:22.592 --> 00:00:25.144
+A route might need to check a role, a
+permission, a tenant boundary,
+
+11
+00:00:25.224 --> 00:00:27.822
+an object owner, a workflow state, or a
+service-to-service policy.
+
+12
+00:00:27.902 --> 00:00:31.183
+Missing or unclear authorization context
+should fail closed rather than fall back to
+
+13
+00:00:31.263 --> 00:00:31.809
+broad access.
+
+14
+00:00:31.889 --> 00:00:35.216
+Session-aware code should avoid trusting
+client-controlled fields as enforcement.
+
+15
+00:00:35.296 --> 00:00:37.757
+A request may include user IDs, tenant
+IDs, or role-like values,
+
+16
+00:00:37.837 --> 00:00:40.890
+but trusted authorization context should
+come from server-side session data,
+
+17
+00:00:40.970 --> 00:00:42.747
+validated tokens, or authoritative
+records.
+
+18
+00:00:42.827 --> 00:00:45.698
+User interface behavior can guide users,
+but it is not a security boundary.
+
+19
+00:00:45.778 --> 00:00:48.558
+Testing should include unauthorized cases,
+not only successful calls.
+
+20
+00:00:48.638 --> 00:00:51.736
+Include missing sessions, expired
+sessions, wrong tenant, wrong object owner,
+
+21
+00:00:51.816 --> 00:00:53.776
+and service identities with limited
+permissions.
+
+22
+00:00:53.856 --> 00:00:56.727
+Consistent authorization helpers can make
+this testing easier and reduce
+
+23
+00:00:56.807 --> 00:00:57.718
+route-by-route drift.
+
+24
+00:00:57.798 --> 00:01:00.806
+A secure Go application treats access
+control as explicit application logic,
+
+25
+00:01:00.886 --> 00:01:02.390
+not an assumption hidden in the client.
+
+26
+00:01:02.470 --> 00:01:04.748
+Authorization should also be readable
+during code review.
+
+27
+00:01:04.828 --> 00:01:07.198
+A reviewer should be able to identify the
+protected resource,
+
+28
+00:01:07.278 --> 00:01:09.101
+the caller identity, the required
+permission,
+
+29
+00:01:09.181 --> 00:01:12.370
+and the decision point without tracing
+through unrelated formatting or transport
+
+30
+00:01:12.450 --> 00:01:12.678
+code.
+
+31
+00:01:12.758 --> 00:01:15.675
+When those pieces are visible, it is
+easier to notice missing tenant checks,
+
+32
+00:01:15.755 --> 00:01:18.580
+broad administrative paths, or behavior
+that changed during a refactor.

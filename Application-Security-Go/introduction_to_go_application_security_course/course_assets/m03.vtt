@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.995
+HTTP handlers often sit directly at the
+trust boundary.
+
+2
+00:00:03.075 --> 00:00:05.728
+They receive raw requests, decide which
+method is allowed,
+
+3
+00:00:05.808 --> 00:00:09.258
+parse headers and bodies, start or
+continue context, call application code,
+
+4
+00:00:09.338 --> 00:00:10.400
+and write the response.
+
+5
+00:00:10.480 --> 00:00:13.558
+A secure Go handler should be small,
+predictable, and easy to review.
+
+6
+00:00:13.638 --> 00:00:16.929
+It should not hide parsing, validation,
+authorization, business logic,
+
+7
+00:00:17.009 --> 00:00:18.972
+and response formatting in one large
+block.
+
+8
+00:00:19.052 --> 00:00:21.547
+A strong handler shape starts with clear
+expectations.
+
+9
+00:00:21.627 --> 00:00:22.635
+Check the HTTP method.
+
+10
+00:00:22.715 --> 00:00:23.830
+Set request body limits.
+
+11
+00:00:23.910 --> 00:00:26.139
+Enforce content type when the route
+requires one.
+
+12
+00:00:26.219 --> 00:00:27.811
+Decode only what the route expects.
+
+13
+00:00:27.891 --> 00:00:29.112
+Validate the decoded data.
+
+14
+00:00:29.192 --> 00:00:31.049
+Attach or read trusted identity context.
+
+15
+00:00:31.129 --> 00:00:32.138
+Authorize the action.
+
+16
+00:00:32.218 --> 00:00:35.986
+Then call business logic with validated
+inputs and write a response that matches the
+
+17
+00:00:36.066 --> 00:00:36.703
+API contract.
+
+18
+00:00:36.783 --> 00:00:39.543
+Context propagation is especially
+important in Go services.
+
+19
+00:00:39.623 --> 00:00:43.497
+Request handlers often call databases,
+queues, storage services, or other HTTP APIs.
+
+20
+00:00:43.577 --> 00:00:47.399
+The request context should carry
+cancellation and deadlines so downstream work does
+
+21
+00:00:47.479 --> 00:00:49.655
+not continue long after the caller has
+gone away.
+
+22
+00:00:49.735 --> 00:00:53.609
+Timeouts and cancellation also make
+services behave more predictably during partial
+
+23
+00:00:53.689 --> 00:00:54.963
+failures or traffic spikes.
+
+24
+00:00:55.043 --> 00:00:57.007
+Response behavior is part of secure
+design.
+
+25
+00:00:57.087 --> 00:01:00.643
+Stable status codes and consistent
+response shapes help callers handle errors
+
+26
+00:01:00.723 --> 00:01:01.094
+safely.
+
+27
+00:01:01.174 --> 00:01:04.836
+User-facing responses should not expose
+stack traces, internal configuration,
+
+28
+00:01:04.916 --> 00:01:07.517
+raw queries, secrets, or sensitive
+operational details.
+
+29
+00:01:07.597 --> 00:01:10.622
+Secure handler design is not only about
+rejecting unsafe requests.
+
+30
+00:01:10.702 --> 00:01:13.993
+It is about creating a clean boundary
+between untrusted input and trusted
+
+31
+00:01:14.073 --> 00:01:15.135
+application behavior.
+
+32
+00:01:15.215 --> 00:01:18.187
+Handlers are easier to secure when they
+have a repeatable pattern.
+
+33
+00:01:18.267 --> 00:01:20.973
+Parse the request once, validate it once,
+authorize it once,
+
+34
+00:01:21.053 --> 00:01:23.866
+then call a service function with a small
+set of trusted values.
+
+35
+00:01:23.946 --> 00:01:27.343
+That structure reduces duplicated checks,
+makes logs easier to interpret,
+
+36
+00:01:27.423 --> 00:01:30.820
+and gives tests a stable place to verify
+negative cases and edge conditions.

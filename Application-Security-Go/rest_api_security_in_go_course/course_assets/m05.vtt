@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.103
+Data access is part of REST API security
+because handlers often stand between
+
+2
+00:00:04.183 --> 00:00:06.567
+untrusted requests and durable business
+records.
+
+3
+00:00:06.647 --> 00:00:10.305
+Go code should use safe database access
+patterns, parameterized operations,
+
+4
+00:00:10.385 --> 00:00:13.878
+clear repository or service contracts, and
+reviewed query construction.
+
+5
+00:00:13.958 --> 00:00:17.395
+The goal is that untrusted input does not
+become executable behavior or an
+
+6
+00:00:17.475 --> 00:00:18.639
+uncontrolled selector.
+
+7
+00:00:18.719 --> 00:00:21.546
+Validation should happen before storage or
+downstream use.
+
+8
+00:00:21.626 --> 00:00:25.395
+A decoded request should not be written
+directly to the database just because its
+
+9
+00:00:25.475 --> 00:00:26.418
+fields fit a struct.
+
+10
+00:00:26.498 --> 00:00:29.657
+The service should check shape, meaning,
+ownership, tenant scope,
+
+11
+00:00:29.737 --> 00:00:33.230
+and workflow rules before it creates,
+updates, deletes, or forwards data.
+
+12
+00:00:33.310 --> 00:00:35.693
+Output safety is just as important as
+input safety.
+
+13
+00:00:35.773 --> 00:00:39.765
+APIs should return explicit response
+models rather than automatically serializing
+
+14
+00:00:39.845 --> 00:00:40.731
+internal records.
+
+15
+00:00:40.811 --> 00:00:44.082
+Internal database models may contain
+fields that clients do not need,
+
+16
+00:00:44.162 --> 00:00:48.042
+such as administrative notes, internal
+flags, authorization metadata, secrets,
+
+17
+00:00:48.122 --> 00:00:50.617
+or fields that become sensitive as the
+model evolves.
+
+18
+00:00:50.697 --> 00:00:53.081
+Response shaping helps preserve least
+privilege.
+
+19
+00:00:53.161 --> 00:00:56.930
+It also gives teams a clear place to
+review which fields are safe for which caller.
+
+20
+00:00:57.010 --> 00:00:59.837
+Downstream service data should receive the
+same treatment.
+
+21
+00:00:59.917 --> 00:01:03.797
+A response from another system should be
+validated and minimized before it becomes
+
+22
+00:01:03.877 --> 00:01:05.042
+part of the API response.
+
+23
+00:01:05.122 --> 00:01:08.725
+Tenant separation must be preserved in
+data access, not only in route checks.
+
+24
+00:01:08.805 --> 00:01:12.574
+Queries, repository methods, cache keys,
+object references, file references,
+
+25
+00:01:12.654 --> 00:01:16.313
+and pagination should carry the tenant or
+ownership context needed to prevent
+
+26
+00:01:16.393 --> 00:01:18.278
+accidental cross-scope data exposure.
+
+27
+00:01:18.358 --> 00:01:21.185
+Safe APIs control both what they accept
+and what they return.
+
+28
+00:01:21.265 --> 00:01:23.759
+Transaction boundaries should also be
+intentional.
+
+29
+00:01:23.839 --> 00:01:26.888
+When a route changes multiple records or
+calls multiple systems,
+
+30
+00:01:26.968 --> 00:01:29.241
+failure handling should preserve a clear
+state.
+
+31
+00:01:29.321 --> 00:01:31.926
+Data access code should make partial
+updates, retries,
+
+32
+00:01:32.006 --> 00:01:33.780
+and cleanup visible enough to review.

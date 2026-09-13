@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.835
+Validation supports SQL injection
+prevention by reducing ambiguity before data
+
+2
+00:00:03.915 --> 00:00:05.171
+reaches query-building code.
+
+3
+00:00:05.251 --> 00:00:07.039
+It does not replace parameterized queries,
+
+4
+00:00:07.119 --> 00:00:08.907
+but it makes the database boundary
+clearer.
+
+5
+00:00:08.987 --> 00:00:11.017
+A request should be decoded into expected
+fields,
+
+6
+00:00:11.097 --> 00:00:12.402
+converted into useful Go types,
+
+7
+00:00:12.482 --> 00:00:15.768
+and checked against the rules that apply
+to the operation before the application
+
+8
+00:00:15.848 --> 00:00:17.201
+builds database calls around it.
+
+9
+00:00:17.281 --> 00:00:19.601
+Good validation checks more than whether a
+value exists.
+
+10
+00:00:19.681 --> 00:00:22.629
+It checks type, length, range, allowed
+values, required combinations,
+
+11
+00:00:22.709 --> 00:00:23.627
+and business meaning.
+
+12
+00:00:23.707 --> 00:00:26.896
+A date range may parse correctly but still
+be too wide for a reporting endpoint.
+
+13
+00:00:26.976 --> 00:00:28.813
+A sort option may be present but
+unsupported.
+
+14
+00:00:28.893 --> 00:00:32.034
+A status value may be spelled correctly
+but invalid for the current workflow.
+
+15
+00:00:32.114 --> 00:00:34.820
+These checks should happen before query
+logic depends on the data.
+
+16
+00:00:34.900 --> 00:00:36.495
+Normalization is the companion habit.
+
+17
+00:00:36.575 --> 00:00:39.475
+Applications often trim whitespace,
+canonicalize enum-like values,
+
+18
+00:00:39.555 --> 00:00:42.889
+parse numeric fields, and convert external
+request shapes into internal models.
+
+19
+00:00:42.969 --> 00:00:46.207
+After normalization, downstream code
+should receive narrow values with clear
+
+20
+00:00:46.287 --> 00:00:46.674
+meaning.
+
+21
+00:00:46.754 --> 00:00:49.991
+That makes it harder for a later function
+to misunderstand whether a field is raw
+
+22
+00:00:50.071 --> 00:00:52.584
+input, a validated choice, or a trusted
+internal identifier.
+
+23
+00:00:52.664 --> 00:00:55.419
+Allowlist validation is especially useful
+for dynamic structure.
+
+24
+00:00:55.499 --> 00:00:57.190
+Sort options, categories, report types,
+
+25
+00:00:57.270 --> 00:00:59.735
+and selected views should map to known
+application choices.
+
+26
+00:00:59.815 --> 00:01:02.908
+Unsupported choices should be rejected
+with a safe, predictable response.
+
+27
+00:01:02.988 --> 00:01:05.743
+Silent fallback can hide mistakes and
+create surprising behavior,
+
+28
+00:01:05.823 --> 00:01:07.852
+so it should be used carefully and
+intentionally.
+
+29
+00:01:07.932 --> 00:01:11.122
+Even after strong validation, runtime
+values should still be parameterized.
+
+30
+00:01:11.202 --> 00:01:14.150
+Validation and parameterization solve
+different parts of the problem.
+
+31
+00:01:14.230 --> 00:01:17.081
+Validation decides whether the request is
+meaningful and supported.
+
+32
+00:01:17.161 --> 00:01:20.302
+Parameterization preserves the boundary
+between SQL structure and values.
+
+33
+00:01:20.382 --> 00:01:23.620
+Together they create code that is safer,
+easier to test, and easier to maintain.

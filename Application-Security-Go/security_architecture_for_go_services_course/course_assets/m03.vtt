@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.542
+Authentication answers who or what is
+calling.
+
+2
+00:00:02.622 --> 00:00:05.071
+Authorization answers what that caller is
+allowed to do.
+
+3
+00:00:05.151 --> 00:00:08.571
+A secure Go service architecture keeps
+those questions separate and explicit.
+
+4
+00:00:08.651 --> 00:00:11.917
+A caller can be known and still not be
+allowed to perform a particular action.
+
+5
+00:00:11.997 --> 00:00:14.447
+Go services may need to handle several
+kinds of identity.
+
+6
+00:00:14.527 --> 00:00:16.620
+A user may act through a browser or mobile
+client.
+
+7
+00:00:16.700 --> 00:00:19.660
+Another service may call through
+machine-to-machine credentials.
+
+8
+00:00:19.740 --> 00:00:21.526
+A background job may process queued work.
+
+9
+00:00:21.606 --> 00:00:24.158
+An administrative tool may perform a
+sensitive operation.
+
+10
+00:00:24.238 --> 00:00:27.504
+Each caller type needs a clear identity
+model and a clear path for permission
+
+11
+00:00:27.584 --> 00:00:28.095
+decisions.
+
+12
+00:00:28.175 --> 00:00:30.982
+Authorization should be enforced close to
+the protected action.
+
+13
+00:00:31.062 --> 00:00:34.583
+A gateway, router, or middleware layer may
+authenticate a request and reject many
+
+14
+00:00:34.663 --> 00:00:38.134
+invalid calls early, but the code that
+performs a sensitive read, write, export,
+
+15
+00:00:38.214 --> 00:00:41.736
+or administrative change should still make
+the permission requirement visible.
+
+16
+00:00:41.816 --> 00:00:45.184
+This protects the service when routes are
+reorganized, new callers are added,
+
+17
+00:00:45.264 --> 00:00:46.438
+or internal code is reused.
+
+18
+00:00:46.518 --> 00:00:47.794
+Token claims, roles, scopes,
+
+19
+00:00:47.874 --> 00:00:50.630
+and service credentials should be treated
+as sensitive inputs.
+
+20
+00:00:50.710 --> 00:00:54.231
+The service should validate the issuer,
+audience, expiration, expected format,
+
+21
+00:00:54.311 --> 00:00:56.455
+and relevant claims according to its trust
+model.
+
+22
+00:00:56.535 --> 00:01:00.006
+It should also avoid logging credentials
+or copying sensitive claim values into
+
+23
+00:01:00.086 --> 00:01:01.515
+places where they are not needed.
+
+24
+00:01:01.595 --> 00:01:04.147
+Machine-to-machine trust should be
+explicit and limited.
+
+25
+00:01:04.227 --> 00:01:06.625
+Credentials should have clear purpose,
+narrow access,
+
+26
+00:01:06.705 --> 00:01:09.461
+rotation expectations where appropriate,
+and observable use.
+
+27
+00:01:09.541 --> 00:01:10.868
+If service A can call service B,
+
+28
+00:01:10.948 --> 00:01:14.215
+engineers should understand which
+operations are allowed and how misuse or
+
+29
+00:01:14.295 --> 00:01:15.928
+misconfiguration would be detected.
+
+30
+00:01:16.008 --> 00:01:19.785
+Good architecture avoids spreading
+authorization logic randomly across handlers and
+
+31
+00:01:19.865 --> 00:01:20.681
+helper functions.
+
+32
+00:01:20.761 --> 00:01:23.109
+Central policy helpers, clear
+service-layer checks,
+
+33
+00:01:23.189 --> 00:01:26.047
+and consistent audit events make
+authorization easier to review.
+
+34
+00:01:26.127 --> 00:01:29.240
+The team should be able to answer, for any
+protected action, who can do it,
+
+35
+00:01:29.320 --> 00:01:32.740
+which code enforces it, and what evidence
+is recorded when the decision is made.

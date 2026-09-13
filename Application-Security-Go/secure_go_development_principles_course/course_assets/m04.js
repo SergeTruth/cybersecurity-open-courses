@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Memory, Resources, and Runtime Safety",
+  "graphicAlt": "Bounded reads, allocation limits and timeouts complement managed memory, while owned external resources require explicit cleanup and low-level code review.",
+  "narration": "Go improves memory safety compared with languages that require manual memory management, but secure programs still need resource discipline. A service can be correct from a memory-safety point of view and still fail because it allocates too much, reads too much, opens too much, waits too long, or forgets to release something important.\n\nSlices, maps, buffers, and decoded objects should have practical size expectations. Reading an entire request, file, or stream into memory may be fine for a small administrative tool and risky for a public service. Bounded readers, request size limits, pagination, streaming, and careful allocation patterns help keep behavior predictable.\n\nResource lifecycles deserve the same attention. Files, network connections, response bodies, database rows, locks, timers, and goroutines should have clear ownership and cleanup. defer is useful because it keeps cleanup near acquisition, but it should be used with lifecycle awareness. A defer inside a long-running loop may delay cleanup longer than intended.\n\nTimeouts and limits protect availability. HTTP clients, servers, database calls, queue operations, and background workers should not wait forever by default. When failure occurs, code should return to a known state, release resources, and provide enough operational signal for investigation.\n\nThe unsafe package, cgo, and low-level runtime assumptions should be rare and reviewed. There may be legitimate reasons in specialized code, but ordinary application security is stronger when teams stay within Go's safer runtime model and make resource limits explicit. Resource decisions should also appear in tests and runbooks so operators know what normal pressure looks like and what limits are expected to protect.",
+  "narrationPoints": [
+    "Go improves memory safety compared with languages that require manual memory management, but secure programs still need resource discipline.",
+    "Slices, maps, buffers, and decoded objects should have practical size expectations.",
+    "Resource lifecycles deserve the same attention.",
+    "Timeouts and limits protect availability.",
+    "The unsafe package, cgo, and low-level runtime assumptions should be rare and reviewed."
+  ]
+};

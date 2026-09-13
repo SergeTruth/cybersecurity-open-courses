@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.392
+SQL injection prevention in Go starts with
+one central habit:
+
+2
+00:00:03.472 --> 00:00:05.808
+keep SQL structure separate from runtime
+values.
+
+3
+00:00:05.888 --> 00:00:08.558
+Trusted application code should choose the
+query shape.
+
+4
+00:00:08.638 --> 00:00:12.142
+Runtime values should be supplied through
+parameters or bound arguments.
+
+5
+00:00:12.222 --> 00:00:15.003
+That separation should be visible in
+ordinary code review,
+
+6
+00:00:15.083 --> 00:00:17.308
+not hidden in a special security-only
+process.
+
+7
+00:00:17.388 --> 00:00:19.835
+Dynamic query behavior needs a similar
+discipline.
+
+8
+00:00:19.915 --> 00:00:21.361
+Values remain parameterized.
+
+9
+00:00:21.441 --> 00:00:24.278
+Structure such as sort fields, report
+modes, table choices,
+
+10
+00:00:24.358 --> 00:00:27.306
+and selected columns should come from
+controlled allowlists.
+
+11
+00:00:27.386 --> 00:00:31.335
+Optional filters should be assembled from
+known fragments selected by application
+
+12
+00:00:31.415 --> 00:00:31.748
+logic.
+
+13
+00:00:31.828 --> 00:00:35.444
+Search and pagination should have clear
+limits so database behavior remains
+
+14
+00:00:35.524 --> 00:00:37.081
+predictable under real traffic.
+
+15
+00:00:37.161 --> 00:00:40.387
+Validation and normalization make the
+boundary easier to maintain.
+
+16
+00:00:40.467 --> 00:00:42.580
+Decode external data into expected Go
+types.
+
+17
+00:00:42.660 --> 00:00:44.830
+Convert request shapes into internal
+models.
+
+18
+00:00:44.910 --> 00:00:47.913
+Reject unsupported choices before query
+logic depends on them.
+
+19
+00:00:47.993 --> 00:00:49.550
+Then still parameterize values.
+
+20
+00:00:49.630 --> 00:00:52.133
+Validation decides whether a request is
+meaningful;
+
+21
+00:00:52.213 --> 00:00:55.217
+parameterization preserves how the
+database receives values.
+
+22
+00:00:55.297 --> 00:00:58.467
+Abstractions, permissions, and operations
+complete the picture.
+
+23
+00:00:58.547 --> 00:01:02.274
+ORMs, query builders, generated query
+layers, and stored procedures can help,
+
+24
+00:01:02.354 --> 00:01:06.024
+but teams must understand their safe paths
+and review their lower-level entry
+
+25
+00:01:06.104 --> 00:01:06.494
+points.
+
+26
+00:01:06.574 --> 00:01:10.133
+Database accounts should use least
+privilege so mistakes have less impact.
+
+27
+00:01:10.213 --> 00:01:12.383
+Logging, error handling, tests,
+monitoring,
+
+28
+00:01:12.463 --> 00:01:14.632
+and review should reinforce the same
+pattern.
+
+29
+00:01:14.712 --> 00:01:17.048
+Secure Go SQL access is not a single
+function call.
+
+30
+00:01:17.128 --> 00:01:20.020
+It is a set of habits that make safe query
+behavior repeatable.

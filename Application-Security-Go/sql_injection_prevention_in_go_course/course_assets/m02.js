@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "How SQL Injection Risk Enters an Application",
+  "graphicAlt": "Requests, internal APIs, imports, queues and stored data all require origin-aware review at the query boundary for search, sorting, reporting and export features.",
+  "narration": "SQL injection risk usually enters a Go application through a design shortcut: query text is assembled from data whose origin is external, unclear, or only loosely controlled. A developer may be trying to add a filter, a search feature, a report, a sort order, or an administrative tool quickly. If the query-building code treats caller-influenced text as SQL syntax, the database boundary becomes harder to reason about.\n\nThe source of the data can be broader than a public web form. Values may arrive through REST APIs, internal APIs, message queues, uploaded files, scheduled imports, command-line tools, support dashboards, analytics features, or another microservice. A value may also be read from a database table that was populated earlier by user activity. Once data is stored or forwarded, it can look internal even when its origin was not trusted.\n\nRisk is also not limited to authentication screens. Filters, search boxes, date ranges, sort fields, pagination controls, report builders, bulk upload mapping, export tools, and optional query features all influence database behavior. Some of these features feel operational rather than security-sensitive, which is why they deserve deliberate review.\n\nA defensive architecture traces where data comes from before deciding how it may influence a query. Teams should identify the places where request data becomes an internal model, where internal models become database calls, and where dynamic query structure is selected. That map does not need to be elaborate. It needs to make the database boundary visible enough that safe construction becomes consistent across everyday features.",
+  "narrationPoints": [
+    "SQL injection risk usually enters a Go application through a design shortcut: query text is assembled from data whose origin is external, unclear...",
+    "The source of the data can be broader than a public web form.",
+    "Risk is also not limited to authentication screens.",
+    "A defensive architecture traces where data comes from before deciding how it may influence a query."
+  ]
+};

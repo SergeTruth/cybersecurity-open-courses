@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.243
+Go's static types describe what code
+expects after values have entered the program.
+
+2
+00:00:04.323 --> 00:00:07.327
+They do not prove that runtime data is
+valid, complete, authorized,
+
+3
+00:00:07.407 --> 00:00:08.936
+or safe for the current operation.
+
+4
+00:00:09.016 --> 00:00:11.652
+HTTP request bodies, query parameters,
+headers, cookies,
+
+5
+00:00:11.732 --> 00:00:14.631
+environment variables, files, queue
+events, database records,
+
+6
+00:00:14.711 --> 00:00:18.454
+and third-party API responses should all
+be treated as untrusted at their boundary.
+
+7
+00:00:18.534 --> 00:00:21.064
+Validation is more than checking whether a
+field exists.
+
+8
+00:00:21.144 --> 00:00:24.570
+A good boundary checks shape, size, range,
+allowed values, required fields,
+
+9
+00:00:24.650 --> 00:00:27.181
+encoding assumptions, and consistency
+between fields.
+
+10
+00:00:27.261 --> 00:00:30.845
+For example, an identifier may have the
+right type but still refer to an object the
+
+11
+00:00:30.925 --> 00:00:32.085
+caller should not access.
+
+12
+00:00:32.165 --> 00:00:35.222
+A timestamp may parse successfully but
+fall outside a business rule.
+
+13
+00:00:35.302 --> 00:00:37.569
+A file may have a name but not an
+acceptable purpose.
+
+14
+00:00:37.649 --> 00:00:41.286
+Boundary code should convert external data
+into validated internal types before
+
+15
+00:00:41.366 --> 00:00:42.052
+sensitive use.
+
+16
+00:00:42.132 --> 00:00:45.822
+This keeps downstream services from
+repeating low-level parsing checks and makes
+
+17
+00:00:45.902 --> 00:00:47.905
+application invariants easier to preserve.
+
+18
+00:00:47.985 --> 00:00:51.358
+In Go, this often means decoding
+carefully, applying explicit validation,
+
+19
+00:00:51.438 --> 00:00:55.023
+returning predictable errors, and passing
+a narrow value to business logic only
+
+20
+00:00:55.103 --> 00:00:56.104
+after checks succeed.
+
+21
+00:00:56.184 --> 00:00:59.769
+For HTTP APIs, request size limits and
+predictable malformed-data handling are
+
+22
+00:00:59.849 --> 00:01:00.376
+important.
+
+23
+00:01:00.456 --> 00:01:03.883
+JSON decoding should be configured
+intentionally for the route's contract.
+
+24
+00:01:03.963 --> 00:01:07.336
+Strictness may be appropriate when unknown
+fields would create ambiguity.
+
+25
+00:01:07.416 --> 00:01:10.526
+Validation should happen before database
+writes, downstream calls,
+
+26
+00:01:10.606 --> 00:01:13.031
+authorization decisions that depend on
+request data,
+
+27
+00:01:13.111 --> 00:01:15.378
+or work that could consume significant
+resources.
+
+28
+00:01:15.458 --> 00:01:17.145
+The goal is not only to block bad input.
+
+29
+00:01:17.225 --> 00:01:20.282
+The goal is to make trusted code simpler,
+safer, and easier to review.
+
+30
+00:01:20.362 --> 00:01:22.523
+Good validation also has a maintenance
+benefit.
+
+31
+00:01:22.603 --> 00:01:24.765
+When a future developer reads the boundary
+code,
+
+32
+00:01:24.845 --> 00:01:28.271
+they should be able to see which
+assumptions are guaranteed for the rest of the
+
+33
+00:01:28.351 --> 00:01:28.773
+request.
+
+34
+00:01:28.853 --> 00:01:31.225
+Clear validation errors, focused helper
+functions,
+
+35
+00:01:31.305 --> 00:01:34.731
+and tests for rejected cases keep those
+assumptions from drifting as fields,
+
+36
+00:01:34.811 --> 00:01:36.340
+routes, and integrations evolve.

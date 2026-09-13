@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.279
+Secure Go handlers should be small enough
+to review and predictable enough to test.
+
+2
+00:00:04.359 --> 00:00:07.759
+A common shape is straightforward: check
+the method or route assumptions,
+
+3
+00:00:07.839 --> 00:00:09.836
+limit and parse the request, validate
+data,
+
+4
+00:00:09.916 --> 00:00:13.479
+read the authentication context, authorize
+the action, call business logic,
+
+5
+00:00:13.559 --> 00:00:16.420
+persist changes where appropriate, and
+write a safe response.
+
+6
+00:00:16.500 --> 00:00:18.443
+This does not require heavy architecture.
+
+7
+00:00:18.523 --> 00:00:20.682
+It means the trust decisions should be
+visible.
+
+8
+00:00:20.762 --> 00:00:23.407
+When parsing, validation, authorization,
+persistence,
+
+9
+00:00:23.487 --> 00:00:25.485
+and response writing are tangled together,
+
+10
+00:00:25.565 --> 00:00:28.371
+reviewers have to guess which assumptions
+protect the route.
+
+11
+00:00:28.451 --> 00:00:31.042
+Clear boundaries make it easier to test
+malformed input,
+
+12
+00:00:31.122 --> 00:00:35.171
+unauthorized access, missing records,
+downstream failures, and successful behavior.
+
+13
+00:00:35.251 --> 00:00:36.978
+Middleware can support consistency.
+
+14
+00:00:37.058 --> 00:00:40.027
+Request IDs, logging context,
+authentication, panic recovery,
+
+15
+00:00:40.107 --> 00:00:43.454
+common headers, timeouts, and basic
+request shaping are good middleware
+
+16
+00:00:43.534 --> 00:00:44.451
+responsibilities.
+
+17
+00:00:44.531 --> 00:00:48.364
+Middleware should be ordered intentionally
+and documented so developers know what
+
+18
+00:00:48.444 --> 00:00:49.524
+each layer guarantees.
+
+19
+00:00:49.604 --> 00:00:53.490
+It should not hide sensitive authorization
+decisions so deeply that route reviewers
+
+20
+00:00:53.570 --> 00:00:54.380
+cannot find them.
+
+21
+00:00:54.460 --> 00:00:57.267
+Context propagation matters for API
+reliability and safety.
+
+22
+00:00:57.347 --> 00:01:00.909
+Handlers should pass request context to
+database calls, downstream clients,
+
+23
+00:01:00.989 --> 00:01:04.768
+queues, and background work that should
+stop when the request is cancelled or times
+
+24
+00:01:04.848 --> 00:01:05.064
+out.
+
+25
+00:01:05.144 --> 00:01:08.814
+A lost context can turn a cancelled
+request into continued work that nobody owns.
+
+26
+00:01:08.894 --> 00:01:10.892
+Response helpers can improve consistency.
+
+27
+00:01:10.972 --> 00:01:14.696
+Status codes, validation errors, not-found
+behavior, authorization failures,
+
+28
+00:01:14.776 --> 00:01:17.259
+and internal failures should be mapped
+deliberately.
+
+29
+00:01:17.339 --> 00:01:19.444
+The safer handler is not the fanciest
+handler.
+
+30
+00:01:19.524 --> 00:01:21.575
+It is the one whose order,
+responsibilities,
+
+31
+00:01:21.655 --> 00:01:23.545
+and failure behavior are easy to explain.
+
+32
+00:01:23.625 --> 00:01:25.514
+Secure structure also helps onboarding.
+
+33
+00:01:25.594 --> 00:01:29.265
+New maintainers can follow an existing
+route pattern and understand where to add
+
+34
+00:01:29.345 --> 00:01:30.532
+checks without guessing.
+
+35
+00:01:30.612 --> 00:01:32.555
+When the shape of a handler is
+predictable,
+
+36
+00:01:32.635 --> 00:01:36.522
+code review can focus on the specific
+business decision instead of rediscovering the
+
+37
+00:01:36.602 --> 00:01:38.059
+framework behavior every time.
+
+38
+00:01:38.139 --> 00:01:41.540
+That consistency is a quiet but powerful
+control for long-lived services.

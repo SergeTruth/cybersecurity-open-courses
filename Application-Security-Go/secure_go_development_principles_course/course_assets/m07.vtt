@@ -1,0 +1,151 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.354
+Go's HTTP ecosystem is practical and
+direct,
+
+2
+00:00:02.434 --> 00:00:04.337
+which makes service boundaries easier to
+see.
+
+3
+00:00:04.417 --> 00:00:06.954
+A handler receives a request, checks
+method and content type,
+
+4
+00:00:07.034 --> 00:00:09.669
+enforces size limits, parses input,
+authenticates the caller,
+
+5
+00:00:09.749 --> 00:00:13.165
+authorizes the action, performs work, logs
+useful events, and returns a response.
+
+6
+00:00:13.245 --> 00:00:16.270
+Security improves when that order is
+consistent across the application.
+
+7
+00:00:16.350 --> 00:00:17.862
+Request limits should happen early.
+
+8
+00:00:17.942 --> 00:00:20.431
+Servers and handlers need sensible read
+and write timeouts,
+
+9
+00:00:20.511 --> 00:00:23.878
+maximum header sizes where appropriate,
+body size limits, content-type checks,
+
+10
+00:00:23.958 --> 00:00:24.836
+and bounded parsing.
+
+11
+00:00:24.916 --> 00:00:27.258
+Without limits, a service can spend too
+much memory, CPU,
+
+12
+00:00:27.338 --> 00:00:29.143
+or time before reaching the business
+logic.
+
+13
+00:00:29.223 --> 00:00:32.053
+Authentication and authorization should be
+separate in the design.
+
+14
+00:00:32.133 --> 00:00:33.792
+Authentication identifies the caller.
+
+15
+00:00:33.872 --> 00:00:37.288
+Authorization decides whether that caller
+may perform the action on the requested
+
+16
+00:00:37.368 --> 00:00:37.807
+resource.
+
+17
+00:00:37.887 --> 00:00:39.644
+Middleware can help with shared concerns,
+
+18
+00:00:39.724 --> 00:00:42.944
+but resource-level decisions often need
+trusted data loaded by the handler or
+
+19
+00:00:43.024 --> 00:00:43.658
+service layer.
+
+20
+00:00:43.738 --> 00:00:46.617
+Middleware is useful for consistent
+logging, recovery, request IDs,
+
+21
+00:00:46.697 --> 00:00:49.722
+size limits, security headers where
+relevant, and common policy checks.
+
+22
+00:00:49.802 --> 00:00:51.217
+It should remain understandable.
+
+23
+00:00:51.297 --> 00:00:54.615
+A reviewer should be able to tell which
+controls run for a route and which controls
+
+24
+00:00:54.695 --> 00:00:56.061
+must still happen in the handler.
+
+25
+00:00:56.141 --> 00:00:58.727
+CORS should be deliberate and narrow for
+browser-facing APIs.
+
+26
+00:00:58.807 --> 00:01:02.174
+Safe error responses should help callers
+recover without exposing stack traces,
+
+27
+00:01:02.254 --> 00:01:05.182
+internal queries, private configuration,
+or sensitive identifiers.
+
+28
+00:01:05.262 --> 00:01:07.799
+Service-to-service boundaries should
+document ownership,
+
+29
+00:01:07.879 --> 00:01:11.343
+expected callers, authentication method,
+authorization rule, and data contract.
+
+30
+00:01:11.423 --> 00:01:13.082
+When those boundaries are written down,
+
+31
+00:01:13.162 --> 00:01:16.334
+new routes and clients can be reviewed
+against an existing pattern instead of
+
+32
+00:01:16.414 --> 00:01:17.780
+inventing trust rules each time.

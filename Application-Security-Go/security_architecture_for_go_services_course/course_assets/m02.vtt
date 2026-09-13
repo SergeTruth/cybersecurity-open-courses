@@ -1,0 +1,177 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.551
+A Go service usually sits between many
+systems.
+
+2
+00:00:02.631 --> 00:00:05.451
+It may receive calls from clients,
+gateways, internal services,
+
+3
+00:00:05.531 --> 00:00:07.890
+background jobs, administrative tools, or
+webhooks.
+
+4
+00:00:07.970 --> 00:00:11.457
+It may call databases, caches, queues,
+identity providers, logging platforms,
+
+5
+00:00:11.537 --> 00:00:13.896
+object stores, cloud APIs, and third-party
+services.
+
+6
+00:00:13.976 --> 00:00:16.540
+Each connection is a boundary where
+assumptions can break.
+
+7
+00:00:16.620 --> 00:00:18.210
+A boundary is not only a network edge.
+
+8
+00:00:18.290 --> 00:00:19.572
+A message queue is a boundary.
+
+9
+00:00:19.652 --> 00:00:20.831
+A file import is a boundary.
+
+10
+00:00:20.911 --> 00:00:22.501
+A configuration value is a boundary.
+
+11
+00:00:22.581 --> 00:00:26.068
+A database record written by an older
+version of the service can also behave like a
+
+12
+00:00:26.148 --> 00:00:29.019
+boundary because its shape and meaning may
+not match current code.
+
+13
+00:00:29.099 --> 00:00:31.868
+Boundaries are where data and authority
+move between contexts.
+
+14
+00:00:31.948 --> 00:00:35.076
+Internal traffic should not automatically
+be treated as fully trusted.
+
+15
+00:00:35.156 --> 00:00:38.284
+Internal callers can be misconfigured,
+outdated, over-permissioned,
+
+16
+00:00:38.364 --> 00:00:40.774
+or compromised through ordinary
+operational failure.
+
+17
+00:00:40.854 --> 00:00:44.444
+A secure architecture avoids assuming that
+private network location alone proves
+
+18
+00:00:44.524 --> 00:00:44.883
+safety.
+
+19
+00:00:44.963 --> 00:00:48.039
+It still validates inputs, authenticates
+callers where appropriate,
+
+20
+00:00:48.119 --> 00:00:50.376
+and enforces authorization for protected
+actions.
+
+21
+00:00:50.456 --> 00:00:52.968
+Trust zones help engineers decide where
+controls belong.
+
+22
+00:00:53.048 --> 00:00:56.228
+At one boundary, the service may need
+request validation and rate limits.
+
+23
+00:00:56.308 --> 00:00:59.025
+At another, it may need service identity,
+scoped credentials,
+
+24
+00:00:59.105 --> 00:01:00.387
+or careful output filtering.
+
+25
+00:01:00.467 --> 00:01:04.006
+At another, it may need audit events
+because administrative actions or sensitive
+
+26
+00:01:04.086 --> 00:01:05.060
+records are involved.
+
+27
+00:01:05.140 --> 00:01:08.524
+The control should match the trust
+relationship and the risk of the operation.
+
+28
+00:01:08.604 --> 00:01:11.425
+A good architecture makes boundaries
+visible in code structure,
+
+29
+00:01:11.505 --> 00:01:14.222
+configuration, deployment, and operational
+documentation.
+
+30
+00:01:14.302 --> 00:01:16.918
+Handlers, middleware, service layers,
+repository layers,
+
+31
+00:01:16.998 --> 00:01:19.972
+and background workers should make it
+clear where input is accepted,
+
+32
+00:01:20.052 --> 00:01:22.462
+where it is normalized, where permissions
+are checked,
+
+33
+00:01:22.542 --> 00:01:23.875
+and where side effects happen.
+
+34
+00:01:23.955 --> 00:01:27.288
+Clear boundaries reduce confusion during
+maintenance, incident response,
+
+35
+00:01:27.368 --> 00:01:28.445
+and future feature work.
+
+36
+00:01:28.525 --> 00:01:32.166
+When a team can quickly identify which
+boundary failed or which assumption changed,
+
+37
+00:01:32.246 --> 00:01:35.220
+it can fix the design instead of patching
+symptoms in unrelated code.

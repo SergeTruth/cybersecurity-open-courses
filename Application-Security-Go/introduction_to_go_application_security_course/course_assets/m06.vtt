@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.477
+Go makes errors explicit, which is useful
+for security review.
+
+2
+00:00:03.557 --> 00:00:07.264
+Each returned error is a point where the
+application decides whether to retry,
+
+3
+00:00:07.344 --> 00:00:09.815
+stop, clean up, roll back, log, or return
+a response.
+
+4
+00:00:09.895 --> 00:00:12.591
+Secure error handling preserves invariants
+on failure.
+
+5
+00:00:12.671 --> 00:00:16.602
+It avoids partial state changes that leave
+a request half-complete or a resource in
+
+6
+00:00:16.682 --> 00:00:17.525
+an unclear state.
+
+7
+00:00:17.605 --> 00:00:20.244
+Internal errors can include useful
+technical context,
+
+8
+00:00:20.324 --> 00:00:23.076
+but user-facing responses should be safe
+and consistent.
+
+9
+00:00:23.156 --> 00:00:26.751
+A client usually needs to know whether a
+request was invalid, unauthorized,
+
+10
+00:00:26.831 --> 00:00:30.032
+not found, conflicted, rate limited, or
+temporarily unavailable.
+
+11
+00:00:30.112 --> 00:00:33.257
+The client does not need raw stack traces,
+secret values, SQL text,
+
+12
+00:00:33.337 --> 00:00:36.595
+internal file paths, dependency details,
+or configuration values.
+
+13
+00:00:36.675 --> 00:00:39.932
+Logging should support investigation
+without becoming a data leak.
+
+14
+00:00:40.012 --> 00:00:43.214
+Structured logs, request IDs, correlation
+IDs, event categories,
+
+15
+00:00:43.294 --> 00:00:46.607
+and appropriate log levels help operators
+understand what happened.
+
+16
+00:00:46.687 --> 00:00:50.226
+At the same time, tokens, cookies, API
+keys, passwords, private user data,
+
+17
+00:00:50.306 --> 00:00:53.788
+raw payloads, and internal configuration
+should not be logged casually.
+
+18
+00:00:53.868 --> 00:00:57.125
+Logs often flow to dashboards, tickets,
+alerts, long-term storage,
+
+19
+00:00:57.205 --> 00:00:59.115
+and third-party monitoring platforms.
+
+20
+00:00:59.195 --> 00:01:01.722
+Secret protection should be boring and
+disciplined.
+
+21
+00:01:01.802 --> 00:01:03.094
+Keep secrets server-side.
+
+22
+00:01:03.174 --> 00:01:06.319
+Read them from approved environment or
+secret-store mechanisms.
+
+23
+00:01:06.399 --> 00:01:08.702
+Avoid printing secrets during startup or
+tests.
+
+24
+00:01:08.782 --> 00:01:10.635
+Scope credentials to the job they need.
+
+25
+00:01:10.715 --> 00:01:12.850
+When errors and logs are designed
+carefully,
+
+26
+00:01:12.930 --> 00:01:16.861
+teams get useful visibility while reducing
+the chance that observability becomes
+
+27
+00:01:16.941 --> 00:01:18.064
+another exposure path.
+
+28
+00:01:18.144 --> 00:01:20.897
+The safest error strategy is intentional
+and consistent.
+
+29
+00:01:20.977 --> 00:01:24.683
+Decide which errors should be retried,
+which should be reported to the caller,
+
+30
+00:01:24.763 --> 00:01:26.167
+which should trigger alerts,
+
+31
+00:01:26.247 --> 00:01:29.056
+and which should be summarized without
+sensitive details.
+
+32
+00:01:29.136 --> 00:01:30.203
+Then test those paths.
+
+33
+00:01:30.283 --> 00:01:34.158
+Error handling is part of the
+application's security contract because failure is
+
+34
+00:01:34.238 --> 00:01:36.260
+when assumptions are most likely to break.

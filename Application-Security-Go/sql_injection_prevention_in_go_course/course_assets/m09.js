@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Go SQL Safety Habits",
+  "graphicAlt": "Bound values, allowlisted structure, meaningful validation, reviewed abstractions, least privilege, tests and careful observability reinforce SQL safety.",
+  "narration": "SQL injection prevention in Go starts with one central habit: keep SQL structure separate from runtime values. Trusted application code should choose the query shape. Runtime values should be supplied through parameters or bound arguments. That separation should be visible in ordinary code review, not hidden in a special security-only process.\n\nDynamic query behavior needs a similar discipline. Values remain parameterized. Structure such as sort fields, report modes, table choices, and selected columns should come from controlled allowlists. Optional filters should be assembled from known fragments selected by application logic. Search and pagination should have clear limits so database behavior remains predictable under real traffic.\n\nValidation and normalization make the boundary easier to maintain. Decode external data into expected Go types. Convert request shapes into internal models. Reject unsupported choices before query logic depends on them. Then still parameterize values. Validation decides whether a request is meaningful; parameterization preserves how the database receives values.\n\nAbstractions, permissions, and operations complete the picture. ORMs, query builders, generated query layers, and stored procedures can help, but teams must understand their safe paths and review their lower-level entry points. Database accounts should use least privilege so mistakes have less impact. Logging, error handling, tests, monitoring, and review should reinforce the same pattern. Secure Go SQL access is not a single function call. It is a set of habits that make safe query behavior repeatable.",
+  "narrationPoints": [
+    "SQL injection prevention in Go starts with one central habit: keep SQL structure separate from runtime values.",
+    "Dynamic query behavior needs a similar discipline.",
+    "Validation and normalization make the boundary easier to maintain.",
+    "Abstractions, permissions, and operations complete the picture."
+  ]
+};

@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.612
+Reliable services assume that calls can
+fail, dependencies can slow down,
+
+2
+00:00:03.692 --> 00:00:06.062
+callers can send too much work, and
+resources are finite.
+
+3
+00:00:06.142 --> 00:00:09.797
+Security architecture includes resilience
+because unavailable or unstable services
+
+4
+00:00:09.877 --> 00:00:11.754
+can create business risk, operational
+risk,
+
+5
+00:00:11.834 --> 00:00:14.304
+and pressure to bypass normal controls
+during an incident.
+
+6
+00:00:14.384 --> 00:00:17.001
+Go's context patterns are useful for
+timeouts, cancellation,
+
+7
+00:00:17.081 --> 00:00:19.798
+and request-scoped cleanup when they are
+applied consistently.
+
+8
+00:00:19.878 --> 00:00:23.335
+A request context can carry deadlines and
+cancellation signals through handlers,
+
+9
+00:00:23.415 --> 00:00:25.736
+service logic, database calls, and
+outbound requests.
+
+10
+00:00:25.816 --> 00:00:29.076
+The architecture should make it normal for
+long-running work to respect those
+
+11
+00:00:29.156 --> 00:00:29.551
+signals.
+
+12
+00:00:29.631 --> 00:00:31.261
+Retries should be designed carefully.
+
+13
+00:00:31.341 --> 00:00:33.564
+A retry can help with a temporary
+dependency failure,
+
+14
+00:00:33.644 --> 00:00:36.953
+but it can also increase load on a
+struggling system or repeat side effects if the
+
+15
+00:00:37.033 --> 00:00:38.367
+operation is not safe to repeat.
+
+16
+00:00:38.447 --> 00:00:41.212
+Defensive designs consider backoff, retry
+limits, idempotency,
+
+17
+00:00:41.292 --> 00:00:44.799
+and whether a retry belongs at the caller,
+service, queue, or infrastructure layer.
+
+18
+00:00:44.879 --> 00:00:47.843
+Rate limits, request size limits,
+connection limits, queue controls,
+
+19
+00:00:47.923 --> 00:00:50.590
+and backpressure help services remain
+available under stress.
+
+20
+00:00:50.670 --> 00:00:52.843
+These controls do not need to assume
+hostile intent.
+
+21
+00:00:52.923 --> 00:00:55.985
+They are useful for accidental spikes,
+misbehaving clients, batch jobs,
+
+22
+00:00:56.065 --> 00:00:57.893
+dependency failures, and ordinary growth.
+
+23
+00:00:57.973 --> 00:01:00.096
+Abuse resistance is also resilience
+engineering.
+
+24
+00:01:00.176 --> 00:01:03.090
+Error handling should distinguish expected
+failure, invalid input,
+
+25
+00:01:03.170 --> 00:01:05.442
+dependency failure, and unexpected
+internal faults.
+
+26
+00:01:05.522 --> 00:01:07.103
+Callers need safe, stable responses.
+
+27
+00:01:07.183 --> 00:01:08.566
+Operators need useful evidence.
+
+28
+00:01:08.646 --> 00:01:10.770
+Developers need enough context to fix the
+problem.
+
+29
+00:01:10.850 --> 00:01:14.356
+The architecture should avoid leaking
+internal details while still preserving the
+
+30
+00:01:14.436 --> 00:01:15.918
+signals needed for investigation.
+
+31
+00:01:15.998 --> 00:01:19.110
+Defensive resilience means failing safely,
+preserving useful evidence,
+
+32
+00:01:19.190 --> 00:01:20.721
+and avoiding unnecessary exposure.
+
+33
+00:01:20.801 --> 00:01:23.171
+A service that times out clearly, cancels
+work promptly,
+
+34
+00:01:23.251 --> 00:01:24.585
+limits unbounded resource use,
+
+35
+00:01:24.665 --> 00:01:28.122
+and records meaningful failure categories
+is easier to operate than one that waits
+
+36
+00:01:28.202 --> 00:01:30.820
+indefinitely or returns inconsistent
+behavior under stress.

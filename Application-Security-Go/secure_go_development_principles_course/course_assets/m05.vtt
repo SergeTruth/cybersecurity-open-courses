@@ -1,0 +1,152 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.165
+Go's concurrency model is one of its
+strengths, but concurrency still needs design.
+
+2
+00:00:04.245 --> 00:00:07.083
+A goroutine should have an owner, a reason
+to exist, an error path,
+
+3
+00:00:07.163 --> 00:00:07.886
+and a way to stop.
+
+4
+00:00:07.966 --> 00:00:10.702
+Unbounded goroutines, missing
+cancellation, blocked sends,
+
+5
+00:00:10.782 --> 00:00:14.188
+and forgotten workers can turn a clean
+service into one that leaks resources or
+
+6
+00:00:14.268 --> 00:00:15.817
+behaves unpredictably under load.
+
+7
+00:00:15.897 --> 00:00:18.632
+context.Context is an important tool for
+defensive services.
+
+8
+00:00:18.712 --> 00:00:21.035
+Context can carry deadlines, cancellation
+signals,
+
+9
+00:00:21.115 --> 00:00:24.212
+and request scope through handlers,
+database calls, service clients,
+
+10
+00:00:24.292 --> 00:00:25.221
+and background work.
+
+11
+00:00:25.301 --> 00:00:27.159
+It should not become a general storage
+bag,
+
+12
+00:00:27.239 --> 00:00:30.542
+but it should make cancellation and time
+limits visible as work moves across
+
+13
+00:00:30.622 --> 00:00:31.190
+boundaries.
+
+14
+00:00:31.270 --> 00:00:32.457
+Channels need clear rules.
+
+15
+00:00:32.537 --> 00:00:34.911
+Teams should know who sends, who receives,
+who closes,
+
+16
+00:00:34.991 --> 00:00:38.037
+whether buffering is intentional, and what
+happens during shutdown.
+
+17
+00:00:38.117 --> 00:00:41.162
+Ambiguous channel ownership can lead to
+blocked work, missed errors,
+
+18
+00:00:41.242 --> 00:00:42.377
+or panics during cleanup.
+
+19
+00:00:42.457 --> 00:00:45.554
+The safest channel designs are simple
+enough to explain during review.
+
+20
+00:00:45.634 --> 00:00:47.286
+Shared state needs synchronization.
+
+21
+00:00:47.366 --> 00:00:50.153
+Mutexes, atomic values, channel ownership,
+immutable copies,
+
+22
+00:00:50.233 --> 00:00:53.433
+and single-writer designs can all be
+reasonable when used deliberately.
+
+23
+00:00:53.513 --> 00:00:56.713
+Race conditions can become more than
+reliability issues when they affect
+
+24
+00:00:56.793 --> 00:01:00.252
+authorization state, cached configuration,
+session data, counters, limits,
+
+25
+00:01:00.332 --> 00:01:01.364
+or security decisions.
+
+26
+00:01:01.444 --> 00:01:04.592
+Graceful shutdown protects data integrity
+and operational stability.
+
+27
+00:01:04.672 --> 00:01:06.479
+A service should stop accepting new work,
+
+28
+00:01:06.559 --> 00:01:08.882
+cancel or finish in-flight work according
+to policy,
+
+29
+00:01:08.962 --> 00:01:11.439
+flush important logs or metrics, and
+release resources.
+
+30
+00:01:11.519 --> 00:01:15.029
+Concurrency is secure when its lifecycle
+is bounded, observable, and testable.
+
+31
+00:01:15.109 --> 00:01:18.257
+The review question is simple: if this
+goroutine starts, who can stop it,
+
+32
+00:01:18.337 --> 00:01:20.660
+who sees its error, and what data remains
+consistent?

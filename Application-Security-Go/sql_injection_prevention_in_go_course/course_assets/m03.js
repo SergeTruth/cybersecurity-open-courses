@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Parameterized Queries with Go's Database APIs",
+  "graphicAlt": "A fixed query shape and separate arguments use driver binding, with driver-specific marker conventions and repeatable query shapes for new values.",
+  "narration": "Parameterized queries are the core prevention pattern. The idea is simple: the SQL command structure is supplied by trusted code, while runtime values are passed separately through placeholders or bound parameters. The driver and database then handle those values as data rather than as part of the command syntax.\n\nIn Go, teams commonly use the standard database/sql package, driver-specific packages, prepared statements, generated query layers, or higher-level libraries. The exact placeholder convention depends on the database driver. Some drivers use one marker style, while others use numbered or named conventions. The important habit is to follow the driver's documented convention and keep values in the argument list rather than adding them directly to the SQL text.\n\nBound parameters are appropriate for values such as names, dates, statuses, account identifiers, tenant identifiers stored as values, numeric limits, and filter values. Even when an input appears harmless, parameterization should remain the default. Harmless-looking values can change over time, be reused in a different feature, or come from a path that was not obvious during the first implementation.\n\nParameterization also improves review. A query with fixed structure and a clear argument list is easier to inspect than a query assembled from many text fragments. Reviewers can focus on whether dynamic structure is controlled, whether values are bound, and whether the query matches the business rule. Prepared statements can help make repeated query shapes explicit, but the security value comes from preserving the separation between structure and values.",
+  "narrationPoints": [
+    "Parameterized queries are the core prevention pattern.",
+    "In Go, teams commonly use the standard database/sql package, driver-specific packages, prepared statements, generated query layers, or...",
+    "Bound parameters are appropriate for values such as names, dates, statuses, account identifiers, tenant identifiers stored as values, numeric...",
+    "Parameterization also improves review."
+  ]
+};

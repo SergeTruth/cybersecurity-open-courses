@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.315
+Many Go teams use an ORM, a query builder,
+generated query code,
+
+2
+00:00:03.395 --> 00:00:06.475
+or stored procedures instead of writing
+every SQL statement by hand.
+
+3
+00:00:06.555 --> 00:00:10.378
+These tools can reduce repetitive string
+handling and can make safer patterns easier
+
+4
+00:00:10.458 --> 00:00:10.936
+to follow.
+
+5
+00:00:11.016 --> 00:00:12.715
+They are still tools, not guarantees.
+
+6
+00:00:12.795 --> 00:00:16.619
+Developers need to understand how each
+abstraction separates values from structure
+
+7
+00:00:16.699 --> 00:00:19.301
+and where the abstraction exposes
+lower-level features.
+
+8
+00:00:19.381 --> 00:00:21.664
+An ORM may parameterize common lookups by
+default,
+
+9
+00:00:21.744 --> 00:00:24.559
+but it may also provide raw query
+functions for advanced cases.
+
+10
+00:00:24.639 --> 00:00:27.506
+A query builder may keep arguments
+separate when used normally,
+
+11
+00:00:27.586 --> 00:00:29.339
+but it may also allow custom fragments.
+
+12
+00:00:29.419 --> 00:00:32.286
+Generated query code can make fixed query
+shapes easy to review,
+
+13
+00:00:32.366 --> 00:00:35.871
+but the generated layer still depends on
+how query definitions are written and
+
+14
+00:00:35.951 --> 00:00:36.535
+maintained.
+
+15
+00:00:36.615 --> 00:00:40.439
+The safest use of these abstractions keeps
+the same principle as direct database/sql
+
+16
+00:00:40.519 --> 00:00:40.784
+code.
+
+17
+00:00:40.864 --> 00:00:42.936
+Runtime values belong in argument
+positions.
+
+18
+00:00:43.016 --> 00:00:45.299
+Dynamic structure should come from known
+options.
+
+19
+00:00:45.379 --> 00:00:47.450
+Raw SQL entry points should be rare,
+reviewed,
+
+20
+00:00:47.530 --> 00:00:51.194
+and documented so the team understands why
+the lower-level path was necessary and
+
+21
+00:00:51.274 --> 00:00:52.443
+how values are protected.
+
+22
+00:00:52.523 --> 00:00:56.346
+Stored procedures can centralize database
+behavior and reduce repeated query logic
+
+23
+00:00:56.426 --> 00:00:57.382
+in application code.
+
+24
+00:00:57.462 --> 00:01:01.126
+They can also hide unsafe string assembly
+inside the database layer if teams treat
+
+25
+00:01:01.206 --> 00:01:02.481
+them as automatically safe.
+
+26
+00:01:02.561 --> 00:01:05.003
+Review should include the procedure
+implementation,
+
+27
+00:01:05.083 --> 00:01:08.270
+the permissions used to run it, and the
+way application values reach it.
+
+28
+00:01:08.350 --> 00:01:11.589
+The safest abstraction is the one the team
+understands well enough to use
+
+29
+00:01:11.669 --> 00:01:12.359
+consistently.
+
+30
+00:01:12.439 --> 00:01:16.263
+Conventions, examples, linting, and code
+review should guide developers toward the
+
+31
+00:01:16.343 --> 00:01:16.874
+safer path.
+
+32
+00:01:16.954 --> 00:01:19.343
+When a library offers several ways to
+express a query,
+
+33
+00:01:19.423 --> 00:01:22.928
+the team should document which patterns
+are preferred and which require extra
+
+34
+00:01:23.008 --> 00:01:23.380
+review.

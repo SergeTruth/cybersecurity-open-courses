@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.561
+A REST API route is a security boundary
+because it sits between outside requests and
+
+2
+00:00:04.641 --> 00:00:06.207
+trusted application behavior.
+
+3
+00:00:06.287 --> 00:00:08.897
+A Go API may receive calls from browsers,
+mobile apps,
+
+4
+00:00:08.977 --> 00:00:12.400
+internal services, automation, partner
+systems, or scheduled jobs.
+
+5
+00:00:12.480 --> 00:00:15.787
+Even when an API is called internal, its
+handlers still accept data,
+
+6
+00:00:15.867 --> 00:00:17.897
+identity context, headers, parameters,
+
+7
+00:00:17.977 --> 00:00:21.632
+and workflow instructions from outside the
+handler's immediate control.
+
+8
+00:00:21.712 --> 00:00:24.438
+Each route becomes part of the system's
+security model.
+
+9
+00:00:24.518 --> 00:00:27.535
+A handler parses input, chooses status
+codes, loads records,
+
+10
+00:00:27.615 --> 00:00:31.907
+enforces authorization, calls business
+logic, writes state, and shapes the response.
+
+11
+00:00:31.987 --> 00:00:35.758
+A small mistake in that path can expose
+too much data, mutate the wrong object,
+
+12
+00:00:35.838 --> 00:00:37.810
+leak a sensitive value through an error,
+
+13
+00:00:37.890 --> 00:00:40.907
+or let one tenant's request influence
+another tenant's data.
+
+14
+00:00:40.987 --> 00:00:42.959
+Go helps by keeping control flow direct.
+
+15
+00:00:43.039 --> 00:00:45.824
+The standard HTTP library is clear, errors
+are explicit,
+
+16
+00:00:45.904 --> 00:00:47.992
+and handlers can be small enough to
+review.
+
+17
+00:00:48.072 --> 00:00:50.914
+But Go does not automatically decide which
+caller may act,
+
+18
+00:00:50.994 --> 00:00:54.881
+which fields are safe, which requests are
+too large, which logs need redaction,
+
+19
+00:00:54.961 --> 00:00:56.934
+or which defaults belong in production.
+
+20
+00:00:57.014 --> 00:00:59.334
+A secure REST API makes safe behavior
+explicit.
+
+21
+00:00:59.414 --> 00:01:01.560
+Inputs are validated before sensitive use.
+
+22
+00:01:01.640 --> 00:01:05.121
+Authorization happens on the server and
+close to the protected action.
+
+23
+00:01:05.201 --> 00:01:07.057
+Responses return only intended data.
+
+24
+00:01:07.137 --> 00:01:08.471
+Failures are predictable.
+
+25
+00:01:08.551 --> 00:01:12.206
+Logging supports investigation without
+becoming a second exposure path.
+
+26
+00:01:12.286 --> 00:01:14.258
+The practical goal is maintainability.
+
+27
+00:01:14.338 --> 00:01:17.703
+A reviewer should understand what the
+route trusts, what it rejects,
+
+28
+00:01:17.783 --> 00:01:19.581
+what it changes, and what it returns.
+
+29
+00:01:19.661 --> 00:01:23.780
+Security improves when handlers are
+predictable under both normal use and failure.

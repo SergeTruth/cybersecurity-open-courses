@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.966
+Inputs arrive through many paths: HTTP
+requests, RPC calls, messages,
+
+2
+00:00:04.046 --> 00:00:08.264
+files, environment variables, webhooks,
+administrative tools, and scheduled jobs.
+
+3
+00:00:08.344 --> 00:00:12.215
+A secure Go service treats these inputs as
+external until they have been parsed,
+
+4
+00:00:12.295 --> 00:00:15.010
+validated, and normalized into safer
+internal models.
+
+5
+00:00:15.090 --> 00:00:18.267
+Validation should happen before business
+logic depends on data.
+
+6
+00:00:18.347 --> 00:00:21.698
+In Go, this often means decoding into a
+request-specific structure,
+
+7
+00:00:21.778 --> 00:00:24.031
+checking required fields, enforcing
+limits,
+
+8
+00:00:24.111 --> 00:00:28.098
+and then creating an internal command or
+query type that represents the operation
+
+9
+00:00:28.178 --> 00:00:29.853
+the service is willing to perform.
+
+10
+00:00:29.933 --> 00:00:34.035
+The handler should not pass raw, loosely
+understood data deep into the application.
+
+11
+00:00:34.115 --> 00:00:38.043
+Good validation covers structure, type,
+size, allowed values, business rules,
+
+12
+00:00:38.123 --> 00:00:38.759
+and context.
+
+13
+00:00:38.839 --> 00:00:40.572
+A string may be present but too long.
+
+14
+00:00:40.652 --> 00:00:44.292
+A numeric value may be valid as a number
+but invalid for the current account.
+
+15
+00:00:44.372 --> 00:00:47.780
+A field may be allowed for one role but
+ignored or rejected for another.
+
+16
+00:00:47.860 --> 00:00:51.442
+Architecture should provide a consistent
+place to make those decisions.
+
+17
+00:00:51.522 --> 00:00:55.393
+Normalization matters because external
+formats are often shaped for callers,
+
+18
+00:00:55.473 --> 00:00:56.975
+not for internal correctness.
+
+19
+00:00:57.055 --> 00:01:00.868
+The service may need to trim or reject
+ambiguous values, resolve identifiers,
+
+20
+00:01:00.948 --> 00:01:05.050
+apply safe defaults intentionally, or
+convert external names into internal enums.
+
+21
+00:01:05.130 --> 00:01:09.290
+These choices should be visible and
+repeatable, not hidden in scattered helper code.
+
+22
+00:01:09.370 --> 00:01:11.161
+Output design is equally important.
+
+23
+00:01:11.241 --> 00:01:13.725
+Services should return only what the
+caller needs.
+
+24
+00:01:13.805 --> 00:01:16.809
+Internal database models, audit fields,
+operational flags,
+
+25
+00:01:16.889 --> 00:01:20.529
+and sensitive attributes should not
+automatically become API responses.
+
+26
+00:01:20.609 --> 00:01:24.826
+Response structures should be deliberately
+shaped so future developers can see which
+
+27
+00:01:24.906 --> 00:01:26.177
+fields are safe to expose.
+
+28
+00:01:26.257 --> 00:01:30.070
+Consistent validation and serialization
+patterns make the service easier to
+
+29
+00:01:30.150 --> 00:01:30.670
+maintain.
+
+30
+00:01:30.750 --> 00:01:32.194
+When new endpoints are added,
+
+31
+00:01:32.274 --> 00:01:34.990
+engineers should be able to follow an
+established path:
+
+32
+00:01:35.070 --> 00:01:38.132
+accept external input, validate it, map it
+to internal intent,
+
+33
+00:01:38.212 --> 00:01:40.580
+enforce authorization, perform the
+operation,
+
+34
+00:01:40.660 --> 00:01:42.740
+and serialize only the approved response.

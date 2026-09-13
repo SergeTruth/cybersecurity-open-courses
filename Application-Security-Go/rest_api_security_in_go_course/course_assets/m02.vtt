@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.402
+Request validation is the first defensive
+boundary in many Go REST APIs.
+
+2
+00:00:03.482 --> 00:00:05.575
+Structs describe what code expects after
+decoding,
+
+3
+00:00:05.655 --> 00:00:08.700
+but they do not prove that the request is
+complete, meaningful, authorized,
+
+4
+00:00:08.780 --> 00:00:09.684
+or within safe limits.
+
+5
+00:00:09.764 --> 00:00:12.523
+Request bodies, query strings, path
+parameters, headers, cookies,
+
+6
+00:00:12.603 --> 00:00:15.886
+and content types should be treated as
+untrusted until the server validates them.
+
+7
+00:00:15.966 --> 00:00:16.917
+Start before decoding.
+
+8
+00:00:16.997 --> 00:00:19.899
+A handler should confirm the method and
+content type where appropriate,
+
+9
+00:00:19.979 --> 00:00:20.931
+apply a body size limit,
+
+10
+00:00:21.011 --> 00:00:23.532
+and decide how malformed or unsupported
+input will be handled.
+
+11
+00:00:23.612 --> 00:00:25.182
+JSON decoding is a boundary operation.
+
+12
+00:00:25.262 --> 00:00:28.592
+It should not silently turn an
+uncontrolled request into trusted application data
+
+13
+00:00:28.672 --> 00:00:30.575
+simply because the decode call filled a
+struct.
+
+14
+00:00:30.655 --> 00:00:33.224
+Validation should cover the facts the
+business logic relies on.
+
+15
+00:00:33.304 --> 00:00:36.634
+Required fields, unknown fields where
+relevant, string lengths, numeric ranges,
+
+16
+00:00:36.714 --> 00:00:38.950
+enum values, array lengths, timestamps,
+identifiers,
+
+17
+00:00:39.030 --> 00:00:41.028
+and relationships between fields may all
+matter.
+
+18
+00:00:41.108 --> 00:00:43.820
+A value can be syntactically valid JSON
+and still be outside policy,
+
+19
+00:00:43.900 --> 00:00:46.897
+inconsistent with the workflow, or
+inappropriate for the current caller.
+
+20
+00:00:46.977 --> 00:00:50.117
+The boundary layer should convert external
+request data into internal types.
+
+21
+00:00:50.197 --> 00:00:53.289
+Downstream code is simpler when it
+receives a value that already passed size,
+
+22
+00:00:53.369 --> 00:00:55.130
+shape, meaning, and normalization checks.
+
+23
+00:00:55.210 --> 00:00:57.874
+That pattern also keeps validation tests
+focused and reviewable.
+
+24
+00:00:57.954 --> 00:00:59.999
+Rejection behavior should be safe and
+consistent.
+
+25
+00:01:00.079 --> 00:01:03.172
+Malformed JSON, oversized payloads,
+missing fields, unsupported formats,
+
+26
+00:01:03.252 --> 00:01:06.725
+and invalid combinations should produce
+understandable responses without exposing
+
+27
+00:01:06.805 --> 00:01:07.566
+internal details.
+
+28
+00:01:07.646 --> 00:01:09.787
+The point of validation is not only to
+block bad input.
+
+29
+00:01:09.867 --> 00:01:12.341
+It preserves invariants and makes later
+code easier to trust.
+
+30
+00:01:12.421 --> 00:01:14.561
+Validation should also be documented
+through tests.
+
+31
+00:01:14.641 --> 00:01:17.258
+A team should know which inputs are
+accepted, which are rejected,
+
+32
+00:01:17.338 --> 00:01:19.003
+and what response shape clients receive.
+
+33
+00:01:19.083 --> 00:01:22.508
+That turns validation from scattered
+defensive code into a contract that can survive
+
+34
+00:01:22.588 --> 00:01:25.300
+refactoring, framework changes, and client
+updates across teams.

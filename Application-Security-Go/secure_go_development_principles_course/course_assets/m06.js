@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Data Protection, Secrets, and Configuration",
+  "graphicAlt": "Controlled configuration and secrets are checked at startup; verified transport, minimal responses and redacted logs protect data at output boundaries.",
+  "narration": "Go applications often run as services, command-line tools, workers, or internal automation. Each form needs careful handling of secrets and sensitive data. API keys, tokens, database passwords, private keys, signing material, connection strings, and privileged service credentials should not live in source code, sample files, container images, crash output, or client-facing responses.\n\nConfiguration should come from controlled sources such as deployment settings, secret managers, or approved runtime configuration. The application should validate required settings during startup and fail clearly when security-relevant values are missing or invalid. A missing secret, empty allowlist, disabled TLS setting, or unexpected debug mode should not silently become normal production behavior.\n\nLogs and errors need intentional redaction. Operators need enough information to understand failures, but tokens, keys, passwords, private user data, raw request bodies, and sensitive records should not be copied into logs, metrics, tickets, or alert payloads. Structured logging can help by separating event fields and making redaction rules easier to apply.\n\nTransport settings deserve review. TLS configuration, certificate validation, mutual authentication where used, and service-to-service connection settings should be documented and tested. The goal is not to make every developer a cryptography specialist; it is to make secure transport assumptions explicit and reviewable.\n\nSerialization is also a data protection boundary. Response structs, JSON tags, database models, and internal objects should not automatically expose every field they contain. Go makes it easy to define small response types, and that habit supports data minimization. The same discipline applies to metrics and traces: record what helps operations, not everything the process can see.",
+  "narrationPoints": [
+    "Go applications often run as services, command-line tools, workers, or internal automation.",
+    "Configuration should come from controlled sources such as deployment settings, secret managers, or approved runtime configuration.",
+    "Logs and errors need intentional redaction.",
+    "Transport settings deserve review.",
+    "Serialization is also a data protection boundary."
+  ]
+};

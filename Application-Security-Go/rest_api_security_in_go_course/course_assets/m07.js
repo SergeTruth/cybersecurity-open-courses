@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Rate Limits, Timeouts, Context, and Resource Controls",
+  "graphicAlt": "An API applies body, pagination, deadline and rate budgets, a bounded worker queue, cancellation, and explicit resource cleanup.",
+  "narration": "REST API security includes predictable resource behavior. A service must handle requests that are slow, malformed, repeated, expensive, cancelled, or partially failed. Go gives developers useful tools through context, explicit handlers, timeouts, and concurrency primitives, but those tools need deliberate design.\n\nStart by bounding work. Request body limits, header limits where applicable, JSON decoding limits, pagination, file size limits, and careful parsing prevent a single request from consuming more memory, CPU, or time than the feature requires. Limits should match the business purpose of the route, not just a default copied from another service.\n\nTimeouts and context cancellation should travel through the call path. HTTP servers, HTTP clients, database operations, queue calls, and downstream services should have clear deadlines. If a client disconnects or a request times out, related work should stop unless there is a specific reason to continue under a separate owner.\n\nGoroutines need lifecycle ownership. A handler should not start background work that has no cancellation path, no error reporting, or no cleanup. Files, response bodies, database rows, locks, timers, and network connections should be released predictably.\n\nRate limits, bounded queues, backpressure, and safe degradation help the service stay useful under pressure. The goal is not to guess every failure. It is to make resource use intentional, observable, and recoverable so the API behaves safely when conditions are not ideal.\n\nResource controls should be reviewed as part of feature design, not only after production trouble. A route that exports data, imports files, sends notifications, or calls a slow dependency needs different bounds than a simple lookup. Clear limits make those differences visible, testable, and easier to operate during incidents.",
+  "narrationPoints": [
+    "REST API security includes predictable resource behavior.",
+    "Start by bounding work.",
+    "Timeouts and context cancellation should travel through the call path.",
+    "Goroutines need lifecycle ownership.",
+    "Rate limits, bounded queues, backpressure, and safe degradation help the service stay useful under pressure."
+  ]
+};

@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.896
+Parameterized queries are the core
+prevention pattern.
+
+2
+00:00:02.976 --> 00:00:06.071
+The idea is simple: the SQL command
+structure is supplied by trusted code,
+
+3
+00:00:06.151 --> 00:00:09.844
+while runtime values are passed separately
+through placeholders or bound parameters.
+
+4
+00:00:09.924 --> 00:00:13.318
+The driver and database then handle those
+values as data rather than as part of the
+
+5
+00:00:13.398 --> 00:00:14.097
+command syntax.
+
+6
+00:00:14.177 --> 00:00:16.773
+In Go, teams commonly use the standard
+database/sql package,
+
+7
+00:00:16.853 --> 00:00:20.047
+driver-specific packages, prepared
+statements, generated query layers,
+
+8
+00:00:20.127 --> 00:00:21.325
+or higher-level libraries.
+
+9
+00:00:21.405 --> 00:00:24.200
+The exact placeholder convention depends
+on the database driver.
+
+10
+00:00:24.280 --> 00:00:27.774
+Some drivers use one marker style, while
+others use numbered or named conventions.
+
+11
+00:00:27.854 --> 00:00:31.398
+The important habit is to follow the
+driver's documented convention and keep values
+
+12
+00:00:31.478 --> 00:00:34.373
+in the argument list rather than adding
+them directly to the SQL text.
+
+13
+00:00:34.453 --> 00:00:37.698
+Bound parameters are appropriate for
+values such as names, dates, statuses,
+
+14
+00:00:37.778 --> 00:00:41.022
+account identifiers, tenant identifiers
+stored as values, numeric limits,
+
+15
+00:00:41.102 --> 00:00:41.901
+and filter values.
+
+16
+00:00:41.981 --> 00:00:45.475
+Even when an input appears harmless,
+parameterization should remain the default.
+
+17
+00:00:45.555 --> 00:00:48.949
+Harmless-looking values can change over
+time, be reused in a different feature,
+
+18
+00:00:49.029 --> 00:00:52.074
+or come from a path that was not obvious
+during the first implementation.
+
+19
+00:00:52.154 --> 00:00:53.901
+Parameterization also improves review.
+
+20
+00:00:53.981 --> 00:00:57.325
+A query with fixed structure and a clear
+argument list is easier to inspect than a
+
+21
+00:00:57.405 --> 00:00:59.202
+query assembled from many text fragments.
+
+22
+00:00:59.282 --> 00:01:02.027
+Reviewers can focus on whether dynamic
+structure is controlled,
+
+23
+00:01:02.107 --> 00:01:05.252
+whether values are bound, and whether the
+query matches the business rule.
+
+24
+00:01:05.332 --> 00:01:08.177
+Prepared statements can help make repeated
+query shapes explicit,
+
+25
+00:01:08.257 --> 00:01:11.751
+but the security value comes from
+preserving the separation between structure and
+
+26
+00:01:11.831 --> 00:01:12.180
+values.

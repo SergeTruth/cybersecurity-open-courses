@@ -1,0 +1,161 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.115
+REST API security includes predictable
+resource behavior.
+
+2
+00:00:03.195 --> 00:00:06.117
+A service must handle requests that are
+slow, malformed, repeated,
+
+3
+00:00:06.197 --> 00:00:08.145
+expensive, cancelled, or partially failed.
+
+4
+00:00:08.225 --> 00:00:11.763
+Go gives developers useful tools through
+context, explicit handlers, timeouts,
+
+5
+00:00:11.843 --> 00:00:14.868
+and concurrency primitives, but those
+tools need deliberate design.
+
+6
+00:00:14.948 --> 00:00:15.973
+Start by bounding work.
+
+7
+00:00:16.053 --> 00:00:18.411
+Request body limits, header limits where
+applicable,
+
+8
+00:00:18.491 --> 00:00:20.799
+JSON decoding limits, pagination, file
+size limits,
+
+9
+00:00:20.879 --> 00:00:24.262
+and careful parsing prevent a single
+request from consuming more memory, CPU,
+
+10
+00:00:24.342 --> 00:00:25.829
+or time than the feature requires.
+
+11
+00:00:25.909 --> 00:00:28.268
+Limits should match the business purpose
+of the route,
+
+12
+00:00:28.348 --> 00:00:30.398
+not just a default copied from another
+service.
+
+13
+00:00:30.478 --> 00:00:33.606
+Timeouts and context cancellation should
+travel through the call path.
+
+14
+00:00:33.686 --> 00:00:36.454
+HTTP servers, HTTP clients, database
+operations, queue calls,
+
+15
+00:00:36.534 --> 00:00:38.893
+and downstream services should have clear
+deadlines.
+
+16
+00:00:38.973 --> 00:00:40.972
+If a client disconnects or a request times
+out,
+
+17
+00:00:41.052 --> 00:00:44.385
+related work should stop unless there is a
+specific reason to continue under a
+
+18
+00:00:44.465 --> 00:00:45.182
+separate owner.
+
+19
+00:00:45.262 --> 00:00:46.954
+Goroutines need lifecycle ownership.
+
+20
+00:00:47.034 --> 00:00:50.213
+A handler should not start background work
+that has no cancellation path,
+
+21
+00:00:50.293 --> 00:00:51.780
+no error reporting, or no cleanup.
+
+22
+00:00:51.860 --> 00:00:54.269
+Files, response bodies, database rows,
+locks, timers,
+
+23
+00:00:54.349 --> 00:00:56.862
+and network connections should be released
+predictably.
+
+24
+00:00:56.942 --> 00:00:58.890
+Rate limits, bounded queues, backpressure,
+
+25
+00:00:58.970 --> 00:01:01.841
+and safe degradation help the service stay
+useful under pressure.
+
+26
+00:01:01.921 --> 00:01:03.561
+The goal is not to guess every failure.
+
+27
+00:01:03.641 --> 00:01:05.897
+It is to make resource use intentional,
+observable,
+
+28
+00:01:05.977 --> 00:01:09.105
+and recoverable so the API behaves safely
+when conditions are not ideal.
+
+29
+00:01:09.185 --> 00:01:11.953
+Resource controls should be reviewed as
+part of feature design,
+
+30
+00:01:12.033 --> 00:01:13.571
+not only after production trouble.
+
+31
+00:01:13.651 --> 00:01:16.420
+A route that exports data, imports files,
+sends notifications,
+
+32
+00:01:16.500 --> 00:01:19.576
+or calls a slow dependency needs different
+bounds than a simple lookup.
+
+33
+00:01:19.656 --> 00:01:22.117
+Clear limits make those differences
+visible, testable,
+
+34
+00:01:22.197 --> 00:01:23.940
+and easier to operate during incidents.

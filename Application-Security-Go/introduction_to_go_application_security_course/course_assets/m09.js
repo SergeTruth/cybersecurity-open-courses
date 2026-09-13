@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure Go Habits",
+  "graphicAlt": "Secure Go habits combine validation, authorization, bounded work, safe failure, data protection and reviewed delivery around a protected service.",
+  "narration": "Go provides strong foundations, but secure applications require disciplined engineering. Treat runtime data as untrusted until it is validated. Keep HTTP handlers small and reviewable. Convert boundary data into internal types before sensitive use. Enforce authorization on the server and near the action being performed.\n\nUse context, timeouts, cancellation, and cleanup consistently. Handle errors without leaking sensitive internals. Redact logs and protect secrets. Manage files, serialization, databases, and downstream service calls as trust-boundary operations. Shared state, goroutines, and background work should have clear ownership and predictable lifecycle behavior.\n\nGovern dependencies, builds, tests, and releases. Review new packages. Track stale or vulnerable modules. Use CI checks, static analysis, integration tests, and negative tests. Keep production configuration intentional and document release changes. A secure Go application is not only one that compiles cleanly. It is one whose trust decisions, failure modes, and operational behavior are explicit, maintainable, and testable.\n\nAs you apply these ideas, look for places where the code already has a natural review point. A handler can show how a request becomes trusted data. A service function can show the authorization decision. A repository can show how data is stored safely. A worker can show its timeout, cleanup, and shutdown behavior. A release checklist can show how dependencies, configuration, and tests were handled. Secure Go application development is strongest when these controls are ordinary, visible, and repeatable.",
+  "narrationPoints": [
+    "Go provides strong foundations, but secure applications require disciplined engineering.",
+    "Use context, timeouts, cancellation, and cleanup consistently.",
+    "Govern dependencies, builds, tests, and releases.",
+    "As you apply these ideas, look for places where the code already has a natural review point."
+  ]
+};

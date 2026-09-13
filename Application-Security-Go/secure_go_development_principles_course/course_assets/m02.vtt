@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.891
+Go's type system supports defensive design
+when teams use it deliberately.
+
+2
+00:00:03.971 --> 00:00:06.355
+Concrete types can make important meanings
+visible.
+
+3
+00:00:06.435 --> 00:00:08.449
+Typed constants can limit supported
+states.
+
+4
+00:00:08.529 --> 00:00:11.655
+Explicit conversions can force a developer
+to acknowledge a change in
+
+5
+00:00:11.735 --> 00:00:12.529
+representation.
+
+6
+00:00:12.609 --> 00:00:16.424
+Small interfaces can describe the exact
+behavior a caller needs rather than granting
+
+7
+00:00:16.504 --> 00:00:17.988
+broad access to an entire object.
+
+8
+00:00:18.068 --> 00:00:20.982
+Broad interfaces and ambiguous data
+structures deserve review.
+
+9
+00:00:21.062 --> 00:00:24.453
+A value of type interface{} or any may be
+necessary near generic boundaries,
+
+10
+00:00:24.533 --> 00:00:27.606
+but it should not become a way to avoid
+thinking about shape, meaning,
+
+11
+00:00:27.686 --> 00:00:28.375
+and ownership.
+
+12
+00:00:28.455 --> 00:00:31.951
+Type assertions should be checked and
+close to the boundary where uncertainty
+
+13
+00:00:32.031 --> 00:00:32.402
+exists.
+
+14
+00:00:32.482 --> 00:00:36.191
+Once data is validated, the rest of the
+application should work with clearer types.
+
+15
+00:00:36.271 --> 00:00:38.814
+Error returns are also security-relevant
+control flow.
+
+16
+00:00:38.894 --> 00:00:41.861
+An ignored error can turn a failed parse,
+failed permission check,
+
+17
+00:00:41.941 --> 00:00:45.756
+failed write, failed cleanup, or failed
+network operation into misleading success.
+
+18
+00:00:45.836 --> 00:00:47.903
+The secure habit is not to panic on every
+error.
+
+19
+00:00:47.983 --> 00:00:50.738
+It is to decide what each failure means,
+preserve invariants,
+
+20
+00:00:50.818 --> 00:00:54.739
+return safe responses, and log useful
+information without exposing sensitive values.
+
+21
+00:00:54.819 --> 00:00:57.786
+Zero values are one of Go's strengths, but
+they still need context.
+
+22
+00:00:57.866 --> 00:01:00.303
+A zero timeout, empty allowlist, nil map,
+empty token,
+
+23
+00:01:00.383 --> 00:01:03.880
+or missing configuration value may be safe
+in one package and risky in another.
+
+24
+00:01:03.960 --> 00:01:07.245
+Defaults should be documented and tested
+so ordinary use is predictable.
+
+25
+00:01:07.325 --> 00:01:09.285
+Safer defaults reduce maintenance burden.
+
+26
+00:01:09.365 --> 00:01:11.855
+Constructors, option structs, validation
+functions,
+
+27
+00:01:11.935 --> 00:01:14.690
+and package APIs should make secure use
+easier than risky use.
+
+28
+00:01:14.770 --> 00:01:16.678
+The less special knowledge a caller needs,
+
+29
+00:01:16.758 --> 00:01:19.460
+the more reliable the code becomes under
+deadline pressure.

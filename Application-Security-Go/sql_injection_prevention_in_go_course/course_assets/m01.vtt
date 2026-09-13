@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.060
+SQL injection prevention is a practical
+engineering responsibility for any Go
+
+2
+00:00:04.140 --> 00:00:06.160
+service that talks to a relational
+database.
+
+3
+00:00:06.240 --> 00:00:09.641
+The risk appears when data that a caller
+can influence becomes part of the SQL
+
+4
+00:00:09.721 --> 00:00:11.687
+command text that the database interprets.
+
+5
+00:00:11.767 --> 00:00:14.583
+That caller-influenced data may come
+directly from a request,
+
+6
+00:00:14.663 --> 00:00:17.799
+or it may arrive after moving through
+another service, a file, a queue,
+
+7
+00:00:17.879 --> 00:00:18.995
+or an internal workflow.
+
+8
+00:00:19.075 --> 00:00:21.519
+Go helps developers avoid many programming
+mistakes.
+
+9
+00:00:21.599 --> 00:00:24.681
+The language has static types, explicit
+errors, clear control flow,
+
+10
+00:00:24.761 --> 00:00:26.196
+and strong standard libraries.
+
+11
+00:00:26.276 --> 00:00:28.774
+Those strengths do not automatically
+protect SQL text.
+
+12
+00:00:28.854 --> 00:00:32.042
+The database receives a command at
+runtime, interprets its structure,
+
+13
+00:00:32.122 --> 00:00:35.895
+and applies values according to the API
+and driver behavior used by the application.
+
+14
+00:00:35.975 --> 00:00:38.154
+If the program assembles command text
+unsafely,
+
+15
+00:00:38.234 --> 00:00:40.997
+Go's type system cannot make that command
+safe after the fact.
+
+16
+00:00:41.077 --> 00:00:42.937
+The main prevention habit is separation.
+
+17
+00:00:43.017 --> 00:00:45.727
+SQL structure should be chosen by trusted
+application code.
+
+18
+00:00:45.807 --> 00:00:49.421
+Runtime values should travel as parameters
+or bound arguments through APIs that
+
+19
+00:00:49.501 --> 00:00:50.723
+preserve that separation.
+
+20
+00:00:50.803 --> 00:00:54.151
+When reviewers can see that structure and
+values are handled differently,
+
+21
+00:00:54.231 --> 00:00:57.260
+unsafe query construction becomes easier
+to spot and easier to fix.
+
+22
+00:00:57.340 --> 00:01:00.209
+A Go service should treat HTTP inputs,
+JSON bodies, path values,
+
+23
+00:01:00.289 --> 00:01:02.096
+background jobs, imports, admin tools,
+
+24
+00:01:02.176 --> 00:01:05.896
+and service-to-service data as untrusted
+until the relevant boundary has handled
+
+25
+00:01:05.976 --> 00:01:06.560
+them safely.
+
+26
+00:01:06.640 --> 00:01:10.095
+Internal data can still carry risk if it
+originally came from a user or outside
+
+27
+00:01:10.175 --> 00:01:10.547
+system.
+
+28
+00:01:10.627 --> 00:01:11.796
+The goal is not to fear SQL.
+
+29
+00:01:11.876 --> 00:01:15.330
+The goal is to make safe query
+construction the ordinary path that developers
+
+30
+00:01:15.410 --> 00:01:16.260
+naturally follow.

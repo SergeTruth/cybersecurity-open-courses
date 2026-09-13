@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.588
+Go applications often run as services,
+command-line tools, workers,
+
+2
+00:00:03.668 --> 00:00:04.767
+or internal automation.
+
+3
+00:00:04.847 --> 00:00:07.673
+Each form needs careful handling of
+secrets and sensitive data.
+
+4
+00:00:07.753 --> 00:00:10.945
+API keys, tokens, database passwords,
+private keys, signing material,
+
+5
+00:00:11.025 --> 00:00:14.689
+connection strings, and privileged service
+credentials should not live in source
+
+6
+00:00:14.769 --> 00:00:18.432
+code, sample files, container images,
+crash output, or client-facing responses.
+
+7
+00:00:18.512 --> 00:00:22.123
+Configuration should come from controlled
+sources such as deployment settings,
+
+8
+00:00:22.203 --> 00:00:24.611
+secret managers, or approved runtime
+configuration.
+
+9
+00:00:24.691 --> 00:00:28.406
+The application should validate required
+settings during startup and fail clearly
+
+10
+00:00:28.486 --> 00:00:30.946
+when security-relevant values are missing
+or invalid.
+
+11
+00:00:31.026 --> 00:00:33.590
+A missing secret, empty allowlist,
+disabled TLS setting,
+
+12
+00:00:33.670 --> 00:00:37.282
+or unexpected debug mode should not
+silently become normal production behavior.
+
+13
+00:00:37.362 --> 00:00:39.350
+Logs and errors need intentional
+redaction.
+
+14
+00:00:39.430 --> 00:00:42.623
+Operators need enough information to
+understand failures, but tokens,
+
+15
+00:00:42.703 --> 00:00:45.215
+keys, passwords, private user data, raw
+request bodies,
+
+16
+00:00:45.295 --> 00:00:48.487
+and sensitive records should not be copied
+into logs, metrics, tickets,
+
+17
+00:00:48.567 --> 00:00:49.404
+or alert payloads.
+
+18
+00:00:49.484 --> 00:00:53.148
+Structured logging can help by separating
+event fields and making redaction rules
+
+19
+00:00:53.228 --> 00:00:53.961
+easier to apply.
+
+20
+00:00:54.041 --> 00:00:55.663
+Transport settings deserve review.
+
+21
+00:00:55.743 --> 00:00:59.354
+TLS configuration, certificate validation,
+mutual authentication where used,
+
+22
+00:00:59.434 --> 00:01:02.940
+and service-to-service connection settings
+should be documented and tested.
+
+23
+00:01:03.020 --> 00:01:05.951
+The goal is not to make every developer a
+cryptography specialist;
+
+24
+00:01:06.031 --> 00:01:09.067
+it is to make secure transport assumptions
+explicit and reviewable.
+
+25
+00:01:09.147 --> 00:01:11.397
+Serialization is also a data protection
+boundary.
+
+26
+00:01:11.477 --> 00:01:13.570
+Response structs, JSON tags, database
+models,
+
+27
+00:01:13.650 --> 00:01:17.209
+and internal objects should not
+automatically expose every field they contain.
+
+28
+00:01:17.289 --> 00:01:19.382
+Go makes it easy to define small response
+types,
+
+29
+00:01:19.462 --> 00:01:21.399
+and that habit supports data minimization.
+
+30
+00:01:21.479 --> 00:01:25.090
+The same discipline applies to metrics and
+traces: record what helps operations,
+
+31
+00:01:25.170 --> 00:01:26.740
+not everything the process can see.

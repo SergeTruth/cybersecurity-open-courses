@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.405
+SQL injection risk usually enters a Go
+application through a design shortcut:
+
+2
+00:00:04.485 --> 00:00:07.917
+query text is assembled from data whose
+origin is external, unclear,
+
+3
+00:00:07.997 --> 00:00:09.416
+or only loosely controlled.
+
+4
+00:00:09.496 --> 00:00:12.869
+A developer may be trying to add a filter,
+a search feature, a report,
+
+5
+00:00:12.949 --> 00:00:15.375
+a sort order, or an administrative tool
+quickly.
+
+6
+00:00:15.455 --> 00:00:19.123
+If the query-building code treats
+caller-influenced text as SQL syntax,
+
+7
+00:00:19.203 --> 00:00:21.925
+the database boundary becomes harder to
+reason about.
+
+8
+00:00:22.005 --> 00:00:24.904
+The source of the data can be broader than
+a public web form.
+
+9
+00:00:24.984 --> 00:00:28.415
+Values may arrive through REST APIs,
+internal APIs, message queues,
+
+10
+00:00:28.495 --> 00:00:32.459
+uploaded files, scheduled imports,
+command-line tools, support dashboards,
+
+11
+00:00:32.539 --> 00:00:34.906
+analytics features, or another
+microservice.
+
+12
+00:00:34.986 --> 00:00:38.891
+A value may also be read from a database
+table that was populated earlier by user
+
+13
+00:00:38.971 --> 00:00:39.503
+activity.
+
+14
+00:00:39.583 --> 00:00:41.240
+Once data is stored or forwarded,
+
+15
+00:00:41.320 --> 00:00:44.160
+it can look internal even when its origin
+was not trusted.
+
+16
+00:00:44.240 --> 00:00:46.843
+Risk is also not limited to authentication
+screens.
+
+17
+00:00:46.923 --> 00:00:50.532
+Filters, search boxes, date ranges, sort
+fields, pagination controls,
+
+18
+00:00:50.612 --> 00:00:53.275
+report builders, bulk upload mapping,
+export tools,
+
+19
+00:00:53.355 --> 00:00:56.491
+and optional query features all influence
+database behavior.
+
+20
+00:00:56.571 --> 00:01:00.298
+Some of these features feel operational
+rather than security-sensitive,
+
+21
+00:01:00.378 --> 00:01:02.626
+which is why they deserve deliberate
+review.
+
+22
+00:01:02.706 --> 00:01:06.730
+A defensive architecture traces where data
+comes from before deciding how it may
+
+23
+00:01:06.810 --> 00:01:07.756
+influence a query.
+
+24
+00:01:07.836 --> 00:01:11.800
+Teams should identify the places where
+request data becomes an internal model,
+
+25
+00:01:11.880 --> 00:01:14.188
+where internal models become database
+calls,
+
+26
+00:01:14.268 --> 00:01:16.634
+and where dynamic query structure is
+selected.
+
+27
+00:01:16.714 --> 00:01:18.608
+That map does not need to be elaborate.
+
+28
+00:01:18.688 --> 00:01:22.948
+It needs to make the database boundary
+visible enough that safe construction becomes
+
+29
+00:01:23.028 --> 00:01:24.980
+consistent across everyday features.

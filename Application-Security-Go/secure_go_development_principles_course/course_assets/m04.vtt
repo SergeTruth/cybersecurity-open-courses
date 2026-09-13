@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.027
+Go improves memory safety compared with
+languages that require manual memory
+
+2
+00:00:04.107 --> 00:00:07.100
+management, but secure programs still need
+resource discipline.
+
+3
+00:00:07.180 --> 00:00:10.814
+A service can be correct from a
+memory-safety point of view and still fail because
+
+4
+00:00:10.894 --> 00:00:13.993
+it allocates too much, reads too much,
+opens too much, waits too long,
+
+5
+00:00:14.073 --> 00:00:16.051
+or forgets to release something important.
+
+6
+00:00:16.131 --> 00:00:20.032
+Slices, maps, buffers, and decoded objects
+should have practical size expectations.
+
+7
+00:00:20.112 --> 00:00:21.608
+Reading an entire request, file,
+
+8
+00:00:21.688 --> 00:00:25.215
+or stream into memory may be fine for a
+small administrative tool and risky for a
+
+9
+00:00:25.295 --> 00:00:26.043
+public service.
+
+10
+00:00:26.123 --> 00:00:29.009
+Bounded readers, request size limits,
+pagination, streaming,
+
+11
+00:00:29.089 --> 00:00:32.082
+and careful allocation patterns help keep
+behavior predictable.
+
+12
+00:00:32.162 --> 00:00:34.406
+Resource lifecycles deserve the same
+attention.
+
+13
+00:00:34.486 --> 00:00:38.013
+Files, network connections, response
+bodies, database rows, locks, timers,
+
+14
+00:00:38.093 --> 00:00:40.658
+and goroutines should have clear ownership
+and cleanup.
+
+15
+00:00:40.738 --> 00:00:43.410
+defer is useful because it keeps cleanup
+near acquisition,
+
+16
+00:00:43.490 --> 00:00:45.628
+but it should be used with lifecycle
+awareness.
+
+17
+00:00:45.708 --> 00:00:49.075
+A defer inside a long-running loop may
+delay cleanup longer than intended.
+
+18
+00:00:49.155 --> 00:00:51.132
+Timeouts and limits protect availability.
+
+19
+00:00:51.212 --> 00:00:53.884
+HTTP clients, servers, database calls,
+queue operations,
+
+20
+00:00:53.964 --> 00:00:56.636
+and background workers should not wait
+forever by default.
+
+21
+00:00:56.716 --> 00:01:00.190
+When failure occurs, code should return to
+a known state, release resources,
+
+22
+00:01:00.270 --> 00:01:02.942
+and provide enough operational signal for
+investigation.
+
+23
+00:01:03.022 --> 00:01:04.144
+The unsafe package, cgo,
+
+24
+00:01:04.224 --> 00:01:07.110
+and low-level runtime assumptions should
+be rare and reviewed.
+
+25
+00:01:07.190 --> 00:01:09.595
+There may be legitimate reasons in
+specialized code,
+
+26
+00:01:09.675 --> 00:01:13.309
+but ordinary application security is
+stronger when teams stay within Go's safer
+
+27
+00:01:13.389 --> 00:01:15.633
+runtime model and make resource limits
+explicit.
+
+28
+00:01:15.713 --> 00:01:19.454
+Resource decisions should also appear in
+tests and runbooks so operators know what
+
+29
+00:01:19.534 --> 00:01:22.580
+normal pressure looks like and what limits
+are expected to protect.

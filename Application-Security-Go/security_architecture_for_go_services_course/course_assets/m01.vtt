@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.936
+Security architecture for Go services is
+the set of engineering decisions that
+
+2
+00:00:04.016 --> 00:00:07.606
+shapes how a service protects data,
+actions, dependencies, and runtime behavior.
+
+3
+00:00:07.686 --> 00:00:09.635
+It is not only a diagram or a review
+checklist.
+
+4
+00:00:09.715 --> 00:00:12.484
+It is the way a team decides where trust
+begins, where trust ends,
+
+5
+00:00:12.564 --> 00:00:13.846
+which controls are required,
+
+6
+00:00:13.926 --> 00:00:16.952
+and how those controls remain
+understandable as the service changes.
+
+7
+00:00:17.032 --> 00:00:18.878
+Go gives service teams useful advantages.
+
+8
+00:00:18.958 --> 00:00:22.087
+The language is small, the standard
+library has strong server patterns,
+
+9
+00:00:22.167 --> 00:00:23.962
+binaries are straightforward to deploy,
+
+10
+00:00:24.042 --> 00:00:27.221
+and concurrency can be expressed clearly
+when the design is disciplined.
+
+11
+00:00:27.301 --> 00:00:30.635
+Those strengths help, but they do not
+automatically create secure outcomes.
+
+12
+00:00:30.715 --> 00:00:33.946
+A Go service still needs deliberate
+choices around identity, validation,
+
+13
+00:00:34.026 --> 00:00:37.308
+data exposure, dependency management,
+failure behavior, and operations.
+
+14
+00:00:37.388 --> 00:00:39.439
+A secure service should have clear
+boundaries.
+
+15
+00:00:39.519 --> 00:00:42.801
+Engineers should be able to identify who
+can call it, what inputs it accepts,
+
+16
+00:00:42.881 --> 00:00:45.241
+what outputs it returns, what dependencies
+it trusts,
+
+17
+00:00:45.321 --> 00:00:47.526
+and what assumptions must hold for each
+operation.
+
+18
+00:00:47.606 --> 00:00:49.401
+Inputs and outputs should be controlled,
+
+19
+00:00:49.481 --> 00:00:51.737
+sensitive data should have visible
+handling rules,
+
+20
+00:00:51.817 --> 00:00:55.305
+and security-relevant behavior should be
+observable in logs, metrics, traces,
+
+21
+00:00:55.385 --> 00:00:56.154
+and audit events.
+
+22
+00:00:56.234 --> 00:00:58.901
+Architecture also prevents fragile
+security by convention.
+
+23
+00:00:58.981 --> 00:01:01.135
+If authorization checks are scattered
+randomly,
+
+24
+00:01:01.215 --> 00:01:03.163
+if validation happens only in some
+handlers,
+
+25
+00:01:03.243 --> 00:01:05.500
+or if secret handling depends on
+individual memory,
+
+26
+00:01:05.580 --> 00:01:07.529
+the service becomes hard to maintain
+safely.
+
+27
+00:01:07.609 --> 00:01:10.173
+Architecture should make secure behavior
+the normal path,
+
+28
+00:01:10.253 --> 00:01:13.022
+not a heroic effort by the most
+experienced engineer on the team.
+
+29
+00:01:13.102 --> 00:01:16.282
+The goal is a Go service that is
+understandable, maintainable, testable,
+
+30
+00:01:16.362 --> 00:01:18.516
+and safe to operate under real-world
+conditions.
+
+31
+00:01:18.596 --> 00:01:21.878
+Good architecture supports feature work,
+incident response, code review,
+
+32
+00:01:21.958 --> 00:01:23.753
+onboarding, and production operations.
+
+33
+00:01:23.833 --> 00:01:27.269
+It makes important assumptions explicit so
+teams can reason about risk before a
+
+34
+00:01:27.349 --> 00:01:28.580
+failure, not only after one.
