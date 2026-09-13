@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.977
+Rust applications often wrap resources
+that are not just ordinary memory:
+
+2
+00:00:04.057 --> 00:00:07.037
+file descriptors, sockets, database
+handles, device handles,
+
+3
+00:00:07.117 --> 00:00:09.711
+temporary directories, native handles,
+lock objects,
+
+4
+00:00:09.791 --> 00:00:11.391
+or externally allocated buffers.
+
+5
+00:00:11.471 --> 00:00:14.783
+A safe abstraction should make ownership
+and cleanup authority clear.
+
+6
+00:00:14.863 --> 00:00:16.850
+Private fields are a powerful design tool.
+
+7
+00:00:16.930 --> 00:00:20.020
+If callers cannot manufacture duplicate
+owners from raw handles,
+
+8
+00:00:20.100 --> 00:00:22.694
+they are less likely to create duplicate
+cleanup paths.
+
+9
+00:00:22.774 --> 00:00:26.141
+Constructors can validate that a handle is
+valid, establish ownership,
+
+10
+00:00:26.221 --> 00:00:29.587
+and return a wrapper that controls how the
+resource is used and released.
+
+11
+00:00:29.667 --> 00:00:33.365
+Methods should expose controlled
+operations rather than exposing raw cleanup
+
+12
+00:00:33.445 --> 00:00:34.052
+mechanisms.
+
+13
+00:00:34.132 --> 00:00:37.167
+A resource wrapper can provide read,
+write, query, close, flush,
+
+14
+00:00:37.247 --> 00:00:41.000
+or shutdown behavior while keeping the
+actual release contract inside the type.
+
+15
+00:00:41.080 --> 00:00:44.668
+`Drop` can then release the resource once
+when the wrapper's ownership ends.
+
+16
+00:00:44.748 --> 00:00:47.617
+Some external resources provide idempotent
+close behavior,
+
+17
+00:00:47.697 --> 00:00:49.684
+where repeated close calls are tolerated.
+
+18
+00:00:49.764 --> 00:00:50.647
+That can be useful,
+
+19
+00:00:50.727 --> 00:00:53.818
+but idempotence should not be a substitute
+for ownership clarity.
+
+20
+00:00:53.898 --> 00:00:56.602
+If code depends on repeated cleanup calls
+being harmless,
+
+21
+00:00:56.682 --> 00:01:00.490
+the lifecycle design is harder to review
+and may fail when the underlying resource
+
+22
+00:01:00.570 --> 00:01:01.012
+changes.
+
+23
+00:01:01.092 --> 00:01:04.844
+A good resource abstraction states who
+owns the resource, when cleanup happens,
+
+24
+00:01:04.924 --> 00:01:07.463
+what happens on error, whether early close
+is allowed,
+
+25
+00:01:07.543 --> 00:01:10.082
+and what methods remain valid after close
+or shutdown.
+
+26
+00:01:10.162 --> 00:01:13.915
+The safe API should make duplicate cleanup
+difficult even when callers are under
+
+27
+00:01:13.995 --> 00:01:15.540
+pressure during error handling.

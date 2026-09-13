@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.217
+Single ownership is Rust's default,
+
+2
+00:00:02.297 --> 00:00:04.677
+but real systems sometimes need shared
+ownership.
+
+3
+00:00:04.757 --> 00:00:06.419
+`Box` provides owned indirection.
+
+4
+00:00:06.499 --> 00:00:09.212
+`Rc` supports shared ownership in
+single-threaded code.
+
+5
+00:00:09.292 --> 00:00:11.617
+`Arc` supports shared ownership across
+threads.
+
+6
+00:00:11.697 --> 00:00:14.798
+These tools solve real design problems
+when chosen deliberately.
+
+7
+00:00:14.878 --> 00:00:16.871
+Shared ownership changes cleanup timing.
+
+8
+00:00:16.951 --> 00:00:20.717
+A value behind `Rc` or `Arc` is dropped
+only when the final strong owner goes away.
+
+9
+00:00:20.797 --> 00:00:24.728
+That prevents ordinary use-after-free in
+safe Rust because the value remains alive
+
+10
+00:00:24.808 --> 00:00:26.082
+while strong owners exist,
+
+11
+00:00:26.162 --> 00:00:29.705
+but it also means lifecycle and cleanup
+timing may be less obvious than with a
+
+12
+00:00:29.785 --> 00:00:30.450
+single owner.
+
+13
+00:00:30.530 --> 00:00:33.741
+`Weak` references model non-owning
+relationships that may expire.
+
+14
+00:00:33.821 --> 00:00:36.424
+A weak reference does not keep the value
+alive by itself.
+
+15
+00:00:36.504 --> 00:00:39.715
+Code must check whether the value is still
+available before using it.
+
+16
+00:00:39.795 --> 00:00:43.616
+This is useful for parent-child
+relationships, caches, observer lists, graphs,
+
+17
+00:00:43.696 --> 00:00:47.849
+and lifecycle-sensitive designs where not
+every relationship should extend lifetime.
+
+18
+00:00:47.929 --> 00:00:51.528
+Reference cycles are usually leaks rather
+than use-after-free in safe Rust,
+
+19
+00:00:51.608 --> 00:00:53.435
+but they are still lifecycle problems.
+
+20
+00:00:53.515 --> 00:00:57.170
+If strong references keep each other alive
+forever, cleanup may never happen.
+
+21
+00:00:57.250 --> 00:01:00.572
+That can matter for memory, file handles,
+network connections, locks,
+
+22
+00:01:00.652 --> 00:01:01.981
+and long-running services.
+
+23
+00:01:02.061 --> 00:01:05.494
+Interior mutability and shared ownership
+should be reviewed carefully.
+
+24
+00:01:05.574 --> 00:01:06.737
+They can be appropriate,
+
+25
+00:01:06.817 --> 00:01:10.083
+but they move some reasoning into runtime
+checks or synchronization.
+
+26
+00:01:10.163 --> 00:01:13.153
+The design should explain who owns the
+value, who can observe it,
+
+27
+00:01:13.233 --> 00:01:15.061
+who can mutate it, how cleanup happens,
+
+28
+00:01:15.141 --> 00:01:18.020
+and what happens when a weak relationship
+no longer upgrades.

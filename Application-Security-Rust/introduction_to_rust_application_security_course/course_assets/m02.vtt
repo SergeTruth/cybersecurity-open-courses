@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.965
+Ownership and borrowing help Rust enforce
+clear rules about memory access,
+
+2
+00:00:04.045 --> 00:00:05.182
+mutation, and lifetime.
+
+3
+00:00:05.262 --> 00:00:08.564
+In safe Rust, the compiler prevents many
+mistakes that can lead to memory
+
+4
+00:00:08.644 --> 00:00:09.239
+corruption.
+
+5
+00:00:09.319 --> 00:00:11.809
+It checks that values are not used after
+they are moved,
+
+6
+00:00:11.889 --> 00:00:14.326
+that references do not outlive the data
+they point to,
+
+7
+00:00:14.406 --> 00:00:16.679
+and that mutation follows clear borrowing
+rules.
+
+8
+00:00:16.759 --> 00:00:20.386
+These guarantees are a major reason Rust
+is attractive for security-sensitive
+
+9
+00:00:20.466 --> 00:00:20.954
+software.
+
+10
+00:00:21.034 --> 00:00:23.632
+Teams still need to understand where the
+guarantees end.
+
+11
+00:00:23.712 --> 00:00:27.610
+The unsafe keyword allows certain
+operations that the compiler cannot fully verify.
+
+12
+00:00:27.690 --> 00:00:29.530
+Unsafe code is not automatically wrong,
+
+13
+00:00:29.610 --> 00:00:31.992
+and some low-level libraries legitimately
+need it.
+
+14
+00:00:32.072 --> 00:00:34.292
+But unsafe code changes the review
+expectation.
+
+15
+00:00:34.372 --> 00:00:38.107
+It asks the human reviewer to confirm
+invariants that the compiler cannot prove on
+
+16
+00:00:38.187 --> 00:00:38.566
+its own.
+
+17
+00:00:38.646 --> 00:00:41.678
+A healthy Rust security practice keeps
+unsafe surface area small,
+
+18
+00:00:41.758 --> 00:00:43.544
+isolated, justified, and documented.
+
+19
+00:00:43.624 --> 00:00:47.035
+The code should explain what assumptions
+must hold, who owns the boundary,
+
+20
+00:00:47.115 --> 00:00:48.685
+how callers are expected to use it,
+
+21
+00:00:48.765 --> 00:00:51.201
+and what tests or reviews support those
+assumptions.
+
+22
+00:00:51.281 --> 00:00:54.745
+Reviewers should be able to tell why
+unsafe is needed and why the safe wrapper
+
+23
+00:00:54.825 --> 00:00:56.016
+around it is trustworthy.
+
+24
+00:00:56.096 --> 00:00:59.182
+Foreign function interfaces, raw pointers,
+global mutable state,
+
+25
+00:00:59.262 --> 00:01:01.536
+low-level performance code, custom
+allocators,
+
+26
+00:01:01.616 --> 00:01:04.539
+and platform integrations should be
+treated as boundary areas.
+
+27
+00:01:04.619 --> 00:01:07.921
+Those areas may depend on contracts
+outside Rust's normal safety model.
+
+28
+00:01:08.001 --> 00:01:10.979
+Secure teams make those contracts visible,
+test them carefully,
+
+29
+00:01:11.059 --> 00:01:14.740
+and avoid letting unsafe assumptions
+spread casually through the application.

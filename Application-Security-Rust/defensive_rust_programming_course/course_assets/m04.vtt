@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.601
+Rust encourages explicit error handling
+through Result and Option,
+
+2
+00:00:03.681 --> 00:00:06.890
+but defensive programming depends on using
+those types thoughtfully.
+
+3
+00:00:06.970 --> 00:00:10.017
+The presence of a Result is not a
+guarantee of good failure behavior.
+
+4
+00:00:10.097 --> 00:00:13.306
+The code still needs to decide what the
+failure means, who should see it,
+
+5
+00:00:13.386 --> 00:00:16.541
+whether it is recoverable, and how it
+affects the rest of the workflow.
+
+6
+00:00:16.621 --> 00:00:19.294
+Careless unwrap or expect can turn a
+predictable bad input,
+
+7
+00:00:19.374 --> 00:00:21.994
+missing file, unavailable service,
+malformed response,
+
+8
+00:00:22.074 --> 00:00:23.464
+or optional value into a crash.
+
+9
+00:00:23.544 --> 00:00:26.913
+That may be acceptable in tests or in
+narrowly defined startup validation,
+
+10
+00:00:26.993 --> 00:00:30.469
+but production request handlers,
+background jobs, long-running services,
+
+11
+00:00:30.549 --> 00:00:33.222
+and command-line tools need deliberate
+failure behavior.
+
+12
+00:00:33.302 --> 00:00:36.083
+A predictable problem should not become a
+surprising outage.
+
+13
+00:00:36.163 --> 00:00:37.874
+Panics should have clear boundaries.
+
+14
+00:00:37.954 --> 00:00:40.253
+If a panic is used to protect an internal
+invariant,
+
+15
+00:00:40.333 --> 00:00:42.472
+the invariant should be documented and
+tested.
+
+16
+00:00:42.552 --> 00:00:46.135
+If a process should fail fast during
+startup because required configuration is
+
+17
+00:00:46.215 --> 00:00:48.353
+missing, that behavior should be
+intentional.
+
+18
+00:00:48.433 --> 00:00:50.305
+If a service handles untrusted requests,
+
+19
+00:00:50.385 --> 00:00:53.272
+panics should not be the normal path for
+ordinary invalid input.
+
+20
+00:00:53.352 --> 00:00:56.935
+Error messages should be useful without
+exposing secrets, internal topology,
+
+21
+00:00:57.015 --> 00:00:59.635
+tokens, sensitive configuration, private
+identifiers,
+
+22
+00:00:59.715 --> 00:01:01.426
+or excessive implementation detail.
+
+23
+00:01:01.506 --> 00:01:03.592
+User-facing errors, internal logs,
+metrics,
+
+24
+00:01:03.672 --> 00:01:05.596
+and alerts each have different audiences.
+
+25
+00:01:05.676 --> 00:01:09.419
+Defensive code chooses what to reveal at
+each layer rather than dumping raw context
+
+26
+00:01:09.499 --> 00:01:10.088
+everywhere.
+
+27
+00:01:10.168 --> 00:01:11.932
+Fail-safe behavior requires choices.
+
+28
+00:01:12.012 --> 00:01:14.044
+Some failures should be retried with
+limits.
+
+29
+00:01:14.124 --> 00:01:15.247
+Some should be rejected.
+
+30
+00:01:15.327 --> 00:01:16.450
+Some should fail closed.
+
+31
+00:01:16.530 --> 00:01:17.974
+Some should terminate startup.
+
+32
+00:01:18.054 --> 00:01:19.818
+Some should be escalated to operators.
+
+33
+00:01:19.898 --> 00:01:22.518
+Defensive Rust makes those decisions
+visible, testable,
+
+34
+00:01:22.598 --> 00:01:25.860
+and aligned with the security and
+reliability needs of the application.

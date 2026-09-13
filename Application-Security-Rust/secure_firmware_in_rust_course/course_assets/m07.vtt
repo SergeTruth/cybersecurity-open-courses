@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.825
+Firmware may contain or access device
+identities, keys, credentials,
+
+2
+00:00:03.905 --> 00:00:06.510
+certificates, pairing material,
+manufacturing data,
+
+3
+00:00:06.590 --> 00:00:09.637
+calibration values, configuration secrets,
+or service tokens.
+
+4
+00:00:09.717 --> 00:00:12.876
+These values often determine whether a
+device can identify itself,
+
+5
+00:00:12.956 --> 00:00:16.226
+join a service, receive updates, or access
+protected functionality.
+
+6
+00:00:16.306 --> 00:00:19.298
+Rust ownership helps make sensitive data
+flow easier to review.
+
+7
+00:00:19.378 --> 00:00:22.537
+A type can show where a value is
+introduced, which component owns it,
+
+8
+00:00:22.617 --> 00:00:23.559
+and how it is passed.
+
+9
+00:00:23.639 --> 00:00:26.521
+But ownership alone does not protect
+storage, erase secrets,
+
+10
+00:00:26.601 --> 00:00:29.648
+prevent diagnostic leakage, or define
+replacement procedures.
+
+11
+00:00:29.728 --> 00:00:31.834
+Those are product design responsibilities.
+
+12
+00:00:31.914 --> 00:00:34.519
+Provisioning and secure storage need
+explicit design.
+
+13
+00:00:34.599 --> 00:00:36.926
+Teams should know where secrets enter the
+device,
+
+14
+00:00:37.006 --> 00:00:39.278
+whether hardware-backed storage is
+available,
+
+15
+00:00:39.358 --> 00:00:42.129
+which firmware components can access
+sensitive material,
+
+16
+00:00:42.209 --> 00:00:44.426
+how manufacturing and service tools handle
+it,
+
+17
+00:00:44.506 --> 00:00:47.277
+and what happens if a device needs
+credential replacement.
+
+18
+00:00:47.357 --> 00:00:49.906
+Debug output, logs, crash reports,
+diagnostic dumps,
+
+19
+00:00:49.986 --> 00:00:52.535
+and field-support tools are possible
+exposure paths.
+
+20
+00:00:52.615 --> 00:00:56.439
+They should avoid keys, tokens, private
+configuration, sensitive identifiers,
+
+21
+00:00:56.519 --> 00:00:59.733
+raw buffers that may contain secrets, and
+excessive internal state.
+
+22
+00:00:59.813 --> 00:01:03.747
+Redaction should be designed before
+release, not bolted on after a review surprise.
+
+23
+00:01:03.827 --> 00:01:07.817
+Production firmware should avoid
+hard-coded production secrets and should plan for
+
+24
+00:01:07.897 --> 00:01:11.333
+rotation, replacement, revocation, and
+retirement where appropriate.
+
+25
+00:01:11.413 --> 00:01:13.574
+Device identity is not only a variable in
+code;
+
+26
+00:01:13.654 --> 00:01:16.536
+it is part of an operational lifecycle
+shared by engineering,
+
+27
+00:01:16.616 --> 00:01:18.500
+manufacturing, support, and security.

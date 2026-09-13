@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.459
+Defensive Rust code treats secrets and
+configuration as operational security
+
+2
+00:00:04.539 --> 00:00:05.070
+concerns.
+
+3
+00:00:05.150 --> 00:00:08.695
+Applications may use API tokens, database
+credentials, private keys,
+
+4
+00:00:08.775 --> 00:00:12.261
+certificates, session secrets, signing
+keys, service credentials,
+
+5
+00:00:12.341 --> 00:00:13.759
+or sensitive feature flags.
+
+6
+00:00:13.839 --> 00:00:17.207
+These values should not be hard-coded,
+checked into repositories,
+
+7
+00:00:17.287 --> 00:00:20.005
+printed during debugging, or written into
+broad logs.
+
+8
+00:00:20.085 --> 00:00:23.866
+Configuration should be explicit,
+validated, and environment-specific.
+
+9
+00:00:23.946 --> 00:00:26.841
+Startup validation can catch missing
+required settings,
+
+10
+00:00:26.921 --> 00:00:30.112
+inconsistent options, invalid endpoints,
+unsupported modes,
+
+11
+00:00:30.192 --> 00:00:33.559
+and risky defaults before the application
+begins serving traffic.
+
+12
+00:00:33.639 --> 00:00:37.953
+Configuration errors should be clear
+without exposing the secret values themselves.
+
+13
+00:00:38.033 --> 00:00:42.346
+Secrets should come from approved runtime
+mechanisms such as platform secret stores,
+
+14
+00:00:42.426 --> 00:00:46.798
+runtime injection, managed identity
+patterns, or protected files where appropriate.
+
+15
+00:00:46.878 --> 00:00:49.891
+The exact mechanism depends on the
+deployment environment,
+
+16
+00:00:49.971 --> 00:00:52.689
+but the principle stays the same: keep
+secrets scoped,
+
+17
+00:00:52.769 --> 00:00:56.727
+limit where they are copied, and avoid
+turning generated files, crash reports,
+
+18
+00:00:56.807 --> 00:00:58.934
+logs, or artifacts into new secret stores.
+
+19
+00:00:59.014 --> 00:01:02.914
+Logs should be structured enough to
+support operations but redacted enough to
+
+20
+00:01:02.994 --> 00:01:04.235
+protect sensitive data.
+
+21
+00:01:04.315 --> 00:01:07.269
+Useful logs identify events, status,
+request categories,
+
+22
+00:01:07.349 --> 00:01:10.835
+validation failures, dependency issues,
+and operational outcomes.
+
+23
+00:01:10.915 --> 00:01:14.814
+They should avoid secrets, tokens,
+personal data, sensitive configuration,
+
+24
+00:01:14.894 --> 00:01:17.317
+internal topology, and excessive raw
+payloads.
+
+25
+00:01:17.397 --> 00:01:20.764
+Teams should understand where sensitive
+values enter the process,
+
+26
+00:01:20.844 --> 00:01:24.685
+where they are cloned or serialized, how
+they are passed between components,
+
+27
+00:01:24.765 --> 00:01:26.596
+and how they are rotated or replaced.
+
+28
+00:01:26.676 --> 00:01:30.221
+Defensive Rust does not rely on good
+intentions at every log statement.
+
+29
+00:01:30.301 --> 00:01:34.260
+It uses interfaces, redaction, and review
+to make sensitive data flow visible.

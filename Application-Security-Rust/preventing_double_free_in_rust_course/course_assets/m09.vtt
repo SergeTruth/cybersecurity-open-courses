@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.504
+Preventing double free in Rust is a
+layered engineering practice.
+
+2
+00:00:03.584 --> 00:00:05.300
+Prefer safe ownership and borrowing.
+
+3
+00:00:05.380 --> 00:00:07.204
+Make cleanup responsibility explicit.
+
+4
+00:00:07.284 --> 00:00:11.039
+Use moves and ownership transfer so old
+bindings cannot continue acting as owners.
+
+5
+00:00:11.119 --> 00:00:14.284
+Remember that borrowed references access
+data but do not own cleanup.
+
+6
+00:00:14.364 --> 00:00:15.544
+Use `Drop` deliberately.
+
+7
+00:00:15.624 --> 00:00:17.716
+Resource cleanup should be tied to
+ownership,
+
+8
+00:00:17.796 --> 00:00:19.835
+not scattered through unrelated code
+paths.
+
+9
+00:00:19.915 --> 00:00:23.723
+Custom `Drop` implementations deserve
+careful review because they define release
+
+10
+00:00:23.803 --> 00:00:24.286
+behavior.
+
+11
+00:00:24.366 --> 00:00:26.887
+Keep cleanup paths simple, predictable,
+and testable.
+
+12
+00:00:26.967 --> 00:00:28.737
+Choose smart pointers intentionally.
+
+13
+00:00:28.817 --> 00:00:30.266
+`Box` gives owned indirection.
+
+14
+00:00:30.346 --> 00:00:34.154
+`Rc` and `Arc` coordinate shared ownership
+so cleanup happens when the final strong
+
+15
+00:00:34.234 --> 00:00:34.985
+owner goes away.
+
+16
+00:00:35.065 --> 00:00:37.854
+`Weak` expresses non-owning relationships
+that can expire.
+
+17
+00:00:37.934 --> 00:00:40.026
+Shared ownership is not duplicate
+ownership.
+
+18
+00:00:40.106 --> 00:00:42.145
+Wrap external resources in safe owner
+types.
+
+19
+00:00:42.225 --> 00:00:45.926
+Use private fields, controlled
+constructors, and documented cleanup behavior.
+
+20
+00:00:46.006 --> 00:00:48.688
+Keep unsafe and FFI boundaries small,
+documented, tested,
+
+21
+00:00:48.768 --> 00:00:51.987
+and wrapped in APIs that prevent duplicate
+owners for one raw resource.
+
+22
+00:00:52.067 --> 00:00:55.714
+Finally, test lifecycle edges and maintain
+cleanup contracts as dependencies,
+
+23
+00:00:55.794 --> 00:00:57.082
+APIs, and platforms change.
+
+24
+00:00:57.162 --> 00:01:00.648
+Review custom `Drop`, unsafe code, raw
+pointers, allocator compatibility,
+
+25
+00:01:00.728 --> 00:01:04.269
+external cleanup functions, callbacks,
+retained pointers, and error paths.
+
+26
+00:01:04.349 --> 00:01:07.460
+The goal is one clear cleanup authority
+from design through release.

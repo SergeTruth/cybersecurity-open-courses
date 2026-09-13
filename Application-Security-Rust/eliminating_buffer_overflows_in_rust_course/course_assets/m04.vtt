@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.047
+Rust separates text from bytes in a way
+that supports defensive programming.
+
+2
+00:00:04.127 --> 00:00:05.656
+A `String` owns valid UTF-8 text.
+
+3
+00:00:05.736 --> 00:00:07.373
+An `&str` borrows valid UTF-8 text.
+
+4
+00:00:07.453 --> 00:00:09.309
+A byte slice may contain arbitrary data.
+
+5
+00:00:09.389 --> 00:00:13.318
+Treating arbitrary bytes as text before
+validation creates confusion about length,
+
+6
+00:00:13.398 --> 00:00:15.745
+encoding, delimiters, and character
+boundaries.
+
+7
+00:00:15.825 --> 00:00:19.700
+This distinction matters because text
+length and byte length are not always the same
+
+8
+00:00:19.780 --> 00:00:20.216
+concept.
+
+9
+00:00:20.296 --> 00:00:23.462
+Code that slices text as if every
+character were one byte can be wrong.
+
+10
+00:00:23.542 --> 00:00:24.797
+Safe Rust protects memory,
+
+11
+00:00:24.877 --> 00:00:28.698
+but the application still needs correct
+parsing and validation so text operations
+
+12
+00:00:28.778 --> 00:00:31.998
+match the protocol, file format, or
+business rule being implemented.
+
+13
+00:00:32.078 --> 00:00:35.461
+File input, network input, protocol
+messages, command-line arguments,
+
+14
+00:00:35.541 --> 00:00:38.543
+and serialized data should be treated as
+untrusted until parsed.
+
+15
+00:00:38.623 --> 00:00:42.061
+A parser boundary should validate length,
+format, encoding, delimiters,
+
+16
+00:00:42.141 --> 00:00:45.525
+record structure, and supported values
+before data is used for indexing,
+
+17
+00:00:45.605 --> 00:00:48.934
+allocation, file paths, database
+operations, or downstream requests.
+
+18
+00:00:49.014 --> 00:00:51.088
+Parser boundaries are security boundaries.
+
+19
+00:00:51.168 --> 00:00:54.497
+They are the place where raw input becomes
+structured application data.
+
+20
+00:00:54.577 --> 00:00:57.143
+Defensive code should keep raw bytes near
+the boundary,
+
+21
+00:00:57.223 --> 00:00:59.187
+convert them into validated domain types,
+
+22
+00:00:59.267 --> 00:01:03.197
+and avoid letting untrusted strings or
+slices drift through the application without
+
+23
+00:01:03.277 --> 00:01:03.713
+context.
+
+24
+00:01:03.793 --> 00:01:05.922
+Good parser design also defines safe
+failure.
+
+25
+00:01:06.002 --> 00:01:09.386
+Invalid encoding, truncated data, extra
+delimiters, oversized fields,
+
+26
+00:01:09.466 --> 00:01:13.395
+missing terminators, and unsupported
+versions should produce predictable errors.
+
+27
+00:01:13.475 --> 00:01:16.968
+That makes the application more reliable
+and reduces pressure to add unsafe
+
+28
+00:01:17.048 --> 00:01:18.740
+shortcuts around difficult inputs.

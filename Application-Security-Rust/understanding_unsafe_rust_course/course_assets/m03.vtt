@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:01.965
+Unsafe Rust is not a vague label.
+
+2
+00:00:02.045 --> 00:00:05.192
+It is tied to specific categories of
+operations that need extra care.
+
+3
+00:00:05.272 --> 00:00:08.635
+Code may need unsafe to dereference raw
+pointers, call unsafe functions,
+
+4
+00:00:08.715 --> 00:00:11.916
+access or modify mutable static variables,
+implement unsafe traits,
+
+5
+00:00:11.996 --> 00:00:13.244
+or access fields of unions.
+
+6
+00:00:13.324 --> 00:00:17.122
+Each category asks the programmer to
+uphold rules the compiler cannot fully check.
+
+7
+00:00:17.202 --> 00:00:20.349
+Raw pointer dereferencing requires review
+of validity, alignment,
+
+8
+00:00:20.429 --> 00:00:22.978
+initialization, lifetime, and aliasing
+assumptions.
+
+9
+00:00:23.058 --> 00:00:25.608
+A pointer-like value is not the same as a
+Rust reference.
+
+10
+00:00:25.688 --> 00:00:28.889
+The code must establish that the memory is
+live, suitable for the type,
+
+11
+00:00:28.969 --> 00:00:31.682
+and used according to the rules the
+abstraction depends on.
+
+12
+00:00:31.762 --> 00:00:35.451
+Calling an unsafe function means the
+caller must satisfy preconditions that the
+
+13
+00:00:35.531 --> 00:00:36.616
+compiler cannot check.
+
+14
+00:00:36.696 --> 00:00:40.223
+The function may require a pointer to be
+valid, a buffer length to be accurate,
+
+15
+00:00:40.303 --> 00:00:44.101
+a value to follow a representation
+contract, or a thread-safety condition to hold.
+
+16
+00:00:44.181 --> 00:00:47.653
+Review should look at both the function
+contract and the caller's evidence.
+
+17
+00:00:47.733 --> 00:00:50.445
+Mutable statics introduce global
+shared-state concerns.
+
+18
+00:00:50.525 --> 00:00:54.486
+Any design that allows process-wide
+mutable state needs careful synchronization and
+
+19
+00:00:54.566 --> 00:00:55.380
+clear ownership.
+
+20
+00:00:55.460 --> 00:00:59.095
+Unsafe traits are also sensitive because
+other code may rely on the implementer
+
+21
+00:00:59.175 --> 00:01:00.748
+correctly upholding guarantees.
+
+22
+00:01:00.828 --> 00:01:04.355
+A wrong implementation can break
+assumptions far away from where it appears.
+
+23
+00:01:04.435 --> 00:01:08.124
+Union field access depends on
+representation and initialization assumptions.
+
+24
+00:01:08.204 --> 00:01:10.916
+Reviewers should ask what data is active,
+how that is known,
+
+25
+00:01:10.996 --> 00:01:13.438
+and how the abstraction prevents
+accidental misuse.
+
+26
+00:01:13.518 --> 00:01:15.797
+The practical goal of this module is
+recognition:
+
+27
+00:01:15.877 --> 00:01:19.620
+when you see one of these categories, you
+know what kind of safety questions to ask.

@@ -1,0 +1,144 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.053
+Most Rust smart pointers build on a few
+foundational ideas.
+
+2
+00:00:03.133 --> 00:00:05.840
+Ownership determines which value is
+responsible for cleanup.
+
+3
+00:00:05.920 --> 00:00:09.034
+Borrowing controls temporary access
+without transferring ownership.
+
+4
+00:00:09.114 --> 00:00:12.638
+Smart pointers combine these ideas with
+pointer-like behavior so code can access
+
+5
+00:00:12.718 --> 00:00:15.424
+data indirectly while still keeping
+ownership rules visible.
+
+6
+00:00:15.504 --> 00:00:19.028
+`Deref` is the trait that allows many
+smart pointers to behave like references for
+
+7
+00:00:19.108 --> 00:00:19.465
+access.
+
+8
+00:00:19.545 --> 00:00:23.120
+In practical terms, it lets code call
+methods or read data through a wrapper without
+
+9
+00:00:23.200 --> 00:00:25.089
+manually unpacking the pointer every time.
+
+10
+00:00:25.169 --> 00:00:26.394
+That convenience is useful,
+
+11
+00:00:26.474 --> 00:00:29.283
+but it should not make every smart pointer
+feel interchangeable.
+
+12
+00:00:29.363 --> 00:00:31.916
+The wrapper still carries important
+ownership semantics.
+
+13
+00:00:31.996 --> 00:00:33.834
+`Drop` is the cleanup side of the
+contract.
+
+14
+00:00:33.914 --> 00:00:37.131
+When an owner goes out of scope, Rust runs
+drop behavior for the owned value.
+
+15
+00:00:37.211 --> 00:00:39.101
+For a simple owner this is
+straightforward.
+
+16
+00:00:39.181 --> 00:00:41.734
+For smart pointers, drop behavior may
+release heap memory,
+
+17
+00:00:41.814 --> 00:00:45.031
+decrement a reference count, unlock or
+release a resource, close a handle,
+
+18
+00:00:45.111 --> 00:00:47.562
+or trigger cleanup only when the final
+owner disappears.
+
+19
+00:00:47.642 --> 00:00:51.063
+Borrowing through a smart pointer should
+still be understood in terms of access
+
+20
+00:00:51.143 --> 00:00:51.450
+rules.
+
+21
+00:00:51.530 --> 00:00:53.674
+Some pointers preserve compile-time
+borrowing.
+
+22
+00:00:53.754 --> 00:00:57.278
+Others introduce runtime borrow checks,
+reference counts, or synchronization.
+
+23
+00:00:57.358 --> 00:01:00.881
+That distinction matters during review
+because it changes what failure modes are
+
+24
+00:01:00.961 --> 00:01:02.340
+possible and where they appear.
+
+25
+00:01:02.420 --> 00:01:04.105
+A smart pointer type is an API contract.
+
+26
+00:01:04.185 --> 00:01:07.147
+It tells callers whether they receive
+ownership, shared ownership,
+
+27
+00:01:07.227 --> 00:01:10.035
+borrowed access, interior mutability, or
+synchronized access.
+
+28
+00:01:10.115 --> 00:01:11.954
+Good Rust APIs make that contract obvious,
+
+29
+00:01:12.034 --> 00:01:14.178
+keep pointer types as simple as the design
+allows,
+
+30
+00:01:14.258 --> 00:01:17.220
+and avoid using smart pointers to hide
+unclear lifecycle decisions.

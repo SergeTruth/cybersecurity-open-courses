@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.384
+Concurrent Rust frequently uses `Arc<T>`
+to share ownership across threads or async
+
+2
+00:00:04.464 --> 00:00:04.787
+tasks.
+
+3
+00:00:04.867 --> 00:00:08.427
+The pattern is common for configuration,
+clients, connection pools, queues,
+
+4
+00:00:08.507 --> 00:00:10.773
+caches, metrics handles, and application
+state.
+
+5
+00:00:10.853 --> 00:00:14.683
+`Arc<T>` solves the ownership problem of
+keeping a value alive while multiple tasks
+
+6
+00:00:14.763 --> 00:00:15.140
+need it.
+
+7
+00:00:15.220 --> 00:00:18.942
+When shared data must be mutated,
+ownership sharing is only one part of the design.
+
+8
+00:00:19.022 --> 00:00:22.528
+The code still needs controlled access
+through synchronization, channels,
+
+9
+00:00:22.608 --> 00:00:25.413
+ownership transfer, or specialized
+concurrent structures.
+
+10
+00:00:25.493 --> 00:00:28.298
+A common pattern such as `Arc<Mutex<T>>`
+can be appropriate,
+
+11
+00:00:28.378 --> 00:00:30.644
+but it should not be treated as a
+universal answer.
+
+12
+00:00:30.724 --> 00:00:32.396
+Lock scope deserves careful review.
+
+13
+00:00:32.476 --> 00:00:35.982
+Holding a lock while performing unrelated
+work, waiting on slow operations,
+
+14
+00:00:36.062 --> 00:00:37.357
+calling out to complex code,
+
+15
+00:00:37.437 --> 00:00:40.350
+or crossing async boundaries can create
+reliability problems.
+
+16
+00:00:40.430 --> 00:00:43.019
+The defensive pattern is to keep locked
+sections narrow,
+
+17
+00:00:43.099 --> 00:00:44.285
+make lock ordering clear,
+
+18
+00:00:44.365 --> 00:00:48.033
+and avoid mixing synchronization with work
+that does not need protected access.
+
+19
+00:00:48.113 --> 00:00:51.242
+Smart pointers do not automatically
+prevent deadlock, starvation,
+
+20
+00:00:51.322 --> 00:00:54.558
+priority inversion, unbounded queues, or
+unclear shutdown behavior.
+
+21
+00:00:54.638 --> 00:00:56.041
+They make ownership explicit,
+
+22
+00:00:56.121 --> 00:00:59.789
+but the concurrency design must still
+define who produces work, who consumes it,
+
+23
+00:00:59.869 --> 00:01:03.159
+how backpressure works, and how resources
+are released when tasks stop.
+
+24
+00:01:03.239 --> 00:01:05.990
+Async systems also need cancellation and
+cleanup behavior.
+
+25
+00:01:06.070 --> 00:01:07.796
+A shared handle may outlive a request.
+
+26
+00:01:07.876 --> 00:01:09.710
+A task may be dropped before completing.
+
+27
+00:01:09.790 --> 00:01:11.355
+A pool may need graceful shutdown.
+
+28
+00:01:11.435 --> 00:01:14.186
+Reviewers should ask what happens when
+tasks are cancelled,
+
+29
+00:01:14.266 --> 00:01:17.124
+whether cleanup is deterministic enough
+for the application,
+
+30
+00:01:17.204 --> 00:01:20.009
+and whether shared resources have limits
+and observability.
+
+31
+00:01:20.089 --> 00:01:23.542
+Defensive Rust treats smart pointers as
+one part of safe concurrent design.
+
+32
+00:01:23.622 --> 00:01:26.912
+Use them to express ownership, then review
+synchronization, shutdown,
+
+33
+00:01:26.992 --> 00:01:30.660
+limits, metrics, and error handling as
+first-class parts of the same lifecycle.

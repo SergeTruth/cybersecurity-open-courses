@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.594
+Rust applications often need configuration
+values, API tokens,
+
+2
+00:00:03.674 --> 00:00:07.049
+database credentials, private keys,
+certificates, session secrets,
+
+3
+00:00:07.129 --> 00:00:08.367
+and service credentials.
+
+4
+00:00:08.447 --> 00:00:11.091
+These values should not be hard-coded into
+source code,
+
+5
+00:00:11.171 --> 00:00:15.108
+checked into repositories, printed during
+debugging, or written into broad logs.
+
+6
+00:00:15.188 --> 00:00:19.182
+A safe configuration pattern keeps
+sensitive values outside the codebase and makes
+
+7
+00:00:19.262 --> 00:00:20.837
+runtime expectations explicit.
+
+8
+00:00:20.917 --> 00:00:24.349
+Configuration should be
+environment-specific, validated, and owned.
+
+9
+00:00:24.429 --> 00:00:27.185
+Startup validation can catch missing
+required settings,
+
+10
+00:00:27.265 --> 00:00:30.303
+inconsistent options, invalid endpoints,
+unsupported modes,
+
+11
+00:00:30.383 --> 00:00:33.589
+and risky defaults before the application
+begins serving traffic.
+
+12
+00:00:33.669 --> 00:00:37.719
+Configuration errors should be reported
+clearly without exposing the secret values
+
+13
+00:00:37.799 --> 00:00:38.418
+themselves.
+
+14
+00:00:38.498 --> 00:00:41.986
+Secrets should come from approved
+mechanisms such as runtime injection,
+
+15
+00:00:42.066 --> 00:00:46.116
+platform secret stores, managed
+identities, or protected files where appropriate.
+
+16
+00:00:46.196 --> 00:00:49.065
+The exact mechanism depends on the
+deployment environment,
+
+17
+00:00:49.145 --> 00:00:51.733
+but the principle stays the same: keep
+secrets scoped,
+
+18
+00:00:51.813 --> 00:00:55.131
+limit where they are copied, and avoid
+turning generated files, logs,
+
+19
+00:00:55.211 --> 00:00:57.687
+shell history, or artifacts into new
+secret stores.
+
+20
+00:00:57.767 --> 00:00:59.904
+Teams should also think about data
+lifetime.
+
+21
+00:00:59.984 --> 00:01:02.122
+Where do sensitive values enter the
+process?
+
+22
+00:01:02.202 --> 00:01:03.721
+Which components receive them?
+
+23
+00:01:03.801 --> 00:01:07.457
+Are they cloned, serialized, cached,
+logged, or included in error contexts?
+
+24
+00:01:07.537 --> 00:01:09.281
+How are they rotated operationally?
+
+25
+00:01:09.361 --> 00:01:11.892
+Secure Rust code uses redaction, careful
+ownership,
+
+26
+00:01:11.972 --> 00:01:15.460
+and clear interfaces so sensitive data
+flows are visible and reviewable.

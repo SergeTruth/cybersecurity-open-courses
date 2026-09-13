@@ -1,0 +1,114 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.066
+Most Rust code uses lifetimes without
+writing explicit lifetime annotations.
+
+2
+00:00:04.146 --> 00:00:07.818
+The compiler can infer many relationships
+from ownership, borrowing, and scope.
+
+3
+00:00:07.898 --> 00:00:11.411
+That is why common functions can accept
+references and return ordinary values
+
+4
+00:00:11.491 --> 00:00:13.726
+without becoming cluttered with lifetime
+names.
+
+5
+00:00:13.806 --> 00:00:16.414
+Lifetime elision rules keep common
+signatures readable.
+
+6
+00:00:16.494 --> 00:00:18.304
+They do not remove the underlying model.
+
+7
+00:00:18.384 --> 00:00:22.216
+They simply allow developers to omit
+lifetime names when the relationship is obvious
+
+8
+00:00:22.296 --> 00:00:24.478
+enough for the compiler to apply standard
+rules.
+
+9
+00:00:24.558 --> 00:00:27.858
+The safety check is still present even
+when the annotation is not written.
+
+10
+00:00:27.938 --> 00:00:31.717
+Explicit annotations become useful when a
+function has multiple references and the
+
+11
+00:00:31.797 --> 00:00:34.352
+relationship between inputs and outputs
+must be stated.
+
+12
+00:00:34.432 --> 00:00:38.051
+For example, a function may return a
+reference that is tied to one specific input.
+
+13
+00:00:38.131 --> 00:00:40.632
+In that case, the annotation is part of
+the API contract.
+
+14
+00:00:40.712 --> 00:00:43.533
+The key lesson is that annotations do not
+make data live longer.
+
+15
+00:00:43.613 --> 00:00:46.327
+They document a relationship the code must
+already satisfy.
+
+16
+00:00:46.407 --> 00:00:48.802
+If a local value is cleaned up when a
+function returns,
+
+17
+00:00:48.882 --> 00:00:52.289
+no lifetime annotation can make a
+reference to that local value valid for the
+
+18
+00:00:52.369 --> 00:00:52.741
+caller.
+
+19
+00:00:52.821 --> 00:00:54.950
+Defensive Rust avoids lifetime cargo
+culting.
+
+20
+00:00:55.030 --> 00:00:58.277
+Do not add lifetime names mechanically
+just to satisfy a compiler error.
+
+21
+00:00:58.357 --> 00:01:00.486
+Ask what relationship the API needs to
+express.
+
+22
+00:01:00.566 --> 00:01:03.653
+If there is no valid borrowed owner for
+the caller, return owned data.
+
+23
+00:01:03.733 --> 00:01:06.660
+If the relationship is real, make it clear
+through the signature.

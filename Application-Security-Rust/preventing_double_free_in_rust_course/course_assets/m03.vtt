@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.661
+`Drop` is Rust's structured cleanup
+mechanism.
+
+2
+00:00:02.741 --> 00:00:04.849
+When an owned value reaches the end of its
+scope,
+
+3
+00:00:04.929 --> 00:00:06.826
+Rust runs the cleanup logic for that
+value.
+
+4
+00:00:06.906 --> 00:00:10.279
+This deterministic behavior helps
+developers reason about memory, files,
+
+5
+00:00:10.359 --> 00:00:11.940
+sockets, buffers, locks, handles,
+
+6
+00:00:12.020 --> 00:00:15.709
+and other resources without scattering
+manual release calls throughout ordinary
+
+7
+00:00:15.789 --> 00:00:16.052
+code.
+
+8
+00:00:16.132 --> 00:00:18.662
+The important point is that cleanup is
+tied to ownership.
+
+9
+00:00:18.742 --> 00:00:20.428
+A value is dropped when its owner ends,
+
+10
+00:00:20.508 --> 00:00:22.511
+not when any random reference stops using
+it.
+
+11
+00:00:22.591 --> 00:00:26.016
+That connection is what prevents safe
+borrowed access from becoming cleanup
+
+12
+00:00:26.096 --> 00:00:29.521
+authority and what keeps release behavior
+aligned with the ownership model.
+
+13
+00:00:29.601 --> 00:00:33.238
+Custom `Drop` implementations can be
+useful when a type owns a resource that needs
+
+14
+00:00:33.318 --> 00:00:34.161
+explicit release.
+
+15
+00:00:34.241 --> 00:00:36.823
+They can close a file descriptor, release
+a native handle,
+
+16
+00:00:36.903 --> 00:00:40.434
+return a buffer to a pool, or notify
+another component that ownership has ended.
+
+17
+00:00:40.514 --> 00:00:43.571
+Because they define cleanup behavior, they
+deserve careful review.
+
+18
+00:00:43.651 --> 00:00:45.073
+Cleanup ordering also matters.
+
+19
+00:00:45.153 --> 00:00:47.261
+Fields are dropped when their owner is
+dropped.
+
+20
+00:00:47.341 --> 00:00:49.344
+Partially initialized states, error paths,
+
+21
+00:00:49.424 --> 00:00:52.533
+and wrapper types should be designed so
+cleanup remains predictable.
+
+22
+00:00:52.613 --> 00:00:56.197
+A resource-owning type should not rely on
+scattered flags or external calls when
+
+23
+00:00:56.277 --> 00:00:58.543
+ownership can express the lifecycle more
+clearly.
+
+24
+00:00:58.623 --> 00:01:01.838
+Defensive Rust keeps cleanup paths simple,
+testable, and easy to audit.
+
+25
+00:01:01.918 --> 00:01:04.869
+If the same resource appears to be
+released through several paths,
+
+26
+00:01:04.949 --> 00:01:06.582
+ask whether there is truly one owner.
+
+27
+00:01:06.662 --> 00:01:08.191
+If manual release is still needed,
+
+28
+00:01:08.271 --> 00:01:11.380
+document how it interacts with `Drop` so
+cleanup cannot happen twice.

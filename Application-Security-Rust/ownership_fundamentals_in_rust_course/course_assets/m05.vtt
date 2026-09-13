@@ -1,0 +1,134 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.030
+Lifetimes describe how long references are
+valid relative to the data they borrow.
+
+2
+00:00:04.110 --> 00:00:07.640
+The essential rule is simple: a reference
+must never outlive the value it points to.
+
+3
+00:00:07.720 --> 00:00:11.150
+Rust uses lifetime reasoning to prevent
+references to data that has already been
+
+4
+00:00:11.230 --> 00:00:14.407
+cleaned up or moved away from the context
+where the reference would be used.
+
+5
+00:00:14.487 --> 00:00:17.815
+Most lifetime reasoning happens
+automatically through compiler inference.
+
+6
+00:00:17.895 --> 00:00:20.619
+Developers do not annotate every reference
+in normal Rust code.
+
+7
+00:00:20.699 --> 00:00:22.211
+When lifetime annotations appear,
+
+8
+00:00:22.291 --> 00:00:25.267
+they are usually explaining relationships
+among inputs and outputs.
+
+9
+00:00:25.347 --> 00:00:28.171
+They are not a way to force data to live
+longer than it actually does.
+
+10
+00:00:28.251 --> 00:00:31.932
+A function signature with lifetime
+annotations might say that the returned reference
+
+11
+00:00:32.012 --> 00:00:33.626
+is tied to one of the input references.
+
+12
+00:00:33.706 --> 00:00:35.017
+That can be useful and precise,
+
+13
+00:00:35.097 --> 00:00:38.022
+but it also means the caller must provide
+data that lives long enough.
+
+14
+00:00:38.102 --> 00:00:39.464
+If the relationship is not true,
+
+15
+00:00:39.544 --> 00:00:42.822
+the compiler should reject the design
+rather than allow a reference to become
+
+16
+00:00:42.902 --> 00:00:43.306
+invalid.
+
+17
+00:00:43.386 --> 00:00:46.008
+Lifetime problems often point to unclear
+ownership choices.
+
+18
+00:00:46.088 --> 00:00:49.164
+A function may be trying to return a
+reference to data it created locally.
+
+19
+00:00:49.244 --> 00:00:51.715
+A struct may be borrowing data that would
+be simpler to own.
+
+20
+00:00:51.795 --> 00:00:54.216
+A temporary value may not live as long as
+a caller expects.
+
+21
+00:00:54.296 --> 00:00:55.759
+Instead of fighting the compiler,
+
+22
+00:00:55.839 --> 00:00:58.612
+ask what ownership relationship the design
+is trying to express.
+
+23
+00:00:58.692 --> 00:01:00.609
+Sometimes the answer is to return owned
+data.
+
+24
+00:01:00.689 --> 00:01:02.908
+Sometimes it is to borrow from an input
+more clearly.
+
+25
+00:01:02.988 --> 00:01:06.316
+Sometimes it is to restructure state so
+the owner outlives the references that
+
+26
+00:01:06.396 --> 00:01:06.951
+depend on it.
+
+27
+00:01:07.031 --> 00:01:09.098
+Lifetimes are not a separate puzzle from
+design;
+
+28
+00:01:09.178 --> 00:01:11.700
+they are Rust's way of making reference
+validity explicit.

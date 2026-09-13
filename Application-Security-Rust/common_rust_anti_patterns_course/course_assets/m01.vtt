@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.545
+Rust gives teams strong tools for memory
+safety, ownership,
+
+2
+00:00:03.625 --> 00:00:05.237
+and explicit failure handling,
+
+3
+00:00:05.317 --> 00:00:09.497
+but compiling successfully is not the same
+as being robust, secure, maintainable,
+
+4
+00:00:09.577 --> 00:00:10.831
+or operationally ready.
+
+5
+00:00:10.911 --> 00:00:14.613
+A program can satisfy the compiler while
+still hiding unclear ownership,
+
+6
+00:00:14.693 --> 00:00:17.918
+fragile error paths, weak validation,
+excessive resource use,
+
+7
+00:00:17.998 --> 00:00:20.505
+or difficult-to-review lifecycle
+assumptions.
+
+8
+00:00:20.585 --> 00:00:24.706
+A Rust anti-pattern is a repeated habit
+that works in the moment but creates future
+
+9
+00:00:24.786 --> 00:00:25.084
+cost.
+
+10
+00:00:25.164 --> 00:00:28.090
+It may start as a quick clone, a broad
+lifetime annotation,
+
+11
+00:00:28.170 --> 00:00:31.036
+an `unwrap` in code that later becomes
+production logic,
+
+12
+00:00:31.116 --> 00:00:33.504
+a raw primitive passed through too many
+layers,
+
+13
+00:00:33.584 --> 00:00:36.869
+or an unsafe boundary that depends on
+undocumented assumptions.
+
+14
+00:00:36.949 --> 00:00:40.054
+None of these choices automatically means
+the code is broken,
+
+15
+00:00:40.134 --> 00:00:41.865
+but each can become a design smell.
+
+16
+00:00:41.945 --> 00:00:43.557
+The useful posture is not blame.
+
+17
+00:00:43.637 --> 00:00:45.070
+Anti-patterns are signals.
+
+18
+00:00:45.150 --> 00:00:48.375
+They show places where the code is asking
+for clearer ownership,
+
+19
+00:00:48.455 --> 00:00:52.635
+more deliberate error handling, stronger
+types, safer boundaries, better tests,
+
+20
+00:00:52.715 --> 00:00:54.745
+or more explicit operational behavior.
+
+21
+00:00:54.825 --> 00:00:58.945
+Treating these signals early is cheaper
+than discovering them after an incident,
+
+22
+00:00:59.025 --> 00:01:00.518
+outage, or painful refactor.
+
+23
+00:01:00.598 --> 00:01:04.837
+Rust's strengths are real, but they do not
+remove the need for engineering judgment.
+
+24
+00:01:04.917 --> 00:01:07.305
+The compiler can enforce many borrowing
+rules,
+
+25
+00:01:07.385 --> 00:01:10.729
+but it cannot decide whether an API
+exposes the right domain model,
+
+26
+00:01:10.809 --> 00:01:13.138
+whether a dependency feature is
+appropriate,
+
+27
+00:01:13.218 --> 00:01:15.248
+whether a log line leaks sensitive data,
+
+28
+00:01:15.328 --> 00:01:17.896
+or whether an async service has sane
+backpressure.
+
+29
+00:01:17.976 --> 00:01:22.036
+The defensive goal of this course is to
+make weak patterns easier to recognize and
+
+30
+00:01:22.116 --> 00:01:24.027
+safer alternatives easier to choose.
+
+31
+00:01:24.107 --> 00:01:27.988
+Good Rust code makes ownership, errors,
+data meaning, boundary validation,
+
+32
+00:01:28.068 --> 00:01:32.427
+resource limits, and operational
+assumptions visible enough for another engineer to
+
+33
+00:01:32.507 --> 00:01:33.940
+review, test, and maintain.

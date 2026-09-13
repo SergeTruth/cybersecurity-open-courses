@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.522
+Rust's ordinary ownership model is one of
+the language's strongest safety tools,
+
+2
+00:00:04.602 --> 00:00:08.682
+but real programs often need ownership
+shapes that are more expressive than a value
+
+3
+00:00:08.762 --> 00:00:10.336
+directly owned by one variable.
+
+4
+00:00:10.416 --> 00:00:13.563
+Applications may need heap allocation,
+recursive structures,
+
+5
+00:00:13.643 --> 00:00:16.150
+shared configuration, long-lived service
+state,
+
+6
+00:00:16.230 --> 00:00:18.736
+reference-counted graphs, thread-safe
+handles,
+
+7
+00:00:18.816 --> 00:00:22.313
+or resource wrappers that clean up at a
+specific point in the lifecycle.
+
+8
+00:00:22.393 --> 00:00:24.725
+Smart pointers encode those patterns in
+types.
+
+9
+00:00:24.805 --> 00:00:27.719
+They are not just convenience wrappers
+around references.
+
+10
+00:00:27.799 --> 00:00:31.705
+A smart pointer can communicate who owns
+data, whether ownership can be shared,
+
+11
+00:00:31.785 --> 00:00:34.349
+when cleanup happens, whether mutation is
+allowed,
+
+12
+00:00:34.429 --> 00:00:37.052
+whether access is checked at compile time
+or runtime,
+
+13
+00:00:37.132 --> 00:00:39.930
+and whether the value can safely cross a
+thread boundary.
+
+14
+00:00:40.010 --> 00:00:43.624
+This makes smart pointer choice a security
+and reliability review point.
+
+15
+00:00:43.704 --> 00:00:47.201
+A type such as `Box<T>`, `Rc<T>`,
+`Arc<T>`, `Weak<T>`, `RefCell<T>`,
+
+16
+00:00:47.281 --> 00:00:51.128
+or `Mutex<T>` tells reviewers how the code
+expects data to live, move, mutate,
+
+17
+00:00:51.208 --> 00:00:52.082
+and be cleaned up.
+
+18
+00:00:52.162 --> 00:00:56.243
+The wrong pointer type can make lifecycle
+behavior harder to reason about even when
+
+19
+00:00:56.323 --> 00:00:57.780
+the code remains memory safe.
+
+20
+00:00:57.860 --> 00:01:01.649
+Smart pointers also show where ownership
+complexity has entered the design.
+
+21
+00:01:01.729 --> 00:01:03.535
+Shared ownership may delay cleanup.
+
+22
+00:01:03.615 --> 00:01:07.521
+Interior mutability may move borrow
+enforcement from compile time to runtime.
+
+23
+00:01:07.601 --> 00:01:11.040
+Thread-safe sharing may require lock
+discipline and shutdown rules.
+
+24
+00:01:11.120 --> 00:01:12.577
+These choices can be correct,
+
+25
+00:01:12.657 --> 00:01:15.863
+but they deserve explicit intent rather
+than accidental growth.
+
+26
+00:01:15.943 --> 00:01:17.400
+The defensive goal is simple:
+
+27
+00:01:17.480 --> 00:01:21.327
+choose the least complex smart pointer
+that accurately expresses the design.
+
+28
+00:01:21.407 --> 00:01:24.671
+Start with ordinary ownership and
+borrowing when they are enough.
+
+29
+00:01:24.751 --> 00:01:28.307
+Reach for heap indirection, reference
+counting, interior mutability,
+
+30
+00:01:28.387 --> 00:01:32.175
+or synchronization only when the ownership
+problem truly requires it and the
+
+31
+00:01:32.255 --> 00:01:34.820
+lifecycle behavior can be documented and
+reviewed.

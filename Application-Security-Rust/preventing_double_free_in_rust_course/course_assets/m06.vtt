@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.316
+Safe Rust prevents ordinary double free,
+
+2
+00:00:02.396 --> 00:00:05.199
+but unsafe code can reintroduce manual
+ownership assumptions.
+
+3
+00:00:05.279 --> 00:00:08.807
+Raw pointers do not automatically record
+who owns an allocation, who may free it,
+
+4
+00:00:08.887 --> 00:00:11.274
+or whether the resource has already been
+transferred.
+
+5
+00:00:11.354 --> 00:00:13.378
+Those facts live in the surrounding
+contract.
+
+6
+00:00:13.458 --> 00:00:17.091
+Manual reconstruction of owned values from
+raw pointers is especially sensitive.
+
+7
+00:00:17.171 --> 00:00:20.751
+The review question is whether ownership
+is being reconstructed exactly once and
+
+8
+00:00:20.831 --> 00:00:22.803
+only by the code that truly owns the
+resource.
+
+9
+00:00:22.883 --> 00:00:25.115
+If two wrappers are built around the same
+raw owner,
+
+10
+00:00:25.195 --> 00:00:27.219
+cleanup may run twice through separate
+paths.
+
+11
+00:00:27.299 --> 00:00:29.634
+Custom allocation behavior needs clear
+boundaries.
+
+12
+00:00:29.714 --> 00:00:31.323
+Which allocator created the memory?
+
+13
+00:00:31.403 --> 00:00:33.375
+Which component is allowed to deallocate
+it?
+
+14
+00:00:33.455 --> 00:00:36.880
+Has ownership been transferred to Rust, to
+external code, or to a wrapper type?
+
+15
+00:00:36.960 --> 00:00:39.814
+The answer should be visible in the API
+and safety documentation.
+
+16
+00:00:39.894 --> 00:00:43.059
+Advanced tools such as `ManuallyDrop`,
+intentional drop suppression,
+
+17
+00:00:43.139 --> 00:00:45.890
+or manual cleanup sequencing require
+strong review evidence.
+
+18
+00:00:45.970 --> 00:00:48.201
+They can be legitimate in low-level
+abstractions,
+
+19
+00:00:48.281 --> 00:00:50.876
+but they should not be used to paper over
+unclear ownership.
+
+20
+00:00:50.956 --> 00:00:54.277
+The safety contract should explain why
+ordinary `Drop` is not enough and how
+
+21
+00:00:54.357 --> 00:00:55.810
+duplicate cleanup is prevented.
+
+22
+00:00:55.890 --> 00:00:59.626
+A safe wrapper around unsafe internals
+must enforce cleanup invariants for ordinary
+
+23
+00:00:59.706 --> 00:01:00.121
+callers.
+
+24
+00:01:00.201 --> 00:01:03.159
+Callers should not be able to create two
+owners for one raw resource,
+
+25
+00:01:03.239 --> 00:01:04.485
+free through the wrong path,
+
+26
+00:01:04.565 --> 00:01:07.108
+or keep using an object after ownership
+has been consumed.
+
+27
+00:01:07.188 --> 00:01:08.900
+The wrapper is the defensive boundary.

@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.033
+Eliminating buffer overflows in Rust is a
+layered engineering practice.
+
+2
+00:00:04.113 --> 00:00:07.531
+Start with safe Rust abstractions: arrays,
+vectors, slices, strings,
+
+3
+00:00:07.611 --> 00:00:10.688
+byte slices, checked access, iterators,
+and pattern matching.
+
+4
+00:00:10.768 --> 00:00:14.699
+These tools carry length and validity
+information that raw buffer handling often
+
+5
+00:00:14.779 --> 00:00:15.121
+loses.
+
+6
+00:00:15.201 --> 00:00:16.853
+Treat parsing as a trust boundary.
+
+7
+00:00:16.933 --> 00:00:21.036
+Validate input length, encoding,
+delimiters, record structure, supported values,
+
+8
+00:00:21.116 --> 00:00:24.420
+and version expectations before data
+drives indexing, allocation,
+
+9
+00:00:24.500 --> 00:00:27.349
+file paths, database operations, or
+downstream requests.
+
+10
+00:00:27.429 --> 00:00:31.247
+Convert raw input into validated domain
+types where that makes the application
+
+11
+00:00:31.327 --> 00:00:32.466
+easier to reason about.
+
+12
+00:00:32.546 --> 00:00:33.629
+Control resource use.
+
+13
+00:00:33.709 --> 00:00:37.412
+Buffer overflow prevention is not enough
+if a safe program can still allocate
+
+14
+00:00:37.492 --> 00:00:40.284
+without limit or spend unbounded time on
+malformed input.
+
+15
+00:00:40.364 --> 00:00:43.441
+Review length and capacity assumptions,
+integer conversions,
+
+16
+00:00:43.521 --> 00:00:45.857
+maximum sizes, timeouts, and failure
+behavior.
+
+17
+00:00:45.937 --> 00:00:48.957
+Keep unsafe and FFI boundaries small,
+documented, and tested.
+
+18
+00:00:49.037 --> 00:00:52.569
+Review pointer validity, buffer length
+contracts, ownership transfer,
+
+19
+00:00:52.649 --> 00:00:56.353
+allocation and deallocation
+responsibility, alignment, initialization,
+
+20
+00:00:56.433 --> 00:00:57.572
+and callback behavior.
+
+21
+00:00:57.652 --> 00:01:01.641
+Wrap low-level behavior in safe APIs that
+prevent ordinary callers from violating
+
+22
+00:01:01.721 --> 00:01:02.746
+the buffer contract.
+
+23
+00:01:02.826 --> 00:01:04.934
+Finally, maintain buffer safety over time.
+
+24
+00:01:05.014 --> 00:01:08.547
+Test empty, short, oversized, malformed,
+and invalid-encoding inputs.
+
+25
+00:01:08.627 --> 00:01:10.279
+Add regression tests after fixes.
+
+26
+00:01:10.359 --> 00:01:12.467
+Review dependencies and parser libraries.
+
+27
+00:01:12.547 --> 00:01:13.972
+Watch operational failures.
+
+28
+00:01:14.052 --> 00:01:16.331
+The goal is not just to avoid one old
+class of bug,
+
+29
+00:01:16.411 --> 00:01:20.228
+but to build Rust software where buffer
+boundaries remain visible, validated,
+
+30
+00:01:20.308 --> 00:01:21.220
+and safe by design.

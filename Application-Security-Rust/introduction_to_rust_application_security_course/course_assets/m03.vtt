@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.770
+Rust makes it easier to represent valid
+states,
+
+2
+00:00:02.850 --> 00:00:05.573
+but the application still has to decide
+what valid means.
+
+3
+00:00:05.653 --> 00:00:09.171
+Input can arrive through HTTP requests,
+files, command-line arguments,
+
+4
+00:00:09.251 --> 00:00:13.336
+environment variables, queues, serialized
+messages, databases, user interfaces,
+
+5
+00:00:13.416 --> 00:00:14.324
+or other services.
+
+6
+00:00:14.404 --> 00:00:18.205
+Until the application validates that
+input, it should be treated as untrusted.
+
+7
+00:00:18.285 --> 00:00:22.257
+Good Rust design uses explicit types,
+parsing boundaries, validation functions,
+
+8
+00:00:22.337 --> 00:00:23.812
+and clear rejection behavior.
+
+9
+00:00:23.892 --> 00:00:27.466
+A string from outside the process should
+not quietly become a trusted path,
+
+10
+00:00:27.546 --> 00:00:31.859
+resource identifier, authorization
+decision, query parameter, or downstream request.
+
+11
+00:00:31.939 --> 00:00:35.797
+When possible, convert raw input into
+domain-specific types after validation,
+
+12
+00:00:35.877 --> 00:00:39.054
+so later code receives values that already
+carry clearer meaning.
+
+13
+00:00:39.134 --> 00:00:43.276
+Serialization and deserialization deserve
+special attention because they often sit
+
+14
+00:00:43.356 --> 00:00:44.377
+at trust boundaries.
+
+15
+00:00:44.457 --> 00:00:46.783
+Data that crosses services, persists over
+time,
+
+16
+00:00:46.863 --> 00:00:50.211
+or comes from a queue may not match the
+assumptions of the current code.
+
+17
+00:00:50.291 --> 00:00:52.674
+Versioning, missing fields, unexpected
+values,
+
+18
+00:00:52.754 --> 00:00:56.612
+and overly permissive deserialization can
+all create security and reliability
+
+19
+00:00:56.692 --> 00:00:58.394
+problems even in memory-safe code.
+
+20
+00:00:58.474 --> 00:01:02.616
+A secure Rust application avoids
+scattering hidden assumptions across the codebase.
+
+21
+00:01:02.696 --> 00:01:06.100
+It validates paths before file access,
+resource IDs before selection,
+
+22
+00:01:06.180 --> 00:01:08.904
+request fields before authorization or
+business logic,
+
+23
+00:01:08.984 --> 00:01:11.197
+and outbound values before downstream
+calls.
+
+24
+00:01:11.277 --> 00:01:13.660
+Rejection should be clear, safe, and
+consistent.
+
+25
+00:01:13.740 --> 00:01:17.257
+Invalid data should not produce vague
+behavior, excessive error detail,
+
+26
+00:01:17.337 --> 00:01:19.380
+or accidental fallback to a risky default.

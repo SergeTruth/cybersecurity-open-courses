@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.251
+Primitive obsession appears when
+meaningful domain concepts remain represented as
+
+2
+00:00:04.331 --> 00:00:06.207
+raw strings, integers, booleans, tuples,
+
+3
+00:00:06.287 --> 00:00:08.891
+or loosely structured maps long after
+parsing is complete.
+
+4
+00:00:08.971 --> 00:00:12.254
+A `String` might mean a username, tenant
+identifier, path fragment, role,
+
+5
+00:00:12.334 --> 00:00:14.001
+status, token label, or display name.
+
+6
+00:00:14.081 --> 00:00:17.623
+A `u32` might mean a count, port, timeout,
+user ID, protocol field, or size limit.
+
+7
+00:00:17.703 --> 00:00:20.100
+When too many concepts share the same
+primitive shape,
+
+8
+00:00:20.180 --> 00:00:21.743
+accidental mixing becomes easier.
+
+9
+00:00:21.823 --> 00:00:24.219
+The compiler can tell that two values are
+both strings,
+
+10
+00:00:24.299 --> 00:00:27.738
+but it cannot know that one is a tenant ID
+and the other is a path component unless
+
+11
+00:00:27.818 --> 00:00:29.225
+the code models those concepts.
+
+12
+00:00:29.305 --> 00:00:32.326
+Validation also tends to become scattered,
+repeated, or forgotten.
+
+13
+00:00:32.406 --> 00:00:34.751
+Weak type design leaves invalid states
+expressible.
+
+14
+00:00:34.831 --> 00:00:37.175
+A boolean pair might allow impossible
+combinations.
+
+15
+00:00:37.255 --> 00:00:39.547
+A stringly typed status might accept
+misspellings.
+
+16
+00:00:39.627 --> 00:00:42.753
+A raw integer limit might be negative in
+one layer, too large in another,
+
+17
+00:00:42.833 --> 00:00:44.136
+or measured in the wrong unit.
+
+18
+00:00:44.216 --> 00:00:45.935
+These problems are not Rust-specific,
+
+19
+00:00:46.015 --> 00:00:48.307
+but Rust gives teams excellent tools to
+reduce them.
+
+20
+00:00:48.387 --> 00:00:51.774
+Newtypes make domain meaning visible while
+keeping representation simple.
+
+21
+00:00:51.854 --> 00:00:54.250
+Enums model states, roles, modes, and
+finite choices.
+
+22
+00:00:54.330 --> 00:00:57.612
+Validated constructors can ensure that a
+value meets range, format, unit,
+
+23
+00:00:57.692 --> 00:01:00.558
+and policy requirements before it enters
+the core of the program.
+
+24
+00:01:00.638 --> 00:01:03.972
+`Option` and `Result` can show absence and
+validation failure explicitly.
+
+25
+00:01:04.052 --> 00:01:07.386
+A strong review question is whether a
+primitive still belongs at that layer.
+
+26
+00:01:07.466 --> 00:01:09.029
+Raw input is normal at the boundary.
+
+27
+00:01:09.109 --> 00:01:11.818
+Deeper in the system, important values
+should carry meaning.
+
+28
+00:01:11.898 --> 00:01:13.826
+Good type design reduces scattered checks,
+
+29
+00:01:13.906 --> 00:01:15.625
+makes invalid states harder to create,
+
+30
+00:01:15.705 --> 00:01:19.300
+and gives security reviewers a clearer map
+of what the program believes to be true.

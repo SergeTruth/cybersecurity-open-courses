@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.683
+Ownership becomes visible when designing
+functions.
+
+2
+00:00:02.763 --> 00:00:05.943
+A function that takes a value by ownership
+is saying it needs responsibility for
+
+3
+00:00:06.023 --> 00:00:06.498
+that value.
+
+4
+00:00:06.578 --> 00:00:09.046
+It may store the value, transform it into
+another owned value,
+
+5
+00:00:09.126 --> 00:00:11.784
+send it to another component, or consume
+it as part of an operation.
+
+6
+00:00:11.864 --> 00:00:14.759
+The caller should not expect to keep using
+the original owner afterward.
+
+7
+00:00:14.839 --> 00:00:17.402
+A function that takes a reference is
+making a different promise.
+
+8
+00:00:17.482 --> 00:00:18.763
+It only needs temporary access.
+
+9
+00:00:18.843 --> 00:00:20.932
+A shared reference says read-only access
+is enough.
+
+10
+00:00:21.012 --> 00:00:24.239
+A mutable reference says the function
+needs to change existing state but does not
+
+11
+00:00:24.319 --> 00:00:25.411
+need to own it permanently.
+
+12
+00:00:25.491 --> 00:00:28.671
+These signatures are contracts that help
+callers and reviewers understand the
+
+13
+00:00:28.751 --> 00:00:29.463
+function's role.
+
+14
+00:00:29.543 --> 00:00:30.872
+Structs also express ownership.
+
+15
+00:00:30.952 --> 00:00:32.043
+A struct can own its fields,
+
+16
+00:00:32.123 --> 00:00:35.019
+which is common when the value should be
+self-contained and easy to move.
+
+17
+00:00:35.099 --> 00:00:36.807
+A struct can borrow fields with lifetimes,
+
+18
+00:00:36.887 --> 00:00:39.735
+which can be efficient but requires
+careful relationship management.
+
+19
+00:00:39.815 --> 00:00:43.042
+A struct can also hold smart pointers or
+shared ownership handles when the design
+
+20
+00:00:43.122 --> 00:00:43.834
+truly needs them.
+
+21
+00:00:43.914 --> 00:00:46.098
+Enums can carry owned data through state
+transitions.
+
+22
+00:00:46.178 --> 00:00:48.930
+A state enum might own a pending request,
+a validated configuration,
+
+23
+00:00:49.010 --> 00:00:49.912
+or a completed result.
+
+24
+00:00:49.992 --> 00:00:53.409
+This can make impossible states harder to
+represent because each variant carries the
+
+25
+00:00:53.489 --> 00:00:54.818
+data appropriate for that state.
+
+26
+00:00:54.898 --> 00:00:58.078
+Ownership becomes part of the domain model
+rather than a separate housekeeping
+
+27
+00:00:58.158 --> 00:00:58.538
+concern.
+
+28
+00:00:58.618 --> 00:01:01.988
+Constructors and builder patterns can make
+ownership safer by validating input and
+
+29
+00:01:02.068 --> 00:01:04.536
+assembling owned state before the rest of
+the program uses it.
+
+30
+00:01:04.616 --> 00:01:07.179
+Instead of spreading partial assumptions
+across the codebase,
+
+31
+00:01:07.259 --> 00:01:09.679
+a type can own its validated fields and
+expose clear methods.
+
+32
+00:01:09.759 --> 00:01:12.180
+Good Rust APIs use ownership choices as
+part of the contract.

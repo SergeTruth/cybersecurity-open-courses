@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.694
+Embedded firmware often has multiple
+execution contexts: a main loop,
+
+2
+00:00:03.774 --> 00:00:07.661
+interrupt handlers, timers, DMA engines,
+RTOS tasks, and sometimes async executors.
+
+3
+00:00:07.741 --> 00:00:11.201
+These contexts can interact through shared
+state, hardware flags, buffers,
+
+4
+00:00:11.281 --> 00:00:12.719
+queues, and peripheral events.
+
+5
+00:00:12.799 --> 00:00:15.194
+Rust helps with ownership and data-race
+prevention,
+
+6
+00:00:15.274 --> 00:00:17.723
+but the concurrency design still needs to
+be explicit.
+
+7
+00:00:17.803 --> 00:00:21.157
+Shared mutable state should be protected
+through an appropriate pattern.
+
+8
+00:00:21.237 --> 00:00:24.591
+Depending on the platform and framework,
+that may mean critical sections,
+
+9
+00:00:24.671 --> 00:00:27.173
+atomics, locks, message passing, ownership
+transfer,
+
+10
+00:00:27.253 --> 00:00:29.170
+or framework-supported resource models.
+
+11
+00:00:29.250 --> 00:00:32.710
+The key is that the code should show who
+may read or mutate a value and under what
+
+12
+00:00:32.790 --> 00:00:33.376
+conditions.
+
+13
+00:00:33.456 --> 00:00:37.076
+DMA introduces special ownership questions
+because hardware may read or write a
+
+14
+00:00:37.156 --> 00:00:39.020
+buffer while software also wants access.
+
+15
+00:00:39.100 --> 00:00:41.708
+Defensive code defines who owns the buffer
+at each moment,
+
+16
+00:00:41.788 --> 00:00:44.344
+when software may inspect it, when
+hardware may write it,
+
+17
+00:00:44.424 --> 00:00:48.097
+how completion is signaled, and what
+happens on cancellation, timeout, or error.
+
+18
+00:00:48.177 --> 00:00:49.508
+Timing and signaling matter.
+
+19
+00:00:49.588 --> 00:00:52.729
+A design may be memory-safe and still have
+races in state transitions,
+
+20
+00:00:52.809 --> 00:00:56.483
+missed signals, unexpected latency, or
+cleanup that only works on the happy path.
+
+21
+00:00:56.563 --> 00:00:59.544
+Reviewers should ask whether interrupt
+handlers do minimal work,
+
+22
+00:00:59.624 --> 00:01:03.350
+whether shared flags are used correctly,
+and whether long operations are bounded.
+
+23
+00:01:03.430 --> 00:01:06.412
+The defensive goal is concurrency that is
+bounded and reviewable.
+
+24
+00:01:06.492 --> 00:01:09.420
+The firmware should make shared-state
+rules, buffer ownership,
+
+25
+00:01:09.500 --> 00:01:13.173
+interrupt behavior, and completion paths
+clear enough that a reviewer can reason
+
+26
+00:01:13.253 --> 00:01:16.980
+about normal execution, overload,
+cancellation, and recovery without guessing.

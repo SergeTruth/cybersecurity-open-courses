@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.225
+Double-free prevention in safe Rust comes
+from ownership rules,
+
+2
+00:00:03.305 --> 00:00:05.831
+but lifecycle-sensitive code still needs
+tests and review.
+
+3
+00:00:05.911 --> 00:00:09.132
+Tests should cover creation, ownership
+transfer, cleanup, repeated calls,
+
+4
+00:00:09.212 --> 00:00:12.481
+failed initialization, cancellation,
+shutdown, and wrapper drop behavior.
+
+5
+00:00:12.561 --> 00:00:15.336
+These are the paths where cleanup
+assumptions are easiest to miss.
+
+6
+00:00:15.416 --> 00:00:17.348
+Error-path testing is especially
+important.
+
+7
+00:00:17.428 --> 00:00:19.112
+If construction fails halfway through,
+
+8
+00:00:19.192 --> 00:00:21.818
+which resources have been acquired and
+which must be released?
+
+9
+00:00:21.898 --> 00:00:24.771
+If shutdown is called before startup
+completes, what is still owned?
+
+10
+00:00:24.851 --> 00:00:27.328
+If an external API reports an error after
+taking ownership,
+
+11
+00:00:27.408 --> 00:00:28.448
+which side must clean up?
+
+12
+00:00:28.528 --> 00:00:31.550
+Code review should focus on custom `Drop`,
+unsafe blocks, raw pointers,
+
+13
+00:00:31.630 --> 00:00:34.603
+FFI ownership transfer, allocator
+assumptions, callback lifetimes,
+
+14
+00:00:34.683 --> 00:00:36.565
+shared ownership, `Weak` upgrade behavior,
+
+15
+00:00:36.645 --> 00:00:39.123
+and any path where cleanup can happen in
+more than one place.
+
+16
+00:00:39.203 --> 00:00:42.819
+Reviewers should ask whether exactly one
+cleanup authority exists for each resource.
+
+17
+00:00:42.899 --> 00:00:46.367
+Tooling concepts such as Miri and
+sanitizers can support confidence near unsafe or
+
+18
+00:00:46.447 --> 00:00:46.843
+FFI code.
+
+19
+00:00:46.923 --> 00:00:48.756
+They do not replace a clear ownership
+model,
+
+20
+00:00:48.836 --> 00:00:52.007
+but they can help teams validate
+assumptions around low-level boundaries.
+
+21
+00:00:52.087 --> 00:00:55.555
+Dependency review also matters when
+external crates provide wrappers over native
+
+22
+00:00:55.635 --> 00:00:56.130
+resources.
+
+23
+00:00:56.210 --> 00:00:59.381
+Regression tests should be added when
+ownership and cleanup bugs are fixed.
+
+24
+00:00:59.461 --> 00:01:01.195
+If a duplicate cleanup path was possible,
+
+25
+00:01:01.275 --> 00:01:03.504
+capture the lifecycle edge in a test where
+practical.
+
+26
+00:01:03.584 --> 00:01:07.250
+Update safety contracts and API
+documentation so future maintainers understand which
+
+27
+00:01:07.330 --> 00:01:08.420
+path owns cleanup and why.

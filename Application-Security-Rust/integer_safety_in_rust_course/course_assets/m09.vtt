@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.272
+Integer safety in Rust is a repeatable
+engineering practice.
+
+2
+00:00:03.352 --> 00:00:07.191
+Start by choosing integer types based on
+meaning, range, and boundary requirements.
+
+3
+00:00:07.271 --> 00:00:09.083
+Signedness, width, platform behavior,
+
+4
+00:00:09.163 --> 00:00:11.456
+and serialization needs should all be
+deliberate.
+
+5
+00:00:11.536 --> 00:00:15.001
+A number's type should help reviewers
+understand what the value represents.
+
+6
+00:00:15.081 --> 00:00:17.640
+Validate external numbers after parsing
+and before use.
+
+7
+00:00:17.720 --> 00:00:20.066
+Parsing confirms representation, not
+permission.
+
+8
+00:00:20.146 --> 00:00:23.398
+Check range, unit, tenant context,
+operation context, related fields,
+
+9
+00:00:23.478 --> 00:00:24.491
+and default behavior.
+
+10
+00:00:24.571 --> 00:00:28.303
+Reject unsupported values clearly and
+convert validated values into domain types
+
+11
+00:00:28.383 --> 00:00:29.076
+when possible.
+
+12
+00:00:29.156 --> 00:00:32.141
+Use fallible conversions when narrowing or
+changing signedness.
+
+13
+00:00:32.221 --> 00:00:33.767
+Treat `as` casts as review points.
+
+14
+00:00:33.847 --> 00:00:37.312
+Choose arithmetic behavior deliberately:
+checked, saturating, wrapping,
+
+15
+00:00:37.392 --> 00:00:39.578
+or overflowing only when the domain calls
+for it.
+
+16
+00:00:39.658 --> 00:00:42.271
+Test numeric edge cases around every
+important behavior.
+
+17
+00:00:42.351 --> 00:00:44.483
+Treat indexes, offsets, lengths,
+capacities,
+
+18
+00:00:44.563 --> 00:00:47.229
+and allocation calculations as high-value
+review points.
+
+19
+00:00:47.309 --> 00:00:49.441
+Use checked arithmetic for size
+calculations.
+
+20
+00:00:49.521 --> 00:00:50.694
+Apply explicit maximums.
+
+21
+00:00:50.774 --> 00:00:53.173
+Fail safely when a request exceeds
+supported limits.
+
+22
+00:00:53.253 --> 00:00:56.399
+Resource exhaustion is still a security
+concern in memory-safe code.
+
+23
+00:00:56.479 --> 00:00:59.890
+Finally, document numeric contracts at
+protocol, serialization, unsafe,
+
+24
+00:00:59.970 --> 00:01:00.877
+and FFI boundaries.
+
+25
+00:01:00.957 --> 00:01:04.156
+Translate external representations into
+validated Rust types early.
+
+26
+00:01:04.236 --> 00:01:07.648
+Maintain tests for minimums, maximums,
+invalid values, conversion edges,
+
+27
+00:01:07.728 --> 00:01:09.860
+and boundary combinations as the code
+evolves.

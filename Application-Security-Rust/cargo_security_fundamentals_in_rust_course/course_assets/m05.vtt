@@ -1,0 +1,148 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.121
+Cargo builds can execute code before the
+final application runs.
+
+2
+00:00:03.201 --> 00:00:06.440
+Build scripts, procedural macros, code
+generators, native library discovery,
+
+3
+00:00:06.520 --> 00:00:09.856
+and platform-specific compilation steps
+may all run on a developer workstation or
+
+4
+00:00:09.936 --> 00:00:10.507
+CI/CD runner.
+
+5
+00:00:10.587 --> 00:00:12.970
+That makes build-time behavior part of the
+trust boundary,
+
+6
+00:00:13.050 --> 00:00:14.622
+not a harmless implementation detail.
+
+7
+00:00:14.702 --> 00:00:16.894
+A build.rs script can inspect environment
+variables,
+
+8
+00:00:16.974 --> 00:00:19.499
+locate native libraries, generate files,
+set compiler flags,
+
+9
+00:00:19.579 --> 00:00:21.104
+or communicate information to Cargo.
+
+10
+00:00:21.184 --> 00:00:24.614
+Many build scripts are legitimate and
+useful, especially for platform integration.
+
+11
+00:00:24.694 --> 00:00:27.172
+The security point is that they should be
+visible, necessary,
+
+12
+00:00:27.252 --> 00:00:29.730
+and reviewed with the same seriousness as
+other trusted code.
+
+13
+00:00:29.810 --> 00:00:32.668
+Procedural macros and code generators also
+affect what gets compiled.
+
+14
+00:00:32.748 --> 00:00:35.941
+They can create code that reviewers may
+not see directly in the source file being
+
+15
+00:00:36.021 --> 00:00:36.354
+edited.
+
+16
+00:00:36.434 --> 00:00:39.055
+Teams should understand which macros are
+central to their build,
+
+17
+00:00:39.135 --> 00:00:41.231
+whether generated code is inspectable when
+needed,
+
+18
+00:00:41.311 --> 00:00:44.837
+and whether macro dependencies introduce
+additional maintenance or policy concerns.
+
+19
+00:00:44.917 --> 00:00:46.537
+Native dependencies add another layer.
+
+20
+00:00:46.617 --> 00:00:49.714
+They may depend on platform libraries,
+link behavior, toolchains, headers,
+
+21
+00:00:49.794 --> 00:00:50.604
+or system packages.
+
+22
+00:00:50.684 --> 00:00:53.114
+This can affect portability,
+reproducibility, licensing,
+
+23
+00:00:53.194 --> 00:00:55.290
+vulnerability management, and incident
+response.
+
+24
+00:00:55.370 --> 00:00:58.515
+A Rust artifact is easier to govern when
+native assumptions are documented and
+
+25
+00:00:58.595 --> 00:01:00.120
+tested in the expected environments.
+
+26
+00:01:00.200 --> 00:01:03.678
+CI/CD context matters because build-time
+code runs where secrets and credentials may
+
+27
+00:01:03.758 --> 00:01:04.234
+be present.
+
+28
+00:01:04.314 --> 00:01:07.650
+Runners should not expose unnecessary
+registry tokens, deployment credentials,
+
+29
+00:01:07.730 --> 00:01:10.017
+or sensitive environment values to general
+build steps.
+
+30
+00:01:10.097 --> 00:01:13.384
+Secure Cargo workflows treat build-time
+execution as trusted work and design the
+
+31
+00:01:13.464 --> 00:01:16.180
+pipeline so only the right secrets are
+available at the right stage.

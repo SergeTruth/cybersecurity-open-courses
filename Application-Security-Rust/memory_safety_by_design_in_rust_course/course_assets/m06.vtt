@@ -1,0 +1,124 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.145
+Rust's unsafe keyword marks code where the
+programmer must uphold rules the compiler
+
+2
+00:00:04.225 --> 00:00:05.085
+cannot fully check.
+
+3
+00:00:05.165 --> 00:00:08.506
+Unsafe code is sometimes necessary for
+performance, low-level systems work,
+
+4
+00:00:08.586 --> 00:00:12.433
+hardware interaction, custom abstractions,
+or interoperability with other languages.
+
+5
+00:00:12.513 --> 00:00:14.336
+The keyword does not mean the code is
+wrong,
+
+6
+00:00:14.416 --> 00:00:16.188
+but it does mean the review model changes.
+
+7
+00:00:16.268 --> 00:00:19.204
+Unsafe blocks should be rare, isolated,
+justified, and documented.
+
+8
+00:00:19.284 --> 00:00:22.776
+The goal is to keep the trusted surface
+small enough that reviewers can understand
+
+9
+00:00:22.856 --> 00:00:23.008
+it.
+
+10
+00:00:23.088 --> 00:00:26.581
+When possible, unsafe internals should be
+wrapped behind safe APIs that preserve
+
+11
+00:00:26.661 --> 00:00:27.724
+documented invariants.
+
+12
+00:00:27.804 --> 00:00:31.449
+Callers should not need to understand raw
+pointer rules or allocation contracts just
+
+13
+00:00:31.529 --> 00:00:33.301
+to use an ordinary high-level operation.
+
+14
+00:00:33.381 --> 00:00:35.001
+FFI boundaries require special care.
+
+15
+00:00:35.081 --> 00:00:38.118
+Code that crosses into another language
+may involve pointer validity,
+
+16
+00:00:38.198 --> 00:00:41.134
+ownership transfer, allocation and
+deallocation responsibility,
+
+17
+00:00:41.214 --> 00:00:43.947
+thread assumptions, error conventions,
+data representation,
+
+18
+00:00:44.027 --> 00:00:46.660
+and lifetime expectations that Rust cannot
+verify on its own.
+
+19
+00:00:46.740 --> 00:00:50.283
+Those assumptions should be written down
+and tested, not left as tribal knowledge.
+
+20
+00:00:50.363 --> 00:00:52.590
+The goal is not to forbid unsafe code
+categorically.
+
+21
+00:00:52.670 --> 00:00:55.151
+The goal is to prevent unsafe assumptions
+from spreading.
+
+22
+00:00:55.231 --> 00:00:57.711
+A good boundary explains what must be true
+before the call,
+
+23
+00:00:57.791 --> 00:01:00.373
+what the call guarantees afterward, who
+owns returned data,
+
+24
+00:01:00.453 --> 00:01:03.338
+how errors are represented, and which
+tests exercise the boundary.
+
+25
+00:01:03.418 --> 00:01:07.013
+Small, documented, reviewable unsafe areas
+let the rest of the code remain easier to
+
+26
+00:01:07.093 --> 00:01:07.700
+reason about.

@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.174
+Borrowing allows code to use a value
+without taking ownership.
+
+2
+00:00:03.254 --> 00:00:05.221
+A shared reference permits read-only
+access.
+
+3
+00:00:05.301 --> 00:00:07.672
+A mutable reference permits controlled
+modification.
+
+4
+00:00:07.752 --> 00:00:09.669
+In both cases, the borrower receives
+access,
+
+5
+00:00:09.749 --> 00:00:13.230
+but the original owner remains responsible
+for the value's lifetime and cleanup.
+
+6
+00:00:13.310 --> 00:00:16.842
+Lifetimes describe how long references are
+valid relative to the data they borrow.
+
+7
+00:00:16.922 --> 00:00:19.091
+A reference must not outlive the owner of
+that data.
+
+8
+00:00:19.171 --> 00:00:22.803
+This is one of the core reasons safe Rust
+eliminates ordinary use-after-free errors:
+
+9
+00:00:22.883 --> 00:00:25.557
+the compiler checks the relationship
+before the program runs.
+
+10
+00:00:25.637 --> 00:00:27.403
+Borrow checker messages can feel strict,
+
+11
+00:00:27.483 --> 00:00:29.703
+but they often identify a real lifecycle
+ambiguity.
+
+12
+00:00:29.783 --> 00:00:32.910
+A function may be trying to return a
+reference to data that will disappear.
+
+13
+00:00:32.990 --> 00:00:35.210
+A task may be trying to hold a borrowed
+value too long.
+
+14
+00:00:35.290 --> 00:00:38.670
+A scope may be mixing mutation and shared
+access in a way that obscures who can use
+
+15
+00:00:38.750 --> 00:00:39.204
+the value.
+
+16
+00:00:39.284 --> 00:00:41.252
+Returning references requires special
+care.
+
+17
+00:00:41.332 --> 00:00:44.460
+A returned reference must point to data
+that remains valid for the caller.
+
+18
+00:00:44.540 --> 00:00:46.053
+If the reference is tied to an input,
+
+19
+00:00:46.133 --> 00:00:48.756
+the function signature should make that
+relationship clear.
+
+20
+00:00:48.836 --> 00:00:51.258
+If no valid owner will remain after the
+function returns,
+
+21
+00:00:51.338 --> 00:00:53.356
+the function should return owned data
+instead.
+
+22
+00:00:53.436 --> 00:00:56.211
+In security review, ask what owns the data
+behind each reference.
+
+23
+00:00:56.291 --> 00:00:58.107
+Ask whether that owner outlives every use.
+
+24
+00:00:58.187 --> 00:01:01.466
+Ask whether a reference crosses async,
+thread, callback, or FFI boundaries.
+
+25
+00:01:01.546 --> 00:01:04.876
+Good lifetime design makes those answers
+visible instead of relying on tribal
+
+26
+00:01:04.956 --> 00:01:05.460
+knowledge.

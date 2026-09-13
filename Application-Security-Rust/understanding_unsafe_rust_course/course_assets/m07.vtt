@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.267
+One of the best uses of unsafe Rust is to
+implement an abstraction that callers can
+
+2
+00:00:04.347 --> 00:00:04.901
+use safely.
+
+3
+00:00:04.981 --> 00:00:07.086
+The unsafe code may be necessary
+internally,
+
+4
+00:00:07.166 --> 00:00:10.324
+but the public API should make invalid use
+difficult or impossible.
+
+5
+00:00:10.404 --> 00:00:14.171
+That is the difference between unsafe as a
+controlled implementation detail and
+
+6
+00:00:14.251 --> 00:00:16.301
+unsafe as a burden pushed onto every
+caller.
+
+7
+00:00:16.381 --> 00:00:18.153
+Encapsulation protects invariants.
+
+8
+00:00:18.233 --> 00:00:21.723
+If a type depends on a buffer being
+initialized, a pointer remaining valid,
+
+9
+00:00:21.803 --> 00:00:24.186
+or a state transition happening in a
+certain order,
+
+10
+00:00:24.266 --> 00:00:26.648
+the public interface should preserve those
+rules.
+
+11
+00:00:26.728 --> 00:00:30.218
+Limited visibility, constructor
+validation, ownership-aware methods,
+
+12
+00:00:30.298 --> 00:00:33.677
+and explicit lifetime relationships can
+help keep the contract intact.
+
+13
+00:00:33.757 --> 00:00:36.970
+Type-state patterns can be useful when a
+value moves through phases.
+
+14
+00:00:37.050 --> 00:00:40.097
+Instead of storing a flag that callers
+must interpret correctly,
+
+15
+00:00:40.177 --> 00:00:42.171
+the API can represent the phase in the
+type.
+
+16
+00:00:42.251 --> 00:00:45.908
+That can prevent operations from being
+called before initialization or after
+
+17
+00:00:45.988 --> 00:00:46.431
+closure.
+
+18
+00:00:46.511 --> 00:00:49.447
+The goal is to let the compiler enforce
+more of the safety story.
+
+19
+00:00:49.527 --> 00:00:52.962
+A safe wrapper is only valid if it
+prevents safe callers from violating the
+
+20
+00:00:53.042 --> 00:00:55.258
+assumptions required by the unsafe
+internals.
+
+21
+00:00:55.338 --> 00:00:59.160
+Review should ask whether ordinary safe
+code can accidentally produce an invalid
+
+22
+00:00:59.240 --> 00:01:02.841
+state, create aliasing that the internals
+cannot handle, misuse a lifetime,
+
+23
+00:01:02.921 --> 00:01:05.081
+or bypass validation through a public
+method.
+
+24
+00:01:05.161 --> 00:01:08.596
+The review question is not only whether
+the unsafe block is correct today.
+
+25
+00:01:08.676 --> 00:01:12.665
+It is also whether tomorrow's maintainer
+can change nearby code without breaking the
+
+26
+00:01:12.745 --> 00:01:13.243
+contract.
+
+27
+00:01:13.323 --> 00:01:16.813
+Good abstractions make the unsafe
+assumption local, documented, tested,
+
+28
+00:01:16.893 --> 00:01:18.500
+and hard to violate accidentally.

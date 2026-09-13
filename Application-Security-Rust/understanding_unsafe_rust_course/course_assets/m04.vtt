@@ -1,0 +1,135 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.617
+Unsafe code should come with a safety
+contract.
+
+2
+00:00:02.697 --> 00:00:05.980
+The contract explains what must be true
+before the unsafe operation runs,
+
+3
+00:00:06.060 --> 00:00:09.236
+what invariants the code maintains, what
+callers are responsible for,
+
+4
+00:00:09.316 --> 00:00:11.275
+and what future maintainers must not
+break.
+
+5
+00:00:11.355 --> 00:00:13.048
+This is not paperwork for its own sake.
+
+6
+00:00:13.128 --> 00:00:15.511
+It is the evidence that makes unsafe code
+reviewable.
+
+7
+00:00:15.591 --> 00:00:18.767
+A useful safety comment is not a
+decorative note that says, this is safe.
+
+8
+00:00:18.847 --> 00:00:22.129
+It explains why the unsafe operation is
+valid under specific conditions.
+
+9
+00:00:22.209 --> 00:00:23.850
+It may identify the owner of a buffer,
+
+10
+00:00:23.930 --> 00:00:27.636
+the lifetime relationship being preserved,
+the source of an alignment guarantee,
+
+11
+00:00:27.716 --> 00:00:31.527
+the reason a pointer is non-null, or the
+synchronization that protects shared state.
+
+12
+00:00:31.607 --> 00:00:34.942
+Documentation should identify trusted
+inputs, ownership expectations,
+
+13
+00:00:35.022 --> 00:00:38.887
+lifetime assumptions, thread assumptions,
+layout assumptions, and error behavior.
+
+14
+00:00:38.967 --> 00:00:42.672
+If a caller must pass a value created only
+through a particular constructor, say so.
+
+15
+00:00:42.752 --> 00:00:45.611
+If an external function must not retain a
+pointer after the call,
+
+16
+00:00:45.691 --> 00:00:46.961
+document that expectation.
+
+17
+00:00:47.041 --> 00:00:50.747
+If a type representation must match an
+external ABI, make that assumption visible.
+
+18
+00:00:50.827 --> 00:00:53.050
+Safety documentation also needs to stay
+current.
+
+19
+00:00:53.130 --> 00:00:56.730
+Unsafe code can become risky when
+surrounding code changes and the old comment no
+
+20
+00:00:56.810 --> 00:00:58.557
+longer describes the real conditions.
+
+21
+00:00:58.637 --> 00:01:01.496
+Reviewers should treat stale safety
+comments as a warning sign,
+
+22
+00:01:01.576 --> 00:01:04.646
+because outdated documentation can be
+worse than no documentation:
+
+23
+00:01:04.726 --> 00:01:07.161
+it creates confidence where the evidence
+has drifted.
+
+24
+00:01:07.241 --> 00:01:10.205
+Without safety contracts, unsafe code
+becomes tribal knowledge,
+
+25
+00:01:10.285 --> 00:01:11.768
+and tribal knowledge ages badly.
+
+26
+00:01:11.848 --> 00:01:15.553
+People leave, APIs change, dependencies
+update, and platform assumptions shift.
+
+27
+00:01:15.633 --> 00:01:19.392
+Documentation turns hidden reasoning into
+shared engineering evidence that can be
+
+28
+00:01:19.472 --> 00:01:21.060
+reviewed, tested, and maintained.

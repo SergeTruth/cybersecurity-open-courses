@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.057
+Memory safety is stronger when the
+program's types represent reality accurately.
+
+2
+00:00:04.137 --> 00:00:07.338
+Rust lets developers move checks closer to
+the point where data is created,
+
+3
+00:00:07.418 --> 00:00:08.993
+parsed, or accepted from a boundary.
+
+4
+00:00:09.073 --> 00:00:10.903
+Instead of letting raw strings, integers,
+
+5
+00:00:10.983 --> 00:00:13.320
+or loosely related flags spread through
+the codebase,
+
+6
+00:00:13.400 --> 00:00:15.534
+teams can create types that carry domain
+meaning.
+
+7
+00:00:15.614 --> 00:00:19.070
+Newtypes are useful when two values share
+the same primitive representation but
+
+8
+00:00:19.150 --> 00:00:20.522
+should not be interchangeable.
+
+9
+00:00:20.602 --> 00:00:22.787
+A user identifier, tenant identifier, path
+label,
+
+10
+00:00:22.867 --> 00:00:25.001
+and request identifier may all look like
+strings,
+
+11
+00:00:25.081 --> 00:00:28.790
+but they may follow different validation
+rules and carry different security meaning.
+
+12
+00:00:28.870 --> 00:00:32.529
+Giving them separate types reduces
+accidental mixups and makes interfaces clearer.
+
+13
+00:00:32.609 --> 00:00:36.217
+Enums can model states and transitions
+without relying on scattered boolean flags.
+
+14
+00:00:36.297 --> 00:00:39.295
+A connection, job, or parser may have a
+small set of meaningful states.
+
+15
+00:00:39.375 --> 00:00:43.033
+Encoding those states directly makes
+impossible combinations harder to represent.
+
+16
+00:00:43.113 --> 00:00:46.721
+Option represents absence explicitly, and
+Result represents failure explicitly,
+
+17
+00:00:46.801 --> 00:00:50.104
+so downstream code must acknowledge those
+cases instead of relying on hidden
+
+18
+00:00:50.184 --> 00:00:50.794
+assumptions.
+
+19
+00:00:50.874 --> 00:00:54.329
+Constructors and parsers can validate data
+once and return a type that later code
+
+20
+00:00:54.409 --> 00:00:54.866
+can trust.
+
+21
+00:00:54.946 --> 00:00:57.080
+This reduces repeated checks, lowers
+ambiguity,
+
+22
+00:00:57.160 --> 00:00:59.040
+and makes invalid states harder to
+express.
+
+23
+00:00:59.120 --> 00:01:02.576
+Type-driven design does not replace
+validation, but it gives validation a home.
+
+24
+00:01:02.656 --> 00:01:05.857
+The result is downstream code that is
+simpler, safer, and easier to review.
+
+25
+00:01:05.937 --> 00:01:07.716
+This pattern also improves maintenance.
+
+26
+00:01:07.796 --> 00:01:09.015
+When a requirement changes,
+
+27
+00:01:09.095 --> 00:01:12.296
+reviewers can look for the type or
+constructor that owns the rule instead of
+
+28
+00:01:12.376 --> 00:01:14.104
+searching for scattered conditionals.
+
+29
+00:01:14.184 --> 00:01:17.639
+Memory safety and correctness both benefit
+when the codebase has obvious places
+
+30
+00:01:17.719 --> 00:01:20.260
+where assumptions are created, enforced,
+and documented.

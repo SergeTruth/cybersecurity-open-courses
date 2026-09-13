@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.292
+Many RTIC systems run in `no_std`
+environments with strict memory and timing
+
+2
+00:00:04.372 --> 00:00:05.072
+constraints.
+
+3
+00:00:05.152 --> 00:00:09.060
+That can mean limited library support,
+controlled allocation, fixed buffers,
+
+4
+00:00:09.140 --> 00:00:13.049
+static resources, and failure behavior
+that must match the device rather than a
+
+5
+00:00:13.129 --> 00:00:14.471
+desktop or server runtime.
+
+6
+00:00:14.551 --> 00:00:16.709
+Safe Rust reduces memory-corruption risk,
+
+7
+00:00:16.789 --> 00:00:20.464
+but firmware can still fail through stack
+exhaustion, oversized buffers,
+
+8
+00:00:20.544 --> 00:00:24.453
+unbounded queues, unchecked integer
+conversions, uncontrolled allocation,
+
+9
+00:00:24.533 --> 00:00:27.391
+or panic behavior that is not appropriate
+for the product.
+
+10
+00:00:27.471 --> 00:00:29.746
+Resource safety remains an engineering
+task.
+
+11
+00:00:29.826 --> 00:00:33.326
+Defensive design reviews stack use, heap
+policy if any, static memory,
+
+12
+00:00:33.406 --> 00:00:37.315
+queue lengths, message rates, buffer
+sizes, allocation strategy, recursion,
+
+13
+00:00:37.395 --> 00:00:38.912
+and worst-case parsing paths.
+
+14
+00:00:38.992 --> 00:00:42.375
+Numeric values that influence indexes,
+lengths, timeouts, counts,
+
+15
+00:00:42.455 --> 00:00:44.789
+or allocation should be validated and
+bounded.
+
+16
+00:00:44.869 --> 00:00:46.735
+Panic behavior should be deliberate.
+
+17
+00:00:46.815 --> 00:00:49.616
+A development panic policy may be useful
+during testing,
+
+18
+00:00:49.696 --> 00:00:53.721
+but production firmware needs a
+product-specific answer for what happens when an
+
+19
+00:00:53.801 --> 00:00:54.676
+invariant fails.
+
+20
+00:00:54.756 --> 00:00:58.664
+The answer may involve reset, safe state,
+error reporting, watchdog behavior,
+
+21
+00:00:58.744 --> 00:01:01.136
+or controlled shutdown depending on the
+device.
+
+22
+00:01:01.216 --> 00:01:04.366
+The system should define behavior under
+pressure: full queues,
+
+23
+00:01:04.446 --> 00:01:08.063
+oversized input, dropped messages, missed
+timing, peripheral failure,
+
+24
+00:01:08.143 --> 00:01:09.368
+and allocation failure.
+
+25
+00:01:09.448 --> 00:01:13.532
+Predictable degraded behavior is better
+than pretending those conditions cannot
+
+26
+00:01:13.612 --> 00:01:14.020
+happen.

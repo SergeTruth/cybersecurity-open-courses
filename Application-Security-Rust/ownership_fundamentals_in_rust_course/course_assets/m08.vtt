@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.317
+Single ownership is the default in Rust,
+
+2
+00:00:02.397 --> 00:00:04.909
+but some designs need shared ownership or
+indirection.
+
+3
+00:00:04.989 --> 00:00:08.837
+Smart pointers support these patterns
+while still keeping responsibility visible.
+
+4
+00:00:08.917 --> 00:00:10.895
+They are not escape hatches from
+ownership.
+
+5
+00:00:10.975 --> 00:00:13.861
+They are tools for expressing more
+specific ownership designs.
+
+6
+00:00:13.941 --> 00:00:15.544
+`Box<T>` gives owned indirection.
+
+7
+00:00:15.624 --> 00:00:17.815
+It stores a value behind a stable owning
+pointer,
+
+8
+00:00:17.895 --> 00:00:21.048
+which can be useful for large values,
+recursive types, trait objects,
+
+9
+00:00:21.128 --> 00:00:24.656
+or cases where moving the pointer is
+simpler than moving the underlying value.
+
+10
+00:00:24.736 --> 00:00:28.370
+The box still has one owner, and cleanup
+still happens when that owner is dropped.
+
+11
+00:00:28.450 --> 00:00:31.657
+`Rc<T>` supports shared ownership within a
+single-threaded context.
+
+12
+00:00:31.737 --> 00:00:33.714
+Multiple owners can point to the same
+value,
+
+13
+00:00:33.794 --> 00:00:36.199
+and the value is cleaned up when the last
+owner is gone.
+
+14
+00:00:36.279 --> 00:00:38.684
+`Arc<T>` supports shared ownership across
+threads.
+
+15
+00:00:38.764 --> 00:00:42.292
+The distinction matters because
+thread-safe sharing has different costs and
+
+16
+00:00:42.372 --> 00:00:44.403
+constraints than single-threaded sharing.
+
+17
+00:00:44.483 --> 00:00:46.834
+Shared ownership is not the same as shared
+mutation.
+
+18
+00:00:46.914 --> 00:00:49.587
+If multiple parts of the program need to
+mutate shared data,
+
+19
+00:00:49.667 --> 00:00:53.354
+the design needs controlled
+synchronization or an interior mutability pattern.
+
+20
+00:00:53.434 --> 00:00:54.877
+These tools can be appropriate,
+
+21
+00:00:54.957 --> 00:00:58.752
+but they should be used deliberately
+because they move some checks from compile time
+
+22
+00:00:58.832 --> 00:01:01.077
+into runtime rules or synchronization
+behavior.
+
+23
+00:01:01.157 --> 00:01:03.882
+Threads and async tasks make ownership
+lifetimes explicit.
+
+24
+00:01:03.962 --> 00:01:06.528
+Data moved into a task must live long
+enough for that task.
+
+25
+00:01:06.608 --> 00:01:09.707
+Data shared across tasks must be safe to
+share under the chosen model.
+
+26
+00:01:09.787 --> 00:01:13.101
+Resource cleanup and cancellation behavior
+should be part of the design.
+
+27
+00:01:13.181 --> 00:01:16.815
+Ownership gives teams a language for
+reasoning about these lifecycle questions
+
+28
+00:01:16.895 --> 00:01:19.140
+before production behavior becomes
+surprising.

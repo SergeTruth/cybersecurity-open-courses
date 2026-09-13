@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.398
+Arithmetic behavior is a design decision.
+
+2
+00:00:02.478 --> 00:00:06.115
+Overflow and underflow happen when a
+calculation crosses the range that a type can
+
+3
+00:00:06.195 --> 00:00:06.722
+represent.
+
+4
+00:00:06.802 --> 00:00:09.964
+The defensive question is not only whether
+Rust catches a problem in one
+
+5
+00:00:10.044 --> 00:00:10.782
+configuration.
+
+6
+00:00:10.862 --> 00:00:14.341
+The question is which arithmetic behavior
+the application actually intends.
+
+7
+00:00:14.421 --> 00:00:16.793
+Rust can detect overflow in checked
+configurations,
+
+8
+00:00:16.873 --> 00:00:20.616
+but production code should not rely on
+accidental build-mode behavior for security
+
+9
+00:00:20.696 --> 00:00:24.280
+decisions, allocation decisions,
+authorization rules, or parser boundaries.
+
+10
+00:00:24.360 --> 00:00:28.050
+If failure matters, the code should
+represent failure explicitly through checked
+
+11
+00:00:28.130 --> 00:00:30.397
+arithmetic or a domain-specific validation
+path.
+
+12
+00:00:30.477 --> 00:00:33.850
+Checked arithmetic reports failure when
+the result cannot be represented.
+
+13
+00:00:33.930 --> 00:00:37.146
+That is often the right choice for
+allocation sizes, offsets, counters,
+
+14
+00:00:37.226 --> 00:00:39.229
+protocol calculations, money-like values,
+
+15
+00:00:39.309 --> 00:00:42.788
+and other cases where crossing the
+boundary means the operation should stop or
+
+16
+00:00:42.868 --> 00:00:43.606
+return an error.
+
+17
+00:00:43.686 --> 00:00:45.689
+Saturating arithmetic clamps at a
+boundary.
+
+18
+00:00:45.769 --> 00:00:49.195
+It can be appropriate for some counters,
+metrics, or bounded display values,
+
+19
+00:00:49.275 --> 00:00:52.490
+but it can hide a problem if the domain
+really needs to know that a limit was
+
+20
+00:00:52.570 --> 00:00:53.045
+exceeded.
+
+21
+00:00:53.125 --> 00:00:56.762
+Wrapping arithmetic intentionally wraps
+around the type range and should be used
+
+22
+00:00:56.842 --> 00:01:00.057
+only when wraparound is part of the
+design, not because it is convenient.
+
+23
+00:01:00.137 --> 00:01:03.458
+Overflowing arithmetic returns both a
+result and an overflow indication,
+
+24
+00:01:03.538 --> 00:01:06.595
+which can be useful when the caller needs
+both pieces of information.
+
+25
+00:01:06.675 --> 00:01:09.996
+Whichever behavior is chosen, document the
+intent and test the edge cases.
+
+26
+00:01:10.076 --> 00:01:11.499
+Minimums, maximums, zero, one,
+
+27
+00:01:11.579 --> 00:01:14.900
+and one-past-limit values are where
+numeric assumptions become visible.

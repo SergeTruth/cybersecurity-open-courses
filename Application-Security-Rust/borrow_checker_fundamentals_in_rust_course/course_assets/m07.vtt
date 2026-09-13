@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.887
+Collections are where many borrow checker
+lessons become practical.
+
+2
+00:00:03.967 --> 00:00:05.976
+Borrowing one element from a vector, map,
+
+3
+00:00:06.056 --> 00:00:09.787
+or string can prevent mutation of the
+collection while that borrow is active.
+
+4
+00:00:09.867 --> 00:00:13.483
+That protection matters because changing a
+collection may move elements,
+
+5
+00:00:13.563 --> 00:00:17.294
+resize storage, or invalidate assumptions
+about what a reference points to.
+
+6
+00:00:17.374 --> 00:00:20.244
+Iteration choices also communicate
+ownership and access.
+
+7
+00:00:20.324 --> 00:00:22.218
+Iterating by value can consume values.
+
+8
+00:00:22.298 --> 00:00:25.742
+Iterating by shared reference reads values
+without taking ownership.
+
+9
+00:00:25.822 --> 00:00:28.578
+Iterating by mutable reference changes
+values in place.
+
+10
+00:00:28.658 --> 00:00:32.676
+A loop should choose the access pattern
+that matches the work it actually performs.
+
+11
+00:00:32.756 --> 00:00:36.716
+Borrow conflicts often happen when code
+tries to read from a collection and modify
+
+12
+00:00:36.796 --> 00:00:37.772
+it in the same phase.
+
+13
+00:00:37.852 --> 00:00:41.182
+For example, a function might look up an
+entry, keep a reference to it,
+
+14
+00:00:41.262 --> 00:00:44.533
+and then try to insert or remove something
+from the same collection.
+
+15
+00:00:44.613 --> 00:00:48.345
+The compiler rejects these patterns when
+the active reference would make the
+
+16
+00:00:48.425 --> 00:00:49.802
+mutation unclear or unsafe.
+
+17
+00:00:49.882 --> 00:00:52.867
+Defensive refactoring separates lookup
+from modification.
+
+18
+00:00:52.947 --> 00:00:56.219
+First collect the information needed to
+decide what should happen.
+
+19
+00:00:56.299 --> 00:00:57.676
+Then let the read borrow end.
+
+20
+00:00:57.756 --> 00:00:59.249
+Finally perform the mutation.
+
+21
+00:00:59.329 --> 00:01:01.740
+In other cases, use APIs that safely split
+access,
+
+22
+00:01:01.820 --> 00:01:03.427
+borrow only the necessary field,
+
+23
+00:01:03.507 --> 00:01:06.607
+or return an owned value that can outlive
+the collection borrow.
+
+24
+00:01:06.687 --> 00:01:08.983
+Avoid reflexive cloning as the first
+response.
+
+25
+00:01:09.063 --> 00:01:12.220
+Cloning can be right when independent
+ownership is truly needed,
+
+26
+00:01:12.300 --> 00:01:14.137
+but it can also hide unclear data flow.
+
+27
+00:01:14.217 --> 00:01:15.996
+Narrow borrow scopes, split phases,
+
+28
+00:01:16.076 --> 00:01:20.209
+and clearer function boundaries often
+solve the problem while preserving the design
+
+29
+00:01:20.289 --> 00:01:20.691
+intent.
+
+30
+00:01:20.771 --> 00:01:24.100
+When cloning is chosen, it should be
+intentional and easy to explain.

@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.834
+Rust's type system and bounds checks are
+powerful,
+
+2
+00:00:02.914 --> 00:00:05.086
+but buffer-handling code still needs
+testing.
+
+3
+00:00:05.166 --> 00:00:07.826
+Tests should cover expected input and
+unexpected shapes.
+
+4
+00:00:07.906 --> 00:00:11.652
+Boundary tests are especially important
+because buffer bugs often live at edges:
+
+5
+00:00:11.732 --> 00:00:14.012
+empty input, one element, maximum expected
+size,
+
+6
+00:00:14.092 --> 00:00:17.403
+one beyond the expected size, truncated
+records, and invalid encoding.
+
+7
+00:00:17.483 --> 00:00:20.469
+Negative tests should be routine for
+parsers and input handlers.
+
+8
+00:00:20.549 --> 00:00:23.101
+Oversized input, malformed fields, extra
+delimiters,
+
+9
+00:00:23.181 --> 00:00:26.221
+missing delimiters, inconsistent length
+fields, invalid UTF-8,
+
+10
+00:00:26.301 --> 00:00:30.155
+unsupported versions, and incomplete
+records should produce predictable errors.
+
+11
+00:00:30.235 --> 00:00:32.407
+The goal is not just to avoid memory
+corruption;
+
+12
+00:00:32.487 --> 00:00:34.550
+it is to avoid fragile operational
+behavior.
+
+13
+00:00:34.630 --> 00:00:38.267
+Fuzzing concepts are useful for parsers
+because they explore unexpected input
+
+14
+00:00:38.347 --> 00:00:38.727
+shapes.
+
+15
+00:00:38.807 --> 00:00:42.281
+A fuzzer can generate many variations that
+humans would not manually write.
+
+16
+00:00:42.361 --> 00:00:45.510
+The safe defensive framing is to use
+fuzzing to find crashes, panics,
+
+17
+00:00:45.590 --> 00:00:47.382
+resource problems, parser confusion,
+
+18
+00:00:47.462 --> 00:00:51.370
+and unexpected acceptance of malformed
+input before those issues reach production.
+
+19
+00:00:51.450 --> 00:00:53.296
+Tooling can support safer development.
+
+20
+00:00:53.376 --> 00:00:55.493
+Formatting and linting improve
+readability.
+
+21
+00:00:55.573 --> 00:00:59.428
+Miri concepts and sanitizer concepts can
+help teams reason about memory behavior in
+
+22
+00:00:59.508 --> 00:01:00.594
+appropriate contexts.
+
+23
+00:01:00.674 --> 00:01:03.931
+Dependency review helps when parser
+libraries, binary format crates,
+
+24
+00:01:04.011 --> 00:01:06.779
+or FFI wrappers become part of the
+buffer-handling surface.
+
+25
+00:01:06.859 --> 00:01:10.497
+Code review should focus on indexing,
+length assumptions, allocation limits,
+
+26
+00:01:10.577 --> 00:01:13.943
+integer conversions, unsafe blocks, FFI
+contracts, parser boundaries,
+
+27
+00:01:14.023 --> 00:01:16.791
+and places where a panic would create
+operational problems.
+
+28
+00:01:16.871 --> 00:01:18.120
+After a buffer-safety fix,
+
+29
+00:01:18.200 --> 00:01:21.620
+add regression tests so the same
+assumption does not quietly return later.

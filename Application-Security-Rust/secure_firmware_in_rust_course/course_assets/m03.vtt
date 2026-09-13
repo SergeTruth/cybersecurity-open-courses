@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.236
+Many firmware projects use `no_std`, fixed
+memory layouts,
+
+2
+00:00:03.316 --> 00:00:06.697
+static allocation, bounded buffers, or
+carefully controlled heap usage.
+
+3
+00:00:06.777 --> 00:00:10.586
+These constraints shape security because
+the device may have limited diagnostics,
+
+4
+00:00:10.666 --> 00:00:14.476
+strict timing behavior, and little
+tolerance for unbounded allocation or surprise
+
+5
+00:00:14.556 --> 00:00:15.254
+failure paths.
+
+6
+00:00:15.334 --> 00:00:19.036
+Rust ownership and borrowing help clarify
+who owns buffers, peripherals, state,
+
+7
+00:00:19.116 --> 00:00:19.706
+and handles.
+
+8
+00:00:19.786 --> 00:00:23.596
+That clarity reduces classes of
+memory-safety risk in safe code and gives reviewers
+
+9
+00:00:23.676 --> 00:00:26.359
+a better way to reason about reuse,
+mutation, and lifetime.
+
+10
+00:00:26.439 --> 00:00:30.194
+In firmware, that also helps explain which
+component is responsible for a resource
+
+11
+00:00:30.274 --> 00:00:31.240
+at each point in time.
+
+12
+00:00:31.320 --> 00:00:34.057
+Memory-safe code can still fail through
+resource pressure.
+
+13
+00:00:34.137 --> 00:00:37.303
+Stack depth, buffer sizes, queue lengths,
+message rates, recursion,
+
+14
+00:00:37.383 --> 00:00:41.085
+allocation policy, integer conversions,
+and worst-case input sizes all matter.
+
+15
+00:00:41.165 --> 00:00:44.760
+A firmware path can be memory safe and
+still become unreliable if it accepts more
+
+16
+00:00:44.840 --> 00:00:46.289
+work than the device can handle.
+
+17
+00:00:46.369 --> 00:00:49.803
+Defensive Rust firmware favors bounded
+data structures, explicit limits,
+
+18
+00:00:49.883 --> 00:00:53.746
+predictable failure behavior, and careful
+conversion of numeric values into sizes,
+
+19
+00:00:53.826 --> 00:00:55.275
+indexes, counts, and timeouts.
+
+20
+00:00:55.355 --> 00:00:58.842
+When a heap is present, the policy for
+allocation and failure should be clear.
+
+21
+00:00:58.922 --> 00:01:02.464
+When static buffers are used, ownership
+and maximum use should be documented.
+
+22
+00:01:02.544 --> 00:01:05.387
+The practical review question is what
+happens under pressure.
+
+23
+00:01:05.467 --> 00:01:08.311
+If input is too large, if a queue is full,
+if a task misses timing,
+
+24
+00:01:08.391 --> 00:01:10.645
+if a buffer is exhausted, or if a
+conversion fails,
+
+25
+00:01:10.725 --> 00:01:12.764
+the device should move to a defined
+behavior.
+
+26
+00:01:12.844 --> 00:01:14.668
+Secure firmware is not only memory safe;
+
+27
+00:01:14.748 --> 00:01:17.860
+it is bounded enough to operate safely
+when conditions are not ideal.

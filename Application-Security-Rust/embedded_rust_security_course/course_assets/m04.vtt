@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.816
+Embedded Rust often interacts directly
+with hardware through memory-mapped
+
+2
+00:00:03.896 --> 00:00:06.860
+registers, peripheral access crates,
+hardware abstraction layers,
+
+3
+00:00:06.940 --> 00:00:08.246
+and device-specific drivers.
+
+4
+00:00:08.326 --> 00:00:11.692
+These layers are where language-level
+safety meets hardware behavior that the
+
+5
+00:00:11.772 --> 00:00:13.279
+compiler cannot fully understand.
+
+6
+00:00:13.359 --> 00:00:15.670
+Memory-mapped I/O is different from
+ordinary memory.
+
+7
+00:00:15.750 --> 00:00:18.764
+Register reads and writes can have side
+effects, timing requirements,
+
+8
+00:00:18.844 --> 00:00:21.958
+ordering constraints, or relationships
+with clocks, pins, interrupts,
+
+9
+00:00:22.038 --> 00:00:23.345
+DMA engines, and power states.
+
+10
+00:00:23.425 --> 00:00:27.042
+The defensive goal is to represent those
+constraints through types and APIs wherever
+
+11
+00:00:27.122 --> 00:00:27.624
+practical.
+
+12
+00:00:27.704 --> 00:00:29.965
+Some hardware access requires `unsafe`
+internally.
+
+13
+00:00:30.045 --> 00:00:32.808
+That does not make the code wrong, but it
+changes the review model.
+
+14
+00:00:32.888 --> 00:00:35.651
+Unsafe code should be small, justified,
+documented, and tested.
+
+15
+00:00:35.731 --> 00:00:39.197
+A safety comment should explain the
+hardware and memory assumptions that make the
+
+16
+00:00:39.277 --> 00:00:41.437
+operation valid, not simply assert that it
+is safe.
+
+17
+00:00:41.517 --> 00:00:43.527
+Peripheral ownership and exclusivity
+matter.
+
+18
+00:00:43.607 --> 00:00:47.123
+If two parts of firmware believe they own
+the same peripheral or pin configuration,
+
+19
+00:00:47.203 --> 00:00:48.761
+behavior can become unpredictable.
+
+20
+00:00:48.841 --> 00:00:51.955
+Initialization order, clock setup, pin
+mode, interrupt configuration,
+
+21
+00:00:52.035 --> 00:00:55.351
+and reset behavior should be expressed in
+a way that safe callers cannot misuse
+
+22
+00:00:55.431 --> 00:00:56.084
+accidentally.
+
+23
+00:00:56.164 --> 00:00:58.425
+The best hardware abstractions protect
+invariants.
+
+24
+00:00:58.505 --> 00:01:01.117
+Safe APIs should guide callers toward
+valid register states,
+
+25
+00:01:01.197 --> 00:01:04.563
+valid transitions, bounded operations, and
+documented timing expectations.
+
+26
+00:01:04.643 --> 00:01:07.858
+Reviewers should pay close attention to
+places where safe code crosses into
+
+27
+00:01:07.938 --> 00:01:10.500
+low-level assumptions that cannot be
+checked by Rust alone.

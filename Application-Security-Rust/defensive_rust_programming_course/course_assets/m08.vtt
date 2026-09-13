@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.342
+Rust helps prevent data races in safe
+code,
+
+2
+00:00:02.422 --> 00:00:05.646
+but defensive programming still matters in
+concurrent and async systems.
+
+3
+00:00:05.726 --> 00:00:08.899
+Shared state, locks, channels, atomics,
+task lifetimes, cancellation,
+
+4
+00:00:08.979 --> 00:00:11.231
+timeouts, connection pools, file handles,
+queues,
+
+5
+00:00:11.311 --> 00:00:13.870
+and memory limits can all affect security
+and reliability.
+
+6
+00:00:13.950 --> 00:00:15.485
+Memory safety is a major advantage,
+
+7
+00:00:15.565 --> 00:00:17.664
+but it is not the same as operational
+resilience.
+
+8
+00:00:17.744 --> 00:00:20.200
+Shared state needs deliberate
+synchronization design.
+
+9
+00:00:20.280 --> 00:00:23.504
+Traits such as Send and Sync express
+important thread-safety properties,
+
+10
+00:00:23.584 --> 00:00:25.836
+but developers still choose the
+concurrency model.
+
+11
+00:00:25.916 --> 00:00:29.498
+A lock may protect memory safety while
+still creating deadlock or starvation risk.
+
+12
+00:00:29.578 --> 00:00:33.263
+A channel may simplify ownership while
+still allowing unbounded work to accumulate.
+
+13
+00:00:33.343 --> 00:00:36.311
+Async Rust adds additional design
+questions around task ownership,
+
+14
+00:00:36.391 --> 00:00:39.001
+cancellation, timeout behavior, and
+blocking operations.
+
+15
+00:00:39.081 --> 00:00:42.049
+A service can fail because it accepts
+unbounded work, waits forever,
+
+16
+00:00:42.129 --> 00:00:43.306
+blocks the wrong executor,
+
+17
+00:00:43.386 --> 00:00:45.843
+or holds a lock across an operation that
+should not block.
+
+18
+00:00:45.923 --> 00:00:49.096
+These are defensive design issues, not
+just performance tuning details.
+
+19
+00:00:49.176 --> 00:00:51.018
+Resource controls are security controls.
+
+20
+00:00:51.098 --> 00:00:54.169
+Bounded queues, connection limits, request
+timeouts, worker limits,
+
+21
+00:00:54.249 --> 00:00:58.036
+backpressure, and graceful degradation
+help preserve availability when the system is
+
+22
+00:00:58.116 --> 00:00:58.576
+stressed.
+
+23
+00:00:58.656 --> 00:01:02.290
+A memory-safe application can still become
+unavailable if it does not control work,
+
+24
+00:01:02.370 --> 00:01:04.264
+memory, and external dependency pressure.
+
+25
+00:01:04.344 --> 00:01:07.005
+Defensive Rust designs concurrency around
+clear ownership,
+
+26
+00:01:07.085 --> 00:01:10.053
+bounded resources, observable failure, and
+recoverable behavior.
+
+27
+00:01:10.133 --> 00:01:13.613
+Reviewers should ask what happens when
+requests spike, dependencies slow down,
+
+28
+00:01:13.693 --> 00:01:16.098
+tasks are cancelled, or partial work must
+be cleaned up.
+
+29
+00:01:16.178 --> 00:01:19.300
+The safest concurrent design is the one
+future maintainers can explain.

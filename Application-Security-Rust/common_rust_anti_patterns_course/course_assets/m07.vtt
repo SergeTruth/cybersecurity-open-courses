@@ -1,0 +1,147 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.475
+Rust can parse data safely, but parsed
+does not mean trusted.
+
+2
+00:00:03.555 --> 00:00:06.647
+External input may arrive from files,
+network requests, APIs,
+
+3
+00:00:06.727 --> 00:00:10.344
+environment variables, command-line
+arguments, serialized messages,
+
+4
+00:00:10.424 --> 00:00:12.349
+databases, queues, or configuration.
+
+5
+00:00:12.429 --> 00:00:15.346
+A value can be syntactically valid and
+still be out of range,
+
+6
+00:00:15.426 --> 00:00:18.576
+unauthorized, inconsistent, too large,
+incorrectly encoded,
+
+7
+00:00:18.656 --> 00:00:20.990
+or inappropriate for the requested
+operation.
+
+8
+00:00:21.070 --> 00:00:23.870
+Parsing and validation are separate
+responsibilities.
+
+9
+00:00:23.950 --> 00:00:26.925
+Parsing says that bytes or text can be
+interpreted as a value.
+
+10
+00:00:27.005 --> 00:00:30.622
+Validation says that the value is allowed
+in this domain, for this tenant,
+
+11
+00:00:30.702 --> 00:00:33.152
+in this unit, at this boundary, under this
+policy.
+
+12
+00:00:33.232 --> 00:00:36.674
+Treating those as the same step is a
+common source of weak assumptions.
+
+13
+00:00:36.754 --> 00:00:41.071
+Indexes, lengths, offsets, capacities, and
+allocation sizes deserve special review.
+
+14
+00:00:41.151 --> 00:00:44.010
+Direct indexing may panic if shape
+assumptions are wrong.
+
+15
+00:00:44.090 --> 00:00:47.240
+Unchecked casts can change meaning across
+signedness or width.
+
+16
+00:00:47.320 --> 00:00:50.995
+Arithmetic used to calculate sizes can
+overflow or produce values that are
+
+17
+00:00:51.075 --> 00:00:53.701
+technically valid but operationally
+unreasonable.
+
+18
+00:00:53.781 --> 00:00:56.231
+Resource assumptions are security
+assumptions.
+
+19
+00:00:56.311 --> 00:01:00.394
+Unbounded payloads, retries, queues,
+allocations, recursion depth, file reads,
+
+20
+00:01:00.474 --> 00:01:03.916
+or request fan-out can reduce availability
+even in memory-safe code.
+
+21
+00:01:03.996 --> 00:01:07.672
+Defensive Rust sets explicit limits,
+checks conversions and arithmetic,
+
+22
+00:01:07.752 --> 00:01:09.443
+rejects unsupported sizes early,
+
+23
+00:01:09.523 --> 00:01:12.207
+and fails safely before data reaches
+sensitive logic.
+
+24
+00:01:12.287 --> 00:01:16.370
+Internal data should not be trusted
+forever simply because it crossed one boundary
+
+25
+00:01:16.450 --> 00:01:16.917
+earlier.
+
+26
+00:01:16.997 --> 00:01:20.731
+Data can be stale, migrated incorrectly,
+loaded from a compromised source,
+
+27
+00:01:20.811 --> 00:01:24.253
+or passed through a different component
+with different assumptions.
+
+28
+00:01:24.333 --> 00:01:27.891
+Good validation strategy is layered:
+validate at external boundaries,
+
+29
+00:01:27.971 --> 00:01:29.196
+convert to domain types,
+
+30
+00:01:29.276 --> 00:01:32.660
+and re-check critical assumptions before
+high-impact operations.

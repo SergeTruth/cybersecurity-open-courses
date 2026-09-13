@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Over-Cloning, Over-Sharing, and Smart Pointer Confusion",
+  "graphicAlt": "Independent ownership and shared ownership have different lifecycle needs; shared mutation and reference cycles need separate review.",
+  "narration": "`clone`, `Rc`, `Arc`, `Mutex`, and `RefCell` are useful Rust tools. The anti-pattern is using them to avoid thinking about ownership, access, and lifecycle design. When a codebase reaches for these tools automatically, it may be adding complexity that makes the program harder to review even though it still compiles.\n\nCloning is appropriate when the program truly needs independent ownership of a value. But repeated clones can hide confused data flow. They can also create performance cost, stale copies, or multiple places that appear to hold the same logical state. Reviewers should ask whether the clone expresses a real ownership decision or simply avoids a borrow problem.\n\n`Rc` and `Arc` coordinate shared ownership through reference counts. That is valuable, but it distributes cleanup timing across all owners. If no one knows which owner is responsible for the lifecycle, the value may live longer than intended. In long-running services, distributed ownership can also make memory growth and stale state harder to reason about.\n\n`Mutex` and `RefCell` can move access checks into runtime behavior. Again, that can be correct. But if mutation is broadly shared because ownership is unclear, the code may accumulate lock scope problems, runtime borrow failures, or hidden state transitions. Shared ownership is not the same as shared mutable design.\n\nReference cycles deserve attention when using reference-counted structures. A strong cycle can prevent cleanup, creating a leak rather than a typical memory-safety failure. Safe Rust still has lifecycle concerns, especially in caches, graphs, registries, and observer patterns. Sometimes a weak relationship or a simpler owner-borrower model is the better design.\n\nThe defensive pattern is to start simple. Use ordinary ownership and borrowing when possible, `Box` for owned indirection when that is enough, shared ownership only when there are real multiple owners, and interior mutability only when the mutation model is documented and contained.",
+  "narrationPoints": [
+    "`clone`, `Rc`, `Arc`, `Mutex`, and `RefCell` are useful.",
+    "Cloning is appropriate.",
+    "`Rc` and `Arc` coordinate shared ownership through.",
+    "`Mutex` and `RefCell` can move access checks into runtime.",
+    "Reference cycles deserve attention.",
+    "The defensive pattern is to start simple."
+  ]
+};

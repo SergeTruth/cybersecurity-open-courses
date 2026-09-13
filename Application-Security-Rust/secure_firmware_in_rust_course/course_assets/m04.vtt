@@ -1,0 +1,117 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.587
+Firmware often accesses hardware through
+memory-mapped registers,
+
+2
+00:00:03.667 --> 00:00:06.232
+peripheral access crates, hardware
+abstraction layers,
+
+3
+00:00:06.312 --> 00:00:09.504
+board support packages, drivers, and
+device-specific configuration.
+
+4
+00:00:09.584 --> 00:00:13.142
+These layers are where Rust code meets
+behavior the compiler cannot fully model.
+
+5
+00:00:13.222 --> 00:00:15.106
+Memory-mapped I/O is not ordinary memory.
+
+6
+00:00:15.186 --> 00:00:18.430
+Register reads and writes may acknowledge
+interrupts, start transfers,
+
+7
+00:00:18.510 --> 00:00:21.859
+clear flags, change power state, or affect
+hardware outside the processor.
+
+8
+00:00:21.939 --> 00:00:25.184
+Initialization order, clock configuration,
+pin modes, reset behavior,
+
+9
+00:00:25.264 --> 00:00:28.560
+interrupt setup, and peripheral ownership
+all influence safe operation.
+
+10
+00:00:28.640 --> 00:00:32.408
+Some hardware-facing code requires
+`unsafe` because Rust cannot prove the validity
+
+11
+00:00:32.488 --> 00:00:35.105
+of hardware side effects, raw addresses,
+volatile access,
+
+12
+00:00:35.185 --> 00:00:37.016
+or aliasing rules at the device boundary.
+
+13
+00:00:37.096 --> 00:00:38.561
+That does not make the code wrong.
+
+14
+00:00:38.641 --> 00:00:41.886
+It makes the boundary important enough to
+document and review carefully.
+
+15
+00:00:41.966 --> 00:00:44.268
+Safe wrappers should protect hardware
+invariants.
+
+16
+00:00:44.348 --> 00:00:47.017
+They should make invalid operation order
+harder to express,
+
+17
+00:00:47.097 --> 00:00:50.498
+prevent unrelated code from controlling
+the same peripheral unexpectedly,
+
+18
+00:00:50.578 --> 00:00:53.613
+and hide low-level details behind APIs
+that communicate ownership,
+
+19
+00:00:53.693 --> 00:00:55.787
+initialization state, and valid
+transitions.
+
+20
+00:00:55.867 --> 00:00:59.320
+Unsafe code should be small, justified,
+documented, tested where practical,
+
+21
+00:00:59.400 --> 00:01:02.383
+and revisited when hardware, platform
+crates, board support code,
+
+22
+00:01:02.463 --> 00:01:05.393
+generated register definitions, or
+toolchain behavior changes.
+
+23
+00:01:05.473 --> 00:01:08.927
+A safety contract should explain why
+assumptions hold and how safe callers are
+
+24
+00:01:09.007 --> 00:01:10.420
+prevented from violating them.

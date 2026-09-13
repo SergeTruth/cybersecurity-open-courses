@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.525
+Rust helps prevent data races in safe
+code,
+
+2
+00:00:02.605 --> 00:00:05.025
+which is a major advantage for concurrent
+systems.
+
+3
+00:00:05.105 --> 00:00:08.649
+Traits such as Send and Sync express
+important thread-safety properties.
+
+4
+00:00:08.729 --> 00:00:12.499
+They help the compiler decide when values
+can move across threads or be shared by
+
+5
+00:00:12.579 --> 00:00:13.141
+reference.
+
+6
+00:00:13.221 --> 00:00:16.710
+This makes many unsafe concurrent designs
+harder to write accidentally.
+
+7
+00:00:16.790 --> 00:00:19.209
+Safe Rust still needs careful concurrency
+design.
+
+8
+00:00:19.289 --> 00:00:22.046
+Shared state, locks, channels, atomics,
+task lifetimes,
+
+9
+00:00:22.126 --> 00:00:25.727
+cancellation behavior, timeouts, queues,
+and resource limits all matter.
+
+10
+00:00:25.807 --> 00:00:27.776
+The compiler can prevent many data races,
+
+11
+00:00:27.856 --> 00:00:30.950
+but it cannot decide whether the chosen
+locking strategy is fair,
+
+12
+00:00:31.030 --> 00:00:32.606
+whether a queue can grow forever,
+
+13
+00:00:32.686 --> 00:00:35.386
+or whether a task should be cancelled when
+a request ends.
+
+14
+00:00:35.466 --> 00:00:37.323
+Async Rust adds more design questions.
+
+15
+00:00:37.403 --> 00:00:41.060
+Tasks need clear ownership, timeout
+expectations, cancellation behavior,
+
+16
+00:00:41.140 --> 00:00:42.153
+and error reporting.
+
+17
+00:00:42.233 --> 00:00:45.946
+Blocking operations inside async contexts
+can create performance collapse.
+
+18
+00:00:46.026 --> 00:00:48.220
+Unbounded task growth can harm
+availability.
+
+19
+00:00:48.300 --> 00:00:52.126
+A memory-safe service can still fail if it
+accepts more work than it can process or
+
+20
+00:00:52.206 --> 00:00:54.063
+holds resources longer than expected.
+
+21
+00:00:54.143 --> 00:00:57.687
+Locks and shared resources should be
+reviewed for deadlocks, starvation,
+
+22
+00:00:57.767 --> 00:00:59.568
+and hidden performance bottlenecks.
+
+23
+00:00:59.648 --> 00:01:03.080
+Backpressure, bounded queues, worker
+limits, connection pool limits,
+
+24
+00:01:03.160 --> 00:01:05.410
+and graceful degradation are safety
+controls.
+
+25
+00:01:05.490 --> 00:01:09.653
+Memory safety by design includes
+protecting reliability because availability is part
+
+26
+00:01:09.733 --> 00:01:11.140
+of secure software behavior.

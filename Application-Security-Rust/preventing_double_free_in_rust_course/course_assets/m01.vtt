@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.188
+A double free occurs when the same memory
+allocation or resource is cleaned up more
+
+2
+00:00:04.268 --> 00:00:04.749
+than once.
+
+3
+00:00:04.829 --> 00:00:08.570
+In manual-memory environments, this class
+of bug can cause severe reliability and
+
+4
+00:00:08.650 --> 00:00:12.392
+security problems because two paths both
+believe they have the right to release the
+
+5
+00:00:12.472 --> 00:00:13.701
+same underlying resource.
+
+6
+00:00:13.781 --> 00:00:15.277
+The core issue is not only memory.
+
+7
+00:00:15.357 --> 00:00:16.747
+It is cleanup responsibility.
+
+8
+00:00:16.827 --> 00:00:19.767
+Files, sockets, native handles, lock
+guards, database handles,
+
+9
+00:00:19.847 --> 00:00:22.412
+temporary directories, externally
+allocated buffers,
+
+10
+00:00:22.492 --> 00:00:25.325
+and device resources all need one clear
+authority for release.
+
+11
+00:00:25.405 --> 00:00:27.543
+When responsibility is duplicated or
+unclear,
+
+12
+00:00:27.623 --> 00:00:29.814
+lifecycle bugs become much easier to
+introduce.
+
+13
+00:00:29.894 --> 00:00:31.284
+In everyday engineering work,
+
+14
+00:00:31.364 --> 00:00:35.212
+double-free risk often appears where a
+Rust abstraction meets a manual cleanup rule.
+
+15
+00:00:35.292 --> 00:00:36.735
+A library might expose a handle,
+
+16
+00:00:36.815 --> 00:00:39.327
+a platform API might require a matching
+close function,
+
+17
+00:00:39.407 --> 00:00:41.331
+or a wrapper might support early shutdown.
+
+18
+00:00:41.411 --> 00:00:44.404
+The question is always the same: which
+path owns cleanup right now?
+
+19
+00:00:44.484 --> 00:00:47.584
+Rust changes the default model by
+assigning each value a clear owner.
+
+20
+00:00:47.664 --> 00:00:50.978
+Safe Rust ties cleanup to ownership and
+runs cleanup when ownership ends.
+
+21
+00:00:51.058 --> 00:00:53.142
+Moved values cannot keep acting as old
+owners,
+
+22
+00:00:53.222 --> 00:00:56.376
+and ordinary borrowed references do not
+own cleanup responsibility.
+
+23
+00:00:56.456 --> 00:00:59.609
+Those rules make duplicate cleanup
+difficult to express in safe code.
+
+24
+00:00:59.689 --> 00:01:02.896
+That safety story is strongest inside
+Rust's normal ownership system.
+
+25
+00:01:02.976 --> 00:01:05.114
+Risk can re-enter at unsafe code, raw
+pointers,
+
+26
+00:01:05.194 --> 00:01:08.027
+custom allocation boundaries, foreign
+function interfaces,
+
+27
+00:01:08.107 --> 00:01:10.405
+external cleanup functions, callback
+contracts,
+
+28
+00:01:10.485 --> 00:01:14.119
+and low-level wrappers where the compiler
+cannot prove the ownership contract.
+
+29
+00:01:14.199 --> 00:01:17.086
+The defensive goal is one clear cleanup
+authority per resource.
+
+30
+00:01:17.166 --> 00:01:20.319
+If a design needs shared ownership, use
+coordinated ownership tools.
+
+31
+00:01:20.399 --> 00:01:23.552
+If a design crosses unsafe or external
+boundaries, document who owns,
+
+32
+00:01:23.632 --> 00:01:25.610
+who frees, which cleanup function applies,
+
+33
+00:01:25.690 --> 00:01:27.668
+and how error paths change responsibility.
+
+34
+00:01:27.748 --> 00:01:30.420
+Every exception should be explicit,
+tested, and reviewed.

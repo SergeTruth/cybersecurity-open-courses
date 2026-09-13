@@ -1,0 +1,127 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.444
+Direct indexing is sometimes appropriate,
+
+2
+00:00:02.524 --> 00:00:05.783
+especially when surrounding logic has
+already proved the index is valid.
+
+3
+00:00:05.863 --> 00:00:07.387
+But it should not be the only habit.
+
+4
+00:00:07.467 --> 00:00:10.410
+If an index is influenced by input,
+parsing, length calculations,
+
+5
+00:00:10.490 --> 00:00:12.171
+record structure, or previous state,
+
+6
+00:00:12.251 --> 00:00:14.721
+checked access can make the intended
+behavior clearer.
+
+7
+00:00:14.801 --> 00:00:18.375
+Methods such as checked lookup let code
+handle missing or short data explicitly.
+
+8
+00:00:18.455 --> 00:00:20.084
+Instead of assuming an index exists,
+
+9
+00:00:20.164 --> 00:00:22.739
+the code can decide what should happen
+when data is absent.
+
+10
+00:00:22.819 --> 00:00:26.287
+That choice is important for parsers,
+command-line tools, network handlers,
+
+11
+00:00:26.367 --> 00:00:28.837
+and services that process untrusted or
+variable input.
+
+12
+00:00:28.917 --> 00:00:32.648
+Iterators often make buffer access safer
+and clearer than manual index arithmetic.
+
+13
+00:00:32.728 --> 00:00:36.302
+They let the collection manage traversal
+while the code focuses on the operation
+
+14
+00:00:36.382 --> 00:00:37.170
+being performed.
+
+15
+00:00:37.250 --> 00:00:39.142
+When a loop does not need the numeric
+index,
+
+16
+00:00:39.222 --> 00:00:42.953
+removing manual indexing also removes
+opportunities for off-by-one assumptions.
+
+17
+00:00:43.033 --> 00:00:45.766
+Pattern matching and slice APIs can
+express expected shapes.
+
+18
+00:00:45.846 --> 00:00:48.999
+Code can distinguish empty data, one
+element, a fixed header plus body,
+
+19
+00:00:49.079 --> 00:00:50.235
+or a prefix and remainder.
+
+20
+00:00:50.315 --> 00:00:52.207
+These patterns make assumptions visible.
+
+21
+00:00:52.287 --> 00:00:55.861
+They also make failure behavior easier to
+review because unsupported shapes are
+
+22
+00:00:55.941 --> 00:00:57.728
+handled as cases rather than accidents.
+
+23
+00:00:57.808 --> 00:01:00.750
+Defensive Rust reviews empty, short, long,
+and malformed inputs.
+
+24
+00:01:00.830 --> 00:01:03.458
+It asks what happens at the first element,
+the last element,
+
+25
+00:01:03.538 --> 00:01:05.693
+one past the last element, and no elements
+at all.
+
+26
+00:01:05.773 --> 00:01:07.192
+The goal is not to fear indexing.
+
+27
+00:01:07.272 --> 00:01:10.740
+The goal is to choose access patterns that
+make boundary behavior deliberate.

@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.987
+Rust normally enforces borrowing rules at
+compile time.
+
+2
+00:00:03.067 --> 00:00:06.695
+That is the preferred path because invalid
+access patterns are rejected before the
+
+3
+00:00:06.775 --> 00:00:07.397
+program runs.
+
+4
+00:00:07.477 --> 00:00:11.156
+Interior mutability types exist for cases
+where the design needs mutation through a
+
+5
+00:00:11.236 --> 00:00:14.863
+shared structure and the rules cannot be
+expressed with ordinary borrowing alone.
+
+6
+00:00:14.943 --> 00:00:18.622
+`Cell<T>` supports simple
+replacement-oriented patterns for copyable or movable
+
+7
+00:00:18.702 --> 00:00:19.065
+values.
+
+8
+00:00:19.145 --> 00:00:22.669
+It can be useful for small pieces of
+internal state where the operation is limited
+
+9
+00:00:22.749 --> 00:00:23.785
+and easy to understand.
+
+10
+00:00:23.865 --> 00:00:27.234
+The important review point is that
+mutation is still intentional and scoped,
+
+11
+00:00:27.314 --> 00:00:29.386
+not a hidden workaround for unclear
+ownership.
+
+12
+00:00:29.466 --> 00:00:31.747
+`RefCell<T>` enforces borrowing rules at
+runtime.
+
+13
+00:00:31.827 --> 00:00:34.677
+It allows code to request shared or
+mutable borrows dynamically,
+
+14
+00:00:34.757 --> 00:00:36.519
+and it can fail if the rules are violated.
+
+15
+00:00:36.599 --> 00:00:40.174
+That makes `RefCell<T>` useful for certain
+single-threaded structures, tests,
+
+16
+00:00:40.254 --> 00:00:43.882
+or graph-like designs, but runtime borrow
+failures are operational concerns that
+
+17
+00:00:43.962 --> 00:00:45.568
+should be considered during review.
+
+18
+00:00:45.648 --> 00:00:49.327
+For threaded code, `Mutex<T>` and
+`RwLock<T>` coordinate access through locking.
+
+19
+00:00:49.407 --> 00:00:52.257
+These types are synchronization tools, not
+only smart pointers.
+
+20
+00:00:52.337 --> 00:00:54.773
+They can make shared mutation safe when
+used correctly,
+
+21
+00:00:54.853 --> 00:00:57.703
+but they also introduce questions about
+lock scope, contention,
+
+22
+00:00:57.783 --> 00:01:01.514
+failure handling, and whether a simpler
+ownership model could avoid shared mutation
+
+23
+00:01:01.594 --> 00:01:02.060
+entirely.
+
+24
+00:01:02.140 --> 00:01:04.058
+Interior mutability should be documented.
+
+25
+00:01:04.138 --> 00:01:06.729
+Explain why compile-time borrowing did not
+fit the design,
+
+26
+00:01:06.809 --> 00:01:09.970
+what invariant the wrapper protects, how
+long borrows or locks are held,
+
+27
+00:01:10.050 --> 00:01:11.293
+and what happens on failure.
+
+28
+00:01:11.373 --> 00:01:14.794
+Defensive Rust uses these tools to make a
+necessary pattern safe and explicit,
+
+29
+00:01:14.874 --> 00:01:17.620
+not to hide a design that has become too
+tangled to reason about.

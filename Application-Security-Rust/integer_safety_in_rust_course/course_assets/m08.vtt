@@ -1,0 +1,135 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.270
+Protocols, file formats, serialized
+messages, databases,
+
+2
+00:00:03.350 --> 00:00:07.205
+and FFI often impose numeric
+representations that differ from internal Rust types.
+
+3
+00:00:07.285 --> 00:00:10.761
+A field may be fixed-width, signed,
+unsigned, little-endian, big-endian,
+
+4
+00:00:10.841 --> 00:00:13.284
+optional, versioned, or measured in a
+specific unit.
+
+5
+00:00:13.364 --> 00:00:15.591
+Those details are part of the security
+contract.
+
+6
+00:00:15.671 --> 00:00:18.658
+Binary formats and protocol fields should
+be reviewed for width,
+
+7
+00:00:18.738 --> 00:00:20.964
+signedness, endianness, unit, and valid
+range.
+
+8
+00:00:21.044 --> 00:00:23.759
+A length field in bytes is different from
+a count of records.
+
+9
+00:00:23.839 --> 00:00:26.555
+A version field is different from a
+user-controlled limit.
+
+10
+00:00:26.635 --> 00:00:30.273
+A signed external value may not safely map
+to an unsigned internal value without
+
+11
+00:00:30.353 --> 00:00:30.950
+validation.
+
+12
+00:00:31.030 --> 00:00:34.017
+Serialization boundaries should validate
+before internal use.
+
+13
+00:00:34.097 --> 00:00:37.736
+Deserializing a number into a Rust type
+does not automatically mean the value is
+
+14
+00:00:37.816 --> 00:00:38.956
+valid for the operation.
+
+15
+00:00:39.036 --> 00:00:41.045
+A database row, JSON field, binary
+message,
+
+16
+00:00:41.125 --> 00:00:44.872
+or configuration file can still carry a
+value outside the domain's allowed range.
+
+17
+00:00:44.952 --> 00:00:48.265
+Cross-language boundaries add another
+layer because C, platform APIs,
+
+18
+00:00:48.345 --> 00:00:52.092
+device SDKs, and native libraries may use
+different integer widths or signedness
+
+19
+00:00:52.172 --> 00:00:52.824
+assumptions.
+
+20
+00:00:52.904 --> 00:00:56.325
+A type that looks like a length in one
+language may not match the size or range
+
+21
+00:00:56.405 --> 00:00:57.219
+expected by Rust.
+
+22
+00:00:57.299 --> 00:00:59.254
+FFI wrappers should document the mapping.
+
+23
+00:00:59.334 --> 00:01:03.299
+Unsafe and FFI wrappers should translate
+external numbers into validated Rust domain
+
+24
+00:01:03.379 --> 00:01:04.628
+types as early as possible.
+
+25
+00:01:04.708 --> 00:01:07.477
+Document valid ranges, size relationships,
+length fields,
+
+26
+00:01:07.557 --> 00:01:10.870
+allocation limits, conversion behavior,
+and ownership implications.
+
+27
+00:01:10.950 --> 00:01:13.556
+The more clearly the wrapper defines
+numeric contracts,
+
+28
+00:01:13.636 --> 00:01:15.700
+the less every caller has to rediscover
+them.

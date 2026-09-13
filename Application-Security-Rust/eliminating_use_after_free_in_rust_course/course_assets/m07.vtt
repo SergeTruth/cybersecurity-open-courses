@@ -1,0 +1,166 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.448
+Safe Rust prevents ordinary
+use-after-free,
+
+2
+00:00:02.528 --> 00:00:04.825
+but unsafe code and FFI boundaries require
+extra care.
+
+3
+00:00:04.905 --> 00:00:08.401
+Raw pointers do not carry the same checked
+lifetime guarantees as safe references.
+
+4
+00:00:08.481 --> 00:00:10.529
+External libraries may allocate, free,
+retain,
+
+5
+00:00:10.609 --> 00:00:13.206
+or call back into Rust using rules the
+compiler cannot verify.
+
+6
+00:00:13.286 --> 00:00:16.033
+Review should cover pointer validity and
+lifetime assumptions.
+
+7
+00:00:16.113 --> 00:00:17.861
+Is the pointer still valid when it is
+used?
+
+8
+00:00:17.941 --> 00:00:18.790
+Who owns the memory?
+
+9
+00:00:18.870 --> 00:00:19.619
+Who allocated it?
+
+10
+00:00:19.699 --> 00:00:20.348
+Who may free it?
+
+11
+00:00:20.428 --> 00:00:22.976
+Can external code retain the pointer after
+the call returns?
+
+12
+00:00:23.056 --> 00:00:26.352
+Can Rust continue using a value after
+ownership has moved across the boundary?
+
+13
+00:00:26.432 --> 00:00:28.480
+Callbacks are a common lifetime pressure
+point.
+
+14
+00:00:28.560 --> 00:00:30.857
+External code may store a callback and
+invoke it later.
+
+15
+00:00:30.937 --> 00:00:34.233
+The callback may depend on Rust state that
+could be dropped before invocation.
+
+16
+00:00:34.313 --> 00:00:37.210
+A safe design needs a clear registration,
+ownership, cancellation,
+
+17
+00:00:37.290 --> 00:00:40.087
+and cleanup story so callback use cannot
+outlive referenced data.
+
+18
+00:00:40.167 --> 00:00:42.864
+Allocation and deallocation pairs deserve
+the same attention.
+
+19
+00:00:42.944 --> 00:00:45.241
+If Rust allocates memory and another
+library frees it,
+
+20
+00:00:45.321 --> 00:00:48.268
+the contract must say that explicitly and
+use compatible mechanisms.
+
+21
+00:00:48.348 --> 00:00:50.745
+If external code allocates memory and
+returns it to Rust,
+
+22
+00:00:50.825 --> 00:00:54.271
+the wrapper must know how and when to
+release it without letting callers keep stale
+
+23
+00:00:54.351 --> 00:00:54.751
+handles.
+
+24
+00:00:54.831 --> 00:00:57.578
+Unsafe code should be small, justified,
+documented, and tested.
+
+25
+00:00:57.658 --> 00:00:59.905
+Safety comments should explain ownership
+transfer,
+
+26
+00:00:59.985 --> 00:01:02.582
+allocation and deallocation contracts,
+callback lifetime,
+
+27
+00:01:02.662 --> 00:01:05.709
+pointer validity, synchronization, and
+what callers must not violate.
+
+28
+00:01:05.789 --> 00:01:08.536
+A vague comment that says the block is
+safe is not enough evidence.
+
+29
+00:01:08.616 --> 00:01:11.612
+A safe wrapper should protect ordinary
+safe callers from stale access.
+
+30
+00:01:11.692 --> 00:01:15.039
+It should encode ownership and lifetime
+rules in types and runtime checks where
+
+31
+00:01:15.119 --> 00:01:15.568
+possible.
+
+32
+00:01:15.648 --> 00:01:18.245
+It should prevent callers from using
+handles after shutdown,
+
+33
+00:01:18.325 --> 00:01:20.423
+passing temporary buffers to retained
+pointers,
+
+34
+00:01:20.503 --> 00:01:22.900
+or depending on external state that may
+already be freed.

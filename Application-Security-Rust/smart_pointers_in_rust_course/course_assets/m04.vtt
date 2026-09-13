@@ -1,0 +1,177 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.660
+Some designs have legitimate shared
+ownership.
+
+2
+00:00:02.740 --> 00:00:05.320
+A configuration object may be used by
+several components.
+
+3
+00:00:05.400 --> 00:00:07.665
+A graph node may be reached through
+multiple paths.
+
+4
+00:00:07.745 --> 00:00:09.694
+A service client may be shared by many
+tasks.
+
+5
+00:00:09.774 --> 00:00:12.934
+Rust supports these patterns with
+reference-counted smart pointers,
+
+6
+00:00:13.014 --> 00:00:14.489
+primarily `Rc<T>` and `Arc<T>`.
+
+7
+00:00:14.569 --> 00:00:17.203
+`Rc<T>` provides shared ownership inside a
+single thread.
+
+8
+00:00:17.283 --> 00:00:20.812
+It keeps a strong reference count and
+drops the inner value when the final strong
+
+9
+00:00:20.892 --> 00:00:21.629
+owner goes away.
+
+10
+00:00:21.709 --> 00:00:25.501
+It is useful when several parts of a
+single-threaded structure need ownership-level
+
+11
+00:00:25.581 --> 00:00:28.162
+access to the same value without copying
+the value itself.
+
+12
+00:00:28.242 --> 00:00:31.929
+`Arc<T>` provides atomically
+reference-counted shared ownership that can cross
+
+13
+00:00:32.009 --> 00:00:32.905
+thread boundaries.
+
+14
+00:00:32.985 --> 00:00:34.881
+It is common in threaded and async
+systems,
+
+15
+00:00:34.961 --> 00:00:38.384
+especially for shared configuration,
+clients, caches, pools, and handles.
+
+16
+00:00:38.464 --> 00:00:39.676
+The atomic count has a cost,
+
+17
+00:00:39.756 --> 00:00:43.232
+so `Arc<T>` should be chosen because
+thread-safe shared ownership is needed,
+
+18
+00:00:43.312 --> 00:00:45.682
+not as a default replacement for ordinary
+ownership.
+
+19
+00:00:45.762 --> 00:00:47.817
+Shared ownership is not duplicate
+ownership.
+
+20
+00:00:47.897 --> 00:00:51.478
+The pointer coordinates a single
+underlying value and a single eventual cleanup
+
+21
+00:00:51.558 --> 00:00:51.874
+event.
+
+22
+00:00:51.954 --> 00:00:55.589
+That distinction matters because cleanup
+timing becomes distributed across all
+
+23
+00:00:55.669 --> 00:00:56.353
+strong owners.
+
+24
+00:00:56.433 --> 00:00:59.752
+A value may live longer than any one
+caller expects if another owner remains
+
+25
+00:00:59.832 --> 00:01:01.148
+somewhere else in the system.
+
+26
+00:01:01.228 --> 00:01:03.282
+Shared ownership is also not shared
+mutation.
+
+27
+00:01:03.362 --> 00:01:06.049
+`Rc<T>` and `Arc<T>` let multiple owners
+keep a value alive;
+
+28
+00:01:06.129 --> 00:01:08.604
+they do not by themselves make mutation
+safe or allowed.
+
+29
+00:01:08.684 --> 00:01:09.948
+If shared state must change,
+
+30
+00:01:10.028 --> 00:01:13.136
+the design needs an appropriate pattern
+such as interior mutability,
+
+31
+00:01:13.216 --> 00:01:16.376
+synchronization, message passing, or a
+narrower ownership boundary.
+
+32
+00:01:16.456 --> 00:01:19.616
+During review, ask why shared ownership is
+needed, who creates owners,
+
+33
+00:01:19.696 --> 00:01:21.803
+where owners are stored, when they are
+dropped,
+
+34
+00:01:21.883 --> 00:01:23.937
+whether any owner can live unexpectedly
+long,
+
+35
+00:01:24.017 --> 00:01:26.177
+and whether mutation is controlled
+separately.
+
+36
+00:01:26.257 --> 00:01:27.732
+Reference counting is powerful,
+
+37
+00:01:27.812 --> 00:01:30.340
+but lifecycle clarity must be maintained
+deliberately.

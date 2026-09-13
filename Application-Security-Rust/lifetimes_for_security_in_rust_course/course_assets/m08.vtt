@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.886
+Safe Rust uses lifetimes to enforce
+reference validity,
+
+2
+00:00:02.966 --> 00:00:06.099
+but unsafe code and FFI boundaries can
+move some responsibility back to the
+
+3
+00:00:06.179 --> 00:00:06.725
+programmer.
+
+4
+00:00:06.805 --> 00:00:09.888
+Raw pointers do not carry the same checked
+lifetime relationships as safe
+
+5
+00:00:09.968 --> 00:00:10.515
+references.
+
+6
+00:00:10.595 --> 00:00:13.379
+External code may follow rules Rust cannot
+verify automatically.
+
+7
+00:00:13.459 --> 00:00:16.790
+FFI boundaries often involve allocation,
+deallocation, buffers, callbacks,
+
+8
+00:00:16.870 --> 00:00:17.765
+and thread behavior.
+
+9
+00:00:17.845 --> 00:00:18.690
+Who owns the memory?
+
+10
+00:00:18.770 --> 00:00:19.416
+Who may free it?
+
+11
+00:00:19.496 --> 00:00:20.988
+How long must a buffer remain valid?
+
+12
+00:00:21.068 --> 00:00:23.404
+Can external code retain a pointer after a
+call returns?
+
+13
+00:00:23.484 --> 00:00:25.672
+Can a callback run after the Rust owner
+has gone away?
+
+14
+00:00:25.752 --> 00:00:29.033
+These questions are lifetime questions
+even when no Rust lifetime annotation
+
+15
+00:00:29.113 --> 00:00:29.511
+appears.
+
+16
+00:00:29.591 --> 00:00:33.022
+A safe wrapper around unsafe or external
+code must preserve the lifetime contract
+
+17
+00:00:33.102 --> 00:00:33.847
+for safe callers.
+
+18
+00:00:33.927 --> 00:00:37.010
+The wrapper should prevent ordinary safe
+Rust code from creating invalid
+
+19
+00:00:37.090 --> 00:00:37.786
+relationships.
+
+20
+00:00:37.866 --> 00:00:40.252
+If the wrapper cannot enforce everything
+through types,
+
+21
+00:00:40.332 --> 00:00:42.669
+it should document the remaining
+assumptions clearly.
+
+22
+00:00:42.749 --> 00:00:45.831
+Safety contracts should explain what data
+must remain valid, who owns it,
+
+23
+00:00:45.911 --> 00:00:48.447
+who may free it, how long references or
+callbacks may be used,
+
+24
+00:00:48.527 --> 00:00:50.167
+and what the caller is responsible for.
+
+25
+00:00:50.247 --> 00:00:52.534
+A comment that simply says a block is safe
+is not enough.
+
+26
+00:00:52.614 --> 00:00:56.144
+The evidence needs to connect the unsafe
+operation to the lifetime assumptions that
+
+27
+00:00:56.224 --> 00:00:56.821
+make it valid.
+
+28
+00:00:56.901 --> 00:01:00.282
+A good review also asks whether the safe
+API prevents misuse by ordinary callers.
+
+29
+00:01:00.362 --> 00:01:03.693
+If a caller can pass a temporary buffer to
+external code that stores it for later,
+
+30
+00:01:03.773 --> 00:01:06.010
+the wrapper has not protected the lifetime
+contract.
+
+31
+00:01:06.090 --> 00:01:08.526
+If callback registration can outlive the
+captured state,
+
+32
+00:01:08.606 --> 00:01:10.992
+the API needs a clearer ownership or
+cancellation model.
+
+33
+00:01:11.072 --> 00:01:14.503
+Testing and review are important because
+compiler enforcement is weaker at these
+
+34
+00:01:14.583 --> 00:01:15.130
+boundaries.
+
+35
+00:01:15.210 --> 00:01:18.093
+Reviewers should focus on ownership
+transfer, allocation pairing,
+
+36
+00:01:18.173 --> 00:01:21.156
+callback lifetime, buffer validity,
+synchronization, and API shape.
+
+37
+00:01:21.236 --> 00:01:23.573
+The best unsafe boundary is small,
+documented, tested,
+
+38
+00:01:23.653 --> 00:01:25.940
+and wrapped in a safe interface that
+protects callers.

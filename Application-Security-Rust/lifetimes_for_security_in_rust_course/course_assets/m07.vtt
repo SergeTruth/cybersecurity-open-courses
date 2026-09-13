@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.182
+Many real lifetime questions appear around
+collections.
+
+2
+00:00:03.262 --> 00:00:06.820
+Iterators often yield references that are
+valid only while the collection is
+
+3
+00:00:06.900 --> 00:00:07.393
+borrowed.
+
+4
+00:00:07.473 --> 00:00:10.264
+Slices are borrowed views into arrays,
+vectors, or strings.
+
+5
+00:00:10.344 --> 00:00:14.012
+A reference into a collection cannot
+outlive the collection that owns the data.
+
+6
+00:00:14.092 --> 00:00:16.500
+Mutation can also conflict with active
+references.
+
+7
+00:00:16.580 --> 00:00:18.605
+If code holds a reference into a
+collection,
+
+8
+00:00:18.685 --> 00:00:22.517
+mutating the collection may be unsafe or
+unclear because the mutation could change
+
+9
+00:00:22.597 --> 00:00:24.294
+storage or invalidate assumptions.
+
+10
+00:00:24.374 --> 00:00:28.151
+Rust pushes developers to separate read
+and write phases or use APIs that preserve
+
+11
+00:00:28.231 --> 00:00:28.833
+safe access.
+
+12
+00:00:28.913 --> 00:00:30.336
+Async code adds another layer.
+
+13
+00:00:30.416 --> 00:00:33.043
+An async task may outlive the stack frame
+that created it.
+
+14
+00:00:33.123 --> 00:00:35.477
+A future may hold values across suspension
+points.
+
+15
+00:00:35.557 --> 00:00:39.169
+A reference that is fine for a local
+synchronous helper may not be valid for work
+
+16
+00:00:39.249 --> 00:00:40.289
+that continues later.
+
+17
+00:00:40.369 --> 00:00:43.216
+When a task boundary is involved, owned
+data is often clearer.
+
+18
+00:00:43.296 --> 00:00:46.142
+Thread boundaries also make lifetime
+requirements visible.
+
+19
+00:00:46.222 --> 00:00:49.068
+Data moved into a thread must live long
+enough for that thread.
+
+20
+00:00:49.148 --> 00:00:52.871
+Data shared across threads usually needs
+owned or shared ownership patterns and
+
+21
+00:00:52.951 --> 00:00:54.428
+appropriate synchronization.
+
+22
+00:00:54.508 --> 00:00:58.449
+A borrowed stack reference is rarely the
+right shape for long-lived concurrent work.
+
+23
+00:00:58.529 --> 00:01:00.445
+When references cannot live long enough,
+
+24
+00:01:00.525 --> 00:01:04.193
+the answer may be ownership transfer,
+intentional cloning, shared ownership,
+
+25
+00:01:04.273 --> 00:01:05.641
+or a different task boundary.
+
+26
+00:01:05.721 --> 00:01:07.418
+These choices should be deliberate.
+
+27
+00:01:07.498 --> 00:01:09.249
+The goal is not to avoid all owned data,
+
+28
+00:01:09.329 --> 00:01:12.340
+but to match the ownership model to the
+real lifecycle of the work.

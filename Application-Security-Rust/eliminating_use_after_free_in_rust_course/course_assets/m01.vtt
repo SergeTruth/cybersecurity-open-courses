@@ -1,0 +1,135 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.179
+A use-after-free condition happens when
+code continues to use memory or an object
+
+2
+00:00:04.259 --> 00:00:05.858
+after its valid lifetime has ended.
+
+3
+00:00:05.938 --> 00:00:09.830
+In manual-memory environments, this class
+of mistake has caused serious reliability
+
+4
+00:00:09.910 --> 00:00:13.589
+and security failures because stale
+references can point to data that is no longer
+
+5
+00:00:13.669 --> 00:00:15.108
+valid for the original purpose.
+
+6
+00:00:15.188 --> 00:00:17.321
+The defensive concept is lifecycle
+integrity.
+
+7
+00:00:17.401 --> 00:00:21.079
+A value is created, used, possibly shared
+or borrowed, and eventually cleaned up.
+
+8
+00:00:21.159 --> 00:00:24.678
+If some part of the program keeps acting
+as though the value is still valid after
+
+9
+00:00:24.758 --> 00:00:28.330
+cleanup, the program is no longer
+reasoning about the object that it thinks it is
+
+10
+00:00:28.410 --> 00:00:28.730
+using.
+
+11
+00:00:28.810 --> 00:00:31.689
+Rust changes the default model by making
+ownership, borrowing,
+
+12
+00:00:31.769 --> 00:00:33.368
+and lifetimes part of the language.
+
+13
+00:00:33.448 --> 00:00:37.020
+Safe Rust prevents ordinary references
+from outliving the values they borrow.
+
+14
+00:00:37.100 --> 00:00:40.672
+It also prevents moved values from being
+used as though ownership still exists.
+
+15
+00:00:40.752 --> 00:00:43.738
+Those rules turn many stale-access risks
+into compiler feedback.
+
+16
+00:00:43.818 --> 00:00:46.590
+This does not mean every Rust boundary is
+automatically safe.
+
+17
+00:00:46.670 --> 00:00:49.069
+Risk can re-enter through unsafe code, raw
+pointers,
+
+18
+00:00:49.149 --> 00:00:52.614
+foreign function interfaces, external
+libraries, callback registration,
+
+19
+00:00:52.694 --> 00:00:56.426
+allocators, and low-level abstractions
+where the compiler cannot fully check the
+
+20
+00:00:56.506 --> 00:00:57.413
+lifetime contract.
+
+21
+00:00:57.493 --> 00:00:59.145
+Those areas need deliberate review.
+
+22
+00:00:59.225 --> 00:01:01.784
+Use-after-free prevention in Rust is
+lifecycle design.
+
+23
+00:01:01.864 --> 00:01:02.984
+Know who owns each value.
+
+24
+00:01:03.064 --> 00:01:04.077
+Know who may borrow it.
+
+25
+00:01:04.157 --> 00:01:05.383
+Know when cleanup happens.
+
+26
+00:01:05.463 --> 00:01:07.383
+Know where references, callbacks, tasks,
+
+27
+00:01:07.463 --> 00:01:10.075
+and external code can outlive the scope
+that created them.
+
+28
+00:01:10.155 --> 00:01:13.780
+The safe path should make invalid lifetime
+relationships impossible or at least
+
+29
+00:01:13.860 --> 00:01:14.340
+explicit.

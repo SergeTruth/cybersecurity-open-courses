@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.794
+Safe Rust prevents many buffer-overflow
+classes,
+
+2
+00:00:02.874 --> 00:00:05.649
+but unsafe code and foreign interfaces
+require special care.
+
+3
+00:00:05.729 --> 00:00:08.770
+Raw pointers, external C APIs, platform
+calls, device interfaces,
+
+4
+00:00:08.850 --> 00:00:12.691
+and custom low-level abstractions may not
+carry Rust's checked reference and bounds
+
+5
+00:00:12.771 --> 00:00:13.411
+information.
+
+6
+00:00:13.491 --> 00:00:16.372
+At those boundaries, human review and
+safety contracts matter.
+
+7
+00:00:16.452 --> 00:00:19.120
+Review starts with pointer validity and
+buffer contracts.
+
+8
+00:00:19.200 --> 00:00:20.961
+Is the pointer non-null when required?
+
+9
+00:00:21.041 --> 00:00:22.908
+Is it aligned for the type being accessed?
+
+10
+00:00:22.988 --> 00:00:24.215
+Is the memory initialized?
+
+11
+00:00:24.295 --> 00:00:25.949
+How many bytes or elements are valid?
+
+12
+00:00:26.029 --> 00:00:28.216
+Can the external function write into the
+buffer?
+
+13
+00:00:28.296 --> 00:00:30.751
+Does the Rust side reserve enough space
+for that write?
+
+14
+00:00:30.831 --> 00:00:34.245
+Ownership transfer and allocation
+responsibility are equally important.
+
+15
+00:00:34.325 --> 00:00:35.499
+Who allocated the memory?
+
+16
+00:00:35.579 --> 00:00:36.699
+Who is allowed to free it?
+
+17
+00:00:36.779 --> 00:00:38.113
+Which allocator must be used?
+
+18
+00:00:38.193 --> 00:00:40.807
+Can external code retain a pointer after
+the call returns?
+
+19
+00:00:40.887 --> 00:00:44.089
+Can Rust safely access the buffer after
+handing it across the boundary?
+
+20
+00:00:44.169 --> 00:00:46.516
+These questions should be documented, not
+guessed.
+
+21
+00:00:46.596 --> 00:00:49.050
+Unsafe code should be small, justified,
+and isolated.
+
+22
+00:00:49.130 --> 00:00:52.652
+A short unsafe block with a clear safety
+comment is easier to review than a broad
+
+23
+00:00:52.732 --> 00:00:55.453
+module where assumptions are spread across
+many functions.
+
+24
+00:00:55.533 --> 00:00:58.254
+The comment should explain why the buffer
+contract is valid,
+
+25
+00:00:58.334 --> 00:01:01.321
+what has been checked, and what future
+maintainers must preserve.
+
+26
+00:01:01.401 --> 00:01:04.229
+A safe wrapper should protect callers from
+invalid buffer use.
+
+27
+00:01:04.309 --> 00:01:07.564
+Ordinary safe code should not need to
+remember raw pointer length rules,
+
+28
+00:01:07.644 --> 00:01:10.258
+allocation pairing, or callback lifetime
+requirements.
+
+29
+00:01:10.338 --> 00:01:14.019
+The wrapper should encode those rules in
+types and runtime checks where possible,
+
+30
+00:01:14.099 --> 00:01:16.340
+and document the remaining assumptions
+clearly.

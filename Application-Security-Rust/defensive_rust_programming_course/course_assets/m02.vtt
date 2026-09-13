@@ -1,0 +1,139 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.222
+Defensive Rust starts with representing
+the problem clearly.
+
+2
+00:00:03.302 --> 00:00:04.997
+Types are not just containers for data;
+
+3
+00:00:05.077 --> 00:00:07.646
+they are a way to express what the program
+believes is valid.
+
+4
+00:00:07.726 --> 00:00:09.986
+A raw string or integer can carry almost
+any meaning.
+
+5
+00:00:10.066 --> 00:00:12.120
+A domain type can carry a much narrower
+meaning,
+
+6
+00:00:12.200 --> 00:00:15.282
+and that narrower meaning makes misuse
+easier to notice during review.
+
+7
+00:00:15.362 --> 00:00:18.957
+Newtypes are useful when values share a
+primitive representation but should not be
+
+8
+00:00:19.037 --> 00:00:19.859
+interchangeable.
+
+9
+00:00:19.939 --> 00:00:22.045
+User IDs, tenant IDs, file names, tokens,
+paths,
+
+10
+00:00:22.125 --> 00:00:25.104
+and request identifiers may all appear as
+strings in external input,
+
+11
+00:00:25.184 --> 00:00:28.780
+but they usually have different validation
+rules and different security meaning.
+
+12
+00:00:28.860 --> 00:00:32.507
+Giving them separate types helps the
+compiler and the reviewer see mistakes sooner.
+
+13
+00:00:32.587 --> 00:00:33.922
+Enums can model states, modes,
+
+14
+00:00:34.002 --> 00:00:36.519
+and intent without scattering flags across
+the codebase.
+
+15
+00:00:36.599 --> 00:00:38.859
+A job can be pending, running, completed,
+or failed.
+
+16
+00:00:38.939 --> 00:00:41.148
+A request can be unauthenticated,
+authenticated,
+
+17
+00:00:41.228 --> 00:00:42.820
+or authorized for a specific action.
+
+18
+00:00:42.900 --> 00:00:46.547
+Encoding meaningful states directly
+prevents impossible combinations from being
+
+19
+00:00:46.627 --> 00:00:47.654
+represented casually.
+
+20
+00:00:47.734 --> 00:00:49.943
+Option and Result are also defensive
+design tools.
+
+21
+00:00:50.023 --> 00:00:53.516
+Option makes absence explicit, so callers
+cannot pretend a value always exists.
+
+22
+00:00:53.596 --> 00:00:56.575
+Result makes failure explicit, so code has
+to decide how to handle it.
+
+23
+00:00:56.655 --> 00:01:00.250
+Constructors and parsers can validate data
+at the boundary and return domain types
+
+24
+00:01:00.330 --> 00:01:01.717
+that downstream code can trust.
+
+25
+00:01:01.797 --> 00:01:04.571
+This approach reduces repeated checks and
+makes review easier.
+
+26
+00:01:04.651 --> 00:01:08.092
+Instead of asking whether every call site
+remembered the same validation rule,
+
+27
+00:01:08.172 --> 00:01:11.305
+reviewers can look at where a type is
+constructed and what it guarantees.
+
+28
+00:01:11.385 --> 00:01:15.186
+Clear data models turn defensive
+programming from scattered caution into enforceable
+
+29
+00:01:15.266 --> 00:01:15.780
+structure.

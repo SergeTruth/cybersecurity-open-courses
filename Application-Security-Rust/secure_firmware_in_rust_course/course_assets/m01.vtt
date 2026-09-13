@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.472
+Firmware is long-lived software that often
+runs close to hardware,
+
+2
+00:00:03.552 --> 00:00:07.149
+controls physical behavior, processes
+device input, stores identity material,
+
+3
+00:00:07.229 --> 00:00:08.741
+and remains in the field for years.
+
+4
+00:00:08.821 --> 00:00:11.532
+A firmware decision may affect not only a
+process or a service,
+
+5
+00:00:11.612 --> 00:00:13.801
+but a device that is deployed, serviced,
+updated,
+
+6
+00:00:13.881 --> 00:00:16.123
+and recovered outside the developer's
+workspace.
+
+7
+00:00:16.203 --> 00:00:18.236
+Rust gives firmware teams strong
+advantages.
+
+8
+00:00:18.316 --> 00:00:21.705
+Ownership and borrowing make buffer
+responsibility easier to reason about.
+
+9
+00:00:21.785 --> 00:00:23.662
+Type safety helps represent valid states.
+
+10
+00:00:23.742 --> 00:00:27.443
+Safe Rust reduces many memory-corruption
+risks that have historically mattered in
+
+11
+00:00:27.523 --> 00:00:28.357
+embedded systems.
+
+12
+00:00:28.437 --> 00:00:29.584
+Those strengths are real,
+
+13
+00:00:29.664 --> 00:00:32.584
+and they are a major reason Rust is
+attractive for device software.
+
+14
+00:00:32.664 --> 00:00:35.062
+But secure firmware still requires
+defensive design.
+
+15
+00:00:35.142 --> 00:00:38.218
+Rust does not automatically decide whether
+an update process is safe,
+
+16
+00:00:38.298 --> 00:00:39.914
+whether debug access is controlled,
+
+17
+00:00:39.994 --> 00:00:42.079
+whether hardware assumptions are
+documented,
+
+18
+00:00:42.159 --> 00:00:44.557
+whether protocol input is valid for the
+current state,
+
+19
+00:00:44.637 --> 00:00:46.983
+or whether secrets are exposed through
+diagnostics.
+
+20
+00:00:47.063 --> 00:00:50.035
+Language safety is one layer, not the
+whole product security model.
+
+21
+00:00:50.115 --> 00:00:52.357
+Secure firmware in Rust is a lifecycle
+discipline.
+
+22
+00:00:52.437 --> 00:00:55.565
+Code, hardware, build pipeline,
+provisioning, deployment, updates,
+
+23
+00:00:55.645 --> 00:00:58.460
+logging, diagnostics, field support, and
+recovery all matter.
+
+24
+00:00:58.540 --> 00:01:02.033
+A design that is elegant in source code
+can still be fragile if release artifacts
+
+25
+00:01:02.113 --> 00:01:04.563
+are hard to trace or field recovery
+behavior is unclear.
+
+26
+00:01:04.643 --> 00:01:07.823
+The defensive goal is firmware with
+explicit, reviewable assumptions.
+
+27
+00:01:07.903 --> 00:01:10.614
+Engineers should be able to explain what
+the firmware trusts,
+
+28
+00:01:10.694 --> 00:01:13.927
+what it validates, what resources are
+bounded, how hardware is accessed,
+
+29
+00:01:14.007 --> 00:01:16.874
+how updates are accepted or rejected, how
+secrets are protected,
+
+30
+00:01:16.954 --> 00:01:19.300
+and how the device behaves when something
+goes wrong.

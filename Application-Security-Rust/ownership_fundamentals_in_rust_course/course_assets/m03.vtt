@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.735
+Borrowing lets code access a value without
+becoming responsible for owning and
+
+2
+00:00:03.815 --> 00:00:04.443
+cleaning it up.
+
+3
+00:00:04.523 --> 00:00:06.890
+This is what makes Rust practical for
+normal programming.
+
+4
+00:00:06.970 --> 00:00:09.239
+Not every function should take ownership
+of its inputs.
+
+5
+00:00:09.319 --> 00:00:12.458
+Many functions only need to inspect data,
+format it, validate it, compare it,
+
+6
+00:00:12.538 --> 00:00:15.387
+or temporarily use it while the original
+owner keeps responsibility.
+
+7
+00:00:15.467 --> 00:00:17.930
+A shared reference gives read-only access
+to borrowed data.
+
+8
+00:00:18.010 --> 00:00:21.342
+A function that receives a shared
+reference is communicating that it does not need
+
+9
+00:00:21.422 --> 00:00:23.450
+ownership and does not intend to modify
+the value.
+
+10
+00:00:23.530 --> 00:00:26.911
+That makes the function easier to call and
+easier to review because the caller knows
+
+11
+00:00:26.991 --> 00:00:29.309
+the value remains available after the
+function returns.
+
+12
+00:00:29.389 --> 00:00:31.562
+A mutable reference gives controlled
+modification.
+
+13
+00:00:31.642 --> 00:00:34.974
+A function that receives a mutable
+reference is saying it needs to change the value
+
+14
+00:00:35.054 --> 00:00:37.661
+in place, but it still does not need to
+own the value permanently.
+
+15
+00:00:37.741 --> 00:00:41.074
+This is useful for updating buffers,
+appending to collections, adjusting state,
+
+16
+00:00:41.154 --> 00:00:44.534
+or performing transformations that should
+remain attached to the original owner.
+
+17
+00:00:44.614 --> 00:00:46.352
+Borrowing is therefore part of API design.
+
+18
+00:00:46.432 --> 00:00:48.509
+A formatting function may take a shared
+reference.
+
+19
+00:00:48.589 --> 00:00:51.052
+A validation function may inspect data
+without changing it.
+
+20
+00:00:51.132 --> 00:00:53.450
+A parser may return owned data when it
+creates a new value.
+
+21
+00:00:53.530 --> 00:00:56.669
+A transformation function may take a
+mutable reference when it should modify
+
+22
+00:00:56.749 --> 00:00:57.425
+existing state.
+
+23
+00:00:57.505 --> 00:00:59.533
+The signature communicates the
+responsibility.
+
+24
+00:00:59.613 --> 00:01:02.559
+Good Rust APIs usually take the least
+powerful access that fits the task.
+
+25
+00:01:02.639 --> 00:01:05.150
+If a function only needs to read, it
+should not take ownership.
+
+26
+00:01:05.230 --> 00:01:06.727
+If it only needs temporary mutation,
+
+27
+00:01:06.807 --> 00:01:08.931
+it should not require the caller to give
+up the value.
+
+28
+00:01:09.011 --> 00:01:11.716
+These choices reduce unnecessary copies,
+make data flow clearer,
+
+29
+00:01:11.796 --> 00:01:14.500
+and help reviewers understand what each
+function is allowed to do.

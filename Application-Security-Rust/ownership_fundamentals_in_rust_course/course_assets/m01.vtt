@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.443
+Ownership is the foundation of Rust's
+approach to memory safety.
+
+2
+00:00:03.523 --> 00:00:06.412
+Instead of relying on a garbage collector
+in ordinary safe code,
+
+3
+00:00:06.492 --> 00:00:10.130
+and instead of asking developers to
+manually free memory in routine application
+
+4
+00:00:10.210 --> 00:00:13.742
+logic, Rust tracks which part of the
+program owns each value and when that value
+
+5
+00:00:13.822 --> 00:00:14.785
+should be cleaned up.
+
+6
+00:00:14.865 --> 00:00:18.342
+This model gives the compiler a practical
+way to prevent many mistakes before
+
+7
+00:00:18.422 --> 00:00:18.850
+runtime.
+
+8
+00:00:18.930 --> 00:00:20.375
+A value has a responsible owner.
+
+9
+00:00:20.455 --> 00:00:23.558
+That owner controls when the value is
+available, when it can be moved,
+
+10
+00:00:23.638 --> 00:00:26.099
+when it can be borrowed, and when cleanup
+should occur.
+
+11
+00:00:26.179 --> 00:00:28.159
+When ownership reaches the end of its
+scope,
+
+12
+00:00:28.239 --> 00:00:31.663
+Rust can run cleanup predictably through
+the value's destructor behavior.
+
+13
+00:00:31.743 --> 00:00:33.188
+Ownership is also a design tool.
+
+14
+00:00:33.268 --> 00:00:36.104
+It makes developers answer important
+engineering questions:
+
+15
+00:00:36.184 --> 00:00:39.180
+who is responsible for this data, who may
+read it, who may change it,
+
+16
+00:00:39.260 --> 00:00:40.491
+and how long should it live?
+
+17
+00:00:40.571 --> 00:00:44.048
+Those are security and reliability
+questions as much as language questions.
+
+18
+00:00:44.128 --> 00:00:46.001
+Clear answers make code easier to review.
+
+19
+00:00:46.081 --> 00:00:49.826
+Compiler feedback around ownership should
+not be treated as a nuisance to silence.
+
+20
+00:00:49.906 --> 00:00:51.725
+It often shows that data flow is unclear,
+
+21
+00:00:51.805 --> 00:00:53.678
+mutation is happening in the wrong place,
+
+22
+00:00:53.758 --> 00:00:56.166
+a value is being used after responsibility
+has moved,
+
+23
+00:00:56.246 --> 00:00:58.761
+or an API is asking for more control than
+it really needs.
+
+24
+00:00:58.841 --> 00:01:01.997
+Good Rust design uses that feedback to
+make responsibility explicit.
+
+25
+00:01:02.077 --> 00:01:05.823
+A secure Rust codebase benefits from
+ownership because data flow becomes visible.
+
+26
+00:01:05.903 --> 00:01:09.220
+Reviewers can see where values are
+created, passed, borrowed, modified,
+
+27
+00:01:09.300 --> 00:01:10.477
+returned, and cleaned up.
+
+28
+00:01:10.557 --> 00:01:13.981
+That visibility helps teams write programs
+with fewer lifetime surprises,
+
+29
+00:01:14.061 --> 00:01:17.860
+fewer accidental shared-mutation
+assumptions, and clearer resource management.

@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.495
+Integers often control memory behavior.
+
+2
+00:00:02.575 --> 00:00:05.825
+Lengths, indexes, offsets, capacities,
+chunk sizes, page counts,
+
+3
+00:00:05.905 --> 00:00:09.553
+and multiplication results can influence
+allocation and access patterns.
+
+4
+00:00:09.633 --> 00:00:12.027
+Safe Rust prevents many memory-safety
+failures,
+
+5
+00:00:12.107 --> 00:00:16.098
+but it does not automatically decide
+whether a size is reasonable or whether a value
+
+6
+00:00:16.178 --> 00:00:17.603
+from input should be trusted.
+
+7
+00:00:17.683 --> 00:00:20.419
+`usize` is the natural type for indexes
+and memory sizes,
+
+8
+00:00:20.499 --> 00:00:22.893
+but a value becoming `usize` does not make
+it safe.
+
+9
+00:00:22.973 --> 00:00:25.596
+A parsed protocol length, file size, query
+parameter,
+
+10
+00:00:25.676 --> 00:00:29.381
+or database value should be validated
+before it becomes an allocation size or
+
+11
+00:00:29.461 --> 00:00:30.373
+collection index.
+
+12
+00:00:30.453 --> 00:00:32.505
+The context decides what range is allowed.
+
+13
+00:00:32.585 --> 00:00:34.751
+Length and capacity are different
+concepts.
+
+14
+00:00:34.831 --> 00:00:36.371
+Length describes current data.
+
+15
+00:00:36.451 --> 00:00:38.275
+Capacity describes allocated space.
+
+16
+00:00:38.355 --> 00:00:42.459
+Offset, index, element count, byte count,
+and record count are also different ideas.
+
+17
+00:00:42.539 --> 00:00:45.105
+Mixing them can produce subtle bugs even
+in safe code,
+
+18
+00:00:45.185 --> 00:00:47.522
+especially near parsers and buffer
+management.
+
+19
+00:00:47.602 --> 00:00:50.281
+Allocation calculations deserve checked
+arithmetic.
+
+20
+00:00:50.361 --> 00:00:53.781
+Adding header size to payload size,
+multiplying count by element size,
+
+21
+00:00:53.861 --> 00:00:57.738
+or aligning a size upward can overflow
+before the allocation call sees the value.
+
+22
+00:00:57.818 --> 00:01:01.922
+Defensive code checks the calculation and
+rejects impossible or excessive requests
+
+23
+00:01:02.002 --> 00:01:02.971
+before allocating.
+
+24
+00:01:03.051 --> 00:01:06.871
+Resource exhaustion is a security and
+reliability concern even without memory
+
+25
+00:01:06.951 --> 00:01:07.578
+corruption.
+
+26
+00:01:07.658 --> 00:01:11.363
+Unbounded sizes can consume memory, CPU
+time, disk space, or queue capacity.
+
+27
+00:01:11.443 --> 00:01:13.837
+Apply explicit limits, document them, test
+them,
+
+28
+00:01:13.917 --> 00:01:16.027
+and fail safely when a request exceeds
+them.
+
+29
+00:01:16.107 --> 00:01:18.900
+Safe Rust needs resource policy alongside
+memory safety.

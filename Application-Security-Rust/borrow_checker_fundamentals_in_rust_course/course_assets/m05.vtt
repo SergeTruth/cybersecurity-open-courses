@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.230
+Lifetimes are Rust's way of reasoning
+about reference validity.
+
+2
+00:00:03.310 --> 00:00:05.395
+A reference must not outlive the data it
+points to.
+
+3
+00:00:05.475 --> 00:00:07.113
+That rule prevents a function, struct,
+
+4
+00:00:07.193 --> 00:00:10.221
+or caller from keeping a reference to a
+value that has already been moved,
+
+5
+00:00:10.301 --> 00:00:12.039
+dropped, or otherwise made unavailable.
+
+6
+00:00:12.119 --> 00:00:14.353
+Most lifetime reasoning is inferred
+automatically.
+
+7
+00:00:14.433 --> 00:00:15.376
+In everyday Rust code,
+
+8
+00:00:15.456 --> 00:00:18.683
+developers often write references without
+explicit lifetime annotations.
+
+9
+00:00:18.763 --> 00:00:22.089
+The compiler can usually determine how
+long those references are valid based on
+
+10
+00:00:22.169 --> 00:00:23.956
+scope, ownership, and how values are used.
+
+11
+00:00:24.036 --> 00:00:27.113
+That inference keeps common code readable
+while still enforcing safety.
+
+12
+00:00:27.193 --> 00:00:30.867
+Lifetime annotations appear when
+relationships among references need to be described
+
+13
+00:00:30.947 --> 00:00:31.493
+explicitly.
+
+14
+00:00:31.573 --> 00:00:33.459
+An annotation does not make data live
+longer.
+
+15
+00:00:33.539 --> 00:00:36.965
+It tells the compiler that one reference's
+validity is related to another value's
+
+16
+00:00:37.045 --> 00:00:37.491
+lifetime.
+
+17
+00:00:37.571 --> 00:00:38.912
+If the relationship is not true,
+
+18
+00:00:38.992 --> 00:00:41.921
+the compiler rejects the code rather than
+allow an invalid reference.
+
+19
+00:00:42.001 --> 00:00:44.532
+Returning references requires a valid
+owner relationship.
+
+20
+00:00:44.612 --> 00:00:47.938
+A function cannot safely return a
+reference to a temporary local value that will
+
+21
+00:00:48.018 --> 00:00:49.458
+disappear when the function ends.
+
+22
+00:00:49.538 --> 00:00:52.765
+It can return a reference tied to an input
+if the input owner lives long enough.
+
+23
+00:00:52.845 --> 00:00:56.121
+It can also return owned data when the
+function creates something new that must
+
+24
+00:00:56.201 --> 00:00:57.194
+survive after the call.
+
+25
+00:00:57.274 --> 00:00:58.862
+Lifetime errors are design feedback.
+
+26
+00:00:58.942 --> 00:01:02.318
+They often mean ownership is unclear, a
+reference is trying to outlive its owner,
+
+27
+00:01:02.398 --> 00:01:04.830
+or a function is promising more than it
+can safely provide.
+
+28
+00:01:04.910 --> 00:01:07.293
+Good refactoring options include returning
+owned data,
+
+29
+00:01:07.373 --> 00:01:10.054
+keeping the owner alive longer,
+restructuring data ownership,
+
+30
+00:01:10.134 --> 00:01:12.020
+or avoiding references to temporary
+values.

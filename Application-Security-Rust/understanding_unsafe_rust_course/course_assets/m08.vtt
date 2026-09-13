@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.690
+Unsafe code needs more than a one-time
+glance.
+
+2
+00:00:02.770 --> 00:00:06.588
+The important question is not just whether
+the code looked reasonable during the
+
+3
+00:00:06.668 --> 00:00:07.342
+first review.
+
+4
+00:00:07.422 --> 00:00:11.296
+The question is whether the team has
+ongoing evidence that the safety assumptions
+
+5
+00:00:11.376 --> 00:00:14.801
+still hold as the code changes, platforms
+change, dependencies update,
+
+6
+00:00:14.881 --> 00:00:16.285
+and surrounding APIs evolve.
+
+7
+00:00:16.365 --> 00:00:19.846
+Tests should cover expected behavior,
+boundary values, invalid inputs,
+
+8
+00:00:19.926 --> 00:00:23.464
+empty inputs, unusual sizes, concurrency
+expectations, and error paths.
+
+9
+00:00:23.544 --> 00:00:27.530
+Boundary tests are especially important
+because unsafe code often exists where the
+
+10
+00:00:27.610 --> 00:00:30.698
+program crosses from one representation or
+system into another.
+
+11
+00:00:30.778 --> 00:00:34.316
+Regression tests help preserve assumptions
+after a bug or review finding.
+
+12
+00:00:34.396 --> 00:00:38.046
+Review should focus on safety contracts,
+invariants, pointer assumptions,
+
+13
+00:00:38.126 --> 00:00:41.944
+FFI assumptions, layout assumptions,
+thread behavior, public API guarantees,
+
+14
+00:00:42.024 --> 00:00:43.091
+and maintenance risk.
+
+15
+00:00:43.171 --> 00:00:46.989
+A reviewer should be able to connect each
+unsafe operation to a documented reason
+
+16
+00:00:47.069 --> 00:00:49.259
+and to evidence that the reason still
+applies.
+
+17
+00:00:49.339 --> 00:00:52.595
+Tooling can support review through
+formatting, linting, CI checks,
+
+18
+00:00:52.675 --> 00:00:56.437
+dependency review, and specialized
+runtime-checking concepts such as Miri or
+
+19
+00:00:56.517 --> 00:00:57.135
+sanitizers.
+
+20
+00:00:57.215 --> 00:01:00.303
+Not every tool is available or appropriate
+in every environment,
+
+21
+00:01:00.383 --> 00:01:04.201
+but teams should understand the tool
+categories and use the ones that match their
+
+22
+00:01:04.281 --> 00:01:04.955
+risk profile.
+
+23
+00:01:05.035 --> 00:01:09.022
+Maintenance matters because a safe
+abstraction can become unsafe if future changes
+
+24
+00:01:09.102 --> 00:01:11.572
+violate an assumption nobody documented or
+tested.
+
+25
+00:01:11.652 --> 00:01:14.684
+Updating safety documentation is part of
+changing unsafe code.
+
+26
+00:01:14.764 --> 00:01:18.189
+If a refactor changes ownership, layout,
+lifetime, or thread behavior,
+
+27
+00:01:18.269 --> 00:01:20.740
+the safety contract and tests should
+change with it.

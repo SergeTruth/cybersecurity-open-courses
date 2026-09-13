@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.734
+A secure RTIC system starts with an
+architecture that another engineer can
+
+2
+00:00:03.814 --> 00:00:04.378
+understand.
+
+3
+00:00:04.458 --> 00:00:07.230
+Reviewers should be able to identify
+initialization behavior,
+
+4
+00:00:07.310 --> 00:00:10.646
+idle behavior, hardware-facing tasks,
+communication tasks, timing tasks,
+
+5
+00:00:10.726 --> 00:00:12.317
+shared resources, local resources,
+
+6
+00:00:12.397 --> 00:00:15.836
+and safety-relevant actions without
+reverse engineering the whole firmware.
+
+7
+00:00:15.916 --> 00:00:17.918
+Initialization is part of the security
+model.
+
+8
+00:00:17.998 --> 00:00:21.077
+It decides which peripherals exist, which
+resources are initialized,
+
+9
+00:00:21.157 --> 00:00:23.159
+which tasks are enabled, what defaults
+apply,
+
+10
+00:00:23.239 --> 00:00:25.241
+and what happens if a resource is
+unavailable.
+
+11
+00:00:25.321 --> 00:00:28.811
+Idle behavior also matters because
+low-power states, background maintenance,
+
+12
+00:00:28.891 --> 00:00:32.022
+and watchdog interactions can affect
+device reliability and recovery.
+
+13
+00:00:32.102 --> 00:00:34.771
+RTIC resources should have clear ownership
+and access rules.
+
+14
+00:00:34.851 --> 00:00:37.468
+Local resources can keep state close to
+the task that owns it.
+
+15
+00:00:37.548 --> 00:00:41.141
+Shared resources should exist for a
+specific reason and should not become a dumping
+
+16
+00:00:41.221 --> 00:00:42.299
+ground for global state.
+
+17
+00:00:42.379 --> 00:00:46.023
+The more broadly shared a resource is, the
+more important its access policy becomes.
+
+18
+00:00:46.103 --> 00:00:48.567
+Focused task responsibilities improve
+reviewability.
+
+19
+00:00:48.647 --> 00:00:51.367
+A single task should not casually mix
+parsing, authorization,
+
+20
+00:00:51.447 --> 00:00:53.295
+hardware control, logging, diagnostics,
+
+21
+00:00:53.375 --> 00:00:56.506
+and recovery if those concerns need
+separate timing or trust decisions.
+
+22
+00:00:56.586 --> 00:01:00.230
+Clear separation helps reviewers
+understand what input can influence which device
+
+23
+00:01:00.310 --> 00:01:00.772
+behavior.
+
+24
+00:01:00.852 --> 00:01:03.675
+Security review should map input paths to
+resources and actions.
+
+25
+00:01:03.755 --> 00:01:06.013
+When a message, sensor value, maintenance
+command,
+
+26
+00:01:06.093 --> 00:01:09.481
+or timer event enters the system,
+reviewers should know which task handles it,
+
+27
+00:01:09.561 --> 00:01:12.127
+what resource it can touch, what
+validation happens first,
+
+28
+00:01:12.207 --> 00:01:14.260
+and what failure behavior protects the
+device.

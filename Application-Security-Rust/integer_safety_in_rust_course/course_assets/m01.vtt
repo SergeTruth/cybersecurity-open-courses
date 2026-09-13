@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.849
+Integer mistakes are easy to underestimate
+because numbers look simple.
+
+2
+00:00:03.929 --> 00:00:07.115
+In real systems, integers often represent
+lengths, counts, offsets,
+
+3
+00:00:07.195 --> 00:00:10.976
+capacities, identifiers, timestamps,
+prices, limits, indexes, retry counters,
+
+4
+00:00:11.056 --> 00:00:12.028
+and protocol fields.
+
+5
+00:00:12.108 --> 00:00:13.890
+When the meaning of a number is unclear,
+
+6
+00:00:13.970 --> 00:00:17.211
+the program can make the wrong decision
+while still compiling cleanly.
+
+7
+00:00:17.291 --> 00:00:20.531
+Numeric mistakes can affect correctness,
+reliability, and security.
+
+8
+00:00:20.611 --> 00:00:22.393
+A limit may be calculated incorrectly.
+
+9
+00:00:22.473 --> 00:00:23.229
+A count may wrap.
+
+10
+00:00:23.309 --> 00:00:25.416
+A signed value may be treated as
+non-negative.
+
+11
+00:00:25.496 --> 00:00:28.034
+A large parsed value may drive an
+excessive allocation.
+
+12
+00:00:28.114 --> 00:00:30.545
+A truncated identifier may point to the
+wrong record.
+
+13
+00:00:30.625 --> 00:00:33.163
+A protocol length may be trusted before it
+is validated.
+
+14
+00:00:33.243 --> 00:00:34.917
+Rust gives developers strong tools,
+
+15
+00:00:34.997 --> 00:00:37.266
+but it does not remove the need for
+numeric design.
+
+16
+00:00:37.346 --> 00:00:40.478
+The language provides explicit integer
+types, checked operations,
+
+17
+00:00:40.558 --> 00:00:43.529
+fallible conversions, safe collections,
+and type-driven APIs.
+
+18
+00:00:43.609 --> 00:00:47.281
+Those tools are most effective when
+developers choose types based on meaning and
+
+19
+00:00:47.361 --> 00:00:49.791
+validate values before they cross trust
+boundaries.
+
+20
+00:00:49.871 --> 00:00:51.762
+Integer safety is also a review practice.
+
+21
+00:00:51.842 --> 00:00:54.920
+Reviewers should ask what a number
+represents, what range is valid,
+
+22
+00:00:55.000 --> 00:00:57.701
+what unit it uses, whether negative values
+are meaningful,
+
+23
+00:00:57.781 --> 00:01:01.129
+whether conversion can fail, what happens
+at minimum and maximum values,
+
+24
+00:01:01.209 --> 00:01:04.234
+and whether arithmetic behavior has been
+selected deliberately.
+
+25
+00:01:04.314 --> 00:01:07.770
+The defensive goal is to make numeric
+assumptions explicit and reviewable.
+
+26
+00:01:07.850 --> 00:01:11.307
+A Rust codebase should show where numbers
+come from, how they are validated,
+
+27
+00:01:11.387 --> 00:01:14.087
+how they are converted, how arithmetic
+failure is handled,
+
+28
+00:01:14.167 --> 00:01:17.246
+and how numeric values influence memory,
+authorization, parsing,
+
+29
+00:01:17.326 --> 00:01:19.540
+billing, scheduling, or operational
+behavior.

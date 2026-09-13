@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.312
+Collections and strings are where many
+developers first feel Rust ownership in
+
+2
+00:00:04.392 --> 00:00:05.132
+everyday work.
+
+3
+00:00:05.212 --> 00:00:06.919
+`String` owns growable UTF-8 text.
+
+4
+00:00:06.999 --> 00:00:09.616
+`&str` is a borrowed view of text owned
+somewhere else.
+
+5
+00:00:09.696 --> 00:00:11.688
+Choosing between them is not just syntax.
+
+6
+00:00:11.768 --> 00:00:15.409
+It communicates whether a function needs
+to own text or only read a view of it.
+
+7
+00:00:15.489 --> 00:00:17.196
+`Vec<T>` owns a sequence of values.
+
+8
+00:00:17.276 --> 00:00:20.861
+A slice borrows a view into an array,
+vector, or string-like region of data.
+
+9
+00:00:20.941 --> 00:00:24.867
+Passing a slice can be an excellent API
+choice when a function only needs to inspect
+
+10
+00:00:24.947 --> 00:00:28.190
+a range of values without taking ownership
+of the whole collection.
+
+11
+00:00:28.270 --> 00:00:32.025
+Passing an owned vector can be appropriate
+when the function needs to consume,
+
+12
+00:00:32.105 --> 00:00:33.869
+store, or transform the collection.
+
+13
+00:00:33.949 --> 00:00:35.713
+Iteration also reflects ownership.
+
+14
+00:00:35.793 --> 00:00:39.150
+Iterating by value consumes or moves
+values when the type requires it.
+
+15
+00:00:39.230 --> 00:00:42.360
+Iterating by shared reference reads values
+without taking them.
+
+16
+00:00:42.440 --> 00:00:45.171
+Iterating by mutable reference changes
+values in place.
+
+17
+00:00:45.251 --> 00:00:49.063
+The right choice depends on what the loop
+is responsible for doing, not on habit.
+
+18
+00:00:49.143 --> 00:00:52.329
+Unnecessary clones often appear when
+ownership feels confusing.
+
+19
+00:00:52.409 --> 00:00:54.458
+A clone can make the compiler error go
+away,
+
+20
+00:00:54.538 --> 00:00:58.350
+but it may also hide the fact that an API
+is asking for ownership when it only needs
+
+21
+00:00:58.430 --> 00:01:00.934
+a borrow, or that a scope is holding a
+borrow too long.
+
+22
+00:01:01.014 --> 00:01:04.883
+Reviewers should ask whether the clone
+represents a real independent value or an
+
+23
+00:01:04.963 --> 00:01:06.101
+avoidable workaround.
+
+24
+00:01:06.181 --> 00:01:08.001
+At the same time, owned data is not bad.
+
+25
+00:01:08.081 --> 00:01:11.723
+Sometimes returning or storing owned
+values makes a design clearer, safer,
+
+26
+00:01:11.803 --> 00:01:15.672
+and easier to maintain than threading
+borrowed references through many layers.
+
+27
+00:01:15.752 --> 00:01:18.540
+Practical Rust design balances efficiency
+with clarity.
+
+28
+00:01:18.620 --> 00:01:22.660
+The goal is intentional ownership, not the
+fewest possible allocations at any cost.

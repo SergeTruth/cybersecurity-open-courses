@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="preventing_double_free_in_rust">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{"q1": "B", "q2": "C", "q3": "A", "q4": "D", "q5": "B", "q6": "C", "q7": "C", "q8": "D", "q9": "A", "q10": "B", "q11": "C", "q12": "D"}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. What is double free at a defensive conceptual level?</legend>
+                      <label><input type="radio" name="q1" value="A"> Running a test twice in CI/CD.</label>
+                      <label><input type="radio" name="q1" value="B"> Cleaning up the same memory allocation or resource more than once.</label>
+                      <label><input type="radio" name="q1" value="C"> Using a smart pointer for heap allocation.</label>
+                      <label><input type="radio" name="q1" value="D"> Borrowing a value through two shared references.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>2. How does safe Rust prevent ordinary double-free errors?</legend>
+                      <label><input type="radio" name="q2" value="A"> It requires every caller to manually free every value.</label>
+                      <label><input type="radio" name="q2" value="B"> It treats borrowed references as cleanup owners.</label>
+                      <label><input type="radio" name="q2" value="C"> It ties cleanup to ownership and prevents old bindings from acting as owners after a move.</label>
+                      <label><input type="radio" name="q2" value="D"> It disables cleanup when a value leaves scope.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>3. What does moving a non-Copy value do?</legend>
+                      <label><input type="radio" name="q3" value="A"> It transfers ownership and cleanup responsibility to the new owner.</label>
+                      <label><input type="radio" name="q3" value="B"> It guarantees the value will never be dropped.</label>
+                      <label><input type="radio" name="q3" value="C"> It creates two independent owners of the same resource.</label>
+                      <label><input type="radio" name="q3" value="D"> It turns the value into a weak reference.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>4. Why is borrowing important for double-free prevention?</legend>
+                      <label><input type="radio" name="q4" value="A"> Borrowing requires raw pointers for every resource.</label>
+                      <label><input type="radio" name="q4" value="B"> Borrowed references always free the value when they are dropped.</label>
+                      <label><input type="radio" name="q4" value="C"> Borrowing disables ownership transfer.</label>
+                      <label><input type="radio" name="q4" value="D"> Borrowed references can access data without taking cleanup responsibility.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>5. What is the role of Drop?</legend>
+                      <label><input type="radio" name="q5" value="A"> Drop creates duplicate owners for shared resources.</label>
+                      <label><input type="radio" name="q5" value="B"> Drop defines cleanup behavior that runs when ownership ends.</label>
+                      <label><input type="radio" name="q5" value="C"> Drop disables the borrow checker.</label>
+                      <label><input type="radio" name="q5" value="D"> Drop is only used for comments in Rust source files.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>6. Why should custom Drop implementations be reviewed carefully?</legend>
+                      <label><input type="radio" name="q6" value="A"> They are only used in test code.</label>
+                      <label><input type="radio" name="q6" value="B"> They prevent all FFI ownership bugs by default.</label>
+                      <label><input type="radio" name="q6" value="C"> They define resource-release behavior and can create fragile cleanup assumptions if poorly designed.</label>
+                      <label><input type="radio" name="q6" value="D"> They make all cleanup paths automatically idempotent.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>7. What is the difference between shared ownership and duplicate ownership?</legend>
+                      <label><input type="radio" name="q7" value="A"> There is no meaningful difference.</label>
+                      <label><input type="radio" name="q7" value="B"> Shared ownership always leaks memory, while duplicate ownership is always safe.</label>
+                      <label><input type="radio" name="q7" value="C"> Shared ownership coordinates cleanup through reference counting, while duplicate ownership incorrectly treats multiple paths as independent owners of the same resource.</label>
+                      <label><input type="radio" name="q7" value="D"> Shared ownership exists only for stack data, while duplicate ownership exists only for strings.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>8. Why are Weak references useful?</legend>
+                      <label><input type="radio" name="q8" value="A"> They force cleanup to run twice for verification.</label>
+                      <label><input type="radio" name="q8" value="B"> They are required for every Box allocation.</label>
+                      <label><input type="radio" name="q8" value="C"> They replace the need for ownership review.</label>
+                      <label><input type="radio" name="q8" value="D"> They represent non-owning relationships that can be checked before use without keeping the resource alive.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>9. Where can double-free risk re-enter Rust programs?</legend>
+                      <label><input type="radio" name="q9" value="A"> Unsafe code, raw pointers, manual ownership reconstruction, FFI boundaries, allocator mismatches, and external cleanup contracts.</label>
+                      <label><input type="radio" name="q9" value="B"> Never, because Rust checks every external API automatically.</label>
+                      <label><input type="radio" name="q9" value="C"> Only when using safe iterators.</label>
+                      <label><input type="radio" name="q9" value="D"> Only in ordinary shared references.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>10. Why does allocator compatibility matter in FFI?</legend>
+                      <label><input type="radio" name="q10" value="A"> Any allocator can safely free any external resource.</label>
+                      <label><input type="radio" name="q10" value="B"> A resource may need to be released by the same library or allocator family that created it.</label>
+                      <label><input type="radio" name="q10" value="C"> Allocator compatibility only changes documentation formatting.</label>
+                      <label><input type="radio" name="q10" value="D"> Allocator compatibility matters only for web applications.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>11. What should an FFI cleanup contract clarify?</legend>
+                      <label><input type="radio" name="q11" value="A"> Only which editor was used to write the wrapper.</label>
+                      <label><input type="radio" name="q11" value="B"> How to bypass Rust ownership checks in safe code.</label>
+                      <label><input type="radio" name="q11" value="C"> Who owns the resource, who allocates it, who frees it, which cleanup function is required, and how error paths affect ownership.</label>
+                      <label><input type="radio" name="q11" value="D"> How to make every cleanup call optional without review.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>12. What is the main goal of preventing double free in Rust?</legend>
+                      <label><input type="radio" name="q12" value="A"> Move all cleanup responsibility into undocumented callbacks.</label>
+                      <label><input type="radio" name="q12" value="B"> Avoid using Drop for any resource-owning type.</label>
+                      <label><input type="radio" name="q12" value="C"> Create multiple independent cleanup owners for each resource.</label>
+                      <label><input type="radio" name="q12" value="D"> Maintain one clear cleanup authority through safe ownership, reviewed abstractions, documented unsafe boundaries, and lifecycle testing.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

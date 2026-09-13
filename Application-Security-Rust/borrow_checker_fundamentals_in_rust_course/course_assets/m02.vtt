@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.279
+Borrowing only makes sense against the
+background of ownership.
+
+2
+00:00:03.359 --> 00:00:04.218
+A value has an owner,
+
+3
+00:00:04.298 --> 00:00:07.431
+and that owner is responsible for cleanup
+when the value goes out of scope.
+
+4
+00:00:07.511 --> 00:00:10.796
+Borrowing lets another part of the program
+use the value temporarily without
+
+5
+00:00:10.876 --> 00:00:11.735
+becoming the owner.
+
+6
+00:00:11.815 --> 00:00:14.645
+The original owner remains responsible for
+the value's lifetime.
+
+7
+00:00:14.725 --> 00:00:16.746
+A shared reference provides read-only
+access.
+
+8
+00:00:16.826 --> 00:00:19.858
+A function that receives a shared
+reference is saying it can do its job by
+
+9
+00:00:19.938 --> 00:00:20.898
+inspecting the value.
+
+10
+00:00:20.978 --> 00:00:24.061
+It does not need to store the value
+permanently, consume it, or mutate it.
+
+11
+00:00:24.141 --> 00:00:27.627
+That keeps the caller's ownership intact
+and makes the function easier to compose
+
+12
+00:00:27.707 --> 00:00:28.415
+with other code.
+
+13
+00:00:28.495 --> 00:00:30.870
+A mutable reference provides controlled
+write access.
+
+14
+00:00:30.950 --> 00:00:34.336
+It lets a function change a value owned
+somewhere else without taking permanent
+
+15
+00:00:34.416 --> 00:00:35.780
+responsibility for that value.
+
+16
+00:00:35.860 --> 00:00:39.347
+This is useful for updating state,
+appending to buffers, modifying collections,
+
+17
+00:00:39.427 --> 00:00:42.913
+and performing transformations where the
+caller should keep the same owned value
+
+18
+00:00:42.993 --> 00:00:43.499
+afterward.
+
+19
+00:00:43.579 --> 00:00:45.448
+Function signatures are access contracts.
+
+20
+00:00:45.528 --> 00:00:49.015
+A parameter of an owned type says the
+function takes responsibility for the value.
+
+21
+00:00:49.095 --> 00:00:51.470
+A shared reference says the function needs
+read access.
+
+22
+00:00:51.550 --> 00:00:54.683
+A mutable reference says the function
+needs to change something in place.
+
+23
+00:00:54.763 --> 00:00:58.199
+These choices tell callers and reviewers
+what kind of relationship the function
+
+24
+00:00:58.279 --> 00:00:58.734
+requires.
+
+25
+00:00:58.814 --> 00:01:01.644
+Defensive Rust code uses the least
+powerful form that fits the job.
+
+26
+00:01:01.724 --> 00:01:04.352
+If a function only needs to read, it
+should not take ownership.
+
+27
+00:01:04.432 --> 00:01:05.796
+If it needs temporary mutation,
+
+28
+00:01:05.876 --> 00:01:08.352
+it should not require a clone or a full
+ownership transfer.
+
+29
+00:01:08.432 --> 00:01:12.020
+Precise borrowing reduces unnecessary
+copies and makes data flow easier to review.

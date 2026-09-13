@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.319
+Rust code can be correct in isolation and
+still fail operationally.
+
+2
+00:00:03.399 --> 00:00:05.278
+Async systems make this especially
+visible.
+
+3
+00:00:05.358 --> 00:00:08.671
+Anti-patterns include unbounded task
+spawning, queues with no backpressure,
+
+4
+00:00:08.751 --> 00:00:11.569
+retries without limits, missing timeouts,
+ignored cancellation,
+
+5
+00:00:11.649 --> 00:00:14.666
+and cleanup behavior that depends on tasks
+finishing in a perfect order.
+
+6
+00:00:14.746 --> 00:00:17.070
+Locks also need attention in async and
+concurrent code.
+
+7
+00:00:17.150 --> 00:00:19.474
+Holding a lock across unrelated work, slow
+operations,
+
+8
+00:00:19.554 --> 00:00:22.472
+or code that can wait indefinitely can
+create availability problems.
+
+9
+00:00:22.552 --> 00:00:25.024
+The defensive pattern is to keep critical
+sections narrow,
+
+10
+00:00:25.104 --> 00:00:27.033
+define cancellation behavior, set
+timeouts,
+
+11
+00:00:27.113 --> 00:00:28.843
+and make queue and retry limits explicit.
+
+12
+00:00:28.923 --> 00:00:31.396
+Dependency governance is another Rust
+anti-pattern area.
+
+13
+00:00:31.476 --> 00:00:34.987
+Adding crates casually, enabling broad
+feature flags, ignoring lockfile changes,
+
+14
+00:00:35.067 --> 00:00:38.380
+or failing to review build scripts and
+procedural macros can expand the trusted
+
+15
+00:00:38.460 --> 00:00:39.152
+computing base.
+
+16
+00:00:39.232 --> 00:00:41.903
+A dependency may bring parsers, network
+behavior, native code,
+
+17
+00:00:41.983 --> 00:00:44.653
+optional protocols, or transitive crates
+that deserve review.
+
+18
+00:00:44.733 --> 00:00:48.293
+Logging and tracing should support
+operations without leaking sensitive material.
+
+19
+00:00:48.373 --> 00:00:51.489
+Logs should avoid secrets, tokens,
+credentials, private configuration,
+
+20
+00:00:51.569 --> 00:00:53.299
+personal data, and excessive internals.
+
+21
+00:00:53.379 --> 00:00:56.890
+Structured logging is useful, but fields
+still need classification and redaction.
+
+22
+00:00:56.970 --> 00:00:59.690
+Debug-friendly output should not become
+permanent disclosure.
+
+23
+00:00:59.770 --> 00:01:03.034
+Operational blind spots include missing
+metrics, unclear readiness checks,
+
+24
+00:01:03.114 --> 00:01:04.844
+weak error reporting, no release review,
+
+25
+00:01:04.924 --> 00:01:08.040
+and tests that stop at unit-level behavior
+while ignoring runtime limits.
+
+26
+00:01:08.120 --> 00:01:11.235
+Defensive Rust treats the running system
+as part of the security boundary.
+
+27
+00:01:11.315 --> 00:01:13.837
+Observability, configuration review,
+dependency review,
+
+28
+00:01:13.917 --> 00:01:16.340
+and release discipline are part of the
+code's trust story.

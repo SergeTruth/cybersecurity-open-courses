@@ -1,0 +1,120 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.783
+RTIC helps structure access to shared
+resources,
+
+2
+00:00:02.863 --> 00:00:06.287
+but shared state still deserves careful
+security and reliability review.
+
+3
+00:00:06.367 --> 00:00:08.650
+A shared resource should exist for a clear
+reason.
+
+4
+00:00:08.730 --> 00:00:09.926
+If many tasks need access,
+
+5
+00:00:10.006 --> 00:00:13.919
+reviewers should understand why the state
+is shared and whether a narrower ownership
+
+6
+00:00:13.999 --> 00:00:15.086
+model would be clearer.
+
+7
+00:00:15.166 --> 00:00:16.470
+Lock scope should be narrow.
+
+8
+00:00:16.550 --> 00:00:20.518
+Exclusive access should protect the
+smallest operation that truly needs protection.
+
+9
+00:00:20.598 --> 00:00:23.805
+If a critical section grows to include
+parsing, formatting, logging,
+
+10
+00:00:23.885 --> 00:00:26.766
+communication, storage access, or slow
+peripheral activity,
+
+11
+00:00:26.846 --> 00:00:29.563
+the code may be mixing data protection
+with unrelated work.
+
+12
+00:00:29.643 --> 00:00:33.230
+Synchronization choices affect timing
+behavior, not only data correctness.
+
+13
+00:00:33.310 --> 00:00:36.354
+A lock that is technically correct can
+still delay important work,
+
+14
+00:00:36.434 --> 00:00:39.913
+create unexpected latency, or make
+degraded conditions harder to analyze.
+
+15
+00:00:39.993 --> 00:00:43.526
+Priority and resource access should be
+reviewed together so timing impact is
+
+16
+00:00:43.606 --> 00:00:44.040
+visible.
+
+17
+00:00:44.120 --> 00:00:47.545
+Defensive firmware avoids hidden shared
+mutation and broad global state.
+
+18
+00:00:47.625 --> 00:00:50.342
+It keeps shared resources close to the
+tasks that need them,
+
+19
+00:00:50.422 --> 00:00:52.107
+documents why sharing is necessary,
+
+20
+00:00:52.187 --> 00:00:55.448
+and limits the amount of work performed
+while exclusive access is held.
+
+21
+00:00:55.528 --> 00:00:58.300
+Reviewers should ask what invariant the
+resource protects,
+
+22
+00:00:58.380 --> 00:01:00.609
+which tasks can access it, how long access
+lasts,
+
+23
+00:01:00.689 --> 00:01:03.515
+whether slow operations occur inside the
+protected section,
+
+24
+00:01:03.595 --> 00:01:06.041
+and what happens when a task is
+interrupted, delayed,
+
+25
+00:01:06.121 --> 00:01:07.860
+or unable to complete its normal path.

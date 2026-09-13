@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.675
+Rust can enforce memory safety, but it
+cannot know whether an email address,
+
+2
+00:00:03.755 --> 00:00:07.178
+file path, API parameter, tenant ID,
+serialized message, environment variable,
+
+3
+00:00:07.258 --> 00:00:09.490
+or command-line option is valid for the
+application.
+
+4
+00:00:09.570 --> 00:00:11.505
+Validity is a business and security
+decision.
+
+5
+00:00:11.585 --> 00:00:14.165
+The application has to define it and
+enforce it consistently.
+
+6
+00:00:14.245 --> 00:00:17.469
+External input should be treated as
+untrusted until it is parsed, validated,
+
+7
+00:00:17.549 --> 00:00:20.178
+and converted into a type that represents
+the intended domain.
+
+8
+00:00:20.258 --> 00:00:22.441
+That input may arrive through HTTP
+requests, files,
+
+9
+00:00:22.521 --> 00:00:25.746
+command-line arguments, environment
+variables, queues, serialized data,
+
+10
+00:00:25.826 --> 00:00:27.116
+databases, or other services.
+
+11
+00:00:27.196 --> 00:00:30.668
+Internal systems can also produce invalid
+data when versions drift or assumptions
+
+12
+00:00:30.748 --> 00:00:31.095
+change.
+
+13
+00:00:31.175 --> 00:00:34.152
+Parsing should happen at clear boundaries,
+close to where data enters.
+
+14
+00:00:34.232 --> 00:00:37.704
+Defensive code avoids letting raw strings
+or unchecked values travel deep into the
+
+15
+00:00:37.784 --> 00:00:40.563
+application and then become file paths,
+authorization subjects,
+
+16
+00:00:40.643 --> 00:00:43.917
+resource selectors, database query inputs,
+downstream request parameters,
+
+17
+00:00:43.997 --> 00:00:45.683
+or security-sensitive configuration.
+
+18
+00:00:45.763 --> 00:00:47.946
+The sooner raw input becomes validated
+domain data,
+
+19
+00:00:48.026 --> 00:00:49.713
+the simpler the rest of the code becomes.
+
+20
+00:00:49.793 --> 00:00:52.273
+Validation should include shape, length,
+allowed values,
+
+21
+00:00:52.353 --> 00:00:55.231
+encoding expectations, resource ownership,
+and contextual rules.
+
+22
+00:00:55.311 --> 00:00:58.039
+A path-like value may need different
+checks than a display label.
+
+23
+00:00:58.119 --> 00:01:00.798
+A tenant ID may need to match the
+authenticated subject's scope.
+
+24
+00:01:00.878 --> 00:01:04.450
+A serialized message may need
+version-aware validation before it influences state.
+
+25
+00:01:04.530 --> 00:01:06.018
+Clear rejection behavior matters.
+
+26
+00:01:06.098 --> 00:01:08.082
+Invalid input should be rejected
+predictably,
+
+27
+00:01:08.162 --> 00:01:11.784
+without falling back to risky defaults or
+exposing excessive implementation detail.
+
+28
+00:01:11.864 --> 00:01:14.096
+Defensive Rust code makes trust boundaries
+visible,
+
+29
+00:01:14.176 --> 00:01:15.763
+validates data before sensitive use,
+
+30
+00:01:15.843 --> 00:01:18.820
+and turns successful validation into
+simpler, safer downstream APIs.

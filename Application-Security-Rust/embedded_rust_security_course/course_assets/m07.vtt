@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.843
+Embedded systems may store device
+credentials, manufacturing data,
+
+2
+00:00:03.923 --> 00:00:07.945
+keys, certificates, pairing material,
+calibration data, configuration secrets,
+
+3
+00:00:08.025 --> 00:00:08.932
+or service tokens.
+
+4
+00:00:09.012 --> 00:00:12.298
+These values often affect identity,
+access, updates, diagnostics,
+
+5
+00:00:12.378 --> 00:00:14.248
+and communication with other systems.
+
+6
+00:00:14.328 --> 00:00:18.180
+Rust lifetimes and ownership can help make
+sensitive data flow easier to review.
+
+7
+00:00:18.260 --> 00:00:20.810
+A type can make clear where a secret
+enters the system,
+
+8
+00:00:20.890 --> 00:00:23.269
+which component owns it, where it may be
+borrowed,
+
+9
+00:00:23.349 --> 00:00:25.049
+and when it should no longer be used.
+
+10
+00:00:25.129 --> 00:00:28.075
+But ownership alone does not erase
+secrets, protect storage,
+
+11
+00:00:28.155 --> 00:00:30.252
+or prevent disclosure through debug paths.
+
+12
+00:00:30.332 --> 00:00:33.278
+Teams need clear policies for where
+secrets are provisioned,
+
+13
+00:00:33.358 --> 00:00:36.757
+where they are stored, whether
+hardware-backed storage is available,
+
+14
+00:00:36.837 --> 00:00:39.783
+who can access them, how credentials are
+rotated or replaced,
+
+15
+00:00:39.863 --> 00:00:43.149
+and what happens when a device is
+serviced, transferred, or retired.
+
+16
+00:00:43.229 --> 00:00:46.912
+These decisions belong in the firmware
+lifecycle, not only in code comments.
+
+17
+00:00:46.992 --> 00:00:50.278
+Debug output, logs, crash data,
+diagnostics, manufacturing tools,
+
+18
+00:00:50.358 --> 00:00:52.624
+and field-support scripts are exposure
+paths.
+
+19
+00:00:52.704 --> 00:00:55.877
+They should avoid printing keys, tokens,
+private configuration,
+
+20
+00:00:55.957 --> 00:00:59.073
+sensitive identifiers, or raw buffers that
+may contain secrets.
+
+21
+00:00:59.153 --> 00:01:03.176
+Redaction should be designed, not added
+only after a release review finds a problem.
+
+22
+00:01:03.256 --> 00:01:06.939
+Defensive embedded Rust avoids hard-coded
+production secrets and plans for
+
+23
+00:01:07.019 --> 00:01:07.699
+replacement.
+
+24
+00:01:07.779 --> 00:01:11.348
+Device identity and credential handling
+should be documented enough that
+
+25
+00:01:11.428 --> 00:01:15.507
+engineering, manufacturing, support, and
+security teams understand how sensitive
+
+26
+00:01:15.587 --> 00:01:18.420
+material is introduced, protected,
+updated, and removed.

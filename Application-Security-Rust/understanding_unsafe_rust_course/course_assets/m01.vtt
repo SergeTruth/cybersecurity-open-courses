@@ -1,0 +1,135 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.519
+Rust's safe subset is intentionally
+strict.
+
+2
+00:00:02.599 --> 00:00:06.426
+That strictness is one of the language's
+main security strengths because it prevents
+
+3
+00:00:06.506 --> 00:00:08.632
+many memory-safety mistakes before code
+runs.
+
+4
+00:00:08.712 --> 00:00:12.060
+The compiler asks hard questions about
+ownership, borrowing, lifetimes,
+
+5
+00:00:12.140 --> 00:00:15.754
+aliasing, and mutation so that ordinary
+safe code can rely on strong guarantees.
+
+6
+00:00:15.834 --> 00:00:19.447
+Real systems sometimes need operations the
+compiler cannot fully reason about.
+
+7
+00:00:19.527 --> 00:00:22.025
+A Rust program may need to call an
+operating-system API,
+
+8
+00:00:22.105 --> 00:00:24.390
+interact with embedded hardware, wrap a C
+library,
+
+9
+00:00:24.470 --> 00:00:27.075
+implement a custom allocator, optimize a
+data structure,
+
+10
+00:00:27.155 --> 00:00:29.440
+or work with a platform-specific
+representation.
+
+11
+00:00:29.520 --> 00:00:32.921
+These cases can require operations outside
+safe Rust's normal guarantees.
+
+12
+00:00:33.001 --> 00:00:34.595
+Unsafe Rust exists for those cases.
+
+13
+00:00:34.675 --> 00:00:37.651
+It is a controlled escape hatch, not a
+shortcut around discipline.
+
+14
+00:00:37.731 --> 00:00:41.452
+The unsafe keyword marks places where the
+programmer is taking responsibility for
+
+15
+00:00:41.532 --> 00:00:43.976
+specific assumptions that the compiler
+cannot prove.
+
+16
+00:00:44.056 --> 00:00:47.829
+That signal is valuable because it tells
+reviewers where the trust boundary begins.
+
+17
+00:00:47.909 --> 00:00:49.716
+Unsafe code is not automatically wrong.
+
+18
+00:00:49.796 --> 00:00:53.463
+Some of Rust's most useful libraries and
+platform abstractions rely on carefully
+
+19
+00:00:53.543 --> 00:00:54.819
+reviewed unsafe internals.
+
+20
+00:00:54.899 --> 00:00:58.300
+The important question is whether unsafe
+is necessary, whether it is small,
+
+21
+00:00:58.380 --> 00:00:59.496
+whether it is justified,
+
+22
+00:00:59.576 --> 00:01:03.030
+and whether the surrounding API prevents
+ordinary callers from misusing the
+
+23
+00:01:03.110 --> 00:01:04.067
+low-level behavior.
+
+24
+00:01:04.147 --> 00:01:07.973
+A professional unsafe Rust practice treats
+every unsafe block as something that must
+
+25
+00:01:08.053 --> 00:01:08.744
+earn its place.
+
+26
+00:01:08.824 --> 00:01:11.535
+If safe Rust can express the behavior
+clearly, use safe Rust.
+
+27
+00:01:11.615 --> 00:01:14.803
+If unsafe is required, scope it tightly,
+document the safety contract,
+
+28
+00:01:14.883 --> 00:01:17.700
+test boundary behavior, and make review
+evidence easy to find.

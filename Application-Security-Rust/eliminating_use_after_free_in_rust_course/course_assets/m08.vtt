@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.865
+Use-after-free prevention in safe Rust
+comes from the language model,
+
+2
+00:00:03.945 --> 00:00:06.918
+but lifecycle-sensitive code still needs
+testing and review.
+
+3
+00:00:06.998 --> 00:00:10.812
+Tests should cover construction, ownership
+transfer, cleanup, cancellation,
+
+4
+00:00:10.892 --> 00:00:14.313
+retries, dropped handles, failed
+initialization, and shutdown paths.
+
+5
+00:00:14.393 --> 00:00:17.702
+These are the places where lifecycle
+assumptions are easiest to miss.
+
+6
+00:00:17.782 --> 00:00:20.362
+Drop-path review matters for
+resource-owning types.
+
+7
+00:00:20.442 --> 00:00:23.078
+What happens if initialization fails
+halfway through?
+
+8
+00:00:23.158 --> 00:00:26.692
+What happens if a handle is dropped while
+background work is still pending?
+
+9
+00:00:26.772 --> 00:00:28.623
+What happens during service shutdown?
+
+10
+00:00:28.703 --> 00:00:30.834
+Does cleanup happen once, in the right
+order,
+
+11
+00:00:30.914 --> 00:00:33.606
+and without leaving callbacks or tasks
+with stale state?
+
+12
+00:00:33.686 --> 00:00:37.164
+Code review should focus on unsafe blocks,
+FFI, callbacks, raw pointers,
+
+13
+00:00:37.244 --> 00:00:40.441
+shared ownership, `Weak` upgrade behavior,
+interior mutability,
+
+14
+00:00:40.521 --> 00:00:43.381
+async task boundaries, and custom `Drop`
+implementations.
+
+15
+00:00:43.461 --> 00:00:47.275
+Reviewers should ask what owns each
+resource, how long references remain valid,
+
+16
+00:00:47.355 --> 00:00:49.094
+and what prevents use after cleanup.
+
+17
+00:00:49.174 --> 00:00:52.259
+Tooling concepts such as Miri and
+sanitizers can support review,
+
+18
+00:00:52.339 --> 00:00:54.021
+especially near unsafe or FFI code.
+
+19
+00:00:54.101 --> 00:00:56.625
+They do not replace design, documentation,
+or tests,
+
+20
+00:00:56.705 --> 00:00:59.790
+but they can provide extra confidence
+around boundary behavior.
+
+21
+00:00:59.870 --> 00:01:03.852
+Dependency review also matters when
+external crates manage lifetimes, callbacks,
+
+22
+00:01:03.932 --> 00:01:05.110
+or low-level resources.
+
+23
+00:01:05.190 --> 00:01:08.275
+Regression tests are important when a
+lifetime bug, cleanup bug,
+
+24
+00:01:08.355 --> 00:01:10.318
+or stale-reference assumption is fixed.
+
+25
+00:01:10.398 --> 00:01:12.753
+The fix should not remain only in a review
+comment.
+
+26
+00:01:12.833 --> 00:01:16.591
+Capture the lifecycle edge in a test where
+practical, update safety contracts,
+
+27
+00:01:16.671 --> 00:01:19.700
+and make sure future refactors preserve
+the intended behavior.

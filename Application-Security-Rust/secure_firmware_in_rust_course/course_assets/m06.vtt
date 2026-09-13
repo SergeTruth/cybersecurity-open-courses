@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.885
+Firmware often processes input from
+sensors, UART, SPI, I2C, CAN, USB, BLE,
+
+2
+00:00:03.965 --> 00:00:07.720
+radio packets, local buttons, update
+channels, debug commands, network messages,
+
+3
+00:00:07.800 --> 00:00:08.646
+or cloud services.
+
+4
+00:00:08.726 --> 00:00:10.630
+Some of these inputs are clearly external.
+
+5
+00:00:10.710 --> 00:00:13.883
+Others feel internal but still cross
+reliability or trust boundaries.
+
+6
+00:00:13.963 --> 00:00:17.136
+Input should be treated as unverified
+until it is parsed and validated.
+
+7
+00:00:17.216 --> 00:00:19.860
+A message can be syntactically valid and
+still be too large,
+
+8
+00:00:19.940 --> 00:00:23.590
+out of order, inconsistent with other
+fields, unauthorized for the current mode,
+
+9
+00:00:23.670 --> 00:00:25.415
+or unsafe for the current device state.
+
+10
+00:00:25.495 --> 00:00:27.082
+Parsing confirms representation.
+
+11
+00:00:27.162 --> 00:00:29.224
+Validation confirms meaning and
+permission.
+
+12
+00:00:29.304 --> 00:00:32.742
+Defensive Rust firmware uses bounded
+buffers, explicit parser boundaries,
+
+13
+00:00:32.822 --> 00:00:36.365
+length checks, framing checks, field
+validation, state-machine validation,
+
+14
+00:00:36.445 --> 00:00:37.080
+and timeouts.
+
+15
+00:00:37.160 --> 00:00:40.968
+Device-facing parsing should avoid
+panic-prone paths because invalid input should
+
+16
+00:00:41.048 --> 00:00:43.903
+not make timing, availability, or device
+state unpredictable.
+
+17
+00:00:43.983 --> 00:00:45.094
+Protocol state matters.
+
+18
+00:00:45.174 --> 00:00:47.290
+A command may only be valid after
+provisioning.
+
+19
+00:00:47.370 --> 00:00:49.538
+A field may be allowed only in a
+maintenance mode.
+
+20
+00:00:49.618 --> 00:00:52.315
+A sensor value may be plausible only
+within a physical range.
+
+21
+00:00:52.395 --> 00:00:55.991
+A firmware update command may require a
+state transition before it can influence
+
+22
+00:00:56.071 --> 00:00:56.494
+storage.
+
+23
+00:00:56.574 --> 00:00:59.113
+These relationships should be validated
+deliberately.
+
+24
+00:00:59.193 --> 00:01:02.684
+A strong pattern is to convert valid input
+into domain types after validation.
+
+25
+00:01:02.764 --> 00:01:06.201
+Downstream code can then work with
+reviewed meaning rather than raw bytes and
+
+26
+00:01:06.281 --> 00:01:06.863
+primitives.
+
+27
+00:01:06.943 --> 00:01:08.582
+The boundary becomes easier to test,
+
+28
+00:01:08.662 --> 00:01:12.100
+and later tasks do not need to rediscover
+which checks have already happened.

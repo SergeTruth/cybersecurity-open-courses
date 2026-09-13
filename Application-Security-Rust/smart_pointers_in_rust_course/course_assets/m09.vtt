@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.410
+Smart pointers are typed ownership tools.
+
+2
+00:00:02.490 --> 00:00:05.673
+They help Rust programs represent heap
+allocation, shared ownership,
+
+3
+00:00:05.753 --> 00:00:08.883
+non-owning references, controlled
+mutation, thread-safe sharing,
+
+4
+00:00:08.963 --> 00:00:11.934
+stable-location assumptions, and flexible
+borrow-or-own APIs.
+
+5
+00:00:12.014 --> 00:00:14.242
+Their value comes from making ownership
+visible,
+
+6
+00:00:14.322 --> 00:00:16.020
+not from making ownership disappear.
+
+7
+00:00:16.100 --> 00:00:18.169
+Start with ordinary ownership and
+borrowing.
+
+8
+00:00:18.249 --> 00:00:19.893
+If owned heap indirection is needed,
+
+9
+00:00:19.973 --> 00:00:22.308
+consider `Box<T>` before adding shared
+ownership.
+
+10
+00:00:22.388 --> 00:00:26.154
+If several parts of a single-threaded
+design truly need ownership, `Rc<T>` may fit.
+
+11
+00:00:26.234 --> 00:00:28.887
+If ownership must cross threads or tasks,
+`Arc<T>` may fit.
+
+12
+00:00:28.967 --> 00:00:31.885
+If a relationship should not keep the
+value alive, use `Weak<T>`.
+
+13
+00:00:31.965 --> 00:00:35.148
+Interior mutability and synchronization
+deserve special attention.
+
+14
+00:00:35.228 --> 00:00:38.995
+`Cell<T>`, `RefCell<T>`, `Mutex<T>`, and
+`RwLock<T>` can support valid designs,
+
+15
+00:00:39.075 --> 00:00:42.735
+but they change where access rules are
+enforced and what runtime behaviors must be
+
+16
+00:00:42.815 --> 00:00:43.293
+reviewed.
+
+17
+00:00:43.373 --> 00:00:46.874
+Keep mutation scope small, lock scope
+narrow, and failure behavior explicit.
+
+18
+00:00:46.954 --> 00:00:50.668
+For async and concurrent systems, smart
+pointers are not a complete safety design.
+
+19
+00:00:50.748 --> 00:00:54.462
+Review shutdown, cancellation,
+backpressure, resource limits, observability,
+
+20
+00:00:54.542 --> 00:00:55.550
+and cleanup behavior.
+
+21
+00:00:55.630 --> 00:00:58.547
+Shared ownership should not become a place
+where tasks, handles,
+
+22
+00:00:58.627 --> 00:01:02.129
+and resources live indefinitely because no
+one knows who should release them.
+
+23
+00:01:02.209 --> 00:01:04.968
+The practical checklist is to keep
+ownership choices simple,
+
+24
+00:01:05.048 --> 00:01:08.231
+document lifecycle assumptions, avoid
+unnecessary shared mutation,
+
+25
+00:01:08.311 --> 00:01:11.865
+use weak relationships for observers or
+back-references, test cleanup paths,
+
+26
+00:01:11.945 --> 00:01:15.659
+and review smart pointer use whenever it
+affects resource lifetime, concurrency,
+
+27
+00:01:15.739 --> 00:01:18.020
+API contracts, or long-running service
+behavior.

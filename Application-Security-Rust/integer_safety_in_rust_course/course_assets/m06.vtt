@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.291
+External numbers should not be trusted
+just because they parse.
+
+2
+00:00:03.371 --> 00:00:05.955
+Numeric input can come from files, network
+messages, APIs,
+
+3
+00:00:06.035 --> 00:00:09.653
+command-line arguments, environment
+variables, database rows, configuration,
+
+4
+00:00:09.733 --> 00:00:10.819
+or serialized payloads.
+
+5
+00:00:10.899 --> 00:00:14.310
+A successful parse only says the text or
+bytes could be interpreted as a number.
+
+6
+00:00:14.390 --> 00:00:15.734
+Validation is a separate step.
+
+7
+00:00:15.814 --> 00:00:18.812
+A parsed value may be negative when only
+positive values are allowed,
+
+8
+00:00:18.892 --> 00:00:21.011
+too large for a limit, measured in the
+wrong unit,
+
+9
+00:00:21.091 --> 00:00:23.675
+inconsistent with another field, outside a
+business rule,
+
+10
+00:00:23.755 --> 00:00:26.133
+or inappropriate for the current tenant or
+operation.
+
+11
+00:00:26.213 --> 00:00:28.745
+The application must decide whether the
+value is allowed.
+
+12
+00:00:28.825 --> 00:00:31.048
+Defaults and missing values need explicit
+policy.
+
+13
+00:00:31.128 --> 00:00:34.074
+A missing timeout might mean use a safe
+default, reject the request,
+
+14
+00:00:34.154 --> 00:00:35.653
+or inherit a configuration value.
+
+15
+00:00:35.733 --> 00:00:38.110
+A missing limit might be safer than an
+unbounded limit,
+
+16
+00:00:38.190 --> 00:00:39.947
+but that behavior should be deliberate.
+
+17
+00:00:40.027 --> 00:00:43.594
+Silent defaults can become security
+surprises when callers misunderstand them.
+
+18
+00:00:43.674 --> 00:00:45.690
+Related fields should be validated
+together.
+
+19
+00:00:45.770 --> 00:00:48.922
+A count may parse successfully while a
+payload length disagrees with it.
+
+20
+00:00:49.002 --> 00:00:52.052
+A start offset and length may each be
+valid alone but invalid as a range.
+
+21
+00:00:52.132 --> 00:00:55.440
+A rate limit and time window may combine
+into an unreasonable amount of work.
+
+22
+00:00:55.520 --> 00:00:58.776
+Defensive validation checks relationships,
+not only individual fields.
+
+23
+00:00:58.856 --> 00:01:01.750
+A strong Rust pattern is to parse into a
+temporary representation,
+
+24
+00:01:01.830 --> 00:01:04.621
+validate range and meaning, and then
+convert into a domain type.
+
+25
+00:01:04.701 --> 00:01:08.319
+After that conversion, downstream code can
+rely on the type's invariant instead of
+
+26
+00:01:08.399 --> 00:01:10.260
+repeating raw numeric checks everywhere.

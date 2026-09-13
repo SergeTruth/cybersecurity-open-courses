@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.897
+Safe Rust gives strong guarantees around
+memory access, aliasing, lifetimes,
+
+2
+00:00:03.977 --> 00:00:05.143
+and data races in safe code.
+
+3
+00:00:05.223 --> 00:00:08.265
+Those guarantees let developers build
+abstractions with confidence.
+
+4
+00:00:08.345 --> 00:00:09.866
+When a value is borrowed immutably,
+
+5
+00:00:09.946 --> 00:00:12.126
+safe Rust limits mutation through that
+reference.
+
+6
+00:00:12.206 --> 00:00:13.574
+When a reference has a lifetime,
+
+7
+00:00:13.654 --> 00:00:16.443
+the compiler checks that it does not
+outlive the data it points to.
+
+8
+00:00:16.523 --> 00:00:18.399
+Unsafe does not turn off the whole
+language.
+
+9
+00:00:18.479 --> 00:00:21.622
+Rust still has types, ownership,
+borrowing, pattern matching, modules,
+
+10
+00:00:21.702 --> 00:00:24.794
+visibility, and ordinary compiler checks
+around the unsafe operation.
+
+11
+00:00:24.874 --> 00:00:28.575
+What unsafe does is permit specific
+operations whose correctness depends on promises
+
+12
+00:00:28.655 --> 00:00:30.379
+the compiler cannot verify completely.
+
+13
+00:00:30.459 --> 00:00:32.031
+The distinction is responsibility.
+
+14
+00:00:32.111 --> 00:00:34.291
+Safe code relies heavily on compiler
+enforcement.
+
+15
+00:00:34.371 --> 00:00:37.514
+Unsafe code relies on a combination of
+compiler checks, human reasoning,
+
+16
+00:00:37.594 --> 00:00:39.825
+documented invariants, tests, and careful
+review.
+
+17
+00:00:39.905 --> 00:00:43.504
+The programmer must know which rule is
+being manually upheld and why the surrounding
+
+18
+00:00:43.584 --> 00:00:44.395
+code preserves it.
+
+19
+00:00:44.475 --> 00:00:47.416
+Undefined behavior should be understood at
+a safe conceptual level:
+
+20
+00:00:47.496 --> 00:00:50.791
+it is behavior the program must avoid
+because the language no longer promises
+
+21
+00:00:50.871 --> 00:00:51.834
+predictable results.
+
+22
+00:00:51.914 --> 00:00:55.362
+Defensive unsafe Rust does not explore
+undefined behavior or treat it as a clever
+
+23
+00:00:55.442 --> 00:00:55.695
+edge.
+
+24
+00:00:55.775 --> 00:00:59.071
+It designs code so the documented
+preconditions keep execution within valid
+
+25
+00:00:59.151 --> 00:00:59.607
+behavior.
+
+26
+00:00:59.687 --> 00:01:03.185
+Review expectations are higher around
+unsafe code because the evidence burden is
+
+27
+00:01:03.265 --> 00:01:03.620
+higher.
+
+28
+00:01:03.700 --> 00:01:06.032
+Reviewers should ask what safe Rust could
+not express,
+
+29
+00:01:06.112 --> 00:01:09.205
+what assumptions are being made, how those
+assumptions are documented,
+
+30
+00:01:09.285 --> 00:01:12.580
+how callers are constrained, and how tests
+or tools support the safety story.

@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.338
+RTIC is used to structure embedded Rust
+firmware around tasks,
+
+2
+00:00:03.418 --> 00:00:06.096
+priorities, resources, and
+interrupt-driven execution.
+
+3
+00:00:06.176 --> 00:00:09.764
+That structure can make concurrent
+firmware easier to reason about because the
+
+4
+00:00:09.844 --> 00:00:13.646
+program describes execution contexts and
+shared resources more explicitly than ad
+
+5
+00:00:13.726 --> 00:00:14.636
+hoc interrupt code.
+
+6
+00:00:14.716 --> 00:00:17.233
+Security in this setting is broader than
+memory safety.
+
+7
+00:00:17.313 --> 00:00:19.723
+Real-time firmware must remain available,
+bounded,
+
+8
+00:00:19.803 --> 00:00:23.659
+and predictable under normal operation,
+degraded operation, and unexpected input.
+
+9
+00:00:23.739 --> 00:00:26.416
+A task that runs too long, a queue that
+grows without policy,
+
+10
+00:00:26.496 --> 00:00:30.084
+or a debug path that remains broader than
+intended can become a product security
+
+11
+00:00:30.164 --> 00:00:30.593
+concern.
+
+12
+00:00:30.673 --> 00:00:33.672
+Rust helps with memory safety in safe
+code, ownership, borrowing,
+
+13
+00:00:33.752 --> 00:00:34.876
+and type-driven design.
+
+14
+00:00:34.956 --> 00:00:37.313
+RTIC helps organize concurrent embedded
+behavior.
+
+15
+00:00:37.393 --> 00:00:40.552
+Neither one automatically validates input,
+proves timing behavior,
+
+16
+00:00:40.632 --> 00:00:43.952
+protects secrets, secures updates, or
+documents hardware assumptions.
+
+17
+00:00:44.032 --> 00:00:46.871
+Those responsibilities still belong to the
+engineering team.
+
+18
+00:00:46.951 --> 00:00:49.789
+Interrupt-driven systems need especially
+clear boundaries.
+
+19
+00:00:49.869 --> 00:00:52.654
+Reviewers should understand which task
+handles which event,
+
+20
+00:00:52.734 --> 00:00:55.090
+which resources it can access, what work
+is bounded,
+
+21
+00:00:55.170 --> 00:00:56.776
+what happens when input is invalid,
+
+22
+00:00:56.856 --> 00:00:59.962
+and how the system behaves when timing or
+resource pressure appears.
+
+23
+00:01:00.042 --> 00:01:03.095
+The defensive goal is field-ready firmware
+whose behavior is safe,
+
+24
+00:01:03.175 --> 00:01:05.317
+bounded, documented, tested, and
+reviewable.
+
+25
+00:01:05.397 --> 00:01:08.182
+RTIC can support that goal when task
+design, priority design,
+
+26
+00:01:08.262 --> 00:01:12.010
+resource ownership, hardware access,
+updates, debug policy, dependency review,
+
+27
+00:01:12.090 --> 00:01:14.500
+and release discipline are treated as one
+lifecycle.

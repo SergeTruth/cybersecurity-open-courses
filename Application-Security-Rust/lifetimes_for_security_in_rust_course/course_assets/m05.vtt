@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:01.670
+Structs can own their fields,
+
+2
+00:00:01.750 --> 00:00:04.044
+or they can store references to data owned
+somewhere else.
+
+3
+00:00:04.124 --> 00:00:06.324
+A struct with owned fields is usually
+straightforward:
+
+4
+00:00:06.404 --> 00:00:08.792
+the struct controls the data and cleanup
+follows ownership.
+
+5
+00:00:08.872 --> 00:00:10.744
+A struct with borrowed fields can be
+efficient,
+
+6
+00:00:10.824 --> 00:00:13.586
+but it introduces lifetime relationships
+that callers must satisfy.
+
+7
+00:00:13.666 --> 00:00:15.070
+When a struct stores borrowed data,
+
+8
+00:00:15.150 --> 00:00:18.380
+the struct needs lifetime parameters to
+express that it cannot outlive the data it
+
+9
+00:00:18.460 --> 00:00:18.975
+references.
+
+10
+00:00:19.055 --> 00:00:22.379
+This protects safe code from building a
+long-lived object around short-lived data.
+
+11
+00:00:22.459 --> 00:00:25.268
+The type itself communicates that the
+borrowed data must remain valid.
+
+12
+00:00:25.348 --> 00:00:26.565
+Borrowed fields are not wrong.
+
+13
+00:00:26.645 --> 00:00:29.407
+They can be useful for views, parsers,
+adapters, temporary contexts,
+
+14
+00:00:29.487 --> 00:00:31.032
+and APIs that should avoid allocation.
+
+15
+00:00:31.112 --> 00:00:34.388
+But they increase API complexity because
+every caller must understand and satisfy
+
+16
+00:00:34.468 --> 00:00:35.592
+the lifetime relationship.
+
+17
+00:00:35.672 --> 00:00:37.685
+That complexity should be justified by the
+design.
+
+18
+00:00:37.765 --> 00:00:40.854
+Trait objects, callbacks, and borrowed
+behavior can also introduce lifetime
+
+19
+00:00:40.934 --> 00:00:41.402
+questions.
+
+20
+00:00:41.482 --> 00:00:42.746
+A callback may hold a reference.
+
+21
+00:00:42.826 --> 00:00:44.512
+A trait object may be tied to borrowed
+data.
+
+22
+00:00:44.592 --> 00:00:47.354
+An abstraction may need to expose whether
+it owns its data, borrows it,
+
+23
+00:00:47.434 --> 00:00:49.353
+or shares ownership through another
+mechanism.
+
+24
+00:00:49.433 --> 00:00:51.867
+Defensive API design asks which ownership
+model is clearest.
+
+25
+00:00:51.947 --> 00:00:53.071
+Should the type own its data?
+
+26
+00:00:53.151 --> 00:00:54.368
+Should it borrow temporarily?
+
+27
+00:00:54.448 --> 00:00:57.818
+Should it use shared ownership because
+several components truly need the same value?
+
+28
+00:00:57.898 --> 00:01:00.660
+The simplest safe ownership model is often
+the most maintainable one.

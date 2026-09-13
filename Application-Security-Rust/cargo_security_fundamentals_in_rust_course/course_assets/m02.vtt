@@ -1,0 +1,147 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.364
+The Cargo.toml manifest is the project's
+declaration of intent.
+
+2
+00:00:03.444 --> 00:00:06.932
+It describes the package, dependencies,
+features, workspace relationships,
+
+3
+00:00:07.012 --> 00:00:09.824
+build settings, metadata, and sometimes
+publishing behavior.
+
+4
+00:00:09.904 --> 00:00:13.236
+For security review, the manifest answers
+a simple but important question:
+
+5
+00:00:13.316 --> 00:00:16.700
+what did this project ask Cargo to include
+and how is that request configured?
+
+6
+00:00:16.780 --> 00:00:18.654
+Cargo.lock answers a different question.
+
+7
+00:00:18.734 --> 00:00:21.130
+It records the resolved versions selected
+for a build.
+
+8
+00:00:21.210 --> 00:00:24.802
+That matters because dependency
+requirements in the manifest can allow a range of
+
+9
+00:00:24.882 --> 00:00:28.423
+versions, while the lockfile captures the
+concrete dependency graph that Cargo
+
+10
+00:00:28.503 --> 00:00:29.388
+actually selected.
+
+11
+00:00:29.468 --> 00:00:30.665
+The manifest shows intent.
+
+12
+00:00:30.745 --> 00:00:32.151
+The lockfile shows resolution.
+
+13
+00:00:32.231 --> 00:00:35.303
+Direct dependencies are the crates the
+project requests explicitly.
+
+14
+00:00:35.383 --> 00:00:37.830
+Transitive dependencies arrive through
+those crates.
+
+15
+00:00:37.910 --> 00:00:41.346
+Both are security-relevant because both
+become part of the trusted codebase.
+
+16
+00:00:41.426 --> 00:00:44.967
+A project may have only a few direct
+dependencies and still pull in a larger tree of
+
+17
+00:00:45.047 --> 00:00:48.431
+parsing libraries, platform helpers, build
+utilities, procedural macros,
+
+18
+00:00:48.511 --> 00:00:49.709
+or optional integrations.
+
+19
+00:00:49.789 --> 00:00:53.433
+Version requirements deserve review
+because they shape what Cargo can resolve now
+
+20
+00:00:53.513 --> 00:00:54.711
+and during future updates.
+
+21
+00:00:54.791 --> 00:00:58.592
+Flexible requirements may ease
+maintenance, but they still need release discipline.
+
+22
+00:00:58.672 --> 00:01:00.910
+Very narrow requirements may preserve
+stability,
+
+23
+00:01:00.990 --> 00:01:02.761
+but they can also slow security updates.
+
+24
+00:01:02.841 --> 00:01:05.548
+The right choice depends on the project,
+the release process,
+
+25
+00:01:05.628 --> 00:01:07.346
+and the team's ability to test changes.
+
+26
+00:01:07.426 --> 00:01:11.175
+Workspace dependency visibility is
+especially important in larger Rust codebases.
+
+27
+00:01:11.255 --> 00:01:14.014
+Shared dependencies, feature unification,
+internal crates,
+
+28
+00:01:14.094 --> 00:01:17.218
+and multiple binaries can make it harder
+to see what each artifact uses.
+
+29
+00:01:17.298 --> 00:01:20.995
+Defensive teams review Cargo.toml and
+Cargo.lock together in code review and CI/CD
+
+30
+00:01:21.075 --> 00:01:22.689
+so unknown, unnecessary, outdated,
+
+31
+00:01:22.769 --> 00:01:25.060
+or surprising dependencies do not enter
+unnoticed.

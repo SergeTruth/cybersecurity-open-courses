@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.154
+Foreign function interfaces are one of the
+most common reasons unsafe Rust exists.
+
+2
+00:00:04.234 --> 00:00:07.574
+Rust may call into C libraries,
+operating-system APIs, device interfaces,
+
+3
+00:00:07.654 --> 00:00:09.847
+embedded platforms, or other external
+runtimes.
+
+4
+00:00:09.927 --> 00:00:13.633
+At those boundaries, Rust's type system
+cannot automatically verify every promise
+
+5
+00:00:13.713 --> 00:00:14.704
+made by the other side.
+
+6
+00:00:14.784 --> 00:00:16.402
+Review should start with ownership.
+
+7
+00:00:16.482 --> 00:00:18.570
+Who owns the memory passed across the
+boundary?
+
+8
+00:00:18.650 --> 00:00:19.433
+Who allocates it?
+
+9
+00:00:19.513 --> 00:00:20.087
+Who frees it?
+
+10
+00:00:20.167 --> 00:00:21.942
+Is the same allocator used on both sides?
+
+11
+00:00:22.022 --> 00:00:24.736
+Can the external code retain a pointer
+after the call returns?
+
+12
+00:00:24.816 --> 00:00:27.583
+Can Rust safely use the value after
+handing it to external code?
+
+13
+00:00:27.663 --> 00:00:30.951
+These questions determine whether the
+boundary is safe to use repeatedly.
+
+14
+00:00:31.031 --> 00:00:33.745
+Error conventions and data representation
+also need review.
+
+15
+00:00:33.825 --> 00:00:37.166
+External code may signal errors through
+return values, output parameters,
+
+16
+00:00:37.246 --> 00:00:39.490
+global state, or platform-specific
+conventions.
+
+17
+00:00:39.570 --> 00:00:42.128
+Strings and buffers may have different
+encoding, length,
+
+18
+00:00:42.208 --> 00:00:43.617
+and termination expectations.
+
+19
+00:00:43.697 --> 00:00:47.247
+Structures may rely on layout guarantees
+that must be documented and preserved.
+
+20
+00:00:47.327 --> 00:00:49.414
+Threading and callbacks add more
+assumptions.
+
+21
+00:00:49.494 --> 00:00:51.165
+External code may not be thread-safe.
+
+22
+00:00:51.245 --> 00:00:54.063
+It may call back into Rust after the
+original owner has gone away.
+
+23
+00:00:54.143 --> 00:00:56.962
+It may require a callback to remain valid
+for a certain lifetime.
+
+24
+00:00:57.042 --> 00:00:59.861
+These assumptions need explicit design,
+not hopeful comments.
+
+25
+00:00:59.941 --> 00:01:03.594
+A good FFI wrapper converts external
+behavior into safe Rust types and clear APIs as
+
+26
+00:01:03.674 --> 00:01:04.509
+soon as practical.
+
+27
+00:01:04.589 --> 00:01:08.243
+Callers should not have to remember every
+pointer, lifetime, and allocation rule.
+
+28
+00:01:08.323 --> 00:01:11.403
+The wrapper should capture those rules,
+enforce them where possible,
+
+29
+00:01:11.483 --> 00:01:14.980
+and document the remaining safety contract
+where enforcement is not possible.

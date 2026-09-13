@@ -1,0 +1,139 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.298
+Rust's safe abstractions help prevent
+buffer overflows,
+
+2
+00:00:03.378 --> 00:00:05.833
+but safe programs still need resource
+discipline.
+
+3
+00:00:05.913 --> 00:00:09.739
+A program can avoid memory corruption and
+still fail because it accepts too much
+
+4
+00:00:09.819 --> 00:00:13.017
+input, allocates too much memory, performs
+too much parsing work,
+
+5
+00:00:13.097 --> 00:00:15.038
+or waits too long on a malformed request.
+
+6
+00:00:15.118 --> 00:00:17.288
+Length and capacity are different
+concepts.
+
+7
+00:00:17.368 --> 00:00:19.937
+Length describes how much data is
+currently present.
+
+8
+00:00:20.017 --> 00:00:24.072
+Capacity describes how much storage has
+been allocated or can be used before growth.
+
+9
+00:00:24.152 --> 00:00:27.863
+Confusing those ideas can lead to flawed
+assumptions about what data exists,
+
+10
+00:00:27.943 --> 00:00:30.513
+what can be written, or what a downstream
+API expects.
+
+11
+00:00:30.593 --> 00:00:32.477
+Untrusted size values deserve review.
+
+12
+00:00:32.557 --> 00:00:35.697
+Network lengths, file sizes, protocol
+fields, database values,
+
+13
+00:00:35.777 --> 00:00:39.717
+and platform API results may need
+validation before they influence allocation or
+
+14
+00:00:39.797 --> 00:00:40.254
+parsing.
+
+15
+00:00:40.334 --> 00:00:43.189
+Defensive code sets maximums, rejects
+unsupported sizes,
+
+16
+00:00:43.269 --> 00:00:46.867
+and avoids assuming that every conversion
+between integer types is safe or
+
+17
+00:00:46.947 --> 00:00:47.575
+meaningful.
+
+18
+00:00:47.655 --> 00:00:50.567
+Integer sizing and conversions are common
+boundary issues.
+
+19
+00:00:50.647 --> 00:00:53.388
+A value may be signed in one place and
+unsigned in another.
+
+20
+00:00:53.468 --> 00:00:56.608
+A platform type may be wider or narrower
+than an application type.
+
+21
+00:00:56.688 --> 00:00:59.829
+A length may represent bytes, characters,
+elements, or records.
+
+22
+00:00:59.909 --> 00:01:03.849
+Reviewers should ask what the unit is and
+whether the value has been checked before
+
+23
+00:01:03.929 --> 00:01:04.157
+use.
+
+24
+00:01:04.237 --> 00:01:06.293
+Explicit limits are part of secure design.
+
+25
+00:01:06.373 --> 00:01:09.856
+Set maximum request sizes, maximum field
+sizes, maximum record counts,
+
+26
+00:01:09.936 --> 00:01:12.163
+and timeout expectations where
+appropriate.
+
+27
+00:01:12.243 --> 00:01:14.926
+When a limit is exceeded, fail safely with
+a clear error.
+
+28
+00:01:15.006 --> 00:01:19.289
+Resource safety complements memory safety
+by protecting availability and operational
+
+29
+00:01:19.369 --> 00:01:19.940
+stability.

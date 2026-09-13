@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.408
+In embedded systems, availability is often
+part of security.
+
+2
+00:00:03.488 --> 00:00:06.340
+A device that misses timing, blocks a
+critical control path,
+
+3
+00:00:06.420 --> 00:00:10.223
+ignores backpressure, or becomes stuck in
+lower-value work can fail in ways that
+
+4
+00:00:10.303 --> 00:00:12.540
+matter to safety, reliability, and user
+trust.
+
+5
+00:00:12.620 --> 00:00:16.255
+RTIC priority design should reflect what
+must happen quickly, what may wait,
+
+6
+00:00:16.335 --> 00:00:18.404
+and what work should be deferred or
+bounded.
+
+7
+00:00:18.484 --> 00:00:22.343
+High priority should not become a place
+for unlimited parsing, logging, storage,
+
+8
+00:00:22.423 --> 00:00:23.541
+or communication work.
+
+9
+00:00:23.621 --> 00:00:26.977
+Priority expresses operational intent, so
+it deserves design review.
+
+10
+00:00:27.057 --> 00:00:31.027
+Long-running work can starve
+lower-priority tasks or delay critical maintenance.
+
+11
+00:00:31.107 --> 00:00:32.617
+Even if the code is memory-safe,
+
+12
+00:00:32.697 --> 00:00:36.109
+a task that monopolizes execution can
+interfere with watchdog service,
+
+13
+00:00:36.189 --> 00:00:39.041
+command handling, sensor processing, or
+recovery actions.
+
+14
+00:00:39.121 --> 00:00:42.197
+Timing risks are not always visible from
+functional tests alone.
+
+15
+00:00:42.277 --> 00:00:46.024
+Defensive design uses bounded work, clear
+scheduling assumptions, timeouts,
+
+16
+00:00:46.104 --> 00:00:48.005
+watchdog thinking, and recovery paths.
+
+17
+00:00:48.085 --> 00:00:49.595
+It asks what happens under load,
+
+18
+00:00:49.675 --> 00:00:52.247
+what happens when input arrives faster
+than expected,
+
+19
+00:00:52.327 --> 00:00:55.180
+and what happens when hardware responds
+slowly or not at all.
+
+20
+00:00:55.260 --> 00:00:58.224
+Timing assumptions should be written in
+reviewable language.
+
+21
+00:00:58.304 --> 00:01:01.547
+If a task must finish quickly, say what
+quickly means for the product.
+
+22
+00:01:01.627 --> 00:01:04.479
+If work is deferred, state what queue or
+signal limits apply.
+
+23
+00:01:04.559 --> 00:01:06.125
+If a watchdog is part of recovery,
+
+24
+00:01:06.205 --> 00:01:10.176
+define what conditions it is expected to
+catch and what evidence should be available
+
+25
+00:01:10.256 --> 00:01:11.039
+after recovery.
+
+26
+00:01:11.119 --> 00:01:13.467
+A useful review question is not only, can
+this run,
+
+27
+00:01:13.547 --> 00:01:15.952
+but can this run safely under degraded
+conditions.
+
+28
+00:01:16.032 --> 00:01:18.940
+RTIC gives structure for priority and
+scheduling decisions.
+
+29
+00:01:19.020 --> 00:01:22.711
+Security comes from using that structure
+to make timing behavior measurable,
+
+30
+00:01:22.791 --> 00:01:25.140
+bounded, and aligned with product
+requirements.

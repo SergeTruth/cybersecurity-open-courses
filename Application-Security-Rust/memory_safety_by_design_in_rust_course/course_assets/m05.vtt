@@ -1,0 +1,120 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.870
+Many memory-safety problems in other
+languages appear around arrays,
+
+2
+00:00:03.950 --> 00:00:05.522
+strings, buffers, and indexing.
+
+3
+00:00:05.602 --> 00:00:09.646
+Rust provides safer abstractions for
+collections, strings, slices, and iteration.
+
+4
+00:00:09.726 --> 00:00:11.298
+Bounds checks, ownership rules,
+
+5
+00:00:11.378 --> 00:00:15.029
+and borrowing rules remove many classes of
+direct memory misuse in safe code.
+
+6
+00:00:15.109 --> 00:00:19.153
+But developers still make design choices
+about how data is accessed and interpreted.
+
+7
+00:00:19.233 --> 00:00:22.153
+Direct indexing can panic when length
+assumptions are wrong.
+
+8
+00:00:22.233 --> 00:00:26.108
+Sometimes indexing is acceptable because
+the code has already proven the length.
+
+9
+00:00:26.188 --> 00:00:29.951
+In other cases, iterator-based patterns or
+checked access express intent more
+
+10
+00:00:30.031 --> 00:00:30.480
+clearly.
+
+11
+00:00:30.560 --> 00:00:34.492
+Defensive Rust code makes assumptions
+visible instead of hiding them in a position
+
+12
+00:00:34.572 --> 00:00:37.043
+that might become invalid when input shape
+changes.
+
+13
+00:00:37.123 --> 00:00:38.246
+Rust strings are UTF-8,
+
+14
+00:00:38.326 --> 00:00:41.471
+so code should distinguish text operations
+from byte operations.
+
+15
+00:00:41.551 --> 00:00:43.966
+A character boundary is not always a byte
+boundary,
+
+16
+00:00:44.046 --> 00:00:47.023
+and the meaning of length depends on what
+the code is measuring.
+
+17
+00:00:47.103 --> 00:00:51.090
+Parsing, slicing, and validation should be
+explicit about whether the data is text,
+
+18
+00:00:51.170 --> 00:00:53.417
+bytes, tokens, fields, or a structured
+format.
+
+19
+00:00:53.497 --> 00:00:55.238
+Slices are borrowed views into data.
+
+20
+00:00:55.318 --> 00:00:58.407
+They are powerful because they let code
+operate without copying,
+
+21
+00:00:58.487 --> 00:01:01.856
+but the relationship between the slice and
+the owner must remain clear.
+
+22
+00:01:01.936 --> 00:01:05.699
+Secure design avoids hidden assumptions
+about length, encoding, delimiters,
+
+23
+00:01:05.779 --> 00:01:06.565
+and input shape.
+
+24
+00:01:06.645 --> 00:01:08.836
+The goal is not to avoid collections or
+slices;
+
+25
+00:01:08.916 --> 00:01:11.780
+it is to make access patterns match the
+actual data contract.

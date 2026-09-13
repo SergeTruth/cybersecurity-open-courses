@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="eliminating_use_after_free_in_rust">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{"q1": "B", "q2": "C", "q3": "A", "q4": "D", "q5": "B", "q6": "C", "q7": "C", "q8": "D", "q9": "A", "q10": "B", "q11": "C", "q12": "D"}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. What is use-after-free at a defensive conceptual level?</legend>
+                      <label><input type="radio" name="q1" value="A"> A Cargo feature for removing unused dependencies.</label>
+                      <label><input type="radio" name="q1" value="B"> Using data or an object after its valid lifetime has ended.</label>
+                      <label><input type="radio" name="q1" value="C"> A normal way to keep callbacks alive forever.</label>
+                      <label><input type="radio" name="q1" value="D"> Using a value after it has been formatted for display.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>2. How does safe Rust prevent ordinary use-after-free errors?</legend>
+                      <label><input type="radio" name="q2" value="A"> It allows all references to remain valid after cleanup.</label>
+                      <label><input type="radio" name="q2" value="B"> It automatically trusts every raw pointer boundary.</label>
+                      <label><input type="radio" name="q2" value="C"> It enforces ownership, borrowing, and lifetime rules so references cannot outlive the data they borrow.</label>
+                      <label><input type="radio" name="q2" value="D"> It disables drop behavior for resource-owning types.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>3. What happens when ownership of a non-Copy value moves?</legend>
+                      <label><input type="radio" name="q3" value="A"> The old binding can no longer be used as if it still owns the value.</label>
+                      <label><input type="radio" name="q3" value="B"> The value is immediately converted to a raw pointer.</label>
+                      <label><input type="radio" name="q3" value="C"> Both bindings remain full owners forever.</label>
+                      <label><input type="radio" name="q3" value="D"> Drop behavior is disabled for that value.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>4. Why does Drop matter for lifecycle design?</legend>
+                      <label><input type="radio" name="q4" value="A"> It allows safe code to use freed values.</label>
+                      <label><input type="radio" name="q4" value="B"> It makes references ignore lifetimes.</label>
+                      <label><input type="radio" name="q4" value="C"> It replaces all error handling in Rust.</label>
+                      <label><input type="radio" name="q4" value="D"> It defines cleanup behavior when ownership ends.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>5. Why must a returned reference be tied to a valid owner?</legend>
+                      <label><input type="radio" name="q5" value="A"> Returned references must always point to global data.</label>
+                      <label><input type="radio" name="q5" value="B"> The caller can only use the reference safely if the referenced data still exists.</label>
+                      <label><input type="radio" name="q5" value="C"> Returned references are never checked by the compiler.</label>
+                      <label><input type="radio" name="q5" value="D"> Returned references automatically allocate new owners.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>6. When should an API return owned data instead of a reference?</legend>
+                      <label><input type="radio" name="q6" value="A"> Only when the code is intentionally unsafe.</label>
+                      <label><input type="radio" name="q6" value="B"> Never, because references are always safer.</label>
+                      <label><input type="radio" name="q6" value="C"> When no valid owner will remain for the caller to borrow from.</label>
+                      <label><input type="radio" name="q6" value="D"> Whenever a value is small enough to copy by hand.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>7. How does shared ownership affect cleanup?</legend>
+                      <label><input type="radio" name="q7" value="A"> Shared ownership means weak references keep data alive forever.</label>
+                      <label><input type="radio" name="q7" value="B"> A value is cleaned up as soon as the first owner is cloned.</label>
+                      <label><input type="radio" name="q7" value="C"> A value is cleaned up only after the final strong owner goes away.</label>
+                      <label><input type="radio" name="q7" value="D"> Shared ownership disables cleanup completely.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>8. Why are Weak references useful?</legend>
+                      <label><input type="radio" name="q8" value="A"> They force a value to stay alive even after every strong owner is gone.</label>
+                      <label><input type="radio" name="q8" value="B"> They bypass Rust&#x27;s ownership rules for callbacks.</label>
+                      <label><input type="radio" name="q8" value="C"> They are required for every stack variable.</label>
+                      <label><input type="radio" name="q8" value="D"> They represent non-owning relationships that can be checked before use.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>9. Why are async tasks and threads lifetime-sensitive?</legend>
+                      <label><input type="radio" name="q9" value="A"> They may outlive the stack frame that created them, so borrowed data may not live long enough.</label>
+                      <label><input type="radio" name="q9" value="B"> They automatically cancel every callback.</label>
+                      <label><input type="radio" name="q9" value="C"> They never own data.</label>
+                      <label><input type="radio" name="q9" value="D"> They always run before the caller returns.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>10. Where can use-after-free risk re-enter Rust programs?</legend>
+                      <label><input type="radio" name="q10" value="A"> Only in code that uses safe iterators.</label>
+                      <label><input type="radio" name="q10" value="B"> Unsafe code, raw pointers, FFI boundaries, callbacks, and external ownership contracts.</label>
+                      <label><input type="radio" name="q10" value="C"> Only in code that uses shared references.</label>
+                      <label><input type="radio" name="q10" value="D"> Never, because Rust checks every external library automatically.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>11. What should an FFI safety contract clarify?</legend>
+                      <label><input type="radio" name="q11" value="A"> Only the name of the target operating system.</label>
+                      <label><input type="radio" name="q11" value="B"> Why tests are unnecessary near external code.</label>
+                      <label><input type="radio" name="q11" value="C"> Who owns memory, who may free it, how long pointers remain valid, and whether callbacks can outlive referenced data.</label>
+                      <label><input type="radio" name="q11" value="D"> How to disable ownership checks in safe Rust.</label>
+                    </fieldset>
+          <fieldset class="quiz-question">
+                      <legend>12. What is the main goal of eliminating use-after-free in Rust?</legend>
+                      <label><input type="radio" name="q12" value="A"> Avoid documenting callback and cleanup behavior.</label>
+                      <label><input type="radio" name="q12" value="B"> Keep all values alive forever with global state.</label>
+                      <label><input type="radio" name="q12" value="C"> Replace every safe reference with a raw pointer.</label>
+                      <label><input type="radio" name="q12" value="D"> Use safe ownership, valid lifetimes, clear APIs, reviewed unsafe boundaries, and lifecycle testing to prevent stale access.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

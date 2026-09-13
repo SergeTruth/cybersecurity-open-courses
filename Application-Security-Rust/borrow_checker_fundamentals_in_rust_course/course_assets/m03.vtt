@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.292
+Rust's borrowing rules are often
+summarized as many shared references or one mutable
+
+2
+00:00:04.372 --> 00:00:04.899
+reference.
+
+3
+00:00:04.979 --> 00:00:06.137
+The rule is not arbitrary.
+
+4
+00:00:06.217 --> 00:00:09.377
+It captures a practical safety
+expectation: read access can be shared,
+
+5
+00:00:09.457 --> 00:00:11.458
+but mutation needs to be exclusive and
+clear.
+
+6
+00:00:11.538 --> 00:00:15.172
+This keeps code from observing data
+through one path while another path changes it
+
+7
+00:00:15.252 --> 00:00:15.937
+unexpectedly.
+
+8
+00:00:16.017 --> 00:00:19.756
+Many shared references can exist at the
+same time because shared references provide
+
+9
+00:00:19.836 --> 00:00:20.679
+read-only access.
+
+10
+00:00:20.759 --> 00:00:23.550
+If several functions or scopes are only
+reading the same value,
+
+11
+00:00:23.630 --> 00:00:25.421
+the value remains stable for all of them.
+
+12
+00:00:25.501 --> 00:00:28.977
+That makes shared borrowing useful for
+formatting, validation, comparison,
+
+13
+00:00:29.057 --> 00:00:31.163
+logging decisions, and other inspection
+work.
+
+14
+00:00:31.243 --> 00:00:34.719
+A mutable reference is different because
+it represents the right to change the
+
+15
+00:00:34.799 --> 00:00:35.115
+value.
+
+16
+00:00:35.195 --> 00:00:38.144
+Rust requires that mutable access be
+exclusive during the borrow.
+
+17
+00:00:38.224 --> 00:00:40.647
+The exclusive rule helps prevent ambiguous
+aliasing,
+
+18
+00:00:40.727 --> 00:00:44.203
+where multiple paths point to the same
+value and at least one path can mutate it.
+
+19
+00:00:44.283 --> 00:00:47.811
+Without discipline, those patterns are
+difficult to review and easy to misuse.
+
+20
+00:00:47.891 --> 00:00:50.261
+The borrow checker enforces read/write
+separation.
+
+21
+00:00:50.341 --> 00:00:51.816
+If shared access is still active,
+
+22
+00:00:51.896 --> 00:00:54.266
+Rust will not allow a mutable borrow of
+the same value.
+
+23
+00:00:54.346 --> 00:00:55.610
+If mutable access is active,
+
+24
+00:00:55.690 --> 00:00:59.218
+Rust will not allow additional aliases
+that could observe or interfere with the
+
+25
+00:00:59.298 --> 00:00:59.772
+mutation.
+
+26
+00:00:59.852 --> 00:01:02.802
+The goal is not inconvenience; it is
+clarity around who may do what.
+
+27
+00:01:02.882 --> 00:01:05.936
+When code runs into aliasing errors, the
+design may need adjustment.
+
+28
+00:01:06.016 --> 00:01:07.807
+Separate read phases from write phases.
+
+29
+00:01:07.887 --> 00:01:09.520
+Reduce how long references are held.
+
+30
+00:01:09.600 --> 00:01:11.759
+Move data out when ownership is actually
+needed.
+
+31
+00:01:11.839 --> 00:01:14.525
+Use helper functions that borrow only the
+necessary fields.
+
+32
+00:01:14.605 --> 00:01:18.344
+These refactorings make access patterns
+visible instead of hidden inside a tangled
+
+33
+00:01:18.424 --> 00:01:18.740
+scope.

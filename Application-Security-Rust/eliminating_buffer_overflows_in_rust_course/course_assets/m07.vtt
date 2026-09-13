@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.370
+Good APIs prevent misuse before it starts.
+
+2
+00:00:02.450 --> 00:00:04.425
+Instead of passing raw indexes, raw
+lengths,
+
+3
+00:00:04.505 --> 00:00:06.220
+and unrelated buffers around loosely,
+
+4
+00:00:06.300 --> 00:00:08.742
+Rust code can use types that represent
+validated input,
+
+5
+00:00:08.822 --> 00:00:11.523
+slices that carry length, iterators that
+control traversal,
+
+6
+00:00:11.603 --> 00:00:13.318
+and result types that express failure.
+
+7
+00:00:13.398 --> 00:00:16.360
+Validated input types are especially
+useful at parser boundaries.
+
+8
+00:00:16.440 --> 00:00:19.453
+Once a raw message, path, identifier, or
+size field has been checked,
+
+9
+00:00:19.533 --> 00:00:23.274
+converting it into a domain type prevents
+every downstream caller from repeating the
+
+10
+00:00:23.354 --> 00:00:24.134
+same validation.
+
+11
+00:00:24.214 --> 00:00:27.747
+The type communicates that the value has
+crossed a trust boundary under specific
+
+12
+00:00:27.827 --> 00:00:28.138
+rules.
+
+13
+00:00:28.218 --> 00:00:30.401
+Slices and iterators can carry bounds
+naturally.
+
+14
+00:00:30.481 --> 00:00:33.858
+A function that accepts a slice receives
+both a view of the data and its length.
+
+15
+00:00:33.938 --> 00:00:37.575
+A function that accepts an iterator can
+process values without knowing or trusting
+
+16
+00:00:37.655 --> 00:00:38.798
+manual index arithmetic.
+
+17
+00:00:38.878 --> 00:00:42.359
+These shapes often reduce the need for
+callers to coordinate separate buffers,
+
+18
+00:00:42.439 --> 00:00:43.530
+lengths, and positions.
+
+19
+00:00:43.610 --> 00:00:46.208
+Encapsulation protects internal buffers
+and invariants.
+
+20
+00:00:46.288 --> 00:00:49.510
+A type can own its buffer and expose
+operations that maintain valid state.
+
+21
+00:00:49.590 --> 00:00:52.136
+Callers do not need to know the internal
+capacity, offset,
+
+22
+00:00:52.216 --> 00:00:53.619
+or partially parsed structure.
+
+23
+00:00:53.699 --> 00:00:57.024
+They interact with safe methods that
+either succeed or return clear errors.
+
+24
+00:00:57.104 --> 00:01:00.845
+Owned results can be safer than
+caller-managed output buffers when the ownership and
+
+25
+00:01:00.925 --> 00:01:03.315
+size relationship would otherwise be hard
+to express.
+
+26
+00:01:03.395 --> 00:01:07.136
+Caller-managed buffers may be appropriate
+for performance-sensitive boundaries,
+
+27
+00:01:07.216 --> 00:01:08.723
+but they require clear contracts.
+
+28
+00:01:08.803 --> 00:01:12.180
+Defensive API design makes the safe path
+natural and the risky path explicit.

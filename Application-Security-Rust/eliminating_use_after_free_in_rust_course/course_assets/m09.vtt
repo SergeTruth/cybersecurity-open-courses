@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.837
+Use-after-free prevention in Rust is a
+layered engineering practice.
+
+2
+00:00:03.917 --> 00:00:05.697
+Prefer safe ownership and borrowing.
+
+3
+00:00:05.777 --> 00:00:09.004
+Know who owns each value, who may borrow
+it, and when cleanup happens.
+
+4
+00:00:09.084 --> 00:00:12.644
+Keep lifetime relationships visible in
+function signatures, type design,
+
+5
+00:00:12.724 --> 00:00:13.836
+and module boundaries.
+
+6
+00:00:13.916 --> 00:00:16.530
+Return owned data when no valid borrowed
+owner remains.
+
+7
+00:00:16.610 --> 00:00:18.835
+Avoid references into short-lived
+internals.
+
+8
+00:00:18.915 --> 00:00:22.642
+Encapsulate internal state so callers
+cannot depend on temporary locations or
+
+9
+00:00:22.722 --> 00:00:23.557
+invalid handles.
+
+10
+00:00:23.637 --> 00:00:27.197
+Use constructors and domain types to
+represent valid owned state instead of
+
+11
+00:00:27.277 --> 00:00:29.613
+spreading lifetime assumptions across
+callers.
+
+12
+00:00:29.693 --> 00:00:32.196
+Use shared ownership only when it matches
+the design.
+
+13
+00:00:32.276 --> 00:00:35.224
+Understand how `Rc`, `Arc`, and `Weak`
+affect cleanup timing.
+
+14
+00:00:35.304 --> 00:00:37.307
+Make async and thread ownership explicit.
+
+15
+00:00:37.387 --> 00:00:40.502
+Define cancellation and shutdown behavior
+for long-lived tasks.
+
+16
+00:00:40.582 --> 00:00:43.029
+Keep shared mutation synchronized and
+reviewable.
+
+17
+00:00:43.109 --> 00:00:47.058
+Keep unsafe and FFI boundaries small,
+documented, tested, and wrapped in safe APIs.
+
+18
+00:00:47.138 --> 00:00:49.808
+Review callbacks, raw pointers, allocation
+contracts,
+
+19
+00:00:49.888 --> 00:00:53.226
+deallocation responsibility, retained
+pointers, and cleanup paths.
+
+20
+00:00:53.306 --> 00:00:56.532
+The wrapper should prevent safe callers
+from creating stale access.
+
+21
+00:00:56.612 --> 00:00:58.837
+Finally, maintain lifecycle safety over
+time.
+
+22
+00:00:58.917 --> 00:01:02.755
+Test construction, transfer, shutdown,
+cancellation, failed initialization,
+
+23
+00:01:02.835 --> 00:01:03.892
+and regression cases.
+
+24
+00:01:03.972 --> 00:01:05.863
+Update safety contracts as APIs evolve.
+
+25
+00:01:05.943 --> 00:01:09.058
+The goal is Rust code where stale access
+is prevented by ownership,
+
+26
+00:01:09.138 --> 00:01:12.420
+made visible by lifetimes, and contained
+by careful boundary design.

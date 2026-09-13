@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.531
+`unsafe` Rust is not automatically wrong.
+
+2
+00:00:02.611 --> 00:00:06.503
+It exists because some valid systems work
+cannot be fully checked by the compiler.
+
+3
+00:00:06.583 --> 00:00:10.475
+The anti-pattern is treating `unsafe` as a
+convenience switch when ordinary Rust
+
+4
+00:00:10.555 --> 00:00:11.514
+feels restrictive.
+
+5
+00:00:11.594 --> 00:00:15.317
+Unsafe code asks the programmer to uphold
+rules that the compiler cannot fully
+
+6
+00:00:15.397 --> 00:00:18.161
+verify, so the responsibility boundary
+must be explicit.
+
+7
+00:00:18.241 --> 00:00:21.287
+A safety comment should not merely say
+that an operation is safe.
+
+8
+00:00:21.367 --> 00:00:24.808
+It should explain the conditions that make
+it valid: pointer alignment,
+
+9
+00:00:24.888 --> 00:00:28.667
+lifetime, initialization, aliasing,
+ownership, mutability, thread access,
+
+10
+00:00:28.747 --> 00:00:32.131
+allocation responsibility, and any
+assumptions about external code.
+
+11
+00:00:32.211 --> 00:00:34.355
+If the assumptions cannot be stated
+clearly,
+
+12
+00:00:34.435 --> 00:00:36.353
+the unsafe block is not ready for review.
+
+13
+00:00:36.433 --> 00:00:38.351
+FFI boundaries add even more contracts.
+
+14
+00:00:38.431 --> 00:00:40.800
+Code crossing into C, platform APIs,
+device SDKs,
+
+15
+00:00:40.880 --> 00:00:44.546
+or other language runtimes may depend on
+pointer validity, string encoding,
+
+16
+00:00:44.626 --> 00:00:48.293
+buffer length, callback lifetime,
+allocation and deallocation ownership,
+
+17
+00:00:48.373 --> 00:00:52.265
+error conventions, and whether functions
+are safe to call from multiple threads.
+
+18
+00:00:52.345 --> 00:00:54.714
+These are design facts, not comments to
+add later.
+
+19
+00:00:54.794 --> 00:00:58.517
+The most reviewable unsafe code is small,
+justified, documented, and tested.
+
+20
+00:00:58.597 --> 00:01:01.304
+It should be isolated near the boundary
+that requires it,
+
+21
+00:01:01.384 --> 00:01:03.753
+surrounded by safe abstractions where
+possible,
+
+22
+00:01:03.833 --> 00:01:07.161
+and supported by tests that exercise
+normal, edge, and failure cases.
+
+23
+00:01:07.241 --> 00:01:11.134
+The safe wrapper should prevent ordinary
+callers from violating the assumptions
+
+24
+00:01:11.214 --> 00:01:12.849
+required by the unsafe internals.
+
+25
+00:01:12.929 --> 00:01:16.596
+A defensive review asks why unsafe is
+necessary, what invariant it relies on,
+
+26
+00:01:16.676 --> 00:01:19.778
+how that invariant is established, how it
+is preserved over time,
+
+27
+00:01:19.858 --> 00:01:22.171
+and what would break if the external API
+changes.
+
+28
+00:01:22.251 --> 00:01:26.030
+Unsafe code should be rare enough and
+clear enough that reviewers can spend real
+
+29
+00:01:26.110 --> 00:01:26.900
+attention on it.

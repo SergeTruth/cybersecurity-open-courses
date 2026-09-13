@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.851
+RTIC firmware often processes input from
+UART, SPI, I2C, CAN, USB, BLE,
+
+2
+00:00:03.931 --> 00:00:07.841
+radio packets, sensors, local controls,
+maintenance commands, update channels,
+
+3
+00:00:07.921 --> 00:00:08.927
+or network services.
+
+4
+00:00:09.007 --> 00:00:10.906
+Some inputs arrive through interrupts.
+
+5
+00:00:10.986 --> 00:00:13.946
+Others arrive through scheduled tasks or
+peripheral drivers.
+
+6
+00:00:14.026 --> 00:00:16.540
+All should be treated as unverified until
+validated.
+
+7
+00:00:16.620 --> 00:00:19.692
+A message can be syntactically well formed
+and still be too large,
+
+8
+00:00:19.772 --> 00:00:23.626
+out of sequence, inconsistent with other
+fields, not allowed in the current mode,
+
+9
+00:00:23.706 --> 00:00:25.941
+or inappropriate for the current device
+state.
+
+10
+00:00:26.021 --> 00:00:27.417
+Parsing confirms structure.
+
+11
+00:00:27.497 --> 00:00:30.513
+Validation confirms meaning, permission,
+and timing context.
+
+12
+00:00:30.593 --> 00:00:34.224
+Defensive RTIC designs separate fast
+capture from heavier validation work.
+
+13
+00:00:34.304 --> 00:00:38.214
+Interrupt-facing code should do the
+minimum necessary to preserve data and signal
+
+14
+00:00:38.294 --> 00:00:38.573
+work.
+
+15
+00:00:38.653 --> 00:00:40.888
+More expensive parsing, validation,
+logging,
+
+16
+00:00:40.968 --> 00:00:44.878
+and state transitions should be bounded
+and scheduled in a way that does not disrupt
+
+17
+00:00:44.958 --> 00:00:46.187
+time-critical behavior.
+
+18
+00:00:46.267 --> 00:00:48.724
+State machines help make protocol flow
+reviewable.
+
+19
+00:00:48.804 --> 00:00:52.603
+They show which commands are valid in
+which modes, what transitions are allowed,
+
+20
+00:00:52.683 --> 00:00:54.302
+and how invalid input is rejected.
+
+21
+00:00:54.382 --> 00:00:58.292
+Domain types can represent validated
+messages so downstream tasks do not continue
+
+22
+00:00:58.372 --> 00:01:00.718
+passing raw buffers and primitive values
+around.
+
+23
+00:01:00.798 --> 00:01:03.200
+Firmware paths should avoid panic-prone
+parsing.
+
+24
+00:01:03.280 --> 00:01:06.576
+Invalid input should produce clear
+rejection, controlled recovery,
+
+25
+00:01:06.656 --> 00:01:07.941
+or safe degraded behavior.
+
+26
+00:01:08.021 --> 00:01:09.752
+The goal is not to accept every input.
+
+27
+00:01:09.832 --> 00:01:13.072
+The goal is to reject bad input without
+making timing, availability,
+
+28
+00:01:13.152 --> 00:01:14.660
+or device state unpredictable.

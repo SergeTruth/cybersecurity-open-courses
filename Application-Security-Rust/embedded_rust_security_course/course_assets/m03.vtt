@@ -1,0 +1,141 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.445
+Many embedded Rust projects use `no_std`,
+limited memory, fixed buffers,
+
+2
+00:00:04.525 --> 00:00:07.406
+static allocation, or carefully controlled
+heap use.
+
+3
+00:00:07.486 --> 00:00:09.740
+These constraints shape security design.
+
+4
+00:00:09.820 --> 00:00:13.014
+A firmware component may have no operating
+system services,
+
+5
+00:00:13.094 --> 00:00:15.598
+limited diagnostics, strict timing
+behavior,
+
+6
+00:00:15.678 --> 00:00:19.373
+and little room for unbounded allocation
+or panic-oriented failure.
+
+7
+00:00:19.453 --> 00:00:23.085
+Rust's ownership and borrowing rules help
+clarify who owns buffers,
+
+8
+00:00:23.165 --> 00:00:24.981
+peripherals, handles, and state.
+
+9
+00:00:25.061 --> 00:00:29.444
+That clarity can prevent many classes of
+memory corruption and aliasing mistakes.
+
+10
+00:00:29.524 --> 00:00:34.096
+In embedded systems, ownership clarity
+also helps reviewers understand when a buffer
+
+11
+00:00:34.176 --> 00:00:36.743
+can be reused, when a peripheral is
+initialized,
+
+12
+00:00:36.823 --> 00:00:39.829
+and which component is responsible for
+cleanup or reset.
+
+13
+00:00:39.909 --> 00:00:43.290
+Safe Rust does not automatically solve
+every resource problem.
+
+14
+00:00:43.370 --> 00:00:47.128
+Stack usage, buffer sizes, static storage
+layout, allocator choices,
+
+15
+00:00:47.208 --> 00:00:50.464
+integer conversions, watchdog timing,
+maximum frame sizes,
+
+16
+00:00:50.544 --> 00:00:53.550
+and worst-case input behavior still need
+design review.
+
+17
+00:00:53.630 --> 00:00:57.637
+A memory-safe program can still exhaust
+memory, miss timing expectations,
+
+18
+00:00:57.717 --> 00:00:59.847
+or fail poorly under resource pressure.
+
+19
+00:00:59.927 --> 00:01:03.934
+Defensive embedded Rust favors bounded
+data structures, explicit limits,
+
+20
+00:01:04.014 --> 00:01:07.208
+predictable failure behavior, and small
+trusted surfaces.
+
+21
+00:01:07.288 --> 00:01:09.730
+When a heap is used, its policy should be
+clear.
+
+22
+00:01:09.810 --> 00:01:13.943
+When static buffers are used, their
+ownership and maximum use should be clear.
+
+23
+00:01:14.023 --> 00:01:16.653
+When conversion or arithmetic determines a
+size,
+
+24
+00:01:16.733 --> 00:01:18.674
+the failure path should be explicit.
+
+25
+00:01:18.754 --> 00:01:21.698
+The practical question is what happens
+under pressure.
+
+26
+00:01:21.778 --> 00:01:25.535
+If input is larger than expected, if a
+queue fills, if a timer fires late,
+
+27
+00:01:25.615 --> 00:01:28.996
+if parsing cannot complete, or if a
+peripheral fails to respond,
+
+28
+00:01:29.076 --> 00:01:33.397
+the firmware should fail in a controlled
+way that matches the product's safety and
+
+29
+00:01:33.477 --> 00:01:34.980
+reliability requirements.

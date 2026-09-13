@@ -1,0 +1,116 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.765
+RTIC systems often interact with hardware
+through interrupt handlers,
+
+2
+00:00:03.845 --> 00:00:07.699
+peripheral access crates, hardware
+abstraction layers, memory-mapped registers,
+
+3
+00:00:07.779 --> 00:00:09.759
+DMA engines, and device-specific drivers.
+
+4
+00:00:09.839 --> 00:00:13.479
+These interfaces connect Rust code to
+behavior the compiler cannot fully model.
+
+5
+00:00:13.559 --> 00:00:17.145
+Peripheral ownership should make it hard
+for unrelated code to control the same
+
+6
+00:00:17.225 --> 00:00:18.349
+hardware unexpectedly.
+
+7
+00:00:18.429 --> 00:00:22.069
+Initialization order, clock state, pin
+configuration, interrupt enablement,
+
+8
+00:00:22.149 --> 00:00:24.878
+and reset behavior can all affect security
+and reliability.
+
+9
+00:00:24.958 --> 00:00:27.581
+The architecture should make those
+assumptions visible.
+
+10
+00:00:27.661 --> 00:00:30.337
+Memory-mapped I/O has side effects outside
+normal memory.
+
+11
+00:00:30.417 --> 00:00:33.896
+Reads and writes may acknowledge
+interrupts, start transfers, clear flags,
+
+12
+00:00:33.976 --> 00:00:35.154
+or change hardware state.
+
+13
+00:00:35.234 --> 00:00:39.088
+Safe abstractions should guide callers
+toward valid sequences and prevent ordinary
+
+14
+00:00:39.168 --> 00:00:41.576
+code from violating important hardware
+invariants.
+
+15
+00:00:41.656 --> 00:00:45.349
+DMA requires special care because hardware
+may read from or write to buffers while
+
+16
+00:00:45.429 --> 00:00:46.714
+software also wants access.
+
+17
+00:00:46.794 --> 00:00:49.470
+The firmware should define who owns a
+buffer at each moment,
+
+18
+00:00:49.550 --> 00:00:52.440
+when it is valid to read or modify it, how
+completion is signaled,
+
+19
+00:00:52.520 --> 00:00:54.875
+and what happens if a transfer is
+cancelled or fails.
+
+20
+00:00:54.955 --> 00:00:58.435
+Unsafe hardware access should be small,
+justified, documented, and tested.
+
+21
+00:00:58.515 --> 00:01:01.940
+A safety contract should explain pointer
+validity, register assumptions,
+
+22
+00:01:02.020 --> 00:01:05.285
+aliasing expectations, interrupt
+interactions, and ownership rules.
+
+23
+00:01:05.365 --> 00:01:09.058
+Safe wrappers should protect callers from
+needing to remember those assumptions
+
+24
+00:01:09.138 --> 00:01:09.620
+manually.

@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.944
+Rust's ownership model is built around
+responsibility.
+
+2
+00:00:03.024 --> 00:00:03.890
+A value has an owner,
+
+3
+00:00:03.970 --> 00:00:07.076
+and the owner is responsible for cleanup
+when the value goes out of scope.
+
+4
+00:00:07.156 --> 00:00:09.295
+This is why ownership is not just a syntax
+concept.
+
+5
+00:00:09.375 --> 00:00:11.921
+It is how Rust represents who has
+authority over a resource.
+
+6
+00:00:12.001 --> 00:00:14.292
+When ownership moves, responsibility moves
+with it.
+
+7
+00:00:14.372 --> 00:00:17.580
+A value passed into a function that takes
+ownership is no longer owned by the
+
+8
+00:00:17.660 --> 00:00:18.017
+caller.
+
+9
+00:00:18.097 --> 00:00:21.152
+A value moved into a struct field is now
+part of that struct's lifecycle.
+
+10
+00:00:21.232 --> 00:00:24.796
+The previous binding is not allowed to
+continue behaving as though it still owns the
+
+11
+00:00:24.876 --> 00:00:25.182
+value.
+
+12
+00:00:25.262 --> 00:00:27.910
+Borrowing is equally important for
+double-free prevention.
+
+13
+00:00:27.990 --> 00:00:30.587
+A borrowed reference can read or modify a
+value temporarily,
+
+14
+00:00:30.667 --> 00:00:32.602
+but it does not take cleanup
+responsibility.
+
+15
+00:00:32.682 --> 00:00:36.144
+That distinction lets code use values
+without creating another owner that might
+
+16
+00:00:36.224 --> 00:00:37.905
+later try to release the same resource.
+
+17
+00:00:37.985 --> 00:00:40.887
+Function signatures should make cleanup
+responsibility visible.
+
+18
+00:00:40.967 --> 00:00:43.004
+A function that accepts `T` may take
+ownership.
+
+19
+00:00:43.084 --> 00:00:45.223
+A function that accepts `&T` borrows for
+reading.
+
+20
+00:00:45.303 --> 00:00:48.358
+A function that accepts `&mut T` borrows
+for controlled modification.
+
+21
+00:00:48.438 --> 00:00:51.748
+A function that returns `T` gives
+ownership back to the caller or transfers it
+
+22
+00:00:51.828 --> 00:00:52.184
+onward.
+
+23
+00:00:52.264 --> 00:00:54.658
+Defensive Rust design avoids ambiguous
+cleanup paths.
+
+24
+00:00:54.738 --> 00:00:58.098
+Do not make callers guess whether a helper
+closes a handle, consumes a wrapper,
+
+25
+00:00:58.178 --> 00:00:58.993
+or only borrows it.
+
+26
+00:00:59.073 --> 00:01:00.499
+The more sensitive the resource,
+
+27
+00:01:00.579 --> 00:01:04.092
+the more valuable it is for ownership
+transfer to be explicit in the type signature
+
+28
+00:01:04.172 --> 00:01:05.700
+and documented in the API contract.

@@ -1,0 +1,134 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.946
+Rust's Result and Option types encourage
+explicit handling of failure and absence.
+
+2
+00:00:04.026 --> 00:00:06.550
+That is a security advantage when teams
+use it intentionally.
+
+3
+00:00:06.630 --> 00:00:09.687
+Instead of letting unexpected states drift
+silently through the program,
+
+4
+00:00:09.767 --> 00:00:13.262
+Rust makes many failure paths visible in
+function signatures and compiler feedback.
+
+5
+00:00:13.342 --> 00:00:15.720
+The value comes from designing those paths
+deliberately.
+
+6
+00:00:15.800 --> 00:00:19.003
+Careless use of unwrap or expect can turn
+predictable failure into unexpected
+
+7
+00:00:19.083 --> 00:00:20.491
+termination or fragile behavior.
+
+8
+00:00:20.571 --> 00:00:23.192
+Panics may be acceptable in some startup
+validation, test code,
+
+9
+00:00:23.272 --> 00:00:26.184
+or invariant-checking situations, but
+production request handling,
+
+10
+00:00:26.264 --> 00:00:27.866
+background jobs, message processors,
+
+11
+00:00:27.946 --> 00:00:30.275
+and long-running services need clear
+failure behavior.
+
+12
+00:00:30.355 --> 00:00:32.248
+A malformed request, missing optional
+value,
+
+13
+00:00:32.328 --> 00:00:35.968
+or unavailable dependency should not
+automatically become a service-wide reliability
+
+14
+00:00:36.048 --> 00:00:36.437
+problem.
+
+15
+00:00:36.517 --> 00:00:39.283
+Error messages should be useful without
+exposing secrets, tokens,
+
+16
+00:00:39.363 --> 00:00:42.227
+sensitive configuration, internal
+topology, private identifiers,
+
+17
+00:00:42.307 --> 00:00:43.860
+or excessive implementation detail.
+
+18
+00:00:43.940 --> 00:00:46.609
+Internal logs may need more context than
+user-facing responses,
+
+19
+00:00:46.689 --> 00:00:48.825
+but even internal logs should avoid
+sensitive data.
+
+20
+00:00:48.905 --> 00:00:52.157
+Error handling should support diagnosis
+without spreading secrets or turning
+
+21
+00:00:52.237 --> 00:00:54.178
+implementation details into public
+behavior.
+
+22
+00:00:54.258 --> 00:00:57.267
+Secure applications define which failures
+should be retried, rejected,
+
+23
+00:00:57.347 --> 00:00:59.143
+logged, surfaced to the caller, escalated,
+
+24
+00:00:59.223 --> 00:01:01.067
+or treated as startup-blocking conditions.
+
+25
+00:01:01.147 --> 00:01:04.399
+They also avoid retry behavior that
+creates overload and avoid silent fallback
+
+26
+00:01:04.479 --> 00:01:05.838
+behavior that weakens security.
+
+27
+00:01:05.918 --> 00:01:07.908
+Fail-safe Rust code is not code that never
+fails;
+
+28
+00:01:07.988 --> 00:01:10.900
+it is code that fails in controlled,
+observable, and appropriate ways.

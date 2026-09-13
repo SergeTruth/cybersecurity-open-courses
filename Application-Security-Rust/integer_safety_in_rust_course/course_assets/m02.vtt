@@ -1,0 +1,148 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.307
+Rust offers signed and unsigned integers
+in several widths,
+
+2
+00:00:03.387 --> 00:00:05.313
+plus pointer-sized `usize` and `isize`.
+
+3
+00:00:05.393 --> 00:00:07.539
+The right type depends on what the value
+means.
+
+4
+00:00:07.619 --> 00:00:10.811
+A count, length, array index, protocol
+field, database identifier,
+
+5
+00:00:10.891 --> 00:00:13.533
+user-visible value, and signed delta may
+all be numbers,
+
+6
+00:00:13.613 --> 00:00:16.145
+but they do not all carry the same design
+requirements.
+
+7
+00:00:16.225 --> 00:00:19.362
+Signed types communicate that values below
+zero may be meaningful.
+
+8
+00:00:19.442 --> 00:00:22.029
+That can fit deltas, balances, offsets,
+temperatures,
+
+9
+00:00:22.109 --> 00:00:24.585
+or calculations where negative values are
+expected.
+
+10
+00:00:24.665 --> 00:00:27.252
+Unsigned types communicate non-negative
+quantities,
+
+11
+00:00:27.332 --> 00:00:29.533
+but unsigned does not automatically mean
+safe.
+
+12
+00:00:29.613 --> 00:00:32.750
+A value can be non-negative and still be
+too large, in the wrong unit,
+
+13
+00:00:32.830 --> 00:00:34.206
+or invalid for the operation.
+
+14
+00:00:34.286 --> 00:00:37.478
+Fixed-width types are useful when layout,
+serialization, storage,
+
+15
+00:00:37.558 --> 00:00:39.264
+or protocol compatibility matters.
+
+16
+00:00:39.344 --> 00:00:41.326
+A file format might define a field as
+`u16`,
+
+17
+00:00:41.406 --> 00:00:43.167
+a network message might carry a `u32`,
+
+18
+00:00:43.247 --> 00:00:45.723
+and an embedded interface might require
+exact width.
+
+19
+00:00:45.803 --> 00:00:48.830
+In those cases, the type choice documents
+the external contract.
+
+20
+00:00:48.910 --> 00:00:52.432
+`usize` is appropriate for indexing and
+memory sizes because it matches the
+
+21
+00:00:52.512 --> 00:00:54.329
+platform's addressable memory model.
+
+22
+00:00:54.409 --> 00:00:56.885
+But it should not become the default for
+every number.
+
+23
+00:00:56.965 --> 00:00:59.112
+A port, retry count, percentage, database
+ID,
+
+24
+00:00:59.192 --> 00:01:02.549
+or protocol version may deserve a
+domain-specific type or a fixed-width
+
+25
+00:01:02.629 --> 00:01:03.840
+representation instead.
+
+26
+00:01:03.920 --> 00:01:06.671
+Defensive Rust chooses integer types that
+express intent.
+
+27
+00:01:06.751 --> 00:01:07.742
+If a type is too broad,
+
+28
+00:01:07.822 --> 00:01:11.564
+review becomes harder because invalid
+values can flow farther into the program.
+
+29
+00:01:11.644 --> 00:01:15.057
+If a type is too narrow, conversion and
+overflow edges become more likely.
+
+30
+00:01:15.137 --> 00:01:18.439
+The best choice makes valid range,
+signedness, platform assumptions,
+
+31
+00:01:18.519 --> 00:01:20.500
+and boundary behavior easy to understand.

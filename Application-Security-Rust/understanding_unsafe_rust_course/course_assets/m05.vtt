@@ -1,0 +1,144 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.905
+Raw pointers are powerful because they
+allow code to refer to memory without the
+
+2
+00:00:03.985 --> 00:00:05.611
+normal reference checks of safe Rust.
+
+3
+00:00:05.691 --> 00:00:07.521
+That power is why they need careful
+review.
+
+4
+00:00:07.601 --> 00:00:10.700
+The code must establish pointer validity,
+alignment, initialization,
+
+5
+00:00:10.780 --> 00:00:14.287
+ownership, aliasing behavior, and lifetime
+relationships through other means.
+
+6
+00:00:14.367 --> 00:00:16.857
+Review should ask whether the pointer
+points to live data,
+
+7
+00:00:16.937 --> 00:00:19.224
+whether the memory is correctly aligned
+for the type,
+
+8
+00:00:19.304 --> 00:00:20.981
+whether the data has been initialized,
+
+9
+00:00:21.061 --> 00:00:23.297
+and whether the referenced memory outlives
+the use.
+
+10
+00:00:23.377 --> 00:00:24.444
+If mutation is involved,
+
+11
+00:00:24.524 --> 00:00:28.132
+review must also ask whether the mutation
+is exclusive when exclusivity is required
+
+12
+00:00:28.212 --> 00:00:29.076
+by the abstraction.
+
+13
+00:00:29.156 --> 00:00:30.986
+Aliasing assumptions should be explicit.
+
+14
+00:00:31.066 --> 00:00:33.810
+Safe Rust references carry strict aliasing
+and mutation rules.
+
+15
+00:00:33.890 --> 00:00:36.939
+Raw pointer code may need to recreate
+those guarantees through design.
+
+16
+00:00:37.019 --> 00:00:39.001
+If multiple views can point to the same
+memory,
+
+17
+00:00:39.081 --> 00:00:42.587
+reviewers should understand which
+operations are allowed, which are forbidden,
+
+18
+00:00:42.667 --> 00:00:44.649
+and how the code prevents conflicting
+access.
+
+19
+00:00:44.729 --> 00:00:47.829
+Ownership transfer and cleanup
+responsibility are equally important.
+
+20
+00:00:47.909 --> 00:00:50.145
+If memory crosses a boundary, who owns it
+afterward?
+
+21
+00:00:50.225 --> 00:00:50.784
+Who frees it?
+
+22
+00:00:50.864 --> 00:00:52.084
+Which allocator created it?
+
+23
+00:00:52.164 --> 00:00:53.536
+Can the external code retain it?
+
+24
+00:00:53.616 --> 00:00:54.887
+Can the Rust side use it again?
+
+25
+00:00:54.967 --> 00:00:58.575
+These questions should be answered in the
+API contract, not guessed from local code.
+
+26
+00:00:58.655 --> 00:01:02.212
+Layout and representation assumptions
+matter when code crosses FFI boundaries or
+
+27
+00:01:02.292 --> 00:01:03.918
+interprets bytes as structured data.
+
+28
+00:01:03.998 --> 00:01:07.606
+Defensive design keeps these assumptions
+behind narrow abstractions and tests the
+
+29
+00:01:07.686 --> 00:01:08.550
+boundary behavior.
+
+30
+00:01:08.630 --> 00:01:10.155
+The smaller the low-level surface,
+
+31
+00:01:10.235 --> 00:01:12.420
+the easier it is to prove that the
+assumptions hold.

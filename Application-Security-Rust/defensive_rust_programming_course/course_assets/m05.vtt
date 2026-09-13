@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.385
+The unsafe keyword marks code where the
+programmer must uphold rules the compiler
+
+2
+00:00:04.465 --> 00:00:05.422
+cannot fully check.
+
+3
+00:00:05.502 --> 00:00:07.303
+Unsafe Rust is not automatically bad,
+
+4
+00:00:07.383 --> 00:00:11.437
+and some low-level libraries,
+performance-sensitive code, platform integration,
+
+5
+00:00:11.517 --> 00:00:14.050
+and interoperability work legitimately
+require it.
+
+6
+00:00:14.130 --> 00:00:15.875
+But unsafe changes the review model.
+
+7
+00:00:15.955 --> 00:00:17.419
+It creates a trusted boundary.
+
+8
+00:00:17.499 --> 00:00:21.215
+Defensive Rust keeps unsafe code rare,
+justified, isolated, and documented.
+
+9
+00:00:21.295 --> 00:00:23.941
+Reviewers should be able to answer why
+unsafe is needed,
+
+10
+00:00:24.021 --> 00:00:26.498
+what invariants must hold, what callers
+may assume,
+
+11
+00:00:26.578 --> 00:00:30.350
+and how the code prevents unsafe
+assumptions from leaking across the rest of the
+
+12
+00:00:30.430 --> 00:00:31.106
+application.
+
+13
+00:00:31.186 --> 00:00:34.226
+The smaller the unsafe surface, the easier
+that review becomes.
+
+14
+00:00:34.306 --> 00:00:36.332
+Safe wrappers are often the right pattern.
+
+15
+00:00:36.412 --> 00:00:40.297
+Unsafe internals can sometimes expose a
+safe public API when the wrapper enforces
+
+16
+00:00:40.377 --> 00:00:41.616
+the required invariants.
+
+17
+00:00:41.696 --> 00:00:45.299
+That wrapper should define what inputs are
+valid, who owns returned values,
+
+18
+00:00:45.379 --> 00:00:47.743
+what lifetimes mean, how errors are
+represented,
+
+19
+00:00:47.823 --> 00:00:49.681
+and whether concurrent use is allowed.
+
+20
+00:00:49.761 --> 00:00:53.533
+Foreign function interfaces require
+special attention because Rust's normal
+
+21
+00:00:53.613 --> 00:00:56.203
+guarantees may not apply across language
+boundaries.
+
+22
+00:00:56.283 --> 00:00:59.154
+Review should cover pointer validity,
+ownership transfer,
+
+23
+00:00:59.234 --> 00:01:02.499
+allocation and deallocation
+responsibility, thread assumptions,
+
+24
+00:01:02.579 --> 00:01:05.169
+error conventions, data layout, and
+representation.
+
+25
+00:01:05.249 --> 00:01:09.134
+These details should be written down, not
+carried as unwritten tribal knowledge.
+
+26
+00:01:09.214 --> 00:01:12.197
+Boundary tests and documentation are part
+of the safety story.
+
+27
+00:01:12.277 --> 00:01:14.755
+The goal is not to forbid unsafe code
+categorically.
+
+28
+00:01:14.835 --> 00:01:18.156
+The goal is to keep trusted assumptions
+small, explicit, reviewable,
+
+29
+00:01:18.236 --> 00:01:22.064
+and exercised by tests so safe Rust
+remains the default experience for the rest of
+
+30
+00:01:22.144 --> 00:01:22.820
+the codebase.

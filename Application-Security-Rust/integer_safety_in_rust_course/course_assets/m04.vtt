@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.022
+Many integer bugs appear during conversion
+rather than during arithmetic.
+
+2
+00:00:04.102 --> 00:00:06.468
+A value may be parsed as one type, stored
+as another,
+
+3
+00:00:06.548 --> 00:00:10.236
+sent over a protocol as a fixed-width
+field, converted to `usize` for indexing,
+
+4
+00:00:10.316 --> 00:00:12.792
+or cast across signed and unsigned
+representations.
+
+5
+00:00:12.872 --> 00:00:15.128
+Each transition is a chance for meaning to
+drift.
+
+6
+00:00:15.208 --> 00:00:19.171
+Widening conversions are usually easier to
+reason about than narrowing conversions
+
+7
+00:00:19.251 --> 00:00:21.617
+because the target type can represent more
+values.
+
+8
+00:00:21.697 --> 00:00:25.494
+Narrowing conversions require review
+because the target may not represent every
+
+9
+00:00:25.574 --> 00:00:26.510
+valid source value.
+
+10
+00:00:26.590 --> 00:00:30.222
+Signedness changes also need attention
+because a value that means one thing as
+
+11
+00:00:30.302 --> 00:00:33.274
+signed data may mean something very
+different as unsigned data.
+
+12
+00:00:33.354 --> 00:00:36.380
+The `as` operator can be concise, but it
+can also hide truncation,
+
+13
+00:00:36.460 --> 00:00:38.992
+reinterpretation, or unexpected boundary
+behavior.
+
+14
+00:00:39.072 --> 00:00:41.053
+That does not mean every `as` cast is
+wrong.
+
+15
+00:00:41.133 --> 00:00:42.894
+It means cast sites are review points.
+
+16
+00:00:42.974 --> 00:00:46.111
+The reviewer should understand the source
+range, the target range,
+
+17
+00:00:46.191 --> 00:00:48.722
+and why the conversion preserves the
+value's meaning.
+
+18
+00:00:48.802 --> 00:00:52.655
+Fallible conversion patterns such as
+`TryFrom` make boundary failures explicit.
+
+19
+00:00:52.735 --> 00:00:55.266
+Instead of silently forcing a value into a
+target type,
+
+20
+00:00:55.346 --> 00:00:58.373
+the code can return an error, reject the
+input, choose a fallback,
+
+21
+00:00:58.453 --> 00:00:59.829
+or apply a documented policy.
+
+22
+00:00:59.909 --> 00:01:03.101
+That is especially useful at parser, FFI,
+serialization, indexing,
+
+23
+00:01:03.181 --> 00:01:04.501
+and allocation boundaries.
+
+24
+00:01:04.581 --> 00:01:07.058
+Defensive Rust validates ranges before
+conversion.
+
+25
+00:01:07.138 --> 00:01:10.495
+If a parsed value will become an index, a
+length, a retry count, a timeout,
+
+26
+00:01:10.575 --> 00:01:14.042
+a port, or a protocol field, validate the
+allowed range in the domain first.
+
+27
+00:01:14.122 --> 00:01:16.598
+Conversion should preserve a decision
+already made,
+
+28
+00:01:16.678 --> 00:01:19.540
+not smuggle an unchecked value into a more
+dangerous context.

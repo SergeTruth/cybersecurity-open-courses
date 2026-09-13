@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.002
+Use-after-free prevention is not only a
+compiler feature.
+
+2
+00:00:03.082 --> 00:00:04.484
+It is also an API design practice.
+
+3
+00:00:04.564 --> 00:00:07.316
+A good API communicates whether the caller
+transfers ownership,
+
+4
+00:00:07.396 --> 00:00:09.248
+borrows temporarily, receives owned data,
+
+5
+00:00:09.328 --> 00:00:11.430
+or receives a reference tied to an
+existing owner.
+
+6
+00:00:11.510 --> 00:00:13.512
+The signature should tell the lifecycle
+story.
+
+7
+00:00:13.592 --> 00:00:16.745
+Owned returns are often safer when there
+is no durable owner to borrow from.
+
+8
+00:00:16.825 --> 00:00:18.877
+If a function builds a result, normalizes
+input,
+
+9
+00:00:18.957 --> 00:00:21.659
+or extracts a value that needs to survive
+beyond the input scope,
+
+10
+00:00:21.739 --> 00:00:25.293
+returning an owned value can be clearer
+than forcing a borrowed relationship that is
+
+11
+00:00:25.373 --> 00:00:26.073
+hard to satisfy.
+
+12
+00:00:26.153 --> 00:00:28.355
+Encapsulation protects internal state
+lifetimes.
+
+13
+00:00:28.435 --> 00:00:31.738
+A type can own its resources and expose
+methods that do not leak references into
+
+14
+00:00:31.818 --> 00:00:32.869
+short-lived internals.
+
+15
+00:00:32.949 --> 00:00:36.352
+Callers interact with stable operations
+instead of depending on private buffer
+
+16
+00:00:36.432 --> 00:00:38.034
+locations, temporary parsing state,
+
+17
+00:00:38.114 --> 00:00:40.166
+or internal handles that may be cleaned up
+later.
+
+18
+00:00:40.246 --> 00:00:43.049
+Constructors and domain types can assemble
+validated owned data.
+
+19
+00:00:43.129 --> 00:00:46.332
+Instead of passing around loosely related
+handles, flags, and references,
+
+20
+00:00:46.412 --> 00:00:49.715
+an API can validate once and then expose a
+type that represents a valid resource
+
+21
+00:00:49.795 --> 00:00:50.095
+state.
+
+22
+00:00:50.175 --> 00:00:52.978
+This reduces repeated lifetime assumptions
+across the codebase.
+
+23
+00:00:53.058 --> 00:00:54.409
+The safe path should be obvious.
+
+24
+00:00:54.489 --> 00:00:57.592
+If callers can accidentally store a
+borrowed reference beyond the owner,
+
+25
+00:00:57.672 --> 00:01:00.374
+retain a callback after cleanup, or use a
+handle after shutdown,
+
+26
+00:01:00.454 --> 00:01:02.056
+the API is asking too much of its users.
+
+27
+00:01:02.136 --> 00:01:05.839
+Defensive API design makes invalid
+lifetime relationships difficult or impossible to
+
+28
+00:01:05.919 --> 00:01:06.820
+express in safe code.

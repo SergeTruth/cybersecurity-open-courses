@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.515
+Safe Rust protects buffers through
+multiple reinforcing rules.
+
+2
+00:00:03.595 --> 00:00:07.048
+Ownership clarifies who controls a value
+and when that value is cleaned up.
+
+3
+00:00:07.128 --> 00:00:09.540
+Borrowing controls who may read or mutate
+the value.
+
+4
+00:00:09.620 --> 00:00:11.867
+Lifetimes help ensure references remain
+valid.
+
+5
+00:00:11.947 --> 00:00:14.304
+These rules work together before the
+program runs.
+
+6
+00:00:14.384 --> 00:00:17.234
+The standard buffer abstractions carry
+structure with them.
+
+7
+00:00:17.314 --> 00:00:18.520
+Arrays have fixed length.
+
+8
+00:00:18.600 --> 00:00:20.683
+`Vec<T>` owns a growable sequence of
+values.
+
+9
+00:00:20.763 --> 00:00:22.627
+Slices borrow views into existing data.
+
+10
+00:00:22.707 --> 00:00:24.187
+`String` owns valid UTF-8 text.
+
+11
+00:00:24.267 --> 00:00:25.802
+`&str` borrows valid UTF-8 text.
+
+12
+00:00:25.882 --> 00:00:27.417
+Byte slices represent raw bytes.
+
+13
+00:00:27.497 --> 00:00:30.511
+Each abstraction communicates different
+ownership, validity,
+
+14
+00:00:30.591 --> 00:00:31.797
+and access expectations.
+
+15
+00:00:31.877 --> 00:00:33.138
+Safe access checks bounds.
+
+16
+00:00:33.218 --> 00:00:35.739
+If code uses safe indexing and an index is
+out of bounds,
+
+17
+00:00:35.819 --> 00:00:39.601
+Rust produces controlled failure behavior
+instead of allowing arbitrary memory
+
+18
+00:00:39.681 --> 00:00:40.065
+access.
+
+19
+00:00:40.145 --> 00:00:43.927
+A panic is still an operational concern
+because it can affect availability or user
+
+20
+00:00:44.007 --> 00:00:46.584
+experience, but it is not the same as
+memory corruption.
+
+21
+00:00:46.664 --> 00:00:49.240
+That distinction is important during
+security review.
+
+22
+00:00:49.320 --> 00:00:51.896
+A service should still avoid panics on
+untrusted input,
+
+23
+00:00:51.976 --> 00:00:54.662
+but a panic from safe indexing is a
+contained failure mode.
+
+24
+00:00:54.742 --> 00:00:58.305
+It does not mean another buffer was
+overwritten or unrelated memory was read.
+
+25
+00:00:58.385 --> 00:01:02.112
+Defensive code should design predictable
+error handling rather than relying on
+
+26
+00:01:02.192 --> 00:01:03.672
+panics as routine control flow.
+
+27
+00:01:03.752 --> 00:01:06.657
+Safe abstractions should be the default
+for application code.
+
+28
+00:01:06.737 --> 00:01:10.026
+If a design seems to require raw pointers
+or unchecked buffer behavior,
+
+29
+00:01:10.106 --> 00:01:10.928
+pause and ask why.
+
+30
+00:01:11.008 --> 00:01:13.859
+Often a slice, iterator, checked access
+method, parser type,
+
+31
+00:01:13.939 --> 00:01:17.611
+or owned result can express the same
+intent while preserving Rust's safe buffer
+
+32
+00:01:17.691 --> 00:01:18.020
+model.

@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.431
+A buffer overflow occurs when code reads
+or writes beyond the intended boundary of a
+
+2
+00:00:04.511 --> 00:00:04.904
+buffer.
+
+3
+00:00:04.984 --> 00:00:07.174
+In many low-level programming
+environments,
+
+4
+00:00:07.254 --> 00:00:11.016
+that class of mistake has historically
+caused severe reliability and security
+
+5
+00:00:11.096 --> 00:00:11.602
+failures.
+
+6
+00:00:11.682 --> 00:00:13.198
+The defensive lesson is simple:
+
+7
+00:00:13.278 --> 00:00:17.209
+memory boundaries matter because they
+define which data an operation is allowed to
+
+8
+00:00:17.289 --> 00:00:17.626
+reach.
+
+9
+00:00:17.706 --> 00:00:19.446
+Rust changes the default risk model.
+
+10
+00:00:19.526 --> 00:00:22.896
+In safe Rust, developers normally work
+through checked abstractions,
+
+11
+00:00:22.976 --> 00:00:26.233
+ownership rules, borrowing rules, and
+type-aware access patterns.
+
+12
+00:00:26.313 --> 00:00:27.997
+Arrays, vectors, slices, strings,
+
+13
+00:00:28.077 --> 00:00:31.053
+and byte buffers carry information about
+length and validity.
+
+14
+00:00:31.133 --> 00:00:35.064
+Safe APIs are designed so out-of-bounds
+memory access is not an ordinary outcome of
+
+15
+00:00:35.144 --> 00:00:36.380
+a small indexing mistake.
+
+16
+00:00:36.460 --> 00:00:40.166
+The point of this course is not to
+memorize old failure modes or learn offensive
+
+17
+00:00:40.246 --> 00:00:40.863
+techniques.
+
+18
+00:00:40.943 --> 00:00:44.425
+The point is to understand why buffer
+boundaries matter and how Rust helps
+
+19
+00:00:44.505 --> 00:00:48.323
+developers build software where invalid
+memory access is prevented by default.
+
+20
+00:00:48.403 --> 00:00:51.380
+That matters for parsers, network
+services, file processing,
+
+21
+00:00:51.460 --> 00:00:53.762
+embedded code, libraries, and backend
+systems.
+
+22
+00:00:53.842 --> 00:00:57.267
+Rust's protections are strongest when code
+stays in safe abstractions.
+
+23
+00:00:57.347 --> 00:01:00.099
+Risk can re-enter at unsafe blocks, raw
+pointer handling,
+
+24
+00:01:00.179 --> 00:01:03.324
+foreign function interfaces, platform
+APIs, device interfaces,
+
+25
+00:01:03.404 --> 00:01:05.481
+and custom low-level buffer abstractions.
+
+26
+00:01:05.561 --> 00:01:09.492
+Those boundaries need explicit review
+because the compiler may not be able to prove
+
+27
+00:01:09.572 --> 00:01:10.808
+the full buffer contract.
+
+28
+00:01:10.888 --> 00:01:12.684
+The defensive goal is layered design.
+
+29
+00:01:12.764 --> 00:01:13.607
+Prefer safe Rust.
+
+30
+00:01:13.687 --> 00:01:15.708
+Make buffer ownership and length visible.
+
+31
+00:01:15.788 --> 00:01:17.529
+Validate input at trust boundaries.
+
+32
+00:01:17.609 --> 00:01:19.406
+Control allocation and resource use.
+
+33
+00:01:19.486 --> 00:01:21.339
+Keep unsafe code small and documented.
+
+34
+00:01:21.419 --> 00:01:23.160
+Wrap external behavior in safe APIs.
+
+35
+00:01:23.240 --> 00:01:27.115
+Test boundary cases over time so buffer
+safety remains part of normal engineering
+
+36
+00:01:27.195 --> 00:01:27.700
+practice.

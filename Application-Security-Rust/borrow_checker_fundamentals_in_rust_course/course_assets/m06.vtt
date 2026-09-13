@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.500
+Borrow checking is not only local to a
+line of code.
+
+2
+00:00:02.580 --> 00:00:03.437
+It shapes API design.
+
+3
+00:00:03.517 --> 00:00:06.278
+A function that accepts a shared reference
+says it only needs to read.
+
+4
+00:00:06.358 --> 00:00:09.739
+A function that accepts a mutable
+reference says it needs controlled modification.
+
+5
+00:00:09.819 --> 00:00:13.200
+A function that accepts an owned value
+says responsibility moves into the function.
+
+6
+00:00:13.280 --> 00:00:14.518
+Those choices affect callers.
+
+7
+00:00:14.598 --> 00:00:15.835
+If a function takes ownership,
+
+8
+00:00:15.915 --> 00:00:19.248
+the caller cannot keep using the old owner
+unless the function returns something or
+
+9
+00:00:19.328 --> 00:00:21.138
+the value implements a simple copy
+behavior.
+
+10
+00:00:21.218 --> 00:00:22.122
+If a function borrows,
+
+11
+00:00:22.202 --> 00:00:24.916
+the caller keeps ownership but must
+respect the borrow's duration.
+
+12
+00:00:24.996 --> 00:00:28.091
+If a function mutably borrows, the caller
+gives temporary exclusive access.
+
+13
+00:00:28.171 --> 00:00:30.171
+Structs make these relationships
+longer-lived.
+
+14
+00:00:30.251 --> 00:00:33.584
+A struct with owned fields is usually
+straightforward because the struct controls
+
+15
+00:00:33.664 --> 00:00:34.711
+cleanup for those fields.
+
+16
+00:00:34.791 --> 00:00:36.696
+A struct with borrowed fields can be
+efficient,
+
+17
+00:00:36.776 --> 00:00:39.776
+but it introduces lifetime relationships
+that every caller must satisfy.
+
+18
+00:00:39.856 --> 00:00:40.856
+That can be appropriate,
+
+19
+00:00:40.936 --> 00:00:43.697
+but it should be intentional and
+documented through the type design.
+
+20
+00:00:43.777 --> 00:00:45.729
+Good APIs avoid surprising ownership
+transfer.
+
+21
+00:00:45.809 --> 00:00:48.666
+If a function only needs to read a
+request, configuration object, path,
+
+22
+00:00:48.746 --> 00:00:50.794
+or collection, a reference may be the
+right choice.
+
+23
+00:00:50.874 --> 00:00:53.111
+If the function needs to store the value
+beyond the call,
+
+24
+00:00:53.191 --> 00:00:55.429
+spawn work that owns it, or transform it
+into a new state,
+
+25
+00:00:55.509 --> 00:00:56.842
+taking ownership may be clearer.
+
+26
+00:00:56.922 --> 00:00:58.684
+The borrow checker reinforces API honesty.
+
+27
+00:00:58.764 --> 00:01:01.907
+It prevents a function from returning
+references that cannot remain valid and
+
+28
+00:01:01.987 --> 00:01:05.081
+prevents callers from mutating values
+while a shared borrow is still active.
+
+29
+00:01:05.161 --> 00:01:07.637
+Clear APIs make caller and callee
+responsibilities obvious,
+
+30
+00:01:07.717 --> 00:01:09.860
+which improves maintainability and
+reviewability.

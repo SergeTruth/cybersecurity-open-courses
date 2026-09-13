@@ -1,0 +1,122 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.318
+Lifetimes are about reference validity,
+
+2
+00:00:02.398 --> 00:00:05.463
+but the same design mindset helps with
+security-sensitive data flow.
+
+3
+00:00:05.543 --> 00:00:08.659
+A reference should usually last only as
+long as it serves a real purpose.
+
+4
+00:00:08.739 --> 00:00:12.219
+Narrow borrows make code easier to reason
+about and reduce conflicts with later
+
+5
+00:00:12.299 --> 00:00:13.754
+mutation, movement, or cleanup.
+
+6
+00:00:13.834 --> 00:00:16.015
+Avoid holding references across unrelated
+work.
+
+7
+00:00:16.095 --> 00:00:19.575
+A reference used for validation does not
+need to remain active while the program
+
+8
+00:00:19.655 --> 00:00:22.824
+performs logging, mutation, network calls,
+or response construction.
+
+9
+00:00:22.904 --> 00:00:26.384
+Shorter scopes make the relationship
+between owner and borrower more obvious.
+
+10
+00:00:26.464 --> 00:00:28.126
+Temporary values deserve attention.
+
+11
+00:00:28.206 --> 00:00:31.738
+A reference to a temporary value is only
+valid while that temporary value exists.
+
+12
+00:00:31.818 --> 00:00:35.039
+If code tries to keep the reference
+longer, Rust should reject the design.
+
+13
+00:00:35.119 --> 00:00:37.196
+When the data must outlive the temporary
+scope,
+
+14
+00:00:37.276 --> 00:00:39.822
+use an owned value or restructure the
+owner relationship.
+
+15
+00:00:39.902 --> 00:00:42.810
+Sensitive data such as tokens,
+credentials, keys, personal data,
+
+16
+00:00:42.890 --> 00:00:46.007
+or confidential configuration also
+benefits from lifetime thinking.
+
+17
+00:00:46.087 --> 00:00:49.359
+Ask where the data enters, who owns it,
+who borrows it, whether it is cloned,
+
+18
+00:00:49.439 --> 00:00:52.037
+where it might be logged, and how long it
+remains available.
+
+19
+00:00:52.117 --> 00:00:54.506
+Lifetimes do not automatically erase
+sensitive data,
+
+20
+00:00:54.586 --> 00:00:56.664
+but they encourage explicit data-flow
+review.
+
+21
+00:00:56.744 --> 00:00:59.600
+Runtime retention and compile-time
+lifetime are not identical.
+
+22
+00:00:59.680 --> 00:01:01.446
+Rust can help prove reference validity,
+
+23
+00:01:01.526 --> 00:01:04.124
+but teams still need policy and careful
+code for redaction,
+
+24
+00:01:04.204 --> 00:01:07.684
+zeroization where appropriate, log
+hygiene, retention, and secure transfer.
+
+25
+00:01:07.764 --> 00:01:11.140
+Lifetime thinking is one piece of a
+broader secure data handling discipline.

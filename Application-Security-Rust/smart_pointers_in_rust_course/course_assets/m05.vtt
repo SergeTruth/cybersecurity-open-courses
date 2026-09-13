@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.847
+Reference counting solves some ownership
+problems,
+
+2
+00:00:02.927 --> 00:00:06.109
+but it can introduce lifecycle problems
+when strong owners form cycles.
+
+3
+00:00:06.189 --> 00:00:09.580
+If two values strongly own each other, the
+strong counts may never reach zero.
+
+4
+00:00:09.660 --> 00:00:11.433
+Safe Rust still protects memory safety,
+
+5
+00:00:11.513 --> 00:00:14.122
+but the values may not be cleaned up when
+the design expects.
+
+6
+00:00:14.202 --> 00:00:15.923
+A leak is not automatically an exploit,
+
+7
+00:00:16.003 --> 00:00:18.142
+and safe Rust prevents many dangerous
+outcomes,
+
+8
+00:00:18.222 --> 00:00:19.943
+but leaks still matter in real systems.
+
+9
+00:00:20.023 --> 00:00:23.466
+Long-running services, background workers,
+desktop applications, caches,
+
+10
+00:00:23.546 --> 00:00:26.624
+and agents can suffer resource growth,
+stale state, delayed cleanup,
+
+11
+00:00:26.704 --> 00:00:29.833
+and operational instability when lifecycle
+behavior is not reviewed.
+
+12
+00:00:29.913 --> 00:00:33.252
+`Weak<T>` models a non-owning relationship
+to a reference-counted value.
+
+13
+00:00:33.332 --> 00:00:35.366
+A weak reference does not keep the value
+alive.
+
+14
+00:00:35.446 --> 00:00:39.045
+Code must attempt to upgrade the weak
+reference and handle the case where the value
+
+15
+00:00:39.125 --> 00:00:40.273
+has already been dropped.
+
+16
+00:00:40.353 --> 00:00:43.170
+That checked access makes non-owning
+relationships explicit.
+
+17
+00:00:43.250 --> 00:00:46.223
+This is useful for parent-child
+relationships, back-references,
+
+18
+00:00:46.303 --> 00:00:49.224
+observer lists, caches, registries, and
+graph-like structures.
+
+19
+00:00:49.304 --> 00:00:52.904
+A child may need to know about its parent
+without keeping the parent alive forever.
+
+20
+00:00:52.984 --> 00:00:56.374
+A cache may want to remember a value if it
+still exists but not force it to remain
+
+21
+00:00:56.454 --> 00:00:56.976
+allocated.
+
+22
+00:00:57.056 --> 00:01:00.081
+The review question is whether each
+relationship should own, share,
+
+23
+00:01:00.161 --> 00:01:00.996
+or merely observe.
+
+24
+00:01:01.076 --> 00:01:04.154
+Strong references should represent real
+ownership responsibility.
+
+25
+00:01:04.234 --> 00:01:07.103
+Weak references should represent optional,
+non-owning access.
+
+26
+00:01:07.183 --> 00:01:10.417
+When that distinction is clear, cleanup
+behavior becomes easier to test,
+
+27
+00:01:10.497 --> 00:01:11.540
+maintain, and explain.

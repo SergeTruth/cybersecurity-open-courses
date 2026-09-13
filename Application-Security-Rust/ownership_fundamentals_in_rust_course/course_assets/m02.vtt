@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:01.995
+In Rust, most values have one owner.
+
+2
+00:00:02.075 --> 00:00:05.015
+When a value is assigned to another
+variable or passed into a function,
+
+3
+00:00:05.095 --> 00:00:06.689
+ownership may move to the new binding.
+
+4
+00:00:06.769 --> 00:00:10.157
+After that move, the old binding is no
+longer responsible for the value and cannot
+
+5
+00:00:10.237 --> 00:00:11.483
+be used as if it still owned it.
+
+6
+00:00:11.563 --> 00:00:15.100
+This rule prevents two parts of the
+program from both believing they are responsible
+
+7
+00:00:15.180 --> 00:00:16.127
+for the same resource.
+
+8
+00:00:16.207 --> 00:00:18.051
+Move semantics are common in everyday
+Rust.
+
+9
+00:00:18.131 --> 00:00:21.618
+Passing a `String` into a function that
+takes ownership means the function now owns
+
+10
+00:00:21.698 --> 00:00:22.346
+that `String`.
+
+11
+00:00:22.426 --> 00:00:24.868
+Returning a value transfers ownership back
+to the caller.
+
+12
+00:00:24.948 --> 00:00:28.535
+Assigning one owned value to another
+binding can make the original binding unusable.
+
+13
+00:00:28.615 --> 00:00:32.252
+These behaviors make responsibility
+explicit instead of leaving cleanup ambiguous.
+
+14
+00:00:32.332 --> 00:00:33.877
+Some simple types implement `Copy`.
+
+15
+00:00:33.957 --> 00:00:37.345
+These values can be duplicated implicitly
+because copying them is predictable,
+
+16
+00:00:37.425 --> 00:00:40.365
+inexpensive, and does not create confusing
+cleanup responsibility.
+
+17
+00:00:40.445 --> 00:00:42.288
+Integers and booleans are common examples.
+
+18
+00:00:42.368 --> 00:00:44.561
+The important concept is not the exact
+list of types,
+
+19
+00:00:44.641 --> 00:00:47.730
+but the distinction between moving
+ownership and copying simple values.
+
+20
+00:00:47.810 --> 00:00:49.703
+`Clone` is different because it is
+explicit.
+
+21
+00:00:49.783 --> 00:00:51.727
+Cloning may allocate memory, duplicate
+data,
+
+22
+00:00:51.807 --> 00:00:53.849
+or perform a deeper operation than a
+simple copy.
+
+23
+00:00:53.929 --> 00:00:57.268
+A clone can be exactly the right design
+when two owners need independent values,
+
+24
+00:00:57.348 --> 00:01:00.836
+but unnecessary cloning can hide unclear
+ownership design and add avoidable cost.
+
+25
+00:01:00.916 --> 00:01:04.104
+Reviewers should ask whether a clone
+represents a real need or a workaround.
+
+26
+00:01:04.184 --> 00:01:05.829
+`Drop` connects ownership to cleanup.
+
+27
+00:01:05.909 --> 00:01:07.204
+When an owner goes out of scope,
+
+28
+00:01:07.284 --> 00:01:09.576
+Rust can release resources associated with
+the value.
+
+29
+00:01:09.656 --> 00:01:13.044
+That resource might be memory, a file
+handle, a network connection, a lock guard,
+
+30
+00:01:13.124 --> 00:01:14.669
+or another cleanup responsibility.
+
+31
+00:01:14.749 --> 00:01:16.393
+Understanding moves, copies, clones,
+
+32
+00:01:16.473 --> 00:01:19.214
+and drops helps developers reason about
+what exists, who owns it,
+
+33
+00:01:19.294 --> 00:01:20.340
+and when cleanup occurs.
