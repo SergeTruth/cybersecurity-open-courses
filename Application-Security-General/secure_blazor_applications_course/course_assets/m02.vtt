@@ -1,0 +1,184 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.194
+Hosting model and render mode shape the
+security boundary for a Blazor application.
+
+2
+00:00:08.274 --> 00:00:15.643
+The same component model can be used in
+designs where interaction is processed on
+
+3
+00:00:15.723 --> 00:00:21.575
+the server, where code runs in the browser
+through WebAssembly,
+
+4
+00:00:21.655 --> 00:00:26.857
+or where static and interactive rendering
+are combined.
+
+5
+00:00:26.937 --> 00:00:32.247
+Those choices affect where code runs,
+where data appears,
+
+6
+00:00:32.327 --> 00:00:36.770
+and which layer must enforce trusted
+decisions.
+
+7
+00:00:36.850 --> 00:00:40.426
+In server-side interactive behavior,
+
+8
+00:00:40.506 --> 00:00:45.383
+UI events are processed through a server
+connection.
+
+9
+00:00:45.463 --> 00:00:51.531
+The browser displays the interface and
+sends interaction events,
+
+10
+00:00:51.611 --> 00:00:56.163
+but protected decisions can remain on the
+server.
+
+11
+00:00:56.243 --> 00:01:02.962
+This can be useful when the application
+needs server-side access to data,
+
+12
+00:01:03.042 --> 00:01:06.510
+policy, services, or configuration,
+
+13
+00:01:06.590 --> 00:01:12.116
+but the design still needs authentication,
+authorization,
+
+14
+00:01:12.196 --> 00:01:17.181
+connection handling, logging, and safe
+data shaping.
+
+15
+00:01:17.261 --> 00:01:24.847
+In Blazor WebAssembly, application code is
+delivered to and executed in the user's
+
+16
+00:01:24.927 --> 00:01:25.794
+browser.
+
+17
+00:01:25.874 --> 00:01:31.184
+That code should be treated like any other
+browser client.
+
+18
+00:01:31.264 --> 00:01:35.274
+It can improve the experience and call
+APIs,
+
+19
+00:01:35.354 --> 00:01:41.423
+but it should not contain secrets or
+trusted authorization logic.
+
+20
+00:01:41.503 --> 00:01:47.896
+Anything shipped to the browser should be
+assumed visible to the user.
+
+21
+00:01:47.976 --> 00:01:52.203
+Blazor Web Apps add more render-mode
+choices,
+
+22
+00:01:52.283 --> 00:01:57.918
+including static rendering, interactive
+server rendering,
+
+23
+00:01:57.998 --> 00:02:04.392
+interactive WebAssembly rendering, and
+interactive auto behavior.
+
+24
+00:02:04.472 --> 00:02:09.240
+These modes can be mixed across pages or
+components.
+
+25
+00:02:09.320 --> 00:02:16.689
+A design that mixes modes should document
+where each sensitive workflow runs and
+
+26
+00:02:16.769 --> 00:02:20.562
+where protected decisions are enforced.
+
+27
+00:02:20.642 --> 00:02:24.977
+Render mode choices also affect data
+exposure.
+
+28
+00:02:25.057 --> 00:02:31.559
+A component should receive only the data
+it needs to render and operate.
+
+29
+00:02:31.639 --> 00:02:38.032
+Sensitive records, administrative fields,
+server-only decisions,
+
+30
+00:02:38.112 --> 00:02:45.373
+and internal diagnostic values should not
+be sent to components that do not need
+
+31
+00:02:45.453 --> 00:02:45.995
+them.
+
+32
+00:02:46.075 --> 00:02:51.927
+Data minimization matters even when the
+user is authenticated.
+
+33
+00:02:52.007 --> 00:03:00.135
+Development convenience should not
+determine production render mode or authorization
+
+34
+00:03:00.215 --> 00:03:00.973
+design.
+
+35
+00:03:01.053 --> 00:03:08.097
+A render mode that is easy during
+prototyping may not be the right boundary for
+
+36
+00:03:08.177 --> 00:03:09.369
+production.
+
+37
+00:03:09.449 --> 00:03:14.976
+Teams should review the hosting model,
+data flow, API shape,
+
+38
+00:03:15.056 --> 00:03:22.100
+browser-delivered assets, and
+authorization enforcement before release.

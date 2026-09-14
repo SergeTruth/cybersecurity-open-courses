@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary",
+  "graphicAlt": "Secure endpoints combine identity, access control, validated input, intentional output, contextual limits, and visibility, grounded in least privilege and ongoing review.",
+  "narration": "API security protects the interfaces that expose application data, business logic, and service operations. APIs connect users, devices, services, partners, and internal systems. That makes them essential to modern software and also makes them a direct path to sensitive actions. A secure API is not simply reachable over HTTPS or hidden behind a user interface. It is explicit about identity, access, input, output, abuse limits, and operational visibility.\n\nStrong API security starts with clear trust boundaries. Know which endpoints are public, partner-facing, internal, service-to-service, or webhook-driven. Know where tokens are validated, where authorization is enforced, where request contracts are checked, and where responses are shaped. Authentication identifies the caller, but authorization decides whether the caller can perform the requested operation on the specific resource in the specific tenant or context.\n\nValidation, response design, and abuse controls reduce both security and reliability risk. APIs should validate fields, formats, ranges, arrays, unknown properties, and request sizes before data reaches sensitive code. Responses should return only what the caller needs. Rate limits, quotas, pagination limits, resource controls, and replay-aware workflows help APIs remain dependable under automation pressure.\n\nThe final takeaway is that API security is an operational discipline as much as an implementation task. Logs, tests, specifications, monitoring, and regular review keep endpoints understandable as systems change. The goal is to make every API endpoint explicit, least-privileged, validated, observable, and resilient against misuse.",
+  "narrationPoints": [
+    "API security protects the interfaces that expose application data, business logic, and service operations.",
+    "Strong API security starts with clear trust boundaries.",
+    "Validation, response design, and abuse controls reduce both security and reliability risk.",
+    "The final takeaway is that API security is an operational discipline as much as an implementation task."
+  ]
+};

@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.757
+Every request input should be treated as
+untrusted until validated on the server.
+
+2
+00:00:08.837 --> 00:00:15.778
+Path parameters, query parameters,
+headers, cookies, JSON bodies,
+
+3
+00:00:15.858 --> 00:00:22.560
+form submissions, and uploaded files can
+all influence behavior.
+
+4
+00:00:22.640 --> 00:00:28.504
+Frontend validation helps users correct
+mistakes early,
+
+5
+00:00:28.584 --> 00:00:32.413
+but it is not an enforcement boundary.
+
+6
+00:00:32.493 --> 00:00:38.477
+Browser clients can be modified, requests
+can be replayed,
+
+7
+00:00:38.557 --> 00:00:44.899
+and API handlers can be called without the
+intended interface.
+
+8
+00:00:44.979 --> 00:00:50.604
+The server must validate before sensitive
+processing.
+
+9
+00:00:50.684 --> 00:00:57.386
+Schema validation concepts help make
+request contracts visible.
+
+10
+00:00:57.466 --> 00:01:05.484
+Handlers should check type, shape,
+required fields, optional fields, length,
+
+11
+00:01:05.564 --> 00:01:12.146
+range, format, enum values, and content
+type where appropriate.
+
+12
+00:01:12.226 --> 00:01:18.448
+Business-rule validation is separate from
+type validation.
+
+13
+00:01:18.528 --> 00:01:26.307
+A string may be a valid identifier format
+but still refer to a resource the user
+
+14
+00:01:26.387 --> 00:01:27.943
+cannot access.
+
+15
+00:01:28.023 --> 00:01:32.929
+A number may be in range but still violate
+policy.
+
+16
+00:01:33.009 --> 00:01:40.788
+A form may be structurally valid but still
+request an unauthorized mutation.
+
+17
+00:01:40.868 --> 00:01:48.527
+API routes, route handlers, and server
+actions should be explicit, narrow,
+
+18
+00:01:48.607 --> 00:01:50.282
+and reviewable.
+
+19
+00:01:50.362 --> 00:01:56.825
+Mutation paths need particular care
+because they change state.
+
+20
+00:01:56.905 --> 00:02:04.444
+The code should define which fields may be
+updated, avoid mass assignment,
+
+21
+00:02:04.524 --> 00:02:07.276
+apply request size limits,
+
+22
+00:02:07.356 --> 00:02:12.861
+validate file uploads before downstream
+processing,
+
+23
+00:02:12.941 --> 00:02:20.122
+handle parsing errors safely, and return
+consistent error responses.
+
+24
+00:02:20.202 --> 00:02:28.459
+The handler should not rely on hidden
+assumptions from the page that submitted the
+
+25
+00:02:28.539 --> 00:02:29.496
+request.
+
+26
+00:02:29.576 --> 00:02:34.363
+Safe validation is also an operations
+feature.
+
+27
+00:02:34.443 --> 00:02:41.863
+Clear request contracts make tests easier,
+reduce surprising behavior,
+
+28
+00:02:41.943 --> 00:02:45.174
+and give logs better structure.
+
+29
+00:02:45.254 --> 00:02:53.272
+When validation fails, the response should
+help the caller correct the request
+
+30
+00:02:53.352 --> 00:02:56.463
+without revealing internals.
+
+31
+00:02:56.543 --> 00:03:01.570
+Internal logs can record safe diagnostic
+detail,
+
+32
+00:03:01.650 --> 00:03:09.189
+but they should avoid secrets, tokens,
+session values, private payloads,
+
+33
+00:03:09.269 --> 00:03:12.500
+and unnecessary personal data.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authentication, Tokens, and Session Choices",
+  "graphicAlt": "Token validation checks signature, issuer, audience, and time; a known caller still passes a separate action authorization gate.",
+  "narration": "Authentication verifies who or what is making a request. FastAPI applications may use bearer tokens, API keys, OAuth flows, OpenID Connect concepts, mTLS, browser sessions, or service-to-service credentials depending on the environment. These patterns have different tradeoffs, but the stable principle is the same: identify the caller through a trusted process, then make sure the result is carried into the path operation in a clear and reviewable way.\n\nSigned token validation should check more than whether a token exists. At a high level, validation may include signature integrity, issuer, audience, expiration, not-before time, intended use, and the application's trust relationship with the identity provider. A token from the wrong issuer, intended for another service, expired, or missing required context should not be treated as a valid grant of access. Presence is not proof of permission.\n\nBrowser sessions and API tokens solve related but different problems. Browser clients may involve cookies, same-site behavior, CSRF considerations, and user interaction. Machine clients may use tokens or keys with service identity and narrower permissions. MFA and step-up authentication can be useful for high-risk actions, but they must be integrated into the actual authorization flow rather than treated as a label on the account.\n\nAuthentication success should not imply broad access. A valid user token may still lack permission for an administrative endpoint. A valid service token may be limited to one integration. A valid browser session may still need CSRF protection for a state-changing action. FastAPI security is stronger when identity, token validity, user intent, and authorization are treated as separate checks that happen in the right order.",
+  "narrationPoints": [
+    "Authentication verifies who or what is making a request.",
+    "Signed token validation should check more than whether a token exists.",
+    "Browser sessions and API tokens solve related but different problems.",
+    "Authentication success should not imply broad access."
+  ]
+};

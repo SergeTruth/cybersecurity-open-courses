@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.829
+Authentication answers the question, who
+is making this request.
+
+2
+00:00:05.909 --> 00:00:10.761
+Authorization answers, what is that
+identity allowed to do.
+
+3
+00:00:10.841 --> 00:00:16.265
+Flask applications often combine login
+forms, password handling,
+
+4
+00:00:16.345 --> 00:00:22.625
+session cookies, password reset flows, API
+tokens, SSO, or MFA integrations.
+
+5
+00:00:22.705 --> 00:00:26.987
+A secure design keeps those
+responsibilities clear.
+
+6
+00:00:27.067 --> 00:00:33.442
+Successful authentication should establish
+an identity and session context,
+
+7
+00:00:33.522 --> 00:00:39.707
+but it should not automatically grant
+access to every route, record, tenant,
+
+8
+00:00:39.787 --> 00:00:41.976
+or administrative action.
+
+9
+00:00:42.056 --> 00:00:49.002
+Password handling should rely on
+established password hashing and identity patterns
+
+10
+00:00:49.082 --> 00:00:53.268
+rather than homegrown storage or
+comparison logic.
+
+11
+00:00:53.348 --> 00:00:58.962
+MFA integration should be treated as part
+of the authentication flow,
+
+12
+00:00:59.042 --> 00:01:04.847
+with attention to enrollment, recovery,
+reset, and step-up decisions.
+
+13
+00:01:04.927 --> 00:01:11.587
+Account recovery is especially important
+because a weak reset path can undermine a
+
+14
+00:01:11.667 --> 00:01:13.190
+strong login path.
+
+15
+00:01:13.270 --> 00:01:16.410
+The goal is not to memorize one library,
+
+16
+00:01:16.490 --> 00:01:22.580
+but to understand which parts of the flow
+need protection and verification.
+
+17
+00:01:22.660 --> 00:01:27.703
+Flask sessions commonly rely on signed
+cookies at a high level,
+
+18
+00:01:27.783 --> 00:01:33.682
+meaning the client may hold session data
+protected against tampering by a
+
+19
+00:01:33.762 --> 00:01:35.475
+server-side secret.
+
+20
+00:01:35.555 --> 00:01:42.406
+Signing is not the same as
+confidentiality, and session content should be minimized.
+
+21
+00:01:42.486 --> 00:01:46.673
+Do not store sensitive records, broad
+permissions,
+
+22
+00:01:46.753 --> 00:01:50.273
+or large state in a client-carried
+session.
+
+23
+00:01:50.353 --> 00:01:54.730
+Server-side session stores can reduce some
+exposure,
+
+24
+00:01:54.810 --> 00:01:58.236
+but they add lifecycle, storage, cleanup,
+
+25
+00:01:58.316 --> 00:02:02.978
+and availability considerations that still
+need design.
+
+26
+00:02:03.058 --> 00:02:07.721
+Cookies need deliberate attributes and
+lifecycle rules.
+
+27
+00:02:07.801 --> 00:02:14.557
+Secure transport, HTTP-only behavior,
+same-site behavior, expiration, renewal,
+
+28
+00:02:14.637 --> 00:02:17.586
+and logout handling all affect risk.
+
+29
+00:02:17.666 --> 00:02:24.137
+Session fixation concerns appear when an
+attacker-controlled or stale session
+
+30
+00:02:24.217 --> 00:02:27.166
+survives login or privilege change,
+
+31
+00:02:27.246 --> 00:02:33.146
+so applications should refresh session
+state at important transitions.
+
+32
+00:02:33.226 --> 00:02:39.982
+Logout should invalidate the relevant
+server-side state where applicable and make
+
+33
+00:02:40.062 --> 00:02:42.250
+the client state unusable.
+
+34
+00:02:42.330 --> 00:02:48.420
+Sessions are small security contracts, and
+they should be treated that way.

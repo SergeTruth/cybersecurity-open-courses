@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.855
+Next.js applications can render and fetch
+data in several ways.
+
+2
+00:00:05.935 --> 00:00:10.001
+Some work happens on the server for each
+request.
+
+3
+00:00:10.081 --> 00:00:13.651
+Some output may be generated ahead of
+time.
+
+4
+00:00:13.731 --> 00:00:18.293
+Some behavior runs in the browser after
+the page loads.
+
+5
+00:00:18.373 --> 00:00:23.828
+Some components or handlers may execute
+only in server contexts,
+
+6
+00:00:23.908 --> 00:00:29.065
+while client components are delivered to
+the user's browser.
+
+7
+00:00:29.145 --> 00:00:35.988
+These distinctions are security-relevant
+because secrets, trusted decisions,
+
+8
+00:00:36.068 --> 00:00:41.125
+and sensitive data belong on the server
+side of the boundary.
+
+9
+00:00:41.205 --> 00:00:46.263
+Data crossing from server to browser
+should be intentional.
+
+10
+00:00:46.343 --> 00:00:51.698
+Anything sent to the client can be
+inspected, copied, modified,
+
+11
+00:00:51.778 --> 00:00:53.563
+or replayed by a user.
+
+12
+00:00:53.643 --> 00:00:58.007
+That does not make the browser hostile in
+every case,
+
+13
+00:00:58.087 --> 00:01:04.434
+but it means the browser is not a place to
+keep server-only secrets or enforce
+
+14
+00:01:04.514 --> 00:01:06.795
+sensitive authorization.
+
+15
+00:01:06.875 --> 00:01:11.238
+A component can hide a field or button for
+usability,
+
+16
+00:01:11.318 --> 00:01:17.963
+but the server still needs to decide
+whether the current identity may access the
+
+17
+00:01:18.043 --> 00:01:20.324
+data or perform the action.
+
+18
+00:01:20.404 --> 00:01:24.371
+Build-time behavior also deserves
+attention.
+
+19
+00:01:24.451 --> 00:01:31.690
+Static generation and build outputs can
+accidentally include data that was available
+
+20
+00:01:31.770 --> 00:01:35.539
+during a build but should not be public
+later.
+
+21
+00:01:35.619 --> 00:01:42.759
+Runtime rendering can accidentally return
+authorization-dependent data under the
+
+22
+00:01:42.839 --> 00:01:44.426
+wrong cache scope.
+
+23
+00:01:44.506 --> 00:01:47.679
+Middleware can shape requests early,
+
+24
+00:01:47.759 --> 00:01:54.106
+but it should not become the only place
+where business authorization lives.
+
+25
+00:01:54.186 --> 00:02:00.930
+Each rendering and routing path should
+have a clear explanation of what it trusts
+
+26
+00:02:01.010 --> 00:02:02.696
+and what it exposes.
+
+27
+00:02:02.776 --> 00:02:08.924
+The durable principle is simple: know
+where code runs before trusting it.
+
+28
+00:02:09.004 --> 00:02:13.467
+Browser code is for user interaction,
+presentation,
+
+29
+00:02:13.547 --> 00:02:16.621
+and calls back to trusted endpoints.
+
+30
+00:02:16.701 --> 00:02:23.048
+Server code is where secrets, privileged
+data access, session validation,
+
+31
+00:02:23.128 --> 00:02:26.699
+and authorization decisions should live.
+
+32
+00:02:26.779 --> 00:02:33.423
+Framework behavior and platform
+configuration can support these boundaries,
+
+33
+00:02:33.503 --> 00:02:38.660
+but application logic must still enforce
+them deliberately.

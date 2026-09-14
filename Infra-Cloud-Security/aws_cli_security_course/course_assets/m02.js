@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Accounts, Regions, Profiles, and Target Validation",
+  "graphicAlt": "Account, region, role, and resource are checked against approved scope before a change; any mismatch stops the workflow.",
+  "narration": "AWS CLI commands run against a selected account, region, profile, and credential context. In automation, those values may come from AWS configuration files, shared credentials files, environment variables, SSO sessions, assumed roles, CI/CD variables, or active local profiles. A secure script should not assume that the current default profile or region is correct just because a command would run.\n\nTarget validation should happen before any meaningful change. The script should confirm the expected account, partition when relevant, region, profile name, environment label, role, and resource identifiers. A deployment or operations script should make it hard to mix a production resource name with a development profile, or a staging role with a production action. The target should be visible before the script reaches an AWS API call that changes state.\n\nDevelopment, staging, and production should have separate assumptions, credentials, variables, and approval paths. A fast local workflow may be appropriate for development, but a production workflow may need a release ticket, protected branch, change window, operator confirmation, or CI/CD environment approval. The script should reflect those differences instead of relying on naming conventions alone.\n\nEnvironment variables and CI/CD variables should be treated as input, not unquestioned truth. They can be missing, stale, inherited, or inconsistent with the requested action. A good AWS CLI helper validates target context early and stops if the account, region, profile, role, or resource does not match the approved scope. The safest wrong-target change is the one that fails before it starts.",
+  "narrationPoints": [
+    "AWS CLI commands run against a selected account, region, profile, and credential context.",
+    "Target validation should happen before any meaningful change.",
+    "Development, staging, and production should have separate assumptions, credentials, variables, and approval paths.",
+    "Environment variables and CI/CD variables should be treated as input, not unquestioned truth."
+  ]
+};

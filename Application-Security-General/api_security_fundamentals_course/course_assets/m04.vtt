@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.640
+Authorization decides whether an
+authenticated caller may perform an action on a
+
+2
+00:00:07.720 --> 00:00:08.651
+resource.
+
+3
+00:00:08.731 --> 00:00:16.284
+In APIs, object-level authorization is
+especially important because many endpoints
+
+4
+00:00:16.364 --> 00:00:18.848
+accept direct identifiers.
+
+5
+00:00:18.928 --> 00:00:25.964
+A caller may be allowed to view their own
+order, but not another customer's order.
+
+6
+00:00:26.044 --> 00:00:32.873
+They may be allowed to edit a project they
+own, but not one in a different tenant.
+
+7
+00:00:32.953 --> 00:00:38.230
+Every sensitive object access should be
+checked in context.
+
+8
+00:00:38.310 --> 00:00:45.346
+Function-level authorization controls
+which operations a caller may perform.
+
+9
+00:00:45.426 --> 00:00:50.496
+A user who can view an account may not be
+allowed to close it.
+
+10
+00:00:50.576 --> 00:00:56.992
+A support operator may reset a password
+but not change billing ownership.
+
+11
+00:00:57.072 --> 00:01:02.349
+A service account may read inventory but
+not update pricing.
+
+12
+00:01:02.429 --> 00:01:07.913
+Role-based access control, attribute-based
+access control,
+
+13
+00:01:07.993 --> 00:01:15.236
+relationship-based rules, and policy
+engines can all help when they are applied at
+
+14
+00:01:15.316 --> 00:01:19.972
+the operation that actually changes or
+reveals data.
+
+15
+00:01:20.052 --> 00:01:24.191
+Tenant isolation deserves special
+attention.
+
+16
+00:01:24.271 --> 00:01:31.514
+Multi-tenant APIs must ensure that tenant
+context cannot be chosen casually by the
+
+17
+00:01:31.594 --> 00:01:32.318
+client.
+
+18
+00:01:32.398 --> 00:01:36.020
+A tenant ID in a header, path, token
+claim,
+
+19
+00:01:36.100 --> 00:01:43.757
+or request body should be validated
+against trusted server-side authorization state.
+
+20
+00:01:43.837 --> 00:01:50.045
+Weak tenant checks can expose one
+customer's data to another customer,
+
+21
+00:01:50.125 --> 00:01:54.781
+even when authentication appears to work
+correctly.
+
+22
+00:01:54.861 --> 00:02:00.552
+Avoid relying on hidden UI controls or
+client-side enforcement.
+
+23
+00:02:00.632 --> 00:02:04.668
+Attackers and testers can call APIs
+directly.
+
+24
+00:02:04.748 --> 00:02:07.335
+Mobile apps can be inspected.
+
+25
+00:02:07.415 --> 00:02:10.415
+Browser requests can be modified.
+
+26
+00:02:10.495 --> 00:02:13.186
+Internal clients can be buggy.
+
+27
+00:02:13.266 --> 00:02:19.681
+The backend should enforce authorization
+at every sensitive operation,
+
+28
+00:02:19.761 --> 00:02:26.590
+using least-privileged service permissions
+and explicit ownership checks.
+
+29
+00:02:26.670 --> 00:02:31.223
+If an API endpoint can affect data or
+business state,
+
+30
+00:02:31.303 --> 00:02:36.580
+the server must decide whether the caller
+is allowed to do it.

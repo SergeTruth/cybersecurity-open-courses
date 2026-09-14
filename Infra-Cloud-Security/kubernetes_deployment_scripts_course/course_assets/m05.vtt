@@ -1,0 +1,134 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.402
+Kubernetes deployments often come from
+manifests, Helm charts,
+
+2
+00:00:06.482 --> 00:00:12.061
+Kustomize overlays, generated files, or
+release artifacts.
+
+3
+00:00:12.141 --> 00:00:19.438
+The source may be reviewed, but the
+rendered output is what the cluster receives.
+
+4
+00:00:19.518 --> 00:00:25.097
+A values file, overlay, environment
+setting, chart default,
+
+5
+00:00:25.177 --> 00:00:32.581
+or generation step can change the
+effective resources in ways that are not obvious
+
+6
+00:00:32.661 --> 00:00:35.344
+from the base manifest alone.
+
+7
+00:00:35.424 --> 00:00:39.716
+Rendered output can affect security
+behavior.
+
+8
+00:00:39.796 --> 00:00:45.483
+It can change images, labels, annotations,
+service accounts,
+
+9
+00:00:45.563 --> 00:00:52.859
+network exposure, volume mounts, resource
+limits, security contexts, probes,
+
+10
+00:00:52.939 --> 00:00:55.515
+and environment variables.
+
+11
+00:00:55.595 --> 00:01:02.891
+A small values change can alter which
+account a workload uses or whether a service
+
+12
+00:01:02.971 --> 00:01:04.795
+becomes reachable.
+
+13
+00:01:04.875 --> 00:01:12.708
+Deployment scripts should therefore make
+effective output visible where practical,
+
+14
+00:01:12.788 --> 00:01:16.544
+especially before high-impact applies.
+
+15
+00:01:16.624 --> 00:01:21.774
+Diff and review workflows help connect
+intent to action.
+
+16
+00:01:21.854 --> 00:01:29.151
+A script can render the effective
+manifest, compare intended resource changes,
+
+17
+00:01:29.231 --> 00:01:34.703
+and require review or approval for
+sensitive environments.
+
+18
+00:01:34.783 --> 00:01:37.358
+This reduces blind applies,
+
+19
+00:01:37.438 --> 00:01:44.842
+where generated output is sent to the
+cluster without anyone seeing what changed.
+
+20
+00:01:44.922 --> 00:01:46.961
+Diffs are not perfect,
+
+21
+00:01:47.041 --> 00:01:53.372
+but they help operators and reviewers
+reason about the actual change.
+
+22
+00:01:53.452 --> 00:01:58.602
+Versioned deployment artifacts improve
+traceability.
+
+23
+00:01:58.682 --> 00:02:05.120
+A release should connect the approved
+source, chart, values, overlay,
+
+24
+00:02:05.200 --> 00:02:11.531
+image reference, and rendered output where
+the workflow supports it.
+
+25
+00:02:11.611 --> 00:02:17.835
+That connection helps answer what was
+deployed, why it was approved,
+
+26
+00:02:17.915 --> 00:02:21.885
+and how to reproduce or roll back the
+change.
+
+27
+00:02:21.965 --> 00:02:29.690
+Secure deployment scripting makes that
+chain visible instead of relying on memory or
+
+28
+00:02:29.770 --> 00:02:31.380
+ad hoc job output.

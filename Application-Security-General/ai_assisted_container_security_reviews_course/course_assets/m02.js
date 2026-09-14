@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Container Security Review Scope",
+  "graphicAlt": "Approved repositories, images, clusters, and artifacts remain inside the review boundary, while out-of-scope environments require approval and sensitive evidence is protected.",
+  "narration": "Scope defines what the review is allowed to examine and what it should avoid. A container security review may include application repositories, container images, registries, Dockerfiles, compose files, Kubernetes manifests, Helm charts, CI/CD pipelines, runtime environments, and cloud or orchestration configuration. The scope should name the in-scope repositories, images, namespaces, clusters, environments, and review activities.\n\nRules of engagement should also define data handling. Container reviews can expose secrets, environment variables, internal package names, source code, vulnerability reports, registry metadata, deployment manifests, and client-specific architecture details. AI-assisted workflows should keep that material inside approved systems and avoid unnecessary disclosure to public services. Sensitive values should be minimized or redacted where possible.\n\nClient boundaries and environment boundaries matter. A development image may be in scope while production runtime configuration is not. A registry may contain images from multiple teams or tenants. A Kubernetes cluster may host workloads unrelated to the engagement. AI-generated checklists and summaries should be reviewed against those boundaries so the work remains authorized and focused.\n\nAvoid out-of-scope testing or intrusive actions. A review can often be performed from artifacts such as Dockerfiles, manifests, scanner reports, SBOMs, registry metadata, and approved configuration exports. When runtime validation is needed, it should follow the agreed plan and change-control expectations. Scope is what keeps AI assistance helpful instead of turning it into a source of risk.",
+  "narrationPoints": [
+    "Scope defines what the review is allowed to examine and what it should avoid.",
+    "Rules of engagement should also define data handling.",
+    "Client boundaries and environment boundaries matter.",
+    "Avoid out-of-scope testing or intrusive actions."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Environment Separation, Promotion, and Change Control",
+  "graphicAlt": "A change is tested and approved as it moves through development, staging, and production, while each environment keeps separate identities, state, and variables.",
+  "narration": "Development, staging, and production environments should not share the same assumptions, credentials, state, variables, or approval paths. IaC workflows should make these boundaries explicit. Environment separation reduces the chance that a lower-risk workflow can affect production resources or expose production data.\n\nPromotion gives teams a controlled way to build confidence. A change can be tested in a lower-risk environment, reviewed, and then promoted to production through a path that preserves evidence. Teams should know what changed, who reviewed it, which plan was approved, which artifact or commit was promoted, and which environment received the update.\n\nHigh-impact changes may require approval gates, change windows, stakeholder coordination, staged application, or canary-style rollout where the platform and workflow support it. The goal is controlled confidence, not blind speed. Some changes are safe to apply frequently. Others affect foundational networking, identity, encryption, storage, or production availability and deserve stronger gates.\n\nThe workflow should prevent accidental production applies. That means explicit target selection, protected production credentials, separate state backends, protected branches or tags, and clear approval requirements. If a script or pipeline cannot confirm the intended environment, it should fail before it changes anything. Controlled promotion turns infrastructure change into a reviewable operational process.",
+  "narrationPoints": [
+    "Development, staging, and production environments should not share the same assumptions, credentials, state, variables, or approval paths.",
+    "Promotion gives teams a controlled way to build confidence.",
+    "High-impact changes may require approval gates, change windows, stakeholder coordination, staged application, or canary-style rollout where the platform and workflow support it.",
+    "The workflow should prevent accidental production applies."
+  ]
+};

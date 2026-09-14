@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.044
+npm scripts are powerful because they give
+projects a standard way to run build,
+
+2
+00:00:08.124 --> 00:00:13.641
+test, lint, prepare, release, and
+operational commands.
+
+3
+00:00:13.721 --> 00:00:20.927
+Package lifecycle hooks can also run
+automatically during installation or
+
+4
+00:00:21.007 --> 00:00:22.245
+publishing.
+
+5
+00:00:22.325 --> 00:00:27.617
+This power is useful, but it creates a
+security concern:
+
+6
+00:00:27.697 --> 00:00:35.466
+installing a package can become code
+execution in the developer workstation or CI
+
+7
+00:00:35.546 --> 00:00:36.897
+environment.
+
+8
+00:00:36.977 --> 00:00:42.269
+That execution may have access to files,
+network paths,
+
+9
+00:00:42.349 --> 00:00:47.753
+and environment variables available to the
+npm process.
+
+10
+00:00:47.833 --> 00:00:53.801
+Lifecycle script risk is especially
+important in automation.
+
+11
+00:00:53.881 --> 00:00:59.961
+CI systems often hold tokens, cloud
+credentials, signing keys,
+
+12
+00:01:00.041 --> 00:01:05.670
+deployment permissions, or access to
+private registries.
+
+13
+00:01:05.750 --> 00:01:11.493
+If installation scripts run in a context
+with broad secrets,
+
+14
+00:01:11.573 --> 00:01:17.653
+a compromised dependency has a much more
+valuable opportunity.
+
+15
+00:01:17.733 --> 00:01:23.362
+Teams should reduce secret exposure during
+install steps,
+
+16
+00:01:23.442 --> 00:01:27.270
+separate build and deploy permissions,
+
+17
+00:01:27.350 --> 00:01:34.444
+and avoid placing high-value credentials
+in jobs that only need to restore
+
+18
+00:01:34.524 --> 00:01:35.987
+dependencies.
+
+19
+00:01:36.067 --> 00:01:42.260
+Practical controls include reviewing
+scripts in package.json,
+
+20
+00:01:42.340 --> 00:01:48.420
+watching for new install-time behavior in
+dependency updates,
+
+21
+00:01:48.500 --> 00:01:55.593
+using least-privilege CI jobs, preferring
+clean ephemeral build agents,
+
+22
+00:01:55.673 --> 00:02:03.442
+and using install options that ignore
+scripts where the workflow can tolerate it.
+
+23
+00:02:03.522 --> 00:02:11.291
+Ignoring scripts is not universal because
+some packages legitimately need build
+
+24
+00:02:11.371 --> 00:02:12.047
+steps.
+
+25
+00:02:12.127 --> 00:02:19.783
+The key is to know when code will execute
+and to make that execution environment as
+
+26
+00:02:19.863 --> 00:02:22.340
+constrained as possible.

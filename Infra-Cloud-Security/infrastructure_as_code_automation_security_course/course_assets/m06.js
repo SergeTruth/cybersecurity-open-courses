@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Policy, Validation, and Security Guardrails",
+  "graphicAlt": "A proposed infrastructure change either meets policy or goes through visible exception review with ownership, approval, and expiry where needed.",
+  "narration": "IaC security improves when teams check changes before they reach production. Static analysis, policy-as-code, schema validation, required metadata, naming rules, tagging standards, and environment-specific checks can catch many issues early. These checks turn repeated review questions into consistent automation without removing human judgment from high-impact decisions.\n\nGuardrails can look for missing encryption, broad network exposure, weak identity scope, missing logging, public storage settings, unsupported regions, missing ownership tags, or environment-specific policy violations. They can also enforce secure defaults and reusable standards. The best guardrails focus on settings that matter and provide feedback that engineers can understand and fix.\n\nExceptions should be visible, documented, and approved by the right owners. Some exceptions may be time-bounded. Others may require compensating controls or additional monitoring. An undocumented exception becomes a quiet policy bypass. A documented exception becomes a decision that can be reviewed, revisited, and retired when the underlying need changes.\n\nGuardrails should help teams move safely, not become hidden magic that nobody understands. If a policy fails, the message should explain the issue and the expected safer pattern. If a rule is too noisy, teams may work around it. Maintainable policy-as-code balances enforcement with clarity, ownership, and continuous improvement based on real failures, drift, and review findings.",
+  "narrationPoints": [
+    "IaC security improves when teams check changes before they reach production.",
+    "Guardrails can look for missing encryption, broad network exposure, weak identity scope, missing logging, public storage settings, unsupported regions, missing ownership tags, or environment-specific policy violations.",
+    "Exceptions should be visible, documented, and approved by the right owners.",
+    "Guardrails should help teams move safely, not become hidden magic that nobody understands."
+  ]
+};

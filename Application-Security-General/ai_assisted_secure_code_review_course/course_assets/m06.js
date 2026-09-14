@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Reviewing AI Output Critically",
+  "graphicAlt": "AI claims are checked against code, configuration, tests, and versions, then supported or rejected with documented reasons while reviewers remain alert to missed issues.",
+  "narration": "AI output can be useful and wrong at the same time. A hallucination is a confident statement that is unsupported or incorrect. In code review, that may mean inventing a missing check, naming a function that does not exist, assuming a framework version, or describing a data flow that is not actually present. False positives are reported issues that are not valid in context. False negatives are issues the AI misses entirely. Both are normal enough that critical review is mandatory.\n\nVerification means checking claims against the code, configuration, tests, dependency versions, deployment assumptions, and runtime behavior when that information is available. If the AI says access control is missing, find the route, middleware, service call, policy check, and object ownership rule. If it says input validation is weak, identify exactly which input reaches which operation without an adequate check. If it recommends a library function, confirm that advice is appropriate for the language, framework, and version.\n\nDistinguish exploitability from theoretical weakness. A pattern may be risky in general but not reachable in the scoped context. Another issue may look small but become serious because of a trust boundary or privilege level. The reviewer owns that judgment. Use AI to generate questions, identify evidence to collect, and draft explanations, but do not let confident language substitute for analysis. The right question is not whether the model sounds certain. The right question is whether the evidence supports the finding.",
+  "narrationPoints": [
+    "AI output can be useful and wrong at the same time.",
+    "Verification means checking claims against the code, configuration, tests, dependency versions, deployment assumptions, and runtime behavior when that information is available.",
+    "Distinguish exploitability from theoretical weakness."
+  ]
+};

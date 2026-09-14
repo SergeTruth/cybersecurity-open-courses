@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.719
+Authentication answers the question,
+
+2
+00:00:03.799 --> 00:00:08.871
+who is making this request or using this
+application session.
+
+3
+00:00:08.951 --> 00:00:13.828
+Blazor relies on ASP.NET Core
+authentication mechanisms,
+
+4
+00:00:13.908 --> 00:00:20.444
+but the details depend on hosting model,
+identity provider, browser behavior,
+
+5
+00:00:20.524 --> 00:00:27.059
+and whether the application is calling
+protected APIs from server-side code or
+
+6
+00:00:27.139 --> 00:00:29.285
+browser-delivered code.
+
+7
+00:00:29.365 --> 00:00:35.706
+Authentication state lets components
+understand the current user context.
+
+8
+00:00:35.786 --> 00:00:40.858
+A component may use that state to show a
+signed-in experience,
+
+9
+00:00:40.938 --> 00:00:45.328
+display the user's name, choose navigation
+options,
+
+10
+00:00:45.408 --> 00:00:49.407
+or conditionally render parts of the
+interface.
+
+11
+00:00:49.487 --> 00:00:52.413
+That is useful for user experience,
+
+12
+00:00:52.493 --> 00:00:58.541
+but it is not the same as enforcing access
+to protected data or operations.
+
+13
+00:00:58.621 --> 00:01:05.644
+Showing or hiding UI based on
+authentication state should be treated as presentation
+
+14
+00:01:05.724 --> 00:01:06.309
+logic.
+
+15
+00:01:06.389 --> 00:01:11.754
+A hidden menu item does not protect the
+server resource behind it.
+
+16
+00:01:11.834 --> 00:01:18.272
+A component that does not render a button
+does not prove that the corresponding
+
+17
+00:01:18.352 --> 00:01:20.693
+operation is inaccessible.
+
+18
+00:01:20.773 --> 00:01:27.601
+Protected data and state changes must
+still be enforced by server-side handlers or
+
+19
+00:01:27.681 --> 00:01:28.169
+APIs.
+
+20
+00:01:28.249 --> 00:01:35.272
+Cookie-based and token-based designs have
+different browser and API implications.
+
+21
+00:01:35.352 --> 00:01:40.230
+Cookie-based browser flows may depend on
+cookie settings,
+
+22
+00:01:40.310 --> 00:01:45.870
+same-site behavior, antiforgery protection
+for unsafe requests,
+
+23
+00:01:45.950 --> 00:01:49.266
+and server-side session expectations.
+
+24
+00:01:49.346 --> 00:01:55.394
+Token-based API flows require careful
+design around issuance, storage,
+
+25
+00:01:55.474 --> 00:01:59.278
+audience, expiration, and browser
+exposure.
+
+26
+00:01:59.358 --> 00:02:04.821
+Authentication failure behavior should be
+predictable and safe.
+
+27
+00:02:04.901 --> 00:02:08.217
+A browser page, interactive component,
+
+28
+00:02:08.297 --> 00:02:12.199
+and API client may expect different
+responses.
+
+29
+00:02:12.279 --> 00:02:19.497
+The application should avoid revealing
+sensitive implementation details while still
+
+30
+00:02:19.577 --> 00:02:26.405
+giving users and operators enough
+information to understand that identity was not
+
+31
+00:02:26.485 --> 00:02:29.411
+established or was no longer valid.
+
+32
+00:02:29.491 --> 00:02:34.759
+The secure baseline is to document how
+identity is established,
+
+33
+00:02:34.839 --> 00:02:38.741
+how components receive authentication
+state,
+
+34
+00:02:38.821 --> 00:02:43.015
+what APIs or server handlers rely on that
+identity,
+
+35
+00:02:43.095 --> 00:02:48.948
+and how production behavior differs from
+local development behavior.
+
+36
+00:02:49.028 --> 00:02:54.100
+Identity assumptions should not live only
+in component code.

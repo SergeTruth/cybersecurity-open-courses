@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Output Safety, Templates, Errors, and Data Exposure",
+  "graphicAlt": "An explicit response model returns only needed fields from internal records, while failures split into safe client errors and redacted internal diagnostics.",
+  "narration": "Responses should include only the data needed by the caller and use case. Excessive data exposure often comes from convenience: a database record is already available, so the handler returns it directly. That shortcut can expose password hashes, reset tokens, internal flags, administrative notes, billing metadata, secret names, or fields intended only for another role. Response models, serializers, or explicit object construction make output shaping a deliberate security boundary.\n\nTemplate rendering and HTML responses require context-aware output handling. Data that is safe as plain text may not be safe inside an HTML attribute, a URL, a script context, or rendered rich content. Express applications may serve APIs, server-rendered pages, admin tools, and email previews from the same codebase, so output rules should match the destination. Avoid assuming that a value is safe simply because it has already been validated for storage or business logic.\n\nErrors should help clients recover and help engineers investigate without exposing internals. Production responses should avoid stack traces, internal paths, SQL details, tokens, secret names, dependency internals, and implementation details. Internal logs can preserve diagnostic context with access controls and redaction, while client responses stay safe, consistent, and limited. A mature error path is not silent; it separates what operators need to know from what callers should receive.",
+  "narrationPoints": [
+    "Responses should include only the data needed by the caller and use case.",
+    "Template rendering and HTML responses require context-aware output handling.",
+    "Errors should help clients recover and help engineers investigate without exposing internals."
+  ]
+};

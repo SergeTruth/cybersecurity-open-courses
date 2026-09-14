@@ -1,0 +1,139 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.305
+Excessive data exposure occurs when an API
+returns more information than the caller
+
+2
+00:00:09.385 --> 00:00:11.989
+needs or should receive.
+
+3
+00:00:12.069 --> 00:00:20.501
+This often happens when backend models are
+serialized directly into responses.
+
+4
+00:00:20.581 --> 00:00:27.898
+A database entity may include internal
+IDs, role flags, audit fields,
+
+5
+00:00:27.978 --> 00:00:32.566
+tenant metadata, email addresses, tokens,
+
+6
+00:00:32.646 --> 00:00:38.474
+or configuration details that the client
+never needed.
+
+7
+00:00:38.554 --> 00:00:46.491
+API responses should be shaped
+intentionally for the caller and operation.
+
+8
+00:00:46.571 --> 00:00:51.531
+Field-level filtering is a practical
+control.
+
+9
+00:00:51.611 --> 00:00:59.300
+The server should decide which fields are
+returned based on the endpoint,
+
+10
+00:00:59.380 --> 00:01:04.092
+caller, tenant, relationship, and purpose.
+
+11
+00:01:04.172 --> 00:01:09.877
+A user profile response, an administrative
+response,
+
+12
+00:01:09.957 --> 00:01:18.513
+and an internal service response may all
+represent the same underlying object but
+
+13
+00:01:18.593 --> 00:01:21.321
+expose different fields.
+
+14
+00:01:21.401 --> 00:01:28.842
+Do not rely on the client to hide
+sensitive fields after receiving them.
+
+15
+00:01:28.922 --> 00:01:35.122
+If the caller should not see it, the API
+should not return it.
+
+16
+00:01:35.202 --> 00:01:41.031
+Error message leakage is another form of
+data exposure.
+
+17
+00:01:41.111 --> 00:01:49.543
+Stack traces, database errors, exception
+names, service URLs, debug metadata,
+
+18
+00:01:49.623 --> 00:01:55.824
+and raw downstream responses can reveal
+system internals.
+
+19
+00:01:55.904 --> 00:02:04.708
+APIs should provide stable error
+structures that support troubleshooting without
+
+20
+00:02:04.788 --> 00:02:08.012
+exposing unnecessary detail.
+
+21
+00:02:08.092 --> 00:02:16.649
+Correlation IDs can help operators find
+internal logs while keeping the external
+
+22
+00:02:16.729 --> 00:02:18.465
+response clean.
+
+23
+00:02:18.545 --> 00:02:25.737
+Pagination, sorting, and filtering
+controls also affect exposure.
+
+24
+00:02:25.817 --> 00:02:33.878
+Unbounded result sets can reveal too much
+data and create availability risk.
+
+25
+00:02:33.958 --> 00:02:42.019
+Flexible filters can accidentally allow
+enumeration of sensitive records.
+
+26
+00:02:42.099 --> 00:02:46.067
+Sort fields can leak internal schema.
+
+27
+00:02:46.147 --> 00:02:53.835
+A secure API response design defines
+default limits, maximum page sizes,
+
+28
+00:02:53.915 --> 00:02:58.628
+allowed filter fields, allowed sort
+fields,
+
+29
+00:02:58.708 --> 00:03:04.660
+and stable response shapes that match real
+client needs.

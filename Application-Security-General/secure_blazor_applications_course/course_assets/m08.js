@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Output Rendering, Components, and XSS Reduction",
+  "graphicAlt": "Ordinary values use normal encoded rendering, while required rich content is reviewed and sanitized before markup rendering; CSP adds defense in depth.",
+  "narration": "Blazor components should render untrusted data safely. Normal framework rendering and encoding help keep ordinary values as text instead of browser instructions. That default is valuable, and teams should preserve it wherever possible when displaying names, comments, labels, messages, and other user-influenced values.\n\nRendering markup from untrusted or weakly trusted sources requires careful review and sanitization. A design that treats stored content as markup has a different risk profile than a design that displays it as text. The team should know who produces the content, who reviews it, how it is sanitized, and which components are allowed to render it.\n\nContext matters. JavaScript, CSS, URL, HTML attribute, and markup contexts each have different handling requirements. A value that is safe as ordinary text may not be safe in another context without the right framework pattern or encoding path. Avoid mixing user-controlled values into contexts that expect structure or executable behavior.\n\nThird-party component libraries should be reviewed for update practices, data handling, and unsafe rendering patterns. A component can make UI development easier while also introducing dependencies, rendering behavior, and browser-side code that the team must maintain.\n\nContent Security Policy can provide defense in depth for browser-facing applications. It can help constrain some browser behaviors when configured carefully. It does not replace safe rendering, correct encoding, careful component review, or a disciplined approach to user-generated content.\n\nThe safe baseline is to favor normal component rendering, limit markup rendering to reviewed cases, sanitize where the business requires rich content, and treat browser-side rendering decisions as part of application security review.",
+  "narrationPoints": [
+    "Blazor components should render untrusted data safely.",
+    "Rendering markup from untrusted or weakly trusted sources requires careful review and sanitization.",
+    "Context matters.",
+    "Third-party component libraries should be reviewed for update practices, data handling, and unsafe rendering patterns.",
+    "Content Security Policy can provide defense in depth for browser-facing applications."
+  ]
+};

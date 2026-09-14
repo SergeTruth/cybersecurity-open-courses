@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.276
+Database access should keep data separate
+from query structure.
+
+2
+00:00:07.356 --> 00:00:15.858
+Parameterized queries and safe ORM
+patterns help prevent SQL injection when used
+
+3
+00:00:15.938 --> 00:00:17.170
+correctly.
+
+4
+00:00:17.250 --> 00:00:20.946
+Raw SQL is not automatically wrong,
+
+5
+00:00:21.026 --> 00:00:28.788
+but it deserves careful review because
+string assembly, dynamic filters,
+
+6
+00:00:28.868 --> 00:00:35.890
+and unchecked sort or column names can
+change the meaning of a query.
+
+7
+00:00:35.970 --> 00:00:41.145
+Least-privilege database accounts also
+matter:
+
+8
+00:00:41.225 --> 00:00:49.850
+the account used by the web app should not
+have more capability than the application
+
+9
+00:00:49.930 --> 00:00:50.669
+needs.
+
+10
+00:00:50.749 --> 00:00:59.004
+Transactions, error handling, and
+authorization are part of safe data access.
+
+11
+00:00:59.084 --> 00:01:07.092
+A route should not update half of a
+sensitive workflow and then fail silently.
+
+12
+00:01:07.172 --> 00:01:13.086
+A database error should not leak internals
+to the client.
+
+13
+00:01:13.166 --> 00:01:21.667
+Most importantly, query results should
+still respect the caller's permissions.
+
+14
+00:01:21.747 --> 00:01:30.125
+Filtering by tenant, owner, or resource
+permission should happen server-side,
+
+15
+00:01:30.205 --> 00:01:36.858
+not in the browser after too much data has
+already been returned.
+
+16
+00:01:36.938 --> 00:01:43.838
+File uploads and file processing create
+their own trust boundary.
+
+17
+00:01:43.918 --> 00:01:50.448
+A safe Flask design considers size limits,
+filename handling,
+
+18
+00:01:50.528 --> 00:01:57.427
+storage location, content type
+expectations, extension policy,
+
+19
+00:01:57.507 --> 00:02:05.269
+scanning expectations, temporary file
+cleanup, and downstream parsing.
+
+20
+00:02:05.349 --> 00:02:13.727
+Filenames and metadata are user-controlled
+and should not be trusted as proof of
+
+21
+00:02:13.807 --> 00:02:15.286
+safe content.
+
+22
+00:02:15.366 --> 00:02:24.483
+Storage paths should be constrained so
+uploaded content cannot overwrite application
+
+23
+00:02:24.563 --> 00:02:28.629
+files or escape intended directories.
+
+24
+00:02:28.709 --> 00:02:35.608
+Serialization formats such as JSON, YAML,
+XML, and CSV are useful,
+
+25
+00:02:35.688 --> 00:02:41.109
+but parsers and loaders should be chosen
+carefully.
+
+26
+00:02:41.189 --> 00:02:49.937
+Unsafe deserialization at a high level is
+the risk of converting untrusted data into
+
+27
+00:02:50.017 --> 00:02:58.272
+behavior, objects, references, or resource
+usage that the application did not
+
+28
+00:02:58.352 --> 00:02:59.214
+intend.
+
+29
+00:02:59.294 --> 00:03:06.440
+Defensive processing uses safe parser
+modes, size and depth limits,
+
+30
+00:03:06.520 --> 00:03:13.789
+clear schemas, and authorization around
+import and export features.
+
+31
+00:03:13.869 --> 00:03:22.740
+Data handling should preserve trust
+boundaries from request to storage to response.

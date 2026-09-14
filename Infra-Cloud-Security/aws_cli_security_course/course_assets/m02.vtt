@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.560
+AWS CLI commands run against a selected
+account, region, profile,
+
+2
+00:00:06.640 --> 00:00:08.912
+and credential context.
+
+3
+00:00:08.992 --> 00:00:15.160
+In automation, those values may come from
+AWS configuration files,
+
+4
+00:00:15.240 --> 00:00:22.707
+shared credentials files, environment
+variables, SSO sessions, assumed roles,
+
+5
+00:00:22.787 --> 00:00:26.791
+CI/CD variables, or active local profiles.
+
+6
+00:00:26.871 --> 00:00:34.013
+A secure script should not assume that the
+current default profile or region is
+
+7
+00:00:34.093 --> 00:00:37.880
+correct just because a command would run.
+
+8
+00:00:37.960 --> 00:00:43.804
+Target validation should happen before any
+meaningful change.
+
+9
+00:00:43.884 --> 00:00:50.701
+The script should confirm the expected
+account, partition when relevant,
+
+10
+00:00:50.781 --> 00:00:57.707
+region, profile name, environment label,
+role, and resource identifiers.
+
+11
+00:00:57.787 --> 00:01:05.253
+A deployment or operations script should
+make it hard to mix a production resource
+
+12
+00:01:05.333 --> 00:01:12.259
+name with a development profile, or a
+staging role with a production action.
+
+13
+00:01:12.339 --> 00:01:19.805
+The target should be visible before the
+script reaches an AWS API call that changes
+
+14
+00:01:19.885 --> 00:01:20.535
+state.
+
+15
+00:01:20.615 --> 00:01:27.432
+Development, staging, and production
+should have separate assumptions,
+
+16
+00:01:27.512 --> 00:01:31.732
+credentials, variables, and approval
+paths.
+
+17
+00:01:31.812 --> 00:01:37.115
+A fast local workflow may be appropriate
+for development,
+
+18
+00:01:37.195 --> 00:01:43.688
+but a production workflow may need a
+release ticket, protected branch,
+
+19
+00:01:43.768 --> 00:01:50.368
+change window, operator confirmation, or
+CI/CD environment approval.
+
+20
+00:01:50.448 --> 00:01:58.348
+The script should reflect those
+differences instead of relying on naming conventions
+
+21
+00:01:58.428 --> 00:01:59.077
+alone.
+
+22
+00:01:59.157 --> 00:02:05.650
+Environment variables and CI/CD variables
+should be treated as input,
+
+23
+00:02:05.730 --> 00:02:08.002
+not unquestioned truth.
+
+24
+00:02:08.082 --> 00:02:15.657
+They can be missing, stale, inherited, or
+inconsistent with the requested action.
+
+25
+00:02:15.737 --> 00:02:22.771
+A good AWS CLI helper validates target
+context early and stops if the account,
+
+26
+00:02:22.851 --> 00:02:29.235
+region, profile, role, or resource does
+not match the approved scope.
+
+27
+00:02:29.315 --> 00:02:35.700
+The safest wrong-target change is the one
+that fails before it starts.

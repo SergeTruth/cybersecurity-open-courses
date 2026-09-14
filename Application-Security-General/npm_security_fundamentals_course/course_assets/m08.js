@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Account Security, Tokens, and Publishing Controls",
+  "graphicAlt": "Install-only access is separated from protected publishing access, with scoped tokens, protected accounts, and source-to-workflow-to-artifact publication evidence.",
+  "narration": "npm account security protects the authority to publish, update, deprecate, or manage packages. A compromised maintainer account can affect many downstream users, and a compromised organization account can disrupt internal delivery. Teams should enforce strong authentication, review membership regularly, remove stale maintainers, and separate human publishing access from automation where possible. Publishing rights should be treated like production deployment rights.\n\nTokens should be scoped, protected, rotated, and stored in a secret manager rather than copied into scripts, local files, or broad CI variables. Automation tokens should have the minimum permission needed for the job. A token used only to install private packages should not also publish releases. A token used for one project should not unlock every package in an organization. Smaller blast radius makes credential exposure less damaging and easier to respond to.\n\nTrusted publishing and provenance features can improve confidence by tying package publication to a known build workflow and source repository. They do not make a package automatically safe, but they help answer important questions: what workflow produced this artifact, under what identity, and from which source. Combined with code review, release approvals, branch protections, and package ownership controls, publishing evidence makes npm delivery more accountable.",
+  "narrationPoints": [
+    "npm account security protects the authority to publish, update, deprecate, or manage packages.",
+    "Tokens should be scoped, protected, rotated, and stored in a secret manager rather than copied into scripts, local files, or broad CI variables.",
+    "Trusted publishing and provenance features can improve confidence by tying package publication to a known build workflow and source repository."
+  ]
+};

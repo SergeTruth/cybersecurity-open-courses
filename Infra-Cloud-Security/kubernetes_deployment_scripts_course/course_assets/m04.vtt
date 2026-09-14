@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.108
+A deployment script should be predictable
+and easy to review.
+
+2
+00:00:06.188 --> 00:00:13.845
+Avoid building one large command string
+from variable data and then asking the shell
+
+3
+00:00:13.925 --> 00:00:15.974
+to interpret it again.
+
+4
+00:00:16.054 --> 00:00:22.956
+Keep the command structure fixed, quote
+values that should remain literal,
+
+5
+00:00:23.036 --> 00:00:29.291
+and use arrays for options and operands
+where that improves clarity.
+
+6
+00:00:29.371 --> 00:00:32.929
+The less a script relies on re-parsing,
+
+7
+00:00:33.009 --> 00:00:37.862
+the easier it is to understand what will
+actually run.
+
+8
+00:00:37.942 --> 00:00:43.334
+Inputs to deployment tools should be
+validated before use.
+
+9
+00:00:43.414 --> 00:00:50.532
+Namespaces, resource names, labels, file
+paths, chart names, release names,
+
+10
+00:00:50.612 --> 00:00:53.847
+image references, timeout values,
+
+11
+00:00:53.927 --> 00:00:59.212
+and environment names all influence what
+the script does.
+
+12
+00:00:59.292 --> 00:01:04.252
+Validation does not need to be elaborate
+in every case,
+
+13
+00:01:04.332 --> 00:01:11.234
+but the script should reject unsupported
+or empty values before they shape a
+
+14
+00:01:11.314 --> 00:01:13.256
+deployment command.
+
+15
+00:01:13.336 --> 00:01:19.590
+Working directory control matters because
+manifests, Helm charts,
+
+16
+00:01:19.670 --> 00:01:26.357
+Kustomize overlays, and generated files
+often depend on relative paths.
+
+17
+00:01:26.437 --> 00:01:33.231
+A script should not silently change
+behavior because it was launched from a
+
+18
+00:01:33.311 --> 00:01:37.193
+different directory or runner workspace.
+
+19
+00:01:37.273 --> 00:01:39.753
+Tool versions also matter.
+
+20
+00:01:39.833 --> 00:01:47.167
+kubectl, Helm, Kustomize, and supporting
+tools may produce different output or
+
+21
+00:01:47.247 --> 00:01:51.453
+enforce different behavior across
+versions,
+
+22
+00:01:51.533 --> 00:01:58.003
+so important workflows should document or
+control expected versions.
+
+23
+00:01:58.083 --> 00:02:02.828
+Exit status and result handling should be
+explicit.
+
+24
+00:02:02.908 --> 00:02:10.781
+A script should distinguish expected
+no-change results from failures and stop before
+
+25
+00:02:10.861 --> 00:02:14.959
+later steps trust an incomplete
+deployment.
+
+26
+00:02:15.039 --> 00:02:20.323
+If a render step fails, the apply step
+should not continue.
+
+27
+00:02:20.403 --> 00:02:26.335
+If an apply step fails, a rollout check
+should not report success.
+
+28
+00:02:26.415 --> 00:02:33.640
+Clear, non-sensitive errors help operators
+respond without exposing tokens,
+
+29
+00:02:33.720 --> 00:02:39.220
+kubeconfig contents, secrets, or sensitive
+manifest data.

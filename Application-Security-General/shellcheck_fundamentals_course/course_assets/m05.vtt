@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.882
+Shell scripts often make decisions based
+on variables, test expressions,
+
+2
+00:00:06.962 --> 00:00:11.521
+command substitutions, pipelines, and exit
+status.
+
+3
+00:00:11.601 --> 00:00:16.768
+Small mistakes in those areas can cause a
+script to skip work,
+
+4
+00:00:16.848 --> 00:00:21.508
+continue after failure, report success
+incorrectly,
+
+5
+00:00:21.588 --> 00:00:25.539
+or take a branch that the author did not
+expect.
+
+6
+00:00:25.619 --> 00:00:31.900
+ShellCheck can help identify suspicious
+variable use, confusing tests,
+
+7
+00:00:31.980 --> 00:00:39.173
+unreachable logic, and places where
+command results may not be handled as intended.
+
+8
+00:00:39.253 --> 00:00:44.622
+Variable findings are especially useful in
+maintenance work.
+
+9
+00:00:44.702 --> 00:00:49.464
+A misspelled variable name may expand to
+an empty value.
+
+10
+00:00:49.544 --> 00:00:55.014
+An unused assignment may indicate dead
+code or a forgotten step.
+
+11
+00:00:55.094 --> 00:01:01.578
+A variable supplied by the environment may
+need an explicit presence check.
+
+12
+00:01:01.658 --> 00:01:05.812
+ShellCheck cannot decide what value is
+correct,
+
+13
+00:01:05.892 --> 00:01:12.983
+but it can draw attention to places where
+the script depends on assumptions that are
+
+14
+00:01:13.063 --> 00:01:14.583
+easy to overlook.
+
+15
+00:01:14.663 --> 00:01:19.424
+Conditions and exit status deserve
+deliberate design.
+
+16
+00:01:19.504 --> 00:01:26.495
+A command that fails inside a substitution
+or pipeline may not produce the failure
+
+17
+00:01:26.575 --> 00:01:29.107
+behavior the author expects.
+
+18
+00:01:29.187 --> 00:01:35.266
+A test expression may be syntactically
+valid but logically confusing.
+
+19
+00:01:35.346 --> 00:01:42.539
+A script may check the wrong command's
+result or continue after a partial operation.
+
+20
+00:01:42.619 --> 00:01:48.089
+Reviewers should ask what safe failure
+means for this workflow:
+
+21
+00:01:48.169 --> 00:01:52.526
+stop immediately, retry, skip a
+noncritical step,
+
+22
+00:01:52.606 --> 00:01:56.354
+or report a clear error for human
+follow-up.
+
+23
+00:01:56.434 --> 00:02:03.019
+ShellCheck is a helpful signal, but the
+script owner still owns control flow.
+
+24
+00:02:03.099 --> 00:02:07.253
+Good scripts make important decisions
+visible.
+
+25
+00:02:07.333 --> 00:02:12.398
+They check preconditions, handle expected
+failure modes,
+
+26
+00:02:12.478 --> 00:02:17.341
+report meaningful errors, and avoid
+ambiguous success.
+
+27
+00:02:17.421 --> 00:02:23.803
+When ShellCheck points at a variable,
+condition, or exit-status pattern,
+
+28
+00:02:23.883 --> 00:02:30.266
+use it as an opportunity to make the
+script easier for the next maintainer to
+
+29
+00:02:30.346 --> 00:02:31.460
+understand.

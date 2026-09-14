@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.907
+Every AWS CLI command runs with an AWS
+identity.
+
+2
+00:00:04.987 --> 00:00:10.936
+That identity might be an IAM user, IAM
+role, federated session,
+
+3
+00:00:11.016 --> 00:00:18.397
+SSO session, instance role, container
+role, workload identity, service role,
+
+4
+00:00:18.477 --> 00:00:19.799
+or CI/CD role.
+
+5
+00:00:19.879 --> 00:00:26.930
+The identity determines what the script
+can read, create, update, publish,
+
+6
+00:00:27.010 --> 00:00:28.442
+or administer.
+
+7
+00:00:28.522 --> 00:00:33.370
+IAM design is therefore central to AWS CLI
+security.
+
+8
+00:00:33.450 --> 00:00:36.645
+Permissions should match the job.
+
+9
+00:00:36.725 --> 00:00:41.572
+A reporting script should not use a
+deployment role.
+
+10
+00:00:41.652 --> 00:00:48.923
+A validation step should not need the same
+permissions as a production change.
+
+11
+00:00:49.003 --> 00:00:56.384
+A read-only inventory workflow should not
+share access with an administrative
+
+12
+00:00:56.464 --> 00:00:57.456
+workflow.
+
+13
+00:00:57.536 --> 00:01:04.366
+Least privilege should consider service,
+action, resource, condition,
+
+14
+00:01:04.446 --> 00:01:07.091
+environment, and duration.
+
+15
+00:01:07.171 --> 00:01:13.230
+The narrower the role, the easier it is to
+understand and contain.
+
+16
+00:01:13.310 --> 00:01:18.378
+Role assumption should be intentional and
+auditable.
+
+17
+00:01:18.458 --> 00:01:25.619
+The script should make clear which role it
+expects to use and for what purpose.
+
+18
+00:01:25.699 --> 00:01:32.529
+Teams should understand whether a role is
+meant for read-only reporting,
+
+19
+00:01:32.609 --> 00:01:38.558
+deployment, rollback, incident response,
+or administration.
+
+20
+00:01:38.638 --> 00:01:46.350
+Approval expectations and access
+boundaries can help keep higher-risk roles from
+
+21
+00:01:46.430 --> 00:01:49.184
+becoming ordinary defaults.
+
+22
+00:01:49.264 --> 00:01:55.764
+Avoid broad shared administrator
+credentials in AWS CLI automation.
+
+23
+00:01:55.844 --> 00:02:03.997
+Shared high-privilege access makes
+mistakes harder to attribute and incidents harder
+
+24
+00:02:04.077 --> 00:02:05.178
+to contain.
+
+25
+00:02:05.258 --> 00:02:11.318
+Each automation role should have an owner,
+a documented purpose,
+
+26
+00:02:11.398 --> 00:02:15.584
+a known usage location, and a review
+process.
+
+27
+00:02:15.664 --> 00:02:23.045
+Stale roles and unused permissions should
+be cleaned up over time so automation
+
+28
+00:02:23.125 --> 00:02:26.100
+access does not quietly expand.

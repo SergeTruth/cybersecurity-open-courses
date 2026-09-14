@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.461
+Authentication establishes who or what the
+caller is.
+
+2
+00:00:06.541 --> 00:00:13.020
+APIs commonly use API keys, bearer tokens,
+OAuth 2.0 flows,
+
+3
+00:00:13.100 --> 00:00:21.912
+OpenID Connect identity tokens, service
+accounts, workload identities, mTLS,
+
+4
+00:00:21.992 --> 00:00:26.917
+or platform-specific identity mechanisms.
+
+5
+00:00:26.997 --> 00:00:35.290
+The right pattern depends on the caller,
+the trust model, and the operation.
+
+6
+00:00:35.370 --> 00:00:40.424
+A browser user, a mobile app, a partner
+server,
+
+7
+00:00:40.504 --> 00:00:49.575
+and an internal workload should not
+automatically share the same identity design.
+
+8
+00:00:49.655 --> 00:00:56.005
+API keys are simple, but simplicity comes
+with tradeoffs.
+
+9
+00:00:56.085 --> 00:01:05.156
+They often identify an application or
+integration rather than an individual user,
+
+10
+00:01:05.236 --> 00:01:13.141
+and they can become long-lived shared
+secrets if not managed carefully.
+
+11
+00:01:13.221 --> 00:01:20.737
+Bearer tokens are powerful because
+possession is enough to use them.
+
+12
+00:01:20.817 --> 00:01:29.240
+That means token storage, transport,
+logging, lifetime, audience, issuer,
+
+13
+00:01:29.320 --> 00:01:32.300
+and revocation all matter.
+
+14
+00:01:32.380 --> 00:01:39.119
+A token copied into a log or artifact may
+become an access path.
+
+15
+00:01:39.199 --> 00:01:45.678
+OAuth 2.0 and OpenID Connect are often
+discussed together,
+
+16
+00:01:45.758 --> 00:01:50.942
+but they solve related and different
+problems.
+
+17
+00:01:51.022 --> 00:01:57.112
+OAuth 2.0 is commonly used for delegated
+access to APIs.
+
+18
+00:01:57.192 --> 00:02:06.393
+OpenID Connect adds an identity layer that
+helps clients understand who the user is.
+
+19
+00:02:06.473 --> 00:02:15.026
+In API design, teams should be clear about
+which token type they are accepting,
+
+20
+00:02:15.106 --> 00:02:22.362
+what audience it was issued for, who
+issued it, how long it is valid,
+
+21
+00:02:22.442 --> 00:02:25.682
+and which claims are trusted.
+
+22
+00:02:25.762 --> 00:02:31.723
+Authentication is only the beginning of
+API security.
+
+23
+00:02:31.803 --> 00:02:39.967
+A caller can be real and still not be
+allowed to perform a particular action.
+
+24
+00:02:40.047 --> 00:02:47.174
+A service account can be valid and still
+have too much permission.
+
+25
+00:02:47.254 --> 00:02:53.993
+A token can be signed and still be
+intended for a different API.
+
+26
+00:02:54.073 --> 00:03:00.941
+Good identity handling narrows the
+question to who is calling.
+
+27
+00:03:01.021 --> 00:03:10.351
+Authorization, validation, and business
+rules decide what that caller may actually
+
+28
+00:03:10.431 --> 00:03:10.820
+do.

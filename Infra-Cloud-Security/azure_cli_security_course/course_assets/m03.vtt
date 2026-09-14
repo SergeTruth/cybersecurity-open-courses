@@ -1,0 +1,122 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.332
+Every Azure CLI command runs with an Azure
+identity.
+
+2
+00:00:05.412 --> 00:00:12.551
+That identity may be a signed-in user,
+service principal, managed identity,
+
+3
+00:00:12.631 --> 00:00:20.099
+workload identity, federated CI/CD
+identity, or another automation identity.
+
+4
+00:00:20.179 --> 00:00:26.987
+The identity and its role assignments
+determine what the script can read,
+
+5
+00:00:27.067 --> 00:00:30.801
+create, update, deploy, or administer.
+
+6
+00:00:30.881 --> 00:00:36.043
+RBAC design is therefore central to Azure
+CLI security.
+
+7
+00:00:36.123 --> 00:00:39.308
+Permissions should match the job.
+
+8
+00:00:39.388 --> 00:00:44.659
+A reporting script should not use a
+deployment identity.
+
+9
+00:00:44.739 --> 00:00:51.988
+A validation step should not need the same
+permissions as a production change.
+
+10
+00:00:52.068 --> 00:00:59.975
+A rollback workflow should not
+automatically share broad owner-level permissions.
+
+11
+00:01:00.055 --> 00:01:06.864
+Least privilege should consider tenant,
+subscription, resource group,
+
+12
+00:01:06.944 --> 00:01:14.082
+resource, role, action, condition where
+available, environment, and time.
+
+13
+00:01:14.162 --> 00:01:19.214
+Role assignment should be intentional and
+auditable.
+
+14
+00:01:19.294 --> 00:01:26.323
+Teams should know which identities are
+used by which scripts, who owns them,
+
+15
+00:01:26.403 --> 00:01:31.345
+what scope they have, and why that access
+is required.
+
+16
+00:01:31.425 --> 00:01:37.794
+Broad Owner or Contributor access may make
+automation easy to start,
+
+17
+00:01:37.874 --> 00:01:42.926
+but it makes mistakes and incidents harder
+to contain.
+
+18
+00:01:43.006 --> 00:01:50.474
+Narrower scopes and purpose-specific
+identities make review and response much
+
+19
+00:01:50.554 --> 00:01:51.433
+cleaner.
+
+20
+00:01:51.513 --> 00:01:54.368
+Access review is ongoing work.
+
+21
+00:01:54.448 --> 00:02:00.488
+Automation identities can outlive the
+script that created them,
+
+22
+00:02:00.568 --> 00:02:07.267
+and temporary exceptions can become
+permanent if nobody revisits them.
+
+23
+00:02:07.347 --> 00:02:12.838
+Secure Azure CLI automation includes
+ownership, purpose,
+
+24
+00:02:12.918 --> 00:02:17.970
+rotation or renewal expectations,
+revocation steps,
+
+25
+00:02:18.050 --> 00:02:24.420
+and periodic review of stale access and
+overbroad role assignments.

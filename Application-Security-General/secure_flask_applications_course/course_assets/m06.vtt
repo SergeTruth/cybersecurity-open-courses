@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.064
+Flask commonly uses Jinja templates to
+combine server-side data with HTML.
+
+2
+00:00:08.144 --> 00:00:13.935
+Jinja can provide autoescaping in
+appropriate contexts,
+
+3
+00:00:14.015 --> 00:00:20.752
+but developers still need to understand
+where data is being placed.
+
+4
+00:00:20.832 --> 00:00:25.678
+HTML text, attributes, URLs, JavaScript,
+JSON,
+
+5
+00:00:25.758 --> 00:00:30.604
+and style contexts have different safety
+rules.
+
+6
+00:00:30.684 --> 00:00:38.248
+A value that is harmless as plain text may
+become risky if it is inserted into a
+
+7
+00:00:38.328 --> 00:00:42.110
+script block, an event handler, a URL,
+
+8
+00:00:42.190 --> 00:00:47.627
+or a client-side template without the
+right handling.
+
+9
+00:00:47.707 --> 00:00:56.098
+Cross-site scripting is a response safety
+problem where untrusted content becomes
+
+10
+00:00:56.178 --> 00:01:02.442
+executable or behavior-changing content in
+a user's browser.
+
+11
+00:01:02.522 --> 00:01:08.550
+The defensive principle is context-aware
+output handling:
+
+12
+00:01:08.630 --> 00:01:16.076
+validate what data is allowed, keep
+user-generated content constrained,
+
+13
+00:01:16.156 --> 00:01:19.347
+rely on safe template behavior,
+
+14
+00:01:19.427 --> 00:01:24.982
+and avoid patterns that mark untrusted
+content as safe.
+
+15
+00:01:25.062 --> 00:01:30.026
+Security headers can add useful defense in
+depth,
+
+16
+00:01:30.106 --> 00:01:37.315
+but they do not replace correct rendering
+decisions in the application.
+
+17
+00:01:37.395 --> 00:01:45.432
+CSRF is concerned with unwanted cross-site
+requests causing a user's browser to
+
+18
+00:01:45.512 --> 00:01:50.240
+perform an action in an authenticated
+context.
+
+19
+00:01:50.320 --> 00:01:58.947
+Flask applications that use cookies for
+authentication should think carefully about
+
+20
+00:01:59.027 --> 00:02:02.691
+state-changing forms and requests.
+
+21
+00:02:02.771 --> 00:02:08.681
+CSRF protection at a high level uses
+unpredictable tokens,
+
+22
+00:02:08.761 --> 00:02:13.607
+same-site cookie behavior, method
+discipline,
+
+23
+00:02:13.687 --> 00:02:20.660
+and clear separation between safe reads
+and state-changing actions.
+
+24
+00:02:20.740 --> 00:02:24.049
+APIs may use different patterns,
+
+25
+00:02:24.129 --> 00:02:32.520
+but the underlying question is whether the
+request was intentionally authorized by
+
+26
+00:02:32.600 --> 00:02:35.673
+the user and application flow.
+
+27
+00:02:35.753 --> 00:02:43.790
+Response safety also includes redirects,
+data minimization, and error output.
+
+28
+00:02:43.870 --> 00:02:51.907
+Redirect targets should be constrained so
+the application does not send users to
+
+29
+00:02:51.987 --> 00:02:57.069
+untrusted destinations based on unchecked
+input.
+
+30
+00:02:57.149 --> 00:03:05.777
+Responses should not include fields simply
+because they are convenient to serialize.
+
+31
+00:03:05.857 --> 00:03:09.875
+Templates, JSON responses, downloads,
+
+32
+00:03:09.955 --> 00:03:15.629
+and error pages should reveal only what
+the caller needs.
+
+33
+00:03:15.709 --> 00:03:24.100
+Safe response design reduces both
+browser-side risk and accidental data exposure.

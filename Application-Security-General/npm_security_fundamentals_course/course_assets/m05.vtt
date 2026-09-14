@@ -1,0 +1,111 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.204
+npm audit and similar tools are useful
+because they compare the dependency tree
+
+2
+00:00:08.284 --> 00:00:12.423
+against known vulnerability advisories.
+
+3
+00:00:12.503 --> 00:00:20.207
+They can show affected packages, severity
+labels, vulnerable version ranges,
+
+4
+00:00:20.287 --> 00:00:23.047
+and possible upgrade paths.
+
+5
+00:00:23.127 --> 00:00:26.116
+That visibility is important,
+
+6
+00:00:26.196 --> 00:00:32.060
+especially in projects where dependencies
+change quickly.
+
+7
+00:00:32.140 --> 00:00:37.545
+But an audit report is an input to
+engineering judgment,
+
+8
+00:00:37.625 --> 00:00:41.419
+not a complete risk decision by itself.
+
+9
+00:00:41.499 --> 00:00:49.893
+Triage should consider whether the
+vulnerable package is present in production code,
+
+10
+00:00:49.973 --> 00:00:54.572
+whether the vulnerable function is
+reachable,
+
+11
+00:00:54.652 --> 00:00:59.596
+whether the package runs only during
+development,
+
+12
+00:00:59.676 --> 00:01:04.046
+what privilege or data exposure is
+involved,
+
+13
+00:01:04.126 --> 00:01:10.335
+and whether a fix is available without
+breaking compatibility.
+
+14
+00:01:10.415 --> 00:01:17.659
+A critical finding in an unreachable
+development-only tool may be handled
+
+15
+00:01:17.739 --> 00:01:23.718
+differently from a moderate finding in a
+public request path.
+
+16
+00:01:23.798 --> 00:01:30.237
+Severity labels help prioritize, but they
+do not replace context.
+
+17
+00:01:30.317 --> 00:01:38.481
+Blindly running npm audit fix can be risky
+because automated remediation may change
+
+18
+00:01:38.561 --> 00:01:46.840
+package versions, alter transitive
+dependencies, or introduce breaking behavior.
+
+19
+00:01:46.920 --> 00:01:54.623
+A safer workflow is to review the proposed
+change, understand the upgrade path,
+
+20
+00:01:54.703 --> 00:02:01.602
+run tests, compare lockfile movement, and
+document any accepted risk.
+
+21
+00:02:01.682 --> 00:02:08.121
+When no patch is available, teams may need
+compensating controls,
+
+22
+00:02:08.201 --> 00:02:12.341
+package replacement, feature isolation,
+
+23
+00:02:12.421 --> 00:02:17.940
+or a tracked exception with an owner and
+expiration date.

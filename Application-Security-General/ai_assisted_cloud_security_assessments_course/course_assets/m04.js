@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Asset Inventory and Attack Surface Documentation",
+  "graphicAlt": "A cloud asset is connected to ownership, exposure, permissions, data sensitivity, and evidence to form a reviewable attack-surface inventory.",
+  "narration": "Cloud asset inventory is the foundation for attack surface documentation. The assessment should identify cloud services, workloads, APIs, identities, storage locations, databases, public endpoints, third-party integrations, internet-facing resources, management interfaces, owners, environments, and data sensitivity. Without this baseline, risk review becomes scattered and reactive.\n\nCloud names are often inconsistent. A resource tag may use one service name, a repository may use another, and a diagram may use a business-friendly label. AI can help normalize these names, group related components, and identify likely duplicates. Human review is still required because merging two similar-looking resources can hide important differences in ownership, exposure, or data type.\n\nAttack surface documentation should connect assets to exposure. A compute workload matters differently if it has public ingress, privileged identity access, sensitive data access, or management-plane permissions. A storage location matters differently if it is private, shared internally, exposed publicly, or connected to a third-party process. Context turns inventory into security insight.\n\nAI can help build attack surface registers, open-question lists, and owner review packets. A useful register might include component name, environment, owner, public exposure, authentication method, identities, data handled, dependencies, evidence source, assumptions, and review status. This structure makes the document easier to validate and maintain.\n\nThe output should be practical for developers, security teams, architects, and responders. A polished diagram alone is not enough. The team needs a record that supports review, prioritization, remediation, and future incident response. The best inventory is one that can be questioned, updated, and traced back to evidence.",
+  "narrationPoints": [
+    "Cloud asset inventory is the foundation for attack surface documentation.",
+    "Cloud names are often inconsistent.",
+    "Attack surface documentation should connect assets to exposure.",
+    "AI can help build attack surface registers, open-question lists, and owner review packets.",
+    "The output should be practical for developers, security teams, architects, and responders."
+  ]
+};

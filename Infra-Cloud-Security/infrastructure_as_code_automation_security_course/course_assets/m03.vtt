@@ -1,0 +1,134 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.257
+IaC automation usually needs credentials
+to read current state and modify
+
+2
+00:00:07.337 --> 00:00:08.946
+infrastructure.
+
+3
+00:00:09.026 --> 00:00:15.462
+Those credentials may belong to a service
+account, workload identity,
+
+4
+00:00:15.542 --> 00:00:20.690
+cloud role, CI/CD runner, managed
+deployment platform,
+
+5
+00:00:20.770 --> 00:00:23.667
+or human-approved release job.
+
+6
+00:00:23.747 --> 00:00:25.999
+Whatever form they take,
+
+7
+00:00:26.079 --> 00:00:33.587
+they should be treated as sensitive
+operational authority because they can change
+
+8
+00:00:33.667 --> 00:00:35.705
+real infrastructure.
+
+9
+00:00:35.785 --> 00:00:40.183
+Different jobs may need different
+permissions.
+
+10
+00:00:40.263 --> 00:00:46.591
+A formatting or module validation job may
+not need cloud access at all.
+
+11
+00:00:46.671 --> 00:00:52.249
+A plan job may need read access to state
+and current resources.
+
+12
+00:00:52.329 --> 00:00:57.906
+An apply job may need write access for a
+specific environment.
+
+13
+00:00:57.986 --> 00:01:04.315
+A rollback or break-glass workflow may
+need a separate approval path.
+
+14
+00:01:04.395 --> 00:01:12.225
+Treating every job as though it needs
+broad administrator access creates unnecessary
+
+15
+00:01:12.305 --> 00:01:13.592
+blast radius.
+
+16
+00:01:13.672 --> 00:01:19.786
+Secrets should come from approved
+secret-management mechanisms,
+
+17
+00:01:19.866 --> 00:01:25.229
+platform identity, or workload identity
+where practical.
+
+18
+00:01:25.309 --> 00:01:30.886
+Avoid hard-coded credentials, broad
+repository variables,
+
+19
+00:01:30.966 --> 00:01:36.866
+copied local credentials, and shared cloud
+administrator keys.
+
+20
+00:01:36.946 --> 00:01:44.132
+Scope identities by environment, action,
+service, repository, and workflow.
+
+21
+00:01:44.212 --> 00:01:51.720
+A development plan should not accidentally
+receive production apply privileges.
+
+22
+00:01:51.800 --> 00:01:56.520
+Automation identities need lifecycle
+management.
+
+23
+00:01:56.600 --> 00:02:03.679
+Each credential should have an owner,
+purpose, scope, environment boundary,
+
+24
+00:02:03.759 --> 00:02:09.015
+rotation path, revocation process, and
+review schedule.
+
+25
+00:02:09.095 --> 00:02:12.956
+Least privilege is not a one-time setting.
+
+26
+00:02:13.036 --> 00:02:19.043
+As repositories, modules, cloud services,
+and pipelines evolve,
+
+27
+00:02:19.123 --> 00:02:26.095
+the permissions behind IaC automation
+should be reviewed and narrowed where
+
+28
+00:02:26.175 --> 00:02:27.140
+possible.

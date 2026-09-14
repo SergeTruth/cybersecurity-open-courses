@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Detection, Alerting, and Behavioral Signals",
+  "graphicAlt": "Events are combined with context and impact, triaged, and investigated, with separate cautions for false positives and missed detections.",
+  "narration": "Agent monitoring should look for behavior that represents meaningful risk. Examples include repeated policy denials, unusual tool use, unexpected data access, high-volume retrieval, abnormal failed actions, attempts to access unauthorized resources, unexpected memory writes, unusual prompt patterns at a high level, and tool argument anomalies. The point is not to alert on every strange phrase. The point is to detect patterns that could indicate misuse, confusion, compromise, or control failure.\n\nAlert severity should reflect impact and confidence. A single denied low-risk lookup may be informational. Repeated attempts to access restricted data across several sessions may deserve investigation. A write-capable tool call outside normal patterns may need urgent review. Detections should combine event type, user context, tool risk, data sensitivity, policy outcome, volume, timing, and historical baseline where available.\n\nFalse positives and false negatives both matter. A false positive is an alert that reports a problem that did not occur as described. Too many false positives create alert fatigue and train teams to ignore agent monitoring. A false negative is a real problem or risky behavior that monitoring fails to detect. Tuning should improve signal quality over time, using incident lessons, analyst feedback, and changing workflows.\n\nGood detections are explainable. An analyst should understand why the alert fired, which events contributed, what evidence is available, and what response steps are recommended. Agent detections should connect to response workflows, not just dashboards. The best monitoring programs treat alerts as hypotheses to investigate, backed by traceable events and clear severity logic.",
+  "narrationPoints": [
+    "Agent monitoring should look for behavior that represents meaningful risk.",
+    "Alert severity should reflect impact and confidence.",
+    "False positives and false negatives both matter.",
+    "Good detections are explainable."
+  ]
+};

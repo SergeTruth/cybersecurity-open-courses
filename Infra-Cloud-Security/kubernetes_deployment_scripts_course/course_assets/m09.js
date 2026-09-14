@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Kubernetes Deployment Script Checklist",
+  "graphicAlt": "A controlled deployment confirms the target, scopes access, reviews rendered output, controls inputs, verifies health, and supports recovery and review.",
+  "narration": "Kubernetes deployment scripts are security-relevant operational automation. Before applying changes, validate the cluster context, namespace, workload, release, and environment. Do not rely on an accidental active context on a workstation or runner. Development, staging, and production should have separate expectations, credentials, policies, and approval paths.\n\nUse scoped identities and RBAC rather than broad cluster administrator access. Protect kubeconfig files, service-account tokens, CI/CD secrets, and runner identities. Separate validation, apply, rollback, secret-management, and administrative capabilities where practical. Review, rotate, and revoke deployment credentials over time so old automation does not become forgotten access.\n\nInvoke kubectl, Helm, Kustomize, and supporting tools with fixed, reviewable Bash patterns. Validate names, namespaces, file paths, chart names, release names, images, and timeouts. Control working directories and expected tool versions. Review rendered output before high-impact applies, use diffs to understand intended changes, and connect approved changes to versioned deployment artifacts.\n\nFinally, control images, configuration, and secrets; verify rollout health; plan rollback; log safely; monitor unexpected behavior; and review deployment scripts and access over time. A good deployment script does more than apply files. It makes the deployment scoped, least-privileged, reviewed, observable, verifiable, recoverable, and safe to operate.",
+  "narrationPoints": [
+    "Kubernetes deployment scripts are security-relevant operational automation.",
+    "Use scoped identities and RBAC rather than broad cluster administrator access.",
+    "Invoke kubectl, Helm, Kustomize, and supporting tools with fixed, reviewable Bash patterns.",
+    "Finally, control images, configuration, and secrets; verify rollout health; plan rollback; log safely; monitor unexpected behavior; and review deployment scripts and access over time."
+  ]
+};

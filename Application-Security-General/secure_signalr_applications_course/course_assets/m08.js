@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Resource Controls, Streaming, Backpressure, and Reconnects",
+  "graphicAlt": "Message size and frequency controls, bounded buffers, controlled fan-out, backpressure, and limited reconnect recovery keep real-time work predictable.",
+  "narration": "Real-time systems need resource controls because connections and messages can be long-lived, frequent, and highly connected. A SignalR application may handle chat updates, dashboards, telemetry, collaboration events, notifications, streaming data, or administrative signals. Each pattern has different pressure on CPU, memory, network bandwidth, queues, databases, and downstream services.\n\nStart with message size. The expected size of incoming messages should be reviewed and constrained to match the feature. Large messages may affect server memory, serialization cost, logs, queues, and clients. Streaming and upload-like patterns need especially clear limits, because they can behave differently from ordinary one-message method calls.\n\nFrequency matters as much as size. Typing indicators, cursor movement, location updates, telemetry streams, dashboard refreshes, and notification bursts can be individually small while still creating heavy backend pressure. Defensive design uses bounded queues, controlled fan-out, throttling, batching, sampling, and backpressure thinking so the system has predictable behavior under stress.\n\nReconnect behavior also deserves review. Automatic reconnect and stateful reconnect features can improve user experience, but buffered data and resumed delivery should remain within intended limits. The application should define what state can be recovered, how long it is retained, and what happens when the client falls too far behind.\n\nDeployment architecture can change the answer. Azure SignalR Service, Redis backplanes, reverse proxies, load balancers, container platforms, and scale-out settings affect capacity, routing, sticky behavior, timeouts, and observability. Resource controls are not one setting; they are a set of design decisions that keep real-time features useful without letting them overwhelm the application.",
+  "narrationPoints": [
+    "Real-time systems need resource controls because connections and messages can be long-lived, frequent, and highly connected.",
+    "Start with message size.",
+    "Frequency matters as much as size.",
+    "Reconnect behavior also deserves review.",
+    "Deployment architecture can change the answer."
+  ]
+};

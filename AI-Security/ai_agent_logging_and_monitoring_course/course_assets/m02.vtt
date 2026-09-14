@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.886
+Agent telemetry starts with sessions and
+events.
+
+2
+00:00:04.966 --> 00:00:11.442
+A session may include user requests, model
+calls, retrieval operations,
+
+3
+00:00:11.522 --> 00:00:17.997
+tool selections, tool results, memory
+reads, memory writes, approvals,
+
+4
+00:00:18.077 --> 00:00:24.657
+policy decisions, errors, latency, and
+cost or token usage at a high level.
+
+5
+00:00:24.737 --> 00:00:32.152
+Each event should explain what happened
+and how it relates to the wider interaction.
+
+6
+00:00:32.232 --> 00:00:38.603
+Isolated log lines are much less useful
+than a trace that connects cause,
+
+7
+00:00:38.683 --> 00:00:40.772
+decision, and outcome.
+
+8
+00:00:40.852 --> 00:00:43.671
+Correlation IDs are essential.
+
+9
+00:00:43.751 --> 00:00:50.331
+A single user request may pass through a
+frontend, backend, model gateway,
+
+10
+00:00:50.411 --> 00:00:57.304
+retrieval service, tool service, approval
+workflow, and downstream system.
+
+11
+00:00:57.384 --> 00:01:05.113
+If each system uses unrelated identifiers,
+investigation becomes slow and uncertain.
+
+12
+00:01:05.193 --> 00:01:12.399
+A shared trace or correlation identifier
+lets teams reconstruct the path from the
+
+13
+00:01:12.479 --> 00:01:16.657
+original request to the final answer or
+action,
+
+14
+00:01:16.737 --> 00:01:21.228
+even when events are distributed across
+services.
+
+15
+00:01:21.308 --> 00:01:28.305
+Telemetry should include model and prompt
+metadata without blindly recording
+
+16
+00:01:28.385 --> 00:01:30.787
+sensitive prompt content.
+
+17
+00:01:30.867 --> 00:01:36.611
+Teams often need model version, prompt
+version, policy version,
+
+18
+00:01:36.691 --> 00:01:42.540
+tool version, retrieval source reference,
+and decision outcome.
+
+19
+00:01:42.620 --> 00:01:49.931
+They may not need full raw prompts, full
+documents, credentials, or personal data.
+
+20
+00:01:50.011 --> 00:01:57.217
+Good event design separates metadata
+needed for investigation from content that
+
+21
+00:01:57.297 --> 00:02:02.310
+would create unnecessary privacy or
+security exposure.
+
+22
+00:02:02.390 --> 00:02:09.597
+The logging architecture should tell the
+story of what happened without exposing
+
+23
+00:02:09.677 --> 00:02:11.557
+more than necessary.
+
+24
+00:02:11.637 --> 00:02:18.530
+It should support query, timeline
+reconstruction, alerting, access review,
+
+25
+00:02:18.610 --> 00:02:21.116
+and evidence preservation.
+
+26
+00:02:21.196 --> 00:02:26.209
+It should also account for retention and
+access control.
+
+27
+00:02:26.289 --> 00:02:31.198
+Agent observability is not only an
+engineering detail;
+
+28
+00:02:31.278 --> 00:02:36.500
+it is part of the agent's safety and
+accountability design.

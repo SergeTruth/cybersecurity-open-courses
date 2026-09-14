@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Credentials, Login Sessions, and Runtime Handling",
+  "graphicAlt": "Managed identity, workload identity, or federation provide runtime access for a scoped job, while sessions are protected and credentials can be rotated or revoked.",
+  "narration": "Azure credentials and sessions are sensitive operational authority. They may exist as local Azure CLI login sessions, token caches, service principal secrets, certificates, federated credentials, managed identities, environment variables, CI/CD service connections, or temporary files. The script does not need to print a token for that token to define what the script can do.\n\nLong-lived static secrets should be minimized where better options exist. Managed identity, workload identity, federation, short-lived sessions, and approved secret stores can reduce risk when they fit the environment. They do not remove the need for validation, but they can reduce reliance on durable secrets and improve governance of runtime access.\n\nScripts should check whether the required login context is available without printing tokens or sensitive values. Avoid exposing secrets, token-derived values, service principal credentials, full environments, debug traces, or support bundles. CI/CD masking is useful, but it is not a complete boundary. Sensitive values can still leak through command echoing, transformed output, temporary files, artifacts, or verbose tool logs.\n\nCredential handling includes rotation, revocation, ownership, and lifetime limits. Teams should know how to disable an exposed service principal credential, revoke a connection, expire a session, review a managed identity assignment, and determine which jobs used the credential. Secure Azure CLI automation treats credentials as scoped and reviewable, not permanent background plumbing.",
+  "narrationPoints": [
+    "Azure credentials and sessions are sensitive operational authority.",
+    "Long-lived static secrets should be minimized where better options exist.",
+    "Scripts should check whether the required login context is available without printing tokens or sensitive values.",
+    "Credential handling includes rotation, revocation, ownership, and lifetime limits."
+  ]
+};

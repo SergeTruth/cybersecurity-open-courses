@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.453
+Browser storage and client state are not
+trusted security boundaries.
+
+2
+00:00:06.533 --> 00:00:12.883
+localStorage, sessionStorage, IndexedDB,
+query strings, hidden fields,
+
+3
+00:00:12.963 --> 00:00:18.321
+and client-side component state can
+support useful workflows,
+
+4
+00:00:18.401 --> 00:00:24.652
+but they are not the right place for
+secrets or authoritative permissions.
+
+5
+00:00:24.732 --> 00:00:29.197
+The browser is an environment controlled
+by the user.
+
+6
+00:00:29.277 --> 00:00:34.238
+Client state can improve performance and
+user experience.
+
+7
+00:00:34.318 --> 00:00:41.164
+It can remember view preferences, draft
+choices, non-sensitive workflow hints,
+
+8
+00:00:41.244 --> 00:00:46.800
+or cached data that the application is
+comfortable revalidating.
+
+9
+00:00:46.880 --> 00:00:52.039
+It should not decide who owns a record,
+which tenant is active,
+
+10
+00:00:52.119 --> 00:00:57.279
+what role a user has, or whether a
+sensitive action is allowed.
+
+11
+00:00:57.359 --> 00:01:02.022
+Protected browser storage has important
+limitations.
+
+12
+00:01:02.102 --> 00:01:05.178
+It can help with specific scenarios,
+
+13
+00:01:05.258 --> 00:01:10.913
+but it should not be treated as a
+universal production secret store.
+
+14
+00:01:10.993 --> 00:01:15.558
+Teams should understand what protection it
+provides,
+
+15
+00:01:15.638 --> 00:01:20.301
+which hosting models it supports, how keys
+are handled,
+
+16
+00:01:20.381 --> 00:01:25.639
+and what data remains visible or usable in
+the browser context.
+
+17
+00:01:25.719 --> 00:01:32.566
+JavaScript interop crosses a boundary
+between .NET code and browser JavaScript.
+
+18
+00:01:32.646 --> 00:01:36.714
+Data passed through interop should be
+reviewed,
+
+19
+00:01:36.794 --> 00:01:42.548
+especially when it includes
+user-controlled values, identifiers,
+
+20
+00:01:42.628 --> 00:01:47.688
+sensitive fields, or values used by
+third-party libraries.
+
+21
+00:01:47.768 --> 00:01:54.515
+Interop can be necessary and useful, but
+it deserves clear ownership and review.
+
+22
+00:01:54.595 --> 00:02:01.838
+Third-party JavaScript, browser
+extensions, analytics scripts, embedded content,
+
+23
+00:02:01.918 --> 00:02:06.383
+and component libraries can change the
+risk picture.
+
+24
+00:02:06.463 --> 00:02:11.325
+They may observe page behavior, manipulate
+the document,
+
+25
+00:02:11.405 --> 00:02:16.267
+load additional resources, or change how
+data is handled.
+
+26
+00:02:16.347 --> 00:02:23.590
+A production Blazor application should
+know which browser-side dependencies it uses
+
+27
+00:02:23.670 --> 00:02:24.364
+and why.
+
+28
+00:02:24.444 --> 00:02:28.611
+Authoritative checks belong on the server
+or API.
+
+29
+00:02:28.691 --> 00:02:34.248
+The client may hold temporary state and
+coordinate the interface,
+
+30
+00:02:34.328 --> 00:02:40.479
+but the server should confirm identity,
+authorization, resource scope,
+
+31
+00:02:40.559 --> 00:02:47.009
+and business rules before returning
+protected data or performing important
+
+32
+00:02:47.089 --> 00:02:48.180
+operations.

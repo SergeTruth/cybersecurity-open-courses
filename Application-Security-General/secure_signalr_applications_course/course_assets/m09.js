@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Errors, Logging, Secrets, and Deployment Review",
+  "graphicAlt": "Safe client errors and protected event metadata support operations while token and full-URL logging are excluded and deployment boundaries are reviewed.",
+  "narration": "Real-time applications need operational visibility, but visibility should not become data exposure. Useful SignalR logs include connection attempts, authentication failures, authorization denials, rejected messages, validation failures, disconnect reasons, unexpected exceptions, group membership changes, administrative actions, and unusual resource-control events.\n\nSensitive data should stay out of logs. Do not log passwords, tokens, secrets, raw sensitive payloads, or full query strings that may contain access tokens. Logging should also avoid excessive personal data and should respect the same retention, access control, and review standards used for the rest of the application.\n\nError behavior deserves review. SignalR returns generic error information by default, which is usually safer for production clients. Custom hub errors can be useful, but they should be written for the receiving audience and checked for internal details, identifiers, stack information, sensitive business data, and confusing recovery guidance. Development error detail should not silently become production behavior.\n\nDeployment review should bring the earlier topics together. Confirm HTTPS, CORS, WebSocket origin behavior, access token logging, reverse proxies, load balancers, scale-out settings, Azure SignalR Service or backplane configuration, secrets management, dependency review, monitoring, alerting, incident handoff, and documented exceptions.\n\nA good operational baseline makes security review repeatable. Teams know which events are logged, which values are redacted, which deployment settings matter, who receives alerts, and how exceptions are approved. That practical discipline is what turns SignalR security from a one-time checklist into an ongoing engineering practice.",
+  "narrationPoints": [
+    "Real-time applications need operational visibility, but visibility should not become data exposure.",
+    "Sensitive data should stay out of logs.",
+    "Error behavior deserves review.",
+    "Deployment review should bring the earlier topics together.",
+    "A good operational baseline makes security review repeatable."
+  ]
+};

@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.256
+Browser-facing output deserves special
+review because the browser interprets markup,
+
+2
+00:00:09.336 --> 00:00:12.838
+scripts, URLs, styles, and events.
+
+3
+00:00:12.918 --> 00:00:20.390
+React rendering provides useful escaping
+behavior for normal text output,
+
+4
+00:00:20.470 --> 00:00:25.607
+but that does not make every rendering
+pattern safe.
+
+5
+00:00:25.687 --> 00:00:33.742
+Dangerous HTML rendering, user-generated
+content, Markdown transformations,
+
+6
+00:00:33.822 --> 00:00:42.228
+rich text, URLs, attributes, and embedded
+content all need context-aware handling.
+
+7
+00:00:42.308 --> 00:00:50.480
+The question is whether untrusted content
+can become active browser behavior in an
+
+8
+00:00:50.560 --> 00:00:52.661
+unintended context.
+
+9
+00:00:52.741 --> 00:01:00.563
+CSRF is concerned with unwanted
+state-changing requests made by a browser in an
+
+10
+00:01:00.643 --> 00:01:03.095
+authenticated context.
+
+11
+00:01:03.175 --> 00:01:10.413
+The exact controls depend on the
+authentication design, request method,
+
+12
+00:01:10.493 --> 00:01:17.381
+cookie behavior, and framework pattern,
+but the principle is stable:
+
+13
+00:01:17.461 --> 00:01:22.248
+browser credentials can be sent
+automatically,
+
+14
+00:01:22.328 --> 00:01:30.383
+so state-changing endpoints should have
+protections appropriate to their risk.
+
+15
+00:01:30.463 --> 00:01:37.701
+SameSite cookie behavior, explicit
+anti-CSRF patterns, origin checks,
+
+16
+00:01:37.781 --> 00:01:45.603
+and requiring deliberate user interaction
+may all be relevant depending on the
+
+17
+00:01:45.683 --> 00:01:47.084
+application.
+
+18
+00:01:47.164 --> 00:01:55.687
+CORS controls which browser-based origins
+are allowed to make cross-origin requests
+
+19
+00:01:55.767 --> 00:01:57.868
+under browser rules.
+
+20
+00:01:57.948 --> 00:02:02.968
+It is not authentication, it is not
+authorization,
+
+21
+00:02:03.048 --> 00:02:07.484
+and it does not protect non-browser
+clients.
+
+22
+00:02:07.564 --> 00:02:15.036
+Broad origins combined with credentials
+can create unnecessary exposure.
+
+23
+00:02:15.116 --> 00:02:20.603
+CORS policy should match the intended
+browser clients,
+
+24
+00:02:20.683 --> 00:02:28.739
+while server-side authentication and
+authorization continue to enforce who may
+
+25
+00:02:28.819 --> 00:02:31.037
+access or change data.
+
+26
+00:02:31.117 --> 00:02:37.771
+Response safety also includes redirects,
+response minimization,
+
+27
+00:02:37.851 --> 00:02:40.069
+and security headers.
+
+28
+00:02:40.149 --> 00:02:47.504
+Redirect targets should be constrained so
+users are not sent to unintended
+
+29
+00:02:47.584 --> 00:02:49.102
+destinations.
+
+30
+00:02:49.182 --> 00:02:56.537
+Responses should return only the fields
+needed for the caller and use case.
+
+31
+00:02:56.617 --> 00:03:03.038
+Security headers, including Content
+Security Policy concepts,
+
+32
+00:03:03.118 --> 00:03:09.189
+can reduce browser-side risk when
+configured thoughtfully.
+
+33
+00:03:09.269 --> 00:03:15.456
+These controls work best when reviewed
+together with routing,
+
+34
+00:03:15.536 --> 00:03:21.140
+session behavior, output rendering, and
+data exposure.

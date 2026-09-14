@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Preparing Code for Review",
+  "graphicAlt": "A source-code data-flow map follows input through handlers, services, and storage while identifying trust boundaries, authentication, authorization, and exact code locations.",
+  "narration": "Preparation starts with understanding how the application is put together. Identify the major components, entry points, data stores, service boundaries, and deployment model. AI can help summarize unfamiliar files, trace high-level call paths, or describe what a framework route or handler appears to do. Use that help to orient yourself, but keep the summaries tied to specific files and functions. A useful summary tells you where to look next. It does not replace inspection.\n\nSecurity review depends heavily on data flow and trust boundaries. Track where input enters the system, how it is parsed, where authentication is enforced, how authorization decisions are made, and where sensitive data is stored or transmitted. Pay attention to secrets, dependency configuration, environment variables, logging behavior, and feature flags. Vulnerabilities often live in the gap between components: a controller trusts a service, a service trusts a queue message, or a background job assumes data was validated earlier.\n\nWhen using AI to prepare, provide bounded context. Ask it to summarize a file, identify external inputs, list security-relevant assumptions, or explain how a particular data path appears to work. Avoid dumping a full repository into a prompt when a smaller slice will do. Keep notes about what the AI inferred and what the code actually proves. Good preparation gives the reviewer a map: what matters, where boundaries exist, and which assumptions need direct verification.",
+  "narrationPoints": [
+    "Preparation starts with understanding how the application is put together.",
+    "Security review depends heavily on data flow and trust boundaries.",
+    "When using AI to prepare, provide bounded context."
+  ]
+};

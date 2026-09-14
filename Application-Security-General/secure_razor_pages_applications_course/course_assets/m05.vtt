@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.963
+Model binding converts request data into
+page model properties,
+
+2
+00:00:07.043 --> 00:00:11.038
+handler parameters, and input objects.
+
+3
+00:00:11.118 --> 00:00:18.521
+That convenience is one of the reasons
+Razor Pages can be pleasant to build.
+
+4
+00:00:18.601 --> 00:00:24.829
+It also creates a boundary that must be
+designed deliberately.
+
+5
+00:00:24.909 --> 00:00:30.784
+A value that appears in a typed property
+has been converted;
+
+6
+00:00:30.864 --> 00:00:33.919
+it has not become trustworthy.
+
+7
+00:00:33.999 --> 00:00:41.755
+Bound data should be treated as untrusted
+until the server validates it for the
+
+8
+00:00:41.835 --> 00:00:43.010
+operation.
+
+9
+00:00:43.090 --> 00:00:50.140
+Validation should include required fields,
+types, lengths, formats,
+
+10
+00:00:50.220 --> 00:00:58.328
+ranges, enumerated values, relationships,
+workflow state, and business rules.
+
+11
+00:00:58.408 --> 00:01:02.521
+A valid shape is not always a valid
+action,
+
+12
+00:01:02.601 --> 00:01:09.181
+and a valid action may depend on the
+current user and target record.
+
+13
+00:01:09.261 --> 00:01:16.194
+Input models and view models help define
+the intended input contract.
+
+14
+00:01:16.274 --> 00:01:22.736
+A page that updates a display name should
+not accept account role,
+
+15
+00:01:22.816 --> 00:01:29.749
+approval state, tenant identifier,
+internal notes, or audit fields.
+
+16
+00:01:29.829 --> 00:01:37.702
+Narrow models make it easier for reviewers
+to see what the user is allowed to send
+
+17
+00:01:37.782 --> 00:01:40.250
+and what the server owns.
+
+18
+00:01:40.330 --> 00:01:48.790
+Avoid binding directly to broad domain
+entities when doing so could allow accidental
+
+19
+00:01:48.870 --> 00:01:52.395
+modification of sensitive fields.
+
+20
+00:01:52.475 --> 00:02:00.348
+Domain objects often contain more data
+than a page should accept from a request.
+
+21
+00:02:00.428 --> 00:02:08.066
+They may include ownership, status,
+pricing, configuration, audit values,
+
+22
+00:02:08.146 --> 00:02:10.731
+or administrative flags.
+
+23
+00:02:10.811 --> 00:02:18.214
+Those fields should usually be set by
+server logic, not by general binding.
+
+24
+00:02:18.294 --> 00:02:25.580
+Client-side validation improves usability
+by catching mistakes early,
+
+25
+00:02:25.660 --> 00:02:30.477
+but it does not replace server-side
+validation.
+
+26
+00:02:30.557 --> 00:02:38.313
+The server must enforce the rules it
+depends on because clients can be changed,
+
+27
+00:02:38.393 --> 00:02:41.918
+disabled, scripted, or out of date.
+
+28
+00:02:41.998 --> 00:02:50.458
+A state-changing handler should check
+model validity and operation-specific rules
+
+29
+00:02:50.538 --> 00:02:52.888
+before making changes.
+
+30
+00:02:52.968 --> 00:02:58.726
+Safe update patterns assign intended
+fields explicitly.
+
+31
+00:02:58.806 --> 00:03:06.209
+Instead of allowing a bound object to
+overwrite a stored record wholesale,
+
+32
+00:03:06.289 --> 00:03:13.457
+load the trusted record, verify access,
+validate the requested change,
+
+33
+00:03:13.537 --> 00:03:19.177
+and assign only the fields the page is
+designed to update.
+
+34
+00:03:19.257 --> 00:03:26.660
+That pattern reduces over-posting and
+makes future review more reliable.

@@ -1,0 +1,152 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.645
+Every Flask route is a boundary between
+outside input and server-side behavior.
+
+2
+00:00:08.725 --> 00:00:16.630
+Request data may arrive through path
+parameters, query strings, form fields,
+
+3
+00:00:16.710 --> 00:00:24.136
+JSON bodies, headers, cookies, file
+uploads, and third-party webhooks.
+
+4
+00:00:24.216 --> 00:00:28.049
+Some of that data comes from a browser.
+
+5
+00:00:28.129 --> 00:00:36.514
+Some comes from scripts, mobile clients,
+partners, queues, or automated systems.
+
+6
+00:00:36.594 --> 00:00:39.588
+The secure default is simple:
+
+7
+00:00:39.668 --> 00:00:48.172
+treat request data as untrusted until it
+has been validated for the specific purpose
+
+8
+00:00:48.252 --> 00:00:49.690
+it will serve.
+
+9
+00:00:49.770 --> 00:00:55.160
+Validation is more than checking that a
+field exists.
+
+10
+00:00:55.240 --> 00:01:03.385
+Good validation considers type, shape,
+range, length, format, allowed values,
+
+11
+00:01:03.465 --> 00:01:05.621
+and business intent.
+
+12
+00:01:05.701 --> 00:01:13.965
+A customer identifier may be the correct
+type and still refer to a record the caller
+
+13
+00:01:14.045 --> 00:01:15.962
+should not access.
+
+14
+00:01:16.042 --> 00:01:23.708
+A date may parse correctly and still be
+outside the allowed business window.
+
+15
+00:01:23.788 --> 00:01:32.412
+A webhook may have the expected JSON
+structure and still need source authentication,
+
+16
+00:01:32.492 --> 00:01:37.882
+replay protection, and a clear processing
+contract.
+
+17
+00:01:37.962 --> 00:01:44.789
+Schema validation can help teams make
+request contracts explicit.
+
+18
+00:01:44.869 --> 00:01:52.535
+A schema can define required fields,
+optional fields, nesting, data types,
+
+19
+00:01:52.615 --> 00:01:56.807
+length constraints, and allowed values.
+
+20
+00:01:56.887 --> 00:02:04.193
+That does not remove the need for
+authorization or business rule checks,
+
+21
+00:02:04.273 --> 00:02:12.179
+but it reduces ambiguity and keeps route
+handlers from becoming a pile of ad hoc
+
+22
+00:02:12.259 --> 00:02:13.696
+assumptions.
+
+23
+00:02:13.776 --> 00:02:21.202
+Size limits are also part of validation
+because unbounded bodies, forms,
+
+24
+00:02:21.282 --> 00:02:29.667
+and uploads can affect memory, storage,
+parsing time, and downstream processing.
+
+25
+00:02:29.747 --> 00:02:34.658
+Safe error responses are part of input
+handling.
+
+26
+00:02:34.738 --> 00:02:41.685
+A client should receive enough information
+to correct a bad request,
+
+27
+00:02:41.765 --> 00:02:49.071
+but not raw stack traces, SQL fragments,
+secret values, internal paths,
+
+28
+00:02:49.151 --> 00:02:51.906
+or framework diagnostics.
+
+29
+00:02:51.986 --> 00:02:59.652
+For developers, the most useful pattern is
+consistency: parse the request,
+
+30
+00:02:59.732 --> 00:03:06.320
+validate its shape, enforce authorization,
+perform the action,
+
+31
+00:03:06.400 --> 00:03:09.873
+and return a controlled response.
+
+32
+00:03:09.953 --> 00:03:17.140
+That structure makes Flask routes easier
+to review and safer to change.

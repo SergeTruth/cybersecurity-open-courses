@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Remediation and Secure Refactoring",
+  "graphicAlt": "A proposed fix for a verified issue passes review and tests for expected behavior, edge cases, and rejection paths before human approval.",
+  "narration": "AI can be useful during remediation because it can draft safer alternatives, suggest validation logic, explain framework-specific APIs, or propose tests that exercise the corrected behavior. That does not make generated code safe by default. Every proposed change should be reviewed like any other security-sensitive code change. Confirm that it fixes the verified issue, preserves intended behavior, handles failure paths, and does not introduce a new weakness elsewhere.\n\nGood remediation is tied to context. Replacing an unsafe API, adding input validation, enforcing authorization, improving error handling, or changing cryptography must match the application architecture. A generic fix may compile and still be wrong for the service boundary, data model, performance requirement, or user workflow. Ask AI to explain assumptions and tradeoffs, not just provide a patch. Ask for minimal changes when stability matters, and ask for refactoring options when the surrounding design is part of the risk.\n\nTests are part of remediation. Add cases for the vulnerable behavior, the corrected behavior, edge cases, and expected rejection paths. When AI drafts tests, review whether they prove the security property rather than only increasing coverage. Avoid blind copy-paste remediation. Generated changes should go through normal review, static analysis, dependency checks, build validation, and human approval. The best remediation workflow uses AI to accelerate drafting while keeping engineering ownership where it belongs.",
+  "narrationPoints": [
+    "AI can be useful during remediation because it can draft safer alternatives, suggest validation logic, explain framework-specific APIs, or propose tests that exercise the corrected behavior.",
+    "Good remediation is tied to context.",
+    "Tests are part of remediation."
+  ]
+};

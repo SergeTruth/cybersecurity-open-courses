@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.187
+A Kubernetes deployment script should
+always know where it is operating.
+
+2
+00:00:05.267 --> 00:00:09.726
+The active context, cluster, namespace,
+environment, release name,
+
+3
+00:00:09.806 --> 00:00:15.022
+and target workload should be explicit and
+validated before a deployment begins.
+
+4
+00:00:15.102 --> 00:00:19.864
+A script that relies on whatever context
+happens to be active on an operator
+
+5
+00:00:19.944 --> 00:00:25.235
+workstation or runner is allowing hidden
+state to decide the target of a production
+
+6
+00:00:25.315 --> 00:00:25.845
+change.
+
+7
+00:00:25.925 --> 00:00:30.158
+Namespace validation is just as important
+as cluster validation.
+
+8
+00:00:30.238 --> 00:00:34.319
+A namespace mistake can deploy resources
+into the wrong tenant,
+
+9
+00:00:34.399 --> 00:00:38.179
+modify the wrong workload, expose a
+service unexpectedly,
+
+10
+00:00:38.259 --> 00:00:42.719
+or make a script believe it changed the
+intended system when it did not.
+
+11
+00:00:42.799 --> 00:00:47.334
+The script should confirm the intended
+namespace, workload, release,
+
+12
+00:00:47.414 --> 00:00:50.135
+and environment before applying changes,
+
+13
+00:00:50.215 --> 00:00:54.902
+especially when the same names exist
+across multiple clusters or stages.
+
+14
+00:00:54.982 --> 00:00:59.820
+Development, staging, and production
+should have separate expectations,
+
+15
+00:00:59.900 --> 00:01:02.772
+credentials, policies, and approval paths.
+
+16
+00:01:02.852 --> 00:01:06.556
+A development deployment may be frequent
+and low-impact.
+
+17
+00:01:06.636 --> 00:01:11.398
+A production deployment may require a
+protected branch, a tagged release,
+
+18
+00:01:11.478 --> 00:01:15.106
+a change window, a ticket reference, or an
+approval gate.
+
+19
+00:01:15.186 --> 00:01:20.629
+The script should reflect those
+differences rather than treating every environment
+
+20
+00:01:20.709 --> 00:01:23.279
+as the same target with different names.
+
+21
+00:01:23.359 --> 00:01:27.592
+For high-impact actions, confirmation or
+gating can be valuable.
+
+22
+00:01:27.672 --> 00:01:31.225
+That may mean a CI/CD environment gate, a
+protected tag,
+
+23
+00:01:31.305 --> 00:01:36.520
+an explicit operator confirmation, or a
+check that required metadata is present.
+
+24
+00:01:36.600 --> 00:01:38.868
+The core defensive habit is simple:
+
+25
+00:01:38.948 --> 00:01:42.425
+validate target scope before changing
+cluster state.
+
+26
+00:01:42.505 --> 00:01:47.645
+If context, namespace, release, workload,
+or environment cannot be confirmed,
+
+27
+00:01:47.725 --> 00:01:50.900
+fail clearly before the script applies
+anything.

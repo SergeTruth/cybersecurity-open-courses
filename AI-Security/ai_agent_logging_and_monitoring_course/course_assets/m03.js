@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What to Log and What Not to Log",
+  "graphicAlt": "Event metadata reaches a protected evidence log, while secrets and raw content are blocked; minimization, redaction, and retention limits constrain collection.",
+  "narration": "The strongest logging programs begin with a clear list of security-relevant events. For agents, that includes prompt and response metadata, tool-call metadata, permission checks, data access events, high-impact action attempts, policy denials, user approvals, model version, prompt version, retrieval source references, redaction decisions, and error conditions. These events help teams understand whether the agent followed policy and whether it interacted with sensitive systems appropriately.\n\nWhat not to log is just as important. Secrets, tokens, credentials, unnecessary personal data, regulated data, confidential business information, and full sensitive documents should not be captured in plaintext by default. Logs often have broad operational access and long retention periods. If logs become a second copy of everything the agent saw, they can become a major privacy and security liability.\n\nData minimization means collecting only what is needed for legitimate security, operational, audit, or support purposes. A tool name, resource identifier, authorization outcome, and redacted argument summary may be enough for many investigations. For some high-risk actions, more detailed evidence may be justified. The right balance depends on risk, regulation, business need, and the sensitivity of the data involved.\n\nRetention rules should match the purpose of the logs. Debug data may have a short lifetime. Security audit trails may require longer retention. Sensitive content should be redacted or tokenized where possible. Access to logs should be monitored and limited. Good logging does not mean maximum collection; it means intentional collection that supports accountability without creating unnecessary exposure.",
+  "narrationPoints": [
+    "The strongest logging programs begin with a clear list of security-relevant events.",
+    "What not to log is just as important.",
+    "Data minimization means collecting only what is needed for legitimate security, operational, audit, or support purposes.",
+    "Retention rules should match the purpose of the logs."
+  ]
+};

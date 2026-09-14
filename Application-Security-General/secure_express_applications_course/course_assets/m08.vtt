@@ -1,0 +1,118 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.482
+Express applications rely heavily on npm
+dependencies and middleware packages.
+
+2
+00:00:08.562 --> 00:00:15.733
+Every package that parses input, handles
+authentication, signs tokens,
+
+3
+00:00:15.813 --> 00:00:21.713
+processes files, renders templates,
+connects to services,
+
+4
+00:00:21.793 --> 00:00:29.080
+or changes build behavior becomes part of
+the application security story.
+
+5
+00:00:29.160 --> 00:00:37.373
+Reviewing package.json, lockfile changes,
+install scripts, package provenance,
+
+6
+00:00:37.453 --> 00:00:45.435
+and security advisories helps teams
+understand what is being added to the runtime
+
+7
+00:00:45.515 --> 00:00:47.481
+and build pipeline.
+
+8
+00:00:47.561 --> 00:00:55.080
+npm audit is useful input, but it is not a
+complete security program by itself.
+
+9
+00:00:55.160 --> 00:01:01.869
+Secrets should never be treated as
+ordinary configuration strings.
+
+10
+00:01:01.949 --> 00:01:08.890
+Database passwords, API keys, OAuth client
+secrets, JWT signing keys,
+
+11
+00:01:08.970 --> 00:01:13.597
+session secrets, webhook secrets, npm
+tokens,
+
+12
+00:01:13.677 --> 00:01:18.535
+and service credentials should not be
+hardcoded,
+
+13
+00:01:18.615 --> 00:01:25.903
+committed in real .env files, printed
+during startup, copied into images,
+
+14
+00:01:25.983 --> 00:01:33.502
+exposed in frontend bundles, stored in
+tickets, or logged during debugging.
+
+15
+00:01:33.582 --> 00:01:39.134
+Environment variables can deliver secrets
+to a process,
+
+16
+00:01:39.214 --> 00:01:45.807
+but they are not a full secrets-management
+strategy by themselves.
+
+17
+00:01:45.887 --> 00:01:52.828
+Configuration hygiene means separating
+development, test, staging,
+
+18
+00:01:52.908 --> 00:01:56.609
+and production values deliberately.
+
+19
+00:01:56.689 --> 00:02:04.787
+A .env.example file can document required
+settings without exposing real values.
+
+20
+00:02:04.867 --> 00:02:13.080
+CI/CD variables and secret managers can
+provide protected runtime configuration.
+
+21
+00:02:13.160 --> 00:02:18.134
+Rotation should be possible without code
+changes.
+
+22
+00:02:18.214 --> 00:02:25.848
+Logs should avoid authorization headers,
+cookies, session IDs, reset links,
+
+23
+00:02:25.928 --> 00:02:29.167
+tokens, and sensitive payloads.
+
+24
+00:02:29.247 --> 00:02:37.460
+Secure code can still fail badly when
+dependencies or secrets are handled casually.

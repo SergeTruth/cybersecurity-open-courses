@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.417
+Secure APIs control what they return as
+carefully as what they accept.
+
+2
+00:00:07.497 --> 00:00:14.648
+A Minimal API endpoint may be close to the
+data access code, service call,
+
+3
+00:00:14.728 --> 00:00:18.949
+or domain object that produced the result.
+
+4
+00:00:19.029 --> 00:00:25.829
+That closeness can tempt teams to return
+internal objects directly.
+
+5
+00:00:25.909 --> 00:00:31.771
+Response shaping keeps the external
+contract deliberate.
+
+6
+00:00:31.851 --> 00:00:39.588
+Response DTOs help prevent accidental
+exposure of internal fields, secrets,
+
+7
+00:00:39.668 --> 00:00:46.703
+flags, tokens, administrative data, tenant
+markers, internal notes,
+
+8
+00:00:46.783 --> 00:00:48.658
+or workflow state.
+
+9
+00:00:48.738 --> 00:00:54.952
+The caller should receive the information
+needed for the task,
+
+10
+00:00:55.032 --> 00:00:59.604
+not every property the server happens to
+have.
+
+11
+00:00:59.684 --> 00:01:08.008
+This is especially important for endpoints
+that serve multiple client types or user
+
+12
+00:01:08.088 --> 00:01:08.791
+roles.
+
+13
+00:01:08.871 --> 00:01:16.257
+Error responses should be useful to
+clients but not disclose stack traces,
+
+14
+00:01:16.337 --> 00:01:24.544
+internal implementation details, secret
+names, connection strings, file paths,
+
+15
+00:01:24.624 --> 00:01:27.320
+or sensitive identifiers.
+
+16
+00:01:27.400 --> 00:01:35.724
+A consistent error shape helps clients
+handle failures while preserving sensitive
+
+17
+00:01:35.804 --> 00:01:39.673
+diagnostic detail for protected logs.
+
+18
+00:01:39.753 --> 00:01:44.912
+Status codes should be consistent and
+intentional.
+
+19
+00:01:44.992 --> 00:01:52.143
+A validation failure, authentication
+failure, authorization denial,
+
+20
+00:01:52.223 --> 00:01:57.381
+missing resource, conflict, rate-limit
+response,
+
+21
+00:01:57.461 --> 00:02:03.323
+and unexpected server failure should not
+all look the same.
+
+22
+00:02:03.403 --> 00:02:08.913
+Consistent status behavior helps clients,
+operators,
+
+23
+00:02:08.993 --> 00:02:13.331
+and security reviewers understand the API.
+
+24
+00:02:13.411 --> 00:02:21.501
+Problem details and typed results can
+support predictable API behavior when used
+
+25
+00:02:21.581 --> 00:02:22.753
+carefully.
+
+26
+00:02:22.833 --> 00:02:29.750
+They help define response shapes and make
+handlers easier to inspect.
+
+27
+00:02:29.830 --> 00:02:37.333
+The key is discipline: return clear
+outcomes, avoid raw exception details,
+
+28
+00:02:37.413 --> 00:02:43.041
+and keep sensitive data out of
+client-facing responses.
+
+29
+00:02:43.121 --> 00:02:50.858
+Logging can preserve operational detail
+that should not be sent to the client.
+
+30
+00:02:50.938 --> 00:02:58.090
+Safe logs can include correlation IDs,
+route names, status categories,
+
+31
+00:02:58.170 --> 00:03:06.376
+validation categories, and failure context
+without copying secrets or sensitive
+
+32
+00:03:06.456 --> 00:03:09.504
+request and response content.
+
+33
+00:03:09.584 --> 00:03:18.260
+The client response and operator
+diagnostic record should serve different audiences.

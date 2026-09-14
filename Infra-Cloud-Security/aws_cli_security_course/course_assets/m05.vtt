@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.234
+A Bash script should invoke the AWS CLI in
+a predictable and reviewable way.
+
+2
+00:00:07.314 --> 00:00:14.690
+The safer pattern is a fixed command
+structure with clearly separated options and
+
+3
+00:00:14.770 --> 00:00:15.732
+operands.
+
+4
+00:00:15.812 --> 00:00:23.508
+Avoid building one large command string
+from variable data and then re-interpreting
+
+5
+00:00:23.588 --> 00:00:25.512
+it through the shell.
+
+6
+00:00:25.592 --> 00:00:31.792
+That approach makes quoting harder, hides
+behavior from reviewers,
+
+7
+00:00:31.872 --> 00:00:37.644
+and can produce surprising results when an
+input is unexpected.
+
+8
+00:00:37.724 --> 00:00:41.465
+Quote values that should remain literal,
+
+9
+00:00:41.545 --> 00:00:47.959
+and use arrays where the script needs to
+assemble options and operands.
+
+10
+00:00:48.039 --> 00:00:54.666
+Validate service names, operation names,
+ARNs, regions, profile names,
+
+11
+00:00:54.746 --> 00:01:01.908
+resource identifiers, file paths, output
+paths, filters, query expressions,
+
+12
+00:01:01.988 --> 00:01:04.767
+and timeout values before use.
+
+13
+00:01:04.847 --> 00:01:11.047
+Validation should favor known allowed
+values and expected formats,
+
+14
+00:01:11.127 --> 00:01:16.792
+especially for scripts that can affect
+production resources.
+
+15
+00:01:16.872 --> 00:01:22.751
+Working directory control matters when
+scripts read templates,
+
+16
+00:01:22.831 --> 00:01:28.817
+policy documents, parameter files,
+artifacts, or JSON payloads.
+
+17
+00:01:28.897 --> 00:01:34.349
+A relative path should resolve from the
+intended directory,
+
+18
+00:01:34.429 --> 00:01:38.704
+not from wherever the script happened to
+start.
+
+19
+00:01:38.784 --> 00:01:44.663
+Tool version expectations also matter
+because AWS CLI behavior,
+
+20
+00:01:44.743 --> 00:01:48.271
+output formats, paginated responses,
+
+21
+00:01:48.351 --> 00:01:54.444
+and service features can vary across
+versions and configurations.
+
+22
+00:01:54.524 --> 00:01:58.692
+Result handling is part of secure
+automation.
+
+23
+00:01:58.772 --> 00:02:01.872
+Scripts should check exit status,
+
+24
+00:02:01.952 --> 00:02:06.656
+distinguish expected empty results from
+failures,
+
+25
+00:02:06.736 --> 00:02:11.546
+and stop before later steps trust
+incomplete output.
+
+26
+00:02:11.626 --> 00:02:15.795
+Clear error messages help operators
+recover,
+
+27
+00:02:15.875 --> 00:02:21.647
+but those messages should not expose
+secrets, raw credentials,
+
+28
+00:02:21.727 --> 00:02:27.178
+sensitive resource details, or excessive
+response bodies.
+
+29
+00:02:27.258 --> 00:02:34.420
+A secure AWS CLI wrapper is
+understandable, strict, and intentionally boring.

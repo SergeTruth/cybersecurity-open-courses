@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.404
+Razor Pages applications often use
+cookies, session state, TempData,
+
+2
+00:00:07.484 --> 00:00:14.733
+hidden fields, query strings, and route
+values to support user workflows.
+
+3
+00:00:14.813 --> 00:00:20.796
+These mechanisms can make multi-step
+experiences smoother,
+
+4
+00:00:20.876 --> 00:00:28.126
+but they also carry assumptions about
+trust, lifetime, scope, and source.
+
+5
+00:00:28.206 --> 00:00:34.879
+User state deserves the same review
+attention as forms and handlers.
+
+6
+00:00:34.959 --> 00:00:42.669
+Cookies are security-sensitive because
+they may carry authentication state,
+
+7
+00:00:42.749 --> 00:00:50.343
+correlation state, antiforgery state,
+preferences, workflow identifiers,
+
+8
+00:00:50.423 --> 00:00:52.954
+or application settings.
+
+9
+00:00:53.034 --> 00:00:59.018
+Review SameSite, Secure, HttpOnly,
+lifetime, path, domain,
+
+10
+00:00:59.098 --> 00:01:03.585
+and purpose for security-sensitive
+cookies.
+
+11
+00:01:03.665 --> 00:01:11.260
+A cookie choice that is reasonable for a
+preference may be wrong for a session or
+
+12
+00:01:11.340 --> 00:01:13.526
+workflow identifier.
+
+13
+00:01:13.606 --> 00:01:19.935
+Sensitive data should be minimized in
+client-controlled state.
+
+14
+00:01:20.015 --> 00:01:23.927
+The browser can store and return values,
+
+15
+00:01:24.007 --> 00:01:28.955
+but that does not make those values
+authoritative.
+
+16
+00:01:29.035 --> 00:01:33.407
+Hidden fields, query strings, route
+values,
+
+17
+00:01:33.487 --> 00:01:41.772
+and client-stored preferences should not
+become trusted sources for authorization
+
+18
+00:01:41.852 --> 00:01:48.295
+decisions, pricing, ownership, role,
+tenant, or approval state.
+
+19
+00:01:48.375 --> 00:01:54.819
+Session and TempData can be useful for
+short workflows, messages,
+
+20
+00:01:54.899 --> 00:01:56.970
+and temporary state.
+
+21
+00:01:57.050 --> 00:02:05.105
+They should not become hidden stores for
+secrets, broad authorization decisions,
+
+22
+00:02:05.185 --> 00:02:09.903
+or important business state that no one
+reviews.
+
+23
+00:02:09.983 --> 00:02:18.037
+If a handler depends on session or
+TempData to make a security-sensitive decision,
+
+24
+00:02:18.117 --> 00:02:26.287
+reviewers should understand why that value
+is trustworthy and how it is maintained.
+
+25
+00:02:26.367 --> 00:02:34.536
+Server-side authorization should be based
+on trusted server-side data and current
+
+26
+00:02:34.616 --> 00:02:35.422
+policy.
+
+27
+00:02:35.502 --> 00:02:40.105
+A page can use user state to improve
+experience,
+
+28
+00:02:40.185 --> 00:02:47.894
+but the final decision should be validated
+against records, identity, policy,
+
+29
+00:02:47.974 --> 00:02:52.346
+and workflow state that the server
+controls.
+
+30
+00:02:52.426 --> 00:03:00.596
+This distinction prevents convenience
+state from becoming accidental authority.
+
+31
+00:03:00.676 --> 00:03:07.350
+The baseline is conservative: keep
+client-controlled state small,
+
+32
+00:03:07.430 --> 00:03:11.227
+protect cookies according to purpose,
+
+33
+00:03:11.307 --> 00:03:15.334
+avoid storing secrets in workflow state,
+
+34
+00:03:15.414 --> 00:03:19.557
+validate state transitions on the server,
+
+35
+00:03:19.637 --> 00:03:25.620
+and make user-state assumptions visible
+during page review.

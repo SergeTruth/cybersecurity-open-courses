@@ -1,0 +1,152 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.753
+Secure C review should focus on data flow,
+ownership, length checks, cleanup,
+
+2
+00:00:08.833 --> 00:00:11.209
+and failure behavior.
+
+3
+00:00:11.289 --> 00:00:19.042
+Review where input enters, how it is
+validated, how sizes are calculated,
+
+4
+00:00:19.122 --> 00:00:27.250
+and where data is copied, formatted,
+stored, or passed to another component.
+
+5
+00:00:27.330 --> 00:00:34.207
+Review every allocation, every free, every
+ownership transfer,
+
+6
+00:00:34.287 --> 00:00:39.164
+and every pointer stored beyond a local
+scope.
+
+7
+00:00:39.244 --> 00:00:46.497
+A pointer saved into a structure,
+callback, global variable, cache,
+
+8
+00:00:46.577 --> 00:00:52.454
+or thread context may outlive the scope
+that created it.
+
+9
+00:00:52.534 --> 00:01:00.412
+The code should show who owns the object
+and who is responsible for cleanup.
+
+10
+00:01:00.492 --> 00:01:04.493
+Review boundary handling carefully.
+
+11
+00:01:04.573 --> 00:01:10.826
+Test empty input, maximum allowed sizes,
+too-large input,
+
+12
+00:01:10.906 --> 00:01:19.034
+negative numbers, malformed records,
+embedded delimiters, partial reads,
+
+13
+00:01:19.114 --> 00:01:24.616
+interrupted operations, and allocation
+failures.
+
+14
+00:01:24.696 --> 00:01:33.824
+These cases often reveal assumptions that
+ordinary happy-path tests do not exercise.
+
+15
+00:01:33.904 --> 00:01:36.655
+Failure testing matters.
+
+16
+00:01:36.735 --> 00:01:38.861
+A file open can fail.
+
+17
+00:01:38.941 --> 00:01:41.192
+A read can be partial.
+
+18
+00:01:41.272 --> 00:01:45.523
+A memory allocation can return failure.
+
+19
+00:01:45.603 --> 00:01:50.105
+A parser can stop halfway through a
+record.
+
+20
+00:01:50.185 --> 00:01:54.186
+A cleanup call can encounter an error.
+
+21
+00:01:54.266 --> 00:02:00.394
+The design should define which failures
+are recoverable,
+
+22
+00:02:00.474 --> 00:02:07.351
+which should stop processing, and what
+state remains afterward.
+
+23
+00:02:07.431 --> 00:02:13.308
+Review logging and errors for sensitive
+data exposure.
+
+24
+00:02:13.388 --> 00:02:19.515
+C code that handles raw buffers, paths,
+keys, device data,
+
+25
+00:02:19.595 --> 00:02:28.474
+or protocol records should not dump
+arbitrary memory or raw input into routine logs.
+
+26
+00:02:28.554 --> 00:02:37.432
+Safe diagnostics preserve enough context
+for operators without turning logs into a
+
+27
+00:02:37.512 --> 00:02:39.638
+data exposure path.
+
+28
+00:02:39.718 --> 00:02:46.470
+Review concurrency assumptions if buffers,
+handles, globals,
+
+29
+00:02:46.550 --> 00:02:54.553
+or shared structures can be accessed by
+multiple threads, signal handlers,
+
+30
+00:02:54.633 --> 00:02:58.385
+interrupt handlers, or callbacks.
+
+31
+00:02:58.465 --> 00:03:07.343
+Secure C review is strongest when it uses
+checklists to make these habits repeatable
+
+32
+00:03:07.423 --> 00:03:13.300
+rather than relying on one expert to
+notice every issue.

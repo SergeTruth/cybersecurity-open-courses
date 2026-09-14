@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Hubs, Methods, and Client Invocation",
+  "graphicAlt": "Narrow method contracts reach trusted server decisions; client callbacks deliver results but do not enforce business permissions.",
+  "narration": "A SignalR hub is not just a convenient transport wrapper. Its method names, argument lists, return values, and side effects are part of the application security surface. If a method changes application state, looks up data, joins a group, sends a targeted notification, or triggers a workflow, then it should be treated as an intentional application action with a defined trust boundary.\n\nGood hub design starts with narrow methods. A hub method should represent one clear operation, accept the smallest useful set of inputs, and return only the data the caller needs. Broad methods that accept loosely shaped objects or leave important interpretation to the client are harder to review and harder to protect consistently.\n\nClient callbacks need a different mental model. A server may call client-side functions to deliver data, update a screen, or notify a user about a state change. Those callbacks are delivery mechanisms. They should not be the only place where business rules, permission checks, tenant separation, or administrative decisions are enforced. A modified or outdated client must not be able to turn a display decision into a server-side authorization decision.\n\nHub context, connection identifiers, users, groups, and client proxies are useful, but they should be handled deliberately. Separate public notifications, authenticated user events, tenant-scoped messages, administrative messages, and system operations in the design. That separation makes it easier to review who can call each method, who can receive each message, and what server-side data supports the decision.\n\nA secure SignalR API is predictable. The method set is small enough to reason about, sensitive operations stand out during review, and the server remains responsible for identity, authorization, validation, routing decisions, and audit events.",
+  "narrationPoints": [
+    "A SignalR hub is not just a convenient transport wrapper.",
+    "Good hub design starts with narrow methods.",
+    "Client callbacks need a different mental model.",
+    "Hub context, connection identifiers, users, groups, and client proxies are useful, but they should be handled deliberately.",
+    "A secure SignalR API is predictable."
+  ]
+};

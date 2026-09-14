@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Authorization for Hubs, Methods, Users, and Groups",
+  "graphicAlt": "Hub, method, and resource policies govern protected actions; routing groups are not equivalent to authorization.",
+  "narration": "Authorization answers a different question from authentication: what may this connected user do? An authenticated connection proves an identity or client context. It does not automatically prove that the caller may use every hub, invoke every method, read every resource, join every group, or receive every targeted message.\n\nSignalR applications can use hub-level authorization to protect an entire hub. That is useful when every method on the hub requires a common baseline, such as an authenticated account or a specific application policy. Method-level authorization is useful when sensitive actions need stronger checks than ordinary notifications or user-level operations.\n\nPolicy-based authorization helps express requirements in maintainable terms. A policy may depend on roles, claims, scopes, tenant membership, subscription state, administrative status, or other business rules. For resource-sensitive actions, the hub often needs to check trusted server-side data at the time the method runs. Ownership, tenant boundaries, account status, and delegated permissions should not be accepted only because a client supplied an identifier.\n\nUI hiding is not server-side authorization. A button may be hidden for a user who should not perform an action, but the hub method still needs its own enforcement. Clients can be outdated, modified, automated, or simply wrong. The server is the place where authorization decisions must be made and recorded.\n\nGroups are also not a complete authorization system. They are useful for routing messages, but group membership must be managed by trusted server-side decisions and refreshed when permissions change. If a user loses access, active connections and group membership may need explicit removal, refresh, or reconnection behavior. Treat groups as delivery structure, not as the whole permission model.",
+  "narrationPoints": [
+    "Authorization answers a different question from authentication: what may this connected user do?",
+    "SignalR applications can use hub-level authorization to protect an entire hub.",
+    "Policy-based authorization helps express requirements in maintainable terms.",
+    "UI hiding is not server-side authorization.",
+    "Groups are also not a complete authorization system."
+  ]
+};

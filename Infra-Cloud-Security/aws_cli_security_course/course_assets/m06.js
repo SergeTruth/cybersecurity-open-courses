@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Output Handling, JSON, Files, and Logs",
+  "graphicAlt": "Structured output is parsed into specific fields; only an expected result advances, while empty or ambiguous results require handling. Files and logs remain controlled.",
+  "narration": "AWS CLI output is often consumed by later automation. A script may query JSON, extract an identifier, select a resource, compare configuration, write a file, or decide whether the next step should run. That output may contain resource names, account details, ARNs, endpoints, policy documents, configuration values, or sensitive context. Output handling should be deliberate because later automation may trust it.\n\nStructured parsing is safer than fragile text assumptions. Scripts should request expected output formats and parse specific fields instead of depending on incidental formatting. They should handle empty responses, multiple matches, missing fields, pagination, and unexpected values clearly. A missing result is not the same as success, and multiple results may indicate that the target was not specific enough.\n\nOutput files should go to approved destinations with appropriate permissions and retention expectations. Temporary files, generated JSON, policy documents, inventory data, and support bundles can reveal sensitive operational context even when they do not contain raw credentials. The script should avoid writing sensitive output into shared workspaces, broad CI/CD artifacts, or long-lived logs without a reason.\n\nLogs should provide minimal useful evidence. Good logs show high-level identity, account, region, action, target category, time, and result. They avoid access keys, session tokens, secrets, private data, excessive raw responses, and sensitive policy or configuration details. Secure output handling helps automation remain useful without turning logs and files into another source of exposure.",
+  "narrationPoints": [
+    "AWS CLI output is often consumed by later automation.",
+    "Structured parsing is safer than fragile text assumptions.",
+    "Output files should go to approved destinations with appropriate permissions and retention expectations.",
+    "Logs should provide minimal useful evidence."
+  ]
+};

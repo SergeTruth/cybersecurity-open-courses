@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.555
+Users and groups are routing tools in
+SignalR.
+
+2
+00:00:04.635 --> 00:00:11.600
+They help the server decide which active
+connections should receive a message.
+
+3
+00:00:11.680 --> 00:00:16.878
+A single user may have several connections
+at the same time,
+
+4
+00:00:16.958 --> 00:00:22.260
+such as a browser tab, a mobile session,
+and a desktop client.
+
+5
+00:00:22.340 --> 00:00:29.721
+The design should account for that
+one-to-many relationship when sending targeted
+
+6
+00:00:29.801 --> 00:00:32.608
+messages or tracking presence.
+
+7
+00:00:32.688 --> 00:00:38.614
+Group membership should come from trusted
+server-side decisions.
+
+8
+00:00:38.694 --> 00:00:44.620
+A group can represent a room, tenant,
+project, role-like audience,
+
+9
+00:00:44.700 --> 00:00:50.002
+subscription, administrative channel, or
+workflow state,
+
+10
+00:00:50.082 --> 00:00:55.488
+but joining that group should follow the
+application policy.
+
+11
+00:00:55.568 --> 00:01:01.494
+The server should decide whether a
+connection belongs in the group,
+
+12
+00:01:01.574 --> 00:01:08.331
+and it should revisit that decision when
+the underlying permission changes.
+
+13
+00:01:08.411 --> 00:01:15.689
+Groups should not replace identity,
+authorization policies, or resource checks.
+
+14
+00:01:15.769 --> 00:01:18.783
+They can make delivery efficient,
+
+15
+00:01:18.863 --> 00:01:25.517
+but they do not prove that a caller may
+act on a resource or receive a sensitive
+
+16
+00:01:25.597 --> 00:01:26.429
+message.
+
+17
+00:01:26.509 --> 00:01:33.578
+A secure design combines authenticated
+identity, server-side authorization,
+
+18
+00:01:33.658 --> 00:01:36.361
+and careful group management.
+
+19
+00:01:36.441 --> 00:01:39.560
+Presence features need restraint.
+
+20
+00:01:39.640 --> 00:01:44.526
+Showing that a user is online, typing,
+viewing a record,
+
+21
+00:01:44.606 --> 00:01:48.661
+or active in a room can improve
+collaboration,
+
+22
+00:01:48.741 --> 00:01:52.483
+but it can also reveal sensitive behavior.
+
+23
+00:01:52.563 --> 00:01:58.593
+Presence should respect tenant boundaries,
+privacy expectations,
+
+24
+00:01:58.673 --> 00:02:06.054
+and the difference between internal
+operational signals and user-visible status.
+
+25
+00:02:06.134 --> 00:02:12.580
+Disconnect and reconnect behavior affects
+group membership, presence,
+
+26
+00:02:12.660 --> 00:02:15.155
+and delivery expectations.
+
+27
+00:02:15.235 --> 00:02:21.473
+Teams should define what happens when a
+connection drops, reconnects,
+
+28
+00:02:21.553 --> 00:02:25.087
+changes identity, or loses permission.
+
+29
+00:02:25.167 --> 00:02:32.341
+Real-time delivery is most reliable when
+those lifecycle decisions are explicit
+
+30
+00:02:32.421 --> 00:02:34.500
+instead of accidental.

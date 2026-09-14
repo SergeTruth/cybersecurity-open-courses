@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.509
+Minimal API parameter binding converts
+request data into handler parameters.
+
+2
+00:00:08.589 --> 00:00:16.479
+That data may come from route values,
+query strings, headers, request bodies,
+
+3
+00:00:16.559 --> 00:00:20.265
+forms, services, or custom binders.
+
+4
+00:00:20.345 --> 00:00:27.637
+Binding is convenient because it lets the
+handler receive typed values.
+
+5
+00:00:27.717 --> 00:00:31.662
+It is not a security decision by itself.
+
+6
+00:00:31.742 --> 00:00:34.850
+Bound data remains untrusted.
+
+7
+00:00:34.930 --> 00:00:42.461
+A value that arrives as an integer, GUID,
+enum, string, DTO, uploaded file,
+
+8
+00:00:42.541 --> 00:00:49.714
+or service-resolved object still needs
+validation for the operation.
+
+9
+00:00:49.794 --> 00:00:55.891
+The binder can help create a value in the
+expected .NET shape,
+
+10
+00:00:55.971 --> 00:01:02.187
+but it does not know whether the value is
+allowed, meaningful,
+
+11
+00:01:02.267 --> 00:01:07.049
+owned by the caller, or safe for
+downstream use.
+
+12
+00:01:07.129 --> 00:01:11.791
+DTOs help define the intended input
+contract.
+
+13
+00:01:11.871 --> 00:01:18.685
+A create request, update request, search
+request, import request,
+
+14
+00:01:18.765 --> 00:01:27.133
+and administrative request should accept
+only the fields the caller is supposed to
+
+15
+00:01:27.213 --> 00:01:28.169
+provide.
+
+16
+00:01:28.249 --> 00:01:36.139
+A narrow DTO is easier to validate and
+easier to review than a broad domain model
+
+17
+00:01:36.219 --> 00:01:38.490
+with many properties.
+
+18
+00:01:38.570 --> 00:01:46.819
+Avoid binding directly to domain models
+when doing so would allow over-posting or
+
+19
+00:01:46.899 --> 00:01:51.680
+accidental modification of sensitive
+fields.
+
+20
+00:01:51.760 --> 00:01:59.531
+Server-controlled values such as
+ownership, tenant, role, approval state,
+
+21
+00:01:59.611 --> 00:02:02.838
+pricing, status, audit fields,
+
+22
+00:02:02.918 --> 00:02:09.852
+or administrative flags should usually be
+assigned by server logic,
+
+23
+00:02:09.932 --> 00:02:14.116
+not accepted from a general request body.
+
+24
+00:02:14.196 --> 00:02:17.782
+Explicit output models matter too.
+
+25
+00:02:17.862 --> 00:02:25.991
+The object used internally by the
+application may include fields that should not
+
+26
+00:02:26.071 --> 00:02:27.864
+leave the server.
+
+27
+00:02:27.944 --> 00:02:35.595
+Response DTOs help avoid accidental
+exposure of internal fields, secrets,
+
+28
+00:02:35.675 --> 00:02:42.489
+flags, tokens, administrative notes, or
+implementation details.
+
+29
+00:02:42.569 --> 00:02:48.427
+Input and output boundaries are both part
+of API security.
+
+30
+00:02:48.507 --> 00:02:52.691
+Request body size, file upload behavior,
+
+31
+00:02:52.771 --> 00:02:58.867
+and form binding risk should also be
+reviewed conceptually.
+
+32
+00:02:58.947 --> 00:03:03.251
+Large bodies, file data, multipart forms,
+
+33
+00:03:03.331 --> 00:03:12.057
+and custom binders can consume resources
+or introduce parsing assumptions before the
+
+34
+00:03:12.137 --> 00:03:16.202
+handler performs business validation.
+
+35
+00:03:16.282 --> 00:03:22.020
+Endpoint design should make those
+boundaries explicit.

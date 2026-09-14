@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why AWS CLI Security Matters",
+  "graphicAlt": "A Bash AWS CLI script acts on storage, compute, and access through the AWS control plane, with impact determined by identity, account, region, and permissions.",
+  "narration": "The AWS CLI is one of the most practical ways to connect Bash automation to AWS services. Teams use it to query resources, publish artifacts, deploy applications, update configuration, create storage, change routing, start compute resources, inspect logs, and coordinate operational workflows. Those activities may be routine, but they are also security-relevant because the CLI acts against the AWS control plane.\n\nEvery AWS CLI command runs with the identity, account, region, profile, and permissions available at runtime. That means a small script can have a large effect if it uses the wrong profile, assumes the wrong role, targets the wrong region, or passes an unexpected resource identifier. A helper that was meant to support a staging deployment can cause production impact if its target assumptions are unclear.\n\nAWS CLI security is not only about blocking mistakes. It is about designing automation so the safe path is obvious and repeatable. A script should know what account it expects, what region is in scope, which role it should use, what resources it is allowed to affect, and what output later automation will trust. When those facts are unknown, the script should fail before taking action.\n\nThe defensive goal is scoped, least-privileged, observable AWS automation. That means validating targets, protecting credentials, invoking commands predictably, handling output carefully, guarding high-impact changes, and leaving useful audit evidence. Bash helpers can be simple, but simple automation still deserves production-grade security thinking when it can change cloud resources.",
+  "narrationPoints": [
+    "The AWS CLI is one of the most practical ways to connect Bash automation to AWS services.",
+    "Every AWS CLI command runs with the identity, account, region, profile, and permissions available at runtime.",
+    "AWS CLI security is not only about blocking mistakes.",
+    "The defensive goal is scoped, least-privileged, observable AWS automation."
+  ]
+};

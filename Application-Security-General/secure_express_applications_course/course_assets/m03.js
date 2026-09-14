@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Routing, Authentication, and Authorization",
+  "graphicAlt": "Client-supplied roles and tenant claims are not proof of permission; verified identity and resource, tenant, and action context govern server-side authorization.",
+  "narration": "Express routes should be grouped clearly into public, authenticated, privileged, service-only, webhook, and administrative areas. Authentication answers who is making the request. It might come from a session cookie, bearer token, API key, identity provider, service credential, or reverse proxy integration. Authorization answers what that identity may do. These two checks work together, but they are not the same. A logged-in user is not automatically allowed to read every record or perform every action.\n\nConsider a route that returns a document by ID. The application must verify not only that the requester is authenticated, but that the requester is allowed to access that specific document. The same principle applies to organization records, invoices, files, projects, administrative features, and service accounts. Route-level authentication middleware is helpful, but object ownership, tenant boundaries, roles, and business permissions must be checked server-side close enough to business logic to understand the context.\n\nNever trust client-supplied user IDs, roles, tenant IDs, ownership claims, or admin flags as proof of permission. Treat them as request data that must be checked against server-side state. Code review should look for routes that bypass middleware, use inconsistent guard functions, trust request fields for authorization, or handle service credentials differently from human users without clear policy. Secure Express routing is about consistent entry points and explicit authorization decisions.",
+  "narrationPoints": [
+    "Express routes should be grouped clearly into public, authenticated, privileged, service-only, webhook, and administrative areas.",
+    "Consider a route that returns a document by ID.",
+    "Never trust client-supplied user IDs, roles, tenant IDs, ownership claims, or admin flags as proof of permission."
+  ]
+};

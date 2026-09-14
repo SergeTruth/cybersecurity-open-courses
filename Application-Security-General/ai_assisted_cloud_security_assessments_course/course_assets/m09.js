@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "The cloud assessment workflow authorizes scope, gathers evidence, validates findings, prioritizes action, and follows through, supported by provenance, privacy, and human accountability.",
+  "narration": "AI can accelerate cloud security assessments by organizing evidence, identifying review questions, normalizing inventories, summarizing posture findings, and drafting clearer reports. This is valuable because cloud environments generate large amounts of fragmented information across accounts, subscriptions, projects, identities, services, and tools.\n\nAI does not replace authorization, source evidence, cloud expertise, validation, or professional judgment. The model should work inside a defined scope and from approved evidence. It should preserve provenance, mark uncertainty, and help reviewers ask better questions. It should not invent missing resources, expand the assessment boundary, or recommend actions against unauthorized systems.\n\nStrong assessments are evidence-backed and privacy-aware. IAM exports, cloud inventories, logs, diagrams, and posture findings can contain sensitive information. Handling that data requires approved workflows and careful minimization. Findings should be traceable so reviewers can verify claims and remediation owners can act with confidence.\n\nThe most useful assessment outputs connect to action. Attack surface registers, identity summaries, configuration findings, logging gap analyses, remediation tickets, and executive summaries should all help teams reduce risk. A finding that is clear, scoped, evidenced, and assigned is more valuable than a vague observation buried in a long report.\n\nThe goal is not automated conclusions. The goal is faster, better-documented, more defensible cloud security review. AI can make the assessment workflow more efficient, but humans remain responsible for scope control, evidence interpretation, risk decisions, remediation planning, and final accountability.",
+  "narrationPoints": [
+    "AI can accelerate cloud security assessments by organizing evidence, identifying review questions, normalizing inventories, summarizing posture findings, and drafting clearer reports.",
+    "AI does not replace authorization, source evidence, cloud expertise, validation, or professional judgment.",
+    "Strong assessments are evidence-backed and privacy-aware.",
+    "The most useful assessment outputs connect to action.",
+    "The goal is not automated conclusions."
+  ]
+};

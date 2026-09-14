@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Using ShellCheck in Editors, Reviews, and CI/CD",
+  "graphicAlt": "Editor feedback, lint checks, review, and CI prevent repeatable regressions while tests verify actual runtime behavior.",
+  "narration": "ShellCheck is most valuable when feedback arrives early. If developers see findings while editing or before opening a pull request, fixes are small and cheap. If the first signal appears during a production deployment, the tool is being used too late. Local use, editor integration, pre-review checks, and CI/CD linting all help move script-quality feedback closer to the author.\n\nTeams should decide which scripts are in scope and how strict the workflow should be. New production scripts may be expected to pass ShellCheck before merge. Legacy scripts may need a baseline and incremental cleanup plan. Some repositories may treat findings as blocking; others may begin with reporting while the team works through old issues. The right policy depends on the codebase, but it should be explicit.\n\nPull request review is a strong place for ShellCheck because the tool and the reviewer can support each other. ShellCheck catches repeatable patterns. Humans evaluate intent, operational impact, and safe failure behavior. A reviewer can ask why a warning was suppressed, whether a quoted value changes semantics, whether a shell dialect is declared correctly, and whether the script has been tested in the intended runtime.\n\nCI/CD integration helps prevent regressions. It makes shell-script quality visible, repeatable, and less dependent on individual memory. But ShellCheck should be part of a broader process that includes testing, review, and operational validation. Static analysis can raise the floor for shell automation, but teams still need to understand what the script does and how it behaves when the environment changes.",
+  "narrationPoints": [
+    "ShellCheck is most valuable when feedback arrives early.",
+    "Teams should decide which scripts are in scope and how strict the workflow should be.",
+    "Pull request review is a strong place for ShellCheck because the tool and the reviewer can support each other.",
+    "CI/CD integration helps prevent regressions."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Secure C Programming Matters",
+  "graphicAlt": "C's direct control requires explicit contracts for bounds, lifetime, input validation, and failure paths, with tools supporting engineering judgment.",
+  "narration": "C gives developers direct control over memory, pointers, object layout, files, and system resources. That control is one reason C remains important in systems software, embedded devices, operating systems, networking components, performance-sensitive libraries, firmware, drivers, and interoperability layers.\n\nThe same control also means the program has fewer automatic guardrails than many higher-level environments. The developer must actively manage object lifetime, validate lengths, check arithmetic, preserve string termination, release resources, and define what should happen when input or dependencies do not match expectations.\n\nSecure C programming is not mainly about memorizing a list of banned functions. It is about understanding ownership, boundaries, validation, and failure modes. A function may be safe in one design and unsafe in another if the caller does not track capacity, lifetime, or error results correctly.\n\nSecurity, reliability, and maintainability are tightly connected in C. A small correctness error can affect process memory, data integrity, availability, and later debugging. A missing cleanup path can become an operational issue. A hidden lifetime assumption can make the next change risky even if the original code worked in a narrow test case.\n\nA secure baseline includes design review, careful implementation, compiler diagnostics, static analysis, sanitizer testing, code review, and production-safe error handling. Tooling is important, but it supports engineering judgment. The team still needs to review data flow, memory flow, ownership transfer, boundary checks, and failure behavior.",
+  "narrationPoints": [
+    "C gives developers direct control over memory, pointers, object layout, files, and system resources.",
+    "The same control also means the program has fewer automatic guardrails than many higher-level environments.",
+    "Secure C programming is not mainly about memorizing a list of banned functions.",
+    "Security, reliability, and maintainability are tightly connected in C.",
+    "A secure baseline includes design review, careful implementation, compiler diagnostics, static analysis, sanitizer testing, code review, and production-safe error handling."
+  ]
+};

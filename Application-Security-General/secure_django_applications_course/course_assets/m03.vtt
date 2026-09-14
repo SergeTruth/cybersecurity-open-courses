@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.062
+Django routes requests through URL
+patterns into function-based or class-based
+
+2
+00:00:07.142 --> 00:00:07.712
+views.
+
+3
+00:00:07.792 --> 00:00:13.879
+Those views receive data from many places:
+path parameters, query strings,
+
+4
+00:00:13.959 --> 00:00:19.189
+form fields, JSON bodies, headers,
+cookies, and uploaded files.
+
+5
+00:00:19.269 --> 00:00:22.027
+Some inputs arrive from a browser,
+
+6
+00:00:22.107 --> 00:00:28.954
+while others may come from mobile clients,
+scripts, webhooks, or internal services.
+
+7
+00:00:29.034 --> 00:00:35.691
+The secure default is to treat request
+data as untrusted until it has been validated
+
+8
+00:00:35.771 --> 00:00:39.385
+for the specific operation being
+performed.
+
+9
+00:00:39.465 --> 00:00:45.932
+Validation should check type, shape,
+format, range, size, and business intent.
+
+10
+00:00:46.012 --> 00:00:52.384
+A value can be syntactically correct and
+still be inappropriate for the action.
+
+11
+00:00:52.464 --> 00:00:57.504
+A user identifier can be an integer but
+refer to another tenant.
+
+12
+00:00:57.584 --> 00:01:03.195
+A file can have an expected extension but
+contain unexpected content.
+
+13
+00:01:03.275 --> 00:01:09.266
+A JSON body can have the right fields but
+describe an action the caller is not
+
+14
+00:01:09.346 --> 00:01:10.677
+allowed to take.
+
+15
+00:01:10.757 --> 00:01:14.847
+Validation narrows what the application
+accepts,
+
+16
+00:01:14.927 --> 00:01:21.108
+while authorization decides whether the
+current subject may use that data in
+
+17
+00:01:21.188 --> 00:01:21.949
+context.
+
+18
+00:01:22.029 --> 00:01:28.401
+Django forms and model validation concepts
+can help make input rules explicit.
+
+19
+00:01:28.481 --> 00:01:34.187
+Forms are especially useful when a request
+maps to a known set of fields,
+
+20
+00:01:34.267 --> 00:01:38.356
+constraints, and user-facing validation
+errors.
+
+21
+00:01:38.436 --> 00:01:42.335
+Model validation can protect data
+consistency,
+
+22
+00:01:42.415 --> 00:01:47.931
+but it does not automatically capture
+every request-specific rule,
+
+23
+00:01:48.011 --> 00:01:52.100
+authorization decision, or workflow
+constraint.
+
+24
+00:01:52.180 --> 00:01:57.601
+Developers should be clear about where
+validation happens and why,
+
+25
+00:01:57.681 --> 00:02:03.292
+rather than assuming that one layer covers
+every path into the system.
+
+26
+00:02:03.372 --> 00:02:08.983
+Safe request handling also includes method
+discipline, size limits,
+
+27
+00:02:09.063 --> 00:02:11.630
+and controlled error behavior.
+
+28
+00:02:11.710 --> 00:02:17.702
+State-changing actions should use
+appropriate methods and protections.
+
+29
+00:02:17.782 --> 00:02:24.534
+Large bodies and uploads should have
+reasonable limits before they consume memory,
+
+30
+00:02:24.614 --> 00:02:26.611
+storage, or parser time.
+
+31
+00:02:26.691 --> 00:02:33.253
+Error responses should help legitimate
+clients fix bad input without disclosing
+
+32
+00:02:33.333 --> 00:02:39.229
+stack traces, model internals, secrets,
+raw queries, or internal paths.
+
+33
+00:02:39.309 --> 00:02:45.300
+Well-structured views make security review
+and maintenance much easier.

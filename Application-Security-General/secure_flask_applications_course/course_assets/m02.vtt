@@ -1,0 +1,161 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.745
+Flask applications often start small, but
+architecture matters early.
+
+2
+00:00:03.825 --> 00:00:07.709
+The application factory pattern is useful
+because it encourages developers to create
+
+3
+00:00:07.789 --> 00:00:10.874
+the app in a controlled function, load
+configuration deliberately,
+
+4
+00:00:10.954 --> 00:00:13.082
+register routes and extensions
+consistently,
+
+5
+00:00:13.162 --> 00:00:16.514
+and support different environments without
+rewriting application code.
+
+6
+00:00:16.594 --> 00:00:18.669
+Even if a project does not use a formal
+factory,
+
+7
+00:00:18.749 --> 00:00:22.579
+the same principle applies: initialization
+should be understandable, repeatable,
+
+8
+00:00:22.659 --> 00:00:24.096
+and separated from route logic.
+
+9
+00:00:24.176 --> 00:00:27.261
+Configuration should distinguish
+development, testing, staging,
+
+10
+00:00:27.341 --> 00:00:28.512
+and production behavior.
+
+11
+00:00:28.592 --> 00:00:31.730
+Development settings may favor debugging
+speed, local credentials,
+
+12
+00:00:31.810 --> 00:00:33.992
+permissive origins, or relaxed error
+handling.
+
+13
+00:00:34.072 --> 00:00:36.732
+Production settings need safer defaults,
+explicit hosts,
+
+14
+00:00:36.812 --> 00:00:40.323
+stable secret material, conservative
+cookie behavior, controlled logging,
+
+15
+00:00:40.403 --> 00:00:42.052
+and predictable proxy assumptions.
+
+16
+00:00:42.132 --> 00:00:45.643
+Debug mode is especially important: it is
+meant for development diagnostics,
+
+17
+00:00:45.723 --> 00:00:46.894
+not production exposure.
+
+18
+00:00:46.974 --> 00:00:50.325
+A production app should fail safely and
+log internally without disclosing
+
+19
+00:00:50.405 --> 00:00:51.895
+unnecessary internals to users.
+
+20
+00:00:51.975 --> 00:00:55.752
+Secret keys and signing keys deserve
+careful handling because Flask and extensions
+
+21
+00:00:55.832 --> 00:00:59.077
+may use them to protect cookies, tokens,
+forms, and other signed values.
+
+22
+00:00:59.157 --> 00:01:02.722
+They should be strong, private,
+environment-specific, and rotated with care.
+
+23
+00:01:02.802 --> 00:01:05.940
+They should not be committed to source
+control or copied through chat,
+
+24
+00:01:06.020 --> 00:01:08.042
+tickets, container images, or sample
+files.
+
+25
+00:01:08.122 --> 00:01:11.846
+Configuration values that affect security
+should also be validated at startup so a
+
+26
+00:01:11.926 --> 00:01:15.437
+broken deployment does not silently run
+with missing keys or unsafe defaults.
+
+27
+00:01:15.517 --> 00:01:18.230
+Deployment context changes how Flask
+should be configured.
+
+28
+00:01:18.310 --> 00:01:21.768
+A reverse proxy may terminate TLS, set
+forwarding headers, route hostnames,
+
+29
+00:01:21.848 --> 00:01:24.721
+and enforce request size limits before
+traffic reaches the app.
+
+30
+00:01:24.801 --> 00:01:27.993
+The Flask service still needs to
+understand which headers it can trust,
+
+31
+00:01:28.073 --> 00:01:31.159
+which hosts are valid, and what
+assumptions are being made upstream.
+
+32
+00:01:31.239 --> 00:01:35.176
+A durable security posture treats
+configuration as code-adjacent operational logic:
+
+33
+00:01:35.256 --> 00:01:38.820
+explicit, reviewed, documented, and
+separated from the secrets that power it.

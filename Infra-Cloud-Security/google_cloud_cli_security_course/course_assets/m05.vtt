@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.697
+A Bash script should invoke the Google
+Cloud CLI in a predictable and reviewable
+
+2
+00:00:07.777 --> 00:00:08.207
+way.
+
+3
+00:00:08.287 --> 00:00:15.699
+The safer pattern is a fixed command
+structure with clearly separated options and
+
+4
+00:00:15.779 --> 00:00:16.746
+operands.
+
+5
+00:00:16.826 --> 00:00:24.238
+Avoid building one large command string
+from variable data and asking the shell to
+
+6
+00:00:24.318 --> 00:00:26.145
+interpret it again.
+
+7
+00:00:26.225 --> 00:00:32.133
+That style makes quoting harder, hides
+behavior from reviewers,
+
+8
+00:00:32.213 --> 00:00:36.617
+and can behave unexpectedly when input
+changes.
+
+9
+00:00:36.697 --> 00:00:43.572
+Quote values that should remain literal
+and use arrays where option lists or
+
+10
+00:00:43.652 --> 00:00:46.445
+operands need to be assembled.
+
+11
+00:00:46.525 --> 00:00:53.078
+Validate command groups, operation names,
+project IDs, account names,
+
+12
+00:00:53.158 --> 00:00:59.389
+resource names, regions, zones, file
+paths, output paths, filters,
+
+13
+00:00:59.469 --> 00:01:02.262
+and timeout values before use.
+
+14
+00:01:02.342 --> 00:01:07.928
+Validation should favor expected formats,
+approved scopes,
+
+15
+00:01:08.008 --> 00:01:15.313
+and known target values, especially when
+production resources may be affected.
+
+16
+00:01:15.393 --> 00:01:22.375
+Working directory control matters when
+scripts read templates, artifacts,
+
+17
+00:01:22.455 --> 00:01:28.041
+policy files, deployment manifests, or
+JSON configuration.
+
+18
+00:01:28.121 --> 00:01:33.600
+A relative path should resolve from the
+intended directory,
+
+19
+00:01:33.680 --> 00:01:37.547
+not wherever the script happened to start.
+
+20
+00:01:37.627 --> 00:01:44.932
+CLI version expectations also matter
+because output formats, supported flags,
+
+21
+00:01:45.012 --> 00:01:51.672
+and service behavior can vary across
+installed versions and components.
+
+22
+00:01:51.752 --> 00:01:55.727
+Safe stopping is part of secure
+automation.
+
+23
+00:01:55.807 --> 00:01:58.922
+Scripts should check exit status,
+
+24
+00:01:59.002 --> 00:02:03.729
+distinguish expected empty results from
+failures,
+
+25
+00:02:03.809 --> 00:02:08.643
+and stop before later steps trust
+incomplete output.
+
+26
+00:02:08.723 --> 00:02:16.135
+Clear errors help operators recover, but
+those errors should not expose secrets,
+
+27
+00:02:16.215 --> 00:02:21.908
+raw tokens, service account key material,
+sensitive IAM data,
+
+28
+00:02:21.988 --> 00:02:24.781
+or excessive response bodies.
+
+29
+00:02:24.861 --> 00:02:30.340
+A good wrapper is strict, understandable,
+and easy to audit.

@@ -1,0 +1,195 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.289
+Authentication answers the question, who
+is making this request.
+
+2
+00:00:07.369 --> 00:00:14.521
+In a Razor Pages application,
+authentication may be based on cookies,
+
+3
+00:00:14.601 --> 00:00:19.814
+an identity provider, an enterprise
+sign-on flow,
+
+4
+00:00:19.894 --> 00:00:24.864
+or another ASP.NET Core authentication
+scheme.
+
+5
+00:00:24.944 --> 00:00:33.187
+Whatever the mechanism, identity should
+come from the configured platform path
+
+6
+00:00:33.267 --> 00:00:41.632
+rather than from page naming, hidden
+fields, route values, or local assumptions.
+
+7
+00:00:41.712 --> 00:00:46.439
+Authorization answers a different
+question:
+
+8
+00:00:46.519 --> 00:00:51.126
+what is this identity allowed to access or
+do.
+
+9
+00:00:51.206 --> 00:00:57.631
+A signed-in user may be allowed to view
+one page but not another.
+
+10
+00:00:57.711 --> 00:01:06.075
+A support user may view selected records
+but not approve administrative changes.
+
+11
+00:01:06.155 --> 00:01:14.641
+An administrator may manage configuration
+but still need extra checks for certain
+
+12
+00:01:14.721 --> 00:01:15.933
+workflows.
+
+13
+00:01:16.013 --> 00:01:22.681
+Treating login as blanket permission is a
+common design mistake.
+
+14
+00:01:22.761 --> 00:01:30.762
+Razor Pages can apply authorization by
+page, folder, convention, and policy.
+
+15
+00:01:30.842 --> 00:01:39.691
+Folder conventions are especially useful
+when the directory structure reflects real
+
+16
+00:01:39.771 --> 00:01:41.832
+access boundaries.
+
+17
+00:01:41.912 --> 00:01:48.943
+Public pages can remain public, account
+pages can require identity,
+
+18
+00:01:49.023 --> 00:01:54.235
+administrative areas can require named
+policies,
+
+19
+00:01:54.315 --> 00:02:02.559
+and sensitive workflows can use explicit
+requirements that reviewers can find.
+
+20
+00:02:02.639 --> 00:02:09.549
+Anonymous access should be deliberate,
+narrow, and easy to review.
+
+21
+00:02:09.629 --> 00:02:15.447
+Pages such as sign-in, password recovery,
+help content,
+
+22
+00:02:15.527 --> 00:02:20.861
+or public documentation may need anonymous
+access.
+
+23
+00:02:20.941 --> 00:02:24.457
+The important point is ownership.
+
+24
+00:02:24.537 --> 00:02:33.265
+Anonymous pages should not appear
+accidentally because a convention was omitted or a
+
+25
+00:02:33.345 --> 00:02:36.982
+page was placed in the wrong folder.
+
+26
+00:02:37.062 --> 00:02:45.426
+Policy-based authorization helps when
+access depends on more than a simple role.
+
+27
+00:02:45.506 --> 00:02:52.659
+Policies can represent claims, tenant
+context, approval authority,
+
+28
+00:02:52.739 --> 00:03:01.345
+employment status, support scope,
+environment, or custom business requirements.
+
+29
+00:03:01.425 --> 00:03:09.669
+A meaningful policy name also helps
+reviewers understand why access is allowed.
+
+30
+00:03:09.749 --> 00:03:17.265
+User interface restrictions do not enforce
+server-side authorization.
+
+31
+00:03:17.345 --> 00:03:23.285
+Hiding a link or disabling a button can
+improve usability,
+
+32
+00:03:23.365 --> 00:03:29.547
+but the page handler must still enforce
+access on the server.
+
+33
+00:03:29.627 --> 00:03:37.992
+Sensitive workflows and administrative
+actions should be safe even when someone
+
+34
+00:03:38.072 --> 00:03:44.618
+reaches the handler directly through
+normal browser behavior.
+
+35
+00:03:44.698 --> 00:03:50.032
+Some decisions require resource-specific
+checks.
+
+36
+00:03:50.112 --> 00:03:53.991
+A user may be allowed to view invoices,
+
+37
+00:03:54.071 --> 00:03:59.405
+but only invoices they own or are assigned
+to manage.
+
+38
+00:03:59.485 --> 00:04:06.395
+A page handler that loads a record should
+verify ownership, tenant,
+
+39
+00:04:06.475 --> 00:04:15.203
+workflow state, or permission against that
+specific record before returning data or
+
+40
+00:04:15.283 --> 00:04:16.980
+changing state.

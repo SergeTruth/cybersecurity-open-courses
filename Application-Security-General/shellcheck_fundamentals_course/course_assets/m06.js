@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Shell Dialects, Shebangs, and Portability",
+  "graphicAlt": "Interpreter declaration, language features, and tested runtime must agree, whether choosing Bash or a portable POSIX approach.",
+  "narration": "Shell scripts are not all interpreted by the same shell. A script written for Bash may fail or behave differently under POSIX sh, dash, ksh, zsh, or another shell. The shebang at the top of a script is an important signal because it tells readers and execution environments which interpreter the script expects. When the code and the declared interpreter disagree, portability problems appear quickly.\n\nShellCheck can help identify constructs that do not match the declared shell. For example, a script that claims to be POSIX shell but uses Bash-specific features is likely to surprise someone when it runs in a minimal container image or a CI/CD runner with a different default shell. The opposite can also happen: a script may be written carefully for broad portability, but its invocation path may accidentally run it under a shell the author did not test.\n\nPortability does not mean every script must run everywhere. Sometimes the right answer is to require Bash and declare that clearly. Sometimes the right answer is to use portable POSIX syntax because the script must run across many systems. The important point is intention. The team should choose the shell deliberately, document the expectation, and test in the runtime environment where the script will actually run.\n\nWhen ShellCheck reports dialect or portability issues, reviewers should decide whether to change the code, change the shebang, or change the execution environment. The fix is not always to make the script more generic. The fix is to make the script, declaration, and runtime match reality. Clear interpreter expectations reduce surprises when scripts move between laptops, servers, containers, and pipelines.",
+  "narrationPoints": [
+    "Shell scripts are not all interpreted by the same shell.",
+    "ShellCheck can help identify constructs that do not match the declared shell.",
+    "Portability does not mean every script must run everywhere.",
+    "When ShellCheck reports dialect or portability issues, reviewers should decide whether to change the code, change the shebang, or change the execution environment."
+  ]
+};

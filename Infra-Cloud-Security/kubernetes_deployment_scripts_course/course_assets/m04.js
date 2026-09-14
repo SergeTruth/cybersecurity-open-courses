@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Safe Bash Patterns for kubectl and Deployment Tools",
+  "graphicAlt": "Fixed arguments, validated inputs, a known working directory, and expected tool versions support a render, apply, verify pipeline that stops on failure.",
+  "narration": "A deployment script should be predictable and easy to review. Avoid building one large command string from variable data and then asking the shell to interpret it again. Keep the command structure fixed, quote values that should remain literal, and use arrays for options and operands where that improves clarity. The less a script relies on re-parsing, the easier it is to understand what will actually run.\n\nInputs to deployment tools should be validated before use. Namespaces, resource names, labels, file paths, chart names, release names, image references, timeout values, and environment names all influence what the script does. Validation does not need to be elaborate in every case, but the script should reject unsupported or empty values before they shape a deployment command.\n\nWorking directory control matters because manifests, Helm charts, Kustomize overlays, and generated files often depend on relative paths. A script should not silently change behavior because it was launched from a different directory or runner workspace. Tool versions also matter. kubectl, Helm, Kustomize, and supporting tools may produce different output or enforce different behavior across versions, so important workflows should document or control expected versions.\n\nExit status and result handling should be explicit. A script should distinguish expected no-change results from failures and stop before later steps trust an incomplete deployment. If a render step fails, the apply step should not continue. If an apply step fails, a rollout check should not report success. Clear, non-sensitive errors help operators respond without exposing tokens, kubeconfig contents, secrets, or sensitive manifest data.",
+  "narrationPoints": [
+    "A deployment script should be predictable and easy to review.",
+    "Inputs to deployment tools should be validated before use.",
+    "Working directory control matters because manifests, Helm charts, Kustomize overlays, and generated files often depend on relative paths.",
+    "Exit status and result handling should be explicit."
+  ]
+};

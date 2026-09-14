@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Security Review Patterns",
+  "graphicAlt": "Input handling, access control, sensitive operations, and dependency or secret patterns guide investigation into controlled inputs, required guards, and code evidence.",
+  "narration": "AI-assisted review works best when the reviewer brings a pattern library. For input validation, look for untrusted data entering from HTTP requests, message queues, files, command-line arguments, environment variables, callbacks, and external services. Ask whether the code validates type, length, format, range, and allowed values before use. For output encoding, check whether data is encoded for the correct destination, such as HTML, JavaScript, SQL, shell commands, logs, or file paths.\n\nAccess control and authentication deserve careful human attention. AI can point out missing checks or inconsistent patterns, but the reviewer must understand roles, ownership, tenancy, object-level access, session behavior, and framework conventions. A function may look protected because it is behind middleware, or it may look exposed because the protection lives elsewhere. Review session management, password reset flows, token handling, authorization helpers, and admin-only actions with the actual application routing and configuration in mind.\n\nOther recurring patterns include cryptography misuse, unsafe file handling, command execution, deserialization, dependency risk, and error handling. AI may help identify suspicious APIs, weak defaults, or missing checks, but it can also overstate risk without context. For each pattern, ask what input controls the behavior, what security property is at stake, what guard should exist, and where the evidence is in code. A pattern is a starting point for analysis, not a conclusion by itself.",
+  "narrationPoints": [
+    "AI-assisted review works best when the reviewer brings a pattern library.",
+    "Access control and authentication deserve careful human attention.",
+    "Other recurring patterns include cryptography misuse, unsafe file handling, command execution, deserialization, dependency risk, and error handling."
+  ]
+};

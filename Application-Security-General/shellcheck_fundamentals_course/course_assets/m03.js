@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Reading ShellCheck Findings",
+  "graphicAlt": "Read findings in context, identify the behavioral root cause, and verify the fix while prioritizing operational impact.",
+  "narration": "A ShellCheck finding should be read as a warning about possible behavior, not as a cosmetic complaint. The useful question is not how to make the warning disappear as quickly as possible. The useful question is what behavior the tool is pointing at. Start with the location, the message, and the surrounding code. Then identify which shell rule or scripting assumption is involved.\n\nGood fixes come from understanding root cause. If ShellCheck warns about quoting, the issue is usually argument boundaries, not style. If it warns about a variable, the issue may be a typo, an unset value, or dead code. If it warns about a shell dialect, the issue may be that the script is written for one interpreter but declared for another. A mechanical edit can silence the warning while leaving the underlying behavior unclear.\n\nTeams should prioritize findings that affect data safety, command execution, error handling, portability, secrets, and production behavior. A warning in a deployment script, backup job, or remote administration task may deserve more attention than the same pattern in a local one-off helper. Severity labels are useful, but they do not replace local risk assessment. Context decides impact.\n\nSometimes a finding reveals an unclear assumption. Maybe the script relies on splitting a value intentionally, expects a variable to be supplied by the environment, or uses a feature available only in a specific shell. In those cases, the answer may be documentation, a clearer interface, a runtime check, or a narrow suppression with explanation. The goal is not just to quiet ShellCheck. The goal is to make the script's behavior easier to trust.",
+  "narrationPoints": [
+    "A ShellCheck finding should be read as a warning about possible behavior, not as a cosmetic complaint.",
+    "Good fixes come from understanding root cause.",
+    "Teams should prioritize findings that affect data safety, command execution, error handling, portability, secrets, and production behavior.",
+    "Sometimes a finding reveals an unclear assumption."
+  ]
+};

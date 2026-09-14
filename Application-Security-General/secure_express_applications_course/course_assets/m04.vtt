@@ -1,0 +1,114 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.186
+Express makes request data easy to reach
+through req.body, req.query,
+
+2
+00:00:07.266 --> 00:00:11.055
+req.params, req.headers, and cookies.
+
+3
+00:00:11.135 --> 00:00:13.586
+Convenience is not trust.
+
+4
+00:00:13.666 --> 00:00:20.910
+Every value from the request should be
+treated as untrusted until validated.
+
+5
+00:00:20.990 --> 00:00:27.230
+Body fields, query strings, route
+parameters, headers, cookies,
+
+6
+00:00:27.310 --> 00:00:34.219
+and upload metadata can all influence
+database queries, business rules,
+
+7
+00:00:34.299 --> 00:00:41.654
+redirects, file paths, template rendering,
+outbound calls, or side effects.
+
+8
+00:00:41.734 --> 00:00:49.423
+Validation belongs at the API boundary
+before the application relies on the data.
+
+9
+00:00:49.503 --> 00:00:55.632
+Schema validation helps make expected
+request shapes explicit.
+
+10
+00:00:55.712 --> 00:01:02.175
+A handler should know which fields are
+required, which are optional,
+
+11
+00:01:02.255 --> 00:01:08.272
+what types are allowed, what lengths and
+ranges are acceptable,
+
+12
+00:01:08.352 --> 00:01:15.818
+which enum values are valid, and whether
+unexpected fields should be rejected.
+
+13
+00:01:15.898 --> 00:01:24.033
+For update routes, explicit allowlists
+reduce mass assignment risk by choosing which
+
+14
+00:01:24.113 --> 00:01:30.911
+fields may change instead of accepting
+every property the client sends.
+
+15
+00:01:30.991 --> 00:01:36.674
+Type validation and business-rule
+validation are related,
+
+16
+00:01:36.754 --> 00:01:40.877
+but they are not the same; both may be
+needed.
+
+17
+00:01:40.957 --> 00:01:48.757
+File handling needs particular care
+because uploaded content often moves through
+
+18
+00:01:48.837 --> 00:01:55.524
+storage, scanning, previews, downloads,
+and downstream processors.
+
+19
+00:01:55.604 --> 00:02:02.958
+A secure design considers size limits,
+type expectations, storage location,
+
+20
+00:02:03.038 --> 00:02:11.396
+access control, temporary file cleanup,
+and scanning requirements where appropriate.
+
+21
+00:02:11.476 --> 00:02:18.273
+Avoid using unvalidated input in
+filesystem paths, command execution,
+
+22
+00:02:18.353 --> 00:02:25.708
+database queries, redirects, template
+rendering, or service destinations.
+
+23
+00:02:25.788 --> 00:02:33.700
+The defensive pattern is predictable
+parsing followed by narrow, intentional use.

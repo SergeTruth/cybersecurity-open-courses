@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.381
+Azure credentials and sessions are
+sensitive operational authority.
+
+2
+00:00:07.461 --> 00:00:13.540
+They may exist as local Azure CLI login
+sessions, token caches,
+
+3
+00:00:13.620 --> 00:00:20.272
+service principal secrets, certificates,
+federated credentials,
+
+4
+00:00:20.352 --> 00:00:27.577
+managed identities, environment variables,
+CI/CD service connections,
+
+5
+00:00:27.657 --> 00:00:29.607
+or temporary files.
+
+6
+00:00:29.687 --> 00:00:37.256
+The script does not need to print a token
+for that token to define what the script
+
+7
+00:00:37.336 --> 00:00:38.024
+can do.
+
+8
+00:00:38.104 --> 00:00:45.445
+Long-lived static secrets should be
+minimized where better options exist.
+
+9
+00:00:45.525 --> 00:00:52.865
+Managed identity, workload identity,
+federation, short-lived sessions,
+
+10
+00:00:52.945 --> 00:01:00.055
+and approved secret stores can reduce risk
+when they fit the environment.
+
+11
+00:01:00.135 --> 00:01:04.264
+They do not remove the need for
+validation,
+
+12
+00:01:04.344 --> 00:01:12.258
+but they can reduce reliance on durable
+secrets and improve governance of runtime
+
+13
+00:01:12.338 --> 00:01:13.140
+access.
+
+14
+00:01:13.220 --> 00:01:20.790
+Scripts should check whether the required
+login context is available without
+
+15
+00:01:20.870 --> 00:01:24.540
+printing tokens or sensitive values.
+
+16
+00:01:24.620 --> 00:01:32.533
+Avoid exposing secrets, token-derived
+values, service principal credentials,
+
+17
+00:01:32.613 --> 00:01:37.889
+full environments, debug traces, or
+support bundles.
+
+18
+00:01:37.969 --> 00:01:43.589
+CI/CD masking is useful, but it is not a
+complete boundary.
+
+19
+00:01:43.669 --> 00:01:49.289
+Sensitive values can still leak through
+command echoing,
+
+20
+00:01:49.369 --> 00:01:56.365
+transformed output, temporary files,
+artifacts, or verbose tool logs.
+
+21
+00:01:56.445 --> 00:02:04.932
+Credential handling includes rotation,
+revocation, ownership, and lifetime limits.
+
+22
+00:02:05.012 --> 00:02:12.237
+Teams should know how to disable an
+exposed service principal credential,
+
+23
+00:02:12.317 --> 00:02:19.886
+revoke a connection, expire a session,
+review a managed identity assignment,
+
+24
+00:02:19.966 --> 00:02:24.439
+and determine which jobs used the
+credential.
+
+25
+00:02:24.519 --> 00:02:31.745
+Secure Azure CLI automation treats
+credentials as scoped and reviewable,
+
+26
+00:02:31.825 --> 00:02:35.380
+not permanent background plumbing.

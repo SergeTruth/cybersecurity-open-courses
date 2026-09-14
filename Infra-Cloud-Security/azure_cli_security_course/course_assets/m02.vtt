@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.585
+Azure CLI commands run within a tenant,
+subscription, region, resource group,
+
+2
+00:00:07.665 --> 00:00:09.886
+and credential context.
+
+3
+00:00:09.966 --> 00:00:15.571
+In automation, those values may come from
+local account state,
+
+4
+00:00:15.651 --> 00:00:21.467
+environment variables, CI/CD variables,
+service connections,
+
+5
+00:00:21.547 --> 00:00:27.469
+managed identity, workload identity, or
+federated credentials.
+
+6
+00:00:27.549 --> 00:00:34.528
+A secure script should not assume that the
+currently selected subscription or
+
+7
+00:00:34.608 --> 00:00:40.001
+default values are correct just because a
+command would run.
+
+8
+00:00:40.081 --> 00:00:45.792
+Target validation should happen before any
+meaningful change.
+
+9
+00:00:45.872 --> 00:00:51.477
+The script should confirm the expected
+tenant, subscription,
+
+10
+00:00:51.557 --> 00:00:57.479
+Azure cloud environment where relevant,
+resource group, region,
+
+11
+00:00:57.559 --> 00:01:03.375
+environment label, identity, and target
+resource identifiers.
+
+12
+00:01:03.455 --> 00:01:10.857
+A deployment script should make it
+difficult to combine a production resource name
+
+13
+00:01:10.937 --> 00:01:18.234
+with a development subscription, or a
+staging identity with a production action.
+
+14
+00:01:18.314 --> 00:01:24.976
+Development, staging, and production
+should have separate assumptions,
+
+15
+00:01:25.056 --> 00:01:30.555
+credentials, approval paths, and
+monitoring expectations.
+
+16
+00:01:30.635 --> 00:01:34.548
+A development helper may prioritize speed,
+
+17
+00:01:34.628 --> 00:01:41.184
+while a production helper may require a
+protected branch, change ticket,
+
+18
+00:01:41.264 --> 00:01:47.292
+release window, operator confirmation, or
+environment approval.
+
+19
+00:01:47.372 --> 00:01:55.092
+The script should encode those differences
+through validation and gating rather than
+
+20
+00:01:55.172 --> 00:01:57.815
+relying on convention alone.
+
+21
+00:01:57.895 --> 00:02:03.288
+CI/CD and environment variables should be
+treated as input.
+
+22
+00:02:03.368 --> 00:02:10.771
+They can be missing, stale, inherited, or
+inconsistent with the requested action.
+
+23
+00:02:10.851 --> 00:02:15.715
+If the tenant, subscription, resource
+group, region,
+
+24
+00:02:15.795 --> 00:02:23.304
+or resource target cannot be confirmed,
+the script should stop with a clear message.
+
+25
+00:02:23.384 --> 00:02:29.940
+The safest wrong-target change is one that
+fails before it reaches Azure.

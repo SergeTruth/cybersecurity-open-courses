@@ -1,0 +1,134 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.870
+Google Cloud CLI output is often consumed
+by later automation.
+
+2
+00:00:03.950 --> 00:00:07.893
+A script may query JSON, extract a
+resource name, inspect IAM policy data,
+
+3
+00:00:07.973 --> 00:00:10.898
+select a target, compare configuration,
+write a file,
+
+4
+00:00:10.978 --> 00:00:13.204
+or decide whether a later step should run.
+
+5
+00:00:13.284 --> 00:00:17.417
+That output can include project details,
+endpoints, service account names,
+
+6
+00:00:17.497 --> 00:00:22.012
+storage locations, log results, IAM
+bindings, policy data, and sensitive context.
+
+7
+00:00:22.092 --> 00:00:25.335
+Structured parsing is safer than fragile
+text assumptions.
+
+8
+00:00:25.415 --> 00:00:29.930
+Scripts should parse expected JSON fields
+deliberately and handle missing fields,
+
+9
+00:00:30.010 --> 00:00:34.144
+empty responses, multiple matches,
+paginated data, and unexpected values.
+
+10
+00:00:34.224 --> 00:00:36.767
+A missing result is not automatically
+success,
+
+11
+00:00:36.847 --> 00:00:40.345
+and multiple results may mean the target
+was not specific enough.
+
+12
+00:00:40.425 --> 00:00:45.067
+Later automation should make decisions
+from fields that were intentionally selected
+
+13
+00:00:45.147 --> 00:00:45.910
+and verified.
+
+14
+00:00:45.990 --> 00:00:50.442
+Output files should go to approved
+destinations with appropriate permissions and
+
+15
+00:00:50.522 --> 00:00:51.921
+retention expectations.
+
+16
+00:00:52.001 --> 00:00:55.244
+Generated JSON, IAM policy data, service
+account listings,
+
+17
+00:00:55.324 --> 00:00:57.359
+deployment details, inventory data,
+
+18
+00:00:57.439 --> 00:01:01.890
+and support bundles can reveal sensitive
+operational context even when they do not
+
+19
+00:01:01.970 --> 00:01:03.051
+contain raw tokens.
+
+20
+00:01:03.131 --> 00:01:07.010
+A script should avoid writing sensitive
+output into shared workspaces,
+
+21
+00:01:07.090 --> 00:01:10.651
+broad CI/CD artifacts, or long-lived logs
+without a clear reason.
+
+22
+00:01:10.731 --> 00:01:13.211
+Logs should provide minimal useful
+evidence.
+
+23
+00:01:13.291 --> 00:01:17.043
+Good logs show high-level identity,
+project, region or zone, action,
+
+24
+00:01:17.123 --> 00:01:19.031
+target category, time, and result.
+
+25
+00:01:19.111 --> 00:01:22.291
+They avoid tokens, service account key
+material, secrets,
+
+26
+00:01:22.371 --> 00:01:25.995
+sensitive IAM details, private data, and
+excessive raw responses.
+
+27
+00:01:26.075 --> 00:01:30.654
+Secure output handling lets automation
+remain useful without turning logs and files
+
+28
+00:01:30.734 --> 00:01:32.260
+into another exposure path.

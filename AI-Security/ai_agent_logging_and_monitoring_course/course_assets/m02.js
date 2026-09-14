@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Agent Telemetry and Event Architecture",
+  "graphicAlt": "A shared trace identifier correlates events across frontend, model gateway, retrieval, and tool services while event metadata stays separate from sensitive content.",
+  "narration": "Agent telemetry starts with sessions and events. A session may include user requests, model calls, retrieval operations, tool selections, tool results, memory reads, memory writes, approvals, policy decisions, errors, latency, and cost or token usage at a high level. Each event should explain what happened and how it relates to the wider interaction. Isolated log lines are much less useful than a trace that connects cause, decision, and outcome.\n\nCorrelation IDs are essential. A single user request may pass through a frontend, backend, model gateway, retrieval service, tool service, approval workflow, and downstream system. If each system uses unrelated identifiers, investigation becomes slow and uncertain. A shared trace or correlation identifier lets teams reconstruct the path from the original request to the final answer or action, even when events are distributed across services.\n\nTelemetry should include model and prompt metadata without blindly recording sensitive prompt content. Teams often need model version, prompt version, policy version, tool version, retrieval source reference, and decision outcome. They may not need full raw prompts, full documents, credentials, or personal data. Good event design separates metadata needed for investigation from content that would create unnecessary privacy or security exposure.\n\nThe logging architecture should tell the story of what happened without exposing more than necessary. It should support query, timeline reconstruction, alerting, access review, and evidence preservation. It should also account for retention and access control. Agent observability is not only an engineering detail; it is part of the agent's safety and accountability design.",
+  "narrationPoints": [
+    "Agent telemetry starts with sessions and events.",
+    "Correlation IDs are essential.",
+    "Telemetry should include model and prompt metadata without blindly recording sensitive prompt content.",
+    "The logging architecture should tell the story of what happened without exposing more than necessary."
+  ]
+};

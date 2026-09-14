@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.707
+Blazor forms and components often collect
+user input and trigger state-changing
+
+2
+00:00:05.787 --> 00:00:06.391
+actions.
+
+3
+00:00:06.471 --> 00:00:11.678
+The interaction may feel strongly typed
+because values are bound to .NET objects,
+
+4
+00:00:11.758 --> 00:00:16.512
+but bound form data is still input from
+outside the trusted decision point.
+
+5
+00:00:16.592 --> 00:00:21.723
+Binding makes data convenient to process;
+it does not make it safe or authorized.
+
+6
+00:00:21.803 --> 00:00:24.746
+Client-side validation improves usability.
+
+7
+00:00:24.826 --> 00:00:27.467
+It can catch missing fields, bad formats,
+
+8
+00:00:27.547 --> 00:00:30.415
+and common mistakes before the user
+submits.
+
+9
+00:00:30.495 --> 00:00:33.061
+It should not be treated as enforcement.
+
+10
+00:00:33.141 --> 00:00:37.517
+The server or trusted backend must
+validate required fields, types,
+
+11
+00:00:37.597 --> 00:00:40.390
+formats, lengths, ranges, relationships,
+
+12
+00:00:40.470 --> 00:00:43.639
+and business rules before performing the
+change.
+
+13
+00:00:43.719 --> 00:00:49.001
+State-changing operations should verify
+authorization and input validity at the
+
+14
+00:00:49.081 --> 00:00:51.043
+point where the change is made.
+
+15
+00:00:51.123 --> 00:00:53.463
+A component may prepare the request,
+
+16
+00:00:53.543 --> 00:00:58.900
+but the backend should confirm that the
+current identity may perform the operation,
+
+17
+00:00:58.980 --> 00:01:01.622
+that the target resource is within scope,
+
+18
+00:01:01.702 --> 00:01:05.475
+and that the submitted data matches the
+expected contract.
+
+19
+00:01:05.555 --> 00:01:11.214
+Cookie-authenticated browser workflows may
+need CSRF protection for unsafe requests.
+
+20
+00:01:11.294 --> 00:01:16.577
+The details depend on how the Blazor
+application is hosted and how backend calls are
+
+21
+00:01:16.657 --> 00:01:21.788
+made, but the design should not assume
+that authentication alone proves request
+
+22
+00:01:21.868 --> 00:01:24.887
+intent for every browser-driven state
+change.
+
+23
+00:01:24.967 --> 00:01:29.495
+File uploads and large request bodies need
+explicit limits and review.
+
+24
+00:01:29.575 --> 00:01:33.499
+Teams should define accepted business
+purpose, size limits,
+
+25
+00:01:33.579 --> 00:01:35.993
+content handling, storage location,
+
+26
+00:01:36.073 --> 00:01:40.601
+scanning or review workflow where
+appropriate, and failure behavior.
+
+27
+00:01:40.681 --> 00:01:45.435
+Upload handling should be designed as a
+security and reliability feature,
+
+28
+00:01:45.515 --> 00:01:46.874
+not just a form input.
+
+29
+00:01:46.954 --> 00:01:50.802
+The baseline is consistent: collect input
+in the component,
+
+30
+00:01:50.882 --> 00:01:54.052
+validate for usability in the client when
+useful,
+
+31
+00:01:54.132 --> 00:01:59.414
+then enforce authorization and validation
+in the trusted backend before changing
+
+32
+00:01:59.494 --> 00:02:02.286
+records, sending messages, storing files,
+
+33
+00:02:02.366 --> 00:02:05.460
+or triggering important workflow
+transitions.

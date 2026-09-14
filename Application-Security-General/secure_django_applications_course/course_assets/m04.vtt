@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.653
+Django includes authentication concepts
+for users, groups, permissions,
+
+2
+00:00:06.733 --> 00:00:09.233
+and authentication backends.
+
+3
+00:00:09.313 --> 00:00:15.274
+Those pieces can support local login,
+enterprise identity integration,
+
+4
+00:00:15.354 --> 00:00:19.393
+API authentication, and more specialized
+flows.
+
+5
+00:00:19.473 --> 00:00:24.761
+The stable principle is that
+authentication verifies identity.
+
+6
+00:00:24.841 --> 00:00:31.475
+It should rely on vetted
+framework-supported mechanisms for password handling,
+
+7
+00:00:31.555 --> 00:00:38.574
+login, logout, and credential lifecycle
+rather than homegrown storage or comparison
+
+8
+00:00:38.654 --> 00:00:39.231
+logic.
+
+9
+00:00:39.311 --> 00:00:45.080
+MFA can strengthen authentication, but
+enrollment, recovery, reset,
+
+10
+00:00:45.160 --> 00:00:49.006
+and step-up behavior also need careful
+design.
+
+11
+00:00:49.086 --> 00:00:54.181
+Session protection is separate from
+authentication success.
+
+12
+00:00:54.261 --> 00:01:00.126
+After login, the application must manage
+session lifecycle: creation,
+
+13
+00:01:00.206 --> 00:01:05.495
+renewal, expiration, logout, and important
+state transitions.
+
+14
+00:01:05.575 --> 00:01:12.401
+Session fixation concerns appear when
+stale or attacker-influenced session state
+
+15
+00:01:12.481 --> 00:01:16.423
+survives authentication or privilege
+changes.
+
+16
+00:01:16.503 --> 00:01:23.137
+Session data should be minimized because
+unnecessary sensitive values increase
+
+17
+00:01:23.217 --> 00:01:26.775
+exposure, complexity, and lifecycle risk.
+
+18
+00:01:26.855 --> 00:01:33.777
+Cookie attributes should be chosen
+deliberately so session cookies are protected in
+
+19
+00:01:33.857 --> 00:01:37.511
+the expected transport and browser
+context.
+
+20
+00:01:37.591 --> 00:01:44.514
+CSRF protection addresses unwanted
+cross-site requests that cause a user's browser
+
+21
+00:01:44.594 --> 00:01:48.632
+to perform an action in an authenticated
+context.
+
+22
+00:01:48.712 --> 00:01:52.462
+Django provides CSRF-oriented protections,
+
+23
+00:01:52.542 --> 00:01:58.695
+but developers still need to preserve the
+pattern: protect unsafe methods,
+
+24
+00:01:58.775 --> 00:02:02.813
+use trusted forms or API patterns
+intentionally,
+
+25
+00:02:02.893 --> 00:02:09.431
+and avoid weakening protection for
+convenience without a compensating design.
+
+26
+00:02:09.511 --> 00:02:12.684
+CSRF is not the same as authentication,
+
+27
+00:02:12.764 --> 00:02:19.495
+and a valid session does not prove that a
+state-changing request was intentionally
+
+28
+00:02:19.575 --> 00:02:23.901
+initiated through the application's
+expected flow.
+
+29
+00:02:23.981 --> 00:02:31.000
+Authentication, sessions, cookies, and
+CSRF controls work together but do different
+
+30
+00:02:31.080 --> 00:02:31.561
+jobs.
+
+31
+00:02:31.641 --> 00:02:36.929
+A user may be logged in and still need a
+CSRF token for a form action.
+
+32
+00:02:37.009 --> 00:02:42.105
+A valid session may still need expiration
+and logout behavior.
+
+33
+00:02:42.185 --> 00:02:47.473
+A strong password flow does not authorize
+access to every object.
+
+34
+00:02:47.553 --> 00:02:53.899
+A secure Django application treats
+identity, browser state, request intent,
+
+35
+00:02:53.979 --> 00:02:59.940
+and permission as separate questions that
+all need appropriate answers.

@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.890
+Quoting is one of the most important
+ShellCheck themes because it protects argument
+
+2
+00:00:07.970 --> 00:00:09.115
+boundaries.
+
+3
+00:00:09.195 --> 00:00:12.005
+In many programming languages,
+
+4
+00:00:12.085 --> 00:00:18.642
+a string variable remains one string when
+it is passed to another function.
+
+5
+00:00:18.722 --> 00:00:25.799
+In shell, an unquoted variable expansion
+may be split into multiple words and may
+
+6
+00:00:25.879 --> 00:00:29.210
+also be treated as a filename pattern.
+
+7
+00:00:29.290 --> 00:00:36.159
+That behavior can change the number and
+meaning of arguments sent to a command.
+
+8
+00:00:36.239 --> 00:00:43.213
+The problem often appears with ordinary
+data: paths with spaces, empty values,
+
+9
+00:00:43.293 --> 00:00:50.370
+names that contain wildcard characters, or
+values produced by another command.
+
+10
+00:00:50.450 --> 00:00:56.279
+A script may work during testing because
+the sample path is simple,
+
+11
+00:00:56.359 --> 00:01:01.042
+then fail later when a real path contains
+whitespace.
+
+12
+00:01:01.122 --> 00:01:08.096
+It may behave unexpectedly when an empty
+variable removes an argument or when an
+
+13
+00:01:08.176 --> 00:01:12.964
+asterisk is interpreted as a pattern
+rather than data.
+
+14
+00:01:13.044 --> 00:01:20.121
+ShellCheck warnings help reviewers notice
+those conditions before they become
+
+15
+00:01:20.201 --> 00:01:21.242
+incidents.
+
+16
+00:01:21.322 --> 00:01:24.756
+Quoting is not just a style preference.
+
+17
+00:01:24.836 --> 00:01:30.561
+It is a safety control that tells the
+shell to treat a value as data.
+
+18
+00:01:30.641 --> 00:01:37.094
+When a variable represents one path, one
+identifier, or one option value,
+
+19
+00:01:37.174 --> 00:01:40.609
+quoting usually preserves the intent.
+
+20
+00:01:40.689 --> 00:01:46.621
+Reviewers should ask whether the script
+wants one argument or many,
+
+21
+00:01:46.701 --> 00:01:53.675
+whether empty values are allowed, and
+whether filename expansion is intended.
+
+22
+00:01:53.755 --> 00:02:00.312
+Most of the time, preserving the value as
+one argument is safer and clearer.
+
+23
+00:02:00.392 --> 00:02:07.365
+There are legitimate cases where a script
+intentionally relies on splitting or
+
+24
+00:02:07.445 --> 00:02:13.378
+pattern expansion, but those cases should
+be obvious and reviewed.
+
+25
+00:02:13.458 --> 00:02:15.748
+If the script needs a list,
+
+26
+00:02:15.828 --> 00:02:21.968
+consider using a safer structure
+appropriate for the intended shell.
+
+27
+00:02:22.048 --> 00:02:26.316
+If it needs a pattern, make that intent
+explicit.
+
+28
+00:02:26.396 --> 00:02:33.577
+ShellCheck is most useful when it pushes
+the team to distinguish accidental shell
+
+29
+00:02:33.657 --> 00:02:37.300
+interpretation from deliberate design.

@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Registry, Scope, and Dependency Confusion Risk",
+  "graphicAlt": "An organization scope maps explicitly to its approved private registry; ambiguous names and unintended public sources are rejected and package origin remains reviewable.",
+  "narration": "npm projects may pull packages from the public registry, private registries, internal mirrors, or scoped organization registries. Registry configuration decides where package names are resolved. Security teams should understand .npmrc files, organization-level settings, CI configuration, and developer workstation defaults because a package name can mean different things depending on registry selection and scope configuration.\n\nDependency confusion risk appears when an internal package name can be resolved from an unintended public source or a higher-precedence registry. The defensive lesson is not to experiment with offensive package names. The lesson is to configure internal packages clearly, use scopes for organization packages, pin scope-to-registry mappings, and avoid ambiguous names. A scoped package such as an organization namespace gives teams a cleaner boundary than relying on informal naming conventions.\n\nRegistry control should be part of normal dependency governance. Teams can use private registries, allowlisted sources, package mirrors, provenance policies, and documented publishing paths to reduce ambiguity. Developers should be able to tell where a package came from and why. When registry configuration is hidden in a workstation or pipeline, dependency behavior becomes harder to review and easier to misconfigure during onboarding, incident response, or environment rebuilds.",
+  "narrationPoints": [
+    "npm projects may pull packages from the public registry, private registries, internal mirrors, or scoped organization registries.",
+    "Dependency confusion risk appears when an internal package name can be resolved from an unintended public source or a higher-precedence registry.",
+    "Registry control should be part of normal dependency governance."
+  ]
+};

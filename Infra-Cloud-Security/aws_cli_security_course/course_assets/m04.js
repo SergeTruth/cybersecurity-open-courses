@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Credentials, SSO, MFA, and Runtime Handling",
+  "graphicAlt": "Federated or workload identity issues a short-lived session for a scoped runtime, supported by rotation, revocation, review, and exclusion of credentials from logs.",
+  "narration": "AWS credentials are sensitive operational authority. They may exist in shared credentials files, AWS config files, SSO sessions, environment variables, CI/CD secret stores, instance metadata roles, container credential providers, or temporary session files. A script does not need to print a secret for that secret to influence behavior. The presence of a credential is enough to define what the script can do.\n\nLong-lived static credentials should be minimized where better options are available. SSO, federation, MFA, role assumption, short-lived sessions, workload identity, and metadata-based roles can reduce risk when they fit the environment. They do not remove the need for validation, but they can reduce the useful lifetime of exposed credentials and make access easier to govern.\n\nScripts should check whether required credentials are available without displaying them. Avoid printing access keys, session tokens, credential-derived values, full environments, debug traces, or support bundles that include sensitive data. CI/CD masking is helpful, but it is not a complete security boundary. Secrets can still appear through transformations, files, command echoes, verbose tool output, or artifacts.\n\nCredential handling includes rotation, revocation, ownership, and session duration. Teams should know how to expire a role session, rotate a key if one still exists, disable a compromised credential, and identify which jobs or scripts used it. Secure AWS CLI automation treats credentials as temporary, scoped, and reviewable rather than permanent background plumbing.",
+  "narrationPoints": [
+    "AWS credentials are sensitive operational authority.",
+    "Long-lived static credentials should be minimized where better options are available.",
+    "Scripts should check whether required credentials are available without displaying them.",
+    "Credential handling includes rotation, revocation, ownership, and session duration."
+  ]
+};

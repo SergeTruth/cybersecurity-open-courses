@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.962
+Authentication answers who is making the
+request.
+
+2
+00:00:06.042 --> 00:00:13.664
+Next.js applications may use session
+cookies, token-based sessions,
+
+3
+00:00:13.744 --> 00:00:21.873
+passwordless sign-in, federated identity,
+MFA, step-up authentication,
+
+4
+00:00:21.953 --> 00:00:25.637
+or a dedicated identity provider.
+
+5
+00:00:25.717 --> 00:00:33.974
+The implementation details vary, but the
+security questions remain stable.
+
+6
+00:00:34.054 --> 00:00:37.229
+How is identity established?
+
+7
+00:00:37.309 --> 00:00:40.739
+How is session state protected?
+
+8
+00:00:40.819 --> 00:00:43.233
+How is logout handled?
+
+9
+00:00:43.313 --> 00:00:46.869
+How are tokens or cookies stored?
+
+10
+00:00:46.949 --> 00:00:52.411
+How does the server know the request is
+still valid?
+
+11
+00:00:52.491 --> 00:01:00.113
+Cookies need careful handling when they
+represent session authority.
+
+12
+00:01:00.193 --> 00:01:08.323
+HttpOnly helps keep session cookies out of
+normal client-side JavaScript.
+
+13
+00:01:08.403 --> 00:01:13.484
+Secure limits transmission to HTTPS
+contexts.
+
+14
+00:01:13.564 --> 00:01:19.534
+SameSite can reduce some cross-site
+request behavior.
+
+15
+00:01:19.614 --> 00:01:25.838
+Domain and path settings control where the
+cookie is sent.
+
+16
+00:01:25.918 --> 00:01:32.015
+Expiration and renewal policy affect
+session lifetime.
+
+17
+00:01:32.095 --> 00:01:36.287
+These attributes are not decorations;
+
+18
+00:01:36.367 --> 00:01:44.243
+they are part of the security model for
+browser-authenticated requests.
+
+19
+00:01:44.323 --> 00:01:51.690
+Authentication success does not
+automatically grant broad access.
+
+20
+00:01:51.770 --> 00:01:57.995
+A user may be signed in but not allowed to
+read every record,
+
+21
+00:01:58.075 --> 00:02:06.585
+edit every organization, invoke every API
+handler, or perform every mutation.
+
+22
+00:02:06.665 --> 00:02:13.271
+API keys and service credentials can
+identify integrations,
+
+23
+00:02:13.351 --> 00:02:19.702
+but they do not automatically prove an end
+user's identity.
+
+24
+00:02:19.782 --> 00:02:28.293
+Session state, token validation, issuer,
+audience, expiration, revocation,
+
+25
+00:02:28.373 --> 00:02:35.232
+and intended use all need to line up with
+the application design.
+
+26
+00:02:35.312 --> 00:02:42.172
+Session behavior crosses server, browser,
+and API boundaries.
+
+27
+00:02:42.252 --> 00:02:49.873
+Account recovery, password reset, MFA
+changes, role changes, logout,
+
+28
+00:02:49.953 --> 00:02:59.099
+and session invalidation can affect
+whether existing sessions should remain valid.
+
+29
+00:02:59.179 --> 00:03:07.817
+A secure application treats authentication
+as a lifecycle, not a one-time flag.
+
+30
+00:03:07.897 --> 00:03:15.010
+It also avoids logging tokens, placing
+secrets in client bundles,
+
+31
+00:03:15.090 --> 00:03:23.220
+or exposing session internals through
+error messages or debugging output.

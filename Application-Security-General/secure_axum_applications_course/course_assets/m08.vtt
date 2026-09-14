@@ -1,0 +1,167 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.839
+A secure Axum application is more than its
+handlers.
+
+2
+00:00:03.919 --> 00:00:08.396
+Crates, feature flags, middleware
+dependencies, database clients,
+
+3
+00:00:08.476 --> 00:00:12.725
+session libraries, serialization
+libraries, TLS integrations,
+
+4
+00:00:12.805 --> 00:00:16.903
+and proxy integrations become part of the
+trusted application.
+
+5
+00:00:16.983 --> 00:00:20.473
+Dependency review should consider what
+code is added,
+
+6
+00:00:20.553 --> 00:00:24.423
+which features are enabled, what parsing
+behavior changes,
+
+7
+00:00:24.503 --> 00:00:27.462
+and what runtime assumptions are
+introduced.
+
+8
+00:00:27.542 --> 00:00:33.006
+Configuration should be validated before
+the service accepts traffic or at a clearly
+
+9
+00:00:33.086 --> 00:00:34.300
+defined boundary.
+
+10
+00:00:34.380 --> 00:00:38.705
+Missing secrets, unsafe defaults,
+unexpected environment modes,
+
+11
+00:00:38.785 --> 00:00:43.641
+disabled protections, and incorrect
+endpoint settings should fail early.
+
+12
+00:00:43.721 --> 00:00:48.957
+Configuration that changes security
+behavior deserves documentation, review,
+
+13
+00:00:49.037 --> 00:00:50.934
+and operational visibility.
+
+14
+00:00:51.014 --> 00:00:56.326
+Secrets should be delivered through
+approved mechanisms and treated as sensitive
+
+15
+00:00:56.406 --> 00:00:57.999
+everywhere they travel.
+
+16
+00:00:58.079 --> 00:01:02.556
+They should not appear in source code,
+responses, logs, crash output,
+
+17
+00:01:02.636 --> 00:01:05.368
+build artifacts, images, or diagnostics.
+
+18
+00:01:05.448 --> 00:01:08.863
+Redaction should be deliberate rather than
+hopeful.
+
+19
+00:01:08.943 --> 00:01:11.598
+When teams add structured logs or traces,
+
+20
+00:01:11.678 --> 00:01:16.155
+they should decide which fields are safe,
+which fields are sensitive,
+
+21
+00:01:16.235 --> 00:01:18.967
+and which fields should never be recorded.
+
+22
+00:01:19.047 --> 00:01:22.613
+Deployment assumptions affect application
+security.
+
+23
+00:01:22.693 --> 00:01:26.715
+TLS termination, reverse proxy behavior,
+forwarded headers,
+
+24
+00:01:26.795 --> 00:01:31.196
+trusted networks, exposed ports, health
+checks, readiness checks,
+
+25
+00:01:31.276 --> 00:01:34.236
+background workers, environment variables,
+
+26
+00:01:34.316 --> 00:01:37.123
+and monitoring all shape the real
+boundary.
+
+27
+00:01:37.203 --> 00:01:40.466
+The code and deployment should tell the
+same story.
+
+28
+00:01:40.546 --> 00:01:43.202
+If the application trusts a proxy header,
+
+29
+00:01:43.282 --> 00:01:47.455
+the infrastructure must enforce where that
+header can come from.
+
+30
+00:01:47.535 --> 00:01:50.798
+Monitoring and incident readiness close
+the loop.
+
+31
+00:01:50.878 --> 00:01:55.659
+Secure services emit useful, sanitized
+signals about failures, denials,
+
+32
+00:01:55.739 --> 00:02:01.126
+latency, dependency health, unexpected
+request patterns, and resource pressure.
+
+33
+00:02:01.206 --> 00:02:03.103
+The goal is not noisy logging.
+
+34
+00:02:03.183 --> 00:02:07.660
+The goal is enough observability that
+operators can detect problems,
+
+35
+00:02:07.740 --> 00:02:12.900
+investigate safely, and improve the
+service after operational lessons appear.

@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.738
+A deployment command finishing does not
+always mean the application is healthy.
+
+2
+00:00:07.818 --> 00:00:13.459
+A rollout may stall, pods may crash,
+readiness probes may fail,
+
+3
+00:00:13.539 --> 00:00:20.351
+traffic may not reach the new version, or
+only part of the change may succeed.
+
+4
+00:00:20.431 --> 00:00:27.562
+A script that reports success too early
+can create false confidence and trigger
+
+5
+00:00:27.642 --> 00:00:32.751
+later automation before the workload is
+actually ready.
+
+6
+00:00:32.831 --> 00:00:40.601
+Secure deployment scripts should wait for
+expected rollout and readiness conditions
+
+7
+00:00:40.681 --> 00:00:42.703
+that fit the workload.
+
+8
+00:00:42.783 --> 00:00:48.743
+They should use timeouts, detect partial
+or stalled deployments,
+
+9
+00:00:48.823 --> 00:00:51.484
+and report failures clearly.
+
+10
+00:00:51.564 --> 00:00:58.163
+Health checks should be appropriate to the
+application and environment.
+
+11
+00:00:58.243 --> 00:01:05.374
+For some workloads, Kubernetes readiness
+is enough for the deployment script.
+
+12
+00:01:05.454 --> 00:01:13.011
+For others, additional smoke checks or
+monitoring signals may be part of the release
+
+13
+00:01:13.091 --> 00:01:13.943
+process.
+
+14
+00:01:14.023 --> 00:01:18.706
+Failure handling should avoid misleading
+success.
+
+15
+00:01:18.786 --> 00:01:21.021
+If a rollout check fails,
+
+16
+00:01:21.101 --> 00:01:27.274
+the script should not continue with later
+promotion, notification,
+
+17
+00:01:27.354 --> 00:01:30.654
+or cleanup steps that imply success.
+
+18
+00:01:30.734 --> 00:01:38.610
+Operators should receive a clear status,
+target, version, and follow-up expectation.
+
+19
+00:01:38.690 --> 00:01:45.502
+The script should make it easy to see
+whether a failure was during rendering,
+
+20
+00:01:45.582 --> 00:01:51.755
+apply, rollout, health verification, or a
+later operational check.
+
+21
+00:01:51.835 --> 00:01:56.731
+Rollback planning matters before
+deployment begins.
+
+22
+00:01:56.811 --> 00:02:01.282
+Teams should know what rollback can and
+cannot do,
+
+23
+00:02:01.362 --> 00:02:08.386
+what stateful resources require extra
+care, and who owns recovery decisions.
+
+24
+00:02:08.466 --> 00:02:14.001
+A stateless workload may be easier to
+revert than a migration,
+
+25
+00:02:14.081 --> 00:02:19.403
+persistent volume change, or external
+dependency change.
+
+26
+00:02:19.483 --> 00:02:26.508
+Secure deployment automation treats
+rollback as part of the deployment plan,
+
+27
+00:02:26.588 --> 00:02:30.100
+not a wish made after something breaks.

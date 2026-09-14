@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.411
+A secure Axum application starts with a
+route map that a reviewer can understand.
+
+2
+00:00:08.491 --> 00:00:15.238
+Public routes, authenticated user routes,
+administrative routes,
+
+3
+00:00:15.318 --> 00:00:19.273
+health endpoints, internal callbacks,
+
+4
+00:00:19.353 --> 00:00:24.821
+and service-to-service APIs should not
+blur together.
+
+5
+00:00:24.901 --> 00:00:32.695
+If a team cannot quickly answer which
+routes are public and which routes require
+
+6
+00:00:32.775 --> 00:00:39.523
+identity, the service is already harder to
+review than it needs to be.
+
+7
+00:00:39.603 --> 00:00:44.256
+Handlers should have clear
+responsibilities.
+
+8
+00:00:44.336 --> 00:00:51.316
+A handler often receives extracted input,
+checks identity or context,
+
+9
+00:00:51.396 --> 00:00:55.701
+calls domain logic, and returns a
+response.
+
+10
+00:00:55.781 --> 00:01:02.295
+That does not mean it should silently mix
+parsing, authorization,
+
+11
+00:01:02.375 --> 00:01:05.749
+business decisions, data access,
+
+12
+00:01:05.829 --> 00:01:11.180
+and response formatting in one
+hard-to-review block.
+
+13
+00:01:11.260 --> 00:01:14.169
+The more sensitive the route,
+
+14
+00:01:14.249 --> 00:01:20.298
+the more valuable it is to make the
+sequence of checks visible.
+
+15
+00:01:20.378 --> 00:01:25.031
+Shared application state is another
+boundary.
+
+16
+00:01:25.111 --> 00:01:30.346
+Axum makes it convenient to pass state
+into handlers,
+
+17
+00:01:30.426 --> 00:01:33.567
+but state should be deliberate.
+
+18
+00:01:33.647 --> 00:01:37.486
+A handler should receive what it needs,
+
+19
+00:01:37.566 --> 00:01:43.499
+not a grab bag of powerful clients and
+configuration values.
+
+20
+00:01:43.579 --> 00:01:50.210
+Database pools, API clients, key material
+handles, feature flags,
+
+21
+00:01:50.290 --> 00:01:58.317
+and authorization helpers should be scoped
+and documented so reviewers know what
+
+22
+00:01:58.397 --> 00:02:00.491
+each route can reach.
+
+23
+00:02:00.571 --> 00:02:05.341
+The request lifecycle should tell a clear
+story.
+
+24
+00:02:05.421 --> 00:02:09.260
+Where is authentication established?
+
+25
+00:02:09.340 --> 00:02:12.714
+Where is authorization enforced?
+
+26
+00:02:12.794 --> 00:02:17.214
+Where does input become trusted domain
+data?
+
+27
+00:02:17.294 --> 00:02:22.180
+Where are tenant and ownership checks
+performed?
+
+28
+00:02:22.260 --> 00:02:26.448
+Where are errors mapped to safe responses?
+
+29
+00:02:26.528 --> 00:02:33.276
+A secure design makes those answers
+visible through route grouping,
+
+30
+00:02:33.356 --> 00:02:40.685
+middleware scope, extractor choice,
+handler structure, and domain APIs.
+
+31
+00:02:40.765 --> 00:02:45.186
+Treat the route flow as a trust-boundary
+map.
+
+32
+00:02:45.266 --> 00:02:53.293
+A request begins outside the service and
+passes through network infrastructure,
+
+33
+00:02:53.373 --> 00:03:00.236
+proxy behavior, Axum routing, middleware,
+extraction, validation,
+
+34
+00:03:00.316 --> 00:03:07.180
+authorization, domain logic, data access,
+and response generation.
+
+35
+00:03:07.260 --> 00:03:15.287
+Each transition should either preserve a
+clear invariant or add a controlled one.
+
+36
+00:03:15.367 --> 00:03:21.300
+That is what makes the application
+reviewable under change.

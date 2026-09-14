@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.734
+Axum applications need consistent error
+behavior because every error path is still
+
+2
+00:00:08.814 --> 00:00:11.713
+part of the public interface.
+
+3
+00:00:11.793 --> 00:00:19.100
+Validation failures, authentication
+failures, authorization denials,
+
+4
+00:00:19.180 --> 00:00:24.862
+missing resources, upstream failures,
+database errors,
+
+5
+00:00:24.942 --> 00:00:32.828
+and unexpected internal problems should be
+mapped to responses intentionally.
+
+6
+00:00:32.908 --> 00:00:41.258
+The client should understand the outcome
+without receiving details that belong only
+
+7
+00:00:41.338 --> 00:00:43.890
+in internal diagnostics.
+
+8
+00:00:43.970 --> 00:00:51.044
+User-facing responses should avoid
+secrets, raw tokens, stack traces,
+
+9
+00:00:51.124 --> 00:00:57.619
+database details, internal topology,
+sensitive configuration,
+
+10
+00:00:57.699 --> 00:01:02.569
+and implementation-specific failure
+messages.
+
+11
+00:01:02.649 --> 00:01:09.260
+A production service can be transparent
+about success, rejection,
+
+12
+00:01:09.340 --> 00:01:15.255
+and retry behavior without exposing how
+the system is built.
+
+13
+00:01:15.335 --> 00:01:23.916
+Safe response design reduces unnecessary
+information disclosure while still helping
+
+14
+00:01:23.996 --> 00:01:28.519
+legitimate clients handle errors
+correctly.
+
+15
+00:01:28.599 --> 00:01:33.586
+Logging and response content should be
+separated.
+
+16
+00:01:33.666 --> 00:01:40.161
+Operators may need correlation IDs, route
+names, status classes,
+
+17
+00:01:40.241 --> 00:01:47.431
+dependency names, latency, and sanitized
+context to diagnose a problem.
+
+18
+00:01:47.511 --> 00:01:54.701
+Clients usually need a stable status code,
+a predictable response shape,
+
+19
+00:01:54.781 --> 00:01:58.144
+and perhaps a safe error category.
+
+20
+00:01:58.224 --> 00:02:06.575
+The service should not solve operational
+visibility by dumping internal detail into
+
+21
+00:02:06.655 --> 00:02:08.510
+the HTTP response.
+
+22
+00:02:08.590 --> 00:02:13.693
+Panics should not be treated as normal
+control flow.
+
+23
+00:02:13.773 --> 00:02:20.963
+Rust makes it possible to write robust
+error types and explicit mappings,
+
+24
+00:02:21.043 --> 00:02:27.190
+and Axum can return structured responses
+from those mappings.
+
+25
+00:02:27.270 --> 00:02:30.749
+Unexpected panics may still occur,
+
+26
+00:02:30.829 --> 00:02:38.831
+but production design should define how
+they are contained, logged, correlated,
+
+27
+00:02:38.911 --> 00:02:40.419
+and monitored.
+
+28
+00:02:40.499 --> 00:02:46.645
+A panic is an operational signal, not a
+normal validation path.
+
+29
+00:02:46.725 --> 00:02:51.364
+Consistency makes error behavior
+reviewable.
+
+30
+00:02:51.444 --> 00:02:58.866
+Similar failures should produce similar
+status codes and response shapes.
+
+31
+00:02:58.946 --> 00:03:05.557
+Sensitive routes should not leak more
+detail than ordinary routes.
+
+32
+00:03:05.637 --> 00:03:12.131
+Errors should be redacted before logs
+leave the service boundary.
+
+33
+00:03:12.211 --> 00:03:18.010
+The goal is a system where developers,
+security reviewers,
+
+34
+00:03:18.090 --> 00:03:25.860
+and operators can reason about both client
+behavior and incident diagnostics.

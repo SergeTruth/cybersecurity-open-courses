@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Authentication and Connection Identity",
+  "graphicAlt": "An open connection can outlive identity or policy changes; explicit rechecking or reconnection handles stale authorization context.",
+  "narration": "Authentication answers the question, who is connected? In ASP.NET Core SignalR, the hub can integrate with the same authentication system used by the rest of the application. When a connection is established, the server can associate a user principal with that connection, and hub code can make decisions using the authenticated identity.\n\nThe details matter because SignalR clients are not all the same. Browser clients may use cookies. Browser or non-browser clients may use bearer tokens. Mobile, desktop, service, and generated clients may have different token storage, refresh, and retry behavior. A secure design documents which credential type each client uses, how the connection is established, and how authentication failure appears to that client.\n\nA long-lived connection also changes the timing model. Authentication data is typically captured when the connection starts. It should not be assumed to update instantly while the connection stays open. Token expiration, user logout, disabled accounts, role changes, claim updates, tenant changes, and permission changes all need deliberate connection-lifecycle review.\n\nThat review can lead to different engineering choices. Some applications require shorter connection lifetimes. Some close connections when authentication state changes. Some require reconnects to pick up new claims. Some avoid placing highly dynamic authorization facts in long-lived identity claims and instead check trusted server-side data when a method runs.\n\nThe important point is predictability. Authenticated SignalR connections should behave consistently across browser and non-browser clients. Failed authentication should produce understandable outcomes, and the server should never assume that a connected client remains authorized for every future action just because an earlier connection handshake succeeded.",
+  "narrationPoints": [
+    "Authentication answers the question, who is connected?",
+    "The details matter because SignalR clients are not all the same.",
+    "A long-lived connection also changes the timing model.",
+    "That review can lead to different engineering choices.",
+    "The important point is predictability."
+  ]
+};

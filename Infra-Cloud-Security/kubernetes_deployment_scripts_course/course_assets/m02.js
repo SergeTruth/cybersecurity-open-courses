@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Context, Scope, Namespaces, and Environment Boundaries",
+  "graphicAlt": "Cluster, namespace, workload, and environment must be confirmed before applying changes; unknown targets stop, and production has its own approval gate.",
+  "narration": "A Kubernetes deployment script should always know where it is operating. The active context, cluster, namespace, environment, release name, and target workload should be explicit and validated before a deployment begins. A script that relies on whatever context happens to be active on an operator workstation or runner is allowing hidden state to decide the target of a production change.\n\nNamespace validation is just as important as cluster validation. A namespace mistake can deploy resources into the wrong tenant, modify the wrong workload, expose a service unexpectedly, or make a script believe it changed the intended system when it did not. The script should confirm the intended namespace, workload, release, and environment before applying changes, especially when the same names exist across multiple clusters or stages.\n\nDevelopment, staging, and production should have separate expectations, credentials, policies, and approval paths. A development deployment may be frequent and low-impact. A production deployment may require a protected branch, a tagged release, a change window, a ticket reference, or an approval gate. The script should reflect those differences rather than treating every environment as the same target with different names.\n\nFor high-impact actions, confirmation or gating can be valuable. That may mean a CI/CD environment gate, a protected tag, an explicit operator confirmation, or a check that required metadata is present. The core defensive habit is simple: validate target scope before changing cluster state. If context, namespace, release, workload, or environment cannot be confirmed, fail clearly before the script applies anything.",
+  "narrationPoints": [
+    "A Kubernetes deployment script should always know where it is operating.",
+    "Namespace validation is just as important as cluster validation.",
+    "Development, staging, and production should have separate expectations, credentials, policies, and approval paths.",
+    "For high-impact actions, confirmation or gating can be valuable."
+  ]
+};

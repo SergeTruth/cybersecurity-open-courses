@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Data Exposure and Response Security",
+  "graphicAlt": "A response policy selects allowed fields from an internal model, excludes sensitive internals, and applies page limits, filter restrictions, and safe error responses.",
+  "narration": "Excessive data exposure occurs when an API returns more information than the caller needs or should receive. This often happens when backend models are serialized directly into responses. A database entity may include internal IDs, role flags, audit fields, tenant metadata, email addresses, tokens, or configuration details that the client never needed. API responses should be shaped intentionally for the caller and operation.\n\nField-level filtering is a practical control. The server should decide which fields are returned based on the endpoint, caller, tenant, relationship, and purpose. A user profile response, an administrative response, and an internal service response may all represent the same underlying object but expose different fields. Do not rely on the client to hide sensitive fields after receiving them. If the caller should not see it, the API should not return it.\n\nError message leakage is another form of data exposure. Stack traces, database errors, exception names, service URLs, debug metadata, and raw downstream responses can reveal system internals. APIs should provide stable error structures that support troubleshooting without exposing unnecessary detail. Correlation IDs can help operators find internal logs while keeping the external response clean.\n\nPagination, sorting, and filtering controls also affect exposure. Unbounded result sets can reveal too much data and create availability risk. Flexible filters can accidentally allow enumeration of sensitive records. Sort fields can leak internal schema. A secure API response design defines default limits, maximum page sizes, allowed filter fields, allowed sort fields, and stable response shapes that match real client needs.",
+  "narrationPoints": [
+    "Excessive data exposure occurs when an API returns more information than the caller needs or should receive.",
+    "Field-level filtering is a practical control.",
+    "Error message leakage is another form of data exposure.",
+    "Pagination, sorting, and filtering controls also affect exposure."
+  ]
+};

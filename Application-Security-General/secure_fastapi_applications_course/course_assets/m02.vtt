@@ -1,0 +1,150 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.258
+FastAPI applications usually run as ASGI
+applications,
+
+2
+00:00:05.338 --> 00:00:11.583
+which means the application may sit behind
+an ASGI server, a reverse proxy,
+
+3
+00:00:11.663 --> 00:00:14.339
+a load balancer, an API gateway,
+
+4
+00:00:14.419 --> 00:00:19.672
+or other infrastructure before a request
+reaches Python code.
+
+5
+00:00:19.752 --> 00:00:24.807
+Routers help organize path operations by
+feature or domain,
+
+6
+00:00:24.887 --> 00:00:28.654
+but architecture is more than folder
+layout.
+
+7
+00:00:28.734 --> 00:00:35.573
+A secure structure makes authentication,
+authorization, validation, logging,
+
+8
+00:00:35.653 --> 00:00:41.006
+and error handling consistent across the
+routes that need them.
+
+9
+00:00:41.086 --> 00:00:44.952
+Configuration should be environment-aware.
+
+10
+00:00:45.032 --> 00:00:52.169
+Development settings often favor
+convenience, local credentials, verbose errors,
+
+11
+00:00:52.249 --> 00:00:54.627
+and visible documentation.
+
+12
+00:00:54.707 --> 00:00:58.276
+Production settings need safer defaults,
+
+13
+00:00:58.356 --> 00:01:05.096
+controlled host and proxy assumptions,
+private secrets, predictable logging,
+
+14
+00:01:05.176 --> 00:01:08.844
+and deliberate exposure of documentation.
+
+15
+00:01:08.924 --> 00:01:15.961
+Debug behavior and interactive API
+documentation can be useful for development and
+
+16
+00:01:16.041 --> 00:01:22.881
+internal environments, but teams should
+decide intentionally what is exposed in
+
+17
+00:01:22.961 --> 00:01:25.637
+production and who can reach it.
+
+18
+00:01:25.717 --> 00:01:29.186
+Secrets should live outside source code.
+
+19
+00:01:29.266 --> 00:01:35.610
+API keys, token signing material, database
+credentials, webhook secrets,
+
+20
+00:01:35.690 --> 00:01:41.241
+and service credentials should not be
+committed to repositories,
+
+21
+00:01:41.321 --> 00:01:44.592
+copied into images, or printed in logs.
+
+22
+00:01:44.672 --> 00:01:48.538
+Configuration validation is also
+important.
+
+23
+00:01:48.618 --> 00:01:55.457
+The application should fail clearly at
+startup if required security settings are
+
+24
+00:01:55.537 --> 00:02:02.079
+missing or unsafe, rather than running
+with defaults that were never meant for
+
+25
+00:02:02.159 --> 00:02:03.249
+production.
+
+26
+00:02:03.329 --> 00:02:07.889
+Deployment boundaries affect security
+assumptions.
+
+27
+00:02:07.969 --> 00:02:14.015
+A proxy may terminate TLS, set forwarding
+headers, enforce body limits,
+
+28
+00:02:14.095 --> 00:02:16.871
+or identify the original client.
+
+29
+00:02:16.951 --> 00:02:23.592
+The FastAPI application still needs to
+know which headers are trusted and which
+
+30
+00:02:23.672 --> 00:02:26.249
+hosts or origins are expected.
+
+31
+00:02:26.329 --> 00:02:33.664
+Configuration should document those
+assumptions so the service behaves consistently
+
+32
+00:02:33.744 --> 00:02:40.980
+across local development, staging,
+production, and cloud or container deployments.

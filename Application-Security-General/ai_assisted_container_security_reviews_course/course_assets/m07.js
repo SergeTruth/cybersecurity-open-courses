@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Kubernetes and Orchestration Context",
+  "graphicAlt": "The same image can have different permissions and reach in different deployments; service accounts, RBAC, network policy, and admission controls shape the actual risk.",
+  "narration": "Kubernetes and orchestration context can change the meaning of a container finding. A pod, deployment, service, namespace, service account, admission policy, network policy, and security context all influence runtime risk. The same image may be lower or higher risk depending on where it runs, what it can reach, and what identity or permissions it receives.\n\nSecurity contexts can define user IDs, privilege escalation settings, capabilities, seccomp profiles, AppArmor or SELinux options where applicable, and read-only filesystem behavior. RBAC controls what a service account can do through the Kubernetes API. Network policies can limit which workloads communicate. Admission controls can prevent risky workloads from being deployed. These settings help turn a container review into a deployment risk review.\n\nImage pull policies, registry controls, signing, and promotion workflows also matter. If a cluster can pull mutable tags from an untrusted registry, the deployment may be harder to reason about. If admission controls require signed images from approved registries, the organization has stronger guardrails. Reviewers should connect image provenance and build evidence to what the orchestrator actually allows.\n\nAI can help summarize manifests and map findings to deployment context. It can identify questions about service accounts, namespaces, network exposure, security contexts, and policies. The reviewer still needs to verify the live or approved configuration and understand operational constraints. Kubernetes context does not replace image review; it completes the risk picture.",
+  "narrationPoints": [
+    "Kubernetes and orchestration context can change the meaning of a container finding.",
+    "Security contexts can define user IDs, privilege escalation settings, capabilities, seccomp profiles, AppArmor or SELinux options where applicable, and read-only filesystem behavior.",
+    "Image pull policies, registry controls, signing, and promotion workflows also matter.",
+    "AI can help summarize manifests and map findings to deployment context."
+  ]
+};

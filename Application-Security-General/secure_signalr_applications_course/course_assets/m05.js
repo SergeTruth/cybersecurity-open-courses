@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Browser Transports, CORS, WebSockets, and Connection Tokens",
+  "graphicAlt": "CORS, WebSocket origin handling, and token-safe logging require separate transport review, with HTTPS protecting production traffic.",
+  "narration": "SignalR may use WebSockets, Server-Sent Events, or long polling depending on client capability, server configuration, proxies, and hosting environment. Those transports support the same application feature, but they can have different effects on authentication behavior, logging, origin review, and operational troubleshooting.\n\nFor browser clients, CORS deserves direct review. Cross-origin SignalR connections should be allowed only for trusted and controlled origins that are part of the application design. A broad or casual CORS policy can turn a deployment setting into a long-term governance problem. The allowed origins should match real client deployments and should be reviewed when environments, domains, or front-end hosting changes.\n\nWebSocket origin behavior needs separate attention where relevant. CORS policy is not the complete story for WebSocket origin restriction, so teams should confirm how their hosting stack, reverse proxy, and application middleware treat WebSocket requests. The goal is not to memorize a transport detail, but to make origin handling an explicit production review item.\n\nAccess tokens also need care. In some browser transport cases, tokens may appear in query strings because of browser API limitations. That means URL logging, reverse proxy logs, application logs, load balancer logs, diagnostics, monitoring, and error reporting should be reviewed so sensitive values are not stored or forwarded unintentionally.\n\nConnection identifiers and connection tokens should be treated carefully. They are part of connection management and should not be casually exposed in logs, URLs, screenshots, support tickets, or client-visible diagnostics. HTTPS should be the production baseline so connection negotiation, transport upgrade, credentials, and messages are protected in transit.",
+  "narrationPoints": [
+    "SignalR may use WebSockets, Server-Sent Events, or long polling depending on client capability, server configuration, proxies, and hosting environment.",
+    "For browser clients, CORS deserves direct review.",
+    "WebSocket origin behavior needs separate attention where relevant.",
+    "Access tokens also need care.",
+    "Connection identifiers and connection tokens should be treated carefully."
+  ]
+};

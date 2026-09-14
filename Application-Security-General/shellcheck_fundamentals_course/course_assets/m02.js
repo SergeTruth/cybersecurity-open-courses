@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What ShellCheck Analyzes",
+  "graphicAlt": "ShellCheck inspects source without executing the workflow; findings complement runtime tests and engineering review.",
+  "narration": "ShellCheck analyzes scripts without running them. That makes it useful early in development and review, because it can point out risky patterns before the script touches files, services, or production systems. It examines shell syntax, variable use, quoting, expansion, command structure, conditionals, and portability assumptions. It also provides maintainability guidance where a construct may be confusing to future readers.\n\nMany findings are about shell behavior that is easy to miss. ShellCheck can warn when an unquoted value may be split into multiple arguments, when a variable looks misspelled or unused, when a test expression is suspicious, when command substitution may hide an error, or when a feature does not match the declared shell. These are not obscure academic details. They are the kinds of issues that make automation behave differently from what the author intended.\n\nStatic analysis has limits. ShellCheck does not execute the workflow, contact the remote system, inspect the production policy, or know the sensitivity of the data being handled. It may not understand why a team intentionally chose one behavior over another. It cannot prove that a deployment is safe, that a backup is complete, or that an incident-response script meets operational requirements. Runtime testing, human review, and operational validation are still needed.\n\nThe best mindset is to treat ShellCheck findings as review prompts. Some findings are straightforward and should be fixed directly. Others reveal assumptions that need documentation, a test case, or a design change. A finding can also help reviewers ask better questions: what shell will run this script, what happens when the variable is empty, what happens when the command fails, and does this code preserve argument boundaries?",
+  "narrationPoints": [
+    "ShellCheck analyzes scripts without running them.",
+    "Many findings are about shell behavior that is easy to miss.",
+    "Static analysis has limits.",
+    "The best mindset is to treat ShellCheck findings as review prompts."
+  ]
+};

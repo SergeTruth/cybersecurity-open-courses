@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Third-Party Content and Frontend Architecture",
+  "graphicAlt": "Third-party widgets, analytics, and APIs are tracked by feature, directive, and owner before their origins are included as approved sources in the policy.",
+  "narration": "Third-party resources are one of the hardest parts of CSP design. Applications often depend on CDNs, analytics, tag managers, payment widgets, embedded media, maps, chat tools, fonts, and external APIs. Each dependency may require scripts, frames, images, styles, or network connections. CSP forces teams to name those relationships explicitly, which can be uncomfortable but useful. If the application cannot explain why a source is allowed, that source should be reviewed.\n\nOverly broad allowlists reduce the value of the policy. Allowing every subdomain of a large provider, every HTTPS source, or broad wildcard patterns may make deployment easy, but it also permits more behavior than the application needs. Third-party scripts also carry supply chain considerations because code loaded from an external origin can affect the page. CSP cannot make an untrusted script safe once it is allowed to execute. It can, however, help limit which origins are trusted and make unexpected loads visible.\n\nMaintaining an inventory of trusted resource origins is a practical governance step. The inventory should identify why each origin is needed, which feature uses it, which directive allows it, who owns the relationship, and what happens if the provider changes. Frontend architecture choices matter too. Reducing tag sprawl, avoiding unnecessary third-party scripts, bundling static assets where appropriate, and separating data from code all make CSP simpler and stronger.",
+  "narrationPoints": [
+    "Third-party resources are one of the hardest parts of CSP design.",
+    "Overly broad allowlists reduce the value of the policy.",
+    "Maintaining an inventory of trusted resource origins is a practical governance step."
+  ]
+};

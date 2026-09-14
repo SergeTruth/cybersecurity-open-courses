@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.647
+Axum gives Rust teams a practical way to
+build web APIs, internal services,
+
+2
+00:00:07.727 --> 00:00:12.265
+backend applications, and operational
+tools.
+
+3
+00:00:12.345 --> 00:00:18.924
+It fits naturally with the Rust ecosystem
+by using routes, handlers,
+
+4
+00:00:19.004 --> 00:00:27.059
+extractors, shared state, middleware,
+Tower layers, and asynchronous execution.
+
+5
+00:00:27.139 --> 00:00:30.315
+Those pieces make it productive,
+
+6
+00:00:30.395 --> 00:00:38.223
+but they also create the security boundary
+where untrusted requests meet trusted
+
+7
+00:00:38.303 --> 00:00:40.571
+application behavior.
+
+8
+00:00:40.651 --> 00:00:48.819
+Rust's memory-safety model removes many
+classes of low-level implementation risk,
+
+9
+00:00:48.899 --> 00:00:54.912
+but it does not automatically solve web
+application security.
+
+10
+00:00:54.992 --> 00:00:59.870
+An Axum service can still authorize the
+wrong user,
+
+11
+00:00:59.950 --> 00:01:07.664
+accept input that is syntactically valid
+but unsafe for the business operation,
+
+12
+00:01:07.744 --> 00:01:14.210
+leak internal details in an error
+response, apply CORS too broadly,
+
+13
+00:01:14.290 --> 00:01:21.096
+log sensitive tokens, or accept enough
+work to exhaust a database pool.
+
+14
+00:01:21.176 --> 00:01:28.096
+The important shift is to treat an Axum
+application as a boundary system.
+
+15
+00:01:28.176 --> 00:01:32.033
+Routes define what outsiders can reach.
+
+16
+00:01:32.113 --> 00:01:36.538
+Handlers decide how requests become
+actions.
+
+17
+00:01:36.618 --> 00:01:42.063
+Extractors shape how untrusted input
+enters typed code.
+
+18
+00:01:42.143 --> 00:01:46.567
+Middleware applies cross-cutting behavior.
+
+19
+00:01:46.647 --> 00:01:51.866
+Shared state exposes clients, pools,
+configuration,
+
+20
+00:01:51.946 --> 00:01:56.143
+and service handles to request processing.
+
+21
+00:01:56.223 --> 00:02:03.029
+Each of those areas deserves design
+review, not just compiler success.
+
+22
+00:02:03.109 --> 00:02:08.441
+Secure Axum development is not about
+distrusting Rust.
+
+23
+00:02:08.521 --> 00:02:16.235
+It is about being precise about what Rust
+protects and what the application still
+
+24
+00:02:16.315 --> 00:02:16.883
+owns.
+
+25
+00:02:16.963 --> 00:02:24.336
+The compiler helps with ownership,
+lifetimes, and many concurrency issues.
+
+26
+00:02:24.416 --> 00:02:31.336
+The engineering team still owns identity,
+authorization, validation,
+
+27
+00:02:31.416 --> 00:02:38.450
+error mapping, request limits, dependency
+governance, configuration,
+
+28
+00:02:38.530 --> 00:02:43.521
+logging, monitoring, and deployment
+assumptions.
+
+29
+00:02:43.601 --> 00:02:49.273
+The defensive goal is a service that is
+easy to reason about.
+
+30
+00:02:49.353 --> 00:02:52.303
+Boundaries should be visible.
+
+31
+00:02:52.383 --> 00:02:55.673
+Defaults should be conservative.
+
+32
+00:02:55.753 --> 00:02:58.475
+Privilege should be narrow.
+
+33
+00:02:58.555 --> 00:03:00.937
+Failures should be safe.
+
+34
+00:03:01.017 --> 00:03:06.690
+Logs should support operations without
+exposing secrets.
+
+35
+00:03:06.770 --> 00:03:10.173
+When a reviewer opens the codebase,
+
+36
+00:03:10.253 --> 00:03:15.812
+they should be able to understand who can
+reach each route,
+
+37
+00:03:15.892 --> 00:03:20.996
+what input is trusted, where authorization
+happens,
+
+38
+00:03:21.076 --> 00:03:24.820
+and how risky behavior is constrained.

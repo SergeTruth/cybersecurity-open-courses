@@ -1,0 +1,151 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.800
+SignalR may use WebSockets, Server-Sent
+Events,
+
+2
+00:00:04.880 --> 00:00:11.944
+or long polling depending on client
+capability, server configuration, proxies,
+
+3
+00:00:12.024 --> 00:00:14.276
+and hosting environment.
+
+4
+00:00:14.356 --> 00:00:19.270
+Those transports support the same
+application feature,
+
+5
+00:00:19.350 --> 00:00:25.800
+but they can have different effects on
+authentication behavior, logging,
+
+6
+00:00:25.880 --> 00:00:30.282
+origin review, and operational
+troubleshooting.
+
+7
+00:00:30.362 --> 00:00:34.764
+For browser clients, CORS deserves direct
+review.
+
+8
+00:00:34.844 --> 00:00:42.215
+Cross-origin SignalR connections should be
+allowed only for trusted and controlled
+
+9
+00:00:42.295 --> 00:00:46.492
+origins that are part of the application
+design.
+
+10
+00:00:46.572 --> 00:00:53.022
+A broad or casual CORS policy can turn a
+deployment setting into a long-term
+
+11
+00:00:53.102 --> 00:00:54.945
+governance problem.
+
+12
+00:00:55.025 --> 00:01:02.396
+The allowed origins should match real
+client deployments and should be reviewed when
+
+13
+00:01:02.476 --> 00:01:07.287
+environments, domains, or front-end
+hosting changes.
+
+14
+00:01:07.367 --> 00:01:13.408
+WebSocket origin behavior needs separate
+attention where relevant.
+
+15
+00:01:13.488 --> 00:01:19.732
+CORS policy is not the complete story for
+WebSocket origin restriction,
+
+16
+00:01:19.812 --> 00:01:25.341
+so teams should confirm how their hosting
+stack, reverse proxy,
+
+17
+00:01:25.421 --> 00:01:30.232
+and application middleware treat WebSocket
+requests.
+
+18
+00:01:30.312 --> 00:01:34.305
+The goal is not to memorize a transport
+detail,
+
+19
+00:01:34.385 --> 00:01:39.913
+but to make origin handling an explicit
+production review item.
+
+20
+00:01:39.993 --> 00:01:42.553
+Access tokens also need care.
+
+21
+00:01:42.633 --> 00:01:45.499
+In some browser transport cases,
+
+22
+00:01:45.579 --> 00:01:51.722
+tokens may appear in query strings because
+of browser API limitations.
+
+23
+00:01:51.802 --> 00:01:57.228
+That means URL logging, reverse proxy
+logs, application logs,
+
+24
+00:01:57.308 --> 00:02:01.403
+load balancer logs, diagnostics,
+monitoring,
+
+25
+00:02:01.483 --> 00:02:08.035
+and error reporting should be reviewed so
+sensitive values are not stored or
+
+26
+00:02:08.115 --> 00:02:10.674
+forwarded unintentionally.
+
+27
+00:02:10.754 --> 00:02:17.409
+Connection identifiers and connection
+tokens should be treated carefully.
+
+28
+00:02:17.489 --> 00:02:24.552
+They are part of connection management and
+should not be casually exposed in logs,
+
+29
+00:02:24.632 --> 00:02:30.775
+URLs, screenshots, support tickets, or
+client-visible diagnostics.
+
+30
+00:02:30.855 --> 00:02:36.793
+HTTPS should be the production baseline so
+connection negotiation,
+
+31
+00:02:36.873 --> 00:02:43.220
+transport upgrade, credentials, and
+messages are protected in transit.

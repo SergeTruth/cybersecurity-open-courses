@@ -1,0 +1,151 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.851
+Good prompts make AI-assisted review more
+precise.
+
+2
+00:00:05.931 --> 00:00:12.740
+Instead of asking whether a file is
+secure, ask a focused question:
+
+3
+00:00:12.820 --> 00:00:17.198
+identify external inputs in this handler,
+
+4
+00:00:17.278 --> 00:00:24.696
+check whether this authorization decision
+protects object ownership,
+
+5
+00:00:24.776 --> 00:00:29.883
+explain how this parser handles malformed
+input,
+
+6
+00:00:29.963 --> 00:00:36.287
+or list assumptions required for this
+remediation to be safe.
+
+7
+00:00:36.367 --> 00:00:44.879
+Small sections of code with clear context
+usually produce better output than broad
+
+8
+00:00:44.959 --> 00:00:48.242
+prompts over an entire project.
+
+9
+00:00:48.322 --> 00:00:56.591
+A strong review prompt provides the
+purpose of the code, the relevant framework,
+
+10
+00:00:56.671 --> 00:01:01.414
+the trust boundary, and the specific
+concern.
+
+11
+00:01:01.494 --> 00:01:08.669
+It can ask the AI to separate confirmed
+observations from hypotheses,
+
+12
+00:01:08.749 --> 00:01:14.342
+cite the exact code behavior that supports
+each claim,
+
+13
+00:01:14.422 --> 00:01:19.773
+and state what additional evidence would
+be needed.
+
+14
+00:01:19.853 --> 00:01:26.176
+This forces the output into a structure
+the reviewer can test.
+
+15
+00:01:26.256 --> 00:01:34.647
+It also helps prevent vague advice that
+sounds reasonable but cannot be tied to the
+
+16
+00:01:34.727 --> 00:01:36.186
+application.
+
+17
+00:01:36.266 --> 00:01:40.766
+Prompting is also part of the review
+record.
+
+18
+00:01:40.846 --> 00:01:48.142
+Capture important assumptions, decisions,
+and rejected hypotheses.
+
+19
+00:01:48.222 --> 00:01:56.491
+If the AI suggests a risk that is not
+valid because of middleware, configuration,
+
+20
+00:01:56.571 --> 00:02:01.557
+or a business rule, document why it was
+rejected.
+
+21
+00:02:01.637 --> 00:02:09.541
+If it identifies a plausible issue,
+document the evidence that confirmed it.
+
+22
+00:02:09.621 --> 00:02:17.282
+Avoid prompts that ask for unauthorized
+testing, exploitation, evasion,
+
+23
+00:02:17.362 --> 00:02:20.159
+or out-of-scope behavior.
+
+24
+00:02:20.239 --> 00:02:27.657
+The review should remain defensive,
+authorized, and evidence-driven.
+
+25
+00:02:27.737 --> 00:02:35.641
+A practical numeric review also asks how
+the value will be used after parsing.
+
+26
+00:02:35.721 --> 00:02:43.382
+A value that is acceptable as text may
+still be unsafe as an allocation size,
+
+27
+00:02:43.462 --> 00:02:48.083
+loop bound, timeout, offset, or array
+index.
+
+28
+00:02:48.163 --> 00:02:56.311
+Ask the AI to identify each downstream
+use, then verify the constraints in code.
+
+29
+00:02:56.391 --> 00:03:03.687
+The safest fix usually validates at the
+boundary and preserves a typed,
+
+30
+00:03:03.767 --> 00:03:12.158
+range-checked value for later operations
+instead of reparsing the same string in
+
+31
+00:03:12.238 --> 00:03:13.940
+several places.

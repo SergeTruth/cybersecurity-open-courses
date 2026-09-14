@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why IaC Automation Security Matters",
+  "graphicAlt": "Infrastructure as Code automation changes networks, identities, storage, and compute, so the repository, runner, credentials, and approval path all need protection.",
+  "narration": "Infrastructure-as-Code gives teams a repeatable way to define infrastructure in files, review proposed changes, and apply those changes through automation. That repeatability is powerful because it makes infrastructure more consistent and easier to reason about. It also raises the stakes. An IaC workflow is not just documentation. It can create, modify, or remove real resources.\n\nA small code change can affect networks, identities, storage, compute, encryption, logging, monitoring, data exposure, and production availability. A single module input or policy exception may change who can access a system, whether storage is public, how traffic flows, or whether a workload has the right logging controls. The automation may be fast, but the impact is still operationally real.\n\nIaC automation becomes part of the infrastructure control plane. Repositories, pull requests, branch protection, pipeline runners, credentials, state backends, modules, providers, plans, and approval gates all influence what happens in the environment. If those pieces are weak, an organization can have beautifully written infrastructure code and still make unsafe changes.\n\nSecure IaC automation means making infrastructure change controlled, reviewed, scoped, observable, and recoverable. The objective is not to slow every team down with friction. The objective is to build a path where the right change can move quickly, with the right identity, the right evidence, the right approvals, and a clear way to detect and recover from mistakes.",
+  "narrationPoints": [
+    "Infrastructure-as-Code gives teams a repeatable way to define infrastructure in files, review proposed changes, and apply those changes through automation.",
+    "A small code change can affect networks, identities, storage, compute, encryption, logging, monitoring, data exposure, and production availability.",
+    "IaC automation becomes part of the infrastructure control plane.",
+    "Secure IaC automation means making infrastructure change controlled, reviewed, scoped, observable, and recoverable."
+  ]
+};

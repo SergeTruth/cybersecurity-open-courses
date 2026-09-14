@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Sessions, Cookies, CSRF, and CORS",
+  "graphicAlt": "Cookie protections and CSRF controls align with browser credential behavior; CORS is a browser policy, while authentication and authorization remain separate API controls.",
+  "narration": "Session identifiers and bearer tokens must be protected because whoever can use them may be treated as authenticated. For cookie-based authentication, attributes such as HttpOnly, Secure, SameSite, domain, path, and expiration are part of the security model. HttpOnly helps keep cookies out of normal client-side JavaScript. Secure limits transmission to HTTPS contexts. SameSite can reduce some cross-site request behavior. Domain and path settings influence where the browser sends the cookie.\n\nCookie-based authentication requires CSRF risk analysis for state-changing requests. Browsers can attach cookies automatically, so an application should consider anti-CSRF tokens, SameSite behavior, origin checks, and defense-in-depth appropriate to the architecture. A same-site web app, a separate frontend domain, and an API consumed by mobile clients may each need different choices. The key is to understand how credentials are sent and which requests can change state.\n\nCORS controls which browser origins may call the application from client-side JavaScript under browser rules. It is not authentication, it is not authorization, and it does not stop non-browser clients. Broad CORS settings are especially risky when credentials are allowed. Cookie, CORS, CSRF, HTTPS, and proxy settings must match the actual deployment architecture. Treat browser credential behavior and cross-origin policy as one connected design rather than separate toggles.",
+  "narrationPoints": [
+    "Session identifiers and bearer tokens must be protected because whoever can use them may be treated as authenticated.",
+    "Cookie-based authentication requires CSRF risk analysis for state-changing requests.",
+    "CORS controls which browser origins may call the application from client-side JavaScript under browser rules."
+  ]
+};

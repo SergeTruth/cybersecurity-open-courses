@@ -1,0 +1,108 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.386
+Lockfiles help turn dependency resolution
+into something the team can review.
+
+2
+00:00:06.466 --> 00:00:09.102
+package.json often allows ranges,
+
+3
+00:00:09.182 --> 00:00:14.453
+while package-lock.json records the tree
+that npm actually selected.
+
+4
+00:00:14.533 --> 00:00:20.683
+That resolved tree includes transitive
+packages the team may never name directly.
+
+5
+00:00:20.763 --> 00:00:23.838
+When a pull request changes the lockfile,
+
+6
+00:00:23.918 --> 00:00:27.256
+reviewers can inspect which packages
+moved,
+
+7
+00:00:27.336 --> 00:00:30.763
+whether a major version appeared
+indirectly,
+
+8
+00:00:30.843 --> 00:00:35.587
+and whether the update matches the stated
+reason for the change.
+
+9
+00:00:35.667 --> 00:00:41.992
+npm install is convenient during
+development because it can update the lockfile when
+
+10
+00:00:42.072 --> 00:00:43.741
+dependencies change.
+
+11
+00:00:43.821 --> 00:00:47.775
+npm ci is designed for clean, repeatable
+automation.
+
+12
+00:00:47.855 --> 00:00:53.653
+It removes the existing node_modules
+directory, installs from the lockfile,
+
+13
+00:00:53.733 --> 00:00:58.741
+and fails when package.json and
+package-lock.json are out of sync.
+
+14
+00:00:58.821 --> 00:01:04.795
+That makes npm ci a better default for
+CI/CD because the build should prove what is
+
+15
+00:01:04.875 --> 00:01:10.146
+already recorded, not silently resolve a
+new tree during the pipeline.
+
+16
+00:01:10.226 --> 00:01:14.443
+Reproducible installs are not the same as
+safe installs.
+
+17
+00:01:14.523 --> 00:01:19.970
+A lockfile can reproduce a vulnerable
+dependency, an untrusted package,
+
+18
+00:01:20.050 --> 00:01:23.652
+or an unsafe script just as reliably as a
+good one.
+
+19
+00:01:23.732 --> 00:01:28.476
+The security value comes from combining
+lockfiles with review,
+
+20
+00:01:28.556 --> 00:01:34.794
+audit triage, controlled updates, clean CI
+environments, and release discipline.
+
+21
+00:01:34.874 --> 00:01:39.091
+Think of the lockfile as evidence and
+control over drift,
+
+22
+00:01:39.171 --> 00:01:43.300
+not as a guarantee that every dependency
+is acceptable.

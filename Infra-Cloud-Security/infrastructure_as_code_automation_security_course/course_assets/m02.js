@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Repositories, Pipelines, and Trust Boundaries",
+  "graphicAlt": "Untrusted changes can receive limited validation without production authority; reviewed changes reach production only through a protected pipeline and approved apply.",
+  "narration": "An IaC repository is not just a place to store text. It may define production networks, access policies, storage locations, databases, compute resources, logging pipelines, encryption settings, and security controls. A repository change can become an infrastructure change, so the repository itself becomes a control point that deserves protection and review.\n\nPull requests, branch protection, code owners, required reviews, signed commits where used, and protected environments all help ensure infrastructure changes are intentional. These controls create a reviewable path from proposed change to applied change. A production apply should not happen merely because someone changed a file in a low-trust context or because a workflow was triggered by an unreviewed event.\n\nPipelines add another trust boundary. A runner may receive credentials, read state, calculate plans, comment on proposed changes, or apply infrastructure updates. That runner is not just compute. It is an execution environment with access to the automation control plane. Its permissions, workspace handling, secrets, logs, artifacts, and trigger rules all matter.\n\nSecure design separates untrusted triggers from privileged execution. A pull request from an untrusted source may be allowed to run limited validation, but it should not automatically receive credentials capable of changing infrastructure. Production environments should use protected branches, protected tags, explicit approvals, and environment gates where appropriate. The path from request to plan to apply should remain visible and reviewable.",
+  "narrationPoints": [
+    "An IaC repository is not just a place to store text.",
+    "Pull requests, branch protection, code owners, required reviews, signed commits where used, and protected environments all help ensure infrastructure changes are intentional.",
+    "Pipelines add another trust boundary.",
+    "Secure design separates untrusted triggers from privileged execution."
+  ]
+};

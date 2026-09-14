@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.001
+Deployment scripts often choose container
+images, image tags, digests,
+
+2
+00:00:07.081 --> 00:00:13.163
+registry locations, ConfigMaps, Secrets,
+environment variables,
+
+3
+00:00:13.243 --> 00:00:15.235
+and runtime settings.
+
+4
+00:00:15.315 --> 00:00:22.026
+These inputs determine what code runs and
+what data the workload can access.
+
+5
+00:00:22.106 --> 00:00:29.551
+Treating them as ordinary parameters can
+hide the fact that they shape both security
+
+6
+00:00:29.631 --> 00:00:32.776
+posture and operational behavior.
+
+7
+00:00:32.856 --> 00:00:36.841
+Image references deserve careful handling.
+
+8
+00:00:36.921 --> 00:00:43.946
+Mutable tags can make it harder to know
+exactly what image version was deployed.
+
+9
+00:00:44.026 --> 00:00:51.786
+Digests or controlled release references
+can improve traceability where the workflow
+
+10
+00:00:51.866 --> 00:00:53.229
+supports them.
+
+11
+00:00:53.309 --> 00:00:55.930
+Registry trust also matters.
+
+12
+00:00:56.010 --> 00:01:03.665
+The script should use approved registries
+and release channels rather than accepting
+
+13
+00:01:03.745 --> 00:01:08.358
+arbitrary image sources or unreviewed
+references.
+
+14
+00:01:08.438 --> 00:01:15.254
+Configuration and secrets should be
+environment-specific and reviewable.
+
+15
+00:01:15.334 --> 00:01:20.367
+Secrets should not be placed in plaintext
+scripts, logs,
+
+16
+00:01:20.447 --> 00:01:25.480
+generated manifests, artifacts, or exposed
+job output.
+
+17
+00:01:25.560 --> 00:01:32.900
+ConfigMaps and Secrets can contain
+sensitive or operationally important values,
+
+18
+00:01:32.980 --> 00:01:40.425
+so changes to them should be reviewed with
+the same seriousness as workload changes.
+
+19
+00:01:40.505 --> 00:01:47.531
+A deployment script should not turn secret
+handling into a side effect of string
+
+20
+00:01:47.611 --> 00:01:48.974
+substitution.
+
+21
+00:01:49.054 --> 00:01:56.289
+Supply-chain checks such as provenance,
+scanning, signing, approval metadata,
+
+22
+00:01:56.369 --> 00:02:02.975
+or promotion gates can be integrated at a
+defensive governance level where
+
+23
+00:02:03.055 --> 00:02:04.103
+available.
+
+24
+00:02:04.183 --> 00:02:10.265
+The goal is not to overload every script
+with every possible control.
+
+25
+00:02:10.345 --> 00:02:17.685
+The goal is to ensure the deployment
+script respects the controls the organization
+
+26
+00:02:17.765 --> 00:02:20.911
+relies on: approved image sources,
+
+27
+00:02:20.991 --> 00:02:27.387
+traceable release references,
+environment-specific configuration,
+
+28
+00:02:27.467 --> 00:02:32.500
+and secret handling that does not leak
+sensitive values.

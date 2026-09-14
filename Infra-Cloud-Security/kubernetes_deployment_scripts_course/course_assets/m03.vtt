@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.491
+Kubernetes deployment scripts run with
+identities.
+
+2
+00:00:05.571 --> 00:00:12.116
+That identity may come from a kubeconfig
+file, service account token,
+
+3
+00:00:12.196 --> 00:00:20.182
+CI/CD runner, workload identity, platform
+identity, or managed deployment system.
+
+4
+00:00:20.262 --> 00:00:28.248
+Whatever the source, the script's
+permissions are the permissions of that identity.
+
+5
+00:00:28.328 --> 00:00:33.985
+If the identity is broad, the script has a
+broad blast radius.
+
+6
+00:00:34.065 --> 00:00:41.718
+kubeconfig files, tokens, and
+service-account credentials should be treated as
+
+7
+00:00:41.798 --> 00:00:44.128
+sensitive credentials.
+
+8
+00:00:44.208 --> 00:00:50.974
+They should have owners, controlled
+storage, environment boundaries,
+
+9
+00:00:51.054 --> 00:00:56.933
+rotation expectations, revocation paths,
+and access review.
+
+10
+00:00:57.013 --> 00:01:04.666
+A kubeconfig copied into a shared
+workspace or a CI/CD variable scoped too broadly
+
+11
+00:01:04.746 --> 00:01:11.290
+can become long-lived cluster access that
+is difficult to inventory.
+
+12
+00:01:11.370 --> 00:01:15.031
+RBAC should match the deployment task.
+
+13
+00:01:15.111 --> 00:01:22.986
+A script that validates manifests may only
+need read or dry-run style capabilities.
+
+14
+00:01:23.066 --> 00:01:30.830
+A script that applies a release may need
+permission for specific resource types in a
+
+15
+00:01:30.910 --> 00:01:32.907
+specific namespace.
+
+16
+00:01:32.987 --> 00:01:40.529
+Rollback, secret-management, and
+administrative tasks may require different
+
+17
+00:01:40.609 --> 00:01:42.051
+capabilities.
+
+18
+00:01:42.131 --> 00:01:46.457
+Separating validate, plan, apply,
+rollback,
+
+19
+00:01:46.537 --> 00:01:54.523
+and administration where practical helps
+prevent one script from becoming a general
+
+20
+00:01:54.603 --> 00:01:56.933
+cluster administrator.
+
+21
+00:01:57.013 --> 00:02:00.784
+Environment-specific access matters.
+
+22
+00:02:00.864 --> 00:02:08.961
+A staging deployment identity should not
+automatically have production privileges.
+
+23
+00:02:09.041 --> 00:02:15.918
+A production deployment identity should be
+tightly scoped and reviewed.
+
+24
+00:02:15.998 --> 00:02:21.988
+Avoid broad cluster-admin deployment
+identities as a default.
+
+25
+00:02:22.068 --> 00:02:24.730
+The goal is least privilege:
+
+26
+00:02:24.810 --> 00:02:30.245
+enough access to perform the intended
+deployment safely,
+
+27
+00:02:30.325 --> 00:02:36.980
+with credentials that can be reviewed,
+rotated, and revoked over time.

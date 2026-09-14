@@ -1,0 +1,158 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.075
+Authorization is where many otherwise
+well-built Flask applications fail.
+
+2
+00:00:08.155 --> 00:00:10.719
+A route may require login,
+
+3
+00:00:10.799 --> 00:00:18.491
+but that does not prove the caller can use
+the specific object named in the URL or
+
+4
+00:00:18.571 --> 00:00:19.969
+request body.
+
+5
+00:00:20.049 --> 00:00:26.692
+Secure authorization checks the caller,
+the action, the resource,
+
+6
+00:00:26.772 --> 00:00:29.336
+and the relevant context.
+
+7
+00:00:29.416 --> 00:00:37.225
+Context may include tenant membership,
+account ownership, role, permission,
+
+8
+00:00:37.305 --> 00:00:41.733
+workflow state, environment, sensitivity,
+
+9
+00:00:41.813 --> 00:00:49.272
+and whether the action is normal user
+behavior or administrative behavior.
+
+10
+00:00:49.352 --> 00:00:56.927
+Role-based access can be useful, but roles
+are usually only part of the model.
+
+11
+00:00:57.007 --> 00:01:04.582
+A support role may view some customer
+information but not export all records.
+
+12
+00:01:04.662 --> 00:01:10.839
+A team admin may manage users within one
+tenant but not another.
+
+13
+00:01:10.919 --> 00:01:16.047
+A project member may read an object but
+not delete it.
+
+14
+00:01:16.127 --> 00:01:23.119
+Object-level authorization ties the
+decision to the specific record,
+
+15
+00:01:23.199 --> 00:01:28.444
+file, workspace, tenant, or resource being
+touched.
+
+16
+00:01:28.524 --> 00:01:36.798
+Without it, an application can have good
+login security and still expose data across
+
+17
+00:01:36.878 --> 00:01:38.160
+boundaries.
+
+18
+00:01:38.240 --> 00:01:45.349
+Flask developers often use decorators,
+blueprints, helper functions,
+
+19
+00:01:45.429 --> 00:01:51.256
+and service-layer guards to make
+authorization reusable.
+
+20
+00:01:51.336 --> 00:01:59.028
+Those patterns are helpful when they make
+enforcement consistent and close to
+
+21
+00:01:59.108 --> 00:02:01.089
+sensitive actions.
+
+22
+00:02:01.169 --> 00:02:06.763
+They are risky when they create a false
+sense of coverage.
+
+23
+00:02:06.843 --> 00:02:11.971
+Hiding a button, removing a link,
+obscuring a route,
+
+24
+00:02:12.051 --> 00:02:17.529
+or relying on client-side checks is not
+access control.
+
+25
+00:02:17.609 --> 00:02:25.650
+The server must enforce authorization even
+if a request is manually constructed.
+
+26
+00:02:25.730 --> 00:02:29.926
+Authorization should be tested directly.
+
+27
+00:02:30.006 --> 00:02:35.600
+A good test suite includes normal access,
+denied access,
+
+28
+00:02:35.680 --> 00:02:42.672
+cross-tenant attempts, object ownership
+checks, privilege changes,
+
+29
+00:02:42.752 --> 00:02:49.861
+administrative boundaries, and negative
+cases for sensitive actions.
+
+30
+00:02:49.941 --> 00:02:54.137
+These tests are not offensive procedures;
+
+31
+00:02:54.217 --> 00:03:01.442
+they are defensive assurance that the
+application follows its own rules.
+
+32
+00:03:01.522 --> 00:03:06.883
+When teams make authorization explicit and
+testable,
+
+33
+00:03:06.963 --> 00:03:13.140
+Flask routes become easier to reason about
+and safer to extend.

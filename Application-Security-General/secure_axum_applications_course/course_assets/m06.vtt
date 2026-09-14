@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.002
+Axum applications often rely on Tower
+layers and middleware for cross-cutting
+
+2
+00:00:07.082 --> 00:00:07.955
+behavior.
+
+3
+00:00:08.035 --> 00:00:13.858
+Tracing, compression, authentication,
+CORS, timeouts, body limits,
+
+4
+00:00:13.938 --> 00:00:17.820
+rate limiting, request IDs, response
+headers,
+
+5
+00:00:17.900 --> 00:00:23.723
+and proxy-aware behavior may all live
+outside the individual handler.
+
+6
+00:00:23.803 --> 00:00:28.267
+That can be powerful because it
+centralizes controls,
+
+7
+00:00:28.347 --> 00:00:35.043
+but it also means the route-level security
+story depends on layer order and scope.
+
+8
+00:00:35.123 --> 00:00:38.713
+Middleware scope should be easy to
+inspect.
+
+9
+00:00:38.793 --> 00:00:41.899
+A global layer may affect every route,
+
+10
+00:00:41.979 --> 00:00:47.122
+while a layer applied to a router group
+affects only that group.
+
+11
+00:00:47.202 --> 00:00:51.666
+If administrative routes, API routes,
+health routes,
+
+12
+00:00:51.746 --> 00:00:55.822
+and internal callbacks are composed
+separately,
+
+13
+00:00:55.902 --> 00:01:01.045
+reviewers should confirm which controls
+apply to each branch.
+
+14
+00:01:01.125 --> 00:01:07.821
+A route can look safe locally while
+missing a required layer because of where it was
+
+15
+00:01:07.901 --> 00:01:08.678
+mounted.
+
+16
+00:01:08.758 --> 00:01:14.969
+CORS deserves careful review because it
+defines browser trust boundaries.
+
+17
+00:01:15.049 --> 00:01:21.842
+It should match real access requirements
+rather than broad convenience defaults.
+
+18
+00:01:21.922 --> 00:01:28.424
+A browser-facing service, a same-origin
+application, an internal admin tool,
+
+19
+00:01:28.504 --> 00:01:33.356
+and a machine-to-machine API may need
+different behavior.
+
+20
+00:01:33.436 --> 00:01:38.676
+CORS is not a replacement for
+authentication or authorization,
+
+21
+00:01:38.756 --> 00:01:44.094
+but misconfiguration can still expose
+risky interaction paths.
+
+22
+00:01:44.174 --> 00:01:47.959
+Security headers, request limits,
+timeouts,
+
+23
+00:01:48.039 --> 00:01:54.152
+and rate-limiting concepts should be
+reviewed in the deployment context.
+
+24
+00:01:54.232 --> 00:01:57.726
+Some headers may be set by the Axum
+service,
+
+25
+00:01:57.806 --> 00:02:01.202
+while others may be set by a reverse
+proxy.
+
+26
+00:02:01.282 --> 00:02:04.485
+Body limits may need to differ by route.
+
+27
+00:02:04.565 --> 00:02:09.029
+Timeouts should reflect expected upstream
+behavior.
+
+28
+00:02:09.109 --> 00:02:15.805
+Forwarded headers should only be trusted
+from known infrastructure boundaries.
+
+29
+00:02:15.885 --> 00:02:21.028
+The best middleware design makes security
+reasoning simpler.
+
+30
+00:02:21.108 --> 00:02:26.349
+It should reduce repeated logic, make
+route groups consistent,
+
+31
+00:02:26.429 --> 00:02:29.146
+and expose assumptions clearly.
+
+32
+00:02:29.226 --> 00:02:34.661
+If middleware hides too much behavior or
+applies inconsistently,
+
+33
+00:02:34.741 --> 00:02:36.876
+it can make review harder.
+
+34
+00:02:36.956 --> 00:02:40.837
+The question is not only whether a layer
+exists;
+
+35
+00:02:40.917 --> 00:02:46.740
+it is whether the team can prove where it
+applies and what it guarantees.

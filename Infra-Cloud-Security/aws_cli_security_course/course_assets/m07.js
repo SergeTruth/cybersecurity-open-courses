@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "High-Impact Actions and Change Guardrails",
+  "graphicAlt": "High-impact AWS changes require target validation, previews where supported, approval, recovery planning, and safe repeated execution.",
+  "narration": "Some AWS CLI actions are higher impact because they can change security posture, data exposure, availability, or recovery options quickly. IAM permission changes, network rule changes, storage policy updates, encryption setting changes, compute changes, logging changes, and data-access changes deserve stronger guardrails than simple read-only queries. The script should make those actions explicit.\n\nWhere AWS services or deployment workflows support defensive preview behavior, use it. Dry-run checks, policy simulation, diffs, previews, and change sets can help reviewers understand the effective change before it happens. These tools are not a substitute for least privilege or target validation, but they provide a safer review point before a high-impact operation reaches production.\n\nDeletion, overwrite, public exposure, permission expansion, and encryption changes deserve extra care. A helper should require target validation, release context, approval gates, operator confirmation, or change tickets when the operation could affect production or sensitive resources. It should also avoid ambiguous resource selection. If a script cannot prove exactly which target is in scope, it should stop.\n\nGuardrails should support idempotent behavior, rollback thinking, and safe failure. An operation should be designed so repeated runs do not create uncontrolled side effects. Recovery options should be considered before the change begins, not after impact is detected. Good AWS CLI automation makes high-impact actions visible, reviewed, and bounded.",
+  "narrationPoints": [
+    "Some AWS CLI actions are higher impact because they can change security posture, data exposure, availability, or recovery options quickly.",
+    "Where AWS services or deployment workflows support defensive preview behavior, use it.",
+    "Deletion, overwrite, public exposure, permission expansion, and encryption changes deserve extra care.",
+    "Guardrails should support idempotent behavior, rollback thinking, and safe failure."
+  ]
+};

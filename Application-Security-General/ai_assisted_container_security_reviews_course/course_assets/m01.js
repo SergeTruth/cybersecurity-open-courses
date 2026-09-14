@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Is an AI-Assisted Container Security Review?",
+  "graphicAlt": "Container images, build records, and runtime evidence are organized with AI and verified by a human reviewer within scope and deployment context.",
+  "narration": "An AI-assisted container security review uses AI to support authorized review of container images, Dockerfiles, build pipelines, runtime settings, and deployment context. The review still depends on human judgment. AI can help organize evidence, explain unfamiliar output, draft checklists, summarize scanner results, and improve remediation language, but it does not replace the reviewer, the rules of engagement, or verified evidence.\n\nContainer security reviews are context-heavy. A finding may depend on the base image, application dependencies, build process, registry practices, deployment settings, Kubernetes security context, network exposure, and the sensitivity of the workload. AI can help connect those pieces, but it cannot automatically know what is in scope, which controls are compensating, or which remediation is practical for the team.\n\nA useful assistant can turn a messy set of observations into a structured review plan. It can help explain why an image digest matters, why running as root increases risk, or why a scanner finding might be lower priority if the component is not reachable. Those are advisory outputs. The reviewer must check source material, configuration, build records, and deployment evidence before making a finding.\n\nThe safest posture is clear: scope, evidence, and human verification remain required. AI should not be used to justify intrusive actions, out-of-scope testing, or blind approval of container releases. The goal is faster, clearer, more consistent defensive review of containerized applications, not uncontrolled automation or trust in a model response.",
+  "narrationPoints": [
+    "An AI-assisted container security review uses AI to support authorized review of container images, Dockerfiles, build pipelines, runtime settings, and deployment context.",
+    "Container security reviews are context-heavy.",
+    "A useful assistant can turn a messy set of observations into a structured review plan.",
+    "The safest posture is clear: scope, evidence, and human verification remain required."
+  ]
+};

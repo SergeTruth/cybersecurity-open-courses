@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.512
+APIs are designed for automation, which
+means they can be abused at machine speed.
+
+2
+00:00:07.592 --> 00:00:13.994
+Rate limiting, throttling, quotas,
+resource limits, pagination limits,
+
+3
+00:00:14.074 --> 00:00:21.391
+file upload limits, and expensive-query
+controls help keep normal traffic reliable
+
+4
+00:00:21.471 --> 00:00:24.621
+while reducing the impact of misuse.
+
+5
+00:00:24.701 --> 00:00:28.461
+These controls are not only for public
+APIs.
+
+6
+00:00:28.541 --> 00:00:34.232
+Internal and partner APIs can also be
+overloaded by bugs, retries,
+
+7
+00:00:34.312 --> 00:00:39.596
+compromised credentials, or poorly
+designed integrations.
+
+8
+00:00:39.676 --> 00:00:42.115
+Good limits are contextual.
+
+9
+00:00:42.195 --> 00:00:47.886
+A user-facing endpoint may need limits by
+user, token, IP address,
+
+10
+00:00:47.966 --> 00:00:52.031
+tenant, operation, and authentication
+state.
+
+11
+00:00:52.111 --> 00:00:58.818
+A service-to-service endpoint may need
+limits by workload identity or client
+
+12
+00:00:58.898 --> 00:01:00.117
+application.
+
+13
+00:01:00.197 --> 00:01:06.295
+A file upload API may need size, count,
+content, and processing limits.
+
+14
+00:01:06.375 --> 00:01:10.541
+A search API may need query complexity
+controls.
+
+15
+00:01:10.621 --> 00:01:17.430
+The most effective controls reflect what
+the endpoint actually costs and who is
+
+16
+00:01:17.510 --> 00:01:19.034
+allowed to use it.
+
+17
+00:01:19.114 --> 00:01:26.024
+Replay risk should be considered at a high
+level for operations where repeating a
+
+18
+00:01:26.104 --> 00:01:28.137
+request can cause harm.
+
+19
+00:01:28.217 --> 00:01:33.399
+Payments, approvals, password resets,
+inventory changes,
+
+20
+00:01:33.479 --> 00:01:40.593
+and webhook processing should be designed
+to handle duplicate or delayed requests
+
+21
+00:01:40.673 --> 00:01:41.384
+safely.
+
+22
+00:01:41.464 --> 00:01:47.968
+Idempotency keys, nonce-like values,
+timestamps, signature validation,
+
+23
+00:01:48.048 --> 00:01:54.552
+and server-side state checks may be
+appropriate depending on the workflow.
+
+24
+00:01:54.632 --> 00:02:01.136
+The point is to make repeated requests
+predictable rather than surprising.
+
+25
+00:02:01.216 --> 00:02:05.789
+Bot and automation pressure is not always
+malicious.
+
+26
+00:02:05.869 --> 00:02:10.035
+A client library bug, an integration retry
+loop,
+
+27
+00:02:10.115 --> 00:02:16.314
+or a misconfigured job can create the same
+operational pain as an attack.
+
+28
+00:02:16.394 --> 00:02:23.609
+API teams should design controls that
+protect availability while producing useful
+
+29
+00:02:23.689 --> 00:02:24.502
+signals.
+
+30
+00:02:24.582 --> 00:02:26.208
+When a limit is hit,
+
+31
+00:02:26.288 --> 00:02:32.385
+the response should be clear enough for
+legitimate clients to back off,
+
+32
+00:02:32.465 --> 00:02:37.953
+and monitoring should show which identity,
+tenant, operation,
+
+33
+00:02:38.033 --> 00:02:40.980
+or endpoint is creating pressure.

@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.474
+Kubernetes deployment scripts often run in
+CI/CD systems.
+
+2
+00:00:03.554 --> 00:00:06.826
+That means runner permissions, branch
+filters, protected tags,
+
+3
+00:00:06.906 --> 00:00:10.534
+environment gates, approval workflows, and
+secret scoping all matter.
+
+4
+00:00:10.614 --> 00:00:14.778
+A runner that can deploy to production
+should be treated as a sensitive operational
+
+5
+00:00:14.858 --> 00:00:15.393
+identity.
+
+6
+00:00:15.473 --> 00:00:18.566
+The pipeline should make it clear which
+branches, tags, jobs,
+
+7
+00:00:18.646 --> 00:00:21.442
+and approvals can trigger changes in each
+environment.
+
+8
+00:00:21.522 --> 00:00:24.853
+Logs should support review without
+exposing sensitive material.
+
+9
+00:00:24.933 --> 00:00:27.371
+Useful deployment logs show which identity
+ran,
+
+10
+00:00:27.451 --> 00:00:31.496
+which cluster and namespace were targeted,
+which version or image was deployed,
+
+11
+00:00:31.576 --> 00:00:34.015
+what action occurred, and whether it
+succeeded.
+
+12
+00:00:34.095 --> 00:00:38.318
+Logs should avoid tokens, kubeconfig
+contents, Secrets, sensitive manifest data,
+
+13
+00:00:38.398 --> 00:00:39.707
+and excessive raw output.
+
+14
+00:00:39.787 --> 00:00:42.225
+Operators need enough context to
+troubleshoot,
+
+15
+00:00:42.305 --> 00:00:45.101
+but not a second copy of sensitive
+deployment material.
+
+16
+00:00:45.181 --> 00:00:48.988
+Monitoring should detect failed
+deployments, repeated rollout failures,
+
+17
+00:00:49.068 --> 00:00:51.745
+unexpected namespace changes, unusual
+identities,
+
+18
+00:00:51.825 --> 00:00:53.668
+drift from approved configuration,
+
+19
+00:00:53.748 --> 00:00:56.901
+and deployment activity outside expected
+windows or sources.
+
+20
+00:00:56.981 --> 00:01:00.728
+These signals help teams catch both
+reliability issues and control drift.
+
+21
+00:01:00.808 --> 00:01:04.972
+A deployment script should produce status
+that monitoring and operations can use,
+
+22
+00:01:05.052 --> 00:01:07.907
+not only console text that disappears
+after the job ends.
+
+23
+00:01:07.987 --> 00:01:11.199
+Periodic review should cover scripts,
+RBAC, service accounts,
+
+24
+00:01:11.279 --> 00:01:14.194
+kubeconfig storage, CI/CD variables,
+deployment gates,
+
+25
+00:01:14.274 --> 00:01:17.664
+image promotion rules, logging behavior,
+and rollback readiness.
+
+26
+00:01:17.744 --> 00:01:21.254
+Incidents and failed rollouts should feed
+back into better controls.
+
+27
+00:01:21.334 --> 00:01:24.129
+Secure deployment scripting is not a
+one-time project;
+
+28
+00:01:24.209 --> 00:01:28.432
+it is an operational practice that
+improves as teams learn where their automation is
+
+29
+00:01:28.512 --> 00:01:29.940
+fragile or overprivileged.

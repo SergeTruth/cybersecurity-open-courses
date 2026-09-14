@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.399
+Authentication and authorization are
+different controls,
+
+2
+00:00:06.479 --> 00:00:12.609
+and secure Axum applications keep that
+distinction explicit.
+
+3
+00:00:12.689 --> 00:00:17.662
+Authentication answers who is making the
+request.
+
+4
+00:00:17.742 --> 00:00:26.070
+Authorization answers whether that
+identity may perform the requested action on the
+
+5
+00:00:26.150 --> 00:00:28.232
+requested resource.
+
+6
+00:00:28.312 --> 00:00:35.714
+A route can know the user and still make
+the wrong decision if it does not check
+
+7
+00:00:35.794 --> 00:00:41.230
+ownership, role, tenant, scope, or
+operation context.
+
+8
+00:00:41.310 --> 00:00:47.556
+Axum applications may establish identity
+through middleware,
+
+9
+00:00:47.636 --> 00:00:54.807
+request extensions, session layers, token
+validation, signed cookies,
+
+10
+00:00:54.887 --> 00:01:00.439
+upstream identity providers, or dedicated
+extractors.
+
+11
+00:01:00.519 --> 00:01:06.418
+Whatever mechanism is used, the trust
+model should be clear.
+
+12
+00:01:06.498 --> 00:01:13.437
+Reviewers should know where identity is
+accepted, how it is validated,
+
+13
+00:01:13.517 --> 00:01:16.178
+how expiration is handled,
+
+14
+00:01:16.258 --> 00:01:22.503
+and how missing or invalid identity is
+represented to handlers.
+
+15
+00:01:22.583 --> 00:01:30.101
+Authorization should be checked close to
+the protected resource and action.
+
+16
+00:01:30.181 --> 00:01:35.155
+Administrative routes need explicit
+protection.
+
+17
+00:01:35.235 --> 00:01:40.208
+Tenant-specific operations need tenant
+context.
+
+18
+00:01:40.288 --> 00:01:45.725
+Object-level actions need ownership or
+policy checks.
+
+19
+00:01:45.805 --> 00:01:52.397
+A common mistake is to assume that because
+a route is authenticated,
+
+20
+00:01:52.477 --> 00:01:57.913
+the user can safely act on any identifier
+in the request.
+
+21
+00:01:57.993 --> 00:02:02.273
+That assumption should not survive review.
+
+22
+00:02:02.353 --> 00:02:08.599
+Sessions and tokens require defensive
+handling at a high level.
+
+23
+00:02:08.679 --> 00:02:13.652
+They should not be logged, reflected in
+responses,
+
+24
+00:02:13.732 --> 00:02:17.433
+or treated as plain application data.
+
+25
+00:02:17.513 --> 00:02:25.957
+Expiration, rotation, invalidation, and
+scope decisions should be understood by the
+
+26
+00:02:26.037 --> 00:02:26.615
+team.
+
+27
+00:02:26.695 --> 00:02:33.403
+If an upstream proxy or identity service
+supplies identity headers,
+
+28
+00:02:33.483 --> 00:02:41.695
+the Axum application should only trust
+those headers under a documented deployment
+
+29
+00:02:41.775 --> 00:02:42.816
+boundary.
+
+30
+00:02:42.896 --> 00:02:46.482
+Fail-closed behavior is essential.
+
+31
+00:02:46.562 --> 00:02:52.345
+If identity is absent, malformed, expired,
+inconsistent,
+
+32
+00:02:52.425 --> 00:02:59.943
+or missing required authorization context,
+the handler should not proceed.
+
+33
+00:03:00.023 --> 00:03:05.690
+The failure should be predictable, safe,
+and observable.
+
+34
+00:03:05.770 --> 00:03:13.867
+Secure design makes the allowed path
+explicit and treats uncertainty as a reason to
+
+35
+00:03:13.947 --> 00:03:16.260
+stop rather than guess.

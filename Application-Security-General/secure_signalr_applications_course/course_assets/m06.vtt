@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.704
+Every hub method argument is untrusted
+input.
+
+2
+00:00:03.784 --> 00:00:09.452
+The fact that a message arrives through
+SignalR instead of an HTTP controller does
+
+3
+00:00:09.532 --> 00:00:10.764
+not make it safer.
+
+4
+00:00:10.844 --> 00:00:15.362
+Required fields, types, lengths, ranges,
+formats, enum values,
+
+5
+00:00:15.442 --> 00:00:20.453
+and business rules should be validated
+before the server changes state,
+
+6
+00:00:20.533 --> 00:00:25.216
+queries sensitive data, joins a group, or
+sends a targeted message.
+
+7
+00:00:25.296 --> 00:00:27.514
+Narrow message contracts help.
+
+8
+00:00:27.594 --> 00:00:33.098
+Use DTOs that describe the specific
+operation rather than binding broad domain
+
+9
+00:00:33.178 --> 00:00:35.478
+objects directly to hub methods.
+
+10
+00:00:35.558 --> 00:00:41.308
+A narrow contract makes it clearer which
+values the client is allowed to provide and
+
+11
+00:00:41.388 --> 00:00:45.167
+which values must come from trusted
+server-side data.
+
+12
+00:00:45.247 --> 00:00:50.669
+It also limits accidental exposure when
+domain objects gain new fields later.
+
+13
+00:00:50.749 --> 00:00:54.856
+Pay close attention to identifiers
+supplied by the client.
+
+14
+00:00:54.936 --> 00:01:00.276
+User names, tenant IDs, group names,
+target IDs, room IDs, conversation IDs,
+
+15
+00:01:00.356 --> 00:01:04.545
+and message IDs can all influence routing
+or authorization.
+
+16
+00:01:04.625 --> 00:01:10.129
+The server should verify those values
+against trusted data and current policy.
+
+17
+00:01:10.209 --> 00:01:15.631
+A client-supplied tenant or target should
+not become the authority for where a
+
+18
+00:01:15.711 --> 00:01:16.697
+message goes.
+
+19
+00:01:16.777 --> 00:01:19.323
+Content also has a display boundary.
+
+20
+00:01:19.403 --> 00:01:25.071
+User-generated text or markup sent through
+SignalR may later appear in a browser,
+
+21
+00:01:25.151 --> 00:01:28.273
+desktop view, notification surface, or
+log.
+
+22
+00:01:28.353 --> 00:01:31.310
+Safe rendering, encoding, sanitization,
+
+23
+00:01:31.390 --> 00:01:36.894
+and content rules should be selected based
+on where the message is displayed and
+
+24
+00:01:36.974 --> 00:01:39.439
+what the receiving client expects.
+
+25
+00:01:39.519 --> 00:01:45.433
+Serialization settings and protocol
+choices should be reviewed for compatibility,
+
+26
+00:01:45.513 --> 00:01:47.238
+size, and data exposure.
+
+27
+00:01:47.318 --> 00:01:52.165
+The goal is a predictable contract: inputs
+are intentionally shaped,
+
+28
+00:01:52.245 --> 00:01:54.956
+invalid messages are rejected safely,
+
+29
+00:01:55.036 --> 00:01:58.650
+sensitive fields are not accidentally
+serialized,
+
+30
+00:01:58.730 --> 00:02:04.645
+and authorization depends on trusted
+server decisions rather than client-provided
+
+31
+00:02:04.725 --> 00:02:05.300
+claims.

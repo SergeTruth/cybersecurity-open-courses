@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Code Review and Testing",
+  "graphicAlt": "Defensive review traces input, size, memory, and release while testing oversized input, partial reads, allocation failures, and cleanup behavior.",
+  "narration": "Secure C review should focus on data flow, ownership, length checks, cleanup, and failure behavior. Review where input enters, how it is validated, how sizes are calculated, and where data is copied, formatted, stored, or passed to another component.\n\nReview every allocation, every free, every ownership transfer, and every pointer stored beyond a local scope. A pointer saved into a structure, callback, global variable, cache, or thread context may outlive the scope that created it. The code should show who owns the object and who is responsible for cleanup.\n\nReview boundary handling carefully. Test empty input, maximum allowed sizes, too-large input, negative numbers, malformed records, embedded delimiters, partial reads, interrupted operations, and allocation failures. These cases often reveal assumptions that ordinary happy-path tests do not exercise.\n\nFailure testing matters. A file open can fail. A read can be partial. A memory allocation can return failure. A parser can stop halfway through a record. A cleanup call can encounter an error. The design should define which failures are recoverable, which should stop processing, and what state remains afterward.\n\nReview logging and errors for sensitive data exposure. C code that handles raw buffers, paths, keys, device data, or protocol records should not dump arbitrary memory or raw input into routine logs. Safe diagnostics preserve enough context for operators without turning logs into a data exposure path.\n\nReview concurrency assumptions if buffers, handles, globals, or shared structures can be accessed by multiple threads, signal handlers, interrupt handlers, or callbacks. Secure C review is strongest when it uses checklists to make these habits repeatable rather than relying on one expert to notice every issue.",
+  "narrationPoints": [
+    "Secure C review should focus on data flow, ownership, length checks, cleanup, and failure behavior.",
+    "Review every allocation, every free, every ownership transfer, and every pointer stored beyond a local scope.",
+    "Review boundary handling carefully.",
+    "Failure testing matters.",
+    "Review logging and errors for sensitive data exposure."
+  ]
+};

@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.785
+Authentication answers the question, who
+is making this request.
+
+2
+00:00:06.865 --> 00:00:14.273
+Minimal APIs use the same ASP.NET Core
+authentication system as the rest of the
+
+3
+00:00:14.353 --> 00:00:15.363
+platform.
+
+4
+00:00:15.443 --> 00:00:18.361
+Depending on the application,
+
+5
+00:00:18.441 --> 00:00:22.931
+that may involve bearer tokens for API
+clients,
+
+6
+00:00:23.011 --> 00:00:29.633
+cookies for browser-based workflows,
+external identity providers,
+
+7
+00:00:29.713 --> 00:00:32.519
+or other configured schemes.
+
+8
+00:00:32.599 --> 00:00:38.435
+The important point is that authentication
+must be explicit.
+
+9
+00:00:38.515 --> 00:00:46.372
+A Minimal API endpoint should not rely on
+local development identity assumptions,
+
+10
+00:00:46.452 --> 00:00:54.084
+trusted test headers, route naming, or a
+client convention as proof of identity.
+
+11
+00:00:54.164 --> 00:01:01.908
+The identity should come from the
+configured authentication system and should be
+
+12
+00:01:01.988 --> 00:01:09.171
+available to the endpoint through the
+normal ASP.NET Core request context.
+
+13
+00:01:09.251 --> 00:01:15.873
+Authentication middleware behavior and
+order should be understood.
+
+14
+00:01:15.953 --> 00:01:24.035
+The application needs the authentication
+middleware to establish the caller before
+
+15
+00:01:24.115 --> 00:01:28.941
+authorization decisions depend on that
+identity.
+
+16
+00:01:29.021 --> 00:01:35.418
+Route groups and endpoint metadata can
+make requirements visible,
+
+17
+00:01:35.498 --> 00:01:43.243
+but the pipeline still needs to be
+configured correctly so those requirements are
+
+18
+00:01:43.323 --> 00:01:45.343
+enforced at runtime.
+
+19
+00:01:45.423 --> 00:01:53.392
+Cookie-authenticated browser APIs and
+bearer-token APIs have different security
+
+20
+00:01:53.472 --> 00:01:55.155
+considerations.
+
+21
+00:01:55.235 --> 00:02:02.643
+Cookie-based APIs may involve browser
+session behavior, SameSite settings,
+
+22
+00:02:02.723 --> 00:02:09.682
+CSRF prevention for unsafe requests, and
+frontend integration choices.
+
+23
+00:02:09.762 --> 00:02:16.945
+Bearer-token APIs usually expect the
+client to present a token explicitly,
+
+24
+00:02:17.025 --> 00:02:25.218
+which changes the browser credential model
+but still requires careful token handling
+
+25
+00:02:25.298 --> 00:02:27.206
+and authorization.
+
+26
+00:02:27.286 --> 00:02:34.245
+Authentication failure behavior should be
+predictable for API clients.
+
+27
+00:02:34.325 --> 00:02:39.039
+A browser page may expect a redirect in
+some flows,
+
+28
+00:02:39.119 --> 00:02:46.415
+while an API client may expect a status
+response with a clear but minimal error
+
+29
+00:02:46.495 --> 00:02:47.168
+shape.
+
+30
+00:02:47.248 --> 00:02:53.197
+The response should not disclose sensitive
+internal details,
+
+31
+00:02:53.277 --> 00:03:00.460
+and it should be consistent enough for
+clients and operators to understand.
+
+32
+00:03:00.540 --> 00:03:06.376
+A good Minimal API baseline documents
+which schemes are used,
+
+33
+00:03:06.456 --> 00:03:12.741
+which endpoints require identity, how
+failures are represented,
+
+34
+00:03:12.821 --> 00:03:18.994
+and how development behavior differs from
+production behavior.
+
+35
+00:03:19.074 --> 00:03:27.380
+That clarity prevents identity assumptions
+from becoming hidden application policy.

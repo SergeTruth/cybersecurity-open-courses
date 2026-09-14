@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Google Cloud CLI Security Checklist",
+  "graphicAlt": "Bounded cloud automation confirms context, scopes IAM, protects credentials, invokes commands safely, audits behavior, approves risky changes, and plans recovery.",
+  "narration": "Google Cloud CLI security is a repeatable engineering practice. Start with target validation. Confirm project, account, active configuration, region, zone, identity, environment label, and resource target before action. Do not rely on accidental active settings, inherited variables, stale configurations, or defaults that have not been checked.\n\nUse scoped IAM and protect credentials. Match permissions to the script's actual job, separate read-only, deploy, rollback, and owner-level access, and prefer Workload Identity Federation, service account impersonation, or managed runtime identity where practical. Protect login sessions, Application Default Credentials, service account key material, CI/CD secrets, and environment variables. Rotate, revoke, and review access over time.\n\nInvoke the Google Cloud CLI from Bash with fixed, reviewable patterns. Quote values, use arrays where useful, validate command groups, operations, project IDs, regions, zones, resources, paths, filters, and output destinations, and check exit status before trusting output. Parse JSON deliberately and write files only to approved locations.\n\nFinally, guard high-impact actions with organization policy checks, previews, validation, approvals, and rollback planning where available. Treat deletion, overwrite, public exposure, permission expansion, and encryption changes with extra care. Log safely, monitor audit and identity records, respond quickly to credential exposure or wrong-target changes, and improve scripts and roles through regular review.",
+  "narrationPoints": [
+    "Google Cloud CLI security is a repeatable engineering practice.",
+    "Use scoped IAM and protect credentials.",
+    "Invoke the Google Cloud CLI from Bash with fixed, reviewable patterns.",
+    "Finally, guard high-impact actions with organization policy checks, previews, validation, approvals, and rollback planning where available."
+  ]
+};

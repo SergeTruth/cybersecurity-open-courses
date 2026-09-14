@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Safe Bash Patterns for Azure CLI Automation",
+  "graphicAlt": "Azure CLI commands use separate options and values, approved input checks, controlled paths, known tool versions and extensions, and explicit result checks.",
+  "narration": "A Bash script should invoke the Azure CLI in a predictable and reviewable way. The safer pattern is a fixed command structure with clearly separated options and operands. Avoid building one large command string from variable data and asking the shell to interpret it again. That style makes quoting harder, hides behavior from reviewers, and can produce surprising results when input is unexpected.\n\nQuote values that should remain literal and use arrays where the script needs to assemble options and operands. Validate command groups, operation names, resource IDs, subscription IDs, resource group names, regions, resource names, file paths, output paths, filters, and timeout values before use. Validation should favor expected formats, approved scopes, and known target values.\n\nWorking directory control matters when scripts read templates, artifacts, policy files, deployment parameters, or JSON configuration. A relative path should resolve from the intended directory, not wherever the script happened to start. CLI version expectations also matter because output formats, supported options, and service behavior can vary across tool versions and extensions.\n\nSafe stopping is part of secure automation. Scripts should check exit status, distinguish expected empty results from failures, and stop before later steps trust incomplete output. Clear errors help operators recover, but those errors should not expose secrets, raw tokens, sensitive role details, or excessive response bodies. A good Azure CLI wrapper is strict, understandable, and easy to audit.",
+  "narrationPoints": [
+    "A Bash script should invoke the Azure CLI in a predictable and reviewable way.",
+    "Quote values that should remain literal and use arrays where the script needs to assemble options and operands.",
+    "Working directory control matters when scripts read templates, artifacts, policy files, deployment parameters, or JSON configuration.",
+    "Safe stopping is part of secure automation."
+  ]
+};

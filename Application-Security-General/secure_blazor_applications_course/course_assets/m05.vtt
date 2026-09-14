@@ -1,0 +1,167 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.055
+Blazor applications often depend on
+backend APIs for data retrieval and state
+
+2
+00:00:07.135 --> 00:00:07.930
+changes.
+
+3
+00:00:08.010 --> 00:00:11.983
+Those APIs may be called from server-side
+code,
+
+4
+00:00:12.063 --> 00:00:18.221
+browser-delivered WebAssembly code, or a
+mix of client and server paths.
+
+5
+00:00:18.301 --> 00:00:23.267
+The API is the authority for protected
+data and operations,
+
+6
+00:00:23.347 --> 00:00:30.399
+so it must authenticate and authorize
+requests independently of what the UI decided
+
+7
+00:00:30.479 --> 00:00:31.174
+to show.
+
+8
+00:00:31.254 --> 00:00:38.504
+A Blazor WebAssembly client should be
+treated like a browser single-page application
+
+9
+00:00:38.584 --> 00:00:40.968
+from a security standpoint.
+
+10
+00:00:41.048 --> 00:00:45.319
+It can hold user interface logic and call
+services,
+
+11
+00:00:45.399 --> 00:00:48.081
+but it is not a trusted boundary.
+
+12
+00:00:48.161 --> 00:00:54.716
+API design should assume that requests
+arrive from a browser client and must be
+
+13
+00:00:54.796 --> 00:00:56.981
+evaluated by the backend.
+
+14
+00:00:57.061 --> 00:01:04.609
+Cookie-authenticated browser APIs and
+bearer-token APIs have different implications.
+
+15
+00:01:04.689 --> 00:01:11.841
+Cookie-based flows may require antiforgery
+protection for unsafe browser requests
+
+16
+00:01:11.921 --> 00:01:14.404
+and careful cookie settings.
+
+17
+00:01:14.484 --> 00:01:20.642
+Token-based flows require review of token
+audience, lifetime, storage,
+
+18
+00:01:20.722 --> 00:01:25.986
+refresh behavior, and what parts of the
+system can access them.
+
+19
+00:01:26.066 --> 00:01:31.330
+Browser-accessible tokens and state
+require careful design.
+
+20
+00:01:31.410 --> 00:01:34.687
+If a value is available to browser code,
+
+21
+00:01:34.767 --> 00:01:40.230
+the application should not treat it as a
+protected server secret.
+
+22
+00:01:40.310 --> 00:01:43.985
+The design should minimize what is
+exposed,
+
+23
+00:01:44.065 --> 00:01:49.428
+prefer short-lived and scoped credentials
+where appropriate,
+
+24
+00:01:49.508 --> 00:01:53.680
+and keep authoritative decisions in the
+backend.
+
+25
+00:01:53.760 --> 00:01:58.329
+CORS controls browser cross-origin access
+behavior.
+
+26
+00:01:58.409 --> 00:02:02.977
+It is not authentication, and it is not
+authorization.
+
+27
+00:02:03.057 --> 00:02:09.414
+Allowing a browser origin to call an API
+does not mean the API should trust the
+
+28
+00:02:09.494 --> 00:02:11.977
+caller or skip policy checks.
+
+29
+00:02:12.057 --> 00:02:16.527
+CORS should describe approved browser
+integration,
+
+30
+00:02:16.607 --> 00:02:21.771
+while identity and authorization remain
+separate controls.
+
+31
+00:02:21.851 --> 00:02:29.002
+Backend-for-frontend and server-mediated
+API access are design options when teams
+
+32
+00:02:29.082 --> 00:02:35.638
+want the server to manage sensitive
+coordination or reduce browser exposure.
+
+33
+00:02:35.718 --> 00:02:40.783
+Those patterns can improve control when
+applied carefully,
+
+34
+00:02:40.863 --> 00:02:47.716
+but they still need clear authentication,
+authorization, validation, logging,
+
+35
+00:02:47.796 --> 00:02:50.180
+and operational ownership.

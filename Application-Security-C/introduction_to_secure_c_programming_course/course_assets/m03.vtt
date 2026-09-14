@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.917
+Buffers and arrays require explicit length
+tracking.
+
+2
+00:00:05.997 --> 00:00:14.595
+C arrays do not automatically carry
+runtime bounds information into every operation.
+
+3
+00:00:14.675 --> 00:00:22.565
+A pointer to the first element may look
+like enough information to operate on the
+
+4
+00:00:22.645 --> 00:00:29.712
+data, but safe code also needs to know the
+capacity, the current length,
+
+5
+00:00:29.792 --> 00:00:32.265
+and the intended result.
+
+6
+00:00:32.345 --> 00:00:37.409
+Array indexes, pointer arithmetic, copy
+lengths,
+
+7
+00:00:37.489 --> 00:00:42.553
+and string terminators must be reviewed
+together.
+
+8
+00:00:42.633 --> 00:00:48.875
+An index that is valid for one array may
+not be valid for another.
+
+9
+00:00:48.955 --> 00:00:53.195
+A byte count may not match an element
+count.
+
+10
+00:00:53.275 --> 00:01:01.283
+A copy that fits the source may still
+overflow the destination if the destination
+
+11
+00:01:01.363 --> 00:01:03.483
+capacity is smaller.
+
+12
+00:01:03.563 --> 00:01:11.807
+Off-by-one errors are common when code
+forgets space for a terminating null byte or
+
+13
+00:01:11.887 --> 00:01:18.836
+confuses the number of characters with the
+number of bytes available.
+
+14
+00:01:18.916 --> 00:01:24.686
+A string buffer needs room for the data
+and the terminator.
+
+15
+00:01:24.766 --> 00:01:29.477
+Binary buffers may not have a terminator
+at all,
+
+16
+00:01:29.557 --> 00:01:36.388
+so treating all input as a C string can
+create incorrect assumptions.
+
+17
+00:01:36.468 --> 00:01:44.476
+Copy operations should be based on the
+destination capacity, the source length,
+
+18
+00:01:44.556 --> 00:01:47.618
+and the intended output state.
+
+19
+00:01:47.698 --> 00:01:54.058
+The review question is not only whether a
+copy function was used.
+
+20
+00:01:54.138 --> 00:01:59.202
+It is whether the code knows how much can
+be written,
+
+21
+00:01:59.282 --> 00:02:07.526
+how much should be written, and whether
+the resulting buffer is valid for later use.
+
+22
+00:02:07.606 --> 00:02:14.555
+Avoid assuming that external input will
+fit into a fixed-size buffer.
+
+23
+00:02:14.635 --> 00:02:22.525
+Files, sockets, device data, command-line
+arguments, configuration values,
+
+24
+00:02:22.605 --> 00:02:30.849
+and environment variables may be longer
+than expected or shaped differently than a
+
+25
+00:02:30.929 --> 00:02:31.989
+test case.
+
+26
+00:02:32.069 --> 00:02:39.489
+Defensive designs check length before
+copying and handle oversized input
+
+27
+00:02:39.569 --> 00:02:41.100
+deliberately.
+
+28
+00:02:41.180 --> 00:02:49.188
+Prefer designs that keep buffer capacity
+and current length together in the same
+
+29
+00:02:49.268 --> 00:02:52.566
+structure or function contract.
+
+30
+00:02:52.646 --> 00:03:01.007
+Buffer-related errors should be handled
+safely without dumping sensitive memory,
+
+31
+00:03:01.087 --> 00:03:05.681
+raw internal data, or confusing
+diagnostics.
+
+32
+00:03:05.761 --> 00:03:11.649
+The secure habit is to make size
+information part of the API,
+
+33
+00:03:11.729 --> 00:03:15.380
+not a guess held in the caller's head.

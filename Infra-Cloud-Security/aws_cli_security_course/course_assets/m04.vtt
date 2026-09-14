@@ -1,0 +1,127 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.477
+AWS credentials are sensitive operational
+authority.
+
+2
+00:00:04.557 --> 00:00:08.957
+They may exist in shared credentials
+files, AWS config files,
+
+3
+00:00:09.037 --> 00:00:13.352
+SSO sessions, environment variables, CI/CD
+secret stores,
+
+4
+00:00:13.432 --> 00:00:19.778
+instance metadata roles, container
+credential providers, or temporary session files.
+
+5
+00:00:19.858 --> 00:00:25.358
+A script does not need to print a secret
+for that secret to influence behavior.
+
+6
+00:00:25.438 --> 00:00:30.431
+The presence of a credential is enough to
+define what the script can do.
+
+7
+00:00:30.511 --> 00:00:36.011
+Long-lived static credentials should be
+minimized where better options are
+
+8
+00:00:36.091 --> 00:00:36.937
+available.
+
+9
+00:00:37.017 --> 00:00:43.025
+SSO, federation, MFA, role assumption,
+short-lived sessions, workload identity,
+
+10
+00:00:43.105 --> 00:00:48.266
+and metadata-based roles can reduce risk
+when they fit the environment.
+
+11
+00:00:48.346 --> 00:00:51.392
+They do not remove the need for
+validation,
+
+12
+00:00:51.472 --> 00:00:57.057
+but they can reduce the useful lifetime of
+exposed credentials and make access
+
+13
+00:00:57.137 --> 00:00:58.406
+easier to govern.
+
+14
+00:00:58.486 --> 00:01:04.663
+Scripts should check whether required
+credentials are available without displaying
+
+15
+00:01:04.743 --> 00:01:05.166
+them.
+
+16
+00:01:05.246 --> 00:01:10.577
+Avoid printing access keys, session
+tokens, credential-derived values,
+
+17
+00:01:10.657 --> 00:01:16.580
+full environments, debug traces, or
+support bundles that include sensitive data.
+
+18
+00:01:16.660 --> 00:01:21.568
+CI/CD masking is helpful, but it is not a
+complete security boundary.
+
+19
+00:01:21.648 --> 00:01:27.063
+Secrets can still appear through
+transformations, files, command echoes,
+
+20
+00:01:27.143 --> 00:01:29.682
+verbose tool output, or artifacts.
+
+21
+00:01:29.762 --> 00:01:36.108
+Credential handling includes rotation,
+revocation, ownership, and session duration.
+
+22
+00:01:36.188 --> 00:01:39.488
+Teams should know how to expire a role
+session,
+
+23
+00:01:39.568 --> 00:01:44.391
+rotate a key if one still exists, disable
+a compromised credential,
+
+24
+00:01:44.471 --> 00:01:47.517
+and identify which jobs or scripts used
+it.
+
+25
+00:01:47.597 --> 00:01:52.505
+Secure AWS CLI automation treats
+credentials as temporary, scoped,
+
+26
+00:01:52.585 --> 00:01:56.900
+and reviewable rather than permanent
+background plumbing.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Remediation Planning and Reporting",
+  "graphicAlt": "Evidence-backed findings are prioritized, assigned, and verified; uncertainty remains visible while executive and technical reports share the same evidence trail.",
+  "narration": "Assessment value depends on whether findings lead to practical remediation. Prioritization should consider risk, likelihood, impact, exploitability at a high level, business context, affected data, ownership, dependencies, remediation effort, and compensating controls. A technically severe issue may need staged remediation if it affects production availability. A simple configuration fix may be prioritized quickly if exposure is clear.\n\nAI can help group related issues and draft remediation tickets. It can turn a cluster of findings into owner-specific work, suggest verification steps, and create report language for different audiences. It can also help maintain consistency across findings by using the same fields for evidence, impact, recommendation, owner, uncertainty, and review status.\n\nReports should preserve uncertainty. If a finding is confirmed, say what evidence confirms it. If a finding needs owner validation, label it that way. If the business impact is unknown, identify what question needs to be answered. This makes the report more trustworthy than a document that presents every AI-generated statement with the same level of confidence.\n\nExecutive summaries and technical findings serve different purposes. Executives need themes, impact, priorities, and decisions. Technical teams need affected resources, evidence, reproduction of the observation from authorized sources, remediation guidance, and validation criteria. Both views should connect to the same evidence trail.\n\nReviewer accountability remains important. AI can draft language, but humans own the final assessment. The final report should make scope clear, describe methodology, cite source evidence, identify assumptions, recommend remediation, and assign follow-up. The purpose is defensible risk reduction, not a polished document that no one can operationalize.",
+  "narrationPoints": [
+    "Assessment value depends on whether findings lead to practical remediation.",
+    "AI can help group related issues and draft remediation tickets.",
+    "Reports should preserve uncertainty.",
+    "Executive summaries and technical findings serve different purposes.",
+    "Reviewer accountability remains important."
+  ]
+};

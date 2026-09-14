@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Why npm Security Matters",
+  "graphicAlt": "An application depends on direct and transitive packages, with risks from known flaws, install-time execution, and publishing authority across the supply chain.",
+  "narration": "npm security matters because modern Node.js applications are built from many layers of first-party code, open source packages, build tools, test utilities, transitive dependencies, and registry metadata. A small application can depend on hundreds or thousands of packages after the full dependency tree is resolved. That dependency tree becomes part of the software supply chain, even when most of the code was not written by the application team.\n\nThe risk is not limited to known vulnerabilities. Package installation can execute scripts, dependency updates can change behavior, maintainership can shift, account credentials can be stolen, and internal package names can collide with public registry packages if configuration is weak. npm gives teams enormous speed, but speed only stays useful when teams understand how packages enter the environment, how versions are selected, and how changes are reviewed before they reach production.\n\nA practical npm security program does not try to eliminate third-party code. It treats package use as an engineering decision with evidence, review, reproducibility, and ownership. Developers should know what they are installing, why it is needed, how it is locked, how findings are triaged, and how CI/CD prevents accidental drift. The goal is a workflow where dependency risk is visible and manageable instead of hidden inside node_modules.",
+  "narrationPoints": [
+    "npm security matters because modern Node.js applications are built from many layers of first-party code, open source packages, build tools, test utilities, transitive dependencies, and registry metadata.",
+    "The risk is not limited to known vulnerabilities.",
+    "A practical npm security program does not try to eliminate third-party code."
+  ]
+};

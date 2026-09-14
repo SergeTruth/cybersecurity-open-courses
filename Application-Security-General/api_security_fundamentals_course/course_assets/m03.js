@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authentication and Identity",
+  "graphicAlt": "Authentication establishes caller identity and checks token context; a separate authorization decision permits or denies an action on a protected resource.",
+  "narration": "Authentication establishes who or what the caller is. APIs commonly use API keys, bearer tokens, OAuth 2.0 flows, OpenID Connect identity tokens, service accounts, workload identities, mTLS, or platform-specific identity mechanisms. The right pattern depends on the caller, the trust model, and the operation. A browser user, a mobile app, a partner server, and an internal workload should not automatically share the same identity design.\n\nAPI keys are simple, but simplicity comes with tradeoffs. They often identify an application or integration rather than an individual user, and they can become long-lived shared secrets if not managed carefully. Bearer tokens are powerful because possession is enough to use them. That means token storage, transport, logging, lifetime, audience, issuer, and revocation all matter. A token copied into a log or artifact may become an access path.\n\nOAuth 2.0 and OpenID Connect are often discussed together, but they solve related and different problems. OAuth 2.0 is commonly used for delegated access to APIs. OpenID Connect adds an identity layer that helps clients understand who the user is. In API design, teams should be clear about which token type they are accepting, what audience it was issued for, who issued it, how long it is valid, and which claims are trusted.\n\nAuthentication is only the beginning of API security. A caller can be real and still not be allowed to perform a particular action. A service account can be valid and still have too much permission. A token can be signed and still be intended for a different API. Good identity handling narrows the question to who is calling. Authorization, validation, and business rules decide what that caller may actually do.",
+  "narrationPoints": [
+    "Authentication establishes who or what the caller is.",
+    "API keys are simple, but simplicity comes with tradeoffs.",
+    "OAuth 2.0 and OpenID Connect are often discussed together, but they solve related and different problems.",
+    "Authentication is only the beginning of API security."
+  ]
+};

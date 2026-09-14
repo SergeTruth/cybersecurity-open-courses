@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Monitoring, Rollback, and Incident Response",
+  "graphicAlt": "Evidence links the commit, plan, automation identity, apply, and result; recovery planning recognizes that some changes are irreversible and includes containment and state review.",
+  "narration": "Secure IaC automation needs evidence. Teams should know who triggered a run, which identity applied the change, which repository and commit were used, which environment was targeted, what plan was reviewed, and whether the apply succeeded. Without that evidence, it is difficult to investigate failures, prove approval, or understand how the environment reached its current state.\n\nLogs should be useful without exposing sensitive material. They should record identity, commit, environment, plan reference, action, and result at a safe level. They should avoid secrets, excessive sensitive state data, endpoints or configuration details that do not help operations, and raw outputs that could be copied into broad log systems. Logs are often widely accessible and retained for a long time.\n\nMonitoring should detect failed runs, unexpected changes, drift, missing security controls, unusual identities, repeated policy exceptions, and repeated apply failures. Drift can indicate manual changes, automation gaps, or policy exceptions that need review. Monitoring should feed operational review rather than sit unused until an audit or incident.\n\nRollback planning matters because not every infrastructure change can be safely or automatically undone. Some changes affect stateful resources, identity, networking, or data retention. Incident response should include containment, review of applied changes, credential review, state review, and lessons learned for future guardrails. A failed or unauthorized IaC change should make the next change path safer.",
+  "narrationPoints": [
+    "Secure IaC automation needs evidence.",
+    "Logs should be useful without exposing sensitive material.",
+    "Monitoring should detect failed runs, unexpected changes, drift, missing security controls, unusual identities, repeated policy exceptions, and repeated apply failures.",
+    "Rollback planning matters because not every infrastructure change can be safely or automatically undone."
+  ]
+};

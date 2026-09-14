@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.468
+Data fetching decisions can become
+security decisions.
+
+2
+00:00:06.548 --> 00:00:14.381
+Server-side fetching can reach databases,
+internal APIs, external APIs,
+
+3
+00:00:14.461 --> 00:00:20.305
+and services that browser code cannot
+access directly.
+
+4
+00:00:20.385 --> 00:00:28.964
+That is powerful, but it means
+destinations, credentials, response validation,
+
+5
+00:00:29.044 --> 00:00:33.395
+and authorization need to be controlled.
+
+6
+00:00:33.475 --> 00:00:41.557
+User-supplied URLs or identifiers should
+not freely decide where the server
+
+7
+00:00:41.637 --> 00:00:49.346
+connects, what credentials are sent, or
+what internal data is retrieved.
+
+8
+00:00:49.426 --> 00:00:57.632
+SSRF concepts matter at a high level
+whenever server-side code makes outbound
+
+9
+00:00:57.712 --> 00:01:00.323
+requests based on input.
+
+10
+00:01:00.403 --> 00:01:08.236
+The defensive pattern is destination
+control: use configured endpoints,
+
+11
+00:01:08.316 --> 00:01:17.019
+allowlists, scheme and host validation,
+request timeouts, response size limits,
+
+12
+00:01:17.099 --> 00:01:19.959
+and safe client libraries.
+
+13
+00:01:20.039 --> 00:01:27.250
+TLS validation should remain enabled for
+sensitive external calls.
+
+14
+00:01:27.330 --> 00:01:35.909
+Responses from internal or external
+services should be treated as untrusted data
+
+15
+00:01:35.989 --> 00:01:43.947
+until validated for structure, size,
+meaning, and authorization context.
+
+16
+00:01:44.027 --> 00:01:49.249
+Caching and revalidation require careful
+scope.
+
+17
+00:01:49.329 --> 00:01:53.556
+Public data can often be cached broadly,
+
+18
+00:01:53.636 --> 00:02:02.091
+but private or authorization-dependent
+data should not be reused across users,
+
+19
+00:02:02.171 --> 00:02:05.279
+tenants, roles, or sessions.
+
+20
+00:02:05.359 --> 00:02:13.689
+A cache entry created under one user's
+authority should not be served to another
+
+21
+00:02:13.769 --> 00:02:20.235
+user without checking whether the data is
+still appropriate.
+
+22
+00:02:20.315 --> 00:02:24.169
+Authorization changes, stale data,
+
+23
+00:02:24.249 --> 00:02:32.580
+and revalidation timing can all affect
+whether a cached response is safe to use.
+
+24
+00:02:32.660 --> 00:02:39.498
+Sensitive data should not end up in cached
+responses by accident.
+
+25
+00:02:39.578 --> 00:02:47.287
+Server-rendered pages, API responses,
+generated artifacts, previews,
+
+26
+00:02:47.367 --> 00:02:55.697
+and intermediary caches should be reviewed
+for data classification and scope.
+
+27
+00:02:55.777 --> 00:03:02.118
+The safe pattern is to decide what is
+public, what is private,
+
+28
+00:03:02.198 --> 00:03:10.777
+what is user-specific, what is
+tenant-specific, and what should never be cached.
+
+29
+00:03:10.857 --> 00:03:16.079
+Data fetching and caching are performance
+tools,
+
+30
+00:03:16.159 --> 00:03:22.500
+but they must preserve access control and
+confidentiality.

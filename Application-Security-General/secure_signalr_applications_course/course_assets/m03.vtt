@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.294
+Authentication answers the question, who
+is connected?
+
+2
+00:00:06.374 --> 00:00:08.909
+In ASP.NET Core SignalR,
+
+3
+00:00:08.989 --> 00:00:17.076
+the hub can integrate with the same
+authentication system used by the rest of the
+
+4
+00:00:17.156 --> 00:00:18.604
+application.
+
+5
+00:00:18.684 --> 00:00:22.185
+When a connection is established,
+
+6
+00:00:22.265 --> 00:00:28.783
+the server can associate a user principal
+with that connection,
+
+7
+00:00:28.863 --> 00:00:35.622
+and hub code can make decisions using the
+authenticated identity.
+
+8
+00:00:35.702 --> 00:00:42.220
+The details matter because SignalR clients
+are not all the same.
+
+9
+00:00:42.300 --> 00:00:45.680
+Browser clients may use cookies.
+
+10
+00:00:45.760 --> 00:00:51.312
+Browser or non-browser clients may use
+bearer tokens.
+
+11
+00:00:51.392 --> 00:00:59.962
+Mobile, desktop, service, and generated
+clients may have different token storage,
+
+12
+00:01:00.042 --> 00:01:03.059
+refresh, and retry behavior.
+
+13
+00:01:03.139 --> 00:01:09.899
+A secure design documents which credential
+type each client uses,
+
+14
+00:01:09.979 --> 00:01:13.600
+how the connection is established,
+
+15
+00:01:13.680 --> 00:01:19.353
+and how authentication failure appears to
+that client.
+
+16
+00:01:19.433 --> 00:01:25.106
+A long-lived connection also changes the
+timing model.
+
+17
+00:01:25.186 --> 00:01:32.549
+Authentication data is typically captured
+when the connection starts.
+
+18
+00:01:32.629 --> 00:01:40.475
+It should not be assumed to update
+instantly while the connection stays open.
+
+19
+00:01:40.555 --> 00:01:47.314
+Token expiration, user logout, disabled
+accounts, role changes,
+
+20
+00:01:47.394 --> 00:01:50.653
+claim updates, tenant changes,
+
+21
+00:01:50.733 --> 00:01:58.458
+and permission changes all need deliberate
+connection-lifecycle review.
+
+22
+00:01:58.538 --> 00:02:04.211
+That review can lead to different
+engineering choices.
+
+23
+00:02:04.291 --> 00:02:10.326
+Some applications require shorter
+connection lifetimes.
+
+24
+00:02:10.406 --> 00:02:16.562
+Some close connections when authentication
+state changes.
+
+25
+00:02:16.642 --> 00:02:21.350
+Some require reconnects to pick up new
+claims.
+
+26
+00:02:21.430 --> 00:02:30.241
+Some avoid placing highly dynamic
+authorization facts in long-lived identity claims
+
+27
+00:02:30.321 --> 00:02:36.718
+and instead check trusted server-side data
+when a method runs.
+
+28
+00:02:36.798 --> 00:02:40.902
+The important point is predictability.
+
+29
+00:02:40.982 --> 00:02:49.552
+Authenticated SignalR connections should
+behave consistently across browser and
+
+30
+00:02:49.632 --> 00:02:51.926
+non-browser clients.
+
+31
+00:02:52.006 --> 00:02:58.765
+Failed authentication should produce
+understandable outcomes,
+
+32
+00:02:58.845 --> 00:03:07.174
+and the server should never assume that a
+connected client remains authorized for
+
+33
+00:03:07.254 --> 00:03:15.220
+every future action just because an
+earlier connection handshake succeeded.

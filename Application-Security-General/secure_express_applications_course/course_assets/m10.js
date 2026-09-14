@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "A practical Express security review maps middleware, checks access, validates inputs, shapes outputs, reviews production configuration, and adds limits and observability.",
+  "narration": "Secure Express applications depend on routing, middleware, code, configuration, dependencies, runtime context, and operations. Treat middleware order as security-relevant design. Separate public, authenticated, privileged, service-only, webhook, and administrative routes. Enforce authentication and authorization server-side. Validate request data before using it. Shape responses intentionally and handle errors safely. Protect cookies, sessions, CSRF-sensitive flows, and CORS configuration based on the real browser and deployment model.\n\nProduction readiness matters as much as route code. Apply security headers thoughtfully, review TLS and proxy assumptions, remove development behavior from production, manage dependencies deliberately, protect secrets, separate environment configuration, and avoid leaking sensitive values into logs or images. Add abuse controls, safe logs, monitoring, and operational ownership so the team can see whether the application is behaving as expected.\n\nA practical first week plan can produce meaningful improvement. Map routes and middleware in the order they run. Identify unprotected or inconsistently protected endpoints. Review authentication and object-level access checks on high-risk routes. Add schema validation and allowlisted update fields. Check cookie and CORS settings. Review secrets and production error handling. Add rate limits to sensitive flows. Improve security logging so incident response starts with evidence instead of guesses.",
+  "narrationPoints": [
+    "Secure Express applications depend on routing, middleware, code, configuration, dependencies, runtime context, and operations.",
+    "Production readiness matters as much as route code.",
+    "A practical first week plan can produce meaningful improvement."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Files, Resources, and Error Paths",
+  "graphicAlt": "When initialization fails after memory and file acquisition, cleanup releases only the resources actually acquired and returns a predictable result.",
+  "narration": "Secure C code must handle resources consistently on both success and failure paths. Resources include memory, files, file descriptors, sockets, locks, temporary files, handles, mapped regions, and dynamically allocated structures. Every acquisition should have a matching release path.\n\nError paths need the same cleanup discipline as success paths. Many defects appear when a function succeeds through the common path but leaks or double-cleans resources when a later step fails. A function that allocates memory, opens a file, and then fails halfway through should leave the process in a predictable state.\n\nPartial initialization needs careful handling. If a structure owns several resources and only some are initialized, cleanup code must know which ones are valid. Consistent initialization, clear ownership flags, and ordered cleanup can help avoid leaks, double cleanup, and inconsistent return values.\n\nCleanup sections can be useful when they make ownership and release order clear. The point is not a particular style for every project. The point is that reviewers can see one path where resources are released correctly, including after intermediate failures.\n\nTemporary files and output files need safe names, permissions, retention, and cleanup behavior. A temporary file may contain sensitive intermediate data. An output file may be partially written. Code should define whether partial output is removed, replaced atomically, marked incomplete, or handled through another safe workflow.\n\nError messages should be useful but should not expose secrets, internal paths, raw input, or sensitive memory. Diagnostic detail for authorized operators should be separated from user-facing messages. A safe error path releases resources, preserves a clear status, and avoids unnecessary disclosure.",
+  "narrationPoints": [
+    "Secure C code must handle resources consistently on both success and failure paths.",
+    "Error paths need the same cleanup discipline as success paths.",
+    "Partial initialization needs careful handling.",
+    "Cleanup sections can be useful when they make ownership and release order clear.",
+    "Temporary files and output files need safe names, permissions, retention, and cleanup behavior."
+  ]
+};

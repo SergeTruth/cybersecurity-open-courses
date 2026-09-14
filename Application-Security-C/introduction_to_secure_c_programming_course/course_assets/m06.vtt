@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.066
+Secure C code must handle resources
+consistently on both success and failure paths.
+
+2
+00:00:09.146 --> 00:00:16.264
+Resources include memory, files, file
+descriptors, sockets, locks,
+
+3
+00:00:16.344 --> 00:00:24.911
+temporary files, handles, mapped regions,
+and dynamically allocated structures.
+
+4
+00:00:24.991 --> 00:00:30.661
+Every acquisition should have a matching
+release path.
+
+5
+00:00:30.741 --> 00:00:37.136
+Error paths need the same cleanup
+discipline as success paths.
+
+6
+00:00:37.216 --> 00:00:45.420
+Many defects appear when a function
+succeeds through the common path but leaks or
+
+7
+00:00:45.500 --> 00:00:50.567
+double-cleans resources when a later step
+fails.
+
+8
+00:00:50.647 --> 00:00:55.473
+A function that allocates memory, opens a
+file,
+
+9
+00:00:55.553 --> 00:01:03.637
+and then fails halfway through should
+leave the process in a predictable state.
+
+10
+00:01:03.717 --> 00:01:08.784
+Partial initialization needs careful
+handling.
+
+11
+00:01:08.864 --> 00:01:15.862
+If a structure owns several resources and
+only some are initialized,
+
+12
+00:01:15.942 --> 00:01:20.406
+cleanup code must know which ones are
+valid.
+
+13
+00:01:20.486 --> 00:01:25.915
+Consistent initialization, clear ownership
+flags,
+
+14
+00:01:25.995 --> 00:01:31.907
+and ordered cleanup can help avoid leaks,
+double cleanup,
+
+15
+00:01:31.987 --> 00:01:35.365
+and inconsistent return values.
+
+16
+00:01:35.445 --> 00:01:43.649
+Cleanup sections can be useful when they
+make ownership and release order clear.
+
+17
+00:01:43.729 --> 00:01:49.158
+The point is not a particular style for
+every project.
+
+18
+00:01:49.238 --> 00:01:57.804
+The point is that reviewers can see one
+path where resources are released correctly,
+
+19
+00:01:57.884 --> 00:02:02.107
+including after intermediate failures.
+
+20
+00:02:02.187 --> 00:02:09.909
+Temporary files and output files need safe
+names, permissions, retention,
+
+21
+00:02:09.989 --> 00:02:12.281
+and cleanup behavior.
+
+22
+00:02:12.361 --> 00:02:18.394
+A temporary file may contain sensitive
+intermediate data.
+
+23
+00:02:18.474 --> 00:02:22.576
+An output file may be partially written.
+
+24
+00:02:22.656 --> 00:02:30.498
+Code should define whether partial output
+is removed, replaced atomically,
+
+25
+00:02:30.578 --> 00:02:36.972
+marked incomplete, or handled through
+another safe workflow.
+
+26
+00:02:37.052 --> 00:02:45.136
+Error messages should be useful but should
+not expose secrets, internal paths,
+
+27
+00:02:45.216 --> 00:02:48.473
+raw input, or sensitive memory.
+
+28
+00:02:48.553 --> 00:02:56.999
+Diagnostic detail for authorized operators
+should be separated from user-facing
+
+29
+00:02:57.079 --> 00:02:58.165
+messages.
+
+30
+00:02:58.245 --> 00:03:04.760
+A safe error path releases resources,
+preserves a clear status,
+
+31
+00:03:04.840 --> 00:03:08.580
+and avoids unnecessary disclosure.

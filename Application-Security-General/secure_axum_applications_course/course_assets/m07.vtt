@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.729
+Many Axum services connect web requests to
+trusted systems: databases,
+
+2
+00:00:07.809 --> 00:00:15.985
+queues, caches, file systems, object
+stores, search indexes, and internal APIs.
+
+3
+00:00:16.065 --> 00:00:24.242
+The handler is often the bridge between
+untrusted request data and sensitive data
+
+4
+00:00:24.322 --> 00:00:25.625
+operations.
+
+5
+00:00:25.705 --> 00:00:32.815
+That bridge should be narrow, validated,
+authorized, and observable.
+
+6
+00:00:32.895 --> 00:00:37.753
+Resource identifiers need defensive
+handling.
+
+7
+00:00:37.833 --> 00:00:43.166
+A parsed identifier is not automatically
+safe to use.
+
+8
+00:00:43.246 --> 00:00:50.474
+The application should validate that the
+identifier has the right form,
+
+9
+00:00:50.554 --> 00:00:57.427
+belongs to the correct tenant or owner, is
+allowed for the operation,
+
+10
+00:00:57.507 --> 00:01:03.077
+and is checked before sensitive retrieval
+or mutation.
+
+11
+00:01:03.157 --> 00:01:11.096
+Authorization should not be an
+afterthought placed after data has already been
+
+12
+00:01:11.176 --> 00:01:12.954
+fetched broadly.
+
+13
+00:01:13.034 --> 00:01:19.670
+Parameterized data access patterns are
+part of defensive design.
+
+14
+00:01:19.750 --> 00:01:25.912
+The course does not need offensive
+examples to make the point:
+
+15
+00:01:25.992 --> 00:01:30.850
+string-built queries, fragile resource
+logic,
+
+16
+00:01:30.930 --> 00:01:38.633
+and inconsistent filtering are harder to
+review than structured query APIs,
+
+17
+00:01:38.713 --> 00:01:42.860
+parameter binding, typed repositories,
+
+18
+00:01:42.940 --> 00:01:48.628
+and domain methods that require
+authorization context.
+
+19
+00:01:48.708 --> 00:01:57.240
+Reviewers should be able to see how
+user-controlled values reach data access layers.
+
+20
+00:01:57.320 --> 00:02:01.586
+Async services also need resource safety.
+
+21
+00:02:01.666 --> 00:02:09.487
+Memory safety does not prevent an
+application from accepting unlimited work,
+
+22
+00:02:09.568 --> 00:02:17.033
+waiting forever on upstream dependencies,
+exhausting a connection pool,
+
+23
+00:02:17.113 --> 00:02:22.564
+or spawning background tasks with unclear
+ownership.
+
+24
+00:02:22.644 --> 00:02:29.162
+Connection pools, queue sizes, request
+bodies, task lifetimes,
+
+25
+00:02:29.242 --> 00:02:36.944
+and upstream calls all need limits and
+timeout behavior aligned with service
+
+26
+00:02:37.024 --> 00:02:38.328
+objectives.
+
+27
+00:02:38.408 --> 00:02:47.295
+Backpressure and bounded concurrency are
+security-relevant because availability is a
+
+28
+00:02:47.375 --> 00:02:49.390
+security property.
+
+29
+00:02:49.470 --> 00:02:56.698
+A service should have a plan for what
+happens when dependencies are slow,
+
+30
+00:02:56.778 --> 00:03:02.703
+request volume rises, queues fill, or
+clients disconnect.
+
+31
+00:03:02.783 --> 00:03:09.064
+Defensive Axum design treats async work as
+a managed resource,
+
+32
+00:03:09.144 --> 00:03:12.580
+not an infinite capacity promise.

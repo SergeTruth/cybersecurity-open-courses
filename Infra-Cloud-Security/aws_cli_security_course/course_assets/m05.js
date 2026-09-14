@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Safe Bash Patterns for AWS CLI Automation",
+  "graphicAlt": "A fixed command, separate options and values, validated inputs, known working directory, expected tool version, and checked exit status make CLI invocation predictable.",
+  "narration": "A Bash script should invoke the AWS CLI in a predictable and reviewable way. The safer pattern is a fixed command structure with clearly separated options and operands. Avoid building one large command string from variable data and then re-interpreting it through the shell. That approach makes quoting harder, hides behavior from reviewers, and can produce surprising results when an input is unexpected.\n\nQuote values that should remain literal, and use arrays where the script needs to assemble options and operands. Validate service names, operation names, ARNs, regions, profile names, resource identifiers, file paths, output paths, filters, query expressions, and timeout values before use. Validation should favor known allowed values and expected formats, especially for scripts that can affect production resources.\n\nWorking directory control matters when scripts read templates, policy documents, parameter files, artifacts, or JSON payloads. A relative path should resolve from the intended directory, not from wherever the script happened to start. Tool version expectations also matter because AWS CLI behavior, output formats, paginated responses, and service features can vary across versions and configurations.\n\nResult handling is part of secure automation. Scripts should check exit status, distinguish expected empty results from failures, and stop before later steps trust incomplete output. Clear error messages help operators recover, but those messages should not expose secrets, raw credentials, sensitive resource details, or excessive response bodies. A secure AWS CLI wrapper is understandable, strict, and intentionally boring.",
+  "narrationPoints": [
+    "A Bash script should invoke the AWS CLI in a predictable and reviewable way.",
+    "Quote values that should remain literal, and use arrays where the script needs to assemble options and operands.",
+    "Working directory control matters when scripts read templates, policy documents, parameter files, artifacts, or JSON payloads.",
+    "Result handling is part of secure automation."
+  ]
+};

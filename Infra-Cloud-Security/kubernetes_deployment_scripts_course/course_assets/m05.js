@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Manifests, Helm, Kustomize, and Rendered Output",
+  "graphicAlt": "Charts, values, and overlays combine into rendered output that is diffed and reviewed before the approved change reaches the cluster.",
+  "narration": "Kubernetes deployments often come from manifests, Helm charts, Kustomize overlays, generated files, or release artifacts. The source may be reviewed, but the rendered output is what the cluster receives. A values file, overlay, environment setting, chart default, or generation step can change the effective resources in ways that are not obvious from the base manifest alone.\n\nRendered output can affect security behavior. It can change images, labels, annotations, service accounts, network exposure, volume mounts, resource limits, security contexts, probes, and environment variables. A small values change can alter which account a workload uses or whether a service becomes reachable. Deployment scripts should therefore make effective output visible where practical, especially before high-impact applies.\n\nDiff and review workflows help connect intent to action. A script can render the effective manifest, compare intended resource changes, and require review or approval for sensitive environments. This reduces blind applies, where generated output is sent to the cluster without anyone seeing what changed. Diffs are not perfect, but they help operators and reviewers reason about the actual change.\n\nVersioned deployment artifacts improve traceability. A release should connect the approved source, chart, values, overlay, image reference, and rendered output where the workflow supports it. That connection helps answer what was deployed, why it was approved, and how to reproduce or roll back the change. Secure deployment scripting makes that chain visible instead of relying on memory or ad hoc job output.",
+  "narrationPoints": [
+    "Kubernetes deployments often come from manifests, Helm charts, Kustomize overlays, generated files, or release artifacts.",
+    "Rendered output can affect security behavior.",
+    "Diff and review workflows help connect intent to action.",
+    "Versioned deployment artifacts improve traceability."
+  ]
+};

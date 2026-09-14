@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Reporting and Remediation",
+  "graphicAlt": "A container finding identifies the exact image, evidence, contextual risk, and remediation; assumptions remain visible and changes are validated through the release process.",
+  "narration": "Reporting turns container review observations into action. A useful finding should identify the affected image, component, manifest, pipeline, or runtime setting; provide evidence references; explain risk in context; describe severity reasoning; and give practical remediation guidance. The goal is not to overwhelm developers with scanner noise. The goal is to help teams reduce meaningful risk.\n\nEvidence references are important. A report may cite image digests, Dockerfile lines, scanner report entries, SBOM components, registry metadata, manifest snippets, runtime configuration exports, or policy findings. Those references let others reproduce the review and understand exactly what was evaluated. If evidence is based on a tag, a point-in-time export, or a non-production environment, the limitation should be stated.\n\nRemediation should be developer-friendly and operationally realistic. It may involve updating base images, rebuilding images, removing unnecessary packages, improving build secret handling, setting non-root users, reducing capabilities, changing mounts, adding network policies, improving registry controls, or creating backlog tickets for dependency updates. Severity should reflect risk, exposure, and feasibility rather than scanner score alone.\n\nAI can help draft clear language, organize recommendations, and create ticket-ready summaries. Those drafts still need human review. AI-generated remediation may be incomplete, outdated, unsafe, or mismatched to the environment. A strong report preserves assumptions and limitations, ties recommendations to verified evidence, and gives teams a practical path toward safer containerized applications.",
+  "narrationPoints": [
+    "Reporting turns container review observations into action.",
+    "Evidence references are important.",
+    "Remediation should be developer-friendly and operationally realistic.",
+    "AI can help draft clear language, organize recommendations, and create ticket-ready summaries."
+  ]
+};

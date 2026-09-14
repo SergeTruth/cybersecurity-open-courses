@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure Axum Checklist",
+  "graphicAlt": "A secure Axum service maps boundaries, validates input meaning, authorizes actions, fails safely, limits work, and is maintained and observed over time.",
+  "narration": "Secure Axum development is a layered engineering practice. Start with the route map and the trust-boundary model. A reviewer should be able to identify public routes, authenticated routes, administrative routes, internal callbacks, health endpoints, shared state, middleware scope, and the request lifecycle without guessing.\n\nUse extractors to structure request data, but do not confuse extraction with validation. Validate business rules explicitly. Convert raw request values into trusted domain values only after checks for type, range, tenant, ownership, resource state, and operation context. Reject unsupported values safely before they reach sensitive logic.\n\nKeep authentication and authorization separate. Identity tells the service who is calling. Authorization decides whether that identity may take a specific action on a specific resource. Fail closed when identity or authorization context is missing, expired, inconsistent, or insufficient. Protect administrative and high-impact actions with extra clarity.\n\nMap errors to safe responses, apply middleware deliberately, review headers and CORS, configure body limits and timeouts, and document proxy assumptions. Protect data access with authorization, parameterized patterns, resource limits, connection-pool awareness, timeout behavior, bounded concurrency, and backpressure.\n\nFinally, maintain the service as the environment changes. Review dependencies and features. Protect secrets and configuration. Use structured logging and tracing with redaction. Test expected and unexpected request flows. Monitor production behavior. Improve the application as new risks, dependencies, and operational lessons appear.",
+  "narrationPoints": [
+    "Secure Axum development is a layered engineering practice.",
+    "Use extractors to structure request data, but do not confuse extraction with validation.",
+    "Keep authentication and authorization separate.",
+    "Map errors to safe responses, apply middleware deliberately, review headers and CORS, configure body limits and timeouts, and document proxy assumptions.",
+    "Finally, maintain the service as the environment changes."
+  ]
+};

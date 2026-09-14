@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.980
+Express routes should be grouped clearly
+into public, authenticated,
+
+2
+00:00:07.060 --> 00:00:13.001
+privileged, service-only, webhook, and
+administrative areas.
+
+3
+00:00:13.081 --> 00:00:17.725
+Authentication answers who is making the
+request.
+
+4
+00:00:17.805 --> 00:00:23.097
+It might come from a session cookie,
+bearer token, API key,
+
+5
+00:00:23.177 --> 00:00:29.766
+identity provider, service credential, or
+reverse proxy integration.
+
+6
+00:00:29.846 --> 00:00:34.382
+Authorization answers what that identity
+may do.
+
+7
+00:00:34.462 --> 00:00:39.646
+These two checks work together, but they
+are not the same.
+
+8
+00:00:39.726 --> 00:00:47.287
+A logged-in user is not automatically
+allowed to read every record or perform every
+
+9
+00:00:47.367 --> 00:00:48.123
+action.
+
+10
+00:00:48.203 --> 00:00:52.415
+Consider a route that returns a document
+by ID.
+
+11
+00:00:52.495 --> 00:00:59.299
+The application must verify not only that
+the requester is authenticated,
+
+12
+00:00:59.379 --> 00:01:05.536
+but that the requester is allowed to
+access that specific document.
+
+13
+00:01:05.616 --> 00:01:12.096
+The same principle applies to organization
+records, invoices, files,
+
+14
+00:01:12.176 --> 00:01:17.684
+projects, administrative features, and
+service accounts.
+
+15
+00:01:17.764 --> 00:01:24.677
+Route-level authentication middleware is
+helpful, but object ownership,
+
+16
+00:01:24.757 --> 00:01:32.749
+tenant boundaries, roles, and business
+permissions must be checked server-side close
+
+17
+00:01:32.829 --> 00:01:37.581
+enough to business logic to understand the
+context.
+
+18
+00:01:37.661 --> 00:01:44.682
+Never trust client-supplied user IDs,
+roles, tenant IDs, ownership claims,
+
+19
+00:01:44.762 --> 00:01:48.218
+or admin flags as proof of permission.
+
+20
+00:01:48.298 --> 00:01:55.102
+Treat them as request data that must be
+checked against server-side state.
+
+21
+00:01:55.182 --> 00:02:00.583
+Code review should look for routes that
+bypass middleware,
+
+22
+00:02:00.663 --> 00:02:07.683
+use inconsistent guard functions, trust
+request fields for authorization,
+
+23
+00:02:07.763 --> 00:02:15.324
+or handle service credentials differently
+from human users without clear policy.
+
+24
+00:02:15.404 --> 00:02:23.180
+Secure Express routing is about consistent
+entry points and explicit authorization
+
+25
+00:02:23.260 --> 00:02:24.340
+decisions.

@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.702
+FastAPI dependency injection can be a
+powerful security tool because it lets teams
+
+2
+00:00:07.782 --> 00:00:14.263
+express reusable checks and attach them
+consistently to path operations.
+
+3
+00:00:14.343 --> 00:00:19.693
+Dependencies can load the current subject,
+validate a token,
+
+4
+00:00:19.773 --> 00:00:26.768
+require a permission, check a scope, or
+prepare request context for later logic.
+
+5
+00:00:26.848 --> 00:00:30.346
+The value is not the mechanism by itself.
+
+6
+00:00:30.426 --> 00:00:37.422
+The value is making security enforcement
+visible, centralized enough to reuse,
+
+7
+00:00:37.502 --> 00:00:41.309
+and close enough to the route to
+understand.
+
+8
+00:00:41.389 --> 00:00:48.076
+Role-based checks, permission checks,
+scopes, and claims can all be useful,
+
+9
+00:00:48.156 --> 00:00:52.580
+but they are rarely the whole
+authorization story.
+
+10
+00:00:52.660 --> 00:00:56.672
+APIs often need object-level
+authorization.
+
+11
+00:00:56.752 --> 00:01:03.748
+The service must verify that the current
+subject can access the specific record,
+
+12
+00:01:03.828 --> 00:01:09.897
+file, tenant, organization, project, or
+operation being requested.
+
+13
+00:01:09.977 --> 00:01:16.870
+A user with a general role may still be
+denied for another tenant's resource or an
+
+14
+00:01:16.950 --> 00:01:20.757
+action outside the current workflow state.
+
+15
+00:01:20.837 --> 00:01:28.038
+Administrative endpoints and internal APIs
+deserve the same discipline as public
+
+16
+00:01:28.118 --> 00:01:29.147
+endpoints.
+
+17
+00:01:29.227 --> 00:01:33.034
+Internal does not automatically mean safe,
+
+18
+00:01:33.114 --> 00:01:38.875
+and hidden documentation or obscure URLs
+are not access controls.
+
+19
+00:01:38.955 --> 00:01:44.922
+If an endpoint can change configuration,
+trigger jobs, export data,
+
+20
+00:01:45.002 --> 00:01:48.397
+impersonate users, or manage tenants,
+
+21
+00:01:48.477 --> 00:01:54.135
+the server should verify the current
+subject, action, resource,
+
+22
+00:01:54.215 --> 00:01:56.273
+and context every time.
+
+23
+00:01:56.353 --> 00:02:00.571
+Authorization should be enforced on the
+server,
+
+24
+00:02:00.651 --> 00:02:04.663
+not inferred from which client called the
+API.
+
+25
+00:02:04.743 --> 00:02:07.624
+Good authorization is testable.
+
+26
+00:02:07.704 --> 00:02:13.054
+Teams should include negative tests for
+denied permissions,
+
+27
+00:02:13.134 --> 00:02:19.409
+cross-tenant access, missing scopes, stale
+tokens, object ownership,
+
+28
+00:02:19.489 --> 00:02:25.045
+administrative actions, and
+service-to-service boundaries.
+
+29
+00:02:25.125 --> 00:02:31.915
+These are defensive tests that prove the
+service refuses actions it should not
+
+30
+00:02:31.995 --> 00:02:32.612
+allow.
+
+31
+00:02:32.692 --> 00:02:38.453
+When authorization dependencies are
+consistent and well tested,
+
+32
+00:02:38.533 --> 00:02:43.780
+FastAPI path operations are much easier to
+maintain safely.

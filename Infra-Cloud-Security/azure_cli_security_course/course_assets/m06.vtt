@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.800
+Azure CLI output is often consumed by
+later automation.
+
+2
+00:00:05.880 --> 00:00:12.872
+A script may query JSON, extract a
+resource ID, inspect a role assignment,
+
+3
+00:00:12.952 --> 00:00:19.267
+select a deployment target, compare
+configuration, write a file,
+
+4
+00:00:19.347 --> 00:00:23.294
+or decide whether a later step should run.
+
+5
+00:00:23.374 --> 00:00:30.366
+That output can include identifiers,
+subscription details, endpoints,
+
+6
+00:00:30.446 --> 00:00:38.340
+policy results, role assignments,
+configuration values, and sensitive context.
+
+7
+00:00:38.420 --> 00:00:44.172
+Structured parsing is safer than fragile
+text assumptions.
+
+8
+00:00:44.252 --> 00:00:52.259
+Scripts should parse expected JSON fields
+deliberately and handle missing fields,
+
+9
+00:00:52.339 --> 00:00:58.090
+empty responses, multiple matches, and
+unexpected values.
+
+10
+00:00:58.170 --> 00:01:05.613
+JMESPath-style query concepts can be
+useful defensively when they make field
+
+11
+00:01:05.693 --> 00:01:13.474
+selection explicit, but the script still
+needs to confirm that the returned value
+
+12
+00:01:13.554 --> 00:01:16.374
+matches the intended target.
+
+13
+00:01:16.454 --> 00:01:24.348
+Output files should go to approved
+destinations with appropriate permissions and
+
+14
+00:01:24.428 --> 00:01:26.909
+retention expectations.
+
+15
+00:01:26.989 --> 00:01:33.642
+Generated JSON, deployment details, policy
+results, role listings,
+
+16
+00:01:33.722 --> 00:01:41.616
+and support bundles can reveal sensitive
+operational context even when they do not
+
+17
+00:01:41.696 --> 00:01:43.614
+contain raw tokens.
+
+18
+00:01:43.694 --> 00:01:50.573
+A script should avoid writing sensitive
+output into shared workspaces,
+
+19
+00:01:50.653 --> 00:01:56.968
+broad CI/CD artifacts, or long-lived logs
+without a clear reason.
+
+20
+00:01:57.048 --> 00:02:01.446
+Logs should provide minimal useful
+evidence.
+
+21
+00:02:01.526 --> 00:02:08.856
+Good logs show high-level identity,
+tenant, subscription, resource group,
+
+22
+00:02:08.936 --> 00:02:13.109
+action, target category, time, and result.
+
+23
+00:02:13.189 --> 00:02:19.053
+They avoid tokens, secrets, service
+principal credentials,
+
+24
+00:02:19.133 --> 00:02:25.674
+sensitive role details, private data, and
+excessive raw responses.
+
+25
+00:02:25.754 --> 00:02:33.873
+Secure output handling lets automation
+remain useful without turning logs and files
+
+26
+00:02:33.953 --> 00:02:36.660
+into another exposure path.

@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.175
+A SignalR hub is not just a convenient
+transport wrapper.
+
+2
+00:00:06.255 --> 00:00:11.221
+Its method names, argument lists, return
+values,
+
+3
+00:00:11.301 --> 00:00:17.567
+and side effects are part of the
+application security surface.
+
+4
+00:00:17.647 --> 00:00:24.386
+If a method changes application state,
+looks up data, joins a group,
+
+5
+00:00:24.466 --> 00:00:30.023
+sends a targeted notification, or triggers
+a workflow,
+
+6
+00:00:30.103 --> 00:00:38.379
+then it should be treated as an
+intentional application action with a defined trust
+
+7
+00:00:38.459 --> 00:00:39.523
+boundary.
+
+8
+00:00:39.603 --> 00:00:43.977
+Good hub design starts with narrow
+methods.
+
+9
+00:00:44.057 --> 00:00:49.141
+A hub method should represent one clear
+operation,
+
+10
+00:00:49.221 --> 00:00:57.497
+accept the smallest useful set of inputs,
+and return only the data the caller needs.
+
+11
+00:00:57.577 --> 00:01:06.090
+Broad methods that accept loosely shaped
+objects or leave important interpretation
+
+12
+00:01:06.170 --> 00:01:13.145
+to the client are harder to review and
+harder to protect consistently.
+
+13
+00:01:13.225 --> 00:01:18.073
+Client callbacks need a different mental
+model.
+
+14
+00:01:18.153 --> 00:01:25.483
+A server may call client-side functions to
+deliver data, update a screen,
+
+15
+00:01:25.563 --> 00:01:29.228
+or notify a user about a state change.
+
+16
+00:01:29.308 --> 00:01:33.564
+Those callbacks are delivery mechanisms.
+
+17
+00:01:33.644 --> 00:01:41.093
+They should not be the only place where
+business rules, permission checks,
+
+18
+00:01:41.173 --> 00:01:47.557
+tenant separation, or administrative
+decisions are enforced.
+
+19
+00:01:47.637 --> 00:01:55.322
+A modified or outdated client must not be
+able to turn a display decision into a
+
+20
+00:01:55.402 --> 00:01:59.304
+server-side authorization decision.
+
+21
+00:01:59.384 --> 00:02:04.822
+Hub context, connection identifiers,
+users, groups,
+
+22
+00:02:04.902 --> 00:02:12.114
+and client proxies are useful, but they
+should be handled deliberately.
+
+23
+00:02:12.194 --> 00:02:18.342
+Separate public notifications,
+authenticated user events,
+
+24
+00:02:18.422 --> 00:02:23.743
+tenant-scoped messages, administrative
+messages,
+
+25
+00:02:23.823 --> 00:02:27.488
+and system operations in the design.
+
+26
+00:02:27.568 --> 00:02:34.189
+That separation makes it easier to review
+who can call each method,
+
+27
+00:02:34.269 --> 00:02:42.190
+who can receive each message, and what
+server-side data supports the decision.
+
+28
+00:02:42.270 --> 00:02:45.935
+A secure SignalR API is predictable.
+
+29
+00:02:46.015 --> 00:02:50.626
+The method set is small enough to reason
+about,
+
+30
+00:02:50.706 --> 00:02:55.435
+sensitive operations stand out during
+review,
+
+31
+00:02:55.515 --> 00:03:03.437
+and the server remains responsible for
+identity, authorization, validation,
+
+32
+00:03:03.517 --> 00:03:07.300
+routing decisions, and audit events.

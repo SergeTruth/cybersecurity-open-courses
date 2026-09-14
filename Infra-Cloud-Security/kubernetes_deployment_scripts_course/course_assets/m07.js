@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Rollouts, Readiness, Verification, and Rollback",
+  "graphicAlt": "After apply completes, rollout and readiness must be verified; timeouts or failures invoke a recovery plan, with extra care for stateful changes.",
+  "narration": "A deployment command finishing does not always mean the application is healthy. A rollout may stall, pods may crash, readiness probes may fail, traffic may not reach the new version, or only part of the change may succeed. A script that reports success too early can create false confidence and trigger later automation before the workload is actually ready.\n\nSecure deployment scripts should wait for expected rollout and readiness conditions that fit the workload. They should use timeouts, detect partial or stalled deployments, and report failures clearly. Health checks should be appropriate to the application and environment. For some workloads, Kubernetes readiness is enough for the deployment script. For others, additional smoke checks or monitoring signals may be part of the release process.\n\nFailure handling should avoid misleading success. If a rollout check fails, the script should not continue with later promotion, notification, or cleanup steps that imply success. Operators should receive a clear status, target, version, and follow-up expectation. The script should make it easy to see whether a failure was during rendering, apply, rollout, health verification, or a later operational check.\n\nRollback planning matters before deployment begins. Teams should know what rollback can and cannot do, what stateful resources require extra care, and who owns recovery decisions. A stateless workload may be easier to revert than a migration, persistent volume change, or external dependency change. Secure deployment automation treats rollback as part of the deployment plan, not a wish made after something breaks.",
+  "narrationPoints": [
+    "A deployment command finishing does not always mean the application is healthy.",
+    "Secure deployment scripts should wait for expected rollout and readiness conditions that fit the workload.",
+    "Failure handling should avoid misleading success.",
+    "Rollback planning matters before deployment begins."
+  ]
+};

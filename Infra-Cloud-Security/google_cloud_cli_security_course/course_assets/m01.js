@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why Google Cloud CLI Security Matters",
+  "graphicAlt": "Google Cloud CLI automation acts on storage, compute, and IAM using the inherited account, project, configuration, and location context.",
+  "narration": "The Google Cloud CLI is a practical interface between Bash automation and Google Cloud services. Teams use it to list resources, publish artifacts, deploy applications, update configuration, modify IAM policies, create storage, change networking, start compute resources, query logs, and support operational workflows. Those activities may be routine, but they can act directly on the cloud control plane.\n\nEvery CLI command runs with the account, project, active configuration, region, zone, credential source, and permissions available at execution time. If a script uses the wrong project, wrong account, wrong configuration, wrong region, wrong zone, or unexpected command input, a routine helper can affect production. A command that is harmless in a development project may be high-impact in a production project.\n\nSecure Google Cloud CLI usage means treating each script as a cloud automation component. The script should know which project it expects, which account or service account it is using, which configuration is active, which region or zone is in scope, what resource it is allowed to affect, and what output later automation will trust. It should not rely on whatever local or runner state happens to be active when it starts.\n\nThe defensive goal is scoped, least-privileged, observable Google Cloud automation. That means validating targets, protecting credentials and sessions, invoking commands predictably, parsing output carefully, guarding high-impact changes, and leaving useful audit evidence. Small Bash helpers can be valuable, but if they can change cloud resources, they deserve deliberate security design.",
+  "narrationPoints": [
+    "The Google Cloud CLI is a practical interface between Bash automation and Google Cloud services.",
+    "Every CLI command runs with the account, project, active configuration, region, zone, credential source, and permissions available at execution time.",
+    "Secure Google Cloud CLI usage means treating each script as a cloud automation component.",
+    "The defensive goal is scoped, least-privileged, observable Google Cloud automation."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Tenants, Subscriptions, Resource Groups, and Target Validation",
+  "graphicAlt": "A target is identified within its tenant, subscription, and resource group, then checked with region and identity before an approved change can proceed.",
+  "narration": "Azure CLI commands run within a tenant, subscription, region, resource group, and credential context. In automation, those values may come from local account state, environment variables, CI/CD variables, service connections, managed identity, workload identity, or federated credentials. A secure script should not assume that the currently selected subscription or default values are correct just because a command would run.\n\nTarget validation should happen before any meaningful change. The script should confirm the expected tenant, subscription, Azure cloud environment where relevant, resource group, region, environment label, identity, and target resource identifiers. A deployment script should make it difficult to combine a production resource name with a development subscription, or a staging identity with a production action.\n\nDevelopment, staging, and production should have separate assumptions, credentials, approval paths, and monitoring expectations. A development helper may prioritize speed, while a production helper may require a protected branch, change ticket, release window, operator confirmation, or environment approval. The script should encode those differences through validation and gating rather than relying on convention alone.\n\nCI/CD and environment variables should be treated as input. They can be missing, stale, inherited, or inconsistent with the requested action. If the tenant, subscription, resource group, region, or resource target cannot be confirmed, the script should stop with a clear message. The safest wrong-target change is one that fails before it reaches Azure.",
+  "narrationPoints": [
+    "Azure CLI commands run within a tenant, subscription, region, resource group, and credential context.",
+    "Target validation should happen before any meaningful change.",
+    "Development, staging, and production should have separate assumptions, credentials, approval paths, and monitoring expectations.",
+    "CI/CD and environment variables should be treated as input."
+  ]
+};

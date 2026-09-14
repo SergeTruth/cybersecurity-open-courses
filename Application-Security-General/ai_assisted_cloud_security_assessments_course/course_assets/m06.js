@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Configuration, Exposure, and Data Protection Review",
+  "graphicAlt": "Observed cloud configuration is evaluated with current evidence and data sensitivity; findings distinguish confirmed conditions from issues needing validation.",
+  "narration": "Configuration review looks for settings that expose data, weaken controls, or make incidents harder to detect. Common concerns include public storage, permissive firewall rules, open management ports, insecure defaults, weak encryption settings, missing logging, exposed secrets, misconfigured CORS, database exposure, and backup exposure. Each concern should be validated against current evidence.\n\nAI can help group findings by risk theme. For example, it can cluster storage exposure issues, network exposure issues, logging gaps, identity-related misconfigurations, and encryption concerns. Grouping helps leaders see patterns instead of isolated alerts. It also helps technical teams plan remediation across related resources.\n\nConfirmed exposure should be separated from theoretical concern. A storage container configured for broad access is different from a finding that needs owner confirmation. A firewall rule that allows public management access is different from a rule attached to an unused resource. The report should label confidence and evidence so remediation teams can act appropriately.\n\nData protection review should connect configuration to data sensitivity. A misconfigured test bucket with synthetic data is not the same risk as exposed production records. Encryption, backup access, logging, retention, and third-party sharing all depend on what data is stored or processed. AI can help summarize data-handling evidence, but data owners must validate sensitivity and business impact.\n\nThe goal is not to produce the longest list of findings. The goal is to identify conditions that materially affect risk and can be improved. Good assessment language explains what was observed, why it matters, what evidence supports it, what uncertainty remains, and what remediation path is recommended.",
+  "narrationPoints": [
+    "Configuration review looks for settings that expose data, weaken controls, or make incidents harder to detect.",
+    "AI can help group findings by risk theme.",
+    "Confirmed exposure should be separated from theoretical concern.",
+    "Data protection review should connect configuration to data sensitivity.",
+    "The goal is not to produce the longest list of findings."
+  ]
+};

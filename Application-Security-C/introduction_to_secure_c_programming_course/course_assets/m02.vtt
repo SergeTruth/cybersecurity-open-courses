@@ -1,0 +1,163 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.602
+Memory safety starts with one practical
+question:
+
+2
+00:00:05.682 --> 00:00:13.870
+what object does this pointer refer to,
+and how long does that object remain valid.
+
+3
+00:00:13.950 --> 00:00:17.391
+In C, a pointer carries an address,
+
+4
+00:00:17.471 --> 00:00:23.523
+but it does not carry a complete runtime
+ownership contract.
+
+5
+00:00:23.603 --> 00:00:31.079
+The code and its surrounding conventions
+must make that contract visible.
+
+6
+00:00:31.159 --> 00:00:36.261
+Stack objects, heap allocations, static
+storage,
+
+7
+00:00:36.341 --> 00:00:42.631
+and borrowed pointers have different
+lifetime expectations.
+
+8
+00:00:42.711 --> 00:00:49.356
+Stack objects usually stop being valid
+when the function returns.
+
+9
+00:00:49.436 --> 00:00:54.182
+Heap allocations remain valid until
+released.
+
+10
+00:00:54.262 --> 00:00:59.009
+Static storage lasts for the program
+lifetime.
+
+11
+00:00:59.089 --> 00:01:07.276
+Borrowed pointers may be valid only while
+another owner preserves the underlying
+
+12
+00:01:07.356 --> 00:01:08.187
+object.
+
+13
+00:01:08.267 --> 00:01:16.336
+Every dynamically allocated object should
+have a clear owner and a clear cleanup
+
+14
+00:01:16.416 --> 00:01:17.009
+path.
+
+15
+00:01:17.089 --> 00:01:23.853
+Ownership can belong to a function, a
+structure, a module, a caller,
+
+16
+00:01:23.933 --> 00:01:29.510
+or a transfer operation, but it should not
+be ambiguous.
+
+17
+00:01:29.590 --> 00:01:35.879
+Ambiguity is where leaks, double cleanup,
+dangling pointers,
+
+18
+00:01:35.959 --> 00:01:39.163
+and invalid access often begin.
+
+19
+00:01:39.243 --> 00:01:43.990
+Initialize variables and pointers before
+use.
+
+20
+00:01:44.070 --> 00:01:52.020
+Uninitialized data can carry whatever
+value happened to be present in storage.
+
+21
+00:01:52.100 --> 00:02:00.407
+That creates unpredictable behavior and
+makes review harder because the code does
+
+22
+00:02:00.487 --> 00:02:04.047
+not show a reliable starting state.
+
+23
+00:02:04.127 --> 00:02:11.246
+Clear initialization also makes cleanup
+paths easier to write safely.
+
+24
+00:02:11.326 --> 00:02:13.581
+After memory is freed,
+
+25
+00:02:13.661 --> 00:02:20.425
+avoid continuing to use aliases that still
+point to the old storage.
+
+26
+00:02:20.505 --> 00:02:27.506
+Setting one pointer to null does not
+update every copy of that pointer.
+
+27
+00:02:27.586 --> 00:02:35.180
+Code review should look for stored
+aliases, callbacks, global references,
+
+28
+00:02:35.260 --> 00:02:42.380
+and structures that may retain a pointer
+beyond the object's lifetime.
+
+29
+00:02:42.460 --> 00:02:50.648
+Avoid returning pointers to stack-local
+data because the object will no longer be
+
+30
+00:02:50.728 --> 00:02:54.169
+valid after the function returns.
+
+31
+00:02:54.249 --> 00:02:59.351
+Prefer small scopes, visible ownership
+comments,
+
+32
+00:02:59.431 --> 00:03:05.602
+and cleanup patterns that make lifetime
+rules easy to follow.
+
+33
+00:03:05.682 --> 00:03:09.835
+The aim is not decorative documentation;
+
+34
+00:03:09.915 --> 00:03:18.340
+it is making memory ownership clear enough
+that the next maintainer can preserve it.

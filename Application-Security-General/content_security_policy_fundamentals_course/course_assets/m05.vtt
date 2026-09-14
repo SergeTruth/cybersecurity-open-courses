@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.751
+Script control is one of the most
+important parts of CSP because script execution is
+
+2
+00:00:07.831 --> 00:00:12.493
+often the high-impact outcome of browser
+injection.
+
+3
+00:00:12.573 --> 00:00:19.928
+Inline scripts are risky because injected
+markup may try to create script execution
+
+4
+00:00:20.008 --> 00:00:21.872
+directly in the page.
+
+5
+00:00:21.952 --> 00:00:29.411
+A policy that allows unsafe-inline weakens
+CSP protection because it permits inline
+
+6
+00:00:29.491 --> 00:00:32.288
+script execution more broadly.
+
+7
+00:00:32.368 --> 00:00:39.308
+A mature policy usually works toward
+reducing or eliminating dangerous script
+
+8
+00:00:39.388 --> 00:00:45.189
+allowances rather than adding them
+permanently for convenience.
+
+9
+00:00:45.269 --> 00:00:51.692
+Nonces and hashes provide ways to allow
+specific trusted inline scripts.
+
+10
+00:00:51.772 --> 00:00:57.158
+A nonce is a unique value generated for a
+particular response.
+
+11
+00:00:57.238 --> 00:01:04.179
+The server places that value in the policy
+and on the trusted script elements for
+
+12
+00:01:04.259 --> 00:01:05.606
+that response.
+
+13
+00:01:05.686 --> 00:01:12.523
+A hash allows specific inline script or
+style content that matches an expected
+
+14
+00:01:12.603 --> 00:01:14.467
+cryptographic hash.
+
+15
+00:01:14.547 --> 00:01:19.002
+Both approaches require careful
+implementation.
+
+16
+00:01:19.082 --> 00:01:23.743
+Nonces must be unpredictable and fresh per
+response.
+
+17
+00:01:23.823 --> 00:01:30.453
+Hashes must match the exact trusted
+content and be updated when that content
+
+18
+00:01:30.533 --> 00:01:31.362
+changes.
+
+19
+00:01:31.442 --> 00:01:37.657
+unsafe-eval and broad script source
+allowlists also deserve caution.
+
+20
+00:01:37.737 --> 00:01:44.263
+Some frameworks or build settings may rely
+on evaluation-like behavior in
+
+21
+00:01:44.343 --> 00:01:47.451
+development but not in production.
+
+22
+00:01:47.531 --> 00:01:50.431
+strict-dynamic, at a high level,
+
+23
+00:01:50.511 --> 00:01:58.177
+can let trusted nonce-bearing scripts load
+additional scripts in supported browsers,
+
+24
+00:01:58.257 --> 00:02:02.608
+changing how source allowlists are
+interpreted.
+
+25
+00:02:02.688 --> 00:02:07.556
+Teams should use well-documented framework
+guidance,
+
+26
+00:02:07.636 --> 00:02:11.780
+reduce dangerous script allowances over
+time,
+
+27
+00:02:11.860 --> 00:02:19.008
+and treat script policy as an architecture
+decision rather than a header pasted in
+
+28
+00:02:19.088 --> 00:02:20.020
+at the end.

@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Lockfiles, Reproducible Installs, and npm ci",
+  "graphicAlt": "npm ci reproduces the reviewed lockfile and stops on manifest mismatch, but reproducible installation does not establish dependency safety.",
+  "narration": "Lockfiles help turn dependency resolution into something the team can review. package.json often allows ranges, while package-lock.json records the tree that npm actually selected. That resolved tree includes transitive packages the team may never name directly. When a pull request changes the lockfile, reviewers can inspect which packages moved, whether a major version appeared indirectly, and whether the update matches the stated reason for the change.\n\nnpm install is convenient during development because it can update the lockfile when dependencies change. npm ci is designed for clean, repeatable automation. It removes the existing node_modules directory, installs from the lockfile, and fails when package.json and package-lock.json are out of sync. That makes npm ci a better default for CI/CD because the build should prove what is already recorded, not silently resolve a new tree during the pipeline.\n\nReproducible installs are not the same as safe installs. A lockfile can reproduce a vulnerable dependency, an untrusted package, or an unsafe script just as reliably as a good one. The security value comes from combining lockfiles with review, audit triage, controlled updates, clean CI environments, and release discipline. Think of the lockfile as evidence and control over drift, not as a guarantee that every dependency is acceptable.",
+  "narrationPoints": [
+    "Lockfiles help turn dependency resolution into something the team can review. package.json often allows ranges, while package-lock.json records the tree that npm actually selected.",
+    "npm install is convenient during development because it can update the lockfile when dependencies change. npm ci is designed for clean, repeatable automation.",
+    "Reproducible installs are not the same as safe installs."
+  ]
+};

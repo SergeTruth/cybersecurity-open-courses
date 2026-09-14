@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Output Handling, JSON, Files, and Logs",
+  "graphicAlt": "CLI output is parsed and verified before its expected value drives the next operation, while missing or ambiguous results are handled separately and storage is controlled.",
+  "narration": "Google Cloud CLI output is often consumed by later automation. A script may query JSON, extract a resource name, inspect IAM policy data, select a target, compare configuration, write a file, or decide whether a later step should run. That output can include project details, endpoints, service account names, storage locations, log results, IAM bindings, policy data, and sensitive context.\n\nStructured parsing is safer than fragile text assumptions. Scripts should parse expected JSON fields deliberately and handle missing fields, empty responses, multiple matches, paginated data, and unexpected values. A missing result is not automatically success, and multiple results may mean the target was not specific enough. Later automation should make decisions from fields that were intentionally selected and verified.\n\nOutput files should go to approved destinations with appropriate permissions and retention expectations. Generated JSON, IAM policy data, service account listings, deployment details, inventory data, and support bundles can reveal sensitive operational context even when they do not contain raw tokens. A script should avoid writing sensitive output into shared workspaces, broad CI/CD artifacts, or long-lived logs without a clear reason.\n\nLogs should provide minimal useful evidence. Good logs show high-level identity, project, region or zone, action, target category, time, and result. They avoid tokens, service account key material, secrets, sensitive IAM details, private data, and excessive raw responses. Secure output handling lets automation remain useful without turning logs and files into another exposure path.",
+  "narrationPoints": [
+    "Google Cloud CLI output is often consumed by later automation.",
+    "Structured parsing is safer than fragile text assumptions.",
+    "Output files should go to approved destinations with appropriate permissions and retention expectations.",
+    "Logs should provide minimal useful evidence."
+  ]
+};

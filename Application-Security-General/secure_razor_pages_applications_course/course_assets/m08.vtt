@@ -1,0 +1,171 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.908
+File uploads and user-generated content
+require explicit design in Razor Pages
+
+2
+00:00:06.988 --> 00:00:08.213
+applications.
+
+3
+00:00:08.293 --> 00:00:11.968
+A file field on a form is not just another
+input.
+
+4
+00:00:12.048 --> 00:00:17.984
+It introduces size, storage, naming,
+content review, download behavior,
+
+5
+00:00:18.064 --> 00:00:23.341
+retention, access control, and operational
+capacity questions.
+
+6
+00:00:23.421 --> 00:00:29.452
+Those questions should be answered before
+the feature reaches production.
+
+7
+00:00:29.532 --> 00:00:33.867
+Review upload size limits, allowed
+business purpose,
+
+8
+00:00:33.947 --> 00:00:39.695
+accepted file categories, storage
+location, generated storage names,
+
+9
+00:00:39.775 --> 00:00:45.617
+scanning or review workflow, download
+authorization, retention rules,
+
+10
+00:00:45.697 --> 00:00:47.488
+and cleanup behavior.
+
+11
+00:00:47.568 --> 00:00:54.164
+The page model should make the intended
+flow visible rather than treating uploaded
+
+12
+00:00:54.244 --> 00:00:57.165
+content as an ordinary string value.
+
+13
+00:00:57.245 --> 00:01:03.841
+Uploaded files should not be stored where
+they can be executed as application code.
+
+14
+00:01:03.921 --> 00:01:08.821
+Storage should be separated from
+application runtime paths,
+
+15
+00:01:08.901 --> 00:01:15.215
+and download behavior should go through
+access checks when files are private or
+
+16
+00:01:15.295 --> 00:01:16.614
+user-specific.
+
+17
+00:01:16.694 --> 00:01:23.384
+A safe design avoids giving uploaded
+content more capability than the business need
+
+18
+00:01:23.464 --> 00:01:24.313
+requires.
+
+19
+00:01:24.393 --> 00:01:28.633
+Do not rely on file names, content types,
+extensions,
+
+20
+00:01:28.713 --> 00:01:32.105
+or user-supplied metadata by themselves.
+
+21
+00:01:32.185 --> 00:01:36.991
+Those values can be useful hints for
+usability and workflow,
+
+22
+00:01:37.071 --> 00:01:43.008
+but the application should make decisions
+using a reviewed combination of
+
+23
+00:01:43.088 --> 00:01:48.647
+server-side naming, validation, storage
+policy, content handling,
+
+24
+00:01:48.727 --> 00:01:50.329
+and business rules.
+
+25
+00:01:50.409 --> 00:01:56.063
+Static file configuration should expose
+only intended public assets.
+
+26
+00:01:56.143 --> 00:02:02.174
+It is easy to focus on upload pages and
+forget that static file middleware can
+
+27
+00:02:02.254 --> 00:02:05.835
+publish files from configured directories.
+
+28
+00:02:05.915 --> 00:02:10.626
+Review which folders are public, which
+files are excluded,
+
+29
+00:02:10.706 --> 00:02:14.287
+whether directory behavior is appropriate,
+
+30
+00:02:14.367 --> 00:02:19.361
+and how build or deployment output affects
+published content.
+
+31
+00:02:19.441 --> 00:02:25.566
+Large uploads can affect memory, disk,
+network, queues, scanning services,
+
+32
+00:02:25.646 --> 00:02:27.437
+and backend capacity.
+
+33
+00:02:27.517 --> 00:02:31.569
+Limits and failure behavior should be
+deliberate.
+
+34
+00:02:31.649 --> 00:02:36.643
+A secure and reliable upload flow tells
+users what is accepted,
+
+35
+00:02:36.723 --> 00:02:42.188
+rejects unsupported content safely,
+records operational signals,
+
+36
+00:02:42.268 --> 00:02:46.980
+and gives administrators a way to manage
+storage over time.

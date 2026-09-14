@@ -1,0 +1,131 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.425
+Every Google Cloud CLI command runs with
+an identity.
+
+2
+00:00:05.505 --> 00:00:10.649
+That identity may be a signed-in user,
+service account,
+
+3
+00:00:10.729 --> 00:00:17.624
+metadata-based identity, workload
+identity, federated CI/CD identity,
+
+4
+00:00:17.704 --> 00:00:20.877
+or impersonated service account.
+
+5
+00:00:20.957 --> 00:00:27.852
+The identity determines what the script
+can read, create, update, deploy,
+
+6
+00:00:27.932 --> 00:00:29.355
+or administer.
+
+7
+00:00:29.435 --> 00:00:35.126
+IAM design is therefore central to Google
+Cloud CLI security.
+
+8
+00:00:35.206 --> 00:00:38.380
+Permissions should match the job.
+
+9
+00:00:38.460 --> 00:00:43.713
+A reporting script should not use a
+deployment identity.
+
+10
+00:00:43.793 --> 00:00:51.016
+A validation step should not need the same
+permissions as a production change.
+
+11
+00:00:51.096 --> 00:00:58.976
+A rollback workflow should not
+automatically share broad owner-level permissions.
+
+12
+00:00:59.056 --> 00:01:06.170
+Least privilege should consider
+organization, folder, project, resource,
+
+13
+00:01:06.250 --> 00:01:12.379
+role, action, condition where available,
+environment, and time.
+
+14
+00:01:12.459 --> 00:01:20.339
+Service account impersonation can reduce
+service account key-file exposure when it
+
+15
+00:01:20.419 --> 00:01:22.607
+is governed carefully.
+
+16
+00:01:22.687 --> 00:01:28.926
+It should be intentional, auditable, and
+scoped to a clear purpose.
+
+17
+00:01:29.006 --> 00:01:35.572
+Teams should understand who or what can
+impersonate a service account,
+
+18
+00:01:35.652 --> 00:01:43.094
+which scripts use it, what that service
+account can do, and how usage is reviewed.
+
+19
+00:01:43.174 --> 00:01:48.427
+Impersonation is not a shortcut around
+least privilege;
+
+20
+00:01:48.507 --> 00:01:55.074
+it is a way to manage runtime access
+without spreading long-lived keys.
+
+21
+00:01:55.154 --> 00:02:00.407
+Avoid broad shared Owner or Editor access
+in automation.
+
+22
+00:02:00.487 --> 00:02:04.646
+Broad roles may make early scripting
+easier,
+
+23
+00:02:04.726 --> 00:02:09.870
+but they make mistakes and incidents
+harder to contain.
+
+24
+00:02:09.950 --> 00:02:16.407
+Each automation identity should have an
+owner, a documented purpose,
+
+25
+00:02:16.487 --> 00:02:20.646
+a known usage location, and a review
+process.
+
+26
+00:02:20.726 --> 00:02:24.337
+Stale roles, unused service accounts,
+
+27
+00:02:24.417 --> 00:02:29.780
+and overbroad permissions should be
+cleaned up over time.

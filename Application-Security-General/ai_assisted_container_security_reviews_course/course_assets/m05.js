@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Vulnerability and Dependency Triage",
+  "graphicAlt": "Scanner findings are triaged using reachability, exposure, available fixes, and workload context, then addressed through update, rebuild, and validation.",
+  "narration": "Container scanner output can be noisy. A single image may include operating system packages, language dependencies, application libraries, and inherited base image components. Scanner severity is useful, but severity alone does not determine priority. The reviewer should consider exploitability, reachability, package ownership, workload exposure, available fixes, compensating controls, and whether the finding applies to the deployed image.\n\nReachable components matter. A vulnerable package that is installed but unused may carry different risk from a vulnerable library directly exposed through an internet-facing feature. False positives can occur because scanners infer package versions, rely on imperfect metadata, or lack application context. Triage turns raw findings into prioritized work the development or platform team can act on.\n\nStale images are a common source of repeat findings. If an image has not been rebuilt against current base images or dependency updates, the vulnerability count may grow even when application code has not changed. Patching may require updating base images, rebuilding, validating compatibility, and promoting the new image through the release process. The remediation path should reflect how the organization actually ships containers.\n\nAI can help summarize and prioritize findings for analyst review. It can group vulnerabilities by base image, package manager, application dependency, or likely remediation path. It can draft questions for package owners or turn scanner output into a clearer triage table. Those summaries are useful only after the reviewer checks the evidence, confirms context, and avoids treating model output as a final risk decision.",
+  "narrationPoints": [
+    "Container scanner output can be noisy.",
+    "Reachable components matter.",
+    "Stale images are a common source of repeat findings.",
+    "AI can help summarize and prioritize findings for analyst review."
+  ]
+};

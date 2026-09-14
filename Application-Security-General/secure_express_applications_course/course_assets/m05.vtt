@@ -1,0 +1,115 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.105
+Responses should include only the data
+needed by the caller and use case.
+
+2
+00:00:04.185 --> 00:00:06.963
+Excessive data exposure often comes from
+convenience:
+
+3
+00:00:07.043 --> 00:00:10.825
+a database record is already available, so
+the handler returns it directly.
+
+4
+00:00:10.905 --> 00:00:13.742
+That shortcut can expose password hashes,
+reset tokens,
+
+5
+00:00:13.822 --> 00:00:17.486
+internal flags, administrative notes,
+billing metadata, secret names,
+
+6
+00:00:17.566 --> 00:00:19.635
+or fields intended only for another role.
+
+7
+00:00:19.715 --> 00:00:24.029
+Response models, serializers, or explicit
+object construction make output shaping a
+
+8
+00:00:24.109 --> 00:00:25.705
+deliberate security boundary.
+
+9
+00:00:25.785 --> 00:00:29.803
+Template rendering and HTML responses
+require context-aware output handling.
+
+10
+00:00:29.883 --> 00:00:33.666
+Data that is safe as plain text may not be
+safe inside an HTML attribute, a URL,
+
+11
+00:00:33.746 --> 00:00:35.932
+a script context, or rendered rich
+content.
+
+12
+00:00:36.012 --> 00:00:39.795
+Express applications may serve APIs,
+server-rendered pages, admin tools,
+
+13
+00:00:39.875 --> 00:00:42.002
+and email previews from the same codebase,
+
+14
+00:00:42.082 --> 00:00:44.387
+so output rules should match the
+destination.
+
+15
+00:00:44.467 --> 00:00:48.604
+Avoid assuming that a value is safe simply
+because it has already been validated for
+
+16
+00:00:48.684 --> 00:00:50.044
+storage or business logic.
+
+17
+00:00:50.124 --> 00:00:54.379
+Errors should help clients recover and
+help engineers investigate without exposing
+
+18
+00:00:54.459 --> 00:00:55.050
+internals.
+
+19
+00:00:55.130 --> 00:00:59.089
+Production responses should avoid stack
+traces, internal paths, SQL details,
+
+20
+00:00:59.169 --> 00:01:02.952
+tokens, secret names, dependency
+internals, and implementation details.
+
+21
+00:01:03.032 --> 00:01:07.228
+Internal logs can preserve diagnostic
+context with access controls and redaction,
+
+22
+00:01:07.308 --> 00:01:10.322
+while client responses stay safe,
+consistent, and limited.
+
+23
+00:01:10.402 --> 00:01:12.057
+A mature error path is not silent;
+
+24
+00:01:12.137 --> 00:01:15.860
+it separates what operators need to know
+from what callers should receive.

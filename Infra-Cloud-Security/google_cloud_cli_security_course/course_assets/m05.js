@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Safe Bash Patterns for Google Cloud CLI Automation",
+  "graphicAlt": "Predictable Google Cloud CLI invocation separates command arguments, validates values, controls paths and tool versions, and checks results with safe error handling.",
+  "narration": "A Bash script should invoke the Google Cloud CLI in a predictable and reviewable way. The safer pattern is a fixed command structure with clearly separated options and operands. Avoid building one large command string from variable data and asking the shell to interpret it again. That style makes quoting harder, hides behavior from reviewers, and can behave unexpectedly when input changes.\n\nQuote values that should remain literal and use arrays where option lists or operands need to be assembled. Validate command groups, operation names, project IDs, account names, resource names, regions, zones, file paths, output paths, filters, and timeout values before use. Validation should favor expected formats, approved scopes, and known target values, especially when production resources may be affected.\n\nWorking directory control matters when scripts read templates, artifacts, policy files, deployment manifests, or JSON configuration. A relative path should resolve from the intended directory, not wherever the script happened to start. CLI version expectations also matter because output formats, supported flags, and service behavior can vary across installed versions and components.\n\nSafe stopping is part of secure automation. Scripts should check exit status, distinguish expected empty results from failures, and stop before later steps trust incomplete output. Clear errors help operators recover, but those errors should not expose secrets, raw tokens, service account key material, sensitive IAM data, or excessive response bodies. A good wrapper is strict, understandable, and easy to audit.",
+  "narrationPoints": [
+    "A Bash script should invoke the Google Cloud CLI in a predictable and reviewable way.",
+    "Quote values that should remain literal and use arrays where option lists or operands need to be assembled.",
+    "Working directory control matters when scripts read templates, artifacts, policy files, deployment manifests, or JSON configuration.",
+    "Safe stopping is part of secure automation."
+  ]
+};

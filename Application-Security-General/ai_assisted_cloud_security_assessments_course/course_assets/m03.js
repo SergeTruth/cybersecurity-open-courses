@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Gathering Cloud Evidence for AI Review",
+  "graphicAlt": "Inventory, identity exports, and configuration evidence are minimized and labeled with source and date; missing facts become open questions instead of invented findings.",
+  "narration": "AI-assisted assessment depends on evidence quality. Useful source material can include asset inventories, IAM exports, configuration snapshots, cloud posture findings, logging summaries, architecture diagrams, infrastructure-as-code, tagging data, security group and firewall summaries, storage permissions, workload lists, and vulnerability scan summaries from authorized tools. Each source contributes a different view of the environment.\n\nAsset and IAM exports help answer what exists and who can reach it. Configuration snapshots reveal how services are actually set up. Infrastructure-as-code can show intended state and deployment patterns. Architecture diagrams explain design intent, while logs and telemetry summaries show observed activity. Posture findings can highlight candidate risks, but they still need validation and context.\n\nProvenance matters because a cloud assessment should be reviewable. If a report says a storage location is public, a reviewer should be able to trace that claim to a configuration export, posture finding, command output, ticket, or owner confirmation. Without provenance, findings become harder to trust and harder to remediate.\n\nEvidence should be prepared for AI use. Remove secrets where possible, minimize unnecessary sensitive data, label the source and date of each file, and keep context about account, region, service, and owner. If the evidence is partial, say so. AI performs better when it knows the difference between current production exports, example snippets, old diagrams, and working notes.\n\nThe model should be instructed not to invent missing facts. Missing owners, unclear identities, unknown data sensitivity, or incomplete logging evidence should become open questions. This keeps the assessment honest and gives the team a clear follow-up path.",
+  "narrationPoints": [
+    "AI-assisted assessment depends on evidence quality.",
+    "Asset and IAM exports help answer what exists and who can reach it.",
+    "Provenance matters because a cloud assessment should be reviewable.",
+    "Evidence should be prepared for AI use.",
+    "The model should be instructed not to invent missing facts."
+  ]
+};

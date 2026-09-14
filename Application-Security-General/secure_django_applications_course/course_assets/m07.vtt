@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.385
+Django's ORM provides safer patterns for
+common database operations by separating
+
+2
+00:00:07.465 --> 00:00:11.248
+application values from query
+construction.
+
+3
+00:00:11.328 --> 00:00:17.437
+That is a strong starting point, but it
+does not remove every database risk.
+
+4
+00:00:17.517 --> 00:00:23.821
+Raw SQL, dynamic filters, user-controlled
+ordering, complex annotations,
+
+5
+00:00:23.901 --> 00:00:27.780
+and custom query construction deserve
+review.
+
+6
+00:00:27.860 --> 00:00:33.582
+Parameterized queries and safe ORM usage
+help prevent SQL injection,
+
+7
+00:00:33.662 --> 00:00:40.159
+while clear authorization filters help
+ensure a query only returns records the
+
+8
+00:00:40.239 --> 00:00:42.276
+caller is allowed to see.
+
+9
+00:00:42.356 --> 00:00:47.496
+Database security also includes
+migrations, schema changes,
+
+10
+00:00:47.576 --> 00:00:53.782
+transaction behavior, error handling, and
+database account permissions.
+
+11
+00:00:53.862 --> 00:00:59.293
+A migration can accidentally expose or
+transform sensitive data.
+
+12
+00:00:59.373 --> 00:01:04.513
+A failed transaction can leave a workflow
+in a confusing state.
+
+13
+00:01:04.593 --> 00:01:11.478
+A database user with excessive privileges
+can increase the impact of an application
+
+14
+00:01:11.558 --> 00:01:12.043
+flaw.
+
+15
+00:01:12.123 --> 00:01:18.524
+The web application's data access should
+match the least capability it needs,
+
+16
+00:01:18.604 --> 00:01:25.198
+and sensitive operations should have
+predictable rollback and error behavior.
+
+17
+00:01:25.278 --> 00:01:32.164
+Mass assignment and over-posting concepts
+are important in model-backed forms and
+
+18
+00:01:32.244 --> 00:01:33.407
+serializers.
+
+19
+00:01:33.487 --> 00:01:37.463
+If user-submitted fields are bound too
+broadly,
+
+20
+00:01:37.543 --> 00:01:43.653
+a caller may influence fields that should
+be controlled only by the server,
+
+21
+00:01:43.733 --> 00:01:48.776
+such as ownership, role, status, pricing,
+or approval state.
+
+22
+00:01:48.856 --> 00:01:55.547
+Defensive code explicitly chooses which
+fields can be set from a request and which
+
+23
+00:01:55.627 --> 00:02:02.416
+fields are derived from authenticated
+context, workflow, or server-side policy.
+
+24
+00:02:02.496 --> 00:02:06.666
+Convenience should not decide the trust
+boundary.
+
+25
+00:02:06.746 --> 00:02:12.856
+File handling and serialization create
+additional paths into the system.
+
+26
+00:02:12.936 --> 00:02:19.045
+Uploads require size limits, safe names,
+constrained storage locations,
+
+27
+00:02:19.125 --> 00:02:25.041
+content handling rules, and authorization
+around access and deletion.
+
+28
+00:02:25.121 --> 00:02:31.812
+Media files and static files serve
+different purposes and should not be confused.
+
+29
+00:02:31.892 --> 00:02:38.487
+JSON, YAML, XML, and CSV processing should
+use safe parsers, reasonable limits,
+
+30
+00:02:38.567 --> 00:02:40.118
+and clear schemas.
+
+31
+00:02:40.198 --> 00:02:46.793
+Unsafe deserialization at a high level is
+the risk of turning untrusted data into
+
+32
+00:02:46.873 --> 00:02:51.140
+behavior or objects the application did
+not intend.

@@ -1,0 +1,152 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.312
+FastAPI makes request modeling convenient,
+
+2
+00:00:05.392 --> 00:00:10.203
+but request data still deserves
+skepticism.
+
+3
+00:00:10.283 --> 00:00:18.387
+Inputs may come from path parameters,
+query parameters, headers, cookies,
+
+4
+00:00:18.467 --> 00:00:22.519
+JSON bodies, forms, and file uploads.
+
+5
+00:00:22.599 --> 00:00:30.450
+They may be sent by browsers, mobile
+applications, command line clients,
+
+6
+00:00:30.530 --> 00:00:37.747
+partner systems, automation, or services
+inside the environment.
+
+7
+00:00:37.827 --> 00:00:45.931
+The defensive default is to treat request
+data as untrusted until it has been
+
+8
+00:00:46.011 --> 00:00:49.937
+validated for the specific use case.
+
+9
+00:00:50.017 --> 00:00:58.754
+Type validation is valuable because it
+catches malformed data early and makes API
+
+10
+00:00:58.834 --> 00:01:00.986
+contracts clearer.
+
+11
+00:01:01.066 --> 00:01:03.852
+It is not enough by itself.
+
+12
+00:01:03.932 --> 00:01:09.883
+Correctly typed data can still violate
+business rules,
+
+13
+00:01:09.963 --> 00:01:17.561
+authorization rules, ownership boundaries,
+limits, workflow state,
+
+14
+00:01:17.641 --> 00:01:19.920
+or tenant isolation.
+
+15
+00:01:20.000 --> 00:01:25.571
+A valid integer may identify someone
+else's record.
+
+16
+00:01:25.651 --> 00:01:30.210
+A valid string may be too broad for a
+search.
+
+17
+00:01:30.290 --> 00:01:39.153
+A valid file may still exceed size,
+content, storage, or processing expectations.
+
+18
+00:01:39.233 --> 00:01:47.337
+Request models and schema validation
+should describe what the API accepts,
+
+19
+00:01:47.417 --> 00:01:56.407
+including required fields, optional
+fields, formats, ranges, and allowed values.
+
+20
+00:01:56.487 --> 00:02:04.971
+Unexpected fields should be handled
+deliberately so clients cannot influence
+
+21
+00:02:05.051 --> 00:02:09.863
+server-controlled attributes by accident.
+
+22
+00:02:09.943 --> 00:02:16.401
+Size limits matter because request bodies,
+uploaded files,
+
+23
+00:02:16.481 --> 00:02:23.192
+and nested objects can consume memory,
+storage, parsing time,
+
+24
+00:02:23.272 --> 00:02:28.463
+and downstream capacity if they are not
+bounded.
+
+25
+00:02:28.543 --> 00:02:33.355
+Safe error responses are part of
+validation.
+
+26
+00:02:33.435 --> 00:02:39.639
+Clients need enough information to correct
+bad requests,
+
+27
+00:02:39.719 --> 00:02:47.317
+but they do not need raw stack traces,
+internal model details, secrets,
+
+28
+00:02:47.397 --> 00:02:51.575
+query fragments, or service topology.
+
+29
+00:02:51.655 --> 00:02:59.000
+Clear validation boundaries make path
+operations easier to review:
+
+30
+00:02:59.080 --> 00:03:05.157
+parse the request, validate shape and
+business meaning,
+
+31
+00:03:05.237 --> 00:03:12.961
+authenticate the caller, authorize the
+action, perform the operation,
+
+32
+00:03:13.041 --> 00:03:17.220
+and return only the intended response.

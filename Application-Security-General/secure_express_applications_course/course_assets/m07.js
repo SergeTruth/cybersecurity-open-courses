@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Security Headers, TLS, Proxies, and Production Configuration",
+  "graphicAlt": "The deployed Express boundary aligns HTTPS termination, trusted proxy behavior, reviewed headers, removed development exposure, and scoped operational endpoints.",
+  "narration": "Production security is often about removing development assumptions. Express applications may expose verbose errors, debug routes, development middleware, permissive settings, internal documentation, health details, or metrics that are useful locally but inappropriate for public production environments. Environment-specific configuration should be explicit, reviewed, and documented. A setting should not be safe by accident only because the current deployment happens to hide it.\n\nSecurity headers can reduce browser-side risks when configured appropriately. Helmet-style middleware can help set common headers, but headers still need application-specific review. Content Security Policy, framing controls, content type behavior, referrer behavior, and transport security settings all interact with how the application renders pages, serves static assets, uses third-party resources, and handles redirects. Headers are a useful layer, not proof that the application is secure.\n\nExpress applications often run behind reverse proxies, load balancers, TLS termination points, or platform routing layers. Trusted proxy settings should match the real infrastructure because they influence how the application interprets client IPs, protocols, and secure request state. HTTPS enforcement, cookie Secure behavior, redirect generation, health endpoints, metrics endpoints, and documentation routes should all be reviewed in the deployed architecture, not only on localhost.",
+  "narrationPoints": [
+    "Production security is often about removing development assumptions.",
+    "Security headers can reduce browser-side risks when configured appropriately.",
+    "Express applications often run behind reverse proxies, load balancers, TLS termination points, or platform routing layers."
+  ]
+};

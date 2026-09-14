@@ -1,0 +1,148 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.556
+CORS is a browser security mechanism that
+controls which browser-based origins are
+
+2
+00:00:07.636 --> 00:00:12.704
+allowed to make cross-origin requests
+under browser rules.
+
+3
+00:00:12.784 --> 00:00:17.952
+It is not general API authentication, and
+it is not a firewall.
+
+4
+00:00:18.032 --> 00:00:24.194
+A permissive CORS policy can expose
+browser clients to unnecessary risk,
+
+5
+00:00:24.274 --> 00:00:27.951
+especially when credentials are involved.
+
+6
+00:00:28.031 --> 00:00:33.397
+A durable design starts by deciding which
+clients are browsers,
+
+7
+00:00:33.477 --> 00:00:40.335
+which are machine clients, and which
+origins actually need cross-origin access.
+
+8
+00:00:40.415 --> 00:00:44.986
+Credentialed browser requests require
+special care.
+
+9
+00:00:45.066 --> 00:00:50.532
+Cookies, bearer tokens in browser storage,
+same-site behavior,
+
+10
+00:00:50.612 --> 00:00:54.985
+and CSRF concepts all influence the
+security model.
+
+11
+00:00:55.065 --> 00:00:59.139
+If browser credentials are sent
+automatically,
+
+12
+00:00:59.219 --> 00:01:06.573
+the application should consider whether
+state-changing actions need CSRF protection
+
+13
+00:01:06.653 --> 00:01:10.132
+or another clear user-intent mechanism.
+
+14
+00:01:10.212 --> 00:01:13.292
+If tokens are handled by JavaScript,
+
+15
+00:01:13.372 --> 00:01:18.341
+the team should think carefully about
+exposure, lifetime,
+
+16
+00:01:18.421 --> 00:01:21.204
+and how response data is limited.
+
+17
+00:01:21.284 --> 00:01:28.141
+Response models and response filtering are
+important FastAPI features when used
+
+18
+00:01:28.221 --> 00:01:29.613
+intentionally.
+
+19
+00:01:29.693 --> 00:01:36.053
+They can help ensure that internal fields,
+secrets, administrative flags,
+
+20
+00:01:36.133 --> 00:01:42.891
+or unrelated model data are not returned
+simply because an object contains them.
+
+21
+00:01:42.971 --> 00:01:46.449
+Data minimization is a security control.
+
+22
+00:01:46.529 --> 00:01:53.188
+The API should return what the intended
+client needs for the current operation,
+
+23
+00:01:53.268 --> 00:01:58.038
+not every field that was convenient to
+load from storage.
+
+24
+00:01:58.118 --> 00:02:03.882
+Response safety also includes redirects,
+error messages, headers,
+
+25
+00:02:03.962 --> 00:02:06.446
+and documentation exposure.
+
+26
+00:02:06.526 --> 00:02:12.887
+Redirect targets should be constrained so
+clients are not sent to untrusted
+
+27
+00:02:12.967 --> 00:02:16.346
+destinations based on unchecked input.
+
+28
+00:02:16.426 --> 00:02:21.693
+Error messages should be useful without
+revealing internals.
+
+29
+00:02:21.773 --> 00:02:27.835
+Security headers can add defense in depth
+for browser-facing services.
+
+30
+00:02:27.915 --> 00:02:33.679
+Documentation should match the expected
+audience and environment.
+
+31
+00:02:33.759 --> 00:02:40.020
+The response is part of the trust
+boundary, not just the end of the function.

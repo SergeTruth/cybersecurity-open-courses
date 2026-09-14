@@ -1,0 +1,159 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.391
+Axum extractors are one of the framework's
+strengths because they help handlers
+
+2
+00:00:08.471 --> 00:00:12.648
+receive request data in structured forms.
+
+3
+00:00:12.728 --> 00:00:20.502
+Path parameters, query strings, headers,
+JSON bodies, forms, cookies, state,
+
+4
+00:00:20.582 --> 00:00:25.340
+and other inputs can be pulled into typed
+values.
+
+5
+00:00:25.420 --> 00:00:33.078
+That structure is valuable because it
+reduces ad hoc parsing and makes handler
+
+6
+00:00:33.158 --> 00:00:37.916
+signatures communicate what the route
+expects.
+
+7
+00:00:37.996 --> 00:00:42.057
+Extraction is not the same as validation.
+
+8
+00:00:42.137 --> 00:00:48.751
+A value can parse successfully and still
+be wrong for the operation.
+
+9
+00:00:48.831 --> 00:00:54.401
+A path identifier may exist but belong to
+another tenant.
+
+10
+00:00:54.481 --> 00:01:01.211
+A JSON field may have the correct type but
+be outside an allowed range.
+
+11
+00:01:01.291 --> 00:01:05.120
+A header may be present but not trusted.
+
+12
+00:01:05.200 --> 00:01:12.859
+A request body may be valid JSON but too
+large or too expensive to process for the
+
+13
+00:01:12.939 --> 00:01:13.635
+route.
+
+14
+00:01:13.715 --> 00:01:20.213
+Defensive Axum applications validate input
+at clear boundaries.
+
+15
+00:01:20.293 --> 00:01:24.122
+They use domain types where practical,
+
+16
+00:01:24.202 --> 00:01:30.004
+so validated values are different from raw
+request values.
+
+17
+00:01:30.084 --> 00:01:34.726
+They reject unsupported values
+consistently,
+
+18
+00:01:34.806 --> 00:01:39.447
+normalize only when that behavior is
+explicit,
+
+19
+00:01:39.527 --> 00:01:46.605
+and avoid letting raw strings drift deep
+into sensitive business logic.
+
+20
+00:01:46.685 --> 00:01:54.228
+A handler should make it clear when data
+has moved from parsed input to trusted
+
+21
+00:01:54.308 --> 00:01:56.280
+application value.
+
+22
+00:01:56.360 --> 00:02:04.251
+Body limits and parsing expectations
+matter because web clients are untrusted.
+
+23
+00:02:04.331 --> 00:02:12.337
+A service should not let an arbitrary
+request force excessive memory allocation,
+
+24
+00:02:12.417 --> 00:02:16.827
+expensive parsing, or long processing
+time.
+
+25
+00:02:16.907 --> 00:02:23.173
+Reviewers should understand the configured
+body-size limits,
+
+26
+00:02:23.253 --> 00:02:30.331
+which routes accept large payloads, which
+content types are supported,
+
+27
+00:02:30.411 --> 00:02:35.285
+and how parsing failures are returned to
+clients.
+
+28
+00:02:35.365 --> 00:02:39.890
+Safe rejection behavior is part of the
+design.
+
+29
+00:02:39.970 --> 00:02:48.325
+Validation failures should stop work
+before sensitive operations, data retrieval,
+
+30
+00:02:48.405 --> 00:02:50.261
+or state mutation.
+
+31
+00:02:50.341 --> 00:02:57.768
+The response should be consistent and
+useful without revealing internals.
+
+32
+00:02:57.848 --> 00:03:06.434
+The operational logs should capture enough
+context for investigation without storing
+
+33
+00:03:06.514 --> 00:03:11.620
+secrets, raw tokens, or unnecessary
+personal data.

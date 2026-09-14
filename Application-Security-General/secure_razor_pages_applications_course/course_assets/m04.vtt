@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.627
+Razor Pages applications commonly use
+browser forms for account changes,
+
+2
+00:00:07.707 --> 00:00:15.060
+profile updates, search filters,
+approvals, edits, uploads, preferences,
+
+3
+00:00:15.140 --> 00:00:18.194
+and administrative workflows.
+
+4
+00:00:18.274 --> 00:00:21.668
+Forms are productive and familiar,
+
+5
+00:00:21.748 --> 00:00:29.101
+but a form that changes server-side state
+needs more than a signed-in browser
+
+6
+00:00:29.181 --> 00:00:30.086
+session.
+
+7
+00:00:30.166 --> 00:00:37.632
+The application needs confidence that the
+request came from the intended user
+
+8
+00:00:37.712 --> 00:00:39.070
+interaction.
+
+9
+00:00:39.150 --> 00:00:46.276
+A logged-in browser request does not
+automatically prove request intent.
+
+10
+00:00:46.356 --> 00:00:51.334
+Browsers carry cookies according to
+browser rules,
+
+11
+00:00:51.414 --> 00:00:57.070
+and those cookies may represent an
+authenticated session.
+
+12
+00:00:57.150 --> 00:01:05.182
+Antiforgery validation adds a
+request-intent check for unsafe browser requests by
+
+13
+00:01:05.262 --> 00:01:13.294
+requiring a value that the application
+expects and validates before processing the
+
+14
+00:01:13.374 --> 00:01:14.731
+state change.
+
+15
+00:01:14.811 --> 00:01:22.730
+Framework form helpers and Razor
+conventions often make antiforgery support feel
+
+16
+00:01:22.810 --> 00:01:23.715
+routine.
+
+17
+00:01:23.795 --> 00:01:30.017
+That is useful, but teams should still
+review nonstandard forms,
+
+18
+00:01:30.097 --> 00:01:37.563
+custom HTML, partial views, AJAX
+submissions, JavaScript-driven requests,
+
+19
+00:01:37.643 --> 00:01:42.620
+and handlers that sit outside the expected
+pattern.
+
+20
+00:01:42.700 --> 00:01:50.732
+The places that differ from convention are
+the places most likely to need attention.
+
+21
+00:01:50.812 --> 00:01:56.355
+GET-style requests should not modify
+server-side state.
+
+22
+00:01:56.435 --> 00:02:01.413
+A request used for navigation, display,
+filtering,
+
+23
+00:02:01.493 --> 00:02:08.620
+or lookup should not approve an item,
+change a setting, trigger a workflow,
+
+24
+00:02:08.700 --> 00:02:12.659
+delete a record, or update a user's state.
+
+25
+00:02:12.739 --> 00:02:20.658
+Keeping state changes in handlers that
+expect unsafe methods makes request intent
+
+26
+00:02:20.738 --> 00:02:25.036
+easier to reason about and easier to
+protect.
+
+27
+00:02:25.116 --> 00:02:32.469
+CSRF protection is separate from
+authentication, authorization, and CORS.
+
+28
+00:02:32.549 --> 00:02:36.169
+Authentication identifies the user.
+
+29
+00:02:36.249 --> 00:02:42.358
+Authorization decides whether the user may
+perform the action.
+
+30
+00:02:42.438 --> 00:02:48.207
+CORS controls certain browser cross-origin
+read behavior.
+
+31
+00:02:48.287 --> 00:02:53.717
+Antiforgery validation addresses a
+different concern:
+
+32
+00:02:53.797 --> 00:03:01.037
+whether an unsafe browser request reflects
+the expected user interaction.
+
+33
+00:03:01.117 --> 00:03:03.719
+Failure handling matters.
+
+34
+00:03:03.799 --> 00:03:11.605
+Token validation failures should be
+predictable, safe, and useful to operators.
+
+35
+00:03:11.685 --> 00:03:19.377
+The user-facing response should not expose
+sensitive implementation details.
+
+36
+00:03:19.457 --> 00:03:27.149
+The operational record should provide
+enough context to understand which page,
+
+37
+00:03:27.229 --> 00:03:35.148
+handler, and request category failed
+without recording secrets or sensitive form
+
+38
+00:03:35.228 --> 00:03:36.020
+values.

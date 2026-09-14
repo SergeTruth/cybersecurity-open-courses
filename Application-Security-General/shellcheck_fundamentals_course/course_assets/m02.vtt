@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.888
+ShellCheck analyzes scripts without
+running them.
+
+2
+00:00:04.968 --> 00:00:09.455
+That makes it useful early in development
+and review,
+
+3
+00:00:09.535 --> 00:00:15.619
+because it can point out risky patterns
+before the script touches files,
+
+4
+00:00:15.699 --> 00:00:18.591
+services, or production systems.
+
+5
+00:00:18.671 --> 00:00:23.856
+It examines shell syntax, variable use,
+quoting, expansion,
+
+6
+00:00:23.936 --> 00:00:29.521
+command structure, conditionals, and
+portability assumptions.
+
+7
+00:00:29.601 --> 00:00:36.382
+It also provides maintainability guidance
+where a construct may be confusing to
+
+8
+00:00:36.462 --> 00:00:37.858
+future readers.
+
+9
+00:00:37.938 --> 00:00:42.924
+Many findings are about shell behavior
+that is easy to miss.
+
+10
+00:00:43.004 --> 00:00:49.786
+ShellCheck can warn when an unquoted value
+may be split into multiple arguments,
+
+11
+00:00:49.866 --> 00:00:53.555
+when a variable looks misspelled or
+unused,
+
+12
+00:00:53.635 --> 00:00:56.826
+when a test expression is suspicious,
+
+13
+00:00:56.906 --> 00:01:00.696
+when command substitution may hide an
+error,
+
+14
+00:01:00.776 --> 00:01:05.064
+or when a feature does not match the
+declared shell.
+
+15
+00:01:05.144 --> 00:01:08.535
+These are not obscure academic details.
+
+16
+00:01:08.615 --> 00:01:15.496
+They are the kinds of issues that make
+automation behave differently from what the
+
+17
+00:01:15.576 --> 00:01:17.072
+author intended.
+
+18
+00:01:17.152 --> 00:01:19.545
+Static analysis has limits.
+
+19
+00:01:19.625 --> 00:01:25.509
+ShellCheck does not execute the workflow,
+contact the remote system,
+
+20
+00:01:25.589 --> 00:01:32.470
+inspect the production policy, or know the
+sensitivity of the data being handled.
+
+21
+00:01:32.550 --> 00:01:39.231
+It may not understand why a team
+intentionally chose one behavior over another.
+
+22
+00:01:39.311 --> 00:01:44.995
+It cannot prove that a deployment is safe,
+that a backup is complete,
+
+23
+00:01:45.075 --> 00:01:51.059
+or that an incident-response script meets
+operational requirements.
+
+24
+00:01:51.139 --> 00:01:57.721
+Runtime testing, human review, and
+operational validation are still needed.
+
+25
+00:01:57.801 --> 00:02:03.485
+The best mindset is to treat ShellCheck
+findings as review prompts.
+
+26
+00:02:03.565 --> 00:02:09.050
+Some findings are straightforward and
+should be fixed directly.
+
+27
+00:02:09.130 --> 00:02:16.210
+Others reveal assumptions that need
+documentation, a test case, or a design change.
+
+28
+00:02:16.290 --> 00:02:20.977
+A finding can also help reviewers ask
+better questions:
+
+29
+00:02:21.057 --> 00:02:27.140
+what shell will run this script, what
+happens when the variable is empty,
+
+30
+00:02:27.220 --> 00:02:30.312
+what happens when the command fails,
+
+31
+00:02:30.392 --> 00:02:34.580
+and does this code preserve argument
+boundaries?

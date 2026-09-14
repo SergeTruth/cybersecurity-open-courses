@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.284
+Authorization answers a different question
+from authentication:
+
+2
+00:00:06.364 --> 00:00:09.104
+what may this connected user do?
+
+3
+00:00:09.184 --> 00:00:14.969
+An authenticated connection proves an
+identity or client context.
+
+4
+00:00:15.049 --> 00:00:20.630
+It does not automatically prove that the
+caller may use every hub,
+
+5
+00:00:20.710 --> 00:00:25.886
+invoke every method, read every resource,
+join every group,
+
+6
+00:00:25.966 --> 00:00:29.011
+or receive every targeted message.
+
+7
+00:00:29.091 --> 00:00:35.991
+SignalR applications can use hub-level
+authorization to protect an entire hub.
+
+8
+00:00:36.071 --> 00:00:42.059
+That is useful when every method on the
+hub requires a common baseline,
+
+9
+00:00:42.139 --> 00:00:47.923
+such as an authenticated account or a
+specific application policy.
+
+10
+00:00:48.003 --> 00:00:55.208
+Method-level authorization is useful when
+sensitive actions need stronger checks
+
+11
+00:00:55.288 --> 00:01:00.160
+than ordinary notifications or user-level
+operations.
+
+12
+00:01:00.240 --> 00:01:07.242
+Policy-based authorization helps express
+requirements in maintainable terms.
+
+13
+00:01:07.322 --> 00:01:12.903
+A policy may depend on roles, claims,
+scopes, tenant membership,
+
+14
+00:01:12.983 --> 00:01:19.072
+subscription state, administrative status,
+or other business rules.
+
+15
+00:01:19.152 --> 00:01:26.256
+For resource-sensitive actions, the hub
+often needs to check trusted server-side
+
+16
+00:01:26.336 --> 00:01:29.076
+data at the time the method runs.
+
+17
+00:01:29.156 --> 00:01:33.317
+Ownership, tenant boundaries, account
+status,
+
+18
+00:01:33.397 --> 00:01:40.500
+and delegated permissions should not be
+accepted only because a client supplied an
+
+19
+00:01:40.580 --> 00:01:41.697
+identifier.
+
+20
+00:01:41.777 --> 00:01:45.633
+UI hiding is not server-side
+authorization.
+
+21
+00:01:45.713 --> 00:01:51.193
+A button may be hidden for a user who
+should not perform an action,
+
+22
+00:01:51.273 --> 00:01:55.637
+but the hub method still needs its own
+enforcement.
+
+23
+00:01:55.717 --> 00:02:01.197
+Clients can be outdated, modified,
+automated, or simply wrong.
+
+24
+00:02:01.277 --> 00:02:08.178
+The server is the place where
+authorization decisions must be made and recorded.
+
+25
+00:02:08.258 --> 00:02:12.824
+Groups are also not a complete
+authorization system.
+
+26
+00:02:12.904 --> 00:02:16.152
+They are useful for routing messages,
+
+27
+00:02:16.232 --> 00:02:23.538
+but group membership must be managed by
+trusted server-side decisions and refreshed
+
+28
+00:02:23.618 --> 00:02:25.851
+when permissions change.
+
+29
+00:02:25.931 --> 00:02:27.859
+If a user loses access,
+
+30
+00:02:27.939 --> 00:02:34.637
+active connections and group membership
+may need explicit removal, refresh,
+
+31
+00:02:34.717 --> 00:02:37.051
+or reconnection behavior.
+
+32
+00:02:37.131 --> 00:02:43.220
+Treat groups as delivery structure, not as
+the whole permission model.

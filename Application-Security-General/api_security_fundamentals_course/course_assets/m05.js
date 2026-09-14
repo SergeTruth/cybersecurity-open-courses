@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Input Validation and API Contracts",
+  "graphicAlt": "Contract checks validate types, formats, ranges, sizes, and field policy before data reaches business logic, returning a safe error for rejected input.",
+  "narration": "An API contract defines expected request and response behavior. It should describe required fields, optional fields, types, formats, ranges, enums, arrays, nested objects, and constraints. OpenAPI specifications, GraphQL schemas, protobuf definitions, and written interface documents can all serve this purpose. The contract is not just documentation for clients. It is also a guide for what the server should accept, reject, and test.\n\nValidation should happen before request data reaches business logic, queries, files, downstream services, or state-changing workflows. A request body that fits JSON syntax may still be invalid. A string may be too long. A number may exceed allowed range. An enum may be unknown or deprecated. A nested array may be too large. A field may be forbidden for the caller even though it is valid in another workflow.\n\nUnknown fields deserve a deliberate policy. Some APIs reject them to keep clients honest and prevent accidental over-posting. Others allow them for compatibility but ignore them safely. The danger is accepting unknown fields without knowing whether downstream mapping, patch logic, or persistence code might use them. If a client sends a field the API does not recognize, that should either be rejected or handled by a clearly documented compatibility rule.\n\nSafe error responses are part of validation. A client should know that a field is missing, malformed, out of range, or unsupported. It should not receive stack traces, SQL errors, internal object names, secrets, or detailed implementation paths. Strong API validation produces predictable failures: reject early, explain safely, log responsibly, and pass only trusted values into the rest of the system.",
+  "narrationPoints": [
+    "An API contract defines expected request and response behavior.",
+    "Validation should happen before request data reaches business logic, queries, files, downstream services, or state-changing workflows.",
+    "Unknown fields deserve a deliberate policy.",
+    "Safe error responses are part of validation."
+  ]
+};

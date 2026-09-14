@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "A sustainable npm security baseline chooses dependencies deliberately, reproduces lockfiles, triages findings, constrains scripts, controls package sources, and protects publishing.",
+  "narration": "npm security is software supply chain security applied to everyday JavaScript and Node.js work. The package manager gives teams fast access to reusable code, but it also brings transitive dependencies, registry behavior, install-time execution, account permissions, tokens, and release workflows into the application risk model. Secure teams do not treat package installation as a background detail. They treat it as a controlled engineering process.\n\nA practical checklist starts with dependency selection. Install packages intentionally, review package purpose and maintenance signals, and prefer smaller dependency footprints when they meet the need. Use package.json to understand declared dependencies and scripts. Use package-lock.json to review the resolved tree. Use npm ci in automation so CI proves the committed lockfile instead of silently resolving new versions during a build.\n\nThen add operational controls. Triage audit findings with context, test remediation changes, and avoid blind automated fixes. Pay attention to lifecycle scripts and minimize what secrets are available during install. Configure scopes and registries so internal packages resolve from the intended source. Protect npm accounts, use least-privilege tokens, and prefer publishing workflows that produce provenance evidence where available.\n\nFinally, make the practice sustainable. Route dependency changes through review, document exceptions, track ownership, and keep CI policies understandable. The best npm security program is not the one with the most warnings. It is the one where developers can explain what changed, why it changed, how it was verified, and what risk remains before the code reaches users.",
+  "narrationPoints": [
+    "npm security is software supply chain security applied to everyday JavaScript and Node.js work.",
+    "A practical checklist starts with dependency selection.",
+    "Then add operational controls.",
+    "Finally, make the practice sustainable."
+  ]
+};

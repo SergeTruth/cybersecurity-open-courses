@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Variables, Conditions, and Exit Status",
+  "graphicAlt": "Explicit preconditions and result checks distinguish continuation from failure handling, while pipeline status receives separate review.",
+  "narration": "Shell scripts often make decisions based on variables, test expressions, command substitutions, pipelines, and exit status. Small mistakes in those areas can cause a script to skip work, continue after failure, report success incorrectly, or take a branch that the author did not expect. ShellCheck can help identify suspicious variable use, confusing tests, unreachable logic, and places where command results may not be handled as intended.\n\nVariable findings are especially useful in maintenance work. A misspelled variable name may expand to an empty value. An unused assignment may indicate dead code or a forgotten step. A variable supplied by the environment may need an explicit presence check. ShellCheck cannot decide what value is correct, but it can draw attention to places where the script depends on assumptions that are easy to overlook.\n\nConditions and exit status deserve deliberate design. A command that fails inside a substitution or pipeline may not produce the failure behavior the author expects. A test expression may be syntactically valid but logically confusing. A script may check the wrong command's result or continue after a partial operation. Reviewers should ask what safe failure means for this workflow: stop immediately, retry, skip a noncritical step, or report a clear error for human follow-up.\n\nShellCheck is a helpful signal, but the script owner still owns control flow. Good scripts make important decisions visible. They check preconditions, handle expected failure modes, report meaningful errors, and avoid ambiguous success. When ShellCheck points at a variable, condition, or exit-status pattern, use it as an opportunity to make the script easier for the next maintainer to understand.",
+  "narrationPoints": [
+    "Shell scripts often make decisions based on variables, test expressions, command substitutions, pipelines, and exit status.",
+    "Variable findings are especially useful in maintenance work.",
+    "Conditions and exit status deserve deliberate design.",
+    "ShellCheck is a helpful signal, but the script owner still owns control flow."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: IaC Automation Security Checklist",
+  "graphicAlt": "A controlled IaC workflow protects reviews, scopes identities, reviews plans, guards changes, monitors outcomes, separates environments, and plans recovery.",
+  "narration": "Infrastructure-as-Code automation security is a layered engineering practice. Start by protecting repositories and review paths. Use pull requests, branch protection, code ownership, protected environments, and review requirements to ensure infrastructure changes are intentional. Separate low-trust triggers from privileged execution so untrusted events do not receive the authority to change infrastructure.\n\nScope automation identities and secrets. Plan, validate, apply, rollback, and administrative tasks may need different permissions. Use approved secret delivery or platform identity where practical. Protect state files with access control, encryption where appropriate, locking, versioning, and auditability. Review plans before high-impact applies so risky replacements, deletions, exposure changes, and permission changes are visible.\n\nTrust modules, providers, templates, and dependencies deliberately. Review ownership, provenance, defaults, versioning, and update practices. Use policy-as-code, validation, secure defaults, metadata requirements, and environment-specific rules to catch problems before they reach production. Document and approve exceptions so they remain visible rather than becoming quiet bypasses.\n\nFinally, separate environments, credentials, state, variables, and approvals. Promote changes through reviewable workflows. Monitor what automation does, keep useful evidence, plan rollback and recovery, and feed incidents, drift, failed runs, and exceptions back into better guardrails. The goal is infrastructure change that is controlled, reviewed, least-privileged, observable, recoverable, and continuously improved.",
+  "narrationPoints": [
+    "Infrastructure-as-Code automation security is a layered engineering practice.",
+    "Scope automation identities and secrets.",
+    "Trust modules, providers, templates, and dependencies deliberately.",
+    "Finally, separate environments, credentials, state, variables, and approvals."
+  ]
+};

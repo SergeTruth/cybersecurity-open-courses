@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Dependencies, Secrets, and Configuration Hygiene",
+  "graphicAlt": "Express dependency changes are reviewed, secrets arrive through protected delivery, environments remain distinct, and secret rotation avoids code changes or output leakage.",
+  "narration": "Express applications rely heavily on npm dependencies and middleware packages. Every package that parses input, handles authentication, signs tokens, processes files, renders templates, connects to services, or changes build behavior becomes part of the application security story. Reviewing package.json, lockfile changes, install scripts, package provenance, and security advisories helps teams understand what is being added to the runtime and build pipeline. npm audit is useful input, but it is not a complete security program by itself.\n\nSecrets should never be treated as ordinary configuration strings. Database passwords, API keys, OAuth client secrets, JWT signing keys, session secrets, webhook secrets, npm tokens, and service credentials should not be hardcoded, committed in real .env files, printed during startup, copied into images, exposed in frontend bundles, stored in tickets, or logged during debugging. Environment variables can deliver secrets to a process, but they are not a full secrets-management strategy by themselves.\n\nConfiguration hygiene means separating development, test, staging, and production values deliberately. A .env.example file can document required settings without exposing real values. CI/CD variables and secret managers can provide protected runtime configuration. Rotation should be possible without code changes. Logs should avoid authorization headers, cookies, session IDs, reset links, tokens, and sensitive payloads. Secure code can still fail badly when dependencies or secrets are handled casually.",
+  "narrationPoints": [
+    "Express applications rely heavily on npm dependencies and middleware packages.",
+    "Secrets should never be treated as ordinary configuration strings.",
+    "Configuration hygiene means separating development, test, staging, and production values deliberately."
+  ]
+};

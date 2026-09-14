@@ -1,0 +1,148 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.454
+Security-relevant API logs should help
+teams understand who called what,
+
+2
+00:00:05.534 --> 00:00:10.410
+from where, against which resource, with
+what result, and at what volume.
+
+3
+00:00:10.490 --> 00:00:15.130
+Useful fields often include timestamp,
+request ID, caller identity,
+
+4
+00:00:15.210 --> 00:00:19.850
+client application, tenant, endpoint,
+operation, status, latency,
+
+5
+00:00:19.930 --> 00:00:22.604
+decision category, and safe error code.
+
+6
+00:00:22.684 --> 00:00:28.346
+Logs should support investigation and
+monitoring without turning into a second copy
+
+7
+00:00:28.426 --> 00:00:29.999
+of sensitive payloads.
+
+8
+00:00:30.079 --> 00:00:33.146
+Avoid secrets and sensitive payloads in
+logs.
+
+9
+00:00:33.226 --> 00:00:37.944
+Authorization headers, bearer tokens, API
+keys, cookies, passwords,
+
+10
+00:00:38.024 --> 00:00:39.990
+payment data, personal data,
+
+11
+00:00:40.070 --> 00:00:44.396
+and full request or response bodies should
+be handled carefully.
+
+12
+00:00:44.476 --> 00:00:48.879
+Redaction should be designed, tested, and
+applied consistently.
+
+13
+00:00:48.959 --> 00:00:54.386
+Audit trails should capture meaningful
+actions such as administrative changes,
+
+14
+00:00:54.466 --> 00:00:58.712
+access to sensitive records, failed
+authorization decisions,
+
+15
+00:00:58.792 --> 00:01:00.916
+and changes to API credentials.
+
+16
+00:01:00.996 --> 00:01:04.613
+Testing should cover the contract and the
+abuse cases.
+
+17
+00:01:04.693 --> 00:01:10.119
+API contract tests confirm that required
+fields, response shapes, status codes,
+
+18
+00:01:10.199 --> 00:01:12.873
+and schema expectations remain stable.
+
+19
+00:01:12.953 --> 00:01:17.357
+Negative tests send malformed, missing,
+oversized, unexpected,
+
+20
+00:01:17.437 --> 00:01:19.167
+and type-confused input.
+
+21
+00:01:19.247 --> 00:01:24.359
+Authorization tests verify that callers
+can only perform allowed actions on
+
+22
+00:01:24.439 --> 00:01:27.113
+resources they are permitted to access.
+
+23
+00:01:27.193 --> 00:01:32.619
+Fuzzing at a high level can help exercise
+parsers and edge cases that hand-written
+
+24
+00:01:32.699 --> 00:01:33.486
+tests miss.
+
+25
+00:01:33.566 --> 00:01:38.677
+Reviewing OpenAPI specifications and
+production behavior closes the loop.
+
+26
+00:01:38.757 --> 00:01:44.026
+Specifications can reveal undocumented
+endpoints, missing authentication,
+
+27
+00:01:44.106 --> 00:01:47.252
+broad parameters, inconsistent error
+models,
+
+28
+00:01:47.332 --> 00:01:51.893
+or response fields that do not match
+least-privilege expectations.
+
+29
+00:01:51.973 --> 00:01:56.692
+Production monitoring can reveal unusual
+volume, repeated failures,
+
+30
+00:01:56.772 --> 00:02:02.355
+enumeration patterns, expensive queries,
+and clients using deprecated behavior.
+
+31
+00:02:02.435 --> 00:02:07.940
+Observability is part of API security
+because unknown behavior cannot be managed.

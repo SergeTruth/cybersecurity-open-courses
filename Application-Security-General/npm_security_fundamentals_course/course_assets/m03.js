@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Dependency Selection and Package Review",
+  "graphicAlt": "Package selection weighs purpose, maintenance, dependency footprint, and explainable changes; popularity alone is not proof, and unusual changes warrant review.",
+  "narration": "Dependency review starts before installation. A developer should ask whether the package is necessary, whether the same need can be met with existing platform capability, and how much code is being imported for the value gained. A tiny convenience package can create a long transitive chain. A large framework can be appropriate when it provides durable value, but the decision should be intentional rather than driven by the first search result.\n\nUseful review signals include maintainer activity, release history, documentation quality, issue patterns, dependency footprint, license expectations, package size, and whether ownership or naming looks unusual. Popularity can help show ecosystem usage, but popularity is not proof of safety. Attackers sometimes target popular packages precisely because compromise has broad impact. Reviewers should combine popularity with evidence about maintenance, scope, and fit for the application.\n\nTeams should also watch for sudden changes that are hard to explain. A new maintainer, a large unexpected rewrite, a new install script, obfuscated files, unusual network behavior in tooling, or a package that requests more responsibility than its purpose requires should trigger review. The response does not need to be dramatic. It may be as simple as holding the update, reading the diff, opening an issue, choosing another package, or isolating the dependency behind a smaller interface.",
+  "narrationPoints": [
+    "Dependency review starts before installation.",
+    "Useful review signals include maintainer activity, release history, documentation quality, issue patterns, dependency footprint, license expectations, package size, and whether ownership or naming looks unusual.",
+    "Teams should also watch for sudden changes that are hard to explain."
+  ]
+};

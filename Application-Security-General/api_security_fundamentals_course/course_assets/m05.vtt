@@ -1,0 +1,148 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.698
+An API contract defines expected request
+and response behavior.
+
+2
+00:00:07.778 --> 00:00:16.545
+It should describe required fields,
+optional fields, types, formats, ranges,
+
+3
+00:00:16.625 --> 00:00:22.122
+enums, arrays, nested objects, and
+constraints.
+
+4
+00:00:22.202 --> 00:00:29.661
+OpenAPI specifications, GraphQL schemas,
+protobuf definitions,
+
+5
+00:00:29.741 --> 00:00:36.415
+and written interface documents can all
+serve this purpose.
+
+6
+00:00:36.495 --> 00:00:42.253
+The contract is not just documentation for
+clients.
+
+7
+00:00:42.333 --> 00:00:49.923
+It is also a guide for what the server
+should accept, reject, and test.
+
+8
+00:00:50.003 --> 00:00:58.902
+Validation should happen before request
+data reaches business logic, queries,
+
+9
+00:00:58.982 --> 00:01:05.656
+files, downstream services, or
+state-changing workflows.
+
+10
+00:01:05.736 --> 00:01:12.017
+A request body that fits JSON syntax may
+still be invalid.
+
+11
+00:01:12.097 --> 00:01:14.715
+A string may be too long.
+
+12
+00:01:14.795 --> 00:01:18.590
+A number may exceed allowed range.
+
+13
+00:01:18.670 --> 00:01:22.726
+An enum may be unknown or deprecated.
+
+14
+00:01:22.806 --> 00:01:26.209
+A nested array may be too large.
+
+15
+00:01:26.289 --> 00:01:35.319
+A field may be forbidden for the caller
+even though it is valid in another workflow.
+
+16
+00:01:35.399 --> 00:01:40.371
+Unknown fields deserve a deliberate
+policy.
+
+17
+00:01:40.451 --> 00:01:49.612
+Some APIs reject them to keep clients
+honest and prevent accidental over-posting.
+
+18
+00:01:49.692 --> 00:01:56.366
+Others allow them for compatibility but
+ignore them safely.
+
+19
+00:01:56.446 --> 00:02:05.868
+The danger is accepting unknown fields
+without knowing whether downstream mapping,
+
+20
+00:02:05.948 --> 00:02:11.313
+patch logic, or persistence code might use
+them.
+
+21
+00:02:11.393 --> 00:02:17.021
+If a client sends a field the API does not
+recognize,
+
+22
+00:02:17.101 --> 00:02:25.999
+that should either be rejected or handled
+by a clearly documented compatibility
+
+23
+00:02:26.079 --> 00:02:26.734
+rule.
+
+24
+00:02:26.814 --> 00:02:31.787
+Safe error responses are part of
+validation.
+
+25
+00:02:31.867 --> 00:02:39.457
+A client should know that a field is
+missing, malformed, out of range,
+
+26
+00:02:39.537 --> 00:02:41.369
+or unsupported.
+
+27
+00:02:41.449 --> 00:02:50.347
+It should not receive stack traces, SQL
+errors, internal object names, secrets,
+
+28
+00:02:50.427 --> 00:02:54.353
+or detailed implementation paths.
+
+29
+00:02:54.433 --> 00:03:02.154
+Strong API validation produces predictable
+failures: reject early,
+
+30
+00:03:02.234 --> 00:03:06.029
+explain safely, log responsibly,
+
+31
+00:03:06.109 --> 00:03:12.260
+and pass only trusted values into the rest
+of the system.

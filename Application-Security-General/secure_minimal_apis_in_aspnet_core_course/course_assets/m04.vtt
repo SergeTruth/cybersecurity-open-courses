@@ -1,0 +1,171 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.514
+Authorization answers the question, what
+is this identity allowed to do.
+
+2
+00:00:07.594 --> 00:00:15.626
+In Minimal APIs, authorization should be
+explicit through endpoint or group-level
+
+3
+00:00:15.706 --> 00:00:16.498
+policy.
+
+4
+00:00:16.578 --> 00:00:23.252
+Private APIs should generally start from
+deny-by-default thinking:
+
+5
+00:00:23.332 --> 00:00:28.762
+an endpoint is not accessible just because
+it has a route.
+
+6
+00:00:28.842 --> 00:00:36.082
+It becomes accessible when the team
+intentionally defines the access rule.
+
+7
+00:00:36.162 --> 00:00:44.421
+RequireAuthorization is useful because it
+makes access policy visible on an endpoint
+
+8
+00:00:44.501 --> 00:00:45.971
+or route group.
+
+9
+00:00:46.051 --> 00:00:52.386
+The exact syntax is less important than
+the engineering practice:
+
+10
+00:00:52.466 --> 00:01:00.159
+reviewers should see that the endpoint
+requires authenticated access or a named
+
+11
+00:01:00.239 --> 00:01:05.895
+policy, and they should understand what
+that policy means.
+
+12
+00:01:05.975 --> 00:01:10.500
+Named policies support reusable access
+rules.
+
+13
+00:01:10.580 --> 00:01:16.350
+A policy can represent claims, roles,
+tenant requirements,
+
+14
+00:01:16.430 --> 00:01:23.670
+administrative access, service identity
+expectations, or custom checks.
+
+15
+00:01:23.750 --> 00:01:31.782
+Named policies are easier to review than
+repeated inline decisions because the rule
+
+16
+00:01:31.862 --> 00:01:36.387
+has a central definition and a meaningful
+name.
+
+17
+00:01:36.467 --> 00:01:41.218
+Role-based and claim-based checks can be
+useful,
+
+18
+00:01:41.298 --> 00:01:45.823
+but they should match real business
+decisions.
+
+19
+00:01:45.903 --> 00:01:50.881
+A role may be too broad for a record-level
+operation.
+
+20
+00:01:50.961 --> 00:01:58.088
+A claim may describe identity context but
+not prove ownership of a specific
+
+21
+00:01:58.168 --> 00:01:59.186
+resource.
+
+22
+00:01:59.266 --> 00:02:07.185
+Resource-sensitive checks may require
+loading the target resource and verifying
+
+23
+00:02:07.265 --> 00:02:14.505
+ownership, tenant, state, or permission
+before completing the operation.
+
+24
+00:02:14.585 --> 00:02:20.581
+Group-level authorization helps protect
+related endpoints,
+
+25
+00:02:20.661 --> 00:02:25.978
+but sensitive endpoints still need
+individual review.
+
+26
+00:02:26.058 --> 00:02:33.298
+A route group can apply a common policy to
+a tenant API or administrative API,
+
+27
+00:02:33.378 --> 00:02:36.772
+but an export, deletion, approval,
+
+28
+00:02:36.852 --> 00:02:42.056
+or configuration operation may require
+extra checks.
+
+29
+00:02:42.136 --> 00:02:49.602
+Shared policy should not become a reason
+to skip endpoint-specific thinking.
+
+30
+00:02:49.682 --> 00:02:54.660
+UI-only restrictions, route naming, hidden
+links,
+
+31
+00:02:54.740 --> 00:03:01.301
+or client-side checks are not server-side
+authorization controls.
+
+32
+00:03:01.381 --> 00:03:04.662
+They may improve user experience,
+
+33
+00:03:04.742 --> 00:03:10.511
+but Minimal API endpoints must enforce
+access on the server.
+
+34
+00:03:10.591 --> 00:03:18.284
+Every protected operation should be safe
+even if called directly by a legitimate
+
+35
+00:03:18.364 --> 00:03:24.020
+client with a valid identity but
+insufficient permission.

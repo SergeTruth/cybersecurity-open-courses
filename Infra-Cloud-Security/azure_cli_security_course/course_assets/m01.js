@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why Azure CLI Security Matters",
+  "graphicAlt": "Azure CLI commands act on storage, networking, and compute using the runtime identity, tenant, subscription, and role assignments.",
+  "narration": "The Azure CLI is a practical bridge between Bash automation and Azure services. Teams use it to list resources, publish artifacts, deploy applications, update configuration, create storage, change networking, start compute resources, query logs, and support operational workflows. Those activities may look routine, but they can act directly on the Azure control plane.\n\nEvery Azure CLI command runs with a tenant, subscription, identity, role assignment, selected cloud environment, and runtime configuration. If a script uses the wrong tenant, wrong subscription, wrong resource group, wrong region, wrong identity, or wrong command input, a routine helper can create production impact. A command that is harmless in a development resource group may be high-impact in production.\n\nSecure Azure CLI usage means treating each script as a cloud automation component. The script should know which tenant and subscription it expects, which resource group and region are in scope, which identity it is using, what resources it is allowed to affect, and what output later automation will trust. It should not rely on whatever account state happens to be selected when it starts.\n\nThe defensive goal is scoped, least-privileged, observable Azure automation. That means validating targets, protecting credentials and sessions, invoking commands predictably, handling JSON output carefully, guarding high-impact changes, and leaving useful audit evidence. Small Bash helpers can be valuable, but if they can change Azure resources, they deserve deliberate security design.",
+  "narrationPoints": [
+    "The Azure CLI is a practical bridge between Bash automation and Azure services.",
+    "Every Azure CLI command runs with a tenant, subscription, identity, role assignment, selected cloud environment, and runtime configuration.",
+    "Secure Azure CLI usage means treating each script as a cloud automation component.",
+    "The defensive goal is scoped, least-privileged, observable Azure automation."
+  ]
+};

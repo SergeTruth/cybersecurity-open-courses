@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.499
+Authorization decides what an
+authenticated subject may access or do.
+
+2
+00:00:06.579 --> 00:00:11.979
+Django permissions and groups can provide
+a useful foundation,
+
+3
+00:00:12.059 --> 00:00:19.358
+especially for broad capabilities,
+administrative workflows, and reusable checks.
+
+4
+00:00:19.438 --> 00:00:24.937
+But many real applications need more than
+role-level decisions.
+
+5
+00:00:25.017 --> 00:00:31.716
+They need object-level authorization,
+tenant boundaries, ownership checks,
+
+6
+00:00:31.796 --> 00:00:38.696
+workflow state checks, and context-aware
+decisions that account for the current
+
+7
+00:00:38.776 --> 00:00:42.375
+user, action, resource, and environment.
+
+8
+00:00:42.455 --> 00:00:49.654
+Object-level authorization is critical
+when views accept identifiers for records,
+
+9
+00:00:49.734 --> 00:00:56.034
+files, projects, organizations, invoices,
+tickets, or other resources.
+
+10
+00:00:56.114 --> 00:01:02.413
+A user being logged in does not mean they
+can access every object with a valid
+
+11
+00:01:02.493 --> 00:01:03.593
+primary key.
+
+12
+00:01:03.673 --> 00:01:10.572
+The server must verify that the caller has
+permission for the specific resource in
+
+13
+00:01:10.652 --> 00:01:12.452
+the current context.
+
+14
+00:01:12.532 --> 00:01:18.031
+Template logic that hides a button is
+useful for user experience,
+
+15
+00:01:18.111 --> 00:01:20.711
+but it is not an access control.
+
+16
+00:01:20.791 --> 00:01:25.290
+A manually crafted request still reaches
+the server.
+
+17
+00:01:25.370 --> 00:01:32.569
+The Django admin deserves careful
+protection because it can expose high-impact data
+
+18
+00:01:32.649 --> 00:01:33.749
+and actions.
+
+19
+00:01:33.829 --> 00:01:40.328
+Staff and superuser privileges should be
+limited, reviewed, and monitored.
+
+20
+00:01:40.408 --> 00:01:45.208
+Administrative actions should follow least
+privilege,
+
+21
+00:01:45.288 --> 00:01:50.387
+and admin exposure should match the risk
+of the environment.
+
+22
+00:01:50.467 --> 00:01:54.267
+The admin can be a powerful operational
+tool,
+
+23
+00:01:54.347 --> 00:02:01.446
+but it should not become an unreviewed
+backdoor around application authorization,
+
+24
+00:02:01.526 --> 00:02:04.926
+approval flows, or audit expectations.
+
+25
+00:02:05.006 --> 00:02:12.005
+Reusable permission checks can improve
+consistency when they are easy to apply and
+
+26
+00:02:12.085 --> 00:02:13.385
+hard to forget.
+
+27
+00:02:13.465 --> 00:02:18.164
+Decorators, mixins, service-layer guards,
+managers,
+
+28
+00:02:18.244 --> 00:02:23.543
+and explicit helper functions can all
+support authorization.
+
+29
+00:02:23.623 --> 00:02:30.723
+The important question is whether
+enforcement happens server-side and close to the
+
+30
+00:02:30.803 --> 00:02:32.402
+sensitive action.
+
+31
+00:02:32.482 --> 00:02:36.782
+Mature Django teams test authorization
+directly,
+
+32
+00:02:36.862 --> 00:02:44.061
+including denied cases, cross-tenant
+cases, ownership changes, admin boundaries,
+
+33
+00:02:44.141 --> 00:02:50.540
+and paths that are easy to overlook, such
+as exports, imports, bulk actions,
+
+34
+00:02:50.620 --> 00:02:52.420
+and background work.

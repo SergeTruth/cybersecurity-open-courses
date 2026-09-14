@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Authorization and Access Control",
+  "graphicAlt": "The server evaluates the caller, requested action, resource, and tenant together before allowing access; denied requests stop before the data.",
+  "narration": "Authorization decides whether an authenticated caller may perform an action on a resource. In APIs, object-level authorization is especially important because many endpoints accept direct identifiers. A caller may be allowed to view their own order, but not another customer's order. They may be allowed to edit a project they own, but not one in a different tenant. Every sensitive object access should be checked in context.\n\nFunction-level authorization controls which operations a caller may perform. A user who can view an account may not be allowed to close it. A support operator may reset a password but not change billing ownership. A service account may read inventory but not update pricing. Role-based access control, attribute-based access control, relationship-based rules, and policy engines can all help when they are applied at the operation that actually changes or reveals data.\n\nTenant isolation deserves special attention. Multi-tenant APIs must ensure that tenant context cannot be chosen casually by the client. A tenant ID in a header, path, token claim, or request body should be validated against trusted server-side authorization state. Weak tenant checks can expose one customer's data to another customer, even when authentication appears to work correctly.\n\nAvoid relying on hidden UI controls or client-side enforcement. Attackers and testers can call APIs directly. Mobile apps can be inspected. Browser requests can be modified. Internal clients can be buggy. The backend should enforce authorization at every sensitive operation, using least-privileged service permissions and explicit ownership checks. If an API endpoint can affect data or business state, the server must decide whether the caller is allowed to do it.",
+  "narrationPoints": [
+    "Authorization decides whether an authenticated caller may perform an action on a resource.",
+    "Function-level authorization controls which operations a caller may perform.",
+    "Tenant isolation deserves special attention.",
+    "Avoid relying on hidden UI controls or client-side enforcement."
+  ]
+};

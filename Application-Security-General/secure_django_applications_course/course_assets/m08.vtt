@@ -1,0 +1,170 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.406
+Django applications often expose
+REST-style endpoints, internal APIs,
+
+2
+00:00:06.486 --> 00:00:11.915
+webhooks, background-triggered views, or
+service integrations.
+
+3
+00:00:11.995 --> 00:00:16.949
+API security starts with the same
+principles as web security:
+
+4
+00:00:17.029 --> 00:00:22.744
+authenticate the caller, validate the
+request, authorize the action,
+
+5
+00:00:22.824 --> 00:00:26.920
+protect sensitive data, and handle errors
+safely.
+
+6
+00:00:27.000 --> 00:00:33.191
+Token validation concepts include checking
+issuer, audience, expiration,
+
+7
+00:00:33.271 --> 00:00:38.510
+signature or integrity, and intended
+context where applicable.
+
+8
+00:00:38.590 --> 00:00:44.782
+Rate limiting and throttling at a high
+level can reduce abuse and operational
+
+9
+00:00:44.862 --> 00:00:48.672
+strain, but they do not replace
+authorization.
+
+10
+00:00:48.752 --> 00:00:54.563
+Third-party integrations and webhooks add
+trust-boundary questions.
+
+11
+00:00:54.643 --> 00:01:00.263
+The application should know which partner
+or service is sending data,
+
+12
+00:01:00.343 --> 00:01:03.391
+how request authenticity is checked,
+
+13
+00:01:03.471 --> 00:01:09.091
+how replay or duplicate delivery is
+handled, what happens on retries,
+
+14
+00:01:09.171 --> 00:01:13.457
+and which actions are safe to perform
+automatically.
+
+15
+00:01:13.537 --> 00:01:17.443
+Outbound integrations should protect
+secrets,
+
+16
+00:01:17.523 --> 00:01:23.048
+constrain destinations where appropriate,
+use sensible timeouts,
+
+17
+00:01:23.128 --> 00:01:29.986
+and handle failures without exposing
+sensitive internals or creating repeated side
+
+18
+00:01:30.066 --> 00:01:30.828
+effects.
+
+19
+00:01:30.908 --> 00:01:37.385
+Dependency hygiene is part of Django
+security because the application relies on
+
+20
+00:01:37.465 --> 00:01:44.038
+Django itself, Python packages,
+middleware, admin extensions, API frameworks,
+
+21
+00:01:44.118 --> 00:01:50.595
+image libraries, parsers, container
+images, and operating system components.
+
+22
+00:01:50.675 --> 00:01:57.057
+Pinning concepts, vulnerability scanning,
+secrets scanning, update review,
+
+23
+00:01:57.137 --> 00:02:03.615
+and release testing help teams understand
+what they run and how risk changes over
+
+24
+00:02:03.695 --> 00:02:04.171
+time.
+
+25
+00:02:04.251 --> 00:02:09.109
+Alerts should be triaged based on actual
+exposure and usage,
+
+26
+00:02:09.189 --> 00:02:12.142
+not ignored and not applied blindly.
+
+27
+00:02:12.222 --> 00:02:16.699
+Security-focused tests and monitoring
+close the loop.
+
+28
+00:02:16.779 --> 00:02:22.589
+Unit and integration tests should cover
+authentication requirements,
+
+29
+00:02:22.669 --> 00:02:28.004
+authorization boundaries, CSRF behavior,
+session transitions,
+
+30
+00:02:28.084 --> 00:02:33.132
+validation failures, file upload limits,
+and error behavior.
+
+31
+00:02:33.212 --> 00:02:38.165
+Negative tests prove that forbidden
+actions stay forbidden.
+
+32
+00:02:38.245 --> 00:02:44.723
+Safe logging should capture important
+audit events without exposing secrets or
+
+33
+00:02:44.803 --> 00:02:47.375
+sensitive data unnecessarily.
+
+34
+00:02:47.455 --> 00:02:53.646
+Monitoring and incident readiness help the
+team see when assumptions fail in
+
+35
+00:02:53.726 --> 00:02:57.060
+production and respond with confidence.

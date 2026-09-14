@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.476
+The API attack surface includes more than
+public internet endpoints.
+
+2
+00:00:06.556 --> 00:00:12.532
+Public APIs, partner APIs, internal APIs,
+service-to-service APIs,
+
+3
+00:00:12.612 --> 00:00:19.703
+mobile-backed APIs, browser-backed APIs,
+third-party integrations, webhooks,
+
+4
+00:00:19.783 --> 00:00:26.772
+API gateways, and reverse proxies all
+create places where requests cross from one
+
+5
+00:00:26.852 --> 00:00:29.080
+trust level into another.
+
+6
+00:00:29.160 --> 00:00:31.692
+Internal APIs may feel safer,
+
+7
+00:00:31.772 --> 00:00:39.065
+but internal callers can be compromised,
+misconfigured, outdated, or simply wrong.
+
+8
+00:00:39.145 --> 00:00:43.400
+Every request has multiple surfaces to
+consider.
+
+9
+00:00:43.480 --> 00:00:50.367
+Paths, route parameters, query parameters,
+headers, cookies, request bodies,
+
+10
+00:00:50.447 --> 00:00:55.613
+tokens, and response fields can all carry
+security meaning.
+
+11
+00:00:55.693 --> 00:00:59.340
+A route parameter may identify a resource.
+
+12
+00:00:59.420 --> 00:01:03.978
+A header may choose a tenant, locale, or
+content type.
+
+13
+00:01:04.058 --> 00:01:07.603
+A body may carry fields that update state.
+
+14
+00:01:07.683 --> 00:01:11.329
+A response may reveal sensitive metadata.
+
+15
+00:01:11.409 --> 00:01:17.284
+Security review should follow the entire
+request and response path,
+
+16
+00:01:17.364 --> 00:01:20.302
+not just the obvious JSON payload.
+
+17
+00:01:20.382 --> 00:01:26.459
+API gateways and reverse proxies can help
+centralize authentication,
+
+18
+00:01:26.539 --> 00:01:33.731
+routing, throttling, and logging, but they
+do not remove endpoint responsibility.
+
+19
+00:01:33.811 --> 00:01:38.268
+The backend service still needs to
+validate inputs,
+
+20
+00:01:38.348 --> 00:01:44.931
+enforce authorization for the operation,
+and return only appropriate data.
+
+21
+00:01:45.011 --> 00:01:48.354
+A gateway may know that a token is valid,
+
+22
+00:01:48.434 --> 00:01:55.220
+but the application usually knows whether
+that caller can access this invoice,
+
+23
+00:01:55.300 --> 00:01:59.352
+change this account, or approve this
+workflow.
+
+24
+00:01:59.432 --> 00:02:04.598
+Trust boundaries should be documented as
+part of API design.
+
+25
+00:02:04.678 --> 00:02:07.514
+Where does untrusted data enter.
+
+26
+00:02:07.594 --> 00:02:11.342
+Which component authenticates the caller.
+
+27
+00:02:11.422 --> 00:02:15.980
+Which component authorizes the object and
+function.
+
+28
+00:02:16.060 --> 00:02:19.605
+Which component validates the contract.
+
+29
+00:02:19.685 --> 00:02:21.711
+Which logs are created.
+
+30
+00:02:21.791 --> 00:02:24.627
+When these boundaries are clear,
+
+31
+00:02:24.707 --> 00:02:30.379
+teams can avoid relying on assumptions
+such as hidden UI controls,
+
+32
+00:02:30.459 --> 00:02:35.220
+friendly internal callers, or network
+location alone.
