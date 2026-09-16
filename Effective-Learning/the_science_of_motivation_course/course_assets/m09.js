@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Motivation also lives in teams.",
     "The goal is not constant intensity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Reliable engagement is supported by meaningful, visible, manageable and sustainable work, so people can return to useful action as motivation fluctuates."
 };

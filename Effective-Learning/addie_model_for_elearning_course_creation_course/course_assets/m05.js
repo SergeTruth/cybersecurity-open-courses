@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Implementation also includes communication.",
     "Pilot groups can reduce risk."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 5"
+  "graphicAlt": "Course implementation combines publishing, tracking tests, communication, support and pilot rollout to enable reliable learner access and completion."
 };

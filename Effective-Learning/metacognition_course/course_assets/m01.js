@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Metacognition matters because many important mistakes happen before the final answer.",
     "The point is not endless self-analysis."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Metacognition."
+  "graphicAlt": "Cognition performs the task, while metacognition inspects and adjusts the approach through a monitoring-and-regulation loop."
 };

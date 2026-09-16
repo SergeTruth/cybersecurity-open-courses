@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Time horizons help balance the near term and the long term.",
     "High-leverage activities produce progress that compounds."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Priorities, Goals, and Time Allocation."
+  "graphicAlt": "Outcomes guide process commitments and protected time, with daily, weekly and long-term review keeping attention on meaningful progress."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The reverse is also true.",
     "The discipline is practical."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Decision Science?."
+  "graphicAlt": "A decision process passes through uncertainty to different possible outcomes, while review examines the reasoning rather than only the result."
 };

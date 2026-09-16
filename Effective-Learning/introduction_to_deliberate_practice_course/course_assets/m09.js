@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Measurement helps the learner avoid guessing about progress.",
     "The final takeaway is that deliberate practice is structured, sustainable improvement."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Specific practice, correction, variation and measurement form a sustainable loop aimed at real-world skill transfer."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The goal is reliable execution, healthy pacing, continuous improvement, and systems that help people do their best work over time.",
     "A useful next step is to choose one performance constraint and improve the system around it."
   ],
-  "graphicAlt": "Blank placeholder image for module 9: Course Summary and Key Takeaways"
+  "graphicAlt": "Attention, recovery, skill, decision quality and teamwork support repeatable human performance through small, reviewed system improvements."
 };

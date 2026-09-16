@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Wording alone is not a reliable security boundary.",
     "Sensitive decisions should include review and constraint."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on prompt injection and instruction handling."
+  "graphicAlt": "Trusted instructions and source-labeled data remain distinct inputs, while code-enforced policy and sensitive-action approval control proposed effects."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Better instruction activates prior knowledge before adding complexity.",
     "This is also why vocabulary matters."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Prior Knowledge and Mental Models."
+  "graphicAlt": "Prior knowledge is tested against examples and refined into a more useful model, supported by vocabulary and visible relationships."
 };

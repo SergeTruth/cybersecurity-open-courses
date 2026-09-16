@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The difference between studying more and learning better matters.",
     "This course stays practical and non-clinical."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, Why Sleep Matters for Learning."
+  "graphicAlt": "Rest and recovery support attention, memory and consistency around active practice rather than replacing it."
 };

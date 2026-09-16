@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Fading guidance means gradually reducing support as learners gain capability.",
     "Practice should change as learners gain experience."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Examples, Practice, and the Worked Example Effect."
+  "graphicAlt": "Worked examples lead to guided attempts, feedback and independent practice while support fades according to learner readiness."
 };

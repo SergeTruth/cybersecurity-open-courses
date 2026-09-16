@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Accounts and roles are especially important in web application work.",
     "Scope also controls data handling."
   ],
-  "graphicAlt": "Blank placeholder graphic for scope and rules of engagement"
+  "graphicAlt": "Suggested activity is checked against rules of engagement covering targets, roles, test windows, rate limits and data handling; out-of-scope work stops or escalates."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Shutdown routines help close loops.",
     "Distraction design matters too."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Designing Energy-Smart Workflows."
+  "graphicAlt": "Prepared starts, protected focus, routine-task batching and loop-closing routines are supported by checklists, templates and distraction-reducing defaults."
 };

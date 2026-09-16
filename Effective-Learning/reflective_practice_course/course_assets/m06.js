@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Notes should be searchable and easy to apply.",
     "The strongest reflective notes become patterns, checklists, examples, and future prompts."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Reflective Journals, Decision Records, and Learning Notes."
+  "graphicAlt": "A findable reflective note can become a checklist, runbook update or prompt that supports future work."
 };

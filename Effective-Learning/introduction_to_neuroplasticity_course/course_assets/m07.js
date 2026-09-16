@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Older learners can also continue adapting, though realistic expectations matter.",
     "Avoid fixed-ability thinking."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Plasticity Across the Lifespan."
+  "graphicAlt": "Learning continues across early life, adulthood and later life, with practice adapted to differing conditions rather than assuming equal speed or fixed ability."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Preparation reduces avoidable stress.",
     "A practical habit is to name the next controllable step."
   ],
-  "graphicAlt": "Blank placeholder image for module 4: Stress, Pressure, and Emotional Regulation"
+  "graphicAlt": "Noticing pressure, pausing and choosing the next controllable step support deliberate action, reinforced by pre-briefs and debriefs."
 };

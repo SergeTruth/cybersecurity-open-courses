@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Fragile decisions fail sharply when conditions change.",
     "A responsible decision process considers upside, downside, and survivability."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Risk, Expected Value, and Consequences."
+  "graphicAlt": "Risk assessment weighs likelihood, impact, upside and downside, while tail risks and resilience determine whether adverse outcomes can be absorbed."
 };

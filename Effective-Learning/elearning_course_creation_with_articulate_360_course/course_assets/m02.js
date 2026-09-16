@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Storyboarding and scripting reduce rework.",
     "A strong planning document should be short enough for stakeholders to read but specific enough to guide development."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 2"
+  "graphicAlt": "A performance goal guides the storyboard, narration and assessment, with constraints agreed before screen production."
 };

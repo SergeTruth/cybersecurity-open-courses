@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The risk is autopilot.",
     "Attention control includes focus routines and interruption management."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Automaticity and Attention Control."
+  "graphicAlt": "Fluent routine execution frees attention for judgment and exceptions while checklists, pauses and peer review protect against autopilot."
 };

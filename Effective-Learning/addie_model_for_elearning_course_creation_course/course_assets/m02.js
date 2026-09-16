@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Analysis also includes constraints: delivery environment, device expectations, seat time, accessibility needs, translation needs, regulatory requirements, LMS tracking, review timelines, and available source material.",
     "Finally, analysis should ask whether eLearning is the right solution."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 2"
+  "graphicAlt": "Audience, performance, constraints and evidence define the problem before a team selects a course, job aid or process support."
 };

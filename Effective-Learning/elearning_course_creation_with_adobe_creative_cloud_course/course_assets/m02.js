@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Naming conventions and folder structure are practical quality controls.",
     "Decide constraints early: screen size, brand style, accessibility expectations, caption requirements, file size limits, LMS constraints, and export targets."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 2"
+  "graphicAlt": "Learner needs guide content planning and asset tracking, with source files separate from exports and accessibility, format and delivery constraints decided early."
 };

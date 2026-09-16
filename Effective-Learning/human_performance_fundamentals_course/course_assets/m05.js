@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Environment design can also manage attention.",
     "Small design changes often matter more than dramatic personal reinvention."
   ],
-  "graphicAlt": "Blank placeholder image for module 5: Habits, Routines, and Environment Design"
+  "graphicAlt": "Prepared starts, simple supports, reduced distraction access and clear shutdown notes make useful behavior easier to repeat."
 };

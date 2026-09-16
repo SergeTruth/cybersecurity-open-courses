@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Clear instruction hierarchy and context can improve behavior, but prompt wording alone is not a security boundary.",
     "Safer systems preserve the source and provenance of content, separate trusted configuration from retrieved material, constrain available tools, validate outputs before downstream use, and fail safely when instructions conflict."
   ],
-  "graphicAlt": "Blank white placeholder image for the defending against malicious instructions module."
+  "graphicAlt": "External content retains provenance and is interpreted as data; independent authorization, argument validation and approval determine whether an effect is permitted or blocked."
 };

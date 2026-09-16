@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Neuroplasticity matters for learning, skill development, habits, rehabilitation concepts at a general level, and workplace performance.",
     "This course stays non-clinical."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Neuroplasticity."
+  "graphicAlt": "Practice, attention and feedback contribute to adaptation over time, illustrated by changing network pathways; change is neither instant nor unlimited."
 };

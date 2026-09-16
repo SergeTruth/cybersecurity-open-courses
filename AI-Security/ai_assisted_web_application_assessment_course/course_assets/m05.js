@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Business logic issues are a good reminder of AI limits.",
     "Treat AI output as advisory."
   ],
-  "graphicAlt": "Blank placeholder graphic for AI-assisted vulnerability reasoning"
+  "graphicAlt": "Observed symptoms lead to possible explanations and safe verification before conclusions are reported, with facts, assumptions and missing evidence kept explicit."
 };

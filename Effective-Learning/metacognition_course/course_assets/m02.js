@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Illusions of understanding are common in learning and work.",
     "To test understanding, ask the idea to do work."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Knowing What You Know."
+  "graphicAlt": "Recognizing familiar material differs from testing understanding by explaining, retrieving and applying it without relying on the source."
 };

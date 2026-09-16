@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Good design also avoids information dumps.",
     "This does not require every course to be elaborate."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Designing Better Learning Experiences."
+  "graphicAlt": "Objectives, examples, practice and assessment align with desired capability on an accessible, inclusive foundation."
 };

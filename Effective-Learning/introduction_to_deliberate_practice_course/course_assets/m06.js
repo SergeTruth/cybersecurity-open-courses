@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Practicing edge cases is especially useful when real work includes ambiguity.",
     "Transfer is the goal."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Repetition with Variation."
+  "graphicAlt": "Repetition builds fluency while variation helps recognize the underlying principle, supporting transfer to real work."
 };

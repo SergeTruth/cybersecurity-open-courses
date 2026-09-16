@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Motion graphics should guide attention, not decorate every moment.",
     "Sometimes static visuals are better than video."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 6"
+  "graphicAlt": "Video supports timing, sequence and change, while static diagrams and job aids support scanning, review and reuse."
 };

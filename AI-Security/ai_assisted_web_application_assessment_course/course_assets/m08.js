@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Remediation guidance should be practical and connected to the confirmed issue.",
     "Communication matters throughout the engagement."
   ],
-  "graphicAlt": "Blank placeholder graphic for web assessment reporting and remediation"
+  "graphicAlt": "Verified evidence, application context and impact reasoning support a reviewed finding with severity rationale, remediation and limitations, tailored for developers and executives."
 };

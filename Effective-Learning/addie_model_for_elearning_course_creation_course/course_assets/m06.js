@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Useful evaluation looks beyond attendance and completion.",
     "Evaluation should feed the next iteration."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 6"
+  "graphicAlt": "Evaluation during development improves the course, while evidence after delivery measures outcomes; both guide revision, with completion treated as only one signal."
 };

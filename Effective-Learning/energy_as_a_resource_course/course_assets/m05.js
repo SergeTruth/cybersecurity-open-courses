@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Movement, hydration, nutrition, and emotional decompression can all support capacity in broad practical ways.",
     "Transitions between tasks are especially valuable."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Recovery and Renewal."
+  "graphicAlt": "Demand, renewal and a prepared restart form a repeatable work cycle, with basic needs and transitions included in planning."
 };

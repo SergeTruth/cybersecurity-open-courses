@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Model output should not directly become a high-impact action.",
     "Agent behavior needs operational limits."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on AI tools, agents, and action control."
+  "graphicAlt": "Tool proposals are validated and authorized, previewed and approved when required, and executed with limited credentials and explicit agent budgets, rate limits and stop conditions."
 };

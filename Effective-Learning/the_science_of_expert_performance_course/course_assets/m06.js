@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Calibration means matching confidence to actual performance, accuracy, or likelihood.",
     "The challenge is to measure what matters without turning performance into shallow score-chasing."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Feedback, Measurement, and Calibration."
+  "graphicAlt": "Process, quality and outcome evidence are reviewed together to calibrate performance rather than chasing shallow scores."
 };

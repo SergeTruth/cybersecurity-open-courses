@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Campaign context helps analysts avoid isolated conclusions.",
     "This work must remain defensive and non-operational."
   ],
-  "graphicAlt": "Blank course placeholder for module 6."
+  "graphicAlt": "Infrastructure and tool observations are weighed within campaign context, preserving the distinction between event, discovery and publication dates without treating reuse as proof of identity."
 };

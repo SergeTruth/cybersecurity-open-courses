@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Maintenance work deserves explicit time.",
     "Useful plans include review points."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Planning Under Uncertainty."
+  "graphicAlt": "Plans include task estimates, buffer space and maintenance, with review points to adjust when dependencies or conditions change."
 };

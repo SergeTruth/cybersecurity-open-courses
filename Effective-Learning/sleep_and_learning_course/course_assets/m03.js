@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Design study and training sessions around realistic attention capacity.",
     "A useful design habit is to identify the most attention-heavy part of the lesson and protect it."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Attention, Encoding, and Learning Readiness."
+  "graphicAlt": "Clear examples, retrieval and fewer interruptions help protect limited attention for the most demanding practice."
 };

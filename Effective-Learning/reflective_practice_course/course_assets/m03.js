@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Reflection after action reviews what happened and what should change.",
     "Reflection should support action rather than delay it indefinitely."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Reflection Before, During, and After Action."
+  "graphicAlt": "Reflection prepares before action, notices changing conditions during action and identifies improvements afterward, informing the next cycle."
 };

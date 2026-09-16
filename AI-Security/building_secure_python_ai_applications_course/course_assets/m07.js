@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Hallucination and uncertainty are security-relevant.",
     "User experience is part of the control model."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on AI output handling, validation, and user experience."
+  "graphicAlt": "Untrusted output requires structural and business-rule validation and context-appropriate encoding, with separate verification of high-impact claims."
 };

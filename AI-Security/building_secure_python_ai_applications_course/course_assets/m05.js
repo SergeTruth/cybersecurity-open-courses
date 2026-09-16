@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Retrieved content is evidence, not authority.",
     "Safe RAG systems validate the whole lifecycle."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on retrieval augmented generation and document safety."
+  "graphicAlt": "RAG classifies and indexes source documents, authorizes retrieval, supplies evidence context and presents source references with uncertainty while maintaining tenant boundaries."
 };

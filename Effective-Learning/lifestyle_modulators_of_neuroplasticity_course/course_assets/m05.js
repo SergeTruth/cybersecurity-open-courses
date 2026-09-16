@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Recovery is part of adaptation.",
     "This course stays non-clinical."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Stress, Challenge, and Recovery."
+  "graphicAlt": "A clear target and usable feedback make challenge productive, while overload obscures correction; recovery and adjustment support continued practice."
 };

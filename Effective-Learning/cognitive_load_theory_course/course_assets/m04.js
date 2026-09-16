@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Worked examples and partially completed examples are especially useful early.",
     "Progressive complexity is the key."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Managing Intrinsic Load."
+  "graphicAlt": "Foundations lead to supported combinations and then the full task, using examples and scaffolds to manage interacting elements."
 };

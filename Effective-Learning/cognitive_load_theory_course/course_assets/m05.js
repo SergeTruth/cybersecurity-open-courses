@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Redundancy can also create load.",
     "Navigation and pacing matter as well."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Reducing Extraneous Load."
+  "graphicAlt": "A cluttered layout with separated explanations becomes an integrated diagram with nearby labels, purposeful emphasis and clear navigation."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Avoid shame-based motivation and all-or-nothing thinking.",
     "A useful habit design question is: what should happen after the interruption?"
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Habits, Identity, and Social Context."
+  "graphicAlt": "Stable cues, repeatable action and supportive feedback form a routine with a next-small-step bridge after interruptions."
 };

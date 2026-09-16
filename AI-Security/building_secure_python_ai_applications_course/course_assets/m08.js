@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Logging must balance observability with minimization.",
     "Monitoring should focus on behavior and impact."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on secure operations, testing, logging, and monitoring for AI applications."
+  "graphicAlt": "Changes to models, prompts, tools and data are managed through regression tests, careful logging, monitoring and incident-driven improvement."
 };

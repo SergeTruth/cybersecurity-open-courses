@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The goal is not to follow a template mechanically.",
     "A durable ADDIE practice is clear, iterative, and evidence-informed."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 9"
+  "graphicAlt": "Clarify, plan, build, deliver and improve summarize ADDIE, anchored in learner outcomes and ongoing evidence-informed revision."
 };

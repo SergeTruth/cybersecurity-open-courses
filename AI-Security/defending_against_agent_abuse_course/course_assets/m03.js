@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Avoid broad standing credentials when task-specific or temporary access is practical.",
     "Permission reviews should continue after deployment."
   ],
-  "graphicAlt": "Blank white placeholder image for the restricting agent permissions module."
+  "graphicAlt": "Task-specific authorization separately controls read, draft and execute capabilities, with limited credentials, approval for execution and an explicit denied path."
 };

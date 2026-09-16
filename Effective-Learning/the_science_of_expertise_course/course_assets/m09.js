@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "For organizations, the goal is to build expertise that is visible, teachable, and reusable.",
     "The practical takeaway is simple: build reliable capability, not just familiarity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Reliable expertise combines organized knowledge, deliberate practice, feedback, adaptable judgment and reusable learning supported by evidence and system design."
 };

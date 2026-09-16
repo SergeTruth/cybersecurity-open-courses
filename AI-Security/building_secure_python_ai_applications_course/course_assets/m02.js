@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Every data source should have a clear authority level.",
     "The architecture should also show where decisions are enforced."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on AI application architecture and trust boundaries."
+  "graphicAlt": "Trusted configuration informs application enforcement; untrusted content can support interpretation and drafting but model proposals are still independently allowed or denied."
 };

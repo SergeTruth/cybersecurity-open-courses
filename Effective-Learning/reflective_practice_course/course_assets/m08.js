@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Psychological safety matters because people need enough trust to share uncertainty, missed signals, confusion, and uncomfortable facts.",
     "Team reflection should avoid talk without change."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Reflection in Teams."
+  "graphicAlt": "Teams surface facts, review evidence together and make a clear workflow adjustment, combining trust with accountability."
 };

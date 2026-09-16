@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Preparing data for AI summarization requires restraint.",
     "Evidence freshness matters because threat activity and reporting change."
   ],
-  "graphicAlt": "Blank course placeholder for module 3."
+  "graphicAlt": "Telemetry, reports and advisories are minimized and redacted for AI review while retaining provenance, freshness and caveats that distinguish historical context from current evidence."
 };

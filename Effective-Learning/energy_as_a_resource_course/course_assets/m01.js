@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "An open calendar does not automatically mean useful capacity.",
     "This course uses a practical, non-clinical frame."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What It Means to Treat Energy as a Resource."
+  "graphicAlt": "Available time differs from usable capacity; matching work, reducing drains and protecting recovery support practical planning."
 };

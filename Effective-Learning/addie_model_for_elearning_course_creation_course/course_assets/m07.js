@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Not every issue should be fixed immediately.",
     "Iteration is not a sign the original design failed."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 7"
+  "graphicAlt": "Reviewed evidence becomes an owned change record, then is prioritized for immediate repair, a planned update or monitoring."
 };

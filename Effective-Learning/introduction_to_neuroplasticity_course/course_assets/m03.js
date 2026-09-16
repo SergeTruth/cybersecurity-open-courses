@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Repetition with variation helps skill formation because real work rarely looks exactly like the lesson.",
     "Automaticity can develop when parts of a skill are practiced enough that they require less conscious effort."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Learning, Memory, and Skill Formation."
+  "graphicAlt": "Encoding, retrieval, application and correction support durable capability through an active learning loop."
 };

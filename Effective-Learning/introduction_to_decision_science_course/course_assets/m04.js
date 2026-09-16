@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Decision makers also need to distinguish reversible and irreversible choices.",
     "Sometimes the best decision is not a single big bet."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Options and Tradeoffs."
+  "graphicAlt": "A decision can use pilots, staged action, or commitment, with opportunity cost and reversibility considered for each route."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Perfectionism and procrastination can both distort time.",
     "Ignoring recovery is one of the most expensive failure modes."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Common Time Failure Modes."
+  "graphicAlt": "Overcommitment, switching, diminishing returns and crowded-out recovery can create busyness without value; reducing load, protecting time and enabling restarts improves the system."
 };

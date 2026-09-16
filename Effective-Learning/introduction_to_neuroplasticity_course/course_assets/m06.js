@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Fatigue matters because learning and performance require attention.",
     "Responsible use of neuroplasticity avoids extreme self-optimization claims."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Stress, Recovery, and Adaptation."
+  "graphicAlt": "Focused challenge and recovery support sustainable learning, while excess strain is shown as a separate overload condition."
 };

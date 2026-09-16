@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Effective learning is active.",
     "A useful test is to ask what evidence would prove the learner can do the thing."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Learning Really Means."
+  "graphicAlt": "Exposure and familiarity differ from recalling and applying knowledge; learning requires evidence of usable capability."
 };

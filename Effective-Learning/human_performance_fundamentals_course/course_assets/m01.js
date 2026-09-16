@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The core idea of this course is that human performance is a system design problem, not just a motivation problem.",
     "This systems view is useful because it creates more options."
   ],
-  "graphicAlt": "Blank placeholder image for module 1: What Is Human Performance?"
+  "graphicAlt": "Output volume differs from reliable work, which depends on clear priorities, good conditions, feedback, quality and judgment."
 };

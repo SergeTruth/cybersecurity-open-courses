@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Model provider boundaries matter whether the model is hosted or local.",
     "AI applications should avoid turning logs, memory, or vector stores into hidden data silos."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on data handling, privacy, and context control in AI applications."
+  "graphicAlt": "Available data is reduced to authorized, task-needed context, while memory, logs and vector stores have access, retention and deletion rules."
 };

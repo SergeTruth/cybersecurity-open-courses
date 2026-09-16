@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Tradeoffs are not failures.",
     "Deliberate choice means naming the cost before the calendar spends the time automatically."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Opportunity Cost and Tradeoffs."
+  "graphicAlt": "A new commitment displaces other uses of finite capacity and also brings hidden preparation, coordination and cleanup work."
 };

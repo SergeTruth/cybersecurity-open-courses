@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "It helps to separate roles.",
     "AI application security is not only model safety."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson introducing secure Python AI applications."
+  "graphicAlt": "A Python application surrounds its model with authorization, context control, tool permissions, validation and observability."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The goal is not to make learners consume more content.",
     "As a practical takeaway, look at any learning experience and ask four questions."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Connecting knowledge, understanding, retrieval, refinement and application support usable capability beyond passive content consumption."
 };

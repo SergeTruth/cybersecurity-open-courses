@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "AI can also help compare discovered material against the scope.",
     "Avoid intrusive or out-of-scope automation."
   ],
-  "graphicAlt": "Blank placeholder graphic for AI-assisted reconnaissance and mapping"
+  "graphicAlt": "Authorized observations are grouped into an application map, checked against scope and used for a manual review plan; discovered routes do not grant permission to test."
 };

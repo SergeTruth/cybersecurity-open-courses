@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "A weekly review turns scattered commitments into a usable picture.",
     "Routines make important work easier to start and finish."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Time Systems, Tools, and Routines."
+  "graphicAlt": "Calendars reserve time, task lists capture work and boards show flow; a weekly review combines them to choose a useful next action with less overhead."
 };

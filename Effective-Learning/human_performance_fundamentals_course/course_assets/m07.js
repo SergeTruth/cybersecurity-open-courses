@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "High-risk actions deserve deliberate friction.",
     "Error management works best when the team can discuss mistakes without turning every review into blame."
   ],
-  "graphicAlt": "Blank placeholder image for module 7: Decision Quality and Error Management"
+  "graphicAlt": "Scope confirmation, critical-step checks and appropriate review add deliberate care before high-consequence actions, while error discussion supports learning."
 };

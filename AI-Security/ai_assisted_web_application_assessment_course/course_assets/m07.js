@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Data flow reasoning should remain evidence-driven.",
     "Avoid blind trust in AI-generated interpretations."
   ],
-  "graphicAlt": "Blank placeholder graphic for AI support in code and API understanding"
+  "graphicAlt": "Code snippets and API documentation inform AI interpretations that must be verified in implementation, with data flows, trust assumptions and developer questions tied to supplied evidence."
 };

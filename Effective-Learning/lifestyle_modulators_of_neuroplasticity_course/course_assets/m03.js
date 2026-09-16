@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Exercise should be discussed as a non-clinical performance support, not as a prescription.",
     "For training and behavior design, movement can be built into routines."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Movement and Physical Activity."
+  "graphicAlt": "Learning can include movement within personal capacity and a return to practice; movement supports the rhythm rather than replacing skill practice."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Performance risk matters in driving, safety-sensitive roles, incident response, medical and operational settings, and any work where errors can compound.",
     "Persistent sleep, health, or safety concerns belong with qualified help."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Sleep Loss, Fatigue, and Performance Risk."
+  "graphicAlt": "Reduced readiness can narrow performance margin, prompting extra review, task adjustment or rescheduling when possible."
 };

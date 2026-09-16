@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Psychological safety at a practical level means people can raise risks, ask questions, admit uncertainty, and challenge assumptions without unnecessary punishment or humiliation.",
     "Sustainable pace reduces reliance on heroic individual effort."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Energy in Teams and Organizations."
+  "graphicAlt": "Clear ownership, useful communication, early risk discussion and a sustainable pace support shared team capacity."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Learner engagement comes from relevance, examples, pacing, and application more than gimmicks.",
     "For narration workflows, keep the script connected to the module structure."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 5"
+  "graphicAlt": "Narration explains a main idea while concise labels and purposeful media focus attention; scripts, audio, captions and media stay aligned."
 };

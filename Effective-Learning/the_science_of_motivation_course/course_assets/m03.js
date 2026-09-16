@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Expectancy matters too.",
     "Feedback loops sustain motivation by connecting behavior to results."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Goals, Expectations, and Progress."
+  "graphicAlt": "Desired outcomes become actions under the learner’s control, with visible progress feeding adjustments to the next action."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Deliberate practice is goal-directed, feedback-driven, and intentionally challenging.",
     "The practical mindset is simple but demanding."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Deliberate Practice."
+  "graphicAlt": "Deliberate practice cycles through a chosen skill, focused attempt, feedback and correction to improve the next attempt."
 };

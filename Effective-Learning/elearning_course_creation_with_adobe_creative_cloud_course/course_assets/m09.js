@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Durable production depends on organization.",
     "The practical takeaway is simple: media should serve learning."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 9"
+  "graphicAlt": "Visuals, audio, video and job aids should serve a learner need and remain accessible, reviewed and maintainable."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "They also respect the limits of judgment.",
     "The goal is better judgment, better process, better learning, and more reliable action over time."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "A decision process frames, compares, assesses uncertainty, acts and learns in a repeating loop; a good process does not guarantee a good outcome."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Weak feedback environments are dangerous because they allow habits to form without correction.",
     "Error correction is most useful before mistakes become automatic."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Feedback, Coaching, and Error Correction."
+  "graphicAlt": "Effective feedback observes an attempt, explains the cue or reasoning and identifies a specific correction to retry."
 };

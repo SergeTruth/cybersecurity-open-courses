@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This is one reason experts can appear fast.",
     "Strong performance requires active updating."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Mental Models and Situational Awareness."
+  "graphicAlt": "Situational awareness notices cues, interprets them through a working model and anticipates possibilities, updating the model when evidence changes."
 };

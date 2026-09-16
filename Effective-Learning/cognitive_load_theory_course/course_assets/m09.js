@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Worked examples, guided practice, feedback, signaling, purposeful multimedia, and adaptive support all help manage load.",
     "The goal is not to make learning effortless."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Sequencing, reduced friction, guided practice and adaptive support help learners build usable schemas and apply understanding."
 };

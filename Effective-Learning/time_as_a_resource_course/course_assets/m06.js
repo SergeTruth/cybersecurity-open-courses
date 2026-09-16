@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Meeting discipline protects the time of everyone involved.",
     "Commitments should be explicit, visible, and reviewable."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Time Boundaries and Commitments."
+  "graphicAlt": "Reliable commitments account for preparation, execution and review, while new requests may require renegotiation and protected focus or recovery."
 };

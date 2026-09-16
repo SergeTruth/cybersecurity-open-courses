@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "AI does not replace source validation, analyst judgment, uncertainty handling, or responsible attribution.",
     "The goal is not to name actors for its own sake."
   ],
-  "graphicAlt": "Blank course placeholder for module 9."
+  "graphicAlt": "Responsible profiling scopes the question, validates evidence, analyzes behavior, states confidence and supports defensive decisions, grounded in privacy, provenance and human review."
 };

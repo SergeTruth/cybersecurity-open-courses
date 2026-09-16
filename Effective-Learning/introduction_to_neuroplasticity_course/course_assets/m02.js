@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Attention, emotion, repetition, feedback, and context all influence learning.",
     "The practical implication is clear: people adapt to the systems around them."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, The Brain as an Adaptive System."
+  "graphicAlt": "Repeated use affects pattern accessibility, while tools, routines and feedback shape what the learning environment repeatedly requires."
 };

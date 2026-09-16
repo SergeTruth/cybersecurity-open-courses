@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Nutrition should support sustainable performance rather than becoming a distraction from practice.",
     "For course and workplace design, energy planning can be simple."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Nutrition, Hydration, and Energy Stability."
+  "graphicAlt": "Demanding practice is supported by basic needs, useful timing and realistic breaks; caffeine is not equivalent to rest."
 };

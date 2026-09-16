@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Responsible profiling focuses on defensible behavior patterns rather than speculation or sensational labels.",
     "AI systems should inherit those boundaries."
   ],
-  "graphicAlt": "Blank course placeholder for module 2."
+  "graphicAlt": "A defensive decision guides the environment, period, authorized sources and intended audience, with privacy and ethics keeping behavior observations distinct from uncertain identity."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Stakeholders and decision ownership matter.",
     "Finally, ask what happens if no decision is made."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Framing the Decision."
+  "graphicAlt": "A decision frame gathers scope, time horizon, constraints, and ownership, with the cost of inaction considered separately."
 };

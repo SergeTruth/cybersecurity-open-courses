@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Spacing improves durability by revisiting material across time instead of concentrating all practice in one sitting.",
     "For course design, this means review should not be treated as filler."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Memory, Retrieval, and Spacing."
+  "graphicAlt": "Recognizing material differs from recalling it without the answer, and spaced retrieval creates repeated opportunities to revisit learning."
 };

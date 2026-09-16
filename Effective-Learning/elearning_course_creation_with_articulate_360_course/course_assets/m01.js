@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The tool does not replace instructional design.",
     "A useful way to frame Articulate 360 work is to treat each project as a learning product with a lifecycle."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 1"
+  "graphicAlt": "Defining a learning need, authoring, review, delivery and maintenance form the course lifecycle; Articulate 360 supports authoring rather than replacing instructional purpose."
 };

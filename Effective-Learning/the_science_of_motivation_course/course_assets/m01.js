@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Motivation is therefore not simply willpower.",
     "This matters in work, learning, leadership, and skill development because people rarely operate at constant intensity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Motivation."
+  "graphicAlt": "Motivation supports wanting, deciding, starting, continuing and finishing, with clarity, feedback and energy helping people re-engage."
 };

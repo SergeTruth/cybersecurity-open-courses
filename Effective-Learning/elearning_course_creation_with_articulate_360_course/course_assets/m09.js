@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "A durable course is also maintainable.",
     "The practical takeaway is simple: design decisions should be explainable."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 9"
+  "graphicAlt": "Structure, media, interactions and assessment serve the performance goal, supported by accessibility, review and maintainability."
 };

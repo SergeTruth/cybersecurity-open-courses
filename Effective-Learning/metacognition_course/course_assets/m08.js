@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "A practical AI workflow includes metacognitive checkpoints.",
     "This is also useful for delegation and review."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Metacognition in Work, Teams, and AI-Assisted Tasks."
+  "graphicAlt": "Generated output passes through checks of sources, assumptions and constraints before the task owner exercises accountable judgment."
 };

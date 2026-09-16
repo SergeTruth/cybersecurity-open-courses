@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Review cycles should be managed deliberately.",
     "Avoid overproduction before the design is validated."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 4"
+  "graphicAlt": "A representative prototype is reviewed and revised before production expands into organized, traceable course assets."
 };

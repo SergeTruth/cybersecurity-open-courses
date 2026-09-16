@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Lifecycle controls matter because agent capabilities change.",
     "Effective governance supports business value rather than treating every change as identical."
   ],
-  "graphicAlt": "Blank white placeholder image for the governance and organizational controls module."
+  "graphicAlt": "Inventory and ownership support review, release, change reassessment and retirement, with risk tiers, evidence and accountability across the lifecycle."
 };

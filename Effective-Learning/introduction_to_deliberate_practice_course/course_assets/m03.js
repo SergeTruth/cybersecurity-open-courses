@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Observable behaviors make practice easier to design.",
     "Choosing one improvement target at a time protects focus."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Defining the Skill Clearly."
+  "graphicAlt": "A broad capability is decomposed into subskills, then one observable bottleneck is selected as the practice target."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "AI models can support workflows, but they should not become unsupervised authorities over data access, permissions, or high-impact actions.",
     "The goal is useful AI automation that remains controlled, observable, privacy-aware, and resilient as the application evolves."
   ],
-  "graphicAlt": "Blank placeholder image for the course summary on building secure Python AI applications."
+  "graphicAlt": "Controlled, observable, privacy-aware and resilient AI applications rely on boundaries, authorization, validation and operations, with the model assisting rather than deciding authority."
 };

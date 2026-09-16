@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Instructional design should come before visual production.",
     "Use Creative Cloud to clarify, focus, and reinforce."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 1"
+  "graphicAlt": "An instructional plan guides Creative Cloud asset production, which feeds course assembly and then LMS delivery and tracking."
 };

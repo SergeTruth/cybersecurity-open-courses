@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Challenge should be balanced with recoverability.",
     "Deliberate practice also requires selecting the right measure."
   ],
-  "graphicAlt": "Blank placeholder image for module 6: Skill Development and Deliberate Practice"
+  "graphicAlt": "Selecting a skill component, practicing, comparing results and correcting approach form a feedback loop measured by relevant performance qualities."
 };

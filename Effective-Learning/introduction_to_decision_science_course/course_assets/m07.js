@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Useful practices include checklists, explicit assumptions, independent estimates, pre-mortems, red-team review at a high level, and structured disagreement.",
     "Decision hygiene does not assume perfect rationality."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Bias, Noise, and Decision Hygiene."
+  "graphicAlt": "Bias shifts judgments systematically, noise adds unwanted variation, and independent views, explicit assumptions and pre-mortems help support judgment."
 };

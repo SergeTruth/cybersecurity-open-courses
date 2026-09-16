@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Hidden emotional labor is often invisible in plans.",
     "Small drains compound across a week."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Energy Drains and Energy Leaks."
+  "graphicAlt": "Unclear priorities, open loops, interruptions and unresolved friction are examined for opportunities to clarify, close and simplify."
 };

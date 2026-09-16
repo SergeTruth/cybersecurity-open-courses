@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Avoid overcrowded screens.",
     "One practical screen-design test is to ask what the learner should notice within the first few seconds."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 4"
+  "graphicAlt": "A clear course path moves through context, explanation, examples and practice, with calm layouts and progressive disclosure."
 };

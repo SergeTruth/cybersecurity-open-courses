@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Psychological safety at a practical level means people can ask questions, surface problems, and admit uncertainty without being punished for honesty.",
     "Teams should not depend only on heroic individual motivation."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Social Motivation and Team Systems."
+  "graphicAlt": "Clear expectations, safety to ask questions, useful feedback and practical support help teams sustain work toward shared goals without lowering standards."
 };

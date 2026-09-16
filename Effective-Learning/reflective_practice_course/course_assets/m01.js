@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Reflective practice matters in technical work, learning, leadership, communication, incident response, and skill development.",
     "This course treats reflection as practical and non-clinical."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Reflective Practice?."
+  "graphicAlt": "Reflection examines evidence from experience and converts it into a change for the next attempt."
 };

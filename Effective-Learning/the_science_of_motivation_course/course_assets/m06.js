@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Self-regulation is the ability to notice impulses, pause, and choose a useful next action.",
     "Breaking work into smaller next actions can help because it reduces ambiguity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Emotion, Energy, and Self-Regulation."
+  "graphicAlt": "Pausing to identify ambiguity, overload, missing information or low energy helps select a useful next action while supporting recovery."
 };

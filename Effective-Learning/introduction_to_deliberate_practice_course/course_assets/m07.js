@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Avoid vanity metrics.",
     "A good progress review should lead to a decision."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Measuring Progress."
+  "graphicAlt": "Practice time provides context, but baseline comparisons and performance evidence guide whether to continue, adjust or advance."
 };

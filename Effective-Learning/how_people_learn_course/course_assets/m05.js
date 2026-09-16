@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Feedback is most useful when it helps learners improve, not merely when it judges them.",
     "Variation keeps practice from becoming memorized theater."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Practice and Feedback."
+  "graphicAlt": "Examples, guided attempts, specific corrective feedback and varied application help move understanding toward usable skill."
 };

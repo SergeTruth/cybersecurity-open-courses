@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Unsafe or extreme performance practices should be avoided.",
     "Recovery also has an operational dimension."
   ],
-  "graphicAlt": "Blank placeholder image for module 3: Energy, Fatigue, and Recovery"
+  "graphicAlt": "Demand is followed by recovery and a prepared return to work, while health and safety limits remain part of the plan."
 };

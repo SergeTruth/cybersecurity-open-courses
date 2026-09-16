@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Stakeholder review should confirm accuracy, tone, completeness, brand fit, and learner relevance.",
     "Quality assurance is not a single final click-through."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 8"
+  "graphicAlt": "Early review, asset checks and delivery verification support readable, accessible, responsive and accurate learning materials throughout production."
 };

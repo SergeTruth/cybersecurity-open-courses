@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Time served does not automatically produce expertise.",
     "A useful improvement cycle is simple to describe, even when it takes discipline to execute."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Deliberate Practice and Skill Development."
+  "graphicAlt": "Deliberate practice targets a component skill, attempts it, compares against a standard and corrects the gap before varying conditions."
 };

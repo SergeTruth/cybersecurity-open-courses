@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Useful AI support often appears in planning, documentation, triage, and reporting.",
     "AI should not be trusted to run unsupervised testing, bypass scope limits, make final severity decisions, or publish findings without review."
   ],
-  "graphicAlt": "Blank placeholder graphic for AI-assisted web application assessment overview"
+  "graphicAlt": "Within an authorized engagement, AI assists planning, organization and drafting, while assessor judgment verifies the final assessment output."
 };

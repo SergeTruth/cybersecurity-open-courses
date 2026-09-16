@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This course keeps expectations realistic and non-clinical.",
     "The practical goal is to create better conditions for deliberate practice and sustainable learning."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Lifestyle Modulators Mean."
+  "graphicAlt": "Rest, movement, stable energy and social support form conditions around practice; practice and feedback still build the skill."
 };

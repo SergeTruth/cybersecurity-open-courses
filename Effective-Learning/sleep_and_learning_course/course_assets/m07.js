@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Breaks and recovery days matter for demanding learning.",
     "Avoid extreme routines and idealized productivity advice."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Timing Practice, Review, and Recovery."
+  "graphicAlt": "Repeatable practice sessions are distributed around recovery intervals and fitted to real-life constraints."
 };

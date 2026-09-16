@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Decision quality is not measured only by whether a single outcome went well.",
     "Simulations and scenario exercises can reveal expertise because they place people in realistic constraints without waiting for real consequences."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Measuring Expertise and Decision Quality."
+  "graphicAlt": "Evaluate expertise using relevant performance, calibrated confidence and reasoning available at decision time, rather than a single outcome or status."
 };

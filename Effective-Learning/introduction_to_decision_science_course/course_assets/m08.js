@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Team decisions need role clarity.",
     "After-action reviews close the loop."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Decision Tools and Team Decisions."
+  "graphicAlt": "A team compares options, makes an owned decision, records its reasons and reviews the result, supported by clear roles and useful dissent."
 };

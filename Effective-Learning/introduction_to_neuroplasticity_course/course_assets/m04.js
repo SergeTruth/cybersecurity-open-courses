@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Distraction, divided attention, and excessive cognitive load make learning harder.",
     "A good practice environment helps the learner notice and correct important details."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Attention and Focus in Plastic Change."
+  "graphicAlt": "Focused attention selects one clear target from competing information, reducing interruptions so feedback can support noticing and correction."
 };

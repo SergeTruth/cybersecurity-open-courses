@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Strategy selection includes choosing when to use notes, examples, diagrams, checklists, experiments, retrieval practice, peer review, or a worked example.",
     "The practical risk is strategy autopilot."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Planning and Strategy Selection."
+  "graphicAlt": "Different task types call for different methods: diagrams for relationships, checklists for repeatable steps and experiments for testable uncertainty."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Cognitive load still matters for experts.",
     "The practical lesson is to automate the right things while keeping critical thinking engaged."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Automaticity, Attention, and Cognitive Load."
+  "graphicAlt": "Practiced components free attention for judgment and exceptions, while checklists, verification pauses and peer review protect against error."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Organizations and teams shape sleep-supportive learning too.",
     "For teams, one practical improvement is to make recovery visible in planning."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Building Sleep-Supportive Learning Systems."
+  "graphicAlt": "Capturing unfinished work, naming the next step and preparing materials help close loops and protect recovery within realistic team schedules."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Recovery is part of performance.",
     "Performance problems are often system problems."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Performance Degradation and Recovery."
+  "graphicAlt": "Performance drift prompts examination of workload, tools and handoffs, followed by changes that restore support instead of merely adding effort."
 };

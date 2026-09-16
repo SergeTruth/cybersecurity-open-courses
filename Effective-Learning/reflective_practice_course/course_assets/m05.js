@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Feedback improves calibration.",
     "Hindsight bias can distort reflection by making outcomes seem more predictable after they happen than they really were before."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Evidence, Feedback, and Calibration."
+  "graphicAlt": "Observed facts are distinguished from interpretations, which are tested against evidence while considering what was knowable at decision time."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Safe practice environments can include rehearsal, drills, simulations, worked examples, targeted exercises, and low-stakes review.",
     "Separating learning time from production pressure does not mean practice is artificial or irrelevant."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Practice Versus Performance."
+  "graphicAlt": "Practice allows slowing down, repeating and correcting components; the developed skill transfers to delivering the real task."
 };

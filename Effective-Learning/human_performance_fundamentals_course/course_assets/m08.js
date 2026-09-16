@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Meeting hygiene, escalation paths, and feedback culture all matter.",
     "Healthy teams also make work visible."
   ],
-  "graphicAlt": "Blank placeholder image for module 8: Team Performance and Communication"
+  "graphicAlt": "A shared picture of goals, roles, current state, risks and next actions supports documented handoffs and honest coordination."
 };

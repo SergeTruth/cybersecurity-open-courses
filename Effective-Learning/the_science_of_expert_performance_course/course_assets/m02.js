@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This is why performance should be evaluated in context.",
     "Training and assessment should therefore include realistic constraints."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Performance Domains and Real-World Conditions."
+  "graphicAlt": "Real performance is shaped by time pressure, partial information, coordination and tradeoffs, so practice progressively includes those conditions."
 };

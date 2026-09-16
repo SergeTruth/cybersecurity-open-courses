@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Authentication and authorization deserve careful attention.",
     "Third-party integrations and APIs often expand the assessment surface."
   ],
-  "graphicAlt": "Blank placeholder graphic for understanding the web application"
+  "graphicAlt": "An application model connects workflows, user roles, sensitive data and integrations while distinguishing authentication from authorization and verifying intended behavior."
 };

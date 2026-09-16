@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Busy environments often skip learning because the next demand arrives before the current one has been understood.",
     "Reflective practice turns events into evidence."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Experience Does Not Automatically Become Learning."
+  "graphicAlt": "Repeated activity can continue unchanged unless attention, comparison, feedback and correction lead to changed behavior."
 };

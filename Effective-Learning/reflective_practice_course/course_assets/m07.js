@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Operations and troubleshooting also create reflective opportunities.",
     "AI-assisted work adds another reflective layer."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Reflective Practice for Technical Work."
+  "graphicAlt": "After resolving a technical issue, reflection examines the work and can improve observability, guidance and ownership."
 };

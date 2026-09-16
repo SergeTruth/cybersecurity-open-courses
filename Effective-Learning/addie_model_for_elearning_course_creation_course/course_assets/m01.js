@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "It also helps separate related but different kinds of work.",
     "The practical purpose of ADDIE is decision support."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 1"
+  "graphicAlt": "Analyze, design, develop, implement and evaluate form an instructional design workflow, with evidence guiding revision."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Versioning is important for downloadable resources because learners may save copies.",
     "Align job aids with real workplace tasks."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 7"
+  "graphicAlt": "Job aids extend course learning into workplace application and should be accessible, maintainable and relevant to the task."
 };

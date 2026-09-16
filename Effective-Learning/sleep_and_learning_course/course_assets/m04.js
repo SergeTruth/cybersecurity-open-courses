@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "All-night cramming can be misleading because it feels productive.",
     "Use sleep as part of the learning cycle."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Sleep and Memory Consolidation."
+  "graphicAlt": "Learning, retrieval, sleep, review, application and correction form a repeated cycle; sleep supports rather than replaces meaningful practice."
 };

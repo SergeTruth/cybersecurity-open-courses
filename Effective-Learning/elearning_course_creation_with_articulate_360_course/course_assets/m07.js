@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "SCORM completion and success are tracking concepts, not learning design by themselves.",
     "Completion rules should be agreed on before publishing."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 7"
+  "graphicAlt": "Objectives guide final assessment, while completion, score and success are separately defined LMS reporting requirements."
 };

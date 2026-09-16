@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Organizational consequences can include unauthorized data access, incorrect system changes, inappropriate communications, financial loss, privacy exposure, service disruption, or decisions made from misleading information.",
     "Defending against abuse begins by treating the agent as a security-sensitive software system."
   ],
-  "graphicAlt": "Blank white placeholder image for the understanding agent abuse module."
+  "graphicAlt": "Misuse and mistakes can influence an agent, while its access, actions and oversight shape potential downstream impact."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This has implications far beyond technical troubleshooting.",
     "Training for expertise therefore needs more than definitions."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Knowledge, Mental Models, and Pattern Recognition."
+  "graphicAlt": "Organized mental models group details into meaningful patterns, helping identify relevant cues and choose actions."
 };

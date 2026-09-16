@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Strong support systems are sustainable.",
     "The goal is not perfect optimization."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Deliberate practice sits within rest, readiness, attention design, habits and support, with individual needs respected."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "HTTP evidence can be especially useful because it records what the application actually sent and received.",
     "Screenshots and behavior notes help tell the story when they are tied to timestamps and source references."
   ],
-  "graphicAlt": "Blank placeholder graphic for reviewing evidence and tool output"
+  "graphicAlt": "HTTP evidence, tool output, screenshots and notes are protected and summarized, then verified against their sources before supporting a finding."
 };

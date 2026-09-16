@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Repetition with variation is important.",
     "Practice should be separated from production when possible."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Practice Design for Expert Performance."
+  "graphicAlt": "Practice targets a weak point, varies meaningful conditions and tests transfer back to real performance, feeding results into the next practice cycle."
 };

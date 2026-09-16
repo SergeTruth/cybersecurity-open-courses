@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Interactions and media can become mistakes when added without purpose.",
     "Finally, teams sometimes treat LMS upload as the end of implementation and completion as the only evaluation."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 8"
+  "graphicAlt": "Common design pitfalls are addressed by starting with the need, specifying performance, choosing purposeful media and following through after launch."
 };

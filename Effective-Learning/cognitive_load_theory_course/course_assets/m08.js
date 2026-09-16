@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Adaptive design can be simple.",
     "The goal is to support novices without trapping experienced learners in unnecessary detail."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Expertise Reversal and Adaptive Design."
+  "graphicAlt": "Beginners receive worked examples, developing learners use faded support, and experienced learners tackle varied cases with optional reference help."
 };

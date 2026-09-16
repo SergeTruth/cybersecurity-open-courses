@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Mental rehearsal can be useful in a general way when it helps someone prepare steps, anticipate decisions, or review a performance.",
     "Measure skill by performance, not just time spent practicing."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Sleep and Skill Development."
+  "graphicAlt": "Quality practice and correction are tested through performance, with recovery supporting repeated attempts; time alone does not prove skill."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The same idea works in the opposite direction.",
     "Habit loops are repeated patterns shaped by cues, behavior, and reinforcement."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Friction, Environment, and Habit Loops."
+  "graphicAlt": "A clear cue, small first action and useful reinforcement support repeatable behavior, while adding friction to distractions protects attention."
 };

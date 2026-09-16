@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Monitoring progress means noticing whether the current method is working.",
     "This also helps learners know when to ask for help."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Metacognition for Learning and Skill Development."
+  "graphicAlt": "Planning practice, testing recall, identifying gaps and adjusting form an adaptive learning loop, with focused help when a gap is identified."
 };

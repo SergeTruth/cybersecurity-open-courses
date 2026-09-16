@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "These ideas apply across technical skills, communication, leadership, and personal development.",
     "Be cautious with brain hack claims."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Applying Neuroplasticity Responsibly."
+  "graphicAlt": "Realistic goals support revisiting, retrieval, deliberate practice, correction and measurement, rather than claims of instant rewiring."
 };

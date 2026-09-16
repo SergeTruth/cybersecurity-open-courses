@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Operational controls make behavior visible and manageable.",
     "Governance connects these controls to organizational accountability."
   ],
-  "graphicAlt": "Blank white placeholder image for the defending against agent abuse course summary module."
+  "graphicAlt": "Technical controls, operational controls and governance combine least privilege, validation, monitoring, response, ownership and review around agent capabilities."
 };

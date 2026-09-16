@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Different work types create different demands.",
     "Fatigue does not always announce itself directly."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Types of Energy in Real Work."
+  "graphicAlt": "Physical, cognitive, emotional, social, creative and decision demands overlap but differ across tasks."
 };

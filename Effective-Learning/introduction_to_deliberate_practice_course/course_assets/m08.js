@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Recovery belongs in the system.",
     "A practice plan should be simple enough to use."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Building a Sustainable Practice System."
+  "graphicAlt": "A sustainable system keeps materials ready, protects practice time, provides feedback and makes rest and restarting normal."
 };

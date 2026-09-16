@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Cognitive load is not a judgment about intelligence.",
     "The goal is not to make learning effortless."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Cognitive Load Theory."
+  "graphicAlt": "Limited working memory processes new ideas into organized long-term knowledge, supported by sequenced complexity and reduced presentation friction."
 };

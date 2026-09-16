@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sleep consistency can help learners plan better practice.",
     "Practical sleep hygiene concepts should stay general: protect a reasonable wind-down routine where possible, reduce avoidable late interruptions, and respect the relationship between recovery and learning quality."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Sleep and Learning Readiness."
+  "graphicAlt": "Recovery supports readiness, and lower readiness can lead to guided review instead of demanding new practice; fatigue informs design rather than blame."
 };

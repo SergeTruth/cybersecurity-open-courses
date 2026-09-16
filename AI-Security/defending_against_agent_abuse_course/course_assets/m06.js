@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Monitoring can identify repeated blocked actions, unusual tool sequences, unexpected data access, approval failures, abnormal transaction volume, elevated error rates, or activity outside the approved task.",
     "Incident response plans should explain how to pause the agent, revoke credentials, disable tools, preserve logs and memory, identify affected systems, and review recent changes."
   ],
-  "graphicAlt": "Blank white placeholder image for the monitoring and logging agent activity module."
+  "graphicAlt": "Request, tool, policy and outcome records are minimized and correlated for an accountable triage owner, with pause, revoke and evidence-preservation responses."
 };

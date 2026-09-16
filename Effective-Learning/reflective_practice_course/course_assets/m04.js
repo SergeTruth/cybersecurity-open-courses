@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Outcome questions connect reflection to improvement.",
     "Blame questions usually produce weaker learning."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Asking Better Reflective Questions."
+  "graphicAlt": "Evidence-oriented questions explore events, assumptions, repeatability and future changes rather than stopping at blame."
 };

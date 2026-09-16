@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Practical pause techniques can also help at a non-clinical level.",
     "Expert performers know when speed is useful and when slowing down is safer."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Pressure, Stress, and Performance Stability."
+  "graphicAlt": "Preparation and deliberate checks of stakes help maintain observation, reasoning and communication while choosing an appropriate pace under pressure."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Monitoring does not mean stopping every few seconds.",
     "A useful signal is the phrase, I sort of get it."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Monitoring Understanding in Real Time."
+  "graphicAlt": "Meaningful checkpoints examine meaning, evidence and assumptions, allowing work to continue or return for clarification and testing."
 };

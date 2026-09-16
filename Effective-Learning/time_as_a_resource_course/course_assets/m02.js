@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Cognitive load is the mental demand placed on working memory.",
     "A practical system matches task type to available state."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Time, Attention, and Energy."
+  "graphicAlt": "Useful planning matches tasks to available time, attention and energy, protecting demanding work and grouping routine tasks appropriately."
 };

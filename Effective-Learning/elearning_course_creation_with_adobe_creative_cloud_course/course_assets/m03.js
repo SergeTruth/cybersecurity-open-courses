@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Screenshots deserve special care.",
     "Reducing cognitive load is a central design goal."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 3"
+  "graphicAlt": "A cluttered interface becomes a focused instructional visual through cropping, callouts, hierarchy, whitespace and readable contrast."
 };

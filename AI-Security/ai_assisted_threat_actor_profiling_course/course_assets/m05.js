@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "AI can help extract TTP observations from reports and incident notes.",
     "Behavior-based profiling supports practical defense."
   ],
-  "graphicAlt": "Blank course placeholder for module 5."
+  "graphicAlt": "Observed behavior is organized through TTP mapping to support detection planning, while shared techniques and attached source references prevent mapping from being mistaken for attribution."
 };

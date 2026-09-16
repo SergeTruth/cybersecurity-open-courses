@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Cognitive load matters because working memory has limits.",
     "Deliberate practice is mentally demanding, but it should not become unsafe or unsustainable intensity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Focus, Difficulty, and Cognitive Load."
+  "graphicAlt": "Useful practice stretches current ability without overload and is supported by focus and recovery."
 };

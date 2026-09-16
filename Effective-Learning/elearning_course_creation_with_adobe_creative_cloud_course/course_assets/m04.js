@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Consistent templates and reusable components improve quality and speed.",
     "Design graphics for the destination."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 4"
+  "graphicAlt": "Raster and vector artwork are composed to explain relationships and exported appropriately for course screens, responsive lessons or handouts."
 };

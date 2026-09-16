@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Good learning design manages load deliberately.",
     "One practical move is to separate must-know structure from nice-to-know detail."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Attention and Cognitive Load."
+  "graphicAlt": "A clear core pattern replaces competing detail, using sequencing, chunking and reduced clutter before adding complexity."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Choose the tool by the learning problem, not by habit.",
     "Tool choice also affects the project team."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 3"
+  "graphicAlt": "Custom slide control and responsive course structures offer different tradeoffs, evaluated against the objective, flexibility, speed, accessibility and maintenance needs."
 };

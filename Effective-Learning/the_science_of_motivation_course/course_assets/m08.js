@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Perfectionism can also block motivation by making the first step feel too risky.",
     "At a non-clinical level, burnout risk is a warning sign that intensity has replaced sustainability."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Motivation Failure Modes."
+  "graphicAlt": "Conflicting incentives, perfectionism, overload and invisible progress call for reviewing conditions, resetting priorities, supporting restarts and restoring support."
 };

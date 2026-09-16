@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Strong performers also build systems around their work.",
     "The final takeaway is sustainable, adaptable, evidence-informed performance under real conditions."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Reliable performance is supported by understanding, attention, deliberate practice, calibration and recovery under real conditions."
 };

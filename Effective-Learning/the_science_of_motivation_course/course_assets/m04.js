@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The risk is that poorly designed incentives can distort behavior.",
     "A practical approach is to combine motivation sources thoughtfully."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Intrinsic and Extrinsic Motivation."
+  "graphicAlt": "Interest in the work and external structures can both support useful behavior, but incentive design must be checked against real quality."
 };

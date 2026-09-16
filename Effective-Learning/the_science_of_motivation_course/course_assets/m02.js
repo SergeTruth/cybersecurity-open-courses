@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Meaning should be handled carefully.",
     "In learning and workplace performance, relevance is often the first bridge to meaning."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Needs, Values, and Meaning."
+  "graphicAlt": "Real relevance connects effort to valued outcomes, supported by autonomy, competence and belonging when purpose matches working conditions."
 };

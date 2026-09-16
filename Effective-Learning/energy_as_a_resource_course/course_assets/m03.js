@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Context switching is a common energy leak.",
     "Demanding work should be protected from low-energy windows when possible."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Energy, Attention, and Cognitive Load."
+  "graphicAlt": "Repeated switching forces context to be rebuilt, while protected focus and routine-task batching help match demands to attention quality."
 };

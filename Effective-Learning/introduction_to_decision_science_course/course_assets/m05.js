@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Confidence ranges are also useful.",
     "The phrase I do not know should not end the analysis."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Uncertainty and Probability."
+  "graphicAlt": "Base rates inform an uncertain current belief, and new evidence supports an updated belief rather than a permanently fixed forecast."
 };

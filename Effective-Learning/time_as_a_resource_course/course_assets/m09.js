@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The best systems are practical and humane.",
     "The final takeaway is simple: use time in a way that supports reliable execution, sustainable performance, and a life that matches actual priorities."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Deliberate time use matches attention, names tradeoffs, leaves room and reviews plans to support actual priorities reliably and sustainably."
 };

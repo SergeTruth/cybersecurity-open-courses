@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "AI is also useful for finding gaps.",
     "The workflow should make unsupported conclusions harder to publish."
   ],
-  "graphicAlt": "Blank course placeholder for module 7."
+  "graphicAlt": "Source-linked input moves through AI organization and comparison to contradictions and gaps, then analyst review separating facts, hypotheses and unknowns."
 };

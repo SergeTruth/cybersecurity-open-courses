@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Common criteria include quality, cost, speed, safety, resilience, ethics, reversibility, maintainability, user impact, operational burden, and learning value.",
     "Unclear objectives create false agreement."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Objectives, Values, and Criteria."
+  "graphicAlt": "Objectives describe the desired conditions, values explain why they matter, and criteria compare options; must-haves screen viability before nice-to-haves."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The course also emphasized boundaries.",
     "The final takeaway is that improvement is a system."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Adaptation over time is supported by attention, practice, feedback, and environments that allow recovery; improvement is practical rather than magical."
 };

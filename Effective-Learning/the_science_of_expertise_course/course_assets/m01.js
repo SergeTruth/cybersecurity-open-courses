@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Expertise is also domain-specific.",
     "For practical training and workplace development, this definition changes the goal."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Expertise."
+  "graphicAlt": "Expertise is demonstrated by repeated performance within a domain, not status or confidence alone, and includes awareness of its limits."
 };

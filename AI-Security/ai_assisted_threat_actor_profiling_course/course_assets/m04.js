@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Targeting analysis looks at sectors, geographies, technologies, roles, data types, and victimology.",
     "The safest analytic habit is to separate observed facts from inferred judgments."
   ],
-  "graphicAlt": "Blank course placeholder for module 4."
+  "graphicAlt": "Observed facts inform analytic judgments and hypotheses about objectives, capabilities and targeting, with interpretation constrained by evidence and confidence."
 };

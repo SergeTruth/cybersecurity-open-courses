@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Storyboards make the design visible before production becomes expensive.",
     "Accessibility should be planned here, not added at the end."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 3"
+  "graphicAlt": "A reviewed storyboard aligns observable objectives, practice and assessment, supported by narration, visuals and accessibility planning."
 };

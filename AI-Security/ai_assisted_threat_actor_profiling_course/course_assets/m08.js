@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Attribution has limits.",
     "Structured analytic language makes reporting more defensible."
   ],
-  "graphicAlt": "Blank course placeholder for module 8."
+  "graphicAlt": "Repeated reports may share one original source, whereas independent evidence supports confidence assessment; alternatives, bias and unknowns remain part of review."
 };

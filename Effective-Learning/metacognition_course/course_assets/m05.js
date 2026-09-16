@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Comparing predictions to outcomes strengthens reflection.",
     "Personal after-action reviews, learning journals, and decision notes can make reflection easier."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Reflection and Self-Explanation."
+  "graphicAlt": "Comparing expected and observed results reveals what changed and informs the next approach through structured reflection."
 };

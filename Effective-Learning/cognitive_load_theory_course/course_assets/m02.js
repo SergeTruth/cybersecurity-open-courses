@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Expertise reduces working memory demand because experts have organized patterns available in long-term memory.",
     "Instruction should therefore help learners build usable schemas over time."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Working Memory, Long-Term Memory, and Schemas."
+  "graphicAlt": "Schemas organize separate details into meaningful patterns; prior knowledge supports processing without enlarging working memory capacity."
 };

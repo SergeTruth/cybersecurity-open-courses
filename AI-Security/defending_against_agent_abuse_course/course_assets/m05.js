@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Risk tiers help balance control with productivity.",
     "If approval is missing, denied, or expired, the workflow should stop safely."
   ],
-  "graphicAlt": "Blank white placeholder image for the human oversight and approval gate module."
+  "graphicAlt": "Reviewers inspect target, parameters and effect, and approval is bound to that exact action before execution; missing, denied or expired approval stops the workflow."
 };

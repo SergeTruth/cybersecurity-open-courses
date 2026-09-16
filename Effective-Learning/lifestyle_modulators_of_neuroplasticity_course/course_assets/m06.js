@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Phones and notifications are practical examples.",
     "Visual cues can help when they point to the desired behavior."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Attention, Environment, and Distraction."
+  "graphicAlt": "Prepared practice materials and a visible next step reduce friction, while putting distractions farther away protects attention."
 };

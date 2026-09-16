@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The goal is not endless introspection or harsh self-criticism.",
     "Used well, metacognition makes people more adaptable."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Planning, monitoring, reflection, calibration and adjustment provide practical checkpoints for better-informed action."
 };

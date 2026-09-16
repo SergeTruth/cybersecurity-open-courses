@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Modality choices should be purposeful.",
     "Accessibility must be considered alongside load."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Multimedia, Modality, and Signaling."
+  "graphicAlt": "Narration, concise labels and visual signals serve complementary roles, supported by captions, keyboard access and meaningful alternative text."
 };

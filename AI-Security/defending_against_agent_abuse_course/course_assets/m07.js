@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Different test layers provide different evidence.",
     "Changes should trigger appropriate retesting."
   ],
-  "graphicAlt": "Blank white placeholder image for the testing and continuous validation module."
+  "graphicAlt": "Continuous validation checks that permitted actions run and prohibited actions stop, using unit, integration, scenario and monitoring evidence."
 };

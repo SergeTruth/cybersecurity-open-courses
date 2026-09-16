@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Environment design changes the pattern by changing friction.",
     "Replacing patterns is usually more practical than only suppressing them."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, Habits, Routines, and Behavioral Patterns."
+  "graphicAlt": "Habits follow cue, action and consequence patterns; the environment can make useful behavior easier and distractions harder to start."
 };

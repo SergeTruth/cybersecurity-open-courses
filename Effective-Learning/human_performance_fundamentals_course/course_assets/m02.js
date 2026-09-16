@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Practical focus management includes batching similar tasks, protecting focus blocks, reducing unnecessary notifications, closing open loops, and separating planning from execution.",
     "A useful test is to ask what the work is making the person remember."
   ],
-  "graphicAlt": "Blank placeholder image for module 2: Attention, Focus, and Cognitive Load"
+  "graphicAlt": "Checklists, task boards, calendars and handoff notes externalize information so attention can focus on problem solving and judgment."
 };

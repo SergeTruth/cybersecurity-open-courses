@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Recovery after intense work also matters.",
     "Observation helps without becoming obsessive."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Energy Cycles and Personal Patterns."
+  "graphicAlt": "Simple observation, prepared materials and recovery transitions help people plan around variable capacity rather than assuming every day is identical."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sleep stages can be discussed generally, but the lesson should avoid oversimplified claims.",
     "Consistency and sleep timing matter because learning often depends on repeated sessions."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, Sleep Basics for Learners."
+  "graphicAlt": "Circadian rhythm and sleep pressure influence readiness, which can inform flexible timing of demanding learning and lighter review."
 };

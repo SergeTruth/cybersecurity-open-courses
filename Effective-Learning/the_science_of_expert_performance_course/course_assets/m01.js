@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Performance depends on more than individual ability.",
     "The goal is not perfection."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What Is Expert Performance."
+  "graphicAlt": "Repeatable capability depends on skill, conditions, feedback and recovery, combining consistency with adaptability."
 };

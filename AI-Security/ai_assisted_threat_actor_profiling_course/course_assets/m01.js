@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Actor profiling is different from attribution, incident response, threat hunting, and vulnerability management.",
     "AI output must be grounded in evidence and reviewed by human analysts."
   ],
-  "graphicAlt": "Blank course placeholder for module 1."
+  "graphicAlt": "Observed behavior is organized with AI assistance and reviewed by analysts to support detection, readiness and priorities, not unsupported accusations."
 };

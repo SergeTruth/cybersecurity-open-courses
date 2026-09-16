@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Identity and credentials are also exposure points.",
     "A useful attack-surface review produces a data-flow and trust-boundary diagram, an inventory of tools and data sources, and a record of assumptions."
   ],
-  "graphicAlt": "Blank white placeholder image for the understanding agent attack surface module."
+  "graphicAlt": "The agent attack surface includes instruction, data and action paths, with documented component ownership and the identity used for execution."
 };

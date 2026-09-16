@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Recovery is not separate from performance.",
     "The goal is not constant high intensity."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Matching work, reducing drains, renewal and adaptation support realistic workload design and sustainable performance."
 };

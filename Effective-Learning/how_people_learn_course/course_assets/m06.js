@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Psychological safety is important in many learning settings because people learn more honestly when they can ask questions, make mistakes, and correct their understanding without humiliation.",
     "Designers can support motivation by making the path visible."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Motivation, Relevance, and Confidence."
+  "graphicAlt": "Relevant goals, achievable challenge and a safe environment for questions support a visible path from starting to stretching and improving."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "QA should include link checks, audio checks, caption checks, interaction checks, quiz behavior, responsive behavior, and LMS testing in the target environment.",
     "A good review process also protects relationships."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 8"
+  "graphicAlt": "Content, accessibility and delivery behavior are reviewed, with fixes resolved and recorded for a maintainable release."
 };

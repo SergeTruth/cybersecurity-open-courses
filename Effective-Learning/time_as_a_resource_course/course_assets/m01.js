@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This is not a guilt-based way to talk about productivity.",
     "A better frame is strategic resource management."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, What It Means to Treat Time as a Resource."
+  "graphicAlt": "Finite time is allocated among work, learning, relationships, recovery and upkeep; deliberate review makes those tradeoffs visible."
 };

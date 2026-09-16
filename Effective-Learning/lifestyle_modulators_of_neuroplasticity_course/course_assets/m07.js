@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Enriched learning environments, at a practical level, include varied examples, feedback-rich settings, social learning, and opportunities to apply ideas in meaningful contexts.",
     "Exploration should be balanced with structure."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Novelty, Variety, and Enriched Learning."
+  "graphicAlt": "Different examples reveal the same underlying pattern and support transfer when variety stays connected to the learning goal."
 };

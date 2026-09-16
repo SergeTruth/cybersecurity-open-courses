@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Captions and transcripts are essential production assets.",
     "Keep narration assets organized and easy to revise."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 5"
+  "graphicAlt": "Writing, recording and restrained cleanup produce clear narration, while module scripts, audio and captions remain aligned and traceable."
 };

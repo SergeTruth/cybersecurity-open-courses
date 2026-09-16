@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Evidence and feedback keep reflection honest.",
     "The goal is not endless introspection."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Acting, noticing, learning and adjusting form a sustainable reflection loop that produces reusable lessons for future work."
 };

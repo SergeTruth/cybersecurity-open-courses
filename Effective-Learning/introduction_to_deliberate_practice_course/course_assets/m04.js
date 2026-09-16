@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Correction is the next step after feedback.",
     "Weak feedback environments create repeated mistakes and false confidence."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, Feedback and Correction."
+  "graphicAlt": "An attempt receives specific feedback, is corrected and tried again, closing the learning loop."
 };

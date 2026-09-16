@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Job aids, checklists, examples, and workflow references can also support transfer.",
     "A strong transfer question is, where will this learner first need the skill after the lesson ends?"
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Transfer to Real Work."
+  "graphicAlt": "Practice is applied in similar and different contexts, with checklists, examples and workflow guides supporting adaptation."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sleep-supportive routines help close loops, reduce late-night friction, and prepare the next learning session.",
     "The goal is not perfect optimization."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "Focused learning, retrieval, feedback, spacing and recovery support the next quality attempt under real conditions."
 };

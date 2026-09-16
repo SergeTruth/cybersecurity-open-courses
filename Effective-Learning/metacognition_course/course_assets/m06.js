@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Prediction checks are a simple calibration tool.",
     "Feedback loops improve calibration when they are specific and timely."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Calibration and Confidence."
+  "graphicAlt": "Calibration keeps confidence aligned with evidence using a repeating cycle of prediction, checking and updating."
 };

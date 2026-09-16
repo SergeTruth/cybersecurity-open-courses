@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Extraneous load is the avoidable burden.",
     "The practical distinction is productive mental effort versus wasted mental effort."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, Types of Cognitive Load."
+  "graphicAlt": "Manage task complexity, reduce presentation friction and support the mental work that builds understanding."
 };

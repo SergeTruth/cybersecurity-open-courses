@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "A major challenge is avoiding deskilling.",
     "Teams can make expertise reusable by capturing examples, decision records, review notes, checklists, and lessons learned."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Expertise in Teams, Tools, and AI-Assisted Work."
+  "graphicAlt": "Shared knowledge and tool assistance support expert work, while accountable review inspects output, explains decisions and preserves human skill."
 };

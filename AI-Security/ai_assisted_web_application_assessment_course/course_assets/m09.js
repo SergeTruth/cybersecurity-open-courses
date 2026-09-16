@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Evidence verification is central.",
     "The goal is better authorized assessment quality, not uncontrolled automation."
   ],
-  "graphicAlt": "Blank placeholder graphic for AI-assisted web application assessment summary"
+  "graphicAlt": "AI-supported assessment authorizes scope, understands the application, collects evidence safely, verifies conclusions and communicates findings with protected data, explicit assumptions and human accountability."
 };

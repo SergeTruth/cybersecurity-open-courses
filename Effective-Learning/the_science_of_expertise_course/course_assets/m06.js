@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Brittle expertise performs well under familiar conditions but struggles when novelty appears.",
     "Adaptable expertise requires humility and updating."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Transfer, Adaptability, and Limits of Expertise."
+  "graphicAlt": "Expertise transfers more reliably when underlying structure is similar; changed conditions require checking assumptions, fresh evidence and testing adaptation."
 };

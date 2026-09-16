@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Software demonstrations and simulations can help when learners need procedural practice.",
     "When designing practice, begin with the mistake learners are likely to make."
   ],
-  "graphicAlt": "Blank placeholder graphic for module 6"
+  "graphicAlt": "Purposeful interactions connect to a task, let learners practice decisions and provide explanatory feedback; extra clicks alone do not create engagement."
 };
