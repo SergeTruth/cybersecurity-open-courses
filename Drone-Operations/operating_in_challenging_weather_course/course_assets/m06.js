@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Review a sample when safe and watch for lens obstruction, focus loss, vibration, motion blur, compression, low contrast, or inconsistent mapping overlap.",
     "Document visibility, weather, lighting, wind, sensor settings, and limitations for later analysis."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Safe operational visibility and useful evidence quality are separate requirements; failure of either calls for changing the mission."
 };

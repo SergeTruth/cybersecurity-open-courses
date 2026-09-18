@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Ground unsafe or uncertain equipment.",
     "Maintain an approved configuration baseline for aircraft, controller, application, payload, and critical settings."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Track aircraft, controllers and batteries individually, record inspections and configuration, and keep uncertain or defective equipment grounded rather than treating it as ready."
 };

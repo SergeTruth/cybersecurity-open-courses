@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Review a sample for exposure, focus, framing, storage, and metadata when operationally safe.",
     "Collection teams should prefer a small set of well-documented, usable images over a large volume of rushed footage."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Choose stills or video for the objective, control viewing angle and coverage, and check sharpness and exposure; favor usable evidence over excess volume."
 };

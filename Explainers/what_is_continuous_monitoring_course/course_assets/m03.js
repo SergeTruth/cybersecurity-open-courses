@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Thresholds and ownership matter.",
     "Risk-based monitoring also means saying no to low-value noise."
   ],
-  "graphicAlt": "Blank course placeholder for module 3."
+  "graphicAlt": "Monitoring objectives, thresholds, owners, and escalation paths prioritize signals using system criticality, data sensitivity, exposure, and privilege."
 };

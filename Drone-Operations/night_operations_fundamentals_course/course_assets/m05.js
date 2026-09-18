@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Launch and recovery areas need stable footing, clear boundaries, sufficient light, and control of people and vehicles.",
     "Monitor changes throughout the flight."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Night risk includes reduced visibility, moisture, cold-related endurance changes, hidden obstacles, and recovery-area conditions, supporting early return."
 };

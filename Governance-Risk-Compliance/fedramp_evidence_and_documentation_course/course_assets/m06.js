@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sensitive evidence handling deserves deliberate planning.",
     "Evidence should be prepared for multiple audiences."
   ],
-  "graphicAlt": "Blank course placeholder for module 6."
+  "graphicAlt": "An evidence request moves through assigned ownership, protected collection and review with source, date, control and status retained."
 };

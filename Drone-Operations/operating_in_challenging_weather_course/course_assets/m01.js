@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Weather also determines mission value.",
     "Conservative decision-making and legal compliance come first."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Wind, moisture, visibility, temperature, crew readiness, and data quality combine to determine the remaining mission margin."
 };

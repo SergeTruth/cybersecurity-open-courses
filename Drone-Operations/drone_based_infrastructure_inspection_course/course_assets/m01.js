@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "The goal is useful inspection support, not replacing engineering judgment or forcing access.",
     "Repeatability adds long-term value."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Drone collection provides traceable inspection evidence for qualified specialist judgment; an image alone does not establish a diagnosis or structural significance."
 };

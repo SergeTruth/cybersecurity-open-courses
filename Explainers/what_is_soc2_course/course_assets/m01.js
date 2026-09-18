@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "This course provides an educational overview of SOC 2.",
     "The most useful way to think about SOC 2 is as a trust conversation supported by evidence."
   ],
-  "graphicAlt": "SOC 2 overview diagram connecting trust, controls, evidence, customers, auditors, and reports."
+  "graphicAlt": "Scoped controls and independent evaluation produce a SOC 2 attestation report, not a certification."
 };

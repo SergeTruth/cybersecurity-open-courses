@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Complete aircraft, site, weather, battery, payload, storage, and calibration-context checks.",
     "Document the plan and protect privacy."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Thermal collection planning starts with the decision, then selects useful timing, safe distance and target coverage, and operational and privacy limits."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Plans of action and milestones are part of the risk story.",
     "Documentation must match the real system."
   ],
-  "graphicAlt": "Blank course placeholder for module 7."
+  "graphicAlt": "Operational reality supplies boundary, control, and weakness evidence for assessment and risk decisions, while remediation and monitoring continue after authorization."
 };

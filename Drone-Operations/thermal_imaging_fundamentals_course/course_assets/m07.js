@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Fireground or hotspot support can improve awareness from an approved safe position, but smoke, material, geometry, sensor range, and changing conditions limit interpretation.",
     "Specialist review is needed when findings affect electrical safety, structural decisions, fire operations, medical or rescue conclusions, warranty, or regulatory action."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Thermal screening across buildings, electrical and mechanical assets, and solar arrays relies on valid baselines and specialist review while retaining safety procedures."
 };

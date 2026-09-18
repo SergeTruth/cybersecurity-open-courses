@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Document objective, location, crew, platform, permissions, official-source checks, weather, lighting, hazards, controls, route, collection settings, and emergency actions.",
     "Review the plan immediately before collection because conditions can change."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Plan authority and access, weather and lighting, battery margins, and recovery contingencies, and brief who can stop the observation mission."
 };

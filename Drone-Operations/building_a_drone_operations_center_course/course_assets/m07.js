@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Protect sensitive imagery of people, property, facilities, infrastructure, and operations.",
     "Where evidence integrity matters, preserve collection and processing lineage: who captured, transferred, transformed, reviewed, approved, and exported each product."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Keep originals and document transformations, then review evidence and uncertainty before approving products, preserving lineage from capture through release."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Cancellation is a safety control.",
     "After exposure, power down and inspect equipment according to approved guidance."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Moisture and particles can expose equipment, reduce visual awareness and obscure imagery; delay or stop when operating or data-quality limits are not met."
 };

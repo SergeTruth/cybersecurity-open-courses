@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The word continuous does not mean every signal is reviewed every second by a person.",
     "Continuous monitoring is decision support."
   ],
-  "graphicAlt": "Blank course placeholder for module 1."
+  "graphicAlt": "Continuous monitoring observes change, interprets risk, assigns action, and improves controls at a cadence suited to risk."
 };

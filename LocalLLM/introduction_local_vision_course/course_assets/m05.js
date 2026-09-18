@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Confidence values are model-specific signals, not guarantees of truth.",
     "Treat AI output as assistance, not proof of identity, intent, wrongdoing, or safety."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A shadow incorrectly reported as an event represents a false positive, while an occluded person not detected represents a false negative; local lighting, weather, occlusion and motion affect results."
 };

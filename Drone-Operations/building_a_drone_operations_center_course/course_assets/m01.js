@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "The goal is reliable operations, not simply more flights.",
     "Program measures should reflect quality: approval cycle time, mission success, safety events, grounded equipment, data rework, overdue maintenance, privacy exceptions, and corrective-action closure."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A drone operations center coordinates missions, crews, fleet, and data while the pilot retains flight-safety authority."
 };

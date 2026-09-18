@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "A useful system filters hours of footage into reviewable events.",
     "This course focuses on legitimate safety, security, and operational uses."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Camera footage passes through local analysis and selected event clips to human review; motion, detection and description offer different interpretations, not proof."
 };

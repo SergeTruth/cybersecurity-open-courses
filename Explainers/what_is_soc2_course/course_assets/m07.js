@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "The audit process should not be treated as a performance.",
     "When audit questions reveal unclear ownership or missing records, the best response is usually process improvement."
   ],
-  "graphicAlt": "SOC 2 audit lifecycle timeline showing planning, scope, evidence requests, interviews, testing, review, and report issuance."
+  "graphicAlt": "Define scope, gather evidence, test and discuss controls, and prepare the report, with follow-up questions feeding evidence gathering."
 };

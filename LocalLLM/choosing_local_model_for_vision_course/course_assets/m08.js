@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Do not blindly trust model output.",
     "Reevaluate over time as cameras, documents, use cases, models, drivers, and runtimes change."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A local vision deployment needs data policy, queue and timeout limits, labeled fallback, evidence review and tested updates with rollback."
 };

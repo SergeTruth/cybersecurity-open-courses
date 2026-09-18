@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Access control should separate pilots, analysts, clients, administrators, and public recipients according to need.",
     "Responsible use is explainable."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Bound collection, review incidental sensitive content, limit sharing to authorized recipients, and pause when authority or safety is unclear."
 };

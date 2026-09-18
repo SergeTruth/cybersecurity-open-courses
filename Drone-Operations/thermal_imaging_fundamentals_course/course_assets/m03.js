@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Drone-mounted payloads add vibration, movement, changing angle, altitude, wind, and flight-safety constraints.",
     "Match capability to the question."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Radiometric measurement data differs from non-radiometric visual contrast; target coverage, calibration assumptions, and the distinction between sensitivity and accuracy remain important."
 };

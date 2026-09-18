@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The operational burden is real.",
     "High is not automatically better than Moderate or Low."
   ],
-  "graphicAlt": "Blank course placeholder for module 5."
+  "graphicAlt": "High-impact consequences call for sustained attention to resilience, separation, privileged access, auditability, and tested operations when the risk warrants that baseline."
 };

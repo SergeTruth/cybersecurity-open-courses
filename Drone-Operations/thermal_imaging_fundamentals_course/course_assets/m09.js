@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Interpret patterns against appropriate backgrounds and comparable components.",
     "The goal is useful, defensible observation, not unsupported conclusions from colors on a screen."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A defensible thermal workflow plans a purpose, captures context, interprets comparisons cautiously, and documents and corroborates findings without treating colors as conclusions."
 };

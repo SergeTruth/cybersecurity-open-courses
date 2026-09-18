@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Match sensor capability to the question.",
     "Report image limitations."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Exposure settings trade brightness against noise and blur; thermal images need context, and reports must retain image-quality limitations."
 };

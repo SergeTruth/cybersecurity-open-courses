@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Local runners such as llama.cpp, Ollama, LM Studio, and other tools may use different backends, model files, prompt templates, defaults, and vision adapters.",
     "Test a small matrix of sensible settings, record memory and completion, and keep one reproducible configuration per candidate."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Quantization, image settings and runtime form a configuration that should be compared on real tasks and recorded reproducibly, without assuming higher precision always wins."
 };

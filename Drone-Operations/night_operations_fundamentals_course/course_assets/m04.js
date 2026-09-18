@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Recognizing a colored light does not always establish aircraft attitude.",
     "Lighting is a risk control, not permission to extend distance, operate beyond visual capability, or ignore obstacles."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Aircraft lighting supports visibility and orientation but also requires secure mounting, power planning, and reliable identification against background lights."
 };

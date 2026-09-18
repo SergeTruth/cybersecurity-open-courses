@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Control implementation statements are where the provider explains how the service satisfies an expectation.",
     "Cloud shared responsibility makes this more nuanced."
   ],
-  "graphicAlt": "Blank course placeholder for module 6."
+  "graphicAlt": "NIST control concepts inform FedRAMP baseline expectations, which must be allocated across provider, inherited-service, and customer responsibilities with specific evidence."
 };

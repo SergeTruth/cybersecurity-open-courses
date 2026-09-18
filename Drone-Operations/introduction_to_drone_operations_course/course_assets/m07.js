@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Post-flight work includes inspecting the aircraft, recording maintenance concerns, accounting for batteries and media, offloading data into approved storage, and completing the flight log.",
     "An after-action review asks what happened, what worked, what changed, and what should improve."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A five-stage drone workflow runs from preparation through launch, monitoring, recovery, and review, with lessons returning to the next flight."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Compliance evidence should reflect real operations.",
     "Continuous authorization concepts build on this idea at a high level."
   ],
-  "graphicAlt": "Blank course placeholder for module 7."
+  "graphicAlt": "Required controls must operate in normal workflows, have accountable owners, and produce current traceable evidence; automation supports human judgment."
 };

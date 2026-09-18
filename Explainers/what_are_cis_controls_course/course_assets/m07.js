@@ -1,6 +1,6 @@
 window.COURSE_MODULE = {
   "title": "Benefits and Limitations",
-  "graphicAlt": "Risk reduction workflow showing practical guidance, prioritization, judgment, business context, and continuous review.",
+  "graphicAlt": "CIS priorities combine with business needs, risk and obligations, and accountable measurement as part of a broader security strategy.",
   "narration": "The CIS Controls provide practical guidance and prioritization, but they do not remove the need for organizational judgment.\n\nSecurity programs must still consider business requirements, risk tolerance, regulatory obligations, resource constraints, and operational realities.\n\nThe controls are a tool, not a complete security strategy by themselves. They help teams focus, but teams still need ownership, governance, measurement, and improvement.\n\nRealistic expectations matter. The CIS Controls can strengthen security programs, but they should be used as part of a broader risk management approach.",
   "narrationPoints": [
     "The CIS Controls provide practical guidance and prioritization, but they do not remove the need for organizational judgment.",

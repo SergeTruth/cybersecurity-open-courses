@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Larger models can improve some tasks while increasing latency, power, and failure risk under memory pressure.",
     "Shortlist configurations that fit comfortably, then test speed, memory, temperature, power, and completion under representative load."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Model components, image tokens, context and runtime share memory with needed headroom; supported acceleration and concurrency determine practical fit."
 };

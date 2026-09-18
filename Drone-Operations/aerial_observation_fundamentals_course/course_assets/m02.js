@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Also define what should not be collected.",
     "A useful objective also names the decision."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "An observation objective defines the decision, bounded area, required detail and timing, while excluding unrelated areas and unnecessary collection."
 };

@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Record date, time, asset, component, location confidence, aircraft, sensor, settings, weather, lighting, load state where relevant, and source file.",
     "Maintain a coverage log or annotated asset plan during collection."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Capture linked overview, intermediate, and close-up views so details remain locatable, and record metadata and incomplete or obstructed coverage."
 };

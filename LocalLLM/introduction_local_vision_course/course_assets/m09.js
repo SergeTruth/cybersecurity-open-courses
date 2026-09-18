@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Responsible monitoring limits coverage to legitimate purposes, respects privacy expectations, minimizes retention, controls access, records use, and prohibits harassment or inappropriate surveillance.",
     "Strong systems secure cameras and servers, segment networks, protect footage, patch components, back up configuration, and monitor the entire pipeline for degraded coverage."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Local processing, error evaluation, exposure limits and human judgment rest on secure components, health monitoring and documented limitations."
 };

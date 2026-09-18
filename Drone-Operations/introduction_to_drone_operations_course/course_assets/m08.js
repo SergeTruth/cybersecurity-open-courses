@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Do not use drones for harassment, stalking, unlawful surveillance, interference with aircraft, evasion of law enforcement, or unsafe activity.",
     "Ethical operation asks whether the mission is necessary, proportionate, and explainable to affected people and accountable reviewers."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Four groups show protected accounts, controlled software changes, restricted data access, and minimized collection as parts of accountable drone operation."
 };

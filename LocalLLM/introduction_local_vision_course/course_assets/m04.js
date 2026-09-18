@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Storage may hold continuous video, event clips, thumbnails, model metadata, and review outcomes.",
     "The architecture should show every data flow and trust boundary: camera, network, NVR, inference host, storage, dashboard, alert channel, and administrator."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Authorized camera and NVR streams are decoded and analyzed locally, stored as events and delivered for alerting and review, with time, camera identity and health monitored throughout."
 };

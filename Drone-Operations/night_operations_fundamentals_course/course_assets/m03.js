@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Maintain visual line of sight as required and operationally necessary.",
     "Use brief communications for aircraft location, orientation, hazards, battery, signal, and landing."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Glare management, multiple visual and telemetry cues, and fatigue control support night awareness, with recovery when orientation is uncertain."
 };

@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "The strongest programs treat SOC 2 as part of normal business operations.",
     "That mindset also improves customer conversations."
   ],
-  "graphicAlt": "Business trust workflow showing customer assurance, vendor review, procurement, risk management, and growth."
+  "graphicAlt": "Consistent controls support both customer assurance and internal operational discipline through a scoped report and evidence."
 };

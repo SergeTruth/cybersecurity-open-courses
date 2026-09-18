@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Return-to-home is an automated contingency, not a universal rescue.",
     "Monitor signal trends and navigation behavior during flight."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Monitor link trends and navigation confidence and review configured return behavior; automated return depends on correct site context, so recover before margins disappear."
 };

@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Abort criteria include weather deterioration, signal or navigation uncertainty, aircraft warnings, obstacle conflict, people or vehicles entering the area, privacy concerns, lost communication, or poor data quality.",
     "At critical sites, coordinate radio use, cybersecurity, photography restrictions, escorts, emergency procedures, and data transfer with the owner."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Maintain safe standoff, control the operating area, and stop when conditions change; scoped inspection does not authorize surveillance, and recovery outranks complete coverage."
 };

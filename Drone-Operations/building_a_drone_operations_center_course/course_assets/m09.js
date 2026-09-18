@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Live support prioritizes safety information, clear communication, action-oriented status, emergency coordination, and decision logging without replacing the pilot.",
     "The goal is reliable, safe, lawful, privacy-conscious, and accountable operation, not simply more flights."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A drone operations center governs, plans, maintains, supports, and learns, emphasizing safety, privacy, and accountability rather than flight count."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Flyaway risk can be reduced through maintenance, configuration checks, current situational awareness, and appropriate operating limits, but it cannot be reduced to zero.",
     "Crew communication should be brief and unambiguous."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Preflight inspection, awareness of the aircraft and surroundings, and early recovery form an active safety loop supported by crew concerns."
 };

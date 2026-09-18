@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Accuracy does not improve merely because inference is local.",
     "Local and cloud processing can be combined selectively, but the data flow should be explicit."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Local processing can provide data control, low latency and core analysis without internet, but requires capacity, maintenance and model evaluation."
 };

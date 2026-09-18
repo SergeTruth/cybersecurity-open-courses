@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Moderate work affects engineering and operations directly.",
     "A common mistake is treating Moderate as paperwork."
   ],
-  "graphicAlt": "Blank course placeholder for module 4."
+  "graphicAlt": "A Moderate-baseline operating model connects engineering, security operations, and assessable documentation to implemented cloud controls."
 };

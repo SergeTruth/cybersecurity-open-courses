@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Design each use case around an observable event, expected response, permitted camera area, retention, reviewer, and success measure.",
     "Keep a human in the loop for meaningful action."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A blocked-exit observation illustrates a narrowly defined event, permitted camera area, named reviewer and response, with AI supplementing established safety controls."
 };

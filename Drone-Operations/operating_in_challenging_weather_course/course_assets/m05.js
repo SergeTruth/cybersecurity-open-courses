@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Crew performance also changes in heat and cold.",
     "Conservative reserve margins preserve options."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Cold and heat affect battery and equipment performance, supporting shorter missions, larger reserves, and early recovery when behavior changes."
 };

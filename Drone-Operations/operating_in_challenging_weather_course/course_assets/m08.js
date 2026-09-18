@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "After an abnormal event, secure the area, account for people and equipment, preserve logs and media, inspect the aircraft, and make required notifications.",
     "Document what happened, what cues appeared, what decisions were made, and what should change."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A contingency plan keeps home and alternate recovery options available, supported by thresholds, crew communication, and post-event review rather than guaranteed automation."
 };

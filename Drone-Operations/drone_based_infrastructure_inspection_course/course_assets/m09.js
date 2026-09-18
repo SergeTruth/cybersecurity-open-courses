@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Organize originals, notes, tags, maps, and reports with traceable evidence references.",
     "The goal is useful inspection support, not replacing engineering judgment or forcing unsafe missions."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A defensible drone inspection scopes the question, plans safely, selects suitable sensors, captures contextual evidence, and uses specialist review while protecting data."
 };

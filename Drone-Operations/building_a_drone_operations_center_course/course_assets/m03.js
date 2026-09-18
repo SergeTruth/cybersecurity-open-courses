@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "A maintenance area should support inspection, cleaning, configuration, and controlled repair while preventing parts or tools from mixing across assets.",
     "Plan continuity for power loss, network outage, unavailable displays, inaccessible storage, or evacuation."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "An operations center provides planning and communications, secure equipment storage, supervised battery management, protected data, and continuity options for outages."
 };

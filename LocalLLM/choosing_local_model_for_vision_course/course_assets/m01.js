@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "The best model depends on task, hardware, latency, privacy, expected volume, and tolerance for false or incomplete output.",
     "Selection is an engineering decision."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Vision-language models differ in reading text, recognizing and counting objects, interpreting charts and describing evidence; fluent prose does not prove accurate perception."
 };

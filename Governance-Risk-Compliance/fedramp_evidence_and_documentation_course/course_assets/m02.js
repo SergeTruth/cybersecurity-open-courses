@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Included and excluded components need careful treatment.",
     "Unclear scope creates assessment and operational risk."
   ],
-  "graphicAlt": "Blank course placeholder for module 2."
+  "graphicAlt": "A scoped cloud-service boundary contains application components and connects to external dependencies and customer responsibilities, with included, excluded and shared scope made explicit."
 };

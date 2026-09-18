@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "The final plan documents objective, route, altitude strategy, collection settings, risks, controls, communications, battery margins, emergency procedures, data handling, and abort criteria.",
     "Scheduling conflicts need transparent priority rules."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A scheduled mission still requires current crew, aircraft, conditions, and permission checks before the final go decision, with reassessment when circumstances change."
 };

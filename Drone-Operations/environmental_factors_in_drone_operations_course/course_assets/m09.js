@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Remember that risks compound.",
     "The goal is safe, lawful, conservative operation, not forcing a mission through unsafe conditions."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Wind, cold, weak links and fading light can combine to erode operating margin; delay, return or cancel when controlled flight and useful data cannot be maintained."
 };

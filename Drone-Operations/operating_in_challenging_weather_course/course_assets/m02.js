@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Define go or no-go criteria before travel and before organizational pressure to complete the flight increases.",
     "Plan alternatives: a later time, shorter route, different authorized platform, ground inspection, existing imagery, or rescheduling."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Weather planning covers launch, flight, and recovery, accounting for local terrain and forecast uncertainty with conservative alternatives."
 };

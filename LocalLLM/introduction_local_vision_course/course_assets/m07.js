@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Do not use the system for harassment, covert stalking, inappropriate surveillance, or attempts to identify private individuals without lawful and legitimate authority.",
     "Publish clear policy, train reviewers, provide a way to report misuse, and review new use cases before enabling them."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Purpose-limited monitoring narrows camera coverage, sets justified retention and restricts footage and review access to authorized roles."
 };

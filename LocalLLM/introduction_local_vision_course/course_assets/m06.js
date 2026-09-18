@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Document review decisions and outcomes.",
     "Measure alert quality through confirmed relevance, missed events, review time, duplicate rate, escalation outcome, and reviewer feedback."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Repeated detections become one contextual event for a human reviewer to confirm, dismiss or escalate; review outcomes guide tuning."
 };

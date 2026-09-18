@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Baseline selection should reflect the federal data, agency mission, system context, and intended use case.",
     "The practical question is, 'What kind of harm could reasonably result if this cloud service failed in a security-relevant way?' That answer should be informed by agency use, data sensitivity, dependencies, business process importance, and operational expectations."
   ],
-  "graphicAlt": "Blank course placeholder for module 2."
+  "graphicAlt": "Losses of confidentiality, integrity, or availability inform impact categories based on limited, serious, or severe or catastrophic potential harm, not prestige."
 };

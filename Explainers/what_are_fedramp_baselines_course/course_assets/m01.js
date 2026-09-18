@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "A baseline also does not guarantee security by itself.",
     "For practitioners, the key habit is to treat the baseline as an engineering and operations guide, not a paperwork label."
   ],
-  "graphicAlt": "Blank course placeholder for module 1."
+  "graphicAlt": "Baseline expectations guide real implementation and evidence, which inform a risk decision rather than guaranteeing security."
 };

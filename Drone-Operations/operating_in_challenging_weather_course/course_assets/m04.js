@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Wind-driven moisture can reach openings and surfaces that remain protected in calm conditions.",
     "After exposure, power down, inspect, dry, clean, and document the equipment according to approved procedures."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Moisture can affect equipment, sensors, and route visibility, requiring conservative landing and approved inspection and care."
 };

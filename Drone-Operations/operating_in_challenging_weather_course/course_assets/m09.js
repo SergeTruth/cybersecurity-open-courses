@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Review return-to-home assumptions and preserve manual and emergency landing options.",
     "The goal is safe, lawful, useful flight data, not forcing a mission through conditions that exceed aircraft, crew, or mission limits."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Conservative planning, on-site verification, trend monitoring, and recovery with lessons learned support useful data, including delay or cancellation when appropriate."
 };

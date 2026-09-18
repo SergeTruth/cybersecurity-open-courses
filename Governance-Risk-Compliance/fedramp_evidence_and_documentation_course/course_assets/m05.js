@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Control narratives should be specific enough for assessment but maintainable over time.",
     "Copy-paste control language is weak documentation because it repeats the requirement without explaining implementation."
   ],
-  "graphicAlt": "Blank course placeholder for module 5."
+  "graphicAlt": "A narrative bridges a control expectation to actual implementation through mechanism, ownership and evidence, with provider, customer, shared and inherited responsibilities."
 };

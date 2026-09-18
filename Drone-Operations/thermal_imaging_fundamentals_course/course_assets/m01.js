@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Safety and lawful purpose come first.",
     "Treat thermal imagery as evidence that needs context."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Surface radiation passes through a thermal sensor and settings to an apparent-temperature image, which needs contextual evidence rather than assumptions about cause or seeing through walls."
 };

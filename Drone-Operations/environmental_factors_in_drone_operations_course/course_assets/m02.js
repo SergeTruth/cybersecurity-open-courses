@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Payloads change wind sensitivity.",
     "Use conservative go or no-go criteria and an early return point."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A tailwind on the outbound leg can become a headwind on return, increasing time and energy demand; preserve battery and control margin for recovery."
 };

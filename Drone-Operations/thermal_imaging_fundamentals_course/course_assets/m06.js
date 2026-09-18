@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Separate observation, judgment, and diagnosis.",
     "Use confidence language and identify alternatives."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Thermal interpretation moves from describing a pattern to comparison with context, then corroborating a cause with additional evidence and qualified review."
 };

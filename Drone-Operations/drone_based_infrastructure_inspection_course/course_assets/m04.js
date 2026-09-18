@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Match sensor field of view, resolution, metadata, measurement capability, and payload weight to the target and required decision.",
     "Verify the payload before mobilization with representative targets or approved checks."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "RGB records visible condition, zoom supports detail at standoff, and thermal imagery shows patterns requiring interpretation; verify payload and processing before flight."
 };

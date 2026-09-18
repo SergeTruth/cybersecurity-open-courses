@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Match the payload and collection pattern to the mission purpose.",
     "Assess data quality during the mission when safe, then verify after landing."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A mission determines the payload and capture boundary, followed by verification and protection of imagery and metadata."
 };

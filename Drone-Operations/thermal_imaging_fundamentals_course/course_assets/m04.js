@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Interior and exterior temperature difference can also determine whether a building pattern is visible.",
     "Document temperature, wind, precipitation, humidity, sun, time, target state, distance, angle, and relevant recent conditions."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Solar history, weather, material and viewing angle, and operating state all influence a thermal pattern; weak contrast may reflect unsuitable collection conditions."
 };

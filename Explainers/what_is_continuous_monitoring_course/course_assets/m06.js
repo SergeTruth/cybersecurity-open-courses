@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Change monitoring connects operational changes to security impact.",
     "Exception tracking is part of mature monitoring."
   ],
-  "graphicAlt": "Blank course placeholder for module 6."
+  "graphicAlt": "Vulnerabilities, configuration drift, and security-relevant changes require ownership and review, with remediation or explicitly governed exceptions."
 };

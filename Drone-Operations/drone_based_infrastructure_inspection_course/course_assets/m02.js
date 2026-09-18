@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Set explicit exclusions for private areas, unrelated infrastructure, sensitive security features, and unnecessary people.",
     "Define acceptance criteria for the deliverable."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Define the scoped component, decision and evidence requirements, together with deliverable acceptance criteria, exclusions and review authority."
 };

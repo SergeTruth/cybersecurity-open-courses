@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Even in lower-impact scenarios, common responsibilities remain.",
     "For small SaaS providers entering the federal market, the low-impact conversation can be a useful starting point."
   ],
-  "graphicAlt": "Blank course placeholder for module 3."
+  "graphicAlt": "A focused lower-impact scope still requires controlled operations and continuing evidence; tailored paths depend on a suitable use case."
 };

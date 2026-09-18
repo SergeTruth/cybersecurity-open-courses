@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Remediation documentation should show both action and verification.",
     "Risk acceptance should be treated carefully."
   ],
-  "graphicAlt": "Blank course placeholder for module 7."
+  "graphicAlt": "A finding proceeds through ownership, planning, action and verification to closure evidence; a documented risk decision is a separate accountable path."
 };

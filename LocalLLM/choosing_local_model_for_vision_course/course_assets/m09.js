@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Benchmark locally using representative images, prewritten rubrics, repeated runs, controlled settings, and a durable evaluation log.",
     "Deployment adds privacy, licensing, retention, cost, power, monitoring, fallback, updates, and human review."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Choose local vision configurations by defining the task, fitting hardware, measuring reliability and operating responsibly with visible evidence, privacy and human judgment."
 };

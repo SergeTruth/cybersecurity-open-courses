@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Environmental risk is dynamic.",
     "The goal is safe, lawful, conservative operation."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Wind, temperature, visibility, terrain and signal conditions interact to change drone operating margins; observe trends and recover early."
 };

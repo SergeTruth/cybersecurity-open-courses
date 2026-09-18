@@ -12,5 +12,5 @@ window.COURSE_MODULE = {
     "The practical takeaway is that SOC 2 is not just an audit event.",
     "Over time, this culture can make SOC 2 less disruptive."
   ],
-  "graphicAlt": "Culture of trust framework showing governance, controls, evidence, accountability, customer assurance, and continuous improvement."
+  "graphicAlt": "Ownership, control operation, documentation, and improvement support trust commitments, with leadership providing capacity."
 };

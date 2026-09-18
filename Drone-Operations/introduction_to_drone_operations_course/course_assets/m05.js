@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Property access and aviation authority are separate.",
     "Document the official sources checked, approvals obtained, and conditions attached to them."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Separate panels distinguish flight authority, property access, and data-collection permission, supported by checking current official requirements."
 };

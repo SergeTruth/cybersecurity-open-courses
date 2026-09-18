@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Identity monitoring is just as important.",
     "Monitoring also extends to dependencies and control evidence."
   ],
-  "graphicAlt": "Blank course placeholder for module 2."
+  "graphicAlt": "Assets, identities, system state, dependencies, and control evidence need ownership and context to support monitoring decisions."
 };

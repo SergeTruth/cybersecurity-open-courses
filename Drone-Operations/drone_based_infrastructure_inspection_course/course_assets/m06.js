@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Damage assessment can accelerate situational awareness, but urgent conditions do not remove authorization or safety requirements.",
     "Some defects remain inaccessible to aerial imagery."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Drone inspection supports roofs, structures, utilities and solar arrays, while qualified interpretation and other methods remain necessary for hidden conditions."
 };

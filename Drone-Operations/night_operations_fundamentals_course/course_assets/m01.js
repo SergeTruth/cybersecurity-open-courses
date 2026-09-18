@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Safety, legality, privacy, and accountability remain inseparable.",
     "Night is not merely a camera setting."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Nighttime visual cues, sensor views, and human performance all have limitations, so a clear display does not guarantee a clear flight path."
 };

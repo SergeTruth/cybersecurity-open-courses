@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Thermal imagery may expose people, occupancy patterns, property conditions, security features, or sensitive operations.",
     "Do not use thermal imaging for stalking, harassment, unlawful surveillance, targeting private individuals, or intrusive observation without authority."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Original thermal data and capture context are preserved separately from derivatives, feeding traceable qualified reports distributed only to approved reviewers."
 };

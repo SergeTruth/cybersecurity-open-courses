@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Baseline work should involve the right stakeholders.",
     "The most useful baseline discussions are honest and specific."
   ],
-  "graphicAlt": "Blank course placeholder for module 8."
+  "graphicAlt": "Federal use and data, system dependencies, and explicit responsibilities inform a shared baseline decision and sustainable implementation commitments."
 };

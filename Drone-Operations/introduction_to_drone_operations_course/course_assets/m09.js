@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Payloads should match the mission, and data collection should be accurate, minimal, privacy-conscious, securely handled, and linked to flight records.",
     "The goal is safe, lawful, useful, and accountable operation."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A summary links authorized planning, maintained safety margins, deliberate recovery, and responsible data handling, with delay or cancellation when needed."
 };

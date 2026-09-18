@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "False positives and false negatives are both important.",
     "Detection improves over time when teams document decisions."
   ],
-  "graphicAlt": "Blank course placeholder for module 5."
+  "graphicAlt": "Triage evaluates alert impact, confidence, and context to choose incident escalation, remediation, or detection tuning, while also learning from missed detections."
 };

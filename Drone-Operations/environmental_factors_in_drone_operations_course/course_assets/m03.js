@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Storage and transport affect safety.",
     "Temperature also affects people and data."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Cold can reduce available battery power and heat can stress components; prepare within approved guidance and include crew and payload limitations."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Safety, legality, and accountability are core principles.",
     "The goal is a useful flight completed without creating unacceptable risk."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A quadcopter sits within a system of controls, equipment, crew, purpose, and records, with a reminder that capability does not create permission."
 };

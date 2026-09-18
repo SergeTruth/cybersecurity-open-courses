@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Monitor trends during flight.",
     "Document the decision and outcome."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Compare forecasts with site observations, set limits and crew roles, monitor and reassess during flight, recover early, and record decisions and lessons."
 };

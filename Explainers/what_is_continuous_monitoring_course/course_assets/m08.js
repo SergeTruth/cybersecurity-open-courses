@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Reporting should serve multiple audiences.",
     "Feedback loops improve the program."
   ],
-  "graphicAlt": "Blank course placeholder for module 8."
+  "graphicAlt": "Findings receive owners and plans, actions are validated, and reporting is tailored to technical, leadership, and compliance decisions while feedback improves the program."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Documentation must describe the real system rather than an idealized version of the system.",
     "Strong evidence supports assessment, authorization support, continuous monitoring, customer reuse, and risk decisions."
   ],
-  "graphicAlt": "Blank course placeholder for module 1."
+  "graphicAlt": "A claim connects to an implemented mechanism and supporting operational evidence, emphasizing trustworthy information rather than document volume."
 };

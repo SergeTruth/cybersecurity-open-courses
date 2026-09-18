@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Retention and time synchronization are practical details with large consequences.",
     "Evidence should be current, traceable, and reviewable."
   ],
-  "graphicAlt": "Blank course placeholder for module 4."
+  "graphicAlt": "Logs, scans, and change records become useful evidence when source health, time alignment, retention, and ownership are maintained."
 };

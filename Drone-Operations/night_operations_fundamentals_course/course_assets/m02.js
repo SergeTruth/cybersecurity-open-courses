@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Set go or no-go and abort criteria.",
     "Document the sources checked, approvals, aircraft, crew, weather, site findings, risk controls, return settings, emergency options, and decision."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Night planning checks current authority, reviews the site, simplifies the route, and defines no-go and abort criteria before launch."
 };

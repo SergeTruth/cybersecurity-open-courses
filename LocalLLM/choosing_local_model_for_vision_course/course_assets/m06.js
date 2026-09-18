@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Prompts should ask the model to state uncertainty and avoid unsupported claims.",
     "Benchmark both modes with the same images and scoring."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Extract visible evidence before forming a supported answer, and benchmark thinking-on and thinking-off configurations because extra reasoning cannot recover missing visual detail."
 };

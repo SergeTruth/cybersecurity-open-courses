@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Crosswind during approach can also complicate landing near obstacles or people.",
     "Cancel or delay when gusts or turbulence threaten stable control, safe return, or usable data."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A tailwind outbound becomes a headwind on return, increasing return energy demand; local gusts and turbulence further reduce margins."
 };

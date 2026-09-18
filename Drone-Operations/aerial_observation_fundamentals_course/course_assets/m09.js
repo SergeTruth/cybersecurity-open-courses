@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Time-based comparison depends on repeatable collection and preserved date, location, sensor, and condition context.",
     "The goal is useful situational awareness and evidence, not uncontrolled surveillance or instant certainty."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Purpose-driven aerial observation defines the objective, plans safely, captures clearly, interprets cautiously, and documents and protects the evidence."
 };

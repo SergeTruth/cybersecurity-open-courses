@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "Controls connect these criteria to real activity.",
     "Choosing criteria is therefore a scoping decision."
   ],
-  "graphicAlt": "Trust Services Criteria wheel showing security, availability, processing integrity, confidentiality, and privacy."
+  "graphicAlt": "Security is included in every SOC 2 engagement; availability, processing integrity, confidentiality, and privacy are selected to fit scope and commitments."
 };

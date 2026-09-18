@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Baselines are grounded in NIST control concepts but applied through the realities of cloud architecture.",
     "The practical takeaway is simple: baseline work is operational work."
   ],
-  "graphicAlt": "Blank course placeholder for module 9."
+  "graphicAlt": "FedRAMP baseline work connects understanding impact, defining scope, implementing controls, demonstrating them with evidence, and continuing monitoring to support risk decisions."
 };

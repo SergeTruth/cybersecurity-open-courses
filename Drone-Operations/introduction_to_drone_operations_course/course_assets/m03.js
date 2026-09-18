@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Choose emergency options before takeoff.",
     "Document the plan at a level appropriate to the mission."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Mission planning progresses from purpose through site and weather review to return margins, emergency options, and documented stop conditions."
 };

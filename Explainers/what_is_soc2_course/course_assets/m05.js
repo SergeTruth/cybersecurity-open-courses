@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "Understanding the difference helps teams prepare.",
     "For teams doing the work, Type II usually requires stronger habits."
   ],
-  "graphicAlt": "SOC 2 Type I versus Type II comparison showing point-in-time design and period-of-time operating effectiveness."
+  "graphicAlt": "Type I evaluates control design at a point in time; Type II evaluates design and operation over a review period."
 };

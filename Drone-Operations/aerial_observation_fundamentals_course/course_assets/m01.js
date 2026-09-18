@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "The objective is useful situational awareness and evidence, not uncontrolled surveillance.",
     "For example, documenting a washed-out access road requires a bounded route view and visible condition evidence."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Aerial observation separates capture, visible observation, interpretation, and reporting, while preserving context and uncertainty."
 };

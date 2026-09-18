@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Obstacle-avoidance systems have blind spots and performance limits related to size, texture, lighting, speed, direction, and sensor cleanliness.",
     "Maintain a simple route with sufficient space and an escape direction."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Plan clearance against actual terrain and hard-to-see obstacles with recovery options; obstacle-avoidance sensors do not replace conservative route planning."
 };

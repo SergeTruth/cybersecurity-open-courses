@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Preserve event chronology.",
     "A useful comparison explains what changed, what remained stable, how collection conditions differed, and how confident the judgment is."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Compare aligned observations across time while accounting for viewpoint, lighting, and seasonal differences and verifying capture time and context."
 };

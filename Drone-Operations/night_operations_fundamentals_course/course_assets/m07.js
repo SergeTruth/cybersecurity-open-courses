@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "If orientation is lost, avoid rapid speculative inputs.",
     "Abort criteria must trigger early enough to preserve options."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Verified preparation, continuous monitoring, and early recovery preserve options, while return-to-home remains dependent on navigation, route, and recovery assumptions."
 };

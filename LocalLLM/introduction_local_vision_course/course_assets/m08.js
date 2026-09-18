@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Monitor the complete pipeline: camera reachability, stream decode, frame rate, inference latency, accelerator health, storage capacity, event creation, dashboard access, and alert delivery.",
     "Define fail-safe expectations."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Camera, inference, storage and alert delivery must all be monitored; an active server cannot compensate for a failed stream, so degraded coverage must be reported."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Plan camera orientation, exposure behavior, route direction, and observation time around the mission.",
     "Image quality is operational quality."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Shadows, glare and low light change visible detail and can confound comparison; plan collection timing and viewpoint and record lighting limitations."
 };

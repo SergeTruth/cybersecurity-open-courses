@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "A strong SOC 2 culture makes control performance part of normal work.",
     "This does not mean every employee needs to become a compliance specialist."
   ],
-  "graphicAlt": "Employee participation model connecting policies, access, training, documentation, reporting, and process ownership."
+  "graphicAlt": "Following and learning processes, recording work, reviewing access, and reporting issues support controls connected to each role."
 };

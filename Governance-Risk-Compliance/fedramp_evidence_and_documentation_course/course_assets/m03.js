@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Operational records are just as important as formal documents.",
     "Different documents must tell a consistent story."
   ],
-  "graphicAlt": "Blank course placeholder for module 3."
+  "graphicAlt": "Architecture, inventory, control narratives and operational evidence align around the same service; policy expectations are distinguished from actual operational records."
 };

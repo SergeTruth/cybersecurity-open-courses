@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "The operating model should define handoffs and records from intake through closure.",
     "Set realistic service levels for intake, ordinary review, urgent escalation, scheduling, data delivery, and correction."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Mission intake defines purpose and scope, approval assigns accountable roles, changes return for review, and unsafe or unsuitable missions can be paused or rejected."
 };

@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Handoffs preserve authority and context when shifts or teams change.",
     "When several missions are active, the center must prioritize attention."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "The center supports the pilot with prioritized safety communication, clearly marked stale status, escalation support, and after-action review without taking flight command."
 };

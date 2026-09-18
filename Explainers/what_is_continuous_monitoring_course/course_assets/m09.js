@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Strong monitoring depends on telemetry quality and operational discipline.",
     "The goal is not collecting more data."
   ],
-  "graphicAlt": "Blank course placeholder for module 9."
+  "graphicAlt": "Continuous monitoring uses reliable evidence and risk-based scope to identify change, understand its significance, assign action, and improve controls."
 };

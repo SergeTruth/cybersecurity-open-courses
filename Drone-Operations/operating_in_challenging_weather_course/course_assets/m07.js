@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "If actual conditions differ materially from the plan, pause and reassess.",
     "Client schedules, travel cost, expiring access, or a waiting crew can create pressure to continue."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Actual site conditions can change a forecast-based plan; crews reassess continuously and may go, modify, delay, or cancel without yielding to schedule pressure."
 };

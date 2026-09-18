@@ -11,5 +11,5 @@ window.COURSE_MODULE = {
     "For employees, the lesson is simple: follow the process and document the work.",
     "Evidence quality improves when teams capture the right information at the time the work happens."
   ],
-  "graphicAlt": "Controls and evidence workflow showing policies, tickets, logs, access reviews, approvals, training, and monitoring records."
+  "graphicAlt": "Access reviews, change approvals, and backup tests produce corresponding records captured when the work occurs."
 };

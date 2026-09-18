@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "The ground-control station may be a dedicated controller, mobile device, or computer.",
     "Firmware and mobile applications coordinate aircraft behavior, settings, maps, accounts, and records."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Four component groups show airframe and propulsion, power and payload, control and navigation, and links and software, while retaining operator responsibility."
 };

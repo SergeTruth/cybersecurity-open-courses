@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Plan an alternative before launch.",
     "The goal is safe, lawful, privacy-conscious operation, not forcing a mission through poor visibility."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A night mission proceeds only when supported by conditions and authority; daylight, ground methods, or rescheduling remain valid alternatives that preserve safety and evidence quality."
 };

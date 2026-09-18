@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Measurement often needs more target pixels than simple detection.",
     "Palettes and display ranges map values to colors or shades."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Emission and reflection affect thermal readings; target pixel coverage limits detail, and palette changes alter appearance without changing the underlying scene data."
 };

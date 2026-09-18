@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Separate observation from interpretation.",
     "Use annotations and evidence references carefully."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Water visibly covering a road is an observation; judging the route impassable may require additional evidence. Imagery alone does not establish intent or cause."
 };

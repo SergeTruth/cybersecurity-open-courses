@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Document objective, approvals, crew, aircraft, payload, conditions, route, standoff, hazards, controls, emergency actions, data handling, and abort criteria.",
     "Deconflict with maintenance, cranes, lifts, traffic control, rail movement, energized work, deliveries, and emergency access."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Plan inspection standoff, clear routes and recovery around site activity and conditions, with the responsible drone pilot retaining the final go decision."
 };

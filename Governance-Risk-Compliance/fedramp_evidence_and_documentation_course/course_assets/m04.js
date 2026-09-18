@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Weak evidence creates friction.",
     "Good evidence is also protected."
   ],
-  "graphicAlt": "Blank course placeholder for module 4."
+  "graphicAlt": "A contextualized artifact links to its source, owner, system, control and time period; missing context is contrasted with protected, reviewable evidence."
 };

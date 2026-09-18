@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Operational reliability may favor a slightly lower-scoring model that is faster, finishes consistently, and stays within memory.",
     "Test structured output if automation depends on it, but retain human review for consequential decisions."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Operational fit combines grounded facts, completion, latency and repeated stability, while unsupported details are rejected."
 };

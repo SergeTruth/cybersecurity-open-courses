@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Storage and access should reflect sensitivity.",
     "Retention should match mission, policy, legal, and evidentiary needs."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Preserve original imagery, separate working copies, retain metadata and mission logs, trace findings to evidence, and manage access and retention."
 };

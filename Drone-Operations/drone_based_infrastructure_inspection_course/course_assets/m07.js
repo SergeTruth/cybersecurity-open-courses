@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Infrastructure data can reveal layout, condition, access routes, vulnerabilities, and operational details.",
     "Version reports and correction records."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Link observed conditions to source files, review confidence and limitations, version reports and corrections, and protect sensitive infrastructure data."
 };

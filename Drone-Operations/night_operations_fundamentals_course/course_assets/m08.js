@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Low-light imagery can also increase misidentification risk.",
     "Do not use night operations for stalking, harassment, unlawful surveillance, targeting private individuals, flight-restriction bypass, or evasion of oversight."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Night collection stays within its authorized purpose, uses controlled data handling, and separates observations from uncertain interpretations of weak imagery."
 };

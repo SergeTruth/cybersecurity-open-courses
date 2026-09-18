@@ -10,5 +10,5 @@ window.COURSE_MODULE = {
     "Responsible-use policy prohibits harassment, stalking, unlawful surveillance, weaponization, restriction bypass, unsafe operations, and targeting private individuals.",
     "Third-party platforms and service providers belong in the security review."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Protect identities, software, purpose-limited collection, and provider relationships, with records of approvals, access, and exports across the drone program."
 };

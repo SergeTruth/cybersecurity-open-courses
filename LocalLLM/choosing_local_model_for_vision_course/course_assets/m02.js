@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Define representative normal cases, difficult cases, and costly failures.",
     "No universal best model exists because use cases value different tradeoffs."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Choose a vision model from representative inputs, required output and acceptance criteria that account for latency, error cost, privacy and workload timing."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Controls, evidence, audit activities, and employee participation all shape the report and the customer assurance it can provide.",
     "Strong SOC 2 programs treat compliance as part of normal operations, supported by clear ownership, documentation, and continuous improvement."
   ],
-  "graphicAlt": "SOC 2 lifecycle showing trust services criteria, controls, evidence, audit activities, customer assurance, and continuous improvement."
+  "graphicAlt": "Scope, controls, records, and independent attestation rest on ownership, consistent operation, and improvement; SOC 2 is not a certification."
 };

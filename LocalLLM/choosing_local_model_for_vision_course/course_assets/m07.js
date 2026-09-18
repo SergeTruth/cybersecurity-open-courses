@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Use generic public benchmarks as background, not as a substitute for local evidence.",
     "Maintain an evaluation log with dates, results, decisions, and rejected alternatives."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Build representative local tests, write a scoring rubric before comparison, repeat controlled runs, record configuration and results, and retest changes."
 };
