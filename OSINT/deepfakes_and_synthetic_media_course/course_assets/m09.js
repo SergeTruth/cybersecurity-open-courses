@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Responsible reporting distinguishes unverified, manipulated, synthetic, and miscontextualized content.",
     "The goal is disciplined analysis rather than panic or instant certainty."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Media verification preserves context, traces provenance, tests the claim and explains evidence and limits, using fallible tools to support proportionate decisions while minimizing harm."
 };

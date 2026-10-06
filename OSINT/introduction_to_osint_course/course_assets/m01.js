@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Defensive uses include understanding an organization's exposed assets, supporting incident response, monitoring public threat reporting, checking business claims, assessing risk, and helping journalists or researchers verify events.",
     "OSINT is disciplined inquiry, not unrestricted internet searching."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Public sources pass through evaluation and analysis to become decision-ready intelligence; collection alone is not intelligence, and the work remains lawful, relevant and reviewable."
 };

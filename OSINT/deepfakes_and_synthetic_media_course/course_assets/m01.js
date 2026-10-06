@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Analysts need careful habits because intuitive visual judgment is unreliable.",
     "The objective is disciplined assessment, not panic or instant certainty."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Captured, altered and generated media all require review of the claimed source, event, identity and context; appearance alone does not establish authenticity."
 };

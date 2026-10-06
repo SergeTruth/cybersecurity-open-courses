@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Assign confidence based on source quality, independence, consistency, and remaining alternatives.",
     "A relationship map is an analytical aid, not proof by appearance."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Three explicit relationship types—domain resolved to address, certificate covered hostname and repository referenced domain—each carry source and date, without implying common control from appearance alone."
 };

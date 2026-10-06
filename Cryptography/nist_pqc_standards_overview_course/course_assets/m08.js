@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Library and protocol support are necessary but not sufficient.",
     "Standards become useful when they are translated into engineering roadmaps."
   ],
-  "graphicAlt": "Blank white placeholder image for module 8, Standards in Real Migration Programs."
+  "graphicAlt": "Standards become useful through inventory, dependency readiness, interoperability tests and staged deployment with owners, monitoring, rollback and agility."
 };

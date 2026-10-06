@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "SATs help teams document assumptions, compare explanations, identify useful indicators, and communicate confidence.",
     "Structured techniques do not replace technical expertise."
   ],
-  "graphicAlt": "Cybersecurity investigation workflow showing alerts, evidence, hypotheses, assumptions, indicators, and decisions."
+  "graphicAlt": "Alerts, incident evidence and risk inputs are examined using assumptions, hypotheses, indicators and confidence to make reviewable decisions supported by technical expertise and operational context."
 };

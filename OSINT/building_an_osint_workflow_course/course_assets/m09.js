@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Reporting answers the requirement with evidence references, calibrated confidence, limitations, and proportionate next steps.",
     "Ethics, legal authority, privacy, documentation, and source reliability are not optional extras."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "The OSINT workflow defines, collects, processes, validates and analyzes, then reports, with feedback and a foundation of authority, privacy and provenance."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Use multiple forms of evidence.",
     "Report the tool, version, input, result, limitations, and interpretation."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "An AI detector produces one analytical input for contextual source review and can make false-positive or false-negative errors, so its tool, input, result and limitations should be recorded."
 };

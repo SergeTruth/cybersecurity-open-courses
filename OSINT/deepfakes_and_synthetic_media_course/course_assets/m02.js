@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Synthetic and manipulated media complicate evidence.",
     "Trust is protected through process."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Synthetic media can serve legitimate purposes or cause harm; consequential requests need independent verification, and genuine evidence should not be dismissed merely because fakes exist."
 };

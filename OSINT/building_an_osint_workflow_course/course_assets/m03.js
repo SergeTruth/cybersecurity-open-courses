@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Avoid overcollection.",
     "Include contingencies."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A collection plan links information needs to source priorities, ownership and time limits, with scoped collection and a pause when boundaries change."
 };

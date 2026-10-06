@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Hybrid manipulation combines methods.",
     "Classifying the media is only part of the task."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Misleading media may be synthetic or AI-altered, edited, staged or miscontextualized, with overlapping methods that should be described according to the evidence."
 };

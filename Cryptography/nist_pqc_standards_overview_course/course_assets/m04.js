@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "ML-DSA gives organizations a standardized post-quantum signature option, but adoption still requires engineering work.",
     "The practical migration question is where trust depends on signatures and how long that trust must last."
   ],
-  "graphicAlt": "Blank white placeholder image for module 4, FIPS 204 and ML-DSA."
+  "graphicAlt": "ML-DSA signs artifacts with a private key and verifies them with a public key; migration must support trust structures and verifiers that may persist for years."
 };

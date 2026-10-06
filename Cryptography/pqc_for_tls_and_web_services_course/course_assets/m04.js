@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "That distinction matters for TLS.",
     "Teams should use standards-based algorithms through mature libraries and protocols."
   ],
-  "graphicAlt": "Blank course placeholder for module 4."
+  "graphicAlt": "PQC key establishment and signature-based authentication are separate migration tracks with different protocol and certificate-ecosystem dependencies."
 };

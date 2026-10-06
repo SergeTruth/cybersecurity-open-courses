@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Strong analysis separates observation from inference.",
     "The goal is responsible visibility and decision support."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Public technical indicators are assessed in context to support defensive inventory and ownership decisions; they are signals rather than proof of compromise and do not authorize intrusive access."
 };

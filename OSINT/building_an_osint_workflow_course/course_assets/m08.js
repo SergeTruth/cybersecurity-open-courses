@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Recommendations should be lawful, proportionate, and tied to the finding.",
     "Control dissemination according to sensitivity and purpose."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A report answers the question through findings, supporting evidence, confidence, limits and next steps, delivered to an authorized audience with feedback."
 };

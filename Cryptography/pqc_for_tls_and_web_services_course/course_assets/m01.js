@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The risk is not limited to a future outage.",
     "For TLS and web services, PQC is a migration and operations problem, not just a cryptography problem."
   ],
-  "graphicAlt": "Blank course placeholder for module 1."
+  "graphicAlt": "TLS spans browsers, applications, gateways and services; PQC planning must distinguish handshake identity and key establishment from symmetric session protection."
 };

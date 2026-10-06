@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Ethics belongs in every stage.",
     "A mature workflow ends with reporting and feedback."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A defined question leads through a traceable source trail and documented reasoning to a useful answer, with scope, ethics, review and feedback throughout."
 };

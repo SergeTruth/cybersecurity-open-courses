@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Considering multiple possibilities improves preparedness and reduces overconfidence.",
     "The objective is not precise prediction."
   ],
-  "graphicAlt": "Branching alternative futures map showing different outcomes driven by key assumptions and changing conditions."
+  "graphicAlt": "Key assumptions lead to several plausible future paths, whose early indicators help develop response options; the purpose is preparedness rather than precise prediction."
 };

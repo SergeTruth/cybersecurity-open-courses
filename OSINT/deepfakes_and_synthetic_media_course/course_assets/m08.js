@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Sensitive media may involve victims, private individuals, sexual content, violence, or reputational accusations.",
     "Support truth without amplifying harm."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Responsible reporting distinguishes unverified, manipulated, synthetic and miscontextualized media while stating evidence, confidence and limitations and protecting affected people."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Protocol negotiation becomes very important.",
     "Hybrid key exchange may appear in production ecosystems before post-quantum certificate chains are widely deployed."
   ],
-  "graphicAlt": "Blank course placeholder for module 5."
+  "graphicAlt": "Hybrid TLS key establishment combines classical and post-quantum inputs under protocol rules; secure negotiation, compatibility and fallback behavior still need testing."
 };

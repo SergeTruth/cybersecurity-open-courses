@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Correlation works when every relationship has a source, date, meaning, and confidence.",
     "The objective is responsible visibility and decision support, not intrusive testing."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Responsible technical OSINT defines scope, observes public indicators, adds context and time, correlates carefully and validates with owners; source, date, meaning and confidence support every finding, and exposed secrets are never used."
 };

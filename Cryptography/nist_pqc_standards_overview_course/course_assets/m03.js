@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "ML-KEM is central because many networked systems depend on key establishment.",
     "Migration will often involve hybrid deployments where classical and post-quantum mechanisms are combined during transition."
   ],
-  "graphicAlt": "Blank white placeholder image for module 3, FIPS 203 and ML-KEM."
+  "graphicAlt": "ML-KEM uses a recipient public key and a transmitted ciphertext to establish matching shared secrets, while the private key remains with the recipient."
 };

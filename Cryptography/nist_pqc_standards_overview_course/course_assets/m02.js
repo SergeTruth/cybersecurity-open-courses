@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The words selected and standardized are not interchangeable.",
     "Organizations should also expect guidance to evolve."
   ],
-  "graphicAlt": "Blank white placeholder image for module 2, The NIST PQC Standardization Process."
+  "graphicAlt": "PQC candidates undergo security, performance and implementation review; selection and publication are distinct milestones."
 };

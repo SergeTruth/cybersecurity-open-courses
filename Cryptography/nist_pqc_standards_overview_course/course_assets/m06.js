@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Primary choices, backup choices, and future standards play different roles.",
     "Migration programs should track these algorithms without chasing every draft as if it were already production-ready."
   ],
-  "graphicAlt": "Blank white placeholder image for module 6, Algorithms Still in the Pipeline."
+  "graphicAlt": "Falcon/FN-DSA and HQC represent ongoing standardization paths; track them for future options without equating selection with production readiness."
 };

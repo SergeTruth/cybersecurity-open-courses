@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "It helps to separate several stages that are often blended together.",
     "Security practitioners do not need to become cryptographers to use the standards well."
   ],
-  "graphicAlt": "Blank white placeholder image for module 1, Why NIST PQC Standards Matter."
+  "graphicAlt": "Algorithm selection, publication, implementation, validation and real deployment are separate stages that require different evidence."
 };

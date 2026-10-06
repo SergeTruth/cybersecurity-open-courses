@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Use confidence language consistently.",
     "When evidence remains unresolved, say so."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Many copied reports share one origin, while corroboration relies on independently sourced evidence reviewed for origin, context and contradictions."
 };

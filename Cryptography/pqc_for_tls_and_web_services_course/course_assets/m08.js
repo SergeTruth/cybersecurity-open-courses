@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Deployment should be staged.",
     "Rollback planning is part of responsible change management."
   ],
-  "graphicAlt": "Blank course placeholder for module 8."
+  "graphicAlt": "Test real TLS clients and handshake behavior, stage deployment, and monitor failures and fallback with controlled rollback and retained evidence."
 };

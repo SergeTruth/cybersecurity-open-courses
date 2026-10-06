@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "This is why PQC migration requires testing with real protocols and realistic traffic.",
     "The practical approach is to match parameters to risk, protocol, and operational constraints."
   ],
-  "graphicAlt": "Blank white placeholder image for module 7, Parameters, Security Categories, and Practical Tradeoffs."
+  "graphicAlt": "PQC parameter choices must balance security requirements, size, performance and interoperability, then be tested in realistic protocols and traffic."
 };

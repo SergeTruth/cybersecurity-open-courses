@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Proportionality asks whether the expected value justifies the collection and potential harm.",
     "Ethical practice includes correction and restraint."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Public visibility does not remove the need for purpose, authority and proportionality; collect only necessary information, pause for review when unclear and do not bypass access controls."
 };

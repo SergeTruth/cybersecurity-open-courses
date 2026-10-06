@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Over time, these habits improve both individual and team performance.",
     "The goal is not perfection."
   ],
-  "graphicAlt": "Continuous analytical improvement cycle showing assumptions, evidence, feedback, revision, and transparent communication."
+  "graphicAlt": "Analytical discipline cycles through questions, documented assumptions, feedback, revised judgments and communicated uncertainty, while distinguishing what is known from what is inferred."
 };

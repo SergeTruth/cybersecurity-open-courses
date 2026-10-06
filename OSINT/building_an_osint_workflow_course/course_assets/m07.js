@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Identify gaps explicitly.",
     "Document the chain of reasoning from observations to judgments."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Observed evidence is compared against competing explanations for support, contradictions and gaps before forming a judgment with calibrated confidence."
 };

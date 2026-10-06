@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Cross-source corroboration looks for independent evidence with different origins: official statements, credible reporting, other recordings, direct witnesses, public records, or known event timelines.",
     "Preserve uncertainty."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Earlier appearances, keyframes, metadata and timelines, and independent corroboration contribute to assessing the claim; unresolved verification does not mean media is synthetic."
 };

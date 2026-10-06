@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Repeatability does not mean every public result will remain identical.",
     "Auditability protects both the audience and the analyst."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Source URLs, times and origins are preserved, observations are distinguished from claims and inferences, and a reviewer can trace the resulting finding without unnecessary retention."
 };

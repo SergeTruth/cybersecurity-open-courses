@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Prioritize findings by evidence quality, asset importance, reachability, potential impact, and urgency.",
     "Responsible reporting avoids sensational language and unsupported attribution."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Public risk signals are prioritized using evidence quality, asset importance and potential impact, then sent to authorized owners for validation and proportionate action rather than assumed to be confirmed vulnerabilities."
 };

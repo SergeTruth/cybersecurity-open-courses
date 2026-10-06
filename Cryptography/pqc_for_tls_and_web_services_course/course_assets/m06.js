@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Certificate migration depends on many parties.",
     "It also helps to separate related use cases."
   ],
-  "graphicAlt": "Blank course placeholder for module 6."
+  "graphicAlt": "PQC certificate migration depends on the full validation path, including authorities, chains, client trust stores, libraries, devices, managed platforms and inspection tools."
 };

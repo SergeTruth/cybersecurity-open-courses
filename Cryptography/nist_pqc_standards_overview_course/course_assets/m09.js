@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Additional algorithms such as Falcon and HQC matter for diversity, backup options, and future planning.",
     "The goal is not merely to know algorithm names."
   ],
-  "graphicAlt": "Blank white placeholder image for module 9, Course Summary and Key Takeaways."
+  "graphicAlt": "FIPS 203, 204 and 205 address key establishment and two signature families; readiness combines that standards knowledge with inventory, testing and adaptable deployment."
 };

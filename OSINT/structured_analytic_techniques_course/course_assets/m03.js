@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "ACH works best when analysts include alternatives they might otherwise dismiss too early.",
     "The output is not certainty."
   ],
-  "graphicAlt": "Analysis of competing hypotheses matrix comparing evidence against multiple plausible explanations."
+  "graphicAlt": "Available evidence is compared against multiple plausible hypotheses with attention to supportive, contradictory and uncertain relationships; inconsistency is examined without claiming certainty or selecting a winner by vote."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Discovery should combine multiple sources.",
     "Cryptographic inventory is the foundation for PQC readiness because it connects risk to action."
   ],
-  "graphicAlt": "Blank course placeholder for module 7."
+  "graphicAlt": "Map clients, TLS termination points and services, then record ownership, libraries, platforms, data needs and vendor dependencies in a maintained inventory."
 };

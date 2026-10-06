@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Repositories and registries have access rules.",
     "Report code and package findings as evidence with confidence and limitations."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Public repositories and packages are interpreted in context and checked against actual authorized use; accidentally exposed secrets are not tested or used and are reported through approved channels with minimal, restricted evidence."
 };

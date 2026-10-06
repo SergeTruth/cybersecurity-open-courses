@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Prioritization should consider data lifetime, confidentiality sensitivity, internet exposure, operational criticality, dependency complexity, and business or regulatory impact.",
     "Not every endpoint has the same urgency, and that is good news."
   ],
-  "graphicAlt": "Blank course placeholder for module 3."
+  "graphicAlt": "Prioritize TLS traffic using confidentiality lifetime, exposure and migration difficulty, especially when sensitive data and hard-to-update clients coincide."
 };

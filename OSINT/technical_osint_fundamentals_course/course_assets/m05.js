@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Redirects and page metadata can connect brands, domains, and services, but relationships may be temporary or managed by a third party.",
     "Use certificate and web metadata defensively to reconcile assets, detect unexpected names, review exposure, and prioritize authorized internal validation."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Certificate records provide name-and-time clues, while web metadata provides technology clues; both lead to internal validation rather than proving current security or ownership."
 };

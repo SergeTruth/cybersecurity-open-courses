@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Specify what a satisfactory answer looks like.",
     "Requirements can change as evidence appears, but changes should be documented and approved."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Decision needs, subject and timeframe, scope constraints and stopping conditions define the intelligence requirement before collection begins."
 };

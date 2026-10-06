@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Hosting context remains useful for defensive work.",
     "Document observed addresses, source dates, provider context, shared-infrastructure limitations, and confidence."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "An observed address can lead to shared provider infrastructure serving different applications; the network owner need not be the application operator, geolocation is an estimate and assignments can change."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Time matters.",
     "Defensive analysis should reconcile public DNS with approved asset inventories, service owners, and vendor records."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Six DNS record types are mapped to their roles: A to IPv4, AAAA to IPv6, CNAME to a name alias, MX to a mail exchanger, NS to an authoritative name server and TXT to context-specific text; observed configuration does not prove who operates a service."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Write for the audience.",
     "A finding is actionable when the recipient understands what happened, why it matters, how confident the assessment is, and what proportionate next step is recommended."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Testing explanations and assessing confidence leads to an audience-appropriate report that separates finding, evidence, uncertainty and next step; confidence is not the same as impact."
 };

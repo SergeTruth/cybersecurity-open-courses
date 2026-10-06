@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Hybrid key exchange can help during the transition, but it should be standards-based, tested, monitored, and governed.",
     "Strong readiness starts with inventory and prioritization."
   ],
-  "graphicAlt": "Blank course placeholder for module 9."
+  "graphicAlt": "Adaptable web cryptography distinguishes key establishment, authentication and data protection, then uses inventory, prioritization, pilots and ongoing monitoring across all dependencies."
 };

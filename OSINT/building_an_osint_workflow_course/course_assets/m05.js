@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Separate facts, source claims, assumptions, and analytical judgments.",
     "Maintain traceability through processing."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Sources are deduplicated and organized into timelines and evidenced links while facts, claims, assumptions and judgments remain distinct and traceable."
 };

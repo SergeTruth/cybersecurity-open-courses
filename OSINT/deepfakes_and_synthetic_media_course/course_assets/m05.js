@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Chain of custody records how evidence was obtained, stored, transformed, and reviewed.",
     "Provenance often provides stronger evidence than appearance alone."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Media circulates through reposts to the item found; provenance work traces backward while recording the claim, upload history, edits and transfers, without confusing first found with first published."
 };

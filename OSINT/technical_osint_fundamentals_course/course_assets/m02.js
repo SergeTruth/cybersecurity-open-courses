@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Domain data is time-sensitive.",
     "Use domain information to form defensible questions: Is the asset in the internal inventory?"
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A domain tree using example.com illustrates naming clues, which must be validated against authorized ownership, purpose, current need and observation dates rather than treated as proof."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "Document methods, URLs, timestamps, preserved artifacts, transformations, and reasoning so the work can be reviewed.",
     "The goal is not to collect everything."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Responsible OSINT defines the question, collects within scope, evaluates and corroborates evidence, documents reasoning and communicates honestly, with privacy, proportionality and an authorized audience throughout."
 };

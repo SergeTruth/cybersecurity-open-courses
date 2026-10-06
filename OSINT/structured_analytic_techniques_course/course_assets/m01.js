@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "These techniques do not replace expertise.",
     "The value of structure is discipline."
   ],
-  "graphicAlt": "Intuition and experience being balanced with structured reasoning, evidence, assumptions, and uncertainty."
+  "graphicAlt": "Expertise is supported by structured reasoning to produce transparent judgments while uncertainty remains and blind spots are challenged."
 };

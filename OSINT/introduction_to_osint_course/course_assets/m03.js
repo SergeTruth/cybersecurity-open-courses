@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Reporting communicates findings for the intended audience.",
     "Feedback closes the lifecycle."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A six-stage loop moves from requirements through collection, processing, analysis, reporting and feedback, bounded by purpose, authority, scope, time and proportionality."
 };

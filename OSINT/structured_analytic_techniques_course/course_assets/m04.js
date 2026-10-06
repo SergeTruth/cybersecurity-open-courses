@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Indicators support adaptive thinking by preventing conclusions from becoming frozen.",
     "This technique is useful in cybersecurity, investigations, risk management, business planning, and any environment where conditions can shift quickly."
   ],
-  "graphicAlt": "Indicators dashboard showing developments that support, challenge, or change an analytical assessment."
+  "graphicAlt": "A current assessment specifies observable developments that support or challenge it, monitors those indicators and is reassessed as conditions change."
 };

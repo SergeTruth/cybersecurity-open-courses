@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Constructive challenge works best when it is focused on the reasoning, evidence, and assumptions rather than personal disagreement.",
     "Used well, devil's advocacy and red team thinking help teams notice blind spots, test confidence, and strengthen recommendations."
   ],
-  "graphicAlt": "Constructive challenge board showing prevailing view, assumptions, weaknesses, alternatives, and decision support."
+  "graphicAlt": "Colleagues examine the assumptions, evidence and alternatives behind a prevailing view to strengthen the recommendation, focusing challenge on reasoning rather than personal disagreement."
 };

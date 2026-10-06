@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Consider bias, incentives, access, expertise, and possible manipulation.",
     "Avoid unsupported conclusions."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Many copied claims can share a single origin, while independent documents, imagery and technical records offer stronger corroboration; origin, timing, bias and gaps still require evaluation."
 };

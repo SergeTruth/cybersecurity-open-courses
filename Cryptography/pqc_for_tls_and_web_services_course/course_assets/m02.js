@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Key establishment solves a different problem.",
     "Client authentication is another TLS use case, often seen in mutual TLS for service-to-service traffic, administrative interfaces, device identity, or partner integrations."
   ],
-  "graphicAlt": "Blank course placeholder for module 2."
+  "graphicAlt": "TLS combines peer authentication and session-key establishment in the handshake, then uses symmetric protection for application data."
 };

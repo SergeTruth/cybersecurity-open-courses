@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Examine patterns across multiple frames or audio segments and compare them with source context.",
     "Do not declare authenticity because no artifact is visible."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "Visual and audio artifacts can arise from manipulation or ordinary processing, so both odd-looking and natural-looking media require contextual checks and corroboration."
 };

@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Source selection should follow the requirement.",
     "Maintain a source inventory that records ownership, access conditions, update patterns, expected reliability, and preservation needs."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A defined requirement guides selection among official records, news, technical data, public code, imagery and maps, and social sources; search is a discovery aid rather than proof."
 };

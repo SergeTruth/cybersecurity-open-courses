@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The technique also asks what would happen if an assumption proved false.",
     "Making assumptions visible improves analytical quality."
   ],
-  "graphicAlt": "Assumptions iceberg showing visible conclusions above hidden beliefs, constraints, and evidence questions."
+  "graphicAlt": "An assessment rests on visible beliefs, constraints and expectations, which are tested by asking what is assumed, what supports it and what changes if it is false."
 };

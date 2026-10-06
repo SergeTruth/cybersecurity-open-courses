@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Context determines significance.",
     "Good OSINT reduces uncertainty enough to support a decision; it does not promise perfect knowledge."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "External clues from advisories, infrastructure, repositories and filings are assessed in context and against alternatives to support better-informed decisions while acknowledging unknowns."
 };

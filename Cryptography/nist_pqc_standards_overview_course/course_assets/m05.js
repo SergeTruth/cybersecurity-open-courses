@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Those tradeoffs do not make SLH-DSA unimportant.",
     "Security practitioners should understand SLH-DSA as part of the standards portfolio."
   ],
-  "graphicAlt": "Blank white placeholder image for module 5, FIPS 205 and SLH-DSA."
+  "graphicAlt": "SLH-DSA provides a stateless hash-based signature option with a different design foundation, balanced against signature-size and performance constraints."
 };

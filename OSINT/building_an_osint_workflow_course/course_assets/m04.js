@@ -9,5 +9,5 @@ window.COURSE_MODULE = {
     "Follow approved handling and retention rules.",
     "Collection must remain within lawful public access and authorized methods."
   ],
-  "graphicAlt": "Blank course graphic placeholder"
+  "graphicAlt": "A relevant source becomes a preserved artifact with URL, publisher, access time and context, linked to a handling record that distinguishes originals and working copies."
 };
