@@ -1,0 +1,188 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.899
+Device identity is one of the most
+important parts of an IoT design.
+
+2
+00:00:03.979 --> 00:00:07.986
+A device may use a certificate, key,
+token, serial number, enrollment record,
+
+3
+00:00:08.066 --> 00:00:11.223
+or cloud-assigned identity to decide what
+it is allowed to do.
+
+4
+00:00:11.303 --> 00:00:15.491
+That identity should be unique where
+possible and managed across manufacturing,
+
+5
+00:00:15.571 --> 00:00:18.182
+onboarding, operation, service, and
+retirement.
+
+6
+00:00:18.262 --> 00:00:22.572
+Provisioning is the process that places
+identity and credentials onto the device or
+
+7
+00:00:22.652 --> 00:00:24.169
+binds the device to a service.
+
+8
+00:00:24.249 --> 00:00:27.952
+It may happen during manufacturing, first
+boot, installer onboarding,
+
+9
+00:00:28.032 --> 00:00:30.218
+field service, or replacement workflows.
+
+10
+00:00:30.298 --> 00:00:33.879
+The design should explain who creates each
+value, how it is delivered,
+
+11
+00:00:33.959 --> 00:00:37.055
+where it is stored, and how provisioning
+errors are handled.
+
+12
+00:00:37.135 --> 00:00:41.020
+Credentials need storage and access
+controls appropriate to the platform.
+
+13
+00:00:41.100 --> 00:00:44.986
+Some devices have protected storage,
+secure elements, hardware key slots,
+
+14
+00:00:45.066 --> 00:00:46.583
+or restricted flash regions.
+
+15
+00:00:46.663 --> 00:00:49.941
+Others have fewer protections and need
+compensating controls.
+
+16
+00:00:50.021 --> 00:00:54.453
+The release documentation should state the
+assumption clearly so reviewers know what
+
+17
+00:00:54.533 --> 00:00:55.747
+the product depends on.
+
+18
+00:00:55.827 --> 00:00:57.830
+Shared fleet secrets increase impact.
+
+19
+00:00:57.910 --> 00:01:00.035
+If many devices use the same secret value,
+
+20
+00:01:00.115 --> 00:01:02.300
+one exposure can affect more than one
+unit.
+
+21
+00:01:02.380 --> 00:01:06.872
+Unique credentials reduce that broad
+dependency and support controlled replacement,
+
+22
+00:01:06.952 --> 00:01:08.834
+revocation, and support workflows.
+
+23
+00:01:08.914 --> 00:01:11.039
+The goal is practical lifecycle control,
+
+24
+00:01:11.119 --> 00:01:13.486
+not a claim that any storage choice is
+perfect.
+
+25
+00:01:13.566 --> 00:01:15.448
+Credential purpose should be clear.
+
+26
+00:01:15.528 --> 00:01:19.110
+A manufacturing token, transport
+credential, signing trust anchor,
+
+27
+00:01:19.190 --> 00:01:23.318
+device authentication key, and service
+enrollment value are different things.
+
+28
+00:01:23.398 --> 00:01:27.465
+The code and documentation should show
+where each one may be used and what should
+
+29
+00:01:27.545 --> 00:01:29.002
+never be logged or exported.
+
+30
+00:01:29.082 --> 00:01:31.207
+Rotation and replacement need planning.
+
+31
+00:01:31.287 --> 00:01:35.172
+Certificates expire, cloud policies
+change, devices move between owners,
+
+32
+00:01:35.252 --> 00:01:36.891
+and service procedures evolve.
+
+33
+00:01:36.971 --> 00:01:40.006
+Teams should know how credentials are
+renewed or replaced,
+
+34
+00:01:40.086 --> 00:01:42.332
+what happens when a credential is
+rejected,
+
+35
+00:01:42.412 --> 00:01:46.358
+and how the device reports the condition
+without exposing sensitive values.
+
+36
+00:01:46.438 --> 00:01:50.020
+Logs and diagnostics must not expose keys,
+tokens, private material,
+
+37
+00:01:50.100 --> 00:01:51.678
+or sensitive identity values.
+
+38
+00:01:51.758 --> 00:01:54.429
+During development, verbose logs can feel
+helpful,
+
+39
+00:01:54.509 --> 00:01:58.637
+but production diagnostics should provide
+bounded status and error categories
+
+40
+00:01:58.717 --> 00:02:02.420
+without turning support data into a second
+copy of credential material.

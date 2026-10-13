@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Dynamic String Libraries",
+  "graphicAlt": "A dynamic string tracks storage and ownership while growth remains subject to size limits, reported failures, cleanup rules, and possible invalidation of borrowed views.",
+  "narration": "Dynamic string libraries reduce some fixed-buffer problems by managing storage growth internally. Instead of asking every caller to predict the final size, a dynamic string object can grow as content is appended or formatted. That can improve maintainability, especially for complex string construction.\n\nDynamic growth does not remove failure handling. Allocation can fail, a configured maximum can be reached, or a builder can enter an error state. Code should know how the library reports failure and whether the object remains usable, becomes frozen, or must be discarded. Continuing with a failed builder can produce misleading output.\n\nOwnership transfer must be explicit. A dynamic string may own its buffer, lend a temporary pointer, transfer ownership to the caller, or invalidate earlier views when it grows. Those rules should be documented in code patterns and followed consistently. A pointer returned from a dynamic string object should not be treated as permanently stable unless the library promises that behavior.\n\nCleanup responsibility needs the same clarity. If a function creates a dynamic string, who frees it? If ownership is handed to a caller, is that visible in the function name or documentation? If an error occurs halfway through construction, are all allocated pieces released exactly once?\n\nMaximum length policy is part of defensive design. Dynamic strings can grow beyond what a fixed buffer would allow, which is useful when the data is legitimate and bounded by policy. Without a maximum, a builder can consume more memory than the application intends. Safer dynamic use includes size limits, allocation checks, and cleanup tests.",
+  "narrationPoints": [
+    "Instead of asking every caller to predict the final size, a dynamic string object can grow as content is appended or formatted.",
+    "Code should know how the library reports failure and whether the object remains usable, becomes frozen.",
+    "A dynamic string may own its buffer, lend a temporary pointer, transfer ownership to the caller, or invalidate earlier views.",
+    "If ownership is handed to a caller, is that visible in the function name or documentation.",
+    "Safer dynamic use includes size limits, allocation checks, and cleanup tests."
+  ]
+};

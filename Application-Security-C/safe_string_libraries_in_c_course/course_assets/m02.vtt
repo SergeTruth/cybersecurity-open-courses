@@ -1,0 +1,174 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.294
+C strings are null-terminated sequences in
+memory.
+
+2
+00:00:03.374 --> 00:00:07.691
+A function that expects a C string
+typically scans until it reaches a terminator.
+
+3
+00:00:07.771 --> 00:00:11.010
+If the expected terminator is missing
+inside valid storage,
+
+4
+00:00:11.090 --> 00:00:13.757
+the function contract has already been
+violated.
+
+5
+00:00:13.837 --> 00:00:15.551
+A safer API may reduce this risk,
+
+6
+00:00:15.631 --> 00:00:19.822
+but it cannot repair an input that does
+not meet its documented preconditions.
+
+7
+00:00:19.902 --> 00:00:22.886
+String length and buffer capacity are
+different facts.
+
+8
+00:00:22.966 --> 00:00:25.823
+Length is the current content before the
+terminator.
+
+9
+00:00:25.903 --> 00:00:29.967
+Capacity is the storage available for
+content and any required terminator.
+
+10
+00:00:30.047 --> 00:00:32.142
+A call that writes data needs capacity.
+
+11
+00:00:32.222 --> 00:00:36.540
+A call that reads data may need length,
+termination, or both depending on the API.
+
+12
+00:00:36.620 --> 00:00:39.414
+Reviewers should not let those terms blur
+together.
+
+13
+00:00:39.494 --> 00:00:42.414
+Pointer lifetime and storage mutability
+also matter.
+
+14
+00:00:42.494 --> 00:00:46.558
+A pointer to stack storage, heap storage,
+static storage, a string literal,
+
+15
+00:00:46.638 --> 00:00:50.003
+or a slice inside another buffer can have
+very different rules.
+
+16
+00:00:50.083 --> 00:00:51.671
+Some storage can be modified.
+
+17
+00:00:51.751 --> 00:00:53.719
+Some should be treated as read-only.
+
+18
+00:00:53.799 --> 00:00:57.482
+Some is valid only until a function
+returns or a dynamic string grows.
+
+19
+00:00:57.562 --> 00:00:59.911
+Binary data is not automatically a C
+string.
+
+20
+00:00:59.991 --> 00:01:03.420
+A buffer may contain embedded null bytes,
+may not be terminated,
+
+21
+00:01:03.500 --> 00:01:06.802
+or may use an encoding that the string API
+does not understand.
+
+22
+00:01:06.882 --> 00:01:10.691
+Treating arbitrary bytes as text can make
+length checks, comparisons,
+
+23
+00:01:10.771 --> 00:01:12.740
+formatting, and logging incorrect.
+
+24
+00:01:12.820 --> 00:01:15.931
+Use byte-oriented APIs when the data is
+not a valid string.
+
+25
+00:01:16.011 --> 00:01:17.979
+Every string API assumes a contract.
+
+26
+00:01:18.059 --> 00:01:20.409
+Some require valid null-terminated input.
+
+27
+00:01:20.489 --> 00:01:22.139
+Some accept explicit lengths.
+
+28
+00:01:22.219 --> 00:01:25.204
+Some always terminate output when capacity
+is nonzero.
+
+29
+00:01:25.284 --> 00:01:27.823
+Some report truncation through a return
+value.
+
+30
+00:01:27.903 --> 00:01:28.729
+Some allocate.
+
+31
+00:01:28.809 --> 00:01:29.507
+Some borrow.
+
+32
+00:01:29.587 --> 00:01:33.397
+A safer API is still unsafe when the
+caller violates those assumptions.
+
+33
+00:01:33.477 --> 00:01:37.604
+The practical review habit is to name the
+representation before choosing the
+
+34
+00:01:37.684 --> 00:01:38.256
+function.
+
+35
+00:01:38.336 --> 00:01:42.336
+Is this a C string, a bounded byte range,
+a dynamic string object, a builder,
+
+36
+00:01:42.416 --> 00:01:43.495
+or an encoded field?
+
+37
+00:01:43.575 --> 00:01:48.020
+Once the representation is clear, the
+correct API contract is much easier to check.

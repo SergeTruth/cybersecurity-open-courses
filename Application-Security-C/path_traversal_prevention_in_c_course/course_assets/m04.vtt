@@ -1,0 +1,127 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.949
+A strong pattern is to accept constrained
+file names or resource identifiers instead
+
+2
+00:00:05.029 --> 00:00:05.709
+of raw paths.
+
+3
+00:00:05.789 --> 00:00:08.816
+If a workflow only needs a report
+identifier, an image key,
+
+4
+00:00:08.896 --> 00:00:12.665
+or a simple export name, the interface
+should ask for that smaller value.
+
+5
+00:00:12.745 --> 00:00:16.762
+The application can then map it into an
+approved root using rules it controls.
+
+6
+00:00:16.842 --> 00:00:21.167
+Allowlisting is usually clearer than
+trying to recognize every dangerous string.
+
+7
+00:00:21.247 --> 00:00:23.533
+Define the characters, length, extension,
+
+8
+00:00:23.613 --> 00:00:26.085
+and naming format the workflow actually
+needs.
+
+9
+00:00:26.165 --> 00:00:29.378
+Reject values that are empty, too long,
+ambiguous, absolute,
+
+10
+00:00:29.458 --> 00:00:32.794
+contain unexpected separators, use
+platform-reserved names,
+
+11
+00:00:32.874 --> 00:00:34.666
+or do not fit the supported format.
+
+12
+00:00:34.746 --> 00:00:38.886
+The specific policy may vary by platform
+and product, but it should be explicit.
+
+13
+00:00:38.966 --> 00:00:42.797
+Metadata-derived names deserve the same
+treatment as direct user input.
+
+14
+00:00:42.877 --> 00:00:46.955
+Uploaded filenames, archive entry names,
+document titles, exported labels,
+
+15
+00:00:47.035 --> 00:00:50.434
+and names read from other files can all
+carry external influence.
+
+16
+00:00:50.514 --> 00:00:52.429
+They may be useful as display labels,
+
+17
+00:00:52.509 --> 00:00:56.031
+but they should not be trusted as
+destinations without validation.
+
+18
+00:00:56.111 --> 00:01:00.436
+Validation should happen before path
+construction and before the file operation.
+
+19
+00:01:00.516 --> 00:01:04.780
+That ordering matters because later code
+should deal with a resource name that has
+
+20
+00:01:04.860 --> 00:01:08.073
+already been reduced to the safe shape the
+workflow supports.
+
+21
+00:01:08.153 --> 00:01:12.169
+If path construction accepts arbitrary
+strings and then tries to repair them
+
+22
+00:01:12.249 --> 00:01:15.092
+afterward, the design becomes harder to
+reason about.
+
+23
+00:01:15.172 --> 00:01:17.890
+The goal is not to recognize every
+possible bad path.
+
+24
+00:01:17.970 --> 00:01:22.110
+The goal is to accept only values that are
+clearly part of the intended workflow.
+
+25
+00:01:22.190 --> 00:01:26.392
+That shift makes the implementation
+simpler, makes test cases more meaningful,
+
+26
+00:01:26.472 --> 00:01:28.820
+and gives reviewers a concrete rule to
+check.

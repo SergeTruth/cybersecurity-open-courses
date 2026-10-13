@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Review, and Operational Controls",
+  "graphicAlt": "A review loop documents settings, tests edge cases, traces effects and reviews deployments to maintain safe defaults and clear failure behavior.",
+  "narration": "Environment handling needs tests for both expected and unexpected state. Tests should cover missing values, empty values, malformed values, oversized values, unsupported modes, boundary numeric values, invalid paths, invalid list entries, and combinations that operators might accidentally deploy. These tests make configuration behavior predictable.\n\nTests should also verify safe defaults and safe failure. If a variable is optional, the default should be explicit and secure. If a variable is required, invalid or missing values should stop the workflow clearly rather than letting the program continue with guessed behavior. That clarity helps both developers and operators.\n\nReview should identify every environment variable the program reads and trace how it affects behavior. Does it influence file access, child process launch, logging, memory allocation, network endpoints, feature modes, or trust decisions? Is it copied and validated before use? Is the value safe to log? Can it reach a more privileged operation?\n\nLogging should avoid secrets, full environment dumps, and sensitive path details. Deployment documentation should list supported variables, allowed values, defaults, whether each value is sensitive, and who is expected to set it. Operators should not have to reverse-engineer environment policy from source code.\n\nOperational controls keep environment behavior from drifting. Remove obsolete variables, detect unsupported settings during startup, keep service definitions reviewed, and avoid old launch wrappers that continue to inject unused state. Environment security is easiest when the program accepts a small, documented set of validated variables.",
+  "narrationPoints": [
+    "Tests should cover missing values, empty values, malformed values, oversized values, unsupported modes.",
+    "If a variable is optional, the default should be explicit and secure.",
+    "Tests should also verify safe defaults and safe failure.",
+    "Logging should avoid secrets, full environment dumps, and sensitive path details.",
+    "Environment security is easiest when the program accepts a small, documented set of validated variables."
+  ]
+};

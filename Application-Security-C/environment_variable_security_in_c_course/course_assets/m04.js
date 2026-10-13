@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Validating Environment Values",
+  "graphicAlt": "Four validation categories cover known modes, bounded numbers, path rules and list-entry limits, supported by explicit defaults or clear failure.",
+  "narration": "Environment values should be validated according to what they mean. The program should not treat all variables as generic strings after startup. A boolean, number, path, list, mode, identifier, or feature selector each has different validation needs and different failure behavior.\n\nBoolean and mode variables should allow only known values. If a setting supports enabled and disabled, or a small set of operational modes, the parser should accept that known vocabulary and reject ambiguous values. Silent interpretation of unexpected strings can produce surprising behavior and make operational mistakes harder to diagnose.\n\nNumeric values need careful conversion. The code should check whether conversion succeeded, whether extra characters were present, whether the value fits the intended type, and whether it falls within the allowed range. Values that drive allocation, timeouts, retry counts, logging limits, or concurrency should have practical minimums and maximums.\n\nPath values deserve the same care as other external paths. They should have length limits, expected forms, approved roots where appropriate, and defined behavior when invalid. A path from the environment is still external input unless deployment provides a stronger trust boundary and the code documents it.\n\nList-style variables need clear separator rules, entry limits, empty-entry handling, duplicate handling, and per-entry validation. Without those rules, a list can become an open-ended parsing problem or a way for accidental configuration to change search behavior. Missing or malformed variables should lead to safe defaults or clear failure, not guessed behavior.",
+  "narrationPoints": [
+    "Environment values should be validated according to what they mean.",
+    "Boolean and mode variables should allow only known values.",
+    "Values that drive allocation, timeouts, retry counts, logging limits, or concurrency should have practical minimums and maximums.",
+    "A path from the environment is still external input unless deployment provides a stronger trust boundary and the code documents it.",
+    "List-style variables need clear separator rules, entry limits, empty-entry handling, duplicate handling."
+  ]
+};

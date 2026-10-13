@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Ownership, Groups, and Trust Boundaries",
+  "graphicAlt": "Separate user, tenant and service storage boundaries are paired with deliberate sharing and verification of ownership expectations.",
+  "narration": "Ownership and group settings are part of the trust story for a file. They help define who can manage, read, write, or replace the file, depending on the platform model and surrounding policy. A C program that creates or consumes files should understand which identity owns those files and which identities are expected to share access.\n\nShared groups and service accounts can be useful, but they should be deliberate. Accidental group sharing can expose files to services that do not need them. A service account that owns too much data can turn a small application defect into a broader operational problem. The ownership model should match the workflow, not merely the easiest deployment path.\n\nUser-specific, tenant-specific, and service-specific data need clear separation. Directory layout, permissions, and application checks should all support that separation. If multiple users or tenants write into a shared area, the application needs careful naming, ownership, and authorization rules so one actor's files do not become another actor's responsibility.\n\nDo not assume a file is trustworthy only because its path looks familiar. A file in an expected directory may have unexpected owner, group, type, permissions, or history. For sensitive workflows, the program may need to check metadata or rely on controlled creation patterns before trusting the file as part of the application state.\n\nDocument ownership and group expectations where they matter. Reviewers should be able to see which account creates the file, which account reads it later, which group if any participates, and where the trust boundary sits. Files that cross users, services, tenants, or privilege levels deserve especially clear ownership design.",
+  "narrationPoints": [
+    "Ownership and group settings are part of the trust story for a file.",
+    "The ownership model should match the workflow, not merely the easiest deployment path.",
+    "Directory layout, permissions, and application checks should all support that separation.",
+    "Do not assume a file is trustworthy only because its path looks familiar.",
+    "Files that cross users, services, tenants, or privilege levels deserve especially clear ownership design."
+  ]
+};

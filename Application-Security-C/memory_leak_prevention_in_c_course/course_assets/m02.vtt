@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.201
+C requires developers to explicitly
+allocate and release dynamic memory.
+
+2
+00:00:04.281 --> 00:00:08.394
+Functions such as malloc and calloc create
+allocations that remain reserved until
+
+3
+00:00:08.474 --> 00:00:09.884
+they are released with free.
+
+4
+00:00:09.964 --> 00:00:13.430
+The compiler does not infer when a heap
+allocation is no longer needed,
+
+5
+00:00:13.510 --> 00:00:17.681
+and the language does not automatically
+attach cleanup responsibility to a pointer
+
+6
+00:00:17.761 --> 00:00:18.290
+variable.
+
+7
+00:00:18.370 --> 00:00:21.777
+The pointer returned from an allocation
+function is only an address.
+
+8
+00:00:21.857 --> 00:00:24.031
+It is not, by itself, an ownership
+contract.
+
+9
+00:00:24.111 --> 00:00:27.753
+The same pointer type can represent an
+owned allocation, a borrowed view,
+
+10
+00:00:27.833 --> 00:00:30.359
+an element inside a larger object, a
+global object,
+
+11
+00:00:30.439 --> 00:00:33.377
+or a pointer returned by a library with
+its own cleanup rule.
+
+12
+00:00:33.457 --> 00:00:37.040
+The ownership meaning comes from the API
+contract and surrounding code.
+
+13
+00:00:37.120 --> 00:00:40.234
+Ownership describes who is responsible for
+releasing memory.
+
+14
+00:00:40.314 --> 00:00:43.369
+A function that allocates may return
+ownership to its caller.
+
+15
+00:00:43.449 --> 00:00:45.211
+A structure may own a nested buffer.
+
+16
+00:00:45.291 --> 00:00:49.463
+A container may own its elements, or it
+may only reference elements owned elsewhere.
+
+17
+00:00:49.543 --> 00:00:53.714
+Reviewers should be able to identify the
+owner without searching through unrelated
+
+18
+00:00:53.794 --> 00:00:54.381
+code paths.
+
+19
+00:00:54.461 --> 00:00:57.869
+Borrowed pointers provide access without
+cleanup responsibility.
+
+20
+00:00:57.949 --> 00:01:00.886
+A borrowed pointer may be valid only
+during a function call,
+
+21
+00:01:00.966 --> 00:01:04.256
+while a parent object remains alive, or
+until a container changes.
+
+22
+00:01:04.336 --> 00:01:07.508
+Borrowing is useful, but it must not be
+confused with ownership.
+
+23
+00:01:07.588 --> 00:01:11.407
+Code that borrows a pointer should not
+free it unless the contract explicitly
+
+24
+00:01:11.487 --> 00:01:12.603
+transfers ownership.
+
+25
+00:01:12.683 --> 00:01:15.679
+Every allocation should have a clear
+expected cleanup path.
+
+26
+00:01:15.759 --> 00:01:18.638
+That cleanup path may be a direct free, a
+destroy function,
+
+27
+00:01:18.718 --> 00:01:21.891
+a cleanup helper for a structure, a
+container teardown routine,
+
+28
+00:01:21.971 --> 00:01:23.557
+or a caller-owned release step.
+
+29
+00:01:23.637 --> 00:01:27.044
+If no one can name the cleanup path when
+the allocation is introduced,
+
+30
+00:01:27.124 --> 00:01:28.887
+the code is already harder to trust.
+
+31
+00:01:28.967 --> 00:01:30.788
+Good ownership design is practical.
+
+32
+00:01:30.868 --> 00:01:34.628
+It reduces leaks, prevents repeated
+cleanup, and makes maintenance safer.
+
+33
+00:01:34.708 --> 00:01:37.116
+When an allocation crosses a function
+boundary,
+
+34
+00:01:37.196 --> 00:01:39.840
+the contract should say who owns it, who
+may borrow it,
+
+35
+00:01:39.920 --> 00:01:42.740
+how long it remains valid, and which
+routine releases it.

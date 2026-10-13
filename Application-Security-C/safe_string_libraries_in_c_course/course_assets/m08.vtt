@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.207
+Migrating legacy string code should be
+deliberate.
+
+2
+00:00:03.287 --> 00:00:06.609
+Start by inventorying call sites and
+grouping them by behavior:
+
+3
+00:00:06.689 --> 00:00:10.258
+copying, concatenation, formatting,
+parsing, path construction,
+
+4
+00:00:10.338 --> 00:00:13.045
+protocol fields, logging, and dynamic
+allocation.
+
+5
+00:00:13.125 --> 00:00:16.816
+This gives the team a map of where risk
+and complexity are concentrated.
+
+6
+00:00:16.896 --> 00:00:20.280
+Prioritize paths where string behavior
+affects trust, parsing,
+
+7
+00:00:20.360 --> 00:00:23.806
+storage, configuration, external input, or
+resource selection.
+
+8
+00:00:23.886 --> 00:00:27.823
+A low-risk display-only buffer may not
+need the same urgency as a parser that
+
+9
+00:00:27.903 --> 00:00:29.441
+controls application state.
+
+10
+00:00:29.521 --> 00:00:33.643
+Migration should focus first on code where
+hidden assumptions have the highest
+
+11
+00:00:33.723 --> 00:00:34.154
+impact.
+
+12
+00:00:34.234 --> 00:00:35.834
+Add tests before replacement.
+
+13
+00:00:35.914 --> 00:00:40.159
+Existing behavior may be flawed, but it is
+still behavior the system may depend on.
+
+14
+00:00:40.239 --> 00:00:44.484
+Boundary tests, truncation tests,
+empty-string tests, malformed-input tests,
+
+15
+00:00:44.564 --> 00:00:48.994
+and ownership tests help reveal whether
+the new API changes semantics intentionally
+
+16
+00:00:49.074 --> 00:00:49.997
+or accidentally.
+
+17
+00:00:50.077 --> 00:00:52.046
+Avoid blind mechanical replacement.
+
+18
+00:00:52.126 --> 00:00:55.017
+A new function may have different
+truncation behavior,
+
+19
+00:00:55.097 --> 00:00:59.158
+termination guarantees, return values,
+error codes, allocation ownership,
+
+20
+00:00:59.238 --> 00:01:00.099
+or portability.
+
+21
+00:01:00.179 --> 00:01:04.363
+Replacing names without reviewing
+semantics can make the code look modern while
+
+22
+00:01:04.443 --> 00:01:06.596
+changing the program in unintended ways.
+
+23
+00:01:06.676 --> 00:01:09.383
+Migrate incrementally with approved
+conventions.
+
+24
+00:01:09.463 --> 00:01:12.970
+Introduce project wrappers where they
+clarify repeated behavior.
+
+25
+00:01:13.050 --> 00:01:14.957
+Document how truncation is handled.
+
+26
+00:01:15.037 --> 00:01:16.452
+Update review checklists.
+
+27
+00:01:16.532 --> 00:01:19.117
+Keep changes small enough to test and
+understand.
+
+28
+00:01:19.197 --> 00:01:20.981
+The point is not a cosmetic rename;
+
+29
+00:01:21.061 --> 00:01:24.260
+the point is to make string behavior
+explicit and repeatable.

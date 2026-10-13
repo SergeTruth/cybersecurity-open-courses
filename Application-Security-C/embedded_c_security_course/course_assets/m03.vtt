@@ -1,0 +1,178 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.725
+Memory safety in firmware starts with the
+fact that embedded C often uses fixed
+
+2
+00:00:04.805 --> 00:00:08.453
+buffers, direct hardware access, interrupt
+handlers, callbacks,
+
+3
+00:00:08.533 --> 00:00:11.093
+DMA-capable memory, and tight memory
+budgets.
+
+4
+00:00:11.173 --> 00:00:13.990
+These patterns are normal in embedded
+engineering,
+
+5
+00:00:14.070 --> 00:00:18.551
+but they require disciplined review
+because the program is responsible for its own
+
+6
+00:00:18.631 --> 00:00:19.399
+memory rules.
+
+7
+00:00:19.479 --> 00:00:23.575
+Bounds checks, size tracking, and explicit
+initialization are essential.
+
+8
+00:00:23.655 --> 00:00:26.408
+A buffer sized for a command, frame,
+sensor sample,
+
+9
+00:00:26.488 --> 00:00:30.328
+or status string should be checked before
+copy, append, parse, format,
+
+10
+00:00:30.408 --> 00:00:31.752
+or indexing operations.
+
+11
+00:00:31.832 --> 00:00:35.225
+Reviewers should be able to see the
+capacity, the valid length,
+
+12
+00:00:35.305 --> 00:00:38.121
+and the rule for what happens when input
+does not fit.
+
+13
+00:00:38.201 --> 00:00:40.506
+Stack usage, heap use, static allocation,
+
+14
+00:00:40.586 --> 00:00:43.210
+and memory pools should be chosen
+deliberately.
+
+15
+00:00:43.290 --> 00:00:46.170
+Some firmware avoids heap allocation after
+startup.
+
+16
+00:00:46.250 --> 00:00:47.467
+Some uses fixed pools.
+
+17
+00:00:47.547 --> 00:00:49.659
+Some relies heavily on static storage.
+
+18
+00:00:49.739 --> 00:00:53.643
+Each policy can be reasonable, but it
+should define allocation failure,
+
+19
+00:00:53.723 --> 00:00:56.540
+cleanup responsibility, lifetime, and
+ownership.
+
+20
+00:00:56.620 --> 00:01:00.524
+Interrupts, callbacks, DMA, and
+concurrency complicate assumptions.
+
+21
+00:01:00.604 --> 00:01:03.421
+A buffer may be written by hardware, read
+by a driver,
+
+22
+00:01:03.501 --> 00:01:06.189
+forwarded to application code, and later
+reused.
+
+23
+00:01:06.269 --> 00:01:09.342
+The code should make it clear when
+hardware owns a buffer,
+
+24
+00:01:09.422 --> 00:01:10.702
+when the CPU may read it,
+
+25
+00:01:10.782 --> 00:01:15.006
+and when shared state is protected by
+synchronization or design constraints.
+
+26
+00:01:15.086 --> 00:01:19.119
+Defensive firmware avoids unchecked
+copies, unsafe string assumptions,
+
+27
+00:01:19.199 --> 00:01:22.207
+unvalidated indexes, and ambiguous buffer
+ownership.
+
+28
+00:01:22.287 --> 00:01:26.768
+It also avoids treating successful tests
+on the normal path as proof that rare error
+
+29
+00:01:26.848 --> 00:01:27.680
+paths are safe.
+
+30
+00:01:27.760 --> 00:01:30.897
+Error handling often uses formatting,
+logging, cleanup,
+
+31
+00:01:30.977 --> 00:01:33.985
+and recovery paths that have their own
+memory behavior.
+
+32
+00:01:34.065 --> 00:01:37.521
+Memory safety review should trace pointer
+validity, capacity,
+
+33
+00:01:37.601 --> 00:01:41.442
+lifetime, initialization, and cleanup
+across normal and error paths.
+
+34
+00:01:41.522 --> 00:01:45.747
+Where possible, support the review with
+compiler warnings, static analysis,
+
+35
+00:01:45.827 --> 00:01:50.499
+stack analysis, tests for boundary cases,
+and measurements from target-like builds.
+
+36
+00:01:50.579 --> 00:01:54.868
+Tools help, but they work best when the
+design already makes the memory contract
+
+37
+00:01:54.948 --> 00:01:55.460
+visible.

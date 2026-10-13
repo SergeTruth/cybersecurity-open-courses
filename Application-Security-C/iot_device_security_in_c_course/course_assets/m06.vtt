@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.674
+Network-facing behavior is a major part of
+IoT device design.
+
+2
+00:00:03.754 --> 00:00:06.684
+A device may expose local services,
+connect to a gateway,
+
+3
+00:00:06.764 --> 00:00:10.488
+communicate with a cloud service, accept
+mobile application messages,
+
+4
+00:00:10.568 --> 00:00:12.765
+or exchange telemetry and configuration.
+
+5
+00:00:12.845 --> 00:00:17.057
+Every network path should have a purpose,
+an owner, and a deployment expectation.
+
+6
+00:00:17.137 --> 00:00:19.518
+Local services should match the product
+need.
+
+7
+00:00:19.598 --> 00:00:22.528
+A service used for onboarding, discovery,
+maintenance,
+
+8
+00:00:22.608 --> 00:00:26.454
+or normal operation should be documented
+with its allowed build profiles,
+
+9
+00:00:26.534 --> 00:00:30.440
+access expectations, data types, resource
+limits, and shutdown behavior.
+
+10
+00:00:30.520 --> 00:00:34.610
+Services that are not needed in a field
+build should not remain enabled by habit.
+
+11
+00:00:34.690 --> 00:00:36.522
+Protocol framing must be explicit.
+
+12
+00:00:36.602 --> 00:00:40.081
+The device should define message
+boundaries, maximum frame sizes,
+
+13
+00:00:40.161 --> 00:00:43.030
+allowed states, version behavior, and
+error handling.
+
+14
+00:00:43.110 --> 00:00:47.444
+A parser should validate lengths before
+storing data and should reject incomplete,
+
+15
+00:00:47.524 --> 00:00:51.675
+malformed, or out-of-state messages
+without corrupting later protocol state.
+
+16
+00:00:51.755 --> 00:00:55.234
+Authentication and authorization decisions
+belong before trust.
+
+17
+00:00:55.314 --> 00:00:57.939
+A device should know whether a peer,
+service, user,
+
+18
+00:00:58.019 --> 00:01:00.522
+or local tool is allowed to request an
+operation.
+
+19
+00:01:00.602 --> 00:01:04.936
+Authorization should be specific to the
+action and current device state rather than
+
+20
+00:01:05.016 --> 00:01:07.763
+treating all successful connections as
+equivalent.
+
+21
+00:01:07.843 --> 00:01:12.238
+Secure transport at a high level protects
+sensitive communication from unnecessary
+
+22
+00:01:12.318 --> 00:01:16.042
+exposure and helps the device authenticate
+the service it is talking to.
+
+23
+00:01:16.122 --> 00:01:20.028
+Developers should still handle certificate
+lifecycle, time assumptions,
+
+24
+00:01:20.108 --> 00:01:22.794
+reconnect behavior, and error handling
+carefully.
+
+25
+00:01:22.874 --> 00:01:25.621
+A library call alone does not define the
+whole policy.
+
+26
+00:01:25.701 --> 00:01:29.425
+Timeouts, retry limits, and resource
+limits protect device stability.
+
+27
+00:01:29.505 --> 00:01:32.862
+Network conditions can be slow,
+intermittent, or inconsistent.
+
+28
+00:01:32.942 --> 00:01:36.727
+The device should bound queued work,
+parser state, connection attempts,
+
+29
+00:01:36.807 --> 00:01:41.141
+retained messages, and diagnostic output
+so communication failures do not consume
+
+30
+00:01:41.221 --> 00:01:42.564
+resources indefinitely.
+
+31
+00:01:42.644 --> 00:01:45.269
+Network input remains untrusted until
+validated.
+
+32
+00:01:45.349 --> 00:01:48.584
+Messages may be malformed, incomplete,
+duplicated, delayed,
+
+33
+00:01:48.664 --> 00:01:53.120
+unexpected for the current state, or
+incompatible with the running firmware version.
+
+34
+00:01:53.200 --> 00:01:57.595
+Defensive protocol handling keeps the
+device predictable by focusing on validation
+
+35
+00:01:57.675 --> 00:01:59.140
+and safe state transitions.

@@ -1,0 +1,116 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.424
+Multiple references to heap memory
+complicate safety.
+
+2
+00:00:03.504 --> 00:00:06.677
+A pointer may be owned by one component,
+borrowed by another,
+
+3
+00:00:06.757 --> 00:00:09.059
+cached in a structure, passed to a
+callback,
+
+4
+00:00:09.139 --> 00:00:11.939
+or used as an interior reference into a
+larger object.
+
+5
+00:00:12.019 --> 00:00:15.814
+Each reference needs a lifetime that does
+not exceed the object it names.
+
+6
+00:00:15.894 --> 00:00:17.760
+Shared mutation needs clear rules.
+
+7
+00:00:17.840 --> 00:00:20.266
+If two modules can modify the same heap
+object,
+
+8
+00:00:20.346 --> 00:00:24.701
+reviewers need to know which invariants
+must be preserved and which operations can
+
+9
+00:00:24.781 --> 00:00:26.212
+resize or release storage.
+
+10
+00:00:26.292 --> 00:00:30.461
+Without those rules, one caller can
+invalidate another caller's assumptions.
+
+11
+00:00:30.541 --> 00:00:32.905
+Resizing or freeing can invalidate
+aliases.
+
+12
+00:00:32.985 --> 00:00:36.469
+A pointer that was safe before a resize
+may become stale afterward.
+
+13
+00:00:36.549 --> 00:00:40.344
+A pointer that was safe before cleanup may
+become invalid after release.
+
+14
+00:00:40.424 --> 00:00:44.779
+APIs that expose interior pointers should
+document when those pointers stop being
+
+15
+00:00:44.859 --> 00:00:45.232
+valid.
+
+16
+00:00:45.312 --> 00:00:48.174
+Const-correctness can communicate intended
+access.
+
+17
+00:00:48.254 --> 00:00:50.929
+A const pointer does not solve ownership
+by itself,
+
+18
+00:00:51.009 --> 00:00:54.369
+but it can tell callers when data should
+be treated as read-only.
+
+19
+00:00:54.449 --> 00:00:57.684
+That makes accidental mutation easier to
+spot during review.
+
+20
+00:00:57.764 --> 00:00:59.879
+Safer APIs reduce ambiguous ownership.
+
+21
+00:00:59.959 --> 00:01:03.443
+Prefer functions that clearly borrow,
+clearly return ownership,
+
+22
+00:01:03.523 --> 00:01:06.074
+or operate through a well-defined owner
+object.
+
+23
+00:01:06.154 --> 00:01:10.322
+Avoid designs where any caller can free
+shared storage or where size metadata is
+
+24
+00:01:10.402 --> 00:01:12.580
+separated from the pointer it describes.

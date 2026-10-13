@@ -1,0 +1,130 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.648
+A heap allocation creates storage for an
+object or sequence of objects with a
+
+2
+00:00:04.728 --> 00:00:05.506
+defined size.
+
+3
+00:00:05.586 --> 00:00:10.188
+The allocation function returns a pointer
+value that can designate the beginning of
+
+4
+00:00:10.268 --> 00:00:11.046
+that storage.
+
+5
+00:00:11.126 --> 00:00:14.367
+That pointer is useful, but it is not the
+whole safety story.
+
+6
+00:00:14.447 --> 00:00:18.271
+A pointer value by itself does not prove
+ownership, lifetime, bounds,
+
+7
+00:00:18.351 --> 00:00:20.296
+initialization state, or safe use.
+
+8
+00:00:20.376 --> 00:00:23.811
+It does not automatically carry the number
+of bytes allocated,
+
+9
+00:00:23.891 --> 00:00:25.965
+the number of elements that are valid,
+
+10
+00:00:26.045 --> 00:00:28.962
+or the component responsible for freeing
+the object.
+
+11
+00:00:29.042 --> 00:00:31.376
+Those facts must be tracked by the
+program.
+
+12
+00:00:31.456 --> 00:00:34.178
+A heap object remains valid only for its
+lifetime.
+
+13
+00:00:34.258 --> 00:00:38.795
+Its lifetime begins after successful
+allocation and appropriate construction or
+
+14
+00:00:38.875 --> 00:00:40.950
+initialization for the intended use.
+
+15
+00:00:41.030 --> 00:00:43.493
+Its lifetime ends when the owner releases
+it.
+
+16
+00:00:43.573 --> 00:00:46.554
+Pointer values can continue to exist after
+that point,
+
+17
+00:00:46.634 --> 00:00:48.968
+but they no longer designate a live
+object.
+
+18
+00:00:49.048 --> 00:00:51.446
+The allocator has a narrow responsibility:
+
+19
+00:00:51.526 --> 00:00:55.026
+provide and reclaim dynamic storage
+according to its contract.
+
+20
+00:00:55.106 --> 00:00:57.699
+The application owns the higher-level
+policy.
+
+21
+00:00:57.779 --> 00:01:01.020
+It must decide who can read or write, how
+capacity is stored,
+
+22
+00:01:01.100 --> 00:01:05.248
+whether aliases are allowed, how resizing
+works, and when cleanup happens.
+
+23
+00:01:05.328 --> 00:01:08.440
+A useful mental model separates address
+from authority.
+
+24
+00:01:08.520 --> 00:01:11.307
+Having a pointer value means code can name
+storage;
+
+25
+00:01:11.387 --> 00:01:13.785
+it does not mean code is allowed to access
+it.
+
+26
+00:01:13.865 --> 00:01:17.430
+Safe access depends on context, bounds,
+object state, lifetime,
+
+27
+00:01:17.510 --> 00:01:21.140
+and the ownership contract that the
+surrounding API establishes.

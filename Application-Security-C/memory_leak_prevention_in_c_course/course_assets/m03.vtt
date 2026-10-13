@@ -1,0 +1,176 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.606
+A leak often occurs when the last usable
+pointer to an allocation is overwritten or
+
+2
+00:00:04.686 --> 00:00:04.983
+lost.
+
+3
+00:00:05.063 --> 00:00:08.753
+Once the program no longer retains a
+pointer that can be used to release the
+
+4
+00:00:08.833 --> 00:00:11.927
+allocation, the memory remains reserved
+until process exit.
+
+5
+00:00:12.007 --> 00:00:14.506
+The allocator may still know about it
+internally,
+
+6
+00:00:14.586 --> 00:00:16.788
+but the program has lost its cleanup
+handle.
+
+7
+00:00:16.868 --> 00:00:20.973
+Reassigning a pointer before freeing the
+old allocation is a common way to abandon
+
+8
+00:00:21.053 --> 00:00:21.470
+memory.
+
+9
+00:00:21.550 --> 00:00:25.120
+A variable that once held the only owner
+pointer is assigned a new value,
+
+10
+00:00:25.200 --> 00:00:26.688
+and the old value disappears.
+
+11
+00:00:26.768 --> 00:00:30.457
+The safer pattern is to decide whether the
+old allocation should be freed,
+
+12
+00:00:30.537 --> 00:00:34.762
+transferred, stored elsewhere, or
+intentionally retained before overwriting the
+
+13
+00:00:34.842 --> 00:00:35.615
+owner pointer.
+
+14
+00:00:35.695 --> 00:00:39.206
+Early returns can skip cleanup unless they
+are handled deliberately.
+
+15
+00:00:39.286 --> 00:00:42.618
+A function may allocate a buffer,
+encounter a validation failure,
+
+16
+00:00:42.698 --> 00:00:44.960
+and return before reaching the release
+step.
+
+17
+00:00:45.040 --> 00:00:48.669
+This is especially common when several
+error checks are added over time.
+
+18
+00:00:48.749 --> 00:00:53.034
+Each early exit should either happen
+before allocation or route through cleanup that
+
+19
+00:00:53.114 --> 00:00:54.720
+knows which resources are live.
+
+20
+00:00:54.800 --> 00:00:59.144
+Partially initialized objects can leak if
+cleanup only handles the fully initialized
+
+21
+00:00:59.224 --> 00:00:59.521
+case.
+
+22
+00:00:59.601 --> 00:01:02.160
+A structure may allocate several fields
+one by one.
+
+23
+00:01:02.240 --> 00:01:04.620
+If allocation or initialization fails
+midway,
+
+24
+00:01:04.700 --> 00:01:08.985
+cleanup must release the fields that
+succeeded while avoiding fields that were never
+
+25
+00:01:09.065 --> 00:01:09.779
+initialized.
+
+26
+00:01:09.859 --> 00:01:13.250
+Initialization state should be clear
+enough for cleanup to be safe.
+
+27
+00:01:13.330 --> 00:01:17.496
+Global caches, lists, and tables can hide
+lost ownership when entries are replaced
+
+28
+00:01:17.576 --> 00:01:18.171
+or removed.
+
+29
+00:01:18.251 --> 00:01:21.345
+Replacing a value in a map may require
+releasing the old value.
+
+30
+00:01:21.425 --> 00:01:25.352
+Removing a list entry may or may not
+release the pointed-to object depending on
+
+31
+00:01:25.432 --> 00:01:26.325
+ownership rules.
+
+32
+00:01:26.405 --> 00:01:27.892
+Those rules must be explicit.
+
+33
+00:01:27.972 --> 00:01:31.186
+Code should make it easy to trace each
+allocation to its release.
+
+34
+00:01:31.266 --> 00:01:34.717
+During review, follow the pointer from
+allocation through storage,
+
+35
+00:01:34.797 --> 00:01:37.534
+transfer, replacement, error handling, and
+cleanup.
+
+36
+00:01:37.614 --> 00:01:41.482
+If that trace becomes vague, the code
+needs a clearer owner, a cleanup helper,
+
+37
+00:01:41.562 --> 00:01:44.180
+or a structure that keeps ownership state
+together.

@@ -1,0 +1,147 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.544
+Detection tools help find leaks earlier,
+
+2
+00:00:02.624 --> 00:00:06.070
+but they work best when the code already
+expresses ownership clearly.
+
+3
+00:00:06.150 --> 00:00:09.421
+Compiler warnings, static analysis, leak
+checkers, sanitizers,
+
+4
+00:00:09.501 --> 00:00:13.648
+allocation tracing, tests, and code review
+each provide a different view of the same
+
+5
+00:00:13.728 --> 00:00:14.721
+lifecycle problem.
+
+6
+00:00:14.801 --> 00:00:18.773
+Compiler warnings can reveal suspicious
+ownership and control-flow patterns.
+
+7
+00:00:18.853 --> 00:00:21.657
+Warnings around ignored results,
+unreachable cleanup,
+
+8
+00:00:21.737 --> 00:00:24.131
+uninitialized pointers, suspicious
+branches,
+
+9
+00:00:24.211 --> 00:00:28.125
+or mismatched types near allocation should
+be reviewed rather than dismissed.
+
+10
+00:00:28.205 --> 00:00:31.826
+A warning is often a clue that the cleanup
+story is harder than it should be.
+
+11
+00:00:31.906 --> 00:00:35.586
+Static analysis can help identify missed
+cleanup, overwritten pointers,
+
+12
+00:00:35.666 --> 00:00:39.696
+inconsistent ownership assumptions, and
+paths where a function returns without
+
+13
+00:00:39.776 --> 00:00:41.353
+releasing acquired resources.
+
+14
+00:00:41.433 --> 00:00:45.580
+Static tools are especially useful when
+allocation and cleanup happen in different
+
+15
+00:00:45.660 --> 00:00:46.244
+functions.
+
+16
+00:00:46.324 --> 00:00:50.354
+Leak checkers and sanitizers can expose
+unreleased allocations during testing.
+
+17
+00:00:50.434 --> 00:00:54.406
+They can show which allocation sites
+remain live at a checkpoint or process exit,
+
+18
+00:00:54.486 --> 00:00:58.633
+and they can help distinguish intentional
+long-lived allocations from accidental
+
+19
+00:00:58.713 --> 00:00:59.064
+leaks.
+
+20
+00:00:59.144 --> 00:01:01.889
+The findings should lead to fixes and
+regression tests.
+
+21
+00:01:01.969 --> 00:01:05.707
+Allocation tracing can connect allocation
+sites to missing release paths.
+
+22
+00:01:05.787 --> 00:01:09.876
+This is useful in services and libraries
+where the leak only appears after repeated
+
+23
+00:01:09.956 --> 00:01:10.248
+work.
+
+24
+00:01:10.328 --> 00:01:12.430
+Tracing should be interpreted carefully,
+
+25
+00:01:12.510 --> 00:01:16.774
+because some allocations are intentionally
+long-lived caches while others are meant
+
+26
+00:01:16.854 --> 00:01:18.665
+to be released after each operation.
+
+27
+00:01:18.745 --> 00:01:22.483
+Tests should exercise success paths,
+failure paths, repeated operations,
+
+28
+00:01:22.563 --> 00:01:26.944
+partial initialization, replacement,
+removal, and cleanup after allocation failure.
+
+29
+00:01:27.024 --> 00:01:30.587
+Code review should follow each allocation
+through ownership transfer,
+
+30
+00:01:30.667 --> 00:01:32.477
+storage, replacement, and cleanup.
+
+31
+00:01:32.557 --> 00:01:34.660
+That trace is the heart of leak
+prevention.

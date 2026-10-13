@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.494
+File systems are not static text stores.
+
+2
+00:00:02.574 --> 00:00:06.269
+Symbolic links, hard links, replacement,
+rename behavior, mount points,
+
+3
+00:00:06.349 --> 00:00:09.165
+and special files can complicate
+path-based decisions.
+
+4
+00:00:09.245 --> 00:00:13.116
+A path that appears to refer to an
+ordinary file at one moment may not refer to the
+
+5
+00:00:13.196 --> 00:00:16.421
+same thing later, especially in shared or
+writable directories.
+
+6
+00:00:16.501 --> 00:00:19.317
+A check performed before opening a file
+can become stale.
+
+7
+00:00:19.397 --> 00:00:22.036
+The program may validate a name, inspect a
+candidate,
+
+8
+00:00:22.116 --> 00:00:24.462
+or confirm that a location appears
+acceptable,
+
+9
+00:00:24.542 --> 00:00:28.648
+but another process or thread may change
+the file system before the later operation
+
+10
+00:00:28.728 --> 00:00:29.138
+occurs.
+
+11
+00:00:29.218 --> 00:00:33.148
+That gap between check and use is where
+fragile path workflows often break down.
+
+12
+00:00:33.228 --> 00:00:37.275
+A defensive design avoids assuming that a
+path checked earlier still refers to the
+
+13
+00:00:37.355 --> 00:00:38.293
+same object later.
+
+14
+00:00:38.373 --> 00:00:42.538
+For sensitive operations, the program may
+need platform-supported open patterns,
+
+15
+00:00:42.618 --> 00:00:45.316
+directory-relative operations, restrictive
+flags,
+
+16
+00:00:45.396 --> 00:00:48.856
+or file identity checks that reduce
+reliance on text-only decisions.
+
+17
+00:00:48.936 --> 00:00:52.925
+The right mechanism depends on the
+platform and the sensitivity of the workflow.
+
+18
+00:00:53.005 --> 00:00:56.524
+Shared directories require extra care
+because other users, services,
+
+19
+00:00:56.604 --> 00:00:58.305
+or processes may influence names.
+
+20
+00:00:58.385 --> 00:01:00.848
+Temporary work areas, upload staging
+locations,
+
+21
+00:01:00.928 --> 00:01:05.151
+and extraction directories should be
+designed so the application controls creation
+
+22
+00:01:05.231 --> 00:01:06.932
+and ownership as much as possible.
+
+23
+00:01:07.012 --> 00:01:09.123
+If other actors can write in the same
+place,
+
+24
+00:01:09.203 --> 00:01:12.077
+the program needs fewer assumptions and
+stronger checks.
+
+25
+00:01:12.157 --> 00:01:15.911
+Race-aware design is not about making the
+code complicated for its own sake.
+
+26
+00:01:15.991 --> 00:01:20.038
+It is about reducing the number of claims
+the program makes between validation and
+
+27
+00:01:20.118 --> 00:01:20.353
+use.
+
+28
+00:01:20.433 --> 00:01:22.603
+The closer the decision is to the
+operation,
+
+29
+00:01:22.683 --> 00:01:25.674
+and the more the platform can enforce in
+one controlled step,
+
+30
+00:01:25.754 --> 00:01:28.100
+the less the program depends on stale path
+text.

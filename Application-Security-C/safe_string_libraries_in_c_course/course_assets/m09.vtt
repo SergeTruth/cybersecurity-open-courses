@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.572
+Testing safer string usage means testing
+the contract, not just the happy path.
+
+2
+00:00:04.652 --> 00:00:08.176
+Boundary tests should cover empty strings,
+one-character strings,
+
+3
+00:00:08.256 --> 00:00:11.295
+full buffers, maximum accepted lengths,
+exact-fit cases,
+
+4
+00:00:11.375 --> 00:00:13.016
+and one-byte-too-large cases.
+
+5
+00:00:13.096 --> 00:00:16.803
+These tests show whether capacity and
+terminator handling are correct.
+
+6
+00:00:16.883 --> 00:00:19.192
+Truncation tests are especially important.
+
+7
+00:00:19.272 --> 00:00:23.526
+If an API reports truncation, the program
+should respond according to the use case.
+
+8
+00:00:23.606 --> 00:00:25.186
+Display text may be shortened.
+
+9
+00:00:25.266 --> 00:00:27.271
+A configuration value may be rejected.
+
+10
+00:00:27.351 --> 00:00:29.357
+A protocol field may need a clear error.
+
+11
+00:00:29.437 --> 00:00:33.630
+The test should confirm the intended
+decision, not merely that the call returned.
+
+12
+00:00:33.710 --> 00:00:37.903
+Dynamic string libraries need
+allocation-failure and maximum-size tests where
+
+13
+00:00:37.983 --> 00:00:38.591
+practical.
+
+14
+00:00:38.671 --> 00:00:43.168
+Builders, append operations, and
+allocation-backed formatting should leave objects
+
+15
+00:00:43.248 --> 00:00:45.132
+in a defined state when growth fails.
+
+16
+00:00:45.212 --> 00:00:48.007
+Cleanup should work on both success and
+failure paths.
+
+17
+00:00:48.087 --> 00:00:52.341
+Embedded-null tests are useful when the
+code crosses between byte buffers and text
+
+18
+00:00:52.421 --> 00:00:52.907
+strings.
+
+19
+00:00:52.987 --> 00:00:54.385
+If binary data is possible,
+
+20
+00:00:54.465 --> 00:00:58.232
+tests should confirm that the selected API
+does not stop early or silently
+
+21
+00:00:58.312 --> 00:01:02.506
+reinterpret the data as a shorter string
+unless that is exactly the intended rule.
+
+22
+00:01:02.586 --> 00:01:03.619
+Tool support helps.
+
+23
+00:01:03.699 --> 00:01:07.041
+Compiler warnings can find suspicious
+sizes or ignored results.
+
+24
+00:01:07.121 --> 00:01:10.767
+Static analysis can flag unsafe call
+patterns and ownership mistakes.
+
+25
+00:01:10.847 --> 00:01:13.217
+Sanitizers can reveal runtime memory
+errors.
+
+26
+00:01:13.297 --> 00:01:16.214
+Fortified diagnostics may add checks on
+some platforms.
+
+27
+00:01:16.294 --> 00:01:20.305
+These tools support review, but they do
+not replace clear contracts and tests.
+
+28
+00:01:20.385 --> 00:01:23.120
+Code review should ask the same questions
+every time:
+
+29
+00:01:23.200 --> 00:01:27.150
+what representation is this, what capacity
+is accurate, who owns the buffer,
+
+30
+00:01:27.230 --> 00:01:31.241
+what happens on truncation or allocation
+failure, and was the result checked?
+
+31
+00:01:31.321 --> 00:01:34.420
+Consistent review turns safer library use
+into a team habit.

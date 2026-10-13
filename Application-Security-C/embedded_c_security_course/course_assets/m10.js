@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Embedded-Safe C Habits",
+  "graphicAlt": "Clear boundaries, bounded memory, integrity and identity, and controlled interfaces rest on a foundation of failure and recovery testing.",
+  "narration": "Embedded C security depends on clear trust boundaries, defensive memory handling, and explicit validation. Know which interfaces accept input, what data can influence device behavior, which code has high authority, and which assumptions are inherited from hardware, manufacturing, configuration, and services.\n\nKeep memory behavior explicit and bounded. Review fixed buffers, stack depth, heap policy, memory pools, shared buffers, pointer lifetime, initialization, cleanup, interrupts, DMA, and error paths. The device is easier to trust when memory ownership and capacity are visible.\n\nProtect firmware integrity and device secrets before field deployment. Use platform-supported secure boot and update mechanisms where appropriate, approved cryptographic libraries, documented key provisioning, scoped device identity, and careful logging discipline. Avoid clever custom security designs when supported mechanisms exist.\n\nRestrict and review debug, manufacturing, maintenance, communication, and peripheral interfaces. Development convenience should not silently become production behavior. Least privilege, clear command contracts, and documented production settings make the device easier to maintain responsibly.\n\nFinally, test failures, recovery, update behavior, and lifecycle controls under realistic conditions. Include malformed inputs, boundary values, power interruption, reset timing, storage limits, update failure, service workflows, and end-of-life planning. Embedded-safe C habits are practical: write assumptions down, keep the code bounded, use supported controls, and gather evidence before release.",
+  "narrationPoints": [
+    "Embedded C security depends on clear trust boundaries, defensive memory handling.",
+    "Review fixed buffers, stack depth, heap policy, memory pools, shared buffers.",
+    "Use platform-supported secure boot and update mechanisms where appropriate, approved cryptographic libraries, documented key provisioning.",
+    "Least privilege, clear command contracts, and documented production settings make the device easier to maintain responsibly.",
+    "Embedded-safe C habits are practical: write assumptions down, keep the code bounded, use supported controls."
+  ]
+};

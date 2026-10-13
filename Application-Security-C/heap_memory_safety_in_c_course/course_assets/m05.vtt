@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.337
+Resizing heap memory is easy to get wrong
+because a resize changes more than
+
+2
+00:00:04.417 --> 00:00:04.965
+capacity.
+
+3
+00:00:05.045 --> 00:00:09.490
+It can change the address, object layout
+assumptions, aliases, and failure behavior.
+
+4
+00:00:09.570 --> 00:00:14.016
+A realloc-style operation should be
+treated as an ownership and lifetime transition.
+
+5
+00:00:14.096 --> 00:00:18.176
+If resizing fails, the original allocation
+remains the object the program must
+
+6
+00:00:18.256 --> 00:00:18.683
+manage.
+
+7
+00:00:18.763 --> 00:00:22.782
+Assigning the result directly to the only
+owning pointer can lose the original
+
+8
+00:00:22.862 --> 00:00:24.080
+allocation on failure.
+
+9
+00:00:24.160 --> 00:00:28.423
+A safer pattern preserves the original
+pointer until success is confirmed and then
+
+10
+00:00:28.503 --> 00:00:29.843
+updates ownership state.
+
+11
+00:00:29.923 --> 00:00:32.785
+When resizing succeeds, the allocation may
+have moved.
+
+12
+00:00:32.865 --> 00:00:35.971
+Old aliases, interior pointers, cached
+element addresses,
+
+13
+00:00:36.051 --> 00:00:38.487
+and borrowed references may no longer be
+valid.
+
+14
+00:00:38.567 --> 00:00:42.769
+Code that resizes a buffer should review
+every place that may still refer to the old
+
+15
+00:00:42.849 --> 00:00:43.336
+storage.
+
+16
+00:00:43.416 --> 00:00:46.096
+Pointer and size metadata must be updated
+together.
+
+17
+00:00:46.176 --> 00:00:48.368
+Capacity, current length, element count,
+
+18
+00:00:48.448 --> 00:00:51.250
+and object state should describe the same
+allocation.
+
+19
+00:00:51.330 --> 00:00:55.715
+A mismatch between pointer and metadata
+can make later accesses appear checked while
+
+20
+00:00:55.795 --> 00:00:57.317
+still using the wrong bounds.
+
+21
+00:00:57.397 --> 00:01:01.112
+A good resize workflow defines what
+happens when expanding, shrinking,
+
+22
+00:01:01.192 --> 00:01:03.872
+failing, moving, or receiving a zero-size
+request.
+
+23
+00:01:03.952 --> 00:01:07.849
+That definition makes resizing reviewable
+instead of relying on scattered
+
+24
+00:01:07.929 --> 00:01:08.660
+assumptions.

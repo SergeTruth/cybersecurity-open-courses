@@ -1,0 +1,172 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.795
+Integer conversions can lose, reinterpret,
+
+2
+00:00:02.875 --> 00:00:07.223
+or misrepresent data when the destination
+type cannot represent the original value.
+
+3
+00:00:07.303 --> 00:00:11.168
+That risk appears when parsing input,
+storing values into narrower fields,
+
+4
+00:00:11.248 --> 00:00:14.569
+calling platform APIs, serializing
+records, reading metadata,
+
+5
+00:00:14.649 --> 00:00:17.307
+or moving values between signed and
+unsigned types.
+
+6
+00:00:17.387 --> 00:00:21.674
+A narrowing conversion can discard
+high-order information and leave a value that no
+
+7
+00:00:21.754 --> 00:00:23.928
+longer represents the original quantity.
+
+8
+00:00:24.008 --> 00:00:25.820
+If the program parsed a large count,
+
+9
+00:00:25.900 --> 00:00:28.376
+then stores it in a smaller type for
+convenience,
+
+10
+00:00:28.456 --> 00:00:32.684
+later checks may operate on the converted
+value rather than the value that actually
+
+11
+00:00:32.764 --> 00:00:33.247
+arrived.
+
+12
+00:00:33.327 --> 00:00:35.682
+That creates a gap between validation and
+use.
+
+13
+00:00:35.762 --> 00:00:40.170
+Signed-to-unsigned conversion can turn a
+negative value into a large unsigned value.
+
+14
+00:00:40.250 --> 00:00:43.934
+This is especially important when a value
+later controls a size, offset,
+
+15
+00:00:44.014 --> 00:00:45.403
+allocation, or loop bound.
+
+16
+00:00:45.483 --> 00:00:47.295
+If negative values are not allowed,
+
+17
+00:00:47.375 --> 00:00:51.663
+reject them before conversion rather than
+hoping the destination type will make the
+
+18
+00:00:51.743 --> 00:00:52.769
+problem disappear.
+
+19
+00:00:52.849 --> 00:00:55.748
+Unsigned-to-signed conversion deserves the
+same care.
+
+20
+00:00:55.828 --> 00:01:00.116
+A value may be outside the intended
+business range or outside the destination type's
+
+21
+00:01:00.196 --> 00:01:01.343
+representable range.
+
+22
+00:01:01.423 --> 00:01:03.175
+Depending on the type and context,
+
+23
+00:01:03.255 --> 00:01:05.791
+the result may not be what the developer
+intended.
+
+24
+00:01:05.871 --> 00:01:10.098
+The safe design is to check
+representability and business meaning before storing.
+
+25
+00:01:10.178 --> 00:01:11.688
+Casts do not validate values.
+
+26
+00:01:11.768 --> 00:01:13.278
+A cast requests a conversion;
+
+27
+00:01:13.358 --> 00:01:16.679
+it does not prove that the source value
+fits the destination type,
+
+28
+00:01:16.759 --> 00:01:18.692
+that the destination unit is correct,
+
+29
+00:01:18.772 --> 00:01:21.369
+or that the value is appropriate for the
+operation.
+
+30
+00:01:21.449 --> 00:01:25.495
+A cast that silences a warning without a
+nearby range check should be treated as a
+
+31
+00:01:25.575 --> 00:01:26.239
+review item.
+
+32
+00:01:26.319 --> 00:01:29.943
+API boundaries are common conversion risk
+points: parsing functions,
+
+33
+00:01:30.023 --> 00:01:33.284
+file formats, network formats, database
+fields, system calls,
+
+34
+00:01:33.364 --> 00:01:37.168
+library callbacks, serialization, and
+callbacks from lower-level code.
+
+35
+00:01:37.248 --> 00:01:41.536
+Store values only after validating that
+the destination type and business range can
+
+36
+00:01:41.616 --> 00:01:42.462
+represent them.
+
+37
+00:01:42.542 --> 00:01:45.380
+That validation should be visible to the
+next reviewer.

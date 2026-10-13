@@ -1,0 +1,176 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.789
+Embedded devices receive input from more
+places than developers sometimes expect.
+
+2
+00:00:04.869 --> 00:00:08.313
+Data may come from sensors, field buses,
+serial ports, radio links,
+
+3
+00:00:08.393 --> 00:00:11.534
+network packets, files, local commands,
+firmware metadata,
+
+4
+00:00:11.614 --> 00:00:15.239
+configuration storage, manufacturing
+tools, or service procedures.
+
+5
+00:00:15.319 --> 00:00:17.736
+Each input path can influence device
+behavior.
+
+6
+00:00:17.816 --> 00:00:21.863
+External input should be treated as
+untrusted until it is validated against the
+
+7
+00:00:21.943 --> 00:00:24.299
+expected format and the current device
+state.
+
+8
+00:00:24.379 --> 00:00:26.433
+Local does not always mean trustworthy.
+
+9
+00:00:26.513 --> 00:00:29.896
+A peripheral can report stale data, a bus
+message can be malformed,
+
+10
+00:00:29.976 --> 00:00:33.964
+configuration can be inconsistent, and a
+command can arrive at the wrong time.
+
+11
+00:00:34.044 --> 00:00:37.427
+Parsers should check lengths, counts,
+offsets, versions, flags,
+
+12
+00:00:37.507 --> 00:00:41.434
+checksums where the format uses them, and
+message order before using values.
+
+13
+00:00:41.514 --> 00:00:44.353
+A length field should be checked against
+the input size,
+
+14
+00:00:44.433 --> 00:00:47.333
+destination capacity, product limit, and
+parser state.
+
+15
+00:00:47.413 --> 00:00:51.883
+Validation should happen before allocating
+memory or writing into output structures.
+
+16
+00:00:51.963 --> 00:00:55.286
+State machines help prevent commands from
+running before setup,
+
+17
+00:00:55.366 --> 00:00:59.293
+authorization, configuration, or
+prerequisite validation has completed.
+
+18
+00:00:59.373 --> 00:01:01.789
+A state machine does not need to be
+complicated.
+
+19
+00:01:01.869 --> 00:01:05.011
+The important part is that allowed
+transitions are explicit,
+
+20
+00:01:05.091 --> 00:01:07.266
+rejected transitions are handled safely,
+
+21
+00:01:07.346 --> 00:01:10.668
+and partially processed input cannot
+masquerade as valid state.
+
+22
+00:01:10.748 --> 00:01:15.098
+Invalid or malformed input should fail
+safely without corrupting state or consuming
+
+23
+00:01:15.178 --> 00:01:16.326
+unbounded resources.
+
+24
+00:01:16.406 --> 00:01:19.306
+The device might reject the command, reset
+parser state,
+
+25
+00:01:19.386 --> 00:01:22.104
+return a bounded error, record a compact
+diagnostic,
+
+26
+00:01:22.184 --> 00:01:24.782
+or continue with the previous safe
+configuration.
+
+27
+00:01:24.862 --> 00:01:26.735
+The behavior should be predictable.
+
+28
+00:01:26.815 --> 00:01:29.896
+Validation logic should be simple enough
+to test and review.
+
+29
+00:01:29.976 --> 00:01:33.963
+Boundary tests should cover minimum and
+maximum sizes, just-outside limits,
+
+30
+00:01:34.043 --> 00:01:37.305
+missing fields, bad versions, unexpected
+order, full buffers,
+
+31
+00:01:37.385 --> 00:01:38.956
+and recovery after rejection.
+
+32
+00:01:39.036 --> 00:01:41.453
+If reviewers cannot explain the parser
+states,
+
+33
+00:01:41.533 --> 00:01:43.768
+the parser is probably too hard to
+maintain.
+
+34
+00:01:43.848 --> 00:01:46.748
+The most useful validation code is boring
+in the best way.
+
+35
+00:01:46.828 --> 00:01:50.875
+It states what is accepted, rejects
+everything else, keeps memory use bounded,
+
+36
+00:01:50.955 --> 00:01:54.580
+and leaves the device in a known state
+when input is not suitable for use.

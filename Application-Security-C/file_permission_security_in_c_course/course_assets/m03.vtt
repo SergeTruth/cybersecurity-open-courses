@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.487
+File creation is a moment of exposure.
+
+2
+00:00:02.567 --> 00:00:04.181
+When a C program creates a file,
+
+3
+00:00:04.261 --> 00:00:08.359
+it establishes an object that other users,
+services, backup tools, scanners,
+
+4
+00:00:08.439 --> 00:00:10.053
+or operators may be able to see.
+
+5
+00:00:10.133 --> 00:00:14.541
+The permissions chosen at creation should
+match the sensitivity of the data from the
+
+6
+00:00:14.621 --> 00:00:15.242
+beginning.
+
+7
+00:00:15.322 --> 00:00:19.606
+Creating a broad-access file and then
+trying to restrict it afterward is a fragile
+
+8
+00:00:19.686 --> 00:00:20.183
+pattern.
+
+9
+00:00:20.263 --> 00:00:22.498
+Even if the later change usually succeeds,
+
+10
+00:00:22.578 --> 00:00:26.614
+there can be a period where the file
+exists with broader access than intended.
+
+11
+00:00:26.694 --> 00:00:30.047
+If the permission change fails and the
+program misses the error,
+
+12
+00:00:30.127 --> 00:00:31.617
+the file may remain exposed.
+
+13
+00:00:31.697 --> 00:00:35.981
+Prefer creation mechanisms that apply
+restrictive access as part of the creation
+
+14
+00:00:36.061 --> 00:00:38.482
+step where the platform supports that
+design.
+
+15
+00:00:38.562 --> 00:00:42.846
+On POSIX-style systems, process defaults
+and umask behavior can affect the final
+
+16
+00:00:42.926 --> 00:00:43.671
+permissions.
+
+17
+00:00:43.751 --> 00:00:46.918
+Inherited directory settings, deployment
+configuration,
+
+18
+00:00:46.998 --> 00:00:49.047
+and file system policy may also matter.
+
+19
+00:00:49.127 --> 00:00:53.597
+The implementation should not rely on
+vague assumptions about defaults when the file
+
+20
+00:00:53.677 --> 00:00:55.043
+contains sensitive data.
+
+21
+00:00:55.123 --> 00:00:58.165
+Sensitive files are not limited to obvious
+secret stores.
+
+22
+00:00:58.245 --> 00:01:01.846
+Temporary output, logs, reports, exports,
+caches, debug captures,
+
+23
+00:01:01.926 --> 00:01:04.969
+and conversion products may include
+identifiers, paths,
+
+24
+00:01:05.049 --> 00:01:08.588
+configuration values, customer content, or
+operational details.
+
+25
+00:01:08.668 --> 00:01:10.530
+If the program creates those files,
+
+26
+00:01:10.610 --> 00:01:13.839
+it should classify them and choose
+permissions accordingly.
+
+27
+00:01:13.919 --> 00:01:17.458
+Creation should combine clear access
+intent with checked results.
+
+28
+00:01:17.538 --> 00:01:19.959
+If a file was supposed to be created
+privately,
+
+29
+00:01:20.039 --> 00:01:24.386
+the code should use the platform's
+appropriate creation options and verify errors
+
+30
+00:01:24.466 --> 00:01:27.446
+from creation and any permission-sensitive
+follow-up.
+
+31
+00:01:27.526 --> 00:01:31.437
+A failure to create the file safely should
+be treated as a real failure of the
+
+32
+00:01:31.517 --> 00:01:33.380
+workflow, not an ignorable detail.

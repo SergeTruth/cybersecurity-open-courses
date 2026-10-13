@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.741
+A practical integer safety baseline for C
+starts with knowing the type, range,
+
+2
+00:00:04.821 --> 00:00:07.520
+and signedness of each security-relevant
+value.
+
+3
+00:00:07.600 --> 00:00:11.649
+Numeric values should have a clear
+meaning: length, count, index, offset,
+
+4
+00:00:11.729 --> 00:00:13.785
+quota, limit, identifier, or status.
+
+5
+00:00:13.865 --> 00:00:15.279
+Once the meaning is clear,
+
+6
+00:00:15.359 --> 00:00:19.536
+the allowed range can be checked before
+the value controls program behavior.
+
+7
+00:00:19.616 --> 00:00:21.544
+Validate numeric input before use.
+
+8
+00:00:21.624 --> 00:00:25.479
+Avoid signed overflow by checking operands
+before signed arithmetic.
+
+9
+00:00:25.559 --> 00:00:28.901
+Detect unsigned wraparound when wraparound
+is not intended.
+
+10
+00:00:28.981 --> 00:00:33.222
+Check conversions before storing into
+narrower or differently signed types,
+
+11
+00:00:33.302 --> 00:00:37.543
+and remember that a cast does not prove
+the value is valid for the destination or
+
+12
+00:00:37.623 --> 00:00:38.652
+the business rule.
+
+13
+00:00:38.732 --> 00:00:41.752
+Check multiplication and addition before
+allocation.
+
+14
+00:00:41.832 --> 00:00:45.109
+Bound indexes, offsets, loop counters, and
+parser lengths.
+
+15
+00:00:45.189 --> 00:00:48.402
+Validate shift counts, divisors, remainder
+assumptions,
+
+16
+00:00:48.482 --> 00:00:50.410
+and special arithmetic edge cases.
+
+17
+00:00:50.490 --> 00:00:54.024
+When arithmetic controls memory, access,
+quotas, or resources,
+
+18
+00:00:54.104 --> 00:00:58.795
+choose clear failure behavior and avoid
+trusting a result whose representability was
+
+19
+00:00:58.875 --> 00:00:59.968
+never established.
+
+20
+00:01:00.048 --> 00:01:02.169
+Finally, use tooling, boundary tests,
+
+21
+00:01:02.249 --> 00:01:05.269
+and systematic review as a normal
+engineering routine.
+
+22
+00:01:05.349 --> 00:01:09.204
+Compiler warnings, static analysis,
+sanitizers, defensive fuzzing,
+
+23
+00:01:09.284 --> 00:01:11.726
+and code review all catch different
+defects.
+
+24
+00:01:11.806 --> 00:01:15.983
+The mature habit is to trace numeric data
+from input to final use and make every
+
+25
+00:01:16.063 --> 00:01:20.754
+range, conversion, and arithmetic decision
+visible enough for the next maintainer to
+
+26
+00:01:20.834 --> 00:01:21.220
+trust.

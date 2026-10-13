@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.695
+Permission models vary, and secure C code
+should not pretend that every operating
+
+2
+00:00:04.775 --> 00:00:06.235
+system behaves the same way.
+
+3
+00:00:06.315 --> 00:00:10.206
+POSIX-style systems commonly describe
+permissions through owner, group,
+
+4
+00:00:10.286 --> 00:00:11.320
+and other mode bits.
+
+5
+00:00:11.400 --> 00:00:14.683
+Those bits express read, write, and
+execute style permissions,
+
+6
+00:00:14.763 --> 00:00:19.020
+but even on POSIX-like systems the real
+result can be affected by process identity,
+
+7
+00:00:19.100 --> 00:00:22.444
+groups, default masks, mount options, and
+file system behavior.
+
+8
+00:00:22.524 --> 00:00:25.868
+Access control lists can add more detail
+beyond simple mode bits.
+
+9
+00:00:25.948 --> 00:00:30.083
+They may grant or deny access to specific
+users or groups in ways that are not fully
+
+10
+00:00:30.163 --> 00:00:31.987
+visible from a simple mode display.
+
+11
+00:00:32.067 --> 00:00:36.262
+A program that checks only one simplified
+view of permissions may miss policy that
+
+12
+00:00:36.342 --> 00:00:37.923
+the system actually enforces.
+
+13
+00:00:38.003 --> 00:00:39.645
+Windows uses a different model,
+
+14
+00:00:39.725 --> 00:00:43.252
+commonly based on security descriptors and
+access control entries.
+
+15
+00:00:43.332 --> 00:00:46.494
+Portable C code should not assume POSIX
+behavior everywhere.
+
+16
+00:00:46.574 --> 00:00:49.006
+If an application targets multiple
+platforms,
+
+17
+00:00:49.086 --> 00:00:52.430
+the design should state which permission
+concepts are required,
+
+18
+00:00:52.510 --> 00:00:56.888
+which are platform-specific, and which
+operations need separate implementations.
+
+19
+00:00:56.968 --> 00:00:58.792
+Runtime environment also matters.
+
+20
+00:00:58.872 --> 00:01:02.095
+Containers, services, scheduled jobs,
+network file systems,
+
+21
+00:01:02.175 --> 00:01:05.823
+removable media, deployment scripts,
+inherited directory settings,
+
+22
+00:01:05.903 --> 00:01:09.612
+and managed storage platforms can all
+affect the final access decision.
+
+23
+00:01:09.692 --> 00:01:13.279
+A mode value in source code is only one
+part of the operational picture.
+
+24
+00:01:13.359 --> 00:01:16.096
+Textbook examples are useful for learning
+concepts,
+
+25
+00:01:16.176 --> 00:01:19.641
+but production behavior is often shaped by
+the surrounding system.
+
+26
+00:01:19.721 --> 00:01:23.552
+Good documentation states the permission
+model the application expects,
+
+27
+00:01:23.632 --> 00:01:25.031
+the platforms it supports,
+
+28
+00:01:25.111 --> 00:01:28.576
+and the assumptions that
+security-sensitive workflows depend on.
+
+29
+00:01:28.656 --> 00:01:32.791
+That documentation helps reviewers and
+operators validate the real deployment
+
+30
+00:01:32.871 --> 00:01:35.060
+instead of relying on memory or guesswork.

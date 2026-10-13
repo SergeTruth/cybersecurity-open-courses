@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Text, Encoding, and Character Rules",
+  "graphicAlt": "An embedded null can make C-string and length-delimited views differ; an explicit field contract defines encoding, character and whitespace rules.",
+  "narration": "Text validation in C starts with a practical reminder: bytes, characters, and displayed text are not always the same thing. Many APIs operate on byte buffers or null-terminated strings. The program has to decide what encoding it accepts and whether its length rules are based on bytes, characters, fields, or display behavior.\n\nEmbedded null bytes can create different interpretations of the same buffer. A length-delimited parser may see bytes after a zero byte, while C string functions may stop at the first null. Validation should define whether embedded null bytes are allowed and ensure later code uses the same interpretation.\n\nControl characters and whitespace need explicit rules. A newline, tab, carriage return, leading space, trailing space, or nonprinting byte may be acceptable in one field and unacceptable in another. Trimming or normalizing text can be useful, but only when the rule matches the data format and the program's meaning.\n\nCase normalization should be designed for the use case. A case-insensitive option name, a user-visible label, a protocol token, and a locale-sensitive text field may all have different expectations. Code should not casually change case if that changes identity, comparison behavior, or audit meaning.\n\nCharacter allowlists work best when they are tied to the field. A simple identifier, a decimal number, a path segment, a configuration key, and a free-text note need different allowed sets and length rules. Documenting the encoding and character rule keeps validation consistent across parsing, storage, comparison, and logging.",
+  "narrationPoints": [
+    "The program has to decide what encoding it accepts and whether its length rules are based on bytes, characters, fields.",
+    "Validation should define whether embedded null bytes are allowed and ensure later code uses the same interpretation.",
+    "Trimming or normalizing text can be useful, but only when the rule matches the data format and the program's meaning.",
+    "A case-insensitive option name, a user-visible label, a protocol token, and a locale-sensitive text field may all have different expectations.",
+    "Documenting the encoding and character rule keeps validation consistent across parsing, storage, comparison, and logging."
+  ]
+};

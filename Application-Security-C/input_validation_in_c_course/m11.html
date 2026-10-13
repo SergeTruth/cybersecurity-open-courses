@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="input_validation_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;: &quot;D&quot;, &quot;q02&quot;: &quot;B&quot;, &quot;q03&quot;: &quot;C&quot;, &quot;q04&quot;: &quot;A&quot;, &quot;q05&quot;: &quot;D&quot;, &quot;q06&quot;: &quot;C&quot;, &quot;q07&quot;: &quot;B&quot;, &quot;q08&quot;: &quot;A&quot;, &quot;q09&quot;: &quot;C&quot;, &quot;q10&quot;: &quot;A&quot;, &quot;q11&quot;: &quot;B&quot;, &quot;q12&quot;: &quot;D&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. What is the main purpose of input validation in C?</legend>
+                      <label><input type="radio" name="q01" value="A" required> Validation primarily prevents syntax errors; authorization and resource controls can handle memory and state consequences later.</label>
+                      <label><input type="radio" name="q01" value="B"> Copy the input into a sufficiently large buffer first, then validate it after it is safely stored.</label>
+                      <label><input type="radio" name="q01" value="C"> If a parser reports success, its output is trusted for every downstream use without additional policy checks.</label>
+                      <label><input type="radio" name="q01" value="D"> To ensure input satisfies explicit expectations before it influences memory access, control flow, resources, or state.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>2. What is a trust boundary?</legend>
+                      <label><input type="radio" name="q02" value="A" required> A trust boundary is any process or module edge, regardless of whether source trust or authority changes.</label>
+                      <label><input type="radio" name="q02" value="B"> A point where data from a less trusted source enters code that may rely on it.</label>
+                      <label><input type="radio" name="q02" value="C"> Files and local sockets inside the host do not cross a trust boundary because they are not remote.</label>
+                      <label><input type="radio" name="q02" value="D"> After data is validated once, decoded or transformed versions inherit that trust without further checks.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>3. Why is accepting known good input often easier to reason about?</legend>
+                      <label><input type="radio" name="q03" value="A" required> A blacklist of known dangerous forms provides better compatibility with input formats that may be added later.</label>
+                      <label><input type="radio" name="q03" value="B"> Accepting values that a parser can coerce reduces rejection while preserving the original validation contract.</label>
+                      <label><input type="radio" name="q03" value="C"> It defines the expected valid shape of data instead of trying to list every possible invalid case.</label>
+                      <label><input type="radio" name="q03" value="D"> Field-specific allowlists are unnecessary when one global maximum input length is enforced.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>4. Why must length checks match the operation being performed?</legend>
+                      <label><input type="radio" name="q04" value="A" required> Different operations may need different limits, including room for terminators, indexes, or allocation sizes.</label>
+                      <label><input type="radio" name="q04" value="B"> Check the source length against the largest application buffer and reuse that result for every later operation.</label>
+                      <label><input type="radio" name="q04" value="C"> Terminator space matters only for displayed text, not for copying, parsing, or allocation.</label>
+                      <label><input type="radio" name="q04" value="D"> Once a source length is validated, later decoding and appending cannot invalidate the established bound.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>5. What should numeric validation check?</legend>
+                      <label><input type="radio" name="q05" value="A" required> A successful strtol call is sufficient; errno and the end pointer are useful only for diagnostic messages.</label>
+                      <label><input type="radio" name="q05" value="B"> Cast the parsed value to its destination type and compare it with policy limits afterward.</label>
+                      <label><input type="radio" name="q05" value="C"> A syntactically valid number is acceptable unless its text is too long for the input buffer.</label>
+                      <label><input type="radio" name="q05" value="D"> Conversion success, leftover characters, range limits, sign expectations, and whether the value is acceptable for the use case.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>6. Why can embedded null bytes cause validation problems?</legend>
+                      <label><input type="radio" name="q06" value="A" required> An explicit buffer length makes C string functions process embedded null bytes as ordinary characters.</label>
+                      <label><input type="radio" name="q06" value="B"> Rejecting a null in the original input is sufficient even when a later decoder can introduce one.</label>
+                      <label><input type="radio" name="q06" value="C"> Some C string functions stop at the first null byte even when more data exists in the buffer.</label>
+                      <label><input type="radio" name="q06" value="D"> Embedded nulls are harmless when validation and logging use text functions, even if downstream code uses the byte length.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>7. What is a risk of validating text using unclear encoding assumptions?</legend>
+                      <label><input type="radio" name="q07" value="A" required> Valid UTF-8 guarantees that character counts and byte counts are interchangeable for length limits.</label>
+                      <label><input type="radio" name="q07" value="B"> The program may accept, reject, compare, or truncate data differently than intended.</label>
+                      <label><input type="radio" name="q07" value="C"> Unicode normalization always produces one canonical form without changing the amount of storage required.</label>
+                      <label><input type="radio" name="q07" value="D"> ASCII-only checks can be applied after locale-sensitive comparisons without changing identifier semantics.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>8. What should structured input validation include?</legend>
+                      <label><input type="radio" name="q08" value="A" required> Required fields, field types, field lengths, duplicate handling, and cross-field consistency where relevant.</label>
+                      <label><input type="radio" name="q08" value="B"> Parsing required fields is sufficient; duplicate and unknown fields can be ignored in whatever order they appear.</label>
+                      <label><input type="radio" name="q08" value="C"> Commit each field as soon as it validates to avoid the memory cost of temporary record state.</label>
+                      <label><input type="radio" name="q08" value="D"> Cross-field consistency belongs to business logic and does not need to be atomic with parsing.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>9. What is fail-closed behavior?</legend>
+                      <label><input type="radio" name="q09" value="A" required> Continue using the fields already validated when a later optional field fails.</label>
+                      <label><input type="radio" name="q09" value="B"> Replace malformed values with defaults and treat the whole record as accepted.</label>
+                      <label><input type="radio" name="q09" value="C"> Rejecting input and avoiding unsafe continuation when validation does not succeed.</label>
+                      <label><input type="radio" name="q09" value="D"> Log the raw rejected payload and return an error; rolling back partial state is unnecessary.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>10. Why should validation failures avoid partial state updates?</legend>
+                      <label><input type="radio" name="q10" value="A" required> Partial updates can leave the program in an inconsistent or unsafe state.</label>
+                      <label><input type="radio" name="q10" value="B"> Partial state is safe when each individual field passed validation before it was assigned.</label>
+                      <label><input type="radio" name="q10" value="C"> Cleanup can restore invariants later, so a parser may publish an intermediate object during validation.</label>
+                      <label><input type="radio" name="q10" value="D"> A caller can decide whether inconsistent state is acceptable after a validating function reports failure.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>11. What is the role of tests and tools in input validation?</legend>
+                      <label><input type="radio" name="q11" value="A" required> Fuzzing is sufficient because it explores malformed input without requiring explicit field contracts.</label>
+                      <label><input type="radio" name="q11" value="B"> They help reveal missed assumptions and boundary cases, but they do not replace clear validation contracts.</label>
+                      <label><input type="radio" name="q11" value="C"> Static analysis can prove validation for future input formats when the current parser is clean.</label>
+                      <label><input type="radio" name="q11" value="D"> Boundary tests only need minimum and maximum values; malformed encodings and duplicate relationships add little value.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>12. What is the main course takeaway?</legend>
+                      <label><input type="radio" name="q12" value="A" required> Once type and range are checked, authorization and application state may assume the input source is trusted.</label>
+                      <label><input type="radio" name="q12" value="B"> A central sanitizer should broadly normalize input before the meanings of individual fields are known.</label>
+                      <label><input type="radio" name="q12" value="C"> Validation may occur after memory operations when those operations use defensive library calls.</label>
+                      <label><input type="radio" name="q12" value="D"> Validate input against explicit source, type, range, length, format, encoding, and state rules before trusting it.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

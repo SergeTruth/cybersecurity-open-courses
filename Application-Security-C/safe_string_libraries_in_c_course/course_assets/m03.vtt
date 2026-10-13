@@ -1,0 +1,154 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.201
+A safer string API makes the important
+parts of the operation visible.
+
+2
+00:00:04.281 --> 00:00:08.609
+It asks for destination capacity rather
+than assuming the buffer is large enough.
+
+3
+00:00:08.689 --> 00:00:11.449
+It distinguishes content length from
+storage size.
+
+4
+00:00:11.529 --> 00:00:16.046
+It reports whether the operation
+succeeded, failed, or produced a truncated result.
+
+5
+00:00:16.126 --> 00:00:19.199
+It documents who owns memory and what
+cleanup is required.
+
+6
+00:00:19.279 --> 00:00:23.796
+Explicit capacity parameters reduce
+guesswork, but only when the value is accurate.
+
+7
+00:00:23.876 --> 00:00:27.828
+Passing the size of a pointer instead of
+the size of the buffer is still a bug.
+
+8
+00:00:27.908 --> 00:00:30.730
+Passing an old capacity after a resize is
+still wrong.
+
+9
+00:00:30.810 --> 00:00:32.943
+Safer APIs improve the shape of the call,
+
+10
+00:00:33.023 --> 00:00:35.595
+but the program must still track the real
+object.
+
+11
+00:00:35.675 --> 00:00:37.933
+Return values are central to safer design.
+
+12
+00:00:38.013 --> 00:00:41.839
+A good API explains what success looks
+like, how truncation is reported,
+
+13
+00:00:41.919 --> 00:00:45.809
+what failure means, and whether it returns
+required size, bytes written,
+
+14
+00:00:45.889 --> 00:00:47.457
+status codes, or a new object.
+
+15
+00:00:47.537 --> 00:00:51.928
+Code that ignores those results loses the
+very safety signal the API was designed to
+
+16
+00:00:52.008 --> 00:00:52.510
+provide.
+
+17
+00:00:52.590 --> 00:00:54.973
+Termination behavior should be documented.
+
+18
+00:00:55.053 --> 00:00:59.570
+Some APIs guarantee a terminator when the
+destination capacity is greater than zero.
+
+19
+00:00:59.650 --> 00:01:00.402
+Others do not.
+
+20
+00:01:00.482 --> 00:01:01.988
+Some write a partial result.
+
+21
+00:01:02.068 --> 00:01:03.636
+Others reject the operation.
+
+22
+00:01:03.716 --> 00:01:05.598
+Guaranteed termination is useful,
+
+23
+00:01:05.678 --> 00:01:09.818
+but only if the caller also handles
+truncation and knows whether the resulting
+
+24
+00:01:09.898 --> 00:01:11.090
+string is meaningful.
+
+25
+00:01:11.170 --> 00:01:13.114
+Ownership rules matter just as much.
+
+26
+00:01:13.194 --> 00:01:16.895
+A dynamic string API might allocate a new
+buffer, grow an existing one,
+
+27
+00:01:16.975 --> 00:01:21.053
+borrow a pointer, or return a view that
+becomes invalid after the next append.
+
+28
+00:01:21.133 --> 00:01:24.708
+Safer APIs should make these rules easy to
+read and hard to overlook.
+
+29
+00:01:24.788 --> 00:01:27.799
+The best string APIs make misuse easier to
+spot in review.
+
+30
+00:01:27.879 --> 00:01:32.207
+They have consistent names, clear argument
+order, documented failure behavior,
+
+31
+00:01:32.287 --> 00:01:34.984
+and project examples that show expected
+handling.
+
+32
+00:01:35.064 --> 00:01:39.518
+A library is safer when its contracts are
+visible enough for ordinary maintainers to
+
+33
+00:01:39.598 --> 00:01:40.100
+enforce.

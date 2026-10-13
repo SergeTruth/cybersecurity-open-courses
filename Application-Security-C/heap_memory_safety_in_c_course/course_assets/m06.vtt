@@ -1,0 +1,121 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.131
+Disciplined deallocation starts with a
+simple rule:
+
+2
+00:00:03.211 --> 00:00:05.140
+free only memory the current code owns.
+
+3
+00:00:05.220 --> 00:00:07.617
+A pointer parameter is not automatically
+owned.
+
+4
+00:00:07.697 --> 00:00:11.263
+A borrowed reference, interior pointer,
+string literal, stack object,
+
+5
+00:00:11.343 --> 00:00:15.318
+static object, or object owned by another
+component should not be released by the
+
+6
+00:00:15.398 --> 00:00:16.333
+current function.
+
+7
+00:00:16.413 --> 00:00:18.868
+Centralized cleanup can reduce duplicate
+logic.
+
+8
+00:00:18.948 --> 00:00:21.287
+When a function acquires several heap
+objects,
+
+9
+00:00:21.367 --> 00:00:25.517
+one cleanup section can make release order
+visible and keep error paths consistent.
+
+10
+00:00:25.597 --> 00:00:29.339
+That pattern is useful only when the
+ownership state of each object is clear.
+
+11
+00:00:29.419 --> 00:00:31.699
+Partial initialization needs safe
+teardown.
+
+12
+00:00:31.779 --> 00:00:35.871
+If an object has several allocated fields
+and construction fails partway through,
+
+13
+00:00:35.951 --> 00:00:39.751
+cleanup should release exactly the fields
+that were successfully acquired.
+
+14
+00:00:39.831 --> 00:00:44.040
+Helper functions can make this easier when
+they accept well-defined partial states.
+
+15
+00:00:44.120 --> 00:00:48.329
+Double-free problems often come from
+unclear ownership or duplicate cleanup paths.
+
+16
+00:00:48.409 --> 00:00:51.273
+The code may release a field in both a
+helper and its caller,
+
+17
+00:00:51.353 --> 00:00:54.276
+or release the same object on two
+different error branches.
+
+18
+00:00:54.356 --> 00:00:58.331
+Use-after-free problems come from
+continuing to use aliases after the object's
+
+19
+00:00:58.411 --> 00:00:59.171
+lifetime ends.
+
+20
+00:00:59.251 --> 00:01:03.285
+Setting a pointer to NULL after free can
+help some local cleanup patterns by making
+
+21
+00:01:03.365 --> 00:01:04.885
+repeated local cleanup safer.
+
+22
+00:01:04.965 --> 00:01:06.426
+It is not a complete solution.
+
+23
+00:01:06.506 --> 00:01:08.962
+Other aliases may still point to the freed
+object,
+
+24
+00:01:09.042 --> 00:01:11.263
+and the real control is lifetime
+discipline:
+
+25
+00:01:11.343 --> 00:01:14.500
+make release points obvious and prevent
+later access by design.

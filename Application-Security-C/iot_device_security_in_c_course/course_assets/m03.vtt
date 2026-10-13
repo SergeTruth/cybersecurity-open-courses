@@ -1,0 +1,180 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.354
+Secure firmware starts before the main
+application runs.
+
+2
+00:00:03.434 --> 00:00:04.191
+At a high level,
+
+3
+00:00:04.271 --> 00:00:08.465
+startup should establish that the device
+is running authorized firmware and that the
+
+4
+00:00:08.545 --> 00:00:10.583
+state needed for safe operation is valid.
+
+5
+00:00:10.663 --> 00:00:13.517
+The details depend on hardware and product
+requirements,
+
+6
+00:00:13.597 --> 00:00:15.519
+but the design question is consistent:
+
+7
+00:00:15.599 --> 00:00:17.987
+what is checked before the device trusts
+itself?
+
+8
+00:00:18.067 --> 00:00:21.096
+Signed firmware concepts support
+authorization decisions.
+
+9
+00:00:21.176 --> 00:00:25.253
+The device can use a protected trust
+anchor and metadata policy to decide whether an
+
+10
+00:00:25.333 --> 00:00:26.498
+image is allowed to run.
+
+11
+00:00:26.578 --> 00:00:29.490
+This course does not implement
+cryptography or boot logic;
+
+12
+00:00:29.570 --> 00:00:33.589
+it focuses on the review questions C
+developers need to understand when their code
+
+13
+00:00:33.669 --> 00:00:35.183
+depends on startup integrity.
+
+14
+00:00:35.263 --> 00:00:37.884
+Startup state includes more than the
+firmware image.
+
+15
+00:00:37.964 --> 00:00:40.993
+Configuration records, version markers,
+calibration data,
+
+16
+00:00:41.073 --> 00:00:43.869
+endpoint settings, identity material,
+rollback state,
+
+17
+00:00:43.949 --> 00:00:46.861
+and factory provisioning data may all
+influence behavior.
+
+18
+00:00:46.941 --> 00:00:50.960
+The device should validate required state
+before using it and define what happens
+
+19
+00:00:51.040 --> 00:00:53.136
+when the state is missing or inconsistent.
+
+20
+00:00:53.216 --> 00:00:55.139
+Failure behavior must be predictable.
+
+21
+00:00:55.219 --> 00:00:58.072
+If firmware validation fails,
+configuration is damaged,
+
+22
+00:00:58.152 --> 00:01:01.589
+version policy rejects an image, or
+recovery metadata is incomplete,
+
+23
+00:01:01.669 --> 00:01:04.348
+the device should not quietly enter normal
+operation.
+
+24
+00:01:04.428 --> 00:01:07.690
+Depending on the product, it may enter a
+controlled recovery mode,
+
+25
+00:01:07.770 --> 00:01:10.798
+continue with a previous valid image,
+report a bounded fault,
+
+26
+00:01:10.878 --> 00:01:11.985
+or stop in a safe state.
+
+27
+00:01:12.065 --> 00:01:15.967
+Boot security depends on protected trust
+anchors and reviewed configuration.
+
+28
+00:01:16.047 --> 00:01:19.892
+Hardware option settings, debug
+configuration, storage layout, boot order,
+
+29
+00:01:19.972 --> 00:01:23.874
+recovery permissions, and manufacturing
+choices can change the meaning of the
+
+30
+00:01:23.954 --> 00:01:24.362
+design.
+
+31
+00:01:24.442 --> 00:01:28.227
+These settings should be treated as
+release artifacts and verified as part of
+
+32
+00:01:28.307 --> 00:01:29.472
+production readiness.
+
+33
+00:01:29.552 --> 00:01:31.940
+Testing should include negative startup
+cases.
+
+34
+00:01:32.020 --> 00:01:34.874
+Teams should exercise invalid images,
+missing metadata,
+
+35
+00:01:34.954 --> 00:01:38.158
+bad configuration, interrupted updates,
+reset during startup,
+
+36
+00:01:38.238 --> 00:01:40.568
+and recovery decisions on target-like
+builds.
+
+37
+00:01:40.648 --> 00:01:44.725
+A startup design is not complete until
+both successful and failed validation paths
+
+38
+00:01:44.805 --> 00:01:45.620
+are understood.

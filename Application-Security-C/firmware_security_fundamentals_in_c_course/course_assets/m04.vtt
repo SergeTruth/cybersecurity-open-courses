@@ -1,0 +1,202 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.907
+Memory safety is central to firmware
+security because firmware often operates with
+
+2
+00:00:04.987 --> 00:00:08.339
+constrained RAM, fixed flash layouts,
+direct hardware access,
+
+3
+00:00:08.419 --> 00:00:10.157
+and long-running control loops.
+
+4
+00:00:10.237 --> 00:00:14.395
+A memory defect may appear only under an
+unusual message, a rare reset sequence,
+
+5
+00:00:14.475 --> 00:00:18.758
+a timing edge, or a field configuration
+that was not present during early testing.
+
+6
+00:00:18.838 --> 00:00:20.825
+Fixed buffers are common in firmware,
+
+7
+00:00:20.905 --> 00:00:23.574
+but fixed size does not make a buffer safe
+by itself.
+
+8
+00:00:23.654 --> 00:00:27.874
+Code should validate lengths before
+copying, formatting, appending, parsing,
+
+9
+00:00:27.954 --> 00:00:28.637
+or indexing.
+
+10
+00:00:28.717 --> 00:00:32.441
+Buffer sizes should be tied to protocol
+definitions, hardware limits,
+
+11
+00:00:32.521 --> 00:00:34.880
+file formats, or explicit design
+constants,
+
+12
+00:00:34.960 --> 00:00:37.815
+not to old examples that nobody has
+reviewed recently.
+
+13
+00:00:37.895 --> 00:00:40.068
+Stack and heap policy should be explicit.
+
+14
+00:00:40.148 --> 00:00:43.562
+Some firmware avoids dynamic allocation
+after initialization.
+
+15
+00:00:43.642 --> 00:00:45.131
+Some uses controlled pools.
+
+16
+00:00:45.211 --> 00:00:47.818
+Some permits allocation in selected
+subsystems.
+
+17
+00:00:47.898 --> 00:00:51.436
+Whatever the policy is, it should address
+failure, fragmentation,
+
+18
+00:00:51.516 --> 00:00:53.254
+cleanup, ownership, and timing.
+
+19
+00:00:53.334 --> 00:00:57.741
+Stack sizes should be supported by
+measurement and by tests that exercise realistic
+
+20
+00:00:57.821 --> 00:00:58.442
+call paths.
+
+21
+00:00:58.522 --> 00:01:01.501
+Object lifetime and pointer ownership need
+clear rules.
+
+22
+00:01:01.581 --> 00:01:04.250
+A buffer passed from a driver to
+application logic,
+
+23
+00:01:04.330 --> 00:01:06.441
+from an interrupt path to deferred work,
+
+24
+00:01:06.521 --> 00:01:10.059
+or from an update parser to storage code
+should have a visible owner.
+
+25
+00:01:10.139 --> 00:01:13.118
+The code should make it clear who may
+read, who may modify,
+
+26
+00:01:13.198 --> 00:01:16.240
+when the object is valid, and when it is
+released or reused.
+
+27
+00:01:16.320 --> 00:01:18.926
+Integer sizing matters in hardware-facing
+code.
+
+28
+00:01:19.006 --> 00:01:22.544
+Device registers, bus lengths, packet
+fields, counters, offsets,
+
+29
+00:01:22.624 --> 00:01:25.976
+alignment rules, and flash addresses may
+have specific widths.
+
+30
+00:01:26.056 --> 00:01:30.153
+Conversions should be reviewed so that
+signedness, truncation, wraparound,
+
+31
+00:01:30.233 --> 00:01:33.585
+and mixed-width arithmetic do not change
+the meaning of a check.
+
+32
+00:01:33.665 --> 00:01:38.072
+Memory-mapped I/O and volatile access
+should be isolated behind clear interfaces.
+
+33
+00:01:38.152 --> 00:01:41.814
+Register access code should be careful
+about ordering, side effects,
+
+34
+00:01:41.894 --> 00:01:46.115
+reserved bits, read-clear behavior, and
+concurrency with interrupt handlers.
+
+35
+00:01:46.195 --> 00:01:50.664
+Higher-level firmware should call reviewed
+driver functions instead of scattering
+
+36
+00:01:50.744 --> 00:01:53.289
+direct register access across the
+application.
+
+37
+00:01:53.369 --> 00:01:56.348
+Parser discipline completes the memory
+safety picture.
+
+38
+00:01:56.428 --> 00:01:59.345
+Firmware parsers should reject malformed
+input early,
+
+39
+00:01:59.425 --> 00:02:02.529
+check lengths before reading fields, cap
+loops and counts,
+
+40
+00:02:02.609 --> 00:02:04.595
+handle unknown values deliberately,
+
+41
+00:02:04.675 --> 00:02:08.213
+and keep partially parsed state from
+influencing device behavior.
+
+42
+00:02:08.293 --> 00:02:10.900
+Safe parsing is a design habit, not a
+cleanup step.

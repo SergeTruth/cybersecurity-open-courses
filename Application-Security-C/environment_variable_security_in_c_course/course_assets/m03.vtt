@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.432
+Environment variables become more
+sensitive when a program runs as a service,
+
+2
+00:00:04.512 --> 00:00:08.443
+daemon, scheduled task, launcher, helper,
+installer, maintenance utility,
+
+3
+00:00:08.523 --> 00:00:09.834
+or privileged component.
+
+4
+00:00:09.914 --> 00:00:13.905
+In those contexts, the process may perform
+operations on behalf of other users,
+
+5
+00:00:13.985 --> 00:00:17.857
+access protected storage, manage system
+state, or launch additional tools.
+
+6
+00:00:17.937 --> 00:00:22.286
+Hidden environment influence can change
+more than a local command-line convenience.
+
+7
+00:00:22.366 --> 00:00:26.416
+A program that crosses privilege
+boundaries should not blindly trust inherited
+
+8
+00:00:26.496 --> 00:00:27.509
+environment state.
+
+9
+00:00:27.589 --> 00:00:31.699
+If lower-trust context can influence the
+environment seen by higher-trust code,
+
+10
+00:00:31.779 --> 00:00:35.949
+environment-driven behavior may become a
+path from low-trust input to high-trust
+
+11
+00:00:36.029 --> 00:00:36.685
+operations.
+
+12
+00:00:36.765 --> 00:00:40.815
+The safer approach is to decide explicitly
+which variables are accepted and why.
+
+13
+00:00:40.895 --> 00:00:43.993
+Trust decisions should come from
+controlled configuration,
+
+14
+00:00:44.073 --> 00:00:47.826
+verified identity, deployment policy, or
+explicit authorization logic,
+
+15
+00:00:47.906 --> 00:00:49.574
+not only from environment state.
+
+16
+00:00:49.654 --> 00:00:52.632
+An environment variable may help select a
+mode or location,
+
+17
+00:00:52.712 --> 00:00:56.763
+but it should not by itself establish that
+a caller is trusted or that a privileged
+
+18
+00:00:56.843 --> 00:00:57.737
+behavior is safe.
+
+19
+00:00:57.817 --> 00:01:02.225
+Privileged or service-style programs
+should minimize their environment dependency.
+
+20
+00:01:02.305 --> 00:01:05.700
+Accept only the variables that are part of
+the documented contract.
+
+21
+00:01:05.780 --> 00:01:07.865
+Reject unsupported or malformed values.
+
+22
+00:01:07.945 --> 00:01:11.222
+Clear or ignore variables that should not
+influence the program.
+
+23
+00:01:11.302 --> 00:01:15.412
+Avoid making security-sensitive decisions
+based on ambient values that were not
+
+24
+00:01:15.492 --> 00:01:17.756
+intentionally provided for this component.
+
+25
+00:01:17.836 --> 00:01:21.886
+Reviewers should be able to see the
+privilege and environment assumptions in the
+
+26
+00:01:21.966 --> 00:01:22.264
+code.
+
+27
+00:01:22.344 --> 00:01:23.655
+Which variables are read?
+
+28
+00:01:23.735 --> 00:01:24.569
+Who can set them?
+
+29
+00:01:24.649 --> 00:01:27.091
+Are they inherited or controlled by
+deployment?
+
+30
+00:01:27.171 --> 00:01:28.958
+What operations do they influence?
+
+31
+00:01:29.038 --> 00:01:30.945
+What happens in privileged contexts?
+
+32
+00:01:31.025 --> 00:01:34.420
+Those questions turn hidden process state
+into reviewable design.

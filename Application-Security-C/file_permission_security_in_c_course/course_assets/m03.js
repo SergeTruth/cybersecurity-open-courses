@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Creating Files with Safe Defaults",
+  "graphicAlt": "Restrictive file creation is contrasted with an exposure window caused by creating broadly accessible files and tightening permissions later.",
+  "narration": "File creation is a moment of exposure. When a C program creates a file, it establishes an object that other users, services, backup tools, scanners, or operators may be able to see. The permissions chosen at creation should match the sensitivity of the data from the beginning.\n\nCreating a broad-access file and then trying to restrict it afterward is a fragile pattern. Even if the later change usually succeeds, there can be a period where the file exists with broader access than intended. If the permission change fails and the program misses the error, the file may remain exposed. Prefer creation mechanisms that apply restrictive access as part of the creation step where the platform supports that design.\n\nOn POSIX-style systems, process defaults and umask behavior can affect the final permissions. Inherited directory settings, deployment configuration, and file system policy may also matter. The implementation should not rely on vague assumptions about defaults when the file contains sensitive data.\n\nSensitive files are not limited to obvious secret stores. Temporary output, logs, reports, exports, caches, debug captures, and conversion products may include identifiers, paths, configuration values, customer content, or operational details. If the program creates those files, it should classify them and choose permissions accordingly.\n\nCreation should combine clear access intent with checked results. If a file was supposed to be created privately, the code should use the platform's appropriate creation options and verify errors from creation and any permission-sensitive follow-up. A failure to create the file safely should be treated as a real failure of the workflow, not an ignorable detail.",
+  "narrationPoints": [
+    "When a C program creates a file, it establishes an object that other users, services, backup tools, scanners.",
+    "If the permission change fails and the program misses the error, the file may remain exposed.",
+    "The implementation should not rely on vague assumptions about defaults when the file contains sensitive data.",
+    "If the program creates those files, it should classify them and choose permissions accordingly.",
+    "A failure to create the file safely should be treated as a real failure of the workflow, not an ignorable detail."
+  ]
+};

@@ -1,0 +1,108 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Heap memory safety depends on correct size
+tracking.
+
+2
+00:00:03.220 --> 00:00:06.563
+A heap pointer does not automatically
+include the allocation size,
+
+3
+00:00:06.643 --> 00:00:09.987
+the number of initialized elements, or the
+current logical length.
+
+4
+00:00:10.067 --> 00:00:12.999
+That metadata must be stored and
+maintained by the program.
+
+5
+00:00:13.079 --> 00:00:15.660
+Byte counts and element counts are
+different units.
+
+6
+00:00:15.740 --> 00:00:19.846
+Allocating space for elements requires
+multiplying the count by the element size,
+
+7
+00:00:19.926 --> 00:00:22.742
+and that calculation must be checked
+before allocation.
+
+8
+00:00:22.822 --> 00:00:26.752
+Copying, indexing, formatting, and parsing
+should use the correct unit for the
+
+9
+00:00:26.832 --> 00:00:27.418
+operation.
+
+10
+00:00:27.498 --> 00:00:31.604
+Integer overflow in allocation-size
+calculations can break safety assumptions.
+
+11
+00:00:31.684 --> 00:00:35.732
+A wrapped size can request less memory
+than the program later treats as available.
+
+12
+00:00:35.812 --> 00:00:39.038
+Defensive code validates counts,
+additions, multiplications,
+
+13
+00:00:39.118 --> 00:00:41.933
+and conversions before memory is allocated
+or accessed.
+
+14
+00:00:42.013 --> 00:00:44.067
+Current length and capacity also differ.
+
+15
+00:00:44.147 --> 00:00:47.021
+Capacity is how much space the allocation
+can safely hold.
+
+16
+00:00:47.101 --> 00:00:50.503
+Length is how much of that space currently
+contains meaningful data.
+
+17
+00:00:50.583 --> 00:00:52.577
+Operations such as append, parse, read,
+
+18
+00:00:52.657 --> 00:00:55.179
+and resize must update these values
+consistently.
+
+19
+00:00:55.259 --> 00:00:58.603
+Object layout matters when a heap object
+contains headers, arrays,
+
+20
+00:00:58.683 --> 00:01:01.088
+flexible trailing data, or nested
+allocations.
+
+21
+00:01:01.168 --> 00:01:05.274
+Reviewers should check that every access
+stays within the object boundary that was
+
+22
+00:01:05.354 --> 00:01:08.580
+actually allocated, not the boundary the
+code hoped to allocate.

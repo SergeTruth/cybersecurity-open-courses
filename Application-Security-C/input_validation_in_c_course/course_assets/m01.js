@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Input Validation Matters",
+  "graphicAlt": "Uncertain input passes an explicit contract before a validated representation influences memory, resources or state.",
+  "narration": "Input validation is a core reliability, maintainability, and security practice in C because C programs often operate close to memory, buffers, files, device interfaces, and operating-system resources. A value that looks like ordinary data can influence allocation size, array indexing, file selection, parsing decisions, control flow, or state changes.\n\nInvalid input usually causes trouble by breaking assumptions. The code may assume a string is terminated, a number fits a range, a field exists, a delimiter appears once, a byte sequence is text, or a length value matches the actual buffer. When those assumptions are not checked, later code may make decisions on a false contract.\n\nValidation means making expectations explicit before input is trusted. The program should define the source, expected type, range, length, format, encoding, and state rules for a value. Only after the value satisfies those rules should it influence memory access, resource use, policy decisions, or persistent state.\n\nValidation is not a complete security program by itself. It works together with memory-safe coding practices, careful parsing, clear error handling, output encoding where relevant, authorization checks, logging discipline, testing, and code review. The goal is to keep invalid or ambiguous data from reaching code that assumes it is already safe.\n\nGood validation also improves maintenance. Future developers can see what the program expects and what it rejects. Reviewers can compare the validation contract against the later use of the value. That visibility is especially important in C, where a small unchecked assumption can have wide effects.",
+  "narrationPoints": [
+    "Input validation is a core reliability, maintainability, and security practice in C because C programs often operate close to memory.",
+    "The code may assume a string is terminated, a number fits a range, a field exists, a delimiter appears once, a byte sequence is text.",
+    "Only after the value satisfies those rules should it influence memory access, resource use, policy decisions.",
+    "Validation is not a complete security program by itself.",
+    "Reviewers can compare the validation contract against the later use of the value."
+  ]
+};

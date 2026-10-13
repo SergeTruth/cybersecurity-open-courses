@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.658
+Length validation is central in C because
+input length often affects copying,
+
+2
+00:00:04.738 --> 00:00:07.635
+indexing, allocation, parsing, and string
+handling.
+
+3
+00:00:07.715 --> 00:00:11.369
+A length value should be checked before it
+drives a memory operation.
+
+4
+00:00:11.449 --> 00:00:15.229
+It should also be checked against the
+exact operation being performed,
+
+5
+00:00:15.309 --> 00:00:18.081
+not a convenient limit from another part
+of the code.
+
+6
+00:00:18.161 --> 00:00:21.121
+String length and buffer capacity are
+different facts.
+
+7
+00:00:21.201 --> 00:00:23.469
+String length describes current content.
+
+8
+00:00:23.549 --> 00:00:26.888
+Capacity describes the available storage
+in the destination.
+
+9
+00:00:26.968 --> 00:00:28.165
+A copy, append, parse,
+
+10
+00:00:28.245 --> 00:00:31.773
+or formatted output operation may need
+room for data, separators,
+
+11
+00:00:31.853 --> 00:00:33.679
+and a terminating null character.
+
+12
+00:00:33.759 --> 00:00:36.342
+The validation rule must account for all
+of that.
+
+13
+00:00:36.422 --> 00:00:39.005
+Maximum accepted input size should be
+explicit.
+
+14
+00:00:39.085 --> 00:00:43.180
+A program should know how much input it is
+willing to accept for a field and why.
+
+15
+00:00:43.260 --> 00:00:47.165
+Limits protect memory use, processing
+time, log size, storage behavior,
+
+16
+00:00:47.245 --> 00:00:48.820
+and downstream assumptions.
+
+17
+00:00:48.900 --> 00:00:52.995
+Limits should be enforced before
+allocation or before a long parse step where
+
+18
+00:00:53.075 --> 00:00:53.705
+practical.
+
+19
+00:00:53.785 --> 00:00:57.187
+Array bounds and index validation should
+happen before access.
+
+20
+00:00:57.267 --> 00:01:01.172
+A value read from input may be a count,
+offset, index, length, or capacity.
+
+21
+00:01:01.252 --> 00:01:02.953
+Those are not interchangeable.
+
+22
+00:01:03.033 --> 00:01:06.183
+Code should check that a value is
+nonnegative where needed,
+
+23
+00:01:06.263 --> 00:01:10.295
+within the correct maximum, and consistent
+with the object it will address.
+
+24
+00:01:10.375 --> 00:01:13.461
+Size values should remain trustworthy
+after validation.
+
+25
+00:01:13.541 --> 00:01:16.943
+If the program validates a length and then
+transforms the input,
+
+26
+00:01:17.023 --> 00:01:20.362
+appends to a buffer, decodes text, or
+changes representation,
+
+27
+00:01:20.442 --> 00:01:23.088
+the old length may no longer describe the
+new data.
+
+28
+00:01:23.168 --> 00:01:27.640
+Reviewers should track when size metadata
+must be recalculated or carried forward.
+
+29
+00:01:27.720 --> 00:01:31.941
+The practical review question is: what
+exact operation will this size control?
+
+30
+00:01:32.021 --> 00:01:34.919
+A check for display length may not protect
+allocation.
+
+31
+00:01:34.999 --> 00:01:38.400
+A check for source length may not protect
+destination capacity.
+
+32
+00:01:38.480 --> 00:01:42.260
+Safe validation ties bounds to the real
+memory operation that follows.

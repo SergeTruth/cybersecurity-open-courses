@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Safe String Libraries Matter",
+  "graphicAlt": "A string operation depends on accurate capacity, source representation, ownership and lifetime, and explicit handling of status and failure; its name alone is not a guarantee.",
+  "narration": "Safer string libraries and APIs matter because C string handling depends on details that are easy to hide in ordinary code. A function call may need the destination capacity, the current content length, the source length, room for a terminator, ownership rules, and a clear interpretation of failure. When those facts are missing, even familiar code becomes difficult to review.\n\nA safer library can reduce repeated mistakes by making important information explicit. Capacity-aware calls, builder objects, dynamic string abstractions, and functions with clear return values can make code easier to reason about. But a library name does not make a call safe by itself. Developers still have to understand the contract and supply accurate inputs.\n\nThe same old questions remain. Is the destination buffer actually that large? Is the input a valid C string or a byte range? Is null termination guaranteed, required, or irrelevant? What happens when output is truncated? Who owns any allocated buffer? What should the program do when the operation fails?\n\nConsistent project conventions make these questions easier. If a team chooses approved string APIs, documents their expected behavior, checks return values the same way, and tests boundary cases, reviewers spend less time guessing. They can focus on whether each call meets the contract for the specific operation.\n\nThe goal is not to invent a new string library. The goal is disciplined selection and use. Choose APIs by documented behavior, not reputation alone. Use them consistently, test edge cases, and treat strings as memory with text rules layered on top.",
+  "narrationPoints": [
+    "Safer string libraries and APIs matter because C string handling depends on details that are easy to hide in ordinary code.",
+    "But a library name does not make a call safe by itself.",
+    "Is the input a valid C string or a byte range.",
+    "If a team chooses approved string APIs, documents their expected behavior, checks return values the same way, and tests boundary cases.",
+    "Use them consistently, test edge cases, and treat strings as memory with text rules layered on top."
+  ]
+};

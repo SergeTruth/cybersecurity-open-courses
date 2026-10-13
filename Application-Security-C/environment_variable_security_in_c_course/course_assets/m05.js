@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Paths, Search Order, and External Tools",
+  "graphicAlt": "Uncontrolled ambient search is contrasted with an explicit trusted tool path and a deliberately defined child-process environment.",
+  "narration": "Environment-controlled paths can influence where programs look for files, tools, plugins, libraries, configuration, temporary storage, and helper programs. This is useful for flexible deployment, but it becomes risky when sensitive operations depend on ambient search behavior rather than explicit trusted locations.\n\nFor security-sensitive operations, prefer explicit trusted paths. If a program must open a specific configuration file, launch a known helper, or load a trusted component, the location should come from controlled configuration or a trusted installation path, not from a broad search process shaped by unrelated environment state.\n\nExecutable lookup behavior should be deliberate. A child process launch that relies on ambient search settings can behave differently depending on who started the program and what environment it inherited. Sensitive launch code should specify the intended program clearly and define the environment that the child receives.\n\nIf the application accepts search paths, they should be constrained, documented, and validated. Each entry should be checked for expected form, length, allowed roots where appropriate, and empty-entry behavior. The program should also define ordering and what happens when a path is unusable.\n\nEnvironment-derived file paths should pass the same validation and permission checks as other external paths. Review should trace any environment variable that affects file access, tool launch, loading behavior, plugin discovery, or command construction. The question is not whether the value came from the environment; it is what authority the program gives to that value.",
+  "narrationPoints": [
+    "Environment-controlled paths can influence where programs look for files, tools, plugins, libraries, configuration.",
+    "If a program must open a specific configuration file, launch a known helper, or load a trusted component.",
+    "Sensitive launch code should specify the intended program clearly and define the environment that the child receives.",
+    "If the application accepts search paths, they should be constrained, documented, and validated.",
+    "Environment-derived file paths should pass the same validation and permission checks as other external paths."
+  ]
+};

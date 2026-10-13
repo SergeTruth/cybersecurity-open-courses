@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="integer_overflow_fundamentals_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;: &quot;D&quot;, &quot;q2&quot;: &quot;A&quot;, &quot;q3&quot;: &quot;C&quot;, &quot;q4&quot;: &quot;B&quot;, &quot;q5&quot;: &quot;D&quot;, &quot;q6&quot;: &quot;C&quot;, &quot;q7&quot;: &quot;A&quot;, &quot;q8&quot;: &quot;B&quot;, &quot;q9&quot;: &quot;C&quot;, &quot;q10&quot;: &quot;A&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. Why does integer overflow matter for C security?</legend>
+                      <label><input type="radio" name="q1" value="A" required> Integer overflow is mainly a calculation-accuracy issue; memory APIs and loop bounds reject invalid results independently.</label>
+                      <label><input type="radio" name="q1" value="B"> Using size_t for values that affect memory removes overflow risk because it matches allocator and index types.</label>
+                      <label><input type="radio" name="q1" value="C"> Overflow matters only when the final incorrect value is directly visible to an external user.</label>
+                      <label><input type="radio" name="q1" value="D"> Arithmetic controls sizes, indexes, limits, parsing, and security decisions, so wrong results can break safety assumptions.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>2. Why do signedness and integer ranges matter?</legend>
+                      <label><input type="radio" name="q2" value="A" required> The same numeric expression can behave differently depending on type width and signedness.</label>
+                      <label><input type="radio" name="q2" value="B"> The compiler promotes every integer expression to a type wide enough for its mathematical result.</label>
+                      <label><input type="radio" name="q2" value="C"> Unsigned types are preferable for all nonnegative values because they eliminate range and comparison mistakes.</label>
+                      <label><input type="radio" name="q2" value="D"> A type that fits the expected production value needs no review of malformed or boundary inputs.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>3. How does signed overflow differ from unsigned wraparound?</legend>
+                      <label><input type="radio" name="q3" value="A" required> Both signed and unsigned overflow wrap, but signed types preserve the sign bit while unsigned types do not.</label>
+                      <label><input type="radio" name="q3" value="B"> Unsigned wraparound is harmless for counts and sizes because its behavior is defined by the language.</label>
+                      <label><input type="radio" name="q3" value="C"> Signed overflow is undefined behavior; unsigned arithmetic wraps modulo the type range but may still be unintended.</label>
+                      <label><input type="radio" name="q3" value="D"> A post-operation comparison reliably detects signed overflow as long as compiler warnings are enabled.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>4. Why do conversions and casts require validation?</legend>
+                      <label><input type="radio" name="q4" value="A" required> An explicit cast tells the compiler to reject values outside the destination type.</label>
+                      <label><input type="radio" name="q4" value="B"> Casts do not prove that the value fits the destination type or business range.</label>
+                      <label><input type="radio" name="q4" value="C"> It is safe to cast first and validate the converted result when the destination range is known.</label>
+                      <label><input type="radio" name="q4" value="D"> Warnings from one clean build prove the conversion is valid across supported widths and signedness rules.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>5. Why must allocation-size arithmetic be checked before allocation?</legend>
+                      <label><input type="radio" name="q5" value="A" required> malloc can reconstruct the element count, so it rejects a wrapped product that is smaller than intended.</label>
+                      <label><input type="radio" name="q5" value="B"> Checking each operand against SIZE_MAX is sufficient without checking their product or added header space.</label>
+                      <label><input type="radio" name="q5" value="C"> Allocation math only needs validation after the allocator returns a non-null pointer.</label>
+                      <label><input type="radio" name="q5" value="D"> Overflow can create a too-small allocation that later code treats as larger than it is.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>6. Why do indexes, loops, and parsed counts need range review?</legend>
+                      <label><input type="radio" name="q6" value="A" required> A parsed count is trustworthy after conversion succeeds, even if it exceeds the collection it will index.</label>
+                      <label><input type="radio" name="q6" value="B"> Unsigned loop counters cannot become negative, so they avoid wraparound and termination errors.</label>
+                      <label><input type="radio" name="q6" value="C"> They can cross boundaries through off-by-one errors, wraparound, negative values, or untrusted metadata.</label>
+                      <label><input type="radio" name="q6" value="D"> One upper bound on the initial value protects later increments, offsets, and derived indexes automatically.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>7. Why do shifts, division, and remainder operations need edge-case checks?</legend>
+                      <label><input type="radio" name="q7" value="A" required> Invalid divisors, special signed values, and invalid shift counts can produce undefined or unintended behavior.</label>
+                      <label><input type="radio" name="q7" value="B"> Portable C masks every shift count to the width of the left operand.</label>
+                      <label><input type="radio" name="q7" value="C"> Division needs only a zero-divisor check; the minimum signed value divided by negative one is representable.</label>
+                      <label><input type="radio" name="q7" value="D"> Remainder and right-shift results have identical meaning for negative values on every supported compiler.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>8. What are checked arithmetic patterns for?</legend>
+                      <label><input type="radio" name="q8" value="A" required> Checked arithmetic means performing the operation in the destination type and testing the result afterward.</label>
+                      <label><input type="radio" name="q8" value="B"> They prevent or detect unsafe arithmetic before the result is trusted.</label>
+                      <label><input type="radio" name="q8" value="C"> A wider temporary is always enough, even when no guaranteed wider type exists or policy limits are lower.</label>
+                      <label><input type="radio" name="q8" value="D"> A helper can return a saturated value on failure and callers may use it without checking a separate status.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>9. Why are tooling and boundary tests useful but not sufficient?</legend>
+                      <label><input type="radio" name="q9" value="A" required> A sanitizer-clean test run proves numeric contracts for values not exercised by the tests.</label>
+                      <label><input type="radio" name="q9" value="B"> Compiler diagnostics make manual signedness and business-range review unnecessary.</label>
+                      <label><input type="radio" name="q9" value="C"> They catch many defects earlier, but safe contracts and review are still required.</label>
+                      <label><input type="radio" name="q9" value="D"> Testing only type minima and maxima covers combinations near multiplication, addition, and conversion boundaries.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>10. What belongs in an integer safety baseline?</legend>
+                      <label><input type="radio" name="q10" value="A" required> Range validation, signedness review, conversion checks, checked allocation math, bounded indexes, shift and division checks, tooling, tests, and code review.</label>
+                      <label><input type="radio" name="q10" value="B"> Replacing signed integers with unsigned types is the central baseline because defined wraparound is predictable.</label>
+                      <label><input type="radio" name="q10" value="C"> Casts can resolve warnings, while runtime checks are needed only at network and file boundaries.</label>
+                      <label><input type="radio" name="q10" value="D"> Allocation checks and loop bounds are sufficient; shifts, division, conversions, and business limits can rely on code review.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

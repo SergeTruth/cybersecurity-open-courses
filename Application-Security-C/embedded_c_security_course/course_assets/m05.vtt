@@ -1,0 +1,182 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.460
+Secure boot helps ensure that expected
+firmware is verified before execution.
+
+2
+00:00:04.540 --> 00:00:07.908
+At a high level, the device starts from a
+trusted or protected point,
+
+3
+00:00:07.988 --> 00:00:09.230
+verifies the next stage,
+
+4
+00:00:09.310 --> 00:00:12.678
+and continues only when the policy says
+the firmware is acceptable.
+
+5
+00:00:12.758 --> 00:00:15.300
+The exact implementation depends on the
+platform,
+
+6
+00:00:15.380 --> 00:00:17.448
+but the design questions are consistent.
+
+7
+00:00:17.528 --> 00:00:21.429
+Firmware integrity depends on a chain of
+trust, protected verification keys,
+
+8
+00:00:21.509 --> 00:00:23.518
+signed images, and defined boot policy.
+
+9
+00:00:23.598 --> 00:00:26.612
+Developers should understand where the
+trust anchor lives,
+
+10
+00:00:26.692 --> 00:00:30.238
+which firmware stages are checked, how
+image metadata is interpreted,
+
+11
+00:00:30.318 --> 00:00:33.332
+and which configuration settings affect
+startup behavior.
+
+12
+00:00:33.412 --> 00:00:37.490
+This is design and review work that should
+rely on supported platform mechanisms.
+
+13
+00:00:37.570 --> 00:00:41.353
+Update validation should check
+authenticity, integrity, version policy,
+
+14
+00:00:41.433 --> 00:00:43.915
+image format, image size, target
+compatibility,
+
+15
+00:00:43.995 --> 00:00:48.014
+and any product-specific requirements
+before the device accepts new firmware.
+
+16
+00:00:48.094 --> 00:00:50.812
+A valid signature alone may not answer
+every question;
+
+17
+00:00:50.892 --> 00:00:54.675
+the image still needs to be appropriate
+for the device and its current state.
+
+18
+00:00:54.755 --> 00:00:56.882
+Older-version policy should be explicit.
+
+19
+00:00:56.962 --> 00:01:01.336
+Some products use platform-supported
+anti-rollback concepts to avoid unintended use
+
+20
+00:01:01.416 --> 00:01:05.198
+of older firmware where that fits the
+product risk and hardware capability.
+
+21
+00:01:05.278 --> 00:01:08.765
+The policy should be documented so
+developers, manufacturing teams,
+
+22
+00:01:08.845 --> 00:01:11.150
+and support teams understand what is
+allowed.
+
+23
+00:01:11.230 --> 00:01:12.589
+Failure behavior matters.
+
+24
+00:01:12.669 --> 00:01:16.747
+If validation fails, metadata is damaged,
+storage is full, power is interrupted,
+
+25
+00:01:16.827 --> 00:01:19.014
+or the new image does not pass health
+checks,
+
+26
+00:01:19.094 --> 00:01:23.113
+the device should avoid unsafe,
+inconsistent, or permanently unusable states.
+
+27
+00:01:23.193 --> 00:01:26.384
+Recovery behavior should be designed
+before the field needs it.
+
+28
+00:01:26.464 --> 00:01:30.365
+Secure boot and update design should rely
+on platform-supported mechanisms,
+
+29
+00:01:30.445 --> 00:01:33.932
+vendor-supported features, and approved
+cryptographic libraries.
+
+30
+00:01:34.012 --> 00:01:37.203
+Teams should avoid inventing their own
+cryptographic schemes,
+
+31
+00:01:37.283 --> 00:01:39.765
+boot policy formats, or secret-storage
+designs.
+
+32
+00:01:39.845 --> 00:01:44.100
+Use documented capabilities and then test
+the success and failure paths on realistic
+
+33
+00:01:44.180 --> 00:01:45.067
+configurations.
+
+34
+00:01:45.147 --> 00:01:47.393
+Review should include production settings.
+
+35
+00:01:47.473 --> 00:01:50.605
+Debug state, key provisioning, boot
+options, storage layout,
+
+36
+00:01:50.685 --> 00:01:52.517
+signing workflow, update metadata,
+
+37
+00:01:52.597 --> 00:01:56.793
+and recovery permissions can all affect
+the real security properties of the device.
+
+38
+00:01:56.873 --> 00:01:59.060
+Treat those settings as release artifacts.

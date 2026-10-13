@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.625
+Dynamic string libraries reduce some
+fixed-buffer problems by managing storage
+
+2
+00:00:04.705 --> 00:00:05.722
+growth internally.
+
+3
+00:00:05.802 --> 00:00:08.671
+Instead of asking every caller to predict
+the final size,
+
+4
+00:00:08.751 --> 00:00:12.219
+a dynamic string object can grow as
+content is appended or formatted.
+
+5
+00:00:12.299 --> 00:00:16.424
+That can improve maintainability,
+especially for complex string construction.
+
+6
+00:00:16.504 --> 00:00:19.015
+Dynamic growth does not remove failure
+handling.
+
+7
+00:00:19.095 --> 00:00:22.025
+Allocation can fail, a configured maximum
+can be reached,
+
+8
+00:00:22.105 --> 00:00:23.958
+or a builder can enter an error state.
+
+9
+00:00:24.038 --> 00:00:28.044
+Code should know how the library reports
+failure and whether the object remains
+
+10
+00:00:28.124 --> 00:00:30.456
+usable, becomes frozen, or must be
+discarded.
+
+11
+00:00:30.536 --> 00:00:33.824
+Continuing with a failed builder can
+produce misleading output.
+
+12
+00:00:33.904 --> 00:00:35.817
+Ownership transfer must be explicit.
+
+13
+00:00:35.897 --> 00:00:39.006
+A dynamic string may own its buffer, lend
+a temporary pointer,
+
+14
+00:00:39.086 --> 00:00:42.972
+transfer ownership to the caller, or
+invalidate earlier views when it grows.
+
+15
+00:00:43.052 --> 00:00:46.998
+Those rules should be documented in code
+patterns and followed consistently.
+
+16
+00:00:47.078 --> 00:00:51.323
+A pointer returned from a dynamic string
+object should not be treated as permanently
+
+17
+00:00:51.403 --> 00:00:53.974
+stable unless the library promises that
+behavior.
+
+18
+00:00:54.054 --> 00:00:56.505
+Cleanup responsibility needs the same
+clarity.
+
+19
+00:00:56.585 --> 00:00:59.215
+If a function creates a dynamic string,
+who frees it?
+
+20
+00:00:59.295 --> 00:01:01.029
+If ownership is handed to a caller,
+
+21
+00:01:01.109 --> 00:01:03.859
+is that visible in the function name or
+documentation?
+
+22
+00:01:03.939 --> 00:01:06.450
+If an error occurs halfway through
+construction,
+
+23
+00:01:06.530 --> 00:01:08.982
+are all allocated pieces released exactly
+once?
+
+24
+00:01:09.062 --> 00:01:11.633
+Maximum length policy is part of defensive
+design.
+
+25
+00:01:11.713 --> 00:01:14.941
+Dynamic strings can grow beyond what a
+fixed buffer would allow,
+
+26
+00:01:15.021 --> 00:01:18.309
+which is useful when the data is
+legitimate and bounded by policy.
+
+27
+00:01:18.389 --> 00:01:22.574
+Without a maximum, a builder can consume
+more memory than the application intends.
+
+28
+00:01:22.654 --> 00:01:26.660
+Safer dynamic use includes size limits,
+allocation checks, and cleanup tests.

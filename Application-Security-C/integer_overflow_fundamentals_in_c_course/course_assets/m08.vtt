@@ -1,0 +1,174 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.308
+Checked arithmetic should be designed
+before risky arithmetic is performed.
+
+2
+00:00:04.388 --> 00:00:07.503
+If a result will control allocation,
+indexing, authorization,
+
+3
+00:00:07.583 --> 00:00:10.007
+quota enforcement, parsing, or resource
+limits,
+
+4
+00:00:10.087 --> 00:00:14.241
+the program should verify that the
+operation is representable and meaningful before
+
+5
+00:00:14.321 --> 00:00:15.359
+trusting the result.
+
+6
+00:00:15.439 --> 00:00:18.555
+Precondition checks are often the clearest
+defensive pattern.
+
+7
+00:00:18.635 --> 00:00:22.616
+Before adding, verify that the left
+operand is not above the maximum allowed value
+
+8
+00:00:22.696 --> 00:00:23.907
+minus the right operand.
+
+9
+00:00:23.987 --> 00:00:27.795
+Before multiplying, verify that the count
+is within a safe relationship to the
+
+10
+00:00:27.875 --> 00:00:28.567
+element size.
+
+11
+00:00:28.647 --> 00:00:32.628
+Before converting, verify that the source
+value fits the destination type and the
+
+12
+00:00:32.708 --> 00:00:33.516
+business range.
+
+13
+00:00:33.596 --> 00:00:37.808
+Postcondition checks can sometimes detect
+wraparound when the operation is defined,
+
+14
+00:00:37.888 --> 00:00:39.676
+especially in unsigned arithmetic,
+
+15
+00:00:39.756 --> 00:00:42.468
+but they must be appropriate for the type
+and operation.
+
+16
+00:00:42.548 --> 00:00:45.664
+A check that works for addition may not
+work for multiplication.
+
+17
+00:00:45.744 --> 00:00:49.494
+A check that assumes unsigned modulo
+behavior should not be applied to signed
+
+18
+00:00:49.574 --> 00:00:50.785
+overflow after the fact.
+
+19
+00:00:50.865 --> 00:00:54.673
+Compiler built-ins or vetted helper
+functions can improve readability where
+
+20
+00:00:54.753 --> 00:00:55.330
+available.
+
+21
+00:00:55.410 --> 00:00:58.872
+A well-named helper can make intent clear:
+checked addition for sizes,
+
+22
+00:00:58.952 --> 00:01:02.529
+checked multiplication for allocation,
+checked narrowing conversion,
+
+23
+00:01:02.609 --> 00:01:04.398
+checked shift, or checked division.
+
+24
+00:01:04.478 --> 00:01:07.535
+The helper should document accepted
+ranges, output behavior,
+
+25
+00:01:07.615 --> 00:01:09.000
+and how failure is reported.
+
+26
+00:01:09.080 --> 00:01:11.388
+Saturating arithmetic, clamping,
+rejection,
+
+27
+00:01:11.468 --> 00:01:13.545
+and error returns are different policies.
+
+28
+00:01:13.625 --> 00:01:16.452
+Clamping a display value may be acceptable
+in one context,
+
+29
+00:01:16.532 --> 00:01:20.051
+while rejecting an allocation request is
+the safer behavior in another.
+
+30
+00:01:20.131 --> 00:01:22.612
+Arithmetic that controls memory, access,
+quotas,
+
+31
+00:01:22.692 --> 00:01:26.731
+or parser advancement often needs
+fail-closed behavior rather than a best-effort
+
+32
+00:01:26.811 --> 00:01:27.215
+result.
+
+33
+00:01:27.295 --> 00:01:31.160
+Reusable checked-arithmetic patterns
+should make the result state explicit.
+
+34
+00:01:31.240 --> 00:01:35.164
+The caller should know whether the output
+was produced, whether it was rejected,
+
+35
+00:01:35.244 --> 00:01:38.071
+and whether any partially computed value
+must be ignored.
+
+36
+00:01:38.151 --> 00:01:42.132
+Clear result handling prevents safe helper
+functions from being misused by later
+
+37
+00:01:42.212 --> 00:01:42.500
+code.

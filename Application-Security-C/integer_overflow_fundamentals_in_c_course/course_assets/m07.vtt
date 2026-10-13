@@ -1,0 +1,152 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.113
+Addition, subtraction, and multiplication
+get most of the attention,
+
+2
+00:00:04.193 --> 00:00:07.505
+but division, remainder, and shifts also
+need defensive review.
+
+3
+00:00:07.585 --> 00:00:11.498
+These operations often appear in alignment
+code, bucket selection, paging,
+
+4
+00:00:11.578 --> 00:00:16.034
+hashing support, bit masks, record layout,
+size rounding, and capacity calculations.
+
+5
+00:00:16.114 --> 00:00:18.583
+Division and remainder require divisor
+checks.
+
+6
+00:00:18.663 --> 00:00:21.553
+Dividing by zero is not a recoverable
+arithmetic result.
+
+7
+00:00:21.633 --> 00:00:24.945
+If a divisor comes from configuration,
+input, metadata, a count,
+
+8
+00:00:25.025 --> 00:00:28.036
+or an earlier calculation, verify it
+before the operation.
+
+9
+00:00:28.116 --> 00:00:32.331
+The check should be close enough to the
+operation that later changes do not separate
+
+10
+00:00:32.411 --> 00:00:33.795
+the guarantee from the use.
+
+11
+00:00:33.875 --> 00:00:37.970
+Signed minimum divided by negative one is
+a special overflow edge case for common
+
+12
+00:00:38.050 --> 00:00:39.796
+two's-complement-style ranges.
+
+13
+00:00:39.876 --> 00:00:44.272
+Defensive code that performs signed
+division near type boundaries should account for
+
+14
+00:00:44.352 --> 00:00:45.737
+this case when it can arise.
+
+15
+00:00:45.817 --> 00:00:49.068
+Edge values should be included in tests,
+not left to assumption.
+
+16
+00:00:49.148 --> 00:00:53.604
+Remainder results should not be assumed
+positive without understanding operand signs
+
+17
+00:00:53.684 --> 00:00:54.888
+and language behavior.
+
+18
+00:00:54.968 --> 00:00:57.678
+Code that uses a remainder as an index,
+bucket number,
+
+19
+00:00:57.758 --> 00:01:01.913
+or offset should make sure the resulting
+value is within the intended nonnegative
+
+20
+00:01:01.993 --> 00:01:02.354
+range.
+
+21
+00:01:02.434 --> 00:01:06.167
+When in doubt, validate the value before
+it reaches an indexing decision.
+
+22
+00:01:06.247 --> 00:01:10.101
+Shift counts must be nonnegative and less
+than the width of the promoted left
+
+23
+00:01:10.181 --> 00:01:10.662
+operand.
+
+24
+00:01:10.742 --> 00:01:15.018
+Left shifts can overflow or produce
+unintended results depending on signedness and
+
+25
+00:01:15.098 --> 00:01:15.459
+value.
+
+26
+00:01:15.539 --> 00:01:19.453
+Right shifts of signed values also deserve
+care when code relies on a specific
+
+27
+00:01:19.533 --> 00:01:21.520
+representation or rounding behavior.
+
+28
+00:01:21.600 --> 00:01:23.828
+Bit masks, flags, alignment calculations,
+
+29
+00:01:23.908 --> 00:01:27.822
+and power-of-two calculations should
+document their numeric assumptions.
+
+30
+00:01:27.902 --> 00:01:31.153
+Name the width, signedness, allowed range,
+and failure policy.
+
+31
+00:01:31.233 --> 00:01:35.388
+A small helper with a reviewed contract is
+often easier to maintain than scattered
+
+32
+00:01:35.468 --> 00:01:38.900
+expressions that rely on everyone
+remembering the same edge cases.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Sensitive Files, Logs, and Temporary Output",
+  "graphicAlt": "Private records produce logs, reports and temporary outputs that also need restrictive creation, controlled storage and narrow cleanup.",
+  "narration": "Sensitive files include more than the obvious key or credential file. Configuration files, exported reports, cached responses, diagnostic bundles, generated archives, request traces, and logs may contain secrets, tokens, identifiers, private data, internal paths, or operational state. If these files are created by a C program, their permissions need explicit attention.\n\nLogs are especially easy to underestimate. A useful log can become a data exposure path if it records credentials, request bodies, private filenames, internal directory layouts, or detailed identifiers without need. Logging should support troubleshooting while respecting the sensitivity of the data being written.\n\nTemporary output should be protected like any other sensitive file. It may exist briefly, but briefly is not the same as safely. Other processes, backup jobs, indexing services, or operators may see a temporary file while it exists. If the contents are sensitive, creation permissions, location, naming, and cleanup all matter.\n\nGenerated files should not receive broader permissions than the data requires. A report generated from private records does not become public because it was produced by a batch job. A cache of sensitive responses does not become low risk because it can be regenerated. Permission decisions should follow the content, not the convenience of the workflow.\n\nCleanup is part of protection. Sensitive temporary files should be removed when no longer needed, and cleanup should be narrow enough to avoid touching unrelated data. Security review should include these secondary outputs because they often become the place where sensitive data escapes the intended protection model.",
+  "narrationPoints": [
+    "Sensitive files include more than the obvious key or credential file.",
+    "Logging should support troubleshooting while respecting the sensitivity of the data being written.",
+    "Temporary output should be protected like any other sensitive file.",
+    "A cache of sensitive responses does not become low risk because it can be regenerated.",
+    "Sensitive temporary files should be removed when no longer needed, and cleanup should be narrow enough to avoid touching unrelated data."
+  ]
+};

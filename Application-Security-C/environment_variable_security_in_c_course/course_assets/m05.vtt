@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.470
+Environment-controlled paths can influence
+where programs look for files,
+
+2
+00:00:04.550 --> 00:00:09.009
+tools, plugins, libraries, configuration,
+temporary storage, and helper programs.
+
+3
+00:00:09.089 --> 00:00:11.166
+This is useful for flexible deployment,
+
+4
+00:00:11.246 --> 00:00:15.461
+but it becomes risky when sensitive
+operations depend on ambient search behavior
+
+5
+00:00:15.541 --> 00:00:17.679
+rather than explicit trusted locations.
+
+6
+00:00:17.759 --> 00:00:21.363
+For security-sensitive operations, prefer
+explicit trusted paths.
+
+7
+00:00:21.443 --> 00:00:25.352
+If a program must open a specific
+configuration file, launch a known helper,
+
+8
+00:00:25.432 --> 00:00:26.898
+or load a trusted component,
+
+9
+00:00:26.978 --> 00:00:31.254
+the location should come from controlled
+configuration or a trusted installation
+
+10
+00:00:31.334 --> 00:00:35.304
+path, not from a broad search process
+shaped by unrelated environment state.
+
+11
+00:00:35.384 --> 00:00:38.011
+Executable lookup behavior should be
+deliberate.
+
+12
+00:00:38.091 --> 00:00:42.489
+A child process launch that relies on
+ambient search settings can behave differently
+
+13
+00:00:42.569 --> 00:00:46.295
+depending on who started the program and
+what environment it inherited.
+
+14
+00:00:46.375 --> 00:00:50.589
+Sensitive launch code should specify the
+intended program clearly and define the
+
+15
+00:00:50.669 --> 00:00:52.624
+environment that the child receives.
+
+16
+00:00:52.704 --> 00:00:56.980
+If the application accepts search paths,
+they should be constrained, documented,
+
+17
+00:00:57.060 --> 00:00:57.854
+and validated.
+
+18
+00:00:57.934 --> 00:01:00.805
+Each entry should be checked for expected
+form, length,
+
+19
+00:01:00.885 --> 00:01:04.061
+allowed roots where appropriate, and
+empty-entry behavior.
+
+20
+00:01:04.141 --> 00:01:08.295
+The program should also define ordering
+and what happens when a path is unusable.
+
+21
+00:01:08.375 --> 00:01:12.895
+Environment-derived file paths should pass
+the same validation and permission checks
+
+22
+00:01:12.975 --> 00:01:14.257
+as other external paths.
+
+23
+00:01:14.337 --> 00:01:18.064
+Review should trace any environment
+variable that affects file access,
+
+24
+00:01:18.144 --> 00:01:22.114
+tool launch, loading behavior, plugin
+discovery, or command construction.
+
+25
+00:01:22.194 --> 00:01:25.492
+The question is not whether the value came
+from the environment;
+
+26
+00:01:25.572 --> 00:01:28.260
+it is what authority the program gives to
+that value.

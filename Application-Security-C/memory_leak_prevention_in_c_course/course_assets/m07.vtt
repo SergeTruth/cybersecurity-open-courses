@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.687
+Reallocation combines memory ownership,
+size arithmetic, and failure handling.
+
+2
+00:00:04.767 --> 00:00:07.877
+The realloc function can resize memory,
+move memory, or fail.
+
+3
+00:00:07.957 --> 00:00:11.964
+A resize routine should be written so the
+object remains valid no matter which of
+
+4
+00:00:12.044 --> 00:00:13.240
+those outcomes occurs.
+
+5
+00:00:13.320 --> 00:00:17.627
+Assigning realloc directly to the original
+pointer can leak the original allocation
+
+6
+00:00:17.707 --> 00:00:18.305
+on failure.
+
+7
+00:00:18.385 --> 00:00:22.572
+If realloc fails, the original allocation
+remains valid and still needs to be owned
+
+8
+00:00:22.652 --> 00:00:23.369
+and released.
+
+9
+00:00:23.449 --> 00:00:27.576
+Overwriting the only owner pointer with a
+null failure result loses the ability to
+
+10
+00:00:27.656 --> 00:00:29.451
+clean up that original allocation.
+
+11
+00:00:29.531 --> 00:00:33.658
+A temporary pointer helps preserve
+ownership until resize success is confirmed.
+
+12
+00:00:33.738 --> 00:00:36.848
+Store the result of realloc in a temporary
+variable, check it,
+
+13
+00:00:36.928 --> 00:00:38.901
+and only then update the owner pointer.
+
+14
+00:00:38.981 --> 00:00:43.288
+This pattern keeps the old allocation
+reachable when the resize cannot be completed.
+
+15
+00:00:43.368 --> 00:00:46.777
+Count and capacity should be updated only
+after successful resize.
+
+16
+00:00:46.857 --> 00:00:50.804
+Updating metadata too early can leave a
+buffer claiming space it does not have,
+
+17
+00:00:50.884 --> 00:00:54.234
+or cause cleanup code to believe the
+object changed when it did not.
+
+18
+00:00:54.314 --> 00:00:58.501
+A failed resize should leave the old
+object state intact and usable according to the
+
+19
+00:00:58.581 --> 00:00:59.119
+contract.
+
+20
+00:00:59.199 --> 00:01:03.206
+Allocation size calculations should
+account for overflow before allocating.
+
+21
+00:01:03.286 --> 00:01:07.294
+Capacity growth often involves
+multiplication, addition, terminator space,
+
+22
+00:01:07.374 --> 00:01:08.570
+or structure overhead.
+
+23
+00:01:08.650 --> 00:01:10.683
+If the computed size wraps or truncates,
+
+24
+00:01:10.763 --> 00:01:13.993
+the allocation request may not represent
+the intended storage.
+
+25
+00:01:14.073 --> 00:01:16.525
+Check arithmetic before calling the
+allocator.
+
+26
+00:01:16.605 --> 00:01:20.613
+Resize logic should preserve a valid
+object state whether it succeeds or fails.
+
+27
+00:01:20.693 --> 00:01:23.683
+The caller should know whether old data
+remains available,
+
+28
+00:01:23.763 --> 00:01:27.352
+whether the buffer changed, and what
+cleanup responsibility remains.
+
+29
+00:01:27.432 --> 00:01:31.140
+Clear resize contracts prevent leaks from
+hiding inside error handling.

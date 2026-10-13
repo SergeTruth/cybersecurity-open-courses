@@ -1,0 +1,193 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.608
+Firmware update capability is one of the
+most important lifecycle features a device
+
+2
+00:00:04.688 --> 00:00:05.150
+can have.
+
+3
+00:00:05.230 --> 00:00:07.834
+It allows teams to fix defects, improve
+reliability,
+
+4
+00:00:07.914 --> 00:00:10.691
+and respond to changing requirements after
+deployment.
+
+5
+00:00:10.771 --> 00:00:14.821
+The update path is also highly sensitive
+because it changes the software the device
+
+6
+00:00:14.901 --> 00:00:16.115
+will trust in the future.
+
+7
+00:00:16.195 --> 00:00:20.072
+Signed update concepts help the device
+decide whether an update is authorized.
+
+8
+00:00:20.152 --> 00:00:23.739
+At a safe engineering level, the design
+should include integrity checks,
+
+9
+00:00:23.819 --> 00:00:26.885
+metadata validation, version policy,
+compatibility checks,
+
+10
+00:00:26.965 --> 00:00:30.205
+and a clear decision about when an image
+is considered ready to run.
+
+11
+00:00:30.285 --> 00:00:33.351
+This course does not implement signing or
+cryptographic code.
+
+12
+00:00:33.431 --> 00:00:37.076
+Version and compatibility checks matter
+because a valid image may still be
+
+13
+00:00:37.156 --> 00:00:38.544
+inappropriate for a device.
+
+14
+00:00:38.624 --> 00:00:42.327
+Hardware revision, storage layout, feature
+set, regional configuration,
+
+15
+00:00:42.407 --> 00:00:46.398
+migration state, and dependency versions
+can all affect whether an update should
+
+16
+00:00:46.478 --> 00:00:46.941
+proceed.
+
+17
+00:00:47.021 --> 00:00:49.683
+Metadata should support those decisions
+explicitly.
+
+18
+00:00:49.763 --> 00:00:51.845
+Staging must handle power loss and resets.
+
+19
+00:00:51.925 --> 00:00:56.091
+Many devices update in environments where
+power can be interrupted or communication
+
+20
+00:00:56.171 --> 00:00:56.634
+can fail.
+
+21
+00:00:56.714 --> 00:01:00.474
+The firmware should define when data is
+written, when metadata is committed,
+
+22
+00:01:00.554 --> 00:01:02.232
+when the new image becomes active,
+
+23
+00:01:02.312 --> 00:01:04.857
+and how the device recognizes an
+incomplete update.
+
+24
+00:01:04.937 --> 00:01:06.731
+Rollback policy should be explicit.
+
+25
+00:01:06.811 --> 00:01:10.051
+Some products need the ability to return
+to a previous valid image.
+
+26
+00:01:10.131 --> 00:01:12.850
+Others may prohibit older versions for
+policy reasons.
+
+27
+00:01:12.930 --> 00:01:15.764
+Either way, the behavior should be
+documented and tested.
+
+28
+00:01:15.844 --> 00:01:19.431
+Ambiguous rollback behavior can leave the
+device in a state that is hard to
+
+29
+00:01:19.511 --> 00:01:20.032
+diagnose.
+
+30
+00:01:20.112 --> 00:01:23.236
+Recovery modes need access controls and
+operational planning.
+
+31
+00:01:23.316 --> 00:01:25.804
+A recovery flow may be essential for field
+service,
+
+32
+00:01:25.884 --> 00:01:29.876
+but it should still respect production
+policy, device identity, logging limits,
+
+33
+00:01:29.956 --> 00:01:31.171
+and support procedures.
+
+34
+00:01:31.251 --> 00:01:34.433
+Teams should define who can use recovery,
+under what conditions,
+
+35
+00:01:34.513 --> 00:01:36.017
+and what evidence is retained.
+
+36
+00:01:36.097 --> 00:01:39.742
+Update systems deserve negative tests
+before they are needed in the field.
+
+37
+00:01:39.822 --> 00:01:43.351
+Test invalid metadata, incompatible
+versions, interrupted transfer,
+
+38
+00:01:43.431 --> 00:01:46.613
+storage exhaustion, reset during commit,
+failed health checks,
+
+39
+00:01:46.693 --> 00:01:47.907
+and recovery decisions.
+
+40
+00:01:47.987 --> 00:01:50.070
+The desired outcome is predictable state,
+
+41
+00:01:50.150 --> 00:01:52.580
+not merely a successful update in the
+normal path.

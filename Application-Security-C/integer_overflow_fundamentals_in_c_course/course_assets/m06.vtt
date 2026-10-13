@@ -1,0 +1,168 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.163
+Integer values often control indexes, loop
+bounds, counts, offsets,
+
+2
+00:00:04.243 --> 00:00:06.229
+and remaining-length calculations.
+
+3
+00:00:06.309 --> 00:00:10.283
+That makes integer safety part of every
+parser, serializer, buffer walker,
+
+4
+00:00:10.363 --> 00:00:13.467
+table lookup, and loop that processes
+variable-size data.
+
+5
+00:00:13.547 --> 00:00:15.533
+The numeric value is not just a number;
+
+6
+00:00:15.613 --> 00:00:18.159
+it is a permission to move through memory
+or data.
+
+7
+00:00:18.239 --> 00:00:20.970
+Off-by-one mistakes can invalidate bounds
+checks.
+
+8
+00:00:21.050 --> 00:00:23.471
+A loop that allows an index equal to the
+length,
+
+9
+00:00:23.551 --> 00:00:25.538
+a copy that forgets terminator space,
+
+10
+00:00:25.618 --> 00:00:29.840
+or a range check that subtracts before
+verifying order can all cross the intended
+
+11
+00:00:29.920 --> 00:00:30.478
+boundary.
+
+12
+00:00:30.558 --> 00:00:34.718
+Review should look at both the check and
+the arithmetic used to reach the checked
+
+13
+00:00:34.798 --> 00:00:35.170
+value.
+
+14
+00:00:35.250 --> 00:00:37.734
+Unsigned counters deserve special
+attention.
+
+15
+00:00:37.814 --> 00:00:41.973
+Decrementing an unsigned value can wrap if
+the termination condition is wrong.
+
+16
+00:00:42.053 --> 00:00:46.212
+A remaining-length calculation can become
+large if code subtracts more than is
+
+17
+00:00:46.292 --> 00:00:46.913
+available.
+
+18
+00:00:46.993 --> 00:00:51.029
+The fact that a value is nonnegative by
+type does not mean it represents a valid
+
+19
+00:00:51.109 --> 00:00:52.102
+remaining amount.
+
+20
+00:00:52.182 --> 00:00:54.913
+Negative values, maximum values, sentinel
+values,
+
+21
+00:00:54.993 --> 00:00:59.277
+and parsed numeric fields require explicit
+handling before they become indexes,
+
+22
+00:00:59.357 --> 00:01:00.413
+counts, or offsets.
+
+23
+00:01:00.493 --> 00:01:04.466
+A parser should validate length fields
+before using them to skip, allocate,
+
+24
+00:01:04.546 --> 00:01:06.284
+copy, index, or advance a cursor.
+
+25
+00:01:06.364 --> 00:01:10.027
+The validated range should remain
+connected to the data it describes.
+
+26
+00:01:10.107 --> 00:01:13.894
+Loop invariants should make it clear that
+indexes remain within bounds.
+
+27
+00:01:13.974 --> 00:01:17.140
+A reviewer should be able to see why the
+index starts in range,
+
+28
+00:01:17.220 --> 00:01:21.441
+why each update keeps it in range, and why
+the loop stops before an invalid access.
+
+29
+00:01:21.521 --> 00:01:25.991
+If that reasoning depends on several
+scattered conversions or unchecked additions,
+
+30
+00:01:26.071 --> 00:01:27.499
+the loop is harder to trust.
+
+31
+00:01:27.579 --> 00:01:29.814
+Operationally, test the edge of the range.
+
+32
+00:01:29.894 --> 00:01:33.805
+Empty input, one element, maximum accepted
+length, one above the maximum,
+
+33
+00:01:33.885 --> 00:01:38.231
+malformed numeric fields, and early
+termination all exercise the arithmetic that
+
+34
+00:01:38.311 --> 00:01:39.801
+ordinary examples may skip.
+
+35
+00:01:39.881 --> 00:01:44.289
+Parser safety improves when boundary
+behavior is part of normal testing rather than
+
+36
+00:01:44.369 --> 00:01:45.300
+an afterthought.

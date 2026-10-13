@@ -1,0 +1,180 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.088
+Embedded devices communicate through
+network stacks, radio links,
+
+2
+00:00:04.168 --> 00:00:07.818
+serial interfaces, field buses, sensors,
+actuators, storage parts,
+
+3
+00:00:07.898 --> 00:00:09.197
+and peripheral drivers.
+
+4
+00:00:09.277 --> 00:00:13.422
+Each path can bring data into the device
+or cause the device to perform an action.
+
+5
+00:00:13.502 --> 00:00:16.533
+Communication handlers should have
+explicit contracts.
+
+6
+00:00:16.613 --> 00:00:20.572
+A handler should validate message size,
+source expectation, command type,
+
+7
+00:00:20.652 --> 00:00:23.559
+version, state, and timing assumptions
+before acting.
+
+8
+00:00:23.639 --> 00:00:26.856
+It should also define what happens on
+timeout, partial input,
+
+9
+00:00:26.936 --> 00:00:30.215
+repeated messages, unsupported values, and
+resource limits.
+
+10
+00:00:30.295 --> 00:00:33.264
+Clear contracts make handlers easier to
+test and review.
+
+11
+00:00:33.344 --> 00:00:37.675
+Peripheral inputs should not be trusted
+merely because they are local to the board.
+
+12
+00:00:37.755 --> 00:00:40.724
+A sensor can be disconnected, noisy,
+stale, out of range,
+
+13
+00:00:40.804 --> 00:00:43.216
+or inconsistent with the current device
+mode.
+
+14
+00:00:43.296 --> 00:00:45.524
+A bus device can report unexpected status.
+
+15
+00:00:45.604 --> 00:00:49.377
+A driver should normalize hardware details
+and report errors in a way the
+
+16
+00:00:49.457 --> 00:00:51.127
+application can handle safely.
+
+17
+00:00:51.207 --> 00:00:54.053
+DMA, shared buffers, RTOS tasks, interrupt
+handlers,
+
+18
+00:00:54.133 --> 00:00:57.906
+and driver boundaries require careful
+ownership and synchronization.
+
+19
+00:00:57.986 --> 00:01:00.708
+The design should state when hardware owns
+a buffer,
+
+20
+00:01:00.788 --> 00:01:03.696
+when software may read it, which task owns
+shared state,
+
+21
+00:01:03.776 --> 00:01:06.993
+and which synchronization rule protects
+concurrent access.
+
+22
+00:01:07.073 --> 00:01:10.228
+Ambiguous ownership is a reliability and
+security problem.
+
+23
+00:01:10.308 --> 00:01:14.576
+Least privilege can apply inside firmware
+even when the platform does not provide
+
+24
+00:01:14.656 --> 00:01:15.955
+full process isolation.
+
+25
+00:01:16.035 --> 00:01:19.932
+Separate roles, limit exposed commands,
+keep high-authority code small,
+
+26
+00:01:20.012 --> 00:01:22.672
+restrict direct register access to driver
+layers,
+
+27
+00:01:22.752 --> 00:01:26.093
+and avoid giving every task access to
+every resource by default.
+
+28
+00:01:26.173 --> 00:01:29.019
+Isolation choices should match platform
+capability.
+
+29
+00:01:29.099 --> 00:01:32.996
+An MPU, MMU, RTOS task boundary, hardware
+privilege mode, secure element,
+
+30
+00:01:33.076 --> 00:01:36.478
+or peripheral access rule can support the
+design when available.
+
+31
+00:01:36.558 --> 00:01:38.600
+These features are not magic switches;
+
+32
+00:01:38.680 --> 00:01:43.134
+they work best when the software
+architecture already defines roles and boundaries.
+
+33
+00:01:43.214 --> 00:01:45.874
+Review communications and peripherals
+together.
+
+34
+00:01:45.954 --> 00:01:50.222
+The most important question is not whether
+data arrived through a network or a wire
+
+35
+00:01:50.302 --> 00:01:50.983
+on the board.
+
+36
+00:01:51.063 --> 00:01:54.713
+The question is what the firmware assumes
+about that data, who owns it,
+
+37
+00:01:54.793 --> 00:01:57.700
+how it is validated, and what state
+changes it may cause.

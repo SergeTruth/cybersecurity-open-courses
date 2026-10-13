@@ -1,0 +1,155 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.077
+Hardware interfaces are where firmware
+assumptions meet the physical device and its
+
+2
+00:00:05.157 --> 00:00:05.920
+environment.
+
+3
+00:00:06.000 --> 00:00:09.623
+GPIO, UART, SPI, I2C, CAN, USB, sensors,
+actuators, storage parts,
+
+4
+00:00:09.703 --> 00:00:13.772
+radio modules, and companion chips can all
+provide data or control signals.
+
+5
+00:00:13.852 --> 00:00:18.365
+Defensive firmware treats those interfaces
+as boundaries that need validation and
+
+6
+00:00:18.445 --> 00:00:19.398
+clear ownership.
+
+7
+00:00:19.478 --> 00:00:23.928
+Peripheral data should not be blindly
+trusted just because it comes from hardware.
+
+8
+00:00:24.008 --> 00:00:26.678
+A sensor reading can be out of range,
+stale, noisy,
+
+9
+00:00:26.758 --> 00:00:29.619
+inconsistent with the current mode, or
+unavailable.
+
+10
+00:00:29.699 --> 00:00:33.322
+A bus message can have an unexpected
+length, a bad state transition,
+
+11
+00:00:33.402 --> 00:00:37.661
+an unsupported command, or a timing
+pattern the application was not expecting.
+
+12
+00:00:37.741 --> 00:00:42.064
+Drivers should separate low-level hardware
+handling from application policy.
+
+13
+00:00:42.144 --> 00:00:45.958
+A driver can normalize status, check basic
+invariants, report errors,
+
+14
+00:00:46.038 --> 00:00:47.246
+and expose a small API.
+
+15
+00:00:47.326 --> 00:00:51.966
+Application logic can then make
+higher-level decisions using validated data instead
+
+16
+00:00:52.046 --> 00:00:56.178
+of repeating fragile register or protocol
+details throughout the codebase.
+
+17
+00:00:56.258 --> 00:00:58.992
+DMA needs careful buffer ownership at a
+high level.
+
+18
+00:00:59.072 --> 00:01:01.932
+If hardware can read from or write to
+memory directly,
+
+19
+00:01:02.012 --> 00:01:05.063
+software must know when a buffer belongs
+to the hardware,
+
+20
+00:01:05.143 --> 00:01:08.576
+when it belongs to the CPU, when cache or
+alignment rules matter,
+
+21
+00:01:08.656 --> 00:01:09.991
+and what length is valid.
+
+22
+00:01:10.071 --> 00:01:13.313
+Simple happy-path tests may not expose
+ownership mistakes.
+
+23
+00:01:13.393 --> 00:01:16.381
+Actuator and control commands need strict
+validation.
+
+24
+00:01:16.461 --> 00:01:19.830
+A command path should define allowed
+modes, parameter ranges,
+
+25
+00:01:19.910 --> 00:01:22.707
+timing rules, authorization state where
+relevant,
+
+26
+00:01:22.787 --> 00:01:25.012
+and safe outcomes when validation fails.
+
+27
+00:01:25.092 --> 00:01:29.414
+The design should avoid letting malformed
+or out-of-state input drive physical
+
+28
+00:01:29.494 --> 00:01:30.066
+behavior.
+
+29
+00:01:30.146 --> 00:01:34.215
+Reviewers should ask practical questions:
+where does this data originate,
+
+30
+00:01:34.295 --> 00:01:38.109
+what range is valid, what mode must the
+device be in, who owns the buffer,
+
+31
+00:01:38.189 --> 00:01:42.575
+what happens on timeout or bus error, and
+how is unexpected device state reported?
+
+32
+00:01:42.655 --> 00:01:46.660
+Those questions make hardware-facing code
+easier to secure and maintain.

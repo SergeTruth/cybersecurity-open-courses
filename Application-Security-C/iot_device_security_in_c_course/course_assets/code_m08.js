@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Updates, Recovery, and Fleet Lifecycle",
+  "codeIntro": "Compare premature activation metadata with a staged update that is committed only after complete transfer and a successful health decision.",
+  "codeExamples": [
+    {
+      "title": "Vulnerable: activate a version before staging completes",
+      "language": "c",
+      "blurb": "An interrupted transfer returns failure but has already replaced the installed-version record, leaving durable state inconsistent with available firmware.",
+      "code": "#include <assert.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n\nstruct update_record {\n    uint32_t installed_version;\n    uint32_t staged_version;\n    bool staged_ready;\n};\n\nstatic bool stage_update(struct update_record *record, uint32_t new_version,\n                         bool authorized, size_t bytes_received,\n                         size_t expected_bytes)\n{\n    if (record == NULL || !authorized || expected_bytes == 0 ||\n        new_version <= record->installed_version) {\n        return false;\n    }\n\n    /* IMPORTANT DEFECT: activation state changes before staging is complete. */\n    record->installed_version = new_version;\n    if (bytes_received != expected_bytes) {\n        return false;\n    }\n    return true;\n}\n\nint main(void)\n{\n    struct update_record record = {7u, 0u, false};\n\n    assert(!stage_update(&record, 8u, true, 600u, 1000u));\n\n    /* TEST: an interrupted transfer incorrectly changed active metadata. */\n    assert(record.installed_version == 8u);\n    return 0;\n}\n"
+    },
+    {
+      "title": "Safer: stage completely and commit after health checks",
+      "language": "c",
+      "blurb": "Interrupted or unauthorized transfers leave installed state unchanged; a complete image becomes staged and is activated only after an explicit health result.",
+      "code": "#include <assert.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n\nstruct update_record {\n    uint32_t installed_version;\n    uint32_t staged_version;\n    bool staged_ready;\n};\n\nstatic bool stage_update(struct update_record *record, uint32_t new_version,\n                         bool authorized, size_t bytes_received,\n                         size_t expected_bytes)\n{\n    if (record == NULL || !authorized || expected_bytes == 0 ||\n        new_version <= record->installed_version ||\n        bytes_received != expected_bytes) {\n        return false;\n    }\n\n    /* IMPORTANT FIX: only a complete, authorized candidate becomes staged. */\n    record->staged_version = new_version;\n    record->staged_ready = true;\n    return true;\n}\n\nstatic bool commit_healthy_update(struct update_record *record, bool healthy)\n{\n    if (record == NULL || !record->staged_ready || !healthy) {\n        return false;\n    }\n    record->installed_version = record->staged_version;\n    record->staged_version = 0u;\n    record->staged_ready = false;\n    return true;\n}\n\nint main(void)\n{\n    struct update_record record = {7u, 0u, false};\n\n    assert(!stage_update(&record, 8u, true, 600u, 1000u));\n    assert(record.installed_version == 7u && !record.staged_ready);\n    assert(!stage_update(&record, 8u, false, 1000u, 1000u));\n    assert(stage_update(&record, 8u, true, 1000u, 1000u));\n    assert(record.installed_version == 7u && record.staged_ready);\n\n    /* TEST: failed health preserves rollback; success commits once. */\n    assert(!commit_healthy_update(&record, false));\n    assert(record.installed_version == 7u);\n    assert(commit_healthy_update(&record, true));\n    assert(record.installed_version == 8u && !record.staged_ready);\n    return 0;\n}\n"
+    }
+  ]
+};

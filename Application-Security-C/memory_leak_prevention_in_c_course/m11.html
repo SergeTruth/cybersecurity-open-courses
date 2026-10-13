@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="memory_leak_prevention_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;: &quot;A&quot;, &quot;q2&quot;: &quot;D&quot;, &quot;q3&quot;: &quot;B&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;A&quot;, &quot;q6&quot;: &quot;C&quot;, &quot;q7&quot;: &quot;D&quot;, &quot;q8&quot;: &quot;B&quot;, &quot;q9&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;D&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. What does a memory leak mean in C?</legend>
+                      <label><input type="radio" name="q1" value="A" required> Allocated memory remains reserved but the program can no longer release it correctly.</label>
+                      <label><input type="radio" name="q1" value="B"> Any allocation still reserved at function return is a leak, even when ownership was transferred to the caller.</label>
+                      <label><input type="radio" name="q1" value="C"> Memory is not leaked while the process retains enough virtual address space, regardless of whether references were lost.</label>
+                      <label><input type="radio" name="q1" value="D"> A leak means an allocator returned more bytes than requested and the extra bytes cannot be addressed.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>2. Why is a pointer value not the same as an ownership contract?</legend>
+                      <label><input type="radio" name="q2" value="A" required> The pointer type indicates whether the caller or callee owns the allocation.</label>
+                      <label><input type="radio" name="q2" value="B"> The function that most recently assigned the pointer becomes responsible for releasing it.</label>
+                      <label><input type="radio" name="q2" value="C"> Setting a pointer to null documents ownership well enough for callers to infer cleanup responsibility.</label>
+                      <label><input type="radio" name="q2" value="D"> A pointer is an address; ownership and cleanup responsibility come from the API contract and program design.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>3. Why can overwriting the last pointer to an allocation leak memory?</legend>
+                      <label><input type="radio" name="q3" value="A" required> The allocator tracks the old object and frees it automatically when its pointer variable is reassigned.</label>
+                      <label><input type="radio" name="q3" value="B"> The program loses the handle needed to release the allocation.</label>
+                      <label><input type="radio" name="q3" value="C"> The old object remains recoverable through the pointer value stored in allocator metadata.</label>
+                      <label><input type="radio" name="q3" value="D"> Reassignment leaks only when the replacement points to a larger allocation than the original.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>4. Why do early returns and error paths commonly cause leaks?</legend>
+                      <label><input type="radio" name="q4" value="A" required> Early-return leaks are avoided when every pointer is initialized to null before the first allocation.</label>
+                      <label><input type="radio" name="q4" value="B"> The operating system releases memory on process exit, so cleanup on error paths is necessary only for long-running services.</label>
+                      <label><input type="radio" name="q4" value="C"> They can bypass cleanup unless the function routes failures through deliberate release logic.</label>
+                      <label><input type="radio" name="q4" value="D"> A function may skip cleanup after reporting failure because the caller can release allocations it never received.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>5. What is the difference between owning and borrowed pointers?</legend>
+                      <label><input type="radio" name="q5" value="A" required> An owning pointer carries cleanup responsibility; a borrowed pointer provides temporary access without cleanup responsibility.</label>
+                      <label><input type="radio" name="q5" value="B"> A borrowed pointer becomes owning when it is stored in a local variable for longer than one function call.</label>
+                      <label><input type="radio" name="q5" value="C"> A const pointer is always borrowed, while a modifiable pointer is always owning.</label>
+                      <label><input type="radio" name="q5" value="D"> Ownership is shared automatically when two variables contain the same address, so either holder may free it.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>6. Why do containers need clear ownership rules for elements?</legend>
+                      <label><input type="radio" name="q6" value="A" required> A container should always free every pointer it stores, even when the insertion API accepts borrowed elements.</label>
+                      <label><input type="radio" name="q6" value="B"> Callers can determine element ownership from whether the container itself was heap-allocated.</label>
+                      <label><input type="radio" name="q6" value="C"> Callers must know whether the container releases elements or only stores references.</label>
+                      <label><input type="radio" name="q6" value="D"> Removing an element transfers ownership only if the returned pointer is non-null; replacement never needs a separate rule.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>7. Why do nested allocations need dedicated cleanup logic?</legend>
+                      <label><input type="radio" name="q7" value="A" required> Freeing the outer structure recursively releases every pointer-valued field on common C runtimes.</label>
+                      <label><input type="radio" name="q7" value="B"> A destructor only needs to handle fully initialized objects because construction failure owns no usable object.</label>
+                      <label><input type="radio" name="q7" value="C"> Nested fields may be freed in any order without tracking which ones were initialized or borrowed.</label>
+                      <label><input type="radio" name="q7" value="D"> A structure can own multiple fields that each require release, including partially initialized cases.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>8. Why should realloc usually be assigned to a temporary pointer first?</legend>
+                      <label><input type="radio" name="q8" value="A" required> Direct assignment is preferable because a failed realloc sets the original object to a safely freeable state.</label>
+                      <label><input type="radio" name="q8" value="B"> If resize fails, the original allocation remains valid and should not be lost.</label>
+                      <label><input type="radio" name="q8" value="C"> A temporary pointer is useful only when shrinking, since growth never moves an existing allocation.</label>
+                      <label><input type="radio" name="q8" value="D"> On failure, update capacity to the requested value so a later retry knows the intended size.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>9. Why should count and capacity be updated only after successful resizing?</legend>
+                      <label><input type="radio" name="q9" value="A" required> A failed resize should leave the old object state accurate and usable according to the contract.</label>
+                      <label><input type="radio" name="q9" value="B"> Update count first and capacity after the call so observers can distinguish an in-progress resize.</label>
+                      <label><input type="radio" name="q9" value="C"> A failed resize invalidates the old buffer contents even though the original pointer remains non-null.</label>
+                      <label><input type="radio" name="q9" value="D"> Capacity may be updated before success when every later access also checks the allocator error code.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>10. How do leak checkers, static analysis, tests, and review support prevention?</legend>
+                      <label><input type="radio" name="q10" value="A" required> A leak checker proves every retained allocation is intentional when the process exits without a report.</label>
+                      <label><input type="radio" name="q10" value="B"> Static analysis can infer ownership intent, so APIs do not need to document transfer and cleanup rules.</label>
+                      <label><input type="radio" name="q10" value="C"> Tooling should be run only after integration because unit-level allocation failures are too artificial to be useful.</label>
+                      <label><input type="radio" name="q10" value="D"> They help find unreleased allocations and missed cleanup paths while clear ownership design remains necessary.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

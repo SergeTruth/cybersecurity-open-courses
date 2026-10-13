@@ -1,0 +1,122 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.602
+Every heap allocation needs a clear owner.
+
+2
+00:00:02.682 --> 00:00:06.243
+The owner is the code responsible for
+eventually releasing the object or
+
+3
+00:00:06.323 --> 00:00:08.133
+transferring that responsibility.
+
+4
+00:00:08.213 --> 00:00:10.490
+Without an owner, cleanup becomes
+guesswork.
+
+5
+00:00:10.570 --> 00:00:14.073
+With multiple informal owners, release can
+happen too early, too late,
+
+6
+00:00:14.153 --> 00:00:15.028
+or more than once.
+
+7
+00:00:15.108 --> 00:00:17.269
+C APIs often pass pointers in several
+roles.
+
+8
+00:00:17.349 --> 00:00:21.085
+A caller-owned pointer may be read or
+modified without changing ownership.
+
+9
+00:00:21.165 --> 00:00:23.909
+A callee-owned result may need to be freed
+by the caller.
+
+10
+00:00:23.989 --> 00:00:26.441
+A borrowed pointer may be valid only
+during a call.
+
+11
+00:00:26.521 --> 00:00:29.323
+An output parameter may receive newly
+allocated memory.
+
+12
+00:00:29.403 --> 00:00:31.038
+Each role needs a clear contract.
+
+13
+00:00:31.118 --> 00:00:33.979
+Ownership transfer should be explicit at
+API boundaries.
+
+14
+00:00:34.059 --> 00:00:36.219
+Function names, comments, documentation,
+
+15
+00:00:36.299 --> 00:00:40.327
+and parameter conventions should make it
+obvious whether the caller must free the
+
+16
+00:00:40.407 --> 00:00:43.093
+result, whether the callee consumes an
+input pointer,
+
+17
+00:00:43.173 --> 00:00:45.099
+or whether a pointer remains borrowed.
+
+18
+00:00:45.179 --> 00:00:47.573
+Hidden ownership rules are difficult to
+review.
+
+19
+00:00:47.653 --> 00:00:51.506
+Returned heap objects and output
+parameters are common sources of confusion.
+
+20
+00:00:51.586 --> 00:00:55.440
+A function that fills an output pointer
+should define what happens on success,
+
+21
+00:00:55.520 --> 00:00:57.446
+failure, and partial initialization.
+
+22
+00:00:57.526 --> 00:01:01.613
+It should also define whether the output
+is unchanged on failure or whether cleanup
+
+23
+00:01:01.693 --> 00:01:02.335
+is required.
+
+24
+00:01:02.415 --> 00:01:06.560
+Reviewers should be able to trace each
+allocated object from allocation to release.
+
+25
+00:01:06.640 --> 00:01:10.377
+If that trace requires remembering private
+conventions across many files,
+
+26
+00:01:10.457 --> 00:01:12.500
+the API needs a clearer ownership design.

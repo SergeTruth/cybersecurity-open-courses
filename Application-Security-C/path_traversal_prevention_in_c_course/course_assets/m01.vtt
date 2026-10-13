@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.901
+Path traversal occurs when untrusted input
+influences file system access outside the
+
+2
+00:00:04.981 --> 00:00:07.151
+location the application intended to use.
+
+3
+00:00:07.231 --> 00:00:10.969
+In C, that usually means some path-like
+value eventually reaches an open,
+
+4
+00:00:11.049 --> 00:00:13.220
+read, write, rename, delete, extraction,
+
+5
+00:00:13.300 --> 00:00:17.279
+or similar file operation without enough
+control over where that operation is
+
+6
+00:00:17.359 --> 00:00:18.203
+allowed to land.
+
+7
+00:00:18.283 --> 00:00:21.900
+The important point is that path traversal
+is not only a string problem.
+
+8
+00:00:21.980 --> 00:00:23.668
+It is an access boundary problem.
+
+9
+00:00:23.748 --> 00:00:27.908
+A program may have a perfectly valid
+string that still points outside the approved
+
+10
+00:00:27.988 --> 00:00:28.712
+storage area.
+
+11
+00:00:28.792 --> 00:00:33.012
+It may also have a string that looked safe
+earlier but resolves differently because
+
+12
+00:00:33.092 --> 00:00:35.986
+the file system changed, the working
+directory changed,
+
+13
+00:00:36.066 --> 00:00:39.140
+or platform rules interpreted the text in
+an unexpected way.
+
+14
+00:00:39.220 --> 00:00:42.596
+The impact can be serious even when no
+network service is involved.
+
+15
+00:00:42.676 --> 00:00:45.992
+A traversal defect can expose files the
+program should not serve,
+
+16
+00:00:46.072 --> 00:00:49.629
+overwrite data the program should not
+modify, damage configuration,
+
+17
+00:00:49.709 --> 00:00:53.809
+confuse logs or reports, or break
+separation between users, tenants, projects,
+
+18
+00:00:53.889 --> 00:00:54.612
+or workflows.
+
+19
+00:00:54.692 --> 00:00:58.611
+The application may believe it is
+operating inside one managed area while the
+
+20
+00:00:58.691 --> 00:01:01.284
+operating system is asked to touch
+something else.
+
+21
+00:01:01.364 --> 00:01:03.775
+Many defects begin with ordinary
+assumptions.
+
+22
+00:01:03.855 --> 00:01:08.075
+A developer assumes an input is only a
+filename because the user interface labels it
+
+23
+00:01:08.155 --> 00:01:08.638
+that way.
+
+24
+00:01:08.718 --> 00:01:11.672
+A helper assumes the current working
+directory is stable.
+
+25
+00:01:11.752 --> 00:01:14.766
+A service assumes a caller already checked
+authorization.
+
+26
+00:01:14.846 --> 00:01:18.946
+A parser assumes metadata names are
+trustworthy because they came from a file the
+
+27
+00:01:19.026 --> 00:01:20.232
+application accepted.
+
+28
+00:01:20.312 --> 00:01:23.688
+These assumptions are where path design
+needs to become explicit.
+
+29
+00:01:23.768 --> 00:01:27.807
+Prevention starts by separating trusted
+storage policy from untrusted names.
+
+30
+00:01:27.887 --> 00:01:31.987
+The application decides which roots are
+approved, which workflows may use them,
+
+31
+00:01:32.067 --> 00:01:35.081
+and what kind of relative names are
+acceptable inside them.
+
+32
+00:01:35.161 --> 00:01:37.331
+User input can select an allowed resource,
+
+33
+00:01:37.411 --> 00:01:39.883
+but it should not redefine the storage
+boundary.
+
+34
+00:01:39.963 --> 00:01:43.460
+That distinction is the foundation for
+traversal-resistant C code.

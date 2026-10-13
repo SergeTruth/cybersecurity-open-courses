@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "What a Memory Leak Means",
+  "graphicAlt": "An owned heap allocation retains a pointer and release path, while an orphaned allocation remains reserved after its cleanup handle is lost. Repeated losses accumulate.",
+  "narration": "A memory leak occurs when allocated memory remains reserved but the program can no longer release it correctly. In C, this most often means dynamic memory was allocated and the last usable ownership path to that allocation was lost, skipped, or never defined. The memory may still exist in the process, but the program has no reliable way to return it.\n\nLeaks are not always immediate crashes. A small allocation missed once may be hard to notice. The same missed cleanup repeated in a loop, request handler, parser, batch job, service thread, or library call can gradually consume memory until reliability suffers. That slow accumulation is what makes leaks easy to underestimate.\n\nLost heap memory can reduce reliability, availability, and performance. A process with growing memory use can slow down, trigger allocator pressure, force restarts, fail under workload, or interfere with other software on the same system. In constrained environments, even small recurring leaks can matter.\n\nLong-running programs, embedded systems, daemons, services, plugins, and libraries are especially sensitive to leaks because they may not get a clean process restart after each unit of work. A command-line tool that exits immediately may hide sloppy cleanup, while a service that runs for months cannot rely on process exit as its normal cleanup strategy.\n\nLeak prevention starts by treating ownership and cleanup as part of design, not as an afterthought. Every allocation should have an intended owner, an expected lifetime, and a release path. The safer habit is to make cleanup visible when the code is written, rather than hoping a later review finds every missing release.",
+  "narrationPoints": [
+    "In C, this most often means dynamic memory was allocated and the last usable ownership path to that allocation was lost, skipped.",
+    "The same missed cleanup repeated in a loop, request handler, parser, batch job, service thread.",
+    "A process with growing memory use can slow down, trigger allocator pressure, force restarts, fail under workload.",
+    "A command-line tool that exits immediately may hide sloppy cleanup.",
+    "Leak prevention starts by treating ownership and cleanup as part of design, not as an afterthought."
+  ]
+};

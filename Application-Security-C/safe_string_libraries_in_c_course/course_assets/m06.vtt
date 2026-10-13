@@ -1,0 +1,142 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.246
+String construction often combines
+formatting, appending, allocation,
+
+2
+00:00:04.326 --> 00:00:05.158
+and validation.
+
+3
+00:00:05.238 --> 00:00:07.200
+That makes it easy to hide assumptions.
+
+4
+00:00:07.280 --> 00:00:10.848
+A format string should be a trusted
+template controlled by the program.
+
+5
+00:00:10.928 --> 00:00:12.949
+Untrusted text should be passed as data,
+
+6
+00:00:13.029 --> 00:00:16.656
+not used as the format that tells the
+library how to interpret arguments.
+
+7
+00:00:16.736 --> 00:00:19.412
+Capacity-aware formatted output should be
+checked.
+
+8
+00:00:19.492 --> 00:00:22.881
+The result may indicate failure,
+truncation, or the required size.
+
+9
+00:00:22.961 --> 00:00:26.766
+If the formatted string becomes a path,
+configuration key, protocol field,
+
+10
+00:00:26.846 --> 00:00:30.117
+log line, or command argument for an
+approved process interface,
+
+11
+00:00:30.197 --> 00:00:31.980
+partial output can change meaning.
+
+12
+00:00:32.060 --> 00:00:35.093
+The code should decide whether to retry
+with a larger buffer,
+
+13
+00:00:35.173 --> 00:00:37.432
+reject the operation, or use a safe
+fallback.
+
+14
+00:00:37.512 --> 00:00:41.020
+Builder-style abstractions can make
+complex construction cleaner.
+
+15
+00:00:41.100 --> 00:00:44.727
+A good builder reports errors clearly,
+tracks length, owns its storage,
+
+16
+00:00:44.807 --> 00:00:46.591
+and has predictable cleanup rules.
+
+17
+00:00:46.671 --> 00:00:50.892
+It should also expose whether the final
+string is complete and terminated according
+
+18
+00:00:50.972 --> 00:00:52.221
+to the library contract.
+
+19
+00:00:52.301 --> 00:00:54.858
+Append operations need length and capacity
+rules.
+
+20
+00:00:54.938 --> 00:00:58.029
+Appending a C string is different from
+appending a byte range.
+
+21
+00:00:58.109 --> 00:01:02.093
+Appending formatted text is different from
+appending already validated text.
+
+22
+00:01:02.173 --> 00:01:06.157
+The API should make those differences
+visible so the caller can choose the right
+
+23
+00:01:06.237 --> 00:01:06.831
+operation.
+
+24
+00:01:06.911 --> 00:01:09.349
+Constructed strings still require
+validation.
+
+25
+00:01:09.429 --> 00:01:12.343
+A path assembled safely is not
+automatically authorized.
+
+26
+00:01:12.423 --> 00:01:15.931
+A message built without truncation is not
+automatically meaningful.
+
+27
+00:01:16.011 --> 00:01:19.875
+A formatted value still needs the
+application rules for allowed characters,
+
+28
+00:01:19.955 --> 00:01:21.561
+length, encoding, and purpose.
+
+29
+00:01:21.641 --> 00:01:24.495
+Safer construction helps maintain the
+representation;
+
+30
+00:01:24.575 --> 00:01:26.180
+it does not replace validation.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Validating File Names Instead of Trusting Paths",
+  "graphicAlt": "Resource identifiers and filenames must match explicit format, length, character, and extension rules before path construction; unsupported forms are rejected, including metadata-derived names.",
+  "narration": "A strong pattern is to accept constrained file names or resource identifiers instead of raw paths. If a workflow only needs a report identifier, an image key, or a simple export name, the interface should ask for that smaller value. The application can then map it into an approved root using rules it controls.\n\nAllowlisting is usually clearer than trying to recognize every dangerous string. Define the characters, length, extension, and naming format the workflow actually needs. Reject values that are empty, too long, ambiguous, absolute, contain unexpected separators, use platform-reserved names, or do not fit the supported format. The specific policy may vary by platform and product, but it should be explicit.\n\nMetadata-derived names deserve the same treatment as direct user input. Uploaded filenames, archive entry names, document titles, exported labels, and names read from other files can all carry external influence. They may be useful as display labels, but they should not be trusted as destinations without validation.\n\nValidation should happen before path construction and before the file operation. That ordering matters because later code should deal with a resource name that has already been reduced to the safe shape the workflow supports. If path construction accepts arbitrary strings and then tries to repair them afterward, the design becomes harder to reason about.\n\nThe goal is not to recognize every possible bad path. The goal is to accept only values that are clearly part of the intended workflow. That shift makes the implementation simpler, makes test cases more meaningful, and gives reviewers a concrete rule to check.",
+  "narrationPoints": [
+    "A strong pattern is to accept constrained file names or resource identifiers instead of raw paths.",
+    "Define the characters, length, extension, and naming format the workflow actually needs.",
+    "Metadata-derived names deserve the same treatment as direct user input.",
+    "Validation should happen before path construction and before the file operation.",
+    "If path construction accepts arbitrary strings and then tries to repair them afterward, the design becomes harder to reason about."
+  ]
+};

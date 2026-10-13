@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.252
+Preventing path traversal in C depends on
+explicit file access policy,
+
+2
+00:00:04.332 --> 00:00:06.208
+not clever string filtering alone.
+
+3
+00:00:06.288 --> 00:00:09.164
+The application should know which roots
+are approved,
+
+4
+00:00:09.244 --> 00:00:12.309
+which workflows may use them, which names
+are acceptable,
+
+5
+00:00:12.389 --> 00:00:14.452
+and which file operations are allowed.
+
+6
+00:00:14.532 --> 00:00:17.909
+Once that policy is clear, the code can
+enforce it consistently.
+
+7
+00:00:17.989 --> 00:00:21.991
+The strongest basic pattern is trusted
+root plus constrained name plus safe
+
+8
+00:00:22.071 --> 00:00:22.884
+construction.
+
+9
+00:00:22.964 --> 00:00:26.403
+The root comes from trusted configuration
+or application state.
+
+10
+00:00:26.483 --> 00:00:30.110
+The untrusted input is reduced to a safe
+relative name or identifier.
+
+11
+00:00:30.190 --> 00:00:34.255
+The path is built with a reviewed helper,
+resolved or checked as appropriate,
+
+12
+00:00:34.335 --> 00:00:38.837
+and confirmed to remain inside the
+approved area before the file operation proceeds.
+
+13
+00:00:38.917 --> 00:00:42.794
+External filenames, archive entries,
+metadata names, uploaded labels,
+
+14
+00:00:42.874 --> 00:00:46.939
+generated report parts, and
+database-derived names should all be treated as
+
+15
+00:00:47.019 --> 00:00:49.583
+untrusted until they match the workflow's
+rule.
+
+16
+00:00:49.663 --> 00:00:53.790
+A value does not become safe because it
+came through another file or because the
+
+17
+00:00:53.870 --> 00:00:55.683
+application generated part of it.
+
+18
+00:00:55.763 --> 00:00:59.078
+Each path component needs a clear source
+and validation story.
+
+19
+00:00:59.158 --> 00:01:01.972
+Path checks should be combined with least
+privilege,
+
+20
+00:01:02.052 --> 00:01:06.179
+safe open behavior, permissions,
+race-aware workflows, and narrow cleanup.
+
+21
+00:01:06.259 --> 00:01:09.323
+These layers help when one part of the
+design is imperfect.
+
+22
+00:01:09.403 --> 00:01:13.655
+They also make the file boundary easier to
+reason about because the application,
+
+23
+00:01:13.735 --> 00:01:17.862
+the operating system, and the directory
+layout all reinforce the same intent.
+
+24
+00:01:17.942 --> 00:01:22.070
+Finally, keep the prevention logic simple,
+centralized, and easy to inspect.
+
+25
+00:01:22.150 --> 00:01:23.963
+Tests should cover failure cases.
+
+26
+00:01:24.043 --> 00:01:27.045
+Static analysis and warnings should be
+taken seriously.
+
+27
+00:01:27.125 --> 00:01:30.939
+Reviews should trace every user-influenced
+path into file operations.
+
+28
+00:01:31.019 --> 00:01:33.145
+Traversal-resistant code is not magic;
+
+29
+00:01:33.225 --> 00:01:37.540
+it is disciplined boundary design applied
+every time a path meets the file system.

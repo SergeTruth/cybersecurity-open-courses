@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Directories, Shared Locations, and Cleanup",
+  "graphicAlt": "A managed directory boundary governs create, rename and remove operations, with cleanup limited to an owned file inside the boundary.",
+  "narration": "Directory permissions are part of file permission security. A file's own permissions are only part of the picture. Directory access can affect whether a file can be found, created, removed, renamed, or replaced. In some environments, directory search permission can matter even when individual file permissions look restrictive.\n\nShared locations require careful design. Upload directories, export folders, cache directories, temporary directories, and shared service areas may be touched by multiple processes or identities. The application needs clear rules for naming, ownership, permissions, and cleanup so files do not accidentally cross trust boundaries.\n\nA directory that permits broad creation or replacement can weaken the protection of files inside it. If another process can create names, replace entries, or remove files in a shared location, the application must account for that in its workflow. File permissions and directory permissions should be designed together.\n\nCleanup routines deserve the same caution as creation routines. Cleanup should delete or replace only files inside the intended managed area and only files the workflow owns. Vague paths, broad matching, unchecked names, or assumptions about the current directory can turn cleanup into a reliability and security problem.\n\nGood directory design shapes what the process and other users can do. It gives each workflow an appropriate place to operate, limits unnecessary access, and makes permission review practical. Instead of relying on every call site to remember every rule, the directory layout should embody part of the policy.",
+  "narrationPoints": [
+    "In some environments, directory search permission can matter even when individual file permissions look restrictive.",
+    "The application needs clear rules for naming, ownership, permissions, and cleanup so files do not accidentally cross trust boundaries.",
+    "File permissions and directory permissions should be designed together.",
+    "Cleanup should delete or replace only files inside the intended managed area and only files the workflow owns.",
+    "Good directory design shapes what the process and other users can do."
+  ]
+};

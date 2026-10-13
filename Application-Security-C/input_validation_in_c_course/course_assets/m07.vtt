@@ -1,0 +1,125 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.441
+Structured input appears in records,
+delimited fields, key-value files,
+
+2
+00:00:04.521 --> 00:00:07.461
+headers, simple messages, and
+configuration formats.
+
+3
+00:00:07.541 --> 00:00:11.356
+The program should parse structure before
+trusting individual fields.
+
+4
+00:00:11.436 --> 00:00:15.315
+A value is not meaningful until the parser
+knows which field it belongs to,
+
+5
+00:00:15.395 --> 00:00:19.648
+whether the record is complete, and
+whether the surrounding structure is valid.
+
+6
+00:00:19.728 --> 00:00:23.043
+Required and optional fields should be
+validated separately.
+
+7
+00:00:23.123 --> 00:00:25.375
+A required field must be present and
+valid.
+
+8
+00:00:25.455 --> 00:00:29.146
+An optional field may be absent, but if it
+appears, it still needs type,
+
+9
+00:00:29.226 --> 00:00:31.040
+length, range, and format checks.
+
+10
+00:00:31.120 --> 00:00:34.560
+Defaults should be explicit and should not
+hide malformed input.
+
+11
+00:00:34.640 --> 00:00:37.080
+Duplicate fields need intentional
+handling.
+
+12
+00:00:37.160 --> 00:00:39.287
+Some formats may allow repeated fields,
+
+13
+00:00:39.367 --> 00:00:43.870
+some may treat the last value as
+authoritative, and others should reject duplicates.
+
+14
+00:00:43.950 --> 00:00:48.454
+The program should not accidentally accept
+whichever value happens to be parsed last
+
+15
+00:00:48.534 --> 00:00:50.348
+if that is not part of the contract.
+
+16
+00:00:50.428 --> 00:00:53.618
+Field-level validation should match each
+field's meaning.
+
+17
+00:00:53.698 --> 00:00:57.014
+A name, count, size, flag, path segment,
+identifier, timeout,
+
+18
+00:00:57.094 --> 00:01:00.346
+and message type are different even if
+they all arrive as text.
+
+19
+00:01:00.426 --> 00:01:04.805
+Cross-field consistency may also matter
+when one field controls the length, type,
+
+20
+00:01:04.885 --> 00:01:06.386
+or allowed range of another.
+
+21
+00:01:06.466 --> 00:01:08.843
+Safe rejection is part of parser
+discipline.
+
+22
+00:01:08.923 --> 00:01:12.364
+If a record is incomplete, ambiguous,
+oversized, inconsistent,
+
+23
+00:01:12.444 --> 00:01:14.195
+or outside the accepted grammar,
+
+24
+00:01:14.275 --> 00:01:18.403
+the parser should return a predictable
+error and avoid partial state updates.
+
+25
+00:01:18.483 --> 00:01:23.050
+Deeper code should receive either a
+validated representation or no representation at
+
+26
+00:01:23.130 --> 00:01:23.380
+all.

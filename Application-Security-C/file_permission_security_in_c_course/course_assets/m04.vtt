@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.014
+Least privilege applies to every file
+operation.
+
+2
+00:00:03.094 --> 00:00:06.926
+A function that only needs to read a
+configuration file should not open it for
+
+3
+00:00:07.006 --> 00:00:07.784
+modification.
+
+4
+00:00:07.864 --> 00:00:12.055
+A process that only needs to write reports
+should not have broad access to unrelated
+
+5
+00:00:12.135 --> 00:00:13.152
+application state.
+
+6
+00:00:13.232 --> 00:00:17.543
+Narrow access reduces accidental damage
+and limits what can happen when another part
+
+7
+00:00:17.623 --> 00:00:19.539
+of the program behaves unexpectedly.
+
+8
+00:00:19.619 --> 00:00:22.672
+Read-only access is safer when no
+modification is required.
+
+9
+00:00:22.752 --> 00:00:26.763
+It communicates intent to reviewers,
+reduces the chance of accidental writes,
+
+10
+00:00:26.843 --> 00:00:30.075
+and can allow the operating system to
+enforce part of the design.
+
+11
+00:00:30.155 --> 00:00:33.628
+Similarly, append behavior, overwrite
+behavior, create behavior,
+
+12
+00:00:33.708 --> 00:00:37.360
+and truncate behavior should be chosen
+because they match the workflow,
+
+13
+00:00:37.440 --> 00:00:40.612
+not because a convenient mode happened to
+work during testing.
+
+14
+00:00:40.692 --> 00:00:43.087
+Execute permission deserves special
+caution.
+
+15
+00:00:43.167 --> 00:00:45.502
+Ordinary data files, logs, reports,
+uploads,
+
+16
+00:00:45.582 --> 00:00:48.755
+and caches should not receive execute
+permission as a default.
+
+17
+00:00:48.835 --> 00:00:50.631
+When files are meant to be executed,
+
+18
+00:00:50.711 --> 00:00:54.303
+that is a distinct workflow with its own
+trust and review requirements.
+
+19
+00:00:54.383 --> 00:00:57.316
+Most application-created data should not
+be executable.
+
+20
+00:00:57.396 --> 00:01:00.150
+Least privilege also applies to the
+process identity.
+
+21
+00:01:00.230 --> 00:01:04.361
+Services should run with file system
+privileges limited to the storage areas they
+
+22
+00:01:04.441 --> 00:01:05.219
+actually need.
+
+23
+00:01:05.299 --> 00:01:08.412
+If the service only needs a work directory
+and a log directory,
+
+24
+00:01:08.492 --> 00:01:11.186
+it should not be able to write broadly
+across the host.
+
+25
+00:01:11.266 --> 00:01:13.361
+Directory design, account permissions,
+
+26
+00:01:13.441 --> 00:01:16.016
+and application code should reinforce each
+other.
+
+27
+00:01:16.096 --> 00:01:20.167
+The practical value of least privilege is
+that it reduces the impact of mistakes.
+
+28
+00:01:20.247 --> 00:01:23.539
+If validation, parsing, path handling, or
+business logic fails,
+
+29
+00:01:23.619 --> 00:01:27.451
+restrictive file access can keep the
+failure from reaching unrelated data.
+
+30
+00:01:27.531 --> 00:01:30.165
+Permissions are not a replacement for
+correct code,
+
+31
+00:01:30.245 --> 00:01:32.340
+but they are an important layer around it.

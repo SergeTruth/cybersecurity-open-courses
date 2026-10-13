@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Checking and Changing Permissions Safely",
+  "graphicAlt": "A stale path-check sequence is contrasted with checking and acting through a stable reference to the same file, followed by result verification.",
+  "narration": "Metadata checks can help a program confirm facts such as file type, owner, group, permissions, size, or timestamps before a sensitive operation. These checks are useful when the workflow depends on properties of the file, but they should be paired with careful design. A metadata check is not automatically a permanent guarantee.\n\nFile systems can change. A program may check a path and then later open, modify, or delete something at that path. If another process can change the file or directory in between, the earlier check may be stale. Sensitive workflows should reduce the gap between check and use and prefer stable references where the platform offers them.\n\nChanging permissions should also be intentional. The program should know why the change is needed, what permission state is expected afterward, and what to do if the change fails. Silent permission-change failures are dangerous because later code may proceed as if the file is protected when it is not.\n\nWhere the platform supports it, changing permissions through a stable file reference can be safer than reasoning only about a path string. The exact mechanism is platform-specific, but the design goal is consistent: act on the object you mean to act on, and avoid assumptions that a path still names the same object later.\n\nPermission management should fail safely. If metadata does not match expectations, if a permission change fails, or if the program cannot confirm a security-sensitive property, it should stop the sensitive workflow or fall back to a clearly safe behavior. The code should not continue with a vague warning while treating the file as trusted.",
+  "narrationPoints": [
+    "Metadata checks can help a program confirm facts such as file type, owner, group, permissions, size.",
+    "If another process can change the file or directory in between, the earlier check may be stale.",
+    "The program should know why the change is needed, what permission state is expected afterward, and what to do if the change fails.",
+    "Where the platform supports it, changing permissions through a stable file reference can be safer than reasoning only about a path string.",
+    "The code should not continue with a vague warning while treating the file as trusted."
+  ]
+};

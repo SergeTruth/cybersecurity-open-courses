@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Bounded Copying and Concatenation APIs",
+  "graphicAlt": "Bounded append considers existing content, remaining capacity, the suffix, and terminator space, then checks whether output is complete or partial and applies an explicit application policy.",
+  "narration": "Bounded copying and concatenation APIs are designed to make buffer limits visible, but they still depend on accurate information. The destination capacity must describe the actual writable object. The source must meet the API's input rules. The caller must know whether the result was complete, truncated, or rejected.\n\nConcatenation adds another requirement: the current destination length matters. A buffer that has enough total capacity for one string may not have enough remaining capacity for an append. If the existing destination is not a valid string, an append-style API may start from an invalid state.\n\nTerminator space is part of capacity planning. A copied or concatenated C string usually needs storage for the content plus the null terminator. The code should make it obvious whether the capacity includes that terminator and what happens when there is no room for the complete result.\n\nTruncation semantics vary across APIs and libraries. In some contexts, truncated display text may be acceptable. In configuration values, identifiers, file paths, protocol fields, or authorization-related labels, truncation may change meaning and should cause rejection or recovery. The application, not the library name, decides whether a partial result is safe to use.\n\nChecked results are non-negotiable. Bounded APIs often communicate required length, bytes copied, status, or truncation. Ignoring that result can make the code look safer while still using incomplete data. Reviewers should ask what the code does when the output did not fit.",
+  "narrationPoints": [
+    "Bounded copying and concatenation APIs are designed to make buffer limits visible, but they still depend on accurate information.",
+    "A buffer that has enough total capacity for one string may not have enough remaining capacity for an append.",
+    "The code should make it obvious whether the capacity includes that terminator and what happens.",
+    "The application, not the library name, decides whether a partial result is safe to use.",
+    "Bounded APIs often communicate required length, bytes copied, status, or truncation."
+  ]
+};

@@ -1,0 +1,187 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.808
+A typical IoT device is a system of
+systems.
+
+2
+00:00:02.888 --> 00:00:05.708
+It may include a bootloader, application
+firmware,
+
+3
+00:00:05.788 --> 00:00:09.827
+an RTOS or bare-metal runtime, drivers,
+interrupts, sensors, actuators,
+
+4
+00:00:09.907 --> 00:00:13.561
+local radios, wired interfaces, storage,
+configuration records,
+
+5
+00:00:13.641 --> 00:00:17.872
+identity material, mobile application
+workflows, and cloud communication.
+
+6
+00:00:17.952 --> 00:00:21.670
+Security review starts by understanding
+how those pieces interact.
+
+7
+00:00:21.750 --> 00:00:25.019
+Bootloaders and startup code establish
+early assumptions.
+
+8
+00:00:25.099 --> 00:00:27.984
+Application firmware implements product
+behavior.
+
+9
+00:00:28.064 --> 00:00:31.141
+Drivers translate hardware status into
+software state.
+
+10
+00:00:31.221 --> 00:00:34.811
+Sensors and actuators connect the software
+to the physical world.
+
+11
+00:00:34.891 --> 00:00:38.801
+Communication components connect the
+device to local users, gateways,
+
+12
+00:00:38.881 --> 00:00:40.676
+mobile apps, and cloud services.
+
+13
+00:00:40.756 --> 00:00:43.064
+Each area has a different authority level.
+
+14
+00:00:43.144 --> 00:00:45.708
+A trust boundary is a point where data,
+control,
+
+15
+00:00:45.788 --> 00:00:48.737
+or authority crosses between different
+assumptions.
+
+16
+00:00:48.817 --> 00:00:50.997
+Data may move from a sensor into a driver,
+
+17
+00:00:51.077 --> 00:00:53.320
+from a local radio into command handling,
+
+18
+00:00:53.400 --> 00:00:55.708
+from a cloud response into configuration,
+
+19
+00:00:55.788 --> 00:00:58.032
+from stored state into startup behavior,
+
+20
+00:00:58.112 --> 00:01:00.484
+or from a factory tool into device
+identity.
+
+21
+00:01:00.564 --> 00:01:03.512
+These crossings need validation and clear
+ownership.
+
+22
+00:01:03.592 --> 00:01:07.310
+Stored configuration can change device
+behavior as much as code can.
+
+23
+00:01:07.390 --> 00:01:11.429
+Feature flags, calibration records,
+endpoint addresses, certificates,
+
+24
+00:01:11.509 --> 00:01:13.176
+keys, counters, update state,
+
+25
+00:01:13.256 --> 00:01:17.038
+and recovery markers should be treated as
+security-relevant inputs.
+
+26
+00:01:17.118 --> 00:01:20.772
+Reviewers should ask where each value
+comes from, who may change it,
+
+27
+00:01:20.852 --> 00:01:22.711
+and how it is validated before use.
+
+28
+00:01:22.791 --> 00:01:25.355
+Device identity anchors many later
+decisions.
+
+29
+00:01:25.435 --> 00:01:28.705
+If the device uses a certificate, key,
+token, serial number,
+
+30
+00:01:28.785 --> 00:01:32.951
+or enrolled identity, the architecture
+should show where it is provisioned,
+
+31
+00:01:33.031 --> 00:01:35.403
+where it is stored, which code may access
+it,
+
+32
+00:01:35.483 --> 00:01:37.919
+and how it is used by local or remote
+services.
+
+33
+00:01:37.999 --> 00:01:41.140
+Identity is not just a string; it is part
+of the trust model.
+
+34
+00:01:41.220 --> 00:01:43.208
+Boundary mapping improves testing.
+
+35
+00:01:43.288 --> 00:01:47.326
+Once interfaces, stored state, privileged
+paths, and owners are visible,
+
+36
+00:01:47.406 --> 00:01:51.317
+teams can design tests for malformed
+messages, missing configuration,
+
+37
+00:01:51.397 --> 00:01:54.858
+reset timing, failed credentials, expired
+identity material,
+
+38
+00:01:54.938 --> 00:01:58.143
+unreachable services, and production build
+differences.
+
+39
+00:01:58.223 --> 00:02:00.980
+A map turns security review into
+engineering work.

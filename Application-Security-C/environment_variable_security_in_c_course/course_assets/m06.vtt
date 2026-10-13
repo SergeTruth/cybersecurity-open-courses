@@ -1,0 +1,160 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.244
+Environment variables are commonly used
+for deployment configuration,
+
+2
+00:00:04.324 --> 00:00:06.619
+and many systems use them to provide
+secrets.
+
+3
+00:00:06.699 --> 00:00:09.839
+That does not make the environment
+automatic secret storage.
+
+4
+00:00:09.919 --> 00:00:14.388
+Whether environment variables are
+appropriate depends on the operating environment,
+
+5
+00:00:14.468 --> 00:00:17.608
+visibility controls, process model,
+diagnostic practices,
+
+6
+00:00:17.688 --> 00:00:19.318
+and the sensitivity of the data.
+
+7
+00:00:19.398 --> 00:00:23.505
+Secrets in environment variables may
+appear in places developers do not expect.
+
+8
+00:00:23.585 --> 00:00:25.759
+Depending on the platform and deployment,
+
+9
+00:00:25.839 --> 00:00:29.643
+they may be visible through process
+inspection, captured in diagnostics,
+
+10
+00:00:29.723 --> 00:00:32.501
+included in crash dumps, copied into
+support bundles,
+
+11
+00:00:32.581 --> 00:00:35.842
+inherited by child processes, or
+accidentally written to logs.
+
+12
+00:00:35.922 --> 00:00:37.794
+The risk is not the word environment;
+
+13
+00:00:37.874 --> 00:00:40.652
+the risk is uncontrolled propagation and
+visibility.
+
+14
+00:00:40.732 --> 00:00:45.080
+Programs should avoid logging full
+environment dumps or sensitive variable values.
+
+15
+00:00:45.160 --> 00:00:49.145
+Debugging convenience should not create a
+record of secrets, internal paths,
+
+16
+00:00:49.225 --> 00:00:50.916
+or private operational details.
+
+17
+00:00:50.996 --> 00:00:53.472
+If a setting must be logged for
+troubleshooting,
+
+18
+00:00:53.552 --> 00:00:57.356
+prefer logging the fact that it was
+present, whether it passed validation,
+
+19
+00:00:57.436 --> 00:00:58.644
+or a safe redacted form.
+
+20
+00:00:58.724 --> 00:01:03.012
+Child process inheritance is a common way
+sensitive configuration spreads farther
+
+21
+00:01:03.092 --> 00:01:03.877
+than intended.
+
+22
+00:01:03.957 --> 00:01:06.553
+A helper tool may not need a database
+token, API key,
+
+23
+00:01:06.633 --> 00:01:08.083
+or internal endpoint value,
+
+24
+00:01:08.163 --> 00:01:11.726
+but it may receive one if the parent
+launches it with the full inherited
+
+25
+00:01:11.806 --> 00:01:12.530
+environment.
+
+26
+00:01:12.610 --> 00:01:16.837
+Sensitive workflows should define the
+child environment explicitly and pass only
+
+27
+00:01:16.917 --> 00:01:17.823
+what is required.
+
+28
+00:01:17.903 --> 00:01:19.473
+Secret lifetime also matters.
+
+29
+00:01:19.553 --> 00:01:22.995
+Consider how values are provided, copied
+into application memory,
+
+30
+00:01:23.075 --> 00:01:26.457
+retained in configuration structures,
+included in diagnostics,
+
+31
+00:01:26.537 --> 00:01:28.047
+and cleared where practical.
+
+32
+00:01:28.127 --> 00:01:32.595
+For higher-sensitivity secrets, a
+purpose-built secret store or platform credential
+
+33
+00:01:32.675 --> 00:01:36.118
+mechanism may provide better access
+control, auditing, rotation,
+
+34
+00:01:36.198 --> 00:01:39.700
+and lifecycle management than general
+environment configuration.

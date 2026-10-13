@@ -1,0 +1,146 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.892
+Numeric input needs two levels of
+validation.
+
+2
+00:00:02.972 --> 00:00:06.407
+First, is this actually a number in the
+format the program expects?
+
+3
+00:00:06.487 --> 00:00:09.615
+Second, is this number acceptable for the
+specific use case?
+
+4
+00:00:09.695 --> 00:00:13.314
+Passing the first question does not
+automatically answer the second.
+
+5
+00:00:13.394 --> 00:00:16.093
+Conversion failure should be detected
+explicitly.
+
+6
+00:00:16.173 --> 00:00:19.179
+Parsing code should know whether no digits
+were consumed,
+
+7
+00:00:19.259 --> 00:00:21.958
+whether the value was outside the
+conversion range,
+
+8
+00:00:22.038 --> 00:00:25.166
+and whether unexpected characters remain
+after the number.
+
+9
+00:00:25.246 --> 00:00:29.172
+A string such as a number followed by
+extra text may be valid for one format and
+
+10
+00:00:29.252 --> 00:00:31.767
+invalid for another, so the rule should be
+clear.
+
+11
+00:00:31.847 --> 00:00:35.711
+Range checks should happen before the
+value drives allocation, indexing,
+
+12
+00:00:35.791 --> 00:00:39.165
+loop counts, timeouts, resource limits, or
+protocol decisions.
+
+13
+00:00:39.245 --> 00:00:42.802
+A number can be syntactically valid and
+still be too large, too small,
+
+14
+00:00:42.882 --> 00:00:45.643
+negative where only nonnegative values are
+allowed,
+
+15
+00:00:45.723 --> 00:00:47.992
+or outside the business rule for that
+field.
+
+16
+00:00:48.072 --> 00:00:50.771
+Signed and unsigned interpretation
+deserves care.
+
+17
+00:00:50.851 --> 00:00:55.206
+Conversions between signed and unsigned
+types can change comparisons and boundary
+
+18
+00:00:55.286 --> 00:00:55.716
+checks.
+
+19
+00:00:55.796 --> 00:01:00.151
+Code should avoid accepting a value under
+one interpretation and then using it under
+
+20
+00:01:00.231 --> 00:01:01.519
+another without review.
+
+21
+00:01:01.599 --> 00:01:04.359
+Overflow-aware reasoning continues after
+parsing.
+
+22
+00:01:04.439 --> 00:01:08.487
+A count may be in range by itself but
+become unsafe when multiplied by an element
+
+23
+00:01:08.567 --> 00:01:11.818
+size, added to a header length, or
+combined with another field.
+
+24
+00:01:11.898 --> 00:01:16.069
+Validation should include later
+calculations that depend on the numeric value.
+
+25
+00:01:16.149 --> 00:01:17.867
+Context decides acceptability.
+
+26
+00:01:17.947 --> 00:01:21.198
+A port number, buffer size, retry count,
+array index, timeout,
+
+27
+00:01:21.278 --> 00:01:23.118
+and record count can all be numeric,
+
+28
+00:01:23.198 --> 00:01:25.958
+but they have different allowed ranges and
+meanings.
+
+29
+00:01:26.038 --> 00:01:29.903
+Good validation names the intended use
+instead of treating all successful
+
+30
+00:01:29.983 --> 00:01:31.700
+conversions as trusted numbers.

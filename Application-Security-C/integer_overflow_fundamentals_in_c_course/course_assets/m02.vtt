@@ -1,0 +1,179 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.899
+C provides multiple integer types, and
+each type has a width, signedness, and range.
+
+2
+00:00:04.979 --> 00:00:07.581
+A value that fits in one type may not fit
+in another.
+
+3
+00:00:07.661 --> 00:00:11.936
+An expression that behaves as intended on
+one platform may deserve another review
+
+4
+00:00:12.016 --> 00:00:15.982
+when compiled under a different data model
+or passed through a different API
+
+5
+00:00:16.062 --> 00:00:16.619
+boundary.
+
+6
+00:00:16.699 --> 00:00:21.098
+Signed and unsigned types follow different
+rules and have different failure modes.
+
+7
+00:00:21.178 --> 00:00:25.206
+Signed types can represent negative and
+positive values within their range.
+
+8
+00:00:25.286 --> 00:00:29.685
+Unsigned types represent nonnegative
+values and have modulo arithmetic behavior.
+
+9
+00:00:29.765 --> 00:00:31.871
+Neither choice is automatically safer.
+
+10
+00:00:31.951 --> 00:00:35.917
+The right choice depends on what the value
+means and which operations will be
+
+11
+00:00:35.997 --> 00:00:36.616
+performed.
+
+12
+00:00:36.696 --> 00:00:39.856
+Fixed-width types, such as explicitly
+sized integer types,
+
+13
+00:00:39.936 --> 00:00:41.857
+can make width assumptions clearer.
+
+14
+00:00:41.937 --> 00:00:44.725
+They are useful when parsing a wire field,
+file field,
+
+15
+00:00:44.805 --> 00:00:47.159
+or hardware register that has a defined
+size.
+
+16
+00:00:47.239 --> 00:00:50.833
+But a fixed-width type does not remove the
+need for range validation.
+
+17
+00:00:50.913 --> 00:00:54.878
+The program still needs to decide which
+values are allowed and whether later
+
+18
+00:00:54.958 --> 00:00:56.383
+arithmetic stays in range.
+
+19
+00:00:56.463 --> 00:01:00.057
+The type size_t is commonly used for
+object sizes and memory lengths.
+
+20
+00:01:00.137 --> 00:01:04.102
+It is the right vocabulary for many
+allocation and buffer-size interfaces,
+
+21
+00:01:04.182 --> 00:01:05.359
+but it is still finite.
+
+22
+00:01:05.439 --> 00:01:09.405
+Code that multiplies an element count by
+an element size, adds a terminator,
+
+23
+00:01:09.485 --> 00:01:13.946
+or combines a header with data length
+still needs checked arithmetic before trusting
+
+24
+00:01:14.026 --> 00:01:14.645
+the result.
+
+25
+00:01:14.725 --> 00:01:18.876
+Platform data models can affect the width
+of int, long, pointer-related types,
+
+26
+00:01:18.956 --> 00:01:20.258
+and size-related types.
+
+27
+00:01:20.338 --> 00:01:22.816
+Code that assumes long is always wider
+than int,
+
+28
+00:01:22.896 --> 00:01:25.994
+or that an intermediate expression is
+always large enough,
+
+29
+00:01:26.074 --> 00:01:27.994
+may be less portable than it appears.
+
+30
+00:01:28.074 --> 00:01:32.288
+Defensive code checks the range required
+by the operation rather than trusting a
+
+31
+00:01:32.368 --> 00:01:34.288
+vague sense that a type is big enough.
+
+32
+00:01:34.368 --> 00:01:36.847
+Constants, parsed values, external
+metadata,
+
+33
+00:01:36.927 --> 00:01:40.830
+and API parameters should be reviewed for
+intended type and allowed range.
+
+34
+00:01:40.910 --> 00:01:42.707
+A literal constant can have a type.
+
+35
+00:01:42.787 --> 00:01:47.186
+A parsed number can exceed the business
+range even if the parsing function succeeds.
+
+36
+00:01:47.266 --> 00:01:51.355
+An API may accept one numeric type while
+the caller stores the value in another.
+
+37
+00:01:51.435 --> 00:01:55.338
+Integer safety starts by naming what the
+value represents and what range is
+
+38
+00:01:55.418 --> 00:01:56.100
+acceptable.

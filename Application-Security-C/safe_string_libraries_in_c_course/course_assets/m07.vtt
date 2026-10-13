@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.571
+String-library choices vary by platform,
+compiler, C library implementation,
+
+2
+00:00:04.651 --> 00:00:07.046
+coding standard, and deployment
+environment.
+
+3
+00:00:07.126 --> 00:00:10.120
+A function available on one target may not
+exist on another.
+
+4
+00:00:10.200 --> 00:00:13.912
+A function with a similar name may have
+different return-value behavior,
+
+5
+00:00:13.992 --> 00:00:15.968
+truncation rules, or parameter order.
+
+6
+00:00:16.048 --> 00:00:18.982
+Portability needs to be part of the
+selection discussion.
+
+7
+00:00:19.062 --> 00:00:23.492
+Standard functions are widely available,
+but many require careful caller discipline.
+
+8
+00:00:23.572 --> 00:00:27.225
+Optional bounds-checking interfaces may be
+present only under certain
+
+9
+00:00:27.305 --> 00:00:28.981
+implementations or build modes.
+
+10
+00:00:29.061 --> 00:00:31.815
+BSD-style APIs, platform-specific secure
+variants,
+
+11
+00:00:31.895 --> 00:00:34.171
+and third-party libraries can all be
+useful,
+
+12
+00:00:34.251 --> 00:00:36.586
+but their contracts are not
+interchangeable.
+
+13
+00:00:36.666 --> 00:00:39.839
+Platform-specific variants often encode
+local conventions.
+
+14
+00:00:39.919 --> 00:00:42.015
+Some report errors through status codes.
+
+15
+00:00:42.095 --> 00:00:43.591
+Some report required length.
+
+16
+00:00:43.671 --> 00:00:46.006
+Some guarantee termination in a specific
+way.
+
+17
+00:00:46.086 --> 00:00:48.002
+Some require handler configuration.
+
+18
+00:00:48.082 --> 00:00:52.154
+A team should document the behavior it
+relies on instead of assuming every target
+
+19
+00:00:52.234 --> 00:00:54.090
+will match one development machine.
+
+20
+00:00:54.170 --> 00:00:57.104
+Third-party libraries introduce dependency
+decisions.
+
+21
+00:00:57.184 --> 00:01:00.177
+Maintenance, license, platform support,
+update cadence,
+
+22
+00:01:00.257 --> 00:01:03.191
+binary footprint, thread-safety,
+allocation strategy,
+
+23
+00:01:03.271 --> 00:01:05.008
+and integration style all matter.
+
+24
+00:01:05.088 --> 00:01:08.201
+A string library should fit the product's
+operational model,
+
+25
+00:01:08.281 --> 00:01:10.017
+not just solve one local call site.
+
+26
+00:01:10.097 --> 00:01:14.408
+Project-owned wrappers can improve
+consistency when they preserve safe semantics.
+
+27
+00:01:14.488 --> 00:01:18.200
+A wrapper should not hide truncation,
+discard errors, guess at capacity,
+
+28
+00:01:18.280 --> 00:01:21.454
+or silently fall back to a weaker behavior
+on another platform.
+
+29
+00:01:21.534 --> 00:01:24.767
+Its contract should be documented and
+tested like any other API.
+
+30
+00:01:24.847 --> 00:01:28.319
+Portability assumptions should be visible
+in build configuration,
+
+31
+00:01:28.399 --> 00:01:30.555
+coding standards, and review checklists.
+
+32
+00:01:30.635 --> 00:01:34.467
+If a course of action depends on a
+platform extension or optional interface,
+
+33
+00:01:34.547 --> 00:01:37.780
+the project should know what happens on
+every supported target.

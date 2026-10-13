@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.721
+A memory leak occurs when allocated memory
+remains reserved but the program can no
+
+2
+00:00:04.801 --> 00:00:06.330
+longer release it correctly.
+
+3
+00:00:06.410 --> 00:00:10.264
+In C, this most often means dynamic memory
+was allocated and the last usable
+
+4
+00:00:10.344 --> 00:00:14.014
+ownership path to that allocation was
+lost, skipped, or never defined.
+
+5
+00:00:14.094 --> 00:00:16.235
+The memory may still exist in the process,
+
+6
+00:00:16.315 --> 00:00:18.762
+but the program has no reliable way to
+return it.
+
+7
+00:00:18.842 --> 00:00:20.921
+Leaks are not always immediate crashes.
+
+8
+00:00:21.001 --> 00:00:23.693
+A small allocation missed once may be hard
+to notice.
+
+9
+00:00:23.773 --> 00:00:27.321
+The same missed cleanup repeated in a
+loop, request handler, parser,
+
+10
+00:00:27.401 --> 00:00:28.808
+batch job, service thread,
+
+11
+00:00:28.888 --> 00:00:32.680
+or library call can gradually consume
+memory until reliability suffers.
+
+12
+00:00:32.760 --> 00:00:36.186
+That slow accumulation is what makes leaks
+easy to underestimate.
+
+13
+00:00:36.266 --> 00:00:40.119
+Lost heap memory can reduce reliability,
+availability, and performance.
+
+14
+00:00:40.199 --> 00:00:44.175
+A process with growing memory use can slow
+down, trigger allocator pressure,
+
+15
+00:00:44.255 --> 00:00:46.213
+force restarts, fail under workload,
+
+16
+00:00:46.293 --> 00:00:48.984
+or interfere with other software on the
+same system.
+
+17
+00:00:49.064 --> 00:00:52.673
+In constrained environments, even small
+recurring leaks can matter.
+
+18
+00:00:52.753 --> 00:00:56.546
+Long-running programs, embedded systems,
+daemons, services, plugins,
+
+19
+00:00:56.626 --> 00:01:00.724
+and libraries are especially sensitive to
+leaks because they may not get a clean
+
+20
+00:01:00.804 --> 00:01:02.884
+process restart after each unit of work.
+
+21
+00:01:02.964 --> 00:01:06.512
+A command-line tool that exits immediately
+may hide sloppy cleanup,
+
+22
+00:01:06.592 --> 00:01:10.507
+while a service that runs for months
+cannot rely on process exit as its normal
+
+23
+00:01:10.587 --> 00:01:11.565
+cleanup strategy.
+
+24
+00:01:11.645 --> 00:01:15.560
+Leak prevention starts by treating
+ownership and cleanup as part of design,
+
+25
+00:01:15.640 --> 00:01:16.864
+not as an afterthought.
+
+26
+00:01:16.944 --> 00:01:20.614
+Every allocation should have an intended
+owner, an expected lifetime,
+
+27
+00:01:20.694 --> 00:01:21.672
+and a release path.
+
+28
+00:01:21.752 --> 00:01:25.178
+The safer habit is to make cleanup visible
+when the code is written,
+
+29
+00:01:25.258 --> 00:01:28.500
+rather than hoping a later review finds
+every missing release.

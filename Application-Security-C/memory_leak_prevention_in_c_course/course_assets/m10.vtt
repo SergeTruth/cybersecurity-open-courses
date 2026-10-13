@@ -1,0 +1,108 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.486
+Memory leak prevention depends on clear
+ownership and predictable cleanup.
+
+2
+00:00:04.566 --> 00:00:08.000
+Every allocation should have an intended
+owner and a release path.
+
+3
+00:00:08.080 --> 00:00:11.208
+The owner may be a caller, a structure, a
+container, a module,
+
+4
+00:00:11.288 --> 00:00:12.575
+or a lifecycle function,
+
+5
+00:00:12.655 --> 00:00:16.028
+but it should be identifiable when the
+allocation is introduced.
+
+6
+00:00:16.108 --> 00:00:17.825
+Error paths, replacement paths,
+
+7
+00:00:17.905 --> 00:00:22.443
+and partial initialization paths deserve
+the same attention as successful execution.
+
+8
+00:00:22.523 --> 00:00:24.547
+Early returns should not skip cleanup.
+
+9
+00:00:24.627 --> 00:00:27.693
+Replacing a pointer should not abandon the
+old allocation.
+
+10
+00:00:27.773 --> 00:00:32.066
+Cleanup for partially initialized objects
+should release what succeeded without
+
+11
+00:00:32.146 --> 00:00:33.740
+assuming every field is ready.
+
+12
+00:00:33.820 --> 00:00:36.702
+Containers, nested allocations, duplicated
+strings,
+
+13
+00:00:36.782 --> 00:00:38.990
+and reallocation require explicit rules.
+
+14
+00:00:39.070 --> 00:00:41.768
+A container should say whether it owns its
+elements.
+
+15
+00:00:41.848 --> 00:00:45.098
+A structure cleanup routine should release
+every owned field.
+
+16
+00:00:45.178 --> 00:00:49.594
+Resize logic should preserve the original
+allocation on failure and update metadata
+
+17
+00:00:49.674 --> 00:00:50.716
+only after success.
+
+18
+00:00:50.796 --> 00:00:52.452
+Tools help detect missed cases,
+
+19
+00:00:52.532 --> 00:00:55.475
+but design and review prevent many leaks
+before testing.
+
+20
+00:00:55.555 --> 00:00:59.051
+Leak checkers, sanitizers, static
+analysis, allocation tracing,
+
+21
+00:00:59.131 --> 00:01:03.546
+and boundary-focused tests are strongest
+when APIs use simple ownership contracts.
+
+22
+00:01:03.626 --> 00:01:07.919
+Prefer maintainable cleanup rules over
+clever assumptions that only the original
+
+23
+00:01:07.999 --> 00:01:08.980
+author remembers.

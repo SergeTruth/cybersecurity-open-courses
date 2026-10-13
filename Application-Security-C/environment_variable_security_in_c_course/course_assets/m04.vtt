@@ -1,0 +1,132 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.116
+Environment values should be validated
+according to what they mean.
+
+2
+00:00:04.196 --> 00:00:08.248
+The program should not treat all variables
+as generic strings after startup.
+
+3
+00:00:08.328 --> 00:00:10.946
+A boolean, number, path, list, mode,
+identifier,
+
+4
+00:00:11.026 --> 00:00:15.203
+or feature selector each has different
+validation needs and different failure
+
+5
+00:00:15.283 --> 00:00:15.844
+behavior.
+
+6
+00:00:15.924 --> 00:00:19.042
+Boolean and mode variables should allow
+only known values.
+
+7
+00:00:19.122 --> 00:00:23.298
+If a setting supports enabled and
+disabled, or a small set of operational modes,
+
+8
+00:00:23.378 --> 00:00:27.431
+the parser should accept that known
+vocabulary and reject ambiguous values.
+
+9
+00:00:27.511 --> 00:00:32.124
+Silent interpretation of unexpected
+strings can produce surprising behavior and make
+
+10
+00:00:32.204 --> 00:00:34.448
+operational mistakes harder to diagnose.
+
+11
+00:00:34.528 --> 00:00:36.710
+Numeric values need careful conversion.
+
+12
+00:00:36.790 --> 00:00:39.596
+The code should check whether conversion
+succeeded,
+
+13
+00:00:39.676 --> 00:00:43.977
+whether extra characters were present,
+whether the value fits the intended type,
+
+14
+00:00:44.057 --> 00:00:46.489
+and whether it falls within the allowed
+range.
+
+15
+00:00:46.569 --> 00:00:50.372
+Values that drive allocation, timeouts,
+retry counts, logging limits,
+
+16
+00:00:50.452 --> 00:00:53.693
+or concurrency should have practical
+minimums and maximums.
+
+17
+00:00:53.773 --> 00:00:56.828
+Path values deserve the same care as other
+external paths.
+
+18
+00:00:56.908 --> 00:00:59.464
+They should have length limits, expected
+forms,
+
+19
+00:00:59.544 --> 00:01:03.285
+approved roots where appropriate, and
+defined behavior when invalid.
+
+20
+00:01:03.365 --> 00:01:07.604
+A path from the environment is still
+external input unless deployment provides a
+
+21
+00:01:07.684 --> 00:01:10.365
+stronger trust boundary and the code
+documents it.
+
+22
+00:01:10.445 --> 00:01:13.873
+List-style variables need clear separator
+rules, entry limits,
+
+23
+00:01:13.953 --> 00:01:17.756
+empty-entry handling, duplicate handling,
+and per-entry validation.
+
+24
+00:01:17.836 --> 00:01:22.013
+Without those rules, a list can become an
+open-ended parsing problem or a way for
+
+25
+00:01:22.093 --> 00:01:24.961
+accidental configuration to change search
+behavior.
+
+26
+00:01:25.041 --> 00:01:29.156
+Missing or malformed variables should lead
+to safe defaults or clear failure,
+
+27
+00:01:29.236 --> 00:01:30.420
+not guessed behavior.

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="path_traversal_prevention_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;: &quot;B&quot;, &quot;q2&quot;: &quot;C&quot;, &quot;q3&quot;: &quot;A&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;A&quot;, &quot;q6&quot;: &quot;C&quot;, &quot;q7&quot;: &quot;D&quot;, &quot;q8&quot;: &quot;D&quot;, &quot;q9&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;B&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. Why is path traversal best understood as an access boundary problem?</legend>
+                      <label><input type="radio" name="q1" value="A" required> Path traversal is primarily a string-sanitization defect, so removing parent-directory text solves it without a storage policy.</label>
+                      <label><input type="radio" name="q1" value="B"> Because the main risk is file access outside the location the application intended to allow.</label>
+                      <label><input type="radio" name="q1" value="C"> The boundary is the current working directory because relative file operations cannot reach outside it.</label>
+                      <label><input type="radio" name="q1" value="D"> Only absolute paths create access-boundary risk; relative paths remain confined to the application.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>2. Why should applications define approved file roots?</legend>
+                      <label><input type="radio" name="q2" value="A" required> One application-wide root is simpler and remains safe when each workflow checks file extensions.</label>
+                      <label><input type="radio" name="q2" value="B"> The requested root may come from the user when the resulting path is normalized before use.</label>
+                      <label><input type="radio" name="q2" value="C"> To make clear which base directories each workflow is allowed to use.</label>
+                      <label><input type="radio" name="q2" value="D"> Operating-system permissions make explicit workflow roots unnecessary for processes with a dedicated service account.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>3. Why are constrained file names generally safer than raw user-provided paths?</legend>
+                      <label><input type="radio" name="q3" value="A" required> They reduce user influence to the resource name shape the workflow actually supports.</label>
+                      <label><input type="radio" name="q3" value="B"> They are safe whenever separators and parent-directory tokens are removed from the supplied string.</label>
+                      <label><input type="radio" name="q3" value="C"> They let the caller select a relative subdirectory while preventing only absolute paths.</label>
+                      <label><input type="radio" name="q3" value="D"> They eliminate the need for platform-specific rules because a basename has identical syntax everywhere.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>4. Which validation strategy is usually clearer for file names?</legend>
+                      <label><input type="radio" name="q4" value="A" required> Reject a list of known traversal spellings while accepting unfamiliar encodings for compatibility.</label>
+                      <label><input type="radio" name="q4" value="B"> Normalize the name first, then repair or strip any components that leave the intended directory.</label>
+                      <label><input type="radio" name="q4" value="C"> Accept only names that match the intended workflow.</label>
+                      <label><input type="radio" name="q4" value="D"> Accept names recognized by the file system and rely on the final containment check to enforce every naming rule.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>5. True or false: Normalization alone proves that a path is authorized for use.</legend>
+                      <label><input type="radio" name="q5" value="A" required> False</label>
+                      <label><input type="radio" name="q5" value="B"> True, when normalization removes all literal parent-directory components.</label>
+                      <label><input type="radio" name="q5" value="C"> True, when the normalized path begins with the same text as the approved root.</label>
+                      <label><input type="radio" name="q5" value="D"> True, when the target currently exists and has restrictive file permissions.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>6. After constructing or resolving a candidate path, what should defensive code confirm?</legend>
+                      <label><input type="radio" name="q6" value="A" required> Confirm that the normalized path text contains the approved root as a prefix, regardless of component boundaries.</label>
+                      <label><input type="radio" name="q6" value="B"> Check containment only when creating files; reads of existing objects cannot escape after construction.</label>
+                      <label><input type="radio" name="q6" value="C"> That the final location remains inside the approved root for the workflow.</label>
+                      <label><input type="radio" name="q6" value="D"> Validate the original user string once and assume platform resolution preserves the same location.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>7. Why can links, replacement, and rename behavior matter for path decisions?</legend>
+                      <label><input type="radio" name="q7" value="A" required> An earlier successful stat check remains valid when the same path string is opened immediately afterward.</label>
+                      <label><input type="radio" name="q7" value="B"> Symbolic links are the only concern; ordinary rename and replacement cannot change which object a path names.</label>
+                      <label><input type="radio" name="q7" value="C"> Restrictive file mode bits prevent directory entries from being exchanged between the check and use.</label>
+                      <label><input type="radio" name="q7" value="D"> They can make earlier path checks stale if the file system changes before use.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>8. How does least privilege support traversal prevention?</legend>
+                      <label><input type="radio" name="q8" value="A" required> Grant access to a broad storage tree so path validation can recover from unexpected deployment layouts.</label>
+                      <label><input type="radio" name="q8" value="B"> Least privilege can replace application path validation when the service account has a dedicated home directory.</label>
+                      <label><input type="radio" name="q8" value="C"> Apply least privilege only to writes because unintended reads do not modify the file system.</label>
+                      <label><input type="radio" name="q8" value="D"> It limits what the process can access even if path logic contains a mistake.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>9. How should uploaded filenames and archive entry names be treated?</legend>
+                      <label><input type="radio" name="q9" value="A" required> As untrusted labels or metadata that need validation before use in storage paths.</label>
+                      <label><input type="radio" name="q9" value="B"> Treat them as safe display names and preserve their directory components so users can recognize source structure.</label>
+                      <label><input type="radio" name="q9" value="C"> Normalize each external name and extract it directly when no literal parent-directory token remains.</label>
+                      <label><input type="radio" name="q9" value="D"> Trust archive names from signed packages because authenticity also authorizes every extraction destination.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>10. How do logging, tests, static analysis, and review support traversal-resistant design?</legend>
+                      <label><input type="radio" name="q10" value="A" required> Log every raw path to make incident reconstruction complete, including sensitive names and rejected payloads.</label>
+                      <label><input type="radio" name="q10" value="B"> They help confirm policy enforcement, identify risky flows, and trace paths into file operations.</label>
+                      <label><input type="radio" name="q10" value="C"> Successful-path tests plus static analysis provide enough evidence without link, race, encoding, and platform cases.</label>
+                      <label><input type="radio" name="q10" value="D"> Review should focus on validation helpers; flows from external names to open calls are obvious from function names.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

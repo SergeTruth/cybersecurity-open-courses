@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.122
+Function APIs should make memory ownership
+visible.
+
+2
+00:00:03.202 --> 00:00:07.106
+The allocation may happen in one function,
+the pointer may be stored by another,
+
+3
+00:00:07.186 --> 00:00:09.050
+and cleanup may occur later in a third.
+
+4
+00:00:09.130 --> 00:00:11.344
+If the contract is not clear at each
+boundary,
+
+5
+00:00:11.424 --> 00:00:15.386
+leaks and repeated cleanup become
+maintenance risks rather than isolated bugs.
+
+6
+00:00:15.466 --> 00:00:18.904
+A function that allocates memory should
+document who must release it.
+
+7
+00:00:18.984 --> 00:00:22.713
+If the caller owns the returned pointer,
+the function name, documentation,
+
+8
+00:00:22.793 --> 00:00:25.123
+or surrounding pattern should make that
+clear.
+
+9
+00:00:25.203 --> 00:00:27.884
+If the function returns a pointer to
+internal storage,
+
+10
+00:00:27.964 --> 00:00:31.809
+that should also be clear so callers do
+not try to release memory they do not own.
+
+11
+00:00:31.889 --> 00:00:35.793
+A function that takes ownership should say
+whether the caller must stop using or
+
+12
+00:00:35.873 --> 00:00:37.621
+freeing the pointer after the call.
+
+13
+00:00:37.701 --> 00:00:39.740
+Ownership transfer is a strong contract.
+
+14
+00:00:39.820 --> 00:00:43.607
+Once ownership moves, the old owner should
+treat the pointer according to the
+
+15
+00:00:43.687 --> 00:00:46.601
+documented rule, usually as no longer its
+responsibility.
+
+16
+00:00:46.681 --> 00:00:50.584
+A function that borrows memory should
+document how long the pointer must remain
+
+17
+00:00:50.664 --> 00:00:51.014
+valid.
+
+18
+00:00:51.094 --> 00:00:53.891
+Borrowed data may need to stay alive only
+during the call,
+
+19
+00:00:53.971 --> 00:00:57.583
+until an operation completes, or until a
+containing object is destroyed.
+
+20
+00:00:57.663 --> 00:00:59.644
+If the callee stores a borrowed pointer,
+
+21
+00:00:59.724 --> 00:01:01.880
+that retention must be part of the
+contract.
+
+22
+00:01:01.960 --> 00:01:05.164
+Naming conventions such as create and
+destroy, init and cleanup,
+
+23
+00:01:05.244 --> 00:01:08.624
+retain and release, or duplicate and free
+can clarify expectations.
+
+24
+00:01:08.704 --> 00:01:10.219
+Naming is not enough by itself,
+
+25
+00:01:10.299 --> 00:01:14.494
+but consistent names help reviewers spot
+mismatched lifecycle calls and understand
+
+26
+00:01:14.574 --> 00:01:15.273
+who owns what.
+
+27
+00:01:15.353 --> 00:01:19.665
+Ambiguous ownership contracts create
+leaks, repeated cleanup, and maintenance risk.
+
+28
+00:01:19.745 --> 00:01:23.415
+A developer who cannot tell whether a
+function owns an argument will guess.
+
+29
+00:01:23.495 --> 00:01:25.651
+A future maintainer may guess differently.
+
+30
+00:01:25.731 --> 00:01:29.460
+Clear contracts are a low-cost way to
+prevent those divergent assumptions.

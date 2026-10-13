@@ -1,0 +1,166 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.428
+Firmware architecture is usually layered,
+even when the codebase is small.
+
+2
+00:00:04.508 --> 00:00:07.516
+A device may begin in immutable or
+protected startup code,
+
+3
+00:00:07.596 --> 00:00:11.033
+transition through one or more boot
+stages, initialize hardware,
+
+4
+00:00:11.113 --> 00:00:13.630
+load application firmware, configure
+drivers,
+
+5
+00:00:13.710 --> 00:00:15.797
+and then enter normal runtime behavior.
+
+6
+00:00:15.877 --> 00:00:19.191
+Each stage establishes assumptions that
+later code depends on.
+
+7
+00:00:19.271 --> 00:00:23.506
+Boot ROM concepts, bootloaders,
+application firmware, board support packages,
+
+8
+00:00:23.586 --> 00:00:25.980
+device drivers, interrupt handlers,
+timers,
+
+9
+00:00:26.060 --> 00:00:29.436
+and communication stacks all have
+different responsibilities.
+
+10
+00:00:29.516 --> 00:00:34.058
+Security review improves when those
+responsibilities are documented instead of being
+
+11
+00:00:34.138 --> 00:00:37.268
+left as shared background knowledge among
+a few developers.
+
+12
+00:00:37.348 --> 00:00:41.645
+A trust boundary is a point where data,
+control, authority, or assumptions change.
+
+13
+00:00:41.725 --> 00:00:44.917
+Examples include data moving from a
+peripheral into a driver,
+
+14
+00:00:44.997 --> 00:00:48.250
+from an external communication stack into
+application logic,
+
+15
+00:00:48.330 --> 00:00:51.214
+from nonvolatile storage into runtime
+configuration,
+
+16
+00:00:51.294 --> 00:00:53.504
+from interrupt context into task context,
+
+17
+00:00:53.584 --> 00:00:57.206
+or from privileged startup code into
+ordinary application behavior.
+
+18
+00:00:57.286 --> 00:01:01.459
+Memory-mapped registers deserve careful
+treatment because they connect C code
+
+19
+00:01:01.539 --> 00:01:03.012
+directly to hardware state.
+
+20
+00:01:03.092 --> 00:01:05.548
+Reads may reflect changing device
+conditions.
+
+21
+00:01:05.628 --> 00:01:07.592
+Writes may change hardware behavior.
+
+22
+00:01:07.672 --> 00:01:10.557
+Code that touches registers should be
+small, reviewed,
+
+23
+00:01:10.637 --> 00:01:15.056
+and organized so that higher-level logic
+is not scattered across unrelated modules.
+
+24
+00:01:15.136 --> 00:01:17.530
+Stored state is also part of the
+architecture.
+
+25
+00:01:17.610 --> 00:01:21.783
+Calibration data, feature flags,
+identifiers, certificates, keys, counters,
+
+26
+00:01:21.863 --> 00:01:25.669
+update metadata, and recovery markers can
+change how the device behaves.
+
+27
+00:01:25.749 --> 00:01:29.493
+Reviewers should ask where stored state
+comes from, how it is validated,
+
+28
+00:01:29.573 --> 00:01:33.194
+who may update it, and what happens when
+it is missing or inconsistent.
+
+29
+00:01:33.274 --> 00:01:35.914
+Boundary mapping makes firmware review
+concrete.
+
+30
+00:01:35.994 --> 00:01:39.370
+A simple diagram or table that lists
+startup stages, interfaces,
+
+31
+00:01:39.450 --> 00:01:41.843
+storage regions, drivers, privileged
+paths,
+
+32
+00:01:41.923 --> 00:01:44.870
+and owners helps teams decide where
+validation belongs,
+
+33
+00:01:44.950 --> 00:01:47.650
+where logging is useful, where secrets are
+handled,
+
+34
+00:01:47.730 --> 00:01:49.940
+and where failure behavior must be tested.

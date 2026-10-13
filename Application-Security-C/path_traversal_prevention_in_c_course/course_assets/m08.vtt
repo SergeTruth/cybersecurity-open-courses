@@ -1,0 +1,138 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.399
+Path traversal risk often appears around
+workflows that move files across
+
+2
+00:00:04.479 --> 00:00:08.379
+boundaries: uploads, downloads, archive
+extraction, exported reports,
+
+3
+00:00:08.459 --> 00:00:11.491
+generated logs, cached data, and
+user-specific storage.
+
+4
+00:00:11.571 --> 00:00:15.099
+These workflows combine external names,
+internal storage policy,
+
+5
+00:00:15.179 --> 00:00:18.522
+and file operations, so they need
+especially clear boundaries.
+
+6
+00:00:18.602 --> 00:00:22.563
+Uploaded filenames should usually be
+treated as labels, not destinations.
+
+7
+00:00:22.643 --> 00:00:25.985
+A user-supplied name may be useful for
+display or audit context,
+
+8
+00:00:26.065 --> 00:00:30.398
+but the application should choose the
+storage root and the controlled stored name.
+
+9
+00:00:30.478 --> 00:00:33.944
+This avoids letting the external name
+decide where the file lives.
+
+10
+00:00:34.024 --> 00:00:37.738
+Archive entry names and metadata-derived
+names need the same caution.
+
+11
+00:00:37.818 --> 00:00:39.860
+An archive, image, document, package,
+
+12
+00:00:39.940 --> 00:00:42.478
+or export can contain names that look like
+paths.
+
+13
+00:00:42.558 --> 00:00:45.838
+Those names come from outside the
+application trust boundary.
+
+14
+00:00:45.918 --> 00:00:49.941
+Before extraction or processing, the
+application should validate the name,
+
+15
+00:00:50.021 --> 00:00:52.683
+construct the destination under an
+approved root,
+
+16
+00:00:52.763 --> 00:00:55.486
+and confirm the result remains in the
+intended area.
+
+17
+00:00:55.566 --> 00:00:59.156
+Generated output paths should also follow
+controlled naming rules.
+
+18
+00:00:59.236 --> 00:01:01.588
+It is easy to assume generated names are
+safe,
+
+19
+00:01:01.668 --> 00:01:05.629
+but they may include user labels,
+timestamps, identifiers, report titles,
+
+20
+00:01:05.709 --> 00:01:06.761
+or database fields.
+
+21
+00:01:06.841 --> 00:01:09.441
+If any component comes from outside
+trusted code,
+
+22
+00:01:09.521 --> 00:01:12.120
+validate or transform it before using it
+in a path.
+
+23
+00:01:12.200 --> 00:01:16.719
+Per-user and per-tenant storage should
+enforce separation through directory design
+
+24
+00:01:16.799 --> 00:01:17.789
+and access checks.
+
+25
+00:01:17.869 --> 00:01:21.521
+A user identifier should not become an
+arbitrary directory selector.
+
+26
+00:01:21.601 --> 00:01:24.634
+Cleanup routines deserve the same
+attention as creation.
+
+27
+00:01:24.714 --> 00:01:28.860
+They should remove only files managed by
+the workflow and should not expand into
+
+28
+00:01:28.940 --> 00:01:31.540
+broader directories because of unchecked
+names.

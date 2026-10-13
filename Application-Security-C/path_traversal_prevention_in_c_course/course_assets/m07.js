@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Open Behavior, Permissions, and Least Privilege",
+  "graphicAlt": "A read workflow avoids unnecessary modification rights; creation and replacement are explicit choices; new-file permissions match sensitivity, reinforced by a least-privilege process.",
+  "narration": "Path validation decides where an operation is allowed to point. Open behavior decides what the program is allowed to do there. A secure workflow needs both. The selected mode or flags should match the intended operation: read, write, create, append, replace, or temporary use.\n\nWritable access should not be requested when read-only access is enough. A download or preview workflow should not need write permission to the managed content. A validation routine should not open a file with broad modification rights. Narrow access reduces accidental effects and makes code review easier.\n\nCreate and replace behavior should be deliberate. Creating files in a managed directory, replacing generated output, and appending to logs each have different integrity expectations. The code should not create or truncate files as a side effect of a convenient open mode. Reviewers should be able to see when the program may change existing data.\n\nNewly created files should use permissions appropriate to their contents. Sensitive reports, private uploads, temporary extracts, and internal state should not become broadly readable because of defaults or inherited settings. Permissions are part of the file workflow, not only a deployment concern.\n\nLeast privilege supports traversal prevention by reducing what a mistake can reach. The process account, directory permissions, storage layout, and application checks should all point in the same direction. Path controls are strongest when the operating system also limits access to only the approved areas.",
+  "narrationPoints": [
+    "The selected mode or flags should match the intended operation: read, write, create, append, replace.",
+    "A validation routine should not open a file with broad modification rights.",
+    "The code should not create or truncate files as a side effect of a convenient open mode.",
+    "Sensitive reports, private uploads, temporary extracts, and internal state should not become broadly readable.",
+    "The process account, directory permissions, storage layout, and application checks should all point in the same direction."
+  ]
+};

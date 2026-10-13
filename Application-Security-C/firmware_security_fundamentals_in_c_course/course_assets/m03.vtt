@@ -1,0 +1,173 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.702
+Secure boot is a defensive startup
+concept:
+
+2
+00:00:02.782 --> 00:00:07.066
+the device should validate that authorized
+firmware is allowed to run before handing
+
+3
+00:00:07.146 --> 00:00:07.860
+control to it.
+
+4
+00:00:07.940 --> 00:00:10.558
+The details vary by processor, vendor, and
+product,
+
+5
+00:00:10.638 --> 00:00:12.661
+but the engineering idea is consistent.
+
+6
+00:00:12.741 --> 00:00:16.966
+Startup trust begins before the main
+application and depends on a chain of decisions
+
+7
+00:00:17.046 --> 00:00:18.236
+made in the right order.
+
+8
+00:00:18.316 --> 00:00:22.243
+A chain of trust usually starts from code
+or data that is immutable, protected,
+
+9
+00:00:22.323 --> 00:00:24.643
+or otherwise controlled by the device
+design.
+
+10
+00:00:24.723 --> 00:00:28.413
+That root is used to check the next stage,
+which then checks the next stage,
+
+11
+00:00:28.493 --> 00:00:30.694
+until the application firmware is reached.
+
+12
+00:00:30.774 --> 00:00:33.630
+The course does not implement boot code or
+cryptography,
+
+13
+00:00:33.710 --> 00:00:37.756
+but developers should understand the
+assumptions their application inherits.
+
+14
+00:00:37.836 --> 00:00:42.061
+Signed firmware images support integrity
+decisions by allowing the device to check
+
+15
+00:00:42.141 --> 00:00:45.176
+whether an image matches an expected
+authorization policy.
+
+16
+00:00:45.256 --> 00:00:47.755
+The signature check is only one part of
+the system.
+
+17
+00:00:47.835 --> 00:00:51.107
+The design must also address key
+protection, image format rules,
+
+18
+00:00:51.187 --> 00:00:53.567
+version policy, configuration
+dependencies,
+
+19
+00:00:53.647 --> 00:00:55.730
+and what state is trusted during startup.
+
+20
+00:00:55.810 --> 00:00:58.547
+Failure behavior is as important as
+success behavior.
+
+21
+00:00:58.627 --> 00:01:02.078
+If validation fails, metadata is damaged,
+storage is inconsistent,
+
+22
+00:01:02.158 --> 00:01:06.502
+or a required configuration value is
+missing, the device should respond predictably.
+
+23
+00:01:06.582 --> 00:01:09.914
+That response may involve a recovery mode,
+a previous valid image,
+
+24
+00:01:09.994 --> 00:01:12.077
+a safe service flow, or a controlled stop,
+
+25
+00:01:12.157 --> 00:01:15.013
+depending on the product and its operating
+environment.
+
+26
+00:01:15.093 --> 00:01:18.127
+Startup integrity depends on configuration
+as much as code.
+
+27
+00:01:18.207 --> 00:01:21.778
+Build settings, fuse or option settings,
+debug state, storage layout,
+
+28
+00:01:21.858 --> 00:01:26.082
+boot order, and recovery permissions can
+change the meaning of a secure boot design.
+
+29
+00:01:26.162 --> 00:01:29.018
+These settings should be reviewed as
+release artifacts,
+
+30
+00:01:29.098 --> 00:01:31.657
+not treated as incidental manufacturing
+details.
+
+31
+00:01:31.737 --> 00:01:33.522
+Testing must cover negative paths.
+
+32
+00:01:33.602 --> 00:01:37.351
+Teams should test invalid images,
+interrupted writes, missing metadata,
+
+33
+00:01:37.431 --> 00:01:39.989
+incompatible versions, unexpected reset
+timing,
+
+34
+00:01:40.069 --> 00:01:43.044
+and recovery decisions on realistic
+hardware conditions.
+
+35
+00:01:43.124 --> 00:01:47.051
+A startup security feature is only
+dependable when the failure cases have been
+
+36
+00:01:47.131 --> 00:01:48.500
+exercised and documented.

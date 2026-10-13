@@ -1,0 +1,123 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.369
+Text validation in C starts with a
+practical reminder: bytes, characters,
+
+2
+00:00:04.449 --> 00:00:06.966
+and displayed text are not always the same
+thing.
+
+3
+00:00:07.046 --> 00:00:10.301
+Many APIs operate on byte buffers or
+null-terminated strings.
+
+4
+00:00:10.381 --> 00:00:14.618
+The program has to decide what encoding it
+accepts and whether its length rules are
+
+5
+00:00:14.698 --> 00:00:17.706
+based on bytes, characters, fields, or
+display behavior.
+
+6
+00:00:17.786 --> 00:00:21.839
+Embedded null bytes can create different
+interpretations of the same buffer.
+
+7
+00:00:21.919 --> 00:00:24.928
+A length-delimited parser may see bytes
+after a zero byte,
+
+8
+00:00:25.008 --> 00:00:27.648
+while C string functions may stop at the
+first null.
+
+9
+00:00:27.728 --> 00:00:32.027
+Validation should define whether embedded
+null bytes are allowed and ensure later
+
+10
+00:00:32.107 --> 00:00:33.949
+code uses the same interpretation.
+
+11
+00:00:34.029 --> 00:00:36.976
+Control characters and whitespace need
+explicit rules.
+
+12
+00:00:37.056 --> 00:00:40.434
+A newline, tab, carriage return, leading
+space, trailing space,
+
+13
+00:00:40.514 --> 00:00:44.628
+or nonprinting byte may be acceptable in
+one field and unacceptable in another.
+
+14
+00:00:44.708 --> 00:00:46.980
+Trimming or normalizing text can be
+useful,
+
+15
+00:00:47.060 --> 00:00:50.805
+but only when the rule matches the data
+format and the program's meaning.
+
+16
+00:00:50.885 --> 00:00:53.772
+Case normalization should be designed for
+the use case.
+
+17
+00:00:53.852 --> 00:00:57.659
+A case-insensitive option name, a
+user-visible label, a protocol token,
+
+18
+00:00:57.739 --> 00:01:01.484
+and a locale-sensitive text field may all
+have different expectations.
+
+19
+00:01:01.564 --> 00:01:04.819
+Code should not casually change case if
+that changes identity,
+
+20
+00:01:04.899 --> 00:01:06.987
+comparison behavior, or audit meaning.
+
+21
+00:01:07.067 --> 00:01:10.321
+Character allowlists work best when they
+are tied to the field.
+
+22
+00:01:10.401 --> 00:01:14.331
+A simple identifier, a decimal number, a
+path segment, a configuration key,
+
+23
+00:01:14.411 --> 00:01:17.850
+and a free-text note need different
+allowed sets and length rules.
+
+24
+00:01:17.930 --> 00:01:22.167
+Documenting the encoding and character
+rule keeps validation consistent across
+
+25
+00:01:22.247 --> 00:01:24.580
+parsing, storage, comparison, and logging.

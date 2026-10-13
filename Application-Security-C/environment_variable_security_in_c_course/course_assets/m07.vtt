@@ -1,0 +1,136 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.642
+When a C program launches another process,
+
+2
+00:00:02.722 --> 00:00:06.767
+the child may inherit environment
+variables from the parent unless the launch is
+
+3
+00:00:06.847 --> 00:00:07.918
+designed otherwise.
+
+4
+00:00:07.998 --> 00:00:09.961
+This is convenient for ordinary tools,
+
+5
+00:00:10.041 --> 00:00:14.086
+but it can be unsafe for sensitive
+workflows because the child may receive values
+
+6
+00:00:14.166 --> 00:00:15.951
+that were meant only for the parent.
+
+7
+00:00:16.031 --> 00:00:20.136
+Inherited environment state can include
+configuration, secrets, search paths,
+
+8
+00:00:20.216 --> 00:00:24.142
+locale settings, debugging flags, runtime
+options, temporary directories,
+
+9
+00:00:24.222 --> 00:00:25.174
+and feature modes.
+
+10
+00:00:25.254 --> 00:00:27.931
+Some of those values may change how the
+child behaves.
+
+11
+00:00:28.011 --> 00:00:31.343
+Others may simply expose information that
+the child does not need.
+
+12
+00:00:31.423 --> 00:00:33.148
+Both outcomes deserve attention.
+
+13
+00:00:33.228 --> 00:00:37.571
+Process launch code should define the
+child environment explicitly when the workflow
+
+14
+00:00:37.651 --> 00:00:38.365
+is sensitive.
+
+15
+00:00:38.445 --> 00:00:40.586
+Instead of passing everything by default,
+
+16
+00:00:40.666 --> 00:00:44.533
+build a small environment containing the
+variables that are part of the child
+
+17
+00:00:44.613 --> 00:00:45.565
+process contract.
+
+18
+00:00:45.645 --> 00:00:49.809
+That contract should be documented so
+operators and reviewers understand what the
+
+19
+00:00:49.889 --> 00:00:50.901
+child needs and why.
+
+20
+00:00:50.981 --> 00:00:55.026
+Unsafe inherited values should be cleared
+or replaced before launching tools or
+
+21
+00:00:55.106 --> 00:00:55.582
+helpers.
+
+22
+00:00:55.662 --> 00:00:58.636
+The specific list depends on the platform
+and application,
+
+23
+00:00:58.716 --> 00:01:00.382
+but the principle is consistent:
+
+24
+00:01:00.462 --> 00:01:04.626
+do not let unrelated parent state
+influence a child operation that is supposed to be
+
+25
+00:01:04.706 --> 00:01:05.361
+controlled.
+
+26
+00:01:05.441 --> 00:01:07.701
+This discipline also improves reliability.
+
+27
+00:01:07.781 --> 00:01:11.708
+A child process that receives only
+expected variables is easier to reproduce,
+
+28
+00:01:11.788 --> 00:01:13.037
+test, and troubleshoot.
+
+29
+00:01:13.117 --> 00:01:17.162
+It behaves less like a product of the
+operator's shell or service wrapper and more
+
+30
+00:01:17.242 --> 00:01:19.860
+like a defined component in the
+application design.

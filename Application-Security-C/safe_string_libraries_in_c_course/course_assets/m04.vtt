@@ -1,0 +1,126 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.897
+Bounded copying and concatenation APIs are
+designed to make buffer limits visible,
+
+2
+00:00:04.977 --> 00:00:07.454
+but they still depend on accurate
+information.
+
+3
+00:00:07.534 --> 00:00:11.125
+The destination capacity must describe the
+actual writable object.
+
+4
+00:00:11.205 --> 00:00:13.434
+The source must meet the API's input
+rules.
+
+5
+00:00:13.514 --> 00:00:17.601
+The caller must know whether the result
+was complete, truncated, or rejected.
+
+6
+00:00:17.681 --> 00:00:22.078
+Concatenation adds another requirement:
+the current destination length matters.
+
+7
+00:00:22.158 --> 00:00:26.493
+A buffer that has enough total capacity
+for one string may not have enough remaining
+
+8
+00:00:26.573 --> 00:00:27.811
+capacity for an append.
+
+9
+00:00:27.891 --> 00:00:30.492
+If the existing destination is not a valid
+string,
+
+10
+00:00:30.572 --> 00:00:33.296
+an append-style API may start from an
+invalid state.
+
+11
+00:00:33.376 --> 00:00:35.853
+Terminator space is part of capacity
+planning.
+
+12
+00:00:35.933 --> 00:00:40.082
+A copied or concatenated C string usually
+needs storage for the content plus the
+
+13
+00:00:40.162 --> 00:00:41.091
+null terminator.
+
+14
+00:00:41.171 --> 00:00:45.444
+The code should make it obvious whether
+the capacity includes that terminator and
+
+15
+00:00:45.524 --> 00:00:48.558
+what happens when there is no room for the
+complete result.
+
+16
+00:00:48.638 --> 00:00:51.487
+Truncation semantics vary across APIs and
+libraries.
+
+17
+00:00:51.567 --> 00:00:54.725
+In some contexts, truncated display text
+may be acceptable.
+
+18
+00:00:54.805 --> 00:00:58.458
+In configuration values, identifiers, file
+paths, protocol fields,
+
+19
+00:00:58.538 --> 00:01:02.873
+or authorization-related labels,
+truncation may change meaning and should cause
+
+20
+00:01:02.953 --> 00:01:04.191
+rejection or recovery.
+
+21
+00:01:04.271 --> 00:01:06.315
+The application, not the library name,
+
+22
+00:01:06.395 --> 00:01:08.872
+decides whether a partial result is safe
+to use.
+
+23
+00:01:08.952 --> 00:01:10.933
+Checked results are non-negotiable.
+
+24
+00:01:11.013 --> 00:01:15.596
+Bounded APIs often communicate required
+length, bytes copied, status, or truncation.
+
+25
+00:01:15.676 --> 00:01:20.072
+Ignoring that result can make the code
+look safer while still using incomplete data.
+
+26
+00:01:20.152 --> 00:01:23.620
+Reviewers should ask what the code does
+when the output did not fit.

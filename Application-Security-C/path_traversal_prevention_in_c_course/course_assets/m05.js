@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Safe Path Construction and Normalization",
+  "graphicAlt": "A trusted root and validated name are joined, resolved as appropriate, and checked for containment before controlled access. Normalization is not permission, and checks must stay tied to use.",
+  "narration": "Safe path construction combines a trusted base directory with a validated relative name. The root defines the allowed area. The name selects a resource inside that area. The join operation should preserve that relationship and should fail clearly when the candidate does not fit the workflow.\n\nAd hoc string concatenation is fragile. It can mishandle separators, duplicate separators, missing separators, length limits, platform conventions, or buffer boundaries. In C, it can also introduce ordinary memory safety mistakes if buffers and lengths are not handled carefully. Prefer small, reviewed helpers that centralize path construction and enforce the same rules consistently.\n\nNormalization can simplify path text, but normalized text is not automatically safe. It may reduce redundant pieces or platform-specific spelling, yet the resulting path still needs to be judged against policy. Normalization is a tool for clarity, not a permission decision by itself.\n\nCanonicalization or resolution can help when the program needs to compare actual locations. For example, a candidate can be resolved and then compared with the approved root to confirm that the final location remains inside the managed area. That comparison must be done carefully, with attention to platform behavior and the possibility that the file system can change.\n\nPath construction should have explicit failure behavior. If a name is invalid, a path is too long, a resolution step fails, or the resolved location is outside the approved area, the operation should fail cleanly before any file is opened or changed. The caller should receive a clear result that does not require guessing what happened.",
+  "narrationPoints": [
+    "Safe path construction combines a trusted base directory with a validated relative name.",
+    "Prefer small, reviewed helpers that centralize path construction and enforce the same rules consistently.",
+    "Normalization can simplify path text, but normalized text is not automatically safe.",
+    "Canonicalization or resolution can help when the program needs to compare actual locations.",
+    "If a name is invalid, a path is too long, a resolution step fails."
+  ]
+};

@@ -1,0 +1,162 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.540
+Allocation sizes often come from element
+counts, byte counts, string lengths,
+
+2
+00:00:04.620 --> 00:00:07.876
+record counts, structure sizes, headers,
+and metadata fields.
+
+3
+00:00:07.956 --> 00:00:12.177
+Those values may be combined through
+multiplication and addition before memory is
+
+4
+00:00:12.257 --> 00:00:12.860
+allocated.
+
+5
+00:00:12.940 --> 00:00:14.448
+If the combined size is wrong,
+
+6
+00:00:14.528 --> 00:00:18.809
+every later operation that trusts the
+allocation size is working from a bad premise.
+
+7
+00:00:18.889 --> 00:00:22.989
+Multiplication and addition used for
+allocation must be checked before calling
+
+8
+00:00:23.069 --> 00:00:24.275
+allocation functions.
+
+9
+00:00:24.355 --> 00:00:27.009
+Element count times element size, header
+plus body,
+
+10
+00:00:27.089 --> 00:00:29.923
+length plus terminator, structure plus
+trailing data,
+
+11
+00:00:30.003 --> 00:00:34.224
+and alignment adjustments are all common
+places where a result can exceed the range
+
+12
+00:00:34.304 --> 00:00:35.570
+of the destination type.
+
+13
+00:00:35.650 --> 00:00:39.992
+A too-small allocation followed by
+initialization, parsing, copying, formatting,
+
+14
+00:00:40.072 --> 00:00:42.363
+or appending can create memory-safety
+risk.
+
+15
+00:00:42.443 --> 00:00:45.880
+The allocation call may succeed because
+the computed size is small,
+
+16
+00:00:45.960 --> 00:00:49.699
+while later code behaves as if the
+original larger request was satisfied.
+
+17
+00:00:49.779 --> 00:00:54.060
+The defensive goal is to reject or handle
+unsafe numeric values before allocation or
+
+18
+00:00:54.140 --> 00:00:54.441
+copy.
+
+19
+00:00:54.521 --> 00:00:58.562
+Use sizeof in a way that follows the
+actual object or pointed-to type rather than
+
+20
+00:00:58.642 --> 00:01:00.149
+hardcoded byte assumptions.
+
+21
+00:01:00.229 --> 00:01:04.510
+Expressions such as element count times
+the size of the pointed-to object are easier
+
+22
+00:01:04.590 --> 00:01:08.691
+to review than expressions that repeat a
+type name or constant in several places.
+
+23
+00:01:08.771 --> 00:01:12.871
+The code should make clear which object
+shape the allocation is meant to support.
+
+24
+00:01:12.951 --> 00:01:14.640
+C strings need terminator space.
+
+25
+00:01:14.720 --> 00:01:18.036
+If a string length comes from parsing,
+measurement, or metadata,
+
+26
+00:01:18.116 --> 00:01:22.337
+allocation should account for the content
+and the terminating null character when
+
+27
+00:01:22.417 --> 00:01:24.166
+the result is meant to be a C string.
+
+28
+00:01:24.246 --> 00:01:28.346
+The same idea applies to any format that
+needs sentinel storage, header storage,
+
+29
+00:01:28.426 --> 00:01:29.572
+or alignment padding.
+
+30
+00:01:29.652 --> 00:01:33.210
+Safe allocation math is a policy decision
+as well as a technical check.
+
+31
+00:01:33.290 --> 00:01:36.908
+When a value exceeds a safe limit, the
+program might reject the request,
+
+32
+00:01:36.988 --> 00:01:41.209
+return an error, stream the data, chunk
+the work, or use a different bounded design.
+
+33
+00:01:41.289 --> 00:01:44.002
+What it should not do is convert,
+multiply, allocate,
+
+34
+00:01:44.082 --> 00:01:47.700
+and then trust a result whose
+representability was never established.

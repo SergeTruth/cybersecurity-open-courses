@@ -1,0 +1,151 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.725
+Logging should support diagnosis without
+exposing more file system detail than
+
+2
+00:00:04.805 --> 00:00:05.675
+operators need.
+
+3
+00:00:05.755 --> 00:00:09.981
+A log may need to identify that a path was
+rejected or that a file operation failed,
+
+4
+00:00:10.061 --> 00:00:13.789
+but it should not casually disclose
+sensitive filenames, tenant data,
+
+5
+00:00:13.869 --> 00:00:16.914
+internal directory layouts, or private
+storage details.
+
+6
+00:00:16.994 --> 00:00:20.846
+The diagnostic value should be balanced
+against the data being revealed.
+
+7
+00:00:20.926 --> 00:00:23.536
+Testing should exercise the defensive
+boundary.
+
+8
+00:00:23.616 --> 00:00:26.288
+Useful tests include empty names, very
+long names,
+
+9
+00:00:26.368 --> 00:00:29.786
+unexpected separators, absolute-style
+names, reserved names,
+
+10
+00:00:29.866 --> 00:00:33.470
+unusual but allowed characters,
+platform-specific case behavior,
+
+11
+00:00:33.550 --> 00:00:36.160
+link-related cases in controlled
+environments,
+
+12
+00:00:36.240 --> 00:00:39.657
+and names that are valid for one workflow
+but invalid for another.
+
+13
+00:00:39.737 --> 00:00:42.533
+The point is to confirm the allowlist and
+root policy,
+
+14
+00:00:42.613 --> 00:00:44.788
+not to publish reusable misuse material.
+
+15
+00:00:44.868 --> 00:00:48.659
+Platform differences should be documented
+where they affect behavior.
+
+16
+00:00:48.739 --> 00:00:52.032
+Separators, case sensitivity, link
+semantics, permissions,
+
+17
+00:00:52.112 --> 00:00:55.592
+path length limits, reserved names, and
+rename behavior can vary.
+
+18
+00:00:55.672 --> 00:00:59.649
+A course or codebase that pretends every
+platform behaves the same will miss
+
+19
+00:00:59.729 --> 00:01:01.282
+important review questions.
+
+20
+00:01:01.362 --> 00:01:04.655
+Static analysis and compiler warnings can
+support the review.
+
+21
+00:01:04.735 --> 00:01:07.283
+They may identify unchecked string
+operations,
+
+22
+00:01:07.363 --> 00:01:10.781
+path buffers with risky length handling,
+ignored return values,
+
+23
+00:01:10.861 --> 00:01:15.086
+and control flow that reaches file
+operations without passing through expected
+
+24
+00:01:15.166 --> 00:01:16.285
+validation helpers.
+
+25
+00:01:16.365 --> 00:01:20.342
+These signals are most useful when the
+code structure makes policy visible.
+
+26
+00:01:20.422 --> 00:01:24.212
+Review should trace every path from input
+through validation, joining,
+
+27
+00:01:24.292 --> 00:01:28.766
+resolution, authorization, open, write,
+rename, delete, extraction, and cleanup.
+
+28
+00:01:28.846 --> 00:01:32.885
+The reviewer should ask which root is
+approved, which component controls it,
+
+29
+00:01:32.965 --> 00:01:36.134
+what name policy applies, how the final
+location is checked,
+
+30
+00:01:36.214 --> 00:01:38.202
+and what happens when each step fails.
+
+31
+00:01:38.282 --> 00:01:41.700
+That trace is the practical test of
+traversal-resistant design.

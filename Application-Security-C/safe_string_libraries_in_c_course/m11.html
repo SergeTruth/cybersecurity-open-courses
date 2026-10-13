@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Assessment</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="safe_string_libraries_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;: &quot;B&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;D&quot;, &quot;q04&quot;: &quot;C&quot;, &quot;q05&quot;: &quot;C&quot;, &quot;q06&quot;: &quot;B&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;D&quot;, &quot;q09&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;D&quot;, &quot;q11&quot;: &quot;C&quot;, &quot;q12&quot;: &quot;B&quot;}'
+        >
+          <fieldset class="quiz-question">
+                      <legend>1. Why does a safer string library not automatically make C string handling safe?</legend>
+                      <label><input type="radio" name="q01" value="A" required> A capacity-aware function makes a call safe whenever the supplied destination capacity is nonzero, even if it is overstated, because the library can recover the real object size from the destination pointer.</label>
+                      <label><input type="radio" name="q01" value="B"> Developers still must follow the API contract, pass accurate sizes, check results, and handle ownership and failure correctly.</label>
+                      <label><input type="radio" name="q01" value="C"> An approved library guarantees that callers do not need to interpret truncation, ownership, or failure differences.</label>
+                      <label><input type="radio" name="q01" value="D"> Static analysis of the API name is enough to confirm that the call follows the function contract.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>2. What is the difference between string length and buffer capacity?</legend>
+                      <label><input type="radio" name="q02" value="A" required> String length is current content length, while capacity is the total storage available for content and any required terminator.</label>
+                      <label><input type="radio" name="q02" value="B"> Capacity is the current content length plus its terminator; extra unused storage is not part of the contract until a later append explicitly extends the current string.</label>
+                      <label><input type="radio" name="q02" value="C"> strlen reports both length and writable capacity for any valid destination buffer.</label>
+                      <label><input type="radio" name="q02" value="D"> Length and capacity may be used interchangeably when the destination was allocated on the stack.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>3. What should a safer string API make clear?</legend>
+                      <label><input type="radio" name="q03" value="A" required> A function name containing bounded or safe is sufficient when the team standard approves the library.</label>
+                      <label><input type="radio" name="q03" value="B"> A null-termination guarantee makes truncation reporting and ownership behavior irrelevant.</label>
+                      <label><input type="radio" name="q03" value="C"> The return type and header declaration fully specify failure semantics without a project convention.</label>
+                      <label><input type="radio" name="q03" value="D"> Required inputs, destination capacity, termination behavior, truncation behavior, return values, ownership, and failure handling.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>4. Why must truncation behavior be understood?</legend>
+                      <label><input type="radio" name="q04" value="A" required> Truncated display, configuration, and protocol strings may all be accepted when the output remains terminated.</label>
+                      <label><input type="radio" name="q04" value="B"> It is sufficient to compare the return value with zero; the required size does not need to be retained.</label>
+                      <label><input type="radio" name="q04" value="C"> Truncation can change program meaning, produce incomplete data, or require explicit rejection depending on the use case.</label>
+                      <label><input type="radio" name="q04" value="D"> Retrying with a larger buffer is always the correct response, regardless of size policy or attacker influence.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>5. What is a common obligation when using dynamic string libraries?</legend>
+                      <label><input type="radio" name="q05" value="A" required> The library owns all buffers it returns indefinitely, so callers should never release them.</label>
+                      <label><input type="radio" name="q05" value="B"> A growth failure may leave a string partially modified, and the caller can infer its state from the pointer.</label>
+                      <label><input type="radio" name="q05" value="C"> Managing allocation failure, ownership transfer, cleanup, and maximum size policy.</label>
+                      <label><input type="radio" name="q05" value="D"> Dynamic capacity makes a maximum-size policy unnecessary whenever the allocator reports success.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>6. Why should formatted string API return values be checked?</legend>
+                      <label><input type="radio" name="q06" value="A" required> A nonnegative snprintf result always means the complete output was stored in the destination.</label>
+                      <label><input type="radio" name="q06" value="B"> They may report failure, required size, or truncation that the program must handle.</label>
+                      <label><input type="radio" name="q06" value="C"> Terminated output may be used after truncation whenever its bytes are readable.</label>
+                      <label><input type="radio" name="q06" value="D"> Checking the destination's final byte after the call is a portable substitute for reading the return contract.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>7. Why is portability important when choosing string APIs?</legend>
+                      <label><input type="radio" name="q07" value="A" required> Availability, behavior, names, and semantics can differ across platforms, libraries, compilers, and coding standards.</label>
+                      <label><input type="radio" name="q07" value="B"> A function with the same name has the same semantics across every C library and platform.</label>
+                      <label><input type="radio" name="q07" value="C"> Selecting an API available on the developer workstation is sufficient when CI compiles the target code.</label>
+                      <label><input type="radio" name="q07" value="D"> A portability wrapper should expose each platform's native truncation and failure behavior to its callers.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>8. Why is blind mechanical replacement of legacy string calls risky?</legend>
+                      <label><input type="radio" name="q08" value="A" required> Replacing calls one for one preserves semantics when the new function accepts a similar argument list.</label>
+                      <label><input type="radio" name="q08" value="B"> A migration can standardize truncation policy after rollout because ordinary tests will expose any changed behavior.</label>
+                      <label><input type="radio" name="q08" value="C"> The new library's safety reputation is sufficient evidence to ignore assumptions at legacy call sites.</label>
+                      <label><input type="radio" name="q08" value="D"> New APIs may have different truncation, termination, return-value, or ownership behavior that changes program semantics.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>9. What should migration tests cover?</legend>
+                      <label><input type="radio" name="q09" value="A" required> Normal cases, boundary lengths, truncation, empty strings, invalid input, and failure paths.</label>
+                      <label><input type="radio" name="q09" value="B"> The happy path and the maximum successful length cover most migration risk.</label>
+                      <label><input type="radio" name="q09" value="C"> Sanitizer results replace explicit tests for truncation, allocation failure, and unchanged failure state.</label>
+                      <label><input type="radio" name="q09" value="D"> Comparing output text is sufficient; return status and failure-state metadata are implementation details.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>10. What is the role of static analysis and sanitizers?</legend>
+                      <label><input type="radio" name="q10" value="A" required> A clean static-analysis and sanitizer run proves API contracts are followed for all possible input.</label>
+                      <label><input type="radio" name="q10" value="B"> Compiler warnings can select the correct project policy for truncation and allocation failure.</label>
+                      <label><input type="radio" name="q10" value="C"> Tooling reduces the need for boundary tests when the chosen library is widely deployed.</label>
+                      <label><input type="radio" name="q10" value="D"> They help detect risky usage and runtime defects, but they do not replace clear contracts and tests.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>11. What should reviewers ask about a string-building abstraction?</legend>
+                      <label><input type="radio" name="q11" value="A" required> A builder owns every source string appended to it until the final result is produced.</label>
+                      <label><input type="radio" name="q11" value="B"> A successful append guarantees that old interior pointers remain valid after future growth.</label>
+                      <label><input type="radio" name="q11" value="C"> Who owns the buffer, how growth is handled, what happens on failure, and how final length and termination are reported.</label>
+                      <label><input type="radio" name="q11" value="D"> The caller needs only the final character pointer; length, capacity, and failure state can remain undocumented internals.</label>
+                    </fieldset>
+
+<fieldset class="quiz-question">
+                      <legend>12. What is the main course takeaway?</legend>
+                      <label><input type="radio" name="q12" value="A" required> Adopting one approved API is the main control; usage differences can be handled informally during review.</label>
+                      <label><input type="radio" name="q12" value="B"> Safe string libraries should be chosen and used by explicit contract, with consistent conventions, checked results, edge-case tests, and review.</label>
+                      <label><input type="radio" name="q12" value="C"> A termination guarantee matters more than accurate capacity and consistently checked results.</label>
+                      <label><input type="radio" name="q12" value="D"> Migration is complete when unsafe function names disappear, even if tests and call-site contracts remain unchanged.</label>
+                    </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m11.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

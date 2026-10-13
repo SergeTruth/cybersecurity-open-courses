@@ -1,0 +1,120 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Validation failure should produce
+predictable behavior.
+
+2
+00:00:03.620 --> 00:00:08.058
+Fail-closed behavior means the program
+rejects input and avoids unsafe continuation
+
+3
+00:00:08.138 --> 00:00:09.902
+when validation does not succeed.
+
+4
+00:00:09.982 --> 00:00:14.238
+The code should not keep processing a
+value simply because a later layer might catch
+
+5
+00:00:14.318 --> 00:00:14.986
+the problem.
+
+6
+00:00:15.066 --> 00:00:17.438
+Avoid partial state updates on invalid
+input.
+
+7
+00:00:17.518 --> 00:00:21.530
+If a parser updates configuration,
+modifies an object, allocates resources,
+
+8
+00:00:21.610 --> 00:00:24.164
+or writes records before validation is
+complete,
+
+9
+00:00:24.244 --> 00:00:27.162
+a failure can leave the program in an
+inconsistent state.
+
+10
+00:00:27.242 --> 00:00:31.255
+A safer pattern validates into temporary
+state and commits only after the full
+
+11
+00:00:31.335 --> 00:00:32.551
+contract is satisfied.
+
+12
+00:00:32.631 --> 00:00:35.489
+Temporary resources should be cleaned up
+on rejection.
+
+13
+00:00:35.569 --> 00:00:38.487
+Buffers, parsed fields, dynamic objects,
+file handles,
+
+14
+00:00:38.567 --> 00:00:42.398
+and intermediate records should have clear
+ownership during validation.
+
+15
+00:00:42.478 --> 00:00:45.761
+Failure paths deserve the same cleanup
+review as success paths.
+
+16
+00:00:45.841 --> 00:00:48.030
+Error reporting should be useful but safe.
+
+17
+00:00:48.110 --> 00:00:51.636
+Logs can record source, field name,
+failure category, length range,
+
+18
+00:00:51.716 --> 00:00:55.182
+or validation rule without copying
+secrets, raw sensitive values,
+
+19
+00:00:55.262 --> 00:00:56.538
+or large untrusted text.
+
+20
+00:00:56.618 --> 00:01:00.996
+User-facing messages should avoid
+unnecessary internal details while still making
+
+21
+00:01:01.076 --> 00:01:04.055
+the failure understandable enough for
+normal operation.
+
+22
+00:01:04.135 --> 00:01:08.391
+Most importantly, invalid data should not
+continue deeper into the program under a
+
+23
+00:01:08.471 --> 00:01:11.937
+warning-only model unless the contract
+explicitly supports that.
+
+24
+00:01:12.017 --> 00:01:16.151
+Once validation fails, later code should
+not have to defend against the rejected
+
+25
+00:01:16.231 --> 00:01:18.420
+representation as if it were still usable.

@@ -1,0 +1,143 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.786
+Ownership and group settings are part of
+the trust story for a file.
+
+2
+00:00:03.866 --> 00:00:07.092
+They help define who can manage, read,
+write, or replace the file,
+
+3
+00:00:07.172 --> 00:00:09.989
+depending on the platform model and
+surrounding policy.
+
+4
+00:00:10.069 --> 00:00:14.058
+A C program that creates or consumes files
+should understand which identity owns
+
+5
+00:00:14.138 --> 00:00:17.248
+those files and which identities are
+expected to share access.
+
+6
+00:00:17.328 --> 00:00:21.317
+Shared groups and service accounts can be
+useful, but they should be deliberate.
+
+7
+00:00:21.397 --> 00:00:25.152
+Accidental group sharing can expose files
+to services that do not need them.
+
+8
+00:00:25.232 --> 00:00:29.280
+A service account that owns too much data
+can turn a small application defect into a
+
+9
+00:00:29.360 --> 00:00:30.886
+broader operational problem.
+
+10
+00:00:30.966 --> 00:00:33.313
+The ownership model should match the
+workflow,
+
+11
+00:00:33.393 --> 00:00:35.387
+not merely the easiest deployment path.
+
+12
+00:00:35.467 --> 00:00:39.750
+User-specific, tenant-specific, and
+service-specific data need clear separation.
+
+13
+00:00:39.830 --> 00:00:43.820
+Directory layout, permissions, and
+application checks should all support that
+
+14
+00:00:43.900 --> 00:00:44.545
+separation.
+
+15
+00:00:44.625 --> 00:00:47.266
+If multiple users or tenants write into a
+shared area,
+
+16
+00:00:47.346 --> 00:00:49.868
+the application needs careful naming,
+ownership,
+
+17
+00:00:49.948 --> 00:00:53.645
+and authorization rules so one actor's
+files do not become another actor's
+
+18
+00:00:53.725 --> 00:00:54.605
+responsibility.
+
+19
+00:00:54.685 --> 00:00:58.264
+Do not assume a file is trustworthy only
+because its path looks familiar.
+
+20
+00:00:58.344 --> 00:01:01.864
+A file in an expected directory may have
+unexpected owner, group, type,
+
+21
+00:01:01.944 --> 00:01:03.234
+permissions, or history.
+
+22
+00:01:03.314 --> 00:01:06.952
+For sensitive workflows, the program may
+need to check metadata or rely on
+
+23
+00:01:07.032 --> 00:01:11.080
+controlled creation patterns before
+trusting the file as part of the application
+
+24
+00:01:11.160 --> 00:01:11.512
+state.
+
+25
+00:01:11.592 --> 00:01:14.702
+Document ownership and group expectations
+where they matter.
+
+26
+00:01:14.782 --> 00:01:17.891
+Reviewers should be able to see which
+account creates the file,
+
+27
+00:01:17.971 --> 00:01:21.081
+which account reads it later, which group
+if any participates,
+
+28
+00:01:21.161 --> 00:01:22.862
+and where the trust boundary sits.
+
+29
+00:01:22.942 --> 00:01:25.113
+Files that cross users, services, tenants,
+
+30
+00:01:25.193 --> 00:01:28.420
+or privilege levels deserve especially
+clear ownership design.

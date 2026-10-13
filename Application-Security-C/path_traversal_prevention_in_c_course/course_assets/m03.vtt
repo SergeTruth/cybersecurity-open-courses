@@ -1,0 +1,140 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.133
+An approved file root is the trusted base
+directory for a specific workflow.
+
+2
+00:00:04.213 --> 00:00:07.903
+It answers a simple question: where is
+this operation allowed to touch files?
+
+3
+00:00:07.983 --> 00:00:10.991
+A download workflow may have one root,
+upload staging another,
+
+4
+00:00:11.071 --> 00:00:14.874
+reports another, temporary work another,
+and user-specific storage another.
+
+5
+00:00:14.954 --> 00:00:17.168
+Naming those roots makes the policy
+concrete.
+
+6
+00:00:17.248 --> 00:00:20.484
+A trusted root should come from
+configuration, deployment policy,
+
+7
+00:00:20.564 --> 00:00:24.537
+or trusted application state, not directly
+from the user request being processed.
+
+8
+00:00:24.617 --> 00:00:26.774
+The root is part of the application
+boundary.
+
+9
+00:00:26.854 --> 00:00:29.863
+User-controlled input may select a file
+inside that boundary,
+
+10
+00:00:29.943 --> 00:00:32.667
+but it should not be able to redefine the
+boundary itself.
+
+11
+00:00:32.747 --> 00:00:35.926
+Separate roots help keep workflows from
+bleeding into each other.
+
+12
+00:00:36.006 --> 00:00:39.979
+A report export should not share the same
+write area as application configuration.
+
+13
+00:00:40.059 --> 00:00:43.863
+Upload staging should not silently overlap
+served downloads unless the design
+
+14
+00:00:43.943 --> 00:00:45.419
+intentionally supports that.
+
+15
+00:00:45.499 --> 00:00:49.472
+User or tenant data should be separated by
+directory design and access checks so one
+
+16
+00:00:49.552 --> 00:00:52.674
+caller's resource name cannot select
+another caller's storage.
+
+17
+00:00:52.754 --> 00:00:54.741
+Least privilege strengthens the design.
+
+18
+00:00:54.821 --> 00:00:58.624
+The operating system account running the
+process should have access only to the
+
+19
+00:00:58.704 --> 00:01:01.372
+directories and operations required for
+the workflow.
+
+20
+00:01:01.452 --> 00:01:03.041
+If path logic contains a mistake,
+
+21
+00:01:03.121 --> 00:01:07.151
+restrictive process permissions and
+storage layout can reduce what the mistake can
+
+22
+00:01:07.231 --> 00:01:07.629
+affect.
+
+23
+00:01:07.709 --> 00:01:11.115
+Application checks and operating system
+limits should work together.
+
+24
+00:01:11.195 --> 00:01:15.225
+Approved root policy should be documented
+closely enough for code review to compare
+
+25
+00:01:15.305 --> 00:01:16.724
+intent with implementation.
+
+26
+00:01:16.804 --> 00:01:19.983
+Reviewers should know which root a
+function uses, who controls it,
+
+27
+00:01:20.063 --> 00:01:23.185
+which operations are allowed there, and
+what naming rules apply.
+
+28
+00:01:23.265 --> 00:01:27.011
+Without that policy, review becomes a
+debate about strings rather than a check
+
+29
+00:01:27.091 --> 00:01:28.340
+against a clear boundary.

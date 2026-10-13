@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.700
+File permissions are one of the operating
+system's main ways to decide who can read,
+
+2
+00:00:04.780 --> 00:00:08.020
+write, execute, modify, or sometimes
+delete file-backed data.
+
+3
+00:00:08.100 --> 00:00:12.240
+For C programs, permissions are not just
+an administrative setting applied after
+
+4
+00:00:12.320 --> 00:00:12.980
+deployment.
+
+5
+00:00:13.060 --> 00:00:16.000
+They are part of what the program creates,
+opens, changes,
+
+6
+00:00:16.080 --> 00:00:18.060
+and relies on during normal operation.
+
+7
+00:00:18.140 --> 00:00:21.020
+A permission mistake can expose sensitive
+information,
+
+8
+00:00:21.100 --> 00:00:25.120
+allow unintended modification, weaken
+separation between users or services,
+
+9
+00:00:25.200 --> 00:00:27.300
+or make tenant boundaries less reliable.
+
+10
+00:00:27.380 --> 00:00:30.680
+The file may be a primary data file, but
+it may also be a log, export,
+
+11
+00:00:30.760 --> 00:00:35.200
+cache, temporary file, diagnostic bundle,
+generated report, or intermediate output.
+
+12
+00:00:35.280 --> 00:00:39.600
+Secondary files often receive less
+attention even though they may contain sensitive
+
+13
+00:00:39.680 --> 00:00:40.220
+material.
+
+14
+00:00:40.300 --> 00:00:43.120
+Because C code often interacts directly
+with file APIs,
+
+15
+00:00:43.200 --> 00:00:46.140
+the application has to be deliberate about
+access intent.
+
+16
+00:00:46.220 --> 00:00:49.520
+It should be clear whether a file needs
+read access, write access,
+
+17
+00:00:49.600 --> 00:00:53.080
+append behavior, replacement behavior, or
+executable permission.
+
+18
+00:00:53.160 --> 00:00:54.780
+When the program creates files,
+
+19
+00:00:54.860 --> 00:00:58.100
+it should also be clear who is supposed to
+access them afterward.
+
+20
+00:00:58.180 --> 00:01:01.060
+Secure permission handling starts before a
+file exists.
+
+21
+00:01:01.140 --> 00:01:04.440
+The program should choose safe defaults
+for newly created files,
+
+22
+00:01:04.520 --> 00:01:07.520
+request only the access it needs, check
+important results,
+
+23
+00:01:07.600 --> 00:01:11.020
+and clean up sensitive temporary output
+when it is no longer needed.
+
+24
+00:01:11.100 --> 00:01:15.000
+Waiting until deployment to think about
+permissions usually leaves too many
+
+25
+00:01:15.080 --> 00:01:16.700
+assumptions hidden in the code.
+
+26
+00:01:16.780 --> 00:01:20.680
+A good habit is to treat file permission
+decisions as part of the data model and
+
+27
+00:01:20.760 --> 00:01:21.600
+trust boundary.
+
+28
+00:01:21.680 --> 00:01:24.920
+Ask what the file contains, who should
+access it, who should not,
+
+29
+00:01:25.000 --> 00:01:27.520
+how long it should remain, where it will
+be stored,
+
+30
+00:01:27.600 --> 00:01:30.660
+and what happens if permission-sensitive
+operations fail.
+
+31
+00:01:30.740 --> 00:01:34.820
+Those questions turn permissions from an
+afterthought into a designed control.

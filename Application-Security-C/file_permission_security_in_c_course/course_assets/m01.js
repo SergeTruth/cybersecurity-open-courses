@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why File Permissions Matter",
+  "graphicAlt": "A file-backed data object is surrounded by decisions about access identity, operation, storage location and retention.",
+  "narration": "File permissions are one of the operating system's main ways to decide who can read, write, execute, modify, or sometimes delete file-backed data. For C programs, permissions are not just an administrative setting applied after deployment. They are part of what the program creates, opens, changes, and relies on during normal operation.\n\nA permission mistake can expose sensitive information, allow unintended modification, weaken separation between users or services, or make tenant boundaries less reliable. The file may be a primary data file, but it may also be a log, export, cache, temporary file, diagnostic bundle, generated report, or intermediate output. Secondary files often receive less attention even though they may contain sensitive material.\n\nBecause C code often interacts directly with file APIs, the application has to be deliberate about access intent. It should be clear whether a file needs read access, write access, append behavior, replacement behavior, or executable permission. When the program creates files, it should also be clear who is supposed to access them afterward.\n\nSecure permission handling starts before a file exists. The program should choose safe defaults for newly created files, request only the access it needs, check important results, and clean up sensitive temporary output when it is no longer needed. Waiting until deployment to think about permissions usually leaves too many assumptions hidden in the code.\n\nA good habit is to treat file permission decisions as part of the data model and trust boundary. Ask what the file contains, who should access it, who should not, how long it should remain, where it will be stored, and what happens if permission-sensitive operations fail. Those questions turn permissions from an afterthought into a designed control.",
+  "narrationPoints": [
+    "For C programs, permissions are not just an administrative setting applied after deployment.",
+    "The file may be a primary data file, but it may also be a log, export, cache, temporary file.",
+    "Because C code often interacts directly with file APIs, the application has to be deliberate about access intent.",
+    "Secure permission handling starts before a file exists.",
+    "A good habit is to treat file permission decisions as part of the data model and trust boundary."
+  ]
+};

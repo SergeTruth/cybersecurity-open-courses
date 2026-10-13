@@ -1,0 +1,181 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.972
+Firmware often participates in device
+identity.
+
+2
+00:00:03.052 --> 00:00:06.348
+It may store identifiers, keys,
+certificates, pairing material,
+
+3
+00:00:06.428 --> 00:00:08.782
+manufacturing records, service
+credentials,
+
+4
+00:00:08.862 --> 00:00:12.394
+or counters that help the device prove
+what it is or decide what it may do.
+
+5
+00:00:12.474 --> 00:00:15.711
+These values need lifecycle ownership, not
+just a place in flash.
+
+6
+00:00:15.791 --> 00:00:18.557
+Each key or secret should have a clear
+purpose and scope.
+
+7
+00:00:18.637 --> 00:00:22.522
+A signing trust anchor, a device
+authentication key, a transport credential,
+
+8
+00:00:22.602 --> 00:00:26.074
+a pairing secret, and a manufacturing
+token are not interchangeable.
+
+9
+00:00:26.154 --> 00:00:29.627
+Naming the purpose helps reviewers decide
+where the value may be used,
+
+10
+00:00:29.707 --> 00:00:32.120
+who may access it, and how it should be
+protected.
+
+11
+00:00:32.200 --> 00:00:34.436
+Provisioning is part of the security
+design.
+
+12
+00:00:34.516 --> 00:00:38.578
+Values may be installed during
+manufacturing, personalization, field service,
+
+13
+00:00:38.658 --> 00:00:40.011
+first boot, or enrollment.
+
+14
+00:00:40.091 --> 00:00:43.446
+The process should define who creates the
+value, where it is stored,
+
+15
+00:00:43.526 --> 00:00:47.646
+how it is protected in transit, what
+records are kept, and how mistakes are handled.
+
+16
+00:00:47.726 --> 00:00:51.081
+Hard-coded secrets are risky because they
+are difficult to rotate,
+
+17
+00:00:51.161 --> 00:00:54.692
+easy to copy across builds, and hard to
+manage across product variants.
+
+18
+00:00:54.772 --> 00:00:58.892
+Firmware should avoid embedding shared
+secret material directly in source code or
+
+19
+00:00:58.972 --> 00:01:00.385
+widely distributed images.
+
+20
+00:01:00.465 --> 00:01:04.232
+When a device needs identity, use a
+reviewed provisioning and storage plan.
+
+21
+00:01:04.312 --> 00:01:07.784
+Storage controls should match sensitivity
+and platform capability.
+
+22
+00:01:07.864 --> 00:01:10.925
+Some devices have secure elements,
+protected flash regions,
+
+23
+00:01:11.005 --> 00:01:14.595
+one-time programmable memory, hardware key
+slots, or access controls.
+
+24
+00:01:14.675 --> 00:01:18.148
+Others have fewer protections and need
+compensating design choices.
+
+25
+00:01:18.228 --> 00:01:22.230
+The important point is to document the
+assumption and test that the release build
+
+26
+00:01:22.310 --> 00:01:22.898
+matches it.
+
+27
+00:01:22.978 --> 00:01:25.804
+Logging and diagnostics must handle
+secrets carefully.
+
+28
+00:01:25.884 --> 00:01:29.827
+A helpful debug line during bring-up can
+become an exposure in a field build if it
+
+29
+00:01:29.907 --> 00:01:33.615
+records keys, credentials, tokens,
+certificates with private material,
+
+30
+00:01:33.695 --> 00:01:35.049
+or sensitive identifiers.
+
+31
+00:01:35.129 --> 00:01:39.072
+Logs should be reviewed for what they
+reveal, not only for whether they compile.
+
+32
+00:01:39.152 --> 00:01:42.095
+Lifecycle planning includes replacement
+and retirement.
+
+33
+00:01:42.175 --> 00:01:45.000
+Teams should know what happens if a
+certificate expires,
+
+34
+00:01:45.080 --> 00:01:48.729
+a manufacturing process changes, a service
+credential must be replaced,
+
+35
+00:01:48.809 --> 00:01:50.869
+or a product line needs a new trust
+anchor.
+
+36
+00:01:50.949 --> 00:01:55.069
+Firmware security is stronger when
+identity has an owner from design through field
+
+37
+00:01:55.149 --> 00:01:55.620
+support.

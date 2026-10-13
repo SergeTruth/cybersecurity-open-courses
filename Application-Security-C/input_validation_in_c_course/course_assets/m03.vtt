@@ -1,0 +1,122 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.388
+A strong validation strategy starts by
+defining what valid input looks like.
+
+2
+00:00:04.468 --> 00:00:08.297
+Instead of trying to list every possible
+invalid case, describe the source,
+
+3
+00:00:08.377 --> 00:00:12.146
+type, required fields, allowed characters,
+length limits, range limits,
+
+4
+00:00:12.226 --> 00:00:15.815
+encoding, and state relationships that the
+program actually expects.
+
+5
+00:00:15.895 --> 00:00:19.724
+Accept-known-good validation is usually
+easier to reason about than broad
+
+6
+00:00:19.804 --> 00:00:20.462
+acceptance.
+
+7
+00:00:20.542 --> 00:00:24.251
+An allowlist says which forms are
+permitted and rejects everything else.
+
+8
+00:00:24.331 --> 00:00:27.621
+That is clearer than relying on a long
+denylist of unusual values,
+
+9
+00:00:27.701 --> 00:00:31.290
+especially when the input space includes
+many encodings, separators,
+
+10
+00:00:31.370 --> 00:00:33.942
+control characters, or partially formed
+records.
+
+11
+00:00:34.022 --> 00:00:37.671
+Ambiguous data should be rejected or
+normalized only under clear rules.
+
+12
+00:00:37.751 --> 00:00:41.520
+For example, the program should know
+whether extra whitespace is allowed,
+
+13
+00:00:41.600 --> 00:00:45.847
+whether repeated delimiters are
+meaningful, whether case changes are acceptable,
+
+14
+00:00:45.927 --> 00:00:49.457
+and whether more than one representation
+of the same value can appear.
+
+15
+00:00:49.537 --> 00:00:53.425
+Canonical forms help only when the
+canonicalization rule itself is precise.
+
+16
+00:00:53.505 --> 00:00:57.274
+Validation should be close to the boundary
+where input enters the program.
+
+17
+00:00:57.354 --> 00:01:00.465
+If raw input travels through many layers
+before it is checked,
+
+18
+00:01:00.545 --> 00:01:03.596
+more code has to defend itself against
+every possible shape.
+
+19
+00:01:03.676 --> 00:01:07.744
+A validated internal representation lets
+later code work with clearer types and
+
+20
+00:01:07.824 --> 00:01:08.960
+smaller assumptions.
+
+21
+00:01:09.040 --> 00:01:11.014
+The strategy should match the use case.
+
+22
+00:01:11.094 --> 00:01:14.983
+A parser for a configuration file, a
+command-line option, a field in a record,
+
+23
+00:01:15.063 --> 00:01:17.575
+and a device message may all need
+different rules.
+
+24
+00:01:17.655 --> 00:01:21.843
+The shared discipline is to define
+expected good input and reject values that do not
+
+25
+00:01:21.923 --> 00:01:22.820
+fit the contract.

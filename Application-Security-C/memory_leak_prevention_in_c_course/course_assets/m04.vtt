@@ -1,0 +1,157 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.828
+Error handling is one of the most common
+places for leaks to appear.
+
+2
+00:00:03.908 --> 00:00:06.998
+The normal path may allocate, use, and
+free memory correctly,
+
+3
+00:00:07.078 --> 00:00:09.574
+while failure paths return early, skip a
+release,
+
+4
+00:00:09.654 --> 00:00:11.615
+or lose track of what has been acquired.
+
+5
+00:00:11.695 --> 00:00:15.914
+Defensive C review should inspect the
+failure paths with the same seriousness as the
+
+6
+00:00:15.994 --> 00:00:16.886
+successful path.
+
+7
+00:00:16.966 --> 00:00:21.185
+Functions that allocate several resources
+need cleanup logic for partial success.
+
+8
+00:00:21.265 --> 00:00:25.365
+A parser might allocate a header object,
+then a list, then several nested strings.
+
+9
+00:00:25.445 --> 00:00:29.546
+A setup function might acquire memory, a
+file handle, and a configuration buffer.
+
+10
+00:00:29.626 --> 00:00:30.814
+If the third step fails,
+
+11
+00:00:30.894 --> 00:00:35.173
+cleanup should release the first two
+without assuming the entire object is complete.
+
+12
+00:00:35.253 --> 00:00:39.472
+Releasing resources in many different
+branches increases the chance of missing one
+
+13
+00:00:39.552 --> 00:00:39.849
+path.
+
+14
+00:00:39.929 --> 00:00:40.939
+As a function grows,
+
+15
+00:00:41.019 --> 00:00:44.407
+separate returns and scattered free calls
+can become hard to audit.
+
+16
+00:00:44.487 --> 00:00:48.706
+A predictable cleanup section can make
+ownership state easier to review because all
+
+17
+00:00:48.786 --> 00:00:51.341
+releases happen in a known order from a
+known place.
+
+18
+00:00:51.421 --> 00:00:54.927
+A single cleanup section is not a magic
+rule, but it is a useful pattern.
+
+19
+00:00:55.007 --> 00:00:57.800
+It can release resources in reverse
+acquisition order,
+
+20
+00:00:57.880 --> 00:01:02.099
+check whether a pointer is non-null before
+freeing, and return a consistent status.
+
+21
+00:01:02.179 --> 00:01:06.458
+This approach works best when pointers are
+initialized to known values and ownership
+
+22
+00:01:06.538 --> 00:01:08.143
+state is updated consistently.
+
+23
+00:01:08.223 --> 00:01:12.323
+Cleanup code can be safe to run for
+resources that were never initialized when it is
+
+24
+00:01:12.403 --> 00:01:13.354
+designed that way.
+
+25
+00:01:13.434 --> 00:01:15.811
+For example, freeing a null pointer is
+safe in C,
+
+26
+00:01:15.891 --> 00:01:19.813
+but calling a custom cleanup routine on an
+uninitialized structure may not be.
+
+27
+00:01:19.893 --> 00:01:22.924
+Each cleanup helper should document what
+states it accepts.
+
+28
+00:01:23.004 --> 00:01:26.331
+Failure behavior should leave the program
+in a known, valid state.
+
+29
+00:01:26.411 --> 00:01:27.422
+If a function fails,
+
+30
+00:01:27.502 --> 00:01:30.711
+callers should know whether ownership
+remains with the caller,
+
+31
+00:01:30.791 --> 00:01:32.752
+whether partial output was cleaned up,
+
+32
+00:01:32.832 --> 00:01:35.862
+and whether any returned object must be
+ignored or released.
+
+33
+00:01:35.942 --> 00:01:40.340
+A predictable failure contract prevents
+leaks from spreading across call boundaries.

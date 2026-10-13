@@ -1,0 +1,144 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.229
+C programs commonly access environment
+variables through getenv or platform-specific
+
+2
+00:00:05.309 --> 00:00:06.065
+equivalents.
+
+3
+00:00:06.145 --> 00:00:07.658
+The interface looks simple:
+
+4
+00:00:07.738 --> 00:00:11.080
+ask for a name and receive a string-like
+value if one is present.
+
+5
+00:00:11.160 --> 00:00:14.943
+The simplicity is useful, but it can hide
+important details about type,
+
+6
+00:00:15.023 --> 00:00:16.788
+lifetime, ownership, and trust.
+
+7
+00:00:16.868 --> 00:00:18.634
+An environment value is a string.
+
+8
+00:00:18.714 --> 00:00:22.812
+If the program intends to use it as a
+number, boolean, mode, list, identifier,
+
+9
+00:00:22.892 --> 00:00:26.864
+path, timeout, size limit, or feature
+setting, the program has to parse it.
+
+10
+00:00:26.944 --> 00:00:28.709
+That parsing should be explicit.
+
+11
+00:00:28.789 --> 00:00:32.698
+A string that happens to look close to the
+expected value is not the same as a
+
+12
+00:00:32.778 --> 00:00:34.670
+validated configuration setting.
+
+13
+00:00:34.750 --> 00:00:39.037
+The pointer returned by getenv should not
+be treated as permanent owned storage.
+
+14
+00:00:39.117 --> 00:00:43.215
+The C standard and platform behavior leave
+room for environment storage to be
+
+15
+00:00:43.295 --> 00:00:44.556
+managed by the runtime.
+
+16
+00:00:44.636 --> 00:00:47.410
+Other environment APIs may modify the
+environment,
+
+17
+00:00:47.490 --> 00:00:51.714
+and the lifetime assumptions may be
+different from ordinary allocated memory.
+
+18
+00:00:51.794 --> 00:00:55.766
+Copy the value if the application needs to
+keep it, normalize it, redact it,
+
+19
+00:00:55.846 --> 00:00:56.666
+or use it later.
+
+20
+00:00:56.746 --> 00:01:00.403
+The process environment may also be
+inherited from a parent process.
+
+21
+00:01:00.483 --> 00:01:03.825
+A shell, service manager, scheduler,
+launcher, test harness,
+
+22
+00:01:03.905 --> 00:01:05.733
+or wrapper can provide variables.
+
+23
+00:01:05.813 --> 00:01:08.146
+That inheritance is useful for deployment,
+
+24
+00:01:08.226 --> 00:01:12.009
+but it means the program may not be the
+first component to decide what the
+
+25
+00:01:12.089 --> 00:01:13.350
+environment contains.
+
+26
+00:01:13.430 --> 00:01:17.465
+A robust pattern is to read environment
+values during configuration setup,
+
+27
+00:01:17.545 --> 00:01:21.706
+copy the relevant values into
+application-owned structures, validate them,
+
+28
+00:01:21.786 --> 00:01:26.262
+and then let the rest of the program use
+those typed configuration structures rather
+
+29
+00:01:26.342 --> 00:01:28.927
+than repeatedly reading raw environment
+state.
+
+30
+00:01:29.007 --> 00:01:33.421
+This makes assumptions visible and gives
+reviewers one place to inspect defaults,
+
+31
+00:01:33.501 --> 00:01:35.140
+limits, and failure behavior.

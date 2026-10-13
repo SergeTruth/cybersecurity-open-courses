@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.922
+Safer string libraries and APIs matter
+because C string handling depends on details
+
+2
+00:00:05.002 --> 00:00:06.995
+that are easy to hide in ordinary code.
+
+3
+00:00:07.075 --> 00:00:11.248
+A function call may need the destination
+capacity, the current content length,
+
+4
+00:00:11.328 --> 00:00:14.442
+the source length, room for a terminator,
+ownership rules,
+
+5
+00:00:14.522 --> 00:00:16.577
+and a clear interpretation of failure.
+
+6
+00:00:16.657 --> 00:00:20.768
+When those facts are missing, even
+familiar code becomes difficult to review.
+
+7
+00:00:20.848 --> 00:00:24.958
+A safer library can reduce repeated
+mistakes by making important information
+
+8
+00:00:25.038 --> 00:00:25.599
+explicit.
+
+9
+00:00:25.679 --> 00:00:29.478
+Capacity-aware calls, builder objects,
+dynamic string abstractions,
+
+10
+00:00:29.558 --> 00:00:33.544
+and functions with clear return values can
+make code easier to reason about.
+
+11
+00:00:33.624 --> 00:00:36.364
+But a library name does not make a call
+safe by itself.
+
+12
+00:00:36.444 --> 00:00:40.555
+Developers still have to understand the
+contract and supply accurate inputs.
+
+13
+00:00:40.635 --> 00:00:42.254
+The same old questions remain.
+
+14
+00:00:42.334 --> 00:00:44.825
+Is the destination buffer actually that
+large?
+
+15
+00:00:44.905 --> 00:00:47.147
+Is the input a valid C string or a byte
+range?
+
+16
+00:00:47.227 --> 00:00:50.342
+Is null termination guaranteed, required,
+or irrelevant?
+
+17
+00:00:50.422 --> 00:00:52.477
+What happens when output is truncated?
+
+18
+00:00:52.557 --> 00:00:54.176
+Who owns any allocated buffer?
+
+19
+00:00:54.256 --> 00:00:56.996
+What should the program do when the
+operation fails?
+
+20
+00:00:57.076 --> 00:01:00.377
+Consistent project conventions make these
+questions easier.
+
+21
+00:01:00.457 --> 00:01:04.443
+If a team chooses approved string APIs,
+documents their expected behavior,
+
+22
+00:01:04.523 --> 00:01:07.700
+checks return values the same way, and
+tests boundary cases,
+
+23
+00:01:07.780 --> 00:01:09.710
+reviewers spend less time guessing.
+
+24
+00:01:09.790 --> 00:01:14.088
+They can focus on whether each call meets
+the contract for the specific operation.
+
+25
+00:01:14.168 --> 00:01:16.534
+The goal is not to invent a new string
+library.
+
+26
+00:01:16.614 --> 00:01:18.857
+The goal is disciplined selection and use.
+
+27
+00:01:18.937 --> 00:01:22.051
+Choose APIs by documented behavior, not
+reputation alone.
+
+28
+00:01:22.131 --> 00:01:24.248
+Use them consistently, test edge cases,
+
+29
+00:01:24.328 --> 00:01:27.380
+and treat strings as memory with text
+rules layered on top.
