@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Safe defaults matter.",
     "Avoid assumptions about interactive users or trusted input."
   ],
-  "graphicAlt": "Blank placeholder image for Input Validation and Defensive Parameters."
+  "graphicAlt": "Typed and constrained parameters pass into explicit scope and a change preview before application; invalid input is rejected and defaults remain narrow."
 };

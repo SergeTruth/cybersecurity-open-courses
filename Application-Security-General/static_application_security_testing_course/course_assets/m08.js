@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "SAST findings should feed back into secure coding standards, developer education, threat modeling, and design review.",
     "Audit evidence and management reporting should support decisions without overwhelming engineers."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST governance, metrics, and continuous improvement."
+  "graphicAlt": "Explicit SAST ownership interprets coverage, finding age and recurring causes to improve standards and developer learning; raw alert counts are not the measure of risk reduction."
 };

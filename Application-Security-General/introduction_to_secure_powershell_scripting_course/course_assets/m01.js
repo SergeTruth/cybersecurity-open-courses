@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Secure PowerShell scripting combines reliability, accountability, least privilege, and careful data handling.",
     "The goal is trustworthy automation."
   ],
-  "graphicAlt": "Blank placeholder image for Why Secure PowerShell Scripting Matters."
+  "graphicAlt": "PowerShell automation reaches endpoints, directories and cloud services; intended authority, reliability, accountability and least privilege define its boundaries."
 };

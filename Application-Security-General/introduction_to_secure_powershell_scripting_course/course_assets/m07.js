@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Structured logging improves observability.",
     "Exit codes and operational signals matter for scheduled jobs, CI pipelines, and monitoring systems."
   ],
-  "graphicAlt": "Blank placeholder image for Error Handling, Logging, and Observability."
+  "graphicAlt": "Explicit error handling emits truthful success or failure signals, performs cleanup, and leaves safe structured logs with reviewed transcript access and contents."
 };

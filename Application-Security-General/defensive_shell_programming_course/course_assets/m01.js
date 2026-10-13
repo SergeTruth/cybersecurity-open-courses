@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Defensive shell programming means writing automation that behaves predictably under stress.",
     "The goal is safer automation without unnecessary complexity."
   ],
-  "graphicAlt": "Blank white placeholder for Defensive Shell Programming in Real Systems."
+  "graphicAlt": "A small script drives servers, files and deployments using inherited permissions; explicit inputs, visible failures and reviewable intent limit surprises."
 };

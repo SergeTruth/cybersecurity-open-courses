@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Operational records are just as important as formal documents.",
     "Different documents must tell a consistent story."
   ],
-  "graphicAlt": "Architecture, inventory, control narratives and operational evidence align around the same service; policy expectations are distinguished from actual operational records."
+  "graphicAlt": "Architecture, inventory, control narratives and operational records must describe the same system consistently."
 };

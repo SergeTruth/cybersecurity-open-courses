@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Allowlisting is often the clearest pattern for small sets of expected values.",
     "Avoid evaluating user-controlled or uncontrolled strings as shell code."
   ],
-  "graphicAlt": "Blank white placeholder for Input Validation and Trust Boundaries."
+  "graphicAlt": "Arguments, environment values and files must pass expected-value validation; accepted values reach the operation and invalid values stop with clear rejection."
 };

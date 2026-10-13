@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Resource exhaustion can occur through large files, complex documents, image dimensions, nested structures, decompression ratios, or expensive parser behavior.",
     "Errors, logs, and generated artifacts should avoid leaking sensitive file data."
   ],
-  "graphicAlt": "Blank placeholder image for Processing Files Safely."
+  "graphicAlt": "Untrusted archives and documents are processed with entry validation, size, time, memory and count limits; unsafe extraction paths stop and temporary files are cleaned up."
 };

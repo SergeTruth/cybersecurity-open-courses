@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Authentication error messages need care.",
     "Password verification should also be separated from authorization and session management."
   ],
-  "graphicAlt": "Blank placeholder image for Password Handling Principles."
+  "graphicAlt": "Sensitive password input crosses HTTPS into brief verification, never routine logs, URLs or debug dumps; verification remains distinct from authorization."
 };

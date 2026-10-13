@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Credential databases and backups should be protected as sensitive assets.",
     "Design should assume compromise is possible."
   ],
-  "graphicAlt": "Blank placeholder image for Credential Storage Architecture."
+  "graphicAlt": "Protected verifier and version metadata enable rehashing after successful login when an upgrade is needed; backups are protected and credential exports excluded."
 };

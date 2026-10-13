@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Peppers should not create false confidence.",
     "Separating password hashes from application secrets helps incident response."
   ],
-  "graphicAlt": "Blank placeholder image for Salts, Peppers, and Secret Management."
+  "graphicAlt": "A salt is unique per password and stored with the verifier; a pepper is an application secret stored separately and adds lifecycle and availability responsibilities."
 };

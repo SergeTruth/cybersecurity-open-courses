@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Monitoring should look for unusual file activity.",
     "Retention, deletion, backup, and incident response are part of secure file handling."
   ],
-  "graphicAlt": "Blank placeholder image for Logging, Monitoring, and Operational Controls."
+  "graphicAlt": "Safe actor, file identifier, action and result events support auditing, monitoring, retention and incident response without copying sensitive file contents into logs."
 };

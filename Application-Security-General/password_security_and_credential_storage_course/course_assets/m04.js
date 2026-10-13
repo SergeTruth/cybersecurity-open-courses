@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Algorithm selection should avoid custom cryptography.",
     "Parameter tuning is an operational decision."
   ],
-  "graphicAlt": "Blank placeholder image for Modern Password Hashing Algorithms."
+  "graphicAlt": "Established password-hashing libraries support choices such as Argon2, bcrypt, scrypt and PBKDF2; parameters balance guessing cost with login capacity and require measurement and migration planning."
 };

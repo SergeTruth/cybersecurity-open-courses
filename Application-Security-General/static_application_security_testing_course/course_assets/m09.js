@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "SAST works best when paired with secure design, manual code review, dependency scanning, runtime testing, monitoring, and vulnerability response.",
     "The goal is not to generate more alerts."
   ],
-  "graphicAlt": "Blank placeholder image for the course summary on static application security testing."
+  "graphicAlt": "SAST contributes source-level evidence alongside secure design, manual review and runtime testing; reviewing, remediating, validating and learning reduce repeated risk while exceptions stay controlled."
 };

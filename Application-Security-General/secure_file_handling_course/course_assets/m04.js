@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Least-privilege permissions are essential.",
     "Tenant separation and access control should be built into storage design."
   ],
-  "graphicAlt": "Blank placeholder image for Safe File Storage Design."
+  "graphicAlt": "Separate intake, quarantine, processing and deliberately published storage; private tenant compartments and least-privilege permissions prevent accidental exposure."
 };

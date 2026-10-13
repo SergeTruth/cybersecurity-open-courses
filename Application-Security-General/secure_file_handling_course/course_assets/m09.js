@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Download and processing workflows need the same care.",
     "The final goal is to keep files from becoming a path to unauthorized access, data exposure, unsafe execution, resource exhaustion, or operational failure."
   ],
-  "graphicAlt": "Blank placeholder image for Course Summary."
+  "graphicAlt": "End-to-end secure file handling validates input, controls storage, authorizes access, bounds processing, monitors events and cleans up retained or temporary data."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "DAST can be integrated into CI/CD and release decisions, but it should be done carefully.",
     "Exception workflows and risk acceptance should be documented, owned, and revisited."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on DAST remediation, validation, and pipeline integration."
+  "graphicAlt": "An owner remediates the root cause, runtime retesting verifies behavior, and reviewed release gates and owned exceptions manage unresolved risk."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sanitizers and validators are part of that reasoning.",
     "Accuracy depends on language, framework, configuration, and tool capability."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on how static analysis finds issues."
+  "graphicAlt": "Static analysis models data from sources through functions and context-specific controls to sensitive sinks, using syntax, control flow and taint flow with framework and build context."
 };

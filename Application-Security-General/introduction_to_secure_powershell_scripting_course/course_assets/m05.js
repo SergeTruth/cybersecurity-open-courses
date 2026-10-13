@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "SecretManagement module concepts, Windows Credential Manager, certificate-based authentication, and managed identities can all support better patterns depending on the environment.",
     "Secrets can leak through surprising paths."
   ],
-  "graphicAlt": "Blank placeholder image for Secrets and Credential Handling."
+  "graphicAlt": "Automation uses an approved credential store or managed identity, excludes hard-coded and committed secrets and sensitive output, and does not treat SecureString as complete secret management."
 };

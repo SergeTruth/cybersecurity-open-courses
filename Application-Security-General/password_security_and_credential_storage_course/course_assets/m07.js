@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Sessions should be reviewed after password changes and reset events.",
     "Lockout design needs balance."
   ],
-  "graphicAlt": "Blank placeholder image for Authentication Flow Defenses."
+  "graphicAlt": "Authentication defenses combine throttling, MFA and safe recovery; password changes trigger review of sessions and tokens and appropriate user notification."
 };

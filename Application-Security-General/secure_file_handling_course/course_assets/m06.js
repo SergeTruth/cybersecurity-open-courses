@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Signed URLs can be useful for time-limited access to a specific resource under controlled conditions.",
     "Content-Disposition and Content-Type affect how browsers handle downloads."
   ],
-  "graphicAlt": "Blank placeholder image for Secure File Download and Sharing."
+  "graphicAlt": "Every protected download passes object-specific ownership, tenant, sharing and state checks; signed links need narrow scope and short lifetimes."
 };

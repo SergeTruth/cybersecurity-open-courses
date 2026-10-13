@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "User-controlled file content is only part of the concern.",
     "A mature file-handling design combines validation, safe naming, controlled storage, least-privilege permissions, authorization checks, careful processing, monitoring, retention, and cleanup."
   ],
-  "graphicAlt": "Blank placeholder image for Why Secure File Handling Matters."
+  "graphicAlt": "A file workflow crosses receive, storage, processing and return boundaries; names, content, paths and size all require explicit security design."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Pipelines and compound commands deserve review because failures can be hidden if only the last command status is considered.",
     "Temporary state and partial changes need cleanup."
   ],
-  "graphicAlt": "Blank white placeholder for Error Handling and Safe Failure."
+  "graphicAlt": "An operation's result is checked; success continues while failure stops safely and cleans temporary state. Strict shell options support deliberate handling rather than replacing it."
 };

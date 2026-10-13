@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Continuous monitoring records should align with the same scope and boundary story used in the core package.",
     "The best continuous monitoring documentation reflects real operations."
   ],
-  "graphicAlt": "Continuous observation, evidence refresh, risk review and action keep documentation aligned to a changing live system rather than an old approval snapshot."
+  "graphicAlt": "Continuous monitoring connects live scans, changes and incidents to refreshed evidence and risk treatment."
 };

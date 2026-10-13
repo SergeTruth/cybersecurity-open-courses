@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Grouping related findings can reduce noise.",
     "Documentation is part of the control."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST triage and prioritization."
+  "graphicAlt": "Triage groups related findings by root cause and weighs exposure, reachability and data impact before assigning an owner, action and validation plan."
 };

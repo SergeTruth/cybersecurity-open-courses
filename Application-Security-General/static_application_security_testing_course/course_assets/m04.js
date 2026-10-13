@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "False positives and false negatives are normal.",
     "A tool finding is not automatically a confirmed vulnerability."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST findings, rules, and signal quality."
+  "graphicAlt": "A SAST finding is a potential issue: severity estimates impact, confidence estimates validity, and rule context, evidence paths and human review determine the disposition."
 };

@@ -8,5 +8,5 @@ window.COURSE_MODULE = {
     "The professional goal is not to avoid shell scripting.",
     "As you return to existing automation, look for the scripts that run unattended, run with elevated permissions, or handle important data."
   ],
-  "graphicAlt": "Blank white placeholder for Defensive Shell Programming Habits summary."
+  "graphicAlt": "A cycle of validation and quoting, file and secret protection, deliberate failure handling, and logging and review makes automation more predictable."
 };

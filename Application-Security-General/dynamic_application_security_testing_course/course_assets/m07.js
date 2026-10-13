@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Severity should reflect context.",
     "Evidence should be useful but controlled."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on DAST findings, triage, and evidence."
+  "graphicAlt": "A potential finding is validated and placed in context before remediation, documented risk acceptance or dismissal with evidence; useful evidence is redacted and protected."
 };

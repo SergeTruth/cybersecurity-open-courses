@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Legacy application onboarding deserves a thoughtful approach.",
     "SAST should support developers, not become a noisy final gate."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST in the secure software development lifecycle."
+  "graphicAlt": "SAST delivers feedback during development, pull requests, pipelines and release; a known baseline separates inherited findings from new issues while remediation remains planned."
 };

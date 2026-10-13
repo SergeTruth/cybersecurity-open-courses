@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Common SAST finding categories include injection risks, insecure cryptography, unsafe deserialization, path handling issues, hardcoded secrets, access control concerns, and unsafe API use.",
     "The durable value of SAST is defensive quality improvement."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson introducing static application security testing."
+  "graphicAlt": "SAST inspects source, bytecode or artifacts without requiring a live application, producing early review leads that need human context."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Working with objects is usually safer than scraping and rebuilding raw text.",
     "Command injection patterns often hide in convenience helpers: generic run-command functions, remote command wrappers, string templates, or logging code that later gets reused for execution."
   ],
-  "graphicAlt": "Blank placeholder image for Safe Command Construction."
+  "graphicAlt": "Structured parameters and splatting pass values directly to commands, while constructed command text requiring evaluation is avoided; objects preserve intent."
 };

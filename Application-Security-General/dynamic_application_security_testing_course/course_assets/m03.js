@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Session state affects discovery.",
     "Coverage gaps should be reported honestly."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on DAST crawling, discovery, and coverage."
+  "graphicAlt": "A scanner's lens covers only reached application routes; other routes remain explicitly not covered, so paths, roles and exclusions must be reported honestly."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Common DAST finding categories include injection indicators, authentication weaknesses, session handling issues, security header gaps, misconfiguration, exposed errors, insecure transport, and access control concerns.",
     "DAST is a defensive testing practice, not a complete security guarantee."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson introducing dynamic application security testing."
+  "graphicAlt": "DAST sends requests to a running application and examines responses, including headers, cookies, sessions and errors; this provides runtime evidence, not a security guarantee."
 };

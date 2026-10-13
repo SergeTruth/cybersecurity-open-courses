@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "The file's origin should influence the control set, but it should not eliminate controls entirely.",
     "Good design names each file boundary and assigns responsibility."
   ],
-  "graphicAlt": "Blank placeholder image for File Input Trust Boundaries."
+  "graphicAlt": "Public uploads, partner feeds and internal files all pass through intake checks for format, size, ownership and purpose."
 };

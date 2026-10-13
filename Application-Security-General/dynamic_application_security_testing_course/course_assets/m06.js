@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Object-level access control is a core API concern.",
     "Frontend-heavy applications add browser behavior and client-side routing."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on DAST for APIs and modern applications."
+  "graphicAlt": "Schemas and examples, identity and permissions, and workflow state and sequence inform API testing across web, mobile and service clients."
 };

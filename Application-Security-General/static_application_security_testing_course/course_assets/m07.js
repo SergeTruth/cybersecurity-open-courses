@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Exception workflows need ownership.",
     "Automation should not hide responsibility."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST pipeline integration and release controls."
+  "graphicAlt": "Pipeline scanning gives fast feedback on changed code, with risk-based gates, remediation of baseline findings and owned, reviewed exceptions supporting accountable release decisions."
 };

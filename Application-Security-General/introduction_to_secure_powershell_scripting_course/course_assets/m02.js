@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Remote execution adds another layer.",
     "Secure scripting depends on both code and environment."
   ],
-  "graphicAlt": "Blank placeholder image for PowerShell Security Basics."
+  "graphicAlt": "Code combines with execution context—identity, loaded modules and reachable systems—to determine administrative behavior; elevation and remoting require deliberate design."
 };

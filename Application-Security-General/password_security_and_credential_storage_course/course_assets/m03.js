@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Work factors are another key concept.",
     "Password hashes should still be treated as sensitive data."
   ],
-  "graphicAlt": "Blank placeholder image for Password Hashing Fundamentals."
+  "graphicAlt": "A password and unique salt produce a one-way stored verifier through password hashing; library verification checks later input, and hashes remain sensitive."
 };

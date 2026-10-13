@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Good authentication flows add layers around storage.",
     "The final goal is resilience."
   ],
-  "graphicAlt": "Blank placeholder image for Course Summary."
+  "graphicAlt": "Careful handling, strong storage, flow defenses and prepared response limit damage throughout the credential lifecycle."
 };

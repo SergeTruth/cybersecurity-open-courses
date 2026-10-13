@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Trustworthy automation also respects administrative boundaries.",
     "The final takeaway is that secure scripts are reviewed, tested, documented, monitored, and operated within clear boundaries."
   ],
-  "graphicAlt": "Blank placeholder image for Course Summary."
+  "graphicAlt": "Validation, structured parameter passing, limited authority and secret protection, and verification and observation turn PowerShell scripts into dependable operational software."
 };

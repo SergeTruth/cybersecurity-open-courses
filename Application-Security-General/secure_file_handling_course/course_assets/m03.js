@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Extension checks and content type claims are useful hints, not proof.",
     "Metadata should be constrained too."
   ],
-  "graphicAlt": "Blank placeholder image for Validating File Names, Paths, and Metadata."
+  "graphicAlt": "Original filenames remain display metadata; server-generated storage IDs and resolved-path containment keep file operations within an approved root, while extensions and type claims are only hints."
 };

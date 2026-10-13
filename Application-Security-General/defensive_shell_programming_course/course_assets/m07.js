@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Approved secret-management or secure runtime injection mechanisms are preferable where available.",
     "Sensitive output needs the same care as sensitive input."
   ],
-  "graphicAlt": "Blank white placeholder for Secrets, Environment Variables, and Sensitive Output."
+  "graphicAlt": "An approved secret source supplies only needed credentials; token logs and debug dumps are excluded, output is protected, and privilege remains limited."
 };

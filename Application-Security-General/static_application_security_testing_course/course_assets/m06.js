@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Fix validation matters.",
     "SAST feedback should teach repeatable secure coding habits."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on SAST remediation and developer workflow."
+  "graphicAlt": "Durable remediation replaces risky implementation patterns, validates behavior with tests and rescanning, and strengthens team standards and reusable helpers."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "DAST planning should include test accounts and roles.",
     "Coordination matters because DAST touches several teams."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on authorized DAST scope and test planning."
+  "graphicAlt": "Written authorization and a plan for targets, accounts, timing and contacts precede approved testing coordinated with application and operations owners."
 };

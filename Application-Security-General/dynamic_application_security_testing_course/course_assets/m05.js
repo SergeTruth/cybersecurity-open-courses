@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Rate, volume, and state control are part of safe active testing.",
     "Active testing should avoid destructive operations and protect test data."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on active and passive DAST testing concepts."
+  "graphicAlt": "Passive checks inspect responses, while active checks send controlled requests; both require scope, throttling, test-data protection and exclusion of harmful actions."
 };

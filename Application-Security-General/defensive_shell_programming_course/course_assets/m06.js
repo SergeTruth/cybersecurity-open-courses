@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Temporary data should be handled with safe patterns.",
     "Permissions are part of the script design."
   ],
-  "graphicAlt": "Blank white placeholder for Files, Paths, Temporary Data, and Permissions."
+  "graphicAlt": "File operations stay within a controlled base directory, with validated paths, safe temporary files, narrow permissions, file-type checks and scoped cleanup."
 };

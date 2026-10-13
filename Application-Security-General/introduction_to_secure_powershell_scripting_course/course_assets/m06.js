@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Session configuration and role boundaries help separate tasks.",
     "Auditability is part of the privilege model."
   ],
-  "graphicAlt": "Blank placeholder image for Privilege, Remoting, and Administrative Boundaries."
+  "graphicAlt": "An operator reaches only approved tasks through a constrained endpoint; unrelated systems stay outside the capability, with scoped permissions and attributable actions."
 };

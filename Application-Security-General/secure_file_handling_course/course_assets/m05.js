@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Malware scanning and quarantine patterns can reduce risk where files may later be opened by users or processed by internal systems.",
     "Safe upload errors should explain what the user can fix without exposing internal paths, scanner details, stack traces, or sensitive policy internals."
   ],
-  "graphicAlt": "Blank placeholder image for Secure File Upload Workflows."
+  "graphicAlt": "Uploads pass server-side identity, category, size and rate checks before quarantine, scanning and validation; rejected files stop and only accepted files become ready."
 };

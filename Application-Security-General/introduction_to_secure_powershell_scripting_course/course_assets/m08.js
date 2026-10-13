@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Idempotent automation is easier to operate safely.",
     "Maintainability is a security feature."
   ],
-  "graphicAlt": "Blank placeholder image for Testing, Review, and Maintainability."
+  "graphicAlt": "Static review, behavior testing, WhatIf previews and staged rollout support scripts that detect state, make only necessary changes and remain owned and maintainable."
 };

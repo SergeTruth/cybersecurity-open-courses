@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Operational checks should include logs, telemetry, support workflows, database access, backup handling, and incident response runbooks.",
     "Incident response for credential exposure should be planned before it is needed."
   ],
-  "graphicAlt": "Blank placeholder image for Testing, Review, and Operations."
+  "graphicAlt": "Review spans code and libraries, logs and telemetry, databases and backups, and support workflows; incident planning assesses exposure before resets, rotation and notification."
 };

@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "DAST complements secure design, SAST, SCA, code review, manual testing, monitoring, and incident response.",
     "The goal is not to run more scans."
   ],
-  "graphicAlt": "Blank placeholder image for the course summary on dynamic application security testing."
+  "graphicAlt": "Authorization, coverage, controlled testing, triage and verified remediation turn DAST runtime evidence into risk reduction alongside design, code review and other testing."
 };

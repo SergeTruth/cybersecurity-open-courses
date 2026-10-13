@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Safe logging avoids secrets and unnecessary sensitive details.",
     "Review is part of operational evidence because readable scripts are easier to approve, troubleshoot, and improve."
   ],
-  "graphicAlt": "Blank white placeholder for Logging, Review, and Operational Evidence."
+  "graphicAlt": "A script separates normal output from errors and records actions, results and follow-up without secrets; static analysis and human review inspect its behavior."
 };

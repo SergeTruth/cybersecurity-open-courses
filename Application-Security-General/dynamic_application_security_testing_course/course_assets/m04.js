@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Role-based test accounts are important because one account rarely represents the whole application.",
     "Account safety matters."
   ],
-  "graphicAlt": "Blank placeholder image for a lesson on authentication, sessions, and DAST test accounts."
+  "graphicAlt": "Role and tenant test accounts reach protected paths through maintained sessions; login loss must be detected and test credentials protected and retired."
 };

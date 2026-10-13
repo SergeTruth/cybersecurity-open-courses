@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Password policy, password handling, and credential storage are related but different.",
     "Password security is part of a larger identity and access control system."
   ],
-  "graphicAlt": "Blank placeholder image for Why Password Security Still Matters."
+  "graphicAlt": "Password security combines policy, handling and storage with MFA, rate limits and monitoring, assuming credentials may eventually be exposed."
 };

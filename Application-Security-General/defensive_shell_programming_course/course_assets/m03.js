@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "When Bash arrays are available, they can be a safer way to hold argument lists because each element remains a separate argument.",
     "The practical habit is simple: quote variables unless there is a deliberate reason not to, pass arguments directly, avoid accidental globbing, and keep data out of shell syntax."
   ],
-  "graphicAlt": "Blank white placeholder for Quoting, Expansion, and Argument Safety."
+  "graphicAlt": "An unquoted filename splits into multiple arguments, while a quoted filename stays together; array compartments preserve separate argument boundaries."
 };

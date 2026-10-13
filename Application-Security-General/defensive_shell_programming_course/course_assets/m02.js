@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Exit status is a core control signal.",
     "Works on my machine is not enough for shell automation because production environments differ."
   ],
-  "graphicAlt": "Blank white placeholder for Understanding Shell Execution Risk."
+  "graphicAlt": "Text and environment pass through shell interpretation into arguments and a tool, whose result determines whether automation continues or stops."
 };

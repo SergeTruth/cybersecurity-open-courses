@@ -7,5 +7,5 @@ window.COURSE_MODULE = {
     "Strong evidence is traceable, relevant, reviewable, protected, and connected to control assertions, findings, remediation, and monitoring.",
     "The goal is not documentation volume."
   ],
-  "graphicAlt": "Real scope, actual controls and current records converge into trustworthy evidence supporting assessment, monitoring and risk decisions."
+  "graphicAlt": "Clear scope, consistent documentation and current protected evidence support informed risk decisions."
 };
