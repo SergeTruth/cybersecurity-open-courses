@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+Automation changes the secrets problem because scripts run without a person typing a password.
+
+2
+00:00:05.480 --> 00:00:13.560
+Scheduled tasks, service accounts, CI/CD pipelines, deployment jobs, and cloud runbooks all need a way to authenticate.
+
+3
+00:00:13.660 --> 00:00:21.580
+The weak pattern is to place the secret directly in a task argument, script file, exported runbook, or generated configuration artifact.
+
+4
+00:00:21.680 --> 00:00:30.800
+The stronger pattern is to let the platform provide a protected secret store or identity mechanism and retrieve secrets only at runtime.
+
+5
+00:00:30.900 --> 00:00:40.100
+Automation-platform secret protections do not prevent scripts from leaking values to consoles, command lines, artifacts, or tools that echo configuration.
+
+6
+00:00:40.380 --> 00:00:48.060
+CI/CD platforms such as GitHub Actions, Azure DevOps, and similar systems usually provide protected secret or variable mechanisms.
+
+7
+00:00:48.160 --> 00:00:59.920
+Those features help, but scripts can still leak values if they print secrets to console output, include them in command lines, write them to artifacts, or pass them into tools that echo configuration.
+
+8
+00:01:00.020 --> 00:01:08.740
+Build-time secrets and runtime secrets should be separated because the people and systems that can build software should not automatically have every production credential.
+
+9
+00:01:09.020 --> 00:01:12.540
+Scheduled tasks and service accounts need careful review.
+
+10
+00:01:12.640 --> 00:01:19.120
+A task running as a broad administrator account may work reliably, but it also concentrates risk.
+
+11
+00:01:19.220 --> 00:01:27.780
+Task arguments should avoid secrets because task definitions, process listings, event data, or administrative views may expose them.
+
+12
+00:01:27.880 --> 00:01:34.920
+Service account credentials should have defined ownership, limited permissions, rotation procedures, and monitoring.
+
+13
+00:01:35.020 --> 00:01:41.900
+A scheduled job should not become the only undocumented place where a critical password is known.
+
+14
+00:01:42.180 --> 00:01:46.580
+Cloud runbooks and automation accounts should use managed identities where practical.
+
+15
+00:01:46.680 --> 00:01:52.360
+A managed identity can reduce the need to store long-lived credentials in scripts or configuration.
+
+16
+00:01:52.460 --> 00:01:59.580
+When a secret is still required, the runbook should retrieve it from an approved vault and keep it out of output streams and artifacts.
+
+17
+00:01:59.680 --> 00:02:05.680
+Good automation design makes authentication reliable while reducing the number of long-lived secret copies.

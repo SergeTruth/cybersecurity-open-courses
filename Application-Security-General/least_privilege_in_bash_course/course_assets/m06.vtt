@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Least privilege depends on runtime context as much as assigned permissions.
+
+2
+00:00:05.160 --> 00:00:11.000
+A script may appear narrow when read in isolation, but the environment around it can change what it does.
+
+3
+00:00:11.100 --> 00:00:15.660
+PATH controls which executable runs when a command name is used.
+
+4
+00:00:15.760 --> 00:00:26.320
+Environment variables can influence credentials, configuration locations, proxies, debug modes, language runtimes, temporary directories, and tool-specific behavior.
+
+5
+00:00:26.420 --> 00:00:30.980
+The current working directory can change which files are read or written.
+
+6
+00:00:31.260 --> 00:00:36.700
+Command lookup deserves attention because Bash scripts often call external tools by name.
+
+7
+00:00:36.800 --> 00:00:47.120
+If PATH differs between an interactive shell, a cron job, a service, and a CI/CD runner, the script may execute a different binary than the author expected.
+
+8
+00:00:47.220 --> 00:00:52.100
+Defensive scripts should avoid relying on accidental lookup behavior for sensitive workflows.
+
+9
+00:00:52.200 --> 00:00:57.640
+They should make important assumptions explicit and keep the command path model understandable to reviewers.
+
+10
+00:00:57.920 --> 00:01:01.040
+Environment variables can act like hidden inputs.
+
+11
+00:01:01.140 --> 00:01:03.700
+Some are harmless convenience settings.
+
+12
+00:01:03.800 --> 00:01:09.960
+Others can change authentication, output, network routing, logging, or configuration.
+
+13
+00:01:10.060 --> 00:01:15.900
+A script that inherits a large environment from a privileged context may carry more authority than intended.
+
+14
+00:01:16.000 --> 00:01:22.400
+Before launching unrelated helper tools, consider whether sensitive or authority-changing variables should be minimized.
+
+15
+00:01:22.500 --> 00:01:30.020
+At the same time, avoid logging full environments because they can include secrets and operationally sensitive context.
+
+16
+00:01:30.300 --> 00:01:33.260
+Working directory and helper trust matter too.
+
+17
+00:01:33.360 --> 00:01:38.160
+A relative path can point somewhere different depending on how the script was started.
+
+18
+00:01:38.260 --> 00:01:43.220
+A helper script may have its own permissions, assumptions, and side effects.
+
+19
+00:01:43.320 --> 00:01:54.360
+Review the runtime context as part of least privilege: which commands are called, where they come from, which variables influence them, where files are read and written, and what context is logged.
+
+20
+00:01:54.460 --> 00:01:59.100
+The goal is predictable behavior with no accidental inherited power.
+
+21
+00:01:59.200 --> 00:02:06.080
+Reviewers can verify important runtime assumptions and understand exactly how each command path is selected.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.660
+A secure path-handling script should fail clearly when a path is unsupported, unresolved, outside scope, or the wrong file type.
+
+2
+00:00:08.760 --> 00:00:14.920
+The failure message should help an operator correct the problem without exposing unnecessary sensitive details.
+
+3
+00:00:15.020 --> 00:00:26.220
+For example, a script can say that a supplied report path is outside the approved output area without printing every internal path component or dumping raw input into a long-lived log.
+
+4
+00:00:26.500 --> 00:00:35.860
+Logs should show high-level path decisions: what action was attempted, which approved category was involved, whether validation passed, and what follow-up is needed.
+
+5
+00:00:35.960 --> 00:00:45.400
+Avoid logging secrets, sensitive file contents, excessive raw input, or detailed internal paths that do not help operations.
+
+6
+00:00:45.500 --> 00:00:49.260
+Useful logs support troubleshooting and review.
+
+7
+00:00:49.360 --> 00:00:55.440
+Overly detailed logs can become another place where sensitive filesystem information spreads.
+
+8
+00:00:55.720 --> 00:01:01.080
+Testing should cover the path forms the script expects and the forms it should reject.
+
+9
+00:01:01.180 --> 00:01:15.740
+Include expected paths, empty values, relative values, absolute values, outside-scope values, no-match cases, unexpected file types, symlinks, shared directory assumptions, and archive contents.
+
+10
+00:01:15.840 --> 00:01:18.640
+Tests do not need to be elaborate to be valuable.
+
+11
+00:01:18.740 --> 00:01:23.940
+A small realistic test directory can catch assumptions before the script touches production data.
+
+12
+00:01:24.220 --> 00:01:31.740
+ShellCheck and peer review help catch fragile script behavior around quoting, variables, command failures, and control flow.
+
+13
+00:01:31.840 --> 00:01:42.960
+Reviewers should ask where path values come from, what approved bases exist, how effective locations are checked, what happens when resolution fails, and whether validation stays close to use.
+
+14
+00:01:43.060 --> 00:01:51.380
+Regression tests are useful when path checks change, because a small refactor can accidentally loosen a boundary that was previously working.
+
+15
+00:01:51.480 --> 00:01:56.600
+Regression tests confirm that path-check changes have not loosened a previously enforced boundary.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Quoting is one of the most practical Bash defenses because it helps keep a value as one argument.
+
+2
+00:00:05.160 --> 00:00:13.160
+When a variable is quoted, Bash is less likely to split it into multiple words or expand pattern-like text into pathnames.
+
+3
+00:00:13.260 --> 00:00:16.860
+This protects ordinary reliability as much as security.
+
+4
+00:00:17.140 --> 00:00:21.700
+Arrays provide a stronger structure when a script needs to assemble arguments.
+
+5
+00:00:21.800 --> 00:00:24.360
+Each array element remains a separate value.
+
+6
+00:00:24.460 --> 00:00:30.540
+Fixed options, validated option values, and operands can be represented as distinct pieces.
+
+7
+00:00:30.640 --> 00:00:36.640
+When passed correctly, that structure reaches the command as an argument list instead of a shell string.
+
+8
+00:00:36.920 --> 00:00:42.040
+The form "$@" is important for wrappers and functions that forward arguments.
+
+9
+00:00:42.140 --> 00:00:44.460
+It preserves the original argument boundaries.
+
+10
+00:00:44.560 --> 00:00:54.320
+Without that care, a wrapper can accidentally flatten multiple values into one string or split one value into several, changing what the next command receives.
+
+11
+00:00:54.600 --> 00:00:57.880
+These tools are essential, but they are not magic.
+
+12
+00:00:57.980 --> 00:01:00.780
+Quoting does not decide whether a value is allowed.
+
+13
+00:01:00.880 --> 00:01:04.400
+Arrays do not decide whether a selected mode is supported.
+
+14
+00:01:04.500 --> 00:01:09.300
+Validation answers the question, is this value acceptable for this workflow.
+
+15
+00:01:09.400 --> 00:01:14.920
+Quoting and arrays answer the question, will this accepted value remain intact when passed to a command.
+
+16
+00:01:15.200 --> 00:01:19.600
+A useful habit is to avoid command strings as the default representation.
+
+17
+00:01:19.700 --> 00:01:24.980
+If you are storing a command line in one variable, ask whether you are really storing a list of arguments.
+
+18
+00:01:25.080 --> 00:01:30.840
+If you are manually adding quotes inside a string, ask whether an array would express the design more safely.
+
+19
+00:01:31.120 --> 00:01:40.160
+The prevention pattern is layered: validate input, choose a known command, build an argument list, quote values, and forward boundaries intentionally.
+
+20
+00:01:40.260 --> 00:01:47.140
+That combination keeps data in data positions and makes command behavior easier for reviewers to predict.

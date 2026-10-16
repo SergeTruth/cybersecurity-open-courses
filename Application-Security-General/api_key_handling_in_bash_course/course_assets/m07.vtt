@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.540
+API key material may appear in local configuration files, token cache files, temporary headers, generated request files, downloaded credentials, or output from a secret store.
+
+2
+00:00:11.640 --> 00:00:16.680
+These files are easy to overlook because they may be created briefly during an automation run.
+
+3
+00:00:16.780 --> 00:00:26.300
+If they remain on disk with broad permissions, predictable names, or shared directory placement, the key can survive longer and reach more readers than intended.
+
+4
+00:00:26.580 --> 00:00:30.740
+Safe handling starts with controlled locations and restrictive permissions.
+
+5
+00:00:30.840 --> 00:00:38.920
+Sensitive temporary files should be created in directories appropriate for the current user or job, not in arbitrary shared workspaces.
+
+6
+00:00:39.020 --> 00:00:46.060
+File ownership should be clear, permissions should be narrow, and filenames should not reveal unnecessary sensitive context.
+
+7
+00:00:46.160 --> 00:00:53.520
+If a script needs to read a local key file, it should verify that the file exists and is usable without printing its contents.
+
+8
+00:00:53.800 --> 00:00:57.480
+Cleanup is important, but cleanup is not the only control.
+
+9
+00:00:57.580 --> 00:01:04.140
+Scripts can fail, be interrupted, or run in environments where artifacts and workspaces are preserved after completion.
+
+10
+00:01:04.240 --> 00:01:06.880
+CI/CD systems may cache directories.
+
+11
+00:01:06.980 --> 00:01:09.700
+Support bundles may collect files.
+
+12
+00:01:09.800 --> 00:01:13.080
+Backup jobs may capture local workspaces.
+
+13
+00:01:13.180 --> 00:01:22.300
+Reduce the amount of key material that touches disk, reduce how long it remains there, and avoid placing it in artifact, cache, or backup paths.
+
+14
+00:01:22.580 --> 00:01:27.220
+When temporary key material must touch disk, make the lifecycle explicit.
+
+15
+00:01:27.320 --> 00:01:35.720
+Create it safely, use it for the narrow job, keep permissions restricted, avoid logging contents, and remove it deliberately when the job ends.
+
+16
+00:01:35.820 --> 00:01:42.700
+The more sensitive the key, the more the script should prefer controlled runtime mechanisms that avoid writing the value to disk at all.

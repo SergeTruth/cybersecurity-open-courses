@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "Two focused examples apply this module's controls to a concrete automation boundary.",
+  "codeExamples": [
+    {
+      "title": "Send an API key through a protected curl configuration stream",
+      "language": "bash",
+      "blurb": "A bounded single-line key reaches curl through a descriptor. Default curlrc files, ambient proxies, and redirects are disabled; the destination and timeouts are fixed.",
+      "code": "#!/usr/bin/env bash\nset -euo pipefail\nexport LC_ALL=C\n# Trusted supervisor supplies the private descriptor and immutable request file.\ncall_payments_api() {\n  local api_key=\"${1:?key required}\" config status=0\n  [[ \"$api_key\" =~ ^[A-Za-z0-9._~-]{32,128}$ ]] || return 65\n  printf -v config 'header = \"Authorization: Bearer %s\"\\n' \"$api_key\"\n  /usr/bin/env -i PATH=/usr/bin:/bin LANG=C HOME=/nonexistent \\\n    /usr/bin/curl --disable --config /proc/self/fd/3 \\\n      --proxy '' --noproxy '*' --no-location --max-redirs 0 \\\n      --proto '=https' --proto-redir '=https' --tlsv1.2 \\\n      --connect-timeout 5 --max-time 15 --fail --silent --show-error \\\n      --request POST --data-binary @- \\\n      'https://payments.example.test/v1/charges' 3<<<\"$config\" || status=$?\n  unset -v config api_key\n  return \"$status\"\n}\nkey=''; read_status=0\nIFS= read -r -n 129 -u \"${API_KEY_FD:?key fd required}\" key || read_status=$?\n((read_status <= 1)) && [[ \"$key\" =~ ^[A-Za-z0-9._~-]{32,128}$ ]] || exit 65\nextra=''; extra_status=0\nIFS= read -r -n 1 -u \"$API_KEY_FD\" extra || extra_status=$?\n((extra_status == 1)) && [[ -z \"$extra\" ]] || exit 65\ncall_payments_api \"$key\" < request.json\nunset -v key\n"
+    },
+    {
+      "title": "Capture HTTP status without logging credentials",
+      "language": "bash",
+      "blurb": "An ordinary pipe closes on curl failure instead of blocking a FIFO open. Supervised timeouts bound producer and limiter lifetimes, actual body bytes are capped, and both exit statuses must succeed.",
+      "code": "#!/usr/bin/env bash\nset -euo pipefail\numask 077\n# GNU timeout and Python 3; the supervisor owns this runtime directory.\nreadonly MAX_RESPONSE_BYTES=1048576\nruntime=\"${XDG_RUNTIME_DIR:?runtime directory required}\"\n[[ -d \"$runtime\" && ! -L \"$runtime\" ]] || exit 77\nresponse_dir=\"$(mktemp -d -p \"$runtime\" api-response.XXXXXX)\"\nbody_file=\"$response_dir/body\"; status_file=\"$response_dir/status\"\ncleanup(){ rm -f -- \"$body_file\" \"$status_file\"; rmdir -- \"$response_dir\"; }\ntrap cleanup EXIT\ntrap 'exit 130' INT\ntrap 'exit 143' TERM HUP\nset +e\ntimeout --kill-after=2s 15s /usr/bin/env -i PATH=/usr/bin:/bin LANG=C HOME=/nonexistent \\\n  /usr/bin/curl --disable --proxy '' --noproxy '*' --no-location \\\n    --proto '=https' --connect-timeout 5 --max-time 15 \\\n    --silent --show-error --output - --write-out '%{stderr}%{http_code}' \\\n    'https://payments.example.test/v1/status' 2>\"$status_file\" \\\n| timeout --kill-after=2s 18s python3 -c '\nimport sys\nremaining = int(sys.argv[1])\nwhile True:\n    chunk = sys.stdin.buffer.read(min(65536, remaining + 1))\n    if not chunk:\n        break\n    if len(chunk) > remaining:\n        raise SystemExit(\"response body limit exceeded\")\n    sys.stdout.buffer.write(chunk)\n    remaining -= len(chunk)\n' \"$MAX_RESPONSE_BYTES\" > \"$body_file\"\nstatuses=(\"${PIPESTATUS[@]}\")\nset -e\n((statuses[0] == 0 && statuses[1] == 0)) || exit 70\nstatus=\"$(<\"$status_file\")\"\n[[ \"$status\" =~ ^[0-9]{3}$ ]] || exit 70\nbytes=\"$(wc -c < \"$body_file\")\"\n((bytes <= MAX_RESPONSE_BYTES)) || exit 70\nprintf 'payments status request completed: http=%s bytes=%s\\n' \"$status\" \"$bytes\"\n"
+    }
+  ]
+};

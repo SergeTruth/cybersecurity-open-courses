@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.220
+Processes run in a current working directory.
+
+2
+00:00:03.320 --> 00:00:11.640
+If a script assumes the wrong directory, the invoked tool may read, write, scan, or generate files in the wrong location.
+
+3
+00:00:11.740 --> 00:00:17.580
+That can break builds, confuse operators, or affect data the script never intended to touch.
+
+4
+00:00:17.680 --> 00:00:21.440
+Safe invocation makes directory assumptions explicit.
+
+5
+00:00:21.540 --> 00:00:29.460
+Uncontrolled redirection can overwrite output, hide errors, merge streams, or place sensitive data into logs.
+
+6
+00:00:29.740 --> 00:00:33.580
+Input and output paths should be validated before invocation.
+
+7
+00:00:33.680 --> 00:00:42.960
+A script should know whether a path must exist, whether it must be a file or directory, whether it should be relative or absolute, and which base locations are acceptable.
+
+8
+00:00:43.060 --> 00:00:48.740
+When output is involved, the script should avoid accidental overwrites and handle existing files deliberately.
+
+9
+00:00:49.020 --> 00:00:50.620
+Redirection deserves care.
+
+10
+00:00:50.720 --> 00:00:56.880
+It can overwrite output, hide errors, merge streams, or place sensitive data into logs.
+
+11
+00:00:56.980 --> 00:00:59.860
+Redirection is not merely formatting.
+
+12
+00:00:59.960 --> 00:01:03.880
+It changes how a process communicates and where evidence goes.
+
+13
+00:01:03.980 --> 00:01:08.700
+A safe script redirects only when the destination and purpose are clear.
+
+14
+00:01:08.980 --> 00:01:13.460
+Standard input, standard output, and standard error should be handled intentionally.
+
+15
+00:01:13.560 --> 00:01:17.320
+Some tools read from standard input when no file is provided.
+
+16
+00:01:17.420 --> 00:01:22.300
+Some write machine-readable data to standard output and human-readable errors to standard error.
+
+17
+00:01:22.400 --> 00:01:28.240
+Keeping those streams separate where useful makes automation easier to parse and easier to troubleshoot.
+
+18
+00:01:28.520 --> 00:01:34.120
+Logging should help operators without exposing secrets or sensitive file contents.
+
+19
+00:01:34.220 --> 00:01:41.820
+Capture high-level actions, paths at an appropriate sensitivity level, exit results, and clear failure messages.
+
+20
+00:01:41.920 --> 00:01:50.480
+Avoid dumping full output when it may contain tokens, private data, or configuration details that do not belong in routine logs.
+
+21
+00:01:50.580 --> 00:01:57.940
+Review confirms the intended standard-input, standard-output, standard-error, and redirection destinations and the evidence each produces.

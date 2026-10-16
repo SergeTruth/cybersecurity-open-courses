@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.500
+Many shell scripts run inside automation platforms rather than on a single administrator's terminal.
+
+2
+00:00:06.600 --> 00:00:20.840
+CI/CD jobs, containers, deployment agents, configuration-management tasks, remote sessions, and cloud automation platforms all change how secrets are stored, injected, inherited, logged, and cleaned up.
+
+3
+00:00:20.940 --> 00:00:31.340
+A pattern that is acceptable for a tightly controlled local script may be risky when it runs in a pipeline that stores logs, artifacts, caches, and job metadata.
+
+4
+00:00:31.620 --> 00:00:35.700
+CI/CD secret masking is useful, but it is not a full security boundary.
+
+5
+00:00:35.800 --> 00:00:49.560
+Masking usually works for exact values in logs, and it may not catch derived values, transformed strings, multiline values, encoded forms, partial values, or secrets passed into tools that generate their own output.
+
+6
+00:00:49.660 --> 00:00:56.540
+Untrusted jobs, pull request workflows, broad variable scopes, and shared runners can also change the risk picture.
+
+7
+00:00:56.640 --> 00:01:06.240
+Secrets should be scoped to the minimum project, job, branch, environment, role, or runner that needs them.
+
+8
+00:01:06.520 --> 00:01:11.480
+Containers introduce another common mistake: mixing build-time and runtime secrets.
+
+9
+00:01:11.580 --> 00:01:20.220
+A secret used while building an image may be captured in an image layer, cache, build log, package configuration, or artifact.
+
+10
+00:01:20.320 --> 00:01:25.360
+Runtime secrets should be injected when the container runs, not baked into the image.
+
+11
+00:01:25.460 --> 00:01:33.300
+When build-time secrets are unavoidable, use platform-supported secret mechanisms and verify that the value is not preserved in the final artifact.
+
+12
+00:01:33.580 --> 00:01:36.620
+Remote automation adds its own exposure paths.
+
+13
+00:01:36.720 --> 00:01:41.120
+Scripts, variables, and logs may be copied across hosts.
+
+14
+00:01:41.220 --> 00:01:44.180
+Temporary files may remain on target systems.
+
+15
+00:01:44.280 --> 00:01:48.200
+Credentials used for deployment may have access beyond the immediate task.
+
+16
+00:01:48.300 --> 00:01:57.740
+Separate development, staging, and production credentials where possible, use least privilege for automation identities, and clean up workspace material after use.
+
+17
+00:01:57.840 --> 00:02:00.160
+The goal is not to distrust automation.
+
+18
+00:02:00.260 --> 00:02:05.540
+The goal is to design automation so secret exposure is narrow and understandable.

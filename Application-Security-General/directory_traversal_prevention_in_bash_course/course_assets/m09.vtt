@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Directory traversal prevention in Bash is a repeatable defensive habit.
+
+2
+00:00:04.920 --> 00:00:09.640
+Treat path values as input, even when they come from internal automation.
+
+3
+00:00:09.740 --> 00:00:20.700
+Arguments, configuration, environment variables, CI/CD metadata, generated files, archive member names, and tool output can all influence file operations.
+
+4
+00:00:20.800 --> 00:00:24.880
+Before using them, define the trust boundary and decide what forms are allowed.
+
+5
+00:00:25.160 --> 00:00:29.400
+Define approved base directories before file operations begin.
+
+6
+00:00:29.500 --> 00:00:35.900
+Know where input, staging, output, extraction, and cleanup are allowed to happen.
+
+7
+00:00:36.000 --> 00:00:41.840
+Avoid accidental current-directory assumptions, and make environment-specific paths explicit.
+
+8
+00:00:41.940 --> 00:00:48.260
+Resolve or normalize path meaning where appropriate, then compare the effective location to the approved scope.
+
+9
+00:00:48.360 --> 00:00:53.720
+Reject unsupported, unresolved, empty, or out-of-scope paths before action.
+
+10
+00:00:54.000 --> 00:00:57.200
+Validate file type and filesystem assumptions.
+
+11
+00:00:57.300 --> 00:01:05.300
+Symlinks, mount points, shared writable directories, unexpected file types, and changing filesystems can alter what a path means.
+
+12
+00:01:05.400 --> 00:01:08.360
+Keep checks close to the operation they protect.
+
+13
+00:01:08.460 --> 00:01:20.620
+Read only from approved locations, write only to approved destinations, prevent unintended overwrites, use controlled temporary directories, and stage important output before final placement where practical.
+
+14
+00:01:20.900 --> 00:01:24.740
+Finally, be careful with archives and bulk operations.
+
+15
+00:01:24.840 --> 00:01:36.840
+Extract into controlled staging directories, verify extracted content remains in scope, use preview or dry-run modes for risky changes, and guard cleanup against broad or unexpected deletion.
+
+16
+00:01:36.940 --> 00:01:40.620
+Log high-level decisions without exposing sensitive detail.
+
+17
+00:01:40.720 --> 00:01:47.840
+Test expected and unexpected path forms, use ShellCheck and peer review, and keep regression coverage for validation behavior.
+
+18
+00:01:47.940 --> 00:01:54.500
+Safe path handling makes file automation predictable, reviewable, and much easier to trust.

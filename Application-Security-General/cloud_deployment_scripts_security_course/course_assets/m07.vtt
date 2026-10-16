@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Most cloud deployments run through CI/CD, so pipeline design is part of deployment security.
+
+2
+00:00:06.200 --> 00:00:17.880
+Branch filters, protected tags, release approvals, environment gates, runner permissions, secret scope, deployment windows, and manual approvals all influence what a script can do.
+
+3
+00:00:17.980 --> 00:00:22.860
+A deployment helper is only as safe as the path that is allowed to trigger it.
+
+4
+00:00:23.140 --> 00:00:30.500
+Validation, build, publish, deploy, and rollback jobs should not all share the same authority.
+
+5
+00:00:30.600 --> 00:00:34.040
+Validation may need little or no secret access.
+
+6
+00:00:34.140 --> 00:00:37.500
+Build jobs may need dependency and packaging access.
+
+7
+00:00:37.600 --> 00:00:40.400
+Publish jobs may need registry permissions.
+
+8
+00:00:40.500 --> 00:00:43.700
+Deployment jobs need environment-specific authority.
+
+9
+00:00:43.800 --> 00:00:47.160
+Rollback jobs may need a separate operational path.
+
+10
+00:00:47.260 --> 00:00:53.100
+Separating these permissions reduces blast radius and makes pipeline behavior easier to reason about.
+
+11
+00:00:53.380 --> 00:00:57.860
+Low-trust triggers should not receive production secrets or deployment rights.
+
+12
+00:00:57.960 --> 00:01:07.320
+A pull request, dependency update, or unreviewed branch should still be able to receive useful feedback, but it should not reach privileged production paths.
+
+13
+00:01:07.420 --> 00:01:18.700
+Protected branches, protected tags, release workflows, environment approvals, and scoped secrets help ensure that production deployment happens only after the appropriate review.
+
+14
+00:01:18.980 --> 00:01:22.980
+Promotion workflows should make artifact movement clear.
+
+15
+00:01:23.080 --> 00:01:30.040
+Operators should be able to tell which artifact was built, where it was tested, who approved it, and which controls applied before production.
+
+16
+00:01:30.140 --> 00:01:38.540
+Staged rollout, limited exposure, health checks, and measured promotion reduce blast radius when something unexpected occurs.
+
+17
+00:01:38.640 --> 00:01:45.040
+Good CI/CD gates are not paperwork; they are technical boundaries that keep deployment authority aligned with trust.

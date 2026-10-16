@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Directory traversal prevention applies to both reads and writes.
+
+2
+00:00:04.440 --> 00:00:09.960
+A script that reads outside scope may expose sensitive data or process the wrong input.
+
+3
+00:00:10.060 --> 00:00:19.500
+A script that writes outside scope may overwrite unrelated files, place output where it is not protected, or create confusing artifacts for later jobs.
+
+4
+00:00:19.600 --> 00:00:25.760
+Both directions matter, and both should be checked against approved locations before the operation begins.
+
+5
+00:00:26.040 --> 00:00:28.520
+Safe reads start with source validation.
+
+6
+00:00:28.620 --> 00:00:35.980
+The script should know which directory or dataset is approved, which file types are expected, and what conditions should cause a safe stop.
+
+7
+00:00:36.080 --> 00:00:42.640
+It should not expand a path input into a broad search or accept a fallback source simply because the intended file is missing.
+
+8
+00:00:42.740 --> 00:00:49.940
+When a source does not match the expected scope, the script should report the problem without reading from a substitute location that was never reviewed.
+
+9
+00:00:50.220 --> 00:00:52.860
+Safe writes require the same discipline.
+
+10
+00:00:52.960 --> 00:01:01.040
+Output destinations should be validated before use, and existing files should not be overwritten unless that behavior is intentional and reviewed.
+
+11
+00:01:01.140 --> 00:01:04.820
+Sensitive output should use appropriate ownership and permissions.
+
+12
+00:01:04.920 --> 00:01:17.400
+A report, transformed file, extracted object, or generated configuration may create risk if it is written into a broadly readable directory or a location consumed by another process without review.
+
+13
+00:01:17.680 --> 00:01:23.360
+Temporary files should be created in controlled directories, not arbitrary locations derived from input.
+
+14
+00:01:23.460 --> 00:01:29.860
+For important updates, staging content before final placement can reduce partial or misplaced results.
+
+15
+00:01:29.960 --> 00:01:38.760
+The script can prepare output in a dedicated staging area, verify it, and then move it into the approved destination through a narrow, reviewed step.
+
+16
+00:01:38.860 --> 00:01:43.260
+That pattern makes failure safer and makes the final write easier to reason about.

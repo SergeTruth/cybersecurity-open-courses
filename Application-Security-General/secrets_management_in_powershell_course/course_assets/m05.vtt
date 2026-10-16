@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.780
+Local development and administration are common places for secret hygiene to slip.
+
+2
+00:00:05.880 --> 00:00:16.120
+A developer may use a test token in a profile script, an administrator may save a credential for troubleshooting, or a support engineer may place a connection string in a local JSON file.
+
+3
+00:00:16.220 --> 00:00:23.980
+These choices feel temporary, but local files are copied, indexed, backed up, synchronized, and sometimes committed by mistake.
+
+4
+00:00:24.080 --> 00:00:28.080
+Workstations should be treated as real secret-handling environments.
+
+5
+00:00:28.180 --> 00:00:37.780
+Secret-bearing environment variables may be inherited by child processes, printed during debugging, captured by tooling, or copied into logs and diagnostics.
+
+6
+00:00:38.060 --> 00:00:43.100
+Local vaults can help keep secrets out of scripts, but they should be paired with repository hygiene.
+
+7
+00:00:43.200 --> 00:00:55.120
+PowerShell files such as .ps1, .psm1, and .psd1, along with .json, .env, and configuration files, should be reviewed for secret content before commit.
+
+8
+00:00:55.220 --> 00:01:02.340
+.gitignore rules can prevent common local files from entering a repository, but they are not a substitute for secret scanning and careful review.
+
+9
+00:01:02.440 --> 00:01:06.520
+Once a secret enters history, deleting the current line is not enough.
+
+10
+00:01:06.800 --> 00:01:14.720
+Environment variables are useful for configuration and sometimes for local development, but they are not a complete secrets management solution by themselves.
+
+11
+00:01:14.820 --> 00:01:22.260
+They may be inherited by child processes, printed during debugging, captured by tooling, or copied into logs and diagnostics.
+
+12
+00:01:22.360 --> 00:01:33.080
+If an environment variable carries a sensitive value, scripts should treat it as a secret, avoid echoing it, and prefer a more controlled vault-backed approach for long-term use.
+
+13
+00:01:33.360 --> 00:01:36.080
+Avoid shared local credentials.
+
+14
+00:01:36.180 --> 00:01:42.660
+When several people use the same local password or token, ownership and rotation become unclear.
+
+15
+00:01:42.760 --> 00:01:51.160
+It is harder to know who used the credential, harder to revoke one person's access, and harder to respond when a workstation is lost or compromised.
+
+16
+00:01:51.260 --> 00:02:04.540
+Good local practice uses individual access where possible, stores secrets in approved locations, scans before commits, and keeps troubleshooting scripts as clean as production scripts.
+
+17
+00:02:04.640 --> 00:02:12.560
+Review confirms individual access, approved storage, pre-commit scanning, and troubleshooting scripts held to production standards.

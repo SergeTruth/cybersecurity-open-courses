@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Cloud deployment scripts often touch sensitive material.
+
+2
+00:00:03.560 --> 00:00:16.200
+They may pass configuration values, environment variables, certificates, API tokens, registry credentials, storage locations, data migration parameters, or encryption settings.
+
+3
+00:00:16.300 --> 00:00:26.140
+These values should not appear in plaintext scripts, shell history, generated files, support bundles, broad CI/CD artifacts, or verbose logs.
+
+4
+00:00:26.240 --> 00:00:31.760
+A deployment helper should reduce sensitive exposure, not create new places for secrets to live.
+
+5
+00:00:32.040 --> 00:00:36.440
+Configuration should be environment-specific and reviewable.
+
+6
+00:00:36.540 --> 00:00:47.260
+Production settings, staging settings, and development settings may have different endpoints, feature flags, identity bindings, logging retention, data stores, and access controls.
+
+7
+00:00:47.360 --> 00:00:53.920
+A helper should make those configuration choices explicit and should avoid silently mixing values from different environments.
+
+8
+00:00:54.020 --> 00:00:58.980
+Configuration drift can weaken controls even when the deployment command itself succeeds.
+
+9
+00:00:59.260 --> 00:01:11.420
+Cloud storage deserves special attention because deployments often create or update buckets, containers, databases, queues, logs, snapshots, or artifact locations.
+
+10
+00:01:11.520 --> 00:01:20.000
+Storage permissions, encryption expectations, logging, lifecycle rules, retention, and ownership should be deliberate.
+
+11
+00:01:20.100 --> 00:01:25.460
+A script should not create broadly accessible storage or long-lived artifacts by accident.
+
+12
+00:01:25.560 --> 00:01:32.760
+Where storage holds deployment evidence or packages, access and retention should match the sensitivity of the content.
+
+13
+00:01:33.040 --> 00:01:39.040
+Keys and secrets should be separated from templates and artifacts in a way that preserves the protection model.
+
+14
+00:01:39.140 --> 00:01:45.620
+It is not enough to move a secret from one file into another generated file if that generated file is widely retained.
+
+15
+00:01:45.720 --> 00:01:51.240
+Use approved secret stores, scoped runtime delivery, and safe logging habits.
+
+16
+00:01:51.340 --> 00:01:55.740
+Deployment security includes the data trail left behind after the release finishes.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Safe Process Invocation Checklist",
+  "graphicAlt": "Known tools, intact arguments, controlled context, intentional streams, and owned result handling form the process baseline.",
+  "narration": "Safe process invocation in Bash is a repeatable checklist. Start by choosing known executables and reviewed tools. Avoid arbitrary command names from input. Understand how PATH, wrappers, helper scripts, and versions affect what program actually runs. Arbitrary command names, inherited secrets, ambiguous working directories, and ignored failures can make process execution unpredictable.\n\nPass arguments separately. Quote variables that should remain single values. Use arrays when building options and operands. Use \"$@\" when forwarding an argument list. Avoid command strings when the real model is executable plus structured arguments.\n\nControl runtime context. Treat environment variables as process input. Avoid leaking secrets to tools that do not need them. Be explicit about current working directory. Validate input and output paths. Handle standard input, standard output, standard error, and redirection intentionally.\n\nCheck results. Define success clearly, inspect exit status where it matters, and make pipeline behavior explicit when upstream failure would change the meaning of the run. Use timeouts and retry limits for unattended work. Treat background process ownership and cleanup as part of the design.\n\nUse least privilege and log safely. Scope service accounts, permissions, and delegated privilege rules to the job. Record useful actions and failures without exposing sensitive data. Review scripts with ShellCheck, peer review, CI/CD linting, staged rollout, and realistic tests before trusting them in production.",
+  "narrationPoints": [
+    "Trust boundary — Course Summary: Safe Process Invocation Checklist: Safe process invocation in Bash is a repeatable checklist.",
+    "Input and state — Course Summary: Safe Process Invocation Checklist: Pass arguments separately.",
+    "Validation checkpoint — Course Summary: Safe Process Invocation Checklist: Control runtime context.",
+    "Controlled operation — Course Summary: Safe Process Invocation Checklist: Check results.",
+    "Failure path — Course Summary: Safe Process Invocation Checklist: Arbitrary command names, inherited secrets, ambiguous working directories, and ignored failures can make process execution unpredictable.",
+    "Review outcome — Course Summary: Safe Process Invocation Checklist: Review scripts with ShellCheck, peer review, CI/CD linting, staged rollout, and realistic tests before trusting them in production."
+  ]
+};

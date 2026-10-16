@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.300
+Environment variables are common for API keys because they are easy to use in Bash scripts and CI/CD jobs.
+
+2
+00:00:07.400 --> 00:00:11.960
+They can be an acceptable delivery channel when the surrounding controls are appropriate.
+
+3
+00:00:12.060 --> 00:00:13.980
+They are not automatically safe.
+
+4
+00:00:14.080 --> 00:00:25.840
+An environment variable is still a value in a process context, and process context can be inherited, logged, inspected, collected, or copied in ways the script author did not intend.
+
+5
+00:00:26.120 --> 00:00:29.560
+Parent-to-child inheritance is the first concern.
+
+6
+00:00:29.660 --> 00:00:36.620
+If a script sets a key in the environment and then launches other tools, those tools may receive the key even if they do not need it.
+
+7
+00:00:36.720 --> 00:00:45.120
+Diagnostic tools, crash handlers, debug wrappers, language runtimes, and CI/CD plugins may record environment details.
+
+8
+00:00:45.220 --> 00:00:52.980
+Full environment dumps are especially risky because they collect many values at once, including secrets that may not be relevant to the current failure.
+
+9
+00:00:53.260 --> 00:00:56.140
+Command-line arguments create a related visibility risk.
+
+10
+00:00:56.240 --> 00:01:04.320
+Arguments may appear in process listings, job output, shell history, logs, support bundles, or terminal transcripts.
+
+11
+00:01:04.420 --> 00:01:11.140
+Placing a key directly in a command line can make exposure easier even when the API call itself is legitimate.
+
+12
+00:01:11.240 --> 00:01:18.120
+Where possible, prefer mechanisms that keep the key out of URLs, history, and broadly visible command metadata.
+
+13
+00:01:18.400 --> 00:01:20.800
+Defensive scripts minimize exposure.
+
+14
+00:01:20.900 --> 00:01:32.180
+Avoid raw command-line key values, avoid broad debug traces, avoid full environment dumps, and scrub or minimize inherited values before launching unrelated tools.
+
+15
+00:01:32.280 --> 00:01:37.080
+Logs should record enough context to troubleshoot the action, but not the secret itself.
+
+16
+00:01:37.180 --> 00:01:45.980
+Treat every place that captures runtime context as a potential long-lived record, because logs and support evidence often outlive the process that created them.

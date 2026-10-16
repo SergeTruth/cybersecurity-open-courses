@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Path input can enter a Bash script from many places.
+
+2
+00:00:04.200 --> 00:00:08.920
+Command-line arguments are the obvious source, but they are not the only one.
+
+3
+00:00:09.020 --> 00:00:23.980
+Configuration files, environment variables, CI/CD variables, generated file lists, artifact names, upload filenames, metadata from another tool, and command output can all influence which filesystem location a script uses.
+
+4
+00:00:24.080 --> 00:00:29.840
+A secure script treats each of those values as input until it has been checked against the script's rules.
+
+5
+00:00:29.940 --> 00:00:37.460
+Internal path values may still be stale, malformed, from the wrong environment, or influenced by a separate workflow.
+
+6
+00:00:37.740 --> 00:00:41.180
+Some path values are directly provided by a person.
+
+7
+00:00:41.280 --> 00:00:42.880
+Others are indirect.
+
+8
+00:00:42.980 --> 00:00:45.860
+A build system may create an artifact name.
+
+9
+00:00:45.960 --> 00:00:48.520
+A deployment job may pass a workspace path.
+
+10
+00:00:48.620 --> 00:00:50.940
+An archive may contain member names.
+
+11
+00:00:51.040 --> 00:00:54.320
+A monitoring tool may produce a list of files to collect.
+
+12
+00:00:54.420 --> 00:01:02.660
+These values feel internal, but they may still be stale, malformed, from the wrong environment, or influenced by a separate workflow.
+
+13
+00:01:02.760 --> 00:01:05.560
+Internal does not automatically mean trusted.
+
+14
+00:01:05.840 --> 00:01:11.760
+Empty values are especially important in Bash because an empty or missing variable can change the meaning of a command.
+
+15
+00:01:11.860 --> 00:01:16.900
+Malformed values can also push a script into fallback behavior the author did not intend.
+
+16
+00:01:17.000 --> 00:01:25.400
+A defensive script checks that a required path is present, non-empty, in an expected form, and associated with the correct environment before it is used.
+
+17
+00:01:25.500 --> 00:01:32.060
+If a required value is missing or unsupported, the safe answer is to stop with a clear, non-sensitive error.
+
+18
+00:01:32.340 --> 00:01:34.340
+Thinking in trust boundaries helps.
+
+19
+00:01:34.440 --> 00:01:42.040
+Ask where the value was created, who or what can influence it, which environment it belongs to, and what operation it controls.
+
+20
+00:01:42.140 --> 00:01:46.380
+The more impact the operation has, the more careful the validation should be.
+
+21
+00:01:46.480 --> 00:01:59.440
+Reading a report, writing output, extracting an archive, and cleaning a workspace may require different levels of confidence, but all of them begin with the same principle: path values are inputs, and inputs need rules.

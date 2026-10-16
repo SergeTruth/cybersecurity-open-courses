@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+File and path arguments are common in Bash scripts, and they deserve special care because they can affect real data.
+
+2
+00:00:06.840 --> 00:00:09.720
+A source path may determine what is read.
+
+3
+00:00:09.820 --> 00:00:13.100
+A destination path may determine what is written.
+
+4
+00:00:13.200 --> 00:00:16.320
+An output argument may overwrite something important.
+
+5
+00:00:16.420 --> 00:00:25.300
+A path may be empty, relative, absolute, outside the expected base directory, contain spaces, or begin with a dash.
+
+6
+00:00:25.580 --> 00:00:29.820
+A defensive script validates paths against its purpose.
+
+7
+00:00:29.920 --> 00:00:38.720
+It can reject empty paths, require that an input file exists, require that a destination directory is approved, and check before overwriting output.
+
+8
+00:00:38.820 --> 00:00:49.860
+If the script is intended to operate under a specific base directory, it should confirm that the requested path is within that boundary instead of assuming the caller supplied a safe value.
+
+9
+00:00:50.140 --> 00:00:53.820
+Values that look like options are a practical concern.
+
+10
+00:00:53.920 --> 00:01:00.400
+Many command-line tools support -- to mark the end of options so later values are treated as operands.
+
+11
+00:01:00.500 --> 00:01:06.340
+That can help when a filename begins with a dash, but it is not a complete security strategy by itself.
+
+12
+00:01:06.440 --> 00:01:13.320
+It belongs with validation, quoting, and clear expectations about which files and directories the script is allowed to touch.
+
+13
+00:01:13.600 --> 00:01:17.360
+Path handling should also consider operational recovery.
+
+14
+00:01:17.460 --> 00:01:22.660
+If a script writes output, can it avoid accidental overwrite?
+
+15
+00:01:22.760 --> 00:01:25.960
+If it updates a file, can it stage the result first?
+
+16
+00:01:26.060 --> 00:01:30.540
+If it rejects a path, does the message explain what kind of value is expected?
+
+17
+00:01:30.640 --> 00:01:37.520
+Safe path handling turns a risky command-line value into a controlled input that matches the script's intent.
+
+18
+00:01:37.620 --> 00:01:47.460
+Review confirms that path validation, quoting, option termination, and overwrite policy keep filesystem arguments within the intended operation.

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Bash scripts often run outside an interactive terminal.
+
+2
+00:00:03.560 --> 00:00:14.680
+They run in CI/CD jobs, cron schedules, systemd services, containers, remote administration sessions, deployment agents, and configuration-management workflows.
+
+3
+00:00:14.780 --> 00:00:18.460
+Each environment has its own identity and permission model.
+
+4
+00:00:18.560 --> 00:00:26.160
+A script that looks harmless in a local shell may have much broader reach when executed by a pipeline runner or a service account.
+
+5
+00:00:26.440 --> 00:00:29.080
+CI/CD jobs deserve particular care.
+
+6
+00:00:29.180 --> 00:00:38.780
+A job may receive repository write access, package publishing rights, cloud credentials, deployment tokens, environment variables, and artifact permissions.
+
+7
+00:00:38.880 --> 00:00:46.160
+Scope those permissions to the minimum job, branch, project, environment, or role that needs them.
+
+8
+00:00:46.260 --> 00:00:50.180
+A test job usually does not need production deployment credentials.
+
+9
+00:00:50.280 --> 00:00:55.560
+A pull request job should not automatically receive the same authority as a trusted release job.
+
+10
+00:00:55.840 --> 00:01:00.560
+Scheduled jobs and services should have explicit execution identities.
+
+11
+00:01:00.660 --> 00:01:06.500
+A cron entry that runs as a powerful local user can quietly become an administrative interface.
+
+12
+00:01:06.600 --> 00:01:13.880
+A systemd service can often be assigned a dedicated user, narrower filesystem access, and clearer service boundaries.
+
+13
+00:01:13.980 --> 00:01:25.740
+Containers also need review: user identity, mounted directories, network access, injected secrets, and runtime privileges all affect what the script can do from inside the container.
+
+14
+00:01:26.020 --> 00:01:33.540
+Remote jobs inherit boundaries from SSH, sudo, deployment agents, and the target host.
+
+15
+00:01:33.640 --> 00:01:37.720
+Avoid one identity that works everywhere simply because it is convenient.
+
+16
+00:01:37.820 --> 00:01:42.060
+Separate development, staging, and production where practical.
+
+17
+00:01:42.160 --> 00:01:47.360
+Review which hosts, networks, secrets, and files the automation can reach.
+
+18
+00:01:47.460 --> 00:01:59.060
+Lifecycle matters too: when a job is retired, remove stale access, tokens, schedules, and remote permissions so yesterday's automation does not remain tomorrow's hidden privilege.

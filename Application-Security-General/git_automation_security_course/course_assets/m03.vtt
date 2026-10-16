@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:14.900
+Git automation often uses credentials: SSH keys, deploy keys, access tokens, service accounts, machine users, CI/CD tokens, package registry credentials, or platform-issued identities.
+
+2
+00:00:15.000 --> 00:00:17.560
+These credentials determine what a script can do.
+
+3
+00:00:17.660 --> 00:00:25.660
+They may allow a clone, a push, a tag creation, a package publication, a release action, or a deployment trigger.
+
+4
+00:00:25.760 --> 00:00:30.080
+Treat them as operational authority, not as invisible plumbing.
+
+5
+00:00:30.360 --> 00:00:33.480
+Least privilege starts by matching the credential to the job.
+
+6
+00:00:33.580 --> 00:00:37.180
+A read-only clone job should not receive write access.
+
+7
+00:00:37.280 --> 00:00:40.880
+A documentation update job should not have release authority.
+
+8
+00:00:40.980 --> 00:00:44.580
+A validation workflow should not receive deployment credentials.
+
+9
+00:00:44.680 --> 00:00:48.200
+A development workflow should not receive production access.
+
+10
+00:00:48.300 --> 00:00:53.660
+Separate read, write, release, and deployment capabilities where the platform supports it.
+
+11
+00:00:53.940 --> 00:01:00.260
+Credentials should be scoped by repository, branch, environment, action, and job.
+
+12
+00:01:00.360 --> 00:01:07.640
+A token that can write to every repository is harder to review and more dangerous than a token scoped to one automation purpose.
+
+13
+00:01:07.740 --> 00:01:15.260
+A deploy key tied to one repository and workflow is easier to rotate than a shared key used across many jobs.
+
+14
+00:01:15.360 --> 00:01:20.480
+Dedicated identities also improve attribution, monitoring, and incident response.
+
+15
+00:01:20.760 --> 00:01:29.560
+Good key and token management includes ownership, purpose, storage, runtime delivery, rotation, revocation, and access review.
+
+16
+00:01:29.660 --> 00:01:38.460
+Secrets should come from approved secret mechanisms or controlled runtime injection rather than hard-coded files or broad repository variables without scope.
+
+17
+00:01:38.560 --> 00:01:44.240
+Logs should never expose raw credentials, sensitive headers, private keys, or token values.
+
+18
+00:01:44.340 --> 00:01:51.140
+When a credential is suspected of exposure, teams should be able to revoke or rotate it without guessing where it is used.

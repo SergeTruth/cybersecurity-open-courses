@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Options, Flags, and Parsing Discipline",
+  "graphicAlt": "Options and values form a complete validated request before explicit preview or apply behavior begins.",
+  "narration": "Many Bash scripts begin with simple positional arguments and gradually grow options: verbose mode, dry-run mode, output path, environment, target, or apply behavior. This growth is normal, but ad hoc parsing becomes hard to reason about quickly. A defensive script keeps parsing rules clear enough for maintainers to understand which inputs are accepted and which combinations are rejected.\n\nUnknown options should usually fail closed. Ignoring an unknown option can hide typos, stale documentation, or a caller using the wrong version of a script. If an option requires a value, the parser should check that the value exists and is not actually another option by mistake. If two options conflict, the script should reject the combination instead of choosing one implicitly.\n\nDry-run and apply behavior deserve particular clarity. A script should not silently switch from preview to apply mode because of a missing flag or ambiguous combination. High-impact modes should be explicit, easy to review, and hard to trigger accidentally. Parsing should produce a well-defined request before any operational action begins.\n\nTools such as getopts can help with disciplined short-option parsing, but the larger principle is separation. Parse and validate first. Act later. When parsing branches are mixed deeply into action logic, reviewers have to reason about behavior and input handling at the same time. Keeping those concerns separate makes argument security easier to test, review, and maintain.",
+  "narrationPoints": [
+    "Trust boundary — Options, Flags, and Parsing Discipline: Many Bash scripts begin with simple positional arguments and gradually grow options: verbose mode, dry-run mode, output path, environment, target, or apply behavior.",
+    "Input and state — Options, Flags, and Parsing Discipline: Unknown options should usually fail closed.",
+    "Validation checkpoint — Options, Flags, and Parsing Discipline: Dry-run and apply behavior deserve particular clarity.",
+    "Controlled operation — Options, Flags, and Parsing Discipline: Tools such as getopts can help with disciplined short-option parsing, but the larger principle is separation.",
+    "Failure path — Options, Flags, and Parsing Discipline: Ignoring an unknown option can hide typos, stale documentation, or a caller using the wrong version of a script.",
+    "Review outcome — Options, Flags, and Parsing Discipline: Keeping those concerns separate makes argument security easier to test, review, and maintain."
+  ]
+};

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Privileges are not only local file permissions or sudo rights.
+
+2
+00:00:04.760 --> 00:00:17.240
+Bash scripts often authenticate to APIs, databases, artifact repositories, cloud services, SSH servers, deployment platforms, and monitoring systems.
+
+3
+00:00:17.340 --> 00:00:19.740
+Those credentials carry their own privileges.
+
+4
+00:00:19.840 --> 00:00:28.880
+A script with a narrow local user account can still be overprivileged if it holds a broad production token or a shared key that can reach many environments.
+
+5
+00:00:29.160 --> 00:00:33.160
+Dedicated automation identities make privilege easier to manage.
+
+6
+00:00:33.260 --> 00:00:36.060
+A status script should not use a deployment identity.
+
+7
+00:00:36.160 --> 00:00:42.400
+A backup script should not use a general administrator credential if a narrower account can read the required data.
+
+8
+00:00:42.500 --> 00:00:48.020
+A deployment script for one environment should not automatically receive access to every environment.
+
+9
+00:00:48.120 --> 00:00:58.520
+Dedicated identities give teams a way to connect purpose, owner, scope, audit records, rotation, and revocation to a specific workflow.
+
+10
+00:00:58.800 --> 00:01:08.240
+Secrets should come from approved mechanisms rather than hard-coded values in scripts, shared files, copied terminal commands, or informal notes.
+
+11
+00:01:08.340 --> 00:01:18.820
+Runtime injection, managed secret stores, platform identity, short-lived credentials, and protected CI/CD variables can all be useful when implemented carefully.
+
+12
+00:01:18.920 --> 00:01:31.240
+The same principle applies across mechanisms: deliver the credential only to the job that needs it, with only the permissions it needs, and avoid passing it to unrelated commands or child processes.
+
+13
+00:01:31.520 --> 00:01:34.240
+Least privilege also requires a lifecycle.
+
+14
+00:01:34.340 --> 00:01:43.380
+Each token, key, service account, or cloud role should have an owner, a reason to exist, a documented scope, and a way to rotate or revoke it.
+
+15
+00:01:43.480 --> 00:01:50.440
+Shared broad credentials are hard to review and dangerous to retire because nobody knows what will break.
+
+16
+00:01:50.540 --> 00:01:58.620
+A narrower identity tied to one workflow is easier to monitor, easier to replace, and easier to remove when the script is retired.

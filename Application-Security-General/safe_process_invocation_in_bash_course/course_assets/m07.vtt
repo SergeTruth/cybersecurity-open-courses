@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Starting a process safely is only half the job.
+
+2
+00:00:04.280 --> 00:00:06.760
+The script also has to interpret the result.
+
+3
+00:00:06.860 --> 00:00:14.860
+A command may fail, partially succeed, produce unexpected output, hang, or return a status that requires special handling.
+
+4
+00:00:14.960 --> 00:00:18.880
+The script should define what success means before later steps depend on it.
+
+5
+00:00:19.160 --> 00:00:22.280
+Exit status is the basic feedback channel.
+
+6
+00:00:22.380 --> 00:00:28.940
+Important commands should be checked where their result affects state, control flow, or reporting.
+
+7
+00:00:29.040 --> 00:00:33.120
+Some nonzero statuses may be expected and should be handled intentionally.
+
+8
+00:00:33.220 --> 00:00:40.020
+The unsafe pattern is to continue after a failed process and report misleading success at the end.
+
+9
+00:00:40.300 --> 00:00:46.780
+Pipelines need attention because the most visible result may come from the final command, while an earlier command failed.
+
+10
+00:00:46.880 --> 00:00:50.880
+Defensive scripts make pipeline behavior explicit when upstream failure matters.
+
+11
+00:00:50.980 --> 00:00:56.580
+This prevents formatted output from hiding a failed data source, missing file, or rejected permission.
+
+12
+00:00:56.860 --> 00:01:01.580
+Timeouts and retry limits are important for unattended automation.
+
+13
+00:01:01.680 --> 00:01:06.400
+A process that hangs forever can block a deployment or maintenance window.
+
+14
+00:01:06.500 --> 00:01:10.980
+A retry loop without limits can amplify a dependency problem.
+
+15
+00:01:11.080 --> 00:01:17.560
+Safer scripts set reasonable boundaries, stop clearly, and provide enough context for operators to respond.
+
+16
+00:01:17.840 --> 00:01:20.960
+Background jobs and cleanup should be deliberate.
+
+17
+00:01:21.060 --> 00:01:28.580
+If a script starts work in the background, it should know who owns that process, how completion is detected, and what should happen if the parent exits early.
+
+18
+00:01:28.680 --> 00:01:38.280
+Signals and cleanup behavior can be handled at a safe conceptual level: make ownership clear, avoid orphaned work, and leave systems in a known state where practical.

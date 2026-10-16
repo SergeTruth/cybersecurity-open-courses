@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "How Bash Sees Arguments",
+  "graphicAlt": "Argument count and separate containers preserve empty, spaced, and option-like values through forwarding.",
+  "narration": "Bash scripts receive command-line arguments as positional parameters. The script name is represented separately from the arguments, individual values can be accessed by position, and the total number of supplied arguments can be checked before work begins. These details are not trivia. They determine how the script understands its input and whether it can reject an incomplete or unsupported request.\n\nArgument count is a simple but powerful control. If a script requires a mode and a destination, it should check that both are present before taking action. If a script supports no extra positional values, it should reject unexpected extras instead of silently ignoring them. Clear count checks make usage predictable and keep mistakes from flowing deeper into the workflow.\n\nThe full argument list also matters. In Bash, quoted forms such as \"$@\" preserve each original argument as its own value when forwarding to another function or command. That is different from treating the entire command line as one string or accidentally re-splitting values. Empty arguments, values containing spaces, and values that look like options should be considered normal possibilities, not rare edge cases.\n\nArgument boundaries are part of correctness and security. A path with a space should remain one path. An empty value should be detected if it is not allowed. A literal value that begins with a dash should not accidentally become an option to a downstream command. Understanding how Bash represents arguments gives reviewers the vocabulary to ask whether the script preserves what the caller actually supplied.",
+  "narrationPoints": [
+    "Trust boundary — How Bash Sees Arguments: Bash scripts receive command-line arguments as positional parameters.",
+    "Input and state — How Bash Sees Arguments: Argument count is a simple but powerful control.",
+    "Validation checkpoint — How Bash Sees Arguments: The full argument list also matters.",
+    "Controlled operation — How Bash Sees Arguments: Argument boundaries are part of correctness and security.",
+    "Failure path — How Bash Sees Arguments: A literal value that begins with a dash should not accidentally become an option to a downstream command.",
+    "Review outcome — How Bash Sees Arguments: Understanding how Bash represents arguments gives reviewers the vocabulary to ask whether the script preserves what the caller actually supplied."
+  ]
+};

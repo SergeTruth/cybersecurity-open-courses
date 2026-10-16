@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.140
+A safer Bash script usually chooses the command in the script and passes variable values as separate arguments.
+
+2
+00:00:07.240 --> 00:00:12.520
+That may sound basic, but it is one of the most important design choices in shell automation.
+
+3
+00:00:12.620 --> 00:00:18.940
+The command, the fixed options, and the purpose of each variable should be visible in the code that reviewers inspect.
+
+4
+00:00:19.220 --> 00:00:25.300
+This is different from building a full command line as a string and later asking Bash to interpret that string.
+
+5
+00:00:25.400 --> 00:00:31.160
+A command string mixes data, options, quoting rules, and shell syntax into one blob.
+
+6
+00:00:31.260 --> 00:00:36.060
+Once a script takes that path, reviewers have to mentally simulate another layer of parsing.
+
+7
+00:00:36.160 --> 00:00:40.960
+That makes mistakes easier to miss and behavior harder to explain.
+
+8
+00:00:41.240 --> 00:00:43.640
+Fixed commands are easier to reason about.
+
+9
+00:00:43.740 --> 00:00:53.980
+If a script archives a known directory, calls a known deployment tool, or checks a known service status, the executable and stable options should be written directly in the script.
+
+10
+00:00:54.080 --> 00:01:01.440
+Variable values can still be used, but they should be passed as arguments to the known command rather than inserted into new shell syntax.
+
+11
+00:01:01.720 --> 00:01:05.720
+When a script needs to choose between actions, use a controlled mapping.
+
+12
+00:01:05.820 --> 00:01:14.300
+For example, a validated mode such as report, sync, or verify can map to a known function that the script defines.
+
+13
+00:01:14.400 --> 00:01:19.200
+That keeps the set of possible actions small, reviewable, and testable.
+
+14
+00:01:19.300 --> 00:01:24.420
+The input selects among supported behaviors; it does not become arbitrary command text.
+
+15
+00:01:24.700 --> 00:01:27.340
+This design also helps maintainability.
+
+16
+00:01:27.440 --> 00:01:32.800
+Future engineers can see what the script is allowed to do without tracing string construction across many branches.
+
+17
+00:01:32.900 --> 00:01:38.660
+They can test each mode, document the expected inputs, and reason about permissions.
+
+18
+00:01:38.760 --> 00:01:45.400
+If a new action is needed, it is added as a new known path rather than squeezed into a free-form command builder.
+
+19
+00:01:45.680 --> 00:01:50.960
+The defensive habit is to ask whether a value is being used as data or as syntax.
+
+20
+00:01:51.060 --> 00:01:56.580
+Paths, names, identifiers, counts, and labels should stay data.
+
+21
+00:01:56.680 --> 00:02:01.000
+Shell syntax should come from the script author, not from runtime text.
+
+22
+00:02:01.100 --> 00:02:05.980
+That single distinction removes a large class of accidental and risky behavior.
+
+23
+00:02:06.080 --> 00:02:14.160
+Reviewers can see every permitted action, test each mode, and verify that runtime values remain arguments rather than shell syntax.

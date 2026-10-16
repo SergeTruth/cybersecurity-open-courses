@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.180
+The most obvious exposure pattern is a hard-coded credential in a script, module, profile, or configuration file.
+
+2
+00:00:08.280 --> 00:00:16.360
+A password in a variable may look temporary, but scripts are copied, emailed, archived, committed, and reused.
+
+3
+00:00:16.460 --> 00:00:21.100
+Repository history can preserve secrets long after the current file has been cleaned.
+
+4
+00:00:21.200 --> 00:00:33.200
+Plaintext configuration files, runbook exports, copied troubleshooting snippets, and shared administrator workstations all create more places where a secret can drift away from its intended use.
+
+5
+00:00:33.480 --> 00:00:38.920
+PowerShell also has operational surfaces that capture more than people expect.
+
+6
+00:00:39.020 --> 00:00:43.260
+Command history may retain commands that include tokens or credentials.
+
+7
+00:00:43.360 --> 00:00:48.720
+Transcripts can record commands, output, prompts, and errors.
+
+8
+00:00:48.820 --> 00:00:58.260
+Logs, verbose output, debug output, screenshots, and support tickets can capture secret-adjacent values during troubleshooting.
+
+9
+00:00:58.360 --> 00:01:05.960
+An error handler that dumps an object for convenience may accidentally print headers, connection strings, or credential metadata.
+
+10
+00:01:06.240 --> 00:01:09.280
+Automation platforms add their own exposure paths.
+
+11
+00:01:09.380 --> 00:01:13.860
+CI/CD variables may be copied between projects without the same access model.
+
+12
+00:01:13.960 --> 00:01:22.120
+Scheduled task arguments can be visible in task definitions, administrative views, process listings, or event data.
+
+13
+00:01:22.220 --> 00:01:24.620
+Cloud runbooks may be exported for review.
+
+14
+00:01:24.720 --> 00:01:28.320
+Build artifacts may contain generated configuration.
+
+15
+00:01:28.420 --> 00:01:36.980
+A secret that is safe inside one platform's protected variable store may become exposed if a script writes it to the console or embeds it in an artifact.
+
+16
+00:01:37.260 --> 00:01:50.700
+The defensive mindset is to assume that any value written to a file, argument list, command line, history, log stream, transcript, or repository may be read later by someone who was not meant to use the secret.
+
+17
+00:01:50.800 --> 00:01:58.640
+PowerShell scripts should minimize where secrets appear, avoid passing secrets through broad surfaces, and make troubleshooting output safe by design.
+
+18
+00:01:58.740 --> 00:02:03.220
+The fewer places a secret travels, the easier it is to protect and rotate.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Quoting, Arrays, and Argument Boundaries",
+  "graphicAlt": "Validation checks acceptability, while quoting and arrays preserve literal argument boundaries and separate data from shell syntax.",
+  "narration": "After a script validates an argument, it still has to pass that value safely. Validation checks whether a value is acceptable. Quoting preserves the value when Bash expands it. These are different controls. A validated path can still be split into multiple words if it is expanded without quotes. A validated label can still be treated as a filename pattern if globbing is allowed to reinterpret it.\n\nQuoting tells Bash to keep a value together as one argument. This matters for paths, labels, environment names, filenames, and option values. When forwarding the original argument list, \"$@\" preserves each argument boundary. That lets a wrapper function or helper script receive the same arguments the caller supplied, rather than a re-split approximation.\n\nArrays are especially useful in Bash because they let scripts build argument lists without turning them into one large command string. A script can append a flag, an option value, or a path as separate array elements and then pass the array to a command with preserved boundaries. This is easier to review than constructing a string that the shell later interprets.\n\nDefensive Bash scripts keep data as data. They avoid evaluating constructed command strings from uncontrolled or loosely controlled values. They prefer passing separate arguments to the command being called. The safety habit is consistent: validate first, quote expansions, use arrays for argument lists, and keep shell syntax separate from command-line data.",
+  "narrationPoints": [
+    "Trust boundary — Quoting, Arrays, and Argument Boundaries: After a script validates an argument, it still has to pass that value safely.",
+    "Input and state — Quoting, Arrays, and Argument Boundaries: Quoting tells Bash to keep a value together as one argument.",
+    "Validation checkpoint — Quoting, Arrays, and Argument Boundaries: Arrays are especially useful in Bash because they let scripts build argument lists without turning them into one large command string.",
+    "Controlled operation — Quoting, Arrays, and Argument Boundaries: Defensive Bash scripts keep data as data.",
+    "Failure path — Quoting, Arrays, and Argument Boundaries: A validated path can still be split into multiple words if it is expanded without quotes.",
+    "Review outcome — Quoting, Arrays, and Argument Boundaries: The safety habit is consistent: validate first, quote expansions, use arrays for argument lists, and keep shell syntax separate from command-line data."
+  ]
+};

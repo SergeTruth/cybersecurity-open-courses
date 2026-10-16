@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+A script should receive API keys through the narrowest practical channel.
+
+2
+00:00:04.440 --> 00:00:18.120
+Depending on the environment, that channel may be a managed secret store, platform identity, workload identity, short-lived token, CI/CD secret variable, protected file descriptor, restricted local file, or secrets-aware runtime.
+
+3
+00:00:18.220 --> 00:00:25.900
+The mechanism can vary, but the design principle is consistent: expose the key only to the job that needs it and only for as long as needed.
+
+4
+00:00:26.000 --> 00:00:34.720
+Making one API key ambient state exposes it to every helper, wrapper, diagnostic command, or child process the script launches.
+
+5
+00:00:35.000 --> 00:00:40.120
+Runtime delivery is better than storing the key in the script because it separates code from authority.
+
+6
+00:00:40.220 --> 00:00:45.180
+The script can be reviewed, copied, and versioned without carrying the credential.
+
+7
+00:00:45.280 --> 00:00:48.000
+The key can be rotated without editing the script.
+
+8
+00:00:48.100 --> 00:00:54.900
+Access can be scoped by job, environment, branch, host, workload, or identity.
+
+9
+00:00:55.000 --> 00:01:02.680
+In mature environments, platform identity or short-lived credentials may reduce the need for long-lived static keys at all.
+
+10
+00:01:02.960 --> 00:01:04.480
+Minimal inheritance matters.
+
+11
+00:01:04.580 --> 00:01:13.780
+A key needed by one API request does not need to become ambient state for every helper, wrapper, diagnostic command, or child process the script launches.
+
+12
+00:01:13.880 --> 00:01:20.920
+Before calling unrelated tools, consider whether sensitive variables should be removed or the command should run in a minimized environment.
+
+13
+00:01:21.020 --> 00:01:27.500
+This is especially important in CI/CD jobs, where many tools may record context for debugging or support.
+
+14
+00:01:27.780 --> 00:01:32.740
+Scripts should check whether required keys are available without printing their values.
+
+15
+00:01:32.840 --> 00:01:44.680
+A safe failure message can explain that a required API key was not provided through the approved mechanism, but it should not echo the key, dump the environment, or include sensitive headers.
+
+16
+00:01:44.780 --> 00:01:51.020
+Clear non-sensitive errors help operators fix configuration while preserving the security boundary around the credential.

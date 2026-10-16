@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Raw path text is not always the same as the filesystem location the script will actually use.
+
+2
+00:00:06.520 --> 00:00:13.640
+A path may include relative elements, repeated separators, links, or assumptions about the current working directory.
+
+3
+00:00:13.740 --> 00:00:18.780
+It may look acceptable as a string while resolving to a location the script should not touch.
+
+4
+00:00:18.880 --> 00:00:25.200
+Secure Bash automation should reason about the effective location, not only the original characters provided to the script.
+
+5
+00:00:25.300 --> 00:00:31.220
+A path may look acceptable as a string while resolving to a location the script should not touch.
+
+6
+00:00:31.500 --> 00:00:37.020
+Normalization and canonical path reasoning help a script compare meaning instead of appearance.
+
+7
+00:00:37.120 --> 00:00:52.560
+The exact implementation depends on the platform, available tools, and whether the target already exists, but the design goal is consistent: resolve path meaning where appropriate, then compare the resulting location against an approved base.
+
+8
+00:00:52.660 --> 00:01:00.820
+If the effective path is not inside the approved area, the script rejects it before reading, writing, extracting, or cleaning.
+
+9
+00:01:01.100 --> 00:01:06.460
+Relative paths require special care because they depend on working directory context.
+
+10
+00:01:06.560 --> 00:01:12.640
+A relative value may be safe when launched from one directory and unsafe or nonsensical when launched from another.
+
+11
+00:01:12.740 --> 00:01:24.740
+A defensive script should either reject relative path forms for sensitive operations or resolve them relative to an explicit approved base rather than the accidental launch location.
+
+12
+00:01:24.840 --> 00:01:29.080
+The rule should be clear enough for a reviewer to understand and for tests to cover.
+
+13
+00:01:29.360 --> 00:01:31.840
+Safe failure is part of the control.
+
+14
+00:01:31.940 --> 00:01:45.300
+When a path cannot be resolved, belongs to the wrong scope, uses an unsupported form, or does not meet the script's expectations, the script should stop with a useful error that does not expose unnecessary sensitive details.
+
+15
+00:01:45.400 --> 00:01:50.840
+It should not try to repair the path silently or continue with a fallback that broadens scope.
+
+16
+00:01:50.940 --> 00:01:58.060
+The safest file operation is the one the script refuses to perform when the path is not clearly inside bounds.

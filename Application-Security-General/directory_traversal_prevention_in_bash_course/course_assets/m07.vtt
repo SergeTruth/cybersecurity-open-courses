@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Bulk file operations increase risk because one path mistake can affect many files.
+
+2
+00:00:06.520 --> 00:00:15.160
+Archive extraction, recursive copy, synchronization, report collection, and cleanup jobs often operate over entire directory trees.
+
+3
+00:00:15.260 --> 00:00:24.620
+If scope is unclear or validation is weak, the script may process files outside the intended area or place many outputs where they do not belong.
+
+4
+00:00:24.720 --> 00:00:31.680
+A mistake that would be annoying for one file can become serious when repeated across hundreds or thousands of paths.
+
+5
+00:00:31.960 --> 00:00:37.000
+Archive extraction is especially sensitive because archive member names are input.
+
+6
+00:00:37.100 --> 00:00:44.540
+The script should not assume that every member belongs in the intended extraction area simply because it came from an archive the workflow expected.
+
+7
+00:00:44.640 --> 00:00:58.640
+A safer pattern is to extract into a controlled staging directory, validate or inspect member paths where practical, and verify that extracted content remains inside the approved scope before moving anything onward.
+
+8
+00:00:58.920 --> 00:01:04.360
+Synchronization and recursive copy jobs need similarly clear scope.
+
+9
+00:01:04.460 --> 00:01:09.980
+The source, destination, filters, and excluded areas should be explicit.
+
+10
+00:01:10.080 --> 00:01:17.440
+Risky bulk operations benefit from dry-run or preview modes so operators can review intended changes before the script applies them.
+
+11
+00:01:17.540 --> 00:01:24.900
+This is particularly useful when a job may update many files, remove old outputs, or mirror one directory structure into another.
+
+12
+00:01:25.180 --> 00:01:27.580
+Cleanup deserves strong guardrails.
+
+13
+00:01:27.680 --> 00:01:37.440
+Broad or ambiguous cleanup logic can remove unexpected data, especially if a variable is empty, a base directory is wrong, or a path resolves somewhere surprising.
+
+14
+00:01:37.540 --> 00:01:47.540
+Keep cleanup within approved directories, validate targets close to use, log actions at a useful level, and avoid relying on assumptions that are hard to review.
+
+15
+00:01:47.640 --> 00:01:53.240
+Bulk operations should be designed to make the safe path easy and the dangerous path difficult.

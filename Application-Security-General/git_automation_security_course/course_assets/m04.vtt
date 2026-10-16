@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+A Bash script should invoke Git in a way that is easy to review and difficult to misuse.
+
+2
+00:00:06.200 --> 00:00:11.880
+Avoid building one large command string from variable data and then asking the shell to interpret it again.
+
+3
+00:00:11.980 --> 00:00:14.940
+Fixed command structure makes behavior clearer.
+
+4
+00:00:15.040 --> 00:00:21.520
+Quoting repository URLs, refs, paths, and option values helps preserve literal boundaries.
+
+5
+00:00:21.620 --> 00:00:27.060
+Bash arrays can be useful when a script needs to assemble options and operands while keeping them separate.
+
+6
+00:00:27.340 --> 00:00:30.300
+Inputs to Git should be validated before use.
+
+7
+00:00:30.400 --> 00:00:42.160
+Branch names, tag names, remote names, repository identifiers, directories, and release refs can all affect what the script checks out or what later automation trusts.
+
+8
+00:00:42.260 --> 00:00:48.180
+A missing or unexpected ref should not silently fall back to a default that changes the release target.
+
+9
+00:00:48.280 --> 00:00:53.160
+A repository URL should not be arbitrary when the workflow expects an approved source.
+
+10
+00:00:53.440 --> 00:00:58.880
+Working directory control matters because Git behavior depends on which repository and checkout are active.
+
+11
+00:00:58.980 --> 00:01:09.140
+A script that assumes it is inside one repository but runs from another can fetch, reset, describe, or package the wrong content.
+
+12
+00:01:09.240 --> 00:01:17.080
+Use explicit workspace paths, verify repository identity where appropriate, and make directory transitions visible in the script.
+
+13
+00:01:17.180 --> 00:01:21.500
+Avoid allowing leftover workspace state from one job to influence another.
+
+14
+00:01:21.780 --> 00:01:24.260
+Result handling is part of safety.
+
+15
+00:01:24.360 --> 00:01:33.320
+Scripts should check exit status, distinguish expected no-change states from failures, and stop before later steps trust a wrong checkout or incomplete operation.
+
+16
+00:01:33.420 --> 00:01:46.380
+If a fetch fails, a checkout fails, a tag is missing, or a submodule update does not complete, the script should not continue to package, publish, or deploy as though the workspace is trustworthy.
+
+17
+00:01:46.480 --> 00:01:53.120
+Reviewers can verify explicit workspace paths, repository identity, and visible directory transitions.

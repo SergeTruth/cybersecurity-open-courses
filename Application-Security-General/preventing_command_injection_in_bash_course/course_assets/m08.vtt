@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.980
+Command injection prevention is strongest when safe script design is supported by a controlled execution context.
+
+2
+00:00:07.080 --> 00:00:17.480
+A command runs with a current directory, PATH, environment variables, available tools, inherited settings, and the permissions of the identity that launched it.
+
+3
+00:00:17.580 --> 00:00:22.140
+Those assumptions can change behavior even when the command line itself looks careful.
+
+4
+00:00:22.240 --> 00:00:27.520
+Execution assumptions can change behavior even when the command line itself looks careful.
+
+5
+00:00:27.800 --> 00:00:31.240
+PATH and command lookup deserve attention.
+
+6
+00:00:31.340 --> 00:00:35.900
+For high-impact automation, avoid relying on an uncontrolled PATH.
+
+7
+00:00:36.000 --> 00:00:43.360
+Decide how required tools are located, which versions are expected, and how the script should fail if a dependency is missing.
+
+8
+00:00:43.460 --> 00:00:48.980
+The current working directory should also be explicit when relative paths affect important work.
+
+9
+00:00:49.260 --> 00:00:51.420
+Environment variables are inputs.
+
+10
+00:00:51.520 --> 00:00:59.040
+They may influence command lookup, runtime behavior, proxies, credentials, debug settings, and tool configuration.
+
+11
+00:00:59.140 --> 00:01:06.580
+A safe script knows which environment values it accepts, which ones it sets, and which inherited values should not be trusted blindly.
+
+12
+00:01:06.860 --> 00:01:08.700
+Least privilege limits impact.
+
+13
+00:01:08.800 --> 00:01:16.800
+A validation mistake or unexpected input path is less damaging when the automation identity has only the access required for the job.
+
+14
+00:01:16.900 --> 00:01:23.460
+Avoid giving broad administrative power to scripts that only need a narrow operational role.
+
+15
+00:01:23.560 --> 00:01:26.840
+Permission design is part of command execution safety.
+
+16
+00:01:27.120 --> 00:01:30.240
+Logging should support operations without exposing secrets.
+
+17
+00:01:30.340 --> 00:01:38.340
+Avoid printing tokens, private keys, sensitive command output, or full argument lists when they may include confidential values.
+
+18
+00:01:38.440 --> 00:01:43.400
+Good logs explain what the script attempted, what failed, and what an operator should check next.
+
+19
+00:01:43.680 --> 00:01:45.760
+Review completes the picture.
+
+20
+00:01:45.860 --> 00:01:48.740
+ShellCheck can catch many shell-specific mistakes.
+
+21
+00:01:48.840 --> 00:01:54.520
+Peer review can question design choices, trust boundaries, and operational assumptions.
+
+22
+00:01:54.620 --> 00:02:05.820
+Realistic tests with empty values, missing files, spaced names, option-like values, and unexpected metadata can reveal problems before automation is trusted in production.

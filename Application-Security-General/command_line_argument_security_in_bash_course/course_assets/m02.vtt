@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Bash scripts receive command-line arguments as positional parameters.
+
+2
+00:00:04.440 --> 00:00:14.200
+The script name is represented separately from the arguments, individual values can be accessed by position, and the total number of supplied arguments can be checked before work begins.
+
+3
+00:00:14.300 --> 00:00:16.220
+These details are not trivia.
+
+4
+00:00:16.320 --> 00:00:22.480
+They determine how the script understands its input and whether it can reject an incomplete or unsupported request.
+
+5
+00:00:22.760 --> 00:00:26.360
+Argument count is a simple but powerful control.
+
+6
+00:00:26.460 --> 00:00:31.900
+If a script requires a mode and a destination, it should check that both are present before taking action.
+
+7
+00:00:32.000 --> 00:00:39.520
+If a script supports no extra positional values, it should reject unexpected extras instead of silently ignoring them.
+
+8
+00:00:39.620 --> 00:00:45.220
+Clear count checks make usage predictable and keep mistakes from flowing deeper into the workflow.
+
+9
+00:00:45.500 --> 00:00:47.820
+The full argument list also matters.
+
+10
+00:00:47.920 --> 00:00:56.960
+In Bash, quoted forms such as "$@" preserve each original argument as its own value when forwarding to another function or command.
+
+11
+00:00:57.060 --> 00:01:02.420
+That is different from treating the entire command line as one string or accidentally re-splitting values.
+
+12
+00:01:02.520 --> 00:01:10.680
+Empty arguments, values containing spaces, and values that look like options should be considered normal possibilities, not rare edge cases.
+
+13
+00:01:10.960 --> 00:01:14.640
+Argument boundaries are part of correctness and security.
+
+14
+00:01:14.740 --> 00:01:18.340
+A path with a space should remain one path.
+
+15
+00:01:18.440 --> 00:01:22.120
+An empty value should be detected if it is not allowed.
+
+16
+00:01:22.220 --> 00:01:27.900
+A literal value that begins with a dash should not accidentally become an option to a downstream command.
+
+17
+00:01:28.000 --> 00:01:35.120
+Understanding how Bash represents arguments gives reviewers the vocabulary to ask whether the script preserves what the caller actually supplied.

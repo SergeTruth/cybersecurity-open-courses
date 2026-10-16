@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Every cloud deployment script runs with an identity.
+
+2
+00:00:03.880 --> 00:00:13.960
+That identity may come from a human session, service account, role assumption, workload identity, managed identity, deployment agent, or CI/CD runner credential.
+
+3
+00:00:14.060 --> 00:00:21.580
+The identity determines what the script can read, create, update, publish, route, or disable.
+
+4
+00:00:21.680 --> 00:00:27.200
+Credentials are therefore not setup details; they are part of the deployment authority model.
+
+5
+00:00:27.300 --> 00:00:35.620
+Hard-coded secrets, command examples, logs, and broadly accessible configuration can spread deployment credentials beyond the authorized job.
+
+6
+00:00:35.900 --> 00:00:41.580
+Least privilege should be based on action, environment, service, and repository.
+
+7
+00:00:41.680 --> 00:00:46.240
+A validation job does not need the same permissions as a production deployment.
+
+8
+00:00:46.340 --> 00:00:50.020
+A staging rollout should not inherit production access.
+
+9
+00:00:50.120 --> 00:00:55.240
+A package publication job may need registry permissions but not infrastructure administration.
+
+10
+00:00:55.340 --> 00:01:00.780
+A rollback path may require narrowly scoped authority that is different from ordinary release activity.
+
+11
+00:01:00.880 --> 00:01:06.000
+Splitting those permissions reduces unnecessary access and makes failures easier to contain.
+
+12
+00:01:06.280 --> 00:01:09.080
+Credential delivery should use approved mechanisms.
+
+13
+00:01:09.180 --> 00:01:17.180
+In CI/CD, that may mean scoped secrets, short-lived credentials, workload identity, or managed identity where the platform supports it.
+
+14
+00:01:17.280 --> 00:01:24.400
+Locally, it means avoiding hidden assumptions about broad profiles and making the target identity visible enough to validate.
+
+15
+00:01:24.500 --> 00:01:33.140
+Secrets should not be hard-coded into scripts, embedded in command examples, written into logs, or stored in broadly accessible configuration.
+
+16
+00:01:33.420 --> 00:01:40.140
+Broad shared administrator credentials may make automation quick to start, but they make incidents harder to understand and contain.
+
+17
+00:01:40.240 --> 00:01:48.720
+Secure deployment identities have owners, documented purpose, rotation paths, revocation steps, and periodic access review.
+
+18
+00:01:48.820 --> 00:01:55.940
+Teams should be able to answer which scripts use a credential, what it can touch, and how to disable it quickly if something goes wrong.

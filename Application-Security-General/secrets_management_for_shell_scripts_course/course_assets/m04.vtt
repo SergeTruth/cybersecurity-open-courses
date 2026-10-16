@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+A shell script should receive secrets through the narrowest practical channel.
+
+2
+00:00:04.440 --> 00:00:08.440
+That means the secret is not placed in the script just because it is convenient.
+
+3
+00:00:08.540 --> 00:00:24.300
+It is delivered at runtime through a mechanism appropriate for the environment: a managed secret store, workload identity, platform-managed identity, CI/CD secret variable, protected file, restricted file descriptor, short-lived token, or another approved pattern.
+
+4
+00:00:24.400 --> 00:00:28.720
+The exact mechanism changes, but the design principle stays the same.
+
+5
+00:00:29.000 --> 00:00:34.280
+The script should expose the value only to the job that needs it, for only as long as needed.
+
+6
+00:00:34.380 --> 00:00:42.380
+Avoid passing secrets to unrelated tools, broad child processes, debugging wrappers, or commands that may record their inputs.
+
+7
+00:00:42.480 --> 00:00:46.640
+If a script launches other processes, think about what those processes inherit.
+
+8
+00:00:46.740 --> 00:00:52.580
+A secret needed by one command does not need to become ambient state for every later command in the workflow.
+
+9
+00:00:52.860 --> 00:00:55.420
+Runtime checks should also be careful.
+
+10
+00:00:55.520 --> 00:01:00.960
+It is reasonable for a script to verify that a required secret is available before continuing.
+
+11
+00:01:01.060 --> 00:01:08.340
+It is not reasonable to print the value as part of a check, echo it in a debug trace, or include it in a failure message.
+
+12
+00:01:08.440 --> 00:01:14.840
+A safe failure message should tell the operator what is missing in operational terms without revealing the secret.
+
+13
+00:01:14.940 --> 00:01:22.460
+For example, the script can say that a required deployment token was not provided through the approved channel, without displaying the token value.
+
+14
+00:01:22.740 --> 00:01:27.380
+Short-lived credentials are especially useful where the platform supports them.
+
+15
+00:01:27.480 --> 00:01:32.040
+They reduce the value of stale copies and make cleanup easier when a job completes.
+
+16
+00:01:32.140 --> 00:01:34.940
+Still, short-lived does not mean careless.
+
+17
+00:01:35.040 --> 00:01:39.360
+A token with broad privileges can cause damage even during a short lifetime.
+
+18
+00:01:39.460 --> 00:01:46.100
+Pair short lifetime with least privilege, controlled injection, minimal inheritance, and useful audit records.
+
+19
+00:01:46.200 --> 00:01:52.920
+A non-sensitive preflight check verifies that the required secret is available through the approved channel before work begins.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.140
+Microsoft.PowerShell.SecretManagement provides a common way for scripts to work with secrets without hard-coding storage logic into every script.
+
+2
+00:00:11.240 --> 00:00:13.880
+Its value is the vault abstraction.
+
+3
+00:00:13.980 --> 00:00:24.700
+A script can ask for a secret by name through a consistent interface, while the actual backend may be a local store, an enterprise vault, or a cloud secret service through an extension.
+
+4
+00:00:24.800 --> 00:00:29.040
+This separates script logic from the details of secret storage.
+
+5
+00:00:29.320 --> 00:00:34.680
+The SecretStore extension vault is commonly used for local scenarios and development workflows.
+
+6
+00:00:34.780 --> 00:00:42.700
+At a high level, a vault is registered, configured, and then used to set or retrieve named secrets.
+
+7
+00:00:42.800 --> 00:00:50.320
+A script can retrieve a credential, token, or other secret at runtime instead of storing the plaintext value inside the script.
+
+8
+00:00:50.420 --> 00:00:56.740
+This reduces credential sprawl and makes the script easier to move between environments where the vault binding may differ.
+
+9
+00:00:57.020 --> 00:00:59.100
+The operational model matters.
+
+10
+00:00:59.200 --> 00:01:02.800
+Registering a vault is not the same as designing access control.
+
+11
+00:01:02.900 --> 00:01:12.980
+Teams still need to decide who can read or write secrets, whether unlock steps are interactive or unattended, how vault access is audited, and how secrets are named.
+
+12
+00:01:13.080 --> 00:01:21.880
+Scripts should request only the secrets they need and should handle missing or unavailable secrets clearly rather than falling back to insecure defaults.
+
+13
+00:01:22.160 --> 00:01:25.600
+SecretManagement is most useful when it becomes a standard pattern.
+
+14
+00:01:25.700 --> 00:01:34.660
+Instead of each team inventing its own password file, environment variable convention, or local export, scripts can rely on a supported retrieval flow.
+
+15
+00:01:34.760 --> 00:01:41.720
+That makes review easier: the script contains the secret name and the expected use, not the secret value.
+
+16
+00:01:41.820 --> 00:01:46.700
+The vault and platform own storage, protection, and policy.
+
+17
+00:01:46.800 --> 00:01:55.120
+Review confirms that the script contains only the secret name and expected use while the vault owns storage, protection, and policy.

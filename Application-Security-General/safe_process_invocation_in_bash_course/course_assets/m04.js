@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Passing Arguments Safely",
+  "graphicAlt": "Validation, quoting, arrays, and forwarding preserve accepted values as separate arguments to the process.",
+  "narration": "External commands receive arguments as separate values. A safe Bash script preserves those boundaries from input through invocation. Problems appear when a script collapses values into one command string and asks the shell to interpret it later. That design mixes data, options, quoting rules, and shell syntax into something harder to review.\n\nQuoting helps preserve a value as one argument. A filename, identifier, label, or option value may contain spaces or characters that Bash would otherwise treat specially. If the value should be one argument, the script should pass it as one argument. Quoting is basic, but it is one of the most important reliability and security habits in Bash.\n\nArrays are the preferred structure when a script needs to build an argument list. Fixed options, validated option values, and operands can be separate array elements. The script can add optional supported arguments without turning the whole invocation into a shell string. That makes behavior clearer and reduces accidental interpretation.\n\nThe form \"$@\" is important when forwarding an existing argument list from a wrapper or function. Used correctly, it preserves each original argument boundary. That matters when a wrapper receives values it should pass along as data rather than flatten into a string and split again.\n\nValidation and argument preservation solve different problems. Validation decides whether a value is acceptable for this workflow. Quoting, arrays, and \"$@\" preserve that accepted value when invoking the process. A defensive script uses both layers together: validate first, then pass values as structured arguments to known executables.",
+  "narrationPoints": [
+    "Trust boundary — Passing Arguments Safely: External commands receive arguments as separate values.",
+    "Input and state — Passing Arguments Safely: Quoting helps preserve a value as one argument.",
+    "Validation checkpoint — Passing Arguments Safely: Arrays are the preferred structure when a script needs to build an argument list.",
+    "Controlled operation — Passing Arguments Safely: The form \"$@\" is important when forwarding an existing argument list from a wrapper or function.",
+    "Failure path — Passing Arguments Safely: Problems appear when a script collapses values into one command string and asks the shell to interpret it later.",
+    "Review outcome — Passing Arguments Safely: A defensive script uses both layers together: validate first, then pass values as structured arguments to known executables."
+  ]
+};

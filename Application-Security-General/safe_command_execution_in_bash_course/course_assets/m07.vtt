@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Safe command execution is not finished when a process starts.
+
+2
+00:00:04.280 --> 00:00:07.560
+The script also has to decide what the result means.
+
+3
+00:00:07.660 --> 00:00:16.780
+Commands can fail because files are missing, permissions changed, tools are unavailable, network calls timed out, or preconditions were never true.
+
+4
+00:00:16.880 --> 00:00:22.960
+A script that ignores those results can report success while leaving a system only partially updated.
+
+5
+00:00:23.240 --> 00:00:25.880
+Exit status is the basic signal.
+
+6
+00:00:25.980 --> 00:00:33.820
+Commands report whether they succeeded according to their own rules, and scripts should check that signal when the result affects later work.
+
+7
+00:00:33.920 --> 00:00:38.400
+Some non-success outcomes may be expected, but they should be handled deliberately.
+
+8
+00:00:38.500 --> 00:00:44.260
+The unsafe pattern is to let failure drift forward until a later step creates confusing output.
+
+9
+00:00:44.540 --> 00:00:50.300
+Pipelines need special attention because the visible result of a pipeline may not tell the whole story.
+
+10
+00:00:50.400 --> 00:00:56.080
+A later command can succeed after an earlier command failed, depending on shell options and script structure.
+
+11
+00:00:56.180 --> 00:01:04.260
+Defensive scripts make pipeline behavior explicit where it matters and avoid treating a formatted final output as proof that every upstream step worked.
+
+12
+00:01:04.540 --> 00:01:08.140
+Precondition checks help stop unsafe runs early.
+
+13
+00:01:08.240 --> 00:01:16.400
+If a required file, directory, account, tool, or configuration value is missing, the script should say so before it begins changing state.
+
+14
+00:01:16.500 --> 00:01:24.020
+This is especially important for unattended jobs, where a clear failure message may be the only clue an operator sees.
+
+15
+00:01:24.300 --> 00:01:28.460
+Timeouts and retry limits are part of safe failure.
+
+16
+00:01:28.560 --> 00:01:33.120
+A command that hangs forever can block a deployment or maintenance window.
+
+17
+00:01:33.220 --> 00:01:38.980
+A retry loop with no limit can create operational noise or repeated partial work.
+
+18
+00:01:39.080 --> 00:01:46.200
+Good automation sets boundaries, stops when assumptions are not met, and gives the next human enough information to decide what to do.
+
+19
+00:01:46.480 --> 00:01:48.800
+The goal is not to make scripts fragile.
+
+20
+00:01:48.900 --> 00:01:51.060
+The goal is to make failures honest.
+
+21
+00:01:51.160 --> 00:01:58.920
+A safe script distinguishes expected conditions from real errors, avoids misleading success, and stays rerunnable where practical.
+
+22
+00:01:59.020 --> 00:02:03.900
+That turns command execution from a hopeful sequence of steps into a controlled workflow.

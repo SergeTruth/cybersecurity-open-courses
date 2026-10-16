@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Shell scripts often work with files, and some of those files can contain sensitive material.
+
+2
+00:00:05.720 --> 00:00:16.920
+Examples include key files, token files, generated certificates, temporary configuration fragments, encrypted data, downloaded credentials, or output from a secret store.
+
+3
+00:00:17.020 --> 00:00:29.580
+Even when the final workflow is secure, the temporary handling can create exposure if the file is placed in a shared directory, created with broad permissions, given a predictable name, or left behind after the script finishes.
+
+4
+00:00:29.860 --> 00:00:34.420
+Safe handling starts with controlled locations and restrictive permissions.
+
+5
+00:00:34.520 --> 00:00:44.440
+Sensitive temporary material should be created in a directory appropriate for the current user or job, not in a broad shared workspace unless that workspace is designed for that purpose.
+
+6
+00:00:44.540 --> 00:00:50.940
+File ownership should be clear, permissions should be narrow, and the filename should not reveal sensitive context.
+
+7
+00:00:51.040 --> 00:00:57.600
+If the script depends on a secret file, the script should check that the file exists and is readable without printing its contents.
+
+8
+00:00:57.880 --> 00:01:01.560
+Cleanup matters, but cleanup should not be the only control.
+
+9
+00:01:01.660 --> 00:01:07.500
+Scripts may fail, be interrupted, or run on systems with unexpected retention behavior.
+
+10
+00:01:07.600 --> 00:01:19.760
+Traps and cleanup handlers can help remove temporary files when a script exits, but the better design is to reduce how much sensitive material touches disk in the first place and how long it remains there.
+
+11
+00:01:19.860 --> 00:01:25.540
+If a secret can be passed through a safer runtime mechanism, that may be better than creating another file.
+
+12
+00:01:25.820 --> 00:01:30.220
+Be especially careful with artifacts, caches, and backups.
+
+13
+00:01:30.320 --> 00:01:32.800
+CI/CD systems may preserve workspaces.
+
+14
+00:01:32.900 --> 00:01:35.220
+Container builds may preserve layers.
+
+15
+00:01:35.320 --> 00:01:39.400
+Support packages may collect files that look operationally useful.
+
+16
+00:01:39.500 --> 00:01:43.900
+Backup systems may copy directories that were assumed to be temporary.
+
+17
+00:01:44.000 --> 00:01:53.120
+A defensive engineer asks whether secret material can be captured outside the script's immediate control and then designs the workflow to avoid or minimize that persistence.

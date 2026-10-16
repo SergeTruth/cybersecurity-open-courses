@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: API Key Handling Checklist",
+  "graphicAlt": "Approved delivery, mapped exposure, minimal copies, and rotation sit on a foundation of key ownership and scope.",
+  "narration": "API key handling in Bash is a set of repeatable engineering habits. Keep keys out of scripts and repositories. A script can be useful, portable, and reviewable without carrying its own credential. Once a key is committed, copied, logged, or archived, cleanup becomes a lifecycle problem rather than a simple edit. Treat keys as authority, not as convenient text.\n\nMap key flow through the automation. Know where a key enters, where it is stored, which tool receives it, which child processes inherit it, what logs are produced, and where it may persist. Use approved secret-management mechanisms, platform identity, workload identity, short-lived tokens, protected runtime injection, or restricted local files as appropriate for the environment. Check for required keys without printing them.\n\nMinimize exposure through environments, arguments, files, headers, payloads, logs, and artifacts. Avoid raw key values in command lines and URLs where practical. Use fixed command structures, arrays where useful, and careful quoting. Redact sensitive headers and request data. Protect temporary key material with restrictive permissions and controlled locations, and reduce how long it remains on disk.\n\nFinally, manage keys over time. Scope them by action, data, system, environment, and job. Separate development, staging, and production. Rotate and revoke keys through documented processes. Review access, logs, CI/CD variables, local configuration, and legacy scripts. Safe API automation is not about never using keys; it is about keeping keys intentional, scoped, protected, monitored, and replaceable while the script does its job.",
+  "narrationPoints": [
+    "Trust boundary — Course Summary: API Key Handling Checklist: API key handling in Bash is a set of repeatable engineering habits.",
+    "Input and state — Course Summary: API Key Handling Checklist: Map key flow through the automation.",
+    "Validation checkpoint — Course Summary: API Key Handling Checklist: Minimize exposure through environments, arguments, files, headers, payloads, logs, and artifacts.",
+    "Controlled operation — Course Summary: API Key Handling Checklist: Finally, manage keys over time.",
+    "Failure path — Course Summary: API Key Handling Checklist: Once a key is committed, copied, logged, or archived, cleanup becomes a lifecycle problem rather than a simple edit.",
+    "Review outcome — Course Summary: API Key Handling Checklist: Review access, logs, CI/CD variables, local configuration, and legacy scripts."
+  ]
+};

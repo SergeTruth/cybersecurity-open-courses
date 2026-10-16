@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.220
+Git events often trigger automation: pushes, pull requests, tags, releases, schedules, webhooks, manual dispatches, and dependency updates.
+
+2
+00:00:11.320 --> 00:00:14.840
+These triggers do not all have the same trust level.
+
+3
+00:00:14.940 --> 00:00:24.140
+A push to a protected branch, a pull request from a fork, a dependency update, and a release tag should not automatically receive the same credentials or authority.
+
+4
+00:00:24.420 --> 00:00:30.340
+CI/CD design should separate validation, build, publish, and deployment jobs.
+
+5
+00:00:30.440 --> 00:00:33.800
+Validation can often run with little or no secret access.
+
+6
+00:00:33.900 --> 00:00:37.420
+Build jobs may need read access to dependencies.
+
+7
+00:00:37.520 --> 00:00:40.080
+Publish jobs may need package credentials.
+
+8
+00:00:40.180 --> 00:00:44.340
+Deployment jobs may need environment-specific authority and approvals.
+
+9
+00:00:44.440 --> 00:00:50.760
+Splitting these roles reduces blast radius and makes it easier to reason about which event can trigger which action.
+
+10
+00:00:51.040 --> 00:00:53.920
+Low-trust triggers should not receive production secrets.
+
+11
+00:00:54.020 --> 00:01:02.260
+A pull request from a less trusted source should not be able to reach privileged deployment paths merely because it changes a workflow file or runs a job.
+
+12
+00:01:02.360 --> 00:01:13.000
+Branch filters, protected tags, protected environments, approval gates, and scoped secrets help keep high-impact actions behind reviewed workflows.
+
+13
+00:01:13.280 --> 00:01:18.160
+The goal is to run helpful automation without letting every trigger become a privileged pathway.
+
+14
+00:01:18.260 --> 00:01:23.220
+Automation should provide fast feedback while protecting release and deployment authority.
+
+15
+00:01:23.320 --> 00:01:30.360
+If a trigger cannot be trusted with a secret or credential, design the workflow so it can still validate safely without receiving that authority.
+
+16
+00:01:30.460 --> 00:01:35.340
+Privilege should be tied to trust, review, and environment scope.

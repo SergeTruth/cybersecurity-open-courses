@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Safer command design starts with known code paths.
+
+2
+00:00:03.800 --> 00:00:10.040
+The script decides which commands it supports, which options are stable, and where variable data is allowed to appear.
+
+3
+00:00:10.140 --> 00:00:12.220
+That does not prevent flexibility.
+
+4
+00:00:12.320 --> 00:00:18.560
+It channels flexibility through explicit choices that can be reviewed, tested, and documented.
+
+5
+00:00:18.660 --> 00:00:27.300
+Accepting arbitrary command names or helper paths lets runtime input control executable selection in a high-impact workflow.
+
+6
+00:00:27.580 --> 00:00:33.900
+When a script supports multiple actions, use a validated mode and map that mode to a known function or command.
+
+7
+00:00:34.000 --> 00:00:38.400
+The input selects from supported behavior; it does not become a command.
+
+8
+00:00:38.500 --> 00:00:45.780
+This pattern is clearer for reviewers and easier to test because each supported path can have its own expectations and failure handling.
+
+9
+00:00:46.060 --> 00:00:50.540
+Variable values should be passed as separate arguments.
+
+10
+00:00:50.640 --> 00:00:52.400
+A path should be an operand.
+
+11
+00:00:52.500 --> 00:00:55.940
+A count should be an option value only after it is checked.
+
+12
+00:00:56.040 --> 00:00:59.560
+An environment name should map to a known configuration.
+
+13
+00:00:59.660 --> 00:01:07.420
+Keeping data in argument positions reduces the chance that Bash syntax or tool options are shaped accidentally by runtime text.
+
+14
+00:01:07.700 --> 00:01:11.460
+Arrays are a practical tool for optional arguments.
+
+15
+00:01:11.560 --> 00:01:17.480
+A script can start with a known command and append validated options as separate elements.
+
+16
+00:01:17.580 --> 00:01:22.220
+That preserves boundaries while still letting the script adapt to supported settings.
+
+17
+00:01:22.320 --> 00:01:27.040
+It is much easier to reason about than a single command string with embedded quotes.
+
+18
+00:01:27.320 --> 00:01:30.200
+The executable selection should remain controlled.
+
+19
+00:01:30.300 --> 00:01:34.780
+If the workflow truly needs to choose a tool, make the allowed set explicit.
+
+20
+00:01:34.880 --> 00:01:40.160
+Avoid accepting arbitrary command names or helper paths as normal input.
+
+21
+00:01:40.260 --> 00:01:44.900
+For high-impact automation, command choice is part of the security boundary.
+
+22
+00:01:45.180 --> 00:01:49.100
+Good command design improves security and operations at the same time.
+
+23
+00:01:49.200 --> 00:01:57.840
+It makes the script easier to review, easier to log safely, easier to test with edge cases, and easier to maintain when new modes or options are added.
+
+24
+00:01:57.940 --> 00:02:02.420
+The safer design is usually the design that future maintainers can understand quickly.
+
+25
+00:02:02.520 --> 00:02:10.280
+Reviewers can trace every supported path, test its expectations, and verify that runtime data never selects an arbitrary command.

@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.420
+A command does not run in isolation.
+
+2
+00:00:02.520 --> 00:00:11.800
+It runs with a current directory, a PATH, environment variables, inherited file descriptors, available tools, and the permissions of the account that started it.
+
+3
+00:00:11.900 --> 00:00:17.660
+Safe command execution includes controlling those assumptions, not just writing the command line carefully.
+
+4
+00:00:17.940 --> 00:00:20.340
+PATH affects command lookup.
+
+5
+00:00:20.440 --> 00:00:32.680
+For high-impact automation, relying on whatever PATH happens to be present can make behavior depend on the caller, scheduler, login shell, container image, or CI environment.
+
+6
+00:00:32.780 --> 00:00:41.340
+A script should set or constrain important lookup assumptions, or call known tools in a way that matches the team's deployment model.
+
+7
+00:00:41.620 --> 00:00:43.780
+The current working directory matters too.
+
+8
+00:00:43.880 --> 00:00:49.560
+Relative paths are interpreted from wherever the script is running, not necessarily where the script is stored.
+
+9
+00:00:49.660 --> 00:00:55.500
+Defensive scripts make directory assumptions explicit before using files or handing paths to external tools.
+
+10
+00:00:55.600 --> 00:01:00.960
+That prevents accidental operations in the wrong workspace or release directory.
+
+11
+00:01:01.240 --> 00:01:04.200
+Environment variables should be treated as input.
+
+12
+00:01:04.300 --> 00:01:13.660
+They can affect command lookup, runtime behavior, proxies, credentials, debug flags, locale handling, and tool configuration.
+
+13
+00:01:13.760 --> 00:01:16.720
+Some variables are useful and intentional.
+
+14
+00:01:16.820 --> 00:01:19.380
+Others are inherited by accident.
+
+15
+00:01:19.480 --> 00:01:28.360
+A safe script decides which values it depends on, validates or sets them, and avoids leaking sensitive values through logs or process arguments.
+
+16
+00:01:28.640 --> 00:01:30.560
+External tools are dependencies.
+
+17
+00:01:30.660 --> 00:01:42.180
+Before a script relies on a tool, consider whether it is installed, which version is expected, whether its output format is stable enough for parsing, and whether it handles errors in a way the script checks.
+
+18
+00:01:42.280 --> 00:01:46.680
+The more authority a tool has, the more important this review becomes.
+
+19
+00:01:46.960 --> 00:01:49.200
+Permissions determine impact.
+
+20
+00:01:49.300 --> 00:01:52.820
+Automation should run with the least privilege practical for the job.
+
+21
+00:01:52.920 --> 00:01:57.160
+Overpowered service accounts turn simple scripting mistakes into larger incidents.
+
+22
+00:01:57.260 --> 00:02:03.180
+Logging should support troubleshooting without exposing secrets, tokens, or sensitive command output.
+
+23
+00:02:03.280 --> 00:02:08.320
+Safe command execution is therefore both a coding discipline and an operational discipline.
+
+24
+00:02:08.420 --> 00:02:17.220
+Review confirms tool origin, version assumptions, runtime context, least privilege, and safe operational logging.

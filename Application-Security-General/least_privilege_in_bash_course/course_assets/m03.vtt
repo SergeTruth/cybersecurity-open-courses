@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+A Bash script always runs as some identity.
+
+2
+00:00:04.280 --> 00:00:12.200
+That identity may be an interactive user, a service account, a CI/CD runner, a scheduled job user, a container user, or root.
+
+3
+00:00:12.300 --> 00:00:18.220
+Least privilege begins by asking which identity runs the script and what that identity can already do.
+
+4
+00:00:18.320 --> 00:00:20.800
+The script is not only the lines in the file.
+
+5
+00:00:20.900 --> 00:00:24.900
+It also includes the authority of the account that executes those lines.
+
+6
+00:00:25.180 --> 00:00:29.660
+File permissions are a common source of overbroad access.
+
+7
+00:00:29.760 --> 00:00:38.080
+Files and directories have owners, groups, modes, and sometimes inherited access patterns through parent directories or mounted storage.
+
+8
+00:00:38.180 --> 00:00:43.300
+Groups are useful for shared operational access, but they should be specific enough to review.
+
+9
+00:00:43.400 --> 00:00:50.680
+A broad group that quietly accumulates unrelated people and automation can become a hidden administrative boundary.
+
+10
+00:00:50.780 --> 00:00:59.020
+If a script only needs one shared operational directory, avoid giving it access to a general-purpose group with far wider reach.
+
+11
+00:00:59.300 --> 00:01:01.300
+Created files deserve attention too.
+
+12
+00:01:01.400 --> 00:01:09.400
+Defaults such as umask can influence whether output files are readable by more users than intended.
+
+13
+00:01:09.500 --> 00:01:20.380
+A script that produces sensitive reports, generated configuration, private metadata, or operational logs should set or verify restrictive permissions where appropriate.
+
+14
+00:01:20.480 --> 00:01:23.040
+This is not only about confidentiality.
+
+15
+00:01:23.140 --> 00:01:24.900
+It is also about integrity.
+
+16
+00:01:25.000 --> 00:01:32.600
+If output is later consumed by another job, broad write permissions can turn a simple automation chain into a hard-to-review trust problem.
+
+17
+00:01:32.880 --> 00:01:38.080
+Permission review should focus on the actual workflow, not only whether the script currently works.
+
+18
+00:01:38.180 --> 00:01:41.540
+A script may work because it has access to everything.
+
+19
+00:01:41.640 --> 00:01:44.600
+That is not evidence that it needs everything.
+
+20
+00:01:44.700 --> 00:01:52.540
+Review the files it reads, the directories it writes, the commands it executes, and the users or groups that can alter its inputs.
+
+21
+00:01:52.640 --> 00:02:01.520
+The goal is a permission model that supports the task while limiting accidental exposure, accidental modification, and unauthorized changes to the automation path.

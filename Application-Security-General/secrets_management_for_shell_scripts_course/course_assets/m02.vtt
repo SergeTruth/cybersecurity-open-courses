@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Secrets rarely appear in only one obvious place.
+
+2
+00:00:04.120 --> 00:00:08.760
+A learner might look for a variable named password, but real workflows are broader.
+
+3
+00:00:08.860 --> 00:00:23.900
+Sensitive values can be stored in shell scripts, configuration files, shell profiles, .env files, inventory files, deployment manifests, CI/CD variable stores, container runtime settings, local key files, or service configuration fragments.
+
+4
+00:00:24.000 --> 00:00:26.240
+Some of those locations are expected.
+
+5
+00:00:26.340 --> 00:00:31.620
+Others appear because a team needed something to work quickly and never returned to clean up the pattern.
+
+6
+00:00:31.900 --> 00:00:35.500
+Secrets can also appear in places that were never meant to store them.
+
+7
+00:00:35.600 --> 00:00:40.000
+Command-line arguments may be visible to process inspection tools.
+
+8
+00:00:40.100 --> 00:00:43.460
+Environment variables may be inherited by child processes.
+
+9
+00:00:43.560 --> 00:00:46.280
+Shell history may preserve typed commands.
+
+10
+00:00:46.380 --> 00:00:49.260
+Debug traces may print expanded commands.
+
+11
+00:00:49.360 --> 00:00:54.080
+Logs may capture headers, connection strings, or derived values.
+
+12
+00:00:54.180 --> 00:01:05.700
+Temporary files, build artifacts, support bundles, crash reports, and copied terminal output may preserve sensitive material long after the script has finished.
+
+13
+00:01:05.980 --> 00:01:08.860
+The practical skill is secret flow mapping.
+
+14
+00:01:08.960 --> 00:01:22.240
+Ask where the secret enters the workflow, where it is stored, which process receives it, which child processes inherit it, what files are created, what logs are produced, and how long each copy remains available.
+
+15
+00:01:22.340 --> 00:01:29.140
+That mapping does not need to be elaborate for every small script, but it should be good enough to reveal obvious exposure paths.
+
+16
+00:01:29.240 --> 00:01:35.480
+If nobody can explain where the value goes, the script is probably carrying more risk than the team understands.
+
+17
+00:01:35.760 --> 00:01:43.200
+This map is especially important when scripts connect local machines, CI/CD systems, deployment targets, and cloud services.
+
+18
+00:01:43.300 --> 00:01:50.180
+Each system has different rules for masking, retention, access control, and artifact storage.
+
+19
+00:01:50.280 --> 00:01:57.080
+A defensive engineer does not rely on a single assumption such as, it is in a protected variable store, so it must be safe.
+
+20
+00:01:57.180 --> 00:02:03.340
+The question is what happens after the variable is injected into the job and how the workflow prevents it from spreading.
+
+21
+00:02:03.440 --> 00:02:11.600
+Mapping the secret flow reveals where values enter, which processes inherit them, what files and logs are created, and how long copies remain available.

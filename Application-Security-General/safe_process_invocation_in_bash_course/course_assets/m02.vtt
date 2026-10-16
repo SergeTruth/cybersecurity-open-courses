@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+When Bash sees a command, it does not always start a new external program.
+
+2
+00:00:04.920 --> 00:00:10.040
+It may run a shell builtin, call a function, or locate an external executable.
+
+3
+00:00:10.140 --> 00:00:20.220
+That distinction matters because functions and builtins run inside the shell context, while external commands run as separate processes with their own argument list and runtime context.
+
+4
+00:00:20.500 --> 00:00:24.340
+For an external command, Bash prepares an invocation.
+
+5
+00:00:24.440 --> 00:00:34.520
+The process receives an executable, a structured list of arguments, environment values, a current working directory, and standard input, output, and error streams.
+
+6
+00:00:34.620 --> 00:00:40.780
+Thinking in those terms is safer than imagining a vague command string that somehow runs as typed.
+
+7
+00:00:41.060 --> 00:00:44.180
+The environment is inherited unless the script changes it.
+
+8
+00:00:44.280 --> 00:00:47.960
+The current directory is inherited unless the script changes it.
+
+9
+00:00:48.060 --> 00:00:52.860
+Standard streams are inherited or redirected according to the script.
+
+10
+00:00:52.960 --> 00:00:55.200
+Each of those pieces can affect behavior.
+
+11
+00:00:55.300 --> 00:01:02.980
+A tool may look up configuration in the environment, read from standard input, write to standard output, or report problems on standard error.
+
+12
+00:01:03.260 --> 00:01:06.220
+The command eventually returns an exit status.
+
+13
+00:01:06.320 --> 00:01:09.920
+That status is the process saying how it believes the work ended.
+
+14
+00:01:10.020 --> 00:01:16.340
+Scripts that ignore important exit status values risk building later decisions on false assumptions.
+
+15
+00:01:16.440 --> 00:01:23.640
+A failed command, missing dependency, denied permission, or partial result should not silently become a successful workflow.
+
+16
+00:01:23.920 --> 00:01:30.480
+The safer mental model is executable plus arguments plus context plus result.
+
+17
+00:01:30.580 --> 00:01:41.380
+When a Bash script is written around that model, reviewers can reason about what program runs, what values it receives, what assumptions shape it, and how the script reacts afterward.

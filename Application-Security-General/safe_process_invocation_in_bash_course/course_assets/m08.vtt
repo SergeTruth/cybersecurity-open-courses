@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Process invocation risk depends on both script design and operating context.
+
+2
+00:00:04.760 --> 00:00:10.760
+A carefully written script can still have too much impact if it runs with broad administrative rights.
+
+3
+00:00:10.860 --> 00:00:19.340
+Automation identities, service accounts, file permissions, and delegated privilege rules should be scoped to the job they actually perform.
+
+4
+00:00:19.620 --> 00:00:22.020
+Least privilege reduces blast radius.
+
+5
+00:00:22.120 --> 00:00:32.600
+If an invoked process behaves unexpectedly, receives a malformed value, or encounters a tool behavior the script did not anticipate, narrower permissions limit what can be affected.
+
+6
+00:00:32.700 --> 00:00:36.940
+This is not a substitute for validation or safe argument passing.
+
+7
+00:00:37.040 --> 00:00:40.480
+It is another layer that makes mistakes less costly.
+
+8
+00:00:40.760 --> 00:00:43.640
+External tools should be known and reviewed.
+
+9
+00:00:43.740 --> 00:00:51.580
+Teams should understand where tools come from, how versions are controlled, what output formats are relied upon, and how errors are reported.
+
+10
+00:00:51.680 --> 00:00:58.000
+Helper scripts deserve the same review as the main script because they participate in the invocation chain.
+
+11
+00:00:58.280 --> 00:01:04.920
+Logging should record high-level actions, results, and failures without exposing secrets or sensitive data.
+
+12
+00:01:05.020 --> 00:01:10.060
+Good logs tell an operator what was attempted, what changed, and where to investigate next.
+
+13
+00:01:10.160 --> 00:01:18.000
+They should avoid printing tokens, private keys, full credential-bearing environment values, or sensitive command output.
+
+14
+00:01:18.280 --> 00:01:21.640
+Review practices make safe invocation sustainable.
+
+15
+00:01:21.740 --> 00:01:25.100
+ShellCheck can catch many Bash-specific issues.
+
+16
+00:01:25.200 --> 00:01:32.880
+Peer review can challenge assumptions about executable selection, environment, permissions, and error handling.
+
+17
+00:01:32.980 --> 00:01:46.020
+CI/CD linting, staged rollout, and realistic tests with missing files, unexpected paths, spaced values, and dependency failures help catch problems before scripts become trusted production automation.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+A secure deployment script should always know exactly where it is operating.
+
+2
+00:00:04.760 --> 00:00:17.480
+Cloud accounts, projects, tenants, subscriptions, regions, resource groups, services, environments, and release scopes should be explicit and validated before action.
+
+3
+00:00:17.580 --> 00:00:21.820
+The active CLI profile or runner environment is not enough by itself.
+
+4
+00:00:21.920 --> 00:00:30.240
+A script that simply trusts whatever profile is active can make an authorized user or runner operate in the wrong place.
+
+5
+00:00:30.520 --> 00:00:33.000
+Environment separation should be deliberate.
+
+6
+00:00:33.100 --> 00:00:42.140
+Development, staging, and production should have different assumptions, credentials, variables, approval paths, and monitoring expectations.
+
+7
+00:00:42.240 --> 00:00:53.840
+A development deployment may be fast and flexible; a production deployment may require a release ticket, protected branch, operator confirmation, approved window, or environment-specific gate.
+
+8
+00:00:53.940 --> 00:00:58.980
+The helper should understand that difference instead of treating every target as interchangeable.
+
+9
+00:00:59.260 --> 00:01:14.940
+Target validation should include the cloud identity, environment label, region, service name, resource group or equivalent boundary, artifact version, and any configuration bundle or variable set used by the deployment.
+
+10
+00:01:15.040 --> 00:01:17.200
+The script should make mismatches obvious.
+
+11
+00:01:17.300 --> 00:01:26.660
+For example, a production artifact should not be sent to a test target by accident, and a staging credential should not be accepted for a production deployment path.
+
+12
+00:01:26.940 --> 00:01:29.420
+Failing early is a defensive control.
+
+13
+00:01:29.520 --> 00:01:38.720
+If the account, target, region, artifact, or environment cannot be confirmed, the script should stop with a clear message.
+
+14
+00:01:38.820 --> 00:01:47.140
+For high-impact changes, approval gates or operator confirmation can add a final check that the intended deployment matches the planned change.
+
+15
+00:01:47.240 --> 00:01:50.760
+The core habit is simple: prove the target before changing it.

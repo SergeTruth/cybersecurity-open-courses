@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+API keys can appear in many places besides the obvious variable assignment.
+
+2
+00:00:05.160 --> 00:00:19.160
+They may be stored in shell scripts, .env files, shell profiles, local configuration files, CI/CD variables, deployment manifests, client configuration, token caches, or temporary request files.
+
+3
+00:00:19.260 --> 00:00:22.780
+Some of these locations are intended to hold configuration.
+
+4
+00:00:22.880 --> 00:00:28.480
+Others appear because a script was written quickly and the key needed to be somewhere for the first version to work.
+
+5
+00:00:28.760 --> 00:00:32.520
+Keys can also appear in places that were never meant to store secrets.
+
+6
+00:00:32.620 --> 00:00:36.220
+Command-line arguments may be visible through process metadata.
+
+7
+00:00:36.320 --> 00:00:40.000
+Environment variables may be inherited by child processes.
+
+8
+00:00:40.100 --> 00:00:47.060
+Headers, query parameters, JSON payloads, and request files may be printed by verbose tools.
+
+9
+00:00:47.160 --> 00:00:58.600
+Logs, shell history, debug traces, support bundles, copied terminal sessions, and build artifacts may preserve sensitive values long after the script has finished.
+
+10
+00:00:58.880 --> 00:01:01.760
+A defensive engineer maps the key flow.
+
+11
+00:01:01.860 --> 00:01:04.100
+Where does the key enter the workflow?
+
+12
+00:01:04.200 --> 00:01:05.720
+Where is it stored?
+
+13
+00:01:05.820 --> 00:01:07.340
+Which command receives it?
+
+14
+00:01:07.440 --> 00:01:09.760
+Which child processes inherit it?
+
+15
+00:01:09.860 --> 00:01:11.780
+What logs are produced?
+
+16
+00:01:11.880 --> 00:01:18.040
+Does a CI/CD job mask the exact value, and could derived or partial values still appear?
+
+17
+00:01:18.140 --> 00:01:21.660
+How long does the key remain available after the job completes?
+
+18
+00:01:21.760 --> 00:01:25.920
+These questions make exposure paths visible before they become incidents.
+
+19
+00:01:26.200 --> 00:01:29.640
+This mapping is especially useful in automation environments.
+
+20
+00:01:29.740 --> 00:01:39.580
+A key may start in a protected variable store, pass through a runner environment, enter an API client, appear in a failed request log, and then be copied into a ticket.
+
+21
+00:01:39.680 --> 00:01:44.080
+The original storage may be controlled, but the flow after injection may not be.
+
+22
+00:01:44.180 --> 00:01:50.020
+API key handling is therefore about the whole lifecycle of the value, not only the place where it begins.
+
+23
+00:01:50.120 --> 00:01:55.720
+Mapping the key flow makes exposure paths visible before they become incidents.

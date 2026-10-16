@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+A common mistake is to imagine that Bash simply sends a line of text directly to a program.
+
+2
+00:00:05.720 --> 00:00:07.640
+That is not how the shell works.
+
+3
+00:00:07.740 --> 00:00:20.140
+Bash reads the script, parses shell syntax, performs expansions, sets up redirection and pipelines, and only then starts commands with an executable name and an argument list.
+
+4
+00:00:20.420 --> 00:00:21.940
+That order matters.
+
+5
+00:00:22.040 --> 00:00:26.440
+Variable expansion happens before the external command receives anything.
+
+6
+00:00:26.540 --> 00:00:30.700
+Command substitution is evaluated before the surrounding command runs.
+
+7
+00:00:30.800 --> 00:00:36.000
+Word splitting can turn one expanded value into several words when it is not protected.
+
+8
+00:00:36.100 --> 00:00:40.900
+Globbing can turn pattern-like text into matching pathnames.
+
+9
+00:00:41.000 --> 00:00:44.120
+Redirection changes where input and output flow.
+
+10
+00:00:44.220 --> 00:00:48.620
+Pipelines connect commands and create their own failure-handling questions.
+
+11
+00:00:48.900 --> 00:00:52.180
+These features are powerful when they are used intentionally.
+
+12
+00:00:52.280 --> 00:00:57.400
+They let scripts compose tools, move data through filters, and automate repetitive work.
+
+13
+00:00:57.500 --> 00:01:04.780
+The risk appears when a script author forgets which parts of a command line Bash will interpret and which parts should remain literal.
+
+14
+00:01:04.880 --> 00:01:13.760
+A value that looks harmless as data can behave differently when the shell treats it as syntax, a pattern, an option, or a list of words.
+
+15
+00:01:14.040 --> 00:01:20.040
+For safe command execution, the key question is: what arguments will the target command actually receive?
+
+16
+00:01:20.140 --> 00:01:29.260
+The answer is not always obvious from the raw text if variables are unquoted, if command strings are assembled dynamically, or if a script relies on implicit shell behavior.
+
+17
+00:01:29.360 --> 00:01:33.680
+Defensive Bash code is written so this transformation is visible and controlled.
+
+18
+00:01:33.960 --> 00:01:36.840
+Exit status is part of execution as well.
+
+19
+00:01:36.940 --> 00:01:42.380
+Every command reports a result, and scripts need to decide whether that result is acceptable.
+
+20
+00:01:42.480 --> 00:01:50.240
+A failed lookup, missing file, rejected permission, or timed-out operation should not be hidden by later commands that appear to succeed.
+
+21
+00:01:50.340 --> 00:01:55.940
+Understanding execution includes understanding both how commands start and how their results are interpreted.
+
+22
+00:01:56.220 --> 00:02:01.340
+The practical takeaway is simple: Bash behavior happens before the tool sees its arguments.
+
+23
+00:02:01.440 --> 00:02:13.920
+Safe scripts protect values that should stay literal, avoid unnecessary dynamic interpretation, check results that affect state, and make pipelines and redirection explicit enough for a reviewer to understand.

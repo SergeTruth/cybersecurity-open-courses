@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+After a script validates an argument, it still has to pass that value safely.
+
+2
+00:00:05.160 --> 00:00:08.280
+Validation checks whether a value is acceptable.
+
+3
+00:00:08.380 --> 00:00:11.180
+Quoting preserves the value when Bash expands it.
+
+4
+00:00:11.280 --> 00:00:13.040
+These are different controls.
+
+5
+00:00:13.140 --> 00:00:18.980
+A validated path can still be split into multiple words if it is expanded without quotes.
+
+6
+00:00:19.080 --> 00:00:25.480
+A validated label can still be treated as a filename pattern if globbing is allowed to reinterpret it.
+
+7
+00:00:25.760 --> 00:00:29.600
+Quoting tells Bash to keep a value together as one argument.
+
+8
+00:00:29.700 --> 00:00:35.940
+This matters for paths, labels, environment names, filenames, and option values.
+
+9
+00:00:36.040 --> 00:00:40.360
+When forwarding the original argument list, "$@" preserves each argument boundary.
+
+10
+00:00:40.460 --> 00:00:47.100
+That lets a wrapper function or helper script receive the same arguments the caller supplied, rather than a re-split approximation.
+
+11
+00:00:47.380 --> 00:00:55.220
+Arrays are especially useful in Bash because they let scripts build argument lists without turning them into one large command string.
+
+12
+00:00:55.320 --> 00:01:04.920
+A script can append a flag, an option value, or a path as separate array elements and then pass the array to a command with preserved boundaries.
+
+13
+00:01:05.020 --> 00:01:10.460
+This is easier to review than constructing a string that the shell later interprets.
+
+14
+00:01:10.740 --> 00:01:13.620
+Defensive Bash scripts keep data as data.
+
+15
+00:01:13.720 --> 00:01:18.680
+They avoid evaluating constructed command strings from uncontrolled or loosely controlled values.
+
+16
+00:01:18.780 --> 00:01:22.460
+They prefer passing separate arguments to the command being called.
+
+17
+00:01:22.560 --> 00:01:32.160
+The safety habit is consistent: validate first, quote expansions, use arrays for argument lists, and keep shell syntax separate from command-line data.

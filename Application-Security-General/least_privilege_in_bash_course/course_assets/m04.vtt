@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Some Bash automation genuinely needs a privileged action.
+
+2
+00:00:05.400 --> 00:00:08.280
+A deployment may need to reload one service.
+
+3
+00:00:08.380 --> 00:00:12.540
+A maintenance job may need to read one protected status file.
+
+4
+00:00:12.640 --> 00:00:15.920
+A support script may need to collect a specific diagnostic.
+
+5
+00:00:16.020 --> 00:00:21.300
+That does not mean the entire script should run with unrestricted administrative access.
+
+6
+00:00:21.400 --> 00:00:28.760
+A safer design separates the privileged operation from ordinary work and keeps elevation narrow, visible, and reviewable.
+
+7
+00:00:29.040 --> 00:00:33.520
+Sudo rules should be treated as security boundaries, not convenience shortcuts.
+
+8
+00:00:33.620 --> 00:00:41.620
+Broad permission to run many commands as root gives a script room to do unrelated privileged work, especially if the script evolves over time.
+
+9
+00:00:41.720 --> 00:00:46.040
+Narrow rules make it easier to understand what is allowed and why.
+
+10
+00:00:46.140 --> 00:00:54.060
+When privileged helper scripts are used, they should have clear ownership, restricted write permissions, stable behavior, and periodic review.
+
+11
+00:00:54.160 --> 00:01:00.560
+A helper that can be modified by the same broad population it controls may not provide the boundary the team expects.
+
+12
+00:01:00.840 --> 00:01:04.520
+High-impact tasks may need more than a technical permission.
+
+13
+00:01:04.620 --> 00:01:11.900
+They may require an approval, a ticket reference, a change window, additional logging, or separation of duties.
+
+14
+00:01:12.000 --> 00:01:15.600
+The point is not to wrap every minor action in bureaucracy.
+
+15
+00:01:15.700 --> 00:01:20.340
+The point is to make meaningful privilege visible before it changes production state.
+
+16
+00:01:20.440 --> 00:01:32.840
+A script that performs routine read-only checks does not need the same control model as a script that restarts services, changes routing, writes configuration, or touches production data.
+
+17
+00:01:33.120 --> 00:01:38.080
+Good Bash automation keeps ordinary work ordinary and elevated work exceptional.
+
+18
+00:01:38.180 --> 00:01:45.780
+Prepare inputs, validate assumptions, collect non-sensitive context, and perform safe checks without elevation.
+
+19
+00:01:45.880 --> 00:01:49.080
+Use privilege only for the specific action that requires it.
+
+20
+00:01:49.180 --> 00:01:51.500
+Then return to the lower-privilege context.
+
+21
+00:01:51.600 --> 00:02:01.120
+This pattern reduces blast radius and makes code review easier because reviewers can focus carefully on the few lines or helper calls where privilege actually matters.

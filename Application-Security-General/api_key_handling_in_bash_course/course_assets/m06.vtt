@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.100
+Many Bash scripts use curl, wget, cloud CLIs, deployment clients, or custom API tools.
+
+2
+00:00:08.200 --> 00:00:17.000
+API keys may be placed in authorization headers, custom headers, query parameters, payloads, or client configuration files.
+
+3
+00:00:17.100 --> 00:00:24.700
+Headers are often preferable to putting keys in URLs because URLs are commonly logged, cached, copied, and displayed.
+
+4
+00:00:24.800 --> 00:00:31.680
+Headers still need careful handling because verbose output, debug traces, and generated command strings can reveal them.
+
+5
+00:00:31.960 --> 00:00:35.080
+A safer script uses a fixed command structure.
+
+6
+00:00:35.180 --> 00:00:39.900
+It avoids building one large command string that must be re-parsed by the shell.
+
+7
+00:00:40.000 --> 00:00:46.240
+Where useful, Bash arrays can keep options and literal values separated so quoting remains clear.
+
+8
+00:00:46.340 --> 00:00:53.060
+Literal values should be quoted, and request construction should avoid mixing data and shell syntax.
+
+9
+00:00:53.160 --> 00:00:59.160
+This makes the script easier to review and reduces the chance that a formatting mistake changes what is sent.
+
+10
+00:00:59.440 --> 00:01:03.040
+Tool invocation should be designed around redaction.
+
+11
+00:01:03.140 --> 00:01:13.220
+If the script logs the request, it should log the high-level action, target service, safe identifier, status code, or result, not the raw key.
+
+12
+00:01:13.320 --> 00:01:19.480
+If a tool has verbose output, decide whether that output is safe before enabling it in automation.
+
+13
+00:01:19.580 --> 00:01:24.620
+If headers or payloads may contain sensitive values, redact or avoid printing them.
+
+14
+00:01:24.720 --> 00:01:27.920
+A troubleshooting log should not become a credential leak.
+
+15
+00:01:28.200 --> 00:01:32.280
+The same principle applies to configuration files and request payloads.
+
+16
+00:01:32.380 --> 00:01:40.860
+If a temporary header file, token file, or generated request file is needed, protect it with restrictive permissions and remove it when it is no longer required.
+
+17
+00:01:40.960 --> 00:01:44.960
+Prefer clear, reviewable invocation over clever shortcuts.
+
+18
+00:01:45.060 --> 00:01:55.700
+API automation is safest when the command structure is predictable, the credential is passed through a controlled channel, and logs explain the outcome without exposing the secret.
+
+19
+00:01:55.800 --> 00:02:02.680
+Review confirms that command structure is predictable, credential delivery is controlled, and logs explain the outcome without exposing the secret.

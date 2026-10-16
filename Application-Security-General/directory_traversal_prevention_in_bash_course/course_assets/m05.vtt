@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Filesystem features can complicate path validation.
+
+2
+00:00:04.200 --> 00:00:10.680
+A path that appears to be inside an approved directory may lead somewhere else through a symbolic link.
+
+3
+00:00:10.780 --> 00:00:17.660
+A mount point may connect an approved-looking location to a different storage area with different trust assumptions.
+
+4
+00:00:17.760 --> 00:00:21.920
+Shared writable directories may change between one check and the next.
+
+5
+00:00:22.020 --> 00:00:28.980
+These details matter because path validation is about the actual operation the script will perform, not the visual shape of the path.
+
+6
+00:00:29.260 --> 00:00:32.700
+Scripts should define what type of object they expect.
+
+7
+00:00:32.800 --> 00:00:44.080
+If the workflow expects a regular input file, a directory, an existing output directory, or a newly created temporary file, that expectation should be checked before sensitive operations.
+
+8
+00:00:44.180 --> 00:00:54.660
+A value that points to a directory when a file was expected, a link when a regular file was expected, or another unexpected filesystem object should not be treated as harmless.
+
+9
+00:00:54.760 --> 00:00:57.240
+File type is part of validation.
+
+10
+00:00:57.520 --> 00:01:00.720
+Race-condition awareness matters at a defensive level.
+
+11
+00:01:00.820 --> 00:01:08.500
+The filesystem can change between validation and use, especially in shared writable areas or long-running workflows.
+
+12
+00:01:08.600 --> 00:01:15.080
+A script should keep checks close to the operation they protect and avoid broad trust in mutable locations.
+
+13
+00:01:15.180 --> 00:01:24.620
+Where a workflow is sensitive, prefer controlled directories with restricted write access over shared locations where other users or jobs can change entries unexpectedly.
+
+14
+00:01:24.900 --> 00:01:28.980
+The goal is not to make every script a filesystem research project.
+
+15
+00:01:29.080 --> 00:01:32.200
+The goal is to be honest about the features that can change path meaning.
+
+16
+00:01:32.300 --> 00:01:41.660
+If the script's safety depends on a path staying inside a base directory, links, mounts, file types, and shared write access all deserve review.
+
+17
+00:01:41.760 --> 00:01:47.280
+Good scripts make those assumptions explicit and fail safely when the filesystem does not match the expected shape.

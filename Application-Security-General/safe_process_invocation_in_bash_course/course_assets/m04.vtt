@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+External commands receive arguments as separate values.
+
+2
+00:00:04.360 --> 00:00:09.240
+A safe Bash script preserves those boundaries from input through invocation.
+
+3
+00:00:09.340 --> 00:00:16.460
+Problems appear when a script collapses values into one command string and asks the shell to interpret it later.
+
+4
+00:00:16.560 --> 00:00:23.600
+That design mixes data, options, quoting rules, and shell syntax into something harder to review.
+
+5
+00:00:23.880 --> 00:00:26.520
+Quoting helps preserve a value as one argument.
+
+6
+00:00:26.620 --> 00:00:34.700
+A filename, identifier, label, or option value may contain spaces or characters that Bash would otherwise treat specially.
+
+7
+00:00:34.800 --> 00:00:39.120
+If the value should be one argument, the script should pass it as one argument.
+
+8
+00:00:39.220 --> 00:00:44.660
+Quoting is basic, but it is one of the most important reliability and security habits in Bash.
+
+9
+00:00:44.940 --> 00:00:49.260
+Arrays are the preferred structure when a script needs to build an argument list.
+
+10
+00:00:49.360 --> 00:00:55.040
+Fixed options, validated option values, and operands can be separate array elements.
+
+11
+00:00:55.140 --> 00:01:00.580
+The script can add optional supported arguments without turning the whole invocation into a shell string.
+
+12
+00:01:00.680 --> 00:01:04.920
+That makes behavior clearer and reduces accidental interpretation.
+
+13
+00:01:05.200 --> 00:01:11.680
+The form "$@" is important when forwarding an existing argument list from a wrapper or function.
+
+14
+00:01:11.780 --> 00:01:15.700
+Used correctly, it preserves each original argument boundary.
+
+15
+00:01:15.800 --> 00:01:22.440
+That matters when a wrapper receives values it should pass along as data rather than flatten into a string and split again.
+
+16
+00:01:22.720 --> 00:01:26.640
+Validation and argument preservation solve different problems.
+
+17
+00:01:26.740 --> 00:01:31.540
+Validation decides whether a value is acceptable for this workflow.
+
+18
+00:01:31.640 --> 00:01:37.400
+Quoting, arrays, and "$@" preserve that accepted value when invoking the process.
+
+19
+00:01:37.500 --> 00:01:45.900
+A defensive script uses both layers together: validate first, then pass values as structured arguments to known executables.

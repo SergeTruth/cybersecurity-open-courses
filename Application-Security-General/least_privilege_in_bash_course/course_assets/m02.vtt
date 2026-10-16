@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+Least privilege starts before permissions are granted.
+
+2
+00:00:03.080 --> 00:00:08.040
+The team should be able to describe what the script is supposed to accomplish in plain operational terms.
+
+3
+00:00:08.140 --> 00:00:17.740
+Is it reporting status, collecting diagnostics, publishing an artifact, restarting one service, copying approved files, or preparing a deployment directory?
+
+4
+00:00:17.840 --> 00:00:21.440
+A script with a vague purpose tends to receive vague access.
+
+5
+00:00:21.540 --> 00:00:25.140
+A script with a clear job can be reviewed against that job.
+
+6
+00:00:25.420 --> 00:00:29.100
+The next step is to identify what the script actually touches.
+
+7
+00:00:29.200 --> 00:00:38.800
+List the systems it connects to, the files it reads, the directories it writes, the commands it calls, the data it handles, and the expected outputs it produces.
+
+8
+00:00:38.900 --> 00:00:48.020
+This does not need to be formal architecture documentation for every small script, but it should be clear enough that a maintainer can understand why each permission exists.
+
+9
+00:00:48.120 --> 00:00:54.440
+Permissions should be tied to workflow needs, not granted because a broad account happened to make the first test pass.
+
+10
+00:00:54.720 --> 00:01:00.960
+Read, write, execute, delete, and administer are different capabilities.
+
+11
+00:01:01.060 --> 00:01:05.380
+A script that reads status should not automatically be able to change state.
+
+12
+00:01:05.480 --> 00:01:11.800
+A script that writes to one output directory should not automatically be able to write into configuration directories.
+
+13
+00:01:11.900 --> 00:01:18.140
+A script that starts one approved helper should not automatically be able to administer the host.
+
+14
+00:01:18.240 --> 00:01:26.640
+Separating these capabilities helps reviewers grant the minimum access required and notice when a requested permission does not match the intended outcome.
+
+15
+00:01:26.920 --> 00:01:30.840
+It is equally useful to document disallowed actions.
+
+16
+00:01:30.940 --> 00:01:42.300
+If a script should never touch production, never delete inputs, never modify source directories, never use production credentials, or never run outside a maintenance window, say so.
+
+17
+00:01:42.400 --> 00:01:44.000
+Ownership also matters.
+
+18
+00:01:44.100 --> 00:01:51.060
+Someone should know who maintains the script, who approves permission changes, and who reviews access after the workflow changes.
+
+19
+00:01:51.160 --> 00:01:57.080
+Least privilege becomes sustainable when permission decisions are connected to purpose, ownership, and review.

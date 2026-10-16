@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Bash scripts frequently work with files and directories.
+
+2
+00:00:03.560 --> 00:00:14.840
+They read logs, copy artifacts, extract archives, process uploads, write reports, synchronize directories, clean temporary workspaces, and collect diagnostics.
+
+3
+00:00:14.940 --> 00:00:20.140
+That makes path handling one of the most important security concerns in shell automation.
+
+4
+00:00:20.240 --> 00:00:28.160
+A script that chooses the wrong file can expose data, overwrite a result, pollute a workspace, or act outside the area the operator expected.
+
+5
+00:00:28.440 --> 00:00:33.560
+A path becomes security-relevant input as soon as it influences a file operation.
+
+6
+00:00:33.660 --> 00:00:43.900
+The value may come from a command-line argument, a configuration file, an environment variable, CI/CD metadata, tool output, an archive manifest, or a generated filename.
+
+7
+00:00:44.000 --> 00:00:54.960
+It may not look like user input in the traditional sense, but it still crosses a trust boundary when the script decides what to read, write, copy, extract, synchronize, or clean.
+
+8
+00:00:55.240 --> 00:01:02.120
+Directory traversal prevention means ensuring that path input cannot move the script outside the locations it is supposed to use.
+
+9
+00:01:02.220 --> 00:01:05.500
+The point is not to distrust every filename for no reason.
+
+10
+00:01:05.600 --> 00:01:10.560
+The point is to make file operations intentional, scoped, and reviewable.
+
+11
+00:01:10.660 --> 00:01:16.740
+A script should know where its approved input, staging, output, extraction, and cleanup areas are before it acts.
+
+12
+00:01:16.840 --> 00:01:22.440
+If a path does not fit that scope, the script should fail safely before touching the filesystem.
+
+13
+00:01:22.720 --> 00:01:26.400
+This control reduces both security and reliability risk.
+
+14
+00:01:26.500 --> 00:01:36.180
+It helps prevent accidental reads from sensitive areas, writes into unintended destinations, extraction outside a controlled directory, and cleanup in the wrong place.
+
+15
+00:01:36.280 --> 00:01:42.920
+It also makes code review easier because reviewers can see how the script defines its safe operating area.
+
+16
+00:01:43.020 --> 00:01:51.820
+Good path handling gives Bash automation a clear boundary: use approved locations, reject unsupported path input, and make file behavior predictable.
+
+17
+00:01:51.920 --> 00:01:57.760
+Reviewers can verify how the script defines and enforces its safe filesystem operating area.

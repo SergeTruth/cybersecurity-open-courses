@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Safe process invocation begins with selecting the intended executable.
+
+2
+00:00:05.080 --> 00:00:14.840
+If a script relies casually on command lookup, aliases, functions, wrapper scripts, or an uncontrolled PATH, it may run something different than the author expected.
+
+3
+00:00:14.940 --> 00:00:24.780
+That risk is especially important in automation that runs under service accounts, CI runners, containers, or scheduled task environments.
+
+4
+00:00:25.060 --> 00:00:28.900
+PATH is convenient, but it is also part of the trust boundary.
+
+5
+00:00:29.000 --> 00:00:33.240
+It determines where Bash searches when a command name is used.
+
+6
+00:00:33.340 --> 00:00:37.420
+For low-risk local helpers, default lookup may be acceptable.
+
+7
+00:00:37.520 --> 00:00:48.080
+For high-impact automation, teams should understand how required tools are found, which locations are trusted, and what happens if a tool is missing or shadowed by another executable.
+
+8
+00:00:48.360 --> 00:00:51.320
+Wrappers and helper scripts need review too.
+
+9
+00:00:51.420 --> 00:00:57.500
+A wrapper can be useful when it standardizes options or environment, but it can also hide behavior.
+
+10
+00:00:57.600 --> 00:01:08.320
+If a script invokes a helper, reviewers should know what that helper does, how it is versioned, and whether it changes arguments, output, logging, or exit status semantics.
+
+11
+00:01:08.600 --> 00:01:12.680
+Avoid letting runtime input provide arbitrary command names.
+
+12
+00:01:12.780 --> 00:01:18.860
+If the script supports multiple tools or actions, map a validated mode to known code paths.
+
+13
+00:01:18.960 --> 00:01:24.800
+That lets the input choose among supported behavior without controlling executable selection directly.
+
+14
+00:01:24.900 --> 00:01:28.740
+It also makes tests and permissions easier to reason about.
+
+15
+00:01:29.020 --> 00:01:33.820
+The goal is not to hard-code every absolute path in every script.
+
+16
+00:01:33.920 --> 00:01:36.000
+The goal is deliberate selection.
+
+17
+00:01:36.100 --> 00:01:46.820
+A reviewer should be able to tell what program will run, why that program is trusted, what version assumptions matter, and how the script behaves if the expected executable is not available.

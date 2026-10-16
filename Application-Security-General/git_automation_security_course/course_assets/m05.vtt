@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.020
+Git behavior can be influenced by configuration at multiple levels: repository, global, system, environment, and tool-specific settings.
+
+2
+00:00:10.120 --> 00:00:15.880
+Automation should know which configuration it depends on and which configuration it ignores.
+
+3
+00:00:15.980 --> 00:00:24.300
+A script that behaves differently based on a developer's global configuration or a runner's inherited environment can be difficult to review and reproduce.
+
+4
+00:00:24.400 --> 00:00:31.120
+Running unreviewed repository content in privileged automation can expose secrets or deployment authority.
+
+5
+00:00:31.400 --> 00:00:34.760
+Hooks and related tooling also deserve attention.
+
+6
+00:00:34.860 --> 00:00:42.140
+Some workflows execute scripts as part of commit, checkout, merge, build, release, or packaging steps.
+
+7
+00:00:42.240 --> 00:00:47.680
+Some build and release systems run repository-provided scripts after checkout.
+
+8
+00:00:47.780 --> 00:00:59.220
+That can be appropriate when the repository content has passed the expected review path, but it is risky when unreviewed content runs in privileged automation with secrets or deployment authority.
+
+9
+00:00:59.500 --> 00:01:05.420
+Secure design treats repository content as input until it has passed the expected trust path.
+
+10
+00:01:05.520 --> 00:01:10.640
+A checked-out file is not automatically safe to execute merely because it came from Git.
+
+11
+00:01:10.740 --> 00:01:20.340
+The script should understand whether the ref is trusted, whether the workflow is allowed to run repository-provided code, and whether the runtime has sensitive credentials available.
+
+12
+00:01:20.440 --> 00:01:24.040
+Low-trust content and high-privilege execution should be separated.
+
+13
+00:01:24.320 --> 00:01:27.600
+Avoid hidden behavior in privileged automation.
+
+14
+00:01:27.700 --> 00:01:34.100
+Document required Git configuration, tool versions, environment variables, hooks, and execution context.
+
+15
+00:01:34.200 --> 00:01:36.360
+Review them like other deployment assumptions.
+
+16
+00:01:36.460 --> 00:01:43.340
+If automation depends on a specific config value or intentionally disables a behavior, that decision should be visible.
+
+17
+00:01:43.440 --> 00:01:49.040
+Predictable Git automation is safer because reviewers can see what will run and under which assumptions.

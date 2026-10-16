@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Hard-coded secrets are attractive because they make the first version of a script easy.
+
+2
+00:00:04.840 --> 00:00:10.040
+The script runs without extra setup, the value is right there, and the author can move on.
+
+3
+00:00:10.140 --> 00:00:15.020
+The problem is that hard-coded credentials are easy to create and hard to control.
+
+4
+00:00:15.120 --> 00:00:24.960
+Once a value is committed, copied, shared, backed up, packaged, or built into an artifact, the secret has more lives than the current file suggests.
+
+5
+00:00:25.060 --> 00:00:37.380
+A hard-coded secret may remain in repository history, old release branches, archived folders, container layers, build logs, backups, chat messages, or copied scripts.
+
+6
+00:00:37.660 --> 00:00:41.900
+Deleting the value from the latest script is not the same as removing it from the environment.
+
+7
+00:00:42.000 --> 00:00:54.880
+It may remain in repository history, old release branches, archived support folders, container layers, build logs, developer workstations, backup systems, chat messages, or copied scripts.
+
+8
+00:00:54.980 --> 00:01:01.220
+This is why a hard-coded secret should usually be treated as exposed, not merely misplaced.
+
+9
+00:01:01.320 --> 00:01:07.240
+Cleanup often requires rotation or revocation, not just editing a file.
+
+10
+00:01:07.520 --> 00:01:12.720
+The better pattern is to keep credentials outside the script and provide them through a controlled mechanism.
+
+11
+00:01:12.820 --> 00:01:25.620
+Depending on the environment, that may mean an approved secret-management system, a platform identity, a CI/CD secret variable, a short-lived credential, a protected runtime injection mechanism, or a restricted local file.
+
+12
+00:01:25.720 --> 00:01:32.200
+The shell script should consume the value only at the point of need, without becoming the permanent home for the secret.
+
+13
+00:01:32.480 --> 00:01:40.080
+There are cases where local sensitive files are unavoidable, such as a private key or a configuration fragment required by a tool.
+
+14
+00:01:40.180 --> 00:01:47.780
+Even then, the file should have a clear owner, restrictive permissions, a controlled directory, and a defined lifecycle.
+
+15
+00:01:47.880 --> 00:01:52.520
+It should not live in a shared repository or broad workspace by accident.
+
+16
+00:01:52.620 --> 00:02:01.900
+The guiding question is simple: if this credential must be replaced tomorrow, can we find every place it is used and update it without a manual scavenger hunt?

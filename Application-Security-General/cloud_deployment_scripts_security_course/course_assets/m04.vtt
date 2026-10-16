@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Cloud deployment scripts should be predictable and reviewable.
+
+2
+00:00:03.640 --> 00:00:10.840
+A safer Bash wrapper keeps command structure fixed, separates options from operands, and makes the deployment target visible.
+
+3
+00:00:10.940 --> 00:00:16.700
+Avoid building one large command string from variable data and then asking the shell to interpret it again.
+
+4
+00:00:16.800 --> 00:00:25.360
+That style makes quoting harder, hides behavior from reviewers, and increases the chance that an unexpected value changes what the script does.
+
+5
+00:00:25.460 --> 00:00:35.300
+Building one large command string makes quoting harder, hides behavior from reviewers, and increases the chance that an unexpected value changes what the script does.
+
+6
+00:00:35.580 --> 00:00:41.420
+Quote values that should remain literal, and use Bash arrays where option lists or arguments need to be assembled.
+
+7
+00:00:41.520 --> 00:00:56.240
+Validate account identifiers, project names, tenants, subscriptions, regions, resource names, file paths, image references, artifact versions, tags, labels, and timeout values before using them.
+
+8
+00:00:56.340 --> 00:01:07.140
+Validation should favor known patterns and approved values rather than treating every argument, environment variable, or CI/CD field as a trusted deployment instruction.
+
+9
+00:01:07.420 --> 00:01:17.660
+Working directory control matters because deployment packages, rendered templates, configuration files, manifests, and scripts often use relative paths.
+
+10
+00:01:17.760 --> 00:01:27.200
+A helper should know which repository and directory it is operating in, verify that expected files exist, and avoid letting leftover workspace state influence a later deployment.
+
+11
+00:01:27.300 --> 00:01:34.820
+Tool version expectations also matter because different cloud CLI, packaging, IaC, or deployment tool versions can produce different behavior.
+
+12
+00:01:35.100 --> 00:01:38.620
+Safe stopping is part of secure automation.
+
+13
+00:01:38.720 --> 00:01:50.480
+Scripts should check exit status, distinguish expected no-change results from failures, enforce timeouts where appropriate, and stop before later steps trust an incomplete or failed deployment.
+
+14
+00:01:50.580 --> 00:02:01.380
+Error messages should help operators understand what failed without exposing secrets, raw credentials, sensitive configuration, or unnecessary resource detail.
+
+15
+00:02:01.480 --> 00:02:06.120
+A good deployment wrapper is strict, boring, and easy to audit.

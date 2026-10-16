@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+A deployment command finishing does not prove the deployment is healthy.
+
+2
+00:00:04.360 --> 00:00:07.640
+Cloud operations may be asynchronous.
+
+3
+00:00:07.740 --> 00:00:18.300
+Resources may still be updating, permissions may be incomplete, routing may point to the wrong version, configuration may not be loaded, or health checks may fail after the script has moved on.
+
+4
+00:00:18.400 --> 00:00:25.440
+Secure deployment scripts verify expected results instead of assuming success from a single command exit.
+
+5
+00:00:25.720 --> 00:00:28.600
+Verification should match the deployment risk.
+
+6
+00:00:28.700 --> 00:00:39.580
+A helper may confirm service state, artifact version, routing target, configuration version, permissions, health signals, monitoring data, or successful rollout status.
+
+7
+00:00:39.680 --> 00:00:45.120
+Timeouts and clear failure handling matter because cloud operations can be delayed or partially complete.
+
+8
+00:00:45.220 --> 00:00:50.100
+If verification fails, later steps should not treat the deployment as healthy.
+
+9
+00:00:50.380 --> 00:00:53.180
+Rollback planning belongs before the deployment starts.
+
+10
+00:00:53.280 --> 00:00:56.960
+Not every cloud change can be safely or automatically undone.
+
+11
+00:00:57.060 --> 00:01:03.700
+Some changes affect data, schemas, identity permissions, routing, or external dependencies.
+
+12
+00:01:03.800 --> 00:01:16.120
+A responsible deployment workflow identifies the recovery path, the decision point, the owner, and the information needed to decide whether to pause, roll back, roll forward, or contain impact.
+
+13
+00:01:16.400 --> 00:01:20.640
+Logs and monitoring make deployment outcomes observable.
+
+14
+00:01:20.740 --> 00:01:29.620
+Logs should show identity, target, artifact, action, time, and result without exposing secrets or sensitive resource details.
+
+15
+00:01:29.720 --> 00:01:39.160
+Monitoring should look for failed deployments, drift, unusual identities, unexpected changes, policy exceptions, and health degradation.
+
+16
+00:01:39.260 --> 00:01:47.500
+Incidents and near misses should feed back into stronger validation, narrower credentials, better gates, and better recovery procedures.

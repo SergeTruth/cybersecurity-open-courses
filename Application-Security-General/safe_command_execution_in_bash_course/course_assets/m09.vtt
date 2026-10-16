@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Safe command execution in Bash is a repeatable engineering habit.
+
+2
+00:00:04.520 --> 00:00:15.400
+It starts with a simple principle: the script should run known commands with known structure, and runtime values should remain data unless the author deliberately wrote shell syntax in the script.
+
+3
+00:00:15.680 --> 00:00:18.560
+Prefer fixed commands and known actions.
+
+4
+00:00:18.660 --> 00:00:23.380
+Put the executable, stable options, and supported modes where reviewers can see them.
+
+5
+00:00:23.480 --> 00:00:31.400
+If the script must choose between behaviors, validate the requested mode and map it to a function or known command.
+
+6
+00:00:31.500 --> 00:00:36.700
+Avoid arbitrary command text as an input to automation.
+
+7
+00:00:36.980 --> 00:00:38.820
+Preserve argument boundaries.
+
+8
+00:00:38.920 --> 00:00:41.880
+Quote variables that should remain single values.
+
+9
+00:00:41.980 --> 00:00:45.420
+Use arrays when building option and operand lists.
+
+10
+00:00:45.520 --> 00:00:50.720
+Use "$@" when forwarding arguments and the script needs to preserve the caller's boundaries.
+
+11
+00:00:50.820 --> 00:00:57.460
+Remember that validation decides whether a value is acceptable, while quoting and arrays preserve how it is passed.
+
+12
+00:00:57.740 --> 00:01:01.820
+Avoid eval and unnecessary re-parsing.
+
+13
+00:01:01.920 --> 00:01:09.520
+If you are tempted to build a command string, ask whether a function, case statement, or array would express the design more clearly.
+
+14
+00:01:09.620 --> 00:01:16.820
+Re-parsing generated text reduces reviewability and makes it easier for data and syntax to blur together.
+
+15
+00:01:17.100 --> 00:01:18.940
+Validate before execution.
+
+16
+00:01:19.040 --> 00:01:28.000
+Define supported modes, targets, identifiers, paths, numbers, and option values before state-changing commands run.
+
+17
+00:01:28.100 --> 00:01:33.460
+Reject unsupported values early with clear messages and useful exit status.
+
+18
+00:01:33.560 --> 00:01:42.120
+Then check important command results, pipeline behavior, and preconditions so the script does not continue after an unsafe failure.
+
+19
+00:01:42.400 --> 00:01:44.400
+Control execution context.
+
+20
+00:01:44.500 --> 00:01:52.340
+Be deliberate about PATH, current directory, environment variables, external tools, permissions, and logging.
+
+21
+00:01:52.440 --> 00:02:03.960
+Run with the least privilege practical, protect secrets from command lines and logs, and use timeouts or retry limits where unattended automation could hang or repeat unsafe work.
+
+22
+00:02:04.240 --> 00:02:08.320
+Finally, review and test scripts before trusting them in production.
+
+23
+00:02:08.420 --> 00:02:16.900
+ShellCheck, peer review, realistic test cases, and dry-run style behavior where appropriate all help catch mistakes before they become operational surprises.
+
+24
+00:02:17.000 --> 00:02:25.640
+The result is Bash automation that is easier to operate, easier to audit, and less likely to turn a small scripting decision into a large problem.

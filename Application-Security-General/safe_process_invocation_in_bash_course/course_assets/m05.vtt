@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+A child process usually inherits environment variables from the script.
+
+2
+00:00:04.360 --> 00:00:13.320
+That inheritance is useful because many tools read configuration, credentials, locale settings, proxy settings, or feature flags from the environment.
+
+3
+00:00:13.420 --> 00:00:20.460
+But inheritance also means the invoked process may receive values the script author did not think about.
+
+4
+00:00:20.740 --> 00:00:30.580
+Environment variables can affect command lookup, runtime behavior, certificate handling, proxies, debug modes, tool configuration, and credentials.
+
+5
+00:00:30.680 --> 00:00:36.360
+A script that works in one runner may behave differently in another because the surrounding environment changed.
+
+6
+00:00:36.460 --> 00:00:41.580
+Safe invocation treats the environment as part of process input, not background scenery.
+
+7
+00:00:41.860 --> 00:00:44.420
+Secrets deserve special care.
+
+8
+00:00:44.520 --> 00:00:47.960
+A tool should not receive credentials it does not need.
+
+9
+00:00:48.060 --> 00:00:50.700
+Logs should not dump environment values casually.
+
+10
+00:00:50.800 --> 00:00:57.040
+Some systems expose process environment to diagnostics, crash reports, or administrative inspection.
+
+11
+00:00:57.140 --> 00:01:04.980
+The safest approach is to keep secrets scoped to the commands that require them and avoid passing broad inherited state to sensitive tools.
+
+12
+00:01:05.260 --> 00:01:08.460
+Scripts should avoid relying on accidental shell state.
+
+13
+00:01:08.560 --> 00:01:17.040
+A successful run should not depend on a developer's interactive profile, a local debug flag, or a CI variable that happens to be present today.
+
+14
+00:01:17.140 --> 00:01:20.420
+If a setting is required, make it explicit.
+
+15
+00:01:20.520 --> 00:01:25.400
+If an inherited value is dangerous, clear or override it where practical.
+
+16
+00:01:25.680 --> 00:01:28.960
+For sensitive operations, consider a controlled environment.
+
+17
+00:01:29.060 --> 00:01:38.180
+That can mean setting only the variables the tool needs, documenting required values, validating important settings, and failing clearly when context is incomplete.
+
+18
+00:01:38.280 --> 00:01:43.560
+The goal is to make runtime context deliberate rather than whatever happened to exist when the script started.
+
+19
+00:01:43.660 --> 00:01:49.580
+Review confirms that runtime context is deliberate rather than whatever happened to exist when the script started.

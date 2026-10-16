@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.380
+Environment variables are common in shell workflows because they are easy to set, easy to read, and widely supported by CI/CD platforms, containers, and command-line tools.
+
+2
+00:00:11.480 --> 00:00:14.760
+They can be an appropriate delivery channel when used carefully.
+
+3
+00:00:14.860 --> 00:00:16.780
+They are not automatically safe.
+
+4
+00:00:16.880 --> 00:00:22.880
+The fact that a value is not visible in the script file does not mean it cannot appear somewhere else.
+
+5
+00:00:23.160 --> 00:00:25.560
+The first issue is inheritance.
+
+6
+00:00:25.660 --> 00:00:29.420
+A process can pass environment variables to child processes.
+
+7
+00:00:29.520 --> 00:00:40.160
+If a script sets a secret in the environment and then launches unrelated tools, wrappers, diagnostics, or helper scripts, those child processes may receive the value too.
+
+8
+00:00:40.260 --> 00:00:44.660
+Some tools record their environment for debugging or failure analysis.
+
+9
+00:00:44.760 --> 00:00:49.640
+Some jobs run with verbose traces that reveal expanded commands or configuration.
+
+10
+00:00:49.740 --> 00:00:53.900
+Some support bundles collect more context than the original author expected.
+
+11
+00:00:54.180 --> 00:00:57.140
+Command-line arguments can create similar exposure.
+
+12
+00:00:57.240 --> 00:01:03.400
+They may be visible in process metadata, diagnostic snapshots, job output, or operator tooling.
+
+13
+00:01:03.500 --> 00:01:12.780
+The safer pattern is to avoid putting sensitive values in broad command lines and to prefer approved mechanisms that keep secrets scoped to the intended process.
+
+14
+00:01:12.880 --> 00:01:23.040
+When a tool supports a protected file, standard input, a platform identity, or a secret reference, that may be preferable to exposing the value as a plain argument.
+
+15
+00:01:23.320 --> 00:01:26.760
+Defensive scripts treat logs as long-lived records.
+
+16
+00:01:26.860 --> 00:01:32.780
+Logs are read by operators, developers, auditors, vendors, and support staff.
+
+17
+00:01:32.880 --> 00:01:36.480
+They may be copied into tickets or retained for months.
+
+18
+00:01:36.580 --> 00:01:45.300
+Avoid full environment dumps, avoid printing headers or connection strings, and be cautious with debugging modes that echo commands.
+
+19
+00:01:45.400 --> 00:01:52.840
+If a child process does not need a secret, minimize or scrub the inherited environment before launching it.
+
+20
+00:01:52.940 --> 00:01:57.180
+This reduces accidental spread without making the workflow harder to understand.
+
+21
+00:01:57.280 --> 00:02:02.800
+A minimized environment reduces accidental spread without making the workflow harder to understand.

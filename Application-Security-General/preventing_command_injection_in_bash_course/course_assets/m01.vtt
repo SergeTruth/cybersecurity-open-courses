@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+Command injection in Bash is best understood as a boundary failure.
+
+2
+00:00:05.480 --> 00:00:11.240
+A value that should remain data starts to influence command structure, shell syntax, or execution flow.
+
+3
+00:00:11.340 --> 00:00:19.420
+The value might be a file name, mode, service name, environment label, identifier, or option value.
+
+4
+00:00:19.520 --> 00:00:27.680
+When a script treats that value as part of a command line instead of passing it as data, behavior becomes harder to predict and harder to review.
+
+5
+00:00:27.780 --> 00:00:35.860
+When a script treats a runtime value as part of a command line instead of passing it as data, behavior becomes harder to predict and harder to review.
+
+6
+00:00:36.140 --> 00:00:40.380
+This matters because Bash interpretation is powerful.
+
+7
+00:00:40.480 --> 00:00:49.440
+Bash expands variables, splits words, expands patterns, handles redirection, builds pipelines, and starts commands.
+
+8
+00:00:49.540 --> 00:00:54.260
+Those features are useful when the script author controls them intentionally.
+
+9
+00:00:54.360 --> 00:01:00.040
+They are risky when runtime values are allowed to shape the shell syntax that Bash interprets.
+
+10
+00:01:00.320 --> 00:01:04.160
+Bash scripts often sit in operational workflows with real authority.
+
+11
+00:01:04.260 --> 00:01:14.180
+They run in CI/CD jobs, backup tasks, deployment scripts, maintenance automation, scheduled cleanup routines, and administrative helper tools.
+
+12
+00:01:14.280 --> 00:01:22.920
+A small parsing or construction mistake can affect files, services, releases, logs, artifacts, or infrastructure state.
+
+13
+00:01:23.200 --> 00:01:29.600
+The defensive goal is not to make Bash unusable or to treat every script as suspicious.
+
+14
+00:01:29.700 --> 00:01:32.260
+The goal is to make command execution explicit.
+
+15
+00:01:32.360 --> 00:01:37.480
+A safe script should run known commands, with intended arguments, in a controlled context.
+
+16
+00:01:37.580 --> 00:01:42.540
+If an input is not supported, the script should reject it before it reaches high-impact command logic.
+
+17
+00:01:42.820 --> 00:01:51.380
+A good mental model is to separate three things: the command chosen by the script, the shell syntax written by the author, and the data provided at runtime.
+
+18
+00:01:51.480 --> 00:02:00.360
+Prevention is strongest when the first two are stable and reviewable, while runtime data is validated and passed as arguments rather than interpreted as shell language.
+
+19
+00:02:00.640 --> 00:02:04.400
+Throughout this course, we will stay at a defensive engineering level.
+
+20
+00:02:04.500 --> 00:02:19.620
+The emphasis is on recognizing trust boundaries, avoiding risky construction patterns, preserving argument boundaries, validating inputs, controlling execution context, and using review practices that catch mistakes before scripts become trusted automation.

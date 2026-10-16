@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Commands do not receive a vague line of text.
+
+2
+00:00:04.280 --> 00:00:08.760
+They receive an executable name and a list of arguments.
+
+3
+00:00:08.860 --> 00:00:16.460
+Safe Bash scripting is largely about preserving that structure from the point where values enter the script to the point where a command runs.
+
+4
+00:00:16.740 --> 00:00:19.700
+Quoting is the first practical defense.
+
+5
+00:00:19.800 --> 00:00:28.200
+When a variable is quoted, Bash is less likely to split the value into multiple words or expand pattern characters as pathnames.
+
+6
+00:00:28.300 --> 00:00:32.380
+That matters for ordinary reliability, not just security.
+
+7
+00:00:32.480 --> 00:00:35.360
+File paths may contain spaces.
+
+8
+00:00:35.460 --> 00:00:39.300
+Identifiers may contain characters that have meaning to the shell.
+
+9
+00:00:39.400 --> 00:00:43.400
+A value that should be one argument should remain one argument.
+
+10
+00:00:43.680 --> 00:00:48.000
+Arrays are even better when a script needs to build an argument list.
+
+11
+00:00:48.100 --> 00:00:50.580
+Each array element is a distinct value.
+
+12
+00:00:50.680 --> 00:00:59.240
+A script can start with fixed options, append a validated option value, and then pass the array to a command while preserving the intended boundaries.
+
+13
+00:00:59.340 --> 00:01:03.660
+This is clearer than trying to maintain quoting inside one large string.
+
+14
+00:01:03.940 --> 00:01:10.820
+The special form "$@" matters when forwarding arguments from one function or script to another.
+
+15
+00:01:10.920 --> 00:01:17.720
+Used correctly, it preserves the original argument boundaries instead of flattening everything into a single ambiguous string.
+
+16
+00:01:17.820 --> 00:01:21.900
+That makes wrappers and helper functions safer and more predictable.
+
+17
+00:01:22.180 --> 00:01:24.660
+Validation and quoting work together.
+
+18
+00:01:24.760 --> 00:01:29.880
+Validation decides whether a value is acceptable for the script's purpose.
+
+19
+00:01:29.980 --> 00:01:32.700
+Quoting and arrays preserve the value during execution.
+
+20
+00:01:32.800 --> 00:01:41.520
+A validated value can still be mishandled if it is expanded without care, and careful quoting does not prove the value is appropriate for the operation.
+
+21
+00:01:41.620 --> 00:01:43.940
+Treat them as separate layers.
+
+22
+00:01:44.220 --> 00:01:47.900
+A useful review question is: where are the argument boundaries?
+
+23
+00:01:48.000 --> 00:01:53.600
+If the answer is hidden inside a constructed command string, the script is harder to trust.
+
+24
+00:01:53.700 --> 00:02:03.060
+If the answer is visible through quoted variables, arrays, and fixed command structure, the script is easier to test, maintain, and operate.

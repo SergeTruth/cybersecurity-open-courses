@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Bash sits in the middle of a surprising amount of operational work.
+
+2
+00:00:04.680 --> 00:00:15.880
+A short script might rotate logs, copy release artifacts, start a service, trigger a backup, call an internal API, create a directory, or hand work to another tool.
+
+3
+00:00:15.980 --> 00:00:21.820
+That makes Bash useful, but it also means command execution is not a minor implementation detail.
+
+4
+00:00:21.920 --> 00:00:25.760
+It is the point where text in a script becomes action on a system.
+
+5
+00:00:26.040 --> 00:00:31.080
+Safe command execution is the practice of making that action predictable.
+
+6
+00:00:31.180 --> 00:00:36.940
+The script should run the command the author intended, with the arguments intended, in the environment intended.
+
+7
+00:00:37.040 --> 00:00:45.120
+When it cannot do that, it should fail clearly instead of guessing, continuing silently, or turning data into unexpected shell behavior.
+
+8
+00:00:45.400 --> 00:00:49.240
+The central boundary is the difference between data and shell instruction.
+
+9
+00:00:49.340 --> 00:00:56.860
+Data is a filename, service name, environment label, numeric limit, package identifier, or user-selected mode.
+
+10
+00:00:56.960 --> 00:01:02.800
+Shell instruction is syntax that Bash interprets before a command receives arguments.
+
+11
+00:01:02.900 --> 00:01:05.620
+A safe script keeps those roles separate.
+
+12
+00:01:05.720 --> 00:01:11.240
+It lets Bash interpret the script that the maintainer wrote, not a command line assembled from uncontrolled text.
+
+13
+00:01:11.520 --> 00:01:15.520
+Small construction mistakes matter because commands often have authority.
+
+14
+00:01:15.620 --> 00:01:27.540
+A value that is split into two arguments, interpreted as a pattern, treated as an option, or passed through a second shell interpretation can produce behavior the author did not review.
+
+15
+00:01:27.640 --> 00:01:30.360
+The defensive answer is not to stop using Bash.
+
+16
+00:01:30.460 --> 00:01:35.980
+The answer is to build scripts that are explicit, boring, and easy to inspect.
+
+17
+00:01:36.260 --> 00:01:40.100
+In professional automation, predictability is a feature.
+
+18
+00:01:40.200 --> 00:01:49.720
+Reviewers should be able to tell which executable will run, which options are fixed, which values are variable, and how errors are handled.
+
+19
+00:01:49.820 --> 00:01:53.420
+Operators should be able to understand what happened when a run fails.
+
+20
+00:01:53.520 --> 00:02:03.280
+Safe command execution gives developers, administrators, DevOps teams, and security reviewers a shared language for making Bash automation dependable.
+
+21
+00:02:03.560 --> 00:02:06.920
+Throughout this course, the focus is practical and defensive.
+
+22
+00:02:07.020 --> 00:02:21.340
+We will look at how Bash prepares commands, how to preserve argument boundaries, why re-parsing generated text is dangerous, how validation fits into the design, and how environment and permissions shape the final behavior.
+
+23
+00:02:21.440 --> 00:02:26.080
+The goal is a checklist you can apply before trusting a script with real operational work.

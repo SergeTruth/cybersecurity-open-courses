@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.020
+Many Bash scripts begin with simple positional arguments and gradually grow options: verbose mode, dry-run mode, output path, environment, target, or apply behavior.
+
+2
+00:00:12.120 --> 00:00:17.000
+This growth is normal, but ad hoc parsing becomes hard to reason about quickly.
+
+3
+00:00:17.100 --> 00:00:24.380
+A defensive script keeps parsing rules clear enough for maintainers to understand which inputs are accepted and which combinations are rejected.
+
+4
+00:00:24.660 --> 00:00:27.620
+Unknown options should usually fail closed.
+
+5
+00:00:27.720 --> 00:00:34.840
+Ignoring an unknown option can hide typos, stale documentation, or a caller using the wrong version of a script.
+
+6
+00:00:34.940 --> 00:00:41.820
+If an option requires a value, the parser should check that the value exists and is not actually another option by mistake.
+
+7
+00:00:41.920 --> 00:00:48.080
+If two options conflict, the script should reject the combination instead of choosing one implicitly.
+
+8
+00:00:48.360 --> 00:00:51.880
+Dry-run and apply behavior deserve particular clarity.
+
+9
+00:00:51.980 --> 00:00:58.700
+A script should not silently switch from preview to apply mode because of a missing flag or ambiguous combination.
+
+10
+00:00:58.800 --> 00:01:04.080
+High-impact modes should be explicit, easy to review, and hard to trigger accidentally.
+
+11
+00:01:04.180 --> 00:01:08.740
+Parsing should produce a well-defined request before any operational action begins.
+
+12
+00:01:09.020 --> 00:01:14.540
+Tools such as getopts can help with disciplined short-option parsing, but the larger principle is separation.
+
+13
+00:01:14.640 --> 00:01:16.880
+Parse and validate first.
+
+14
+00:01:16.980 --> 00:01:17.940
+Act later.
+
+15
+00:01:18.040 --> 00:01:25.640
+When parsing branches are mixed deeply into action logic, reviewers have to reason about behavior and input handling at the same time.
+
+16
+00:01:25.740 --> 00:01:32.140
+Keeping those concerns separate makes argument security easier to test, review, and maintain.

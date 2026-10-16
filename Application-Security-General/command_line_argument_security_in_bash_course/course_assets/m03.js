@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Required Arguments, Usage, and Safe Defaults",
+  "graphicAlt": "Required intent is checked before action; safe usage and deliberate optional defaults replace guessed high-impact targets.",
+  "narration": "A script should make its expectations clear. Required arguments should be checked before work begins, and optional arguments should have deliberate defaults. An empty variable that happens to point at the current directory, default environment, or first matching value is not a safe default. It is an unreviewed decision made by accident.\n\nUsage and help messages are part of secure behavior. They should explain what the script expects, which values are supported, and how an operator can correct a common mistake. They should not reveal secrets, internal sensitive paths, or unnecessary implementation details. A clear usage message lets the script fail early without forcing the operator to inspect the code under pressure.\n\nRequired argument checks should happen before state-changing work. If a destination is missing, reject the request before copying, writing, deploying, restarting, or contacting a service. If a mode is required, reject a blank or unsupported mode before choosing a branch. If the target is sensitive, do not guess. A safe script stops when intent is unclear.\n\nSafe defaults are useful when they are intentional and documented. A read-only preview mode may be a reasonable default in some workflows. A production target, destructive mode, or broad search path should not be guessed. The principle is simple: defaults should reduce risk and clarify behavior, not hide missing input or make high-impact choices without the caller's explicit intent.",
+  "narrationPoints": [
+    "Trust boundary — Required Arguments, Usage, and Safe Defaults: A script should make its expectations clear.",
+    "Input and state — Required Arguments, Usage, and Safe Defaults: Usage and help messages are part of secure behavior.",
+    "Validation checkpoint — Required Arguments, Usage, and Safe Defaults: Required argument checks should happen before state-changing work.",
+    "Controlled operation — Required Arguments, Usage, and Safe Defaults: Safe defaults are useful when they are intentional and documented.",
+    "Failure path — Required Arguments, Usage, and Safe Defaults: An empty variable that happens to point at the current directory, default environment, or first matching value is not a safe default.",
+    "Review outcome — Required Arguments, Usage, and Safe Defaults: Required arguments should be checked before work begins, and optional arguments should have deliberate defaults."
+  ]
+};

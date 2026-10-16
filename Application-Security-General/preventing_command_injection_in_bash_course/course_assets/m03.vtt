@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Bash does not simply pass a source line directly to an external program.
+
+2
+00:00:05.240 --> 00:00:20.040
+It parses shell syntax, expands variables, processes substitutions, performs word splitting, expands wildcard patterns, handles redirection, sets up pipelines, and then starts a command with a resulting argument list.
+
+3
+00:00:20.140 --> 00:00:24.220
+That transformation is why command construction is security-relevant.
+
+4
+00:00:24.500 --> 00:00:29.380
+The command a reviewer sees in a script is not always the same thing an external tool receives.
+
+5
+00:00:29.480 --> 00:00:33.720
+A variable can expand to a value that becomes one argument or several.
+
+6
+00:00:33.820 --> 00:00:36.860
+Pattern-like text can be expanded into pathnames.
+
+7
+00:00:36.960 --> 00:00:39.840
+Redirection changes where input and output go.
+
+8
+00:00:39.940 --> 00:00:44.260
+A pipeline can make one command's result drive another command's behavior.
+
+9
+00:00:44.540 --> 00:00:46.300
+Argument boundaries are central.
+
+10
+00:00:46.400 --> 00:00:50.320
+A command receives a list of arguments, not a vague sentence of text.
+
+11
+00:00:50.420 --> 00:00:56.420
+When a script preserves boundaries, a file name remains a file name and a mode remains a mode.
+
+12
+00:00:56.520 --> 00:01:02.760
+When a script collapses everything into a command string, Bash has another opportunity to interpret the text as syntax.
+
+13
+00:01:03.040 --> 00:01:13.520
+Command substitution is useful when a script intentionally captures a value from another command, but it should be kept conceptually separate from dynamic command construction.
+
+14
+00:01:13.620 --> 00:01:17.380
+The defensive question is not whether Bash can evaluate something.
+
+15
+00:01:17.480 --> 00:01:23.480
+It is whether the script author intended that evaluation and whether a reviewer can see the boundary clearly.
+
+16
+00:01:23.760 --> 00:01:27.040
+Word splitting and globbing are frequent sources of surprise.
+
+17
+00:01:27.140 --> 00:01:31.940
+They can change how many arguments a command receives and what those arguments contain.
+
+18
+00:01:32.040 --> 00:01:39.640
+Quoting, arrays, and explicit validation are practical ways to keep values stable as they move from input to execution.
+
+19
+00:01:39.920 --> 00:01:43.280
+For prevention, think in terms of structured execution.
+
+20
+00:01:43.380 --> 00:01:49.940
+The script should choose a known command path, build a known argument list, and pass values in positions where they remain data.
+
+21
+00:01:50.040 --> 00:01:55.480
+Avoid designs that require Bash to reinterpret generated text as a fresh command line.
+
+22
+00:01:55.580 --> 00:02:02.060
+Review confirms that every shell evaluation is intended and that each data-to-syntax boundary is visible.

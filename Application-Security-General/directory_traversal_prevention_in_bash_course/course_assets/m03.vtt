@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Directory traversal prevention starts with a clear base.
+
+2
+00:00:04.200 --> 00:00:14.520
+A script should know its approved input directory, staging directory, output directory, archive extraction directory, or cleanup directory before it performs file operations.
+
+3
+00:00:14.620 --> 00:00:17.980
+These directories are the script's operating scope.
+
+4
+00:00:18.080 --> 00:00:26.080
+Without an approved base, validation becomes vague because there is no clear answer to the question, inside what area is this path allowed to be?
+
+5
+00:00:26.360 --> 00:00:29.160
+Base directories should be specific enough to review.
+
+6
+00:00:29.260 --> 00:00:39.420
+A broad system location is harder to reason about than a dedicated application workspace, backup staging area, upload processing directory, or report output directory.
+
+7
+00:00:39.520 --> 00:00:48.000
+Source, staging, and destination locations should be separated where practical so a mistake in one phase does not affect unrelated data.
+
+8
+00:00:48.100 --> 00:00:55.860
+For example, a script that receives files, transforms them, and writes reports should not use one uncontrolled directory for every phase.
+
+9
+00:00:56.140 --> 00:00:59.500
+Avoid relying on the current working directory by accident.
+
+10
+00:00:59.600 --> 00:01:08.640
+The same script may be launched from an interactive terminal, a scheduled job, a CI/CD workspace, a service directory, or a remote automation context.
+
+11
+00:01:08.740 --> 00:01:16.660
+If relative paths are interpreted differently depending on launch location, the script's trust boundary can shift without anyone changing the script text.
+
+12
+00:01:16.760 --> 00:01:25.000
+Important paths should be derived from explicit configuration, known installation locations, or controlled runtime variables that are validated before use.
+
+13
+00:01:25.280 --> 00:01:28.880
+Environment-specific directories should also be explicit.
+
+14
+00:01:28.980 --> 00:01:35.780
+Development, staging, and production may have different base locations, different permissions, and different retention expectations.
+
+15
+00:01:35.880 --> 00:01:42.360
+A script should not silently switch scope because an environment variable was missing or a default pointed somewhere unexpected.
+
+16
+00:01:42.460 --> 00:01:52.140
+Clear bases make behavior reviewable: the script operates here, stages there, writes output there, and never treats an arbitrary launch directory as trusted scope.
