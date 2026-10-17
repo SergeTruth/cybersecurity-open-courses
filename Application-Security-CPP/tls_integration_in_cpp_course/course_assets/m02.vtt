@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+C++ teams should not implement TLS themselves.
+
+2
+00:00:04.280 --> 00:00:13.080
+TLS is complex, security-critical, and dependent on protocol details, platform behavior, library updates, and cryptographic review.
+
+3
+00:00:13.180 --> 00:00:22.460
+Even small mistakes in protocol negotiation, certificate checks, random number use, or error handling can undermine the protection the application expects.
+
+4
+00:00:22.560 --> 00:00:29.600
+The defensive choice is to use approved TLS libraries, platform facilities, or organization-maintained wrappers.
+
+5
+00:00:29.880 --> 00:00:33.080
+Library choice is only the first architectural decision.
+
+6
+00:00:33.180 --> 00:00:45.900
+A narrow internal TLS interface can reduce misuse by centralizing configuration, certificate validation, hostname verification, error translation, logging, and dependency ownership.
+
+7
+00:00:46.000 --> 00:00:50.640
+Application code should not have to decide policy at every socket call.
+
+8
+00:00:50.740 --> 00:00:57.220
+It should ask for a secure client or server channel that already reflects the organization's requirements.
+
+9
+00:00:57.500 --> 00:01:00.140
+Centralization also makes review easier.
+
+10
+00:01:00.240 --> 00:01:11.280
+Reviewers can examine one integration layer for trust store selection, certificate handling, protocol policy, and logging behavior instead of hunting through unrelated features.
+
+11
+00:01:11.380 --> 00:01:18.900
+It becomes easier to update a dependency, change a default, add monitoring, or tighten validation without rewriting every network component.
+
+12
+00:01:19.180 --> 00:01:23.500
+Dependency versions and security updates belong in the integration design.
+
+13
+00:01:23.600 --> 00:01:31.360
+The team should know which library version is used, how updates are evaluated, which platforms are supported, and who owns compatibility testing.
+
+14
+00:01:31.460 --> 00:01:39.780
+TLS is a moving dependency in a changing threat and compliance environment, so maintenance planning is part of the security control.
+
+15
+00:01:40.060 --> 00:01:44.780
+A good integration architecture also makes the safe path the easy path.
+
+16
+00:01:44.880 --> 00:01:55.360
+Developers should have a small number of approved ways to create secure connections, and unusual requirements should go through review instead of becoming hidden one-off configuration.

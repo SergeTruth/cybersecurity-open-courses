@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Heap allocation is useful when an object's size, lifetime, or ownership pattern does not fit a simple local scope.
+
+2
+00:00:08.120 --> 00:00:15.560
+Variable-size data, long-lived objects, polymorphic objects, and shared structures may all justify dynamic storage.
+
+3
+00:00:15.660 --> 00:00:23.660
+The safety requirement is that heap use must communicate who owns the object, who may borrow it, who may transfer it, and when it is destroyed.
+
+4
+00:00:23.940 --> 00:00:27.940
+Unclear ownership is where heap use becomes fragile.
+
+5
+00:00:28.040 --> 00:00:32.600
+If no owner is responsible for cleanup, the program leaks memory or resources.
+
+6
+00:00:32.700 --> 00:00:37.580
+If two pieces of code believe they own the same object, double cleanup can occur.
+
+7
+00:00:37.680 --> 00:00:44.080
+If code keeps a raw pointer after the owner destroys or moves the object, stale access becomes possible.
+
+8
+00:00:44.180 --> 00:00:50.820
+These defects are difficult to review because the allocation, transfer, use, and release may be far apart.
+
+9
+00:00:51.100 --> 00:00:55.900
+Modern C++ provides better patterns than raw owning pointers.
+
+10
+00:00:56.000 --> 00:01:03.200
+A factory can return a std::unique_ptr to make exclusive ownership explicit.
+
+11
+00:01:03.300 --> 00:01:08.340
+A class can store ownership as a member so destruction follows object lifetime.
+
+12
+00:01:08.440 --> 00:01:14.520
+Shared ownership should be represented intentionally, not used as a shortcut for avoiding ownership design.
+
+13
+00:01:14.620 --> 00:01:24.460
+When code only needs temporary access, references, raw non-owning pointers, spans, or views may be appropriate if their lifetimes are clear.
+
+14
+00:01:24.740 --> 00:01:28.180
+Allocation and cleanup responsibilities should match visibly.
+
+15
+00:01:28.280 --> 00:01:33.400
+Avoid APIs where callers must guess whether they should delete a returned pointer.
+
+16
+00:01:33.500 --> 00:01:36.700
+Avoid mixing allocation styles without clear wrappers.
+
+17
+00:01:36.800 --> 00:01:46.480
+During modernization, prioritize raw owning pointers and manual delete paths because they are often where leaks, double cleanup, and stale access begin.
+
+18
+00:01:46.760 --> 00:01:49.720
+Good heap discipline also includes failure behavior.
+
+19
+00:01:49.820 --> 00:01:55.660
+Allocation can fail, construction can throw, and later setup can discover invalid input.
+
+20
+00:01:55.760 --> 00:02:03.200
+RAII-based owners make these paths easier because partially completed work is cleaned up through object lifetime.
+
+21
+00:02:03.300 --> 00:02:11.060
+If code allocates first and then relies on several manual cleanup branches, every future edit must preserve that fragile sequence.
+
+22
+00:02:11.160 --> 00:02:14.760
+A clear owner gives reviewers one place to verify destruction.

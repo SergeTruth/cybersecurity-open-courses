@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.820
+String output must respect context.
+
+2
+00:00:02.920 --> 00:00:15.560
+The same value may need different treatment when written to logs, JSON, XML, HTML, shell arguments, SQL parameters, file paths, UI messages, or diagnostic events.
+
+3
+00:00:15.660 --> 00:00:20.620
+A string that is harmless as plain text can have structural meaning in a different output format.
+
+4
+00:00:20.900 --> 00:00:23.540
+Formatting should separate data from structure.
+
+5
+00:00:23.640 --> 00:00:32.280
+Program-controlled format strings and structured output APIs make intent clearer than building complex output by repeated concatenation.
+
+6
+00:00:32.380 --> 00:00:40.460
+When a target format has an encoder or escaping API, use the context-appropriate mechanism rather than inventing partial escaping rules.
+
+7
+00:00:40.740 --> 00:00:46.260
+Format strings should be controlled by the program, not supplied by untrusted input.
+
+8
+00:00:46.360 --> 00:00:50.760
+This is defensive guidance about ownership of formatting templates.
+
+9
+00:00:50.860 --> 00:00:57.420
+User-controlled data should be treated as data and inserted through APIs that preserve that boundary.
+
+10
+00:00:57.700 --> 00:01:00.100
+Logs deserve special discipline.
+
+11
+00:01:00.200 --> 00:01:07.160
+They are often copied, indexed, exported, retained, and read by many people and systems.
+
+12
+00:01:07.260 --> 00:01:12.540
+Logs should avoid credentials, tokens, private data, and excessive raw input.
+
+13
+00:01:12.640 --> 00:01:21.520
+When a value is sensitive, log that the field was present, missing, malformed, or rejected without printing the sensitive content itself.
+
+14
+00:01:21.800 --> 00:01:25.400
+User-facing errors should be safe and actionable.
+
+15
+00:01:25.500 --> 00:01:36.940
+Operators need enough information to fix configuration and data issues, but error text should not reveal secrets, internal parsing details, or data that belongs in restricted channels.
+
+16
+00:01:37.040 --> 00:01:40.720
+Output rules should be documented for each destination context.

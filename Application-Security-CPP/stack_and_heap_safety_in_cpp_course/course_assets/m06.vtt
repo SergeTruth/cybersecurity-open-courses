@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.140
+RAII, Resource Acquisition Is Initialization, is the central C++ pattern for safe cleanup.
+
+2
+00:00:07.240 --> 00:00:14.520
+It ties a resource to an object lifetime so cleanup happens when the owner leaves scope, including during early returns and exceptions.
+
+3
+00:00:14.620 --> 00:00:21.260
+This turns cleanup into a property of the type instead of a set of manual branches that every function must remember.
+
+4
+00:00:21.540 --> 00:00:24.740
+Standard containers are RAII types for memory.
+
+5
+00:00:24.840 --> 00:00:32.200
+std::vector, std::string, and std::array manage storage and provide size-aware interfaces.
+
+6
+00:00:32.300 --> 00:00:36.300
+They reduce the need for raw arrays and manual allocation.
+
+7
+00:00:36.400 --> 00:00:43.280
+Lock guards, file wrappers, and other small resource types apply the same idea to non-memory resources.
+
+8
+00:00:43.380 --> 00:00:50.820
+The rule of zero follows naturally: prefer member types that already manage their resources so your class does not need custom cleanup logic.
+
+9
+00:00:51.100 --> 00:00:53.740
+Smart pointers express heap ownership.
+
+10
+00:00:53.840 --> 00:01:00.960
+std::unique_ptr is usually the clearest default when one owner controls a heap object's lifetime.
+
+11
+00:01:01.060 --> 00:01:05.460
+Transfer is explicit through moves, and accidental copying is prevented.
+
+12
+00:01:05.560 --> 00:01:13.000
+std::shared_ptr should mean shared lifetime is real and intentional, not simply that ownership was hard to decide.
+
+13
+00:01:13.100 --> 00:01:25.500
+std::weak_ptr can represent non-owning observation of a shared object, especially where cycles or callbacks would otherwise keep objects alive unexpectedly.
+
+14
+00:01:25.780 --> 00:01:28.580
+These patterns do not replace design judgment.
+
+15
+00:01:28.680 --> 00:01:33.480
+A smart pointer can still be misused, and a container can still be indexed incorrectly.
+
+16
+00:01:33.580 --> 00:01:38.620
+The value is that ownership, cleanup, and bounds become easier to review.
+
+17
+00:01:38.720 --> 00:01:45.680
+Prefer standard patterns that make the safe path ordinary and reserve manual allocation or release for narrow, well-documented wrappers.
+
+18
+00:01:45.960 --> 00:01:49.640
+When a custom wrapper is necessary, keep it small and specific.
+
+19
+00:01:49.740 --> 00:01:56.940
+It should acquire one resource, define whether it can be copied or moved, and release reliably in its destructor.
+
+20
+00:01:57.040 --> 00:02:03.040
+Avoid wrappers that mix cleanup with unrelated policy, logging, or ownership surprises.
+
+21
+00:02:03.140 --> 00:02:12.020
+The more focused the type, the easier it is for ordinary application code to compose safe stack and heap behavior without repeating low-level decisions.

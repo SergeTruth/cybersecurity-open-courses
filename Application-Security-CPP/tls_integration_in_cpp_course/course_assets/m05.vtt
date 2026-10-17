@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+A valid certificate chain is not enough by itself.
+
+2
+00:00:04.040 --> 00:00:08.840
+A client also needs to verify that the certificate represents the service it intended to reach.
+
+3
+00:00:08.940 --> 00:00:13.100
+Hostname verification connects the network endpoint to the expected identity.
+
+4
+00:00:13.200 --> 00:00:20.800
+Without that check, the client may know that a certificate came from a trusted issuer but not that it belongs to the right service.
+
+5
+00:00:21.080 --> 00:00:27.080
+SNI, or Server Name Indication, supports identity selection during the TLS handshake.
+
+6
+00:00:27.180 --> 00:00:34.060
+It lets a client indicate the intended service name so a server hosting multiple identities can present the right certificate.
+
+7
+00:00:34.160 --> 00:00:46.640
+For modern deployments, especially those using shared infrastructure, proxies, gateways, or service discovery, SNI and hostname verification are part of making the intended peer identity explicit.
+
+8
+00:00:46.920 --> 00:00:50.120
+Internal services still need clear identity rules.
+
+9
+00:00:50.220 --> 00:00:54.380
+Being inside a network is not a substitute for peer authentication.
+
+10
+00:00:54.480 --> 00:01:02.560
+Services may use aliases, internal names, generated hostnames, load balancers, or service mesh components.
+
+11
+00:01:02.660 --> 00:01:09.300
+The integration design should define which name is expected, where that name comes from, and how the TLS library verifies it.
+
+12
+00:01:09.580 --> 00:01:12.620
+Identity expectations should be consistent and testable.
+
+13
+00:01:12.720 --> 00:01:20.480
+Tests should cover wrong names, missing names, valid certificates for other identities, and expected aliases.
+
+14
+00:01:20.580 --> 00:01:25.380
+Configuration should avoid scattered exceptions that make identity behavior unpredictable.
+
+15
+00:01:25.480 --> 00:01:32.040
+A safe TLS channel is not only encrypted; it is connected to the peer the application meant to contact.
+
+16
+00:01:32.320 --> 00:01:36.240
+That expectation should be documented close to the client configuration.
+
+17
+00:01:36.340 --> 00:01:44.580
+Future maintainers need to know whether the application connects by public hostname, internal service name, proxy name, or another approved identity form.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Deserialization and Parsing",
+  "graphicAlt": "Parsing produces an intermediate representation that passes semantic and invariant checks before domain construction.",
+  "narration": "Serialized input should remain untrusted until it has been parsed and validated. A safe design often parses bytes or text into a controlled intermediate representation, validates that representation, and only then constructs trusted domain objects. This pattern creates a clear point where the program moves from external data to internal state.\n\nParsing should be separate from business logic. Raw serialized input should not directly control authorization decisions, resource ownership, command execution, or state transitions. The parser's job is to recognize the format, enforce basic structure, and report well-defined errors. The validator's job is to check field meaning, relationships, ranges, and consistency before domain behavior begins.\n\nValidation should check required fields, allowed values, type expectations, encoding rules, cross-field relationships, and compatibility constraints. Parser errors should fail safely, release temporary resources, and avoid leaving partially trusted state behind. A partially parsed object should not be inserted into caches, registries, authorization maps, or long-lived application state.\n\nDeserialization should not skip constructors, invariants, authorization, or normal validation rules. If a domain object has rules for creation during ordinary application use, the deserialization path needs equivalent rules. Defensive parsing is about preserving those invariants even when the input arrives from a file, network, cache, or older version of the system.\n\nOne useful review question is: when does this data become trusted? The answer should point to a specific validation boundary. If trust changes gradually across several functions, the code is harder to reason about and more likely to accept inconsistent state.",
+  "narrationPoints": [
+    "Serialized input should remain untrusted until it has been parsed and validated.",
+    "Raw serialized input should not directly control authorization decisions, resource ownership, command execution, or state transitions.",
+    "Validation should check required fields, allowed values, type expectations, encoding rules, cross-field relationships, and compatibility constraints.",
+    "Parser errors should fail safely, release temporary resources, and avoid leaving partially trusted state behind.",
+    "If a domain object has rules for creation during ordinary application use, the deserialization path needs equivalent rules.",
+    "The answer should point to a specific validation boundary."
+  ]
+};

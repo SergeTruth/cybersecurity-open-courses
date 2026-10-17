@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.180
+Some strings require special handling because they contain credentials, tokens, keys, session identifiers, personal information, regulated data, or security decisions.
+
+2
+00:00:12.280 --> 00:00:18.680
+These values may look like ordinary text to the compiler, but they are not ordinary from an operational or privacy perspective.
+
+3
+00:00:18.960 --> 00:00:29.360
+Sensitive strings can leak through logs, exceptions, crash dumps, telemetry, debug output, caches, copies, and long-lived objects.
+
+4
+00:00:29.460 --> 00:00:36.900
+A value that is carefully protected at rest can still appear in a diagnostic event if logging code treats every string the same way.
+
+5
+00:00:37.000 --> 00:00:40.600
+Redaction should happen before sensitive data reaches broad sinks.
+
+6
+00:00:40.880 --> 00:00:46.720
+C++ does not automatically erase sensitive storage when a std::string is destroyed.
+
+7
+00:00:46.820 --> 00:00:55.540
+Optimization, small-string storage, copies, moves, allocator behavior, and crash diagnostics can complicate cleanup.
+
+8
+00:00:55.640 --> 00:00:59.400
+That does not mean teams should invent fragile memory rituals everywhere.
+
+9
+00:00:59.500 --> 00:01:04.060
+It means sensitive handling should follow project-approved and platform-approved policy.
+
+10
+00:01:04.340 --> 00:01:09.540
+Practical guidance starts with minimizing unnecessary copies.
+
+11
+00:01:09.640 --> 00:01:22.600
+Pass sensitive values only where needed, avoid broad logging, restrict access, document lifetime expectations, and prefer dedicated secret storage or credential delivery mechanisms when available.
+
+12
+00:01:22.700 --> 00:01:30.460
+If secure memory clearing is required, use established APIs and verify the project standard rather than relying on ordinary string destruction.
+
+13
+00:01:30.740 --> 00:01:33.540
+Secret handling is also a review topic.
+
+14
+00:01:33.640 --> 00:01:43.240
+Reviewers should ask where the value came from, where it is stored, whether it is ever printed, how long it lives, and how rotation or revocation affects the application.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+String input should be treated as untrusted until the application validates it.
+
+2
+00:00:05.480 --> 00:00:15.720
+Inputs can come from files, protocols, users, command lines, configuration, environment variables, IPC, databases, or other processes.
+
+3
+00:00:15.820 --> 00:00:21.020
+A value that looks internal may still have crossed a trust boundary before it reached the current function.
+
+4
+00:00:21.300 --> 00:00:28.660
+Validation should define expected length, allowed format, allowed character set, required encoding, and domain rules.
+
+5
+00:00:28.760 --> 00:00:36.120
+A username, a file name, a protocol field, and a configuration key should not share one vague validation rule.
+
+6
+00:00:36.220 --> 00:00:40.860
+Each has a purpose, and the accepted values should match that purpose.
+
+7
+00:00:41.140 --> 00:00:45.220
+Parsing should be separated from validation and business logic.
+
+8
+00:00:45.320 --> 00:00:49.400
+Raw strings should not flow through the application as if they were trusted decisions.
+
+9
+00:00:49.500 --> 00:01:00.540
+A parser can translate input into a structured type, validation can decide whether the structured value is allowed, and business logic can operate on the validated result.
+
+10
+00:01:00.820 --> 00:01:06.660
+Invalid, ambiguous, oversized, or malformed strings should fail safely.
+
+11
+00:01:06.760 --> 00:01:14.360
+A failure path should not fall back to a more permissive mode, skip important checks, or keep using a partially parsed value.
+
+12
+00:01:14.460 --> 00:01:22.060
+Error messages should help operators diagnose the issue without exposing sensitive values or internal parsing assumptions.
+
+13
+00:01:22.340 --> 00:01:25.300
+Good validation is explicit enough to test.
+
+14
+00:01:25.400 --> 00:01:32.120
+Boundary tests should show what the application accepts, what it rejects, and how it reports rejection.

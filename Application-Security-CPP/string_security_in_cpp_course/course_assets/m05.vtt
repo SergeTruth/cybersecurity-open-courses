@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Modern string security is not only about buffer safety.
+
+2
+00:00:04.520 --> 00:00:06.600
+Encoding determines what bytes mean.
+
+3
+00:00:06.700 --> 00:00:18.220
+If one component treats data as UTF-8, another treats it as a local code page, and another treats it as arbitrary bytes, comparisons and validation can become inconsistent.
+
+4
+00:00:18.500 --> 00:00:20.420
+Unicode adds another layer.
+
+5
+00:00:20.520 --> 00:00:25.320
+Text that appears similar to a person may have different underlying representations.
+
+6
+00:00:25.420 --> 00:00:29.340
+Some characters can be represented in composed or decomposed forms.
+
+7
+00:00:29.440 --> 00:00:33.200
+Some scripts contain characters that look alike but are not the same.
+
+8
+00:00:33.300 --> 00:00:40.820
+These facts matter when strings are used as identifiers, user names, file names, policy values, or security labels.
+
+9
+00:00:41.100 --> 00:00:47.340
+Normalization can make comparisons more predictable by converting text into a chosen canonical form.
+
+10
+00:00:47.440 --> 00:00:51.200
+That does not mean every string should always be normalized the same way.
+
+11
+00:00:51.300 --> 00:00:58.980
+It means the application should define which fields require canonical comparison and which form is expected before the comparison happens.
+
+12
+00:00:59.260 --> 00:01:02.300
+Case conversion and locale also need attention.
+
+13
+00:01:02.400 --> 00:01:08.400
+Rules that seem obvious in simple ASCII examples may not hold for all languages or platforms.
+
+14
+00:01:08.500 --> 00:01:15.780
+Security-sensitive comparison should avoid accidental dependence on the current process locale unless that is part of the design.
+
+15
+00:01:16.060 --> 00:01:27.340
+The practical guidance is to choose expected encodings, validate conversions, normalize before security-sensitive comparison where appropriate, and document the canonical form.
+
+16
+00:01:27.440 --> 00:01:31.200
+Avoid making security decisions on inconsistent representations.

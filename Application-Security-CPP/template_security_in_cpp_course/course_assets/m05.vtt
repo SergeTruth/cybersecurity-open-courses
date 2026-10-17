@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Template calls are often resolved at instantiation time, not when the generic code is first written.
+
+2
+00:00:05.400 --> 00:00:13.800
+Overload resolution, implicit conversions, and argument-dependent lookup can cause a template to call functions that are not obvious from the template body alone.
+
+3
+00:00:13.900 --> 00:00:18.220
+This flexibility enables generic libraries, but it can surprise reviewers.
+
+4
+00:00:18.500 --> 00:00:25.060
+A call that appears to use a standard operation may resolve to a user-defined operation for a particular type.
+
+5
+00:00:25.160 --> 00:00:30.600
+An unqualified function call may find candidates in namespaces associated with the argument types.
+
+6
+00:00:30.700 --> 00:00:36.780
+An implicit conversion may choose a path that changes cost, exception behavior, or semantics.
+
+7
+00:00:37.060 --> 00:00:40.260
+Defensive template design limits unnecessary ambiguity.
+
+8
+00:00:40.360 --> 00:00:43.720
+Qualify names when a specific operation is intended.
+
+9
+00:00:43.820 --> 00:00:47.740
+Document customization points when extension is intended.
+
+10
+00:00:47.840 --> 00:00:53.280
+Avoid relying on implicit conversions when they make security-sensitive behavior harder to understand.
+
+11
+00:00:53.560 --> 00:00:58.760
+Review should consider what code may actually run for important instantiations.
+
+12
+00:00:58.860 --> 00:01:05.580
+This is especially important for comparison, hashing, formatting, allocation, serialization, cleanup, and policy decisions.
+
+13
+00:01:05.680 --> 00:01:11.200
+The operation selected for one type may not preserve the assumptions tested with another type.
+
+14
+00:01:11.480 --> 00:01:14.040
+The goal is not to disable extensibility.
+
+15
+00:01:14.140 --> 00:01:16.940
+The goal is to make extensibility deliberate.
+
+16
+00:01:17.040 --> 00:01:24.160
+Generic APIs should make clear which operations can be customized and which operations are fixed by the library.
+
+17
+00:01:24.440 --> 00:01:31.240
+When behavior must be fixed, use qualified calls or helper functions that enforce the intended operation.
+
+18
+00:01:31.340 --> 00:01:38.860
+When behavior is intentionally customizable, name that extension point and test at least one custom implementation.

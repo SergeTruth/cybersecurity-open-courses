@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Templates can move complex work into compile time.
+
+2
+00:00:04.040 --> 00:00:12.920
+constexpr functions, recursive templates, type computation, generated overload sets, and metaprogramming can improve performance or expressiveness.
+
+3
+00:00:13.020 --> 00:00:19.500
+They can also create build-time cost, code bloat, difficult diagnostics, and hard-to-review behavior.
+
+4
+00:00:19.780 --> 00:00:25.620
+A design that creates many instantiations may increase binary size and make verification harder.
+
+5
+00:00:25.720 --> 00:00:32.200
+A template that expands through many layers can produce compiler errors that few engineers can interpret.
+
+6
+00:00:32.300 --> 00:00:39.820
+A clever metaprogram can hide a security decision from ordinary code review because the decision is encoded in type machinery rather than straightforward control flow.
+
+7
+00:00:40.100 --> 00:00:44.260
+Resource control is therefore part of defensive template design.
+
+8
+00:00:44.360 --> 00:00:53.400
+Teams should monitor build impact for template-heavy libraries, keep expansion patterns understandable, and avoid generating large families of code unless the value is clear.
+
+9
+00:00:53.500 --> 00:00:57.660
+Simpler generic designs are often safer because more engineers can review them.
+
+10
+00:00:57.940 --> 00:01:01.460
+Compile-time diagnostics should guide safe use.
+
+11
+00:01:01.560 --> 00:01:10.360
+If a template rejects a type, the error should point toward the violated contract rather than a maze of internal implementation details.
+
+12
+00:01:10.460 --> 00:01:15.580
+Clear diagnostics reduce pressure to make constraints looser just to silence compiler noise.
+
+13
+00:01:15.860 --> 00:01:23.220
+Use compile-time computation where it improves the design, but keep reviewability, build cost, and binary impact visible.
+
+14
+00:01:23.500 --> 00:01:26.540
+Build metrics can be useful governance signals.
+
+15
+00:01:26.640 --> 00:01:36.800
+A sudden increase in compile time, object size, or template depth may indicate that a generic design is becoming harder to maintain and verify.

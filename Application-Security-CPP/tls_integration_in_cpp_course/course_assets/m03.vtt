@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+TLS configuration should follow current project policy, compliance requirements, and approved library guidance.
+
+2
+00:00:07.000 --> 00:00:10.600
+This is not a place for universal hardcoded advice that never changes.
+
+3
+00:00:10.700 --> 00:00:23.980
+Protocol support, certificate requirements, trust sources, client and server modes, and error behavior should be expressed as policy owned by the project and reviewed as the environment changes.
+
+4
+00:00:24.260 --> 00:00:29.780
+A secure default is conservative and visible.
+
+5
+00:00:29.880 --> 00:00:34.040
+Obsolete or weak modes should not be enabled casually.
+
+6
+00:00:34.140 --> 00:00:41.100
+Missing configuration should fail safely rather than quietly creating a channel with weaker properties than the caller expects.
+
+7
+00:00:41.200 --> 00:00:52.320
+Startup validation can catch missing certificate files, unexpected trust store paths, disabled verification settings, or production deployments that still reference test-only configuration.
+
+8
+00:00:52.600 --> 00:00:56.440
+Development and test exceptions need sharp boundaries.
+
+9
+00:00:56.540 --> 00:01:06.140
+Test certificates, local trust stores, relaxed endpoints, or temporary diagnostics may be useful in controlled environments, but they should not silently reach production.
+
+10
+00:01:06.240 --> 00:01:14.320
+Separate configuration profiles, deployment checks, and clear naming reduce the chance that a convenience setting becomes a long-lived production risk.
+
+11
+00:01:14.600 --> 00:01:18.040
+Centralized configuration keeps these decisions reviewable.
+
+12
+00:01:18.140 --> 00:01:30.380
+The integration layer can define allowed protocol behavior, trust sources, certificate requirements, hostname verification expectations, mTLS requirements, logging rules, and safe error handling.
+
+13
+00:01:30.480 --> 00:01:39.920
+Good documentation should explain both the defaults and the process for changing them, because TLS policy is a product and operations decision as much as a code decision.
+
+14
+00:01:40.200 --> 00:01:42.680
+Configuration should also be observable.
+
+15
+00:01:42.780 --> 00:01:54.460
+When the application starts, operators should be able to confirm which policy profile is active and whether required validation checks are enabled, without exposing secrets or private certificate material.

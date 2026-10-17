@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Compile-Time Computation and Resource Control",
+  "graphicAlt": "Compile-time computation is evaluated for build cost, expansion, binary impact, useful diagnostics and reviewability.",
+  "narration": "Templates can move complex work into compile time. constexpr functions, recursive templates, type computation, generated overload sets, and metaprogramming can improve performance or expressiveness. They can also create build-time cost, code bloat, difficult diagnostics, and hard-to-review behavior.\n\nA design that creates many instantiations may increase binary size and make verification harder. A template that expands through many layers can produce compiler errors that few engineers can interpret. A clever metaprogram can hide a security decision from ordinary code review because the decision is encoded in type machinery rather than straightforward control flow.\n\nResource control is therefore part of defensive template design. Teams should monitor build impact for template-heavy libraries, keep expansion patterns understandable, and avoid generating large families of code unless the value is clear. Simpler generic designs are often safer because more engineers can review them.\n\nCompile-time diagnostics should guide safe use. If a template rejects a type, the error should point toward the violated contract rather than a maze of internal implementation details. Clear diagnostics reduce pressure to make constraints looser just to silence compiler noise.\n\nUse compile-time computation where it improves the design, but keep reviewability, build cost, and binary impact visible.\n\nBuild metrics can be useful governance signals. A sudden increase in compile time, object size, or template depth may indicate that a generic design is becoming harder to maintain and verify.",
+  "narrationPoints": [
+    "Templates can move complex work into compile time. constexpr functions, recursive templates, type computation, generated overload sets.",
+    "A design that creates many instantiations may increase binary size and make verification harder.",
+    "Resource control is therefore part of defensive template design.",
+    "If a template rejects a type, the error should point toward the violated contract rather than a maze of internal implementation details.",
+    "Use compile-time computation where it improves the design, but keep reviewability, build cost, and binary impact visible.",
+    "A sudden increase in compile time, object size, or template depth may indicate that a generic design is becoming harder to maintain and verify."
+  ]
+};

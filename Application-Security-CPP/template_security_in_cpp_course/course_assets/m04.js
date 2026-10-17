@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Perfect Forwarding, Lifetimes, and Ownership",
+  "graphicAlt": "Forwarded value categories still require explicit borrowing, storage and move contracts that preserve the owner's lifetime.",
+  "narration": "Perfect forwarding is useful because it preserves value category. A generic wrapper can pass lvalues as lvalues and rvalues as rvalues. That is powerful, but it preserves mechanics rather than design intent. The caller may not know whether the template will store, borrow, move from, or simply inspect the value.\n\nForwarding references can accidentally accept temporaries that do not live long enough for the template's later behavior. Generic code may store a reference, create a view, capture a callback, or pass an object into another layer that retains it. If lifetime is not documented, the API can look safe while carrying a dangling reference risk.\n\nOwnership should be visible in the API shape. A template that stores an object should say so and usually take ownership explicitly. A template that borrows only during the call should avoid storing borrowed state. A template that transfers ownership should make that transfer visible through the parameter type or documentation.\n\nLifetime-sensitive types deserve extra review: spans, string views, iterators, references, callbacks, coroutine handles, and non-owning wrappers. They are efficient and useful, but they depend on another object staying alive. Generic code can hide that dependency if it accepts everything through one broad forwarding path.\n\nMove behavior also needs intent. Moving from a parameter can be correct, but generic code should not surprise callers by consuming an object earlier than expected. Defensive templates make borrowing, storing, moving, and viewing part of the contract.\n\nTests should include temporary arguments, lvalue arguments, moved-from objects, and borrowed views when those cases are supported. Those tests document whether the template preserves, consumes, or only observes its inputs.",
+  "narrationPoints": [
+    "Perfect forwarding is useful because it preserves value category.",
+    "If lifetime is not documented, the API can look safe while carrying a dangling reference risk.",
+    "A template that stores an object should say so and usually take ownership explicitly.",
+    "Lifetime-sensitive types deserve extra review: spans, string views, iterators, references, callbacks, coroutine handles, and non-owning wrappers.",
+    "Moving from a parameter can be correct, but generic code should not surprise callers by consuming an object earlier than expected.",
+    "Tests should include temporary arguments, lvalue arguments, moved-from objects, and borrowed views when those cases are supported."
+  ]
+};

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Many string defects come from confusing concepts that sound similar.
+
+2
+00:00:05.160 --> 00:00:08.920
+Size is the current number of elements in a string.
+
+3
+00:00:09.020 --> 00:00:13.420
+Capacity is storage that may be available without reallocation.
+
+4
+00:00:13.520 --> 00:00:16.960
+A buffer length is the amount of memory available to write into.
+
+5
+00:00:17.060 --> 00:00:20.100
+A string length is the amount of meaningful data.
+
+6
+00:00:20.200 --> 00:00:23.960
+Those values may be related, but they are not interchangeable.
+
+7
+00:00:24.240 --> 00:00:27.440
+Byte count and character count can also differ.
+
+8
+00:00:27.540 --> 00:00:31.620
+In many encodings, one visible character may require multiple bytes.
+
+9
+00:00:31.720 --> 00:00:39.560
+A limit expressed in bytes may be appropriate for storage or protocol size, while a limit expressed in characters may be appropriate for display or policy.
+
+10
+00:00:39.660 --> 00:00:42.140
+Code should name which limit it is enforcing.
+
+11
+00:00:42.420 --> 00:00:44.660
+Null termination needs the same care.
+
+12
+00:00:44.760 --> 00:00:52.040
+A C API may require a null-terminated string, while a length-aware API may accept data with embedded null characters.
+
+13
+00:00:52.140 --> 00:00:59.500
+A null terminator can be missing, appear earlier than expected, or be irrelevant for binary data.
+
+14
+00:00:59.600 --> 00:01:03.680
+Defensive code does not assume that a terminator proves a buffer is safe or complete.
+
+15
+00:01:03.960 --> 00:01:08.920
+Bounds should be checked before indexing, copying, formatting, or converting.
+
+16
+00:01:09.020 --> 00:01:14.940
+Truncation should not happen silently unless it is an explicit and documented behavior.
+
+17
+00:01:15.040 --> 00:01:25.040
+If truncation is allowed, the code should make clear whether it preserves valid encoding, whether it changes security meaning, and whether the operator needs to know it occurred.
+
+18
+00:01:25.320 --> 00:01:31.240
+The practical rule is to carry length information alongside data and validate it before use.
+
+19
+00:01:31.340 --> 00:01:37.500
+Avoid APIs that require guessing how much data is present when a safer, length-aware option is available.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Legacy APIs and Interoperability",
+  "graphicAlt": "A narrow interoperability wrapper validates length, termination, encoding, lifetime and returned results at a legacy API boundary.",
+  "narration": "String risk often increases at boundaries with C libraries, operating system APIs, plugins, foreign function interfaces, older code, and platform-specific encodings. These boundaries may not share modern C++ assumptions about ownership, length, termination, mutability, or encoding.\n\nA legacy API may expect a null-terminated string. Another may expect a mutable caller-provided buffer and a length. Another may return a pointer that remains valid only until the next call. Wide string and narrow string conventions can differ by platform. The dangerous part is not the existence of these APIs; it is letting their conventions spread through the application without a clear boundary.\n\nWrappers can isolate these details. A small wrapper can validate lengths, handle conversion errors, define ownership, translate platform-specific return values, and expose safer application-level types. The rest of the code can then operate on clear C++ objects instead of pointer-only contracts.\n\nInterop code should be strict about failure. Conversion errors, truncation, missing terminators, and unexpected output lengths should be handled deliberately. If the application cannot represent the result safely, it should fail clearly rather than guessing.\n\nDefensive design also keeps review focused. When risky string conventions are concentrated at a boundary, engineers know where to look for length discipline, encoding rules, and lifetime assumptions.",
+  "narrationPoints": [
+    "String risk often increases at boundaries with C libraries, operating system APIs, plugins, foreign function interfaces, older code, and platform-specific encodings.",
+    "The dangerous part is not the existence of these APIs; it is letting their conventions spread through the application without a clear boundary.",
+    "A small wrapper can validate lengths, handle conversion errors, define ownership, translate platform-specific return values, and expose safer application-level types.",
+    "Conversion errors, truncation, missing terminators, and unexpected output lengths should be handled deliberately.",
+    "If the application cannot represent the result safely, it should fail clearly rather than guessing.",
+    "When risky string conventions are concentrated at a boundary, engineers know where to look for length discipline, encoding rules, and lifetime assumptions."
+  ]
+};

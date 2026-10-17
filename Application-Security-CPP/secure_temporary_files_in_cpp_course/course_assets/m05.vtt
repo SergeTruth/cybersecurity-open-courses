@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Temporary-file security is often about what a path means at the moment it is used.
+
+2
+00:00:05.640 --> 00:00:09.080
+A path string is not the same thing as an opened file.
+
+3
+00:00:09.180 --> 00:00:14.780
+Directory entries, links, permissions, and timing can affect what the string refers to.
+
+4
+00:00:15.060 --> 00:00:17.940
+Keep operations inside trusted directories.
+
+5
+00:00:18.040 --> 00:00:25.080
+Build paths from a controlled base directory and a validated filename component, not from arbitrary input.
+
+6
+00:00:25.180 --> 00:00:31.980
+If a value is path-like, treat it as structured input with a policy, not as a raw string to append.
+
+7
+00:00:32.260 --> 00:00:35.460
+Review symlink and hard-link behavior on the target platform.
+
+8
+00:00:35.560 --> 00:00:41.960
+Links can change how a path resolves, how ownership appears, and what object an operation affects.
+
+9
+00:00:42.060 --> 00:00:47.580
+Defensive code should use APIs and flags that match the project's link policy.
+
+10
+00:00:47.860 --> 00:00:51.380
+Avoid time-of-check/time-of-use assumptions.
+
+11
+00:00:51.480 --> 00:01:01.960
+If code checks a path, then later opens, deletes, changes permissions, or reads that same path, reviewers should ask what could change between those steps.
+
+12
+00:01:02.060 --> 00:01:07.020
+The safer design is often to create or open with the needed guarantees from the start.
+
+13
+00:01:07.300 --> 00:01:11.060
+Canonicalization can help, but only with a clear policy.
+
+14
+00:01:11.160 --> 00:01:20.200
+Decide which base directory is trusted, how relative components are handled, how links are treated, and whether comparisons happen before or after opening.
+
+15
+00:01:20.300 --> 00:01:23.260
+Different platforms may answer these questions differently.
+
+16
+00:01:23.540 --> 00:01:26.100
+Prefer handle-based decisions after open.
+
+17
+00:01:26.200 --> 00:01:31.560
+Once a file is safely opened, the handle carries stronger meaning than the path string alone.
+
+18
+00:01:31.660 --> 00:01:38.060
+Metadata checks, writes, reads, and cleanup policies should be tied to the opened object whenever practical.
+
+19
+00:01:38.340 --> 00:01:40.900
+Keep this review defensive and design-focused.
+
+20
+00:01:41.000 --> 00:01:44.200
+The goal is not to memorize every filesystem trick.
+
+21
+00:01:44.300 --> 00:01:51.500
+The goal is to avoid security decisions that depend on a path string remaining stable in an uncontrolled location.
+
+22
+00:01:51.780 --> 00:01:55.060
+Code review should pay attention to follow-up operations.
+
+23
+00:01:55.160 --> 00:02:06.920
+Changing permissions, reopening by name, renaming, deleting, or handing a path to another component can reintroduce path assumptions after safe creation has already happened.

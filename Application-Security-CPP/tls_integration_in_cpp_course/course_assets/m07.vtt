@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Private keys and related secrets are among the most sensitive parts of TLS integration.
+
+2
+00:00:05.320 --> 00:00:09.000
+Certificate files may be public, but private keys are not.
+
+3
+00:00:09.100 --> 00:00:20.220
+Key files, passphrases, hardware-backed keys, service account identities, certificate bundles, and deployment secrets need careful handling from development through production operations.
+
+4
+00:00:20.500 --> 00:00:25.540
+Access should be restricted to the process and operators that genuinely need it.
+
+5
+00:00:25.640 --> 00:00:34.440
+File permissions, secret storage, container mounts, service identities, and backup behavior should be reviewed as part of deployment.
+
+6
+00:00:34.540 --> 00:00:43.900
+A key that is protected in source control but exposed through logs, command-line arguments, crash reports, or support bundles is still exposed.
+
+7
+00:00:44.180 --> 00:00:47.380
+Secret handling needs logging discipline.
+
+8
+00:00:47.480 --> 00:00:57.560
+TLS configuration errors can be frustrating, but diagnostics should not print private keys, passphrases, tokens, credentials, or sensitive payloads.
+
+9
+00:00:57.660 --> 00:01:09.020
+Logs should identify the class of problem and relevant safe metadata, such as a missing file path or certificate expiration category, without copying secret material into durable storage.
+
+10
+00:01:09.300 --> 00:01:13.220
+Rotation and revocation should be planned before an emergency forces the issue.
+
+11
+00:01:13.320 --> 00:01:21.320
+Teams should know how certificates and keys are delivered, how new material is deployed, how old material is retired, and how services behave during rollover.
+
+12
+00:01:21.420 --> 00:01:26.460
+Documentation and tests make the process repeatable when time pressure is high.
+
+13
+00:01:26.740 --> 00:01:29.460
+Secret handling is also a supply-chain concern.
+
+14
+00:01:29.560 --> 00:01:41.480
+Build systems, deployment pipelines, support tooling, and observability platforms may all touch TLS material indirectly, so their access patterns should be reviewed along with application code.

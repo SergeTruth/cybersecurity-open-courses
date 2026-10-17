@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+String-heavy code needs tests around boundaries and unusual cases.
+
+2
+00:00:05.160 --> 00:00:07.000
+Typical examples are not enough.
+
+3
+00:00:07.100 --> 00:00:24.620
+Include empty strings, very long strings, maximum allowed length, embedded nulls, invalid encodings, unusual Unicode forms, leading and trailing whitespace, case differences, path-like values, malformed serialized data, and sensitive value redaction.
+
+4
+00:00:24.900 --> 00:00:28.820
+Tests should verify both acceptance and rejection.
+
+5
+00:00:28.920 --> 00:00:33.160
+If a parser rejects malformed input, test the failure path.
+
+6
+00:00:33.260 --> 00:00:38.140
+If logging redacts a token, test that the token does not appear in the emitted event.
+
+7
+00:00:38.240 --> 00:00:44.880
+If a validation rule depends on canonical form, test the canonicalization step and the comparison that follows.
+
+8
+00:00:45.160 --> 00:00:48.360
+Diagnostics help catch issues earlier.
+
+9
+00:00:48.460 --> 00:00:56.300
+Compiler warnings and static analysis can reveal unsafe conversions, suspicious casts, or lifetime problems.
+
+10
+00:00:56.400 --> 00:00:59.920
+Sanitizers can reveal related memory errors.
+
+11
+00:01:00.020 --> 00:01:04.980
+Runtime assertions can document assumptions near string boundaries during development builds.
+
+12
+00:01:05.080 --> 00:01:09.960
+No single tool is enough, but layered diagnostics make defects easier to find.
+
+13
+00:01:10.240 --> 00:01:23.520
+Code review should ask practical questions: where did the string come from, who owns it, how long does it live, which encoding is expected, how is length validated, where is it logged, and what output context does it enter?
+
+14
+00:01:23.620 --> 00:01:29.140
+Those questions turn string security from a vague concern into a concrete review checklist.
+
+15
+00:01:29.420 --> 00:01:34.300
+When a defect is found, add a regression test that captures the boundary condition.
+
+16
+00:01:34.400 --> 00:01:39.360
+String bugs often repeat because teams fix one symptom without documenting the assumption that failed.

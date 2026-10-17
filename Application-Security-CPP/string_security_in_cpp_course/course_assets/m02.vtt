@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+C++ code often contains several string representations at once.
+
+2
+00:00:04.600 --> 00:00:08.280
+C strings are character sequences that end with a null terminator.
+
+3
+00:00:08.380 --> 00:00:13.420
+Many older C libraries and operating system APIs depend on that convention.
+
+4
+00:00:13.520 --> 00:00:21.280
+The convention is simple, but it relies on the terminator being present at the right place and on the receiving API understanding the buffer correctly.
+
+5
+00:00:21.560 --> 00:00:25.800
+std::string owns its data and tracks its size.
+
+6
+00:00:25.900 --> 00:00:34.380
+That ownership usually makes application code easier to reason about because the string object is responsible for storage, copying, moving, and lifetime.
+
+7
+00:00:34.480 --> 00:00:42.880
+It can contain embedded null characters, so code should not assume that the first null byte is necessarily the logical end when using modern C++ string objects.
+
+8
+00:00:43.160 --> 00:00:46.280
+std::string_view is different.
+
+9
+00:00:46.380 --> 00:00:49.580
+It observes existing character data without owning it.
+
+10
+00:00:49.680 --> 00:00:54.880
+That makes it efficient for function parameters and parsing windows, but it does not keep the referenced data alive.
+
+11
+00:00:54.980 --> 00:01:03.060
+A view into a temporary, a local variable that has gone out of scope, or a buffer that has been modified can become misleading or unsafe.
+
+12
+00:01:03.340 --> 00:01:06.380
+API signatures should communicate intent.
+
+13
+00:01:06.480 --> 00:01:09.760
+Use owning strings when a function must keep data.
+
+14
+00:01:09.860 --> 00:01:14.340
+Use references or views for short borrowed access when lifetime is clear.
+
+15
+00:01:14.440 --> 00:01:18.840
+Avoid storing string views unless the owner is obvious and stable.
+
+16
+00:01:18.940 --> 00:01:25.420
+Avoid converting short-lived data into long-lived views because the type does not enforce the lifetime for you.
+
+17
+00:01:25.700 --> 00:01:34.820
+Good string design is less about choosing one type everywhere and more about matching the representation to ownership, lifetime, mutability, and API boundaries.

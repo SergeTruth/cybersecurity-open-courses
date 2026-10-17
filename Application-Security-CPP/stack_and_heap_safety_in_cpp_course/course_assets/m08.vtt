@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Tools and workflow support stack and heap safety, but they do not replace clear design.
+
+2
+00:00:05.800 --> 00:00:12.280
+Compiler warnings can catch suspicious conversions, lifetime issues, and unsafe patterns before they spread.
+
+3
+00:00:12.380 --> 00:00:19.740
+Warning policies should be practical enough that developers trust the signal and strict enough that new warnings are investigated.
+
+4
+00:00:20.020 --> 00:00:22.660
+Runtime tools add another layer.
+
+5
+00:00:22.760 --> 00:00:30.840
+AddressSanitizer can expose out-of-bounds access, use-after-free, and related memory problems during instrumented execution.
+
+6
+00:00:30.940 --> 00:00:35.980
+UndefinedBehaviorSanitizer can reveal assumptions that violate C++ rules.
+
+7
+00:00:36.080 --> 00:00:41.600
+Static analysis can help find ownership, bounds, and cleanup patterns that deserve review.
+
+8
+00:00:41.700 --> 00:00:48.580
+These tools are most useful when they run in local development and CI with tests that exercise meaningful paths.
+
+9
+00:00:48.860 --> 00:00:53.980
+Testing should include boundary and lifetime behavior, not only ordinary success cases.
+
+10
+00:00:54.080 --> 00:01:04.720
+Test empty input, maximum sizes, invalid sizes, container modification, moved objects, teardown, and error paths.
+
+11
+00:01:04.820 --> 00:01:11.860
+Regression tests for memory fixes are important because many memory bugs return through nearby interfaces or future refactors.
+
+12
+00:01:12.140 --> 00:01:14.540
+Code review ties the evidence together.
+
+13
+00:01:14.640 --> 00:01:28.000
+Ask who owns each heap object, whether stack access escapes scope, whether cleanup is automatic, whether sizes are validated, whether iterators remain valid after mutation, and whether long-lived references are necessary.
+
+14
+00:01:28.100 --> 00:01:33.380
+A tool may point to a symptom, but review should trace the defect back to design decisions.
+
+15
+00:01:33.480 --> 00:01:37.720
+Safer stack and heap code is a team practice, not a single tool setting.
+
+16
+00:01:38.000 --> 00:01:40.240
+CI should make the practice repeatable.
+
+17
+00:01:40.340 --> 00:01:49.140
+Sanitizer jobs, static analysis runs, and focused boundary tests should be easy to reproduce locally and clear enough that failures are actionable.
+
+18
+00:01:49.240 --> 00:02:01.000
+When a tool reports a defect, track it like engineering work: reproduce it, identify the root cause, fix the unsafe assumption, and remove any temporary suppression once the underlying issue is resolved.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+A temporary file should be created with permissions appropriate for its contents.
+
+2
+00:00:04.840 --> 00:00:14.760
+If the file contains intermediate data, reports, parsed records, or operational details, the default should be restrictive access rather than broad readability.
+
+3
+00:00:15.040 --> 00:00:17.760
+Ownership expectations should be explicit.
+
+4
+00:00:17.860 --> 00:00:25.940
+A per-user tool, a service account, a privileged helper, and a container process may all create files under different identities.
+
+5
+00:00:26.040 --> 00:00:31.960
+Review who owns the directory, who owns the file, and which other processes can read or modify it.
+
+6
+00:00:32.240 --> 00:00:33.920
+Inherited permissions matter.
+
+7
+00:00:34.020 --> 00:00:42.100
+On some systems, process settings, directory defaults, or platform-specific inheritance can affect the final access mode.
+
+8
+00:00:42.200 --> 00:00:47.880
+A secure design does not assume that a developer workstation default will match production behavior.
+
+9
+00:00:48.160 --> 00:00:51.520
+Minimize sensitive data before it reaches disk.
+
+10
+00:00:51.620 --> 00:00:59.060
+Avoid writing secrets, tokens, raw personal data, large contents, and unnecessary diagnostics into temporary files.
+
+11
+00:00:59.160 --> 00:01:06.120
+If sensitive material is unavoidable, the decision should be driven by policy and reviewed as part of the system design.
+
+12
+00:01:06.400 --> 00:01:08.960
+Temporary secrets are still secrets.
+
+13
+00:01:09.060 --> 00:01:17.540
+A value written for only a few milliseconds may be captured by backups, crash dumps, endpoint tools, debug bundles, or support scripts.
+
+14
+00:01:17.640 --> 00:01:24.920
+If the system can stream, keep data in memory, or write a less sensitive representation, consider that design first.
+
+15
+00:01:25.200 --> 00:01:32.240
+Encryption or alternative storage may be required in some environments, but it should not be treated as a universal cleanup substitute.
+
+16
+00:01:32.340 --> 00:01:37.860
+Permissions, lifetime, access control, and deletion behavior still need review.
+
+17
+00:01:38.140 --> 00:01:50.620
+A practical review asks: what data is written, who can read it, how long it remains, what defaults affect access, and whether the same operational goal could be achieved with less sensitive content.
+
+18
+00:01:50.900 --> 00:01:53.700
+Developers should also consider derived data.
+
+19
+00:01:53.800 --> 00:02:03.560
+A report fragment, transformed record, or extracted archive member may still reveal sensitive facts even if it is not a direct copy of the original input.
+
+20
+00:02:03.660 --> 00:02:06.460
+Minimize and classify those contents too.

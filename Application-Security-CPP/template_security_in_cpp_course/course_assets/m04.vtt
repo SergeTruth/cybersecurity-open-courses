@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Perfect forwarding is useful because it preserves value category.
+
+2
+00:00:05.320 --> 00:00:10.280
+A generic wrapper can pass lvalues as lvalues and rvalues as rvalues.
+
+3
+00:00:10.380 --> 00:00:15.260
+That is powerful, but it preserves mechanics rather than design intent.
+
+4
+00:00:15.360 --> 00:00:21.760
+The caller may not know whether the template will store, borrow, move from, or simply inspect the value.
+
+5
+00:00:22.040 --> 00:00:27.960
+Forwarding references can accidentally accept temporaries that do not live long enough for the template's later behavior.
+
+6
+00:00:28.060 --> 00:00:36.700
+Generic code may store a reference, create a view, capture a callback, or pass an object into another layer that retains it.
+
+7
+00:00:36.800 --> 00:00:43.120
+If lifetime is not documented, the API can look safe while carrying a dangling reference risk.
+
+8
+00:00:43.400 --> 00:00:45.640
+Ownership should be visible in the API shape.
+
+9
+00:00:45.740 --> 00:00:50.700
+A template that stores an object should say so and usually take ownership explicitly.
+
+10
+00:00:50.800 --> 00:00:55.680
+A template that borrows only during the call should avoid storing borrowed state.
+
+11
+00:00:55.780 --> 00:01:03.620
+A template that transfers ownership should make that transfer visible through the parameter type or documentation.
+
+12
+00:01:03.900 --> 00:01:14.940
+Lifetime-sensitive types deserve extra review: spans, string views, iterators, references, callbacks, coroutine handles, and non-owning wrappers.
+
+13
+00:01:15.040 --> 00:01:19.920
+They are efficient and useful, but they depend on another object staying alive.
+
+14
+00:01:20.020 --> 00:01:24.980
+Generic code can hide that dependency if it accepts everything through one broad forwarding path.
+
+15
+00:01:25.260 --> 00:01:28.460
+Move behavior also needs intent.
+
+16
+00:01:28.560 --> 00:01:35.120
+Moving from a parameter can be correct, but generic code should not surprise callers by consuming an object earlier than expected.
+
+17
+00:01:35.220 --> 00:01:39.700
+Defensive templates make borrowing, storing, moving, and viewing part of the contract.
+
+18
+00:01:39.980 --> 00:01:47.500
+Tests should include temporary arguments, lvalue arguments, moved-from objects, and borrowed views when those cases are supported.
+
+19
+00:01:47.600 --> 00:01:54.160
+Those tests document whether the template preserves, consumes, or only observes its inputs.

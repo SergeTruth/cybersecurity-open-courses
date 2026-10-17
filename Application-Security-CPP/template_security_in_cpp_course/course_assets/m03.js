@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Concepts, Constraints, and Compile-Time Guards",
+  "graphicAlt": "Meaningful constraints and static guards restrict intended instantiations and explain rejected use before implementation instantiation.",
+  "narration": "Concepts, constraints, and compile-time guards help turn implicit assumptions into visible rules. A constrained template tells callers what kinds of types are intended before the compiler tries to instantiate a large body of code. That makes the API easier to understand and makes misuse easier to diagnose.\n\nGood constraints are meaningful and specific. A broad template that accepts almost anything may look flexible, but it is harder to review and easier to misuse. A concept that states the required operations, value category expectations, or iterator category gives reviewers a clearer model of the intended behavior.\n\nstatic_assert can enforce important assumptions that are not naturally captured by a simple expression requirement. A template might require a type to be nothrow movable, explicitly allowed by policy, or safe for a particular storage model. When a guard fails, the diagnostic should explain what the caller needs to change.\n\nCompile-time checks should not become decorative noise. They should protect invariants that matter. A guard that simply repeats what the compiler would already report may not help. A guard that explains the security-relevant contract can save time and prevent accidental broad use.\n\nThe result is a safer failure mode. Instead of compiling a surprising instantiation and discovering a defect later, the code rejects unintended use early with a message connected to the template's design.\n\nWell-designed constraints also reduce review burden. Reviewers can focus on whether the constraint matches the design rather than guessing from every operation buried inside the implementation.",
+  "narrationPoints": [
+    "A constrained template tells callers what kinds of types are intended before the compiler tries to instantiate a large body of code.",
+    "A broad template that accepts almost anything may look flexible, but it is harder to review and easier to misuse.",
+    "A template might require a type to be nothrow movable, explicitly allowed by policy, or safe for a particular storage model.",
+    "A guard that explains the security-relevant contract can save time and prevent accidental broad use.",
+    "Instead of compiling a surprising instantiation and discovering a defect later, the code rejects unintended use early with a message connected to the template's design.",
+    "Reviewers can focus on whether the constraint matches the design rather than guessing from every operation buried inside the implementation."
+  ]
+};

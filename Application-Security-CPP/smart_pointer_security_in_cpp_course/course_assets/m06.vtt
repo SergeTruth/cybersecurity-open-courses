@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+API signatures should communicate ownership expectations.
+
+2
+00:00:04.600 --> 00:00:10.200
+When a function takes ownership, accepting std::unique_ptr by value makes the handoff visible.
+
+3
+00:00:10.300 --> 00:00:16.380
+When a function creates an owned object for the caller, returning std::unique_ptr makes the new owner clear.
+
+4
+00:00:16.480 --> 00:00:24.720
+When a function must retain shared ownership beyond the call, accepting or storing std::shared_ptr can be appropriate.
+
+5
+00:00:25.000 --> 00:00:28.440
+Not every function that uses an object should receive a smart pointer.
+
+6
+00:00:28.540 --> 00:00:37.340
+If the callee only needs temporary access, a reference or raw pointer can be clearer because it says the function is borrowing, not owning.
+
+7
+00:00:37.440 --> 00:00:41.520
+A reference is useful for required non-null access.
+
+8
+00:00:41.620 --> 00:00:46.340
+A raw pointer can express optional borrowed access when null has meaning.
+
+9
+00:00:46.440 --> 00:00:53.720
+The important point is that borrowed access should not be stored unless the API explicitly promises that the owner outlives the stored use.
+
+10
+00:00:54.000 --> 00:00:57.600
+Passing smart pointers everywhere can blur responsibility.
+
+11
+00:00:57.700 --> 00:01:03.140
+A function that takes shared_ptr may imply retention even when it only reads the object briefly.
+
+12
+00:01:03.240 --> 00:01:11.000
+A function that takes unique_ptr by reference may make reviewers wonder whether ownership is being transferred.
+
+13
+00:01:11.100 --> 00:01:16.780
+Good interfaces avoid that confusion by matching parameter type to lifetime intent.
+
+14
+00:01:17.060 --> 00:01:20.340
+Design APIs for the caller and the reviewer.
+
+15
+00:01:20.440 --> 00:01:22.840
+Name ownership-taking functions clearly.
+
+16
+00:01:22.940 --> 00:01:25.340
+Document whether access may be retained.
+
+17
+00:01:25.440 --> 00:01:27.920
+Keep nullable values explicit.
+
+18
+00:01:28.020 --> 00:01:34.500
+Prefer small boundaries where raw legacy conventions are converted into RAII or smart pointer ownership.
+
+19
+00:01:34.600 --> 00:01:40.920
+A clear API makes misuse harder and reduces the amount of lifetime reasoning hidden in implementation details.

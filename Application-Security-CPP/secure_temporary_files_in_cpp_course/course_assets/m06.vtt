@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+RAII is the preferred C++ model for temporary-file cleanup.
+
+2
+00:00:05.160 --> 00:00:11.560
+A wrapper object can own the file handle, remember the cleanup policy, and remove the file when the owner leaves scope.
+
+3
+00:00:11.660 --> 00:00:17.340
+That approach is more reliable than asking every caller to remember a manual delete.
+
+4
+00:00:17.620 --> 00:00:22.420
+Scoped handles help with normal returns, early returns, and exceptions.
+
+5
+00:00:22.520 --> 00:00:30.520
+If a function fails halfway through writing a temporary file, destructors can still close handles and remove partial artifacts according to the wrapper's policy.
+
+6
+00:00:30.800 --> 00:00:32.960
+Ownership should be move-only when appropriate.
+
+7
+00:00:33.060 --> 00:00:37.220
+A temporary file usually has one cleanup owner.
+
+8
+00:00:37.320 --> 00:00:45.080
+If ownership can move from a helper to a caller, that transfer should be visible in the type and should leave exactly one object responsible for cleanup.
+
+9
+00:00:45.360 --> 00:00:48.080
+Deletion timing must be explicit.
+
+10
+00:00:48.180 --> 00:00:54.180
+Some designs can remove the directory entry immediately after opening while continuing to use the handle.
+
+11
+00:00:54.280 --> 00:00:57.960
+Other designs need a named file so another component can read it.
+
+12
+00:00:58.060 --> 00:01:02.300
+Those choices affect review, portability, and cleanup behavior.
+
+13
+00:01:02.580 --> 00:01:04.900
+Cleanup should be exception-safe.
+
+14
+00:01:05.000 --> 00:01:10.200
+Destructors should not throw, and cleanup failures should be handled according to project policy.
+
+15
+00:01:10.300 --> 00:01:17.500
+If cleanup failure must be reported, consider an explicit close, commit, or finalize operation before destruction.
+
+16
+00:01:17.780 --> 00:01:19.700
+Avoid scattered cleanup branches.
+
+17
+00:01:19.800 --> 00:01:27.240
+Manual cleanup across success, error, cancellation, and shutdown paths is easy to miss during maintenance.
+
+18
+00:01:27.340 --> 00:01:33.500
+A small, well-reviewed RAII wrapper makes the lifetime and deletion rule much easier to inspect.
+
+19
+00:01:33.780 --> 00:01:38.020
+The wrapper should also make intentional persistence visible.
+
+20
+00:01:38.120 --> 00:01:50.520
+If a temporary file becomes an output artifact, a handoff to another component, or evidence for diagnostics, that change should be represented by an explicit release or commit operation.
+
+21
+00:01:50.800 --> 00:01:52.480
+Clear naming helps review.
+
+22
+00:01:52.580 --> 00:02:02.500
+A type named temporary_file_owner or scoped_temp_directory communicates responsibility better than a bare path string passed through several layers of code.

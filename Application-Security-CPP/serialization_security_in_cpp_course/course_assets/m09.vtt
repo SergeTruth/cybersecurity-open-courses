@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Serialization code needs tests that go beyond well-formed examples.
+
+2
+00:00:05.160 --> 00:00:22.040
+Useful tests include missing fields, unknown fields, duplicated fields, invalid types, boundary lengths, maximum sizes, empty values, nested data, truncated data, extra data, incompatible versions, invalid encoding, and failed integrity checks.
+
+3
+00:00:22.140 --> 00:00:27.260
+These cases show whether the parser fails safely or accepts data it should reject.
+
+4
+00:00:27.540 --> 00:00:30.980
+Compatibility tests protect format evolution.
+
+5
+00:00:31.080 --> 00:00:37.960
+If the product promises that old data can be read by new code, that promise should be exercised with real baseline examples.
+
+6
+00:00:38.060 --> 00:00:42.620
+If new data must fail safely in old readers, that behavior should be intentional.
+
+7
+00:00:42.720 --> 00:00:49.280
+Compatibility tests turn a vague support statement into evidence that reviewers can inspect.
+
+8
+00:00:49.560 --> 00:00:59.640
+Defensive fuzzing can help reveal parser crashes, hangs, memory errors, excessive resource use, and unexpected acceptance of malformed inputs.
+
+9
+00:00:59.740 --> 00:01:11.340
+The important point is safe engineering practice: run fuzzing in controlled test environments, track findings as defects, and connect results back to parser limits and validation rules.
+
+10
+00:01:11.440 --> 00:01:15.120
+Fuzzing complements design review; it does not replace it.
+
+11
+00:01:15.400 --> 00:01:18.840
+Logs should not expose sensitive serialized data.
+
+12
+00:01:18.940 --> 00:01:27.660
+Code review should check trust boundaries, size limits, version rules, object construction, cryptographic assumptions, redaction, and failure behavior.
+
+13
+00:01:27.760 --> 00:01:38.080
+A good review asks what happens when the input is old, partial, oversized, inconsistent, or validly structured but not authorized for the requested operation.
+
+14
+00:01:38.360 --> 00:01:42.440
+Findings from tests and fuzzing should feed back into the format contract.
+
+15
+00:01:42.540 --> 00:01:51.260
+If a malformed case surprises the parser, document the expected behavior, add a regression test, and decide whether the schema or limits need to be clearer.

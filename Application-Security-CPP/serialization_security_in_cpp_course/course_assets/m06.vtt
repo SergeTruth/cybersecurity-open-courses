@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Deserialization should create valid domain objects, not arbitrary runtime objects.
+
+2
+00:00:05.720 --> 00:00:15.880
+C++ object layout, pointers, references, vtables, padding, allocator state, and process addresses are implementation details.
+
+3
+00:00:15.980 --> 00:00:19.980
+They should not be treated as portable serialized form or trusted input.
+
+4
+00:00:20.080 --> 00:00:24.560
+A safe serialized representation describes data meaning, not raw memory.
+
+5
+00:00:24.840 --> 00:00:31.560
+Type selection should be constrained through explicit schemas, known variants, or carefully reviewed allowlists.
+
+6
+00:00:31.660 --> 00:00:39.100
+The input should not be able to select arbitrary classes, callbacks, function pointers, resource owners, or construction paths.
+
+7
+00:00:39.200 --> 00:00:46.640
+If a format supports variants, the parser should map each variant to a small set of supported domain types with clear validation for each case.
+
+8
+00:00:46.920 --> 00:00:49.240
+Constructors and invariants still matter.
+
+9
+00:00:49.340 --> 00:00:57.580
+If an object normally requires validation before it can exist, deserialization should not create it in an invalid state and then hope later code repairs it.
+
+10
+00:00:57.680 --> 00:01:01.120
+Ownership and lifetime must also be rebuilt safely.
+
+11
+00:01:01.220 --> 00:01:09.860
+Pointers in input should become validated references, identifiers, or relationships according to application rules, not copied process addresses.
+
+12
+00:01:10.140 --> 00:01:14.700
+The goal is predictable reconstruction into safe, validated types.
+
+13
+00:01:14.800 --> 00:01:20.160
+The parser and validator should produce values that the domain layer can trust because checks have already happened.
+
+14
+00:01:20.260 --> 00:01:28.340
+When object construction is explicit and narrow, code review can focus on whether each serialized field is allowed to influence each runtime property.
+
+15
+00:01:28.620 --> 00:01:31.580
+This separation also improves testing.
+
+16
+00:01:31.680 --> 00:01:45.600
+Tests can assert that invalid variants are rejected before construction, that constructors still enforce invariants, and that ownership rules are rebuilt from validated identifiers rather than copied directly from the input.

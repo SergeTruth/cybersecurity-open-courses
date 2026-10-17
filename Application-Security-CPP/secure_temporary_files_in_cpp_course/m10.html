@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Secure Temporary Files in C++</title>
+  <link rel="stylesheet" href="base.css?v=11">
+</head>
+<body data-course-id="secure_temporary_files_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;: &quot;B&quot;, &quot;q02&quot;: &quot;C&quot;, &quot;q03&quot;: &quot;A&quot;, &quot;q04&quot;: &quot;D&quot;, &quot;q05&quot;: &quot;D&quot;, &quot;q06&quot;: &quot;C&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;B&quot;, &quot;q09&quot;: &quot;B&quot;, &quot;q10&quot;: &quot;A&quot;}'
+        >
+          <fieldset class="quiz-question">
+            <legend>1. Why are temporary files security-sensitive?</legend>
+            <label><input type="radio" name="q01" value="A" required> Temporary data exists only in memory unless an application explicitly publishes the path.</label>
+            <label><input type="radio" name="q01" value="B"> A temporary file often contains sensitive data exposed through naming, permissions, cleanup, or paths.</label>
+            <label><input type="radio" name="q01" value="C"> The operating system deletes temporary files before a competing process can observe them.</label>
+            <label><input type="radio" name="q01" value="D"> Temporary-file naming and permissions affect convenience but do not determine sensitive-data exposure.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>2. What is a safer temporary location choice?</legend>
+            <label><input type="radio" name="q02" value="A" required> A shared writable directory is acceptable when generated filenames use a restricted character set.</label>
+            <label><input type="radio" name="q02" value="B"> A fixed shared temporary directory is acceptable when cleanup runs after each job.</label>
+            <label><input type="radio" name="q02" value="C"> A trusted per-user or application-private temporary directory with appropriate permissions.</label>
+            <label><input type="radio" name="q02" value="D"> Directory-name brevity is a practical signal that the location is platform managed.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>3. Why are predictable temporary filenames risky?</legend>
+            <label><input type="radio" name="q03" value="A" required> Predictable names make file creation easier to collide with or redirect.</label>
+            <label><input type="radio" name="q03" value="B"> Predictable names improve cleanup and do not affect exclusive creation behavior.</label>
+            <label><input type="radio" name="q03" value="C"> Restrictive file permissions prevent another process from claiming the path first.</label>
+            <label><input type="radio" name="q03" value="D"> A random suffix proves the resulting file object belongs to the creating process.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>4. What does atomic exclusive creation help prevent?</legend>
+            <label><input type="radio" name="q04" value="A" required> Checking path absence immediately before creation closes the relevant filesystem race.</label>
+            <label><input type="radio" name="q04" value="B"> Exclusive creation avoids the need to validate the containing directory and links.</label>
+            <label><input type="radio" name="q04" value="C"> Atomic creation protects logging and permission decisions made after the file opens.</label>
+            <label><input type="radio" name="q04" value="D"> A gap between checking a path and creating or opening the file.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>5. Which data-minimization habit is safest?</legend>
+            <label><input type="radio" name="q05" value="A" required> Temporary storage is appropriate for complete tokens when debugging requires later replay.</label>
+            <label><input type="radio" name="q05" value="B"> Deleting sensitive content during normal shutdown achieves adequate data minimization.</label>
+            <label><input type="radio" name="q05" value="C"> Raw personal data may be staged when the temporary directory includes a recognizable name.</label>
+            <label><input type="radio" name="q05" value="D"> Avoid writing secrets or unnecessary sensitive contents to temporary files.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>6. Why are path strings not enough as a security authority?</legend>
+            <label><input type="radio" name="q06" value="A" required> A resolved path string continues naming the same file object prior to the handle closes.</label>
+            <label><input type="radio" name="q06" value="B"> Ownership can be established from the path syntax without opening the destination object.</label>
+            <label><input type="radio" name="q06" value="C"> The meaning of a path can be affected by directory state, links, permissions, and timing.</label>
+            <label><input type="radio" name="q06" value="D"> Directory links affect lookup performance but preserve the caller’s intended authority.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>7. How does RAII support temporary-file safety?</legend>
+            <label><input type="radio" name="q07" value="A" required> RAII ties handle cleanup and file removal policy to object lifetime.</label>
+            <label><input type="radio" name="q07" value="B"> RAII prevents disk-write errors once the temporary handle includes an owning object.</label>
+            <label><input type="radio" name="q07" value="C"> A scoped wrapper should expose the temporary file globally so cleanup can be centralized.</label>
+            <label><input type="radio" name="q07" value="D"> Exception suppression in destructors supplies complete publication and durability guarantees.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>8. What should temporary-file failure handling preserve?</legend>
+            <label><input type="radio" name="q08" value="A" required> Recovery logic should retain partial files to maximize assurance for future retries.</label>
+            <label><input type="radio" name="q08" value="B"> Predictable state, cleanup of partial work where appropriate, and safe diagnostics.</label>
+            <label><input type="radio" name="q08" value="C"> User-facing errors may include temporary contents when the operation does not commit.</label>
+            <label><input type="radio" name="q08" value="D"> Returning a Boolean status accurately distinguishes a precommit rejection from uncertain durability.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>9. Why does cross-platform review matter for temporary files?</legend>
+            <label><input type="radio" name="q09" value="A" required> Standard filesystem APIs provide identical creation and deletion guarantees on supported systems.</label>
+            <label><input type="radio" name="q09" value="B"> File creation, permissions, deletion behavior, and path semantics can vary by platform.</label>
+            <label><input type="radio" name="q09" value="C"> Platform differences influence portability but do not change the temporary-file security model.</label>
+            <label><input type="radio" name="q09" value="D"> A filesystem path abstraction displaces the need to review native permission and link behavior.</label>
+          </fieldset>
+<fieldset class="quiz-question">
+            <legend>10. Which review question best supports secure temporary-file handling?</legend>
+            <label><input type="radio" name="q10" value="A" required> Is the file created atomically in a trusted location with restrictive permissions and reliable cleanup?.</label>
+            <label><input type="radio" name="q10" value="B"> A difficult-to-guess filename contains the main security property for temporary storage.</label>
+            <label><input type="radio" name="q10" value="C"> Cleanup may be delegated to whichever caller last accesses the temporary path.</label>
+            <label><input type="radio" name="q10" value="D"> Restrictive permissions compensate for nonexclusive creation in a shared directory.</label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+          <p id="quiz-result" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=9"></script>
+  <script src="quiz-engine.js"></script>
+  <script src="course_assets/course.js"></script>
+  <script src="course_assets/modules.js"></script>
+  <script src="course_assets/m10.js"></script>
+  <script src="navigation.js"></script>
+  <script src="base.js?v=9"></script>
+</body>
+</html>

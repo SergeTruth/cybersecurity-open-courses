@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.660
+std::shared_ptr makes reference-count ownership operations safe to use across threads, but that does not make the pointed-to object itself safe for concurrent access.
+
+2
+00:00:10.760 --> 00:00:22.280
+The control block can manage lifetime while the object still needs synchronization, immutability, thread confinement, message passing, or another concurrency strategy.
+
+3
+00:00:22.380 --> 00:00:27.420
+Lifetime safety and data-race safety are related, but they are not the same guarantee.
+
+4
+00:00:27.700 --> 00:00:33.780
+Capturing smart pointers in threads, tasks, callbacks, and asynchronous continuations is common.
+
+5
+00:00:33.880 --> 00:00:39.000
+Capturing a shared_ptr can intentionally keep an object alive until work finishes.
+
+6
+00:00:39.100 --> 00:00:43.180
+That can be the right design when the work requires the object to exist.
+
+7
+00:00:43.280 --> 00:00:51.600
+It can also delay cleanup, retain sensitive state longer than intended, or create cycles when callbacks hold owners that also own the callback.
+
+8
+00:00:51.880 --> 00:00:56.040
+Weak observation is often useful in asynchronous code.
+
+9
+00:00:56.140 --> 00:01:03.500
+A task can store a weak_ptr , lock it when it runs, and skip work if the target no longer exists.
+
+10
+00:01:03.600 --> 00:01:10.880
+This supports cancellation-friendly behavior, but it still needs clear handling for expiration and still needs synchronization for mutable state.
+
+11
+00:01:11.160 --> 00:01:15.480
+Concurrent systems need documented ownership and shutdown rules.
+
+12
+00:01:15.580 --> 00:01:17.420
+Who owns work while it is queued?
+
+13
+00:01:17.520 --> 00:01:19.600
+What happens during cancellation?
+
+14
+00:01:19.700 --> 00:01:22.740
+Can callbacks outlive their registrants?
+
+15
+00:01:22.840 --> 00:01:25.240
+What protects shared state?
+
+16
+00:01:25.340 --> 00:01:32.540
+Tests should cover delayed execution, shutdown order, cancellation paths, and repeated registration.
+
+17
+00:01:32.640 --> 00:01:37.520
+Smart pointers help express lifetime, but they do not replace a concurrency design.

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.220
+Serialization converts program data into a representation that can be stored, transmitted, queued, logged, cached, or exchanged with another component.
+
+2
+00:00:11.320 --> 00:00:16.680
+Deserialization reverses that process by turning bytes or text back into program state.
+
+3
+00:00:16.780 --> 00:00:23.420
+That reversal is security-relevant because the application may be accepting data created outside its current trust boundary.
+
+4
+00:00:23.700 --> 00:00:34.020
+A C++ application may deserialize files, network messages, IPC messages, plugin metadata, cache entries, database records, telemetry, or configuration.
+
+5
+00:00:34.120 --> 00:00:42.680
+Some of that data may come from trusted services, but it can still be stale, corrupted, truncated, incompatible, or unexpectedly large.
+
+6
+00:00:42.780 --> 00:00:49.500
+Other data may come from users, partners, devices, or environments the application does not fully control.
+
+7
+00:00:49.780 --> 00:01:02.740
+If a parser accepts malformed data, allocates based on untrusted sizes, constructs unsafe objects, skips validation, or leaves partially trusted state behind, the result can be unreliable or insecure.
+
+8
+00:01:02.840 --> 00:01:15.320
+Serialization defects often look like ordinary engineering bugs at first: an unchecked length, a missing version rule, a confusing default, or a type selection path that was never meant for hostile input.
+
+9
+00:01:15.600 --> 00:01:18.640
+Serialization security begins before the parser runs.
+
+10
+00:01:18.740 --> 00:01:32.020
+Teams need clear format design, controlled parsing, safe defaults, resource limits, predictable object construction, integrity checks where needed, and tests for malformed and compatibility cases.
+
+11
+00:01:32.120 --> 00:01:38.040
+A serialized format becomes a contract between systems, so it deserves the same care as an API.
+
+12
+00:01:38.320 --> 00:01:44.400
+In practice, this means naming the owners of each format and documenting where data may come from.
+
+13
+00:01:44.500 --> 00:01:56.340
+When ownership is clear, teams can review changes, track compatibility, and decide which inputs deserve extra validation or protection instead of relying on informal assumptions.

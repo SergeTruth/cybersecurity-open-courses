@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:13.620
+Many C++ systems contain raw owning pointers, manual delete paths, pointer caches, mixed allocation conventions, and comments that describe lifetime rules no one fully trusts anymore.
+
+2
+00:00:13.720 --> 00:00:18.520
+Smart pointer migration should begin with ownership mapping, not search-and-replace.
+
+3
+00:00:18.620 --> 00:00:26.380
+Identify who creates each object, who owns it, who merely observes it, who may store access, and who destroys it.
+
+4
+00:00:26.660 --> 00:00:30.340
+Replace owning raw pointers before observer pointers.
+
+5
+00:00:30.440 --> 00:00:37.000
+If one component clearly owns the object, std::unique_ptr is often the safest migration target.
+
+6
+00:00:37.100 --> 00:00:40.620
+It reduces manual cleanup and makes transfer explicit.
+
+7
+00:00:40.720 --> 00:00:49.680
+Use std::shared_ptr only when the existing design truly requires shared lifetime, and record why sharing is necessary.
+
+8
+00:00:49.780 --> 00:00:55.860
+Otherwise, migration can turn unclear raw ownership into unclear shared ownership.
+
+9
+00:00:56.140 --> 00:00:59.420
+Refactoring should be incremental and test-driven.
+
+10
+00:00:59.520 --> 00:01:09.200
+Add regression tests around destruction order, error paths, early returns, cancellation, and object graph behavior before making broad changes.
+
+11
+00:01:09.300 --> 00:01:14.420
+Watch for APIs that return raw pointers, store callbacks, or expose caches.
+
+12
+00:01:14.520 --> 00:01:18.040
+These are places where ownership and observation can become tangled.
+
+13
+00:01:18.320 --> 00:01:24.800
+Some raw pointers may remain as borrowed access, especially at legacy or C interfaces.
+
+14
+00:01:24.900 --> 00:01:27.460
+Document those conventions and keep them narrow.
+
+15
+00:01:27.560 --> 00:01:38.280
+The goal is not to eliminate every raw pointer; it is to eliminate hidden ownership and make remaining borrowing rules clear enough for maintainers, reviewers, and tools to reason about.

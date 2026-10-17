@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Template Safety Roadmap",
+  "graphicAlt": "Explicit contracts, lifetime rules, governed customization and representative tests keep generic code reviewable.",
+  "narration": "A template safety roadmap begins with the contract. Write down what each template expects from its type parameters, traits, policies, operations, ownership model, and failure behavior. If the contract is important, make it visible in the API, not only in tribal knowledge.\n\nUse concepts, constraints, and static assertions to restrict templates to intended use. Broad flexibility is valuable only when the design can actually support it. Clear compile-time failure is safer than accepting an instantiation that violates the template's invariants.\n\nKeep ownership and lifetime behavior explicit. Be careful with forwarding references, views, iterators, callbacks, and stored references. Control overload resolution and customization boundaries so reviewers understand which operations may run and which policy decisions may be specialized.\n\nAvoid overly clever compile-time machinery when simpler code is clearer. Monitor build cost and binary impact for template-heavy designs. Govern specialization, traits, policy types, and extension points as normal security-relevant code.\n\nFinally, test representative instantiations, include invalid-use checks where practical, enable helpful diagnostics, and review template-heavy code intentionally. Template security is disciplined generic API design: explicit contracts, constrained use, clear lifetime rules, governed customization, and evidence from tests.\n\nThat discipline scales. The more widely a template is reused, the more valuable it becomes to document assumptions, constrain use, and preserve understandable diagnostics from the beginning.",
+  "narrationPoints": [
+    "Write down what each template expects from its type parameters, traits, policies, operations, ownership model, and failure behavior.",
+    "Clear compile-time failure is safer than accepting an instantiation that violates the template's invariants.",
+    "Control overload resolution and customization boundaries so reviewers understand which operations may run and which policy decisions may be specialized.",
+    "Monitor build cost and binary impact for template-heavy designs.",
+    "Template security is disciplined generic API design: explicit contracts, constrained use, clear lifetime rules, governed customization, and evidence from tests.",
+    "The more widely a template is reused, the more valuable it becomes to document assumptions, constrain use, and preserve understandable diagnostics from the beginning."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Specialization and customization points are powerful extension mechanisms.
+
+2
+00:00:04.840 --> 00:00:16.120
+Explicit specializations, partial specializations, traits, policy classes, tag dispatch, and customization point objects can all change behavior based on type.
+
+3
+00:00:16.220 --> 00:00:22.060
+That is useful for performance and integration, but it also changes the security review surface.
+
+4
+00:00:22.340 --> 00:00:31.060
+A specialization should not silently bypass validation, change ownership, relax safety checks, or alter policy in a way that reviewers cannot see.
+
+5
+00:00:31.160 --> 00:00:38.360
+If a trait says a type is safe for a fast path, the codebase needs confidence that the trait is accurate and maintained.
+
+6
+00:00:38.640 --> 00:00:41.760
+Extension points should have documented responsibilities.
+
+7
+00:00:41.860 --> 00:00:45.060
+A policy type may need to preserve invariants.
+
+8
+00:00:45.160 --> 00:00:48.200
+A serializer may need to reject malformed data.
+
+9
+00:00:48.300 --> 00:00:50.860
+A comparator may need to implement a stable ordering.
+
+10
+00:00:50.960 --> 00:00:55.120
+A custom allocator may need to respect lifetime and cleanup expectations.
+
+11
+00:00:55.220 --> 00:00:58.260
+Those responsibilities are part of the API contract.
+
+12
+00:00:58.540 --> 00:01:03.580
+Governance matters because customization can appear far from the generic code that uses it.
+
+13
+00:01:03.680 --> 00:01:10.080
+Security-relevant specializations should receive the same attention as direct changes to the main implementation.
+
+14
+00:01:10.180 --> 00:01:18.340
+Reviewers should ask what behavior changes, what invariants still hold, and which tests cover the specialized path.
+
+15
+00:01:18.620 --> 00:01:21.020
+Good customization boundaries are explicit.
+
+16
+00:01:21.120 --> 00:01:26.480
+They let teams extend generic code without letting hidden policy changes spread unnoticed through the system.
+
+17
+00:01:26.760 --> 00:01:29.320
+Ownership of extension points should be clear as well.
+
+18
+00:01:29.420 --> 00:01:39.740
+If many teams can add specializations, the project needs naming, testing, and review expectations so policy changes are not scattered silently across the codebase.

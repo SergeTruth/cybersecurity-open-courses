@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Stack and heap safety also depends on resource limits.
+
+2
+00:00:04.120 --> 00:00:13.400
+A design can use valid lifetimes and still fail if it assumes unlimited stack depth, unlimited local storage, or unlimited heap capacity.
+
+3
+00:00:13.500 --> 00:00:22.220
+Defensive C++ treats memory as a budgeted resource and makes externally influenced sizes visible before allocation or recursion occurs.
+
+4
+00:00:22.500 --> 00:00:25.060
+Large local objects deserve attention.
+
+5
+00:00:25.160 --> 00:00:36.280
+Placing a very large array or object graph on the stack can exhaust stack space, especially in threads with smaller stack budgets or code that nests deeply.
+
+6
+00:00:36.380 --> 00:00:45.580
+Prefer containers or heap-backed storage when size is large, variable, or influenced by input, but keep the same ownership and bounds discipline.
+
+7
+00:00:45.680 --> 00:00:51.200
+Moving data to the heap is not a safety fix by itself; it changes the resource being consumed.
+
+8
+00:00:51.480 --> 00:00:54.360
+Unbounded recursion is another stack risk.
+
+9
+00:00:54.460 --> 00:00:59.020
+Recursive algorithms may be elegant, but the maximum depth should be understood.
+
+10
+00:00:59.120 --> 00:01:06.960
+For input-driven structures, consider iterative approaches, explicit depth limits, or validation that prevents unreasonable nesting.
+
+11
+00:01:07.060 --> 00:01:12.340
+The goal is predictable behavior under stress, not just correctness for small examples.
+
+12
+00:01:12.620 --> 00:01:15.260
+Heap pressure also needs policy.
+
+13
+00:01:15.360 --> 00:01:18.240
+Validate sizes before allocation.
+
+14
+00:01:18.340 --> 00:01:25.780
+Consider maximum request sizes, aggregate memory budgets, and what the program should do if allocation fails or is rejected.
+
+15
+00:01:25.880 --> 00:01:31.400
+Avoid designs where one input or request can consume unreasonable memory.
+
+16
+00:01:31.500 --> 00:01:39.580
+Robust systems make resource assumptions explicit so reviewers can evaluate reliability and security impact before deployment.
+
+17
+00:01:39.860 --> 00:01:43.860
+Resource limits are also operational contracts.
+
+18
+00:01:43.960 --> 00:01:56.680
+A library, service, or tool should make clear whether it rejects oversized work, streams it in chunks, uses bounded queues, or reports an allocation failure according to project policy.
+
+19
+00:01:56.780 --> 00:01:59.500
+This is defensive engineering, not pessimism.
+
+20
+00:01:59.600 --> 00:02:04.800
+Clear limits keep failure behavior predictable and help prevent one workload from degrading the whole system.

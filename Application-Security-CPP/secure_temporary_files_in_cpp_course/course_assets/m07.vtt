@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Temporary-file operations fail in ordinary production ways.
+
+2
+00:00:04.520 --> 00:00:14.120
+The directory may be missing, permissions may be wrong, disk may be full, quotas may be exceeded, writes may be partial, or a service may restart in the middle of a workflow.
+
+3
+00:00:14.400 --> 00:00:17.680
+Failure behavior should preserve predictable state.
+
+4
+00:00:17.780 --> 00:00:22.740
+If creating a temporary file fails, the operation should report a controlled error.
+
+5
+00:00:22.840 --> 00:00:29.080
+If writing fails after partial output, the program should close resources and remove partial work where appropriate.
+
+6
+00:00:29.360 --> 00:00:34.160
+Crash recovery matters because temporary files may survive process termination.
+
+7
+00:00:34.260 --> 00:00:42.260
+Long-running services should define cleanup-on-startup policies, age-based cleanup rules, and operational visibility for orphaned files.
+
+8
+00:00:42.360 --> 00:00:45.560
+Cleanup should be scoped to known application-owned directories.
+
+9
+00:00:45.840 --> 00:00:48.320
+Disk pressure deserves monitoring.
+
+10
+00:00:48.420 --> 00:00:53.780
+A growing temporary directory can affect availability, neighboring services, or the host.
+
+11
+00:00:53.880 --> 00:01:02.280
+Metrics for temp-directory size, file counts, cleanup failures, and quota errors can help operators respond before the issue becomes severe.
+
+12
+00:01:02.560 --> 00:01:08.960
+Logging should help diagnose without exposing sensitive paths or contents unnecessarily.
+
+13
+00:01:09.060 --> 00:01:16.180
+A safe event may include an error category, component, operation, and safe correlation value.
+
+14
+00:01:16.280 --> 00:01:22.120
+It should avoid dumping file contents or revealing more path detail than maintainers need.
+
+15
+00:01:22.400 --> 00:01:24.800
+Recovery also requires testing.
+
+16
+00:01:24.900 --> 00:01:33.780
+Exercise disk errors where practical, permission failures, interrupted operations, partial writes, cleanup failures, and restart cleanup.
+
+17
+00:01:33.880 --> 00:01:38.920
+These paths are easy to neglect because successful temporary-file use often looks simple.
+
+18
+00:01:39.200 --> 00:01:44.960
+Operational hygiene turns temporary files from an afterthought into a managed lifecycle.
+
+19
+00:01:45.060 --> 00:01:51.380
+The system should know where files are created, how they are bounded, how they are cleaned, and who responds when cleanup stops working.
+
+20
+00:01:51.660 --> 00:01:54.060
+Cleanup policies should be conservative.
+
+21
+00:01:54.160 --> 00:02:04.480
+Startup cleanup should target only application-owned directories and known naming patterns, and it should avoid sweeping broad shared locations where unrelated files may exist.

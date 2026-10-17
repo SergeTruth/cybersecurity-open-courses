@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.140
+Structural validation tells the application whether data has the expected shape, but it does not prove who created the data or whether it was modified outside the application's trust model.
+
+2
+00:00:11.240 --> 00:00:17.960
+Some serialized data needs integrity checks, authenticated messages, signatures, encryption, or secure transport.
+
+3
+00:00:18.060 --> 00:00:21.340
+The right protection depends on what the data controls and where it travels.
+
+4
+00:00:21.620 --> 00:00:26.660
+A plain checksum may detect accidental corruption, but it does not authenticate a sender.
+
+5
+00:00:26.760 --> 00:00:36.680
+When origin and integrity matter, approved mechanisms such as HMACs, digital signatures, or authenticated secure channels may be appropriate under project policy.
+
+6
+00:00:36.780 --> 00:00:44.140
+These checks should cover the exact data and context the application relies on, with clear rules for versioning and canonical representation.
+
+7
+00:00:44.420 --> 00:00:49.940
+Encryption protects confidentiality, but encrypted data still needs validation after decryption.
+
+8
+00:00:50.040 --> 00:00:57.560
+Decryption does not make a message well formed, current, authorized, or safe to construct into runtime objects.
+
+9
+00:00:57.660 --> 00:01:05.820
+The application should still enforce schemas, limits, identity rules, compatibility requirements, and object invariants after the data becomes readable.
+
+10
+00:01:06.100 --> 00:01:10.260
+Keys, certificates, and trust policy need lifecycle management.
+
+11
+00:01:10.360 --> 00:01:14.520
+Use approved cryptographic libraries and avoid custom constructions.
+
+12
+00:01:14.620 --> 00:01:20.300
+Review how keys are generated, stored, rotated, revoked, and logged.
+
+13
+00:01:20.400 --> 00:01:28.400
+Serialization security is strongest when parsing controls and cryptographic controls are layered, tested, and owned together.
+
+14
+00:01:28.680 --> 00:01:31.480
+Teams should document what each protection proves.
+
+15
+00:01:31.580 --> 00:01:37.420
+Integrity, authenticity, confidentiality, and freshness are different properties.
+
+16
+00:01:37.520 --> 00:01:44.560
+Naming the property helps reviewers see whether the selected control matches the risk instead of assuming one mechanism solves every problem.

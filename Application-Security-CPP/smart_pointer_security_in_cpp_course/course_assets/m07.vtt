@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Smart pointers can manage more than heap memory.
+
+2
+00:00:03.240 --> 00:00:15.960
+A resource may be a file handle, operating system handle, library object, socket, cryptographic context, parser state, or other value that must be released through a specific cleanup function.
+
+3
+00:00:16.060 --> 00:00:23.180
+Pairing ownership with a correct deleter turns those cleanup rules into RAII, so resources are released when the owning object ends.
+
+4
+00:00:23.460 --> 00:00:26.100
+The deleter must match the resource creation mechanism.
+
+5
+00:00:26.200 --> 00:00:30.360
+Memory allocated by one library may need that library's release function.
+
+6
+00:00:30.460 --> 00:00:34.860
+A handle opened by an operating system API may need a close routine, not delete .
+
+7
+00:00:34.960 --> 00:00:39.440
+A cryptographic or compression library may require cleanup in a documented order.
+
+8
+00:00:39.540 --> 00:00:47.220
+Incorrect deleters can leak resources, release them incorrectly, or violate assumptions made by the library that created them.
+
+9
+00:00:47.500 --> 00:00:53.580
+Custom deleters are powerful, but they can also make code harder to read if every use spells out a complex type.
+
+10
+00:00:53.680 --> 00:01:02.480
+When the ownership rule is important and repeated, a small named RAII wrapper is often clearer than raw custom deleter syntax scattered through the codebase.
+
+11
+00:01:02.580 --> 00:01:08.500
+The wrapper can validate construction, hide cleanup details, and provide a narrow interface for safe use.
+
+12
+00:01:08.780 --> 00:01:16.780
+The review habit is straightforward: find the resource creation call, find the matching cleanup contract, and ensure ownership is captured immediately.
+
+13
+00:01:16.880 --> 00:01:25.200
+RAII should make normal paths, early returns, and error paths behave consistently without manual cleanup branches spread across the function.

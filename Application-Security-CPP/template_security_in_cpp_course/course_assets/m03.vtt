@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.060
+Concepts, constraints, and compile-time guards help turn implicit assumptions into visible rules.
+
+2
+00:00:07.160 --> 00:00:15.240
+A constrained template tells callers what kinds of types are intended before the compiler tries to instantiate a large body of code.
+
+3
+00:00:15.340 --> 00:00:20.220
+That makes the API easier to understand and makes misuse easier to diagnose.
+
+4
+00:00:20.500 --> 00:00:23.220
+Good constraints are meaningful and specific.
+
+5
+00:00:23.320 --> 00:00:30.360
+A broad template that accepts almost anything may look flexible, but it is harder to review and easier to misuse.
+
+6
+00:00:30.460 --> 00:00:40.140
+A concept that states the required operations, value category expectations, or iterator category gives reviewers a clearer model of the intended behavior.
+
+7
+00:00:40.420 --> 00:00:45.940
+static_assert can enforce important assumptions that are not naturally captured by a simple expression requirement.
+
+8
+00:00:46.040 --> 00:00:52.760
+A template might require a type to be nothrow movable, explicitly allowed by policy, or safe for a particular storage model.
+
+9
+00:00:52.860 --> 00:00:56.940
+When a guard fails, the diagnostic should explain what the caller needs to change.
+
+10
+00:00:57.220 --> 00:01:00.180
+Compile-time checks should not become decorative noise.
+
+11
+00:01:00.280 --> 00:01:02.440
+They should protect invariants that matter.
+
+12
+00:01:02.540 --> 00:01:07.820
+A guard that simply repeats what the compiler would already report may not help.
+
+13
+00:01:07.920 --> 00:01:14.560
+A guard that explains the security-relevant contract can save time and prevent accidental broad use.
+
+14
+00:01:14.840 --> 00:01:17.400
+The result is a safer failure mode.
+
+15
+00:01:17.500 --> 00:01:27.180
+Instead of compiling a surprising instantiation and discovering a defect later, the code rejects unintended use early with a message connected to the template's design.
+
+16
+00:01:27.460 --> 00:01:30.100
+Well-designed constraints also reduce review burden.
+
+17
+00:01:30.200 --> 00:01:37.720
+Reviewers can focus on whether the constraint matches the design rather than guessing from every operation buried inside the implementation.

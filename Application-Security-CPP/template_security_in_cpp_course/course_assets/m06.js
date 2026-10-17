@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Specialization and Customization Boundaries",
+  "graphicAlt": "Traits, policies and specializations pass the same invariant and ownership review as the main generic implementation.",
+  "narration": "Specialization and customization points are powerful extension mechanisms. Explicit specializations, partial specializations, traits, policy classes, tag dispatch, and customization point objects can all change behavior based on type. That is useful for performance and integration, but it also changes the security review surface.\n\nA specialization should not silently bypass validation, change ownership, relax safety checks, or alter policy in a way that reviewers cannot see. If a trait says a type is safe for a fast path, the codebase needs confidence that the trait is accurate and maintained.\n\nExtension points should have documented responsibilities. A policy type may need to preserve invariants. A serializer may need to reject malformed data. A comparator may need to implement a stable ordering. A custom allocator may need to respect lifetime and cleanup expectations. Those responsibilities are part of the API contract.\n\nGovernance matters because customization can appear far from the generic code that uses it. Security-relevant specializations should receive the same attention as direct changes to the main implementation. Reviewers should ask what behavior changes, what invariants still hold, and which tests cover the specialized path.\n\nGood customization boundaries are explicit. They let teams extend generic code without letting hidden policy changes spread unnoticed through the system.\n\nOwnership of extension points should be clear as well. If many teams can add specializations, the project needs naming, testing, and review expectations so policy changes are not scattered silently across the codebase.",
+  "narrationPoints": [
+    "Specialization and customization points are powerful extension mechanisms.",
+    "A specialization should not silently bypass validation, change ownership, relax safety checks, or alter policy in a way that reviewers cannot see.",
+    "If a trait says a type is safe for a fast path, the codebase needs confidence that the trait is accurate and maintained.",
+    "A custom allocator may need to respect lifetime and cleanup expectations.",
+    "Reviewers should ask what behavior changes, what invariants still hold, and which tests cover the specialized path.",
+    "If many teams can add specializations, the project needs naming, testing, and review expectations so policy changes are not scattered silently across the codebase."
+  ]
+};

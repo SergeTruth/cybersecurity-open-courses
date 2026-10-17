@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Shared Ownership Risks with std::shared_ptr",
+  "graphicAlt": "Shared owners use one control block; last-owner cleanup is distinct from cycles, accidental retention and duplicate adoption hazards.",
+  "narration": "std::shared_ptr is useful when ownership is genuinely shared. Each shared owner contributes to keeping the object alive, and the object is destroyed when the last owner releases it. That model is appropriate for some asynchronous work, graph structures, and callback systems, but it should not be used merely to avoid deciding who owns an object.\n\nShared ownership can create security and reliability risk when the ownership graph is unclear. A reference cycle can prevent cleanup because objects keep each other alive. Accidental copies can extend lifetime beyond the point where cleanup was expected. Sensitive resources such as cached data, file handles, credentials, or cryptographic contexts can remain in memory longer than intended if shared ownership is spread casually through a system.\n\nConstruction patterns matter. Prefer consistent creation such as std::make_shared when it fits the design. Be cautious about designs that create more than one shared ownership control block for the same object, because that breaks the reference-counting model and can produce unsafe destruction behavior. At a defensive level, reviewers should look for mixed ownership patterns, raw pointer adoption, and unclear transitions from borrowed access to shared ownership.\n\nShared ownership should have a reason. Document why multiple owners are needed, what releases ownership, and whether any weak links are required to break cycles. A healthy shared ownership graph is understandable, bounded, and testable under shutdown, cancellation, and error paths.",
+  "narrationPoints": [
+    "Each shared owner contributes to keeping the object alive, and the object is destroyed when the last owner releases it.",
+    "std::shared_ptr is useful when ownership is genuinely shared.",
+    "Shared ownership can create security and reliability risk when the ownership graph is unclear.",
+    "Be cautious about designs that create more than one shared ownership control block for the same object, because that breaks the reference-counting model and can produce unsafe destruction behavior.",
+    "At a defensive level, reviewers should look for mixed ownership patterns, raw pointer adoption, and unclear transitions from borrowed access to shared ownership.",
+    "A healthy shared ownership graph is understandable, bounded, and testable under shutdown, cancellation, and error paths."
+  ]
+};

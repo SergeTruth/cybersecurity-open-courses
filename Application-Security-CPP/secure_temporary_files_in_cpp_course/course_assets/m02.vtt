@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+The temporary directory is part of the security boundary.
+
+2
+00:00:04.520 --> 00:00:12.920
+A safe filename is not enough if the directory itself is shared, loosely controlled, or chosen by configuration that the program has not reviewed.
+
+3
+00:00:13.200 --> 00:00:17.680
+Prefer trusted per-user or application-private temporary locations.
+
+4
+00:00:17.780 --> 00:00:21.700
+For a desktop tool, a per-user temp directory may be appropriate.
+
+5
+00:00:21.800 --> 00:00:28.200
+For a service, an application-private working directory with controlled ownership and permissions may be safer.
+
+6
+00:00:28.300 --> 00:00:33.660
+For containers, the writable area should match the service model and deployment policy.
+
+7
+00:00:33.940 --> 00:00:37.380
+Avoid casual use of shared writable paths.
+
+8
+00:00:37.480 --> 00:00:45.400
+Shared directories require careful assumptions about who can list names, create entries, remove entries, or influence links.
+
+9
+00:00:45.500 --> 00:00:51.420
+If a shared location is unavoidable, the design should account for that platform behavior explicitly.
+
+10
+00:00:51.700 --> 00:00:56.180
+Environment-provided paths can be useful, but they should be treated as configuration.
+
+11
+00:00:56.280 --> 00:01:02.520
+A program should not blindly trust a variable or inherited setting simply because it names a writable directory.
+
+12
+00:01:02.620 --> 00:01:07.020
+Policy, validation, and fallback behavior should be clear.
+
+13
+00:01:07.300 --> 00:01:10.740
+Creating a private working directory can reduce risk.
+
+14
+00:01:10.840 --> 00:01:18.040
+The application can control permissions, keep related files grouped, simplify cleanup, and make operational monitoring easier.
+
+15
+00:01:18.140 --> 00:01:24.300
+Directory creation should itself be checked and should fail safely if the expected protection cannot be established.
+
+16
+00:01:24.580 --> 00:01:27.380
+Location choice should match the service context.
+
+17
+00:01:27.480 --> 00:01:33.880
+A batch tool, long-running daemon, container workload, and multi-user host have different assumptions.
+
+18
+00:01:33.980 --> 00:01:41.980
+Review who can access the directory, how long files may remain, and how cleanup is performed after normal and abnormal termination.
+
+19
+00:01:42.260 --> 00:01:46.340
+Location policy should also be consistent across the codebase.
+
+20
+00:01:46.440 --> 00:01:52.280
+If each component chooses its own temp path, permissions and cleanup become hard to reason about.
+
+21
+00:01:52.380 --> 00:01:57.740
+A shared wrapper or configuration policy can make the safer location the normal path.
+
+22
+00:01:58.020 --> 00:02:02.660
+When the preferred location is unavailable, fallback behavior should be intentional.
+
+23
+00:02:02.760 --> 00:02:11.560
+Failing clearly is often safer than silently switching to a less trusted directory whose access rules do not match the system's data handling expectations.

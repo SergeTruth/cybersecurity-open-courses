@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Templates are one of the most powerful features in C++.
+
+2
+00:00:04.840 --> 00:00:11.160
+They let libraries and applications express a generic operation once and reuse it across many types.
+
+3
+00:00:11.260 --> 00:00:16.540
+That reuse can reduce duplication, improve consistency, and make APIs more expressive.
+
+4
+00:00:16.640 --> 00:00:21.920
+It also means the behavior that finally runs may depend on the type used to instantiate the template.
+
+5
+00:00:22.200 --> 00:00:26.360
+A template that looks safe with one type may be incorrect with another.
+
+6
+00:00:26.460 --> 00:00:32.620
+The type may supply different overloads, traits, policies, comparators, allocators, or conversion behavior.
+
+7
+00:00:32.720 --> 00:00:38.160
+Build configuration can also influence which specializations are present and which diagnostics are enabled.
+
+8
+00:00:38.260 --> 00:00:43.140
+Generic code therefore has security-relevant assumptions even when the template body looks small.
+
+9
+00:00:43.420 --> 00:00:46.380
+Template security is not about avoiding templates.
+
+10
+00:00:46.480 --> 00:00:51.760
+It is about making generic assumptions visible before they surprise a caller or reviewer.
+
+11
+00:00:51.860 --> 00:01:01.220
+A secure generic API describes what kinds of types are intended, what operations may be called, what ownership rules apply, and how invalid use fails.
+
+12
+00:01:01.500 --> 00:01:05.580
+Some defects appear only in specific instantiations.
+
+13
+00:01:05.680 --> 00:01:13.120
+A happy-path test with one common type does not prove that every valid instantiation preserves the same invariants.
+
+14
+00:01:13.220 --> 00:01:21.140
+Defensive engineering includes representative tests, useful compile-time errors, clear constraints, and review of customization points.
+
+15
+00:01:21.420 --> 00:01:24.540
+The practical goal is disciplined generic design.
+
+16
+00:01:24.640 --> 00:01:33.360
+Templates should make intended use clear, reject unintended use early, and keep type-dependent behavior understandable enough for security review.
+
+17
+00:01:33.640 --> 00:01:43.720
+A useful review habit is to ask what would happen if the next caller supplied a move-only type, a throwing type, a custom allocator, or a user-defined operation.
+
+18
+00:01:43.820 --> 00:01:48.460
+That question quickly reveals whether the template contract is explicit enough.

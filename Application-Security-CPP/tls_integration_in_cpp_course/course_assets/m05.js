@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Hostname Verification, SNI, and Peer Identity",
+  "graphicAlt": "SNI supports certificate selection while independent chain and expected-name checks determine whether the intended peer is accepted.",
+  "narration": "A valid certificate chain is not enough by itself. A client also needs to verify that the certificate represents the service it intended to reach. Hostname verification connects the network endpoint to the expected identity. Without that check, the client may know that a certificate came from a trusted issuer but not that it belongs to the right service.\n\nSNI, or Server Name Indication, supports identity selection during the TLS handshake. It lets a client indicate the intended service name so a server hosting multiple identities can present the right certificate. For modern deployments, especially those using shared infrastructure, proxies, gateways, or service discovery, SNI and hostname verification are part of making the intended peer identity explicit.\n\nInternal services still need clear identity rules. Being inside a network is not a substitute for peer authentication. Services may use aliases, internal names, generated hostnames, load balancers, or service mesh components. The integration design should define which name is expected, where that name comes from, and how the TLS library verifies it.\n\nIdentity expectations should be consistent and testable. Tests should cover wrong names, missing names, valid certificates for other identities, and expected aliases. Configuration should avoid scattered exceptions that make identity behavior unpredictable. A safe TLS channel is not only encrypted; it is connected to the peer the application meant to contact.\n\nThat expectation should be documented close to the client configuration. Future maintainers need to know whether the application connects by public hostname, internal service name, proxy name, or another approved identity form.",
+  "narrationPoints": [
+    "Without that check, the client may know that a certificate came from a trusted issuer but not that it belongs to the right service.",
+    "SNI, or Server Name Indication, supports identity selection during the TLS handshake.",
+    "The integration design should define which name is expected, where that name comes from, and how the TLS library verifies it.",
+    "Tests should cover wrong names, missing names, valid certificates for other identities, and expected aliases.",
+    "A safe TLS channel is not only encrypted; it is connected to the peer the application meant to contact.",
+    "Future maintainers need to know whether the application connects by public hostname, internal service name, proxy name, or another approved identity form."
+  ]
+};

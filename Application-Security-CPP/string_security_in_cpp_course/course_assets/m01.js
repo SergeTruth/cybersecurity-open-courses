@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why String Security Matters",
+  "graphicAlt": "A string retains source, ownership, length and encoding context as domain validation and destination-specific handling govern its flow.",
+  "narration": "Strings appear at almost every boundary in a C++ system. They carry file paths, configuration values, environment variables, usernames, protocol fields, commands, log messages, tokens, identifiers, and serialized data. Because strings feel ordinary, teams sometimes underestimate how much behavior they control.\n\nA string can decide which file is opened, which user is recognized, which parser branch runs, which policy rule applies, or what information appears in a log. A string can also cross from one representation to another: bytes from a network message may become text, text may become a file path, a path may become a command argument, and a command result may become a log event. Each transition has assumptions.\n\nString mistakes can lead to memory errors, broken validation, ambiguous comparisons, unsafe output, accidental disclosure, or unreliable parsing. The defensive lesson is not that strings are dangerous by themselves. The lesson is that strings need context: what they represent, who owns them, how long they live, what encoding they use, and where they are allowed to flow.\n\nSecure string handling starts by distinguishing text from binary data. It continues with ownership clarity, length validation, bounds checks, encoding discipline, output escaping, redaction, and careful interop with older APIs. A string that is safe in one context may need different handling in another context.\n\nThis course treats string security as daily engineering practice. The goal is to make string assumptions explicit, testable, and reviewable before they become production surprises.",
+  "narrationPoints": [
+    "Because strings feel ordinary, teams sometimes underestimate how much behavior they control.",
+    "A string can decide which file is opened, which user is recognized, which parser branch runs, which policy rule applies, or what information appears in a log.",
+    "A string can also cross from one representation to another: bytes from a network message may become text, text may become a file path, a path may become a command argument, and a command result may become a log event.",
+    "String mistakes can lead to memory errors, broken validation, ambiguous comparisons, unsafe output, accidental disclosure, or unreliable parsing.",
+    "The lesson is that strings need context: what they represent, who owns them, how long they live, what encoding they use, and where they are allowed to flow.",
+    "A string that is safe in one context may need different handling in another context."
+  ]
+};

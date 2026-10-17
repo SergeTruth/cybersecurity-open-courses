@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+TLS behavior needs direct tests, not only successful connection tests.
+
+2
+00:00:05.160 --> 00:00:20.360
+A useful test set covers expired certificates, wrong hostnames, untrusted roots, missing intermediates, invalid certificate chains, client-auth failures, connection timeouts, handshake failures, shutdown behavior, and safe logging.
+
+3
+00:00:20.460 --> 00:00:27.660
+These tests prove that the integration rejects unsafe cases instead of only proving that one happy path works.
+
+4
+00:00:27.940 --> 00:00:30.740
+Operational visibility is just as important.
+
+5
+00:00:30.840 --> 00:00:41.240
+Monitoring should help operators see handshake failure rates, certificate expiration risk, trust store changes, configuration drift, and dependency rollout effects.
+
+6
+00:00:41.340 --> 00:00:50.780
+Metrics and alerts should point to the problem class without exposing secrets, private keys, tokens, credentials, or sensitive payloads.
+
+7
+00:00:50.880 --> 00:00:56.640
+Visibility supports safe maintenance because TLS failures often appear first as operational symptoms.
+
+8
+00:00:56.920 --> 00:01:01.480
+Library updates should be reviewed for security and compatibility impact.
+
+9
+00:01:01.580 --> 00:01:10.620
+Updating a TLS dependency can change defaults, supported platforms, certificate handling, trust behavior, logging, or error codes.
+
+10
+00:01:10.720 --> 00:01:17.680
+Delaying updates indefinitely creates risk, but applying updates without testing can break communication.
+
+11
+00:01:17.780 --> 00:01:26.020
+A good lifecycle includes version tracking, release notes review, compatibility testing, and a rollback or mitigation plan.
+
+12
+00:01:26.300 --> 00:01:28.860
+Governance keeps TLS behavior from drifting.
+
+13
+00:01:28.960 --> 00:01:37.840
+Configuration changes, trust store changes, certificate issuer changes, and exception requests should be reviewed with security impact in mind.
+
+14
+00:01:37.940 --> 00:01:40.340
+The goal is not paperwork for its own sake.
+
+15
+00:01:40.440 --> 00:01:46.680
+The goal is to keep the secure-channel promise testable, observable, and maintainable across releases.
+
+16
+00:01:46.960 --> 00:01:55.520
+When tests and monitoring agree, teams gain confidence that the configured policy is the policy actually running in production.
+
+17
+00:01:55.620 --> 00:02:02.500
+That confidence is what lets TLS remain dependable through updates, migrations, and incident response.

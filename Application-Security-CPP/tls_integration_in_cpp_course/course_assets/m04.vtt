@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.220
+Certificate validation is how a TLS peer proves that its certificate chains to a trusted issuer and is acceptable under the application's trust policy.
+
+2
+00:00:09.320 --> 00:00:19.640
+The process can involve chain building, expiration checks, trust anchors, certificate constraints, revocation strategy, and platform-specific behavior.
+
+3
+00:00:19.740 --> 00:00:27.260
+The exact mechanics vary by library and platform, but the defensive principle is stable: validation is part of peer authentication.
+
+4
+00:00:27.540 --> 00:00:30.660
+Trust stores define which issuers the application accepts.
+
+5
+00:00:30.760 --> 00:00:39.000
+Some applications rely on the operating system trust store, while others use an application-specific or organization-managed store.
+
+6
+00:00:39.100 --> 00:00:41.260
+Either choice is security-relevant.
+
+7
+00:00:41.360 --> 00:00:52.080
+Adding, removing, or replacing trust anchors can change which peers are accepted, so trust store changes should be reviewed, tested, documented, and deployed deliberately.
+
+8
+00:00:52.360 --> 00:00:55.240
+Validation must not be disabled for convenience.
+
+9
+00:00:55.340 --> 00:01:04.220
+A development environment may need controlled test certificates or a separate test trust store, but that exception should be isolated from production and obvious to reviewers.
+
+10
+00:01:04.320 --> 00:01:12.800
+Production code should fail safely when a certificate is expired, untrusted, inconsistent with policy, or otherwise invalid for the connection being made.
+
+11
+00:01:13.080 --> 00:01:17.080
+Good error handling helps teams operate validation safely.
+
+12
+00:01:17.180 --> 00:01:28.940
+Logs should identify the class of problem, such as expiration, untrusted issuer, missing intermediate, or policy mismatch, without exposing secrets or private payloads.
+
+13
+00:01:29.040 --> 00:01:37.280
+Tests should prove that invalid certificate cases are rejected and that production configuration does not accidentally use development trust assumptions.
+
+14
+00:01:37.560 --> 00:01:42.360
+The review question is simple: what would this application trust after the change?
+
+15
+00:01:42.460 --> 00:01:52.140
+If a trust store, validation callback, or deployment bundle changes that answer, it deserves the same care as any other security-relevant release change.

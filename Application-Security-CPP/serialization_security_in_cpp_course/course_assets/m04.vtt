@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Serialized input should remain untrusted until it has been parsed and validated.
+
+2
+00:00:05.080 --> 00:00:16.520
+A safe design often parses bytes or text into a controlled intermediate representation, validates that representation, and only then constructs trusted domain objects.
+
+3
+00:00:16.620 --> 00:00:22.220
+This pattern creates a clear point where the program moves from external data to internal state.
+
+4
+00:00:22.500 --> 00:00:25.140
+Parsing should be separate from business logic.
+
+5
+00:00:25.240 --> 00:00:34.200
+Raw serialized input should not directly control authorization decisions, resource ownership, command execution, or state transitions.
+
+6
+00:00:34.300 --> 00:00:39.980
+The parser's job is to recognize the format, enforce basic structure, and report well-defined errors.
+
+7
+00:00:40.080 --> 00:00:47.600
+The validator's job is to check field meaning, relationships, ranges, and consistency before domain behavior begins.
+
+8
+00:00:47.880 --> 00:00:58.680
+Validation should check required fields, allowed values, type expectations, encoding rules, cross-field relationships, and compatibility constraints.
+
+9
+00:00:58.780 --> 00:01:05.260
+Parser errors should fail safely, release temporary resources, and avoid leaving partially trusted state behind.
+
+10
+00:01:05.360 --> 00:01:14.080
+A partially parsed object should not be inserted into caches, registries, authorization maps, or long-lived application state.
+
+11
+00:01:14.360 --> 00:01:21.160
+Deserialization should not skip constructors, invariants, authorization, or normal validation rules.
+
+12
+00:01:21.260 --> 00:01:28.700
+If a domain object has rules for creation during ordinary application use, the deserialization path needs equivalent rules.
+
+13
+00:01:28.800 --> 00:01:38.000
+Defensive parsing is about preserving those invariants even when the input arrives from a file, network, cache, or older version of the system.
+
+14
+00:01:38.280 --> 00:01:42.760
+One useful review question is: when does this data become trusted?
+
+15
+00:01:42.860 --> 00:01:46.220
+The answer should point to a specific validation boundary.
+
+16
+00:01:46.320 --> 00:01:54.720
+If trust changes gradually across several functions, the code is harder to reason about and more likely to accept inconsistent state.

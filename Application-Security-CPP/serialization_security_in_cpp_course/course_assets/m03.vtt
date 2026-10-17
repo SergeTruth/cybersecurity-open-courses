@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.220
+Schemas reduce ambiguity by defining fields, types, ranges, required values, optional values, defaults, and relationships.
+
+2
+00:00:09.320 --> 00:00:13.800
+They give parsers and reviewers a shared view of what valid data looks like.
+
+3
+00:00:13.900 --> 00:00:21.740
+Without a schema, validity often becomes whatever the current parser happens to accept, and that can change accidentally when code is refactored.
+
+4
+00:00:22.020 --> 00:00:27.860
+Versioning helps the application understand which interpretation rules apply to a message or file.
+
+5
+00:00:27.960 --> 00:00:32.120
+Old data, new data, and malformed data should be distinguishable.
+
+6
+00:00:32.220 --> 00:00:39.020
+If a field changes meaning or a new requirement is introduced, the parser needs a deliberate compatibility rule instead of guessing.
+
+7
+00:00:39.120 --> 00:00:44.320
+Version information should be close to the serialized data, not hidden in external assumptions.
+
+8
+00:00:44.600 --> 00:00:46.920
+Unknown fields require policy.
+
+9
+00:00:47.020 --> 00:00:55.900
+Depending on the format and product requirements, the safest behavior may be to reject them, ignore them, preserve them, or log them safely.
+
+10
+00:00:56.000 --> 00:00:58.560
+Defaults also require policy.
+
+11
+00:00:58.660 --> 00:01:05.540
+A missing value should not silently produce elevated capability, unlimited resource use, or surprising behavior.
+
+12
+00:01:05.640 --> 00:01:09.240
+Defaults should be conservative, documented, and tested.
+
+13
+00:01:09.520 --> 00:01:14.160
+Compatibility should be tested in both directions where the product promises it.
+
+14
+00:01:14.260 --> 00:01:21.460
+New readers may need to handle old data, and old readers may need safe behavior when presented with newer data.
+
+15
+00:01:21.560 --> 00:01:28.440
+Format evolution should be governed because serialized data can outlive the process that created it and sometimes outlive entire versions of the product.
+
+16
+00:01:28.720 --> 00:01:32.880
+The governance process does not need to be heavy, but it does need to be explicit.
+
+17
+00:01:32.980 --> 00:01:44.580
+Treat schema changes like interface changes: record the reason, compatibility impact, migration behavior, and tests that prove old and new data are handled safely.

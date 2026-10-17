@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Every template has a contract, even when the contract is not written down.
+
+2
+00:00:04.680 --> 00:00:17.480
+A template may assume that a type is movable, copyable, comparable, hashable, thread-safe, non-owning, owning, nothrow movable, cheaply copied, or safe to store.
+
+3
+00:00:17.580 --> 00:00:25.020
+If those assumptions are unstated, callers may supply types that compile but do not behave as the template designer expected.
+
+4
+00:00:25.300 --> 00:00:29.140
+A generic contract should describe behavior, not only syntax.
+
+5
+00:00:29.240 --> 00:00:32.760
+It is not enough to say that a type must have an equality operator.
+
+6
+00:00:32.860 --> 00:00:40.860
+The code may also need equality to be stable, cheap enough for repeated use, consistent with hashing, and free of unexpected side effects.
+
+7
+00:00:40.960 --> 00:00:43.760
+Those requirements affect correctness and review.
+
+8
+00:00:44.040 --> 00:00:47.560
+Contracts should also explain ownership and lifetime.
+
+9
+00:00:47.660 --> 00:00:51.100
+A type accepted by value may be copied or moved.
+
+10
+00:00:51.200 --> 00:00:55.920
+A type accepted by reference may be borrowed only during the call.
+
+11
+00:00:56.020 --> 00:01:00.420
+A stored callable may run later and must not depend on a destroyed object.
+
+12
+00:01:00.520 --> 00:01:04.040
+Generic code needs to make those expectations visible.
+
+13
+00:01:04.320 --> 00:01:10.640
+Documentation, constraints, tests, and review comments should tell the same story.
+
+14
+00:01:10.740 --> 00:01:17.700
+If documentation promises one behavior while the constraints allow a much broader set of types, the API invites misuse.
+
+15
+00:01:17.800 --> 00:01:22.840
+If tests cover only one type family, hidden assumptions remain untested.
+
+16
+00:01:23.120 --> 00:01:31.920
+Defensive generic design starts by asking, "what must be true about this type for the template to preserve its invariants?" The answer becomes the contract.
+
+17
+00:01:32.200 --> 00:01:35.640
+Contracts also help maintainers change code safely.
+
+18
+00:01:35.740 --> 00:01:44.060
+When requirements are visible, a future refactor can tell whether adding storage, comparison, hashing, or deferred execution changes what callers must provide.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Secure temporary-file handling starts with the mindset that temporary files are real storage.
+
+2
+00:00:05.640 --> 00:00:14.680
+They can contain sensitive data, survive longer than intended, and interact with filesystem permissions, names, links, and operational tools.
+
+3
+00:00:14.960 --> 00:00:16.960
+Use trusted locations.
+
+4
+00:00:17.060 --> 00:00:22.340
+Prefer per-user or application-private directories with appropriate permissions.
+
+5
+00:00:22.440 --> 00:00:30.680
+Treat environment-provided paths as configuration, and avoid casual dependence on shared writable directories unless the design accounts for that safely.
+
+6
+00:00:30.960 --> 00:00:33.920
+Avoid predictable names and check-then-create logic.
+
+7
+00:00:34.020 --> 00:00:42.100
+Use atomic exclusive creation through platform-supported APIs or well-reviewed wrappers, and keep the opened handle as the authority whenever possible.
+
+8
+00:00:42.380 --> 00:00:45.420
+Restrict permissions and minimize contents.
+
+9
+00:00:45.520 --> 00:00:52.560
+Do not write secrets, unnecessary sensitive data, or broad diagnostics to disk simply because the file is temporary.
+
+10
+00:00:52.660 --> 00:00:58.100
+Review inherited permissions and ownership expectations across deployment contexts.
+
+11
+00:00:58.380 --> 00:01:01.820
+Finally, use RAII cleanup and plan for failure.
+
+12
+00:01:01.920 --> 00:01:09.840
+Temporary-file code should handle partial writes, disk pressure, restarts, orphaned files, and cleanup errors predictably.
+
+13
+00:01:09.940 --> 00:01:15.060
+Review this code as part of secure C++ engineering, not as incidental plumbing.
+
+14
+00:01:15.340 --> 00:01:19.900
+The durable habit is to make temporary-file behavior explicit in code.
+
+15
+00:01:20.000 --> 00:01:32.080
+Location, creation, permissions, contents, lifetime, cleanup, and failure response should be visible enough that reviewers can reason about them without guesswork.

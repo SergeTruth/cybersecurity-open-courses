@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Dangling access occurs when code keeps a way to reach an object or state after it is no longer valid.
+
+2
+00:00:06.680 --> 00:00:13.560
+The access might be a pointer, reference, iterator, span, string view, or cached address.
+
+3
+00:00:13.660 --> 00:00:20.860
+The type can still look reasonable, and the code can still be readable, but the lifetime assumption behind it is broken.
+
+4
+00:00:21.140 --> 00:00:37.060
+Common hazards include returning references to local objects, storing pointers into buffers whose owners have been destroyed, keeping views longer than their source data, and using references into containers after a modification that reallocated storage.
+
+5
+00:00:37.160 --> 00:00:40.200
+Moved-from objects add another source of confusion.
+
+6
+00:00:40.300 --> 00:00:46.540
+They remain valid only according to their documented state, not according to whatever happened to be true in one test run.
+
+7
+00:00:46.820 --> 00:00:48.820
+Aliasing makes these issues harder.
+
+8
+00:00:48.920 --> 00:00:56.760
+If several pieces of code hold access to the same object, a mutation through one path can invalidate assumptions held by another.
+
+9
+00:00:56.860 --> 00:01:02.220
+A vector growth operation may invalidate iterators, pointers, and references.
+
+10
+00:01:02.320 --> 00:01:06.800
+An erase operation may change which elements remain valid.
+
+11
+00:01:06.900 --> 00:01:12.020
+A string modification may invalidate a previously saved pointer to its characters.
+
+12
+00:01:12.120 --> 00:01:17.320
+Long-lived aliases to unstable storage make review and testing more difficult.
+
+13
+00:01:17.600 --> 00:01:20.880
+Prevention starts with interface design.
+
+14
+00:01:20.980 --> 00:01:23.220
+Keep borrowed access short-lived.
+
+15
+00:01:23.320 --> 00:01:28.200
+Prefer returning values or owning handles when lifetime would otherwise be ambiguous.
+
+16
+00:01:28.300 --> 00:01:31.980
+Document invalidation behavior near mutating operations.
+
+17
+00:01:32.080 --> 00:01:36.080
+Review async callbacks, caches, and stored views carefully.
+
+18
+00:01:36.180 --> 00:01:42.660
+The safer design makes stale access difficult to create and easy to identify before it becomes a production defect.
+
+19
+00:01:42.940 --> 00:01:50.060
+Tests should include the operations that change validity, not just the operation that later observes the stale access.
+
+20
+00:01:50.160 --> 00:01:57.040
+Exercise container growth, erase paths, moves, resets, shutdown, and callback cancellation.
+
+21
+00:01:57.140 --> 00:02:02.420
+These are the moments when an alias that seemed harmless can become invalid.
+
+22
+00:02:02.520 --> 00:02:09.960
+If those transitions are important to the design, make them visible in names, contracts, and review checklists.

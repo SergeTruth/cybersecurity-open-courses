@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.260
+String risk often increases at boundaries with C libraries, operating system APIs, plugins, foreign function interfaces, older code, and platform-specific encodings.
+
+2
+00:00:10.360 --> 00:00:18.120
+These boundaries may not share modern C++ assumptions about ownership, length, termination, mutability, or encoding.
+
+3
+00:00:18.400 --> 00:00:21.920
+A legacy API may expect a null-terminated string.
+
+4
+00:00:22.020 --> 00:00:25.940
+Another may expect a mutable caller-provided buffer and a length.
+
+5
+00:00:26.040 --> 00:00:30.440
+Another may return a pointer that remains valid only until the next call.
+
+6
+00:00:30.540 --> 00:00:34.540
+Wide string and narrow string conventions can differ by platform.
+
+7
+00:00:34.640 --> 00:00:42.640
+The dangerous part is not the existence of these APIs; it is letting their conventions spread through the application without a clear boundary.
+
+8
+00:00:42.920 --> 00:00:45.080
+Wrappers can isolate these details.
+
+9
+00:00:45.180 --> 00:00:56.140
+A small wrapper can validate lengths, handle conversion errors, define ownership, translate platform-specific return values, and expose safer application-level types.
+
+10
+00:00:56.240 --> 00:01:01.920
+The rest of the code can then operate on clear C++ objects instead of pointer-only contracts.
+
+11
+00:01:02.200 --> 00:01:04.920
+Interop code should be strict about failure.
+
+12
+00:01:05.020 --> 00:01:11.980
+Conversion errors, truncation, missing terminators, and unexpected output lengths should be handled deliberately.
+
+13
+00:01:12.080 --> 00:01:17.600
+If the application cannot represent the result safely, it should fail clearly rather than guessing.
+
+14
+00:01:17.880 --> 00:01:20.920
+Defensive design also keeps review focused.
+
+15
+00:01:21.020 --> 00:01:29.180
+When risky string conventions are concentrated at a boundary, engineers know where to look for length discipline, encoding rules, and lifetime assumptions.

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Generic containers and algorithms inherit behavior from the types and operations supplied to them.
+
+2
+00:00:05.160 --> 00:00:07.480
+A comparator can define ordering incorrectly.
+
+3
+00:00:07.580 --> 00:00:10.940
+A hash function can affect correctness and performance.
+
+4
+00:00:11.040 --> 00:00:15.120
+An allocator can change memory ownership and lifetime assumptions.
+
+5
+00:00:15.220 --> 00:00:17.220
+A move constructor can throw.
+
+6
+00:00:17.320 --> 00:00:21.720
+An equality operator can be expensive, stateful, or surprising.
+
+7
+00:00:22.000 --> 00:00:27.200
+Type-dependent behavior is not automatically unsafe, but it must be part of the contract.
+
+8
+00:00:27.300 --> 00:00:33.380
+If an algorithm assumes a strict weak ordering, the comparator requirement should be documented and tested.
+
+9
+00:00:33.480 --> 00:00:41.320
+If a container needs stable moves to preserve invariants during growth, that expectation should be constrained or handled safely.
+
+10
+00:00:41.600 --> 00:00:43.760
+Iterator category is another example.
+
+11
+00:00:43.860 --> 00:00:48.340
+Code that assumes random access is not valid for every iterator.
+
+12
+00:00:48.440 --> 00:00:57.160
+Generic algorithms should express whether they need input, forward, bidirectional, random-access, or contiguous behavior.
+
+13
+00:00:57.260 --> 00:01:02.620
+This prevents accidental use with ranges that compile but do not support the required operations.
+
+14
+00:01:02.900 --> 00:01:05.380
+Exception behavior also matters.
+
+15
+00:01:05.480 --> 00:01:13.560
+A user-defined operation may throw during comparison, allocation, movement, copying, formatting, or cleanup.
+
+16
+00:01:13.660 --> 00:01:18.060
+Defensive generic code should preserve invariants when supplied behavior fails.
+
+17
+00:01:18.160 --> 00:01:21.360
+Tests should cover relevant failure paths where practical.
+
+18
+00:01:21.640 --> 00:01:24.120
+Representative types are essential.
+
+19
+00:01:24.220 --> 00:01:34.220
+Testing only with int or std::string can miss ownership, lifetime, exception, and customization behavior that appears with real application types.
+
+20
+00:01:34.320 --> 00:01:39.920
+Secure generic code is tested against the kind of variation it promises to support.
+
+21
+00:01:40.200 --> 00:01:44.200
+Type-dependent risk should be documented where it enters the API.
+
+22
+00:01:44.300 --> 00:01:55.420
+If the caller supplies a comparator, allocator, policy object, or callback, the documentation should describe the behavior required to keep the container or algorithm consistent.

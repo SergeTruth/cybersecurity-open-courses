@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.300
+Template-heavy code needs a different testing mindset.
+
+2
+00:00:03.400 --> 00:00:07.880
+It is not enough to test one happy-path instantiation.
+
+3
+00:00:07.980 --> 00:00:23.260
+Generic code should be exercised across common types, boundary types, move-only types, non-copyable types, throwing operations where relevant, custom comparators, custom allocators, views, iterators, and policy objects.
+
+4
+00:00:23.540 --> 00:00:25.700
+Invalid use should fail clearly.
+
+5
+00:00:25.800 --> 00:00:32.520
+When the build system supports negative compile checks, tests can verify that unintended instantiations are rejected.
+
+6
+00:00:32.620 --> 00:00:37.260
+This protects the contract from gradually becoming broader than the design intended.
+
+7
+00:00:37.360 --> 00:00:41.840
+Clear compile-time diagnostics are part of usability and safety.
+
+8
+00:00:42.120 --> 00:00:49.240
+Compiler warnings, sanitizers, static analysis, and strict diagnostic builds can expose issues earlier.
+
+9
+00:00:49.340 --> 00:00:58.620
+They can reveal lifetime mistakes, incorrect assumptions about moves or copies, suspicious conversions, and runtime behavior in representative instantiations.
+
+10
+00:00:58.720 --> 00:01:04.000
+Template libraries often benefit from more than one compiler configuration because diagnostics differ.
+
+11
+00:01:04.280 --> 00:01:16.440
+Review should check constraints, lifetime assumptions, overload behavior, customization points, specialization paths, diagnostics, and whether invalid use fails in a helpful way.
+
+12
+00:01:16.540 --> 00:01:22.780
+Reviewers should ask which type families were tested and which type-dependent behaviors are expected.
+
+13
+00:01:23.060 --> 00:01:29.060
+When a template defect is found, capture the specific type or instantiation pattern that revealed it.
+
+14
+00:01:29.160 --> 00:01:32.600
+That regression test becomes part of the generic contract.
+
+15
+00:01:32.880 --> 00:01:36.800
+Diagnostics should be treated as part of the developer experience.
+
+16
+00:01:36.900 --> 00:01:43.860
+If safe use requires reading pages of compiler output, callers may work around the template instead of using it correctly.

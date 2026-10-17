@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Overload Resolution, ADL, and API Surprises",
+  "graphicAlt": "Fixed operations and documented customization routes make overload, conversion and associated-namespace behavior reviewable.",
+  "narration": "Template calls are often resolved at instantiation time, not when the generic code is first written. Overload resolution, implicit conversions, and argument-dependent lookup can cause a template to call functions that are not obvious from the template body alone. This flexibility enables generic libraries, but it can surprise reviewers.\n\nA call that appears to use a standard operation may resolve to a user-defined operation for a particular type. An unqualified function call may find candidates in namespaces associated with the argument types. An implicit conversion may choose a path that changes cost, exception behavior, or semantics.\n\nDefensive template design limits unnecessary ambiguity. Qualify names when a specific operation is intended. Document customization points when extension is intended. Avoid relying on implicit conversions when they make security-sensitive behavior harder to understand.\n\nReview should consider what code may actually run for important instantiations. This is especially important for comparison, hashing, formatting, allocation, serialization, cleanup, and policy decisions. The operation selected for one type may not preserve the assumptions tested with another type.\n\nThe goal is not to disable extensibility. The goal is to make extensibility deliberate. Generic APIs should make clear which operations can be customized and which operations are fixed by the library.\n\nWhen behavior must be fixed, use qualified calls or helper functions that enforce the intended operation. When behavior is intentionally customizable, name that extension point and test at least one custom implementation.",
+  "narrationPoints": [
+    "Overload resolution, implicit conversions, and argument-dependent lookup can cause a template to call functions that are not obvious from the template body alone.",
+    "An implicit conversion may choose a path that changes cost, exception behavior, or semantics.",
+    "Avoid relying on implicit conversions when they make security-sensitive behavior harder to understand.",
+    "Review should consider what code may actually run for important instantiations.",
+    "Generic APIs should make clear which operations can be customized and which operations are fixed by the library.",
+    "When behavior must be fixed, use qualified calls or helper functions that enforce the intended operation."
+  ]
+};

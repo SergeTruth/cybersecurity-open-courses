@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Type Assumptions and Generic Contracts",
+  "graphicAlt": "A generic contract aligns operations, semantic expectations, ownership, lifetime and failure rules across documentation, constraints and tests.",
+  "narration": "Every template has a contract, even when the contract is not written down. A template may assume that a type is movable, copyable, comparable, hashable, thread-safe, non-owning, owning, nothrow movable, cheaply copied, or safe to store. If those assumptions are unstated, callers may supply types that compile but do not behave as the template designer expected.\n\nA generic contract should describe behavior, not only syntax. It is not enough to say that a type must have an equality operator. The code may also need equality to be stable, cheap enough for repeated use, consistent with hashing, and free of unexpected side effects. Those requirements affect correctness and review.\n\nContracts should also explain ownership and lifetime. A type accepted by value may be copied or moved. A type accepted by reference may be borrowed only during the call. A stored callable may run later and must not depend on a destroyed object. Generic code needs to make those expectations visible.\n\nDocumentation, constraints, tests, and review comments should tell the same story. If documentation promises one behavior while the constraints allow a much broader set of types, the API invites misuse. If tests cover only one type family, hidden assumptions remain untested.\n\nDefensive generic design starts by asking, \"what must be true about this type for the template to preserve its invariants?\" The answer becomes the contract.\n\nContracts also help maintainers change code safely. When requirements are visible, a future refactor can tell whether adding storage, comparison, hashing, or deferred execution changes what callers must provide.",
+  "narrationPoints": [
+    "If those assumptions are unstated, callers may supply types that compile but do not behave as the template designer expected.",
+    "The code may also need equality to be stable, cheap enough for repeated use, consistent with hashing, and free of unexpected side effects.",
+    "A stored callable may run later and must not depend on a destroyed object.",
+    "If documentation promises one behavior while the constraints allow a much broader set of types, the API invites misuse.",
+    "Defensive generic design starts by asking, \"what must be true about this type for the template to preserve its invariants?\" The answer becomes the.",
+    "When requirements are visible, a future refactor can tell whether adding storage, comparison, hashing, or deferred execution changes what callers must provide."
+  ]
+};

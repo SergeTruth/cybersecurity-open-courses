@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+String security is a roadmap, not a single safe function call.
+
+2
+00:00:04.600 --> 00:00:14.120
+Treat strings as structured data with a source, owner, lifetime, length, encoding, validation rule, and output context.
+
+3
+00:00:14.220 --> 00:00:18.620
+When those properties are implicit, mistakes become much easier to miss.
+
+4
+00:00:18.900 --> 00:00:23.620
+Prefer std::string for owned text when the application needs to keep data.
+
+5
+00:00:23.720 --> 00:00:27.800
+Use std::string_view only when lifetime is clear.
+
+6
+00:00:27.900 --> 00:00:36.860
+Do not confuse text with binary data, and do not assume that null termination, byte count, capacity, and displayed character count all mean the same thing.
+
+7
+00:00:37.140 --> 00:00:48.260
+Validate length, format, allowed characters, encoding, and domain rules before using strings in parsing, policy decisions, file paths, logs, or output.
+
+8
+00:00:48.360 --> 00:00:55.880
+Normalize before security-sensitive comparison where the application requires canonical text, and document the form that is expected.
+
+9
+00:00:56.160 --> 00:00:57.680
+Output discipline matters.
+
+10
+00:00:57.780 --> 00:01:06.420
+Format strings should be controlled by the program, structured output should use context-appropriate escaping, and logs should avoid secrets and sensitive personal data.
+
+11
+00:01:06.520 --> 00:01:15.080
+Sensitive strings need special handling around copying, access, lifetime, cleanup expectations, and redaction.
+
+12
+00:01:15.360 --> 00:01:24.000
+Finally, isolate legacy APIs behind small wrappers, test boundary cases, use diagnostics, and review string flows deliberately.
+
+13
+00:01:24.100 --> 00:01:34.660
+Secure string handling is ordinary engineering discipline: make assumptions visible, constrain data before trust, and verify behavior at the boundaries where strings matter most.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Lengths, Counts, Sizes, and Resource Limits",
+  "graphicAlt": "Size consistency, checked arithmetic and resource budgets are enforced before allocation or construction.",
+  "narration": "Many serialization defects involve lengths, counts, nesting, and allocation. A length field may be wrong, unexpectedly large, negative after conversion, inconsistent with the remaining input, or inconsistent with related fields. A count field may drive loops or allocations. Nested data can consume stack, heap, or CPU if depth and complexity are not limited.\n\nDefensive parsers validate sizes before allocation. They check that the declared size fits within the remaining input, within the maximum allowed message size, and within the application's memory policy. They also check arithmetic carefully. Size calculations can overflow before allocation, especially when counts, element sizes, and offsets are combined.\n\nAvailability is part of secure parsing. A parser that accepts unlimited nesting, unlimited repeated fields, unlimited string lengths, or unlimited queued records can be correct for small examples and unsafe under pressure. Limits should cover message size, individual field size, collection counts, nesting depth, parse time, and retained memory where those controls apply.\n\nFailure behavior should be explicit. When limits are exceeded, the parser should reject the input, release temporary resources, and report a safe error. The program should not continue with truncated data, partially constructed objects, or guessed defaults. Resource limits are not just performance settings; they are part of the format contract.\n\nLimits should also be monitored where the parser is exposed to production traffic or large data sets. Frequent limit failures can signal bad clients, incompatible data, or sizing assumptions that need product review, and the response should be predictable.",
+  "narrationPoints": [
+    "Nested data can consume stack, heap, or CPU if depth and complexity are not limited.",
+    "Size calculations can overflow before allocation, especially when counts, element sizes, and offsets are combined.",
+    "Limits should cover message size, individual field size, collection counts, nesting depth, parse time, and retained memory where those controls apply.",
+    "When limits are exceeded, the parser should reject the input, release temporary resources, and report a safe error.",
+    "Resource limits are not just performance settings; they are part of the format contract.",
+    "Limits should also be monitored where the parser is exposed to production traffic or large data sets."
+  ]
+};

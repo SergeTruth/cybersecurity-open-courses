@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Automatic storage duration is one of the most useful safety features in C++.
+
+2
+00:00:05.400 --> 00:00:11.640
+A local object begins its lifetime when execution reaches its construction and ends when its scope exits.
+
+3
+00:00:11.740 --> 00:00:19.740
+Destructors run automatically, so local containers, locks, smart pointers, and resource wrappers can clean up without a separate manual release path.
+
+4
+00:00:19.840 --> 00:00:24.560
+This makes simple stack lifetimes easy to review and efficient in practice.
+
+5
+00:00:24.840 --> 00:00:27.240
+The safety boundary is the scope.
+
+6
+00:00:27.340 --> 00:00:36.540
+A pointer, reference, iterator, span, string view, or other view into a local object must not outlive that local object.
+
+7
+00:00:36.640 --> 00:00:43.600
+Returning a reference to a local variable is unsafe because the referenced object is gone once the function returns.
+
+8
+00:00:43.700 --> 00:00:48.420
+Storing the address of a local buffer in a longer-lived object has the same problem.
+
+9
+00:00:48.520 --> 00:00:55.560
+The code may compile and may even appear to work during a test, but the access no longer refers to a valid object.
+
+10
+00:00:55.840 --> 00:00:58.960
+Temporaries also require lifetime awareness.
+
+11
+00:00:59.060 --> 00:01:06.660
+Binding, forwarding, or storing references to values that exist only for a short expression can create subtle dangling access.
+
+12
+00:01:06.760 --> 00:01:13.080
+Return values are normally safe when returned by value, because the returned object is constructed for the caller.
+
+13
+00:01:13.180 --> 00:01:20.060
+The danger appears when code tries to return or store access into an object whose lifetime remains local to the callee.
+
+14
+00:01:20.340 --> 00:01:26.340
+Stack objects are often the simplest and safest choice when ownership is local and bounded.
+
+15
+00:01:26.440 --> 00:01:29.480
+They become risky when access escapes the scope.
+
+16
+00:01:29.580 --> 00:01:35.740
+During review, ask whether every borrowed stack reference remains shorter-lived than the object it observes.
+
+17
+00:01:36.020 --> 00:01:39.140
+As code evolves, revisit those assumptions.
+
+18
+00:01:39.240 --> 00:01:47.960
+A helper that once used a local buffer only during the call may later cache a view, schedule a callback, or return a reference for convenience.
+
+19
+00:01:48.060 --> 00:01:53.820
+That is the moment a simple stack lifetime becomes a cross-boundary contract.
+
+20
+00:01:53.920 --> 00:02:00.080
+Keeping stack borrows narrow, local, and obvious helps prevent those quiet lifetime extensions.

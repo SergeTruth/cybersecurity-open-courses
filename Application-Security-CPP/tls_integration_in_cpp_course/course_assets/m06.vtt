@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.260
+Mutual TLS, often called mTLS, is a pattern where both sides of a TLS connection authenticate with certificates.
+
+2
+00:00:08.360 --> 00:00:14.200
+Instead of only the client validating the server, the server also validates a client certificate.
+
+3
+00:00:14.300 --> 00:00:24.940
+This can be useful for service-to-service communication, device identity, internal APIs, and workflows where the connection itself should carry a strong machine or workload identity.
+
+4
+00:00:25.220 --> 00:00:27.940
+mTLS adds lifecycle work.
+
+5
+00:00:28.040 --> 00:00:36.200
+Client certificates need issuance, storage, renewal, rotation, revocation, expiration handling, and deployment support.
+
+6
+00:00:36.300 --> 00:00:41.660
+The system also needs a clear way to map a validated certificate to an application identity.
+
+7
+00:00:41.760 --> 00:00:48.480
+That mapping should be documented and tested, especially when certificates are issued by different authorities or represent different environments.
+
+8
+00:00:48.760 --> 00:00:51.160
+Authentication is not the same as authorization.
+
+9
+00:00:51.260 --> 00:00:58.140
+A valid client certificate may prove an identity, but the application still needs to decide what that identity is allowed to do.
+
+10
+00:00:58.240 --> 00:01:05.200
+Authorization decisions should be explicit and reviewable rather than implied only by the presence of a certificate.
+
+11
+00:01:05.300 --> 00:01:11.620
+This distinction is important when certificates are shared across services, roles, or environments.
+
+12
+00:01:11.900 --> 00:01:15.660
+mTLS failures should be observable and safe.
+
+13
+00:01:15.760 --> 00:01:26.400
+Operators need to see expiration risk, validation failures, rotation problems, and unusual rejection rates without exposing private keys or certificate secrets.
+
+14
+00:01:26.500 --> 00:01:38.180
+The safest mTLS integration treats certificate lifecycle, identity mapping, authorization, monitoring, and incident response as one design, not as separate afterthoughts.
+
+15
+00:01:38.460 --> 00:01:41.260
+Teams should also plan how to remove access.
+
+16
+00:01:41.360 --> 00:01:52.080
+If a workload, device, or partner is retired, the certificate and authorization mapping should be retired cleanly so identity inventory and actual access stay aligned.

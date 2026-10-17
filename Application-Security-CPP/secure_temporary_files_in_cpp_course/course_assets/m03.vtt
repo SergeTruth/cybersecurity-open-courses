@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+Temporary filenames should not be predictable.
+
+2
+00:00:03.080 --> 00:00:11.800
+A timestamp, process ID, counter, or user-provided fragment may look unique during testing, but uniqueness is not the same as safe creation.
+
+3
+00:00:11.900 --> 00:00:17.340
+Other processes may observe, collide with, or pre-create names in shared locations.
+
+4
+00:00:17.620 --> 00:00:20.180
+Check-then-create workflows are fragile.
+
+5
+00:00:20.280 --> 00:00:27.400
+Code that checks whether a path exists and then later opens that path is making an assumption about filesystem state over time.
+
+6
+00:00:27.500 --> 00:00:31.580
+Between those two operations, the meaning of the path may change.
+
+7
+00:00:31.860 --> 00:00:37.300
+Safe creation should combine unpredictable naming with atomic exclusive creation.
+
+8
+00:00:37.400 --> 00:00:46.280
+The program should ask the platform or a well-reviewed wrapper to create and open a new file in one operation that fails if the chosen name is already present.
+
+9
+00:00:46.560 --> 00:00:48.960
+The opened handle should become the authority.
+
+10
+00:00:49.060 --> 00:00:56.180
+Once the file is created safely, code should prefer operations on the handle rather than repeatedly reinterpreting the string path.
+
+11
+00:00:56.280 --> 00:01:02.280
+The path can still be useful for cleanup or coordination, but it should not be the only proof of what was opened.
+
+12
+00:01:02.560 --> 00:01:09.200
+Prefer platform-supported secure temporary creation APIs or project wrappers that encode the right semantics.
+
+13
+00:01:09.300 --> 00:01:18.260
+C and C++ ecosystems include many older naming helpers and convenience functions, and not all of them provide the same safety properties.
+
+14
+00:01:18.540 --> 00:01:21.820
+Avoid hand-rolled randomness and naming rules.
+
+15
+00:01:21.920 --> 00:01:29.600
+A local naming scheme has to get unpredictability, collision handling, permissions, and directory behavior right across platforms.
+
+16
+00:01:29.700 --> 00:01:34.740
+A reviewed wrapper is easier to test, document, and maintain.
+
+17
+00:01:35.020 --> 00:01:42.140
+During review, look for any code that constructs a temporary path as a string and later assumes it is safe.
+
+18
+00:01:42.240 --> 00:01:49.040
+That pattern deserves careful replacement or a clear explanation of how creation remains atomic and exclusive.
+
+19
+00:01:49.320 --> 00:01:53.400
+Tests should verify both success and collision behavior.
+
+20
+00:01:53.500 --> 00:02:03.660
+The safe path is not only that creation succeeds under normal conditions, but also that the program handles an already-existing candidate without reusing a file it did not create.

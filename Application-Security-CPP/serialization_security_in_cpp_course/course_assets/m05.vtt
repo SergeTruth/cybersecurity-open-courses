@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Many serialization defects involve lengths, counts, nesting, and allocation.
+
+2
+00:00:06.760 --> 00:00:16.120
+A length field may be wrong, unexpectedly large, negative after conversion, inconsistent with the remaining input, or inconsistent with related fields.
+
+3
+00:00:16.220 --> 00:00:19.980
+A count field may drive loops or allocations.
+
+4
+00:00:20.080 --> 00:00:25.600
+Nested data can consume stack, heap, or CPU if depth and complexity are not limited.
+
+5
+00:00:25.880 --> 00:00:29.640
+Defensive parsers validate sizes before allocation.
+
+6
+00:00:29.740 --> 00:00:38.220
+They check that the declared size fits within the remaining input, within the maximum allowed message size, and within the application's memory policy.
+
+7
+00:00:38.320 --> 00:00:41.360
+They also check arithmetic carefully.
+
+8
+00:00:41.460 --> 00:00:48.340
+Size calculations can overflow before allocation, especially when counts, element sizes, and offsets are combined.
+
+9
+00:00:48.620 --> 00:00:51.740
+Availability is part of secure parsing.
+
+10
+00:00:51.840 --> 00:01:03.760
+A parser that accepts unlimited nesting, unlimited repeated fields, unlimited string lengths, or unlimited queued records can be correct for small examples and unsafe under pressure.
+
+11
+00:01:03.860 --> 00:01:14.180
+Limits should cover message size, individual field size, collection counts, nesting depth, parse time, and retained memory where those controls apply.
+
+12
+00:01:14.460 --> 00:01:16.540
+Failure behavior should be explicit.
+
+13
+00:01:16.640 --> 00:01:23.360
+When limits are exceeded, the parser should reject the input, release temporary resources, and report a safe error.
+
+14
+00:01:23.460 --> 00:01:29.060
+The program should not continue with truncated data, partially constructed objects, or guessed defaults.
+
+15
+00:01:29.160 --> 00:01:33.880
+Resource limits are not just performance settings; they are part of the format contract.
+
+16
+00:01:34.160 --> 00:01:40.480
+Limits should also be monitored where the parser is exposed to production traffic or large data sets.
+
+17
+00:01:40.580 --> 00:01:48.740
+Frequent limit failures can signal bad clients, incompatible data, or sizing assumptions that need product review, and the response should be predictable.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+std::unique_ptr is often the right default when dynamic ownership is necessary.
+
+2
+00:00:06.680 --> 00:00:11.000
+It says that exactly one owner is responsible for destroying the object.
+
+3
+00:00:11.100 --> 00:00:17.340
+That simplicity is valuable during security review because ownership transfer is visible through move semantics.
+
+4
+00:00:17.440 --> 00:00:22.320
+A copied unique_ptr is not allowed; a moved one makes the handoff explicit.
+
+5
+00:00:22.600 --> 00:00:24.760
+Factory functions are a common pattern.
+
+6
+00:00:24.860 --> 00:00:31.100
+A factory can build an object and return std::unique_ptr , making the caller's ownership clear.
+
+7
+00:00:31.200 --> 00:00:40.240
+Member fields can also use unique_ptr when an object owns a subobject whose lifetime should end with the containing object.
+
+8
+00:00:40.340 --> 00:00:45.140
+This avoids raw owning pointers and makes destruction predictable through RAII.
+
+9
+00:00:45.420 --> 00:00:47.820
+Safe use still requires discipline.
+
+10
+00:00:47.920 --> 00:00:57.680
+Passing ptr.get() can be appropriate for short borrowed access, but the callee must not delete or store that raw pointer unless a separate contract guarantees lifetime.
+
+11
+00:00:57.780 --> 00:01:03.540
+Calling release() is review-sensitive because it gives up ownership without destroying the object.
+
+12
+00:01:03.640 --> 00:01:08.440
+If release is used, a new owner should take responsibility immediately.
+
+13
+00:01:08.720 --> 00:01:14.400
+unique_ptr can also carry a custom deleter for resources that are not released with ordinary delete .
+
+14
+00:01:14.500 --> 00:01:19.700
+That makes it useful at library boundaries, but the deleter must match the creation API.
+
+15
+00:01:19.800 --> 00:01:28.120
+Overall, exclusive ownership keeps object graphs smaller, cleanup paths easier to test, and lifetime responsibilities easier to maintain.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+The boundary around serialized data changes the risk.
+
+2
+00:00:04.280 --> 00:00:13.080
+A file parser must handle missing files, truncated files, stale versions, partial writes, path assumptions, and metadata confusion.
+
+3
+00:00:13.180 --> 00:00:23.740
+File names, extensions, directory locations, and timestamps can provide context, but they are not a substitute for validating the serialized content itself.
+
+4
+00:00:24.020 --> 00:00:26.260
+A network parser has different concerns.
+
+5
+00:00:26.360 --> 00:00:37.320
+It must handle framing, partial I/O, timeouts, retransmission, oversized messages, peers that disconnect, and messages that arrive out of order for the application protocol.
+
+6
+00:00:37.420 --> 00:00:43.660
+The parser should know when a complete message has arrived before it attempts to interpret fields or make state changes.
+
+7
+00:00:43.940 --> 00:00:45.860
+Storage boundaries also matter.
+
+8
+00:00:45.960 --> 00:00:56.680
+Database records, cache entries, queue messages, and telemetry blobs may be old, partially migrated, or created by a previous version of the system.
+
+9
+00:00:56.780 --> 00:01:01.340
+A cache hit should not automatically mean the data is current and safe.
+
+10
+00:01:01.440 --> 00:01:07.840
+Compatibility rules and validation still apply when data comes from infrastructure the application usually trusts.
+
+11
+00:01:08.120 --> 00:01:14.200
+Logs and telemetry may contain sensitive serialized fields that require redaction or minimization.
+
+12
+00:01:14.300 --> 00:01:25.180
+Boundary assumptions should be documented: what data is covered by validation, what is covered by integrity checks, what is encrypted, and which compatibility rules apply.
+
+13
+00:01:25.280 --> 00:01:30.160
+Clear boundaries make audits and incident response much easier.
+
+14
+00:01:30.440 --> 00:01:34.920
+The same serialized format may appear in more than one boundary over time.
+
+15
+00:01:35.020 --> 00:01:41.260
+A file format may later be sent over a network, or a cache entry may become a queue message.
+
+16
+00:01:41.360 --> 00:01:44.080
+Review assumptions whenever the boundary changes.

@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Temporary-file security is platform-sensitive.
+
+2
+00:00:04.040 --> 00:00:16.680
+File modes, directory permissions, link behavior, deletion semantics, inherited access rules, handle lifetime, and naming APIs can vary across operating systems and runtime libraries.
+
+3
+00:00:16.960 --> 00:00:26.560
+The C++ standard library can help with paths and filesystem operations, but secure temporary-file creation often depends on platform-specific semantics.
+
+4
+00:00:26.660 --> 00:00:33.540
+A portable-looking path operation may not provide atomic exclusive creation or the permission behavior the design expects.
+
+5
+00:00:33.820 --> 00:00:39.740
+C library helpers and operating system APIs should be wrapped behind clear project contracts.
+
+6
+00:00:39.840 --> 00:00:49.040
+A wrapper can define the trusted directory policy, creation mode, naming approach, permission rules, cleanup ownership, and error behavior in one place.
+
+7
+00:00:49.320 --> 00:00:51.320
+Review deletion behavior carefully.
+
+8
+00:00:51.420 --> 00:00:55.820
+Some platforms allow removing a file name while a handle remains open.
+
+9
+00:00:55.920 --> 00:01:00.800
+Others behave differently when files are shared, mapped, or opened by another process.
+
+10
+00:01:00.900 --> 00:01:04.180
+The cleanup strategy should match the target platform's rules.
+
+11
+00:01:04.460 --> 00:01:08.460
+Link behavior and canonicalization rules also vary.
+
+12
+00:01:08.560 --> 00:01:15.280
+Decide whether links are allowed, whether they are followed, how base-directory checks work, and which APIs enforce those decisions.
+
+13
+00:01:15.380 --> 00:01:19.540
+Then test the policy on the platforms the software actually supports.
+
+14
+00:01:19.820 --> 00:01:23.740
+Review questions should be concrete: Is creation atomic?
+
+15
+00:01:23.840 --> 00:01:25.280
+Is the directory trusted?
+
+16
+00:01:25.380 --> 00:01:26.900
+Are names unpredictable?
+
+17
+00:01:27.000 --> 00:01:28.760
+Are permissions restrictive?
+
+18
+00:01:28.860 --> 00:01:30.940
+Is sensitive content minimized?
+
+19
+00:01:31.040 --> 00:01:32.400
+Is cleanup reliable?
+
+20
+00:01:32.500 --> 00:01:34.340
+Are failure paths tested?
+
+21
+00:01:34.620 --> 00:01:38.060
+Make temporary-file policy visible in code review.
+
+22
+00:01:38.160 --> 00:01:48.160
+When a module reaches directly for low-level APIs, reviewers should ask whether the shared wrapper already solves the problem and whether platform assumptions are documented.
+
+23
+00:01:48.440 --> 00:01:54.520
+Cross-platform tests should include the behaviors the policy depends on, not only the happy path.
+
+24
+00:01:54.620 --> 00:02:03.260
+Creation failure, permission mismatch, cleanup while handles are open, and restart cleanup can behave differently enough to deserve explicit coverage.
+
+25
+00:02:03.540 --> 00:02:06.900
+Documentation should name supported platforms and assumptions.
+
+26
+00:02:07.000 --> 00:02:14.840
+If a wrapper relies on a specific OS guarantee, future maintainers should not have to rediscover that detail from scattered call sites.

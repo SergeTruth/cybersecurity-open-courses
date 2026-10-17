@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.860
+Choosing a serialization format is both a security decision and a maintenance decision.
+
+2
+00:00:05.960 --> 00:00:15.080
+The format determines how easy it is to see structure, validate fields, test boundaries, evolve compatibility, and explain failures.
+
+3
+00:00:15.180 --> 00:00:23.660
+A format that is convenient for one team may become difficult to operate when the data crosses a process, service, file, or vendor boundary.
+
+4
+00:00:23.940 --> 00:00:33.540
+Text formats can be easier to inspect, diff, and troubleshoot, but they still require careful encoding, escaping, canonicalization, and type handling.
+
+5
+00:00:33.640 --> 00:00:41.480
+Binary formats can be compact and fast, but they may be harder to inspect and easier to parse incorrectly if the structure is informal.
+
+6
+00:00:41.580 --> 00:00:48.780
+Schema-based formats can make expected fields, types, defaults, and version behavior explicit.
+
+7
+00:00:49.060 --> 00:00:53.140
+Custom formats are sometimes necessary, but they carry long-term ownership.
+
+8
+00:00:53.240 --> 00:01:00.360
+The team must document the grammar, define limits, test malformed input, and maintain compatibility rules.
+
+9
+00:01:00.460 --> 00:01:09.820
+Designs that blindly reconstruct arbitrary runtime objects from untrusted data are especially hard to review because the serialized form controls too much of the runtime behavior.
+
+10
+00:01:10.100 --> 00:01:18.420
+The safest choice depends on trust level, interoperability needs, performance requirements, compatibility promises, and reviewability.
+
+11
+00:01:18.520 --> 00:01:25.240
+Ask how the format will reject invalid input, how it will evolve, how old data will be read, and who owns changes.
+
+12
+00:01:25.340 --> 00:01:31.260
+Format selection is not only about bytes on the wire; it shapes the security properties of the system for years.
+
+13
+00:01:31.540 --> 00:01:34.260
+A good format choice also makes misuse visible.
+
+14
+00:01:34.360 --> 00:01:47.800
+If developers can understand the structure, limits, and intended evolution path, they are more likely to add validation when requirements change instead of extending the parser with undocumented special cases.
