@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Pointer Safety Means",
+  "graphicAlt": "Show pointer contracts include ownership, nullability, lifetime, bounds and storage intent.",
+  "narration": "Pointer safety is the discipline of using address-based access only when the surrounding contract is clear. A pointer may identify one object, the first element of a buffer, an optional parameter, a borrowed object, a transferred owner, or an external handle. The value itself does not explain which meaning is intended. That ambiguity is where many C++ memory defects begin.\n\nPointers are not inherently bad. They are low-level tools that remain useful at library boundaries, performance-sensitive interfaces, and places where optional or non-owning access must be represented. They become risky when lifetime, ownership, nullability, mutability, or bounds are left for maintainers to infer from scattered call sites. A safe pointer design answers basic questions near the API: who owns the object, may this pointer be null, how long is it valid, what range may be accessed, and may the callee store it?\n\nPointer safety also connects to security and reliability. A stale pointer, mismatched length, hidden ownership transfer, or unchecked nullable pointer can produce crashes, data corruption, and confusing failure behavior. In security-sensitive systems, those same defects make review and incident analysis harder because the program's memory assumptions are unclear.\n\nThe practical goal is not to ban every raw pointer. It is to make pointer intent explicit. Use references for required non-null access, smart pointers for ownership, spans or containers for bounded sequences, and clear contracts at legacy boundaries. Safer C++ lets reviewers understand pointer meaning without guessing.",
+  "narrationPoints": [
+    "A pointer contract must distinguish single objects, buffers, optional parameters, borrowed objects, transferred owners, and external handles.",
+    "Pointer safety is the discipline of using address-based access only when the surrounding contract is clear.",
+    "A safe pointer API states ownership, nullability, lifetime, accessible range, and whether the callee may retain the pointer.",
+    "A stale pointer, mismatched length, hidden ownership transfer, or unchecked nullable pointer can produce crashes, data corruption, and confusing failure behavior.",
+    "In security-sensitive systems, those same defects make review and incident analysis harder because the program's memory assumptions are unclear.",
+    "Use references for required non-null access, smart pointers for ownership, spans or containers for bounded sequences, and clear contracts at legacy boundaries."
+  ]
+};

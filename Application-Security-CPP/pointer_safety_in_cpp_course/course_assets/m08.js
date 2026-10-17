@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Callbacks, Concurrency, and Stored Pointers",
+  "graphicAlt": "Show queued callback resolves lifetime/cancellation and separate state lock before use.",
+  "narration": "A pointer that is safe for immediate use may be unsafe when saved for later. Callbacks, asynchronous jobs, threads, event handlers, and containers of pointers all extend the reasoning window. The reviewer must ask not only whether the pointer is valid now, but whether it will still be valid when the stored access is eventually used.\n\nCaptured this pointers deserve special attention. A member function may schedule work that runs after the object has been destroyed. A callback registry may store a raw pointer without knowing when the target unregisters. A background task may keep a borrowed pointer from a request that has already completed. These designs need explicit lifetime policy: ownership handoff, cancellation, weak observation, or a guarantee that the owner outlives the work.\n\nShared ownership can keep an object alive for asynchronous work, but it is not always the right answer. It may extend lifetime longer than intended or create cycles. Weak observation can be better when work should simply stop if the target no longer exists. In either case, lifetime safety is not thread safety. A pointer or smart pointer can ensure an object exists while still leaving its internal state unsafe for concurrent mutation.\n\nReview async pointer use together with synchronization. What is captured? Who owns it while work is pending? What happens during shutdown or cancellation? What protects mutable state? Tests should cover delayed execution, unregister order, shutdown paths, and cancellation under load because those timings often decide whether a stored pointer remains valid when used. Clear answers prevent stored pointers from becoming stale access hidden behind event-driven code.",
+  "narrationPoints": [
+    "A pointer that is safe for immediate use may be unsafe when saved for later.",
+    "The reviewer must ask not only whether the pointer is valid now, but whether it will still be valid when the stored access is eventually used.",
+    "A member function may schedule work that runs after the object has been destroyed.",
+    "Shared ownership can keep an object alive for asynchronous work, but it is not always the right answer.",
+    "A pointer or smart pointer can ensure an object exists while still leaving its internal state unsafe for concurrent mutation.",
+    "Clear answers prevent stored pointers from becoming stale access hidden behind event-driven code."
+  ]
+};

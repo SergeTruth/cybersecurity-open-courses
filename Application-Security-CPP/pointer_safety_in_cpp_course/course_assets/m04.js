@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Lifetime Hazards and Dangling Pointers",
+  "graphicAlt": "Show pointer escape through stored/callback paths requires stronger lifetime contract.",
+  "narration": "A dangling pointer refers to an object or storage that is no longer valid. This can happen when code returns the address of a local object, stores access to a temporary, keeps a pointer after deletion, or saves a view into data that later goes away. The pointer value may still look like an address, but the program no longer has a valid object behind it.\n\nLifetime hazards often come from hidden relationships rather than one dramatic mistake. A helper may store a pointer that was meant only for the call. A callback may run after the owner has been destroyed. A container may reallocate and invalidate pointers into its elements. Code may move an object and then rely on details of its old state. Each case is a contract problem: access lived longer than the state it described.\n\nPointer escape is a key review concept. Whenever a pointer crosses a boundary, ask whether it is used immediately, stored, returned, captured, or passed to asynchronous work. Short-lived borrows are easier to verify. Long-lived access requires a stronger ownership or observation model. If the pointer may be stored, the API should say who guarantees the pointee remains alive and how invalidation is handled.\n\nPrevention relies on ownership clarity and RAII. Return values or owning handles when lifetime would otherwise be ambiguous. Use containers and smart pointers to tie cleanup to object lifetime. Keep views shorter-lived than their source data. Also review exceptional exits and early returns: cleanup may happen sooner than the caller expects, and stored pointers may outlive partially completed initialization. Test teardown, cancellation, movement, and container modification paths because those are where dangling access often becomes visible.",
+  "narrationPoints": [
+    "A dangling pointer refers to an object or storage that is no longer valid.",
+    "A container may reallocate and invalidate pointers into its elements.",
+    "If the pointer may be stored, the API should say who guarantees the pointee remains alive and how invalidation is handled.",
+    "Whenever a pointer crosses a boundary, ask whether it is used immediately, stored, returned, captured, or passed to asynchronous work.",
+    "Test teardown, cancellation, movement, and container modification paths because those are where dangling access often becomes visible.",
+    "Also review exceptional exits and early returns: cleanup may happen sooner than the caller expects, and stored pointers may outlive partially completed initialization."
+  ]
+};

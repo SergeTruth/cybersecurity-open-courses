@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Authorization Patterns in Python Mean",
+  "graphicAlt": "Subject, action, resource and context determine whether one protected operation is permitted or denied.",
+  "narration": "Authorization is the decision about what an authenticated subject is allowed to do. In Python applications, the subject may be a human user, service account, API client, background job, automation process, or internal workload. The resource may be a record, file, tenant, project, report, function, queue message, integration, or administrative operation. The action may be read, create, update, approve, export, delete, or administer. Good authorization patterns make those decisions explicit instead of hiding them in assumptions.\n\nAuthentication, authorization, session management, and auditing are related but separate. Authentication verifies identity. Authorization decides permitted actions. Session management carries authenticated state across requests or jobs. Auditing records what happened for review, investigation, and accountability. A successful login does not imply broad access. A valid session or token is only a starting point for a more specific access decision.\n\nPython applications appear in many forms: Flask and Django sites, FastAPI services, internal tools, automation systems, APIs, background workers, command-line utilities, and service integrations. The exact framework changes, but the pattern stays stable. Sensitive operations should check a subject, an action, a resource, and relevant context before data is disclosed or changed. The check should be server-side, testable, and close enough to the operation that future changes do not accidentally bypass it.\n\nAuthorization should be consistent and maintainable. Scattered one-off checks make it difficult for developers to know whether access is enforced correctly. Overly broad checks can allow too much. Checks that live only in the user interface can be bypassed by direct requests or automation. Strong Python authorization design gives teams a shared structure for deciding access, reviewing code, testing negative cases, logging important events, and evolving policies as the application changes.",
+  "narrationPoints": [
+    "Authorization is the decision about what an authenticated.",
+    "Authentication, authorization, session management,.",
+    "Python applications appear in many forms: Flask and Django.",
+    "Authorization should be consistent and maintainable.",
+    "Auditing records what happened for review.",
+    "Sensitive operations should check a subject."
+  ]
+};

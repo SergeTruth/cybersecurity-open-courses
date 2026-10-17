@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Leak prevention starts with ownership.
+
+2
+00:00:03.640 --> 00:00:10.840
+Ownership answers a practical question: who is responsible for keeping this resource alive and releasing it when the work is done?
+
+3
+00:00:10.940 --> 00:00:21.100
+A design with one clear owner is usually easier to understand, test, and maintain than a design where responsibility moves by convention.
+
+4
+00:00:21.380 --> 00:00:23.620
+Borrowing is different from ownership.
+
+5
+00:00:23.720 --> 00:00:32.520
+A borrowed pointer, reference, span, iterator, or view lets code use a resource temporarily without taking cleanup responsibility.
+
+6
+00:00:32.620 --> 00:00:36.860
+Borrowed access should remain within the lifetime contract of the owner.
+
+7
+00:00:36.960 --> 00:00:40.720
+It should not silently become a long-lived dependency.
+
+8
+00:00:41.000 --> 00:00:43.560
+Ownership transfer should be visible in code.
+
+9
+00:00:43.660 --> 00:00:49.660
+If a function creates a resource and gives responsibility to the caller, the return type should express that.
+
+10
+00:00:49.760 --> 00:00:55.760
+If a function accepts responsibility from the caller, the parameter type and call site should make the handoff obvious.
+
+11
+00:00:55.860 --> 00:00:59.300
+Hidden transfer rules create fragile cleanup behavior.
+
+12
+00:00:59.580 --> 00:01:02.300
+Shared ownership requires deliberate design.
+
+13
+00:01:02.400 --> 00:01:08.080
+When multiple owners can keep a resource alive, cleanup happens only after the final owner releases it.
+
+14
+00:01:08.180 --> 00:01:16.100
+That can be correct, but reviewers need to understand who may extend lifetime, how cycles are prevented, and what resources may remain retained.
+
+15
+00:01:16.380 --> 00:01:18.380
+Cleanup rules should be easy to review.
+
+16
+00:01:18.480 --> 00:01:26.560
+Constructors, destructors, member types, function signatures, and wrapper types should communicate lifecycle responsibilities.
+
+17
+00:01:26.660 --> 00:01:32.260
+Comments can help, but the design should not depend on comments to decide who releases a resource.
+
+18
+00:01:32.540 --> 00:01:38.140
+Ambiguous lifetime rules create leak risk because each component may assume another component will clean up.
+
+19
+00:01:38.240 --> 00:01:46.160
+During review, ask who creates, observes, stores, transfers, shares, and destroys each resource.
+
+20
+00:01:46.260 --> 00:01:51.700
+If the answer is unclear, the design needs more lifecycle information in the code itself.
+
+21
+00:01:51.980 --> 00:01:56.940
+One practical technique is to document ownership at module boundaries.
+
+22
+00:01:57.040 --> 00:02:06.080
+Public APIs should make it clear whether callers keep responsibility, give responsibility away, receive a borrowed view, or participate in shared lifetime management.

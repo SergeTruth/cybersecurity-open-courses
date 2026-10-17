@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.820
+Leaks often appear in failure paths.
+
+2
+00:00:02.920 --> 00:00:08.280
+A function allocates one resource, fails while acquiring another, and skips cleanup.
+
+3
+00:00:08.380 --> 00:00:11.340
+A constructor partially initializes an object.
+
+4
+00:00:11.440 --> 00:00:13.600
+A retry path keeps old state.
+
+5
+00:00:13.700 --> 00:00:17.060
+An early return misses a manual release call.
+
+6
+00:00:17.160 --> 00:00:22.200
+These paths are easy to miss when tests cover only successful execution.
+
+7
+00:00:22.480 --> 00:00:28.000
+RAII is the preferred answer because destructors run when owning objects leave scope.
+
+8
+00:00:28.100 --> 00:00:39.380
+If a local owner represents each acquired resource, cleanup happens whether the function reaches the normal end, returns early, or exits through an exception according to project policy.
+
+9
+00:00:39.660 --> 00:00:43.740
+Partial initialization needs careful ownership handling.
+
+10
+00:00:43.840 --> 00:00:48.320
+A resource should not escape to other code until the owner can maintain its invariant.
+
+11
+00:00:48.420 --> 00:00:55.540
+If construction cannot complete, cleanup should remain inside the object or factory that knows which pieces were acquired.
+
+12
+00:00:55.820 --> 00:01:00.380
+Ownership transfer should happen only after setup has succeeded.
+
+13
+00:01:00.480 --> 00:01:06.320
+A function should avoid handing responsibility to another component while still depending on local cleanup assumptions.
+
+14
+00:01:06.420 --> 00:01:12.020
+Transfer points should be visible and should leave exactly one owner responsible for each resource.
+
+15
+00:01:12.300 --> 00:01:15.500
+Error-path tests should verify cleanup behavior.
+
+16
+00:01:15.600 --> 00:01:25.760
+Tests should exercise failed initialization, rejected inputs, canceled operations, retries, shutdown during setup, and repeated create-destroy cycles.
+
+17
+00:01:25.860 --> 00:01:30.980
+Leak prevention becomes much more reliable when failure paths are first-class test cases.
+
+18
+00:01:31.260 --> 00:01:44.060
+A useful implementation habit is to acquire resources into local RAII owners first, validate the rest of the setup, and then commit the completed owner to longer-lived state only after the invariant is established.

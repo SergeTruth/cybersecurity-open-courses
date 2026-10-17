@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:17.140
+Authentication architecture includes login flows, registration flows, password reset flows, identity provider integration, callback endpoints, redirects, cookies, headers, API boundaries, frontend and backend boundaries, and authentication middleware.
+
+2
+00:00:17.240 --> 00:00:20.280
+These pieces should work together as one clear system.
+
+3
+00:00:20.380 --> 00:00:32.780
+If every route, worker, or service invents its own identity checks, reviewers cannot easily tell which requests are authenticated, which claims are trusted, and which paths are accidental exceptions.
+
+4
+00:00:33.060 --> 00:00:35.380
+Trust boundaries are central to authentication.
+
+5
+00:00:35.480 --> 00:00:40.760
+A browser request crossing into a Python backend is not automatically trustworthy.
+
+6
+00:00:40.860 --> 00:00:46.060
+A header set by a client should not be treated like a header set by a trusted proxy.
+
+7
+00:00:46.160 --> 00:00:50.960
+A claim from a validated identity token is different from a form field named role.
+
+8
+00:00:51.060 --> 00:00:55.540
+A callback from an identity provider is different from an arbitrary redirect request.
+
+9
+00:00:55.640 --> 00:01:01.800
+Good architecture labels these boundaries and validates identity information at the point where trust changes.
+
+10
+00:01:02.080 --> 00:01:09.200
+Authentication decisions should be centralized where practical, explicit in code, and hard to bypass accidentally.
+
+11
+00:01:09.300 --> 00:01:18.180
+Middleware, framework-supported decorators, dependency injection, route guards, and shared identity services can all help when used consistently.
+
+12
+00:01:18.280 --> 00:01:27.480
+The exact mechanism varies by framework, but the goal is the same: sensitive handlers should not need to guess whether identity was established correctly somewhere else.
+
+13
+00:01:27.760 --> 00:01:31.040
+Architecture should also account for failure and edge cases.
+
+14
+00:01:31.140 --> 00:01:34.420
+What happens when the identity provider is unavailable?
+
+15
+00:01:34.520 --> 00:01:36.680
+What happens when a callback is malformed?
+
+16
+00:01:36.780 --> 00:01:39.660
+Which endpoints are intentionally public?
+
+17
+00:01:39.760 --> 00:01:42.400
+How are service-to-service calls authenticated?
+
+18
+00:01:42.500 --> 00:01:45.060
+Where is authentication state stored?
+
+19
+00:01:45.160 --> 00:01:47.400
+Clear answers make the system testable.
+
+20
+00:01:47.500 --> 00:01:53.500
+They also prevent developers from adding one-off checks that work in the happy path but fail under pressure.

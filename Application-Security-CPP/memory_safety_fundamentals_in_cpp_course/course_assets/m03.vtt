@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.140
+Resource Acquisition Is Initialization, usually called RAII, is one of the most important safety patterns in C++.
+
+2
+00:00:09.240 --> 00:00:14.840
+The idea is to bind a resource to an object whose lifetime is already managed by the language.
+
+3
+00:00:14.940 --> 00:00:19.980
+The constructor establishes the resource or invariant, and the destructor releases it.
+
+4
+00:00:20.080 --> 00:00:26.720
+When the object leaves scope, cleanup runs deterministically, including during early returns and error paths.
+
+5
+00:00:27.000 --> 00:00:30.760
+RAII matters because manual release logic is fragile.
+
+6
+00:00:30.860 --> 00:00:37.740
+A function may gain a new branch, a validation check, or an exception boundary, and suddenly a cleanup call is missed.
+
+7
+00:00:37.840 --> 00:00:44.160
+When cleanup is encoded in a destructor, the code no longer depends on every path remembering the same final action.
+
+8
+00:00:44.260 --> 00:00:46.900
+Standard containers use this model for memory.
+
+9
+00:00:47.000 --> 00:00:49.320
+Lock guards use it for mutexes.
+
+10
+00:00:49.420 --> 00:00:51.900
+Smart pointers use it for ownership.
+
+11
+00:00:52.000 --> 00:00:58.800
+File, socket, and handle wrappers can use the same design when a system resource needs reliable release.
+
+12
+00:00:59.080 --> 00:01:02.760
+The rule of zero is a practical extension of the same habit.
+
+13
+00:01:02.860 --> 00:01:11.900
+Prefer member types that already manage their own resources so your class does not need custom destructors, copy operations, or move operations.
+
+14
+00:01:12.000 --> 00:01:19.280
+If a class must directly own a raw resource, make that responsibility narrow, documented, and tested.
+
+15
+00:01:19.380 --> 00:01:23.620
+Avoid spreading allocation and release across unrelated functions.
+
+16
+00:01:23.720 --> 00:01:34.600
+The safer pattern is local, reviewable, and deterministic: acquire a valid resource into an object, perform the work, and let object lifetime handle cleanup consistently.
+
+17
+00:01:34.880 --> 00:01:42.880
+RAII also improves security review because cleanup behavior becomes part of the type contract instead of a convention hidden in call sites.
+
+18
+00:01:42.980 --> 00:01:52.580
+Reviewers can focus on whether the wrapper is correct, whether copying or moving is allowed, and whether the resource is always placed in a valid state.
+
+19
+00:01:52.680 --> 00:01:59.400
+Once that is true, ordinary application code can use the wrapper without repeating low-level cleanup decisions in every branch.

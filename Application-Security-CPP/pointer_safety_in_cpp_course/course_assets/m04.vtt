@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+A dangling pointer refers to an object or storage that is no longer valid.
+
+2
+00:00:05.160 --> 00:00:14.040
+This can happen when code returns the address of a local object, stores access to a temporary, keeps a pointer after deletion, or saves a view into data that later goes away.
+
+3
+00:00:14.140 --> 00:00:19.740
+The pointer value may still look like an address, but the program no longer has a valid object behind it.
+
+4
+00:00:20.020 --> 00:00:25.140
+Lifetime hazards often come from hidden relationships rather than one dramatic mistake.
+
+5
+00:00:25.240 --> 00:00:27.880
+A helper may store a pointer that was meant only for the call.
+
+6
+00:00:27.980 --> 00:00:31.420
+A callback may run after the owner has been destroyed.
+
+7
+00:00:31.520 --> 00:00:36.560
+A container may reallocate and invalidate pointers into its elements.
+
+8
+00:00:36.660 --> 00:00:40.580
+Code may move an object and then rely on details of its old state.
+
+9
+00:00:40.680 --> 00:00:45.320
+Each case is a contract problem: access lived longer than the state it described.
+
+10
+00:00:45.600 --> 00:00:48.800
+Pointer escape is a key review concept.
+
+11
+00:00:48.900 --> 00:00:57.700
+Whenever a pointer crosses a boundary, ask whether it is used immediately, stored, returned, captured, or passed to asynchronous work.
+
+12
+00:00:57.800 --> 00:01:00.760
+Short-lived borrows are easier to verify.
+
+13
+00:01:00.860 --> 00:01:05.260
+Long-lived access requires a stronger ownership or observation model.
+
+14
+00:01:05.360 --> 00:01:12.640
+If the pointer may be stored, the API should say who guarantees the pointee remains alive and how invalidation is handled.
+
+15
+00:01:12.920 --> 00:01:16.120
+Prevention relies on ownership clarity and RAII.
+
+16
+00:01:16.220 --> 00:01:21.500
+Return values or owning handles when lifetime would otherwise be ambiguous.
+
+17
+00:01:21.600 --> 00:01:26.000
+Use containers and smart pointers to tie cleanup to object lifetime.
+
+18
+00:01:26.100 --> 00:01:28.740
+Keep views shorter-lived than their source data.
+
+19
+00:01:28.840 --> 00:01:38.040
+Also review exceptional exits and early returns: cleanup may happen sooner than the caller expects, and stored pointers may outlive partially completed initialization.
+
+20
+00:01:38.140 --> 00:01:47.580
+Test teardown, cancellation, movement, and container modification paths because those are where dangling access often becomes visible.

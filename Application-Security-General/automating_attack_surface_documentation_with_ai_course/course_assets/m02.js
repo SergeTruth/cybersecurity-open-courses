@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Defining Scope and Documentation Goals",
+  "narration": "A useful AI-assisted documentation effort begins with scope. Define the application, system boundary, environments, business functions, users, roles, external interfaces, internal services, cloud resources, third-party dependencies, and sensitive data types that are in scope. A vague request such as document the attack surface invites broad, inconsistent output. A scoped request creates a reviewable work product.\n\nScope should also identify what is not included. A production application may have development environments, test tenants, old integrations, legacy APIs, and vendor-managed components. Some may be in scope and some may not. Clear boundaries prevent the AI workflow from blending unrelated systems or implying that unreviewed areas were covered.\n\nDocumentation goals shape the output. Architecture review may need a component summary and trust boundary map. Threat modeling may need data flows, entry points, and security assumptions. Compliance may need owners, control evidence, and data classification. Vulnerability management may need exposed interfaces and dependency context. Incident readiness may need identity paths, logs, and critical data stores.\n\nThe audience matters. Developers need details that connect to repositories, services, and deployment manifests. Security teams need exposure, trust boundaries, identity, and risk notes. Architects need dependency and flow clarity. Auditors need provenance and review evidence. Incident responders need owners, critical resources, logging, and recovery context.\n\nA strong scope statement becomes the guardrail for AI use. It tells the model what evidence to consider, what output to produce, and where to stop. It also gives human reviewers a way to decide whether the document is complete enough for its purpose.",
+  "graphicAlt": "A scope statement separates included application, interface and environment evidence from excluded areas and guides the documentation purpose.",
+  "narrationPoints": [
+    "A useful AI-assisted documentation effort begins with scope.",
+    "Scope should also identify what is not included.",
+    "Documentation goals shape the output.",
+    "The audience matters."
+  ]
+};

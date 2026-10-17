@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.220
+Many Node.js teams use external identity providers and assume authentication has been outsourced.
+
+2
+00:00:07.320 --> 00:00:14.120
+In reality, the provider handles part of the flow, while the application still owns important security decisions.
+
+3
+00:00:14.220 --> 00:00:19.500
+OAuth 2.0 is primarily an authorization framework.
+
+4
+00:00:19.600 --> 00:00:23.200
+OpenID Connect adds an identity layer for authentication.
+
+5
+00:00:23.300 --> 00:00:34.020
+The application should understand whether it is validating an ID token, using an access token, exchanging an authorization code, or establishing a local session after a provider login.
+
+6
+00:00:34.300 --> 00:00:42.300
+Modern interactive flows commonly use Authorization Code Flow with PKCE, but the durable lesson is validation and clear responsibility.
+
+7
+00:00:42.400 --> 00:00:53.920
+Redirect URI validation, state, nonce, issuer validation, audience validation, token handling, and provider metadata are security-critical details.
+
+8
+00:00:54.020 --> 00:01:03.380
+These protocols should be implemented through well-maintained libraries and provider configuration, not hand-rolled request parsing and custom assumptions.
+
+9
+00:01:03.480 --> 00:01:07.880
+Protocol correctness is difficult and easy to get subtly wrong.
+
+10
+00:01:08.160 --> 00:01:16.080
+External identity does not remove local account mapping, authorization, session handling, logging, or account lifecycle decisions.
+
+11
+00:01:16.180 --> 00:01:32.820
+After sign-in, the application still decides which local account is associated with the external identity, whether the account is enabled, which tenant or organization applies, what roles or permissions are current, and whether step-up authentication is needed for sensitive actions.
+
+12
+00:01:32.920 --> 00:01:39.160
+Signing in through a provider is the beginning of local trust decisions, not the end.

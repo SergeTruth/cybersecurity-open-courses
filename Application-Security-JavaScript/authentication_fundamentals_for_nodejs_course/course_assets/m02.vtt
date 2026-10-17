@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Authentication design starts by identifying who or what can call the application.
+
+2
+00:00:05.400 --> 00:00:17.480
+Human users, administrators, service accounts, machine clients, mobile apps, browser sessions, third-party integrations, webhook providers, and background workers are not interchangeable.
+
+3
+00:00:17.580 --> 00:00:23.740
+Each identity type has a different trust boundary, credential type, lifecycle, and audit expectation.
+
+4
+00:00:23.840 --> 00:00:31.840
+A customer login, admin dashboard, webhook receiver, and internal worker calling an API should not all be treated as the same flow.
+
+5
+00:00:32.120 --> 00:00:44.120
+Map the trust boundaries between browsers, mobile apps, APIs, reverse proxies, identity providers, databases, caches, and external services.
+
+6
+00:00:44.220 --> 00:00:49.260
+Decide which component authenticates the requester and which component consumes that result.
+
+7
+00:00:49.360 --> 00:01:03.680
+For example, an identity provider may validate a user login, but the Node.js application still maps that external identity to a local account, checks account state, creates or validates a session, and enforces local authorization policy.
+
+8
+00:01:03.960 --> 00:01:10.760
+Avoid spreading authentication decisions inconsistently across routes, controllers, middleware, and helper functions.
+
+9
+00:01:10.860 --> 00:01:20.060
+The application should document the identity source, token issuer, session storage, credential type, account state checks, and failure behavior for each major flow.
+
+10
+00:01:20.160 --> 00:01:33.920
+A simple boundary map helps reviewers ask useful questions before implementation: where is identity established, where is it trusted, what happens when it expires, and how does the rest of the request pipeline know validation succeeded?

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+An enforcement point is where the application applies an authorization decision.
+
+2
+00:00:05.000 --> 00:00:19.000
+Python applications may enforce access at route level, view level, service layer, data layer, middleware, decorators, dependency injection hooks, guard clauses, reusable helpers, or centralized policy checks.
+
+3
+00:00:19.100 --> 00:00:22.380
+Each location has strengths and limits.
+
+4
+00:00:22.480 --> 00:00:31.200
+A route-level check may ensure the caller is authenticated and has a broad role, while a service-layer check may understand the specific resource and action.
+
+5
+00:00:31.480 --> 00:00:33.560
+Server-side enforcement is essential.
+
+6
+00:00:33.660 --> 00:00:43.420
+Client-side checks, hidden buttons, disabled controls, and hidden routes can improve user experience, but they do not protect sensitive operations by themselves.
+
+7
+00:00:43.520 --> 00:00:51.840
+Requests can come from scripts, direct API calls, background jobs, alternate clients, or modified browsers.
+
+8
+00:00:51.940 --> 00:01:00.660
+Trusted application logic must enforce decisions before returning sensitive data, changing state, launching jobs, or invoking privileged integrations.
+
+9
+00:01:00.940 --> 00:01:04.300
+Reusable patterns help prevent scattered one-off checks.
+
+10
+00:01:04.400 --> 00:01:08.960
+Decorators or dependencies can be useful for common route guards.
+
+11
+00:01:09.060 --> 00:01:12.260
+Middleware can ensure authentication state is present.
+
+12
+00:01:12.360 --> 00:01:16.280
+Service-layer helpers can centralize object-specific checks.
+
+13
+00:01:16.380 --> 00:01:19.260
+Data-layer filters can limit list results.
+
+14
+00:01:19.360 --> 00:01:25.280
+Centralized policy functions can give reviewers one place to inspect high-value rules.
+
+15
+00:01:25.380 --> 00:01:31.940
+The goal is not to put every rule in one file; it is to make the pattern predictable and hard to forget.
+
+16
+00:01:32.220 --> 00:01:36.940
+Enforcement should happen before sensitive actions and before data disclosure.
+
+17
+00:01:37.040 --> 00:01:43.040
+A list endpoint should not fetch every record and rely on the frontend to hide unauthorized items.
+
+18
+00:01:43.140 --> 00:01:48.260
+An export job should not start before checking the caller's permission for the selected tenant and resource.
+
+19
+00:01:48.360 --> 00:01:56.040
+A background worker should not assume that the scheduling user had permission unless that authorization decision is preserved and rechecked as needed.
+
+20
+00:01:56.140 --> 00:01:59.980
+Good enforcement is close to risk, not merely close to routing.

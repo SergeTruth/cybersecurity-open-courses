@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+A secure API architecture starts by identifying the moving parts.
+
+2
+00:00:05.240 --> 00:00:13.400
+Clients may include browsers, mobile apps, scripts, partner systems, backend services, automation jobs, and administrators.
+
+3
+00:00:13.500 --> 00:00:24.460
+Behind the API may be application services, databases, identity providers, message queues, file stores, analytics systems, and downstream third-party services.
+
+4
+00:00:24.560 --> 00:00:28.720
+Each component has different privileges, assumptions, and failure modes.
+
+5
+00:00:29.000 --> 00:00:35.080
+Trust boundaries show where data, identity, control, or responsibility moves between systems.
+
+6
+00:00:35.180 --> 00:00:39.900
+A request crossing from a client into an API gateway crosses a boundary.
+
+7
+00:00:40.000 --> 00:00:42.640
+A gateway forwarding to application code crosses another.
+
+8
+00:00:42.740 --> 00:00:48.260
+Application code reading from a database or calling a downstream service crosses additional boundaries.
+
+9
+00:00:48.360 --> 00:00:55.800
+Security decisions should be explicit at these points so the application does not accidentally inherit trust from a place that should only route traffic.
+
+10
+00:00:56.080 --> 00:00:59.920
+Internal APIs should not automatically trust every request.
+
+11
+00:01:00.020 --> 00:01:08.660
+Internal services can be misconfigured, compromised, called through unexpected paths, or reused outside their original design.
+
+12
+00:01:08.760 --> 00:01:15.080
+A private network location is useful context, but it is not a complete identity or authorization model.
+
+13
+00:01:15.180 --> 00:01:24.140
+Service-to-service calls should still have clear caller identity, scoped permissions, input validation, logging, and monitoring appropriate to their risk.
+
+14
+00:01:24.420 --> 00:01:28.420
+Centralized controls can help when they are difficult to bypass.
+
+15
+00:01:28.520 --> 00:01:37.800
+Gateways, shared authentication middleware, reusable validation helpers, common authorization libraries, and standard logging patterns reduce inconsistency.
+
+16
+00:01:37.900 --> 00:01:41.020
+But centralization should not hide responsibility.
+
+17
+00:01:41.120 --> 00:01:51.280
+Sensitive operations still need local context, especially for object ownership, tenant boundaries, workflow state, and business-specific authorization.
+
+18
+00:01:51.380 --> 00:01:56.740
+Good architecture makes the safe path easy and the bypass path obvious during review.

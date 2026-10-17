@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.980
+APIs need authorization because they often expose data and business operations directly to clients, services, partners, and automation.
+
+2
+00:00:09.080 --> 00:00:21.320
+A valid bearer token, API key, service account, or workload identity may authenticate the caller, but the application still needs to decide whether that caller can perform the requested action on the requested resource.
+
+3
+00:00:21.420 --> 00:00:25.980
+Token validation and authorization decisions are related, but they are not identical.
+
+4
+00:00:26.260 --> 00:00:31.860
+Scopes and claims can carry authorization-relevant information at a high level.
+
+5
+00:00:31.960 --> 00:00:35.240
+A scope might describe delegated access.
+
+6
+00:00:35.340 --> 00:00:41.180
+A claim might identify a tenant, group, role, or subject property.
+
+7
+00:00:41.280 --> 00:00:48.560
+These values are useful only when they come from a trusted issuer, are validated for the application, and are interpreted correctly.
+
+8
+00:00:48.660 --> 00:00:55.300
+A token claim should not become automatic permission for every endpoint unless the policy explicitly says so.
+
+9
+00:00:55.580 --> 00:01:00.780
+Service-to-service authorization deserves the same discipline as user-facing authorization.
+
+10
+00:01:00.880 --> 00:01:07.120
+Internal APIs should not automatically trust every caller just because traffic is inside a network or platform.
+
+11
+00:01:07.220 --> 00:01:15.380
+Internal services can be misconfigured, compromised, reused outside the intended path, or granted broader access than needed.
+
+12
+00:01:15.480 --> 00:01:22.840
+Service accounts and workload identities should have ownership, least privilege, rotation expectations, and monitoring.
+
+13
+00:01:23.120 --> 00:01:28.240
+Background jobs, webhooks, and delegated access require careful context.
+
+14
+00:01:28.340 --> 00:01:31.940
+A job may run later than the user request that created it.
+
+15
+00:01:32.040 --> 00:01:35.400
+A webhook may claim to represent an external event.
+
+16
+00:01:35.500 --> 00:01:40.060
+A delegated application may act on behalf of a user or organization.
+
+17
+00:01:40.160 --> 00:01:45.360
+The system should preserve enough context to authorize safely without trusting unverified input.
+
+18
+00:01:45.460 --> 00:01:52.420
+The durable pattern is to authenticate the caller, validate the request, then authorize the action and resource explicitly.

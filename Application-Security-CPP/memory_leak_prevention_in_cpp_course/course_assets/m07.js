@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Caches, Services, and Long-Running Processes",
+  "graphicAlt": "Show cache eviction, queue backpressure and session expiry plus operational monitoring.",
+  "narration": "Not every leak is a missing cleanup call. Some leaks are logical retention problems. A long-running service may keep objects in maps, queues, caches, registries, telemetry buffers, session tables, or retry state long after those objects are useful.\n\nCaches need size limits and eviction policies. A cache that grows forever is not behaving like a cache; it is behaving like unbounded retained state. Policies should define maximum entries, maximum memory, entry age, invalidation triggers, and cleanup at shutdown.\n\nQueues and buffers need backpressure. If work arrives faster than it can be processed, retained work items can consume memory indefinitely. A robust design defines queue limits, rejection behavior, priority handling, retry rules, and operator-visible signals when pressure rises.\n\nRequest and session state should expire predictably. Connection registries, user sessions, per-request context, and temporary records should have clear lifecycle boundaries. Cleanup should not depend on rare shutdown events or manual intervention.\n\nMonitoring helps detect unexpected resource growth. Metrics for memory use, queue depth, cache size, object counts, handle counts, and cleanup failures can reveal a retention problem before it becomes an outage. Operational visibility is part of leak prevention.\n\nOperational limits should be treated as design requirements, not afterthoughts. A system should define what happens at capacity, how old state ages out, and who is alerted when retained state grows unexpectedly.",
+  "narrationPoints": [
+    "Long-running services need explicit retention limits for maps, queues, caches, registries, telemetry buffers, sessions, and retry state.",
+    "Policies should define maximum entries, maximum memory, entry age, invalidation triggers, and cleanup at shutdown.",
+    "A robust design defines queue limits, rejection behavior, priority handling, retry rules, and operator-visible signals when pressure rises.",
+    "Connection registries, user sessions, per-request context, and temporary records should have clear lifecycle boundaries.",
+    "Metrics for memory use, queue depth, cache size, object counts, handle counts, and cleanup failures can reveal a retention problem before it becomes an outage.",
+    "A system should define what happens at capacity, how old state ages out, and who is alerted when retained state grows unexpectedly."
+  ]
+};

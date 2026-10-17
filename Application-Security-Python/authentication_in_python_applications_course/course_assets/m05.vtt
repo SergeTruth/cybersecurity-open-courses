@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:13.780
+APIs commonly authenticate callers with bearer tokens, API keys, access tokens, refresh tokens, service accounts, workload identities, or machine-to-machine credentials.
+
+2
+00:00:13.880 --> 00:00:23.400
+A bearer token at a high level grants access to whoever presents it within its validity and scope, so token handling must assume that exposure can matter.
+
+3
+00:00:23.500 --> 00:00:30.140
+API authentication should establish who or what is calling, then authorization should separately decide what that caller may do.
+
+4
+00:00:30.420 --> 00:00:32.900
+Token validation must be deliberate.
+
+5
+00:00:33.000 --> 00:00:44.760
+Depending on the token type and architecture, validation may include issuer, audience, expiration, signature or integrity checks, intended use, scope, and other claims.
+
+6
+00:00:44.860 --> 00:00:47.420
+A token being present is not enough.
+
+7
+00:00:47.520 --> 00:00:55.440
+The application should know which authority issued it, which service it was meant for, whether it is still valid, and whether it supports the operation being requested.
+
+8
+00:00:55.720 --> 00:01:00.120
+Token lifetime and revocation are operational choices.
+
+9
+00:01:00.220 --> 00:01:05.260
+Short-lived access tokens can reduce exposure but may require refresh flows.
+
+10
+00:01:05.360 --> 00:01:12.000
+Refresh tokens or long-lived API keys need stronger storage, rotation, revocation, and monitoring.
+
+11
+00:01:12.100 --> 00:01:22.580
+Service accounts and workload identities may have persistent access without direct human interaction, so least privilege, ownership, review, and alerting are especially important.
+
+12
+00:01:22.860 --> 00:01:26.700
+Token storage risks vary by client and environment.
+
+13
+00:01:26.800 --> 00:01:35.280
+A backend service, browser application, mobile client, CLI tool, and scheduled worker have different storage constraints.
+
+14
+00:01:35.380 --> 00:01:42.980
+Python developers should avoid logging tokens, placing them in broadly readable configuration, or passing them through unnecessary systems.
+
+15
+00:01:43.080 --> 00:01:50.760
+Because token handling errors can affect many endpoints at once, API authentication should be tested and reviewed as shared infrastructure.

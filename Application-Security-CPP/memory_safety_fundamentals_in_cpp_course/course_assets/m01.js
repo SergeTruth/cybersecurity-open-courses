@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "What Memory Safety Means in C++",
+  "graphicAlt": "Show safe memory access requires live object and valid range/state.",
+  "narration": "Memory safety in C++ means that a program accesses only memory that is valid for the operation being performed. The access must go through an object that actually exists, within that object's lifetime, using an address and range that belong to it. This sounds simple, but in C++ the programmer has a great deal of control over object creation, destruction, representation, and address manipulation. That control is powerful, and it is also why disciplined design matters.\n\nA memory safety defect can begin as an ordinary engineering mistake: a stale pointer, an unchecked index, a buffer length that no longer matches the data, or an object used after ownership has moved somewhere else. The consequences are often reliability problems first. Programs crash, corrupt state, or behave differently under load. In security-sensitive systems, the same defect classes can undermine trust boundaries and make defensive reasoning harder. The goal in this course is prevention, not exploitation.\n\nProfessional C++ memory safety starts with making ownership, initialization, lifetime, and bounds explicit enough that another engineer can review them. Prefer constructs that carry their own size information, tie cleanup to object lifetime, and avoid representing invalid states. Be cautious with raw addresses and manual cleanup paths, especially where error handling, concurrency, parsing, or legacy interfaces are involved. Safer C++ does not mean abandoning performance or control. It means choosing defaults that reduce repeated defect patterns and reserving lower-level techniques for places where their responsibilities are clear, documented, and tested.",
+  "narrationPoints": [
+    "The access must go through an object that actually exists, within that object's lifetime, using an address and range that belong to it.",
+    "Memory safety in C++ means that a program accesses only memory that is valid for the operation being performed.",
+    "A memory safety defect can begin as an ordinary engineering mistake: a stale pointer, an unchecked index, a buffer length that no longer matches the data, or an object used after ownership has moved somewhere else.",
+    "In security-sensitive systems, the same defect classes can undermine trust boundaries and make defensive reasoning harder.",
+    "Prefer constructs that carry their own size information, tie cleanup to object lifetime, and avoid representing invalid states.",
+    "Professional C++ memory safety starts with making ownership, initialization, lifetime, and bounds explicit enough that another engineer can review them."
+  ]
+};

@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Understanding Input Sources and Trust Boundaries",
+  "narration": "A C++ application may receive input through many channels. Standard input can be typed by a person, redirected from a file, or streamed from another process. Command-line arguments can be missing, reordered, very long, or encoded in unexpected ways. Environment variables can influence paths, feature flags, credentials, or library behavior. Files and configuration files may be malformed, stale, partially written, or supplied by a user who does not know the expected format. Each source needs explicit assumptions.\n\nNetwork sockets, APIs, serialized data, binary protocols, device input, and library callbacks add more complexity. Sockets may deliver partial messages or multiple messages at once. APIs may receive unexpected content types, missing fields, or values from older clients. Serialized formats may carry nested structures, counts, and version fields. Device input may fail, return data out of range, or report values with timing constraints. A callback may feel internal, but the data passed to it may still be untrusted.\n\nA trust boundary is the point where data crosses from a less trusted context into code that may act on it. Good input handling identifies those boundaries and applies checks close to them. Define maximum sizes, expected encodings, allowed formats, ownership rules, and completion criteria before parsing deeply. Decide whether input is text or binary, whether embedded null bytes are valid, whether missing fields are allowed, and which values can influence files, memory allocation, indexes, or control flow. Clear boundaries keep downstream code from relying on guesswork.",
+  "graphicAlt": "Show data origin, format/encoding/size and ownership requirements at entry.",
+  "narrationPoints": [
+    "A C++ application may receive input through many channels.",
+    "Network sockets, APIs, serialized data, binary protocols, device input, and library callbacks add more complexity.",
+    "A trust boundary is the point where data crosses from a less trusted context into code that may act on it."
+  ]
+};

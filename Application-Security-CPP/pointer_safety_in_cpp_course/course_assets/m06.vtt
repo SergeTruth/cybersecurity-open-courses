@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Raw pointers should not silently transfer ownership.
+
+2
+00:00:03.960 --> 00:00:11.880
+If a function returns a raw pointer, callers may not know whether they must delete it, borrow it briefly, or treat it as an external handle.
+
+3
+00:00:11.980 --> 00:00:16.780
+That uncertainty creates leaks, double cleanup, and stale access.
+
+4
+00:00:16.880 --> 00:00:22.400
+Modern C++ designs should make ownership transfer visible through types and conventions.
+
+5
+00:00:22.680 --> 00:00:28.600
+std::unique_ptr is usually the clearest choice when one owner controls a heap object's lifetime.
+
+6
+00:00:28.700 --> 00:00:33.420
+A factory returning unique_ptr tells the caller that ownership has been handed off.
+
+7
+00:00:33.520 --> 00:00:39.520
+A function accepting unique_ptr by value tells reviewers that the callee takes ownership.
+
+8
+00:00:39.620 --> 00:00:48.580
+std::shared_ptr should be reserved for intentional shared lifetime, where multiple owners genuinely participate in keeping the object alive.
+
+9
+00:00:48.680 --> 00:00:55.480
+std::weak_ptr is useful for observing shared objects without extending their lifetime.
+
+10
+00:00:55.760 --> 00:01:00.560
+Raw pointers and references remain useful for non-owning access.
+
+11
+00:01:00.660 --> 00:01:03.780
+The important rule is that they must not imply ownership.
+
+12
+00:01:03.880 --> 00:01:13.720
+The .get() member of a smart pointer can be appropriate for temporary borrowed access during a call, but the callee should not store that pointer unless another contract guarantees lifetime.
+
+13
+00:01:13.820 --> 00:01:20.380
+The .release() member is review-sensitive because it gives up ownership without deleting the object.
+
+14
+00:01:20.480 --> 00:01:24.000
+A clear new owner must take responsibility immediately.
+
+15
+00:01:24.280 --> 00:01:27.560
+Good boundaries keep ownership and borrowing separate.
+
+16
+00:01:27.660 --> 00:01:37.100
+Factory return values, member fields, handoff functions, and interop wrappers should all answer the same question: who owns this object now?
+
+17
+00:01:37.200 --> 00:01:42.720
+When interoperating with older APIs, wrap ownership transitions at the narrowest boundary.
+
+18
+00:01:42.820 --> 00:01:53.860
+Convert raw factory results immediately into smart pointers or RAII types, and pass borrowed raw pointers only for the duration of the call so the contract is visible.
+
+19
+00:01:53.960 --> 00:01:59.880
+If that answer is not obvious, the pointer design needs more work before the code is safe to maintain.

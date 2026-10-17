@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+A pointer that is safe for immediate use may be unsafe when saved for later.
+
+2
+00:00:05.480 --> 00:00:13.080
+Callbacks, asynchronous jobs, threads, event handlers, and containers of pointers all extend the reasoning window.
+
+3
+00:00:13.180 --> 00:00:20.380
+The reviewer must ask not only whether the pointer is valid now, but whether it will still be valid when the stored access is eventually used.
+
+4
+00:00:20.660 --> 00:00:24.100
+Captured this pointers deserve special attention.
+
+5
+00:00:24.200 --> 00:00:28.920
+A member function may schedule work that runs after the object has been destroyed.
+
+6
+00:00:29.020 --> 00:00:33.340
+A callback registry may store a raw pointer without knowing when the target unregisters.
+
+7
+00:00:33.440 --> 00:00:37.920
+A background task may keep a borrowed pointer from a request that has already completed.
+
+8
+00:00:38.020 --> 00:00:46.740
+These designs need explicit lifetime policy: ownership handoff, cancellation, weak observation, or a guarantee that the owner outlives the work.
+
+9
+00:00:47.020 --> 00:00:52.940
+Shared ownership can keep an object alive for asynchronous work, but it is not always the right answer.
+
+10
+00:00:53.040 --> 00:00:57.120
+It may extend lifetime longer than intended or create cycles.
+
+11
+00:00:57.220 --> 00:01:02.340
+Weak observation can be better when work should simply stop if the target no longer exists.
+
+12
+00:01:02.440 --> 00:01:06.520
+In either case, lifetime safety is not thread safety.
+
+13
+00:01:06.620 --> 00:01:14.300
+A pointer or smart pointer can ensure an object exists while still leaving its internal state unsafe for concurrent mutation.
+
+14
+00:01:14.580 --> 00:01:17.780
+Review async pointer use together with synchronization.
+
+15
+00:01:17.880 --> 00:01:19.320
+What is captured?
+
+16
+00:01:19.420 --> 00:01:21.900
+Who owns it while work is pending?
+
+17
+00:01:22.000 --> 00:01:25.200
+What happens during shutdown or cancellation?
+
+18
+00:01:25.300 --> 00:01:27.380
+What protects mutable state?
+
+19
+00:01:27.480 --> 00:01:38.600
+Tests should cover delayed execution, unregister order, shutdown paths, and cancellation under load because those timings often decide whether a stored pointer remains valid when used.
+
+20
+00:01:38.700 --> 00:01:44.620
+Clear answers prevent stored pointers from becoming stale access hidden behind event-driven code.

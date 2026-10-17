@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Smart pointers are most useful when they communicate ownership intent.
+
+2
+00:00:04.840 --> 00:00:10.440
+Use std::unique_ptr when one owner is responsible for an object.
+
+3
+00:00:10.540 --> 00:00:17.660
+It is the clearest default for heap ownership because transfer must be explicit, and accidental copying is prevented.
+
+4
+00:00:17.760 --> 00:00:22.640
+A unique owner makes the lifetime easier to trace and usually easier to test.
+
+5
+00:00:22.920 --> 00:00:27.160
+Use std::shared_ptr only when ownership is genuinely shared.
+
+6
+00:00:27.260 --> 00:00:35.340
+Shared ownership can be appropriate for objects whose lifetime is naturally controlled by multiple independent consumers, but it also makes destruction less obvious.
+
+7
+00:00:35.440 --> 00:00:42.080
+Overusing shared ownership can hide design problems and make it difficult to know when an object should go away.
+
+8
+00:00:42.180 --> 00:00:51.540
+If shared objects refer back to each other, consider std::weak_ptr for non-owning observation so the graph does not keep itself alive unexpectedly.
+
+9
+00:00:51.820 --> 00:00:56.140
+Smart pointers do not automatically repair poor lifetime design.
+
+10
+00:00:56.240 --> 00:01:05.040
+A raw pointer or reference can still be the right tool for short-lived, non-owning access, especially in function parameters where the caller retains responsibility.
+
+11
+00:01:05.140 --> 00:01:13.220
+The important distinction is that non-owning access must not be stored or extended beyond the owner's lifetime unless a clear contract protects it.
+
+12
+00:01:13.320 --> 00:01:18.360
+During review, ask whether each pointer-like type answers the ownership question.
+
+13
+00:01:18.460 --> 00:01:20.380
+Who owns this object?
+
+14
+00:01:20.480 --> 00:01:21.520
+Who may observe it?
+
+15
+00:01:21.620 --> 00:01:22.900
+Who may transfer it?
+
+16
+00:01:23.000 --> 00:01:30.280
+When those answers are visible in the interface, memory safety becomes a design property instead of a guessing exercise.
+
+17
+00:01:30.560 --> 00:01:38.640
+Prefer factory functions that return ownership directly, and avoid APIs that require callers to mix allocation policy with business logic.
+
+18
+00:01:38.740 --> 00:01:44.420
+When shared ownership appears, ask why one owner is not enough and how cycles are prevented.
+
+19
+00:01:44.520 --> 00:01:51.640
+When raw access appears, ask whether the lifetime is shorter than the call and whether null is an expected state.
+
+20
+00:01:51.740 --> 00:01:57.740
+These questions keep smart pointers connected to design intent instead of turning them into mechanical replacements.

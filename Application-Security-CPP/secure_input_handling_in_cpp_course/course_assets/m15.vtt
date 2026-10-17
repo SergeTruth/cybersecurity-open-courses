@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Secure input handling depends on failure behavior.
+
+2
+00:00:04.120 --> 00:00:10.760
+Fail closed means the program rejects, stops, or returns a safe error when required checks fail.
+
+3
+00:00:10.860 --> 00:00:17.740
+It does not continue with partially initialized objects, guessed defaults, stale values, or half-parsed state.
+
+4
+00:00:17.840 --> 00:00:28.080
+C++ programs may use error returns, expected-style results, exceptions, or status objects, but the design should make failures visible and hard to ignore.
+
+5
+00:00:28.180 --> 00:00:33.540
+Ambiguous failure handling is where many validation checks quietly lose their value.
+
+6
+00:00:33.820 --> 00:00:38.540
+RAII helps defensive code by tying resource cleanup to object lifetime.
+
+7
+00:00:38.640 --> 00:00:47.120
+Files, locks, memory, temporary objects, and handles can be released reliably when a parse fails or an exception is thrown.
+
+8
+00:00:47.220 --> 00:00:52.740
+Cleanup reliability matters because malformed input often exercises unusual paths.
+
+9
+00:00:52.840 --> 00:01:01.640
+Logging is useful, but logs should not expose secrets, raw tokens, sensitive paths, or unbounded attacker-controlled text.
+
+10
+00:01:01.740 --> 00:01:08.380
+Error messages should help troubleshooting without turning diagnostics into another disclosure or injection problem.
+
+11
+00:01:08.660 --> 00:01:26.420
+Testing should include edge cases and hostile shapes of input: empty values, maximum lengths, one byte over the limit, malformed encodings, invalid numbers, negative values, huge counts, missing fields, duplicate fields, deeply nested structures, and truncated binary records.
+
+12
+00:01:26.520 --> 00:01:30.200
+Fuzzing can discover combinations humans would not write by hand.
+
+13
+00:01:30.300 --> 00:01:41.740
+Compiler warnings, sanitizers, static analysis, and code review add more coverage by surfacing memory errors, undefined behavior, suspicious conversions, and unchecked assumptions.
+
+14
+00:01:41.840 --> 00:01:46.960
+The goal is to prove that rejection paths are as engineered as success paths.

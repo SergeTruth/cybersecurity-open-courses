@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+In a browser-based login flow, the session and the cookie are related but not the same thing.
+
+2
+00:00:06.040 --> 00:00:12.760
+A server-side session stores trusted authentication state on the server or in a protected backing store.
+
+3
+00:00:12.860 --> 00:00:16.620
+The browser usually receives a session identifier in a cookie.
+
+4
+00:00:16.720 --> 00:00:19.360
+That identifier is a bearer secret.
+
+5
+00:00:19.460 --> 00:00:27.940
+Whoever can use it may be treated as the authenticated user, so protecting it is just as important as protecting the original login credential.
+
+6
+00:00:28.220 --> 00:00:33.900
+Authentication cookies should use attributes that match the deployment and risk model.
+
+7
+00:00:34.000 --> 00:00:38.240
+HttpOnly helps keep the cookie out of normal client-side JavaScript.
+
+8
+00:00:38.340 --> 00:00:41.460
+Secure limits transmission to HTTPS contexts.
+
+9
+00:00:41.560 --> 00:00:45.400
+SameSite can reduce some cross-site request behavior.
+
+10
+00:00:45.500 --> 00:00:49.420
+Domain and path determine where the cookie is sent.
+
+11
+00:00:49.520 --> 00:00:53.280
+Expiration and renewal policy shape session lifetime.
+
+12
+00:00:53.380 --> 00:01:01.220
+HTTPS is required to protect credentials and session identifiers in transit, especially behind reverse proxies and load balancers.
+
+13
+00:01:01.500 --> 00:01:13.340
+Session lifecycle should be deliberate: creation, expiration, renewal, logout, revocation, and regeneration after important authentication or privilege events.
+
+14
+00:01:13.440 --> 00:01:23.760
+A password change, MFA reset, role change, account disablement, or suspicious activity may require revoking existing sessions or forcing reauthentication.
+
+15
+00:01:23.860 --> 00:01:29.780
+Session storage should be reliable, protected, and appropriate for the deployment model.
+
+16
+00:01:29.880 --> 00:01:36.920
+When cookie-based authentication is used, CSRF risk must be evaluated for state-changing requests.

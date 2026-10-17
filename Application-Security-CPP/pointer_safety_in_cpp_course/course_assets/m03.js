@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Nullability, Constness, and API Contracts",
+  "graphicAlt": "Show required reference vs optional access and distinction read-only pointee vs fixed pointer.",
+  "narration": "Pointer APIs should communicate whether null is allowed, whether data may be modified, and how long the pointer remains valid. If a parameter is required and cannot be null, a reference is often clearer than a raw pointer. The type tells the caller that an object must exist. If missing data is a valid case, use an explicit optional pattern or document that nullptr is allowed and what it means.\n\nUnclear nullability creates inconsistent checks. One caller may validate before calling, another may rely on the callee, and a third may assume the value is always present. At trust boundaries, such as public APIs, plugin interfaces, parsers, or C interop layers, validate pointer inputs defensively. Inside well-defined internal code, prefer contracts that make repeated defensive guessing unnecessary.\n\nConstness is another part of the contract. A pointer to const data communicates that the pointee should not be modified through that access path. A const pointer communicates that the pointer value itself should not be reseated. These meanings are different, and reviewers need the distinction. Clear const use helps separate read-only observation from mutation, which is especially important when data is shared across components or threads.\n\nGood pointer APIs are narrow. They avoid accepting null when null is not meaningful. They avoid mutable access when only inspection is needed. They describe ownership and lifetime instead of relying on habit. Callers should not need to reverse-engineer whether a pointer is an optional input, required output, or mutable view. When the answer matters for safety, encode it in the interface. The safer interface makes misuse stand out during review.",
+  "narrationPoints": [
+    "Pointer APIs should communicate whether null is allowed, whether data may be modified, and how long the pointer remains valid.",
+    "If missing data is a valid case, use an explicit optional pattern or document that nullptr is allowed and what it means.",
+    "At trust boundaries, such as public APIs, plugin interfaces, parsers, or C interop layers, validate pointer inputs defensively.",
+    "One caller may validate before calling, another may rely on the callee, and a third may assume the value is always present.",
+    "A const pointer communicates that the pointer value itself should not be reseated.",
+    "Callers should not need to reverse-engineer whether a pointer is an optional input, required output, or mutable view."
+  ]
+};

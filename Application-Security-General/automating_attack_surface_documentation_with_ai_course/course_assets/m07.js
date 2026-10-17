@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Building Reusable Documentation Outputs",
+  "narration": "The output of AI-assisted documentation should be reusable, not just readable. Common outputs include an attack surface register, system summary, component table, data flow summary, interface inventory, identity and permission summary, dependency map, risk notes, open questions, and review checklist. Each output serves a different audience and decision.\n\nAn attack surface register is often the central artifact. It can list components, interfaces, exposure level, data types, identities, owners, dependencies, trust boundaries, assumptions, evidence links, open questions, and review status. The register does not need to be fancy. It needs to be structured enough that teams can filter, update, and review it over time.\n\nA system summary helps new reviewers understand the big picture. A component table helps developers and architects confirm the system inventory. A data flow summary supports privacy review, threat modeling, and incident response. An identity and permission summary helps security teams evaluate access patterns. Risk notes connect the documentation to decisions and follow-up work.\n\nOpen questions are not a weakness. They are one of the most valuable outputs because they make uncertainty actionable. If an owner is missing, a data type is unknown, a third-party integration is unclear, or a logging assumption is unverified, the document should say so. Hidden uncertainty creates false confidence.\n\nReusable outputs work best when they are easy to maintain. Use stable identifiers, clear field names, source references, ownership fields, and review status. AI can help generate first drafts and updates, but the structure should be designed for ongoing use by developers, security teams, architects, auditors, and incident responders.",
+  "graphicAlt": "A maintained register retains stable identifiers, evidence links, owners and review status while supporting maps, flow summaries and open questions.",
+  "narrationPoints": [
+    "The output of AI-assisted documentation should be reusable, not just readable.",
+    "An attack surface register is often the central artifact.",
+    "A system summary helps new reviewers understand the big picture.",
+    "Open questions are not a weakness."
+  ]
+};

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.220
+Object-level authorization checks whether a caller can access a specific record, file, tenant, project, report, or other resource.
+
+2
+00:00:09.320 --> 00:00:14.440
+Function-level authorization asks whether the caller can perform an action at all.
+
+3
+00:00:14.540 --> 00:00:16.220
+Both are necessary.
+
+4
+00:00:16.320 --> 00:00:21.360
+A user may have permission to view projects generally, but only for projects where they are a member.
+
+5
+00:00:21.460 --> 00:00:27.780
+A support agent may be allowed to view customer cases, but only within assigned queues or approved support workflows.
+
+6
+00:00:28.060 --> 00:00:31.100
+Tenant and organization boundaries are high-value rules.
+
+7
+00:00:31.200 --> 00:00:41.520
+In a multi-tenant application, one tenant should not receive another tenant's records, files, exports, administrative settings, or background job results.
+
+8
+00:00:41.620 --> 00:00:54.100
+Tenant checks should apply to read, write, list, export, import, search, bulk actions, background processing, and administrative overrides.
+
+9
+00:00:54.200 --> 00:01:01.240
+A route that works for one object should not accidentally become a cross-tenant data path when a caller changes an identifier.
+
+10
+00:01:01.520 --> 00:01:09.040
+Ownership, team membership, project membership, shared resources, and administrative override rules should be explicit.
+
+11
+00:01:09.140 --> 00:01:14.340
+Sharing is common in collaborative applications, but sharing rules need clear scope.
+
+12
+00:01:14.440 --> 00:01:19.400
+Administrative overrides should be narrow, logged, and justified.
+
+13
+00:01:19.500 --> 00:01:28.140
+Database query filtering can help by limiting what records are returned in the first place, but data filtering should match the same policy used for single-object actions.
+
+14
+00:01:28.420 --> 00:01:37.860
+Insecure direct object reference concepts at a high level describe cases where a caller reaches a resource they should not access by changing an identifier or path.
+
+15
+00:01:37.960 --> 00:01:41.640
+The defensive answer is not to hide identifiers.
+
+16
+00:01:41.740 --> 00:01:50.700
+It is to verify every sensitive operation against the current subject, requested action, specific resource, and relevant context.
+
+17
+00:01:50.800 --> 00:01:55.280
+Every object-level decision should be testable with allowed and denied users.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Pointer Roles: Owning, Borrowing, and Observing",
+  "graphicAlt": "Show cleanup owner, temporary borrower and weak observation of shared object.",
+  "narration": "A pointer can play several roles, and security review depends on knowing which role is intended. An owning pointer is responsible for an object's lifetime. In modern C++, raw owning pointers should be avoided in new designs because ownership is easy to miss and hard to audit. Prefer a type such as std::unique_ptr or a focused resource wrapper when code owns something.\n\nA borrowed pointer gives temporary access to an object owned elsewhere. Borrowing can be appropriate for optional parameters, legacy APIs, or short call paths where a reference is not the right shape. The contract must say that the callee does not delete the object and does not store the pointer beyond the valid lifetime. Borrowed access should be brief, local, and easy to trace.\n\nAn observing pointer or handle may allow code to check or refer to something without controlling lifetime. Observation appears in caches, registries, callbacks, and object graphs. It can be useful, but it becomes unsafe when observers accidentally keep stale access or when the observed object's owner is not obvious. For shared ownership designs, std::weak_ptr can express observation without extending lifetime.\n\nPointers may also refer to arrays, buffers, output locations, or external resources. A handle from a C API may require a specific release function. A pointer-to-pointer parameter may mean the callee writes a result. These are not interchangeable roles. A safe API makes the role visible through type choice, naming, documentation, and ownership conventions. Code comments should not be the only place this meaning appears; parameter names, wrapper types, and return types should carry the contract where possible. During review, ask what the pointer means before reasoning about what the code does.",
+  "narrationPoints": [
+    "A pointer can play several roles, and security review depends on knowing which role is intended.",
+    "Prefer a type such as std::unique_ptr or a focused resource wrapper when code owns something.",
+    "The contract must say that the callee does not delete the object and does not store the pointer beyond the valid lifetime.",
+    "An observing pointer or handle may allow code to check or refer to something without controlling lifetime.",
+    "During review, ask what the pointer means before reasoning about what the code does.",
+    "A safe API makes the role visible through type choice, naming, documentation, and ownership conventions."
+  ]
+};

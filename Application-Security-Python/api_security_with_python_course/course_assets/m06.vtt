@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+API responses should expose only what the caller is authorized to receive.
+
+2
+00:00:04.520 --> 00:00:13.400
+Response minimization means returning the fields needed for the operation, not every field available in a database model or internal object.
+
+3
+00:00:13.500 --> 00:00:19.180
+Response models, serializers, and field filtering can help when they are used intentionally.
+
+4
+00:00:19.280 --> 00:00:28.560
+They reduce accidental exposure of internal identifiers, administrative flags, secrets, relationship data, or sensitive metadata.
+
+5
+00:00:28.840 --> 00:00:32.040
+Error message design is part of response safety.
+
+6
+00:00:32.140 --> 00:00:44.700
+Detailed errors can be useful during development, but production clients should not receive raw stack traces, token details, database fragments, internal paths, or sensitive business rules.
+
+7
+00:00:44.800 --> 00:00:52.720
+Pagination and bulk exports also need attention because large responses can expose more data than a user interface would normally show.
+
+8
+00:00:52.820 --> 00:00:59.060
+An export is not just a bigger list response; it is often a higher-risk operation.
+
+9
+00:00:59.340 --> 00:01:06.860
+CORS is a browser mechanism that controls which browser-based origins can make cross-origin requests under browser rules.
+
+10
+00:01:06.960 --> 00:01:11.440
+It is not general API authentication and not a substitute for authorization.
+
+11
+00:01:11.540 --> 00:01:15.140
+Browser clients and machine clients have different trust models.
+
+12
+00:01:15.240 --> 00:01:21.560
+If browser credentials are involved, cookie behavior, token storage, and CSRF concepts matter.
+
+13
+00:01:21.660 --> 00:01:27.020
+Credentialed cross-origin access should be deliberate and limited to expected origins.
+
+14
+00:01:27.300 --> 00:01:32.740
+Response safety also includes redirects and security headers at a high level.
+
+15
+00:01:32.840 --> 00:01:39.400
+Redirect targets should be constrained so unchecked input does not send users or clients to unintended destinations.
+
+16
+00:01:39.500 --> 00:01:45.340
+Headers can provide defense in depth for browser-facing APIs, but they do not replace careful response content.
+
+17
+00:01:45.440 --> 00:01:54.080
+The API should consistently ask: who is the caller, what are they allowed to receive, and what could this response reveal beyond the immediate business need.

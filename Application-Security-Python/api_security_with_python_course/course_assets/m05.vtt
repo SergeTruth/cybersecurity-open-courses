@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Authorization decides what the authenticated subject may access or do.
+
+2
+00:00:05.640 --> 00:00:13.960
+Roles, permissions, scopes, and claims can all help express capability, but sensitive APIs usually need more context.
+
+3
+00:00:14.060 --> 00:00:19.820
+The service should verify the current subject, action, resource, and context.
+
+4
+00:00:19.920 --> 00:00:32.240
+Context may include tenant, organization, ownership, workflow state, delegated access, risk level, and whether the request is user-initiated or service-initiated.
+
+5
+00:00:32.520 --> 00:00:36.520
+Object-level authorization is one of the most important API controls.
+
+6
+00:00:36.620 --> 00:00:43.340
+A caller being allowed to use an endpoint does not mean the caller can access every record referenced by that endpoint.
+
+7
+00:00:43.440 --> 00:00:47.760
+List endpoints should filter results to what the caller may see.
+
+8
+00:00:47.860 --> 00:00:51.460
+Detail endpoints should check access to the specific object.
+
+9
+00:00:51.560 --> 00:00:58.280
+Update, delete, export, and administrative actions should verify permission at the point where the operation occurs.
+
+10
+00:00:58.560 --> 00:01:02.560
+Tenant and organization boundaries deserve special attention.
+
+11
+00:01:02.660 --> 00:01:09.140
+Multi-tenant APIs should prevent one tenant from reading, modifying, exporting, or triggering work against another tenant's data.
+
+12
+00:01:09.240 --> 00:01:14.600
+This cannot be left to client behavior, hidden buttons, hidden routes, or documentation.
+
+13
+00:01:14.700 --> 00:01:21.580
+Server-side enforcement should be present even when the caller is internal, privileged, or using an integration path.
+
+14
+00:01:21.680 --> 00:01:25.040
+Boundaries should be testable and visible during review.
+
+15
+00:01:25.320 --> 00:01:29.800
+Delegated access and administrative actions should be narrow and auditable.
+
+16
+00:01:29.900 --> 00:01:41.100
+Support tools, background services, partner integrations, and admin endpoints often need special privileges, but those privileges should be explicit, limited, and logged.
+
+17
+00:01:41.200 --> 00:01:45.040
+A mature API does not ask only whether a subject is powerful.
+
+18
+00:01:45.140 --> 00:01:51.380
+It asks whether this subject is allowed to perform this action on this resource for this reason right now.

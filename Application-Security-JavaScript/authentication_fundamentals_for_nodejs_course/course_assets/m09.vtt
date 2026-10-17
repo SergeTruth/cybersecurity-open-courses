@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.740
+Authentication systems depend on secrets: session secrets, token signing keys, OAuth client secrets, database credentials, API keys, encryption keys, and provider configuration.
+
+2
+00:00:12.840 --> 00:00:24.360
+These values should come from secret managers or protected deployment configuration, not hardcoded source, committed .env files, container images, logs, or client-visible bundles.
+
+3
+00:00:24.460 --> 00:00:33.820
+Rotation, revocation, environment separation, and least-privilege CI/CD access are part of authentication security, not optional cleanup tasks.
+
+4
+00:00:34.100 --> 00:00:39.700
+Logs should capture security-relevant authentication events while avoiding sensitive credential material.
+
+5
+00:00:39.800 --> 00:00:55.720
+Useful events include login success, login failure, MFA changes, password reset requests, token refresh, logout, account lockout, suspicious activity, and high-risk administrative authentication events.
+
+6
+00:00:55.820 --> 00:01:06.700
+Logs should not expose passwords, session IDs, bearer tokens, reset tokens, authorization codes, one-time codes, or unnecessary personal data.
+
+7
+00:01:06.800 --> 00:01:10.720
+Redaction and retention rules should be decided before an incident.
+
+8
+00:01:11.000 --> 00:01:14.120
+Monitoring should make abuse and failure visible.
+
+9
+00:01:14.220 --> 00:01:29.420
+Teams should watch for unusual login patterns, high failure rates, credential stuffing signals, unexpected administrative sign-ins, repeated recovery requests, token validation errors, and impossible-travel style indicators where appropriate.
+
+10
+00:01:29.520 --> 00:01:36.880
+Production configuration should disable debug behavior and protect error responses from leaking authentication internals.
+
+11
+00:01:36.980 --> 00:01:44.900
+Authentication security is not complete when the login route works; it must remain observable and supportable in production.

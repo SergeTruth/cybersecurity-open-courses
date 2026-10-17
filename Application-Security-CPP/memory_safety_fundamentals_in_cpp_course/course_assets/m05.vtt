@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Bounds safety means code reads and writes only within the range that belongs to the object or buffer being used.
+
+2
+00:00:07.000 --> 00:00:12.280
+In C++, the safest designs keep data and size information together.
+
+3
+00:00:12.380 --> 00:00:21.660
+Standard containers such as std::vector, std::array, and std::string make the valid range available through their interfaces.
+
+4
+00:00:21.760 --> 00:00:28.240
+Range-based loops and standard algorithms can reduce the amount of manual index management that reviewers must verify.
+
+5
+00:00:28.520 --> 00:00:34.760
+Views are useful when code needs non-owning access without losing bounds information.
+
+6
+00:00:34.860 --> 00:00:41.100
+A std::span can represent a contiguous sequence while preserving the pointer and length as a single value.
+
+7
+00:00:41.200 --> 00:00:52.080
+That is usually easier to reason about than passing a raw pointer in one parameter and a length in another, especially when the values are transformed, forwarded, or validated in different places.
+
+8
+00:00:52.180 --> 00:00:56.100
+Views still have lifetimes, so they must not outlive the data they describe.
+
+9
+00:00:56.380 --> 00:01:05.100
+Raw arrays, unchecked indexes, pointer arithmetic, mismatched lengths, and assumptions about null termination all increase risk.
+
+10
+00:01:05.200 --> 00:01:11.360
+Defensive code validates sizes before copy, parse, transform, or allocation work.
+
+11
+00:01:11.460 --> 00:01:15.060
+It checks that offsets and counts are consistent with the available data.
+
+12
+00:01:15.160 --> 00:01:24.360
+It treats external input, file formats, network messages, and legacy APIs as places where length assumptions deserve special attention.
+
+13
+00:01:24.460 --> 00:01:27.740
+Bounds-aware code is not just about preventing crashes.
+
+14
+00:01:27.840 --> 00:01:35.680
+It also makes maintenance safer because the relationship between data and its valid range remains visible across ordinary changes.
+
+15
+00:01:35.960 --> 00:01:40.360
+When reviewing bounds-sensitive code, follow the data from input to use.
+
+16
+00:01:40.460 --> 00:01:47.660
+Identify where the size is established, where it is checked, where it may change, and where it controls memory access.
+
+17
+00:01:47.760 --> 00:01:56.000
+Be cautious when signed and unsigned values mix, when multiplication affects allocation size, or when one buffer length is assumed to describe another buffer.
+
+18
+00:01:56.100 --> 00:02:02.260
+Small validation choices often decide whether a later operation is straightforward or fragile.

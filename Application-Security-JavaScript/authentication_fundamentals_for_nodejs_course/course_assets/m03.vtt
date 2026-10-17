@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Passwords should never be stored in plaintext or reversible form.
+
+2
+00:00:04.840 --> 00:00:18.280
+A Node.js application should store password verifiers using password-hashing algorithms designed for credential storage, such as Argon2id, bcrypt, or scrypt, through well-maintained libraries.
+
+3
+00:00:18.380 --> 00:00:21.900
+Password hashing is different from ordinary fast hashing.
+
+4
+00:00:22.000 --> 00:00:27.360
+It is intentionally slower and configurable so large-scale guessing is more expensive.
+
+5
+00:00:27.460 --> 00:00:32.980
+Salts should be unique per password and handled by the library or storage format correctly.
+
+6
+00:00:33.260 --> 00:00:36.940
+There is an engineering tradeoff in password-hashing parameters.
+
+7
+00:00:37.040 --> 00:00:44.880
+Stronger parameters increase attacker cost, but they also consume server CPU and memory during legitimate logins.
+
+8
+00:00:44.980 --> 00:00:52.020
+Teams should choose settings that fit the deployment environment, monitor performance, and plan to upgrade over time.
+
+9
+00:00:52.120 --> 00:00:59.640
+They should avoid custom cryptography, homegrown password transformations, or storing enough information to recover the original password.
+
+10
+00:00:59.740 --> 00:01:05.660
+Verification should compare the submitted password to the stored verifier through the selected library.
+
+11
+00:01:05.940 --> 00:01:14.100
+Password authentication also includes login abuse controls, account enumeration resistance, reset flows, and monitoring.
+
+12
+00:01:14.200 --> 00:01:18.680
+Error messages should avoid confirming whether a specific account exists.
+
+13
+00:01:18.780 --> 00:01:29.500
+Rate limiting, throttling, lockout design, bot protection, and alerts help defend login endpoints without creating unnecessary denial of service for legitimate users.
+
+14
+00:01:29.600 --> 00:01:37.680
+Password change and reset flows should revalidate identity and invalidate risky existing sessions or tokens where appropriate.

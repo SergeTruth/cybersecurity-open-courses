@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.500
+Real C++ systems often interact with C APIs, legacy libraries, operating-system interfaces, and resource handles.
+
+2
+00:00:08.600 --> 00:00:16.280
+These boundaries may use raw pointers, output parameters, pointer-to-pointer APIs, opaque handles, and custom cleanup functions.
+
+3
+00:00:16.380 --> 00:00:20.140
+Pointer safety does not require avoiding these interfaces.
+
+4
+00:00:20.240 --> 00:00:26.880
+It requires isolating their conventions and translating them into clear C++ ownership as soon as practical.
+
+5
+00:00:27.160 --> 00:00:29.880
+Start by documenting the contract.
+
+6
+00:00:29.980 --> 00:00:31.660
+Who allocates the object?
+
+7
+00:00:31.760 --> 00:00:32.720
+Who frees it?
+
+8
+00:00:32.820 --> 00:00:34.260
+May the pointer be null?
+
+9
+00:00:34.360 --> 00:00:37.640
+Is the buffer length supplied by the caller or the callee?
+
+10
+00:00:37.740 --> 00:00:40.540
+Does the API write through an output parameter?
+
+11
+00:00:40.640 --> 00:00:42.080
+How are errors reported?
+
+12
+00:00:42.180 --> 00:00:47.060
+If those answers live only in tribal knowledge, the boundary is review-sensitive.
+
+13
+00:00:47.160 --> 00:00:51.560
+A small wrapper can place the rule next to the code that enforces it.
+
+14
+00:00:51.840 --> 00:00:54.560
+RAII adapters are often the safest shape.
+
+15
+00:00:54.660 --> 00:00:59.940
+A wrapper can own an opaque handle and call the correct release function in its destructor.
+
+16
+00:01:00.040 --> 00:01:07.400
+A std::unique_ptr with a custom deleter can express ownership for resources that are not deleted with ordinary delete.
+
+17
+00:01:07.500 --> 00:01:15.580
+Output parameters can be converted into return objects that make success, failure, and ownership clearer to C++ callers.
+
+18
+00:01:15.860 --> 00:01:17.540
+Interop code should be narrow.
+
+19
+00:01:17.640 --> 00:01:23.000
+Keep unsafe conventions at the edge and avoid letting raw handles spread through application code.
+
+20
+00:01:23.100 --> 00:01:32.140
+Validate inputs before crossing trust boundaries, convert errors into the local error model, and test both success and cleanup paths.
+
+21
+00:01:32.240 --> 00:01:42.480
+Treat each wrapper as part of the security boundary: it should reject invalid combinations before they reach the less expressive C surface, or document why the legacy call requires them.
+
+22
+00:01:42.580 --> 00:01:45.540
+The goal is a small boundary that is easy to audit.

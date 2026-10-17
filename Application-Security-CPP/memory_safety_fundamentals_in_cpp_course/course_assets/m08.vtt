@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Memory safety improves when design discipline is supported by layered engineering practices.
+
+2
+00:00:05.560 --> 00:00:08.040
+Compiler warnings are the first layer.
+
+3
+00:00:08.140 --> 00:00:14.860
+Enable meaningful warnings, keep the warning set visible to the team, and treat warnings as actionable whenever practical.
+
+4
+00:00:14.960 --> 00:00:20.960
+Warnings are most valuable when they appear early, before unsafe patterns spread into surrounding code.
+
+5
+00:00:21.240 --> 00:00:24.360
+Dynamic tools add another layer.
+
+6
+00:00:24.460 --> 00:00:37.500
+Address sanitizers and undefined-behavior sanitizers can expose classes of defects that ordinary unit tests may miss, including out-of-bounds access, invalid lifetimes, and operations that violate language assumptions.
+
+7
+00:00:37.600 --> 00:00:42.160
+Static analysis can find risky patterns across larger code surfaces.
+
+8
+00:00:42.260 --> 00:00:47.300
+Dependency scanning helps teams understand third-party exposure and update pressure.
+
+9
+00:00:47.400 --> 00:00:57.080
+Fuzzing can be useful when applied defensively to parsers and boundary-heavy interfaces, with clear limits, safe environments, and responsible handling of findings.
+
+10
+00:00:57.360 --> 00:01:01.040
+Testing and review connect the tools to everyday behavior.
+
+11
+00:01:01.140 --> 00:01:10.660
+Add unit tests around boundary conditions, empty inputs, maximum sizes, error returns, move operations, and object teardown.
+
+12
+00:01:10.760 --> 00:01:17.160
+In code review, look at ownership, lifetime, and bounds together rather than as separate checkboxes.
+
+13
+00:01:17.260 --> 00:01:20.780
+Ask whether an interface makes the safe path obvious.
+
+14
+00:01:20.880 --> 00:01:27.600
+CI gates can run sanitizer configurations, static analysis, and targeted tests before changes merge.
+
+15
+00:01:27.700 --> 00:01:34.500
+For legacy systems, prioritize high-risk modules and risky interfaces instead of attempting blind rewrites.
+
+16
+00:01:34.600 --> 00:01:40.600
+Tools do not replace design judgment, but they make disciplined memory-safety work repeatable across a team.
+
+17
+00:01:40.880 --> 00:01:45.040
+The most effective programs tune these practices to the codebase.
+
+18
+00:01:45.140 --> 00:01:50.980
+A performance-critical component may run sanitizers in scheduled builds rather than every commit.
+
+19
+00:01:51.080 --> 00:01:57.000
+A parser or serialization layer may receive heavier boundary testing than ordinary UI glue.
+
+20
+00:01:57.100 --> 00:02:03.500
+A legacy subsystem may start with warnings and ownership cleanup before larger redesign.
+
+21
+00:02:03.600 --> 00:02:12.480
+The point is consistency: findings should lead to fixes, fixes should lead to tests, and repeated defect patterns should lead to safer local conventions.

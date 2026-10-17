@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "AI-Assisted Extraction and Normalization",
+  "narration": "Once source material is gathered, AI can help extract and normalize security-relevant facts. Candidate items include assets, services, endpoints, data stores, identities, protocols, queues, integrations, external dependencies, owners, and environments. The model can turn narrative notes into structured tables and can highlight fields that appear to be missing or inconsistent.\n\nNormalization is a practical challenge. One source may call a component payment-api, another may call it Payments Service, and a diagram may label it Checkout Backend. AI can help group likely matches, but reviewers should confirm whether names refer to the same component. Deduplication is useful only when it is evidence-backed. Merging unrelated items can hide important risk.\n\nStructured outputs should preserve provenance. A component table is much more trustworthy when each row can point back to a README, diagram, manifest, inventory export, ticket, or owner confirmation. Provenance lets reviewers verify statements, resolve disagreement, and update the record later when source material changes.\n\nAI is also useful for asking clarifying questions. If an API appears in one file but not in the architecture diagram, the model can flag the mismatch. If a storage bucket exists without an owner, the model can create an open item. If a trust boundary is implied but not documented, the model can ask what identity, network, or data control separates the contexts.\n\nThe rule is simple: AI may organize, summarize, and suggest, but it should not silently invent. Missing facts should become visible uncertainty. That habit makes the documentation more useful because it shows both what the team knows and what still needs validation.",
+  "graphicAlt": "AI proposes a candidate name match, evidence review confirms normalization, and original source references remain attached.",
+  "narrationPoints": [
+    "Once source material is gathered, AI can help extract and normalize security-relevant facts.",
+    "Normalization is a practical challenge.",
+    "Structured outputs should preserve provenance.",
+    "AI is also useful for asking clarifying questions."
+  ]
+};

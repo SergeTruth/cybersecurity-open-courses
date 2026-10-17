@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Authentication controls need tests because small changes can affect many users and endpoints.
+
+2
+00:00:06.680 --> 00:00:25.480
+Useful tests include successful login, failed login, password reset, MFA enrollment, MFA reset, session expiration, logout, token validation, invalid token handling, account lockout or throttling behavior, public endpoint access, and service account authentication.
+
+3
+00:00:25.580 --> 00:00:33.660
+Negative tests are especially valuable because they show how the application behaves when identity proof is missing, malformed, expired, or inconsistent.
+
+4
+00:00:33.940 --> 00:00:47.460
+Code review should ask where authentication is enforced, which routes are intentionally public, how identity claims are validated, how sessions are created and ended, how tokens are stored, and whether service-to-service calls are authenticated.
+
+5
+00:00:47.560 --> 00:00:53.000
+Reviewers should also check that authentication is not confused with authorization.
+
+6
+00:00:53.100 --> 00:00:57.980
+A caller may be authenticated and still not be allowed to perform a sensitive action.
+
+7
+00:00:58.260 --> 00:01:03.700
+Authentication logs support detection, troubleshooting, and incident response.
+
+8
+00:01:03.800 --> 00:01:19.880
+Useful events include successful and failed logins, password resets, MFA changes, recovery activity, privileged account sign-ins, suspicious MFA activity, token anomalies at a high level, identity provider errors, and account lockouts.
+
+9
+00:01:19.980 --> 00:01:27.820
+Logs should be privacy-aware and avoid recording passwords, tokens, recovery secrets, or unnecessary personal information.
+
+10
+00:01:28.100 --> 00:01:32.020
+Monitoring turns logs into operational awareness.
+
+11
+00:01:32.120 --> 00:01:44.920
+Spikes in failed logins, unusual geographic or device patterns, repeated recovery attempts, unexpected service account behavior, and privileged sign-ins outside normal patterns may require triage.
+
+12
+00:01:45.020 --> 00:01:48.220
+Authentication is not a set-and-forget feature.
+
+13
+00:01:48.320 --> 00:01:58.800
+It changes as users, libraries, providers, platforms, and threats change, so testing and monitoring must continue throughout the application lifecycle.

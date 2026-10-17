@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Authentication should be enforced by server-side middleware or guards that fail closed.
+
+2
+00:00:05.320 --> 00:00:22.520
+A conceptual Express-style flow is straightforward: the request arrives, authentication middleware validates a session or credential, a verified identity context is attached to the request, authorization checks evaluate the requested action, and the handler performs business logic.
+
+3
+00:00:22.620 --> 00:00:29.260
+The authentication code should be boring, centralized, testable, and difficult to accidentally bypass.
+
+4
+00:00:29.540 --> 00:00:35.940
+Route protection should be consistent across APIs, pages, admin features, and background endpoints.
+
+5
+00:00:36.040 --> 00:00:41.400
+Public, authenticated, privileged, and service-only routes should be clearly separated.
+
+6
+00:00:41.500 --> 00:00:45.980
+Middleware should attach identity context only after validation succeeds.
+
+7
+00:00:46.080 --> 00:00:55.520
+Avoid relying on client-side checks, hidden UI elements, route naming conventions, unverified request fields, or assumptions that a frontend is the only caller.
+
+8
+00:00:55.620 --> 00:00:58.180
+Server-side enforcement is the trusted boundary.
+
+9
+00:00:58.460 --> 00:01:01.260
+Authentication must be followed by authorization.
+
+10
+00:01:01.360 --> 00:01:06.320
+A valid identity is not automatically allowed to perform every action.
+
+11
+00:01:06.420 --> 00:01:21.060
+Tests and code review should look for missing middleware, inconsistent guards, routes mounted outside protected routers, handlers that trust decoded but unvalidated tokens, and routes that use client-provided identity fields.
+
+12
+00:01:21.160 --> 00:01:28.920
+The point is not clever authentication code; the point is predictable request handling that makes bypasses hard to introduce accidentally.

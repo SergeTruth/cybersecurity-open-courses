@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Prefer Values, Containers, and RAII",
+  "graphicAlt": "Show values/containers and RAII tying release to scope across exits.",
+  "narration": "The best way to prevent leaks is often to avoid manual memory management in application code. If an object can be owned directly as a local value, member value, or returned value, that ownership is usually clearer than dynamic allocation. The lifetime follows scope or containing object lifetime.\n\nUse standard containers instead of manually allocated dynamic structures where practical. std::vector, std::string, std::map, std::unordered_map, and other standard library types manage storage and cleanup for their elements. They also keep size, ownership, and resource behavior closer to the data.\n\nRAII is the central C++ cleanup principle. A resource is acquired or represented by an object, and the object's destructor releases that resource. This works across normal execution, early returns, exceptions according to project policy, and partial failures during construction.\n\nDestructors make cleanup consistent because the cleanup rule lives with the owning object. A caller does not have to remember every branch that needs a release operation. Reviewers can inspect the owner type and its move or copy behavior to understand lifecycle.\n\nSimpler ownership is easier to test and maintain. Values and containers usually reduce the number of explicit transfer points. RAII wrappers concentrate cleanup logic in one place. Smart pointers can then be reserved for cases where dynamic ownership is genuinely needed.\n\nThis approach also improves change safety. When maintenance work adds a new return path, validation branch, or failure condition, RAII and container ownership keep cleanup behavior tied to scope instead of scattered manual calls.",
+  "narrationPoints": [
+    "The best way to prevent leaks is often to avoid manual memory management in application code.",
+    "Use standard containers instead of manually allocated dynamic structures where practical. std::vector, std::string, std::map, std::unordered_map, and other standard library types manage storage and cleanup for their elements.",
+    "A resource is acquired or represented by an object, and the object's destructor releases that resource.",
+    "Reviewers can inspect the owner type and its move or copy behavior to understand lifecycle.",
+    "Simpler ownership is easier to test and maintain.",
+    "RAII and container ownership preserve cleanup when maintenance adds new return paths, validation branches, or failure conditions."
+  ]
+};

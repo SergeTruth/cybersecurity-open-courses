@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Legacy C Interop and Resource Handles",
+  "graphicAlt": "Show C API opaque handle/output/error translated by narrow RAII adapter.",
+  "narration": "Real C++ systems often interact with C APIs, legacy libraries, operating-system interfaces, and resource handles. These boundaries may use raw pointers, output parameters, pointer-to-pointer APIs, opaque handles, and custom cleanup functions. Pointer safety does not require avoiding these interfaces. It requires isolating their conventions and translating them into clear C++ ownership as soon as practical.\n\nStart by documenting the contract. Who allocates the object? Who frees it? May the pointer be null? Is the buffer length supplied by the caller or the callee? Does the API write through an output parameter? How are errors reported? If those answers live only in tribal knowledge, the boundary is review-sensitive. A small wrapper can place the rule next to the code that enforces it.\n\nRAII adapters are often the safest shape. A wrapper can own an opaque handle and call the correct release function in its destructor. A std::unique_ptr with a custom deleter can express ownership for resources that are not deleted with ordinary delete. Output parameters can be converted into return objects that make success, failure, and ownership clearer to C++ callers.\n\nInterop code should be narrow. Keep unsafe conventions at the edge and avoid letting raw handles spread through application code. Validate inputs before crossing trust boundaries, convert errors into the local error model, and test both success and cleanup paths. Treat each wrapper as part of the security boundary: it should reject invalid combinations before they reach the less expressive C surface, or document why the legacy call requires them. The goal is a small boundary that is easy to audit.",
+  "narrationPoints": [
+    "Real C++ systems often interact with C APIs, legacy libraries, operating-system interfaces, and resource handles.",
+    "If those answers live only in tribal knowledge, the boundary is review-sensitive.",
+    "Output parameters can be converted into return objects that make success, failure, and ownership clearer to C++ callers.",
+    "Validate inputs before crossing trust boundaries, convert errors into the local error model, and test both success and cleanup paths.",
+    "Treat each wrapper as part of the security boundary: it should reject invalid combinations before they reach the less expressive C surface, or document why the legacy call requires them.",
+    "Keep unsafe conventions at the edge and avoid letting raw handles spread through application code."
+  ]
+};

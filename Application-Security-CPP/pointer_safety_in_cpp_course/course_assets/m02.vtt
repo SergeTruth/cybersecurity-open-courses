@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+A pointer can play several roles, and security review depends on knowing which role is intended.
+
+2
+00:00:06.840 --> 00:00:10.520
+An owning pointer is responsible for an object's lifetime.
+
+3
+00:00:10.620 --> 00:00:17.980
+In modern C++, raw owning pointers should be avoided in new designs because ownership is easy to miss and hard to audit.
+
+4
+00:00:18.080 --> 00:00:24.400
+Prefer a type such as std::unique_ptr or a focused resource wrapper when code owns something.
+
+5
+00:00:24.680 --> 00:00:29.720
+A borrowed pointer gives temporary access to an object owned elsewhere.
+
+6
+00:00:29.820 --> 00:00:38.220
+Borrowing can be appropriate for optional parameters, legacy APIs, or short call paths where a reference is not the right shape.
+
+7
+00:00:38.320 --> 00:00:43.920
+The contract must say that the callee does not delete the object and does not store the pointer beyond the valid lifetime.
+
+8
+00:00:44.020 --> 00:00:48.260
+Borrowed access should be brief, local, and easy to trace.
+
+9
+00:00:48.540 --> 00:00:55.980
+An observing pointer or handle may allow code to check or refer to something without controlling lifetime.
+
+10
+00:00:56.080 --> 00:01:01.920
+Observation appears in caches, registries, callbacks, and object graphs.
+
+11
+00:01:02.020 --> 00:01:10.340
+It can be useful, but it becomes unsafe when observers accidentally keep stale access or when the observed object's owner is not obvious.
+
+12
+00:01:10.440 --> 00:01:16.360
+For shared ownership designs, std::weak_ptr can express observation without extending lifetime.
+
+13
+00:01:16.640 --> 00:01:23.600
+Pointers may also refer to arrays, buffers, output locations, or external resources.
+
+14
+00:01:23.700 --> 00:01:27.380
+A handle from a C API may require a specific release function.
+
+15
+00:01:27.480 --> 00:01:31.320
+A pointer-to-pointer parameter may mean the callee writes a result.
+
+16
+00:01:31.420 --> 00:01:33.900
+These are not interchangeable roles.
+
+17
+00:01:34.000 --> 00:01:41.040
+A safe API makes the role visible through type choice, naming, documentation, and ownership conventions.
+
+18
+00:01:41.140 --> 00:01:51.140
+Code comments should not be the only place this meaning appears; parameter names, wrapper types, and return types should carry the contract where possible.
+
+19
+00:01:51.240 --> 00:01:56.200
+During review, ask what the pointer means before reasoning about what the code does.

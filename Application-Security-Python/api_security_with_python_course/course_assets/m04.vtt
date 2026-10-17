@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Authentication verifies who or what is calling the API.
+
+2
+00:00:03.880 --> 00:00:16.760
+Python services may use API keys, bearer tokens, signed tokens, OAuth and OpenID Connect concepts, service accounts, workload identity, or session-based approaches for browser clients.
+
+3
+00:00:16.860 --> 00:00:22.780
+Each pattern has tradeoffs, but none of them removes the need for careful validation and follow-on authorization.
+
+4
+00:00:22.880 --> 00:00:28.720
+An API should know how the caller identity was established and what confidence that identity carries.
+
+5
+00:00:29.000 --> 00:00:33.080
+Signed token validation should check more than token presence.
+
+6
+00:00:33.180 --> 00:00:43.100
+At a high level, the service may need to verify signature integrity, issuer, audience, expiration, not-before time, intended use, and relevant claims.
+
+7
+00:00:43.200 --> 00:00:47.440
+A token meant for one service should not automatically be accepted by another.
+
+8
+00:00:47.540 --> 00:00:52.420
+An expired token should not remain useful simply because it is well formed.
+
+9
+00:00:52.520 --> 00:00:57.080
+A token with missing context should not be treated as a blank check.
+
+10
+00:00:57.360 --> 00:01:01.760
+API keys and service accounts also require lifecycle thinking.
+
+11
+00:01:01.860 --> 00:01:07.060
+They should have owners, scopes, storage rules, rotation plans, and logging.
+
+12
+00:01:07.160 --> 00:01:15.160
+Long-lived credentials increase exposure when they leak, so teams should prefer narrow capability and operational visibility.
+
+13
+00:01:15.260 --> 00:01:26.780
+Revocation concepts matter because identity is not only about initial issuance; the system needs a way to respond when access should end, credentials are replaced, or a service relationship changes.
+
+14
+00:01:27.060 --> 00:01:32.020
+Authentication must be followed by authorization, logging, and monitoring.
+
+15
+00:01:32.120 --> 00:01:36.680
+A valid token may identify a user who cannot access the requested object.
+
+16
+00:01:36.780 --> 00:01:43.260
+A valid service account may be allowed to read one dataset but not trigger administrative work.
+
+17
+00:01:43.360 --> 00:01:46.800
+Token presence is only the beginning of the decision.
+
+18
+00:01:46.900 --> 00:01:55.860
+Secure APIs validate the token, understand the subject, enforce permissions, record meaningful events, and watch for unusual usage patterns.

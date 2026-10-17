@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+Numbers from input should be parsed with functions that let the program distinguish success from failure.
+
+2
+00:00:06.280 --> 00:00:13.640
+std::from_chars is useful because it is explicit, locale-independent, and reports where parsing stopped.
+
+3
+00:00:13.740 --> 00:00:21.500
+Functions such as stoi and stol can be appropriate when exceptions are handled deliberately, but they should not be treated as magic validation.
+
+4
+00:00:21.600 --> 00:00:28.320
+Stream extraction has its own pitfalls because failed parsing, partial parsing, and leftover input must be checked.
+
+5
+00:00:28.600 --> 00:00:30.920
+Conversion is only the first step.
+
+6
+00:00:31.020 --> 00:00:34.460
+The converted value must be valid for its purpose.
+
+7
+00:00:34.560 --> 00:00:45.200
+A port number, timeout, count, array index, file offset, allocation size, enum value, and percentage all have different allowed ranges.
+
+8
+00:00:45.300 --> 00:00:49.780
+Signed and unsigned conversions deserve special attention.
+
+9
+00:00:49.880 --> 00:00:54.520
+A negative value converted to an unsigned type can become a very large number.
+
+10
+00:00:54.620 --> 00:00:58.140
+A value that fits in one type may not fit in another.
+
+11
+00:00:58.240 --> 00:01:03.440
+Narrowing conversions can lose information or change meaning if they are not checked first.
+
+12
+00:01:03.720 --> 00:01:08.680
+Integer overflow matters before allocation, indexing, and pointer movement.
+
+13
+00:01:08.780 --> 00:01:16.380
+A count multiplied by an element size can wrap and produce a smaller allocation than later code expects.
+
+14
+00:01:16.480 --> 00:01:20.880
+An offset plus a length can wrap and appear to be within a buffer.
+
+15
+00:01:20.980 --> 00:01:26.740
+Validate counts, sizes, indexes, offsets, and allocation inputs before use.
+
+16
+00:01:26.840 --> 00:01:32.520
+Ask how the value will be used downstream, not only whether it was syntactically a number.
+
+17
+00:01:32.620 --> 00:01:38.540
+Secure numeric handling creates typed, range-checked values that later code can trust.

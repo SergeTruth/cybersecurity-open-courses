@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Documenting Security-Relevant Assumptions",
+  "narration": "Security assumptions are beliefs about how the system is protected or operated. They may involve authentication, authorization, network exposure, encryption, secrets handling, logging, monitoring, backup and recovery, dependency ownership, third-party responsibility, and environment separation. Some assumptions are confirmed. Others are inherited from old decisions, tribal knowledge, or incomplete documentation.\n\nAssumptions should be visible, reviewable, and testable. A statement such as all admin actions require MFA is security-relevant. So is production databases are not reachable from the public internet, secrets are managed by the platform service, or vendors do not receive regulated data. If those statements are false or only partly true, the risk picture changes.\n\nAI can help extract assumptions from text, diagrams, comments, and architecture notes. It can also identify where a statement sounds like an assumption rather than confirmed evidence. For example, words such as should, expected, normally, or assumed may signal uncertainty. The output should label whether each assumption is confirmed, unverified, contradicted, or open for review.\n\nEnvironment differences deserve special attention. Development, test, staging, and production may have different data, identities, network rules, logging, and deployment practices. An assumption that is true in production may be false in a lower environment. Attack surface documentation should not collapse those environments into one generic description unless the evidence supports it.\n\nAssumption tracking turns documentation into a security review tool. Instead of hiding uncertainty, it gives teams a list of claims to validate. That list can feed architecture review, control testing, backlog items, and future detection work.",
+  "graphicAlt": "Assumptions receive explicit evidence statuses and remain tied to the environment where the evidence applies.",
+  "narrationPoints": [
+    "Security assumptions are beliefs about how the system is protected or operated.",
+    "Assumptions should be visible, reviewable, and testable.",
+    "AI can help extract assumptions from text, diagrams, comments, and architecture notes.",
+    "Environment differences deserve special attention."
+  ]
+};

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.300
+API request data can arrive through path parameters, query parameters, headers, cookies, JSON bodies, form fields, and uploaded files.
+
+2
+00:00:11.400 --> 00:00:18.440
+The sender might be a normal client, an integration, a service, a script, or a broken automation job.
+
+3
+00:00:18.540 --> 00:00:28.300
+The defensive rule is straightforward: treat request data as untrusted until it has been validated for type, shape, range, format, size, and business intent.
+
+4
+00:00:28.580 --> 00:00:33.060
+Schema validation is useful because it makes the input contract visible.
+
+5
+00:00:33.160 --> 00:00:40.600
+It can define required fields, optional fields, nesting, allowed values, and basic formats.
+
+6
+00:00:40.700 --> 00:00:45.180
+Type validation is valuable, but it does not prove the request is safe.
+
+7
+00:00:45.280 --> 00:00:48.480
+A valid identifier can point to another tenant's resource.
+
+8
+00:00:48.580 --> 00:00:52.900
+A correctly formatted date can be outside an allowed business window.
+
+9
+00:00:53.000 --> 00:00:57.480
+A well-formed JSON object can still request an action the caller should not perform.
+
+10
+00:00:57.760 --> 00:01:01.680
+Unexpected fields and size limits deserve deliberate choices.
+
+11
+00:01:01.780 --> 00:01:10.500
+If the API silently accepts extra fields, clients may believe those fields have meaning or accidentally influence server behavior through over-posting.
+
+12
+00:01:10.600 --> 00:01:18.760
+If bodies, arrays, strings, nested structures, or uploads are unbounded, validation can become an availability problem.
+
+13
+00:01:18.860 --> 00:01:25.980
+Safe parsing means choosing parsers and limits that match the data contract and failure behavior the service is prepared to handle.
+
+14
+00:01:26.260 --> 00:01:32.660
+Error responses should help legitimate clients fix bad requests without disclosing internals.
+
+15
+00:01:32.760 --> 00:01:38.840
+They can explain that a field is missing, malformed, too large, out of range, or unsupported.
+
+16
+00:01:38.940 --> 00:01:46.700
+They should not expose stack traces, raw queries, secrets, token contents, internal paths, or service topology.
+
+17
+00:01:46.800 --> 00:01:57.040
+Good validation creates a clean boundary: reject what is outside the contract, explain failures safely, and only pass trusted, normalized data into business logic.

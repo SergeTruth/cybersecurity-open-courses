@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Authorization architecture defines where decisions are made and where they are enforced.
+
+2
+00:00:05.320 --> 00:00:09.080
+A policy decision point evaluates policy and context.
+
+3
+00:00:09.180 --> 00:00:13.820
+A policy enforcement point applies the result by allowing or denying access.
+
+4
+00:00:13.920 --> 00:00:26.320
+In a Python application, these roles might be implemented through local functions, shared libraries, framework hooks, a policy engine, a database rule layer, or a centralized authorization service.
+
+5
+00:00:26.600 --> 00:00:30.920
+Local checks can be simple, fast, and close to application code.
+
+6
+00:00:31.020 --> 00:00:35.260
+Centralized policy services can improve consistency across multiple services.
+
+7
+00:00:35.360 --> 00:00:40.080
+Policy engines can help express rules outside individual handlers.
+
+8
+00:00:40.180 --> 00:00:47.220
+Each pattern has tradeoffs in performance, clarity, availability, and operational complexity.
+
+9
+00:00:47.320 --> 00:00:52.920
+The right architecture should make safe behavior consistent and hard to bypass accidentally, not merely fashionable.
+
+10
+00:00:53.200 --> 00:00:58.400
+Data filtering is a common authorization pattern for list endpoints and search results.
+
+11
+00:00:58.500 --> 00:01:01.380
+A caller should only receive records they are allowed to see.
+
+12
+00:01:01.480 --> 00:01:06.760
+Filtering needs to happen in the backend query or service logic, not just in the client.
+
+13
+00:01:06.860 --> 00:01:12.300
+Overbroad query results can expose sensitive data even if individual record pages have checks.
+
+14
+00:01:12.400 --> 00:01:20.080
+The list view, export path, API endpoint, and report generator should all follow the same access expectations.
+
+15
+00:01:20.360 --> 00:01:25.000
+Caching authorization decisions can improve performance, but stale permissions create risk.
+
+16
+00:01:25.100 --> 00:01:30.780
+Roles, permissions, ownership, tenant membership, and policy versions can change.
+
+17
+00:01:30.880 --> 00:01:38.240
+If cached decisions are used, the design should account for lifetime, invalidation, policy versioning, and fail-closed behavior.
+
+18
+00:01:38.340 --> 00:01:45.220
+If the policy system cannot evaluate access safely, the safer default is generally to deny rather than allow.
+
+19
+00:01:45.320 --> 00:01:51.000
+Error handling should support operators without revealing sensitive policy internals to unauthorized callers.

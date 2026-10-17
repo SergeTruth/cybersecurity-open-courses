@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.060
+A memory leak happens when memory or another resource remains allocated after the program no longer has a valid reason to keep it.
+
+2
+00:00:07.160 --> 00:00:13.720
+The program may have lost the last useful path to the resource, or it may still have a reference that is no longer serving a real purpose.
+
+3
+00:00:13.820 --> 00:00:17.020
+Either way, the resource stays alive longer than intended.
+
+4
+00:00:17.300 --> 00:00:21.780
+In a small command-line tool, a leak may be hidden by process exit.
+
+5
+00:00:21.880 --> 00:00:31.720
+In long-running services, desktop applications, embedded systems, libraries, and high-throughput processes, retained resources accumulate over time.
+
+6
+00:00:31.820 --> 00:00:38.940
+The result can be rising memory use, slower operation, unstable behavior, failed requests, or forced restarts.
+
+7
+00:00:39.220 --> 00:00:42.260
+Leaks are not limited to forgotten cleanup calls.
+
+8
+00:00:42.360 --> 00:00:53.800
+They can come from unclear ownership, shared ownership cycles, retained callbacks, unbounded caches, missed cleanup during error handling, or resource wrappers that do not match the underlying cleanup contract.
+
+9
+00:00:53.900 --> 00:00:59.500
+File handles, sockets, library contexts, sessions, and buffers can all leak.
+
+10
+00:00:59.780 --> 00:01:02.980
+Leak prevention is therefore a lifecycle design problem.
+
+11
+00:01:03.080 --> 00:01:10.280
+The code should show who owns each resource, who may borrow it, who may transfer it, who may share it, and when cleanup should happen.
+
+12
+00:01:10.380 --> 00:01:16.060
+If those answers are not visible, reviewers have to reconstruct the contract from scattered usage.
+
+13
+00:01:16.340 --> 00:01:18.180
+This course is preventive.
+
+14
+00:01:18.280 --> 00:01:31.560
+The goal is to design C++ code so resources have clear owners, predictable lifetimes, explicit cleanup behavior, realistic limits, and verification through tests, diagnostics, monitoring, and review.
+
+15
+00:01:31.840 --> 00:01:37.040
+A useful review habit is to look past the allocation line and follow the intended lifetime.
+
+16
+00:01:37.140 --> 00:01:44.340
+Ask what event ends the resource's usefulness, what code notices that event, and what evidence proves the release actually happened.

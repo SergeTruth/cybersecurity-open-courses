@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Smart pointers support leak prevention when dynamic ownership is necessary.
+
+2
+00:00:05.000 --> 00:00:09.960
+They connect ownership to object lifetime and reduce the need for manual cleanup calls.
+
+3
+00:00:10.060 --> 00:00:15.740
+They also make ownership easier to see in function signatures, member variables, and factory returns.
+
+4
+00:00:16.020 --> 00:00:20.900
+std::unique_ptr is usually the default tool for exclusive dynamic ownership.
+
+5
+00:00:21.000 --> 00:00:27.160
+It automatically destroys the object when the owner goes away and makes transfer visible through move semantics.
+
+6
+00:00:27.260 --> 00:00:31.260
+A unique pointer tells reviewers that one owner is responsible for cleanup.
+
+7
+00:00:31.540 --> 00:00:38.900
+std::shared_ptr is appropriate when multiple owners genuinely need to keep an object alive.
+
+8
+00:00:39.000 --> 00:00:43.560
+Shared ownership should not be used just because ownership is unclear.
+
+9
+00:00:43.660 --> 00:00:52.220
+If the design has one natural owner, unique ownership or value ownership is usually simpler and easier to review.
+
+10
+00:00:52.500 --> 00:00:57.620
+std::weak_ptr observes shared objects without extending lifetime.
+
+11
+00:00:57.720 --> 00:01:07.160
+It can help prevent cycles and support callbacks, registries, or caches that should check whether a target still exists before using it.
+
+12
+00:01:07.260 --> 00:01:11.100
+Expired weak observations need clear handling.
+
+13
+00:01:11.380 --> 00:01:13.780
+Smart pointers are not magic.
+
+14
+00:01:13.880 --> 00:01:24.280
+A program can still leak through shared ownership cycles, long-lived globals, unbounded caches, retained callbacks, or ownership graphs that never release.
+
+15
+00:01:24.380 --> 00:01:29.500
+Smart pointers work best when they express a clear lifecycle design rather than hiding one.
+
+16
+00:01:29.780 --> 00:01:32.740
+Function boundaries are a good place to enforce intent.
+
+17
+00:01:32.840 --> 00:01:43.240
+Returning unique ownership, accepting borrowed references, and storing shared ownership in narrow, reviewed locations helps prevent smart pointers from becoming a substitute for design.

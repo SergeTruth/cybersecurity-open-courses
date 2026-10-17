@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+One common modern leak pattern is unintended retention.
+
+2
+00:00:04.200 --> 00:00:10.600
+A shared ownership cycle can keep an object graph alive even after the rest of the program no longer needs it.
+
+3
+00:00:10.700 --> 00:00:15.340
+Each object remains alive because another object in the cycle still owns it.
+
+4
+00:00:15.620 --> 00:00:18.980
+Parent-child relationships need a clear ownership direction.
+
+5
+00:00:19.080 --> 00:00:25.640
+A parent may own children, while children observe the parent through a weak reference or another non-owning mechanism.
+
+6
+00:00:25.740 --> 00:00:31.820
+If both directions use shared ownership, cleanup can become dependent on a cycle breaking by chance.
+
+7
+00:00:32.100 --> 00:00:34.660
+Callback captures also deserve review.
+
+8
+00:00:34.760 --> 00:00:39.400
+Capturing a shared pointer may be the right choice when queued work must keep a target alive.
+
+9
+00:00:39.500 --> 00:00:46.300
+It may also retain an object after a screen closes, a request ends, or a service begins shutdown.
+
+10
+00:00:46.400 --> 00:00:49.200
+The code should make that lifetime extension intentional.
+
+11
+00:00:49.480 --> 00:00:56.440
+Caches, observer lists, event systems, task queues, and registries need lifecycle rules.
+
+12
+00:00:56.540 --> 00:01:03.740
+A cache should define size limits, eviction policy, and whether entries own objects or merely observe them.
+
+13
+00:01:03.840 --> 00:01:08.000
+A callback list should define registration and deregistration behavior.
+
+14
+00:01:08.280 --> 00:01:14.120
+std::weak_ptr can break cycles safely when the observed object is managed by shared ownership.
+
+15
+00:01:14.220 --> 00:01:19.900
+Code can lock the weak pointer for temporary access and handle the case where the object no longer exists.
+
+16
+00:01:20.000 --> 00:01:24.880
+That failure path is part of the design, not an exceptional surprise.
+
+17
+00:01:25.160 --> 00:01:28.360
+Retention paths should be reviewed explicitly.
+
+18
+00:01:28.460 --> 00:01:37.660
+Ask what can keep this object alive, how long those owners can last, whether any relationship is cyclic, and what cleanup or expiration path releases the object.
+
+19
+00:01:37.760 --> 00:01:41.760
+If a resource can stay retained forever, the design needs a boundary.
+
+20
+00:01:42.040 --> 00:01:46.040
+When reviewing retained state, include indirect owners.
+
+21
+00:01:46.140 --> 00:01:54.700
+Scheduled work, promises, lambdas, GUI bindings, background tasks, and telemetry buffers may all hold references.
+
+22
+00:01:54.800 --> 00:01:59.280
+The retention decision should be intentional, bounded, and visible.

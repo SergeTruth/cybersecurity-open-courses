@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Pointer safety includes knowing how much memory is valid to access.
+
+2
+00:00:04.760 --> 00:00:10.360
+A pointer to the first element of a sequence does not, by itself, describe how many elements are available.
+
+3
+00:00:10.460 --> 00:00:17.660
+That is why pointer-plus-length APIs, spans, containers, and range-based operations are so important.
+
+4
+00:00:17.760 --> 00:00:23.600
+They keep access and bounds information close enough for callers and reviewers to reason about them together.
+
+5
+00:00:23.880 --> 00:00:26.840
+Prefer standard containers and views where possible.
+
+6
+00:00:26.940 --> 00:00:30.460
+std::array expresses fixed-size storage.
+
+7
+00:00:30.560 --> 00:00:34.640
+std::vector and std::string track dynamic size.
+
+8
+00:00:34.740 --> 00:00:39.220
+std::span can represent a bounded non-owning view when the source data outlives the span.
+
+9
+00:00:39.320 --> 00:00:45.720
+Iterators and algorithms can reduce manual pointer arithmetic and make the valid range more visible.
+
+10
+00:00:45.820 --> 00:00:52.940
+These tools do not remove every logic error, but they reduce how often a raw address must carry hidden size information.
+
+11
+00:00:53.220 --> 00:00:56.900
+Raw pointer arithmetic deserves careful review.
+
+12
+00:00:57.000 --> 00:01:04.920
+Offsets, counts, signed and unsigned conversions, and multiplication used for allocation can all create invalid ranges.
+
+13
+00:01:05.020 --> 00:01:14.060
+Before copying, parsing, transforming, or indexing, validate that the requested range fits the available data and the destination.
+
+14
+00:01:14.160 --> 00:01:16.480
+Treat null termination assumptions carefully.
+
+15
+00:01:16.580 --> 00:01:24.660
+A buffer with a length is not necessarily a C string, and a C string may not be appropriate when embedded nulls or explicit lengths matter.
+
+16
+00:01:24.940 --> 00:01:27.900
+The defensive habit is to preserve length with data.
+
+17
+00:01:28.000 --> 00:01:35.360
+If an API accepts a pointer, ask where the valid range comes from, who checked it, and whether the pointer and length can diverge.
+
+18
+00:01:35.460 --> 00:01:43.700
+When ranges are derived from untrusted input, check the arithmetic before forming the pointer or view, not only after dereference.
+
+19
+00:01:43.800 --> 00:01:47.800
+Invalid intermediate pointers can already be undefined behavior.
+
+20
+00:01:47.900 --> 00:01:54.780
+Good designs make out-of-range access harder to express and easier to catch in tests and review.

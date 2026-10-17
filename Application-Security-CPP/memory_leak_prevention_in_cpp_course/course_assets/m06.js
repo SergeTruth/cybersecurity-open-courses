@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Exception Safety and Error Path Cleanup",
+  "graphicAlt": "Show staged RAII acquisition, invariant validation, commit on success and cleanup on failure.",
+  "narration": "Leaks often appear in failure paths. A function allocates one resource, fails while acquiring another, and skips cleanup. A constructor partially initializes an object. A retry path keeps old state. An early return misses a manual release call. These paths are easy to miss when tests cover only successful execution.\n\nRAII is the preferred answer because destructors run when owning objects leave scope. If a local owner represents each acquired resource, cleanup happens whether the function reaches the normal end, returns early, or exits through an exception according to project policy.\n\nPartial initialization needs careful ownership handling. A resource should not escape to other code until the owner can maintain its invariant. If construction cannot complete, cleanup should remain inside the object or factory that knows which pieces were acquired.\n\nOwnership transfer should happen only after setup has succeeded. A function should avoid handing responsibility to another component while still depending on local cleanup assumptions. Transfer points should be visible and should leave exactly one owner responsible for each resource.\n\nError-path tests should verify cleanup behavior. Tests should exercise failed initialization, rejected inputs, canceled operations, retries, shutdown during setup, and repeated create-destroy cycles. Leak prevention becomes much more reliable when failure paths are first-class test cases.\n\nA useful implementation habit is to acquire resources into local RAII owners first, validate the rest of the setup, and then commit the completed owner to longer-lived state only after the invariant is established.",
+  "narrationPoints": [
+    "A function allocates one resource, fails while acquiring another, and skips cleanup.",
+    "RAII is the preferred answer because destructors run when owning objects leave scope.",
+    "If construction cannot complete, cleanup should remain inside the object or factory that knows which pieces were acquired.",
+    "Transfer points should be visible and should leave exactly one owner responsible for each resource.",
+    "Leak prevention becomes much more reliable when failure paths are first-class test cases.",
+    "A useful implementation habit is to acquire resources into local RAII owners first, validate the rest of the setup, and then commit the completed owner to longer-lived state only after the invariant is established."
+  ]
+};

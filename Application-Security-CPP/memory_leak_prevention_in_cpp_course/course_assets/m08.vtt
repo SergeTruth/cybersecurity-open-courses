@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+C++ programs often manage resources beyond heap memory.
+
+2
+00:00:04.920 --> 00:00:19.160
+File handles, sockets, operating system handles, library contexts, cryptographic contexts, GPU resources, memory-mapped files, pools, and arenas can all leak if ownership is unclear.
+
+3
+00:00:19.440 --> 00:00:23.680
+Resource ownership should be represented in types, usually through RAII wrappers.
+
+4
+00:00:23.780 --> 00:00:28.900
+A wrapper can define how the resource is acquired, moved, released, and inspected.
+
+5
+00:00:29.000 --> 00:00:33.960
+It can also prevent accidental copying when copying would duplicate ownership incorrectly.
+
+6
+00:00:34.240 --> 00:00:37.440
+Custom deleters must match cleanup contracts.
+
+7
+00:00:37.540 --> 00:00:43.460
+A resource created by one library function may require a specific release function.
+
+8
+00:00:43.560 --> 00:00:47.400
+A mismatch can leak the resource or release it incorrectly.
+
+9
+00:00:47.500 --> 00:00:53.180
+Reviewers should be able to connect creation and cleanup without tracing unrelated code.
+
+10
+00:00:53.460 --> 00:00:59.940
+Pools and arenas can be safe and useful, but they require clear reset rules.
+
+11
+00:01:00.040 --> 00:01:03.960
+A pool reset may invalidate many objects at once.
+
+12
+00:01:04.060 --> 00:01:07.980
+An arena may retain memory until a larger scope ends.
+
+13
+00:01:08.080 --> 00:01:13.280
+These lifetime choices must be documented so callers do not assume ordinary individual cleanup.
+
+14
+00:01:13.560 --> 00:01:17.480
+Specialized allocators require documentation and review.
+
+15
+00:01:17.580 --> 00:01:27.500
+State who owns the allocator, when memory is released, whether the allocator is thread-safe, what happens when it is exhausted, and how usage is measured.
+
+16
+00:01:27.600 --> 00:01:31.200
+Performance optimization should not hide lifecycle responsibility.
+
+17
+00:01:31.480 --> 00:01:34.760
+A good wrapper makes the correct cleanup path ordinary.
+
+18
+00:01:34.860 --> 00:01:43.180
+It should be movable when transfer is allowed, noncopyable when ownership must remain unique, and small enough that teams will use it consistently.

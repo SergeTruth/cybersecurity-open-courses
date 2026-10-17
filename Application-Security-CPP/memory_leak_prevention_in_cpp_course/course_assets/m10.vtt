@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+The leak prevention roadmap starts with explicit ownership and cleanup.
+
+2
+00:00:04.280 --> 00:00:09.400
+Every resource should have an owner, a lifetime, and a release path.
+
+3
+00:00:09.500 --> 00:00:12.220
+Borrowed access should remain temporary.
+
+4
+00:00:12.320 --> 00:00:16.400
+Transfer and sharing should be visible in the API and type design.
+
+5
+00:00:16.680 --> 00:00:20.680
+Prefer RAII, values, containers, and smart pointers.
+
+6
+00:00:20.780 --> 00:00:23.980
+Values and containers reduce manual allocation.
+
+7
+00:00:24.080 --> 00:00:27.280
+RAII makes cleanup follow object lifetime.
+
+8
+00:00:27.380 --> 00:00:30.180
+unique_ptr expresses exclusive ownership.
+
+9
+00:00:30.280 --> 00:00:37.560
+shared_ptr should represent real shared ownership, and weak_ptr should be used when observation should not extend lifetime.
+
+10
+00:00:37.840 --> 00:00:41.280
+Break cycles and limit unintended retention.
+
+11
+00:00:41.380 --> 00:00:49.380
+Review parent-child structures, callbacks, observer lists, event systems, caches, queues, and registries.
+
+12
+00:00:49.480 --> 00:00:57.560
+Define eviction, expiration, deregistration, backpressure, and shutdown behavior before retained state grows without a boundary.
+
+13
+00:00:57.840 --> 00:01:02.160
+Wrap custom resources in types that match their cleanup contracts.
+
+14
+00:01:02.260 --> 00:01:06.180
+Document allocator, pool, and arena rules.
+
+15
+00:01:06.280 --> 00:01:13.320
+Specialized lifecycle strategies can be valuable, but only when callers understand when resources are released and when objects become invalid.
+
+16
+00:01:13.600 --> 00:01:19.360
+Finally, test, monitor, review, and revisit resource lifecycles.
+
+17
+00:01:19.460 --> 00:01:25.940
+Use leak detection, lifecycle tests, shutdown tests, diagnostics, and CI checks.
+
+18
+00:01:26.040 --> 00:01:29.080
+Treat ownership changes as carefully as logic changes.
+
+19
+00:01:29.180 --> 00:01:33.820
+Leak prevention is a lifecycle discipline, not a final cleanup pass.
+
+20
+00:01:34.100 --> 00:01:41.940
+When a team treats lifecycle design as normal engineering practice, leaks become easier to reason about and easier to prevent.
+
+21
+00:01:42.040 --> 00:01:47.800
+The result is C++ software that stays predictable under real operating conditions.

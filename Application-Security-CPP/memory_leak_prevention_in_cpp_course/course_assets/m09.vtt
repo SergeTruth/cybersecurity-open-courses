@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Teams make leak prevention measurable through tests, diagnostics, and review.
+
+2
+00:00:05.720 --> 00:00:18.360
+LeakSanitizer, AddressSanitizer, static analysis, compiler warnings, debug allocation tools, and platform diagnostics can expose retained resources earlier than production monitoring alone.
+
+3
+00:00:18.640 --> 00:00:22.320
+Repeated create-destroy tests are especially useful.
+
+4
+00:00:22.420 --> 00:00:28.580
+A component that appears fine after one run may retain state across many cycles.
+
+5
+00:00:28.680 --> 00:00:37.800
+Tests that create, use, destroy, and repeat can reveal retained ownership in services, libraries, caches, and factories.
+
+6
+00:00:38.080 --> 00:00:40.960
+Shutdown tests catch missed cleanup.
+
+7
+00:00:41.060 --> 00:00:51.460
+They should exercise callback deregistration, cache eviction, queue draining, session expiration, failed initialization, and cleanup after error paths.
+
+8
+00:00:51.560 --> 00:00:57.080
+A clean shutdown path is often where unclear ownership becomes visible.
+
+9
+00:00:57.360 --> 00:01:01.280
+Static analysis and code review can flag ownership mistakes before runtime.
+
+10
+00:01:01.380 --> 00:01:11.860
+Reviewers should ask who owns this resource, how it is released, whether it can be retained by a cycle, what happens on failure, and whether a cache or queue has a boundary.
+
+11
+00:01:12.140 --> 00:01:18.700
+Findings should become tracked engineering defects with owners, fixes, and regression tests.
+
+12
+00:01:18.800 --> 00:01:22.640
+Suppressions should be documented and revisited.
+
+13
+00:01:22.740 --> 00:01:28.980
+Leak prevention improves when tool feedback changes the codebase instead of becoming background noise.
+
+14
+00:01:29.260 --> 00:01:32.540
+Tooling works best when the team agrees on expectations.
+
+15
+00:01:32.640 --> 00:01:41.120
+Decide which leak checks run locally, which run in CI, what failures block release, and how exceptions are reviewed so the signal remains useful.

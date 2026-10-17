@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Memory Leak Prevention Matters",
+  "graphicAlt": "Show intended usefulness ends with owner-triggered cleanup rather than indefinite retained resources.",
+  "narration": "A memory leak happens when memory or another resource remains allocated after the program no longer has a valid reason to keep it. The program may have lost the last useful path to the resource, or it may still have a reference that is no longer serving a real purpose. Either way, the resource stays alive longer than intended.\n\nIn a small command-line tool, a leak may be hidden by process exit. In long-running services, desktop applications, embedded systems, libraries, and high-throughput processes, retained resources accumulate over time. The result can be rising memory use, slower operation, unstable behavior, failed requests, or forced restarts.\n\nLeaks are not limited to forgotten cleanup calls. They can come from unclear ownership, shared ownership cycles, retained callbacks, unbounded caches, missed cleanup during error handling, or resource wrappers that do not match the underlying cleanup contract. File handles, sockets, library contexts, sessions, and buffers can all leak.\n\nLeak prevention is therefore a lifecycle design problem. The code should show who owns each resource, who may borrow it, who may transfer it, who may share it, and when cleanup should happen. If those answers are not visible, reviewers have to reconstruct the contract from scattered usage.\n\nThis course is preventive. The goal is to design C++ code so resources have clear owners, predictable lifetimes, explicit cleanup behavior, realistic limits, and verification through tests, diagnostics, monitoring, and review.\n\nA useful review habit is to look past the allocation line and follow the intended lifetime. Ask what event ends the resource's usefulness, what code notices that event, and what evidence proves the release actually happened.",
+  "narrationPoints": [
+    "A memory leak happens when memory or another resource remains allocated after the program no longer has a valid reason to keep it.",
+    "The program may have lost the last useful path to the resource, or it may still have a reference that is no longer serving a real purpose.",
+    "The result can be rising memory use, slower operation, unstable behavior, failed requests, or forced restarts.",
+    "File handles, sockets, library contexts, sessions, and buffers can all leak.",
+    "The code should show who owns each resource, who may borrow it, who may transfer it, who may share it, and when cleanup should happen.",
+    "A useful review habit is to look past the allocation line and follow the intended lifetime."
+  ]
+};
