@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive API and Data Flow Design",
+  "graphicAlt": "API input is validated, permission is checked beside the operation, and only deliberately selected fields reach the response.",
+  "narration": "Defensive API design enforces boundaries on both input and output. Input validation protects the application from malformed or inappropriate requests. Output shaping protects callers and users from receiving data they do not need, should not see, or might misuse. Both directions matter.\n\nDo not return more data than the caller needs. It is common for internal objects to contain fields that are useful for storage, auditing, operations, or later workflow steps. Those fields should not automatically become API response fields. Defensive serialization selects the response shape deliberately.\n\nAuthorization should be checked close to the protected action. An earlier layer may authenticate a user, load a session, or apply a route-level guard, but the code that performs the sensitive operation should still be clear about what permission is required. Relying only on distant assumptions makes later refactors risky.\n\nInternal modules also need clear contracts. Internal does not mean risk-free. A background worker, service object, repository, or utility function can still receive stale data, a partial object, or a value that was valid in one context but not another. Defensive internal contracts describe what the module accepts and what it guarantees.\n\nData flow should be easy to trace. Engineers should be able to answer where a value came from, whether it was validated, who is allowed to use it, and where it is allowed to go. This is especially important for identifiers, permissions, account boundaries, personal data, and values that influence security-sensitive decisions.\n\nDefensive data flow reduces accidental exposure and makes code review more effective. When validation, authorization, transformation, and serialization are visible in the design, reviewers can reason about the system without guessing which earlier layer might have handled a critical step.",
+  "narrationPoints": [
+    "Defensive API design enforces boundaries on both input and output.",
+    "Do not return more data than the caller needs.",
+    "Authorization should be checked close to the protected action.",
+    "Internal modules also need clear contracts.",
+    "Data flow should be easy to trace."
+  ]
+};

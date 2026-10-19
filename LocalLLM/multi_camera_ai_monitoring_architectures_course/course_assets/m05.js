@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Storage and Event Retention",
+  "narration": "Continuous recording preserves full timelines but consumes substantial storage and retains unrelated activity. Event-based storage keeps clips, thumbnails, and metadata around detected or reviewed events. Many systems combine a shorter continuous window with longer retention for confirmed events.\n\nAn NVR may remain the authoritative video store while the AI system holds event references and metadata. Avoid unnecessary duplicate copies. If AI clips are separate, record camera, start and end time, original source, model version, and review status so evidence can be traced.\n\nMetadata is smaller than video but still sensitive. Object labels, descriptions, zones, timestamps, alerts, and reviewer notes can reveal routines and operations. Apply the same purpose, access, and deletion principles used for footage.\n\nRetention policies define how long continuous video, event clips, thumbnails, metadata, exports, and audit logs remain. Set periods by legitimate need and applicable policy, not simply by available disk. Confirm that deletion includes secondary indexes and copies.\n\nSearch and retrieval need reliable camera identity, synchronized time, event type, zone, and review outcome. Indexes should help authorized users find relevant events without encouraging broad browsing unrelated to the stated purpose.\n\nProtect storage with access control, encryption where appropriate, integrity monitoring, capacity alerts, and tested recovery for configuration and critical event records. Plan for disk failure and full volumes. A storage design is successful when it supports necessary review while minimizing unnecessary retention and exposure.",
+  "graphicAlt": "Source-linked event records minimize duplicate footage while metadata, export, retention and storage recovery remain governed.",
+  "narrationPoints": [
+    "Continuous recording preserves full timelines but consumes substantial storage and retains unrelated activity.",
+    "An NVR may remain the authoritative video store while the AI system holds event references and metadata.",
+    "Metadata is smaller than video but still sensitive.",
+    "Retention policies define how long continuous video, event clips, thumbnails, metadata, exports, and audit logs remain."
+  ]
+};

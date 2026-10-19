@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+Configuration validation checks whether settings match the expected contract before they affect a running system.
+
+2
+00:00:06.040 --> 00:00:13.800
+A schema can define required values, types, formats, ranges, allowed values, and relationships between settings.
+
+3
+00:00:13.900 --> 00:00:24.140
+This is especially important for values that begin as strings, such as environment variables, because a misspelled boolean, missing URL, or invalid duration can silently change behavior.
+
+4
+00:00:24.420 --> 00:00:27.780
+Startup validation is a useful guardrail.
+
+5
+00:00:27.880 --> 00:00:37.960
+Instead of allowing an application to start with missing secrets, unsafe defaults, invalid ranges, or dangerous combinations, the application can fail early and clearly.
+
+6
+00:00:38.060 --> 00:00:51.260
+Fail-safe behavior is better than serving traffic with a configuration that disables authentication, writes secrets to logs, skips TLS verification, or connects to the wrong data environment.
+
+7
+00:00:51.540 --> 00:00:54.980
+Dangerous combinations deserve explicit checks.
+
+8
+00:00:55.080 --> 00:00:58.360
+Debug mode and production environment should not coexist.
+
+9
+00:00:58.460 --> 00:01:02.940
+Public access and sensitive storage should not coexist.
+
+10
+00:01:03.040 --> 00:01:08.640
+Disabled TLS verification and external service calls should not coexist.
+
+11
+00:01:08.740 --> 00:01:14.420
+Broad CORS origins and credentialed browser requests should be reviewed carefully.
+
+12
+00:01:14.520 --> 00:01:20.360
+Guardrails should encode these rules so they are not dependent on memory during a high-pressure deployment.
+
+13
+00:01:20.640 --> 00:01:26.480
+Pre-deployment checks and automated policy checks in CI/CD can catch problems before they reach production.
+
+14
+00:01:26.580 --> 00:01:37.540
+These checks might validate infrastructure-as-code, container settings, Kubernetes manifests, cloud resources, application configuration, or environment variables.
+
+15
+00:01:37.640 --> 00:01:45.000
+Automation does not replace human review, but it makes common risky patterns harder to miss and easier to correct early.

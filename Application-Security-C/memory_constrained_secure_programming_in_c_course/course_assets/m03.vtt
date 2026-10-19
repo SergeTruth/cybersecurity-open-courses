@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+Static allocation and fixed buffers are common in constrained C programs because they make memory use predictable.
+
+2
+00:00:06.840 --> 00:00:13.480
+They can reduce allocation failure during runtime, simplify ownership, and make capacity visible during review.
+
+3
+00:00:13.580 --> 00:00:16.540
+But fixed buffers are not automatically safe.
+
+4
+00:00:16.640 --> 00:00:20.720
+They still need accurate sizing, validation, and failure behavior.
+
+5
+00:00:21.000 --> 00:00:24.760
+Capacity planning should be based on real workload requirements.
+
+6
+00:00:24.860 --> 00:00:33.500
+A buffer for a configuration record, command, sensor frame, formatted message, or output line should have a clear maximum and a reason for that maximum.
+
+7
+00:00:33.600 --> 00:00:41.760
+If the system accepts multiple formats or versions, the buffer should match the largest supported case or reject unsupported input cleanly.
+
+8
+00:00:42.040 --> 00:00:44.840
+Bounds checks remain mandatory.
+
+9
+00:00:44.940 --> 00:00:53.180
+Every copy, append, parse, conversion, format, and index calculation should be checked against the destination capacity.
+
+10
+00:00:53.280 --> 00:01:02.400
+Reviewers should look for operations that assume a previous check still applies after a length changes, a delimiter is missing, or a string is transformed.
+
+11
+00:01:02.680 --> 00:01:06.520
+String termination deserves explicit attention.
+
+12
+00:01:06.620 --> 00:01:12.140
+A truncated string may still need a terminator, and the program should know whether truncation is acceptable.
+
+13
+00:01:12.240 --> 00:01:21.120
+Safe behavior may be to reject the input, report that output was shortened, or use a separate length field instead of relying on a terminator alone.
+
+14
+00:01:21.400 --> 00:01:23.960
+Truncation policy should not be accidental.
+
+15
+00:01:24.060 --> 00:01:27.820
+Shortening a log line may be acceptable if the record remains clear.
+
+16
+00:01:27.920 --> 00:01:35.600
+Shortening a filename, identifier, policy value, certificate field, or command parameter may change meaning.
+
+17
+00:01:35.700 --> 00:01:40.740
+The code should distinguish harmless display truncation from data loss that affects decisions.
+
+18
+00:01:41.020 --> 00:01:43.660
+Ownership matters even for static storage.
+
+19
+00:01:43.760 --> 00:01:50.880
+A global buffer shared across parser, formatter, and diagnostic code can create hidden coupling.
+
+20
+00:01:50.980 --> 00:01:57.540
+A fixed buffer should have a clear owner, a documented lifetime, and rules for who may read or modify it.
+
+21
+00:01:57.640 --> 00:02:03.240
+Visible limits are only useful when the code also makes responsibility visible.

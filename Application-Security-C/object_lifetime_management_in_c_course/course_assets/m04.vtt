@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.420
+Automatic objects are useful precisely because their lifetime is simple: they exist while execution is within the relevant block or function.
+
+2
+00:00:08.520 --> 00:00:12.680
+The danger appears when a pointer to such an object escapes that scope.
+
+3
+00:00:12.780 --> 00:00:19.260
+Once the scope ends, the object no longer exists, even if a copied pointer value remains somewhere in the program.
+
+4
+00:00:19.540 --> 00:00:27.940
+Returning the address of a local object is a classic lifetime error because the caller receives a pointer to storage that has already ended its lifetime.
+
+5
+00:00:28.040 --> 00:00:39.400
+The same problem can appear less obviously when code stores a local address in a global, a heap object, a callback context, a work queue, or a structure that outlives the function call.
+
+6
+00:00:39.680 --> 00:00:48.400
+Short-lived addresses should not be placed into longer-lived data structures unless the longer-lived structure is only borrowing the pointer during a known valid-use window.
+
+7
+00:00:48.500 --> 00:01:00.820
+If a structure needs the value after the local object is gone, it should copy the data, receive caller-provided storage with a clear lifetime, or take ownership of dynamically allocated storage where appropriate.
+
+8
+00:01:01.100 --> 00:01:05.020
+Callbacks and asynchronous code deserve special attention.
+
+9
+00:01:05.120 --> 00:01:12.480
+A pointer that is safe during a synchronous call may not be safe after the function returns or after another thread continues work.
+
+10
+00:01:12.580 --> 00:01:19.140
+The API should say whether a pointer is consumed immediately, retained, copied, or merely observed.
+
+11
+00:01:19.420 --> 00:01:25.500
+A good review question is whether every retained pointer remains valid for as long as the retaining code can use it.
+
+12
+00:01:25.600 --> 00:01:31.360
+If the answer depends on a local variable that has gone out of scope, the lifetime contract is wrong.
+
+13
+00:01:31.460 --> 00:01:36.740
+Safer code either keeps the lifetime local or makes ownership explicit.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+Testing should cover secret handling behavior, not only successful database connections.
+
+2
+00:00:06.120 --> 00:00:19.880
+Useful tests include missing secrets, invalid secrets, unsafe defaults, environment separation, redaction behavior, failed startup, and rotation-like refresh behavior where applicable.
+
+3
+00:00:19.980 --> 00:00:31.340
+Secrets scanning can help detect credentials in code, configuration, notebooks, artifacts, and pipeline definitions, but findings still need triage and remediation ownership.
+
+4
+00:00:31.620 --> 00:00:33.780
+Safe logging is essential.
+
+5
+00:00:33.880 --> 00:00:49.720
+Database connection failures should provide enough sanitized detail for operators to diagnose environment, service, and timing, but logs should not include passwords, tokens, private keys, full sensitive connection strings, or unnecessary credential material.
+
+6
+00:00:49.820 --> 00:00:58.380
+Redaction should be tested because logging libraries, exception handlers, database drivers, and frameworks can expose values in different formats.
+
+7
+00:00:58.660 --> 00:01:02.020
+Monitoring should watch for unusual credential use.
+
+8
+00:01:02.120 --> 00:01:15.640
+Database audit logs, authentication failures, unexpected source locations, unusual login times, new client identities, failed rotations, and broad query patterns may all matter depending on the system.
+
+9
+00:01:15.740 --> 00:01:22.540
+Alerting on unexpected credential use is easier when credentials are separated by environment and purpose.
+
+10
+00:01:22.640 --> 00:01:28.160
+Shared credentials make monitoring less precise because every system looks like the same caller.
+
+11
+00:01:28.440 --> 00:01:34.120
+When a production database secret is confirmed exposed, treat it as potentially compromised until assessed.
+
+12
+00:01:34.220 --> 00:01:49.820
+Incident response should identify scope, preserve evidence, revoke or rotate affected credentials, verify consumers on the replacement, review logs for unusual use, communicate with the right stakeholders, and fix the exposure path.
+
+13
+00:01:49.920 --> 00:01:52.400
+The response should be calm and procedural.
+
+14
+00:01:52.500 --> 00:01:58.100
+A good secrets program makes emergency rotation possible before the emergency happens.

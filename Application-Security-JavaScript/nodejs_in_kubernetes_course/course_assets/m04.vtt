@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Node.js applications commonly read configuration from environment variables, files, or service discovery.
+
+2
+00:00:08.120 --> 00:00:20.360
+In Kubernetes, ConfigMaps are commonly used for non-secret values such as feature flags, service names, log levels, timeouts, and environment-specific settings.
+
+3
+00:00:20.460 --> 00:00:31.260
+Secrets are intended for sensitive values such as database passwords, API keys, signing keys, OAuth client secrets, webhook secrets, and private credentials.
+
+4
+00:00:31.360 --> 00:00:36.400
+Treating those two categories differently is a basic operating discipline.
+
+5
+00:00:36.680 --> 00:00:43.160
+A ConfigMap can make environment-specific behavior visible in the deployment instead of hiding it inside the image.
+
+6
+00:00:43.260 --> 00:00:49.980
+A Secret can deliver sensitive material to the Pod without baking it into source code or image layers.
+
+7
+00:00:50.080 --> 00:00:54.320
+But neither object is a complete security strategy by itself.
+
+8
+00:00:54.420 --> 00:01:03.940
+Teams still need access control, encryption where appropriate, rotation, redaction, auditability, and careful application behavior.
+
+9
+00:01:04.040 --> 00:01:06.600
+Environment variables are a delivery mechanism.
+
+10
+00:01:06.700 --> 00:01:12.540
+They do not automatically prevent logging, overexposure, stale values, or excessive permissions.
+
+11
+00:01:12.820 --> 00:01:18.260
+For Node.js services, startup validation is one of the simplest reliability improvements.
+
+12
+00:01:18.360 --> 00:01:26.840
+The application should check required configuration at startup, reject unsafe combinations, and fail with a clear message when critical values are missing.
+
+13
+00:01:26.940 --> 00:01:32.540
+That failure should be specific enough for operators to fix the deployment, but not so verbose that it prints secrets.
+
+14
+00:01:32.640 --> 00:01:37.360
+Avoid dumping process.env or full configuration objects into logs.
+
+15
+00:01:37.460 --> 00:01:42.900
+During incidents, full configuration dumps are tempting, but they often create new exposure problems.
+
+16
+00:01:43.180 --> 00:01:49.740
+Separate configuration for development, staging, production, preview environments, and CI/CD.
+
+17
+00:01:49.840 --> 00:01:54.720
+A local default that is harmless on a laptop may be dangerous in a public cluster.
+
+18
+00:01:54.820 --> 00:01:59.700
+A debug log level may be useful during testing and unacceptable in production.
+
+19
+00:01:59.800 --> 00:02:04.760
+A service endpoint may point to a mock in CI and a protected dependency in production.
+
+20
+00:02:04.860 --> 00:02:15.900
+Kubernetes helps express those differences, but the team still owns deciding which values belong in the image, which belong in ConfigMaps, which belong in Secrets, and who is allowed to change them.

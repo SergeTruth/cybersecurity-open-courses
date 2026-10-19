@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.940
+Server-side sessions store authenticated state in backend storage and give the client a session identifier or reference.
+
+2
+00:00:08.040 --> 00:00:18.520
+On each request, the application looks up the session, validates that it is still active, and uses the stored state to identify the subject and related context.
+
+3
+00:00:18.620 --> 00:00:24.300
+This pattern can reduce what the browser carries, but it makes the session store a security-critical system.
+
+4
+00:00:24.580 --> 00:00:32.740
+A session store might be database backed, cache backed, distributed across instances, or provided by framework infrastructure.
+
+5
+00:00:32.840 --> 00:00:43.160
+The store needs access control, encryption or protection appropriate to the environment, monitoring, backup and recovery expectations, and predictable cleanup.
+
+6
+00:00:43.260 --> 00:00:54.620
+If an attacker, misconfigured service, or overly broad support process can read or modify session records, authenticated state can be affected without touching the login flow.
+
+7
+00:00:54.900 --> 00:00:56.980
+Session data should be minimized.
+
+8
+00:00:57.080 --> 00:01:04.120
+Store what is needed to represent identity, session creation, expiration, renewal, and selected context.
+
+9
+00:01:04.220 --> 00:01:13.820
+Avoid storing unnecessary secrets, full user profiles, sensitive business records, or data that can become stale and conflict with current authorization.
+
+10
+00:01:13.920 --> 00:01:25.280
+When roles, permissions, MFA state, or account status changes, the session design should define whether session state is refreshed, invalidated, or rechecked.
+
+11
+00:01:25.560 --> 00:01:29.640
+Lifecycle control is essential for server-side sessions.
+
+12
+00:01:29.740 --> 00:01:36.620
+Session identifiers should be protected and regenerated when authentication state changes in important ways.
+
+13
+00:01:36.720 --> 00:01:43.440
+Sessions should be invalidated on logout, account disablement, high-risk recovery events, or other policy triggers where appropriate.
+
+14
+00:01:43.540 --> 00:01:51.860
+Load balancing and session consistency matter in distributed systems because every backend that handles a request must reach the same conclusion about session validity.

@@ -1,0 +1,153 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.260
+The hardest loop defects are often data-context defects rather than connection defects.
+
+2
+00:00:06.360 --> 00:00:18.440
+A loop can have the correct node, the correct return path, and the correct batch size, yet still update the wrong record because the item no longer carries the identifier that connects the result to the source.
+
+3
+00:00:18.540 --> 00:00:23.500
+Reliable loop design treats data identity as a first-class part of the workflow.
+
+4
+00:00:23.780 --> 00:00:37.380
+In a customer-enrichment loop, preserve fields such as customerId, sourceIndex, requestId, the original input object when needed, the external API result, processing status, and error information.
+
+5
+00:00:37.480 --> 00:00:40.760
+The exact field names can vary, but the principle is stable.
+
+6
+00:00:40.860 --> 00:00:48.220
+Later nodes should not depend on a fragile assumption that the original record will remain at the top level after every transformation.
+
+7
+00:00:48.500 --> 00:00:51.700
+External responses frequently reshape data.
+
+8
+00:00:51.800 --> 00:01:00.040
+An HTTP Request node may return a response body whose top-level fields belong to the external service, not to the original customer item.
+
+9
+00:01:00.140 --> 00:01:05.020
+A normalization step may replace the JSON object with a smaller destination-ready shape.
+
+10
+00:01:05.120 --> 00:01:08.160
+A code step may map values into a new structure.
+
+11
+00:01:08.260 --> 00:01:14.980
+If the original identifier is not carried forward deliberately, the workflow may lose the link between the enriched data and the source record.
+
+12
+00:01:15.260 --> 00:01:24.860
+Item linking exists in n8n to preserve relationships between items as workflows transform data, but an operator should still make important business identifiers explicit.
+
+13
+00:01:24.960 --> 00:01:32.320
+A visible customerId or requestId is easier to inspect, log, compare, and use in a destination upsert.
+
+14
+00:01:32.420 --> 00:01:42.100
+It also makes recovery easier after a partial failure because the workflow can identify which records succeeded, which records failed, and which records can be retried safely.
+
+15
+00:01:42.380 --> 00:01:48.460
+A practical pattern is to build a normalized working object early in the loop body.
+
+16
+00:01:48.560 --> 00:01:56.400
+Put the source identifier, source index, request identifier, original values needed later, and a status field in that object.
+
+17
+00:01:56.500 --> 00:02:00.660
+Then let enrichment and destination fields accumulate beside those values.
+
+18
+00:02:00.760 --> 00:02:06.440
+This avoids a fragile chain of assumptions about which node last owned the top-level JSON shape.
+
+19
+00:02:06.720 --> 00:02:11.600
+The done output marks the distinction between per-iteration data and the complete processed set.
+
+20
+00:02:11.700 --> 00:02:17.140
+Inside the loop body, the workflow works on the item or batch currently released through the loop output.
+
+21
+00:02:17.240 --> 00:02:22.040
+After the loop finishes, a summary on the done path can reason about the finished set.
+
+22
+00:02:22.140 --> 00:02:33.900
+That summary should be based on explicit status fields such as processed, skipped, failed, and retried rather than on the assumption that every released item reached the destination.
+
+23
+00:02:34.180 --> 00:02:38.500
+Loop Over Items also exposes context values that can help diagnostics.
+
+24
+00:02:38.600 --> 00:02:48.200
+The documented expression {{$("Loop Over Items").context["noItemsLeft"]}} returns a boolean that indicates whether the node has no more data to process.
+
+25
+00:02:48.300 --> 00:02:56.380
+The documented expression {{$("Loop Over Items").context["currentRunIndex"];}} returns the current running index of the node.
+
+26
+00:02:56.480 --> 00:03:03.200
+These values can support logging, diagnostics, controlled status messages, or carefully designed conditions.
+
+27
+00:03:03.480 --> 00:03:06.440
+Context expressions do not replace business identity.
+
+28
+00:03:06.540 --> 00:03:15.020
+A run index can tell an operator where the loop was in its sequence, but it does not prove which customer, ticket, invoice, or file was processed.
+
+29
+00:03:15.120 --> 00:03:21.440
+Use loop context to understand execution state, and use stable identifiers to protect the meaning of the data.
+
+30
+00:03:21.540 --> 00:03:25.300
+When both are present, troubleshooting becomes much more concrete.
+
+31
+00:03:25.580 --> 00:03:28.460
+Data integrity also affects the done path.
+
+32
+00:03:28.560 --> 00:03:34.240
+A final summary should not assume that every item reaching the loop output completed successfully.
+
+33
+00:03:34.340 --> 00:03:38.820
+It should aggregate explicit status fields from the processed set.
+
+34
+00:03:38.920 --> 00:03:43.960
+That makes the summary resilient to skips, handled errors, and retry outcomes.
+
+35
+00:03:44.060 --> 00:03:53.340
+It also gives downstream monitoring a stable contract: the workflow can report exactly how many records reached each state and which identifiers require follow-up.
+
+36
+00:03:53.620 --> 00:03:55.940
+This approach pays off during recovery.
+
+37
+00:03:56.040 --> 00:04:07.720
+If an execution stops halfway through a large job, the team can inspect the preserved identifiers and statuses, isolate unfinished records, and restart only the work that still needs attention.
+
+38
+00:04:07.820 --> 00:04:15.260
+Without that context, the only choices are manual investigation or risky replay of operations that may already have succeeded.

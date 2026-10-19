@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.060
+Runtime hardening in Kubernetes is layered.
+
+2
+00:00:03.160 --> 00:00:07.800
+The container image determines much of what the Node.js process contains.
+
+3
+00:00:07.900 --> 00:00:12.060
+The Pod security context determines what the process is allowed to do at runtime.
+
+4
+00:00:12.160 --> 00:00:18.000
+The service account and RBAC rules determine whether the workload can call the Kubernetes API.
+
+5
+00:00:18.100 --> 00:00:23.220
+Namespace policy and admission controls can enforce baseline expectations.
+
+6
+00:00:23.320 --> 00:00:29.880
+None of these replaces secure application code, but together they reduce blast radius when something behaves unexpectedly.
+
+7
+00:00:30.160 --> 00:00:37.600
+Most Node.js application Pods should run as non-root where possible and should not require privilege escalation.
+
+8
+00:00:37.700 --> 00:00:49.540
+Security context settings such as runAsNonRoot, allowPrivilegeEscalation, dropped capabilities, seccomp profiles, and read-only root filesystems help make that intent explicit.
+
+9
+00:00:49.640 --> 00:00:51.000
+There are tradeoffs.
+
+10
+00:00:51.100 --> 00:00:56.700
+A read-only root filesystem may require an explicit writable directory for temporary files.
+
+11
+00:00:56.800 --> 00:01:02.000
+A non-root user requires file ownership and permissions to be correct in the image.
+
+12
+00:01:02.100 --> 00:01:07.540
+Those tradeoffs are manageable when they are designed intentionally rather than discovered during an outage.
+
+13
+00:01:07.820 --> 00:01:12.940
+Avoid high-risk runtime patterns unless there is a documented and exceptional need.
+
+14
+00:01:13.040 --> 00:01:24.880
+Privileged containers, broad hostPath mounts, Docker socket mounts, host networking, and unnecessary host access can dramatically expand the consequences of a compromised application.
+
+15
+00:01:24.980 --> 00:01:28.420
+A typical Express-style API should not need those permissions.
+
+16
+00:01:28.520 --> 00:01:36.440
+If a workload asks for them, reviewers should understand exactly why, what safer alternatives were considered, and how the risk is monitored and limited.
+
+17
+00:01:36.720 --> 00:01:39.760
+Service accounts deserve the same least-privilege thinking.
+
+18
+00:01:39.860 --> 00:01:44.340
+Many Node.js services do not need to call the Kubernetes API at all.
+
+19
+00:01:44.440 --> 00:01:50.520
+If they do, RBAC should grant only the verbs and resources required for the specific function.
+
+20
+00:01:50.620 --> 00:01:54.860
+Broad permissions make incident response harder and increase blast radius.
+
+21
+00:01:54.960 --> 00:02:04.160
+Pod Security Standards and admission policies can help enforce safer defaults, but the application team still needs to understand what permissions their workload actually needs to run.

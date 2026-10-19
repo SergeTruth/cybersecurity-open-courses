@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Automatic Objects and Escaping Pointers",
+  "graphicAlt": "Local references stay within scope; later work uses copied data or storage with explicit ownership and sufficient lifetime.",
+  "narration": "Automatic objects are useful precisely because their lifetime is simple: they exist while execution is within the relevant block or function. The danger appears when a pointer to such an object escapes that scope. Once the scope ends, the object no longer exists, even if a copied pointer value remains somewhere in the program.\n\nReturning the address of a local object is a classic lifetime error because the caller receives a pointer to storage that has already ended its lifetime. The same problem can appear less obviously when code stores a local address in a global, a heap object, a callback context, a work queue, or a structure that outlives the function call.\n\nShort-lived addresses should not be placed into longer-lived data structures unless the longer-lived structure is only borrowing the pointer during a known valid-use window. If a structure needs the value after the local object is gone, it should copy the data, receive caller-provided storage with a clear lifetime, or take ownership of dynamically allocated storage where appropriate.\n\nCallbacks and asynchronous code deserve special attention. A pointer that is safe during a synchronous call may not be safe after the function returns or after another thread continues work. The API should say whether a pointer is consumed immediately, retained, copied, or merely observed.\n\nA good review question is whether every retained pointer remains valid for as long as the retaining code can use it. If the answer depends on a local variable that has gone out of scope, the lifetime contract is wrong. Safer code either keeps the lifetime local or makes ownership explicit.",
+  "narrationPoints": [
+    "Automatic objects are useful precisely because their lifetime is simple: they exist.",
+    "The same problem can appear less obviously when code stores a local address in a global, a heap object, a callback context, a work queue.",
+    "If a structure needs the value after the local object is gone, it should copy the data.",
+    "A pointer that is safe during a synchronous call may not be safe after the function returns or after another thread continues work.",
+    "Safer code either keeps the lifetime local or makes ownership explicit."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Privilege Separation Roadmap",
+  "graphicAlt": "A maintained roadmap keeps sensitive operations explicit, the core low privilege, the broker narrow and resource boundaries tested.",
+  "narration": "A privilege separation roadmap begins by identifying privileged operations early. Name the workflows that touch protected files, services, devices, platform credentials, administrative APIs, sensitive handles, or deployment configuration. Keep ordinary code low privilege, and make the narrow operation that truly requires authority explicit and reviewable.\n\nNext, isolate sensitive operations. Use helper processes, brokered services, dedicated workers, or platform controls where they fit the product. Keep privileged code small, simple, and owned. The low-privilege application core should prepare requests and validate user intent, while the privileged boundary validates messages, authorizes callers, performs the narrow operation, and logs safe outcomes.\n\nThen handle resources defensively. IPC messages need schemas, versions, limits, type checks, and boundary-side validation. Files, paths, devices, temporary resources, secrets, handles, and credentials require careful scoping. Use platform controls such as service accounts, capabilities, sandboxing, entitlements, process isolation, filesystem permissions, or containers when they match the operation being protected.\n\nFinally, maintain the boundary over time. Test denied operations, malformed requests, path limits, helper lifecycle, recovery, and failure paths. Monitor privileged behavior without exposing sensitive data. Review changes to helper interfaces, deployment settings, permissions, and platform controls as security-relevant engineering. Privilege separation reduces impact when defects occur, but only when the boundary remains clear and governed.",
+  "narrationPoints": [
+    "Keep ordinary code low privilege, and make the narrow operation that truly requires authority explicit and reviewable.",
+    "Use helper processes, brokered services, dedicated workers, or platform controls where they fit the product.",
+    "Files, paths, devices, temporary resources, secrets, handles, and credentials require careful scoping.",
+    "Test denied operations, malformed requests, path limits, helper lifecycle, recovery, and failure paths.",
+    "Privilege separation reduces impact when defects occur, but only when the boundary remains clear and governed.",
+    "Review changes to helper interfaces, deployment settings, permissions, and platform controls as security-relevant engineering."
+  ]
+};

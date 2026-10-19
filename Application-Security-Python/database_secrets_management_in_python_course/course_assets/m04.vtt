@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Least privilege means each database credential has only the access needed for its approved purpose.
+
+2
+00:00:05.640 --> 00:00:16.440
+A runtime application account, read-only reporting account, migration account, administrative account, background worker account, and data pipeline account may need different privileges.
+
+3
+00:00:16.540 --> 00:00:24.780
+Combining all of those functions into one broad administrator credential may be convenient, but it makes every exposure more damaging and every audit trail less useful.
+
+4
+00:00:25.060 --> 00:00:28.340
+Runtime access should be separated from maintenance access.
+
+5
+00:00:28.440 --> 00:00:39.400
+A web service that reads and writes application records usually should not have schema ownership, broad administrative capabilities, or unrestricted access to unrelated databases.
+
+6
+00:00:39.500 --> 00:00:48.140
+Migration credentials may need schema-change privileges, but they should be limited to migration workflows and protected with strong operational controls.
+
+7
+00:00:48.240 --> 00:00:53.200
+Reporting credentials may be read-only and restricted to approved views or datasets.
+
+8
+00:00:53.480 --> 00:00:58.200
+Tenant, customer, and data-domain boundaries should influence credential design.
+
+9
+00:00:58.300 --> 00:01:05.100
+In some systems, application logic enforces tenant isolation while the database account has broad table access.
+
+10
+00:01:05.200 --> 00:01:11.520
+In other systems, separate schemas, databases, views, or accounts can reduce blast radius.
+
+11
+00:01:11.620 --> 00:01:18.980
+The right model depends on architecture, but the principle is consistent: credentials should not grant access that the workload has no business using.
+
+12
+00:01:19.260 --> 00:01:24.940
+Each credential should have an owner, a consumer, a purpose, and a review cadence.
+
+13
+00:01:25.040 --> 00:01:33.840
+Service accounts and workload identity concepts can help tie database access to a specific application or job rather than a person or shared password.
+
+14
+00:01:33.940 --> 00:01:41.220
+Avoiding broad administrator credentials in application runtimes makes rotation, incident response, and monitoring easier.
+
+15
+00:01:41.320 --> 00:01:46.600
+When privilege is narrow, a mistake is less likely to become a system-wide data event.

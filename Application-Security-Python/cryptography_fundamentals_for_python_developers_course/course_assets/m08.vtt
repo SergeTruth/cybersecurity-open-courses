@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Common Python cryptography mistakes usually come from misplaced confidence.
+
+2
+00:00:04.600 --> 00:00:25.480
+A developer writes custom cryptography, copies obsolete examples, hardcodes keys, reuses nonces, encrypts without integrity protection, uses fast hashes for passwords, disables TLS certificate verification, logs secrets or private keys, confuses encoding with encryption, accepts unsigned tokens, or forgets rotation.
+
+3
+00:00:25.580 --> 00:00:28.380
+None of these mistakes requires a weak algorithm.
+
+4
+00:00:28.480 --> 00:00:31.600
+They are usually integration and ownership failures.
+
+5
+00:00:31.880 --> 00:00:34.280
+Encoding is a frequent source of confusion.
+
+6
+00:00:34.380 --> 00:00:41.260
+Encoding changes representation so data can be transported or displayed; it does not provide confidentiality.
+
+7
+00:00:41.360 --> 00:00:43.760
+Compression is not encryption.
+
+8
+00:00:43.860 --> 00:00:45.460
+Hashing is not encryption.
+
+9
+00:00:45.560 --> 00:00:47.080
+Signing is not encryption.
+
+10
+00:00:47.180 --> 00:00:52.380
+Obscuring a value in a configuration file is not the same as protecting it with managed key access.
+
+11
+00:00:52.480 --> 00:00:58.880
+Reviewers should ask which security property the code actually provides and whether that property matches the requirement.
+
+12
+00:00:59.160 --> 00:01:00.920
+Safe review questions are direct.
+
+13
+00:01:01.020 --> 00:01:02.540
+What is the security goal?
+
+14
+00:01:02.640 --> 00:01:05.680
+Which library or protocol is used?
+
+15
+00:01:05.780 --> 00:01:07.380
+Where do keys come from?
+
+16
+00:01:07.480 --> 00:01:09.400
+Where are keys stored?
+
+17
+00:01:09.500 --> 00:01:11.980
+Is randomness security-grade?
+
+18
+00:01:12.080 --> 00:01:16.720
+Is authenticated encryption used where confidentiality and tamper detection are needed?
+
+19
+00:01:16.820 --> 00:01:20.020
+Are passwords handled with dedicated password hashing?
+
+20
+00:01:20.120 --> 00:01:22.120
+Is TLS verification enabled?
+
+21
+00:01:22.220 --> 00:01:25.100
+Are tokens validated before claims are trusted?
+
+22
+00:01:25.200 --> 00:01:28.160
+How are errors, logs, and rotation handled?
+
+23
+00:01:28.440 --> 00:01:37.880
+Security tools can help find weak patterns, leaked secrets, outdated libraries, and dangerous configuration, but they do not replace design review and ownership.
+
+24
+00:01:37.980 --> 00:01:44.140
+A tool may flag a call but not understand the business context, or miss a misuse hidden in architecture.
+
+25
+00:01:44.240 --> 00:01:56.560
+Strong teams document crypto decisions, prefer high-level APIs, avoid custom primitives, test failure paths, monitor key and certificate lifecycle, and assign ownership for review and remediation.

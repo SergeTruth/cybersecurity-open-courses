@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "OpenAI-Compatible Requests and Model Selection",
+  "narration": "OpenRouter is designed to work with familiar OpenAI-compatible request patterns. In practice, that means many client libraries can point at the OpenRouter base URL, supply an OpenRouter API key, and send chat completion style requests with a chosen model identifier. This compatibility is valuable because it lets teams preserve a common application shape while evaluating different models behind that shape.\n\nModel selection should be treated as an engineering decision, not a menu click. A model that is excellent for long-form reasoning may be slower or more expensive than a model that is good enough for classification. A model that writes concise code comments may not be the best model for legal review, summarization, or tool calling. The right question is not which model is generally best. The right question is which model satisfies the task's quality, latency, context, privacy, and cost requirements under realistic inputs.\n\nThe model catalog is useful for discovery, but production systems need their own allow list. Record the model identifiers your application may use, the purpose of each one, and the fallback sequence if the first choice is unavailable. Avoid wiring business logic to a vague idea of the newest model. Model names, versions, providers, and capabilities can change over time, so the application should make those dependencies visible.\n\nGood integrations also normalize request construction. Keep system instructions, user content, temperature choices, token limits, and response expectations in code paths that can be reviewed and tested. OpenRouter makes access flexible, but the application still owns prompt discipline and output validation. For long-lived products, record why each model was selected so future maintainers can evaluate changes against the original requirement. That note prevents emergency upgrades from becoming guesswork.",
+  "narrationPoints": [
+    "OpenRouter supports OpenAI-compatible chat request patterns.",
+    "Model choice should match task requirements.",
+    "Production systems need explicit model allow lists.",
+    "Do not bind critical behavior to vague model freshness.",
+    "Prompt construction and output validation remain application responsibilities."
+  ],
+  "graphicAlt": "Normalized requests and task requirements guide evaluated model allow lists, documented fallbacks and validated responses."
+};

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+Lifetime safety becomes much easier when API contracts say what the caller and callee may assume.
+
+2
+00:00:06.120 --> 00:00:09.000
+A pointer parameter should not be a mystery.
+
+3
+00:00:09.100 --> 00:00:18.380
+The contract should describe whether the pointer is required or optional, whether null is accepted, whether the callee may modify the object, and whether the pointer may be retained.
+
+4
+00:00:18.660 --> 00:00:22.660
+Returned pointers need ownership and validity rules.
+
+5
+00:00:22.760 --> 00:00:33.560
+A function may return a newly allocated object that the caller must destroy, a borrowed reference to internal state, a pointer to static storage, or a view into caller-owned data.
+
+6
+00:00:33.660 --> 00:00:38.940
+Those cases need different cleanup behavior, so the API should not leave them ambiguous.
+
+7
+00:00:39.220 --> 00:00:42.180
+Output parameters need clear lifetime rules.
+
+8
+00:00:42.280 --> 00:00:49.240
+The function may allocate and return ownership through the parameter, write into caller-provided storage, or set a borrowed reference.
+
+9
+00:00:49.340 --> 00:00:56.140
+The contract should define the output state after success and failure so the caller knows whether cleanup is required.
+
+10
+00:00:56.420 --> 00:01:02.260
+Callbacks complicate lifetimes because they often cross time and control-flow boundaries.
+
+11
+00:01:02.360 --> 00:01:10.360
+An API should state whether callback context pointers are copied, borrowed, retained, or released by the registration system.
+
+12
+00:01:10.460 --> 00:01:15.420
+It should also describe when unregistering or shutdown makes those pointers invalid.
+
+13
+00:01:15.700 --> 00:01:23.140
+Containers should state whether insertion copies, borrows, or takes ownership of inserted data.
+
+14
+00:01:23.240 --> 00:01:26.120
+The caller's responsibility changes depending on that rule.
+
+15
+00:01:26.220 --> 00:01:33.020
+Removal should also define whether it returns ownership, destroys the object, or simply detaches a borrowed reference.
+
+16
+00:01:33.300 --> 00:01:36.580
+Good APIs make misuse harder to express.
+
+17
+00:01:36.680 --> 00:01:49.400
+Separate functions for borrow versus take-ownership behavior, clear destroy routines, const-correct parameters, and documented failure state all reduce the amount of lifetime reasoning the caller has to invent.

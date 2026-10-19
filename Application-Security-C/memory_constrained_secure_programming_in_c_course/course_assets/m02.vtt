@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.900
+A memory budget is an engineering contract.
+
+2
+00:00:03.000 --> 00:00:12.040
+It describes how much memory the program expects to use, which parts of the program own that memory, and which conditions were considered when the limit was chosen.
+
+3
+00:00:12.140 --> 00:00:18.220
+Without that contract, developers may make local decisions that work individually but fail when combined.
+
+4
+00:00:18.500 --> 00:00:28.820
+Start with the major categories: RAM, stack, heap, static storage, fixed buffers, memory pools, persistent storage, and scratch space.
+
+5
+00:00:28.920 --> 00:00:40.600
+In embedded or device-facing C, some memory may have special properties such as DMA capability, alignment requirements, retention behavior, or limited write endurance.
+
+6
+00:00:40.700 --> 00:00:43.500
+Those regions should be named in the design.
+
+7
+00:00:43.780 --> 00:00:48.820
+The budget should define maximum input sizes and message sizes before implementation.
+
+8
+00:00:48.920 --> 00:00:55.720
+If a protocol field says a message can be large, the program still needs a product-level decision about what it will accept.
+
+9
+00:00:55.820 --> 00:01:03.580
+Maximums should be tied to memory, timing, and operational requirements, not only to what the format can theoretically express.
+
+10
+00:01:03.860 --> 00:01:06.100
+Concurrency assumptions matter.
+
+11
+00:01:06.200 --> 00:01:18.280
+A system that handles one request at a time has a different memory profile from one that handles several connections, queued messages, worker tasks, or overlapping device operations.
+
+12
+00:01:18.380 --> 00:01:24.300
+Per-client buffers, per-task stacks, parser state, and retry queues can add up quickly.
+
+13
+00:01:24.580 --> 00:01:27.460
+A good budget leaves room for error and recovery paths.
+
+14
+00:01:27.560 --> 00:01:35.480
+Low-memory behavior still needs control structures, cleanup state, diagnostic records, and sometimes enough scratch space to return a clear error.
+
+15
+00:01:35.580 --> 00:01:42.220
+If the normal path uses every available byte, the failure path may be forced into unsafe shortcuts.
+
+16
+00:01:42.500 --> 00:01:45.220
+Document worst-case assumptions in plain language.
+
+17
+00:01:45.320 --> 00:01:47.880
+What is the largest accepted input?
+
+18
+00:01:47.980 --> 00:01:49.820
+How many operations can be active?
+
+19
+00:01:49.920 --> 00:01:51.920
+What stack depth is possible?
+
+20
+00:01:52.020 --> 00:01:53.700
+Which buffers are shared?
+
+21
+00:01:53.800 --> 00:01:56.760
+Which allocations are allowed after startup?
+
+22
+00:01:56.860 --> 00:01:59.340
+What happens if persistent storage is full?
+
+23
+00:01:59.620 --> 00:02:03.060
+Finally, validate the budget on realistic targets.
+
+24
+00:02:03.160 --> 00:02:12.840
+Compiler options, library choices, build profiles, logging settings, interrupt behavior, and test configuration can all change actual memory use.
+
+25
+00:02:12.940 --> 00:02:20.060
+Measurement does not replace design, but it catches the gap between the design and the binary that actually runs.

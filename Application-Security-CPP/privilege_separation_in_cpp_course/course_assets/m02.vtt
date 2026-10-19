@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Privilege separation starts by identifying what actually requires elevated authority.
+
+2
+00:00:04.760 --> 00:00:22.360
+Common examples include installing software, updating protected files, changing system settings, opening restricted devices, binding protected resources, managing services, accessing private keys, writing to privileged directories, or communicating with sensitive system components.
+
+3
+00:00:22.640 --> 00:00:26.080
+Not every operation around those workflows needs the same authority.
+
+4
+00:00:26.180 --> 00:00:34.100
+A user interface can gather intent, a low-privilege component can validate basic input, and ordinary business logic can prepare a request.
+
+5
+00:00:34.200 --> 00:00:39.720
+The privileged portion should be the smallest operation that truly needs special permission.
+
+6
+00:00:39.820 --> 00:00:45.900
+That may be a single file replacement, service action, device command, or protected configuration update.
+
+7
+00:00:46.180 --> 00:00:48.820
+Engineers should map privileged workflows early.
+
+8
+00:00:48.920 --> 00:01:00.280
+The map should identify the request source, required authority, data inputs, expected resource targets, authorization decision, logging expectations, and failure behavior.
+
+9
+00:01:00.380 --> 00:01:06.700
+Doing this before implementation helps avoid designs where broad authority is added late because the boundary was not planned.
+
+10
+00:01:06.980 --> 00:01:11.300
+Privileged operations should be rare, explicit, and reviewable.
+
+11
+00:01:11.400 --> 00:01:17.400
+If every feature appears to need special authority, the application probably needs a sharper architecture.
+
+12
+00:01:17.500 --> 00:01:28.300
+Reviewers should ask whether the operation truly needs that authority, whether the authority can be narrowed, and whether a safer low-privilege path exists for routine work.
+
+13
+00:01:28.580 --> 00:01:33.860
+Documentation matters because privilege decisions often outlive the original feature team.
+
+14
+00:01:33.960 --> 00:01:44.280
+A clear inventory of sensitive operations helps future maintainers avoid accidental expansion of the privileged surface when adding logging, import, update, or automation features.

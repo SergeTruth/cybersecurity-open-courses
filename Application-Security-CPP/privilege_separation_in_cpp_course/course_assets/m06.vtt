@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+File and resource operations are common reasons for privilege separation, and they require careful handling.
+
+2
+00:00:06.280 --> 00:00:11.640
+A privileged helper should not blindly act on a path supplied by a low-privilege caller.
+
+3
+00:00:11.740 --> 00:00:19.900
+The helper must verify what it is operating on at the point of use, because files and paths can change between request preparation and execution.
+
+4
+00:00:20.180 --> 00:00:35.620
+Path handling should account for allowed locations, canonicalization, symlinks, shortcuts, relative paths, temporary files, network locations, ownership, permissions, and platform behavior.
+
+5
+00:00:35.720 --> 00:00:39.720
+The safest designs avoid open-ended path authority.
+
+6
+00:00:39.820 --> 00:00:47.100
+Where practical, privileged code should use allowlisted resource locations, known identifiers, brokered handles, or tightly scoped commands.
+
+7
+00:00:47.380 --> 00:00:57.220
+Resource access boundaries also apply to devices, services, registry-like settings, protected directories, sockets, and named system objects.
+
+8
+00:00:57.320 --> 00:01:03.480
+The helper should validate the resource category, the requested operation, and the caller's permission for that operation.
+
+9
+00:01:03.580 --> 00:01:09.180
+It should not treat a string path or resource name as sufficient proof of intent.
+
+10
+00:01:09.460 --> 00:01:13.060
+Temporary resources deserve explicit lifecycle rules.
+
+11
+00:01:13.160 --> 00:01:20.040
+They should be created in safe locations, with safe permissions, predictable ownership, and reliable cleanup.
+
+12
+00:01:20.140 --> 00:01:26.460
+Partial failures should not leave protected files, locks, handles, or service state in a confusing condition.
+
+13
+00:01:26.560 --> 00:01:31.760
+The privileged component should be able to explain what it changed and how it recovered.
+
+14
+00:01:32.040 --> 00:01:34.920
+Good file-boundary design is boring in the best way.
+
+15
+00:01:35.020 --> 00:01:44.140
+It favors known locations, narrow operations, careful checks, and consistent errors over flexible but difficult-to-review behavior.
+
+16
+00:01:44.240 --> 00:01:48.640
+That makes maintenance safer when platforms or deployment layouts change.

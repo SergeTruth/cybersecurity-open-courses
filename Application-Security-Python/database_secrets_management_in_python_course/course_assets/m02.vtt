@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Connection strings and DSNs are common places where secrets gather.
+
+2
+00:00:05.240 --> 00:00:15.480
+They may include usernames, passwords, hostnames, ports, database names, connection options, certificate paths, token references, or driver-specific settings.
+
+3
+00:00:15.580 --> 00:00:23.740
+Not every part is secret, but the complete string can be highly sensitive because it often combines routing information with authentication material.
+
+4
+00:00:23.840 --> 00:00:28.960
+Treat connection strings as sensitive unless they are deliberately proven otherwise.
+
+5
+00:00:29.240 --> 00:00:32.760
+Database secrets spread through normal engineering habits.
+
+6
+00:00:32.860 --> 00:00:49.580
+A developer may paste credentials into source code for a quick test, add them to an environment file, print a connection error, save a notebook, bake a value into a container image, copy it into a CI/CD variable, or configure migration tooling separately from the runtime application.
+
+7
+00:00:49.680 --> 00:00:55.360
+Each copy becomes another place where the credential must be protected, rotated, and eventually removed.
+
+8
+00:00:55.640 --> 00:00:59.880
+Logs and diagnostics are especially common exposure paths.
+
+9
+00:00:59.980 --> 00:01:15.740
+Stack traces, debug pages, failed connection messages, ORM configuration dumps, health checks, metrics, and local scripts can reveal passwords, tokens, certificate paths, or full connection strings if they are not redacted.
+
+10
+00:01:15.840 --> 00:01:25.840
+Notebooks and one-off scripts deserve attention too because they often live outside normal application review while still touching production-like data or credentials.
+
+11
+00:01:26.120 --> 00:01:32.360
+Developers should identify every place a database credential is stored, transmitted, logged, or loaded.
+
+12
+00:01:32.460 --> 00:01:49.500
+That inventory should include source repositories, local files, environment variables, secret stores, CI/CD systems, deployment manifests, container images, runtime configuration, migration jobs, backups, artifacts, and monitoring tools.
+
+13
+00:01:49.600 --> 00:01:57.920
+Once the paths are visible, teams can reduce copies, centralize access, and design rotation without guessing where a secret might still exist.

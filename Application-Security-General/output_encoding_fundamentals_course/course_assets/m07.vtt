@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.300
+Modern frameworks and template engines often provide auto-escaping, context-aware rendering, and safe binding APIs.
+
+2
+00:00:07.400 --> 00:00:12.280
+These protections are valuable because they make the safe path easy for common use cases.
+
+3
+00:00:12.380 --> 00:00:15.020
+But every framework has boundaries.
+
+4
+00:00:15.120 --> 00:00:21.200
+A template may escape text nodes but handle URLs, styles, scripts, and raw HTML differently.
+
+5
+00:00:21.300 --> 00:00:26.660
+Server-side rendering and client-side rendering may also use different mechanisms.
+
+6
+00:00:26.760 --> 00:00:32.120
+Developers need to know what the framework protects by default and where it expects explicit care.
+
+7
+00:00:32.400 --> 00:00:34.400
+Unsafe helpers deserve review.
+
+8
+00:00:34.500 --> 00:00:46.100
+Features with names such as raw HTML, dangerously set inner HTML, safe string, no escape, unescaped output, or trusted markup are powerful and risky.
+
+9
+00:00:46.200 --> 00:00:53.000
+Sometimes they are necessary, especially for sanitized rich text or controlled internal content.
+
+10
+00:00:53.100 --> 00:00:57.660
+But they should be rare, justified, and surrounded by strong controls.
+
+11
+00:00:57.760 --> 00:01:05.520
+Markdown rendering and rich text editors are common places where teams accidentally assume content is safe because it looks user friendly.
+
+12
+00:01:05.800 --> 00:01:07.320
+Template context matters.
+
+13
+00:01:07.420 --> 00:01:20.220
+A value inserted into normal text may be auto-escaped correctly, while the same value inserted into a script, style, URL, or event handler context may require a different approach or should be avoided entirely.
+
+14
+00:01:20.320 --> 00:01:32.080
+Review places where escaping is disabled, where helper functions return pre-marked safe content, where server data becomes client state, and where generated HTML is stored for later rendering.
+
+15
+00:01:32.180 --> 00:01:39.220
+Safe framework use is not only about choosing a framework; it is about staying inside the framework?s safe patterns.

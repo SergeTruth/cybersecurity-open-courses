@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "What Is Output Encoding?",
+  "narration": "Output encoding is the practice of preparing data safely for the specific context where it will be rendered, transmitted, or consumed. The key phrase is specific context. A value that is safe as plain text may not be safe inside an HTML attribute, a JavaScript string, a URL, a CSS value, a CSV cell, or a log viewer. Encoding preserves the meaning of the value as data so it is not accidentally interpreted as markup, script, syntax, or active content.\n\nEncoding is related to validation, sanitization, and escaping, but those terms are not interchangeable. Validation decides whether input is acceptable for the application. Sanitization attempts to remove or transform unsafe parts of content, usually when some rich content must be allowed. Escaping is often the mechanical act of replacing special characters with safe representations. Output encoding is broader: it means choosing the correct transformation for the destination context, at the moment data leaves the application boundary.\n\nTrusted and untrusted data can both become dangerous in the wrong context. A display name, product title, support note, CSV export field, markdown comment, or error message may start as ordinary data, then become unsafe when inserted into a browser page, script block, spreadsheet, report, or log console. Output encoding is a core defense against injection into rendered output because it keeps data from becoming executable code or markup. The goal is not to make all text look strange. The goal is to preserve data meaning exactly where the data is used.",
+  "graphicAlt": "Output handling identifies the destination, applies its safe API and preserves data meaning; validation and sanitization solve separate problems.",
+  "narrationPoints": [
+    "Output encoding is the practice of preparing data safely for the specific context where it will be rendered, transmitted, or consumed.",
+    "Encoding is related to validation, sanitization, and escaping, but those terms are not interchangeable.",
+    "Trusted and untrusted data can both become dangerous in the wrong context."
+  ]
+};

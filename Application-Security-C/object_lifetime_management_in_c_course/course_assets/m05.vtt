@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Dynamically allocated objects let a program create storage whose lifetime is controlled by program logic.
+
+2
+00:00:06.520 --> 00:00:15.080
+That is useful for objects returned from factory functions, buffers sized at runtime, data structures that survive a call, and values shared across components.
+
+3
+00:00:15.180 --> 00:00:18.620
+The lifetime begins only after allocation succeeds.
+
+4
+00:00:18.900 --> 00:00:20.980
+Allocation is not initialization.
+
+5
+00:00:21.080 --> 00:00:27.400
+A successful allocation gives storage; initialization gives that storage a known valid state.
+
+6
+00:00:27.500 --> 00:00:34.060
+The code should not pass a partially initialized object to consumers that expect a complete object.
+
+7
+00:00:34.160 --> 00:00:40.080
+If initialization fails, cleanup should release only the resources already acquired by the constructing code.
+
+8
+00:00:40.360 --> 00:00:43.560
+Ownership defines who must release the object.
+
+9
+00:00:43.660 --> 00:00:47.500
+Caller-owned memory remains the caller's cleanup responsibility.
+
+10
+00:00:47.600 --> 00:00:50.000
+Callee-owned memory belongs to the callee.
+
+11
+00:00:50.100 --> 00:00:55.060
+Borrowed pointers allow access but do not transfer cleanup authority.
+
+12
+00:00:55.160 --> 00:00:59.880
+Returned objects and output parameters should document which side owns the result.
+
+13
+00:01:00.160 --> 00:01:02.880
+Transfer changes who controls the lifetime.
+
+14
+00:01:02.980 --> 00:01:09.620
+When a caller passes an object to a container that takes ownership, the caller should stop freeing it after successful insertion.
+
+15
+00:01:09.720 --> 00:01:16.920
+If a function consumes a pointer, the caller should know whether use of that pointer is allowed after the call and what happens if the function fails.
+
+16
+00:01:17.200 --> 00:01:21.120
+Freeing an owned dynamic object ends its lifetime for all aliases.
+
+17
+00:01:21.220 --> 00:01:26.740
+Setting one pointer to NULL may help local cleanup, but it does not update other copies of the pointer.
+
+18
+00:01:26.840 --> 00:01:35.000
+Structures, caches, callbacks, or borrowed references that still point at the old object must be governed by the same lifetime end.
+
+19
+00:01:35.280 --> 00:01:44.960
+Defensive dynamic lifetime management keeps allocation, initialization, ownership, transfer, cleanup, and invalidation in one reviewable story.
+
+20
+00:01:45.060 --> 00:01:51.540
+A pointer is safe only while that story says the object is alive, valid, and usable for the intended operation.

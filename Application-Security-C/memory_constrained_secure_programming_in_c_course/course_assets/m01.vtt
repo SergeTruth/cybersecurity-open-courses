@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Memory constraints change secure C design because they make every implicit assumption more expensive.
+
+2
+00:00:06.200 --> 00:00:13.000
+A desktop service might tolerate extra buffering, temporary copies, or generous log records.
+
+3
+00:00:13.100 --> 00:00:15.740
+A constrained C program often cannot.
+
+4
+00:00:15.840 --> 00:00:23.360
+It may have a small stack, a fixed heap, limited static storage, narrow scratch buffers, and strict timing expectations.
+
+5
+00:00:23.640 --> 00:00:26.600
+Those limits affect common security decisions.
+
+6
+00:00:26.700 --> 00:00:29.340
+Parsers need maximum input sizes.
+
+7
+00:00:29.440 --> 00:00:33.040
+Network and file handling need bounded buffering.
+
+8
+00:00:33.140 --> 00:00:36.340
+Cryptographic operations may require temporary workspace.
+
+9
+00:00:36.440 --> 00:00:40.840
+Logging and diagnostics consume memory that may be needed by normal operation.
+
+10
+00:00:40.940 --> 00:00:46.540
+Error paths need enough reserved capacity to report a problem without making the system less stable.
+
+11
+00:00:46.820 --> 00:00:51.860
+Allocation failure must be treated as an expected condition, not as a surprising event.
+
+12
+00:00:51.960 --> 00:01:03.080
+If a design assumes memory is always available, the code may continue with incomplete state, skip cleanup, truncate output silently, or lose the information needed to make a safe decision.
+
+13
+00:01:03.180 --> 00:01:07.420
+A constrained system needs clear behavior when memory runs low.
+
+14
+00:01:07.700 --> 00:01:10.500
+Stack growth is another quiet source of risk.
+
+15
+00:01:10.600 --> 00:01:18.920
+Deep call chains, recursion, large local arrays, formatting functions, and error handling paths can use more stack than the normal path suggests.
+
+16
+00:01:19.020 --> 00:01:24.860
+The most important stack behavior may appear when the system is already handling unusual input or nested operations.
+
+17
+00:01:25.140 --> 00:01:28.340
+Small memory budgets also affect sensitive data.
+
+18
+00:01:28.440 --> 00:01:39.560
+Reused buffers, compact diagnostics, and shared scratch areas can leave keys, tokens, intermediate plaintext, or identifiers in places where later code does not expect them.
+
+19
+00:01:39.660 --> 00:01:45.900
+The safer habit is to minimize copies, shorten lifetimes, and document ownership of sensitive buffers.
+
+20
+00:01:46.180 --> 00:01:49.940
+The goal of this course is practical discipline.
+
+21
+00:01:50.040 --> 00:02:06.040
+Secure memory-constrained C code defines limits early, validates lengths consistently, keeps allocation policy explicit, streams large input where possible, handles failure predictably, and verifies the real behavior on target-like builds instead of trusting estimates.

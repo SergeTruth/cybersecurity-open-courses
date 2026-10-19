@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+A reliable OpenRouter integration starts with account and key hygiene.
+
+2
+00:00:05.080 --> 00:00:11.000
+OpenRouter authenticates API calls with a bearer token, usually supplied in an Authorization header.
+
+3
+00:00:11.100 --> 00:00:30.060
+That token should be handled like any production secret: generated for a specific purpose, stored in a secret manager or deployment environment, never committed to source control, never pasted into support tickets, and never exposed to browser-side code unless the architecture is explicitly designed to protect it.
+
+4
+00:00:30.340 --> 00:00:33.620
+Cost control belongs in the same conversation as authentication.
+
+5
+00:00:33.720 --> 00:00:42.680
+LLM calls can scale quickly because each request may include prompt tokens, output tokens, retries, and fallback attempts.
+
+6
+00:00:42.780 --> 00:00:48.060
+A useful engineering habit is to decide where the spending boundary lives before traffic grows.
+
+7
+00:00:48.160 --> 00:00:55.600
+That may include per-environment keys, service-level budgets, request limits, alerts, and application-side throttling.
+
+8
+00:00:55.700 --> 00:01:01.940
+Even when a platform offers account controls, the application should still make abuse and runaway loops harder.
+
+9
+00:01:02.220 --> 00:01:05.580
+Headers and metadata also deserve care.
+
+10
+00:01:05.680 --> 00:01:12.720
+OpenRouter supports common API conventions and may allow optional identifying headers for application attribution.
+
+11
+00:01:12.820 --> 00:01:14.580
+Use those fields deliberately.
+
+12
+00:01:14.680 --> 00:01:24.520
+They should help with legitimate accounting, monitoring, or product identification, not leak private customer names, internal project secrets, or sensitive prompt content.
+
+13
+00:01:24.800 --> 00:01:28.720
+In development, keep the integration boring on purpose.
+
+14
+00:01:28.820 --> 00:01:38.740
+Load the key from an environment variable, fail closed when it is missing, redact it in logs, and use separate credentials for local testing, staging, and production.
+
+15
+00:01:38.840 --> 00:01:44.040
+These practices are ordinary, but they are what turn a convenient API into an auditable system.
+
+16
+00:01:44.140 --> 00:01:50.140
+Add alerts for unusual request volume so key misuse or looping jobs are discovered quickly.
+
+17
+00:01:50.240 --> 00:01:54.240
+This is especially important for shared services used by many features.

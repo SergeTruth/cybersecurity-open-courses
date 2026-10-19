@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "What Is a Multi-Camera AI Monitoring Architecture?",
+  "narration": "A multi-camera AI monitoring architecture is the complete system that receives several video feeds, analyzes selected frames, stores footage and event metadata, sends alerts, and supports human review. Processing may be local, distributed to edge devices, or split between local and approved cloud services.\n\nThe components include cameras, NVRs, RTSP streams, networks, edge devices, servers, CPUs or accelerators, models, storage, dashboards, logs, and alert channels. Architecture determines how these pieces share identity, time, capacity, policy, and failure handling.\n\nA single-camera experiment can succeed while an operational fleet fails. One demonstration may ignore stream drops, time drift, storage growth, model updates, alert duplication, reviewer workload, and hardware saturation. A production design has to manage all of them continuously.\n\nScaling also changes privacy and security. More cameras create more coverage, credentials, footage, and users. The design should limit collection to legitimate areas, protect every data path, and make access and retention visible to governance.\n\nAI models assist with detection, description, grouping, and prioritization. They do not establish identity, intent, or wrongdoing by themselves. Important alerts need context and accountable human confirmation before action.\n\nMulti-camera monitoring is therefore an architecture and operations problem, not simply a model-selection problem. A strong system balances useful visibility with compute, storage, latency, resilience, alert quality, privacy, security, and responsible use.",
+  "graphicAlt": "Camera feeds, analysis, governed storage and accountable review form one monitored architecture.",
+  "narrationPoints": [
+    "A multi-camera AI monitoring architecture is the complete system that receives several video feeds, analyzes selected frames, stores footage and event metadata, sends alerts, and supports human review.",
+    "The components include cameras, NVRs, RTSP streams, networks, edge devices, servers, CPUs or accelerators, models, storage, dashboards, logs, and alert channels.",
+    "A single-camera experiment can succeed while an operational fleet fails.",
+    "Scaling also changes privacy and security."
+  ]
+};

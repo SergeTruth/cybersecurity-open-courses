@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Application Integration and Session Security",
+  "narration": "SSO integration is an application security project, not only an identity administration task. Web applications, SaaS applications, internal tools, APIs, and legacy systems each have different integration models. Onboarding should identify the owner, the protocol, the assigned users or groups, the required claims, the redirect or callback behavior, the test plan, the rollback plan, and the security review needed before production use.\n\nRedirect URI and callback concepts matter because identity data must return to the intended application location. If redirect handling is too broad or poorly reviewed, an integration may create security risk. Certificate and key rotation also need ownership. A federation configuration that depends on expired or stale signing material can break access, while poorly controlled keys can weaken trust in the integration.\n\nSession security controls what happens after login succeeds. Token lifetime, session lifetime, refresh behavior, logout, and reauthentication requirements determine how long access persists. A long-lived session can be convenient, but it may increase exposure if a device is lost or a session is misused. A very short session can be secure in theory but create support problems if it constantly interrupts normal work.\n\nLogin success should never imply unlimited access. Applications still need authorization checks, least privilege, administrative access controls, and service-to-service identity design. APIs and workloads may need different identity patterns than human users. Good integrations are owned, tested, reviewed, monitored, and maintainable. The best SSO program makes application access simpler without making application security assumptions weaker.",
+  "graphicAlt": "An owned SSO integration validates federation, manages sessions and preserves application authorization.",
+  "narrationPoints": [
+    "SSO integration is an application security project, not only an identity administration task.",
+    "Redirect URI and callback concepts matter because identity data must return to the intended application location.",
+    "Session security controls what happens after login succeeds.",
+    "Login success should never imply unlimited access."
+  ]
+};

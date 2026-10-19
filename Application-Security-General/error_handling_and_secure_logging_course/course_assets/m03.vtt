@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Error responses should be designed for their audience.
+
+2
+00:00:03.960 --> 00:00:10.120
+A user-facing message should be understandable, respectful, and actionable where possible.
+
+3
+00:00:10.220 --> 00:00:16.940
+It might say that a form field needs a different format, that a request could not be completed, or that the user should try again later.
+
+4
+00:00:17.040 --> 00:00:24.720
+It should not expose the database table, stack frame, library version, raw exception, or exact security rule that failed.
+
+5
+00:00:24.820 --> 00:00:29.060
+The message should help the legitimate user without coaching abuse.
+
+6
+00:00:29.340 --> 00:00:31.900
+API errors need consistency.
+
+7
+00:00:32.000 --> 00:00:46.400
+HTTP status codes should match the situation closely enough for clients to handle them correctly: validation failures, authentication failures, authorization failures, missing resources, rate limits, conflicts, and server errors are not the same event.
+
+8
+00:00:46.500 --> 00:00:52.900
+Response bodies should use a predictable shape with an error code, safe message, and correlation ID when appropriate.
+
+9
+00:00:53.000 --> 00:01:03.640
+Avoid returning different details that let an attacker infer whether an account, token, object ID, or tenant exists unless that distinction is intentional and safe.
+
+10
+00:01:03.920 --> 00:01:09.280
+Authentication, authorization, and rate limiting errors require special care.
+
+11
+00:01:09.380 --> 00:01:17.220
+Overly detailed authentication failures can support account enumeration by revealing which usernames exist or which factor failed.
+
+12
+00:01:17.320 --> 00:01:24.200
+Authorization failures should not confirm sensitive resource details to users who are not allowed to know the resource exists.
+
+13
+00:01:24.300 --> 00:01:31.820
+Rate limiting responses should guide legitimate clients without giving unnecessary internals about thresholds or defensive logic.
+
+14
+00:01:31.920 --> 00:01:38.320
+A well-designed error response gives enough information for recovery and support while protecting the system model.

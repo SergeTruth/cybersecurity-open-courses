@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Enrollment, Recovery, and Lifecycle Controls",
+  "narration": "Enrollment is where users bind authenticators to their identities. That makes it a sensitive workflow, not a routine preference screen. Device registration, authenticator replacement, backup-code issuance, and initial MFA setup should require appropriate identity proofing and policy. If enrollment can be performed by the wrong person, strong MFA later in the process will not protect the account.\n\nRecovery paths must be protected as strongly as primary login paths. Password reset, MFA reset, backup-code use, and help desk recovery are common pressure points because legitimate users do lose devices and forget passwords. Attackers also look for weaker recovery channels. A practical program defines who can approve recovery, what evidence is required, how changes are logged, and when additional review is needed.\n\nLifecycle controls keep access aligned with reality. Joiner, mover, and leaver processes should create, modify, and remove access based on role changes. Dormant accounts should be detected and reviewed. Privileged accounts need stronger controls and monitoring. Service accounts and workload identities need ownership, rotation expectations, and limited scope. SSO makes lifecycle quality more important because one identity can unlock many applications.\n\nWeak recovery can undermine strong MFA. If an administrator can reset a factor without verification, or a dormant account can be reactivated without review, the organization may have a hidden path around its best controls. Enrollment, recovery, and lifecycle workflows should be documented, tested, audited, and included in incident response planning because identity security often fails through operational paths, not only through login screens.",
+  "graphicAlt": "Enrollment and recovery require trusted proof while identity lifecycle changes update access.",
+  "narrationPoints": [
+    "Enrollment is where users bind authenticators to their identities.",
+    "Recovery paths must be protected as strongly as primary login paths.",
+    "Lifecycle controls keep access aligned with reality.",
+    "Weak recovery can undermine strong MFA."
+  ]
+};

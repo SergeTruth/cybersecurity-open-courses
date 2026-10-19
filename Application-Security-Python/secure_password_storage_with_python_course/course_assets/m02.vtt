@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Hashing and encryption are often confused, but they solve different problems.
+
+2
+00:00:05.080 --> 00:00:08.520
+Encryption is designed to be reversible with the right key.
+
+3
+00:00:08.620 --> 00:00:12.860
+Password hashing for storage is designed for one-way verification.
+
+4
+00:00:12.960 --> 00:00:21.200
+During login, the application processes the submitted password with the stored parameters and compares the result to the stored verifier.
+
+5
+00:00:21.300 --> 00:00:26.820
+It should not decrypt or recover the original password because recovery should not be possible.
+
+6
+00:00:27.100 --> 00:00:31.420
+A salt is a unique value used with each password before hashing.
+
+7
+00:00:31.520 --> 00:00:39.360
+When used correctly, per-password salts help ensure that two users with the same password do not have the same stored verifier.
+
+8
+00:00:39.460 --> 00:00:43.140
+Salts also make broad precomputed comparisons less useful.
+
+9
+00:00:43.240 --> 00:00:49.320
+Salts are normally stored with the password hash because their role is uniqueness, not secrecy.
+
+10
+00:00:49.420 --> 00:00:56.780
+A missing or reused salt weakens the design because repeated passwords become easier to recognize.
+
+11
+00:00:57.060 --> 00:01:04.420
+Work factors and computational cost are what make password hashing intentionally expensive.
+
+12
+00:01:04.520 --> 00:01:17.560
+A good password hashing design should be slow enough to make large-scale offline guessing difficult if hashes are exposed, but not so slow that normal login, account creation, and reset flows become unreliable.
+
+13
+00:01:17.660 --> 00:01:25.420
+Memory-hard hashing concepts add memory cost as part of the defensive design, making some large-scale guessing strategies harder to scale.
+
+14
+00:01:25.700 --> 00:01:34.020
+Fast general-purpose hashes are not appropriate for password storage because speed helps attackers test guesses quickly after a hash database is exposed.
+
+15
+00:01:34.120 --> 00:01:40.840
+Password storage should use vetted password hashing algorithms through mature libraries or framework-supported patterns.
+
+16
+00:01:40.940 --> 00:01:49.820
+Custom implementations are risky because small mistakes in salts, parameters, comparisons, encoding, or upgrades can undermine the entire control.

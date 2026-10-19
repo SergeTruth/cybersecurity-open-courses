@@ -1,0 +1,18 @@
+window.COURSE_MODULE = {
+  "id": "m03",
+  "title": "Turning Public Research Into Verifiable Evidence",
+  "type": "lesson",
+  "narration": "Public research becomes useful evidence when it shows a method rather than only a conclusion. Start with a clear research question. What security behavior are you examining, and why does it matter? Then identify prior work, define your assumptions, and choose an environment where testing is authorized. This might be a local lab, an intentionally vulnerable application, an open-source project, or a formal program. The environment should fit the question and keep other people safe.\n\nThe next step is to record a traceable path from question to observation. Keep notes about versions, configuration choices, test data, and decisions you made along the way. When you discard an idea, write down why. When a result surprises you, preserve the evidence before adjusting the setup. A polished final post does not need to expose every note, but your private record should be strong enough that you can answer careful follow-up questions without guessing.\n\nVerifiable evidence should distinguish between reproduction, extension, and original discovery. Reproducing a known issue in a lab can still demonstrate skill if you clearly label it as practice and explain what you learned. Extending prior research might mean testing a variant, comparing mitigations, or building a safer detection approach. Original discovery requires extra care, because disclosure timing, affected parties, and program rules may limit what you can publish.\n\nStrong evidence is usually layered. A reader may see a diagram, a short explanation of the weakness, a controlled demonstration, test cases, a remediation discussion, and a limitations section. The controlled demonstration should prove the point without functioning as a turnkey attack guide. The remediation discussion should connect the specific finding to a broader principle, such as input validation, authorization boundaries, least privilege, secure defaults, or safe error handling.\n\nThe final artifact should make independent review possible. Use stable references, reproducible lab conditions, and clear claims. Avoid inflated language such as \"critical everywhere\" when the result depends on a narrow configuration. Explain what you did not test, what could change the conclusion, and how someone could validate the lesson in a safe environment. That combination turns research into evidence rather than performance.\n\nA useful habit is to keep a small evidence checklist before publication. Confirm that the claim is precise, the artifact is safe to share, the evidence supports only what you say it supports, and the limitations are visible. This keeps research writing from drifting into marketing language and helps reviewers trust your technical judgment.",
+  "narrationPoints": [
+    "Start public research with a focused security question.",
+    "Use an authorized environment that matches the question.",
+    "Keep notes that preserve decisions, observations, and assumptions.",
+    "Label reproduction, extension, and original discovery accurately.",
+    "Layer evidence with diagrams, tests, remediation, and limits.",
+    "Controlled demonstrations should not become turnkey attack guides.",
+    "Independent reviewers need stable, bounded, reproducible claims."
+  ],
+  "graphic": "course_assets/m03.png",
+  "graphicAlt": "Research evidence traces a question through an authorized environment and observations to a reviewable conclusion with accurately labeled contribution type.",
+  "codeExamples": []
+};

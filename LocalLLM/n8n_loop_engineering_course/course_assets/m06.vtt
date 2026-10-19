@@ -1,0 +1,193 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Looping over a known item set is different from repeating until a changing condition is met.
+
+2
+00:00:05.720 --> 00:00:11.560
+With a known set, Loop Over Items receives the items at the start and releases them according to Batch Size.
+
+3
+00:00:11.660 --> 00:00:16.940
+With a condition-controlled loop, the workflow learns during execution whether more work exists.
+
+4
+00:00:17.040 --> 00:00:19.760
+API pagination is the clearest example.
+
+5
+00:00:19.860 --> 00:00:26.180
+The workflow requests a page, processes the response, and then decides whether another page should be requested.
+
+6
+00:00:26.460 --> 00:00:29.340
+Pagination signals vary across APIs.
+
+7
+00:00:29.440 --> 00:00:32.000
+Some APIs use an incrementing page number.
+
+8
+00:00:32.100 --> 00:00:34.340
+Some use an offset and limit.
+
+9
+00:00:34.440 --> 00:00:39.480
+Some return a cursor, continuation token, or next-page URL.
+
+10
+00:00:39.580 --> 00:00:46.060
+Others signal completion with an empty result set or with a response field that says no further page exists.
+
+11
+00:00:46.160 --> 00:00:51.360
+The important point is that the state used to continue is produced by the previous response.
+
+12
+00:00:51.460 --> 00:00:54.980
+The workflow cannot always know the full item set before it begins.
+
+13
+00:00:55.260 --> 00:01:01.660
+Before drawing a manual pagination loop, inspect the HTTP Request node's native pagination options.
+
+14
+00:01:01.760 --> 00:01:06.960
+If the API fits those options cleanly, the native feature is usually preferable.
+
+15
+00:01:07.060 --> 00:01:13.620
+It keeps the pagination behavior close to the request configuration and avoids extra return connections.
+
+16
+00:01:13.720 --> 00:01:23.960
+Native pagination is a good match when the request can derive the next page directly from the prior response and no additional workflow logic needs to transform or store the pagination state.
+
+17
+00:01:24.240 --> 00:01:41.840
+A manual condition-controlled loop is justified when the pagination state must pass through several nodes, when each page needs conditional processing before the next request, when the API's completion rule is unusual, or when the workflow needs custom pacing, logging, and safeguards.
+
+18
+00:01:41.940 --> 00:01:49.380
+In that design, a later node connects back to an earlier node, and an If node decides whether execution should continue or exit.
+
+19
+00:01:49.480 --> 00:01:52.040
+The true path represents a deliberate return.
+
+20
+00:01:52.140 --> 00:01:54.540
+The false path represents completion.
+
+21
+00:01:54.820 --> 00:01:59.940
+In a manual pagination design, the workflow should make the pagination state visible.
+
+22
+00:02:00.040 --> 00:02:06.040
+Store the page number, cursor, token, or next-page URL in a predictable field.
+
+23
+00:02:06.140 --> 00:02:10.380
+Preserve the previous value when repeated-token detection matters.
+
+24
+00:02:10.480 --> 00:02:13.120
+Record the number of items returned by the page.
+
+25
+00:02:13.220 --> 00:02:21.300
+These values let an operator see progress and also make the exit rule testable with a tiny mocked response before the workflow handles real data.
+
+26
+00:02:21.580 --> 00:02:25.900
+Reset can support a specific dynamic-input design with Loop Over Items.
+
+27
+00:02:26.000 --> 00:02:32.000
+The documented behavior is that Reset makes the node reinitialize with current input data during each loop.
+
+28
+00:02:32.100 --> 00:02:40.180
+n8n describes this in the context of designs where incoming data should be treated as a new set rather than a continuation of previous items.
+
+29
+00:02:40.280 --> 00:02:47.880
+A pagination loop can use that behavior when each pass introduces a newly initialized item that represents the next page request.
+
+30
+00:02:47.980 --> 00:02:50.940
+The design still depends on a clear exit condition.
+
+31
+00:02:51.220 --> 00:02:55.060
+Termination safety is the central engineering concern.
+
+32
+00:02:55.160 --> 00:03:05.240
+A condition-controlled loop needs a positive continuation rule, a valid exit rule, and a practical guard such as maximum pages or maximum iterations.
+
+33
+00:03:05.340 --> 00:03:13.020
+It also needs handling for empty responses, malformed responses, missing page tokens, and repeated page tokens.
+
+34
+00:03:13.120 --> 00:03:24.080
+Observable state should make progress visible, such as the page number, current cursor, previous cursor, item count, and exit reason.
+
+35
+00:03:24.360 --> 00:03:28.360
+Infinite loops happen when workflow state never reaches the exit condition.
+
+36
+00:03:28.460 --> 00:03:36.220
+Imagine an API that returns a next-page token, but because of a bad expression or service defect, the same token appears on every response.
+
+37
+00:03:36.320 --> 00:03:42.800
+The workflow keeps requesting what it believes is the next page, and the If node keeps taking the continuation path.
+
+38
+00:03:42.900 --> 00:03:50.500
+A repeated-token guard turns that silent failure into a controlled stop with an error or a clear status value.
+
+39
+00:03:50.780 --> 00:03:54.940
+Empty and malformed responses need the same deliberate treatment.
+
+40
+00:03:55.040 --> 00:04:01.040
+An empty page may mean completion for one API, but it may mean a temporary backend problem for another.
+
+41
+00:04:01.140 --> 00:04:07.140
+A missing token may be a valid exit signal, or it may indicate an error payload that was not parsed correctly.
+
+42
+00:04:07.240 --> 00:04:15.160
+The workflow should branch according to the API contract and should log enough state for a maintainer to distinguish a clean finish from a defensive stop.
+
+43
+00:04:15.440 --> 00:04:23.200
+Manual pagination is also easier to maintain when the loop stores a plain explanation of its next action.
+
+44
+00:04:23.300 --> 00:04:32.660
+A status such as continue, complete, or stop_due_to_repeated_token is easier to review than a chain of implicit expression outcomes.
+
+45
+00:04:32.760 --> 00:04:37.000
+The expression still controls the branch, but the recorded state explains it.
+
+46
+00:04:37.280 --> 00:04:42.160
+The safest manual pagination loop is explicit about what one pass means.
+
+47
+00:04:42.260 --> 00:04:53.220
+One pass requests one page, processes that page, records the state needed for the next request, evaluates the continuation rule, and either returns or exits.
+
+48
+00:04:53.320 --> 00:05:03.960
+When that structure is visible in the workflow and visible in execution data, operators can explain why the loop continued, why it stopped, and what data was processed before completion.

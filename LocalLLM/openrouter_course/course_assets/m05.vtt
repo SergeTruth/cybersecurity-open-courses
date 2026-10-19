@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.580
+Privacy review is central to responsible OpenRouter use because a request may involve OpenRouter and one or more model providers.
+
+2
+00:00:08.680 --> 00:00:16.920
+The prompt, attachments, metadata, and generated response can all contain information the organization is obligated to protect.
+
+3
+00:00:17.020 --> 00:00:29.980
+Before sending real traffic, identify what data classes may appear in prompts and outputs, such as customer content, source code, incident details, health information, financial records, or internal strategy.
+
+4
+00:00:30.260 --> 00:00:38.980
+OpenRouter documentation exposes provider data handling information and routing controls that can help teams choose providers with acceptable logging behavior.
+
+5
+00:00:39.080 --> 00:00:42.440
+Those controls are not a substitute for policy review.
+
+6
+00:00:42.540 --> 00:00:44.780
+They are inputs to a decision.
+
+7
+00:00:44.880 --> 00:00:56.800
+The engineering team should document which providers are approved for which data classes, when no-log or lower-retention options are required, and what should happen when a requested provider cannot satisfy the requirement.
+
+8
+00:00:57.080 --> 00:01:00.280
+The application should also minimize the data it sends.
+
+9
+00:01:00.380 --> 00:01:11.740
+Remove unrelated context, avoid secrets in prompts, redact credentials before summarization, and prefer identifiers that are meaningless outside the system when exact values are unnecessary.
+
+10
+00:01:11.840 --> 00:01:22.000
+If user-facing features allow arbitrary input, the service should assume sensitive data may arrive and should apply conservative routing and retention choices by default.
+
+11
+00:01:22.280 --> 00:01:25.320
+Logging is another common leak path.
+
+12
+00:01:25.420 --> 00:01:33.740
+It is useful to record request identifiers, model identifiers, provider choices, latency, token counts, and error classes.
+
+13
+00:01:33.840 --> 00:01:42.400
+It is usually risky to log full prompts and responses without a clear retention policy, access control, and redaction strategy.
+
+14
+00:01:42.500 --> 00:01:50.340
+Privacy is strongest when routing, prompt design, and observability all follow the same data classification rules.
+
+15
+00:01:50.440 --> 00:01:58.200
+Sensitive workflows should default to conservative provider choices rather than relying on each caller to remember policy details.
+
+16
+00:01:58.300 --> 00:02:02.860
+Treat provider review as a recurring control, not a one-time checklist.

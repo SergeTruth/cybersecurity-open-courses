@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+The first principle is to fail safely.
+
+2
+00:00:03.240 --> 00:00:11.000
+When a required check fails, the application should reject the action, stop the risky workflow, or move into a safe degraded state.
+
+3
+00:00:11.100 --> 00:00:18.780
+It should not continue with partially initialized data, guessed defaults, stale permissions, or incomplete authorization.
+
+4
+00:00:18.880 --> 00:00:21.360
+A secure failure is predictable.
+
+5
+00:00:21.460 --> 00:00:26.740
+The caller may not get the result they wanted, but the system should remain consistent and protected.
+
+6
+00:00:27.020 --> 00:00:30.140
+The second principle is controlled disclosure.
+
+7
+00:00:30.240 --> 00:00:42.880
+User-facing errors should usually avoid stack traces, internal paths, SQL queries, secrets, tokens, architecture details, cloud resource names, and dependency internals.
+
+8
+00:00:42.980 --> 00:00:48.900
+Those details can help attackers understand the system, but they are often useful to defenders and maintainers.
+
+9
+00:00:49.000 --> 00:00:50.840
+The answer is not to throw them away.
+
+10
+00:00:50.940 --> 00:00:59.980
+The answer is to send detailed diagnostics to protected internal logs and give the user a safe message plus a supportable reference such as a correlation ID.
+
+11
+00:01:00.260 --> 00:01:03.380
+The third principle is to avoid silent failure.
+
+12
+00:01:03.480 --> 00:01:12.600
+A swallowed exception, ignored error code, or empty catch block can be worse than a visible failure because the application keeps moving without a reliable state.
+
+13
+00:01:12.700 --> 00:01:16.060
+Graceful degradation is different from pretending nothing happened.
+
+14
+00:01:16.160 --> 00:01:20.880
+If a recommendation service fails, the application might continue without recommendations.
+
+15
+00:01:20.980 --> 00:01:25.620
+If an authorization check fails, the secure response is denial.
+
+16
+00:01:25.720 --> 00:01:31.640
+Error handling should be explicit about which failures are recoverable and which ones must stop the workflow.

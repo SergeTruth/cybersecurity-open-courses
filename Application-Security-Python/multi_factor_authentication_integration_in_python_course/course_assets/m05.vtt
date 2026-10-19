@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.620
+A common verification flow starts with primary authentication, then requires MFA before the session becomes fully authenticated.
+
+2
+00:00:07.720 --> 00:00:13.880
+The Python backend should keep partial-login state separate from the final authenticated session.
+
+3
+00:00:13.980 --> 00:00:18.220
+A user who has completed only the first step should not be treated as fully signed in.
+
+4
+00:00:18.320 --> 00:00:27.040
+The application should limit what partial state can do, how long it lasts, and which user, session, purpose, and challenge it belongs to.
+
+5
+00:00:27.320 --> 00:00:32.760
+Step-up MFA applies additional proof to higher-risk actions or contexts.
+
+6
+00:00:32.860 --> 00:00:48.700
+A user may already have a normal session, but the application may require fresh verification before changing MFA settings, exporting sensitive data, updating payment information, managing administrators, viewing highly sensitive records, or performing risky operations.
+
+7
+00:00:48.800 --> 00:00:55.760
+Step-up works best when tied to a clear policy rather than sprinkled into code by individual route owners.
+
+8
+00:00:56.040 --> 00:00:59.400
+Challenge state needs replay resistance and expiration.
+
+9
+00:00:59.500 --> 00:01:05.340
+A challenge result should not be reusable for the wrong user, session, purpose, or action.
+
+10
+00:01:05.440 --> 00:01:12.480
+Failed attempts should be handled with rate limiting, throttling, alerting, or temporary protective controls as appropriate.
+
+11
+00:01:12.580 --> 00:01:18.340
+The goal is to slow abuse and protect users without turning every mistake into permanent lockout.
+
+12
+00:01:18.440 --> 00:01:22.920
+Error messages should be useful but not reveal sensitive verification details.
+
+13
+00:01:23.200 --> 00:01:31.040
+After MFA succeeds, the application may upgrade the session, record the authentication context, and continue to the intended action.
+
+14
+00:01:31.140 --> 00:01:33.300
+That upgrade should be explicit.
+
+15
+00:01:33.400 --> 00:01:42.120
+Remembering trusted devices at a high level may reduce friction, but it requires careful lifetime, device binding, revocation, and user visibility.
+
+16
+00:01:42.220 --> 00:01:50.140
+MFA verification must be connected to the right session and purpose because detached verification creates confusion and risk.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.100
+A database secret has a lifecycle: creation, activation, use, expiration, rotation, revocation, retirement, and sometimes emergency replacement.
+
+2
+00:00:12.200 --> 00:00:16.520
+Rotation should reduce risk without causing avoidable outages.
+
+3
+00:00:16.620 --> 00:00:25.260
+That means teams need to know which applications, jobs, migrations, notebooks, dashboards, and pipelines consume the credential.
+
+4
+00:00:25.360 --> 00:00:30.400
+A secret with unknown consumers is difficult to rotate safely because nobody knows what will break.
+
+5
+00:00:30.680 --> 00:00:35.800
+Staged or dual-credential rotation patterns can reduce downtime risk.
+
+6
+00:00:35.900 --> 00:00:44.860
+The database may accept an old and new credential during a controlled transition, or the application may be updated to read a new secret before the old one is revoked.
+
+7
+00:00:44.960 --> 00:00:51.280
+Connection pool draining, application restarts, worker reloads, and scheduled jobs must be considered.
+
+8
+00:00:51.380 --> 00:00:59.140
+Rotation is not finished until old credentials are no longer accepted and consumers are verified on the new path.
+
+9
+00:00:59.420 --> 00:01:02.380
+Migration coordination and rollback planning matter.
+
+10
+00:01:02.480 --> 00:01:09.920
+A deployment may include application code, database schema changes, secret updates, and infrastructure changes.
+
+11
+00:01:10.020 --> 00:01:17.780
+If rotation fails halfway through, teams need a safe plan that preserves availability without leaving both credentials active indefinitely.
+
+12
+00:01:17.880 --> 00:01:28.840
+Emergency replacement after exposure may move faster, but it still needs owner communication, scope assessment, revocation, and verification that affected systems are using the replacement.
+
+13
+00:01:29.120 --> 00:01:33.040
+Documenting credential owners and consumers is practical security work.
+
+14
+00:01:33.140 --> 00:01:39.380
+The owner knows why the secret exists, who can approve changes, when it should rotate, and what systems rely on it.
+
+15
+00:01:39.480 --> 00:01:44.760
+Consumers are the services, jobs, or humans allowed to retrieve it.
+
+16
+00:01:44.860 --> 00:01:49.340
+Without that map, rotation becomes a high-risk manual exercise.
+
+17
+00:01:49.440 --> 00:01:56.240
+With it, rotation becomes an expected maintenance workflow that improves security and reliability together.

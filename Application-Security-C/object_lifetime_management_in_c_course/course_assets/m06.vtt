@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Static and long-lived objects can look simple because their storage lasts for a long time.
+
+2
+00:00:05.000 --> 00:00:08.200
+That does not make them automatically safe or maintainable.
+
+3
+00:00:08.300 --> 00:00:19.340
+A long lifetime removes one category of scope problem, but it introduces questions about access order, initialization assumptions, shared mutation, testing, and shutdown behavior.
+
+4
+00:00:19.620 --> 00:00:22.100
+Global objects can hide dependencies.
+
+5
+00:00:22.200 --> 00:00:28.040
+A function may appear independent while reading or modifying state that lives elsewhere.
+
+6
+00:00:28.140 --> 00:00:36.300
+This makes code harder to test and harder to review because the lifetime of the object is long, but the valid-use rules are still distributed across the program.
+
+7
+00:00:36.580 --> 00:00:39.460
+Static locals preserve state between calls.
+
+8
+00:00:39.560 --> 00:00:45.240
+That can be useful for caches or counters, but it may affect reentrancy and repeated use.
+
+9
+00:00:45.340 --> 00:00:52.940
+A function that seems pure or isolated may behave differently on the second call because the static object retained previous state.
+
+10
+00:00:53.220 --> 00:00:59.700
+Thread-local storage can help avoid some cross-thread sharing, but it has its own lifetime and initialization rules.
+
+11
+00:00:59.800 --> 00:01:08.200
+Pointers to thread-local objects should not escape into contexts that can outlive the thread or use the pointer from another thread without a clear contract.
+
+12
+00:01:08.480 --> 00:01:13.040
+Shared mutable state needs synchronization and ownership discipline.
+
+13
+00:01:13.140 --> 00:01:22.820
+A long-lived object may still be invalid for a particular operation if another part of the program is modifying it, shutting it down, or resetting it.
+
+14
+00:01:22.920 --> 00:01:27.800
+Shutdown behavior should be explicit rather than based on guesses about module order.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Data Flow and Trust Boundaries",
+  "narration": "Secure reviewers trace untrusted data from entry points to security-relevant use. Entry points may include user input, API input, file uploads, headers, cookies, webhooks, message queues, third-party responses, environment variables, and configuration files. Not every input is equally risky, but every input has a source, an expected shape, and a level of trust that should be clear in the code.\n\nSensitive sinks are places where data has security impact. Database queries, shell commands, template rendering, file paths, logs, outbound requests, and authorization decisions are common examples. A review should ask what data reaches these sinks, what validation or transformation happened first, and whether the sink is used through safe APIs. The question is not only whether a value exists, but whether the code uses it in a way that changes security behavior.\n\nTrust boundaries show where data, identity, permissions, or assumptions change. A browser request crossing into a server-side API crosses a boundary. A webhook from a third party crosses another. A background worker reading from a queue may receive data that was trusted by one component but not by another. A reviewer should be cautious when code treats data as safe merely because it came from an internal service or configuration source.\n\nData-flow review also helps find missing controls. If a value enters through an API and eventually becomes a file path, the reviewer can look for path normalization, allowed directories, extension handling, and error behavior. If a parameter reaches an outbound HTTP request, the reviewer can ask whether the destination is constrained. The goal is to understand how untrusted or sensitive data moves before deciding whether the implementation is safe.",
+  "graphicAlt": "Source-aware tracing follows trust transitions to sensitive sinks and verifies appropriate controls.",
+  "narrationPoints": [
+    "Secure reviewers trace untrusted data from entry points to security-relevant use.",
+    "Sensitive sinks are places where data has security impact.",
+    "Trust boundaries show where data, identity, permissions, or assumptions change.",
+    "Data-flow review also helps find missing controls."
+  ]
+};

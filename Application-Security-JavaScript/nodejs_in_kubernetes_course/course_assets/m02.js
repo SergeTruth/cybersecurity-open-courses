@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "From Node.js App to Container Image",
+  "graphicAlt": "A controlled build context and repeatable dependencies produce an intentional runtime image with explicit startup and user.",
+  "narration": "Kubernetes runs container images, not source directories. That means the image becomes the deployable unit for your Node.js application. It carries the Node runtime, application code, installed dependencies, startup command, metadata, and assumptions about files, ports, users, and configuration. If the image is vague or bloated, Kubernetes will not correct it. The cluster will simply pull the image and run the behavior it contains.\n\nA production image should be repeatable and reviewable. For many Node.js projects, that means copying package metadata first, using a committed lockfile, installing dependencies with npm ci where appropriate, and then copying application code into the image. Development tools, test-only dependencies, source-control files, local caches, and accidental credentials should stay out of the final runtime image. A .dockerignore file matters because the Docker build context is often larger than developers realize, and anything sent to the builder can become part of build history or image layers if the Dockerfile handles it carelessly.\n\nStartup behavior should also be explicit. A container should not depend on hidden local shell aliases, a developer's working directory, or a manually loaded environment file. It should start with a clear command, listen on the port expected by the Kubernetes manifest, and fail in a way operators can understand when required configuration is missing. If the service can run as a non-root user, the image should support that by setting ownership and permissions correctly rather than relying on root as a convenient default.\n\nThere is a practical balance around image size. Smaller images usually pull faster and reduce the amount of software you must maintain, but the final image still needs what the service requires to operate safely. The question is not whether the image is the smallest possible artifact. The better question is whether it contains only intentional runtime content, whether it can be rebuilt predictably, whether it avoids unsafe defaults, and whether the Kubernetes workload can run it without special privileges or hidden assumptions.",
+  "narrationPoints": [
+    "Kubernetes runs container images, not source directories.",
+    "A production image should be repeatable and reviewable.",
+    "Startup behavior should also be explicit.",
+    "There is a practical balance around image size.",
+    "Development tools, test-only dependencies, source-control.",
+    "A container should not depend on hidden local shell aliases."
+  ]
+};

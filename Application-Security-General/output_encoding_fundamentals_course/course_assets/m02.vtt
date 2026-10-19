@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Different output contexts interpret characters differently.
+
+2
+00:00:04.040 --> 00:00:09.800
+In an HTML body, angle brackets can start tags and ampersands can start entities.
+
+3
+00:00:09.900 --> 00:00:13.820
+In an HTML attribute, quotes can end the attribute value.
+
+4
+00:00:13.920 --> 00:00:20.560
+In JavaScript, quotes, backslashes, line breaks, and closing script sequences may change code structure.
+
+5
+00:00:20.660 --> 00:00:28.260
+In URLs, reserved characters can change paths, parameters, fragments, or schemes.
+
+6
+00:00:28.360 --> 00:00:35.000
+A single encoder cannot safely cover every destination because each destination has its own grammar.
+
+7
+00:00:35.280 --> 00:00:42.160
+CSS, JSON, XML, CSV, logs, and reports all have their own rules.
+
+8
+00:00:42.260 --> 00:00:47.300
+CSS values can interact with browser parsing and external references.
+
+9
+00:00:47.400 --> 00:00:51.800
+JSON should be produced through serializers, not hand-built strings.
+
+10
+00:00:51.900 --> 00:00:56.220
+XML has entity rules and structural concerns.
+
+11
+00:00:56.320 --> 00:01:01.040
+CSV may be opened by spreadsheet software that interprets certain cell prefixes as formulas.
+
+12
+00:01:01.140 --> 00:01:08.980
+Logs and reports may later be rendered in web interfaces, searched, copied, or exported into other tools.
+
+13
+00:01:09.080 --> 00:01:12.840
+Output can move through multiple contexts over its lifetime.
+
+14
+00:01:13.120 --> 00:01:16.880
+The practical habit is to identify the destination before encoding.
+
+15
+00:01:16.980 --> 00:01:20.660
+Ask: where is this value going next?
+
+16
+00:01:20.760 --> 00:01:30.760
+Is it plain HTML text, an attribute, a URL component, JavaScript data, JSON, a style value, a report cell, or a log field?
+
+17
+00:01:30.860 --> 00:01:34.940
+Then use an encoder or safe API designed for that destination.
+
+18
+00:01:35.040 --> 00:01:43.200
+Context-specific thinking prevents the common mistake of applying one familiar escaping function everywhere and assuming the result is safe.

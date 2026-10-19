@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+MFA controls need tests because authentication flows are easy to break during ordinary changes.
+
+2
+00:00:06.760 --> 00:00:21.240
+Useful tests cover enrollment, verification, failed attempts, recovery, reset, session upgrade, trusted-device behavior, step-up prompts, identity provider claims, and regression after authentication changes.
+
+3
+00:00:21.340 --> 00:00:33.660
+Negative tests are especially important: partial-login users should not reach protected actions, expired challenges should fail, and reset workflows should not silently bypass policy.
+
+4
+00:00:33.940 --> 00:00:46.500
+Code review should ask where MFA is required, where the decision is enforced, how challenge state is protected, how session state changes after success, how recovery works, and how privileged actions are handled.
+
+5
+00:00:46.600 --> 00:00:50.520
+Reviewers should check that MFA is not confused with authorization.
+
+6
+00:00:50.620 --> 00:00:57.180
+Completing MFA proves more about identity assurance; it does not decide every resource permission by itself.
+
+7
+00:00:57.460 --> 00:01:02.180
+MFA logs should support investigation without exposing sensitive authentication material.
+
+8
+00:01:02.280 --> 00:01:19.640
+Useful events include enrollment, factor removal, reset, failed verification, successful verification, step-up success, backup code use, privileged account MFA changes, suspicious approval activity, and recovery workflow decisions.
+
+9
+00:01:19.740 --> 00:01:29.740
+Logs should avoid one-time codes, recovery codes, tokens, authenticator secrets, excessive device detail, and unnecessary personal information.
+
+10
+00:01:30.020 --> 00:01:32.820
+Monitoring turns logs into action.
+
+11
+00:01:32.920 --> 00:01:46.840
+Unusual MFA failures, repeated reset attempts, unexpected privileged factor changes, approval patterns that do not match user behavior, and recovery events followed by sensitive actions may require triage.
+
+12
+00:01:46.940 --> 00:01:56.700
+Incident response readiness includes knowing how to revoke sessions, remove factors, reset account access, preserve evidence, and communicate with affected users.
+
+13
+00:01:56.800 --> 00:02:01.440
+MFA must be observable without becoming another place where secrets leak.

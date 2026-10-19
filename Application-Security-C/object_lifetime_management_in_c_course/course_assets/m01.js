@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Object Lifetime Matters",
+  "graphicAlt": "An object is used only after initialization and before cleanup, within its owner and borrowing contract.",
+  "narration": "Object lifetime is a foundation of safe C programming because pointers, buffers, strings, resources, and structures are only meaningful while the objects they refer to exist and are in a valid state. A pointer value by itself is not enough. The code also needs to know whether the object has begun its lifetime, whether it was initialized, who owns it, and when that lifetime ends.\n\nMany C defects are really timing defects. Code may use storage before initialization, use an object after cleanup, retain a pointer beyond the object's scope, or keep freeing responsibility after ownership has been transferred. These problems show up in normal engineering work when APIs grow, callbacks are added, structures gain owned members, or failure paths become more complex.\n\nLifetime mistakes affect reliability and maintainability even before they become security concerns. They can produce crashes, inconsistent state, incorrect logging, resource leaks, stale references, and hard-to-review cleanup behavior. The defensive goal is to make the object's valid-use window visible enough that later changes do not silently break it.\n\nScope and ownership are part of the same conversation. An automatic object may be valid only during a call. A dynamically allocated object may remain valid until its owner releases it. A static object may last much longer but still require clear access rules. A borrowed pointer may be usable only for the duration of one operation.\n\nThis course treats object lifetime as an engineering contract. For each object, developers should be able to answer when it begins, when it becomes valid, who owns it, who may borrow it, how aliases behave, what cleanup path ends it, and what callers may rely on after failure.",
+  "narrationPoints": [
+    "Object lifetime is a foundation of safe C programming because pointers, buffers, strings, resources.",
+    "Code may use storage before initialization, use an object after cleanup, retain a pointer beyond the object's scope.",
+    "Lifetime mistakes affect reliability and maintainability even before they become security concerns.",
+    "A static object may last much longer but still require clear access rules.",
+    "For each object, developers should be able to answer when it begins, when it becomes valid, who owns it, who may borrow it."
+  ]
+};

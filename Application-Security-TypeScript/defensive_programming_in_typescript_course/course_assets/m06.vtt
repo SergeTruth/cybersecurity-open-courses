@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Async TypeScript code runs in an operational world where many things can fail.
+
+2
+00:00:05.640 --> 00:00:11.000
+Network calls can be slow, unavailable, or partially successful.
+
+3
+00:00:11.100 --> 00:00:13.740
+External services may return stale data.
+
+4
+00:00:13.840 --> 00:00:16.080
+Browser interactions can be canceled.
+
+5
+00:00:16.180 --> 00:00:19.060
+Server resources can be exhausted.
+
+6
+00:00:19.160 --> 00:00:25.720
+Defensive async code makes these failure states explicit instead of treating them as rare surprises.
+
+7
+00:00:26.000 --> 00:00:29.040
+Handle expected errors close to where they occur.
+
+8
+00:00:29.140 --> 00:00:39.380
+If a user submitted invalid input, if a resource was not found, or if a dependency returned a known conflict, nearby code usually has the best context for producing a useful response.
+
+9
+00:00:39.480 --> 00:00:48.600
+Unexpected errors should still reach a deliberate boundary where they can be logged, converted into a safe response, and monitored.
+
+10
+00:00:48.880 --> 00:00:52.880
+Timeouts and cancellation are defensive resource controls.
+
+11
+00:00:52.980 --> 00:01:02.980
+Without them, a request can hang longer than the user workflow, a server connection can remain occupied, or background work can continue after the result is no longer needed.
+
+12
+00:01:03.080 --> 00:01:07.640
+Cancellation should be part of the design for operations that may outlive their usefulness.
+
+13
+00:01:07.920 --> 00:01:09.760
+Retries require care.
+
+14
+00:01:09.860 --> 00:01:23.380
+A retry may be helpful when a dependency has a temporary failure, but careless retries can amplify an outage, overload a struggling service, or repeat side effects such as sending a message or charging an account.
+
+15
+00:01:23.480 --> 00:01:31.000
+Defensive retry design considers idempotency, backoff, limits, and whether retrying is safe for that operation.
+
+16
+00:01:31.280 --> 00:01:34.320
+Logs should help investigation without creating new risk.
+
+17
+00:01:34.420 --> 00:01:41.620
+Useful logs include stable identifiers, failure categories, timing, and relevant operational context.
+
+18
+00:01:41.720 --> 00:01:48.600
+They should avoid secrets, tokens, credentials, personal data, and sensitive payloads.
+
+19
+00:01:48.700 --> 00:01:54.780
+Debugging value should be balanced with privacy, security, and retention expectations.
+
+20
+00:01:55.060 --> 00:01:59.700
+Defensive error handling is not about catching every exception and continuing blindly.
+
+21
+00:01:59.800 --> 00:02:08.280
+It is about deciding which failures are recoverable, which should stop the current operation, which should be surfaced to callers, and which should alert operators.
+
+22
+00:02:08.380 --> 00:02:13.820
+Clear failure paths make production behavior easier to reason about and easier to improve.

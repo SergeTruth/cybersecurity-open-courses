@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Digital signatures help verify authenticity and integrity.
+
+2
+00:00:04.920 --> 00:00:08.280
+A signer uses a private key to sign data.
+
+3
+00:00:08.380 --> 00:00:15.820
+A verifier uses the corresponding public key to check that the signed data has not changed and that it was signed by the holder of the private key.
+
+4
+00:00:15.920 --> 00:00:17.920
+Signing is not the same as encryption.
+
+5
+00:00:18.020 --> 00:00:20.340
+Signed data may still be readable.
+
+6
+00:00:20.440 --> 00:00:23.160
+Encryption is about confidentiality.
+
+7
+00:00:23.260 --> 00:00:26.700
+Signing is about trust in origin and change detection.
+
+8
+00:00:26.980 --> 00:00:35.060
+Signatures and MACs are common in APIs, webhooks, software updates, artifacts, and message workflows.
+
+9
+00:00:35.160 --> 00:00:37.720
+The receiver should verify before trusting.
+
+10
+00:00:37.820 --> 00:00:46.300
+That means checking the signature or MAC, the key or issuer, the intended use, and any freshness or replay protections required by the design.
+
+11
+00:00:46.400 --> 00:00:51.600
+A valid signature proves only what the signature scheme is designed to prove.
+
+12
+00:00:51.700 --> 00:00:57.380
+It does not automatically prove authorization, business validity, or user intent.
+
+13
+00:00:57.660 --> 00:01:08.540
+Signed tokens at a high level often carry claims such as subject, issuer, audience, expiration, scopes, roles, or other context.
+
+14
+00:01:08.640 --> 00:01:18.560
+Token validation should check signature validity, issuer, audience, expiration, intended use, and any application-specific requirements as appropriate.
+
+15
+00:01:18.660 --> 00:01:29.140
+Accepting an unsigned token, trusting claims without validation, or ignoring expiration can affect many endpoints at once because tokens often sit at the front of API access.
+
+16
+00:01:29.420 --> 00:01:32.300
+Key rotation for signing keys requires planning.
+
+17
+00:01:32.400 --> 00:01:40.400
+Verifiers may need to trust old and new keys during a transition, tokens may remain valid for a period, and services must refresh key material safely.
+
+18
+00:01:40.500 --> 00:01:47.220
+Replay and freshness concepts also matter when signed messages can be captured and sent again.
+
+19
+00:01:47.320 --> 00:01:54.680
+Signed data still requires authorization, input validation, and business-rule checks before the application acts on it.

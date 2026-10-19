@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Monitoring, Revocation, and Incident Response",
+  "graphicAlt": "Inventory scopes affected model use so revoked artifacts can be blocked, replaced and communicated with supporting evidence.",
+  "narration": "Checkpoint trust is not permanent. A model can become deprecated, superseded, restricted, or suspected of being unsafe for a workflow. New evidence may appear, licensing interpretations may change, better evaluations may become available, or a downstream deployment may reveal problems that were not visible during intake.\n\nTeams need inventory visibility to know where a model is stored, deployed, referenced, or embedded in workflows. Inventory should connect model versions to registries, storage paths, applications, owners, approval records, evaluation results, and deployment history. Without inventory, removal becomes guesswork.\n\nRevocation should remove or block artifacts that are no longer trusted and communicate what changed to affected owners. Depending on the environment, that may mean registry controls, deployment blocks, access changes, cache cleanup, configuration updates, replacement guidance, and clear notices to teams using the model.\n\nIncident response depends on evidence. Source records, hashes, approvals, deployment history, runtime logs, evaluation results, and change records help responders understand scope and choose a response. Rollback and replacement plans reduce downtime when a checkpoint must be removed quickly.\n\nPost-incident review should improve intake, documentation, monitoring, approval controls, and owner communication. The purpose is not blame. It is to make future model use more observable, reversible, and evidence-based.\n\nResponse planning should include communication. Application owners, platform teams, governance reviewers, and affected users may need different levels of detail. A clear message should explain which model changed, what action was taken, whether outputs need review, and what replacement path is available.",
+  "narrationPoints": [
+    "Checkpoint trust is not permanent.",
+    "Teams need inventory visibility to know where a model is stored, deployed, referenced, or embedded in workflows.",
+    "Revocation should remove or block artifacts that are no longer trusted and communicate what changed to affected owners.",
+    "Incident response depends on evidence.",
+    "Post-incident review should improve intake, documentation, monitoring, approval controls, and owner communication."
+  ]
+};

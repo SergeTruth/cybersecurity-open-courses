@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Health behavior is one of the places where application design and Kubernetes configuration meet directly.
+
+2
+00:00:06.760 --> 00:00:10.840
+Readiness probes tell Kubernetes whether a Pod should receive traffic.
+
+3
+00:00:10.940 --> 00:00:14.540
+Liveness probes help identify a container that should be restarted.
+
+4
+00:00:14.640 --> 00:00:20.160
+Startup probes can protect slow-starting applications from premature liveness failures while they initialize.
+
+5
+00:00:20.260 --> 00:00:23.140
+These probes are not decorations in the manifest.
+
+6
+00:00:23.240 --> 00:00:29.400
+They are signals used by the platform to decide when to send traffic, when to wait, and when to restart.
+
+7
+00:00:29.680 --> 00:00:32.400
+Alive and ready are different states.
+
+8
+00:00:32.500 --> 00:00:41.860
+A Node.js process can be alive while it is still loading configuration, warming caches, connecting to dependencies, running migrations, or recovering from overload.
+
+9
+00:00:41.960 --> 00:00:46.920
+A readiness check should fail when the application cannot safely serve traffic.
+
+10
+00:00:47.020 --> 00:00:54.700
+A liveness check should be narrower and should avoid restarting the process for every temporary downstream dependency failure unless that behavior is intentional.
+
+11
+00:00:54.800 --> 00:00:57.840
+Bad liveness probes can create restart loops.
+
+12
+00:00:57.940 --> 00:01:02.340
+Bad readiness probes can send users to a Pod that is not prepared to serve them.
+
+13
+00:01:02.620 --> 00:01:08.780
+Graceful shutdown matters during normal operations, especially rolling updates and node maintenance.
+
+14
+00:01:08.880 --> 00:01:14.800
+Kubernetes sends SIGTERM and then waits for a configured termination window before forcing the container to stop.
+
+15
+00:01:14.900 --> 00:01:27.940
+A Node.js application should respond by stopping new work, draining or finishing in-flight requests where appropriate, closing listeners, closing database or queue connections safely, and exiting within the allowed time.
+
+16
+00:01:28.040 --> 00:01:35.480
+If the process ignores termination, releases can create failed requests, abandoned work, or confusing logs.
+
+17
+00:01:35.760 --> 00:01:41.760
+Lifecycle hooks and termination settings should match the application rather than conceal design problems.
+
+18
+00:01:41.860 --> 00:01:48.740
+A longer termination grace period can help a service finish in-flight work, but it is not a substitute for signal handling.
+
+19
+00:01:48.840 --> 00:01:55.320
+A readiness endpoint can protect traffic during startup, but it is not a substitute for fixing broken initialization.
+
+20
+00:01:55.420 --> 00:01:58.460
+Treat health behavior as part of release engineering.
+
+21
+00:01:58.560 --> 00:02:09.200
+The safest deployments are those where Kubernetes and the Node.js process agree about when the service is starting, ready, unhealthy, draining, and stopped.

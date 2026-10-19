@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Treat Runtime Data as Untrusted",
+  "graphicAlt": "Runtime values from multiple sources are checked for shape, limits and meaning before becoming internal data.",
+  "narration": "Runtime data should be treated as untrusted until the program has verified it. That includes obvious external sources such as users, public APIs, uploaded files, URL parameters, browser storage, environment variables, and third-party packages. It also includes less obvious sources such as databases, queues, caches, feature flags, and internal services that can drift from their original contract.\n\nA TypeScript interface describes what your code expects. It does not validate what actually arrived at runtime. If an API response is missing a field, if a database row contains old data, or if a package returns a value that no longer matches its documentation, the interface alone cannot protect the running program. The JavaScript value exists independently of the type annotation.\n\nDefensive programs identify trust boundaries. A trust boundary is any point where data moves from a less controlled context into a more controlled one. At that point, the program should convert unknown input into validated internal types, or reject it with a clear failure path. This approach keeps the rest of the application from repeatedly guessing about shape and meaning.\n\nUseful validation checks more than whether a property exists. It may check shape, range, allowed values, encoding expectations, length limits, relationships between fields, and business rules. A value can be technically shaped like a string and still be too long, empty when it must be present, not one of the allowed choices, or unsafe to use in a particular workflow.\n\nTreating data as untrusted does not mean assuming malicious intent in every caller. It means engineering for reality. Systems change, callers make mistakes, deployments are imperfect, and data outlives code. Defensive TypeScript makes those realities explicit so the program can respond predictably instead of letting uncertainty leak into unrelated business logic.",
+  "narrationPoints": [
+    "Runtime data should be treated as untrusted until the program has verified it.",
+    "A TypeScript interface describes what your code expects.",
+    "Defensive programs identify trust boundaries.",
+    "Useful validation checks more than whether a property exists.",
+    "Treating data as untrusted does not mean assuming malicious intent in every caller."
+  ]
+};

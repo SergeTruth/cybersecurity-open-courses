@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Runtime data should be treated as untrusted until the program has verified it.
+
+2
+00:00:05.000 --> 00:00:16.920
+That includes obvious external sources such as users, public APIs, uploaded files, URL parameters, browser storage, environment variables, and third-party packages.
+
+3
+00:00:17.020 --> 00:00:26.220
+It also includes less obvious sources such as databases, queues, caches, feature flags, and internal services that can drift from their original contract.
+
+4
+00:00:26.500 --> 00:00:29.940
+A TypeScript interface describes what your code expects.
+
+5
+00:00:30.040 --> 00:00:32.920
+It does not validate what actually arrived at runtime.
+
+6
+00:00:33.020 --> 00:00:44.300
+If an API response is missing a field, if a database row contains old data, or if a package returns a value that no longer matches its documentation, the interface alone cannot protect the running program.
+
+7
+00:00:44.400 --> 00:00:49.440
+The JavaScript value exists independently of the type annotation.
+
+8
+00:00:49.720 --> 00:00:52.520
+Defensive programs identify trust boundaries.
+
+9
+00:00:52.620 --> 00:00:59.580
+A trust boundary is any point where data moves from a less controlled context into a more controlled one.
+
+10
+00:00:59.680 --> 00:01:07.760
+At that point, the program should convert unknown input into validated internal types, or reject it with a clear failure path.
+
+11
+00:01:07.860 --> 00:01:12.500
+This approach keeps the rest of the application from repeatedly guessing about shape and meaning.
+
+12
+00:01:12.780 --> 00:01:16.860
+Useful validation checks more than whether a property exists.
+
+13
+00:01:16.960 --> 00:01:26.240
+It may check shape, range, allowed values, encoding expectations, length limits, relationships between fields, and business rules.
+
+14
+00:01:26.340 --> 00:01:37.380
+A value can be technically shaped like a string and still be too long, empty when it must be present, not one of the allowed choices, or unsafe to use in a particular workflow.
+
+15
+00:01:37.660 --> 00:01:43.260
+Treating data as untrusted does not mean assuming malicious intent in every caller.
+
+16
+00:01:43.360 --> 00:01:45.840
+It means engineering for reality.
+
+17
+00:01:45.940 --> 00:01:52.100
+Systems change, callers make mistakes, deployments are imperfect, and data outlives code.
+
+18
+00:01:52.200 --> 00:02:00.360
+Defensive TypeScript makes those realities explicit so the program can respond predictably instead of letting uncertainty leak into unrelated business logic.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+Stack discipline is essential in memory-constrained C because stack use can grow quietly.
+
+2
+00:00:06.280 --> 00:00:17.240
+A function that looks harmless in isolation may call formatting code, validation helpers, error handlers, and driver wrappers that add more local storage and call depth than expected.
+
+3
+00:00:17.340 --> 00:00:20.780
+The risk is highest when unusual paths are not measured.
+
+4
+00:00:21.060 --> 00:00:28.500
+Stack sizing should consider normal paths, error paths, cleanup paths, and interrupt-like conditions.
+
+5
+00:00:28.600 --> 00:00:34.760
+A parser may use little stack for valid input but more stack when reporting malformed input.
+
+6
+00:00:34.860 --> 00:00:38.380
+A diagnostic function may allocate temporary formatting buffers.
+
+7
+00:00:38.480 --> 00:00:43.040
+A retry path may call code that the normal path does not.
+
+8
+00:00:43.320 --> 00:00:47.960
+Recursion is often risky because it makes stack use harder to bound.
+
+9
+00:00:48.060 --> 00:00:54.780
+Some algorithms can be rewritten iteratively or with an explicit bounded work queue.
+
+10
+00:00:54.880 --> 00:01:01.600
+If recursion is used, the maximum depth should be tied to a validated input limit and reviewed as part of the memory budget.
+
+11
+00:01:01.880 --> 00:01:04.440
+Large local objects need careful review.
+
+12
+00:01:04.540 --> 00:01:10.860
+A local array can be convenient, but it consumes stack every time the function is active.
+
+13
+00:01:10.960 --> 00:01:22.000
+If the object is large, long-lived, shared across calls, or required only for rare cases, static storage, caller-owned storage, or a controlled pool may be more predictable.
+
+14
+00:01:22.280 --> 00:01:28.440
+Interrupt stacks and task stacks need separate budgets in RTOS-like or device-facing systems.
+
+15
+00:01:28.540 --> 00:01:37.660
+A task stack sized for normal operation may not account for nested callbacks, interrupt preemption, logging, or library calls.
+
+16
+00:01:37.760 --> 00:01:41.280
+Each execution context should have a clear stack assumption.
+
+17
+00:01:41.560 --> 00:01:46.120
+Stack high-water marks and static analysis can help validate assumptions.
+
+18
+00:01:46.220 --> 00:01:52.140
+They should be used with tests that exercise worst-case messages, error handling, and configured features.
+
+19
+00:01:52.240 --> 00:02:00.560
+Reviewers should ask what the deepest call path is, what local objects exist on that path, and whether the measurement matches the release build.

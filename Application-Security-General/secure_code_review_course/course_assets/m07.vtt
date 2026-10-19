@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.060
+Error handling should help operators and developers diagnose problems without exposing sensitive internals to users.
+
+2
+00:00:07.160 --> 00:00:17.160
+Reviewers should look for raw exception details, stack traces, secrets, tokens, query fragments, or internal paths in user-facing responses.
+
+3
+00:00:17.260 --> 00:00:24.540
+At the same time, errors should not be swallowed so completely that failures become invisible.
+
+4
+00:00:24.640 --> 00:00:30.880
+Safe error handling separates useful operational detail from information that should not leave trusted logs.
+
+5
+00:00:31.160 --> 00:00:37.240
+Logging is security-relevant because logs often become long-lived, searchable, and widely accessible.
+
+6
+00:00:37.340 --> 00:00:44.300
+Safe logging avoids unnecessary secrets, tokens, regulated data, and sensitive personal information.
+
+7
+00:00:44.400 --> 00:00:54.800
+Audit events should capture important security actions such as login changes, permission changes, administrative activity, sensitive exports, and recovery events.
+
+8
+00:00:54.900 --> 00:01:01.460
+Log injection at a high level is also worth considering when untrusted data can alter how log entries are interpreted.
+
+9
+00:01:01.740 --> 00:01:06.300
+File handling and uploads create risk outside the main business logic.
+
+10
+00:01:06.400 --> 00:01:19.440
+Reviewers should check file size limits, type validation, content handling, storage location, path normalization, temporary file cleanup, malware scanning expectations, and downstream processing.
+
+11
+00:01:19.540 --> 00:01:25.380
+File names and metadata should not be trusted merely because they came from a browser or partner system.
+
+12
+00:01:25.480 --> 00:01:32.680
+A safe design treats uploaded content as data with constraints, not as trusted executable or parseable material.
+
+13
+00:01:32.960 --> 00:01:37.440
+External integrations add network and operational behavior to the code.
+
+14
+00:01:37.540 --> 00:01:48.660
+Outbound HTTP requests, third-party APIs, webhooks, retries, timeouts, rate limiting, and server-side request forgery concepts at a high level all matter.
+
+15
+00:01:48.760 --> 00:01:59.160
+Reviewers should ask whether destinations are constrained, secrets are protected, failures are handled safely, and retries cannot create unexpected side effects.
+
+16
+00:01:59.260 --> 00:02:03.340
+Integrations often create security issues far from the main feature code.

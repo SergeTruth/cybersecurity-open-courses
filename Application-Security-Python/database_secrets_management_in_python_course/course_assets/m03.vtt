@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.340
+Managed secret stores, cloud secret managers, operating system secret stores, and encrypted configuration systems all exist to reduce uncontrolled secret spread.
+
+2
+00:00:10.440 --> 00:00:22.440
+The exact product or platform may change, but the principle is stable: secrets should be stored in a system designed for access control, auditing, lifecycle management, and retrieval by authorized workloads.
+
+3
+00:00:22.540 --> 00:00:30.860
+Source code, images, shared local files, and general-purpose documentation systems are poor places for production database secrets.
+
+4
+00:00:31.140 --> 00:00:37.380
+Environment variables are common and can be useful, but they are not a complete secrets management strategy by themselves.
+
+5
+00:00:37.480 --> 00:00:48.680
+Depending on the platform, environment values may be visible through process inspection, crash dumps, logs, debugging tools, deployment manifests, or broad runtime access.
+
+6
+00:00:48.780 --> 00:00:58.620
+They are often better than hardcoding secrets, but teams should still control who can set them, who can read them, how they are rotated, and whether more managed storage is appropriate.
+
+7
+00:00:58.900 --> 00:01:02.020
+Environment separation is a major safety control.
+
+8
+00:01:02.120 --> 00:01:09.800
+Local development, testing, staging, and production should use separate database accounts and separate secrets.
+
+9
+00:01:09.900 --> 00:01:13.260
+Lower-trust environments should not grant production access.
+
+10
+00:01:13.360 --> 00:01:20.560
+Shared credentials across environments increase blast radius and make it harder to know which system used a credential.
+
+11
+00:01:20.660 --> 00:01:27.620
+Per-environment accounts also make monitoring and revocation more precise when a secret is exposed or a system is retired.
+
+12
+00:01:27.900 --> 00:01:29.500
+Safe defaults matter.
+
+13
+00:01:29.600 --> 00:01:38.880
+A missing database secret should lead to a clear, safe startup failure rather than falling back to a shared default, a local development password, or a privileged account.
+
+14
+00:01:38.980 --> 00:01:45.620
+Production database secrets should not be recoverable from source code, images, artifacts, or shared local files.
+
+15
+00:01:45.720 --> 00:01:53.240
+A secure design assumes configuration mistakes will happen and makes those mistakes visible before the application starts handling real data.

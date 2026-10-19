@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Log Integrity, Access, and Retention",
+  "narration": "Logs need protection because they may contain sensitive operational, user, and security information. Access should be limited to people and systems with a legitimate need. Developers may need application diagnostics, security teams may need investigation records, and auditors may need specific evidence. Those needs are real, but they do not require every person to see every field. Role-based access, field-level controls where available, and careful sharing practices reduce exposure.\n\nLog integrity means having confidence that records have not been improperly changed or deleted. Centralized logging helps because application servers do not become the only place records live. Append-oriented storage, protected audit trails, backups, restricted administrative access, and monitoring of logging pipeline failures all support integrity. The defensive goal is to make logs reliable enough for operations, investigation, and accountability. Teams should also monitor whether expected logs are being produced, because a silent logging failure can leave a major evidence gap.\n\nRetention is a policy decision. Logs should be kept long enough for operational troubleshooting, security investigation, legal, contractual, and compliance needs, but not collected or retained forever by default. Overcollection increases cost and risk. Encryption in transit and at rest, backup controls, retention schedules, deletion processes, and privacy reviews all belong in the logging design. A mature program treats logs as sensitive records with lifecycle management, not as a dumping ground.",
+  "graphicAlt": "Log protection combines limited access, integrity measures, pipeline monitoring and policy-based retention.",
+  "narrationPoints": [
+    "Logs need protection because they may contain sensitive operational, user, and security information.",
+    "Log integrity means having confidence that records have not been improperly changed or deleted.",
+    "Retention is a policy decision."
+  ]
+};

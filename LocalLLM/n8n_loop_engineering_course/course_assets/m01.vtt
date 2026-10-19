@@ -1,0 +1,129 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.060
+Reliable loop design in n8n starts with a simple mental model: an item is a unit of data moving through the workflow.
+
+2
+00:00:07.160 --> 00:00:16.520
+A trigger, database query, webhook, file reader, or API request may create one item, five items, or thousands of items.
+
+3
+00:00:16.620 --> 00:00:22.780
+Each item carries its own JSON data, and downstream nodes receive the list of items from the previous step.
+
+4
+00:00:22.880 --> 00:00:26.640
+In many workflows, that list is already the repetition mechanism.
+
+5
+00:00:26.740 --> 00:00:30.740
+The workflow does not need a visible loop just because there is more than one item.
+
+6
+00:00:31.020 --> 00:00:36.060
+Most n8n nodes are designed to process incoming items automatically.
+
+7
+00:00:36.160 --> 00:00:46.480
+If a workflow loads five customer records and then sends a notification, the notification node can receive five items and perform the configured operation for each item.
+
+8
+00:00:46.580 --> 00:00:53.460
+The canvas may show one notification node, but the execution can still contain five notification operations.
+
+9
+00:00:53.560 --> 00:01:01.240
+That distinction matters because the canvas shows the structure of the workflow, while the execution data shows how many items moved through that structure.
+
+10
+00:01:01.520 --> 00:01:05.520
+People with a programming background often reach for an explicit loop too early.
+
+11
+00:01:05.620 --> 00:01:13.140
+In source code, repeated work is commonly written with a for statement, a while statement, or a function called inside an iterator.
+
+12
+00:01:13.240 --> 00:01:17.960
+In n8n, repeated work may already be represented by multiple incoming items.
+
+13
+00:01:18.060 --> 00:01:22.700
+Adding a Loop Over Items node to force a familiar shape can make the workflow harder to read.
+
+14
+00:01:22.800 --> 00:01:31.360
+It also introduces loop state, return connections, completion paths, and new failure modes that did not exist in the simpler design.
+
+15
+00:01:31.640 --> 00:01:34.360
+A practical example makes the difference concrete.
+
+16
+00:01:34.460 --> 00:01:41.660
+Imagine a workflow that reads five customer records, formats a message for each record, and sends one update for each customer.
+
+17
+00:01:41.760 --> 00:01:46.640
+The correct design may be a straight path from the data source to the message node.
+
+18
+00:01:46.740 --> 00:01:51.620
+Each item carries its own customer name, destination address, and message fields.
+
+19
+00:01:51.720 --> 00:01:55.160
+The message node uses expressions that refer to the current item.
+
+20
+00:01:55.260 --> 00:02:04.300
+During execution, n8n evaluates those expressions for each incoming item, so every customer is handled separately without drawing a connection back to an earlier node.
+
+21
+00:02:04.580 --> 00:02:08.340
+The Execute Once setting is the important exception to keep in mind.
+
+22
+00:02:08.440 --> 00:02:15.880
+When Execute Once is enabled for a node, the node processes only the first input item instead of processing every item it receives.
+
+23
+00:02:15.980 --> 00:02:25.500
+That can be useful when a node should run a setup step, create one shared value, or perform an operation that must happen one time for the whole execution.
+
+24
+00:02:25.600 --> 00:02:32.800
+It should not be treated as a shortcut for performance, and it should not be enabled casually inside a workflow that is supposed to act on every item.
+
+25
+00:02:33.080 --> 00:02:36.280
+A careful review therefore begins in the execution data.
+
+26
+00:02:36.380 --> 00:02:45.580
+Count the items coming out of the source node, inspect a few representative JSON objects, and confirm that the downstream expressions refer to fields that exist on each item.
+
+27
+00:02:45.680 --> 00:02:54.960
+When the item count and shape already match the business action, the direct workflow is easier to explain and easier to recover than a manual loop built only from habit.
+
+28
+00:02:55.240 --> 00:02:59.480
+The first engineering rule is to inspect the input before choosing a loop pattern.
+
+29
+00:02:59.580 --> 00:03:06.140
+Look at the number of items, the fields on each item, and the operation each downstream node is expected to perform.
+
+30
+00:03:06.240 --> 00:03:10.320
+If ordinary item processing expresses the behavior, keep the workflow direct.
+
+31
+00:03:10.420 --> 00:03:17.540
+If a node offers native pagination or batching that exactly matches the API requirement, prefer that native feature.
+
+32
+00:03:17.640 --> 00:03:28.600
+Build an explicit loop only when the workflow needs controlled release of items, a repeated multi-node body, custom pacing, or a condition that changes as the workflow runs.

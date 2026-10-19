@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Session controls need tests because they are easy to break during ordinary application changes.
+
+2
+00:00:06.520 --> 00:00:27.560
+Useful tests include login and logout tests, session lifecycle tests, idle and absolute expiration tests, renewal tests, revocation tests, role-change tests, account-disable tests, password-change effects, MFA-reset effects, token validation tests, and CSRF-related tests at a high level.
+
+3
+00:00:27.660 --> 00:00:35.100
+Negative tests should confirm that missing, expired, malformed, or revoked session state is denied.
+
+4
+00:00:35.380 --> 00:00:45.380
+Code review should ask where authenticated state is created, where it is stored, how it is protected, how long it lasts, how it is renewed, and how it is invalidated.
+
+5
+00:00:45.480 --> 00:00:58.440
+Reviewers should check whether session state is minimized, whether cookie settings match the application model, whether token validation is centralized, and whether authorization is rechecked before sensitive actions.
+
+6
+00:00:58.540 --> 00:01:05.900
+The review should include APIs, background jobs, admin tools, and internal portals, not only the main login page.
+
+7
+00:01:06.180 --> 00:01:10.340
+Session logging should support investigation without exposing secrets.
+
+8
+00:01:10.440 --> 00:01:25.240
+Useful events include login, logout, session renewal, failed validation, revocation, account disablement effects, privileged session creation, unusual session activity, token validation failures, and changes to security settings.
+
+9
+00:01:25.340 --> 00:01:35.100
+Logs should avoid passwords, cookies, bearer tokens, refresh tokens, recovery secrets, and unnecessary personal or regulated data.
+
+10
+00:01:35.200 --> 00:01:41.280
+Correlation identifiers can help connect session events across services without dumping sensitive values.
+
+11
+00:01:41.560 --> 00:01:45.720
+Monitoring turns session events into operational awareness.
+
+12
+00:01:45.820 --> 00:01:58.540
+Unusual session activity, repeated failed validations, unexpected refresh patterns, privileged session events, account recovery followed by sensitive actions, or activity after disablement may deserve attention.
+
+13
+00:01:58.640 --> 00:02:06.560
+Incident response readiness depends on knowing how to invalidate sessions, trace session activity, preserve useful evidence, and communicate impact.
+
+14
+00:02:06.660 --> 00:02:13.220
+Session management should be tested and monitored as the application evolves, not only during initial implementation.

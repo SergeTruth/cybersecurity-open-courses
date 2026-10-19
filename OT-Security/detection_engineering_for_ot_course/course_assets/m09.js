@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "OT detection combines evidence, context, useful logic, safe validation and shared operational ownership for better decisions.",
+  "narration": "OT detection engineering turns telemetry and process knowledge into useful defensive signals. It is a lifecycle discipline: define a meaningful use case, understand the environment and evidence, write logic, validate safely, deploy with ownership, tune from results, maintain through change, and retire detections that no longer serve their purpose.\n\nEffective detections depend on accurate asset identity, architecture, communication paths, protocol behavior, and process context. Network, endpoint, historian, identity, remote-access, firewall, and controller records each contribute part of the picture, with documented limitations and blind spots.\n\nBaselines describe expected devices, roles, timing, commands, and operating modes. Anomalies reveal change but do not prove malicious activity. Maintenance, equipment faults, and authorized engineering can look unusual, so operator and engineering collaboration is essential to reduce false positives and interpret consequence.\n\nValidation must protect safety and reliability. Use isolated tests, record review, tabletop analysis, engineering review, and passive production observation before considering any active method. Tune detections for evidence quality, investigation value, and safe action rather than maximum alert volume.\n\nA mature program documents ownership, versions, metrics, coverage, runbooks, and retirement. Its goal is trustworthy, actionable visibility that supports safe and reliable operations. More alerts are not the product. Better decisions, made with defensible evidence and operational collaboration, are.",
+  "narrationPoints": [
+    "OT detection engineering turns telemetry and process knowledge into useful defensive signals.",
+    "It is a lifecycle discipline: define a meaningful use case, understand the environment and evidence, write logic, validate safely, deploy with ownership, tune from...",
+    "Effective detections depend on accurate asset identity, architecture, communication paths, protocol behavior, and process context.",
+    "Network, endpoint, historian, identity, remote-access, firewall, and controller records each contribute part of the picture, with documented limitations and blind spots.",
+    "Baselines describe expected devices, roles, timing, commands, and operating modes.",
+    "Anomalies reveal change but do not prove malicious activity."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Security Goals and Threat Models",
+  "graphicAlt": "Stored and transmitted data are reviewed at their trust boundaries to choose confidentiality, integrity, authenticity and replay protections.",
+  "narration": "Cryptographic decisions should begin with security goals. Confidentiality protects information from unauthorized disclosure. Integrity helps detect whether data has been changed unexpectedly. Authenticity helps establish who or what produced a message, key, connection, or token. Non-repudiation at a high level is about evidence that a party signed or approved something in a way they cannot easily deny. Replay resistance helps prevent an old valid message from being accepted again in the wrong context.\n\nData at rest and data in transit have different needs. Data at rest may be files, database fields, backups, logs, object storage, or local caches. Data in transit may be browser traffic, API calls, service-to-service requests, webhook deliveries, or queue messages. A design that protects a stored backup may not be the same design that protects an API request. The same algorithm can be appropriate in one context and inappropriate in another because the surrounding protocol and key handling are different.\n\nThreat modeling helps clarify attacker capabilities at a high level. Can an attacker read storage? Modify messages? Observe network traffic? Replay old requests? Access logs? Obtain a development backup? Influence configuration? Call an internal service? Each possibility changes what protection is needed. Trust boundaries also matter. A value from a trusted key manager is different from a value in a client request. A token from a validated issuer is different from a string supplied by a browser.\n\nThreat modeling does not need to be elaborate to be useful. Before choosing crypto, identify the data, sensitivity, boundary, likely misuse, key exposure impact, and operational failure mode. Ask what should happen if keys rotate, certificates expire, a token is replayed, or a service is misconfigured. These questions prevent crypto from becoming decoration. They connect the cryptographic control to the risk the application actually faces.",
+  "narrationPoints": [
+    "Cryptographic decisions should begin with security goals.",
+    "Data at rest and data in transit have different needs.",
+    "Threat modeling helps clarify attacker capabilities at.",
+    "Threat modeling does not need to be elaborate to be useful.",
+    "Ask what should happen if keys rotate.",
+    "Confidentiality protects information from unauthorized."
+  ]
+};

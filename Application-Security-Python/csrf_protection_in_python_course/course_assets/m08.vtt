@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+CSRF protection should be tested as part of normal application quality.
+
+2
+00:00:05.160 --> 00:00:18.280
+Reviewers should identify state-changing routes, confirm that framework middleware or equivalent protection applies, and verify that missing, invalid, or expired tokens are rejected before action.
+
+3
+00:00:18.380 --> 00:00:26.460
+The inventory should include forms, admin actions, settings pages, JavaScript routes, and session-bound API endpoints.
+
+4
+00:00:26.740 --> 00:00:30.500
+Testing should focus on safe defensive cases.
+
+5
+00:00:30.600 --> 00:00:34.680
+The goal is not to build attack pages or teach abuse.
+
+6
+00:00:34.780 --> 00:00:47.660
+The goal is to confirm that protected routes require the expected token or equivalent control, that the failure path does not perform the action, and that newly added custom routes do not bypass the established framework protection.
+
+7
+00:00:47.940 --> 00:00:58.500
+Logging should record rejected CSRF validation events at a useful level without exposing raw token values, secrets, sensitive request bodies, or unnecessary personal data.
+
+8
+00:00:58.600 --> 00:01:05.720
+A log entry can identify the route, high-level failure reason, timestamp, and safe request context.
+
+9
+00:01:05.820 --> 00:01:11.180
+It should help defenders investigate misconfiguration without creating a sensitive data leak.
+
+10
+00:01:11.460 --> 00:01:16.900
+Monitoring can identify unusual rejection patterns, misconfiguration, or regressions.
+
+11
+00:01:17.000 --> 00:01:25.080
+A sudden spike in token failures may indicate a broken frontend release, expired session behavior, proxy issue, or suspicious activity.
+
+12
+00:01:25.180 --> 00:01:35.740
+Regression tests are especially valuable because CSRF gaps often appear when a team adds a custom form, admin route, or API endpoint outside the standard path.

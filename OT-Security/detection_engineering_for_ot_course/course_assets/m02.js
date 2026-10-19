@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Understanding the OT Environment",
+  "graphicAlt": "OT asset roles, owners, communication paths and dependencies provide detection context, with blind spots documented.",
+  "narration": "OT detection begins with an accurate understanding of the environment. Asset inventory should identify systems, owners, locations, functions, criticality, software or firmware where known, and expected communication. An address without operational identity is weak detection context.\n\nA Purdue-style view can organize field, control, supervisory, site-operations, industrial-DMZ, and enterprise functions. The model is a reference, not a substitute for the real architecture. Document zones, conduits, serial and wireless paths, vendor connections, and services that cross boundaries.\n\nPLCs and RTUs execute or support control. HMIs and SCADA platforms give operators process visibility and supervisory authority. Historians preserve process data. Engineering workstations contain privileged programming tools. Remote-access systems connect support personnel to selected assets. Each role produces different evidence and different consequences.\n\nMap detection use cases to critical assets and communication paths. An unexpected peer is more meaningful when the detection knows it contacted a controller, crossed an industrial DMZ, or used an engineering pathway. Asset function and process ownership also determine who should validate the alert.\n\nArchitecture reveals dependencies and blind spots. A sensor may not be visible on IP networks, a gateway may hide serial devices, and a central historian may represent many sites. A detection that assumes complete network visibility can produce false confidence.\n\nKeep context current through change control and collaboration. Operations and engineering teams can explain maintenance patterns, redundancy, control modes, and safe escalation. Detection engineers translate that knowledge into asset enrichment, expected behavior, and response guidance that analysts can use under pressure.",
+  "narrationPoints": [
+    "OT detection begins with an accurate understanding of the environment.",
+    "Asset inventory should identify systems, owners, locations, functions, criticality, software or firmware where known, and expected communication.",
+    "An address without operational identity is weak detection context.",
+    "A Purdue-style view can organize field, control, supervisory, site-operations, industrial-DMZ, and enterprise functions.",
+    "The model is a reference, not a substitute for the real architecture.",
+    "Document zones, conduits, serial and wireless paths, vendor connections, and services that cross boundaries."
+  ]
+};

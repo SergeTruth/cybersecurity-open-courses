@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "IPC Validation and Authorization",
+  "graphicAlt": "Privileged-side message validation and caller/action/target authorization precede every sensitive action.",
+  "narration": "Inter-process communication is a trust boundary. A privileged helper cannot assume a request is safe simply because it arrived through the expected channel. Messages need clear schemas, versioning, length limits, type checks, caller identity where available, and authorization rules that match the operation being requested.\n\nThe privileged side should validate all inputs independently, even when the low-privilege client already performed validation. Client-side validation improves user experience, but boundary-side validation protects the authority. The helper should check command names, allowed values, paths, handles, sizes, operation modes, and state transitions before acting.\n\nAuthorization belongs where the authority exists. The broker or helper should decide whether the caller may perform the requested action on the requested target at the requested time. That decision may depend on platform identity, session context, user approval, policy settings, resource ownership, or deployment configuration.\n\nError responses should be safe and useful. They can tell the client that a request was denied, malformed, unsupported, or temporarily unavailable without exposing secrets, internal paths, privileged state, or unnecessary implementation details. Consistent errors also help clients handle failure without guessing.\n\nIPC contracts should be treated as stable interfaces. Adding a new command, field, or version changes the privileged surface, so it deserves design review, compatibility tests, negative tests, and operational documentation.",
+  "narrationPoints": [
+    "Messages need clear schemas, versioning, length limits, type checks, caller identity where available, and authorization rules that match the operation being requested.",
+    "Client-side validation improves user experience, but boundary-side validation protects the authority.",
+    "The privileged side should validate all inputs independently, even when the low-privilege client already performed validation.",
+    "The broker or helper should decide whether the caller may perform the requested action on the requested target at the requested time.",
+    "Consistent errors also help clients handle failure without guessing.",
+    "Adding a new command, field, or version changes the privileged surface, so it deserves design review, compatibility tests, negative tests, and operational documentation."
+  ]
+};

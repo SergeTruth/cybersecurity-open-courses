@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Secrets handling is a high-value review area.
+
+2
+00:00:03.560 --> 00:00:14.040
+Reviewers should look for hardcoded API keys, credentials, tokens, connection strings, private keys, and secrets committed to configuration files or tests.
+
+3
+00:00:14.140 --> 00:00:22.860
+They should also check whether secrets are logged, returned in errors, exposed through diagnostics, or copied into places with broader access.
+
+4
+00:00:22.960 --> 00:00:28.640
+Secret storage and rotation concepts should be visible in the design, not improvised later.
+
+5
+00:00:28.920 --> 00:00:35.240
+Cryptography should usually rely on vetted libraries, approved algorithms, and established platform patterns.
+
+6
+00:00:35.340 --> 00:00:41.900
+Custom cryptography is a review concern because it may be incorrectly designed or implemented in ways that are difficult to validate.
+
+7
+00:00:42.000 --> 00:00:53.920
+Reviewers should distinguish approved cryptographic use from homegrown encoding, reversible transformations, weak randomness, hardcoded keys, or unclear key management.
+
+8
+00:00:54.200 --> 00:00:57.800
+Password handling deserves specific attention at a high level.
+
+9
+00:00:57.900 --> 00:01:03.340
+Passwords should not be stored in plaintext, encrypted for later recovery, or logged.
+
+10
+00:01:03.440 --> 00:01:09.840
+Password hashing should use a purpose-built password hashing approach with appropriate configuration and upgrade paths.
+
+11
+00:01:09.940 --> 00:01:19.540
+Account recovery and password reset flows should be reviewed alongside password storage because weak recovery can undermine strong storage.
+
+12
+00:01:19.820 --> 00:01:27.820
+Data protection includes minimization, storage, transport, logging, backups, and export paths.
+
+13
+00:01:27.920 --> 00:01:36.560
+Sensitive data should be collected only when needed, protected in transit and at rest where appropriate, and omitted from logs unless there is a clear and controlled reason.
+
+14
+00:01:36.660 --> 00:01:46.580
+Reviewers should ask where sensitive data lives, who can read it, how long it remains, and whether backup or export flows preserve the same protections as the primary application.

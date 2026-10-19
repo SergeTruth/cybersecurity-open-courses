@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Permission boundaries should be tested with realistic user and tenant scenarios.
+
+2
+00:00:04.840 --> 00:00:09.960
+A happy-path test that confirms the right user can retrieve the right content is not enough.
+
+3
+00:00:10.060 --> 00:00:21.740
+Teams also need negative tests for users without access, revoked access, stale indexes, deleted documents, missing metadata, mixed sources, and cross-tenant requests.
+
+4
+00:00:22.020 --> 00:00:26.020
+Access revocation is a particularly important failure mode.
+
+5
+00:00:26.120 --> 00:00:34.360
+If a user leaves a group or a document is restricted, related chunks and index records should stop appearing in future results.
+
+6
+00:00:34.460 --> 00:00:41.340
+Deleted-document tests confirm that removed content no longer participates in retrieval or citations.
+
+7
+00:00:41.440 --> 00:00:47.760
+Missing-metadata tests confirm that records fail closed when the system cannot make a safe permission decision.
+
+8
+00:00:48.040 --> 00:00:53.480
+Audit logs should help teams reconstruct what happened without storing more sensitive data than necessary.
+
+9
+00:00:53.580 --> 00:01:08.700
+Useful records may include request identity, tenant, policy version, retrieval filters, source identifiers, allowed source references, excluded source counts, response provenance, and operational correlation IDs.
+
+10
+00:01:08.800 --> 00:01:13.760
+Raw sensitive text should be logged only when there is a deliberate governed need.
+
+11
+00:01:14.040 --> 00:01:17.160
+Reviews should look beyond the main answer path.
+
+12
+00:01:17.260 --> 00:01:26.380
+Caches, debug logs, traces, exports, transcripts, analytics, admin views, and summaries can all become leakage paths.
+
+13
+00:01:26.480 --> 00:01:32.160
+Incident readiness matters because RAG permission mistakes can be hard to reconstruct after the fact.
+
+14
+00:01:32.260 --> 00:01:42.580
+Teams need enough evidence to understand impact, correct data, notify owners, and improve tests without creating a second data exposure through excessive logging.

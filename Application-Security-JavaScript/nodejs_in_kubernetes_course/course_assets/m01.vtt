@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+A Node.js API can feel production-ready when it runs locally and passes a few Docker-based tests.
+
+2
+00:00:06.760 --> 00:00:09.800
+The shift to Kubernetes changes the operating model.
+
+3
+00:00:09.900 --> 00:00:16.060
+The application is no longer just a process started by a developer or a single container launched by hand.
+
+4
+00:00:16.160 --> 00:00:28.480
+It becomes a workload scheduled by a cluster, restarted by controllers, reached through Services and routing layers, configured by manifests, and observed through logs, metrics, events, and alerts.
+
+5
+00:00:28.580 --> 00:00:35.300
+That extra machinery is powerful, but it also exposes any weak assumptions in the application and its deployment configuration.
+
+6
+00:00:35.580 --> 00:00:51.500
+A common first deployment story is familiar: the container starts on a laptop, but in the cluster it fails because an environment variable is missing, a port is wrong, a database connection takes longer than expected, the readiness probe sends traffic too early, or the process exits badly during rollout.
+
+7
+00:00:51.600 --> 00:01:01.520
+Kubernetes can schedule, restart, expose, scale, and replace Pods, but it depends on accurate signals from the container and clear intent in the manifests.
+
+8
+00:01:01.620 --> 00:01:12.100
+If the application does not start predictably, listen on the expected port, handle termination, or report health honestly, Kubernetes will automate the wrong behavior very efficiently.
+
+9
+00:01:12.380 --> 00:01:18.300
+For Node.js teams, production quality in Kubernetes depends on several connected decisions.
+
+10
+00:01:18.400 --> 00:01:21.120
+The image must contain the right runtime and dependencies.
+
+11
+00:01:21.220 --> 00:01:26.180
+The Deployment must describe how many copies should run and how they should be replaced.
+
+12
+00:01:26.280 --> 00:01:29.800
+Configuration and secrets must be delivered safely.
+
+13
+00:01:29.900 --> 00:01:34.380
+Resource requests and limits must match measured behavior.
+
+14
+00:01:34.480 --> 00:01:38.640
+Probes must distinguish startup, readiness, and liveness.
+
+15
+00:01:38.740 --> 00:01:42.340
+Network exposure must match the real service boundary.
+
+16
+00:01:42.440 --> 00:01:49.320
+Logs, metrics, traces, and events must help operators understand what the service is doing when something changes.
+
+17
+00:01:49.600 --> 00:01:52.400
+The goal is not merely to run Node in a cluster.
+
+18
+00:01:52.500 --> 00:01:59.780
+The goal is to operate a service that is deployable, observable, recoverable, and safe to change.
+
+19
+00:01:59.880 --> 00:02:03.240
+Kubernetes does not create operational maturity by itself.
+
+20
+00:02:03.340 --> 00:02:08.700
+It gives teams a vocabulary and a control plane for expressing operational intent.
+
+21
+00:02:08.800 --> 00:02:17.840
+This course walks through the decisions that make a Node.js service communicate that intent clearly, so releases are less surprising and incidents are easier to diagnose.

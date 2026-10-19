@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Designing Low-Privilege Application Cores",
+  "graphicAlt": "The core prepares structured intent while the authority boundary independently decides and executes the permitted operation.",
+  "narration": "The safest default is for the main application, user interface, or ordinary service logic to run with ordinary permissions. Low-privilege code can parse input, display UI, prepare requests, validate basic user intent, handle non-sensitive workflow steps, and report errors. It should not gain broad authority simply because a user clicked a button or opened a file.\n\nThis design reduces the consequences of routine defects. A parsing error, rendering issue, plugin problem, or UI mistake should not automatically become a protected file change or service configuration update. The low-privilege core should be able to say what it wants done, but the privileged boundary should decide whether the action is allowed.\n\nLow-privilege components still need strong engineering. They should validate input before building requests, preserve clear state, handle cancellation, and avoid collecting secrets they do not need. They should also avoid embedding privileged assumptions in presentation code. A clean request model makes it easier for helpers and brokers to verify intent.\n\nWhen privileged work is required, the low-privilege component should request a narrow operation through a controlled boundary. The request should name the action, the target resource, the caller context, and any validated parameters. The boundary should then authorize and execute only the approved operation.\n\nGood low-privilege design also improves testing. Teams can exercise most workflows without special rights and reserve focused tests for the small boundary where authority is actually held. That keeps the architecture understandable and the privileged surface easier to review.",
+  "narrationPoints": [
+    "Low-privilege code can parse input, display UI, prepare requests, validate basic user intent, handle non-sensitive workflow steps, and report errors.",
+    "A parsing error, rendering issue, plugin problem, or UI mistake should not automatically become a protected file change or service configuration.",
+    "The low-privilege core should be able to say what it wants done, but the privileged boundary should decide whether the action is allowed.",
+    "A clean request model makes it easier for helpers and brokers to verify intent.",
+    "The request should name the action, the target resource, the caller context, and any validated parameters.",
+    "Teams can exercise most workflows without special rights and reserve focused tests for the small boundary where authority is actually held."
+  ]
+};

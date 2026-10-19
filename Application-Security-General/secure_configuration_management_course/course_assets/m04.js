@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Secrets, Sensitive Values, and Environment Separation",
+  "narration": "Secrets should be separated from ordinary configuration. API keys, tokens, passwords, certificates, private keys, connection strings, and service account credentials need stronger storage, access control, auditing, rotation, and exposure response than non-sensitive settings. A feature flag and a database password should not live in the same unmanaged file with the same access rules.\n\nSecret managers provide a better pattern for production systems because scripts and services can request secrets at runtime under a controlled identity. The configuration can reference a secret name or vault path without storing the secret value itself. This helps keep sensitive material out of repositories, container images, deployment artifacts, crash dumps, logs, and configuration bundles.\n\nLocal development still needs discipline. Developers may need test credentials, local certificates, or sandbox tokens, but those values should not be committed or copied into production configuration. .env files, JSON files, profile scripts, container override files, and sample configuration should be clearly separated from deployable production settings. Repository hygiene and secret scanning help catch mistakes before they spread.\n\nEnvironment-specific settings should be explicit. Production, staging, test, and local development may use different endpoints, credentials, feature flags, and logging levels, but the mechanism should be deliberate and reviewable. Secure environment separation prevents a test identity from reaching production data, a production secret from appearing in a local file, or a development exception from silently shipping to users.",
+  "graphicAlt": "Configuration references a protected secret service, and environment identities stay deliberately separated.",
+  "narrationPoints": [
+    "Secrets should be separated from ordinary configuration.",
+    "Secret managers provide a better pattern for production systems because scripts and services can request secrets at runtime under a controlled identity.",
+    "Local development still needs discipline.",
+    "Environment-specific settings should be explicit."
+  ]
+};

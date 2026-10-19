@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Conditional Access and Risk-Based Authentication",
+  "narration": "Conditional access means authentication and session policy can change based on context. Useful signals may include device posture, location, network context, user risk, sign-in risk, application sensitivity, and whether the user is attempting a privileged action. The goal is not to make login unpredictable. The goal is to apply stronger checks when the request has higher risk or higher impact.\n\nStep-up authentication is a common pattern. A user may sign in normally for low-risk work, then be asked for stronger proof when accessing a sensitive application, changing security settings, or performing an administrative action. Session controls can limit how long access lasts, require reauthentication, or restrict behavior based on device or risk posture. These controls should support the business process rather than surprise users without explanation.\n\nExceptions and break-glass accounts require discipline. Every organization needs a way to maintain business continuity if the normal identity system or MFA method has a problem. Those accounts should be few, highly protected, monitored, documented, and tested. Exceptions for users, devices, locations, or applications should have owners and expiration dates. Otherwise, conditional access gradually becomes a collection of permanent bypasses.\n\nRisk-based authentication must be transparent to operators. Policies should be documented, reviewed, tested before broad rollout, and monitored after deployment. Support teams need to know why users are challenged or blocked. Security teams need logs and alerts that explain policy outcomes. The balance is usability, security, business continuity, and operational support, not one control turned up until work stops.",
+  "graphicAlt": "Context policies choose normal access, stronger proof or denial, with governed continuity exceptions.",
+  "narrationPoints": [
+    "Conditional access means authentication and session policy can change based on context.",
+    "Step-up authentication is a common pattern.",
+    "Exceptions and break-glass accounts require discipline.",
+    "Risk-based authentication must be transparent to operators."
+  ]
+};

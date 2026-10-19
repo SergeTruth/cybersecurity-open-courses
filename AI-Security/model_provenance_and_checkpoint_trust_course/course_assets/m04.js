@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Checkpoint Formats and Serialization Risk",
+  "graphicAlt": "Controlled intake reviews format, companion files and loading behavior, while conversion preserves source-to-output lineage.",
+  "narration": "Checkpoints can appear in different formats depending on the framework, conversion process, fine-tuning toolchain, quantization workflow, and deployment target. A model package may also include tokenizer files, configuration files, adapter weights, metadata, scripts, or runtime dependencies. Format decisions therefore belong in the trust discussion.\n\nAt a defensive level, the important point is that not every format has the same loading behavior. Some serialization formats can represent more than simple tensor data, and that complexity requires careful handling. Teams should avoid casually loading unfamiliar checkpoint files on sensitive machines, shared infrastructure, or production hosts.\n\nSafer tensor-focused formats are preferred when they fit the workflow because they reduce unnecessary loading risk and make artifact contents easier to reason about. This does not remove the need for provenance, integrity checks, evaluation, or access control, but it narrows one part of the intake risk.\n\nConversion should be treated as a controlled transformation, not a casual cleanup step. The record should include inputs, outputs, tool names, tool versions, settings, environment, person or job responsible, and verification steps. A converted artifact should not lose the lineage of the source checkpoint.\n\nThe safe habit is to know what kind of artifact is being loaded before allowing it into an operational environment. If the team cannot explain the format, source, companion files, conversion path, and intended loader, the checkpoint should remain in a controlled intake path until the evidence is complete enough.",
+  "narrationPoints": [
+    "Checkpoints can appear in different formats depending on the framework, conversion process, fine-tuning toolchain, quantization workflow, and...",
+    "At a defensive level, the important point is that not every format has the same loading behavior.",
+    "Safer tensor-focused formats are preferred when they fit the workflow because they reduce unnecessary loading risk and make artifact contents...",
+    "Conversion should be treated as a controlled transformation, not a casual cleanup step.",
+    "The safe habit is to know what kind of artifact is being loaded before allowing it into an operational environment."
+  ]
+};

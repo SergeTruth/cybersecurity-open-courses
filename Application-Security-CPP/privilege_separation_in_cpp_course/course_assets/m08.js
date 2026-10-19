@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Sandboxing, Capabilities, and Platform Controls",
+  "graphicAlt": "Platform capabilities and access policies enforce operation-specific limits while application validation and platform tests remain necessary.",
+  "narration": "Operating systems provide different mechanisms for enforcing privilege separation. Depending on the platform and application type, teams may use sandboxing, service accounts, capabilities, entitlements, process isolation, job objects, restricted tokens, containers, filesystem permissions, brokered APIs, or mandatory access controls. These controls can enforce boundaries even when application code has defects.\n\nPlatform controls should match the operation being performed. A renderer might need file and network restrictions. A service might need a dedicated account with only specific directories available. A worker might need a small set of capabilities instead of broad administrative rights. Applying controls as vague hardening is less useful than mapping each control to a clear operation and risk.\n\nBehavior differs across Windows, Linux, macOS, mobile, embedded, and containerized environments. Names, permission models, inheritance behavior, service identities, filesystem rules, and available sandbox features vary. A design that is safe on one platform may need adjustment on another. Platform assumptions should be documented and tested.\n\nSecurity should be enforced where the platform can help, not only by comments or convention. If a helper should not access a directory, the operating system configuration should ideally reflect that. If a worker does not need network access, the environment should make that limitation real where practical.\n\nPlatform controls work best alongside application-level validation. The OS can limit broad categories of access, while the broker still validates requests, authorizes callers, and records safe audit information. Together they provide layered defense.",
+  "narrationPoints": [
+    "Depending on the platform and application type, teams may use sandboxing, service accounts, capabilities, entitlements, process isolation, job.",
+    "Applying controls as vague hardening is less useful than mapping each control to a clear operation and risk.",
+    "Names, permission models, inheritance behavior, service identities, filesystem rules, and available sandbox features vary.",
+    "A design that is safe on one platform may need adjustment on another.",
+    "Security should be enforced where the platform can help, not only by comments or convention.",
+    "The OS can limit broad categories of access, while the broker still validates requests, authorizes callers, and records safe audit information."
+  ]
+};

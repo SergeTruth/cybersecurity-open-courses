@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Retrieval-time authorization is a core security control in permission-aware RAG.
+
+2
+00:00:07.000 --> 00:00:13.800
+The system should filter candidates using the current caller's permissions before any retrieved text enters the model context.
+
+3
+00:00:13.900 --> 00:00:20.860
+Once sensitive content is placed into the prompt or context window, the system has already crossed an important boundary.
+
+4
+00:00:21.140 --> 00:00:30.500
+The retriever should apply tenant, project, repository, document, classification, and ACL filters based on trusted request context.
+
+5
+00:00:30.600 --> 00:00:36.120
+It should also handle deleted, deprecated, stale, or incomplete records.
+
+6
+00:00:36.220 --> 00:00:42.940
+If a record lacks the metadata required to make a confident permission decision, deny-by-default behavior is safer than guessing.
+
+7
+00:00:43.040 --> 00:00:46.640
+Ambiguity should lead to exclusion, not exposure.
+
+8
+00:00:46.920 --> 00:00:50.840
+Ranking should not reintroduce content that policy already excluded.
+
+9
+00:00:50.940 --> 00:00:57.900
+In a well-designed pipeline, authorization decisions constrain the candidate set before relevance ranking selects the best allowed results.
+
+10
+00:00:58.000 --> 00:01:00.720
+This keeps relevance from competing against policy.
+
+11
+00:01:00.820 --> 00:01:07.460
+It also makes the system easier to reason about during review: first decide what is allowed, then decide what is useful.
+
+12
+00:01:07.740 --> 00:01:13.420
+Retrieval logs should support investigation without leaking the content they are meant to protect.
+
+13
+00:01:13.520 --> 00:01:23.440
+Teams may need to know which source identifiers were allowed, which policy checks applied, and why a result was excluded, but they do not always need raw chunk text in logs.
+
+14
+00:01:23.540 --> 00:01:30.980
+Permission checks should be tested like core application logic because retrieval is the point where private source material becomes model context.

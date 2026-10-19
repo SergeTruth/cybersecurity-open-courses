@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Remote Administration and Fleet Operations",
+  "narration": "PowerShell remoting lets administrators operate across systems without logging into each machine manually. At a high level, remoting commonly relies on WinRM, authenticated sessions, and commands sent to one or more target hosts. It is powerful because it turns one script into a fleet operation. That same power creates risk when permissions, scope, error handling, or logging are weak.\n\nFan-out risk is the central concern. A mistaken command that affects one workstation is a local issue. The same mistake run across hundreds of servers can become an outage. Remote scripts should require clear target selection, support throttling, record host-level results, and avoid unnecessary administrator-wide execution. Operators should be able to see which systems were targeted, which systems were reached, and what happened on each one.\n\nLeast privilege applies strongly to remote administration. Just Enough Administration is a useful concept because it limits what remote operators can do to the tasks they actually need. Even when full JEA design is outside the scope of a small script, the principle still matters: do not use more privilege than the work requires, and do not make broad administrative access the default path for routine reporting.\n\nAuditable remote operations need consistent records. A useful script logs the command purpose, operator identity where available, target list, start and end times, success and failure status, and error categories. It should also handle partial failure gracefully. In fleet work, partial success is normal. Good automation helps administrators understand the state of the fleet instead of hiding complexity behind a single pass or fail message.",
+  "graphicAlt": "Explicit targets, limited remote authority and throttling produce auditable per-host results even with partial failure.",
+  "narrationPoints": [
+    "PowerShell remoting lets administrators operate across systems without logging into each machine manually.",
+    "Fan-out risk is the central concern.",
+    "Least privilege applies strongly to remote administration.",
+    "Auditable remote operations need consistent records."
+  ]
+};

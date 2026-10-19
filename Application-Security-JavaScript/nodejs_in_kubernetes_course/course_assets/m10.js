@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "Everyday deployment review keeps images, configuration, resources, lifecycle, access and operational response current.",
+  "narration": "Running Node.js in Kubernetes responsibly starts before the first manifest is applied. Build a clean production image with a predictable startup command, repeatable dependency installation, a clear runtime user, and no accidental local files or secrets. Use Deployments for stateless replicated services when that model fits. Connect Pods, Services, and Ingress through labels, selectors, ports, and routing rules that are simple enough to review and debug.\n\nConfiguration should be explicit and secrets should be protected. Use ConfigMaps for non-sensitive settings and Secrets or approved secret-delivery mechanisms for sensitive values. Validate required environment variables at startup and fail clearly when critical values are missing or unsafe. Avoid logging full environment data, authorization headers, cookies, tokens, private URLs, or configuration objects that contain secrets. Kubernetes can deliver configuration, but the application must still handle it safely.\n\nOperational behavior is equally important. Set resource requests and limits based on measurement. Define readiness, liveness, and startup probes with clear intent. Handle SIGTERM so rollouts and node maintenance do not drop work unnecessarily. Harden the workload with non-root execution, limited privilege, narrow service-account permissions, and security context settings that match the service. Observe production behavior through structured logs, metrics, traces, Kubernetes events, alerts, and runbooks.\n\nA practical first-week improvement plan is straightforward. Review the Dockerfile and .dockerignore. Check Deployment and Service selectors. Add startup validation. Define or repair probes. Set initial requests and limits from test or production data. Verify graceful shutdown. Restrict service account permissions. Review how secrets enter the Pod. Add basic logs and metrics if they are missing. Finally, make Kubernetes deployment review part of pull requests, CI/CD, release management, and incident response so these controls stay current as the service changes.",
+  "narrationPoints": [
+    "Configuration should be explicit and secrets should.",
+    "Operational behavior is equally important.",
+    "A practical first-week improvement plan is straightforward.",
+    "Use Deployments for stateless replicated services.",
+    "Connect Pods, Services, and Ingress through labels.",
+    "Use ConfigMaps for non-sensitive settings and Secrets."
+  ]
+};

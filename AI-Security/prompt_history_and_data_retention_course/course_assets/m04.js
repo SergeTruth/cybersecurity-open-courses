@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Retention Policy Design",
+  "graphicAlt": "Purpose-specific retention categories are minimized and checked against actual settings, jobs and backup behavior.",
+  "narration": "A retention policy turns a vague intention into an operational rule. For prompt history, the policy should state what is collected, why it is collected, how long each category is kept, who owns the decision, which systems are in scope, and what exceptions apply. It should cover visible conversations, hidden metadata, logs, exports, backups, evaluation records, and derived datasets.\n\nRetention should be tied to purpose. User continuity may justify one window. Debugging may justify a shorter technical window. Security monitoring, legal obligations, records rules, product quality review, billing, or compliance may justify different windows. When purposes differ, teams should avoid collapsing everything into the longest possible retention period. Separate categories make it easier to keep useful records without keeping unnecessary content forever.\n\nIndefinite retention because storage is cheap is a risky default. Stored prompt history can expand access risk, discovery obligations, privacy impact, breach exposure, and deletion complexity. A good policy asks whether the same goal can be met with less content, shorter storage, aggregation, redaction, sampling, or metadata instead of full prompt and response text.\n\nThe policy also has to match real system behavior. Product settings, database jobs, log pipelines, analytics retention, observability tools, backup rotation, vendor settings, and manual exports should all align with the stated rule. A policy that cannot be implemented, tested, or audited will not protect users or the organization. The practical goal is a retention design that is documented, technically enforceable, reviewed regularly, and clear enough for engineering, security, privacy, legal, support, and product teams to follow.",
+  "narrationPoints": [
+    "A retention policy turns a vague intention into an operational rule.",
+    "Retention should be tied to purpose.",
+    "Indefinite retention because storage is cheap is a risky default.",
+    "The policy also has to match real system behavior."
+  ]
+};

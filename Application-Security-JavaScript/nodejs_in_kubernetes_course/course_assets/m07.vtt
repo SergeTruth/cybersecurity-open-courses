@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+A useful way to reason about Kubernetes networking is to follow a request.
+
+2
+00:00:04.680 --> 00:00:10.440
+A client reaches an ingress controller, gateway, load balancer, or reverse proxy.
+
+3
+00:00:10.540 --> 00:00:13.340
+That routing layer forwards traffic to a Service.
+
+4
+00:00:13.440 --> 00:00:16.720
+The Service selects ready Pods using labels.
+
+5
+00:00:16.820 --> 00:00:24.820
+Traffic then reaches a container port inside a Pod, where the Node.js process must be listening on the expected interface and port.
+
+6
+00:00:24.920 --> 00:00:30.680
+A mistake at any one of those steps can look like an application outage even when the code itself is healthy.
+
+7
+00:00:30.960 --> 00:00:33.920
+Many production bugs are configuration mismatches.
+
+8
+00:00:34.020 --> 00:00:36.980
+The Service targets the wrong port.
+
+9
+00:00:37.080 --> 00:00:40.040
+The Pod labels do not match the Service selector.
+
+10
+00:00:40.140 --> 00:00:44.940
+The application listens only on localhost when it should accept traffic inside the container.
+
+11
+00:00:45.040 --> 00:00:48.640
+The Ingress routes the wrong hostname or path.
+
+12
+00:00:48.740 --> 00:00:54.660
+TLS termination happens at a proxy, but the application does not trust forwarded headers correctly.
+
+13
+00:00:54.760 --> 00:01:03.560
+Cookie security, CORS, redirects, and absolute URLs may all depend on the real deployment path, not the local development path.
+
+14
+00:01:03.840 --> 00:01:05.840
+Exposure should be deliberate.
+
+15
+00:01:05.940 --> 00:01:14.740
+Internal admin endpoints, debug ports, development servers, and metrics endpoints should not be reachable from the public internet by accident.
+
+16
+00:01:14.840 --> 00:01:19.000
+Health endpoints should reveal service status without leaking sensitive details.
+
+17
+00:01:19.100 --> 00:01:24.140
+Metrics should be available to monitoring systems without becoming an information disclosure path.
+
+18
+00:01:24.240 --> 00:01:34.640
+Network policies, service mesh policy, namespaces, and platform controls can restrict traffic paths where available, but they need clear design intent to be effective.
+
+19
+00:01:34.920 --> 00:01:40.280
+For Node.js teams, networking review should be part of deployment review.
+
+20
+00:01:40.380 --> 00:01:56.300
+Confirm the container port, Service port, selectors, Ingress or gateway rules, TLS assumptions, trusted proxy settings, CORS behavior, cookie settings, and separation of public, internal, health, and metrics endpoints.
+
+21
+00:01:56.400 --> 00:01:59.840
+Kubernetes provides several layers of routing and service discovery.
+
+22
+00:01:59.940 --> 00:02:06.100
+The engineering task is to make sure those layers expose exactly the service boundary you intended, and no more.

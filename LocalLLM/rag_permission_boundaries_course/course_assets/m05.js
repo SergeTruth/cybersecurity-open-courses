@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Chunking, Indexing, and ACL Preservation",
+  "graphicAlt": "Every searchable chunk and embedding retains source access context and receives permission and lifecycle updates.",
+  "narration": "Chunking turns larger source documents into smaller units that can be embedded and retrieved. That process is useful, but it can separate text from the context that explains its permissions. A paragraph may look harmless by itself while the source document, folder, project, or tenant indicates that only a limited audience should see it.\n\nIndex records should preserve links back to the source document, section, owner, tenant, classification, lifecycle status, and access control records. If a chunk is copied into an index without those references, the retriever may not have the information it needs to filter results correctly. Embeddings also deserve careful treatment. They may not display the original text, but they can represent sensitive meaning and should be governed according to the source material.\n\nIndex design choices affect permission boundaries. Some systems use per-tenant indexes. Others use shared indexes with strict metadata filters. Some combine keyword search with vector search and structured filters. Any approach can work if the filtering rules are reliable, tested, and enforced consistently. The risk increases when shared indexes are treated as a convenience layer without strong isolation logic.\n\nPermission changes must reach the index. If a document is deleted, reclassified, moved, or restricted, related chunks and embeddings need to be updated or excluded. Re-indexing should account for changed ACLs and stale records. Permission-aware chunk design reduces accidental overexposure by keeping security context attached to every searchable unit.",
+  "narrationPoints": [
+    "Chunking turns larger source documents into smaller units that can be embedded and retrieved.",
+    "Index records should preserve links back to the source document, section, owner, tenant, classification, lifecycle status, and access control records.",
+    "Index design choices affect permission boundaries.",
+    "Permission changes must reach the index."
+  ]
+};

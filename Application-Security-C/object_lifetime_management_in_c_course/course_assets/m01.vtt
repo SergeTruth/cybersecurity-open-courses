@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:14.340
+Object lifetime is a foundation of safe C programming because pointers, buffers, strings, resources, and structures are only meaningful while the objects they refer to exist and are in a valid state.
+
+2
+00:00:14.440 --> 00:00:17.400
+A pointer value by itself is not enough.
+
+3
+00:00:17.500 --> 00:00:25.500
+The code also needs to know whether the object has begun its lifetime, whether it was initialized, who owns it, and when that lifetime ends.
+
+4
+00:00:25.780 --> 00:00:28.580
+Many C defects are really timing defects.
+
+5
+00:00:28.680 --> 00:00:39.800
+Code may use storage before initialization, use an object after cleanup, retain a pointer beyond the object's scope, or keep freeing responsibility after ownership has been transferred.
+
+6
+00:00:39.900 --> 00:00:48.460
+These problems show up in normal engineering work when APIs grow, callbacks are added, structures gain owned members, or failure paths become more complex.
+
+7
+00:00:48.740 --> 00:00:54.740
+Lifetime mistakes affect reliability and maintainability even before they become security concerns.
+
+8
+00:00:54.840 --> 00:01:03.720
+They can produce crashes, inconsistent state, incorrect logging, resource leaks, stale references, and hard-to-review cleanup behavior.
+
+9
+00:01:03.820 --> 00:01:10.460
+The defensive goal is to make the object's valid-use window visible enough that later changes do not silently break it.
+
+10
+00:01:10.740 --> 00:01:15.140
+Scope and ownership are part of the same conversation.
+
+11
+00:01:15.240 --> 00:01:18.680
+An automatic object may be valid only during a call.
+
+12
+00:01:18.780 --> 00:01:22.700
+A dynamically allocated object may remain valid until its owner releases it.
+
+13
+00:01:22.800 --> 00:01:27.840
+A static object may last much longer but still require clear access rules.
+
+14
+00:01:27.940 --> 00:01:32.900
+A borrowed pointer may be usable only for the duration of one operation.
+
+15
+00:01:33.180 --> 00:01:36.380
+This course treats object lifetime as an engineering contract.
+
+16
+00:01:36.480 --> 00:01:51.920
+For each object, developers should be able to answer when it begins, when it becomes valid, who owns it, who may borrow it, how aliases behave, what cleanup path ends it, and what callers may rely on after failure.

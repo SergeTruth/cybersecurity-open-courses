@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Inter-process communication is a trust boundary.
+
+2
+00:00:03.560 --> 00:00:09.880
+A privileged helper cannot assume a request is safe simply because it arrived through the expected channel.
+
+3
+00:00:09.980 --> 00:00:20.620
+Messages need clear schemas, versioning, length limits, type checks, caller identity where available, and authorization rules that match the operation being requested.
+
+4
+00:00:20.900 --> 00:00:27.620
+The privileged side should validate all inputs independently, even when the low-privilege client already performed validation.
+
+5
+00:00:27.720 --> 00:00:33.720
+Client-side validation improves user experience, but boundary-side validation protects the authority.
+
+6
+00:00:33.820 --> 00:00:43.260
+The helper should check command names, allowed values, paths, handles, sizes, operation modes, and state transitions before acting.
+
+7
+00:00:43.540 --> 00:00:46.420
+Authorization belongs where the authority exists.
+
+8
+00:00:46.520 --> 00:00:53.240
+The broker or helper should decide whether the caller may perform the requested action on the requested target at the requested time.
+
+9
+00:00:53.340 --> 00:01:02.860
+That decision may depend on platform identity, session context, user approval, policy settings, resource ownership, or deployment configuration.
+
+10
+00:01:03.140 --> 00:01:06.020
+Error responses should be safe and useful.
+
+11
+00:01:06.120 --> 00:01:18.760
+They can tell the client that a request was denied, malformed, unsupported, or temporarily unavailable without exposing secrets, internal paths, privileged state, or unnecessary implementation details.
+
+12
+00:01:18.860 --> 00:01:23.340
+Consistent errors also help clients handle failure without guessing.
+
+13
+00:01:23.620 --> 00:01:27.380
+IPC contracts should be treated as stable interfaces.
+
+14
+00:01:27.480 --> 00:01:39.000
+Adding a new command, field, or version changes the privileged surface, so it deserves design review, compatibility tests, negative tests, and operational documentation.

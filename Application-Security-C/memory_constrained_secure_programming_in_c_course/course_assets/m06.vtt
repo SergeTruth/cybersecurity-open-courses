@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.300
+Streaming and chunked processing let a constrained C program handle data without storing the entire input in memory.
+
+2
+00:00:07.400 --> 00:00:15.800
+This matters for files, network messages, serial protocols, logs, update packages, sensor streams, and encoded records.
+
+3
+00:00:15.900 --> 00:00:20.300
+The safer design processes bounded pieces and keeps parser state small.
+
+4
+00:00:20.580 --> 00:00:24.260
+A streaming parser should enforce maximums.
+
+5
+00:00:24.360 --> 00:00:35.560
+Even if the program reads data in chunks, it still needs a maximum frame size, maximum field length, maximum nesting level where relevant, and maximum amount of retained state.
+
+6
+00:00:35.660 --> 00:00:40.220
+Without those limits, incremental code can still accumulate too much data.
+
+7
+00:00:40.500 --> 00:00:43.700
+Length validation must happen before storage.
+
+8
+00:00:43.800 --> 00:00:53.560
+A length field should be checked against protocol limits, destination capacity, remaining input, and product policy before a buffer is filled or an object is allocated.
+
+9
+00:00:53.660 --> 00:00:58.140
+The parser should not trust a length simply because it was read from a familiar format.
+
+10
+00:00:58.420 --> 00:01:00.260
+Partial input is normal.
+
+11
+00:01:00.360 --> 00:01:04.920
+A chunk may end in the middle of a header, string, record, or checksum.
+
+12
+00:01:05.020 --> 00:01:11.020
+The parser should have a clear state machine that records only the minimal state needed to continue.
+
+13
+00:01:11.120 --> 00:01:16.560
+State transitions should be explicit enough that reviewers can see how malformed input is rejected.
+
+14
+00:01:16.840 --> 00:01:23.240
+Ring buffers and other bounded buffers can be useful when they have clear ownership and capacity rules.
+
+15
+00:01:23.340 --> 00:01:31.260
+The code should define what happens when the buffer fills, whether data may be dropped, how consumers catch up, and how message boundaries are preserved.
+
+16
+00:01:31.540 --> 00:01:34.420
+Safe rejection is part of parser design.
+
+17
+00:01:34.520 --> 00:01:45.000
+Oversized or malformed input should lead to a predictable error path that resets parser state, releases owned resources, and keeps later input from being interpreted in the wrong context.
+
+18
+00:01:45.100 --> 00:01:50.140
+The parser should not leave half-built objects where later code treats them as valid.
+
+19
+00:01:50.420 --> 00:02:00.020
+Tests should include boundary sizes, partial chunks, missing terminators, invalid lengths, repeated small fragments, and full-buffer conditions.
+
+20
+00:02:00.120 --> 00:02:07.320
+The purpose is to prove that the parser remains bounded and understandable even when input arrives in inconvenient shapes.

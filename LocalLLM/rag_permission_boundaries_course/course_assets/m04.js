@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Ingestion with Access Metadata",
+  "graphicAlt": "Ingestion preserves origin, ownership, tenant, ACL and lifecycle information needed for later authorization.",
+  "narration": "Ingestion is where a RAG system first has the chance to preserve permission context. A connector may read from a document repository, ticketing system, drive, wiki, database, or case management tool. The text matters, but the access metadata around the text matters just as much. Without that metadata, later stages may not know who is allowed to use the content.\n\nUseful metadata can include document origin, repository, owner, tenant, project, classification, access control list, sharing settings, source identifier, source URL, lifecycle state, ingestion time, update time, and deletion status. Some systems have simple permissions. Others have inherited permissions, groups, labels, exceptions, or time-bound access. The ingestion process should capture enough information to support the permission decision that retrieval will need later.\n\nA chunk without permission context is risky. If only the text moves forward, the index may treat private content like generic reference material. If stale content keeps a current-looking record, users may receive guidance that should have been retired. If deleted content remains searchable, the RAG system can outlive the source repository's intended control.\n\nGood ingestion design preserves boundaries between repositories, tenants, projects, and data classifications. It also records ownership so someone can investigate or correct records later. Connector behavior should be reviewed like application code because connector shortcuts can create long-lasting permission problems downstream. Metadata quality is the foundation for reliable authorization.",
+  "narrationPoints": [
+    "Ingestion is where a RAG system first has the chance to preserve permission context.",
+    "Useful metadata can include document origin, repository, owner, tenant, project, classification, access control list, sharing settings, source...",
+    "A chunk without permission context is risky.",
+    "Good ingestion design preserves boundaries between repositories, tenants, projects, and data classifications."
+  ]
+};

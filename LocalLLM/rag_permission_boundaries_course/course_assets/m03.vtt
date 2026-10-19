@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Permission-aware RAG starts with reliable identity and request context.
+
+2
+00:00:05.080 --> 00:00:17.800
+Retrieval decisions need to know who is asking, which tenant or project they belong to, what groups or roles they have, which application is acting, and whether the request is direct, delegated, or service-to-service.
+
+3
+00:00:17.900 --> 00:00:23.100
+Without that context, retrieval cannot safely decide which sources may be considered.
+
+4
+00:00:23.380 --> 00:00:26.580
+Client-supplied hints should not be trusted by default.
+
+5
+00:00:26.680 --> 00:00:40.360
+A request may include a tenant ID, role-like value, or document identifier, but trusted permission decisions should come from authoritative identity systems, verified session state, validated tokens, or server-side policy records.
+
+6
+00:00:40.460 --> 00:00:45.820
+The application should decide which context is reliable before it reaches the retriever.
+
+7
+00:00:46.100 --> 00:00:48.100
+Entitlements change over time.
+
+8
+00:00:48.200 --> 00:00:55.480
+A user may join or leave a group, a project may end, a document may become restricted, or a service account may lose a permission.
+
+9
+00:00:55.580 --> 00:01:01.100
+Cached permission state can improve performance, but it needs lifecycle rules.
+
+10
+00:01:01.200 --> 00:01:08.480
+Teams should define how long permission caches live, when they are refreshed, and how revocation is handled for sensitive repositories.
+
+11
+00:01:08.760 --> 00:01:12.040
+Service accounts also need clear scope and accountability.
+
+12
+00:01:12.140 --> 00:01:21.100
+A connector may need broad read access to ingest source content, but that does not mean the retrieval service can show all ingested content to every user.
+
+13
+00:01:21.200 --> 00:01:27.760
+When context is missing, stale, conflicting, or ambiguous, the safer default is to fail closed.
+
+14
+00:01:27.860 --> 00:01:33.540
+Denying uncertain access is less convenient than accidental disclosure, but it preserves the boundary.

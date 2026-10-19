@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Aliasing means more than one reference can designate the same object.
+
+2
+00:00:05.000 --> 00:00:12.760
+One pointer may own the object, another may borrow it during a call, another may point into a member, and another may be stored in a container.
+
+3
+00:00:12.860 --> 00:00:18.940
+The object still has one lifetime, but multiple references can make that lifetime harder to reason about.
+
+4
+00:00:19.220 --> 00:00:21.860
+Borrowed pointers need valid-use windows.
+
+5
+00:00:21.960 --> 00:00:25.640
+A function may be allowed to read an object only during the call.
+
+6
+00:00:25.740 --> 00:00:31.020
+A callback may be allowed to retain a pointer only until a related unregister operation.
+
+7
+00:00:31.120 --> 00:00:35.920
+A parser may borrow input text only until the input buffer is reused.
+
+8
+00:00:36.020 --> 00:00:38.020
+Those windows should be documented.
+
+9
+00:00:38.300 --> 00:00:43.980
+Aliases can become stale after cleanup, transfer, resize, or object replacement.
+
+10
+00:00:44.080 --> 00:00:48.720
+If the owner releases an object, every borrower must stop using it.
+
+11
+00:00:48.820 --> 00:00:55.860
+If a container takes ownership, callers should not continue to mutate the object unless the contract permits it.
+
+12
+00:00:55.960 --> 00:01:00.360
+If storage moves, interior aliases need review.
+
+13
+00:01:00.640 --> 00:01:03.600
+Const-correctness communicates mutation intent.
+
+14
+00:01:03.700 --> 00:01:08.340
+A pointer to const data tells the callee not to modify the object through that pointer.
+
+15
+00:01:08.440 --> 00:01:15.640
+It does not prove ownership, storage duration, or thread safety, but it makes one part of the lifetime contract clearer.
+
+16
+00:01:15.920 --> 00:01:20.480
+Retained references require explicit permission.
+
+17
+00:01:20.580 --> 00:01:26.500
+An API should state whether it copies data, borrows it temporarily, or stores the pointer for later.
+
+18
+00:01:26.600 --> 00:01:34.200
+Without that rule, callers cannot know how long the referenced object must remain alive or who may modify or destroy it.

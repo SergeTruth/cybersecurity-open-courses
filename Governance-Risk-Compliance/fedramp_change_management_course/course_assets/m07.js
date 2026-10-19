@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Evidence and Documentation for Changes",
+  "narration": "Change evidence explains the path from request to closure. Useful evidence can include change tickets, approvals, implementation notes, test results, configuration records, screenshots at a high level, pull requests, deployment logs, scan results, monitoring records, and updated diagrams, inventories, or control narratives. Not every change needs every artifact, but meaningful changes should leave a reviewable trail.\n\nEvidence should be current, traceable, reviewable, and consistent with the live system. Current evidence reflects what actually happened. Traceable evidence connects the change to affected systems, owners, approvals, and controls. Reviewable evidence can be understood by assessors, security teams, engineers, operations teams, and compliance teams. Consistency means tickets, diagrams, inventories, control narratives, and deployment records tell the same story.\n\nDocumentation updates are often the difference between a successful technical change and a sustainable security program. If a change modifies architecture, dependencies, data flows, control implementation, monitoring coverage, or customer responsibility, the related documentation may need to change. Otherwise, the next assessment or incident response effort will be based on outdated assumptions. Documentation drift is a common source of review friction.\n\nUndocumented production changes are risky because they bypass the evidence chain. They make it harder to explain what changed, why it changed, whether it was approved, whether it was tested, and whether it affected security posture. Strong programs make the approved path the practical path. The evidence process should be light enough to use and strong enough to support trust.",
+  "graphicAlt": "A reviewable change trail connects approvals, implementation, tests and documentation consistent with the live system.",
+  "narrationPoints": [
+    "Change evidence explains the path from request to closure.",
+    "Evidence should be current, traceable, reviewable, and consistent with the live system.",
+    "Documentation updates are often the difference between a successful technical change and a sustainable security program.",
+    "Undocumented production changes are risky because they bypass the evidence chain."
+  ]
+};

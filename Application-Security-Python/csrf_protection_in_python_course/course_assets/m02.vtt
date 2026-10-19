@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+CSRF risk is not limited to one Python framework or one kind of page.
+
+2
+00:00:05.240 --> 00:00:17.080
+It can appear in Django, Flask, FastAPI, Pyramid, custom WSGI applications, and internal tools whenever browser-based authentication and state-changing requests meet.
+
+3
+00:00:17.180 --> 00:00:26.540
+The technology stack changes, but the review question remains similar: can a browser send this request with the user's credentials, and does the request change server-side state?
+
+4
+00:00:26.820 --> 00:00:31.220
+Traditional HTML forms are the familiar case, but they are not the only one.
+
+5
+00:00:31.320 --> 00:00:41.000
+Admin panels, account settings, preference updates, workflow approval screens, and internal dashboards often include state-changing behavior.
+
+6
+00:00:41.100 --> 00:00:53.580
+Because internal tools may be built quickly and used by trusted staff, teams sometimes assume they are lower risk and accidentally skip protections that would be standard in a public-facing application.
+
+7
+00:00:53.860 --> 00:00:56.580
+Cookie-authenticated APIs also need review.
+
+8
+00:00:56.680 --> 00:01:04.120
+A Python backend may serve server-rendered pages, JavaScript-enhanced pages, or endpoints used by a frontend.
+
+9
+00:01:04.220 --> 00:01:13.340
+If the browser automatically sends the user's session cookie, then state-changing API calls may need CSRF protection even when the request body is JSON.
+
+10
+00:01:13.440 --> 00:01:19.040
+The format of the request does not by itself answer whether CSRF is relevant.
+
+11
+00:01:19.320 --> 00:01:21.480
+Custom routes are a common gap.
+
+12
+00:01:21.580 --> 00:01:34.060
+A framework may protect standard forms, but a developer may add a custom endpoint, webhook-like path, admin action, or JavaScript route that bypasses the default protection.
+
+13
+00:01:34.160 --> 00:01:40.960
+Good CSRF review inventories state-changing routes and checks whether the configured protection actually applies to each one.

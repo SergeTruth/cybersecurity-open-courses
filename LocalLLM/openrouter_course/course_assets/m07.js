@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Observability, Evaluation, and Operational Controls",
+  "narration": "Observability turns OpenRouter from a black box into an operable dependency. At minimum, record which model was requested, which provider served the request when that information is available, latency, token usage, status codes, fallback events, retry counts, and application feature names. These signals help engineers distinguish model quality issues from routing issues, provider outages, prompt regressions, and cost changes.\n\nEvaluation should happen before and after launch. Before launch, build a representative set of prompts and expected qualities for the task. That set does not need to be enormous to be useful. It should include normal inputs, edge cases, ambiguous requests, long context cases, and examples where the system should refuse or ask for clarification. Run the set when changing models, prompts, provider preferences, or decoding settings.\n\nAfter launch, watch trends rather than isolated anecdotes. Track latency percentiles, error rates, user correction rates, fallback frequency, token consumption, and quality review samples. A cheaper route that doubles corrections may not be cheaper in practice. A faster model that fails on longer context may be a poor fit for a document workflow. Operational controls should connect cost, reliability, and quality instead of optimizing one metric alone.\n\nFinally, define change management. Who can add a model? Who can allow a new provider? What review is required for sensitive data classes? How quickly can the team disable a failing route? These questions sound administrative, but they are practical safeguards for any LLM system that may change underneath active users. When a route changes, the team should know whether it changed quality, privacy, latency, or cost. Rollback criteria should be written before an incident starts.",
+  "narrationPoints": [
+    "Track model, provider, latency, tokens, retries, and fallback events.",
+    "Use representative evaluations before model or prompt changes.",
+    "Monitor trends across quality, cost, and reliability.",
+    "A cheaper route is not useful if it increases correction work.",
+    "Model and provider changes need clear ownership and rollback paths."
+  ],
+  "graphicAlt": "Representative evaluations and minimized operational signals support owned route changes with prepared rollback."
+};

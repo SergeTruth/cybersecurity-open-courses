@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Accounts, Keys, Authentication, and Cost Boundaries",
+  "narration": "A reliable OpenRouter integration starts with account and key hygiene. OpenRouter authenticates API calls with a bearer token, usually supplied in an Authorization header. That token should be handled like any production secret: generated for a specific purpose, stored in a secret manager or deployment environment, never committed to source control, never pasted into support tickets, and never exposed to browser-side code unless the architecture is explicitly designed to protect it.\n\nCost control belongs in the same conversation as authentication. LLM calls can scale quickly because each request may include prompt tokens, output tokens, retries, and fallback attempts. A useful engineering habit is to decide where the spending boundary lives before traffic grows. That may include per-environment keys, service-level budgets, request limits, alerts, and application-side throttling. Even when a platform offers account controls, the application should still make abuse and runaway loops harder.\n\nHeaders and metadata also deserve care. OpenRouter supports common API conventions and may allow optional identifying headers for application attribution. Use those fields deliberately. They should help with legitimate accounting, monitoring, or product identification, not leak private customer names, internal project secrets, or sensitive prompt content.\n\nIn development, keep the integration boring on purpose. Load the key from an environment variable, fail closed when it is missing, redact it in logs, and use separate credentials for local testing, staging, and production. These practices are ordinary, but they are what turn a convenient API into an auditable system. Add alerts for unusual request volume so key misuse or looping jobs are discovered quickly. This is especially important for shared services used by many features.",
+  "narrationPoints": [
+    "Bearer tokens are production secrets.",
+    "Use separate keys for local, staging, and production systems.",
+    "Plan spend limits before usage scales.",
+    "Redact keys and sensitive headers from logs.",
+    "Application-side throttles reduce accidental runaway usage."
+  ],
+  "graphicAlt": "Protected environment credentials combine with application request and spending bounds, redacted metadata and volume alerts."
+};

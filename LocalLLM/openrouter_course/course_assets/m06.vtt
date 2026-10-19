@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+A robust OpenRouter client starts with a narrow wrapper around the API.
+
+2
+00:00:05.240 --> 00:00:16.840
+The wrapper should own base URL configuration, authentication, request defaults, timeout policy, retry policy, model allow lists, and error translation.
+
+3
+00:00:16.940 --> 00:00:22.380
+Application features should call that wrapper instead of constructing raw requests in many places.
+
+4
+00:00:22.480 --> 00:00:27.280
+This keeps provider and model decisions visible and makes later changes safer.
+
+5
+00:00:27.560 --> 00:00:30.360
+Timeouts and retries should be explicit.
+
+6
+00:00:30.460 --> 00:00:40.860
+LLM requests can fail because of network issues, provider capacity, invalid parameters, content policy decisions, malformed input, or context limits.
+
+7
+00:00:40.960 --> 00:00:43.440
+Retrying every failure is not safe.
+
+8
+00:00:43.540 --> 00:00:52.180
+Retrying a timeout may be reasonable for an idempotent summarization request, while retrying a request that triggers an external action can duplicate work.
+
+9
+00:00:52.280 --> 00:00:58.520
+The client should distinguish retryable transport problems from validation errors and policy outcomes.
+
+10
+00:00:58.800 --> 00:01:01.120
+Inputs and outputs need contracts.
+
+11
+00:01:01.220 --> 00:01:13.540
+Define maximum input size, expected response format, and how the application handles refusal, truncation, invalid JSON, empty output, or a model answer that does not meet the contract.
+
+12
+00:01:13.640 --> 00:01:19.160
+If the application expects structured data, validate it with a schema or parser before using it.
+
+13
+00:01:19.260 --> 00:01:25.180
+If the model output influences business logic, treat it as untrusted until checked.
+
+14
+00:01:25.460 --> 00:01:28.580
+Configuration should be boring and auditable.
+
+15
+00:01:28.680 --> 00:01:34.600
+Store allowed models and provider preferences in reviewed configuration, not scattered constants.
+
+16
+00:01:34.700 --> 00:01:37.580
+Keep secrets out of client-side bundles.
+
+17
+00:01:37.680 --> 00:01:40.320
+Use generic placeholders in tests.
+
+18
+00:01:40.420 --> 00:01:47.540
+A clean client layer makes OpenRouter an interchangeable access layer instead of a hidden dependency woven through the product.
+
+19
+00:01:47.640 --> 00:01:53.080
+That layer also gives incident responders one place to inspect when requests behave unexpectedly.
+
+20
+00:01:53.180 --> 00:01:58.700
+It also becomes the natural place to enforce rate limits and shared request metadata.
+
+21
+00:01:58.800 --> 00:02:02.400
+Tests should assert those defaults before teams depend on them.

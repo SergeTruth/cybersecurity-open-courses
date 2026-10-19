@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Testing and Review",
+  "narration": "Output encoding review starts with an inventory of contexts. Identify where application data is written into HTML, attributes, URLs, JavaScript, JSON, CSS, XML, CSV, logs, reports, emails, and generated documents. For each location, ask whether the data is trusted, which context it enters, which encoder or safe API is used, and whether any escaping has been bypassed. Template review is especially important because a single unsafe helper can affect many pages.\n\nTesting should include special characters that reveal encoding mistakes: angle brackets, quotes, apostrophes, ampersands, slashes, backslashes, line breaks, equals signs, and characters meaningful to the destination format. Unit tests can verify helpers and serializers. Security tests can verify that rendered output displays the data rather than interpreting it as markup or code. Reviewing generated HTML can help confirm that the browser receives what the developer intended.\n\nAvoid brittle deny-list assumptions. Blocking one tag, one event handler, or one character rarely solves the broader context problem. Prefer safe framework patterns, context-specific encoders, serializers, and allowlists for constrained values such as URL schemes or CSS tokens. Browser-based checks can be useful, but they should support code review rather than replace it. The strongest process combines context inventory, code review, targeted tests, and attention to places where default escaping has been disabled.",
+  "graphicAlt": "Context inventories, special-character tests and generated-output review verify that data stays data at each sink.",
+  "narrationPoints": [
+    "Output encoding review starts with an inventory of contexts.",
+    "Testing should include special characters that reveal encoding mistakes: angle brackets, quotes, apostrophes, ampersands, slashes, backslashes, line breaks, equals signs, and characters meaningful to the destination format.",
+    "Avoid brittle deny-list assumptions."
+  ]
+};

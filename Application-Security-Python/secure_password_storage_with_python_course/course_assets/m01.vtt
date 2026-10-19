@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.220
+Password storage is a high-impact security design decision because it affects what happens after something has already gone wrong.
+
+2
+00:00:07.320 --> 00:00:19.560
+A login system may work perfectly during normal use, but the real test is how much harm occurs if an authentication database, backup, log archive, export, or development copy is exposed.
+
+3
+00:00:19.660 --> 00:00:27.580
+Secure password storage is designed to reduce that harm by making stored password verifiers difficult to turn back into usable passwords.
+
+4
+00:00:27.860 --> 00:00:35.940
+Password authentication, password storage, password reset, session management, and authorization are related but separate concerns.
+
+5
+00:00:36.040 --> 00:00:39.400
+Password authentication verifies a user's claim during login.
+
+6
+00:00:39.500 --> 00:00:45.580
+Password storage determines how the application keeps the information needed to verify future logins.
+
+7
+00:00:45.680 --> 00:00:49.600
+Password reset changes or reestablishes that verifier.
+
+8
+00:00:49.700 --> 00:00:53.060
+Session management carries authenticated state after login.
+
+9
+00:00:53.160 --> 00:00:56.440
+Authorization decides what the authenticated user may do.
+
+10
+00:00:56.540 --> 00:00:59.820
+A weakness in any one area can affect the others.
+
+11
+00:01:00.100 --> 00:01:06.660
+Password databases are attractive targets because users often reuse passwords across services.
+
+12
+00:01:06.760 --> 00:01:22.680
+If one application stores plaintext passwords or reversible password data, a breach can affect not only that application but also email accounts, business systems, banking services, cloud portals, and other unrelated sites where users reused credentials.
+
+13
+00:01:22.780 --> 00:01:29.260
+This is why plaintext password storage creates downstream risk far beyond the original database.
+
+14
+00:01:29.540 --> 00:01:32.500
+Secure storage does not make passwords invincible.
+
+15
+00:01:32.600 --> 00:01:36.280
+It does make password database exposure less immediately damaging.
+
+16
+00:01:36.380 --> 00:01:39.820
+The application should never need to recover a user's password.
+
+17
+00:01:39.920 --> 00:01:44.560
+It only needs to verify whether a submitted password matches a stored verifier.
+
+18
+00:01:44.660 --> 00:01:52.100
+That shift from recovery to verification is the core principle behind responsible password storage in Python applications.

@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.300
+Modern Python backends often serve APIs used by single-page applications, JavaScript-enhanced pages, or separate frontend applications.
+
+2
+00:00:09.400 --> 00:00:14.360
+CSRF protection still matters when the browser automatically sends session cookies.
+
+3
+00:00:14.460 --> 00:00:22.140
+The presence of JavaScript, JSON, or a frontend framework does not automatically remove the need to prove user intent for state-changing requests.
+
+4
+00:00:22.420 --> 00:00:30.180
+Many designs use a CSRF token delivered through a trusted page, safe bootstrap response, or framework-supported cookie and header pattern.
+
+5
+00:00:30.280 --> 00:00:35.000
+The frontend then sends the token in a request header for state-changing actions.
+
+6
+00:00:35.100 --> 00:00:44.620
+This approach can work well when token delivery, storage, renewal, and validation are implemented consistently and are aligned with the framework's expectations.
+
+7
+00:00:44.900 --> 00:00:50.740
+Teams should avoid exposing tokens unnecessarily or mixing unrelated authentication models.
+
+8
+00:00:50.840 --> 00:01:01.800
+A session-cookie API, a bearer-token API, and a service-to-service API may all exist in the same Python system, but they do not have the same CSRF assumptions.
+
+9
+00:01:01.900 --> 00:01:06.780
+Route design should make those boundaries clear so developers know which protection applies.
+
+10
+00:01:07.060 --> 00:01:14.340
+The key question remains practical: can a browser send an authenticated state-changing request without the user's intended application flow?
+
+11
+00:01:14.440 --> 00:01:18.680
+If the answer may be yes, the route needs CSRF review.
+
+12
+00:01:18.780 --> 00:01:25.580
+Modern frontend architecture changes the shape of the request, but it does not remove the need for deliberate protection.

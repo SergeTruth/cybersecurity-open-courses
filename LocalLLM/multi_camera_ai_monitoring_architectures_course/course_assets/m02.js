@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Core Architecture Patterns",
+  "narration": "Centralized processing sends multiple feeds to one local server or cluster. It simplifies model management, dashboards, storage integration, and capacity pooling. It also creates a shared bandwidth path and a larger failure domain, so redundancy and overload behavior need attention.\n\nEdge processing runs some analysis near each camera or site. This can reduce upstream bandwidth and keep decisions available during connectivity loss. Edge devices have limited compute and create a distributed fleet that must be secured, updated, observed, and supported.\n\nA hybrid architecture performs lightweight filtering locally and sends selected events to a central or approved cloud service for deeper analysis. This can balance privacy, latency, and model capability, but every external data transfer must be explicit and governed.\n\nNVR-integrated analysis uses the recording platform as the stream and event hub. It may be easier to operate, though model flexibility and hardware choices can be constrained by the vendor. Batch review analyzes stored clips later, while near-real-time processing favors timely alerts at higher continuous compute cost.\n\nNo pattern wins every tradeoff. Centralization favors simplicity and shared resources. Edge favors locality and resilience. Hybrid designs can scale selectively but add integration and data-flow complexity.\n\nChoose by use case, camera count, network capacity, event urgency, privacy, cost, model size, support skills, and acceptable failure modes. A fleet can use different patterns for different cameras, provided policy, identity, time, and review remain consistent.",
+  "graphicAlt": "Centralized, edge and governed hybrid designs trade capacity, latency, complexity and resilience.",
+  "narrationPoints": [
+    "Centralized processing sends multiple feeds to one local server or cluster.",
+    "Edge processing runs some analysis near each camera or site.",
+    "A hybrid architecture performs lightweight filtering locally and sends selected events to a central or approved cloud service for deeper analysis.",
+    "NVR-integrated analysis uses the recording platform as the stream and event hub."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Monitoring, and Review Practices",
+  "graphicAlt": "Allowed and denied-path tests, lifecycle checks and sanitized monitoring keep authority changes reviewable.",
+  "narration": "Privilege separation should be tested directly. Tests should verify that low-privilege code cannot perform sensitive operations directly, invalid IPC requests are rejected, malformed messages fail safely, unauthorized callers are denied, path boundaries hold, helpers shut down cleanly, and failures do not leave privileged state behind.\n\nNegative tests are especially important. A feature may work correctly for an allowed request but still behave poorly when the caller is not authorized, the message version is wrong, the target path is outside policy, the helper is restarting, or a resource is unavailable. These paths are part of the security contract and should be exercised intentionally.\n\nMonitoring and logs should show privileged request outcomes without leaking sensitive data. Operators need to know whether requests are allowed, denied, malformed, unsupported, or failing due to dependency problems. Logs should include safe identifiers and event categories rather than secrets, private handles, or unnecessary system detail.\n\nCode review should focus on authority, caller identity, message validation, resource access, helper lifecycle, update paths, and error behavior. Privilege changes should be treated as security-relevant changes. A new helper command, entitlement, service account permission, or deployment rule can alter the boundary even if the code change looks small.\n\nFindings should become tracked engineering work. When a boundary test fails or monitoring shows unclear behavior, teams should update the contract, implementation, and documentation together. Privilege separation stays effective only when it is maintained across releases.",
+  "narrationPoints": [
+    "Tests should verify that low-privilege code cannot perform sensitive operations directly, invalid IPC requests are rejected, malformed messages fail.",
+    "A feature may work correctly for an allowed request but still behave poorly.",
+    "Logs should include safe identifiers and event categories rather than secrets, private handles, or unnecessary system detail.",
+    "Code review should focus on authority, caller identity, message validation, resource access, helper lifecycle, update paths, and error behavior.",
+    "A new helper command, entitlement, service account permission, or deployment rule can alter the boundary even if the code change looks small.",
+    "When a boundary test fails or monitoring shows unclear behavior, teams should update the contract, implementation, and documentation together."
+  ]
+};

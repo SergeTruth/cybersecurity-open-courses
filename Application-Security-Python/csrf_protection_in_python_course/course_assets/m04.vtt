@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+A secure Python web application treats state-changing behavior carefully.
+
+2
+00:00:05.080 --> 00:00:15.960
+Actions that create, update, delete, approve, transfer, configure, or submit data should use a request method and application flow designed for changes.
+
+3
+00:00:16.060 --> 00:00:23.340
+A casual link, image request, or simple navigation action should not perform a meaningful server-side change.
+
+4
+00:00:23.620 --> 00:00:26.340
+GET requests should avoid side effects.
+
+5
+00:00:26.440 --> 00:00:36.680
+They are intended for retrieval and are easier to trigger unintentionally through ordinary browser behavior, previews, crawlers, or embedded references.
+
+6
+00:00:36.780 --> 00:00:46.460
+State-changing actions should require an explicit form or request flow that includes CSRF protection and fits the application's authorization model.
+
+7
+00:00:46.740 --> 00:00:56.020
+Protected forms should include the framework's CSRF token or equivalent established control, and the server should validate that token before performing the action.
+
+8
+00:00:56.120 --> 00:00:59.720
+Token validation belongs before the state change, not after.
+
+9
+00:00:59.820 --> 00:01:08.140
+A failure should not partially complete the operation, modify one field, queue one job, or make a downstream call before the application rejects the request.
+
+10
+00:01:08.420 --> 00:01:12.260
+Sensitive workflows deserve explicit review.
+
+11
+00:01:12.360 --> 00:01:21.480
+Administration screens, billing settings, account changes, approval queues, and security settings should be easy to identify and easy to test.
+
+12
+00:01:21.580 --> 00:01:31.420
+Request semantics, CSRF protection, authorization, user confirmation, logging, and rollback expectations should fit the impact of the action.

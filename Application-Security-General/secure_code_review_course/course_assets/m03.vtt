@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.860
+Secure reviewers trace untrusted data from entry points to security-relevant use.
+
+2
+00:00:05.960 --> 00:00:17.320
+Entry points may include user input, API input, file uploads, headers, cookies, webhooks, message queues, third-party responses, environment variables, and configuration files.
+
+3
+00:00:17.420 --> 00:00:25.980
+Not every input is equally risky, but every input has a source, an expected shape, and a level of trust that should be clear in the code.
+
+4
+00:00:26.260 --> 00:00:29.940
+Sensitive sinks are places where data has security impact.
+
+5
+00:00:30.040 --> 00:00:39.960
+Database queries, shell commands, template rendering, file paths, logs, outbound requests, and authorization decisions are common examples.
+
+6
+00:00:40.060 --> 00:00:49.420
+A review should ask what data reaches these sinks, what validation or transformation happened first, and whether the sink is used through safe APIs.
+
+7
+00:00:49.520 --> 00:00:56.160
+The question is not only whether a value exists, but whether the code uses it in a way that changes security behavior.
+
+8
+00:00:56.440 --> 00:01:01.960
+Trust boundaries show where data, identity, permissions, or assumptions change.
+
+9
+00:01:02.060 --> 00:01:07.180
+A browser request crossing into a server-side API crosses a boundary.
+
+10
+00:01:07.280 --> 00:01:10.000
+A webhook from a third party crosses another.
+
+11
+00:01:10.100 --> 00:01:16.180
+A background worker reading from a queue may receive data that was trusted by one component but not by another.
+
+12
+00:01:16.280 --> 00:01:23.480
+A reviewer should be cautious when code treats data as safe merely because it came from an internal service or configuration source.
+
+13
+00:01:23.760 --> 00:01:27.040
+Data-flow review also helps find missing controls.
+
+14
+00:01:27.140 --> 00:01:38.180
+If a value enters through an API and eventually becomes a file path, the reviewer can look for path normalization, allowed directories, extension handling, and error behavior.
+
+15
+00:01:38.280 --> 00:01:44.200
+If a parameter reaches an outbound HTTP request, the reviewer can ask whether the destination is constrained.
+
+16
+00:01:44.300 --> 00:01:50.460
+The goal is to understand how untrusted or sensitive data moves before deciding whether the implementation is safe.

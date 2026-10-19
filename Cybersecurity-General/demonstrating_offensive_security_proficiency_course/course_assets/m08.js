@@ -1,0 +1,18 @@
+window.COURSE_MODULE = {
+  "id": "m08",
+  "title": "Coordinated Public Disclosures and Published Advisories",
+  "type": "lesson",
+  "narration": "Coordinated disclosure turns a vulnerability finding into a responsible public record. The purpose is not to win attention before others are ready. The purpose is to help affected parties understand risk, develop a fix, notify users, and publish accurate information when disclosure becomes appropriate. This is especially important when multiple vendors, service providers, libraries, or downstream products may be involved.\n\nGood coordination begins with a clear private report. Identify the affected component, version, configuration, or deployment pattern. Explain impact in practical terms. Provide enough safe evidence for the maintainer or owner to reproduce the issue without exposing unrelated systems or people. If the issue affects more than one party, coordination may involve a security team, coordinator, vendor, open-source maintainer, platform operator, or incident response organization.\n\nTimelines should be handled with care. Many disclosure processes use target dates, extensions, and status updates, but rigid deadlines can be harmful when facts are incomplete or fixes require ecosystem coordination. At the same time, indefinite silence can leave users exposed. The professional skill is balancing urgency, accuracy, and harm reduction. Document communication, be clear about expectations, and avoid surprise publication when coordination is still active.\n\nAn advisory should support risk decisions. It should describe the issue, affected versions or conditions, severity rationale, remediation, detection or mitigation guidance, credit, and limitations. It should avoid unnecessary operational details that make abuse easier. If a proof artifact is included, keep it bounded and safe. The strongest advisories are useful to defenders, maintainers, and users, not just impressive to other researchers.\n\nPublished advisories can be excellent portfolio evidence because they are independently inspectable. They show that your work survived external review and resulted in public guidance. Still, the artifact should be presented with humility. Clarify your role, respect co-discoverers, acknowledge maintainers, and avoid overstating impact beyond the validated conditions. Responsible disclosure is a relationship between technical truth and public safety.\n\nFor portfolio purposes, the advisory is only one layer. Add a safe process reflection if disclosure rules allow it: what made coordination complex, what evidence was useful, what limits were respected, and what defenders could learn. This helps a reviewer see judgment without requiring access to private correspondence or sensitive technical material, and it keeps the public lesson defense-centered and operationally responsible for maintainers, users, and future reviewers.",
+  "narrationPoints": [
+    "Coordinated disclosure prioritizes remediation and accurate public guidance.",
+    "Private reports should identify affected components and practical impact.",
+    "Multi-party issues may require coordination beyond one vendor.",
+    "Timelines balance urgency, accuracy, and harm reduction.",
+    "Advisories should help defenders and users make risk decisions.",
+    "Public records are strong evidence when they survive external review.",
+    "Credit, limits, and humility matter in disclosure artifacts."
+  ],
+  "graphic": "course_assets/m08.png",
+  "graphicAlt": "A private report supports coordination, remediation and appropriately timed guidance with credit and limitations.",
+  "codeExamples": []
+};

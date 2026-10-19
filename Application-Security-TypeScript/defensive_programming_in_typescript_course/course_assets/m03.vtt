@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Strong TypeScript types reduce the number of unsafe states the program has to defend against at runtime.
+
+2
+00:00:05.560 --> 00:00:10.760
+They do not replace validation at trust boundaries, but they make validated data easier to use correctly.
+
+3
+00:00:10.860 --> 00:00:19.100
+A defensive codebase uses types to document intent, constrain behavior, and make maintenance mistakes visible early.
+
+4
+00:00:19.380 --> 00:00:22.020
+At boundaries, prefer unknown over any.
+
+5
+00:00:22.120 --> 00:00:26.840
+The any type lets a value flow through the program as if every operation is allowed.
+
+6
+00:00:26.940 --> 00:00:31.100
+It suppresses the compiler at the exact point where you need the most discipline.
+
+7
+00:00:31.200 --> 00:00:38.880
+The unknown type is safer because it forces deliberate narrowing before the value can be read, called, indexed, or passed into a narrower contract.
+
+8
+00:00:39.160 --> 00:00:42.360
+Strict compiler settings are also defensive.
+
+9
+00:00:42.460 --> 00:00:46.940
+Strict null checks make the difference between missing and present values visible.
+
+10
+00:00:47.040 --> 00:00:51.360
+No implicit any prevents untyped values from quietly appearing in the codebase.
+
+11
+00:00:51.460 --> 00:01:00.900
+Not every legacy project can enable every strict option at once, but teams can move toward stricter settings module by module and treat compiler feedback as design information.
+
+12
+00:01:01.180 --> 00:01:03.020
+Model valid states directly.
+
+13
+00:01:03.120 --> 00:01:09.520
+Discriminated unions often express workflow states better than loose flags and many optional fields.
+
+14
+00:01:09.620 --> 00:01:17.060
+For example, a request can be loading, failed, or ready, with each case carrying only the fields that belong to that case.
+
+15
+00:01:17.160 --> 00:01:22.680
+This reduces combinations that should never exist and makes impossible states harder to represent.
+
+16
+00:01:22.960 --> 00:01:29.200
+Readonly data, narrow function contracts, and explicit return types also support defensive design.
+
+17
+00:01:29.300 --> 00:01:37.060
+They reduce accidental mutation, make ownership clearer, and help reviewers see what a function promises to accept and return.
+
+18
+00:01:37.160 --> 00:01:44.600
+Exhaustive handling is especially useful when a union gains a new case, because the compiler can point to code that must be revisited.
+
+19
+00:01:44.880 --> 00:01:49.920
+The point is not to create clever types that only one person understands.
+
+20
+00:01:50.020 --> 00:01:57.460
+The point is to move important assumptions into a form the compiler, reviewers, and future maintainers can see.
+
+21
+00:01:57.560 --> 00:02:03.720
+Strong types are defensive when they make correct use easier, incorrect use harder, and runtime checks more focused.

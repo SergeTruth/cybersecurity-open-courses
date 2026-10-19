@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+Session architecture starts with the path authenticated state takes through the system.
+
+2
+00:00:06.120 --> 00:00:08.360
+Browser clients may send cookies.
+
+3
+00:00:08.460 --> 00:00:12.620
+API clients may send bearer tokens or API keys.
+
+4
+00:00:12.720 --> 00:00:17.360
+Backend services may use service credentials or workload identity.
+
+5
+00:00:17.460 --> 00:00:24.900
+The application may consult a server-side session store, validate a signed cookie, call an identity provider, or check a token.
+
+6
+00:00:25.000 --> 00:00:28.440
+Each step has a trust boundary and a failure mode.
+
+7
+00:00:28.720 --> 00:00:43.200
+The major boundaries are between client and application, application and session storage, application and identity provider, reverse proxy and backend service, load balancer and application instances, and application and downstream services.
+
+8
+00:00:43.300 --> 00:00:53.380
+TLS termination at a high level also matters because the component that terminates encrypted traffic may be the component that adds forwarding headers or handles cookie-related deployment behavior.
+
+9
+00:00:53.480 --> 00:00:58.200
+The application should know which upstream signals are trusted and why.
+
+10
+00:00:58.480 --> 00:01:02.320
+Session decisions should be centralized and explicit where practical.
+
+11
+00:01:02.420 --> 00:01:16.100
+If one route reads a cookie directly, another route uses middleware, a third route trusts a header, and a background job uses a separate convention, reviewers cannot easily determine whether authenticated state is handled consistently.
+
+12
+00:01:16.200 --> 00:01:25.800
+Middleware, framework session support, shared token validators, and common helpers can make the safe path easier to use and harder to bypass accidentally.
+
+13
+00:01:26.080 --> 00:01:29.280
+Architecture should also account for distributed deployment.
+
+14
+00:01:29.380 --> 00:01:37.140
+Multiple application instances may need consistent session lookup, shared signing keys, shared revocation state, or predictable routing.
+
+15
+00:01:37.240 --> 00:01:42.680
+Background jobs may run after the user who created them has logged out or lost access.
+
+16
+00:01:42.780 --> 00:01:47.820
+Downstream services may need proof of caller identity and authorization context.
+
+17
+00:01:47.920 --> 00:01:56.080
+A good architecture explains how session state is established, trusted, propagated, constrained, and ended.

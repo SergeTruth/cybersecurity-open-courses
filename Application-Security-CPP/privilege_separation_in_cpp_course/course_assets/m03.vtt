@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+The safest default is for the main application, user interface, or ordinary service logic to run with ordinary permissions.
+
+2
+00:00:08.120 --> 00:00:18.440
+Low-privilege code can parse input, display UI, prepare requests, validate basic user intent, handle non-sensitive workflow steps, and report errors.
+
+3
+00:00:18.540 --> 00:00:23.740
+It should not gain broad authority simply because a user clicked a button or opened a file.
+
+4
+00:00:24.020 --> 00:00:28.580
+This design reduces the consequences of routine defects.
+
+5
+00:00:28.680 --> 00:00:38.040
+A parsing error, rendering issue, plugin problem, or UI mistake should not automatically become a protected file change or service configuration update.
+
+6
+00:00:38.140 --> 00:00:45.020
+The low-privilege core should be able to say what it wants done, but the privileged boundary should decide whether the action is allowed.
+
+7
+00:00:45.300 --> 00:00:48.260
+Low-privilege components still need strong engineering.
+
+8
+00:00:48.360 --> 00:00:56.520
+They should validate input before building requests, preserve clear state, handle cancellation, and avoid collecting secrets they do not need.
+
+9
+00:00:56.620 --> 00:01:00.780
+They should also avoid embedding privileged assumptions in presentation code.
+
+10
+00:01:00.880 --> 00:01:05.920
+A clean request model makes it easier for helpers and brokers to verify intent.
+
+11
+00:01:06.200 --> 00:01:12.200
+When privileged work is required, the low-privilege component should request a narrow operation through a controlled boundary.
+
+12
+00:01:12.300 --> 00:01:18.940
+The request should name the action, the target resource, the caller context, and any validated parameters.
+
+13
+00:01:19.040 --> 00:01:23.120
+The boundary should then authorize and execute only the approved operation.
+
+14
+00:01:23.400 --> 00:01:26.120
+Good low-privilege design also improves testing.
+
+15
+00:01:26.220 --> 00:01:33.100
+Teams can exercise most workflows without special rights and reserve focused tests for the small boundary where authority is actually held.
+
+16
+00:01:33.200 --> 00:01:37.680
+That keeps the architecture understandable and the privileged surface easier to review.

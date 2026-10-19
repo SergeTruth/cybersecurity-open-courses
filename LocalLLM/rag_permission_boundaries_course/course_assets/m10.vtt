@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Permission-aware RAG is a full-system design practice.
+
+2
+00:00:04.200 --> 00:00:09.000
+It begins with classifying source data and understanding who is allowed to use it.
+
+3
+00:00:09.100 --> 00:00:19.900
+Ingestion should capture origin, owner, tenant, classification, ACLs, lifecycle state, update time, and deletion status.
+
+4
+00:00:20.000 --> 00:00:26.160
+Chunking and indexing should preserve those references so searchable records do not lose their permission context.
+
+5
+00:00:26.440 --> 00:00:33.960
+At request time, the system needs trusted identity, tenant, role, group, project, and service context.
+
+6
+00:00:34.060 --> 00:00:39.180
+Retrieval should authorize candidates before any source text enters the model context.
+
+7
+00:00:39.280 --> 00:00:43.600
+Deny-by-default behavior protects records with missing or ambiguous metadata.
+
+8
+00:00:43.700 --> 00:00:48.660
+Ranking should work only within the set of allowed candidates, never as a way around policy.
+
+9
+00:00:48.940 --> 00:00:52.380
+Generation-time controls should preserve the same boundary.
+
+10
+00:00:52.480 --> 00:00:56.240
+Retrieved content is evidence, not a policy override.
+
+11
+00:00:56.340 --> 00:01:09.860
+Responses should summarize or cite only sources the user may access, handle conflicting sources carefully, and avoid exposing sensitive fragments through formatting, citations, exports, or logs.
+
+12
+00:01:09.960 --> 00:01:20.040
+Tenant isolation should cover indexes, caches, prompts, transcripts, admin tools, analytics, and backups.
+
+13
+00:01:20.320 --> 00:01:31.680
+Durable safety comes from repeatable engineering and operations: test realistic users, revoked access, stale indexes, deleted documents, missing metadata, and cross-tenant cases.
+
+14
+00:01:31.780 --> 00:01:37.460
+Audit enough context to investigate decisions without over-collecting sensitive text.
+
+15
+00:01:37.560 --> 00:01:43.400
+Review the system as data, policies, users, and source repositories change.

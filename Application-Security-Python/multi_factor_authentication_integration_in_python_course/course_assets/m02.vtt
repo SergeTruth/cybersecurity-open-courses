@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:20.740
+An MFA architecture connects several components: the user browser or client, the Python backend, an identity provider, an MFA service, authenticator apps, hardware-backed authenticators, passkeys or platform authenticators, session stores, token stores, recovery workflows, and administrative support workflows.
+
+2
+00:00:20.840 --> 00:00:27.960
+Each component contributes to the identity decision, but each component also introduces a trust boundary that must be understood.
+
+3
+00:00:28.240 --> 00:00:42.400
+Trust boundaries exist between user input and server-side verification, between identity claims and application sessions, between MFA verification results and protected actions, and between support workflows and account state.
+
+4
+00:00:42.500 --> 00:00:48.260
+A client saying that MFA succeeded is not the same as the backend verifying a trusted result.
+
+5
+00:00:48.360 --> 00:00:53.240
+A claim from an identity provider needs validation before the application relies on it.
+
+6
+00:00:53.340 --> 00:00:57.180
+A recovery action needs evidence and auditability.
+
+7
+00:00:57.460 --> 00:01:02.260
+MFA decisions should be explicit and centralized where practical.
+
+8
+00:01:02.360 --> 00:01:13.160
+If some routes require MFA through middleware, others check a flag manually, and admin paths use a separate convention, developers will struggle to know which actions are protected.
+
+9
+00:01:13.260 --> 00:01:22.380
+A better pattern is to define clear policy points for enrollment, verification, session upgrade, step-up authentication, and recovery.
+
+10
+00:01:22.480 --> 00:01:27.440
+The exact Python framework can vary; the architecture should remain understandable.
+
+11
+00:01:27.720 --> 00:01:32.040
+A good architecture also separates partial login from full authentication.
+
+12
+00:01:32.140 --> 00:01:40.060
+After a user enters a password but before MFA succeeds, the application may need temporary state to continue the challenge.
+
+13
+00:01:40.160 --> 00:01:43.120
+That state should not grant ordinary access.
+
+14
+00:01:43.220 --> 00:01:48.500
+It should be narrow, short-lived, tied to the correct user and session, and protected from reuse.
+
+15
+00:01:48.600 --> 00:01:53.720
+Clear state transitions make MFA harder to bypass accidentally and easier to test.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: OpenRouter as an LLM Access Layer",
+  "narration": "OpenRouter is most useful when it is treated as a controlled access layer for LLM work. It gives teams a common API shape, a broad model catalog, and routing options that can reduce provider lock-in and make experimentation faster. Those advantages matter because modern LLM applications rarely stay fixed. Teams compare models, adjust prompts, add fallback paths, and revise privacy requirements as products mature.\n\nThe central lesson is that flexibility must be governed. Authentication should use protected API keys and environment-specific credentials. Model selection should be explicit and tied to task requirements. Provider routing should reflect real constraints around latency, cost, data handling, and fallback behavior. Privacy controls should start with data classification and continue through prompt minimization, provider approval, and log design.\n\nA production OpenRouter integration also needs software engineering discipline. Put API calls behind a wrapper. Validate inputs and outputs. Set timeouts and retry rules deliberately. Measure token usage, latency, errors, fallback frequency, and quality. Run evaluations before changing models or provider preferences. Keep configuration reviewed, documented, and reversible.\n\nUsed this way, OpenRouter is not just a convenient endpoint. It becomes a way to make LLM access more modular, observable, and adaptable. The best outcome is an application that can take advantage of model choice without losing control over reliability, privacy, cost, or user trust. Teams can move faster because the integration is prepared for change, and they can move carefully because every important route, credential, policy decision, and quality signal has a place to be reviewed. That discipline makes future audits and incident reviews much less dependent on memory. That is how optionality becomes an engineering asset rather than operational drift.",
+  "narrationPoints": [
+    "OpenRouter works best as a governed LLM access layer.",
+    "Flexibility requires explicit controls.",
+    "Privacy starts with data classification and minimization.",
+    "Operational telemetry should cover cost, quality, and reliability.",
+    "Reviewed configuration keeps model routing adaptable and auditable."
+  ],
+  "graphicAlt": "Reviewable configuration connects protected credentials and explicit routing with data policy, client validation and evaluation."
+};

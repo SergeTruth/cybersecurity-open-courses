@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Files, Paths, and Resource Access Boundaries",
+  "graphicAlt": "Narrow resource authority is verified at use, with link and ownership checks and owned temporary-resource cleanup.",
+  "narration": "File and resource operations are common reasons for privilege separation, and they require careful handling. A privileged helper should not blindly act on a path supplied by a low-privilege caller. The helper must verify what it is operating on at the point of use, because files and paths can change between request preparation and execution.\n\nPath handling should account for allowed locations, canonicalization, symlinks, shortcuts, relative paths, temporary files, network locations, ownership, permissions, and platform behavior. The safest designs avoid open-ended path authority. Where practical, privileged code should use allowlisted resource locations, known identifiers, brokered handles, or tightly scoped commands.\n\nResource access boundaries also apply to devices, services, registry-like settings, protected directories, sockets, and named system objects. The helper should validate the resource category, the requested operation, and the caller's permission for that operation. It should not treat a string path or resource name as sufficient proof of intent.\n\nTemporary resources deserve explicit lifecycle rules. They should be created in safe locations, with safe permissions, predictable ownership, and reliable cleanup. Partial failures should not leave protected files, locks, handles, or service state in a confusing condition. The privileged component should be able to explain what it changed and how it recovered.\n\nGood file-boundary design is boring in the best way. It favors known locations, narrow operations, careful checks, and consistent errors over flexible but difficult-to-review behavior. That makes maintenance safer when platforms or deployment layouts change.",
+  "narrationPoints": [
+    "File and resource operations are common reasons for privilege separation, and they require careful handling.",
+    "Path handling should account for allowed locations, canonicalization, symlinks, shortcuts, relative paths, temporary files, network locations, ownership, permissions, and platform behavior.",
+    "The helper should validate the resource category, the requested operation, and the caller's permission for that operation.",
+    "Resource access boundaries also apply to devices, services, registry-like settings, protected directories, sockets, and named system objects.",
+    "Partial failures should not leave protected files, locks, handles, or service state in a confusing condition.",
+    "Good file-boundary design is boring in the best way."
+  ]
+};

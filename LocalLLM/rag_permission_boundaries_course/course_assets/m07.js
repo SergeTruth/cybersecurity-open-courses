@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Generation-Time Controls and Source Handling",
+  "graphicAlt": "Allowed source evidence supports generation under trusted policy, with provenance, permitted citations and conflict review.",
+  "narration": "Generation is not a substitute for authorization. By the time the model writes an answer, the application should already have decided which sources the user may access. The model can summarize, compare, and explain allowed evidence, but it should not be responsible for discovering permission boundaries from raw text in the prompt.\n\nRetrieved documents can contain outdated guidance, conflicting statements, sensitive fragments, or instructions written for a different audience. The model should treat retrieved text as context, not as policy. Trusted application rules, system instructions, access decisions, and workflow controls should remain higher authority than statements found inside retrieved content.\n\nSource handling affects user trust and safety. Responses should cite, summarize, or reference only sources the user may access. If the answer depends on several documents, the application should preserve provenance so reviewers can understand where the information came from. When sources conflict, the system should avoid presenting a confident answer that hides uncertainty. It may need to state that available sources differ or that a human review is required.\n\nOutput controls should reduce accidental disclosure from retrieved context. The application may need to limit excerpts, avoid sensitive fields, enforce tenant-specific formatting, or suppress citations that reveal restricted source names. These controls do not replace retrieval authorization, but they help ensure that the final response respects the same permission boundary the retriever enforced.",
+  "narrationPoints": [
+    "Generation is not a substitute for authorization.",
+    "Retrieved documents can contain outdated guidance, conflicting statements, sensitive fragments, or instructions written for a different audience.",
+    "Source handling affects user trust and safety.",
+    "Output controls should reduce accidental disclosure from retrieved context."
+  ]
+};

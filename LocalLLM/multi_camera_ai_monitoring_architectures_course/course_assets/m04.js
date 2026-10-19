@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Compute and Performance Planning",
+  "narration": "Video analysis consumes resources in several stages: network input, codec decode, frame conversion, inference, event logic, encoding, storage, and user access. Measure the entire pipeline. A GPU may be idle while CPU decode or storage becomes the bottleneck.\n\nCPUs can support modest frame sampling and lightweight models. GPUs provide high parallel throughput for detection and larger models. NPUs and dedicated accelerators can offer efficient inference for supported model formats. Hardware compatibility matters as much as advertised speed.\n\nConsumer GPUs can be cost-effective but have fixed memory and operational limits. Mini PCs and edge appliances suit smaller sites. Apple Silicon offers integrated CPU, GPU, and media capabilities for compatible software. Local servers provide more expansion, cooling, storage, and redundancy options.\n\nModel size, input resolution, precision, batch size, and sample rate determine inference demand. Batching can improve throughput while adding delay. Event-triggered sampling can reduce cost but may miss activity if the trigger is weak.\n\nCapacity plans should cover average and peak streams, concurrent events, dashboard use, model reloads, storage jobs, and hardware failure. Preserve headroom rather than sizing to a clean benchmark. Power, cooling, noise, and physical placement also affect reliability.\n\nTest with representative cameras, codecs, lighting, models, and alert rules. Track latency, dropped frames, queue depth, memory, temperature, and event completion. Match hardware to required service levels, then define what the system should degrade or postpone when resources are exhausted.",
+  "graphicAlt": "Whole-pipeline measurements reveal bottlenecks and support peak-demand headroom with explicit degradation behavior.",
+  "narrationPoints": [
+    "Video analysis consumes resources in several stages: network input, codec decode, frame conversion, inference, event logic, encoding, storage, and user access.",
+    "CPUs can support modest frame sampling and lightweight models.",
+    "Consumer GPUs can be cost-effective but have fixed memory and operational limits.",
+    "Model size, input resolution, precision, batch size, and sample rate determine inference demand."
+  ]
+};

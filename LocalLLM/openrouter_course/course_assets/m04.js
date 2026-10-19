@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Routing, Providers, Fallbacks, and Reliability",
+  "narration": "Routing is one of the main reasons teams adopt OpenRouter. A model request may be served through different underlying providers, and the routing layer can help choose a provider based on availability, price, performance, or explicit preferences. That flexibility can improve resilience, but it also introduces a design question: what variation is acceptable for this workload?\n\nFor some features, provider choice can be flexible. A draft summarizer may tolerate small differences in wording as long as it remains accurate and fast. For other features, provider choice should be constrained. A regulated workflow may require a provider with a specific data handling posture, or an evaluation harness may need repeatable behavior from one provider while comparing model changes. OpenRouter provider routing options are powerful when they are tied to clear requirements rather than left as invisible defaults.\n\nFallbacks need special attention. A fallback can prevent outages, but it can also change behavior, privacy posture, context length, supported parameters, or cost. The application should decide whether a fallback is allowed, which providers or models may receive the request, and whether the response should be labeled or logged as a fallback result. Reliability is not just staying online. Reliability is staying within the promises the application made.\n\nA mature routing design includes tests for failure modes. Simulate timeouts, provider unavailability, rejected parameters, and rate pressure. Verify that retries do not multiply cost unexpectedly, that duplicate requests do not create inconsistent user-visible actions, and that the system exposes enough telemetry to explain which route handled a request. A useful rule is to test the route you expect and the route you hope never runs. Documenting negative tests makes later reliability reviews more honest.",
+  "narrationPoints": [
+    "Routing can choose providers by availability, cost, or preference.",
+    "Fallbacks improve uptime but may change behavior or policy posture.",
+    "Provider constraints should reflect workload requirements.",
+    "Reliability includes staying within privacy and cost promises.",
+    "Test timeouts, rejected parameters, rate pressure, and retry behavior."
+  ],
+  "graphicAlt": "Fallback policy preserves approved route constraints, bounds retry effects and records which route served the request."
+};

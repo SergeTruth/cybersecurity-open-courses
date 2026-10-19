@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+OpenRouter is designed to work with familiar OpenAI-compatible request patterns.
+
+2
+00:00:05.240 --> 00:00:16.840
+In practice, that means many client libraries can point at the OpenRouter base URL, supply an OpenRouter API key, and send chat completion style requests with a chosen model identifier.
+
+3
+00:00:16.940 --> 00:00:24.620
+This compatibility is valuable because it lets teams preserve a common application shape while evaluating different models behind that shape.
+
+4
+00:00:24.900 --> 00:00:29.380
+Model selection should be treated as an engineering decision, not a menu click.
+
+5
+00:00:29.480 --> 00:00:36.920
+A model that is excellent for long-form reasoning may be slower or more expensive than a model that is good enough for classification.
+
+6
+00:00:37.020 --> 00:00:46.860
+A model that writes concise code comments may not be the best model for legal review, summarization, or tool calling.
+
+7
+00:00:46.960 --> 00:00:50.480
+The right question is not which model is generally best.
+
+8
+00:00:50.580 --> 00:01:00.020
+The right question is which model satisfies the task's quality, latency, context, privacy, and cost requirements under realistic inputs.
+
+9
+00:01:00.300 --> 00:01:05.580
+The model catalog is useful for discovery, but production systems need their own allow list.
+
+10
+00:01:05.680 --> 00:01:14.240
+Record the model identifiers your application may use, the purpose of each one, and the fallback sequence if the first choice is unavailable.
+
+11
+00:01:14.340 --> 00:01:18.340
+Avoid wiring business logic to a vague idea of the newest model.
+
+12
+00:01:18.440 --> 00:01:26.280
+Model names, versions, providers, and capabilities can change over time, so the application should make those dependencies visible.
+
+13
+00:01:26.560 --> 00:01:30.080
+Good integrations also normalize request construction.
+
+14
+00:01:30.180 --> 00:01:39.300
+Keep system instructions, user content, temperature choices, token limits, and response expectations in code paths that can be reviewed and tested.
+
+15
+00:01:39.400 --> 00:01:45.880
+OpenRouter makes access flexible, but the application still owns prompt discipline and output validation.
+
+16
+00:01:45.980 --> 00:01:53.420
+For long-lived products, record why each model was selected so future maintainers can evaluate changes against the original requirement.
+
+17
+00:01:53.520 --> 00:01:56.880
+That note prevents emergency upgrades from becoming guesswork.

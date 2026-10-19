@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "graphicAlt": "A credible Moderate program aligns live scope and controls with evidence, responsibility and sustained operations.",
+  "narration": "FedRAMP Moderate is a commonly used baseline for cloud services supporting federal use cases with meaningful security, privacy, operational, or mission impact. It connects impact categorization to security control expectations, engineering implementation, assessment evidence, authorization support, and continuous monitoring. Moderate is common because many federal services fall into that risk space, not because the work is simple.\n\nThe most important concepts are scope, impact, implementation, evidence, and operations. Scope defines the cloud service offering and its boundary. Impact explains why Moderate is the right risk category. Implementation shows how controls work in the real system. Evidence supports assessment conclusions. Operations keep the control environment healthy after authorization support activities are complete.\n\nSuccess depends on shared responsibility and accurate documentation. Providers, platforms, customers, assessors, and authorizing officials all have different roles. Inherited controls must be traceable. Customer responsibilities must be clear. Documentation must match the live architecture and operating processes. A Moderate story is only credible when the words, diagrams, evidence, and system behavior align.\n\nThe goal is not simply to pass a review. The goal is to help federal stakeholders make informed risk decisions about a cloud service. A strong Moderate program gives those stakeholders a clear view of the service boundary, control implementation, assessment evidence, known risks, remediation work, and ongoing monitoring. That is the practical value of understanding FedRAMP Moderate.",
+  "narrationPoints": [
+    "FedRAMP Moderate is a commonly used baseline for cloud services supporting federal use cases with meaningful security, privacy, operational, or...",
+    "The most important concepts are scope, impact, implementation, evidence, and operations.",
+    "Success depends on shared responsibility and accurate documentation.",
+    "The goal is not simply to pass a review."
+  ]
+};

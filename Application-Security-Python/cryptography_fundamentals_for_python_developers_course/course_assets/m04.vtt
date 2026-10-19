@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Symmetric encryption uses the same secret key for encryption and decryption.
+
+2
+00:00:04.680 --> 00:00:13.880
+Python applications may use it to protect stored data, files, messages, backups, application secrets, or internal payloads at a high level.
+
+3
+00:00:13.980 --> 00:00:18.940
+The central strength is efficiency and simplicity of a shared secret.
+
+4
+00:00:19.040 --> 00:00:28.160
+The central challenge is key management: anyone who can decrypt must have access to the same secret key or to a service that can use it on their behalf.
+
+5
+00:00:28.440 --> 00:00:30.680
+Encryption alone is not always enough.
+
+6
+00:00:30.780 --> 00:00:42.220
+If a system only hides plaintext but does not detect unauthorized changes to ciphertext, an attacker may be able to tamper with encrypted data in ways the application does not expect.
+
+7
+00:00:42.320 --> 00:00:47.840
+Authenticated encryption concepts combine confidentiality with integrity protection for ciphertext.
+
+8
+00:00:47.940 --> 00:00:55.380
+The application can both keep data private and detect if the protected message was modified outside the intended process.
+
+9
+00:00:55.660 --> 00:01:01.020
+Initialization values, nonces, and modes are areas where misuse becomes dangerous.
+
+10
+00:01:01.120 --> 00:01:07.120
+Some encryption designs require a value to be unique, unpredictable, or never reused with the same key.
+
+11
+00:01:07.220 --> 00:01:15.220
+Reusing a nonce or choosing an unsafe mode can weaken confidentiality or integrity even if the algorithm itself is strong.
+
+12
+00:01:15.320 --> 00:01:24.120
+These details are one reason developers should prefer high-level library APIs that package safe choices together rather than manually assembling primitives.
+
+13
+00:01:24.400 --> 00:01:37.120
+A safe encryption design should define what is encrypted, which key protects it, where the key lives, how nonces or initialization values are handled, how integrity is checked, how errors are reported, and how rotation works.
+
+14
+00:01:37.220 --> 00:01:42.820
+Avoid treating encryption as a single function call that magically solves data protection.
+
+15
+00:01:42.920 --> 00:01:51.720
+It is a small protocol inside your application, and it needs the same review and operational ownership as any other security boundary.

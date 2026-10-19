@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Files, Logs, and Cleanup Automation",
+  "narration": "File system automation is common in Windows administration. Scripts collect logs, summarize directories, archive reports, check permissions, rotate output, and remove temporary files. These workflows look simple, but they can become dangerous when paths, wildcards, and deletion logic are too broad. A cleanup script should be treated as a high-impact administrative tool, especially when it runs unattended or with elevated rights.\n\nPath validation is a core safety control. Scripts should distinguish between operator-provided paths, generated paths, and trusted configuration paths. They should resolve and constrain target locations before acting, avoid accidental path traversal through untrusted input, and be careful with relative paths. If a script uses wildcards, it should make the matched files reviewable before destructive steps occur. The broader the pattern, the stronger the confirmation should be.\n\nRetention policies help avoid arbitrary cleanup behavior. Rather than deleting based on vague assumptions, scripts should define what categories of files are in scope, how age is calculated, which files are excluded, and what evidence is logged. For sensitive logs and archives, scripts should also consider access permissions and whether the output may expose operational details, identifiers, or protected information.\n\nSafe archive handling is part of file automation. Archive scripts should avoid overwriting important files, should not blindly trust archive contents, and should account for very large or deeply nested input. Temporary working directories should be unique to the run and cleaned up when processing completes. If cleanup fails, the script should report the leftover location without dumping sensitive file contents into logs.",
+  "graphicAlt": "Resolved confined paths and explicit retention select reviewable cleanup targets, while archive and logging rules protect operational data.",
+  "narrationPoints": [
+    "File system automation is common in Windows administration.",
+    "Path validation is a core safety control.",
+    "Retention policies help avoid arbitrary cleanup behavior.",
+    "Safe archive handling is part of file automation."
+  ]
+};

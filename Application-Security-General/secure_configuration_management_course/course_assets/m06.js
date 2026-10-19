@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Validation and Guardrails",
+  "narration": "Configuration validation checks whether settings match the expected contract before they affect a running system. A schema can define required values, types, formats, ranges, allowed values, and relationships between settings. This is especially important for values that begin as strings, such as environment variables, because a misspelled boolean, missing URL, or invalid duration can silently change behavior.\n\nStartup validation is a useful guardrail. Instead of allowing an application to start with missing secrets, unsafe defaults, invalid ranges, or dangerous combinations, the application can fail early and clearly. Fail-safe behavior is better than serving traffic with a configuration that disables authentication, writes secrets to logs, skips TLS verification, or connects to the wrong data environment.\n\nDangerous combinations deserve explicit checks. Debug mode and production environment should not coexist. Public access and sensitive storage should not coexist. Disabled TLS verification and external service calls should not coexist. Broad CORS origins and credentialed browser requests should be reviewed carefully. Guardrails should encode these rules so they are not dependent on memory during a high-pressure deployment.\n\nPre-deployment checks and automated policy checks in CI/CD can catch problems before they reach production. These checks might validate infrastructure-as-code, container settings, Kubernetes manifests, cloud resources, application configuration, or environment variables. Automation does not replace human review, but it makes common risky patterns harder to miss and easier to correct early.",
+  "graphicAlt": "Schema and combination checks reject unsafe configuration before deployment and startup.",
+  "narrationPoints": [
+    "Configuration validation checks whether settings match the expected contract before they affect a running system.",
+    "Startup validation is a useful guardrail.",
+    "Dangerous combinations deserve explicit checks.",
+    "Pre-deployment checks and automated policy checks in CI/CD can catch problems before they reach production."
+  ]
+};

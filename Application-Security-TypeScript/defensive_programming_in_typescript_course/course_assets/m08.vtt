@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Dependencies extend the trust boundary of an application.
+
+2
+00:00:04.440 --> 00:00:15.640
+A package may be well maintained, widely used, and still introduce breaking changes, vulnerabilities, unexpected behavior, or transitive dependencies the team did not directly choose.
+
+3
+00:00:15.740 --> 00:00:21.580
+Defensive TypeScript teams treat dependency decisions as engineering decisions, not just installation steps.
+
+4
+00:00:21.860 --> 00:00:28.820
+Useful defenses include lockfiles, minimal packages, reviewed updates, and dependency scanning where appropriate.
+
+5
+00:00:28.920 --> 00:00:32.200
+Minimal packages do not mean never using libraries.
+
+6
+00:00:32.300 --> 00:00:40.460
+They mean avoiding unnecessary dependencies for trivial work and understanding the operational cost of each package that becomes part of the application.
+
+7
+00:00:40.740 --> 00:00:43.540
+Configuration should be validated at startup.
+
+8
+00:00:43.640 --> 00:00:50.440
+Environment variables, feature flags, service endpoints, timeouts, and mode settings are runtime inputs.
+
+9
+00:00:50.540 --> 00:01:02.220
+If a required value is missing or malformed, it is usually better to fail clearly during startup than to fail unpredictably after the system has accepted traffic or processed partial work.
+
+10
+00:01:02.500 --> 00:01:05.060
+Secrets require special care.
+
+11
+00:01:05.160 --> 00:01:10.440
+They should not be hardcoded, logged, committed, or exposed to client-side bundles.
+
+12
+00:01:10.540 --> 00:01:20.300
+A defensive build process makes it clear which values are server-only, which values may be public, and how secret rotation or missing secret behavior is handled.
+
+13
+00:01:20.580 --> 00:01:23.460
+Build settings should support production-safe behavior.
+
+14
+00:01:23.560 --> 00:01:26.120
+Type checking should run before deployment.
+
+15
+00:01:26.220 --> 00:01:29.980
+Linting, when available, can catch risky patterns.
+
+16
+00:01:30.080 --> 00:01:41.200
+Production builds should not depend on development-only assumptions, debug flags, permissive mock behavior, or local environment details that are absent in deployed systems.
+
+17
+00:01:41.480 --> 00:01:46.920
+Defensive teams make risky assumptions visible in configuration and deployment processes.
+
+18
+00:01:47.020 --> 00:01:54.140
+They document required variables, validate them early, review dependency changes, and keep build behavior consistent.
+
+19
+00:01:54.240 --> 00:02:00.320
+This reduces incidents caused by hidden operational assumptions rather than application logic alone.

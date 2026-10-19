@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Operating systems provide different mechanisms for enforcing privilege separation.
+
+2
+00:00:05.240 --> 00:00:22.760
+Depending on the platform and application type, teams may use sandboxing, service accounts, capabilities, entitlements, process isolation, job objects, restricted tokens, containers, filesystem permissions, brokered APIs, or mandatory access controls.
+
+3
+00:00:22.860 --> 00:00:27.580
+These controls can enforce boundaries even when application code has defects.
+
+4
+00:00:27.860 --> 00:00:31.300
+Platform controls should match the operation being performed.
+
+5
+00:00:31.400 --> 00:00:34.520
+A renderer might need file and network restrictions.
+
+6
+00:00:34.620 --> 00:00:39.900
+A service might need a dedicated account with only specific directories available.
+
+7
+00:00:40.000 --> 00:00:45.040
+A worker might need a small set of capabilities instead of broad administrative rights.
+
+8
+00:00:45.140 --> 00:00:51.460
+Applying controls as vague hardening is less useful than mapping each control to a clear operation and risk.
+
+9
+00:00:51.740 --> 00:00:58.860
+Behavior differs across Windows, Linux, macOS, mobile, embedded, and containerized environments.
+
+10
+00:00:58.960 --> 00:01:07.600
+Names, permission models, inheritance behavior, service identities, filesystem rules, and available sandbox features vary.
+
+11
+00:01:07.700 --> 00:01:12.340
+A design that is safe on one platform may need adjustment on another.
+
+12
+00:01:12.440 --> 00:01:16.040
+Platform assumptions should be documented and tested.
+
+13
+00:01:16.320 --> 00:01:21.120
+Security should be enforced where the platform can help, not only by comments or convention.
+
+14
+00:01:21.220 --> 00:01:26.660
+If a helper should not access a directory, the operating system configuration should ideally reflect that.
+
+15
+00:01:26.760 --> 00:01:33.160
+If a worker does not need network access, the environment should make that limitation real where practical.
+
+16
+00:01:33.440 --> 00:01:38.480
+Platform controls work best alongside application-level validation.
+
+17
+00:01:38.580 --> 00:01:46.500
+The OS can limit broad categories of access, while the broker still validates requests, authorizes callers, and records safe audit information.
+
+18
+00:01:46.600 --> 00:01:49.160
+Together they provide layered defense.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Building Robust Client Integrations",
+  "narration": "A robust OpenRouter client starts with a narrow wrapper around the API. The wrapper should own base URL configuration, authentication, request defaults, timeout policy, retry policy, model allow lists, and error translation. Application features should call that wrapper instead of constructing raw requests in many places. This keeps provider and model decisions visible and makes later changes safer.\n\nTimeouts and retries should be explicit. LLM requests can fail because of network issues, provider capacity, invalid parameters, content policy decisions, malformed input, or context limits. Retrying every failure is not safe. Retrying a timeout may be reasonable for an idempotent summarization request, while retrying a request that triggers an external action can duplicate work. The client should distinguish retryable transport problems from validation errors and policy outcomes.\n\nInputs and outputs need contracts. Define maximum input size, expected response format, and how the application handles refusal, truncation, invalid JSON, empty output, or a model answer that does not meet the contract. If the application expects structured data, validate it with a schema or parser before using it. If the model output influences business logic, treat it as untrusted until checked.\n\nConfiguration should be boring and auditable. Store allowed models and provider preferences in reviewed configuration, not scattered constants. Keep secrets out of client-side bundles. Use generic placeholders in tests. A clean client layer makes OpenRouter an interchangeable access layer instead of a hidden dependency woven through the product. That layer also gives incident responders one place to inspect when requests behave unexpectedly. It also becomes the natural place to enforce rate limits and shared request metadata. Tests should assert those defaults before teams depend on them.",
+  "narrationPoints": [
+    "Use a narrow API wrapper instead of scattered raw requests.",
+    "Separate retryable failures from validation and policy outcomes.",
+    "Validate model outputs before using them in logic.",
+    "Keep model and provider choices in reviewed configuration.",
+    "Never expose server-side API keys in client bundles."
+  ],
+  "graphicAlt": "A reviewed wrapper centralizes defaults, validates contracts and handles failure classes with bounded retry behavior."
+};

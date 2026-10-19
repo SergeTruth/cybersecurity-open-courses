@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Validation should happen before business logic depends on the data.
+
+2
+00:00:04.280 --> 00:00:14.040
+This is the parse-then-use pattern: accept raw input, inspect it, convert it into a trusted internal object, and only then let application logic use it.
+
+3
+00:00:14.140 --> 00:00:18.460
+If the input cannot be safely converted, reject it through a clear error path.
+
+4
+00:00:18.740 --> 00:00:22.260
+Parse-then-use is different from scattering small checks everywhere.
+
+5
+00:00:22.360 --> 00:00:28.440
+When validation is centralized near the trust boundary, the rest of the system can work with stronger assumptions.
+
+6
+00:00:28.540 --> 00:00:39.980
+Functions deeper in the application should not have to repeatedly ask whether a required identifier is present, whether a date is meaningful, or whether an enum-like value is one of the allowed cases.
+
+7
+00:00:40.260 --> 00:00:44.340
+Good validation checks both technical structure and business meaning.
+
+8
+00:00:44.440 --> 00:00:52.120
+Technical checks answer questions such as whether a value is an object, whether a field is a string, and whether an array length is within a safe range.
+
+9
+00:00:52.220 --> 00:01:02.220
+Business checks answer questions such as whether a transition is allowed, whether a requested quantity is positive, or whether a value is valid for the current tenant, feature, or workflow.
+
+10
+00:01:02.500 --> 00:01:07.700
+Safe defaults can be useful, but silent correction can also hide bugs.
+
+11
+00:01:07.800 --> 00:01:12.680
+If a missing page size silently becomes a default, that may be fine.
+
+12
+00:01:12.780 --> 00:01:19.020
+If a malformed role silently becomes a low-privilege role, that might hide a caller defect that should be investigated.
+
+13
+00:01:19.120 --> 00:01:24.000
+Defensive design should distinguish intentional defaults from surprising repair.
+
+14
+00:01:24.280 --> 00:01:28.760
+Validation errors should be useful without revealing sensitive internals.
+
+15
+00:01:28.860 --> 00:01:36.140
+Operators and developers need enough detail to diagnose bad input, incompatible clients, or data drift.
+
+16
+00:01:36.240 --> 00:01:39.920
+External callers may need a stable, limited message.
+
+17
+00:01:40.020 --> 00:01:48.020
+Avoid exposing secrets, stack traces, private payloads, or implementation details in places where they do not belong.
+
+18
+00:01:48.300 --> 00:01:50.940
+Validation is also a maintenance boundary.
+
+19
+00:01:51.040 --> 00:01:56.240
+When data contracts change, validators become a visible place to update expectations.
+
+20
+00:01:56.340 --> 00:02:04.740
+That makes the system easier to reason about than code that accepts anything and discovers the problem much later, after partial work has already happened.

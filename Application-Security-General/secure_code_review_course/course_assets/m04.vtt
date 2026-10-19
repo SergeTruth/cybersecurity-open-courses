@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Authentication verifies who or what is making a request.
+
+2
+00:00:04.920 --> 00:00:09.720
+During review, authentication checks should be easy to find and hard to bypass accidentally.
+
+3
+00:00:09.820 --> 00:00:15.500
+Code should not depend on the client to assert identity, hide routes, or send trustworthy role information.
+
+4
+00:00:15.600 --> 00:00:28.160
+Token validation, session lookup, password handling at a high level, account recovery, and administrative login flows all deserve careful attention because failures here affect the foundation of access.
+
+5
+00:00:28.440 --> 00:00:31.880
+Authorization determines what the authenticated identity may do.
+
+6
+00:00:31.980 --> 00:00:40.940
+Reviewers should look for role and permission checks, object-level access control, tenant boundaries, and close enforcement near sensitive actions.
+
+7
+00:00:41.040 --> 00:00:52.000
+A route-level check may be necessary but not sufficient if the route accepts an object identifier, account identifier, tenant identifier, file path, or resource name.
+
+8
+00:00:52.100 --> 00:00:57.700
+The code must verify that the user can access that specific object, not just that the user is logged in.
+
+9
+00:00:57.980 --> 00:01:01.020
+Session logic often creates subtle risk.
+
+10
+00:01:01.120 --> 00:01:08.240
+Reviewers should understand how sessions are created, refreshed, invalidated, and tied to authentication state.
+
+11
+00:01:08.340 --> 00:01:18.980
+Password reset, MFA reset, account recovery, role changes, logout, and administrative actions may need to end existing sessions or require stronger checks.
+
+12
+00:01:19.080 --> 00:01:26.840
+Token validation should include issuer, audience, expiration, signature, and context appropriate to the application design.
+
+13
+00:01:27.120 --> 00:01:30.800
+Privilege escalation risks frequently appear where assumptions are implicit.
+
+14
+00:01:30.900 --> 00:01:45.060
+Code may check authorization in one path but not another, enforce tenant boundaries in the user interface but not the API, or protect normal user actions while forgetting bulk import, export, background, or administrative functions.
+
+15
+00:01:45.160 --> 00:01:53.960
+Reviewers should verify server-side enforcement close to sensitive actions and look for mismatches between intended permissions and actual code paths.

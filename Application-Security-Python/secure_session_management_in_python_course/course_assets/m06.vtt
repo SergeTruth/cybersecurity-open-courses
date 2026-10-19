@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Session lifetime is a risk and usability decision.
+
+2
+00:00:04.600 --> 00:00:08.520
+Idle timeout ends a session after a period of inactivity.
+
+3
+00:00:08.620 --> 00:00:13.740
+Absolute timeout ends a session after a maximum age regardless of activity.
+
+4
+00:00:13.840 --> 00:00:18.720
+Renewal can extend a session when the user is active or when a token is refreshed.
+
+5
+00:00:18.820 --> 00:00:26.420
+Remember-me functionality at a high level may intentionally extend convenience, but it should be designed with clear risk controls and user expectations.
+
+6
+00:00:26.700 --> 00:00:29.980
+Sessions must end predictably when risk changes.
+
+7
+00:00:30.080 --> 00:00:36.960
+Logout should address the actual authenticated session or token state as appropriate, not merely hide a username or change a button label.
+
+8
+00:00:37.060 --> 00:00:49.220
+Account disablement, password change, MFA reset, suspicious activity, administrative revocation, and privilege changes may all require invalidating or reducing existing session authority.
+
+9
+00:00:49.320 --> 00:00:52.760
+The application should define these effects before incidents happen.
+
+10
+00:00:53.040 --> 00:00:56.240
+Revocation is harder in some architectures than others.
+
+11
+00:00:56.340 --> 00:01:00.980
+Server-side sessions can often be invalidated by changing stored state.
+
+12
+00:01:01.080 --> 00:01:12.520
+Stateless tokens may remain valid until expiration unless the system uses revocation lists, short lifetimes, token versioning, or other invalidation strategies.
+
+13
+00:01:12.620 --> 00:01:16.780
+The right answer depends on the risk, scale, and operational model.
+
+14
+00:01:16.880 --> 00:01:22.640
+The important point is to avoid assuming that logout and revocation work unless the architecture supports them.
+
+15
+00:01:22.920 --> 00:01:25.560
+Privileged sessions need extra thought.
+
+16
+00:01:25.660 --> 00:01:37.980
+Administrative actions, sensitive exports, credential changes, and security setting changes may justify shorter lifetimes, step-up authentication, stronger monitoring, or separate session state.
+
+17
+00:01:38.080 --> 00:01:42.080
+Renewal should not silently preserve stale authorization forever.
+
+18
+00:01:42.180 --> 00:01:52.180
+When sessions are renewed, the application should decide what identity, role, tenant, MFA, and risk context are still valid for continued access.

@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Frameworks and Template Engines",
+  "narration": "Modern frameworks and template engines often provide auto-escaping, context-aware rendering, and safe binding APIs. These protections are valuable because they make the safe path easy for common use cases. But every framework has boundaries. A template may escape text nodes but handle URLs, styles, scripts, and raw HTML differently. Server-side rendering and client-side rendering may also use different mechanisms. Developers need to know what the framework protects by default and where it expects explicit care.\n\nUnsafe helpers deserve review. Features with names such as raw HTML, dangerously set inner HTML, safe string, no escape, unescaped output, or trusted markup are powerful and risky. Sometimes they are necessary, especially for sanitized rich text or controlled internal content. But they should be rare, justified, and surrounded by strong controls. Markdown rendering and rich text editors are common places where teams accidentally assume content is safe because it looks user friendly.\n\nTemplate context matters. A value inserted into normal text may be auto-escaped correctly, while the same value inserted into a script, style, URL, or event handler context may require a different approach or should be avoided entirely. Review places where escaping is disabled, where helper functions return pre-marked safe content, where server data becomes client state, and where generated HTML is stored for later rendering. Safe framework use is not only about choosing a framework; it is about staying inside the framework?s safe patterns.",
+  "graphicAlt": "Framework defaults help within supported contexts; raw helpers, rich content and server-to-client boundaries require explicit review.",
+  "narrationPoints": [
+    "Modern frameworks and template engines often provide auto-escaping, context-aware rendering, and safe binding APIs.",
+    "Unsafe helpers deserve review.",
+    "Template context matters."
+  ]
+};

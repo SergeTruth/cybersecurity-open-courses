@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Privilege separation should be tested directly.
+
+2
+00:00:03.480 --> 00:00:21.480
+Tests should verify that low-privilege code cannot perform sensitive operations directly, invalid IPC requests are rejected, malformed messages fail safely, unauthorized callers are denied, path boundaries hold, helpers shut down cleanly, and failures do not leave privileged state behind.
+
+3
+00:00:21.760 --> 00:00:24.320
+Negative tests are especially important.
+
+4
+00:00:24.420 --> 00:00:37.300
+A feature may work correctly for an allowed request but still behave poorly when the caller is not authorized, the message version is wrong, the target path is outside policy, the helper is restarting, or a resource is unavailable.
+
+5
+00:00:37.400 --> 00:00:43.240
+These paths are part of the security contract and should be exercised intentionally.
+
+6
+00:00:43.520 --> 00:00:49.120
+Monitoring and logs should show privileged request outcomes without leaking sensitive data.
+
+7
+00:00:49.220 --> 00:00:56.900
+Operators need to know whether requests are allowed, denied, malformed, unsupported, or failing due to dependency problems.
+
+8
+00:00:57.000 --> 00:01:04.360
+Logs should include safe identifiers and event categories rather than secrets, private handles, or unnecessary system detail.
+
+9
+00:01:04.640 --> 00:01:14.720
+Code review should focus on authority, caller identity, message validation, resource access, helper lifecycle, update paths, and error behavior.
+
+10
+00:01:14.820 --> 00:01:18.900
+Privilege changes should be treated as security-relevant changes.
+
+11
+00:01:19.000 --> 00:01:27.160
+A new helper command, entitlement, service account permission, or deployment rule can alter the boundary even if the code change looks small.
+
+12
+00:01:27.440 --> 00:01:30.160
+Findings should become tracked engineering work.
+
+13
+00:01:30.260 --> 00:01:38.980
+When a boundary test fails or monitoring shows unclear behavior, teams should update the contract, implementation, and documentation together.
+
+14
+00:01:39.080 --> 00:01:44.040
+Privilege separation stays effective only when it is maintained across releases.

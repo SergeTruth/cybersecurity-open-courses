@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Preparing for a Review",
+  "narration": "Preparation makes secure code review sharper and less noisy. A reviewer should understand the application purpose, the business function being changed, the users involved, and the sensitive features in scope. A focused review of a payment workflow, an administrative endpoint, or an account recovery change needs different attention than a broad review of supporting utility code. Clear scope keeps the reviewer from wandering and helps the team understand what the review can and cannot claim.\n\nArchitecture and data-flow context are especially valuable. Diagrams do not need to be perfect, but reviewers need to know where data enters, which services handle it, where trust boundaries exist, what identities are used, and where sensitive operations happen. Authentication, authorization, storage, integrations, background jobs, deployment context, and configuration sources all influence what secure behavior should look like in the code.\n\nReviewers also need to decide whether they are examining recent changes or performing a wider application review. Change-focused reviews are efficient for pull requests and release gates, but they can miss inherited design issues. Full application reviews take more time, but they are useful for high-risk systems, major architecture changes, or applications with little prior security attention. Both styles are valid when the scope is explicit.\n\nGood preparation reduces checklist-driven noise. Instead of asking every possible question of every file, reviewers choose representative code paths and security-sensitive flows. They look at the paths most likely to handle untrusted input, sensitive data, identity decisions, privileged actions, external integrations, or dangerous sinks. Preparation turns review from random inspection into directed analysis.",
+  "graphicAlt": "Purpose, architecture and explicit scope direct attention to representative security-sensitive paths.",
+  "narrationPoints": [
+    "Preparation makes secure code review sharper and less noisy.",
+    "Architecture and data-flow context are especially valuable.",
+    "Reviewers also need to decide whether they are examining recent changes or performing a wider application review.",
+    "Good preparation reduces checklist-driven noise."
+  ]
+};

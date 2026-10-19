@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "C++20 on Linux. This example demonstrates a move-only in-process authorization marker, not an OS credential, a secret, or a cross-process capability. The service UID and connection ownership come from trusted bootstrap; real secret use belongs inside the separately privileged broker.",
+  "codeExamples": [
+    {
+      "title": "Bind credential issuance to the kernel-authenticated peer",
+      "language": "cpp",
+      "blurb": "The broker checks SO_PEERCRED before constructing a private move-only marker. The numeric marker is illustrative and grants no OS authority; the example intentionally neither stores nor issues actual credentials.",
+      "code": "#ifndef _GNU_SOURCE\n#define _GNU_SOURCE\n#endif\n\n#include <optional>\n#include <sys/socket.h>\n#include <sys/types.h>\n#include <unistd.h>\n#include <utility>\n\nclass CredentialHandle {\npublic:\n    CredentialHandle(const CredentialHandle&) = delete;\n    CredentialHandle& operator=(const CredentialHandle&) = delete;\n\n    CredentialHandle(CredentialHandle&& other) noexcept\n        : value_(std::exchange(other.value_, -1)) {}\n\n    CredentialHandle& operator=(CredentialHandle&& other) noexcept {\n        if (this != &other) {\n            value_ = std::exchange(other.value_, -1);\n        }\n        return *this;\n    }\n\n    bool valid() const noexcept { return value_ >= 0; }\n\nprivate:\n    explicit CredentialHandle(int value) noexcept\n        : value_(value) {}\n\n    friend class CredentialBroker;\n    int value_ = -1;\n};\n\nclass CredentialBroker {\npublic:\n    explicit CredentialBroker(uid_t service_user) noexcept\n        : service_user_(service_user) {}\n\n    std::optional<CredentialHandle> issue_from_local_socket(\n        int connected_socket\n    ) const noexcept {\n        ucred credentials{};\n        socklen_t length = sizeof(credentials);\n        if (::getsockopt(\n                connected_socket,\n                SOL_SOCKET,\n                SO_PEERCRED,\n                &credentials,\n                &length\n            ) != 0 ||\n            length != sizeof(credentials) ||\n            credentials.pid <= 0 ||\n            credentials.uid != service_user_) {\n            return std::nullopt;\n        }\n        return CredentialHandle{73};\n    }\n\nprivate:\n    uid_t service_user_;\n};"
+    },
+    {
+      "title": "Verify peer policy and move-only marker ownership",
+      "language": "cpp",
+      "blurb": "A real Unix socket supplies the peer credentials, another configured UID is denied, and moving the marker invalidates its source. C++ constructor restrictions do not replace process isolation.",
+      "code": "#include <type_traits>\n\nstatic_assert(\n    !std::is_constructible_v<CredentialHandle, int>\n);\n\nint test_kernel_authenticated_credential_issuance() {\n    int sockets[2]{-1, -1};\n    if (::socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) != 0) {\n        return 1;\n    }\n\n    const CredentialBroker approved{::getuid()};\n    auto issued =\n        approved.issue_from_local_socket(sockets[0]);\n    if (!issued || !issued->valid()) {\n        ::close(sockets[0]);\n        ::close(sockets[1]);\n        return 2;\n    }\n\n    const CredentialBroker denied{\n        static_cast<uid_t>(::getuid() == 0 ? 1 : 0)\n    };\n    if (denied.issue_from_local_socket(sockets[0])) {\n        ::close(sockets[0]);\n        ::close(sockets[1]);\n        return 3;\n    }\n\n    CredentialHandle active{std::move(*issued)};\n    ::close(sockets[0]);\n    ::close(sockets[1]);\n    if (issued->valid() || !active.valid()) return 4;\n    return 0;\n}"
+    }
+  ]
+};

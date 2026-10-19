@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Deployment, Drift, and Runtime Monitoring",
+  "narration": "Configuration deployment should follow a controlled pipeline. Promotion from development to test, staging, and production should preserve intended security controls while allowing environment-specific values. The pipeline should know which settings are ordinary configuration, which are secrets, which are generated, and which require approval. This makes configuration changes part of release management rather than a side channel.\n\nConfiguration drift occurs when deployed configuration changes away from the approved or expected baseline. Drift can happen through emergency console edits, platform defaults, manual fixes, auto-scaling templates, third-party changes, or out-of-band updates. Drift detection compares what is running against what should be running and highlights differences that need review.\n\nRuntime configuration inventory and monitoring help teams understand production reality. Cloud configuration monitoring, container and Kubernetes configuration review, and platform-level visibility can detect public exposure, broad permissions, disabled logging, missing encryption, unsafe ingress, or changed security groups. Alerting should focus on security-relevant changes rather than overwhelming teams with every harmless difference.\n\nConfiguration must be observable without leaking sensitive values. Teams need to know which version, profile, and policy are active, but they should not dump secrets into logs or dashboards. Rollback planning is also important. If a configuration change breaks authentication, routing, encryption, or availability, teams should know how to restore the previous known-good state quickly and safely.",
+  "graphicAlt": "Runtime configuration is compared with approved baselines, investigated and recoverable.",
+  "narrationPoints": [
+    "Configuration deployment should follow a controlled pipeline.",
+    "Configuration drift occurs when deployed configuration changes away from the approved or expected baseline.",
+    "Runtime configuration inventory and monitoring help teams understand production reality.",
+    "Configuration must be observable without leaking sensitive values."
+  ]
+};

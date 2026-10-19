@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Log Quality and Structure",
+  "narration": "A useful log entry is clear, consistent, and searchable. Timestamps should be precise and time-zone aware. Event types should describe what happened in a stable way. Severity should reflect operational and security meaning rather than personal preference. Actor identity, source context, resource identifiers, action, outcome, and correlation ID often matter more than a long free-form message. Logs should help a responder answer the basic questions: who, what, when, where, against which resource, and with what result.\n\nStructured logging makes that possible by using consistent fields that tools can parse. Instead of burying everything in one text string, a structured log can include fields such as event_type, actor_id, tenant_id, resource_type, resource_id, action, outcome, client_ip, request_id, service, and severity. The exact fields depend on the system, but consistency across services is the key. Consistent fields let teams search, aggregate, alert, and build timelines without fragile text matching.\n\nLog quality also depends on context and restraint. Too little detail makes logs useless. Too much detail creates noise, cost, and privacy risk. Use correlation IDs to connect user-facing errors, API calls, background jobs, and downstream service requests. Avoid ambiguous messages like failed or error without a useful event type or outcome. Make sure normal operations, expected rejections, warning conditions, and critical failures are distinguishable. Good logs are written for future responders who will not have the original developer sitting beside them.",
+  "graphicAlt": "Consistent event, actor, resource, outcome and time fields connect related requests, jobs and service events.",
+  "narrationPoints": [
+    "A useful log entry is clear, consistent, and searchable.",
+    "Structured logging makes that possible by using consistent fields that tools can parse.",
+    "Log quality also depends on context and restraint."
+  ]
+};

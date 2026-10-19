@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Ingestion is where a RAG system first has the chance to preserve permission context.
+
+2
+00:00:05.320 --> 00:00:13.000
+A connector may read from a document repository, ticketing system, drive, wiki, database, or case management tool.
+
+3
+00:00:13.100 --> 00:00:17.580
+The text matters, but the access metadata around the text matters just as much.
+
+4
+00:00:17.680 --> 00:00:22.400
+Without that metadata, later stages may not know who is allowed to use the content.
+
+5
+00:00:22.680 --> 00:00:40.440
+Useful metadata can include document origin, repository, owner, tenant, project, classification, access control list, sharing settings, source identifier, source URL, lifecycle state, ingestion time, update time, and deletion status.
+
+6
+00:00:40.540 --> 00:00:43.020
+Some systems have simple permissions.
+
+7
+00:00:43.120 --> 00:00:49.600
+Others have inherited permissions, groups, labels, exceptions, or time-bound access.
+
+8
+00:00:49.700 --> 00:00:55.700
+The ingestion process should capture enough information to support the permission decision that retrieval will need later.
+
+9
+00:00:55.980 --> 00:00:59.340
+A chunk without permission context is risky.
+
+10
+00:00:59.440 --> 00:01:05.440
+If only the text moves forward, the index may treat private content like generic reference material.
+
+11
+00:01:05.540 --> 00:01:11.220
+If stale content keeps a current-looking record, users may receive guidance that should have been retired.
+
+12
+00:01:11.320 --> 00:01:17.240
+If deleted content remains searchable, the RAG system can outlive the source repository's intended control.
+
+13
+00:01:17.520 --> 00:01:24.880
+Good ingestion design preserves boundaries between repositories, tenants, projects, and data classifications.
+
+14
+00:01:24.980 --> 00:01:30.340
+It also records ownership so someone can investigate or correct records later.
+
+15
+00:01:30.440 --> 00:01:37.640
+Connector behavior should be reviewed like application code because connector shortcuts can create long-lasting permission problems downstream.
+
+16
+00:01:37.740 --> 00:01:41.900
+Metadata quality is the foundation for reliable authorization.

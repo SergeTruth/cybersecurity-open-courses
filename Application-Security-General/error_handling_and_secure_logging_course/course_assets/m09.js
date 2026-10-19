@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "narration": "Secure error handling keeps applications predictable when something goes wrong. It fails safely, avoids unnecessary disclosure, gives users clear and safe messages, and sends protected diagnostics to the places where maintainers can use them. It does not leak stack traces, secrets, tokens, paths, queries, or internal architecture to ordinary users. It also avoids silent failure, because hidden errors can undermine both security and operations.\n\nSecure logging creates useful, protected, privacy-conscious records for operations and incident response. Teams should log meaningful authentication events, authorization decisions, administrative actions, security-relevant validation failures, configuration changes, privileged operations, important data access events, system errors, dependency failures, and business-critical workflow outcomes. They should avoid logging secrets, tokens, session identifiers, private keys, excessive request bodies, and sensitive data that is not needed for a legitimate purpose.\n\nThe goal is enough detail for defenders and maintainers without exposing sensitive information to users or attackers. Strong programs use structured logs, correlation IDs, consistent event types, access control, integrity protections, retention policies, monitoring, alerting, and post-incident improvement. When error handling and logging are designed together, applications become easier to support, safer under failure, and much easier to investigate when something important happens.",
+  "graphicAlt": "Safe failure handling and minimized structured logs support investigation while protecting internal evidence.",
+  "narrationPoints": [
+    "Secure error handling keeps applications predictable when something goes wrong.",
+    "Secure logging creates useful, protected, privacy-conscious records for operations and incident response.",
+    "The goal is enough detail for defenders and maintainers without exposing sensitive information to users or attackers."
+  ]
+};

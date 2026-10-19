@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.860
+Cryptographic randomness is used to generate unpredictable keys, tokens, nonces, salts, session identifiers, and other security-sensitive values.
+
+2
+00:00:11.960 --> 00:00:14.280
+Predictability is the enemy.
+
+3
+00:00:14.380 --> 00:00:22.460
+A value that looks random to a person may still be predictable to software if it comes from the wrong source or is generated with insufficient entropy.
+
+4
+00:00:22.560 --> 00:00:34.000
+Python developers should use secure random number generation facilities intended for security-sensitive values, not ordinary pseudo-random tools meant for simulations or games.
+
+5
+00:00:34.280 --> 00:00:38.360
+Keys, passwords, and tokens are related but not interchangeable.
+
+6
+00:00:38.460 --> 00:00:43.580
+A cryptographic key is usually high-entropy material used directly by an algorithm or protocol.
+
+7
+00:00:43.680 --> 00:00:50.080
+A password is human-chosen and usually lower entropy, so it requires password hashing when stored.
+
+8
+00:00:50.180 --> 00:00:56.260
+A token may represent access, identity, or a session depending on design.
+
+9
+00:00:56.360 --> 00:01:02.440
+Treating a password like a key or treating a bearer token like harmless data can create serious mistakes.
+
+10
+00:01:02.720 --> 00:01:08.000
+Key length concepts matter, but key handling often matters more in real systems.
+
+11
+00:01:08.100 --> 00:01:20.660
+Strong keys must be generated correctly, stored safely, separated by purpose, rotated when required, revoked when exposed, and kept out of logs, source code, images, and broadly readable configuration.
+
+12
+00:01:20.760 --> 00:01:28.440
+Key separation means one key should not be reused for unrelated purposes such as encryption, signing, testing, and production.
+
+13
+00:01:28.540 --> 00:01:33.500
+Environment separation matters too: development keys should not unlock production data.
+
+14
+00:01:33.780 --> 00:01:42.980
+Secret managers at a high level can help store and control access to keys and other sensitive values, but they do not remove the need for ownership.
+
+15
+00:01:43.080 --> 00:01:46.760
+A Python service should access only the keys it needs.
+
+16
+00:01:46.860 --> 00:01:54.860
+Hardcoded keys, predictable values, shared test secrets, and undocumented rotation paths are common sources of failure.
+
+17
+00:01:54.960 --> 00:02:04.080
+In practice, randomness and key handling often determine whether a cryptographic design is safe, even when the algorithm name is modern and respected.

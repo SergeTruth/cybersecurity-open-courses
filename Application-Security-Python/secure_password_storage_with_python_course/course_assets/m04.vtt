@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Salts and peppers serve different purposes.
+
+2
+00:00:03.480 --> 00:00:08.360
+A salt is unique per password and is normally stored with the hash.
+
+3
+00:00:08.460 --> 00:00:14.140
+Its job is to make each stored verifier unique even when users choose the same password.
+
+4
+00:00:14.240 --> 00:00:22.240
+A pepper, at a high level, is a shared secret sometimes used in addition to salts and password hashes.
+
+5
+00:00:22.340 --> 00:00:29.380
+A pepper is treated as an application secret and should not be stored in the same public database table as the hashes it protects.
+
+6
+00:00:29.660 --> 00:00:35.500
+A pepper may be considered when the architecture can protect a separate secret more strongly than the password database.
+
+7
+00:00:35.600 --> 00:00:43.680
+For example, the application may be able to store a pepper-like secret in a secret manager or protected environment where database readers do not have access.
+
+8
+00:00:43.780 --> 00:00:46.980
+The benefit depends on separation of access.
+
+9
+00:00:47.080 --> 00:00:56.600
+If the same system, logs, backups, or operators expose both the hashes and the pepper, the extra protection may be much weaker than expected.
+
+10
+00:00:56.880 --> 00:01:00.000
+Pepper-like secrets add operational complexity.
+
+11
+00:01:00.100 --> 00:01:12.180
+They require secure storage, access control, environment separation, rotation planning, recovery procedures, deployment coordination, and incident response decisions.
+
+12
+00:01:12.280 --> 00:01:18.680
+Rotation can be difficult because changing the secret may affect verification of existing password hashes.
+
+13
+00:01:18.780 --> 00:01:26.700
+That complexity can be justified in some environments, but it should be intentional and documented rather than added as a vague extra layer.
+
+14
+00:01:26.980 --> 00:01:34.580
+Peppers do not replace strong password hashing, per-password salts, secure application design, or abuse monitoring.
+
+15
+00:01:34.680 --> 00:01:40.200
+A weak hash plus a pepper is not a mature password storage design.
+
+16
+00:01:40.300 --> 00:01:47.500
+Secret handling should also cover configuration, environment variables, deployment systems, logs, and backups.
+
+17
+00:01:47.600 --> 00:01:57.280
+The safest pattern is layered: vetted hashing, unique salts, appropriate cost, protected secrets where used, careful logging, and clear operational ownership.

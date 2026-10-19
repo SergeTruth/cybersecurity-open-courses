@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+The LLM integration layer should be treated like a sensitive API client.
+
+2
+00:00:04.680 --> 00:00:16.680
+It may hold API keys, service credentials, workload identities, proxy settings, destination configuration, retry policy, rate-limit handling, and cost controls.
+
+3
+00:00:16.780 --> 00:00:32.460
+Whether the model is hosted by a provider, served through an internal gateway, or running locally, the Python code still needs controlled endpoints, TLS validation where applicable, timeouts, error handling, and clear ownership of credentials and configuration.
+
+4
+00:00:32.740 --> 00:00:36.500
+Hosted provider boundaries deserve deliberate review.
+
+5
+00:00:36.600 --> 00:00:49.240
+Teams should understand where prompts, files, embeddings, outputs, traces, logs, and support data may be processed or retained, and what contractual or technical protections apply.
+
+6
+00:00:49.340 --> 00:00:52.940
+Provider selection is not only a feature or price decision.
+
+7
+00:00:53.040 --> 00:00:59.760
+It affects privacy, residency, incident response, auditability, and operational dependency.
+
+8
+00:00:59.860 --> 00:01:07.140
+The application should avoid sending sensitive context to any provider or endpoint unless that flow is approved for the data involved.
+
+9
+00:01:07.420 --> 00:01:11.260
+Local runtimes change the boundary but do not remove security work.
+
+10
+00:01:11.360 --> 00:01:24.000
+A local model may reduce some provider exposure, but it still requires dependency management, runtime isolation, network controls, resource limits, access control, logging decisions, patching, and monitoring.
+
+11
+00:01:24.100 --> 00:01:37.380
+Internal gateways and model proxy services can centralize policy, credentials, rate limits, and observability, but callers should still minimize data and validate how model output is used.
+
+12
+00:01:37.660 --> 00:01:41.980
+Centralizing the integration layer makes secure behavior repeatable.
+
+13
+00:01:42.080 --> 00:01:58.080
+A shared Python module or service can enforce credential retrieval, destination allowlists, model gateway use, request timeouts, retry bounds, rate-limit behavior, redaction, cost attribution, and structured telemetry.
+
+14
+00:01:58.180 --> 00:02:03.060
+Scattered direct SDK calls are harder to review and easier to misconfigure.
+
+15
+00:02:03.160 --> 00:02:07.800
+The goal is a small, observable path where LLM traffic can be protected and understood.

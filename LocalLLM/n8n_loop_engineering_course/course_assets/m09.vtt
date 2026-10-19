@@ -1,0 +1,133 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+The loop engineering checklist starts with choosing the right pattern.
+
+2
+00:00:04.200 --> 00:00:08.040
+First decide whether the workflow needs an explicit loop at all.
+
+3
+00:00:08.140 --> 00:00:12.940
+If ordinary multi-item processing already expresses the work, keep the workflow direct.
+
+4
+00:00:13.040 --> 00:00:18.240
+If a node's native batching or pagination fits the API cleanly, use that feature.
+
+5
+00:00:18.340 --> 00:00:30.020
+Reach for Loop Over Items or a condition-controlled return connection only when the workflow needs controlled release, a repeated multi-node body, custom pacing, or state-based continuation.
+
+6
+00:00:30.300 --> 00:00:31.980
+The next stage is structure.
+
+7
+00:00:32.080 --> 00:00:35.440
+Define exactly what one iteration means.
+
+8
+00:00:35.540 --> 00:00:41.380
+It may be one customer, one batch of twenty-five records, or one API page.
+
+9
+00:00:41.480 --> 00:00:48.520
+Identify where the loop body begins, where it ends, and what operation must complete before the return connection fires.
+
+10
+00:00:48.620 --> 00:00:51.100
+Place one-time work on the done path.
+
+11
+00:00:51.200 --> 00:00:58.560
+Avoid designs where completion notices, summaries, or final writes sit inside the repeated body by accident.
+
+12
+00:00:58.840 --> 00:01:00.280
+Pacing comes next.
+
+13
+00:01:00.380 --> 00:01:05.660
+Choose a batch size that matches the risk of the downstream operation and the limits of the external service.
+
+14
+00:01:05.760 --> 00:01:09.760
+Add deliberate waits when the next batch should not start immediately.
+
+15
+00:01:09.860 --> 00:01:12.660
+Keep retry delay separate from normal pacing delay.
+
+16
+00:01:12.760 --> 00:01:15.560
+A retry handles a specific failed attempt.
+
+17
+00:01:15.660 --> 00:01:18.380
+Pacing controls the rhythm of successful work.
+
+18
+00:01:18.480 --> 00:01:22.080
+Both settings should be chosen from evidence rather than guesswork.
+
+19
+00:01:22.360 --> 00:01:26.440
+Protection is about bounded behavior and preserved meaning.
+
+20
+00:01:26.540 --> 00:01:34.060
+Every condition-controlled loop needs a valid exit rule, a positive continuation rule, and a practical guard against infinite repetition.
+
+21
+00:01:34.160 --> 00:01:40.080
+Preserve stable identifiers through transformations so the workflow can prove which record produced which result.
+
+22
+00:01:40.180 --> 00:01:49.140
+Treat non-idempotent writes carefully because a retry can duplicate a side effect if the destination cannot recognize the repeated operation.
+
+23
+00:01:49.420 --> 00:01:53.740
+The checklist should be used before production data and again after the first real run.
+
+24
+00:01:53.840 --> 00:02:01.120
+Before production, it exposes missing guards, misplaced completion actions, and unclear ownership of item identity.
+
+25
+00:02:01.220 --> 00:02:07.620
+After the run, it helps compare the intended iteration with the actual evidence in the execution data.
+
+26
+00:02:07.720 --> 00:02:13.000
+That habit turns loop design from a visual wiring exercise into an operational review.
+
+27
+00:02:13.280 --> 00:02:18.320
+It is useful to write the checklist result beside the workflow in plain operational language.
+
+28
+00:02:18.420 --> 00:02:30.900
+State which pattern was chosen, what one iteration means, what stops the loop, what protects side effects, and how success is counted for the next operator during routine maintenance.
+
+29
+00:02:31.000 --> 00:02:35.880
+That short record becomes a future maintainer's map when the workflow needs tuning.
+
+30
+00:02:36.160 --> 00:02:38.160
+Verification closes the design.
+
+31
+00:02:38.260 --> 00:02:45.860
+Operators need to see expected items, processed items, skipped items, failed items, retries, current state, and exit reason.
+
+32
+00:02:45.960 --> 00:02:51.880
+They need evidence that all intended business operations happened, not merely a green execution status.
+
+33
+00:02:51.980 --> 00:03:01.820
+A reliable n8n loop has an explicit purpose, visible progress, preserved data identity, bounded retry behavior, and a provable exit.

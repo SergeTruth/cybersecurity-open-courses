@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Privacy, Data Handling, and Provider Logging Choices",
+  "narration": "Privacy review is central to responsible OpenRouter use because a request may involve OpenRouter and one or more model providers. The prompt, attachments, metadata, and generated response can all contain information the organization is obligated to protect. Before sending real traffic, identify what data classes may appear in prompts and outputs, such as customer content, source code, incident details, health information, financial records, or internal strategy.\n\nOpenRouter documentation exposes provider data handling information and routing controls that can help teams choose providers with acceptable logging behavior. Those controls are not a substitute for policy review. They are inputs to a decision. The engineering team should document which providers are approved for which data classes, when no-log or lower-retention options are required, and what should happen when a requested provider cannot satisfy the requirement.\n\nThe application should also minimize the data it sends. Remove unrelated context, avoid secrets in prompts, redact credentials before summarization, and prefer identifiers that are meaningless outside the system when exact values are unnecessary. If user-facing features allow arbitrary input, the service should assume sensitive data may arrive and should apply conservative routing and retention choices by default.\n\nLogging is another common leak path. It is useful to record request identifiers, model identifiers, provider choices, latency, token counts, and error classes. It is usually risky to log full prompts and responses without a clear retention policy, access control, and redaction strategy. Privacy is strongest when routing, prompt design, and observability all follow the same data classification rules. Sensitive workflows should default to conservative provider choices rather than relying on each caller to remember policy details. Treat provider review as a recurring control, not a one-time checklist.",
+  "narrationPoints": [
+    "Prompts and responses may contain protected information.",
+    "Provider logging controls must be tied to policy review.",
+    "Approved provider lists should reflect data classification.",
+    "Send the minimum context needed for the task.",
+    "Telemetry should avoid storing full sensitive prompts by default."
+  ],
+  "graphicAlt": "Workload classification drives minimized prompts, approved provider handling and governed metadata logging."
+};

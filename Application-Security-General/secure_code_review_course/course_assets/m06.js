@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Secrets, Cryptography, and Data Protection",
+  "narration": "Secrets handling is a high-value review area. Reviewers should look for hardcoded API keys, credentials, tokens, connection strings, private keys, and secrets committed to configuration files or tests. They should also check whether secrets are logged, returned in errors, exposed through diagnostics, or copied into places with broader access. Secret storage and rotation concepts should be visible in the design, not improvised later.\n\nCryptography should usually rely on vetted libraries, approved algorithms, and established platform patterns. Custom cryptography is a review concern because it may be incorrectly designed or implemented in ways that are difficult to validate. Reviewers should distinguish approved cryptographic use from homegrown encoding, reversible transformations, weak randomness, hardcoded keys, or unclear key management.\n\nPassword handling deserves specific attention at a high level. Passwords should not be stored in plaintext, encrypted for later recovery, or logged. Password hashing should use a purpose-built password hashing approach with appropriate configuration and upgrade paths. Account recovery and password reset flows should be reviewed alongside password storage because weak recovery can undermine strong storage.\n\nData protection includes minimization, storage, transport, logging, backups, and export paths. Sensitive data should be collected only when needed, protected in transit and at rest where appropriate, and omitted from logs unless there is a clear and controlled reason. Reviewers should ask where sensitive data lives, who can read it, how long it remains, and whether backup or export flows preserve the same protections as the primary application.",
+  "graphicAlt": "Secret lifecycle, vetted cryptography, purpose-built password hashing and governed data copies are reviewed together.",
+  "narrationPoints": [
+    "Secrets handling is a high-value review area.",
+    "Cryptography should usually rely on vetted libraries, approved algorithms, and established platform patterns.",
+    "Password handling deserves specific attention at a high level.",
+    "Data protection includes minimization, storage, transport, logging, backups, and export paths."
+  ]
+};

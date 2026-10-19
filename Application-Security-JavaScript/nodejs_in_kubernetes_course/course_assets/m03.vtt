@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Most Node.js application teams interact with a small set of Kubernetes objects again and again.
+
+2
+00:00:06.520 --> 00:00:09.320
+A Pod is the smallest deployable unit.
+
+3
+00:00:09.420 --> 00:00:16.860
+It usually contains the Node.js application container and, in some designs, a sidecar for supporting behavior.
+
+4
+00:00:16.960 --> 00:00:25.280
+A Deployment describes the desired state for a replicated stateless workload and manages the creation, replacement, and rollout of Pods.
+
+5
+00:00:25.380 --> 00:00:29.540
+A Service gives those Pods a stable network identity inside the cluster.
+
+6
+00:00:29.640 --> 00:00:37.800
+Ingress, a gateway, or a load balancer then provides external HTTP routing according to the platform's design.
+
+7
+00:00:38.080 --> 00:00:43.280
+The relationship between these objects is built on labels and selectors.
+
+8
+00:00:43.380 --> 00:00:47.060
+The Deployment creates Pods with particular labels.
+
+9
+00:00:47.160 --> 00:00:50.600
+The Service selects Pods with matching labels.
+
+10
+00:00:50.700 --> 00:00:53.500
+The routing layer sends traffic to the Service.
+
+11
+00:00:53.600 --> 00:00:59.120
+If labels are inconsistent, a Service may send traffic to nothing, or to the wrong workload.
+
+12
+00:00:59.220 --> 00:01:09.060
+When a rollout behaves strangely, checking labels, selectors, endpoints, and Pod readiness is often more useful than staring at the application code first.
+
+13
+00:01:09.340 --> 00:01:16.220
+Stateless Node.js APIs are often a natural fit for Deployments because they can run multiple interchangeable replicas.
+
+14
+00:01:16.320 --> 00:01:22.960
+Stateful data should usually live outside those application Pods or in purpose-built storage systems.
+
+15
+00:01:23.060 --> 00:01:32.900
+A Pod can disappear and be recreated; a Deployment can replace old replicas with new ones; a node can fail and the scheduler can place a replacement elsewhere.
+
+16
+00:01:33.000 --> 00:01:44.600
+Application design should assume that individual Pods are disposable, while persistent state, durable queues, and external databases require their own reliability and security controls.
+
+17
+00:01:44.880 --> 00:01:46.480
+Readable manifests matter.
+
+18
+00:01:46.580 --> 00:01:58.580
+Teams should be able to look at a Deployment, Service, and Ingress and understand what runs, how traffic reaches it, what labels connect the pieces, which container port is used, and what rollout settings apply.
+
+19
+00:01:58.680 --> 00:02:04.520
+Kubernetes YAML can become noisy quickly, but the core intent should remain reviewable in pull requests.
+
+20
+00:02:04.620 --> 00:02:11.820
+That reviewability becomes important when debugging traffic, readiness, scaling, and releases under pressure.

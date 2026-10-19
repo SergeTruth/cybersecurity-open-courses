@@ -1,0 +1,145 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.020
+Onion routing is the idea that a network request can be wrapped in layers and passed through several relays, with each relay peeling away only the layer it needs.
+
+2
+00:00:10.120 --> 00:00:15.560
+The image is like an onion because each hop sees just enough routing information for its position.
+
+3
+00:00:15.660 --> 00:00:21.420
+The entry relay knows where the user connection came from, but it does not know the final website in an ordinary web request.
+
+4
+00:00:21.520 --> 00:00:26.000
+The middle relay passes traffic along without being the beginning or the end.
+
+5
+00:00:26.100 --> 00:00:31.540
+The exit relay sends the request out to the normal internet, but it does not know the original user address.
+
+6
+00:00:31.820 --> 00:00:35.420
+This separation is the heart of Tor's privacy model.
+
+7
+00:00:35.520 --> 00:00:39.200
+Tor is not asking one trusted company to hide everything for you.
+
+8
+00:00:39.300 --> 00:00:43.140
+It is trying to prevent any single relay from having the full picture.
+
+9
+00:00:43.240 --> 00:00:49.240
+A local internet provider may see a connection to Tor, but not the final destination inside the circuit.
+
+10
+00:00:49.340 --> 00:00:55.020
+The destination site may see a request from a Tor exit relay, but not the user's home or office address.
+
+11
+00:00:55.120 --> 00:00:58.960
+A relay that sits in the middle has a narrow job and a narrow view.
+
+12
+00:00:59.240 --> 00:01:03.160
+Circuits are temporary paths built by Tor software.
+
+13
+00:01:03.260 --> 00:01:09.260
+When Tor Browser needs to browse, it selects relays from a public directory and establishes layered encryption for the circuit.
+
+14
+00:01:09.360 --> 00:01:13.840
+This layered encryption is different from the encryption used by HTTPS websites.
+
+15
+00:01:13.940 --> 00:01:17.220
+Tor's layers protect routing information between relays.
+
+16
+00:01:17.320 --> 00:01:23.000
+HTTPS protects content between the browser and the website when the destination supports it.
+
+17
+00:01:23.100 --> 00:01:26.860
+These two protections can work together, but they solve different problems.
+
+18
+00:01:27.140 --> 00:01:30.020
+A simple example shows the split.
+
+19
+00:01:30.120 --> 00:01:44.440
+If a person reads an HTTPS news site through Tor, the local network can see a Tor connection, the entry relay can see the user's connection to Tor, the exit relay can see traffic headed toward the news site, and the news site can see a Tor exit address.
+
+20
+00:01:44.540 --> 00:01:49.420
+The HTTPS layer protects the page contents and form data from the exit relay.
+
+21
+00:01:49.520 --> 00:01:55.120
+The Tor layers keep the original address and final destination from being joined by a normal relay.
+
+22
+00:01:55.400 --> 00:01:59.480
+It is important not to overstate what relays hide.
+
+23
+00:01:59.580 --> 00:02:04.940
+The entry relay still sees that a connection is coming from you, even if it does not see the destination.
+
+24
+00:02:05.040 --> 00:02:13.760
+The exit relay may see traffic leaving the Tor network toward a website, and if that traffic is not protected by HTTPS, the exit position may expose content.
+
+25
+00:02:13.860 --> 00:02:20.340
+The destination can observe timing, requests, account activity, and any data you submit.
+
+26
+00:02:20.440 --> 00:02:26.520
+Tor reduces the linkability of source and destination; it does not remove all observable behavior.
+
+27
+00:02:26.800 --> 00:02:30.160
+The mental model also helps explain performance.
+
+28
+00:02:30.260 --> 00:02:36.980
+A Tor circuit adds distance, encryption work, and shared relay capacity.
+
+29
+00:02:37.080 --> 00:02:45.080
+Pages may load more slowly than in a direct browser because the traffic is taking an indirect path through volunteer-operated infrastructure.
+
+30
+00:02:45.180 --> 00:02:48.460
+Slowness is not necessarily a sign that something is broken.
+
+31
+00:02:48.560 --> 00:02:55.200
+It is often the cost of avoiding a direct connection that gives more information to fewer observers.
+
+32
+00:02:55.480 --> 00:03:05.000
+A good learner takeaway is to ask, "Who can see what from this position?" The local network sees that Tor is being used, unless an access method changes that appearance.
+
+33
+00:03:05.100 --> 00:03:08.940
+The entry relay sees the user connection but not the final site.
+
+34
+00:03:09.040 --> 00:03:13.600
+The exit relay sees traffic leaving Tor but not the user's original address.
+
+35
+00:03:13.700 --> 00:03:19.060
+The destination sees the request, the exit relay address, and any website-level identifiers.
+
+36
+00:03:19.160 --> 00:03:23.080
+Thinking in roles keeps Tor understandable and prevents magical thinking.

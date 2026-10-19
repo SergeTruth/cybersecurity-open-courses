@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "What Not to Log",
+  "narration": "Logs are often copied, indexed, retained, searched, and shared with more systems than the original application data. That makes them a risky place for secrets. Passwords, access tokens, refresh tokens, API keys, private keys, session identifiers, one-time codes, password reset links, and raw authorization headers should generally not be logged. If a value can be used to impersonate a user, call an API, decrypt data, or bypass a control, it does not belong in ordinary logs.\n\nSensitive personal data and payment data also require minimization. Full payment card numbers, government identifiers, medical details, private messages, precise location data, and excessive request bodies can create privacy, regulatory, and breach impact problems if collected unnecessarily. Sometimes an application needs to record a stable identifier, category, or outcome. That does not mean it needs the full raw payload. Prefer safe identifiers, redaction, hashing where appropriate, and purpose-specific fields over broad request logging.\n\nException messages can accidentally contain secrets because libraries may include connection strings, query parameters, headers, file paths, or payload fragments. Defensive logging treats exceptions as data to review and sanitize before exposure. Avoid logging entire request bodies by default. Avoid logging user-controlled text without length limits and encoding in log viewers. The best secure logging design collects the minimum sensitive data needed for operations and investigation, then protects that data as if it will matter later.",
+  "graphicAlt": "A sanitization and minimization step keeps secrets and excessive payloads out of useful contextual logs.",
+  "narrationPoints": [
+    "Logs are often copied, indexed, retained, searched, and shared with more systems than the original application data.",
+    "Sensitive personal data and payment data also require minimization.",
+    "Exception messages can accidentally contain secrets because libraries may include connection strings, query parameters, headers, file paths, or payload fragments."
+  ]
+};

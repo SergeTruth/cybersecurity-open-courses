@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+A Node.js service in Kubernetes is not deployed once and forgotten.
+
+2
+00:00:04.840 --> 00:00:11.720
+It is changed, restarted, scaled, rolled back, debugged, and investigated over time.
+
+3
+00:00:11.820 --> 00:00:18.780
+Deployments support rolling updates, replica management, and rollback behavior, but rollout safety depends on the rest of the design.
+
+4
+00:00:18.880 --> 00:00:24.720
+If readiness probes are accurate, Kubernetes can avoid routing traffic to Pods that are not prepared.
+
+5
+00:00:24.820 --> 00:00:30.180
+If resource settings are realistic, new replicas have a better chance of surviving production traffic.
+
+6
+00:00:30.280 --> 00:00:37.000
+If logs and metrics are useful, operators can understand whether a rollout is improving or degrading the service.
+
+7
+00:00:37.280 --> 00:00:39.600
+Scaling should be connected to real bottlenecks.
+
+8
+00:00:39.700 --> 00:00:50.900
+Horizontal scaling can help when more replicas improve throughput, but it does not fix inefficient code, missing resource limits, slow dependencies, database saturation, queue backlogs, or event-loop blocking.
+
+9
+00:00:51.000 --> 00:00:59.640
+Autoscaling signals might include CPU, memory, request rate, latency, queue depth, or custom business metrics, depending on the workload.
+
+10
+00:00:59.740 --> 00:01:07.660
+The key is to scale based on signals that reflect service demand and user impact, not simply because autoscaling is available.
+
+11
+00:01:07.940 --> 00:01:12.020
+Observability should start with the operational questions the team needs to answer.
+
+12
+00:01:12.120 --> 00:01:16.440
+Logs should go to stdout and stderr in a structured, searchable form.
+
+13
+00:01:16.540 --> 00:01:24.220
+Metrics should cover request rate, error rate, latency, memory, CPU, restarts, dependency failures, and queue behavior.
+
+14
+00:01:24.320 --> 00:01:30.400
+For Node.js, event-loop symptoms and runtime memory trends can be especially useful.
+
+15
+00:01:30.500 --> 00:01:35.540
+Tracing can show how requests move through multiple services and where time is spent.
+
+16
+00:01:35.640 --> 00:01:42.280
+Alerts should focus on user impact and actionable conditions rather than every noisy internal change.
+
+17
+00:01:42.560 --> 00:01:45.840
+Runbooks turn repeated failures into a support workflow.
+
+18
+00:01:45.940 --> 00:01:58.740
+A useful runbook explains how to investigate CrashLoopBackOff, ImagePullBackOff, readiness failures, OOMKilled containers, bad rollouts, configuration errors, and unexpected traffic drops.
+
+19
+00:01:58.840 --> 00:02:08.120
+It points operators to Pod status, events, logs, metrics, deployment history, recent changes, and rollback procedures.
+
+20
+00:02:08.220 --> 00:02:11.180
+Mature Kubernetes operation is not just writing YAML.
+
+21
+00:02:11.280 --> 00:02:20.640
+It is connecting manifests, CI/CD, deployment events, telemetry, and incident response into a system the team can reason about under pressure.

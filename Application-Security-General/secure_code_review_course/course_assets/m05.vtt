@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.660
+Input validation confirms that data has the expected type, shape, size, range, and allowed values before the application relies on it.
+
+2
+00:00:08.760 --> 00:00:12.920
+Good validation is usually allowlist based and tied to the purpose of the field.
+
+3
+00:00:13.020 --> 00:00:23.180
+It does not replace authorization, parameterization, or encoding, but it reduces ambiguity and helps the code fail safely when a value is outside the intended contract.
+
+4
+00:00:23.460 --> 00:00:27.780
+Injection prevention depends on safe APIs, not string assembly.
+
+5
+00:00:27.880 --> 00:00:35.320
+Parameterized queries or prepared statements help prevent SQL injection because data is passed separately from query structure.
+
+6
+00:00:35.420 --> 00:00:50.300
+Safe ORM usage can help when the ORM is used correctly, but reviewers should still watch for raw query escape hatches, dynamic filters, string-built expressions, and places where untrusted values influence commands, templates, or interpreters.
+
+7
+00:00:50.580 --> 00:00:58.020
+Command execution, template and expression evaluation, and unsafe deserialization deserve careful review at a high level.
+
+8
+00:00:58.120 --> 00:01:09.480
+The concern is not to demonstrate payloads, but to identify code paths where untrusted data controls behavior in an interpreter, parser, shell, expression engine, or object construction mechanism.
+
+9
+00:01:09.580 --> 00:01:17.260
+Reviewers should ask whether the feature is necessary, whether inputs are constrained, and whether safer APIs exist.
+
+10
+00:01:17.540 --> 00:01:20.100
+Output safety is context specific.
+
+11
+00:01:20.200 --> 00:01:29.160
+HTML text, HTML attributes, URLs, CSS, JavaScript, JSON, and DOM operations require different handling rules.
+
+12
+00:01:29.260 --> 00:01:37.740
+Output encoding reduces the chance that data becomes executable content in the wrong context, while safe rendering practices reduce dangerous DOM behavior.
+
+13
+00:01:37.840 --> 00:01:48.080
+Validation, parameterization, safe APIs, and context-aware encoding solve different problems, so reviewers should look for the right control in the right place.

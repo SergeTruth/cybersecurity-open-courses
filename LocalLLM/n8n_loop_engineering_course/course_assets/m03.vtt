@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+The current node name is Loop Over Items.
+
+2
+00:00:03.720 --> 00:00:14.920
+Older articles, screenshots, and exported workflows may still use the older Split in Batches name, and the documentation still mentions that history for clarity.
+
+3
+00:00:15.020 --> 00:00:18.380
+In this course, the current name is the one to use.
+
+4
+00:00:18.480 --> 00:00:26.880
+The node exists for cases where normal item processing is not enough and the workflow needs controlled iteration over items or batches.
+
+5
+00:00:27.160 --> 00:00:32.120
+The operating model is easier to reason about when the node is treated as a small state machine.
+
+6
+00:00:32.220 --> 00:00:36.780
+It receives an incoming list of items and retains that original input set.
+
+7
+00:00:36.880 --> 00:00:41.840
+On each iteration, it releases a configured number of items through the loop output.
+
+8
+00:00:41.940 --> 00:00:45.220
+The nodes connected to that output form the loop body.
+
+9
+00:00:45.320 --> 00:00:52.040
+After the body completes the work for the current released item or batch, the final node in the body connects back to Loop Over Items.
+
+10
+00:00:52.320 --> 00:00:54.960
+That return connection is not decorative.
+
+11
+00:00:55.060 --> 00:01:01.620
+It tells the loop that the current pass has reached the point where the next item or batch can be released.
+
+12
+00:01:01.720 --> 00:01:09.160
+If the return connection is missing, or if it comes back before the real work is finished, the loop no longer represents the intended sequencing.
+
+13
+00:01:09.260 --> 00:01:17.260
+The workflow may stop early, release later items at the wrong time, or let operations happen outside the loop body that was supposed to control them.
+
+14
+00:01:17.540 --> 00:01:22.100
+Batch Size is the main control on how many items are released during one pass.
+
+15
+00:01:22.200 --> 00:01:29.480
+A batch size of one creates the most controlled behavior because each iteration contains one item.
+
+16
+00:01:29.580 --> 00:01:31.900
+Larger batch sizes release groups.
+
+17
+00:01:32.000 --> 00:01:37.120
+That can improve throughput and reduce overhead, but it also changes downstream behavior.
+
+18
+00:01:37.220 --> 00:01:43.700
+A batch of twenty-five means the next nodes receive twenty-five items for that iteration.
+
+19
+00:01:43.800 --> 00:01:50.840
+Whether those nodes perform network requests serially, in batches, or through their own internal behavior depends on those nodes and their settings.
+
+20
+00:01:51.120 --> 00:01:56.480
+Engineers should treat Batch Size as a design parameter rather than a cosmetic setting.
+
+21
+00:01:56.580 --> 00:02:04.020
+Small batches are easier to observe, easier to retry deliberately, and less likely to overwhelm an external service.
+
+22
+00:02:04.120 --> 00:02:12.680
+Larger batches can reduce total execution overhead, but they can also increase memory pressure and make per-item failures harder to isolate.
+
+23
+00:02:12.780 --> 00:02:21.660
+The right value depends on the external API, the workflow body, the cost of retrying, and the operator's need to understand progress during a long run.
+
+24
+00:02:21.940 --> 00:02:25.780
+The loop output and the done output have different meanings.
+
+25
+00:02:25.880 --> 00:02:28.760
+The loop output is for repeated work.
+
+26
+00:02:28.860 --> 00:02:32.860
+It contains the current item or current batch and leads into the loop body.
+
+27
+00:02:32.960 --> 00:02:39.040
+The done output is for work that should happen once after all input items have been released and processed.
+
+28
+00:02:39.140 --> 00:02:46.820
+A summary, a completion notice, a final database write, or a report generation step belongs on the done path, not inside the loop body.
+
+29
+00:02:47.100 --> 00:02:51.180
+The done path also changes how engineers think about results.
+
+30
+00:02:51.280 --> 00:02:55.520
+During the loop, the workflow is handling per-iteration data.
+
+31
+00:02:55.620 --> 00:03:01.220
+After the loop, the workflow can work with the completed set made available by the node's documented behavior.
+
+32
+00:03:01.320 --> 00:03:10.760
+That distinction prevents a common mistake: placing an action inside the body because it needs loop results, when the action really needs the whole processed set after the loop is finished.
+
+33
+00:03:11.040 --> 00:03:13.280
+Reset deserves careful handling.
+
+34
+00:03:13.380 --> 00:03:21.460
+The documented Reset option reinitializes the node with current input data during each loop and is intended for specific dynamic-loop designs.
+
+35
+00:03:21.560 --> 00:03:30.360
+One documented use is a pagination pattern where an If node decides whether to query another page when the total page count is not known in advance.
+
+36
+00:03:30.460 --> 00:03:32.940
+Reset is not a general troubleshooting switch.
+
+37
+00:03:33.040 --> 00:03:42.720
+Turning it on without understanding how new input is introduced can change the meaning of the loop and can help create an infinite loop when the exit condition is wrong.
+
+38
+00:03:43.000 --> 00:03:47.800
+A good mental check is to trace one item or one batch around the full circuit.
+
+39
+00:03:47.900 --> 00:03:54.220
+It leaves through the loop output, passes through the body, reaches the last required operation, and then returns.
+
+40
+00:03:54.320 --> 00:03:57.920
+Only after all releases are complete should the done path run.
+
+41
+00:03:58.020 --> 00:04:04.420
+If that story cannot be traced on the canvas and in the execution data, the loop is not ready for production use.

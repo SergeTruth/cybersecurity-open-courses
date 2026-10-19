@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+A privilege separation roadmap begins by identifying privileged operations early.
+
+2
+00:00:05.160 --> 00:00:15.160
+Name the workflows that touch protected files, services, devices, platform credentials, administrative APIs, sensitive handles, or deployment configuration.
+
+3
+00:00:15.260 --> 00:00:21.660
+Keep ordinary code low privilege, and make the narrow operation that truly requires authority explicit and reviewable.
+
+4
+00:00:21.940 --> 00:00:25.060
+Next, isolate sensitive operations.
+
+5
+00:00:25.160 --> 00:00:31.960
+Use helper processes, brokered services, dedicated workers, or platform controls where they fit the product.
+
+6
+00:00:32.060 --> 00:00:35.740
+Keep privileged code small, simple, and owned.
+
+7
+00:00:35.840 --> 00:00:47.680
+The low-privilege application core should prepare requests and validate user intent, while the privileged boundary validates messages, authorizes callers, performs the narrow operation, and logs safe outcomes.
+
+8
+00:00:47.960 --> 00:00:50.200
+Then handle resources defensively.
+
+9
+00:00:50.300 --> 00:00:56.780
+IPC messages need schemas, versions, limits, type checks, and boundary-side validation.
+
+10
+00:00:56.880 --> 00:01:05.200
+Files, paths, devices, temporary resources, secrets, handles, and credentials require careful scoping.
+
+11
+00:01:05.300 --> 00:01:19.060
+Use platform controls such as service accounts, capabilities, sandboxing, entitlements, process isolation, filesystem permissions, or containers when they match the operation being protected.
+
+12
+00:01:19.340 --> 00:01:22.060
+Finally, maintain the boundary over time.
+
+13
+00:01:22.160 --> 00:01:29.600
+Test denied operations, malformed requests, path limits, helper lifecycle, recovery, and failure paths.
+
+14
+00:01:29.700 --> 00:01:33.460
+Monitor privileged behavior without exposing sensitive data.
+
+15
+00:01:33.560 --> 00:01:41.320
+Review changes to helper interfaces, deployment settings, permissions, and platform controls as security-relevant engineering.
+
+16
+00:01:41.420 --> 00:01:48.620
+Privilege separation reduces impact when defects occur, but only when the boundary remains clear and governed.

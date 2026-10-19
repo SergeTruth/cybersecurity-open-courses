@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Memory-constrained security work depends on measurement.
+
+2
+00:00:03.640 --> 00:00:16.680
+Estimates are necessary during design, but actual behavior can change with compiler settings, library versions, enabled features, logging levels, alignment, optimization, and target hardware.
+
+3
+00:00:16.780 --> 00:00:21.660
+Teams need a way to compare the expected memory budget with what the program really uses.
+
+4
+00:00:21.940 --> 00:00:26.100
+Stack high-water marks help reveal how much stack was used during tests.
+
+5
+00:00:26.200 --> 00:00:36.920
+They are most useful when tests cover valid input, invalid input, error handling, logging, callbacks, and target-specific features.
+
+6
+00:00:37.020 --> 00:00:40.940
+A shallow test path can make the stack look safer than it is.
+
+7
+00:00:41.220 --> 00:00:50.020
+Heap and allocation tracking help teams understand allocation size, lifetime, peak use, failure behavior, and fragmentation patterns.
+
+8
+00:00:50.120 --> 00:00:58.440
+Even simple counters can show whether memory use grows over time, whether cleanup paths release owned resources, and whether long-running behavior matches the design.
+
+9
+00:00:58.720 --> 00:01:08.080
+Boundary tests should cover minimum, maximum, just-below-maximum, just-above-maximum, empty, truncated, and malformed input.
+
+10
+00:01:08.180 --> 00:01:14.020
+Full-buffer tests should exercise the exact moment when a buffer can no longer accept more data.
+
+11
+00:01:14.120 --> 00:01:18.840
+These tests make limits real instead of aspirational.
+
+12
+00:01:19.120 --> 00:01:22.480
+Allocation-failure tests are especially valuable.
+
+13
+00:01:22.580 --> 00:01:29.940
+Force each allocation point to fail and confirm that the program preserves safe state, releases owned resources, and reports a clear result.
+
+14
+00:01:30.040 --> 00:01:35.400
+The test should also confirm that diagnostics do not allocate excessive memory in the failure path.
+
+15
+00:01:35.680 --> 00:01:42.480
+Static analysis, compiler warnings, sanitizers where available, and code review all support the process.
+
+16
+00:01:42.580 --> 00:01:50.340
+They can find unchecked results, suspicious conversions, out-of-bounds patterns, lifetime issues, and missed error handling.
+
+17
+00:01:50.440 --> 00:01:55.880
+Tools help, but they do not replace explicit limits and reviewed design assumptions.
+
+18
+00:01:56.160 --> 00:01:59.280
+Validate on realistic target builds.
+
+19
+00:01:59.380 --> 00:02:10.260
+A host build with extra memory and different libraries may be useful during development, but constrained behavior must be confirmed with the relevant build profile, configuration, and target assumptions.
+
+20
+00:02:10.360 --> 00:02:14.760
+The closer the test is to release behavior, the more useful the result.

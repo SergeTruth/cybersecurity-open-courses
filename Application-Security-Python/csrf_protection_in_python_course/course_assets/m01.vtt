@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Cross-Site Request Forgery is a browser and session-based risk.
+
+2
+00:00:04.920 --> 00:00:13.960
+At a defensive level, the issue is that a browser may send an authenticated request that does not represent the user's intended action inside the trusted application flow.
+
+3
+00:00:14.060 --> 00:00:22.380
+The browser is doing what browsers normally do: attaching matching credentials, especially cookies, to requests for the destination site.
+
+4
+00:00:22.660 --> 00:00:27.060
+This distinction matters because authentication and intent are not the same thing.
+
+5
+00:00:27.160 --> 00:00:38.200
+A valid session cookie can prove that the browser has an authenticated session, but it does not automatically prove that the user intentionally submitted a specific state-changing action.
+
+6
+00:00:38.300 --> 00:00:46.460
+If an application treats the cookie alone as enough evidence, sensitive operations may lack an important layer of request validation.
+
+7
+00:00:46.740 --> 00:00:51.940
+In Python web applications, CSRF review matters for workflows that change server-side state.
+
+8
+00:00:52.040 --> 00:01:03.880
+Account updates, profile changes, payment settings, administrative actions, password or email changes, workflow approvals, and configuration changes all deserve attention.
+
+9
+00:01:03.980 --> 00:01:06.860
+The concern is not ordinary page viewing.
+
+10
+00:01:06.960 --> 00:01:16.080
+The concern is an authenticated browser request that causes the server to create, update, delete, approve, configure, or submit something meaningful.
+
+11
+00:01:16.360 --> 00:01:23.160
+The defensive goal is straightforward: make state-changing requests prove both authentication and user intent.
+
+12
+00:01:23.260 --> 00:01:36.540
+A secure design uses framework protections, request semantics, token validation, cookie controls, and review discipline so that the server can distinguish an expected application flow from a request that merely arrived with a session cookie.

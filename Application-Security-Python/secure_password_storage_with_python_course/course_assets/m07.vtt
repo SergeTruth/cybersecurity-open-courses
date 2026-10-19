@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Many real Python systems inherit legacy password storage.
+
+2
+00:00:04.840 --> 00:00:12.680
+Older hashes may use outdated algorithms, weak cost settings, missing salts, inconsistent encodings, or homegrown formats.
+
+3
+00:00:12.780 --> 00:00:15.340
+The first step is identification.
+
+4
+00:00:15.440 --> 00:00:30.640
+Teams need to know which accounts use which scheme, how verifiers are encoded, whether salts and parameters are available, and whether any plaintext or reversible password data exists in databases, logs, backups, exports, or test fixtures.
+
+5
+00:00:30.920 --> 00:00:35.160
+Migration should reduce stored password risk while preserving availability.
+
+6
+00:00:35.260 --> 00:00:47.340
+Rehash-on-login is a common concept: when a user successfully authenticates with an older verifier, the application immediately stores a new verifier using the current algorithm and parameters.
+
+7
+00:00:47.440 --> 00:00:52.560
+This avoids forcing every user to reset at once, but it only updates accounts that log in.
+
+8
+00:00:52.660 --> 00:00:56.820
+Dormant or high-risk accounts may still need separate handling.
+
+9
+00:00:57.100 --> 00:01:00.860
+Algorithm versioning and parameter versioning make migration safer.
+
+10
+00:01:00.960 --> 00:01:09.920
+The stored verifier should identify which algorithm and settings were used so the application can verify old records and know when an upgrade is needed.
+
+11
+00:01:10.020 --> 00:01:19.940
+Forced reset scenarios may be appropriate when the legacy scheme is too weak, when plaintext exposure is suspected, or when the application cannot safely verify old hashes.
+
+12
+00:01:20.040 --> 00:01:24.840
+User communication should be clear without oversharing security-sensitive details.
+
+13
+00:01:25.120 --> 00:01:27.440
+Migration should leave audit evidence.
+
+14
+00:01:27.540 --> 00:01:36.660
+Teams should be able to show what legacy schemes existed, what policy replaced them, how users were migrated, which accounts remain, and how exceptions are tracked.
+
+15
+00:01:36.760 --> 00:01:39.320
+Password migration is not just a code change.
+
+16
+00:01:39.420 --> 00:01:49.740
+It is an operational process involving risk review, user impact, support readiness, incident response planning, and continued monitoring until legacy storage is eliminated.

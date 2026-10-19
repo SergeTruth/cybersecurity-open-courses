@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Reuse for Evaluation, Training, and Improvement",
+  "graphicAlt": "Approved eligible records are minimized into owned curated datasets with access, deletion and expiry rules.",
+  "narration": "Prompt history can be valuable for improvement. Teams may use interaction records to evaluate answer quality, review hallucinations, tune retrieval, test safety controls, improve prompts, analyze feature adoption, prepare benchmark sets, or train and fine-tune models. These uses can make an AI product safer and more reliable, but reuse changes the purpose of the data. A record collected to help a user continue a task should not automatically become training material or a broad analytics dataset.\n\nGoverned reuse starts with approval and purpose. The team should know which records are eligible, which are excluded, who approves reuse, what notice or consent is required where applicable, what classification limits apply, and how long the resulting dataset will live. Sensitive tenants, privileged communications, regulated content, children, employee records, source code, credentials, and confidential business material may require stricter rules or complete exclusion.\n\nMinimization still matters after data is selected. Raw conversations may not be necessary. Teams can use redaction, masking, aggregation, sampling, labeling, synthetic test cases, or metadata-only analysis when those approaches meet the goal. Tenant separation and user separation should be preserved. Dataset labels should describe source, purpose, sensitivity, owner, retention window, and restrictions on onward use.\n\nTeams should also separate raw operational logs from curated evaluation or training sets. Curated datasets need ownership, access control, quality review, deletion handling, and expiration. When prompt history is reused responsibly, improvement work becomes traceable and deliberate rather than an accidental secondary use of data that users did not expect.",
+  "narrationPoints": [
+    "Prompt history can be valuable for improvement.",
+    "Governed reuse starts with approval and purpose.",
+    "Minimization still matters after data is selected.",
+    "Teams should also separate raw operational logs from curated evaluation or training sets."
+  ]
+};

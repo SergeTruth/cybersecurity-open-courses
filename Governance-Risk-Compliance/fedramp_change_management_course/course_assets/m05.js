@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Change Planning and Approval",
+  "narration": "A good change request explains what is being proposed and why. It should include business justification, a technical description, affected systems, affected controls or evidence where relevant, risk assessment, test plan, rollback plan, maintenance window, communication plan, and approvals as appropriate. The amount of detail should fit the risk, but the request should be clear enough for reviewers to understand the impact before work begins.\n\nApproval should be based on risk, scope, evidence, and operational readiness rather than speed alone. A fast change can be safe when it is well understood and low risk. A slow change can still be unsafe if no one examines the right issues. Reviewers should ask whether the change affects the boundary, customer responsibility, access, logging, encryption, monitoring, resilience, vulnerability exposure, or documentation.\n\nRollback planning is part of responsible change. It provides a planned way to recover if the change causes unacceptable security, operational, or functional impact. The rollback approach may be technical, procedural, or operational depending on the change. Some changes are easy to reverse; others require careful sequencing, backups, or communication. Knowing that before implementation reduces panic during failure.\n\nEmergency changes require a practical balance. Urgency may change the timing of review, but it should not eliminate traceability. Emergency changes should still identify who approved the action, what was changed, why it was necessary, how the result was validated, what evidence was captured, and what follow-up review occurred. A mature program supports emergency response without letting emergency become a permanent bypass.",
+  "graphicAlt": "A risk-based change plan includes tests, rollback, approval and documented emergency follow-up.",
+  "narrationPoints": [
+    "A good change request explains what is being proposed and why.",
+    "Approval should be based on risk, scope, evidence, and operational readiness rather than speed alone.",
+    "Rollback planning is part of responsible change.",
+    "Emergency changes require a practical balance."
+  ]
+};

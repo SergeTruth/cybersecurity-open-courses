@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Camera and Stream Design",
+  "narration": "Camera placement determines what the system can observe. Define the legitimate event first, then select a field of view that captures useful context without extending into private or unrelated areas. Height, angle, distance, lens, and mounting stability affect detection quality.\n\nResolution controls image detail and increases bandwidth, decode work, storage, and inference cost. Frame rate improves temporal coverage but may add little value for slow events. Select each setting from the use case rather than using the maximum for every camera.\n\nRTSP commonly delivers network video to NVRs and AI services. Protect stream credentials and restrict which systems can connect. Monitor stream age and decode errors so a frozen or delayed picture does not appear healthy.\n\nMany cameras provide a high-resolution main stream and a lower-resolution substream. The substream can support motion or object filtering with lower compute, while the main stream is retained or sampled for detailed review. Verify that the smaller stream still contains enough information for the chosen task.\n\nLighting, weather, glare, shadows, night illumination, occlusion, motion blur, and seasonal changes affect performance. Evaluate placement and model results under representative conditions, not only during installation.\n\nReduce unnecessary data through privacy masks, regions of interest, schedules, frame sampling, and event-based processing. These controls can improve cost and alert relevance while limiting collection. Document camera purpose, permitted coverage, owner, stream settings, retention, and review access.",
+  "graphicAlt": "Permitted coverage, suitable streams, condition testing and freshness checks limit collection while preserving task context.",
+  "narrationPoints": [
+    "Camera placement determines what the system can observe.",
+    "Resolution controls image detail and increases bandwidth, decode work, storage, and inference cost.",
+    "RTSP commonly delivers network video to NVRs and AI services.",
+    "Many cameras provide a high-resolution main stream and a lower-resolution substream."
+  ]
+};

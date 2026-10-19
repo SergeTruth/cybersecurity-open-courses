@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.860
+Privilege separation is the practice of designing an application so that most code runs with only the authority it actually needs.
+
+2
+00:00:07.960 --> 00:00:23.320
+In C++, this matters because native applications often interact directly with files, devices, sockets, installers, services, credentials, plugins, update mechanisms, and operating system APIs.
+
+3
+00:00:23.420 --> 00:00:28.860
+A small defect can have a much larger impact when every component holds broad authority.
+
+4
+00:00:29.140 --> 00:00:32.020
+The goal is not to make privileged work impossible.
+
+5
+00:00:32.120 --> 00:00:35.800
+The goal is to isolate it, make it rare, and keep it reviewable.
+
+6
+00:00:35.900 --> 00:00:43.100
+A user interface, parser, renderer, or routine business-logic component usually does not need administrative rights.
+
+7
+00:00:43.200 --> 00:00:49.600
+When it does need a sensitive operation performed, it can request a narrow action through a controlled boundary.
+
+8
+00:00:49.880 --> 00:00:53.400
+Privilege separation clarifies trust boundaries.
+
+9
+00:00:53.500 --> 00:01:03.980
+It tells engineers which process is allowed to make system changes, which component owns sensitive handles, which code validates requests, and where authorization must happen.
+
+10
+00:01:04.080 --> 00:01:12.640
+That clarity also helps operations teams understand logs, troubleshoot failures, and confirm that deployment settings match the intended security model.
+
+11
+00:01:12.920 --> 00:01:15.400
+Defensive design starts with least privilege.
+
+12
+00:01:15.500 --> 00:01:25.020
+Identify the code that can run with ordinary permissions, keep privileged code small, validate at the boundary, and test both allowed and denied workflows.
+
+13
+00:01:25.120 --> 00:01:30.960
+Privilege separation does not eliminate defects, but it can reduce the impact when defects inevitably occur.
+
+14
+00:01:31.240 --> 00:01:33.640
+A useful mental model is containment.
+
+15
+00:01:33.740 --> 00:01:41.020
+If a renderer, parser, plugin, or UI path misbehaves, the architecture should limit what that code can touch directly.
+
+16
+00:01:41.120 --> 00:01:48.000
+The fewer capabilities a component has by default, the easier it is to reason about its failure modes and recovery behavior.

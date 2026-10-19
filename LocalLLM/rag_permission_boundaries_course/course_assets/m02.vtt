@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+A RAG system is a pipeline, not a single component.
+
+2
+00:00:04.280 --> 00:00:07.400
+Source repositories feed connectors.
+
+3
+00:00:07.500 --> 00:00:10.140
+Connectors run ingestion jobs.
+
+4
+00:00:10.240 --> 00:00:16.640
+Ingestion creates document records, chunks, embeddings, indexes, and metadata.
+
+5
+00:00:16.740 --> 00:00:31.140
+At request time, an application receives user context, retrieves candidate content, assembles model context, generates an answer, and may write logs, traces, transcripts, or cache entries.
+
+6
+00:00:31.420 --> 00:00:33.420
+Every stage has a trust boundary.
+
+7
+00:00:33.520 --> 00:00:36.960
+A source repository may have its own permissions.
+
+8
+00:00:37.060 --> 00:00:40.100
+An ingestion service may run as a privileged connector.
+
+9
+00:00:40.200 --> 00:00:44.440
+A vector index may store derived representations of sensitive content.
+
+10
+00:00:44.540 --> 00:00:51.100
+A retriever may filter by tenant, project, classification, or document-level access.
+
+11
+00:00:51.200 --> 00:00:55.520
+A model prompt may contain the final selected chunks.
+
+12
+00:00:55.620 --> 00:01:01.700
+A user interface may expose citations, excerpts, exports, or summaries.
+
+13
+00:01:01.980 --> 00:01:05.660
+Sensitive information can appear in unexpected places.
+
+14
+00:01:05.760 --> 00:01:07.920
+Embeddings can represent sensitive meaning.
+
+15
+00:01:08.020 --> 00:01:11.300
+Intermediate prompts can contain retrieved snippets.
+
+16
+00:01:11.400 --> 00:01:14.120
+Debug logs can capture request context.
+
+17
+00:01:14.220 --> 00:01:17.420
+Cached responses can preserve private answers.
+
+18
+00:01:17.520 --> 00:01:21.680
+Exported transcripts can move content outside the original repository.
+
+19
+00:01:21.780 --> 00:01:29.060
+Architecture reviews should trace data from source to final answer and then through logs, caches, backups, and administrative tools.
+
+20
+00:01:29.340 --> 00:01:32.300
+Trust zones should be explicit before production.
+
+21
+00:01:32.400 --> 00:01:45.680
+Teams should know which services are trusted to read source content, which identities they use, where data is transformed, which stores retain sensitive fragments, and which controls prevent a service identity from silently bypassing user permissions.
+
+22
+00:01:45.780 --> 00:01:50.580
+Clear trust zones make later testing and incident response much easier.

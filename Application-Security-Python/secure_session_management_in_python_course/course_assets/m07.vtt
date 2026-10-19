@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Session problems often come from design shortcuts rather than one isolated bug.
+
+2
+00:00:05.720 --> 00:00:08.680
+A development setting may become production behavior.
+
+3
+00:00:08.780 --> 00:00:12.140
+A broad cookie scope may be copied between applications.
+
+4
+00:00:12.240 --> 00:00:16.880
+A long session lifetime may be chosen for convenience and never revisited.
+
+5
+00:00:16.980 --> 00:00:23.220
+A support tool may create sessions without the same lifecycle controls as the main login flow.
+
+6
+00:00:23.320 --> 00:00:29.640
+These patterns are easier to prevent when session management is treated as shared security infrastructure.
+
+7
+00:00:29.920 --> 00:00:39.440
+Weak session identifiers at a high level, exposed session values, unsafe cookie scope, missing invalidation, and overly long lifetime all increase risk.
+
+8
+00:00:39.540 --> 00:00:49.380
+Sensitive data in session objects can also create exposure if session storage, logs, debugging tools, or support workflows are too broadly accessible.
+
+9
+00:00:49.480 --> 00:00:53.560
+Client-side state should not be trusted merely because it is convenient.
+
+10
+00:00:53.660 --> 00:01:00.140
+If the client can influence session meaning, the server must validate and constrain that influence.
+
+11
+00:01:00.420 --> 00:01:03.460
+Authorization can drift during a session.
+
+12
+00:01:03.560 --> 00:01:08.440
+A user may sign in with one role, then lose access while the session continues.
+
+13
+00:01:08.540 --> 00:01:10.780
+A tenant membership may be removed.
+
+14
+00:01:10.880 --> 00:01:15.280
+A background job may keep using context from a time when access was allowed.
+
+15
+00:01:15.380 --> 00:01:19.220
+A token may be renewed without rechecking the current permission model.
+
+16
+00:01:19.320 --> 00:01:26.680
+Secure session management connects renewal and continued access to current identity and authorization state where the risk requires it.
+
+17
+00:01:26.960 --> 00:01:32.400
+Cross-tenant session confusion and inconsistent handling across services deserve special care.
+
+18
+00:01:32.500 --> 00:01:37.940
+A session should not accidentally carry tenant context from one organization into another.
+
+19
+00:01:38.040 --> 00:01:45.080
+Internal tools and admin paths should not use weaker session practices than customer-facing applications.
+
+20
+00:01:45.180 --> 00:01:56.300
+Insecure development defaults, debug behavior, permissive cookies, and inconsistent route protections should be caught in code review and configuration review before production.

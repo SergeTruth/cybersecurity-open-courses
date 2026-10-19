@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Where AI Interaction Data Lives",
+  "graphicAlt": "A full data map includes application history, operational records, derived data, exports, backups and metadata.",
+  "narration": "AI interaction data rarely lives in one place. A visible chat history may be only the most obvious copy. Related records may appear in application databases, browser storage, server logs, model gateway logs, API traces, observability platforms, analytics systems, error reports, data warehouses, file stores, vector stores, evaluation datasets, admin exports, user exports, and backups.\n\nDifferent layers create records for different reasons. A chat interface may store history so users can resume work. A gateway may log model name, request size, token counts, latency, tenant ID, and status codes for operations. An observability tool may capture traces or errors. A retrieval system may store source identifiers, retrieved chunk references, or embeddings. A product analytics system may aggregate feature usage. A support export may collect many interactions into one file.\n\nManaged services, private gateways, local model servers, internal tools, and hybrid architectures all have their own record paths. A team may believe it has one retention setting while supporting systems keep separate copies for debugging, billing, security monitoring, quality review, or backups. Metadata is part of the inventory too. User IDs, IP addresses, timestamps, model names, route names, retrieval sources, and tool results can be sensitive even when prompt text is not stored.\n\nA practical data map is essential. Retention cannot be governed if the team does not know where records exist. The map should include content records, metadata records, derived records, exports, and backup behavior. Once the locations are known, teams can make realistic decisions about retention, deletion, access, and reuse.",
+  "narrationPoints": [
+    "AI interaction data rarely lives in one place.",
+    "Different layers create records for different reasons.",
+    "Managed services, private gateways, local model servers, internal tools, and hybrid architectures all have their own record paths.",
+    "A practical data map is essential."
+  ]
+};

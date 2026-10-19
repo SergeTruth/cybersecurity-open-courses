@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.020
+Python developers should rely on mature password hashing libraries or framework-supported password storage patterns instead of writing cryptographic code directly.
+
+2
+00:00:10.120 --> 00:00:18.760
+The library should handle salt generation, parameter storage, verification, safe comparisons, and upgrade paths according to established practice.
+
+3
+00:00:18.860 --> 00:00:30.140
+The exact library or framework may change over time, but the principle is stable: use maintained tools built for password storage, not general-purpose hashing glued together by hand.
+
+4
+00:00:30.420 --> 00:00:34.580
+Authentication logic should be separated from unrelated business logic.
+
+5
+00:00:34.680 --> 00:00:42.840
+A checkout flow, profile page, admin action, or API handler should not each invent its own password verification path.
+
+6
+00:00:42.940 --> 00:00:49.580
+Centralizing password hashing and verification makes the design easier to review, test, upgrade, and monitor.
+
+7
+00:00:49.680 --> 00:00:56.160
+It also reduces the chance that one code path uses outdated parameters while another path uses the current standard.
+
+8
+00:00:56.440 --> 00:01:00.680
+Avoid hardcoded password hashing parameters scattered across the codebase.
+
+9
+00:01:00.780 --> 00:01:09.740
+Cost settings, algorithm identifiers, migration behavior, and version checks should be managed in a clear location with ownership and review.
+
+10
+00:01:09.840 --> 00:01:20.640
+When a library upgrade changes recommendations or support, the application should have a planned way to adopt improved settings without breaking existing users or silently weakening verification.
+
+11
+00:01:20.920 --> 00:01:24.600
+Implementation should be simple, reviewable, and tested.
+
+12
+00:01:24.700 --> 00:01:32.540
+The code should make it clear when a password is accepted, how it is verified, when a stored verifier needs upgrade, and what happens on failure.
+
+13
+00:01:32.640 --> 00:01:35.840
+Error messages should avoid revealing account details.
+
+14
+00:01:35.940 --> 00:01:41.940
+Logs should record useful authentication events without recording passwords or reset secrets.
+
+15
+00:01:42.040 --> 00:01:48.440
+A secure implementation is not clever; it is boring, consistent, and easy to reason about.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Review Workflow, Tools, and Finding Management",
+  "narration": "Secure code review combines manual judgment with tool assistance. Automated static analysis, dependency scanning, secrets scanning, and AI-assisted review at a high level can help identify patterns and prioritize attention, but tools do not understand the full business context by themselves. A tool may flag a harmless pattern, miss a serious authorization flaw, or lack enough context to judge impact. Reviewers provide judgment.\n\nFalse positives and false negatives should be expected. A false positive is a reported issue that does not apply as described after review. A false negative is a real issue the tool did not find. Good teams tune tools, document recurring patterns, and avoid flooding developers with noisy reports. The point of tooling is risk reduction, not generating the largest possible list of warnings.\n\nFindings should include evidence, impact, and remediation guidance. Evidence helps developers understand the issue, reproduce the concern, assess risk, and validate the fix. Impact explains why the issue matters in this application. Remediation guidance should be concrete enough to act on without prescribing fragile product-specific steps. Good communication turns review findings into engineering work instead of defensive debate.\n\nFinding management continues after the initial report. Issues need severity, ownership, tracking, fix validation, and closure or risk acceptance. When a fix is submitted, reviewers should confirm that the risk was addressed without introducing new issues. Mature review programs also look for patterns: recurring findings should lead to better standards, helper libraries, tests, training, or design changes.",
+  "graphicAlt": "Context-validated evidence and impact become owned remediation, verified closure and improvements to recurring patterns.",
+  "narrationPoints": [
+    "Secure code review combines manual judgment with tool assistance.",
+    "False positives and false negatives should be expected.",
+    "Findings should include evidence, impact, and remediation guidance.",
+    "Finding management continues after the initial report."
+  ]
+};

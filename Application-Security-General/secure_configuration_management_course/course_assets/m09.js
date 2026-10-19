@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary",
+  "narration": "Secure configuration management protects the settings that control application, infrastructure, and security behavior. Configuration decides how systems authenticate users, authorize actions, expose networks, log activity, handle errors, encrypt data, call dependencies, and enable features. Because these settings directly shape security posture, they need the same care as application code.\n\nStrong programs use secure defaults, baseline configurations, reviewed changes, separated secrets, schema validation, drift detection, monitoring, and documented exceptions. Configuration as code makes changes reviewable and repeatable. Guardrails and startup validation prevent unsafe values from reaching production. Drift detection and runtime monitoring keep teams aware of what is actually deployed.\n\nEnvironment awareness is central. Development, test, staging, and production can differ, but those differences should be intentional and controlled. Secrets should not be mixed with ordinary configuration. Manual changes should not become hidden production truth. Exceptions should have owners, reasons, and review dates so temporary risk does not become permanent exposure.\n\nThe final goal is predictable, least-privileged, reviewable configuration that resists accidental or unauthorized weakening. When configuration is managed as a lifecycle, teams can move faster with more confidence because security posture is defined, validated, monitored, and recoverable rather than guessed from scattered settings.",
+  "graphicAlt": "A continuous configuration lifecycle combines defaults, review, validation, monitoring and recovery.",
+  "narrationPoints": [
+    "Secure configuration management protects the settings that control application, infrastructure, and security behavior.",
+    "Strong programs use secure defaults, baseline configurations, reviewed changes, separated secrets, schema validation, drift detection, monitoring, and documented exceptions.",
+    "Environment awareness is central.",
+    "The final goal is predictable, least-privileged, reviewable configuration that resists accidental or unauthorized weakening."
+  ]
+};

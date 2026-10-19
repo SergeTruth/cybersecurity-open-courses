@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.860
+A work factor is a setting that influences the computational cost of password hashing.
+
+2
+00:00:05.960 --> 00:00:15.720
+Higher cost can improve resistance to offline guessing after hash exposure, but it also consumes more server time and sometimes more memory during legitimate authentication.
+
+3
+00:00:15.820 --> 00:00:18.620
+The right setting is not simply the highest number possible.
+
+4
+00:00:18.720 --> 00:00:26.240
+It must balance user experience, server capacity, concurrency, password reset behavior, and availability.
+
+5
+00:00:26.520 --> 00:00:31.400
+Login latency is the most visible cost, but it is not the only one.
+
+6
+00:00:31.500 --> 00:00:41.180
+Account creation, password reset, forced password changes, background account migrations, and bursty login events can all trigger hashing work.
+
+7
+00:00:41.280 --> 00:00:47.680
+If cost is tuned without considering peak traffic, the authentication system may become slow or unstable.
+
+8
+00:00:47.780 --> 00:00:52.580
+If cost is too low, exposed hashes may be easier to attack offline.
+
+9
+00:00:52.680 --> 00:00:57.400
+Good tuning uses measurement, capacity planning, and periodic review.
+
+10
+00:00:57.680 --> 00:01:04.640
+Denial-of-service considerations matter because attackers may try to force the application to spend resources on expensive password checks.
+
+11
+00:01:04.740 --> 00:01:12.980
+Rate limiting, throttling, progressive delays, lockout tradeoffs, and bot or abuse controls at a high level help protect availability.
+
+12
+00:01:13.080 --> 00:01:19.400
+Lockouts must be designed carefully because overly aggressive lockouts can be used to disrupt legitimate users.
+
+13
+00:01:19.500 --> 00:01:24.940
+The defensive goal is to reduce automated abuse without creating a new operational weakness.
+
+14
+00:01:25.220 --> 00:01:33.780
+Monitoring authentication performance helps teams detect when cost settings, traffic patterns, or infrastructure changes create risk.
+
+15
+00:01:33.880 --> 00:01:40.760
+Track login latency, error rates, reset activity, throttle events, and unusual spikes.
+
+16
+00:01:40.860 --> 00:01:52.460
+Password hashing should be expensive enough to reduce damage after database exposure, but operationally sustainable enough that users can authenticate reliably and defenders can identify abuse quickly.

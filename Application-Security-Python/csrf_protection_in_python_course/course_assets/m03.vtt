@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.980
+The most common CSRF defense is a server-generated token that is tied to the user's session or request context and validated when a state-changing request arrives.
+
+2
+00:00:09.080 --> 00:00:17.960
+The token helps prove that the request came through a page or client flow prepared by the application, not merely from any browser request carrying a cookie.
+
+3
+00:00:18.240 --> 00:00:26.400
+Python frameworks and extensions often provide middleware, decorators, form helpers, or request validation hooks that implement this pattern.
+
+4
+00:00:26.500 --> 00:00:34.180
+In most applications, the safest starting point is to use the established framework protection rather than inventing a custom token system.
+
+5
+00:00:34.280 --> 00:00:43.320
+Mature framework features usually handle details that are easy to miss, such as token binding, generation, validation, error behavior, and integration with forms.
+
+6
+00:00:43.600 --> 00:00:46.960
+Consistency is as important as the token itself.
+
+7
+00:00:47.060 --> 00:00:53.220
+Protection should cover every route that changes state and depends on browser session authentication.
+
+8
+00:00:53.320 --> 00:01:00.280
+If a token is required for one settings form but not for a neighboring custom endpoint, the application still has a gap.
+
+9
+00:01:00.380 --> 00:01:06.860
+Teams should review route coverage whenever new forms, admin actions, and session-bound APIs are added.
+
+10
+00:01:07.140 --> 00:01:10.740
+Missing, invalid, or expired tokens should fail safely.
+
+11
+00:01:10.840 --> 00:01:21.640
+The application should reject the state-changing action before performing it, return a clear but restrained error, and avoid leaking token values or sensitive request contents in logs.
+
+12
+00:01:21.740 --> 00:01:29.820
+A CSRF token failure is a control working as designed; the failure path should be as deliberate as the success path.

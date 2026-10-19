@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Kubernetes scheduling and runtime behavior depend heavily on resource requests and limits.
+
+2
+00:00:05.400 --> 00:00:11.480
+A request tells the scheduler how much CPU or memory the workload expects to need.
+
+3
+00:00:11.580 --> 00:00:15.420
+A limit defines the boundary the container is not supposed to exceed.
+
+4
+00:00:15.520 --> 00:00:21.200
+These settings influence node placement, capacity planning, noisy-neighbor behavior, and failure modes.
+
+5
+00:00:21.300 --> 00:00:34.980
+For Node.js services, they should be based on measured behavior instead of copied from another manifest because traffic shape, dependency latency, request size, and application design all change resource demand.
+
+6
+00:00:35.260 --> 00:00:37.260
+Memory requires particular care.
+
+7
+00:00:37.360 --> 00:00:45.920
+A Node.js process has its own heap behavior, native memory use, buffers, dependencies, and garbage collection patterns.
+
+8
+00:00:46.020 --> 00:00:51.540
+If the container memory limit is too low, the process may be killed when memory exceeds the allowed boundary.
+
+9
+00:00:51.640 --> 00:00:55.960
+In Kubernetes this often appears as OOMKilled or repeated restarts.
+
+10
+00:00:56.060 --> 00:01:00.140
+If memory requests are too high, the cluster may waste capacity.
+
+11
+00:01:00.240 --> 00:01:06.080
+If limits are absent, one workload may consume more shared capacity than intended.
+
+12
+00:01:06.180 --> 00:01:10.980
+The right answer usually comes from load testing, telemetry, and iteration.
+
+13
+00:01:11.260 --> 00:01:15.340
+CPU controls also affect user experience.
+
+14
+00:01:15.440 --> 00:01:28.560
+CPU limits can change latency and throughput under load, especially for request-heavy services, expensive JSON processing, encryption, compression, or synchronous work that blocks the event loop.
+
+15
+00:01:28.660 --> 00:01:32.340
+Requests influence scheduling and autoscaling inputs.
+
+16
+00:01:32.440 --> 00:01:39.480
+A service may look fine in a small test but behave badly when a replica is throttled during peak traffic.
+
+17
+00:01:39.580 --> 00:01:49.740
+Observing CPU, request latency, event-loop symptoms, queueing, and dependency delays together is more useful than treating CPU as an isolated number.
+
+18
+00:01:50.020 --> 00:01:54.180
+Resource controls are reliability and security controls.
+
+19
+00:01:54.280 --> 00:02:00.520
+They help prevent one workload from consuming shared cluster capacity and degrading unrelated services.
+
+20
+00:02:00.620 --> 00:02:05.740
+They also force teams to understand the expected operating envelope of the service.
+
+21
+00:02:05.840 --> 00:02:19.600
+A practical workflow is to start with reasonable defaults, test with representative traffic, review production telemetry, adjust requests and limits, and revisit those settings when code, traffic, or dependencies change.
+
+22
+00:02:19.700 --> 00:02:23.780
+Kubernetes gives you the controls, but measurement gives those controls meaning.

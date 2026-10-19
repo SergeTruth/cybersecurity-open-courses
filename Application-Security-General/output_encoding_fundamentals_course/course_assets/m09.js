@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "narration": "Output encoding is context-specific protection for data leaving the application. It keeps data from being interpreted as executable code, markup, syntax, formulas, or active content in the destination. The same value may require different handling in HTML body text, an attribute, a URL component, a JavaScript string, JSON, CSS, XML, CSV, logs, or reports. Secure output handling begins by identifying the context before choosing the encoder or safe API.\n\nStrong defenses use the correct encoder for the output context, avoid unsafe sinks, rely on safe framework patterns, and review places where escaping is bypassed. Framework auto-escaping is valuable, but it has limits. Raw HTML helpers, markdown rendering, rich text, inline scripts, dynamic CSS, manual DOM manipulation, and hand-built JSON are all areas that deserve close attention. Pair encoding with validation, sanitization where rich content is allowed, CSP, and careful review of generated output.\n\nThe goal is to preserve meaning as data, not accidentally turn data into executable code or markup. A secure application can display user content, build links, return JSON, produce reports, and support rich interfaces without giving untrusted data control over the page. When teams think in contexts, use safe APIs, test special characters, and review bypasses, output encoding becomes a practical engineering habit rather than a mysterious browser security topic.",
+  "graphicAlt": "Routine context identification, fitting safe APIs, bypass review, layered controls and rendered tests protect output meaning.",
+  "narrationPoints": [
+    "Output encoding is context-specific protection for data leaving the application.",
+    "Strong defenses use the correct encoder for the output context, avoid unsafe sinks, rely on safe framework patterns, and review places where escaping is bypassed.",
+    "The goal is to preserve meaning as data, not accidentally turn data into executable code or markup."
+  ]
+};

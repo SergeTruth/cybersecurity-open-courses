@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Make Memory Limits Explicit",
+  "graphicAlt": "Secure constrained C combines explicit budgets, bounded consumption, predictable failure, protected data lifetimes and realistic testing.",
+  "narration": "The central habit in memory-constrained secure programming is to make limits explicit. Define the memory budget early: RAM, stack, heap, static storage, fixed buffers, pools, scratch space, persistent records, and any special memory regions. Tie those limits to real product assumptions.\n\nBound the code paths that consume memory. What is the maximum input size? What stack depth is possible? Which allocations are allowed? What happens when a buffer fills? Can large input be streamed instead of stored? Which parser state is retained across chunks? These questions turn vague constraints into reviewable contracts.\n\nHandle low-memory behavior predictably. Allocation failure, full buffers, oversized input, and limited diagnostic space should lead to safe, documented results. Preserve safe state, clean up owned resources, avoid partial updates, bound retries, and report errors in a way callers can handle.\n\nProtect sensitive data even when memory is tight. Minimize copies of keys, credentials, tokens, identifiers, and intermediate plaintext. Review reused buffers, logs, crash records, and diagnostics. Clear sensitive buffers where supported and appropriate, and keep lifetimes as short as practical.\n\nFinally, measure and test worst-case paths before release. Use stack measurements, allocation tracking, boundary tests, malformed input tests, long-duration runs, static analysis, compiler warnings, and target-like configurations. Secure constrained C is not one allocator, one wrapper, or one rule. It is a repeatable practice of explicit limits, bounded behavior, safe failure, and evidence from realistic tests.",
+  "narrationPoints": [
+    "Define the memory budget early: RAM, stack, heap, static storage, fixed buffers.",
+    "Can large input be streamed instead of stored.",
+    "Allocation failure, full buffers, oversized input, and limited diagnostic space should lead to safe, documented results.",
+    "Clear sensitive buffers where supported and appropriate, and keep lifetimes as short as practical.",
+    "Use stack measurements, allocation tracking, boundary tests, malformed input tests, long-duration runs."
+  ]
+};

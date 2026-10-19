@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Designing Error Responses",
+  "narration": "Error responses should be designed for their audience. A user-facing message should be understandable, respectful, and actionable where possible. It might say that a form field needs a different format, that a request could not be completed, or that the user should try again later. It should not expose the database table, stack frame, library version, raw exception, or exact security rule that failed. The message should help the legitimate user without coaching abuse.\n\nAPI errors need consistency. HTTP status codes should match the situation closely enough for clients to handle them correctly: validation failures, authentication failures, authorization failures, missing resources, rate limits, conflicts, and server errors are not the same event. Response bodies should use a predictable shape with an error code, safe message, and correlation ID when appropriate. Avoid returning different details that let an attacker infer whether an account, token, object ID, or tenant exists unless that distinction is intentional and safe.\n\nAuthentication, authorization, and rate limiting errors require special care. Overly detailed authentication failures can support account enumeration by revealing which usernames exist or which factor failed. Authorization failures should not confirm sensitive resource details to users who are not allowed to know the resource exists. Rate limiting responses should guide legitimate clients without giving unnecessary internals about thresholds or defensive logic. A well-designed error response gives enough information for recovery and support while protecting the system model.",
+  "graphicAlt": "A consistent error response contains a safe code, message and correlation reference connected to protected support context.",
+  "narrationPoints": [
+    "Error responses should be designed for their audience.",
+    "API errors need consistency.",
+    "Authentication, authorization, and rate limiting errors require special care."
+  ]
+};

@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Consider a workflow that receives twelve customer records.
+
+2
+00:00:04.280 --> 00:00:11.480
+For each customer, the workflow calls an external enrichment API, normalizes the response, and prepares a database update.
+
+3
+00:00:11.580 --> 00:00:16.860
+The API is sensitive to request pacing, so the initial design should send one customer at a time.
+
+4
+00:00:16.960 --> 00:00:22.720
+This is a good candidate for Loop Over Items because the repeated work is not a single isolated node.
+
+5
+00:00:22.820 --> 00:00:26.980
+It is a controlled body made of several steps that must finish in order.
+
+6
+00:00:27.260 --> 00:00:31.180
+The conceptual workflow begins with a trigger or data-source node.
+
+7
+00:00:31.280 --> 00:00:33.760
+That node produces the customer records.
+
+8
+00:00:33.860 --> 00:00:37.940
+The records move into Loop Over Items with Batch Size set to one.
+
+9
+00:00:38.040 --> 00:00:45.400
+The loop output then sends the current customer to an HTTP Request node or to a simulated enrichment step in a training environment.
+
+10
+00:00:45.500 --> 00:00:52.300
+After enrichment, an Edit Fields or Code node normalizes the response into a predictable shape.
+
+11
+00:00:52.400 --> 00:01:00.400
+A database update or simulated destination writes the result, and that last required operation connects back to Loop Over Items.
+
+12
+00:01:00.680 --> 00:01:04.440
+Expressions inside the loop body should refer to the current customer item.
+
+13
+00:01:04.540 --> 00:01:15.500
+Fields such as customerId, email, account tier, or region need to remain available long enough for the request, the normalization step, and the destination update.
+
+14
+00:01:15.600 --> 00:01:22.560
+A stable customer identifier is especially important because an external response may not preserve the same shape as the input.
+
+15
+00:01:22.660 --> 00:01:31.780
+If the original identifier disappears halfway through the body, a later node may know that it has enrichment data but no longer know which customer should receive it.
+
+16
+00:01:32.060 --> 00:01:36.860
+The return connection should originate after the last operation that must complete for the current iteration.
+
+17
+00:01:36.960 --> 00:01:42.240
+In this scenario, that means after the database update or the simulated destination step.
+
+18
+00:01:42.340 --> 00:01:51.060
+If the workflow returns to Loop Over Items immediately after the HTTP Request, the normalization and update might no longer be part of the controlled loop body.
+
+19
+00:01:51.160 --> 00:01:56.040
+The canvas would still contain those nodes, but the sequence would no longer match the design intent.
+
+20
+00:01:56.320 --> 00:01:58.960
+The completion action belongs on the done path.
+
+21
+00:01:59.060 --> 00:02:05.780
+A completion email, audit record, or final summary inside the loop body would run once for each customer.
+
+22
+00:02:05.880 --> 00:02:09.240
+With twelve customers, that means twelve completion messages.
+
+23
+00:02:09.340 --> 00:02:21.100
+The done path represents work after iteration has finished, so it is the correct place to send a single completion notice or calculate a summary of processed, skipped, failed, and retried records.
+
+24
+00:02:21.380 --> 00:02:26.260
+Increasing Batch Size from one to three changes the release pattern.
+
+25
+00:02:26.360 --> 00:02:30.040
+Each iteration now sends three customer items into the body.
+
+26
+00:02:30.140 --> 00:02:35.900
+That can be useful when the API and the downstream nodes can handle small groups safely.
+
+27
+00:02:36.000 --> 00:02:43.360
+It does not automatically guarantee true parallel network requests, and it does not remove the need to inspect the downstream node behavior.
+
+28
+00:02:43.460 --> 00:02:46.820
+It simply changes how many items the loop releases per pass.
+
+29
+00:02:47.100 --> 00:02:51.260
+This scenario is also a good place to practice evidence-based testing.
+
+30
+00:02:51.360 --> 00:02:56.640
+Run the design first with three synthetic customers that have obvious identifiers.
+
+31
+00:02:56.740 --> 00:03:08.180
+Confirm that the API step receives one customer per pass, the normalization step keeps the same customerId, and the destination step receives the normalized result for that same customer.
+
+32
+00:03:08.280 --> 00:03:13.080
+Then inspect the done path and confirm that the completion summary runs one time.
+
+33
+00:03:13.180 --> 00:03:19.980
+After that small test is clean, increase the sample to twelve records and compare expected and completed counts.
+
+34
+00:03:20.260 --> 00:03:22.500
+Error handling should follow the same boundary.
+
+35
+00:03:22.600 --> 00:03:27.800
+A handled per-customer failure belongs inside the body because it describes one customer's result.
+
+36
+00:03:27.900 --> 00:03:33.580
+A final alert about the whole run belongs after done because it describes the completed execution.
+
+37
+00:03:33.680 --> 00:03:40.160
+Separating those two responsibilities keeps the workflow readable when some records succeed and others require follow-up.
+
+38
+00:03:40.440 --> 00:03:48.520
+A controlled loop is reliable when the body has a clear start, a clear end, preserved identity, and a one-time completion path.
+
+39
+00:03:48.620 --> 00:03:56.060
+Start with a conservative batch size, confirm the execution data with a tiny set of records, and only then adjust the design for throughput.
+
+40
+00:03:56.160 --> 00:03:58.720
+The goal is not just to make the loop run.
+
+41
+00:03:58.820 --> 00:04:02.340
+The goal is to make every customer update traceable and repeatable.

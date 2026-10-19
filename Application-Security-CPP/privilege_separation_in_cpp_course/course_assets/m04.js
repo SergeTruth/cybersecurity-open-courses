@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Helper Processes and Brokered Operations",
+  "graphicAlt": "An owned broker exposes narrow commands, validates and authorizes them, records safe outcomes and handles lifecycle recovery.",
+  "narration": "Common privilege-separation architectures use helper processes, broker services, task-specific workers, local agents, installers, or update helpers. These components hold authority on behalf of the application, but they should not become general-purpose tools. A helper should expose a narrow set of commands with clearly documented inputs and outcomes.\n\nA broker mediates sensitive operations. It receives a request, validates the message, identifies the caller where the platform supports it, applies authorization policy, performs the narrow operation, and records audit-friendly results. The broker should make the decision where the authority exists rather than relying only on earlier checks in the client.\n\nLifecycle behavior matters because helpers are long-lived security components. Startup, shutdown, update, recovery, and version mismatch behavior should be designed deliberately. A helper should not keep elevated state longer than necessary, and it should fail in a way that leaves protected resources consistent. Partial operations need cleanup or a safe recovery plan.\n\nLogging should support operations without exposing secrets or sensitive handles. A useful log says what command was requested, whether it was allowed, which safe resource category was involved, and what result occurred. It does not need to print private data or internal implementation details to be useful.\n\nHelpers need ownership. Teams should know who reviews command additions, who approves policy changes, who tests deployment behavior, and who responds to failures. Without ownership, privileged components can grow quietly as new feature work accumulates.",
+  "narrationPoints": [
+    "Common privilege-separation architectures use helper processes, broker services, task-specific workers, local agents, installers, or update helpers.",
+    "A helper should expose a narrow set of commands with clearly documented inputs and outcomes.",
+    "The broker should make the decision where the authority exists rather than relying only on earlier checks in the client.",
+    "A helper should not keep elevated state longer than necessary, and it should fail in a way that leaves protected resources consistent.",
+    "A useful log says what command was requested, whether it was allowed, which safe resource category was involved, and what result occurred.",
+    "Teams should know who reviews command additions, who approves policy changes, who tests deployment behavior, and who responds to failures."
+  ]
+};

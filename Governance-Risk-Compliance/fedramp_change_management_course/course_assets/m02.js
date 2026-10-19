@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Scope, Boundaries, and Types of Changes",
+  "narration": "Change review starts with scope. Teams need to understand the cloud service offering, the authorization boundary, included and excluded systems, inherited services, customer responsibilities, and supporting dependencies. A change that affects an in-scope production component may require a different level of review than a change to an unrelated internal tool. Boundary awareness helps the team decide which stakeholders, evidence, and risk questions are relevant.\n\nSecurity-relevant changes can take many forms. Infrastructure changes may alter compute, storage, network paths, encryption settings, or deployment automation. Application changes may affect authentication, authorization, data handling, APIs, logging, or customer workflows. Identity and access changes may create or remove privileges. Network changes may expose or isolate services. Data flow changes may alter where information is processed, stored, or transmitted.\n\nOther change types deserve attention as well. Logging and monitoring changes can affect detection and evidence. Security tool changes can alter control operation. Vendor or dependency changes can shift inherited responsibilities or introduce new risk. Emergency changes may be necessary during outages or security events, but urgency does not remove the need for traceability, validation, and follow-up. Unplanned does not have to mean unmanaged.\n\nThe central question is whether a change affects the authorized or FedRAMP-aligned system. Does it alter components in scope? Does it change a control implementation? Does it affect inherited controls or customer responsibility? Does it alter data flows, administrative interfaces, evidence, or monitoring coverage? A clear answer helps the organization avoid both over-processing routine work and under-reviewing meaningful risk.",
+  "graphicAlt": "Change review examines service components, crossing data flows, inherited services and customer responsibilities.",
+  "narrationPoints": [
+    "Change review starts with scope.",
+    "Security-relevant changes can take many forms.",
+    "Other change types deserve attention as well.",
+    "The central question is whether a change affects the authorized or FedRAMP-aligned system."
+  ]
+};

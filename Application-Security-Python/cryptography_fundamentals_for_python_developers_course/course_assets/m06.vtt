@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+Public-key cryptography uses a key pair: a public key and a private key.
+
+2
+00:00:06.280 --> 00:00:12.280
+At a high level, key pairs can support encryption, key establishment, and digital signatures depending on the protocol.
+
+3
+00:00:12.380 --> 00:00:14.140
+The public key can be shared.
+
+4
+00:00:14.240 --> 00:00:16.480
+The private key must be protected.
+
+5
+00:00:16.580 --> 00:00:29.140
+This structure helps solve problems where parties need to establish trust without already sharing the same secret key, but it introduces new responsibilities around identity, certificates, and private key protection.
+
+6
+00:00:29.420 --> 00:00:33.980
+Certificates bind public keys to identities through a public key infrastructure.
+
+7
+00:00:34.080 --> 00:00:41.120
+A certificate chain helps a client decide whether to trust a server certificate based on trusted authorities and validation rules.
+
+8
+00:00:41.220 --> 00:00:45.380
+TLS and HTTPS are standard protocols for protecting data in transit.
+
+9
+00:00:45.480 --> 00:00:57.080
+Python applications should normally rely on standard TLS libraries, platform validation, and mature HTTP clients or servers rather than inventing transport security behavior.
+
+10
+00:00:57.360 --> 00:01:07.920
+Certificate validation concepts include checking that the certificate is valid for the intended host, within its validity period, issued by a trusted chain, and appropriate for the connection.
+
+11
+00:01:08.020 --> 00:01:16.020
+Disabling TLS verification or accepting any certificate creates serious risk because the application may trust the wrong server or connection.
+
+12
+00:01:16.120 --> 00:01:22.920
+Temporary troubleshooting choices can become permanent vulnerabilities if they are not removed and reviewed.
+
+13
+00:01:23.200 --> 00:01:26.480
+Public-key systems also need operational care.
+
+14
+00:01:26.580 --> 00:01:33.540
+Private keys must be stored securely, rotated when needed, protected in backups, and monitored for exposure.
+
+15
+00:01:33.640 --> 00:01:36.280
+Certificate expiration can cause outages.
+
+16
+00:01:36.380 --> 00:01:41.500
+Misconfigured trust stores can cause unsafe acceptance or broken connectivity.
+
+17
+00:01:41.600 --> 00:01:55.200
+For Python developers, the safest path is to use standard libraries and protocols correctly, keep validation enabled, and treat certificate and key management as production operations, not one-time setup.

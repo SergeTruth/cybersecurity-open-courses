@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.860
+Logs are often copied, indexed, retained, searched, and shared with more systems than the original application data.
+
+2
+00:00:07.960 --> 00:00:10.280
+That makes them a risky place for secrets.
+
+3
+00:00:10.380 --> 00:00:24.380
+Passwords, access tokens, refresh tokens, API keys, private keys, session identifiers, one-time codes, password reset links, and raw authorization headers should generally not be logged.
+
+4
+00:00:24.480 --> 00:00:33.200
+If a value can be used to impersonate a user, call an API, decrypt data, or bypass a control, it does not belong in ordinary logs.
+
+5
+00:00:33.480 --> 00:00:37.800
+Sensitive personal data and payment data also require minimization.
+
+6
+00:00:37.900 --> 00:00:52.700
+Full payment card numbers, government identifiers, medical details, private messages, precise location data, and excessive request bodies can create privacy, regulatory, and breach impact problems if collected unnecessarily.
+
+7
+00:00:52.800 --> 00:00:58.560
+Sometimes an application needs to record a stable identifier, category, or outcome.
+
+8
+00:00:58.660 --> 00:01:02.100
+That does not mean it needs the full raw payload.
+
+9
+00:01:02.200 --> 00:01:09.560
+Prefer safe identifiers, redaction, hashing where appropriate, and purpose-specific fields over broad request logging.
+
+10
+00:01:09.840 --> 00:01:19.040
+Exception messages can accidentally contain secrets because libraries may include connection strings, query parameters, headers, file paths, or payload fragments.
+
+11
+00:01:19.140 --> 00:01:24.180
+Defensive logging treats exceptions as data to review and sanitize before exposure.
+
+12
+00:01:24.280 --> 00:01:27.480
+Avoid logging entire request bodies by default.
+
+13
+00:01:27.580 --> 00:01:33.260
+Avoid logging user-controlled text without length limits and encoding in log viewers.
+
+14
+00:01:33.360 --> 00:01:41.840
+The best secure logging design collects the minimum sensitive data needed for operations and investigation, then protects that data as if it will matter later.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Security Context, RBAC, and Runtime Hardening",
+  "graphicAlt": "Limited runtime privileges, intentional writable space, narrow API authority and platform policy reduce blast radius.",
+  "narration": "Runtime hardening in Kubernetes is layered. The container image determines much of what the Node.js process contains. The Pod security context determines what the process is allowed to do at runtime. The service account and RBAC rules determine whether the workload can call the Kubernetes API. Namespace policy and admission controls can enforce baseline expectations. None of these replaces secure application code, but together they reduce blast radius when something behaves unexpectedly.\n\nMost Node.js application Pods should run as non-root where possible and should not require privilege escalation. Security context settings such as runAsNonRoot, allowPrivilegeEscalation, dropped capabilities, seccomp profiles, and read-only root filesystems help make that intent explicit. There are tradeoffs. A read-only root filesystem may require an explicit writable directory for temporary files. A non-root user requires file ownership and permissions to be correct in the image. Those tradeoffs are manageable when they are designed intentionally rather than discovered during an outage.\n\nAvoid high-risk runtime patterns unless there is a documented and exceptional need. Privileged containers, broad hostPath mounts, Docker socket mounts, host networking, and unnecessary host access can dramatically expand the consequences of a compromised application. A typical Express-style API should not need those permissions. If a workload asks for them, reviewers should understand exactly why, what safer alternatives were considered, and how the risk is monitored and limited.\n\nService accounts deserve the same least-privilege thinking. Many Node.js services do not need to call the Kubernetes API at all. If they do, RBAC should grant only the verbs and resources required for the specific function. Broad permissions make incident response harder and increase blast radius. Pod Security Standards and admission policies can help enforce safer defaults, but the application team still needs to understand what permissions their workload actually needs to run.",
+  "narrationPoints": [
+    "Runtime hardening in Kubernetes is layered.",
+    "Avoid high-risk runtime patterns unless there is.",
+    "Service accounts deserve the same least-privilege thinking.",
+    "js application Pods should run as non-root.",
+    "A typical Express-style API should not need those.",
+    "If they do."
+  ]
+};

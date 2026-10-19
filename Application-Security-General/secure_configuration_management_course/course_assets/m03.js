@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Secure Defaults and Baselines",
+  "narration": "Secure defaults make the safer path the easiest path. An application should not require every deployment to remember to disable debug mode, turn on TLS, restrict cookies, close management ports, or reduce logging detail. Defaults should assume production-safe behavior unless a controlled environment explicitly chooses otherwise. This reduces the chance that a new service begins life in an exposed or overly permissive state.\n\nBaselines define what normal secure configuration looks like for an environment, platform, or service type. A baseline may specify minimum required services, disabled features, encryption settings, logging expectations, network restrictions, cookie settings, storage policies, and identity patterns. Baselines are especially useful when many teams deploy similar applications because they turn hard-earned security decisions into reusable templates.\n\nHardened templates and standard environment profiles help teams move quickly without inventing configuration from scratch. They should be maintained, versioned, and documented. Intentional exceptions should be recorded with an owner, reason, risk acceptance, expiration, and review plan. Without that discipline, exceptions become invisible and eventually indistinguishable from mistakes.\n\nTemporary insecure settings are one of the most common configuration traps. A team disables TLS verification for a test, opens a firewall rule during troubleshooting, increases debug logging during an incident, or broadens permissions to unblock deployment. The risk is not only the temporary change. The risk is that nobody removes it. Secure baseline management should include reminders, expiration, and review for risky exceptions.",
+  "graphicAlt": "Versioned secure profiles support repeatable deployments while temporary exceptions have owners and review.",
+  "narrationPoints": [
+    "Secure defaults make the safer path the easiest path.",
+    "Baselines define what normal secure configuration looks like for an environment, platform, or service type.",
+    "Hardened templates and standard environment profiles help teams move quickly without inventing configuration from scratch.",
+    "Temporary insecure settings are one of the most common configuration traps."
+  ]
+};

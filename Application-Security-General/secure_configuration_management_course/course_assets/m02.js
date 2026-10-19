@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Configuration Risk and Trust Boundaries",
+  "narration": "Configuration changes can alter the meaning of an entire system. A small value can affect authentication mode, authorization behavior, logging levels, encryption requirements, external network exposure, error messages, debug behavior, data retention, or how requests are routed. For that reason, configuration should be treated as security-sensitive input. If a setting changes what the application trusts, exposes, records, or protects, it deserves review.\n\nDevelopment, test, staging, and production often need different settings, but those differences create risk. Development may allow local origins, verbose errors, mock authentication, relaxed TLS checks, or test credentials. Those choices may be reasonable in a controlled environment and dangerous in production. Teams need clear environment separation so development convenience does not become production behavior through a copied file or inherited default.\n\nConfiguration sources are not always trustworthy. Copied sample files, inherited platform defaults, third-party templates, container images, package defaults, supply chain snippets, and deployment assumptions may all carry unsafe values. A template designed to demonstrate a feature may not be hardened for real workloads. A cloud quickstart may prioritize ease of setup rather than least privilege.\n\nA practical trust-boundary question is: who or what is allowed to change this setting, and how does the system know the value is safe. Configuration that crosses from a repository, pipeline, console, secret store, or external platform into production should be validated like any other input that can affect security. The fact that a value is called configuration does not make it harmless.",
+  "graphicAlt": "Sources cross an explicit validation boundary before affecting production; development exceptions stay separate.",
+  "narrationPoints": [
+    "Configuration changes can alter the meaning of an entire system.",
+    "Development, test, staging, and production often need different settings, but those differences create risk.",
+    "Configuration sources are not always trustworthy.",
+    "A practical trust-boundary question is: who or what is allowed to change this setting, and how does the system know the value is safe."
+  ]
+};

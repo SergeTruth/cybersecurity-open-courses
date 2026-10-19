@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Secrets should be separated from ordinary configuration.
+
+2
+00:00:03.880 --> 00:00:18.440
+API keys, tokens, passwords, certificates, private keys, connection strings, and service account credentials need stronger storage, access control, auditing, rotation, and exposure response than non-sensitive settings.
+
+3
+00:00:18.540 --> 00:00:24.220
+A feature flag and a database password should not live in the same unmanaged file with the same access rules.
+
+4
+00:00:24.500 --> 00:00:33.380
+Secret managers provide a better pattern for production systems because scripts and services can request secrets at runtime under a controlled identity.
+
+5
+00:00:33.480 --> 00:00:39.320
+The configuration can reference a secret name or vault path without storing the secret value itself.
+
+6
+00:00:39.420 --> 00:00:47.660
+This helps keep sensitive material out of repositories, container images, deployment artifacts, crash dumps, logs, and configuration bundles.
+
+7
+00:00:47.940 --> 00:00:50.420
+Local development still needs discipline.
+
+8
+00:00:50.520 --> 00:00:59.480
+Developers may need test credentials, local certificates, or sandbox tokens, but those values should not be committed or copied into production configuration.
+
+9
+00:00:59.580 --> 00:01:09.420
+.env files, JSON files, profile scripts, container override files, and sample configuration should be clearly separated from deployable production settings.
+
+10
+00:01:09.520 --> 00:01:13.760
+Repository hygiene and secret scanning help catch mistakes before they spread.
+
+11
+00:01:14.040 --> 00:01:17.400
+Environment-specific settings should be explicit.
+
+12
+00:01:17.500 --> 00:01:29.740
+Production, staging, test, and local development may use different endpoints, credentials, feature flags, and logging levels, but the mechanism should be deliberate and reviewable.
+
+13
+00:01:29.840 --> 00:01:41.360
+Secure environment separation prevents a test identity from reaching production data, a production secret from appearing in a local file, or a development exception from silently shipping to users.

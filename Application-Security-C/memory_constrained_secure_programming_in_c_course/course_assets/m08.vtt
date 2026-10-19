@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Error handling under memory pressure must be designed before it is needed.
+
+2
+00:00:04.360 --> 00:00:12.920
+When buffers fill, allocation fails, input exceeds limits, or scratch space is unavailable, the program should follow a predictable path.
+
+3
+00:00:13.020 --> 00:00:18.140
+It should not improvise with partial state, missing checks, or unlimited retries.
+
+4
+00:00:18.420 --> 00:00:22.820
+Fail closed when a limit protects a security decision or state transition.
+
+5
+00:00:22.920 --> 00:00:34.440
+If a command does not fit, a message exceeds the accepted maximum, or a required allocation cannot be made, the safer result is usually to reject the operation and preserve the previous safe state.
+
+6
+00:00:34.540 --> 00:00:38.140
+The caller should receive a clear result it can handle.
+
+7
+00:00:38.420 --> 00:00:42.500
+Partial updates are especially dangerous in constrained code.
+
+8
+00:00:42.600 --> 00:00:52.280
+If a function updates configuration, persistent records, parser state, or output structures before discovering that memory is unavailable, it may leave the program in an inconsistent state.
+
+9
+00:00:52.380 --> 00:00:58.380
+Prefer prepare-then-commit patterns where the old state remains valid until the new state is complete.
+
+10
+00:00:58.660 --> 00:01:02.100
+Predictable degradation can be useful when the product permits it.
+
+11
+00:01:02.200 --> 00:01:10.840
+A program might reduce optional logging, refuse new work while completing existing work, or return a retryable status to a higher layer.
+
+12
+00:01:10.940 --> 00:01:16.700
+These behaviors should be bounded and documented so they do not consume more memory than the original operation.
+
+13
+00:01:16.980 --> 00:01:18.340
+Retry limits matter.
+
+14
+00:01:18.440 --> 00:01:24.280
+Repeating a failed allocation or full-buffer operation without a policy can waste time and memory.
+
+15
+00:01:24.380 --> 00:01:33.580
+The code should know how many times to retry, what conditions must change before retrying, and what result to report when progress is not possible.
+
+16
+00:01:33.860 --> 00:01:37.220
+Diagnostics should be resource-aware.
+
+17
+00:01:37.320 --> 00:01:45.480
+Low-memory error paths need to report enough information for support without allocating large messages or exposing sensitive data.
+
+18
+00:01:45.580 --> 00:01:55.980
+Predefined error codes, counters, bounded records, and compact state summaries are often safer than formatting large strings at the point of failure.
+
+19
+00:01:56.260 --> 00:01:58.100
+Tests should simulate pressure.
+
+20
+00:01:58.200 --> 00:02:05.400
+Force buffers to fill, make allocations fail, limit scratch space, and interrupt operations at inconvenient points.
+
+21
+00:02:05.500 --> 00:02:12.060
+A robust constrained design proves that failure behavior is just as intentional as success behavior.

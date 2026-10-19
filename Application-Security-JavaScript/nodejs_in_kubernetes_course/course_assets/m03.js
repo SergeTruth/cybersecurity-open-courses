@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Pods, Deployments, Services, and Ingress",
+  "graphicAlt": "Deployments manage replicas while routing reaches ready matching Pods through a Service; durable state requires separate controls.",
+  "narration": "Most Node.js application teams interact with a small set of Kubernetes objects again and again. A Pod is the smallest deployable unit. It usually contains the Node.js application container and, in some designs, a sidecar for supporting behavior. A Deployment describes the desired state for a replicated stateless workload and manages the creation, replacement, and rollout of Pods. A Service gives those Pods a stable network identity inside the cluster. Ingress, a gateway, or a load balancer then provides external HTTP routing according to the platform's design.\n\nThe relationship between these objects is built on labels and selectors. The Deployment creates Pods with particular labels. The Service selects Pods with matching labels. The routing layer sends traffic to the Service. If labels are inconsistent, a Service may send traffic to nothing, or to the wrong workload. When a rollout behaves strangely, checking labels, selectors, endpoints, and Pod readiness is often more useful than staring at the application code first.\n\nStateless Node.js APIs are often a natural fit for Deployments because they can run multiple interchangeable replicas. Stateful data should usually live outside those application Pods or in purpose-built storage systems. A Pod can disappear and be recreated; a Deployment can replace old replicas with new ones; a node can fail and the scheduler can place a replacement elsewhere. Application design should assume that individual Pods are disposable, while persistent state, durable queues, and external databases require their own reliability and security controls.\n\nReadable manifests matter. Teams should be able to look at a Deployment, Service, and Ingress and understand what runs, how traffic reaches it, what labels connect the pieces, which container port is used, and what rollout settings apply. Kubernetes YAML can become noisy quickly, but the core intent should remain reviewable in pull requests. That reviewability becomes important when debugging traffic, readiness, scaling, and releases under pressure.",
+  "narrationPoints": [
+    "The relationship between these objects is built on labels.",
+    "Readable manifests matter.",
+    "Stateful data should usually live outside those application.",
+    "Kubernetes YAML can become noisy quickly.",
+    "A Pod can disappear and be recreated; a Deployment can.",
+    "Application design should assume that individual Pods."
+  ]
+};

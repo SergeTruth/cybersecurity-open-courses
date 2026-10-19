@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Continuous Monitoring and Operational Discipline",
+  "graphicAlt": "Continuous monitoring connects changing conditions to owned risk, remediation and maintained evidence.",
+  "narration": "FedRAMP Moderate is an ongoing program commitment rather than a one-time documentation project. Authorization work may focus attention on a package and an assessment, but the service still needs continuous monitoring after that point. Security posture changes as vulnerabilities are discovered, configurations drift, personnel change, incidents occur, dependencies evolve, and new features alter the system boundary.\n\nContinuous monitoring includes vulnerability management, configuration monitoring, change management, incident reporting expectations at a high level, periodic evidence updates, risk tracking, plans of action and milestones, security metrics, and operational ownership. The exact routines may vary, but the principle is stable: the provider must keep visibility into whether controls remain effective and whether risk is changing.\n\nOperational discipline is what keeps Moderate from becoming stale. Vulnerabilities need owners and timelines. Significant changes need review. Monitoring alerts need triage. Incidents need defined escalation and records. Evidence needs maintenance. Risk items need tracking. If these activities are disconnected, the security program becomes brittle. If they are integrated into normal operations, the Moderate baseline becomes sustainable.\n\nContinuous monitoring also supports agency trust. Federal customers and authorizing officials are not only interested in whether a service looked acceptable at one point in time. They need confidence that the provider can operate the service responsibly over time, identify problems, communicate risk, and remediate issues. That is why Moderate should be understood as a living operational model, not a static milestone.",
+  "narrationPoints": [
+    "FedRAMP Moderate is an ongoing program commitment rather than a one-time documentation project.",
+    "Continuous monitoring includes vulnerability management, configuration monitoring, change management, incident reporting expectations at a high...",
+    "Operational discipline is what keeps Moderate from becoming stale.",
+    "Continuous monitoring also supports agency trust."
+  ]
+};

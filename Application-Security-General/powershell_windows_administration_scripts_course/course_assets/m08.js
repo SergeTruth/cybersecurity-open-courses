@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Error Handling, Logging, and Testing",
+  "narration": "Administration scripts need explicit error handling because operational environments are messy. Hosts are offline, permissions differ, services are busy, files are locked, and data formats change. PowerShell has both terminating and non-terminating errors. At a high level, some failures stop execution, while others report a problem and allow the pipeline to continue. Scripts should intentionally decide which behavior is appropriate for each operation.\n\nTry, catch, and finally blocks help separate normal logic from failure handling and cleanup. ErrorAction can help turn certain failures into behavior that the script can catch. Exit codes are useful when scripts are run by scheduled tasks, automation platforms, or monitoring tools. The goal is to make failures observable and actionable, not to suppress them so the script appears successful.\n\nLogging should be structured and sensitive to context. Transcripts and logs can capture commands, paths, usernames, hostnames, output, errors, and sometimes data that should not be broadly shared. Scripts should log enough to support audit and troubleshooting while avoiding unnecessary secrets, file contents, or protected data. Logs should also have an owner, location, retention expectation, and access model.\n\nTesting raises confidence before automation touches production. PSScriptAnalyzer can support static review for style, quality, and common issues. Pester can test expected behavior, parameter handling, and helper functions. Dry runs, sample target lists, staged rollout, peer review, and change windows all help catch mistakes. A production-ready script is not only a clever command. It is an operated artifact that has been reviewed, tested, logged, and rolled out carefully.",
+  "graphicAlt": "Intentional error handling, cleanup, meaningful status and protected logs are verified through review, tests and staged rollout.",
+  "narrationPoints": [
+    "Administration scripts need explicit error handling because operational environments are messy.",
+    "Try, catch, and finally blocks help separate normal logic from failure handling and cleanup.",
+    "Logging should be structured and sensitive to context.",
+    "Testing raises confidence before automation touches production."
+  ]
+};

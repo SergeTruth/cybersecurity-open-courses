@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "MFA Factors and Authenticator Strength",
+  "narration": "MFA depends on using distinct types of proof. Something you know includes passwords or memorized secrets. Something you have includes a registered device, authenticator app, hardware security key, or platform authenticator. Something you are refers to biometrics at a high level, such as a local biometric check that unlocks a private key or device capability. The strength comes from combining factors that are not all compromised in the same way.\n\nNot every MFA method provides the same resistance. One-time passcodes can help against simple password reuse, but reusable codes can still be phished or replayed in some situations. Push approvals can be convenient, but the user experience and approval context matter. Hardware security keys, platform authenticators, and passkeys can provide stronger phishing resistance when they bind authentication to the legitimate service and avoid reusable shared secrets.\n\nBiometrics should be understood carefully. In many modern designs, a fingerprint or face check does not leave the device as a password. Instead, it unlocks a local authenticator or private key. That can improve usability, but teams still need device management, enrollment policy, recovery controls, and an understanding of what happens when a device is lost or replaced.\n\nAuthenticator strength should match risk. A general internal knowledge site may not need the same assurance as financial administration, production access, privileged identity management, or sensitive source code access. The durable principle is to use stronger, phishing-resistant authenticators for higher-risk users, applications, and actions, while also preserving practical recovery and support paths that do not undermine the primary control.",
+  "graphicAlt": "Distinct proof and service-bound authenticators support risk-matched authentication, with local biometric unlocking.",
+  "narrationPoints": [
+    "MFA depends on using distinct types of proof.",
+    "Not every MFA method provides the same resistance.",
+    "Biometrics should be understood carefully.",
+    "Authenticator strength should match risk."
+  ]
+};

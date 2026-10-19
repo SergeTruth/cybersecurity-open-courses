@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+File system automation is common in Windows administration.
+
+2
+00:00:03.880 --> 00:00:12.040
+Scripts collect logs, summarize directories, archive reports, check permissions, rotate output, and remove temporary files.
+
+3
+00:00:12.140 --> 00:00:19.260
+These workflows look simple, but they can become dangerous when paths, wildcards, and deletion logic are too broad.
+
+4
+00:00:19.360 --> 00:00:27.120
+A cleanup script should be treated as a high-impact administrative tool, especially when it runs unattended or with elevated rights.
+
+5
+00:00:27.400 --> 00:00:31.400
+Path validation is a core safety control.
+
+6
+00:00:31.500 --> 00:00:37.900
+Scripts should distinguish between operator-provided paths, generated paths, and trusted configuration paths.
+
+7
+00:00:38.000 --> 00:00:47.680
+They should resolve and constrain target locations before acting, avoid accidental path traversal through untrusted input, and be careful with relative paths.
+
+8
+00:00:47.780 --> 00:00:53.700
+If a script uses wildcards, it should make the matched files reviewable before destructive steps occur.
+
+9
+00:00:53.800 --> 00:00:57.800
+The broader the pattern, the stronger the confirmation should be.
+
+10
+00:00:58.080 --> 00:01:01.680
+Retention policies help avoid arbitrary cleanup behavior.
+
+11
+00:01:01.780 --> 00:01:12.900
+Rather than deleting based on vague assumptions, scripts should define what categories of files are in scope, how age is calculated, which files are excluded, and what evidence is logged.
+
+12
+00:01:13.000 --> 00:01:23.240
+For sensitive logs and archives, scripts should also consider access permissions and whether the output may expose operational details, identifiers, or protected information.
+
+13
+00:01:23.520 --> 00:01:26.720
+Safe archive handling is part of file automation.
+
+14
+00:01:26.820 --> 00:01:35.860
+Archive scripts should avoid overwriting important files, should not blindly trust archive contents, and should account for very large or deeply nested input.
+
+15
+00:01:35.960 --> 00:01:40.920
+Temporary working directories should be unique to the run and cleaned up when processing completes.
+
+16
+00:01:41.020 --> 00:01:48.060
+If cleanup fails, the script should report the leftover location without dumping sensitive file contents into logs.

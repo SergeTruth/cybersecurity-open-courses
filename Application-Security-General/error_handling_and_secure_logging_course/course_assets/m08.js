@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Monitoring, Alerting, and Incident Response",
+  "narration": "Logs become more valuable when they are connected to monitoring and alerting. Alertable events should be chosen because they indicate meaningful risk or operational impact: repeated authentication failures, suspicious account recovery activity, privilege changes, access denials on sensitive resources, unusual administrative actions, dependency failures in critical workflows, or spikes in validation failures. The point is not to alert on everything. The point is to surface events that deserve timely attention.\n\nFalse positives and alert fatigue reduce response quality. If a team receives too many low-value alerts, important signals become easier to miss. Detection use cases should define what behavior is being identified, why it matters, what fields are needed, what threshold or pattern is meaningful, and what responder action is expected. Dashboards can help show trends and health, but they should not replace clear alert logic and ownership.\n\nDuring incidents, logs help reconstruct activity, timelines, affected resources, decisions, and control behavior. A responder may need to know when an issue started, which users were affected, which administrative actions occurred, which dependencies failed, and whether security controls fired. Preserving relevant logs is part of incident handling. After the incident, teams should improve logging and alerting based on what was hard to answer. Every incident is a chance to make future evidence cleaner and faster to use.",
+  "graphicAlt": "Meaningful patterns feed tuned alerts, owned response, preserved evidence and post-incident improvement.",
+  "narrationPoints": [
+    "Logs become more valuable when they are connected to monitoring and alerting.",
+    "False positives and alert fatigue reduce response quality.",
+    "During incidents, logs help reconstruct activity, timelines, affected resources, decisions, and control behavior."
+  ]
+};

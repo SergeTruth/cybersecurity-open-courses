@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Heap use in constrained C should be governed by a documented policy.
+
+2
+00:00:05.800 --> 00:00:09.960
+Some systems avoid dynamic allocation after initialization.
+
+3
+00:00:10.060 --> 00:00:14.220
+Others allow it only in specific subsystems.
+
+4
+00:00:14.320 --> 00:00:17.680
+Some use memory pools instead of a general heap.
+
+5
+00:00:17.780 --> 00:00:22.180
+The important point is that reviewers can tell what is allowed and why.
+
+6
+00:00:22.460 --> 00:00:25.100
+Allocation failure is normal design input.
+
+7
+00:00:25.200 --> 00:00:33.360
+The code should check allocation results, preserve safe state, release resources it already owns, and return a clear error to the caller.
+
+8
+00:00:33.460 --> 00:00:39.780
+A function that cannot obtain memory should not partially update shared state and then continue as though the operation succeeded.
+
+9
+00:00:40.060 --> 00:00:43.020
+Fragmentation matters in long-running systems.
+
+10
+00:00:43.120 --> 00:00:49.360
+Even if total free memory looks adequate, the allocator may not have a large enough contiguous block for a later request.
+
+11
+00:00:49.460 --> 00:01:00.500
+Designs with repeated allocate and free cycles should be reviewed for object sizes, lifetimes, and whether a pool or fixed ownership pattern would be more predictable.
+
+12
+00:01:00.780 --> 00:01:05.020
+Memory pools can clarify limits and ownership when they are designed carefully.
+
+13
+00:01:05.120 --> 00:01:11.840
+A pool can cap the number of active objects, avoid some fragmentation patterns, and make exhaustion behavior visible.
+
+14
+00:01:11.940 --> 00:01:17.220
+It still needs rules for borrowing, returning, resetting, and handling pool exhaustion.
+
+15
+00:01:17.500 --> 00:01:20.860
+Cleanup paths deserve the same quality as normal paths.
+
+16
+00:01:20.960 --> 00:01:28.400
+If a function allocates several objects and fails in the middle, it must release the objects it owns and leave the caller with a consistent result.
+
+17
+00:01:28.500 --> 00:01:34.420
+Reviewers should trace allocation ownership across every return path, not only the success path.
+
+18
+00:01:34.700 --> 00:01:37.820
+Avoid allocating during critical operations when possible.
+
+19
+00:01:37.920 --> 00:01:49.520
+If an operation controls safety, persistence, startup, update commit, or time-sensitive work, it may be better to preallocate required resources or prove that allocation failure is handled safely.
+
+20
+00:01:49.620 --> 00:01:53.620
+The design should not depend on memory appearing at the most stressful moment.
+
+21
+00:01:53.900 --> 00:01:58.300
+Testing should force allocation failure at different points.
+
+22
+00:01:58.400 --> 00:02:03.520
+A normal-path test that never exhausts memory tells only part of the story.
+
+23
+00:02:03.620 --> 00:02:11.620
+Targeted failure tests reveal whether cleanup, retries, backpressure, and diagnostics behave predictably when memory is unavailable.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.540
+Origin and Referer validation can provide useful defense in depth for state-changing requests, especially when token validation is difficult or when additional assurance is desired.
+
+2
+00:00:11.640 --> 00:00:16.120
+These headers can help the server reason about where a browser request appears to come from.
+
+3
+00:00:16.220 --> 00:00:25.420
+They should be implemented carefully because proxies, privacy settings, deployment architecture, and browser behavior can affect what the application receives.
+
+4
+00:00:25.700 --> 00:00:29.300
+CORS is often misunderstood in CSRF discussions.
+
+5
+00:00:29.400 --> 00:00:34.840
+CORS controls which browser-based cross-origin responses are readable by frontend code.
+
+6
+00:00:34.940 --> 00:00:41.980
+It is not, by itself, a complete CSRF protection model for cookie-authenticated state-changing requests.
+
+7
+00:00:42.080 --> 00:00:47.760
+A request can be security-relevant even when the response is not readable by another origin.
+
+8
+00:00:48.040 --> 00:00:51.080
+API boundaries deserve clear design.
+
+9
+00:00:51.180 --> 00:00:58.700
+Browser clients using session cookies have different assumptions from non-browser clients using service credentials or bearer tokens.
+
+10
+00:00:58.800 --> 00:01:02.560
+A Python backend that supports both should not mix the models casually.
+
+11
+00:01:02.660 --> 00:01:09.380
+Each route should have an authentication method, CSRF expectation, and client assumption that reviewers can understand.
+
+12
+00:01:09.660 --> 00:01:13.820
+The safest review posture is to match protections to the credential model.
+
+13
+00:01:13.920 --> 00:01:17.840
+Session-authenticated browser flows usually need CSRF controls.
+
+14
+00:01:17.940 --> 00:01:24.180
+Token-based APIs may have different protections, but they still need clear origin, authorization, and logging decisions.
+
+15
+00:01:24.280 --> 00:01:32.200
+False confidence is the risk: CORS, Origin checks, cookies, and tokens each solve different parts of the problem.

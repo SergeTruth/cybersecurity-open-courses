@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.380
+HTML encoding is used when data is rendered as text in an HTML body context.
+
+2
+00:00:07.480 --> 00:00:19.000
+Special characters such as less-than, greater-than, ampersand, and sometimes quotes are represented so the browser displays them as text instead of treating them as markup.
+
+3
+00:00:19.100 --> 00:00:27.340
+If a user enters text that looks like a tag, HTML encoding should make the browser show the characters rather than create an element.
+
+4
+00:00:27.440 --> 00:00:30.400
+That distinction is the heart of output encoding.
+
+5
+00:00:30.680 --> 00:00:36.840
+Modern frameworks often auto-escape template output in common HTML text contexts.
+
+6
+00:00:36.940 --> 00:00:41.420
+This is valuable because it makes safe behavior the default for ordinary variable insertion.
+
+7
+00:00:41.520 --> 00:00:45.200
+However, auto-escaping is not a reason to stop thinking.
+
+8
+00:00:45.300 --> 00:00:59.380
+Developers can accidentally bypass it by using raw HTML helpers, unsafe template directives, manual string concatenation, direct DOM assignment to dangerous properties, or server-rendered content that the framework does not understand.
+
+9
+00:00:59.480 --> 00:01:04.440
+Auto-escaping helps most when developers stay inside the safe patterns it provides.
+
+10
+00:01:04.720 --> 00:01:09.200
+HTML encoding is not the same as sanitizing rich HTML.
+
+11
+00:01:09.300 --> 00:01:20.500
+If the application allows users to submit formatted content, such as markdown or rich text, the system may need a sanitizer that permits a controlled subset of tags and attributes.
+
+12
+00:01:20.600 --> 00:01:26.120
+That is a separate design decision and should use mature libraries with conservative configuration.
+
+13
+00:01:26.220 --> 00:01:31.100
+For ordinary text, prefer encoding and safe template insertion.
+
+14
+00:01:31.200 --> 00:01:36.560
+For rich content, sanitize before rendering and still review the final context carefully.

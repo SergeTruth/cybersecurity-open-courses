@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Password storage controls need tests because small changes can create serious risk.
+
+2
+00:00:05.800 --> 00:00:17.000
+Unit tests should verify that valid passwords are accepted, invalid passwords are rejected, hashes are not reused incorrectly, and migration behavior works as intended.
+
+3
+00:00:17.100 --> 00:00:23.020
+Regression tests should cover legacy verification and rehash-on-login paths.
+
+4
+00:00:23.120 --> 00:00:31.200
+Reset token tests should cover lifetime, one-time use, invalid tokens, and successful replacement of the stored verifier.
+
+5
+00:00:31.480 --> 00:00:35.480
+Lockout, throttling, and rate limiting behavior should also be tested.
+
+6
+00:00:35.580 --> 00:00:42.620
+The application should resist automated abuse without creating easy denial of service for legitimate users.
+
+7
+00:00:42.720 --> 00:00:52.560
+Tests should confirm that errors are safe, timing behavior is not needlessly revealing, and authentication flows remain reliable under expected load.
+
+8
+00:00:52.660 --> 00:00:59.380
+Password-related tests should never require storing real user passwords or exposing secrets in fixtures.
+
+9
+00:00:59.660 --> 00:01:02.220
+Logging must be useful without being dangerous.
+
+10
+00:01:02.320 --> 00:01:14.400
+Authentication logs can include successful and failed login events, reset requests, reset completions, migration events, lockouts, throttle events, and suspicious recovery patterns.
+
+11
+00:01:14.500 --> 00:01:25.700
+Logs should avoid plaintext passwords, reset tokens, password hashes where not necessary, peppers, sensitive authentication secrets, and unnecessary credential material.
+
+12
+00:01:25.800 --> 00:01:30.680
+Observability should help defenders without creating a second source of compromise.
+
+13
+00:01:30.960 --> 00:01:36.080
+Monitoring connects password storage to operations and incident response.
+
+14
+00:01:36.180 --> 00:01:48.740
+Failed login patterns, credential stuffing indicators at a high level, unusual reset activity, spikes in lockouts, migration errors, and authentication performance changes may require investigation.
+
+15
+00:01:48.840 --> 00:01:57.800
+Incident response readiness includes knowing how to rotate secrets, invalidate sessions, force resets, preserve evidence, and communicate with users.
+
+16
+00:01:57.900 --> 00:02:03.020
+Password storage controls must be observable without exposing the secrets they are meant to protect.

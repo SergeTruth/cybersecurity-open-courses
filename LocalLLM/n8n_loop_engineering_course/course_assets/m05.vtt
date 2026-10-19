@@ -1,0 +1,201 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Rate limits are one of the first reasons a workflow that works in a test run fails in production.
+
+2
+00:00:05.720 --> 00:00:10.120
+Ten items may complete cleanly because the external service never feels pressure.
+
+3
+00:00:10.220 --> 00:00:18.620
+Several thousand items can trigger quota limits, temporary throttling, or HTTP 429 responses that indicate too many requests.
+
+4
+00:00:18.720 --> 00:00:25.600
+Reliable loop engineering treats rate limits as part of the design instead of as an error message to handle after the workflow breaks.
+
+5
+00:00:25.880 --> 00:00:27.800
+Several controls work together.
+
+6
+00:00:27.900 --> 00:00:31.980
+Batch size determines how many items are released in one loop iteration.
+
+7
+00:00:32.080 --> 00:00:36.800
+The number of operations depends on how many downstream calls each item causes.
+
+8
+00:00:36.900 --> 00:00:41.780
+A delay between iterations reduces sustained pressure on the external API.
+
+9
+00:00:41.880 --> 00:00:45.800
+Retry behavior controls what happens when a specific request fails.
+
+10
+00:00:45.900 --> 00:00:50.140
+Execution duration increases as pacing becomes more conservative.
+
+11
+00:00:50.240 --> 00:00:55.040
+Idempotency determines whether repeating a failed operation is safe.
+
+12
+00:00:55.320 --> 00:00:59.080
+The official Loop Over Items plus Wait pattern is straightforward.
+
+13
+00:00:59.180 --> 00:01:07.180
+Place the API operation inside the loop body, then place a Wait node after the operation and before the return connection to Loop Over Items.
+
+14
+00:01:07.280 --> 00:01:08.800
+That position matters.
+
+15
+00:01:08.900 --> 00:01:15.460
+The Wait node pauses the workflow after the current batch has completed its API call and before the next batch is released.
+
+16
+00:01:15.560 --> 00:01:20.200
+It is deliberate pacing between iterations, not a retry by itself.
+
+17
+00:01:20.480 --> 00:01:24.800
+The HTTP Request node also has native batching capabilities.
+
+18
+00:01:24.900 --> 00:01:31.140
+When a single HTTP Request node can satisfy the requirement, native batching may be the simplest option.
+
+19
+00:01:31.240 --> 00:01:37.800
+Settings such as items per batch and batch interval can pace requests without adding an explicit multi-node loop.
+
+20
+00:01:37.900 --> 00:01:51.260
+Loop Over Items becomes more useful when the unit of work is an entire sequence: request data, transform it, branch on a result, write to a destination, log status, and only then release the next batch.
+
+21
+00:01:51.540 --> 00:01:54.020
+Retry on Fail solves a different problem.
+
+22
+00:01:54.120 --> 00:02:03.080
+It is meant for transient failures, such as a temporary network problem, a short service interruption, or a 429 response that may succeed after a delay.
+
+23
+00:02:03.180 --> 00:02:06.700
+Max Tries sets a ceiling on how many attempts the node should make.
+
+24
+00:02:06.800 --> 00:02:10.160
+Wait Between Tries sets the pause between those attempts.
+
+25
+00:02:10.260 --> 00:02:16.020
+That retry delay is not the same as the normal pacing delay between successful loop iterations.
+
+26
+00:02:16.120 --> 00:02:19.720
+A workflow can need both, but they answer different questions.
+
+27
+00:02:20.000 --> 00:02:22.640
+Side effects change the risk profile.
+
+28
+00:02:22.740 --> 00:02:32.820
+Retrying a read operation is usually different from retrying a payment, message send, record creation, ticket update, or any other write that affects an external system.
+
+29
+00:02:32.920 --> 00:02:36.920
+If the destination supports idempotency keys, use them.
+
+30
+00:02:37.020 --> 00:02:42.860
+If it supports upserts based on a stable external identifier, prefer that over blind creation.
+
+31
+00:02:42.960 --> 00:02:51.760
+If neither is available, add destination checks or status fields that prevent duplicate effects when a retry occurs after an ambiguous failure.
+
+32
+00:02:52.040 --> 00:02:55.800
+The safest design records what happened at the item level.
+
+33
+00:02:55.900 --> 00:02:59.260
+A processed status means the intended operation completed.
+
+34
+00:02:59.360 --> 00:03:03.600
+A skipped status means the workflow deliberately did not call the destination.
+
+35
+00:03:03.700 --> 00:03:08.180
+A failed status means the item reached a controlled failure path.
+
+36
+00:03:08.280 --> 00:03:11.640
+A retried count shows how much recovery work was needed.
+
+37
+00:03:11.740 --> 00:03:19.420
+Those fields make a paced loop auditable, especially when an external service throttles some requests while accepting others.
+
+38
+00:03:19.700 --> 00:03:23.380
+Rate-limit tuning should also consider the total runtime of the job.
+
+39
+00:03:23.480 --> 00:03:29.400
+A delay that is perfect for one hundred records may be too slow for a nightly job with fifty thousand records.
+
+40
+00:03:29.500 --> 00:03:34.940
+A batch size that is safe during office hours may need to be smaller when the external service is under load.
+
+41
+00:03:35.040 --> 00:03:44.240
+The workflow should begin with conservative defaults and adjust based on measured response codes, retry frequency, destination results, and operational windows.
+
+42
+00:03:44.520 --> 00:03:47.480
+The design should also make throttling visible.
+
+43
+00:03:47.580 --> 00:03:55.980
+Record when a request was retried, when pacing delayed the next batch, and when a final status came from a clean response rather than a recovered attempt.
+
+44
+00:03:56.080 --> 00:04:00.320
+That history helps separate API capacity problems from workflow logic defects.
+
+45
+00:04:00.600 --> 00:04:03.800
+Choosing an initial batch size should be conservative.
+
+46
+00:04:03.900 --> 00:04:08.860
+Start with a small batch and a delay that respects the published or observed API limit.
+
+47
+00:04:08.960 --> 00:04:15.440
+Then inspect execution duration, response codes, retry counts, and destination results.
+
+48
+00:04:15.540 --> 00:04:21.300
+Increase throughput gradually only when the evidence shows that the external service and the workflow can handle it.
+
+49
+00:04:21.400 --> 00:04:28.120
+A fast workflow that creates duplicate records or fails halfway through a large job is not reliable.
+
+50
+00:04:28.220 --> 00:04:34.140
+A paced workflow that produces traceable results is usually easier to operate and recover.
