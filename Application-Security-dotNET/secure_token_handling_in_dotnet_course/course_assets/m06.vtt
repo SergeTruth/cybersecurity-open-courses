@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.380
+Access-token lifetime should balance usability, security, operational cost, and revocation needs.
+
+2
+00:00:07.480 --> 00:00:15.800
+Short lifetimes reduce how long an exposed access token remains useful, but they can increase refresh activity and operational complexity.
+
+3
+00:00:15.900 --> 00:00:21.500
+Long lifetimes reduce friction but make response and policy changes slower to take effect.
+
+4
+00:00:21.780 --> 00:00:29.460
+Refresh tokens are higher-value credentials because they may allow continued access beyond a short-lived access token.
+
+5
+00:00:29.560 --> 00:00:39.560
+They need explicit storage, binding, expiration, rotation, revocation, monitoring, and owner expectations.
+
+6
+00:00:39.660 --> 00:00:43.260
+A refresh token should not be treated like ordinary application state.
+
+7
+00:00:43.540 --> 00:00:49.220
+Rotation can reduce the value of stale refresh tokens when implemented and monitored carefully.
+
+8
+00:00:49.320 --> 00:00:58.120
+In a rotation model, a client receives a new refresh token as part of the refresh flow, and the previous value is retired according to policy.
+
+9
+00:00:58.220 --> 00:01:04.780
+This requires consistent storage, clear failure handling, and visibility into unusual refresh behavior.
+
+10
+00:01:05.060 --> 00:01:14.580
+Logout, password change, MFA change, device removal, user disablement, and suspected compromise should trigger token lifecycle review.
+
+11
+00:01:14.680 --> 00:01:24.520
+The right action may include invalidating sessions, revoking refresh tokens, shortening lifetimes, requiring reauthentication, or notifying owners depending on the system.
+
+12
+00:01:24.800 --> 00:01:30.160
+Revocation state must be available where validation or refresh decisions are made.
+
+13
+00:01:30.260 --> 00:01:37.140
+A revocation decision that exists only in one application instance may not protect a distributed system.
+
+14
+00:01:37.240 --> 00:01:44.360
+Multi-instance deployments, caches, gateways, and identity providers all need to participate in the intended behavior.
+
+15
+00:01:44.640 --> 00:01:50.800
+Long-lived sessions should have ownership, monitoring, and user-facing management where appropriate.
+
+16
+00:01:50.900 --> 00:01:59.220
+Users and administrators may need to see active devices, connected applications, or integration sessions so stale access can be removed deliberately.

@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.580
+ASP.NET Core includes antiforgery support for defending against CSRF and XSRF-style risks in browser-based workflows.
+
+2
+00:00:08.680 --> 00:00:14.920
+Conceptually, the server generates protected values that are associated with the intended application interaction.
+
+3
+00:00:15.020 --> 00:00:21.260
+Protected state-changing requests are expected to include the required token material when they reach the server.
+
+4
+00:00:21.540 --> 00:00:24.420
+Antiforgery tokens are not identity by themselves.
+
+5
+00:00:24.520 --> 00:00:28.200
+They are request-intent evidence for a protected workflow.
+
+6
+00:00:28.300 --> 00:00:33.820
+The server validates whether the expected token is present and valid for the protected request.
+
+7
+00:00:33.920 --> 00:00:42.320
+If validation fails, the request should not proceed as a normal state-changing operation, even if the browser also sent an authentication cookie.
+
+8
+00:00:42.600 --> 00:00:45.720
+Antiforgery validation is separate from authentication.
+
+9
+00:00:45.820 --> 00:00:49.980
+Authentication establishes the user's identity for the request.
+
+10
+00:00:50.080 --> 00:00:55.680
+A token validation check helps confirm that the request followed the expected browser application path.
+
+11
+00:00:55.780 --> 00:00:57.460
+Both checks can matter.
+
+12
+00:00:57.560 --> 00:01:03.320
+A request can be authenticated and still fail antiforgery validation.
+
+13
+00:01:03.600 --> 00:01:06.800
+Antiforgery validation is also separate from authorization.
+
+14
+00:01:06.900 --> 00:01:12.020
+Authorization decides whether the identified user is allowed to perform the action on the target resource.
+
+15
+00:01:12.120 --> 00:01:15.480
+Antiforgery validation helps confirm request intent.
+
+16
+00:01:15.580 --> 00:01:22.300
+A request can pass authorization logic and still be rejected because it did not include the expected antiforgery signal.
+
+17
+00:01:22.580 --> 00:01:28.500
+ASP.NET Core antiforgery relies on the ASP.NET Core Data Protection system.
+
+18
+00:01:28.600 --> 00:01:34.120
+Data Protection handles protected values used by framework features such as antiforgery and cookies.
+
+19
+00:01:34.220 --> 00:01:37.500
+That means key persistence and key availability matter.
+
+20
+00:01:37.600 --> 00:01:46.000
+In multi-instance deployments, instances need compatible Data Protection keys so token generation and validation remain reliable across the deployment.
+
+21
+00:01:46.280 --> 00:01:49.160
+Token failure handling should be practical and safe.
+
+22
+00:01:49.260 --> 00:01:59.980
+A failed validation should produce a controlled response, useful protected logs, and enough operational context to troubleshoot configuration or client-flow problems.
+
+23
+00:02:00.080 --> 00:02:05.200
+It should not reveal sensitive token details or internal implementation data to callers.

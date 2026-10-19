@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.460
+gRPC message handling consumes memory, CPU, network capacity, and downstream service capacity.
+
+2
+00:00:07.560 --> 00:00:17.720
+Because Protobuf messages and generated clients can make service calls feel structured and efficient, teams sometimes under-review the resource profile.
+
+3
+00:00:17.820 --> 00:00:23.100
+A secure service needs explicit expectations for incoming and outgoing message sizes.
+
+4
+00:00:23.380 --> 00:00:26.580
+Message size limits should match business need.
+
+5
+00:00:26.680 --> 00:00:29.560
+A small lookup method should not accept large messages.
+
+6
+00:00:29.660 --> 00:00:39.020
+A batch or import method may need a higher limit, but that limit should be justified, documented, monitored, and paired with back-end capacity planning.
+
+7
+00:00:39.120 --> 00:00:46.720
+Larger limits increase the cost of parsing, validation, logging, retries, and downstream processing.
+
+8
+00:00:47.000 --> 00:00:52.200
+Streaming calls need careful review because they may be long-lived and resource-intensive.
+
+9
+00:00:52.300 --> 00:00:57.980
+Server streaming, client streaming, and bidirectional streaming each have different operational profiles.
+
+10
+00:00:58.080 --> 00:01:01.600
+A server stream may hold resources while a client reads.
+
+11
+00:01:01.700 --> 00:01:05.780
+A client stream may send many messages before work completes.
+
+12
+00:01:05.880 --> 00:01:10.200
+A bidirectional stream may keep both sides active for an extended period.
+
+13
+00:01:10.480 --> 00:01:16.160
+Flow control, backpressure, cancellation, and bounded work should be considered at a high level.
+
+14
+00:01:16.260 --> 00:01:22.100
+The service should avoid designs where a caller can create work that grows without a clear business limit.
+
+15
+00:01:22.200 --> 00:01:29.480
+When a call is canceled or reaches a deadline, the service should stop work that no longer has value where it can do so safely.
+
+16
+00:01:29.760 --> 00:01:35.600
+Streaming should not become an unbounded upload, export, or event pipe without clear controls.
+
+17
+00:01:35.700 --> 00:01:46.660
+Teams should define who can open the stream, how long it can remain active, how much data can flow, what happens when downstream systems slow down, and what operators can monitor.
+
+18
+00:01:46.940 --> 00:01:56.780
+The resource-control baseline includes message size limits, streaming design review, cancellation handling, safe defaults, operational metrics, and capacity ownership.
+
+19
+00:01:56.880 --> 00:02:01.360
+These controls protect availability while keeping legitimate service behavior predictable.

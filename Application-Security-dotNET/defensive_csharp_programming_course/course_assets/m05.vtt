@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Defensive data access uses parameterized patterns so data values are not treated as query syntax.
+
+2
+00:00:06.440 --> 00:00:15.880
+Whether the application uses Entity Framework, Dapper, ADO.NET, or another data layer, query construction should keep structure and values separate.
+
+3
+00:00:15.980 --> 00:00:19.660
+This is a baseline habit, not an optional hardening step.
+
+4
+00:00:19.940 --> 00:00:23.620
+ORMs help, but they do not remove design responsibility.
+
+5
+00:00:23.720 --> 00:00:37.960
+Developers still need to review query shape, tenant filters, object-level authorization, eager loading, lazy loading, performance limits, and whether the returned data is appropriate for the current user and operation.
+
+6
+00:00:38.060 --> 00:00:43.340
+A safe query is not only syntactically safe; it is also authorized and bounded.
+
+7
+00:00:43.620 --> 00:00:52.660
+Resources such as database connections, files, streams, readers, writers, HTTP responses, and handles should be managed correctly.
+
+8
+00:00:52.760 --> 00:00:56.760
+Use language and framework patterns that dispose resources when work is complete.
+
+9
+00:00:56.860 --> 00:01:02.940
+Resource leaks can become availability problems, especially under load or repeated failure conditions.
+
+10
+00:01:03.220 --> 00:01:08.900
+Timeouts, cancellation, size limits, and bounded reads are defensive controls.
+
+11
+00:01:09.000 --> 00:01:20.280
+Long-running queries, unbounded file reads, uncontrolled loops, large uploads, and missing cancellation paths can reduce reliability and make failure harder to control.
+
+12
+00:01:20.380 --> 00:01:24.780
+Respect cancellation tokens when the caller or framework provides them.
+
+13
+00:01:25.060 --> 00:01:28.980
+File handling needs careful path and metadata decisions.
+
+14
+00:01:29.080 --> 00:01:32.680
+User-supplied names should not become trusted storage paths.
+
+15
+00:01:32.780 --> 00:01:40.780
+Validate extensions, content type expectations, size limits, storage location, and authorization.
+
+16
+00:01:40.880 --> 00:01:48.000
+Keep uploaded or imported content away from executable paths and separate display names from internal storage identifiers.
+
+17
+00:01:48.280 --> 00:01:50.520
+The common theme is resource intent.
+
+18
+00:01:50.620 --> 00:01:59.020
+Data and files should flow through known boundaries, be validated, be authorized, be processed with limits, and be cleaned up.
+
+19
+00:01:59.120 --> 00:02:06.800
+Defensive code makes those boundaries clear enough that reviewers can see what happens when input is large, slow, malformed, or unauthorized.

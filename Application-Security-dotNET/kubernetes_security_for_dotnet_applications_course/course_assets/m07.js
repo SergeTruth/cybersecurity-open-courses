@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Health Checks, Probes, and Safe Availability Controls",
+  "graphicAlt": "Readiness gates traffic, liveness asks whether restart is appropriate, and startup protects initialization time with safe health output.",
+  "narration": "Kubernetes probes influence whether traffic reaches an application and whether the application is restarted. That makes probes a security and reliability control, not just a deployment checkbox. Poorly designed probes can hide failures, create noisy restarts, or send traffic before the app is ready.\n\nReadiness should indicate whether the app is ready to receive requests. An ASP.NET Core app may be alive as a process but not ready because configuration is missing, warm-up is incomplete, migrations are in progress, a required dependency is unavailable, or the app is shutting down and draining requests.\n\nLiveness should indicate whether restart is appropriate. It should not fail only because a downstream dependency is slow for a short period. Restarting healthy application processes during a dependency outage can make recovery harder, increase load, and hide the original signal.\n\nStartup probes can help slow-starting apps avoid premature liveness failures. They are useful when an application has predictable initialization work, cold-start behavior, or dependency checks that take longer than normal request handling.\n\nHealth endpoints should avoid exposing secrets, connection strings, raw dependency errors, internal hostnames, or sensitive operational details. Probe timing, thresholds, graceful shutdown, request draining, cancellation, and logging should be reviewed together so availability controls support safe recovery.",
+  "narrationPoints": [
+    "Poorly designed probes can hide failures, create noisy restarts, or send traffic before the app is ready.",
+    "An ASP.NET Core app may be alive as a process but not ready because configuration is missing, warm-up is incomplete, migrations are in progress, a required dependency is unavailable, or the app is shutting down and draining requests.",
+    "Restarting healthy application processes during a dependency outage can make recovery harder, increase load, and hide the original signal.",
+    "Startup probes can help slow-starting apps avoid premature liveness failures.",
+    "Health endpoints should avoid exposing secrets, connection strings, raw dependency errors, internal hostnames, or sensitive operational details."
+  ]
+};

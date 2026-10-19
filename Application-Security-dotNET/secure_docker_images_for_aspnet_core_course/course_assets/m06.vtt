@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+ASP.NET Core containers should run with the least privilege needed.
+
+2
+00:00:05.080 --> 00:00:11.560
+Running as root is often a convenience default, but it grants the process more permission than many applications require.
+
+3
+00:00:11.660 --> 00:00:19.900
+A non-root runtime reduces the default impact of application compromise or misconfiguration inside the container boundary.
+
+4
+00:00:20.180 --> 00:00:25.620
+Modern .NET Linux images may include a non-root app user, but Dockerfiles still need review.
+
+5
+00:00:25.720 --> 00:00:30.040
+The final stage should make it clear which user runs the process.
+
+6
+00:00:30.140 --> 00:00:36.540
+It is easy to set a user in one stage, change stages, and unintentionally return to a different runtime identity.
+
+7
+00:00:36.820 --> 00:00:40.820
+Non-root containers may require application and image adjustments.
+
+8
+00:00:40.920 --> 00:00:52.040
+Ports, file ownership, temporary directories, logs, upload locations, cache paths, certificate locations, and writable directories should all be reviewed.
+
+9
+00:00:52.140 --> 00:00:57.500
+The application should not assume it can write anywhere in the filesystem or bind privileged ports.
+
+10
+00:00:57.780 --> 00:01:01.460
+Avoid broad filesystem permissions only to make startup work.
+
+11
+00:01:01.560 --> 00:01:07.480
+Changing ownership or permissions should be narrow and tied to specific paths the application needs.
+
+12
+00:01:07.580 --> 00:01:13.980
+If a directory must be writable, the Dockerfile and runtime configuration should make that requirement explicit.
+
+13
+00:01:14.260 --> 00:01:22.180
+File ownership matters for published output, mounted volumes, generated files, and temporary data.
+
+14
+00:01:22.280 --> 00:01:31.240
+A container that works in a local development run may fail in production when volumes, orchestrator security context, or read-only filesystem settings differ.
+
+15
+00:01:31.340 --> 00:01:34.540
+Test the runtime identity under deployment-like conditions.
+
+16
+00:01:34.820 --> 00:01:38.100
+Least privilege is not a single Dockerfile line.
+
+17
+00:01:38.200 --> 00:01:50.280
+It is the combined result of runtime user, filesystem permissions, writable paths, exposed ports, container runtime settings, application assumptions, and operational procedures.

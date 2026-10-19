@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Scanning, Patching, and Registry Readiness",
+  "graphicAlt": "Contextual triage assigns fixes before image rebuilds, with scoped registry access and release/rollback records.",
+  "narration": "Image scanning should be part of the release process, but scanning output still requires engineering triage. A scanner can identify packages and known issues, but a team must decide priority based on affected layer, severity, reachability, exposure, fix availability, compensating controls, and business context.\n\nFindings should have ownership. Some fixes require updating the base image. Some require a package update. Some require a .NET dependency change. Some may be false positives or not reachable in the deployed configuration. Each decision should be documented well enough for release review and later audit.\n\nRebuilding images regularly is important because base images and operating system packages can become outdated even when application code does not change. A service can have no source changes and still need a fresh image because the base image or native dependency set has been patched upstream.\n\nNuGet dependencies, native libraries, base images, package manager layers, and transitive dependencies all need update workflows. Image maintenance belongs with dependency management, not only deployment automation.\n\nRegistry access should follow least privilege. Builders may need push rights. Deployers may need pull rights. Security scanners may need read access. Unrelated users and systems should not have broad registry access by default. Promotion, signing, retention, and cleanup policies should be part of registry readiness.\n\nRelease notes or build notes should record the base image, app version, image tag or digest, scan status, known exceptions, owner, and rollback expectations. That record helps operations and incident response understand what was shipped and what follow-up is expected.",
+  "narrationPoints": [
+    "Image scanning should be part of the release process, but scanning output still requires engineering triage.",
+    "Each decision should be documented well enough for release review and later audit.",
+    "A service can have no source changes and still need a fresh image because the base image or native dependency set has been patched upstream.",
+    "Unrelated users and systems should not have broad registry access by default.",
+    "Release notes or build notes should record the base image, app version, image tag or digest, scan status, known exceptions."
+  ]
+};

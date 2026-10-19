@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Diagnostics, and Maintainability",
+  "graphicAlt": "Filtered events and correlation IDs support operational review, while clear guards and names make future changes easier to assess.",
+  "narration": "Logging should help developers and operators understand system behavior without creating a second source of sensitive data. Good logs explain what happened, which component was involved, which request or job was affected, and what decision the application made. They do not expose secrets, tokens, private data, or excessive internals.\n\nCorrelation IDs and request identifiers connect related events across services, queues, background jobs, and user workflows. They let operators investigate without dumping entire payloads or sensitive records into logs. Context should be useful, structured, and appropriate for the audience that can access it.\n\nSecurity-relevant actions should be auditable at a safe defensive level. Authentication events, permission failures, high-risk data changes, administrative actions, configuration changes, and unusual validation failures may all help operations and incident response. The log should support understanding without becoming a playbook for abuse.\n\nMaintainability is part of defensive programming. Guard clauses, clear method names, explicit validation, focused classes, useful comments, and straightforward error messages help future developers avoid accidental regressions. Clever code that hides state, assumptions, or failure behavior is harder to secure over time.\n\nThe best defensive code is readable enough to review under pressure. When the next developer can quickly see what is trusted, what is validated, what can fail, what is logged, and what state changes, the application becomes safer to operate and easier to improve.",
+  "narrationPoints": [
+    "Logging should help developers and operators understand system behavior without creating a second source of sensitive data.",
+    "Correlation IDs and request identifiers connect related events across services, queues, background jobs, and user workflows.",
+    "Authentication events, permission failures, high-risk data changes, administrative actions, configuration changes.",
+    "Clever code that hides state, assumptions, or failure behavior is harder to secure over time.",
+    "When the next developer can quickly see what is trusted, what is validated, what can fail, what is logged, and what state changes."
+  ]
+};

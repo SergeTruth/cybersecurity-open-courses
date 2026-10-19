@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+The basic consumer model starts with IDataProtectionProvider.
+
+2
+00:00:04.040 --> 00:00:10.280
+Application code asks the provider to create an IDataProtector for a specific purpose.
+
+3
+00:00:10.380 --> 00:00:21.660
+That protector can then protect a plaintext value into a protected payload and later unprotect that payload to validate it and recover the original value when the payload and keys are valid.
+
+4
+00:00:21.940 --> 00:00:24.900
+Purpose strings are part of the security boundary.
+
+5
+00:00:25.000 --> 00:00:30.440
+They isolate different consumers even when those consumers share the same underlying key ring.
+
+6
+00:00:30.540 --> 00:00:36.380
+A payload protected for one purpose should not be readable by a protector created for a different purpose.
+
+7
+00:00:36.480 --> 00:00:42.640
+That separation helps prevent one workflow from accidentally accepting payloads created for another workflow.
+
+8
+00:00:42.920 --> 00:00:47.880
+Purpose names should be specific, stable, and tied to the intended workflow.
+
+9
+00:00:47.980 --> 00:00:55.180
+A purpose such as a module name plus workflow name and payload type is easier to review than a vague shared string.
+
+10
+00:00:55.280 --> 00:01:02.160
+The goal is to make it clear why the payload exists, which code should recover it, and whether another consumer should be separate.
+
+11
+00:01:02.440 --> 00:01:06.920
+Do not reuse the same purpose string for unrelated data types or workflows.
+
+12
+00:01:07.020 --> 00:01:17.580
+If a confirmation workflow, an export link, and an internal state value all share the same purpose, the application has made review harder and weakened the intended separation.
+
+13
+00:01:17.680 --> 00:01:20.720
+Different workflows deserve different protectors.
+
+14
+00:01:21.000 --> 00:01:25.560
+Changing purpose strings can break the ability to unprotect existing payloads.
+
+15
+00:01:25.660 --> 00:01:31.020
+That may invalidate cookies, links, stored state, or account workflow tokens.
+
+16
+00:01:31.120 --> 00:01:38.320
+Purpose design should be reviewed before production, and changes should be planned as compatibility events rather than casual refactors.

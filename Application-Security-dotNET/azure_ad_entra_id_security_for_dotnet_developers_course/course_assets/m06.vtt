@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+ID tokens, access tokens, and refresh tokens have different purposes.
+
+2
+00:00:05.400 --> 00:00:08.840
+An ID token tells a client application about the signed-in user.
+
+3
+00:00:08.940 --> 00:00:16.860
+An access token is intended for a resource API and is the token an API should validate before authorizing API operations.
+
+4
+00:00:16.960 --> 00:00:24.560
+Refresh tokens are used by clients to obtain new tokens and should be protected according to application type and hosting environment.
+
+5
+00:00:24.840 --> 00:00:31.160
+A web API should make authorization decisions from validated access tokens intended for that API.
+
+6
+00:00:31.260 --> 00:00:40.700
+Token validation should be performed by maintained components that check issuer, audience, lifetime, signature, signing keys, and token type expectations.
+
+7
+00:00:40.800 --> 00:00:44.160
+Claims should be interpreted only after validation succeeds.
+
+8
+00:00:44.440 --> 00:00:47.000
+Claims require careful interpretation.
+
+9
+00:00:47.100 --> 00:00:58.300
+Scopes, roles, tenant IDs, user IDs, app IDs, groups, and optional claims may vary by tenant, flow, configuration, and token type.
+
+10
+00:00:58.400 --> 00:01:01.440
+A claim that appears in one environment may be absent in another.
+
+11
+00:01:01.540 --> 00:01:06.900
+Group claims can be limited or represented differently when a user has many group memberships.
+
+12
+00:01:07.000 --> 00:01:11.960
+Optional claims should be treated as configuration-dependent, not universal facts.
+
+13
+00:01:12.240 --> 00:01:16.160
+A valid token does not automatically authorize every operation.
+
+14
+00:01:16.260 --> 00:01:20.020
+It proves that the token passed validation for its intended use.
+
+15
+00:01:20.120 --> 00:01:23.080
+The application still decides what the caller may do.
+
+16
+00:01:23.180 --> 00:01:35.340
+Resource-level authorization may require trusted server-side checks for ownership, tenant membership, subscription state, data classification, licensing, or application policy.
+
+17
+00:01:35.620 --> 00:01:42.740
+Good authorization code keeps token validation, claims interpretation, and business authorization separate enough to review.
+
+18
+00:01:42.840 --> 00:01:50.600
+The system first validates the token, then interprets the claims it needs, then checks server-side policy for the specific operation and resource.

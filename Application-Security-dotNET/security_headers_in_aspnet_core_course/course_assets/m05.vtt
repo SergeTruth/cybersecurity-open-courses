@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+Some pages should not be embedded inside frames, iframes, objects, or similar containers.
+
+2
+00:00:06.120 --> 00:00:12.280
+Framing controls help the application tell the browser whether a page may be embedded by another page.
+
+3
+00:00:12.380 --> 00:00:24.700
+This matters for account pages, administrative pages, transaction pages, approval workflows, and other sensitive interactions where the user experience should stay under the application's control.
+
+4
+00:00:24.980 --> 00:00:30.100
+X-Frame-Options is an older but still commonly encountered header for frame restrictions.
+
+5
+00:00:30.200 --> 00:00:35.560
+It can express a small set of choices, such as denying framing or allowing same-origin framing.
+
+6
+00:00:35.660 --> 00:00:44.300
+Many existing applications and platforms still include it as part of a baseline, but it is limited compared with modern CSP-based controls.
+
+7
+00:00:44.580 --> 00:00:49.940
+CSP frame-ancestors provides a more flexible framing control for browsers that support it.
+
+8
+00:00:50.040 --> 00:00:53.640
+It can define which parent origins may embed the page.
+
+9
+00:00:53.740 --> 00:01:02.620
+That is useful when a page must be embedded by a specific trusted parent, such as a known portal or internal shell, but should not be embeddable elsewhere.
+
+10
+00:01:02.900 --> 00:01:05.220
+Embedding decisions should be intentional.
+
+11
+00:01:05.320 --> 00:01:07.640
+Some applications need no embedding.
+
+12
+00:01:07.740 --> 00:01:11.100
+Some need same-origin embedding for internal layouts.
+
+13
+00:01:11.200 --> 00:01:13.600
+Some need a specific parent origin.
+
+14
+00:01:13.700 --> 00:01:17.700
+Those choices should be based on business requirements and reviewed by page type.
+
+15
+00:01:17.800 --> 00:01:25.000
+Admin pages, account pages, transaction pages, and high-impact workflow pages usually deserve extra care.
+
+16
+00:01:25.280 --> 00:01:29.920
+Framing controls do not replace authorization or CSRF protection.
+
+17
+00:01:30.020 --> 00:01:32.340
+They help with browser embedding behavior.
+
+18
+00:01:32.440 --> 00:01:42.360
+The application still needs to authenticate users, authorize actions, validate state-changing requests, protect sensitive data, and log important events.
+
+19
+00:01:42.460 --> 00:01:46.620
+Framing headers are one layer in a broader browser and application security model.

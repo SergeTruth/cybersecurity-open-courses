@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Reflection as a Security Surface",
+  "graphicAlt": "Reflection uses an explicit registry and validation/authorization boundary before invoking an allowed member.",
+  "narration": "Reflection lets .NET code inspect assemblies, types, members, attributes, metadata, and runtime objects. It is a powerful capability because code can reason about other code while the application is running. That flexibility supports many common frameworks and developer workflows.\n\nReflection can also create instances, invoke methods, access properties, read attributes, and support dynamic behavior. Serializers, dependency injection containers, object mappers, plugin systems, testing tools, command dispatchers, validation frameworks, and diagnostic utilities may all depend on reflection in some way.\n\nReflection becomes security-sensitive when runtime behavior depends on data from users, partners, configuration, plugins, files, or external systems. If a runtime name can influence which type is activated or which method is invoked, then a data value has become part of the execution path.\n\nThe secure baseline starts with a simple review question: what type or member is allowed, who decides, and what can happen after invocation? That question should be answered before reflection touches application state, sensitive data, authorization decisions, filesystem access, service providers, or administrative capabilities.\n\nReflection is not automatically unsafe. The risk comes from unreviewed flexibility. A typed design, explicit map, trusted contract, or narrow registry is often easier to reason about than unrestricted runtime discovery. Reflection should be intentional, documented, and bounded by the same validation and authorization expectations as the rest of the application.",
+  "narrationPoints": [
+    "Reflection lets .NET code inspect assemblies, types, members, attributes, metadata.",
+    "Serializers, dependency injection containers, object mappers, plugin systems, testing tools.",
+    "Reflection becomes security-sensitive when runtime behavior depends on data from users, partners, configuration, plugins, files.",
+    "The secure baseline starts with a simple review question: what type or member is allowed, who decides.",
+    "Reflection should be intentional, documented, and bounded by the same validation and authorization expectations as the rest of the application."
+  ]
+};

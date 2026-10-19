@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Default Data Protection behavior depends on the operating environment.
+
+2
+00:00:04.440 --> 00:00:09.240
+Defaults may be acceptable for local development or a simple single-machine application.
+
+3
+00:00:09.340 --> 00:00:20.140
+Production deployments often need explicit configuration because hosting, storage, scaling, and deployment patterns affect whether keys are durable and shared by the right instances.
+
+4
+00:00:20.420 --> 00:00:26.820
+Multi-instance applications need shared, durable key rings when instances must read each other's protected payloads.
+
+5
+00:00:26.920 --> 00:00:38.760
+If one instance protects an authentication cookie and another instance receives the next request, both instances need access to compatible keys and the same intended application identity.
+
+6
+00:00:38.860 --> 00:00:43.580
+Without that alignment, users can see intermittent sign-outs or failed validation.
+
+7
+00:00:43.860 --> 00:00:53.460
+Containers, ephemeral file systems, blue-green deployments, deployment slots, server farms, and scaled-out services require configuration review.
+
+8
+00:00:53.560 --> 00:01:01.480
+Unstable key storage can silently invalidate cookies or workflow tokens after restart, redeploy, scale-out, or slot swap.
+
+9
+00:01:01.580 --> 00:01:07.020
+That kind of failure can look like an authentication problem while the real issue is key persistence.
+
+10
+00:01:07.300 --> 00:01:13.860
+SetApplicationName can be important when multiple app instances must intentionally share protected payload behavior.
+
+11
+00:01:13.960 --> 00:01:16.440
+The application name helps define isolation.
+
+12
+00:01:16.540 --> 00:01:23.900
+It should not be changed casually, and it should not be shared across environments unless that sharing is specifically intended and reviewed.
+
+13
+00:01:24.180 --> 00:01:25.940
+Environment separation matters.
+
+14
+00:01:26.040 --> 00:01:32.360
+Development, staging, and production should not casually share keys or application identity.
+
+15
+00:01:32.460 --> 00:01:43.740
+Configuration should be documented and owned by the application or platform team, including key location, access control, backup, deployment behavior, and recovery expectations.

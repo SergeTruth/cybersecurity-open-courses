@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.260
+Mutable collections can create surprising behavior when they are shared across methods, classes, requests, or threads.
+
+2
+00:00:08.360 --> 00:00:13.800
+Returning an internal list directly may let callers change state the object was supposed to control.
+
+3
+00:00:13.900 --> 00:00:22.220
+Defensive APIs return read-only views, copies, immutable collections, or targeted methods when callers should not modify internals.
+
+4
+00:00:22.500 --> 00:00:25.620
+Shared state should be small and easy to reason about.
+
+5
+00:00:25.720 --> 00:00:34.520
+Application-wide caches, singleton services, static fields, background queues, and lazy initialization all deserve review.
+
+6
+00:00:34.620 --> 00:00:43.340
+Ask who can read the state, who can mutate it, when it changes, and what happens when multiple requests or tasks interact with it.
+
+7
+00:00:43.620 --> 00:00:47.540
+Async and await are powerful, but they need consistency.
+
+8
+00:00:47.640 --> 00:00:57.960
+Blocking on asynchronous work, ignoring returned tasks, mixing synchronous waits with async flows, or losing cancellation signals can create reliability issues.
+
+9
+00:00:58.060 --> 00:01:02.860
+Defensive code follows framework patterns and keeps asynchronous boundaries clear.
+
+10
+00:01:03.140 --> 00:01:06.900
+Cancellation tokens are part of cooperative resource control.
+
+11
+00:01:07.000 --> 00:01:15.320
+When a request is cancelled, a background operation is stopped, or a timeout is reached, the code should respect that signal where practical.
+
+12
+00:01:15.420 --> 00:01:20.780
+Ignoring cancellation can waste resources and keep work running after the result is no longer useful.
+
+13
+00:01:21.060 --> 00:01:23.460
+State transitions should be explicit.
+
+14
+00:01:23.560 --> 00:01:35.560
+Workflows, initialization, retries, cache refresh, background processing, and lifecycle changes should have defined states rather than scattered booleans and unclear timing assumptions.
+
+15
+00:01:35.660 --> 00:01:41.100
+Clear states help reviewers understand what actions are valid and what recovery looks like.
+
+16
+00:01:41.380 --> 00:01:45.620
+The defensive goal is not to avoid all shared state or concurrency.
+
+17
+00:01:45.720 --> 00:01:56.600
+The goal is to choose simple patterns that reviewers can understand: small shared surfaces, clear ownership, explicit transitions, bounded work, and cancellation-aware operations.

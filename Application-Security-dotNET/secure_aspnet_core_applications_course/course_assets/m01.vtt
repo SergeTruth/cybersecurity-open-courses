@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Secure ASP.NET Core development is not a checklist at the end of a sprint.
+
+2
+00:00:05.240 --> 00:00:14.520
+It is a way of engineering the application so security decisions are visible in the design, clear in the code, supported by hosting configuration, and observable in production.
+
+3
+00:00:14.620 --> 00:00:25.020
+The framework provides useful security features, but the team still decides where trust changes, what must be validated, who can perform an operation, and what should happen when assumptions fail.
+
+4
+00:00:25.300 --> 00:00:29.540
+A useful mental model is the request pipeline.
+
+5
+00:00:29.640 --> 00:00:43.640
+Every request moves through hosting infrastructure, proxy behavior, middleware, routing, authentication, authorization, endpoint code, model binding, data access, logging, and response generation.
+
+6
+00:00:43.740 --> 00:00:47.260
+Security-sensitive behavior can occur at any of those points.
+
+7
+00:00:47.360 --> 00:00:58.800
+A small configuration change in the pipeline can affect error exposure, authentication handling, cross-origin behavior, routing, static files, headers, or how an endpoint is reached.
+
+8
+00:00:59.080 --> 00:01:02.280
+Trust boundaries help organize that thinking.
+
+9
+00:01:02.380 --> 00:01:15.740
+A browser, mobile client, partner API, identity provider, background worker, database, file store, queue, administrator console, and operations tool may all make different assumptions.
+
+10
+00:01:15.840 --> 00:01:28.000
+When data, identity, commands, files, or configuration cross those boundaries, the application should treat them as untrusted or at least unverified until they are checked for the current purpose.
+
+11
+00:01:28.280 --> 00:01:47.320
+ASP.NET Core gives teams strong building blocks: authentication middleware, policy-based authorization, antiforgery protections, cookie options, Data Protection, model validation, encoding helpers, logging, configuration providers, dependency injection, and hosting abstractions.
+
+12
+00:01:47.420 --> 00:01:52.940
+Those defaults can reduce common mistakes, but defaults are not a design review.
+
+13
+00:01:53.040 --> 00:02:00.480
+Developers still need to choose appropriate settings, remove development-only behavior, and test how the pieces work together.
+
+14
+00:02:00.760 --> 00:02:05.800
+The goal is prevention, detection, maintainability, and review working together.
+
+15
+00:02:05.900 --> 00:02:12.940
+Good security controls should make the application harder to misuse, easier to monitor, and easier for future developers to reason about.
+
+16
+00:02:13.040 --> 00:02:24.720
+Secure ASP.NET Core engineering is ultimately practical: build features that remain safe when users, inputs, environments, dependencies, and operational conditions change.

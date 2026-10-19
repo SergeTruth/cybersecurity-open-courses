@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+Secure data access in APIs starts with parameterized patterns and controlled query shape.
+
+2
+00:00:06.120 --> 00:00:19.640
+Entity Framework Core and other mature libraries reduce common database risks when used correctly, but they do not automatically know which user owns a record, which tenant a query belongs to, or which fields should be returned to a caller.
+
+3
+00:00:19.920 --> 00:00:26.800
+Raw SQL, dynamic filtering, client-controlled sorting, and flexible search endpoints need careful review.
+
+4
+00:00:26.900 --> 00:00:37.380
+It is normal for APIs to support filtering and pagination, but callers should not be able to choose arbitrary fields, expensive query shapes, or security-sensitive conditions.
+
+5
+00:00:37.480 --> 00:00:43.720
+Use allow-lists for sort fields, filter names, and query options that the API intends to support.
+
+6
+00:00:44.000 --> 00:00:50.880
+Data access should respect the current user, tenant, role, policy, and business rule.
+
+7
+00:00:50.980 --> 00:01:04.100
+A database query that retrieves too broadly can create problems even if the final response is later filtered, because intermediate data may be logged, cached, mapped, serialized, or accidentally exposed through an error path.
+
+8
+00:01:04.200 --> 00:01:08.520
+Narrow the query as close as practical to the real authorization decision.
+
+9
+00:01:08.800 --> 00:01:22.400
+Clients should not control ownership, price, approval status, administrative flags, tenant assignment, or workflow state unless the operation is explicitly designed and authorized to allow that change.
+
+10
+00:01:22.500 --> 00:01:30.100
+These values should usually be derived from server-side context, policy, and business logic rather than accepted directly from request bodies.
+
+11
+00:01:30.380 --> 00:01:35.020
+Separating API boundary models from persistence models often improves safety.
+
+12
+00:01:35.120 --> 00:01:43.120
+A database entity may contain internal fields, relationships, audit values, and operational data that should not be writable or visible through an API.
+
+13
+00:01:43.220 --> 00:01:50.900
+Request and response DTOs let the API declare its contract without binding external callers directly to storage details.
+
+14
+00:01:51.180 --> 00:01:53.980
+Return only the data the caller needs.
+
+15
+00:01:54.080 --> 00:02:02.320
+Overly broad responses increase privacy risk, create accidental dependencies, and make future changes harder.
+
+16
+00:02:02.420 --> 00:02:11.780
+Safe data shaping is not only about confidentiality; it also keeps API contracts understandable and helps clients use the system without relying on internal details.

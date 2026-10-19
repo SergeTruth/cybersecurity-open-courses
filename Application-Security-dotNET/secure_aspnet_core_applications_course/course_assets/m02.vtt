@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.380
+ASP.NET Core applications should behave differently in development, test, staging, and production for good reasons.
+
+2
+00:00:09.480 --> 00:00:17.800
+Development environments often need detailed errors, hot reload, local credentials, permissive test settings, and diagnostic pages.
+
+3
+00:00:17.900 --> 00:00:29.980
+Production environments need controlled error output, stable configuration, locked-down services, secure transport expectations, and only the endpoints and features required to operate the product.
+
+4
+00:00:30.260 --> 00:00:33.700
+Configuration is not just application plumbing.
+
+5
+00:00:33.800 --> 00:00:35.720
+It is a security-relevant input.
+
+6
+00:00:35.820 --> 00:00:50.300
+Connection strings, identity provider settings, allowed origins, cookie options, logging levels, feature flags, endpoint addresses, file storage paths, and dependency credentials all influence how the application behaves.
+
+7
+00:00:50.400 --> 00:00:57.200
+Treat configuration sources with the same seriousness as code because a weak configuration can undermine otherwise careful implementation.
+
+8
+00:00:57.480 --> 00:01:04.360
+Secrets should not live in source code, ordinary JSON settings files, sample configuration, screenshots, or logs.
+
+9
+00:01:04.460 --> 00:01:16.860
+Development secret stores, environment-specific deployment systems, managed secret services, workload identities, and platform-provided secret mechanisms are safer places to manage sensitive values.
+
+10
+00:01:16.960 --> 00:01:25.440
+The key habit is ownership: know where secrets are stored, who can read them, how they rotate, and how they are kept out of accidental disclosure paths.
+
+11
+00:01:25.720 --> 00:01:30.040
+Middleware order is a real security concern in ASP.NET Core.
+
+12
+00:01:30.140 --> 00:01:33.100
+Authentication must run before authorization.
+
+13
+00:01:33.200 --> 00:01:44.960
+Routing, static files, exception handling, forwarded headers, CORS, antiforgery-related flows, response headers, and endpoint mapping all have ordering assumptions.
+
+14
+00:01:45.060 --> 00:01:55.140
+When middleware is placed incorrectly, the application may skip a control, apply it too late, expose a development page, or produce inconsistent behavior that is hard to review.
+
+15
+00:01:55.420 --> 00:01:59.180
+Production error behavior should be safe by default.
+
+16
+00:01:59.280 --> 00:02:08.080
+Users should not see stack traces, internal paths, framework details, raw database errors, secrets, or configuration values.
+
+17
+00:02:08.180 --> 00:02:18.900
+Operators still need useful diagnostic information, but that detail belongs in protected logs and monitoring systems with correlation identifiers, access control, and retention policy.
+
+18
+00:02:19.000 --> 00:02:23.720
+Separate what the user sees from what an authorized operator investigates.
+
+19
+00:02:24.000 --> 00:02:28.960
+Before release, review startup and program configuration as security code.
+
+20
+00:02:29.060 --> 00:02:38.500
+Remove unnecessary diagnostic endpoints, debug features, sample routes, broad permissions, unused services, and development-only assumptions.
+
+21
+00:02:38.600 --> 00:02:50.280
+Confirm reverse proxy behavior, HTTPS expectations, forwarded header handling, host filtering if relevant, static file exposure, and environment-specific settings.
+
+22
+00:02:50.380 --> 00:02:55.020
+The release configuration should be boring, explicit, and explainable.

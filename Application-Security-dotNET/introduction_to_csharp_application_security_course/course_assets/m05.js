@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Authorization and Access Control",
+  "graphicAlt": "Server policy combines caller, action and resource context; UI controls do not replace object-level authorization.",
+  "narration": "Authorization answers the question, is this identity allowed to perform this action on this resource right now. It must be enforced on the server, close to the operation that matters. User interface hiding, disabled buttons, and client-side route checks may improve usability, but they are not enough to protect data or privileged behavior.\n\nC sharp and ASP.NET Core applications commonly use role-based and policy-based authorization. Roles can be useful when they match real business responsibilities. Policies are often better when access depends on claims, ownership, tenant, workflow state, environment, or operation context. The model should fit the business rule, not the other way around.\n\nObject-level authorization is critical. A user may be allowed to view invoices, but not every invoice. A support operator may update some customer records, but not all fields. A service may process one tenant's messages, but not another tenant's data. Authorization checks should include the specific object or action, not only the general feature.\n\nLeast privilege applies to users, services, administrators, background workers, database accounts, cloud identities, and deployment pipelines. Broad permission may feel convenient during implementation, but it creates larger consequences when mistakes happen. High-risk administrative and support workflows should be especially visible in review.\n\nAvoid scattering permission checks across unrelated code in ways that are hard to audit. Central policies, resource-based handlers, service-layer checks, and consistent authorization patterns make it easier to reason about access. Reviewers should be able to locate where the decision is made and understand what data the decision depends on.",
+  "narrationPoints": [
+    "User interface hiding, disabled buttons, and client-side route checks may improve usability.",
+    "C sharp and ASP.NET Core applications commonly use role-based and policy-based authorization.",
+    "Authorization checks should include the specific object or action, not only the general feature.",
+    "Least privilege applies to users, services, administrators, background workers, database accounts.",
+    "Central policies, resource-based handlers, service-layer checks, and consistent authorization patterns make it easier to reason about access."
+  ]
+};

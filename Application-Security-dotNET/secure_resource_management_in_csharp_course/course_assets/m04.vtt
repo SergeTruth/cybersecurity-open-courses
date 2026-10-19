@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Files and streams often create both resource and data safety concerns.
+
+2
+00:00:05.560 --> 00:00:10.840
+A file handle can prevent rotation, scanning, movement, deletion, or cleanup.
+
+3
+00:00:10.940 --> 00:00:18.060
+A stream can hold memory, buffers, network state, compression state, encryption state, or temporary data.
+
+4
+00:00:18.160 --> 00:00:22.720
+Resource handling and data handling are usually connected in file workflows.
+
+5
+00:00:23.000 --> 00:00:25.240
+File handles should be released promptly.
+
+6
+00:00:25.340 --> 00:00:31.900
+Short scopes make it easier to understand when a file can be moved, deleted, scanned, or replaced.
+
+7
+00:00:32.000 --> 00:00:40.720
+They also reduce the chance that long-running requests or background jobs keep a file locked after the user or service expects it to be available for another step.
+
+8
+00:00:41.000 --> 00:00:43.800
+Temporary files need deliberate rules.
+
+9
+00:00:43.900 --> 00:00:54.700
+The application should define where they are stored, how names are chosen, which account can read them, how long they are retained, how cleanup runs, and what happens when cleanup fails.
+
+10
+00:00:54.800 --> 00:01:00.400
+Temporary storage should not become an accidental long-term archive of sensitive or partial data.
+
+11
+00:01:00.680 --> 00:01:03.240
+Error and cancellation paths matter.
+
+12
+00:01:03.340 --> 00:01:10.780
+A workflow may create a file, write part of the input data, transform content, and then fail before the final step.
+
+13
+00:01:10.880 --> 00:01:24.160
+Secure cleanup should consider partial files, abandoned directories, retained handles, failed moves, and sensitive content left behind when a request is canceled or a service shuts down.
+
+14
+00:01:24.440 --> 00:01:28.760
+Uploads and downloads should avoid reading unbounded data into memory.
+
+15
+00:01:28.860 --> 00:01:36.300
+Streaming, size limits, chunked processing, quotas, and content validation can reduce memory pressure while still supporting legitimate use.
+
+16
+00:01:36.400 --> 00:01:46.640
+Logs and client errors should avoid exposing internal paths, temporary names, sensitive contents, or directory structure unless there is a reviewed operational need.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Secure data access begins with parameterized patterns.
+
+2
+00:00:04.040 --> 00:00:16.040
+Whether the application uses Entity Framework, Dapper, ADO.NET, or another data layer, values should be passed as parameters rather than assembled into query text.
+
+3
+00:00:16.140 --> 00:00:24.380
+ORMs reduce some risks, but they do not remove the need to review query shape, authorization, filtering, tenant boundaries, and performance limits.
+
+4
+00:00:24.660 --> 00:00:29.220
+Data access and authorization often meet at the object level.
+
+5
+00:00:29.320 --> 00:00:35.160
+A query should not only be syntactically safe; it should return records the current identity is allowed to see.
+
+6
+00:00:35.260 --> 00:00:41.740
+Filters for tenant, ownership, status, workflow, or scope should be deliberate and tested.
+
+7
+00:00:41.840 --> 00:00:46.560
+Avoid relying on later UI code to hide records that should not have been returned.
+
+8
+00:00:46.840 --> 00:00:54.520
+File handling is security-sensitive because files combine input, storage, metadata, user expectations, and downstream processing.
+
+9
+00:00:54.620 --> 00:01:05.660
+Uploads should have limits for size, type, name handling, storage location, scanning or review processes where appropriate, and separation from executable paths.
+
+10
+00:01:05.760 --> 00:01:11.360
+Download behavior should also enforce authorization and avoid trusting user-supplied paths.
+
+11
+00:01:11.640 --> 00:01:13.560
+Path handling deserves care.
+
+12
+00:01:13.660 --> 00:01:27.500
+Normalize paths before making decisions, avoid combining untrusted values into sensitive paths without validation, generate server-side storage names when possible, and keep user-facing names separate from storage identifiers.
+
+13
+00:01:27.600 --> 00:01:31.040
+A display name does not need to be the filesystem name.
+
+14
+00:01:31.320 --> 00:01:34.520
+Deserialization and parsing are boundaries.
+
+15
+00:01:34.620 --> 00:01:41.660
+Imported files, messages, serialized objects, and documents should be treated as untrusted input.
+
+16
+00:01:41.760 --> 00:01:48.800
+The application should prefer safe parsers, bounded processing, expected schemas, and clear rejection behavior.
+
+17
+00:01:48.900 --> 00:01:54.820
+Avoid dangerous dynamic behavior when processing data that came from outside the trust boundary.
+
+18
+00:01:55.100 --> 00:01:57.900
+The practical goal is controlled data flow.
+
+19
+00:01:58.000 --> 00:02:10.080
+Data should enter through a boundary, be validated, be authorized, be stored safely, and be processed by code paths that do not grant more meaning to the data than it has earned.

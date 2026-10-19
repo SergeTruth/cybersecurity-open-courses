@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Diagnostics, Logging, and Production Resource Review",
+  "graphicAlt": "Sanitized signals for memory, connections, queues and cleanup help owners detect pressure and follow recovery runbooks.",
+  "narration": "Resource problems need observability before they become outages. A leak, queue buildup, pool bottleneck, or cleanup failure may develop gradually, and the first user-visible symptom may be far away from the original cause. Production signals make these issues easier to see and respond to early.\n\nUseful signals include memory growth, garbage collection pressure, handle count, socket usage, connection pool pressure, queue length, background job failures, timeout trends, cancellation rates, file cleanup failures, lock contention, and retry behavior. The exact signals depend on the application, but the review should cover every major resource the system consumes.\n\nLogs should capture safe context. Operation name, resource type, failure category, correlation ID, environment, tenant-safe identifier, dependency name, and cleanup outcome can help investigations without exposing sensitive material. Structured logging makes it easier to search and alert on resource behavior.\n\nDo not log secrets, tokens, connection strings, credential-bearing URLs, raw sensitive content, temporary file contents, or internal paths without redaction review. Diagnostics can spread quickly into monitoring systems, support tickets, dashboards, and exported incident data. Redaction should be designed before a resource problem forces emergency troubleshooting.\n\nProduction review should identify resource owners, lifetimes, disposal paths, timeout behavior, cancellation paths, concurrency bounds, retry policies, cache limits, cleanup jobs, health checks, dashboards, alerts, and runbooks. The goal is not more noise; it is a small set of useful signals that support early detection and safe response.",
+  "narrationPoints": [
+    "A leak, queue buildup, pool bottleneck, or cleanup failure may develop gradually.",
+    "The exact signals depend on the application, but the review should cover every major resource the system consumes.",
+    "Operation name, resource type, failure category, correlation ID, environment.",
+    "Diagnostics can spread quickly into monitoring systems, support tickets, dashboards, and exported incident data.",
+    "Production review should identify resource owners, lifetimes, disposal paths, timeout behavior, cancellation paths."
+  ]
+};

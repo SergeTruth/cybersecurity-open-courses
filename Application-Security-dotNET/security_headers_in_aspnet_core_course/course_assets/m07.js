@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Permissions Policy and Browser Feature Controls",
+  "graphicAlt": "Page requirements shape browser feature restrictions, with embedded content reviewed and consent and authorization retained.",
+  "narration": "Permissions-Policy lets a site restrict access to selected browser features. Feature areas may include camera, microphone, geolocation, fullscreen, payment, sensors, and similar capabilities. The exact set of features and syntax can evolve, so implementation should be checked against the browsers and framework versions the application supports.\n\nThe policy should match what the application actually needs. A public marketing page may not need camera or geolocation access. An internal dashboard may need fullscreen but not microphone access. A payment flow may need a feature that other pages do not. The safest policy is one that reflects real page requirements rather than broad permission everywhere.\n\nEmbedded third-party content deserves extra care. If a page includes an embedded frame, widget, analytics component, support tool, payment surface, or partner content, feature access should be reviewed explicitly. A narrow Permissions-Policy can reduce accidental feature exposure when pages include content outside the application's direct codebase.\n\nPermissions-Policy does not replace user consent, authorization, or application-level privacy controls. A browser feature may still require user permission, and the application still needs to decide whether a user should be allowed to use a feature in a business workflow. The header helps constrain browser capability exposure; it does not settle every privacy or access-control question.\n\nTeams should document feature intent. Which pages need which browser features, why they need them, and whether embedded content should receive access. That documentation keeps future changes from widening feature access only because a browser prompt or integration test failed.",
+  "narrationPoints": [
+    "Permissions-Policy lets a site restrict access to selected browser features.",
+    "The safest policy is one that reflects real page requirements rather than broad permission everywhere.",
+    "If a page includes an embedded frame, widget, analytics component, support tool, payment surface.",
+    "Permissions-Policy does not replace user consent, authorization, or application-level privacy controls.",
+    "Which pages need which browser features, why they need them, and whether embedded content should receive access."
+  ]
+};

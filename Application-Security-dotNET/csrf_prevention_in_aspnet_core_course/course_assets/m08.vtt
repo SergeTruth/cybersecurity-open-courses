@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.780
+Common CSRF prevention mistakes are usually review and consistency problems.
+
+2
+00:00:05.880 --> 00:00:11.240
+A state-changing GET request is one of the clearest findings because it makes an action look like a read.
+
+3
+00:00:11.340 --> 00:00:15.980
+Missing antiforgery validation on unsafe actions is another.
+
+4
+00:00:16.080 --> 00:00:21.840
+So is assuming that a login session or authorization rule proves request intent.
+
+5
+00:00:21.940 --> 00:00:25.460
+These controls are related, but they do not replace one another.
+
+6
+00:00:25.740 --> 00:00:28.620
+Relying only on CORS is also a mistake.
+
+7
+00:00:28.720 --> 00:00:35.040
+CORS controls browser cross-origin response reads, not user intent for state-changing requests.
+
+8
+00:00:35.140 --> 00:00:37.940
+SameSite-only designs need review too.
+
+9
+00:00:38.040 --> 00:00:45.800
+SameSite can reduce exposure, but it should not be the only protection for ASP.NET Core workflows that are better served by antiforgery validation.
+
+10
+00:00:46.080 --> 00:00:55.120
+Inconsistent protection across MVC, Razor Pages, APIs, and AJAX endpoints is common in growing applications.
+
+11
+00:00:55.220 --> 00:01:03.380
+A visible form may be protected while a partial view, modal, JavaScript endpoint, admin helper, or import workflow is missed.
+
+12
+00:01:03.480 --> 00:01:09.640
+Teams should inventory state-changing browser endpoints rather than assuming one convention covers every path.
+
+13
+00:01:09.920 --> 00:01:13.520
+Local development shortcuts should not become production configuration.
+
+14
+00:01:13.620 --> 00:01:24.980
+Relaxed cookie settings, temporary CORS origins, disabled validation during testing, or one-off JavaScript submission patterns can remain long after the original reason is gone.
+
+15
+00:01:25.080 --> 00:01:31.560
+Production review should confirm that the deployed behavior matches the intended CSRF model.
+
+16
+00:01:31.840 --> 00:01:36.480
+Data Protection keys need planning across deployments and multiple instances.
+
+17
+00:01:36.580 --> 00:01:46.900
+If keys are not persisted or shared appropriately, antiforgery token validation can fail unpredictably when requests move between instances or after deployment changes.
+
+18
+00:01:47.000 --> 00:01:54.120
+Reliability matters because noisy false failures can pressure teams to weaken validation instead of fixing the root configuration issue.
+
+19
+00:01:54.400 --> 00:02:08.240
+A safe review identifies state-changing endpoints, credential behavior, antiforgery validation, SameSite cookie settings, CORS assumptions, Data Protection key behavior, failure logging, and documented exceptions.
+
+20
+00:02:08.340 --> 00:02:11.380
+The goal is not to find one magic setting.
+
+21
+00:02:11.480 --> 00:02:16.120
+The goal is a consistent model that the team can operate and explain.

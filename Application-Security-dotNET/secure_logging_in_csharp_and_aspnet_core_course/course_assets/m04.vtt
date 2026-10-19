@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Some values should not appear in logs.
+
+2
+00:00:03.640 --> 00:00:22.520
+Passwords, API keys, access tokens, refresh tokens, session IDs, cookies, private keys, certificates, connection strings, signing keys, webhook secrets, one-time codes, and similar values are access material or trust material.
+
+3
+00:00:22.620 --> 00:00:31.420
+Once logged, they may be copied, retained, indexed, exported, or read by people and systems that never needed the original secret.
+
+4
+00:00:31.700 --> 00:00:38.260
+Sensitive personal, financial, health, legal, and business data also needs minimization.
+
+5
+00:00:38.360 --> 00:00:45.480
+Even when a value is not a credential, it can harm users or the organization if placed into a broadly accessible logging system.
+
+6
+00:00:45.580 --> 00:00:58.140
+Names, addresses, document titles, account details, payment references, case notes, and internal business decisions should be logged only when there is a clear and approved need.
+
+7
+00:00:58.420 --> 00:01:08.420
+Request bodies, headers, query strings, form fields, uploaded file contents, and serialized objects are common sources of accidental exposure.
+
+8
+00:01:08.520 --> 00:01:16.040
+A convenient debug log that prints the whole request or object graph can capture secrets, private records, and third-party data.
+
+9
+00:01:16.140 --> 00:01:19.340
+Broad object logging should be treated as high risk.
+
+10
+00:01:19.620 --> 00:01:29.060
+Exception messages and stack traces may contain sensitive values, internal paths, connection details, provider messages, or record identifiers.
+
+11
+00:01:29.160 --> 00:01:36.040
+Exceptions are useful for diagnostics, but production logging should avoid dumping raw details without filtering and access control.
+
+12
+00:01:36.140 --> 00:01:40.300
+The user-facing error and the operator diagnostic record should be separate.
+
+13
+00:01:40.580 --> 00:01:46.660
+Redaction, masking, filtering, and data minimization should happen before logs spread broadly.
+
+14
+00:01:46.760 --> 00:01:54.040
+A value that reaches a centralized log, dashboard, export, or support bundle becomes harder to contain.
+
+15
+00:01:54.140 --> 00:02:01.660
+Prefer stable identifiers like ExampleUserId, ExampleOrderId, or ExampleRequestId instead of raw sensitive values.
+
+16
+00:02:01.940 --> 00:02:05.700
+Temporary debugging logs often become long-term exposure.
+
+17
+00:02:05.800 --> 00:02:13.880
+If extra detail must be enabled for a specific issue, it should have ownership, scope, approval, and a removal plan.
+
+18
+00:02:13.980 --> 00:02:19.500
+A debug line added during a late incident should not become a permanent record of sensitive inputs.

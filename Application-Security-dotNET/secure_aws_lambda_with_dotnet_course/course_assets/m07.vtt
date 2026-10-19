@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Lambda functions can run with or without VPC configuration depending on resource access needs.
+
+2
+00:00:06.440 --> 00:00:14.360
+VPC access can enable private connectivity to databases, caches, internal services, and VPC endpoints.
+
+3
+00:00:14.460 --> 00:00:21.420
+It can also introduce networking, routing, DNS, and permission considerations that should be understood before production.
+
+4
+00:00:21.700 --> 00:00:24.420
+Private subnet placement is not authorization.
+
+5
+00:00:24.520 --> 00:00:34.280
+A function may reach a private database or internal API, but the application should still rely on IAM, application policy, resource policy, and data-layer controls where appropriate.
+
+6
+00:00:34.380 --> 00:00:39.180
+Network location can reduce exposure; it does not prove business permission.
+
+7
+00:00:39.460 --> 00:00:50.740
+Security groups, subnet selection, route tables, NAT access, VPC endpoints, DNS resolution, and outbound dependency access all need review.
+
+8
+00:00:50.840 --> 00:00:54.280
+A function should have the network paths it needs and no more.
+
+9
+00:00:54.380 --> 00:00:59.660
+Missing paths can cause timeouts, while broad paths can make the workload harder to reason about.
+
+10
+00:00:59.940 --> 00:01:05.460
+VPC-attached functions may require EC2 network-interface permissions as part of their operation.
+
+11
+00:01:05.560 --> 00:01:12.920
+Those role permissions should be scoped and reviewed so that networking requirements do not accidentally expand the function's authority beyond the workload need.
+
+12
+00:01:13.200 --> 00:01:15.440
+Service boundaries should be explicit.
+
+13
+00:01:15.540 --> 00:01:25.780
+A function that calls another service should have a clear identity, authorization model, timeout, retry behavior, logging pattern, and failure response.
+
+14
+00:01:25.880 --> 00:01:29.160
+The network is only one layer of the decision.

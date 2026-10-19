@@ -1,0 +1,97 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.660
+API input arrives through route values, query strings, headers, cookies, JSON bodies, multipart content, files, and configuration.
+
+2
+00:00:10.760 --> 00:00:16.280
+A value can parse successfully and still be wrong for the current operation.
+
+3
+00:00:16.380 --> 00:00:24.060
+It may refer to the wrong tenant, exceed a business limit, request a disallowed state transition, or carry a field the caller should never control.
+
+4
+00:00:24.160 --> 00:00:29.680
+Treat API input as untrusted until the server validates it for the exact decision being made.
+
+5
+00:00:29.960 --> 00:00:31.880
+DTOs are boundary objects.
+
+6
+00:00:31.980 --> 00:00:40.460
+They should describe what this API operation accepts or returns, not simply mirror database entities or internal domain objects.
+
+7
+00:00:40.560 --> 00:00:47.920
+A request DTO for creating a record may need different fields from an update DTO, an administrative DTO, or a response DTO.
+
+8
+00:00:48.020 --> 00:00:55.060
+Intentional shape reduces over-posting, accidental field exposure, and confusion about which properties are caller-controlled.
+
+9
+00:00:55.340 --> 00:00:57.660
+Model binding is object population.
+
+10
+00:00:57.760 --> 00:01:05.360
+It helps map request data into .NET objects, but it does not prove the data is safe, complete, authorized, or appropriate.
+
+11
+00:01:05.460 --> 00:01:19.140
+If sensitive fields such as ownership, price, role, approval status, tenant ID, or workflow state appear in a bindable input model, a caller may be able to send values the server never meant to accept.
+
+12
+00:01:19.240 --> 00:01:23.960
+Operation-specific DTOs are often safer than broad shared models.
+
+13
+00:01:24.240 --> 00:01:27.520
+Server-side validation is the enforcement point.
+
+14
+00:01:27.620 --> 00:01:38.180
+Client-side checks, generated clients, OpenAPI schemas, and mobile app validation improve usability, but the API must validate the rules it relies on.
+
+15
+00:01:38.280 --> 00:01:47.080
+Use allow-lists for known fields, formats, ranges, states, identifiers, sort options, and content types.
+
+16
+00:01:47.180 --> 00:01:54.220
+Validate both syntax and meaning, because a well-formed value can still be inappropriate for the current resource or user.
+
+17
+00:01:54.500 --> 00:01:58.020
+Normalize before security-relevant comparisons.
+
+18
+00:01:58.120 --> 00:02:10.920
+Case, whitespace, URL encoding, Unicode representation, culture-specific formatting, path representation, and alternate identifiers can affect equality and authorization decisions.
+
+19
+00:02:11.020 --> 00:02:16.540
+Convert inputs to the representation the API trusts, then compare or enforce policy.
+
+20
+00:02:16.640 --> 00:02:24.880
+This is especially important for identifiers, file labels, tenant keys, email-like values, route segments, and state names.
+
+21
+00:02:25.160 --> 00:02:31.320
+Validation errors should help legitimate callers fix problems without exposing internals.
+
+22
+00:02:31.420 --> 00:02:39.660
+A good API error can identify the invalid field, explain a safe correction, and remain consistent across clients.
+
+23
+00:02:39.760 --> 00:02:51.680
+It should not reveal database details, internal enum values that are not part of the contract, sensitive record existence, stack traces, service names, or rules that create unnecessary operational exposure.
+
+24
+00:02:51.780 --> 00:02:56.900
+Clear and bounded errors make APIs easier to use and safer to operate.

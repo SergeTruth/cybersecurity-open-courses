@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Resource settings are security and reliability controls.
+
+2
+00:00:03.560 --> 00:00:09.480
+CPU and memory requests help Kubernetes schedule pods onto nodes with enough expected capacity.
+
+3
+00:00:09.580 --> 00:00:13.820
+Limits affect runtime behavior when a workload consumes more than it was allowed.
+
+4
+00:00:13.920 --> 00:00:20.000
+These settings should reflect real .NET application behavior, not guesses copied from another service.
+
+5
+00:00:20.280 --> 00:00:31.400
+ASP.NET Core workloads, background services, upload processing, caches, queues, parallel fan-out, and dependency calls can all create resource pressure.
+
+6
+00:00:31.500 --> 00:00:44.220
+Horizontal scaling can add replicas, but it does not fix unsafe per-pod behavior such as unbounded queues, unrestricted parallelism, large in-memory buffers, or work that waits indefinitely.
+
+7
+00:00:44.500 --> 00:00:48.180
+Autoscaling signals should reflect useful workload indicators.
+
+8
+00:00:48.280 --> 00:00:57.640
+CPU and memory are common, but queue length, request latency, dependency pressure, or custom business metrics may better describe some systems.
+
+9
+00:00:57.740 --> 00:01:02.540
+The scaling plan should be paired with dependency capacity and application limits.
+
+10
+00:01:02.820 --> 00:01:11.620
+Backpressure, request limits, queue limits, timeouts, cancellation, and rate limiting should be designed with Kubernetes resource settings.
+
+11
+00:01:11.720 --> 00:01:19.160
+The application should know what happens when it cannot accept more work, and callers should receive predictable responses rather than hidden buildup.
+
+12
+00:01:19.440 --> 00:01:27.840
+Resource pressure should be observable through metrics, logs, events, restarts, throttling, and OOM-related signals.
+
+13
+00:01:27.940 --> 00:01:37.460
+Developers and operators should be able to tell whether a pod is under-provisioned, over-consuming, waiting on dependencies, or retaining memory longer than intended.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+Image scanning should be part of the release process, but scanning output still requires engineering triage.
+
+2
+00:00:06.280 --> 00:00:19.480
+A scanner can identify packages and known issues, but a team must decide priority based on affected layer, severity, reachability, exposure, fix availability, compensating controls, and business context.
+
+3
+00:00:19.760 --> 00:00:21.280
+Findings should have ownership.
+
+4
+00:00:21.380 --> 00:00:24.340
+Some fixes require updating the base image.
+
+5
+00:00:24.440 --> 00:00:26.520
+Some require a package update.
+
+6
+00:00:26.620 --> 00:00:30.940
+Some require a .NET dependency change.
+
+7
+00:00:31.040 --> 00:00:35.440
+Some may be false positives or not reachable in the deployed configuration.
+
+8
+00:00:35.540 --> 00:00:40.180
+Each decision should be documented well enough for release review and later audit.
+
+9
+00:00:40.460 --> 00:00:50.220
+Rebuilding images regularly is important because base images and operating system packages can become outdated even when application code does not change.
+
+10
+00:00:50.320 --> 00:00:58.320
+A service can have no source changes and still need a fresh image because the base image or native dependency set has been patched upstream.
+
+11
+00:00:58.600 --> 00:01:06.200
+NuGet dependencies, native libraries, base images, package manager layers, and transitive dependencies all need update workflows.
+
+12
+00:01:06.300 --> 00:01:11.580
+Image maintenance belongs with dependency management, not only deployment automation.
+
+13
+00:01:11.860 --> 00:01:15.460
+Registry access should follow least privilege.
+
+14
+00:01:15.560 --> 00:01:17.640
+Builders may need push rights.
+
+15
+00:01:17.740 --> 00:01:19.820
+Deployers may need pull rights.
+
+16
+00:01:19.920 --> 00:01:22.720
+Security scanners may need read access.
+
+17
+00:01:22.820 --> 00:01:26.980
+Unrelated users and systems should not have broad registry access by default.
+
+18
+00:01:27.080 --> 00:01:33.640
+Promotion, signing, retention, and cleanup policies should be part of registry readiness.
+
+19
+00:01:33.920 --> 00:01:44.080
+Release notes or build notes should record the base image, app version, image tag or digest, scan status, known exceptions, owner, and rollback expectations.
+
+20
+00:01:44.180 --> 00:01:50.980
+That record helps operations and incident response understand what was shipped and what follow-up is expected.

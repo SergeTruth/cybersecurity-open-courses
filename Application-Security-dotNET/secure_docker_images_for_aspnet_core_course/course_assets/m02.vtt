@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Base image choice shapes the final image before application code is added.
+
+2
+00:00:05.000 --> 00:00:15.960
+It affects operating system content, runtime libraries, package inventory, patching cadence, diagnostic tools, image size, compatibility, and production behavior.
+
+3
+00:00:16.060 --> 00:00:21.180
+Choosing a base image is a design decision, not a cosmetic Dockerfile line.
+
+4
+00:00:21.460 --> 00:00:25.620
+SDK images are intended for build and development workflows.
+
+5
+00:00:25.720 --> 00:00:31.960
+They include tooling needed to restore packages, compile projects, run build steps, and publish output.
+
+6
+00:00:32.060 --> 00:00:40.540
+That tooling is valuable in a build stage, but it should not normally be carried into the final production runtime image for an ASP.NET Core application.
+
+7
+00:00:40.820 --> 00:00:46.900
+ASP.NET Core runtime images are appropriate for many framework-dependent production applications.
+
+8
+00:00:47.000 --> 00:00:53.800
+They include the runtime support needed to run typical ASP.NET Core workloads without including the full SDK.
+
+9
+00:00:53.900 --> 00:01:02.300
+Runtime-deps images may fit self-contained applications that package their own runtime and only need a smaller operating system dependency base.
+
+10
+00:01:02.580 --> 00:01:12.660
+Chiseled or distroless-style images can reduce shipped components by removing shells, package managers, and other operating system content that the application does not need.
+
+11
+00:01:12.760 --> 00:01:18.840
+They can be useful for reducing image contents, but they also change troubleshooting and compatibility assumptions.
+
+12
+00:01:18.940 --> 00:01:27.500
+Teams should verify that diagnostics, certificates, globalization, time zones, and native dependencies still work for the application.
+
+13
+00:01:27.780 --> 00:01:31.860
+Smaller images are useful only when they still support the real workload.
+
+14
+00:01:31.960 --> 00:01:42.600
+An application may need ICU globalization support, time zone data, root certificates, native graphics or compression libraries, health check behavior, or diagnostic collection.
+
+15
+00:01:42.700 --> 00:01:47.420
+Removing everything without understanding these needs can create fragile production behavior.
+
+16
+00:01:47.700 --> 00:01:50.340
+Image tags should be chosen deliberately.
+
+17
+00:01:50.440 --> 00:01:52.680
+Floating tags can move over time.
+
+18
+00:01:52.780 --> 00:01:58.780
+Version tags can be easier to reason about but still may change depending on publisher behavior.
+
+19
+00:01:58.880 --> 00:02:02.400
+Digests identify a specific image content set.
+
+20
+00:02:02.500 --> 00:02:10.180
+Teams should know whether they are building from a moving label or a pinned artifact and how that choice affects patching and reproducibility.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Kubernetes as a .NET Application Security Surface",
+  "graphicAlt": "A .NET workload depends on code, image, manifest, identity, network and operations; internal callers still need authorization.",
+  "narration": "Kubernetes is not only infrastructure owned by another team. For a .NET application, it is part of the application runtime surface. The behavior of an ASP.NET Core service is shaped by its code, container image, manifest, namespace, service account, secrets, network exposure, runtime policy, and cluster operations.\n\nKubernetes can provide strong deployment and runtime controls, but it does not automatically fix insecure application logic. Missing authorization, unsafe logging, weak secret handling, vulnerable dependencies, broad input handling, or overly permissive admin paths remain application concerns after the app is deployed to the cluster.\n\nInternal cluster location should not be treated as proof of trust. A caller inside the cluster may still need authentication, authorization, TLS decisions, request limits, and safe logging. Service discovery and internal networking make communication easier; they do not prove that a caller should access data or perform an action.\n\nDevelopers should understand which decisions live in code, which live in manifests, and which are controlled by platform policy. A secure workload starts by asking what image runs, who it runs as, what configuration it receives, what network paths are open, and what Kubernetes permissions it has.",
+  "narrationPoints": [
+    "The behavior of an ASP.NET Core service is shaped by its code, container image, manifest, namespace, service account, secrets, network exposure, runtime policy, and cluster operations.",
+    "Missing authorization, unsafe logging, weak secret handling, vulnerable dependencies, broad input handling, or overly permissive admin paths remain application concerns after the app is deployed to the cluster.",
+    "A caller inside the cluster may still need authentication, authorization, TLS decisions, request limits, and safe logging.",
+    "Service discovery and internal networking make communication easier; they do not prove that a caller should access data or perform an action.",
+    "A secure workload starts by asking what image runs, who it runs as, what configuration it receives, what network paths are open, and what Kubernetes permissions it has."
+  ]
+};

@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.180
+Authentication for Web APIs proves the identity of a user, service, workload, or client application.
+
+2
+00:00:08.280 --> 00:00:11.800
+It does not by itself approve every operation.
+
+3
+00:00:11.900 --> 00:00:22.540
+Once the API knows who or what is calling, it still has to decide whether that identity may access the requested resource, perform the action, and use the specific data involved.
+
+4
+00:00:22.820 --> 00:00:32.900
+Use mature identity providers, OAuth or OpenID Connect services, managed authentication platforms, or framework-supported mechanisms where appropriate.
+
+5
+00:00:33.000 --> 00:00:45.320
+Identity systems involve token issuance, validation, expiration, refresh, revocation, consent, MFA, account recovery, service credentials, and audit requirements.
+
+6
+00:00:45.420 --> 00:00:49.420
+These details are difficult to maintain safely in custom code.
+
+7
+00:00:49.700 --> 00:00:59.300
+Token-based authentication should be reviewed conceptually around issuer, audience, expiration, signature validation, intended use, and trust relationship.
+
+8
+00:00:59.400 --> 00:01:12.280
+An API should know which authority issued the token, whether the token was meant for this API, whether it is still valid, whether it was protected by an expected signing mechanism, and whether its claims fit the authentication design.
+
+9
+00:01:12.380 --> 00:01:16.460
+Those checks are normal validation, not optional decoration.
+
+10
+00:01:16.740 --> 00:01:21.140
+Token lifetime and logout expectations deserve careful design.
+
+11
+00:01:21.240 --> 00:01:25.400
+Shorter lifetimes reduce long-term exposure but may require refresh flows.
+
+12
+00:01:25.500 --> 00:01:30.860
+Refresh flows create their own storage, revocation, and monitoring needs.
+
+13
+00:01:30.960 --> 00:01:38.560
+Logout for token-based systems can be different from traditional cookie sign-out, especially when multiple clients or services are involved.
+
+14
+00:01:38.660 --> 00:01:46.580
+Document the expected behavior so product teams, support teams, and users do not assume a guarantee the system does not provide.
+
+15
+00:01:46.860 --> 00:01:52.380
+Avoid custom password storage, custom token formats, and homegrown identity protocols.
+
+16
+00:01:52.480 --> 00:01:58.240
+If the application owns credentials, use supported mechanisms and organizational policy.
+
+17
+00:01:58.340 --> 00:02:06.740
+If an external provider owns identity, keep the API focused on validating the provider relationship and enforcing local authorization.
+
+18
+00:02:06.840 --> 00:02:15.560
+Custom schemes often look simple at first and become fragile once lifecycle, rotation, diagnostics, and cross-client behavior are added.
+
+19
+00:02:15.840 --> 00:02:17.600
+Tokens are sensitive.
+
+20
+00:02:17.700 --> 00:02:25.700
+They should not appear in logs, exception pages, traces, analytics events, support screenshots, or ordinary diagnostics.
+
+21
+00:02:25.800 --> 00:02:34.760
+API teams need enough information to troubleshoot identity failures, but not raw bearer tokens, refresh tokens, secrets, or full assertions.
+
+22
+00:02:34.860 --> 00:02:39.180
+Treat token handling as both a security and an operational hygiene requirement.

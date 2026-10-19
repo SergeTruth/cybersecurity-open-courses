@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+Lambda workloads must be designed for duplicate events, retries, and partial failures.
+
+2
+00:00:06.040 --> 00:00:11.880
+AWS recommends writing idempotent function code so duplicate events are handled safely.
+
+3
+00:00:11.980 --> 00:00:22.060
+This matters because event delivery behavior can repeat work after timeouts, temporary failures, queue visibility changes, or stream processing interruptions.
+
+4
+00:00:22.340 --> 00:00:33.700
+Idempotent design can use natural uniqueness, idempotency keys, conditional writes, deduplication tables, checkpointing, or trusted server-side state where appropriate.
+
+5
+00:00:33.800 --> 00:00:40.040
+The goal is for repeated processing of the same logical work item to produce a safe and predictable result.
+
+6
+00:00:40.320 --> 00:00:48.240
+Asynchronous invocations, queue event source mappings, stream sources, and API-style invocations have different retry and failure behavior.
+
+7
+00:00:48.340 --> 00:00:57.540
+Developers should know which system retries, how long retry attempts continue, what happens after repeated failures, and which errors should be treated as permanent.
+
+8
+00:00:57.820 --> 00:01:03.180
+SQS and stream batches need partial failure and poison-message review.
+
+9
+00:01:03.280 --> 00:01:09.440
+A single bad item should not indefinitely hold back unrelated items when the platform supports partial batch responses.
+
+10
+00:01:09.540 --> 00:01:17.140
+Ordering expectations, visibility timeouts, maximum receive counts, and redrive behavior should be designed together.
+
+11
+00:01:17.420 --> 00:01:26.700
+Dead-letter queues, destinations, redrive policies, visibility timeouts, retry limits, and alerting should be planned as a system.
+
+12
+00:01:26.800 --> 00:01:40.080
+Side effects such as payments, emails, object writes, database changes, and external API calls need special review under retry conditions because repeated side effects can affect users and operations.

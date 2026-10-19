@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Configuration should be separate from source code, and secrets should be separate from ordinary configuration.
+
+2
+00:00:07.000 --> 00:00:17.800
+Connection strings, API keys, certificates, signing keys, tokens, and deployment credentials need stronger handling than feature flags or display settings.
+
+3
+00:00:17.900 --> 00:00:25.260
+They should not live in repositories, source files, screenshots, build logs, or diagnostic output.
+
+4
+00:00:25.540 --> 00:00:30.100
+Use supported secret-management mechanisms for the platform and deployment environment.
+
+5
+00:00:30.200 --> 00:00:41.320
+That may mean managed secret stores, environment-specific configuration providers, cloud identity, certificate stores, deployment variables, or identity-provider integrations.
+
+6
+00:00:41.420 --> 00:00:48.700
+The important point is that secrets can be controlled, rotated, audited, and removed without rewriting application code.
+
+7
+00:00:48.980 --> 00:00:54.820
+Development, test, staging, and production settings should be treated differently.
+
+8
+00:00:54.920 --> 00:00:58.600
+A development shortcut should not silently become a production assumption.
+
+9
+00:00:58.700 --> 00:01:09.980
+Configuration review should confirm that diagnostic settings, test credentials, local endpoints, permissive flags, and sample values do not ship into higher-trust environments.
+
+10
+00:01:10.260 --> 00:01:17.860
+Sensitive values can leak through logs, exceptions, telemetry, crash reports, support bundles, and debug pages.
+
+11
+00:01:17.960 --> 00:01:19.640
+Redaction should be deliberate.
+
+12
+00:01:19.740 --> 00:01:31.500
+Code that logs configuration objects, headers, claims, request bodies, or exception details should be reviewed for accidental exposure of keys, tokens, and private data.
+
+13
+00:01:31.780 --> 00:01:34.660
+Data minimization is also defensive programming.
+
+14
+00:01:34.760 --> 00:01:38.600
+Do not collect sensitive data unless the application needs it.
+
+15
+00:01:38.700 --> 00:01:41.180
+Do not retain it longer than necessary.
+
+16
+00:01:41.280 --> 00:01:43.360
+Restrict access to what remains.
+
+17
+00:01:43.460 --> 00:01:51.380
+The less sensitive data the system handles, the smaller the consequence of mistakes in logs, storage, backups, and support workflows.

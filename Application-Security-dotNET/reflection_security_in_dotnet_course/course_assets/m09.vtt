@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.740
+Reflection-related failures often produce verbose type, member, assembly, binding, and stack information.
+
+2
+00:00:08.840 --> 00:00:16.440
+That information can be useful to developers and operators, but it should not be sent broadly to clients or low-trust users.
+
+3
+00:00:16.540 --> 00:00:20.220
+Error responses should be useful without exposing internal structure.
+
+4
+00:00:20.500 --> 00:00:30.740
+Do not expose internal type names, assembly paths, plugin paths, secrets, connection strings, tenant details, or raw reflected values to clients.
+
+5
+00:00:30.840 --> 00:00:42.520
+Logs should capture safe context such as operation name, allowed type key, plugin ID when appropriate, failure category, correlation ID, environment, and safe version identifiers.
+
+6
+00:00:42.800 --> 00:00:48.640
+Admin-only diagnostics should be access-controlled and should not become public debug endpoints.
+
+7
+00:00:48.740 --> 00:00:58.980
+Diagnostic tools that list loaded assemblies, plugins, handlers, attributes, or runtime registrations need environment scoping, redaction, and ownership.
+
+8
+00:00:59.080 --> 00:01:04.040
+Production operators may need visibility, but that visibility should be governed.
+
+9
+00:01:04.320 --> 00:01:16.960
+Production review should identify every place reflection is used, why it is needed, what input controls it, what code may be invoked, what data may be exposed, and how failures are logged.
+
+10
+00:01:17.060 --> 00:01:25.540
+This is especially important for plugin systems, command dispatchers, object mappers, serializers, and framework automation that creates behavior indirectly.
+
+11
+00:01:25.820 --> 00:01:33.740
+Reflection-heavy features should have owners, test coverage, dependency review, deployment review, and rollback expectations.
+
+12
+00:01:33.840 --> 00:01:37.280
+The goal is not to remove every reflection call.
+
+13
+00:01:37.380 --> 00:01:42.740
+The goal is to know which ones matter, why they exist, and how they behave when something goes wrong.

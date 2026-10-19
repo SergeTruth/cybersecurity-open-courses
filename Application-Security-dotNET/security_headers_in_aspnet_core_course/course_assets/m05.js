@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Framing, Clickjacking, and Embedding Controls",
+  "graphicAlt": "Three intentional framing choices show no embedding, same-origin embedding, and selected parent origins.",
+  "narration": "Some pages should not be embedded inside frames, iframes, objects, or similar containers. Framing controls help the application tell the browser whether a page may be embedded by another page. This matters for account pages, administrative pages, transaction pages, approval workflows, and other sensitive interactions where the user experience should stay under the application's control.\n\nX-Frame-Options is an older but still commonly encountered header for frame restrictions. It can express a small set of choices, such as denying framing or allowing same-origin framing. Many existing applications and platforms still include it as part of a baseline, but it is limited compared with modern CSP-based controls.\n\nCSP frame-ancestors provides a more flexible framing control for browsers that support it. It can define which parent origins may embed the page. That is useful when a page must be embedded by a specific trusted parent, such as a known portal or internal shell, but should not be embeddable elsewhere.\n\nEmbedding decisions should be intentional. Some applications need no embedding. Some need same-origin embedding for internal layouts. Some need a specific parent origin. Those choices should be based on business requirements and reviewed by page type. Admin pages, account pages, transaction pages, and high-impact workflow pages usually deserve extra care.\n\nFraming controls do not replace authorization or CSRF protection. They help with browser embedding behavior. The application still needs to authenticate users, authorize actions, validate state-changing requests, protect sensitive data, and log important events. Framing headers are one layer in a broader browser and application security model.",
+  "narrationPoints": [
+    "Some pages should not be embedded inside frames, iframes, objects, or similar containers.",
+    "Many existing applications and platforms still include it as part of a baseline, but it is limited compared with modern CSP-based controls.",
+    "CSP frame-ancestors provides a more flexible framing control for browsers that support it.",
+    "Admin pages, account pages, transaction pages, and high-impact workflow pages usually deserve extra care.",
+    "Framing headers are one layer in a broader browser and application security model."
+  ]
+};

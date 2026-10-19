@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Reflection, Deserialization, and Framework Automation",
+  "graphicAlt": "Narrow DTOs, registered handlers and explicit validation/authorization keep framework automation away from server-owned domain state.",
+  "narration": "Many .NET frameworks use reflection to bind data, construct objects, map properties, discover attributes, or call handlers. That automation can reduce boilerplate and make applications easier to build. It can also hide important security decisions if the team treats the framework behavior as automatic permission.\n\nDeserialization, model binding, command dispatch, object mapping, validation, and dependency injection should use explicit type boundaries and trusted contracts. A public request shape should be narrow enough to describe what the caller may provide. A domain model may contain fields, navigation properties, or state transitions that should not be bound directly from external input.\n\nAvoid broad domain models as automatic input targets when narrower DTOs or command models are safer. Do not let untrusted data choose arbitrary concrete types, handler classes, command names, formatter types, or service implementations. Runtime selection should come from a trusted registry or allowlist.\n\nAttribute-driven behavior should be reviewed because attributes can affect routing, validation, authorization, serialization, or exposure. An attribute may look like metadata, but it can change how the framework treats a type or member. Attribute use should be visible in code review and testing.\n\nFramework automation must still enforce input validation, authorization, tenant boundaries, data minimization, and safe error handling. Reflection can make the plumbing flexible, but the security decisions must remain explicit enough to test and maintain.",
+  "narrationPoints": [
+    "Many .NET frameworks use reflection to bind data, construct objects, map properties, discover attributes.",
+    "A public request shape should be narrow enough to describe what the caller may provide.",
+    "Do not let untrusted data choose arbitrary concrete types, handler classes, command names, formatter types, or service implementations.",
+    "Attribute-driven behavior should be reviewed because attributes can affect routing, validation, authorization, serialization, or exposure.",
+    "Framework automation must still enforce input validation, authorization, tenant boundaries, data minimization, and safe error handling."
+  ]
+};

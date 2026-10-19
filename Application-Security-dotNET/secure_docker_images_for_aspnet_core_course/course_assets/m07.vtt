@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Every file in the final image should have a reason to be there.
+
+2
+00:00:04.040 --> 00:00:11.000
+The runtime image is not a backup of the repository and not a general troubleshooting workstation.
+
+3
+00:00:11.100 --> 00:00:16.780
+It should contain what the ASP.NET Core application needs to run and operate responsibly.
+
+4
+00:00:17.060 --> 00:00:34.020
+Runtime images should avoid unnecessary shells, package managers, compilers, curl or wget-style tools, source code, test data, sample files, package caches, and debugging utilities unless there is a documented production need.
+
+5
+00:00:34.120 --> 00:00:38.760
+Removing unneeded tools reduces image contents and simplifies review.
+
+6
+00:00:39.040 --> 00:00:43.200
+Native dependencies need the same care as application dependencies.
+
+7
+00:00:43.300 --> 00:00:54.420
+Image packages, operating system libraries, graphics libraries, compression libraries, database drivers, and other native components should be tracked, scanned, patched, and removed when they are no longer needed.
+
+8
+00:00:54.700 --> 00:00:57.500
+Some operating system content is still necessary.
+
+9
+00:00:57.600 --> 00:01:06.800
+Certificates, CA bundles, timezone data, ICU and globalization support, font libraries, and native libraries may be required depending on the application.
+
+10
+00:01:06.900 --> 00:01:15.060
+Removing too aggressively can break authentication, date handling, localization, document generation, or outbound calls.
+
+11
+00:01:15.340 --> 00:01:26.620
+Debug symbols, dumps, generated documentation, OpenAPI artifacts, diagnostics endpoints, and development-only configuration should be reviewed before shipping.
+
+12
+00:01:26.720 --> 00:01:36.240
+These items may be useful in controlled workflows, but they can also expose implementation details or increase operational exposure when carried into production images.
+
+13
+00:01:36.520 --> 00:01:40.920
+Temporary data and build artifacts should not become permanent runtime content.
+
+14
+00:01:41.020 --> 00:01:46.300
+The final image should reflect a release decision, not the accumulation of intermediate build products.
+
+15
+00:01:46.580 --> 00:01:50.980
+Reducing contents reduces attack surface when compatibility is preserved.
+
+16
+00:01:51.080 --> 00:02:00.280
+The balance is to ship only required runtime contents while retaining the operational observability and support paths the production service genuinely needs.

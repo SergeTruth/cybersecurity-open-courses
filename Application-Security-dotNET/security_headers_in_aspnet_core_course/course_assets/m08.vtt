@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Security headers need operational ownership, not one-time copy-paste.
+
+2
+00:00:06.200 --> 00:00:15.000
+ASP.NET Core applications often run behind proxies, ingress controllers, load balancers, CDNs, web servers, and hosting platforms.
+
+3
+00:00:15.100 --> 00:00:18.940
+Any of those layers can add, remove, or change headers.
+
+4
+00:00:19.040 --> 00:00:23.920
+The organization should know which layer owns each policy and how changes are reviewed.
+
+5
+00:00:24.200 --> 00:00:26.040
+Review where headers are applied.
+
+6
+00:00:26.140 --> 00:00:31.180
+Application middleware may cover MVC and API responses but not all static files.
+
+7
+00:00:31.280 --> 00:00:36.000
+A CDN may cover cached assets but not dynamic error responses.
+
+8
+00:00:36.100 --> 00:00:41.300
+A reverse proxy may handle redirects or HSTS before the app sees traffic.
+
+9
+00:00:41.400 --> 00:00:49.960
+Authentication pages, admin pages, health endpoints, file downloads, and exception paths may each need separate confirmation.
+
+10
+00:00:50.240 --> 00:00:52.000
+Environment behavior matters.
+
+11
+00:00:52.100 --> 00:01:06.500
+Local development, staging, production, preview deployments, and branch deployments often use different hosts, proxies, certificates, CDNs, origins, and third-party dependencies.
+
+12
+00:01:06.600 --> 00:01:12.120
+A header that works locally may be too broad, too narrow, or absent in production.
+
+13
+00:01:12.220 --> 00:01:15.340
+Release review should compare the environments that matter.
+
+14
+00:01:15.620 --> 00:01:21.300
+CSP often benefits from report-only rollout when enforcement risk is high.
+
+15
+00:01:21.400 --> 00:01:31.320
+Report-only behavior can reveal missing sources, legacy inline patterns, third-party dependencies, and browser differences before blocking user workflows.
+
+16
+00:01:31.420 --> 00:01:37.660
+That reporting should have an owner and a cleanup plan; collecting reports without review does not improve the policy.
+
+17
+00:01:37.940 --> 00:01:43.380
+Track exceptions with owners, reasons, review dates, and environment scope.
+
+18
+00:01:43.480 --> 00:01:51.400
+Exceptions may be legitimate, especially for legacy pages, partner integrations, analytics, embedded content, or staged migrations.
+
+19
+00:01:51.500 --> 00:01:54.860
+But unexplained exceptions become permanent weak spots.
+
+20
+00:01:54.960 --> 00:01:59.040
+Governance keeps the header baseline from drifting as the application changes.
+
+21
+00:01:59.320 --> 00:02:01.640
+Avoid scanner-driven copy-paste hardening.
+
+22
+00:02:01.740 --> 00:02:09.100
+Scanners can be useful prompts, but they do not know the application's business flows, deployment layers, or compatibility constraints.
+
+23
+00:02:09.200 --> 00:02:16.560
+A professional header baseline explains why each header exists, where it is applied, what value is expected, and who maintains it.

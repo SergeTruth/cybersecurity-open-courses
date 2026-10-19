@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.260
+Authorization answers a different question from authentication: is this identity allowed to perform this action on this resource right now.
+
+2
+00:00:08.360 --> 00:00:12.360
+That decision belongs on the server, close to the operation being protected.
+
+3
+00:00:12.460 --> 00:00:20.780
+Hidden buttons, client-side routes, and user interface conditions can improve usability, but they are not sufficient access control.
+
+4
+00:00:21.060 --> 00:00:29.060
+ASP.NET Core supports roles, policies, claims, requirements, handlers, and endpoint-level authorization.
+
+5
+00:00:29.160 --> 00:00:41.320
+Roles are useful when they match real responsibilities, but they can become too coarse when access depends on tenant, ownership, workflow state, data sensitivity, business unit, or operation type.
+
+6
+00:00:41.420 --> 00:00:45.580
+Policy-based authorization gives teams a clearer place to express those rules.
+
+7
+00:00:45.860 --> 00:00:58.500
+Apply authorization consistently across pages, controllers, minimal APIs, endpoint groups, background actions, and service-layer operations as appropriate for the application architecture.
+
+8
+00:00:58.600 --> 00:01:08.200
+A protected controller action is not enough if the same behavior is reachable through a different endpoint, a background job, an export feature, or an administrative support tool.
+
+9
+00:01:08.480 --> 00:01:12.240
+Object-level authorization is where many applications become fragile.
+
+10
+00:01:12.340 --> 00:01:16.340
+A user may be allowed to open the reports feature, but not every report.
+
+11
+00:01:16.440 --> 00:01:20.360
+A tenant administrator may manage users in one tenant, but not another.
+
+12
+00:01:20.460 --> 00:01:24.940
+A service account may process one queue, but not update unrelated records.
+
+13
+00:01:25.040 --> 00:01:32.480
+Access decisions should include the specific record, file, tenant, action, and current state when those factors matter.
+
+14
+00:01:32.760 --> 00:01:35.720
+Least privilege applies beyond end users.
+
+15
+00:01:35.820 --> 00:01:47.020
+Administrators, support staff, background services, database accounts, managed identities, deployment pipelines, and scheduled jobs should have only the permissions they need.
+
+16
+00:01:47.120 --> 00:01:57.360
+Administrative and support workflows are high-risk paths because they often combine broad visibility, powerful actions, and pressure to resolve issues quickly.
+
+17
+00:01:57.640 --> 00:02:01.400
+Scattered permission logic becomes inconsistent over time.
+
+18
+00:02:01.500 --> 00:02:10.700
+Central policies, resource-based authorization handlers, well-named service methods, and consistent review patterns make access control easier to audit.
+
+19
+00:02:10.800 --> 00:02:17.920
+A reviewer should be able to locate the decision, understand the data it uses, and confirm the same rule is applied wherever the operation can happen.

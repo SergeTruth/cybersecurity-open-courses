@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+HTTP-triggered Lambda patterns are API surfaces.
+
+2
+00:00:04.200 --> 00:00:11.480
+They may be exposed through API Gateway, Application Load Balancer, Lambda function URLs, or another front door.
+
+3
+00:00:11.580 --> 00:00:20.140
+Public exposure should be deliberate, documented, and reviewed because it defines how users, services, and browsers can reach the function.
+
+4
+00:00:20.420 --> 00:00:23.940
+Function URLs can provide direct HTTP endpoints.
+
+5
+00:00:24.040 --> 00:00:33.240
+They need authorization configuration and resource-based policy review because a direct endpoint can change who can invoke the function and how requests reach handler code.
+
+6
+00:00:33.340 --> 00:00:36.860
+The chosen model should match the sensitivity of the operation.
+
+7
+00:00:37.140 --> 00:00:48.180
+API Gateway can add controls such as authorizers, routing, throttling, request validation, custom domains, logging, and deployment stages when configured appropriately.
+
+8
+00:00:48.280 --> 00:01:00.840
+IAM authorization, function URL policies, API keys, JWT authorizers, Lambda authorizers, and application authorization solve different problems and should not be treated as interchangeable.
+
+9
+00:01:01.120 --> 00:01:04.320
+CORS controls browser cross-origin access.
+
+10
+00:01:04.420 --> 00:01:07.780
+It is not authentication or authorization.
+
+11
+00:01:07.880 --> 00:01:21.320
+Browser-facing endpoints may also need CSRF, cookie, redirect, TLS, security header, and rate-limit review depending on the design and where identity is enforced.
+
+12
+00:01:21.600 --> 00:01:29.840
+Request and response logging should avoid sensitive headers, cookies, tokens, authorization data, and raw request bodies.
+
+13
+00:01:29.940 --> 00:01:42.580
+HTTP diagnostics should help operators understand routing, status, latency, and failure category without copying sensitive user or application data into logs.

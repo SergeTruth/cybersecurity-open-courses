@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Network Exposure, Ingress, TLS, and Network Policies",
+  "graphicAlt": "Ingress, proxy trust and enforced network policies shape connectivity while application authorization and governed admin access remain necessary.",
+  "narration": "Kubernetes networking makes service discovery and routing convenient, but connectivity is not authorization. ClusterIP services, NodePort services, load balancers, ingress controllers, gateways, service meshes, and reverse proxies all shape who can reach a .NET application and through which path.\n\nASP.NET Core applications behind ingress or reverse proxies need careful review of forwarded headers, HTTPS behavior, secure cookies, redirects, host handling, client IP handling, and health endpoints. The app should understand where TLS terminates and which proxy headers are trusted.\n\nBrowser-facing applications still need correct authentication, authorization, CORS, CSRF protections, cookies, and security headers. Being deployed in Kubernetes does not remove normal web application security requirements. Internal service-to-service calls also need clear identity and policy expectations.\n\nNetworkPolicies can restrict pod-to-pod traffic when the cluster networking implementation supports them. They are most useful when the team understands which workloads need to communicate and can express those paths clearly. A policy that exists only on paper but is not enforced by the platform does not provide runtime control.\n\nInternal admin endpoints, metrics endpoints, debug endpoints, and management paths should not be exposed casually. The production design should identify which endpoints are public, which are internal, which require stronger controls, and which should only be reachable through governed operational channels.",
+  "narrationPoints": [
+    "Kubernetes networking makes service discovery and routing convenient, but connectivity is not authorization.",
+    "ASP.NET Core applications behind ingress or reverse proxies need careful review of forwarded headers, HTTPS behavior, secure cookies, redirects, host handling, client IP handling, and health endpoints.",
+    "Browser-facing applications still need correct authentication, authorization, CORS, CSRF protections, cookies, and security headers.",
+    "A policy that exists only on paper but is not enforced by the platform does not provide runtime control.",
+    "Internal admin endpoints, metrics endpoints, debug endpoints, and management paths should not be exposed casually."
+  ]
+};

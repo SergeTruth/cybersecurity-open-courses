@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Data Protection uses a key ring to protect and unprotect payloads.
+
+2
+00:00:06.200 --> 00:00:10.120
+The key ring contains key material and metadata used by the framework.
+
+3
+00:00:10.220 --> 00:00:17.500
+New Protect operations use an active default key, while Unprotect may need older keys to read payloads that were created before rotation.
+
+4
+00:00:17.780 --> 00:00:23.780
+Keys move through lifecycle states such as created, active, expired, and revoked.
+
+5
+00:00:23.880 --> 00:00:30.440
+Expired keys are not usually used for new protection, but they may still be needed to unprotect existing payloads.
+
+6
+00:00:30.540 --> 00:00:38.700
+That distinction matters for cookies, workflow links, temporary state, and any stored protected values that outlive a single request.
+
+7
+00:00:38.980 --> 00:00:43.380
+Automatic key management reduces custom cryptographic burden.
+
+8
+00:00:43.480 --> 00:00:49.160
+Developers do not have to design low-level key rotation themselves for normal Data Protection use.
+
+9
+00:00:49.260 --> 00:00:53.180
+But automatic management does not remove deployment responsibility.
+
+10
+00:00:53.280 --> 00:01:02.960
+The application still needs durable storage, environment separation, access control, backup planning, and an understanding of how key changes affect users.
+
+11
+00:01:03.240 --> 00:01:12.760
+Rotation should be understood before changing key storage, application name, deployment slots, hosting topology, or shared-cookie configuration.
+
+12
+00:01:12.860 --> 00:01:17.820
+A change that seems operational can affect whether existing payloads remain readable.
+
+13
+00:01:17.920 --> 00:01:23.920
+That can result in user sign-outs, invalid workflow links, or forms failing validation.
+
+14
+00:01:24.200 --> 00:01:29.400
+Revoking or deleting keys can make existing protected payloads unreadable.
+
+15
+00:01:29.500 --> 00:01:36.860
+Sometimes revocation is the right response to a key compromise, but it should be treated as an incident decision with known user impact.
+
+16
+00:01:36.960 --> 00:01:44.160
+Backup and restore plans should also consider whether protected payloads must survive deployment failures or disaster recovery.

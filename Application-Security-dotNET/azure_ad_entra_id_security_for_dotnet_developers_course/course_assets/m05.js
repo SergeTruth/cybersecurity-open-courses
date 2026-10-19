@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Permissions, Scopes, App Roles, and Consent",
+  "graphicAlt": "Delegated scopes and app-only roles require least-privilege consent review and server-side enforcement.",
+  "narration": "Permissions define what access an application requests or receives. In Microsoft identity platform terms, delegated permissions apply when an application acts on behalf of a signed-in user. Application permissions, often represented as app roles for a resource, can allow app-only access without a signed-in user. Those two models have different review requirements and different operational impact.\n\nScopes should represent clear API permissions and should be enforced by the resource API. A scope name in a token is not useful unless the API checks it before performing the protected action. App roles can represent application-level permissions or user-assigned roles depending on the design. They also need server-side enforcement and review.\n\nConsent is a security and governance decision, not a checkbox to make code work. User consent, admin consent, tenant-wide consent, and customer onboarding all affect who has approved access and what data or operations the application may reach. Admin consent deserves special review because it can authorize organization-wide access.\n\nDevelopers should request the least privilege needed for the actual scenario. A narrow permission set is easier to explain, monitor, approve, and revoke. Microsoft Graph permissions vary widely in sensitivity, so broad Graph permissions should receive extra scrutiny and clear justification.\n\nPermission review should include the resource API, client app, tenant administrators, security owners, and production operators. The question is not only whether the application can get a token. The question is whether the access represented by that token is appropriate, enforced, observable, and still needed.",
+  "narrationPoints": [
+    "Application permissions, often represented as app roles for a resource, can allow app-only access without a signed-in user.",
+    "A scope name in a token is not useful unless the API checks it before performing the protected action.",
+    "Consent is a security and governance decision, not a checkbox to make code work.",
+    "Developers should request the least privilege needed for the actual scenario.",
+    "Permission review should include the resource API, client app, tenant administrators, security owners, and production operators."
+  ]
+};

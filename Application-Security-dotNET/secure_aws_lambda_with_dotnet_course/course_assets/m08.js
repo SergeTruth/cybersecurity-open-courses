@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Idempotency, Retries, Failures, and Dead Letters",
+  "graphicAlt": "Idempotency controls repeated logical effects, while source-specific retries, partial failures and dead-letter recovery are planned together.",
+  "narration": "Lambda workloads must be designed for duplicate events, retries, and partial failures. AWS recommends writing idempotent function code so duplicate events are handled safely. This matters because event delivery behavior can repeat work after timeouts, temporary failures, queue visibility changes, or stream processing interruptions.\n\nIdempotent design can use natural uniqueness, idempotency keys, conditional writes, deduplication tables, checkpointing, or trusted server-side state where appropriate. The goal is for repeated processing of the same logical work item to produce a safe and predictable result.\n\nAsynchronous invocations, queue event source mappings, stream sources, and API-style invocations have different retry and failure behavior. Developers should know which system retries, how long retry attempts continue, what happens after repeated failures, and which errors should be treated as permanent.\n\nSQS and stream batches need partial failure and poison-message review. A single bad item should not indefinitely hold back unrelated items when the platform supports partial batch responses. Ordering expectations, visibility timeouts, maximum receive counts, and redrive behavior should be designed together.\n\nDead-letter queues, destinations, redrive policies, visibility timeouts, retry limits, and alerting should be planned as a system. Side effects such as payments, emails, object writes, database changes, and external API calls need special review under retry conditions because repeated side effects can affect users and operations.",
+  "narrationPoints": [
+    "Lambda workloads must be designed for duplicate events, retries, and partial failures.",
+    "Idempotent design can use natural uniqueness, idempotency keys, conditional writes, deduplication tables, checkpointing.",
+    "Developers should know which system retries, how long retry attempts continue, what happens after repeated failures.",
+    "SQS and stream batches need partial failure and poison-message review.",
+    "Side effects such as payments, emails, object writes, database changes, and external API calls need special review under retry conditions."
+  ]
+};

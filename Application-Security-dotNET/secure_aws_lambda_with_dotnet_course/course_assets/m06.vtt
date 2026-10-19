@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.140
+Lambda environment variables are useful for operational parameters such as feature flags, table names, region choices, endpoint names, and non-sensitive configuration.
+
+2
+00:00:11.240 --> 00:00:21.720
+Sensitive values need more careful handling because environment values can appear in deployment templates, console views, diagnostic output, and support workflows if access is not controlled.
+
+3
+00:00:22.000 --> 00:00:31.040
+AWS recommends using Secrets Manager instead of environment variables for database credentials and sensitive values such as API keys or authorization tokens.
+
+4
+00:00:31.140 --> 00:00:44.580
+Secrets include API keys, connection strings, database credentials, OAuth secrets, private keys, signing keys, webhook secrets, package feed credentials, and third-party provider tokens.
+
+5
+00:00:44.860 --> 00:00:58.940
+Secrets should not appear in source code, deployment packages, Lambda layers, CI logs, CloudFormation, SAM or CDK output, build artifacts, sample files, or screenshots.
+
+6
+00:00:59.040 --> 00:01:10.080
+Secrets Manager, Systems Manager Parameter Store, KMS, environment variables, IAM roles, and short-lived credentials solve different problems and should be selected intentionally.
+
+7
+00:01:10.360 --> 00:01:15.480
+Local development, test, staging, and production configuration should be separated.
+
+8
+00:01:15.580 --> 00:01:20.860
+A function should not accidentally use production secrets in a test environment or test settings in production.
+
+9
+00:01:20.960 --> 00:01:26.160
+Deployment automation should make expected configuration sources visible during review.
+
+10
+00:01:26.440 --> 00:01:34.440
+Secret retrieval should consider caching, rotation, error handling, permission scope, and logging redaction.
+
+11
+00:01:34.540 --> 00:01:44.780
+A function that retrieves a secret on every invocation may create unnecessary latency and service calls, while a function that caches forever may not pick up rotation quickly enough.
+
+12
+00:01:44.880 --> 00:01:49.600
+The right approach depends on the secret, rotation model, and operational need.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Concurrency Safety Matters",
+  "graphicAlt": "Overlapping operations access owned shared state through a controlled interface with invariants and resource bounds.",
+  "narration": "Concurrency safety is about preserving correctness when more than one operation can make progress at the same time. In a C# application, that can mean multiple requests, background jobs, timers, queue consumers, parallel loops, asynchronous continuations, or UI events all touching related state.\n\nThe difficult part is that the code can look correct when read from top to bottom. A method checks a value, changes another value, saves a record, and returns. Under concurrent execution, another operation may observe the same old value, make a competing update, or see state halfway through a transition. The problem is not the language syntax. The problem is the timing between operations.\n\nConcurrency bugs can cause lost updates, duplicate work, stale reads, inconsistent state, corrupted data, exhausted resources, deadlocks, thread pool pressure, and unpredictable user behavior. These failures may only appear under load, on different hardware, after a deployment, or when a dependency becomes slower and changes the timing of the system.\n\nSecurity and reliability overlap when concurrency affects authorization decisions, account state, financial operations, quotas, idempotency, workflow approvals, or sensitive data handling. If two operations race through a state transition, the result may violate a business rule even though each operation looked reasonable by itself.\n\nA safe design begins by identifying shared mutable state, ownership, invariants, and resource limits. What state can change. Who owns it. What must always remain true. Which operations need to be atomic from the application's point of view. Which resources must be bounded so the system remains available. Those questions give concurrency review a concrete starting point.",
+  "narrationPoints": [
+    "Concurrency safety is about preserving correctness when more than one operation can make progress at the same time.",
+    "A method checks a value, changes another value, saves a record.",
+    "Concurrency bugs can cause lost updates, duplicate work, stale reads, inconsistent state, corrupted data.",
+    "Security and reliability overlap when concurrency affects authorization decisions, account state, financial operations, quotas.",
+    "A safe design begins by identifying shared mutable state, ownership, invariants."
+  ]
+};

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Docker Images as Security Artifacts",
+  "graphicAlt": "Source, dependency, base-image and build choices produce a reviewable artifact whose application controls still matter.",
+  "narration": "A Docker image is a security-relevant build artifact, not just a deployment package. It is the packaged result of source code, dependency restore, build output, base image selection, file copying, metadata, and configuration decisions. By the time an image reaches production, many trust decisions have already been made.\n\nAn ASP.NET Core image can contain application assemblies, runtime dependencies, native libraries, certificates, labels, default environment assumptions, diagnostic files, generated assets, and accidentally included local files. Some of those contents are required. Some are convenient. Some are leftovers that no one intended to ship.\n\nImage security affects supply chain risk, runtime attack surface, patching, reproducibility, and incident response. If a team cannot explain what is in an image, where it came from, how it was built, and who can publish it, the team will struggle to patch it, investigate it, or prove what ran in production.\n\nContainers do not make insecure application logic safe. An ASP.NET Core application with weak authorization, unsafe secret handling, poor validation, or excessive data exposure remains weak inside a container. Image hygiene supports secure deployment, but it does not replace secure application design.\n\nA secure image design starts with basic questions. What base image is used. What files are copied. Which dependencies are present. Which user runs the process. Which ports and writable paths are required. Who can rebuild the image. Who can sign or publish it. What metadata proves the source and version. These questions turn a black-box artifact into a reviewable engineering output.",
+  "narrationPoints": [
+    "A Docker image is a security-relevant build artifact, not just a deployment package.",
+    "An ASP.NET Core image can contain application assemblies, runtime dependencies, native libraries, certificates, labels.",
+    "Image security affects supply chain risk, runtime attack surface, patching, reproducibility.",
+    "Image hygiene supports secure deployment, but it does not replace secure application design.",
+    "A secure image design starts with basic questions."
+  ]
+};

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Microsoft Entra ID is the current name for Azure AD.
+
+2
+00:00:04.360 --> 00:00:14.360
+It provides identity and access management services for users, groups, applications, service principals, workloads, and tenants.
+
+3
+00:00:14.460 --> 00:00:23.420
+For .NET developers, it is a central part of authentication and access architecture, but it is not the entire security design by itself.
+
+4
+00:00:23.700 --> 00:00:29.620
+A tenant is an identity boundary for an organization or customer environment.
+
+5
+00:00:29.720 --> 00:00:34.120
+Users and groups represent human identities and collections of those identities.
+
+6
+00:00:34.220 --> 00:00:38.780
+App registrations describe how software integrates with the Microsoft identity platform.
+
+7
+00:00:38.880 --> 00:00:45.200
+Enterprise applications and service principals represent application instances inside tenants.
+
+8
+00:00:45.300 --> 00:00:48.500
+Resource APIs expose protected capabilities.
+
+9
+00:00:48.600 --> 00:00:50.840
+Client applications request tokens.
+
+10
+00:00:50.940 --> 00:00:56.460
+Workload identities represent non-human software that needs to authenticate to other services.
+
+11
+00:00:56.740 --> 00:01:05.060
+Entra ID can authenticate a user, application, or workload and issue tokens that express facts about that authentication event.
+
+12
+00:01:05.160 --> 00:01:07.880
+The .NET application still has responsibilities.
+
+13
+00:01:07.980 --> 00:01:21.340
+It must validate tokens using maintained components, enforce authorization for application actions, protect credentials and token caches, interpret claims carefully, and log useful events without recording sensitive values.
+
+14
+00:01:21.620 --> 00:01:24.500
+The trust boundary depends on the application type.
+
+15
+00:01:24.600 --> 00:01:35.960
+Internal web apps, public customer-facing apps, partner portals, APIs, daemon services, background jobs, and administrative tools all have different assumptions.
+
+16
+00:01:36.060 --> 00:01:42.140
+Internal network location or a familiar tenant name should not be treated as proof that every request is trusted.
+
+17
+00:01:42.240 --> 00:01:46.560
+The application still needs server-side policy and resource checks.
+
+18
+00:01:46.840 --> 00:01:54.200
+A secure Entra ID design separates identity provider responsibility from application responsibility.
+
+19
+00:01:54.300 --> 00:01:59.180
+The identity platform authenticates and issues tokens according to tenant policy.
+
+20
+00:01:59.280 --> 00:02:09.680
+The application validates those tokens, decides what the caller may do, protects its own configuration and secrets, and produces operational evidence for review.

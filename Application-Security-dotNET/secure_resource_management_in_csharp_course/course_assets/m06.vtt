@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Database connections are often pooled, but pooling does not remove lifetime responsibility.
+
+2
+00:00:05.800 --> 00:00:11.000
+A connection that is not closed or disposed correctly may stay checked out longer than intended.
+
+3
+00:00:11.100 --> 00:00:19.900
+Under pressure, that can affect other requests, background jobs, migrations, reports, and operational tools that need database capacity.
+
+4
+00:00:20.180 --> 00:00:29.140
+Connections, commands, readers, transactions, and data contexts should be released according to ownership and framework guidance.
+
+5
+00:00:29.240 --> 00:00:33.640
+A data reader may keep a connection busy while rows are being consumed.
+
+6
+00:00:33.740 --> 00:00:40.300
+A transaction may hold locks until it is committed, rolled back, or disposed.
+
+7
+00:00:40.400 --> 00:00:45.360
+A context may track entities and hold state that is not safe to share broadly.
+
+8
+00:00:45.640 --> 00:00:49.880
+Long-running transactions increase operational risk.
+
+9
+00:00:49.980 --> 00:00:58.380
+They can hold locks, block other work, increase rollback impact, complicate error recovery, and make production incidents harder to reason about.
+
+10
+00:00:58.480 --> 00:01:04.640
+Transaction boundaries should be narrow, purposeful, and aligned with the consistency requirement of the operation.
+
+11
+00:01:04.920 --> 00:01:07.320
+Dependency injection lifetimes matter.
+
+12
+00:01:07.420 --> 00:01:14.860
+Singleton, scoped, and transient services have different expectations for resource ownership and thread safety.
+
+13
+00:01:14.960 --> 00:01:25.280
+DbContext and similar scoped services should not become shared singletons, and they should not be used concurrently unless the framework and application design explicitly support that pattern.
+
+14
+00:01:25.560 --> 00:01:30.200
+Background work needs special care because it often runs outside the request scope.
+
+15
+00:01:30.300 --> 00:01:37.260
+A queued operation or hosted service should not accidentally capture request-scoped services beyond their intended lifetime.
+
+16
+00:01:37.360 --> 00:01:46.000
+It should create the scope it needs, handle cleanup predictably, and separate runtime, migration, administrative, and reporting access where appropriate.

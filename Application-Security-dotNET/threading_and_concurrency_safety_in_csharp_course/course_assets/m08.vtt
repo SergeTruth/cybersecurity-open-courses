@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+CPU-bound parallelism and I/O-bound asynchrony need different design choices.
+
+2
+00:00:05.560 --> 00:00:10.920
+CPU-bound work competes for processor time and may benefit from measured parallelism.
+
+3
+00:00:11.020 --> 00:00:21.180
+I/O-bound work spends much of its time waiting on external systems and usually benefits from asynchronous APIs and concurrency limits rather than raw thread creation.
+
+4
+00:00:21.460 --> 00:00:34.740
+Parallel loops, fan-out, and batch processing can overwhelm CPUs, database connection pools, APIs, file systems, queues, caches, and downstream services if they are unbounded.
+
+5
+00:00:34.840 --> 00:00:38.440
+More simultaneous work is not always more throughput.
+
+6
+00:00:38.540 --> 00:00:44.220
+Past a certain point, the system spends its time waiting, contending, retrying, or timing out.
+
+7
+00:00:44.500 --> 00:00:51.780
+Background work should have ownership, lifetime, cancellation, error handling, logging, and retry policy.
+
+8
+00:00:51.880 --> 00:01:01.640
+Work that starts in the background without an owner can outlive the request scope, lose user context, continue after cancellation, or fail without visible evidence.
+
+9
+00:01:01.740 --> 00:01:06.780
+If work must continue later, a queue or hosted service should own that lifecycle deliberately.
+
+10
+00:01:07.060 --> 00:01:14.420
+ASP.NET Core request handling should not start unmanaged background work that depends on request-scoped services after the request ends.
+
+11
+00:01:14.520 --> 00:01:21.560
+DbContext instances, scoped dependencies, user context, and request cancellation tokens have lifetimes.
+
+12
+00:01:21.660 --> 00:01:27.100
+Sending them into unmanaged background work creates correctness and reliability risks.
+
+13
+00:01:27.380 --> 00:01:31.540
+Bounded concurrency protects availability and dependency health.
+
+14
+00:01:31.640 --> 00:01:41.000
+A SemaphoreSlim, bounded channel, worker pool, rate limit, or queue setting can keep the number of active operations within a range the system can support.
+
+15
+00:01:41.100 --> 00:01:46.620
+The correct bound is an engineering decision based on dependency capacity and production measurement.
+
+16
+00:01:46.900 --> 00:01:55.220
+Shared service clients, DbContext instances, caches, random generators, and other dependencies need thread-safety review.
+
+17
+00:01:55.320 --> 00:01:58.120
+Some types are intended to be reused concurrently.
+
+18
+00:01:58.220 --> 00:02:01.180
+Some are intended to be scoped to a unit of work.
+
+19
+00:02:01.280 --> 00:02:03.760
+Some require their own synchronization.
+
+20
+00:02:03.860 --> 00:02:07.380
+The dependency contract should drive the concurrency design.
+
+21
+00:02:07.660 --> 00:02:11.660
+Resource controls should be measured and tuned in production.
+
+22
+00:02:11.760 --> 00:02:24.080
+Queue length, latency, error rate, thread pool behavior, dependency saturation, retry volume, and timeout trends tell the team whether the design is operating inside safe limits.

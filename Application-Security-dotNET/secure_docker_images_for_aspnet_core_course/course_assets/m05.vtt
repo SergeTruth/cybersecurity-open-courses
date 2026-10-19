@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Build-time secret handling is a common Docker image failure point.
+
+2
+00:00:04.600 --> 00:00:19.320
+ASP.NET Core builds may need NuGet feed credentials, package registry tokens, signing keys, Git credentials, cloud credentials, certificates, connection strings, API keys, or private package source credentials.
+
+3
+00:00:19.420 --> 00:00:22.300
+These values should not become part of the image.
+
+4
+00:00:22.580 --> 00:00:27.300
+Do not pass secrets through Dockerfile ENV or ARG instructions.
+
+5
+00:00:27.400 --> 00:00:34.920
+Those values can persist in image history, build metadata, cache records, logs, or troubleshooting output.
+
+6
+00:00:35.020 --> 00:00:39.580
+A build argument may feel temporary, but it is not the same as a protected build secret.
+
+7
+00:00:39.860 --> 00:00:46.020
+When a build truly needs temporary secret access, use build-secret mechanisms supported by the build platform.
+
+8
+00:00:46.120 --> 00:00:58.520
+The goal is for the restore or build step to access the secret just long enough to complete the required operation without writing it into layers, package configuration files, final artifacts, or routine logs.
+
+9
+00:00:58.800 --> 00:01:01.920
+NuGet restore is a common place to review.
+
+10
+00:01:02.020 --> 00:01:12.100
+Feed credentials should be scoped narrowly, short-lived where possible, and provided through the CI or build platform in a way that avoids committing credentials to repository files.
+
+11
+00:01:12.200 --> 00:01:16.600
+Restore output should not print sensitive feed URLs or tokens.
+
+12
+00:01:16.880 --> 00:01:19.680
+Publish steps should also be reviewed.
+
+13
+00:01:19.780 --> 00:01:28.980
+Generated configuration, transformed files, static assets, and appsettings variants should not embed production secrets into the final image.
+
+14
+00:01:29.080 --> 00:01:36.600
+Runtime configuration should be supplied through the deployment platform or secret store according to the application's operational model.
+
+15
+00:01:36.880 --> 00:01:48.400
+CI/CD logs, cache exports, build summaries, provenance metadata, and troubleshooting screenshots can all expose build-time values if teams are not careful.
+
+16
+00:01:48.500 --> 00:02:00.180
+Safer habits include short-lived credentials, managed build identities, least-privilege package access, redaction, cache controls, and periodic review of build records.

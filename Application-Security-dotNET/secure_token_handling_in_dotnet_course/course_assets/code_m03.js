@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'JWT Bearer Token Validation in ASP.NET Core' into concrete defensive .NET review patterns. Examples are focused supporting fragments, not a complete application. C# requires .NET 8 and C# 12, with Microsoft.AspNetCore.App for web-framework APIs; place member declarations in an application type and include standard namespace imports. Extra package requirements are stated where used. Bootstrap configuration, providers, and private storage are trusted application inputs, never request-controlled policy.",
+  "codeExamples": [
+    {
+      "title": "Validate JWTs through the supported bearer handler",
+      "language": "csharp",
+      "blurb": ".NET 8 / C# 12; Microsoft.AspNetCore.Authentication.JwtBearer 8.0.32. Replace fixed example authority/audience through trusted deployment configuration. Signature, issuer, audience, algorithm, and lifetime are validated before claims reach authorization.",
+      "code": "using Microsoft.AspNetCore.Authentication.JwtBearer;\nusing Microsoft.IdentityModel.Tokens;\npublic static void AddReviewedJwt(IServiceCollection services)\n{\n    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>\n    {\n        options.Authority = \"https://identity.example.com/\";\n        options.Audience = \"orders-api\";\n        options.RequireHttpsMetadata = true;\n        options.MapInboundClaims = false;\n        options.SaveToken = false;\n        options.IncludeErrorDetails = false;\n        options.BackchannelTimeout = TimeSpan.FromSeconds(5);\n        options.TokenValidationParameters = new TokenValidationParameters\n        {\n            AuthenticationType = \"Bearer\", ValidateIssuer = true,\n            ValidIssuer = \"https://identity.example.com/\", ValidateAudience = true,\n            ValidAudience = \"orders-api\", ValidateLifetime = true, RequireExpirationTime = true,\n            RequireSignedTokens = true, ValidateIssuerSigningKey = true,\n            ValidAlgorithms = new[] { SecurityAlgorithms.RsaSha256 }, ClockSkew = TimeSpan.FromSeconds(30)\n        };\n    });\n    services.AddAuthorization();\n}\n// Pipeline: UseAuthentication(); UseAuthorization(); protected endpoints RequireAuthorization().\n// The configured issuer publishes OIDC discovery/JWKS over validated HTTPS.\n"
+    },
+    {
+      "title": "Test rejection of a tampered JWT signature",
+      "language": "csharp",
+      "blurb": "Test helper using the real IdentityModel validator supplied transitively by JwtBearer. Exercise an already accepted test token as a positive control before corrupting the decoded signature. Never use production tokens in fixtures.",
+      "code": "using Microsoft.IdentityModel.JsonWebTokens;\nusing Microsoft.IdentityModel.Tokens;\npublic static async Task AssertJwtTamperRejected(string validFixture, TokenValidationParameters testPolicy)\n{\n    var handler = new JsonWebTokenHandler { MapInboundClaims = false, MaximumTokenSizeInBytes = 16384 };\n    if (!(await handler.ValidateTokenAsync(validFixture, testPolicy)).IsValid) throw new InvalidOperationException(\"Positive control failed.\");\n    var parts = validFixture.Split('.');\n    if (parts.Length != 3) throw new ArgumentException(\"JWS fixture required.\");\n    var signature = Base64UrlEncoder.DecodeBytes(parts[2]);\n    if (signature.Length == 0) throw new ArgumentException(\"Signature required.\");\n    signature[0] ^= 1;\n    parts[2] = Base64UrlEncoder.Encode(signature);\n    if ((await handler.ValidateTokenAsync(string.Join('.', parts), testPolicy)).IsValid)\n        throw new InvalidOperationException(\"Tampered signature accepted.\");\n}\n"
+    }
+  ]
+};

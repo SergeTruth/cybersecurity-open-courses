@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+A practical concurrency safety baseline for C# starts with shared mutable state.
+
+2
+00:00:06.280 --> 00:00:13.240
+Identify what can change, who owns it, which operations can run at the same time, and which invariants must remain true.
+
+3
+00:00:13.340 --> 00:00:20.780
+Minimize sharing through ownership, immutability, local scope, snapshots, and message-based designs where they fit.
+
+4
+00:00:21.060 --> 00:00:23.540
+Use synchronization intentionally.
+
+5
+00:00:23.640 --> 00:00:27.320
+A lock should protect a clear critical section.
+
+6
+00:00:27.420 --> 00:00:30.140
+A semaphore should limit a clear resource.
+
+7
+00:00:30.240 --> 00:00:34.960
+A concurrent collection should match the workflow instead of becoming a shortcut around design.
+
+8
+00:00:35.060 --> 00:00:41.380
+Prefer the simplest primitive that preserves correctness and can be reviewed by the team that maintains the code.
+
+9
+00:00:41.660 --> 00:00:44.060
+Use async and await with discipline.
+
+10
+00:00:44.160 --> 00:00:54.880
+Prefer async all the way through supported call chains, avoid blocking on tasks, observe exceptions, define cancellation behavior, and avoid unmanaged fire-and-forget work.
+
+11
+00:00:54.980 --> 00:01:00.020
+Async code still needs ownership, lifecycle, and safe access to shared state.
+
+12
+00:01:00.300 --> 00:01:03.100
+Bound parallelism and background work.
+
+13
+00:01:03.200 --> 00:01:16.800
+Control fan-out, respect dependency capacity, avoid leaking request-scoped services into unmanaged work, pass cancellation tokens, set timeouts, and define cleanup or retry behavior when work stops halfway through.
+
+14
+00:01:17.080 --> 00:01:19.800
+Finally, make concurrency observable.
+
+15
+00:01:19.900 --> 00:01:31.260
+Log safe correlation and failure context, monitor queue growth, timeouts, lock contention, thread pool pressure, duplicate work, and missing updates.
+
+16
+00:01:31.360 --> 00:01:35.200
+Review concurrency behavior under production-like load when feasible.
+
+17
+00:01:35.300 --> 00:01:42.020
+The goal is code that remains correct when real systems overlap, slow down, retry, and shut down.

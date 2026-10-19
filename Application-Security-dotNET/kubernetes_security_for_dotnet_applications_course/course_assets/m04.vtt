@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Kubernetes Secrets and ConfigMaps are configuration mechanisms.
+
+2
+00:00:04.280 --> 00:00:08.760
+They are useful, but they are not a complete secret-management strategy by themselves.
+
+3
+00:00:08.860 --> 00:00:19.260
+The security result depends on access control, runtime exposure, logging behavior, rotation, backup, and the way developers and operators handle support artifacts.
+
+4
+00:00:19.540 --> 00:00:28.900
+ConfigMaps should not contain passwords, API keys, connection strings, certificates, private keys, tokens, or other sensitive values.
+
+5
+00:00:29.000 --> 00:00:37.480
+ConfigMaps are often easier to view and share than teams expect, so they should be limited to non-sensitive configuration that is appropriate for the environment.
+
+6
+00:00:37.760 --> 00:00:50.000
+Secrets can be exposed through Kubernetes API permissions, pod creation rights, mounted files, environment variables, logs, crash dumps, debug commands, and support bundles.
+
+7
+00:00:50.100 --> 00:01:01.300
+That does not mean Secrets should be avoided; it means teams need clear ownership, access control, rotation, revocation, backup, and incident response expectations.
+
+8
+00:01:01.580 --> 00:01:08.220
+Development, staging, production, and customer-specific configuration should be clearly separated.
+
+9
+00:01:08.320 --> 00:01:16.320
+ASP.NET Core configuration precedence also matters because environment values or mounted files may override reviewed settings.
+
+10
+00:01:16.420 --> 00:01:20.180
+Teams should document which sources are expected in each environment.
+
+11
+00:01:20.460 --> 00:01:32.780
+Managed identities, workload identities, external secret stores, CSI drivers, and platform-specific secret mechanisms can reduce direct secret distribution when governed correctly.
+
+12
+00:01:32.880 --> 00:01:41.920
+The strongest design avoids putting long-lived sensitive values into application images and keeps diagnostic workflows from revealing mounted secret contents.

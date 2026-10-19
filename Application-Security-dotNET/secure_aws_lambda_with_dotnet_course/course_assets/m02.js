@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": ".NET Lambda Functions, Handlers, and Packaging",
+  "graphicAlt": "A handler distinguishes its input sources, while package review includes only required artifacts and checks runtime compatibility.",
+  "narration": "A Lambda handler is the .NET method that processes an invocation event. It receives an event shape, optionally receives Lambda context, performs application work, and returns a response or completion result. Handler design should make the trust boundary visible: what came from the event, what came from configuration, and what came from trusted services.\n\n.NET Lambda functions may use managed runtimes, custom runtimes, or container image packaging depending on project requirements. The packaging choice affects startup behavior, deployment size, dependency handling, diagnostics, runtime patching, and how the team reviews the final artifact.\n\nFunction package contents matter. Dependencies, configuration files, generated output, native libraries, symbols, and accidental files can all affect security and operations. A deployment package should contain only what the function needs to run. Local secrets, test data, debug-only configuration, build caches, package-feed credentials, sample event data, and source artifacts should stay out of production packages.\n\nTrimming, Native AOT, reflection-heavy libraries, serializers, and AWS SDK dependencies deserve compatibility and observability review. A package can be smaller and faster while still failing if runtime metadata, serializers, certificates, native dependencies, or logging expectations are missing.\n\nBuild and deployment pipelines should protect package artifacts, signing credentials, deployment roles, and CI/CD logs. The package is production material, so the process that creates and promotes it should be controlled, repeatable, and readable during review.",
+  "narrationPoints": [
+    "Handler design should make the trust boundary visible: what came from the event, what came from configuration.",
+    ".NET Lambda functions may use managed runtimes, custom runtimes, or container image packaging depending on project requirements.",
+    "A deployment package should contain only what the function needs to run.",
+    "A package can be smaller and faster while still failing if runtime metadata, serializers, certificates, native dependencies.",
+    "Build and deployment pipelines should protect package artifacts, signing credentials, deployment roles, and CI/CD logs."
+  ]
+};

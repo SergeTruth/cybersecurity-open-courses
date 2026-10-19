@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.300
+ASP.NET Core can configure CORS through middleware policies, endpoint routing, and attributes.
+
+2
+00:00:07.400 --> 00:00:09.640
+The right shape depends on the application.
+
+3
+00:00:09.740 --> 00:00:15.020
+Some applications have one clearly defined browser frontend and one API surface.
+
+4
+00:00:15.120 --> 00:00:27.520
+Others have public endpoints, internal operations endpoints, SignalR hubs, Razor Pages, controller APIs, Minimal API groups, and administrative routes that need different decisions.
+
+5
+00:00:27.800 --> 00:00:31.160
+Named policies are often the most reviewable pattern.
+
+6
+00:00:31.260 --> 00:00:39.180
+A name such as ExamplePublicFrontendPolicy or ExampleAdminConsolePolicy communicates the relationship the policy is meant to support.
+
+7
+00:00:39.280 --> 00:00:40.880
+The name should not be vague.
+
+8
+00:00:40.980 --> 00:00:48.660
+Reviewers should be able to connect the policy to a real frontend, a real API surface, and a documented business requirement.
+
+9
+00:00:48.940 --> 00:00:55.500
+A global CORS policy can be appropriate when the application truly has one consistent browser access model.
+
+10
+00:00:55.600 --> 00:01:02.880
+But global policy can also overexpose unrelated endpoints when it is added only to solve one local issue.
+
+11
+00:01:02.980 --> 00:01:13.220
+Before applying policy globally, check whether health endpoints, administrative APIs, file endpoints, SignalR hubs, and other surfaces should share that policy.
+
+12
+00:01:13.500 --> 00:01:17.180
+Endpoint-specific policy can reduce accidental trust.
+
+13
+00:01:17.280 --> 00:01:26.160
+Minimal API groups, controller attributes, endpoint metadata, and route organization can make security intent visible where the endpoint is defined.
+
+14
+00:01:26.260 --> 00:01:33.540
+This is especially useful when different clients need different origins, methods, headers, or credential behavior.
+
+15
+00:01:33.640 --> 00:01:38.440
+The more varied the API surface, the more valuable explicit scoping becomes.
+
+16
+00:01:38.720 --> 00:01:41.760
+Local development origins should not drift into production.
+
+17
+00:01:41.860 --> 00:01:52.180
+Development hosts, temporary ports, preview URLs, and test origins can be useful while building, but production policy should come from approved configuration.
+
+18
+00:01:52.280 --> 00:01:58.120
+Environment-specific settings should be reviewed so convenience does not become a permanent production permission.
+
+19
+00:01:58.400 --> 00:02:01.520
+The course does not need heavy code to make the point.
+
+20
+00:02:01.620 --> 00:02:05.620
+The review question is what relationship the policy allows.
+
+21
+00:02:05.720 --> 00:02:14.920
+Which frontend origin is named, which endpoints are in scope, which methods and headers are necessary, whether credentials are allowed, and who owns the decision.
+
+22
+00:02:15.020 --> 00:02:20.620
+Configuration is safer when those answers are written into names, scope, and documentation.

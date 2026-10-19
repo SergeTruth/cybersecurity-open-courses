@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+gRPC is a service communication model, not a security boundary by itself.
+
+2
+00:00:05.800 --> 00:00:16.200
+It gives .NET teams a structured way to define remote procedures, generate clients, serialize messages with Protobuf, and communicate over HTTP/2.
+
+3
+00:00:16.300 --> 00:00:27.180
+Those features improve consistency and performance, but they do not decide who may call a service, which methods are protected, what data is valid, or how much work a call may consume.
+
+4
+00:00:27.460 --> 00:00:42.500
+Most .NET gRPC services run on ASP.NET Core, which means they can use familiar platform features such as TLS, authentication handlers, authorization policies, logging, dependency injection, and middleware.
+
+5
+00:00:42.600 --> 00:00:52.600
+The important design work is connecting those platform features to the service contract and method behavior rather than assuming that generated code or internal service location provides enough protection.
+
+6
+00:00:52.880 --> 00:01:01.280
+Service-to-service traffic still needs explicit identity, authorization, validation, resource controls, logging, and deployment review.
+
+7
+00:01:01.380 --> 00:01:09.940
+A call that originates from another service may still cross a trust boundary between workloads, teams, tenants, environments, networks, or privilege levels.
+
+8
+00:01:10.040 --> 00:01:16.920
+Internal network location alone should not be treated as proof that the caller is allowed to perform every operation.
+
+9
+00:01:17.200 --> 00:01:30.080
+A secure gRPC baseline includes transport security, service identity, method authorization, contract review, message limits, deadline behavior, safe errors, and observability.
+
+10
+00:01:30.180 --> 00:01:38.820
+These controls help teams understand who called the service, what method was used, what data was accepted, how much work was performed, and what happened when something failed.
+
+11
+00:01:39.100 --> 00:01:46.300
+The practical posture is to treat gRPC as a strong communication framework and then design the security model around it.
+
+12
+00:01:46.400 --> 00:01:58.960
+Reviewers should be able to trace the path from client configuration to channel security, identity, metadata, method policy, validation, resource limits, error behavior, and operational signals.

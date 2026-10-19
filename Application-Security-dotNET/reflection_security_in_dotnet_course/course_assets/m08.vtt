@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.460
+Reflection can make trimming and Native AOT more difficult because build tools may not know which members must be preserved.
+
+2
+00:00:07.560 --> 00:00:13.960
+If code only names a type or member dynamically, static analysis may not see that dependency.
+
+3
+00:00:14.060 --> 00:00:20.700
+A member that exists during development can be missing in a trimmed or ahead-of-time deployment.
+
+4
+00:00:20.980 --> 00:00:25.140
+Reflection-heavy code should be minimized or isolated where possible.
+
+5
+00:00:25.240 --> 00:00:33.720
+A typed design, source-generated approach, explicit registry, or documented contract can make required members visible to tools and reviewers.
+
+6
+00:00:33.820 --> 00:00:43.500
+When reflection is needed, developers should make the required members explicit through analyzable patterns, attributes, source generation, or configuration that is reviewed.
+
+7
+00:00:43.780 --> 00:00:48.820
+Suppressing trim warnings should be a last resort after the reflection behavior is understood.
+
+8
+00:00:48.920 --> 00:00:53.880
+A warning may indicate that runtime behavior depends on members the build cannot prove are present.
+
+9
+00:00:53.980 --> 00:00:58.540
+The answer should not be to hide the warning before the team knows which feature depends on it.
+
+10
+00:00:58.820 --> 00:01:02.660
+Library authors should communicate reflection requirements to callers.
+
+11
+00:01:02.760 --> 00:01:11.560
+Application developers need to know when a library expects certain constructors, properties, attributes, or methods to survive trimming.
+
+12
+00:01:11.660 --> 00:01:20.060
+Runtime failures caused by missing reflected members can affect authentication, authorization, validation, serialization, or diagnostics.
+
+13
+00:01:20.340 --> 00:01:23.620
+Deployment targets should be part of reflection design review.
+
+14
+00:01:23.720 --> 00:01:35.320
+A feature that works in a full framework-style deployment may need source generation, explicit metadata, or a different approach for trimmed, containerized, or Native AOT environments.

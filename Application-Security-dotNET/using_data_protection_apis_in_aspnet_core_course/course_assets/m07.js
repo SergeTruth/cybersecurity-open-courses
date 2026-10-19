@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Protecting Keys at Rest and Managing Access",
+  "graphicAlt": "A durable key store has limited identities, protection at rest and governed backup, with key material excluded from artifacts.",
+  "narration": "Protecting payloads is only as strong as the protection and governance of the keys. A protected payload is meant to be unreadable and tamper-evident to parties that do not have the right key material. If the key ring is exposed or writable by the wrong identities, the security and reliability assumptions around protected payloads are weakened.\n\nKey rings may be stored in a file system, cloud storage, database, Redis, or another configured provider depending on architecture. The right provider depends on deployment topology, durability needs, access control model, backup strategy, and platform operations. The storage choice should be an explicit design decision.\n\nKey storage should be durable, access-controlled, backed up where needed, and separated by environment. Keys may also need additional protection at rest through platform controls, cloud key management, certificates, or managed services. The application should not rely on accidental filesystem permissions or undocumented platform defaults for production assurance.\n\nOnly application identities and operators that need access should be able to read or modify key material. Access to key storage, backups, restore operations, rotation settings, and revocation should be limited and audited. Support tickets, screenshots, deployment artifacts, logs, and source control should not expose key material or sensitive protected values.\n\nKey access, backup, restore, rotation, revocation, and compromise response need operational ownership. Teams should know who approves changes, who receives alerts, how keys are restored, and what user impact is expected if keys are lost or revoked.",
+  "narrationPoints": [
+    "If the key ring is exposed or writable by the wrong identities, the security and reliability assumptions around protected payloads are weakened.",
+    "The right provider depends on deployment topology, durability needs, access control model, backup strategy, and platform operations.",
+    "Keys may also need additional protection at rest through platform controls, cloud key management, certificates.",
+    "Access to key storage, backups, restore operations, rotation settings, and revocation should be limited and audited.",
+    "Teams should know who approves changes, who receives alerts, how keys are restored."
+  ]
+};

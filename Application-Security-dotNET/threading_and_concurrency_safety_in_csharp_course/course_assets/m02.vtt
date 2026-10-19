@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+A thread is an execution path inside a process.
+
+2
+00:00:03.960 --> 00:00:15.960
+A C# application can have many threads doing work at the same time, including request handling, background processing, timers, continuations, garbage collection support, and other runtime activity.
+
+3
+00:00:16.060 --> 00:00:22.060
+Threading is powerful, but direct thread management is rarely the first tool application code should reach for.
+
+4
+00:00:22.340 --> 00:00:27.540
+The .NET thread pool manages worker threads for many short-running operations.
+
+5
+00:00:27.640 --> 00:00:36.760
+Instead of creating a new raw thread for every unit of work, application code usually schedules work that the runtime can execute on available worker threads.
+
+6
+00:00:36.860 --> 00:00:45.580
+This helps the runtime reuse threads and balance throughput, but it also means blocked or long-running work can affect other work that depends on the same pool.
+
+7
+00:00:45.860 --> 00:00:49.540
+Task represents asynchronous or parallel work.
+
+8
+00:00:49.640 --> 00:00:56.840
+A task may complete after an I/O operation finishes, after CPU-bound work runs, or after a continuation is scheduled.
+
+9
+00:00:56.940 --> 00:01:08.140
+The Task Parallel Library gives developers a structured way to compose work, observe completion, handle exceptions, and express concurrency without manually managing every thread.
+
+10
+00:01:08.420 --> 00:01:12.980
+Parallelism and asynchrony are related but not identical.
+
+11
+00:01:13.080 --> 00:01:19.880
+Parallelism uses multiple execution resources at the same time, usually to complete CPU-bound work faster.
+
+12
+00:01:19.980 --> 00:01:31.180
+Asynchrony allows work to wait without blocking a thread, which is especially valuable for I/O-bound operations such as database calls, file operations, web requests, and message processing.
+
+13
+00:01:31.460 --> 00:01:35.460
+async and await make asynchronous control flow easier to read.
+
+14
+00:01:35.560 --> 00:01:42.040
+They allow a method to pause while waiting for a task and resume later without holding a thread the entire time.
+
+15
+00:01:42.140 --> 00:01:53.100
+That improves scalability for many I/O-heavy server applications, but it does not remove the need to handle shared state, cancellation, exceptions, and resource limits.
+
+16
+00:01:53.380 --> 00:01:56.820
+Choosing the wrong model creates practical problems.
+
+17
+00:01:56.920 --> 00:02:01.080
+Creating raw threads for routine request work can waste resources.
+
+18
+00:02:01.180 --> 00:02:06.700
+Treating CPU-heavy work as harmless async work can still overload processors.
+
+19
+00:02:06.800 --> 00:02:11.280
+Blocking thread pool threads while waiting for I/O can reduce throughput.
+
+20
+00:02:11.380 --> 00:02:14.660
+The design should match the kind of work being performed.

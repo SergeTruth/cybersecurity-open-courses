@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Request logging helps teams understand application behavior across endpoints and services.
+
+2
+00:00:05.800 --> 00:00:17.960
+In ASP.NET Core, request logs can show which route pattern was used, which service handled the request, how long it took, what outcome category occurred, and whether downstream dependencies were involved.
+
+3
+00:00:18.060 --> 00:00:22.060
+That view is valuable for operations and security response.
+
+4
+00:00:22.340 --> 00:00:28.740
+Correlation IDs, request IDs, trace IDs, and span IDs connect related activity.
+
+5
+00:00:28.840 --> 00:00:39.720
+A single user action may pass through middleware, a controller, a service, a database call, an outbound client, a queue message, and a background worker.
+
+6
+00:00:39.820 --> 00:00:45.660
+ExampleCorrelationId gives responders a way to follow that path without recording raw payloads everywhere.
+
+7
+00:00:45.940 --> 00:00:50.500
+Request logs should show flow without exposing sensitive content.
+
+8
+00:00:50.600 --> 00:01:02.920
+Safe context often includes route pattern, HTTP method category, status category, duration, service name, dependency name, and stable non-sensitive identifiers.
+
+9
+00:01:03.020 --> 00:01:11.980
+It usually should not include full URLs, query strings, headers, cookies, request bodies, or response bodies when those values may contain sensitive data.
+
+10
+00:01:12.260 --> 00:01:17.620
+Distributed systems need consistent correlation across service-to-service calls.
+
+11
+00:01:17.720 --> 00:01:26.440
+Outbound clients, background jobs, message handlers, and scheduled tasks should preserve or create trace context in a predictable way.
+
+12
+00:01:26.540 --> 00:01:32.940
+Without consistency, each service may have logs that are locally useful but hard to combine during an incident.
+
+13
+00:01:33.220 --> 00:01:36.500
+Correlation also supports audit review and troubleshooting.
+
+14
+00:01:36.600 --> 00:01:46.680
+It lets teams connect a user report to protected logs, connect a deployment event to later failures, and connect a security event to the downstream actions that followed.
+
+15
+00:01:46.780 --> 00:01:51.740
+Good correlation reduces the urge to log sensitive payloads just to understand sequence.
+
+16
+00:01:52.020 --> 00:02:00.580
+The same conventions should apply across ASP.NET Core middleware, controllers, minimal APIs, background jobs, and outbound clients.
+
+17
+00:02:00.680 --> 00:02:07.480
+When each layer uses different context names or loses the request identity, investigations become slower and less reliable.

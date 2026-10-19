@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Resource management is a security and reliability concern because applications depend on finite capacity.
+
+2
+00:00:06.760 --> 00:00:20.040
+A C# service may look memory-safe at the language level and still fail users if it leaks handles, holds connections too long, stores unbounded data, or leaves cleanup paths unclear.
+
+3
+00:00:20.140 --> 00:00:27.100
+Availability, correctness, data safety, and operational stability all depend on resources being used deliberately.
+
+4
+00:00:27.380 --> 00:00:29.780
+Resources are broader than memory.
+
+5
+00:00:29.880 --> 00:00:46.440
+They include file handles, streams, sockets, database connections, HTTP connections, timers, locks, background tasks, queues, caches, thread pool capacity, external service capacity, and temporary storage.
+
+6
+00:00:46.540 --> 00:00:54.380
+Some are managed by the runtime, some are wrappers over operating system resources, and some exist in other systems that the application consumes.
+
+7
+00:00:54.660 --> 00:00:59.140
+Leaks and long retention can degrade performance over time.
+
+8
+00:00:59.240 --> 00:01:08.280
+A missing disposal call, an unbounded queue, a cache with no size policy, or a background operation that never stops can quietly change system behavior.
+
+9
+00:01:08.380 --> 00:01:21.260
+The symptoms may appear as slow responses, blocked users, failed jobs, corrupted workflows, locked files, delayed cleanup, or sensitive temporary data left behind after a partial failure.
+
+10
+00:01:21.540 --> 00:01:26.900
+Unbounded resource use can create risk even when no traditional vulnerability is present.
+
+11
+00:01:27.000 --> 00:01:36.760
+A feature that accepts too much work, loads too much data, fans out without a limit, retries without control, or waits forever can make the system unreliable.
+
+12
+00:01:36.860 --> 00:01:44.380
+Secure engineering treats limits, cleanup, and recovery behavior as part of the design, not as optional production tuning.
+
+13
+00:01:44.660 --> 00:01:48.180
+A practical resource review starts with five questions.
+
+14
+00:01:48.280 --> 00:01:49.880
+Who owns the resource?
+
+15
+00:01:49.980 --> 00:01:51.500
+How long should it live?
+
+16
+00:01:51.600 --> 00:01:53.280
+What code releases it?
+
+17
+00:01:53.380 --> 00:01:56.180
+What limits protect the system if usage grows?
+
+18
+00:01:56.280 --> 00:01:59.480
+What signals show whether cleanup is working in production?
+
+19
+00:01:59.580 --> 00:02:06.060
+Answering those questions early makes the application easier to test, operate, and recover.

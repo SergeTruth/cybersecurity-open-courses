@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Data Protection isolates applications and purposes so protected payloads are not broadly interchangeable.
+
+2
+00:00:06.760 --> 00:00:16.760
+That isolation is useful because most applications should not be able to read each other's cookies, tokens, or internal protected values just because they run on the same platform.
+
+3
+00:00:17.040 --> 00:00:20.800
+Some scenarios intentionally share protected payload behavior.
+
+4
+00:00:20.900 --> 00:00:28.180
+A common example is sharing authentication cookies across related ASP.NET Core applications.
+
+5
+00:00:28.280 --> 00:00:40.840
+That can support a unified user experience, but it requires careful alignment of key storage, application name, cookie name, authentication scheme, domain, path, and deployment environment.
+
+6
+00:00:41.120 --> 00:00:46.480
+Sharing should be deliberate, documented, and limited to applications that truly need it.
+
+7
+00:00:46.580 --> 00:00:56.500
+Multi-app scenarios create risk if one application has weaker access controls, weaker hosting, broader operator access, different release practices, or looser logging.
+
+8
+00:00:56.600 --> 00:01:01.800
+A shared cookie can connect the reliability and security posture of multiple apps.
+
+9
+00:01:02.080 --> 00:01:09.280
+Deployment slots and staging systems should not accidentally share production protected payload behavior unless specifically designed.
+
+10
+00:01:09.380 --> 00:01:16.420
+A staging app that can read production cookies or protected state may create confusing user behavior and governance concerns.
+
+11
+00:01:16.520 --> 00:01:20.520
+Environment boundaries should be reviewed as carefully as app boundaries.
+
+12
+00:01:20.800 --> 00:01:26.800
+The practical question is whether sharing is necessary and whether every participant meets the same expectations.
+
+13
+00:01:26.900 --> 00:01:31.460
+If the answer is yes, align the configuration intentionally.
+
+14
+00:01:31.560 --> 00:01:38.200
+If the answer is no, keep application names, key rings, cookie settings, and environments separated.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Logs should support token troubleshooting and security operations without exposing tokens.
+
+2
+00:00:05.000 --> 00:00:20.440
+Useful records may include safe identifiers, token type, issuer, audience, client ID, subject reference, key ID, result code, endpoint, correlation ID, and failure category where appropriate.
+
+3
+00:00:20.540 --> 00:00:23.500
+They should not include the full credential value.
+
+4
+00:00:23.780 --> 00:00:36.100
+Never log full access tokens, refresh tokens, ID tokens, reset tokens, confirmation tokens, authorization headers, cookie values, or raw credential-bearing payloads.
+
+5
+00:00:36.200 --> 00:00:45.080
+Redaction needs to be considered across application logs, gateway logs, structured traces, exception handling, analytics, and support tooling.
+
+6
+00:00:45.360 --> 00:01:00.560
+Monitoring should cover validation failures, issuer or audience mismatches, expired tokens, denied authorization, unusual refresh behavior, token use after logout, token use after revocation, and high-risk client patterns.
+
+7
+00:01:00.660 --> 00:01:07.460
+These signals help operators see when assumptions are failing or lifecycle controls are not behaving as expected.
+
+8
+00:01:07.740 --> 00:01:14.380
+Error messages should be useful to legitimate clients but should not reveal validation internals that are unnecessary.
+
+9
+00:01:14.480 --> 00:01:19.840
+A client may need to know that authentication failed or reauthentication is required.
+
+10
+00:01:19.940 --> 00:01:26.420
+It does not need every detail of key selection, claim interpretation, or validation configuration.
+
+11
+00:01:26.700 --> 00:01:38.060
+Incident response may include containment, key rotation, token revocation, session invalidation, user or client notification, evidence preservation, and follow-up review.
+
+12
+00:01:38.160 --> 00:01:46.640
+Teams should decide in advance who owns each step and how decisions propagate across identity providers, APIs, gateways, and application instances.
+
+13
+00:01:46.920 --> 00:01:50.440
+The defensive logging goal is evidence without exposure.
+
+14
+00:01:50.540 --> 00:02:01.260
+A good record helps answer what happened, which component decided, which safe identifier was involved, and what response was taken, while keeping the token material out of logs and support artifacts.

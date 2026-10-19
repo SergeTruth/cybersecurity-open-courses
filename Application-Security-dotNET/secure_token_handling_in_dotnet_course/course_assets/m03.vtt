@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.940
+JWT bearer tokens should be validated by maintained authentication components rather than custom parsing.
+
+2
+00:00:08.040 --> 00:00:13.640
+A JWT is a structured value, but reading its fields is not the same as trusting it.
+
+3
+00:00:13.740 --> 00:00:23.340
+Validation needs to confirm that the token came from the right authority, is intended for the right API, has not expired, and was signed in a way the application expects.
+
+4
+00:00:23.620 --> 00:00:26.740
+Issuer validation confirms who issued the token.
+
+5
+00:00:26.840 --> 00:00:31.400
+Audience validation confirms that the token was intended for this API or resource.
+
+6
+00:00:31.500 --> 00:00:42.380
+These checks matter because a token created for one client, API, environment, or identity provider should not be accepted somewhere else merely because its contents are readable.
+
+7
+00:00:42.660 --> 00:00:47.780
+Lifetime validation confirms expiration behavior and token freshness according to policy.
+
+8
+00:00:47.880 --> 00:00:51.080
+Clock skew should be deliberate rather than accidental.
+
+9
+00:00:51.180 --> 00:00:58.300
+A small allowance may be operationally useful, but broad or unreviewed skew can make token lifetime less meaningful than the team intended.
+
+10
+00:00:58.580 --> 00:01:04.820
+Signature and signing key validation confirm that the token has not been altered and was signed by a trusted key.
+
+11
+00:01:04.920 --> 00:01:07.960
+Algorithm expectations should also be explicit.
+
+12
+00:01:08.060 --> 00:01:13.420
+The application should not accept unexpected signing behavior because a token header asked for it.
+
+13
+00:01:13.520 --> 00:01:18.960
+Trust should come from configuration and validated metadata, not from untrusted token content.
+
+14
+00:01:19.240 --> 00:01:22.760
+Claims should be interpreted only after validation succeeds.
+
+15
+00:01:22.860 --> 00:01:27.420
+Before validation, claim values are just data inside a presented token.
+
+16
+00:01:27.520 --> 00:01:37.680
+After validation, the application can map claims into identity and policy decisions according to issuer, audience, token type, and business context.
+
+17
+00:01:37.960 --> 00:01:42.040
+Authentication failure behavior should be predictable and safe.
+
+18
+00:01:42.140 --> 00:01:46.780
+Clients need consistent outcomes, and operators need protected diagnostic context.
+
+19
+00:01:46.880 --> 00:01:56.240
+User-facing or client-facing errors should not reveal unnecessary validation internals, while logs can record safe failure categories for troubleshooting.

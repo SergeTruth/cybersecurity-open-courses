@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Cross-Site Request Forgery, or CSRF, is a browser-session risk involving unwanted state-changing actions.
+
+2
+00:00:06.760 --> 00:00:10.600
+The key idea is not that a user is unknown to the application.
+
+3
+00:00:10.700 --> 00:00:12.860
+The user may already be authenticated.
+
+4
+00:00:12.960 --> 00:00:18.720
+The issue is that an authenticated browser request is not always an intended request from the user.
+
+5
+00:00:19.000 --> 00:00:25.000
+CSRF matters most when a browser automatically includes existing credentials, especially cookies.
+
+6
+00:00:25.100 --> 00:00:32.300
+A server-rendered ASP.NET Core application may rely on authentication cookies for a signed-in session.
+
+7
+00:00:32.400 --> 00:00:44.160
+When the browser sends those cookies according to cookie rules, the server can identify the user, but it still needs a way to know whether a protected state-changing action came from the intended application interaction.
+
+8
+00:00:44.440 --> 00:00:47.880
+State-changing actions deserve special attention.
+
+9
+00:00:47.980 --> 00:01:00.140
+Creating, modifying, deleting, submitting, approving, purchasing, transferring, configuring, or otherwise changing server-side state has different risk than reading a public page.
+
+10
+00:01:00.240 --> 00:01:07.520
+A request that changes data should meet stronger expectations than a request that only reads a low-risk resource.
+
+11
+00:01:07.800 --> 00:01:10.680
+The defensive idea is user intent.
+
+12
+00:01:10.780 --> 00:01:14.060
+Authentication answers who the browser session belongs to.
+
+13
+00:01:14.160 --> 00:01:17.920
+Authorization answers whether that user may perform the action.
+
+14
+00:01:18.020 --> 00:01:25.380
+CSRF prevention adds a signal that the protected request came through the intended application flow.
+
+15
+00:01:25.480 --> 00:01:29.000
+Those controls are related, but they answer different questions.
+
+16
+00:01:29.280 --> 00:01:35.040
+In ASP.NET Core, CSRF prevention is part of normal application design.
+
+17
+00:01:35.140 --> 00:01:47.940
+Teams should review state-changing endpoints, cookie behavior, form conventions, JavaScript clients, SameSite settings, CORS assumptions, Data Protection configuration, and logging.
+
+18
+00:01:48.040 --> 00:01:51.320
+The goal is not a fear-based checklist.
+
+19
+00:01:51.420 --> 00:01:54.940
+The goal is predictable request handling for browser-based workflows.

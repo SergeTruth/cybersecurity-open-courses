@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.180
+Locks protect critical sections where shared state must be read or changed consistently.
+
+2
+00:00:06.280 --> 00:00:14.040
+A critical section is the part of the code where the application needs exclusive access to a resource or invariant.
+
+3
+00:00:14.140 --> 00:00:16.380
+The lock does not make the code faster.
+
+4
+00:00:16.480 --> 00:00:20.960
+It makes a specific region of code run with a specific access rule.
+
+5
+00:00:21.240 --> 00:00:25.160
+The C# lock statement is a common way to provide exclusive access.
+
+6
+00:00:25.260 --> 00:00:30.780
+Traditional lock behavior is based on Monitor, which enters and exits a protected region.
+
+7
+00:00:30.880 --> 00:00:39.920
+Newer C# and .NET versions may also provide System.Threading.Lock for clearer synchronization in codebases that target those runtimes.
+
+8
+00:00:40.020 --> 00:00:46.900
+The important design point is still the same: protect the state with a clear private synchronization object.
+
+9
+00:00:47.180 --> 00:00:52.060
+Lock only on private or internal lock objects that the owning code controls.
+
+10
+00:00:52.160 --> 00:00:58.960
+Avoid locking on public objects, strings, Type objects, or objects that external code can also lock.
+
+11
+00:00:59.060 --> 00:01:08.340
+If unrelated code can acquire the same lock without coordination, the application can become difficult to reason about and may block in surprising places.
+
+12
+00:01:08.620 --> 00:01:11.100
+Keep lock scopes small and reviewable.
+
+13
+00:01:11.200 --> 00:01:16.880
+A lock should cover the state transition that needs protection, not an entire workflow by habit.
+
+14
+00:01:16.980 --> 00:01:25.700
+Avoid slow I/O, network calls, database calls, logging-heavy work, user callbacks, or arbitrary event handlers while holding a lock.
+
+15
+00:01:25.800 --> 00:01:32.200
+The longer a lock is held, the more likely it is to create contention or unexpected dependency chains.
+
+16
+00:01:32.480 --> 00:01:41.520
+SemaphoreSlim can limit concurrency in asynchronous-friendly workflows, such as allowing only a certain number of operations to use a limited resource at once.
+
+17
+00:01:41.620 --> 00:01:47.140
+It still requires careful release behavior, usually with a try-finally pattern around the protected work.
+
+18
+00:01:47.240 --> 00:01:53.320
+A leaked semaphore slot can quietly reduce capacity until the application appears stuck.
+
+19
+00:01:53.600 --> 00:01:58.160
+Reader-writer locks can help some read-heavy scenarios, but they add complexity.
+
+20
+00:01:58.260 --> 00:02:04.820
+They require careful understanding of read locks, write locks, upgrades, fairness, and contention.
+
+21
+00:02:04.920 --> 00:02:09.480
+Use them only when the read-heavy design is clear and measurement supports the complexity.
+
+22
+00:02:09.760 --> 00:02:15.760
+Choose the simplest synchronization primitive that preserves correctness and can be reviewed.
+
+23
+00:02:15.860 --> 00:02:23.460
+A clear lock around a small invariant is often better than a clever mix of primitives that few developers can safely modify later.

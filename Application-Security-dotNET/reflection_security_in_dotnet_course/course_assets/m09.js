@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Diagnostics, Errors, and Production Review",
+  "graphicAlt": "Reflection failures produce safe user errors and sanitized logs, while governed diagnostics and ownership support production review.",
+  "narration": "Reflection-related failures often produce verbose type, member, assembly, binding, and stack information. That information can be useful to developers and operators, but it should not be sent broadly to clients or low-trust users. Error responses should be useful without exposing internal structure.\n\nDo not expose internal type names, assembly paths, plugin paths, secrets, connection strings, tenant details, or raw reflected values to clients. Logs should capture safe context such as operation name, allowed type key, plugin ID when appropriate, failure category, correlation ID, environment, and safe version identifiers.\n\nAdmin-only diagnostics should be access-controlled and should not become public debug endpoints. Diagnostic tools that list loaded assemblies, plugins, handlers, attributes, or runtime registrations need environment scoping, redaction, and ownership. Production operators may need visibility, but that visibility should be governed.\n\nProduction review should identify every place reflection is used, why it is needed, what input controls it, what code may be invoked, what data may be exposed, and how failures are logged. This is especially important for plugin systems, command dispatchers, object mappers, serializers, and framework automation that creates behavior indirectly.\n\nReflection-heavy features should have owners, test coverage, dependency review, deployment review, and rollback expectations. The goal is not to remove every reflection call. The goal is to know which ones matter, why they exist, and how they behave when something goes wrong.",
+  "narrationPoints": [
+    "Reflection-related failures often produce verbose type, member, assembly, binding, and stack information.",
+    "Logs should capture safe context such as operation name, allowed type key, plugin ID when appropriate, failure category, correlation ID.",
+    "Admin-only diagnostics should be access-controlled and should not become public debug endpoints.",
+    "Production review should identify every place reflection is used, why it is needed, what input controls it, what code may be invoked.",
+    "Reflection-heavy features should have owners, test coverage, dependency review, deployment review, and rollback expectations."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.580
+Network resources are finite.
+
+2
+00:00:02.680 --> 00:00:16.920
+HTTP connections, sockets, DNS behavior, proxy settings, TLS sessions, remote service quotas, and connection pools all influence how an application behaves under normal load and during dependency problems.
+
+3
+00:00:17.020 --> 00:00:22.540
+A reliable C# service treats outbound communication as a managed resource.
+
+4
+00:00:22.820 --> 00:00:27.940
+HttpClient lifetime deserves review because it is more than a request wrapper.
+
+5
+00:00:28.040 --> 00:00:39.800
+Handler lifetime, connection pooling, DNS refresh, proxy behavior, cookies, certificates, redirects, authentication state, and default headers can all be affected by how clients and handlers are created.
+
+6
+00:00:39.900 --> 00:00:48.620
+Good designs use long-lived clients with managed handler lifetime or IHttpClientFactory patterns that fit the application.
+
+7
+00:00:48.900 --> 00:00:56.900
+Creating and disposing clients for every request without review can contribute to socket pressure and unpredictable connection behavior.
+
+8
+00:00:57.000 --> 00:01:07.560
+At the same time, sharing a client too broadly can accidentally share headers, cookies, tokens, or authentication assumptions across unrelated outbound calls.
+
+9
+00:01:07.660 --> 00:01:11.980
+The right lifetime depends on the trust boundary and configuration needs of the dependency.
+
+10
+00:01:12.260 --> 00:01:17.060
+Outbound calls should have timeouts, cancellation, and bounded concurrency.
+
+11
+00:01:17.160 --> 00:01:24.760
+A dependency that slows down should not cause an unlimited number of callers, queued operations, or background jobs to wait indefinitely.
+
+12
+00:01:24.860 --> 00:01:31.660
+Timeouts should be paired with cleanup and safe error handling so the application remains consistent when a call does not complete.
+
+13
+00:01:31.940 --> 00:01:36.980
+Retries, fan-out, and polling can amplify load if they are not controlled.
+
+14
+00:01:37.080 --> 00:01:41.480
+Retry policies should use limits and spacing that respect the dependency.
+
+15
+00:01:41.580 --> 00:01:53.820
+Calls to external APIs, storage services, queues, identity systems, and internal services should consider capacity, rate limits, tenant boundaries, and operational agreements.
+
+16
+00:01:54.100 --> 00:01:56.980
+Network diagnostics should be safe by design.
+
+17
+00:01:57.080 --> 00:02:08.920
+URLs with credentials, authorization headers, cookies, tokens, client certificates, sensitive request bodies, and raw response bodies should not be casually logged.
+
+18
+00:02:09.020 --> 00:02:15.900
+Logs should capture enough context to diagnose failures without spreading sensitive data into monitoring and support systems.

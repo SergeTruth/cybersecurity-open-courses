@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Resource Requests, Limits, Scaling, and Backpressure",
+  "graphicAlt": "Bounded queues, concurrency, cancellation and resource limits shape safe overload behavior alongside measured scaling.",
+  "narration": "Resource settings are security and reliability controls. CPU and memory requests help Kubernetes schedule pods onto nodes with enough expected capacity. Limits affect runtime behavior when a workload consumes more than it was allowed. These settings should reflect real .NET application behavior, not guesses copied from another service.\n\nASP.NET Core workloads, background services, upload processing, caches, queues, parallel fan-out, and dependency calls can all create resource pressure. Horizontal scaling can add replicas, but it does not fix unsafe per-pod behavior such as unbounded queues, unrestricted parallelism, large in-memory buffers, or work that waits indefinitely.\n\nAutoscaling signals should reflect useful workload indicators. CPU and memory are common, but queue length, request latency, dependency pressure, or custom business metrics may better describe some systems. The scaling plan should be paired with dependency capacity and application limits.\n\nBackpressure, request limits, queue limits, timeouts, cancellation, and rate limiting should be designed with Kubernetes resource settings. The application should know what happens when it cannot accept more work, and callers should receive predictable responses rather than hidden buildup.\n\nResource pressure should be observable through metrics, logs, events, restarts, throttling, and OOM-related signals. Developers and operators should be able to tell whether a pod is under-provisioned, over-consuming, waiting on dependencies, or retaining memory longer than intended.",
+  "narrationPoints": [
+    "Limits affect runtime behavior when a workload consumes more than it was allowed.",
+    "ASP.NET Core workloads, background services, upload processing, caches, queues, parallel fan-out, and dependency calls can all create resource pressure.",
+    "The scaling plan should be paired with dependency capacity and application limits.",
+    "The application should know what happens when it cannot accept more work, and callers should receive predictable responses rather than hidden buildup.",
+    "Resource pressure should be observable through metrics, logs, events, restarts, throttling, and OOM-related signals."
+  ]
+};

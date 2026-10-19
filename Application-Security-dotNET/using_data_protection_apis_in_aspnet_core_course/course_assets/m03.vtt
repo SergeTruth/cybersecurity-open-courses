@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+ASP.NET Core uses Data Protection behind several framework features.
+
+2
+00:00:05.320 --> 00:00:10.280
+Developers may depend on it even when they never call IDataProtectionProvider directly.
+
+3
+00:00:10.380 --> 00:00:17.900
+That is why Data Protection configuration should be treated as part of application reliability and security, not as an invisible implementation detail.
+
+4
+00:00:18.180 --> 00:00:21.700
+Authentication cookies depend on protected payloads.
+
+5
+00:00:21.800 --> 00:00:27.560
+The framework protects authentication ticket data so the server can later validate and read it.
+
+6
+00:00:27.660 --> 00:00:36.940
+If the application loses access to the keys needed to unprotect those cookies, users may be signed out unexpectedly or moved through sign-in flows more often than intended.
+
+7
+00:00:37.220 --> 00:00:42.580
+Antiforgery tokens use protected values to validate browser request intent.
+
+8
+00:00:42.680 --> 00:00:51.320
+ASP.NET Core Identity workflows, such as password reset and email confirmation, may also rely on protected token behavior.
+
+9
+00:00:51.420 --> 00:00:58.620
+TempData and other protected state mechanisms may depend on Data Protection depending on configuration and framework usage.
+
+10
+00:00:58.900 --> 00:01:12.100
+Failures often appear as ordinary user experience problems: users are logged out, forms fail validation, confirmation links stop working, reset links no longer validate, or temporary state disappears.
+
+11
+00:01:12.200 --> 00:01:21.720
+The root cause may be key-ring location, application name, hosting topology, deployment slot behavior, or lost storage.
+
+12
+00:01:22.000 --> 00:01:27.840
+For production systems, Data Protection is both a security feature and an availability dependency.
+
+13
+00:01:27.940 --> 00:01:39.060
+The configuration needs owners, documentation, monitoring, and deployment review so protected framework payloads remain readable by the intended application instances for the intended period.

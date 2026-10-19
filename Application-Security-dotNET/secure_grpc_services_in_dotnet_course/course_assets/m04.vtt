@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Authentication answers the question, who is calling this service.
+
+2
+00:00:03.960 --> 00:00:12.120
+In .NET gRPC services, ASP.NET Core authentication can associate a caller identity with a gRPC call.
+
+3
+00:00:12.220 --> 00:00:20.860
+The identity may come from bearer tokens, client certificates, or another configured mechanism, depending on the architecture and operational model.
+
+4
+00:00:21.140 --> 00:00:26.580
+Authorization answers a separate question: what service or method is this caller allowed to use.
+
+5
+00:00:26.680 --> 00:00:31.240
+A caller may be known to the system and still not be allowed to call every method.
+
+6
+00:00:31.340 --> 00:00:39.260
+A background worker, reporting service, administrative tool, tenant service, or partner integration may each need different access.
+
+7
+00:00:39.540 --> 00:00:44.660
+Authentication and authorization can apply at the service level and at the method level.
+
+8
+00:00:44.760 --> 00:00:51.480
+A whole service may require identity, while individual methods may require different policies based on sensitivity.
+
+9
+00:00:51.580 --> 00:01:02.860
+Administrative, export, financial, configuration, tenant, and destructive operations need explicit review because their impact is usually broader than ordinary read operations.
+
+10
+00:01:03.140 --> 00:01:10.980
+By default, teams should not assume a method is protected unless authentication and authorization are explicitly required.
+
+11
+00:01:11.080 --> 00:01:19.000
+Generated clients, internal naming, network location, or service ownership do not replace a clear access rule.
+
+12
+00:01:19.100 --> 00:01:25.500
+The protection should be visible in code, configuration, or policy that reviewers can inspect.
+
+13
+00:01:25.780 --> 00:01:35.380
+Policy-based authorization is useful when access depends on service roles, tenant context, scopes, claims, environment, or administrative authority.
+
+14
+00:01:35.480 --> 00:01:42.920
+A meaningful policy name helps reviewers understand the intent, and a central policy definition helps keep repeated rules consistent.
+
+15
+00:01:43.200 --> 00:01:46.400
+Resource-sensitive authorization may also be needed.
+
+16
+00:01:46.500 --> 00:01:52.580
+A caller may be allowed to use a method in general but not for every tenant, account, record, or workflow state.
+
+17
+00:01:52.680 --> 00:01:58.920
+The service method should verify the specific requested resource before returning data or changing state.
+
+18
+00:01:59.200 --> 00:02:11.520
+A secure gRPC design lets reviewers trace a call from transport identity to authentication result, authorization policy, method behavior, validation, and logging.
+
+19
+00:02:11.620 --> 00:02:17.060
+That traceability is what prevents identity from becoming a vague assumption instead of an enforceable control.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Configuring Data Protection for Deployment",
+  "graphicAlt": "Production instances share durable compatible keys and application identity, while staging uses a separate boundary.",
+  "narration": "Default Data Protection behavior depends on the operating environment. Defaults may be acceptable for local development or a simple single-machine application. Production deployments often need explicit configuration because hosting, storage, scaling, and deployment patterns affect whether keys are durable and shared by the right instances.\n\nMulti-instance applications need shared, durable key rings when instances must read each other's protected payloads. If one instance protects an authentication cookie and another instance receives the next request, both instances need access to compatible keys and the same intended application identity. Without that alignment, users can see intermittent sign-outs or failed validation.\n\nContainers, ephemeral file systems, blue-green deployments, deployment slots, server farms, and scaled-out services require configuration review. Unstable key storage can silently invalidate cookies or workflow tokens after restart, redeploy, scale-out, or slot swap. That kind of failure can look like an authentication problem while the real issue is key persistence.\n\nSetApplicationName can be important when multiple app instances must intentionally share protected payload behavior. The application name helps define isolation. It should not be changed casually, and it should not be shared across environments unless that sharing is specifically intended and reviewed.\n\nEnvironment separation matters. Development, staging, and production should not casually share keys or application identity. Configuration should be documented and owned by the application or platform team, including key location, access control, backup, deployment behavior, and recovery expectations.",
+  "narrationPoints": [
+    "Production deployments often need explicit configuration because hosting, storage, scaling.",
+    "If one instance protects an authentication cookie and another instance receives the next request.",
+    "Unstable key storage can silently invalidate cookies or workflow tokens after restart, redeploy, scale-out.",
+    "Unstable key storage can silently invalidate cookies or workflow tokens after restart, redeploy, scale-out, or slot swap.",
+    "Configuration should be documented and owned by the application or platform team, including key location, access control, backup."
+  ]
+};

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Authentication answers the question, who is this user or service.
+
+2
+00:00:04.920 --> 00:00:09.560
+It does not answer the question, what is this identity allowed to do.
+
+3
+00:00:09.660 --> 00:00:21.180
+Keeping that separation clear prevents a common design mistake: treating a successful login as permission to view every record, perform every action, or enter administrative workflows.
+
+4
+00:00:21.460 --> 00:00:30.180
+For most ASP.NET Core applications, mature identity services and framework-supported flows are safer than custom authentication.
+
+5
+00:00:30.280 --> 00:00:54.920
+ASP.NET Core Identity, external identity providers, OpenID Connect integrations, enterprise identity platforms, and managed authentication services handle difficult lifecycle details that are easy to underestimate: enrollment, password storage, account recovery, token issuance, MFA, sign-out, revocation, audit events, and configuration changes.
+
+6
+00:00:55.200 --> 00:01:01.280
+Avoid homegrown password storage, custom token formats, and improvised session logic.
+
+7
+00:01:01.380 --> 00:01:07.620
+Authentication systems have long lifetimes, many edge cases, and high consequences when misunderstood.
+
+8
+00:01:07.720 --> 00:01:14.200
+If the application owns account credentials, use supported mechanisms and current organizational policy.
+
+9
+00:01:14.300 --> 00:01:23.420
+If an external provider owns identity, keep the application focused on validating the provider relationship and enforcing local authorization decisions.
+
+10
+00:01:23.700 --> 00:01:27.140
+Cookies and sessions need deliberate settings.
+
+11
+00:01:27.240 --> 00:01:40.840
+Secure transport, HttpOnly, SameSite behavior, expiration, sliding renewal, revocation, sign-out, and idle timeout should match the application risk and user experience.
+
+12
+00:01:40.940 --> 00:01:49.820
+Session material should not be exposed to client-side script when that exposure is not needed, and authentication cookies should not be treated as ordinary application data.
+
+13
+00:01:50.100 --> 00:01:54.420
+Account recovery and lifecycle events deserve the same review as login.
+
+14
+00:01:54.520 --> 00:02:08.040
+Password resets, MFA changes, email verification, administrator resets, device trust changes, account lockout, reactivation, and offboarding can all affect whether identity proof remains reliable.
+
+15
+00:02:08.140 --> 00:02:17.500
+These flows should be logged, rate-limited where appropriate, and designed so support operations do not become a bypass around normal identity controls.
+
+16
+00:02:17.780 --> 00:02:21.300
+Authentication diagnostics must be handled carefully.
+
+17
+00:02:21.400 --> 00:02:32.440
+Logs, exception pages, analytics, and support tools should not capture passwords, tokens, reset links, cookie values, secrets, or full identity assertions.
+
+18
+00:02:32.540 --> 00:02:40.700
+Operators need enough information to troubleshoot authentication events, but not the sensitive material that would let someone impersonate a user or service.

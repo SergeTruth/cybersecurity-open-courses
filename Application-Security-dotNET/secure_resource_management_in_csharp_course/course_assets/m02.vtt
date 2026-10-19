@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.060
+Resource safety starts with ownership.
+
+2
+00:00:03.160 --> 00:00:13.800
+The component that creates a resource, opens a connection, receives a stream, rents a buffer, or takes responsibility for an object needs to know whether it owns that resource.
+
+3
+00:00:13.900 --> 00:00:19.340
+Ownership decides which code releases the resource and how long the resource should remain available.
+
+4
+00:00:19.620 --> 00:00:24.100
+In C#, IDisposable provides a standard pattern for deterministic cleanup.
+
+5
+00:00:24.200 --> 00:00:37.560
+It is used by many types that wrap unmanaged handles, file resources, network resources, timers, transactions, pooled values, or other objects that should be released before garbage collection happens.
+
+6
+00:00:37.660 --> 00:00:43.660
+Disposal is not only about memory; it is also about external capacity and predictable release.
+
+7
+00:00:43.940 --> 00:00:50.900
+The using statement and using declaration help ensure disposal occurs when control leaves a scope, including when exceptions occur.
+
+8
+00:00:51.000 --> 00:00:57.400
+That makes cleanup visible in the code and reduces the chance that error paths leave resources behind.
+
+9
+00:00:57.500 --> 00:01:06.300
+The pattern is especially useful for short-lived streams, commands, readers, transactions, timers, and other scoped objects.
+
+10
+00:01:06.580 --> 00:01:09.940
+Disposal order matters when resources depend on each other.
+
+11
+00:01:10.040 --> 00:01:14.280
+A stream wrapper may need to flush before its underlying stream is closed.
+
+12
+00:01:14.380 --> 00:01:17.660
+A reader may depend on a command or connection.
+
+13
+00:01:17.760 --> 00:01:23.120
+A transaction may need a clear commit or rollback decision before the connection returns to a pool.
+
+14
+00:01:23.220 --> 00:01:28.740
+Good code makes those relationships explicit rather than relying on incidental order.
+
+15
+00:01:29.020 --> 00:01:32.460
+Resource management also means avoiding premature disposal.
+
+16
+00:01:32.560 --> 00:01:37.520
+A method should not dispose an object it does not own while another component still uses it.
+
+17
+00:01:37.620 --> 00:01:45.300
+Passing disposable objects across layers requires agreement about ownership transfer, shared use, and release responsibility.
+
+18
+00:01:45.400 --> 00:01:51.800
+Static fields and long-lived singletons that hold disposables deserve deliberate lifetime review.
+
+19
+00:01:52.080 --> 00:01:55.440
+Garbage collection does not remove the need for this review.
+
+20
+00:01:55.540 --> 00:02:06.500
+The runtime can reclaim managed memory eventually, but it does not promise immediate release of file handles, sockets, external capacity, locks, or service-side state.
+
+21
+00:02:06.600 --> 00:02:11.960
+Deterministic cleanup is the safer baseline when the resource has operational consequences.

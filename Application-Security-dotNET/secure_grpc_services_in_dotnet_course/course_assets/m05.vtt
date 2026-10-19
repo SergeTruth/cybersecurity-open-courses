@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+gRPC metadata is commonly used to carry call-related information.
+
+2
+00:00:05.080 --> 00:00:15.720
+Depending on configuration, it may include authentication-related headers, correlation values, tenant hints, client identifiers, routing context, or operational tags.
+
+3
+00:00:15.820 --> 00:00:22.860
+Metadata is useful, but it should be treated as security-sensitive because it can influence how a service interprets a call.
+
+4
+00:00:23.140 --> 00:00:26.500
+Metadata and call credentials should be handled carefully.
+
+5
+00:00:26.600 --> 00:00:37.080
+Tokens, secrets, session identifiers, client certificate details, and sensitive call context should not be written to ordinary logs or copied into errors.
+
+6
+00:00:37.180 --> 00:00:45.900
+When teams need diagnostic visibility, they should log safe categories, correlation identifiers, and policy outcomes rather than raw sensitive values.
+
+7
+00:00:46.180 --> 00:00:56.660
+The gRPC client factory can centralize channel settings, logical clients, credentials, handlers, deadline propagation, and environment-specific configuration.
+
+8
+00:00:56.760 --> 00:01:05.640
+Centralization helps review because teams can see how clients are constructed and which defaults apply across services instead of hunting for one-off channel setup in many code paths.
+
+9
+00:01:05.920 --> 00:01:10.560
+Authentication credentials must not be sent over insecure channels in production.
+
+10
+00:01:10.660 --> 00:01:19.540
+The client configuration should make secure transport expectations explicit, and environments should fail safely when a required credential or channel setting is missing.
+
+11
+00:01:19.640 --> 00:01:23.560
+Development shortcuts should not quietly become production behavior.
+
+12
+00:01:23.840 --> 00:01:28.480
+Channel configuration should be owned, reviewed, and environment-aware.
+
+13
+00:01:28.580 --> 00:01:42.260
+Endpoint addresses, TLS expectations, credentials, client certificates, retry settings, message limits, deadlines, and logging behavior all affect security and reliability.
+
+14
+00:01:42.360 --> 00:01:47.960
+A logical gRPC client is part of the system boundary, not just a generated class.

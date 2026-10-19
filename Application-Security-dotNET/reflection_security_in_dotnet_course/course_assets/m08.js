@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Trimming, Native AOT, and Reflection Compatibility",
+  "graphicAlt": "Explicit member requirements support build analysis and deployment testing; trimming warnings return to review rather than being hidden.",
+  "narration": "Reflection can make trimming and Native AOT more difficult because build tools may not know which members must be preserved. If code only names a type or member dynamically, static analysis may not see that dependency. A member that exists during development can be missing in a trimmed or ahead-of-time deployment.\n\nReflection-heavy code should be minimized or isolated where possible. A typed design, source-generated approach, explicit registry, or documented contract can make required members visible to tools and reviewers. When reflection is needed, developers should make the required members explicit through analyzable patterns, attributes, source generation, or configuration that is reviewed.\n\nSuppressing trim warnings should be a last resort after the reflection behavior is understood. A warning may indicate that runtime behavior depends on members the build cannot prove are present. The answer should not be to hide the warning before the team knows which feature depends on it.\n\nLibrary authors should communicate reflection requirements to callers. Application developers need to know when a library expects certain constructors, properties, attributes, or methods to survive trimming. Runtime failures caused by missing reflected members can affect authentication, authorization, validation, serialization, or diagnostics.\n\nDeployment targets should be part of reflection design review. A feature that works in a full framework-style deployment may need source generation, explicit metadata, or a different approach for trimmed, containerized, or Native AOT environments.",
+  "narrationPoints": [
+    "Reflection can make trimming and Native AOT more difficult because build tools may not know.",
+    "When reflection is needed, developers should make the required members explicit through analyzable patterns, attributes, source generation.",
+    "Suppressing trim warnings should be a last resort after the reflection behavior is understood.",
+    "Runtime failures caused by missing reflected members can affect authentication, authorization, validation, serialization, or diagnostics.",
+    "Deployment targets should be part of reflection design review."
+  ]
+};

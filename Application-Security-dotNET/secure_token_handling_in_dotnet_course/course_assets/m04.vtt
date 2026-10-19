@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Tokens should be transmitted only over protected channels in production.
+
+2
+00:00:05.320 --> 00:00:14.120
+A token-bearing request should be treated as sensitive while it moves between client, service, proxy, gateway, and hosting infrastructure.
+
+3
+00:00:14.220 --> 00:00:19.660
+Transport choices should match the value of the token and the sensitivity of the resource it can access.
+
+4
+00:00:19.940 --> 00:00:27.860
+Authorization headers, secure cookies, and backend-mediated patterns have different exposure and CSRF implications.
+
+5
+00:00:27.960 --> 00:00:31.000
+Authorization headers are common for API clients.
+
+6
+00:00:31.100 --> 00:00:39.420
+Cookies can integrate with browser sessions but require careful cookie settings and request-intent protection for unsafe browser workflows.
+
+7
+00:00:39.520 --> 00:00:45.760
+Backend-for-frontend designs can reduce direct browser handling of sensitive tokens in some architectures.
+
+8
+00:00:46.040 --> 00:00:51.800
+Browser storage such as localStorage and sessionStorage is not a trusted secret boundary.
+
+9
+00:00:51.900 --> 00:01:02.940
+It may be useful for some application state, but teams should be cautious about storing sensitive tokens where browser-side code, extensions, or client-side dependencies may interact with them.
+
+10
+00:01:03.040 --> 00:01:06.480
+Browser applications require a deliberate token-handling model.
+
+11
+00:01:06.760 --> 00:01:12.760
+Mobile, desktop, service, and browser clients have different storage and retrieval risks.
+
+12
+00:01:12.860 --> 00:01:18.140
+A server-side service may use managed identity or protected configuration.
+
+13
+00:01:18.240 --> 00:01:21.440
+A mobile client may rely on platform storage.
+
+14
+00:01:21.540 --> 00:01:25.300
+A browser client has a very different exposure profile.
+
+15
+00:01:25.400 --> 00:01:29.080
+One token storage rule rarely fits every client type.
+
+16
+00:01:29.360 --> 00:01:39.680
+Tokens should not be placed in URLs, query strings, analytics data, screenshots, referrer paths, frontend configuration, public repositories, or downloadable assets.
+
+17
+00:01:39.780 --> 00:01:46.340
+These locations are commonly copied, logged, cached, or shared as part of normal operations.
+
+18
+00:01:46.620 --> 00:01:55.980
+Cookie-based token handling requires review of Secure, HttpOnly, SameSite, domain and path scope, lifetime, and CSRF behavior.
+
+19
+00:01:56.080 --> 00:02:05.360
+A cookie may be convenient, but the application must understand when the browser sends it and how server-side logic validates user intent for state changes.

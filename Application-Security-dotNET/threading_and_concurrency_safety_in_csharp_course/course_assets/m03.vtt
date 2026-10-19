@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Shared mutable state is data that more than one operation can read or write.
+
+2
+00:00:05.320 --> 00:00:16.200
+It may be an in-memory field, a static cache, a collection, a database row, a file, a queue message, a counter, a session record, or a business workflow state.
+
+3
+00:00:16.300 --> 00:00:20.620
+The state does not have to live in memory to create a concurrency problem.
+
+4
+00:00:20.900 --> 00:00:26.900
+A race condition occurs when correctness depends on timing or interleaving between operations.
+
+5
+00:00:27.000 --> 00:00:35.960
+If one operation reads a value, another changes it, and the first continues as if the old value is still current, the application may violate its own rules.
+
+6
+00:00:36.060 --> 00:00:40.940
+These defects are hard to reproduce because a small timing change can hide or reveal the issue.
+
+7
+00:00:41.220 --> 00:00:44.580
+Read-modify-write sequences are especially sensitive.
+
+8
+00:00:44.680 --> 00:00:52.280
+Checking a value and then changing it is often intended to be one logical operation, but the machine may perform it as multiple steps.
+
+9
+00:00:52.380 --> 00:00:59.900
+Without a synchronization rule, two operations can both observe the same starting state and both make decisions that were only valid for one operation.
+
+10
+00:01:00.180 --> 00:01:04.820
+Invariants are the statements that must remain true even under concurrent access.
+
+11
+00:01:04.920 --> 00:01:09.080
+An account balance should not be derived from missing transactions.
+
+12
+00:01:09.180 --> 00:01:11.500
+A job should not be completed twice.
+
+13
+00:01:11.600 --> 00:01:13.280
+A quota should not become negative.
+
+14
+00:01:13.380 --> 00:01:17.460
+A cache should not expose partially initialized objects.
+
+15
+00:01:17.560 --> 00:01:22.120
+Naming the invariant helps the team decide which operations must be protected together.
+
+16
+00:01:22.400 --> 00:01:25.200
+The best synchronization is often less sharing.
+
+17
+00:01:25.300 --> 00:01:36.420
+Immutability, ownership, message passing, local variables, snapshots, narrow scope, and clear state transitions all reduce the number of places where timing matters.
+
+18
+00:01:36.520 --> 00:01:45.080
+If only one component owns the state, other components can interact through a controlled interface instead of reaching into the data directly.
+
+19
+00:01:45.360 --> 00:01:49.600
+Document which code owns a piece of state and which rule protects it.
+
+20
+00:01:49.700 --> 00:01:57.860
+That rule might be a lock, a database transaction, a queue ordering guarantee, an atomic operation, a channel, or an immutable snapshot.
+
+21
+00:01:57.960 --> 00:02:02.120
+Reviewers should not have to infer the ownership model from scattered reads and writes.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure API Engineering Workflow",
+  "graphicAlt": "An explainable API connects its caller contract to input validation, resource authorization, bounded data and operational improvement.",
+  "narration": "Secure ASP.NET Core Web API engineering is a repeatable workflow. It starts with clear endpoint purpose, expected callers, trust boundaries, and exposure decisions. It continues through routing, middleware order, environment configuration, validation, identity, authorization, data access, resource protection, and operational monitoring.\n\nThe parts are connected. DTO shape affects over-posting risk. Model binding affects what the server accepts. Validation affects data access. Authentication establishes identity context, but authorization decides what that identity may do. CORS influences browser exposure, but it does not replace access control. Rate limits and resource bounds keep services reliable under real caller behavior.\n\nSecurity continues after release. Safe errors, structured logs, correlation identifiers, controlled OpenAPI exposure, dependency review, CI/CD protection, and runtime maintenance determine whether the team can operate the API responsibly. Production feedback should inform code review and future design, not sit disconnected in an operations tool.\n\nThe practical path is to make good API habits ordinary. Keep endpoints narrow, shape DTOs intentionally, validate on the server, authorize at the resource level, limit expensive work, protect tokens and secrets, sanitize logs, and review deployment configuration. Small decisions repeated across endpoints are what reduce recurring production risk.\n\nA secure API is one a team can explain. Who can call it, what it accepts, what it returns, how it fails, what it logs, how it is documented, and how it is maintained should be visible enough for developers, reviewers, and operators to reason about together.",
+  "narrationPoints": [
+    "Secure ASP.NET Core Web API engineering is a repeatable workflow.",
+    "Authentication establishes identity context, but authorization decides what that identity may do.",
+    "Safe errors, structured logs, correlation identifiers, controlled OpenAPI exposure, dependency review.",
+    "Keep endpoints narrow, shape DTOs intentionally, validate on the server, authorize at the resource level, limit expensive work.",
+    "Who can call it, what it accepts, what it returns, how it fails, what it logs."
+  ]
+};

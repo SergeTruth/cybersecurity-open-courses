@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Some cleanup work needs asynchronous operations.
+
+2
+00:00:03.960 --> 00:00:14.600
+A resource may need to flush data, finish a protocol exchange, close a network-backed stream, return state to a remote service, or release framework-owned resources through an asynchronous path.
+
+3
+00:00:14.700 --> 00:00:18.540
+Synchronous disposal is not always the best fit for that kind of cleanup.
+
+4
+00:00:18.820 --> 00:00:23.860
+IAsyncDisposable gives C# a standard pattern for asynchronous cleanup.
+
+5
+00:00:23.960 --> 00:00:31.960
+When a type exposes asynchronous disposal and the cleanup path matters, await using allows the application to await that cleanup before leaving the scope.
+
+6
+00:00:32.060 --> 00:00:36.940
+That makes the release behavior explicit and helps prevent cleanup work from being ignored.
+
+7
+00:00:37.220 --> 00:00:41.300
+Async cleanup still needs the same ownership rules as synchronous disposal.
+
+8
+00:00:41.400 --> 00:00:50.280
+The code that owns the resource should release it, and the code should define what happens when cleanup fails, is canceled, or occurs during shutdown.
+
+9
+00:00:50.380 --> 00:00:57.580
+Important cleanup failures should be visible through safe logs or metrics so production behavior can be reviewed.
+
+10
+00:00:57.860 --> 00:01:02.900
+Do not ignore tasks or value tasks returned by cleanup paths.
+
+11
+00:01:03.000 --> 00:01:08.680
+Fire-and-forget cleanup can hide failures, leave work incomplete, or make shutdown behavior unpredictable.
+
+12
+00:01:08.780 --> 00:01:17.820
+If cleanup must be attempted in the background, that decision should be designed with logging, retry limits, ownership, and lifecycle control.
+
+13
+00:01:18.100 --> 00:01:24.100
+Avoid mixing synchronous blocking with asynchronous cleanup in a way that stalls request threads or background workers.
+
+14
+00:01:24.200 --> 00:01:29.640
+Blocking on asynchronous cleanup can contribute to thread starvation or delayed shutdown.
+
+15
+00:01:29.740 --> 00:01:37.580
+The preferred design is to keep asynchronous workflows asynchronous from acquisition through cleanup when the resource API supports it.

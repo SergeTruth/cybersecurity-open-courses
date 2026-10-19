@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+User-facing error messages and diagnostic logs serve different audiences.
+
+2
+00:00:05.720 --> 00:00:11.560
+A user needs to know whether a request failed, whether they can retry, or whether they should contact support.
+
+3
+00:00:11.660 --> 00:00:19.420
+Operators need protected diagnostic detail that helps identify the failing component, dependency, route, or workflow.
+
+4
+00:00:19.520 --> 00:00:24.320
+Mixing those audiences creates either poor support or excessive disclosure.
+
+5
+00:00:24.600 --> 00:00:27.000
+Exceptions should be logged safely.
+
+6
+00:00:27.100 --> 00:00:36.860
+A log entry can include exception type, safe message category, ExampleRequestId, component name, dependency name, and sanitized context.
+
+7
+00:00:36.960 --> 00:00:48.880
+It should avoid secrets, tokens, connection strings, private records, full request bodies, and unnecessary internal details that are not needed by the intended log reader.
+
+8
+00:00:49.160 --> 00:00:52.440
+Development diagnostics should not become production behavior.
+
+9
+00:00:52.540 --> 00:00:57.980
+Detailed local errors and broad framework logs help developers learn what went wrong.
+
+10
+00:00:58.080 --> 00:01:03.680
+Production should use safe user responses, protected logs, and correlation IDs.
+
+11
+00:01:03.780 --> 00:01:10.500
+If more detail is temporarily needed in production, it should be scoped, approved, and removed after use.
+
+12
+00:01:10.780 --> 00:01:14.380
+Log levels should match expectedness and impact.
+
+13
+00:01:14.480 --> 00:01:20.560
+Expected validation failures may belong at a lower level or may be aggregated as metrics.
+
+14
+00:01:20.660 --> 00:01:24.980
+Handled dependency failures may need warning-level visibility.
+
+15
+00:01:25.080 --> 00:01:30.600
+Unexpected exceptions that affect user actions or data integrity deserve stronger attention.
+
+16
+00:01:30.700 --> 00:01:34.140
+Consistent levels make monitoring and alerting more reliable.
+
+17
+00:01:34.420 --> 00:01:37.380
+Swallowed exceptions hide important signals.
+
+18
+00:01:37.480 --> 00:01:45.400
+A catch block that absorbs failure without logging, returning a clear outcome, or updating state can make the system appear healthy when it is not.
+
+19
+00:01:45.500 --> 00:01:50.940
+Defensive error handling should preserve useful context while avoiding sensitive data exposure.
+
+20
+00:01:51.220 --> 00:01:55.380
+Repeated high-volume exception logs can create noise and cost.
+
+21
+00:01:55.480 --> 00:02:03.160
+If one dependency failure generates thousands of identical entries, teams may need aggregation, rate control, or alert tuning.
+
+22
+00:02:03.260 --> 00:02:10.300
+The goal is to make failures observable, not to flood responders with repeated copies of the same information.

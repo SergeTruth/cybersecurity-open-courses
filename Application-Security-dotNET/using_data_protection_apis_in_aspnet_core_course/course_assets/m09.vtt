@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Common review findings often start with unclear purpose strings.
+
+2
+00:00:04.840 --> 00:00:14.040
+A vague purpose, a copied string, or a single purpose reused across unrelated workflows makes separation harder to reason about.
+
+3
+00:00:14.140 --> 00:00:19.740
+Purpose strings should help reviewers understand the workflow, payload type, and intended consumer.
+
+4
+00:00:20.020 --> 00:00:22.660
+Production key storage is another frequent issue.
+
+5
+00:00:22.760 --> 00:00:33.880
+Ephemeral keys, local-only keys in scaled-out apps, missing shared key rings, and accidental environment sharing can all create reliability and security problems.
+
+6
+00:00:33.980 --> 00:00:42.380
+A key ring should be durable when protected payloads need to survive restarts, redeploys, slot swaps, or traffic across multiple instances.
+
+7
+00:00:42.660 --> 00:00:49.220
+Data Protection should not be treated as password hashing, general database encryption, or a way to avoid server-side authorization.
+
+8
+00:00:49.320 --> 00:00:52.280
+It protects payloads for intended consumers.
+
+9
+00:00:52.380 --> 00:00:59.420
+It does not turn a protected value into permission, and it does not make an oversized payload a good replacement for server-side state.
+
+10
+00:00:59.700 --> 00:01:01.700
+Logging also deserves review.
+
+11
+00:01:01.800 --> 00:01:08.040
+Applications should not log protected sensitive payloads or the unprotected values recovered from them.
+
+12
+00:01:08.140 --> 00:01:18.780
+Failure logs should help operators understand what happened without turning logs, support artifacts, telemetry, or screenshots into sensitive data stores.
+
+13
+00:01:19.060 --> 00:01:38.980
+A useful checklist asks: what value is protected, why protection is needed, what purpose string is used, who can unprotect it, how long it should remain valid, where keys are stored, how keys are protected, and what happens during scale-out, restart, redeploy, backup, restore, and failure.
+
+14
+00:01:39.080 --> 00:01:41.880
+The answers should be documented before release.

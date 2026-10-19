@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.540
+Reflection can sometimes access nonpublic members inside the same trusted process depending on runtime, permissions, and API usage.
+
+2
+00:00:09.640 --> 00:00:16.520
+Private fields, internal methods, and test-only hooks often exist outside the intended public contract.
+
+3
+00:00:16.620 --> 00:00:24.380
+They may not have the same validation, authorization, logging, or stability guarantees as public APIs.
+
+4
+00:00:24.660 --> 00:00:31.380
+Accessing nonpublic members can sidestep design assumptions, validation paths, invariants, and audit points.
+
+5
+00:00:31.480 --> 00:00:35.800
+A private field may be valid only after a constructor or setter runs.
+
+6
+00:00:35.900 --> 00:00:40.220
+An internal method may assume it is called by a narrow framework path.
+
+7
+00:00:40.320 --> 00:00:44.400
+A test hook may exist only for controlled test fixtures.
+
+8
+00:00:44.680 --> 00:00:49.800
+Do not treat private member reflection as a safe production extension mechanism.
+
+9
+00:00:49.900 --> 00:01:00.300
+If behavior needs to be extended, prefer an intentional interface, service registration, policy, strategy object, or public contract.
+
+10
+00:01:00.400 --> 00:01:04.480
+Those designs are easier to review and support across versions.
+
+11
+00:01:04.760 --> 00:01:14.200
+If nonpublic reflection is required for a framework, migration, test, or compatibility scenario, document the reason, scope, owner, and review path.
+
+12
+00:01:14.300 --> 00:01:21.420
+The team should know which member is accessed, why a public alternative is not used, and what will happen if the underlying implementation changes.
+
+13
+00:01:21.700 --> 00:01:30.180
+Security controls should be enforced by public, intentional application boundaries rather than by hoping private members stay private inside trusted code.
+
+14
+00:01:30.280 --> 00:01:36.840
+Privileged administrative behavior should use explicit, reviewed capabilities rather than hidden reflected members.

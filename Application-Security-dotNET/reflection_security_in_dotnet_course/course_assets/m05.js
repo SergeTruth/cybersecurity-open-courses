@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Assembly Loading, Plugins, and Dependency Boundaries",
+  "graphicAlt": "Plugins enter the host as approved code through narrow contracts; AssemblyLoadContext manages dependencies within the process rather than sandboxing untrusted code.",
+  "narration": "Loading an assembly loads code into the process. That makes plugin and extension systems a trust decision, not just a file handling decision. A plugin can run with access to the process, configuration, services, and host capabilities that the application makes available.\n\nAssemblyLoadContext can isolate dependencies and support unloading, but it is not a complete security boundary for untrusted code. It can help manage version conflicts and plugin lifetime, yet the loaded code is still running in the same process model and needs a trusted governance path.\n\nDo not load arbitrary assemblies from user-controlled paths, uploads, temporary folders, package feeds, or configuration without a trusted review process. A plugin system should define how code is obtained, approved, versioned, configured, deployed, monitored, and retired.\n\nPlugin systems may use signed packages, controlled directories, allowlisted plugin IDs, version review, dependency review, and operational ownership where appropriate. A plugin contract should expose only the capabilities the plugin needs. Broad access to service providers, secrets, file systems, network clients, database connections, or administrative APIs should not be the default.\n\nDependency conflicts, abandoned plugins, stale packages, and unsafe update channels should be reviewed as supply-chain risks. A plugin architecture remains a production code path, so it needs ownership, change control, logging, rollback expectations, and a clear decommissioning plan.",
+  "narrationPoints": [
+    "A plugin can run with access to the process, configuration, services, and host capabilities that the application makes available.",
+    "AssemblyLoadContext can isolate dependencies and support unloading, but it is not a complete security boundary for untrusted code.",
+    "Do not load arbitrary assemblies from user-controlled paths, uploads, temporary folders, package feeds.",
+    "Plugin systems may use signed packages, controlled directories, allowlisted plugin IDs, version review, dependency review.",
+    "Dependency conflicts, abandoned plugins, stale packages, and unsafe update channels should be reviewed as supply-chain risks."
+  ]
+};

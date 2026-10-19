@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.420
+Protobuf contracts define the service methods, message fields, field types, and streaming shape that clients and services agree to use.
+
+2
+00:00:08.520 --> 00:00:12.600
+That contract is not just a technical artifact for code generation.
+
+3
+00:00:12.700 --> 00:00:19.900
+It is a security-relevant interface because it decides what data can be requested, submitted, returned, or streamed.
+
+4
+00:00:20.180 --> 00:00:23.780
+Messages should be narrow and purpose-driven.
+
+5
+00:00:23.880 --> 00:00:29.960
+A request message should contain the fields needed for the specific operation, not a broad copy of an internal domain object.
+
+6
+00:00:30.060 --> 00:00:35.660
+A response message should return what the caller needs, not every field the service happens to know.
+
+7
+00:00:35.760 --> 00:00:39.840
+This reduces accidental exposure and makes the contract easier to review.
+
+8
+00:00:40.120 --> 00:00:55.640
+Contract review should look for internal identifiers, administrative fields, sensitive flags, secret values, overly broad status fields, unnecessary record details, and fields that might be confused with server-controlled decisions.
+
+9
+00:00:55.740 --> 00:01:05.740
+If a field affects ownership, tenant, role, approval, pricing, configuration, or workflow state, reviewers should understand why the client may send or receive it.
+
+10
+00:01:06.020 --> 00:01:11.780
+Field additions, deprecated fields, and backward compatibility are security review topics.
+
+11
+00:01:11.880 --> 00:01:16.120
+A field that is no longer displayed may still be accepted by older clients.
+
+12
+00:01:16.220 --> 00:01:22.620
+A newly added field may appear in generated clients, documentation, logs, or downstream services.
+
+13
+00:01:22.720 --> 00:01:28.640
+Compatibility work should preserve security intent, not only serialization compatibility.
+
+14
+00:01:28.920 --> 00:01:37.320
+The choice between unary, server-streaming, client-streaming, and bidirectional-streaming methods should match business need and resource impact.
+
+15
+00:01:37.420 --> 00:01:46.060
+Streaming can be useful, but it changes how long calls last, how much data can flow, how cancellation works, and how operators monitor behavior.
+
+16
+00:01:46.340 --> 00:01:51.540
+Code-first gRPC can be appropriate in all-.NET systems, but the same discipline applies.
+
+17
+00:01:51.640 --> 00:02:04.280
+Whether the contract begins as a .proto file or C# types, teams still need data minimization, reviewable method shape, clear ownership, and careful compatibility decisions.

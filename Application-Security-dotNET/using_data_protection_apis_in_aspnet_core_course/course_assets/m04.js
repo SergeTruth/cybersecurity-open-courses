@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Time-Limited Payloads and Workflow Tokens",
+  "graphicAlt": "A protected link passes time validity and current server-side checks before the workflow; expired links have a recovery path.",
+  "narration": "Some protected values should expire. Time-limited protection can be useful when a payload supports a workflow that should be valid only for a defined window, such as an invite link, export link, approval link, account workflow token, temporary access decision, or short-lived protected state.\n\nExpiration should be based on the business risk of the workflow. A low-risk confirmation link, a sensitive export link, and an approval decision may need different lifetimes. The time limit should be long enough for normal users to complete the workflow and short enough to reduce the impact of stale links or copied values.\n\nA time-limited protected payload is not the same as full account authorization or session management. The protected payload can show that the value was created by the application and has not expired, but server-side checks may still be needed for ownership, tenant, current account status, permission changes, revocation, or one-time use.\n\nExpired, malformed, or invalid protected payloads should fail predictably and safely. Users should receive a clear recovery path when appropriate, and clients should not see internal key, purpose, or payload details. The application should avoid treating every unprotect failure as an unexpected crash.\n\nLogs should help troubleshoot failures without recording protected or unprotected sensitive values. Useful signals include workflow type, failure category, age or expiration state when safe to record, tenant or environment context, and correlation IDs. Sensitive payload contents should stay out of logs and support artifacts.",
+  "narrationPoints": [
+    "Time-limited protection can be useful when a payload supports a workflow that should be valid only for a defined window.",
+    "Expiration should be based on the business risk of the workflow.",
+    "A time-limited protected payload is not the same as full account authorization or session management.",
+    "Users should receive a clear recovery path when appropriate, and clients should not see internal key, purpose.",
+    "Useful signals include workflow type, failure category, age or expiration state when safe to record, tenant or environment context."
+  ]
+};

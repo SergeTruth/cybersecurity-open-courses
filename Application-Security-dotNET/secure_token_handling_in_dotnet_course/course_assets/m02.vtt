@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Different token types have different purposes and trust boundaries.
+
+2
+00:00:04.760 --> 00:00:10.120
+A secure .NET application does not treat every token-shaped value the same way.
+
+3
+00:00:10.220 --> 00:00:19.020
+It asks who issued the token, who is supposed to consume it, what decision it supports, how long it lasts, and which system is allowed to validate it.
+
+4
+00:00:19.300 --> 00:00:23.860
+Access tokens are intended for resource access decisions by APIs.
+
+5
+00:00:23.960 --> 00:00:34.920
+An API should validate that the token came from the expected issuer, is intended for the expected audience, is still valid, and carries claims or scopes that the API policy understands.
+
+6
+00:00:35.020 --> 00:00:39.020
+An access token should not be accepted merely because it is well formed.
+
+7
+00:00:39.300 --> 00:00:42.900
+ID tokens describe authentication events for clients.
+
+8
+00:00:43.000 --> 00:00:48.840
+They help a client understand that authentication occurred and who the user is in that client context.
+
+9
+00:00:48.940 --> 00:00:52.860
+They should not be treated as general API authorization tokens.
+
+10
+00:00:52.960 --> 00:00:57.360
+Confusing ID tokens and access tokens can blur important trust boundaries.
+
+11
+00:00:57.640 --> 00:01:03.240
+Refresh tokens support obtaining new access tokens and require stronger lifecycle controls.
+
+12
+00:01:03.340 --> 00:01:11.660
+They may outlive a short access token and therefore need careful storage, rotation, revocation, expiration, and monitoring.
+
+13
+00:01:11.760 --> 00:01:14.720
+They should be handled as high-value credentials.
+
+14
+00:01:15.000 --> 00:01:23.720
+ASP.NET Core Identity may use tokens for password reset, email confirmation, phone change, two-factor flows, and other account workflows.
+
+15
+00:01:23.820 --> 00:01:28.540
+Antiforgery tokens help validate browser request intent for state-changing actions.
+
+16
+00:01:28.640 --> 00:01:34.400
+Data Protection-protected payloads represent framework or application-protected data and depend on key management.
+
+17
+00:01:34.680 --> 00:01:42.440
+Token purpose should be explicit so developers do not validate, store, forward, or log the wrong token in the wrong place.
+
+18
+00:01:42.540 --> 00:01:50.220
+When purpose is clear, the application can apply the right validation path, lifetime, storage rules, and operational response.

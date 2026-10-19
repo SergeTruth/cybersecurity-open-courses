@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:15.060
+Data from users, files, APIs, queues, databases, environment variables, and configuration should be treated as untrusted or at least unverified until it has been validated for the current purpose.
+
+2
+00:00:15.160 --> 00:00:24.600
+A value can be well formed and still be inappropriate for the operation, tenant, state, range, or policy.
+
+3
+00:00:24.880 --> 00:00:30.400
+Parsing, validation, and business rules are related but different.
+
+4
+00:00:30.500 --> 00:00:33.860
+Parsing turns input into a structured value.
+
+5
+00:00:33.960 --> 00:00:37.400
+Validation decides whether the value is acceptable.
+
+6
+00:00:37.500 --> 00:00:42.540
+Business logic decides what the application should do with an accepted value.
+
+7
+00:00:42.640 --> 00:00:46.640
+Keeping these concerns separate makes boundaries easier to review and test.
+
+8
+00:00:46.920 --> 00:00:55.080
+Allow-list validation is often the clearest approach for known formats, ranges, names, states, and identifiers.
+
+9
+00:00:55.180 --> 00:00:59.260
+Define what is allowed rather than trying to enumerate every bad possibility.
+
+10
+00:00:59.360 --> 00:01:08.320
+This applies to route values, sort fields, enum-like strings, file labels, numeric limits, and workflow transitions.
+
+11
+00:01:08.600 --> 00:01:13.720
+Normalization and canonicalization matter before security-relevant comparisons.
+
+12
+00:01:13.820 --> 00:01:24.540
+Differences in casing, whitespace, encoding, path representation, Unicode forms, or culture-specific formatting can change how values compare.
+
+13
+00:01:24.640 --> 00:01:29.920
+Normalize into the representation the application actually trusts before making a decision.
+
+14
+00:01:30.200 --> 00:01:32.840
+Client-side validation is not enforcement.
+
+15
+00:01:32.940 --> 00:01:41.020
+It improves usability, reduces accidental mistakes, and gives faster feedback, but the server must validate what it relies on.
+
+16
+00:01:41.120 --> 00:01:48.400
+The application should not assume that a browser, mobile client, or integration partner will enforce the rule before sending the request.
+
+17
+00:01:48.680 --> 00:01:51.960
+Validation errors should be useful without revealing too much.
+
+18
+00:01:52.060 --> 00:02:04.620
+Tell callers what needs to be corrected when appropriate, but avoid exposing internal schemas, sensitive identifiers, implementation details, or rules that would make high-risk workflows easier to manipulate.
+
+19
+00:02:04.720 --> 00:02:09.840
+Good validation is clear, bounded, and tied to the operation being performed.

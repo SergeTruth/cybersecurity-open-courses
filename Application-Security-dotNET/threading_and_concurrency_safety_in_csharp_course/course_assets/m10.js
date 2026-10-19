@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Concurrency Safety Baseline",
+  "graphicAlt": "Owned state, synchronization, async discipline and bounded work support correctness, with observation feeding review.",
+  "narration": "A practical concurrency safety baseline for C# starts with shared mutable state. Identify what can change, who owns it, which operations can run at the same time, and which invariants must remain true. Minimize sharing through ownership, immutability, local scope, snapshots, and message-based designs where they fit.\n\nUse synchronization intentionally. A lock should protect a clear critical section. A semaphore should limit a clear resource. A concurrent collection should match the workflow instead of becoming a shortcut around design. Prefer the simplest primitive that preserves correctness and can be reviewed by the team that maintains the code.\n\nUse async and await with discipline. Prefer async all the way through supported call chains, avoid blocking on tasks, observe exceptions, define cancellation behavior, and avoid unmanaged fire-and-forget work. Async code still needs ownership, lifecycle, and safe access to shared state.\n\nBound parallelism and background work. Control fan-out, respect dependency capacity, avoid leaking request-scoped services into unmanaged work, pass cancellation tokens, set timeouts, and define cleanup or retry behavior when work stops halfway through.\n\nFinally, make concurrency observable. Log safe correlation and failure context, monitor queue growth, timeouts, lock contention, thread pool pressure, duplicate work, and missing updates. Review concurrency behavior under production-like load when feasible. The goal is code that remains correct when real systems overlap, slow down, retry, and shut down.",
+  "narrationPoints": [
+    "A practical concurrency safety baseline for C# starts with shared mutable state.",
+    "Prefer the simplest primitive that preserves correctness and can be reviewed by the team that maintains the code.",
+    "Prefer async all the way through supported call chains, avoid blocking on tasks, observe exceptions.",
+    "Control fan-out, respect dependency capacity, avoid leaking request-scoped services into unmanaged work, pass cancellation tokens.",
+    "Log safe correlation and failure context, monitor queue growth, timeouts, lock contention, thread pool pressure."
+  ]
+};

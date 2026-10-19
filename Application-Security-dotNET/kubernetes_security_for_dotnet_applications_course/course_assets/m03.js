@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Pod Security Contexts and Non-Root Runtime",
+  "graphicAlt": "A restricted non-root workload separates read-only binaries from deliberate writable paths and aligns with platform policy.",
+  "narration": "Pod and container security contexts define runtime privilege behavior. They influence the user identity inside the container, whether the workload may request more privileges, which Linux capabilities are available, whether privileged mode is allowed, and how filesystem restrictions apply.\n\n.NET containers should normally run as non-root when the application supports it. That design reduces default privileges and makes accidental writes or broad filesystem assumptions easier to detect. Running as non-root also forces the image and manifest to declare where the application is allowed to write.\n\nSettings such as runAsNonRoot, runAsUser, allowPrivilegeEscalation, capabilities, privileged mode, seccomp, AppArmor, and SELinux should be reviewed where platform policy supports them. The goal is to grant only the runtime behavior the application needs, not to preserve broad defaults because they are convenient.\n\nRead-only root filesystems can reduce accidental writes, but ASP.NET Core apps may still need planned writable locations for temporary files, uploads, logs, caches, or diagnostics. Those paths should be explicit, permissioned, and separated from application binaries.\n\nFile ownership and permissions should be handled during image build or deployment rather than widened casually at runtime. Pod Security Standards, admission policies, and platform guardrails should align with application requirements so secure defaults do not become release surprises.",
+  "narrationPoints": [
+    ".NET containers should normally run as non-root when the application supports it.",
+    "Running as non-root also forces the image and manifest to declare where the application is allowed to write.",
+    "Read-only root filesystems can reduce accidental writes, but ASP.NET Core apps may still need planned writable locations for temporary files, uploads, logs, caches, or diagnostics.",
+    "Settings such as runAsNonRoot, runAsUser, allowPrivilegeEscalation, capabilities, privileged mode, seccomp, AppArmor, and SELinux should be reviewed where platform policy supports them.",
+    "File ownership and permissions should be handled during image build or deployment rather than widened casually at runtime."
+  ]
+};

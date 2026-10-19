@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Secure data access starts with parameterized query patterns and careful data shaping.
+
+2
+00:00:05.800 --> 00:00:22.440
+Entity Framework Core and other data access libraries can help prevent common query mistakes when used as intended, but they do not automatically decide whether the current user should see the data, whether a query crosses tenant boundaries, or whether a result contains more fields than the operation needs.
+
+3
+00:00:22.720 --> 00:00:26.800
+Raw SQL and dynamic query construction deserve special review.
+
+4
+00:00:26.900 --> 00:00:34.900
+Sometimes raw SQL is necessary for performance or expressiveness, but it should be parameterized and limited to clear, reviewable cases.
+
+5
+00:00:35.000 --> 00:00:47.000
+Inputs that influence filters, sort fields, table-like choices, or query shape should be validated against allow-lists and business rules rather than assembled freely from request data.
+
+6
+00:00:47.280 --> 00:00:50.480
+Authorization must be part of data access decisions.
+
+7
+00:00:50.580 --> 00:00:56.020
+A request may be authenticated and still not allowed to access a specific record.
+
+8
+00:00:56.120 --> 00:01:05.720
+Data access should respect the current user, tenant, role, policy, record ownership, workflow state, and sensitivity of the requested information.
+
+9
+00:01:05.820 --> 00:01:15.020
+Filtering after broad retrieval can be risky if the code logs, caches, serializes, or accidentally returns data before the final check.
+
+10
+00:01:15.300 --> 00:01:17.780
+File handling is another important boundary.
+
+11
+00:01:17.880 --> 00:01:27.560
+Uploaded file names, extensions, content types, sizes, storage locations, metadata, and download behavior should be controlled by the server.
+
+12
+00:01:27.660 --> 00:01:32.220
+Client-provided file names are labels, not trusted paths.
+
+13
+00:01:32.320 --> 00:01:41.040
+Store uploads away from executable paths, generate server-side names when appropriate, and avoid letting uploaded content become active application code.
+
+14
+00:01:41.320 --> 00:01:45.160
+File type decisions should not rely on one signal alone.
+
+15
+00:01:45.260 --> 00:01:55.500
+Extensions, MIME types, signatures, size limits, business context, scanning or review workflow, and storage policy all play a role.
+
+16
+00:01:55.600 --> 00:02:03.600
+The right defensive process depends on the application, but the application should not assume an uploaded file is safe because the browser said it had a familiar type.
+
+17
+00:02:03.880 --> 00:02:08.920
+Imported files and serialized data should be treated as untrusted input.
+
+18
+00:02:09.020 --> 00:02:17.500
+A file that arrives through an internal workflow can still be malformed, stale, oversized, incomplete, or inappropriate for the current operation.
+
+19
+00:02:17.600 --> 00:02:28.720
+Validation, resource limits, safe parsing libraries, and clear error handling make data access and file features more predictable under real-world conditions.

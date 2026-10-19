@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Common Misuse Patterns and Review Checklist",
+  "graphicAlt": "A protected payload is reviewed for intended use, purpose, authorization, key governance, deployment, recovery and safe failure logs.",
+  "narration": "Common review findings often start with unclear purpose strings. A vague purpose, a copied string, or a single purpose reused across unrelated workflows makes separation harder to reason about. Purpose strings should help reviewers understand the workflow, payload type, and intended consumer.\n\nProduction key storage is another frequent issue. Ephemeral keys, local-only keys in scaled-out apps, missing shared key rings, and accidental environment sharing can all create reliability and security problems. A key ring should be durable when protected payloads need to survive restarts, redeploys, slot swaps, or traffic across multiple instances.\n\nData Protection should not be treated as password hashing, general database encryption, or a way to avoid server-side authorization. It protects payloads for intended consumers. It does not turn a protected value into permission, and it does not make an oversized payload a good replacement for server-side state.\n\nLogging also deserves review. Applications should not log protected sensitive payloads or the unprotected values recovered from them. Failure logs should help operators understand what happened without turning logs, support artifacts, telemetry, or screenshots into sensitive data stores.\n\nA useful checklist asks: what value is protected, why protection is needed, what purpose string is used, who can unprotect it, how long it should remain valid, where keys are stored, how keys are protected, and what happens during scale-out, restart, redeploy, backup, restore, and failure. The answers should be documented before release.",
+  "narrationPoints": [
+    "A vague purpose, a copied string, or a single purpose reused across unrelated workflows makes separation harder to reason about.",
+    "A key ring should be durable when protected payloads need to survive restarts, redeploys, slot swaps.",
+    "Data Protection should not be treated as password hashing, general database encryption.",
+    "Failure logs should help operators understand what happened without turning logs, support artifacts, telemetry.",
+    "A useful checklist asks: what value is protected, why protection is needed, what purpose string is used, who can unprotect it."
+  ]
+};

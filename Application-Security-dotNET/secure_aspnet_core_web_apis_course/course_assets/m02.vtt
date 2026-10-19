@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.220
+Secure endpoint design begins with purpose.
+
+2
+00:00:03.320 --> 00:00:10.520
+Each endpoint should have an expected caller, an intended action, a clear owner, and a reason to exist.
+
+3
+00:00:10.620 --> 00:00:24.140
+If a route is left over from testing, a temporary diagnostic, a broad administrative shortcut, or an internal convenience that no longer has a defined audience, it expands the API surface without adding reliable value.
+
+4
+00:00:24.420 --> 00:00:28.580
+HTTP methods should match action intent at a defensive design level.
+
+5
+00:00:28.680 --> 00:00:43.560
+Read operations, state changes, creation, replacement, partial updates, and deletion should be represented consistently so callers, reviewers, gateways, documentation, logs, and monitoring systems can reason about the API.
+
+6
+00:00:43.660 --> 00:00:52.780
+Method choice is not a complete security control, but inconsistent semantics make review harder and can cause accidental exposure through tooling or assumptions.
+
+7
+00:00:53.060 --> 00:00:55.460
+Route structure and versioning also matter.
+
+8
+00:00:55.560 --> 00:01:02.920
+Clear route names, stable resource shapes, and deliberate versioning help teams understand what is exposed and what client contracts exist.
+
+9
+00:01:03.020 --> 00:01:14.220
+When routes are inconsistent, overloaded, or silently reused for different meanings, authorization and validation rules become harder to audit and future changes become riskier.
+
+10
+00:01:14.500 --> 00:01:19.300
+Middleware order is security-relevant in ASP.NET Core.
+
+11
+00:01:19.400 --> 00:01:32.920
+Routing, authentication, authorization, CORS, exception handling, forwarded headers, HTTPS behavior, response headers, rate limiting, and endpoint mapping have ordering assumptions.
+
+12
+00:01:33.020 --> 00:01:41.260
+A control that runs too late, or not at all for a given endpoint path, can create behavior that looks protected in one flow and unprotected in another.
+
+13
+00:01:41.540 --> 00:01:44.100
+Hosting configuration should reflect the environment.
+
+14
+00:01:44.200 --> 00:01:48.440
+Development may need detailed errors and local conveniences.
+
+15
+00:01:48.540 --> 00:01:53.580
+Staging may need production-like settings with test identities and controlled diagnostics.
+
+16
+00:01:53.680 --> 00:02:05.360
+Production should have safe error handling, only required endpoints, locked-down diagnostic access, appropriate reverse proxy awareness, and transport expectations that match the deployment architecture.
+
+17
+00:02:05.640 --> 00:02:10.760
+Before release, review the request pipeline as part of API security.
+
+18
+00:02:10.860 --> 00:02:18.700
+Confirm which endpoints are mapped, which middleware protects them, which environment settings differ, and which diagnostics are reachable.
+
+19
+00:02:18.800 --> 00:02:21.280
+The aim is not to make startup code clever.
+
+20
+00:02:21.380 --> 00:02:29.460
+The aim is to make exposure explicit enough that developers, security reviewers, and operators can explain how requests are handled.

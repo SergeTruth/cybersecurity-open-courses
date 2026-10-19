@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.500
+Calling Microsoft Graph or downstream APIs requires clear design for token acquisition, permissions, consent, caching, and failure handling.
+
+2
+00:00:10.600 --> 00:00:17.320
+A downstream call should request the least privilege required for the scenario rather than broad permissions by default.
+
+3
+00:00:17.420 --> 00:00:25.180
+Microsoft Graph permissions vary widely in sensitivity, so each requested permission should have a clear business reason and an owner.
+
+4
+00:00:25.460 --> 00:00:31.860
+On-behalf-of calls must preserve delegated user context and still enforce local API authorization.
+
+5
+00:00:31.960 --> 00:00:39.320
+The fact that an API can acquire a downstream token does not mean the caller may perform every local action or access every resource.
+
+6
+00:00:39.420 --> 00:00:44.540
+The local API should validate its own access requirements before making downstream calls.
+
+7
+00:00:44.820 --> 00:00:49.700
+Token caches should be protected according to application type and hosting environment.
+
+8
+00:00:49.800 --> 00:00:56.360
+A web app, API, daemon service, desktop app, and development tool can have different cache storage needs.
+
+9
+00:00:56.460 --> 00:01:03.580
+Cache behavior should be reviewed for isolation, data protection, eviction, and operational troubleshooting.
+
+10
+00:01:03.860 --> 00:01:09.620
+Logs should include useful identity and authorization signals without recording sensitive values.
+
+11
+00:01:09.720 --> 00:01:23.400
+Useful events may include sign-in outcomes, consent problems, authorization denials, downstream API failures, claims challenge handling, credential expiration warnings, and app registration review findings.
+
+12
+00:01:23.500 --> 00:01:32.860
+Logs should not include access tokens, refresh tokens, ID tokens, authorization headers, cookies, client secrets, private keys, or raw sensitive payloads.
+
+13
+00:01:33.140 --> 00:01:50.580
+Production review should cover app registrations, redirect URIs, owners, credentials, permissions, consent, tenant restrictions, issuer validation, token cache behavior, logging, alerting, incident response, and stale applications.
+
+14
+00:01:50.680 --> 00:01:54.600
+Development settings should not silently become production behavior.

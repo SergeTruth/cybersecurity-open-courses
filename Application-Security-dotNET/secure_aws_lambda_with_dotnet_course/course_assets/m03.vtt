@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.780
+The Lambda execution role grants the function permission to access AWS services and resources.
+
+2
+00:00:05.880 --> 00:00:11.320
+The code running inside the function receives the effective permissions assigned to that role.
+
+3
+00:00:11.420 --> 00:00:19.100
+If the role can read a table, write to a queue, publish a message, or call another service, then the function code can attempt that action.
+
+4
+00:00:19.380 --> 00:00:26.420
+Least privilege means scoping permissions to the minimum actions, resources, and conditions required for the workload.
+
+5
+00:00:26.520 --> 00:00:31.240
+A function that reads one table should not receive broad write access to many services.
+
+6
+00:00:31.340 --> 00:00:37.020
+A function that sends one type of message should not receive permission to manage unrelated infrastructure.
+
+7
+00:00:37.300 --> 00:00:40.100
+Avoid wildcard permissions for convenience.
+
+8
+00:00:40.200 --> 00:00:48.200
+Broad actions and broad resources make it harder to reason about what a function can do after a code change, configuration mistake, or dependency issue.
+
+9
+00:00:48.300 --> 00:00:55.660
+Separate roles by workload, environment, tenant boundary, or privilege level when that makes the permission model clearer.
+
+10
+00:00:55.940 --> 00:01:02.180
+Resource-based policies control who or what can invoke Lambda resources in supported scenarios.
+
+11
+00:01:02.280 --> 00:01:11.960
+Cross-account access, service invocation, layers, aliases, versions, and function URLs all require explicit policy review.
+
+12
+00:01:12.060 --> 00:01:16.940
+Invocation permission and execution permission are related, but they answer different questions.
+
+13
+00:01:17.220 --> 00:01:25.860
+Administrative, data export, write, delete, payment, configuration, and high-cost operations need extra review.
+
+14
+00:01:25.960 --> 00:01:35.080
+A secure role is narrow enough that reviewers can explain why each permission exists and what production signal would show if that permission is being used unexpectedly.

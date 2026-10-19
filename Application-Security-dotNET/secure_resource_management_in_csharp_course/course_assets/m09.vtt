@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Resource problems need observability before they become outages.
+
+2
+00:00:04.440 --> 00:00:13.560
+A leak, queue buildup, pool bottleneck, or cleanup failure may develop gradually, and the first user-visible symptom may be far away from the original cause.
+
+3
+00:00:13.660 --> 00:00:18.380
+Production signals make these issues easier to see and respond to early.
+
+4
+00:00:18.660 --> 00:00:34.900
+Useful signals include memory growth, garbage collection pressure, handle count, socket usage, connection pool pressure, queue length, background job failures, timeout trends, cancellation rates, file cleanup failures, lock contention, and retry behavior.
+
+5
+00:00:35.000 --> 00:00:41.400
+The exact signals depend on the application, but the review should cover every major resource the system consumes.
+
+6
+00:00:41.680 --> 00:00:43.920
+Logs should capture safe context.
+
+7
+00:00:44.020 --> 00:00:58.820
+Operation name, resource type, failure category, correlation ID, environment, tenant-safe identifier, dependency name, and cleanup outcome can help investigations without exposing sensitive material.
+
+8
+00:00:58.920 --> 00:01:03.560
+Structured logging makes it easier to search and alert on resource behavior.
+
+9
+00:01:03.840 --> 00:01:16.000
+Do not log secrets, tokens, connection strings, credential-bearing URLs, raw sensitive content, temporary file contents, or internal paths without redaction review.
+
+10
+00:01:16.100 --> 00:01:22.900
+Diagnostics can spread quickly into monitoring systems, support tickets, dashboards, and exported incident data.
+
+11
+00:01:23.000 --> 00:01:27.560
+Redaction should be designed before a resource problem forces emergency troubleshooting.
+
+12
+00:01:27.840 --> 00:01:45.760
+Production review should identify resource owners, lifetimes, disposal paths, timeout behavior, cancellation paths, concurrency bounds, retry policies, cache limits, cleanup jobs, health checks, dashboards, alerts, and runbooks.
+
+13
+00:01:45.860 --> 00:01:52.500
+The goal is not more noise; it is a small set of useful signals that support early detection and safe response.

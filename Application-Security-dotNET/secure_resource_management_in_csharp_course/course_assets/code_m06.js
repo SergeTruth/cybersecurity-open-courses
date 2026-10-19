@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Database Connections, Transactions, and Scoped Services' into concrete defensive .NET review patterns. Examples are focused supporting fragments, not a complete application. C# requires .NET 8 and C# 12, with Microsoft.AspNetCore.App for web-framework APIs; place member declarations in an application type and include standard namespace imports. Extra package requirements are stated where used. Bootstrap configuration, providers, and private storage are trusted application inputs, never request-controlled policy.",
+  "codeExamples": [
+    {
+      "title": "Parameterize Database Connections, Transactions, and Scoped Services data access",
+      "language": "csharp",
+      "blurb": "Keeps a fixed projection, binds the authenticated tenant as a parameter, and applies an allowlisted ORDER BY with an Id tie-breaker. The owning repository must still enforce object permissions and paging and dispose the returned command.",
+      "code": "using System.Data.Common;\n\npublic static DbCommand BuildSecureResourceM06DatabaseConnectionsTransactionsScopedCommand(DbConnection connection, string tenantId, string sort)\n{\n    // tenantId comes from authenticated application context; this is query construction only.\n    if (tenantId is not { Length: > 0 and <= 128 } || !tenantId.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_'))\n        throw new ArgumentException(\"Invalid tenant.\");\n    if (sort is null) throw new ArgumentException(\"Sort required.\");\n    var allowedSorts = new Dictionary<string, string>\n    {\n        [\"created\"] = \"CreatedUtc\",\n        [\"name\"] = \"DisplayName\"\n    };\n    if (!allowedSorts.TryGetValue(sort, out var column))\n        throw new ArgumentException(\"database connections transactions scoped services sort rejected.\", nameof(sort));\n\n    var command = connection.CreateCommand();\n    command.CommandText = $\"select Id, DisplayName, CreatedUtc from Records where TenantId = @tenant order by {column}, Id\";\n    var tenant = command.CreateParameter();\n    tenant.ParameterName = \"@tenant\";\n    tenant.DbType = System.Data.DbType.String;\n    tenant.Size = 128;\n    tenant.Value = tenantId;\n    command.Parameters.Add(tenant);\n    return command;\n}\n"
+    },
+    {
+      "title": "Constrain Database Connections, Transactions, and Scoped Services updates",
+      "language": "csharp",
+      "blurb": "Accepts exactly one bounded profile field and returns a private, read-only projection. Database selection and connection policy are never updateable request fields. The owning repository applies authorization and its transaction before using the value.",
+      "code": "using System.Collections.ObjectModel;\npublic static IReadOnlyDictionary<string, object?> SanitizeSecureResourceM06DatabaseConnectionsTransactionsScopedUpdate(IReadOnlyDictionary<string, object?> input)\n{\n    ArgumentNullException.ThrowIfNull(input);\n    // This operation changes ONLY DisplayName. Database/connection selection is deployment policy.\n    if (input.Count != 1 || !input.TryGetValue(\"DisplayName\", out var raw) || raw is not string value ||\n        value.Length is 0 or > 64 || !value.All(c => char.IsAsciiLetterOrDigit(c) || c is ' ' or '-' or '_'))\n        throw new ArgumentException(\"Profile update rejected.\");\n    var name = value.Trim();\n    if (name.Length == 0) throw new ArgumentException(\"Display name required.\");\n    return new ReadOnlyDictionary<string, object?>(new Dictionary<string, object?> { [\"DisplayName\"] = name });\n}\n"
+    }
+  ]
+};

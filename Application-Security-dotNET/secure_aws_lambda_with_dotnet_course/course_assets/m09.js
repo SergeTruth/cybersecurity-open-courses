@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Concurrency, Resource Limits, Logging, and Monitoring",
+  "graphicAlt": "Concurrency and fan-out limits align Lambda resource settings with downstream capacity, supported by safe monitoring.",
+  "narration": "Lambda scales automatically, but automatic scaling does not mean downstream systems have unlimited capacity. A function can scale faster than a database, API, queue consumer, third-party provider, or legacy service can safely handle. Concurrency is therefore a security, reliability, and cost control.\n\nMemory size, timeout, ephemeral storage, reserved concurrency, provisioned concurrency, event source batch size, and maximum concurrency settings affect reliability, availability, latency, and cost. These settings should be chosen with realistic workload behavior rather than copied from another function.\n\nConcurrency decisions should align with database pools, API quotas, queue pressure, S3 operations, third-party services, and rate-limited dependencies. Functions should use timeouts, cancellation-aware patterns, bounded fan-out, safe retry policies, and resource cleanup so work stops predictably when it cannot complete.\n\nUseful monitoring signals include invocation count, errors, throttles, duration, timeout trends, cold-start symptoms, retry counts, DLQ activity, dependency failures, validation failures, authorization denials, and unusual event volume. Logs should add safe context such as request identifiers and failure categories without storing secrets.\n\nLogs should not expose secrets, tokens, cookies, authorization headers, connection strings, raw sensitive content, or excessive personal data. Monitoring should help teams detect unhealthy behavior early and respond without spreading sensitive material into support and incident systems.",
+  "narrationPoints": [
+    "A function can scale faster than a database, API, queue consumer, third-party provider, or legacy service can safely handle.",
+    "Memory size, timeout, ephemeral storage, reserved concurrency, provisioned concurrency.",
+    "Concurrency decisions should align with database pools, API quotas, queue pressure, S3 operations, third-party services.",
+    "Logs should add safe context such as request identifiers and failure categories without storing secrets.",
+    "Logs should not expose secrets, tokens, cookies, authorization headers, connection strings."
+  ]
+};

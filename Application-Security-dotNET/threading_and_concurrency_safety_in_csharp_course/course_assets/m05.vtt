@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+async and await make asynchronous code easier to write and read, but they do not remove concurrency concerns.
+
+2
+00:00:06.680 --> 00:00:17.560
+An async method can still access shared state, start multiple operations, observe stale values, leave work running after a caller has moved on, or fail in a way that no one observes.
+
+3
+00:00:17.660 --> 00:00:20.780
+The control flow is clearer, not automatically safe.
+
+4
+00:00:21.060 --> 00:00:26.340
+Avoid blocking on asynchronous work with synchronous waiting patterns in application code.
+
+5
+00:00:26.440 --> 00:00:33.880
+Blocking can waste thread pool threads, reduce request throughput, and in some synchronization contexts contribute to deadlocks.
+
+6
+00:00:33.980 --> 00:00:40.700
+It can also make exception handling harder to understand because asynchronous failures may be wrapped or observed in unexpected places.
+
+7
+00:00:40.980 --> 00:00:44.420
+Prefer async all the way through call chains where possible.
+
+8
+00:00:44.520 --> 00:00:55.000
+If a controller, service, repository, and HTTP client all support asynchronous operations, keep the chain asynchronous instead of blocking in the middle.
+
+9
+00:00:55.100 --> 00:00:59.980
+This gives the runtime more room to use threads efficiently while waiting for I/O.
+
+10
+00:01:00.260 --> 00:01:04.980
+Understand synchronization context in UI applications and legacy contexts.
+
+11
+00:01:05.080 --> 00:01:13.400
+A continuation may need to return to a particular context, and blocking that context while waiting for the continuation can create a deadlock.
+
+12
+00:01:13.500 --> 00:01:18.940
+Server-side code has different context behavior, but blocking still harms scalability and clarity.
+
+13
+00:01:19.220 --> 00:01:23.940
+Exceptions from asynchronous operations must be observed and handled intentionally.
+
+14
+00:01:24.040 --> 00:01:27.720
+Awaited tasks surface exceptions to the awaiting code.
+
+15
+00:01:27.820 --> 00:01:37.580
+Unobserved background tasks can fail silently from the user's point of view unless the design includes lifecycle ownership, logging, cancellation, and recovery behavior.
+
+16
+00:01:37.860 --> 00:01:41.380
+Avoid fire-and-forget work unless there is a clear owner.
+
+17
+00:01:41.480 --> 00:01:51.080
+A request handler that starts work and then returns may lose cancellation, dependency scope, user context, error reporting, and retry control.
+
+18
+00:01:51.180 --> 00:01:58.380
+If work needs to outlive the request, use a deliberate background service or queue pattern with explicit ownership.
+
+19
+00:01:58.660 --> 00:02:02.180
+Do not hold synchronous locks across awaited operations.
+
+20
+00:02:02.280 --> 00:02:08.360
+The lock protects a synchronous critical section, while an await can pause and resume later.
+
+21
+00:02:08.460 --> 00:02:13.580
+Mixing those models can create contention, deadlock risk, and confusing ownership.
+
+22
+00:02:13.680 --> 00:02:19.760
+Shared state accessed from async code still needs safe ownership or appropriate synchronization.

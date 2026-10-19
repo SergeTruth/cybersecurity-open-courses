@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Multi-stage builds separate build-time tools from runtime artifacts.
+
+2
+00:00:05.160 --> 00:00:14.600
+A build stage can use a .NET SDK image to restore packages, compile the application, run required build-time steps, and publish output.
+
+3
+00:00:14.700 --> 00:00:21.580
+A final runtime stage can then copy only the files needed to run the ASP.NET Core application.
+
+4
+00:00:21.860 --> 00:00:28.340
+This separation is valuable because build environments are usually larger and more privileged than runtime environments.
+
+5
+00:00:28.440 --> 00:00:37.800
+They may contain package caches, source files, compiler tools, intermediate objects, test results, local configuration, and temporary files.
+
+6
+00:00:37.900 --> 00:00:41.660
+The final image should not inherit those contents by accident.
+
+7
+00:00:41.940 --> 00:00:49.300
+A clean runtime image starts with a runtime-appropriate base and copies published output from the build stage.
+
+8
+00:00:49.400 --> 00:01:00.760
+The final stage should contain the application artifacts, required static assets, required native dependencies, configuration defaults that are safe to ship, and the runtime support needed to start the process.
+
+9
+00:01:00.860 --> 00:01:08.460
+It should not contain source code, test data, build caches, package caches, developer tools, or local settings.
+
+10
+00:01:08.740 --> 00:01:14.580
+Dockerfile instruction order affects caching, rebuild behavior, and accidental inclusion.
+
+11
+00:01:14.680 --> 00:01:18.760
+Copying project files before restore can improve cache behavior.
+
+12
+00:01:18.860 --> 00:01:24.860
+Copying the entire repository too early can make restore depend on unrelated files.
+
+13
+00:01:24.960 --> 00:01:31.200
+Broad copy patterns can also move more content into the build than the team expects.
+
+14
+00:01:31.480 --> 00:01:37.080
+Restore, build, publish, and runtime steps should be readable and reviewable.
+
+15
+00:01:37.180 --> 00:01:50.300
+A reviewer should be able to identify which stage restores packages, which stage publishes the app, what is copied into the final stage, which user runs the process, and which environment assumptions are set in the image.
+
+16
+00:01:50.580 --> 00:01:53.060
+The goal is not a clever Dockerfile.
+
+17
+00:01:53.160 --> 00:01:55.160
+The goal is a predictable artifact.
+
+18
+00:01:55.260 --> 00:02:01.100
+Multi-stage builds make it easier to explain what the final image contains and why it contains it.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+A CSRF-resistant ASP.NET Core baseline starts with a clear mental model.
+
+2
+00:00:06.040 --> 00:00:12.520
+CSRF is about unwanted state-changing requests from an authenticated browser context.
+
+3
+00:00:12.620 --> 00:00:25.020
+Authentication identifies the user, and authorization decides what the user may do, but neither one proves that a specific protected browser request was intentionally submitted through the expected application flow.
+
+4
+00:00:25.300 --> 00:00:31.140
+ASP.NET Core antiforgery tokens help validate protected state-changing requests.
+
+5
+00:00:31.240 --> 00:00:44.280
+Razor Pages, MVC forms, AJAX submissions, cookie-authenticated APIs, and SPA workflows should all be reviewed according to how credentials are attached and how unsafe requests are made.
+
+6
+00:00:44.380 --> 00:00:50.540
+APIs that use bearer tokens may have different browser credential behavior, but they still need deliberate design.
+
+7
+00:00:50.820 --> 00:01:00.100
+SameSite cookies help reduce some cross-site cookie behavior and should be used thoughtfully, but they are defense in depth rather than the whole answer.
+
+8
+00:01:00.200 --> 00:01:03.240
+CORS should also stay in its own lane.
+
+9
+00:01:03.340 --> 00:01:11.020
+CORS controls cross-origin browser reads; it does not replace antiforgery validation, authentication, or authorization.
+
+10
+00:01:11.300 --> 00:01:14.980
+Data Protection planning matters for antiforgery reliability.
+
+11
+00:01:15.080 --> 00:01:22.040
+Multi-instance deployments and key rotation should be planned so tokens can be generated and validated consistently.
+
+12
+00:01:22.140 --> 00:01:29.420
+Token validation failures should be logged with safe operational context, not ignored or treated as ordinary user input.
+
+13
+00:01:29.700 --> 00:01:46.580
+The practical baseline is to inventory state-changing browser endpoints, confirm antiforgery validation, review cookie SameSite settings, keep CORS decisions separate, protect secrets and Data Protection keys, document exceptions, and test production-like flows.
+
+14
+00:01:46.680 --> 00:01:51.880
+CSRF prevention is a steady engineering habit, not a one-time checkbox.

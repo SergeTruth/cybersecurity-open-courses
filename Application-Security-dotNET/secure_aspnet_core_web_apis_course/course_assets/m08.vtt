@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.940
+Resource protection is part of API security because availability and predictable performance are security properties for real users.
+
+2
+00:00:08.040 --> 00:00:23.160
+An API that accepts unlimited request bodies, returns unbounded result sets, performs expensive work synchronously, or retries slow dependencies without limits can become fragile under normal mistakes as well as hostile traffic.
+
+3
+00:00:23.440 --> 00:00:32.160
+Use request body limits, upload limits, pagination, maximum page sizes, bounded filters, and controlled response sizes.
+
+4
+00:00:32.260 --> 00:00:35.860
+These controls should reflect business needs and system capacity.
+
+5
+00:00:35.960 --> 00:00:44.440
+A limit is most useful when it is explicit, documented, enforced consistently, and paired with a safe error response that legitimate callers can understand.
+
+6
+00:00:44.720 --> 00:00:51.280
+Timeouts, cancellation tokens, and graceful handling of slow dependencies help APIs fail predictably.
+
+7
+00:00:51.380 --> 00:00:57.860
+If a client disconnects or a dependency becomes slow, the application should avoid wasting work where possible.
+
+8
+00:00:57.960 --> 00:01:09.080
+Background jobs, long-running operations, and asynchronous workflows need status models, retry rules, and monitoring so they do not become invisible resource drains.
+
+9
+00:01:09.360 --> 00:01:12.720
+Rate limiting and throttling protect shared capacity.
+
+10
+00:01:12.820 --> 00:01:21.700
+They can be applied by user, client, token, IP range, route, tenant, or operation class depending on the architecture.
+
+11
+00:01:21.800 --> 00:01:30.200
+Rate limits are not a replacement for authorization or input validation, but they help prevent one caller or integration from consuming resources that others depend on.
+
+12
+00:01:30.480 --> 00:01:34.640
+Expensive queries and repeated operations need design attention.
+
+13
+00:01:34.740 --> 00:01:43.460
+Reporting endpoints, exports, batch jobs, search, file processing, and integrations can all create high resource cost.
+
+14
+00:01:43.560 --> 00:01:54.920
+Bound the inputs, queue heavy work when appropriate, make progress observable, and avoid letting clients trigger uncontrolled loops or memory-heavy processing with untrusted data.
+
+15
+00:01:55.200 --> 00:01:58.720
+File uploads combine input validation and resource protection.
+
+16
+00:01:58.820 --> 00:02:07.700
+Control file names, paths, content types, size limits, storage locations, scanning or review workflows, and download behavior.
+
+17
+00:02:07.800 --> 00:02:16.840
+Keep uploaded content away from executable paths and treat imported content as untrusted even when it comes from an authenticated or internal workflow.

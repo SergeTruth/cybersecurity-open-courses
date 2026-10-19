@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.700
+A Kubernetes service account represents the identity a pod uses to interact with the Kubernetes API unless the workload is configured otherwise.
+
+2
+00:00:07.800 --> 00:00:14.200
+For .NET developers, the important question is whether the application needs Kubernetes API access at all.
+
+3
+00:00:14.300 --> 00:00:18.300
+Many web apps, APIs, and background services do not.
+
+4
+00:00:18.580 --> 00:00:25.060
+If an application does not need Kubernetes API access, it should not receive broad permissions by default.
+
+5
+00:00:25.160 --> 00:00:32.280
+Avoid assumptions that the default service account is harmless, and avoid broad ClusterRoleBindings for ordinary application workloads.
+
+6
+00:00:32.380 --> 00:00:36.620
+The workload identity should match the real operational need.
+
+7
+00:00:36.900 --> 00:00:46.500
+When a .NET application does need API access, RBAC should grant the minimum verbs and resources required in the narrowest practical namespace scope.
+
+8
+00:00:46.600 --> 00:00:54.280
+Reading one ConfigMap, listing one resource type, or updating one status field are different permission levels and should be reviewed as separate decisions.
+
+9
+00:00:54.560 --> 00:01:00.080
+Service account tokens, mounted credentials, and projected tokens should be treated as sensitive.
+
+10
+00:01:00.180 --> 00:01:04.100
+They can grant access to cluster resources according to their permissions.
+
+11
+00:01:04.200 --> 00:01:10.680
+Token audience, expiration, mounting behavior, and logging exposure deserve direct review.
+
+12
+00:01:10.960 --> 00:01:16.160
+Authorization to cloud services and authorization to the Kubernetes API are separate decisions.
+
+13
+00:01:16.260 --> 00:01:28.340
+Workload identity or cloud identity integration can let applications access cloud services without embedding long-lived credentials, but those permissions still need ownership, review, and environment separation.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "App Isolation, Shared Cookies, and Multi-App Scenarios",
+  "graphicAlt": "Default app isolation is compared with intentional sharing that aligns key, app identity and cookie configuration within reviewed environment boundaries.",
+  "narration": "Data Protection isolates applications and purposes so protected payloads are not broadly interchangeable. That isolation is useful because most applications should not be able to read each other's cookies, tokens, or internal protected values just because they run on the same platform.\n\nSome scenarios intentionally share protected payload behavior. A common example is sharing authentication cookies across related ASP.NET Core applications. That can support a unified user experience, but it requires careful alignment of key storage, application name, cookie name, authentication scheme, domain, path, and deployment environment.\n\nSharing should be deliberate, documented, and limited to applications that truly need it. Multi-app scenarios create risk if one application has weaker access controls, weaker hosting, broader operator access, different release practices, or looser logging. A shared cookie can connect the reliability and security posture of multiple apps.\n\nDeployment slots and staging systems should not accidentally share production protected payload behavior unless specifically designed. A staging app that can read production cookies or protected state may create confusing user behavior and governance concerns. Environment boundaries should be reviewed as carefully as app boundaries.\n\nThe practical question is whether sharing is necessary and whether every participant meets the same expectations. If the answer is yes, align the configuration intentionally. If the answer is no, keep application names, key rings, cookie settings, and environments separated.",
+  "narrationPoints": [
+    "Data Protection isolates applications and purposes so protected payloads are not broadly interchangeable.",
+    "A common example is sharing authentication cookies across related ASP.NET Core applications.",
+    "A shared cookie can connect the reliability and security posture of multiple apps.",
+    "A staging app that can read production cookies or protected state may create confusing user behavior and governance concerns.",
+    "If the answer is no, keep application names, key rings, cookie settings, and environments separated."
+  ]
+};

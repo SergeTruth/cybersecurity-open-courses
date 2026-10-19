@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Private Members, Encapsulation, and Trust Boundaries",
+  "graphicAlt": "Intentional public contracts preserve reviewable boundaries; necessary nonpublic reflection requires a documented scope, owner and compatibility review.",
+  "narration": "Reflection can sometimes access nonpublic members inside the same trusted process depending on runtime, permissions, and API usage. Private fields, internal methods, and test-only hooks often exist outside the intended public contract. They may not have the same validation, authorization, logging, or stability guarantees as public APIs.\n\nAccessing nonpublic members can sidestep design assumptions, validation paths, invariants, and audit points. A private field may be valid only after a constructor or setter runs. An internal method may assume it is called by a narrow framework path. A test hook may exist only for controlled test fixtures.\n\nDo not treat private member reflection as a safe production extension mechanism. If behavior needs to be extended, prefer an intentional interface, service registration, policy, strategy object, or public contract. Those designs are easier to review and support across versions.\n\nIf nonpublic reflection is required for a framework, migration, test, or compatibility scenario, document the reason, scope, owner, and review path. The team should know which member is accessed, why a public alternative is not used, and what will happen if the underlying implementation changes.\n\nSecurity controls should be enforced by public, intentional application boundaries rather than by hoping private members stay private inside trusted code. Privileged administrative behavior should use explicit, reviewed capabilities rather than hidden reflected members.",
+  "narrationPoints": [
+    "Reflection can sometimes access nonpublic members inside the same trusted process depending on runtime, permissions, and API usage.",
+    "Accessing nonpublic members can sidestep design assumptions, validation paths, invariants, and audit points.",
+    "Do not treat private member reflection as a safe production extension mechanism.",
+    "If nonpublic reflection is required for a framework, migration, test, or compatibility scenario, document the reason.",
+    "Privileged administrative behavior should use explicit, reviewed capabilities rather than hidden reflected members."
+  ]
+};

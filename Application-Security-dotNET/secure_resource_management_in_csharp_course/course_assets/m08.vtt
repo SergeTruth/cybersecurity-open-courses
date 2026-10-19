@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Cancellation and timeouts are resource-management controls.
+
+2
+00:00:04.920 --> 00:00:14.840
+They define how long work may consume CPU, memory, locks, connections, external service capacity, and user attention.
+
+3
+00:00:14.940 --> 00:00:23.900
+Without these controls, work can continue after the caller is gone, after shutdown has started, or after a dependency has stopped responding in a useful time.
+
+4
+00:00:24.180 --> 00:00:27.940
+Cancellation in .NET is cooperative.
+
+5
+00:00:28.040 --> 00:00:35.960
+A token communicates that the caller no longer wants the work to continue, but the called code must observe the token and stop at safe points.
+
+6
+00:00:36.060 --> 00:00:47.020
+Passing cancellation through supported call chains helps requests, background jobs, database operations, HTTP calls, streams, and queues release resources sooner.
+
+7
+00:00:47.300 --> 00:00:49.780
+Timeouts prevent indefinite waits.
+
+8
+00:00:49.880 --> 00:00:58.600
+They should be applied to external calls, lock acquisition, queue operations, background workflows, and any operation where waiting forever would be harmful.
+
+9
+00:00:58.700 --> 00:01:05.340
+Timeout behavior should be tested with cleanup and error handling so partial work does not leave inconsistent state.
+
+10
+00:01:05.620 --> 00:01:10.100
+Bounded concurrency protects dependencies and the application itself.
+
+11
+00:01:10.200 --> 00:01:22.440
+Worker counts, request limits, connection pool limits, queue capacity, semaphore limits, and rate limits all help prevent one feature from consuming capacity needed by the rest of the system.
+
+12
+00:01:22.540 --> 00:01:27.660
+Limits should be paired with clear failure behavior so callers receive predictable outcomes.
+
+13
+00:01:27.940 --> 00:01:30.900
+Work queues need ownership and recovery rules.
+
+14
+00:01:31.000 --> 00:01:40.360
+A queue should define who can enqueue work, how much it can hold, how failures are recorded, when retries stop, and what happens to messages that cannot be processed.
+
+15
+00:01:40.460 --> 00:01:46.700
+Poison-message handling and dead-letter behavior may be appropriate for workflows where retrying forever would hide the real problem.
+
+16
+00:01:46.980 --> 00:01:53.460
+Cleanup should preserve consistent application state after cancellation, timeout, or partial failure.
+
+17
+00:01:53.560 --> 00:02:04.920
+That may mean releasing locks, rolling back transactions, deleting temporary files, returning buffers, closing streams, marking work as incomplete, or scheduling safe follow-up.
+
+18
+00:02:05.020 --> 00:02:08.940
+Resource limits are most effective when recovery paths are designed with them.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Common CORS review findings are usually about excessive scope or unclear intent.
+
+2
+00:00:05.560 --> 00:00:08.920
+A global policy may be enabled without a clear requirement.
+
+3
+00:00:09.020 --> 00:00:11.820
+All origins may be allowed for convenience.
+
+4
+00:00:11.920 --> 00:00:15.600
+All methods may be allowed even when only one method is needed.
+
+5
+00:00:15.700 --> 00:00:20.020
+All headers may be accepted without knowing what the browser client sends.
+
+6
+00:00:20.120 --> 00:00:23.720
+Credentials may be allowed without a narrow origin list.
+
+7
+00:00:23.820 --> 00:00:28.780
+Each finding points to the same issue: the policy no longer describes a specific relationship.
+
+8
+00:00:29.060 --> 00:00:32.820
+Local development origins are another common source of drift.
+
+9
+00:00:32.920 --> 00:00:41.880
+A localhost port, preview host, temporary test domain, or staging frontend may be added during implementation and then carried into production.
+
+10
+00:00:41.980 --> 00:00:48.780
+Environment-specific configuration should be reviewed before release so development convenience does not become production trust.
+
+11
+00:00:49.060 --> 00:00:52.580
+Gateway, proxy, and application behavior should be reviewed together.
+
+12
+00:00:52.680 --> 00:01:01.720
+An edge service may answer preflight requests, add CORS headers, remove headers, or behave differently from the ASP.NET Core application.
+
+13
+00:01:01.820 --> 00:01:07.500
+If multiple layers disagree, browser errors can be confusing and teams may widen the wrong policy.
+
+14
+00:01:07.600 --> 00:01:10.720
+The review should follow the actual production request path.
+
+15
+00:01:11.000 --> 00:01:16.360
+CORS errors are often confused with authentication or authorization failures.
+
+16
+00:01:16.460 --> 00:01:23.020
+A browser may report that a response was blocked by CORS, while the backend may have returned an error for a different reason.
+
+17
+00:01:23.120 --> 00:01:38.480
+Troubleshooting should confirm the intended origin, endpoint, method, headers, credentials, authentication state, authorization result, middleware order, and proxy behavior without assuming CORS is the root cause.
+
+18
+00:01:38.760 --> 00:01:41.240
+A safe review starts with the business need.
+
+19
+00:01:41.340 --> 00:01:55.260
+Identify the browser client origin, the API endpoints, the methods, the headers, whether credentials are required, the environments where the policy applies, the endpoint scope, the middleware order, and the gateway behavior.
+
+20
+00:01:55.360 --> 00:02:02.160
+Then document the decision so future teams know why the exception exists and when it should be removed or changed.

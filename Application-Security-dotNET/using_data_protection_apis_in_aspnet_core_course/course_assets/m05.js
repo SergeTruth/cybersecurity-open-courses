@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Key Rings, Key Lifetime, and Rotation",
+  "graphicAlt": "New Protect uses an active key while older payloads may need retained older keys for Unprotect; revocation impact is reviewed.",
+  "narration": "Data Protection uses a key ring to protect and unprotect payloads. The key ring contains key material and metadata used by the framework. New Protect operations use an active default key, while Unprotect may need older keys to read payloads that were created before rotation.\n\nKeys move through lifecycle states such as created, active, expired, and revoked. Expired keys are not usually used for new protection, but they may still be needed to unprotect existing payloads. That distinction matters for cookies, workflow links, temporary state, and any stored protected values that outlive a single request.\n\nAutomatic key management reduces custom cryptographic burden. Developers do not have to design low-level key rotation themselves for normal Data Protection use. But automatic management does not remove deployment responsibility. The application still needs durable storage, environment separation, access control, backup planning, and an understanding of how key changes affect users.\n\nRotation should be understood before changing key storage, application name, deployment slots, hosting topology, or shared-cookie configuration. A change that seems operational can affect whether existing payloads remain readable. That can result in user sign-outs, invalid workflow links, or forms failing validation.\n\nRevoking or deleting keys can make existing protected payloads unreadable. Sometimes revocation is the right response to a key compromise, but it should be treated as an incident decision with known user impact. Backup and restore plans should also consider whether protected payloads must survive deployment failures or disaster recovery.",
+  "narrationPoints": [
+    "The key ring contains key material and metadata used by the framework.",
+    "Expired keys are not usually used for new protection, but they may still be needed to unprotect existing payloads.",
+    "Developers do not have to design low-level key rotation themselves for normal Data Protection use.",
+    "Rotation should be understood before changing key storage, application name, deployment slots, hosting topology.",
+    "Sometimes revocation is the right response to a key compromise, but it should be treated as an incident decision with known user impact."
+  ]
+};

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.780
+Traditional server-rendered forms are a core use case for antiforgery protection.
+
+2
+00:00:05.880 --> 00:00:15.560
+Razor Pages and MVC applications often render forms from the server, receive submitted values, validate model state, and then change server-side state.
+
+3
+00:00:15.660 --> 00:00:20.060
+That workflow is exactly where antiforgery validation fits naturally.
+
+4
+00:00:20.340 --> 00:00:27.700
+ASP.NET Core provides framework conventions and validation attributes that can help apply antiforgery protection.
+
+5
+00:00:27.800 --> 00:00:32.840
+Teams should understand which conventions are active in their application and where explicit attributes are used.
+
+6
+00:00:32.940 --> 00:00:41.660
+The goal is not to memorize every implementation detail; it is to know which state-changing handlers and actions require valid antiforgery validation.
+
+7
+00:00:41.940 --> 00:00:49.540
+Consistency matters across full pages, partial views, shared layouts, admin forms, and AJAX form submissions.
+
+8
+00:00:49.640 --> 00:00:59.320
+A form generated through normal helpers may receive expected antiforgery support, while a hand-built form, custom component, or JavaScript submission path may need extra review.
+
+9
+00:00:59.420 --> 00:01:04.620
+Different UI paths should not create different protection levels for the same sensitive operation.
+
+10
+00:01:04.900 --> 00:01:09.780
+Teams should review every unsafe action, not only the most visible forms.
+
+11
+00:01:09.880 --> 00:01:23.960
+Administrative forms, support tools, account settings, email changes, profile updates, approval workflows, exports, delete operations, and configuration changes can all modify server-side state.
+
+12
+00:01:24.060 --> 00:01:28.860
+If a browser session can trigger the change, antiforgery behavior should be part of the review.
+
+13
+00:01:29.140 --> 00:01:34.180
+Forms generated outside normal template conventions deserve careful attention.
+
+14
+00:01:34.280 --> 00:01:45.080
+A shared layout, reusable component, partial view, modal dialog, or custom JavaScript handler may look ordinary to the user while following a different submission path.
+
+15
+00:01:45.180 --> 00:01:51.100
+Reviewers should trace how the token is rendered, how the request is sent, and where validation happens on the server.
+
+16
+00:01:51.380 --> 00:01:54.100
+The practical pattern is to make protection visible.
+
+17
+00:01:54.200 --> 00:02:11.160
+State-changing Razor Pages and MVC actions should have consistent antiforgery expectations, tests or review notes where appropriate, safe failure behavior, and logging that helps identify configuration or client-flow mistakes without exposing sensitive values.

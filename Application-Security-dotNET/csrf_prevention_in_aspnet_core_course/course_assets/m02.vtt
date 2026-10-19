@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Browsers manage cookies and may attach them to requests according to cookie rules.
+
+2
+00:00:06.440 --> 00:00:12.120
+That behavior is useful because users do not need to manually present a session credential on every page.
+
+3
+00:00:12.220 --> 00:00:21.180
+It is also security-sensitive because a request can arrive with valid session cookies even when the server still needs to confirm the request belongs to the expected workflow.
+
+4
+00:00:21.460 --> 00:00:27.700
+Server-side applications should treat state-changing browser requests differently from ordinary reads.
+
+5
+00:00:27.800 --> 00:00:40.280
+A read request may display data, while a state-changing request can update a profile, submit a form, approve a workflow, create an export, delete a record, or change configuration.
+
+6
+00:00:40.380 --> 00:00:46.060
+The server should know which requests are meant to be safe reads and which requests modify state.
+
+7
+00:00:46.340 --> 00:00:50.100
+GET-style requests should not be used for state-changing actions.
+
+8
+00:00:50.200 --> 00:01:00.360
+A GET request is expected to be safe to retrieve, bookmark, preview, cache, crawl, or repeat without changing application state.
+
+9
+00:01:00.460 --> 00:01:07.340
+When a GET request changes data, the application becomes harder to reason about and harder to protect consistently.
+
+10
+00:01:07.440 --> 00:01:12.560
+Use methods and endpoint design that clearly distinguish reads from changes.
+
+11
+00:01:12.840 --> 00:01:20.600
+Authentication identifies the user, but it does not prove that the user intentionally initiated a specific state-changing request.
+
+12
+00:01:20.700 --> 00:01:29.980
+Authorization decides whether the user can perform an action, but it does not prove that this exact browser request came from the intended application form or client flow.
+
+13
+00:01:30.080 --> 00:01:34.080
+That distinction is central to CSRF prevention.
+
+14
+00:01:34.360 --> 00:01:37.640
+CSRF controls add a request-intent signal.
+
+15
+00:01:37.740 --> 00:01:45.420
+In ASP.NET Core, antiforgery validation is the common way to protect browser-based state-changing requests.
+
+16
+00:01:45.520 --> 00:01:53.920
+The application expects a valid token along with the request and treats token validation as separate from identity and permission checks.
+
+17
+00:01:54.200 --> 00:01:58.440
+A practical review should classify endpoints by behavior.
+
+18
+00:01:58.540 --> 00:02:09.980
+Which endpoints read data, which modify data, which use cookies, which are called by server-rendered forms, which are called by JavaScript clients, and which are APIs for non-browser clients.
+
+19
+00:02:10.080 --> 00:02:13.200
+The correct CSRF model depends on those answers.

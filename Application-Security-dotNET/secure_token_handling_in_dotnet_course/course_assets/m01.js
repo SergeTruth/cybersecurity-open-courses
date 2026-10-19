@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Tokens as Security-Sensitive Credentials",
+  "graphicAlt": "A token has an explicit issuer, consumer and purpose, with protection, validation, retirement and safe observation across its lifecycle.",
+  "narration": "Tokens are security-sensitive credentials or protected payloads, not harmless strings. In .NET applications, a token may represent authentication state, API access, account recovery, session continuity, service identity, delegated permission, or protected workflow state. The word token covers several different mechanisms, so teams need to understand the purpose of each one.\n\nBearer tokens deserve special care because possession may be enough to use them in the context where they are accepted. That makes exposure, storage, transport, logging, and client handling important design decisions. A token that looks like opaque text may still carry authorization impact, cost impact, user impact, or operational impact.\n\nSecure token handling includes generation, issuance, transport, storage, validation, authorization, expiration, rotation, revocation, logging, monitoring, and incident response. A team that validates a token but logs it, stores it loosely, or never rotates related keys still has an incomplete design.\n\nToken handling also reduces confusion. A password reset token is not an API access token. An ID token is not a general-purpose authorization token. A Data Protection payload is not the same thing as a JWT. Clear purpose prevents developers from validating or storing the wrong token in the wrong place.\n\nThe goal is to reduce exposure, misuse, confusion, and operational blind spots. Reviewers should be able to tell what each token represents, who issues it, who validates it, how long it lasts, where it travels, where it is stored, and what happens when it must be disabled or replaced.",
+  "narrationPoints": [
+    "In .NET applications, a token may represent authentication state, API access, account recovery, session continuity.",
+    "A token that looks like opaque text may still carry authorization impact, cost impact, user impact.",
+    "A team that validates a token but logs it, stores it loosely.",
+    "Clear purpose prevents developers from validating or storing the wrong token in the wrong place.",
+    "Reviewers should be able to tell what each token represents, who issues it, who validates it, how long it lasts."
+  ]
+};

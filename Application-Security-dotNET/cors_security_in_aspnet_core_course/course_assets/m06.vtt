@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Middleware order is part of ASP.NET Core security behavior.
+
+2
+00:00:05.000 --> 00:00:14.360
+CORS must be placed intentionally in relation to routing, authentication, authorization, static files, response caching, and endpoint mapping.
+
+3
+00:00:14.460 --> 00:00:23.340
+If the policy runs too early, too late, or on the wrong branch of the pipeline, it may appear not to work or may apply differently than intended.
+
+4
+00:00:23.620 --> 00:00:29.300
+Routing and endpoint metadata are especially important when CORS decisions are endpoint-specific.
+
+5
+00:00:29.400 --> 00:00:38.280
+The application needs enough routing context to know which endpoint is being evaluated, and the CORS middleware needs to run before the endpoint response is finalized.
+
+6
+00:00:38.380 --> 00:00:47.740
+When module, route, and policy intent are aligned, reviewers can understand why a particular endpoint allows a particular browser origin.
+
+7
+00:00:48.020 --> 00:00:53.700
+Static files, response caching, gateways, and proxies can change expectations.
+
+8
+00:00:53.800 --> 00:00:57.800
+A cached response may not include the headers the browser expects.
+
+9
+00:00:57.900 --> 00:01:03.420
+A static file path may not pass through the same policy as API endpoints.
+
+10
+00:01:03.520 --> 00:01:06.960
+A gateway may add, remove, or duplicate headers.
+
+11
+00:01:07.060 --> 00:01:10.820
+A proxy may answer OPTIONS before the application sees the request.
+
+12
+00:01:10.920 --> 00:01:16.360
+These are configuration issues, not reasons to broaden application policy without review.
+
+13
+00:01:16.640 --> 00:01:19.440
+Endpoint scope matters as much as middleware order.
+
+14
+00:01:19.540 --> 00:01:33.540
+A policy intended for a public browser client should not automatically cover administrative endpoints, operational endpoints, internal APIs, or routes that were never meant for cross-origin browser use.
+
+15
+00:01:33.640 --> 00:01:38.680
+Grouping endpoints and assigning policies intentionally makes the application easier to reason about.
+
+16
+00:01:38.960 --> 00:01:45.200
+CORS should not become an accidental global permission added only to make browser errors disappear.
+
+17
+00:01:45.300 --> 00:01:53.940
+A browser error is a signal to check origin, method, headers, credentials, middleware placement, endpoint scope, and infrastructure behavior.
+
+18
+00:01:54.040 --> 00:01:59.560
+The fix should match the business requirement rather than create broad permission for unknown future clients.

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+Some protected values should expire.
+
+2
+00:00:03.720 --> 00:00:18.760
+Time-limited protection can be useful when a payload supports a workflow that should be valid only for a defined window, such as an invite link, export link, approval link, account workflow token, temporary access decision, or short-lived protected state.
+
+3
+00:00:19.040 --> 00:00:22.560
+Expiration should be based on the business risk of the workflow.
+
+4
+00:00:22.660 --> 00:00:29.380
+A low-risk confirmation link, a sensitive export link, and an approval decision may need different lifetimes.
+
+5
+00:00:29.480 --> 00:00:37.000
+The time limit should be long enough for normal users to complete the workflow and short enough to reduce the impact of stale links or copied values.
+
+6
+00:00:37.280 --> 00:00:43.200
+A time-limited protected payload is not the same as full account authorization or session management.
+
+7
+00:00:43.300 --> 00:00:56.580
+The protected payload can show that the value was created by the application and has not expired, but server-side checks may still be needed for ownership, tenant, current account status, permission changes, revocation, or one-time use.
+
+8
+00:00:56.860 --> 00:01:03.100
+Expired, malformed, or invalid protected payloads should fail predictably and safely.
+
+9
+00:01:03.200 --> 00:01:11.280
+Users should receive a clear recovery path when appropriate, and clients should not see internal key, purpose, or payload details.
+
+10
+00:01:11.380 --> 00:01:16.740
+The application should avoid treating every unprotect failure as an unexpected crash.
+
+11
+00:01:17.020 --> 00:01:22.140
+Logs should help troubleshoot failures without recording protected or unprotected sensitive values.
+
+12
+00:01:22.240 --> 00:01:32.880
+Useful signals include workflow type, failure category, age or expiration state when safe to record, tenant or environment context, and correlation IDs.
+
+13
+00:01:32.980 --> 00:01:37.220
+Sensitive payload contents should stay out of logs and support artifacts.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.700
+Authorization decides whether an authenticated identity may perform a specific action on a specific resource under the current conditions.
+
+2
+00:00:07.800 --> 00:00:21.800
+In ASP.NET Core Web APIs, that decision may appear on controllers, actions, minimal APIs, route groups, endpoint filters, service-layer methods, or resource-based authorization handlers.
+
+3
+00:00:21.900 --> 00:00:28.300
+Whatever pattern the application uses, the rule should be applied consistently wherever the operation can occur.
+
+4
+00:00:28.580 --> 00:00:34.500
+Claims and scopes are important inputs, but they are not complete access decisions by themselves.
+
+5
+00:00:34.600 --> 00:00:45.000
+A scope may say that a client can request invoices, but the API still has to decide which invoices, for which tenant, under which role, and in which workflow state.
+
+6
+00:00:45.100 --> 00:00:51.900
+A claim may describe a user or service, but local business rules decide how that claim maps to allowed behavior.
+
+7
+00:00:52.180 --> 00:00:55.860
+Policy-based authorization helps make rules explicit.
+
+8
+00:00:55.960 --> 00:01:03.800
+Policies can combine roles, claims, scopes, tenant context, ownership, operation type, environment, and resource attributes.
+
+9
+00:01:03.900 --> 00:01:13.820
+Role-based authorization can still be useful when roles match real responsibilities, but complex API decisions often need policies that reflect business rules rather than broad labels.
+
+10
+00:01:14.100 --> 00:01:17.620
+Object-level authorization is essential for APIs.
+
+11
+00:01:17.720 --> 00:01:21.480
+A user may be allowed to view reports, but not every report.
+
+12
+00:01:21.580 --> 00:01:26.060
+A partner integration may submit jobs for one account, but not another.
+
+13
+00:01:26.160 --> 00:01:32.560
+A background worker may update a processing state, but not change ownership or approval.
+
+14
+00:01:32.660 --> 00:01:41.540
+Authorization should include the actual record, tenant, file, job, administrative action, or data set when that context matters.
+
+15
+00:01:41.820 --> 00:01:52.380
+Least privilege applies to all callers: humans, service accounts, administrators, background workers, partner integrations, and deployment systems.
+
+16
+00:01:52.480 --> 00:01:56.640
+API credentials should not be broader than the integration needs.
+
+17
+00:01:56.740 --> 00:02:05.860
+Administrative and support APIs are especially high-risk because they often combine broad data visibility with powerful actions and urgent operational workflows.
+
+18
+00:02:06.140 --> 00:02:10.300
+Centralized, reviewable authorization logic reduces drift.
+
+19
+00:02:10.400 --> 00:02:16.800
+If each endpoint invents its own permission check, rules become inconsistent and hard to audit.
+
+20
+00:02:16.900 --> 00:02:29.620
+Well-named policies, resource-based handlers, shared application services, and clear tests make it easier for code reviewers and security teams to understand the real access model.

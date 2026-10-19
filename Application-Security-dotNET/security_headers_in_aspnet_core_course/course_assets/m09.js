@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Practical Header Baseline",
+  "graphicAlt": "A narrow policy is tested in final responses and maintained by an owner on a foundation of secure application controls.",
+  "narration": "A practical ASP.NET Core security header baseline starts with the idea that headers are browser-enforced defense in depth. They help guide browser behavior around transport, resource loading, framing, content type handling, referrer information, and selected browser features. They support secure engineering, but they do not replace it.\n\nHSTS supports HTTPS-only behavior when deployed carefully. CSP should be designed from an inventory of real application resources, tested with report-only behavior where useful, and enforced intentionally. Framing controls reduce unwanted embedding risk. Nosniff and accurate content types reduce content confusion. Referrer-Policy reduces unnecessary URL information exposure. Permissions-Policy limits browser feature access.\n\nHeader ownership must be clear across the app, proxy, CDN, hosting platform, web server, and error-handling paths. Review behavior across MVC views, Razor Pages, APIs, static assets, authentication pages, admin pages, health endpoints, downloads, and production error responses. The final browser response is what matters.\n\nThe baseline should be narrow, documented, tested, and maintained. Track exceptions, review environment differences, avoid carrying development settings into production, and revisit policies when frontend resources, third-party services, deployment layers, or browser support changes.\n\nThe final takeaway is steady engineering discipline. Security headers are valuable controls, but they work best when paired with authentication, authorization, input validation, output encoding, CSRF protection, logging, secure configuration, and responsible operational review.",
+  "narrationPoints": [
+    "A practical ASP.NET Core security header baseline starts with the idea that headers are browser-enforced defense in depth.",
+    "CSP should be designed from an inventory of real application resources, tested with report-only behavior where useful.",
+    "Review behavior across MVC views, Razor Pages, APIs, static assets, authentication pages.",
+    "Track exceptions, review environment differences, avoid carrying development settings into production.",
+    "Security headers are valuable controls, but they work best when paired with authentication, authorization, input validation."
+  ]
+};

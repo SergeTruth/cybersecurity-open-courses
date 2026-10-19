@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why CSRF Matters",
+  "graphicAlt": "Authentication and authorization do not replace antiforgery evidence for protected state-changing browser requests.",
+  "narration": "Cross-Site Request Forgery, or CSRF, is a browser-session risk involving unwanted state-changing actions. The key idea is not that a user is unknown to the application. The user may already be authenticated. The issue is that an authenticated browser request is not always an intended request from the user.\n\nCSRF matters most when a browser automatically includes existing credentials, especially cookies. A server-rendered ASP.NET Core application may rely on authentication cookies for a signed-in session. When the browser sends those cookies according to cookie rules, the server can identify the user, but it still needs a way to know whether a protected state-changing action came from the intended application interaction.\n\nState-changing actions deserve special attention. Creating, modifying, deleting, submitting, approving, purchasing, transferring, configuring, or otherwise changing server-side state has different risk than reading a public page. A request that changes data should meet stronger expectations than a request that only reads a low-risk resource.\n\nThe defensive idea is user intent. Authentication answers who the browser session belongs to. Authorization answers whether that user may perform the action. CSRF prevention adds a signal that the protected request came through the intended application flow. Those controls are related, but they answer different questions.\n\nIn ASP.NET Core, CSRF prevention is part of normal application design. Teams should review state-changing endpoints, cookie behavior, form conventions, JavaScript clients, SameSite settings, CORS assumptions, Data Protection configuration, and logging. The goal is not a fear-based checklist. The goal is predictable request handling for browser-based workflows.",
+  "narrationPoints": [
+    "The issue is that an authenticated browser request is not always an intended request from the user.",
+    "When the browser sends those cookies according to cookie rules, the server can identify the user.",
+    "A request that changes data should meet stronger expectations than a request that only reads a low-risk resource.",
+    "CSRF prevention adds a signal that the protected request came through the intended application flow.",
+    "In ASP.NET Core, CSRF prevention is part of normal application design."
+  ]
+};

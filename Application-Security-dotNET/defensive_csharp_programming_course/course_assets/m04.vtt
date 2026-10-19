@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Defensive error handling starts by distinguishing expected failures from unexpected defects.
+
+2
+00:00:06.200 --> 00:00:15.160
+Missing input, validation failure, unavailable dependencies, timeouts, permission problems, and not-found results are often expected conditions.
+
+3
+00:00:15.260 --> 00:00:22.860
+A null dereference, violated invariant, or impossible state may indicate a defect that should be fixed rather than hidden.
+
+4
+00:00:23.140 --> 00:00:28.740
+Exceptions should be used intentionally, not as invisible control flow spread across the codebase.
+
+5
+00:00:28.840 --> 00:00:43.240
+Catch exceptions at meaningful boundaries: request boundaries, job boundaries, message handlers, integration boundaries, and places where the application can add context, choose a safe response, or preserve diagnostic detail.
+
+6
+00:00:43.520 --> 00:00:48.240
+Swallowed exceptions are dangerous because they make the system lie about its state.
+
+7
+00:00:48.340 --> 00:00:59.460
+A catch block that ignores failure may leave data partially processed, resources open, security decisions incomplete, or operators unaware that something went wrong.
+
+8
+00:00:59.560 --> 00:01:04.360
+If the code catches an exception, it should have a reason and a defined next step.
+
+9
+00:01:04.640 --> 00:01:08.080
+User-facing errors should be safe and limited.
+
+10
+00:01:08.180 --> 00:01:17.300
+They should not expose stack traces, connection strings, tokens, internal file paths, raw database errors, sensitive records, or implementation details.
+
+11
+00:01:17.400 --> 00:01:24.680
+At the same time, users need enough information to understand whether they can retry, correct input, or contact support.
+
+12
+00:01:24.960 --> 00:01:28.800
+Operational logs should preserve useful detail for authorized teams.
+
+13
+00:01:28.900 --> 00:01:34.500
+A good error path separates what the user sees from what operators can investigate.
+
+14
+00:01:34.600 --> 00:01:45.720
+Correlation IDs, exception categories, dependency names, request context, and sanitized details help troubleshoot without disclosing secrets or private data.

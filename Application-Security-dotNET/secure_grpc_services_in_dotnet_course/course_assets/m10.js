@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Secure gRPC Service Baseline",
+  "graphicAlt": "A secure gRPC baseline traces narrow contracts through protected channels, resource policy, bounded work and operational review.",
+  "narration": "A secure gRPC service baseline starts by treating gRPC as an RPC framework, not a trust boundary. The framework gives you structured contracts, generated clients, efficient serialization, and HTTP/2 communication. Your system still needs explicit identity, authorization, validation, resource controls, safe errors, and operational review.\n\nDesign narrow Protobuf contracts and enforce identity deliberately. Messages should be purpose-driven, sensitive fields should be minimized, compatibility changes should be reviewed, and transport security should establish the service connection. Authentication identifies the caller. Authorization decides which services, methods, tenants, records, and operations are allowed.\n\nValidate messages before work is performed. Bound message types are not proof of business validity. Service methods should check required fields, ranges, formats, ownership, tenant scope, and method-specific rules before making changes or doing expensive work.\n\nBound resource use with message limits, streaming design review, deadlines, cancellation, and retry policy. These reliability features also protect capacity. They help ensure that calls have time budgets, streams have controls, repeated attempts are safe, and canceled work does not continue without value.\n\nFinally, review metadata, credentials, error details, observability, reflection, JSON transcoding, infrastructure, and production deployment. Secure gRPC services are easier to operate when security decisions are visible from the contract through the channel, method, logs, and deployment path.",
+  "narrationPoints": [
+    "A secure gRPC service baseline starts by treating gRPC as an RPC framework, not a trust boundary.",
+    "Messages should be purpose-driven, sensitive fields should be minimized, compatibility changes should be reviewed.",
+    "Service methods should check required fields, ranges, formats, ownership, tenant scope.",
+    "Bound resource use with message limits, streaming design review, deadlines, cancellation.",
+    "Secure gRPC services are easier to operate when security decisions are visible from the contract through the channel, method, logs."
+  ]
+};

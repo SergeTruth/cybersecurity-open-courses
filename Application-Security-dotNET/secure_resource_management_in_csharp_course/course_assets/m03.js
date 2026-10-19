@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Async Disposal and Asynchronous Resource Cleanup",
+  "graphicAlt": "Asynchronous resources use awaited cleanup before scope exit, with cleanup failures made observable.",
+  "narration": "Some cleanup work needs asynchronous operations. A resource may need to flush data, finish a protocol exchange, close a network-backed stream, return state to a remote service, or release framework-owned resources through an asynchronous path. Synchronous disposal is not always the best fit for that kind of cleanup.\n\nIAsyncDisposable gives C# a standard pattern for asynchronous cleanup. When a type exposes asynchronous disposal and the cleanup path matters, await using allows the application to await that cleanup before leaving the scope. That makes the release behavior explicit and helps prevent cleanup work from being ignored.\n\nAsync cleanup still needs the same ownership rules as synchronous disposal. The code that owns the resource should release it, and the code should define what happens when cleanup fails, is canceled, or occurs during shutdown. Important cleanup failures should be visible through safe logs or metrics so production behavior can be reviewed.\n\nDo not ignore tasks or value tasks returned by cleanup paths. Fire-and-forget cleanup can hide failures, leave work incomplete, or make shutdown behavior unpredictable. If cleanup must be attempted in the background, that decision should be designed with logging, retry limits, ownership, and lifecycle control.\n\nAvoid mixing synchronous blocking with asynchronous cleanup in a way that stalls request threads or background workers. Blocking on asynchronous cleanup can contribute to thread starvation or delayed shutdown. The preferred design is to keep asynchronous workflows asynchronous from acquisition through cleanup when the resource API supports it.",
+  "narrationPoints": [
+    "Synchronous disposal is not always the best fit for that kind of cleanup.",
+    "When a type exposes asynchronous disposal and the cleanup path matters.",
+    "The code that owns the resource should release it, and the code should define what happens when cleanup fails, is canceled.",
+    "If cleanup must be attempted in the background, that decision should be designed with logging, retry limits, ownership.",
+    "Avoid mixing synchronous blocking with asynchronous cleanup in a way that stalls request threads or background workers."
+  ]
+};

@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+ASP.NET Core can emit response headers from several places.
+
+2
+00:00:05.400 --> 00:00:09.320
+Middleware can add headers across broad sections of the pipeline.
+
+3
+00:00:09.420 --> 00:00:13.980
+Endpoint conventions or filters can apply behavior to selected routes.
+
+4
+00:00:14.080 --> 00:00:17.360
+Static file configuration can affect asset responses.
+
+5
+00:00:17.460 --> 00:00:20.020
+Custom middleware can handle special cases.
+
+6
+00:00:20.120 --> 00:00:27.800
+Maintained security header packages may provide centralized policy support when their behavior is understood and reviewed.
+
+7
+00:00:28.080 --> 00:00:32.720
+Headers may also be added or modified outside the application.
+
+8
+00:00:32.820 --> 00:00:43.380
+Reverse proxies, ingress controllers, load balancers, CDNs, hosting platforms, and web servers can all change the final response seen by the browser.
+
+9
+00:00:43.480 --> 00:00:45.880
+That layered reality is common in production.
+
+10
+00:00:45.980 --> 00:00:49.260
+It also means header ownership must be clear.
+
+11
+00:00:49.360 --> 00:00:56.880
+Developers should know whether the app, proxy, CDN, or platform owns each policy.
+
+12
+00:00:57.160 --> 00:01:01.080
+Different response paths may not behave the same way unless reviewed.
+
+13
+00:01:01.180 --> 00:01:16.060
+MVC views, Razor Pages, API responses, static assets, authentication pages, error pages, health endpoints, admin surfaces, and file downloads can follow different paths through the application and infrastructure.
+
+14
+00:01:16.160 --> 00:01:21.280
+A header visible on the home page may not be present on an error response or static file.
+
+15
+00:01:21.560 --> 00:01:25.160
+Duplicate or contradictory headers create confusing behavior.
+
+16
+00:01:25.260 --> 00:01:33.180
+If the application emits one policy and the CDN appends another, the browser may enforce a result the team did not intend.
+
+17
+00:01:33.280 --> 00:01:39.760
+If staging and production use different infrastructure rules, testing may not represent real behavior.
+
+18
+00:01:39.860 --> 00:01:45.540
+Header review should look at the final response as delivered, not only application code.
+
+19
+00:01:45.820 --> 00:01:49.420
+Development settings should not silently become production policy.
+
+20
+00:01:49.520 --> 00:02:02.480
+Local hosts, relaxed CSP settings, temporary framing permissions, verbose diagnostics, or preview deployment exceptions may be useful during implementation, but they should have clear environment scope.
+
+21
+00:02:02.580 --> 00:02:05.220
+Production policy should be explicit and owned.
+
+22
+00:02:05.500 --> 00:02:14.940
+The practical review question is simple: for each important response path, which layer emits the header, what value does the browser actually receive, and who owns changes.
+
+23
+00:02:15.040 --> 00:02:20.240
+Without that clarity, header configuration becomes hard to maintain and hard to trust.

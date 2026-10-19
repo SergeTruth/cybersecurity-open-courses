@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Security Headers Matter",
+  "graphicAlt": "Response headers guide browser behavior while secure application logic provides the foundation.",
+  "narration": "HTTP security response headers are browser-facing defense-in-depth controls. They let a server tell the browser how to handle certain security-sensitive behaviors for a response or site. In ASP.NET Core, headers can influence transport expectations, script and resource loading, framing, content-type handling, referrer information, and access to selected browser features.\n\nHeaders matter because browsers make many decisions on behalf of users. A response can tell the browser to prefer HTTPS, reduce content-type guessing, limit where resources may load from, prevent or restrict embedding, reduce URL information shared with other sites, or limit access to features such as camera, microphone, geolocation, and sensors. These controls help constrain browser behavior when configured carefully.\n\nSecurity headers do not replace secure application logic. They do not authenticate users, authorize actions, validate input, encode output, protect every state-changing request, or fix unsafe data handling. They work alongside those controls. A strong header baseline can reduce certain browser-side risks, but it cannot rescue an application that exposes sensitive data or enforces access rules incorrectly.\n\nA useful header baseline should be intentional, tested, documented, and maintained. Copying a long list of headers from a scanner report without understanding the application can break functionality, create false confidence, or leave important paths uncovered. The team should know which layer emits each header, which responses receive it, and why the policy exists.\n\nThe practical goal is a maintainable baseline for ASP.NET Core applications. Start with business and application behavior, decide which browser controls are needed, test in realistic environments, document exceptions, and review the policy as deployment architecture changes.",
+  "narrationPoints": [
+    "In ASP.NET Core, headers can influence transport expectations, script and resource loading, framing, content-type handling.",
+    "Headers matter because browsers make many decisions on behalf of users.",
+    "Security headers do not replace secure application logic.",
+    "The team should know which layer emits each header, which responses receive it, and why the policy exists.",
+    "The practical goal is a maintainable baseline for ASP.NET Core applications."
+  ]
+};

@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Metadata, Credentials, and Client Configuration' into concrete defensive .NET review patterns. Examples are focused supporting fragments, not a complete application. C# requires .NET 8 and C# 12, with Microsoft.AspNetCore.App for web-framework APIs; place member declarations in an application type and include standard namespace imports. Extra package requirements are stated where used. Bootstrap configuration, providers, and private storage are trusted application inputs, never request-controlled policy.",
+  "codeExamples": [
+    {
+      "title": "Load Metadata, Credentials, and Client Configuration configuration fail-closed",
+      "language": "csharp",
+      "blurb": "Rejects missing, empty, whitespace-only, and oversized required values and bounds the numeric setting. These are structural checks, not credential authentication; production configuration comes from trusted deployment policy.",
+      "code": "public sealed record SecureGrpcM05MetadataCredentialsClientConfigurationOptions(string Metadata, string Credentials, int Client);\n\npublic static SecureGrpcM05MetadataCredentialsClientConfigurationOptions LoadSecureGrpcM05MetadataCredentialsClientConfigurationOptions(IConfiguration configuration)\n{\n    var options = new SecureGrpcM05MetadataCredentialsClientConfigurationOptions(\n        configuration[\"SECUREGRPCM05METADATACREDENTIALSCLIENTCONFIGURATION:Metadata\"] ?? throw new InvalidOperationException(\"metadata credentials client configuration missing metadata\"),\n        configuration[\"SECUREGRPCM05METADATACREDENTIALSCLIENTCONFIGURATION:Credentials\"] ?? throw new InvalidOperationException(\"metadata credentials client configuration missing credentials\"),\n        configuration.GetValue<int>(\"SECUREGRPCM05METADATACREDENTIALSCLIENTCONFIGURATION:Client\"));\n\n    if (string.IsNullOrWhiteSpace(options.Metadata) || options.Metadata.Length > 128 ||\n        string.IsNullOrWhiteSpace(options.Credentials) || options.Credentials.Length > 256)\n        throw new InvalidOperationException(\"Required configuration rejected.\");\n    if (options.Client <= 0 || options.Client > 79)\n        throw new InvalidOperationException(\"metadata credentials client configuration limit rejected.\");\n\n    return options;\n}\n"
+    },
+    {
+      "title": "Project only approved diagnostic fields",
+      "language": "csharp",
+      "blurb": "Drops every unknown field and nested value instead of guessing which key names contain secrets. The trusted caller supplies nonsecret operation/outcome labels and a server-generated correlation ID. A read-only result preserves the validated projection.",
+      "code": "using System.Collections.ObjectModel;\n\npublic static IReadOnlyDictionary<string, string> RedactSecureGrpcM05MetadataCredentialsClientConfigurationSettings(\n    IReadOnlyDictionary<string, string> settings)\n{\n    var source = settings;\n    ArgumentNullException.ThrowIfNull(source);\n    // Only these application-owned diagnostic fields may be emitted. Never walk nested objects.\n    if (source.Count > 32) throw new ArgumentException(\"Diagnostic field limit exceeded.\");\n    var safe = new Dictionary<string, string>(StringComparer.Ordinal);\n    foreach (var key in new[] { \"correlationId\", \"operation\", \"outcome\" })\n    {\n        if (source.TryGetValue(key, out var value) && value is string text &&\n            text.Length is > 0 and <= 64 && text.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_' or '.'))\n            safe.Add(key, text);\n    }\n    return new ReadOnlyDictionary<string, string>(safe);\n}\n"
+    }
+  ]
+};

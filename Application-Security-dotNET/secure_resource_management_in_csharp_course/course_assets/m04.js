@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Files, Streams, Handles, and Temporary Data",
+  "graphicAlt": "Bounded file workflows use controlled temporary storage and cleanup paths that release handles and handle abandoned data after interruption.",
+  "narration": "Files and streams often create both resource and data safety concerns. A file handle can prevent rotation, scanning, movement, deletion, or cleanup. A stream can hold memory, buffers, network state, compression state, encryption state, or temporary data. Resource handling and data handling are usually connected in file workflows.\n\nFile handles should be released promptly. Short scopes make it easier to understand when a file can be moved, deleted, scanned, or replaced. They also reduce the chance that long-running requests or background jobs keep a file locked after the user or service expects it to be available for another step.\n\nTemporary files need deliberate rules. The application should define where they are stored, how names are chosen, which account can read them, how long they are retained, how cleanup runs, and what happens when cleanup fails. Temporary storage should not become an accidental long-term archive of sensitive or partial data.\n\nError and cancellation paths matter. A workflow may create a file, write part of the input data, transform content, and then fail before the final step. Secure cleanup should consider partial files, abandoned directories, retained handles, failed moves, and sensitive content left behind when a request is canceled or a service shuts down.\n\nUploads and downloads should avoid reading unbounded data into memory. Streaming, size limits, chunked processing, quotas, and content validation can reduce memory pressure while still supporting legitimate use. Logs and client errors should avoid exposing internal paths, temporary names, sensitive contents, or directory structure unless there is a reviewed operational need.",
+  "narrationPoints": [
+    "A file handle can prevent rotation, scanning, movement, deletion, or cleanup.",
+    "Short scopes make it easier to understand when a file can be moved, deleted, scanned.",
+    "Temporary storage should not become an accidental long-term archive of sensitive or partial data.",
+    "Secure cleanup should consider partial files, abandoned directories, retained handles, failed moves.",
+    "Streaming, size limits, chunked processing, quotas, and content validation can reduce memory pressure."
+  ]
+};

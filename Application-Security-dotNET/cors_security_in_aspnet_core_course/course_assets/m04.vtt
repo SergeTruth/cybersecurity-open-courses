@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+A preflight request is an automatic browser OPTIONS request.
+
+2
+00:00:05.320 --> 00:00:12.760
+The browser uses it to ask the server whether a planned cross-origin request is allowed under the CORS policy before sending the actual request.
+
+3
+00:00:12.860 --> 00:00:18.940
+This behavior is part of browser enforcement, not a separate feature the application user triggers.
+
+4
+00:00:19.220 --> 00:00:27.540
+During preflight, the browser may send the Origin header, Access-Control-Request-Method, and Access-Control-Request-Headers.
+
+5
+00:00:27.640 --> 00:00:35.240
+Those values describe the origin making the browser request, the method the browser wants to use, and the non-simple request headers it wants to include.
+
+6
+00:00:35.340 --> 00:00:39.580
+The server response tells the browser whether that combination is allowed.
+
+7
+00:00:39.860 --> 00:00:45.220
+Successful preflight does not authenticate the user and does not prove the frontend is trustworthy.
+
+8
+00:00:45.320 --> 00:00:51.080
+It only tells the browser that the server permits the described cross-origin browser request under the policy.
+
+9
+00:00:51.180 --> 00:00:55.580
+Authentication and authorization still happen through normal application controls.
+
+10
+00:00:55.680 --> 00:01:00.480
+A clean preflight response should never be treated as proof that the action itself is allowed.
+
+11
+00:01:00.760 --> 00:01:07.640
+APIs, reverse proxies, gateways, and hosting layers need to handle OPTIONS behavior consistently.
+
+12
+00:01:07.740 --> 00:01:14.060
+A request may pass through infrastructure before it reaches the ASP.NET Core application.
+
+13
+00:01:14.160 --> 00:01:29.520
+If one layer blocks OPTIONS, strips headers, rewrites paths, changes host information, or applies a different CORS policy, the browser may report a CORS error even though the underlying issue is ordinary configuration mismatch.
+
+14
+00:01:29.800 --> 00:01:32.200
+Troubleshooting should stay methodical.
+
+15
+00:01:32.300 --> 00:01:44.780
+Confirm the intended origin, method, request headers, credential mode, endpoint, route, ASP.NET Core middleware placement, endpoint metadata, and proxy behavior.
+
+16
+00:01:44.880 --> 00:01:48.080
+Also confirm which environment is being tested.
+
+17
+00:01:48.180 --> 00:01:54.980
+Many CORS problems come from a difference between local development, staging, production, and the edge infrastructure.
+
+18
+00:01:55.260 --> 00:02:00.700
+The operational lesson is that a browser CORS error is a symptom, not a diagnosis.
+
+19
+00:02:00.800 --> 00:02:06.560
+Treat it as a prompt to verify the complete path from browser request through gateway and application policy.
+
+20
+00:02:06.660 --> 00:02:14.180
+Avoid broadening policy only to make the error disappear; first confirm what access is actually required.

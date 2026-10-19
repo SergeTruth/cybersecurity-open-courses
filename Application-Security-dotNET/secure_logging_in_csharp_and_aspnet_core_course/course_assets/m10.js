@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure Logging Workflow",
+  "graphicAlt": "Secure logging connects meaningful structured events, minimization, protected storage and monitored response in an improvement loop.",
+  "narration": "Secure logging in C# and ASP.NET Core is a repeatable workflow. Start by deciding which events matter. Authentication, authorization, administrative actions, sensitive data access, configuration changes, lifecycle events, dependency failures, and important business outcomes should be considered deliberately rather than added as scattered debug text.\n\nUse structured, consistent, correlation-friendly logging. Stable event names, message templates, categories, scopes, and safe identifiers such as ExampleRequestId and ExampleCorrelationId make logs easier to query and safer to use. Consistency across middleware, controllers, services, background jobs, and outbound clients helps investigations.\n\nKeep secrets and sensitive data out of logs. Do not log passwords, tokens, cookies, keys, connection strings, full request bodies, sensitive headers, uploaded file contents, or raw private records. Use redaction, minimization, placeholders, and stable identifiers before data reaches broad storage or export paths.\n\nProtect logs after creation. Apply access control, retention, transport protection, storage review, export controls, dashboard permissions, and integrity expectations according to log purpose. Audit logs and incident-response logs may require stronger handling than short-lived diagnostics.\n\nFinally, turn logs into monitored signals and improve through review. Tune alerts, write runbooks, protect evidence, learn from incidents, and update logging conventions as the application changes. Good logging helps teams operate with clarity without creating unnecessary exposure.",
+  "narrationPoints": [
+    "Secure logging in C# and ASP.NET Core is a repeatable workflow.",
+    "Consistency across middleware, controllers, services, background jobs, and outbound clients helps investigations.",
+    "Use redaction, minimization, placeholders, and stable identifiers before data reaches broad storage or export paths.",
+    "Audit logs and incident-response logs may require stronger handling than short-lived diagnostics.",
+    "Tune alerts, write runbooks, protect evidence, learn from incidents, and update logging conventions as the application changes."
+  ]
+};

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:15.220
+ASP.NET Core applications receive input through many paths: route values, query strings, form fields, JSON bodies, headers, cookies, files, configuration values, queue messages, and responses from other services.
+
+2
+00:00:15.320 --> 00:00:19.400
+A value may arrive in a familiar type and still be untrusted.
+
+3
+00:00:19.500 --> 00:00:29.340
+The question is not only whether it can be parsed, but whether it is appropriate for this operation, this user, this tenant, this workflow state, and this destination.
+
+4
+00:00:29.620 --> 00:00:32.740
+Server-side validation is the enforcement point.
+
+5
+00:00:32.840 --> 00:00:40.360
+Client-side validation can improve usability and reduce mistakes, but the browser is not a security boundary.
+
+6
+00:00:40.460 --> 00:00:52.940
+The server must validate the values it relies on for business decisions, authorization decisions, database queries, file paths, redirects, workflow transitions, and calls to downstream services.
+
+7
+00:00:53.040 --> 00:00:56.400
+If the server trusts it, the server validates it.
+
+8
+00:00:56.680 --> 00:01:00.120
+Model binding is convenience, not proof of safety.
+
+9
+00:01:00.220 --> 00:01:05.740
+When ASP.NET Core populates a model from a request, it has created an object from input.
+
+10
+00:01:05.840 --> 00:01:14.080
+It has not guaranteed that every field should have been accepted, that server-controlled fields were protected, or that the object represents a valid business operation.
+
+11
+00:01:14.180 --> 00:01:23.060
+Avoid over-posting by using operation-specific request models and by keeping sensitive or server-managed fields out of client-writable shapes.
+
+12
+00:01:23.340 --> 00:01:27.740
+Allow-list validation is often clearer than trying to catch every bad value.
+
+13
+00:01:27.840 --> 00:01:38.000
+Define the route names, sort fields, numeric ranges, enum values, file labels, content types, workflow states, and identifier formats the operation accepts.
+
+14
+00:01:38.100 --> 00:01:47.460
+This is especially important when input controls data access, storage location, filtering, search behavior, or the state of an important record.
+
+15
+00:01:47.740 --> 00:01:51.900
+Normalize and canonicalize values before security-relevant comparisons.
+
+16
+00:01:52.000 --> 00:02:03.760
+Casing, whitespace, Unicode representation, URL encoding, culture-specific formatting, path separators, and alternate identifiers can change how values compare.
+
+17
+00:02:03.860 --> 00:02:11.380
+Decide which representation the application trusts, convert to that representation, then perform the comparison or policy check.
+
+18
+00:02:11.660 --> 00:02:14.620
+Output encoding completes the input-handling story.
+
+19
+00:02:14.720 --> 00:02:18.320
+Valid data can still be unsafe in the wrong output context.
+
+20
+00:02:18.420 --> 00:02:30.580
+Data placed into HTML, attributes, URLs, JavaScript, JSON, logs, CSV exports, or templates must be handled using framework-supported encoding and rendering patterns for that destination.
+
+21
+00:02:30.680 --> 00:02:40.840
+Good input validation narrows what the application accepts; correct output encoding prevents data from being interpreted as structure or script where it should be plain content.

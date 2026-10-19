@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.820
+Kubernetes networking makes service discovery and routing convenient, but connectivity is not authorization.
+
+2
+00:00:06.920 --> 00:00:20.680
+ClusterIP services, NodePort services, load balancers, ingress controllers, gateways, service meshes, and reverse proxies all shape who can reach a .NET application and through which path.
+
+3
+00:00:20.960 --> 00:00:34.400
+ASP.NET Core applications behind ingress or reverse proxies need careful review of forwarded headers, HTTPS behavior, secure cookies, redirects, host handling, client IP handling, and health endpoints.
+
+4
+00:00:34.500 --> 00:00:39.380
+The app should understand where TLS terminates and which proxy headers are trusted.
+
+5
+00:00:39.660 --> 00:00:49.100
+Browser-facing applications still need correct authentication, authorization, CORS, CSRF protections, cookies, and security headers.
+
+6
+00:00:49.200 --> 00:00:53.920
+Being deployed in Kubernetes does not remove normal web application security requirements.
+
+7
+00:00:54.020 --> 00:00:58.660
+Internal service-to-service calls also need clear identity and policy expectations.
+
+8
+00:00:58.940 --> 00:01:04.860
+NetworkPolicies can restrict pod-to-pod traffic when the cluster networking implementation supports them.
+
+9
+00:01:04.960 --> 00:01:11.760
+They are most useful when the team understands which workloads need to communicate and can express those paths clearly.
+
+10
+00:01:11.860 --> 00:01:18.180
+A policy that exists only on paper but is not enforced by the platform does not provide runtime control.
+
+11
+00:01:18.460 --> 00:01:26.220
+Internal admin endpoints, metrics endpoints, debug endpoints, and management paths should not be exposed casually.
+
+12
+00:01:26.320 --> 00:01:36.480
+The production design should identify which endpoints are public, which are internal, which require stronger controls, and which should only be reachable through governed operational channels.

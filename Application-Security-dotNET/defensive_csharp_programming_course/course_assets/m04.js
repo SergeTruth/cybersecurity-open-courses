@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Exceptions, Failure Modes, and Safe Error Handling",
+  "graphicAlt": "Boundary handlers produce safe user responses and sanitized operator diagnostics while keeping failures visible.",
+  "narration": "Defensive error handling starts by distinguishing expected failures from unexpected defects. Missing input, validation failure, unavailable dependencies, timeouts, permission problems, and not-found results are often expected conditions. A null dereference, violated invariant, or impossible state may indicate a defect that should be fixed rather than hidden.\n\nExceptions should be used intentionally, not as invisible control flow spread across the codebase. Catch exceptions at meaningful boundaries: request boundaries, job boundaries, message handlers, integration boundaries, and places where the application can add context, choose a safe response, or preserve diagnostic detail.\n\nSwallowed exceptions are dangerous because they make the system lie about its state. A catch block that ignores failure may leave data partially processed, resources open, security decisions incomplete, or operators unaware that something went wrong. If the code catches an exception, it should have a reason and a defined next step.\n\nUser-facing errors should be safe and limited. They should not expose stack traces, connection strings, tokens, internal file paths, raw database errors, sensitive records, or implementation details. At the same time, users need enough information to understand whether they can retry, correct input, or contact support.\n\nOperational logs should preserve useful detail for authorized teams. A good error path separates what the user sees from what operators can investigate. Correlation IDs, exception categories, dependency names, request context, and sanitized details help troubleshoot without disclosing secrets or private data.",
+  "narrationPoints": [
+    "Missing input, validation failure, unavailable dependencies, timeouts, permission problems.",
+    "Exceptions should be used intentionally, not as invisible control flow spread across the codebase.",
+    "A catch block that ignores failure may leave data partially processed, resources open, security decisions incomplete.",
+    "At the same time, users need enough information to understand whether they can retry, correct input, or contact support.",
+    "A good error path separates what the user sees from what operators can investigate."
+  ]
+};

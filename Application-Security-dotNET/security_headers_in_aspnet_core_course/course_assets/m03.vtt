@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+HTTPS protects transport confidentiality and integrity between the browser and the service endpoint it reaches.
+
+2
+00:00:06.680 --> 00:00:16.600
+In ASP.NET Core applications, teams often combine HTTPS redirection and HSTS, but those controls solve different parts of the transport story.
+
+3
+00:00:16.700 --> 00:00:21.180
+Redirection helps move an HTTP request to HTTPS.
+
+4
+00:00:21.280 --> 00:00:28.160
+HSTS tells supporting browsers to use HTTPS for future requests to a host for a configured period.
+
+5
+00:00:28.440 --> 00:00:35.480
+HTTPS redirection is useful when a request arrives over HTTP and the application or hosting layer can redirect it to HTTPS.
+
+6
+00:00:35.580 --> 00:00:39.100
+This should be reviewed with the real deployment path in mind.
+
+7
+00:00:39.200 --> 00:00:50.720
+Applications behind reverse proxies or load balancers need correct forwarded-header behavior so the app understands the original scheme and does not create confusing redirect behavior.
+
+8
+00:00:51.000 --> 00:00:56.520
+HSTS, or HTTP Strict Transport Security, is stronger in a different way.
+
+9
+00:00:56.620 --> 00:01:03.340
+Once a supporting browser has received the policy, it can remember to use HTTPS for that host for the policy duration.
+
+10
+00:01:03.440 --> 00:01:09.040
+ASP.NET Core provides HSTS middleware that is commonly enabled outside development.
+
+11
+00:01:09.140 --> 00:01:13.620
+The setting should be treated as a deployment decision, not only a code setting.
+
+12
+00:01:13.900 --> 00:01:17.660
+MaxAge controls how long the browser should remember the policy.
+
+13
+00:01:17.760 --> 00:01:21.360
+IncludeSubDomains can extend the policy to subdomains.
+
+14
+00:01:21.460 --> 00:01:25.460
+ExcludedHosts can keep specific hosts out of the middleware behavior.
+
+15
+00:01:25.560 --> 00:01:33.160
+Preload is a separate ecosystem-level decision where a domain may be submitted for browser preload lists when strict requirements are met.
+
+16
+00:01:33.260 --> 00:01:36.380
+Each choice has operational consequences.
+
+17
+00:01:36.660 --> 00:01:42.100
+IncludeSubDomains and preload require careful domain ownership and deployment review.
+
+18
+00:01:42.200 --> 00:01:55.320
+If subdomains, legacy hosts, partner-hosted names, or staging systems are not ready for HTTPS-only behavior, broad HSTS scope can create long-lived availability problems for users.
+
+19
+00:01:55.420 --> 00:01:59.980
+Long durations are difficult to unwind quickly because browsers remember the policy.
+
+20
+00:02:00.260 --> 00:02:08.660
+The safe path is to test HSTS in staging and production-like environments before using long durations or broad subdomain scope.
+
+21
+00:02:08.760 --> 00:02:17.800
+Confirm domain ownership, certificate coverage, proxy behavior, health checks, redirects, error pages, and operational rollback planning.
+
+22
+00:02:17.900 --> 00:02:24.860
+HSTS is valuable, but it deserves the same change-management care as other browser-enforced policies.

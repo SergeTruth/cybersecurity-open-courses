@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Deadlines and cancellation are security-relevant resource controls, not only reliability features.
+
+2
+00:00:06.680 --> 00:00:12.200
+A deadline tells the service how long the client is willing to wait.
+
+3
+00:00:12.300 --> 00:00:15.820
+Cancellation tells the service the call no longer needs to continue.
+
+4
+00:00:15.920 --> 00:00:22.240
+Together, they help bound work and keep resources from being consumed after the result is no longer useful.
+
+5
+00:00:22.520 --> 00:00:26.360
+Clients should communicate realistic deadlines based on the operation.
+
+6
+00:00:26.460 --> 00:00:34.620
+A fast lookup, report generation request, stream subscription, and cross-service workflow may each need different expectations.
+
+7
+00:00:34.720 --> 00:00:45.440
+Without deadlines, slow dependencies and partial failures can tie up threads, connections, memory, and downstream capacity longer than intended.
+
+8
+00:00:45.720 --> 00:00:49.320
+Services should honor cancellation where it is safe to do so.
+
+9
+00:00:49.420 --> 00:00:58.860
+If the caller has gone away or the deadline has passed, continuing expensive work may waste resources and distort operational signals.
+
+10
+00:00:58.960 --> 00:01:06.640
+Cancellation handling should be built into service methods, downstream calls, and long-running loops in a way that preserves data consistency.
+
+11
+00:01:06.920 --> 00:01:12.440
+Deadline and cancellation propagation matter when one gRPC service calls another service.
+
+12
+00:01:12.540 --> 00:01:18.380
+A parent call that is nearly out of time should not start a child call as if it had a full budget.
+
+13
+00:01:18.480 --> 00:01:26.160
+Propagating intent helps the system fail predictably and prevents one slow path from consuming capacity across multiple services.
+
+14
+00:01:26.440 --> 00:01:34.680
+Retries can improve resilience for transient failures, but careless retries can amplify load or repeat work that was not safe to repeat.
+
+15
+00:01:34.780 --> 00:01:42.140
+Retried operations should be reviewed for idempotency, side effects, backend capacity, and user expectations.
+
+16
+00:01:42.240 --> 00:01:47.040
+A read call, a state change, and a payment-like workflow should not be treated the same.
+
+17
+00:01:47.320 --> 00:01:56.280
+The reliability baseline is defensive: define deadlines, honor cancellation, propagate time budgets, review retry policies, and monitor outcomes.
+
+18
+00:01:56.380 --> 00:02:01.500
+These choices help the service remain predictable when dependencies slow down or clients disconnect.

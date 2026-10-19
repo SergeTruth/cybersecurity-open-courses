@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.980
+Kubernetes probes influence whether traffic reaches an application and whether the application is restarted.
+
+2
+00:00:07.080 --> 00:00:11.960
+That makes probes a security and reliability control, not just a deployment checkbox.
+
+3
+00:00:12.060 --> 00:00:18.940
+Poorly designed probes can hide failures, create noisy restarts, or send traffic before the app is ready.
+
+4
+00:00:19.220 --> 00:00:22.900
+Readiness should indicate whether the app is ready to receive requests.
+
+5
+00:00:23.000 --> 00:00:38.680
+An ASP.NET Core app may be alive as a process but not ready because configuration is missing, warm-up is incomplete, migrations are in progress, a required dependency is unavailable, or the app is shutting down and draining requests.
+
+6
+00:00:38.960 --> 00:00:41.760
+Liveness should indicate whether restart is appropriate.
+
+7
+00:00:41.860 --> 00:00:46.660
+It should not fail only because a downstream dependency is slow for a short period.
+
+8
+00:00:46.760 --> 00:00:54.440
+Restarting healthy application processes during a dependency outage can make recovery harder, increase load, and hide the original signal.
+
+9
+00:00:54.720 --> 00:01:00.480
+Startup probes can help slow-starting apps avoid premature liveness failures.
+
+10
+00:01:00.580 --> 00:01:09.620
+They are useful when an application has predictable initialization work, cold-start behavior, or dependency checks that take longer than normal request handling.
+
+11
+00:01:09.900 --> 00:01:18.700
+Health endpoints should avoid exposing secrets, connection strings, raw dependency errors, internal hostnames, or sensitive operational details.
+
+12
+00:01:18.800 --> 00:01:29.680
+Probe timing, thresholds, graceful shutdown, request draining, cancellation, and logging should be reviewed together so availability controls support safe recovery.

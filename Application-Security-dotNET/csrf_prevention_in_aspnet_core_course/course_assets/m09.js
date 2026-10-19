@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A CSRF-Resistant Baseline",
+  "graphicAlt": "A CSRF-resistant baseline combines endpoint inventory, antiforgery validation, cookie review and reliable keys while keeping other controls separate.",
+  "narration": "A CSRF-resistant ASP.NET Core baseline starts with a clear mental model. CSRF is about unwanted state-changing requests from an authenticated browser context. Authentication identifies the user, and authorization decides what the user may do, but neither one proves that a specific protected browser request was intentionally submitted through the expected application flow.\n\nASP.NET Core antiforgery tokens help validate protected state-changing requests. Razor Pages, MVC forms, AJAX submissions, cookie-authenticated APIs, and SPA workflows should all be reviewed according to how credentials are attached and how unsafe requests are made. APIs that use bearer tokens may have different browser credential behavior, but they still need deliberate design.\n\nSameSite cookies help reduce some cross-site cookie behavior and should be used thoughtfully, but they are defense in depth rather than the whole answer. CORS should also stay in its own lane. CORS controls cross-origin browser reads; it does not replace antiforgery validation, authentication, or authorization.\n\nData Protection planning matters for antiforgery reliability. Multi-instance deployments and key rotation should be planned so tokens can be generated and validated consistently. Token validation failures should be logged with safe operational context, not ignored or treated as ordinary user input.\n\nThe practical baseline is to inventory state-changing browser endpoints, confirm antiforgery validation, review cookie SameSite settings, keep CORS decisions separate, protect secrets and Data Protection keys, document exceptions, and test production-like flows. CSRF prevention is a steady engineering habit, not a one-time checkbox.",
+  "narrationPoints": [
+    "A CSRF-resistant ASP.NET Core baseline starts with a clear mental model.",
+    "ASP.NET Core antiforgery tokens help validate protected state-changing requests.",
+    "SameSite cookies help reduce some cross-site cookie behavior and should be used thoughtfully.",
+    "Token validation failures should be logged with safe operational context, not ignored or treated as ordinary user input.",
+    "The practical baseline is to inventory state-changing browser endpoints, confirm antiforgery validation, review cookie SameSite settings."
+  ]
+};

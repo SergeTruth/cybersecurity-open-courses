@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+Transport security protects confidentiality and integrity between a gRPC client and service.
+
+2
+00:00:06.040 --> 00:00:15.880
+Because gRPC normally runs over HTTP/2, production services should have deliberate connection-level security rather than relying on network placement or a development default.
+
+3
+00:00:15.980 --> 00:00:21.260
+The channel configuration should match the sensitivity of the data and the environment where the service runs.
+
+4
+00:00:21.540 --> 00:00:28.580
+TLS should be the production baseline for network calls unless there is a clearly controlled and documented infrastructure reason for a different design.
+
+5
+00:00:28.680 --> 00:00:40.360
+HTTPS endpoints and certificate validation help the client establish that it is talking to the expected service and help protect messages while they cross networks, proxies, and platform layers.
+
+6
+00:00:40.640 --> 00:00:46.640
+Client certificate authentication can support mutual service identity in appropriate service-to-service environments.
+
+7
+00:00:46.740 --> 00:00:51.940
+In that model, the service can validate the client certificate as part of caller identity.
+
+8
+00:00:52.040 --> 00:00:59.400
+This can be useful in controlled enterprise, platform, or service mesh designs, but it requires operational ownership rather than one-time setup.
+
+9
+00:00:59.680 --> 00:01:01.520
+Certificate lifecycle matters.
+
+10
+00:01:01.620 --> 00:01:13.060
+Trust anchors, certificate issuance, environment separation, renewal, rotation, revocation, monitoring, and failure behavior all need owners.
+
+11
+00:01:13.160 --> 00:01:20.680
+A service that depends on certificates should have a clear plan for what happens before expiration, during rotation, and when validation fails.
+
+12
+00:01:20.960 --> 00:01:24.000
+Transport security also depends on infrastructure.
+
+13
+00:01:24.100 --> 00:01:37.620
+Reverse proxies, ingress controllers, load balancers, service meshes, and hosting platforms may terminate or re-establish TLS, enforce HTTP/2 settings, or forward identity-related information.
+
+14
+00:01:37.720 --> 00:01:43.720
+The gRPC team should know where transport security starts and ends in the deployed path.
+
+15
+00:01:44.000 --> 00:01:47.520
+The baseline is not just to enable TLS somewhere.
+
+16
+00:01:47.620 --> 00:01:59.620
+The baseline is to make service identity, channel security, certificate validation, and operational lifecycle visible and testable across development, staging, and production environments.

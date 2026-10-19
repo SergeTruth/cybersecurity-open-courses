@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+Security-relevant logging should focus on events that help authorized teams understand meaningful activity.
+
+2
+00:00:06.840 --> 00:00:24.440
+Authentication successes and failures, authorization failures, access-denied decisions, administrative actions, permission changes, data exports, sensitive record access, configuration changes, and high-impact business actions often deserve attention.
+
+3
+00:00:24.720 --> 00:00:27.040
+The level of detail should be appropriate.
+
+4
+00:00:27.140 --> 00:00:40.180
+For authentication, a system may need to know that a sign-in succeeded or failed, which application component handled it, which safe identity reference was involved, and whether rate limits or policy decisions were triggered.
+
+5
+00:00:40.280 --> 00:00:46.280
+It should not log passwords, tokens, cookies, or sensitive identity assertions.
+
+6
+00:00:46.560 --> 00:01:04.960
+Useful context includes timestamps, ExampleRequestId, ExampleCorrelationId, ExampleUserId, ExampleTenantId, ExampleActionName, service name, route pattern, outcome, status category, and safe object references such as ExampleOrderId.
+
+7
+00:01:05.060 --> 00:01:10.660
+The point is to preserve enough context for investigation while avoiding raw sensitive data.
+
+8
+00:01:10.940 --> 00:01:14.220
+Application lifecycle events can be important.
+
+9
+00:01:14.320 --> 00:01:30.080
+Startup, shutdown, configuration validation failures, migrations, dependency failures, queue processing errors, background job failures, and deployment transitions help operators understand whether the system is healthy and whether a change affected behavior.
+
+10
+00:01:30.360 --> 00:01:39.880
+Validation failures, rate-limit events, repeated operational failures, and suspicious workflow patterns can produce useful signals at a defensive level.
+
+11
+00:01:39.980 --> 00:01:45.020
+The goal is not to log every typo or ordinary user mistake as an incident.
+
+12
+00:01:45.120 --> 00:01:50.960
+The goal is to capture patterns that help teams distinguish normal friction from behavior that deserves investigation.
+
+13
+00:01:51.240 --> 00:01:54.760
+Logs should support investigation without becoming noisy.
+
+14
+00:01:54.860 --> 00:02:00.780
+If logs omit decision-critical context, responders may not be able to reconstruct what happened.
+
+15
+00:02:00.880 --> 00:02:06.480
+If logs record every low-value detail, important events disappear into volume and cost.
+
+16
+00:02:06.580 --> 00:02:12.340
+Review log usefulness during incidents, false positives, and support escalations.

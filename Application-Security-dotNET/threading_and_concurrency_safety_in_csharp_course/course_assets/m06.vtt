@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.260
+Cancellation is cooperative.
+
+2
+00:00:02.360 --> 00:00:09.320
+One part of the system requests cancellation, and the running operation must observe that request and stop safely.
+
+3
+00:00:09.420 --> 00:00:12.060
+A CancellationToken is not a forceful stop button.
+
+4
+00:00:12.160 --> 00:00:17.760
+It is a signal that the operation should check at appropriate points and decide how to wind down.
+
+5
+00:00:18.040 --> 00:00:21.480
+Pass CancellationToken through call chains that support it.
+
+6
+00:00:21.580 --> 00:00:32.060
+Request handlers, hosted services, database calls, HTTP calls, queue operations, file work, and long-running loops may all have cancellation-aware APIs.
+
+7
+00:00:32.160 --> 00:00:38.560
+Passing the token preserves the caller's intent and gives dependencies a chance to stop unnecessary work.
+
+8
+00:00:38.840 --> 00:00:43.400
+Timeouts protect users, services, and dependencies from waiting indefinitely.
+
+9
+00:00:43.500 --> 00:00:51.260
+A timeout may represent a user-facing service level, a dependency expectation, a queue processing limit, or a shutdown boundary.
+
+10
+00:00:51.360 --> 00:00:57.680
+Timeouts should be chosen deliberately and monitored, not scattered as arbitrary numbers that no one owns.
+
+11
+00:00:57.960 --> 00:01:01.000
+Cancellation should leave application state consistent.
+
+12
+00:01:01.100 --> 00:01:13.340
+If a workflow is canceled after partial progress, the design should define what happens to records, files, messages, locks, leases, temporary objects, and external calls.
+
+13
+00:01:13.440 --> 00:01:15.200
+Some work should roll back.
+
+14
+00:01:15.300 --> 00:01:17.380
+Some should mark a retryable state.
+
+15
+00:01:17.480 --> 00:01:21.400
+Some should finish a small critical cleanup step before stopping.
+
+16
+00:01:21.680 --> 00:01:28.560
+Hosted services, background queues, and long-running operations need shutdown behavior that respects cancellation.
+
+17
+00:01:28.660 --> 00:01:40.020
+During deployment or host shutdown, a worker may need to stop accepting new work, finish or release current work, persist progress, and avoid leaving ambiguous state behind.
+
+18
+00:01:40.300 --> 00:01:45.740
+Cleanup, rollback, partial work, and retry decisions should be explicit.
+
+19
+00:01:45.840 --> 00:01:58.320
+Logging should record safe operational details such as operation name, correlation ID, cancellation point, timeout category, and retry decision without exposing secrets or sensitive payloads.
+
+20
+00:01:58.420 --> 00:02:03.060
+Good cancellation design is part of reliability, not an afterthought.

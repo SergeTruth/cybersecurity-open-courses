@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples turn 'Permissions, Scopes, App Roles, and Consent' into concrete defensive .NET review patterns. Examples are focused supporting fragments, not a complete application. C# requires .NET 8 and C# 12, with Microsoft.AspNetCore.App for web-framework APIs; place member declarations in an application type and include standard namespace imports. Extra package requirements are stated where used. Bootstrap configuration, providers, and private storage are trusted application inputs, never request-controlled policy.",
+  "codeExamples": [
+    {
+      "title": "Authorize Permissions, Scopes, App Roles, and Consent with claims and scope checks",
+      "language": "csharp",
+      "blurb": "Checks one approved authenticated identity, a unique tenant and subject, and a delegated action scope. Authentication and per-object authorization are separate required boundaries; this helper is not token validation.",
+      "code": "using System.Security.Claims;\n\n// Trusted host: authenticate the reviewed Bearer scheme before calling this helper.\n// AuthenticationType is configured as \"Bearer\" by that scheme, not read from input.\n// This grants an action in a tenant, NOT ownership of every object in that tenant.\npublic static class AzureAdM05PermissionsScopesRolesConsentAuthorization\n{\n    public static bool CanAccess(ClaimsPrincipal user, string tenantId)\n    {\n        if (user is null || !ValidId(tenantId)) return false;\n        var identities = user.Identities.Where(i => i.IsAuthenticated && i.AuthenticationType == \"Bearer\").Take(2).ToArray();\n        if (identities.Length != 1) return false;\n        var identity = identities[0];\n        var tenants = identity.FindAll(\"tid\").Take(2).ToArray();\n        var subjects = identity.FindAll(\"sub\").Take(2).ToArray();\n        var scopes = identity.FindAll(\"scp\").Take(2).ToArray();\n        return tenants.Length == 1 && subjects.Length == 1 && scopes.Length == 1 &&\n            ValidId(tenants[0].Value) && ValidId(subjects[0].Value) &&\n            tenants[0].Value == tenantId && scopes[0].Value.Length <= 2048 &&\n            scopes[0].Value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Contains(\"permissions.read\", StringComparer.Ordinal);\n    }\n    private static bool ValidId(string? value) => value is { Length: > 0 and <= 128 } &&\n        value.All(c => char.IsAsciiLetterOrDigit(c) || c is '-' or '_');\n}\n"
+    },
+    {
+      "title": "Compare a bounded opaque API credential with its stored digest",
+      "language": "csharp",
+      "blurb": "For a separately issued 256-bit random API key represented as 64 lowercase hex characters. Store SHA-256 of that exact ASCII representation and compare fixed-length digests. This is not an Entra/OAuth token validator or password hasher; identity lookup, revocation, and throttling remain required.",
+      "code": "using System.Security.Cryptography;\nusing System.Text;\n\npublic static class AzureAdM05PermissionsScopesRolesConsentApiKeyCheck\n{\n    public static bool MatchesStoredDigest(string presentedKey, byte[] storedDigest)\n    {\n        // Issuance: 32 cryptographically random bytes encoded as exactly 64 lowercase hex characters.\n        if (presentedKey is not { Length: 64 } || storedDigest is not { Length: 32 } ||\n            !presentedKey.All(c => c is >= '0' and <= '9' or >= 'a' and <= 'f')) return false;\n        var digest = SHA256.HashData(Encoding.UTF8.GetBytes(presentedKey));\n        return digest.Length == storedDigest.Length &&\n               CryptographicOperations.FixedTimeEquals(digest, storedDigest);\n    }\n}\n"
+    }
+  ]
+};

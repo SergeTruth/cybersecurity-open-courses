@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Non-Root Runtime, Ports, and File Ownership",
+  "graphicAlt": "Non-root runtime is supported by deliberate ports, file ownership, writable paths and deployment-condition checks.",
+  "narration": "ASP.NET Core containers should run with the least privilege needed. Running as root is often a convenience default, but it grants the process more permission than many applications require. A non-root runtime reduces the default impact of application compromise or misconfiguration inside the container boundary.\n\nModern .NET Linux images may include a non-root app user, but Dockerfiles still need review. The final stage should make it clear which user runs the process. It is easy to set a user in one stage, change stages, and unintentionally return to a different runtime identity.\n\nNon-root containers may require application and image adjustments. Ports, file ownership, temporary directories, logs, upload locations, cache paths, certificate locations, and writable directories should all be reviewed. The application should not assume it can write anywhere in the filesystem or bind privileged ports.\n\nAvoid broad filesystem permissions only to make startup work. Changing ownership or permissions should be narrow and tied to specific paths the application needs. If a directory must be writable, the Dockerfile and runtime configuration should make that requirement explicit.\n\nFile ownership matters for published output, mounted volumes, generated files, and temporary data. A container that works in a local development run may fail in production when volumes, orchestrator security context, or read-only filesystem settings differ. Test the runtime identity under deployment-like conditions.\n\nLeast privilege is not a single Dockerfile line. It is the combined result of runtime user, filesystem permissions, writable paths, exposed ports, container runtime settings, application assumptions, and operational procedures.",
+  "narrationPoints": [
+    "ASP.NET Core containers should run with the least privilege needed.",
+    "Modern .NET Linux images may include a non-root app user, but Dockerfiles still need review.",
+    "Non-root containers may require application and image adjustments.",
+    "If a directory must be writable, the Dockerfile and runtime configuration should make that requirement explicit.",
+    "A container that works in a local development run may fail in production when volumes, orchestrator security context."
+  ]
+};

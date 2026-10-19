@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Execution Roles, IAM, and Least Privilege",
+  "graphicAlt": "An invocation policy controls who may call the function; the execution role separately limits which AWS actions and resources it may use.",
+  "narration": "The Lambda execution role grants the function permission to access AWS services and resources. The code running inside the function receives the effective permissions assigned to that role. If the role can read a table, write to a queue, publish a message, or call another service, then the function code can attempt that action.\n\nLeast privilege means scoping permissions to the minimum actions, resources, and conditions required for the workload. A function that reads one table should not receive broad write access to many services. A function that sends one type of message should not receive permission to manage unrelated infrastructure.\n\nAvoid wildcard permissions for convenience. Broad actions and broad resources make it harder to reason about what a function can do after a code change, configuration mistake, or dependency issue. Separate roles by workload, environment, tenant boundary, or privilege level when that makes the permission model clearer.\n\nResource-based policies control who or what can invoke Lambda resources in supported scenarios. Cross-account access, service invocation, layers, aliases, versions, and function URLs all require explicit policy review. Invocation permission and execution permission are related, but they answer different questions.\n\nAdministrative, data export, write, delete, payment, configuration, and high-cost operations need extra review. A secure role is narrow enough that reviewers can explain why each permission exists and what production signal would show if that permission is being used unexpectedly.",
+  "narrationPoints": [
+    "The Lambda execution role grants the function permission to access AWS services and resources.",
+    "Least privilege means scoping permissions to the minimum actions, resources, and conditions required for the workload.",
+    "Separate roles by workload, environment, tenant boundary, or privilege level when that makes the permission model clearer.",
+    "Separate roles by workload, environment, tenant boundary, or privilege level.",
+    "Invocation permission and execution permission are related, but they answer different questions."
+  ]
+};

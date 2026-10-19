@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Input handling is one of the most important habits in C sharp application security.
+
+2
+00:00:05.080 --> 00:00:20.440
+External input includes HTTP requests, route values, query strings, form fields, JSON bodies, uploaded files, headers, cookies, queue messages, database rows, configuration, and responses from other services.
+
+3
+00:00:20.540 --> 00:00:26.460
+Treat that data as untrusted or at least unverified until the server has validated it.
+
+4
+00:00:26.740 --> 00:00:29.780
+Server-side validation is the enforcement point.
+
+5
+00:00:29.880 --> 00:00:36.760
+Client-side validation improves usability and reduces accidental mistakes, but it is not a security boundary.
+
+6
+00:00:36.860 --> 00:00:41.500
+A client can be changed, skipped, scripted, or out of date.
+
+7
+00:00:41.600 --> 00:00:52.640
+The server must validate what it actually uses for business decisions, authorization decisions, data access, file handling, redirects, and downstream service calls.
+
+8
+00:00:52.920 --> 00:00:55.480
+Validation should be based on meaning.
+
+9
+00:00:55.580 --> 00:01:09.820
+For known formats and values, prefer allow-lists: expected identifiers, supported enum values, valid date ranges, known sort fields, allowed file types, bounded lengths, and acceptable numeric ranges.
+
+10
+00:01:09.920 --> 00:01:16.080
+Rejecting only a few known-bad strings is usually weaker than defining what the application actually accepts.
+
+11
+00:01:16.360 --> 00:01:21.960
+Canonicalization and normalization matter when comparing or enforcing policy.
+
+12
+00:01:22.060 --> 00:01:25.900
+A value may have multiple textual representations.
+
+13
+00:01:26.000 --> 00:01:36.240
+File paths, email addresses, Unicode text, casing, whitespace, encoded characters, and culture-specific formatting can affect decisions.
+
+14
+00:01:36.340 --> 00:01:41.860
+Normalize data before making security decisions, and be clear about which normalized form is authoritative.
+
+15
+00:01:42.140 --> 00:01:46.860
+Model binding and object population are conveniences, not proof of safety.
+
+16
+00:01:46.960 --> 00:01:57.520
+When frameworks populate objects from requests, the application still needs to decide which fields are allowed, which fields are server-controlled, and which fields require validation.
+
+17
+00:01:57.620 --> 00:02:05.940
+Avoid binding more data than the operation should accept, especially when fields influence identity, role, ownership, price, status, or workflow.
+
+18
+00:02:06.220 --> 00:02:09.340
+Output encoding is the partner of input validation.
+
+19
+00:02:09.440 --> 00:02:20.480
+Data displayed in HTML, JavaScript, URLs, attributes, logs, CSV, JSON, or templates must be encoded for the destination context.
+
+20
+00:02:20.580 --> 00:02:33.620
+The goal is not to memorize every edge case, but to use framework-supported encoding and templating patterns intentionally and avoid mixing untrusted data into contexts that expect executable or structural syntax.

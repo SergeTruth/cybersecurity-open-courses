@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+A CORS policy is a set of explicit permissions.
+
+2
+00:00:04.760 --> 00:00:18.760
+It can define which origins are allowed, which HTTP methods are allowed, which request headers are allowed, which response headers browser code may read, whether credentials are permitted, and how long certain preflight results may be cached by the browser.
+
+3
+00:00:18.860 --> 00:00:22.060
+Each permission should map to a real client requirement.
+
+4
+00:00:22.340 --> 00:00:27.060
+Allowed origins describe the browser origins that may read responses under the policy.
+
+5
+00:00:27.160 --> 00:00:33.400
+In production, these should normally be specific origins that the team owns or has approved.
+
+6
+00:00:33.500 --> 00:00:35.260
+Development origins are different.
+
+7
+00:00:35.360 --> 00:00:42.720
+A local frontend port or temporary test host may be useful during development, but it should not silently become production policy.
+
+8
+00:00:43.000 --> 00:00:47.720
+Allowed methods should match the API behavior that the browser client actually needs.
+
+9
+00:00:47.820 --> 00:00:53.740
+If a browser client only reads a status endpoint, broad method approval is unnecessary.
+
+10
+00:00:53.840 --> 00:01:05.600
+If it performs specific state-changing operations, those operations should have authentication, authorization, CSRF review where relevant, logging, and explicit CORS reasoning.
+
+11
+00:01:05.700 --> 00:01:09.380
+Methods should not be approved casually just because they are available.
+
+12
+00:01:09.660 --> 00:01:14.300
+Allowed request headers and exposed response headers also deserve review.
+
+13
+00:01:14.400 --> 00:01:21.520
+Request headers may be needed for content type, correlation IDs, API versioning, or client metadata.
+
+14
+00:01:21.620 --> 00:01:26.420
+Exposed response headers decide what browser code can read beyond the default set.
+
+15
+00:01:26.520 --> 00:01:32.200
+If a header carries operational or sensitive meaning, the team should decide whether browser code truly needs it.
+
+16
+00:01:32.480 --> 00:01:35.920
+Credentialed requests require deliberate approval.
+
+17
+00:01:36.020 --> 00:01:45.220
+Credentials can include cookies or HTTP authentication material that the browser sends when both the client behavior and server policy allow it.
+
+18
+00:01:45.320 --> 00:01:53.640
+Credentialed cross-origin behavior is more sensitive than an anonymous read because the browser may be acting in the context of an authenticated user.
+
+19
+00:01:53.920 --> 00:01:57.440
+Production policy should be narrower than local development convenience.
+
+20
+00:01:57.540 --> 00:02:06.740
+A good policy names the relationship it supports, lists only required origins, methods, and headers, and documents whether credentials are required.
+
+21
+00:02:06.840 --> 00:02:15.400
+Broad origins, broad methods, broad headers, and credentialed access should not become the default answer to every CORS issue.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+The Docker build context is the set of files available to the build.
+
+2
+00:00:04.760 --> 00:00:11.160
+If a file enters the context, a Dockerfile can potentially copy it, inspect it, or be influenced by it.
+
+3
+00:00:11.260 --> 00:00:20.140
+That makes build context hygiene part of image security, especially when repositories contain local configuration, generated files, or development-only assets.
+
+4
+00:00:20.420 --> 00:00:25.220
+.dockerignore helps exclude irrelevant or sensitive files from the build context.
+
+5
+00:00:25.320 --> 00:00:42.520
+Common exclusions include .git data, .env files, local secrets, certificates, private keys, logs, test output, local databases, IDE folders, temporary files, coverage output, and generated artifacts that should not ship.
+
+6
+00:00:42.800 --> 00:00:49.440
+A clean build context reduces accidental inclusion and can make builds faster and more reproducible.
+
+7
+00:00:49.540 --> 00:00:55.220
+It also makes review easier because the build only sees files that are plausible inputs to the image.
+
+8
+00:00:55.320 --> 00:01:00.760
+If every local artifact is available to the build, accidental copy patterns become harder to reason about.
+
+9
+00:01:01.040 --> 00:01:04.240
+Docker layers can preserve history and copied content.
+
+10
+00:01:04.340 --> 00:01:13.780
+Copying a sensitive file and deleting it in a later instruction is not a safe secret-handling strategy because earlier layers or build logs may still contain evidence of the file.
+
+11
+00:01:13.880 --> 00:01:23.480
+The safer approach is to keep sensitive files out of the build context and use appropriate temporary secret mechanisms when a build requires restricted access.
+
+12
+00:01:23.760 --> 00:01:26.720
+COPY and ADD should be narrow and intentional.
+
+13
+00:01:26.820 --> 00:01:36.260
+Prefer copying project files, published output, or specific directories rather than broad repository-level patterns that include everything.
+
+14
+00:01:36.360 --> 00:01:44.760
+ADD has extra behavior that is rarely needed for ordinary ASP.NET Core builds, so use it only when that behavior is intentional.
+
+15
+00:01:45.040 --> 00:01:48.640
+Before release, check the build output for unexpected files.
+
+16
+00:01:48.740 --> 00:01:59.300
+Look for source files, local configuration, test assets, development certificates, logs, package caches, temporary directories, and generated data.
+
+17
+00:01:59.400 --> 00:02:04.680
+Image contents should be deliberate, not whatever happened to be near the Dockerfile.

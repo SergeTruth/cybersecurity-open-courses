@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+CORS exists because browsers enforce the same-origin policy.
+
+2
+00:00:04.920 --> 00:00:11.960
+The same-origin policy helps protect browser users by limiting what JavaScript loaded from one origin can read from another origin.
+
+3
+00:00:12.060 --> 00:00:19.580
+Without that browser rule, web pages would have a much broader ability to read responses from sites where the user may already have an active session.
+
+4
+00:00:19.860 --> 00:00:23.700
+An origin is defined by scheme, host, and port.
+
+5
+00:00:23.800 --> 00:00:35.240
+That means https on one host is a different origin from http on the same host, and the same host on a different port is also a different origin.
+
+6
+00:00:35.340 --> 00:00:44.940
+This detail matters in development and production because a frontend, API, documentation site, admin console, or local test client may all run on different origins.
+
+7
+00:00:45.220 --> 00:00:49.220
+Modern applications often separate frontend and backend deployments.
+
+8
+00:00:49.320 --> 00:00:55.720
+A single-page application may run on one origin while an ASP.NET Core API runs on another.
+
+9
+00:00:55.820 --> 00:01:03.980
+A partner portal, mobile web shell, or internal operations console may need selected browser-based access to API responses.
+
+10
+00:01:04.080 --> 00:01:11.440
+CORS creates controlled exceptions for those cases so approved browser clients can read selected responses when the server chooses to allow it.
+
+11
+00:01:11.720 --> 00:01:16.520
+A CORS decision should start from a business requirement, not from a browser error.
+
+12
+00:01:16.620 --> 00:01:28.940
+The useful questions are concrete: which frontend origin needs access, which API endpoint is involved, which methods are required, which request headers are needed, whether credentials are involved, and whether this behavior differs by environment.
+
+13
+00:01:29.040 --> 00:01:33.680
+If the team cannot answer those questions, the policy is not ready for production.
+
+14
+00:01:33.960 --> 00:01:37.960
+The defensive mindset is narrow and intentional.
+
+15
+00:01:38.060 --> 00:01:44.140
+CORS does not make an API secure by itself, and it should not be treated as a general fix for connectivity problems.
+
+16
+00:01:44.240 --> 00:01:56.080
+It is one browser-facing control in a broader application design that still needs authentication, authorization, input validation, safe response shaping, logging, and operational review.

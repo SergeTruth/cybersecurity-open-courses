@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+A Lambda handler is the .NET method that processes an invocation event.
+
+2
+00:00:05.000 --> 00:00:13.720
+It receives an event shape, optionally receives Lambda context, performs application work, and returns a response or completion result.
+
+3
+00:00:13.820 --> 00:00:21.900
+Handler design should make the trust boundary visible: what came from the event, what came from configuration, and what came from trusted services.
+
+4
+00:00:22.180 --> 00:00:29.060
+.NET Lambda functions may use managed runtimes, custom runtimes, or container image packaging depending on project requirements.
+
+5
+00:00:29.160 --> 00:00:37.960
+The packaging choice affects startup behavior, deployment size, dependency handling, diagnostics, runtime patching, and how the team reviews the final artifact.
+
+6
+00:00:38.240 --> 00:00:40.400
+Function package contents matter.
+
+7
+00:00:40.500 --> 00:00:50.580
+Dependencies, configuration files, generated output, native libraries, symbols, and accidental files can all affect security and operations.
+
+8
+00:00:50.680 --> 00:00:54.840
+A deployment package should contain only what the function needs to run.
+
+9
+00:00:54.940 --> 00:01:06.620
+Local secrets, test data, debug-only configuration, build caches, package-feed credentials, sample event data, and source artifacts should stay out of production packages.
+
+10
+00:01:06.900 --> 00:01:15.620
+Trimming, Native AOT, reflection-heavy libraries, serializers, and AWS SDK dependencies deserve compatibility and observability review.
+
+11
+00:01:15.720 --> 00:01:25.480
+A package can be smaller and faster while still failing if runtime metadata, serializers, certificates, native dependencies, or logging expectations are missing.
+
+12
+00:01:25.760 --> 00:01:33.360
+Build and deployment pipelines should protect package artifacts, signing credentials, deployment roles, and CI/CD logs.
+
+13
+00:01:33.460 --> 00:01:42.580
+The package is production material, so the process that creates and promotes it should be controlled, repeatable, and readable during review.

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Browser-based APIs need a deliberate CSRF model.
+
+2
+00:00:04.600 --> 00:00:09.640
+A server-rendered form is not the only place where state changes happen.
+
+3
+00:00:09.740 --> 00:00:20.220
+A single-page application or JavaScript client may call ASP.NET Core endpoints that create, update, submit, approve, or delete data.
+
+4
+00:00:20.320 --> 00:00:27.200
+If the browser automatically supplies cookies for those calls, the API may need antiforgery protection for unsafe requests.
+
+5
+00:00:27.480 --> 00:00:35.320
+Cookie-authenticated APIs have CSRF characteristics similar to browser form workflows because the browser can attach cookies according to cookie rules.
+
+6
+00:00:35.420 --> 00:00:45.260
+In that design, the application should define how the JavaScript client receives the antiforgery token and how it sends the expected signal with protected requests.
+
+7
+00:00:45.360 --> 00:00:50.560
+The pattern should be documented and reviewed, not copied into production without understanding.
+
+8
+00:00:50.840 --> 00:00:56.360
+Bearer-token APIs have different browser credential behavior when tokens are not automatically attached by the browser.
+
+9
+00:00:56.460 --> 00:01:04.140
+A token sent explicitly by client code has different CSRF characteristics than a cookie that the browser sends as ambient session state.
+
+10
+00:01:04.240 --> 00:01:14.400
+That does not make bearer-token API design automatically safe in every way; it means the team should reason about where the token is stored, who can access it, and how requests are authorized.
+
+11
+00:01:14.680 --> 00:01:24.040
+Custom request headers can be part of a CSRF prevention design, especially for JavaScript clients that submit a token or intent signal with unsafe requests.
+
+12
+00:01:24.140 --> 00:01:27.180
+Those headers should be understood and reviewed.
+
+13
+00:01:27.280 --> 00:01:30.960
+A header name by itself is not the security goal.
+
+14
+00:01:31.060 --> 00:01:40.260
+The goal is a server-validated pattern that distinguishes intended protected requests from ordinary ambient browser credential behavior.
+
+15
+00:01:40.540 --> 00:01:44.460
+CORS configuration does not replace antiforgery validation.
+
+16
+00:01:44.560 --> 00:01:50.000
+CORS controls which browser JavaScript origins may read certain cross-origin responses.
+
+17
+00:01:50.100 --> 00:01:55.380
+CSRF prevention helps validate intent for state-changing browser requests.
+
+18
+00:01:55.480 --> 00:02:02.840
+An SPA may need both a careful CORS policy and antiforgery behavior, depending on how authentication and credentials are designed.
+
+19
+00:02:03.120 --> 00:02:18.480
+The safe architecture question is, how does this browser client authenticate, how are credentials attached, which endpoints change state, what token or intent signal is required, how is it validated, and how do failures appear to users and operators.
+
+20
+00:02:18.580 --> 00:02:21.780
+Answer those questions before approving the API pattern.

@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.900
+Event sources are trust boundaries.
+
+2
+00:00:03.000 --> 00:00:18.360
+Common sources include SQS, SNS, EventBridge, S3, DynamoDB Streams, Kinesis, API Gateway, Application Load Balancer, scheduled events, and custom service integrations.
+
+3
+00:00:18.460 --> 00:00:24.780
+Each source has its own event shape, delivery behavior, identity context, and failure model.
+
+4
+00:00:25.060 --> 00:00:35.300
+Event data should be validated for shape, type, size, required fields, allowed values, tenant context, source expectation, and business rules.
+
+5
+00:00:35.400 --> 00:00:45.640
+A .NET handler should make invalid events fail safely before side effects such as database writes, object updates, messages, notifications, or external service calls.
+
+6
+00:00:45.920 --> 00:00:51.840
+Do not assume that an event is trustworthy only because it arrived through an AWS service.
+
+7
+00:00:51.940 --> 00:01:00.660
+The event may represent user input, partner input, batch data, uploaded content, scheduled work, or data copied from another system.
+
+8
+00:01:00.760 --> 00:01:05.400
+The source helps describe the path; it does not remove validation responsibility.
+
+9
+00:01:05.680 --> 00:01:16.400
+S3 and file-like events require review of bucket policy, object naming, file size, content type, scanning workflow, retention, and cleanup behavior.
+
+10
+00:01:16.500 --> 00:01:24.100
+The function should know which objects it expects to process and how to handle unexpected metadata or missing objects.
+
+11
+00:01:24.380 --> 00:01:33.500
+Queue and stream events require review of batch size, partial failure behavior, ordering expectations, replay behavior, and poison-message handling.
+
+12
+00:01:33.600 --> 00:01:42.560
+Raw event logging should be avoided when the event may contain personal data, secrets, tokens, customer records, or regulated content.

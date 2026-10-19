@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.220
+ASP.NET Core Identity uses token providers for account workflows such as email confirmation, password reset, change email or phone, and two-factor flows.
+
+2
+00:00:11.320 --> 00:00:14.360
+These tokens support account lifecycle actions.
+
+3
+00:00:14.460 --> 00:00:20.780
+They should be purpose-specific, time-limited, and handled according to the sensitivity of the workflow.
+
+4
+00:00:21.060 --> 00:00:26.020
+Password reset and email confirmation tokens are not API access tokens.
+
+5
+00:00:26.120 --> 00:00:31.800
+They have a different purpose, issuer, validation path, and operational risk.
+
+6
+00:00:31.900 --> 00:00:38.940
+A reset token may allow an account workflow to proceed, while an API access token is intended for resource access decisions.
+
+7
+00:00:39.040 --> 00:00:43.760
+Mixing these concepts makes review harder and can produce unsafe assumptions.
+
+8
+00:00:44.040 --> 00:00:51.880
+Token links and token values should not be logged, copied into analytics, displayed unnecessarily, or exposed through support artifacts.
+
+9
+00:00:51.980 --> 00:01:04.460
+Email links, support tickets, screenshots, page telemetry, and failed request logs can all become accidental exposure paths if the application records full values without redaction.
+
+10
+00:01:04.740 --> 00:01:10.420
+ASP.NET Core Identity token behavior can depend on Data Protection configuration.
+
+11
+00:01:10.520 --> 00:01:16.040
+Data Protection protects and validates framework or application payloads using a key ring.
+
+12
+00:01:16.140 --> 00:01:24.620
+If the key ring is lost, inconsistent, or environment-confused, protected token behavior may change in ways that affect account workflows.
+
+13
+00:01:24.900 --> 00:01:33.220
+Multi-instance deployments need Data Protection key persistence and consistent application identity so protected tokens can be validated reliably.
+
+14
+00:01:33.320 --> 00:01:41.240
+Containers, multiple servers, deployment slots, and cloud hosting all affect where keys live and which application can read them.
+
+15
+00:01:41.520 --> 00:01:45.760
+Token failure handling should be predictable and safe for users and support teams.
+
+16
+00:01:45.860 --> 00:01:57.700
+A user should receive a clear next step when an account workflow token is invalid or expired, while support teams should have safe diagnostic categories rather than raw token values.

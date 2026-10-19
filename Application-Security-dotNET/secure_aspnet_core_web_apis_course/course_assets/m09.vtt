@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+API error responses should be consistent, safe, and useful.
+
+2
+00:00:05.320 --> 00:00:17.560
+Legitimate clients need to distinguish validation failures, authentication failures, authorization failures, missing resources, conflicts, rate limits, and server errors.
+
+3
+00:00:17.660 --> 00:00:27.820
+They do not need stack traces, connection strings, raw exception messages, internal paths, tokens, service names, or sensitive record details.
+
+4
+00:00:28.100 --> 00:00:33.620
+Consistent error formats help client teams handle failures without scraping unpredictable text.
+
+5
+00:00:33.720 --> 00:00:43.400
+ASP.NET Core APIs often use structured responses that include status, code, message, field information, and a correlation identifier.
+
+6
+00:00:43.500 --> 00:00:51.180
+The exact format can vary, but the design should be deliberate and should separate user-facing clarity from operator diagnostics.
+
+7
+00:00:51.460 --> 00:01:09.060
+Structured logging should capture security-relevant events with useful context: authentication events, authorization failures, administrative actions, data changes, suspicious validation failures, file upload decisions, configuration changes, deployment events, and rate limiting decisions.
+
+8
+00:01:09.160 --> 00:01:16.120
+Logs should not become a second store of secrets, private records, bearer tokens, or raw sensitive payloads.
+
+9
+00:01:16.400 --> 00:01:21.600
+Correlation IDs or request identifiers connect related events during investigation.
+
+10
+00:01:21.700 --> 00:01:33.220
+A single API request may pass through a gateway, ASP.NET Core middleware, application code, database calls, downstream services, and background work.
+
+11
+00:01:33.320 --> 00:01:38.760
+Correlation makes it possible to trace behavior without exposing sensitive content in every log entry.
+
+12
+00:01:39.040 --> 00:01:43.680
+OpenAPI or Swagger documentation exposure is a production configuration decision.
+
+13
+00:01:43.780 --> 00:01:53.540
+Documentation can help legitimate clients integrate safely, but it can also reveal endpoints, request shapes, response models, and operational assumptions.
+
+14
+00:01:53.640 --> 00:02:00.600
+Decide where documentation is available, who can reach it, and whether production exposure matches the audience and risk.
+
+15
+00:02:00.880 --> 00:02:13.840
+Deployment security includes dependency review, runtime maintenance, CI/CD secrets, environment-specific configuration, package updates, base images, monitoring, alerting, and rollback readiness.
+
+16
+00:02:13.940 --> 00:02:17.620
+A secure API is not finished when the code is merged.
+
+17
+00:02:17.720 --> 00:02:24.760
+It remains secure because the team can patch it, observe it, investigate it, and change it without relying on hidden assumptions.

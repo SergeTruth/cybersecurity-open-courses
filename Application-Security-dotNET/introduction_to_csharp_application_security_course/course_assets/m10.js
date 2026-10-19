@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Building Security into the C# Workflow",
+  "graphicAlt": "A repeatable workflow connects boundary design, implementation, review, deployment and operational feedback for continuous security improvement.",
+  "narration": "Secure C sharp development works best as a repeatable workflow. It starts in design, where teams identify trust boundaries, sensitive data, privileged operations, dependencies, and deployment assumptions. It continues through implementation, where validation, authorization, error handling, data protection, and safe APIs become normal engineering tasks.\n\nCode review should look for clear ownership of security decisions. Where is input validated? Where is authorization enforced? Where are secrets stored? What data is logged? What dependencies changed? What happens when an operation fails? These questions are easier to answer when teams use consistent patterns rather than one-off fixes.\n\nTesting and deployment connect the workflow. Unit tests, integration tests, security-focused test cases, configuration review, dependency review, release approvals, and monitoring all reinforce each other. No single control is enough, but together they make the application more predictable and easier to improve.\n\nThe practical takeaway is to build small habits into everyday work: validate at the server, encode output correctly, separate authentication from authorization, check object-level access, protect secrets, avoid custom cryptography, use parameterized data access, handle files carefully, log safely, review dependencies, and treat deployment as part of security.\n\nSecure C sharp development is continuous improvement. The goal is not a perfect application on the first pass. The goal is a codebase whose assumptions are visible, whose controls are repeatable, and whose team can keep improving as the application, platform, and threat environment change.",
+  "narrationPoints": [
+    "Secure C sharp development works best as a repeatable workflow.",
+    "Code review should look for clear ownership of security decisions.",
+    "Unit tests, integration tests, security-focused test cases, configuration review, dependency review.",
+    "The practical takeaway is to build small habits into everyday work: validate at the server, encode output correctly.",
+    "The practical takeaway is to build small habits into everyday work."
+  ]
+};

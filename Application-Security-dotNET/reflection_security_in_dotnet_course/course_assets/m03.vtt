@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Dynamic invocation is security-sensitive because it turns runtime names and metadata into behavior.
+
+2
+00:00:06.440 --> 00:00:17.480
+A string, attribute value, configuration entry, or file record can influence which constructor, method, property, event, or handler is used.
+
+3
+00:00:17.580 --> 00:00:21.260
+That is a powerful pattern, but it needs clear boundaries.
+
+4
+00:00:21.540 --> 00:00:28.740
+Avoid selecting types, constructors, methods, properties, or events directly from user-controlled strings.
+
+5
+00:00:28.840 --> 00:00:32.200
+A request value should not become a raw type name.
+
+6
+00:00:32.300 --> 00:00:37.260
+A configuration setting should not grant access to any class on the probing path.
+
+7
+00:00:37.360 --> 00:00:41.040
+A plugin identifier should not become unrestricted assembly discovery.
+
+8
+00:00:41.320 --> 00:00:49.720
+Prefer explicit maps, allowlists, fixed contracts, command registries, dependency injection registrations, or typed interfaces.
+
+9
+00:00:49.820 --> 00:00:53.660
+These patterns keep the dynamic choice bounded.
+
+10
+00:00:53.760 --> 00:01:00.080
+The application can expose stable operation keys without letting external data choose arbitrary runtime members.
+
+11
+00:01:00.360 --> 00:01:04.840
+Validate and authorize the requested operation before invoking reflected code.
+
+12
+00:01:04.940 --> 00:01:13.660
+Treat constructor arguments, method arguments, property values, and attribute-derived values as untrusted unless they come from a trusted source.
+
+13
+00:01:13.760 --> 00:01:22.160
+Runtime activation should not skip normal dependency lifetime, authorization, validation, logging, or error-handling expectations.
+
+14
+00:01:22.440 --> 00:01:25.480
+Reflection exceptions should be handled safely.
+
+15
+00:01:25.580 --> 00:01:33.340
+Failure responses should avoid exposing internal names, paths, stack details, or sensitive values unnecessarily.
+
+16
+00:01:33.440 --> 00:01:40.320
+Logs should preserve enough safe context for troubleshooting without turning internal reflection behavior into public documentation.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.420
+Browser-facing ASP.NET Core applications need defenses that match how browsers send requests and handle content.
+
+2
+00:00:08.520 --> 00:00:15.560
+CSRF risk appears when a browser can send an authenticated state-changing request because a user is already signed in.
+
+3
+00:00:15.660 --> 00:00:28.940
+Antiforgery protections matter most in flows where cookies authenticate the request and the operation changes server-side state, such as form submissions or actions that modify records.
+
+4
+00:00:29.220 --> 00:00:32.180
+Antiforgery protection should be applied intentionally.
+
+5
+00:00:32.280 --> 00:00:43.640
+The goal is not to decorate every endpoint blindly, but to understand which flows rely on browser cookies, which methods change state, and where framework antiforgery patterns should be used.
+
+6
+00:00:43.740 --> 00:00:52.300
+API designs that use different authentication patterns may have different needs, but state-changing browser flows should not be left to chance.
+
+7
+00:00:52.580 --> 00:00:55.220
+CORS is often misunderstood.
+
+8
+00:00:55.320 --> 00:01:03.640
+It is a browser-enforced sharing policy that controls whether browser-based scripts from one origin can read responses from another origin.
+
+9
+00:01:03.740 --> 00:01:07.260
+It is not a general server-side authorization mechanism.
+
+10
+00:01:07.360 --> 00:01:15.600
+A server still has to authenticate the caller, authorize the operation, validate input, and protect data even if CORS is configured correctly.
+
+11
+00:01:15.880 --> 00:01:18.200
+Avoid overly broad CORS settings.
+
+12
+00:01:18.300 --> 00:01:24.940
+Broad origins, methods, headers, or credential settings can make browser exposure wider than intended.
+
+13
+00:01:25.040 --> 00:01:30.880
+CORS rules should reflect real client applications, deployment environments, and data sensitivity.
+
+14
+00:01:30.980 --> 00:01:36.260
+Temporary settings used during development should not drift into production as permanent policy.
+
+15
+00:01:36.540 --> 00:01:40.780
+Cookie attributes and security headers support safer browser behavior.
+
+16
+00:01:40.880 --> 00:01:47.280
+Secure, HttpOnly, and SameSite settings reduce common exposure paths for cookies.
+
+17
+00:01:47.380 --> 00:01:55.700
+Headers that control framing, content type handling, transport expectations, referrer behavior, and content execution can limit accidental browser trust.
+
+18
+00:01:55.800 --> 00:02:01.320
+These settings are supporting controls, not a substitute for server-side authorization and validation.
+
+19
+00:02:01.600 --> 00:02:05.360
+Client-side controls are useful, but they are not enforcement.
+
+20
+00:02:05.460 --> 00:02:16.820
+A user interface can hide actions, validate fields, and guide behavior, but server-side code must still protect state-changing operations, sensitive data, and privileged workflows.
+
+21
+00:02:16.920 --> 00:02:22.920
+Browser defenses work best when they reinforce a server design that is already explicit about trust.

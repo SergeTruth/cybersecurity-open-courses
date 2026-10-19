@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Safe CORS Baseline",
+  "graphicAlt": "A safe CORS baseline ties browser-read exceptions to business needs, scoped endpoints and ongoing review alongside separate application controls.",
+  "narration": "A safe CORS baseline begins with the same-origin policy. Browsers limit what JavaScript from one origin can read from another origin. CORS relaxes that browser restriction for selected browser clients when the server chooses to allow it. That means every exception should be narrow, named, and tied to a real business requirement.\n\nCORS is not authentication, authorization, CSRF protection, or a firewall. Keep those responsibilities separate. Authenticate users and services through the appropriate identity mechanisms. Authorize actions and resources on the server. Protect state-changing browser workflows. Use CORS only to describe which browser origins may read selected cross-origin responses.\n\nPolicies should be explicit and reviewable. Name the intended frontend and API relationship, scope the policy to endpoints that need it, approve only necessary methods and headers, expose only required response headers, and treat credentialed behavior with extra care. Development convenience settings should not become production policy.\n\nMiddleware order and endpoint scope matter in ASP.NET Core. CORS behavior depends on how routing, CORS middleware, authentication, authorization, endpoint mapping, response caching, static files, gateways, and proxies fit together. Preflight behavior should be understood and tested during normal engineering review.\n\nThe final takeaway is practical: do not widen CORS only to remove a browser error. First identify the intended origin, endpoint, method, headers, credentials, environment, middleware placement, and infrastructure behavior. Then document the decision and keep it under review as the application changes.",
+  "narrationPoints": [
+    "CORS relaxes that browser restriction for selected browser clients when the server chooses to allow it.",
+    "CORS is not authentication, authorization, CSRF protection, or a firewall.",
+    "Name the intended frontend and API relationship, scope the policy to endpoints that need it, approve only necessary methods and headers.",
+    "CORS behavior depends on how routing, CORS middleware, authentication, authorization, endpoint mapping.",
+    "Then document the decision and keep it under review as the application changes."
+  ]
+};
