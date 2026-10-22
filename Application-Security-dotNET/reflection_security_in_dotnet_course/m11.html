@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Reflection Security in .NET</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="reflection_security_in_dotnet">
   <main id="main-content" class="main-content">
@@ -20,87 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;A&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;A&quot;, &quot;q04&quot;: &quot;A&quot;, &quot;q05&quot;: &quot;A&quot;, &quot;q06&quot;: &quot;A&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;A&quot;, &quot;q09&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;A&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;A&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is reflection a security surface?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Reflection can inspect metadata, activate types, access members, and invoke behavior at runtime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Reflection only changes source formatting.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Reflection is limited to compile-time comments.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Reflection prevents all dynamic behavior.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. Why is reflection a security surface?</legend>
-                      <label><input type="radio" name="q01" value="A" required> Reflection can inspect metadata, activate types, access members, and invoke behavior at runtime.</label>
-                      <label><input type="radio" name="q01" value="B"> Reflection only changes source formatting.</label>
-                      <label><input type="radio" name="q01" value="C"> Reflection is limited to compile-time comments.</label>
-                      <label><input type="radio" name="q01" value="D"> Reflection prevents all dynamic behavior.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>2. What can metadata exposure reveal?</legend>
-                      <label><input type="radio" name="q02" value="A" required> Internal type names, method names, attributes, architecture, dependencies, and implementation conventions.</label>
-                      <label><input type="radio" name="q02" value="B"> Only public website colors.</label>
-                      <label><input type="radio" name="q02" value="C"> Nothing useful in production.</label>
-                      <label><input type="radio" name="q02" value="D"> Only data that users already entered.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>3. Why is user-controlled dynamic invocation risky?</legend>
-                      <label><input type="radio" name="q03" value="A" required> Names or values from users can influence which code runs if not restricted to trusted allowlists or contracts.</label>
-                      <label><input type="radio" name="q03" value="B"> It makes all code strongly typed automatically.</label>
-                      <label><input type="radio" name="q03" value="C"> It prevents reflection exceptions.</label>
-                      <label><input type="radio" name="q03" value="D"> It removes the need for validation.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>4. Why should private member reflection be reviewed carefully?</legend>
-                      <label><input type="radio" name="q04" value="A" required> It can work around intended public contracts, invariants, validation paths, and review assumptions.</label>
-                      <label><input type="radio" name="q04" value="B"> It always improves application design.</label>
-                      <label><input type="radio" name="q04" value="C"> It is the safest production extension mechanism.</label>
-                      <label><input type="radio" name="q04" value="D"> It automatically creates audit logs.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>5. Why is AssemblyLoadContext not a complete security sandbox?</legend>
-                      <label><input type="radio" name="q05" value="A" required> It isolates loading and dependencies, but it does not make untrusted code safe to execute in the process.</label>
-                      <label><input type="radio" name="q05" value="B"> It prevents all plugin code from running.</label>
-                      <label><input type="radio" name="q05" value="C"> It removes dependency review requirements.</label>
-                      <label><input type="radio" name="q05" value="D"> It allows code to run only at compile time.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>6. How can reflection-driven framework automation hide security decisions?</legend>
-                      <label><input type="radio" name="q06" value="A" required> Binding, serialization, mapping, and dispatch can create or modify objects without obvious typed code paths.</label>
-                      <label><input type="radio" name="q06" value="B"> It always requires no input validation.</label>
-                      <label><input type="radio" name="q06" value="C"> It only runs in unit tests.</label>
-                      <label><input type="radio" name="q06" value="D"> It prevents attributes from changing behavior.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>7. Why does dynamic code generation need review?</legend>
-                      <label><input type="radio" name="q07" value="A" required> Generated behavior may not be visible in source and should not be derived from untrusted input.</label>
-                      <label><input type="radio" name="q07" value="B"> It always produces documentation automatically.</label>
-                      <label><input type="radio" name="q07" value="C"> It cannot affect runtime behavior.</label>
-                      <label><input type="radio" name="q07" value="D"> It eliminates deployment constraints.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>8. Why do trimming and Native AOT affect reflection-heavy code?</legend>
-                      <label><input type="radio" name="q08" value="A" required> Build tools may remove members that are only accessed dynamically unless requirements are explicit.</label>
-                      <label><input type="radio" name="q08" value="B"> They make all members public.</label>
-                      <label><input type="radio" name="q08" value="C"> They disable every compiler warning.</label>
-                      <label><input type="radio" name="q08" value="D"> They replace the need for tests.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>9. What should be redacted in reflection diagnostics?</legend>
-                      <label><input type="radio" name="q09" value="A" required> Type names, assembly paths, plugin paths, secrets, connection strings, tenant details, and raw reflected values when they are not appropriate for the audience.</label>
-                      <label><input type="radio" name="q09" value="B"> Only punctuation marks.</label>
-                      <label><input type="radio" name="q09" value="C"> Nothing, because diagnostics are always private.</label>
-                      <label><input type="radio" name="q09" value="D"> Only final quiz labels.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>10. What belongs in a secure reflection baseline?</legend>
-                      <label><input type="radio" name="q10" value="A" required> Minimal reflection, explicit allowlists, trusted contracts, validation, authorization, controlled assembly loading, redacted diagnostics, trimming review, and ownership.</label>
-                      <label><input type="radio" name="q10" value="B"> Unrestricted runtime type selection and public debug endpoints.</label>
-                      <label><input type="radio" name="q10" value="C"> Loading code from any configured path without review.</label>
-                      <label><input type="radio" name="q10" value="D"> Ignoring trimming warnings and plugin ownership.</label>
-                    </fieldset>
+            <legend>2. What can metadata exposure reveal?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Internal type names, method names, attributes, architecture, dependencies, and implementation conventions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Only public website colors.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Nothing useful in production.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Only data that users already entered.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why is user-controlled dynamic invocation risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Names or values from users can influence which code runs if not restricted to trusted allowlists or contracts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>It makes all code strongly typed automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>It prevents reflection exceptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>It removes the need for validation.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why should private member reflection be reviewed carefully?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>It can work around intended public contracts, invariants, validation paths, and review assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>It always improves application design.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>It is the safest production extension mechanism.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>It automatically creates audit logs.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why is AssemblyLoadContext not a complete security sandbox?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>It isolates loading and dependencies, but it does not make untrusted code safe to execute in the process.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>It prevents all plugin code from running.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>It removes dependency review requirements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>It allows code to run only at compile time.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. How can reflection-driven framework automation hide security decisions?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Binding, serialization, mapping, and dispatch can create or modify objects without obvious typed code paths.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>It always requires no input validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>It only runs in unit tests.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>It prevents attributes from changing behavior.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why does dynamic code generation need review?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Generated behavior may not be visible in source and should not be derived from untrusted input.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>It always produces documentation automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>It cannot affect runtime behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>It eliminates deployment constraints.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do trimming and Native AOT affect reflection-heavy code?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Build tools may remove members that are only accessed dynamically unless requirements are explicit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>They make all members public.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>They disable every compiler warning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>They replace the need for tests.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What should be redacted in reflection diagnostics?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Type names, assembly paths, plugin paths, secrets, connection strings, tenant details, and raw reflected values when they are not appropriate for the audience.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Only punctuation marks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Nothing, because diagnostics are always private.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Only final quiz labels.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What belongs in a secure reflection baseline?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Minimal reflection, explicit allowlists, trusted contracts, validation, authorization, controlled assembly loading, redacted diagnostics, trimming review, and ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Unrestricted runtime type selection and public debug endpoints.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Loading code from any configured path without review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Ignoring trimming warnings and plugin ownership.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -113,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

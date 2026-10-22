@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="secure_secret_storage_in_cpp">
   <main id="main-content" class="main-content">
@@ -20,96 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
           data-answer-key='{&quot;q1&quot;:&quot;A&quot;,&quot;q2&quot;:&quot;D&quot;,&quot;q3&quot;:&quot;C&quot;,&quot;q4&quot;:&quot;B&quot;,&quot;q5&quot;:&quot;A&quot;,&quot;q6&quot;:&quot;C&quot;,&quot;q7&quot;:&quot;B&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;D&quot;}'
         >
-          <fieldset class="quiz-question" data-correct-feedback="Correct. Secrets grant access, prove identity, or protect operations, so storage mistakes can affect system security." data-incorrect-feedback="Review why secret handling matters even when the surrounding C++ code is otherwise careful.">
+                    <fieldset class="quiz-question">
             <legend>1. Why is secret storage security-relevant in C++ applications?</legend>
-            <label><input type="radio" name="q1" value="A" required> Secrets can grant access, prove identity, decrypt data, sign operations, or connect systems.</label>
-            <label><input type="radio" name="q1" value="B"> C++ type safety prevents stored credentials from granting unintended system access.</label>
-            <label><input type="radio" name="q1" value="C"> Secrets affect authentication but not encryption, signing, or service connectivity.</label>
-            <label><input type="radio" name="q1" value="D"> Logging and deployment are dedicated concerns once a secret is held in memory.</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>Secrets can grant access, prove identity, decrypt data, sign operations, or connect systems.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>C++ type safety prevents stored credentials from granting unintended system access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>Secrets affect authentication but not encryption, signing, or service connectivity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>Logging and deployment are dedicated concerns once a secret is held in memory.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Classification drives storage, delivery, rotation, and response decisions." data-incorrect-feedback="Look for the answer focused on scope, ownership, lifetime, and operational handling.">
+          <fieldset class="quiz-question">
             <legend>2. Why should secret type, scope, owner, and lifetime be classified?</legend>
-            <label><input type="radio" name="q2" value="A" required> A shared storage and rotation policy is suitable for unrelated secret types.</label>
-            <label><input type="radio" name="q2" value="B"> Classification primarily improves documentation and does not change access boundaries.</label>
-            <label><input type="radio" name="q2" value="C"> A short lifetime permits broad component access without increasing exposure.</label>
-            <label><input type="radio" name="q2" value="D"> Classification maps each secret to its protection objective, access limits, lifetime, and recovery plan.</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>A shared storage and rotation policy is suitable for unrelated secret types.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>Classification primarily improves documentation and does not change access boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>A short lifetime permits broad component access without increasing exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Classification maps each secret to its protection objective, access limits, lifetime, and recovery plan.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Hardcoded values can spread through repositories, artifacts, packages, and backups." data-incorrect-feedback="Review why source and binaries are poor secret stores.">
+          <fieldset class="quiz-question">
             <legend>3. Why are hardcoded and embedded secrets dangerous?</legend>
-            <label><input type="radio" name="q3" value="A" required> Compiler optimization eliminates embedded credentials from release binaries when unused.</label>
-            <label><input type="radio" name="q3" value="B"> Repository access controls prevent hardcoded values from reaching caches or build artifacts.</label>
-            <label><input type="radio" name="q3" value="C"> Hardcoded secrets can persist in history, binaries, artifacts, logs, caches, and backups.</label>
-            <label><input type="radio" name="q3" value="D"> Protected configuration files provide stronger credential assurance than an external provider.</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>Compiler optimization eliminates embedded credentials from release binaries when unused.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>Repository access controls prevent hardcoded values from reaching caches or build artifacts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>Hardcoded secrets can persist in history, binaries, artifacts, logs, caches, and backups.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>Protected configuration files provide stronger credential assurance than an external provider.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. The value may remain in history and artifacts, so rotation or revocation is usually required." data-incorrect-feedback="Deleting the visible line does not remove every copy of the exposed value.">
+          <fieldset class="quiz-question">
             <legend>4. Why is deleting a committed secret usually not enough?</legend>
-            <label><input type="radio" name="q4" value="A" required> Deleting the current source line eliminates the item from clones and derived artifacts.</label>
-            <label><input type="radio" name="q4" value="B"> The secret may remain in history, artifacts, logs, caches, or copies, so it should be rotated or revoked.</label>
-            <label><input type="radio" name="q4" value="C"> Rotation is appropriate for production credentials but not for exposed development values.</label>
-            <label><input type="radio" name="q4" value="D"> Keeping the original credential active is acceptable when the repository containing it is private.</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>Deleting the current source line eliminates the item from clones and derived artifacts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>The secret may remain in history, artifacts, logs, caches, or copies, so it should be rotated or revoked.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Rotation is appropriate for production credentials but not for exposed development values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Keeping the original credential active is acceptable when the repository containing it is private.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Approved stores centralize protection, access control, auditability, and rotation support." data-incorrect-feedback="Review why custom storage schemes are difficult to secure and maintain.">
+          <fieldset class="quiz-question">
             <legend>5. Why are approved secret stores preferred over custom storage schemes?</legend>
-            <label><input type="radio" name="q5" value="A" required> Approved stores provide reviewed protection, access control, auditability, and rotation mechanisms.</label>
-            <label><input type="radio" name="q5" value="B"> A custom encrypted file is easier to audit because its implementation lives within the application host.</label>
-            <label><input type="radio" name="q5" value="C"> Approved stores remove the need for component authorization and operational ownership.</label>
-            <label><input type="radio" name="q5" value="D"> Central storage requires each component to receive the same retrieval permissions.</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>Approved stores provide reviewed protection, access control, auditability, and rotation mechanisms.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>A custom encrypted file is easier to audit because its implementation lives within the application host.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Approved stores remove the need for component authorization and operational ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>Central storage requires each component to receive the same retrieval permissions.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Each delivery path has different visibility, inheritance, logging, and permission risks." data-incorrect-feedback="Review the module on configuration, environment variables, and deployment injection.">
+          <fieldset class="quiz-question">
             <legend>6. Why do environment variables, command-line arguments, and config files have different exposure risks?</legend>
-            <label><input type="radio" name="q6" value="A" required> Environment variables and command arguments have equivalent inheritance and visibility behavior.</label>
-            <label><input type="radio" name="q6" value="B"> Configuration-file permissions matter less when the path is outside the source repository.</label>
-            <label><input type="radio" name="q6" value="C"> Injection channels differ in visibility, inheritance, diagnostics, permissions, and artifact behavior.</label>
-            <label><input type="radio" name="q6" value="D"> Operating-system tooling does not expose arguments after process initialization completes.</label>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Environment variables and command arguments have equivalent inheritance and visibility behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Configuration-file permissions matter less when the path is outside the source repository.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Injection channels differ in visibility, inheritance, diagnostics, permissions, and artifact behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Operating-system tooling does not expose arguments after process initialization completes.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Fewer copies, shorter lifetimes, and redacted diagnostics reduce accidental exposure." data-incorrect-feedback="Review the practical baseline for runtime secret handling.">
+          <fieldset class="quiz-question">
             <legend>7. Why should in-memory secret handling minimize copies and logging?</legend>
-            <label><input type="radio" name="q7" value="A" required> Ordinary strings suppress copies once callers pass them through const references.</label>
-            <label><input type="radio" name="q7" value="B"> Copies, conversions, dumps, and logs can extend secret lifetime or reveal sensitive values.</label>
-            <label><input type="radio" name="q7" value="C"> A process dump is outside the secret lifetime after the result carries been parsed.</label>
-            <label><input type="radio" name="q7" value="D"> Logging a partial credential assists rotation without materially increasing exposure.</label>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>Ordinary strings suppress copies once callers pass them through const references.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>Copies, conversions, dumps, and logs can extend secret lifetime or reveal sensitive values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>A process dump is outside the secret lifetime after the result carries been parsed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>Logging a partial credential assists rotation without materially increasing exposure.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Encryption at rest still depends on protected keys, permissions, and access control." data-incorrect-feedback="Encryption helps, but key handling and access policy remain essential.">
+          <fieldset class="quiz-question">
             <legend>8. Why does encryption at rest still require key management and access control?</legend>
-            <label><input type="radio" name="q8" value="A" required> Encrypted-secret metadata makes filesystem permissions irrelevant to stored secret protection.</label>
-            <label><input type="radio" name="q8" value="B"> Keeping the decryption key beside ciphertext simplifies recovery without changing risk.</label>
-            <label><input type="radio" name="q8" value="C"> Encrypted backups need no access policy when their storage provider is approved.</label>
-            <label><input type="radio" name="q8" value="D"> If the decryption key and access policy are weak, encrypted storage can still be exposed.</label>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Encrypted-secret metadata makes filesystem permissions irrelevant to stored secret protection.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>Keeping the decryption key beside ciphertext simplifies recovery without changing risk.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>Encrypted backups need no access policy when their storage provider is approved.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>If the decryption key and access policy are weak, encrypted storage can still be exposed.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Narrow access and tested replacement reduce blast radius and improve recovery." data-incorrect-feedback="Review least privilege, access control, rotation, and revocation.">
+          <fieldset class="quiz-question">
             <legend>9. Why do rotation, revocation, and least privilege matter?</legend>
-            <label><input type="radio" name="q9" value="A" required> Rotation, revocation, and least privilege limit exposure and support recovery after trust changes.</label>
-            <label><input type="radio" name="q9" value="B"> Rotation is useful after repository cleanup but supplies little datum during routine operation.</label>
-            <label><input type="radio" name="q9" value="C"> Revocation replaces the need to record which workloads accessed the old secret.</label>
-            <label><input type="radio" name="q9" value="D"> Broad secret access improves availability without affecting incident scope.</label>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Rotation, revocation, and least privilege limit exposure and support recovery after trust changes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Rotation is useful after repository cleanup but supplies little datum during routine operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>Revocation replaces the need to record which workloads accessed the old secret.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Broad secret access improves availability without affecting incident scope.</span></label>
           </fieldset>
-
-<fieldset class="quiz-question" data-correct-feedback="Correct. Secondary systems can preserve or disclose secrets even when primary storage is approved." data-incorrect-feedback="Review how diagnostics and build systems can leak sensitive values.">
+          <fieldset class="quiz-question">
             <legend>10. How can logs, tests, crash reports, and CI output leak secrets?</legend>
-            <label><input type="radio" name="q10" value="A" required> Compiler-generated diagnostics exclude runtime values unless debugging symbols are present.</label>
-            <label><input type="radio" name="q10" value="B"> Test fixtures may contain realistic credentials when CI logs are access-controlled.</label>
-            <label><input type="radio" name="q10" value="C"> Crash reports contain control flow and therefore do not need secret filtering.</label>
-            <label><input type="radio" name="q10" value="D"> Operational outputs can capture printed values, configuration, dumps, fixtures, and unredacted logs.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Compiler-generated diagnostics exclude runtime values unless debugging symbols are present.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Test fixtures may contain realistic credentials when CI logs are access-controlled.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Crash reports contain control flow and therefore do not need secret filtering.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Operational outputs can capture printed values, configuration, dumps, fixtures, and unredacted logs.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -122,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

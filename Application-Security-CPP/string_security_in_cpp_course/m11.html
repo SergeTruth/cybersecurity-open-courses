@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | String Security in C++</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="string_security_in_cpp">
   <main id="main-content" class="main-content">
@@ -20,87 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q1&quot;: &quot;A&quot;, &quot;q2&quot;: &quot;D&quot;, &quot;q3&quot;: &quot;A&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;B&quot;, &quot;q6&quot;: &quot;D&quot;, &quot;q7&quot;: &quot;D&quot;, &quot;q8&quot;: &quot;B&quot;, &quot;q9&quot;: &quot;C&quot;, &quot;q10&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q1&quot;:&quot;A&quot;,&quot;q2&quot;:&quot;D&quot;,&quot;q3&quot;:&quot;A&quot;,&quot;q4&quot;:&quot;C&quot;,&quot;q5&quot;:&quot;B&quot;,&quot;q6&quot;:&quot;D&quot;,&quot;q7&quot;:&quot;D&quot;,&quot;q8&quot;:&quot;B&quot;,&quot;q9&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;}'
         >
-          <fieldset class="quiz-question" data-correct-feedback="Correct. Strings affect parsing, policy, paths, logs, and output." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+                    <fieldset class="quiz-question">
             <legend>1. Why are strings security-relevant in C++ applications?</legend>
-            <label><input type="radio" name="q1" value="A" required> Strings affect parsing, policy, paths, logs, and output.</label>
-            <label><input type="radio" name="q1" value="B"> Text content prevents strings from crossing trust boundaries.</label>
-            <label><input type="radio" name="q1" value="C"> Text input becomes trusted after storage in std::string.</label>
-            <label><input type="radio" name="q1" value="D"> Strings matter to security mainly in graphical interfaces.</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>Strings affect parsing, policy, paths, logs, and output.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>Text content prevents strings from crossing trust boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>Text input becomes trusted after storage in std::string.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>Strings matter to security mainly in graphical interfaces.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Many C APIs discover the end through a null terminator." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>2. Why do C strings require null-termination awareness?</legend>
-            <label><input type="radio" name="q2" value="A" required> A terminator demonstrates that the destination buffer has enough capacity.</label>
-            <label><input type="radio" name="q2" value="B"> C strings carry a length alongside the pointer.</label>
-            <label><input type="radio" name="q2" value="C"> Legacy C APIs accept unterminated arrays as bounded strings.</label>
-            <label><input type="radio" name="q2" value="D"> Many C APIs discover the end through a null terminator.</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>A terminator demonstrates that the destination buffer has enough capacity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>C strings carry a length alongside the pointer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>Legacy C APIs accept unterminated arrays as bounded strings.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Many C APIs discover the end through a null terminator.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. The referenced storage must outlive every string_view use." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>3. Why does std::string_view require lifetime awareness?</legend>
-            <label><input type="radio" name="q3" value="A" required> The referenced storage must outlive every string_view use.</label>
-            <label><input type="radio" name="q3" value="B"> A string_view owns a copy of the referenced characters.</label>
-            <label><input type="radio" name="q3" value="C"> A view extends the source storage lifetime until destruction.</label>
-            <label><input type="radio" name="q3" value="D"> A view remains valid after its source string reallocates.</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>The referenced storage must outlive every string_view use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>A string_view owns a copy of the referenced characters.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>A view extends the source storage lifetime until destruction.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>A view remains valid after its source string reallocates.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Those measurements describe different storage and validation properties." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>4. Why should size, capacity, byte count, and character count not be confused?</legend>
-            <label><input type="radio" name="q4" value="A" required> The measurements are interchangeable for any string representation.</label>
-            <label><input type="radio" name="q4" value="B"> Allocated space is the same as validated user-visible length.</label>
-            <label><input type="radio" name="q4" value="C"> Those measurements describe different storage and validation properties.</label>
-            <label><input type="radio" name="q4" value="D"> Character count is independent of the active encoding.</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>The measurements are interchangeable for any string representation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Allocated space is the same as validated user-visible length.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Those measurements describe different storage and validation properties.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Character count is independent of the active encoding.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Check length, syntax, encoding, characters, and domain rules." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>5. Why should raw string input be validated before use?</legend>
-            <label><input type="radio" name="q5" value="A" required> Configuration strings can be trusted without validation.</label>
-            <label><input type="radio" name="q5" value="B"> Check length, syntax, encoding, characters, and domain rules.</label>
-            <label><input type="radio" name="q5" value="C"> Completed parsing makes each decoded value valid for the domain.</label>
-            <label><input type="radio" name="q5" value="D"> Validation is needed only before displaying the value.</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>Configuration strings can be trusted without validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Check length, syntax, encoding, characters, and domain rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Completed parsing makes each decoded value valid for the domain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>Validation is needed only before displaying the value.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Equivalent text can have different byte representations." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>6. Why do encoding and normalization matter for comparisons?</legend>
-            <label><input type="radio" name="q6" value="A" required> Unicode text has the same properties as ASCII text.</label>
-            <label><input type="radio" name="q6" value="B"> Locale and canonical form do not change comparison results.</label>
-            <label><input type="radio" name="q6" value="C"> Encoding matters only when strings contain image file paths.</label>
-            <label><input type="radio" name="q6" value="D"> Equivalent text can have different byte representations.</label>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Unicode text has the same properties as ASCII text.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Locale and canonical form do not change comparison results.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Encoding matters only when strings contain image file paths.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Equivalent text can have different byte representations.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. The output context controls the decision about formatting and escaping." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>7. Why does output context affect formatting and escaping?</legend>
-            <label><input type="radio" name="q7" value="A" required> One escaping rule is suitable for SQL, HTML, shells, and logs.</label>
-            <label><input type="radio" name="q7" value="B"> Output context is irrelevant after input validation succeeds.</label>
-            <label><input type="radio" name="q7" value="C"> Structured output is safest when separators are concatenated manually.</label>
-            <label><input type="radio" name="q7" value="D"> The output context controls the decision about formatting and escaping.</label>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>One escaping rule is suitable for SQL, HTML, shells, and logs.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>Output context is irrelevant after input validation succeeds.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>Structured output is safest when separators are concatenated manually.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>The output context controls the decision about formatting and escaping.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Extra copies and logs broaden exposure of sensitive data." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>8. Why should sensitive strings avoid unnecessary logging and copying?</legend>
-            <label><input type="radio" name="q8" value="A" required> A credential is acceptable to log when stored in std::string.</label>
-            <label><input type="radio" name="q8" value="B"> Extra copies and logs broaden exposure of sensitive data.</label>
-            <label><input type="radio" name="q8" value="C"> Copying sensitive strings does not alter exposure.</label>
-            <label><input type="radio" name="q8" value="D"> Secret-handling rules protect byte arrays while excluding text strings.</label>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>A credential is acceptable to log when stored in std::string.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>Extra copies and logs broaden exposure of sensitive data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>Copying sensitive strings does not alter exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>Secret-handling rules protect byte arrays while excluding text strings.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. A wrapper centralizes length, encoding, and ownership conventions." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>9. Why should legacy string APIs often be wrapped?</legend>
-            <label><input type="radio" name="q9" value="A" required> Boundary validation can be omitted behind a wrapper.</label>
-            <label><input type="radio" name="q9" value="B"> Legacy APIs already communicate modern ownership and extent semantics.</label>
-            <label><input type="radio" name="q9" value="C"> A wrapper centralizes length, encoding, and ownership conventions.</label>
-            <label><input type="radio" name="q9" value="D"> Raw pointer-and-length contracts document themselves at call sites.</label>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Boundary validation can be omitted behind a wrapper.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Legacy APIs already communicate modern ownership and extent semantics.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>A wrapper centralizes length, encoding, and ownership conventions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Raw pointer-and-length contracts document themselves at call sites.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. They expose boundary, encoding, lifetime, and redaction assumptions." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>10. How do tests and code review help catch string-handling defects?</legend>
-            <label><input type="radio" name="q10" value="A" required> They expose boundary, encoding, lifetime, and redaction assumptions.</label>
-            <label><input type="radio" name="q10" value="B"> Passing tests establishes that no string defect remains.</label>
-            <label><input type="radio" name="q10" value="C"> Review and tests replace runtime input validation.</label>
-            <label><input type="radio" name="q10" value="D"> String-focused testing is useful only after a production incident.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>They expose boundary, encoding, lifetime, and redaction assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Passing tests establishes that no string defect remains.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Review and tests replace runtime input validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>String-focused testing is useful only after a production incident.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -113,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

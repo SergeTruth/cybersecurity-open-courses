@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="firmware_security_fundamentals_in_c">
   <main id="main-content" class="main-content">
@@ -20,112 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;B&quot;, &quot;q02&quot;: &quot;D&quot;, &quot;q03&quot;: &quot;A&quot;, &quot;q04&quot;: &quot;C&quot;, &quot;q05&quot;: &quot;B&quot;, &quot;q06&quot;: &quot;A&quot;, &quot;q07&quot;: &quot;D&quot;, &quot;q08&quot;: &quot;C&quot;, &quot;q09&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;D&quot;, &quot;q11&quot;: &quot;C&quot;, &quot;q12&quot;: &quot;B&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;D&quot;,&quot;q03&quot;:&quot;A&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;B&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;D&quot;,&quot;q08&quot;:&quot;C&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;D&quot;,&quot;q11&quot;:&quot;C&quot;,&quot;q12&quot;:&quot;B&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is firmware security important for C developers?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Firmware security is mostly the hardware team&#x27;s responsibility; C developers only need to meet functional requirements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Firmware may control hardware, process external data, store device identity, and remain deployed for long periods.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Long-lived firmware becomes stable after release, so security work mainly concerns the manufacturing phase.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>If a device is offline, external-data and identity risks are small enough that memory-safety tests are sufficient.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. Why is firmware security important for C developers?</legend>
-                      <label><input type="radio" name="q01" value="A" required> Firmware security is mostly the hardware team's responsibility; C developers only need to meet functional requirements.</label>
-                      <label><input type="radio" name="q01" value="B"> Firmware may control hardware, process external data, store device identity, and remain deployed for long periods.</label>
-                      <label><input type="radio" name="q01" value="C"> Long-lived firmware becomes stable after release, so security work mainly concerns the manufacturing phase.</label>
-                      <label><input type="radio" name="q01" value="D"> If a device is offline, external-data and identity risks are small enough that memory-safety tests are sufficient.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>2. What is a firmware trust boundary?</legend>
-                      <label><input type="radio" name="q02" value="A" required> A boundary is any module interface even when trust and authority are unchanged, so all interfaces can be reviewed identically.</label>
-                      <label><input type="radio" name="q02" value="B"> Only the boundary between the device and a network matters; stored state and privileged drivers are already trusted.</label>
-                      <label><input type="radio" name="q02" value="C"> Trust boundaries can be inferred from the call graph, so physical and maintenance control paths need not be documented.</label>
-                      <label><input type="radio" name="q02" value="D"> A point where data, control, or authority crosses between firmware components, hardware, external interfaces, stored state, or privileged code.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>3. What is the purpose of secure boot at a high level?</legend>
-                      <label><input type="radio" name="q03" value="A" required> To help ensure that authorized firmware is validated before it is allowed to run.</label>
-                      <label><input type="radio" name="q03" value="B"> Secure boot verifies image integrity after the application starts, allowing the application to decide whether execution should continue.</label>
-                      <label><input type="radio" name="q03" value="C"> A checksum stored beside the image is sufficient authorization when accidental corruption is the primary concern.</label>
-                      <label><input type="radio" name="q03" value="D"> Secure boot eliminates the need to validate startup configuration because verified code can safely consume any persisted state.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>4. Why is startup failure behavior important?</legend>
-                      <label><input type="radio" name="q04" value="A" required> On invalid metadata, the best availability strategy is to continue with defaults and record a diagnostic later.</label>
-                      <label><input type="radio" name="q04" value="B"> Startup failure policy can be added after deployment, once the team has observed the actual field fault modes.</label>
-                      <label><input type="radio" name="q04" value="C"> A device must handle invalid or damaged firmware predictably without silently entering unsafe operation.</label>
-                      <label><input type="radio" name="q04" value="D"> A watchdog reset provides predictable handling for every verification, configuration, and storage failure.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>5. Why does firmware C code need explicit memory policy?</legend>
-                      <label><input type="radio" name="q05" value="A" required> Fixed allocation makes memory use deterministic, so explicit ownership and lifetime policy are unnecessary.</label>
-                      <label><input type="radio" name="q05" value="B"> Constrained memory, fixed buffers, stack limits, heap fragmentation, and object lifetime all affect reliability and security.</label>
-                      <label><input type="radio" name="q05" value="C"> Heap fragmentation is only a performance concern if allocation failures are logged and the device can restart.</label>
-                      <label><input type="radio" name="q05" value="D"> Estimating stack use from average execution is sufficient; worst-case interrupt nesting is outside C memory review.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>6. Why should peripheral data be validated?</legend>
-                      <label><input type="radio" name="q06" value="A" required> Hardware-facing data may be malformed, stale, unexpected, noisy, or outside safe operating assumptions.</label>
-                      <label><input type="radio" name="q06" value="B"> A successful driver read means the frame is fresh and safe for application control.</label>
-                      <label><input type="radio" name="q06" value="C"> A frame checksum validates sensor meaning, operating range, sequence freshness, and current mode compatibility.</label>
-                      <label><input type="radio" name="q06" value="D"> Rejecting malformed byte lengths is sufficient; out-of-range values may be clipped without a separate application policy.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>7. Why are hard-coded secrets risky?</legend>
-                      <label><input type="radio" name="q07" value="A" required> One product-wide key is acceptable when it is protected in firmware and the factory network is controlled.</label>
-                      <label><input type="radio" name="q07" value="B"> Rotation is unnecessary for secrets used to identify devices rather than authorize firmware updates.</label>
-                      <label><input type="radio" name="q07" value="C"> Embedding per-device keys in build artifacts is safe when release-pipeline access is restricted.</label>
-                      <label><input type="radio" name="q07" value="D"> They are difficult to rotate, may be reused across devices, and can expand impact if exposed.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>8. What should a secure firmware update process include?</legend>
-                      <label><input type="radio" name="q08" value="A" required> Verify the signature after activation so the device can minimize staging-storage requirements.</label>
-                      <label><input type="radio" name="q08" value="B"> Rollback should accept any previously signed version because its authorization does not expire.</label>
-                      <label><input type="radio" name="q08" value="C"> Integrity checks, version policy, compatibility checks, safe staging, rollback or recovery planning, and failure handling.</label>
-                      <label><input type="radio" name="q08" value="D"> A successful lab update under stable power is enough evidence; interrupted writes are a storage concern outside the update workflow.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>9. Why should debug interfaces be reviewed before production release?</legend>
-                      <label><input type="radio" name="q09" value="A" required> Debug features can expose internal state, control capabilities, or maintenance access that should not be available in field builds.</label>
-                      <label><input type="radio" name="q09" value="B"> A debug interface is safe when its connector is hidden and its commands are undocumented.</label>
-                      <label><input type="radio" name="q09" value="C"> Production review can focus on network services because factory and test features are compiled from the same source.</label>
-                      <label><input type="radio" name="q09" value="D"> Read-only diagnostics cannot affect security even when they reveal keys, addresses, or detailed configuration.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>10. What should firmware diagnostics avoid?</legend>
-                      <label><input type="radio" name="q10" value="A" required> Full memory dumps are the most useful field diagnostic and may be uploaded whenever the device faults.</label>
-                      <label><input type="radio" name="q10" value="B"> Diagnostics should log every received frame before validation so incident analysis retains the original input.</label>
-                      <label><input type="radio" name="q10" value="C"> Once log storage is bounded, its contents no longer require secrecy, privacy, or redaction review.</label>
-                      <label><input type="radio" name="q10" value="D"> Exposing secrets, excessive sensitive data, uncontrolled external input, or behavior that destabilizes the device.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>11. What should firmware security tests include?</legend>
-                      <label><input type="radio" name="q11" value="A" required> Unit tests for valid parsers and update success cover firmware security; reset and hardware behavior belong only to qualification.</label>
-                      <label><input type="radio" name="q11" value="B"> Debug and production builds need not be compared when they compile the same source files.</label>
-                      <label><input type="radio" name="q11" value="C"> Boundary conditions, invalid input, update failure, reset behavior, configuration errors, and production/debug build differences.</label>
-                      <label><input type="radio" name="q11" value="D"> Type-limit tests are sufficient boundary coverage without corrupted persistent state or power-interruption tests.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>12. What is the main course takeaway?</legend>
-                      <label><input type="radio" name="q12" value="A" required> Verified boot and signed updates provide the core guarantee, so memory and diagnostic practices are secondary reliability work.</label>
-                      <label><input type="radio" name="q12" value="B"> Secure firmware requires explicit boundaries, safe C practices, protected secrets, verified startup and updates, controlled debug access, and tested failure behavior.</label>
-                      <label><input type="radio" name="q12" value="C"> Platform security features can compensate for undocumented boundaries and permissive maintenance interfaces.</label>
-                      <label><input type="radio" name="q12" value="D"> Field recovery should favor continued operation over explicit failure states even when validation cannot establish a safe state.</label>
-                    </fieldset>
+            <legend>2. What is a firmware trust boundary?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>A boundary is any module interface even when trust and authority are unchanged, so all interfaces can be reviewed identically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Only the boundary between the device and a network matters; stored state and privileged drivers are already trusted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Trust boundaries can be inferred from the call graph, so physical and maintenance control paths need not be documented.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>A point where data, control, or authority crosses between firmware components, hardware, external interfaces, stored state, or privileged code.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What is the purpose of secure boot at a high level?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>To help ensure that authorized firmware is validated before it is allowed to run.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Secure boot verifies image integrity after the application starts, allowing the application to decide whether execution should continue.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>A checksum stored beside the image is sufficient authorization when accidental corruption is the primary concern.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Secure boot eliminates the need to validate startup configuration because verified code can safely consume any persisted state.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is startup failure behavior important?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>On invalid metadata, the best availability strategy is to continue with defaults and record a diagnostic later.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Startup failure policy can be added after deployment, once the team has observed the actual field fault modes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>A device must handle invalid or damaged firmware predictably without silently entering unsafe operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>A watchdog reset provides predictable handling for every verification, configuration, and storage failure.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why does firmware C code need explicit memory policy?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Fixed allocation makes memory use deterministic, so explicit ownership and lifetime policy are unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Constrained memory, fixed buffers, stack limits, heap fragmentation, and object lifetime all affect reliability and security.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Heap fragmentation is only a performance concern if allocation failures are logged and the device can restart.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Estimating stack use from average execution is sufficient; worst-case interrupt nesting is outside C memory review.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should peripheral data be validated?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Hardware-facing data may be malformed, stale, unexpected, noisy, or outside safe operating assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>A successful driver read means the frame is fresh and safe for application control.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A frame checksum validates sensor meaning, operating range, sequence freshness, and current mode compatibility.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Rejecting malformed byte lengths is sufficient; out-of-range values may be clipped without a separate application policy.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why are hard-coded secrets risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>One product-wide key is acceptable when it is protected in firmware and the factory network is controlled.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Rotation is unnecessary for secrets used to identify devices rather than authorize firmware updates.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Embedding per-device keys in build artifacts is safe when release-pipeline access is restricted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>They are difficult to rotate, may be reused across devices, and can expand impact if exposed.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. What should a secure firmware update process include?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Verify the signature after activation so the device can minimize staging-storage requirements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Rollback should accept any previously signed version because its authorization does not expire.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Integrity checks, version policy, compatibility checks, safe staging, rollback or recovery planning, and failure handling.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>A successful lab update under stable power is enough evidence; interrupted writes are a storage concern outside the update workflow.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why should debug interfaces be reviewed before production release?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Debug features can expose internal state, control capabilities, or maintenance access that should not be available in field builds.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>A debug interface is safe when its connector is hidden and its commands are undocumented.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Production review can focus on network services because factory and test features are compiled from the same source.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Read-only diagnostics cannot affect security even when they reveal keys, addresses, or detailed configuration.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should firmware diagnostics avoid?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Full memory dumps are the most useful field diagnostic and may be uploaded whenever the device faults.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Diagnostics should log every received frame before validation so incident analysis retains the original input.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Once log storage is bounded, its contents no longer require secrecy, privacy, or redaction review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Exposing secrets, excessive sensitive data, uncontrolled external input, or behavior that destabilizes the device.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What should firmware security tests include?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Unit tests for valid parsers and update success cover firmware security; reset and hardware behavior belong only to qualification.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Debug and production builds need not be compared when they compile the same source files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Boundary conditions, invalid input, update failure, reset behavior, configuration errors, and production/debug build differences.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Type-limit tests are sufficient boundary coverage without corrupted persistent state or power-interruption tests.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Verified boot and signed updates provide the core guarantee, so memory and diagnostic practices are secondary reliability work.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Secure firmware requires explicit boundaries, safe C practices, protected secrets, verified startup and updates, controlled debug access, and tested failure behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Platform security features can compensate for undocumented boundaries and permissive maintenance interfaces.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Field recovery should favor continued operation over explicit failure states even when validation cannot establish a safe state.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -138,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="file_permission_security_in_c">
   <main id="main-content" class="main-content">
@@ -20,96 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q1&quot;: &quot;C&quot;, &quot;q2&quot;: &quot;D&quot;, &quot;q3&quot;: &quot;A&quot;, &quot;q4&quot;: &quot;B&quot;, &quot;q5&quot;: &quot;C&quot;, &quot;q6&quot;: &quot;A&quot;, &quot;q7&quot;: &quot;D&quot;, &quot;q8&quot;: &quot;B&quot;, &quot;q9&quot;: &quot;C&quot;, &quot;q10&quot;: &quot;D&quot;}'
+          data-answer-key='{&quot;q1&quot;:&quot;C&quot;,&quot;q2&quot;:&quot;D&quot;,&quot;q3&quot;:&quot;A&quot;,&quot;q4&quot;:&quot;B&quot;,&quot;q5&quot;:&quot;C&quot;,&quot;q6&quot;:&quot;A&quot;,&quot;q7&quot;:&quot;D&quot;,&quot;q8&quot;:&quot;B&quot;,&quot;q9&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;D&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. Why are file permissions an access control boundary?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>They are primarily file-format metadata and do not affect access once a C program has opened the path.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>They protect read and write operations but do not influence replacement, deletion, or discovery through directories.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>They help determine who can read, write, execute, modify, or sometimes delete file-backed data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>They matter only for interactive users; service accounts and automated tools are governed separately.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. Why are file permissions an access control boundary?</legend>
-                      <label><input type="radio" name="q1" value="A" required> They are primarily file-format metadata and do not affect access once a C program has opened the path.</label>
-                      <label><input type="radio" name="q1" value="B"> They protect read and write operations but do not influence replacement, deletion, or discovery through directories.</label>
-                      <label><input type="radio" name="q1" value="C"> They help determine who can read, write, execute, modify, or sometimes delete file-backed data.</label>
-                      <label><input type="radio" name="q1" value="D"> They matter only for interactive users; service accounts and automated tools are governed separately.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>2. What is a sound practice when creating files that may contain sensitive information?</legend>
-                      <label><input type="radio" name="q2" value="A" required> Create the file with deployment defaults, then tighten permissions after all content has been written successfully.</label>
-                      <label><input type="radio" name="q2" value="B"> Request read-write permission for the owner and group so support tools can recover the output if needed.</label>
-                      <label><input type="radio" name="q2" value="C"> Create the object exclusively and rely on its parent directory to make the file contents private.</label>
-                      <label><input type="radio" name="q2" value="D"> Create them with permissions appropriate to the sensitivity of the data from the start.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>3. Why is broad creation followed by later restriction fragile?</legend>
-                      <label><input type="radio" name="q3" value="A" required> It can create an avoidable exposure window and may fail without being handled correctly.</label>
-                      <label><input type="radio" name="q3" value="B"> The later restriction is reliable when it occurs in the same function immediately after creation.</label>
-                      <label><input type="radio" name="q3" value="C"> The exposure window is acceptable if no content is written until after the permission change.</label>
-                      <label><input type="radio" name="q3" value="D"> A failed restriction can be treated as a warning because the original create operation already succeeded.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>4. How does least privilege apply to file access?</legend>
-                      <label><input type="radio" name="q4" value="A" required> Open files read-write by default, then avoid write calls in code paths that only inspect data.</label>
-                      <label><input type="radio" name="q4" value="B"> Request only the access required, such as read-only when modification is not needed.</label>
-                      <label><input type="radio" name="q4" value="C"> Use one broadly privileged service identity so every storage workflow has consistent access.</label>
-                      <label><input type="radio" name="q4" value="D"> Request the widest permissions required by any caller and enforce narrower intent through application logic.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>5. Why should portable C code document permission model assumptions?</legend>
-                      <label><input type="radio" name="q5" value="A" required> POSIX-style owner, group, and other bits are portable enough when numeric modes are kept consistent.</label>
-                      <label><input type="radio" name="q5" value="B"> Documenting the intended mode removes the need to examine ACLs, process identity, and deployment defaults.</label>
-                      <label><input type="radio" name="q5" value="C"> Permission models and final access behavior differ across platforms and environments.</label>
-                      <label><input type="radio" name="q5" value="D"> A successful create call proves the effective permissions match the source-code request on every file system.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>6. Which secondary output may require sensitive-data protection?</legend>
-                      <label><input type="radio" name="q6" value="A" required> Logs, reports, caches, diagnostics, exports, and temporary files.</label>
-                      <label><input type="radio" name="q6" value="B"> Temporary files can inherit the process default because their short lifetime limits exposure.</label>
-                      <label><input type="radio" name="q6" value="C"> Logs and diagnostics may be broadly readable when they omit values explicitly labeled as secrets.</label>
-                      <label><input type="radio" name="q6" value="D"> Derived reports and caches need no separate classification when their source file already has restrictive permissions.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>7. Why should ownership and group assumptions be explicit?</legend>
-                      <label><input type="radio" name="q7" value="A" required> The path owner is implied by the service account that constructed the filename.</label>
-                      <label><input type="radio" name="q7" value="B"> Group membership affects administration but not whether another process can read or replace an object.</label>
-                      <label><input type="radio" name="q7" value="C"> Checking the expected numeric owner is enough even when object type, group, and mode do not match policy.</label>
-                      <label><input type="radio" name="q7" value="D"> They influence who can manage or access files and where trust boundaries sit.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>8. Why do directory permissions matter for file security?</legend>
-                      <label><input type="radio" name="q8" value="A" required> Restrictive file mode bits prevent other directory users from renaming or removing the entry.</label>
-                      <label><input type="radio" name="q8" value="B"> They affect discovery, creation, removal, rename, replacement, and sometimes search behavior.</label>
-                      <label><input type="radio" name="q8" value="C"> A validated basename may be removed with remove because it cannot escape through separators.</label>
-                      <label><input type="radio" name="q8" value="D"> Directory search and write permissions matter for opening files but not for replacement and cleanup operations.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>9. True or false: A metadata check performed earlier always proves that the same file will be used later.</legend>
-                      <label><input type="radio" name="q9" value="A" required> True, when the same unchanged path string is passed to both the check and the later open.</label>
-                      <label><input type="radio" name="q9" value="B"> True, when the earlier metadata matched the expected owner, type, and permission mode.</label>
-                      <label><input type="radio" name="q9" value="C"> False</label>
-                      <label><input type="radio" name="q9" value="D"> True, when only a short amount of time passes between checking the path and using it.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>10. How do testing, review, deployment documentation, and operational validation support permission security?</legend>
-                      <label><input type="radio" name="q10" value="A" required> Unit tests of permission helper functions are sufficient even when deployment identities and ACLs differ.</label>
-                      <label><input type="radio" name="q10" value="B"> Deployment documentation proves the runtime state remains correct until the next software release.</label>
-                      <label><input type="radio" name="q10" value="C"> Operational validation can focus on creation because permission drift and cleanup behavior are outside application control.</label>
-                      <label><input type="radio" name="q10" value="D"> They help confirm that code, configuration, deployment, and real operations match the intended permission model.</label>
-                    </fieldset>
+            <legend>2. What is a sound practice when creating files that may contain sensitive information?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>Create the file with deployment defaults, then tighten permissions after all content has been written successfully.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>Request read-write permission for the owner and group so support tools can recover the output if needed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>Create the object exclusively and rely on its parent directory to make the file contents private.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Create them with permissions appropriate to the sensitivity of the data from the start.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why is broad creation followed by later restriction fragile?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>It can create an avoidable exposure window and may fail without being handled correctly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>The later restriction is reliable when it occurs in the same function immediately after creation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>The exposure window is acceptable if no content is written until after the permission change.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>A failed restriction can be treated as a warning because the original create operation already succeeded.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. How does least privilege apply to file access?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>Open files read-write by default, then avoid write calls in code paths that only inspect data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Request only the access required, such as read-only when modification is not needed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Use one broadly privileged service identity so every storage workflow has consistent access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Request the widest permissions required by any caller and enforce narrower intent through application logic.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why should portable C code document permission model assumptions?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>POSIX-style owner, group, and other bits are portable enough when numeric modes are kept consistent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Documenting the intended mode removes the need to examine ACLs, process identity, and deployment defaults.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Permission models and final access behavior differ across platforms and environments.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>A successful create call proves the effective permissions match the source-code request on every file system.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Which secondary output may require sensitive-data protection?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Logs, reports, caches, diagnostics, exports, and temporary files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Temporary files can inherit the process default because their short lifetime limits exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Logs and diagnostics may be broadly readable when they omit values explicitly labeled as secrets.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Derived reports and caches need no separate classification when their source file already has restrictive permissions.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why should ownership and group assumptions be explicit?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>The path owner is implied by the service account that constructed the filename.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>Group membership affects administration but not whether another process can read or replace an object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>Checking the expected numeric owner is enough even when object type, group, and mode do not match policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>They influence who can manage or access files and where trust boundaries sit.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do directory permissions matter for file security?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Restrictive file mode bits prevent other directory users from renaming or removing the entry.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>They affect discovery, creation, removal, rename, replacement, and sometimes search behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>A validated basename may be removed with remove because it cannot escape through separators.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>Directory search and write permissions matter for opening files but not for replacement and cleanup operations.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. True or false: A metadata check performed earlier always proves that the same file will be used later.</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>True, when the same unchanged path string is passed to both the check and the later open.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>True, when the earlier metadata matched the expected owner, type, and permission mode.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>False</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>True, when only a short amount of time passes between checking the path and using it.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. How do testing, review, deployment documentation, and operational validation support permission security?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Unit tests of permission helper functions are sufficient even when deployment identities and ACLs differ.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Deployment documentation proves the runtime state remains correct until the next software release.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Operational validation can focus on creation because permission drift and cleanup behavior are outside application control.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They help confirm that code, configuration, deployment, and real operations match the intended permission model.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -122,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

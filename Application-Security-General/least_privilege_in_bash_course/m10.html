@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Least Privilege in Bash</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="least_privilege_in_bash">
   <main id="main-content" class="main-content">
@@ -20,101 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q1&quot;: &quot;B&quot;, &quot;q2&quot;: &quot;A&quot;, &quot;q3&quot;: &quot;D&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;A&quot;, &quot;q6&quot;: &quot;B&quot;, &quot;q7&quot;: &quot;C&quot;, &quot;q8&quot;: &quot;D&quot;, &quot;q9&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;C&quot;, &quot;q11&quot;: &quot;D&quot;, &quot;q12&quot;: &quot;B&quot;}'
+          data-answer-key='{&quot;q1&quot;:&quot;B&quot;,&quot;q2&quot;:&quot;A&quot;,&quot;q3&quot;:&quot;D&quot;,&quot;q4&quot;:&quot;C&quot;,&quot;q5&quot;:&quot;A&quot;,&quot;q6&quot;:&quot;B&quot;,&quot;q7&quot;:&quot;C&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;C&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;B&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. What does least privilege mean for Bash scripts?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>Avoid using Bash for any operational automation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>Give the script only the access required for its specific job.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>Grant broad access first and review only after failures occur.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>Run every script with the same administrator account for consistency.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. What does least privilege mean for Bash scripts?</legend>
-                      <label><input type="radio" name="q1" value="A" required> A. Avoid using Bash for any operational automation.</label>
-                      <label><input type="radio" name="q1" value="B" required> B. Give the script only the access required for its specific job.</label>
-                      <label><input type="radio" name="q1" value="C" required> C. Grant broad access first and review only after failures occur.</label>
-                      <label><input type="radio" name="q1" value="D" required> D. Run every script with the same administrator account for consistency.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>2. Why is running every script as root risky?</legend>
-                      <label><input type="radio" name="q2" value="A" required> A. Root access magnifies bugs and misuse.</label>
-                      <label><input type="radio" name="q2" value="B" required> B. It prevents the script from reading local files.</label>
-                      <label><input type="radio" name="q2" value="C" required> C. It makes secret rotation unnecessary.</label>
-                      <label><input type="radio" name="q2" value="D" required> D. It automatically improves auditability.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>3. What should be defined before granting access to a script?</legend>
-                      <label><input type="radio" name="q3" value="A" required> A. A permanent exception from future review.</label>
-                      <label><input type="radio" name="q3" value="B" required> B. The broadest account that makes the script run successfully.</label>
-                      <label><input type="radio" name="q3" value="C" required> C. A shared credential that can work in every environment.</label>
-                      <label><input type="radio" name="q3" value="D" required> D. Define its purpose, resources, and allowed actions.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>4. Why should read, write, execute, delete, and administer permissions be considered separately?</legend>
-                      <label><input type="radio" name="q4" value="A" required> A. They are unnecessary when a script has a clear name.</label>
-                      <label><input type="radio" name="q4" value="B" required> B. They always have identical security impact.</label>
-                      <label><input type="radio" name="q4" value="C" required> C. Each permission grants a distinct capability.</label>
-                      <label><input type="radio" name="q4" value="D" required> D. They are controlled only by application code, never by the operating system.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>5. Why are dedicated automation identities useful?</legend>
-                      <label><input type="radio" name="q5" value="A" required> A. They make scope, ownership, rotation, and revocation explicit.</label>
-                      <label><input type="radio" name="q5" value="B" required> B. They eliminate the need to log automation activity.</label>
-                      <label><input type="radio" name="q5" value="C" required> C. They allow credentials to be hard-coded safely.</label>
-                      <label><input type="radio" name="q5" value="D" required> D. They should be shared across every script to reduce review effort.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>6. Why should sudo rules be narrow?</legend>
-                      <label><input type="radio" name="q6" value="A" required> A. Narrow rules remove the need for script ownership.</label>
-                      <label><input type="radio" name="q6" value="B" required> B. Narrow rules prevent unrelated privileged actions.</label>
-                      <label><input type="radio" name="q6" value="C" required> C. Narrow rules are only useful for interactive desktop users.</label>
-                      <label><input type="radio" name="q6" value="D" required> D. Narrow rules make all scripts impossible to operate.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>7. Why can environment variables affect least privilege?</legend>
-                      <label><input type="radio" name="q7" value="A" required> A. They cannot influence command-line tools.</label>
-                      <label><input type="radio" name="q7" value="B" required> B. They are never inherited by child processes.</label>
-                      <label><input type="radio" name="q7" value="C" required> C. Environment values can alter credentials, command lookup, proxies, debugging, and tool behavior.</label>
-                      <label><input type="radio" name="q7" value="D" required> D. They are always safe to print into logs.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>8. Why does PATH matter?</legend>
-                      <label><input type="radio" name="q8" value="A" required> A. PATH is only used for graphical applications.</label>
-                      <label><input type="radio" name="q8" value="B" required> B. PATH automatically verifies the safety of every command.</label>
-                      <label><input type="radio" name="q8" value="C" required> C. PATH prevents scripts from using external tools.</label>
-                      <label><input type="radio" name="q8" value="D" required> D. PATH controls which executable a command name selects.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>9. What is a good CI/CD least-privilege practice?</legend>
-                      <label><input type="radio" name="q9" value="A" required> A. Grant secrets and permissions only to the minimum job, branch, environment, or role.</label>
-                      <label><input type="radio" name="q9" value="B" required> B. Disable job logs whenever privileged automation exists.</label>
-                      <label><input type="radio" name="q9" value="C" required> C. Use the same identity for testing, staging, and production by default.</label>
-                      <label><input type="radio" name="q9" value="D" required> D. Expose production credentials to every job so pipelines are simpler.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>10. What should privileged automation logs avoid?</legend>
-                      <label><input type="radio" name="q10" value="A" required> A. Success and failure outcomes.</label>
-                      <label><input type="radio" name="q10" value="B" required> B. High-level action names and target identifiers.</label>
-                      <label><input type="radio" name="q10" value="C" required> C. Avoid credentials and sensitive output.</label>
-                      <label><input type="radio" name="q10" value="D" required> D. Timestamps and execution identity.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>11. Why is access review important over time?</legend>
-                      <label><input type="radio" name="q11" value="A" required> A. Access always becomes narrower automatically.</label>
-                      <label><input type="radio" name="q11" value="B" required> B. Review replaces the need for scoped credentials.</label>
-                      <label><input type="radio" name="q11" value="C" required> C. Review is only useful before the first script run.</label>
-                      <label><input type="radio" name="q11" value="D" required> D. Changing systems can accumulate obsolete access.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>12. What is the main goal of least privilege in Bash?</legend>
-                      <label><input type="radio" name="q12" value="A" required> A. Hide privileged automation from operators and reviewers.</label>
-                      <label><input type="radio" name="q12" value="B" required> B. Limit automation authority and blast radius.</label>
-                      <label><input type="radio" name="q12" value="C" required> C. Make every script depend on unrestricted root access.</label>
-                      <label><input type="radio" name="q12" value="D" required> D. Prevent all scripts from running in production.</label>
-                    </fieldset>
+            <legend>2. Why is running every script as root risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>Root access magnifies bugs and misuse.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>It prevents the script from reading local files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>It makes secret rotation unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>It automatically improves auditability.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What should be defined before granting access to a script?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>A permanent exception from future review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>The broadest account that makes the script run successfully.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>A shared credential that can work in every environment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>Define its purpose, resources, and allowed actions.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why should read, write, execute, delete, and administer permissions be considered separately?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>They are unnecessary when a script has a clear name.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>They always have identical security impact.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Each permission grants a distinct capability.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>They are controlled only by application code, never by the operating system.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why are dedicated automation identities useful?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>They make scope, ownership, rotation, and revocation explicit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>They eliminate the need to log automation activity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>They allow credentials to be hard-coded safely.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>They should be shared across every script to reduce review effort.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should sudo rules be narrow?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Narrow rules remove the need for script ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Narrow rules prevent unrelated privileged actions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Narrow rules are only useful for interactive desktop users.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Narrow rules make all scripts impossible to operate.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why can environment variables affect least privilege?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>They cannot influence command-line tools.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>They are never inherited by child processes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>Environment values can alter credentials, command lookup, proxies, debugging, and tool behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>They are always safe to print into logs.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why does PATH matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>PATH is only used for graphical applications.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>PATH automatically verifies the safety of every command.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>PATH prevents scripts from using external tools.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>PATH controls which executable a command name selects.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What is a good CI/CD least-privilege practice?</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Grant secrets and permissions only to the minimum job, branch, environment, or role.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Disable job logs whenever privileged automation exists.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>Use the same identity for testing, staging, and production by default.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Expose production credentials to every job so pipelines are simpler.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should privileged automation logs avoid?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Success and failure outcomes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>High-level action names and target identifiers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Avoid credentials and sensitive output.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Timestamps and execution identity.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. Why is access review important over time?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Access always becomes narrower automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Review replaces the need for scoped credentials.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Review is only useful before the first script run.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Changing systems can accumulate obsolete access.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main goal of least privilege in Bash?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Hide privileged automation from operators and reviewers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Limit automation authority and blast radius.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Make every script depend on unrestricted root access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Prevent all scripts from running in production.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -127,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m10.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m10.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

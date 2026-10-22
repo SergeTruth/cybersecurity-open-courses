@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="buffer_overflow_prevention_in_cpp">
   <main id="main-content" class="main-content">
@@ -20,96 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
           data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;D&quot;}'
         >
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+                    <fieldset class="quiz-question">
             <legend>1. Why does buffer overflow prevention still matter in C++?</legend>
-            <label><input type="radio" name="q01" value="A" required> Buffer overflows affect availability but cannot change confidentiality or application control flow.</label>
-            <label><input type="radio" name="q01" value="B"> C++ standard containers make every raw-pointer operation bounds checked automatically.</label>
-            <label><input type="radio" name="q01" value="C"> Out-of-bounds writes can corrupt adjacent data, control state, and process integrity.</label>
-            <label><input type="radio" name="q01" value="D"> Buffer overflow prevention applies only to character arrays used for text processing.</label>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Buffer overflows affect availability but cannot change confidentiality or application control flow.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>C++ standard containers make every raw-pointer operation bounds checked automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Out-of-bounds writes can corrupt adjacent data, control state, and process integrity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Buffer overflow prevention applies only to character arrays used for text processing.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>2. Why is a raw pointer alone not enough information for safe buffer handling?</legend>
-            <label><input type="radio" name="q02" value="A" required> A non-null pointer reveals the number of writable bytes in its allocation.</label>
-            <label><input type="radio" name="q02" value="B"> Pointer arithmetic stops automatically when it reaches the end of an object.</label>
-            <label><input type="radio" name="q02" value="C"> A pointer does not carry capacity, valid length, ownership, or lifetime.</label>
-            <label><input type="radio" name="q02" value="D"> The operating system validates every pointer subscript against its original allocation.</label>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>A non-null pointer reveals the number of writable bytes in its allocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Pointer arithmetic stops automatically when it reaches the end of an object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>A pointer does not carry capacity, valid length, ownership, or lifetime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>The operating system validates every pointer subscript against its original allocation.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>3. Why is null termination not the same as a known buffer length?</legend>
-            <label><input type="radio" name="q03" value="A" required> A null terminator records the allocated capacity immediately after the final character.</label>
-            <label><input type="radio" name="q03" value="B"> Every received byte buffer contains a terminator because network APIs append one.</label>
-            <label><input type="radio" name="q03" value="C"> Searching for a terminator is safe without a bound when the pointer is non-null.</label>
-            <label><input type="radio" name="q03" value="D"> A terminator marks text end only if it exists within a known valid range.</label>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>A null terminator records the allocated capacity immediately after the final character.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Every received byte buffer contains a terminator because network APIs append one.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Searching for a terminator is safe without a bound when the pointer is non-null.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>A terminator marks text end only if it exists within a known valid range.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>4. How can std::vector, std::array, std::string, and std::span reduce risk?</legend>
-            <label><input type="radio" name="q04" value="A" required> These types keep storage, size, or bounded-view information near each operation.</label>
-            <label><input type="radio" name="q04" value="B"> A span owns copied elements and keeps them alive after the source container is destroyed.</label>
-            <label><input type="radio" name="q04" value="C"> A string guarantees that every external byte sequence is valid encoded text.</label>
-            <label><input type="radio" name="q04" value="D"> A vector makes references stable across any insertion because it manages allocation.</label>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>These types keep storage, size, or bounded-view information near each operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>A span owns copied elements and keeps them alive after the source container is destroyed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>A string guarantees that every external byte sequence is valid encoded text.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>A vector makes references stable across any insertion because it manages allocation.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>5. What should safer API contracts define?</legend>
-            <label><input type="radio" name="q05" value="A" required> A safe API needs only a pointer parameter and a comment naming the expected size.</label>
-            <label><input type="radio" name="q05" value="B"> Returning void is safest because callers cannot misuse partial-result information.</label>
-            <label><input type="radio" name="q05" value="C"> Output capacity can be inferred from the requested input length for every transformation.</label>
-            <label><input type="radio" name="q05" value="D"> Define capacity, valid ranges, overlap, units, ownership, and failure results.</label>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>A safe API needs only a pointer parameter and a comment naming the expected size.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Returning void is safest because callers cannot misuse partial-result information.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Output capacity can be inferred from the requested input length for every transformation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Define capacity, valid ranges, overlap, units, ownership, and failure results.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>6. Why should input length validation happen before copying or allocation?</legend>
-            <label><input type="radio" name="q06" value="A" required> Copy first and reject afterward because rollback restores overwritten adjacent memory.</label>
-            <label><input type="radio" name="q06" value="B"> Validate lengths and arithmetic before allocation, indexing, or copying occurs during use.</label>
-            <label><input type="radio" name="q06" value="C"> Successful integer parsing proves the requested length fits every destination buffer.</label>
-            <label><input type="radio" name="q06" value="D"> Allocation success proves that a declared length is acceptable for the application.</label>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Copy first and reject afterward because rollback restores overwritten adjacent memory.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Validate lengths and arithmetic before allocation, indexing, or copying occurs during use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Successful integer parsing proves the requested length fits every destination buffer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Allocation success proves that a declared length is acceptable for the application.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>7. Why is integer overflow in size calculations dangerous?</legend>
-            <label><input type="radio" name="q07" value="A" required> Overflow can wrap a required size into a smaller allocation than the later copy.</label>
-            <label><input type="radio" name="q07" value="B"> Unsigned arithmetic cannot overflow because it is defined to wrap modulo its range.</label>
-            <label><input type="radio" name="q07" value="C"> Multiplying element count by element size is safe when both operands are nonzero.</label>
-            <label><input type="radio" name="q07" value="D"> A wider destination type repairs overflow that already occurred in a narrower expression.</label>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Overflow can wrap a required size into a smaller allocation than the later copy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Unsigned arithmetic cannot overflow because it is defined to wrap modulo its range.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Multiplying element count by element size is safe when both operands are nonzero.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>A wider destination type repairs overflow that already occurred in a narrower expression.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>8. Why are sanitizers useful in development and CI?</legend>
-            <label><input type="radio" name="q08" value="A" required> Sanitizers extend buffers at runtime so an out-of-range operation can finish safely.</label>
-            <label><input type="radio" name="q08" value="B"> Sanitizers reliably expose exercised invalid accesses and preserve them as regression tests.</label>
-            <label><input type="radio" name="q08" value="C"> A clean sanitizer test proves all input lengths have been exercised exhaustively.</label>
-            <label><input type="radio" name="q08" value="D"> Sanitizers replace capacity checks in code compiled only for development and CI.</label>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Sanitizers extend buffers at runtime so an out-of-range operation can finish safely.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Sanitizers reliably expose exercised invalid accesses and preserve them as regression tests.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>A clean sanitizer test proves all input lengths have been exercised exhaustively.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Sanitizers replace capacity checks in code compiled only for development and CI.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>9. Why is compiler hardening defense in depth rather than a complete fix?</legend>
-            <label><input type="radio" name="q09" value="A" required> Stack protection prevents every overflow in heap, global, and mapped storage.</label>
-            <label><input type="radio" name="q09" value="B"> PIE validates indexes before the program computes an out-of-range address.</label>
-            <label><input type="radio" name="q09" value="C"> Hardening can detect or limit exploitation but cannot correct an unsafe bounds contract.</label>
-            <label><input type="radio" name="q09" value="D"> Non-executable memory prevents an overflow from corrupting existing control data.</label>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Stack protection prevents every overflow in heap, global, and mapped storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>PIE validates indexes before the program computes an out-of-range address.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Hardening can detect or limit exploitation but cannot correct an unsafe bounds contract.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Non-executable memory prevents an overflow from corrupting existing control data.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>10. Why does release verification matter?</legend>
-            <label><input type="radio" name="q10" value="A" required> Compiler command lines are sufficient evidence even when packaging relinks the final binary.</label>
-            <label><input type="radio" name="q10" value="B"> Release verification is unnecessary after a sanitizer configuration passes its test suite.</label>
-            <label><input type="radio" name="q10" value="C"> Checking one development object proves every library in the deployed process is hardened.</label>
-            <label><input type="radio" name="q10" value="D"> Verify after packaging that the shipped artifact contains intended hardening and passed boundary-focused tests.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Compiler command lines are sufficient evidence even when packaging relinks the final binary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Release verification is unnecessary after a sanitizer configuration passes its test suite.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Checking one development object proves every library in the deployed process is hardened.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Verify after packaging that the shipped artifact contains intended hardening and passed boundary-focused tests.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -122,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

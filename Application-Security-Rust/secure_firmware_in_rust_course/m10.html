@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="secure_firmware_in_rust">
   <main id="main-content" class="main-content">
@@ -20,101 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{"q1": "B", "q2": "C", "q3": "A", "q4": "D", "q5": "B", "q6": "C", "q7": "C", "q8": "D", "q9": "A", "q10": "B", "q11": "C", "q12": "D"}'
+          data-answer-key='{&quot;q1&quot;:&quot;B&quot;,&quot;q2&quot;:&quot;C&quot;,&quot;q3&quot;:&quot;A&quot;,&quot;q4&quot;:&quot;D&quot;,&quot;q5&quot;:&quot;B&quot;,&quot;q6&quot;:&quot;C&quot;,&quot;q7&quot;:&quot;C&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;B&quot;,&quot;q11&quot;:&quot;C&quot;,&quot;q12&quot;:&quot;D&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is firmware security a lifecycle problem?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>Firmware security only matters during initial manufacturing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>Firmware security depends on code, hardware assumptions, build process, deployment, updates, diagnostics, recovery, and maintenance.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>Firmware security is handled entirely by the programming language.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>Firmware security ends after the source code compiles.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. Why is firmware security a lifecycle problem?</legend>
-                      <label><input type="radio" name="q1" value="A"> Firmware security only matters during initial manufacturing.</label>
-                      <label><input type="radio" name="q1" value="B"> Firmware security depends on code, hardware assumptions, build process, deployment, updates, diagnostics, recovery, and maintenance.</label>
-                      <label><input type="radio" name="q1" value="C"> Firmware security is handled entirely by the programming language.</label>
-                      <label><input type="radio" name="q1" value="D"> Firmware security ends after the source code compiles.</label>
-                    </fieldset>
+            <legend>2. What does Rust&#x27;s memory safety not automatically solve in firmware?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>It prevents every possible field failure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>It creates a complete release process without engineering review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>It does not automatically solve hardware assumptions, input validation, update safety, debug control, secret storage, resource exhaustion, or release discipline.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>It validates all device protocols automatically.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>2. What does Rust&#x27;s memory safety not automatically solve in firmware?</legend>
-                      <label><input type="radio" name="q2" value="A"> It prevents every possible field failure.</label>
-                      <label><input type="radio" name="q2" value="B"> It creates a complete release process without engineering review.</label>
-                      <label><input type="radio" name="q2" value="C"> It does not automatically solve hardware assumptions, input validation, update safety, debug control, secret storage, resource exhaustion, or release discipline.</label>
-                      <label><input type="radio" name="q2" value="D"> It validates all device protocols automatically.</label>
-                    </fieldset>
+            <legend>3. Why should firmware assets and trust boundaries be defined early?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>They turn device assumptions into requirements that can be implemented, reviewed, tested, and maintained.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>They guarantee all dependencies are safe.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>They replace the need for code review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>They only matter after the product is retired.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>3. Why should firmware assets and trust boundaries be defined early?</legend>
-                      <label><input type="radio" name="q3" value="A"> They turn device assumptions into requirements that can be implemented, reviewed, tested, and maintained.</label>
-                      <label><input type="radio" name="q3" value="B"> They guarantee all dependencies are safe.</label>
-                      <label><input type="radio" name="q3" value="C"> They replace the need for code review.</label>
-                      <label><input type="radio" name="q3" value="D"> They only matter after the product is retired.</label>
-                    </fieldset>
+            <legend>4. Why does `no_std` affect secure firmware design?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>It guarantees that no unsafe code exists.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>It means firmware cannot use any safe Rust abstractions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>It removes the need for stack and buffer review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>It often requires explicit decisions about memory, libraries, allocation, panic behavior, and resource limits.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>4. Why does `no_std` affect secure firmware design?</legend>
-                      <label><input type="radio" name="q4" value="A"> It guarantees that no unsafe code exists.</label>
-                      <label><input type="radio" name="q4" value="B"> It means firmware cannot use any safe Rust abstractions.</label>
-                      <label><input type="radio" name="q4" value="C"> It removes the need for stack and buffer review.</label>
-                      <label><input type="radio" name="q4" value="D"> It often requires explicit decisions about memory, libraries, allocation, panic behavior, and resource limits.</label>
-                    </fieldset>
+            <legend>5. Why are hardware access abstractions security-relevant?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>They are unrelated to runtime device behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Register behavior, side effects, initialization order, peripheral ownership, and interrupt interactions may not be fully checked by the compiler.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>They only affect source formatting.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>They eliminate all hardware assumptions automatically.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>5. Why are hardware access abstractions security-relevant?</legend>
-                      <label><input type="radio" name="q5" value="A"> They are unrelated to runtime device behavior.</label>
-                      <label><input type="radio" name="q5" value="B"> Register behavior, side effects, initialization order, peripheral ownership, and interrupt interactions may not be fully checked by the compiler.</label>
-                      <label><input type="radio" name="q5" value="C"> They only affect source formatting.</label>
-                      <label><input type="radio" name="q5" value="D"> They eliminate all hardware assumptions automatically.</label>
-                    </fieldset>
+            <legend>6. What is a good practice for hardware-facing `unsafe` code?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Hide it from reviewers because it is low-level.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Assume comments are unnecessary if the code compiles.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Keep it small, justified, documented, reviewed, and wrapped in safe APIs that protect hardware invariants.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Use it broadly to avoid ownership design.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>6. What is a good practice for hardware-facing `unsafe` code?</legend>
-                      <label><input type="radio" name="q6" value="A"> Hide it from reviewers because it is low-level.</label>
-                      <label><input type="radio" name="q6" value="B"> Assume comments are unnecessary if the code compiles.</label>
-                      <label><input type="radio" name="q6" value="C"> Keep it small, justified, documented, reviewed, and wrapped in safe APIs that protect hardware invariants.</label>
-                      <label><input type="radio" name="q6" value="D"> Use it broadly to avoid ownership design.</label>
-                    </fieldset>
+            <legend>7. Why is firmware update safety more than a cryptography issue?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>Release evidence has no role in firmware trust.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>Update safety only depends on the filename.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>It also involves state management, versioning, recovery, rollback policy, interrupted updates, artifact control, and operational ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>Recovery behavior is unrelated to update design.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>7. Why is firmware update safety more than a cryptography issue?</legend>
-                      <label><input type="radio" name="q7" value="A"> Release evidence has no role in firmware trust.</label>
-                      <label><input type="radio" name="q7" value="B"> Update safety only depends on the filename.</label>
-                      <label><input type="radio" name="q7" value="C"> It also involves state management, versioning, recovery, rollback policy, interrupted updates, artifact control, and operational ownership.</label>
-                      <label><input type="radio" name="q7" value="D"> Recovery behavior is unrelated to update design.</label>
-                    </fieldset>
+            <legend>8. Why is parsing a security boundary in firmware?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Parsed messages are always safe to act on.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>Firmware inputs never cross trust boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>State-machine validation is only for user interfaces.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>External messages can be malformed, oversized, out of sequence, unauthorized for the current mode, or unsafe for the current device state.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>8. Why is parsing a security boundary in firmware?</legend>
-                      <label><input type="radio" name="q8" value="A"> Parsed messages are always safe to act on.</label>
-                      <label><input type="radio" name="q8" value="B"> Firmware inputs never cross trust boundaries.</label>
-                      <label><input type="radio" name="q8" value="C"> State-machine validation is only for user interfaces.</label>
-                      <label><input type="radio" name="q8" value="D"> External messages can be malformed, oversized, out of sequence, unauthorized for the current mode, or unsafe for the current device state.</label>
-                    </fieldset>
+            <legend>9. What should firmware avoid when handling secrets?</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Hard-coded production secrets, unredacted debug output, uncontrolled diagnostic leakage, unclear storage, and missing replacement planning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Clear plans for replacement and revocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>Redaction in diagnostics.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Documented provisioning procedures.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>9. What should firmware avoid when handling secrets?</legend>
-                      <label><input type="radio" name="q9" value="A"> Hard-coded production secrets, unredacted debug output, uncontrolled diagnostic leakage, unclear storage, and missing replacement planning.</label>
-                      <label><input type="radio" name="q9" value="B"> Clear plans for replacement and revocation.</label>
-                      <label><input type="radio" name="q9" value="C"> Redaction in diagnostics.</label>
-                      <label><input type="radio" name="q9" value="D"> Documented provisioning procedures.</label>
-                    </fieldset>
+            <legend>10. Why should debug and maintenance interfaces be controlled?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>They have no relationship to product security.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>They can expose powerful access paths and should match product risk, lifecycle needs, and operational policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>They should always remain fully open in production.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They only exist in source comments.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>10. Why should debug and maintenance interfaces be controlled?</legend>
-                      <label><input type="radio" name="q10" value="A"> They have no relationship to product security.</label>
-                      <label><input type="radio" name="q10" value="B"> They can expose powerful access paths and should match product risk, lifecycle needs, and operational policy.</label>
-                      <label><input type="radio" name="q10" value="C"> They should always remain fully open in production.</label>
-                      <label><input type="radio" name="q10" value="D"> They only exist in source comments.</label>
-                    </fieldset>
+            <legend>11. Why should firmware dependencies and build artifacts be reviewed?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>They are never included in production builds.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Build artifacts do not need traceability.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Crates, features, build scripts, generated code, toolchains, configuration, and artifacts become part of the trusted firmware.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Feature flags cannot change firmware behavior.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>11. Why should firmware dependencies and build artifacts be reviewed?</legend>
-                      <label><input type="radio" name="q11" value="A"> They are never included in production builds.</label>
-                      <label><input type="radio" name="q11" value="B"> Build artifacts do not need traceability.</label>
-                      <label><input type="radio" name="q11" value="C"> Crates, features, build scripts, generated code, toolchains, configuration, and artifacts become part of the trusted firmware.</label>
-                      <label><input type="radio" name="q11" value="D"> Feature flags cannot change firmware behavior.</label>
-                    </fieldset>
-          <fieldset class="quiz-question">
-                      <legend>12. What is the main goal of secure firmware in Rust?</legend>
-                      <label><input type="radio" name="q12" value="A"> Keep hardware assumptions informal so they can change quickly.</label>
-                      <label><input type="radio" name="q12" value="B"> Focus only on source code and ignore release evidence.</label>
-                      <label><input type="radio" name="q12" value="C"> Use Rust to avoid lifecycle planning.</label>
-                      <label><input type="radio" name="q12" value="D"> Build firmware whose assumptions, memory use, hardware access, inputs, updates, secrets, debug paths, dependencies, and releases are safe, bounded, documented, tested, and reviewable.</label>
-                    </fieldset>
+            <legend>12. What is the main goal of secure firmware in Rust?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Keep hardware assumptions informal so they can change quickly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Focus only on source code and ignore release evidence.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Use Rust to avoid lifecycle planning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Build firmware whose assumptions, memory use, hardware access, inputs, updates, secrets, debug paths, dependencies, and releases are safe, bounded, documented, tested, and reviewable.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -127,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m10.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m10.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

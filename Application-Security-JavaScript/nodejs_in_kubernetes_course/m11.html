@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Node.js in Kubernetes</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="nodejs_in_kubernetes">
   <main id="main-content" class="main-content">
@@ -20,57 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;B&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;C&quot;, &quot;q04&quot;: &quot;D&quot;, &quot;q05&quot;: &quot;C&quot;, &quot;q06&quot;: &quot;B&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;D&quot;, &quot;q09&quot;: &quot;D&quot;, &quot;q10&quot;: &quot;C&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;C&quot;,&quot;q04&quot;:&quot;D&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;D&quot;,&quot;q10&quot;:&quot;C&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. A team moves a working Express API into Kubernetes and assumes the cluster will make it production-ready. What is the best response?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Kubernetes automatically fixes missing health checks and poor logging.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Kubernetes provides useful controls, but the service still needs good image design, manifests, probes, resource settings, secure configuration, observability, and ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Any Node.js service becomes secure once it runs in a Pod.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>The only requirement is that the container starts once.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. A team moves a working Express API into Kubernetes and assumes the cluster will make it production-ready. What is the best response?</legend>
-                      <label><input type="radio" name="q01" value="A" required> A. Kubernetes automatically fixes missing health checks and poor logging.</label> <label><input type="radio" name="q01" value="B" required> B. Kubernetes provides useful controls, but the service still needs good image design, manifests, probes, resource settings, secure configuration, observability, and ownership.</label> <label><input type="radio" name="q01" value="C" required> C. Any Node.js service becomes secure once it runs in a Pod.</label> <label><input type="radio" name="q01" value="D" required> D. The only requirement is that the container starts once.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>2. Why is the container image the deployable unit for Node.js in Kubernetes?</legend>
-                      <label><input type="radio" name="q02" value="A" required> A. Kubernetes pulls and runs container images, so the image carries the runtime, application code, dependencies, startup behavior, and assumptions that production will execute.</label> <label><input type="radio" name="q02" value="B" required> B. The image is used only for documentation.</label> <label><input type="radio" name="q02" value="C" required> C. Kubernetes reads directly from the developer's source directory in production.</label> <label><input type="radio" name="q02" value="D" required> D. Images are irrelevant once a Deployment exists.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>3. Which statement best describes the relationship between Pods, Deployments, Services, and Ingress?</legend>
-                      <label><input type="radio" name="q03" value="A" required> A. An Ingress replaces Pods, so Deployments are unnecessary.</label> <label><input type="radio" name="q03" value="B" required> B. Labels and selectors do not affect traffic routing.</label> <label><input type="radio" name="q03" value="C" required> C. A Deployment manages replicated Pods, a Service provides stable access to selected Pods, and Ingress or a gateway routes external HTTP traffic to the Service.</label> <label><input type="radio" name="q03" value="D" required> D. A Service builds images and pushes them to the registry.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>4. How should ConfigMaps and Secrets be handled differently?</legend>
-                      <label><input type="radio" name="q04" value="A" required> A. Treat ConfigMaps and Secrets as complete security solutions by themselves.</label> <label><input type="radio" name="q04" value="B" required> B. Put all secrets into ConfigMaps because they are easier to edit.</label> <label><input type="radio" name="q04" value="C" required> C. Bake production secrets into the image so Pods start faster.</label> <label><input type="radio" name="q04" value="D" required> D. Use ConfigMaps for non-sensitive configuration and Secrets or approved secret delivery for sensitive values, while still controlling access, redaction, rotation, and logging.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>5. Why are environment variables not a complete secrets-management strategy?</legend>
-                      <label><input type="radio" name="q05" value="A" required> A. Node.js cannot read environment variables.</label> <label><input type="radio" name="q05" value="B" required> B. They eliminate the need for secret managers and RBAC.</label> <label><input type="radio" name="q05" value="C" required> C. They can deliver values to a process, but they do not by themselves provide secure storage, rotation, access control, redaction, or incident response.</label> <label><input type="radio" name="q05" value="D" required> D. Environment variables automatically prevent secrets from appearing in logs.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>6. Why do resource requests and limits matter for Node.js workloads?</legend>
-                      <label><input type="radio" name="q06" value="A" required> A. They guarantee that code has no memory leaks.</label> <label><input type="radio" name="q06" value="B" required> B. They influence scheduling, capacity planning, noisy-neighbor risk, restart behavior, and the workload's operating envelope under real traffic.</label> <label><input type="radio" name="q06" value="C" required> C. They remove the need for load testing or telemetry.</label> <label><input type="radio" name="q06" value="D" required> D. They are decorative fields used only by documentation tools.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>7. What is the best distinction between readiness, liveness, and startup probes?</legend>
-                      <label><input type="radio" name="q07" value="A" required> A. Readiness controls whether the Pod receives traffic, liveness detects when a container should be restarted, and startup protects slow initialization from premature liveness failures.</label> <label><input type="radio" name="q07" value="B" required> B. All three probes should always check every downstream dependency and restart the container on any dependency error.</label> <label><input type="radio" name="q07" value="C" required> C. Startup probes are only for databases, not application services.</label> <label><input type="radio" name="q07" value="D" required> D. Readiness means the process exists, and liveness means it can receive public traffic.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>8. Why does graceful shutdown matter during Kubernetes rollouts?</legend>
-                      <label><input type="radio" name="q08" value="A" required> A. Graceful shutdown replaces readiness probes.</label> <label><input type="radio" name="q08" value="B" required> B. SIGTERM handling is useful only for command-line tools.</label> <label><input type="radio" name="q08" value="C" required> C. Rollouts never stop existing Pods.</label> <label><input type="radio" name="q08" value="D" required> D. Kubernetes sends SIGTERM before stopping a Pod, and the Node.js process should stop accepting new work, finish or cancel in-flight work safely, close connections, and exit within the termination window.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>9. How do non-root execution, service-account least privilege, and security contexts help?</legend>
-                      <label><input type="radio" name="q09" value="A" required> A. They prove the application has no vulnerabilities.</label> <label><input type="radio" name="q09" value="B" required> B. They require every container to run as privileged.</label> <label><input type="radio" name="q09" value="C" required> C. They are useful only when the service directly administers the cluster.</label> <label><input type="radio" name="q09" value="D" required> D. They reduce blast radius by limiting what the Node.js process and Pod can do if application code or a dependency behaves unexpectedly.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>10. What should a practical Node.js Kubernetes deployment review include?</legend>
-                      <label><input type="radio" name="q10" value="A" required> A. Only verify that a public URL returns 200 once.</label> <label><input type="radio" name="q10" value="B" required> B. Only check whether kubectl apply succeeds.</label> <label><input type="radio" name="q10" value="C" required> C. Review image quality, manifests, labels, selectors, configuration, secrets, probes, resources, security context, service-account permissions, exposure, logs, metrics, rollout behavior, and incident runbooks.</label> <label><input type="radio" name="q10" value="D" required> D. Skip logs and metrics until after the first major incident.</label>
-                    </fieldset>
+            <legend>2. Why is the container image the deployable unit for Node.js in Kubernetes?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Kubernetes pulls and runs container images, so the image carries the runtime, application code, dependencies, startup behavior, and assumptions that production will execute.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>The image is used only for documentation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Kubernetes reads directly from the developer&#x27;s source directory in production.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Images are irrelevant once a Deployment exists.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Which statement best describes the relationship between Pods, Deployments, Services, and Ingress?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>An Ingress replaces Pods, so Deployments are unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Labels and selectors do not affect traffic routing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>A Deployment manages replicated Pods, a Service provides stable access to selected Pods, and Ingress or a gateway routes external HTTP traffic to the Service.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>A Service builds images and pushes them to the registry.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. How should ConfigMaps and Secrets be handled differently?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Treat ConfigMaps and Secrets as complete security solutions by themselves.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Put all secrets into ConfigMaps because they are easier to edit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Bake production secrets into the image so Pods start faster.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Use ConfigMaps for non-sensitive configuration and Secrets or approved secret delivery for sensitive values, while still controlling access, redaction, rotation, and logging.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why are environment variables not a complete secrets-management strategy?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Node.js cannot read environment variables.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>They eliminate the need for secret managers and RBAC.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>They can deliver values to a process, but they do not by themselves provide secure storage, rotation, access control, redaction, or incident response.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Environment variables automatically prevent secrets from appearing in logs.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why do resource requests and limits matter for Node.js workloads?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>They guarantee that code has no memory leaks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>They influence scheduling, capacity planning, noisy-neighbor risk, restart behavior, and the workload&#x27;s operating envelope under real traffic.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>They remove the need for load testing or telemetry.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>They are decorative fields used only by documentation tools.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What is the best distinction between readiness, liveness, and startup probes?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Readiness controls whether the Pod receives traffic, liveness detects when a container should be restarted, and startup protects slow initialization from premature liveness failures.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>All three probes should always check every downstream dependency and restart the container on any dependency error.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Startup probes are only for databases, not application services.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Readiness means the process exists, and liveness means it can receive public traffic.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why does graceful shutdown matter during Kubernetes rollouts?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Graceful shutdown replaces readiness probes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>SIGTERM handling is useful only for command-line tools.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Rollouts never stop existing Pods.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Kubernetes sends SIGTERM before stopping a Pod, and the Node.js process should stop accepting new work, finish or cancel in-flight work safely, close connections, and exit within the termination window.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. How do non-root execution, service-account least privilege, and security contexts help?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>They prove the application has no vulnerabilities.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>They require every container to run as privileged.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>They are useful only when the service directly administers the cluster.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>They reduce blast radius by limiting what the Node.js process and Pod can do if application code or a dependency behaves unexpectedly.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should a practical Node.js Kubernetes deployment review include?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Only verify that a public URL returns 200 once.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Only check whether kubectl apply succeeds.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Review image quality, manifests, labels, selectors, configuration, secrets, probes, resources, security context, service-account permissions, exposure, logs, metrics, rollout behavior, and incident runbooks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Skip logs and metrics until after the first major incident.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -83,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

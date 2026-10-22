@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="secure_configuration_in_dotnet">
   <main id="main-content" class="main-content">
@@ -20,112 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
-                  id="quiz-form"
-                  class="quiz-form"
-                  data-passing-score="80"
-                  data-answer-key='{&quot;q1&quot;: &quot;B&quot;, &quot;q2&quot;: &quot;C&quot;, &quot;q3&quot;: &quot;A&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;B&quot;, &quot;q6&quot;: &quot;C&quot;, &quot;q7&quot;: &quot;D&quot;, &quot;q8&quot;: &quot;D&quot;, &quot;q9&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;B&quot;, &quot;q11&quot;: &quot;C&quot;, &quot;q12&quot;: &quot;D&quot;}'
-                >
-                  <fieldset class="quiz-question">
-                              <legend>1. Why is configuration part of application security?</legend>
-                              <label><input type="radio" name="q1" value="A"> It cannot affect production behavior.</label>
-                              <label><input type="radio" name="q1" value="B"> It controls behavior such as authentication, authorization, logging, networking, storage, diagnostics, and deployment safety.</label>
-                              <label><input type="radio" name="q1" value="C"> It is always less important than code and never needs review.</label>
-                              <label><input type="radio" name="q1" value="D"> It only changes the application&#x27;s visual theme.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>2. Why does configuration source precedence matter?</legend>
-                              <label><input type="radio" name="q2" value="A"> Precedence only affects comments in configuration files.</label>
-                              <label><input type="radio" name="q2" value="B"> Precedence makes every setting secret-safe.</label>
-                              <label><input type="radio" name="q2" value="C"> Later sources can override earlier values, including security-sensitive settings.</label>
-                              <label><input type="radio" name="q2" value="D"> All sources are ignored after compilation.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>3. Why should teams review effective runtime configuration?</legend>
-                              <label><input type="radio" name="q3" value="A"> The running application uses the final combined values after all providers and overrides are applied.</label>
-                              <label><input type="radio" name="q3" value="B"> Runtime configuration cannot differ from source control.</label>
-                              <label><input type="radio" name="q3" value="C"> Individual files always show the complete final state.</label>
-                              <label><input type="radio" name="q3" value="D"> Only local development uses configuration providers.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>4. Why should development settings not silently reach production?</legend>
-                              <label><input type="radio" name="q4" value="A"> Detailed errors are required for every user-facing failure.</label>
-                              <label><input type="radio" name="q4" value="B"> Development settings are always safer than production settings.</label>
-                              <label><input type="radio" name="q4" value="C"> Debug behavior, detailed errors, mock services, local credentials, and temporary flags can weaken production posture.</label>
-                              <label><input type="radio" name="q4" value="D"> Production ignores all environment-specific settings.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>5. Why are connection strings considered sensitive?</legend>
-                              <label><input type="radio" name="q5" value="A"> They are only labels for user interface colors.</label>
-                              <label><input type="radio" name="q5" value="B"> They can reveal database access details, provider assumptions, internal names, or access paths even when no password is visible.</label>
-                              <label><input type="radio" name="q5" value="C"> They cannot affect data access.</label>
-                              <label><input type="radio" name="q5" value="D"> They are safe to publish if they include ExampleConnectionString.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>6. Why should secrets stay out of appsettings files and logs?</legend>
-                              <label><input type="radio" name="q6" value="A"> Appsettings files are automatically encrypted everywhere.</label>
-                              <label><input type="radio" name="q6" value="B"> Secrets in logs rotate themselves.</label>
-                              <label><input type="radio" name="q6" value="C"> Those locations are copied, searched, retained, and shared in ways that make exposure hard to contain.</label>
-                              <label><input type="radio" name="q6" value="D"> Logs are always visible only to the original developer.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>7. How do strongly typed options improve configuration review?</legend>
-                              <label><input type="radio" name="q7" value="A"> They prevent deployments from using environment variables.</label>
-                              <label><input type="radio" name="q7" value="B"> They make every setting public.</label>
-                              <label><input type="radio" name="q7" value="C"> They remove the need for allowed values.</label>
-                              <label><input type="radio" name="q7" value="D"> They group related settings into explicit contracts that can be validated, tested, documented, and reviewed.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>8. Why should unsafe or incomplete configuration fail fast?</legend>
-                              <label><input type="radio" name="q8" value="A"> Failing fast hides every operational issue.</label>
-                              <label><input type="radio" name="q8" value="B"> Unsafe configuration should always be accepted silently.</label>
-                              <label><input type="radio" name="q8" value="C"> Fail-fast behavior is only useful for text formatting.</label>
-                              <label><input type="radio" name="q8" value="D"> A clear startup failure can prevent ambiguous runtime behavior or weak fallback settings.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>9. Why do feature flags need ownership and expiration?</legend>
-                              <label><input type="radio" name="q9" value="A"> Flags can change security behavior, and temporary settings can become permanent without review.</label>
-                              <label><input type="radio" name="q9" value="B"> Ownership only matters for user interface labels.</label>
-                              <label><input type="radio" name="q9" value="C"> All flags are automatically deleted after deployment.</label>
-                              <label><input type="radio" name="q9" value="D"> Feature flags cannot affect authentication or authorization.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>10. Why can hosting and middleware settings affect security?</legend>
-                              <label><input type="radio" name="q10" value="A"> They are ignored in containers and cloud platforms.</label>
-                              <label><input type="radio" name="q10" value="B"> They influence identity, routing, errors, request limits, cookies, static files, diagnostics, and public behavior.</label>
-                              <label><input type="radio" name="q10" value="C"> They only change source code indentation.</label>
-                              <label><input type="radio" name="q10" value="D"> They cannot change runtime behavior.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>11. Why should health checks and diagnostics avoid excessive detail?</legend>
-                              <label><input type="radio" name="q11" value="A"> Every health endpoint should reveal every setting to all users.</label>
-                              <label><input type="radio" name="q11" value="B"> Health checks are unrelated to application exposure.</label>
-                              <label><input type="radio" name="q11" value="C"> They can reveal sensitive configuration, dependency details, internal paths, provider information, or environment assumptions.</label>
-                              <label><input type="radio" name="q11" value="D"> Diagnostics cannot contain sensitive information.</label>
-                            </fieldset>
-        
-                  <fieldset class="quiz-question">
-                              <legend>12. Why should teams monitor configuration drift?</legend>
-                              <label><input type="radio" name="q12" value="A"> Monitoring drift replaces secret rotation.</label>
-                              <label><input type="radio" name="q12" value="B"> Drift only affects test data names.</label>
-                              <label><input type="radio" name="q12" value="C"> Configuration can never change after the first deployment.</label>
-                              <label><input type="radio" name="q12" value="D"> Environments can change over time through overrides, emergency edits, infrastructure changes, and deployment settings.</label>
-                            </fieldset>
-                  <button id="submit-quiz" type="submit">Submit Quiz</button>
-                  <p id="quiz-result" aria-live="polite"></p>
-                </form>
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;:&quot;B&quot;,&quot;q2&quot;:&quot;C&quot;,&quot;q3&quot;:&quot;A&quot;,&quot;q4&quot;:&quot;C&quot;,&quot;q5&quot;:&quot;B&quot;,&quot;q6&quot;:&quot;C&quot;,&quot;q7&quot;:&quot;D&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;B&quot;,&quot;q11&quot;:&quot;C&quot;,&quot;q12&quot;:&quot;D&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is configuration part of application security?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>It cannot affect production behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>It controls behavior such as authentication, authorization, logging, networking, storage, diagnostics, and deployment safety.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>It is always less important than code and never needs review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>It only changes the application&#x27;s visual theme.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why does configuration source precedence matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>Precedence only affects comments in configuration files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>Precedence makes every setting secret-safe.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>Later sources can override earlier values, including security-sensitive settings.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>All sources are ignored after compilation.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why should teams review effective runtime configuration?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>The running application uses the final combined values after all providers and overrides are applied.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>Runtime configuration cannot differ from source control.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>Individual files always show the complete final state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>Only local development uses configuration providers.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why should development settings not silently reach production?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>Detailed errors are required for every user-facing failure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Development settings are always safer than production settings.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Debug behavior, detailed errors, mock services, local credentials, and temporary flags can weaken production posture.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Production ignores all environment-specific settings.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why are connection strings considered sensitive?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>They are only labels for user interface colors.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>They can reveal database access details, provider assumptions, internal names, or access paths even when no password is visible.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>They cannot affect data access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>They are safe to publish if they include ExampleConnectionString.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should secrets stay out of appsettings files and logs?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Appsettings files are automatically encrypted everywhere.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Secrets in logs rotate themselves.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Those locations are copied, searched, retained, and shared in ways that make exposure hard to contain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Logs are always visible only to the original developer.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. How do strongly typed options improve configuration review?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>They prevent deployments from using environment variables.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>They make every setting public.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>They remove the need for allowed values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>They group related settings into explicit contracts that can be validated, tested, documented, and reviewed.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why should unsafe or incomplete configuration fail fast?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Failing fast hides every operational issue.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>Unsafe configuration should always be accepted silently.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>Fail-fast behavior is only useful for text formatting.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>A clear startup failure can prevent ambiguous runtime behavior or weak fallback settings.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why do feature flags need ownership and expiration?</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Flags can change security behavior, and temporary settings can become permanent without review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Ownership only matters for user interface labels.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>All flags are automatically deleted after deployment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Feature flags cannot affect authentication or authorization.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why can hosting and middleware settings affect security?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>They are ignored in containers and cloud platforms.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>They influence identity, routing, errors, request limits, cookies, static files, diagnostics, and public behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>They only change source code indentation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They cannot change runtime behavior.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. Why should health checks and diagnostics avoid excessive detail?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Every health endpoint should reveal every setting to all users.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Health checks are unrelated to application exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>They can reveal sensitive configuration, dependency details, internal paths, provider information, or environment assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Diagnostics cannot contain sensitive information.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. Why should teams monitor configuration drift?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Monitoring drift replaces secret rotation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Drift only affects test data names.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Configuration can never change after the first deployment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Environments can change over time through overrides, emergency edits, infrastructure changes, and deployment settings.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -138,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Object Lifetime Management in C</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="object_lifetime_management_in_c">
   <main id="main-content" class="main-content">
@@ -20,101 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;A&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;A&quot;, &quot;q04&quot;: &quot;A&quot;, &quot;q05&quot;: &quot;A&quot;, &quot;q06&quot;: &quot;A&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;A&quot;, &quot;q09&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;A&quot;, &quot;q11&quot;: &quot;A&quot;, &quot;q12&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;A&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;A&quot;,&quot;q11&quot;:&quot;A&quot;,&quot;q12&quot;:&quot;A&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. What does object lifetime describe?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>The period during which an object exists and may be validly used according to its storage and ownership rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Only the number of bytes in the object&#x27;s type.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>The spelling of the variable name.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>A guarantee that every pointer remains valid forever.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. What does object lifetime describe?</legend>
-                      <label><input type="radio" name="q01" value="A" required> The period during which an object exists and may be validly used according to its storage and ownership rules.</label>
-                      <label><input type="radio" name="q01" value="B"> Only the number of bytes in the object's type.</label>
-                      <label><input type="radio" name="q01" value="C"> The spelling of the variable name.</label>
-                      <label><input type="radio" name="q01" value="D"> A guarantee that every pointer remains valid forever.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>2. Why is a pointer value alone not enough to prove safe use?</legend>
-                      <label><input type="radio" name="q02" value="A" required> It does not prove that the referenced object is alive, initialized, in bounds, owned, or valid for the intended operation.</label>
-                      <label><input type="radio" name="q02" value="B"> Every pointer value automatically carries complete lifetime metadata.</label>
-                      <label><input type="radio" name="q02" value="C"> Pointer values can only refer to static objects.</label>
-                      <label><input type="radio" name="q02" value="D"> The compiler always records the cleanup owner inside the pointer.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>3. What is automatic storage duration commonly associated with?</legend>
-                      <label><input type="radio" name="q03" value="A" required> Objects whose lifetime is tied to block or function execution scope.</label>
-                      <label><input type="radio" name="q03" value="B"> Objects that must be manually released by every borrower.</label>
-                      <label><input type="radio" name="q03" value="C"> Objects that always last for the entire program.</label>
-                      <label><input type="radio" name="q03" value="D"> Objects returned by allocation functions only.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>4. Why is returning the address of a local automatic object unsafe?</legend>
-                      <label><input type="radio" name="q04" value="A" required> The object no longer exists after the function returns, leaving the pointer invalid.</label>
-                      <label><input type="radio" name="q04" value="B"> The object automatically moves to static storage after return.</label>
-                      <label><input type="radio" name="q04" value="C"> The caller becomes the owner of the local variable.</label>
-                      <label><input type="radio" name="q04" value="D"> The address is copied into every global object.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>5. What is the difference between allocation and initialization?</legend>
-                      <label><input type="radio" name="q05" value="A" required> Allocation provides storage, while initialization gives the object a known valid state for use.</label>
-                      <label><input type="radio" name="q05" value="B"> Initialization always releases storage.</label>
-                      <label><input type="radio" name="q05" value="C"> Allocation proves every field has a meaningful value.</label>
-                      <label><input type="radio" name="q05" value="D"> There is no practical difference in C.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>6. What happens to aliases after an owned dynamic object is freed?</legend>
-                      <label><input type="radio" name="q06" value="A" required> The object lifetime has ended for all aliases, even if some pointer values still remain.</label>
-                      <label><input type="radio" name="q06" value="B"> Every alias automatically changes to a valid new object.</label>
-                      <label><input type="radio" name="q06" value="C"> Only the pointer used for cleanup is affected by the lifetime end.</label>
-                      <label><input type="radio" name="q06" value="D"> Borrowers become owners after cleanup.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>7. Why are static objects not automatically simple or safe?</legend>
-                      <label><input type="radio" name="q07" value="A" required> They may introduce shared mutable state, initialization assumptions, reentrancy concerns, or shutdown-order issues.</label>
-                      <label><input type="radio" name="q07" value="B"> They never preserve state between calls.</label>
-                      <label><input type="radio" name="q07" value="C"> They always avoid access discipline.</label>
-                      <label><input type="radio" name="q07" value="D"> They can only be used inside a single expression.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>8. What is a borrowed pointer?</legend>
-                      <label><input type="radio" name="q08" value="A" required> A temporary reference to an object that does not transfer ownership or cleanup responsibility.</label>
-                      <label><input type="radio" name="q08" value="B"> A pointer that every callee must free.</label>
-                      <label><input type="radio" name="q08" value="C"> A pointer that automatically extends object lifetime forever.</label>
-                      <label><input type="radio" name="q08" value="D"> A pointer that always refers to uninitialized storage.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>9. What should an API document when returning a pointer?</legend>
-                      <label><input type="radio" name="q09" value="A" required> Who owns the object, how long it remains valid, whether it may be modified, and how cleanup works.</label>
-                      <label><input type="radio" name="q09" value="B"> Only whether the pointer value is nonzero.</label>
-                      <label><input type="radio" name="q09" value="C"> That the caller should guess the ownership rule.</label>
-                      <label><input type="radio" name="q09" value="D"> That returned pointers never need lifetime review.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>10. Why are partially initialized objects important in lifetime management?</legend>
-                      <label><input type="radio" name="q10" value="A" required> Failure paths must clean up only the members that were successfully initialized and owned.</label>
-                      <label><input type="radio" name="q10" value="B"> They can be treated as fully valid in every API call.</label>
-                      <label><input type="radio" name="q10" value="C"> They remove the need for cleanup rules.</label>
-                      <label><input type="radio" name="q10" value="D"> They always have static storage duration.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>11. What is the role of review and tools in lifetime safety?</legend>
-                      <label><input type="radio" name="q11" value="A" required> They help detect risky patterns, but they do not replace explicit ownership, validity, and cleanup contracts.</label>
-                      <label><input type="radio" name="q11" value="B"> They make API contracts unnecessary.</label>
-                      <label><input type="radio" name="q11" value="C"> They prove every pointer remains valid across all future changes.</label>
-                      <label><input type="radio" name="q11" value="D"> They automatically decide who owns every object.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>12. What is the main course takeaway?</legend>
-                      <label><input type="radio" name="q12" value="A" required> Safe lifetime management requires explicit storage duration, initialization state, ownership, borrowing, cleanup, and API contracts.</label>
-                      <label><input type="radio" name="q12" value="B"> A pointer value alone proves an object is valid forever.</label>
-                      <label><input type="radio" name="q12" value="C"> Storage duration eliminates the need for cleanup design.</label>
-                      <label><input type="radio" name="q12" value="D"> One cleanup pattern solves every lifetime question automatically.</label>
-                    </fieldset>
+            <legend>2. Why is a pointer value alone not enough to prove safe use?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>It does not prove that the referenced object is alive, initialized, in bounds, owned, or valid for the intended operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Every pointer value automatically carries complete lifetime metadata.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Pointer values can only refer to static objects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>The compiler always records the cleanup owner inside the pointer.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What is automatic storage duration commonly associated with?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Objects whose lifetime is tied to block or function execution scope.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Objects that must be manually released by every borrower.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Objects that always last for the entire program.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Objects returned by allocation functions only.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is returning the address of a local automatic object unsafe?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>The object no longer exists after the function returns, leaving the pointer invalid.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>The object automatically moves to static storage after return.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>The caller becomes the owner of the local variable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>The address is copied into every global object.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What is the difference between allocation and initialization?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Allocation provides storage, while initialization gives the object a known valid state for use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Initialization always releases storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Allocation proves every field has a meaningful value.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>There is no practical difference in C.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What happens to aliases after an owned dynamic object is freed?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>The object lifetime has ended for all aliases, even if some pointer values still remain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Every alias automatically changes to a valid new object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Only the pointer used for cleanup is affected by the lifetime end.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Borrowers become owners after cleanup.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why are static objects not automatically simple or safe?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>They may introduce shared mutable state, initialization assumptions, reentrancy concerns, or shutdown-order issues.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>They never preserve state between calls.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>They always avoid access discipline.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>They can only be used inside a single expression.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. What is a borrowed pointer?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>A temporary reference to an object that does not transfer ownership or cleanup responsibility.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>A pointer that every callee must free.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>A pointer that automatically extends object lifetime forever.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>A pointer that always refers to uninitialized storage.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What should an API document when returning a pointer?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Who owns the object, how long it remains valid, whether it may be modified, and how cleanup works.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Only whether the pointer value is nonzero.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>That the caller should guess the ownership rule.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>That returned pointers never need lifetime review.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why are partially initialized objects important in lifetime management?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Failure paths must clean up only the members that were successfully initialized and owned.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>They can be treated as fully valid in every API call.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>They remove the need for cleanup rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They always have static storage duration.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of review and tools in lifetime safety?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>They help detect risky patterns, but they do not replace explicit ownership, validity, and cleanup contracts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>They make API contracts unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>They prove every pointer remains valid across all future changes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>They automatically decide who owns every object.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Safe lifetime management requires explicit storage duration, initialization state, ownership, borrowing, cleanup, and API contracts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>A pointer value alone proves an object is valid forever.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Storage duration eliminates the need for cleanup design.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>One cleanup pattern solves every lifetime question automatically.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -127,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

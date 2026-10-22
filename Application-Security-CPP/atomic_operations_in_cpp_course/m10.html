@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="atomic_operations_in_cpp">
   <main id="main-content" class="main-content">
@@ -20,96 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
           data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;A&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;D&quot;,&quot;q07&quot;:&quot;D&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;C&quot;}'
         >
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+                    <fieldset class="quiz-question">
             <legend>1. What is the best description of atomic operations in C++?</legend>
-            <label><input type="radio" name="q01" value="A" required> Atomics make every surrounding non-atomic object safe for concurrent access automatically.</label>
-            <label><input type="radio" name="q01" value="B"> Atomic types guarantee that multi-field business invariants change as one transaction.</label>
-            <label><input type="radio" name="q01" value="C"> An atomic operation always locks the entire process until every thread observes it.</label>
-            <label><input type="radio" name="q01" value="D"> Atomics provide indivisible operations under specified ordering on atomic objects.</label>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Atomics make every surrounding non-atomic object safe for concurrent access automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Atomic types guarantee that multi-field business invariants change as one transaction.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>An atomic operation always locks the entire process until every thread observes it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Atomics provide indivisible operations under specified ordering on atomic objects.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>2. What is a data race?</legend>
-            <label><input type="radio" name="q02" value="A" required> A data race means two threads compute different results from independent local objects.</label>
-            <label><input type="radio" name="q02" value="B"> Concurrent reads of one immutable object form a data race unless they use atomics.</label>
-            <label><input type="radio" name="q02" value="C"> A data race is conflicting unsynchronized access where at least one access writes.</label>
-            <label><input type="radio" name="q02" value="D"> Every scheduling-dependent result is a data race even when synchronization is correct.</label>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>A data race means two threads compute different results from independent local objects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Concurrent reads of one immutable object form a data race unless they use atomics.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>A data race is conflicting unsynchronized access where at least one access writes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Every scheduling-dependent result is a data race even when synchronization is correct.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>3. What is a read-modify-write atomic operation?</legend>
-            <label><input type="radio" name="q03" value="A" required> A read-modify-write observes and updates one atomic value as a single operation.</label>
-            <label><input type="radio" name="q03" value="B"> A read-modify-write loads atomically but performs the subsequent update without synchronization.</label>
-            <label><input type="radio" name="q03" value="C"> A read-modify-write commits changes across all atomic variables used by the expression.</label>
-            <label><input type="radio" name="q03" value="D"> A read-modify-write prevents other threads from accessing unrelated memory during the operation.</label>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>A read-modify-write observes and updates one atomic value as a single operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>A read-modify-write loads atomically but performs the subsequent update without synchronization.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>A read-modify-write commits changes across all atomic variables used by the expression.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>A read-modify-write prevents other threads from accessing unrelated memory during the operation.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>4. Why is sequential consistency often preferred as a starting point?</legend>
-            <label><input type="radio" name="q04" value="A" required> Sequential consistency is always faster because it permits the compiler to reorder every access.</label>
-            <label><input type="radio" name="q04" value="B"> Sequential consistency is easiest to reason about before evidence justifies weaker ordering.</label>
-            <label><input type="radio" name="q04" value="C"> Relaxed ordering establishes payload publication between any pair of atomic operations.</label>
-            <label><input type="radio" name="q04" value="D"> Acquire and release ordering are required even for independent statistics with no payload.</label>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Sequential consistency is always faster because it permits the compiler to reorder every access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Sequential consistency is easiest to reason about before evidence justifies weaker ordering.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Relaxed ordering establishes payload publication between any pair of atomic operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Acquire and release ordering are required even for independent statistics with no payload.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>5. When is a mutex often clearer than atomics?</legend>
-            <label><input type="radio" name="q05" value="A" required> A mutex better expresses invariants spanning multiple values, state transitions, or compound operations.</label>
-            <label><input type="radio" name="q05" value="B"> Atomics are clearer whenever a critical section contains more than one statement.</label>
-            <label><input type="radio" name="q05" value="C"> A mutex is appropriate only when the protected data is itself an atomic type.</label>
-            <label><input type="radio" name="q05" value="D"> Atomics should replace locks even when reviewers cannot state the ordering argument.</label>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>A mutex better expresses invariants spanning multiple values, state transitions, or compound operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Atomics are clearer whenever a critical section contains more than one statement.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>A mutex is appropriate only when the protected data is itself an atomic type.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Atomics should replace locks even when reviewers cannot state the ordering argument.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>6. What should be defined for an atomic state variable?</legend>
-            <label><input type="radio" name="q06" value="A" required> A state variable is safe when compare_exchange accepts any caller-supplied previous value.</label>
-            <label><input type="radio" name="q06" value="B"> Atomic storage makes lifecycle transitions legal regardless of their semantic order.</label>
-            <label><input type="radio" name="q06" value="C"> The state contract needs only the numeric values because callers determine transition policy.</label>
-            <label><input type="radio" name="q06" value="D"> Define legal transitions, responsible threads, failure handling, ordering requirements, and invalid requests.</label>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>A state variable is safe when compare_exchange accepts any caller-supplied previous value.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Atomic storage makes lifecycle transitions legal regardless of their semantic order.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>The state contract needs only the numeric values because callers determine transition policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Define legal transitions, responsible threads, failure handling, ordering requirements, and invalid requests.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>7. What is true about atomics and object lifetime?</legend>
-            <label><input type="radio" name="q07" value="A" required> An atomic pointer automatically owns its pointee until all threads discard their copies.</label>
-            <label><input type="radio" name="q07" value="B"> Destroying an atomic object is safe while another thread continues loading from it.</label>
-            <label><input type="radio" name="q07" value="C"> Release ordering delays object destruction until every potential reader has terminated.</label>
-            <label><input type="radio" name="q07" value="D"> Atomic access does not keep an object alive or prevent concurrent destruction.</label>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>An atomic pointer automatically owns its pointee until all threads discard their copies.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Destroying an atomic object is safe while another thread continues loading from it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Release ordering delays object destruction until every potential reader has terminated.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Atomic access does not keep an object alive or prevent concurrent destruction.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>8. Why are shutdown flags review-sensitive?</legend>
-            <label><input type="radio" name="q08" value="A" required> Setting an atomic stop flag immediately proves that every worker has stopped using state.</label>
-            <label><input type="radio" name="q08" value="B"> Shutdown flags require a payload-lifetime, notification, and thread-join protocol across the complete shutdown sequence.</label>
-            <label><input type="radio" name="q08" value="C"> A relaxed stop flag safely publishes arbitrary cleanup performed before the store.</label>
-            <label><input type="radio" name="q08" value="D"> Joining workers is unnecessary when each worker has observed the same atomic value once.</label>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Setting an atomic stop flag immediately proves that every worker has stopped using state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Shutdown flags require a payload-lifetime, notification, and thread-join protocol across the complete shutdown sequence.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>A relaxed stop flag safely publishes arbitrary cleanup performed before the store.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Joining workers is unnecessary when each worker has observed the same atomic value once.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>9. What is a useful role for ThreadSanitizer?</legend>
-            <label><input type="radio" name="q09" value="A" required> ThreadSanitizer can expose exercised data races but does not prove all schedules safe.</label>
-            <label><input type="radio" name="q09" value="B"> ThreadSanitizer validates the semantic legality of every atomic state transition.</label>
-            <label><input type="radio" name="q09" value="C"> A clean ThreadSanitizer run proves all weak-memory behaviors on every architecture.</label>
-            <label><input type="radio" name="q09" value="D"> ThreadSanitizer replaces documented invariants because it reconstructs the intended algorithm.</label>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>ThreadSanitizer can expose exercised data races but does not prove all schedules safe.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>ThreadSanitizer validates the semantic legality of every atomic state transition.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>A clean ThreadSanitizer run proves all weak-memory behaviors on every architecture.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>ThreadSanitizer replaces documented invariants because it reconstructs the intended algorithm.</span></label>
           </fieldset>
-
-          <fieldset class="quiz-question" data-correct-feedback="Correct. The selected statement matches the course contract." data-incorrect-feedback="Review the relevant module and compare the assumptions in each answer.">
+          <fieldset class="quiz-question">
             <legend>10. Which review question best supports safe atomic use?</legend>
-            <label><input type="radio" name="q10" value="A" required> Ask whether an atomic type compiles, because compilation proves the ordering is correct.</label>
-            <label><input type="radio" name="q10" value="B"> Ask whether lock-free reports true, since lock freedom guarantees semantic correctness.</label>
-            <label><input type="radio" name="q10" value="C"> Ask what invariant is protected and why the chosen ordering establishes it.</label>
-            <label><input type="radio" name="q10" value="D"> Ask whether tests passed once, because a successful schedule covers all interleavings.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Ask whether an atomic type compiles, because compilation proves the ordering is correct.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Ask whether lock-free reports true, since lock freedom guarantees semantic correctness.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Ask what invariant is protected and why the chosen ordering establishes it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Ask whether tests passed once, because a successful schedule covers all interleavings.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -122,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m10.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m10.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

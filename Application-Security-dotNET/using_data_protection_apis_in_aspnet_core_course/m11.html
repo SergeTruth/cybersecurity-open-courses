@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Using Data Protection APIs in ASP.NET Core</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="using_data_protection_apis_in_aspnet_core">
   <main id="main-content" class="main-content">
@@ -20,87 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;A&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;A&quot;, &quot;q04&quot;: &quot;A&quot;, &quot;q05&quot;: &quot;A&quot;, &quot;q06&quot;: &quot;A&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;A&quot;, &quot;q09&quot;: &quot;A&quot;, &quot;q10&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;A&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;A&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. What is ASP.NET Core Data Protection mainly used for?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Protecting application and framework payloads so they can be validated and recovered later by the intended app.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Replacing all authorization checks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Hashing user passwords for storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Disabling TLS requirements.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. What is ASP.NET Core Data Protection mainly used for?</legend>
-                      <label><input type="radio" name="q01" value="A" required> Protecting application and framework payloads so they can be validated and recovered later by the intended app.</label>
-                      <label><input type="radio" name="q01" value="B"> Replacing all authorization checks.</label>
-                      <label><input type="radio" name="q01" value="C"> Hashing user passwords for storage.</label>
-                      <label><input type="radio" name="q01" value="D"> Disabling TLS requirements.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>2. What are IDataProtectionProvider and IDataProtector used for?</legend>
-                      <label><input type="radio" name="q02" value="A" required> Creating purpose-specific protectors and protecting or unprotecting data.</label>
-                      <label><input type="radio" name="q02" value="B"> Creating database indexes.</label>
-                      <label><input type="radio" name="q02" value="C"> Authorizing every user action automatically.</label>
-                      <label><input type="radio" name="q02" value="D"> Replacing application logging.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>3. Why do purpose strings matter?</legend>
-                      <label><input type="radio" name="q03" value="A" required> They isolate cryptographic consumers and prevent unrelated workflows from reading each other's payloads.</label>
-                      <label><input type="radio" name="q03" value="B"> They make all applications share cookies automatically.</label>
-                      <label><input type="radio" name="q03" value="C"> They are only display labels for logs.</label>
-                      <label><input type="radio" name="q03" value="D"> They remove the need for durable keys.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>4. Which framework features commonly depend on Data Protection?</legend>
-                      <label><input type="radio" name="q04" value="A" required> Authentication cookies, antiforgery tokens, Identity workflow tokens, and some protected state features.</label>
-                      <label><input type="radio" name="q04" value="B"> Static file compression only.</label>
-                      <label><input type="radio" name="q04" value="C"> CSS bundling and image resizing.</label>
-                      <label><input type="radio" name="q04" value="D"> Database migrations only.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>5. Why is time-limited protection useful?</legend>
-                      <label><input type="radio" name="q05" value="A" required> It allows protected values to expire when the workflow should no longer be valid.</label>
-                      <label><input type="radio" name="q05" value="B"> It makes a token valid forever.</label>
-                      <label><input type="radio" name="q05" value="C"> It replaces account authorization.</label>
-                      <label><input type="radio" name="q05" value="D"> It makes logging protected values safe.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>6. Why does key-ring persistence matter?</legend>
-                      <label><input type="radio" name="q06" value="A" required> Existing protected payloads may require access to older keys during unprotect operations.</label>
-                      <label><input type="radio" name="q06" value="B"> Keys are needed only while the application starts.</label>
-                      <label><input type="radio" name="q06" value="C"> Lost keys never affect cookies or workflow tokens.</label>
-                      <label><input type="radio" name="q06" value="D"> Persistence is only a local development concern.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>7. Why do multi-instance deployments require Data Protection configuration review?</legend>
-                      <label><input type="radio" name="q07" value="A" required> Instances must share durable keys when they need to read each other's protected cookies or tokens.</label>
-                      <label><input type="radio" name="q07" value="B"> Every instance should use unrelated ephemeral keys.</label>
-                      <label><input type="radio" name="q07" value="C"> Data Protection is not used in scaled apps.</label>
-                      <label><input type="radio" name="q07" value="D"> Only the front-end CSS needs to match.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>8. Why does protecting keys at rest matter?</legend>
-                      <label><input type="radio" name="q08" value="A" required> Exposed key material can undermine protected payload confidentiality and integrity.</label>
-                      <label><input type="radio" name="q08" value="B"> Keys at rest are never sensitive.</label>
-                      <label><input type="radio" name="q08" value="C"> Protecting keys prevents all application bugs.</label>
-                      <label><input type="radio" name="q08" value="D"> It lets operators log unprotected values safely.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>9. Why do shared-cookie scenarios require careful alignment?</legend>
-                      <label><input type="radio" name="q09" value="A" required> Key storage, app name, cookie settings, auth scheme, domain, path, and environment must match intentionally.</label>
-                      <label><input type="radio" name="q09" value="B"> Only the HTML title must match.</label>
-                      <label><input type="radio" name="q09" value="C"> Sharing cookies removes the need for authorization.</label>
-                      <label><input type="radio" name="q09" value="D"> Staging should always share production protected payloads.</label>
-                    </fieldset>
-<fieldset class="quiz-question">
-                      <legend>10. What belongs in a practical Data Protection baseline?</legend>
-                      <label><input type="radio" name="q10" value="A" required> Clear purpose strings, appropriate use cases, durable key storage, key protection, environment separation, time limits, rotation planning, safe logging, and production review.</label>
-                      <label><input type="radio" name="q10" value="B"> One reused purpose string and local-only production keys.</label>
-                      <label><input type="radio" name="q10" value="C"> Logging protected and unprotected payloads for convenience.</label>
-                      <label><input type="radio" name="q10" value="D"> Deleting old keys without reviewing user impact.</label>
-                    </fieldset>
+            <legend>2. What are IDataProtectionProvider and IDataProtector used for?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Creating purpose-specific protectors and protecting or unprotecting data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Creating database indexes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Authorizing every user action automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Replacing application logging.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why do purpose strings matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>They isolate cryptographic consumers and prevent unrelated workflows from reading each other&#x27;s payloads.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>They make all applications share cookies automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>They are only display labels for logs.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>They remove the need for durable keys.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Which framework features commonly depend on Data Protection?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Authentication cookies, antiforgery tokens, Identity workflow tokens, and some protected state features.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Static file compression only.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>CSS bundling and image resizing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Database migrations only.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why is time-limited protection useful?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>It allows protected values to expire when the workflow should no longer be valid.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>It makes a token valid forever.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>It replaces account authorization.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>It makes logging protected values safe.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why does key-ring persistence matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Existing protected payloads may require access to older keys during unprotect operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Keys are needed only while the application starts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Lost keys never affect cookies or workflow tokens.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Persistence is only a local development concern.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why do multi-instance deployments require Data Protection configuration review?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Instances must share durable keys when they need to read each other&#x27;s protected cookies or tokens.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Every instance should use unrelated ephemeral keys.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Data Protection is not used in scaled apps.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Only the front-end CSS needs to match.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why does protecting keys at rest matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Exposed key material can undermine protected payload confidentiality and integrity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Keys at rest are never sensitive.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Protecting keys prevents all application bugs.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>It lets operators log unprotected values safely.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why do shared-cookie scenarios require careful alignment?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Key storage, app name, cookie settings, auth scheme, domain, path, and environment must match intentionally.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Only the HTML title must match.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Sharing cookies removes the need for authorization.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Staging should always share production protected payloads.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What belongs in a practical Data Protection baseline?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Clear purpose strings, appropriate use cases, durable key storage, key protection, environment separation, time limits, rotation planning, safe logging, and production review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>One reused purpose string and local-only production keys.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Logging protected and unprotected payloads for convenience.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Deleting old keys without reviewing user impact.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -113,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | Stack and Heap Safety in C++</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="stack_and_heap_safety_in_cpp">
   <main id="main-content" class="main-content">
@@ -20,87 +20,101 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q1&quot;: &quot;B&quot;, &quot;q2&quot;: &quot;B&quot;, &quot;q3&quot;: &quot;D&quot;, &quot;q4&quot;: &quot;C&quot;, &quot;q5&quot;: &quot;A&quot;, &quot;q6&quot;: &quot;A&quot;, &quot;q7&quot;: &quot;C&quot;, &quot;q8&quot;: &quot;D&quot;, &quot;q9&quot;: &quot;B&quot;, &quot;q10&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q1&quot;:&quot;B&quot;,&quot;q2&quot;:&quot;B&quot;,&quot;q3&quot;:&quot;D&quot;,&quot;q4&quot;:&quot;C&quot;,&quot;q5&quot;:&quot;A&quot;,&quot;q6&quot;:&quot;A&quot;,&quot;q7&quot;:&quot;C&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;A&quot;}'
         >
-          <fieldset class="quiz-question" data-correct-feedback="Correct. Make ownership, lifetime, bounds, and cleanup explicit." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+                    <fieldset class="quiz-question">
             <legend>1. What is the best description of stack and heap safety in C++?</legend>
-            <label><input type="radio" name="q1" value="A" required> Avoid heap allocation even when ownership must outlive the current scope.</label>
-            <label><input type="radio" name="q1" value="B"> Make ownership, lifetime, bounds, and cleanup explicit.</label>
-            <label><input type="radio" name="q1" value="C"> Prefer global storage so objects have a predictable lifetime.</label>
-            <label><input type="radio" name="q1" value="D"> Use source annotations as a substitute for lifetime tests.</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>Avoid heap allocation even when ownership must outlive the current scope.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>Make ownership, lifetime, bounds, and cleanup explicit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>Prefer global storage so objects have a predictable lifetime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>Use source annotations as a substitute for lifetime tests.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. The referenced object dies when the function returns." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>2. Why is returning a reference to a local stack object unsafe?</legend>
-            <label><input type="radio" name="q2" value="A" required> Reference performance makes references less suitable than pointers.</label>
-            <label><input type="radio" name="q2" value="B"> The referenced object dies when the function returns.</label>
-            <label><input type="radio" name="q2" value="C"> Automatic storage extends until the final reference is released.</label>
-            <label><input type="radio" name="q2" value="D"> Moving the object to the heap after return repairs the reference.</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>Reference performance makes references less suitable than pointers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>The referenced object dies when the function returns.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>Automatic storage extends until the final reference is released.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Moving the object to the heap after return repairs the reference.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Identify who destroys the allocation and when." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>3. What should heap ownership make clear?</legend>
-            <label><input type="radio" name="q3" value="A" required> Which comments identify the allocation site.</label>
-            <label><input type="radio" name="q3" value="B"> How cleanup can remain hidden behind raw pointer aliases.</label>
-            <label><input type="radio" name="q3" value="C"> Whether another component might eventually discover the allocation.</label>
-            <label><input type="radio" name="q3" value="D"> Identify who destroys the allocation and when.</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>Which comments identify the allocation site.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>How cleanup can remain hidden behind raw pointer aliases.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>Whether another component might eventually discover the allocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>Identify who destroys the allocation and when.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Preserve extents and validate indexes before access." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>4. Which practice supports bounds safety?</legend>
-            <label><input type="radio" name="q4" value="A" required> Use null termination as evidence that the destination is large enough.</label>
-            <label><input type="radio" name="q4" value="B"> Copy until the source terminator appears without checking capacity.</label>
-            <label><input type="radio" name="q4" value="C"> Preserve extents and validate indexes before access.</label>
-            <label><input type="radio" name="q4" value="D"> Use container capacity as the number of initialized elements.</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>Use null termination as evidence that the destination is large enough.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Copy until the source terminator appears without checking capacity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Preserve extents and validate indexes before access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Use container capacity as the number of initialized elements.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Accessing an object after its lifetime or validity ends." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>5. What is dangling access?</legend>
-            <label><input type="radio" name="q5" value="A" required> Accessing an object after its lifetime or validity ends.</label>
-            <label><input type="radio" name="q5" value="B"> Using a short variable name for a live object.</label>
-            <label><input type="radio" name="q5" value="C"> Passing an owned value by copy to another scope.</label>
-            <label><input type="radio" name="q5" value="D"> Initializing a local object before its first use.</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>Accessing an object after its lifetime or validity ends.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Using a short variable name for a live object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Passing an owned value by copy to another scope.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>Initializing a local object before its first use.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Container mutation can invalidate a retained iterator." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>6. Why can iterator invalidation be dangerous?</legend>
-            <label><input type="radio" name="q6" value="A" required> Container mutation can invalidate a retained iterator.</label>
-            <label><input type="radio" name="q6" value="B"> Reallocation preserves iterators that refer to existing elements.</label>
-            <label><input type="radio" name="q6" value="C"> Iterators allocate independent storage for each referenced element.</label>
-            <label><input type="radio" name="q6" value="D"> Invalidation changes performance without affecting correctness.</label>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>Container mutation can invalidate a retained iterator.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Reallocation preserves iterators that refer to existing elements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Iterators allocate independent storage for each referenced element.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Invalidation changes performance without affecting correctness.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. RAII connects cleanup directly to object lifetime." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>7. Why does RAII improve stack and heap safety?</legend>
-            <label><input type="radio" name="q7" value="A" required> RAII prevents logic errors in operations performed before cleanup.</label>
-            <label><input type="radio" name="q7" value="B"> RAII gives independently allocated resources one process-wide lifetime.</label>
-            <label><input type="radio" name="q7" value="C"> RAII connects cleanup directly to object lifetime.</label>
-            <label><input type="radio" name="q7" value="D"> RAII suppresses destructor execution during exceptions.</label>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>RAII prevents logic errors in operations performed before cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>RAII gives independently allocated resources one process-wide lifetime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>RAII connects cleanup directly to object lifetime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>RAII suppresses destructor execution during exceptions.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Use it when one owner controls the heap object." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>8. When is std::unique_ptr usually appropriate?</legend>
-            <label><input type="radio" name="q8" value="A" required> When several components should own the same heap object.</label>
-            <label><input type="radio" name="q8" value="B"> When the object is intentionally left alive until process exit.</label>
-            <label><input type="radio" name="q8" value="C"> When a function needs temporary non-owning access to a stack object.</label>
-            <label><input type="radio" name="q8" value="D"> Use it when one owner controls the heap object.</label>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>When several components should own the same heap object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>When the object is intentionally left alive until process exit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>When a function needs temporary non-owning access to a stack object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>Use it when one owner controls the heap object.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. Reject unreasonable sizes before requesting memory." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>9. Why should externally influenced sizes be validated before allocation?</legend>
-            <label><input type="radio" name="q9" value="A" required> To make allocation code less visible during review.</label>
-            <label><input type="radio" name="q9" value="B"> Reject unreasonable sizes before requesting memory.</label>
-            <label><input type="radio" name="q9" value="C"> To move externally sized objects from the heap to the stack.</label>
-            <label><input type="radio" name="q9" value="D"> To avoid checking indexes after allocation succeeds.</label>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>To make allocation code less visible during review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Reject unreasonable sizes before requesting memory.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>To move externally sized objects from the heap to the stack.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>To avoid checking indexes after allocation succeeds.</span></label>
           </fieldset>
-<fieldset class="quiz-question" data-correct-feedback="Correct. They supplement sound design by detecting defect classes." data-incorrect-feedback="Review the ownership, validation, and boundary contract named in this question.">
+          <fieldset class="quiz-question">
             <legend>10. What is the best role for sanitizers and static analysis?</legend>
-            <label><input type="radio" name="q10" value="A" required> They supplement sound design by detecting defect classes.</label>
-            <label><input type="radio" name="q10" value="B"> Passing the tools certifies that the program has no memory defects.</label>
-            <label><input type="radio" name="q10" value="C"> The diagnostics replace explicit ownership and lifetime contracts.</label>
-            <label><input type="radio" name="q10" value="D"> The tools are most useful for source notes rather than executable code.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>They supplement sound design by detecting defect classes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Passing the tools certifies that the program has no memory defects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>The diagnostics replace explicit ownership and lifetime contracts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>The tools are most useful for source notes rather than executable code.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -113,12 +127,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m10.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m10.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>

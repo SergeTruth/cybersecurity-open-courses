@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Course Assessment</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="heap_memory_safety_in_c">
   <main id="main-content" class="main-content">
@@ -20,112 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;C&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;D&quot;, &quot;q04&quot;: &quot;B&quot;, &quot;q05&quot;: &quot;C&quot;, &quot;q06&quot;: &quot;B&quot;, &quot;q07&quot;: &quot;A&quot;, &quot;q08&quot;: &quot;D&quot;, &quot;q09&quot;: &quot;B&quot;, &quot;q10&quot;: &quot;C&quot;, &quot;q11&quot;: &quot;D&quot;, &quot;q12&quot;: &quot;A&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;C&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;A&quot;}'
         >
+                    <fieldset class="quiz-question">
+            <legend>1. What does a heap pointer by itself tell you?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Allocator implementations retain size and owner metadata, so any pointer returned by malloc can be treated as self-describing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>A non-null pointer proves its lifetime until the next allocation call, although bounds still require external tracking.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>It provides a reference value, but does not automatically prove ownership, lifetime, bounds, or safe use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>The pointer type establishes which function owns the object and whether aliases may outlive it.</span></label>
+          </fieldset>
           <fieldset class="quiz-question">
-                      <legend>1. What does a heap pointer by itself tell you?</legend>
-                      <label><input type="radio" name="q01" value="A" required> Allocator implementations retain size and owner metadata, so any pointer returned by malloc can be treated as self-describing.</label>
-                      <label><input type="radio" name="q01" value="B"> A non-null pointer proves its lifetime until the next allocation call, although bounds still require external tracking.</label>
-                      <label><input type="radio" name="q01" value="C"> It provides a reference value, but does not automatically prove ownership, lifetime, bounds, or safe use.</label>
-                      <label><input type="radio" name="q01" value="D"> The pointer type establishes which function owns the object and whether aliases may outlive it.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>2. Why should allocation failure be handled explicitly?</legend>
-                      <label><input type="radio" name="q02" value="A" required> Because memory allocation can fail, and predictable failure handling prevents invalid use and incomplete cleanup.</label>
-                      <label><input type="radio" name="q02" value="B"> Desktop and server virtual memory makes failure impractical, so production code may rely on process termination.</label>
-                      <label><input type="radio" name="q02" value="C"> The caller can continue with a partially initialized object if a failed field remains null and an error is logged.</label>
-                      <label><input type="radio" name="q02" value="D"> Retrying the allocation immediately is sufficient even when cleanup and state transitions are undefined.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>3. What is an ownership contract?</legend>
-                      <label><input type="radio" name="q03" value="A" required> The function that first receives a pointer becomes its owner unless the parameter is declared const.</label>
-                      <label><input type="radio" name="q03" value="B"> Any module holding a reference may free the object when done, provided it then sets its local pointer to null.</label>
-                      <label><input type="radio" name="q03" value="C"> Objects stored in containers are automatically owned by the container regardless of its documented API.</label>
-                      <label><input type="radio" name="q03" value="D"> A clear rule that states who is responsible for freeing or retaining allocated memory.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>4. Why is realloc easy to misuse?</legend>
-                      <label><input type="radio" name="q04" value="A" required> realloc preserves the original address whenever a request grows only modestly, so aliases remain valid in the common case.</label>
-                      <label><input type="radio" name="q04" value="B"> It can move the allocation, fail without freeing the original object, and invalidate old assumptions about aliases and size.</label>
-                      <label><input type="radio" name="q04" value="C"> Assigning the result directly is safe because a failed realloc releases the original allocation.</label>
-                      <label><input type="radio" name="q04" value="D"> Only capacity changes after realloc; length fields and interior pointers never require review.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>5. What should happen to size metadata after a successful resize?</legend>
-                      <label><input type="radio" name="q05" value="A" required> Update capacity before calling resize so concurrent code sees the intended limit during the operation.</label>
-                      <label><input type="radio" name="q05" value="B"> The pointer returned by an allocator exposes usable size, making a separate capacity field redundant.</label>
-                      <label><input type="radio" name="q05" value="C"> It should be updated consistently with the pointer and the new allocation capacity.</label>
-                      <label><input type="radio" name="q05" value="D"> Keep the old capacity until the next write proves that the resized range is usable.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>6. Why is setting a freed pointer to NULL not a complete solution?</legend>
-                      <label><input type="radio" name="q06" value="A" required> Setting the owner pointer to null invalidates every alias because they refer to the same logical variable.</label>
-                      <label><input type="radio" name="q06" value="B"> Other aliases may still point to the freed object, and the real issue is lifetime discipline.</label>
-                      <label><input type="radio" name="q06" value="C"> A null assignment prevents double free even when another component kept a copied ownership pointer.</label>
-                      <label><input type="radio" name="q06" value="D"> A freed pointer may still be used for comparisons and logging as long as it is never dereferenced.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>7. What is the difference between length and capacity?</legend>
-                      <label><input type="radio" name="q07" value="A" required> Length is the amount currently used, while capacity is the amount allocated and available for safe use.</label>
-                      <label><input type="radio" name="q07" value="B"> Length includes the entire allocated region, while capacity counts only the currently initialized elements.</label>
-                      <label><input type="radio" name="q07" value="C"> They may be treated as equal for fixed-size buffers because unused elements are always safe to read.</label>
-                      <label><input type="radio" name="q07" value="D"> Capacity follows from the pointer type and therefore does not need to be stored separately.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>8. Why are allocation-size calculations security-relevant?</legend>
-                      <label><input type="radio" name="q08" value="A" required> size_t arithmetic cannot overflow when the result is passed to an allocator on the same platform.</label>
-                      <label><input type="radio" name="q08" value="B"> calloc removes the need to validate element-count multiplication and the application maximum.</label>
-                      <label><input type="radio" name="q08" value="C"> If a requested size wraps, the allocator will reliably reject the resulting request.</label>
-                      <label><input type="radio" name="q08" value="D"> Incorrect calculations can allocate less memory than intended and lead to out-of-bounds access.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>9. What does leak detection often reveal?</legend>
-                      <label><input type="radio" name="q09" value="A" required> Any allocation reported at process exit is a leak and should be freed immediately, including intentional global caches.</label>
-                      <label><input type="radio" name="q09" value="B"> Missing cleanup, unclear ownership, or failure paths that do not release allocated memory.</label>
-                      <label><input type="radio" name="q09" value="C"> A leak-free test run proves ownership and failure paths are correct for inputs the tests did not exercise.</label>
-                      <label><input type="radio" name="q09" value="D"> Leak tools identify the missing ownership contract, so review only needs to confirm the suggested free call.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>10. Why are borrowed pointers useful but risky?</legend>
-                      <label><input type="radio" name="q10" value="A" required> A borrowed pointer may be retained until the owner explicitly sends an invalidation notification.</label>
-                      <label><input type="radio" name="q10" value="B"> A const qualifier guarantees that the referenced object lives throughout every borrower use.</label>
-                      <label><input type="radio" name="q10" value="C"> They avoid ownership transfer, but the caller must understand how long the referenced object remains valid.</label>
-                      <label><input type="radio" name="q10" value="D"> A borrower can promote itself to owner by freeing the pointer after its last local use.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>11. What is the role of tools such as sanitizers and static analysis?</legend>
-                      <label><input type="radio" name="q11" value="A" required> Sanitizer-clean tests prove production heap behavior is safe across paths the tests did not exercise.</label>
-                      <label><input type="radio" name="q11" value="B"> Static analysis can infer intended ownership contracts, making API documentation unnecessary.</label>
-                      <label><input type="radio" name="q11" value="C"> Leak detection covers bounds errors and use-after-free as comprehensively as memory sanitizers.</label>
-                      <label><input type="radio" name="q11" value="D"> They help detect classes of heap defects during testing and review, but they do not replace safe design.</label>
-                    </fieldset>
-
-<fieldset class="quiz-question">
-                      <legend>12. What is the main course takeaway?</legend>
-                      <label><input type="radio" name="q12" value="A" required> Heap safety improves when allocation, initialization, ownership, bounds, lifetime, and cleanup are explicit and repeatable.</label>
-                      <label><input type="radio" name="q12" value="B"> Consistently setting local pointers to null after use is sufficient even with undocumented ownership transfers.</label>
-                      <label><input type="radio" name="q12" value="C"> A single cleanup function can compensate for unchecked allocation sizes and stale aliases.</label>
-                      <label><input type="radio" name="q12" value="D"> Choosing an allocator with diagnostics removes the need for explicit lifetime and capacity contracts.</label>
-                    </fieldset>
+            <legend>2. Why should allocation failure be handled explicitly?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Because memory allocation can fail, and predictable failure handling prevents invalid use and incomplete cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Desktop and server virtual memory makes failure impractical, so production code may rely on process termination.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>The caller can continue with a partially initialized object if a failed field remains null and an error is logged.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Retrying the allocation immediately is sufficient even when cleanup and state transitions are undefined.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What is an ownership contract?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>The function that first receives a pointer becomes its owner unless the parameter is declared const.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Any module holding a reference may free the object when done, provided it then sets its local pointer to null.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Objects stored in containers are automatically owned by the container regardless of its documented API.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>A clear rule that states who is responsible for freeing or retaining allocated memory.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is realloc easy to misuse?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>realloc preserves the original address whenever a request grows only modestly, so aliases remain valid in the common case.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>It can move the allocation, fail without freeing the original object, and invalidate old assumptions about aliases and size.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Assigning the result directly is safe because a failed realloc releases the original allocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Only capacity changes after realloc; length fields and interior pointers never require review.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should happen to size metadata after a successful resize?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Update capacity before calling resize so concurrent code sees the intended limit during the operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>The pointer returned by an allocator exposes usable size, making a separate capacity field redundant.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>It should be updated consistently with the pointer and the new allocation capacity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Keep the old capacity until the next write proves that the resized range is usable.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why is setting a freed pointer to NULL not a complete solution?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Setting the owner pointer to null invalidates every alias because they refer to the same logical variable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Other aliases may still point to the freed object, and the real issue is lifetime discipline.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A null assignment prevents double free even when another component kept a copied ownership pointer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>A freed pointer may still be used for comparisons and logging as long as it is never dereferenced.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What is the difference between length and capacity?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Length is the amount currently used, while capacity is the amount allocated and available for safe use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Length includes the entire allocated region, while capacity counts only the currently initialized elements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>They may be treated as equal for fixed-size buffers because unused elements are always safe to read.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Capacity follows from the pointer type and therefore does not need to be stored separately.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why are allocation-size calculations security-relevant?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>size_t arithmetic cannot overflow when the result is passed to an allocator on the same platform.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>calloc removes the need to validate element-count multiplication and the application maximum.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>If a requested size wraps, the allocator will reliably reject the resulting request.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Incorrect calculations can allocate less memory than intended and lead to out-of-bounds access.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What does leak detection often reveal?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Any allocation reported at process exit is a leak and should be freed immediately, including intentional global caches.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Missing cleanup, unclear ownership, or failure paths that do not release allocated memory.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>A leak-free test run proves ownership and failure paths are correct for inputs the tests did not exercise.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Leak tools identify the missing ownership contract, so review only needs to confirm the suggested free call.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why are borrowed pointers useful but risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>A borrowed pointer may be retained until the owner explicitly sends an invalidation notification.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>A const qualifier guarantees that the referenced object lives throughout every borrower use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>They avoid ownership transfer, but the caller must understand how long the referenced object remains valid.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>A borrower can promote itself to owner by freeing the pointer after its last local use.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of tools such as sanitizers and static analysis?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Sanitizer-clean tests prove production heap behavior is safe across paths the tests did not exercise.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Static analysis can infer intended ownership contracts, making API documentation unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Leak detection covers bounds errors and use-after-free as comprehensively as memory sanitizers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>They help detect classes of heap defects during testing and review, but they do not replace safe design.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Heap safety improves when allocation, initialization, ownership, bounds, lifetime, and cleanup are explicit and repeatable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Consistently setting local pointers to null after use is sufficient even with undocumented ownership transfers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>A single cleanup function can compensate for unchecked allocation sizes and stale aliases.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Choosing an allocator with diagnostics removes the need for explicit lifetime and capacity contracts.</span></label>
+          </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -138,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>
