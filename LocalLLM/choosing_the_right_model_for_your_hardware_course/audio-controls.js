@@ -227,17 +227,24 @@
 
     document.body.classList.add("narration-dock-active");
 
-    function updateDockHeight() {
+    function updateDockLayout() {
+      // The module container keeps the narration card's width even when narration is hidden.
+      var bounds = meta.getBoundingClientRect();
+      card.style.left = bounds.left + "px";
+      card.style.right = "auto";
+      card.style.width = bounds.width + "px";
       var height = Math.ceil(card.getBoundingClientRect().height);
       document.documentElement.style.setProperty("--narration-dock-height", height + "px");
     }
 
     if (typeof window.ResizeObserver === "function") {
-      card.dockResizeObserver = new window.ResizeObserver(updateDockHeight);
+      card.dockResizeObserver = new window.ResizeObserver(updateDockLayout);
       card.dockResizeObserver.observe(card);
+      card.dockResizeObserver.observe(meta);
     }
-    window.addEventListener("resize", updateDockHeight);
-    updateDockHeight();
+    window.addEventListener("resize", updateDockLayout);
+    document.addEventListener("course:navigation-ready", updateDockLayout);
+    updateDockLayout();
 
     narration.classList.toggle("hidden", !narrationVisible);
     if (header) header.classList.toggle("title-card-hidden", !headerVisible);

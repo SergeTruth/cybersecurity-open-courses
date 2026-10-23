@@ -496,6 +496,7 @@
         completed: Array.isArray(parsed.completed) && parsed.completed.indexOf(current) !== -1 ? [current] : [],
         quizPassed: parsed.quizPassed === true,
         quizStatus: parsed.quizStatus === "passed" || parsed.quizStatus === "failed" ? parsed.quizStatus : "in progress",
+        quizReview: parsed.quizReview && typeof parsed.quizReview === "object" ? parsed.quizReview : null,
         updatedAt: Number.isFinite(parsed.updatedAt) && parsed.updatedAt >= 0 ? parsed.updatedAt : 0
       };
     } catch (error) {
@@ -524,7 +525,9 @@
     }
 
     if (connected && lmsRead) {
-      state = learnerScoped && local && local.updatedAt > lms.updatedAt ? local : lms;
+      // Quiz suspend data belongs to the current LMS attempt. A learner-scoped
+      // browser copy can belong to an older attempt or a different device state.
+      state = !isQuiz() && learnerScoped && local && local.updatedAt > lms.updatedAt ? local : lms;
     } else {
       state = local || defaultState();
     }
@@ -632,9 +635,10 @@
     return true;
   }
 
-  function recordQuizResult(passed) {
+  function recordQuizResult(passed, review) {
     state.quizPassed = Boolean(passed);
     state.quizStatus = passed ? "passed" : "failed";
+    state.quizReview = review || null;
     var saved = saveState();
     if (!connected) {
       if (hosted || !saved.local) {
@@ -665,6 +669,17 @@
     if (isQuiz()) {
       if (window.SCORM && typeof SCORM.clearLastError === "function") SCORM.clearLastError();
       var quizStatus = connected ? SCORM.getValue("cmi.core.lesson_status") : state.quizStatus;
+      var quizReadFailed = Boolean(SCORM.getLastError && SCORM.getLastError());
+      // SCORM 1.2 may default an untouched SCO to completed on LMSFinish.
+      // An assessment is incomplete until an actual submission sets its result.
+      if (connected && !quizReadFailed && quizStatus !== "passed" && quizStatus !== "failed") {
+        var quizStarted = SCORM.setValue("cmi.core.lesson_status", "incomplete");
+        var quizCommitted = SCORM.commit();
+        if (!quizStarted || !quizCommitted) {
+          reportPersistenceFailure(false);
+          return;
+        }
+      }
       if (quizStatus === "passed" || quizStatus === "failed") {
         state.quizPassed = quizStatus === "passed";
         state.quizStatus = quizStatus;
@@ -842,6 +857,7 @@
     meta = document.getElementById("module-meta");
     connect();
     initializeGraphic();
+    document.dispatchEvent(new CustomEvent("course:runtime-ready"));
   });
 
   window.addEventListener("beforeunload", function () {
@@ -855,6 +871,7 @@
     isHosted: function () { return hosted; },
     isQuiz: isQuiz,
     recordQuizResult: recordQuizResult,
+    getQuizReview: function () { return state.quizReview || null; },
     reportPersistenceFailure: reportPersistenceFailure,
     reportPersistenceSuccess: reportPersistenceSuccess,
     setProgress: setProgress

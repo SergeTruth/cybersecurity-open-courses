@@ -88,7 +88,8 @@
 
   function mutationSucceeded(method, result) {
     var code = errorCode();
-    var ok = (result.called && succeeded(result.value)) || code === "0";
+    // Moodle may return false with error 0, but a thrown/unavailable call is never saved.
+    var ok = result.called && (succeeded(result.value) || code === "0");
     if (!ok) rememberFailure(method, code);
     return ok;
   }

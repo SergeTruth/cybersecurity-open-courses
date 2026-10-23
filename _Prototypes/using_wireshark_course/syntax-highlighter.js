@@ -377,10 +377,6 @@
       if (heading) heading.textContent = moduleData.title;
     }
 
-    if (moduleData.codeIntro) {
-      target.appendChild(textElement("p", "code-example-intro", moduleData.codeIntro));
-    }
-
     examples.forEach(function (example, index) {
       renderExample(target, example || {}, index);
     });

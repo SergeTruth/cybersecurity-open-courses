@@ -8,9 +8,43 @@
     return element;
   }
 
-  function unavailable(link) {
-    var href = link.getAttribute("href") || "";
-    return !href || href === "#" || href.indexOf("{{") !== -1;
+  function isModuleHref(href) {
+    return /^(?:\.\/)?m\d{2}\.html(?:[?#].*)?$/i.test(href || "");
+  }
+
+  function isLmsHosted() {
+    if (!window.SCORM) return false;
+    if (typeof SCORM.isHosted === "function") return SCORM.isHosted();
+    return typeof SCORM.isAvailable === "function" && SCORM.isAvailable();
+  }
+
+  function enablePreviewNavigation() {
+    var links = document.querySelectorAll(".module-nav a");
+    Array.prototype.forEach.call(links, function (link) {
+      var previewHref = link.getAttribute("data-preview-href") || "";
+      if (!isModuleHref(previewHref)) {
+        link.remove();
+        return;
+      }
+      link.setAttribute("href", previewHref);
+    });
+  }
+
+  function disableScoNavigation() {
+    var moduleNavigation = document.querySelectorAll(".module-nav, .course-nav-pane");
+    Array.prototype.forEach.call(moduleNavigation, function (navigation) {
+      navigation.remove();
+    });
+
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      while (target && target.nodeType === 1 && target.tagName !== "A") {
+        target = target.parentNode;
+      }
+      if (target && target.tagName === "A" && isModuleHref(target.getAttribute("href"))) {
+        event.preventDefault();
+      }
+    }, true);
   }
 
   function fallbackModules() {
@@ -45,6 +79,27 @@
   function notifyNavigationReady() {
     if (typeof window.CustomEvent !== "function") return;
     document.dispatchEvent(new CustomEvent("course:navigation-ready"));
+  }
+
+  function alignSidebar(main, wrap) {
+    var header = wrap.querySelector(".title-card");
+    if (!header) return;
+
+    function updateOffset() {
+      // Match the card below the title, including wrapped or hidden titles.
+      var offset = 0;
+      if (!header.classList.contains("title-card-hidden") && header.getClientRects().length) {
+        offset = header.getBoundingClientRect().bottom - wrap.getBoundingClientRect().top
+          + (parseFloat(window.getComputedStyle(header).marginBottom) || 0);
+      }
+      main.style.setProperty("--course-nav-offset", Math.max(0, offset) + "px");
+    }
+
+    updateOffset();
+    window.addEventListener("resize", updateOffset);
+    if (typeof window.ResizeObserver === "function") {
+      new ResizeObserver(updateOffset).observe(header);
+    }
   }
 
   function addSidebar(modules) {
@@ -82,15 +137,18 @@
     pane.appendChild(navigation);
     main.classList.add("course-layout");
     main.insertBefore(pane, wrap);
+    alignSidebar(main, wrap);
     notifyNavigationReady();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    courseModules().then(addSidebar);
+    if (isLmsHosted()) {
+      disableScoNavigation();
+      notifyNavigationReady();
+      return;
+    }
 
-    var links = document.querySelectorAll(".module-nav a");
-    Array.prototype.forEach.call(links, function (link) {
-      if (unavailable(link)) link.remove();
-    });
+    enablePreviewNavigation();
+    courseModules().then(addSidebar);
   });
 })();

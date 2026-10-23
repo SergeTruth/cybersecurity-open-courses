@@ -81,6 +81,27 @@
     document.dispatchEvent(new CustomEvent("course:navigation-ready"));
   }
 
+  function alignSidebar(main, wrap) {
+    var header = wrap.querySelector(".title-card");
+    if (!header) return;
+
+    function updateOffset() {
+      // Match the card below the title, including wrapped or hidden titles.
+      var offset = 0;
+      if (!header.classList.contains("title-card-hidden") && header.getClientRects().length) {
+        offset = header.getBoundingClientRect().bottom - wrap.getBoundingClientRect().top
+          + (parseFloat(window.getComputedStyle(header).marginBottom) || 0);
+      }
+      main.style.setProperty("--course-nav-offset", Math.max(0, offset) + "px");
+    }
+
+    updateOffset();
+    window.addEventListener("resize", updateOffset);
+    if (typeof window.ResizeObserver === "function") {
+      new ResizeObserver(updateOffset).observe(header);
+    }
+  }
+
   function addSidebar(modules) {
     var main = document.querySelector("main.main-content");
     var wrap = main ? main.querySelector(".wrap") : null;
@@ -116,6 +137,7 @@
     pane.appendChild(navigation);
     main.classList.add("course-layout");
     main.insertBefore(pane, wrap);
+    alignSidebar(main, wrap);
     notifyNavigationReady();
   }
 

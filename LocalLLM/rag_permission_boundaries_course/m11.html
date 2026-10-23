@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Final Quiz | RAG Permission Boundaries</title>
-  <link rel="stylesheet" href="base.css?v=11">
+  <link rel="stylesheet" href="base.css?v=10-fonts1">
 </head>
 <body data-course-id="rag_permission_boundaries">
   <main id="main-content" class="main-content">
@@ -20,101 +20,115 @@
         <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
       </header>
 
-      <section class="card" aria-labelledby="quiz-heading">
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
         <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
         <form
           id="quiz-form"
           class="quiz-form"
           data-passing-score="80"
-          data-answer-key='{&quot;q01&quot;: &quot;C&quot;, &quot;q02&quot;: &quot;A&quot;, &quot;q03&quot;: &quot;D&quot;, &quot;q04&quot;: &quot;B&quot;, &quot;q05&quot;: &quot;C&quot;, &quot;q06&quot;: &quot;A&quot;, &quot;q07&quot;: &quot;D&quot;, &quot;q08&quot;: &quot;B&quot;, &quot;q09&quot;: &quot;C&quot;, &quot;q10&quot;: &quot;A&quot;, &quot;q11&quot;: &quot;D&quot;, &quot;q12&quot;: &quot;B&quot;}'
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;D&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;B&quot;}'
         >
-          <fieldset class="quiz-question">
+                    <fieldset class="quiz-question">
             <legend>1. Why do RAG permission boundaries matter?</legend>
-            <label><input type="radio" name="q01" value="A"> They make all source repositories public by default.</label>
-            <label><input type="radio" name="q01" value="B"> They replace the need for identity and access control.</label>
-            <label><input type="radio" name="q01" value="C"> A user may be allowed to ask a question but not allowed to see every document that could answer it.</label>
-            <label><input type="radio" name="q01" value="D"> They are only useful for non-production prototypes.</label>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>They make all source repositories public by default.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>They replace the need for identity and access control.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>A user may be allowed to ask a question but not allowed to see every document that could answer it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>They are only useful for non-production prototypes.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>2. What is a good architecture review practice for RAG trust zones?</legend>
-            <label><input type="radio" name="q02" value="A"> Trace data from source repositories through ingestion, indexing, retrieval, generation, logs, caches, and outputs.</label>
-            <label><input type="radio" name="q02" value="B"> Review only the final model prompt and ignore storage layers.</label>
-            <label><input type="radio" name="q02" value="C"> Assume embeddings and cached responses cannot contain sensitive information.</label>
-            <label><input type="radio" name="q02" value="D"> Let service identities bypass user permissions for convenience.</label>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Trace data from source repositories through ingestion, indexing, retrieval, generation, logs, caches, and outputs.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Review only the final model prompt and ignore storage layers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Assume embeddings and cached responses cannot contain sensitive information.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Let service identities bypass user permissions for convenience.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>3. What should permission checks use for request context?</legend>
-            <label><input type="radio" name="q03" value="A"> Unverified client hints alone.</label>
-            <label><input type="radio" name="q03" value="B"> Any tenant value supplied in the prompt.</label>
-            <label><input type="radio" name="q03" value="C"> The most permissive role available in the system.</label>
-            <label><input type="radio" name="q03" value="D"> Trusted identity, tenant, role, group, project, and service context from authoritative sources.</label>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Unverified client hints alone.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Any tenant value supplied in the prompt.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>The most permissive role available in the system.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Trusted identity, tenant, role, group, project, and service context from authoritative sources.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>4. Why is access metadata important during ingestion?</legend>
-            <label><input type="radio" name="q04" value="A"> It makes source ownership irrelevant.</label>
-            <label><input type="radio" name="q04" value="B"> Later retrieval needs metadata such as origin, owner, tenant, ACLs, classification, and lifecycle state to enforce permissions.</label>
-            <label><input type="radio" name="q04" value="C"> It allows all chunks to be shared with every user.</label>
-            <label><input type="radio" name="q04" value="D"> It replaces the need for source identifiers.</label>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>It makes source ownership irrelevant.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Later retrieval needs metadata such as origin, owner, tenant, ACLs, classification, and lifecycle state to enforce permissions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>It allows all chunks to be shared with every user.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>It replaces the need for source identifiers.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>5. What is a risk of chunking without ACL preservation?</legend>
-            <label><input type="radio" name="q05" value="A"> Chunks become easier to delete manually.</label>
-            <label><input type="radio" name="q05" value="B"> Search always becomes less accurate.</label>
-            <label><input type="radio" name="q05" value="C"> Text may be separated from the document, tenant, section, or ACL context needed for safe retrieval.</label>
-            <label><input type="radio" name="q05" value="D"> The user interface automatically blocks all answers.</label>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Chunks become easier to delete manually.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Search always becomes less accurate.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Text may be separated from the document, tenant, section, or ACL context needed for safe retrieval.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>The user interface automatically blocks all answers.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>6. When should retrieval-time authorization happen?</legend>
-            <label><input type="radio" name="q06" value="A"> Before retrieved text is inserted into the model context.</label>
-            <label><input type="radio" name="q06" value="B"> Only after the answer has already been shown.</label>
-            <label><input type="radio" name="q06" value="C"> Only when a user complains.</label>
-            <label><input type="radio" name="q06" value="D"> After ranking has selected content that policy excluded.</label>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Before retrieved text is inserted into the model context.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Only after the answer has already been shown.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Only when a user complains.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>After ranking has selected content that policy excluded.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>7. What does deny-by-default mean in a permission-aware RAG pipeline?</legend>
-            <label><input type="radio" name="q07" value="A"> Every source should be denied permanently.</label>
-            <label><input type="radio" name="q07" value="B"> Denied documents should be logged in full.</label>
-            <label><input type="radio" name="q07" value="C"> Users should never receive any answer.</label>
-            <label><input type="radio" name="q07" value="D"> Ambiguous, incomplete, or missing permission context should lead to exclusion rather than exposure.</label>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Every source should be denied permanently.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Denied documents should be logged in full.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Users should never receive any answer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Ambiguous, incomplete, or missing permission context should lead to exclusion rather than exposure.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>8. What is the right relationship between retrieved documents and trusted policy?</legend>
-            <label><input type="radio" name="q08" value="A"> Retrieved documents should override all application rules.</label>
-            <label><input type="radio" name="q08" value="B"> Retrieved text is evidence and context, not a policy override.</label>
-            <label><input type="radio" name="q08" value="C"> The model should infer permissions from document wording alone.</label>
-            <label><input type="radio" name="q08" value="D"> Citations should include restricted sources for transparency.</label>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Retrieved documents should override all application rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Retrieved text is evidence and context, not a policy override.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>The model should infer permissions from document wording alone.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Citations should include restricted sources for transparency.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>9. Which area can become a leakage path in multi-tenant RAG?</legend>
-            <label><input type="radio" name="q09" value="A"> Only the final user-facing answer.</label>
-            <label><input type="radio" name="q09" value="B"> Only source repositories, never operational tooling.</label>
-            <label><input type="radio" name="q09" value="C"> Indexes, caches, logs, exports, transcripts, analytics, admin views, and backups.</label>
-            <label><input type="radio" name="q09" value="D"> None, if the model is private.</label>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Only the final user-facing answer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Only source repositories, never operational tooling.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Indexes, caches, logs, exports, transcripts, analytics, admin views, and backups.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>None, if the model is private.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>10. What should audit records support?</legend>
-            <label><input type="radio" name="q10" value="A"> Reconstructing request context, retrieval decisions, allowed sources, policy checks, and response provenance without unnecessary sensitive text.</label>
-            <label><input type="radio" name="q10" value="B"> Storing every retrieved chunk forever by default.</label>
-            <label><input type="radio" name="q10" value="C"> Hiding all policy decisions from operators.</label>
-            <label><input type="radio" name="q10" value="D"> Replacing negative testing.</label>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Reconstructing request context, retrieval decisions, allowed sources, policy checks, and response provenance without unnecessary sensitive text.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Storing every retrieved chunk forever by default.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Hiding all policy decisions from operators.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Replacing negative testing.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>11. Which test belongs in a permission-aware RAG test plan?</legend>
-            <label><input type="radio" name="q11" value="A"> Only successful retrieval by administrators.</label>
-            <label><input type="radio" name="q11" value="B"> Only model response speed under ideal conditions.</label>
-            <label><input type="radio" name="q11" value="C"> Only visual layout testing of the chat interface.</label>
-            <label><input type="radio" name="q11" value="D"> Revoked access, stale indexes, deleted documents, missing metadata, mixed sources, and cross-tenant negative cases.</label>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Only successful retrieval by administrators.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Only model response speed under ideal conditions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Only visual layout testing of the chat interface.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Revoked access, stale indexes, deleted documents, missing metadata, mixed sources, and cross-tenant negative cases.</span></label>
           </fieldset>
-<fieldset class="quiz-question">
+          <fieldset class="quiz-question">
             <legend>12. What best summarizes permission-aware RAG?</legend>
-            <label><input type="radio" name="q12" value="A"> A prompt-only control that asks the model to be careful.</label>
-            <label><input type="radio" name="q12" value="B"> A full-system design where identity, metadata, indexing, retrieval, output controls, isolation, auditing, and tests align.</label>
-            <label><input type="radio" name="q12" value="C"> A reason to remove access control from source repositories.</label>
-            <label><input type="radio" name="q12" value="D"> A feature that only applies to single-user prototypes.</label>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>A prompt-only control that asks the model to be careful.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>A full-system design where identity, metadata, indexing, retrieval, output controls, isolation, auditing, and tests align.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>A reason to remove access control from source repositories.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>A feature that only applies to single-user prototypes.</span></label>
           </fieldset>
           <button id="submit-quiz" type="submit">Submit Quiz</button>
-          <p id="quiz-result" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
       </section>
 
       <nav class="nav module-nav" aria-label="Module navigation">
@@ -127,12 +141,12 @@
     </div>
   </main>
 
-  <script src="scorm-wrapper.js?v=9"></script>
-  <script src="quiz-engine.js"></script>
-  <script src="course_assets/course.js"></script>
-  <script src="course_assets/modules.js"></script>
-  <script src="course_assets/m11.js"></script>
-  <script src="navigation.js"></script>
-  <script src="base.js?v=9"></script>
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
 </body>
 </html>
