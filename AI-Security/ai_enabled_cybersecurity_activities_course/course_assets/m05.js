@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Cloud, Container, and Infrastructure Security",
+  "graphicAlt": "A deployed workload is assessed using required access, effective permissions, image contents, and runtime and host access, with intended configuration compared for drift before testing remediation.",
+  "narration": "Infrastructure assessment examines how identity, network access, workload configuration, and software dependencies combine in deployment. Inputs include cloud policies, infrastructure-as-code changes, container image inventories, orchestration manifests, and observed runtime settings. AI can compare these large collections and organize candidate findings around affected resources and intended controls.\n\nFor identity and access management, examine the principal, allowed action, resource scope, and applicable conditions. A policy that permits writing many storage resources may exceed a workload's need to read one dataset. A model can highlight the mismatch and draft a narrower proposal. Confirm effective permissions and application requirements before recommending a change. Valid policy syntax says little about whether the resulting access is appropriate.\n\nContainer assessment adds runtime context. Image package findings do not describe workload permissions or host access. A deployment that combines elevated privileges with sensitive host mounts deserves examination beyond the image scan. Check whether the settings are actually deployed, what resources they expose, and which isolation controls are enforced. A claimed compensating control is useful only if its relevant behavior is verified.\n\nComparing intended configuration with deployed state can expose drift, including access-rule changes and altered secret delivery. Models can summarize differences and connect related cloud resources, but should not receive raw secrets merely to explain their handling. The practical output is a contextual finding with configuration evidence, affected scope, and a remediation proposal that can be tested. Cloud assessment and container security offer distinct follow-up paths within this infrastructure work.",
+  "narrationPoints": [
+    "Review effective permissions in the context of principal, actions, resources, and conditions.",
+    "Assess container images and deployed workload permissions as separate evidence sources.",
+    "Compare intended infrastructure with actual deployment to investigate drift.",
+    "Verify compensating controls and test proposed remediation."
+  ]
+};
+

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "The Landscape of AI-Enabled Cybersecurity",
+  "graphicAlt": "A security objective connects source evidence and AI-assisted analysis to a reviewed deliverable, with verification of evidence and assumptions spanning the workflow.",
+  "narration": "Cybersecurity includes discovering exposed assets, investigating weaknesses, assessing software and infrastructure, building detections, and interpreting evidence. These activities produce different results: an inventory, a reproducible finding, a tested rule, or an intelligence assessment. Artificial intelligence is useful when its contribution advances one of those specific results.\n\nAssistance extends beyond asking a chatbot questions. Models can organize discovery records, explain code, draft analysis scripts, and correlate technical artifacts. Conventional tools still collect measurements and execute checks. The relevant combination depends on the activity: code paths matter in application assessment, while event schemas and retained logs matter in monitoring.\n\nThis course surveys those professional activities, including vulnerability research, cloud and container assessment, incident response, and open-source intelligence. AI-assisted threat modeling connects architecture, trust boundaries, and plausible attack paths to design decisions. AI-assisted risk management connects security evidence with business impact, treatment options, accountable owners, and review dates. Together, they help explain what could go wrong and how an organization should respond.\n\nThe aim is to identify where assistance could reduce repetitive effort or make deeper investigation practical. Practitioners still verify evidence, test assumptions, and make decisions within their authority. As you compare the activities, consider which technical skills, source records, and business context would support useful work in your own area.",
+  "narrationPoints": [
+    "Match AI assistance to a specific security activity, its evidence, and its deliverable.",
+    "Threat modeling connects system design with plausible attack paths and control gaps.",
+    "Risk management connects security evidence with business impact, treatment, and ownership.",
+    "Practitioners verify assumptions and remain accountable for decisions."
+  ]
+};

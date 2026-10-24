@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Attack Surface Discovery and Documentation",
+  "graphicAlt": "Hostname, certificate, and cloud-endpoint records form proposed links that are checked for ownership and exposure, while confirmed and unresolved inventory entries retain provenance and gaps.",
+  "narration": "Attack surface analysis establishes which assets and interfaces may be reachable and how they relate to the organization. Inputs include authorized discovery results, domain records, service observations, cloud inventories, application routes, and ownership records. A list of addresses is only a starting point; an assessment needs to connect services with their purpose, exposure, and responsible team.\n\nModels can normalize inconsistent service descriptions and propose links between overlapping records. A hostname, a certificate name, and a cloud endpoint may describe related resources. A useful inventory preserves each source and observation time, records the proposed relationship, and separates confirmed attributes from unresolved matches. It should not silently merge records merely because names resemble one another.\n\nIdentity, ownership, and exposure require different evidence. Shared hosting can place unrelated services behind one address. A certificate name does not prove that the organization owns the current service. Confirm ownership against authoritative records or the responsible team, and verify exposure through permitted network or application checks. Document inaccessible and untested areas instead of calling the inventory complete.\n\nComparing dated snapshots can reveal new listeners, changed routes, or resources absent from earlier records. AI can summarize those differences into an attack surface document and highlight relationships needing investigation. Analysts then distinguish actual changes from missing collection data. The practical deliverable is a traceable inventory with ownership, exposure, and uncertainty visible. Automating attack surface documentation is a natural area for deeper study because it turns recurring discovery output into an assessment resource.",
+  "narrationPoints": [
+    "Normalize discovery data while preserving sources, timestamps, and unresolved matches.",
+    "Confirm identity, ownership, and reachability separately.",
+    "Compare inventory snapshots without treating collection gaps as confirmed removals.",
+    "Produce a traceable inventory and documented investigation gaps."
+  ]
+};
+

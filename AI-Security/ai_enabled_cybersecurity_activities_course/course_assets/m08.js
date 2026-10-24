@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "OSINT and Threat Intelligence",
+  "graphicAlt": "Repeated reports visibly trace back to one original source, while independent evidence and alternative explanations inform a qualified assessment with explicit confidence and gaps.",
+  "narration": "Open-source intelligence turns accessible information into an assessment relevant to a question. Collection may include public technical records, published reports, service documentation, and observable digital footprints. Threat intelligence connects such material with information about adversary behavior and relevant threats. Models can discover candidate sources, extract entities, and organize material by source and date.\n\nRelationship analysis needs careful interpretation. Two domains using the same hosting address may share a provider rather than an owner. Similar names can refer to different entities, and infrastructure relationships change over time. AI can propose connections and display the supporting observations, but common infrastructure alone does not establish attribution. Keep identity claims separate from the technical relationships actually observed.\n\nSource evaluation also prevents repeated claims from appearing stronger than they are. Several reports may quote one original article. Trace important claims back to their origins, compare collection dates, and examine conflicting accounts. Deceptive or incomplete material may be coherent and professionally written. A useful analytical table records the claim, original evidence, confidence, and competing explanation rather than merely counting supporting links.\n\nStructured analytic techniques encourage explicit alternatives and examination of disconfirming evidence. Models can organize competing hypotheses and flag contradictions, while analysts judge relevance and credibility. The output should explain which conclusions are supported, which remain uncertain, and what additional collection could change the assessment. Building an OSINT workflow and studying threat actor profiling develop these capabilities beyond simple information gathering.",
+  "narrationPoints": [
+    "Organize entities and claims by original source and observation date.",
+    "Shared infrastructure suggests a relationship, not proven ownership or attribution.",
+    "Trace repeated reporting to its origin before treating it as corroboration.",
+    "Compare competing explanations and identify evidence that could change the assessment."
+  ]
+};
+

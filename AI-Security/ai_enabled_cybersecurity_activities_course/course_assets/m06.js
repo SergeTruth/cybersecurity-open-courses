@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Detection Engineering and Security Monitoring",
+  "graphicAlt": "An AI-drafted rule grounded in available telemetry passes separate evaluations for syntax, intended behavior, and operational usefulness, including benign and malicious test cases.",
+  "narration": "Detection engineering translates observable behavior into a rule that can operate on available telemetry. Event schemas, collection settings, sample records, and known behaviors provide the starting material. AI can explain unfamiliar fields, draft queries, suggest test cases, and document which log sources a rule depends on. Missing telemetry cannot be repaired by a more confident explanation.\n\nFor a detection of repeated authentication failures followed by success, the details determine meaning. Check which fields identify the account and source, how events are grouped, what time window applies, and whether both event types are collected. Aggregating across unrelated users can create a misleading sequence. A model's query draft should make these assumptions visible.\n\nTest representative malicious and benign activity, including administrative behavior and missing or delayed events. Syntax validation establishes that a query is accepted, not that it identifies the intended behavior. Matching a positive test is a further step. Operational usefulness also depends on false positives, query cost, alert context, and whether analysts can investigate the result. These are separate evaluation questions.\n\nIn monitoring, models can summarize suspicious sequences and collect relevant asset or identity context for alert triage. The summary remains an interpretation of events, not a verified incident. Preserve links to records and unresolved alternatives. Detection lifecycle work then records tuning decisions, versions rules, monitors performance, and reevaluates coverage when systems change. Writing rules, understanding telemetry, and managing detections over time are related specialties that AI can support in different ways.",
+  "narrationPoints": [
+    "Translate a behavior into logic grounded in real event schemas and collection coverage.",
+    "Test grouping, time windows, missing events, and benign as well as malicious cases.",
+    "Distinguish valid syntax, intended detection, and operational usefulness.",
+    "Retain evidence links and tuning history across the detection lifecycle."
+  ]
+};
+
