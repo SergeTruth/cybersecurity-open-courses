@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.060
+Parsing gives the program fields.
+
+2
+00:00:03.160 --> 00:00:06.440
+Validation decides whether those fields are acceptable.
+
+3
+00:00:06.540 --> 00:00:11.820
+A value can be syntactically present and still be wrong for the program's purpose.
+
+4
+00:00:11.920 --> 00:00:17.840
+Defensive configuration parsers validate each field against the type and context where it will be used.
+
+5
+00:00:18.120 --> 00:00:20.360
+Booleans should have accepted forms.
+
+6
+00:00:20.460 --> 00:00:34.380
+Integers, sizes, durations, ports, percentages, and counts should check conversion success, leftover text, range limits, sign expectations, units, and overflow concerns in later calculations.
+
+7
+00:00:34.480 --> 00:00:38.320
+A successful conversion is only the beginning of numeric validation.
+
+8
+00:00:38.600 --> 00:00:42.840
+Enumerations and identifiers should be restricted to allowed values.
+
+9
+00:00:42.940 --> 00:00:53.500
+A mode setting, log level, algorithm choice, feature flag, or resource name should not silently accept arbitrary text if only a small set of values is meaningful.
+
+10
+00:00:53.600 --> 00:00:58.240
+Unknown values should be rejected or handled by a documented compatibility rule.
+
+11
+00:00:58.520 --> 00:01:01.320
+Lists need item-by-item validation.
+
+12
+00:01:01.420 --> 00:01:09.660
+The parser should define separators, empty items, duplicate items, maximum item count, and whether ordering matters.
+
+13
+00:01:09.760 --> 00:01:16.720
+One invalid item should not be silently skipped unless the configuration contract explicitly permits partial acceptance.
+
+14
+00:01:17.000 --> 00:01:23.400
+Path-like strings, names, and resource identifiers need format rules tied to their use.
+
+15
+00:01:23.500 --> 00:01:30.540
+They may need length checks, character rules, location expectations, or normalization before use.
+
+16
+00:01:30.640 --> 00:01:35.760
+The validation rule should be close to the field definition rather than scattered across later consumers.
+
+17
+00:01:36.040 --> 00:01:37.640
+Context matters most.
+
+18
+00:01:37.740 --> 00:01:48.860
+A value may be valid text and valid syntax but still unacceptable for a field because it would exceed a resource budget, conflict with another setting, or choose a disabled feature.
+
+19
+00:01:48.960 --> 00:01:53.520
+Validation should confirm that configured values are meaningful for the final runtime state.

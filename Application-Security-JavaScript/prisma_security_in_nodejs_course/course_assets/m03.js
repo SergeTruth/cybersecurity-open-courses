@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Schema Design, Models, and Sensitive Fields",
+  "graphicAlt": "Models and constraints support integrity while application permission and small public contracts control sensitive fields.",
+  "narration": "Prisma schema design is not only a developer-experience concern. The schema describes models, relationships, field names, generated client behavior, and migrations. It shapes what the application can query, update, expose, and evolve over time. A model that contains tenantId, role, permission, ownerId, accountStatus, passwordHash, tokenHash, resetToken, emailVerified, isAdmin, deletedAt, createdBy, updatedBy, or audit fields is carrying security meaning, even if those fields look ordinary in the schema file.\n\nSchema constraints can support integrity. Unique indexes, required fields, relations, defaults, and database constraints can prevent some inconsistent states. They do not replace authorization. A relation may show that a record belongs to a user, but application code still has to enforce that the current caller may act on that relationship. A required tenantId may support tenant scoping, but the server still must decide which tenant context is trusted and where it is applied.\n\nAvoid exposing internal model structure directly as public API structure. Generated types can make it tempting to pass large objects into create or update calls because the TypeScript compiler accepts them. That does not mean the caller should be allowed to set every field. Sensitive fields need clear rules for who may read them, write them, filter on them, include them in responses, or change them during migrations. Schema changes should be reviewed as security-relevant when they affect identity, ownership, permissions, tenant boundaries, or sensitive data.",
+  "narrationPoints": [
+    "A model that contains tenantId, role, permission, ownerId, accountStatus, passwordHash, tokenHash, resetToken, emailVerified, isAdmin, deletedAt, createdBy, updatedBy, or audit fields is carrying security meaning, even if those fields look ordinary in the schema file.",
+    "Unique indexes, required fields, relations, defaults, and database constraints can prevent some inconsistent states.",
+    "Schema changes should be reviewed as security-relevant when they affect identity, ownership, permissions, tenant boundaries, or sensitive data.",
+    "Prisma schema design is not only a developer-experience concern.",
+    "Sensitive fields need clear rules for who may read them, write them, filter on them, include them in responses, or change them during migrations.",
+    "The schema describes models, relationships, field names, generated client behavior, and migrations."
+  ]
+};

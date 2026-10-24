@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Socket I/O is not the same as reading or writing a complete object in one call.
+
+2
+00:00:05.640 --> 00:00:11.240
+Reads and writes may complete partially, block, fail, or be interrupted.
+
+3
+00:00:11.340 --> 00:00:16.860
+The program must check the actual number of bytes received or sent and update connection state accordingly.
+
+4
+00:00:17.140 --> 00:00:24.260
+A partial read might be the first bytes of a header, the middle of a payload, or the end of one message plus the beginning of another.
+
+5
+00:00:24.360 --> 00:00:33.160
+A partial write means the program still has unsent data that must be queued, retried according to policy, or abandoned during failure handling.
+
+6
+00:00:33.260 --> 00:00:37.980
+Treating partial I/O as rare creates subtle protocol bugs.
+
+7
+00:00:38.260 --> 00:00:42.420
+Buffers need explicit capacity tracking and clear ownership.
+
+8
+00:00:42.520 --> 00:00:45.320
+Capacity is how much memory is available.
+
+9
+00:00:45.420 --> 00:00:49.660
+Valid data length is how many bytes have actually been received or prepared.
+
+10
+00:00:49.760 --> 00:00:52.800
+Parser position is where the next field begins.
+
+11
+00:00:52.900 --> 00:00:58.580
+These are different facts, and mixing them can lead to incorrect parsing or memory safety mistakes.
+
+12
+00:00:58.860 --> 00:01:11.260
+Binary data received from a socket should not be treated as a C string unless the protocol explicitly defines text, the bytes are valid for that expectation, and termination is handled safely.
+
+13
+00:01:11.360 --> 00:01:17.040
+A network message may contain zeros, partial encodings, or no terminator at all.
+
+14
+00:01:17.140 --> 00:01:21.540
+Create a bounded, validated text representation when text is needed.
+
+15
+00:01:21.820 --> 00:01:27.580
+Nonblocking and event-driven code must preserve parser state across multiple I/O events.
+
+16
+00:01:27.680 --> 00:01:34.560
+The parser may need to remember that it has received a partial header, a pending payload, or unsent output.
+
+17
+00:01:34.660 --> 00:01:41.940
+Safe socket code treats partial I/O as normal behavior and designs state machines that remain clear under repeated events.

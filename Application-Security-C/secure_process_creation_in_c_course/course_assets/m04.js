@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Arguments, Quoting, and Shell Avoidance",
+  "graphicAlt": "Validated argument values remain separate from program identity through launch.",
+  "narration": "Arguments should be treated as structured values. The program name, option names, option values, paths, identifiers, counts, and modes should remain distinct until the process creation API receives them. That makes validation clearer and reduces reliance on fragile string assembly.\n\nAvoid building a single command string through concatenation when the API can accept an argument vector or structured parameter list. Concatenation mixes syntax and data. It also makes it harder to know which characters belong to a value and which characters might be interpreted by another parser.\n\nEach argument should be validated before launch. A numeric argument should satisfy numeric rules. A path argument should satisfy path and resource rules. A mode or enum argument should match an allowed value. Validation should be tied to the argument's meaning, not to a generic string check.\n\nShell quoting rules are difficult to reason about across platforms and contexts. Rules can differ by shell, operating system, locale, escaping conventions, and how the process creation API passes the command onward. If shell interpretation is not required, avoiding it keeps the contract smaller.\n\nWhen shell behavior is genuinely needed, the decision should be explicit and narrowly reviewed. The code should document why direct execution is not enough, which values are allowed, how errors are handled, and how tests cover the intended behavior.\n\nKeep program identity separate from arguments. A path to the executable should not be assembled from untrusted argument fragments, and arguments should not decide which program runs unless program selection is itself a validated feature.",
+  "narrationPoints": [
+    "Avoid building a single command string through concatenation when the API can accept an argument vector or structured parameter list.",
+    "A path argument should satisfy path and resource rules.",
+    "If shell interpretation is not required, avoiding it keeps the contract smaller.",
+    "When shell behavior is genuinely needed, the decision should be explicit and narrowly reviewed.",
+    "A path to the executable should not be assembled from untrusted argument fragments, and arguments should not decide which program runs unless program selection is itself a validated feature."
+  ]
+};

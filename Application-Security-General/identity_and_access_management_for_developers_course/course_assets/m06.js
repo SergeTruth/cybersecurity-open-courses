@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Service and Workload Identity",
+  "narration": "Applications do not only authenticate people. Services, jobs, containers, scripts, devices, and other workloads also need identity. Service accounts, API keys, client credentials, managed identities, certificates, and workload identity mechanisms allow machine-to-machine authentication. The same IAM principles apply: each identity should be attributable, constrained, rotated, monitored, and limited to the access required for its job.\n\nShared long-lived credentials are risky because they are hard to rotate, hard to attribute, and often overprivileged. If several services use the same key, logs may not show which workload actually performed an action. If a key never expires, it can survive long after the original deployment changed. If it is stored in source code, copied into tickets, or exposed through build logs, cleanup becomes painful. Managed identity and workload identity approaches can reduce secret handling by letting the platform issue short-lived credentials to approved workloads.\n\nDevelopers should design service access around least privilege and rotation. API keys and client secrets should be stored in approved secret managers, scoped narrowly, rotated on a schedule and after suspected exposure, and removed when no longer needed. Avoid using human user credentials for automation. Avoid one powerful service account for every integration. Good workload identity design lets teams answer which service did what, when, from where, and with which permission set.",
+  "graphicAlt": "Distinct workload identities use short-lived or managed credentials, narrow permissions and monitored rotation.",
+  "narrationPoints": [
+    "Applications do not only authenticate people.",
+    "Shared long-lived credentials are risky because they are hard to rotate, hard to attribute, and often overprivileged.",
+    "Developers should design service access around least privilege and rotation."
+  ]
+};

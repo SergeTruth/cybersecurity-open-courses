@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Secure IPC in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="secure_ipc_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;:&quot;C&quot;,&quot;q2&quot;:&quot;C&quot;,&quot;q3&quot;:&quot;D&quot;,&quot;q4&quot;:&quot;A&quot;,&quot;q5&quot;:&quot;A&quot;,&quot;q6&quot;:&quot;B&quot;,&quot;q7&quot;:&quot;B&quot;,&quot;q8&quot;:&quot;D&quot;,&quot;q9&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why should IPC be treated as a security boundary?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>IPC endpoints are local, so every process able to reach them belongs to the same trust domain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>The C runtime validates IPC peers and message fields before application code receives any bytes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>IPC can join processes with different users, privileges, services, containers, and trust assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>IPC is a security boundary only when its traffic is routed across the public internet.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why is local IPC not automatically trusted?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>The endpoint name proves peer identity because two local processes cannot use the same IPC namespace.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>Local IPC cannot carry attacker-controlled structured data, so message validation is unnecessary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>A local peer may represent another user, service, container, component, or privilege level.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Only remote sockets require trust decisions; local channels inherit the server process&#x27;s authority.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why do endpoint permissions and ownership matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>Endpoint permissions validate message fields, so an authorized peer can send data without further checks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>Ownership affects only the endpoint&#x27;s display name in diagnostics and not which processes can connect.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>Correct endpoint permissions make lifecycle cleanup unnecessary because the operating system removes all state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>Permissions and ownership help control who may create, access, use, and remove the endpoint.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. What is a safe assumption about endpoint names?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>An endpoint name alone proves neither peer identity nor authorization for a requested operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Reaching a known endpoint name authenticates the client and authorizes every command the service implements.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Peer identity is unrelated to command authorization, so neither check belongs at the IPC boundary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Endpoint names provide the same security guarantee as authenticated credentials issued to each process.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why does byte-stream IPC require explicit message framing?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>A byte-stream receiver needs framing to locate each complete message before validation and dispatch.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Every read from a byte stream returns exactly one complete application message without extra framing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Partial reads occur only on network sockets, so local byte streams preserve message boundaries automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>Framing is necessary only for graphical protocols because command and service messages are self-delimiting.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should length fields and message sizes be validated before allocation or copying?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>The operating system validates every length field before delivery, making application limits redundant.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>Lengths drive allocation and copying, so they must fit policy limits and the bytes actually available.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Length checks belong after dispatch because handlers can safely allocate before examining the complete message.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>A local sender can be trusted to provide valid lengths even when it runs with different privileges.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What does shared memory require for safe use?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>Shared memory needs only a larger region because all participating processes observe related fields atomically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>Shared memory needs access control, a layout contract, synchronization, validation, and lifecycle cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>Shared memory requires no validation; mapping the same bytes guarantees that every process interprets them identically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>Signals alone provide the complete synchronization and ownership protocol for every shared-memory update.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do IPC services need resource limits and timeout behavior?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Resource limits are needed only by public network services because local peers cannot exhaust shared capacity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>A timeout makes cleanup unnecessary because expired IPC objects are always removed by the kernel.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>Once a resource limit is configured, malformed messages become safe to parse and dispatch.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>A peer can consume connections, queues, memory, processing time, or worker capacity without explicit limits.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why should descriptors, handles, secrets, and environment values be controlled during process launch?</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Process launch creates a clean IPC boundary automatically and never preserves the parent&#x27;s open descriptors.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>Inherited access is always intentional because the parent successfully created the child process.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>A child can inherit descriptors, handles, secrets, and environment state unless launch policy restricts them.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>Child processes cannot inherit environment values or handles unless they reopen each resource by name.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. How do tests, logging discipline, static analysis, sanitizers, and review support secure IPC?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>These practices reveal malformed-message handling, cleanup defects, resource abuse, leaks, and unclear trust decisions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>They prove every reachable peer is trusted, allowing endpoint permissions and authorization checks to be removed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>They replace endpoint access control because sanitizers reject unauthorized clients before messages are delivered.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They become useful only after deployment, when production failures provide realistic IPC test cases.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.820
+A dangling pointer is a pointer that still holds an address after the referenced object is no longer valid.
+
+2
+00:00:06.920 --> 00:00:16.360
+The pointer might live in a local variable, structure field, array slot, cache entry, callback context, global state, or object graph.
+
+3
+00:00:16.460 --> 00:00:22.300
+The defect appears when later code treats that stale pointer as though the object still exists.
+
+4
+00:00:22.580 --> 00:00:26.340
+Dangling pointers often remain after freeing through another alias.
+
+5
+00:00:26.440 --> 00:00:30.760
+Aliasing means more than one pointer can refer to the same allocation.
+
+6
+00:00:30.860 --> 00:00:36.620
+If one alias releases the allocation, every other alias that still points to that storage becomes stale.
+
+7
+00:00:36.720 --> 00:00:40.720
+Setting the releasing variable to null does not update the other aliases.
+
+8
+00:00:41.000 --> 00:00:51.320
+Pointers stored in structures, arrays, caches, callback contexts, and global state are especially important because they can outlive the code path that created them.
+
+9
+00:00:51.420 --> 00:00:55.100
+A temporary-looking pointer may become long-lived once it is stored.
+
+10
+00:00:55.200 --> 00:01:01.360
+Reviewers should ask not only where a pointer is created, but where it is retained.
+
+11
+00:01:01.640 --> 00:01:07.800
+Returning or storing references without understanding lifetime creates stale-reference risk.
+
+12
+00:01:07.900 --> 00:01:13.020
+A function might return a borrowed pointer into an object that the caller later destroys.
+
+13
+00:01:13.120 --> 00:01:17.120
+A callback might keep a pointer to state that belongs to a request object.
+
+14
+00:01:17.220 --> 00:01:21.940
+A cleanup routine might run while a queued operation still refers to the same memory.
+
+15
+00:01:22.220 --> 00:01:27.900
+Setting one pointer to null after release can help prevent accidental reuse through that one variable.
+
+16
+00:01:28.000 --> 00:01:30.800
+It is not a complete alias-management strategy.
+
+17
+00:01:30.900 --> 00:01:38.180
+Other variables, structure fields, containers, callbacks, or cached pointers may still hold the old address.
+
+18
+00:01:38.280 --> 00:01:43.480
+The deeper practice is knowing who else can reach the allocation before releasing it.
+
+19
+00:01:43.760 --> 00:01:49.520
+Developers should identify all reachable references before releasing shared or referenced memory.
+
+20
+00:01:49.620 --> 00:02:00.820
+If several components can see an object, the design needs a clear owner, a borrowing rule, a release point, and a way to prevent later users from treating stale references as valid.

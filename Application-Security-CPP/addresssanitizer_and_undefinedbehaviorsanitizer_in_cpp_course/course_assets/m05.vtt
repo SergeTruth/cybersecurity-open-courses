@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Sanitizer reports are most useful when read methodically.
+
+2
+00:00:05.000 --> 00:00:08.120
+Start with the reported error type.
+
+3
+00:00:08.220 --> 00:00:15.980
+Is the tool describing an out-of-bounds access, a use-after-free, an invalid shift, a null-related issue, or another category?
+
+4
+00:00:16.080 --> 00:00:20.960
+The category tells you which kind of assumption failed and which parts of the code deserve immediate attention.
+
+5
+00:00:21.240 --> 00:00:25.320
+Next, study the stack trace and source locations.
+
+6
+00:00:25.420 --> 00:00:32.380
+The top frame may show where the invalid access or undefined operation became visible, but it is not always the design root cause.
+
+7
+00:00:32.480 --> 00:00:41.040
+Look for allocation sites, deallocation sites, object lifetime clues, thread context where available, and the path that led to the failing operation.
+
+8
+00:00:41.140 --> 00:00:46.980
+For ASan, the relationship between access, allocation, and release often tells the story.
+
+9
+00:00:47.080 --> 00:00:53.480
+For UBSan, the interesting question is usually which value, type, or precondition made the operation invalid.
+
+10
+00:00:53.760 --> 00:00:56.000
+Read reports calmly before patching.
+
+11
+00:00:56.100 --> 00:01:00.820
+A quick local change may hide the symptom while leaving the unsafe design in place.
+
+12
+00:01:00.920 --> 00:01:04.920
+If an index is out of range, ask where the size should have been validated.
+
+13
+00:01:05.020 --> 00:01:10.700
+If a pointer is stale, ask who owned the object and why borrowed access survived too long.
+
+14
+00:01:10.800 --> 00:01:16.640
+If a numeric operation is undefined, ask whether the type choice or range contract is wrong.
+
+15
+00:01:16.920 --> 00:01:24.680
+Good triage connects the report to ownership, bounds, initialization, numeric assumptions, and API contracts.
+
+16
+00:01:24.780 --> 00:01:33.500
+Capture enough information for another engineer to reproduce the issue, then fix the root cause rather than treating the sanitizer output as a one-line complaint.
+
+17
+00:01:33.780 --> 00:01:37.220
+When a report is difficult to interpret, reduce the problem carefully.
+
+18
+00:01:37.320 --> 00:01:41.880
+Reproduce it with the same build, input, and environment first.
+
+19
+00:01:41.980 --> 00:01:49.740
+Then identify which stack frames are project code, which are dependency code, and which are sanitizer runtime context.
+
+20
+00:01:49.840 --> 00:01:56.240
+This keeps the investigation grounded and avoids blaming a library or the sanitizer before the program's own assumptions have been checked.

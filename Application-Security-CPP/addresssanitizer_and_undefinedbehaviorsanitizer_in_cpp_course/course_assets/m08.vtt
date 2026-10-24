@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Sanitizers are powerful, but safe expectations matter.
+
+2
+00:00:04.280 --> 00:00:09.080
+They add runtime overhead, memory overhead, and sometimes build complexity.
+
+3
+00:00:09.180 --> 00:00:14.060
+They can change timing, allocation behavior, and performance characteristics.
+
+4
+00:00:14.160 --> 00:00:23.200
+That is normal for instrumented development and test builds, but it means sanitizer results should be interpreted in context rather than treated like production performance data.
+
+5
+00:00:23.480 --> 00:00:25.320
+Coverage is another limitation.
+
+6
+00:00:25.420 --> 00:00:32.220
+Sanitizers generally report problems in paths that actually execute under the instrumented build.
+
+7
+00:00:32.320 --> 00:00:40.960
+If tests never reach a parser branch, error path, platform-specific implementation, or shutdown sequence, a defect there may remain hidden.
+
+8
+00:00:41.060 --> 00:00:50.420
+This is why sanitizer use should be paired with thoughtful test design, boundary tests, integration coverage, and review of code that tests do not fully exercise.
+
+9
+00:00:50.700 --> 00:00:55.980
+Platform, compiler, dependency, and build-mode support can vary.
+
+10
+00:00:56.080 --> 00:00:59.840
+Some third-party libraries may not be sanitizer-clean.
+
+11
+00:00:59.940 --> 00:01:06.740
+Custom allocators, low-level runtime code, and mixed toolchains can require careful integration.
+
+12
+00:01:06.840 --> 00:01:14.360
+Suppressions may be necessary for known external issues, but they should be narrow, documented, reviewed, and revisited.
+
+13
+00:01:14.460 --> 00:01:20.460
+A broad suppression that hides real project defects weakens the trustworthiness of the workflow.
+
+14
+00:01:20.740 --> 00:01:24.820
+Most importantly, sanitizers complement secure design.
+
+15
+00:01:24.920 --> 00:01:35.480
+They do not replace ownership clarity, RAII, containers and views, initialization discipline, bounds-aware APIs, static analysis, or code review.
+
+16
+00:01:35.580 --> 00:01:45.100
+A clean sanitizer run should encourage confidence in the tested behavior, while still leaving room for engineering judgment about untested paths and design risk.
+
+17
+00:01:45.380 --> 00:01:48.900
+Set expectations with stakeholders as well as developers.
+
+18
+00:01:49.000 --> 00:01:55.880
+Sanitizer work may temporarily slow builds or expose long-standing defects that were not visible before.
+
+19
+00:01:55.980 --> 00:01:57.980
+That is not a failure of the tooling.
+
+20
+00:01:58.080 --> 00:02:00.400
+It is useful information about risk.
+
+21
+00:02:00.500 --> 00:02:08.980
+The team should decide how to prioritize findings based on severity, reachability, ownership, and the importance of the affected component.

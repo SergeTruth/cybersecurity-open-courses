@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+A Bash script should invoke SCP and rsync in a way that is easy to review.
+
+2
+00:00:06.520 --> 00:00:17.320
+The executable, stable options, source, destination, identity, host, port, and mode should appear as clear pieces of the invocation.
+
+3
+00:00:17.420 --> 00:00:21.500
+That is safer than one large command string assembled from variable data.
+
+4
+00:00:21.780 --> 00:00:23.780
+Arrays help preserve structure.
+
+5
+00:00:23.880 --> 00:00:35.800
+A script can keep options and operands as separate values, add supported optional arguments deliberately, and pass the final list without asking Bash to reinterpret generated shell text.
+
+6
+00:00:35.900 --> 00:00:41.500
+This is especially useful for rsync, where option sets can grow as workflows mature.
+
+7
+00:00:41.780 --> 00:00:44.660
+Quoting protects values that should remain literal.
+
+8
+00:00:44.760 --> 00:00:56.120
+Local paths, remote paths, user names, host names, ports, and option values should not accidentally split into multiple words or become shell syntax.
+
+9
+00:00:56.220 --> 00:01:01.580
+Quoting does not decide whether a value is allowed, but it preserves accepted values during invocation.
+
+10
+00:01:01.860 --> 00:01:04.660
+Validation decides what the workflow supports.
+
+11
+00:01:04.760 --> 00:01:13.480
+Hosts, users, ports, source paths, destination paths, and relevant option values should be checked before execution.
+
+12
+00:01:13.580 --> 00:01:21.100
+A target label can map to a known host and base directory instead of allowing free-form remote destinations.
+
+13
+00:01:21.380 --> 00:01:25.220
+Avoid generated command strings and unnecessary re-parsing.
+
+14
+00:01:25.320 --> 00:01:31.800
+When a script stores a full transfer command in a string, reviewers must reason about another shell interpretation step.
+
+15
+00:01:31.900 --> 00:01:36.140
+That makes scope, quoting, and safety harder to inspect.
+
+16
+00:01:36.240 --> 00:01:40.880
+Fixed structure with separate arguments is easier to test and maintain.
+
+17
+00:01:41.160 --> 00:01:47.720
+The review question is simple: can another engineer see exactly what data might move and where it might land?
+
+18
+00:01:47.820 --> 00:01:54.620
+If the invocation makes that answer clear, mistakes are easier to catch before transfer automation reaches production.

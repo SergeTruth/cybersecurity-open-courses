@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Terraform helper scripts run with credentials.
+
+2
+00:00:03.240 --> 00:00:16.680
+Those credentials may come from a cloud CLI session, a local profile, a service account, a role assumption workflow, a managed identity, workload identity, a CI/CD runner, or a secret store.
+
+3
+00:00:16.780 --> 00:00:25.100
+Whatever the source, the identity behind the script determines what infrastructure Terraform can read, create, update, or remove.
+
+4
+00:00:25.200 --> 00:00:31.280
+That makes credential design one of the most important parts of Terraform automation security.
+
+5
+00:00:31.560 --> 00:00:37.320
+Least privilege should be based on action, environment, service, and repository.
+
+6
+00:00:37.420 --> 00:00:42.940
+A formatting or validation workflow should not need the same authority as a production apply.
+
+7
+00:00:43.040 --> 00:00:48.720
+A plan workflow may need enough read access to evaluate current state, but it may not need broad administrative rights.
+
+8
+00:00:48.820 --> 00:00:54.980
+An import or emergency recovery workflow may require a separate path with additional review.
+
+9
+00:00:55.080 --> 00:00:59.960
+Separating these identities helps contain mistakes and makes access review more meaningful.
+
+10
+00:01:00.240 --> 00:01:07.520
+Approved runtime credential delivery is safer than hard-coded secrets, shared keys, or broad local profiles.
+
+11
+00:01:07.620 --> 00:01:18.980
+In CI/CD, prefer platform-supported secret scoping, short-lived credentials, workload identity, or managed identity where those mechanisms fit the environment.
+
+12
+00:01:19.080 --> 00:01:25.000
+Locally, make credentials explicit enough that a script can confirm the intended account and role before taking action.
+
+13
+00:01:25.100 --> 00:01:33.980
+In all cases, logs should avoid raw secrets, tokens, private keys, sensitive environment values, and provider credential details.
+
+14
+00:01:34.260 --> 00:01:41.140
+Broad administrator credentials may make helper scripts easy to run, but they make errors and compromise harder to contain.
+
+15
+00:01:41.240 --> 00:01:48.680
+Terraform automation identities need ownership, purpose, rotation, revocation, and periodic review.
+
+16
+00:01:48.780 --> 00:01:55.820
+Teams should know which scripts use which identities, what each identity can do, who owns it, and how to disable it quickly.
+
+17
+00:01:55.920 --> 00:02:01.600
+Secure helper scripts reduce both accidental blast radius and operational uncertainty.

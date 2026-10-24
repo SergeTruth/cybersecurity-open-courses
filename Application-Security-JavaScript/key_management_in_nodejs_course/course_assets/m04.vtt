@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+Key strength begins with generation.
+
+2
+00:00:03.720 --> 00:00:09.400
+Cryptographic keys need sufficient entropy and should be created with cryptographically secure mechanisms.
+
+3
+00:00:09.500 --> 00:00:21.340
+Do not use Math.random, timestamps, counters, usernames, UUIDs, predictable seeds, short strings, or human-created phrases as raw cryptographic keys.
+
+4
+00:00:21.440 --> 00:00:27.200
+A value can look random to a human and still be guessable or unsuitable for the algorithm.
+
+5
+00:00:27.480 --> 00:00:37.800
+In Node.js, key material should come from appropriate crypto APIs or from an approved key-management service that generates keys for the intended purpose.
+
+6
+00:00:37.900 --> 00:00:42.540
+The required size and format depend on the algorithm and use case.
+
+7
+00:00:42.640 --> 00:00:52.080
+A key for symmetric encryption, an HMAC key, a signing key pair, and a key-encryption key do not all share one universal format or lifecycle.
+
+8
+00:00:52.360 --> 00:01:00.520
+Passwords and passphrases are not raw keys unless they are processed through an appropriate key-derivation function with reviewed parameters.
+
+9
+00:01:00.620 --> 00:01:06.700
+A phrase typed into an environment variable may be memorable, but memorability is not the same as entropy.
+
+10
+00:01:06.800 --> 00:01:16.560
+If a human-created secret must be used as input, the design should clearly define the derivation function, salt, work factor, storage, and rotation approach.
+
+11
+00:01:16.840 --> 00:01:24.360
+Generation should be repeatable as a secure process, not as a one-off command copied from a terminal history or chat transcript.
+
+12
+00:01:24.460 --> 00:01:36.860
+The process should define who generates the key, where generation happens, how the value is encoded, where it is stored, how it is delivered to runtime, and how production keys stay out of tests and local development.
+
+13
+00:01:36.960 --> 00:01:40.720
+Correct generation starts the lifecycle; it does not finish it.

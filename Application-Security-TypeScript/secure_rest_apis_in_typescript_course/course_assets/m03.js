@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Input Validation and Request Contracts",
+  "graphicAlt": "Allowlisted fields, formats, size limits and normalization produce known meanings or safe rejection.",
+  "narration": "Input validation is one of the most important security boundaries in a REST API. Every request body, query string, path value, header, and content type should be treated as untrusted until the application has checked it. TypeScript can describe what the application wants, but runtime validation confirms what the caller actually sent.\n\nA request contract should be specific. Prefer allowlisted schemas with required fields, accepted formats, bounded sizes, permitted enum values, and clear handling for optional data. Validation should reject unexpected structures rather than quietly accepting unknown fields that later code may interpret differently. This makes route behavior easier to reason about and easier to test.\n\nValidation should happen close to the API boundary, before business logic and before authorization decisions that depend on request data. If a route uses a path value as a resource identifier, or a body value as a requested action, the application should parse and normalize that value first. Authorization checks should operate on the same meaning the business logic will use.\n\nSafe rejection is part of the contract. Malformed input should receive consistent, helpful, non-sensitive error responses. Logging should support investigation without storing secrets or full sensitive payloads. A well-designed validation layer turns unpredictable client input into a small set of known shapes that the rest of the TypeScript application can handle confidently.\n\nValidation rules should be maintained with the API, not scattered as informal assumptions. When schemas, OpenAPI descriptions, tests, and TypeScript types agree, client teams and server teams have a shared contract. When they drift, rejected requests and hidden exposure become more likely.",
+  "narrationPoints": [
+    "Input validation is one of the most important security boundaries in a REST API.",
+    "A request contract should be specific.",
+    "Validation should happen close to the API boundary, before business logic and before authorization decisions that depend on request data.",
+    "Safe rejection is part of the contract.",
+    "Validation rules should be maintained with the API, not scattered as informal assumptions."
+  ]
+};

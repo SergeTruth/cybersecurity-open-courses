@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Thread-safety documentation has to be precise.
+
+2
+00:00:03.480 --> 00:00:15.080
+Saying a library is thread-safe is too vague unless the contract explains which operations may run concurrently, which objects are protected, which state is shared, and which responsibilities belong to the caller.
+
+3
+00:00:15.180 --> 00:00:21.660
+Different objects may have different rules, and read-only operations may not be safe if they touch lazy global state.
+
+4
+00:00:21.760 --> 00:00:26.000
+Consumers need language they can translate into their own locking rules.
+
+5
+00:00:26.280 --> 00:00:29.480
+Hidden shared mutable state is a common source of surprise.
+
+6
+00:00:29.580 --> 00:00:39.100
+Caches, registries, global configuration, static initialization, background workers, and singleton-like helpers should be designed and documented carefully.
+
+7
+00:00:39.200 --> 00:00:46.400
+If shared state is required, the locking strategy and shutdown behavior should be part of the library design rather than an implementation accident.
+
+8
+00:00:46.680 --> 00:00:48.760
+Callbacks need special care.
+
+9
+00:00:48.860 --> 00:00:57.100
+Calling user code while holding internal locks can create deadlocks, reentrancy surprises, and unpredictable state transitions.
+
+10
+00:00:57.200 --> 00:01:07.920
+The library should document whether callbacks can be invoked concurrently, whether they may call back into the library, which thread owns the call, and what lifetime guarantees apply to callback data.
+
+11
+00:01:08.020 --> 00:01:12.340
+If callbacks are deferred, queueing and cancellation rules should be clear.
+
+12
+00:01:12.620 --> 00:01:15.020
+Concurrency contracts should be tested.
+
+13
+00:01:15.120 --> 00:01:27.200
+Unit tests, stress tests, sanitizer-supported builds, and targeted integration scenarios can exercise concurrent reads, writes, cancellation, shutdown, and repeated initialization.
+
+14
+00:01:27.300 --> 00:01:34.180
+Secure libraries make concurrency guarantees explicit so consumers do not have to infer them from private code paths.
+
+15
+00:01:34.280 --> 00:01:39.960
+Release notes should call out changes to locking, callbacks, and background workers.
+
+16
+00:01:40.060 --> 00:01:46.220
+If guarantees change, consumers need enough warning to update their own synchronization assumptions.
+
+17
+00:01:46.320 --> 00:01:55.040
+The library should also document whether objects are safe to move, share, or destroy while work is active or callbacks are pending under load and during shutdown.

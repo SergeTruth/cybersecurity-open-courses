@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.140
+Reallocation and resizing deserve special attention because they combine lifetime, ownership, capacity, and pointer validity.
+
+2
+00:00:09.240 --> 00:00:13.960
+A buffer may begin as one allocation and later grow or shrink.
+
+3
+00:00:14.060 --> 00:00:25.100
+If code keeps interior pointers, cached base pointers, or borrowed views into that storage, resizing can invalidate assumptions that were true a moment earlier.
+
+4
+00:00:25.380 --> 00:00:28.100
+The realloc function may move an allocation.
+
+5
+00:00:28.200 --> 00:00:33.240
+When it moves, older references to the previous storage are no longer valid.
+
+6
+00:00:33.340 --> 00:00:39.500
+That includes aliases to the base pointer and pointers into the middle of the old buffer.
+
+7
+00:00:39.600 --> 00:00:44.480
+Code that resizes a buffer should review who else can still reach the old storage.
+
+8
+00:00:44.760 --> 00:00:49.080
+Assigning realloc directly to the original pointer can lose the allocation on failure.
+
+9
+00:00:49.180 --> 00:00:54.860
+If the resize fails, the original allocation remains valid and still owned by the caller.
+
+10
+00:00:54.960 --> 00:01:01.840
+A temporary pointer pattern preserves the original pointer until the new allocation is known to have succeeded.
+
+11
+00:01:02.120 --> 00:01:07.480
+Capacity and count must be updated only when the resize operation succeeds.
+
+12
+00:01:07.580 --> 00:01:12.700
+If a grow operation fails, the buffer should still describe the old valid allocation.
+
+13
+00:01:12.800 --> 00:01:21.200
+Updating metadata too early can leave the object claiming capacity it does not have, or losing track of data it still owns.
+
+14
+00:01:21.480 --> 00:01:26.280
+Other aliases into the old allocation must be considered after resizing.
+
+15
+00:01:26.380 --> 00:01:35.900
+If a structure stores both a base pointer and a cursor pointer into the same buffer, a successful move requires updating dependent pointers or recomputing them from offsets.
+
+16
+00:01:36.000 --> 00:01:40.400
+Storing offsets instead of interior pointers can sometimes make resizing safer.
+
+17
+00:01:40.680 --> 00:01:47.320
+Resize logic should keep the object in a valid state whether the operation succeeds or fails.
+
+18
+00:01:47.420 --> 00:01:54.460
+The caller should know whether the buffer changed, whether old data remains available, and whether any borrowed views must be considered invalid.
+
+19
+00:01:54.560 --> 00:01:59.920
+A clear resize contract prevents lifetime confusion from spreading beyond the resize function.

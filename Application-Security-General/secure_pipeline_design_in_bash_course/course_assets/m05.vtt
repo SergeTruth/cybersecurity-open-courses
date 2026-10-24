@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.260
+Pipelines often include variable values: file paths, search terms, service names, environment labels, report names, branch names, and patterns.
+
+2
+00:00:10.360 --> 00:00:13.560
+Those values should be treated as data first.
+
+3
+00:00:13.660 --> 00:00:20.140
+If a value is meant to be literal, it should not accidentally become shell syntax, a glob pattern, or multiple arguments.
+
+4
+00:00:20.420 --> 00:00:22.980
+Quoting helps preserve argument boundaries.
+
+5
+00:00:23.080 --> 00:00:25.800
+A path with spaces should remain one path.
+
+6
+00:00:25.900 --> 00:00:28.140
+A branch name should remain data.
+
+7
+00:00:28.240 --> 00:00:33.280
+A report name should not become a pattern unless the script intentionally supports pattern behavior.
+
+8
+00:00:33.380 --> 00:00:37.860
+When values enter pipeline commands, the script should make their role clear.
+
+9
+00:00:38.140 --> 00:00:41.660
+Validation decides which values the pipeline supports.
+
+10
+00:00:41.760 --> 00:00:47.440
+Paths, names, filter values, and modes should be checked before they influence command behavior.
+
+11
+00:00:47.540 --> 00:00:52.820
+If a pipeline supports a limited set of filters or report types, allowlist those options.
+
+12
+00:00:52.920 --> 00:00:56.920
+If a value is unsupported, reject it before the pipeline runs.
+
+13
+00:00:57.200 --> 00:01:00.400
+Avoid building command strings from uncontrolled input.
+
+14
+00:01:00.500 --> 00:01:06.260
+If the pipeline needs optional arguments, build them as structured arguments where possible.
+
+15
+00:01:06.360 --> 00:01:12.680
+If the pipeline needs a filter value, define the safe form of that value and pass it as data.
+
+16
+00:01:12.780 --> 00:01:17.420
+This keeps pipeline behavior reviewable and reduces accidental interpretation.
+
+17
+00:01:17.700 --> 00:01:22.180
+Filenames and metadata deserve the same care as direct user input.
+
+18
+00:01:22.280 --> 00:01:29.880
+They may come from tools, repositories, storage systems, or CI/CD platforms, but they can still be unexpected.
+
+19
+00:01:29.980 --> 00:01:35.020
+A secure pipeline treats those values as data crossing a boundary before they shape execution.

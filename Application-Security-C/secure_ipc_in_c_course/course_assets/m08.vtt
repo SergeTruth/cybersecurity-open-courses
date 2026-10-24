@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+IPC can accidentally expose more than the intended request or response.
+
+2
+00:00:05.400 --> 00:00:15.560
+Messages may contain secrets, tokens, file paths, descriptors, handles, configuration values, internal identifiers, or state snapshots.
+
+3
+00:00:15.660 --> 00:00:21.100
+Even when the channel is local, that data should be protected according to the trust level of the peers.
+
+4
+00:00:21.380 --> 00:00:28.820
+Child processes may inherit descriptors, handles, environment values, or other process state unless launch behavior is controlled.
+
+5
+00:00:28.920 --> 00:00:35.800
+A helper process that only needs one pipe may receive access to other IPC channels if the parent does not manage inheritance.
+
+6
+00:00:35.900 --> 00:00:39.020
+That can make the boundary between processes less clear.
+
+7
+00:00:39.300 --> 00:00:41.940
+Sensitive messages should be minimized.
+
+8
+00:00:42.040 --> 00:00:48.600
+If a peer only needs a reference or status value, avoid sending large internal structures or secrets.
+
+9
+00:00:48.700 --> 00:00:54.380
+Logs and diagnostics should avoid dumping IPC payloads or internal authorization details.
+
+10
+00:00:54.480 --> 00:01:01.120
+Good troubleshooting output identifies the failed operation without exposing the data that the IPC channel was meant to protect.
+
+11
+00:01:01.400 --> 00:01:08.360
+Passing handles or descriptors requires clear ownership, lifetime, and permission expectations.
+
+12
+00:01:08.460 --> 00:01:09.820
+Who may use the handle?
+
+13
+00:01:09.920 --> 00:01:11.040
+Who closes it?
+
+14
+00:01:11.140 --> 00:01:14.900
+Does receiving it imply authorization for the underlying object?
+
+15
+00:01:15.000 --> 00:01:16.680
+Can it outlive the request?
+
+16
+00:01:16.780 --> 00:01:19.820
+These questions should be part of the protocol design.
+
+17
+00:01:20.100 --> 00:01:27.300
+Descriptor and handle hygiene should be reviewed wherever processes are launched, privileges change, or helpers are invoked.
+
+18
+00:01:27.400 --> 00:01:35.560
+The review should confirm what is inherited, what is closed, what is intentionally passed, and how sensitive values are kept out of places that do not need them.

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Symbolic-link-safe file handling should be reviewed as a contract.
+
+2
+00:00:04.520 --> 00:00:16.840
+Reviewers should identify where each path comes from, whether the directory is trusted, who can change entries there, whether the operation is based on a path or an opened object, and whether link-following behavior is intentional.
+
+3
+00:00:17.120 --> 00:00:23.360
+Tests should cover cleanup, replacement, traversal, and permission-sensitive behavior.
+
+4
+00:00:23.460 --> 00:00:34.260
+Include trusted and untrusted directories where practical, expected links, unexpected links, missing files, replaced files, partial operations, and failure paths.
+
+5
+00:00:34.360 --> 00:00:38.760
+Tests should verify the policy the program claims to implement.
+
+6
+00:00:39.040 --> 00:00:41.920
+Permission tests reveal deployment assumptions.
+
+7
+00:00:42.020 --> 00:00:48.740
+A tool may behave differently under a developer account, service account, scheduled job, container, or package hook.
+
+8
+00:00:48.840 --> 00:00:53.640
+The test plan should reflect the accounts and directories the program will actually use.
+
+9
+00:00:53.920 --> 00:01:04.480
+Static analysis and compiler warnings can help identify unchecked return values, risky file patterns, ignored errors, and cleanup paths that skip validation.
+
+10
+00:01:04.580 --> 00:01:08.900
+Sanitizers can support memory behavior during parser and path-handling tests.
+
+11
+00:01:09.000 --> 00:01:15.160
+Operational checks can reveal leftover files, unexpected directories, or permission drift.
+
+12
+00:01:15.440 --> 00:01:17.600
+Tools are support, not the contract.
+
+13
+00:01:17.700 --> 00:01:32.340
+The durable control is explicit design: trusted roots, clear directory policy, descriptor-first workflows where appropriate, permissions that match the operation, and tests that exercise both success and failure paths.

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Signal Handling Security in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="signal_handling_security_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;D&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;C&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;A&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;B&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why are signals security-relevant in C programs?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Receiving a signal makes cleanup unnecessary because the operating system releases every application resource.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Signals matter only to graphical programs that translate user interface events into callbacks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Signals interrupt normal control flow and can affect cleanup, shared state, and shutdown.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>A delivered signal guarantees that every interrupted operation restarts with its original state intact.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. What is the safest general design for a signal handler?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Perform logging, deallocation, shutdown, and policy decisions directly in the handler before returning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Allocate a detailed event object inside the handler so normal code receives complete diagnostic context.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Keep handlers minimal, use only async-signal-safe operations, and defer complex work.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Use handlers as the program&#x27;s general error-processing mechanism because they can interrupt any failure.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why is reentrancy important in signal handlers?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Reentrancy means every ordinary library function can be called safely from an asynchronous handler.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>A handler can interrupt code using shared state or library internals, risking unsafe reentry.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Reentrant handlers remove the need for signal masks around shared-state transitions and setup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Reentrancy proves that application state is immutable whenever a signal can be delivered.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is calling ordinary logging or allocation code from a signal handler risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Logging and allocation are disabled after startup, so a handler call always fails before changing state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Those operations are reserved for child processes and cannot be invoked by a signal handler.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Ordinary logging and allocation ignore signal masks, which makes their handler execution atomic.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Logging and allocation may use locks or internal state that the interrupted code already owns.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What is a signal mask used for?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>A signal mask converts each delivered signal into a formatted diagnostic message automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>A signal mask makes arbitrary shared data thread-safe without a lock or ownership protocol.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>A signal mask restricts handler execution to process exit and has no effect during setup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>A signal mask blocks selected signals during a sensitive setup, state changes or shutdown.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should cleanup usually not happen directly inside a signal handler?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Cleanup usually needs complex operations that are unsafe in asynchronous handler context.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Cleanup is unnecessary after signal delivery because termination releases every external and persistent resource.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>The compiler inserts complete signal cleanup paths whenever a handler changes a global shutdown flag.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Cleanup should run before initialization, leaving handlers free to release resources without checking state.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What is the purpose of a simple shutdown flag?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>A simple flag lets the handler request shutdown while normal code performs cleanup safely.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>A shutdown flag authorizes the handler to perform allocation, logging, and complete resource cleanup immediately.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Setting a shutdown flag prevents every future signal from being delivered to any process thread.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>A shutdown flag replaces checks for interrupted calls and removes the need to restore signal masks.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why does signal handling become more complex in multithreaded programs?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Creating threads prevents asynchronous signals from being delivered until every worker has exited.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>All threads automatically inherit and retain one identical signal policy throughout the process lifetime.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Per-thread masks, delivery routing, shared state, and locks create additional interactions in multithreaded programs.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>A handler may acquire any application lock safely when the interrupted program contains multiple threads.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What should child-process signal handling avoid?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Avoid tracking child status at all because the operating system always reaps exited children automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Avoid heavy child-lifecycle work in the handler; coordinate status handling with safe mainline logic.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Avoid waits in normal code and perform every blocking child-status operation inside the signal handler.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Avoid documenting child lifecycle policy because signal delivery order fully determines cleanup behavior.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should crash diagnostics avoid exposing sensitive state?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Crash logs and dumps can leak secrets or operational details to people who should not receive them.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Crash diagnostics have no value in C programs, so secure applications should disable every failure record.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Crash paths always execute with cleared memory, making complete dumps safe to distribute broadly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Sensitive values are removed automatically from logs and dumps when termination begins with a signal.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What should tests for signal handling include?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Test source formatting only because runtime signal timing cannot reveal actionable lifecycle defects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Test only executions with no delivered signals; handler behavior is guaranteed by successful installation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Review handler comments manually instead of exercising interrupted operations and cleanup paths.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Test shutdown, interruption, cleanup, child lifecycle, and the expected signal-mask policy where practical.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Secure handling places the program&#x27;s most complex logging, cleanup, and policy code inside each handler.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Secure handling combines minimal handlers, async-signal safety, explicit masks, safe coordination, and tested lifecycle behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Signal masks eliminate the need to review shared state, thread routing, cleanup, or interrupted operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Crash handlers should execute the ordinary shutdown path directly before normal control flow resumes.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

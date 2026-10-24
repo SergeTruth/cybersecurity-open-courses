@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Testing and Reviewing IAM Controls",
+  "narration": "IAM testing needs both positive and negative cases. Positive tests confirm that authorized users can complete intended workflows. Negative tests confirm that users cannot perform actions they should not be allowed to perform. Negative authorization tests are often where serious issues appear: a user changes an object ID, switches tenant context, calls an admin route directly, reuses an old token, or attempts an action after their role was removed. Testing only the happy path leaves access control largely unproven.\n\nPrivilege boundary tests should cover roles, groups, tenants, object ownership, service accounts, and administrative functions. Token handling tests should cover expiration, audience, issuer, signature validation, refresh behavior, logout, revocation, and token storage assumptions. Account lifecycle tests should cover user creation, disablement, deletion, recovery, role changes, group synchronization, and deprovisioning. These cases help prove that identity state changes actually affect application behavior.\n\nCode review and threat modeling make IAM controls stronger. Reviewers should ask where authentication is established, where authorization is enforced, which claims are trusted, how tokens are validated, how service credentials are stored, and what audit records are produced. Threat modeling IAM flows helps teams reason about account recovery abuse, privilege escalation, tenant isolation, token leakage, stale permissions, and overprivileged automation. Logging and monitoring should help answer who did what, when, where, and against which resource.",
+  "graphicAlt": "Allowed and denied cases, token validation and lifecycle changes are tested against audit evidence.",
+  "narrationPoints": [
+    "IAM testing needs both positive and negative cases.",
+    "Privilege boundary tests should cover roles, groups, tenants, object ownership, service accounts, and administrative functions.",
+    "Code review and threat modeling make IAM controls stronger."
+  ]
+};

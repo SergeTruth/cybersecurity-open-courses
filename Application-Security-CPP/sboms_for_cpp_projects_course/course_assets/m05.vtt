@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+SBOM generation belongs close to the build and release process.
+
+2
+00:00:04.680 --> 00:00:24.280
+For C++ systems, that may involve CMake-style builds, package managers, vendored dependencies, generated code, toolchain versions, static linking, shared library packaging, debug and release variants, platform-specific builds, installers, archives, and container or package outputs.
+
+3
+00:00:24.380 --> 00:00:30.060
+The closer generation is to the artifact, the easier it is to describe what actually ships.
+
+4
+00:00:30.160 --> 00:00:34.160
+That placement also makes SBOM changes visible in normal release review.
+
+5
+00:00:34.440 --> 00:00:39.560
+A source repository SBOM and a release artifact SBOM can be different.
+
+6
+00:00:39.660 --> 00:00:46.060
+The repository may include tests, examples, scripts, optional features, and development tools.
+
+7
+00:00:46.160 --> 00:00:57.760
+The release package may include runtime libraries, plugins, documentation, third-party binaries, platform packages, or generated files that are not obvious from source metadata.
+
+8
+00:00:57.860 --> 00:01:02.180
+Neither scope is automatically wrong, but each must be named clearly.
+
+9
+00:01:02.280 --> 00:01:06.760
+Teams may maintain more than one SBOM when different audiences need different answers.
+
+10
+00:01:06.860 --> 00:01:09.900
+Naming the artifact prevents confusion during response work.
+
+11
+00:01:10.180 --> 00:01:16.260
+Static linking and native packaging can reduce visibility if the SBOM only lists standalone files.
+
+12
+00:01:16.360 --> 00:01:25.080
+A final binary may contain code from several libraries, while a shared-library package may expose runtime dependencies that are not part of the source tree.
+
+13
+00:01:25.180 --> 00:01:32.220
+Debug and release builds may also differ because logging, assertions, optimization, symbols, and optional components can change.
+
+14
+00:01:32.320 --> 00:01:36.000
+Platform-specific installers can add another layer of variation.
+
+15
+00:01:36.280 --> 00:01:40.520
+Release discipline should attach the SBOM to a specific versioned output.
+
+16
+00:01:40.620 --> 00:01:49.500
+Store the SBOM with the release record, identify the artifact it describes, retain the tool version or generation method, and regenerate when the artifact changes.
+
+17
+00:01:49.600 --> 00:01:57.840
+This helps teams answer later questions about what was shipped, which components were present, and what update or license obligations applied to that release.
+
+18
+00:01:57.940 --> 00:02:05.460
+It also supports rollback analysis when teams need to compare releases and explain what changed to stakeholders during response work.

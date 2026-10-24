@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.220
+Framing is the parser's first structural job.
+
+2
+00:00:03.320 --> 00:00:08.840
+A stream protocol does not necessarily deliver complete application messages in one read.
+
+3
+00:00:08.940 --> 00:00:15.580
+The parser must know how to identify the start and end of each message before it can safely interpret the contents.
+
+4
+00:00:15.860 --> 00:00:20.500
+Datagram protocols preserve message boundaries, but that does not remove validation.
+
+5
+00:00:20.600 --> 00:00:26.680
+A datagram still has a size, source context, message type, version, and payload.
+
+6
+00:00:26.780 --> 00:00:34.460
+The receiver still needs to decide whether the datagram is long enough, short enough, supported, and valid for the current state.
+
+7
+00:00:34.740 --> 00:00:42.180
+Delimiters, length prefixes, fixed headers, and payload boundaries should be validated before deeper parsing.
+
+8
+00:00:42.280 --> 00:00:44.920
+A delimiter must be found within a reasonable limit.
+
+9
+00:00:45.020 --> 00:00:49.500
+A length prefix must fit the available input and configured maximums.
+
+10
+00:00:49.600 --> 00:00:52.960
+A fixed header must be complete before its fields are used.
+
+11
+00:00:53.240 --> 00:00:57.400
+A complete header does not automatically mean the complete message is available.
+
+12
+00:00:57.500 --> 00:01:03.100
+The header may declare a payload that has not arrived yet, or it may declare a size outside policy.
+
+13
+00:01:03.200 --> 00:01:09.440
+The parser should treat the header as a claim that still needs to be checked against actual bytes and limits.
+
+14
+00:01:09.720 --> 00:01:15.800
+The parser should identify a complete message before dispatching commands or modifying application state.
+
+15
+00:01:15.900 --> 00:01:20.300
+That ordering prevents partial messages from becoming partial actions.
+
+16
+00:01:20.400 --> 00:01:27.680
+It also keeps protocol behavior predictable when data arrives in pieces, batches, or unusual boundaries.

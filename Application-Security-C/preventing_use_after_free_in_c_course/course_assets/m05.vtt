@@ -1,0 +1,101 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Aliasing occurs when multiple pointers can refer to the same allocation.
+
+2
+00:00:05.000 --> 00:00:06.600
+This is common in C.
+
+3
+00:00:06.700 --> 00:00:09.500
+A caller passes a pointer to a helper.
+
+4
+00:00:09.600 --> 00:00:12.320
+A structure stores a pointer to data owned elsewhere.
+
+5
+00:00:12.420 --> 00:00:15.300
+A cache records a pointer for faster lookup.
+
+6
+00:00:15.400 --> 00:00:17.880
+A callback receives context.
+
+7
+00:00:17.980 --> 00:00:23.340
+Each alias can be harmless when its lifetime rules are clear, and risky when they are not.
+
+8
+00:00:23.620 --> 00:00:28.580
+Shared references complicate the question of who may free memory and when.
+
+9
+00:00:28.680 --> 00:00:34.440
+If two components both believe they own the same allocation, repeated cleanup becomes likely.
+
+10
+00:00:34.540 --> 00:00:39.340
+If neither component believes it owns the allocation, leaks become likely.
+
+11
+00:00:39.440 --> 00:00:44.480
+If one component borrows but keeps the pointer too long, stale access becomes likely.
+
+12
+00:00:44.760 --> 00:00:48.840
+Borrowed pointers should not outlive the object they reference.
+
+13
+00:00:48.940 --> 00:00:54.700
+A borrowed pointer can be safe for a single function call or a clearly bounded operation.
+
+14
+00:00:54.800 --> 00:01:03.200
+It becomes risky when the callee stores it, uses it asynchronously, or assumes the owner will remain alive without a documented guarantee.
+
+15
+00:01:03.480 --> 00:01:08.360
+APIs should clearly distinguish owning references from non-owning references.
+
+16
+00:01:08.460 --> 00:01:11.660
+Names can help, but behavior must be consistent.
+
+17
+00:01:11.760 --> 00:01:15.600
+A function that takes ownership should say so explicitly.
+
+18
+00:01:15.700 --> 00:01:19.540
+A function that only observes should not release or retain the pointer.
+
+19
+00:01:19.640 --> 00:01:25.000
+A function that retains a pointer should state how long and under what conditions.
+
+20
+00:01:25.280 --> 00:01:30.720
+Containers should document whether they own their elements or merely reference them.
+
+21
+00:01:30.820 --> 00:01:36.500
+A list might free each element during destruction, or it might only store borrowed pointers.
+
+22
+00:01:36.600 --> 00:01:43.400
+Both designs can be valid, but callers must know which one is in force before inserting pointers or destroying the container.
+
+23
+00:01:43.680 --> 00:01:46.720
+Avoid hidden ownership side effects that surprise callers.
+
+24
+00:01:46.820 --> 00:01:53.860
+If a function releases an argument, stores an argument, or invalidates a pointer, that behavior should be obvious from the contract.
+
+25
+00:01:53.960 --> 00:02:00.440
+The safest ownership designs make pointer lifetime visible at the call site and easy to verify during review.

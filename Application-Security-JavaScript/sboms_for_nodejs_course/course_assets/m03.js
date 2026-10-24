@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "SBOM Formats, Fields, and Identifiers",
+  "graphicAlt": "SBOM formats carry component identity and dependency relationships with license and supplier metadata requiring review.",
+  "narration": "Common SBOM formats include CycloneDX and SPDX. The goal of learning them is not to memorize every field in a standards document. The practical goal is to understand what information makes an SBOM usable. Useful fields include component name, version, supplier or author when available, package URL, hashes, licenses, dependency relationships, tool metadata, timestamp, document identity, and the primary component or artifact the SBOM describes.\n\nIdentifiers matter because names alone are often ambiguous. A package URL, often called a purl, helps identify the ecosystem, package name, version, and qualifiers. That is especially important for npm, where vulnerability and dependency matching depends heavily on ecosystem-specific identity. CPE values may appear in some matching workflows, but package-specific identifiers are often more useful for npm components. A package name without a version, or a version without the ecosystem, may not be enough during urgent response.\n\nLicense and supplier metadata require care. License data may be declared, detected, missing, dual-licensed, ambiguous, or inconsistent. Supplier and author fields may provide context, but they are not proof of trust. Dependency relationships help explain why a component is present and whether it arrived directly or transitively. Metadata quality matters because incomplete or ambiguous SBOMs are harder to use when a customer, auditor, or incident responder needs a reliable answer quickly.",
+  "narrationPoints": [
+    "Useful fields include component name, version, supplier or author when available, package URL, hashes, licenses, dependency relationships, tool metadata, timestamp, document identity, and the primary component or artifact the SBOM describes.",
+    "CPE values may appear in some matching workflows, but package-specific identifiers are often more useful for npm components.",
+    "Metadata quality matters because incomplete or ambiguous SBOMs are harder to use when a customer, auditor, or incident responder needs a reliable answer quickly.",
+    "The practical goal is to understand what information makes an SBOM usable.",
+    "A package URL, often called a purl, helps identify the ecosystem, package name, version, and qualifiers.",
+    "That is especially important for npm, where vulnerability and dependency matching depends heavily on ecosystem-specific identity."
+  ]
+};

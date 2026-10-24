@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.300
+Remote administration often changes state.
+
+2
+00:00:03.400 --> 00:00:11.960
+A script may upload a configuration file, fetch logs, stage a package, update a service file, collect diagnostics, or synchronize a directory.
+
+3
+00:00:12.060 --> 00:00:17.820
+These actions should be treated as controlled changes, not incidental file movement.
+
+4
+00:00:18.100 --> 00:00:23.860
+Source and destination paths should be validated before transfer or update.
+
+5
+00:00:23.960 --> 00:00:30.120
+The script should know what it is allowed to read, where it is allowed to write, and what should happen if a target already exists.
+
+6
+00:00:30.220 --> 00:00:35.820
+Empty path values and unsupported destinations should fail before remote state changes.
+
+7
+00:00:36.100 --> 00:00:39.380
+Sensitive files need careful permissions and ownership.
+
+8
+00:00:39.480 --> 00:00:46.120
+A file that arrives readable by the wrong group or owned by the wrong account can create access or runtime problems.
+
+9
+00:00:46.220 --> 00:00:51.180
+The script should define important metadata expectations and check them where they matter.
+
+10
+00:00:51.460 --> 00:00:54.180
+Staging is useful for important updates.
+
+11
+00:00:54.280 --> 00:01:01.960
+A script can place content in a temporary or versioned location, verify it, and then move it into final placement.
+
+12
+00:01:02.060 --> 00:01:07.180
+This reduces the chance that partial transfers or failed updates become active configuration.
+
+13
+00:01:07.460 --> 00:01:09.220
+Avoid broad cleanup behavior.
+
+14
+00:01:09.320 --> 00:01:14.680
+Cleanup should target known temporary files or directories, not ambiguous paths.
+
+15
+00:01:14.780 --> 00:01:22.220
+Accidental overwrites and broad cleanup steps are common ways for routine maintenance automation to damage useful state.
+
+16
+00:01:22.500 --> 00:01:26.180
+After state-changing work, verify the expected result.
+
+17
+00:01:26.280 --> 00:01:39.720
+Confirm the service, file, configuration, or diagnostic output is in the state the workflow requires, and leave enough evidence for operators to understand what changed and what needs follow-up.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Numeric Argument Validation",
+  "graphicAlt": "Three review gates in order: accepted numeric syntax/full consumption, application sign/range, safe downstream arithmetic/narrowing.",
+  "narration": "Numeric command-line values need syntax checks and meaning checks. First, the parser should determine whether the argument is actually a number in the accepted format. Then it should decide whether that number is meaningful for the specific option.\n\nConversion failure should be detected explicitly. A parser should know whether no digits were consumed, whether the converted value was outside the target range, and whether unexpected characters remain after the numeric portion. Partial conversion should not be treated as a successful parse unless the option contract explicitly allows it.\n\nSigned and unsigned expectations should be clear. A count, size, timeout, port, index, retry limit, and mode value can all be numeric, but they may have different minimums, maximums, and sign rules. A negative value that is invalid for a count should be rejected before it reaches allocation or loop logic.\n\nOverflow-aware reasoning continues after parsing. A number may fit its parsed type but become unsafe when multiplied by an element size, added to another length, converted to a narrower type, or used as a buffer capacity. Validation should consider the calculations that follow.\n\nBase assumptions should be documented. A parser may accept decimal only, or it may intentionally accept another notation. What matters is that the rule is clear, tested, and consistent with usage messages.\n\nContext decides acceptability. A value can be numerically valid and still be wrong for the option. Defensive parsers reject values that do not fit the option's range, resource budget, performance expectation, or downstream contract.",
+  "narrationPoints": [
+    "First, the parser should determine whether the argument is actually a number in the accepted format.",
+    "Partial conversion should not be treated as a successful parse unless the option contract explicitly allows it.",
+    "A negative value that is invalid for a count should be rejected before it reaches allocation or loop logic.",
+    "A number may fit its parsed type but become unsafe when multiplied by an element size, added to another length.",
+    "Defensive parsers reject values that do not fit the option's range, resource budget, performance expectation."
+  ]
+};

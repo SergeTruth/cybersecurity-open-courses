@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+TLS integration needs negative tests, not just successful connection tests.
+
+2
+00:00:06.040 --> 00:00:14.520
+A client should fail safely when a certificate is expired, not trusted by the configured trust store, or presented for the wrong identity.
+
+3
+00:00:14.620 --> 00:00:22.620
+A server should fail startup or reload predictably when its certificate or private key configuration is missing or invalid.
+
+4
+00:00:22.900 --> 00:00:27.380
+Trust-store and configuration tests catch deployment mistakes.
+
+5
+00:00:27.480 --> 00:00:38.520
+Test which trust anchors are accepted, whether the expected server name is set, whether organization-approved policy is active, and whether obsolete behavior is excluded according to policy.
+
+6
+00:00:38.620 --> 00:00:44.620
+These tests do not replace expert review, but they make important assumptions repeatable.
+
+7
+00:00:44.900 --> 00:00:50.900
+Logging should help operations diagnose TLS problems without exposing sensitive material.
+
+8
+00:00:51.000 --> 00:01:04.120
+Useful categories include handshake failure, validation failure, expired certificate, name mismatch, trust-store error, configuration error, timeout, and dependency version.
+
+9
+00:01:04.220 --> 00:01:13.100
+Logs should avoid private keys, secrets, session material, raw sensitive application data, and excessive peer-controlled content.
+
+10
+00:01:13.380 --> 00:01:16.740
+Metrics and monitoring make TLS operational.
+
+11
+00:01:16.840 --> 00:01:25.480
+Track certificate expiration, failed handshakes, validation failures, configuration reload outcomes, dependency versions, and unusual error rates.
+
+12
+00:01:25.580 --> 00:01:33.260
+Certificate expiration monitoring is especially important because the application may be correct but still fail if operational renewal processes break down.
+
+13
+00:01:33.540 --> 00:01:37.220
+Operational runbooks should include TLS behavior.
+
+14
+00:01:37.320 --> 00:01:49.880
+Teams should know how to rotate certificates, update trust stores, renew private trust anchors, update TLS libraries, respond to validation failures, and verify a deployment after changes.
+
+15
+00:01:49.980 --> 00:01:55.260
+Runbooks reduce pressure to make unsafe emergency changes when a certificate or dependency issue appears.
+
+16
+00:01:55.540 --> 00:01:58.820
+TLS readiness is a shared responsibility.
+
+17
+00:01:58.920 --> 00:02:08.280
+Developers implement the integration, reviewers check the trust and lifecycle design, test suites exercise negative cases, and operations monitor the deployed control.
+
+18
+00:02:08.380 --> 00:02:13.340
+The handoff should be documented enough that the control can be maintained over time.

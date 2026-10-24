@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+Native C++ pipelines benefit from layered checks.
+
+2
+00:00:03.640 --> 00:00:18.120
+Compiler warnings, warning policies, static analysis, formatting or linting where useful, unit tests, integration tests, dependency scanning, SBOM generation checks, and packaging validation can all catch problems before release.
+
+3
+00:00:18.220 --> 00:00:20.460
+The goal is not to prove perfection.
+
+4
+00:00:20.560 --> 00:00:26.240
+The goal is to provide timely feedback on classes of defects that are common in native systems.
+
+5
+00:00:26.340 --> 00:00:29.300
+Each check should have a clear reason for existing.
+
+6
+00:00:29.580 --> 00:00:33.660
+Sanitizers can be valuable when used in suitable build modes.
+
+7
+00:00:33.760 --> 00:00:46.400
+AddressSanitizer, UndefinedBehaviorSanitizer, ThreadSanitizer where useful, and related runtime checks can reveal memory, lifetime, concurrency, and undefined-behavior issues during tests.
+
+8
+00:00:46.500 --> 00:00:55.460
+They may not run in every release configuration, but scheduled jobs, nightly builds, or targeted test suites can still provide strong signal.
+
+9
+00:00:55.560 --> 00:00:59.240
+Teams should document which platforms and test suites use them.
+
+10
+00:00:59.520 --> 00:01:02.000
+Security checks need workflow design.
+
+11
+00:01:02.100 --> 00:01:06.020
+Fast pull-request checks should give developers quick feedback.
+
+12
+00:01:06.120 --> 00:01:16.280
+Slower analysis, broader platform coverage, fuzzing at a defensive level for parsers and boundary code, and deeper dependency review may fit scheduled or release jobs.
+
+13
+00:01:16.380 --> 00:01:21.420
+This keeps the pipeline useful without turning every small change into an unreasonably long wait.
+
+14
+00:01:21.520 --> 00:01:26.000
+Clear scheduling also helps teams know which checks are required before release.
+
+15
+00:01:26.280 --> 00:01:30.760
+Findings need owners, triage rules, and documented exceptions.
+
+16
+00:01:30.860 --> 00:01:39.660
+If warnings are ignored, scanners produce unowned tickets, or sanitizer failures become routine noise, the value of the pipeline drops quickly.
+
+17
+00:01:39.760 --> 00:01:53.440
+A mature CI/CD process treats security findings as engineering work: assign them, prioritize them, record exceptions, and revisit exceptions when the code, tool, or release risk changes.
+
+18
+00:01:53.540 --> 00:01:58.100
+The pipeline should make risk visible without drowning teams in unreviewed alerts.
+
+19
+00:01:58.200 --> 00:02:04.680
+Quality improves when exceptions expire or require periodic review by the responsible team before release.

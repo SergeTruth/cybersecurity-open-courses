@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Tokens leak through ordinary engineering workflows more often than teams expect.
+
+2
+00:00:06.520 --> 00:00:20.280
+Logs, traces, metrics, error reports, support bundles, screenshots, analytics events, browser history, reverse proxies, and CI/CD logs can all capture values that were never meant to leave a request boundary.
+
+3
+00:00:20.380 --> 00:00:37.100
+Do not log Authorization headers, cookies, access tokens, refresh tokens, API keys, reset links, OAuth codes, CSRF tokens, session IDs, private URLs, or full token payloads containing sensitive data.
+
+4
+00:00:37.380 --> 00:00:41.620
+Redaction should happen before data leaves the application boundary where possible.
+
+5
+00:00:41.720 --> 00:00:43.960
+It should be tested, not assumed.
+
+6
+00:00:44.060 --> 00:00:54.380
+Framework debug logging, request dump middleware, proxy logs, distributed traces, and client-side analytics can quietly preserve token material.
+
+7
+00:00:54.480 --> 00:01:02.960
+A good rule is that an operator should be able to investigate token failures without seeing the token itself unless there is a tightly controlled break-glass process.
+
+8
+00:01:03.240 --> 00:01:07.320
+Monitoring turns token design into operational defense.
+
+9
+00:01:07.420 --> 00:01:22.620
+Watch for unusual token use, repeated invalid-token attempts, refresh-token reuse, token use from unexpected locations, high reset-token activity, invite-code guessing, API key abuse, and authorization failures.
+
+10
+00:01:22.720 --> 00:01:30.160
+These signals help the team detect misuse, identify compromised credentials, and evaluate whether revocation or rotation is needed.
+
+11
+00:01:30.440 --> 00:01:39.000
+Code review should search for token generation, validation, storage, logging, comparison, revocation, and transport decisions.
+
+12
+00:01:39.100 --> 00:01:53.900
+Tests should cover expired tokens, wrong audience, wrong issuer, wrong purpose, revoked tokens, reused one-time tokens, missing signatures where relevant, unsafe storage assumptions, and safe error handling.
+
+13
+00:01:54.000 --> 00:02:06.240
+When a token leaks, response should include revocation, rotation, log review, scope analysis, impact assessment, and validation that exposed tokens no longer work.

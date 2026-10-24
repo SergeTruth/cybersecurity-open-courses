@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.660
+Descriptor-first file handling means the program treats the opened descriptor or handle as the trusted reference after open or creation succeeds.
+
+2
+00:00:08.760 --> 00:00:16.680
+Instead of repeatedly resolving a path string, the program operates on the object it actually opened, subject to the platform's file API rules.
+
+3
+00:00:16.960 --> 00:00:22.720
+This approach is valuable because it reduces the number of times the program has to trust path resolution.
+
+4
+00:00:22.820 --> 00:00:30.100
+After the object is opened, code can check properties of that object, perform reads or writes through the handle, and keep ownership clear.
+
+5
+00:00:30.200 --> 00:00:36.200
+The path remains useful for diagnostics or policy context, but the handle is the operational reference.
+
+6
+00:00:36.480 --> 00:00:43.520
+Platform-aware no-follow behavior can help when the policy is to avoid following symbolic links for a particular operation.
+
+7
+00:00:43.620 --> 00:00:54.580
+The exact flags and semantics vary, so the code should be written for the target platform and should handle unsupported behavior explicitly rather than assuming one portable switch solves every case.
+
+8
+00:00:54.860 --> 00:01:02.700
+Directory-relative operations can reduce ambiguity by anchoring paths to an opened trusted directory.
+
+9
+00:01:02.800 --> 00:01:09.040
+This is useful when the program has a known root or workspace and needs to operate on entries inside that directory.
+
+10
+00:01:09.140 --> 00:01:12.100
+The directory handle becomes part of the trust contract.
+
+11
+00:01:12.380 --> 00:01:15.820
+Post-open validation checks the object in use.
+
+12
+00:01:15.920 --> 00:01:24.400
+The program may verify type, ownership, permissions, size, expected directory relationship, or other properties after opening.
+
+13
+00:01:24.500 --> 00:01:31.300
+That validation is stronger than checking only a path string because it refers to the object the program actually holds.
+
+14
+00:01:31.580 --> 00:01:34.060
+Descriptor-first design is not magic.
+
+15
+00:01:34.160 --> 00:01:39.600
+It still needs correct permissions, error handling, cleanup, and platform review.
+
+16
+00:01:39.700 --> 00:01:46.420
+But it gives reviewers a clearer object to reason about and reduces uncertainty from repeated path lookups.

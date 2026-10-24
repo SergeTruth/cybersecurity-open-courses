@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.820
+C# applications sometimes launch external processes with Process.Start or related APIs.
+
+2
+00:00:06.920 --> 00:00:13.960
+This may be needed for document conversion, media processing, backup tools, scanners, or legacy integrations.
+
+3
+00:00:14.060 --> 00:00:25.420
+It also creates injection risk when user-controlled input influences an executable, argument, flag, path, environment variable, working directory, or shell command.
+
+4
+00:00:25.520 --> 00:00:32.320
+The risk is not limited to obvious command strings; it includes every value that changes what the process does.
+
+5
+00:00:32.600 --> 00:00:38.600
+Prefer .NET libraries or platform APIs when they can perform the operation directly.
+
+6
+00:00:38.700 --> 00:00:45.340
+When a process is genuinely required, avoid constructing one large command string from request values.
+
+7
+00:00:45.440 --> 00:00:54.720
+Use APIs that separate the executable from arguments, choose the executable path deliberately, and map user choices to approved operations.
+
+8
+00:00:54.820 --> 00:01:02.260
+A user should not be able to select arbitrary tools, switches, working directories, or environment settings through a request parameter.
+
+9
+00:01:02.540 --> 00:01:05.900
+Filenames and paths deserve careful treatment.
+
+10
+00:01:06.000 --> 00:01:10.240
+A user-supplied display name should not become a trusted filesystem path.
+
+11
+00:01:10.340 --> 00:01:20.980
+Generate server-side names where possible, normalize and constrain paths to approved directories, and treat extensions as policy decisions rather than proof of content.
+
+12
+00:01:21.080 --> 00:01:27.560
+Be explicit about working directories and PATH behavior so the application runs the intended executable.
+
+13
+00:01:27.660 --> 00:01:33.260
+Run processes with the minimum privileges needed and apply timeouts or resource limits when appropriate.
+
+14
+00:01:33.540 --> 00:01:40.980
+Logging process activity should support operations and investigations without exposing secrets or raw dangerous strings.
+
+15
+00:01:41.080 --> 00:01:47.080
+Record the controlled operation, job identifier, validation outcome, and high-level status.
+
+16
+00:01:47.180 --> 00:01:55.020
+Avoid storing full raw command lines when they include tokens, credentials, personal data, or confusing user-supplied characters.
+
+17
+00:01:55.120 --> 00:02:05.760
+Strong process execution is boring by design: narrow adapters, allowlisted operations, safe argument handling, constrained files, least privilege, and clear logs.

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.180
+Parser-safe C starts by treating protocol input as untrusted until framing, field validation, numeric checks, and state checks succeed.
+
+2
+00:00:10.280 --> 00:00:15.720
+A message becomes meaningful only after the parser proves that it satisfies the protocol contract.
+
+3
+00:00:16.000 --> 00:00:23.120
+Keep raw bytes, decoded fields, validated messages, and trusted application objects clearly separated.
+
+4
+00:00:23.220 --> 00:00:30.660
+This separation prevents partially checked input from leaking into business logic and gives reviewers a way to inspect each transition.
+
+5
+00:00:30.940 --> 00:00:37.740
+Parse incrementally with explicit buffer capacity, used length, consumed length, and remaining input state.
+
+6
+00:00:37.840 --> 00:00:46.000
+Handle partial reads, incomplete messages, overlong messages, rejected input, and disconnects as normal conditions.
+
+7
+00:00:46.100 --> 00:00:50.980
+Binary payloads should remain bytes unless text rules are explicit.
+
+8
+00:00:51.260 --> 00:00:58.860
+Validate lengths, counts, offsets, flags, versions, and command types before use.
+
+9
+00:00:58.960 --> 00:01:03.920
+Check arithmetic before allocation, indexing, copying, or pointer movement.
+
+10
+00:01:04.020 --> 00:01:09.540
+A message that is structurally correct still needs state and authorization checks before dispatch.
+
+11
+00:01:09.820 --> 00:01:15.980
+Finally, bound resource use and fail safely when input violates the protocol contract.
+
+12
+00:01:16.080 --> 00:01:23.760
+Use tests, fuzzing, sanitizers, static analysis, logging discipline, and review as layered support.
+
+13
+00:01:23.860 --> 00:01:31.860
+Good parsers are not just clever decoders; they are reliable boundaries between external bytes and trusted application behavior.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Rotation limits damage from exposed, stale, overused, or broadly shared keys.
+
+2
+00:00:05.800 --> 00:00:08.440
+But rotation is not just a policy statement.
+
+3
+00:00:08.540 --> 00:00:12.460
+It is an engineering capability that has to work before an emergency.
+
+4
+00:00:12.560 --> 00:00:24.080
+A team that has never rotated a JWT signing key, HMAC webhook secret, database encryption key, or service credential may discover during an incident that rotation breaks production.
+
+5
+00:00:24.360 --> 00:00:29.240
+Some keys can be rotated by issuing a new key and invalidating the old one.
+
+6
+00:00:29.340 --> 00:00:32.060
+Others require staged rollout.
+
+7
+00:00:32.160 --> 00:00:36.960
+Verifiers may need to accept both old and new signing keys during a transition.
+
+8
+00:00:37.060 --> 00:00:44.260
+Encrypted records may need key identifiers or version metadata so the application can choose the right decryption key.
+
+9
+00:00:44.360 --> 00:00:48.920
+Old keys may need a controlled decrypt-only period before retirement.
+
+10
+00:00:49.200 --> 00:00:52.640
+Envelope encryption can make rotation more practical.
+
+11
+00:00:52.740 --> 00:00:56.260
+Data encryption keys protect data.
+
+12
+00:00:56.360 --> 00:00:59.320
+Key encryption keys protect those data keys.
+
+13
+00:00:59.420 --> 00:01:05.820
+Rotating a key encryption key may involve rewrapping data keys instead of re-encrypting every record.
+
+14
+00:01:05.920 --> 00:01:13.040
+This can reduce operational pain while still supporting separation by record, tenant, service, or purpose.
+
+15
+00:01:13.140 --> 00:01:18.740
+The pattern still needs metadata, ownership, audit, and recovery rules.
+
+16
+00:01:19.020 --> 00:01:24.620
+Rotation should include validation that old keys no longer grant unintended access.
+
+17
+00:01:24.720 --> 00:01:36.000
+That may mean checking expired JWT signing keys, retired webhook secrets, invalidated API keys, old object-storage credentials, or data keys after rewrap.
+
+18
+00:01:36.100 --> 00:01:39.620
+Revocation should be explicit when compromise is suspected.
+
+19
+00:01:39.720 --> 00:01:46.920
+The question is not whether rotation is written in a policy; the question is whether the team can execute it safely under pressure.

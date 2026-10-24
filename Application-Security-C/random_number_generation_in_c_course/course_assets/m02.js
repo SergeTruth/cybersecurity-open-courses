@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "PRNGs, CSPRNGs, and Use Cases",
+  "graphicAlt": "Two large lanes: a deterministic-state gear repeats identical symbolic output for tests, while a platform security-grade source produces secret-token output.",
+  "narration": "A pseudo-random number generator produces deterministic output from internal state. Given the same state and algorithm, it produces the same sequence. That is not automatically bad. Determinism is useful for repeatable tests, controlled simulations, reproducible debugging, and workloads where the sequence should be stable across runs.\n\nA cryptographically secure random source has a different purpose. It is designed for security-sensitive values where prediction must be difficult even when an observer sees some output or knows the general design. For these values, random-looking output is not enough. The design goal is unpredictability under realistic assumptions.\n\nThe distinction matters because developers often reach for a familiar random API without first classifying the use case. A randomized unit test, a game-like simulation, a temporary display color, a session token, a password reset code, and an encryption key do not share the same requirements.\n\nChoose the generator based on the consequence of prediction, repetition, or bias. If a value protects access, identifies an authorization session, contributes to cryptographic operation, or must not be guessed, it needs a security-grade source from the operating system or an approved library. If a value only supports repeatable testing, deterministic behavior may be desirable.\n\nDocumentation should state what property the value needs. Does it need repeatability? Uniqueness? Unpredictability? Fair selection? Collision resistance? More than one property? Naming those requirements helps reviewers catch a mismatch between the random source and the value's role.",
+  "narrationPoints": [
+    "Determinism is useful for repeatable tests, controlled simulations, reproducible debugging, and workloads.",
+    "The design goal is unpredictability under realistic assumptions.",
+    "The distinction matters because developers often reach for a familiar random API without first classifying the use case.",
+    "If a value protects access, identifies an authorization session, contributes to cryptographic operation, or must not be guessed.",
+    "Naming those requirements helps reviewers catch a mismatch between the random source and the value's role."
+  ]
+};

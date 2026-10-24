@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.980
+Safe temporary-file creation starts with avoiding predictable names and fragile check-then-create logic.
+
+2
+00:00:07.080 --> 00:00:12.360
+A name that appears available during one check may not represent the same state by the time the program opens it.
+
+3
+00:00:12.460 --> 00:00:17.500
+Defensive code avoids designing around a separate availability check followed later by creation.
+
+4
+00:00:17.780 --> 00:00:21.380
+The safer general pattern is atomic create-and-open behavior.
+
+5
+00:00:21.480 --> 00:00:29.080
+The program should ask the platform to create a unique temporary file and return an opened descriptor or handle in one operation.
+
+6
+00:00:29.180 --> 00:00:35.580
+That gives the program immediate ownership of the file object it will use, instead of trusting only a pathname string.
+
+7
+00:00:35.860 --> 00:00:40.580
+Use platform-appropriate secure creation APIs and understand their contracts.
+
+8
+00:00:40.680 --> 00:00:48.360
+Different systems expose different functions, directory rules, name templates, permission behavior, and cleanup options.
+
+9
+00:00:48.460 --> 00:00:57.980
+The engineering task is to choose the API that safely creates and opens a file for the target platform and then handle its return values correctly.
+
+10
+00:00:58.260 --> 00:01:01.780
+The returned descriptor or handle is the object to trust.
+
+11
+00:01:01.880 --> 00:01:10.520
+Once the file is opened safely, code should keep ownership clear, check errors, and avoid reopening by name unless there is a documented reason.
+
+12
+00:01:10.620 --> 00:01:17.180
+Reopening by path can reintroduce ambiguity that the secure creation step was meant to avoid.
+
+13
+00:01:17.460 --> 00:01:21.140
+Creation also needs permission and location decisions.
+
+14
+00:01:21.240 --> 00:01:29.080
+A unique name does not compensate for a poorly chosen directory, overly broad permissions, or sensitive data written where it should not be stored.
+
+15
+00:01:29.180 --> 00:01:33.340
+Creation is one part of a larger temporary-file contract.
+
+16
+00:01:33.620 --> 00:01:46.980
+Reviewers should ask whether the code creates and opens the file atomically, whether it checks the result before use, whether ownership of the handle is clear, and whether cleanup behavior is defined from the first successful creation point.

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.580
+Key storage is a control point.
+
+2
+00:00:02.680 --> 00:00:15.480
+Production keys should not live in source code, committed .env files, frontend bundles, Docker images, build artifacts, logs, screenshots, tickets, or public documentation.
+
+3
+00:00:15.580 --> 00:00:23.340
+Every uncontrolled copy makes rotation harder and increases the chance that a routine workflow becomes a key exposure event.
+
+4
+00:00:23.620 --> 00:00:35.540
+Use approved secret-management systems, cloud key-management services, vault systems, HSM-backed services, orchestrator secrets, or protected runtime injection mechanisms where appropriate.
+
+5
+00:00:35.640 --> 00:00:44.120
+These systems can reduce uncontrolled copies, centralize access policy, support audit records, and help with rotation.
+
+6
+00:00:44.220 --> 00:00:48.860
+They do not fix overly broad permissions or unsafe downstream use by themselves.
+
+7
+00:00:49.140 --> 00:00:51.380
+Access should follow least privilege.
+
+8
+00:00:51.480 --> 00:00:59.480
+Applications, developers, CI jobs, deployment jobs, workers, and services should only access the keys they need.
+
+9
+00:00:59.580 --> 00:01:05.020
+Production keys should not be broadly readable by every developer or every CI job.
+
+10
+00:01:05.120 --> 00:01:10.560
+A build job that creates an artifact may not need runtime decryption keys.
+
+11
+00:01:10.660 --> 00:01:15.460
+A worker that verifies webhooks may not need a database encryption key.
+
+12
+00:01:15.740 --> 00:01:24.060
+Environment variables can deliver key references or key material, but they are not a complete key-management solution.
+
+13
+00:01:24.160 --> 00:01:31.520
+They do not automatically provide ownership, audit, rotation, recovery, safe logging, or policy review.
+
+14
+00:01:31.620 --> 00:01:40.340
+The design should distinguish where a key is stored, how it is delivered to runtime, how code uses it, and what evidence exists when someone accesses it.

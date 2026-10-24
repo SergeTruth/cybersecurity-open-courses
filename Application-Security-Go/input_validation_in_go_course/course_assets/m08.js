@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Common Go Validation Failures",
+  "narration": "A common Go validation failure is trusting client-side checks. Browser validation, frontend TypeScript, or mobile client rules can improve usability, but they are not the authority. The server must validate because requests can be sent directly, clients can be modified, and old versions can remain in use. Another common issue is accepting unknown JSON fields unintentionally, which can hide caller mistakes and make API contracts harder to reason about.\n\nZero values are another recurring source of bugs. If a missing field and an intentionally provided zero both become the same Go value, the handler may approve a request that should have failed or overwrite data unintentionally. Pointers, custom request types, explicit presence tracking, and careful validation can clarify the difference. This is especially important in patch-style endpoints and partial updates.\n\nValidation should not be mistaken for authorization or safe API use. A valid user ID still needs an access check. A validated search string should still be used with parameterized queries rather than string-built SQL. A validated command option should still avoid unsafe process execution patterns. A cleaned path should still be checked against allowed directories. Validation reduces risk, but it is one layer in a larger defensive design.\n\nMass assignment style risks can appear in Go when request structs are copied too broadly into persistence models or update maps. Clients should not be able to set server-controlled fields such as role, owner ID, tenant ID, approval state, or audit values. Business logic validation gaps can be even subtler: the input has the right shape, but the requested state change is not allowed. Strong Go services validate both the data and the operation.",
+  "graphicAlt": "Presence, authorization, safe APIs and explicit update mapping close different gaps around input validation.",
+  "narrationPoints": [
+    "A common Go validation failure is trusting client-side checks.",
+    "Zero values are another recurring source of bugs.",
+    "Validation should not be mistaken for authorization or safe API use.",
+    "Mass assignment style risks can appear in Go when request structs are copied too broadly into persistence models or update maps."
+  ]
+};

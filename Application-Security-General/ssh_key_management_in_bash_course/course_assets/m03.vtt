@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+SSH keys should be created through approved processes and stored in controlled locations.
+
+2
+00:00:06.040 --> 00:00:13.160
+The creation process should define the key's owner, purpose, environment, expected lifetime, and storage location.
+
+3
+00:00:13.260 --> 00:00:22.380
+A key created casually for one task can easily become a hidden dependency if nobody documents why it exists or what it can access.
+
+4
+00:00:22.660 --> 00:00:26.500
+Private keys need restrictive ownership and file permissions.
+
+5
+00:00:26.600 --> 00:00:35.800
+They should not be placed in shared directories, repositories, artifacts, email threads, tickets, public images, or casual backups.
+
+6
+00:00:35.900 --> 00:00:38.380
+Parent directories matter too.
+
+7
+00:00:38.480 --> 00:00:50.240
+A private key stored in a file with narrow permissions may still be exposed if the surrounding workspace is copied, cached, archived, or made readable to more users or processes than intended.
+
+8
+00:00:50.520 --> 00:00:56.280
+Passphrases may be appropriate for human-operated keys because they add protection if the private key file is copied.
+
+9
+00:00:56.380 --> 00:01:03.740
+Automation keys often need a different balance because fully unattended workflows cannot rely on an operator typing a passphrase.
+
+10
+00:01:03.840 --> 00:01:15.200
+In those cases, compensating controls matter: tight remote scope, controlled secret storage, restricted runtime identity, monitoring, rotation, and clear ownership.
+
+11
+00:01:15.480 --> 00:01:18.200
+Endpoint and workspace protection also matter.
+
+12
+00:01:18.300 --> 00:01:25.980
+A well-scoped key can still be exposed from a workstation, build runner, container layer, or service account home directory.
+
+13
+00:01:26.080 --> 00:01:32.400
+Bash scripts should check that required keys are available without printing their contents or dumping sensitive context.
+
+14
+00:01:32.500 --> 00:01:38.740
+The script should fail clearly when a key is missing or unusable, but it should not turn troubleshooting into disclosure.

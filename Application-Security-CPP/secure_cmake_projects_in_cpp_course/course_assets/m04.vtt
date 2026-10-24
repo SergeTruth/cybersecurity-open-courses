@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:14.340
+CMake is often where a C++ team gathers compiler warnings, language standards, optimization settings, linker behavior, sanitizer profiles, and platform-specific hardening policy.
+
+2
+00:00:14.440 --> 00:00:16.680
+These choices should not be accidental.
+
+3
+00:00:16.780 --> 00:00:24.780
+They should be recorded in the build files, scoped to the targets and platforms that need them, and understandable to someone reviewing a change months later.
+
+4
+00:00:25.060 --> 00:00:28.500
+Warnings and diagnostics are part of quality control.
+
+5
+00:00:28.600 --> 00:00:37.160
+They catch questionable conversions, missing returns, shadowing, unused results, and other conditions that can become real defects.
+
+6
+00:00:37.260 --> 00:00:51.900
+A project does not need identical warning flags on every compiler, but it does need a consistent policy: important diagnostics are enabled, noisy exceptions are documented, and warning changes are reviewed as engineering decisions.
+
+7
+00:00:52.180 --> 00:00:54.740
+Sanitizer builds are another layer.
+
+8
+00:00:54.840 --> 00:01:03.960
+Address, undefined behavior, thread, and leak sanitizer profiles help teams discover classes of defects during development and CI.
+
+9
+00:01:04.060 --> 00:01:10.460
+These profiles are not the same as release hardening, and they usually have different performance and runtime expectations.
+
+10
+00:01:10.560 --> 00:01:17.680
+Keeping them as named build profiles helps the team run them regularly without confusing them with production configuration.
+
+11
+00:01:17.960 --> 00:01:20.680
+Release hardening should be deliberate and verifiable.
+
+12
+00:01:20.780 --> 00:01:32.220
+Linker options, symbol visibility, stack protections, relocation settings, control-flow protections, and platform SDK choices all vary by compiler and operating system.
+
+13
+00:01:32.320 --> 00:01:43.760
+A maintainable CMake project expresses those choices in one reviewable policy area, applies them consistently, and confirms through logs or artifact inspection that the intended settings were actually used.

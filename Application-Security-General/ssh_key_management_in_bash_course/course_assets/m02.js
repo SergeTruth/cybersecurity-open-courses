@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "SSH Key Trust Relationships and Use Cases",
+  "graphicAlt": "A client private key and authorized public key support client authentication, while server host identity is checked against known-host records.",
+  "narration": "SSH key management becomes easier when teams distinguish the roles keys play. A user or service private key authenticates a client to a server. A public key listed on the server authorizes the matching private key to access a particular account. A host key helps the client verify that the server it reached is the intended server. These are different trust relationships, and mixing them conceptually leads to weak controls.\n\nDifferent automation keys also serve different purposes. Git deploy keys, CI/CD runner keys, backup keys, monitoring keys, remote administration keys, and deployment keys should not be treated as interchangeable. A key that can fetch one repository should not automatically be able to administer production systems. A backup key should not quietly become a general remote access key. Purpose gives scope meaning.\n\nEach key should have an owner, an approved use case, allowed systems, allowed environments, expected users or automation jobs, and a review path. Ownership answers who can approve changes or removal. Scope answers what the key can reach. Environment separation answers whether the key belongs to development, staging, production, or a specific operational domain. Without those answers, keys become hard to review and hard to retire.\n\nTrust boundaries matter across environments. A key used in development automation should not automatically work in production. A key used by a monitoring job should not work for deployment. Host trust should be managed separately from client authentication. Clear distinctions let teams grant the right access for the right workflow without turning every SSH key into a broad, long-lived credential.",
+  "narrationPoints": [
+    "SSH key management becomes easier when teams distinguish the roles keys play.",
+    "Git deploy keys, CI/CD runner keys, backup keys, monitoring keys, remote administration keys, and deployment keys should not be treated as interchangeable.",
+    "Each key should have an owner, an approved use case, allowed systems, allowed environments, expected users or automation jobs, and a review path.",
+    "A key used in development automation should not automatically work in production.",
+    "A user or service private key authenticates a client to a server.",
+    "A public key listed on the server authorizes the matching private key to access a particular account."
+  ]
+};

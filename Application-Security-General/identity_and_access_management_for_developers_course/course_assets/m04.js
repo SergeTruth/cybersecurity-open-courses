@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Sessions, Cookies, and Tokens",
+  "narration": "After authentication, the application needs a way to remember identity across requests. Traditional server-side sessions use a session identifier stored in a cookie. The server keeps the session state, while the browser sends the identifier with each request. That identifier is sensitive because anyone who can use it may be treated as the authenticated user. Secure session design uses unpredictable identifiers, rotation after important events, expiration, and careful invalidation on logout or account changes.\n\nCookie settings help protect session identifiers. The Secure attribute limits transmission to HTTPS. HttpOnly helps prevent client-side scripts from reading the cookie. SameSite can reduce some cross-site request risks when configured appropriately for the application flow. Cookie protection does not replace authorization. It reduces the chance that the session token leaks or is misused, but every sensitive operation still needs a server-side permission decision.\n\nToken-based systems commonly use access tokens and refresh tokens. Access tokens represent authorization to call an API or access a resource for a limited time. Refresh tokens may allow the client to obtain new access tokens over a longer period, which makes them highly sensitive. JWTs are a common token format, but a JWT is not safe just because it is signed. Developers must validate issuer, audience, expiration, signature, algorithm expectations, and relevant claims. Tokens should not be logged, placed in URLs, stored carelessly in browser storage, or sent to services that do not need them.",
+  "graphicAlt": "Session lifecycle and cookie protection complement complete token validation and protected refresh tokens.",
+  "narrationPoints": [
+    "After authentication, the application needs a way to remember identity across requests.",
+    "Cookie settings help protect session identifiers.",
+    "Token-based systems commonly use access tokens and refresh tokens."
+  ]
+};

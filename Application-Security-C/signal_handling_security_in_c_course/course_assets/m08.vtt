@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.820
+Signals become more complex in multithreaded programs because delivery, masks, shared state, and locks can interact across threads.
+
+2
+00:00:08.920 --> 00:00:16.600
+A signal may be directed at the process or at a specific thread depending on how it is generated and what platform rules apply.
+
+3
+00:00:16.700 --> 00:00:23.980
+If the design assumes that one convenient thread will always handle the signal, that assumption should be verified or removed.
+
+4
+00:00:24.260 --> 00:00:26.980
+Signal masks may differ by thread.
+
+5
+00:00:27.080 --> 00:00:32.920
+A program can use that fact deliberately, but accidental differences can create confusing behavior.
+
+6
+00:00:33.020 --> 00:00:41.740
+One common defensive approach is to block selected signals in worker threads and route signal handling through a dedicated thread or event-loop path.
+
+7
+00:00:41.840 --> 00:00:46.400
+Another design may use a central loop that receives notifications and coordinates shutdown.
+
+8
+00:00:46.500 --> 00:00:49.860
+The important part is that the policy is explicit.
+
+9
+00:00:50.140 --> 00:00:53.580
+Locks and shared state need special attention.
+
+10
+00:00:53.680 --> 00:01:00.480
+A handler or signal-handling path that interacts with data also used by worker threads must follow the program's synchronization design.
+
+11
+00:01:00.580 --> 00:01:11.700
+Because ordinary lock use inside a handler is not appropriate, teams should keep asynchronous state minimal and use normal thread-safe mechanisms after control returns to mainline code.
+
+12
+00:01:11.980 --> 00:01:15.260
+Event loops should integrate signals intentionally.
+
+13
+00:01:15.360 --> 00:01:24.480
+A loop may need to wake when a signal request arrives, stop accepting new work, drain tasks, close descriptors, notify workers, or exit.
+
+14
+00:01:24.580 --> 00:01:30.660
+This behavior should be part of the event-loop design rather than an afterthought added through unrelated global state.
+
+15
+00:01:30.940 --> 00:01:32.940
+Reviewers should look for simplicity.
+
+16
+00:01:33.040 --> 00:01:35.600
+Which thread handles signal requests?
+
+17
+00:01:35.700 --> 00:01:37.380
+Which signals are blocked where?
+
+18
+00:01:37.480 --> 00:01:39.080
+How does the event loop wake?
+
+19
+00:01:39.180 --> 00:01:43.180
+What state crosses from asynchronous context into ordinary code?
+
+20
+00:01:43.280 --> 00:01:45.600
+How is shutdown coordinated with workers?
+
+21
+00:01:45.700 --> 00:01:51.220
+Clear answers make threaded signal handling safer to operate and easier to maintain.

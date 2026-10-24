@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Certificates connect a TLS peer to an identity decision.
+
+2
+00:00:04.200 --> 00:00:11.320
+A peer presents a certificate chain, and the application or TLS library evaluates that chain against trusted anchors.
+
+3
+00:00:11.420 --> 00:00:20.220
+If the chain is valid under the configured rules, the application can then ask whether the certificate identity matches the peer it intended to reach or accept.
+
+4
+00:00:20.500 --> 00:00:25.060
+A trust store is the set of anchors used for that chain decision.
+
+5
+00:00:25.160 --> 00:00:33.800
+It may come from the operating system, a bundled set, an enterprise trust store, a private trust store, or application-specific configuration.
+
+6
+00:00:33.900 --> 00:00:38.140
+The choice matters because it defines which issuers the application accepts.
+
+7
+00:00:38.240 --> 00:00:42.560
+Reviewers should know which trust store is used and how it is updated.
+
+8
+00:00:42.840 --> 00:00:46.680
+Hostname verification is essential for TLS clients.
+
+9
+00:00:46.780 --> 00:00:55.180
+Chain validation can show that a certificate was issued under a trusted anchor, but the client also needs to know that the certificate identity matches the intended server.
+
+10
+00:00:55.280 --> 00:01:02.640
+In modern deployments, this usually means checking names such as subject alternative names according to the library and platform rules.
+
+11
+00:01:02.920 --> 00:01:09.400
+Internal PKI and private trust anchors can be appropriate, but they need explicit governance.
+
+12
+00:01:09.500 --> 00:01:19.660
+Teams should document which internal roots are trusted, which environments use them, how they are distributed, how expired or retired anchors are removed, and how mistakes are detected.
+
+13
+00:01:19.760 --> 00:01:24.320
+Private trust should be treated as carefully as public trust.
+
+14
+00:01:24.600 --> 00:01:29.720
+Certificate pinning can narrow trust in some designs, but it also adds lifecycle risk.
+
+15
+00:01:29.820 --> 00:01:35.260
+Pins need rotation planning, emergency update paths, and operational ownership.
+
+16
+00:01:35.360 --> 00:01:41.920
+A pin that cannot be updated safely can create outages or encourage unsafe workarounds.
+
+17
+00:01:42.020 --> 00:01:46.980
+The design should be reviewed before pinning becomes part of a native application.
+
+18
+00:01:47.260 --> 00:01:51.980
+The key point is that encryption without identity is incomplete.
+
+19
+00:01:52.080 --> 00:01:59.040
+A protected channel is only useful when the application knows which peer is on the other side and what that peer is allowed to do.
+
+20
+00:01:59.140 --> 00:02:03.700
+Trust-store and identity decisions should be visible, tested, and maintained.

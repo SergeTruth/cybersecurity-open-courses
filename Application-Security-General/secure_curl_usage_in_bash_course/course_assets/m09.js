@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure curl Checklist",
+  "graphicAlt": "Destination control, transport verification, structured requests and checked responses are supported by review and failure testing.",
+  "narration": "Secure curl usage in Bash is a repeatable checklist. Start with destination control. Validate URLs, schemes, hosts, ports, paths, and query assumptions before making requests. Prefer allowlisted endpoints and API base URLs for automation that touches real systems.\n\nKeep TLS verification enabled and manage transport trust deliberately. Internal certificate authorities, controlled trust stores, proxies, and inspection systems should be reviewed as part of the environment. Disabling verification is not a substitute for proper trust management.\n\nInvoke curl with fixed, reviewable structure. Use arrays for options and operands where useful, quote values that should remain literal, and validate methods, headers, files, output paths, timeouts, retry settings, and redirect behavior before the request runs.\n\nProtect secrets. Avoid hard-coded credentials, use approved secret delivery, keep tokens and sensitive headers out of visible command lines and logs, and keep debugging scoped and temporary. Logs should support troubleshooting without becoming a disclosure channel.\n\nTreat API intent seriously. Separate read-only requests from state-changing calls, validate payloads and content types, preserve environment boundaries, and require stronger checks for production or high-impact actions. Check HTTP status, curl results, response shape, and downstream assumptions before trusting output.\n\nFinally, test and review over time. Use ShellCheck, peer review, sample responses, failed responses, redirects, empty bodies, malformed data, timeouts, and unexpected status codes. Secure curl automation is intentional, validated, protected, observable, and safe to operate.",
+  "narrationPoints": [
+    "Secure curl usage in Bash is a repeatable checklist.",
+    "Keep TLS verification enabled and manage transport trust deliberately.",
+    "Avoid hard-coded credentials, use approved secret delivery, keep tokens and sensitive headers out of visible command lines and logs, and keep debugging scoped and temporary.",
+    "Separate read-only requests from state-changing calls, validate payloads and content types, preserve environment boundaries, and require stronger checks for production or high-impact actions.",
+    "Use ShellCheck, peer review, sample responses, failed responses, redirects, empty bodies, malformed data, timeouts, and unexpected status codes.",
+    "Validate URLs, schemes, hosts, ports, paths, and query assumptions before making requests."
+  ]
+};

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Token storage should match the client type and threat model.
+
+2
+00:00:04.520 --> 00:00:07.720
+There is no universal best place for every token.
+
+3
+00:00:07.820 --> 00:00:16.940
+A browser session, mobile app credential, command-line token, service-to-service secret, and CI/CD publishing token each have different exposure paths.
+
+4
+00:00:17.040 --> 00:00:23.840
+The right storage model depends on who uses the token, how often it changes, what it can do, and what attacks are most likely.
+
+5
+00:00:24.120 --> 00:00:29.800
+Bearer tokens should be protected in transit with HTTPS, but transport protection is not the whole story.
+
+6
+00:00:29.900 --> 00:00:43.020
+In browsers, cookies, memory, localStorage, sessionStorage, service workers, refresh behavior, XSS risk, CSRF risk, and user experience all create tradeoffs.
+
+7
+00:00:43.120 --> 00:00:49.440
+Cookies used for authentication should use appropriate attributes such as HttpOnly, Secure, and SameSite.
+
+8
+00:00:49.540 --> 00:00:55.140
+Cookie-based authentication still needs CSRF analysis for state-changing requests.
+
+9
+00:00:55.420 --> 00:01:05.580
+Authorization headers are common for API bearer tokens, but headers can still leak through logs, debugging tools, browser extensions, crash reports, or misconfigured proxies.
+
+10
+00:01:05.680 --> 00:01:17.600
+Sensitive tokens should generally not be placed in query strings when safer options are available because URLs are copied, cached, logged, saved in history, shared in tickets, and sometimes leaked through referrers.
+
+11
+00:01:17.880 --> 00:01:22.600
+Mobile and desktop clients should use secure platform storage where available.
+
+12
+00:01:22.700 --> 00:01:31.260
+Server-to-server tokens belong in secret managers or protected runtime configuration, not source code, committed files, or container images.
+
+13
+00:01:31.360 --> 00:01:40.160
+Token placement affects XSS, CSRF, logs, monitoring, support workflows, and incident response.
+
+14
+00:01:40.260 --> 00:01:44.820
+Storage is not an implementation detail; it is a security design decision.

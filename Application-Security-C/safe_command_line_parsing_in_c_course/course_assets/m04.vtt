@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Disciplined parser flow separates recognizing arguments from executing program behavior.
+
+2
+00:00:05.800 --> 00:00:14.600
+The parser should collect intent first: which flags are set, which options have values, which positionals were provided, and which combinations are valid.
+
+3
+00:00:14.700 --> 00:00:21.900
+File operations, resource changes, or expensive work should wait until parsing and validation are complete.
+
+4
+00:00:22.180 --> 00:00:24.660
+Unknown options should be handled consistently.
+
+5
+00:00:24.760 --> 00:00:28.120
+A strict tool may reject them with a clear error.
+
+6
+00:00:28.220 --> 00:00:31.020
+A wrapper may pass some values through by contract.
+
+7
+00:00:31.120 --> 00:00:39.440
+The important point is that unknown input is not silently interpreted as something else unless that behavior is documented and tested.
+
+8
+00:00:39.720 --> 00:00:42.760
+Missing option values are a common edge case.
+
+9
+00:00:42.860 --> 00:00:53.260
+If an option requires a value, the parser should detect when the value is absent, when the next token is another option, or when the value is empty and not allowed.
+
+10
+00:00:53.360 --> 00:00:56.560
+The usage message should make the expected form clear.
+
+11
+00:00:56.840 --> 00:01:01.560
+Repeated options should follow the contract established by the interface design.
+
+12
+00:01:01.660 --> 00:01:06.060
+Reject duplicates, take the final value, or accumulate values intentionally.
+
+13
+00:01:06.160 --> 00:01:13.200
+Do not let repeated options fall through unrelated branches or overwrite state in a way that later code cannot explain.
+
+14
+00:01:13.480 --> 00:01:19.880
+Many command-line conventions support an end-of-options marker so later values are treated as positional arguments.
+
+15
+00:01:19.980 --> 00:01:23.820
+If the tool supports that convention, it should do so deliberately.
+
+16
+00:01:23.920 --> 00:01:28.800
+If it does not, that choice should be reflected in tests and usage behavior.
+
+17
+00:01:29.080 --> 00:01:32.120
+Positionals deserve the same care as named options.
+
+18
+00:01:32.220 --> 00:01:37.740
+Their count, ordering, meaning, and allowed values should be validated before action.
+
+19
+00:01:37.840 --> 00:01:44.080
+A positional that names a resource or controls a mode is still input crossing the parser boundary.

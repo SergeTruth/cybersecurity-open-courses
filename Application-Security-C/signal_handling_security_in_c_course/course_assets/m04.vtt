@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+A minimal handler records intent and returns.
+
+2
+00:00:03.800 --> 00:00:11.720
+That intent may be shutdown requested, reload requested, child status should be checked, or diagnostic state should be noted in a limited way.
+
+3
+00:00:11.820 --> 00:00:14.540
+The handler should not try to complete the whole operation.
+
+4
+00:00:14.640 --> 00:00:19.920
+Its job is to bridge from asynchronous interruption to a safer part of the program.
+
+5
+00:00:20.200 --> 00:00:24.440
+Simple flags are a common pattern when used with the right constraints.
+
+6
+00:00:24.540 --> 00:00:31.100
+A handler can set a flag of a type appropriate for signal communication, and the main loop can check that flag at controlled points.
+
+7
+00:00:31.200 --> 00:00:43.280
+The main code then performs the real work: stop accepting new requests, drain queues, close resources, write logs, remove temporary files, or exit with the intended status.
+
+8
+00:00:43.560 --> 00:00:49.560
+Some programs need a notification channel so a blocking loop can wake up promptly.
+
+9
+00:00:49.660 --> 00:01:00.060
+A self-pipe style pattern is one high-level example: the handler performs a minimal signal-safe notification, and the event loop handles the full transition when it wakes.
+
+10
+00:01:00.160 --> 00:01:06.800
+The important idea is not the specific mechanism; it is that complex logic remains in ordinary control flow.
+
+11
+00:01:07.080 --> 00:01:10.040
+Shared state needs careful boundaries.
+
+12
+00:01:10.140 --> 00:01:13.900
+The handler should touch only state designed for signal communication.
+
+13
+00:01:14.000 --> 00:01:18.160
+Normal code should read and reset that state in a predictable way.
+
+14
+00:01:18.260 --> 00:01:27.220
+If a signal can arrive during initialization or shutdown, the program should define what the flag means before setup is complete and after cleanup has begun.
+
+15
+00:01:27.500 --> 00:01:30.460
+The design should also be easy to review.
+
+16
+00:01:30.560 --> 00:01:33.040
+Name the handler's limited responsibility.
+
+17
+00:01:33.140 --> 00:01:35.700
+Document which state it can touch.
+
+18
+00:01:35.800 --> 00:01:39.800
+Keep the transition from signal request to mainline action clear.
+
+19
+00:01:39.900 --> 00:01:45.260
+When the handler is intentionally boring, the rest of the program becomes easier to reason about under interruption.

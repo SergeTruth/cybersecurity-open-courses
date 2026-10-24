@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.820
+Drivers and peripherals define important trust boundaries in RTOS systems.
+
+2
+00:00:06.920 --> 00:00:17.000
+A driver may translate hardware status into application state, expose commands to actuators, manage bus communication, or provide access to storage and network interfaces.
+
+3
+00:00:17.100 --> 00:00:23.340
+The driver API should make assumptions explicit rather than letting hardware details leak into every task.
+
+4
+00:00:23.620 --> 00:00:26.340
+Peripheral data should be validated before use.
+
+5
+00:00:26.440 --> 00:00:33.240
+Sensor readings can be out of range, stale, noisy, inconsistent with the current mode, or unavailable.
+
+6
+00:00:33.340 --> 00:00:36.700
+Bus messages can be malformed or unexpected.
+
+7
+00:00:36.800 --> 00:00:43.200
+A safe design checks values against the application contract before they influence control decisions.
+
+8
+00:00:43.480 --> 00:00:46.600
+DMA at a high level requires careful buffer ownership.
+
+9
+00:00:46.700 --> 00:00:58.940
+If hardware reads from or writes to memory directly, the software must know which buffer is active, when the hardware owns it, when the CPU may read it, and whether cache or alignment rules apply.
+
+10
+00:00:59.040 --> 00:01:04.080
+Ownership confusion can create unreliable behavior even when the driver works under simple tests.
+
+11
+00:01:04.360 --> 00:01:08.840
+Command channels need strict input contracts.
+
+12
+00:01:08.940 --> 00:01:20.620
+A command from a bus, radio, service port, or diagnostic interface should have a documented format, length, authorization state where relevant, and allowed operating modes.
+
+13
+00:01:20.720 --> 00:01:25.120
+The receiving code should reject malformed or inappropriate commands safely.
+
+14
+00:01:25.400 --> 00:01:28.440
+Debug interfaces require production controls.
+
+15
+00:01:28.540 --> 00:01:38.700
+Development access can be essential during bring-up, but production builds should review which diagnostics, shell-like interfaces, tracing features, or debug ports remain available.
+
+16
+00:01:38.800 --> 00:01:43.680
+Controls should be documented and tested as part of the release baseline.
+
+17
+00:01:43.960 --> 00:01:53.800
+Driver review should focus on boundaries: what comes from hardware, what is trusted, what is validated, what task owns the resulting state, and how errors are reported.
+
+18
+00:01:53.900 --> 00:01:59.100
+The goal is not to distrust every component equally; it is to make every boundary honest.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Network parsers in C deserve careful memory-safety design because every byte comes from outside the process boundary.
+
+2
+00:00:07.000 --> 00:00:17.240
+The parser should treat input as untrusted data until it has validated length, type, format, encoding, bounds, conversion results, and protocol state.
+
+3
+00:00:17.340 --> 00:00:22.460
+Validation is not a single check; it is a sequence of checks before each meaningful use.
+
+4
+00:00:22.740 --> 00:00:25.780
+Buffers should always travel with accurate length values.
+
+5
+00:00:25.880 --> 00:00:30.200
+A pointer without a length invites hidden assumptions.
+
+6
+00:00:30.300 --> 00:00:34.620
+A length without an ownership model invites leaks or double cleanup.
+
+7
+00:00:34.720 --> 00:00:45.120
+Parser code should make it clear which buffer owns memory, which view is borrowed, how much capacity is available, how many bytes are currently valid, and when the memory is released.
+
+8
+00:00:45.400 --> 00:00:49.720
+Integer conversions are a common source of parser mistakes.
+
+9
+00:00:49.820 --> 00:01:01.500
+Lengths may arrive as text, binary fields, signed values, unsigned values, network-byte-order values, or values that need multiplication or addition before allocation.
+
+10
+00:01:01.600 --> 00:01:12.320
+The code should check conversion success, range, overflow, and maximum policy before using a value for allocation, indexing, copying, or pointer movement.
+
+11
+00:01:12.600 --> 00:01:14.920
+String handling needs explicit boundaries.
+
+12
+00:01:15.020 --> 00:01:22.540
+Network data is not automatically null-terminated, and embedded zero bytes may be meaningful or invalid depending on the protocol.
+
+13
+00:01:22.640 --> 00:01:30.640
+Code should not pass untrusted byte ranges to string functions unless it has created a safe representation with known length and termination behavior.
+
+14
+00:01:30.920 --> 00:01:33.960
+Malformed data should be rejected before deeper processing.
+
+15
+00:01:34.060 --> 00:01:46.780
+The parser should avoid partially applying a command, allocating large state, writing logs with uncontrolled content, or advancing the connection state until the frame is known to be meaningful for the current protocol state.
+
+16
+00:01:46.880 --> 00:01:52.240
+Rejection should release temporary resources and leave the connection in a defined condition.
+
+17
+00:01:52.520 --> 00:01:54.840
+Keep parser state small and reviewable.
+
+18
+00:01:54.940 --> 00:02:02.860
+A compact state machine with clear ownership is easier to test than a parser spread across unrelated callbacks and globals.
+
+19
+00:02:02.960 --> 00:02:12.160
+Tests should include valid frames, incomplete frames, boundary sizes, malformed fields, conversion failures, and cleanup after rejection.

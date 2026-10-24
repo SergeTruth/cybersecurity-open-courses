@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+IPC testing should include more than successful request and response pairs.
+
+2
+00:00:05.320 --> 00:00:19.240
+Tests should cover malformed messages, truncated messages, oversized messages, unexpected sequence, disconnects, timeouts, repeated operations, slow peers, and cleanup after protocol failures.
+
+3
+00:00:19.340 --> 00:00:22.940
+These cases are ordinary realities for robust IPC code.
+
+4
+00:00:23.220 --> 00:00:29.780
+Permission tests should verify which users, services, or processes can access endpoints.
+
+5
+00:00:29.880 --> 00:00:37.080
+If an endpoint is meant only for a specific service account or user boundary, that expectation should be tested in the environment where it matters.
+
+6
+00:00:37.180 --> 00:00:41.660
+Endpoint permissions and deployment configuration are part of the behavior.
+
+7
+00:00:41.940 --> 00:00:47.860
+Concurrency tests are important when multiple clients, shared state, or shared memory are involved.
+
+8
+00:00:47.960 --> 00:00:55.080
+Exercise simultaneous clients, writer and reader ordering, cleanup paths, restart recovery, and abandoned resources.
+
+9
+00:00:55.180 --> 00:01:01.340
+Bugs in IPC often appear when timing changes, not when one client politely sends one request at a time.
+
+10
+00:01:01.620 --> 00:01:09.140
+Static analysis, compiler warnings, sanitizers, and runtime diagnostics can support IPC code quality.
+
+11
+00:01:09.240 --> 00:01:17.960
+They can reveal unchecked return values, suspicious length handling, memory safety issues, leaks, races in test builds, and cleanup mistakes.
+
+12
+00:01:18.060 --> 00:01:22.780
+Tools are most useful when the code structure makes endpoint and message ownership clear.
+
+13
+00:01:23.060 --> 00:01:29.780
+Logging should provide useful diagnostics without exposing sensitive payloads or internal authorization details.
+
+14
+00:01:29.880 --> 00:01:39.720
+Code review should trace endpoint creation, permissions, peer identity checks, message parsing, dispatch, state changes, cleanup, and error handling.
+
+15
+00:01:39.820 --> 00:01:45.740
+A reviewer should be able to explain what each peer may do and how the service behaves when the protocol is not followed.

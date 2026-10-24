@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Symbol Visibility, Versioning, and Dependency Control",
+  "graphicAlt": "Exported symbols and dependency changes are compared against a baseline under an explicit version policy.",
+  "narration": "Every exported symbol can become part of a compatibility and maintenance surface. If internal functions, types, or data are visible, downstream code may start using them even when they were never intended as public ABI. Hidden symbols reduce accidental coupling, symbol collisions, and reliance on implementation details. A smaller export surface is easier to review, test, and preserve across releases.\n\nVersioning makes compatibility expectations visible. API and ABI versions, symbol versions, versioned structs, and release notes help callers understand what changed and what remains supported. Versioning should be paired with policy: which changes are backward compatible, which require rebuilding clients, and which are unsupported internal details. Without policy, a version number is only decoration.\n\nDependencies can alter ABI behavior even when public source headers look similar. Compiler versions, standard library versions, runtime library choices, build flags, structure packing, and dependency updates may affect binary compatibility. Release review should inspect exported symbols, binary metadata, dependency changes, and compatibility notes. ABI changes should be intentional, documented, and approved before they reach users. A release process that ignores binary artifacts can miss exactly the changes that older callers depend on.\n\nA practical release checklist should compare exported symbols against a known baseline, record dependency updates, and call out toolchain or runtime changes. When a symbol is removed, renamed, or newly exposed, reviewers should decide whether that change is compatible, accidental, or a deliberate breaking release. The value is not bureaucracy; it is making binary risk visible before customers discover it.",
+  "narrationPoints": [
+    "Every exported symbol can become part of a compatibility and maintenance surface.",
+    "A smaller export surface is easier to review, test, and preserve across releases.",
+    "Without policy, a version number is only decoration.",
+    "Compiler versions, standard library versions, runtime library choices, build flags, structure packing, and dependency updates may affect binary compatibility.",
+    "A release process that ignores binary artifacts can miss exactly the changes that older callers depend on.",
+    "The value is not bureaucracy; it is making binary risk visible before customers discover it."
+  ]
+};

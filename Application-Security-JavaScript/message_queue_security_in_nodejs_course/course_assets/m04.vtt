@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+A queue message should be a contract, not arbitrary JSON that every worker interprets differently.
+
+2
+00:00:05.560 --> 00:00:13.720
+The contract should define message type, version, required fields, allowed types, size limits, formats, and meaning.
+
+3
+00:00:13.820 --> 00:00:18.220
+When the contract is vague, consumers quietly make their own assumptions.
+
+4
+00:00:18.320 --> 00:00:28.400
+Those assumptions become security risks when a producer changes a field used for tenant routing, authorization, file paths, payment amounts, or workflow state.
+
+5
+00:00:28.680 --> 00:00:32.280
+Validate payloads before using them in business logic.
+
+6
+00:00:32.380 --> 00:00:40.620
+Reject unsupported message types, unknown versions, malformed payloads, oversized messages, and unexpected structures.
+
+7
+00:00:40.720 --> 00:00:55.760
+Treat user IDs, tenant IDs, object keys, file paths, URLs, email addresses, roles, amounts, scopes, and workflow state as untrusted until verified against authoritative data.
+
+8
+00:00:55.860 --> 00:01:02.420
+A message can be valid according to the schema and still request an action the user or tenant should not be allowed to perform.
+
+9
+00:01:02.700 --> 00:01:06.220
+Versioning matters because queue systems often evolve gradually.
+
+10
+00:01:06.320 --> 00:01:10.000
+A producer may deploy before every consumer is updated.
+
+11
+00:01:10.100 --> 00:01:14.580
+A worker may process messages created by an older version of the API.
+
+12
+00:01:14.680 --> 00:01:19.800
+A schema change may add a sensitive field or alter the meaning of a status.
+
+13
+00:01:19.900 --> 00:01:27.100
+Consumers should fail safely when they receive unsupported versions rather than silently applying old assumptions to new data.
+
+14
+00:01:27.200 --> 00:01:31.360
+Producers and consumers need clear contract expectations.
+
+15
+00:01:31.640 --> 00:01:34.600
+Validation failures need an intentional path.
+
+16
+00:01:34.700 --> 00:01:37.100
+Some failures can be rejected and counted.
+
+17
+00:01:37.200 --> 00:01:41.360
+Others should be routed to a dead-letter queue or investigation process.
+
+18
+00:01:41.460 --> 00:01:50.580
+Logs should capture the message type, version, validation category, and safe correlation ID without dumping full sensitive payloads.
+
+19
+00:01:50.680 --> 00:01:59.000
+Schema validation supports security, but it does not replace authorization, ownership checks, tenant checks, or business-state checks.

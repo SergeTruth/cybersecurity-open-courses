@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Data sensitivity should shape temporary-file design.
+
+2
+00:00:03.880 --> 00:00:15.000
+Temporary files may contain secrets, personal data, generated reports, intermediate transformed data, or content that is safe only after a later redaction or validation step.
+
+3
+00:00:15.100 --> 00:00:18.620
+The program should decide whether that data belongs on disk at all.
+
+4
+00:00:18.900 --> 00:00:21.380
+Temporary does not always mean private.
+
+5
+00:00:21.480 --> 00:00:27.160
+A file may be readable by another account because of directory or mode settings.
+
+6
+00:00:27.260 --> 00:00:29.260
+It may remain after a crash.
+
+7
+00:00:29.360 --> 00:00:35.200
+It may be included in backups, snapshots, diagnostics, or operational collection.
+
+8
+00:00:35.300 --> 00:00:40.660
+It may be visible through logs or monitoring tools that record paths and names.
+
+9
+00:00:40.940 --> 00:00:45.740
+Avoid storing sensitive values unless the workflow truly requires it.
+
+10
+00:00:45.840 --> 00:00:54.800
+If data can remain in memory, stream through a pipe, or be represented by a handle without writing sensitive content to disk, that may reduce persistence and exposure.
+
+11
+00:00:54.900 --> 00:01:00.900
+When disk storage is necessary, permissions and cleanup need to match the sensitivity.
+
+12
+00:01:01.180 --> 00:01:04.700
+Intermediate content can be more sensitive than final output.
+
+13
+00:01:04.800 --> 00:01:13.200
+Decrypted data, unredacted reports, raw imports, temporary exports, and expanded configuration values may reveal more than the final artifact.
+
+14
+00:01:13.300 --> 00:01:18.740
+Reviewers should ask what the file contains during every phase, not only what it becomes at the end.
+
+15
+00:01:19.020 --> 00:01:24.780
+Diagnostics should avoid exposing sensitive paths, names, or values unnecessarily.
+
+16
+00:01:24.880 --> 00:01:32.960
+Logs can identify a field, operation, failure category, or sanitized path without dumping secrets or untrusted content.
+
+17
+00:01:33.060 --> 00:01:36.660
+Redaction rules should be part of the temporary-file contract.
+
+18
+00:01:36.940 --> 00:01:40.060
+Retention expectations should be clear.
+
+19
+00:01:40.160 --> 00:01:47.280
+Is the file removed immediately, retained for troubleshooting, kept until a process exits, or cleaned by an external job?
+
+20
+00:01:47.380 --> 00:01:52.740
+The answer affects privacy, storage, compliance, and incident response.

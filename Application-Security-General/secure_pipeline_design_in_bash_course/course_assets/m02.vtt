@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+A Bash pipeline connects the standard output of one command to the standard input of another.
+
+2
+00:00:05.640 --> 00:00:10.280
+That basic model is simple, but it is worth slowing down on the details.
+
+3
+00:00:10.380 --> 00:00:14.140
+Standard output is the data stream being passed forward.
+
+4
+00:00:14.240 --> 00:00:18.880
+Standard error is separate unless the script redirects it intentionally.
+
+5
+00:00:19.160 --> 00:00:22.200
+That distinction matters for parsing and logging.
+
+6
+00:00:22.300 --> 00:00:28.620
+A tool may write machine-readable data to standard output while writing warnings or diagnostics to standard error.
+
+7
+00:00:28.720 --> 00:00:37.840
+If a script mixes the streams carelessly, downstream stages may process error messages as if they were data, or logs may miss the evidence needed to explain a failure.
+
+8
+00:00:38.120 --> 00:00:40.520
+A pipeline is not one simple command.
+
+9
+00:00:40.620 --> 00:00:43.820
+It is several commands connected by streams.
+
+10
+00:00:43.920 --> 00:00:49.920
+Each command has its own behavior, output, error stream, and exit status.
+
+11
+00:00:50.020 --> 00:00:54.580
+Some elements may run in subshells, which can affect variables and state.
+
+12
+00:00:54.680 --> 00:00:59.000
+A change made inside part of a pipeline may not be visible where the author expects.
+
+13
+00:00:59.280 --> 00:01:02.560
+Bash reports pipeline status according to shell rules.
+
+14
+00:01:02.660 --> 00:01:07.140
+If the script only looks at the final command, it may miss an earlier failure.
+
+15
+00:01:07.240 --> 00:01:15.320
+That can create false confidence when a final formatting or filtering step completes successfully after receiving empty or invalid upstream data.
+
+16
+00:01:15.600 --> 00:01:21.120
+The secure mental model is multiple processes with separate streams and results.
+
+17
+00:01:21.220 --> 00:01:30.580
+When you design a pipeline with that model, you are more likely to separate stdout and stderr intentionally, check important stages, and avoid treating the pipeline as a black box.

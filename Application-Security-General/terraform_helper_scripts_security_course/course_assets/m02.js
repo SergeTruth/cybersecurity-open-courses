@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Scope, Workspace, Backend, and Environment Validation",
+  "graphicAlt": "Workspace, backend, cloud account and variable set must agree at a target-validation gate before reaching an environment.",
+  "narration": "A Terraform helper script should always understand its target before it runs Terraform. The target is more than a workspace name. It includes the backend category, state location, cloud account, project, tenant, subscription, region, repository path, module directory, variable set, and intended environment. If those details are implicit, inherited, or assumed from a developer workstation, the script is relying on luck instead of control.\n\nDevelopment, staging, and production should not share accidental defaults. A local cloud profile, a previously selected workspace, a cached backend configuration, or a current working directory may be convenient during development, but those assumptions are fragile in automation. A helper should validate that the selected workspace matches the intended environment, that the backend matches the expected state location, and that the active cloud identity is operating in the approved account or project.\n\nVariable sets also define scope. A script may pass environment-specific files, region overlays, feature flags, sizing choices, network settings, or identity configuration. Those inputs should be explicit and reviewed. The helper should make it difficult to combine a production workspace with a development variable file, or a staging backend with a production account. Clear naming is useful, but validation is what turns naming into a guardrail.\n\nSafe failure is a feature. If a target cannot be confirmed, if the backend does not match expectations, if the region is outside the approved list, or if the variable set is inconsistent with the requested environment, the helper should stop. A failed precheck is much cheaper than a wrong-environment plan or apply. Good Terraform helper scripts make the target visible before work begins and refuse to continue when the target is ambiguous.",
+  "narrationPoints": [
+    "A Terraform helper script should always understand its target before it runs Terraform.",
+    "Development, staging, and production should not share accidental defaults.",
+    "A script may pass environment-specific files, region overlays, feature flags, sizing choices, network settings, or identity configuration.",
+    "A failed precheck is much cheaper than a wrong-environment plan or apply.",
+    "The target is more than a workspace name.",
+    "If those details are implicit, inherited, or assumed from a developer workstation, the script is relying on luck instead of control."
+  ]
+};

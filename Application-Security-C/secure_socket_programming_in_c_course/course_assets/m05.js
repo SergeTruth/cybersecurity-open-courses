@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Protocol Framing and Message Validation",
+  "graphicAlt": "TCP framing and UDP validation converge on bounded schema checks before dispatch.",
+  "narration": "Protocols need framing so the receiver knows where one application message ends and the next begins. TCP is a byte stream, not a message queue. A single read might contain part of a message, exactly one message, or multiple messages. The application protocol must define how messages are framed and the implementation must preserve parser state across reads.\n\nUDP preserves datagram boundaries, but that does not remove the need for validation. A datagram still has a source, size, payload format, and operational meaning. The receiver should check whether the datagram fits the expected protocol, size limit, and trust model before acting on it.\n\nLength prefixes, delimiters, command identifiers, version fields, flags, and payload formats all need validation before use. A length should be checked against available data and maximum policy limits. A command should be supported. A flag should be understood. A payload should match the schema expected for that command.\n\nMalformed, unsupported, oversized, truncated, or out-of-sequence messages should fail safely. That may mean rejecting one message, closing the connection, resetting parser state, or reporting an error according to the protocol. The important part is that invalid input does not become a partially trusted request.\n\nValidation should happen before allocation, copying, deep parsing, command dispatch, or state-changing operations. If a service allocates based on unchecked network-provided sizes or dispatches before checking the complete message, the protocol boundary becomes fragile. Good framing makes the receiver's behavior predictable under imperfect input.",
+  "narrationPoints": [
+    "The application protocol must define how messages are framed and the implementation must preserve parser state across reads.",
+    "The receiver should check whether the datagram fits the expected protocol, size limit, and trust model before acting on it.",
+    "A length should be checked against available data and maximum policy limits.",
+    "The important part is that invalid input does not become a partially trusted request.",
+    "Validation should happen before allocation, copying, deep parsing, command dispatch, or state-changing operations."
+  ]
+};

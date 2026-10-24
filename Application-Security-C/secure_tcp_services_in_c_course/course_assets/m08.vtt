@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.460
+Authentication and encryption define important parts of a TCP service's trust model, but they do not remove the need for parser safety, limits, lifecycle management, or authorization.
+
+2
+00:00:11.560 --> 00:00:21.400
+A service that receives sensitive data should not assume plaintext transport is acceptable unless the deployment boundary and data classification clearly support that decision.
+
+3
+00:00:21.680 --> 00:00:26.960
+TLS-like transport protection can help protect confidentiality and integrity in transit.
+
+4
+00:00:27.060 --> 00:00:38.500
+It also introduces configuration responsibilities: certificate validation, key storage, protocol and cipher policy, renewal, error handling, and operational visibility.
+
+5
+00:00:38.600 --> 00:00:45.560
+These decisions should be managed as part of the service design, not left as defaults that no one reviews.
+
+6
+00:00:45.840 --> 00:00:49.520
+Client identity is separate from encrypted transport.
+
+7
+00:00:49.620 --> 00:01:01.060
+A protected channel may tell the service that communication is private to the configured peer relationship, but the application still needs to know which client is connected and what that client is allowed to do.
+
+8
+00:01:01.160 --> 00:01:08.760
+Mutual authentication, tokens, service identity, or application-level credentials may be appropriate depending on the deployment.
+
+9
+00:01:09.040 --> 00:01:11.840
+Authorization happens after authentication.
+
+10
+00:01:11.940 --> 00:01:20.020
+Once a client is identified, the service still needs to decide which commands, resources, tenants, or operations are allowed.
+
+11
+00:01:20.120 --> 00:01:27.000
+Parser code should not trust a requested action just because the connection is encrypted or because authentication succeeded earlier in the session.
+
+12
+00:01:27.280 --> 00:01:30.000
+Trust boundaries remain inside the protocol.
+
+13
+00:01:30.100 --> 00:01:38.260
+A service may have public commands, authenticated commands, administrative actions, and internal maintenance behavior.
+
+14
+00:01:38.360 --> 00:01:48.040
+The protocol should make those boundaries explicit, and tests should confirm that the service rejects requests that do not match the client's current identity, state, and authorization.

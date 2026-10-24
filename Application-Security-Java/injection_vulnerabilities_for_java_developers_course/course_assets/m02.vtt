@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Injection review starts at trust boundaries.
+
+2
+00:00:03.240 --> 00:00:16.920
+In a Java web application, untrusted input can arrive through request bodies, query parameters, route parameters, headers, cookies, JSON payloads, XML payloads, multipart forms, and file uploads.
+
+3
+00:00:17.020 --> 00:00:31.820
+Backend services add more entry points: message queues, webhooks, partner API responses, scheduled imports, environment variables, configuration values, command-line arguments, and data restored from storage.
+
+4
+00:00:31.920 --> 00:00:35.440
+None of these should be assumed safe just because they are internal.
+
+5
+00:00:35.720 --> 00:00:39.800
+The important question is not only where data enters, but where it is used.
+
+6
+00:00:39.900 --> 00:00:52.700
+A value may pass through controllers, DTOs, validators, mappers, services, repositories, templates, loggers, and outbound clients before it reaches a sensitive sink.
+
+7
+00:00:52.800 --> 00:00:57.200
+By the time the risk appears, the original source may be several method calls away.
+
+8
+00:00:57.300 --> 00:01:03.700
+That is why data-flow mapping is more useful than checking only the controller method that receives the request.
+
+9
+00:01:03.980 --> 00:01:07.580
+A practical review traces values from boundary to sink.
+
+10
+00:01:07.680 --> 00:01:16.880
+Ask where the value came from, whether its intended meaning is narrow, which transformations happen along the way, and whether the final API treats it as data or syntax.
+
+11
+00:01:16.980 --> 00:01:32.580
+Search terms, filter fields, sort directions, file names, tenant identifiers, callback URLs, XML nodes, and message attributes often deserve special attention because they look ordinary while still influencing interpretation.
+
+12
+00:01:32.860 --> 00:01:36.140
+Good Java design makes trust boundaries visible.
+
+13
+00:01:36.240 --> 00:01:40.960
+Use request models that separate raw external input from validated domain values.
+
+14
+00:01:41.060 --> 00:01:45.940
+Prefer typed enums for choices like sort direction or report format.
+
+15
+00:01:46.040 --> 00:01:53.480
+Convert strings to domain types early, reject ambiguous values, and pass typed values into safe APIs.
+
+16
+00:01:53.580 --> 00:02:03.020
+When the codebase shows a clear path from external input to constrained internal representation, injection flaws become easier to prevent and easier to review.

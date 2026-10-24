@@ -1,0 +1,12 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Using Platform Random Sources Safely",
+  "codeIntro": "A small wrapper converts provider-specific success and byte-count reporting into an exact-output application contract.",
+  "codeExamples": [
+    {
+      "title": "Enforce complete random-provider output",
+      "language": "c",
+      "blurb": "The wrapper rejects failed, short, or oversized reports and clears partial bytes so callers never receive an incomplete security value.",
+      "code": "#include <assert.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <string.h>\n\ntypedef bool (*random_read_fn)(void *context, uint8_t *output,\n                               size_t requested, size_t *produced);\n\nstruct scripted_source {\n    size_t reported_bytes;\n    bool succeeds;\n    uint8_t value;\n};\n\nstatic bool scripted_read(void *context, uint8_t *output,\n                          size_t requested, size_t *produced)\n{\n    const struct scripted_source *source = context;\n    size_t writable = 0;\n\n    if (source == NULL || output == NULL || produced == NULL) {\n        return false;\n    }\n    writable = source->reported_bytes < requested\n        ? source->reported_bytes : requested;\n    memset(output, source->value, writable);\n    *produced = source->reported_bytes;\n    return source->succeeds;\n}\n\nstatic bool random_fill_exact(random_read_fn read_source, void *context,\n                              uint8_t *output, size_t length)\n{\n    size_t produced = 0;\n\n    if (read_source == NULL || output == NULL || length == 0) {\n        return false;\n    }\n    memset(output, 0, length);\n    if (!read_source(context, output, length, &produced) ||\n        produced != length) {\n        /* IMPORTANT FIX: partial output is cleared and never published. */\n        memset(output, 0, length);\n        return false;\n    }\n    return true;\n}\n\nint main(void)\n{\n    struct scripted_source full = {16, true, 0x5au};\n    struct scripted_source short_read = {8, true, 0xa5u};\n    uint8_t output[16] = {0};\n    size_t index = 0;\n\n    assert(random_fill_exact(scripted_read, &full, output, sizeof output));\n    assert(output[0] == 0x5au && output[15] == 0x5au);\n    assert(!random_fill_exact(scripted_read, &short_read,\n                              output, sizeof output));\n\n    /* TEST: every byte is cleared after incomplete provider output. */\n    for (index = 0; index < sizeof output; ++index) {\n        assert(output[index] == 0u);\n    }\n    return 0;\n}\n"
+    }
+  ]
+};

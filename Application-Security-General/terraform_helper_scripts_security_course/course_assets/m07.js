@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Modules, Providers, Variables, and Supply Chain Trust",
+  "graphicAlt": "Reviewed modules, controlled providers and explicit variables pass provenance and version checks before contributing to a plan.",
+  "narration": "Terraform workflows depend on more than the helper script itself. They depend on modules, providers, variables, environment overlays, generated configuration, and remote sources. Those inputs can change identity permissions, network exposure, storage settings, logging behavior, encryption choices, and service configuration. A secure helper script should assume that dependency and input governance is part of the workflow, not a separate concern.\n\nProviders and plugins are especially important because they run in automation environments that may have access to credentials and state. Version changes can affect behavior, supported arguments, defaults, and generated plans. Organizations should control provider versions through an approved process, pin versions where appropriate, and review updates before they affect privileged workflows. The same principle applies to shared modules and remote module sources.\n\nVariable files and environment overlays deserve careful review. A small variable change can alter regions, CIDR ranges, public exposure, identity bindings, logging retention, backup behavior, or encryption settings. Helper scripts should make the selected variable set explicit and should avoid silently combining unrelated overlays. Reviewers should be able to see which variables were used for a plan and why those variables match the target environment.\n\nShared modules need ownership, versioning, provenance, and review history. A module that creates infrastructure for many teams becomes part of the organization's platform boundary. Defaults should be intentional, especially for permissions, network access, storage protection, logging, and monitoring. Secure Terraform helper scripts should reinforce module and provider governance instead of bypassing it for convenience.",
+  "narrationPoints": [
+    "Terraform workflows depend on more than the helper script itself.",
+    "Providers and plugins are especially important because they run in automation environments that may have access to credentials and state.",
+    "Variable files and environment overlays deserve careful review.",
+    "Shared modules need ownership, versioning, provenance, and review history.",
+    "A secure helper script should assume that dependency and input governance is part of the workflow, not a separate concern.",
+    "Version changes can affect behavior, supported arguments, defaults, and generated plans."
+  ]
+};

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Process creation code should be reviewed as a launch contract.
+
+2
+00:00:04.200 --> 00:00:18.920
+Reviewers should identify the program path, path trust, argument construction, shell usage, environment, working directory, descriptor inheritance, privileges, resource limits, lifecycle handling, and cleanup behavior.
+
+3
+00:00:19.200 --> 00:00:25.920
+Unit tests can cover argument construction and validation without launching real external programs.
+
+4
+00:00:26.020 --> 00:00:36.660
+Integration tests can verify the actual launch path, environment handling, working directory, I/O redirection, exit status interpretation, and error reporting.
+
+5
+00:00:36.760 --> 00:00:39.000
+Both levels of testing are useful.
+
+6
+00:00:39.280 --> 00:00:42.880
+Timeout and cleanup paths need explicit tests.
+
+7
+00:00:42.980 --> 00:00:55.700
+A child that exits quickly, fails to start, writes large output, produces no output, hangs, exits with a failure status, or triggers partial setup cleanup can reveal assumptions that happy-path tests miss.
+
+8
+00:00:55.980 --> 00:01:01.100
+Path-resolution, permission, and environment tests reveal deployment assumptions.
+
+9
+00:01:01.200 --> 00:01:08.880
+The launcher may behave differently under a service account, build agent, container, scheduled task, or developer shell.
+
+10
+00:01:08.980 --> 00:01:12.420
+Tests should reflect the contexts that matter for the program.
+
+11
+00:01:12.700 --> 00:01:24.300
+Static analysis, compiler warnings, and sanitizers support implementation quality by catching ignored results, memory mistakes, unsafe string handling, and cleanup gaps.
+
+12
+00:01:24.400 --> 00:01:28.000
+Operational logging can help diagnose failures safely.
+
+13
+00:01:28.100 --> 00:01:33.540
+These tools help, but they do not replace a clear process-launch contract.

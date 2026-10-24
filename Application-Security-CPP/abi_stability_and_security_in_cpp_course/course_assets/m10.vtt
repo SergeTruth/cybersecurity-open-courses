@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+An ABI safety roadmap starts by identifying binary boundaries deliberately.
+
+2
+00:00:05.400 --> 00:00:10.600
+Decide which interfaces are stable commitments and which are internal details.
+
+3
+00:00:10.700 --> 00:00:15.100
+Keep stable binary interfaces narrow, versioned, and documented.
+
+4
+00:00:15.200 --> 00:00:29.600
+Hide implementation layout where practical, and avoid exposing fragile C++ details such as templates, inline implementation, standard library types, and virtual hierarchies when long-term compatibility is required.
+
+5
+00:00:29.880 --> 00:00:45.160
+Use patterns that make evolution predictable: opaque handles, C-compatible facades, PIMPL, versioned structs, capability queries, explicit ownership rules, paired allocation and release functions, and clear error translation.
+
+6
+00:00:45.260 --> 00:00:48.460
+Control symbol visibility and dependency assumptions.
+
+7
+00:00:48.560 --> 00:00:58.400
+Treat plugins and third-party modules as both compatibility boundaries and potential trust boundaries, with clear lifecycle, threading, ownership, and shutdown rules.
+
+8
+00:00:58.680 --> 00:01:00.920
+Finally, verify the promise.
+
+9
+00:01:01.020 --> 00:01:04.140
+Test old clients against new libraries where practical.
+
+10
+00:01:04.240 --> 00:01:07.920
+Inspect exported symbols and release artifacts.
+
+11
+00:01:08.020 --> 00:01:11.380
+Track dependency and runtime changes.
+
+12
+00:01:11.480 --> 00:01:17.240
+Document supported platforms, version policy, migration paths, and compatibility impact.
+
+13
+00:01:17.340 --> 00:01:27.100
+ABI stability supports both reliability and security because it keeps upgrades predictable, resource ownership clear, and binary integration behavior reviewable over time.
+
+14
+00:01:27.200 --> 00:01:33.280
+Treat every release as an opportunity to confirm that the binary contract still matches the documented contract.
+
+15
+00:01:33.560 --> 00:01:36.840
+The habit to carry forward is intentionality.
+
+16
+00:01:36.940 --> 00:01:43.340
+Do not let ABI promises emerge accidentally from whatever symbols happen to be visible or whatever types happen to appear in a header.
+
+17
+00:01:43.440 --> 00:01:53.600
+Choose the boundary, document it, keep it narrow, test it as a product feature, and change it only with the same care you would apply to any security-relevant interface.

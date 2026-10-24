@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Public-Key Systems, JWKS, Certificates, and Trust Distribution",
+  "graphicAlt": "A verifier selects authentic public keys from trusted distribution while enforcing issuer and algorithm expectations and planning rollover.",
+  "narration": "Asymmetric systems use private keys and public keys, but the direction depends on the design. A private key may sign data that public keys verify. A public key may encrypt data that only the private key can decrypt. In both cases, the private key is a high-value secret. It should be protected with strong storage, limited access, rotation planning, and careful operational handling.\n\nPublic keys are not secret, but their integrity matters. If a verifier trusts the wrong public key, signature verification may succeed for the wrong signer. JWKS endpoints, certificate chains, pinned keys, configured public keys, and service metadata are all ways to distribute verification material. The security question is whether the verifier receives authentic keys and applies the expected trust rules.\n\nKey identifiers help verifiers choose the right key during rotation, but they should not be trusted blindly. A token or message may include a key identifier, but the application still needs to enforce expected issuer, audience, algorithm, key source, certificate trust, and purpose where relevant. The key identifier selects from trusted material; it should not cause the verifier to fetch and trust arbitrary keys.\n\nCertificates add identity, expiration, and trust-chain considerations beyond raw keys. Renewal, revocation, rollover, and outage behavior should be planned before production incidents occur. Public-key management is trust distribution. The hard part is not only generating a pair; it is protecting the private key, distributing authentic verification material, and rolling keys without accepting the wrong key or breaking legitimate traffic.",
+  "narrationPoints": [
+    "A private key may sign data that public keys verify.",
+    "If a verifier trusts the wrong public key, signature verification may succeed for the wrong signer.",
+    "A token or message may include a key identifier, but the application still needs to enforce expected issuer, audience, algorithm, key source, certificate trust, and purpose where relevant.",
+    "The hard part is not only generating a pair; it is protecting the private key, distributing authentic verification material, and rolling keys without accepting the wrong key or breaking legitimate traffic.",
+    "Key identifiers help verifiers choose the right key during rotation, but they should not be trusted blindly.",
+    "A public key may encrypt data that only the private key can decrypt."
+  ]
+};

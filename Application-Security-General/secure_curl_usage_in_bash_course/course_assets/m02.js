@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "URLs, Inputs, and Trust Boundaries",
+  "graphicAlt": "URL inputs pass destination rules before reaching a known endpoint; unsupported targets stop before any request.",
+  "narration": "A URL is not just a string. It contains a scheme, host, port, path, query, and sometimes parameters that came from another workflow. In Bash automation, the URL decides where data is sent, where content is fetched, and which service is trusted for the next decision.\n\nURLs may come from command-line arguments, configuration files, environment variables, CI/CD variables, metadata services, tool output, or repository settings. Some of those sources are controlled. Others are indirect, stale, malformed, or influenced by another process. Treat request targets as input crossing a trust boundary.\n\nMany workflows should use allowlisted endpoints rather than open-ended URLs. A deployment script may support known API base URLs for development, staging, and production. A health check may support a known host and path. A metadata request may be limited to one internal service. Narrow destination rules are easier to review than arbitrary request targets.\n\nValidation should consider scheme, host, port, path, and query expectations. If only HTTPS is allowed, say so in the script. If only specific hosts are allowed, enforce that before making the request. If query values come from inputs, validate their shape and purpose before sending them.\n\nRedirects and metadata values should also be treated as input. A service response that points to another location may be valid in one workflow and unsafe in another. Secure automation rejects unsupported destinations before the request executes, not after data has already been sent.\n\nThe review question is: can this script send data somewhere unexpected? If the answer is hard to determine, the destination rules should be tightened. Good URL handling makes HTTP automation predictable before curl ever opens a connection.",
+  "narrationPoints": [
+    "In Bash automation, the URL decides where data is sent, where content is fetched, and which service is trusted for the next decision.",
+    "URLs may come from command-line arguments, configuration files, environment variables, CI/CD variables, metadata services, tool output, or repository settings.",
+    "Many workflows should use allowlisted endpoints rather than open-ended URLs.",
+    "Validation should consider scheme, host, port, path, and query expectations.",
+    "Redirects and metadata values should also be treated as input.",
+    "The review question is: can this script send data somewhere unexpected?"
+  ]
+};

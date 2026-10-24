@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Privilege management in C starts with a simple observation: some programs can affect more of the system than ordinary application code.
+
+2
+00:00:08.120 --> 00:00:22.040
+They may read or write protected files, open sensitive devices, bind restricted resources, interact with other users, create child processes, update logs, or change operational state that other components depend on.
+
+3
+00:00:22.140 --> 00:00:31.500
+When a C program runs with this kind of authority, mistakes that would normally be local defects can become system-level reliability and security problems.
+
+4
+00:00:31.780 --> 00:00:35.060
+This does not mean privileged C code has to be mysterious.
+
+5
+00:00:35.160 --> 00:00:38.120
+It means the design must be explicit.
+
+6
+00:00:38.220 --> 00:00:50.140
+Developers need to know which part of the program runs with elevated authority, why that authority is needed, what data reaches that code, what files or resources it can touch, and how the program behaves when something fails.
+
+7
+00:00:50.240 --> 00:00:55.600
+Privilege is a boundary for design, review, testing, and operations.
+
+8
+00:00:55.880 --> 00:00:58.840
+Inputs deserve extra discipline around this boundary.
+
+9
+00:00:58.940 --> 00:01:11.020
+Command-line arguments, configuration values, paths, environment variables, message data, file names, and runtime state should not be trusted just because they arrive before a privileged action.
+
+10
+00:01:11.120 --> 00:01:19.520
+The program should validate shape, range, ownership, location, and intended use before it makes a decision that depends on authority.
+
+11
+00:01:19.800 --> 00:01:23.480
+Cleanup paths are just as important as happy paths.
+
+12
+00:01:23.580 --> 00:01:33.500
+A privileged program may create files, change permissions, hold descriptors or handles, update locks, start child processes, or write audit events.
+
+13
+00:01:33.600 --> 00:01:38.640
+If the program exits early or encounters an error, cleanup should still be predictable.
+
+14
+00:01:38.740 --> 00:01:46.580
+Reviewers should ask whether resources are left in a safe state and whether failures are reported without exposing sensitive details.
+
+15
+00:01:46.860 --> 00:01:49.980
+The main habit for this course is to make privilege visible.
+
+16
+00:01:50.080 --> 00:01:54.960
+Put privileged assumptions in the design, not only in scattered code comments.
+
+17
+00:01:55.060 --> 00:02:02.820
+Make the boundary easy to review, keep the powerful parts small, and ensure tests cover both expected behavior and failure behavior.
+
+18
+00:02:02.920 --> 00:02:09.560
+Privileged code becomes safer when teams can explain it, constrain it, and verify it repeatedly.

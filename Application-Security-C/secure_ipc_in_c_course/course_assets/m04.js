@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Peer Identity and Trust Decisions",
+  "graphicAlt": "A connection proceeds through peer checks and action-specific authorization.",
+  "narration": "Some IPC workflows need to know who is on the other side. A service may need to distinguish an administrative tool from an ordinary client, a same-user helper from another account, or a trusted component from a general local process. Peer identity is the bridge between connection and authorization.\n\nEndpoint names alone should not be treated as proof of identity. A client that reaches a named pipe, socket path, or queue name is not necessarily authorized to request every action exposed by that endpoint. The endpoint name may identify where communication happens, but it does not automatically explain who the peer is or what that peer should be allowed to do.\n\nPlatform-supported peer identity checks can help, but their meaning depends on the IPC mechanism and operating system. The design should state what identity property is being checked, when it is checked, whether it can change, and which operations depend on it. A check that is useful for one mechanism may not apply to another.\n\nAuthentication and authorization should be tied to the action being requested. A peer might be allowed to query status but not change configuration. It might be allowed to submit a job but not read another user's result. The existence of a connection is not the same as permission for every command.\n\nPrivileged services should treat low-trust client requests as untrusted even over local IPC. The service may be local, but the requested action can still be high impact. Review should identify every place peer identity affects trust, access, command dispatch, file access, or state changes.",
+  "narrationPoints": [
+    "A service may need to distinguish an administrative tool from an ordinary client, a same-user helper from another account, or a trusted component from a general local process.",
+    "Endpoint names alone should not be treated as proof of identity.",
+    "Platform-supported peer identity checks can help, but their meaning depends on the IPC mechanism and operating system.",
+    "Authentication and authorization should be tied to the action being requested.",
+    "Review should identify every place peer identity affects trust, access, command dispatch, file access, or state changes."
+  ]
+};

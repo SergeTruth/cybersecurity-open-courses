@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Parser tests should cover more than successful messages.
+
+2
+00:00:04.040 --> 00:00:17.480
+Useful cases include empty input, short input, malformed headers, unsupported versions, oversized fields, inconsistent lengths, unexpected state transitions, repeated operations, and disconnects.
+
+3
+00:00:17.580 --> 00:00:21.180
+These cases confirm that failure behavior is intentional.
+
+4
+00:00:21.460 --> 00:00:25.700
+Corpus tests help preserve behavior for known valid and invalid samples.
+
+5
+00:00:25.800 --> 00:00:33.720
+As the parser evolves, the corpus gives developers a stable set of examples that should continue to pass or fail in known ways.
+
+6
+00:00:33.820 --> 00:00:37.660
+This is especially useful when protocol compatibility matters.
+
+7
+00:00:37.940 --> 00:00:45.700
+Fuzzing can support robustness testing by exercising unusual combinations of fields, sizes, message boundaries, and state transitions.
+
+8
+00:00:45.800 --> 00:00:49.720
+At a high level, it helps discover assumptions that normal tests miss.
+
+9
+00:00:49.820 --> 00:01:00.300
+Fuzzing is strongest when paired with clear limits, sanitizers, and a harness that treats crashes, leaks, hangs, and unexpected accepts as useful signals.
+
+10
+00:01:00.580 --> 00:01:08.820
+Runtime sanitizers and static analysis can reveal memory safety, arithmetic, and unchecked-value issues during testing and review.
+
+11
+00:01:08.920 --> 00:01:15.960
+These tools do not replace design, but they often find places where the implementation does not match the intended validation model.
+
+12
+00:01:16.240 --> 00:01:23.200
+Logs should help diagnose parser behavior without dumping secrets, full sensitive payloads, or misleading trust assumptions.
+
+13
+00:01:23.300 --> 00:01:31.700
+Code review should trace raw input through framing, decoding, validation, state checks, dispatch, cleanup, and error handling.
+
+14
+00:01:31.800 --> 00:01:35.640
+That trace is the practical proof that the parser boundary is enforced.

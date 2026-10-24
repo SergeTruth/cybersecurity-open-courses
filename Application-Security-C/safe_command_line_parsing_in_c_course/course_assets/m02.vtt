@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+C programs commonly receive command-line data through argc and argv.
+
+2
+00:00:04.920 --> 00:00:08.680
+argc tells the program how many argument entries are available.
+
+3
+00:00:08.780 --> 00:00:11.500
+argv provides pointers to argument strings.
+
+4
+00:00:11.600 --> 00:00:15.360
+That model is simple, but it should not be confused with validation.
+
+5
+00:00:15.460 --> 00:00:20.260
+Delivery by the operating environment does not prove that an argument has the expected meaning.
+
+6
+00:00:20.540 --> 00:00:24.700
+Each argv entry is presented as a C string for the program to interpret.
+
+7
+00:00:24.800 --> 00:00:36.240
+The program still needs to consider length, null termination expectations, encoding assumptions, and how the value will be copied, compared, parsed, or passed into internal logic.
+
+8
+00:00:36.340 --> 00:00:40.340
+Treat the argument as input, not as a trusted internal object.
+
+9
+00:00:40.620 --> 00:00:46.540
+The first argument is often treated as the program name, but assumptions can vary by environment and launcher.
+
+10
+00:00:46.640 --> 00:00:56.400
+Code should avoid depending on the program-name value for security-sensitive decisions or precise behavior unless the surrounding platform contract is understood and reviewed.
+
+11
+00:00:56.680 --> 00:01:03.640
+Platform and command processor behavior can affect how arguments are split, quoted, encoded, and delivered.
+
+12
+00:01:03.740 --> 00:01:12.940
+A defensive parser should focus on the values it actually receives and should document its own accepted forms instead of assuming every launcher will represent input the same way.
+
+13
+00:01:13.220 --> 00:01:15.140
+Pointer validity also has a scope.
+
+14
+00:01:15.240 --> 00:01:27.560
+argv entries are valid during program execution under the normal startup contract, but copying those pointers into longer-lived or asynchronous contexts still needs lifetime review.
+
+15
+00:01:27.660 --> 00:01:34.700
+A parser should produce a validated internal configuration rather than spreading raw argument pointers throughout the program.

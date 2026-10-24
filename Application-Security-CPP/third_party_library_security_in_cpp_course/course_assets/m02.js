@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Dependency Inventory and Ownership",
+  "graphicAlt": "An owned inventory maps dependency versions and sources to shipped artifacts.",
+  "narration": "Dependency security starts with knowing what is in the product. A useful inventory includes direct dependencies, important transitive dependencies, versions, source locations, build options, license obligations, deployment targets, and the reason each dependency exists. Without that record, a team may not know which applications are affected when an advisory appears or when a library reaches end of support.\n\nOwnership is just as important as the list. Every meaningful dependency should have an engineering owner or owning team. That owner does not need to make every update alone, but someone must watch release notes, evaluate advisories, understand build configuration, approve feature changes, and remove the dependency when it is no longer needed. Dependencies with no owner tend to become stale and surprising.\n\nSBOM-style records can improve visibility. They help security teams, product teams, release teams, and customers understand what components are present. They also make incident response more precise. When a dependency issue is announced, the team can ask whether the affected version is present, whether the affected feature is enabled, and which shipped artifacts need attention.\n\nInventory should also drive reduction. Unused libraries, duplicate implementations, old compatibility packages, and forgotten sample tools add maintenance burden. Removing a dependency can be one of the strongest security improvements because it eliminates update work, configuration uncertainty, and future exposure. A clean inventory keeps dependency decisions visible, assigned, and connected to product value.",
+  "narrationPoints": [
+    "A useful inventory includes direct dependencies, important transitive dependencies, versions, source locations, build options, license obligations, deployment targets, and the reason each dependency exists.",
+    "Every meaningful dependency should have an engineering owner or owning team.",
+    "When a dependency issue is announced, the team can ask whether the affected version is present, whether the affected feature is enabled, and which shipped artifacts need attention.",
+    "Removing a dependency can be one of the strongest security improvements because it eliminates update work, configuration uncertainty, and future exposure.",
+    "A clean inventory keeps dependency decisions visible, assigned, and connected to product value.",
+    "Unused libraries, duplicate implementations, old compatibility packages, and forgotten sample tools add maintenance burden."
+  ]
+};

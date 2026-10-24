@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Logging, Secrets, and Operational Review",
+  "graphicAlt": "Pipeline operations produce safe summaries and separate diagnostics, supported by edge-case testing and anomaly monitoring.",
+  "narration": "A secure pipeline should be understandable during normal operations and during troubleshooting. Logs should show the high-level action attempted, the safe level of input context, how many records or files were processed where appropriate, and whether the pipeline succeeded or failed.\n\nLogs should not expose secrets, tokens, private keys, sensitive file contents, private paths where inappropriate, or excessive raw data. Pipeline output can be tempting to dump because it is already text, but raw output may contain more information than operators need for routine troubleshooting.\n\nSeparate data output from diagnostic errors where useful. A script that sends machine-readable data to stdout and human-readable diagnostics to stderr is easier to compose safely. Mixing those streams makes later parsing more fragile and can cause error text to be interpreted as data.\n\nReview should include both tool-assisted and human judgment. ShellCheck can catch common Bash issues, but peer review is needed for data-flow assumptions, trust boundaries, redaction decisions, and whether pipeline results are strong enough to support downstream actions.\n\nTesting should include no-match cases, malformed input, empty input, unexpected columns, unusual counts, and representative production-like shapes. These tests catch the cases that compact pipelines often hide during happy-path development.\n\nOperational monitoring completes the loop. Watch for pipeline failures, unusual counts, missing expected output, and repeated validation failures. A secure pipeline is not just one that works once. It is one that continues to provide reliable evidence when inputs, tools, and environments change.",
+  "narrationPoints": [
+    "A secure pipeline should be understandable during normal operations and during troubleshooting.",
+    "Logs should not expose secrets, tokens, private keys, sensitive file contents, private paths where inappropriate, or excessive raw data.",
+    "Separate data output from diagnostic errors where useful.",
+    "Review should include both tool-assisted and human judgment.",
+    "Testing should include no-match cases, malformed input, empty input, unexpected columns, unusual counts, and representative production-like shapes.",
+    "Watch for pipeline failures, unusual counts, missing expected output, and repeated validation failures."
+  ]
+};

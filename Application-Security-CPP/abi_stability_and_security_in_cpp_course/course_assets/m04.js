@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safer Boundary Patterns",
+  "graphicAlt": "Opaque handles and versioned capability checks establish a supported creation, use and destruction contract.",
+  "narration": "Safer ABI design often starts by hiding what does not need to be part of the binary contract. Opaque handles let callers refer to an object without knowing its layout. A C-compatible facade can reduce C++ ABI complexity at plugin, SDK, or cross-compiler boundaries. PIMPL can keep source-facing C++ ergonomics while moving private implementation details out of the public object layout.\n\nVersioned structs are another useful pattern. A structure can include a size or version field so newer libraries can understand what the caller knows how to provide. Capability queries let callers and libraries negotiate supported behavior rather than assuming that every feature exists. These patterns make evolution deliberate. They are not magic, but they give the interface a place to express compatibility rather than relying on guesswork.\n\nBoundary contracts should define ownership, allocation, deallocation, error reporting, thread-safety expectations, lifetime rules, and compatibility policy. A narrow exported API is easier to test, document, and preserve. The goal is not to make every boundary look like C. The goal is to keep the binary contract stable enough that implementation details can change safely behind it. Defensive design gives future releases room to evolve without surprising existing callers. A good boundary also makes unsupported use fail clearly instead of becoming accidental coupling.\n\nThese patterns work best when they are paired with examples and negative space. The documentation should show the supported creation, use, and destruction sequence, but it should also say which casts, direct structure access, retained pointers, or cross-version assumptions are outside the contract. Clear limits reduce accidental dependencies and make compatibility testing more meaningful.",
+  "narrationPoints": [
+    "Safer ABI design often starts by hiding what does not need to be part of the binary contract.",
+    "PIMPL can keep source-facing C++ ergonomics while moving private implementation details out of the public object layout.",
+    "Capability queries let callers and libraries negotiate supported behavior rather than assuming that every feature exists.",
+    "The goal is not to make every boundary look like C.",
+    "Defensive design gives future releases room to evolve without surprising existing callers.",
+    "Clear limits reduce accidental dependencies and make compatibility testing more meaningful."
+  ]
+};

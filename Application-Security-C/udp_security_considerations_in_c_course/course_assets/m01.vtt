@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+UDP is often chosen because it is simple, fast, and message-oriented.
+
+2
+00:00:06.120 --> 00:00:14.040
+A sender can transmit a datagram without setting up a long-lived connection, and a receiver can process each datagram as a separate unit.
+
+3
+00:00:14.140 --> 00:00:21.980
+That simplicity is useful, but it also means the application has to provide many of the safety properties that a higher-level protocol might otherwise define.
+
+4
+00:00:22.260 --> 00:00:29.940
+A UDP listener may receive traffic from peers that are unauthenticated, unexpected, misconfigured, outdated, or simply noisy.
+
+5
+00:00:30.040 --> 00:00:40.360
+The service may see malformed datagrams, duplicated datagrams, delayed datagrams, reordered datagrams, oversized input, or messages that belong to a different component.
+
+6
+00:00:40.460 --> 00:00:43.260
+The code should treat these as normal possibilities.
+
+7
+00:00:43.540 --> 00:00:49.140
+Local networks, private networks, and discovery environments should not be treated as automatically safe.
+
+8
+00:00:49.240 --> 00:01:00.760
+A service may be reachable by other hosts, containers, test tools, monitoring systems, legacy clients, or devices that do not share the same trust assumptions.
+
+9
+00:01:00.860 --> 00:01:04.300
+Internal reachability is not the same as authorization.
+
+10
+00:01:04.580 --> 00:01:07.620
+Secure UDP starts with clear assumptions.
+
+11
+00:01:07.720 --> 00:01:09.480
+Who is allowed to send messages?
+
+12
+00:01:09.580 --> 00:01:11.580
+Which datagram types are accepted?
+
+13
+00:01:11.680 --> 00:01:16.880
+What source information is used only for routing, and what information is used for trust?
+
+14
+00:01:16.980 --> 00:01:22.420
+Which actions are allowed before stronger authentication or protocol validation succeeds?
+
+15
+00:01:22.520 --> 00:01:25.000
+Those assumptions should be explicit.
+
+16
+00:01:25.280 --> 00:01:34.400
+UDP defects can cause data exposure, unintended actions, corrupted state, service instability, or broken separation between components.
+
+17
+00:01:34.500 --> 00:01:46.980
+Defensive UDP code validates each datagram, constrains endpoint exposure, limits work and response size, handles loss and repetition, and treats availability as part of the security design.

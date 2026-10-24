@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+User keys and service keys authenticate the client, but host keys help the client verify the server.
+
+2
+00:00:06.760 --> 00:00:11.160
+Secure SSH automation needs both sides of trust.
+
+3
+00:00:11.260 --> 00:00:18.380
+The script should know which identity it is using, and it should also have a reliable way to confirm which server it is reaching.
+
+4
+00:00:18.480 --> 00:00:26.400
+If server trust is ignored, the automation may send sensitive operations to an endpoint it has not properly verified.
+
+5
+00:00:26.680 --> 00:00:34.840
+known_hosts management should be deliberate, especially in CI/CD, containers, ephemeral runners, and newly provisioned environments.
+
+6
+00:00:34.940 --> 00:00:42.860
+A known_hosts file or equivalent host trust process should reflect approved server identity information.
+
+7
+00:00:42.960 --> 00:00:48.160
+It should not be treated as an annoying obstacle to be disabled whenever automation is inconvenient.
+
+8
+00:00:48.260 --> 00:00:54.020
+Bypassing host verification weakens the client's ability to confirm that it reached the intended server.
+
+9
+00:00:54.300 --> 00:00:59.500
+Host key changes should be investigated through approved operational channels rather than ignored.
+
+10
+00:00:59.600 --> 00:01:09.200
+A change may be legitimate after a rebuild, migration, or rotation, but the script should not decide that on its own by simply accepting any new identity.
+
+11
+00:01:09.300 --> 00:01:15.300
+Teams should have a way to update host trust information safely and record why the change was expected.
+
+12
+00:01:15.580 --> 00:01:23.820
+Bastions and jump hosts can centralize access and reduce direct exposure, but they also become critical trust and control points.
+
+13
+00:01:23.920 --> 00:01:29.360
+Their host keys, access policies, logging, and operational ownership matter.
+
+14
+00:01:29.460 --> 00:01:38.980
+Secure SSH key management includes both sides of the connection: who the script is, and which server or control point the script believes it is reaching.

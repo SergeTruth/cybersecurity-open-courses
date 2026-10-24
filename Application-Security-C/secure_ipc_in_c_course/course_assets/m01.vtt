@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.740
+Interprocess communication lets separate processes or components exchange data, requests, signals, handles, descriptors, or shared state.
+
+2
+00:00:10.840 --> 00:00:18.280
+In C systems software, IPC often sits close to operating system behavior, service boundaries, and long-running process state.
+
+3
+00:00:18.380 --> 00:00:25.420
+That makes IPC powerful, but it also means IPC design directly shapes security and reliability.
+
+4
+00:00:25.700 --> 00:00:32.740
+An IPC channel may feel local because traffic never leaves the host, but local does not mean trusted.
+
+5
+00:00:32.840 --> 00:00:43.720
+The peer may be a different user, a different service, a sandboxed component, a container, a helper process, or code running at a different privilege level.
+
+6
+00:00:43.820 --> 00:00:48.220
+The channel may connect components that have different responsibilities and different levels of authority.
+
+7
+00:00:48.500 --> 00:00:51.700
+Secure IPC starts with clear assumptions.
+
+8
+00:00:51.800 --> 00:00:53.320
+Who is allowed to connect?
+
+9
+00:00:53.420 --> 00:00:55.260
+Which process creates the endpoint?
+
+10
+00:00:55.360 --> 00:00:56.800
+Which account owns it?
+
+11
+00:00:56.900 --> 00:00:58.580
+What message shapes are valid?
+
+12
+00:00:58.680 --> 00:01:01.240
+Which actions may a peer request?
+
+13
+00:01:01.340 --> 00:01:06.140
+What happens when the peer disconnects, sends malformed data, or behaves slowly?
+
+14
+00:01:06.240 --> 00:01:10.400
+Those questions should be answered by design, not discovered during failure.
+
+15
+00:01:10.680 --> 00:01:16.920
+IPC defects can affect confidentiality, integrity, availability, and isolation.
+
+16
+00:01:17.020 --> 00:01:31.660
+A service may reveal data to an unintended peer, perform an action for a caller that should not have that authority, corrupt shared state, leak descriptors, hang while waiting for a peer, or exhaust resources because the protocol lacks limits.
+
+17
+00:01:31.940 --> 00:01:35.460
+A defensive IPC design treats the channel as a boundary.
+
+18
+00:01:35.560 --> 00:01:46.360
+It combines endpoint permissions, peer checks where needed, message validation, resource limits, cleanup, logging discipline, and reviewable ownership rules.
+
+19
+00:01:46.460 --> 00:01:53.020
+The goal is not to make IPC mysterious; it is to make the assumptions explicit enough that the code can enforce them.

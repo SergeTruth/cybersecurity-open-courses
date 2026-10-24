@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Authorization and Object Access Control",
+  "graphicAlt": "Server policy checks trusted context, action, object, tenant and ownership with fail-closed denial.",
+  "narration": "Authorization answers a different question than authentication: what is this caller allowed to do? A secure REST API checks the requested action, the target resource, the authenticated caller, and the surrounding context. A user who can view one project, order, account, or tenant should not automatically gain access to another just because they know an identifier.\n\nObject-level access control is where many APIs become difficult to review. The route may look ordinary: read a record, update a setting, download a file, or list a collection. The important question is whether the API proves the caller is allowed to act on that exact object. Ownership, tenant membership, role, permission, workflow state, and service identity may all matter.\n\nDo not trust client-supplied authorization context. A client can send a role name, tenant identifier, account identifier, or feature flag, but the API should derive trusted context from verified identity, server-side records, and policy decisions. Missing or unclear authorization context should fail closed rather than falling through to a permissive default.\n\nCentralized policy helpers reduce inconsistent route-by-route decisions. A policy layer does not remove the need for review, but it gives teams one place to express common checks, test expected outcomes, and log safe authorization decisions. During review, engineers should ask whether every route checks both the action and the specific object being accessed.\n\nAuthorization behavior should also be observable enough to troubleshoot safely. Logs can record that a policy denied a request, the route involved, and a correlation identifier, while avoiding sensitive object contents. This gives operators useful evidence without turning authorization records into another data exposure path.",
+  "narrationPoints": [
+    "Authorization answers a different question than authentication: what is this caller allowed to do?",
+    "Object-level access control is where many APIs become difficult to review.",
+    "Do not trust client-supplied authorization context.",
+    "Centralized policy helpers reduce inconsistent route-by-route decisions.",
+    "Authorization behavior should also be observable enough to troubleshoot safely."
+  ]
+};

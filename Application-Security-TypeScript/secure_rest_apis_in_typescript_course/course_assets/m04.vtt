@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Authentication answers the question, who is calling this API?
+
+2
+00:00:04.600 --> 00:00:12.040
+The caller might be a human user through a browser, a mobile app, a service account, a scheduled job, or another internal system.
+
+3
+00:00:12.140 --> 00:00:21.980
+A secure API needs a clear model for those identities so routes do not confuse user actions with machine actions or administrative tasks with ordinary requests.
+
+4
+00:00:22.260 --> 00:00:26.900
+Sessions and tokens need care throughout their lifecycle.
+
+5
+00:00:27.000 --> 00:00:38.920
+APIs should verify tokens on the server side, check expected issuer and audience values where applicable, respect expiration, and handle revocation or rotation according to the system design.
+
+6
+00:00:39.020 --> 00:00:45.900
+Bearer tokens should be treated as sensitive data because possession of the token can represent access within its scope and lifetime.
+
+7
+00:00:46.180 --> 00:00:52.020
+Authentication data should not leak through logs, error messages, traces, or API responses.
+
+8
+00:00:52.120 --> 00:00:59.720
+A failed login or invalid token response can be useful without revealing credential details or internal verification rules.
+
+9
+00:00:59.820 --> 00:01:08.460
+Structured logs can record safe event information, such as a correlation identifier and high-level reason, without storing raw secrets.
+
+10
+00:01:08.740 --> 00:01:11.380
+Authentication is not authorization.
+
+11
+00:01:11.480 --> 00:01:15.240
+Knowing who called does not automatically answer what they may do.
+
+12
+00:01:15.340 --> 00:01:23.900
+The API should establish an authenticated identity, attach trusted context to the request, and then pass that context to authorization policy.
+
+13
+00:01:24.000 --> 00:01:30.160
+This separation keeps identity proof and permission decisions understandable and reviewable.
+
+14
+00:01:30.440 --> 00:01:34.760
+Session boundaries should also be visible in operations.
+
+15
+00:01:34.860 --> 00:01:42.620
+Teams should know which routes accept user sessions, which accept service credentials, and which are reserved for internal jobs.
+
+16
+00:01:42.720 --> 00:01:49.440
+That inventory helps with monitoring, incident response, and safer key rotation when credentials change.

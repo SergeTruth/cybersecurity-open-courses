@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Acquisition, Pinning, and Provenance",
+  "graphicAlt": "Controlled acquisition records approved sources, pinned inputs, provenance and prebuilt review.",
+  "narration": "Where a dependency comes from matters. C++ projects may use system packages, package managers, vendored source, submodules, internal mirrors, CMake FetchContent, ExternalProject, or prebuilt binaries. Each approach has tradeoffs for trust, repeatability, review, and operational support. The team should understand those tradeoffs before the dependency becomes part of a release workflow.\n\nPinning is about controlling change. A pinned version, commit, package revision, or approved mirror helps the team reproduce builds and review updates deliberately. Without control, two builds from the same application source may use different dependency inputs. That makes testing less reliable and makes incident response harder because the team may not know exactly which component was shipped.\n\nProvenance and integrity records reduce uncertainty. Checksums, package lock data, signed metadata, internal registry records, and build logs can help confirm that the expected dependency was used. These records should be part of normal engineering evidence, not a special exercise performed only during emergencies. The release process should be able to answer what was used, where it came from, and how it was verified.\n\nPrebuilt binaries deserve extra review because the team may not compile them from reviewed source with known flags. They can still be appropriate, especially for platform SDKs or vendor-supported components, but acceptance should be explicit. Remote fetching during ordinary builds should also be governed so release artifacts depend on approved, reproducible sources rather than whatever happens to be reachable during configuration.",
+  "narrationPoints": [
+    "Each approach has tradeoffs for trust, repeatability, review, and operational support.",
+    "C++ projects may use system packages, package managers, vendored source, submodules, internal mirrors, CMake FetchContent, ExternalProject, or prebuilt binaries.",
+    "Without control, two builds from the same application source may use different dependency inputs.",
+    "A pinned version, commit, package revision, or approved mirror helps the team reproduce builds and review updates deliberately.",
+    "Checksums, package lock data, signed metadata, internal registry records, and build logs can help confirm that the expected dependency was used.",
+    "Prebuilt binaries deserve extra review because the team may not compile them from reviewed source with known flags."
+  ]
+};

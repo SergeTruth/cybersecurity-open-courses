@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Token Security Matters in Node.js",
+  "graphicAlt": "A token carries authority that must be scoped, protected, validated and recoverable throughout its lifecycle.",
+  "narration": "A Node.js application often begins with a basic login session and a password reset link. Then it grows. Mobile clients need API tokens. An identity provider adds OAuth and OpenID Connect flows. Webhooks need verification. Admins need invite links. CI/CD systems need deployment credentials. Services need machine-to-machine access. Before long, tokens become invisible keys to the application trust model.\n\nMany tokens are bearer values. Whoever can present the token may be treated as authorized for some action. That means a copied access token, reset link, API key, session ID, or refresh token can become a path to account takeover, unauthorized API access, privilege abuse, data exposure, fraudulent workflow approval, or supply-chain impact. The token may look like a string, but operationally it may carry real authority.\n\nToken security is a lifecycle, not one library call. Generation matters, but so do storage, transport, validation, scope, expiration, revocation, logging, monitoring, and leak response. A token can be generated strongly and still fail if it is logged, placed in a URL, accepted for the wrong audience, stored without revocation, or allowed to live forever after a role change.\n\nThe goal is to make token behavior intentional, limited, protected, observable, and recoverable. Token systems should define what the token is for, who issues it, who validates it, where it travels, what authority it carries, when it expires, how it is revoked, and how the team responds if it leaks. That design discipline is what turns random strings into secure application controls.",
+  "narrationPoints": [
+    "A Node.js application often begins with a basic login session and a password reset link.",
+    "That means a copied access token, reset link, API key, session ID, or refresh token can become a path to account takeover, unauthorized API access, privilege abuse, data exposure, fraudulent workflow approval, or supply-chain impact.",
+    "Generation matters, but so do storage, transport, validation, scope, expiration, revocation, logging, monitoring, and leak response.",
+    "Token systems should define what the token is for, who issues it, who validates it, where it travels, what authority it carries, when it expires, how it is revoked, and how the team responds if it leaks.",
+    "Token security is a lifecycle, not one library call.",
+    "The goal is to make token behavior intentional, limited, protected, observable, and recoverable."
+  ]
+};

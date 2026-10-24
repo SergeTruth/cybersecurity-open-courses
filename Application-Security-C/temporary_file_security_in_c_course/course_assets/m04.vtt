@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Temporary-file location is a security and reliability decision.
+
+2
+00:00:05.640 --> 00:00:15.480
+A directory determines who can list, create, replace, remove, or observe names, and it can influence cleanup and operational monitoring.
+
+3
+00:00:15.580 --> 00:00:19.820
+Treat temporary directories as trust boundaries, not as neutral storage.
+
+4
+00:00:20.100 --> 00:00:23.140
+Shared directories require stricter assumptions.
+
+5
+00:00:23.240 --> 00:00:31.880
+If a directory is writable by multiple users or services, code must not assume that names, permissions, or existing files represent only the current process.
+
+6
+00:00:31.980 --> 00:00:37.100
+In those cases, safe creation and restrictive permissions become especially important.
+
+7
+00:00:37.380 --> 00:00:40.580
+Environment-derived paths should be validated before use.
+
+8
+00:00:40.680 --> 00:00:50.280
+Environment variables, configuration values, or command-line arguments may point to locations that are missing, unexpected, too long, or outside the intended scope.
+
+9
+00:00:50.380 --> 00:00:57.100
+A program should define which directories are acceptable and what happens when the requested location is not usable.
+
+10
+00:00:57.380 --> 00:01:01.140
+Relative paths depend on current working directory context.
+
+11
+00:01:01.240 --> 00:01:08.200
+A service, scheduler, script, or test harness may launch the same program from different directories.
+
+12
+00:01:08.300 --> 00:01:13.900
+If a temporary path is relative, the program should understand and document what it is relative to.
+
+13
+00:01:14.180 --> 00:01:18.740
+Path normalization and canonicalization decisions should be deliberate.
+
+14
+00:01:18.840 --> 00:01:26.440
+Some code needs to compare locations, some only needs an opened directory or file handle, and some needs to preserve a user-facing path.
+
+15
+00:01:26.540 --> 00:01:30.460
+The chosen rule should be applied before relying on path meaning.

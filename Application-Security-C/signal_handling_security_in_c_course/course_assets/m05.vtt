@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Signal masks help a program control when selected signals may interrupt sensitive work.
+
+2
+00:00:05.560 --> 00:00:14.840
+They are not a complete safety system, but they are useful for narrowing interruption windows around setup, handler changes, state transitions, and shutdown coordination.
+
+3
+00:00:14.940 --> 00:00:18.300
+A mask policy should be deliberate and documented.
+
+4
+00:00:18.580 --> 00:00:22.180
+Initialization is a common place to use masks carefully.
+
+5
+00:00:22.280 --> 00:00:30.920
+A program may need to establish handlers, create notification channels, initialize state used by the handler, and start worker threads or an event loop.
+
+6
+00:00:31.020 --> 00:00:35.260
+If a signal arrives halfway through that sequence, the program needs a defined outcome.
+
+7
+00:00:35.360 --> 00:00:40.560
+Blocking selected signals during setup can prevent the handler from observing incomplete state.
+
+8
+00:00:40.840 --> 00:00:44.200
+Masks can also protect important transitions.
+
+9
+00:00:44.300 --> 00:00:53.820
+For example, a program may switch from accepting work to shutting down, or from privileged setup to ordinary processing, or from one child-management state to another.
+
+10
+00:00:53.920 --> 00:01:01.840
+During these transitions, an asynchronous request should not leave the program believing two incompatible states are true at the same time.
+
+11
+00:01:02.120 --> 00:01:04.920
+Restoration matters as much as blocking.
+
+12
+00:01:05.020 --> 00:01:10.940
+Code that blocks signals for a critical section should restore the previous mask predictably, including on error paths.
+
+13
+00:01:11.040 --> 00:01:18.160
+A signal left blocked by accident can make shutdown, supervision, or child notifications unreliable.
+
+14
+00:01:18.260 --> 00:01:23.220
+A signal unblocked too early can expose half-initialized state.
+
+15
+00:01:23.500 --> 00:01:29.580
+In threaded programs, mask policy becomes more important because masks may differ by thread.
+
+16
+00:01:29.680 --> 00:01:40.960
+Teams often choose a simple policy: block selected signals in worker threads and route handling through a known path, or define exactly which thread or loop observes signal requests.
+
+17
+00:01:41.060 --> 00:01:45.460
+The best policy is the one that the team can explain, test, and maintain.

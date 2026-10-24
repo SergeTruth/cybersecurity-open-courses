@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Designing a Clear Option Contract",
+  "graphicAlt": "Central option-contract document connects four large cards: required/defaults, flag/value/positional types, duplicate policy, conflict/dependency rules.",
+  "narration": "A safe parser begins with a clear command-line contract. Before writing parsing branches, define the interface the tool intends to support. Which options are required? Which are optional? Which flags are booleans? Which options take values? Which arguments are positional, and what order do they use?\n\nDefaults should be explicit. If an output directory, verbosity level, timeout, mode, or limit is optional, the program should document the default and apply it consistently. Hidden defaults make parser behavior hard to review and hard for scripts to depend on.\n\nDuplicate handling needs a contract. Some tools reject duplicate options. Some allow the last value to win. Some accumulate repeated values into a list. Any of those choices can be reasonable, but accidental behavior is not. Reviewers should be able to see what happens when the same option appears twice.\n\nMutual exclusions and dependencies should be documented before parsing logic becomes tangled. If two modes cannot be used together, reject that combination clearly. If one option requires another option, check the relationship after parsing and before action. Cross-option rules are part of validation.\n\nUsage messages are also part of the contract. A predictable message tells users and automation what the tool expects. It should describe options, values, positionals, and failure behavior without exposing sensitive runtime data or internal implementation details.\n\nThe more explicit the option contract is, the easier it is to test. Unit tests can cover required arguments, missing values, duplicates, defaults, exclusivity, dependencies, and unknown options. That turns parser design into something repeatable rather than tribal memory.",
+  "narrationPoints": [
+    "Before writing parsing branches, define the interface the tool intends to support.",
+    "Hidden defaults make parser behavior hard to review and hard for scripts to depend on.",
+    "Reviewers should be able to see what happens when the same option appears twice.",
+    "If one option requires another option, check the relationship after parsing and before action.",
+    "A predictable message tells users and automation what the tool expects."
+  ]
+};

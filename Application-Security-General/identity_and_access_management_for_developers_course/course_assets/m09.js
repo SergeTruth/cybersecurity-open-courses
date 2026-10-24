@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "narration": "IAM is a core application security responsibility, not just an infrastructure setting. Developers need to understand how identities are established, how permissions are enforced, how sessions and tokens preserve state, how service credentials authenticate workloads, and how lifecycle events change access over time. A strong identity provider can handle many difficult pieces, but the application still owns its local authorization behavior and its use of identity signals.\n\nStrong IAM design uses proven providers, least privilege, server-side enforcement, careful token handling, and explicit testing. Authentication proves identity. Authorization decides what that identity can do. Sessions and tokens must be protected from leakage and validated carefully. OAuth and OpenID Connect should be implemented with mature libraries and correct configuration. Service and workload identities should be attributable, narrowly scoped, rotated, and monitored.\n\nThe practical goal is predictable access behavior. A user should have the right access, no more and no less. A service should have the permission it needs, not a shared administrator credential. A token should be accepted only when it is valid for the expected issuer, audience, lifetime, and use. Audit logs should support accountability. When developers design, enforce, test, and monitor IAM intentionally, they protect the application?s data, workflows, tenants, and users from some of the most common security failures.",
+  "graphicAlt": "Human and workload identities pass validated state and enforced permissions with boundary testing and lifecycle monitoring.",
+  "narrationPoints": [
+    "IAM is a core application security responsibility, not just an infrastructure setting.",
+    "Strong IAM design uses proven providers, least privilege, server-side enforcement, careful token handling, and explicit testing.",
+    "The practical goal is predictable access behavior."
+  ]
+};

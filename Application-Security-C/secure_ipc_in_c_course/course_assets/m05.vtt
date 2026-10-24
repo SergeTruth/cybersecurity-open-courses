@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+IPC protocols need message framing.
+
+2
+00:00:03.080 --> 00:00:10.280
+The receiver has to know where each message begins and ends before it can validate the content or dispatch an action.
+
+3
+00:00:10.380 --> 00:00:13.180
+Some mechanisms preserve message boundaries.
+
+4
+00:00:13.280 --> 00:00:18.240
+Others are byte streams and require the application to define a framing rule.
+
+5
+00:00:18.340 --> 00:00:20.660
+The code should make that rule explicit.
+
+6
+00:00:20.940 --> 00:00:26.540
+Partial reads, partial writes, and interrupted operations are normal conditions.
+
+7
+00:00:26.640 --> 00:00:28.800
+A receiver might see only part of a header.
+
+8
+00:00:28.900 --> 00:00:32.260
+A sender might write fewer bytes than requested.
+
+9
+00:00:32.360 --> 00:00:35.640
+A peer might disconnect halfway through a message.
+
+10
+00:00:35.740 --> 00:00:41.260
+Defensive code handles those states without treating incomplete input as a complete request.
+
+11
+00:00:41.540 --> 00:00:49.620
+Length fields, delimiters, command identifiers, flags, versions, and payload formats all require validation before use.
+
+12
+00:00:49.720 --> 00:00:55.720
+A declared length should be checked against maximum size, available bytes, and the schema for that message type.
+
+13
+00:00:55.820 --> 00:00:58.380
+A command should be one the receiver supports.
+
+14
+00:00:58.480 --> 00:01:01.680
+Flags should be accepted only when their meaning is defined.
+
+15
+00:01:01.960 --> 00:01:08.280
+Validation should happen before allocation, copying, dispatch, or state-changing operations.
+
+16
+00:01:08.380 --> 00:01:19.100
+If the receiver allocates based on an untrusted length, copies before checking the full range, or dispatches a command before validating the payload, the protocol boundary becomes fragile.
+
+17
+00:01:19.380 --> 00:01:21.460
+Safe failure behavior matters.
+
+18
+00:01:21.560 --> 00:01:36.920
+Malformed, unsupported, oversized, truncated, or out-of-sequence messages should produce predictable outcomes: reject the message, close the connection if appropriate, clean up partial state, and avoid changing trusted state.
+
+19
+00:01:37.020 --> 00:01:42.940
+The parser should be boring in the best sense: explicit, bounded, and reviewable.

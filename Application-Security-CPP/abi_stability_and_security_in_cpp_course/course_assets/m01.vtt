@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.500
+ABI means Application Binary Interface: the binary-level contract compiled code depends on when one component calls another.
+
+2
+00:00:08.600 --> 00:00:17.960
+It is the agreement about how functions are called, how objects are laid out, how symbols are named, which runtime behavior is expected, and how resources cross a boundary.
+
+3
+00:00:18.060 --> 00:00:20.940
+Source code compatibility is not the same thing.
+
+4
+00:00:21.040 --> 00:00:26.400
+A header may still compile while the binary contract expected by an existing caller has changed.
+
+5
+00:00:26.680 --> 00:00:35.960
+ABI instability can produce crashes, corrupted state, mismatched cleanup, plugin load failures, data layout confusion, and unsafe upgrade paths.
+
+6
+00:00:36.060 --> 00:00:42.060
+These failures are often difficult to diagnose because the source code may look correct on both sides of the boundary.
+
+7
+00:00:42.160 --> 00:00:46.400
+A caller built against one view of a type may run against another.
+
+8
+00:00:46.500 --> 00:00:49.620
+A plugin may assume a different allocation rule.
+
+9
+00:00:49.720 --> 00:00:54.440
+A library may expose a symbol that downstream code was never supposed to depend on.
+
+10
+00:00:54.720 --> 00:01:05.280
+Defensive ABI design matters whenever C++ libraries, shared objects, static libraries, SDKs, plugins, or third-party extensions interact.
+
+11
+00:01:05.380 --> 00:01:07.620
+It is not only a packaging concern.
+
+12
+00:01:07.720 --> 00:01:19.000
+ABI stability supports reliable updates, controlled compatibility promises, predictable cleanup, and safer integration with modules built by different teams or vendors.
+
+13
+00:01:19.100 --> 00:01:27.260
+The practical starting point is to identify binary boundaries deliberately and treat them as security-relevant engineering contracts.
+
+14
+00:01:27.360 --> 00:01:33.760
+If the boundary is part of a product promise, it deserves the same release discipline as source code and configuration.
+
+15
+00:01:34.040 --> 00:01:37.560
+In practice, that discipline starts before release week.
+
+16
+00:01:37.660 --> 00:01:44.940
+Teams should decide which interfaces are binary promises, who owns them, how changes are reviewed, and what evidence is needed before shipping.
+
+17
+00:01:45.040 --> 00:01:55.200
+A stable ABI gives operations teams safer upgrade paths and gives developers a clearer line between supported extension points and private implementation details.

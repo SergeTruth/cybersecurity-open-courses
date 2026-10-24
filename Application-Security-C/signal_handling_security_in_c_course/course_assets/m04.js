@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Minimal Handlers and Safe Communication",
+  "graphicAlt": "A restricted handler records intent or wakes the event loop, which performs the real work.",
+  "narration": "A minimal handler records intent and returns. That intent may be shutdown requested, reload requested, child status should be checked, or diagnostic state should be noted in a limited way. The handler should not try to complete the whole operation. Its job is to bridge from asynchronous interruption to a safer part of the program.\n\nSimple flags are a common pattern when used with the right constraints. A handler can set a flag of a type appropriate for signal communication, and the main loop can check that flag at controlled points. The main code then performs the real work: stop accepting new requests, drain queues, close resources, write logs, remove temporary files, or exit with the intended status.\n\nSome programs need a notification channel so a blocking loop can wake up promptly. A self-pipe style pattern is one high-level example: the handler performs a minimal signal-safe notification, and the event loop handles the full transition when it wakes. The important idea is not the specific mechanism; it is that complex logic remains in ordinary control flow.\n\nShared state needs careful boundaries. The handler should touch only state designed for signal communication. Normal code should read and reset that state in a predictable way. If a signal can arrive during initialization or shutdown, the program should define what the flag means before setup is complete and after cleanup has begun.\n\nThe design should also be easy to review. Name the handler's limited responsibility. Document which state it can touch. Keep the transition from signal request to mainline action clear. When the handler is intentionally boring, the rest of the program becomes easier to reason about under interruption.",
+  "narrationPoints": [
+    "The handler should not try to complete the whole operation.",
+    "A handler can set a flag of a type appropriate for signal communication, and the main loop can check that flag at controlled points.",
+    "A self-pipe style pattern is one high-level example: the handler performs a minimal signal-safe notification, and the event loop handles the full transition when it wakes.",
+    "Normal code should read and reset that state in a predictable way.",
+    "The design should also be easy to review."
+  ]
+};

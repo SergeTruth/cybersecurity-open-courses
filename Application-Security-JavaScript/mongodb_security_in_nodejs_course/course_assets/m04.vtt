@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.460
+NoSQL injection occurs when untrusted input changes the meaning of a MongoDB filter, update, aggregation, or command.
+
+2
+00:00:09.560 --> 00:00:15.320
+The practical rule is simple: do not pass request objects directly into database operations.
+
+3
+00:00:15.420 --> 00:00:21.020
+An endpoint that expects an email string should not accept an object that changes operator logic.
+
+4
+00:00:21.120 --> 00:00:29.440
+A report that accepts filters should not accept arbitrary fields, operators, or nested structures just because MongoDB can represent them.
+
+5
+00:00:29.720 --> 00:00:33.800
+Safe query construction starts with application-controlled shape.
+
+6
+00:00:33.900 --> 00:00:40.700
+Decide which fields may be filtered, which operators are supported, which values are valid, and which collection operation is allowed.
+
+7
+00:00:40.800 --> 00:00:46.800
+User input should become a validated value for a specific business purpose, not free-form query structure.
+
+8
+00:00:46.900 --> 00:00:53.620
+If a feature truly needs dynamic filters, define a narrow filter language and map it to known fields and known operators.
+
+9
+00:00:53.720 --> 00:00:59.000
+Reject unsupported structures instead of trying to clean up unknown ones after the fact.
+
+10
+00:00:59.280 --> 00:01:03.680
+Sanitization can support defense, but it should not be the primary design.
+
+11
+00:01:03.780 --> 00:01:09.940
+A sanitizer may miss a path, be bypassed by a new feature, or create false confidence.
+
+12
+00:01:10.040 --> 00:01:22.200
+Review authentication queries, account lookup, tenant filters, search, admin tools, exports, reports, aggregations, and raw command paths carefully.
+
+13
+00:01:22.300 --> 00:01:27.660
+Avoid server-side JavaScript or expression features unless there is a clear need and a strong review.
+
+14
+00:01:27.760 --> 00:01:33.360
+The application should choose the query structure; the user should provide values inside that structure.

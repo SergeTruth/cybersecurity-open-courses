@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Credentials, Permissions, and Least Privilege",
+  "graphicAlt": "Source reading and new backup writing are separate from historical deletion and storage administration.",
+  "narration": "Backup jobs often need broad read access and sometimes write access to protected storage. That does not mean they should run as an all-powerful account by default. Least privilege still applies. A backup identity should have the access required for its specific job and no more. The account that reads source data may not need permission to delete historical backups. The identity that writes to backup storage may not need administrative control over every source system.\n\nDedicated backup identities help make access review possible. A shared administrator account hides purpose and ownership. A dedicated identity can be tied to a system, dataset, schedule, storage destination, and recovery requirement. It can have scoped credentials, monitored activity, clear rotation procedures, and a defined revocation path. If the backup job is retired, the identity can be retired with it rather than remaining as hidden privileged access.\n\nSeparate read, write, delete, and administrative permissions. A script may need to read production data and write a new backup object, but it may not need to overwrite previous backups or change storage policy. Deletion rights should be especially carefully controlled because cleanup mistakes can damage recovery capability. Where possible, use storage controls, roles, or separate processes to prevent one script from having every possible capability.\n\nSecrets used for storage, encryption, transfer, or service access should be protected. Keep them out of script files, command histories, logs, and broad environment dumps. Use approved secret-management mechanisms or controlled runtime injection. Review file ownership and permissions for local configuration and key material. Rotate credentials on a schedule appropriate to the environment and revoke them promptly when a workflow changes or exposure is suspected.",
+  "narrationPoints": [
+    "Backup jobs often need broad read access and sometimes write access to protected storage.",
+    "Dedicated backup identities help make access review possible.",
+    "Deletion rights should be especially carefully controlled because cleanup mistakes can damage recovery capability.",
+    "Secrets used for storage, encryption, transfer, or service access should be protected.",
+    "A backup identity should have the access required for its specific job and no more.",
+    "The account that reads source data may not need permission to delete historical backups."
+  ]
+};

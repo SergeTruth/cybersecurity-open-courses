@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Build profiles shape what engineers and users actually run.
+
+2
+00:00:04.760 --> 00:00:14.520
+Debug, release, sanitizer, coverage, fuzzing, packaging, and developer convenience builds may all be legitimate, but they should not blur together.
+
+3
+00:00:14.620 --> 00:00:24.780
+The project should make it clear which profile is intended for ordinary development, which profile is intended for release, and which profiles exist for testing or investigation.
+
+4
+00:00:25.060 --> 00:00:30.340
+Safe defaults matter because many builds are started by people who are not thinking about every cache variable.
+
+5
+00:00:30.440 --> 00:00:35.160
+A default configuration should produce a predictable artifact with a known posture.
+
+6
+00:00:35.260 --> 00:00:49.180
+If an option enables verbose diagnostics, experimental behavior, compatibility workarounds, or test-only code paths, that option should be named clearly, documented, and kept away from release artifacts unless a deliberate process approves it.
+
+7
+00:00:49.460 --> 00:00:53.700
+CMake presets are a practical way to standardize this behavior.
+
+8
+00:00:53.800 --> 00:01:01.320
+A preset can define the generator, build directory, cache variables, toolchain file, and common workflow commands.
+
+9
+00:01:01.420 --> 00:01:08.060
+When developers and CI use the same approved presets, the team spends less time guessing what settings were active.
+
+10
+00:01:08.160 --> 00:01:14.160
+Presets also make drift easier to spot because configuration becomes an artifact that can be reviewed.
+
+11
+00:01:14.440 --> 00:01:16.520
+Configuration failures should be loud.
+
+12
+00:01:16.620 --> 00:01:26.780
+If a release profile is missing required settings, if an unsupported platform is selected, or if an option combination is invalid, the build should stop with a clear message.
+
+13
+00:01:26.880 --> 00:01:38.240
+Producing an artifact with an unknown configuration is more costly than failing early, because the team may not discover the uncertainty until packaging, deployment, or post-release review.

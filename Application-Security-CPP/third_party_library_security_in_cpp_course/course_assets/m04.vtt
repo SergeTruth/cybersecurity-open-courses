@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.340
+Where a dependency comes from matters.
+
+2
+00:00:02.440 --> 00:00:15.000
+C++ projects may use system packages, package managers, vendored source, submodules, internal mirrors, CMake FetchContent, ExternalProject, or prebuilt binaries.
+
+3
+00:00:15.100 --> 00:00:20.780
+Each approach has tradeoffs for trust, repeatability, review, and operational support.
+
+4
+00:00:20.880 --> 00:00:25.920
+The team should understand those tradeoffs before the dependency becomes part of a release workflow.
+
+5
+00:00:26.200 --> 00:00:28.680
+Pinning is about controlling change.
+
+6
+00:00:28.780 --> 00:00:36.300
+A pinned version, commit, package revision, or approved mirror helps the team reproduce builds and review updates deliberately.
+
+7
+00:00:36.400 --> 00:00:42.480
+Without control, two builds from the same application source may use different dependency inputs.
+
+8
+00:00:42.580 --> 00:00:49.540
+That makes testing less reliable and makes incident response harder because the team may not know exactly which component was shipped.
+
+9
+00:00:49.820 --> 00:00:54.060
+Provenance and integrity records reduce uncertainty.
+
+10
+00:00:54.160 --> 00:01:02.880
+Checksums, package lock data, signed metadata, internal registry records, and build logs can help confirm that the expected dependency was used.
+
+11
+00:01:02.980 --> 00:01:09.700
+These records should be part of normal engineering evidence, not a special exercise performed only during emergencies.
+
+12
+00:01:09.800 --> 00:01:15.560
+The release process should be able to answer what was used, where it came from, and how it was verified.
+
+13
+00:01:15.840 --> 00:01:22.640
+Prebuilt binaries deserve extra review because the team may not compile them from reviewed source with known flags.
+
+14
+00:01:22.740 --> 00:01:29.700
+They can still be appropriate, especially for platform SDKs or vendor-supported components, but acceptance should be explicit.
+
+15
+00:01:29.800 --> 00:01:40.040
+Remote fetching during ordinary builds should also be governed so release artifacts depend on approved, reproducible sources rather than whatever happens to be reachable during configuration.

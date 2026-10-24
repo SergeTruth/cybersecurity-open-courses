@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Parsing Flags, Options, and Positionals",
+  "graphicAlt": "Recognize flags/options/positionals -> collect configuration -> validate combinations -> act.",
+  "narration": "Disciplined parser flow separates recognizing arguments from executing program behavior. The parser should collect intent first: which flags are set, which options have values, which positionals were provided, and which combinations are valid. File operations, resource changes, or expensive work should wait until parsing and validation are complete.\n\nUnknown options should be handled consistently. A strict tool may reject them with a clear error. A wrapper may pass some values through by contract. The important point is that unknown input is not silently interpreted as something else unless that behavior is documented and tested.\n\nMissing option values are a common edge case. If an option requires a value, the parser should detect when the value is absent, when the next token is another option, or when the value is empty and not allowed. The usage message should make the expected form clear.\n\nRepeated options should follow the contract established by the interface design. Reject duplicates, take the final value, or accumulate values intentionally. Do not let repeated options fall through unrelated branches or overwrite state in a way that later code cannot explain.\n\nMany command-line conventions support an end-of-options marker so later values are treated as positional arguments. If the tool supports that convention, it should do so deliberately. If it does not, that choice should be reflected in tests and usage behavior.\n\nPositionals deserve the same care as named options. Their count, ordering, meaning, and allowed values should be validated before action. A positional that names a resource or controls a mode is still input crossing the parser boundary.",
+  "narrationPoints": [
+    "File operations, resource changes, or expensive work should wait until parsing and validation are complete.",
+    "If an option requires a value, the parser should detect when the value is absent, when the next token is another option.",
+    "Repeated options should follow the contract established by the interface design.",
+    "Many command-line conventions support an end-of-options marker so later values are treated as positional arguments.",
+    "A positional that names a resource or controls a mode is still input crossing the parser boundary."
+  ]
+};

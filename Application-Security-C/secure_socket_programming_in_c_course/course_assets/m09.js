@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, and Review Practices",
+  "graphicAlt": "Socket tests exercise partial messages, reconnects, timeouts, concurrency and cleanup.",
+  "narration": "Socket tests should cover more than a clean client sending one perfect request. Useful tests include malformed messages, partial messages, oversized messages, disconnects, reconnects, timeouts, repeated operations, idle peers, and protocol sequences that arrive in multiple reads. These cases exercise the real boundary of the service.\n\nConcurrency tests are also important. A service may handle simultaneous clients, shared state, worker threads, event loops, shutdown signals, and cleanup paths. Timing changes can reveal bugs that ordinary single-client tests never touch. The goal is predictable behavior under normal operating stress and controlled failure.\n\nStatic analysis, compiler warnings, sanitizers, and runtime diagnostics can help identify unchecked return values, risky buffer handling, memory leaks, parser-state mistakes, and cleanup problems. These tools are most valuable when the code makes ownership and protocol state clear.\n\nLogs should provide operational value without exposing sensitive payloads, secrets, or misleading trust assumptions. A log can report that a message was rejected, a connection timed out, or a peer failed validation without including private content or implying that a network location alone proved authorization.\n\nCode review should trace endpoint creation, binding, exposure, peer checks, message framing, parsing, dispatch, state changes, transport decisions, cleanup, and error handling. Reviewers should confirm that socket behavior matches the documented trust boundary and deployment model rather than only checking whether the code compiles.",
+  "narrationPoints": [
+    "Socket tests should cover more than a clean client sending one perfect request.",
+    "Timing changes can reveal bugs that ordinary single-client tests never touch.",
+    "Static analysis, compiler warnings, sanitizers, and runtime diagnostics can help identify unchecked return values, risky buffer handling, memory leaks, parser-state mistakes, and cleanup problems.",
+    "Logs should provide operational value without exposing sensitive payloads, secrets, or misleading trust assumptions.",
+    "Code review should trace endpoint creation, binding, exposure, peer checks, message framing, parsing, dispatch, state changes, transport decisions, cleanup, and error handling."
+  ]
+};

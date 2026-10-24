@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Secure Bash pipeline design is a repeatable engineering habit.
+
+2
+00:00:04.600 --> 00:00:07.640
+Start by understanding how data flows through every stage.
+
+3
+00:00:07.740 --> 00:00:15.420
+Know which command produces data, which command consumes it, which streams are involved, and what each boundary assumes about format, count, and meaning.
+
+4
+00:00:15.700 --> 00:00:18.340
+Validate assumptions between commands.
+
+5
+00:00:18.440 --> 00:00:25.560
+Output may be empty, malformed, truncated, reordered, localized, or mixed with diagnostics.
+
+6
+00:00:25.660 --> 00:00:33.420
+When downstream decisions matter, check required fields, expected counts, and no-match conditions before taking action.
+
+7
+00:00:33.700 --> 00:00:36.340
+Quote and validate pipeline inputs.
+
+8
+00:00:36.440 --> 00:00:42.600
+Treat file paths, names, patterns, branch labels, metadata, and filter values as data.
+
+9
+00:00:42.700 --> 00:00:45.980
+Avoid command strings built from uncontrolled input.
+
+10
+00:00:46.080 --> 00:00:51.120
+Preserve literal values and reject unsupported forms before the pipeline runs.
+
+11
+00:00:51.400 --> 00:00:53.240
+Handle failures deliberately.
+
+12
+00:00:53.340 --> 00:01:00.700
+Use exit status checks and pipefail where appropriate, but define success for the workflow, not just for one command.
+
+13
+00:01:00.800 --> 00:01:06.160
+Stop safely when pipeline results cannot support the next step, and avoid misleading success messages.
+
+14
+00:01:06.440 --> 00:01:08.600
+Avoid brittle parsing where possible.
+
+15
+00:01:08.700 --> 00:01:11.900
+Prefer structured output when available.
+
+16
+00:01:12.000 --> 00:01:20.560
+If human-readable output must be parsed, document the assumption and test no-match, malformed, empty, and unexpected cases.
+
+17
+00:01:20.660 --> 00:01:27.620
+Break complex pipelines into reviewable steps and protect intermediate data from accidental exposure.
+
+18
+00:01:27.900 --> 00:01:31.340
+Finally, log safely and review before production.
+
+19
+00:01:31.440 --> 00:01:42.880
+Separate data from diagnostics, avoid secrets in logs, use ShellCheck and peer review, and monitor operational pipelines for failures, unusual counts, and missing expected output.
+
+20
+00:01:42.980 --> 00:01:50.100
+The goal is stream processing that is predictable, validated, observable, and safe enough for real operations.

@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+A safe parser begins with a clear command-line contract.
+
+2
+00:00:04.120 --> 00:00:08.920
+Before writing parsing branches, define the interface the tool intends to support.
+
+3
+00:00:09.020 --> 00:00:10.940
+Which options are required?
+
+4
+00:00:11.040 --> 00:00:12.320
+Which are optional?
+
+5
+00:00:12.420 --> 00:00:14.660
+Which flags are booleans?
+
+6
+00:00:14.760 --> 00:00:16.520
+Which options take values?
+
+7
+00:00:16.620 --> 00:00:20.700
+Which arguments are positional, and what order do they use?
+
+8
+00:00:20.980 --> 00:00:23.140
+Defaults should be explicit.
+
+9
+00:00:23.240 --> 00:00:31.800
+If an output directory, verbosity level, timeout, mode, or limit is optional, the program should document the default and apply it consistently.
+
+10
+00:00:31.900 --> 00:00:37.020
+Hidden defaults make parser behavior hard to review and hard for scripts to depend on.
+
+11
+00:00:37.300 --> 00:00:39.860
+Duplicate handling needs a contract.
+
+12
+00:00:39.960 --> 00:00:43.320
+Some tools reject duplicate options.
+
+13
+00:00:43.420 --> 00:00:45.580
+Some allow the last value to win.
+
+14
+00:00:45.680 --> 00:00:48.640
+Some accumulate repeated values into a list.
+
+15
+00:00:48.740 --> 00:00:54.100
+Any of those choices can be reasonable, but accidental behavior is not.
+
+16
+00:00:54.200 --> 00:00:59.400
+Reviewers should be able to see what happens when the same option appears twice.
+
+17
+00:00:59.680 --> 00:01:05.520
+Mutual exclusions and dependencies should be documented before parsing logic becomes tangled.
+
+18
+00:01:05.620 --> 00:01:09.780
+If two modes cannot be used together, reject that combination clearly.
+
+19
+00:01:09.880 --> 00:01:15.480
+If one option requires another option, check the relationship after parsing and before action.
+
+20
+00:01:15.580 --> 00:01:17.820
+Cross-option rules are part of validation.
+
+21
+00:01:18.100 --> 00:01:20.820
+Usage messages are also part of the contract.
+
+22
+00:01:20.920 --> 00:01:24.760
+A predictable message tells users and automation what the tool expects.
+
+23
+00:01:24.860 --> 00:01:33.740
+It should describe options, values, positionals, and failure behavior without exposing sensitive runtime data or internal implementation details.
+
+24
+00:01:34.020 --> 00:01:38.260
+The more explicit the option contract is, the easier it is to test.
+
+25
+00:01:38.360 --> 00:01:47.240
+Unit tests can cover required arguments, missing values, duplicates, defaults, exclusivity, dependencies, and unknown options.
+
+26
+00:01:47.340 --> 00:01:51.740
+That turns parser design into something repeatable rather than tribal memory.

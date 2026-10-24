@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+The process creation API shapes the safety properties of the launch.
+
+2
+00:00:04.680 --> 00:00:08.280
+Some APIs pass a single command string through a shell.
+
+3
+00:00:08.380 --> 00:00:12.860
+Others execute a specific program with a structured argument vector.
+
+4
+00:00:12.960 --> 00:00:24.640
+Some platforms provide spawn-style APIs, lower-level fork-and-exec workflows, or dedicated process creation calls with explicit settings for environment, handles, and working directory.
+
+5
+00:00:24.920 --> 00:00:29.640
+Direct program execution is often easier to reason about when shell features are not required.
+
+6
+00:00:29.740 --> 00:00:36.140
+The program name and each argument remain separate values, so validation can be field-specific.
+
+7
+00:00:36.240 --> 00:00:43.840
+A filename, mode, count, or identifier can be checked as data instead of being merged into one command string.
+
+8
+00:00:44.120 --> 00:00:48.760
+Shell-based execution adds another parser and another set of quoting rules.
+
+9
+00:00:48.860 --> 00:00:53.740
+That may be necessary for a narrow class of tasks, but it should be justified and reviewed.
+
+10
+00:00:53.840 --> 00:01:03.920
+If the program does not need shell syntax, redirection, pipelines, globbing, or built-in shell behavior, direct execution is usually the simpler contract.
+
+11
+00:01:04.200 --> 00:01:05.880
+Platform behavior matters.
+
+12
+00:01:05.980 --> 00:01:16.060
+Argument splitting, environment representation, handle inheritance, process groups, working directory handling, and error reporting vary across systems.
+
+13
+00:01:16.160 --> 00:01:22.960
+A wrapper function can be useful, but it should expose the decisions that matter instead of hiding them behind a vague command string.
+
+14
+00:01:23.240 --> 00:01:27.320
+The safest API is the simplest one that matches the actual need.
+
+15
+00:01:27.420 --> 00:01:40.380
+Choose the API that lets the code name the program explicitly, pass arguments structurally, control inherited state, check launch errors, and manage the child process lifecycle predictably.

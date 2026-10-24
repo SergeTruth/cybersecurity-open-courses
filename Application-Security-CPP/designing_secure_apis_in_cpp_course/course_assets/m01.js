@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "APIs as Security Boundaries",
+  "graphicAlt": "A narrow interface makes trust and failure rules visible before access to sensitive state.",
+  "narration": "In this course, API means C++ interfaces broadly: library functions, internal component boundaries, plugin contracts, callback interfaces, service integration layers, and classes that control access to sensitive state.\n\nAn API is a security boundary because it shapes what callers can express and what mistakes are easy to make. A narrow, explicit interface can guide callers toward safe behavior. A vague interface can spread hidden assumptions across many call sites.\n\nSecure API design does not rely on every caller remembering private rules. It makes valid use obvious, invalid use difficult, and security-sensitive behavior explicit. The interface itself should help reviewers understand what is trusted, who owns data, and what happens on failure.\n\nThis matters even for internal code. A parser boundary, plugin hook, scripting bridge, or low-level library can receive data or requests that should be validated before they influence sensitive state.\n\nAPI design connects many topics: ownership, lifetime, input validation, access control, error handling, logging, resource cleanup, and long-term compatibility. A small interface decision can affect hundreds of future calls.\n\nThe goal is not to make every function heavy or bureaucratic. The goal is to put security expectations in the type system, naming, contracts, and failure behavior so future maintainers can use the API safely.\n\nA good secure API reduces review burden because its shape carries part of the security design.\n\nThat shape is especially important in shared libraries and platform components, where one unclear decision can be copied for years.\n\nDesign the boundary so the safe call is the natural call.",
+  "narrationPoints": [
+    "In this course, API means C++ interfaces broadly: library functions, internal component boundaries, plugin contracts, callback interfaces, service integration layers, and classes that control access to sensitive state.",
+    "A vague interface can spread hidden assumptions across many call sites.",
+    "The interface itself should help reviewers understand what is trusted, who owns data, and what happens on failure.",
+    "API design connects many topics: ownership, lifetime, input validation, access control, error handling, logging, resource cleanup, and long-term compatibility.",
+    "The goal is to put security expectations in the type system, naming, contracts, and failure behavior so future maintainers can use the API safely.",
+    "Design the boundary so the safe call is the natural call."
+  ]
+};

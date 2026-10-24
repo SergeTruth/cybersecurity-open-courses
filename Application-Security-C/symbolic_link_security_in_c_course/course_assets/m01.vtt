@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Symbolic links are normal filesystem features.
+
+2
+00:00:03.880 --> 00:00:10.200
+They are useful for compatibility, organization, deployment layouts, and operational workflows.
+
+3
+00:00:10.300 --> 00:00:17.580
+The security issue appears when software treats a path string as if it permanently identifies the object the developer had in mind.
+
+4
+00:00:17.860 --> 00:00:19.700
+A path is input.
+
+5
+00:00:19.800 --> 00:00:28.280
+It may come from a user, a configuration file, an environment variable, a service working directory, a package layout, or another component.
+
+6
+00:00:28.380 --> 00:00:34.780
+The path may contain link components, relative parts, or names in directories that other actors can modify.
+
+7
+00:00:34.880 --> 00:00:42.480
+The program should not assume that the string alone proves the final object is safe to read, write, replace, or delete.
+
+8
+00:00:42.760 --> 00:00:48.680
+Symbolic-link handling affects confidentiality when a program reads from or writes to a different object than intended.
+
+9
+00:00:48.780 --> 00:00:53.580
+It affects integrity when content is modified through an unexpected path.
+
+10
+00:00:53.680 --> 00:01:00.080
+It affects reliability when cleanup removes the wrong file or when replacement logic publishes incomplete state.
+
+11
+00:01:00.180 --> 00:01:05.380
+These concerns are engineering problems around trust, identity, and lifetime.
+
+12
+00:01:05.660 --> 00:01:10.220
+Safe handling begins by separating path strings from file objects.
+
+13
+00:01:10.320 --> 00:01:14.640
+A path can be resolved later and may be influenced by directory state.
+
+14
+00:01:14.740 --> 00:01:22.420
+An opened descriptor or handle is a concrete object reference that the program can validate and operate on according to the platform's rules.
+
+15
+00:01:22.700 --> 00:01:36.300
+This course focuses on defensive design: trusted directories, race-aware workflows, descriptor-first operations, safe creation and replacement, permissions, cleanup, traversal policy, testing, and review.
+
+16
+00:01:36.400 --> 00:01:41.440
+The goal is maintainable file handling that does not depend on hidden path assumptions.

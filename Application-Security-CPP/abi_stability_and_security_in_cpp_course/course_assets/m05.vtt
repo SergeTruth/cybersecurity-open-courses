@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Memory ownership across ABI boundaries is a common source of defects.
+
+2
+00:00:05.400 --> 00:00:14.920
+If one component allocates memory and another frees it with a different allocator, runtime, build mode, or cleanup convention, behavior can become unsafe.
+
+3
+00:00:15.020 --> 00:00:23.500
+This is especially important across DLL boundaries, plugins, custom allocators, third-party libraries, and mixed debug or release builds.
+
+4
+00:00:23.600 --> 00:00:26.080
+The problem is not just allocation.
+
+5
+00:00:26.180 --> 00:00:29.060
+It is the entire ownership lifecycle.
+
+6
+00:00:29.340 --> 00:00:37.420
+Defensive APIs define who owns each object, which function releases it, and whether the caller may copy, retain, mutate, or share it.
+
+7
+00:00:37.520 --> 00:00:41.760
+A returned pointer without a release rule is not a complete contract.
+
+8
+00:00:41.860 --> 00:00:47.940
+Passing containers or strings across a boundary can also carry allocator and layout assumptions.
+
+9
+00:00:48.040 --> 00:00:55.000
+Even when the code compiles, the binary contract may assume a runtime pairing the deployment does not actually provide.
+
+10
+00:00:55.280 --> 00:01:03.120
+Release functions, custom deleters, opaque handles, and RAII wrappers can make cleanup rules explicit and reviewable.
+
+11
+00:01:03.220 --> 00:01:07.140
+A library that creates an object can provide the matching destroy function.
+
+12
+00:01:07.240 --> 00:01:10.520
+A caller-side wrapper can then call that function automatically.
+
+13
+00:01:10.620 --> 00:01:14.300
+This keeps ownership visible while avoiding mismatched cleanup.
+
+14
+00:01:14.400 --> 00:01:22.560
+Review should ask what happens on normal release, error paths, early shutdown, repeated cleanup, and version mismatch.
+
+15
+00:01:22.660 --> 00:01:28.260
+Tests should include the exact allocation and release paths that cross the boundary.
+
+16
+00:01:28.540 --> 00:01:33.580
+Ownership rules should be written in a way a caller can follow without reading implementation code.
+
+17
+00:01:33.680 --> 00:01:43.840
+State whether returned memory is borrowed or owned, whether buffers can be retained after the call, whether the caller may mutate data, and which function performs cleanup.
+
+18
+00:01:43.940 --> 00:01:49.300
+The safer API is usually the one where the release path is boring, obvious, and hard to get wrong.

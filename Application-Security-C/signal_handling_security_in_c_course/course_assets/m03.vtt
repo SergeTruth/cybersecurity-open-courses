@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+The most important signal-handling rule is that handlers run in a restricted environment.
+
+2
+00:00:05.560 --> 00:00:12.760
+A handler may interrupt code that was already using library state, heap state, locks, file buffers, or application data structures.
+
+3
+00:00:12.860 --> 00:00:19.820
+If the handler calls into the same kind of code, the program can create unsafe interactions that are difficult to reproduce.
+
+4
+00:00:20.100 --> 00:00:26.180
+Async-signal safety describes which operations are safe to call from a signal handler under the platform's rules.
+
+5
+00:00:26.280 --> 00:00:27.800
+The safe set is small.
+
+6
+00:00:27.900 --> 00:00:41.660
+Many ordinary functions that developers use every day are not appropriate in handler context because they may allocate memory, take locks, update shared buffers, use internal static state, or depend on invariants that were interrupted.
+
+7
+00:00:41.940 --> 00:00:44.660
+Reentrancy is the related design concern.
+
+8
+00:00:44.760 --> 00:00:50.120
+Reentrant code can be safely entered again before a previous invocation has finished.
+
+9
+00:00:50.220 --> 00:00:53.660
+Much normal application code is not reentrant.
+
+10
+00:00:53.760 --> 00:01:05.600
+A handler that touches shared structures, writes through buffered logging systems, uses formatted output, allocates memory, or calls complex cleanup routines can collide with code that was already in progress.
+
+11
+00:01:05.880 --> 00:01:07.720
+Locks are especially risky.
+
+12
+00:01:07.820 --> 00:01:17.260
+If a signal arrives while the program holds a lock, and the handler tries to acquire that same lock or another lock with related ordering, the program may stop making progress.
+
+13
+00:01:17.360 --> 00:01:21.840
+Memory allocation has similar concerns because allocator state may have been interrupted.
+
+14
+00:01:21.940 --> 00:01:28.260
+Logging frameworks can combine both issues through locks, allocation, formatting, and output buffering.
+
+15
+00:01:28.540 --> 00:01:33.020
+For defensive design, handler behavior should be small and predictable.
+
+16
+00:01:33.120 --> 00:01:41.280
+A handler might set a simple flag of an appropriate type, write a byte to a signal-safe notification channel, or request that normal control flow begin shutdown.
+
+17
+00:01:41.380 --> 00:01:50.340
+It should avoid parsing, allocating, locking, closing many resources, writing rich logs, or making policy decisions.
+
+18
+00:01:50.620 --> 00:01:52.940
+The main work belongs outside the handler.
+
+19
+00:01:53.040 --> 00:02:03.840
+Normal code can observe the request, finish or stop current work, release resources, write logs, update metrics, wait for children, and report status through ordinary mechanisms.
+
+20
+00:02:03.940 --> 00:02:12.100
+This separation keeps the asynchronous part small enough to review and leaves complex behavior in code paths that can be tested more directly.

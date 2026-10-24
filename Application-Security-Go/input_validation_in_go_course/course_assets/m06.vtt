@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Many Go validation paths begin with string conversion.
+
+2
+00:00:03.880 --> 00:00:14.040
+strconv.Atoi and strconv.ParseInt are common tools for converting string input into integers while allowing conversion failures to be handled explicitly.
+
+3
+00:00:14.140 --> 00:00:22.940
+Parsing unsigned values, page numbers, limits, offsets, IDs, counts, and quantities should be followed by range checks.
+
+4
+00:00:23.040 --> 00:00:30.400
+A value can parse successfully and still be too small, too large, negative when it should not be, or outside a business rule.
+
+5
+00:00:30.680 --> 00:00:39.400
+Overflow and type size should be considered when input influences counts, indexes, allocation, pagination, or file offsets.
+
+6
+00:00:39.500 --> 00:00:47.340
+ParseInt accepts a bit size, but the result still needs to be checked before conversion into int, uint, or another narrower type.
+
+7
+00:00:47.440 --> 00:00:51.600
+A successful parse is not permission to use the number everywhere.
+
+8
+00:00:51.700 --> 00:00:57.060
+It only means the input could be interpreted as a number under the parsing rule you chose.
+
+9
+00:00:57.340 --> 00:01:08.220
+Time parsing is security-relevant because expiration, scheduling, access windows, retention, audit timelines, and workflow state often depend on time values.
+
+10
+00:01:08.320 --> 00:01:14.880
+time.Parse should be used with explicit layouts, and applications should normalize time zones intentionally.
+
+11
+00:01:14.980 --> 00:01:25.300
+A timestamp may parse and still be too far in the past, too far in the future, outside an allowed window, or inconsistent with another field in the same request.
+
+12
+00:01:25.580 --> 00:01:28.860
+Identifiers also need more than syntax checks.
+
+13
+00:01:28.960 --> 00:01:36.480
+A UUID-shaped value may not exist, may belong to a different tenant, or may refer to an object the caller cannot access.
+
+14
+00:01:36.580 --> 00:01:42.100
+A numeric ID may parse but be outside an allowed range or point to a record in the wrong state.
+
+15
+00:01:42.200 --> 00:01:46.600
+Validation should check format first, then meaning in context.
+
+16
+00:01:46.700 --> 00:01:52.700
+That separation keeps parsing errors, authorization checks, and business rules understandable.

@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Native dependencies bring ABI and runtime concerns that managed environments may hide.
+
+2
+00:00:05.720 --> 00:00:17.240
+A library compiled with different compiler settings, runtime libraries, standard library versions, structure packing, exception behavior, threading assumptions, or allocator expectations can behave unpredictably.
+
+3
+00:00:17.340 --> 00:00:24.140
+The application may compile cleanly and still fail in subtle ways when the wrong binary combination is deployed.
+
+4
+00:00:24.420 --> 00:00:26.660
+Dynamic libraries add another layer.
+
+5
+00:00:26.760 --> 00:00:33.080
+The application should know which library is loaded in production, where it comes from, and how runtime search paths are controlled.
+
+6
+00:00:33.180 --> 00:00:41.260
+Development machines, CI agents, containers, installers, and customer systems may have different library locations.
+
+7
+00:00:41.360 --> 00:00:47.440
+If that difference is not tested, the release artifact may depend on something the team did not intend to ship.
+
+8
+00:00:47.720 --> 00:00:51.160
+Platform compatibility should be documented rather than assumed.
+
+9
+00:00:51.260 --> 00:01:04.060
+Windows, Linux, macOS, embedded targets, and containerized environments differ in loader behavior, packaging conventions, C++ runtime choices, path handling, and available system packages.
+
+10
+00:01:04.160 --> 00:01:12.320
+Cross-platform products should make these assumptions explicit so reviewers can identify when a dependency change affects one platform differently from another.
+
+11
+00:01:12.600 --> 00:01:15.400
+Testing should include real deployment artifacts.
+
+12
+00:01:15.500 --> 00:01:22.380
+It is not enough to test the development build if the packaged product uses a different library layout or runtime search path.
+
+13
+00:01:22.480 --> 00:01:33.200
+Integration testing, installer validation, package inspection, and startup diagnostics can all help confirm that the application loads the intended dependency versions with compatible settings.

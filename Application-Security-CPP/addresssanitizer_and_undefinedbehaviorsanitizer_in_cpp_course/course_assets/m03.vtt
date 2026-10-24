@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.860
+UndefinedBehaviorSanitizer helps identify operations where a C++ program has stepped outside the rules the language defines.
+
+2
+00:00:07.960 --> 00:00:15.160
+Undefined behavior matters because compilers are allowed to optimize based on assumptions that valid programs must satisfy.
+
+3
+00:00:15.260 --> 00:00:25.420
+When code violates those assumptions, the resulting behavior can be unpredictable across builds, platforms, optimization levels, or seemingly unrelated changes.
+
+4
+00:00:25.700 --> 00:00:38.500
+UBSan can report categories such as signed integer overflow, invalid shift operations, null misuse, misalignment, invalid casts, and other undefined-behavior patterns.
+
+5
+00:00:38.600 --> 00:00:40.840
+These examples are not cosmetic.
+
+6
+00:00:40.940 --> 00:00:49.980
+A size calculation that overflows, an invalid pointer assumption, or a cast that misrepresents an object can undermine both correctness and security reasoning.
+
+7
+00:00:50.080 --> 00:00:56.480
+The code may appear to work in one test, then fail under different optimization or input conditions.
+
+8
+00:00:56.760 --> 00:01:00.600
+UBSan findings should be treated as design and correctness defects.
+
+9
+00:01:00.700 --> 00:01:06.700
+The right response is not to silence the report casually or assume that a previous successful run proves safety.
+
+10
+00:01:06.800 --> 00:01:14.400
+Engineers should ask which assumption was invalid, which type or API allowed the invalid state, and whether callers need a clearer contract.
+
+11
+00:01:14.500 --> 00:01:25.220
+Often the fix is to choose stronger types, validate numeric ranges, avoid questionable casts, or redesign an interface so invalid operations are harder to express.
+
+12
+00:01:25.500 --> 00:01:29.260
+Like ASan, UBSan depends on execution coverage.
+
+13
+00:01:29.360 --> 00:01:42.240
+It is most useful when paired with tests that exercise boundary values, error paths, parsing logic, conversions, and code that manipulates sizes or offsets.
+
+14
+00:01:42.340 --> 00:01:46.420
+Used well, it exposes assumptions before they become production surprises.
+
+15
+00:01:46.700 --> 00:01:52.460
+A useful review habit is to connect each UBSan finding to the rule the program believed was true.
+
+16
+00:01:52.560 --> 00:01:54.800
+Was a count assumed to be nonnegative?
+
+17
+00:01:54.900 --> 00:01:56.740
+Was a pointer assumed to be aligned?
+
+18
+00:01:56.840 --> 00:01:59.800
+Was a conversion assumed to preserve meaning?
+
+19
+00:01:59.900 --> 00:02:07.100
+Naming that broken assumption helps the team choose a fix that protects future callers, not only the one input that triggered the report.

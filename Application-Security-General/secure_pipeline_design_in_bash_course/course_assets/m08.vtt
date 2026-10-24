@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+A secure pipeline should be understandable during normal operations and during troubleshooting.
+
+2
+00:00:05.240 --> 00:00:16.440
+Logs should show the high-level action attempted, the safe level of input context, how many records or files were processed where appropriate, and whether the pipeline succeeded or failed.
+
+3
+00:00:16.720 --> 00:00:25.840
+Logs should not expose secrets, tokens, private keys, sensitive file contents, private paths where inappropriate, or excessive raw data.
+
+4
+00:00:25.940 --> 00:00:34.580
+Pipeline output can be tempting to dump because it is already text, but raw output may contain more information than operators need for routine troubleshooting.
+
+5
+00:00:34.860 --> 00:00:38.140
+Separate data output from diagnostic errors where useful.
+
+6
+00:00:38.240 --> 00:00:46.000
+A script that sends machine-readable data to stdout and human-readable diagnostics to stderr is easier to compose safely.
+
+7
+00:00:46.100 --> 00:00:52.660
+Mixing those streams makes later parsing more fragile and can cause error text to be interpreted as data.
+
+8
+00:00:52.940 --> 00:00:56.700
+Review should include both tool-assisted and human judgment.
+
+9
+00:00:56.800 --> 00:01:08.720
+ShellCheck can catch common Bash issues, but peer review is needed for data-flow assumptions, trust boundaries, redaction decisions, and whether pipeline results are strong enough to support downstream actions.
+
+10
+00:01:09.000 --> 00:01:19.160
+Testing should include no-match cases, malformed input, empty input, unexpected columns, unusual counts, and representative production-like shapes.
+
+11
+00:01:19.260 --> 00:01:25.980
+These tests catch the cases that compact pipelines often hide during happy-path development.
+
+12
+00:01:26.260 --> 00:01:28.820
+Operational monitoring completes the loop.
+
+13
+00:01:28.920 --> 00:01:35.160
+Watch for pipeline failures, unusual counts, missing expected output, and repeated validation failures.
+
+14
+00:01:35.260 --> 00:01:39.100
+A secure pipeline is not just one that works once.
+
+15
+00:01:39.200 --> 00:01:45.600
+It is one that continues to provide reliable evidence when inputs, tools, and environments change.

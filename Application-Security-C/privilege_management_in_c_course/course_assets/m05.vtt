@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Privilege reduction is the practice of removing authority after the program has completed the work that required it.
+
+2
+00:00:06.440 --> 00:00:12.440
+In many designs, elevated rights are needed only for startup or for one narrow operation.
+
+3
+00:00:12.540 --> 00:00:18.460
+After that point, continuing to run with the same authority increases the impact of ordinary defects.
+
+4
+00:00:18.560 --> 00:00:22.480
+A safer design reduces rights as soon as the work permits.
+
+5
+00:00:22.760 --> 00:00:25.480
+The exact mechanism depends on the platform.
+
+6
+00:00:25.580 --> 00:00:31.180
+A POSIX-style program may change identity, adjust group membership, or reduce capabilities.
+
+7
+00:00:31.280 --> 00:00:41.280
+A Windows-style program may use a lower-privilege service identity, adjust token behavior, limit handle inheritance, or split privileged setup into a different component.
+
+8
+00:00:41.380 --> 00:00:44.420
+The course is not about memorizing one API.
+
+9
+00:00:44.520 --> 00:00:48.200
+It is about designing the transition and checking that it happened.
+
+10
+00:00:48.480 --> 00:00:51.840
+Every privilege-change operation must be checked.
+
+11
+00:00:51.940 --> 00:00:59.700
+A failed call, a partial change, or an unexpected platform behavior can leave the process with more authority than the surrounding code assumes.
+
+12
+00:00:59.800 --> 00:01:09.480
+Error handling should be conservative: if the program cannot reduce authority as required by the design, it should avoid continuing into ordinary processing as though nothing happened.
+
+13
+00:01:09.760 --> 00:01:12.400
+Verification should follow the attempted change.
+
+14
+00:01:12.500 --> 00:01:22.660
+The program can check its resulting identity, group state, capabilities, token properties, accessible resource behavior, or other platform-appropriate indicators.
+
+15
+00:01:22.760 --> 00:01:27.640
+Tests should cover both the successful transition and the failure path.
+
+16
+00:01:27.740 --> 00:01:33.500
+A test that only exercises the happy path may miss the most important behavior.
+
+17
+00:01:33.780 --> 00:01:35.780
+Document the point of no return.
+
+18
+00:01:35.880 --> 00:01:41.000
+Once privileges are reduced, later code should not rely on privileged resources appearing again.
+
+19
+00:01:41.100 --> 00:01:48.940
+Comments, design notes, function boundaries, and tests should make it clear when elevated authority is expected to be unavailable.
+
+20
+00:01:49.040 --> 00:01:54.240
+That clarity helps reviewers spot accidental dependencies and makes future maintenance safer.

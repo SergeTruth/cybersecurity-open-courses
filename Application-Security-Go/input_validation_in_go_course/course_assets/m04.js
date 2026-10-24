@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "JSON, Structs, and Decoder Behavior",
+  "narration": "Go's encoding/json package makes it straightforward to decode request bodies into structs. json.Unmarshal and json.Decoder can map object fields using struct tags and basic type information. That mapping is useful, but a successfully decoded struct is not automatically safe. The JSON may be missing required values, contain zero values that need special handling, include unknown fields, or satisfy the struct shape while violating business rules.\n\nUnknown fields deserve deliberate treatment. By default, common decoding patterns may ignore fields that are not present in the destination struct. That behavior can be convenient for compatibility, but it can also hide client mistakes, version drift, or unexpected input. DisallowUnknownFields can be useful for strict API contracts, especially where accepting silent extra fields could lead callers to believe the server honored a value it actually ignored.\n\nRequest body size should be limited before decoding. Without limits, a client can send an oversized body that consumes memory, CPU, or time before validation even begins. Limit readers, content length checks, and framework-level controls help keep invalid input from becoming a resource problem. Decoding should also handle malformed JSON cleanly and avoid logging complete raw bodies that may contain secrets or sensitive data.\n\nCustom unmarshalling can support specialized parsing, but it should be used carefully. It can make domain-specific conversion convenient, yet it can also blur the line between transport decoding and domain validation. A common pattern is to decode into a request struct, validate required fields and formats, normalize where appropriate, and then map into domain types or service commands. The decode step proves shape. Validation proves acceptability.",
+  "graphicAlt": "Size-limited JSON decoding creates a request struct that still requires validation before domain mapping.",
+  "narrationPoints": [
+    "Go's encoding/json package makes it straightforward to decode request bodies into structs.",
+    "Unknown fields deserve deliberate treatment.",
+    "Request body size should be limited before decoding.",
+    "Custom unmarshalling can support specialized parsing, but it should be used carefully."
+  ]
+};

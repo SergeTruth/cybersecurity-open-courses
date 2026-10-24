@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why Symbolic Link Security Matters",
+  "graphicAlt": "Path resolution depends on directory state, while an opened handle references the object in use.",
+  "narration": "Symbolic links are normal filesystem features. They are useful for compatibility, organization, deployment layouts, and operational workflows. The security issue appears when software treats a path string as if it permanently identifies the object the developer had in mind.\n\nA path is input. It may come from a user, a configuration file, an environment variable, a service working directory, a package layout, or another component. The path may contain link components, relative parts, or names in directories that other actors can modify. The program should not assume that the string alone proves the final object is safe to read, write, replace, or delete.\n\nSymbolic-link handling affects confidentiality when a program reads from or writes to a different object than intended. It affects integrity when content is modified through an unexpected path. It affects reliability when cleanup removes the wrong file or when replacement logic publishes incomplete state. These concerns are engineering problems around trust, identity, and lifetime.\n\nSafe handling begins by separating path strings from file objects. A path can be resolved later and may be influenced by directory state. An opened descriptor or handle is a concrete object reference that the program can validate and operate on according to the platform's rules.\n\nThis course focuses on defensive design: trusted directories, race-aware workflows, descriptor-first operations, safe creation and replacement, permissions, cleanup, traversal policy, testing, and review. The goal is maintainable file handling that does not depend on hidden path assumptions.",
+  "narrationPoints": [
+    "The security issue appears when software treats a path string as if it permanently identifies the object the developer had in mind.",
+    "The program should not assume that the string alone proves the final object is safe to read, write, replace, or delete.",
+    "An opened descriptor or handle is a concrete object reference that the program can validate and operate on according to the platform's rules.",
+    "The path may contain link components, relative parts, or names in directories that other actors can modify.",
+    "Safe handling begins by separating path strings from file objects."
+  ]
+};

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Environment-based configuration is normal in Node.js projects.
+
+2
+00:00:05.160 --> 00:00:12.920
+process.env is widely used, and .env files are common during local development.
+
+3
+00:00:13.020 --> 00:00:15.580
+The lesson is not to ban those workflows.
+
+4
+00:00:15.680 --> 00:00:17.840
+The lesson is to use them intentionally.
+
+5
+00:00:17.940 --> 00:00:31.620
+Real .env files containing sensitive values should not be committed to source control, and repositories should provide a .env.example file or documented variable list that names required configuration without containing production secrets.
+
+6
+00:00:31.900 --> 00:00:37.100
+Development, test, staging, and production should use different values where appropriate.
+
+7
+00:00:37.200 --> 00:00:41.760
+A developer may need a local database URL, but should not need production credentials.
+
+8
+00:00:41.860 --> 00:00:47.940
+A test environment may need mock service endpoints, but production should not accidentally inherit them.
+
+9
+00:00:48.040 --> 00:00:54.120
+Environment variables are a delivery mechanism, not a complete configuration governance system or secrets management system.
+
+10
+00:00:54.220 --> 00:01:00.380
+They do not automatically provide approval, rotation, auditing, least privilege, or redaction.
+
+11
+00:01:00.660 --> 00:01:06.820
+Be careful with inherited variables, missing variables, unexpected variables, and platform differences.
+
+12
+00:01:06.920 --> 00:01:10.920
+A value may exist on a developer's workstation but not in CI.
+
+13
+00:01:11.020 --> 00:01:13.580
+A boolean string may be interpreted incorrectly.
+
+14
+00:01:13.680 --> 00:01:17.120
+A shell variable may override what the deployment intended.
+
+15
+00:01:17.220 --> 00:01:21.700
+Startup code should avoid dumping the full environment to logs or error reports.
+
+16
+00:01:21.800 --> 00:01:26.840
+Operators need clear validation failures, not secrets printed into log platforms.

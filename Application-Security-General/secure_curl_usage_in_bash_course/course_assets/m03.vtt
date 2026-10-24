@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.700
+When curl connects over HTTPS, certificate validation helps confirm that the script is communicating with the expected service through a protected channel.
+
+2
+00:00:09.800 --> 00:00:14.120
+That trust check is part of the security design, not a cosmetic feature.
+
+3
+00:00:14.400 --> 00:00:20.080
+Disabling verification can make a failing script appear to work, but it removes an important control.
+
+4
+00:00:20.180 --> 00:00:25.300
+In automation, that is especially risky because there may be no person watching the request.
+
+5
+00:00:25.400 --> 00:00:31.480
+A job may send credentials, payloads, or downloaded output through a channel it has not properly verified.
+
+6
+00:00:31.760 --> 00:00:37.040
+Internal services sometimes use private certificate authorities or managed trust stores.
+
+7
+00:00:37.140 --> 00:00:40.740
+That is normal, but it should be handled deliberately.
+
+8
+00:00:40.840 --> 00:00:50.360
+The better pattern is to configure the appropriate trust store or CA bundle for the environment, not to bypass verification because the script runs on an internal network.
+
+9
+00:00:50.640 --> 00:00:55.040
+Proxies and inspection systems also affect transport trust.
+
+10
+00:00:55.140 --> 00:01:01.140
+A corporate proxy, service mesh, or inspection gateway may terminate or reissue certificates.
+
+11
+00:01:01.240 --> 00:01:08.120
+Scripts should be reviewed with those network assumptions in mind so teams understand what identity is actually being trusted.
+
+12
+00:01:08.400 --> 00:01:12.800
+Transport trust should be explicit in the runbook and script design.
+
+13
+00:01:12.900 --> 00:01:20.180
+If a certificate changes, a CA rotates, or a proxy path changes, that should be treated as an operational event.
+
+14
+00:01:20.280 --> 00:01:25.560
+Secure curl automation keeps verification enabled and manages trust intentionally.

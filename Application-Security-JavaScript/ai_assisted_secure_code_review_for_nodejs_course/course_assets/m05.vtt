@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Authentication review asks how the application establishes identity and whether that identity is verified consistently.
+
+2
+00:00:08.120 --> 00:00:19.160
+In a Node.js API, identity may come from a session cookie, bearer token, JWT, API key, service credential, or upstream identity provider.
+
+3
+00:00:19.260 --> 00:00:29.100
+AI can help locate where tokens are parsed, where signatures and expiration are checked, where request.user is populated, and which routes rely on that value.
+
+4
+00:00:29.200 --> 00:00:34.720
+The reviewer must verify that the code actually enforces those checks in the request path being changed.
+
+5
+00:00:35.000 --> 00:00:42.440
+Authorization review asks a different question: is the verified identity allowed to perform this action on this specific object.
+
+6
+00:00:42.540 --> 00:00:46.220
+Authentication is not a substitute for authorization.
+
+7
+00:00:46.320 --> 00:00:52.000
+A user requesting a document by ID may be logged in and still have no right to read that document.
+
+8
+00:00:52.100 --> 00:01:05.620
+AI can help trace object identifiers from req.params, req.query, or req.body into database calls and point out where the code checks ownership, tenant, role, or permission.
+
+9
+00:01:05.720 --> 00:01:13.000
+The reviewer should look for role checks without object checks and tenant filters that are applied in one path but missing in another.
+
+10
+00:01:13.280 --> 00:01:18.880
+Session behavior deserves careful review because small inconsistencies can undermine access control.
+
+11
+00:01:18.980 --> 00:01:31.220
+Review cookie flags, session invalidation, password reset behavior, token refresh, logout, API key handling, service-to-service credentials, and administrative assumptions.
+
+12
+00:01:31.320 --> 00:01:40.680
+If AI suggests that a route appears protected, ask it to identify the exact middleware or guard, the files involved, and the data flow that proves enforcement.
+
+13
+00:01:40.780 --> 00:01:48.220
+A useful finding explains where the identity is created, where permission is checked, and where the sensitive action happens.

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary",
+  "narration": "Go input validation requires explicit runtime enforcement at trust boundaries. Static typing, structs, JSON decoding, and simple control flow are valuable, but they do not prove that external data is safe. Every important entry point should define what it accepts, decode carefully, limit resource use, handle missing and zero values intentionally, and reject invalid input before it reaches sensitive code.\n\nStrong validation in Go starts with clear contracts. Required and optional fields, string length, numeric ranges, allowed values, nested structs, slices, maps, and cross-field rules should be defined before processing. JSON decoding should not be confused with validation. Unknown fields, body size, defaults, missing values, custom unmarshalling, and decoded zero values all need deliberate handling based on the API contract.\n\nParsing is only the beginning. Numbers, dates, times, identifiers, file names, paths, and structured files need checks after conversion succeeds. A parsed number may be out of range. A parsed time may violate an expiration or scheduling rule. A UUID-shaped value may not belong to the caller. A cleaned path may still need containment checks. The meaning of the value matters as much as its syntax.\n\nThe final takeaway is predictable behavior. Good Go validation rejects malformed, oversized, incomplete, unexpected, and business-invalid input early and safely. Good tests cover negative cases and boundaries, not just happy paths. Good reviews trace raw input from the boundary into trusted application logic. When validation is explicit, Go's simplicity becomes a strength: the rules are visible, the failures are controlled, and sensitive operations receive data they can safely reason about.",
+  "graphicAlt": "Explicit input contracts, bounded decoding, meaning checks and failure-path tests support predictable Go services.",
+  "narrationPoints": [
+    "Go input validation requires explicit runtime enforcement at trust boundaries.",
+    "Strong validation in Go starts with clear contracts.",
+    "Parsing is only the beginning.",
+    "The final takeaway is predictable behavior."
+  ]
+};

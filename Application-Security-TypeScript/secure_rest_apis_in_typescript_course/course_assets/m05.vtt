@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Authorization answers a different question than authentication: what is this caller allowed to do?
+
+2
+00:00:05.640 --> 00:00:14.200
+A secure REST API checks the requested action, the target resource, the authenticated caller, and the surrounding context.
+
+3
+00:00:14.300 --> 00:00:23.740
+A user who can view one project, order, account, or tenant should not automatically gain access to another just because they know an identifier.
+
+4
+00:00:24.020 --> 00:00:28.580
+Object-level access control is where many APIs become difficult to review.
+
+5
+00:00:28.680 --> 00:00:35.240
+The route may look ordinary: read a record, update a setting, download a file, or list a collection.
+
+6
+00:00:35.340 --> 00:00:40.940
+The important question is whether the API proves the caller is allowed to act on that exact object.
+
+7
+00:00:41.040 --> 00:00:48.480
+Ownership, tenant membership, role, permission, workflow state, and service identity may all matter.
+
+8
+00:00:48.760 --> 00:00:52.280
+Do not trust client-supplied authorization context.
+
+9
+00:00:52.380 --> 00:01:05.020
+A client can send a role name, tenant identifier, account identifier, or feature flag, but the API should derive trusted context from verified identity, server-side records, and policy decisions.
+
+10
+00:01:05.120 --> 00:01:12.080
+Missing or unclear authorization context should fail closed rather than falling through to a permissive default.
+
+11
+00:01:12.360 --> 00:01:17.800
+Centralized policy helpers reduce inconsistent route-by-route decisions.
+
+12
+00:01:17.900 --> 00:01:27.820
+A policy layer does not remove the need for review, but it gives teams one place to express common checks, test expected outcomes, and log safe authorization decisions.
+
+13
+00:01:27.920 --> 00:01:34.720
+During review, engineers should ask whether every route checks both the action and the specific object being accessed.
+
+14
+00:01:35.000 --> 00:01:40.120
+Authorization behavior should also be observable enough to troubleshoot safely.
+
+15
+00:01:40.220 --> 00:01:48.380
+Logs can record that a policy denied a request, the route involved, and a correlation identifier, while avoiding sensitive object contents.
+
+16
+00:01:48.480 --> 00:01:55.040
+This gives operators useful evidence without turning authorization records into another data exposure path.

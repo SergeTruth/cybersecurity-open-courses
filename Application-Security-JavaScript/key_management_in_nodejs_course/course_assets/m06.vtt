@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Key handling inside code can undermine safe storage.
+
+2
+00:00:05.320 --> 00:00:16.200
+A key may start in a secret manager and still become unsafe if the application prints it, serializes it into a debug object, sends it to the browser, or stores it in a crash report.
+
+3
+00:00:16.300 --> 00:00:29.180
+Node.js crypto APIs may work with strings, Buffers, KeyObject instances, CryptoKey objects, PEM data, JWKs, certificates, or platform-specific handles.
+
+4
+00:00:29.280 --> 00:00:32.000
+Representation is security-relevant.
+
+5
+00:00:32.280 --> 00:00:37.320
+Encoding, import, export, and serialization choices deserve review.
+
+6
+00:00:37.420 --> 00:00:49.100
+A PEM private key, a JWK with private parameters, a base64-encoded symmetric key, and a Buffer created from an environment variable all behave differently.
+
+7
+00:00:49.200 --> 00:00:59.120
+Teams should prefer reviewed patterns for creating and handling key objects rather than scattering raw key strings throughout route handlers, jobs, and utility files.
+
+8
+00:00:59.400 --> 00:01:01.560
+Keep key purpose clear in code.
+
+9
+00:01:01.660 --> 00:01:06.780
+Do not reuse one key for encryption, HMAC, token signing, and unrelated workflows.
+
+10
+00:01:06.880 --> 00:01:11.840
+Do not accept unexpected algorithms when verifying signatures or tokens.
+
+11
+00:01:11.940 --> 00:01:22.100
+Protect private keys, symmetric keys, HMAC keys, and signing secrets more strictly than public keys, while still preserving integrity for public-key distribution.
+
+12
+00:01:22.200 --> 00:01:25.240
+Public does not mean untrusted sources can replace it.
+
+13
+00:01:25.520 --> 00:01:32.320
+Centralizing cryptographic operations behind small reviewed modules or services helps keep the lifecycle enforceable.
+
+14
+00:01:32.420 --> 00:01:43.140
+A well-designed boundary can load keys consistently, redact errors, validate algorithm expectations, prevent accidental export, and make rotation behavior testable.
+
+15
+00:01:43.240 --> 00:01:49.800
+The application should expose encryption, signing, and verification capabilities, not raw key material everywhere.

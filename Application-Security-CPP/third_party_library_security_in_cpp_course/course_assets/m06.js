@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "ABI, Runtime Loading, and Platform Compatibility",
+  "graphicAlt": "Deployment checks verify ABI assumptions, runtime pairing and the intended loaded library.",
+  "narration": "Native dependencies bring ABI and runtime concerns that managed environments may hide. A library compiled with different compiler settings, runtime libraries, standard library versions, structure packing, exception behavior, threading assumptions, or allocator expectations can behave unpredictably. The application may compile cleanly and still fail in subtle ways when the wrong binary combination is deployed.\n\nDynamic libraries add another layer. The application should know which library is loaded in production, where it comes from, and how runtime search paths are controlled. Development machines, CI agents, containers, installers, and customer systems may have different library locations. If that difference is not tested, the release artifact may depend on something the team did not intend to ship.\n\nPlatform compatibility should be documented rather than assumed. Windows, Linux, macOS, embedded targets, and containerized environments differ in loader behavior, packaging conventions, C++ runtime choices, path handling, and available system packages. Cross-platform products should make these assumptions explicit so reviewers can identify when a dependency change affects one platform differently from another.\n\nTesting should include real deployment artifacts. It is not enough to test the development build if the packaged product uses a different library layout or runtime search path. Integration testing, installer validation, package inspection, and startup diagnostics can all help confirm that the application loads the intended dependency versions with compatible settings.",
+  "narrationPoints": [
+    "A library compiled with different compiler settings, runtime libraries, standard library versions, structure packing, exception behavior, threading assumptions, or allocator expectations can behave unpredictably.",
+    "The application may compile cleanly and still fail in subtle ways when the wrong binary combination is deployed.",
+    "Native dependencies bring ABI and runtime concerns that managed environments may hide.",
+    "The application should know which library is loaded in production, where it comes from, and how runtime search paths are controlled.",
+    "Platform compatibility should be documented rather than assumed.",
+    "Integration testing, installer validation, package inspection, and startup diagnostics can all help confirm that the application loads the intended dependency versions with compatible settings."
+  ]
+};

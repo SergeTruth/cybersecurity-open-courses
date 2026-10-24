@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Secure Process Creation in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="secure_process_creation_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;D&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;C&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is process creation security-relevant?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>A child begins with no access to files or resources and cannot affect later parent decisions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>A child can inherit privileges, environment, descriptors, access, and trust from its parent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>The operating system validates the application meaning and authorization of every child argument.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Process creation stays within one trust domain because parent and child initially share code.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why is direct program execution often safer than unnecessary shell-based execution?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Direct execution combines every argument into one command string so quoting rules remain consistent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Direct execution makes program-path validation unnecessary because no shell performs the lookup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Direct execution automatically supplies a minimal environment and closes every inherited descriptor.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Direct execution keeps arguments structured and avoids adding an extra shell interpretation layer.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why should program paths be explicit or validated?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Search paths always select the safest installed executable, regardless of directory ownership or ordering.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>The current working directory cannot influence program selection when a child is launched from C.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>A configured absolute path proves executable identity even if its file or parent directory is replaceable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Explicit paths reduce ambiguous selection; trusted directories and platform checks verify the executable.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. What is the safer way to handle child process arguments?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Merge all values into one string so the child and any intermediary parser can reinterpret them.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Skip argument validation whenever the values came from a configuration file controlled by an administrator.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Pass each argument as a separate validated value instead of constructing one command string by concatenation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Let argument content select the executable at runtime because program and argument policy are interchangeable.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why does the child process environment matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Environment variables can alter configuration, library loading, locale, parsing, temporary paths, and behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Environment variables are never inherited during process creation unless the child requests each name explicitly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>The environment affects display text only and cannot change parsing, configuration, or filesystem choices.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Every process creation API supplies a safe minimal environment unless the parent opts into inheritance.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What is the concern with inherited file descriptors or handles?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Inherited descriptors become read-only in the child, regardless of the access rights held by the parent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>A child cannot inherit an open descriptor and must reopen every resource using a pathname.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Inherited descriptors can grant a child unintended access to files, sockets, pipes, or sensitive resources.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Descriptor inheritance replaces permission checks because the parent already authenticated the child process.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What does least privilege mean for child processes?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Give the child every parent permission so it can recover from unanticipated authorization failures.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Run the child with only the identity, permissions, descriptors, and resources required for its task.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Remove lifecycle supervision from a least-privileged child because reduced permissions guarantee safe termination.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Transfer all open descriptors to the child to avoid later resource-selection failures.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why should process lifecycle be managed after launch?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>The parent must handle launch failure, exit status, timeouts, cleanup, and reaping.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>A successful create call proves the requested task completed, so later status checks are redundant.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Child exit status has no security or reliability meaning once the executable started successfully.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Timeouts and reaping are operating-system responsibilities that should not appear in parent code.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why are timeouts useful for child processes?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>A timeout proves that every byte produced before expiration is valid and authorized output.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>A timeout prevents a stalled child from blocking the parent workflow indefinitely without progress.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>A timeout replaces termination, reaping, and error reporting when a child exceeds its work budget.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Configuring a timeout makes child operations succeed before the deadline under all system loads.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should review of process creation code include?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Review only whether the source compiles, because the operating system validates the remaining launch contract.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Review only the executable name; arguments and inherited state cannot change child behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Review program selection, arguments, environment, inheritance, privileges, lifecycle, and failures.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Review the post-launch success path and defer creation failures and cleanup behavior to integration testing.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of tests and tools?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>A passing test suite makes shell interpretation safe for every future argument and deployment environment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Static analysis removes the need to validate arguments because it knows all runtime configuration values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Sanitizers prove that every deployment has identical executables, environment variables, privileges, and resource limits.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Tests and tools reveal missed assumptions and memory defects but do not replace an explicit launch contract.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Launch intentionally by controlling program selection, arguments, environment, inheritance, privileges, errors, and lifecycle.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Build one command string and let a shell determine the executable, arguments, and inherited runtime policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Assume children cannot inherit sensitive context when they execute a different program image.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Treat process creation as complete when the create call returns, without supervising exit or cleanup.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Configuration bugs are often boring and dangerous at the same time.
+
+2
+00:00:05.000 --> 00:00:08.520
+A missing session secret may trigger fallback behavior.
+
+3
+00:00:08.620 --> 00:00:15.100
+A value that should be false may be interpreted as true because any non-empty string was treated as enabled.
+
+4
+00:00:15.200 --> 00:00:19.280
+A rate limit may be disabled because a number failed to parse.
+
+5
+00:00:19.380 --> 00:00:22.180
+A URL may point at the wrong environment.
+
+6
+00:00:22.280 --> 00:00:30.040
+These failures are preventable when configuration is validated before the application handles traffic or before a sensitive feature is used.
+
+7
+00:00:30.320 --> 00:00:43.440
+Validate required values, types, formats, allowed values, ranges, URLs, ports, booleans, durations, file paths, environment names, and security modes.
+
+8
+00:00:43.540 --> 00:00:48.900
+Centralized schemas or validation logic can make expected configuration visible and testable.
+
+9
+00:00:49.000 --> 00:00:51.560
+Avoid stringly typed assumptions.
+
+10
+00:00:51.660 --> 00:00:55.180
+For booleans, parse accepted values explicitly.
+
+11
+00:00:55.280 --> 00:00:58.400
+For durations and sizes, define units.
+
+12
+00:00:58.500 --> 00:01:04.660
+For origins, endpoints, and modes, use allowlists that match the business and deployment model.
+
+13
+00:01:04.940 --> 00:01:10.620
+Fail closed when security-critical configuration is missing, malformed, or unsafe.
+
+14
+00:01:10.720 --> 00:01:16.160
+A startup failure should be clear enough for operators to fix quickly, but it should not reveal secrets.
+
+15
+00:01:16.260 --> 00:01:22.740
+Validation reduces drift between environments because it catches mistakes before runtime traffic depends on them.
+
+16
+00:01:22.840 --> 00:01:31.480
+It also creates evidence: the team can see which configuration was expected, whether it was present, and whether it passed the checks required for that environment.

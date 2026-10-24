@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Install and packaging rules define what leaves the build system.
+
+2
+00:00:05.000 --> 00:00:08.200
+That makes them security-relevant even when the compiled code is correct.
+
+3
+00:00:08.300 --> 00:00:21.100
+A package can include test utilities, local configuration, temporary files, private development data, stale generated assets, extra libraries, or debug material that was never intended for users.
+
+4
+00:00:21.200 --> 00:00:24.960
+Artifact hygiene is the discipline of knowing exactly what was produced.
+
+5
+00:00:25.240 --> 00:00:28.360
+RPATH and runtime search behavior deserve special attention.
+
+6
+00:00:28.460 --> 00:00:33.500
+They influence how an installed program finds shared libraries after it is deployed.
+
+7
+00:00:33.600 --> 00:00:39.520
+The right policy depends on platform and distribution model, but the project should not leave the result to chance.
+
+8
+00:00:39.620 --> 00:00:47.860
+Reviewers should know which directories are encoded, which paths are removed for release, and how package layout supports the expected runtime behavior.
+
+9
+00:00:48.140 --> 00:00:51.100
+Packaging metadata is part of the product contract.
+
+10
+00:00:51.200 --> 00:01:01.120
+Names, versions, licenses, dependencies, component selections, symbols, debug files, and archive contents should match policy and documentation.
+
+11
+00:01:01.220 --> 00:01:11.700
+Debug symbols may be valuable for support and incident response, but they often belong in a separate controlled artifact rather than inside the user-facing package.
+
+12
+00:01:11.800 --> 00:01:14.840
+Diagnostic outputs should be treated with the same care.
+
+13
+00:01:15.120 --> 00:01:18.080
+Before delivery, release artifacts should be inspected.
+
+14
+00:01:18.180 --> 00:01:29.780
+Teams can list package contents, check linked libraries, confirm signing steps where applicable, compare files against expected manifests, and preserve build logs for traceability.
+
+15
+00:01:29.880 --> 00:01:39.160
+CMake should make those checks easier by keeping install rules narrow, component names clear, output directories predictable, and packaging steps repeatable in CI.

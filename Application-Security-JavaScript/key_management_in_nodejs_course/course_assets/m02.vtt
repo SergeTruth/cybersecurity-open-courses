@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Key is a broad word in engineering conversation.
+
+2
+00:00:03.240 --> 00:00:18.600
+It may mean a symmetric encryption key, an HMAC key, a JWT signing key, a TLS private key, a data encryption key, a key encryption key, a public verification key, an API key, or a service credential.
+
+3
+00:00:18.700 --> 00:00:27.100
+These values all deserve protection, but they do not all have the same authority, audience, storage requirement, or rotation path.
+
+4
+00:00:27.380 --> 00:00:33.140
+Symmetric encryption keys are shared secrets used to encrypt and decrypt data.
+
+5
+00:00:33.240 --> 00:00:37.880
+HMAC keys are shared secrets used to verify message integrity and authenticity.
+
+6
+00:00:37.980 --> 00:00:46.140
+Private keys must remain protected, while public keys may be distributed but still require integrity so verifiers do not trust attacker-supplied keys.
+
+7
+00:00:46.240 --> 00:00:55.520
+API keys and service credentials may not be cryptographic keys in the strict sense, but they often authorize real access and should be governed like high-value secrets.
+
+8
+00:00:55.800 --> 00:01:04.280
+Key authority should be limited by purpose, environment, tenant, service, algorithm, audience, and lifetime where appropriate.
+
+9
+00:01:04.380 --> 00:01:08.380
+A development webhook secret should not validate production webhooks.
+
+10
+00:01:08.480 --> 00:01:12.880
+A JWT signing key for one issuer should not be accepted for another issuer.
+
+11
+00:01:12.980 --> 00:01:18.420
+An encryption key for one data class should not silently protect unrelated workflows.
+
+12
+00:01:18.520 --> 00:01:22.600
+Separation reduces blast radius and makes review easier.
+
+13
+00:01:22.880 --> 00:01:38.240
+Trust boundaries include application servers, CI/CD systems, developer machines, containers, serverless functions, secret managers, KMS services, logs, databases, backups, and third-party services.
+
+14
+00:01:38.340 --> 00:01:46.100
+A useful key review writes down what the key does, who can use it, what it can access, where it travels, and what happens if it leaks.
+
+15
+00:01:46.200 --> 00:01:49.000
+That classification drives the rest of the lifecycle.

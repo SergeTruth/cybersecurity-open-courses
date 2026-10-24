@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Toolchains, Cross-Compilation, and Environment Control",
+  "graphicAlt": "Cross-builds distinguish host tools from target toolchain inputs while recording environment and cache choices.",
+  "narration": "The toolchain defines a large part of build trust. Compiler identity, version, linker, sysroot, SDK, platform libraries, emulator behavior, and package discovery rules can all change the result. In CMake, those choices may come from a toolchain file, a preset, a cache value, an environment variable, or the first compiler found on a developer workstation.\n\nEnvironment variables are useful, but they should not silently decide security-sensitive behavior. PATH, compiler variables, package roots, SDK locations, and feature toggles can make two builds from the same source produce different artifacts. A secure workflow documents which environment inputs are supported, prints important selections during configuration, and avoids depending on local machine state for release decisions.\n\nCMake cache values deserve review. A cache is designed to preserve choices across configuration runs, which is convenient for development and easy to forget. Stale cache entries can keep old paths, old feature values, or old dependency selections alive after source files change. Clean build directories, named presets, and CI checks reduce surprises by making configuration state explicit.\n\nCross-compilation increases the need for discipline. The host tools that run during the build may differ from the target platform where the application will run. Generated files, tests, packaging rules, and runtime search paths may need separate assumptions for host and target. Reliable cross builds identify those assumptions directly and verify that the intended compiler, sysroot, and package inputs were used.",
+  "narrationPoints": [
+    "In CMake, those choices may come from a toolchain file, a preset, a cache value, an environment variable, or the first compiler found on a developer workstation.",
+    "Environment variables are useful, but they should not silently decide security-sensitive behavior.",
+    "Clean build directories, named presets, and CI checks reduce surprises by making configuration state explicit.",
+    "A cache is designed to preserve choices across configuration runs, which is convenient for development and easy to forget.",
+    "Reliable cross builds identify those assumptions directly and verify that the intended compiler, sysroot, and package inputs were used.",
+    "Generated files, tests, packaging rules, and runtime search paths may need separate assumptions for host and target."
+  ]
+};

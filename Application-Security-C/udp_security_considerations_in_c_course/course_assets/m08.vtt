@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.620
+Broadcast, multicast, and discovery protocols often operate in noisy or mixed-trust local environments.
+
+2
+00:00:07.720 --> 00:00:19.480
+They are designed to help components find each other, but that same broad reach means a listener may see messages from devices, services, test tools, or components outside the intended trust boundary.
+
+3
+00:00:19.760 --> 00:00:25.200
+Announcements and discovery responses should be treated as untrusted until validated.
+
+4
+00:00:25.300 --> 00:00:33.540
+The message may be malformed, outdated, duplicated, irrelevant, or from a component that should not influence this service.
+
+5
+00:00:33.640 --> 00:00:38.280
+Discovery is a way to learn about possibilities, not a complete authorization decision.
+
+6
+00:00:38.560 --> 00:00:42.960
+Limit which message types are accepted from broad-reach communication patterns.
+
+7
+00:00:43.060 --> 00:00:54.340
+A discovery listener might accept a small announcement or status query but should not allow sensitive configuration changes, state-changing commands, or expensive work without additional checks.
+
+8
+00:00:54.440 --> 00:00:57.400
+The protocol should separate discovery from authority.
+
+9
+00:00:57.680 --> 00:01:03.200
+Configuration should constrain where discovery listeners run and which interfaces they use.
+
+10
+00:01:03.300 --> 00:01:09.460
+A discovery feature intended for a lab subnet should not quietly become active on every interface in production.
+
+11
+00:01:09.560 --> 00:01:14.360
+Deployment documentation should state where discovery is expected and how it is restricted.
+
+12
+00:01:14.640 --> 00:01:21.520
+Logs and diagnostics should distinguish normal discovery noise from meaningful security or reliability events.
+
+13
+00:01:21.620 --> 00:01:26.740
+If every stray announcement is logged as an urgent problem, operators will tune out the logs.
+
+14
+00:01:26.840 --> 00:01:32.600
+If important validation failures are hidden among routine noise, review and incident response become harder.

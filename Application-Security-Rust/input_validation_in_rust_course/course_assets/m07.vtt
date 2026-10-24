@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Paths and file names are common places where validation mistakes become security issues.
+
+2
+00:00:06.680 --> 00:00:11.960
+A PathBuf is a useful representation, but it does not make user-supplied path data safe.
+
+3
+00:00:12.060 --> 00:00:19.660
+File names can contain unexpected separators, reserved names, strange encodings, or traversal sequences.
+
+4
+00:00:19.760 --> 00:00:26.560
+Path traversal occurs when input influences file access outside the intended directory.
+
+5
+00:00:26.660 --> 00:00:35.220
+The safer pattern is to generate storage names, constrain accepted names, and verify final paths against an approved base directory.
+
+6
+00:00:35.500 --> 00:00:43.260
+Canonicalization can help, but it must be used carefully with platform behavior, symlinks, and files that may not exist yet.
+
+7
+00:00:43.360 --> 00:00:45.600
+Extension checks are also limited.
+
+8
+00:00:45.700 --> 00:00:51.140
+A file extension may be misleading, missing, or intentionally chosen to pass a superficial filter.
+
+9
+00:00:51.240 --> 00:01:00.120
+Content checks, size limits, safe storage locations, and isolated processing are often more important than trusting the original name or extension.
+
+10
+00:01:00.220 --> 00:01:03.100
+Metadata should be treated as input too.
+
+11
+00:01:03.380 --> 00:01:07.220
+Binary input deserves validation before allocation or indexing.
+
+12
+00:01:07.320 --> 00:01:17.080
+Format headers, magic values, version fields, lengths, offsets, counts, and checksums all influence how a parser interprets bytes.
+
+13
+00:01:17.180 --> 00:01:23.100
+A length field can exceed the available data or request more memory than the application should allocate.
+
+14
+00:01:23.200 --> 00:01:33.760
+Rust's bounds checks help prevent memory corruption, but a parser can still waste resources, reject too late, or make incorrect business decisions if the structure is not validated.
+
+15
+00:01:34.040 --> 00:01:38.840
+A robust binary or file parser fails early and explicitly.
+
+16
+00:01:38.940 --> 00:01:47.180
+It checks that enough data exists before reading, validates counts before loops, limits nesting and allocation, and maps errors into safe responses.
+
+17
+00:01:47.280 --> 00:01:52.960
+Rust is excellent for writing this kind of code because Result, slices, iterators, and careful ownership make control flow visible.
+
+18
+00:01:53.060 --> 00:01:58.740
+The security value comes from combining those tools with clear validation rules.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Logging, and Review Practices",
+  "graphicAlt": "IPC testing covers malformed and slow peers, concurrency, permissions and cleanup.",
+  "narration": "IPC testing should include more than successful request and response pairs. Tests should cover malformed messages, truncated messages, oversized messages, unexpected sequence, disconnects, timeouts, repeated operations, slow peers, and cleanup after protocol failures. These cases are ordinary realities for robust IPC code.\n\nPermission tests should verify which users, services, or processes can access endpoints. If an endpoint is meant only for a specific service account or user boundary, that expectation should be tested in the environment where it matters. Endpoint permissions and deployment configuration are part of the behavior.\n\nConcurrency tests are important when multiple clients, shared state, or shared memory are involved. Exercise simultaneous clients, writer and reader ordering, cleanup paths, restart recovery, and abandoned resources. Bugs in IPC often appear when timing changes, not when one client politely sends one request at a time.\n\nStatic analysis, compiler warnings, sanitizers, and runtime diagnostics can support IPC code quality. They can reveal unchecked return values, suspicious length handling, memory safety issues, leaks, races in test builds, and cleanup mistakes. Tools are most useful when the code structure makes endpoint and message ownership clear.\n\nLogging should provide useful diagnostics without exposing sensitive payloads or internal authorization details. Code review should trace endpoint creation, permissions, peer identity checks, message parsing, dispatch, state changes, cleanup, and error handling. A reviewer should be able to explain what each peer may do and how the service behaves when the protocol is not followed.",
+  "narrationPoints": [
+    "IPC testing should include more than successful request and response pairs.",
+    "Permission tests should verify which users, services, or processes can access endpoints.",
+    "Exercise simultaneous clients, writer and reader ordering, cleanup paths, restart recovery, and abandoned resources.",
+    "Tools are most useful when the code structure makes endpoint and message ownership clear.",
+    "Logging should provide useful diagnostics without exposing sensitive payloads or internal authorization details."
+  ]
+};

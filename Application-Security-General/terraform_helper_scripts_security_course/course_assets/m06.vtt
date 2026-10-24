@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.540
+Terraform plans are security-relevant because they describe intended infrastructure changes before those changes happen.
+
+2
+00:00:07.640 --> 00:00:19.080
+A plan can reveal unexpected replacements, removals, public exposure, identity policy changes, logging changes, encryption changes, storage changes, and network changes.
+
+3
+00:00:19.180 --> 00:00:28.060
+A helper script should make plan review easy instead of burying the most important information inside noisy output or rushing directly from validation into apply.
+
+4
+00:00:28.340 --> 00:00:32.740
+Plan review is most important for high-impact environments and privileged resources.
+
+5
+00:00:32.840 --> 00:00:42.280
+Reviewers should be able to understand what environment is targeted, which identity is running, which variables were used, and what the plan intends to change.
+
+6
+00:00:42.380 --> 00:00:54.380
+They should look for surprises: a resource replacement that was not expected, a logging setting that disappears, a storage configuration that changes, or a network rule that becomes broader than intended.
+
+7
+00:00:54.480 --> 00:00:59.360
+The helper should support that review path with clear outputs and traceability.
+
+8
+00:00:59.640 --> 00:01:03.080
+Plan artifacts should be treated as sensitive and time-bound.
+
+9
+00:01:03.180 --> 00:01:07.500
+A saved plan can contain details that should not be broadly shared.
+
+10
+00:01:07.600 --> 00:01:15.280
+It can also become stale if state, variables, providers, or infrastructure change after it is generated.
+
+11
+00:01:15.380 --> 00:01:21.620
+A production workflow should connect the reviewed plan to the applied change and avoid applying an unrelated or outdated plan.
+
+12
+00:01:21.720 --> 00:01:29.160
+The helper should make that connection visible through artifact naming, metadata, approvals, or CI/CD workflow structure.
+
+13
+00:01:29.440 --> 00:01:33.600
+Approval gates help ensure that powerful operations happen deliberately.
+
+14
+00:01:33.700 --> 00:01:40.180
+A production apply should depend on environment validation, target checks, and the organization's change-control process.
+
+15
+00:01:40.280 --> 00:01:48.840
+Validation, planning, and applying can be separate jobs or separate phases so that each has the right permissions and review requirements.
+
+16
+00:01:48.940 --> 00:01:57.580
+The defensive goal is simple: no blind production applies, and no high-impact change without a clear reviewed path from intent to execution.

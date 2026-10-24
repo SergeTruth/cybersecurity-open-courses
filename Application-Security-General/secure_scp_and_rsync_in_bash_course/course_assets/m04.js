@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Bash Invocation Patterns and Argument Safety",
+  "graphicAlt": "Validated host, source, destination and options remain separate operands in a reviewable transfer invocation.",
+  "narration": "A Bash script should invoke SCP and rsync in a way that is easy to review. The executable, stable options, source, destination, identity, host, port, and mode should appear as clear pieces of the invocation. That is safer than one large command string assembled from variable data.\n\nArrays help preserve structure. A script can keep options and operands as separate values, add supported optional arguments deliberately, and pass the final list without asking Bash to reinterpret generated shell text. This is especially useful for rsync, where option sets can grow as workflows mature.\n\nQuoting protects values that should remain literal. Local paths, remote paths, user names, host names, ports, and option values should not accidentally split into multiple words or become shell syntax. Quoting does not decide whether a value is allowed, but it preserves accepted values during invocation.\n\nValidation decides what the workflow supports. Hosts, users, ports, source paths, destination paths, and relevant option values should be checked before execution. A target label can map to a known host and base directory instead of allowing free-form remote destinations.\n\nAvoid generated command strings and unnecessary re-parsing. When a script stores a full transfer command in a string, reviewers must reason about another shell interpretation step. That makes scope, quoting, and safety harder to inspect. Fixed structure with separate arguments is easier to test and maintain.\n\nThe review question is simple: can another engineer see exactly what data might move and where it might land? If the invocation makes that answer clear, mistakes are easier to catch before transfer automation reaches production.",
+  "narrationPoints": [
+    "A Bash script should invoke SCP and rsync in a way that is easy to review.",
+    "Local paths, remote paths, user names, host names, ports, and option values should not accidentally split into multiple words or become shell syntax.",
+    "Hosts, users, ports, source paths, destination paths, and relevant option values should be checked before execution.",
+    "When a script stores a full transfer command in a string, reviewers must reason about another shell interpretation step.",
+    "The review question is simple: can another engineer see exactly what data might move and where it might land?",
+    "The executable, stable options, source, destination, identity, host, port, and mode should appear as clear pieces of the invocation."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Rotation, Revocation, Incident Response, and Monitoring",
+  "graphicAlt": "A key inventory supports validated replacement and retirement, while suspected exposure triggers containment and revocation review.",
+  "narration": "SSH key management continues after the script works. Teams should maintain an inventory of keys, owners, purposes, installed locations, allowed systems, and environments. Without that inventory, a key becomes a hidden dependency. Hidden keys are difficult to rotate, difficult to revoke, and easy to leave behind after a script or employee role changes.\n\nRotation should be practical and documented. A key used by automation should have a known replacement process, including where the public key is installed, where the private key is stored, which jobs depend on it, and how to confirm that the new key works before the old one is removed. Rotation that requires manual guessing across servers, repositories, CI/CD systems, and secret stores is a sign that the key lifecycle needs improvement.\n\nRevocation procedures should be known before an incident. If exposure is suspected, the response should include containment, revocation or rotation, access review, log review, and a search for copied key material in workspaces, artifacts, images, backups, and support bundles. The team should understand how to remove access from servers, platforms, repositories, CI/CD systems, and secret stores without relying on memory.\n\nMonitoring should look for unexpected targets, unusual access times, repeated authentication failures, surprising source locations, and stale authorized keys. These signals do not automatically prove misuse, but they can reveal key drift, broken automation, or access that no longer matches the intended workflow. Legacy scripts should be improved over time by narrowing keys, cleaning workspaces, removing stale public keys, and documenting ownership.",
+  "narrationPoints": [
+    "SSH key management continues after the script works.",
+    "Rotation that requires manual guessing across servers, repositories, CI/CD systems, and secret stores is a sign that the key lifecycle needs improvement.",
+    "Revocation procedures should be known before an incident.",
+    "Monitoring should look for unexpected targets, unusual access times, repeated authentication failures, surprising source locations, and stale authorized keys.",
+    "Teams should maintain an inventory of keys, owners, purposes, installed locations, allowed systems, and environments.",
+    "Without that inventory, a key becomes a hidden dependency."
+  ]
+};

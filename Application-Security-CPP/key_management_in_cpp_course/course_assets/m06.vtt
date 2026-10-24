@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Safe key use in C++ code starts by keeping key-handling paths narrow.
+
+2
+00:00:06.200 --> 00:00:16.760
+Business logic should not pass raw key material through broad interfaces, generic strings, formatting helpers, or data structures that were not designed for sensitive values.
+
+3
+00:00:17.040 --> 00:00:22.000
+Prefer key handles, opaque references, or backend operations where available.
+
+4
+00:00:22.100 --> 00:00:32.820
+A key handle can let the application request encryption, decryption, signing, or verification without copying raw key bytes into more memory locations than necessary.
+
+5
+00:00:33.100 --> 00:00:38.780
+When raw key material is unavoidable, keep the lifetime short and avoid unnecessary copies.
+
+6
+00:00:38.880 --> 00:00:46.800
+Be careful with conversions to std::string, stream formatting, generic containers, debug helpers, and exception messages.
+
+7
+00:00:46.900 --> 00:00:50.500
+Convenience APIs can spread secrets farther than intended.
+
+8
+00:00:50.780 --> 00:00:54.700
+Use approved crypto APIs and check return values.
+
+9
+00:00:54.800 --> 00:01:03.600
+A failed decrypt, failed signature verification, unavailable key, failed random source, or invalid backend response is security-relevant.
+
+10
+00:01:03.700 --> 00:01:08.660
+It should not be ignored, retried blindly, or converted into a successful default.
+
+11
+00:01:08.940 --> 00:01:12.860
+Verification failures should stop trust-dependent behavior.
+
+12
+00:01:12.960 --> 00:01:22.240
+Do not parse protected content as trusted, accept unauthenticated data, or proceed with partial results after the library reports failure.
+
+13
+00:01:22.520 --> 00:01:25.320
+Keep key access separate from business decisions.
+
+14
+00:01:25.420 --> 00:01:35.500
+A small integration layer can centralize policy, error handling, auditing, and library calls, while callers receive only clear success or failure outcomes.
+
+15
+00:01:35.780 --> 00:01:47.620
+A reviewable C++ key path shows where the key comes from, what operation uses it, how failures are handled, and how the code avoids logging, copying, or caching secrets outside policy.
+
+16
+00:01:47.900 --> 00:01:56.540
+This separation is especially useful in large C++ systems where utility functions may be reused in many contexts.
+
+17
+00:01:56.640 --> 00:02:04.320
+The fewer interfaces that accept key material, the easier it is to confirm that sensitive values do not leak into unrelated code.
+
+18
+00:02:04.600 --> 00:02:13.400
+If caching, pooling, or asynchronous work is involved, reviewers should confirm that key lifetime and thread ownership remain explicit.

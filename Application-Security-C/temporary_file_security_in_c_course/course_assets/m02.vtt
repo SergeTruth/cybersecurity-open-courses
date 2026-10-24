@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.140
+Temporary files are not all the same.
+
+2
+00:00:03.240 --> 00:00:10.360
+A scratch file used during one calculation has different requirements from a cache that intentionally survives between runs.
+
+3
+00:00:10.460 --> 00:00:16.060
+A staging file for final output is different from a handoff file consumed by another component.
+
+4
+00:00:16.160 --> 00:00:20.880
+A diagnostic log has a different lifetime and audience than an intermediate processing file.
+
+5
+00:00:21.160 --> 00:00:25.800
+Staging output often needs a clean transition from working state to final state.
+
+6
+00:00:25.900 --> 00:00:32.060
+Until the program has finished writing and validating the content, other code should not treat the temporary file as final.
+
+7
+00:00:32.160 --> 00:00:36.320
+This calls for clear naming, ownership, and finalization behavior.
+
+8
+00:00:36.600 --> 00:00:40.760
+Intermediate files may contain sensitive or incomplete content.
+
+9
+00:00:40.860 --> 00:00:50.780
+A program might write decoded data, generated reports, transformed records, temporary exports, or data that is safe only after later validation.
+
+10
+00:00:50.880 --> 00:00:58.160
+The temporary step can be more sensitive than the final artifact because it may contain extra context or unredacted values.
+
+11
+00:00:58.440 --> 00:01:01.240
+Handoff files need clear consumer expectations.
+
+12
+00:01:01.340 --> 00:01:13.020
+If one component writes a file for another component to read, the contract should define where it appears, when it is complete, what permissions apply, how the consumer validates it, and who removes it.
+
+13
+00:01:13.300 --> 00:01:17.460
+Logs, caches, and spool files also need different controls.
+
+14
+00:01:17.560 --> 00:01:19.400
+Logs may be retained.
+
+15
+00:01:19.500 --> 00:01:21.420
+Caches may survive restarts.
+
+16
+00:01:21.520 --> 00:01:25.120
+Spool files may be observed by operational tools.
+
+17
+00:01:25.220 --> 00:01:31.540
+The right controls depend on purpose, sensitivity, lifetime, sharing requirements, and cleanup behavior.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Review, and Runtime Defenses",
+  "graphicAlt": "Shipping-configuration tests and constrained runtime boundaries support safer dependency use.",
+  "narration": "Testing third-party libraries means testing the way the product actually uses them. Integration tests should exercise the selected version, enabled features, compile settings, and deployment layout. Boundary tests should cover invalid input, oversized input, unsupported encodings, malformed files, unexpected error returns, and resource limits. The goal is to verify product behavior at the dependency boundary.\n\nSanitizer builds can reveal memory, lifetime, undefined behavior, threading, and leak issues in integration paths. Defensive fuzzing can also help harden parsers, decoders, and conversion layers at a high level. The point is practical validation, not misuse guidance; varied inputs help wrappers, error handling, and cleanup paths get exercised before users depend on them.\n\nRuntime defenses may reduce impact when a dependency handles complex or untrusted data. Sandboxing, least privilege, process isolation, file access limits, resource quotas, timeout controls, and constrained worker processes can all be useful depending on the architecture. These defenses do not replace updates or good integration, but they can reduce the consequences of a dependency failure.\n\nReview should cover purpose, ownership, configuration, API usage, error handling, update plan, and removal strategy. A dependency change can alter the product as much as an application source change. Treating findings as tracked engineering defects keeps the work visible and helps the team improve its dependency process over time.",
+  "narrationPoints": [
+    "Boundary tests should cover invalid input, oversized input, unsupported encodings, malformed files, unexpected error returns, and resource limits.",
+    "Sanitizer builds can reveal memory, lifetime, undefined behavior, threading, and leak issues in integration paths.",
+    "The point is practical validation, not misuse guidance; varied inputs help wrappers, error handling, and cleanup paths get exercised before users depend on them.",
+    "Sandboxing, least privilege, process isolation, file access limits, resource quotas, timeout controls, and constrained worker processes can all be useful depending on the architecture.",
+    "Review should cover purpose, ownership, configuration, API usage, error handling, update plan, and removal strategy.",
+    "Treating findings as tracked engineering defects keeps the work visible and helps the team improve its dependency process over time."
+  ]
+};

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+MongoDB security review should start with data flow, not only with a connection URI.
+
+2
+00:00:05.480 --> 00:00:22.200
+Identify every component that can read or write data: API routes, GraphQL resolvers, workers, scripts, admin tools, test utilities, import jobs, export jobs, dashboards, webhooks, and third-party integrations.
+
+3
+00:00:22.300 --> 00:00:25.660
+Then map the source of each value that reaches those operations.
+
+4
+00:00:25.760 --> 00:00:40.320
+Route parameters, query strings, request bodies, headers, cookies, uploaded files, queue messages, webhook payloads, configuration, and existing database records can all influence behavior.
+
+5
+00:00:40.600 --> 00:00:45.880
+Externally supplied values remain security-relevant even after they are stored.
+
+6
+00:00:45.980 --> 00:00:55.500
+A value accepted from a customer today may be read from MongoDB tomorrow and used in an export, aggregation, notification, or admin workflow.
+
+7
+00:00:55.600 --> 00:00:59.680
+Treat it according to origin and purpose, not according to where it currently lives.
+
+8
+00:00:59.780 --> 00:01:17.860
+Sensitive collections and fields deserve specific attention: users, sessions, tokens, roles, tenant records, billing data, audit data, private documents, security settings, and operational metadata all carry different exposure and integrity risks.
+
+9
+00:01:18.140 --> 00:01:32.860
+Trust boundaries exist between clients, Node.js services, MongoDB clusters, identity providers, secret stores, object storage, logging systems, CI/CD, administrators, and support users.
+
+10
+00:01:32.960 --> 00:01:37.840
+Attach security requirements to collections, operations, and workflows.
+
+11
+00:01:37.940 --> 00:01:39.700
+Who can cause this read.
+
+12
+00:01:39.800 --> 00:01:41.480
+Who can cause this update.
+
+13
+00:01:41.580 --> 00:01:43.580
+What authorization is checked.
+
+14
+00:01:43.680 --> 00:01:45.360
+What fields return to the caller.
+
+15
+00:01:45.460 --> 00:01:48.260
+Which database identity runs the operation.
+
+16
+00:01:48.360 --> 00:01:54.680
+These questions turn MongoDB security from vague concern into concrete reviewable behavior.

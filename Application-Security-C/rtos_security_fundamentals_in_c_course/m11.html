@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | RTOS Security Fundamentals in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="rtos_security_fundamentals_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;B&quot;,&quot;q03&quot;:&quot;C&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;,&quot;q11&quot;:&quot;B&quot;,&quot;q12&quot;:&quot;D&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is RTOS security important for C developers?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Real-time scheduling contains faults within the offending task, so ordinary C defects have limited system impact when task priorities, memory regions, and watchdog recovery are configured correctly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>RTOS security is mainly a scheduler configuration concern; application tasks can rely on platform isolation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Timing-critical behavior reduces the need for input and memory checks because invalid work misses its deadline.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>RTOS applications may interact with hardware, external data, timing-critical behavior, and system resources where C defects can have serious effects.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. What is a trust boundary in an RTOS design?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Any queue or task boundary is a trust boundary even when authority and assumptions remain identical.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>A point where data, control, or authority crosses between tasks, peripherals, external interfaces, privileged code, or different assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Only network input crosses trust boundaries; peripherals and higher-privilege tasks are part of the trusted device once their drivers, queue schemas, and startup configuration have been reviewed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Priority differences define trust, so a higher-priority task may safely accept state from any lower-priority task.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What does least privilege mean for RTOS tasks?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Give each task access to every peripheral it might use during recovery to avoid blocking.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Use one privileged supervisor task for all application logic so authority remains centralized.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Each task should have only the access and authority required for its specific responsibility.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Assign only required memory to each task, but let any memory-isolated task access shared peripherals without a mediated transition.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is stack sizing security-relevant in RTOS systems?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Incorrect stack sizing can cause unreliable behavior, memory corruption risk, or task failure under real workloads.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Average stack use plus a margin is sufficient because rare interrupt nesting is handled separately by the RTOS.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>A stack overflow affects only the current task and therefore is primarily an availability issue.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Runtime stack growth protects tasks on platforms that support dynamic allocation elsewhere.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why should dynamic allocation policy be explicit in RTOS code?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Dynamic allocation is safe after startup because the scheduler serializes allocator calls.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Fragmentation affects performance but not security when every allocation result is logged.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>A general heap can replace ownership rules because the RTOS releases task allocations on exit.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Allocation failure, fragmentation, lifetime, and cleanup can affect reliability and security.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What should be defined when passing buffers between tasks?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Queueing a pointer transfers ownership automatically to the receiving task.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>The sender may keep using a transferred buffer until the receiver acknowledges processing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Ownership, lifetime, valid length, capacity, mutability, and cleanup responsibility.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Capacity follows from the message type, so only current length and task priority need documentation.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why should interrupt handlers avoid complex work?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Interrupt code may perform complex work when it has the highest priority and cannot be preempted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Interrupt context has timing and reentrancy constraints, and complex work can destabilize shared state or timing behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Calling ordinary task APIs from an interrupt is safe when the operation is short.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Shared-state checks can be deferred until after the interrupt updates application objects directly.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why should peripheral input be validated?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>External device data, bus messages, or sensor values may be malformed, unexpected, stale, or outside safe operating assumptions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>A successful driver status proves sensor and bus values meet application freshness and range policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Local peripheral traffic is trusted unless the device enclosure has been opened.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Clamping every out-of-range value is safer than rejecting it because the control loop continues.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What is the purpose of secure boot at a high level?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Secure boot verifies application input after startup and can recover any parser failure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>A valid firmware signature makes persistent configuration and rollback state trustworthy without separate checks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>To help ensure that only authorized firmware or software is allowed to start on the device.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Secure boot removes the need for production debug review because unauthorized code cannot run.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should production debug features be reviewed?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Debug features can expose sensitive state, control paths, or operational capabilities if left enabled unnecessarily.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Undocumented debug commands are safe when the connector is not exposed on the final enclosure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Read-only diagnostics cannot create security risk even when they reveal memory, identity, or configuration.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Factory features may remain enabled if every use is logged and requires physical proximity.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What should RTOS diagnostic logging avoid?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Real-time logs should record full external inputs before validation so field failures can be reconstructed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Secrets, excessive sensitive data, uncontrolled external input, and behavior that destabilizes real-time operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Bounded log volume makes secrets and personal data safe to retain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Diagnostics may use blocking output in fault paths because timing requirements no longer apply after an error.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>A hardened boot option and task-priority plan provide the main security baseline.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Safe queues and memory checks can compensate for broad task authority and production debug access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Explicit task boundaries, ISR discipline, and failure tests work together, so secure boot and production lifecycle hardening can be omitted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>RTOS security requires explicit task boundaries, least privilege, memory discipline, safe communication, interrupt discipline, hardened configuration, and tested failure behavior.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Generated Code, Custom Commands, and Script Execution",
+  "graphicAlt": "A reviewed generator consumes declared inputs with preserved argument boundaries and produces tracked outputs and byproducts.",
+  "narration": "CMake can do much more than compile existing source files. It can run code generators, template expansion, resource compilers, protocol compilers, packaging tools, and project-specific scripts. That build-time execution is security-relevant because it can read files, write generated headers, create source, transform resources, and influence what eventually becomes part of the application.\n\nGenerated files should have clear provenance. Reviewers should understand which input files, generator versions, and command options produced them. If generated code is checked into the repository, the team should know when and how it is refreshed. If generated code is produced only during the build, the command should be reproducible from reviewed inputs and should not depend on uncontrolled local state.\n\nCustom commands benefit from narrow, explicit declarations. Inputs, outputs, byproducts, working directories, dependencies, and comments should be accurate. That precision helps CMake and the underlying build tool know when work is required, and it helps humans understand the purpose of the step. Broad script entry points that hide file discovery, path decisions, or generated outputs make review harder.\n\nQuoting and path handling are practical security concerns in build systems. Paths may contain spaces, unusual characters, or platform-specific separators. Commands should use CMake facilities that preserve argument boundaries and avoid accidental interpretation by another layer. The defensive mindset is simple: make generated behavior observable, deterministic, and tied to the project inputs the team intentionally approved.",
+  "narrationPoints": [
+    "CMake can do much more than compile existing source files.",
+    "If generated code is produced only during the build, the command should be reproducible from reviewed inputs and should not depend on uncontrolled local state.",
+    "If generated code is checked into the repository, the team should know when and how it is refreshed.",
+    "Reviewers should understand which input files, generator versions, and command options produced them.",
+    "Broad script entry points that hide file discovery, path decisions, or generated outputs make review harder.",
+    "Commands should use CMake facilities that preserve argument boundaries and avoid accidental interpretation by another layer."
+  ]
+};

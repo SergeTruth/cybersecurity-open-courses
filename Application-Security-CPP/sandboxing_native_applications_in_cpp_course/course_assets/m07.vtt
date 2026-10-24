@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Sandboxing is also a reliability control.
+
+2
+00:00:03.800 --> 00:00:15.880
+A worker that handles complex input should not be able to consume unlimited CPU, memory, disk, handles, queue space, child processes, or wall-clock time.
+
+3
+00:00:15.980 --> 00:00:24.620
+Resource limits give the broker a way to keep the rest of the application responsive when worker behavior is slow, expensive, or invalid.
+
+4
+00:00:24.720 --> 00:00:30.720
+Limits should be measurable, documented, and tuned from realistic workloads instead of guesses.
+
+5
+00:00:31.000 --> 00:00:34.600
+Timeouts and cancellation should be part of the protocol.
+
+6
+00:00:34.700 --> 00:00:43.180
+A broker may need to cancel a job when the user closes a document, when a worker exceeds a deadline, when shutdown begins, or when backpressure reaches a limit.
+
+7
+00:00:43.280 --> 00:00:51.760
+Cancellation should preserve state: partial output is cleaned up, temporary files are removed or marked incomplete, and broker-owned resources are released.
+
+8
+00:00:51.860 --> 00:00:57.380
+The user experience should communicate recoverable failure without exposing internal details.
+
+9
+00:00:57.660 --> 00:01:00.460
+Crash and restart behavior should be predictable.
+
+10
+00:01:00.560 --> 00:01:06.480
+A worker can exit unexpectedly, fail to launch, return partial results, or stop responding.
+
+11
+00:01:06.580 --> 00:01:15.460
+The broker should detect those cases, record safe diagnostics, decide whether to restart, and avoid treating incomplete results as trusted output.
+
+12
+00:01:15.560 --> 00:01:18.680
+Restart policy should avoid uncontrolled loops.
+
+13
+00:01:18.780 --> 00:01:23.180
+Recovery should protect user data before trying to resume work or retrying a job.
+
+14
+00:01:23.460 --> 00:01:26.340
+The broker's invariants matter most.
+
+15
+00:01:26.440 --> 00:01:35.480
+It should not leak sensitive data, keep stale capabilities alive, lose track of files, or leave privileged operations half-complete because a worker failed.
+
+16
+00:01:35.580 --> 00:01:45.580
+Tests should cover stuck jobs, repeated worker failure, cancellation during IPC, oversized input, denied permissions, and shutdown while work is pending.
+
+17
+00:01:45.680 --> 00:01:53.360
+Monitoring should show whether failures are rare, concentrated in one worker, or linked to a recent feature or policy change.
+
+18
+00:01:53.460 --> 00:01:57.540
+That evidence helps teams improve reliability without weakening the boundary.

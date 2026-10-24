@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Transport Protection and Sensitive Data",
+  "graphicAlt": "Protected transport still requires peer verification, message validation and action authorization.",
+  "narration": "Some socket workflows need confidentiality, integrity, and peer authentication. If data crosses untrusted networks, semi-trusted networks, shared infrastructure, or contains sensitive information, the transport design should protect that data appropriately. A plain socket is only a communication channel; it does not automatically provide secrecy or peer assurance.\n\nTLS or another appropriate transport protection layer may be required depending on the deployment and data. Adding a protection layer is not only a library integration task. Certificate handling, identity validation, trust stores, hostname or service identity rules, version policy, and error handling all become security decisions.\n\nCertificate and identity validation are not optional decoration. A connection that is encrypted but not validated may still fail to provide the assurance the application needs. The program should define what identity it expects from the peer and what happens when validation fails.\n\nSensitive data should also be minimized in messages and protected in memory where practical. Do not send secrets when a reference or scoped token would do. Avoid keeping sensitive payloads longer than needed. Be careful with debug buffers, error messages, and copied data structures.\n\nLogging and diagnostics deserve restraint. They should help operators understand failures without dumping credentials, tokens, session identifiers, private records, or full payloads. Transport protection complements message validation and authorization; it does not replace them. The receiver still has to validate the protocol after the channel is protected.",
+  "narrationPoints": [
+    "If data crosses untrusted networks, semi-trusted networks, shared infrastructure, or contains sensitive information, the transport design should protect that data appropriately.",
+    "TLS or another appropriate transport protection layer may be required depending on the deployment and data.",
+    "The program should define what identity it expects from the peer and what happens when validation fails.",
+    "Sensitive data should also be minimized in messages and protected in memory where practical.",
+    "The receiver still has to validate the protocol after the channel is protected."
+  ]
+};

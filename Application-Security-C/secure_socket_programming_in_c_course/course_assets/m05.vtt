@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Protocols need framing so the receiver knows where one application message ends and the next begins.
+
+2
+00:00:06.760 --> 00:00:10.760
+TCP is a byte stream, not a message queue.
+
+3
+00:00:10.860 --> 00:00:16.620
+A single read might contain part of a message, exactly one message, or multiple messages.
+
+4
+00:00:16.720 --> 00:00:22.880
+The application protocol must define how messages are framed and the implementation must preserve parser state across reads.
+
+5
+00:00:23.160 --> 00:00:28.200
+UDP preserves datagram boundaries, but that does not remove the need for validation.
+
+6
+00:00:28.300 --> 00:00:33.820
+A datagram still has a source, size, payload format, and operational meaning.
+
+7
+00:00:33.920 --> 00:00:40.640
+The receiver should check whether the datagram fits the expected protocol, size limit, and trust model before acting on it.
+
+8
+00:00:40.920 --> 00:00:49.880
+Length prefixes, delimiters, command identifiers, version fields, flags, and payload formats all need validation before use.
+
+9
+00:00:49.980 --> 00:00:54.940
+A length should be checked against available data and maximum policy limits.
+
+10
+00:00:55.040 --> 00:00:56.640
+A command should be supported.
+
+11
+00:00:56.740 --> 00:00:58.660
+A flag should be understood.
+
+12
+00:00:58.760 --> 00:01:02.200
+A payload should match the schema expected for that command.
+
+13
+00:01:02.480 --> 00:01:08.480
+Malformed, unsupported, oversized, truncated, or out-of-sequence messages should fail safely.
+
+14
+00:01:08.580 --> 00:01:15.940
+That may mean rejecting one message, closing the connection, resetting parser state, or reporting an error according to the protocol.
+
+15
+00:01:16.040 --> 00:01:21.800
+The important part is that invalid input does not become a partially trusted request.
+
+16
+00:01:22.080 --> 00:01:30.160
+Validation should happen before allocation, copying, deep parsing, command dispatch, or state-changing operations.
+
+17
+00:01:30.260 --> 00:01:40.020
+If a service allocates based on unchecked network-provided sizes or dispatches before checking the complete message, the protocol boundary becomes fragile.
+
+18
+00:01:40.120 --> 00:01:44.120
+Good framing makes the receiver's behavior predictable under imperfect input.

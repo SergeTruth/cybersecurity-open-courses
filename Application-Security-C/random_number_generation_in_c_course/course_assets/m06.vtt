@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.900
+Many programs need a random value in a bounded range: an index, a retry slot, a selection from a list, or a shuffled position.
+
+2
+00:00:09.000 --> 00:00:13.960
+Turning random bytes or integers into a range is not only a formatting step.
+
+3
+00:00:14.060 --> 00:00:17.260
+The mapping can introduce bias if it is done carelessly.
+
+4
+00:00:17.540 --> 00:00:23.700
+Simple modulo reduction can bias results when the source range is not evenly divisible by the target range.
+
+5
+00:00:23.800 --> 00:00:26.600
+Some outputs become slightly more likely than others.
+
+6
+00:00:26.700 --> 00:00:33.820
+The impact depends on the use case, but where fairness or security matters, biased mapping is a real design issue.
+
+7
+00:00:34.100 --> 00:00:39.540
+Rejection sampling is a common conceptual approach for unbiased bounded values.
+
+8
+00:00:39.640 --> 00:00:47.960
+The idea is to accept only source values that map evenly into the target range and retry when the value falls outside that acceptable region.
+
+9
+00:00:48.060 --> 00:00:54.380
+The exact implementation should come from a reviewed helper or approved library pattern rather than improvised at each call site.
+
+10
+00:00:54.660 --> 00:00:59.780
+Range functions should validate that the requested range is meaningful and non-empty.
+
+11
+00:00:59.880 --> 00:01:07.480
+A helper should handle edge cases such as zero range, inverted bounds, maximum values, and type conversions deliberately.
+
+12
+00:01:07.580 --> 00:01:11.580
+These checks are separate from the strength of the underlying random source.
+
+13
+00:01:11.860 --> 00:01:18.660
+Shuffling and selection logic should use unbiased index generation where fairness or security matters.
+
+14
+00:01:18.760 --> 00:01:23.000
+Code review should check range mapping separately from random byte generation.
+
+15
+00:01:23.100 --> 00:01:29.980
+A good source can still be weakened by poor mapping, and a careful mapping cannot make a weak source suitable for sensitive values.

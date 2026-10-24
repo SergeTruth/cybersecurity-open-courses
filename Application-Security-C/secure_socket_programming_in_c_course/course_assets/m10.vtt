@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Socket-safe C begins with the assumption that every socket is a trust boundary.
+
+2
+00:00:04.600 --> 00:00:08.600
+The peer may be expected, but the data is still external.
+
+3
+00:00:08.700 --> 00:00:13.020
+The endpoint may be local, but local does not automatically mean authorized.
+
+4
+00:00:13.120 --> 00:00:17.920
+The service may be internal, but internal systems still need clear boundaries.
+
+5
+00:00:18.200 --> 00:00:22.760
+Restrict endpoint exposure and run services with least privilege.
+
+6
+00:00:22.860 --> 00:00:35.340
+Binding choices, interface selection, service accounts, firewall policy, container networking, and deployment configuration all shape who can reach the service and what the process can affect if something goes wrong.
+
+7
+00:00:35.620 --> 00:00:43.140
+Validate protocol messages before allocation, copying, deep parsing, command dispatch, or state changes.
+
+8
+00:00:43.240 --> 00:00:45.320
+TCP needs explicit framing.
+
+9
+00:00:45.420 --> 00:00:49.020
+UDP needs size, source, and content checks.
+
+10
+00:00:49.120 --> 00:00:55.520
+Lengths, commands, flags, and payloads need consistent limits and schema expectations.
+
+11
+00:00:55.800 --> 00:01:01.720
+Handle partial I/O, timeouts, disconnects, and cleanup as normal operating conditions.
+
+12
+00:01:01.820 --> 00:01:08.780
+Socket code should expect incomplete reads, partial writes, slow peers, dropped connections, and parser failures.
+
+13
+00:01:08.880 --> 00:01:13.920
+Resource release needs to work on every path, not only during graceful shutdown.
+
+14
+00:01:14.200 --> 00:01:19.800
+Finally, protect sensitive data with appropriate transport security and logging discipline.
+
+15
+00:01:19.900 --> 00:01:29.180
+Use tests, static analysis, sanitizers, runtime diagnostics, and code review to keep behavior predictable under failure and load.
+
+16
+00:01:29.280 --> 00:01:34.160
+Secure socket programming is disciplined boundary management applied to every connection.

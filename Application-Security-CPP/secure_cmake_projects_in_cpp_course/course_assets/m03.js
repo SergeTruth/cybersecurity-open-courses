@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Build Types, Options, and Secure Defaults",
+  "graphicAlt": "Approved presets select distinct build profiles and reject invalid configuration combinations early.",
+  "narration": "Build profiles shape what engineers and users actually run. Debug, release, sanitizer, coverage, fuzzing, packaging, and developer convenience builds may all be legitimate, but they should not blur together. The project should make it clear which profile is intended for ordinary development, which profile is intended for release, and which profiles exist for testing or investigation.\n\nSafe defaults matter because many builds are started by people who are not thinking about every cache variable. A default configuration should produce a predictable artifact with a known posture. If an option enables verbose diagnostics, experimental behavior, compatibility workarounds, or test-only code paths, that option should be named clearly, documented, and kept away from release artifacts unless a deliberate process approves it.\n\nCMake presets are a practical way to standardize this behavior. A preset can define the generator, build directory, cache variables, toolchain file, and common workflow commands. When developers and CI use the same approved presets, the team spends less time guessing what settings were active. Presets also make drift easier to spot because configuration becomes an artifact that can be reviewed.\n\nConfiguration failures should be loud. If a release profile is missing required settings, if an unsupported platform is selected, or if an option combination is invalid, the build should stop with a clear message. Producing an artifact with an unknown configuration is more costly than failing early, because the team may not discover the uncertainty until packaging, deployment, or post-release review.",
+  "narrationPoints": [
+    "Debug, release, sanitizer, coverage, fuzzing, packaging, and developer convenience builds may all be legitimate, but they should not blur together.",
+    "Build profiles shape what engineers and users actually run.",
+    "Safe defaults matter because many builds are started by people who are not thinking about every cache variable.",
+    "A preset can define the generator, build directory, cache variables, toolchain file, and common workflow commands.",
+    "If a release profile is missing required settings, if an unsupported platform is selected, or if an option combination is invalid, the build should stop with a clear message.",
+    "Producing an artifact with an unknown configuration is more costly than failing early, because the team may not discover the uncertainty until packaging, deployment, or post-release review."
+  ]
+};

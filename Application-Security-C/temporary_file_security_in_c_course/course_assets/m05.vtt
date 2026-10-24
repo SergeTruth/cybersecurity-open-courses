@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+Temporary files should use least privilege.
+
+2
+00:00:03.720 --> 00:00:09.080
+Grant only the access required by the creating process and any intended consumer.
+
+3
+00:00:09.180 --> 00:00:14.860
+If no other user or component needs the file, the default design should keep access narrow.
+
+4
+00:00:15.140 --> 00:00:19.540
+File modes and platform access controls should be reviewed together.
+
+5
+00:00:19.640 --> 00:00:28.600
+The creation API, requested mode, process umask, inherited permissions, and directory behavior can all affect the resulting access.
+
+6
+00:00:28.700 --> 00:00:35.260
+A code review should verify the effective permission model, not only the literal mode value in one call.
+
+7
+00:00:35.540 --> 00:00:38.580
+Directory permissions matter as much as file permissions.
+
+8
+00:00:38.680 --> 00:00:47.800
+A restrictive file inside a poorly controlled directory may still be exposed to unwanted observation or interference through directory-level behavior.
+
+9
+00:00:47.900 --> 00:00:51.740
+The directory should match the trust assumptions of the file being created.
+
+10
+00:00:52.020 --> 00:00:55.220
+Shared-directory behavior deserves special care.
+
+11
+00:00:55.320 --> 00:01:03.960
+Code should validate who can create entries, who can remove entries, who can read names, and who can replace or modify content.
+
+12
+00:01:04.060 --> 00:01:10.300
+Those questions are especially important for service accounts, build agents, and multi-user systems.
+
+13
+00:01:10.580 --> 00:01:12.980
+Permissions are not only about secrecy.
+
+14
+00:01:13.080 --> 00:01:15.400
+They also protect integrity.
+
+15
+00:01:15.500 --> 00:01:22.060
+A temporary file that drives a later decision should not be writable by components that are not part of the intended workflow.
+
+16
+00:01:22.160 --> 00:01:28.400
+Least privilege helps ensure that temporary content remains tied to the code that owns it.

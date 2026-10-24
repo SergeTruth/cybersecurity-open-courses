@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply CI, Tests, and Developer Workflow to a concrete, reviewable C++ boundary.",
+  "codeExamples": [
+    {
+      "title": "Verify an expected ASan finding through a test wrapper",
+      "language": "cmake",
+      "blurb": "CTest runs a report-verifying wrapper around a non-inlined observable overflow; the defective target is fixed at -O0 while the clean target retains an optimized sanitizer profile.",
+      "code": "cmake_minimum_required(VERSION 3.20)\nproject(asan_regression LANGUAGES CXX)\ninclude(CTest)\n\nfile(WRITE \"${CMAKE_BINARY_DIR}/overflow.cpp\" [=[\n#include <memory>\n#if defined(_MSC_VER)\n#  define NOINLINE __declspec(noinline)\n#else\n#  define NOINLINE __attribute__((noinline))\n#endif\nNOINLINE int write_past_end(int* values, int input) {\n  values[1] = input;\n  return values[1];\n}\nint main(int argc, char**) {\n  auto values = std::make_unique<int[]>(1);\n  volatile int observed = write_past_end(values.get(), argc);\n  return observed == 0 ? 0 : 1;\n}\n]=])\nfile(WRITE \"${CMAKE_BINARY_DIR}/sanitizer_clean.cpp\" [=[\n#include <memory>\nint main() {\n  auto value = std::make_unique<int>(7);\n  return *value == 7 ? 0 : 1;\n}\n]=])\nfile(WRITE \"${CMAKE_BINARY_DIR}/verify_asan.cmake\" [=[\nif(NOT DEFINED PROGRAM OR NOT DEFINED REPORT)\n  message(FATAL_ERROR \"PROGRAM and REPORT are required\")\nendif()\nexecute_process(\n  COMMAND \"${PROGRAM}\"\n  RESULT_VARIABLE status\n  OUTPUT_QUIET\n  ERROR_FILE \"${REPORT}\"\n  TIMEOUT 10)\nfile(READ \"${REPORT}\" report_text)\nif(status STREQUAL \"0\")\n  message(FATAL_ERROR \"expected ASan failure did not occur\")\nendif()\nif(NOT report_text MATCHES \"AddressSanitizer: heap-buffer-overflow\")\n  message(FATAL_ERROR \"expected heap-buffer-overflow report was not produced\")\nendif()\nmessage(STATUS \"expected ASan heap-buffer-overflow observed\")\n]=])\n\nadd_executable(overflow \"${CMAKE_BINARY_DIR}/overflow.cpp\")\nadd_executable(sanitizer_clean \"${CMAKE_BINARY_DIR}/sanitizer_clean.cpp\")\n\nif(MSVC)\n  target_compile_options(overflow PRIVATE /Od /Zi /fsanitize=address)\n  target_compile_options(sanitizer_clean PRIVATE /O1 /Zi /fsanitize=address)\nelse()\n  target_compile_options(overflow PRIVATE\n    -O0 -g -fsanitize=address -fno-omit-frame-pointer)\n  target_compile_options(sanitizer_clean PRIVATE\n    -O1 -g -fsanitize=address -fno-omit-frame-pointer)\n  target_link_options(overflow PRIVATE -fsanitize=address)\n  target_link_options(sanitizer_clean PRIVATE -fsanitize=address)\nendif()\n\nadd_test(\n  NAME expected_asan_overflow\n  COMMAND \"${CMAKE_COMMAND}\"\n    \"-DPROGRAM=$<TARGET_FILE:overflow>\"\n    \"-DREPORT=${CMAKE_BINARY_DIR}/asan-report.txt\"\n    -P \"${CMAKE_BINARY_DIR}/verify_asan.cmake\")\nset_tests_properties(expected_asan_overflow PROPERTIES\n  TIMEOUT 20\n  ENVIRONMENT \"ASAN_OPTIONS=halt_on_error=1:abort_on_error=1\")\nadd_test(NAME sanitizer_clean COMMAND sanitizer_clean)\n"
+    },
+    {
+      "title": "Fail CI on an unexpected sanitizer outcome",
+      "language": "bash",
+      "blurb": "The runner distinguishes the expected defective-test failure from a missing report or an unexpected clean exit.",
+      "code": "#!/usr/bin/env bash\nset -euo pipefail\nbinary=${1:?sanitized regression binary required}\nreport=$(mktemp)\ntrap 'rm -f \"$report\"' EXIT\n\nset +e\nASAN_OPTIONS='halt_on_error=1:detect_leaks=1' \"$binary\" > /dev/null 2>\"$report\"\nstatus=$?\nset -e\n\nif (( status == 0 )); then\n  echo \"expected sanitizer failure did not occur\" >&2\n  exit 1\nfi\nif ! /usr/bin/grep -Fq 'AddressSanitizer' \"$report\"; then\n  echo \"process failed without an ASan report\" >&2\n  exit 1\nfi\n"
+    }
+  ]
+};

@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Node.js security review is not only about individual functions.
+
+2
+00:00:05.320 --> 00:00:13.240
+Many risks appear in the connections between route definitions, middleware, dependencies, configuration, and runtime behavior.
+
+3
+00:00:13.340 --> 00:00:27.180
+A practical AI-assisted review should inspect route registration, middleware order, authentication checks, authorization checks, input validation, output shaping, error handling, logging, and configuration.
+
+4
+00:00:27.280 --> 00:00:35.680
+Ask the assistant to follow the request flow from route registration through middleware into the handler and then into the database or external service.
+
+5
+00:00:35.960 --> 00:00:42.840
+Middleware order is security-relevant because the same route can be safe or unsafe depending on what runs before it.
+
+6
+00:00:42.940 --> 00:00:52.860
+A body parser, authentication guard, rate limiter, CORS policy, tenant resolver, or error handler may protect some routes and not others.
+
+7
+00:00:52.960 --> 00:01:01.040
+AI can help compare route groups, identify inconsistent guard usage, and find paths that look similar but behave differently.
+
+8
+00:01:01.140 --> 00:01:06.420
+The reviewer should confirm those findings against the actual framework behavior and test coverage.
+
+9
+00:01:06.700 --> 00:01:17.740
+Node.js review should also include package.json, package-lock.json, install scripts, dependency additions, environment variables, and runtime flags.
+
+10
+00:01:17.840 --> 00:01:31.840
+A pull request that changes CORS, debug mode, cookie settings, trusted proxy configuration, request size limits, or production error handling can alter the security boundary without touching a vulnerable-looking function.
+
+11
+00:01:31.940 --> 00:01:43.620
+AI can summarize these changes and generate review questions, but scanner results, package metadata, and configuration assumptions should be verified through trusted tooling and source evidence.

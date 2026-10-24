@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+TLS I/O is not identical to plain socket I/O.
+
+2
+00:00:04.360 --> 00:00:15.160
+A TLS library may need to read or write encrypted records, update internal state, process alerts, complete handshake work, or report retry conditions.
+
+3
+00:00:15.260 --> 00:00:22.380
+Application code should follow the library's documented contract instead of assuming that one call maps directly to one complete application message.
+
+4
+00:00:22.660 --> 00:00:24.500
+Partial progress is normal.
+
+5
+00:00:24.600 --> 00:00:29.080
+A TLS read may return less application data than the parser wants.
+
+6
+00:00:29.180 --> 00:00:33.100
+A TLS write may accept only part of the application data.
+
+7
+00:00:33.200 --> 00:00:39.440
+Nonblocking integrations may report that the operation should be retried when the socket is readable or writable.
+
+8
+00:00:39.540 --> 00:00:45.140
+The application needs state that can resume without duplicating, losing, or reordering data.
+
+9
+00:00:45.420 --> 00:00:47.980
+Buffer ownership should be explicit.
+
+10
+00:00:48.080 --> 00:00:52.720
+Encrypted buffers belong to the TLS layer or transport integration.
+
+11
+00:00:52.820 --> 00:00:56.020
+Plaintext buffers belong to the application protocol layer.
+
+12
+00:00:56.120 --> 00:01:06.440
+Sensitive application data should be kept only as long as needed, bounded by maximum sizes, and cleared where appropriate under the team's coding and platform guidance.
+
+13
+00:01:06.720 --> 00:01:10.960
+Nonblocking I/O and event loops require careful coordination.
+
+14
+00:01:11.060 --> 00:01:17.140
+The event loop should know whether the TLS layer is waiting for read readiness, write readiness, or application action.
+
+15
+00:01:17.240 --> 00:01:21.480
+Handshake, data transfer, and shutdown can all have retry behavior.
+
+16
+00:01:21.580 --> 00:01:27.100
+Mixing TLS state with parser state without a clear contract makes failures hard to review.
+
+17
+00:01:27.380 --> 00:01:30.340
+TLS shutdown has protocol meaning.
+
+18
+00:01:30.440 --> 00:01:35.320
+A clean shutdown can differ from a transport close or an error.
+
+19
+00:01:35.420 --> 00:01:43.420
+The application should understand how the library reports close notifications, unexpected closure, partial transfer, and cleanup requirements.
+
+20
+00:01:43.520 --> 00:01:47.920
+This helps avoid treating incomplete communication as a successful exchange.
+
+21
+00:01:48.200 --> 00:02:01.160
+Cleanup should be predictable on every path: successful close, handshake failure, validation failure, timeout, parser rejection, transport error, and application shutdown.
+
+22
+00:02:01.260 --> 00:02:09.260
+Free TLS objects, close sockets or handles, release buffers, and record useful diagnostics from normal code paths.
+
+23
+00:02:09.360 --> 00:02:15.520
+Lifecycle discipline keeps protected communication from becoming a source of leaks or ambiguous state.

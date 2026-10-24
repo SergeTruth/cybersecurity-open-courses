@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Accepting a connection means communication can begin.
+
+2
+00:00:04.120 --> 00:00:08.280
+It does not mean the peer is trusted for every operation the service supports.
+
+3
+00:00:08.380 --> 00:00:16.060
+A socket gives the program a path to exchange bytes; the application still has to decide what the peer is allowed to request.
+
+4
+00:00:16.340 --> 00:00:24.420
+Source address, hostname, or network location may provide useful context, but they are often not enough for authorization by themselves.
+
+5
+00:00:24.520 --> 00:00:28.920
+Networks are routed, proxied, reused, and reconfigured.
+
+6
+00:00:29.020 --> 00:00:32.940
+Internal systems can have multiple clients with different roles.
+
+7
+00:00:33.040 --> 00:00:38.640
+A private address range does not automatically answer whether a specific peer may perform a specific action.
+
+8
+00:00:38.920 --> 00:00:44.840
+Some workflows need peer identity checks, authentication, or higher-level authorization.
+
+9
+00:00:44.940 --> 00:00:50.060
+The right mechanism depends on the protocol, deployment, and sensitivity of the action.
+
+10
+00:00:50.160 --> 00:00:54.560
+A monitoring query may require less than an administrative state change.
+
+11
+00:00:54.660 --> 00:00:59.380
+A local companion process may need a different trust model from a remote client.
+
+12
+00:00:59.660 --> 00:01:02.860
+Authorization should be tied to the requested action.
+
+13
+00:01:02.960 --> 00:01:07.360
+A peer might be allowed to connect and request status but not change configuration.
+
+14
+00:01:07.460 --> 00:01:11.780
+It might be allowed to submit a job but not retrieve another user's result.
+
+15
+00:01:11.880 --> 00:01:18.280
+The service should make those distinctions in protocol handling rather than treating connection existence as broad permission.
+
+16
+00:01:18.560 --> 00:01:24.800
+Reconnects, dropped connections, half-open sessions, and reused addresses are normal network behavior.
+
+17
+00:01:24.900 --> 00:01:29.700
+Socket code should handle them cleanly without granting trust based on stale state.
+
+18
+00:01:29.800 --> 00:01:36.840
+Review should identify where peer identity affects trust, dispatch, access control, or state-changing decisions.

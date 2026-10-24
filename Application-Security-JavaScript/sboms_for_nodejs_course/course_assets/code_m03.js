@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply SBOM Formats, Fields, and Identifiers through distinct, reviewable JavaScript security boundaries. Run copied snippets independently as Node.js 22+ ES modules; see readme.md for dependencies and trusted adapter/authorization contracts. Offline checks do not replace live-service integration tests.",
+  "codeExamples": [
+    {
+      "title": "Create a minimal CycloneDX component",
+      "language": "javascript",
+      "blurb": "The component converts one canonical npm SHA-512 integrity digest to CycloneDX hexadecimal form and requires bounded package and supplier identity.",
+      "code": "function sha512HexFromIntegrity(integrity) {\n  if (typeof integrity !== \"string\" || !/^sha512-[A-Za-z0-9+/]{86}==$/.test(integrity)) {\n    throw new TypeError(\"canonical SHA-512 integrity required\");\n  }\n  const encoded = integrity.slice(7);\n  const digest = Buffer.from(encoded, \"base64\");\n  if (digest.length !== 64 || digest.toString(\"base64\") !== encoded) {\n    throw new TypeError(\"canonical SHA-512 integrity required\");\n  }\n  return digest.toString(\"hex\");\n}\n\nexport function cyclonedxNpmComponent(pkg, integrity, supplier) {\n  const npmPart = /^[a-z0-9][a-z0-9._-]{0,213}$/;\n  if (typeof pkg?.name !== \"string\" || typeof pkg.version !== \"string\" || !pkg.version ||\n      pkg.version.length > 128 || /\\s/.test(pkg.version) ||\n      typeof supplier !== \"string\" || !supplier.trim() || supplier.length > 200) {\n    throw new TypeError(\"complete npm evidence required\");\n  }\n  const scoped = pkg.name.match(/^@([^/]+)\\/([^/]+)$/);\n  if (scoped ? !npmPart.test(scoped[1]) || !npmPart.test(scoped[2]) : !npmPart.test(pkg.name)) {\n    throw new TypeError(\"npm package name invalid\");\n  }\n  const packagePath = scoped\n    ? encodeURIComponent(\"@\" + scoped[1]) + \"/\" + encodeURIComponent(scoped[2])\n    : encodeURIComponent(pkg.name);\n  const purl = \"pkg:npm/\" + packagePath + \"@\" + encodeURIComponent(pkg.version);\n  const scope = pkg.dev === true ? \"excluded\" : \"required\";\n  return { type: \"library\", name: pkg.name, version: pkg.version,\n    \"bom-ref\": purl, purl,\n    hashes: [{ alg: \"SHA-512\", content: sha512HexFromIntegrity(integrity) }],\n    supplier: { name: supplier.trim() }, scope };\n}\n"
+    },
+    {
+      "title": "Represent dependency relationships by bom-ref",
+      "language": "javascript",
+      "blurb": "The relationship builder requires unique nonempty component references, rejects unknown or duplicate edge sources, and emits deterministic CycloneDX dependency edges.",
+      "code": "export function cyclonedxDependencies(components, edges) {\n  if (!Array.isArray(components) || !Array.isArray(edges)) throw new TypeError(\"component and edge arrays required\");\n  const references = new Set();\n  for (const component of components) {\n    const ref = component?.[\"bom-ref\"];\n    if (typeof ref !== \"string\" || !ref || references.has(ref)) {\n      throw new TypeError(\"unique component bom-ref required\");\n    }\n    references.add(ref);\n  }\n  const edgeSources = new Set();\n  return edges.map((edge) => {\n    const from = edge?.from; const to = edge?.to;\n    if (typeof from !== \"string\" || !references.has(from) || edgeSources.has(from) || !Array.isArray(to) ||\n        to.some((ref) => typeof ref !== \"string\" || !references.has(ref))) {\n      throw new Error(\"dependency references invalid or unknown\");\n    }\n    edgeSources.add(from);\n    return { ref: from, dependsOn: [...new Set(to)].sort() };\n  }).sort((left, right) => left.ref.localeCompare(right.ref));\n}\n"
+    }
+  ]
+};

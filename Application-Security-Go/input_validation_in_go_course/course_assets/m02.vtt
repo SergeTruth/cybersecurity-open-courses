@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+In a Go web service, trust boundaries appear wherever data enters through net/http.
+
+2
+00:00:06.120 --> 00:00:19.320
+Request bodies, query parameters, route parameters, headers, cookies, JSON payloads, form data, and multipart file uploads all arrive from outside the trusted application core.
+
+3
+00:00:19.420 --> 00:00:25.100
+A router or framework may help extract those values, but extraction is not validation.
+
+4
+00:00:25.200 --> 00:00:32.160
+The program still needs to decide whether each value is present, well formed, within limits, and appropriate for the current action.
+
+5
+00:00:32.440 --> 00:00:35.960
+Command-line tools and services have quieter boundaries.
+
+6
+00:00:36.060 --> 00:00:41.180
+Command-line arguments may point to files, choose modes, or set operational limits.
+
+7
+00:00:41.280 --> 00:00:52.640
+Environment variables and configuration files may be missing, use an old name, contain a value from the wrong environment, or hold a string where the application expects a number, duration, or URL.
+
+8
+00:00:52.740 --> 00:00:59.780
+These values deserve the same care as request data because they can change program behavior before any user request arrives.
+
+9
+00:01:00.060 --> 00:01:03.020
+Distributed systems add more sources of uncertainty.
+
+10
+00:01:03.120 --> 00:01:08.880
+Message queues can deliver duplicate, delayed, malformed, or version-skewed messages.
+
+11
+00:01:08.980 --> 00:01:13.620
+Database records may contain legacy states that no longer match current assumptions.
+
+12
+00:01:13.720 --> 00:01:20.920
+External API responses can omit fields, change formats, or return values outside documented ranges.
+
+13
+00:01:21.020 --> 00:01:27.260
+Treating every internal-looking value as trusted is how validation gaps move deeper into the codebase.
+
+14
+00:01:27.540 --> 00:01:30.420
+A practical Go design names its boundaries.
+
+15
+00:01:30.520 --> 00:01:39.960
+The handler, consumer, CLI entry point, or configuration loader should accept raw data, validate it, and pass a smaller trusted representation to the rest of the application.
+
+16
+00:01:40.060 --> 00:01:45.020
+That pattern reduces defensive clutter in business logic and makes the code easier to test.
+
+17
+00:01:45.120 --> 00:01:51.920
+Reviewers can ask a simple question: where does unknown data enter the program, and where is it converted into trusted input?

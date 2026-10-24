@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+A secure Prisma review starts by locating every place Prisma Client is used.
+
+2
+00:00:05.560 --> 00:00:07.560
+Look beyond route handlers.
+
+3
+00:00:07.660 --> 00:00:22.780
+Prisma calls may live in GraphQL resolvers, service layers, repositories, background workers, queue consumers, scripts, seed jobs, migrations, admin tools, tests, and serverless functions.
+
+4
+00:00:22.880 --> 00:00:36.400
+A Prisma call that looks clean by itself may still be risky if it receives values from a public request, a webhook, a support form, a queue message, a configuration value, or a previously stored user-controlled field.
+
+5
+00:00:36.680 --> 00:00:54.840
+Map the input sources that can influence each query or mutation: route parameters, query strings, request bodies, headers, cookies, uploaded files, queue messages, webhook payloads, existing database records, configuration, and admin forms.
+
+6
+00:00:54.940 --> 00:01:01.020
+Treat externally supplied values as untrusted even after they pass through several application layers.
+
+7
+00:01:01.120 --> 00:01:17.440
+Then identify sensitive models and fields, such as users, sessions, roles, permissions, tenant IDs, billing data, audit records, reset tokens, API keys, private documents, and security settings.
+
+8
+00:01:17.720 --> 00:01:22.200
+The important trust-boundary question is not simply whether a Prisma call compiles.
+
+9
+00:01:22.300 --> 00:01:31.580
+Ask who supplied the value, which model and fields it can affect, what authorization has already happened, what database identity is being used, and what fields will be returned.
+
+10
+00:01:31.680 --> 00:01:35.680
+Prisma security should be reviewed at the workflow level.
+
+11
+00:01:35.780 --> 00:01:46.500
+The repository call, the service logic, the route authorization, the validation layer, the database account, and the response mapping together decide whether a feature is safe.

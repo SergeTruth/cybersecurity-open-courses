@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Serverless platforms make scaling easier, and that is exactly why runtime controls matter.
+
+2
+00:00:06.200 --> 00:00:14.120
+Functions have limits around timeout, memory, payload size, execution duration, concurrency, and retry behavior.
+
+3
+00:00:14.220 --> 00:00:19.980
+Those settings affect reliability, cost, security, and downstream safety.
+
+4
+00:00:20.080 --> 00:00:23.680
+A timeout should match the workflow and its dependencies.
+
+5
+00:00:23.780 --> 00:00:27.460
+Memory and CPU settings affect performance and failure behavior.
+
+6
+00:00:27.560 --> 00:00:35.960
+Concurrency controls can protect databases, APIs, queues, rate-limited services, and third-party providers from sudden bursts.
+
+7
+00:00:36.240 --> 00:00:39.760
+Retries are useful only when the handler is designed for them.
+
+8
+00:00:39.860 --> 00:00:42.580
+Async events can be delivered more than once.
+
+9
+00:00:42.680 --> 00:00:44.440
+Messages can be replayed.
+
+10
+00:00:44.540 --> 00:00:48.060
+A downstream failure can leave partial work completed.
+
+11
+00:00:48.160 --> 00:01:00.320
+If the function retries a payment, sends duplicate emails, repeats a delete, or advances the same workflow twice, the incident may look like a business logic failure rather than an infrastructure issue.
+
+12
+00:01:00.420 --> 00:01:04.660
+Duplicate events should be expected, not treated as rare surprises.
+
+13
+00:01:04.940 --> 00:01:08.700
+Idempotency is the practical answer for risky operations.
+
+14
+00:01:08.800 --> 00:01:19.920
+Use idempotency keys, deduplication records, state checks, conditional writes, and safe update patterns so repeating the same event does not repeat the business effect.
+
+15
+00:01:20.020 --> 00:01:23.220
+The exact design depends on the workflow.
+
+16
+00:01:23.320 --> 00:01:27.560
+A notification function may tolerate duplicates differently than a billing function.
+
+17
+00:01:27.660 --> 00:01:31.340
+A cleanup job may need careful state checks before deleting anything.
+
+18
+00:01:31.440 --> 00:01:34.640
+The goal is to make retry behavior predictable.
+
+19
+00:01:34.920 --> 00:01:41.160
+Dead-letter queues, failure destinations, alerts, and runbooks make failures visible and recoverable.
+
+20
+00:01:41.260 --> 00:01:48.940
+Without them, a function can fail silently or retry until it creates cost, data quality, or availability problems.
+
+21
+00:01:49.040 --> 00:01:56.960
+Cost abuse and resource exhaustion should be treated as serverless security concerns because fast scaling can amplify mistakes quickly.
+
+22
+00:01:57.060 --> 00:02:02.900
+Bounded execution, visible failure, and downstream protection are part of secure serverless design.

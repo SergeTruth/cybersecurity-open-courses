@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Connection URLs, Secrets, Migrations, and Production Configuration",
+  "graphicAlt": "Runtime and migration authority use distinct scoped accounts with protected configuration, reviewed changes and connection lifecycle ownership.",
+  "narration": "Prisma security includes the workflows around the database, not only query code. Prisma needs connection configuration for Prisma Client, migrations, development tasks, deployment workflows, and sometimes seed scripts. DATABASE_URL and related settings often contain usernames, passwords, hosts, database names, parameters, and operational assumptions. They should not appear in source code, committed environment files, frontend bundles, Docker images, startup logs, error messages, tickets, screenshots, or public documentation.\n\nUse approved secrets management or protected deployment variables for production credentials. Separate development, test, staging, production, migration, CI/CD, reporting, and runtime credentials where appropriate. Migration credentials may need more privilege than application runtime credentials, so they should be handled deliberately instead of reused casually. The runtime application should not carry broad schema modification rights merely because migrations also need them.\n\nMigrations, seed scripts, and production configuration are security-relevant. A migration can change authorization behavior by adding, removing, renaming, or defaulting important fields. A seed script can create administrative accounts, test users, API keys, or sensitive records. Connection pooling and PrismaClient lifecycle choices affect reliability; misusing PrismaClient in serverless or hot-reload environments can exhaust connections and create operational risk. Review these workflows as part of the product's security posture, not as separate housekeeping.",
+  "narrationPoints": [
+    "Prisma needs connection configuration for Prisma Client, migrations, development tasks, deployment workflows, and sometimes seed scripts.",
+    "Use approved secrets management or protected deployment variables for production credentials.",
+    "Migrations, seed scripts, and production configuration are security-relevant.",
+    "The runtime application should not carry broad schema modification rights merely because migrations also need them.",
+    "Connection pooling and PrismaClient lifecycle choices affect reliability; misusing PrismaClient in serverless or hot-reload environments can exhaust connections and create operational risk.",
+    "They should not appear in source code, committed environment files, frontend bundles, Docker images, startup logs, error messages, tickets, screenshots, or public documentation."
+  ]
+};

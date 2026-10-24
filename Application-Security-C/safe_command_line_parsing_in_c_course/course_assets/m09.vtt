@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.860
+Command-line parsers are excellent candidates for focused tests because the input space is compact and the expected behavior should be explicit.
+
+2
+00:00:07.960 --> 00:00:20.520
+Tests should cover valid invocations, missing required options, unknown options, missing values, duplicate options, invalid positionals, and each documented failure path.
+
+3
+00:00:20.800 --> 00:00:27.040
+Boundary tests are important for numeric values, lengths, paths, and counts.
+
+4
+00:00:27.140 --> 00:00:37.940
+Include minimums, maximums, just-outside values, empty strings, too-long values, and values that are valid syntax but invalid for the option's context.
+
+5
+00:00:38.040 --> 00:00:41.880
+These tests catch assumptions that simple happy-path cases miss.
+
+6
+00:00:42.160 --> 00:00:45.600
+Malformed input tests exercise rejection behavior.
+
+7
+00:00:45.700 --> 00:00:56.020
+A parser should be tested for ambiguous combinations, conflicting modes, unexpected ordering, unsupported characters, and end-of-options behavior if supported.
+
+8
+00:00:56.120 --> 00:01:01.720
+Regression tests should be added when parser bugs are fixed so decisions remain stable.
+
+9
+00:01:02.000 --> 00:01:11.840
+Compiler warnings, static analysis, and sanitizers help find implementation mistakes around conversions, ignored results, bounds, and memory handling.
+
+10
+00:01:11.940 --> 00:01:17.140
+High-level input-generation workflows can also explore combinations of flags and values.
+
+11
+00:01:17.240 --> 00:01:21.960
+These tools are useful because parsers often have many small branches.
+
+12
+00:01:22.240 --> 00:01:25.040
+Code review ties test evidence to the parser contract.
+
+13
+00:01:25.140 --> 00:01:39.780
+Reviewers should verify that the documented interface matches the implementation, that parsing happens before side effects, that invalid input fails predictably, and that each option's type, range, length, and resource rules are covered by tests.

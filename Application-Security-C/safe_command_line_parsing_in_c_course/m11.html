@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Safe Command-Line Parsing in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="safe_command_line_parsing_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;D&quot;,&quot;q11&quot;:&quot;C&quot;,&quot;q12&quot;:&quot;B&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why should command-line arguments be treated as input that needs validation?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Arguments are trusted when a known shell or automation account launches the process.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>They can come from users, scripts, automation, or wrappers and may influence program behavior, memory use, resources, or state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>The operating system validates argument boundaries, so application validation is needed only for file contents and values that cross into another process or external resource.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Copying every argument into owned storage makes its value and intended effect trustworthy.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. What does argc provide?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>The number of command-line argument entries available through argv.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>The total number of bytes available across all argument strings, including terminators.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>The highest valid index in argv, excluding the program name and any null sentinel.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>The count of user-supplied argument entries excluding the program name; each entry still needs its own validation.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why is a clear option contract important?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Accept unknown options for forward compatibility and let later code decide whether to use them.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Define syntax during implementation by following whichever parser branch sees an option first.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Document required values but allow duplicate and missing options to inherit parser-library defaults, because established parser behavior is more predictable than adding application-specific rejection rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>It defines required options, optional values, defaults, duplicates, and failure behavior before parsing logic becomes complicated.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why should parsing be separated from program actions?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Execute each option as soon as it parses so errors can report which side effect failed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Validate flags first, perform their actions, and parse positionals afterward.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>It helps ensure all arguments are validated before side effects such as file changes or resource operations occur.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Store partial configuration globally so later parser stages can fill in missing values.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should numeric argument validation check?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>A successful conversion call and a nonnegative result are sufficient for every numeric option.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Cast to the destination type first, then compare the converted value with application limits.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Conversion success, leftover characters, sign expectations, range limits, and whether the value is acceptable for the context.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Check sign, range, units, and business policy, but accept a valid numeric prefix when trailing characters remain.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why are path-like command-line arguments risky if used without validation?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Removing parent-directory tokens proves a path stays under the intended working directory.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>They may be empty, unexpected, too long, relative to a surprising directory, or outside the program&#x27;s intended resource scope.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A path is safe when it is relative and shorter than the platform maximum.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Prefixing a validated argument with a trusted directory string establishes filesystem containment.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why should command-line strings be checked before copying into internal buffers?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>The destination capacity may be smaller than the argument, and C string handling depends on valid storage and termination.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>The shell limits argument strings to the destination object size declared by the program.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Source length is the correct capacity to pass to a size-taking copy function.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>A successful copy proves encoding, termination, and the field&#x27;s semantic length are acceptable.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. What is the purpose of -- in many command-line conventions?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>It validates all remaining positional arguments because option parsing has ended.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>It enables parser defaults and allows unknown options to be treated as data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>It ends option interpretation and therefore makes later positional values safe without separate meaning or count validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>It marks the end of options so later values can be treated as positional arguments.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What should a parser do with unknown or ambiguous options?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Reject them or report a clear error according to the documented command-line contract.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Choose the closest known option when edit distance is small and emit a warning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Treat unknown options as positionals unless they would change a sensitive operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Ignore ambiguous duplicates when their values happen to be identical.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should validation failures avoid partial state updates?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Partial state is safe when every applied option was individually valid before a later error.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>The program can roll back filesystem and process side effects after printing usage text.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Failure may retain parser state for a retry even when callers can observe the incomplete configuration.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Partial changes can leave the program in an inconsistent or unsafe state even though parsing failed.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of tests and tools in command-line parsing?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>A fuzzing campaign replaces an explicit option contract by exploring unexpected combinations automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Static analysis proves future option forms are safe when the current parser has no warnings.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>They help reveal missed edge cases and memory mistakes, but they do not replace a clear parser contract.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Tests need only valid invocations and one unknown option because the parser library covers boundaries.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Parse and act in one pass, relying on cleanup to undo any change after a later error.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Define the command-line contract, parse without side effects, validate every value, reject ambiguity, and act only after input is acceptable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Treat command-line values as deployment configuration and validate only options from interactive users.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Define syntax and precedence, but commit each action as its option validates and rely on rollback if a later value fails.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

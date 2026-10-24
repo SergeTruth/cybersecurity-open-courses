@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Key Management in Node.js</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="key_management_in_nodejs">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;B&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;A&quot;,&quot;q06&quot;:&quot;A&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is key management separate from algorithm selection?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Approved algorithms include sufficient key-management behavior, so storage and rotation need no separate design.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Key management matters only for symmetric encryption because public-key systems distribute their keys automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Algorithm strength determines who may use a key and how compromise response should proceed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>A strong algorithm can still fail when keys are exposed, reused, unmanaged, or impossible to rotate.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why should keys be classified by purpose and authority?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Classification is a naming convention used for inventory searches and does not affect key access or rotation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Key classification defines purpose, authorized users, protected assets, deployment scope and compromise response.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Keys with the same algorithm may share one classification because their authority is cryptographically equivalent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Classification should record key bytes so incident responders can reproduce every operation after compromise.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why are Math.random, timestamps, UUIDs, and human-created phrases unsuitable as cryptographic keys?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Random UUIDs are always suitable AES keys because their text representation contains more than 128 characters.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Math.random, timestamps, UUIDs, and phrases may lack entropy or generation properties required for secure keys.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Timestamps become secure key material when combined with a private application name known to the deployment team.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Human passphrases may be used directly as encryption keys when they contain uppercase, lowercase, numbers, and symbols.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Where should production keys not be stored?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Keys may be committed in encrypted source files because repository access already identifies every authorized developer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Container images are appropriate key stores when the registry is private and each image has an immutable digest.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Keep production keys out of source, committed files, images, logs, tickets, screenshots, and documentation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Logging a key once during startup is acceptable if log retention is shorter than the key&#x27;s rotation interval.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. Why are environment variables not a complete key-management solution?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Environment variables deliver keys but do not supply ownership, audit, rotation, recovery, or safe logging.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Environment variables are complete key management because child processes cannot inspect variables set by their parent.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Putting a key in an environment variable guarantees automatic rotation whenever the deployment is restarted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Environment variables make key access auditable because the operating system logs each application read.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why is key reuse across unrelated purposes risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Reusing one key across unrelated purposes expands blast radius and complicates rotation and purpose-specific controls.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>One key per algorithm is preferable because cryptographic separation already distinguishes encryption from signing operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Key reuse is safe when every caller runs in the same cloud account, even if applications protect unrelated data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>A long key can be split logically among purposes without deriving separate keys or recording distinct versions.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why does rotation require versioning, staged rollout, and testing?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Rotation should replace key material under the same identifier so ciphertext never needs to record a key version.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Rotation needs versioning, staged rollout, and tests because systems may require old and new keys during transition.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>The old key should be destroyed as soon as a new version is created, before compatibility testing begins.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>A successful new encryption proves rotation is complete even when existing ciphertext and offline workers use older keys.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. How can envelope encryption support key separation and rotation?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Envelope encryption stores the plaintext data key beside ciphertext so rotating the wrapping key never requires unwrapping.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>The key-encryption key should encrypt application data directly and the data key should authenticate only metadata.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Envelope encryption removes the need to record key identifiers because the current wrapping key can open every historical record.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Envelope encryption uses data keys for content and key-encryption keys for wrapping, enabling scoped separation and rewrapping.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why do public keys still require integrity?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Public keys require confidentiality because anyone who sees a verification key can create a valid signature.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>A matching key algorithm proves a public key came from the expected issuer, even without authenticated distribution.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Public keys require integrity because trusting a substituted key can validate signatures or encryption material from the wrong source.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>JWKS endpoints make public-key integrity automatic whenever they return a key with the requested kid.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should a practical Node.js key-management review include?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Review key inventory, purpose, generation, storage, access, representation, reuse, rotation, telemetry, testing, and incident response.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Review algorithms, key lengths, and secret-manager availability; ownership and compromise procedures can be inferred during incidents.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Review active encryption keys only, since decrypt-only, revoked, public, and recovery keys no longer affect production risk.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Review the key vault configuration; application logging, version selection, testing, and deployment access are outside key management.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

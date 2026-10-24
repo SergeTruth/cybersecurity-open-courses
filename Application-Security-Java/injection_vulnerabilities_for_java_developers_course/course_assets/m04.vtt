@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Java applications frequently build queries that are not SQL.
+
+2
+00:00:04.760 --> 00:00:15.480
+Directory searches, NoSQL filters, XPath expressions, search-engine queries, and XML processing logic can all have their own syntax and interpretation rules.
+
+3
+00:00:15.580 --> 00:00:22.860
+The risk is the same pattern in a different language: untrusted input influences query structure instead of remaining a value.
+
+4
+00:00:22.960 --> 00:00:32.320
+A developer who only searches for SQL strings may miss equally important sinks in LDAP, XML, search, or document-processing code.
+
+5
+00:00:32.600 --> 00:00:36.600
+Defensive design begins by separating user intent from query syntax.
+
+6
+00:00:36.700 --> 00:00:44.700
+If the application supports searching by department, status, or owner, those fields should be allowlisted and mapped to known query fields.
+
+7
+00:00:44.800 --> 00:00:51.760
+Operators such as equals, contains, before, after, and in-list should also be explicit choices.
+
+8
+00:00:51.860 --> 00:01:02.260
+Avoid passing user-controlled objects, maps, or strings directly into query builders when those structures can introduce operators, nested expressions, or unexpected behavior.
+
+9
+00:01:02.540 --> 00:01:07.340
+Schema and shape validation help keep complex inputs predictable.
+
+10
+00:01:07.440 --> 00:01:15.120
+JSON and XML bodies should be checked for expected fields, types, sizes, nesting depth, and allowed combinations before they influence a query.
+
+11
+00:01:15.220 --> 00:01:20.740
+XML parsers should be configured defensively and only enable features the application needs.
+
+12
+00:01:20.840 --> 00:01:31.800
+XPath or directory filter construction should use library-supported escaping or parameter mechanisms where available, combined with allowlisted fields and clearly defined operations.
+
+13
+00:01:32.080 --> 00:01:45.120
+A useful review question is, 'Can the caller choose what the query means, or only the values inside a query we designed?' Secure code lets users express approved business intent, such as finding open orders for their account.
+
+14
+00:01:45.220 --> 00:01:52.180
+It does not let them smuggle in new fields, operators, wildcard behavior, parser instructions, or cross-tenant selectors.
+
+15
+00:01:52.280 --> 00:01:56.680
+The more flexible the search feature, the more explicit its constraints need to be.

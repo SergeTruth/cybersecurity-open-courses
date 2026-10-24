@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Modern systems typically provide operating system or approved library APIs for security-grade random bytes.
+
+2
+00:00:08.120 --> 00:00:19.960
+The exact API varies by platform, but the design principle is consistent: use the system or trusted library source intended for security-sensitive randomness rather than building your own generator.
+
+3
+00:00:20.240 --> 00:00:29.120
+Platform-specific APIs differ in names, blocking behavior, error reporting, initialization expectations, and supported environments.
+
+4
+00:00:29.220 --> 00:00:35.700
+C code should document which platforms are supported and which randomness source is used on each one.
+
+5
+00:00:35.800 --> 00:00:41.000
+This is especially important for portable libraries and cross-platform applications.
+
+6
+00:00:41.280 --> 00:00:44.560
+Random byte generation should check return values.
+
+7
+00:00:44.660 --> 00:00:51.540
+The code should confirm that the requested amount was produced, and it should define what happens when the call fails or produces less than requested.
+
+8
+00:00:51.640 --> 00:00:55.160
+Security-sensitive values should not be created from incomplete output.
+
+9
+00:00:55.440 --> 00:00:57.680
+A small wrapper function can help.
+
+10
+00:00:57.780 --> 00:01:06.420
+A wrapper can centralize platform differences, enforce complete output, convert API errors into application errors, and make call sites consistent.
+
+11
+00:01:06.520 --> 00:01:11.720
+It also gives reviewers one place to inspect the security-grade randomness path.
+
+12
+00:01:12.000 --> 00:01:20.160
+Avoid mixing untrusted or predictable values into a secure random source unless the platform or library explicitly supports that operation safely.
+
+13
+00:01:20.260 --> 00:01:24.580
+Application-level mixing is easy to do badly and usually unnecessary.
+
+14
+00:01:24.680 --> 00:01:29.160
+Request the bytes you need from the trusted source and keep the failure behavior simple.

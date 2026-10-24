@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+A seed initializes deterministic generator state.
+
+2
+00:00:04.120 --> 00:00:09.720
+For non-security uses, a known seed can be useful because it makes a sequence repeatable.
+
+3
+00:00:09.820 --> 00:00:15.740
+For security-sensitive uses, predictable seeding is a problem because predictable state leads to predictable output.
+
+4
+00:00:16.020 --> 00:00:24.740
+Time values, process identifiers, counters, and simple combinations of low-entropy values should not be treated as strong entropy.
+
+5
+00:00:24.840 --> 00:00:30.680
+They may vary, but they are often guessable, repeated, or constrained by the environment.
+
+6
+00:00:30.780 --> 00:00:33.900
+They are not a substitute for a security-grade random source.
+
+7
+00:00:34.180 --> 00:00:36.580
+Some environments deserve special attention.
+
+8
+00:00:36.680 --> 00:00:48.280
+Embedded systems, early boot contexts, virtual machines, containers, and cloned images may have unusual initialization patterns or limited entropy availability.
+
+9
+00:00:48.380 --> 00:00:52.700
+The correct response is not to invent a custom entropy scheme in application code.
+
+10
+00:00:52.800 --> 00:01:01.040
+The correct response is to use the platform or approved library mechanism designed for that environment and to document the operational requirement.
+
+11
+00:01:01.320 --> 00:01:08.920
+Security-sensitive applications should rely on trusted platform randomness instead of assembling their own entropy collection.
+
+12
+00:01:09.020 --> 00:01:17.020
+The operating system or approved cryptographic library is where entropy collection, conditioning, and state management should live.
+
+13
+00:01:17.120 --> 00:01:22.400
+Application code should request bytes and handle success or failure carefully.
+
+14
+00:01:22.680 --> 00:01:26.440
+Failure to obtain adequate random bytes should be handled explicitly.
+
+15
+00:01:26.540 --> 00:01:33.260
+If a security-sensitive value cannot be generated with the required source, the operation should fail safely.
+
+16
+00:01:33.360 --> 00:01:37.920
+Continuing with a predictable fallback is worse than returning a clear error.

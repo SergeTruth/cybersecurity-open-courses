@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.580
+Threaded and long-running programs need predictable initialization and safe use of random sources.
+
+2
+00:00:06.680 --> 00:00:16.440
+The code should define when random functionality becomes available, what happens if initialization fails, and how multiple threads call the source safely through the supported API.
+
+3
+00:00:16.720 --> 00:00:21.520
+Forked processes can duplicate process state, which matters for stateful generators.
+
+4
+00:00:21.620 --> 00:00:28.420
+If a design uses a deterministic generator for non-security purposes, fork behavior should be considered.
+
+5
+00:00:28.520 --> 00:00:37.480
+For security-sensitive values, the safer pattern is to rely on platform or approved library sources that are designed to handle process behavior correctly.
+
+6
+00:00:37.760 --> 00:00:45.280
+Daemons, containers, embedded systems, and service restarts may encounter repeated initialization patterns.
+
+7
+00:00:45.380 --> 00:00:52.020
+Cloned images, repeated startup paths, or unusual boot timing can expose assumptions about seeding and entropy.
+
+8
+00:00:52.120 --> 00:00:57.960
+These concerns belong in design and operational review, not in application-level invention.
+
+9
+00:00:58.240 --> 00:01:03.600
+Do not cache or reuse security-sensitive random values beyond their intended lifetime.
+
+10
+00:01:03.700 --> 00:01:09.220
+A token, nonce, key, or one-time code should have a clear purpose and lifecycle.
+
+11
+00:01:09.320 --> 00:01:14.680
+Reuse can break the property the value was meant to provide, even if the original generation was strong.
+
+12
+00:01:14.960 --> 00:01:22.080
+Centralized random helper functions can enforce consistent behavior across threads, processes, and modules.
+
+13
+00:01:22.180 --> 00:01:28.660
+They make it easier to check errors, use the correct source, avoid biased ranges, and document security intent.
+
+14
+00:01:28.760 --> 00:01:34.680
+Review should consider startup, restart, fork, error, and recovery paths.

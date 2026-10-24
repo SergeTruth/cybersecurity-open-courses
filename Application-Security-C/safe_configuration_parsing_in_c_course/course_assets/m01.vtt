@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.180
+Configuration is input.
+
+2
+00:00:02.280 --> 00:00:15.240
+It may look less dynamic than a command-line argument or network message, but it can still control program behavior, memory use, resource access, logging, network behavior, feature flags, and security posture.
+
+3
+00:00:15.340 --> 00:00:23.180
+A configuration value can change what files are opened, which services are contacted, how much memory is allocated, or which protections are enabled.
+
+4
+00:00:23.460 --> 00:00:38.580
+Configuration can come from many places: local files, generated files, deployment systems, packages, environment variables, administrator edits, defaults compiled into the program, or settings loaded from a previous run.
+
+5
+00:00:38.680 --> 00:00:45.240
+Some of those sources feel internal, but they are still data crossing a boundary into code that will rely on them.
+
+6
+00:00:45.520 --> 00:00:51.440
+Defensive parsing is important because configuration often lives longer than the code that first wrote it.
+
+7
+00:00:51.540 --> 00:00:58.900
+A file may survive upgrades, manual edits, migrations, packaging changes, or automation mistakes.
+
+8
+00:00:59.000 --> 00:01:06.360
+If a parser assumes the file is always complete, small, well encoded, and perfectly shaped, later maintenance becomes fragile.
+
+9
+00:01:06.640 --> 00:01:17.280
+Configuration validation should happen before values affect memory operations, resource changes, logging, feature state, or security-sensitive decisions.
+
+10
+00:01:17.380 --> 00:01:26.100
+The parser should define the expected keys, types, lengths, ranges, formats, defaults, and failure behavior before applying settings.
+
+11
+00:01:26.380 --> 00:01:33.340
+The practical mindset is simple: configuration is not trusted just because it is local or intended for administrators.
+
+12
+00:01:33.440 --> 00:01:41.840
+It becomes usable after it has been loaded safely, parsed predictably, validated against an explicit contract, and applied in a controlled order.

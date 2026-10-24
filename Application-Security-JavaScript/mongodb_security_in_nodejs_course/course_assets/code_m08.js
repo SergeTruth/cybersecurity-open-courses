@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Deployment Hardening, Network Exposure, Backups, and Auditing with concrete, reviewable Node.js boundaries. Run copied snippets independently as Node.js 22+ ES modules; see readme.md for dependencies and trusted adapter/authorization contracts. Offline checks do not replace live-service integration tests.",
+  "codeExamples": [
+    {
+      "title": "Define a least-privilege MongoDB application role",
+      "language": "javascript",
+      "blurb": "The role grants only allowlisted actions on named collections and rejects inherited roles, unexpected resources, or any additional action.",
+      "code": "export const applicationRole = {\n  role: \"accountsApiRuntime\", db: \"admin\", privileges: [\n    { resource: { db: \"app\", collection: \"accounts\" }, actions: [\"find\", \"insert\", \"update\"] },\n    { resource: { db: \"app\", collection: \"sessions\" }, actions: [\"find\", \"insert\", \"remove\"] }\n  ], roles: []\n};\n\nconst allowedActions = new Map([\n  [\"app.accounts\", new Set([\"find\", \"insert\", \"update\"])],\n  [\"app.sessions\", new Set([\"find\", \"insert\", \"remove\"])]\n]);\n\nexport function assertApplicationRoleAllowlist(role) {\n  if (!Array.isArray(role?.roles) || role.roles.length !== 0 || !Array.isArray(role?.privileges)) return false;\n  return role.privileges.every((entry) => {\n    const key = String(entry?.resource?.db) + \".\" + String(entry?.resource?.collection);\n    const allowed = allowedActions.get(key);\n    return allowed && Array.isArray(entry.actions) && entry.actions.every((action) => allowed.has(action));\n  });\n}\n"
+    },
+    {
+      "title": "Validate backup restoration into an isolated target",
+      "language": "javascript",
+      "blurb": "Planning validates an isolated target, checksum, and independently loaded unexpired approval. The actual restore/cutover service must reauthorize and consume the exact approval atomically; this descriptor does not itself authorize execution.",
+      "code": "// Deployment-owned allowlist and authenticated approval loader; this returns planning evidence only.\nexport async function validateRestorePlan(plan, allowedTargets, loadApproval) {\n  const id = value => typeof value === \"string\" && /^[A-Za-z0-9_-]{1,128}$/.test(value);\n  if (!id(plan?.targetCluster) || !id(plan.productionCluster) || !allowedTargets.has(plan.targetCluster) ||\n      plan.targetCluster === plan.productionCluster) throw new Error(\"isolated restore target required\");\n  if (plan.encryption !== \"KMS\" || typeof plan.sha256 !== \"string\" || !/^[a-f0-9]{64}$/i.test(plan.sha256) ||\n      typeof plan.approvalId !== \"string\" || !/^[A-Za-z0-9_-]{8,128}$/.test(plan.approvalId) ||\n      typeof loadApproval !== \"function\") throw new Error(\"restore evidence invalid\");\n  const request = Object.freeze({ targetCluster: plan.targetCluster, productionCluster: plan.productionCluster,\n    encryption: \"KMS\", sha256: plan.sha256.toLowerCase(), approvalId: plan.approvalId });\n  const approval = await loadApproval(request.approvalId);\n  const expiry = Date.parse(approval?.expiresAt);\n  if (approval?.status !== \"approved\" || approval.action !== \"restore-cutover\" ||\n      approval.targetCluster !== request.targetCluster || approval.productionCluster !== request.productionCluster ||\n      typeof approval.sha256 !== \"string\" || approval.sha256.toLowerCase() !== request.sha256 ||\n      !Number.isFinite(expiry) || expiry <= Date.now()) throw new Error(\"cutover approval missing or mismatched\");\n  return request;\n}\n"
+    }
+  ]
+};

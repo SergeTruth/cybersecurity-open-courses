@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Target-based CMake is more than a modern style preference.
+
+2
+00:00:04.600 --> 00:00:09.880
+It is a way to express build intent at the level where the intent actually applies.
+
+3
+00:00:09.980 --> 00:00:22.220
+Libraries, executables, tests, tools, and generated components can each carry their own include paths, compile definitions, compile options, link dependencies, and language requirements.
+
+4
+00:00:22.320 --> 00:00:26.560
+This makes the project easier to reason about and easier to review.
+
+5
+00:00:26.840 --> 00:00:31.000
+Public, private, and interface properties are especially important.
+
+6
+00:00:31.100 --> 00:00:36.300
+A private include path should help one target compile without leaking into downstream users.
+
+7
+00:00:36.400 --> 00:00:39.600
+A public dependency becomes part of the contract for consumers.
+
+8
+00:00:39.700 --> 00:00:44.420
+An interface property can carry requirements without building a binary of its own.
+
+9
+00:00:44.520 --> 00:00:51.480
+When those scopes are chosen deliberately, the CMake files describe both implementation detail and integration boundary.
+
+10
+00:00:51.760 --> 00:00:54.560
+Broad global settings create hidden coupling.
+
+11
+00:00:54.660 --> 00:01:01.620
+A global include directory can make an unrelated target compile only because it accidentally sees headers it should not depend on.
+
+12
+00:01:01.720 --> 00:01:07.880
+A global compile definition can change behavior across the project with little visibility.
+
+13
+00:01:07.980 --> 00:01:15.340
+A global linker option may apply to tools, tests, and production binaries even when only one target needed it.
+
+14
+00:01:15.620 --> 00:01:20.340
+A secure project structure helps reviewers see where trust boundaries exist.
+
+15
+00:01:20.440 --> 00:01:31.240
+Internal libraries, third-party dependencies, command-line tools, plugins, and shipped executables should be named and organized so their relationships are visible.
+
+16
+00:01:31.340 --> 00:01:41.340
+The closer CMake stays to the architecture of the software, the easier it becomes to identify unnecessary exposure, surprising inheritance, and changes that deserve deeper review before release.

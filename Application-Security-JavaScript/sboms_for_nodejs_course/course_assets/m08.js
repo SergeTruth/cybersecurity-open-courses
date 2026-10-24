@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "License, Supplier, and Customer Use Cases",
+  "graphicAlt": "Release-specific SBOMs support license, supplier and customer review through deliberate sharing controls.",
+  "narration": "SBOMs are not only for security scanners. They can support open source license review, customer security questionnaires, procurement, vendor risk management, compliance requests, merger and acquisition diligence, support obligations, and software transparency programs. For Node.js teams, this matters because npm ecosystems can include many small packages, transitive dependencies, and license metadata that may be incomplete or inconsistent.\n\nLicense fields may be missing, inaccurate, dual-licensed, ambiguous, or difficult to interpret. Supplier and author metadata can provide context, but it should not be treated as proof of trust. Customers may request SBOMs in a particular format or with particular fields, and those requests should be tied to a specific product version or release. A generic SBOM detached from a release is far less useful than one connected to the actual software the customer received.\n\nSharing SBOMs requires balance. Transparency helps customers, procurement teams, and incident responders, but an SBOM can reveal technology choices, versions, internal package names, dependency structure, and sometimes vulnerability clues. Teams should decide what SBOMs can be shared externally, what review is needed before disclosure, and which channels are approved. Contractual or regulatory expectations may influence retention, update cadence, format, and access control.",
+  "narrationPoints": [
+    "They can support open source license review, customer security questionnaires, procurement, vendor risk management, compliance requests, merger and acquisition diligence, support obligations, and software transparency programs.",
+    "Supplier and author metadata can provide context, but it should not be treated as proof of trust.",
+    "Teams should decide what SBOMs can be shared externally, what review is needed before disclosure, and which channels are approved.",
+    "For Node.js teams, this matters because npm ecosystems can include many small packages, transitive dependencies, and license metadata that may be incomplete or inconsistent.",
+    "Transparency helps customers, procurement teams, and incident responders, but an SBOM can reveal technology choices, versions, internal package names, dependency structure, and sometimes vulnerability clues.",
+    "A generic SBOM detached from a release is far less useful than one connected to the actual software the customer received."
+  ]
+};

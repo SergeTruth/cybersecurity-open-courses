@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Templates and expression evaluators are interpreters.
+
+2
+00:00:03.960 --> 00:00:18.040
+C# applications may use Razor views, mail templates, reporting templates, rules engines, expression evaluators, dynamic scripting, reflection-based plugins, or runtime compilation features.
+
+3
+00:00:18.140 --> 00:00:22.380
+These mechanisms are useful because they turn structured instructions into behavior.
+
+4
+00:00:22.480 --> 00:00:32.400
+They become risky when user-controlled input can influence template logic, expression text, code paths, type names, method names, or evaluation context.
+
+5
+00:00:32.680 --> 00:00:43.800
+Razor and ASP.NET Core provide strong default encoding for ordinary content, but developers can bypass those protections with raw-output features or custom helpers.
+
+6
+00:00:43.900 --> 00:00:51.340
+The issue is not that Razor is unsafe; the issue is treating user content as if it were trusted template logic or markup.
+
+7
+00:00:51.440 --> 00:01:02.880
+A support message, product description, profile field, or imported text should render as content unless there is a deliberate, reviewed, and constrained reason to allow richer behavior.
+
+8
+00:01:03.160 --> 00:01:07.480
+Expression evaluators and rule engines need clear trust boundaries.
+
+9
+00:01:07.580 --> 00:01:13.660
+Administrator-authored rules may be acceptable in some products, while normal end-user expressions are not.
+
+10
+00:01:13.760 --> 00:01:21.200
+Sandboxes and restricted execution modes can reduce risk, but they should not be treated as permission to evaluate arbitrary input.
+
+11
+00:01:21.300 --> 00:01:32.580
+Review dependencies that interpret strings, build expressions dynamically, compile code, call reflection APIs, or load plugin assemblies based on external values.
+
+12
+00:01:32.860 --> 00:01:37.340
+A defensible pattern separates user content from executable logic.
+
+13
+00:01:37.440 --> 00:01:44.000
+Store templates in trusted locations, map user choices to known templates, and pass user values as data.
+
+14
+00:01:44.100 --> 00:01:50.580
+Avoid letting requests select template bodies, expression bodies, type names, or method calls.
+
+15
+00:01:50.680 --> 00:01:59.400
+If dynamic behavior is a product requirement, design a small policy language with explicit operations and tests instead of exposing a general-purpose interpreter.
+
+16
+00:01:59.500 --> 00:02:03.100
+The goal is controlled flexibility, not open-ended evaluation.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+TLS integration matters because native C applications often communicate across networks they do not fully control.
+
+2
+00:00:06.760 --> 00:00:14.040
+When integrated correctly, TLS helps protect confidentiality, integrity, and peer authentication for that communication.
+
+3
+00:00:14.140 --> 00:00:23.260
+It can keep application data private in transit, detect unexpected modification, and help the application decide whether it is talking to the intended peer.
+
+4
+00:00:23.540 --> 00:00:26.260
+Those benefits depend on correct integration.
+
+5
+00:00:26.360 --> 00:00:40.040
+Encryption alone is not enough if the application accepts the wrong identity, ignores validation results, logs sensitive material, continues after a failed handshake, or treats library configuration as a one-time checkbox.
+
+6
+00:00:40.140 --> 00:00:46.140
+TLS is a security boundary only when the application respects the information the TLS layer provides.
+
+7
+00:00:46.420 --> 00:00:49.140
+Native code adds lifecycle responsibility.
+
+8
+00:00:49.240 --> 00:00:57.960
+A C application must manage contexts, connection objects, buffers, errors, cleanup, and dependency updates explicitly.
+
+9
+00:00:58.060 --> 00:01:09.740
+It should know what state exists before the handshake, what state exists after validation succeeds, what happens when validation fails, and how the application protocol behaves over the protected channel.
+
+10
+00:01:10.020 --> 00:01:13.300
+Poor error handling can quietly weaken the design.
+
+11
+00:01:13.400 --> 00:01:23.880
+If a TLS call reports failure, partial progress, retry conditions, or peer-validation problems, application logic should not continue as though the channel is trusted.
+
+12
+00:01:23.980 --> 00:01:32.780
+Errors should be handled predictably and reported safely, without exposing private keys, secrets, session details, or sensitive application data.
+
+13
+00:01:33.060 --> 00:01:36.420
+The defensive habit is to treat TLS as a maintained control.
+
+14
+00:01:36.520 --> 00:01:47.880
+Select a reliable library, follow library and organization guidance, verify identity, protect keys, test negative cases, monitor certificate status, and keep dependencies current.
+
+15
+00:01:47.980 --> 00:01:52.380
+TLS becomes stronger when it is owned as part of the application lifecycle.

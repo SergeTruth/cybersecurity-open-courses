@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+A UDP datagram usually arrives with source address information.
+
+2
+00:00:04.520 --> 00:00:12.040
+That information is useful for sending replies and for operational context, but it should not be treated as a complete proof of identity.
+
+3
+00:00:12.140 --> 00:00:18.380
+Network location can be useful evidence, yet it is not the same as authorization for an application action.
+
+4
+00:00:18.660 --> 00:00:23.860
+Trust decisions should not depend only on a datagram's apparent source address.
+
+5
+00:00:23.960 --> 00:00:30.040
+The application should decide what the source information means in its deployment model and what additional checks are needed.
+
+6
+00:00:30.140 --> 00:00:38.620
+A low-risk status request may require less assurance than a request that changes state, reveals sensitive data, or consumes significant resources.
+
+7
+00:00:38.900 --> 00:00:41.860
+Authorization should be tied to the requested action.
+
+8
+00:00:41.960 --> 00:00:51.080
+Some messages might be accepted from a broad set of peers, while others require stronger identity, a shared trust relationship, or a protected channel.
+
+9
+00:00:51.180 --> 00:00:57.020
+The protocol should not treat every datagram that reaches the port as equally authorized.
+
+10
+00:00:57.300 --> 00:01:03.540
+Protocols may need request correlation, replay awareness, or peer authentication depending on sensitivity.
+
+11
+00:01:03.640 --> 00:01:08.680
+Correlation can help match responses to requests and keep state transitions clear.
+
+12
+00:01:08.780 --> 00:01:15.100
+Replay awareness can help the service avoid applying stale or repeated state changes.
+
+13
+00:01:15.200 --> 00:01:19.040
+Peer authentication may be needed when the message has meaningful authority.
+
+14
+00:01:19.320 --> 00:01:23.800
+State tables and peer records should be bounded and cleaned up predictably.
+
+15
+00:01:23.900 --> 00:01:28.220
+UDP does not provide connection state, so applications often create their own.
+
+16
+00:01:28.320 --> 00:01:36.400
+That state should have limits, expiration, and cleanup rules so unexpected traffic cannot cause unbounded memory growth or stale trust assumptions.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+A Terraform helper script should always understand its target before it runs Terraform.
+
+2
+00:00:05.400 --> 00:00:07.880
+The target is more than a workspace name.
+
+3
+00:00:07.980 --> 00:00:19.500
+It includes the backend category, state location, cloud account, project, tenant, subscription, region, repository path, module directory, variable set, and intended environment.
+
+4
+00:00:19.600 --> 00:00:28.240
+If those details are implicit, inherited, or assumed from a developer workstation, the script is relying on luck instead of control.
+
+5
+00:00:28.520 --> 00:00:34.040
+Development, staging, and production should not share accidental defaults.
+
+6
+00:00:34.140 --> 00:00:45.740
+A local cloud profile, a previously selected workspace, a cached backend configuration, or a current working directory may be convenient during development, but those assumptions are fragile in automation.
+
+7
+00:00:45.840 --> 00:00:57.440
+A helper should validate that the selected workspace matches the intended environment, that the backend matches the expected state location, and that the active cloud identity is operating in the approved account or project.
+
+8
+00:00:57.720 --> 00:01:00.520
+Variable sets also define scope.
+
+9
+00:01:00.620 --> 00:01:10.780
+A script may pass environment-specific files, region overlays, feature flags, sizing choices, network settings, or identity configuration.
+
+10
+00:01:10.880 --> 00:01:14.000
+Those inputs should be explicit and reviewed.
+
+11
+00:01:14.100 --> 00:01:21.940
+The helper should make it difficult to combine a production workspace with a development variable file, or a staging backend with a production account.
+
+12
+00:01:22.040 --> 00:01:26.440
+Clear naming is useful, but validation is what turns naming into a guardrail.
+
+13
+00:01:26.720 --> 00:01:28.960
+Safe failure is a feature.
+
+14
+00:01:29.060 --> 00:01:41.540
+If a target cannot be confirmed, if the backend does not match expectations, if the region is outside the approved list, or if the variable set is inconsistent with the requested environment, the helper should stop.
+
+15
+00:01:41.640 --> 00:01:46.360
+A failed precheck is much cheaper than a wrong-environment plan or apply.
+
+16
+00:01:46.460 --> 00:01:52.780
+Good Terraform helper scripts make the target visible before work begins and refuse to continue when the target is ambiguous.

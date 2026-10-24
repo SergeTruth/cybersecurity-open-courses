@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.980
+Rust prevents many memory safety bugs, but Rust applications still need explicit input validation.
+
+2
+00:00:07.080 --> 00:00:16.120
+Outside data can be malformed, incomplete, hostile, stale, ambiguous, or simply incompatible with current business rules.
+
+3
+00:00:16.220 --> 00:00:21.340
+Memory safety helps the program avoid dangerous classes of implementation bugs.
+
+4
+00:00:21.440 --> 00:00:33.840
+Validation helps the program decide which runtime values are acceptable before those values influence persistence, authorization, file access, allocation, commands, or workflow state.
+
+5
+00:00:34.120 --> 00:00:39.880
+Strong Rust validation starts by treating external input as raw data.
+
+6
+00:00:39.980 --> 00:00:49.100
+Strings, bytes, request payloads, environment variables, queue messages, and deserialized objects should be parsed and constrained before use.
+
+7
+00:00:49.200 --> 00:00:56.960
+Result-based errors, TryFrom, FromStr, newtypes, and enums help turn accepted values into domain types.
+
+8
+00:00:57.060 --> 00:01:04.420
+That approach makes invalid states harder to represent and makes later code more explicit about what it is allowed to assume.
+
+9
+00:01:04.700 --> 00:01:13.820
+Serde, Axum, Actix Web, and other ecosystem tools are helpful, but successful extraction or deserialization is not the end of validation.
+
+10
+00:01:13.920 --> 00:01:28.400
+Required fields, optional fields, defaults, unknown fields, nested collections, numeric ranges, dates, enum values, paths, and binary structures all need context-specific checks.
+
+11
+00:01:28.500 --> 00:01:35.380
+Transport validation should confirm request shape, while domain validation should enforce meaning and business invariants.
+
+12
+00:01:35.660 --> 00:01:39.100
+The final operating principle is graceful distrust.
+
+13
+00:01:39.200 --> 00:01:44.880
+A Rust program should expect bad input without becoming fragile, noisy, or vague.
+
+14
+00:01:44.980 --> 00:01:57.700
+It should reject invalid values with clear errors, avoid exposing unnecessary internal details, log safely, and use tests, property-based testing, fuzzing, and review to keep boundary logic honest.
+
+15
+00:01:57.800 --> 00:02:05.800
+The goal is to move from untrusted runtime input to well-defined domain values in a way that is visible, tested, and maintainable.

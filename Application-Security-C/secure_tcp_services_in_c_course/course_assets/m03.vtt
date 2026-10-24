@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+A TCP connection has a lifecycle, and that lifecycle is part of the service's security design.
+
+2
+00:00:06.760 --> 00:00:19.160
+The service accepts a connection, creates or assigns per-connection state, reads and writes data, handles errors and disconnects, and eventually releases every resource associated with that client.
+
+3
+00:00:19.260 --> 00:00:21.100
+Each step needs a clear owner.
+
+4
+00:00:21.380 --> 00:00:23.620
+Per-connection state should be explicit.
+
+5
+00:00:23.720 --> 00:00:36.040
+A service may track a descriptor or handle, input buffers, output buffers, parser state, authentication state, rate or limit counters, timestamps, and cleanup responsibility.
+
+6
+00:00:36.140 --> 00:00:42.380
+Mixing these details into global state makes it harder to isolate clients and harder to clean up reliably.
+
+7
+00:00:42.660 --> 00:00:44.500
+Disconnects are normal.
+
+8
+00:00:44.600 --> 00:00:52.120
+A peer may close cleanly, close while a message is incomplete, stop reading, stop writing, or disappear during shutdown.
+
+9
+00:00:52.220 --> 00:00:57.340
+A robust service treats these outcomes as expected lifecycle events.
+
+10
+00:00:57.440 --> 00:01:05.440
+It releases buffers, closes descriptors or handles, updates state, and records useful operational information from normal code paths.
+
+11
+00:01:05.720 --> 00:01:08.200
+Partial setup deserves special attention.
+
+12
+00:01:08.300 --> 00:01:19.340
+If the service accepts a connection but fails while allocating buffers, configuring nonblocking behavior, assigning a worker, or initializing parser state, cleanup should still run.
+
+13
+00:01:19.440 --> 00:01:24.320
+The code should not rely on a connection being fully initialized before it can be safely released.
+
+14
+00:01:24.600 --> 00:01:38.840
+Reviewers should follow every path to the cleanup point: successful completion, parse failure, authentication failure, timeout, disconnect, shutdown, worker cancellation, and initialization failure.
+
+15
+00:01:38.940 --> 00:01:45.980
+If any path leaves ownership ambiguous, the service may accumulate resources or carry stale state into later behavior.

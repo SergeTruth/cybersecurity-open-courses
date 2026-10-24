@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.940
+C++ SBOM work is often more complex than reading a single dependency manifest.
+
+2
+00:00:06.040 --> 00:00:21.160
+A project may use header-only libraries, source-included libraries, static archives, shared objects, package manager recipes, platform packages, generated code, compiler runtime libraries, native build tools, and link-time dependencies.
+
+3
+00:00:21.260 --> 00:00:24.060
+Some are visible in source control.
+
+4
+00:00:24.160 --> 00:00:28.960
+Others appear only during the build, packaging, or deployment process.
+
+5
+00:00:29.060 --> 00:00:37.300
+That means SBOM ownership usually has to involve developers, build engineers, release engineers, and security reviewers.
+
+6
+00:00:37.580 --> 00:00:40.220
+Direct and transitive dependencies both matter.
+
+7
+00:00:40.320 --> 00:00:48.880
+A team may choose one library, and that library may bring additional components through package metadata, build options, or platform packaging.
+
+8
+00:00:48.980 --> 00:00:52.260
+Optional features can also change the dependency graph.
+
+9
+00:00:52.360 --> 00:01:03.160
+A release build for Windows, Linux, and macOS may include different runtime libraries, SDK interfaces, or shared library packaging even when the source repository is the same.
+
+10
+00:01:03.260 --> 00:01:07.420
+Architecture variants and build profiles can create similar differences.
+
+11
+00:01:07.700 --> 00:01:11.940
+Vendored code deserves the same attention as package-managed code.
+
+12
+00:01:12.040 --> 00:01:21.000
+Copying source into a repository does not make it first-party design, and generated code is not automatically risk-free just because it appears in the build output.
+
+13
+00:01:21.100 --> 00:01:31.260
+Teams need to understand the generator, the source inputs, the version, and whether the generated files are shipped, linked, or used only during development.
+
+14
+00:01:31.360 --> 00:01:36.400
+They should also record why the vendored copy exists and how it will be updated.
+
+15
+00:01:36.680 --> 00:01:44.520
+A C++ project may ship one executable while depending on many components that are not obvious from the final file name.
+
+16
+00:01:44.620 --> 00:01:54.460
+Define SBOM scope deliberately: what ships with the release, what shapes the build, what is needed for risk response, and what the organization expects to disclose.
+
+17
+00:01:54.560 --> 00:02:00.800
+Clear scope prevents teams from arguing later about whether a missing component was out of scope or simply overlooked.
+
+18
+00:02:00.900 --> 00:02:06.580
+The scope statement should travel with the SBOM so consumers understand what the file is describing.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Parsing Key-Value and Structured Data",
+  "graphicAlt": "Configuration moves through loading, parsing and validation before settings are applied.",
+  "narration": "Configuration parsing should create a structured intermediate representation before applying settings. That representation might be a map of keys, a list of records, a tree of sections, or a typed configuration object. The key idea is to understand the structure before changing runtime behavior.\n\nKey-value formats still need precise rules. The parser should define how keys and values are separated, whether whitespace is trimmed, whether empty values are allowed, how comments are recognized, and whether comments are allowed after values. Small syntax choices can change what the program believes was configured.\n\nQuoting and escaping rules should be intentional. If a value can contain a delimiter, newline, backslash, or quote character, the parser needs a deterministic way to represent it. If the format does not support those cases, reject them clearly instead of accepting ambiguous text.\n\nStructured formats add section and ordering questions. Duplicate sections, repeated keys inside a section, inherited values, and ordering-dependent behavior should all be covered by the contract. If ordering matters, document it. If ordering should not matter, implement and test that expectation.\n\nAmbiguous or incomplete syntax should not drift into defaults or partial state. A missing delimiter, unclosed quote, malformed section header, truncated record, or unexpected token should produce a clear parse error and avoid applying settings from an uncertain representation.\n\nSeparating parse from apply makes this easier. First load the bytes, then parse the structure, then validate types and values, then apply the resulting configuration only if the whole contract is satisfied.",
+  "narrationPoints": [
+    "Configuration parsing should create a structured intermediate representation before applying settings.",
+    "The parser should define how keys and values are separated, whether whitespace is trimmed, whether empty values are allowed.",
+    "If the format does not support those cases, reject them clearly instead of accepting ambiguous text.",
+    "If ordering should not matter, implement and test that expectation.",
+    "First load the bytes, then parse the structure, then validate types and values."
+  ]
+};

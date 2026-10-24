@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+UDP-safe C starts by treating every datagram as untrusted input.
+
+2
+00:00:05.480 --> 00:00:13.080
+The message boundary is useful, but it does not prove that the sender is expected, the content is valid, or the requested action is allowed.
+
+3
+00:00:13.180 --> 00:00:17.660
+Validation and trust decisions still belong in the application.
+
+4
+00:00:17.940 --> 00:00:22.820
+Restrict endpoint exposure and avoid relying on source address alone for trust.
+
+5
+00:00:22.920 --> 00:00:30.360
+Binding choices, interface selection, deployment controls, and service privileges all shape who can reach the UDP listener.
+
+6
+00:00:30.460 --> 00:00:36.700
+Source information is useful, but authorization should follow the application's trust model and requested action.
+
+7
+00:00:36.980 --> 00:00:42.660
+Validate datagram size, structure, type, state, and protocol consistency before use.
+
+8
+00:00:42.760 --> 00:00:46.360
+Check minimum and maximum lengths before reading fields.
+
+9
+00:00:46.460 --> 00:00:48.620
+Detect truncation where possible.
+
+10
+00:00:48.720 --> 00:00:55.840
+Reject unsupported, malformed, duplicated, reordered, or out-of-sequence messages according to protocol rules.
+
+11
+00:00:56.120 --> 00:00:59.480
+Track buffer capacity and received length carefully.
+
+12
+00:00:59.580 --> 00:01:05.020
+Treat binary datagrams as bytes unless the protocol defines text rules.
+
+13
+00:01:05.120 --> 00:01:11.760
+Limit work, state, and response size so unexpected traffic does not consume disproportionate resources.
+
+14
+00:01:11.860 --> 00:01:15.780
+Availability is a security property for UDP services.
+
+15
+00:01:16.060 --> 00:01:21.820
+Finally, use appropriate transport protection, logging discipline, testing, tooling, and review.
+
+16
+00:01:21.920 --> 00:01:29.440
+UDP behavior should remain predictable under noise, loss, repetition, malformed input, and deployment changes.
+
+17
+00:01:29.540 --> 00:01:33.380
+That predictability is the mark of mature defensive network code.

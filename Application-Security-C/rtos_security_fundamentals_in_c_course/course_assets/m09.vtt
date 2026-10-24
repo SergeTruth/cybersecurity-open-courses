@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Diagnostics and logging are essential in RTOS systems because field failures can be hard to reproduce.
+
+2
+00:00:07.000 --> 00:00:15.480
+Logs, fault records, counters, reset reasons, watchdog events, and telemetry can help teams understand what happened.
+
+3
+00:00:15.580 --> 00:00:22.060
+The challenge is to capture useful evidence without exposing secrets or destabilizing real-time behavior.
+
+4
+00:00:22.340 --> 00:00:24.900
+Logs should be bounded and intentional.
+
+5
+00:00:25.000 --> 00:00:33.000
+Avoid recording credentials, keys, sensitive configuration, private user data, or excessive raw external input.
+
+6
+00:00:33.100 --> 00:00:39.020
+Also avoid logging patterns that can consume too much time, memory, or storage during stress.
+
+7
+00:00:39.120 --> 00:00:42.560
+A diagnostic path should not make a fault worse.
+
+8
+00:00:42.840 --> 00:00:46.120
+Fault handling should preserve predictable behavior.
+
+9
+00:00:46.220 --> 00:00:55.660
+When a task fails, an assertion triggers, a driver reports an error, or memory checks detect a problem, the system should follow a documented response.
+
+10
+00:00:55.760 --> 00:01:03.200
+That may involve safe-state behavior, controlled reset, fault recording, or service notification depending on the product.
+
+11
+00:01:03.480 --> 00:01:06.680
+Watchdog resets need useful context.
+
+12
+00:01:06.780 --> 00:01:10.380
+A reset reason without surrounding state can be hard to act on.
+
+13
+00:01:10.480 --> 00:01:18.000
+At the same time, collecting too much state can expose sensitive data or interfere with timing.
+
+14
+00:01:18.100 --> 00:01:25.380
+Teams should decide which counters, task states, and error categories are safe and useful.
+
+15
+00:01:25.660 --> 00:01:27.900
+Field diagnostics should be controlled.
+
+16
+00:01:28.000 --> 00:01:37.760
+Service modes, debug commands, trace settings, and diagnostic channels can be useful for maintenance, but production access should follow documented policy.
+
+17
+00:01:37.860 --> 00:01:44.020
+Controls should match the device environment, privacy expectations, and operational responsibilities.
+
+18
+00:01:44.300 --> 00:01:48.540
+Operational readiness means teams know how to interpret device evidence.
+
+19
+00:01:48.640 --> 00:01:55.280
+Runbooks, dashboards, release notes, and fault taxonomies should connect embedded diagnostics to action.
+
+20
+00:01:55.380 --> 00:02:01.940
+Good diagnostics make the device maintainable without turning every internal detail into field-visible data.

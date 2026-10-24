@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Failure handling in pipelines is easy to get wrong.
+
+2
+00:00:03.800 --> 00:00:09.720
+A pipeline may appear successful because the last command succeeded even though an earlier command failed.
+
+3
+00:00:09.820 --> 00:00:18.140
+A final formatting step can run normally after receiving no useful data, which can hide the real problem from the script and the operator.
+
+4
+00:00:18.420 --> 00:00:24.580
+Bash's pipefail option can help by making failures from earlier pipeline stages visible in the pipeline's result.
+
+5
+00:00:24.680 --> 00:00:28.520
+It is a useful defensive tool, but it should be used with understanding.
+
+6
+00:00:28.620 --> 00:00:36.860
+Some commands intentionally return nonzero for conditions that are not fatal in a particular workflow, such as no records matching a filter.
+
+7
+00:00:37.140 --> 00:00:42.020
+Secure pipeline design defines success for the workflow, not only for each command.
+
+8
+00:00:42.120 --> 00:00:52.840
+Success may mean a command completed, output was nonempty, required fields were present, counts were within an expected range, and downstream decisions had enough evidence to proceed.
+
+9
+00:00:52.940 --> 00:00:56.300
+Exit status is necessary, but it may not be sufficient.
+
+10
+00:00:56.580 --> 00:01:00.420
+Scripts should distinguish expected non-success from real failure.
+
+11
+00:01:00.520 --> 00:01:04.120
+If no-match is acceptable, handle it explicitly.
+
+12
+00:01:04.220 --> 00:01:07.740
+If no-match means a deployment target is missing, stop clearly.
+
+13
+00:01:07.840 --> 00:01:15.280
+If a parser receives empty input, avoid treating empty output as a valid result unless that condition is defined.
+
+14
+00:01:15.560 --> 00:01:18.360
+Safe failure is honest failure.
+
+15
+00:01:18.460 --> 00:01:22.620
+The script should stop before later steps depend on a false success signal.
+
+16
+00:01:22.720 --> 00:01:30.880
+It should report enough context for an operator to understand which stage failed and what assumption was not met, without dumping sensitive data into logs.

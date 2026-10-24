@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Secure RTOS task design starts with clear responsibility.
+
+2
+00:00:04.840 --> 00:00:16.840
+A task that reads sensor data should not quietly become the owner of update handling, diagnostic commands, logging, and actuator control unless the design justifies that authority.
+
+3
+00:00:16.940 --> 00:00:21.100
+Narrow task purpose makes review, testing, and fault isolation easier.
+
+4
+00:00:21.380 --> 00:00:27.700
+Least privilege applies to tasks even when the platform does not have a full privilege model.
+
+5
+00:00:27.800 --> 00:00:36.040
+A task should have access only to the queues, buffers, peripherals, configuration, and shared state needed for its role.
+
+6
+00:00:36.140 --> 00:00:42.940
+Where hardware or RTOS features support stronger isolation, use them according to a reviewed design rather than as an afterthought.
+
+7
+00:00:43.220 --> 00:00:48.580
+Priority choices are security-relevant because they affect reliability and timing.
+
+8
+00:00:48.680 --> 00:00:52.040
+A high-priority task can starve lower-priority work.
+
+9
+00:00:52.140 --> 00:00:57.100
+A low-priority safety-monitoring or cleanup task may not run when expected.
+
+10
+00:00:57.200 --> 00:01:05.200
+Reviewers should ask whether priorities match the real-time requirements and whether priority inversion has been considered.
+
+11
+00:01:05.480 --> 00:01:09.240
+Stack sizing must be based on realistic workload behavior.
+
+12
+00:01:09.340 --> 00:01:18.540
+A stack that works under a simple test may fail under nested calls, worst-case messages, logging, interrupts, or unusual input.
+
+13
+00:01:18.640 --> 00:01:26.800
+Stack monitoring, high-water checks, static analysis, and stress tests can support sizing decisions, but the assumptions should be documented.
+
+14
+00:01:27.080 --> 00:01:30.520
+Watchdog expectations should match task behavior.
+
+15
+00:01:30.620 --> 00:01:37.100
+A task that reports health should do so only after meaningful progress, not simply because it is still scheduled.
+
+16
+00:01:37.200 --> 00:01:45.200
+Watchdog design should account for blocked tasks, waiting tasks, long operations, and controlled shutdown or update states.
+
+17
+00:01:45.480 --> 00:01:56.680
+A good task review asks: what is this task responsible for, what can it read or write, what can it control, what priority does it need, what stack does it require, and how does the system know it is healthy?
+
+18
+00:01:56.780 --> 00:02:00.540
+Clear answers make task authority bounded and maintainable.

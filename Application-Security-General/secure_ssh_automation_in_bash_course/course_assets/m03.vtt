@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Every SSH automation workflow uses an identity.
+
+2
+00:00:04.120 --> 00:00:11.400
+That identity may be represented by an SSH key, service account, deployment account, or job-specific credential.
+
+3
+00:00:11.500 --> 00:00:19.660
+Good identity design is what lets teams answer who or what performed a remote action, why it was allowed, and how access can be changed later.
+
+4
+00:00:19.940 --> 00:00:25.380
+A common weak pattern is one shared privileged key used across many jobs and environments.
+
+5
+00:00:25.480 --> 00:00:34.520
+That kind of key is difficult to attribute, difficult to scope, difficult to rotate, and difficult to revoke without breaking unrelated workflows.
+
+6
+00:00:34.620 --> 00:00:39.740
+It also makes incidents harder to investigate because many scripts may appear to be the same actor.
+
+7
+00:00:40.020 --> 00:00:43.220
+Dedicated automation identities are easier to manage.
+
+8
+00:00:43.320 --> 00:00:48.120
+Each identity should have clear ownership, purpose, scope, and lifecycle.
+
+9
+00:00:48.220 --> 00:00:55.660
+A deployment identity should not automatically be a diagnostic identity, a backup identity, and an administrative identity.
+
+10
+00:00:55.760 --> 00:01:00.720
+Production access should be separated from development and staging access where practical.
+
+11
+00:01:01.000 --> 00:01:03.720
+Private keys must be protected.
+
+12
+00:01:03.820 --> 00:01:11.740
+Storage location, file permissions, secret manager handling, passphrase strategy, and agent use all affect risk.
+
+13
+00:01:11.840 --> 00:01:19.120
+Agents and passphrases can help some workflows, but they introduce operational tradeoffs that should be understood rather than copied blindly.
+
+14
+00:01:19.400 --> 00:01:22.040
+Authorized keys need ongoing review.
+
+15
+00:01:22.140 --> 00:01:28.620
+Stale keys, abandoned accounts, unclear comments, and broad forced-command exceptions can accumulate over time.
+
+16
+00:01:28.720 --> 00:01:37.520
+Secure automation includes inventory, ownership tracking, rotation, revocation, and cleanup of access that no longer has a business purpose.
+
+17
+00:01:37.800 --> 00:01:41.800
+The purpose of key lifecycle work is not paperwork.
+
+18
+00:01:41.900 --> 00:01:44.060
+It keeps remote access understandable.
+
+19
+00:01:44.160 --> 00:01:53.280
+When a job changes, an owner leaves, a host is retired, or an environment boundary changes, the SSH identities behind automation should change with it.

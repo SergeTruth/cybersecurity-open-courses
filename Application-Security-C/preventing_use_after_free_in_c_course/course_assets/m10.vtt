@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Use-after-free prevention depends on explicit ownership and lifetime discipline.
+
+2
+00:00:05.720 --> 00:00:07.320
+A pointer is not enough.
+
+3
+00:00:07.420 --> 00:00:13.980
+The code must know who owns the allocation, who may borrow it, who may retain it, and when the object is released.
+
+4
+00:00:14.080 --> 00:00:17.600
+Those rules should be visible at function boundaries and cleanup points.
+
+5
+00:00:17.880 --> 00:00:23.080
+Avoid stale aliases and ambiguous cleanup responsibilities.
+
+6
+00:00:23.180 --> 00:00:30.620
+If more than one pointer can reach an allocation, the design should say which component owns it and how borrowed references become invalid.
+
+7
+00:00:30.720 --> 00:00:37.440
+Setting one pointer to null can help locally, but it does not clear other aliases or replace a clear ownership model.
+
+8
+00:00:37.720 --> 00:00:42.280
+Handle error paths and reallocation with predictable state transitions.
+
+9
+00:00:42.380 --> 00:00:46.140
+Partial initialization should clean up only what was acquired.
+
+10
+00:00:46.240 --> 00:00:52.480
+Resizing should preserve the original allocation on failure and update metadata only after success.
+
+11
+00:00:52.580 --> 00:00:58.900
+Cleanup should leave objects in a defined state and prevent later code from treating released storage as live.
+
+12
+00:00:59.180 --> 00:01:09.100
+Finally, use clear API contracts, code review, tests, sanitizers, static analysis, and compiler diagnostics as layered defenses.
+
+13
+00:01:09.200 --> 00:01:13.120
+Tools are strongest when they support maintainable lifetime design.
+
+14
+00:01:13.220 --> 00:01:18.260
+Prefer straightforward ownership rules over assumptions that are only obvious to the original author.

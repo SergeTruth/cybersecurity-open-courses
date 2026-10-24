@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Datagram Semantics in C",
+  "graphicAlt": "Separate framed datagrams travel toward receiver: one missing gap, duplicate pair and reordered positions shown symbolic not numbered.",
+  "narration": "UDP is message-oriented. A datagram is sent as a unit, and the receiver handles a datagram rather than an arbitrary slice of a byte stream. This is different from TCP, where the application must frame its own messages over a stream. UDP preserves a message boundary, but it does not provide many other guarantees.\n\nDelivery is not guaranteed. A datagram can be lost, duplicated, delayed, or arrive in a different order than the sender intended. UDP also does not provide retransmission, congestion control, or connection state for the application. If any of those properties matter, the application protocol must define them deliberately.\n\nC code that uses UDP should handle missing messages, repeated messages, unexpected order, and ordinary network errors. A service should not assume that one request always leads to one response or that a sequence of datagrams will be complete. If the application tracks state, the state machine has to tolerate network reality.\n\nDatagram size and receive-buffer behavior matter. If the application provides a receive buffer that is smaller than the datagram, platform and API behavior determines what the program observes. The code should know whether truncation can be detected and how to handle it. A truncated datagram should not be processed as if it were complete.\n\nApplication protocols built on UDP need explicit rules. Which datagrams are valid? How are versions handled? Which messages are idempotent? How are repeated messages treated? When is state created, updated, or expired? The protocol may remain small, but its reliability, validation, and state assumptions should be visible enough for review.",
+  "narrationPoints": [
+    "UDP preserves a message boundary, but it does not provide many other guarantees.",
+    "If any of those properties matter, the application protocol must define them deliberately.",
+    "If the application tracks state, the state machine has to tolerate network reality.",
+    "A truncated datagram should not be processed as if it were complete.",
+    "The protocol may remain small, but its reliability, validation, and state assumptions should be visible enough for review."
+  ]
+};

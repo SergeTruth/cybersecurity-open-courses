@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Go applications routinely process data that the program does not control.
+
+2
+00:00:05.400 --> 00:00:25.080
+HTTP requests, API payloads, files, queue messages, command-line arguments, environment variables, database records, and third-party service responses can all carry values that are malformed, stale, incomplete, oversized, or intentionally misleading.
+
+3
+00:00:25.180 --> 00:00:32.860
+Go's static types help developers write clear code, but they do not prove that external runtime input satisfies the rules the application depends on.
+
+4
+00:00:33.140 --> 00:00:38.340
+Input validation is the boundary between raw input and trusted application logic.
+
+5
+00:00:38.440 --> 00:00:47.880
+At that boundary, the program decides which fields are required, which values are allowed, which ranges are safe, and which combinations make sense for the operation.
+
+6
+00:00:47.980 --> 00:00:59.740
+Once a value crosses that boundary, downstream code should be able to rely on a clearer contract instead of repeatedly guessing whether a string, number, path, or decoded struct is safe to use.
+
+7
+00:01:00.020 --> 00:01:08.580
+Validation is related to parsing, sanitization, normalization, and output encoding, but those terms mean different things.
+
+8
+00:01:08.680 --> 00:01:15.240
+Parsing converts input from one representation to another, such as a string into an integer or JSON into a struct.
+
+9
+00:01:15.340 --> 00:01:19.420
+Normalization makes equivalent inputs consistent.
+
+10
+00:01:19.520 --> 00:01:22.960
+Sanitization transforms content for a particular use.
+
+11
+00:01:23.060 --> 00:01:30.500
+Output encoding protects data when it is rendered into HTML, SQL, shell arguments, logs, or another context.
+
+12
+00:01:30.600 --> 00:01:34.120
+Validation decides whether the data should be accepted at all.
+
+13
+00:01:34.400 --> 00:01:39.760
+Go's simplicity is an advantage because validation code can be direct and easy to review.
+
+14
+00:01:39.860 --> 00:01:46.820
+A handler can decode, check, map, and return a clear error without a large framework hiding the decision.
+
+15
+00:01:46.920 --> 00:01:50.520
+That simplicity does not remove the need for explicit checks.
+
+16
+00:01:50.620 --> 00:01:56.940
+It makes it easier to put those checks in the right place, keep them readable, and make unsafe assumptions stand out during code review.

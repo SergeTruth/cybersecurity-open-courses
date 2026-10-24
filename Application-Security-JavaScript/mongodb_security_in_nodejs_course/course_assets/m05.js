@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Schema Validation, Models, and Safe Updates",
+  "graphicAlt": "Shape validation, authorization and allowed-field mapping precede a narrow update while server-owned fields stay excluded.",
+  "narration": "MongoDB's document flexibility means the application must be deliberate about shape and meaning. Mongoose schemas, validation libraries, JSON schema validation, or database schema validation can help define expected fields, required values, types, lengths, formats, enums, nested objects, arrays, and business constraints. These controls make the document contract visible. They also help prevent accidental storage of fields that the application never intended to accept.\n\nValidation is not authorization, and it does not prove a query is safe. A profile update may pass schema validation and still be dangerous if the caller can set role, tenantId, verified, accountStatus, ownerId, permission flags, token fields, audit fields, or password hash fields. Updates should use explicit DTOs, allowlisted field maps, or controlled model methods that define exactly what the caller may change. Avoid taking a request body and applying it directly as an update document.\n\nBe careful with replacement updates versus operator-based updates. A replacement can remove fields the application expected to preserve. An operator-based update can be risky if the operator or target field is client-controlled. Model hooks and middleware can enforce useful rules, but they should not hide critical security behavior so deeply that reviewers miss it. The clearest design is usually the safest: validate the input, authorize the operation, map allowed fields, and perform a narrow update with predictable behavior.",
+  "narrationPoints": [
+    "Mongoose schemas, validation libraries, JSON schema validation, or database schema validation can help define expected fields, required values, types, lengths, formats, enums, nested objects, arrays, and business constraints.",
+    "A profile update may pass schema validation and still be dangerous if the caller can set role, tenantId, verified, accountStatus, ownerId, permission flags, token fields, audit fields, or password hash fields.",
+    "The clearest design is usually the safest: validate the input, authorize the operation, map allowed fields, and perform a narrow update with predictable behavior.",
+    "Validation is not authorization, and it does not prove a query is safe.",
+    "Model hooks and middleware can enforce useful rules, but they should not hide critical security behavior so deeply that reviewers miss it.",
+    "Updates should use explicit DTOs, allowlisted field maps, or controlled model methods that define exactly what the caller may change."
+  ]
+};

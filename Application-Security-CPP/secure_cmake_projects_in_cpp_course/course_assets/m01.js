@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why CMake Security Matters",
+  "graphicAlt": "Reviewed build configuration controls source selection, settings, dependencies and the delivered artifact.",
+  "narration": "CMake is often treated as plumbing: useful, noisy, and separate from the application code that receives most review attention. In a C++ project, that view is too narrow. The build system decides which source files become part of the product, which compiler and linker settings are active, which libraries are selected, which tests run, which artifacts are packaged, and which installation rules are applied.\n\nA small CMake change can alter the security posture of the delivered program. It might change a language standard, remove a warning setting, select a different dependency, turn off a defensive check for a release profile, or add a build-time script that produces generated source. None of those changes need to look dramatic in a review to affect the final binary.\n\nSecure CMake work starts by treating configuration as part of the trusted engineering system. Build files should be readable, intentional, documented where policy matters, and reviewed with the same seriousness as production source. A reviewer should be able to answer basic questions: what is being built, which options apply, which dependency is linked, what leaves the packaging step, and which assumptions are platform-specific.\n\nThe goal is not to make CMake complicated. The goal is to make build intent explicit and repeatable. When teams can reproduce the same build profile in development and CI, inspect generated artifacts, and explain configuration choices, they reduce ambiguity. That clarity supports safer releases, faster review, better incident response, and a stronger connection between source code quality and shipped application behavior.",
+  "narrationPoints": [
+    "CMake is often treated as plumbing: useful, noisy, and separate from the application code that receives most review attention.",
+    "None of those changes need to look dramatic in a review to affect the final binary.",
+    "Secure CMake work starts by treating configuration as part of the trusted engineering system.",
+    "Build files should be readable, intentional, documented where policy matters, and reviewed with the same seriousness as production source.",
+    "A reviewer should be able to answer basic questions: what is being built, which options apply, which dependency is linked, what leaves the packaging step, and which assumptions are platform-specific.",
+    "When teams can reproduce the same build profile in development and CI, inspect generated artifacts, and explain configuration choices, they reduce ambiguity."
+  ]
+};

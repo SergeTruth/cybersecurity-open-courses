@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Type, Range, and Format Validation",
+  "graphicAlt": "Converted fields still require unit, range, list-item and runtime-context validation.",
+  "narration": "Parsing gives the program fields. Validation decides whether those fields are acceptable. A value can be syntactically present and still be wrong for the program's purpose. Defensive configuration parsers validate each field against the type and context where it will be used.\n\nBooleans should have accepted forms. Integers, sizes, durations, ports, percentages, and counts should check conversion success, leftover text, range limits, sign expectations, units, and overflow concerns in later calculations. A successful conversion is only the beginning of numeric validation.\n\nEnumerations and identifiers should be restricted to allowed values. A mode setting, log level, algorithm choice, feature flag, or resource name should not silently accept arbitrary text if only a small set of values is meaningful. Unknown values should be rejected or handled by a documented compatibility rule.\n\nLists need item-by-item validation. The parser should define separators, empty items, duplicate items, maximum item count, and whether ordering matters. One invalid item should not be silently skipped unless the configuration contract explicitly permits partial acceptance.\n\nPath-like strings, names, and resource identifiers need format rules tied to their use. They may need length checks, character rules, location expectations, or normalization before use. The validation rule should be close to the field definition rather than scattered across later consumers.\n\nContext matters most. A value may be valid text and valid syntax but still unacceptable for a field because it would exceed a resource budget, conflict with another setting, or choose a disabled feature. Validation should confirm that configured values are meaningful for the final runtime state.",
+  "narrationPoints": [
+    "Defensive configuration parsers validate each field against the type and context.",
+    "Unknown values should be rejected or handled by a documented compatibility rule.",
+    "One invalid item should not be silently skipped unless the configuration contract explicitly permits partial acceptance.",
+    "Path-like strings, names, and resource identifiers need format rules tied to their use.",
+    "A value may be valid text and valid syntax but still unacceptable for a field because it would exceed a resource budget."
+  ]
+};

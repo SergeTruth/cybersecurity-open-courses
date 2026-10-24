@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.580
+Cross-site scripting is browser-side injection: untrusted content is interpreted as executable script or unsafe markup.
+
+2
+00:00:08.680 --> 00:00:23.480
+Java web applications can produce browser output through Spring MVC views, Jakarta Servlet responses, JSP pages, server-rendered templates, REST endpoints consumed by frontend code, and JSON embedded into pages.
+
+3
+00:00:23.580 --> 00:00:30.940
+The server may be written in Java, but the final interpreter is often the browser, and the browser has several different contexts.
+
+4
+00:00:31.220 --> 00:00:34.500
+Output encoding must match the output context.
+
+5
+00:00:34.600 --> 00:00:45.480
+Text inside normal HTML, values inside HTML attributes, URL components, CSS values, JavaScript strings, and JSON data all have different handling rules.
+
+6
+00:00:45.580 --> 00:00:49.660
+A value that is safe in one location may be unsafe in another.
+
+7
+00:00:49.760 --> 00:01:02.640
+Autoescaping features in template engines are valuable, but developers need to know which contexts are covered, where escaping is disabled, and whether custom helpers or raw-output features bypass the normal protections.
+
+8
+00:01:02.920 --> 00:01:05.720
+Sanitization is different from encoding.
+
+9
+00:01:05.820 --> 00:01:16.380
+Sanitization attempts to allow some markup while removing unsafe parts, which is hard to do correctly and should rely on mature libraries and narrow requirements.
+
+10
+00:01:16.480 --> 00:01:21.280
+Encoding is usually preferred when the application only needs to display text.
+
+11
+00:01:21.380 --> 00:01:27.140
+Client-side validation can improve usability, but it does not protect the server or other users.
+
+12
+00:01:27.240 --> 00:01:32.360
+The server must still validate input and encode output for the context where it is placed.
+
+13
+00:01:32.640 --> 00:01:39.280
+Content Security Policy can provide defense in depth by limiting which scripts can execute and where resources may load from.
+
+14
+00:01:39.380 --> 00:01:47.220
+It should not be the only control because policy gaps, legacy inline scripts, and unsafe rendering patterns can still create exposure.
+
+15
+00:01:47.320 --> 00:02:03.560
+Strong Java web defense uses safe template defaults, context-specific output encoding, careful handling of rich text, review of raw output paths, and tests that verify untrusted content is displayed as content rather than interpreted by the browser.

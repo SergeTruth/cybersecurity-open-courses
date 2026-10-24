@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.940
+Program selection should be explicit because the chosen executable defines what code runs with the parent's intended authority and context.
+
+2
+00:00:08.040 --> 00:00:15.000
+If the launcher relies on ambiguous path resolution, it may run a different program than the developer or operator expected.
+
+3
+00:00:15.280 --> 00:00:19.680
+Search path behavior can be convenient, but it creates review questions.
+
+4
+00:00:19.780 --> 00:00:21.860
+Which directories are searched?
+
+5
+00:00:21.960 --> 00:00:22.920
+In what order?
+
+6
+00:00:23.020 --> 00:00:25.660
+Can the current working directory influence selection?
+
+7
+00:00:25.760 --> 00:00:29.680
+Can deployment tooling or environment variables change the search path?
+
+8
+00:00:29.780 --> 00:00:34.180
+A launcher that depends on search behavior should document and test that behavior.
+
+9
+00:00:34.460 --> 00:00:40.140
+Absolute paths and trusted install directories reduce uncertainty when they are managed carefully.
+
+10
+00:00:40.240 --> 00:00:47.920
+A configured program path should be validated for source, location, expected role, and platform behavior before launch.
+
+11
+00:00:48.020 --> 00:00:53.620
+The validation should match the operation being performed and the privileges of the parent.
+
+12
+00:00:53.900 --> 00:00:57.340
+Current working directory assumptions are fragile.
+
+13
+00:00:57.440 --> 00:01:05.440
+A service, scheduled job, build step, test harness, or wrapper script may start the same binary from different directories.
+
+14
+00:01:05.540 --> 00:01:12.260
+A relative program name or relative path should not silently rely on whichever directory happened to be current.
+
+15
+00:01:12.540 --> 00:01:17.660
+Program identity can also include version expectations and compatibility.
+
+16
+00:01:17.760 --> 00:01:24.960
+If a helper tool is required, the parent should know which tool it intended to run and how launch failures are reported.
+
+17
+00:01:25.060 --> 00:01:31.460
+The review question is whether the path selection logic makes the intended executable clear enough to verify.

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | MongoDB Security in Node.js</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="mongodb_security_in_nodejs">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;D&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;C&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;D&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is MongoDB security both an application and deployment concern?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>MongoDB security is primarily a database deployment concern because the driver validates application query behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Application authorization is sufficient when MongoDB listens only on an internal network with authenticated users.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>A managed MongoDB service assumes responsibility for query construction, field exposure, tenant isolation, and backup access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>MongoDB security combines application logic, database grants, network controls, secrets, backups, and monitoring.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why should request objects not be passed directly into MongoDB filters or updates?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Request objects can contain unexpected fields, operators, or nested structures that change filter or update meaning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Request objects should be passed directly to MongoDB so the driver can remove unsupported operators automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Direct filters are safe after JSON parsing because JSON cannot represent MongoDB operators or nested query structures.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Only update objects are risky; passing a request query directly into find is safe when results use a projection.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What is the core idea behind NoSQL injection in MongoDB-backed applications?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>NoSQL injection occurs when a document contains more fields than the collection&#x27;s preferred application model.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>NoSQL injection is limited to string concatenation in raw MongoDB shell commands and cannot affect driver objects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>NoSQL injection lets untrusted input alter a query, filter, update, aggregation pipeline or database command.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>NoSQL injection means a query returns too many documents because an appropriate database index is missing.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why does schema validation not replace authorization?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Schema validation establishes authorization whenever the caller submits values that satisfy the collection validator.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Schema validation checks shape and type, but it does not prove the caller may access or modify a specific document.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Authorization is unnecessary for immutable documents because schema rules prevent unauthorized field changes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>A strict schema proves tenant ownership when every document contains a required tenantId string.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. How do update allowlists reduce mass assignment risk?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Update allowlists make every accepted value trustworthy, so field-specific validation is no longer required.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>An allowlist should copy permitted field names and preserve any nested MongoDB operators supplied beneath them.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Update allowlists define the fields a caller may change instead of applying the entire request body.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Update allowlists prevent mass assignment only when MongoDB collection validation is disabled.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What is a safe tenant-boundary practice for MongoDB queries?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Accept the tenant ID from request data and compare it with a valid tenant format before constructing each query.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Apply tenant scoping to reads; writes are safe when the target document already stores a tenantId field.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Background jobs may omit tenant scope because service credentials represent every tenant by design.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Derive tenant context on the server and enforce it across every database and background operation.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why do MongoDB connection strings require secrets management?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Connection strings may be logged after removing the password because hostnames and database options are never sensitive.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>MongoDB connection strings can expose credentials, hosts, database names, and security options through errors or logging.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>A connection URI is deployment metadata rather than a secret once TLS protects traffic to the database.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Secrets management is needed only for self-hosted MongoDB because managed connection strings contain short-lived credentials.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do TLS, RBAC, least privilege, and network restrictions matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>TLS, RBAC, least privilege, and network restrictions reduce exposure and impact when code, credentials, or operations fail.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>These deployment controls validate filters and updates, allowing application query construction to remain flexible.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>RBAC and internal networking together guarantee that every authenticated database operation is authorized by the application.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>TLS removes the need for least privilege because compromised credentials cannot be observed in encrypted transport.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why can backups, logs, and exports expose sensitive MongoDB data?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Backups are safer than production because database encryption automatically follows every exported copy and restore workflow.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Backups, logs, and exports copy production data and may have different access, visibility, and retention controls.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Logs cannot expose MongoDB document data unless the application explicitly logs the complete result object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Exports stop being sensitive after leaving MongoDB because application authorization no longer applies to files.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What belongs in a practical MongoDB security review workflow?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Review query shape, validation, authorization, tenant scope, projections, update allowlists, privileges, errors, tests, and monitoring.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Review connection TLS, credentials, and collection indexes; managed drivers cover query safety and field exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Review schemas and sanitization packages; authorization, tenant scope, and projections are runtime concerns outside database review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Review successful reads and writes in production; negative query cases, backup access, and monitoring can follow after release.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+SSH trust is not only about proving the user to the server.
+
+2
+00:00:04.760 --> 00:00:07.880
+It is also about helping the client recognize the server.
+
+3
+00:00:07.980 --> 00:00:11.020
+Host keys support that decision.
+
+4
+00:00:11.120 --> 00:00:17.440
+When the client has a trusted record for the server, it can detect when the presented host identity is unexpected.
+
+5
+00:00:17.720 --> 00:00:23.720
+In interactive use, a person may see a host key prompt or warning and decide what to do.
+
+6
+00:00:23.820 --> 00:00:27.100
+In automation, there may be no human present.
+
+7
+00:00:27.200 --> 00:00:32.400
+The job either proceeds, fails, or follows whatever trust behavior was scripted.
+
+8
+00:00:32.500 --> 00:00:39.060
+That makes known-hosts management a core part of secure SSH automation.
+
+9
+00:00:39.340 --> 00:00:43.180
+Secure Bash automation should avoid casual trust bypasses.
+
+10
+00:00:43.280 --> 00:00:51.360
+Disabling verification may make a job easier to run, especially in a temporary environment, but it weakens the trust boundary the automation depends on.
+
+11
+00:00:51.460 --> 00:00:55.780
+A remote deployment job should not have to guess whether it reached the expected server.
+
+12
+00:00:56.060 --> 00:00:59.740
+Managed trust can take several operational forms.
+
+13
+00:00:59.840 --> 00:01:09.520
+Teams may provision known host entries, maintain host key inventories, separate environment-specific host trust, and document how host key rotation is handled.
+
+14
+00:01:09.620 --> 00:01:16.820
+The exact process can vary, but the trust decision should be deliberate rather than an accidental side effect of whoever ran the script first.
+
+15
+00:01:17.100 --> 00:01:20.700
+Host key changes should be treated as events that require review.
+
+16
+00:01:20.800 --> 00:01:25.120
+Some changes are normal, such as planned rebuilds or rotations.
+
+17
+00:01:25.220 --> 00:01:31.940
+Others may indicate a misroute, DNS issue, environment mix-up, or unauthorized system change.
+
+18
+00:01:32.040 --> 00:01:36.360
+Automation should make those events visible instead of smoothing them over silently.

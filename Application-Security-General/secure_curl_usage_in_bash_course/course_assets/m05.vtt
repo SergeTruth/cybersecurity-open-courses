@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.940
+Many curl scripts send credentials through authorization headers, API tokens, session values, client certificates, signed request data, or service-specific secret headers.
+
+2
+00:00:12.040 --> 00:00:18.840
+Those values are sensitive even when the script is internal and even when the target service belongs to the same organization.
+
+3
+00:00:19.120 --> 00:00:22.240
+Secrets can leak in more places than developers expect.
+
+4
+00:00:22.340 --> 00:00:34.020
+They may appear in shell history, process listings, CI/CD logs, debug traces, environment dumps, support bundles, copied terminal output, or failure messages.
+
+5
+00:00:34.120 --> 00:00:40.040
+A script that is safe during a happy path can still disclose a token during troubleshooting.
+
+6
+00:00:40.320 --> 00:00:42.880
+Avoid hard-coded credentials in scripts.
+
+7
+00:00:42.980 --> 00:00:48.500
+Use approved secret-management or runtime-injection mechanisms where practical.
+
+8
+00:00:48.600 --> 00:00:56.920
+Keep the secret scoped to the job that needs it, and avoid passing sensitive values to child processes, helper tools, or logs that do not need them.
+
+9
+00:00:57.200 --> 00:01:00.000
+Headers deserve the same care as payloads.
+
+10
+00:01:00.100 --> 00:01:08.180
+An authorization header, session header, tenant identifier, or signed request value may reveal access or internal structure.
+
+11
+00:01:08.280 --> 00:01:13.640
+Logging should show enough context to debug the request without printing secrets.
+
+12
+00:01:13.740 --> 00:01:16.860
+Redaction should be deliberate, not an afterthought.
+
+13
+00:01:17.140 --> 00:01:20.100
+Debugging should be scoped and temporary.
+
+14
+00:01:20.200 --> 00:01:27.960
+Verbose request output can be helpful, but it may include headers, response bodies, or connection details that should not be stored broadly.
+
+15
+00:01:28.060 --> 00:01:34.940
+Debug settings should be turned on only when needed and reviewed before being used in shared CI/CD logs.
+
+16
+00:01:35.220 --> 00:01:38.420
+Secret handling is part of the curl design.
+
+17
+00:01:38.520 --> 00:01:45.880
+The script should define how secrets enter, where they are used, how they are redacted, and what evidence remains after the request.
+
+18
+00:01:45.980 --> 00:01:50.460
+That discipline reduces accidental disclosure while preserving operational visibility.

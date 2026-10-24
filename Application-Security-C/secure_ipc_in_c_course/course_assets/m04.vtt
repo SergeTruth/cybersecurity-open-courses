@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Some IPC workflows need to know who is on the other side.
+
+2
+00:00:03.800 --> 00:00:14.440
+A service may need to distinguish an administrative tool from an ordinary client, a same-user helper from another account, or a trusted component from a general local process.
+
+3
+00:00:14.540 --> 00:00:18.300
+Peer identity is the bridge between connection and authorization.
+
+4
+00:00:18.580 --> 00:00:22.660
+Endpoint names alone should not be treated as proof of identity.
+
+5
+00:00:22.760 --> 00:00:31.480
+A client that reaches a named pipe, socket path, or queue name is not necessarily authorized to request every action exposed by that endpoint.
+
+6
+00:00:31.580 --> 00:00:40.780
+The endpoint name may identify where communication happens, but it does not automatically explain who the peer is or what that peer should be allowed to do.
+
+7
+00:00:41.060 --> 00:00:47.700
+Platform-supported peer identity checks can help, but their meaning depends on the IPC mechanism and operating system.
+
+8
+00:00:47.800 --> 00:00:56.120
+The design should state what identity property is being checked, when it is checked, whether it can change, and which operations depend on it.
+
+9
+00:00:56.220 --> 00:01:00.460
+A check that is useful for one mechanism may not apply to another.
+
+10
+00:01:00.740 --> 00:01:05.860
+Authentication and authorization should be tied to the action being requested.
+
+11
+00:01:05.960 --> 00:01:10.200
+A peer might be allowed to query status but not change configuration.
+
+12
+00:01:10.300 --> 00:01:13.980
+It might be allowed to submit a job but not read another user's result.
+
+13
+00:01:14.080 --> 00:01:18.880
+The existence of a connection is not the same as permission for every command.
+
+14
+00:01:19.160 --> 00:01:26.120
+Privileged services should treat low-trust client requests as untrusted even over local IPC.
+
+15
+00:01:26.220 --> 00:01:31.260
+The service may be local, but the requested action can still be high impact.
+
+16
+00:01:31.360 --> 00:01:40.000
+Review should identify every place peer identity affects trust, access, command dispatch, file access, or state changes.

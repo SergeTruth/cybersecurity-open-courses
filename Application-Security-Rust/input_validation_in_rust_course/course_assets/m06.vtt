@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Numeric validation in Rust is about more than choosing the right integer type.
+
+2
+00:00:04.360 --> 00:00:13.800
+External data may contain values that are negative when only positive values make sense, larger than a safe limit, or valid as a number but invalid for the operation.
+
+3
+00:00:13.900 --> 00:00:22.940
+usize is useful for memory sizes and indexing, but external values should not be casually converted into usize without range checks.
+
+4
+00:00:23.040 --> 00:00:27.200
+Signed and unsigned boundaries are part of the validation design.
+
+5
+00:00:27.480 --> 00:00:36.520
+Checked arithmetic matters when inputs influence sizes, counts, offsets, pagination, quotas, or allocation decisions.
+
+6
+00:00:36.620 --> 00:00:43.340
+Rust has checked, saturating, wrapping, and overflowing arithmetic options, and the right choice depends on intent.
+
+7
+00:00:43.440 --> 00:00:52.880
+For validation paths, checked arithmetic is often the clearest because it can turn an overflow into a controlled error instead of an accidental calculation.
+
+8
+00:00:52.980 --> 00:00:56.580
+A parsed number still needs to be evaluated in context.
+
+9
+00:00:56.860 --> 00:00:59.980
+Dates and timestamps require explicit rules.
+
+10
+00:01:00.080 --> 00:01:09.440
+A timestamp can parse successfully and still be too far in the past, too far in the future, outside a retention window, or ambiguous because of time zone assumptions.
+
+11
+00:01:09.540 --> 00:01:17.620
+Applications should document accepted formats, normalize time zones consistently, and validate ordering relationships such as start before end.
+
+12
+00:01:17.720 --> 00:01:21.320
+Date parsing is a conversion step, not a business rule by itself.
+
+13
+00:01:21.600 --> 00:01:30.080
+Enum parsing should reject unknown, unsupported, or deprecated values unless the application has a deliberate compatibility strategy.
+
+14
+00:01:30.180 --> 00:01:38.340
+Rust enums can model allowed states very well, but external input may arrive as strings, numbers, or unrecognized variants.
+
+15
+00:01:38.440 --> 00:01:49.640
+Fallible parsing, non-exhaustive thinking at API boundaries, and explicit mapping to domain enums help prevent unsupported values from slipping into workflows that were never designed for them.

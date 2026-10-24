@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.500
+UDP is message-oriented.
+
+2
+00:00:02.600 --> 00:00:08.680
+A datagram is sent as a unit, and the receiver handles a datagram rather than an arbitrary slice of a byte stream.
+
+3
+00:00:08.780 --> 00:00:13.820
+This is different from TCP, where the application must frame its own messages over a stream.
+
+4
+00:00:13.920 --> 00:00:18.800
+UDP preserves a message boundary, but it does not provide many other guarantees.
+
+5
+00:00:19.080 --> 00:00:20.760
+Delivery is not guaranteed.
+
+6
+00:00:20.860 --> 00:00:27.740
+A datagram can be lost, duplicated, delayed, or arrive in a different order than the sender intended.
+
+7
+00:00:27.840 --> 00:00:34.160
+UDP also does not provide retransmission, congestion control, or connection state for the application.
+
+8
+00:00:34.260 --> 00:00:41.460
+If any of those properties matter, the application protocol must define them deliberately.
+
+9
+00:00:41.740 --> 00:00:49.580
+C code that uses UDP should handle missing messages, repeated messages, unexpected order, and ordinary network errors.
+
+10
+00:00:49.680 --> 00:00:58.560
+A service should not assume that one request always leads to one response or that a sequence of datagrams will be complete.
+
+11
+00:00:58.660 --> 00:01:03.380
+If the application tracks state, the state machine has to tolerate network reality.
+
+12
+00:01:03.660 --> 00:01:07.020
+Datagram size and receive-buffer behavior matter.
+
+13
+00:01:07.120 --> 00:01:14.800
+If the application provides a receive buffer that is smaller than the datagram, platform and API behavior determines what the program observes.
+
+14
+00:01:14.900 --> 00:01:19.060
+The code should know whether truncation can be detected and how to handle it.
+
+15
+00:01:19.160 --> 00:01:23.320
+A truncated datagram should not be processed as if it were complete.
+
+16
+00:01:23.600 --> 00:01:28.320
+Application protocols built on UDP need explicit rules.
+
+17
+00:01:28.420 --> 00:01:30.020
+Which datagrams are valid?
+
+18
+00:01:30.120 --> 00:01:31.880
+How are versions handled?
+
+19
+00:01:31.980 --> 00:01:34.780
+Which messages are idempotent?
+
+20
+00:01:34.880 --> 00:01:37.040
+How are repeated messages treated?
+
+21
+00:01:37.140 --> 00:01:40.660
+When is state created, updated, or expired?
+
+22
+00:01:40.760 --> 00:01:47.720
+The protocol may remain small, but its reliability, validation, and state assumptions should be visible enough for review.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Injection prevention improves when review questions are concrete.
+
+2
+00:00:04.200 --> 00:00:05.640
+What are the trust boundaries?
+
+3
+00:00:05.740 --> 00:00:08.300
+Which values are externally controlled?
+
+4
+00:00:08.400 --> 00:00:11.120
+Where do those values reach sensitive sinks?
+
+5
+00:00:11.220 --> 00:00:14.580
+Is the code using a safe API for that sink?
+
+6
+00:00:14.680 --> 00:00:18.840
+Are allowed fields, operations, and formats explicit?
+
+7
+00:00:18.940 --> 00:00:28.460
+Could a value change the meaning of a query, command, template, parser operation, browser output, file path, URL, or downstream request?
+
+8
+00:00:28.560 --> 00:00:32.320
+These questions turn a broad category into reviewable engineering work.
+
+9
+00:00:32.600 --> 00:00:34.760
+Tests should cover the boundaries that matter.
+
+10
+00:00:34.860 --> 00:00:43.340
+Validation tests check that unsupported fields, unexpected types, oversize values, and invalid combinations are rejected.
+
+11
+00:00:43.440 --> 00:00:49.600
+Negative tests confirm that suspicious input is treated as data or rejected rather than interpreted.
+
+12
+00:00:49.700 --> 00:00:55.700
+Boundary tests check length, encoding, nesting, and optional parameters.
+
+13
+00:00:55.800 --> 00:01:06.840
+Integration tests are useful around repositories, search endpoints, template rendering, process-launching adapters, XML parsing, and any code that crosses into another interpreter.
+
+14
+00:01:07.120 --> 00:01:15.120
+Static analysis and dependency review can help find risky patterns, but they should support human judgment rather than replace it.
+
+15
+00:01:15.220 --> 00:01:33.860
+Look for raw query strings, dynamic JPQL or HQL, process execution, expression evaluation, template rendering, XML parser configuration, deserialization APIs, path construction, raw HTML output, and custom escaping helpers.
+
+16
+00:01:33.960 --> 00:01:42.040
+When a dependency interprets strings or accepts flexible query objects, document the safe usage pattern expected in the codebase.
+
+17
+00:01:42.320 --> 00:01:46.880
+Secure defaults reduce the number of decisions developers must remember.
+
+18
+00:01:46.980 --> 00:01:55.140
+Centralize query helpers, parser factories, output rendering utilities, process adapters, and validation conventions.
+
+19
+00:01:55.240 --> 00:01:58.520
+Use least-privileged service accounts and runtime permissions.
+
+20
+00:01:58.620 --> 00:02:05.980
+Log validation failures and unusual rejected operations in a way that supports detection without storing sensitive content.
+
+21
+00:02:06.080 --> 00:02:16.560
+The best injection controls are boring in the right way: predictable APIs, typed inputs, narrow capabilities, and tests that preserve those assumptions over time.

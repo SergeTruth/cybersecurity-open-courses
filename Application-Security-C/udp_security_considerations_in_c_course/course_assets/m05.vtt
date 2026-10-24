@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Every UDP datagram should be validated before it changes program state.
+
+2
+00:00:04.440 --> 00:00:08.760
+The message boundary is available, but the contents are still external input.
+
+3
+00:00:08.860 --> 00:00:16.380
+The receiver should confirm that the datagram is long enough, short enough, well-formed, and meaningful for the current protocol state.
+
+4
+00:00:16.660 --> 00:00:21.140
+Minimum and maximum length checks should happen before reading headers or fields.
+
+5
+00:00:21.240 --> 00:00:25.160
+A short datagram should not be interpreted as a complete header.
+
+6
+00:00:25.260 --> 00:00:29.980
+An oversized datagram should not drive excessive allocation or processing.
+
+7
+00:00:30.080 --> 00:00:35.360
+Length decisions should be tied to protocol policy, not only to buffer size.
+
+8
+00:00:35.640 --> 00:00:45.480
+Version fields, message types, flags, counters, embedded lengths, checksums, and payload formats should be checked according to the protocol contract.
+
+9
+00:00:45.580 --> 00:00:50.940
+Unsupported versions or flags should be rejected or handled through a documented compatibility rule.
+
+10
+00:00:51.040 --> 00:00:57.120
+A checksum or integrity field can support validation, but it does not replace bounds and format checks.
+
+11
+00:00:57.400 --> 00:01:04.360
+Unsupported, malformed, truncated, oversized, or out-of-sequence messages should fail safely.
+
+12
+00:01:04.460 --> 00:01:12.860
+That may mean ignoring the datagram, returning a small error response when appropriate, updating a diagnostic counter, or closing related state.
+
+13
+00:01:12.960 --> 00:01:17.840
+It should not mean guessing missing fields or applying a state change from partial data.
+
+14
+00:01:18.120 --> 00:01:25.800
+Validation should happen before allocation, copying, deep parsing, command dispatch, or generating large responses.
+
+15
+00:01:25.900 --> 00:01:36.220
+Parser code should make protocol assumptions visible: which fields are required, which sizes are allowed, which message types are supported, and when the receiver is allowed to act.

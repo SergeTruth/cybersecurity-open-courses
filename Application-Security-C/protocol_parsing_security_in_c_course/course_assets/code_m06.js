@@ -1,0 +1,12 @@
+window.COURSE_CODE_MODULE = {
+  "title": "State Machines and Command Dispatch",
+  "codeIntro": "A well-formed command reaches behavior only when its protocol state and authorization transition also permit it.",
+  "codeExamples": [
+    {
+      "title": "Dispatch commands through an explicit state machine",
+      "language": "c",
+      "blurb": "HELLO, AUTH, DATA, and DISCONNECT have visible state rules; invalid sequence leaves state unchanged and disconnect resets trust.",
+      "code": "#include <assert.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n\nenum protocol_state {\n    STATE_WAIT_HELLO,\n    STATE_WAIT_AUTH,\n    STATE_READY\n};\n\nenum command {\n    COMMAND_HELLO = 1,\n    COMMAND_AUTH = 2,\n    COMMAND_DATA = 16,\n    COMMAND_DISCONNECT = 255\n};\n\nstruct session {\n    enum protocol_state state;\n    size_t dispatched_data;\n};\n\nstatic bool handle_command(struct session *session, uint8_t command,\n                           bool authorization_valid)\n{\n    if (session == NULL) {\n        return false;\n    }\n    if (command == COMMAND_DISCONNECT) {\n        session->state = STATE_WAIT_HELLO;\n        session->dispatched_data = 0;\n        return true;\n    }\n    if (session->state == STATE_WAIT_HELLO && command == COMMAND_HELLO) {\n        session->state = STATE_WAIT_AUTH;\n        return true;\n    }\n    if (session->state == STATE_WAIT_AUTH && command == COMMAND_AUTH &&\n        authorization_valid) {\n        session->state = STATE_READY;\n        return true;\n    }\n\n    /* IMPORTANT FIX: dispatch is reachable only in the authorized state. */\n    if (session->state == STATE_READY && command == COMMAND_DATA) {\n        session->dispatched_data += 1;\n        return true;\n    }\n    return false;\n}\n\nint main(void)\n{\n    struct session session = {STATE_WAIT_HELLO, 0};\n\n    assert(!handle_command(&session, COMMAND_DATA, false));\n    assert(session.state == STATE_WAIT_HELLO);\n    assert(handle_command(&session, COMMAND_HELLO, false));\n    assert(!handle_command(&session, COMMAND_AUTH, false));\n    assert(session.state == STATE_WAIT_AUTH);\n    assert(handle_command(&session, COMMAND_AUTH, true));\n    assert(handle_command(&session, COMMAND_DATA, false));\n    assert(session.dispatched_data == 1);\n\n    /* TEST: disconnect clears both protocol state and dispatched work. */\n    assert(handle_command(&session, COMMAND_DISCONNECT, false));\n    assert(session.state == STATE_WAIT_HELLO &&\n           session.dispatched_data == 0);\n    return 0;\n}\n"
+    }
+  ]
+};

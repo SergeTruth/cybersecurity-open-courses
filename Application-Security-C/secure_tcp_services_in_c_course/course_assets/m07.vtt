@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+TCP services often need concurrency, but concurrency should be a design choice rather than an accident.
+
+2
+00:00:06.840 --> 00:00:14.520
+Thread-per-connection, worker pools, event loops, nonblocking I/O, and hybrid models all have different tradeoffs.
+
+3
+00:00:14.620 --> 00:00:20.060
+The right model is one the team can bound, test, observe, and maintain.
+
+4
+00:00:20.340 --> 00:00:23.540
+Per-client state should be isolated where possible.
+
+5
+00:00:23.640 --> 00:00:31.800
+Input buffers, parser state, authentication state, pending output, timeout state, and cleanup ownership should not bleed across clients.
+
+6
+00:00:31.900 --> 00:00:39.900
+Isolation makes it easier to reason about one connection and reduces the chance that one client's behavior affects another client's state.
+
+7
+00:00:40.180 --> 00:00:44.660
+Shared mutable data needs synchronization and clear ownership.
+
+8
+00:00:44.760 --> 00:00:55.240
+Configuration snapshots, counters, caches, session tables, authorization data, rate state, and global shutdown flags should be protected according to the concurrency model.
+
+9
+00:00:55.340 --> 00:01:03.900
+Reviewers should look for unsynchronized reads, inconsistent lock ordering, and state transitions that cross thread boundaries without a clear contract.
+
+10
+00:01:04.180 --> 00:01:07.220
+Bounded concurrency is part of resource control.
+
+11
+00:01:07.320 --> 00:01:09.640
+A worker pool should have a maximum size.
+
+12
+00:01:09.740 --> 00:01:13.100
+An event loop should have bounded queues and buffers.
+
+13
+00:01:13.200 --> 00:01:17.680
+A thread-per-connection design should have an explicit connection cap and cleanup plan.
+
+14
+00:01:17.780 --> 00:01:23.300
+Without bounds, concurrency can turn normal traffic variation into unpredictable resource use.
+
+15
+00:01:23.580 --> 00:01:28.940
+Cleanup ownership is especially important when work moves between threads or callbacks.
+
+16
+00:01:29.040 --> 00:01:39.120
+The design should define who closes the descriptor, who frees buffers, who records final state, and what happens if shutdown begins while work is in progress.
+
+17
+00:01:39.220 --> 00:01:45.620
+Tests should exercise cancellation, disconnects, worker failure, and normal completion.

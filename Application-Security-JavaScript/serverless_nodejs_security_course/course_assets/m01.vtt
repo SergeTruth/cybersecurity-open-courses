@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:15.460
+A Node.js team may start with one API service and then break the work into several serverless functions: an HTTP handler, a queue processor, an object-storage trigger, a scheduled cleanup job, and a webhook receiver.
+
+2
+00:00:15.560 --> 00:00:19.800
+Each function looks small, which can make it feel safer by default.
+
+3
+00:00:19.900 --> 00:00:31.500
+In practice, a small function can still read databases, write objects, call internal APIs, access secrets, publish messages, and change important business state.
+
+4
+00:00:31.600 --> 00:00:34.480
+The risk is not measured only by lines of code.
+
+5
+00:00:34.580 --> 00:00:40.580
+It is measured by what can trigger the function, what data it trusts, and what authority it has when it runs.
+
+6
+00:00:40.860 --> 00:00:47.900
+Serverless platforms reduce some infrastructure work, but they do not remove application security responsibility.
+
+7
+00:00:48.000 --> 00:00:53.360
+The platform may manage servers, scaling, runtime hosting, and parts of availability.
+
+8
+00:00:53.460 --> 00:01:04.500
+Your team still owns input validation, authentication, authorization, dependency hygiene, secrets handling, logging, monitoring, and least-privilege design.
+
+9
+00:01:04.600 --> 00:01:16.520
+A managed function that parses unsafe input, logs tokens, overuses a broad execution role, or retries a non-idempotent operation can still create a serious incident.
+
+10
+00:01:16.800 --> 00:01:21.680
+The most common serverless security problems are practical engineering problems.
+
+11
+00:01:21.780 --> 00:01:25.140
+Function permissions are broader than the function purpose.
+
+12
+00:01:25.240 --> 00:01:30.280
+Event payloads are treated as trusted because they arrived through a managed service.
+
+13
+00:01:30.380 --> 00:01:34.460
+Deployment packages include unnecessary files or stale dependencies.
+
+14
+00:01:34.560 --> 00:01:37.440
+Public endpoints expose administrative behavior.
+
+15
+00:01:37.540 --> 00:01:39.620
+Retry settings duplicate work.
+
+16
+00:01:39.720 --> 00:01:43.960
+Logs contain full event bodies with secrets or personal data.
+
+17
+00:01:44.060 --> 00:01:53.660
+Incident response is difficult because work is split across many functions, queues, topics, storage events, and scheduled jobs.
+
+18
+00:01:53.940 --> 00:02:00.340
+The goal of secure serverless Node.js design is to make each function explicit and reviewable.
+
+19
+00:02:00.440 --> 00:02:15.960
+A reviewer should be able to answer what triggers the function, what identity it runs as, what inputs it accepts, what resources it can change, what secrets it can read, what downstream services it calls, how it behaves on failure, and where its logs and metrics appear.
+
+20
+00:02:16.060 --> 00:02:19.260
+Serverless changes where security decisions live.
+
+21
+00:02:19.360 --> 00:02:22.160
+It does not make those decisions disappear.

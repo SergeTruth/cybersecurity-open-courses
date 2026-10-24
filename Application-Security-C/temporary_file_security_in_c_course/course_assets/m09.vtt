@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+Temporary-file handling should be reviewed as a resource lifecycle.
+
+2
+00:00:04.600 --> 00:00:14.040
+Reviewers should look at creation, directory selection, permissions, data sensitivity, read and write handling, finalization, and cleanup together.
+
+3
+00:00:14.140 --> 00:00:20.380
+A safe creation call does not compensate for unclear cleanup or a poorly chosen directory.
+
+4
+00:00:20.660 --> 00:00:24.420
+Tests should cover boundary, failure, and cleanup paths.
+
+5
+00:00:24.520 --> 00:00:35.880
+Include file open failures, oversized content, partial write handling where practical, validation failure after creation, retry behavior, normal cleanup, and leftover-file checks.
+
+6
+00:00:35.980 --> 00:00:39.660
+These cases reveal assumptions that happy-path tests miss.
+
+7
+00:00:39.940 --> 00:00:42.900
+Permission tests can reveal deployment assumptions.
+
+8
+00:00:43.000 --> 00:00:50.200
+A tool may behave differently under a service account, build agent, container, scheduled task, or developer shell.
+
+9
+00:00:50.300 --> 00:00:57.020
+Tests and operational checks should confirm that directories and file modes match the intended environment.
+
+10
+00:00:57.300 --> 00:01:06.820
+Static analysis, compiler warnings, and sanitizers can help find risky patterns around unchecked return values, memory handling, and resource cleanup.
+
+11
+00:01:06.920 --> 00:01:11.160
+They can also call attention to ignored errors or paths that skip cleanup.
+
+12
+00:01:11.260 --> 00:01:15.660
+These tools are useful, but they do not replace explicit resource contracts.
+
+13
+00:01:15.940 --> 00:01:18.500
+Operational checks can also help.
+
+14
+00:01:18.600 --> 00:01:27.320
+Monitoring for leftover temporary files, unexpected growth, permission drift, or sensitive names in logs can reveal gaps.
+
+15
+00:01:27.420 --> 00:01:32.460
+Findings should feed back into creation rules, cleanup design, and review checklists.

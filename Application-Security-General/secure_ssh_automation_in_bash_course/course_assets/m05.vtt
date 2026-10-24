@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.380
+SSH automation often involves two layers of interpretation: the local Bash script and the remote environment.
+
+2
+00:00:07.480 --> 00:00:16.680
+A value may be expanded locally before SSH runs, and then the remote side may interpret command text according to its own shell or command interface.
+
+3
+00:00:16.780 --> 00:00:20.460
+That dual context makes remote command construction easy to get wrong.
+
+4
+00:00:20.740 --> 00:00:24.980
+Safer designs keep remote actions narrow, fixed, and validated.
+
+5
+00:00:25.080 --> 00:00:35.880
+Where practical, the remote side should expose a known script, controlled command interface, or limited operational action rather than accepting arbitrary remote command text.
+
+6
+00:00:35.980 --> 00:00:40.940
+The local script should pass validated operands, not open-ended instructions.
+
+7
+00:00:41.220 --> 00:00:44.100
+Remote command boundaries should be reviewed carefully.
+
+8
+00:00:44.200 --> 00:00:50.360
+A variable that is safe as a local argument may have a different meaning if it is embedded into remote shell syntax.
+
+9
+00:00:50.460 --> 00:00:56.700
+The more dynamic the remote command, the harder it becomes to prove what will actually run in each environment.
+
+10
+00:00:56.980 --> 00:00:59.380
+Scripts should check results.
+
+11
+00:00:59.480 --> 00:01:09.640
+SSH can fail because the connection failed, authentication failed, host trust failed, the remote command failed, or the remote environment behaved differently than expected.
+
+12
+00:01:09.740 --> 00:01:16.540
+Where practical, failure messages should distinguish connection or trust problems from remote execution problems.
+
+13
+00:01:16.820 --> 00:01:20.660
+Timeouts and retry limits are important for unattended automation.
+
+14
+00:01:20.760 --> 00:01:25.960
+A hung connection or repeated remote failure should not block a pipeline indefinitely.
+
+15
+00:01:26.060 --> 00:01:32.060
+Safe stopping behavior is better than a false success signal that later deployment or maintenance steps rely on.
+
+16
+00:01:32.340 --> 00:01:34.980
+The goal is not to make remote work rigid.
+
+17
+00:01:35.080 --> 00:01:38.040
+The goal is to keep remote actions reviewable.
+
+18
+00:01:38.140 --> 00:01:47.900
+A small set of known remote behaviors with validated inputs is easier to operate than a general-purpose remote command builder hidden inside a Bash script.

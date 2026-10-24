@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Access control is part of API design.
+
+2
+00:00:03.480 --> 00:00:11.480
+An interface that can reach sensitive state, privileged operations, or tenant-scoped data should make authority explicit enough to review and test.
+
+3
+00:00:11.760 --> 00:00:14.080
+Avoid ambient authority where possible.
+
+4
+00:00:14.180 --> 00:00:25.700
+If an API silently reads broad global state, process-wide credentials, or hidden context, callers may gain more authority than the operation actually needs.
+
+5
+00:00:25.980 --> 00:00:28.620
+Capability-style handles can narrow authority.
+
+6
+00:00:28.720 --> 00:00:36.400
+Instead of passing a general service object to every caller, provide a scoped object that allows only the operation and context required.
+
+7
+00:00:36.500 --> 00:00:39.700
+This makes misuse harder and review easier.
+
+8
+00:00:39.980 --> 00:00:45.100
+Authorization checks should be close enough to the boundary that they are difficult to skip accidentally.
+
+9
+00:00:45.200 --> 00:00:52.400
+A lower-level helper may still need checks if it can be called from multiple entry points with different trust assumptions.
+
+10
+00:00:52.680 --> 00:00:57.160
+Tenant, user, environment, and role boundaries should be represented deliberately.
+
+11
+00:00:57.260 --> 00:01:08.460
+A function that accepts a tenant-scoped handle or validated authorization context is easier to reason about than one that accepts a raw identifier and looks up authority elsewhere.
+
+12
+00:01:08.740 --> 00:01:11.620
+Powerful operations should be hard to call casually.
+
+13
+00:01:11.720 --> 00:01:21.800
+Destructive actions, sensitive reads, configuration changes, and credential-related operations should require explicit authority and clear failure behavior.
+
+14
+00:01:22.080 --> 00:01:32.240
+The review question is whether the API receives only the authority it needs, applies it consistently, and prevents callers from accidentally reaching broader power through convenience paths.
+
+15
+00:01:32.520 --> 00:01:35.160
+Context objects should be scoped carefully.
+
+16
+00:01:35.260 --> 00:01:42.460
+A context that carries every permission in the process is not least privilege; it is another form of ambient authority.
+
+17
+00:01:42.740 --> 00:01:51.620
+Capability objects are most useful when they are hard to forge, narrow in purpose, and tied to the operation or resource they authorize.
+
+18
+00:01:51.900 --> 00:01:58.460
+Tests should cover denied access and cross-context calls, not only successful calls from trusted code.
+
+19
+00:01:58.740 --> 00:02:04.660
+Least privilege is strongest when the API makes the smaller authority easier to pass than the broader one.

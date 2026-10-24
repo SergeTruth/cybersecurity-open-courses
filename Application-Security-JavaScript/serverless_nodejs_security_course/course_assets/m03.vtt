@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.500
+A serverless function package is a supply chain boundary.
+
+2
+00:00:04.600 --> 00:00:15.400
+It contains handler code, npm dependencies, configuration assumptions, build output, startup behavior, and sometimes shared layers or platform extensions.
+
+3
+00:00:15.500 --> 00:00:24.780
+A handler file may be short, but the deployed artifact can include hundreds of packages, generated bundles, native modules, and transitive dependencies.
+
+4
+00:00:24.880 --> 00:00:36.480
+If the package contains stale libraries, unnecessary files, real environment files, private keys, or local test data, the platform will faithfully deploy those mistakes.
+
+5
+00:00:36.760 --> 00:00:40.680
+Builds should be repeatable and easy to review.
+
+6
+00:00:40.780 --> 00:00:44.940
+Use lockfiles and deterministic dependency installation where appropriate.
+
+7
+00:00:45.040 --> 00:00:54.560
+Review changes to package.json, package-lock.json, bundler configuration, lifecycle scripts, generated artifacts, and shared layers.
+
+8
+00:00:54.660 --> 00:00:58.020
+Keep deployment packages minimal, but not mysterious.
+
+9
+00:00:58.120 --> 00:01:05.560
+Removing noise helps reduce attack surface and deployment time, but the package still needs everything required to run and troubleshoot safely.
+
+10
+00:01:05.660 --> 00:01:13.820
+Avoid shipping source-control metadata, local caches, test fixtures, credentials, or development tooling unless there is a documented runtime reason.
+
+11
+00:01:14.100 --> 00:01:20.740
+Shared layers and internal packages can reduce duplication, but they also create shared responsibility.
+
+12
+00:01:20.840 --> 00:01:27.400
+If ten functions depend on the same layer, a vulnerability or unsafe default in that layer affects ten functions.
+
+13
+00:01:27.500 --> 00:01:32.700
+Updates need owners, versioning, testing, and rollout discipline.
+
+14
+00:01:32.800 --> 00:01:39.600
+The same is true for framework adapters, function wrappers, observability extensions, and bundlers.
+
+15
+00:01:39.700 --> 00:01:45.060
+A convenience package becomes part of the security posture once it is deployed into production functions.
+
+16
+00:01:45.340 --> 00:01:51.580
+Runtime hygiene also includes keeping platform runtimes and Node.js versions current.
+
+17
+00:01:51.680 --> 00:01:57.280
+Serverless teams sometimes forget older functions because they are quiet and rarely changed.
+
+18
+00:01:57.380 --> 00:01:59.540
+Quiet is not the same as safe.
+
+19
+00:01:59.640 --> 00:02:04.680
+Inventory deployed runtimes, package versions, layers, and build paths.
+
+20
+00:02:04.780 --> 00:02:12.860
+A small function can carry a large dependency tree, so treat function packaging as production software delivery rather than a quick upload of code.

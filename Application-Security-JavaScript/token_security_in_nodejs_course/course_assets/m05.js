@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "JWTs, Claims, Signatures, and Validation",
+  "graphicAlt": "JWT claims become trusted context only after cryptographic and context checks, followed by separate action authorization.",
+  "narration": "JSON Web Tokens are structured tokens that carry claims and are usually signed. That structure is useful because a resource server can validate a token without looking up every request in a database. It also creates risk when developers treat a decoded payload as trusted before validation. A JWT is only meaningful after the signature and required context checks succeed.\n\nJWT validation should check the signature, expected algorithm, issuer, audience, expiration, not-before time where used, token type or purpose, and key identity where relevant. The application should reject unexpected algorithms, missing signatures, weak keys, wrong issuers, wrong audiences, expired tokens, and tokens intended for another system. Claims are input until validation turns them into trusted security context.\n\nJWT payloads should be minimal. They should not contain secrets, unnecessary personal data, or claims that downstream services will misinterpret. A valid token from the wrong issuer, for the wrong audience, or for the wrong purpose should not be accepted just because the signature verifies. Authentication through a valid JWT also does not replace authorization for specific objects, tenants, fields, or actions.\n\nJWTs introduce lifecycle tradeoffs. Stateless validation can scale well, but revocation is harder unless the design includes short lifetimes, server-side state, token versioning, revocation lists, key rotation, or another explicit control. Key rotation and JWKS handling should be tested. JWTs are useful signed claim containers, not magic security objects.",
+  "narrationPoints": [
+    "It also creates risk when developers treat a decoded payload as trusted before validation.",
+    "JWT validation should check the signature, expected algorithm, issuer, audience, expiration, not-before time where used, token type or purpose, and key identity where relevant.",
+    "They should not contain secrets, unnecessary personal data, or claims that downstream services will misinterpret.",
+    "Stateless validation can scale well, but revocation is harder unless the design includes short lifetimes, server-side state, token versioning, revocation lists, key rotation, or another explicit control.",
+    "The application should reject unexpected algorithms, missing signatures, weak keys, wrong issuers, wrong audiences, expired tokens, and tokens intended for another system.",
+    "Claims are input until validation turns them into trusted security context."
+  ]
+};

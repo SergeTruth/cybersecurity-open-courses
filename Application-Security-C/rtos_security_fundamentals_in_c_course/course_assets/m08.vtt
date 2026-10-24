@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+RTOS configuration is security policy in compiled form.
+
+2
+00:00:04.120 --> 00:00:16.920
+Scheduler settings, enabled services, memory protection options, stack checks, assertion behavior, logging levels, debug features, and driver configuration all shape the system.
+
+3
+00:00:17.020 --> 00:00:22.460
+A release should have a documented baseline so reviewers know what is intentionally enabled.
+
+4
+00:00:22.740 --> 00:00:25.860
+Production debug control is part of that baseline.
+
+5
+00:00:25.960 --> 00:00:32.040
+Development builds often need extra access, diagnostics, tracing, and service hooks.
+
+6
+00:00:32.140 --> 00:00:43.260
+Production builds should review those features carefully and disable or restrict anything that exposes sensitive state, broad control paths, or unnecessary operational capability.
+
+7
+00:00:43.540 --> 00:00:50.900
+Secure boot concepts help establish startup trust at a high level by allowing the device to check that authorized software is starting.
+
+8
+00:00:51.000 --> 00:01:03.480
+This course does not implement boot code or cryptography, but developers should understand the integration question: what does the boot chain verify, what happens on failure, and how does the application know its assumptions are valid?
+
+9
+00:01:03.760 --> 00:01:07.360
+Signed update concepts have similar lifecycle concerns.
+
+10
+00:01:07.460 --> 00:01:14.740
+An update system needs versioning, metadata, verification behavior, rollback planning, and safe failure handling.
+
+11
+00:01:14.840 --> 00:01:23.160
+The application should not treat an update as successful until the required checks and persistence steps have completed according to policy.
+
+12
+00:01:23.440 --> 00:01:26.400
+Rollback and failure behavior should be explicit.
+
+13
+00:01:26.500 --> 00:01:30.180
+What happens if power is lost during update?
+
+14
+00:01:30.280 --> 00:01:32.440
+What if the new image fails health checks?
+
+15
+00:01:32.540 --> 00:01:34.860
+What if configuration migration fails?
+
+16
+00:01:34.960 --> 00:01:42.960
+A secure design avoids ambiguous states and gives operators or field-service workflows a predictable recovery path.
+
+17
+00:01:43.240 --> 00:01:45.640
+Configuration review should be repeatable.
+
+18
+00:01:45.740 --> 00:01:53.820
+Track the intended RTOS options, production diagnostics, boot assumptions, update assumptions, and release-specific exceptions.
+
+19
+00:01:53.920 --> 00:01:59.440
+A documented baseline helps teams keep security decisions from drifting as the device evolves.

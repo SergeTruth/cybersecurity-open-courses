@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Testing and Reviewing Validation Logic",
+  "narration": "Validation code should be tested with the same seriousness as business logic. Unit tests should cover valid examples, but the more important cases are often negative: missing fields, malformed values, unsupported enum variants, overlong strings, oversized collections, invalid dates, unexpected JSON shapes, and numbers at the edge of accepted ranges. cargo test makes these checks easy to keep close to the validators they protect.\n\nBoundary tests are especially valuable because validation rules often fail at the edges. Test the maximum allowed length and one character more. Test zero, one, negative one, the maximum accepted value, and a value above it. Test empty arrays, single-item arrays, duplicate items, and arrays beyond the allowed limit. This is where simple validators reveal whether they encode the intended policy or just the happy path.\n\nProperty-based testing and fuzzing can extend validation coverage beyond hand-picked examples. Property-based tests explore many generated inputs and check that important properties always hold. Fuzzing can exercise parsers and decoders with malformed or unexpected bytes. These techniques are especially useful for file formats, protocol inputs, and complex parsers where humans are unlikely to imagine every edge case.\n\nCode review should trace trust boundaries. Reviewers should ask where the data came from, what type represented it before validation, which validator accepted it, how errors are handled, and whether logging is safe. Clippy and linting help catch some code smells, but they do not understand every domain rule. Good review combines Rust tooling with a simple security question: can invalid or unexpected input reach a sensitive decision point?",
+  "graphicAlt": "Example, boundary, property and fuzz tests support review of validation trust decisions and error handling.",
+  "narrationPoints": [
+    "Validation code should be tested with the same seriousness as business logic.",
+    "Boundary tests are especially valuable because validation rules often fail at the edges.",
+    "Property-based testing and fuzzing can extend validation coverage beyond hand-picked examples.",
+    "Code review should trace trust boundaries."
+  ]
+};

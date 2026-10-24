@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+A TCP service is exposed software.
+
+2
+00:00:03.080 --> 00:00:09.720
+It accepts data from another process, another host, or another network segment and turns that data into program behavior.
+
+3
+00:00:09.820 --> 00:00:21.500
+In C, that boundary matters because network input often reaches parsing code, memory buffers, state machines, resource allocation, logs, child work, and cleanup paths.
+
+4
+00:00:21.600 --> 00:00:26.480
+Even a service with only a few commands can carry many security-relevant assumptions.
+
+5
+00:00:26.760 --> 00:00:34.200
+The first defensive habit is to treat every connection as untrusted until the service has validated what it knows.
+
+6
+00:00:34.300 --> 00:00:43.580
+The remote peer may be an expected application, an outdated client, a misconfigured integration, a test tool, or simply a connection that sends incomplete data.
+
+7
+00:00:43.680 --> 00:00:51.040
+The service should not assume that bytes arrive in useful chunks, that fields are well formed, or that a client follows the happy path.
+
+8
+00:00:51.320 --> 00:00:54.280
+Small services still need explicit design.
+
+9
+00:00:54.380 --> 00:01:10.380
+A simple administrative listener, local helper, queue bridge, metrics endpoint, or embedded control service may be treated as internal, but it still has a listening scope, a protocol contract, resource limits, error behavior, and logging choices.
+
+10
+00:01:10.480 --> 00:01:14.000
+Internal exposure is not the same as no exposure.
+
+11
+00:01:14.280 --> 00:01:17.800
+Secure TCP service design connects several disciplines.
+
+12
+00:01:17.900 --> 00:01:21.580
+Parser boundaries prevent ambiguous input handling.
+
+13
+00:01:21.680 --> 00:01:25.200
+Memory ownership prevents unsafe buffer use.
+
+14
+00:01:25.300 --> 00:01:30.260
+Resource limits keep descriptors, memory, and per-client work predictable.
+
+15
+00:01:30.360 --> 00:01:35.400
+Authentication and encryption protect trust decisions where they are needed.
+
+16
+00:01:35.500 --> 00:01:42.380
+Logging and diagnostics make behavior observable without exposing secrets or recording excessive client-controlled content.
+
+17
+00:01:42.660 --> 00:01:46.980
+This course focuses on the engineering habits that make a C service reviewable.
+
+18
+00:01:47.080 --> 00:01:57.880
+Define what listens, where it listens, who is expected to connect, how messages are framed, how data is validated, how connections are cleaned up, and how failures are handled.
+
+19
+00:01:57.980 --> 00:02:03.660
+A service becomes safer when those answers are deliberate rather than accidental.

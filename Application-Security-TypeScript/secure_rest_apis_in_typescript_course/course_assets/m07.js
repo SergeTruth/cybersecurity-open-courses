@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Middleware and API Hardening",
+  "graphicAlt": "Shared request, identity, rate, time and telemetry controls support routes while CORS remains a distinct browser-origin policy.",
+  "narration": "Middleware is useful because it can apply consistent controls before a request reaches route-specific code. Common concerns include request size limits, content-type checks, correlation identifiers, authentication context, safe error conversion, logging, and rate limiting. Centralizing these controls helps prevent one route from drifting away from the security pattern used elsewhere.\n\nCORS should be explicit and narrow. It is a browser access control mechanism, not a general authentication system. A TypeScript API should define which origins, methods, and headers are allowed based on product requirements. A broad configuration may be convenient during development, but production configuration should match the intended clients.\n\nOperational limits reduce both accidental overload and deliberate misuse. Request body limits, timeouts, concurrency limits, rate limits, and dependency timeouts should be chosen deliberately and tested. These controls do not replace authentication or authorization, but they help keep the service predictable when traffic is unexpected or clients behave poorly.\n\nAPI hardening also includes dependency hygiene, environment configuration, secret handling, structured logging, and telemetry. The team should know which libraries process requests, where secrets are read, which settings differ by environment, and what signals indicate unusual behavior. Middleware and platform controls make security more repeatable when they are documented, tested, and reviewed with the code.\n\nThese controls should be boring in the best way: predictable, consistent, and easy to verify. If every route depends on a different hand-written control path, the API becomes hard to reason about. Shared middleware helps teams improve the baseline once and apply it broadly.",
+  "narrationPoints": [
+    "Middleware is useful because it can apply consistent controls before a request reaches route-specific code.",
+    "CORS should be explicit and narrow.",
+    "Operational limits reduce both accidental overload and deliberate misuse.",
+    "API hardening also includes dependency hygiene, environment configuration, secret handling, structured logging, and telemetry.",
+    "These controls should be boring in the best way: predictable, consistent, and easy to verify."
+  ]
+};

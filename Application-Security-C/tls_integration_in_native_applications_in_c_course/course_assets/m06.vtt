@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Client-side TLS integration starts before the handshake.
+
+2
+00:00:03.800 --> 00:00:14.920
+The client should create or reuse a properly configured TLS context, load or select the correct trust anchors, set the expected server identity, and configure any required protocol options.
+
+3
+00:00:15.020 --> 00:00:19.580
+These choices need to happen before application logic treats the channel as trusted.
+
+4
+00:00:19.860 --> 00:00:24.260
+The expected server name is a security decision, not a display string.
+
+5
+00:00:24.360 --> 00:00:32.600
+The TLS library needs the intended identity so certificate verification can confirm that the peer matches the service the client meant to reach.
+
+6
+00:00:32.700 --> 00:00:41.580
+If the name is missing, copied from an untrusted source, or inconsistent with the connection target, the identity check may not protect the application as intended.
+
+7
+00:00:41.860 --> 00:00:45.780
+Validation failure should be a hard stop for application trust.
+
+8
+00:00:45.880 --> 00:00:54.120
+A client that continues after certificate or hostname validation fails has undermined the purpose of TLS.
+
+9
+00:00:54.220 --> 00:01:04.220
+Error handling should close or discard the connection state, report a safe diagnostic, and avoid sending sensitive application data over a channel that is not trusted.
+
+10
+00:01:04.500 --> 00:01:06.980
+Retries and timeouts should be intentional.
+
+11
+00:01:07.080 --> 00:01:14.120
+A failed handshake may reflect configuration, network, trust-store, certificate, or policy problems.
+
+12
+00:01:14.220 --> 00:01:18.380
+Repeated retries should not hide the real issue or flood logs.
+
+13
+00:01:18.480 --> 00:01:24.160
+Timeouts should be bounded and should clean up TLS and socket resources predictably.
+
+14
+00:01:24.440 --> 00:01:27.960
+Error reporting should help diagnosis without exposing secrets.
+
+15
+00:01:28.060 --> 00:01:37.100
+Logs can include categories such as validation failure, expired certificate, name mismatch, trust-store problem, timeout, or configuration error.
+
+16
+00:01:37.200 --> 00:01:45.760
+They should avoid private keys, secrets, session material, raw sensitive application data, and excessive peer-controlled text.
+
+17
+00:01:46.040 --> 00:01:48.600
+A strong client integration is testable.
+
+18
+00:01:48.700 --> 00:02:00.540
+Tests should prove that the client connects when trust and identity are correct, and that it fails safely when the certificate is invalid, expired, issued by an unexpected trust anchor, or does not match the intended name.

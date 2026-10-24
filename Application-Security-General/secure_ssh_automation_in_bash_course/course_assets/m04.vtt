@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+A Bash script should invoke SSH in a way that is clear to review.
+
+2
+00:00:05.240 --> 00:00:14.760
+The executable, stable options, destination values, identity file choices, and remote operands should be visible as separate parts of the invocation.
+
+3
+00:00:14.860 --> 00:00:19.820
+That is much easier to inspect than one large command string assembled from variables.
+
+4
+00:00:20.100 --> 00:00:25.380
+Arrays are useful for SSH options because they preserve separate argument values.
+
+5
+00:00:25.480 --> 00:00:36.600
+A script can define fixed options, add validated optional values, and pass the array to SSH without asking Bash to reinterpret a generated command line.
+
+6
+00:00:36.700 --> 00:00:41.180
+This keeps option boundaries visible and reduces accidental shell interpretation.
+
+7
+00:00:41.460 --> 00:00:49.700
+Values such as host names, user names, ports, identity file paths, and remote paths should be validated before invocation.
+
+8
+00:00:49.800 --> 00:00:53.000
+Validation defines what the workflow supports.
+
+9
+00:00:53.100 --> 00:00:58.220
+Quoting and arrays preserve accepted values as the script passes them to SSH.
+
+10
+00:00:58.320 --> 00:00:59.760
+Both layers matter.
+
+11
+00:01:00.040 --> 00:01:02.680
+Avoid unnecessary re-parsing.
+
+12
+00:01:02.780 --> 00:01:10.780
+If a script stores a full SSH command in a string and later evaluates it, reviewers must reason about another layer of shell parsing.
+
+13
+00:01:10.880 --> 00:01:15.600
+That increases fragility and makes it easier for data to become syntax.
+
+14
+00:01:15.700 --> 00:01:19.940
+Known command structure with separate arguments is usually the safer design.
+
+15
+00:01:20.220 --> 00:01:23.260
+Destination control is especially important.
+
+16
+00:01:23.360 --> 00:01:32.560
+An input value should not freely decide arbitrary user, host, port, and option behavior unless that is the explicit and reviewed purpose of the tool.
+
+17
+00:01:32.660 --> 00:01:38.980
+In most automation, a validated environment or target label should map to known destinations and options.
+
+18
+00:01:39.260 --> 00:01:44.540
+The result is SSH invocation that is testable and maintainable.
+
+19
+00:01:44.640 --> 00:01:53.520
+Future reviewers can see what can vary, what is fixed, what is validated, and which assumptions belong to the local Bash script before any remote action begins.

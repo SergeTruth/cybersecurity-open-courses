@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Safer ABI design often starts by hiding what does not need to be part of the binary contract.
+
+2
+00:00:05.720 --> 00:00:09.640
+Opaque handles let callers refer to an object without knowing its layout.
+
+3
+00:00:09.740 --> 00:00:16.380
+A C-compatible facade can reduce C++ ABI complexity at plugin, SDK, or cross-compiler boundaries.
+
+4
+00:00:16.480 --> 00:00:23.440
+PIMPL can keep source-facing C++ ergonomics while moving private implementation details out of the public object layout.
+
+5
+00:00:23.720 --> 00:00:26.520
+Versioned structs are another useful pattern.
+
+6
+00:00:26.620 --> 00:00:33.180
+A structure can include a size or version field so newer libraries can understand what the caller knows how to provide.
+
+7
+00:00:33.280 --> 00:00:40.800
+Capability queries let callers and libraries negotiate supported behavior rather than assuming that every feature exists.
+
+8
+00:00:40.900 --> 00:00:43.460
+These patterns make evolution deliberate.
+
+9
+00:00:43.560 --> 00:00:49.160
+They are not magic, but they give the interface a place to express compatibility rather than relying on guesswork.
+
+10
+00:00:49.440 --> 00:01:00.400
+Boundary contracts should define ownership, allocation, deallocation, error reporting, thread-safety expectations, lifetime rules, and compatibility policy.
+
+11
+00:01:00.500 --> 00:01:05.780
+A narrow exported API is easier to test, document, and preserve.
+
+12
+00:01:05.880 --> 00:01:08.680
+The goal is not to make every boundary look like C.
+
+13
+00:01:08.780 --> 00:01:14.860
+The goal is to keep the binary contract stable enough that implementation details can change safely behind it.
+
+14
+00:01:14.960 --> 00:01:20.160
+Defensive design gives future releases room to evolve without surprising existing callers.
+
+15
+00:01:20.260 --> 00:01:25.460
+A good boundary also makes unsupported use fail clearly instead of becoming accidental coupling.
+
+16
+00:01:25.740 --> 00:01:30.700
+These patterns work best when they are paired with examples and negative space.
+
+17
+00:01:30.800 --> 00:01:42.160
+The documentation should show the supported creation, use, and destruction sequence, but it should also say which casts, direct structure access, retained pointers, or cross-version assumptions are outside the contract.
+
+18
+00:01:42.260 --> 00:01:47.220
+Clear limits reduce accidental dependencies and make compatibility testing more meaningful.

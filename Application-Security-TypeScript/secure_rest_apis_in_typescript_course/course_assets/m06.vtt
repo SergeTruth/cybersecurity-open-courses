@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+API responses are part of the security boundary.
+
+2
+00:00:03.720 --> 00:00:08.920
+A route should return only the data the caller truly needs for the intended task.
+
+3
+00:00:09.020 --> 00:00:23.260
+Internal records often contain fields that are not appropriate for an API response: internal notes, flags, relationship identifiers, operational metadata, or sensitive values that support server-side decisions.
+
+4
+00:00:23.540 --> 00:00:28.260
+TypeScript can help separate internal models from response models.
+
+5
+00:00:28.360 --> 00:00:32.920
+A database entity or ORM object is rarely the safest public contract.
+
+6
+00:00:33.020 --> 00:00:41.740
+A data transfer object, response schema, or explicit mapper can filter fields, normalize names, and make response behavior reviewable.
+
+7
+00:00:41.840 --> 00:00:46.320
+This also reduces accidental exposure when internal models grow over time.
+
+8
+00:00:46.600 --> 00:00:50.760
+Error handling should be useful without revealing sensitive internals.
+
+9
+00:00:50.860 --> 00:01:00.220
+Clients need stable status codes and clear messages, but they usually do not need stack traces, raw database errors, dependency details, or secret values.
+
+10
+00:01:00.320 --> 00:01:08.880
+Logs can capture safe diagnostic context, such as request identifiers and high-level error categories, while keeping sensitive data out of durable records.
+
+11
+00:01:09.160 --> 00:01:14.520
+Pagination, filtering, sorting, and caching also shape exposure.
+
+12
+00:01:14.620 --> 00:01:19.740
+Limits help avoid overly large responses and unexpected resource use.
+
+13
+00:01:19.840 --> 00:01:24.480
+Filter and sort parameters should be validated against allowed fields.
+
+14
+00:01:24.580 --> 00:01:27.940
+Cache behavior should match the sensitivity of the data.
+
+15
+00:01:28.040 --> 00:01:34.680
+Secure output design is about controlling what leaves the API, not merely formatting JSON neatly.
+
+16
+00:01:34.960 --> 00:01:39.520
+Response contracts should be versioned and reviewed like request contracts.
+
+17
+00:01:39.620 --> 00:01:45.940
+Adding one field may seem harmless, but it can change what clients store, display, or forward.
+
+18
+00:01:46.040 --> 00:01:51.400
+A deliberate response model makes those changes visible before they become part of a public API promise.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Message Framing and Input Validation",
+  "graphicAlt": "Partial input forms bounded validated messages before command dispatch.",
+  "narration": "IPC protocols need message framing. The receiver has to know where each message begins and ends before it can validate the content or dispatch an action. Some mechanisms preserve message boundaries. Others are byte streams and require the application to define a framing rule. The code should make that rule explicit.\n\nPartial reads, partial writes, and interrupted operations are normal conditions. A receiver might see only part of a header. A sender might write fewer bytes than requested. A peer might disconnect halfway through a message. Defensive code handles those states without treating incomplete input as a complete request.\n\nLength fields, delimiters, command identifiers, flags, versions, and payload formats all require validation before use. A declared length should be checked against maximum size, available bytes, and the schema for that message type. A command should be one the receiver supports. Flags should be accepted only when their meaning is defined.\n\nValidation should happen before allocation, copying, dispatch, or state-changing operations. If the receiver allocates based on an untrusted length, copies before checking the full range, or dispatches a command before validating the payload, the protocol boundary becomes fragile.\n\nSafe failure behavior matters. Malformed, unsupported, oversized, truncated, or out-of-sequence messages should produce predictable outcomes: reject the message, close the connection if appropriate, clean up partial state, and avoid changing trusted state. The parser should be boring in the best sense: explicit, bounded, and reviewable.",
+  "narrationPoints": [
+    "The receiver has to know where each message begins and ends before it can validate the content or dispatch an action.",
+    "Defensive code handles those states without treating incomplete input as a complete request.",
+    "A declared length should be checked against maximum size, available bytes, and the schema for that message type.",
+    "If the receiver allocates based on an untrusted length, copies before checking the full range, or dispatches a command before validating the payload, the protocol boundary becomes fragile.",
+    "The parser should be boring in the best sense: explicit, bounded, and reviewable."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Drift Detection, Logging, Monitoring, and Review",
+  "graphicAlt": "Intended and observed configuration are compared for drift using safe metadata, with differences assigned for review and recovery.",
+  "narration": "Configuration drift happens when environments that should be aligned become different in undocumented ways. Drift can come from manual console changes, emergency fixes, copied variables, stale secrets, old containers, inconsistent CI/CD jobs, incomplete rollback, or a feature flag left on after an experiment. Drift is dangerous because teams think they understand production, while production is actually behaving according to hidden state.\n\nSecure configuration management should produce evidence. Logs can capture configuration version, deployment version, environment name, startup validation result, and security-relevant state without exposing secrets. Monitoring should detect unsafe modes, missing configuration, failed validation, unexpected debug behavior, permissive CORS, disabled protections, unusual feature flag changes, repeated startup failures, and suspicious changes to deployment variables. Dashboards should help defenders without becoming a new source of sensitive data.\n\nReview should include configuration files, schemas, defaults, deployment manifests, CI/CD variables, container settings, feature flags, secret references, and documentation. Periodic review should confirm owner, purpose, risk, last change, and rotation expectation for important values. Incident response should include configuration review, change history, secret exposure analysis, rollback, and remediation. Configuration deserves the same evidence discipline as code because it changes what the code does.",
+  "narrationPoints": [
+    "Configuration drift happens when environments that should be aligned become different in undocumented ways.",
+    "Monitoring should detect unsafe modes, missing configuration, failed validation, unexpected debug behavior, permissive CORS, disabled protections, unusual feature flag changes, repeated startup failures, and suspicious changes to deployment variables.",
+    "Review should include configuration files, schemas, defaults, deployment manifests, CI/CD variables, container settings, feature flags, secret references, and documentation.",
+    "Periodic review should confirm owner, purpose, risk, last change, and rotation expectation for important values.",
+    "Incident response should include configuration review, change history, secret exposure analysis, rollback, and remediation.",
+    "Logs can capture configuration version, deployment version, environment name, startup validation result, and security-relevant state without exposing secrets."
+  ]
+};

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Integrity, Verification, and Restore Testing",
+  "graphicAlt": "Backup integrity checks lead to a restore test that exercises keys, dependencies and recovery procedures.",
+  "narration": "A backup that cannot be restored is not a reliable backup. Secure backup scripting should produce evidence that the expected data was collected, written, and preserved in a usable form. Verification does not have to be complicated to be valuable. The script can check whether expected outputs exist, whether sizes are plausible, whether metadata was recorded, whether checks completed, and whether critical commands actually succeeded.\n\nIntegrity checks help detect empty, partial, incomplete, corrupted, or failed backup outputs. They are not a replacement for restoration, but they reduce the chance that a job silently produces unusable data. A script should avoid treating command completion as proof of recovery. A command can finish while copying too little, skipping files, writing to an unexpected destination, or producing an archive that later cannot be unpacked with the required permissions and dependencies.\n\nRestore testing is the discipline that proves the recovery path. A restore test validates backup format, storage access, encryption keys, credentials, permissions, documentation, dependencies, and the actual recovery steps. It can reveal missing configuration, incompatible versions, slow procedures, unclear ownership, or assumptions that were never captured in the backup. Without restore testing, teams may only discover those gaps during an emergency.\n\nBackup scripts should report verification failures clearly. They should produce useful evidence for operations and audit review without exposing sensitive contents. Evidence may include timestamps, backup identifiers, source scope, destination reference at a safe level, status, size, integrity metadata, and restore-test records. The question to ask is simple: if we needed this backup tomorrow, would we trust both the data and the process that created it?",
+  "narrationPoints": [
+    "A backup that cannot be restored is not a reliable backup.",
+    "Integrity checks help detect empty, partial, incomplete, corrupted, or failed backup outputs.",
+    "Restore testing is the discipline that proves the recovery path.",
+    "Evidence may include timestamps, backup identifiers, source scope, destination reference at a safe level, status, size, integrity metadata, and restore-test records.",
+    "Secure backup scripting should produce evidence that the expected data was collected, written, and preserved in a usable form.",
+    "Verification does not have to be complicated to be valuable."
+  ]
+};

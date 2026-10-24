@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.140
+Many Bash pipelines rely on text-processing tools such as grep, awk, sed, cut, sort, and similar utilities.
+
+2
+00:00:09.240 --> 00:00:14.920
+These tools are valuable, but they depend on assumptions about input format.
+
+3
+00:00:15.020 --> 00:00:19.020
+When those assumptions are not documented or tested, the pipeline becomes brittle.
+
+4
+00:00:19.300 --> 00:00:23.220
+Human-readable output is often not a stable machine interface.
+
+5
+00:00:23.320 --> 00:00:31.320
+A tool may add a column, change spacing, localize labels, include headers, or alter output between versions.
+
+6
+00:00:31.420 --> 00:00:37.100
+A script that depends on a visual layout may keep running while selecting the wrong field or missing important records.
+
+7
+00:00:37.380 --> 00:00:40.180
+Delimiters and columns deserve careful review.
+
+8
+00:00:40.280 --> 00:00:43.320
+A delimiter may appear inside a value.
+
+9
+00:00:43.420 --> 00:00:45.420
+An empty field may be meaningful.
+
+10
+00:00:45.520 --> 00:00:49.120
+Whitespace may be collapsed or preserved differently than expected.
+
+11
+00:00:49.220 --> 00:00:53.140
+Sorting and matching may depend on locale or encoding.
+
+12
+00:00:53.240 --> 00:00:57.320
+These are not edge cases when a pipeline supports production automation.
+
+13
+00:00:57.600 --> 00:01:00.800
+Where available, prefer structured output.
+
+14
+00:01:00.900 --> 00:01:04.820
+Formats designed for machines are easier to validate than free-form text.
+
+15
+00:01:04.920 --> 00:01:10.120
+Even then, the script should check required fields and handle missing or unexpected data.
+
+16
+00:01:10.220 --> 00:01:15.100
+Structured output reduces ambiguity, but it does not remove the need for validation.
+
+17
+00:01:15.380 --> 00:01:20.420
+When human-readable output must be parsed, document the assumption and test it.
+
+18
+00:01:20.520 --> 00:01:28.760
+Include no-match cases, malformed lines, empty fields, unexpected values, and representative production-like samples.
+
+19
+00:01:28.860 --> 00:01:37.260
+If a parsing decision can affect deployment, monitoring, reporting, or data movement, it deserves tests before production use.
+
+20
+00:01:37.540 --> 00:01:40.900
+Secure filtering is not about avoiding classic shell tools.
+
+21
+00:01:41.000 --> 00:01:49.000
+It is about using them with clear input expectations, explicit failure handling, and an understanding that text shape is part of the contract.

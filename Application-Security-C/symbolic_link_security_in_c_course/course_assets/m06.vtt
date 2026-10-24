@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Symbolic-link risk often appears during creation and replacement.
+
+2
+00:00:04.440 --> 00:00:11.960
+If code checks for a filename, then later creates it, the object at that path may not be the object the earlier check described.
+
+3
+00:00:12.060 --> 00:00:17.500
+Safer workflows use platform-appropriate creation behavior that creates and opens the intended file atomically.
+
+4
+00:00:17.780 --> 00:00:21.300
+Temporary files overlap strongly with symbolic-link safety.
+
+5
+00:00:21.400 --> 00:00:29.160
+Temporary names should not be predictable, and temporary directories should be selected according to trust, permissions, and data sensitivity.
+
+6
+00:00:29.260 --> 00:00:34.780
+The program should own the returned descriptor or handle and should not rely only on a generated pathname.
+
+7
+00:00:35.060 --> 00:00:37.780
+Replacement workflows should be intentional.
+
+8
+00:00:37.880 --> 00:00:42.200
+A program may write to a working file and later publish final output.
+
+9
+00:00:42.300 --> 00:00:52.460
+The code should distinguish working files from final files, check write results, handle partial files, and expose final content only after the operation is complete and validated.
+
+10
+00:00:52.740 --> 00:01:02.900
+Rename-style finalization or other durable replacement patterns can be useful at a high level, but the exact guarantees depend on platform and filesystem behavior.
+
+11
+00:01:03.000 --> 00:01:09.160
+The review should focus on whether final output appears only after the program has completed and checked the work.
+
+12
+00:01:09.440 --> 00:01:11.920
+Cleanup also belongs in the creation story.
+
+13
+00:01:12.020 --> 00:01:17.700
+If creation succeeds but later validation fails, the program should know who removes the working file.
+
+14
+00:01:17.800 --> 00:01:22.680
+If replacement fails, the program should avoid leaving ambiguous state.
+
+15
+00:01:22.780 --> 00:01:28.380
+Safe creation is only complete when finalization and cleanup behavior are clear.

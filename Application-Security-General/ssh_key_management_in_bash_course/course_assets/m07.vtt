@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.900
+SSH keys are often used by CI/CD jobs, Git operations, deployment scripts, artifact synchronization jobs, monitoring checks, and remote administration tasks.
+
+2
+00:00:11.000 --> 00:00:16.200
+These environments create storage and exposure risks that differ from an interactive shell.
+
+3
+00:00:16.300 --> 00:00:27.580
+A key may be injected into a runner, copied into a workspace, cached in a container layer, printed in debug output, or reused across environments because it was easy to configure once.
+
+4
+00:00:27.860 --> 00:00:32.580
+Git deploy keys should be scoped to the repository and workflow that need them.
+
+5
+00:00:32.680 --> 00:00:38.760
+A key that only needs read access to one repository should not have broader platform access.
+
+6
+00:00:38.860 --> 00:00:43.500
+Deployment and artifact-transfer keys should be scoped to their target environment and task.
+
+7
+00:00:43.600 --> 00:00:51.600
+Production keys should be separated from development and staging keys so a lower-environment job does not accidentally gain production reach.
+
+8
+00:00:51.880 --> 00:00:55.400
+Build-time and runtime key material should be handled separately.
+
+9
+00:00:55.500 --> 00:01:05.580
+Keys used during image builds can be captured in layers, caches, package metadata, or build logs if the process is not designed carefully.
+
+10
+00:01:05.680 --> 00:01:10.640
+Runtime keys should be injected at runtime through controlled mechanisms where practical.
+
+11
+00:01:10.740 --> 00:01:16.580
+Temporary key files should avoid artifact paths, shared caches, and broad workspaces.
+
+12
+00:01:16.860 --> 00:01:22.700
+Secret masking helps reduce accidental log exposure, but it is not a complete boundary.
+
+13
+00:01:22.800 --> 00:01:30.640
+Derived values, file names, debug output, copied workspaces, or untrusted jobs can still create risk.
+
+14
+00:01:30.740 --> 00:01:38.580
+Automation should clean up temporary key material, avoid overbroad environment access, and log enough to support review without exposing secrets.
+
+15
+00:01:38.680 --> 00:01:44.040
+CI/CD SSH keys should be treated as production credentials when they can affect production systems.

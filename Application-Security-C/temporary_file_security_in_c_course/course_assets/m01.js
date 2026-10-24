@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Temporary Files as a Security Boundary",
+  "graphicAlt": "A temporary file has a known owner, trusted location, restricted access and planned lifetime.",
+  "narration": "Temporary files are often created for convenience, but they are still real resources with real consequences. A temporary file can contain intermediate data, staging output, cached results, generated reports, diagnostics, or content being handed from one component to another. If that file is placed, opened, shared, or cleaned up carelessly, it can affect confidentiality, integrity, reliability, and operational behavior.\n\nThe word temporary can be misleading. Temporary does not automatically mean private, short-lived, safely named, or unrecoverable. A file can remain after a crash, appear in a backup, be observed by another process, or be reused by later code. C programs need explicit decisions about where temporary files live, who owns them, which permissions apply, and when they are removed.\n\nTemporary-file handling is a trust-boundary problem. The program may be interacting with shared directories, environment-derived paths, user-selected locations, service accounts, deployment-specific permissions, or platform-specific file behavior. Safe design starts by selecting the directory and creation method intentionally.\n\nCleanup should be planned at the same time as creation. A temporary file's lifecycle includes creation, writing, reading, validation, finalization, and removal. Failure paths, retries, and abnormal termination should be considered early instead of patched in after leftover files are found in production.\n\nA useful mindset is to treat each temporary file as an owned asset. It should have a purpose, an owner, a trusted location, a permission model, a sensitivity decision, a cleanup path, and tests that prove the intended behavior.",
+  "narrationPoints": [
+    "A temporary file can contain intermediate data, staging output, cached results, generated reports, diagnostics, or content being handed from one component to another.",
+    "A file can remain after a crash, appear in a backup, be observed by another process, or be reused by later code.",
+    "Safe design starts by selecting the directory and creation method intentionally.",
+    "A temporary file's lifecycle includes creation, writing, reading, validation, finalization, and removal.",
+    "A useful mindset is to treat each temporary file as an owned asset."
+  ]
+};

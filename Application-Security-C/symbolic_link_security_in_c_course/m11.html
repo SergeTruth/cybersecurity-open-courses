@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Symbolic Link Security in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="symbolic_link_security_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;A&quot;,&quot;q10&quot;:&quot;B&quot;,&quot;q11&quot;:&quot;C&quot;,&quot;q12&quot;:&quot;B&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why are symbolic links relevant to secure C file handling?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>A symbolic link permanently binds a pathname to one object and prevents later directory-entry changes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Symbolic links remove the need to review directory permissions because the link stores the target policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>A symbolic link can redirect a pathname to a filesystem object the program did not expect.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Using a symbolic link converts every pathname operation into descriptor-first handling automatically.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. What is the difference between a path string and an opened file object?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>A path is resolution input, while an opened descriptor identifies the specific object used by the program.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>A path string proves object identity, while an opened descriptor can refer to a different object on each access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Paths and opened objects provide identical guarantees for validation, ownership, and cleanup decisions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>An opened object cannot be validated after open because all useful metadata belongs to its pathname.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why are shared directories important trust boundaries?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Shared directories prevent entry replacement because all participating processes receive read-only directory access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Path validation is unnecessary in a shared directory because every created entry inherits trusted ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Directory sharing proves that every entry is trusted by all users able to resolve its name.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Depending on permissions, other users or processes may create, remove, or replace entries in a shared directory.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. What is a check-then-use mistake?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>It validates a path, then uses it after the referenced object may have changed.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>It checks the result of the final open before using the returned descriptor.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>It validates metadata from the descriptor that the program will actually use.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>It documents whether traversal follows links before implementing the directory walk.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What is the defensive value of descriptor-first file handling?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Descriptor-first handling proves every parent directory is trusted without checking ownership or permissions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Descriptor-first handling removes the need to check return values because descriptors cannot become invalid.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Descriptor-first handling makes saved path strings safe to resolve again during later cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Descriptor-first handling reduces repeated pathname trust by operating on the object actually opened.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should temporary-file creation avoid predictable names?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>A predictable temporary name produces more restrictive permissions than an atomically generated name.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>A predictable name proves the file was opened atomically because every process computes the same path.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A predictable name lets another actor interact with the expected path before or during creation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>A predictable name prevents cleanup mistakes by ensuring all temporary files share one known location.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why do permissions matter for symbolic-link safety?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Permissions are unrelated to path handling because link resolution occurs before access checks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Permissions determine who may create, replace, read, or modify directory entries and files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Restrictive permissions eliminate every shared-directory, rename, mount, and symbolic-link risk.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Filesystem permissions matter only after shutdown, when cleanup removes the remaining entries.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why are privileged programs especially sensitive to path handling?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Broader privileges make every pathname trustworthy because the process can access the intended target.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Privileged programs never accept paths from configuration, command-line arguments, IPC, or environment state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Directory permissions cannot affect privileged code, so path replacement is not a relevant threat.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>A privileged program may act on less-trusted path input while holding access the input source lacks.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What should recursive traversal code document?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Document whether traversal follows links, skips them, treats them as objects, or restricts them by policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Document only the expected file count because link behavior is determined completely by directory size.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Leave link behavior to platform defaults so traversal automatically chooses the safest interpretation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Allow cleanup to cross directory boundaries whenever a recursive operation encounters a symbolic link.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should cleanup code be reviewed for symbolic-link behavior?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Cleanup never resolves pathnames or changes directory entries, so symbolic links cannot affect it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Unclear link policy can later make cleanup modify or delete an unintended filesystem object.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Cleanup is safe whenever each filename is short enough to fit in a fixed local buffer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Cleanup behavior cannot be tested because link replacement occurs only on unsupported filesystems.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of tests and tools?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>A clean tool run makes every directory trusted and removes the need for path-resolution policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Tests convert untrusted path sources into trusted input when all expected files are present.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Tests and tools reveal path, permission, cleanup, and memory defects but cannot define filesystem policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Static analysis proves identical link and mount behavior across every supported operating system and filesystem.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Trust every absolute pathname because it cannot be redirected through symbolic links or mount changes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Treat paths as input, choose trusted directories, open safely, validate actual objects, and document link policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>Apply one permission mode and skip descriptor validation, cleanup review, and platform-specific link behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Assume cleanup is safe without tests whenever creation used a pathname from a trusted configuration file.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

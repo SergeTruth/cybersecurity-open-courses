@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Type safety is a security design tool.
+
+2
+00:00:03.480 --> 00:00:12.520
+The more accurately an API describes its domain through types, the less it depends on callers remembering which string, integer, flag, or sentinel value means what.
+
+3
+00:00:12.800 --> 00:00:17.120
+Strong domain types can separate concepts that would otherwise look identical.
+
+4
+00:00:17.220 --> 00:00:27.060
+A user identifier, tenant identifier, byte count, timeout, permission set, and record version may all be integers or strings internally, but they do not represent the same idea.
+
+5
+00:00:27.340 --> 00:00:31.740
+Scoped enums and explicit constructors reduce accidental conversions.
+
+6
+00:00:31.840 --> 00:00:37.040
+They make call sites easier to read and prevent unreviewed combinations of loosely typed flags.
+
+7
+00:00:37.320 --> 00:00:40.760
+References can communicate required, non-null objects.
+
+8
+00:00:40.860 --> 00:00:47.420
+Pointers can still be appropriate for optional or borrowed access, but the API should make that meaning clear.
+
+9
+00:00:47.520 --> 00:00:53.680
+Optional values should be modeled explicitly with std::optional or a similarly clear pattern.
+
+10
+00:00:53.960 --> 00:00:57.480
+Return values should force important outcomes into view.
+
+11
+00:00:57.580 --> 00:01:09.340
+If an operation can fail, return a result type, expected-like type, status object, or exception policy that callers cannot reasonably ignore in security-sensitive code.
+
+12
+00:01:09.620 --> 00:01:11.780
+Ambiguous sentinel values are risky.
+
+13
+00:01:11.880 --> 00:01:21.000
+A negative number, empty string, null pointer, or magic value may be confused with a real result unless the contract is obvious and consistently checked.
+
+14
+00:01:21.280 --> 00:01:24.000
+Expressive types reduce review burden.
+
+15
+00:01:24.100 --> 00:01:33.300
+Reviewers can focus on whether the right authority, object, or validated value reaches the boundary instead of decoding a long list of primitive parameters.
+
+16
+00:01:33.580 --> 00:01:36.540
+Const correctness contributes to the same goal.
+
+17
+00:01:36.640 --> 00:01:44.880
+A const view or reference communicates that the callee should not mutate caller-owned state, while a mutable reference signals that change is part of the contract.
+
+18
+00:01:45.160 --> 00:01:48.120
+Return types are also part of the interface design.
+
+19
+00:01:48.220 --> 00:01:57.980
+A result object can carry success, failure, diagnostic category, and output without relying on out-parameters or loosely connected status flags.
+
+20
+00:01:58.260 --> 00:02:03.300
+The strongest APIs make accidental misuse look awkward at the call site.

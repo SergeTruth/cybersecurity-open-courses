@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.540
+Creating a child process from privileged C code is a high-value design decision because the child may inherit more than the developer intended.
+
+2
+00:00:07.640 --> 00:00:20.920
+Identity, environment variables, current working directory, open descriptors, handles, resource limits, signal behavior, console state, and configuration context can all travel from parent to child.
+
+3
+00:00:21.020 --> 00:00:24.940
+The parent should decide what is passed, not leave it to defaults.
+
+4
+00:00:25.220 --> 00:00:27.460
+Program selection should be explicit.
+
+5
+00:00:27.560 --> 00:00:33.960
+Use trusted absolute paths or platform-appropriate lookup rules that are documented and reviewed.
+
+6
+00:00:34.060 --> 00:00:40.300
+Arguments should be structured values controlled by the program, not fragments assembled from ambiguous text.
+
+7
+00:00:40.400 --> 00:00:48.960
+Where the platform offers a direct process creation API, avoid unnecessary shell interpretation for operations that can be represented directly.
+
+8
+00:00:49.240 --> 00:00:52.760
+The environment and working directory should be set deliberately.
+
+9
+00:00:52.860 --> 00:01:03.820
+A child process that inherits a broad environment from a privileged parent may receive configuration, paths, diagnostics, or credentials that are not needed for its task.
+
+10
+00:01:03.920 --> 00:01:10.160
+A controlled environment and known working directory make child behavior easier to test and reason about.
+
+11
+00:01:10.440 --> 00:01:13.800
+Descriptor or handle inheritance should be minimized.
+
+12
+00:01:13.900 --> 00:01:20.300
+The child should receive only the files, sockets, pipes, or handles it needs.
+
+13
+00:01:20.400 --> 00:01:27.440
+Mark unrelated resources as not inheritable or close them before the child starts, depending on the platform and design.
+
+14
+00:01:27.540 --> 00:01:31.860
+This reduces accidental access and makes resource ownership clearer.
+
+15
+00:01:32.140 --> 00:01:40.060
+A good process-launch design also includes identity, limits, status, timeouts, and cleanup.
+
+16
+00:01:40.160 --> 00:01:49.520
+Decide whether the child should run with reduced authority, what resource limits apply, how long it may run, how exit status is handled, and how partial work is cleaned up.
+
+17
+00:01:49.620 --> 00:01:55.860
+The parent should log outcomes in a way that supports operations without exposing sensitive command data or configuration.

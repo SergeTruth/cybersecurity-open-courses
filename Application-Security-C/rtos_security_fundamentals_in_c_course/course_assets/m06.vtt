@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Interrupts introduce asynchronous control flow into RTOS applications.
+
+2
+00:00:04.680 --> 00:00:09.880
+An interrupt service routine may run while a task is updating state, using a driver, or holding a lock.
+
+3
+00:00:09.980 --> 00:00:17.580
+That timing makes interrupt code security-relevant because it can affect shared state, deadline behavior, and system reliability.
+
+4
+00:00:17.860 --> 00:00:20.340
+Interrupt handlers should stay minimal.
+
+5
+00:00:20.440 --> 00:00:29.560
+They should capture essential hardware status, acknowledge the event as required by the platform, and defer complex work to a task or lower-priority handler path.
+
+6
+00:00:29.660 --> 00:00:39.420
+Parsing, allocation, logging, long loops, and multi-step policy decisions generally belong outside the immediate interrupt context.
+
+7
+00:00:39.700 --> 00:00:42.980
+Deferred work keeps timing behavior more predictable.
+
+8
+00:00:43.080 --> 00:00:51.720
+A dedicated task can validate data, update state, write logs, notify other tasks, and handle errors with ordinary synchronization rules.
+
+9
+00:00:51.820 --> 00:00:57.740
+That separation makes the interrupt path easier to reason about and easier to test.
+
+10
+00:00:58.020 --> 00:01:01.140
+Reentrancy must be considered explicitly.
+
+11
+00:01:01.240 --> 00:01:07.880
+If interrupt code and task code call the same function or touch the same object, the code must be safe for that pattern.
+
+12
+00:01:07.980 --> 00:01:13.980
+Static state, shared buffers, library calls, and driver state should be reviewed for concurrent access.
+
+13
+00:01:14.260 --> 00:01:18.340
+Priority inversion and lock discipline deserve design attention.
+
+14
+00:01:18.440 --> 00:01:24.520
+If a high-priority task waits on a resource held by a lower-priority task, timing assumptions can break.
+
+15
+00:01:24.620 --> 00:01:32.620
+RTOS features may help, but teams still need to identify shared resources, lock ordering, timeouts, and what work is allowed while holding locks.
+
+16
+00:01:32.900 --> 00:01:43.220
+A strong concurrency review asks what can interrupt what, which state is shared, which operations are atomic, how deferred work is scheduled, and how timing assumptions are tested.
+
+17
+00:01:43.320 --> 00:01:47.880
+Interrupt discipline makes real-time behavior more predictable and easier to secure.

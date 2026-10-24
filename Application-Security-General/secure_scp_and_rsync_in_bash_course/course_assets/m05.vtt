@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.260
+Secure transfer scripts should validate both sides of the transfer before any data moves.
+
+2
+00:00:06.360 --> 00:00:11.160
+The source should exist, match the expected type, and live within an approved scope.
+
+3
+00:00:11.260 --> 00:00:17.420
+The destination should be approved for the workflow and unambiguous enough that reviewers understand where the data will land.
+
+4
+00:00:17.700 --> 00:00:20.580
+Empty variables deserve special attention.
+
+5
+00:00:20.680 --> 00:00:27.640
+An empty source, destination, host, or base path should not silently become meaningful.
+
+6
+00:00:27.740 --> 00:00:32.140
+Bash scripts should reject missing values before invoking a transfer tool.
+
+7
+00:00:32.240 --> 00:00:37.840
+A clear validation failure is far safer than a transfer that falls back to an unintended path.
+
+8
+00:00:38.120 --> 00:00:41.960
+Local and remote path assumptions should be explicit.
+
+9
+00:00:42.060 --> 00:00:45.100
+A local path may be relative to the runner workspace.
+
+10
+00:00:45.200 --> 00:00:51.440
+A remote path may be relative to the remote account's home directory or another configured base.
+
+11
+00:00:51.540 --> 00:00:57.620
+If the script assumes a directory exists or should be created, that behavior should be intentional and checked.
+
+12
+00:00:57.900 --> 00:01:01.180
+Approved base directories help keep scope controlled.
+
+13
+00:01:01.280 --> 00:01:09.440
+A backup workflow, release workflow, or diagnostic workflow should define where source data comes from and where destination data may go.
+
+14
+00:01:09.540 --> 00:01:15.220
+Unsupported targets should be rejected rather than normalized into a best guess.
+
+15
+00:01:15.500 --> 00:01:18.460
+Validation should happen before transfer begins.
+
+16
+00:01:18.560 --> 00:01:28.080
+If the source is missing, the expected type is wrong, the destination is outside the approved area, or the target is not recognized, the script should stop clearly.
+
+17
+00:01:28.180 --> 00:01:33.860
+This protects systems and also gives operators a useful explanation before anything changes.

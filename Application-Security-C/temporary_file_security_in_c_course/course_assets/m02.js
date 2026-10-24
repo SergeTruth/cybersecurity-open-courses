@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Temporary File Use Cases and Risk",
+  "graphicAlt": "Scratch, cache, staging and handoff files have distinct purposes that determine lifetime and handling controls.",
+  "narration": "Temporary files are not all the same. A scratch file used during one calculation has different requirements from a cache that intentionally survives between runs. A staging file for final output is different from a handoff file consumed by another component. A diagnostic log has a different lifetime and audience than an intermediate processing file.\n\nStaging output often needs a clean transition from working state to final state. Until the program has finished writing and validating the content, other code should not treat the temporary file as final. This calls for clear naming, ownership, and finalization behavior.\n\nIntermediate files may contain sensitive or incomplete content. A program might write decoded data, generated reports, transformed records, temporary exports, or data that is safe only after later validation. The temporary step can be more sensitive than the final artifact because it may contain extra context or unredacted values.\n\nHandoff files need clear consumer expectations. If one component writes a file for another component to read, the contract should define where it appears, when it is complete, what permissions apply, how the consumer validates it, and who removes it.\n\nLogs, caches, and spool files also need different controls. Logs may be retained. Caches may survive restarts. Spool files may be observed by operational tools. The right controls depend on purpose, sensitivity, lifetime, sharing requirements, and cleanup behavior.",
+  "narrationPoints": [
+    "A scratch file used during one calculation has different requirements from a cache that intentionally survives between runs.",
+    "Until the program has finished writing and validating the content, other code should not treat the temporary file as final.",
+    "A program might write decoded data, generated reports, transformed records, temporary exports, or data that is safe only after later validation.",
+    "If one component writes a file for another component to read, the contract should define where it appears, when it is complete, what permissions apply, how the consumer validates it, and who removes it.",
+    "The right controls depend on purpose, sensitivity, lifetime, sharing requirements, and cleanup behavior."
+  ]
+};

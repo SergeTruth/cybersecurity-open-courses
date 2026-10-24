@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Numeric command-line values need syntax checks and meaning checks.
+
+2
+00:00:04.920 --> 00:00:09.880
+First, the parser should determine whether the argument is actually a number in the accepted format.
+
+3
+00:00:09.980 --> 00:00:13.660
+Then it should decide whether that number is meaningful for the specific option.
+
+4
+00:00:13.940 --> 00:00:16.820
+Conversion failure should be detected explicitly.
+
+5
+00:00:16.920 --> 00:00:27.000
+A parser should know whether no digits were consumed, whether the converted value was outside the target range, and whether unexpected characters remain after the numeric portion.
+
+6
+00:00:27.100 --> 00:00:34.620
+Partial conversion should not be treated as a successful parse unless the option contract explicitly allows it.
+
+7
+00:00:34.900 --> 00:00:38.900
+Signed and unsigned expectations should be clear.
+
+8
+00:00:39.000 --> 00:00:52.440
+A count, size, timeout, port, index, retry limit, and mode value can all be numeric, but they may have different minimums, maximums, and sign rules.
+
+9
+00:00:52.540 --> 00:00:59.260
+A negative value that is invalid for a count should be rejected before it reaches allocation or loop logic.
+
+10
+00:00:59.540 --> 00:01:02.660
+Overflow-aware reasoning continues after parsing.
+
+11
+00:01:02.760 --> 00:01:12.920
+A number may fit its parsed type but become unsafe when multiplied by an element size, added to another length, converted to a narrower type, or used as a buffer capacity.
+
+12
+00:01:13.020 --> 00:01:15.900
+Validation should consider the calculations that follow.
+
+13
+00:01:16.180 --> 00:01:18.580
+Base assumptions should be documented.
+
+14
+00:01:18.680 --> 00:01:24.680
+A parser may accept decimal only, or it may intentionally accept another notation.
+
+15
+00:01:24.780 --> 00:01:30.380
+What matters is that the rule is clear, tested, and consistent with usage messages.
+
+16
+00:01:30.660 --> 00:01:33.780
+Context decides acceptability.
+
+17
+00:01:33.880 --> 00:01:37.880
+A value can be numerically valid and still be wrong for the option.
+
+18
+00:01:37.980 --> 00:01:47.420
+Defensive parsers reject values that do not fit the option's range, resource budget, performance expectation, or downstream contract.

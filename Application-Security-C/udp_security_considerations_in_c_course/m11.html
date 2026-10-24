@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | UDP Security Considerations in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="udp_security_considerations_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q1&quot;:&quot;C&quot;,&quot;q2&quot;:&quot;D&quot;,&quot;q3&quot;:&quot;A&quot;,&quot;q4&quot;:&quot;B&quot;,&quot;q5&quot;:&quot;C&quot;,&quot;q6&quot;:&quot;A&quot;,&quot;q7&quot;:&quot;D&quot;,&quot;q8&quot;:&quot;B&quot;,&quot;q9&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;D&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why should UDP be treated as a security boundary?</legend>
+            <label class="quiz-option"><input type="radio" name="q1" value="A" required><span>A bound UDP socket establishes a connection-like trust relationship with every sender that reaches it.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="B" required><span>Private addressing makes datagrams trusted because packets cannot originate outside the local network.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="C" required><span>A listener may receive datagrams from unauthenticated, unexpected, or lower-trust peers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q1" value="D" required><span>The kernel validates application message structure before delivering each datagram to user code.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Which property does UDP provide by itself?</legend>
+            <label class="quiz-option"><input type="radio" name="q2" value="A" required><span>Reliable delivery of each complete datagram, but ordering and duplicate suppression remain application concerns.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="B" required><span>Congestion control and retransmission without a persistent connection state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="C" required><span>Message boundaries and kernel-verified peer identity, but no built-in guarantee of delivery, ordering, or retransmission.</span></label>
+            <label class="quiz-option"><input type="radio" name="q2" value="D" required><span>Message-oriented datagrams, but not guaranteed delivery, ordering, retransmission, or connection state.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why does UDP endpoint binding affect exposure?</legend>
+            <label class="quiz-option"><input type="radio" name="q3" value="A" required><span>It determines which interfaces and addresses can receive UDP traffic for the service.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="B" required><span>Binding to a wildcard address is equivalent to loopback when the service port is not publicly documented.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="C" required><span>The bind address affects outgoing routing only; firewall policy alone determines receive exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q3" value="D" required><span>An ephemeral port prevents exposure across unintended interfaces because clients cannot predict it.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why is source address alone not a strong trust decision?</legend>
+            <label class="quiz-option"><input type="radio" name="q4" value="A" required><span>A source address is authenticated when reverse DNS maps it to an approved hostname.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="B" required><span>Source information is useful routing context, but it does not by itself prove authorization for an action.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="C" required><span>Subnet membership proves authorization for operations that remain within the same network.</span></label>
+            <label class="quiz-option"><input type="radio" name="q4" value="D" required><span>Matching address and port across several datagrams establishes a stable peer identity.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should happen before a UDP parser reads fields from a datagram?</legend>
+            <label class="quiz-option"><input type="radio" name="q5" value="A" required><span>Read the fixed header first, then issue another receive for any missing payload bytes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="B" required><span>Treat the datagram as a string and use its terminator to determine whether every field arrived.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="C" required><span>Minimum and maximum length checks should confirm the required bytes are present and acceptable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q5" value="D" required><span>Parse the declared length before checking the actual datagram size so the parser knows how much to expect.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why should truncated datagrams not be parsed as complete messages?</legend>
+            <label class="quiz-option"><input type="radio" name="q6" value="A" required><span>The receiver may be missing required fields or payload bytes needed for safe validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="B" required><span>A truncated datagram may be combined with the next datagram when both report the same source address.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="C" required><span>Parsing the available prefix is safe when every accessed field fits in the receive buffer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q6" value="D" required><span>Truncation affects payload fidelity but not validation of headers that were received completely.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why should response size and processing cost be controlled?</legend>
+            <label class="quiz-option"><input type="radio" name="q7" value="A" required><span>Rate limiting is unnecessary when each individual response is smaller than the maximum datagram size.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="B" required><span>A one-way work counter is a complete rate limiter even without a time source or refill policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="C" required><span>Authenticated requests may produce unbounded responses because their senders have already paid network cost.</span></label>
+            <label class="quiz-option"><input type="radio" name="q7" value="D" required><span>A service should avoid disproportionate work or large responses for weakly validated requests.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do broadcast, multicast, and discovery traffic require careful validation?</legend>
+            <label class="quiz-option"><input type="radio" name="q8" value="A" required><span>Multicast membership proves every sender belongs to the same trusted application group.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="B" required><span>They often operate in noisy or mixed-trust environments and may reach broad sets of peers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="C" required><span>TTL and interface selection are deployment details and do not change discovery exposure.</span></label>
+            <label class="quiz-option"><input type="radio" name="q8" value="D" required><span>Discovery messages can use broader parsing rules because interoperability requires accepting unknown fields.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why might some UDP workflows need higher-layer protection?</legend>
+            <label class="quiz-option"><input type="radio" name="q9" value="A" required><span>Network segmentation supplies integrity and replay protection for UDP inside a private environment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="B" required><span>A message checksum provides peer authentication and confidentiality when its field is validated.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="C" required><span>UDP does not provide integrity, authenticity, confidentiality, or replay protection by itself.</span></label>
+            <label class="quiz-option"><input type="radio" name="q9" value="D" required><span>DTLS can add peer authentication, integrity, confidentiality, and replay defenses, so every authenticated peer is authorized for every command.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. How do logging discipline, tests, static analysis, sanitizers, and review support UDP security?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Logging raw datagrams is the strongest diagnostic evidence and is safe when files have restrictive permissions.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Sanitizer-clean parser tests prove deployment binding, multicast scope, rate limits, and transport policy are correct.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Tools and review replace negative protocol tests when every receive call checks its byte count.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>They help keep validation, memory handling, diagnostics, state tracking, and deployment assumptions predictable.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

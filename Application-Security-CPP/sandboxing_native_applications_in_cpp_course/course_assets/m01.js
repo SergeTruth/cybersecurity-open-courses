@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Sandboxing Native Applications Matters",
+  "graphicAlt": "A lower-authority worker contains risky processing behind brokered resource access.",
+  "narration": "Sandboxing is a defensive architecture pattern for native C++ applications. Native components often have direct access to memory, files, operating-system APIs, devices, network services, local credentials, and user data. When a parser, renderer, plugin, document handler, helper process, or third-party component behaves unexpectedly, containment can limit what that component is able to reach or change.\n\nA sandbox is not a replacement for memory safety, input validation, secure coding, dependency updates, or patching. It is a containment layer that assumes something may still go wrong and reduces the impact. A well-designed sandbox can turn a serious component failure into a bounded worker failure that the application can observe, clean up, and recover from. That mindset is especially useful when teams maintain older native components or integrate libraries with different review histories.\n\nUseful sandboxing starts with a purpose. The team should know which work is risky, which resources are sensitive, which permissions are unnecessary, which actions need broker approval, and which failures must be visible. Without that purpose, a sandbox can become a label rather than an enforceable boundary.\n\nFor C++ systems, the practical goal is layered resilience. Isolate risky work, reduce privileges, broker sensitive actions, limit resources, and log safe operational signals. The result is not perfect safety, but a clearer architecture where failures have less room to spread. That architecture also helps reviewers understand which component owns risk, which component owns authority, and which signals operations should watch.",
+  "narrationPoints": [
+    "Native components often have direct access to memory, files, operating-system APIs, devices, network services, local credentials, and user data.",
+    "When a parser, renderer, plugin, document handler, helper process, or third-party component behaves unexpectedly, containment can limit what that component is able to reach or change.",
+    "A sandbox is not a replacement for memory safety, input validation, secure coding, dependency updates, or patching.",
+    "A well-designed sandbox can turn a serious component failure into a bounded worker failure that the application can observe, clean up, and recover from.",
+    "Without that purpose, a sandbox can become a label rather than an enforceable boundary.",
+    "Isolate risky work, reduce privileges, broker sensitive actions, limit resources, and log safe operational signals."
+  ]
+};

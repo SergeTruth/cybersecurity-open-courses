@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+Serverless applications are often distributed by default.
+
+2
+00:00:04.280 --> 00:00:15.960
+A user request may enter through an API gateway, run a function, place a message on a queue, trigger another function, update a database, write to object storage, and send a notification.
+
+3
+00:00:16.060 --> 00:00:19.420
+Before reviewing code or permissions, map the workflow.
+
+4
+00:00:19.520 --> 00:00:34.960
+Identify every trigger: HTTP routes, queues, topics, event buses, object storage events, database streams, scheduled jobs, webhooks, identity events, file uploads, and internal service calls.
+
+5
+00:00:35.060 --> 00:00:37.380
+The map does not need to be fancy.
+
+6
+00:00:37.480 --> 00:00:41.640
+It needs to be accurate enough to show where trust changes hands.
+
+7
+00:00:41.920 --> 00:00:49.920
+Treat event payloads as untrusted unless the source, integrity, and authorization have been verified for that workflow.
+
+8
+00:00:50.020 --> 00:00:54.260
+A queue message may contain fields that came from a user request.
+
+9
+00:00:54.360 --> 00:00:59.240
+An object storage event may include a key originally chosen by an uploader.
+
+10
+00:00:59.340 --> 00:01:04.140
+A webhook may be replayed or forged if signature checks and timestamps are missing.
+
+11
+00:01:04.240 --> 00:01:08.720
+A scheduled job may process stale or unexpected state.
+
+12
+00:01:08.820 --> 00:01:15.620
+Managed services can transport events reliably, but they do not automatically make every field safe for business logic.
+
+13
+00:01:15.900 --> 00:01:30.220
+Trust boundaries exist between clients, API gateways, functions, queues, object stores, databases, secret stores, identity systems, third-party services, logs, administrators, and CI/CD systems.
+
+14
+00:01:30.320 --> 00:01:43.120
+Public functions, authenticated user functions, internal service functions, scheduled functions, administrative functions, and deployment-time functions should not be reviewed as if they have the same risk.
+
+15
+00:01:43.220 --> 00:01:49.220
+Each one has a different trigger, caller, data shape, identity, and failure pattern.
+
+16
+00:01:49.500 --> 00:01:56.460
+A useful review question is simple: who can cause this function to run, and what can the function do when it runs?
+
+17
+00:01:56.560 --> 00:02:08.720
+From there, define which resources it may access, which actions it may perform, what data it may trust, and what happens when the event is malformed, duplicated, delayed, or replayed.
+
+18
+00:02:08.820 --> 00:02:13.940
+Serverless systems should be reviewed as workflows, not as isolated handler snippets.

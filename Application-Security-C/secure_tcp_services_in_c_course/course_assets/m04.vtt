@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.300
+TCP gives the application a byte stream.
+
+2
+00:00:03.400 --> 00:00:09.960
+It does not preserve application-level messages, records, commands, or objects.
+
+3
+00:00:10.060 --> 00:00:14.780
+A sender may write one logical message and the receiver may read it in pieces.
+
+4
+00:00:14.880 --> 00:00:20.400
+A receiver may also read bytes from multiple logical messages in one operation.
+
+5
+00:00:20.500 --> 00:00:23.860
+The service must define its own framing before it can parse safely.
+
+6
+00:00:24.140 --> 00:00:31.260
+Framing can use delimiters, fixed headers, length prefixes, structured records, or another documented contract.
+
+7
+00:00:31.360 --> 00:00:38.640
+The important requirement is that the parser knows where one message ends before it treats the content as complete.
+
+8
+00:00:38.740 --> 00:00:45.700
+A parser that assumes one read equals one message is relying on behavior TCP does not provide.
+
+9
+00:00:45.980 --> 00:00:51.180
+Partial reads and partial writes should be ordinary cases in the design.
+
+10
+00:00:51.280 --> 00:00:56.560
+Read logic needs to accumulate enough bytes for the next frame without exceeding buffer limits.
+
+11
+00:00:56.660 --> 00:01:02.340
+Write logic needs to handle the possibility that only part of a response was accepted by the network stack.
+
+12
+00:01:02.440 --> 00:01:05.480
+Both directions need state that can resume safely.
+
+13
+00:01:05.760 --> 00:01:08.080
+Maximum sizes are part of the protocol.
+
+14
+00:01:08.180 --> 00:01:14.980
+A length prefix without a maximum can turn a simple parser into an unbounded allocation request.
+
+15
+00:01:15.080 --> 00:01:19.160
+A delimiter without a maximum can leave the service buffering indefinitely.
+
+16
+00:01:19.260 --> 00:01:30.220
+The service should define limits for line length, frame length, field length, header size, body size, queued output, and total per-connection memory where applicable.
+
+17
+00:01:30.500 --> 00:01:34.340
+Boundary validation should happen before deeper processing.
+
+18
+00:01:34.440 --> 00:01:37.800
+Delimiters should be accepted only in the intended context.
+
+19
+00:01:37.900 --> 00:01:45.020
+Length prefixes should be converted carefully, checked against minimum and maximum sizes, and validated against the available buffer.
+
+20
+00:01:45.120 --> 00:01:50.960
+A frame that violates the contract should be rejected cleanly without carrying partial assumptions forward.
+
+21
+00:01:51.240 --> 00:01:55.960
+The protocol contract should be written well enough that implementation and tests can follow it.
+
+22
+00:01:56.060 --> 00:02:08.540
+Reviewers should be able to compare parser assumptions to the contract: how messages are framed, what sizes are allowed, what happens when a frame is incomplete, and how malformed input is rejected.

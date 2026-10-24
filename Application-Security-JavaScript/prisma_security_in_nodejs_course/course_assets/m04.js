@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Query Safety and Runtime Input Validation",
+  "graphicAlt": "A small business request passes server validation and maps to known fields and options in a controlled Prisma operation.",
+  "narration": "Prisma Client helps avoid manual SQL construction for ordinary model operations, but a running Node.js application still receives untyped runtime data. Request bodies, query strings, route parameters, webhook payloads, and queue messages arrive as data from outside the TypeScript type system. A public API should not let callers submit arbitrary nested Prisma query objects and then pass those objects into where, data, orderBy, include, select, pagination, filtering, or relation operations.\n\nValidation should be tied to business meaning. If an endpoint supports a status filter, define the allowed statuses. If it supports sorting, map user-facing sort choices to known fields and directions. If it supports pagination, validate page size and offsets. If it supports date ranges, enforce format and range rules. Server-side validation is required; client-side validation is only a usability aid. Validation should cover fields, types, lengths, ranges, enum values, date ranges, pagination values, supported filters, and relation behavior.\n\nThe safer pattern is to accept a small business-level request and map it to a controlled Prisma query. That mapping separates user-provided values from application-controlled query structure. Validation supports security, but it does not replace authorization. A valid record ID still needs an object-level access check. A valid tenant identifier should not be trusted merely because the client supplied it. Query safety means the application controls the shape, validates the values, and enforces permission before returning or changing data.",
+  "narrationPoints": [
+    "Request bodies, query strings, route parameters, webhook payloads, and queue messages arrive as data from outside the TypeScript type system.",
+    "Server-side validation is required; client-side validation is only a usability aid.",
+    "Query safety means the application controls the shape, validates the values, and enforces permission before returning or changing data.",
+    "Validation supports security, but it does not replace authorization.",
+    "A public API should not let callers submit arbitrary nested Prisma query objects and then pass those objects into where, data, orderBy, include, select, pagination, filtering, or relation operations.",
+    "Validation should cover fields, types, lengths, ranges, enum values, date ranges, pagination values, supported filters, and relation behavior."
+  ]
+};

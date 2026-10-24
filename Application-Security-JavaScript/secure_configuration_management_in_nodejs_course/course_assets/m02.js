@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Configuration Sources and Trust Boundaries",
+  "graphicAlt": "Multiple configuration sources pass ownership and change-access review before reaching runtime values.",
+  "narration": "A secure review starts by asking where each value came from. Configuration may come from process.env, .env files, JSON files, YAML files, command-line arguments, container environment variables, orchestrator settings, cloud parameters, CI/CD variables, feature flag services, secret managers, config maps, databases, or remote services. Some values are application-controlled, some are deployment-controlled, and some may be externally influenced or copied from a stale environment.\n\nConfiguration crosses trust boundaries between developers, CI/CD systems, cloud consoles, containers, orchestrators, operators, support tools, and third-party services. A variable in process.env might have been set locally, inherited from a shell, injected by a platform, supplied by CI, or copied during an emergency. It should not automatically be treated as safe simply because the application can read it. Security-critical values need clear ownership and review.\n\nConfiguration ownership should answer practical questions: who can read this value, who can change it, who approves changes, who knows what it affects, and who responds when it is wrong. Production configuration should be reviewed as part of the production system rather than treated as an invisible runtime detail. If a setting can weaken authentication, expose data, change access control, or disable protections, it deserves the same seriousness as code that does those things.",
+  "narrationPoints": [
+    "Configuration may come from process.env, .env files, JSON files, YAML files, command-line arguments, container environment variables, orchestrator settings, cloud parameters, CI/CD variables, feature flag services, secret managers, config maps, databases, or remote services.",
+    "Configuration crosses trust boundaries between developers, CI/CD systems, cloud consoles, containers, orchestrators, operators, support tools, and third-party services.",
+    "Configuration ownership should answer practical questions: who can read this value, who can change it, who approves changes, who knows what it affects, and who responds when it is wrong.",
+    "Production configuration should be reviewed as part of the production system rather than treated as an invisible runtime detail.",
+    "Security-critical values need clear ownership and review.",
+    "If a setting can weaken authentication, expose data, change access control, or disable protections, it deserves the same seriousness as code that does those things."
+  ]
+};

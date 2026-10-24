@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.500
+Bash SSH automation often runs from CI/CD systems, ephemeral runners, self-hosted runners, deployment containers, bastions, jump hosts, or administrative workstations.
+
+2
+00:00:12.600 --> 00:00:14.680
+Each environment changes the risk picture.
+
+3
+00:00:14.780 --> 00:00:21.340
+The same SSH command can be low risk in one context and too broad in another.
+
+4
+00:00:21.620 --> 00:00:23.940
+CI/CD keys need careful scoping.
+
+5
+00:00:24.040 --> 00:00:31.640
+A key available to every job, branch, pull request, or workflow can grant access in places that do not need it.
+
+6
+00:00:31.740 --> 00:00:38.060
+Secure design scopes credentials to specific jobs, roles, environments, and targets.
+
+7
+00:00:38.160 --> 00:00:42.480
+Production deployment should require a higher-trust context than ordinary test automation.
+
+8
+00:00:42.760 --> 00:00:47.320
+Hosted, self-hosted, and ephemeral runners have different concerns.
+
+9
+00:00:47.420 --> 00:00:51.980
+A self-hosted runner may retain workspace state or local configuration.
+
+10
+00:00:52.080 --> 00:00:57.040
+An ephemeral runner may need managed known-hosts provisioning and secret injection.
+
+11
+00:00:57.140 --> 00:01:02.900
+A deployment container may need a minimal environment that contains only the keys and tools required for that job.
+
+12
+00:01:03.180 --> 00:01:10.620
+Bastions and jump hosts can improve control because they centralize access paths and monitoring.
+
+13
+00:01:10.720 --> 00:01:13.200
+They also become critical trust points.
+
+14
+00:01:13.300 --> 00:01:22.900
+Access to a bastion, its logs, its authorized keys, and its forwarding rules should be reviewed because many automation paths may depend on it.
+
+15
+00:01:23.180 --> 00:01:25.660
+Avoid one credential that works everywhere.
+
+16
+00:01:25.760 --> 00:01:31.280
+Broad credentials are convenient until they need to be rotated, investigated, or revoked.
+
+17
+00:01:31.380 --> 00:01:39.380
+Narrow credentials create more setup work, but they make it easier to enforce environment boundaries and understand which workflow has access to which target.
+
+18
+00:01:39.660 --> 00:01:40.780
+Cleanup matters.
+
+19
+00:01:40.880 --> 00:01:49.520
+Workspaces, temporary key material, agent state, known-hosts files, and deployment artifacts should not linger longer than needed.
+
+20
+00:01:49.620 --> 00:01:55.780
+Secure SSH automation includes the runner or bastion environment, not only the ssh command line.

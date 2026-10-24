@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Channel Ownership, Permissions, and Exposure",
+  "graphicAlt": "Endpoint ownership spans creation, permissions, inheritance and deliberate stale-state recovery.",
+  "narration": "Every IPC endpoint needs ownership. Some component creates it, some identity owns it, some lifecycle governs it, and some cleanup rule removes or releases it. If those responsibilities are unclear, startup, shutdown, recovery, and permission review become much harder.\n\nNamed endpoints deserve special care. Socket paths, pipe names, shared memory names, queue names, and service handles can become access points into the application. Their names, locations, permissions, and cleanup rules determine who can discover or use them. A name that is convenient for debugging may be too exposed for production.\n\nAccess can be shaped by filesystem permissions, directory placement, service accounts, inherited settings, platform defaults, and deployment scripts. The code and deployment model should agree on who can connect and who cannot. If a service endpoint is meant only for a companion process, the storage location and permissions should reinforce that intent.\n\nDescriptor and handle inheritance can expose channels unintentionally. A child process may receive access to an IPC endpoint because the parent did not control what it inherited. That can make later behavior difficult to reason about, especially when helpers run with different roles or process lifetimes.\n\nStale endpoint files, abandoned shared memory regions, or orphaned queues can confuse recovery. A service restart should know whether it is seeing a valid existing resource, a stale resource to clean up, or a sign that another instance is still running. Endpoint exposure is not just a security topic; it is part of the application's reliability model.",
+  "narrationPoints": [
+    "If those responsibilities are unclear, startup, shutdown, recovery, and permission review become much harder.",
+    "Their names, locations, permissions, and cleanup rules determine who can discover or use them.",
+    "If a service endpoint is meant only for a companion process, the storage location and permissions should reinforce that intent.",
+    "A child process may receive access to an IPC endpoint because the parent did not control what it inherited.",
+    "A service restart should know whether it is seeing a valid existing resource, a stale resource to clean up, or a sign that another instance is still running."
+  ]
+};

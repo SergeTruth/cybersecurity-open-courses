@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Least privilege turns sandboxing from a process layout into an enforceable policy.
+
+2
+00:00:05.080 --> 00:00:12.440
+Start with the smallest set of permissions the component needs, then add access only when a feature has a documented requirement.
+
+3
+00:00:12.540 --> 00:00:20.220
+Each permission should have an owner, a reason, and tests that show what happens when access is allowed or denied.
+
+4
+00:00:20.320 --> 00:00:27.520
+A permission request that cannot be explained should not be treated as routine plumbing during formal code review.
+
+5
+00:00:27.800 --> 00:00:32.120
+Operating systems provide different sandbox and containment primitives.
+
+6
+00:00:32.220 --> 00:00:50.140
+Depending on platform and product requirements, teams may use reduced permissions, restricted tokens, user or session separation, application containers, entitlements, sandbox profiles, job controls, namespaces, syscall filtering concepts, or managed platform frameworks.
+
+7
+00:00:50.240 --> 00:00:56.160
+The details vary, so C++ applications should follow approved platform guidance and organization policy.
+
+8
+00:00:56.260 --> 00:01:03.780
+Treat those mechanisms as policy tools, not decorative settings: they should express the exact resource model the component is supposed to have.
+
+9
+00:01:04.060 --> 00:01:08.460
+Deny-by-default thinking is useful even when the platform primitives differ.
+
+10
+00:01:08.560 --> 00:01:17.120
+The worker should not receive broad filesystem, network, device, UI, environment, or service access just because the full application has it.
+
+11
+00:01:17.220 --> 00:01:23.060
+Permissions should be added for the worker's job, not inherited from the most capable component in the product.
+
+12
+00:01:23.340 --> 00:01:26.300
+Policy review should happen whenever features change.
+
+13
+00:01:26.400 --> 00:01:34.960
+A new import format, plugin model, device integration, update path, or telemetry feature may require new access.
+
+14
+00:01:35.060 --> 00:01:38.420
+That does not make the access wrong, but it should be explicit.
+
+15
+00:01:38.520 --> 00:01:45.880
+A sandbox policy that nobody owns tends to grow quietly until it no longer expresses the original boundary.
+
+16
+00:01:45.980 --> 00:01:52.140
+Version policy changes with the feature, and keep tests for both allowed and denied access.
+
+17
+00:01:52.240 --> 00:01:58.000
+This gives reviewers a way to distinguish intentional capability from accidental permission growth.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.500
+Serverless functions commonly receive configuration through environment variables, deployment settings, secret references, mounted files, or platform bindings.
+
+2
+00:00:10.600 --> 00:00:16.840
+That convenience is useful, but easy injection is not the same as safe lifecycle management.
+
+3
+00:00:16.940 --> 00:00:30.860
+Secrets include database credentials, API keys, OAuth client secrets, webhook signing secrets, JWT signing keys, encryption keys, cloud credentials, service tokens, and private keys.
+
+4
+00:00:30.960 --> 00:00:38.880
+Each secret needs an owner, a scope, an access policy, a rotation path, and redaction behavior.
+
+5
+00:00:39.160 --> 00:00:50.280
+Do not hardcode production secrets in source code, committed .env files, frontend bundles, deployment packages, build artifacts, screenshots, tickets, logs, or public documentation.
+
+6
+00:00:50.380 --> 00:00:58.140
+Use approved secret managers, managed identity patterns, protected deployment variables, or platform secret mechanisms.
+
+7
+00:00:58.240 --> 00:01:04.640
+Separate development, staging, production, preview, and CI/CD configuration.
+
+8
+00:01:04.740 --> 00:01:10.660
+A preview environment should not automatically receive production authority because it was convenient during deployment.
+
+9
+00:01:10.940 --> 00:01:16.140
+Environment variables are a delivery mechanism, not a complete secrets-management system.
+
+10
+00:01:16.240 --> 00:01:27.520
+They can place values where the function can read them, but they do not by themselves solve storage protection, access control, rotation, auditability, or leakage through logs and crash output.
+
+11
+00:01:27.620 --> 00:01:41.060
+A function platform may encrypt values at rest and restrict who can view them, but the application can still print process.env, include a token in an error response, or pass a secret to an untrusted downstream service.
+
+12
+00:01:41.340 --> 00:01:49.580
+Validate required configuration during cold start or initialization and fail safely when critical settings are missing or unsafe.
+
+13
+00:01:49.680 --> 00:01:54.320
+That failure should help operators fix the deployment without exposing the secret value.
+
+14
+00:01:54.420 --> 00:02:03.620
+Avoid logging authorization headers, cookies, connection strings, private URLs, full environment dumps, tokens, or sensitive event payloads.
+
+15
+00:02:03.720 --> 00:02:08.760
+Good secret handling combines platform controls with disciplined application behavior.

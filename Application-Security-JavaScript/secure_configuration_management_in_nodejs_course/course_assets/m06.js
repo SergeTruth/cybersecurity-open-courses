@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secrets, Sensitive Configuration, and Redaction",
+  "graphicAlt": "Classified values use appropriate delivery while diagnostics pass through redaction before operational evidence is retained.",
+  "narration": "Developers often mix configuration and secrets because both are values the app needs. The handling requirements are different. Secrets include database passwords, API keys, OAuth client secrets, JWT signing keys, session secrets, webhook secrets, cloud credentials, private keys, and npm tokens. Some configuration is not secret but still sensitive, such as internal endpoints, tenant IDs, feature flags, administrative email lists, security mode settings, and infrastructure names.\n\nDo not store production secrets in source code, committed .env files, frontend bundles, logs, tickets, screenshots, build artifacts, image layers, or public documentation. Use secret managers, protected CI/CD variables, orchestrator secrets, cloud secret services, or approved runtime injection mechanisms where appropriate. Environment variables may deliver secrets, but they do not automatically solve access control, rotation, auditing, or exposure through diagnostics.\n\nRedaction should be deliberate. Startup logs, error reports, health checks, debug pages, support bundles, telemetry, and incident notes should not contain secrets or full sensitive configuration. Operators need enough context to diagnose problems without turning logs into a secondary secret store. If configuration is exposed, rotate and revoke secrets where needed, review access logs, and improve the workflow that allowed the exposure.",
+  "narrationPoints": [
+    "Secrets include database passwords, API keys, OAuth client secrets, JWT signing keys, session secrets, webhook secrets, cloud credentials, private keys, and npm tokens.",
+    "Use secret managers, protected CI/CD variables, orchestrator secrets, cloud secret services, or approved runtime injection mechanisms where appropriate.",
+    "If configuration is exposed, rotate and revoke secrets where needed, review access logs, and improve the workflow that allowed the exposure.",
+    "Startup logs, error reports, health checks, debug pages, support bundles, telemetry, and incident notes should not contain secrets or full sensitive configuration.",
+    "Some configuration is not secret but still sensitive, such as internal endpoints, tenant IDs, feature flags, administrative email lists, security mode settings, and infrastructure names.",
+    "Developers often mix configuration and secrets because both are values the app needs."
+  ]
+};

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.380
+Directory traversal, cleanup, backup, log rotation, import, export, and recursive operations all need a symbolic-link policy.
+
+2
+00:00:11.480 --> 00:00:18.920
+The code should define whether links are followed, ignored, reported, copied as link objects, or restricted by directory policy.
+
+3
+00:00:19.200 --> 00:00:24.560
+Recursive operations can easily cross the intended boundary if link behavior is unclear.
+
+4
+00:00:24.660 --> 00:00:29.620
+A cleanup routine meant to remove files under one tree should preserve that tree's boundary.
+
+5
+00:00:29.720 --> 00:00:34.280
+A backup routine should know whether it captures link objects or the objects they reference.
+
+6
+00:00:34.380 --> 00:00:38.220
+A log rotation job should know what kind of entry it is rotating.
+
+7
+00:00:38.500 --> 00:00:42.340
+The policy should be documented before processing file trees.
+
+8
+00:00:42.440 --> 00:00:49.800
+If a tool follows links in one mode but not another, tests and usage documentation should make that distinction clear.
+
+9
+00:00:49.900 --> 00:00:54.060
+Hidden traversal behavior becomes hard to review and hard to operate safely.
+
+10
+00:00:54.340 --> 00:00:59.300
+Cleanup deserves special attention because it modifies or removes filesystem entries.
+
+11
+00:00:59.400 --> 00:01:06.440
+The program should know whether it is deleting a link object, a file object, or a directory entry inside a trusted tree.
+
+12
+00:01:06.540 --> 00:01:11.180
+It should avoid relying on ambiguous path state during recursive removal.
+
+13
+00:01:11.460 --> 00:01:21.780
+Reviewers should trace traversal decisions from input path to directory entry handling, recursive descent, final operation, error handling, and cleanup.
+
+14
+00:01:21.880 --> 00:01:25.800
+That makes it clear whether the operation remains inside the intended scope.

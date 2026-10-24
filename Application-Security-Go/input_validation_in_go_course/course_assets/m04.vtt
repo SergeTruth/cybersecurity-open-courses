@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Go's encoding/json package makes it straightforward to decode request bodies into structs.
+
+2
+00:00:05.320 --> 00:00:13.080
+json.Unmarshal and json.Decoder can map object fields using struct tags and basic type information.
+
+3
+00:00:13.180 --> 00:00:18.300
+That mapping is useful, but a successfully decoded struct is not automatically safe.
+
+4
+00:00:18.400 --> 00:00:28.720
+The JSON may be missing required values, contain zero values that need special handling, include unknown fields, or satisfy the struct shape while violating business rules.
+
+5
+00:00:29.000 --> 00:00:31.880
+Unknown fields deserve deliberate treatment.
+
+6
+00:00:31.980 --> 00:00:37.580
+By default, common decoding patterns may ignore fields that are not present in the destination struct.
+
+7
+00:00:37.680 --> 00:00:45.360
+That behavior can be convenient for compatibility, but it can also hide client mistakes, version drift, or unexpected input.
+
+8
+00:00:45.460 --> 00:00:56.740
+DisallowUnknownFields can be useful for strict API contracts, especially where accepting silent extra fields could lead callers to believe the server honored a value it actually ignored.
+
+9
+00:00:57.020 --> 00:01:00.300
+Request body size should be limited before decoding.
+
+10
+00:01:00.400 --> 00:01:08.640
+Without limits, a client can send an oversized body that consumes memory, CPU, or time before validation even begins.
+
+11
+00:01:08.740 --> 00:01:15.540
+Limit readers, content length checks, and framework-level controls help keep invalid input from becoming a resource problem.
+
+12
+00:01:15.640 --> 00:01:23.320
+Decoding should also handle malformed JSON cleanly and avoid logging complete raw bodies that may contain secrets or sensitive data.
+
+13
+00:01:23.600 --> 00:01:28.640
+Custom unmarshalling can support specialized parsing, but it should be used carefully.
+
+14
+00:01:28.740 --> 00:01:35.540
+It can make domain-specific conversion convenient, yet it can also blur the line between transport decoding and domain validation.
+
+15
+00:01:35.640 --> 00:01:47.560
+A common pattern is to decode into a request struct, validate required fields and formats, normalize where appropriate, and then map into domain types or service commands.
+
+16
+00:01:47.660 --> 00:01:50.060
+The decode step proves shape.
+
+17
+00:01:50.160 --> 00:01:52.800
+Validation proves acceptability.

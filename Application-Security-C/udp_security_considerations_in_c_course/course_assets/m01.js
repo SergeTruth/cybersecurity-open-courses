@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "UDP as a Security Boundary",
+  "graphicAlt": "Untrusted datagram objects from mixed peers cross validate-and-authorize gate before state-changing operation.",
+  "narration": "UDP is often chosen because it is simple, fast, and message-oriented. A sender can transmit a datagram without setting up a long-lived connection, and a receiver can process each datagram as a separate unit. That simplicity is useful, but it also means the application has to provide many of the safety properties that a higher-level protocol might otherwise define.\n\nA UDP listener may receive traffic from peers that are unauthenticated, unexpected, misconfigured, outdated, or simply noisy. The service may see malformed datagrams, duplicated datagrams, delayed datagrams, reordered datagrams, oversized input, or messages that belong to a different component. The code should treat these as normal possibilities.\n\nLocal networks, private networks, and discovery environments should not be treated as automatically safe. A service may be reachable by other hosts, containers, test tools, monitoring systems, legacy clients, or devices that do not share the same trust assumptions. Internal reachability is not the same as authorization.\n\nSecure UDP starts with clear assumptions. Who is allowed to send messages? Which datagram types are accepted? What source information is used only for routing, and what information is used for trust? Which actions are allowed before stronger authentication or protocol validation succeeds? Those assumptions should be explicit.\n\nUDP defects can cause data exposure, unintended actions, corrupted state, service instability, or broken separation between components. Defensive UDP code validates each datagram, constrains endpoint exposure, limits work and response size, handles loss and repetition, and treats availability as part of the security design.",
+  "narrationPoints": [
+    "UDP is often chosen because it is simple, fast, and message-oriented.",
+    "The code should treat these as normal possibilities.",
+    "Local networks, private networks, and discovery environments should not be treated as automatically safe.",
+    "Which actions are allowed before stronger authentication or protocol validation succeeds.",
+    "Defensive UDP code validates each datagram, constrains endpoint exposure, limits work and response size, handles loss and repetition."
+  ]
+};

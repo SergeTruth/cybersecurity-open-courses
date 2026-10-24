@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.140
+A backup script that fails silently is dangerous because everyone may assume protection exists when it does not.
+
+2
+00:00:07.240 --> 00:00:13.720
+Scheduled backup jobs should have an owner, a known schedule, and clear expectations for success and failure.
+
+3
+00:00:13.820 --> 00:00:20.460
+If a job can run longer than its interval, use an overlap control such as a lock or platform scheduling feature.
+
+4
+00:00:20.560 --> 00:00:28.000
+Two overlapping backups may compete for resources, produce confusing outputs, or interfere with retention logic.
+
+5
+00:00:28.280 --> 00:00:34.440
+Logs should explain what was attempted, what succeeded, what failed, and what requires attention.
+
+6
+00:00:34.540 --> 00:00:43.580
+They should identify the job, the safe-level source scope, the destination reference, the time, the result, and relevant verification details.
+
+7
+00:00:43.680 --> 00:00:52.400
+Logs should not expose secrets, tokens, private keys, sensitive file contents, or full command traces that reveal protected data.
+
+8
+00:00:52.500 --> 00:00:57.380
+Good logs support operations without becoming another sensitive data repository.
+
+9
+00:00:57.660 --> 00:01:09.980
+Monitoring should cover failed runs, missed schedules, destination errors, expired credentials, storage capacity issues, restore-test failures, and unusual backup sizes.
+
+10
+00:01:10.080 --> 00:01:16.080
+An unusually small backup may indicate missing data, failed collection, or an incomplete run.
+
+11
+00:01:16.180 --> 00:01:22.740
+An unusually large backup may indicate scope drift, unexpected data growth, or misconfiguration.
+
+12
+00:01:22.840 --> 00:01:28.360
+Alerts should route to people who can act, with enough context to triage the problem safely.
+
+13
+00:01:28.640 --> 00:01:34.720
+Backup status should be reviewed as an operational control, not ignored until an emergency.
+
+14
+00:01:34.820 --> 00:01:42.740
+A dashboard, ticket, report, or periodic review can show whether backups are current, verified, and restorable.
+
+15
+00:01:42.840 --> 00:01:47.240
+Repeated warnings should lead to remediation rather than becoming background noise.
+
+16
+00:01:47.340 --> 00:01:55.100
+Secure backup scripting is only partly about the script; it is also about the operational loop that notices when protection is no longer working.

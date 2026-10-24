@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Bash SSH automation frequently transfers files.
+
+2
+00:00:04.440 --> 00:00:12.760
+A script may place artifacts, fetch logs, copy configuration, stage updates, or collect diagnostic bundles.
+
+3
+00:00:12.860 --> 00:00:15.660
+File transfer is not just movement of bytes.
+
+4
+00:00:15.760 --> 00:00:22.960
+It is a state-changing operation that can affect permissions, ownership, availability, and later remote behavior.
+
+5
+00:00:23.240 --> 00:00:27.720
+Source and destination paths should be validated before transfer.
+
+6
+00:00:27.820 --> 00:00:36.060
+A script should know what it is allowed to read, where it is allowed to write, and what should happen if a path is missing or already exists.
+
+7
+00:00:36.160 --> 00:00:41.440
+Avoid assumptions that depend on the current working directory unless that directory is set deliberately.
+
+8
+00:00:41.720 --> 00:00:45.480
+Important changes should be staged before replacement where practical.
+
+9
+00:00:45.580 --> 00:00:52.780
+Staging allows checks before a final handoff, reduces the chance of partial updates, and gives operators clearer failure points.
+
+10
+00:00:52.880 --> 00:00:58.800
+It also supports safer rollback or cleanup behavior when a transfer does not complete.
+
+11
+00:00:59.080 --> 00:01:01.560
+Ownership and permissions matter.
+
+12
+00:01:01.660 --> 00:01:06.540
+A transferred file should not become broadly readable or executable by accident.
+
+13
+00:01:06.640 --> 00:01:15.440
+Sensitive files should not be exposed through temporary locations, build workspaces, logs, or overly broad remote permissions.
+
+14
+00:01:15.540 --> 00:01:19.620
+The script should handle confidentiality as part of the transfer design.
+
+15
+00:01:19.900 --> 00:01:21.900
+Avoid accidental overwrites.
+
+16
+00:01:22.000 --> 00:01:26.640
+If replacement is intended, make it deliberate and logged at a safe level.
+
+17
+00:01:26.740 --> 00:01:31.380
+If replacement is not intended, the script should detect that condition and stop clearly.
+
+18
+00:01:31.480 --> 00:01:36.200
+Silent overwrites are hard to troubleshoot and can damage operational confidence.
+
+19
+00:01:36.480 --> 00:01:38.880
+Transfer outcomes should be checked.
+
+20
+00:01:38.980 --> 00:01:45.140
+Operators need to know whether the transfer completed, which target was involved, and what high-level action occurred.
+
+21
+00:01:45.240 --> 00:01:52.600
+Logs should avoid secrets and sensitive contents while still providing enough evidence for review and incident response.

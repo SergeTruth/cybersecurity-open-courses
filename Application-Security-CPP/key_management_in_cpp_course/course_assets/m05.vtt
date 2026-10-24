@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.820
+Least privilege for keys means each process, service identity, operator role, and automation account receives only the access required for its job and only in the appropriate context.
+
+2
+00:00:13.100 --> 00:00:19.740
+A C++ service that needs to decrypt one class of records should not automatically receive every production key.
+
+3
+00:00:19.840 --> 00:00:24.000
+A signing service should not receive unrelated encryption keys.
+
+4
+00:00:24.100 --> 00:00:28.340
+A staging workload should not be able to read production secrets.
+
+5
+00:00:28.620 --> 00:00:35.580
+Separate the ability to use a key from the ability to view raw key material where the platform supports that distinction.
+
+6
+00:00:35.680 --> 00:00:43.040
+Many designs can let an application request an operation through a key handle or service without exposing the key bytes to the process.
+
+7
+00:00:43.320 --> 00:00:51.080
+Access should be scoped by service, environment, purpose, and sometimes tenant or data category.
+
+8
+00:00:51.180 --> 00:00:58.220
+Narrow scopes improve containment, make logs more meaningful, and help incident response determine what could have been affected.
+
+9
+00:00:58.500 --> 00:01:01.860
+Emergency and operator access need policy too.
+
+10
+00:01:01.960 --> 00:01:07.640
+Break-glass permissions should be rare, logged, reviewed, and removed when the emergency ends.
+
+11
+00:01:07.740 --> 00:01:12.140
+Convenience access that remains after troubleshooting becomes a long-term weakness.
+
+12
+00:01:12.420 --> 00:01:15.700
+Access reviews should remove unused permissions.
+
+13
+00:01:15.800 --> 00:01:19.640
+Keys accumulate consumers over time as systems evolve.
+
+14
+00:01:19.740 --> 00:01:26.860
+Periodic review keeps old jobs, retired services, test accounts, and broad roles from remaining trusted indefinitely.
+
+15
+00:01:27.140 --> 00:01:37.060
+During code review, ask whether the process truly needs this key, whether it needs raw material or only a handle, and whether a narrower identity would serve the same purpose.
+
+16
+00:01:37.340 --> 00:01:41.020
+Least privilege also improves blast-radius analysis.
+
+17
+00:01:41.120 --> 00:01:47.040
+If a service has a narrow key grant, an incident involving that service is easier to scope and contain.
+
+18
+00:01:47.320 --> 00:01:55.320
+Access policy should be visible in deployment configuration, infrastructure code, or backend policy rather than living only in informal operations notes.

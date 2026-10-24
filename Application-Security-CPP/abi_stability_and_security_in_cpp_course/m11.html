@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | ABI Stability and Security in C++</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="abi_stability_and_security_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;D&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;D&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why does ABI stability matter for C++ security and reliability?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>ABI stability prevents layout mismatches, unsafe cleanup, crashes, and risky upgrades.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>ABI stability guarantees every source-level behavior remains unchanged across releases.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>ABI stability matters only when applications and libraries use identical source files.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>ABI stability replaces integration tests because exported symbols prove runtime correctness.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why is source compatibility not the same as binary compatibility?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Source compatibility proves every previously compiled plugin can load without negotiation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Binary compatibility concerns headers, while source compatibility concerns object layouts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Source and binary compatibility are equivalent whenever function names stay unchanged.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>New source can compile while old binaries still depend on changed layouts or calls.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Which kinds of details can belong to an ABI?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Only names declared with extern C participate in a C++ binary interface.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Calling conventions, symbols, layouts, runtimes, exceptions, RTTI, and allocators affect an ABI.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>An ABI contains source formatting and comments but excludes runtime-library choices.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Object layout is purely private even when public classes cross the binary boundary.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why can exposing C++ classes, templates, inline functions, or STL types make ABI stability harder?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Templates stabilize an ABI because every caller instantiates exactly the same machine code.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Standard-library types have one portable binary layout across compilers and build modes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Those features can expose layout, compiler, inline-behavior, and library-version assumptions to binary callers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Inline functions remain entirely inside the library and never affect compiled callers.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. How do opaque handles, C-style facades, PIMPL, and versioned structs reduce ABI risk?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>They make allocator ownership unnecessary because opaque objects can be freed anywhere.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>They permit private fields to change while requiring every caller to recompile immediately.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>They hide layout and give binary contracts an explicit, versioned evolution path.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>They eliminate version negotiation by exposing the complete implementation through the handle.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why must allocation and deallocation rules be explicit across binary boundaries?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>The caller should always use its default delete operator for library-created objects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Allocator differences affect performance but cannot affect correctness across binary boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A release function is unnecessary when the object type is hidden behind an opaque handle.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Each component may use different runtimes, so creation and release must stay paired.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why may exceptions need translation at ABI boundaries?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>The boundary catches exceptions and returns a stable status representation across runtimes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>All C++ runtimes use an identical exception ABI, so translation only loses diagnostics.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>A C callback can safely receive arbitrary C++ exceptions if it returns an integer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Exception translation should happen in the caller after the exception crosses the boundary.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do symbol visibility and dependency control matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Exporting every internal symbol gives callers more stable choices across library releases.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Controlled exports and dependencies limit accidental coupling and unreviewed ABI changes during releases.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Private dependency upgrades cannot alter an ABI when public headers remain textually identical.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Symbol inspection is unnecessary once the library compiles with hidden visibility enabled.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why do plugin systems need version, lifecycle, ownership, and error contracts?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>A matching filename is sufficient evidence that a plugin implements the host contract.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Independent host and plugin builds need negotiated versions, capabilities, ownership, and shutdown.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Plugins can borrow host objects indefinitely because unloading preserves the objects&#x27; storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Capability negotiation is redundant when the plugin exports the expected initialization symbol.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. How do ABI baselines, binary checks, compatibility tests, and review gates reduce release risk?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Baselines and compatibility tests detect unintended binary changes before release approval.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>A symbol baseline proves behavioral compatibility without executing old callers against new code.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>ABI checks should run after publication because prerelease binaries have unstable addresses.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Compatibility governance prevents all intentional ABI changes, including approved major-version breaks.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

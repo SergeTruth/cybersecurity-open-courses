@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Secure design starts with choosing the right tool for the workflow.
+
+2
+00:00:03.880 --> 00:00:07.640
+SCP is often used for straightforward file copying.
+
+3
+00:00:07.740 --> 00:00:15.500
+SFTP-style workflows may be preferred when a controlled file-transfer interface is the right operational model.
+
+4
+00:00:15.600 --> 00:00:21.280
+rsync is useful when synchronization, comparison, and efficient incremental transfer matter.
+
+5
+00:00:21.560 --> 00:00:28.680
+A single-file copy, a directory tree sync, a release artifact promotion, and a backup mirror are different jobs.
+
+6
+00:00:28.780 --> 00:00:37.580
+They may have different requirements for metadata preservation, bandwidth efficiency, repeatability, partial-transfer behavior, delete behavior, and recovery.
+
+7
+00:00:37.680 --> 00:00:40.400
+Choosing by habit can hide those differences.
+
+8
+00:00:40.680 --> 00:00:47.320
+rsync is powerful because it can compare source and destination state and transfer only what changed.
+
+9
+00:00:47.420 --> 00:00:50.380
+That is useful, but synchronization is more than copying.
+
+10
+00:00:50.480 --> 00:00:58.560
+It may preserve or change metadata, skip or include files according to rules, and optionally remove data from the destination.
+
+11
+00:00:58.660 --> 00:01:01.540
+Those behaviors need review before production use.
+
+12
+00:01:01.820 --> 00:01:06.540
+SCP can be simpler for a known file or small controlled set of files.
+
+13
+00:01:06.640 --> 00:01:10.240
+Simplicity can be a security advantage when the workflow is truly simple.
+
+14
+00:01:10.340 --> 00:01:18.660
+But even simple copy workflows still need host verification, dedicated identities, path validation, and result checking.
+
+15
+00:01:18.940 --> 00:01:23.260
+The defensive habit is to write down what the transfer must accomplish.
+
+16
+00:01:23.360 --> 00:01:30.160
+Are you copying, synchronizing, preserving attributes, replacing an existing release, or collecting evidence?
+
+17
+00:01:30.260 --> 00:01:38.420
+Once the workflow is clear, choose the simplest safe tool and verify its behavior instead of assuming all transfer commands are interchangeable.

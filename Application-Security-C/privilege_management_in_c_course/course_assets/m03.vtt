@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Least privilege means code should have only the authority needed for the work it is doing now.
+
+2
+00:00:05.320 --> 00:00:09.800
+In a C program, this is an architecture principle, not a slogan.
+
+3
+00:00:09.900 --> 00:00:15.260
+The safest privileged operation is the one that is not part of the general processing path.
+
+4
+00:00:15.360 --> 00:00:24.480
+If most parsing, networking, formatting, business logic, and user-driven behavior can run with ordinary rights, the design should make that the normal case.
+
+5
+00:00:24.760 --> 00:00:28.920
+A common pattern is to separate privileged setup from ordinary processing.
+
+6
+00:00:29.020 --> 00:00:39.180
+The program may need authority to open a protected resource, bind a port, prepare a directory, read a trusted configuration file, or initialize a controlled resource.
+
+7
+00:00:39.280 --> 00:00:46.640
+After that setup, the remaining logic should be designed to run with reduced authority where the platform and application model allow it.
+
+8
+00:00:46.920 --> 00:00:50.760
+Keeping privileged sections small has practical benefits.
+
+9
+00:00:50.860 --> 00:00:57.500
+Smaller sections are easier to review, easier to test, and easier to explain to operations teams.
+
+10
+00:00:57.600 --> 00:01:02.400
+They also make it clearer which inputs must be validated before authority is used.
+
+11
+00:01:02.500 --> 00:01:16.580
+A broad helper function that reads configuration, validates user input, opens files, spawns children, updates state, and logs decisions is difficult to reason about because its authority is hidden in a large surface.
+
+12
+00:01:16.860 --> 00:01:20.860
+Least privilege also applies to files and resources.
+
+13
+00:01:20.960 --> 00:01:26.800
+A program should not need write access to a whole directory tree when it only appends to one controlled file.
+
+14
+00:01:26.900 --> 00:01:31.780
+A service account should not need broad database rights when it only reads a narrow set of records.
+
+15
+00:01:31.880 --> 00:01:37.880
+A child process should not inherit handles or descriptors that have no purpose in the child.
+
+16
+00:01:37.980 --> 00:01:42.140
+The design should remove unnecessary access before code depends on it.
+
+17
+00:01:42.420 --> 00:01:48.740
+For maintainability, draw the boundary in the documentation and in the structure of the code.
+
+18
+00:01:48.840 --> 00:01:51.640
+Name the privileged setup functions clearly.
+
+19
+00:01:51.740 --> 00:01:55.820
+Keep policy checks near the operations they authorize.
+
+20
+00:01:55.920 --> 00:01:59.120
+Add tests that fail when authority is broader than expected.
+
+21
+00:01:59.220 --> 00:02:05.940
+Least privilege works best when future maintainers can see the intended boundary without reconstructing it from scattered side effects.

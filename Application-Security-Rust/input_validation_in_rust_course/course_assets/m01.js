@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Why Input Validation Matters in Rust",
+  "narration": "Rust gives developers strong memory safety guarantees, but memory safety is not the same thing as input safety. A Rust service can avoid entire classes of use-after-free and buffer overflow bugs while still accepting a malformed request, trusting a misleading file path, parsing a bad timestamp, or allowing a value that violates a business rule. The type system is powerful, but it cannot automatically know what every outside value is supposed to mean.\n\nExternal input should be treated as unknown runtime data until the program proves otherwise. That input may arrive through HTTP, JSON, files, environment variables, sockets, command-line arguments, queues, third-party APIs, or an FFI boundary. Rust will help you model data once it is inside your program, but the boundary between outside data and internal domain types still needs explicit parsing, validation, limits, and error handling.\n\nRust types are especially useful when validation converts raw input into stronger domain types. Instead of passing a plain String as an email address, a tenant identifier, or a command name, a program can parse and validate the raw value, then wrap it in a type that represents the accepted meaning. That pattern makes invalid states harder to represent and makes later code easier to review because the trust decision happened earlier.\n\nThe goal is not to distrust Rust. The goal is to use Rust well. Validation is the point where the program moves from bytes, strings, and loosely structured payloads into values that the application is willing to act on. When that boundary is clear, Rust's ownership model, enums, Result values, traits, and type system can help keep unsafe or invalid assumptions from spreading through the rest of the codebase.",
+  "graphicAlt": "Explicit parsing and validation turn runtime input into domain values on top of Rust memory safety.",
+  "narrationPoints": [
+    "Rust gives developers strong memory safety guarantees, but memory safety is not the same thing as input safety.",
+    "External input should be treated as unknown runtime data until the program proves otherwise.",
+    "Rust types are especially useful when validation converts raw input into stronger domain types.",
+    "The goal is not to distrust Rust."
+  ]
+};

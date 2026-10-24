@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.540
+Rust gives developers strong memory safety guarantees, but memory safety is not the same thing as input safety.
+
+2
+00:00:07.640 --> 00:00:21.480
+A Rust service can avoid entire classes of use-after-free and buffer overflow bugs while still accepting a malformed request, trusting a misleading file path, parsing a bad timestamp, or allowing a value that violates a business rule.
+
+3
+00:00:21.580 --> 00:00:27.580
+The type system is powerful, but it cannot automatically know what every outside value is supposed to mean.
+
+4
+00:00:27.860 --> 00:00:33.140
+External input should be treated as unknown runtime data until the program proves otherwise.
+
+5
+00:00:33.240 --> 00:00:44.520
+That input may arrive through HTTP, JSON, files, environment variables, sockets, command-line arguments, queues, third-party APIs, or an FFI boundary.
+
+6
+00:00:44.620 --> 00:00:56.540
+Rust will help you model data once it is inside your program, but the boundary between outside data and internal domain types still needs explicit parsing, validation, limits, and error handling.
+
+7
+00:00:56.820 --> 00:01:02.580
+Rust types are especially useful when validation converts raw input into stronger domain types.
+
+8
+00:01:02.680 --> 00:01:14.040
+Instead of passing a plain String as an email address, a tenant identifier, or a command name, a program can parse and validate the raw value, then wrap it in a type that represents the accepted meaning.
+
+9
+00:01:14.140 --> 00:01:21.660
+That pattern makes invalid states harder to represent and makes later code easier to review because the trust decision happened earlier.
+
+10
+00:01:21.940 --> 00:01:24.260
+The goal is not to distrust Rust.
+
+11
+00:01:24.360 --> 00:01:26.120
+The goal is to use Rust well.
+
+12
+00:01:26.220 --> 00:01:34.060
+Validation is the point where the program moves from bytes, strings, and loosely structured payloads into values that the application is willing to act on.
+
+13
+00:01:34.160 --> 00:01:46.720
+When that boundary is clear, Rust's ownership model, enums, Result values, traits, and type system can help keep unsafe or invalid assumptions from spreading through the rest of the codebase.

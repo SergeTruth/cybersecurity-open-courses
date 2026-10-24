@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Security-sensitive tokens require cryptographically secure randomness.
+
+2
+00:00:06.520 --> 00:00:17.800
+In Node.js, that means using appropriate crypto APIs for random bytes, random integers, UUIDs, or token material instead of familiar JavaScript shortcuts.
+
+3
+00:00:17.900 --> 00:00:31.340
+Math.random is not designed for session IDs, API keys, password reset links, invite links, CSRF tokens, OAuth state, authorization codes, or any value that protects access or workflow approval.
+
+4
+00:00:31.620 --> 00:00:35.460
+Token length should match the threat model and lifetime.
+
+5
+00:00:35.560 --> 00:00:43.080
+A password reset token sent in a link needs enough entropy to resist guessing until it expires and is used.
+
+6
+00:00:43.180 --> 00:00:49.900
+An API key that may live for months needs a larger safety margin and strong operational controls.
+
+7
+00:00:50.000 --> 00:01:00.320
+A six-digit code can be acceptable in some human-entered flows, but only with short lifetime, attempt limits, rate limits, monitoring, and account context.
+
+8
+00:01:00.600 --> 00:01:08.760
+Encoding matters because tokens move through URLs, headers, cookies, databases, emails, logs, and support tools.
+
+9
+00:01:08.860 --> 00:01:14.940
+Hex and base64url are common choices, but the team should understand the transport path.
+
+10
+00:01:15.040 --> 00:01:27.040
+Avoid modulo bias, timestamp-based secrets, predictable seeds, counters, string slicing, and custom token generators that make a value look random without providing a meaningful guessing margin.
+
+11
+00:01:27.320 --> 00:01:30.120
+Token generation is only the first step.
+
+12
+00:01:30.220 --> 00:01:37.580
+The token still needs storage, comparison, expiration, revocation, and logging controls.
+
+13
+00:01:37.680 --> 00:01:47.840
+A strong random value that is stored in plaintext forever, printed in logs, accepted after account disablement, or compared with careless behavior is still a weak token system.
+
+14
+00:01:47.940 --> 00:01:53.780
+Secure generation provides the raw material; the lifecycle turns it into a reliable control.

@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Privileged behavior is strongly influenced by inherited state.
+
+2
+00:00:04.200 --> 00:00:19.960
+A C program may appear to perform a simple file operation, but the result depends on directory ownership, permissions, symbolic links, mount options, current working directory, umask, environment variables, and open descriptors or handles.
+
+3
+00:00:20.060 --> 00:00:24.380
+These inputs are part of the design even when they are not function parameters.
+
+4
+00:00:24.660 --> 00:00:28.660
+Filesystem checks should focus on trusted locations and expected properties.
+
+5
+00:00:28.760 --> 00:00:36.280
+Directory ownership, write permissions, and resource permissions determine who can influence files that privileged code reads or writes.
+
+6
+00:00:36.380 --> 00:00:41.660
+Created files should have intended permissions from the beginning, not rely on cleanup after the fact.
+
+7
+00:00:41.760 --> 00:00:47.520
+The umask and platform defaults should be considered part of the file creation contract.
+
+8
+00:00:47.800 --> 00:00:50.520
+Temporary locations need special care.
+
+9
+00:00:50.620 --> 00:00:58.700
+A privileged program should not assume that a generic temporary directory is suitable for sensitive data, controlled outputs, or coordination files.
+
+10
+00:00:58.800 --> 00:01:05.600
+Use trusted directories, safe creation patterns, restrictive permissions, and predictable cleanup.
+
+11
+00:01:05.700 --> 00:01:11.540
+The point is not clever path handling; it is eliminating ambiguity around who can influence the resource.
+
+12
+00:01:11.820 --> 00:01:15.420
+Environment state can change behavior in surprising ways.
+
+13
+00:01:15.520 --> 00:01:24.080
+Variables may affect library loading, configuration discovery, localization, diagnostics, proxy behavior, temporary paths, and child process execution.
+
+14
+00:01:24.180 --> 00:01:32.580
+A privileged program should decide which inherited environment values are accepted, which are ignored, and which are replaced with known values.
+
+15
+00:01:32.860 --> 00:01:36.380
+Open descriptors or handles also cross privilege boundaries.
+
+16
+00:01:36.480 --> 00:01:45.200
+A process may hold resources that remain accessible even after identity changes, or it may pass resources to children unintentionally.
+
+17
+00:01:45.300 --> 00:01:53.780
+Reviewers should look for descriptor lifecycle, close-on-exec or handle inheritance settings, and cleanup behavior on every error path.
+
+18
+00:01:54.060 --> 00:01:57.020
+Cleanup must respect the same boundaries as creation.
+
+19
+00:01:57.120 --> 00:02:04.720
+Removing, replacing, or changing files under elevated authority should use trusted paths and verified state.
+
+20
+00:02:04.820 --> 00:02:09.460
+Error handling should avoid turning a cleanup routine into a broad privileged action.
+
+21
+00:02:09.560 --> 00:02:14.280
+Safe cleanup is specific, conservative, and observable.

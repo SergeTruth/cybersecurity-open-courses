@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.780
+A library may receive data from files, network responses, plugins, IPC messages, UI input, configuration, or other libraries.
+
+2
+00:00:09.880 --> 00:00:19.240
+Even when the library is not directly exposed to a remote client, boundary data should be treated as untrusted until it is validated against the library contract.
+
+3
+00:00:19.340 --> 00:00:24.860
+Consumers often reuse libraries in contexts the original author did not anticipate.
+
+4
+00:00:25.140 --> 00:00:27.860
+Validation should happen before sensitive use.
+
+5
+00:00:27.960 --> 00:00:40.040
+Lengths, numeric ranges, encodings, required fields, object relationships, and structural assumptions should be checked before allocation, parsing, indexing, or state mutation.
+
+6
+00:00:40.140 --> 00:00:48.780
+Parsers should have resource limits so malformed or oversized input cannot consume unbounded memory, time, or nested structure depth.
+
+7
+00:00:48.880 --> 00:00:54.880
+Validation rules should be documented so callers know what the library accepts and rejects.
+
+8
+00:00:54.980 --> 00:01:00.500
+This is especially important when the same parser is reused in tools, services, and desktop applications.
+
+9
+00:01:00.780 --> 00:01:04.460
+Error handling is part of the API contract.
+
+10
+00:01:04.560 --> 00:01:11.840
+Exceptions, status objects, error codes, and result types can all be valid choices when used consistently.
+
+11
+00:01:11.940 --> 00:01:25.220
+The important thing is that callers can reliably distinguish success, invalid input, unsupported features, resource exhaustion, and internal failure without scraping unstable message text.
+
+12
+00:01:25.320 --> 00:01:31.720
+Consistency matters more than style preference because callers build control flow around failure signals.
+
+13
+00:01:32.000 --> 00:01:34.560
+Failure should preserve invariants.
+
+14
+00:01:34.660 --> 00:01:38.420
+A failed parse should not leave half-mutated global state.
+
+15
+00:01:38.520 --> 00:01:41.640
+A rejected configuration should not partially apply.
+
+16
+00:01:41.740 --> 00:01:48.700
+Cleanup should be predictable, and errors should provide enough information for safe response without exposing sensitive internals.
+
+17
+00:01:48.800 --> 00:01:53.840
+Secure libraries fail in ways that callers can understand, test, and recover from.
+
+18
+00:01:53.940 --> 00:01:58.980
+Negative tests should verify those failure contracts just as carefully as successful cases.
+
+19
+00:01:59.080 --> 00:02:06.920
+Callers should not need to guess whether retry, cleanup, or replacement is required afterward in each supported build mode and binding layer.

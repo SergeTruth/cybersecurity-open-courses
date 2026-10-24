@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.580
+Sandboxing begins with a threat model.
+
+2
+00:00:02.680 --> 00:00:11.400
+Before choosing processes, policies, or brokers, identify what the application processes, who provides it, and what could happen if a component fails.
+
+3
+00:00:11.500 --> 00:00:25.100
+Untrusted files, downloaded content, plugins, scripts, automation input, project files, local IPC messages, third-party libraries, native codecs, parsers, and helper tools can all introduce risk.
+
+4
+00:00:25.200 --> 00:00:32.480
+For each source, record who can influence it, how often it changes, and what authority the handling component currently receives.
+
+5
+00:00:32.760 --> 00:00:37.160
+Trust boundaries can exist inside a single desktop application or service.
+
+6
+00:00:37.260 --> 00:00:47.500
+A component that parses a document or renders untrusted content may need much less authority than the component that saves user files, reads credentials, or changes settings.
+
+7
+00:00:47.600 --> 00:00:54.480
+Treating the entire application as one trust level often gives risky code more access than its job requires.
+
+8
+00:00:54.760 --> 00:01:01.240
+The design should map risky work to lower-authority components and keep sensitive decisions in more trusted code.
+
+9
+00:01:01.340 --> 00:01:08.060
+Parsing, transformation, rendering, previewing, indexing, and inspection may belong in a worker.
+
+10
+00:01:08.160 --> 00:01:17.360
+File writes, credential use, update decisions, device access, and user-approved actions may belong behind a broker that enforces policy.
+
+11
+00:01:17.640 --> 00:01:24.520
+Sandbox strength should match risk, data sensitivity, platform constraints, and operational cost.
+
+12
+00:01:24.620 --> 00:01:30.140
+A small internal helper may need basic process separation and tight IPC.
+
+13
+00:01:30.240 --> 00:01:36.640
+A complex parser that handles external content may justify stronger limits and deeper monitoring.
+
+14
+00:01:36.740 --> 00:01:44.100
+Revisit the boundary whenever features, file formats, plugins, dependencies, or deployment platforms change.
+
+15
+00:01:44.200 --> 00:01:53.880
+The threat model should also name what the sandbox does not protect, so teams know where validation, coding discipline, update policy, and user approval still matter.
+
+16
+00:01:53.980 --> 00:02:01.500
+Capture assumptions in review notes so future maintainers understand why the boundary exists and which changes should trigger another review.
+
+17
+00:02:01.600 --> 00:02:06.960
+The model does not need to be elaborate, but it must be specific enough to drive design decisions.

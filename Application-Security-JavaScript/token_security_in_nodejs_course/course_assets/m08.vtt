@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.780
+Tokens should have lifetimes that match their purpose and risk.
+
+2
+00:00:03.880 --> 00:00:07.560
+A password reset token may need minutes.
+
+3
+00:00:07.660 --> 00:00:09.980
+An access token may be short lived.
+
+4
+00:00:10.080 --> 00:00:17.840
+A refresh token or API key may last longer, but then it needs stronger storage, monitoring, rotation, and revocation.
+
+5
+00:00:17.940 --> 00:00:23.540
+A token that never expires and cannot be revoked turns a small leak into a long-running incident.
+
+6
+00:00:23.820 --> 00:00:30.140
+Short-lived tokens reduce exposure windows, but they create renewal and user-experience tradeoffs.
+
+7
+00:00:30.240 --> 00:00:35.360
+Long-lived tokens improve convenience, but they increase damage if copied.
+
+8
+00:00:35.460 --> 00:00:39.300
+Good token design makes this tradeoff explicit for each token type.
+
+9
+00:00:39.400 --> 00:00:51.240
+The design should also define logout behavior, account disablement, password changes, MFA reset, role changes, tenant changes, and suspected compromise decisions.
+
+10
+00:00:51.520 --> 00:00:57.520
+Rotation reduces risk when a token may have been copied or used outside expected context.
+
+11
+00:00:57.620 --> 00:01:02.980
+Refresh-token rotation can also help detect replay when an old refresh token is reused.
+
+12
+00:01:03.080 --> 00:01:13.160
+Revocation requires an explicit design, such as server-side state, a revocation list, token versioning, key rotation, or another validation mechanism.
+
+13
+00:01:13.260 --> 00:01:18.620
+Stateless tokens do not become revocable just because the team wants them to be.
+
+14
+00:01:18.900 --> 00:01:21.860
+Replay resistance depends on the system.
+
+15
+00:01:21.960 --> 00:01:25.320
+Some flows rely on TLS and short lifetimes.
+
+16
+00:01:25.420 --> 00:01:27.900
+Some use one-time tokens.
+
+17
+00:01:28.000 --> 00:01:35.280
+Some use nonce-based protocols, proof-of-possession designs, token binding approaches, or strict server-side status checks.
+
+18
+00:01:35.380 --> 00:01:37.780
+The important point is to choose deliberately.
+
+19
+00:01:37.880 --> 00:01:47.240
+Token issuance is the beginning of the lifecycle; expiration, rotation, revocation, and compromise response decide how much damage a leak can do.

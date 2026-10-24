@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Shared memory can be fast because multiple processes access the same bytes.
+
+2
+00:00:05.720 --> 00:00:09.400
+That speed changes the security and correctness model.
+
+3
+00:00:09.500 --> 00:00:15.100
+Instead of receiving a completed message, a process may observe data while another process is writing it.
+
+4
+00:00:15.200 --> 00:00:21.280
+Permissions, layout, synchronization, and lifecycle all become part of the contract.
+
+5
+00:00:21.560 --> 00:00:28.600
+A shared memory region should define ownership, size, version, initialization state, and valid fields.
+
+6
+00:00:28.700 --> 00:00:34.780
+If multiple program versions may interact, versioning and compatibility rules matter.
+
+7
+00:00:34.880 --> 00:00:42.160
+If the region contains offsets, counters, lengths, or arrays, those fields still need validation before use.
+
+8
+00:00:42.260 --> 00:00:46.900
+Shared memory does not make input trusted simply because it is local.
+
+9
+00:00:47.180 --> 00:00:52.940
+Readers and writers need synchronization to avoid inconsistent or partially updated state.
+
+10
+00:00:53.040 --> 00:01:05.680
+The exact mechanism depends on the platform and design, but the principle is stable: a reader should know when data is complete enough to use, and a writer should not leave shared state in an ambiguous condition without a recovery rule.
+
+11
+00:01:05.960 --> 00:01:10.840
+Shared memory should not be used as a shortcut around authorization or message validation.
+
+12
+00:01:10.940 --> 00:01:15.100
+A process that can write shared state can influence another process.
+
+13
+00:01:15.200 --> 00:01:18.960
+That influence should be intentional and constrained.
+
+14
+00:01:19.060 --> 00:01:24.500
+Permissions on the region, peer identity where relevant, and internal consistency checks all matter.
+
+15
+00:01:24.780 --> 00:01:29.740
+Cleanup should handle stale, abandoned, or partially initialized regions safely.
+
+16
+00:01:29.840 --> 00:01:33.680
+A restart may find a leftover region from a previous instance.
+
+17
+00:01:33.780 --> 00:01:39.460
+The program should distinguish usable state from state that must be reinitialized or removed.
+
+18
+00:01:39.560 --> 00:01:43.640
+Without those rules, shared memory can turn recovery into guesswork.

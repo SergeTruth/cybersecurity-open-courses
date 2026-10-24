@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Defensive coding patterns make lifetime behavior easier to inspect.
+
+2
+00:00:04.680 --> 00:00:10.520
+They do not replace design, but they reduce accidental reuse and make cleanup decisions visible.
+
+3
+00:00:10.620 --> 00:00:18.940
+The best patterns are boring in a good way: predictable initialization, clear ownership flags, consistent cleanup, and limited control-flow surprises.
+
+4
+00:00:19.220 --> 00:00:23.220
+Initialize pointers before use and keep cleanup state explicit.
+
+5
+00:00:23.320 --> 00:00:29.560
+A pointer that starts as null is easier for cleanup code to handle than an uninitialized value.
+
+6
+00:00:29.660 --> 00:00:36.460
+An initialized flag, ownership flag, or structured resource state can help cleanup routines know what has actually been acquired.
+
+7
+00:00:36.740 --> 00:00:41.220
+Centralize release logic when repeated cleanup would create confusion.
+
+8
+00:00:41.320 --> 00:00:46.920
+A shared cleanup path can release resources in a known order and reduce duplicated code.
+
+9
+00:00:47.020 --> 00:00:51.500
+It should still be easy to tell which resources are valid at each point.
+
+10
+00:00:51.600 --> 00:00:55.120
+Centralization helps most when state is explicit.
+
+11
+00:00:55.400 --> 00:01:01.240
+Setting a pointer to null after freeing can help prevent accidental reuse through that specific variable.
+
+12
+00:01:01.340 --> 00:01:06.700
+It is a useful local habit, especially for objects that may continue through cleanup code.
+
+13
+00:01:06.800 --> 00:01:10.080
+But it does not solve aliasing across the whole program.
+
+14
+00:01:10.180 --> 00:01:13.380
+Other aliases may still contain the old address.
+
+15
+00:01:13.660 --> 00:01:18.860
+Make invalid states harder to represent with clearer structures and ownership flags where appropriate.
+
+16
+00:01:18.960 --> 00:01:24.720
+A buffer object can pair pointer, capacity, count, and ownership.
+
+17
+00:01:24.820 --> 00:01:27.540
+A handle type can require cleanup through one routine.
+
+18
+00:01:27.640 --> 00:01:30.200
+A container can state whether it owns elements.
+
+19
+00:01:30.300 --> 00:01:32.540
+These patterns reduce ambiguity.
+
+20
+00:01:32.820 --> 00:01:37.380
+Prefer simple, reviewable lifetime logic over clever control flow.
+
+21
+00:01:37.480 --> 00:01:45.560
+Complicated jumps, hidden ownership side effects, and surprising release behavior increase the chance that a later maintainer will use a pointer after release.
+
+22
+00:01:45.660 --> 00:01:49.660
+Clear code is not only easier to read; it is easier to trust.

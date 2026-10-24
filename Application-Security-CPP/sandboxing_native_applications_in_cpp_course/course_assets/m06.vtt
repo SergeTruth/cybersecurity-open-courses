@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+In a brokered sandbox architecture, IPC becomes the main control surface.
+
+2
+00:00:04.920 --> 00:00:09.560
+The worker cannot directly touch sensitive resources, so it asks the broker for help.
+
+3
+00:00:09.660 --> 00:00:18.940
+That means the IPC contract determines whether the sandbox is a meaningful boundary or simply a split process with excessive authority hidden behind messages.
+
+4
+00:00:19.220 --> 00:00:22.820
+The broker should validate every request before acting.
+
+5
+00:00:22.920 --> 00:00:39.720
+Message schemas, operation names, version fields, required fields, numeric ranges, string lengths, identifiers, and state requirements should be checked before file access, credential use, network calls, resource allocation, or state mutation.
+
+6
+00:00:39.820 --> 00:00:44.140
+A worker launched by the broker is still less trusted than the broker.
+
+7
+00:00:44.420 --> 00:00:47.380
+Capability-based design keeps requests narrow.
+
+8
+00:00:47.480 --> 00:01:01.480
+Instead of giving a worker general authority, the broker can issue a handle, token, or context object for one approved action, such as reading a selected file, writing a specific output, or reporting a result for a known job.
+
+9
+00:01:01.580 --> 00:01:05.660
+Capabilities should have scope, lifetime, and cleanup rules.
+
+10
+00:01:05.760 --> 00:01:10.640
+They should also be easy to revoke when work is canceled or the worker exits.
+
+11
+00:01:10.920 --> 00:01:13.720
+IPC also needs resource control.
+
+12
+00:01:13.820 --> 00:01:20.220
+Bound message size, request rate, queue growth, nesting, and complexity.
+
+13
+00:01:20.320 --> 00:01:26.400
+Reject unsupported commands safely, and return errors that help operations without exposing secrets.
+
+14
+00:01:26.500 --> 00:01:35.860
+Avoid ambient authority through global state: the broker should make decisions from explicit request context, caller context, and policy, not hidden assumptions.
+
+15
+00:01:36.140 --> 00:01:38.860
+A good IPC contract is small enough to review.
+
+16
+00:01:38.960 --> 00:01:51.920
+It says what the worker may ask for, what the broker will validate, which capabilities can be returned, and how both sides behave when a request is invalid, stale, unsupported, or too expensive to process.
+
+17
+00:01:52.020 --> 00:02:03.700
+Contract tests should include old workers, new workers, denied operations, malformed messages, repeated requests, and shutdown while requests are still in flight.
+
+18
+00:02:03.800 --> 00:02:10.680
+Documentation should match the implementation so operators and maintainers can reason about the boundary during incidents and upgrades.

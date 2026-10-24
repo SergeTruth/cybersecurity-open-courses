@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Parser failure is part of normal operation.
+
+2
+00:00:03.800 --> 00:00:11.160
+Input may be malformed, unsupported, incomplete, too large, out of sequence, or no longer relevant.
+
+3
+00:00:11.260 --> 00:00:15.420
+The parser should be designed so those failures leave application state predictable.
+
+4
+00:00:15.700 --> 00:00:19.220
+Fail closed when required validation does not pass.
+
+5
+00:00:19.320 --> 00:00:28.600
+If the parser cannot prove the message satisfies the protocol contract, it should not produce a trusted object or trigger a state-changing action.
+
+6
+00:00:28.700 --> 00:00:33.980
+Continuing with guessed defaults makes the failure harder to reason about and harder to review.
+
+7
+00:00:34.260 --> 00:00:38.180
+Avoid building trusted objects from partially validated input.
+
+8
+00:00:38.280 --> 00:00:45.000
+It is safer to keep raw input and temporary decoded fields separate until the full message has passed the relevant checks.
+
+9
+00:00:45.100 --> 00:00:50.780
+Once validation succeeds, the parser can construct a trusted representation for later code.
+
+10
+00:00:51.060 --> 00:00:56.980
+Cleanup should release temporary allocations, buffers, and session resources after parse failure.
+
+11
+00:00:57.080 --> 00:01:04.120
+That includes parser state, queued output, partially built objects, timers, and connection-specific resources.
+
+12
+00:01:04.220 --> 00:01:10.060
+Clean failure paths matter for long-running services because small leaks can become operational problems over time.
+
+13
+00:01:10.340 --> 00:01:16.020
+Error responses should provide useful protocol behavior without leaking sensitive internal details.
+
+14
+00:01:16.120 --> 00:01:25.400
+A peer may need to know that a message was rejected, but it usually does not need stack details, memory layout, private configuration, or authorization internals.
+
+15
+00:01:25.500 --> 00:01:30.780
+Repeated parse failures should also be handled consistently so the service remains reliable.

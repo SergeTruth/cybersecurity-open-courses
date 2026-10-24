@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:12.580
+CI/CD systems often hold powerful credentials because they publish packages, sign binaries, access private dependencies, deploy software, update release records, or communicate with cloud services.
+
+2
+00:00:12.680 --> 00:00:23.080
+Those credentials may include package registry tokens, deployment credentials, code-signing keys, certificate material, SSH keys, API tokens, and service credentials.
+
+3
+00:00:23.180 --> 00:00:28.140
+The pipeline should treat that access as production capability, not merely build convenience.
+
+4
+00:00:28.420 --> 00:00:30.980
+Least privilege is the starting point.
+
+5
+00:00:31.080 --> 00:00:36.360
+A job that builds pull requests should not automatically receive production deployment credentials.
+
+6
+00:00:36.460 --> 00:00:39.580
+A test job should not inherit signing material.
+
+7
+00:00:39.680 --> 00:00:45.440
+A packaging job should receive only the access it needs for its specific task and environment.
+
+8
+00:00:45.540 --> 00:00:50.820
+Where available, short-lived credentials and environment-scoped access reduce long-term exposure.
+
+9
+00:00:50.920 --> 00:00:54.760
+Access should be reviewed when job responsibilities change.
+
+10
+00:00:55.040 --> 00:00:58.240
+Logs and artifacts need special attention.
+
+11
+00:00:58.340 --> 00:01:10.500
+Secrets can appear through command echoes, failed scripts, verbose package managers, test output, crash reports, cache directories, temporary files, and bundled build artifacts.
+
+12
+00:01:10.600 --> 00:01:14.040
+Masking can help, but masking is not a guarantee.
+
+13
+00:01:14.140 --> 00:01:20.700
+Design jobs so sensitive values are not printed, copied, cached, or packaged in the first place.
+
+14
+00:01:20.800 --> 00:01:26.160
+Review failure paths because diagnostic output often reveals more than success output.
+
+15
+00:01:26.440 --> 00:01:29.960
+Signing keys and certificate material need clear policy.
+
+16
+00:01:30.060 --> 00:01:41.340
+Define who can trigger signing, which artifacts may be signed, how approvals work, how keys are protected, how rotation and revocation are handled, and what evidence is retained.
+
+17
+00:01:41.440 --> 00:01:48.720
+Separating jobs that need secrets from jobs that do not is one of the most practical ways to keep the pipeline safer and easier to review.
+
+18
+00:01:48.820 --> 00:01:56.180
+It also reduces the number of logs, caches, and scripts that must be treated as highly sensitive during audits and incident review.
+
+19
+00:01:56.280 --> 00:01:58.200
+Every exception should have an owner.

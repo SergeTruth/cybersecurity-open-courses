@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+Signals matter in C because they introduce asynchronous control flow.
+
+2
+00:00:04.760 --> 00:00:15.320
+A process may be reading a file, updating shared state, holding a lock, writing a log entry, waiting for a child process, or preparing a shutdown path when a signal is delivered.
+
+3
+00:00:15.420 --> 00:00:18.780
+The handler does not wait for the program to reach a tidy checkpoint.
+
+4
+00:00:18.880 --> 00:00:23.840
+It may run at a moment that ordinary program logic did not expect.
+
+5
+00:00:24.120 --> 00:00:29.160
+That timing makes signal handling a reliability and security engineering concern.
+
+6
+00:00:29.260 --> 00:00:37.420
+A handler that performs complex work can interfere with resource state, cleanup behavior, logging, and shutdown decisions.
+
+7
+00:00:37.520 --> 00:00:45.520
+Even a program that works well during routine testing may behave differently when interruption happens during initialization, during an update, or during a failure path.
+
+8
+00:00:45.800 --> 00:00:51.400
+The safest mental model is to treat signal paths as part of the trusted control design.
+
+9
+00:00:51.500 --> 00:01:00.620
+Developers should know which signals the program handles, what each handler is allowed to do, what state the handler can touch, and how the handler communicates with normal code.
+
+10
+00:01:00.720 --> 00:01:06.080
+If those answers are unclear, the program is depending on timing assumptions that are hard to review.
+
+11
+00:01:06.360 --> 00:01:08.680
+Signals are not only about termination.
+
+12
+00:01:08.780 --> 00:01:20.300
+They can be involved in child process notification, configuration reload requests, terminal events, timers, operational supervision, and crash-related diagnostics.
+
+13
+00:01:20.400 --> 00:01:27.040
+Each use should have a narrow purpose and a documented flow from asynchronous notification to safe mainline processing.
+
+14
+00:01:27.320 --> 00:01:30.840
+Throughout this course, the goal is practical discipline.
+
+15
+00:01:30.940 --> 00:01:41.660
+Keep handlers small, make shutdown deliberate, avoid complex behavior inside asynchronous context, and verify that cleanup works when interruption happens at awkward times.
+
+16
+00:01:41.760 --> 00:01:46.560
+Secure signal handling is less about clever code and more about predictable control flow.

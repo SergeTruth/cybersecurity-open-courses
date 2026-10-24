@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+CMake can do much more than compile existing source files.
+
+2
+00:00:04.440 --> 00:00:13.080
+It can run code generators, template expansion, resource compilers, protocol compilers, packaging tools, and project-specific scripts.
+
+3
+00:00:13.180 --> 00:00:26.060
+That build-time execution is security-relevant because it can read files, write generated headers, create source, transform resources, and influence what eventually becomes part of the application.
+
+4
+00:00:26.340 --> 00:00:28.580
+Generated files should have clear provenance.
+
+5
+00:00:28.680 --> 00:00:34.920
+Reviewers should understand which input files, generator versions, and command options produced them.
+
+6
+00:00:35.020 --> 00:00:41.660
+If generated code is checked into the repository, the team should know when and how it is refreshed.
+
+7
+00:00:41.760 --> 00:00:49.360
+If generated code is produced only during the build, the command should be reproducible from reviewed inputs and should not depend on uncontrolled local state.
+
+8
+00:00:49.640 --> 00:00:53.880
+Custom commands benefit from narrow, explicit declarations.
+
+9
+00:00:53.980 --> 00:01:00.860
+Inputs, outputs, byproducts, working directories, dependencies, and comments should be accurate.
+
+10
+00:01:00.960 --> 00:01:08.400
+That precision helps CMake and the underlying build tool know when work is required, and it helps humans understand the purpose of the step.
+
+11
+00:01:08.500 --> 00:01:15.780
+Broad script entry points that hide file discovery, path decisions, or generated outputs make review harder.
+
+12
+00:01:16.060 --> 00:01:20.860
+Quoting and path handling are practical security concerns in build systems.
+
+13
+00:01:20.960 --> 00:01:26.560
+Paths may contain spaces, unusual characters, or platform-specific separators.
+
+14
+00:01:26.660 --> 00:01:33.140
+Commands should use CMake facilities that preserve argument boundaries and avoid accidental interpretation by another layer.
+
+15
+00:01:33.240 --> 00:01:41.480
+The defensive mindset is simple: make generated behavior observable, deterministic, and tied to the project inputs the team intentionally approved.

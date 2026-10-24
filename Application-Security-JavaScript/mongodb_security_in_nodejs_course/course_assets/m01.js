@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why MongoDB Security Matters in Node.js",
+  "graphicAlt": "A document store connects to controlled queries, authorized access, minimal responses and observable recovery.",
+  "narration": "MongoDB security in a Node.js application is not just a database administrator problem and it is not just a coding problem. A small API may begin with a few collections for users, sessions, and content. Over time, the same application gains tenant data, admin screens, export jobs, dashboards, webhooks, support tooling, and background workers. Each new path can read, update, aggregate, or disclose documents if the team does not make access rules explicit.\n\nMongoDB's flexible document model is productive because it lets teams move quickly without forcing every field into a rigid table design. That same flexibility can hide important security assumptions. Which fields are client-controlled. Which fields are internal. Which updates are allowed. Which documents belong to which tenant. Which values are safe to log. If those questions are left implicit, the code can accidentally allow unsafe filters, unsafe updates, mass assignment, broken object-level authorization, excessive data exposure, or NoSQL injection.\n\nThe goal is to make database access intentional. A secure MongoDB-backed Node.js application uses authenticated and encrypted connections, protected secrets, least-privilege database users, application-controlled query shapes, validated values, server-side authorization, safe update allowlists, controlled projections, useful logging, protected backups, and operational monitoring. No single ODM, sanitizer, managed platform, or connection option solves the whole problem. The security posture comes from how the application, database, deployment, and operations practices work together.",
+  "narrationPoints": [
+    "js application is not just a database administrator problem and it is not just a coding problem.",
+    "That same flexibility can hide important security assumptions.",
+    "js application uses authenticated and encrypted connections, protected secrets, least-privilege database users, application-controlled query shapes, validated values, server-side authorization, safe update allowlists, controlled projections, useful logging, protected backups, and operational monitoring.",
+    "The security posture comes from how the application, database, deployment, and operations practices work together.",
+    "MongoDB's flexible document model is productive because it lets teams move quickly without forcing every field into a rigid table design.",
+    "A small API may begin with a few collections for users, sessions, and content."
+  ]
+};

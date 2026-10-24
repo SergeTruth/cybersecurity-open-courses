@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Serde is a common and powerful way to deserialize structured data in Rust.
+
+2
+00:00:06.440 --> 00:00:13.560
+It can turn JSON, YAML, TOML, or other formats into Rust structs and enums with relatively little code.
+
+3
+00:00:13.660 --> 00:00:17.500
+That is useful, but deserialization is not full validation.
+
+4
+00:00:17.600 --> 00:00:29.120
+A successfully deserialized value may have the right broad shape while still violating length limits, numeric ranges, cross-field relationships, authorization rules, or business invariants.
+
+5
+00:00:29.400 --> 00:00:33.560
+Required and optional fields should be chosen deliberately.
+
+6
+00:00:33.660 --> 00:00:41.500
+Optional fields can support compatibility and partial updates, but they can also hide missing data if the application silently applies defaults.
+
+7
+00:00:41.600 --> 00:00:46.560
+Default values are useful when they are part of an explicit contract.
+
+8
+00:00:46.660 --> 00:00:51.620
+They are dangerous when they cause incomplete or unexpected input to look intentional.
+
+9
+00:00:51.720 --> 00:00:59.640
+Unknown fields should also be considered carefully because they may indicate client mistakes, version drift, or attempts to influence behavior.
+
+10
+00:00:59.920 --> 00:01:05.840
+Nested objects, arrays, and collections need validation beyond the top-level struct.
+
+11
+00:01:05.940 --> 00:01:14.660
+Arrays may be too large, contain duplicates, mix incompatible item types, or include items that are individually valid but invalid together.
+
+12
+00:01:14.760 --> 00:01:19.000
+Nested values may need their own constructors or validators.
+
+13
+00:01:19.100 --> 00:01:26.860
+The application should avoid assuming that a parsed JSON object is safe merely because every field could be mapped into a Rust type.
+
+14
+00:01:27.140 --> 00:01:38.820
+Schema validation concepts can help teams document expected shapes and reject unexpected structures, especially when Rust services interact with other languages or public APIs.
+
+15
+00:01:38.920 --> 00:01:41.880
+Even then, domain validation still matters.
+
+16
+00:01:41.980 --> 00:01:53.340
+A good pattern is to deserialize into a transport type, validate and normalize that type, then construct domain types that represent what the application is actually willing to use.

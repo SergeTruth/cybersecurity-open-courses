@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "SBOM Quality, Validation, and Drift",
+  "graphicAlt": "Metadata checks and artifact comparisons identify changes that require explanation.",
+  "narration": "SBOMs can become misleading when quality is not maintained. Common issues include missing components, duplicate components, unknown versions, ambiguous names, missing license data, stale dependency records, incorrect relationships, missing build metadata, and tool limitations. A long SBOM is not automatically a useful SBOM if consumers cannot trust the identity and scope of its components. Quality should be measured by usefulness, not by file size.\n\nValidation should be part of the release workflow. Teams can check required metadata, compare generated SBOMs across builds, verify hashes where practical, confirm that release artifacts match the declared scope, and review major dependency changes. If a component appears, disappears, changes version, or changes relationship unexpectedly, the change should be explained before the release is approved.\n\nDrift happens when the SBOM no longer matches the source, build, dependency set, platform packaging, or release artifact. It can occur because optional features changed, a package manager resolved a different version, generated code was updated, a platform SDK changed, or installer contents were modified after SBOM generation. Drift is especially likely when SBOMs are generated once and then treated as static paperwork. Release gates should make drift visible before publication so teams can fix the record or regenerate it.\n\nTreat SBOM quality as continuous maintenance. Define required fields, review exceptions, fix tool configuration, document manual additions, and assign owners for quality decisions. The goal is not perfection on day one. The goal is a trustworthy, repeatable inventory that improves over time and remains connected to the product's real build and release process. Quality review should become routine, not a special audit scramble at the end. Release records can show these trends.",
+  "narrationPoints": [
+    "A long SBOM is not automatically a useful SBOM if consumers cannot trust the identity and scope of its components.",
+    "Validation should be part of the release workflow.",
+    "Drift happens when the SBOM no longer matches the source, build, dependency set, platform packaging, or release artifact.",
+    "Drift is especially likely when SBOMs are generated once and then treated as static paperwork.",
+    "Define required fields, review exceptions, fix tool configuration, document manual additions, and assign owners for quality decisions.",
+    "Quality review should become routine, not a special audit scramble at the end."
+  ]
+};

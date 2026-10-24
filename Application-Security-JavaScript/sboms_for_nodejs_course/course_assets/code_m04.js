@@ -1,0 +1,18 @@
+window.COURSE_CODE_MODULE = {
+  "title": "Code Examples",
+  "codeIntro": "These examples apply Generating SBOMs for Node.js Projects through distinct, reviewable JavaScript security boundaries. Run copied snippets independently as Node.js 22+ ES modules; see readme.md for dependencies and trusted adapter/authorization contracts. Offline checks do not replace live-service integration tests.",
+  "codeExamples": [
+    {
+      "title": "Read direct dependencies from package.json",
+      "language": "javascript",
+      "blurb": "The parser separates runtime, optional, and development declarations and rejects non-object sections before lockfile resolution adds exact versions.",
+      "code": "export function packageManifestDependencies(manifest) {\n  const sections = [\"dependencies\", \"optionalDependencies\", \"devDependencies\"];\n  return sections.flatMap((section) => {\n    const entries = manifest?.[section] ?? {};\n    if (!entries || typeof entries !== \"object\" || Array.isArray(entries)) throw new TypeError(\"invalid \" + section);\n    return Object.entries(entries).map(([name, requested]) => ({ name, requested, section }));\n  });\n}\n"
+    },
+    {
+      "title": "Walk npm lockfile packages into an SBOM graph",
+      "language": "javascript",
+      "blurb": "The bounded lockfile projection resolves workspace links to their target node, preserves an explicit linkTarget edge, and rejects missing/cyclic links. Dependency names still require npm-aware resolution before constructing a complete dependency graph.",
+      "code": "function packageLocation(value) {\n  if (typeof value !== \"string\" || !value || value.length > 4096 || value.startsWith(\"/\") ||\n      /[\\\\:\\u0000-\\u001f\\u007f]/.test(value) || value.split(\"/\").some(part => !part || part === \".\" || part === \"..\")) throw new TypeError(\"lockfile location invalid\");\n  return value;\n}\nexport function lockfilePackageGraph(lockfile) {\n  const packages = lockfile?.packages;\n  if (![2, 3].includes(lockfile?.lockfileVersion) || !packages || typeof packages !== \"object\" || Array.isArray(packages)) throw new TypeError(\"supported package-lock required\");\n  const entries = Object.entries(packages);\n  if (entries.length > 10_000) throw new RangeError(\"package count exceeds budget\");\n  const targetFor = location => {\n    const seen = new Set();\n    let current = location;\n    for (let depth = 0; depth <= 64; depth++) {\n      if (seen.has(current) || !Object.hasOwn(packages, current)) throw new TypeError(\"cyclic or missing workspace target\");\n      seen.add(current);\n      const record = packages[current];\n      if (!record || typeof record !== \"object\" || Array.isArray(record)) throw new TypeError(\"package record invalid\");\n      if (record.link !== true) return { location: current, record };\n      current = packageLocation(record.resolved);\n    }\n    throw new RangeError(\"workspace link depth exceeded\");\n  };\n  return entries.filter(([location]) => location !== \"\").map(([location, record]) => {\n    packageLocation(location);\n    const target = targetFor(location), resolved = target.record;\n    if (resolved.dependencies !== undefined && (!resolved.dependencies || typeof resolved.dependencies !== \"object\" || Array.isArray(resolved.dependencies))) throw new TypeError(\"dependency map invalid\");\n    return { location, name: resolved.name ?? target.location.split(\"node_modules/\").at(-1),\n      version: resolved.version ?? null, integrity: resolved.integrity ?? null,\n      linkedWorkspace: record.link === true, linkTarget: record.link === true ? target.location : null,\n      dependencies: Object.keys(resolved.dependencies ?? {}) };\n  });\n}\n"
+    }
+  ]
+};

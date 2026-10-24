@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+A symbolic link is a filesystem entry that directs path resolution to another path.
+
+2
+00:00:06.440 --> 00:00:13.560
+That target may be absolute or relative, and the meaning of the link can depend on where the link is located.
+
+3
+00:00:13.660 --> 00:00:20.940
+For a C program, the important point is that a path can include components whose final object is not obvious from the text alone.
+
+4
+00:00:21.220 --> 00:00:29.140
+Hard links are different at a high level: they create additional names for the same underlying file object where the filesystem permits them.
+
+5
+00:00:29.240 --> 00:00:34.280
+They can matter for review because the same object may have more than one directory entry.
+
+6
+00:00:34.380 --> 00:00:40.460
+The program should reason about object identity and permissions, not only the spelling of one path.
+
+7
+00:00:40.740 --> 00:00:44.900
+Relative paths depend on current working directory context.
+
+8
+00:00:45.000 --> 00:00:53.080
+A service, scheduled job, test harness, container, or command-line tool may run from a directory the developer did not expect.
+
+9
+00:00:53.180 --> 00:01:01.740
+Absolute paths remove that specific ambiguity, but they still require trust decisions about directories, permissions, and object identity.
+
+10
+00:01:02.020 --> 00:01:04.820
+Path resolution crosses filesystem state.
+
+11
+00:01:04.920 --> 00:01:12.440
+Directories may be replaced, mounted, renamed, or changed by other code depending on permissions and platform behavior.
+
+12
+00:01:12.540 --> 00:01:19.100
+Filesystem boundaries and mount behavior are platform-specific enough that portable C code should avoid assuming one uniform model.
+
+13
+00:01:19.380 --> 00:01:23.460
+The difference between a path string and an opened file object is central.
+
+14
+00:01:23.560 --> 00:01:27.080
+A path string describes how the program might reach an object later.
+
+15
+00:01:27.180 --> 00:01:33.500
+An opened descriptor or handle represents the object the program is actually using now.
+
+16
+00:01:33.600 --> 00:01:38.960
+Safe designs reduce repeated trust in strings and validate the object in use.
+
+17
+00:01:39.240 --> 00:01:48.440
+Reviewers should ask what the code trusts: the path text, the directory that contains it, the platform's resolution rules, or the object actually opened.
+
+18
+00:01:48.540 --> 00:01:52.060
+Clear answers make link behavior easier to reason about.

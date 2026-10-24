@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+A queue consumer is not a lesser service just because it does not serve HTTP directly.
+
+2
+00:00:05.080 --> 00:00:14.440
+Workers often run with database access, storage access, API credentials, broker credentials, filesystem permissions, and internal network reachability.
+
+3
+00:00:14.540 --> 00:00:19.500
+In some systems, the worker has more authority than the API that produced the message.
+
+4
+00:00:19.600 --> 00:00:28.640
+Secure worker design starts with runtime identity, package hygiene, secrets handling, and a clear understanding of what each worker is allowed to do.
+
+5
+00:00:28.920 --> 00:00:33.400
+Workers should run with least privilege and only the secrets needed for their assigned queues.
+
+6
+00:00:33.500 --> 00:00:41.740
+Keep deployment packages minimal, updated, and free of real .env files, private keys, local test data, and unnecessary tooling.
+
+7
+00:00:41.840 --> 00:00:47.040
+Review dependency changes and worker framework updates as production changes.
+
+8
+00:00:47.140 --> 00:00:54.100
+A background worker can carry the same supply chain risk as an API service, even when users never call it directly.
+
+9
+00:00:54.380 --> 00:00:58.300
+Resource controls are part of queue security.
+
+10
+00:00:58.400 --> 00:01:06.560
+Set concurrency, prefetch, batch size, memory, CPU, timeout, and shutdown behavior intentionally.
+
+11
+00:01:06.660 --> 00:01:15.460
+Too much concurrency can create worker stampedes, retry storms, database exhaustion, API rate-limit failures, or high cloud costs.
+
+12
+00:01:15.560 --> 00:01:22.440
+Too little concurrency can create queue age, delayed security processing, and operational backlog.
+
+13
+00:01:22.540 --> 00:01:29.660
+The right settings come from testing, production telemetry, and downstream capacity rather than defaults copied from another project.
+
+14
+00:01:29.940 --> 00:01:32.180
+Graceful shutdown matters for consumers.
+
+15
+00:01:32.280 --> 00:01:41.720
+A worker should stop accepting new messages, finish, checkpoint, or safely abandon in-flight work according to the platform's acknowledgment model.
+
+16
+00:01:41.820 --> 00:01:52.380
+Logs should avoid full payloads, secrets, tokens, private URLs, authorization headers, broker credentials, and unnecessary personal data.
+
+17
+00:01:52.480 --> 00:02:04.880
+Monitor worker health, queue age, consumer lag, memory growth, processing latency, duplicate detection, and repeated failures so operators can see problems before they become incidents.

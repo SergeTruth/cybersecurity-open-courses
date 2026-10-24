@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Dependencies are part of the product, not an implementation footnote.
+
+2
+00:00:04.360 --> 00:00:16.920
+A C++ project may locate system packages, vendor a library, use submodules, call a package manager, use FetchContent, use ExternalProject, or link to prebuilt binaries.
+
+3
+00:00:17.020 --> 00:00:25.660
+Each approach has different implications for trust, reproducibility, licensing, update cadence, and the ability to inspect what was included.
+
+4
+00:00:25.940 --> 00:00:29.700
+Release workflows should make dependency selection explicit.
+
+5
+00:00:29.800 --> 00:00:36.360
+Engineers should be able to tell which version was used, where it came from, how it was verified, and why that source is approved.
+
+6
+00:00:36.460 --> 00:00:40.060
+When practical, versions and source locations should be pinned.
+
+7
+00:00:40.160 --> 00:00:47.600
+Integrity expectations, such as checksums or package manager lock data, should be part of the normal build record rather than a separate tribal memory.
+
+8
+00:00:47.880 --> 00:00:51.560
+Remote fetching during ordinary builds deserves strict control.
+
+9
+00:00:51.660 --> 00:00:59.820
+It can be convenient during prototyping, but release builds should not quietly depend on whatever is reachable from a developer workstation at configuration time.
+
+10
+00:00:59.920 --> 00:01:12.320
+Many organizations prefer a curated mirror, an internal package registry, a reviewed vendor directory, or CI preparation steps that make dependency inputs stable before CMake configures the project.
+
+11
+00:01:12.600 --> 00:01:16.200
+Dependency updates should follow an engineering process.
+
+12
+00:01:16.300 --> 00:01:23.820
+A version change can affect ABI behavior, compiler settings, transitive libraries, package contents, or platform support.
+
+13
+00:01:23.920 --> 00:01:29.040
+Secure CMake practice makes those changes visible, testable, and reviewable.
+
+14
+00:01:29.140 --> 00:01:38.020
+The build should log the selected dependency path or package identity clearly enough that CI and release reviewers can confirm the expected component was used.

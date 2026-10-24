@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Choosing the Right Process Creation API",
+  "graphicAlt": "Direct execution exposes the program, arguments and context, while shell use needs explicit review.",
+  "narration": "The process creation API shapes the safety properties of the launch. Some APIs pass a single command string through a shell. Others execute a specific program with a structured argument vector. Some platforms provide spawn-style APIs, lower-level fork-and-exec workflows, or dedicated process creation calls with explicit settings for environment, handles, and working directory.\n\nDirect program execution is often easier to reason about when shell features are not required. The program name and each argument remain separate values, so validation can be field-specific. A filename, mode, count, or identifier can be checked as data instead of being merged into one command string.\n\nShell-based execution adds another parser and another set of quoting rules. That may be necessary for a narrow class of tasks, but it should be justified and reviewed. If the program does not need shell syntax, redirection, pipelines, globbing, or built-in shell behavior, direct execution is usually the simpler contract.\n\nPlatform behavior matters. Argument splitting, environment representation, handle inheritance, process groups, working directory handling, and error reporting vary across systems. A wrapper function can be useful, but it should expose the decisions that matter instead of hiding them behind a vague command string.\n\nThe safest API is the simplest one that matches the actual need. Choose the API that lets the code name the program explicitly, pass arguments structurally, control inherited state, check launch errors, and manage the child process lifecycle predictably.",
+  "narrationPoints": [
+    "The process creation API shapes the safety properties of the launch.",
+    "The program name and each argument remain separate values, so validation can be field-specific.",
+    "If the program does not need shell syntax, redirection, pipelines, globbing, or built-in shell behavior, direct execution is usually the simpler contract.",
+    "A wrapper function can be useful, but it should expose the decisions that matter instead of hiding them behind a vague command string.",
+    "Choose the API that lets the code name the program explicitly, pass arguments structurally, control inherited state, check launch errors, and manage the child process lifecycle predictably."
+  ]
+};

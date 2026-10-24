@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+Mutations often carry more risk than reads because they change the state other features rely on.
+
+2
+00:00:05.800 --> 00:00:14.280
+Use explicit allowlists for fields callers may create or update, and avoid passing untrusted request objects directly into Prisma data objects.
+
+3
+00:00:14.380 --> 00:00:28.940
+A profile update should not allow the caller to set role, permission, tenantId, ownerId, passwordHash, emailVerified, accountStatus, billing state, audit fields, or security flags.
+
+4
+00:00:29.040 --> 00:00:33.920
+These fields should be controlled by server-side workflows with clear authorization rules.
+
+5
+00:00:34.200 --> 00:00:40.200
+Nested writes, upsert, connectOrCreate, and relation changes deserve careful review.
+
+6
+00:00:40.300 --> 00:00:46.060
+They can create or connect related records in ways that are not obvious from the top-level route name.
+
+7
+00:00:46.160 --> 00:00:50.880
+A nested write should not create relationships the caller is not allowed to create.
+
+8
+00:00:50.980 --> 00:00:54.580
+An upsert should match real business uniqueness expectations.
+
+9
+00:00:54.680 --> 00:01:05.240
+A connectOrCreate path should not let a caller attach themselves to another tenant, project, account, or privileged object because the relation logic was too broad.
+
+10
+00:01:05.520 --> 00:01:13.120
+Transactions can help maintain consistency across multiple operations, but they do not automatically enforce security rules.
+
+11
+00:01:13.220 --> 00:01:19.940
+Authorization, scoping, validation, and audit evidence still need to be designed into the transaction.
+
+12
+00:01:20.040 --> 00:01:28.600
+Destructive operations should include authorization, scoped where conditions, confirmation logic where appropriate, and evidence for later review.
+
+13
+00:01:28.700 --> 00:01:32.300
+Use database constraints and Prisma-level checks together.
+
+14
+00:01:32.400 --> 00:01:38.800
+Constraints help protect integrity, while application logic explains who is allowed to make each change and why.

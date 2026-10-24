@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "IPC Mechanisms in C",
+  "graphicAlt": "Streams, shared memory, queues and notifications require different contracts.",
+  "narration": "C programs can use many IPC mechanisms. Pipes and named pipes can connect producers and consumers. Unix domain sockets and TCP sockets can carry structured requests. Shared memory can expose the same bytes to multiple processes. Message queues provide queued exchange. Signals communicate limited events. Platform-specific handles and descriptors can extend what one process can grant to another.\n\nThese mechanisms are not interchangeable from a security perspective. They differ in naming, access control, peer identity support, message boundaries, buffering, reliability, cleanup behavior, and how naturally they fit the workflow. A secure design chooses the mechanism that matches the trust boundary and the operational requirement.\n\nByte-stream channels are common, but they do not automatically preserve message boundaries. If a protocol sends structured messages over a stream, the receiver needs explicit framing, parsing, and validation. A single read may contain part of a message, one message, or parts of several messages depending on timing and buffering.\n\nShared memory has a different shape. It can be efficient, but it gives multiple processes access to the same region. That means layout, versioning, initialization, synchronization, and permissions all become part of the contract. Shared memory should not be treated as a shortcut around authorization or input validation.\n\nSignal-based communication is limited and should be used carefully. Signals can be useful for simple notifications, but they are not a good place to carry complex trusted state. Across all IPC choices, the security design should start from the mechanism's real properties rather than from the assumption that local communication is safe by default.",
+  "narrationPoints": [
+    "Platform-specific handles and descriptors can extend what one process can grant to another.",
+    "A secure design chooses the mechanism that matches the trust boundary and the operational requirement.",
+    "Byte-stream channels are common, but they do not automatically preserve message boundaries.",
+    "Shared memory should not be treated as a shortcut around authorization or input validation.",
+    "Signals can be useful for simple notifications, but they are not a good place to carry complex trusted state."
+  ]
+};

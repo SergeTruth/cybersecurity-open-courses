@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Connection Handling and Peer Trust",
+  "graphicAlt": "Peer context and action authorization follow connection establishment.",
+  "narration": "Accepting a connection means communication can begin. It does not mean the peer is trusted for every operation the service supports. A socket gives the program a path to exchange bytes; the application still has to decide what the peer is allowed to request.\n\nSource address, hostname, or network location may provide useful context, but they are often not enough for authorization by themselves. Networks are routed, proxied, reused, and reconfigured. Internal systems can have multiple clients with different roles. A private address range does not automatically answer whether a specific peer may perform a specific action.\n\nSome workflows need peer identity checks, authentication, or higher-level authorization. The right mechanism depends on the protocol, deployment, and sensitivity of the action. A monitoring query may require less than an administrative state change. A local companion process may need a different trust model from a remote client.\n\nAuthorization should be tied to the requested action. A peer might be allowed to connect and request status but not change configuration. It might be allowed to submit a job but not retrieve another user's result. The service should make those distinctions in protocol handling rather than treating connection existence as broad permission.\n\nReconnects, dropped connections, half-open sessions, and reused addresses are normal network behavior. Socket code should handle them cleanly without granting trust based on stale state. Review should identify where peer identity affects trust, dispatch, access control, or state-changing decisions.",
+  "narrationPoints": [
+    "A socket gives the program a path to exchange bytes; the application still has to decide what the peer is allowed to request.",
+    "Source address, hostname, or network location may provide useful context, but they are often not enough for authorization by themselves.",
+    "A local companion process may need a different trust model from a remote client.",
+    "The service should make those distinctions in protocol handling rather than treating connection existence as broad permission.",
+    "Review should identify where peer identity affects trust, dispatch, access control, or state-changing decisions."
+  ]
+};

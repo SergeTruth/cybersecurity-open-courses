@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.340
+Process creation is security-relevant because launching another program crosses a boundary between the parent process and a new execution context.
+
+2
+00:00:08.440 --> 00:00:19.800
+The child may inherit privileges, environment variables, working directory assumptions, open descriptors or handles, resource access, and operational context from the parent.
+
+3
+00:00:20.080 --> 00:00:31.520
+A child process can influence files, logs, network connections, temporary storage, resource consumption, and later decisions made by the parent or by surrounding automation.
+
+4
+00:00:31.620 --> 00:00:34.820
+Its exit status may decide whether a workflow continues.
+
+5
+00:00:34.920 --> 00:00:37.560
+Its output may be parsed by another component.
+
+6
+00:00:37.660 --> 00:00:41.020
+Its side effects may persist after the parent has moved on.
+
+7
+00:00:41.300 --> 00:00:46.900
+Unsafe launch behavior often comes from hidden assumptions rather than one dramatic mistake.
+
+8
+00:00:47.000 --> 00:00:59.240
+The code may assume the intended program was selected, that arguments are only data, that the shell is not involved, that the environment is harmless, or that open resources will not be inherited.
+
+9
+00:00:59.340 --> 00:01:01.980
+Each assumption should be made explicit.
+
+10
+00:01:02.260 --> 00:01:05.460
+Responsible process creation starts with a contract.
+
+11
+00:01:05.560 --> 00:01:07.320
+Which program is launched?
+
+12
+00:01:07.420 --> 00:01:09.660
+How is the program path chosen?
+
+13
+00:01:09.760 --> 00:01:11.360
+How are arguments represented?
+
+14
+00:01:11.460 --> 00:01:14.100
+What environment and working directory are used?
+
+15
+00:01:14.200 --> 00:01:17.080
+Which descriptors or handles are inherited?
+
+16
+00:01:17.180 --> 00:01:19.660
+Which identity and resource limits apply?
+
+17
+00:01:19.760 --> 00:01:23.680
+How are errors, output, and timeouts handled?
+
+18
+00:01:23.960 --> 00:01:28.280
+This course treats process launch as an engineering workflow.
+
+19
+00:01:28.380 --> 00:01:33.020
+The goal is not fear of child processes; it is intentional design.
+
+20
+00:01:33.120 --> 00:01:44.080
+A maintainable launcher selects programs explicitly, passes structured arguments, constrains inherited state, manages the lifecycle, and gives reviewers a clear set of decisions to verify.

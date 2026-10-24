@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.780
+A TCP service has finite resources: descriptors or handles, memory, worker capacity, queues, CPU time, log bandwidth, and downstream dependencies.
+
+2
+00:00:11.880 --> 00:00:20.920
+Defensive design sets limits so the service behaves predictably when clients are slow, incomplete, disconnected, or simply more numerous than expected.
+
+3
+00:00:21.020 --> 00:00:26.380
+This is about availability and operational control, not about describing disruptive procedures.
+
+4
+00:00:26.660 --> 00:00:28.820
+Timeouts prevent indefinite waiting.
+
+5
+00:00:28.920 --> 00:00:40.040
+A service may need separate policies for accepting connections, reading a complete frame, writing a response, completing authentication, waiting for downstream work, and shutting down.
+
+6
+00:00:40.140 --> 00:00:46.460
+Timeouts should be visible in configuration and should produce consistent cleanup behavior when they expire.
+
+7
+00:00:46.740 --> 00:00:49.700
+Connection and request limits keep work bounded.
+
+8
+00:00:49.800 --> 00:01:01.560
+A service might limit total connections, connections per listener, active requests per connection, queued responses, frame sizes, pending writes, or per-client memory.
+
+9
+00:01:01.660 --> 00:01:08.140
+These limits should match the service purpose and should be tested at the edges, not guessed from optimistic traffic.
+
+10
+00:01:08.420 --> 00:01:11.700
+Buffer sizes need explicit maximums.
+
+11
+00:01:11.800 --> 00:01:18.840
+Input buffers, output buffers, parser scratch space, and per-connection queues should not grow without a plan.
+
+12
+00:01:18.940 --> 00:01:28.220
+When a limit is reached, the service should make a controlled decision: reject a frame, close a connection, apply backpressure, or report an operational event.
+
+13
+00:01:28.500 --> 00:01:34.180
+Backpressure is the service's way of responding when work arrives faster than it can be safely processed.
+
+14
+00:01:34.280 --> 00:01:38.920
+In a simple service, that may mean bounded queues and clear rejection.
+
+15
+00:01:39.020 --> 00:01:45.660
+In an event-driven service, it may mean pausing reads, limiting writes, or prioritizing cleanup.
+
+16
+00:01:45.760 --> 00:01:49.760
+Whatever the model, the behavior should be intentional and observable.
+
+17
+00:01:50.040 --> 00:01:53.480
+Reviewers should ask for a resource budget.
+
+18
+00:01:53.580 --> 00:02:01.660
+How many descriptors, how much memory, how much queued data, how many workers, and how much work per client are expected?
+
+19
+00:02:01.760 --> 00:02:09.440
+Monitoring should report when the service is close to those limits so operators can diagnose pressure without relying on noisy or sensitive logs.

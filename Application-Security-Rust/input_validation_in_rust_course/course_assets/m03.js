@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "From Strings to Domain Types",
+  "narration": "Many Rust programs begin with raw strings, byte slices, or unstructured values. The safest pattern is to treat those values as raw input first, then parse before use. Parsing should not simply convert syntax. It should establish whether the value is acceptable for the program's purpose. A port number, a user role, a tenant identifier, and a file name may all begin as strings, but they should not remain interchangeable strings throughout the application.\n\nResult is a natural fit for validation because it communicates either success or a specific failure. Option is useful when something may be absent, but it does not explain why a value failed validation. If the program needs to tell the caller that a field was too long, a number was out of range, or an enum value was unsupported, Result with a clear error type is usually the better model. Explicit errors also make tests and API responses easier to reason about.\n\nNewtypes help move validated values into the type system. A UserId, SafePathName, NonEmptyName, or PositiveQuantity can wrap a primitive after validation and prevent accidental mixing with unrelated strings or numbers. TryFrom and FromStr provide familiar Rust patterns for fallible conversion. They make the validation step visible at the call site and keep domain construction from being a casual assignment.\n\nAvoiding primitive obsession is a security and maintainability win. Primitive values are flexible, but that flexibility makes it easy to pass the wrong value to the wrong place. Domain types, enums, and fallible constructors encode decisions that would otherwise live in comments or scattered if statements. Once raw input has been converted into a well-defined type, later code can depend on a stronger contract.",
+  "graphicAlt": "Fallible conversions produce validated newtypes or explicit Result errors, while Option represents absence.",
+  "narrationPoints": [
+    "Many Rust programs begin with raw strings, byte slices, or unstructured values.",
+    "Result is a natural fit for validation because it communicates either success or a specific failure.",
+    "Newtypes help move validated values into the type system.",
+    "Avoiding primitive obsession is a security and maintainability win."
+  ]
+};

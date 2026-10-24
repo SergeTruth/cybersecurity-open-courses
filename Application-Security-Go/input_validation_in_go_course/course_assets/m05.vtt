@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+In web handlers, validation should happen before request data reaches business services.
+
+2
+00:00:05.560 --> 00:00:08.280
+Body validation checks the decoded payload.
+
+3
+00:00:08.380 --> 00:00:15.420
+Query and route parameter validation checks IDs, filters, page sizes, sort options, and flags.
+
+4
+00:00:15.520 --> 00:00:26.640
+Header and cookie validation checks formats, lengths, and expected presence before those values influence authentication, session handling, localization, or routing decisions.
+
+5
+00:00:26.740 --> 00:00:31.380
+Form submissions and multipart uploads add field, file, and metadata checks.
+
+6
+00:00:31.660 --> 00:00:42.460
+Middleware-level validation is useful for broad concerns such as body size limits, content type checks, authentication header shape, and common request metadata.
+
+7
+00:00:42.560 --> 00:00:47.440
+Handler-level validation remains necessary because each endpoint has a different contract.
+
+8
+00:00:47.540 --> 00:00:58.980
+A profile update, an administrative change, a search request, and a file upload may all use HTTP, but they should not accept the same fields, limits, or combinations of values.
+
+9
+00:00:59.260 --> 00:01:04.860
+Libraries such as go-playground/validator can help centralize common validation rules for structs.
+
+10
+00:01:04.960 --> 00:01:11.440
+They are useful when applied consistently, but they should not become a substitute for thinking about the use case.
+
+11
+00:01:11.540 --> 00:01:15.860
+Some rules are structural, such as required fields or maximum length.
+
+12
+00:01:15.960 --> 00:01:26.200
+Other rules are contextual, such as whether a user can update a tenant, whether a workflow transition is allowed, or whether a value is compatible with current account state.
+
+13
+00:01:26.480 --> 00:01:32.960
+Safe error responses should help legitimate clients without revealing unnecessary internal detail.
+
+14
+00:01:33.060 --> 00:01:38.260
+It is reasonable to say that a required field is missing or a value is out of range.
+
+15
+00:01:38.360 --> 00:01:46.360
+It is not reasonable to return stack traces, SQL errors, secrets, full request bodies, or internal object details.
+
+16
+00:01:46.460 --> 00:01:55.740
+Client-side validation improves usability, but server-side validation is the security control because clients can be bypassed, modified, or out of date.

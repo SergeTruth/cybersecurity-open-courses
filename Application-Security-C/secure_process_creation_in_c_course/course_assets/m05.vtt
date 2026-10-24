@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.300
+A child process can inherit environment variables from the parent, and those variables can influence runtime behavior.
+
+2
+00:00:07.400 --> 00:00:15.880
+They may affect configuration lookup, locale, temporary directory selection, logging, library behavior, proxy settings, and other assumptions.
+
+3
+00:00:15.980 --> 00:00:20.220
+The parent should decide which environment is appropriate for the child.
+
+4
+00:00:20.500 --> 00:00:26.580
+A minimal or controlled environment is often easier to review than inheriting everything.
+
+5
+00:00:26.680 --> 00:00:29.640
+Some tools need a specific set of variables.
+
+6
+00:00:29.740 --> 00:00:32.540
+Others can run with a deliberately small environment.
+
+7
+00:00:32.640 --> 00:00:38.320
+The code should build that environment intentionally where practical and document why inherited values are allowed.
+
+8
+00:00:38.600 --> 00:00:45.480
+Locale and encoding-related environment values can change parsing, comparison, formatting, and diagnostics.
+
+9
+00:00:45.580 --> 00:00:49.660
+Temporary directory variables can influence where files are created.
+
+10
+00:00:49.760 --> 00:00:55.200
+Configuration-related variables can change which files or services a helper uses.
+
+11
+00:00:55.300 --> 00:00:59.460
+These are all process-launch decisions, not background details.
+
+12
+00:00:59.740 --> 00:01:02.220
+The working directory also matters.
+
+13
+00:01:02.320 --> 00:01:06.640
+Relative paths used by the child are interpreted relative to its working directory.
+
+14
+00:01:06.740 --> 00:01:13.700
+If the parent relies on a specific directory, it should set it explicitly or pass absolute paths where appropriate.
+
+15
+00:01:13.800 --> 00:01:19.320
+A service or automation wrapper should not accidentally decide this for the child.
+
+16
+00:01:19.600 --> 00:01:23.200
+Reviewers should ask what the child inherits and why.
+
+17
+00:01:23.300 --> 00:01:29.300
+If the launch uses the parent's environment and current directory unchanged, that should be an intentional choice.
+
+18
+00:01:29.400 --> 00:01:35.960
+If the child needs constrained behavior, build the environment and working directory as part of the launch contract.

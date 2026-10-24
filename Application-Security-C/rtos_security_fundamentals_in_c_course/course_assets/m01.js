@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Why RTOS Security Matters",
+  "graphicAlt": "External sensor/message input passes a validation boundary into a real-time task, then controlled actuator output.",
+  "narration": "RTOS security matters because embedded and real-time C systems often interact directly with the physical world. They may control motors, valves, sensors, displays, radio links, storage, safety indicators, or operational workflows where timing and reliability are central to the product. A software defect in that environment can affect more than a user interface; it can affect device behavior.\n\nReal-time constraints do not remove the need for security discipline. A task may need to meet a deadline, but it still needs valid inputs, predictable memory behavior, checked return values, and safe failure handling. Timing pressure can make shortcuts tempting, so the design must define what is allowed before the system is under stress.\n\nC gives embedded developers control over memory, hardware registers, buffers, drivers, and interrupts. That control is useful, but it also means defects in bounds checks, pointer lifetime, stack sizing, or ownership can create unreliable behavior. Security review for RTOS code is often inseparable from reliability review.\n\nExternal inputs are common even in small devices. Sensor readings, bus messages, radio frames, configuration data, update metadata, field diagnostics, and operator commands can all influence behavior. The system should validate data at boundaries instead of assuming that inputs are well formed because they came from a familiar peripheral or internal bus.\n\nThe practical habit is to make assumptions explicit. What tasks exist? Which tasks can control hardware? What data crosses boundaries? What memory is shared? What happens during timeout, reset, update failure, or interrupt pressure? RTOS security starts when those questions are answered in design, code, tests, and review.",
+  "narrationPoints": [
+    "RTOS security matters because embedded and real-time C systems often interact directly with the physical world.",
+    "A task may need to meet a deadline, but it still needs valid inputs, predictable memory behavior, checked return values.",
+    "Security review for RTOS code is often inseparable from reliability review.",
+    "The system should validate data at boundaries instead of assuming that inputs are well formed.",
+    "RTOS security starts when those questions are answered in design, code, tests."
+  ]
+};

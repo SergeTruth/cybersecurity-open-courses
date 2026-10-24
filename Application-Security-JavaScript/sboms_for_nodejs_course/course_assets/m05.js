@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Build and CI/CD Integration",
+  "graphicAlt": "SBOMs generated for the selected artifact are evaluated and stored with the same release and provenance.",
+  "narration": "SBOM generation should be part of normal build and release workflows, not an occasional manual task. A realistic pipeline might install dependencies with a lockfile, run tests, build the application, build a container image, generate an SBOM, scan or evaluate the SBOM, attach it to the release, and store it for future response. The timing matters because the SBOM should match the artifact it represents, not a convenient earlier approximation.\n\nCI/CD can generate SBOMs after dependency installation, after build, after package creation, after container image creation, or during release publication. The right point depends on whether the SBOM represents source dependencies, a package, an image, or a deployed service. Store SBOMs with release artifacts, image digests, provenance records, artifact repositories, or release metadata where appropriate. If downstream customers or policy require the SBOM, generation failure should be treated as a release-quality issue, not background noise.\n\nProtect the pipeline that produces the SBOM. CI/CD secrets used for private package access, dependency installation, publishing, signing, or artifact upload can be sensitive. Signing, attestation, and provenance can strengthen confidence in where an SBOM came from and which build produced it. They do not make the listed components secure by themselves. A trustworthy workflow gives teams confidence that the SBOM is tied to the real release and has not been casually modified after generation.",
+  "narrationPoints": [
+    "A realistic pipeline might install dependencies with a lockfile, run tests, build the application, build a container image, generate an SBOM, scan or evaluate the SBOM, attach it to the release, and store it for future response.",
+    "If downstream customers or policy require the SBOM, generation failure should be treated as a release-quality issue, not background noise.",
+    "CI/CD secrets used for private package access, dependency installation, publishing, signing, or artifact upload can be sensitive.",
+    "CI/CD can generate SBOMs after dependency installation, after build, after package creation, after container image creation, or during release publication.",
+    "SBOM generation should be part of normal build and release workflows, not an occasional manual task.",
+    "Signing, attestation, and provenance can strengthen confidence in where an SBOM came from and which build produced it."
+  ]
+};

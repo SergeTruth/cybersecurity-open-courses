@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Practical Checklist",
+  "graphicAlt": "Controlled queries, resource policy, constrained mutations and minimal exposure are maintained through migration and operational review.",
+  "narration": "Prisma should be treated as the data-access boundary between application behavior and the database. Inventory Prisma usage across APIs, resolvers, workers, scripts, migrations, seed jobs, and admin tools. Map the inputs that reach each call, the models and fields involved, the authorization checks applied, the database account used, and the fields returned to the caller. This workflow-level view is what reveals risk that a single clean-looking Prisma call might hide.\n\nValidate runtime input before mapping it into Prisma query objects. Do not pass request objects directly into where, data, orderBy, include, select, or raw SQL paths. Prefer normal Prisma model operations when they meet the requirement, and treat raw SQL and unsafe raw query APIs as high-risk review points. Enforce object-level, tenant-aware, and field-aware authorization server-side. Use explicit allowlists for updates, dynamic filters, sorting, relation includes, and selectable fields.\n\nA practical first week plan is concrete: search for direct request-object Prisma calls, review raw SQL usage, add allowlists for dynamic filters and sorts, verify tenant scoping, restrict update fields, protect DATABASE_URL, review migration workflows, reduce sensitive logging, and add tests for unauthorized access and unsafe update attempts. Then make those practices normal through code review, CI/CD, monitoring, and incident response. Secure Prisma usage is not one pattern; it is a repeatable engineering discipline around data access.",
+  "narrationPoints": [
+    "Map the inputs that reach each call, the models and fields involved, the authorization checks applied, the database account used, and the fields returned to the caller.",
+    "Validate runtime input before mapping it into Prisma query objects.",
+    "A practical first week plan is concrete: search for direct request-object Prisma calls, review raw SQL usage, add allowlists for dynamic filters and sorts, verify tenant scoping, restrict update fields, protect DATABASE_URL, review migration workflows, reduce sensitive logging, and add tests for unauthorized access and unsafe update attempts.",
+    "Prefer normal Prisma model operations when they meet the requirement, and treat raw SQL and unsafe raw query APIs as high-risk review points.",
+    "Enforce object-level, tenant-aware, and field-aware authorization server-side.",
+    "Prisma should be treated as the data-access boundary between application behavior and the database."
+  ]
+};

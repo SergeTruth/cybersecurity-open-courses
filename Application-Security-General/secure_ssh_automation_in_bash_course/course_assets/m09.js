@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure SSH Bash Checklist",
+  "graphicAlt": "Host verification, scoped identities, controlled actions and checked remote state are maintained through evidence and lifecycle review.",
+  "narration": "Secure SSH automation in Bash is a layered practice. Start with host trust. Manage known hosts deliberately, understand how host keys are provisioned, and treat unexpected host key changes as review events rather than inconveniences to bypass.\n\nProtect keys and identities. Use dedicated automation accounts with clear ownership, purpose, scope, and lifecycle. Avoid shared privileged keys. Separate production access from lower environments where practical, and remove stale keys when workflows change.\n\nInvoke SSH safely from Bash. Keep command structure visible, use arrays for options, quote values that should remain literal, and validate hosts, users, ports, paths, and target labels before invocation. Avoid generated command strings and unnecessary re-parsing.\n\nKeep remote commands controlled. Prefer narrow, fixed, reviewed remote actions over arbitrary command text. Check SSH and remote command results, use timeouts and retry limits, and fail clearly before downstream steps depend on false success.\n\nProtect transfers and remote state. Validate source and destination paths, handle ownership and permissions deliberately, stage important changes where practical, avoid accidental overwrites, and log transfer outcomes without exposing sensitive contents.\n\nFinally, operate the system over time. Scope CI/CD credentials and bastion access carefully. Log useful activity, monitor failed and unusual SSH behavior, review authorized keys and sudo rules, and rotate or revoke access as workflows change. Secure SSH automation makes remote work safer, not slower.",
+  "narrationPoints": [
+    "Secure SSH automation in Bash is a layered practice.",
+    "Use dedicated automation accounts with clear ownership, purpose, scope, and lifecycle.",
+    "Keep command structure visible, use arrays for options, quote values that should remain literal, and validate hosts, users, ports, paths, and target labels before invocation.",
+    "Prefer narrow, fixed, reviewed remote actions over arbitrary command text.",
+    "Validate source and destination paths, handle ownership and permissions deliberately, stage important changes where practical, avoid accidental overwrites, and log transfer outcomes without exposing sensitive contents.",
+    "Log useful activity, monitor failed and unusual SSH behavior, review authorized keys and sudo rules, and rotate or revoke access as workflows change."
+  ]
+};

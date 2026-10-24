@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Temporary File Security in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="temporary_file_security_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;B&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;A&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;C&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;D&quot;,&quot;q11&quot;:&quot;B&quot;,&quot;q12&quot;:&quot;B&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why should temporary files be treated as security-relevant resources?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Temporary files can affect confidentiality, integrity, cleanup, and later program state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Temporary files are private and deleted immediately by default on every supported platform.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Temporary files cannot contain sensitive data because their contents are excluded from persistent storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>A temporary file is invisible outside the function that created its descriptor.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why are predictable temporary filenames risky?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Predictable names improve cleanup and cannot be used by another process before the file is opened.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Another actor may claim the predictable path before creation, so creation must be unique and atomic.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>A predictable filename automatically applies restrictive permissions to the resulting temporary file.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Knowing the name proves the containing directory is trusted and prevents replacement races.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What is the safer general approach to creating a temporary file?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Check that a chosen name is unused, close the check, and open the same pathname later.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Reuse one filename across processes so all temporary content follows a simple cleanup policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Trust a generated pathname before opening it because uniqueness guarantees object identity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Use a platform-supported API that creates and opens a unique temporary file atomically.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why should temporary-file directories be selected intentionally?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Directory ownership and permissions govern who may see, create, replace, or access temporary entries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>All temporary directories have equivalent permissions and trust boundaries on a given operating system.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Directory choice stops mattering after open, even when cleanup later resolves the pathname again.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Relative temporary paths always resolve beneath one trusted directory regardless of process state.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What does least privilege mean for temporary-file permissions?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Allow every local user to read and write the file so cleanup can succeed from any account.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Ignore umask and directory permissions because temporary-file APIs always enforce a private mode.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Make temporary files public by default, then narrow permissions after sensitive content is written.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Grant only the access required by the creating process and any explicitly intended consumers.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why is sensitive data in temporary files still a concern?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Temporary files are excluded from backups and removed before every abnormal termination.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Sensitive content becomes harmless when stored under a pathname marked as temporary.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Temporary data can survive crashes, enter backups or logs, or remain visible to others.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Cleanup always executes before a crash or forced termination can leave plaintext behind.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What should cleanup logic handle?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Cleanup needs to handle only the simplest success path because failed creation leaves no resources.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Cleanup applies only to empty files; a file containing data must remain for diagnostics.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Cleanup must cover success, failure, partial files, retries, and abnormal termination where feasible.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Temporary files need no cleanup because every platform removes them automatically after use.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why should write operations check return values?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Writes can fail or be short, so later code must not assume the complete output exists.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>A write to a temporary file always transfers the complete buffer in one successful call.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Write return values identify the pathname for logs but do not describe transferred data.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Checking the write result replaces the need to review file permissions and access policy.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. What is a safe approach before consuming temporary-file content?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Trust every artifact in a temporary directory because directory placement validates its producer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Consume the file before checking whether its writer completed, then validate only parsed fields.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Verify content, size, state, and expected source before consuming a temporary artifact.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Skip validation whenever the filename appears unique and was generated by the current process.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should logging temporary-file information be reviewed?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Temporary-file logs are private to the creating process even when sent to a shared collector.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Recording a sensitive temporary value makes it safe because the log has a controlled format.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Temporary paths are never sensitive and can be recorded with complete file contents.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Logs can expose temporary paths, filenames, sensitive content, or operational details.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is the role of tests and tools?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>A passing test makes the selected temporary directory trusted for every deployment environment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Tests and tools reveal cleanup, permission, boundary, and memory defects but do not replace explicit design.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Static analysis removes the need to check create, write, close, rename, and unlink results.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Sanitizers prove every abnormal termination path removes files and clears persistent storage.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Selecting one temporary directory resolves creation races, permissions, cleanup, and sensitive-data lifetime automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Temporary-file design must specify creation, ownership, directory, permissions, lifetime, cleanup, and data sensitivity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>A short filename makes a temporary file safe even when creation and permissions are uncontrolled.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Cleanup can be ignored for brief use because duration determines whether a file persists after failure.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

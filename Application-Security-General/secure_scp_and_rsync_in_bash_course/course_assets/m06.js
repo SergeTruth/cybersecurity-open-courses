@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Permissions, Ownership, Metadata, and Links",
+  "graphicAlt": "Post-transfer verification considers file permissions, ownership, required metadata and symbolic-link behavior.",
+  "narration": "File transfer is not only about bytes. Permissions, ownership, timestamps, modes, directory structure, and symbolic links can all affect the result. A file that arrives with the wrong mode may expose data or fail at runtime. A missing timestamp or ownership change may break downstream expectations.\n\nBefore automating a transfer, define which metadata matters. Some workflows only need file contents. Others need modes, timestamps, ownership, or directory structure preserved. rsync options can affect these details, so option choices should match the operational requirement instead of being copied from another script by habit.\n\nSensitive files require special handling. Transfer automation should avoid broad permissions, accidental publication, and routine logs that reveal sensitive paths or contents. If the destination is shared, staged, or consumed by another process, permissions and ownership should be part of the acceptance check.\n\nSymbolic links and link behavior deserve review. A script should know whether it is transferring a link, the link target, or a directory tree that may contain links. This matters most when automation processes shared directories, generated artifacts, or data prepared by another workflow.\n\nDirectory boundaries should be checked before transfer. A source tree and destination tree should represent the intended scope. Post-transfer verification can confirm that important files arrived, expected attributes are present, and the destination did not receive broader data than intended.\n\nThe secure habit is to verify the parts of file state that matter to the workflow. That may be a simple high-level check or a more formal release validation step. Either way, metadata and links are part of transfer behavior, not an afterthought.",
+  "narrationPoints": [
+    "Permissions, ownership, timestamps, modes, directory structure, and symbolic links can all affect the result.",
+    "Others need modes, timestamps, ownership, or directory structure preserved.",
+    "Transfer automation should avoid broad permissions, accidental publication, and routine logs that reveal sensitive paths or contents.",
+    "A script should know whether it is transferring a link, the link target, or a directory tree that may contain links.",
+    "A source tree and destination tree should represent the intended scope.",
+    "The secure habit is to verify the parts of file state that matter to the workflow."
+  ]
+};

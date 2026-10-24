@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.660
+A configuration parser should be guided by a contract before the parsing branches are written.
+
+2
+00:00:04.760 --> 00:00:14.920
+The contract defines what the program accepts, what it rejects, and how it behaves when input is missing, duplicated, deprecated, or unknown.
+
+3
+00:00:15.020 --> 00:00:20.620
+Without that contract, parser behavior tends to emerge accidentally from control flow.
+
+4
+00:00:20.900 --> 00:00:24.580
+Start by identifying required and optional settings.
+
+5
+00:00:24.680 --> 00:00:30.600
+Required settings should be present and valid before the program uses the configuration.
+
+6
+00:00:30.700 --> 00:00:33.580
+Optional settings need documented defaults.
+
+7
+00:00:33.680 --> 00:00:41.280
+A default is not just a convenience value; it is the behavior the program chooses when no explicit configuration is provided.
+
+8
+00:00:41.560 --> 00:00:43.640
+Allowed values should be specific.
+
+9
+00:00:43.740 --> 00:00:54.700
+Booleans, enumerations, identifiers, sizes, durations, percentages, paths, and lists each need a rule that matches their use.
+
+10
+00:00:54.800 --> 00:01:00.720
+Unknown values should not silently become defaults unless that behavior is part of the documented contract.
+
+11
+00:01:01.000 --> 00:01:05.000
+Duplicate keys and duplicate sections need deterministic behavior.
+
+12
+00:01:05.100 --> 00:01:12.220
+A parser can reject duplicates, use the first value, use the last value, or merge values by rule.
+
+13
+00:01:12.320 --> 00:01:17.680
+The important part is that the rule is intentional, documented, and covered by tests.
+
+14
+00:01:17.960 --> 00:01:21.320
+Unknown keys and versioning deserve the same care.
+
+15
+00:01:21.420 --> 00:01:25.180
+Some systems reject unknown keys to catch mistakes early.
+
+16
+00:01:25.280 --> 00:01:28.400
+Others allow unknown keys for forward compatibility.
+
+17
+00:01:28.500 --> 00:01:37.140
+Deprecated settings should have visible handling so teams know whether old configuration is still honored, warned about, or rejected.
+
+18
+00:01:37.420 --> 00:01:41.260
+A good configuration contract makes review and testing straightforward.
+
+19
+00:01:41.360 --> 00:01:54.240
+Reviewers can compare the parser against the schema, and tests can cover required fields, optional fields, defaults, duplicates, unknown keys, allowed values, deprecation, and version behavior.

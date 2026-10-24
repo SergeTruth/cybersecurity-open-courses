@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.540
+Backup jobs often need broad read access and sometimes write access to protected storage.
+
+2
+00:00:05.640 --> 00:00:10.440
+That does not mean they should run as an all-powerful account by default.
+
+3
+00:00:10.540 --> 00:00:13.020
+Least privilege still applies.
+
+4
+00:00:13.120 --> 00:00:18.000
+A backup identity should have the access required for its specific job and no more.
+
+5
+00:00:18.100 --> 00:00:22.900
+The account that reads source data may not need permission to delete historical backups.
+
+6
+00:00:23.000 --> 00:00:28.840
+The identity that writes to backup storage may not need administrative control over every source system.
+
+7
+00:00:29.120 --> 00:00:32.880
+Dedicated backup identities help make access review possible.
+
+8
+00:00:32.980 --> 00:00:36.500
+A shared administrator account hides purpose and ownership.
+
+9
+00:00:36.600 --> 00:00:44.360
+A dedicated identity can be tied to a system, dataset, schedule, storage destination, and recovery requirement.
+
+10
+00:00:44.460 --> 00:00:51.340
+It can have scoped credentials, monitored activity, clear rotation procedures, and a defined revocation path.
+
+11
+00:00:51.440 --> 00:00:57.920
+If the backup job is retired, the identity can be retired with it rather than remaining as hidden privileged access.
+
+12
+00:00:58.200 --> 00:01:03.080
+Separate read, write, delete, and administrative permissions.
+
+13
+00:01:03.180 --> 00:01:11.500
+A script may need to read production data and write a new backup object, but it may not need to overwrite previous backups or change storage policy.
+
+14
+00:01:11.600 --> 00:01:17.840
+Deletion rights should be especially carefully controlled because cleanup mistakes can damage recovery capability.
+
+15
+00:01:17.940 --> 00:01:25.220
+Where possible, use storage controls, roles, or separate processes to prevent one script from having every possible capability.
+
+16
+00:01:25.500 --> 00:01:31.900
+Secrets used for storage, encryption, transfer, or service access should be protected.
+
+17
+00:01:32.000 --> 00:01:36.880
+Keep them out of script files, command histories, logs, and broad environment dumps.
+
+18
+00:01:36.980 --> 00:01:41.300
+Use approved secret-management mechanisms or controlled runtime injection.
+
+19
+00:01:41.400 --> 00:01:46.120
+Review file ownership and permissions for local configuration and key material.
+
+20
+00:01:46.220 --> 00:01:52.940
+Rotate credentials on a schedule appropriate to the environment and revoke them promptly when a workflow changes or exposure is suspected.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Child Lifecycle, Errors, and Timeouts",
+  "graphicAlt": "Lifecycle management distinguishes startup failure, checked completion and timeout cleanup.",
+  "narration": "Launching a child process is not complete when the create call returns. The parent still has to manage startup failure, process state, I/O, exit status, timeouts, cancellation, and cleanup. Lifecycle management is part of the security and reliability contract.\n\nStartup failure should be reported clearly. The parent should distinguish between failure to start the process, failure inside the child, and a child that exits with a nonzero status according to its own contract. Those cases may require different diagnostics and cleanup behavior.\n\nExit status should be interpreted deliberately. Some tools use zero for success and nonzero for failure. Others encode categories. The parent should not treat any child completion as success unless the contract says so. Output should also be validated before it drives later decisions.\n\nThe parent must avoid unreaped children where the platform requires explicit waiting. It should also avoid waiting forever. Timeouts and cancellation policies protect workflows when a child hangs, stops making progress, or waits for input that will never arrive.\n\nCleanup should cover pipes, temporary files, partial output, and intermediate state. If setup fails halfway through, the code should close what it opened and remove what it owns. If a timeout occurs, the parent should decide how the child is stopped and how resources are recovered.\n\nPredictable error reporting matters for operations. Logs should identify the program, phase, safe error category, exit status where appropriate, and cleanup result without exposing sensitive arguments or environment values unnecessarily.",
+  "narrationPoints": [
+    "The parent should distinguish between failure to start the process, failure inside the child, and a child that exits with a nonzero status according to its own contract.",
+    "The parent should not treat any child completion as success unless the contract says so.",
+    "The parent must avoid unreaped children where the platform requires explicit waiting.",
+    "Cleanup should cover pipes, temporary files, partial output, and intermediate state.",
+    "Logs should identify the program, phase, safe error category, exit status where appropriate, and cleanup result without exposing sensitive arguments or environment values unnecessarily."
+  ]
+};

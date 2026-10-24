@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: A Dependency Security Roadmap",
+  "graphicAlt": "Dependency maintenance joins ownership, selection, controlled inputs, safe integration and ongoing updates.",
+  "narration": "A practical dependency security roadmap begins with inventory and ownership. Know which libraries are in the product, why they are present, where they come from, which versions are shipped, and who is responsible for them. Remove what is unused. Keep SBOM-style records current enough to support updates, customer communication, and incident response.\n\nSelect and acquire libraries deliberately. Evaluate maintenance, documentation, security process, tests, portability, API design, and long-term support expectations. Pin versions or otherwise control inputs. Record provenance and integrity evidence. Treat prebuilt binaries, remote fetching, and transitive dependencies as decisions that need visibility rather than conveniences hidden inside the build.\n\nIntegrate dependencies with clear boundaries. Review build options, optional components, compiler settings, ABI assumptions, runtime loading behavior, and platform differences. Isolate risky APIs behind wrappers, validate inputs at library boundaries, normalize errors, and make resource ownership explicit. Test the configuration the product actually ships.\n\nFinally, govern the lifecycle. Monitor vulnerabilities, assess real exposure, plan routine updates, prepare emergency update paths, and retire unsupported libraries. Use tests, sanitizers, defensive fuzzing, runtime limits, and code review to reduce risk. Keep decisions visible in issue trackers, release notes, and architecture records so future maintainers understand why the dependency exists. Third-party library security is not a one-time install command. It is an ongoing engineering practice tied to every release.",
+  "narrationPoints": [
+    "A practical dependency security roadmap begins with inventory and ownership.",
+    "Evaluate maintenance, documentation, security process, tests, portability, API design, and long-term support expectations.",
+    "Review build options, optional components, compiler settings, ABI assumptions, runtime loading behavior, and platform differences.",
+    "Isolate risky APIs behind wrappers, validate inputs at library boundaries, normalize errors, and make resource ownership explicit.",
+    "Use tests, sanitizers, defensive fuzzing, runtime limits, and code review to reduce risk.",
+    "Keep decisions visible in issue trackers, release notes, and architecture records so future maintainers understand why the dependency exists."
+  ]
+};

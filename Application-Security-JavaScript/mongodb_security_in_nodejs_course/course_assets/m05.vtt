@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.860
+MongoDB's document flexibility means the application must be deliberate about shape and meaning.
+
+2
+00:00:05.960 --> 00:00:23.720
+Mongoose schemas, validation libraries, JSON schema validation, or database schema validation can help define expected fields, required values, types, lengths, formats, enums, nested objects, arrays, and business constraints.
+
+3
+00:00:23.820 --> 00:00:26.460
+These controls make the document contract visible.
+
+4
+00:00:26.560 --> 00:00:32.800
+They also help prevent accidental storage of fields that the application never intended to accept.
+
+5
+00:00:33.080 --> 00:00:37.640
+Validation is not authorization, and it does not prove a query is safe.
+
+6
+00:00:37.740 --> 00:00:52.700
+A profile update may pass schema validation and still be dangerous if the caller can set role, tenantId, verified, accountStatus, ownerId, permission flags, token fields, audit fields, or password hash fields.
+
+7
+00:00:52.800 --> 00:01:00.160
+Updates should use explicit DTOs, allowlisted field maps, or controlled model methods that define exactly what the caller may change.
+
+8
+00:01:00.260 --> 00:01:04.740
+Avoid taking a request body and applying it directly as an update document.
+
+9
+00:01:05.020 --> 00:01:09.660
+Be careful with replacement updates versus operator-based updates.
+
+10
+00:01:09.760 --> 00:01:14.080
+A replacement can remove fields the application expected to preserve.
+
+11
+00:01:14.180 --> 00:01:20.340
+An operator-based update can be risky if the operator or target field is client-controlled.
+
+12
+00:01:20.440 --> 00:01:27.800
+Model hooks and middleware can enforce useful rules, but they should not hide critical security behavior so deeply that reviewers miss it.
+
+13
+00:01:27.900 --> 00:01:37.500
+The clearest design is usually the safest: validate the input, authorize the operation, map allowed fields, and perform a narrow update with predictable behavior.

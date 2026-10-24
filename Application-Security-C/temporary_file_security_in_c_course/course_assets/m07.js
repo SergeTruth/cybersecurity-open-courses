@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Lifetime, Cleanup, and Failure Paths",
+  "graphicAlt": "Owned work files have success and failure cleanup paths, while crash remnants require a separate reviewed cleanup policy.",
+  "narration": "Cleanup is part of the temporary file's lifecycle, not a final detail. A temporary file should have a known owner and a known removal point. That removal point may be tied to closing the file, committing output, finishing a workflow, or handling an error, depending on the platform and design.\n\nSuccess and failure paths both need cleanup. A program may create a file, write partial content, fail validation, retry, or return early. Each path should define whether the file is removed, retained for diagnosis, or rolled into another state. Leaving the answer to incidental control flow usually creates operational surprises.\n\nPartial files require predictable handling. A failed write, interrupted operation, or validation error can leave incomplete content. Later code should not mistake that content for a valid final artifact. Naming, directory separation, handle ownership, and finalization rules can help keep work files distinct from completed output.\n\nAbnormal termination can leave remnants. A process may crash, be killed, lose power, or fail before cleanup runs. Designs that handle sensitive temporary data should consider what remains in that case and whether startup cleanup, external cleanup policies, or unlink-on-close style behavior is appropriate.\n\nCleanup behavior should be tested and reviewed like success behavior. Tests should exercise errors after creation, errors after partial writes, validation failure, retry paths, and normal completion. Reviewers should be able to see who owns the file and how cleanup happens.",
+  "narrationPoints": [
+    "A temporary file should have a known owner and a known removal point.",
+    "Each path should define whether the file is removed, retained for diagnosis, or rolled into another state.",
+    "A failed write, interrupted operation, or validation error can leave incomplete content.",
+    "Designs that handle sensitive temporary data should consider what remains in that case and whether startup cleanup, external cleanup policies, or unlink-on-close style behavior is appropriate.",
+    "Tests should exercise errors after creation, errors after partial writes, validation failure, retry paths, and normal completion."
+  ]
+};

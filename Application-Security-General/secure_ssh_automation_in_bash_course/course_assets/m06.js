@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secure File Transfer and Remote State",
+  "graphicAlt": "Validated file transfer uses staging, permission checks and deliberate replacement before confirming remote state.",
+  "narration": "Bash SSH automation frequently transfers files. A script may place artifacts, fetch logs, copy configuration, stage updates, or collect diagnostic bundles. File transfer is not just movement of bytes. It is a state-changing operation that can affect permissions, ownership, availability, and later remote behavior.\n\nSource and destination paths should be validated before transfer. A script should know what it is allowed to read, where it is allowed to write, and what should happen if a path is missing or already exists. Avoid assumptions that depend on the current working directory unless that directory is set deliberately.\n\nImportant changes should be staged before replacement where practical. Staging allows checks before a final handoff, reduces the chance of partial updates, and gives operators clearer failure points. It also supports safer rollback or cleanup behavior when a transfer does not complete.\n\nOwnership and permissions matter. A transferred file should not become broadly readable or executable by accident. Sensitive files should not be exposed through temporary locations, build workspaces, logs, or overly broad remote permissions. The script should handle confidentiality as part of the transfer design.\n\nAvoid accidental overwrites. If replacement is intended, make it deliberate and logged at a safe level. If replacement is not intended, the script should detect that condition and stop clearly. Silent overwrites are hard to troubleshoot and can damage operational confidence.\n\nTransfer outcomes should be checked. Operators need to know whether the transfer completed, which target was involved, and what high-level action occurred. Logs should avoid secrets and sensitive contents while still providing enough evidence for review and incident response.",
+  "narrationPoints": [
+    "A script may place artifacts, fetch logs, copy configuration, stage updates, or collect diagnostic bundles.",
+    "Source and destination paths should be validated before transfer.",
+    "Important changes should be staged before replacement where practical.",
+    "A transferred file should not become broadly readable or executable by accident.",
+    "If replacement is intended, make it deliberate and logged at a safe level.",
+    "Operators need to know whether the transfer completed, which target was involved, and what high-level action occurred."
+  ]
+};

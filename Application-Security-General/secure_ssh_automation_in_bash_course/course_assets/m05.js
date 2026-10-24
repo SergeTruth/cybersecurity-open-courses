@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Remote Commands, Quoting, and Exit Handling",
+  "graphicAlt": "Validated operands cross from local Bash into a fixed remote action, whose result is checked separately.",
+  "narration": "SSH automation often involves two layers of interpretation: the local Bash script and the remote environment. A value may be expanded locally before SSH runs, and then the remote side may interpret command text according to its own shell or command interface. That dual context makes remote command construction easy to get wrong.\n\nSafer designs keep remote actions narrow, fixed, and validated. Where practical, the remote side should expose a known script, controlled command interface, or limited operational action rather than accepting arbitrary remote command text. The local script should pass validated operands, not open-ended instructions.\n\nRemote command boundaries should be reviewed carefully. A variable that is safe as a local argument may have a different meaning if it is embedded into remote shell syntax. The more dynamic the remote command, the harder it becomes to prove what will actually run in each environment.\n\nScripts should check results. SSH can fail because the connection failed, authentication failed, host trust failed, the remote command failed, or the remote environment behaved differently than expected. Where practical, failure messages should distinguish connection or trust problems from remote execution problems.\n\nTimeouts and retry limits are important for unattended automation. A hung connection or repeated remote failure should not block a pipeline indefinitely. Safe stopping behavior is better than a false success signal that later deployment or maintenance steps rely on.\n\nThe goal is not to make remote work rigid. The goal is to keep remote actions reviewable. A small set of known remote behaviors with validated inputs is easier to operate than a general-purpose remote command builder hidden inside a Bash script.",
+  "narrationPoints": [
+    "SSH automation often involves two layers of interpretation: the local Bash script and the remote environment.",
+    "Safer designs keep remote actions narrow, fixed, and validated.",
+    "A variable that is safe as a local argument may have a different meaning if it is embedded into remote shell syntax.",
+    "SSH can fail because the connection failed, authentication failed, host trust failed, the remote command failed, or the remote environment behaved differently than expected.",
+    "Timeouts and retry limits are important for unattended automation.",
+    "The goal is not to make remote work rigid."
+  ]
+};

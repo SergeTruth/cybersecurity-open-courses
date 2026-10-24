@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.140
+Exceptions, RTTI, and dynamic casting can depend on compatible compiler, runtime, and ABI assumptions.
+
+2
+00:00:09.240 --> 00:00:14.760
+They may be appropriate inside one component, but they should not casually cross every boundary.
+
+3
+00:00:14.860 --> 00:00:24.140
+A C API, foreign language interface, plugin boundary, thread entry point, or ABI-sensitive library boundary may need a different failure reporting rule.
+
+4
+00:00:24.240 --> 00:00:31.040
+If an exception escapes into code that cannot handle it, the result may be termination or lost diagnostic context.
+
+5
+00:00:31.320 --> 00:00:39.080
+A safer boundary pattern is to catch implementation exceptions at the boundary and translate them into a stable status code or error object.
+
+6
+00:00:39.180 --> 00:00:45.740
+The boundary should preserve useful diagnostic context safely, without exposing internal details that callers should not rely on.
+
+7
+00:00:45.840 --> 00:00:53.520
+It should also define object state after failure so callers know whether cleanup, retry, or shutdown is appropriate.
+
+8
+00:00:53.800 --> 00:01:00.040
+RTTI and dynamic casting should be used only when the boundary contract supports compatible runtime assumptions.
+
+9
+00:01:00.140 --> 00:01:10.060
+If modules can be built independently, versioned capability checks or explicit type identifiers may be safer than relying on cross-module C++ runtime behavior.
+
+10
+00:01:10.160 --> 00:01:20.720
+The key design principle is simple: keep implementation error mechanisms inside the component unless the ABI contract explicitly says they are supported across the boundary.
+
+11
+00:01:20.820 --> 00:01:26.500
+That contract should also say how diagnostics are collected without leaking private implementation details.
+
+12
+00:01:26.780 --> 00:01:29.820
+Error translation also needs lifecycle rules.
+
+13
+00:01:29.920 --> 00:01:39.760
+Decide who owns an error object, how long a diagnostic string remains valid, whether the error state is thread-local, and how callers clear or copy it.
+
+14
+00:01:39.860 --> 00:01:47.940
+These details may sound small, but they prevent failures at the moment when the system is already on an unusual path and needs predictable recovery behavior.

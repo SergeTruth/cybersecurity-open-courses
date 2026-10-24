@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Privilege Management in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="privilege_management_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;B&quot;,&quot;q05&quot;:&quot;C&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;D&quot;,&quot;q09&quot;:&quot;B&quot;,&quot;q10&quot;:&quot;C&quot;,&quot;q11&quot;:&quot;D&quot;,&quot;q12&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why is privilege management security-relevant in C programs?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Privilege is relevant only to operating-system administration; application data and resource decisions remain ordinary code concerns.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Elevated code is safe once the caller is authenticated, even when the requested operation is not separately authorized.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Because elevated code can affect files, resources, processes, users, and system state beyond ordinary program behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Privilege affects confidentiality but does not change the impact of memory, path, or process-control defects.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. What does least privilege mean in this course?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Giving code only the permissions and access it needs for its current task.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Grant the service every permission it may need during its lifetime so later operations never fail unexpectedly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Use one broadly privileged process but restrict dangerous behavior through internal function naming and review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>Give each component minimum current authority, but allow it to raise its own privileges whenever more access is required.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why should privileged code paths be small and reviewable?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Small privileged code is automatically correct because its control flow is easy for the compiler to optimize.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>A narrow privileged path reduces review scope, but surrounding unprivileged input may be trusted once it reaches that path.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>Privileged code can omit detailed failure handling when any error returns immediately to unprivileged code.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>Smaller privileged sections reduce the amount of code that can misuse elevated rights.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why does inherited environment state matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Only PATH-like variables matter during privileged startup; locale, loaders, temporary paths, and feature settings are harmless.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Environment variables can influence program behavior, configuration, temporary paths, locale, libraries, and child processes.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Environment values inherited from a service manager are trusted because the manager launched the process.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Clearing a short denylist is sufficient even when new environment-sensitive libraries are added later.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should privileged startup code validate?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Validate only user-supplied configuration because inherited descriptors and working directory are controlled by the operating system.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Complete privileged initialization first, then validate identity and paths before serving the first request.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Configuration, paths, working directory, inherited descriptors or handles, environment assumptions, and expected identity state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>A successful executable launch proves startup identity, environment, descriptors, and configuration are appropriate.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why must privilege-dropping calls be checked?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>A privilege-drop call may be treated as successful when the requested user ID matches configuration.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>A failed or partial privilege change can leave the process with more authority than expected.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Retrying a failed reduction later is sufficient while the process continues with its current authority.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Checking only the primary identity is enough even when supplementary groups or capabilities remain.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. What should happen after privileges are no longer needed?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>The program should reduce or drop them where appropriate and verify the resulting state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Keep startup privilege available in a hidden helper thread so recovery operations remain convenient.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Drop authority only after the process has handled one normal request and confirmed the deployment works.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Reduce privilege but avoid verifying the resulting identity because a second query can introduce race conditions.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why are child processes important in privilege management?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>A trusted executable cannot misuse inherited descriptors, handles, environment, or elevated identity.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Closing known sensitive handles is sufficient; unknown inherited resources may remain for compatibility.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>A child process drops all parent privilege automatically when invoked without a shell.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>They can inherit environment, descriptors, handles, identity, privileges, and resource access from the parent.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why should logs from privileged code be reviewed carefully?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Restrictive log-file permissions make it safe to record raw configuration, identity tokens, and user-controlled paths.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Logs may expose sensitive paths, configuration, identities, errors, or operational details.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Privileged logs should omit failures because denial details can reveal system policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Redacting secrets is sufficient even when untrusted control characters can forge additional log records.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should tests for privileged behavior include?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Successful privileged operations cover the main risk; denial and partial-transition failures are deployment concerns.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Tests can run only as an administrator because lower-privilege identities cannot exercise meaningful paths.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Expected identity state, denied operations, failure paths, permission behavior, environment assumptions, and cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Identity, permissions, failures, and denied operations need explicit cases, but one successful cleanup case proves cleanup on every failure path.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What is a limitation of tools such as static analysis and sanitizers?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>A clean sanitizer run proves the deployed service account, capabilities, and filesystem policy are correctly scoped.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Static analysis can derive intended privilege boundaries without architecture or deployment documentation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Tool findings replace negative tests when privileged APIs return checked status values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>They can reveal many defects but do not replace explicit privilege design, review, and testing.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Make privilege explicit by controlling identity, inherited state, privileged operations, privilege reduction, logging, and review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>Privilege is adequately controlled when the process starts elevated and logs every sensitive operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>A single platform hardening option can replace explicit identity, inheritance, reduction, and child-process rules.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Keep privileged operations narrow, validate inherited state, and constrain propagation; logging each transition can replace tests of denied behavior.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

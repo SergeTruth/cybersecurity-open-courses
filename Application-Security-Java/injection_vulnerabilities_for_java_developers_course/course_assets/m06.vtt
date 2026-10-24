@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Template engines and expression languages are interpreters.
+
+2
+00:00:04.360 --> 00:00:15.400
+Java applications may use technologies such as JSP expression language, Thymeleaf, FreeMarker, Velocity, Spring Expression Language, or framework-specific expression features.
+
+3
+00:00:15.500 --> 00:00:20.300
+These tools are useful because they evaluate templates, conditions, and expressions.
+
+4
+00:00:20.400 --> 00:00:31.360
+They become risky when user-controlled input can influence template logic, expression text, script evaluation, or dynamic behavior that was intended to be controlled by developers.
+
+5
+00:00:31.640 --> 00:00:39.480
+Server-side template injection is best understood at a high level as user content crossing into template instruction space.
+
+6
+00:00:39.580 --> 00:00:47.100
+A comment, display name, search term, or message body should be rendered as content, not parsed as a template.
+
+7
+00:00:47.200 --> 00:00:56.400
+Similarly, expression language features should receive controlled developer expressions, not arbitrary strings from requests, imports, or stored data.
+
+8
+00:00:56.500 --> 00:01:03.540
+Sandboxes and restricted modes can help, but they should not be treated as permission to accept untrusted expressions.
+
+9
+00:01:03.820 --> 00:01:11.500
+Dynamic scripting, plugin systems, rule engines, and configuration-driven behavior need clear trust boundaries.
+
+10
+00:01:11.600 --> 00:01:18.880
+If the product allows administrators to define rules or templates, separate that trusted administrative function from normal user input.
+
+11
+00:01:18.980 --> 00:01:27.060
+Review dependencies that interpret strings, evaluate expressions, deserialize behavior, or load classes dynamically.
+
+12
+00:01:27.160 --> 00:01:32.920
+A harmless-looking helper can become a sensitive sink when it converts text into executable logic.
+
+13
+00:01:33.200 --> 00:01:35.600
+The defensive pattern is separation.
+
+14
+00:01:35.700 --> 00:01:38.660
+Store user content as content.
+
+15
+00:01:38.760 --> 00:01:41.640
+Store developer-controlled templates separately.
+
+16
+00:01:41.740 --> 00:01:50.060
+Use template APIs that escape by default for the relevant context, and only disable escaping after a deliberate review.
+
+17
+00:01:50.160 --> 00:01:58.160
+Avoid giving users control over template names, expression bodies, class names, method names, or evaluation context.
+
+18
+00:01:58.260 --> 00:02:05.940
+When dynamic behavior is required, constrain it to a small vocabulary of approved operations rather than open-ended evaluation.

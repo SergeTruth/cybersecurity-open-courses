@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Secure TCP Services in C</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="secure_tcp_services_in_c">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;B&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;D&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;A&quot;,&quot;q09&quot;:&quot;D&quot;,&quot;q10&quot;:&quot;C&quot;,&quot;q11&quot;:&quot;A&quot;,&quot;q12&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why are TCP services security-relevant?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>TCP validates every application message before delivery, so service parsers receive only authorized requests.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>TCP services expose parsing, memory, resource, authentication, and lifecycle assumptions to client input.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>TCP services run only on trusted local hosts and cannot receive input from a different trust domain.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>The operating system owns all connection state, so services need no cleanup or lifecycle policy.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why should listening scope be intentional?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Listening scope affects only log formatting and does not change the service&#x27;s reachable network surface.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>All binding choices expose a TCP service to exactly the same set of remote and local clients.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Binding to different addresses and interfaces changes which clients can reach the listening service.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>A narrow listening scope authenticates reachable clients and replaces application authorization.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. What does TCP provide to the application?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>TCP provides a built-in parser that validates every field in the service protocol.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>TCP is an ordered byte stream, not a sequence of complete protocol messages or records.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>TCP guarantees each read returns exactly one complete message written by the peer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>TCP automatically validates field types and converts them into the receiving C structures.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why does protocol framing matter?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Framing makes maximum message sizes unnecessary because every complete message is safe to allocate.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Framing is useful only after encryption; plaintext services can use individual read calls as boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Framing prevents malformed input, so field validation can be skipped after a message is complete.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Framing defines complete message boundaries so the service can parse and validate input safely.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should a C network parser validate before using input?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Validate only that the first byte exists, then let downstream handlers interpret the remaining buffer.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Validate only that the client uses a private address because trusted networks supply well-formed messages.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Skip application validation when input arrived over TCP because the transport already checked its meaning.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Validate length, type, format, bounds, conversions, and whether each field is valid in the current protocol state.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. Why are partial reads and writes important?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Partial I/O authenticates the peer because only established connections can return a short operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Partial reads and writes occur only in test harnesses, not in production TCP services.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>A read or write may transfer only part of a request, so code must track incomplete operations.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Partial I/O removes the need for buffers because each returned byte can be dispatched independently.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why do TCP services need resource limits?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>Resource limits ensure that every request succeeds before its connection or work budget expires.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>Limits keep memory, descriptors, connections, queues, and per-client work within predictable budgets.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>A configured limit replaces parser validation because oversized or malformed messages become harmless.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Resource limits matter only to graphical applications and not to long-running TCP services.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. What is a risk of shared mutable state in a concurrent service?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Unsynchronized shared state can cause races, inconsistent decisions, or interference between different clients.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Shared mutable state automatically improves isolation because every worker observes the same values.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Sharing service state prevents cleanup failures by giving every thread ownership of every resource.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Once state is shared, per-client validation is unnecessary because earlier clients established its validity.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why is transport encryption not the same as authorization?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Encrypted transport identifies every user and grants the correct permission for each application command.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Authorization is necessary only for plaintext services because encryption makes all peers equally trusted.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Encrypted messages no longer need parsing or field validation after the TLS handshake succeeds.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Encryption protects communication, while authorization separately decides what an authenticated client may do.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Why should logs avoid excessive client-controlled data?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Logs should preserve every received byte because complete client input is always the most useful diagnostic.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Client-controlled data is safe in logs once it has passed through a connected TCP socket.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Unbounded client data in logs can expose secrets, mislead operators, inject structure, or consume storage.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Recording more client data replaces metrics and monitoring by preserving the entire request history.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>11. What should cleanup logic handle?</legend>
+            <label class="quiz-option"><input type="radio" name="q11" value="A" required><span>Cleanup must cover success, disconnect, parse failure, timeout, partial setup, and service shutdown.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="B" required><span>Cleanup is required only after successful request completion because failures release resources automatically.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="C" required><span>Cleanup should cover only clients that authenticated successfully and therefore own service resources.</span></label>
+            <label class="quiz-option"><input type="radio" name="q11" value="D" required><span>Cleanup is limited to startup configuration errors; established connections belong to the operating system.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>12. What is the main course takeaway?</legend>
+            <label class="quiz-option"><input type="radio" name="q12" value="A" required><span>Secure services explicitly control exposure, framing, validation, limits, isolation, trust, diagnostics, and cleanup.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="B" required><span>One socket option can provide the complete parsing, authorization, resource, and lifecycle policy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="C" required><span>TCP automatically enforces the application protocol once a service accepts a connected client.</span></label>
+            <label class="quiz-option"><input type="radio" name="q12" value="D" required><span>Operational diagnostics should be omitted because secure C services cannot log failures safely.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

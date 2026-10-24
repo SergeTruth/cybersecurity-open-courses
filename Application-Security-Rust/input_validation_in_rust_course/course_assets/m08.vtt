@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Validation code should be tested with the same seriousness as business logic.
+
+2
+00:00:05.240 --> 00:00:23.000
+Unit tests should cover valid examples, but the more important cases are often negative: missing fields, malformed values, unsupported enum variants, overlong strings, oversized collections, invalid dates, unexpected JSON shapes, and numbers at the edge of accepted ranges.
+
+3
+00:00:23.100 --> 00:00:27.660
+cargo test makes these checks easy to keep close to the validators they protect.
+
+4
+00:00:27.940 --> 00:00:32.420
+Boundary tests are especially valuable because validation rules often fail at the edges.
+
+5
+00:00:32.520 --> 00:00:35.800
+Test the maximum allowed length and one character more.
+
+6
+00:00:35.900 --> 00:00:41.420
+Test zero, one, negative one, the maximum accepted value, and a value above it.
+
+7
+00:00:41.520 --> 00:00:47.840
+Test empty arrays, single-item arrays, duplicate items, and arrays beyond the allowed limit.
+
+8
+00:00:47.940 --> 00:00:53.460
+This is where simple validators reveal whether they encode the intended policy or just the happy path.
+
+9
+00:00:53.740 --> 00:00:59.820
+Property-based testing and fuzzing can extend validation coverage beyond hand-picked examples.
+
+10
+00:00:59.920 --> 00:01:05.520
+Property-based tests explore many generated inputs and check that important properties always hold.
+
+11
+00:01:05.620 --> 00:01:10.660
+Fuzzing can exercise parsers and decoders with malformed or unexpected bytes.
+
+12
+00:01:10.760 --> 00:01:19.560
+These techniques are especially useful for file formats, protocol inputs, and complex parsers where humans are unlikely to imagine every edge case.
+
+13
+00:01:19.840 --> 00:01:22.320
+Code review should trace trust boundaries.
+
+14
+00:01:22.420 --> 00:01:31.780
+Reviewers should ask where the data came from, what type represented it before validation, which validator accepted it, how errors are handled, and whether logging is safe.
+
+15
+00:01:31.880 --> 00:01:37.320
+Clippy and linting help catch some code smells, but they do not understand every domain rule.
+
+16
+00:01:37.420 --> 00:01:45.500
+Good review combines Rust tooling with a simple security question: can invalid or unexpected input reach a sensitive decision point?

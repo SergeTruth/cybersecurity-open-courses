@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+File paths cross trust boundaries in many ordinary workflows.
+
+2
+00:00:05.160 --> 00:00:15.960
+A command-line argument, configuration value, environment variable, package setting, administrator-provided path, or runtime-generated path can all guide file operations.
+
+3
+00:00:16.060 --> 00:00:20.940
+Each source needs a trust decision based on who controls it and what the program will do with it.
+
+4
+00:00:21.220 --> 00:00:25.380
+User-supplied paths should be validated against the intended purpose.
+
+5
+00:00:25.480 --> 00:00:35.080
+A path used for input is different from a path used for output, cleanup, replacement, import, export, or logging.
+
+6
+00:00:35.180 --> 00:00:40.300
+The validation rule should match the operation, not just the fact that the value is a path.
+
+7
+00:00:40.580 --> 00:00:44.180
+Environment-derived paths are not automatically trusted.
+
+8
+00:00:44.280 --> 00:00:51.320
+Environment variables can be absent, unexpected, inherited from a launcher, or changed by deployment tooling.
+
+9
+00:00:51.420 --> 00:00:55.340
+Service working directories can also differ between development and production.
+
+10
+00:00:55.440 --> 00:00:58.400
+Code should make its directory assumptions visible.
+
+11
+00:00:58.680 --> 00:01:08.680
+Shared directories require stricter assumptions because other users or processes may be able to create, remove, or replace entries depending on permissions.
+
+12
+00:01:08.780 --> 00:01:17.660
+Temporary directories, spool directories, upload directories, and package-managed paths all deserve explicit ownership and permission review.
+
+13
+00:01:17.940 --> 00:01:21.540
+Configuration paths should match documented purpose.
+
+14
+00:01:21.640 --> 00:01:31.400
+If a setting names a trusted root, output directory, key location, log directory, or cache path, the program should validate it as that role.
+
+15
+00:01:31.500 --> 00:01:39.820
+Directory trust depends on ownership, permissions, who can modify entries, and whether the program runs with broader access than the path source.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Binding, Listening, and Endpoint Exposure",
+  "graphicAlt": "Binding and deployment policy select an intended audience under a restricted service identity.",
+  "narration": "Binding is a security decision because it determines where a service is reachable. A service bound only to a loopback interface has a different exposure profile from a service listening on every interface. A service reachable only inside a private deployment network has a different risk profile from a public-facing endpoint.\n\nListening on all interfaces can expose a service more broadly than intended. The code may have been tested locally, but deployment can place the same binary on a host with additional network interfaces, container bridges, overlay networks, or routes to other environments. Binding behavior should match the intended deployment model, not just the developer's workstation.\n\nPort choices, service accounts, firewall policy, container networking, orchestration configuration, and load balancer behavior all affect endpoint exposure. The socket call is only one part of the real boundary. Secure design documents which endpoints are meant to exist and which surrounding controls are required.\n\nLeast privilege strengthens the design. The service account should have only the filesystem, process, and network privileges the service needs. If socket logic contains a mistake, a restricted process identity can reduce what the service can affect. Network exposure and local process privileges should be reviewed together.\n\nEndpoint exposure should be reviewed as part of the application's security boundary. Reviewers should ask which addresses and ports are reachable, who can reach them, which protocol is expected, how access is controlled, and how deployment configuration keeps the service aligned with its intended audience.",
+  "narrationPoints": [
+    "Binding is a security decision because it determines where a service is reachable.",
+    "Binding behavior should match the intended deployment model, not just the developer's workstation.",
+    "Secure design documents which endpoints are meant to exist and which surrounding controls are required.",
+    "The service account should have only the filesystem, process, and network privileges the service needs.",
+    "Endpoint exposure should be reviewed as part of the application's security boundary."
+  ]
+};

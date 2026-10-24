@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+Not every curl request is a harmless read.
+
+2
+00:00:03.560 --> 00:00:13.880
+A script may create tickets, trigger deployments, approve workflows, upload artifacts, modify settings, rotate configuration, or delete records through an API.
+
+3
+00:00:13.980 --> 00:00:19.020
+That makes HTTP method choice and payload design operationally important.
+
+4
+00:00:19.300 --> 00:00:24.580
+Scripts should distinguish read-only requests from state-changing requests.
+
+5
+00:00:24.680 --> 00:00:29.800
+A status check and a production deployment trigger should not have the same validation threshold.
+
+6
+00:00:29.900 --> 00:00:37.900
+High-impact actions should require stronger endpoint validation, clearer intent, and safer failure behavior.
+
+7
+00:00:38.180 --> 00:00:40.420
+Request bodies should be built safely.
+
+8
+00:00:40.520 --> 00:00:47.880
+Payloads should match the content type the API expects, and values inside the payload should be validated according to the workflow.
+
+9
+00:00:47.980 --> 00:00:56.060
+A malformed body can cause failure, but a subtly wrong body can cause a state change in the wrong environment or with the wrong parameters.
+
+10
+00:00:56.340 --> 00:00:58.180
+Environment separation matters.
+
+11
+00:00:58.280 --> 00:01:03.720
+Development, staging, and production endpoints should be distinct and intentionally selected.
+
+12
+00:01:03.820 --> 00:01:12.620
+A script should not make it easy for a routine test run to send a state-changing request to production because of a loose environment variable or default.
+
+13
+00:01:12.900 --> 00:01:18.660
+Where an API and workflow support it, dry-run, preview, or approval steps can reduce risk.
+
+14
+00:01:18.760 --> 00:01:28.040
+The script should make intent clear before sending a request that changes server-side state, and it should log high-level outcomes without exposing sensitive payload details.

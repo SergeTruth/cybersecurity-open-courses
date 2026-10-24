@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.500
+Token security starts by classifying each token by purpose, authority, issuer, validator, storage location, transport path, and lifetime.
+
+2
+00:00:10.600 --> 00:00:22.760
+A correlation ID, reset token, API key, JWT access token, refresh token, CSRF token, OAuth state value, and webhook secret should not share one vague design.
+
+3
+00:00:22.860 --> 00:00:27.260
+Write down what each token can do and what must happen if it is copied.
+
+4
+00:00:27.540 --> 00:00:32.820
+Use cryptographically secure randomness for opaque tokens and one-time values.
+
+5
+00:00:32.920 --> 00:00:38.120
+Store token digests when the application only needs to verify a presented token.
+
+6
+00:00:38.220 --> 00:00:46.220
+Protect access tokens, refresh tokens, API keys, reset links, and session IDs as bearer secrets.
+
+7
+00:00:46.320 --> 00:00:58.560
+Use HTTPS, avoid sensitive tokens in URLs, apply secure cookie attributes when cookies are used, and include CSRF defenses where cookie-based authentication needs them.
+
+8
+00:00:58.840 --> 00:01:03.800
+JWTs require strict validation before claims are trusted.
+
+9
+00:01:03.900 --> 00:01:10.780
+Check signatures, expected algorithms, issuer, audience, expiration, purpose, and key identity.
+
+10
+00:01:10.880 --> 00:01:15.440
+Keep claims minimal and avoid secrets in token payloads.
+
+11
+00:01:15.540 --> 00:01:22.100
+Do not treat access tokens, refresh tokens, and ID tokens as interchangeable.
+
+12
+00:01:22.200 --> 00:01:32.120
+A valid authentication token still does not replace object-level authorization, tenant authorization, field-level authorization, or business-rule enforcement.
+
+13
+00:01:32.400 --> 00:01:56.800
+A practical first-week plan is direct: inventory token types, find token logging, review JWT validation, check reset-token storage, confirm cookie flags, remove tokens from URLs, review refresh-token handling, add token revocation paths, and add tests for expired, revoked, wrong-audience, wrong-issuer, reused, and wrong-purpose tokens.
+
+14
+00:01:56.900 --> 00:02:04.020
+Token security becomes reliable when it is part of pull requests, tests, monitoring, and incident response.

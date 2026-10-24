@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Bash Invocation, Agents, and Runtime Use",
+  "graphicAlt": "A job selects its intended key for a known target, stops if the key is missing and reviews agent exposure separately.",
+  "narration": "A Bash script should make SSH key use explicit and reviewable. It should select the intended identity for the intended target rather than relying on whichever key happens to be available in the environment. This is especially important on developer workstations, shared runners, and deployment hosts where several keys may be present. The script should make its trust decision visible to reviewers.\n\nQuoting and option handling matter because SSH commands often combine paths, usernames, hostnames, options, and file names. Key paths and SSH options should be quoted where appropriate. Bash arrays can help preserve option boundaries when a script needs to construct a command from several pieces. Avoid building one large generated command string that mixes shell syntax with variable data and then re-parsing it. Clear invocation is easier to review and safer to maintain.\n\nSSH agents can improve usability by avoiding repeated key prompts and by keeping private keys out of direct command-line handling. They also change the runtime exposure model. An agent can make keys available to child processes or sessions beyond the original intended use. Agent forwarding is especially sensitive because it extends agent access through another host. It should be avoided unless there is an explicit, approved reason and the risk is understood.\n\nWhen a required key is unavailable, a script should fail safely with a non-sensitive message. It should not try random identities until something works, dump agent contents into logs, print key material, or silently fall back to a broader key. Safe automation is predictable automation: the intended key is used for the intended target, and missing access is treated as a configuration problem rather than an excuse to broaden privilege.",
+  "narrationPoints": [
+    "A Bash script should make SSH key use explicit and reviewable.",
+    "Quoting and option handling matter because SSH commands often combine paths, usernames, hostnames, options, and file names.",
+    "SSH agents can improve usability by avoiding repeated key prompts and by keeping private keys out of direct command-line handling.",
+    "When a required key is unavailable, a script should fail safely with a non-sensitive message.",
+    "The script should make its trust decision visible to reviewers.",
+    "Key paths and SSH options should be quoted where appropriate."
+  ]
+};

@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+C programs can use many IPC mechanisms.
+
+2
+00:00:04.440 --> 00:00:08.360
+Pipes and named pipes can connect producers and consumers.
+
+3
+00:00:08.460 --> 00:00:12.700
+Unix domain sockets and TCP sockets can carry structured requests.
+
+4
+00:00:12.800 --> 00:00:17.120
+Shared memory can expose the same bytes to multiple processes.
+
+5
+00:00:17.220 --> 00:00:19.780
+Message queues provide queued exchange.
+
+6
+00:00:19.880 --> 00:00:22.200
+Signals communicate limited events.
+
+7
+00:00:22.300 --> 00:00:27.180
+Platform-specific handles and descriptors can extend what one process can grant to another.
+
+8
+00:00:27.460 --> 00:00:31.300
+These mechanisms are not interchangeable from a security perspective.
+
+9
+00:00:31.400 --> 00:00:42.200
+They differ in naming, access control, peer identity support, message boundaries, buffering, reliability, cleanup behavior, and how naturally they fit the workflow.
+
+10
+00:00:42.300 --> 00:00:47.820
+A secure design chooses the mechanism that matches the trust boundary and the operational requirement.
+
+11
+00:00:48.100 --> 00:00:52.660
+Byte-stream channels are common, but they do not automatically preserve message boundaries.
+
+12
+00:00:52.760 --> 00:01:00.040
+If a protocol sends structured messages over a stream, the receiver needs explicit framing, parsing, and validation.
+
+13
+00:01:00.140 --> 00:01:07.260
+A single read may contain part of a message, one message, or parts of several messages depending on timing and buffering.
+
+14
+00:01:07.540 --> 00:01:10.100
+Shared memory has a different shape.
+
+15
+00:01:10.200 --> 00:01:15.080
+It can be efficient, but it gives multiple processes access to the same region.
+
+16
+00:01:15.180 --> 00:01:21.980
+That means layout, versioning, initialization, synchronization, and permissions all become part of the contract.
+
+17
+00:01:22.080 --> 00:01:28.160
+Shared memory should not be treated as a shortcut around authorization or input validation.
+
+18
+00:01:28.440 --> 00:01:32.520
+Signal-based communication is limited and should be used carefully.
+
+19
+00:01:32.620 --> 00:01:38.380
+Signals can be useful for simple notifications, but they are not a good place to carry complex trusted state.
+
+20
+00:01:38.480 --> 00:01:48.160
+Across all IPC choices, the security design should start from the mechanism's real properties rather than from the assumption that local communication is safe by default.

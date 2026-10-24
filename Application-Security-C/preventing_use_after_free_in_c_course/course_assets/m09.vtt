@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.420
+Detection practices help find use-after-free defects earlier, but they work best when code already has clear lifetime contracts.
+
+2
+00:00:08.520 --> 00:00:17.240
+Compiler warnings, static analysis, runtime sanitizers, assertions, boundary tests, and code review all contribute different signals.
+
+3
+00:00:17.340 --> 00:00:19.580
+None of them replaces ownership discipline.
+
+4
+00:00:19.860 --> 00:00:32.420
+Compiler warnings may reveal suspicious lifetime or control-flow patterns: returning local addresses, using uninitialized pointers, ignoring cleanup results, or following confusing branches after release.
+
+5
+00:00:32.520 --> 00:00:39.320
+A warning near allocation, deallocation, callback registration, or cleanup deserves careful review.
+
+6
+00:00:39.600 --> 00:00:48.960
+Static analysis can help identify stale references, inconsistent cleanup, ownership confusion, and paths where a pointer may be used after release.
+
+7
+00:00:49.060 --> 00:00:58.580
+It can follow aliases across functions and notice when one path releases storage while another path still treats the pointer as live.
+
+8
+00:00:58.860 --> 00:01:02.460
+Runtime sanitizers can detect use-after-free during testing.
+
+9
+00:01:02.560 --> 00:01:13.520
+They are most valuable when tests exercise failure paths, repeated operations, resizing, teardown, callback cancellation, and cleanup after partial initialization.
+
+10
+00:01:13.620 --> 00:01:19.300
+A sanitizer finding should lead to a fix and a regression test that protects the same lifetime contract.
+
+11
+00:01:19.580 --> 00:01:23.180
+Assertions can document lifetime assumptions during development.
+
+12
+00:01:23.280 --> 00:01:30.720
+They can state that an object is initialized before use, not destroyed before an operation, or owned by the current component before release.
+
+13
+00:01:30.820 --> 00:01:38.580
+Assertions should support internal invariants, while external input and runtime failures still need ordinary validation and error handling.
+
+14
+00:01:38.860 --> 00:01:43.820
+Code review should trace ownership from allocation through every transfer and release.
+
+15
+00:01:43.920 --> 00:01:56.400
+Reviewers should ask who owns the object, who borrows it, who can store it, when it is released, what aliases remain, what happens on error, and whether later code can still reach stale references.
+
+16
+00:01:56.500 --> 00:01:59.540
+That trace is the core of use-after-free prevention.

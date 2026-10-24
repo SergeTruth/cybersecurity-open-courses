@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+UDP receive buffers should be sized deliberately for the protocol's expected datagrams.
+
+2
+00:00:05.400 --> 00:00:09.320
+A buffer that is too small can hide important data.
+
+3
+00:00:09.420 --> 00:00:14.860
+A buffer that is unbounded or chosen from untrusted input can create memory pressure.
+
+4
+00:00:14.960 --> 00:00:19.520
+The service should define maximum accepted datagram size and allocate buffers accordingly.
+
+5
+00:00:19.800 --> 00:00:25.720
+Code should detect and handle truncation according to the platform and API behavior.
+
+6
+00:00:25.820 --> 00:00:31.500
+Some APIs provide flags or return information that indicate when the datagram did not fit.
+
+7
+00:00:31.600 --> 00:00:37.760
+The program should use those signals when available and define a safe behavior for truncated input.
+
+8
+00:00:38.040 --> 00:00:41.800
+A truncated datagram should not be parsed as though it were complete.
+
+9
+00:00:41.900 --> 00:00:48.700
+If the header says fields are present but the buffer does not contain them, validation fails.
+
+10
+00:00:48.800 --> 00:00:56.000
+If the payload is shorter than the format requires, the program should not guess the missing bytes or dispatch a partial request.
+
+11
+00:00:56.280 --> 00:01:04.680
+Binary datagrams should not be treated as C strings unless the protocol explicitly defines text, encoding, and termination rules.
+
+12
+00:01:04.780 --> 00:01:10.620
+Network data can contain zero bytes, non-text bytes, partial encodings, or no terminator.
+
+13
+00:01:10.720 --> 00:01:16.240
+If a field needs to become a string, create a bounded and validated representation deliberately.
+
+14
+00:01:16.520 --> 00:01:21.400
+Buffer capacity, received length, and parsed length should be tracked separately.
+
+15
+00:01:21.500 --> 00:01:24.700
+Capacity is how much storage exists.
+
+16
+00:01:24.800 --> 00:01:28.320
+Received length is how much data the API delivered.
+
+17
+00:01:28.420 --> 00:01:33.940
+Parsed length is how much of that data has been consumed by the protocol parser.
+
+18
+00:01:34.040 --> 00:01:39.960
+Keeping those facts separate prevents accidental use of uninitialized or incomplete data.

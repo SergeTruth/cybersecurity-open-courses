@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+SBOM generation should be part of normal build and release workflows, not an occasional manual task.
+
+2
+00:00:06.440 --> 00:00:21.000
+A realistic pipeline might install dependencies with a lockfile, run tests, build the application, build a container image, generate an SBOM, scan or evaluate the SBOM, attach it to the release, and store it for future response.
+
+3
+00:00:21.100 --> 00:00:27.100
+The timing matters because the SBOM should match the artifact it represents, not a convenient earlier approximation.
+
+4
+00:00:27.380 --> 00:00:37.300
+CI/CD can generate SBOMs after dependency installation, after build, after package creation, after container image creation, or during release publication.
+
+5
+00:00:37.400 --> 00:00:44.280
+The right point depends on whether the SBOM represents source dependencies, a package, an image, or a deployed service.
+
+6
+00:00:44.380 --> 00:00:53.260
+Store SBOMs with release artifacts, image digests, provenance records, artifact repositories, or release metadata where appropriate.
+
+7
+00:00:53.360 --> 00:01:01.520
+If downstream customers or policy require the SBOM, generation failure should be treated as a release-quality issue, not background noise.
+
+8
+00:01:01.800 --> 00:01:04.920
+Protect the pipeline that produces the SBOM.
+
+9
+00:01:05.020 --> 00:01:14.060
+CI/CD secrets used for private package access, dependency installation, publishing, signing, or artifact upload can be sensitive.
+
+10
+00:01:14.160 --> 00:01:22.160
+Signing, attestation, and provenance can strengthen confidence in where an SBOM came from and which build produced it.
+
+11
+00:01:22.260 --> 00:01:25.780
+They do not make the listed components secure by themselves.
+
+12
+00:01:25.880 --> 00:01:33.560
+A trustworthy workflow gives teams confidence that the SBOM is tied to the real release and has not been casually modified after generation.

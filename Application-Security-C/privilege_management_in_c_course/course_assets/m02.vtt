@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.460
+Privilege decisions depend on identity, but identity is not always a single value.
+
+2
+00:00:05.560 --> 00:00:19.160
+A program may have a real user identity, an effective identity used for access decisions, supplementary group membership, a service account, a container identity, a process token, or platform-specific capabilities.
+
+3
+00:00:19.260 --> 00:00:28.380
+The exact model varies by operating system and deployment environment, so secure C engineering begins by documenting which model applies.
+
+4
+00:00:28.660 --> 00:00:39.220
+On POSIX-style systems, developers often reason about user IDs, group IDs, file permissions, ownership, supplementary groups, and sometimes capabilities.
+
+5
+00:00:39.320 --> 00:00:45.880
+Some programs may begin with one identity and perform sensitive setup before reducing authority.
+
+6
+00:00:45.980 --> 00:00:49.020
+The defensive question is not how to gain authority.
+
+7
+00:00:49.120 --> 00:00:55.760
+The question is how to understand the authority the process already has and how to constrain its use.
+
+8
+00:00:56.040 --> 00:01:06.920
+On Windows-style systems, access decisions are often connected to access tokens, privileges, service accounts, handles, ACLs, and object-specific rights.
+
+9
+00:01:07.020 --> 00:01:14.540
+Services may run under dedicated identities, inherit handles, or interact with resources governed by discretionary access control.
+
+10
+00:01:14.640 --> 00:01:22.160
+Again, the important engineering task is to know what the process can access and what should be intentionally denied.
+
+11
+00:01:22.440 --> 00:01:25.800
+Service accounts deserve particular care.
+
+12
+00:01:25.900 --> 00:01:33.340
+A service account should exist for a defined purpose, have limited permissions, and avoid broad access that is convenient but unnecessary.
+
+13
+00:01:33.440 --> 00:01:40.400
+When multiple services share one powerful account, a defect in one component can affect resources intended for another.
+
+14
+00:01:40.500 --> 00:01:44.420
+Narrow identities make reviews and incident response easier.
+
+15
+00:01:44.700 --> 00:01:48.060
+Effective privilege may differ from what a developer assumes.
+
+16
+00:01:48.160 --> 00:02:04.480
+A process launched by a scheduler, service manager, container runtime, administrator shell, test harness, package script, or helper process may inherit environment, file access, group membership, tokens, or descriptors that are not obvious from the source code.
+
+17
+00:02:04.580 --> 00:02:08.260
+Build and deployment notes should describe the expected authority.
+
+18
+00:02:08.540 --> 00:02:16.300
+A reviewer should be able to answer a practical question for every privileged C program: what authority does this code have right now?
+
+19
+00:02:16.400 --> 00:02:19.440
+If the answer is vague, the design is not ready.
+
+20
+00:02:19.540 --> 00:02:27.140
+Platform-aware documentation, runtime checks, and focused tests help turn identity from a hidden assumption into a visible contract.

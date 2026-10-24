@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Plugin and extension systems are ABI-sensitive by nature.
+
+2
+00:00:04.920 --> 00:00:15.640
+A host application and plugin must agree on initialization, shutdown, object ownership, version negotiation, error reporting, threading, and supported capabilities.
+
+3
+00:00:15.740 --> 00:00:24.140
+The plugin may be built by another team, vendor, or customer, so assumptions that are obvious to the host team may not be obvious to the plugin author.
+
+4
+00:00:24.420 --> 00:00:27.460
+A strict boundary reduces compatibility failures.
+
+5
+00:00:27.560 --> 00:00:30.280
+Avoid exposing internal objects directly.
+
+6
+00:00:30.380 --> 00:00:36.940
+Prefer narrow exported functions, opaque handles, versioned contracts, and capability checks.
+
+7
+00:00:37.040 --> 00:00:45.680
+Define who owns host-provided objects, how long callbacks remain valid, which threads may call which functions, and how shutdown is coordinated.
+
+8
+00:00:45.780 --> 00:00:52.900
+A plugin contract should make it possible for an older plugin to fail gracefully when the host no longer supports its expectations.
+
+9
+00:00:53.180 --> 00:00:55.660
+Plugins may also be trust boundaries.
+
+10
+00:00:55.760 --> 00:01:04.560
+Depending on product architecture, less-trusted modules may need process isolation, permission limits, validation, or defensive loading policy.
+
+11
+00:01:04.660 --> 00:01:10.340
+The goal is not to provide offensive guidance; it is to prevent compatibility failures and contain risk.
+
+12
+00:01:10.440 --> 00:01:13.320
+Treat plugin APIs as product commitments.
+
+13
+00:01:13.420 --> 00:01:19.020
+Document them carefully, test them across versions, and review lifecycle behavior before release.
+
+14
+00:01:19.120 --> 00:01:25.840
+If a plugin cannot meet the required contract, the host should fail safely and explain the incompatibility.
+
+15
+00:01:26.120 --> 00:01:29.000
+Good plugin systems make the first handshake explicit.
+
+16
+00:01:29.100 --> 00:01:37.820
+The host can ask for a declared ABI version, required capabilities, optional features, and shutdown behavior before accepting the module.
+
+17
+00:01:37.920 --> 00:01:49.200
+That negotiation gives the host a safe place to reject incompatible plugins, disable unsupported features, or choose a conservative compatibility path instead of relying on undefined behavior.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.340
+Backup scripts perform high-impact file operations.
+
+2
+00:00:04.440 --> 00:00:10.200
+They read, write, compress, move, synchronize, and sometimes clean up data.
+
+3
+00:00:10.300 --> 00:00:13.500
+That makes ordinary Bash mistakes more serious.
+
+4
+00:00:13.600 --> 00:00:27.760
+A variable that expands unexpectedly, a path that points to the wrong location, an unchecked command failure, or a missing destination can turn a backup job into an incomplete run or a confusing recovery problem.
+
+5
+00:00:27.860 --> 00:00:32.580
+Defensive scripting reduces these risks before the job touches important data.
+
+6
+00:00:32.860 --> 00:00:35.820
+Path handling is one of the first controls.
+
+7
+00:00:35.920 --> 00:00:43.920
+Quote variables, validate source and destination paths, and check that required directories exist before the copy or archive begins.
+
+8
+00:00:44.020 --> 00:00:51.060
+The script should know the difference between a missing source, an empty source, an unavailable destination, and a permission failure.
+
+9
+00:00:51.160 --> 00:00:57.000
+Each condition should lead to a clear operational result rather than continuing with assumptions that may be wrong.
+
+10
+00:00:57.280 --> 00:01:00.720
+Command and pipeline failures should be handled explicitly.
+
+11
+00:01:00.820 --> 00:01:07.460
+A backup script should not mark the job successful because the last command printed something pleasant while an earlier command failed.
+
+12
+00:01:07.560 --> 00:01:16.680
+Check prerequisites such as required tools, available destination space where practical, authentication state, and expected write access.
+
+13
+00:01:16.780 --> 00:01:25.020
+When a critical step fails, the script should stop safely and report a useful message rather than producing a partial output that looks trustworthy.
+
+14
+00:01:25.300 --> 00:01:28.260
+Temporary files and cleanup need deliberate design.
+
+15
+00:01:28.360 --> 00:01:38.040
+Use safe temporary-file creation, predictable ownership, restrictive permissions for sensitive material, and cleanup that is narrow enough to avoid unintended targets.
+
+16
+00:01:38.140 --> 00:01:41.580
+A good backup script should be rerunnable where practical.
+
+17
+00:01:41.680 --> 00:01:51.600
+If it fails halfway through, the next run should be able to proceed without confusion between complete backups, incomplete temporary outputs, and previous successful recovery points.

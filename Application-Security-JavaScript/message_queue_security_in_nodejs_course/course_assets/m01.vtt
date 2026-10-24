@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.260
+Message queues are often introduced to make Node.js systems more responsive and resilient.
+
+2
+00:00:06.360 --> 00:00:20.280
+An API accepts a request, publishes a message, returns quickly to the user, and a worker later updates records, sends notifications, processes files, calls a third-party service, or triggers another workflow.
+
+3
+00:00:20.380 --> 00:00:28.460
+That decoupling is useful, but it also moves business decisions into a delayed path where the original request context may no longer be visible.
+
+4
+00:00:28.560 --> 00:00:34.800
+Security has to follow the message from producer to broker to consumer to downstream side effects.
+
+5
+00:00:35.080 --> 00:00:37.720
+A queued message can be more than a unit of work.
+
+6
+00:00:37.820 --> 00:00:49.100
+It can become an instruction to send money, provision an account, delete a file, email a customer, synchronize data, update audit history, or process sensitive documents.
+
+7
+00:00:49.200 --> 00:00:57.760
+A worker may not expose an HTTP endpoint, but it can still have broad authority over databases, storage, APIs, and customer data.
+
+8
+00:00:57.860 --> 00:01:04.900
+Treating a queue as background plumbing can hide the fact that message handling is application logic with real consequences.
+
+9
+00:01:05.180 --> 00:01:21.100
+The common risks are concrete: forged messages, unvalidated payloads, overprivileged consumers, leaked broker credentials, duplicate processing, unsafe retries, sensitive payload exposure, poisoned messages, weak monitoring, and unclear ownership.
+
+10
+00:01:21.200 --> 00:01:30.880
+A managed queue, internal broker, or familiar worker framework can help with delivery, but none of those prove that the payload is safe, current, authorized, or complete.
+
+11
+00:01:30.980 --> 00:01:32.580
+The queue is transport.
+
+12
+00:01:32.680 --> 00:01:35.160
+It is not a security decision by itself.
+
+13
+00:01:35.440 --> 00:01:38.240
+The goal of secure queue design is reviewability.
+
+14
+00:01:38.340 --> 00:01:53.620
+A team should be able to identify who can publish, who can consume, what the payload means, what permissions the worker has, what downstream actions can occur, how duplicates are handled, what happens on failure, and who owns the workflow.
+
+15
+00:01:53.720 --> 00:01:58.600
+Message queue security is not solved by one setting or one schema.
+
+16
+00:01:58.700 --> 00:02:07.260
+It is the disciplined design of producers, brokers, consumers, payloads, permissions, retries, and operational evidence.

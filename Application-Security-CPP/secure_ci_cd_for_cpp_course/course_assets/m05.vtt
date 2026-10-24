@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Dependency and provenance discipline is central to secure C++ CI/CD.
+
+2
+00:00:05.240 --> 00:00:20.840
+A release may be shaped by package sources, vendored libraries, transitive dependencies, binary packages, source archives, generated code, toolchain downloads, system packages, package manager lock data, and build image contents.
+
+3
+00:00:20.940 --> 00:00:25.820
+The pipeline should make those inputs intentional instead of accidental.
+
+4
+00:00:25.920 --> 00:00:31.920
+C++ release artifacts often combine many of these inputs in ways that are not obvious from source files alone.
+
+5
+00:00:32.200 --> 00:00:35.640
+Release builds should avoid surprise dependency changes.
+
+6
+00:00:35.740 --> 00:00:50.460
+Pin versions where practical, lock resolution when the ecosystem supports it, verify checksums or signatures according to policy, and control which package registries, mirrors, and internal repositories are allowed.
+
+7
+00:00:50.560 --> 00:00:57.120
+If a dependency changes, the team should know what changed, why it changed, and which checks covered the update.
+
+8
+00:00:57.220 --> 00:01:02.260
+Routine update windows can keep this discipline from blocking urgent patches or normal maintenance.
+
+9
+00:01:02.540 --> 00:01:06.540
+Provenance records help answer where code and artifacts came from.
+
+10
+00:01:06.640 --> 00:01:16.880
+Retain build metadata such as source revision, dependency versions, package sources, toolchain versions, image identifiers, generator versions, and relevant build settings.
+
+11
+00:01:16.980 --> 00:01:25.860
+This information supports vulnerability response, release review, customer questions, and investigation when behavior differs between releases.
+
+12
+00:01:25.960 --> 00:01:31.160
+Without it, teams may know that a release exists but not how it was assembled.
+
+13
+00:01:31.440 --> 00:01:36.720
+Repeatable builds are a practical goal even when perfect byte-for-byte reproduction is not required.
+
+14
+00:01:36.820 --> 00:01:47.140
+Teams should be able to recreate or explain the important inputs to a release: source, dependencies, tools, configuration, platform, and artifact promotion path.
+
+15
+00:01:47.240 --> 00:01:57.800
+Repeatable inputs make rollback, patch validation, and incident response faster because teams can compare known states rather than reconstruct history from memory.
+
+16
+00:01:57.900 --> 00:02:06.220
+They also help developers reproduce release-only failures locally or in controlled CI jobs with the same assumptions and tool versions used for release.
+
+17
+00:02:06.320 --> 00:02:10.400
+Reproducibility goals should be documented for each supported platform.

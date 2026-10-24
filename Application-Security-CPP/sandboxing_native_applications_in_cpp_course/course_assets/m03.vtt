@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Process separation is one of the most practical sandboxing techniques for native applications.
+
+2
+00:00:06.520 --> 00:00:16.040
+Instead of running every feature in one process with one set of permissions, the application can split work between a trusted broker and one or more lower-authority workers.
+
+3
+00:00:16.140 --> 00:00:21.100
+The worker performs risky work, while the broker owns sensitive resources and decisions.
+
+4
+00:00:21.380 --> 00:00:25.860
+The broker should expose narrow requests rather than broad access.
+
+5
+00:00:25.960 --> 00:00:36.680
+A worker might ask to open a user-approved file, write a sanitized result, request a network operation with a defined destination policy, or report a completed job.
+
+6
+00:00:36.780 --> 00:00:46.220
+It should not receive direct access to the full filesystem, credential store, update system, or host internals simply because that is easier to implement.
+
+7
+00:00:46.320 --> 00:00:54.080
+Clear ownership also helps performance planning because expensive work can be isolated from the responsive user interface or service control path.
+
+8
+00:00:54.360 --> 00:00:57.480
+Brokered design makes authority visible.
+
+9
+00:00:57.580 --> 00:01:06.060
+Reviewers can see which operations require broker approval, what data the worker can send, what the broker validates, and what resources are returned.
+
+10
+00:01:06.160 --> 00:01:13.360
+That visibility is the difference between a real containment boundary and a process split that quietly grants the worker the same power as the host.
+
+11
+00:01:13.460 --> 00:01:20.740
+Give worker roles clear names so logs, tests, and design reviews all describe the same boundary.
+
+12
+00:01:20.840 --> 00:01:23.480
+That consistency speeds audits and maintenance.
+
+13
+00:01:23.760 --> 00:01:27.520
+Reliability also improves when process boundaries are intentional.
+
+14
+00:01:27.620 --> 00:01:32.980
+A worker can crash, hang, or be restarted without taking down the trusted broker.
+
+15
+00:01:33.080 --> 00:01:40.120
+The broker can clean up partial output, cancel work, report failure, and decide whether a replacement worker should be launched.
+
+16
+00:01:40.220 --> 00:01:45.340
+Those lifecycle decisions should be designed and tested, not left to chance.
+
+17
+00:01:45.440 --> 00:01:54.160
+The broker should also record enough safe context to diagnose worker failures without storing sensitive document contents or secrets.
+
+18
+00:01:54.260 --> 00:01:59.620
+A mature design makes startup, shutdown, restart, and cleanup behavior part of the contract.

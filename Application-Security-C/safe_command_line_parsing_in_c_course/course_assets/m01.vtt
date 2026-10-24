@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+Command-line arguments are input, and input deserves a trust-boundary mindset.
+
+2
+00:00:05.480 --> 00:00:15.960
+A C tool may be launched by a person at a terminal, but it may also be launched by scripts, schedulers, build systems, service wrappers, package hooks, tests, or other automation.
+
+3
+00:00:16.060 --> 00:00:19.740
+The source may be familiar while the actual values are still uncertain.
+
+4
+00:00:20.020 --> 00:00:23.700
+Command-line values can influence program behavior quickly.
+
+5
+00:00:23.800 --> 00:00:38.360
+They may select files, choose directories, set counts, control logging, enable features, change output paths, decide whether resources are created or removed, or affect memory allocation and buffer handling.
+
+6
+00:00:38.460 --> 00:00:42.380
+That makes parser behavior part of the program's safety story.
+
+7
+00:00:42.660 --> 00:00:45.620
+Even internal tools should parse defensively.
+
+8
+00:00:45.720 --> 00:00:48.840
+Internal does not mean perfectly controlled.
+
+9
+00:00:48.940 --> 00:00:55.820
+Automation changes over time, environment assumptions drift, and wrapper scripts can pass through values from another source.
+
+10
+00:00:55.920 --> 00:01:01.280
+A tool that is reliable in one workflow can become fragile when reused in a larger system.
+
+11
+00:01:01.560 --> 00:01:04.120
+Safe parsing starts before action.
+
+12
+00:01:04.220 --> 00:01:16.300
+The parser should identify what arguments are present, what each one means, which values are required, and whether those values satisfy type, range, length, path, and format rules.
+
+13
+00:01:16.400 --> 00:01:23.760
+Only after that should the program perform file changes, resource operations, memory work, or persistent state updates.
+
+14
+00:01:24.040 --> 00:01:27.720
+The goal is not to make command-line interfaces complicated.
+
+15
+00:01:27.820 --> 00:01:30.220
+The goal is to make them explicit.
+
+16
+00:01:30.320 --> 00:01:40.240
+A reviewable parser contract tells developers what the tool accepts, what it rejects, and how it behaves when input is missing, ambiguous, or invalid.

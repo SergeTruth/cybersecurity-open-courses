@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.740
+File names and paths are untrusted input when they come from users, integrations, archives, or configuration.
+
+2
+00:00:08.840 --> 00:00:14.600
+Path traversal is the risk that input influences file access outside an intended directory.
+
+3
+00:00:14.700 --> 00:00:21.900
+filepath.Clean and related path operations can help normalize paths, but normalization alone is not a complete defense.
+
+4
+00:00:22.000 --> 00:00:33.600
+A safe design constrains names, resolves paths against an approved base directory, and verifies the final path remains inside that directory before reading or writing.
+
+5
+00:00:33.880 --> 00:00:37.080
+Absolute and relative paths should be handled deliberately.
+
+6
+00:00:37.180 --> 00:00:41.980
+A user-provided absolute path may bypass an intended storage area.
+
+7
+00:00:42.080 --> 00:00:47.120
+A relative path may contain traversal segments or platform-specific surprises.
+
+8
+00:00:47.220 --> 00:00:53.860
+For uploads, generating server-side storage names is often safer than trusting the original filename.
+
+9
+00:00:53.960 --> 00:01:00.520
+File size limits should be enforced before processing, and upload metadata should be treated as input rather than proof.
+
+10
+00:01:00.800 --> 00:01:05.600
+Extension checks and content type checks are useful hints, not guarantees.
+
+11
+00:01:05.700 --> 00:01:10.100
+A file extension can be misleading or user-controlled.
+
+12
+00:01:10.200 --> 00:01:12.840
+A content type can be wrong or supplied by the client.
+
+13
+00:01:12.940 --> 00:01:19.980
+Depending on the use case, the program may need content inspection, signature checks, scanning, or isolated processing.
+
+14
+00:01:20.080 --> 00:01:28.640
+Even when the file content is not dangerous by itself, metadata can still affect logs, UI, search indexes, and workflow decisions.
+
+15
+00:01:28.920 --> 00:01:36.200
+Structured files such as CSV, YAML, XML, and custom formats should be parsed defensively before use.
+
+16
+00:01:36.300 --> 00:01:47.740
+Rows may have missing columns, YAML may contain unexpected structure, XML parsers may need safe configuration, and custom formats may include lengths or counts that need bounds checks.
+
+17
+00:01:47.840 --> 00:01:59.040
+The same validation pattern applies: parse carefully, reject malformed structure, constrain resource use, and only then map accepted values into application logic.

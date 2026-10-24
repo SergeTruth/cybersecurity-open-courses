@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Launching a child process is not complete when the create call returns.
+
+2
+00:00:04.520 --> 00:00:12.520
+The parent still has to manage startup failure, process state, I/O, exit status, timeouts, cancellation, and cleanup.
+
+3
+00:00:12.620 --> 00:00:16.220
+Lifecycle management is part of the security and reliability contract.
+
+4
+00:00:16.500 --> 00:00:18.980
+Startup failure should be reported clearly.
+
+5
+00:00:19.080 --> 00:00:28.520
+The parent should distinguish between failure to start the process, failure inside the child, and a child that exits with a nonzero status according to its own contract.
+
+6
+00:00:28.620 --> 00:00:32.620
+Those cases may require different diagnostics and cleanup behavior.
+
+7
+00:00:32.900 --> 00:00:35.860
+Exit status should be interpreted deliberately.
+
+8
+00:00:35.960 --> 00:00:39.880
+Some tools use zero for success and nonzero for failure.
+
+9
+00:00:39.980 --> 00:00:41.980
+Others encode categories.
+
+10
+00:00:42.080 --> 00:00:47.680
+The parent should not treat any child completion as success unless the contract says so.
+
+11
+00:00:47.780 --> 00:00:51.060
+Output should also be validated before it drives later decisions.
+
+12
+00:00:51.340 --> 00:00:55.820
+The parent must avoid unreaped children where the platform requires explicit waiting.
+
+13
+00:00:55.920 --> 00:00:58.000
+It should also avoid waiting forever.
+
+14
+00:00:58.100 --> 00:01:07.380
+Timeouts and cancellation policies protect workflows when a child hangs, stops making progress, or waits for input that will never arrive.
+
+15
+00:01:07.660 --> 00:01:12.700
+Cleanup should cover pipes, temporary files, partial output, and intermediate state.
+
+16
+00:01:12.800 --> 00:01:18.880
+If setup fails halfway through, the code should close what it opened and remove what it owns.
+
+17
+00:01:18.980 --> 00:01:24.660
+If a timeout occurs, the parent should decide how the child is stopped and how resources are recovered.
+
+18
+00:01:24.940 --> 00:01:27.740
+Predictable error reporting matters for operations.
+
+19
+00:01:27.840 --> 00:01:40.320
+Logs should identify the program, phase, safe error category, exit status where appropriate, and cleanup result without exposing sensitive arguments or environment values unnecessarily.

@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+RTOS security matters because embedded and real-time C systems often interact directly with the physical world.
+
+2
+00:00:08.120 --> 00:00:21.640
+They may control motors, valves, sensors, displays, radio links, storage, safety indicators, or operational workflows where timing and reliability are central to the product.
+
+3
+00:00:21.740 --> 00:00:27.660
+A software defect in that environment can affect more than a user interface; it can affect device behavior.
+
+4
+00:00:27.940 --> 00:00:32.180
+Real-time constraints do not remove the need for security discipline.
+
+5
+00:00:32.280 --> 00:00:39.800
+A task may need to meet a deadline, but it still needs valid inputs, predictable memory behavior, checked return values, and safe failure handling.
+
+6
+00:00:39.900 --> 00:00:45.900
+Timing pressure can make shortcuts tempting, so the design must define what is allowed before the system is under stress.
+
+7
+00:00:46.180 --> 00:00:53.060
+C gives embedded developers control over memory, hardware registers, buffers, drivers, and interrupts.
+
+8
+00:00:53.160 --> 00:01:02.440
+That control is useful, but it also means defects in bounds checks, pointer lifetime, stack sizing, or ownership can create unreliable behavior.
+
+9
+00:01:02.540 --> 00:01:07.260
+Security review for RTOS code is often inseparable from reliability review.
+
+10
+00:01:07.540 --> 00:01:10.820
+External inputs are common even in small devices.
+
+11
+00:01:10.920 --> 00:01:21.000
+Sensor readings, bus messages, radio frames, configuration data, update metadata, field diagnostics, and operator commands can all influence behavior.
+
+12
+00:01:21.100 --> 00:01:29.500
+The system should validate data at boundaries instead of assuming that inputs are well formed because they came from a familiar peripheral or internal bus.
+
+13
+00:01:29.780 --> 00:01:33.220
+The practical habit is to make assumptions explicit.
+
+14
+00:01:33.320 --> 00:01:35.480
+What tasks exist?
+
+15
+00:01:35.580 --> 00:01:37.980
+Which tasks can control hardware?
+
+16
+00:01:38.080 --> 00:01:39.760
+What data crosses boundaries?
+
+17
+00:01:39.860 --> 00:01:41.380
+What memory is shared?
+
+18
+00:01:41.480 --> 00:01:47.080
+What happens during timeout, reset, update failure, or interrupt pressure?
+
+19
+00:01:47.180 --> 00:01:52.940
+RTOS security starts when those questions are answered in design, code, tests, and review.

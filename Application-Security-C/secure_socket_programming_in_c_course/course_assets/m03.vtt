@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Binding is a security decision because it determines where a service is reachable.
+
+2
+00:00:04.920 --> 00:00:12.040
+A service bound only to a loopback interface has a different exposure profile from a service listening on every interface.
+
+3
+00:00:12.140 --> 00:00:19.020
+A service reachable only inside a private deployment network has a different risk profile from a public-facing endpoint.
+
+4
+00:00:19.300 --> 00:00:23.620
+Listening on all interfaces can expose a service more broadly than intended.
+
+5
+00:00:23.720 --> 00:00:35.960
+The code may have been tested locally, but deployment can place the same binary on a host with additional network interfaces, container bridges, overlay networks, or routes to other environments.
+
+6
+00:00:36.060 --> 00:00:41.180
+Binding behavior should match the intended deployment model, not just the developer's workstation.
+
+7
+00:00:41.460 --> 00:00:51.220
+Port choices, service accounts, firewall policy, container networking, orchestration configuration, and load balancer behavior all affect endpoint exposure.
+
+8
+00:00:51.320 --> 00:00:54.120
+The socket call is only one part of the real boundary.
+
+9
+00:00:54.220 --> 00:00:59.580
+Secure design documents which endpoints are meant to exist and which surrounding controls are required.
+
+10
+00:00:59.860 --> 00:01:02.500
+Least privilege strengthens the design.
+
+11
+00:01:02.600 --> 00:01:08.280
+The service account should have only the filesystem, process, and network privileges the service needs.
+
+12
+00:01:08.380 --> 00:01:15.100
+If socket logic contains a mistake, a restricted process identity can reduce what the service can affect.
+
+13
+00:01:15.200 --> 00:01:19.680
+Network exposure and local process privileges should be reviewed together.
+
+14
+00:01:19.960 --> 00:01:23.800
+Endpoint exposure should be reviewed as part of the application's security boundary.
+
+15
+00:01:23.900 --> 00:01:36.460
+Reviewers should ask which addresses and ports are reachable, who can reach them, which protocol is expected, how access is controlled, and how deployment configuration keeps the service aligned with its intended audience.

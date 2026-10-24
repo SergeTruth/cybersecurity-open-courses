@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.140
+Authentication identifies the caller; authorization decides what records and fields the caller may access or modify.
+
+2
+00:00:07.240 --> 00:00:11.960
+Prisma does not automatically know the application's business authorization rules.
+
+3
+00:00:12.060 --> 00:00:21.900
+Every protected read, create, update, delete, export, aggregation, or administrative operation needs server-side authorization.
+
+4
+00:00:22.000 --> 00:00:31.840
+A route that checks whether a user is logged in may still be unsafe if it forgets record-level ownership, tenant context, role requirements, or field-level restrictions.
+
+5
+00:00:32.120 --> 00:00:38.920
+Object-level authorization should be enforced close to the data operation or in a shared service that every relevant path uses.
+
+6
+00:00:39.020 --> 00:00:46.620
+If a user requests an invoice, document, or project by ID, the Prisma query should not search only by ID.
+
+7
+00:00:46.720 --> 00:00:54.160
+It should also enforce the organization, tenant, ownership, or role context that makes access legitimate.
+
+8
+00:00:54.260 --> 00:01:04.500
+Multi-tenant applications should derive tenant boundaries server-side and include them consistently in reads, writes, deletes, exports, and background jobs.
+
+9
+00:01:04.600 --> 00:01:09.640
+Do not trust client-supplied tenant IDs as proof of access.
+
+10
+00:01:09.920 --> 00:01:12.800
+Field exposure needs intentional design.
+
+11
+00:01:12.900 --> 00:01:17.860
+Prisma select and include are powerful, but they can also return more than the caller needs.
+
+12
+00:01:17.960 --> 00:01:23.640
+Avoid returning raw Prisma model objects directly when they contain internal or sensitive fields.
+
+13
+00:01:23.740 --> 00:01:38.700
+Password hashes, reset tokens, API keys, internal notes, security flags, billing details, audit-only fields, and privileged relationships should be excluded unless the use case explicitly requires them.
+
+14
+00:01:38.800 --> 00:01:47.040
+Admin tools, support workflows, background jobs, and exports need authorization models too, because internal does not mean harmless.

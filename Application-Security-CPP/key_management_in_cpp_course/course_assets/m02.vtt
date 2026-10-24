@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.060
+Key management starts by naming what kind of key or secret the system is handling.
+
+2
+00:00:05.160 --> 00:00:17.080
+Symmetric encryption keys, private signing keys, public verification keys, wrapping keys, transport credentials, API tokens, certificates, and service credentials all have different roles.
+
+3
+00:00:17.360 --> 00:00:24.560
+Symmetric keys and private keys require strong protection because possession can enable decryption, signing, or service access.
+
+4
+00:00:24.660 --> 00:00:28.020
+Public keys are not secret, but they still need authenticity.
+
+5
+00:00:28.120 --> 00:00:34.280
+If a verifier trusts the wrong public key, the trust decision can be wrong even though no secret was exposed.
+
+6
+00:00:34.560 --> 00:00:36.800
+Each key should have a defined purpose.
+
+7
+00:00:36.900 --> 00:00:41.060
+A key used for encrypting records should not casually become a signing key.
+
+8
+00:00:41.160 --> 00:00:44.200
+A test key should not drift into production.
+
+9
+00:00:44.300 --> 00:00:50.860
+A service-wide key should not be used where a tenant-specific or purpose-specific key would contain risk better.
+
+10
+00:00:51.140 --> 00:00:53.620
+Ownership should also be explicit.
+
+11
+00:00:53.720 --> 00:01:03.880
+Someone or some team should know why the key exists, what data or operation depends on it, who can access it, when it rotates, and what happens if it must be revoked.
+
+12
+00:01:04.160 --> 00:01:07.200
+Key identifiers and metadata make review easier.
+
+13
+00:01:07.300 --> 00:01:18.980
+Purpose labels, environment labels, creation time, rotation status, algorithm family, and owner fields help code and operations agree on what a key is allowed to do.
+
+14
+00:01:19.260 --> 00:01:21.980
+Environment separation is a basic control.
+
+15
+00:01:22.080 --> 00:01:28.480
+Development, test, staging, and production should not share sensitive key material just because reuse makes setup convenient.
+
+16
+00:01:28.580 --> 00:01:34.020
+Separate keys make incidents easier to contain and investigations easier to reason about.
+
+17
+00:01:34.300 --> 00:01:36.780
+The durable habit is least surprise.
+
+18
+00:01:36.880 --> 00:01:45.520
+When a reviewer sees a key reference, its purpose, owner, environment, and allowed use should be clear without reconstructing the entire deployment.
+
+19
+00:01:45.800 --> 00:01:52.520
+That clarity also helps operations teams know whom to contact when a key must be rotated, disabled, or investigated.

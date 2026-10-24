@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Child processes should run with the least privilege that fits their task.
+
+2
+00:00:04.680 --> 00:00:15.640
+If a helper only needs read access to a specific input file and write access to a specific output location, it should not inherit broader access just because the parent has it.
+
+3
+00:00:15.920 --> 00:00:18.000
+Identity and group context matter.
+
+4
+00:00:18.100 --> 00:00:28.260
+Services, scheduled jobs, build agents, and containers often run under accounts that have different filesystem, network, and resource permissions from a developer shell.
+
+5
+00:00:28.360 --> 00:00:34.920
+The launch design should specify which identity the child uses and what that identity can access.
+
+6
+00:00:35.200 --> 00:00:38.800
+Privilege changes, where used, require careful ordering.
+
+7
+00:00:38.900 --> 00:00:47.700
+The parent may need to open resources, set up pipes, prepare directories, or drop access before the child begins work.
+
+8
+00:00:47.800 --> 00:00:53.880
+Those steps should be documented and reviewed at a high level so the child does not run with more authority than needed.
+
+9
+00:00:54.160 --> 00:00:57.920
+Resource limits can protect the parent workflow and the host.
+
+10
+00:00:58.020 --> 00:01:08.980
+Limits on time, memory, file size, process count, output size, or other resources can keep a child process from consuming more than the task requires.
+
+11
+00:01:09.080 --> 00:01:17.240
+The exact mechanisms are platform-specific, but the design question is portable: what resources should this child be allowed to use?
+
+12
+00:01:17.520 --> 00:01:22.320
+Higher-privilege launchers need stricter validation of lower-trust inputs.
+
+13
+00:01:22.420 --> 00:01:31.940
+A path, option, environment variable, or working directory supplied by a less trusted source should not quietly control behavior performed with broader access.
+
+14
+00:01:32.040 --> 00:01:35.240
+The launcher should validate before crossing that boundary.

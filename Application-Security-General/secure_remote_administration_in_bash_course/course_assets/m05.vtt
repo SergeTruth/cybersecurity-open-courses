@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.900
+Remote command execution has extra complexity because there may be local Bash interpretation and remote environment interpretation.
+
+2
+00:00:07.000 --> 00:00:15.320
+A value can be processed locally before the remote side receives it, and then interpreted again according to the remote command or shell behavior.
+
+3
+00:00:15.600 --> 00:00:18.960
+Secure scripts avoid arbitrary remote command text.
+
+4
+00:00:19.060 --> 00:00:26.100
+A safer design uses fixed remote actions, controlled scripts, validated operands, and clear argument boundaries.
+
+5
+00:00:26.200 --> 00:00:32.600
+The remote side should expose known behavior when possible, rather than accepting open-ended instructions from a local wrapper.
+
+6
+00:00:32.880 --> 00:00:36.880
+Values that affect remote commands should be validated before use.
+
+7
+00:00:36.980 --> 00:00:44.900
+Host labels, service names, file paths, modes, and environment names should have supported shapes and meanings.
+
+8
+00:00:45.000 --> 00:00:51.960
+Quoting and structured argument handling help preserve accepted values as data rather than accidental syntax.
+
+9
+00:00:52.240 --> 00:00:58.640
+The script should check connection results and remote command results before continuing.
+
+10
+00:00:58.740 --> 00:01:13.140
+A connection failure, host trust failure, authentication failure, remote command failure, timeout, or unexpected output should not be reported as success simply because the local script reached the next line.
+
+11
+00:01:13.420 --> 00:01:17.980
+Timeouts and retry limits matter for unattended remote administration.
+
+12
+00:01:18.080 --> 00:01:20.880
+A hung remote command can block a maintenance window.
+
+13
+00:01:20.980 --> 00:01:23.780
+Repeated retries can amplify a problem.
+
+14
+00:01:23.880 --> 00:01:30.520
+Clear failure messages help operators distinguish connectivity, authorization, and remote execution issues.
+
+15
+00:01:30.800 --> 00:01:34.880
+The goal is a remote action that can be reviewed and trusted.
+
+16
+00:01:34.980 --> 00:01:41.700
+Known remote behaviors with validated inputs are easier to operate than a general-purpose remote shell hidden inside a Bash automation script.

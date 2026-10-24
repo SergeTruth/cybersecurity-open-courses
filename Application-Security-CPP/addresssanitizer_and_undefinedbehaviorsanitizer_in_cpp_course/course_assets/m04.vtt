@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Sanitizer builds should fit cleanly into the normal C++ build strategy.
+
+2
+00:00:05.080 --> 00:00:12.040
+A common practice is to create dedicated configurations for sanitizer work rather than modifying production release builds directly.
+
+3
+00:00:12.140 --> 00:00:19.660
+That separation helps teams keep release settings stable while making instrumented builds easy for developers and CI systems to run.
+
+4
+00:00:19.940 --> 00:00:27.940
+At a high level, sanitizer configurations add compiler and linker options that enable instrumentation and link the sanitizer runtime.
+
+5
+00:00:28.040 --> 00:00:33.480
+They should also include useful debug symbols so reports point back to source locations.
+
+6
+00:00:33.580 --> 00:00:39.900
+Some teams adjust optimization levels or preserve frame pointers where that makes stack traces more reliable.
+
+7
+00:00:40.000 --> 00:00:50.240
+The exact build details vary by compiler, platform, and project, but the goal is the same: make the sanitizer build repeatable, visible, and easy to compare across machines.
+
+8
+00:00:50.520 --> 00:00:53.800
+Sanitizers add runtime and memory overhead.
+
+9
+00:00:53.900 --> 00:01:01.820
+They can also expose compatibility issues with third-party dependencies, custom allocators, unusual build modes, or platform-specific code.
+
+10
+00:01:01.920 --> 00:01:05.200
+That overhead is normal.
+
+11
+00:01:05.300 --> 00:01:12.180
+These builds are typically used in development, pull-request validation, scheduled CI, testing, and staging workflows.
+
+12
+00:01:12.280 --> 00:01:20.360
+Production deployment with sanitizers is a specialized decision that requires controlled operational reasoning, not a default assumption.
+
+13
+00:01:20.640 --> 00:01:22.400
+Good build hygiene matters.
+
+14
+00:01:22.500 --> 00:01:29.780
+Document which sanitizers are enabled, which targets participate, how dependencies are built, and how reports should be collected.
+
+15
+00:01:29.880 --> 00:01:37.720
+If developers can reproduce the same sanitizer configuration locally, they can fix findings faster and trust CI failures more.
+
+16
+00:01:38.000 --> 00:01:44.080
+It is also wise to keep sanitizer configuration close to the build system rather than relying on private command lines.
+
+17
+00:01:44.180 --> 00:01:50.740
+Named presets, documented targets, or repeatable CI jobs reduce confusion about which flags were used.
+
+18
+00:01:50.840 --> 00:01:58.600
+When a report comes from a known configuration, engineers spend less time debating the environment and more time investigating the defect.

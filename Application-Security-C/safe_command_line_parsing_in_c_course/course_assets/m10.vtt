@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:13.780
+The workflow for safer command-line parsing is simple: define the contract, parse without side effects, validate every value, reject ambiguity, report errors clearly, and act only after input is acceptable.
+
+2
+00:00:13.880 --> 00:00:18.040
+That sequence keeps uncertain arguments from driving program behavior too early.
+
+3
+00:00:18.320 --> 00:00:20.720
+Review the contract before the implementation.
+
+4
+00:00:20.820 --> 00:00:22.500
+Which arguments are required?
+
+5
+00:00:22.600 --> 00:00:24.680
+Which options take values?
+
+6
+00:00:24.780 --> 00:00:26.220
+Are duplicates allowed?
+
+7
+00:00:26.320 --> 00:00:28.160
+What defaults apply?
+
+8
+00:00:28.260 --> 00:00:31.060
+Which options conflict or depend on each other?
+
+9
+00:00:31.160 --> 00:00:33.400
+What ranges apply to numeric values?
+
+10
+00:00:33.500 --> 00:00:37.020
+What paths or resources may be referenced?
+
+11
+00:00:37.300 --> 00:00:38.980
+Then review the parser flow.
+
+12
+00:00:39.080 --> 00:00:42.520
+Does parsing perform file changes or resource operations?
+
+13
+00:00:42.620 --> 00:00:45.500
+Are unknown options rejected consistently?
+
+14
+00:00:45.600 --> 00:00:47.120
+Are missing values detected?
+
+15
+00:00:47.220 --> 00:00:50.580
+Are command-line strings checked before copy or comparison?
+
+16
+00:00:50.680 --> 00:00:53.080
+What happens when validation fails?
+
+17
+00:00:53.360 --> 00:00:57.520
+Finally, make the behavior repeatable with tests and tools.
+
+18
+00:00:57.620 --> 00:01:06.660
+Cover valid cases, invalid cases, boundary cases, malformed cases, duplicate handling, missing values, and regression scenarios.
+
+19
+00:01:06.760 --> 00:01:16.280
+A safe command-line tool is not one that trusts its launch environment; it is one that turns input into a validated internal configuration before doing real work.

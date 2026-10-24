@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.460
+Normal Prisma model operations are usually the safest and most maintainable path when they meet the requirement.
+
+2
+00:00:07.560 --> 00:00:17.560
+Sometimes teams need raw SQL for specialized reports, performance tuning, database-specific features, administrative tasks, migrations, or complex queries.
+
+3
+00:00:17.660 --> 00:00:22.780
+Raw SQL is not automatically wrong, but it changes the review standard.
+
+4
+00:00:22.880 --> 00:00:30.400
+When the code leaves normal Prisma model operations, reviewers should treat that boundary as high risk and ask why the raw query is needed.
+
+5
+00:00:30.680 --> 00:00:35.240
+Values supplied to raw queries should use safe parameter binding patterns.
+
+6
+00:00:35.340 --> 00:00:44.300
+Do not concatenate untrusted values into SQL strings, and do not place untrusted values directly into JavaScript template strings that become SQL.
+
+7
+00:00:44.400 --> 00:00:55.920
+Be especially careful with unsafe raw query APIs, dynamic identifiers, dynamic columns, table names, sort directions, operators, and SQL fragments.
+
+8
+00:00:56.020 --> 00:01:05.060
+Ordinary value parameters are not a safe replacement for every part of SQL grammar, so structural choices need allowlists and application-controlled mappings.
+
+9
+00:01:05.340 --> 00:01:15.100
+Review raw SQL wherever it appears: API routes, workers, scripts, reports, migrations, seed jobs, and admin tooling.
+
+10
+00:01:15.200 --> 00:01:32.960
+TypedSQL and other structured approaches can improve maintainability and type awareness, but the security question remains the same: what values are bound, what structure is dynamic, how is that structure controlled, what authorization applies, and what database account runs the query.
+
+11
+00:01:33.060 --> 00:01:36.740
+The course is not asking teams to ban raw SQL.
+
+12
+00:01:36.840 --> 00:01:43.800
+It is asking them to make raw SQL rare, justified, parameterized, scoped, and easy to review.

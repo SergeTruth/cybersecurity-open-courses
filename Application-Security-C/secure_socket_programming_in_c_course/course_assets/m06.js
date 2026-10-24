@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Partial I/O and Buffer Management",
+  "graphicAlt": "Socket state distinguishes buffer capacity, valid data, parser position and unsent output.",
+  "narration": "Socket I/O is not the same as reading or writing a complete object in one call. Reads and writes may complete partially, block, fail, or be interrupted. The program must check the actual number of bytes received or sent and update connection state accordingly.\n\nA partial read might be the first bytes of a header, the middle of a payload, or the end of one message plus the beginning of another. A partial write means the program still has unsent data that must be queued, retried according to policy, or abandoned during failure handling. Treating partial I/O as rare creates subtle protocol bugs.\n\nBuffers need explicit capacity tracking and clear ownership. Capacity is how much memory is available. Valid data length is how many bytes have actually been received or prepared. Parser position is where the next field begins. These are different facts, and mixing them can lead to incorrect parsing or memory safety mistakes.\n\nBinary data received from a socket should not be treated as a C string unless the protocol explicitly defines text, the bytes are valid for that expectation, and termination is handled safely. A network message may contain zeros, partial encodings, or no terminator at all. Create a bounded, validated text representation when text is needed.\n\nNonblocking and event-driven code must preserve parser state across multiple I/O events. The parser may need to remember that it has received a partial header, a pending payload, or unsent output. Safe socket code treats partial I/O as normal behavior and designs state machines that remain clear under repeated events.",
+  "narrationPoints": [
+    "The program must check the actual number of bytes received or sent and update connection state accordingly.",
+    "A partial write means the program still has unsent data that must be queued, retried according to policy, or abandoned during failure handling.",
+    "Buffers need explicit capacity tracking and clear ownership.",
+    "Binary data received from a socket should not be treated as a C string unless the protocol explicitly defines text, the bytes are valid for that expectation, and termination is handled safely.",
+    "Safe socket code treats partial I/O as normal behavior and designs state machines that remain clear under repeated events."
+  ]
+};

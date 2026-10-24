@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.020
+Startup is a sensitive phase for privileged C programs because the process is collecting assumptions before normal controls are fully established.
+
+2
+00:00:08.120 --> 00:00:21.880
+Configuration paths, environment variables, current working directory, inherited descriptors or handles, locale settings, temporary locations, and identity state may all influence what happens next.
+
+3
+00:00:21.980 --> 00:00:26.140
+Treat startup as a controlled sequence, not as incidental boilerplate.
+
+4
+00:00:26.420 --> 00:00:29.540
+Trusted configuration should come from trusted locations.
+
+5
+00:00:29.640 --> 00:00:38.840
+A privileged program should not casually read sensitive settings from a working directory, a user-writable path, or an ambiguous relative location.
+
+6
+00:00:38.940 --> 00:00:47.020
+Configuration files should have expected ownership and permissions, and the program should report unsafe configuration in a controlled way.
+
+7
+00:00:47.120 --> 00:00:50.480
+The goal is to make configuration predictable before authority is used.
+
+8
+00:00:50.760 --> 00:00:59.560
+Environment variables can affect library behavior, file locations, temporary directories, localization, diagnostics, and child processes.
+
+9
+00:00:59.660 --> 00:01:03.980
+Some applications choose to ignore most inherited environment values.
+
+10
+00:01:04.080 --> 00:01:08.960
+Others accept a small allowlist or normalize values early.
+
+11
+00:01:09.060 --> 00:01:14.660
+The right answer depends on platform and deployment, but the decision should be explicit and reviewed.
+
+12
+00:01:14.940 --> 00:01:19.020
+The current working directory is another easy source of hidden behavior.
+
+13
+00:01:19.120 --> 00:01:27.760
+Relative paths can resolve differently under an administrator shell, a service manager, a scheduler, a test runner, or a container entry point.
+
+14
+00:01:27.860 --> 00:01:34.980
+Privileged startup code should prefer absolute, trusted paths for sensitive resources and should avoid relying on an unverified working directory.
+
+15
+00:01:35.260 --> 00:01:39.420
+Inherited descriptors or handles deserve the same attention.
+
+16
+00:01:39.520 --> 00:01:50.400
+A process may begin with open files, sockets, pipes, or handles that were intentionally passed by a launcher or unintentionally inherited from a parent process.
+
+17
+00:01:50.500 --> 00:02:00.020
+Startup code should identify which inherited resources are expected, close or mark others appropriately, and ensure child processes do not receive access they do not need.
+
+18
+00:02:00.300 --> 00:02:03.740
+Finally, startup should confirm identity state.
+
+19
+00:02:03.840 --> 00:02:15.760
+If the program expects to run as a specific service account, with a specific group set, with reduced capabilities, or without elevated administrative context, it should check that assumption in a reliable way.
+
+20
+00:02:15.860 --> 00:02:22.020
+Clear startup checks turn deployment mistakes into early, visible failures instead of confusing runtime behavior.

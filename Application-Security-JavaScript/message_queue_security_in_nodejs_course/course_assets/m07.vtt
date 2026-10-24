@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.460
+Retries can recover from temporary failures, but they can also amplify outages or repeat unsafe actions.
+
+2
+00:00:07.560 --> 00:00:20.840
+A retry that helps during a short network interruption can be harmful when the payload is invalid, the downstream database is overloaded, the worker already completed a side effect, or the business state has changed.
+
+3
+00:00:20.940 --> 00:00:27.020
+Retry behavior should match the operation's idempotency, downstream capacity, and business impact.
+
+4
+00:00:27.300 --> 00:00:35.220
+Use backoff, retry limits, visibility timeout tuning, failure destinations, and dead-letter queues where appropriate.
+
+5
+00:00:35.320 --> 00:00:40.360
+A poison message should be isolated for investigation instead of retried forever.
+
+6
+00:00:40.460 --> 00:00:47.980
+Infinite retries can flood logs, delay other work, increase cost, overload downstream services, and hide the root cause.
+
+7
+00:00:48.080 --> 00:00:55.840
+Failure handling should avoid dropping important security or business events silently, but it should also avoid repeatedly applying dangerous side effects.
+
+8
+00:00:56.120 --> 00:01:00.040
+Dead-letter queues are operational evidence, not a garbage can.
+
+9
+00:01:00.140 --> 00:01:11.740
+They can contain customer data, object keys, business decisions, failed webhook payloads, internal workflow details, and sometimes sensitive fields that should not have been in the message at all.
+
+10
+00:01:11.840 --> 00:01:22.160
+Access should be controlled, retention should be intentional, monitoring should alert when volume changes, and redaction expectations should be clear for support and investigation tools.
+
+11
+00:01:22.440 --> 00:01:24.760
+Manual replay needs governance.
+
+12
+00:01:24.860 --> 00:01:33.260
+Replaying messages can be useful after a fixed bug or downstream outage, but it can also duplicate work or reapply stale decisions.
+
+13
+00:01:33.360 --> 00:01:41.200
+Require authorization, audit logging, careful scoping, and a clear understanding of idempotency before replay.
+
+14
+00:01:41.300 --> 00:01:51.540
+Error messages and failure logs should help operators recover without exposing secrets, tokens, broker credentials, full sensitive payloads, or unnecessary personal data.

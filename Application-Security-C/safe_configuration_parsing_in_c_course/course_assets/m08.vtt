@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.380
+Configuration failure handling should be predictable.
+
+2
+00:00:03.480 --> 00:00:12.200
+If parsing or validation fails, the program should reject invalid settings and avoid continuing with ambiguous or unsafe state.
+
+3
+00:00:12.300 --> 00:00:19.740
+Continuing after a serious configuration error often moves uncertainty deeper into code that expects validated settings.
+
+4
+00:00:20.020 --> 00:00:23.300
+Avoid partial state updates during parse failure.
+
+5
+00:00:23.400 --> 00:00:33.800
+A parser should not apply some settings to global state, then discover a later field is invalid and leave the program running with a mixture of old, default, and rejected values.
+
+6
+00:00:33.900 --> 00:00:40.460
+Parse into temporary state, validate the full result, and commit only when the contract is satisfied.
+
+7
+00:00:40.740 --> 00:00:43.220
+Temporary parser state needs cleanup.
+
+8
+00:00:43.320 --> 00:00:53.560
+Buffers, field lists, intermediate maps, allocated strings, file handles, and parsed resource descriptors should have clear ownership during failure paths.
+
+9
+00:00:53.660 --> 00:00:57.660
+The cleanup logic should be reviewed as carefully as the success path.
+
+10
+00:00:57.940 --> 00:01:04.580
+For systems that support runtime reload, rollback to a prior known-good configuration may be appropriate.
+
+11
+00:01:04.680 --> 00:01:12.280
+The rule should be explicit: either reject startup, keep the current active configuration, or fall back to safe defaults.
+
+12
+00:01:12.380 --> 00:01:15.340
+The program should not improvise at the point of failure.
+
+13
+00:01:15.620 --> 00:01:19.380
+Diagnostics should be clear without exposing sensitive values.
+
+14
+00:01:19.480 --> 00:01:25.480
+Report the source, field, failure category, expected type, or range when useful.
+
+15
+00:01:25.580 --> 00:01:30.220
+Redact secrets and avoid dumping raw configuration content into logs.

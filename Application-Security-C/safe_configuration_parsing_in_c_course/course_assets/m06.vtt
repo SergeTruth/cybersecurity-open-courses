@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.220
+Real configuration often comes from layers.
+
+2
+00:00:03.320 --> 00:00:15.800
+A program may have built-in defaults, a default configuration file, a user configuration file, environment variables, command-line overrides, runtime settings, and deployment-provided values.
+
+3
+00:00:15.900 --> 00:00:19.020
+Safe parsing includes deciding which source wins.
+
+4
+00:00:19.300 --> 00:00:21.460
+Defaults should be safe and visible.
+
+5
+00:00:21.560 --> 00:00:32.360
+A safe default avoids unnecessary exposure, surprising resource access, excessive permissions, or risky behavior when no explicit configuration is provided.
+
+6
+00:00:32.460 --> 00:00:37.740
+Defaults should be documented so administrators and reviewers know which behavior occurs in the absence of a setting.
+
+7
+00:00:38.020 --> 00:00:40.820
+Precedence order must be explicit.
+
+8
+00:00:40.920 --> 00:00:48.680
+If an environment variable overrides a file, or a command-line option overrides deployment configuration, the parser should apply that order consistently.
+
+9
+00:00:48.780 --> 00:00:54.380
+Hidden precedence can make the running configuration different from what operators believe they supplied.
+
+10
+00:00:54.660 --> 00:00:56.900
+Conflicting settings should be handled predictably.
+
+11
+00:00:57.000 --> 00:00:59.160
+Some conflicts should be rejected.
+
+12
+00:00:59.260 --> 00:01:01.580
+Some can be resolved by precedence.
+
+13
+00:01:01.680 --> 00:01:05.680
+Some may require a warning or migration path.
+
+14
+00:01:05.780 --> 00:01:11.300
+The parser should not silently combine incompatible values if the result is unclear.
+
+15
+00:01:11.580 --> 00:01:14.060
+Layering should not hide behavior changes.
+
+16
+00:01:14.160 --> 00:01:21.040
+A later override may change a security-sensitive setting, a resource location, a timeout, or a feature flag.
+
+17
+00:01:21.140 --> 00:01:29.540
+The program should make final effective configuration observable in a safe way, especially during startup diagnostics or troubleshooting.

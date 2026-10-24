@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | Token Security in Node.js</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="token_security_in_nodejs">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="11"
+        data-total="11"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;A&quot;,&quot;q02&quot;:&quot;C&quot;,&quot;q03&quot;:&quot;D&quot;,&quot;q04&quot;:&quot;C&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;B&quot;,&quot;q07&quot;:&quot;A&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;D&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. Why must bearer tokens be protected like secrets?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Possession can be sufficient to exercise every authority granted by the bearer token.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Bearer tokens are ordinary public identifiers without secret value.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Bearer tokens cannot be replayed after a legitimate client has presented them successfully for one authorized operation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Encryption at rest makes token disclosure during transport, browser exposure, application logging, or error reporting harmless.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Why should token purpose be defined before storage or validation decisions?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>Every token type should carry identical authority, lifetime, storage, transport, and revocation behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>Token storage choices are unrelated to intended purpose, replay impact, client type, or granted authority.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>Purpose determines authority, validation context, storage, lifetime, rotation, and revocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>A token&#x27;s user-interface label determines its validation requirements.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Why is Math.random inappropriate for security-sensitive tokens?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>Math.random is cryptographically unpredictable when called repeatedly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>Encoding a random decimal value as base64 adds the missing entropy.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>UUID formatting turns Math.random output into a secure bearer secret.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>It is not designed to provide cryptographically secure unpredictability.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why might storing a digest of an opaque token reduce exposure?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Hashing an opaque bearer token automatically converts its format, claims, signature, and validation behavior into a JWT.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>A stored digest removes the need for expiration and revocation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>A database leak then exposes a verifier rather than the live bearer credential.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Any unsalted fast hash prevents offline testing of stolen token candidates, even when tokens have limited entropy.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. When should decoded JWT claims be trusted?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Decoded claims are trustworthy before signature verification.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Selecting a verification key from the untrusted header authenticates the token&#x27;s complete header, payload, and signature.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>A familiar issuer string is sufficient without algorithm and audience checks.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Only after signature, algorithm, key, and required claim validation succeeds.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What should JWT validation commonly check?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Expiration is the only registered claim that requires validation.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Validate algorithm, key, issuer, audience, expiration, not-before, type, and required identifiers.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>The token may choose any algorithm supported by the library.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Issuer and audience checks remain optional whenever cryptographic signature verification succeeds with a supported key.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. Why should access tokens, refresh tokens, and ID tokens not be treated as interchangeable?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>They carry different authority, audiences, lifetimes, storage needs, and replay consequences.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>ID tokens are suitable bearer credentials for every API.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Refresh tokens should use the same short lifetime, storage policy, and exposure assumptions as access tokens.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>Interchangeable formats imply interchangeable authority and storage controls.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. Why do cookies, Authorization headers, local storage, and URLs have different token risks?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Browser localStorage provides the same confidentiality boundary as an HttpOnly, Secure, SameSite cookie inaccessible to scripts.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Each transport or storage location exposes tokens through different browser and logging boundaries.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>Placing a token in a URL is safe whenever the browser uses HTTPS for the initial request.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Authorization headers cannot appear in browser diagnostics, reverse-proxy logs, server telemetry, traces, or downstream error reports.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why do expiration, rotation, revocation, and monitoring matter after token issuance?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Expiration eliminates every need for durable revocation, session invalidation, replay detection, or emergency token containment.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>Refresh-token replay should issue another valid successor so legitimate clients preserve availability and the token family remains usable.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Post-issuance controls bound lifetime, contain replay, support response, and reveal misuse.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>An in-memory revocation set is sufficient for every application process, deployment replica, restart, and regional failover.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. What should a practical Node.js token security review include?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Strong token generation completes the entire security review.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Logging full bearer values is acceptable after their nominal expiration.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>JWT verification removes the need for rotation, revocation, monitoring, and response.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Review entropy, storage digests, JWT policy, rotation, browser transport, revocation, logging, and response.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m10.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m11.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

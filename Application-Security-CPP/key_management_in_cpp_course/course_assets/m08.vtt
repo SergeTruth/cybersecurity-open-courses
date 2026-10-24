@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Key handling includes diagnostics and failure behavior.
+
+2
+00:00:04.040 --> 00:00:18.600
+Logs, metrics, traces, exceptions, crash reports, support bundles, and debug output can all become exposure paths if they include raw keys, tokens, private material, decrypted data, or sensitive configuration.
+
+3
+00:00:18.880 --> 00:00:22.800
+Safe logging should identify the event without revealing the secret.
+
+4
+00:00:22.900 --> 00:00:36.260
+Log key identifiers, backend names, operation types, and sanitized error categories where policy allows, but avoid raw values and avoid realistic-looking placeholder secrets that may be mistaken for real ones.
+
+5
+00:00:36.540 --> 00:00:40.380
+Memory handling in C++ requires humility.
+
+6
+00:00:40.480 --> 00:00:47.760
+Minimize copies, keep secret lifetimes short, and use library-provided secure containers or handles where available.
+
+7
+00:00:47.860 --> 00:00:58.420
+At the same time, do not overpromise that clearing one buffer removes every copy from allocators, temporaries, paging, dumps, or library internals.
+
+8
+00:00:58.700 --> 00:01:02.860
+Failure paths deserve the same care as success paths.
+
+9
+00:01:02.960 --> 00:01:15.600
+Partial initialization, failed retrieval, failed validation, exceptions, timeout conditions, and shutdown should not leave keys in broad caches or print sensitive values while trying to help diagnosis.
+
+10
+00:01:15.880 --> 00:01:18.840
+Error messages should be safe for their audience.
+
+11
+00:01:18.940 --> 00:01:25.500
+A user-facing error may need to be generic, while internal diagnostics can include non-secret context for operators.
+
+12
+00:01:25.600 --> 00:01:28.240
+Both should avoid exposing key material.
+
+13
+00:01:28.520 --> 00:01:31.480
+Incident response depends on clear key history.
+
+14
+00:01:31.580 --> 00:01:39.660
+Teams need to know which keys were active, which services accessed them, when failures occurred, and what rotation or revocation actions were taken.
+
+15
+00:01:39.940 --> 00:01:44.980
+The practical habit is to test failure paths and inspect logs deliberately.
+
+16
+00:01:45.080 --> 00:01:51.320
+If the system only looks safe on the successful path, the key-management design is unfinished.
+
+17
+00:01:51.600 --> 00:01:53.280
+Exception safety matters too.
+
+18
+00:01:53.380 --> 00:02:03.620
+A failure during setup or shutdown should not leave sensitive values in long-lived structures, nor should it produce verbose diagnostic dumps that include protected material.
+
+19
+00:02:03.900 --> 00:02:13.100
+Clear diagnostics and careful memory handling work together: one supports investigation, the other reduces unnecessary exposure while the investigation happens.

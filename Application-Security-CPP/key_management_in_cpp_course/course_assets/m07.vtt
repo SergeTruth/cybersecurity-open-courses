@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.100
+Key lifecycle planning covers creation, activation, use, rotation, deactivation, revocation, archival where required, and destruction.
+
+2
+00:00:10.200 --> 00:00:14.120
+Each stage should be defined before the key becomes a production dependency.
+
+3
+00:00:14.400 --> 00:00:17.280
+Rotation is more than generating a new key.
+
+4
+00:00:17.380 --> 00:00:28.980
+Systems may need key identifiers, version metadata, compatibility windows, re-encryption jobs, dual-read or dual-write behavior, staged rollout, and rollback policy.
+
+5
+00:00:29.080 --> 00:00:33.160
+Without planning, rotation can become an emergency rewrite.
+
+6
+00:00:33.440 --> 00:00:36.880
+Old data and signatures need deliberate handling.
+
+7
+00:00:36.980 --> 00:00:41.300
+Encrypted records may need to remain readable while being migrated.
+
+8
+00:00:41.400 --> 00:00:45.080
+Signed artifacts may need verification against historical keys.
+
+9
+00:00:45.180 --> 00:00:49.900
+The policy should describe what remains trusted and for how long.
+
+10
+00:00:50.180 --> 00:00:54.500
+Revocation and compromise response require a clear signal.
+
+11
+00:00:54.600 --> 00:01:03.000
+Services need to know which key should no longer be used, how quickly caches should refresh, and what happens to pending operations that still reference old key material.
+
+12
+00:01:03.280 --> 00:01:08.960
+C++ applications should avoid hardcoding assumptions that only one key exists.
+
+13
+00:01:09.060 --> 00:01:17.620
+Passing key identifiers, consulting metadata, and handling unavailable or retired keys make lifecycle operations more realistic.
+
+14
+00:01:17.900 --> 00:01:21.180
+Destruction and archival also need policy.
+
+15
+00:01:21.280 --> 00:01:24.000
+Some keys must be destroyed promptly.
+
+16
+00:01:24.100 --> 00:01:28.180
+Others must remain protected for retention or verification requirements.
+
+17
+00:01:28.280 --> 00:01:31.720
+The application should not invent that decision ad hoc.
+
+18
+00:01:32.000 --> 00:01:35.760
+The safest time to design lifecycle behavior is before production.
+
+19
+00:01:35.860 --> 00:01:44.500
+When key use is documented, scoped, and versioned, rotation and revocation become controlled operations instead of guesswork under pressure.
+
+20
+00:01:44.780 --> 00:01:47.980
+Lifecycle operations should also be rehearsed.
+
+21
+00:01:48.080 --> 00:01:59.040
+A rotation plan that has never been tested may fail because of a forgotten consumer, stale cache, missing key identifier, or deployment step that only exists in one environment.
+
+22
+00:01:59.320 --> 00:02:06.040
+Good lifecycle design gives teams a predictable way to move from normal operation to replacement, containment, and recovery.
+
+23
+00:02:06.320 --> 00:02:08.400
+Practice the workflow.

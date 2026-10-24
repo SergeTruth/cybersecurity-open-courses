@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+File transfer is not only about bytes.
+
+2
+00:00:03.080 --> 00:00:10.440
+Permissions, ownership, timestamps, modes, directory structure, and symbolic links can all affect the result.
+
+3
+00:00:10.540 --> 00:00:14.620
+A file that arrives with the wrong mode may expose data or fail at runtime.
+
+4
+00:00:14.720 --> 00:00:19.280
+A missing timestamp or ownership change may break downstream expectations.
+
+5
+00:00:19.560 --> 00:00:23.080
+Before automating a transfer, define which metadata matters.
+
+6
+00:00:23.180 --> 00:00:25.820
+Some workflows only need file contents.
+
+7
+00:00:25.920 --> 00:00:31.280
+Others need modes, timestamps, ownership, or directory structure preserved.
+
+8
+00:00:31.380 --> 00:00:39.940
+rsync options can affect these details, so option choices should match the operational requirement instead of being copied from another script by habit.
+
+9
+00:00:40.220 --> 00:00:43.180
+Sensitive files require special handling.
+
+10
+00:00:43.280 --> 00:00:51.760
+Transfer automation should avoid broad permissions, accidental publication, and routine logs that reveal sensitive paths or contents.
+
+11
+00:00:51.860 --> 00:01:00.020
+If the destination is shared, staged, or consumed by another process, permissions and ownership should be part of the acceptance check.
+
+12
+00:01:00.300 --> 00:01:03.500
+Symbolic links and link behavior deserve review.
+
+13
+00:01:03.600 --> 00:01:09.920
+A script should know whether it is transferring a link, the link target, or a directory tree that may contain links.
+
+14
+00:01:10.020 --> 00:01:17.300
+This matters most when automation processes shared directories, generated artifacts, or data prepared by another workflow.
+
+15
+00:01:17.580 --> 00:01:20.060
+Directory boundaries should be checked before transfer.
+
+16
+00:01:20.160 --> 00:01:24.560
+A source tree and destination tree should represent the intended scope.
+
+17
+00:01:24.660 --> 00:01:34.740
+Post-transfer verification can confirm that important files arrived, expected attributes are present, and the destination did not receive broader data than intended.
+
+18
+00:01:35.020 --> 00:01:40.060
+The secure habit is to verify the parts of file state that matter to the workflow.
+
+19
+00:01:40.160 --> 00:01:45.200
+That may be a simple high-level check or a more formal release validation step.
+
+20
+00:01:45.300 --> 00:01:50.820
+Either way, metadata and links are part of transfer behavior, not an afterthought.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.780
+Rust web frameworks such as Axum and Actix Web provide request extractors and routing tools that make API development efficient.
+
+2
+00:00:07.880 --> 00:00:16.200
+Extractors can parse path parameters, query parameters, headers, JSON bodies, and other request data into typed structures.
+
+3
+00:00:16.300 --> 00:00:27.020
+That is a helpful first step, but the application still needs to validate whether the extracted values are allowed for the endpoint and the current user, tenant, workflow, and business context.
+
+4
+00:00:27.300 --> 00:00:32.180
+Transport validation and domain validation should remain separate concerns.
+
+5
+00:00:32.280 --> 00:00:40.440
+Transport validation checks the request shape: required fields, formats, lengths, ranges, and unknown fields.
+
+6
+00:00:40.540 --> 00:00:50.700
+Domain validation checks meaning: whether the account can perform the action, whether the state transition is allowed, whether the time window is still open, or whether a quantity is permitted.
+
+7
+00:00:50.800 --> 00:00:55.840
+Mixing those concerns too tightly makes validation harder to test and reuse.
+
+8
+00:00:56.120 --> 00:00:59.160
+Authentication-related inputs need particular care.
+
+9
+00:00:59.260 --> 00:01:10.860
+Headers, cookies, bearer tokens, session identifiers, redirect targets, and user-supplied IDs should be parsed and constrained before they influence access decisions.
+
+10
+00:01:10.960 --> 00:01:14.720
+Validation does not replace authentication or authorization.
+
+11
+00:01:14.820 --> 00:01:23.300
+It supports them by ensuring that the values passed into security logic have expected forms and cannot smuggle in unrelated fields or ambiguous encodings.
+
+12
+00:01:23.580 --> 00:01:27.100
+Validation error responses should be predictable and safe.
+
+13
+00:01:27.200 --> 00:01:33.520
+A legitimate client needs to know that a field is missing, a value is unsupported, or a payload is too large.
+
+14
+00:01:33.620 --> 00:01:40.180
+It does not need stack traces, internal type names, secrets, or sensitive implementation details.
+
+15
+00:01:40.280 --> 00:01:46.680
+Server-side enforcement remains the authority because clients can be bypassed, outdated, modified, or simply wrong.
+
+16
+00:01:46.780 --> 00:01:49.340
+Rust helps keep the enforcement code explicit.

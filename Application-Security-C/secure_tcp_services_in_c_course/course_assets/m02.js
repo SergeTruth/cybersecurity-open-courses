@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Socket Setup and Binding Decisions",
+  "graphicAlt": "Loopback, specific-interface and all-interface listeners expose different reachability and should match deployment scope.",
+  "narration": "Socket setup is where a TCP service first defines its exposure. Creating a socket, selecting an address family, binding to an address and port, and entering a listening state may look like routine boilerplate, but those choices determine who can reach the service and how the deployment must protect it.\n\nBinding to loopback is different from binding to an external interface. Binding to all interfaces is different from binding to one specific address. IPv4 and IPv6 choices can also change reachability depending on platform defaults and deployment configuration. The source code, configuration, and operations documentation should agree on the intended listening scope.\n\nBacklog and listen behavior deserve intentional settings. They are not the entire availability design, but they influence how the service handles connection pressure and startup behavior. A secure design uses settings that match the expected workload and pairs them with connection limits, timeouts, monitoring, and operational review.\n\nPrivileged ports and service accounts should be handled at a high level of design. If a service needs special authority for startup, the program should reduce authority where appropriate after setup and should document why the listening choice is necessary. If a service does not need broad reachability or elevated setup, the deployment should avoid granting it.\n\nReviewers should ask whether the socket setup matches the deployment purpose. Is the service meant for local clients only, a private network, a container sidecar, an internal service mesh, or public clients behind a controlled front end? The binding decision should reflect that answer, and tests or deployment checks should catch accidental exposure.",
+  "narrationPoints": [
+    "Socket setup is where a TCP service first defines its exposure.",
+    "The source code, configuration, and operations documentation should agree on the intended listening scope.",
+    "A secure design uses settings that match the expected workload and pairs them with connection limits, timeouts, monitoring, and operational review.",
+    "Privileged ports and service accounts should be handled at a high level of design.",
+    "Reviewers should ask whether the socket setup matches the deployment purpose."
+  ]
+};

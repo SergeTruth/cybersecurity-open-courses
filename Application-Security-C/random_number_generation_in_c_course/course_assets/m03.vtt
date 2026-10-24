@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.420
+Legacy C APIs such as rand are familiar, but they are not appropriate for security-sensitive randomness.
+
+2
+00:00:06.520 --> 00:00:14.120
+They were not designed to protect tokens, keys, nonces, session identifiers, or other values where prediction has security consequences.
+
+3
+00:00:14.400 --> 00:00:17.520
+The behavior of rand can vary by implementation.
+
+4
+00:00:17.620 --> 00:00:25.300
+Range, quality, period, state size, and seeding behavior are not properties you should depend on for sensitive decisions.
+
+5
+00:00:25.400 --> 00:00:29.560
+Code that seems acceptable on one platform may have different behavior elsewhere.
+
+6
+00:00:29.840 --> 00:00:34.320
+Small or predictable seeds produce repeatable sequences.
+
+7
+00:00:34.420 --> 00:00:41.140
+Seeding a deterministic generator with a low-entropy value can make output repeat across runs or environments.
+
+8
+00:00:41.240 --> 00:00:45.320
+That may be acceptable when repeatability is intentional for tests.
+
+9
+00:00:45.420 --> 00:00:49.820
+It is not acceptable for secrets or access-control values.
+
+10
+00:00:50.100 --> 00:00:56.740
+Simple modulo logic can also introduce range bias when the source range is not evenly divisible by the target range.
+
+11
+00:00:56.840 --> 00:01:00.360
+This is a separate issue from the quality of the generator itself.
+
+12
+00:01:00.460 --> 00:01:04.220
+Even a good source can be mapped poorly into a bounded range.
+
+13
+00:01:04.500 --> 00:01:11.620
+For limited non-security uses, legacy APIs may be acceptable when the quality requirements are modest and documented.
+
+14
+00:01:11.720 --> 00:01:18.440
+The important review rule is to flag any security-sensitive use of legacy or weak randomness APIs.
+
+15
+00:01:18.540 --> 00:01:27.180
+If the value protects access, confidentiality, integrity, or protocol safety, use a trusted platform or approved library source instead.

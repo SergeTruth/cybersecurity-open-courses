@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Some socket workflows need confidentiality, integrity, and peer authentication.
+
+2
+00:00:05.400 --> 00:00:16.520
+If data crosses untrusted networks, semi-trusted networks, shared infrastructure, or contains sensitive information, the transport design should protect that data appropriately.
+
+3
+00:00:16.620 --> 00:00:24.060
+A plain socket is only a communication channel; it does not automatically provide secrecy or peer assurance.
+
+4
+00:00:24.340 --> 00:00:30.900
+TLS or another appropriate transport protection layer may be required depending on the deployment and data.
+
+5
+00:00:31.000 --> 00:00:34.920
+Adding a protection layer is not only a library integration task.
+
+6
+00:00:35.020 --> 00:00:44.700
+Certificate handling, identity validation, trust stores, hostname or service identity rules, version policy, and error handling all become security decisions.
+
+7
+00:00:44.980 --> 00:00:49.060
+Certificate and identity validation are not optional decoration.
+
+8
+00:00:49.160 --> 00:00:55.480
+A connection that is encrypted but not validated may still fail to provide the assurance the application needs.
+
+9
+00:00:55.580 --> 00:01:01.500
+The program should define what identity it expects from the peer and what happens when validation fails.
+
+10
+00:01:01.780 --> 00:01:07.220
+Sensitive data should also be minimized in messages and protected in memory where practical.
+
+11
+00:01:07.320 --> 00:01:11.400
+Do not send secrets when a reference or scoped token would do.
+
+12
+00:01:11.500 --> 00:01:14.380
+Avoid keeping sensitive payloads longer than needed.
+
+13
+00:01:14.480 --> 00:01:19.120
+Be careful with debug buffers, error messages, and copied data structures.
+
+14
+00:01:19.400 --> 00:01:22.120
+Logging and diagnostics deserve restraint.
+
+15
+00:01:22.220 --> 00:01:30.860
+They should help operators understand failures without dumping credentials, tokens, session identifiers, private records, or full payloads.
+
+16
+00:01:30.960 --> 00:01:36.960
+Transport protection complements message validation and authorization; it does not replace them.
+
+17
+00:01:37.060 --> 00:01:41.380
+The receiver still has to validate the protocol after the channel is protected.

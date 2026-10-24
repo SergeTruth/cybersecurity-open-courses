@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.180
+Socket services need resource governance because peers may be slow, disconnected, malformed, or unexpectedly active.
+
+2
+00:00:08.280 --> 00:00:17.080
+A service that has no limits can spend too much memory, too many descriptors, too much queue space, or too much time on one peer or one class of requests.
+
+3
+00:00:17.360 --> 00:00:28.160
+Useful controls include maximum connection counts, maximum message sizes, queue depth limits, request rate limits, idle timeouts, retry limits, and memory caps.
+
+4
+00:00:28.260 --> 00:00:32.740
+These limits should be chosen for the service's role and enforced consistently.
+
+5
+00:00:32.840 --> 00:00:39.400
+Limits are most useful when they are part of the protocol and operational documentation, not hidden surprises.
+
+6
+00:00:39.680 --> 00:00:46.000
+Timeouts and backpressure keep the service from waiting forever or accepting work it cannot process.
+
+7
+00:00:46.100 --> 00:00:49.940
+A slow peer should not hold critical resources indefinitely.
+
+8
+00:00:50.040 --> 00:00:52.840
+A full output queue should have a defined response.
+
+9
+00:00:52.940 --> 00:00:58.220
+A request that exceeds limits should fail predictably and release resources.
+
+10
+00:00:58.500 --> 00:01:02.980
+Avoid unbounded allocation based on network-provided lengths or counts.
+
+11
+00:01:03.080 --> 00:01:08.120
+Even when a value is syntactically valid, the service should decide whether it is acceptable.
+
+12
+00:01:08.220 --> 00:01:14.140
+Allocation, copying, parsing, and dispatch should all happen after size and policy checks.
+
+13
+00:01:14.420 --> 00:01:21.060
+Cleanup after disconnects, timeouts, parse failures, and protocol errors is part of availability.
+
+14
+00:01:21.160 --> 00:01:29.320
+Descriptors, buffers, timers, parser state, worker state, and queued output all need a release path.
+
+15
+00:01:29.420 --> 00:01:37.180
+A long-running service that leaks small amounts of state on failure will eventually become unreliable, and reliability is part of secure socket design.

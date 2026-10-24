@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Expiration, Rotation, Revocation, and Replay Resistance",
+  "graphicAlt": "Purpose-based lifetimes, rotation and explicit revocation checks limit token authority and reject inappropriate reuse.",
+  "narration": "Tokens should have lifetimes that match their purpose and risk. A password reset token may need minutes. An access token may be short lived. A refresh token or API key may last longer, but then it needs stronger storage, monitoring, rotation, and revocation. A token that never expires and cannot be revoked turns a small leak into a long-running incident.\n\nShort-lived tokens reduce exposure windows, but they create renewal and user-experience tradeoffs. Long-lived tokens improve convenience, but they increase damage if copied. Good token design makes this tradeoff explicit for each token type. The design should also define logout behavior, account disablement, password changes, MFA reset, role changes, tenant changes, and suspected compromise decisions.\n\nRotation reduces risk when a token may have been copied or used outside expected context. Refresh-token rotation can also help detect replay when an old refresh token is reused. Revocation requires an explicit design, such as server-side state, a revocation list, token versioning, key rotation, or another validation mechanism. Stateless tokens do not become revocable just because the team wants them to be.\n\nReplay resistance depends on the system. Some flows rely on TLS and short lifetimes. Some use one-time tokens. Some use nonce-based protocols, proof-of-possession designs, token binding approaches, or strict server-side status checks. The important point is to choose deliberately. Token issuance is the beginning of the lifecycle; expiration, rotation, revocation, and compromise response decide how much damage a leak can do.",
+  "narrationPoints": [
+    "A refresh token or API key may last longer, but then it needs stronger storage, monitoring, rotation, and revocation.",
+    "The design should also define logout behavior, account disablement, password changes, MFA reset, role changes, tenant changes, and suspected compromise decisions.",
+    "Revocation requires an explicit design, such as server-side state, a revocation list, token versioning, key rotation, or another validation mechanism.",
+    "Token issuance is the beginning of the lifecycle; expiration, rotation, revocation, and compromise response decide how much damage a leak can do.",
+    "Rotation reduces risk when a token may have been copied or used outside expected context.",
+    "Refresh-token rotation can also help detect replay when an old refresh token is reused."
+  ]
+};

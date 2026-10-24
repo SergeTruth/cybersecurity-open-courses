@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.020
+A use-after-free defect occurs when code accesses memory after that memory has been released.
+
+2
+00:00:06.120 --> 00:00:14.920
+The access might be a read, a write, a call that passes the pointer as valid storage, or logic that treats the old address as an active object.
+
+3
+00:00:15.020 --> 00:00:21.420
+The key issue is lifetime: the program is using storage after the object it represented is no longer alive.
+
+4
+00:00:21.700 --> 00:00:24.580
+The pointer value may still look like an address.
+
+5
+00:00:24.680 --> 00:00:31.000
+It may be non-null, it may compare equal to a saved value, and it may even appear to work in a small test.
+
+6
+00:00:31.100 --> 00:00:33.740
+None of that proves the object is still valid.
+
+7
+00:00:33.840 --> 00:00:41.440
+Once the allocation is released, the program no longer owns that object, and later use depends on an assumption the program is not allowed to make.
+
+8
+00:00:41.720 --> 00:00:49.400
+Freed memory must not be read, written, passed to APIs as valid storage, or interpreted as an active object.
+
+9
+00:00:49.500 --> 00:00:52.300
+The memory manager may reuse that storage later.
+
+10
+00:00:52.400 --> 00:00:54.160
+It may leave it untouched for a while.
+
+11
+00:00:54.260 --> 00:00:57.380
+It may add diagnostics in a debug build.
+
+12
+00:00:57.480 --> 00:01:02.360
+Defensive C code should not rely on any of those implementation details.
+
+13
+00:01:02.640 --> 00:01:12.160
+Use-after-free defects can cause crashes, corrupted state, unpredictable behavior, accidental data exposure, or security defects.
+
+14
+00:01:12.260 --> 00:01:20.500
+The safe engineering response is to prevent stale references from surviving release, and to make ownership and cleanup rules visible enough for review.
+
+15
+00:01:20.780 --> 00:01:25.820
+Prevention begins by treating lifetime as a design rule, not as an afterthought.
+
+16
+00:01:25.920 --> 00:01:27.760
+Every allocation should have an owner.
+
+17
+00:01:27.860 --> 00:01:30.900
+Every borrowed pointer should have a clear lifetime.
+
+18
+00:01:31.000 --> 00:01:37.320
+Every cleanup path should leave the program in a state where later code cannot accidentally continue using released storage.

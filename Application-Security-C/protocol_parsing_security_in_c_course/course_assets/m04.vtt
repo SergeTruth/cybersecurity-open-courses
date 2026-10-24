@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Many protocol parsers receive input incrementally.
+
+2
+00:00:03.800 --> 00:00:07.480
+A network service may read a few bytes now and more bytes later.
+
+3
+00:00:07.580 --> 00:00:10.860
+An event loop may return whenever data is available.
+
+4
+00:00:10.960 --> 00:00:13.360
+A peer may disconnect in the middle of a message.
+
+5
+00:00:13.460 --> 00:00:18.420
+A robust parser treats these as normal conditions rather than exceptional surprises.
+
+6
+00:00:18.700 --> 00:00:20.540
+Buffers need explicit accounting.
+
+7
+00:00:20.640 --> 00:00:23.120
+Capacity is how much storage exists.
+
+8
+00:00:23.220 --> 00:00:26.420
+Used length is how many bytes currently hold input.
+
+9
+00:00:26.520 --> 00:00:30.040
+Consumed length is how much the parser has already processed.
+
+10
+00:00:30.140 --> 00:00:33.260
+Remaining space is what can safely accept more data.
+
+11
+00:00:33.360 --> 00:00:37.840
+Mixing these facts can lead to incorrect parsing or memory safety problems.
+
+12
+00:00:38.120 --> 00:00:41.560
+Partial input should leave parser state consistent.
+
+13
+00:00:41.660 --> 00:00:47.660
+If the parser needs more bytes, it should remember exactly what has been received and what is still required.
+
+14
+00:00:47.760 --> 00:00:53.280
+If input is rejected, it should discard or reset state according to protocol rules.
+
+15
+00:00:53.380 --> 00:00:57.220
+If the peer disconnects, partial state should be cleaned up predictably.
+
+16
+00:00:57.500 --> 00:01:02.140
+Overlong or incomplete messages should not cause unbounded buffering.
+
+17
+00:01:02.240 --> 00:01:08.880
+The parser needs maximum message size and timeout expectations so it does not keep accumulating data forever.
+
+18
+00:01:08.980 --> 00:01:15.460
+When limits are exceeded, the failure path should release resources and leave the session in a defined state.
+
+19
+00:01:15.740 --> 00:01:23.740
+Binary payloads should not be treated as C strings unless the protocol explicitly defines text, termination, and encoding rules.
+
+20
+00:01:23.840 --> 00:01:30.880
+A message can contain zero bytes, unterminated data, or fields that are valid binary but invalid text.
+
+21
+00:01:30.980 --> 00:01:36.500
+If text is required, create a bounded, validated representation deliberately.

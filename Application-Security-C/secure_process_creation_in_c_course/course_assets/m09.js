@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Review, Testing, and Tool Support",
+  "graphicAlt": "Launcher tests cover arguments, deployment context, timeouts and cleanup.",
+  "narration": "Process creation code should be reviewed as a launch contract. Reviewers should identify the program path, path trust, argument construction, shell usage, environment, working directory, descriptor inheritance, privileges, resource limits, lifecycle handling, and cleanup behavior.\n\nUnit tests can cover argument construction and validation without launching real external programs. Integration tests can verify the actual launch path, environment handling, working directory, I/O redirection, exit status interpretation, and error reporting. Both levels of testing are useful.\n\nTimeout and cleanup paths need explicit tests. A child that exits quickly, fails to start, writes large output, produces no output, hangs, exits with a failure status, or triggers partial setup cleanup can reveal assumptions that happy-path tests miss.\n\nPath-resolution, permission, and environment tests reveal deployment assumptions. The launcher may behave differently under a service account, build agent, container, scheduled task, or developer shell. Tests should reflect the contexts that matter for the program.\n\nStatic analysis, compiler warnings, and sanitizers support implementation quality by catching ignored results, memory mistakes, unsafe string handling, and cleanup gaps. Operational logging can help diagnose failures safely. These tools help, but they do not replace a clear process-launch contract.",
+  "narrationPoints": [
+    "Reviewers should identify the program path, path trust, argument construction, shell usage, environment, working directory, descriptor inheritance, privileges, resource limits, lifecycle handling, and cleanup behavior.",
+    "Integration tests can verify the actual launch path, environment handling, working directory, I/O redirection, exit status interpretation, and error reporting.",
+    "A child that exits quickly, fails to start, writes large output, produces no output, hangs, exits with a failure status, or triggers partial setup cleanup can reveal assumptions that happy-path tests miss.",
+    "Path-resolution, permission, and environment tests reveal deployment assumptions.",
+    "Static analysis, compiler warnings, and sanitizers support implementation quality by catching ignored results, memory mistakes, unsafe string handling, and cleanup gaps."
+  ]
+};

@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Go Input Sources and Trust Boundaries",
+  "narration": "In a Go web service, trust boundaries appear wherever data enters through net/http. Request bodies, query parameters, route parameters, headers, cookies, JSON payloads, form data, and multipart file uploads all arrive from outside the trusted application core. A router or framework may help extract those values, but extraction is not validation. The program still needs to decide whether each value is present, well formed, within limits, and appropriate for the current action.\n\nCommand-line tools and services have quieter boundaries. Command-line arguments may point to files, choose modes, or set operational limits. Environment variables and configuration files may be missing, use an old name, contain a value from the wrong environment, or hold a string where the application expects a number, duration, or URL. These values deserve the same care as request data because they can change program behavior before any user request arrives.\n\nDistributed systems add more sources of uncertainty. Message queues can deliver duplicate, delayed, malformed, or version-skewed messages. Database records may contain legacy states that no longer match current assumptions. External API responses can omit fields, change formats, or return values outside documented ranges. Treating every internal-looking value as trusted is how validation gaps move deeper into the codebase.\n\nA practical Go design names its boundaries. The handler, consumer, CLI entry point, or configuration loader should accept raw data, validate it, and pass a smaller trusted representation to the rest of the application. That pattern reduces defensive clutter in business logic and makes the code easier to test. Reviewers can ask a simple question: where does unknown data enter the program, and where is it converted into trusted input?",
+  "graphicAlt": "Web, configuration, messaging, records and external responses cross named validation boundaries into the application core.",
+  "narrationPoints": [
+    "In a Go web service, trust boundaries appear wherever data enters through net/http.",
+    "Command-line tools and services have quieter boundaries.",
+    "Distributed systems add more sources of uncertainty.",
+    "A practical Go design names its boundaries."
+  ]
+};

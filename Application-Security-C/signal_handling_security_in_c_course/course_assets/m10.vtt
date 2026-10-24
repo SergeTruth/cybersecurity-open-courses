@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.860
+The central rule for signal handling security in C is to keep signal paths simple.
+
+2
+00:00:05.960 --> 00:00:09.000
+A signal handler is not an ordinary function call.
+
+3
+00:00:09.100 --> 00:00:17.260
+It may interrupt code at an awkward moment, while shared state, library state, locks, or resources are in transition.
+
+4
+00:00:17.360 --> 00:00:22.160
+That is why handlers should be minimal, async-signal-safe, and easy to review.
+
+5
+00:00:22.440 --> 00:00:25.160
+Move real work into normal control flow.
+
+6
+00:00:25.260 --> 00:00:35.100
+Let the handler record intent or wake a safe path, then let mainline code perform shutdown, cleanup, logging, child management, and diagnostics.
+
+7
+00:00:35.200 --> 00:00:43.280
+This design keeps complex behavior in code that can use ordinary synchronization, error handling, resource management, and tests.
+
+8
+00:00:43.560 --> 00:00:45.800
+Use signal masks intentionally.
+
+9
+00:00:45.900 --> 00:00:52.860
+Know which signals are handled, which are blocked during setup or state transitions, and how masks are restored.
+
+10
+00:00:52.960 --> 00:01:00.800
+In threaded and event-driven programs, define which thread or loop observes signal requests and how shared state is coordinated.
+
+11
+00:01:00.900 --> 00:01:03.540
+Avoid relying on accidental delivery behavior.
+
+12
+00:01:03.820 --> 00:01:06.620
+Finally, review and test the lifecycle.
+
+13
+00:01:06.720 --> 00:01:20.960
+Ask which signals the program handles, what each handler does, whether complex work is deferred, what state can be touched, how shutdown works, how child processes are managed, whether diagnostics protect sensitive state, and whether interruption behavior is tested.
+
+14
+00:01:21.060 --> 00:01:28.100
+Signal handling is safer when the path from asynchronous event to controlled program behavior is short, explicit, and repeatable.

@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Terraform Helper Scripts Matter",
+  "graphicAlt": "A Terraform helper controls module directory, backend, environment and identity before infrastructure actions.",
+  "narration": "Terraform helper scripts usually begin as small convenience tools. A team wants a repeatable way to initialize a backend, select a workspace, validate configuration, pass the correct variable file, produce a plan, or coordinate a CI/CD job. Those helpers are useful because they reduce typing and standardize routine work. But once a Bash wrapper controls Terraform, it becomes part of the infrastructure control path.\n\nThat control path can affect real cloud accounts, networks, identity permissions, storage, monitoring, logging, and service configuration. A helper script that points Terraform at the wrong backend can read or update the wrong state. A script that selects the wrong workspace can plan against the wrong environment. A script that passes the wrong variables can change exposure, identity, regions, instance sizing, or encryption settings. A script that runs with the wrong credentials can make a small mistake much harder to contain.\n\nSecure Terraform helper scripts treat every step as an infrastructure action, even when the command looks simple. The script should know what repository and module directory it is operating from, which backend it expects, which workspace or environment is in scope, which cloud account or project it is targeting, which variable set is approved, and which identity is allowed to perform the action. If those facts are unclear, the safer behavior is to stop before Terraform reaches a risky target.\n\nThe defensive goal is not to make Terraform automation painful. The goal is to make it scoped, reviewed, observable, and recoverable. A well-designed helper makes the safe path easier than the risky path. It reduces ambiguity, supports peer review, protects sensitive artifacts, and gives operators enough evidence to understand what happened. Terraform automation is powerful, so the wrapper around it deserves deliberate security design.",
+  "narrationPoints": [
+    "Terraform helper scripts usually begin as small convenience tools.",
+    "A helper script that points Terraform at the wrong backend can read or update the wrong state.",
+    "Secure Terraform helper scripts treat every step as an infrastructure action, even when the command looks simple.",
+    "The defensive goal is not to make Terraform automation painful.",
+    "But once a Bash wrapper controls Terraform, it becomes part of the infrastructure control path.",
+    "A script that selects the wrong workspace can plan against the wrong environment."
+  ]
+};

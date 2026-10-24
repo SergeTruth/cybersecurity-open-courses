@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Defining Expected Data",
+  "narration": "Before writing validation code, define what valid data means. Go types describe structure, but they rarely describe the full contract. A string field does not say whether it is required, how long it may be, which characters are allowed, or whether it represents a username, tenant, file name, status, or email address. An int does not say whether negative values are allowed or whether a value above a business limit should be rejected.\n\nGo zero values make this design step especially important. A missing JSON number may decode to zero, and zero may also be a legitimate value. A missing string may decode to an empty string, and an empty string may or may not be acceptable. Pointer fields can help distinguish a value that was omitted from a value that was provided as zero, false, or empty. The choice should be intentional because it affects both validation and API compatibility.\n\nRequired fields, optional fields, allowed values, numeric ranges, string lengths, nested structs, slices, maps, and cross-field rules all belong in the contract. Go does not have first-class enums, so teams often use constants and custom types by convention. That convention still needs validation when external input is converted into the custom type. A status string that parses into a known value is different from any arbitrary string.\n\nClear contracts also include business rules. A start time should come before an end time. A page size should fit service limits. A list of IDs may need a maximum length and duplicate handling. A discount code may only apply to certain plans. When these rules are defined before processing input, the code can reject invalid requests early and pass well-understood values into persistence, authorization, file access, or workflow logic.",
+  "graphicAlt": "Presence tracking distinguishes missing input from provided zero before range and cross-field validation.",
+  "narrationPoints": [
+    "Before writing validation code, define what valid data means.",
+    "Go zero values make this design step especially important.",
+    "Required fields, optional fields, allowed values, numeric ranges, string lengths, nested structs, slices, maps, and cross-field rules all belong in the contract.",
+    "Clear contracts also include business rules."
+  ]
+};

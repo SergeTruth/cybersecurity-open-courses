@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.820
+Programs that create child processes must also manage child lifecycle.
+
+2
+00:00:04.920 --> 00:00:11.480
+On POSIX-style systems, child status notifications can inform the parent that a child has changed state.
+
+3
+00:00:11.580 --> 00:00:17.500
+That notification is useful, but it should not turn the signal handler into a full process-management routine.
+
+4
+00:00:17.780 --> 00:00:21.460
+A defensive design keeps child notification handling light.
+
+5
+00:00:21.560 --> 00:00:27.960
+The handler can request that normal code check child status, or it can notify an event loop through a safe mechanism.
+
+6
+00:00:28.060 --> 00:00:38.300
+Mainline code can then perform waits, update internal state, restart planned work if appropriate, release resources, and write logs using ordinary program logic.
+
+7
+00:00:38.580 --> 00:00:43.780
+Avoiding unreaped child processes is a maintainability and operations concern.
+
+8
+00:00:43.880 --> 00:00:53.080
+A parent that starts children should have a clear plan for tracking them, observing completion, handling errors, and cleaning up associated resources.
+
+9
+00:00:53.180 --> 00:00:57.660
+This plan should work during normal operation and during shutdown.
+
+10
+00:00:57.940 --> 00:01:02.580
+Coordination with event loops, worker pools, or supervisors should be explicit.
+
+11
+00:01:02.680 --> 00:01:10.440
+Reviewers should ask where children are created, where status is collected, what happens during shutdown, and how timeouts or failed starts are reported.
+
+12
+00:01:10.540 --> 00:01:16.380
+Predictable lifecycle management reduces surprises without putting unsafe work in the handler.

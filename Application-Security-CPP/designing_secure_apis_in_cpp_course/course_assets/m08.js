@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Versioning, Compatibility, and Review Workflow",
+  "graphicAlt": "Interface changes receive negative tests and documented migrations that preserve validation.",
+  "narration": "An API's first release is not the only security moment. Changes to defaults, overloads, validation, error handling, ownership, and compatibility behavior can alter assumptions at many call sites.\n\nVersioning should be deliberate. If an older pattern is unsafe or unclear, deprecate it with a migration path rather than leaving callers to discover safer behavior by chance.\n\nCompatibility should not silently weaken security. A new version should not accept ambiguous inputs, relax validation, broaden authority, or hide failures simply to avoid breaking callers without a reviewed policy.\n\nMigration wrappers can help when they narrow behavior and make old assumptions visible. They become risky when they preserve unsafe defaults forever.\n\nTesting should include valid calls, invalid calls, denied access, boundary sizes, resource limits, and failure paths. Parser-like APIs or structured input boundaries may benefit from defensive fuzzing at a high level to exercise unusual shapes.\n\nTooling supports review. Compiler warnings, sanitizers, static analysis, API review checklists, documentation review, and targeted tests all help catch interface changes that could spread risk.\n\nDocument compatibility behavior. Callers should know which defaults changed, which overloads are deprecated, which errors are new, and how to migrate without weakening validation or authority boundaries.\n\nFeature flags should be handled carefully. A flag that changes validation, authorization, or failure behavior should be visible, documented, and tested in both states.\n\nReview new overloads as new APIs, not as harmless convenience. They may accept broader types, skip validation, or make an unsafe path easier to call.\n\nChangelogs should name security-relevant behavior changes plainly so downstream maintainers can update assumptions.\n\nA good workflow treats API evolution as design maintenance, not only as compatibility bookkeeping.",
+  "narrationPoints": [
+    "An API's first release is not the only security moment.",
+    "Compatibility should not silently weaken security.",
+    "They become risky when they preserve unsafe defaults forever.",
+    "Compiler warnings, sanitizers, static analysis, API review checklists, documentation review, and targeted tests all help catch interface changes that could spread risk.",
+    "Review new overloads as new APIs, not as harmless convenience.",
+    "A good workflow treats API evolution as design maintenance, not only as compatibility bookkeeping."
+  ]
+};

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.700
+Every IPC endpoint needs ownership.
+
+2
+00:00:03.800 --> 00:00:10.040
+Some component creates it, some identity owns it, some lifecycle governs it, and some cleanup rule removes or releases it.
+
+3
+00:00:10.140 --> 00:00:17.020
+If those responsibilities are unclear, startup, shutdown, recovery, and permission review become much harder.
+
+4
+00:00:17.300 --> 00:00:19.620
+Named endpoints deserve special care.
+
+5
+00:00:19.720 --> 00:00:28.280
+Socket paths, pipe names, shared memory names, queue names, and service handles can become access points into the application.
+
+6
+00:00:28.380 --> 00:00:34.940
+Their names, locations, permissions, and cleanup rules determine who can discover or use them.
+
+7
+00:00:35.040 --> 00:00:39.200
+A name that is convenient for debugging may be too exposed for production.
+
+8
+00:00:39.480 --> 00:00:48.760
+Access can be shaped by filesystem permissions, directory placement, service accounts, inherited settings, platform defaults, and deployment scripts.
+
+9
+00:00:48.860 --> 00:00:52.780
+The code and deployment model should agree on who can connect and who cannot.
+
+10
+00:00:52.880 --> 00:01:00.000
+If a service endpoint is meant only for a companion process, the storage location and permissions should reinforce that intent.
+
+11
+00:01:00.280 --> 00:01:04.440
+Descriptor and handle inheritance can expose channels unintentionally.
+
+12
+00:01:04.540 --> 00:01:11.340
+A child process may receive access to an IPC endpoint because the parent did not control what it inherited.
+
+13
+00:01:11.440 --> 00:01:17.520
+That can make later behavior difficult to reason about, especially when helpers run with different roles or process lifetimes.
+
+14
+00:01:17.800 --> 00:01:24.120
+Stale endpoint files, abandoned shared memory regions, or orphaned queues can confuse recovery.
+
+15
+00:01:24.220 --> 00:01:33.020
+A service restart should know whether it is seeing a valid existing resource, a stale resource to clean up, or a sign that another instance is still running.
+
+16
+00:01:33.120 --> 00:01:39.280
+Endpoint exposure is not just a security topic; it is part of the application's reliability model.

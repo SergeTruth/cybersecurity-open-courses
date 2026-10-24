@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Authorization decides what an authenticated identity is allowed to do.
+
+2
+00:00:04.520 --> 00:00:13.880
+A user may be signed in and still not be allowed to view another tenant record, approve a payment, change a role, export data, or call an administrative endpoint.
+
+3
+00:00:13.980 --> 00:00:23.740
+Roles, groups, permissions, claims, and scopes are common authorization building blocks, but the names do not matter as much as the enforcement.
+
+4
+00:00:23.840 --> 00:00:29.600
+The application must check whether this identity can perform this action against this resource in this context.
+
+5
+00:00:29.880 --> 00:00:37.400
+Role-based access control groups permissions into roles such as user, manager, auditor, or administrator.
+
+6
+00:00:37.500 --> 00:00:42.140
+Groups can simplify assignment, especially when they come from an identity provider.
+
+7
+00:00:42.240 --> 00:00:47.440
+Claims and scopes can communicate identity attributes or delegated permissions in tokens.
+
+8
+00:00:47.540 --> 00:00:51.540
+These are useful inputs, but they must be interpreted carefully.
+
+9
+00:00:51.640 --> 00:00:58.600
+A claim that says department equals finance is not the same thing as permission to approve every finance action.
+
+10
+00:00:58.700 --> 00:01:04.060
+A scope that permits reading an API does not automatically decide which object instance may be read.
+
+11
+00:01:04.340 --> 00:01:08.420
+Object-level and function-level authorization are both critical.
+
+12
+00:01:08.520 --> 00:01:15.400
+Function-level checks decide whether an identity may perform a category of action, such as create users or export reports.
+
+13
+00:01:15.500 --> 00:01:23.020
+Object-level checks decide whether that identity may access this specific invoice, ticket, project, or customer record.
+
+14
+00:01:23.120 --> 00:01:27.120
+Enforcement belongs on the server side and should follow least privilege.
+
+15
+00:01:27.220 --> 00:01:36.260
+Client-side checks can improve usability, but they cannot be the security boundary because requests can be changed, replayed, or crafted directly.

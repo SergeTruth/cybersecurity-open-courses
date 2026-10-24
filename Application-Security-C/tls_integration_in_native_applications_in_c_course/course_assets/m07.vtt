@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Server-side TLS integration begins with the certificate and private key.
+
+2
+00:00:04.520 --> 00:00:11.400
+The server needs to present an identity that clients can validate, and the associated private key must be protected throughout its lifecycle.
+
+3
+00:00:11.500 --> 00:00:19.180
+File permissions, key storage, deployment pipelines, backups, runtime access, and operational procedures all matter.
+
+4
+00:00:19.460 --> 00:00:23.460
+Certificate and key loading should fail safely.
+
+5
+00:00:23.560 --> 00:00:35.960
+If the configured files are missing, expired, inconsistent, unreadable, or not authorized for the service, the program should report a safe startup error and avoid running in a misleading state.
+
+6
+00:00:36.060 --> 00:00:42.700
+A server should not silently fall back to an unintended certificate or continue without the protection the deployment expects.
+
+7
+00:00:42.980 --> 00:00:46.580
+The TLS handshake is part of connection management.
+
+8
+00:00:46.680 --> 00:00:59.640
+A listener may accept a transport connection, create TLS state for that connection, perform or schedule the handshake, then only pass protected application data to the protocol parser after the handshake succeeds.
+
+9
+00:00:59.740 --> 00:01:05.660
+Failed handshakes need cleanup and safe logging just like other connection failures.
+
+10
+00:01:05.940 --> 00:01:12.020
+Client certificate authentication can be useful in some service-to-service or enterprise designs, but it needs a clear policy.
+
+11
+00:01:12.120 --> 00:01:17.400
+Validating a client certificate proves only the identity information defined by the trust model.
+
+12
+00:01:17.500 --> 00:01:22.380
+The application still needs authorization rules that decide what that identified client may do.
+
+13
+00:01:22.660 --> 00:01:26.260
+Certificate rotation should be planned before expiration becomes urgent.
+
+14
+00:01:26.360 --> 00:01:33.080
+Teams should know how certificates are renewed, deployed, reloaded, monitored, and rolled back.
+
+15
+00:01:33.180 --> 00:01:42.860
+If a service requires a restart, reload signal, orchestration update, or key-store refresh, that process should be documented and tested.
+
+16
+00:01:43.140 --> 00:01:48.260
+A good server integration keeps TLS responsibilities separate from application permissions.
+
+17
+00:01:48.360 --> 00:01:53.320
+TLS establishes a protected channel and, where configured, peer identity.
+
+18
+00:01:53.420 --> 00:02:02.140
+The application still validates messages, enforces authorization, applies limits, and logs operational outcomes without exposing sensitive material.

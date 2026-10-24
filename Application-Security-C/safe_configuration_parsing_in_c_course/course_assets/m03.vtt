@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Safe configuration parsing begins with safe loading.
+
+2
+00:00:04.200 --> 00:00:13.000
+The program should define what happens when the file is missing, cannot be opened, is unreadable, is too large, or is only partially read.
+
+3
+00:00:13.100 --> 00:00:18.140
+Those cases should not be surprising side paths; they are part of the parser contract.
+
+4
+00:00:18.420 --> 00:00:22.420
+File size and line length limits protect parser assumptions.
+
+5
+00:00:22.520 --> 00:00:28.920
+A configuration file may be generated incorrectly, truncated, concatenated, or edited by hand.
+
+6
+00:00:29.020 --> 00:00:35.820
+Explicit limits keep memory use, buffer handling, and parse time under control before the data reaches deeper logic.
+
+7
+00:00:36.100 --> 00:00:42.980
+Unexpected binary data, embedded null bytes, or invalid text for the expected encoding should be handled predictably.
+
+8
+00:00:43.080 --> 00:00:47.400
+A byte sequence that is valid for one parser may be invalid for another.
+
+9
+00:00:47.500 --> 00:00:54.540
+The loader and parser should agree on whether configuration is treated as text, structured bytes, or a specific encoded format.
+
+10
+00:00:54.820 --> 00:00:58.580
+Partial reads should not become trusted configuration state.
+
+11
+00:00:58.680 --> 00:01:11.320
+If the loader cannot read the full configuration source, the program should avoid applying a half-loaded result unless the format explicitly supports incremental records and the parser can validate each record independently.
+
+12
+00:01:11.600 --> 00:01:14.320
+Permissions and location awareness also matter.
+
+13
+00:01:14.420 --> 00:01:24.660
+The parser should know which file it intended to load, which deployment layer provided it, and whether failure should stop startup, fall back to defaults, or keep a prior known-good configuration.
+
+14
+00:01:24.760 --> 00:01:28.520
+That behavior should be documented rather than guessed.

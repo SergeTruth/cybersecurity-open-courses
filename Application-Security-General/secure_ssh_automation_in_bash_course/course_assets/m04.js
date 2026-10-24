@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Bash Invocation Patterns for SSH",
+  "graphicAlt": "A known destination map and validated values produce separate SSH arguments without a generated command string.",
+  "narration": "A Bash script should invoke SSH in a way that is clear to review. The executable, stable options, destination values, identity file choices, and remote operands should be visible as separate parts of the invocation. That is much easier to inspect than one large command string assembled from variables.\n\nArrays are useful for SSH options because they preserve separate argument values. A script can define fixed options, add validated optional values, and pass the array to SSH without asking Bash to reinterpret a generated command line. This keeps option boundaries visible and reduces accidental shell interpretation.\n\nValues such as host names, user names, ports, identity file paths, and remote paths should be validated before invocation. Validation defines what the workflow supports. Quoting and arrays preserve accepted values as the script passes them to SSH. Both layers matter.\n\nAvoid unnecessary re-parsing. If a script stores a full SSH command in a string and later evaluates it, reviewers must reason about another layer of shell parsing. That increases fragility and makes it easier for data to become syntax. Known command structure with separate arguments is usually the safer design.\n\nDestination control is especially important. An input value should not freely decide arbitrary user, host, port, and option behavior unless that is the explicit and reviewed purpose of the tool. In most automation, a validated environment or target label should map to known destinations and options.\n\nThe result is SSH invocation that is testable and maintainable. Future reviewers can see what can vary, what is fixed, what is validated, and which assumptions belong to the local Bash script before any remote action begins.",
+  "narrationPoints": [
+    "A Bash script should invoke SSH in a way that is clear to review.",
+    "Arrays are useful for SSH options because they preserve separate argument values.",
+    "Values such as host names, user names, ports, identity file paths, and remote paths should be validated before invocation.",
+    "If a script stores a full SSH command in a string and later evaluates it, reviewers must reason about another layer of shell parsing.",
+    "An input value should not freely decide arbitrary user, host, port, and option behavior unless that is the explicit and reviewed purpose of the tool.",
+    "The result is SSH invocation that is testable and maintainable."
+  ]
+};

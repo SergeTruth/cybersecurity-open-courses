@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Key management fails quietly until something goes wrong.
+
+2
+00:00:04.120 --> 00:00:16.760
+Logs, traces, metrics, error reports, support bundles, screenshots, crash dumps, CI/CD output, and debugging tools can all leak key material or sensitive context.
+
+3
+00:00:16.860 --> 00:00:30.060
+Do not log symmetric keys, private keys, HMAC keys, JWT signing secrets, decrypted secrets, PEM blocks, JWK private values, connection strings, or full environment variables.
+
+4
+00:00:30.340 --> 00:00:35.380
+Redaction should happen before sensitive data leaves the application boundary where possible.
+
+5
+00:00:35.480 --> 00:00:48.440
+Monitoring should detect unusual key access, failed decryption spikes, signature verification failures, unexpected key versions, excessive secret reads, rotation failures, and use of retired keys.
+
+6
+00:00:48.540 --> 00:00:54.140
+These signals help distinguish ordinary failures from possible exposure, drift, or abuse.
+
+7
+00:00:54.420 --> 00:01:05.700
+Tests should cover key loading, missing keys, wrong keys, old key versions, rotation behavior, decryption failure, signature verification failure, and safe error handling.
+
+8
+00:01:05.800 --> 00:01:09.960
+Tests must not use production keys or production secret stores.
+
+9
+00:01:10.060 --> 00:01:17.180
+Good tests prove that failure paths are controlled and that key changes can happen without improvising during an incident.
+
+10
+00:01:17.460 --> 00:01:31.220
+Incident response should include revocation, rotation, blast-radius analysis, log review, backup review, exposed-data analysis, and validation that compromised keys no longer work.
+
+11
+00:01:31.320 --> 00:01:40.280
+Key-related incidents should improve future design through better ownership, shorter lifetimes, narrower access, stronger redaction, and tested rotation.
+
+12
+00:01:40.380 --> 00:01:47.100
+The team should know which key version protected which data and what to do when key material appears somewhere it should not.

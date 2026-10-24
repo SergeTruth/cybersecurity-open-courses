@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.980
+Prisma security includes the workflows around the database, not only query code.
+
+2
+00:00:05.080 --> 00:00:13.640
+Prisma needs connection configuration for Prisma Client, migrations, development tasks, deployment workflows, and sometimes seed scripts.
+
+3
+00:00:13.740 --> 00:00:23.020
+DATABASE_URL and related settings often contain usernames, passwords, hosts, database names, parameters, and operational assumptions.
+
+4
+00:00:23.120 --> 00:00:34.880
+They should not appear in source code, committed environment files, frontend bundles, Docker images, startup logs, error messages, tickets, screenshots, or public documentation.
+
+5
+00:00:35.160 --> 00:00:40.120
+Use approved secrets management or protected deployment variables for production credentials.
+
+6
+00:00:40.220 --> 00:00:49.020
+Separate development, test, staging, production, migration, CI/CD, reporting, and runtime credentials where appropriate.
+
+7
+00:00:49.120 --> 00:00:56.960
+Migration credentials may need more privilege than application runtime credentials, so they should be handled deliberately instead of reused casually.
+
+8
+00:00:57.060 --> 00:01:02.900
+The runtime application should not carry broad schema modification rights merely because migrations also need them.
+
+9
+00:01:03.180 --> 00:01:07.980
+Migrations, seed scripts, and production configuration are security-relevant.
+
+10
+00:01:08.080 --> 00:01:15.120
+A migration can change authorization behavior by adding, removing, renaming, or defaulting important fields.
+
+11
+00:01:15.220 --> 00:01:21.140
+A seed script can create administrative accounts, test users, API keys, or sensitive records.
+
+12
+00:01:21.240 --> 00:01:33.240
+Connection pooling and PrismaClient lifecycle choices affect reliability; misusing PrismaClient in serverless or hot-reload environments can exhaust connections and create operational risk.
+
+13
+00:01:33.340 --> 00:01:38.780
+Review these workflows as part of the product's security posture, not as separate housekeeping.

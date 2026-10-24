@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Many queue systems use at-least-once delivery.
+
+2
+00:00:03.960 --> 00:00:08.840
+That means duplicate processing should be expected, not treated as a rare failure.
+
+3
+00:00:08.940 --> 00:00:19.100
+Retries, consumer crashes, network failures, visibility timeouts, broker behavior, and manual replays can all cause a message to be processed more than once.
+
+4
+00:00:19.200 --> 00:00:30.960
+If the consumer sends money, changes permissions, emails customers, deletes files, provisions resources, or moves a workflow forward, duplicates can create real harm.
+
+5
+00:00:31.240 --> 00:00:37.080
+Idempotent consumers produce the same safe result when the same message is processed more than once.
+
+6
+00:00:37.180 --> 00:00:39.900
+The implementation depends on the business operation.
+
+7
+00:00:40.000 --> 00:00:50.720
+Use message IDs, idempotency keys, operation records, version checks, state transitions, conditional writes, or deduplication tables where appropriate.
+
+8
+00:00:50.820 --> 00:00:54.980
+A payment worker might record an operation before charging.
+
+9
+00:00:55.080 --> 00:00:59.320
+A file deletion worker might verify object version and state.
+
+10
+00:00:59.420 --> 00:01:05.180
+A notification worker might deduplicate security alerts differently from marketing emails.
+
+11
+00:01:05.460 --> 00:01:10.740
+Ordering should not be assumed unless the platform and design explicitly guarantee it.
+
+12
+00:01:10.840 --> 00:01:19.480
+Even when ordering is promised within a partition or group, it may not hold across tenants, topics, queues, or failure recovery paths.
+
+13
+00:01:19.580 --> 00:01:23.100
+Consumers should check current state before applying changes.
+
+14
+00:01:23.200 --> 00:01:28.880
+A stale message should not overwrite a newer decision, roll back a workflow, or restore an old permission.
+
+15
+00:01:28.980 --> 00:01:37.940
+Replay protection should consider event IDs, timestamps, nonces, expiration windows, producer identity, and business state.
+
+16
+00:01:38.220 --> 00:01:40.220
+Deduplication scope matters.
+
+17
+00:01:40.320 --> 00:01:49.520
+A globally unique message ID may be enough for one workflow, while another needs uniqueness by tenant, source, message type, operation, and business object.
+
+18
+00:01:49.620 --> 00:01:55.700
+Manual replay should be treated as a privileged operation because it can intentionally repeat old work.
+
+19
+00:01:55.800 --> 00:02:05.320
+Build handlers as if duplicates, delays, reordering, and replay are normal operating conditions, because in many reliable queue designs they are.

@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.420
+Tests sometimes need deterministic seeds.
+
+2
+00:00:04.520 --> 00:00:10.520
+Repeatable sequences make failures easier to reproduce and simulations easier to compare.
+
+3
+00:00:10.620 --> 00:00:15.980
+That is useful, but test randomness should be separated from production randomness.
+
+4
+00:00:16.080 --> 00:00:20.720
+A fixed seed that helps a test should not accidentally become a production default.
+
+5
+00:00:21.000 --> 00:00:30.920
+Production code should not inherit deterministic test modes, fixed seeds, or mock random sources unless a deliberate test harness is active.
+
+6
+00:00:31.020 --> 00:00:37.980
+Configuration should make the distinction clear, and review should treat accidental production determinism as a serious bug.
+
+7
+00:00:38.260 --> 00:00:43.220
+Failure tests should cover random-source errors where the API allows failure.
+
+8
+00:00:43.320 --> 00:00:52.360
+If the platform call can fail, return partial output, or indicate an unavailable source, the application should have a tested safe response.
+
+9
+00:00:52.460 --> 00:00:58.220
+For security-sensitive values, that response is usually to fail the operation clearly.
+
+10
+00:00:58.500 --> 00:01:03.380
+Code review should identify every randomness-dependent value and classify its requirement.
+
+11
+00:01:03.480 --> 00:01:11.000
+Is the value for a simulation, a test, an identifier, a nonce, a salt, a token, or a key?
+
+12
+00:01:11.100 --> 00:01:17.100
+Does it need repeatability, uniqueness, unpredictability, fairness, or a combination?
+
+13
+00:01:17.200 --> 00:01:21.360
+The source and mapping should match that classification.
+
+14
+00:01:21.640 --> 00:01:33.000
+Static analysis, compiler warnings, and runtime checks can help identify unchecked errors, unsafe conversions, range bugs, and use of discouraged APIs.
+
+15
+00:01:33.100 --> 00:01:42.540
+Operational documentation should state which platform randomness sources are required, how failures are handled, and how test modes are kept out of production behavior.

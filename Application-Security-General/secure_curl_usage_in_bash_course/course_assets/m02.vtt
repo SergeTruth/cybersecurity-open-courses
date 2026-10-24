@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.420
+A URL is not just a string.
+
+2
+00:00:02.520 --> 00:00:09.480
+It contains a scheme, host, port, path, query, and sometimes parameters that came from another workflow.
+
+3
+00:00:09.580 --> 00:00:18.300
+In Bash automation, the URL decides where data is sent, where content is fetched, and which service is trusted for the next decision.
+
+4
+00:00:18.580 --> 00:00:30.580
+URLs may come from command-line arguments, configuration files, environment variables, CI/CD variables, metadata services, tool output, or repository settings.
+
+5
+00:00:30.680 --> 00:00:32.680
+Some of those sources are controlled.
+
+6
+00:00:32.780 --> 00:00:37.660
+Others are indirect, stale, malformed, or influenced by another process.
+
+7
+00:00:37.760 --> 00:00:41.680
+Treat request targets as input crossing a trust boundary.
+
+8
+00:00:41.960 --> 00:00:46.360
+Many workflows should use allowlisted endpoints rather than open-ended URLs.
+
+9
+00:00:46.460 --> 00:00:52.940
+A deployment script may support known API base URLs for development, staging, and production.
+
+10
+00:00:53.040 --> 00:00:56.320
+A health check may support a known host and path.
+
+11
+00:00:56.420 --> 00:01:00.420
+A metadata request may be limited to one internal service.
+
+12
+00:01:00.520 --> 00:01:05.160
+Narrow destination rules are easier to review than arbitrary request targets.
+
+13
+00:01:05.440 --> 00:01:11.840
+Validation should consider scheme, host, port, path, and query expectations.
+
+14
+00:01:11.940 --> 00:01:15.380
+If only HTTPS is allowed, say so in the script.
+
+15
+00:01:15.480 --> 00:01:19.480
+If only specific hosts are allowed, enforce that before making the request.
+
+16
+00:01:19.580 --> 00:01:24.940
+If query values come from inputs, validate their shape and purpose before sending them.
+
+17
+00:01:25.220 --> 00:01:29.060
+Redirects and metadata values should also be treated as input.
+
+18
+00:01:29.160 --> 00:01:34.520
+A service response that points to another location may be valid in one workflow and unsafe in another.
+
+19
+00:01:34.620 --> 00:01:42.300
+Secure automation rejects unsupported destinations before the request executes, not after data has already been sent.
+
+20
+00:01:42.580 --> 00:01:47.300
+The review question is: can this script send data somewhere unexpected?
+
+21
+00:01:47.400 --> 00:01:51.960
+If the answer is hard to determine, the destination rules should be tightened.
+
+22
+00:01:52.060 --> 00:01:56.940
+Good URL handling makes HTTP automation predictable before curl ever opens a connection.

@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.500
+Socket code has a lifecycle.
+
+2
+00:00:02.600 --> 00:00:14.280
+A program creates a descriptor or handle, configures it, binds or connects it, reads and writes through it, shuts it down when communication is finished, closes it, and cleans up any associated state.
+
+3
+00:00:14.380 --> 00:00:21.900
+Security and reliability improve when that lifecycle is explicit rather than scattered across unrelated helper functions.
+
+4
+00:00:22.180 --> 00:00:25.620
+Every successful socket creation should have a clear owner.
+
+5
+00:00:25.720 --> 00:00:33.560
+That owner is responsible for closing the descriptor, releasing buffers, unregistering event-loop state, and handling errors.
+
+6
+00:00:33.660 --> 00:00:36.060
+In a simple function this may be obvious.
+
+7
+00:00:36.160 --> 00:00:46.480
+In a threaded service, event-driven server, or helper-based codebase, ownership can become unclear quickly unless it is documented and reflected in the code structure.
+
+8
+00:00:46.760 --> 00:00:50.840
+Error paths need the same discipline as the successful path.
+
+9
+00:00:50.940 --> 00:00:55.660
+If configuration fails after socket creation, the descriptor should be closed.
+
+10
+00:00:55.760 --> 00:01:02.080
+If accepting a connection succeeds but allocating connection state fails, the accepted descriptor should not leak.
+
+11
+00:01:02.180 --> 00:01:08.180
+If a worker thread takes ownership, the handoff should be visible and single-owner behavior should remain clear.
+
+12
+00:01:08.460 --> 00:01:11.340
+Shutdown and close behavior should be deliberate.
+
+13
+00:01:11.440 --> 00:01:20.560
+A program may need to signal that it will not send more data, continue reading remaining data, or close immediately because the peer violated the protocol.
+
+14
+00:01:20.660 --> 00:01:26.420
+The right behavior depends on the protocol and platform, but it should be a conscious choice rather than an accidental side effect.
+
+15
+00:01:26.700 --> 00:01:29.340
+Socket options also deserve review.
+
+16
+00:01:29.440 --> 00:01:39.360
+Options related to reuse, buffering, blocking mode, keepalive, timeouts, address families, and inheritance can change security and reliability behavior.
+
+17
+00:01:39.460 --> 00:01:45.380
+Reviewers should be able to understand why each option is set and how it supports the intended lifecycle.

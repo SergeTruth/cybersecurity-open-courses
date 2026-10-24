@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.740
+Graceful shutdown begins by treating a termination signal as a request, not as permission to perform complex cleanup inside the handler.
+
+2
+00:00:08.840 --> 00:00:11.640
+The handler can record that shutdown was requested.
+
+3
+00:00:11.740 --> 00:00:22.940
+Normal control flow should decide how to stop accepting work, complete or cancel in-progress operations, release resources, write final logs, and exit with a clear status.
+
+4
+00:00:23.220 --> 00:00:26.900
+Cleanup is usually too complex for handler context.
+
+5
+00:00:27.000 --> 00:00:38.760
+Closing many resources, flushing buffered data, removing files, updating state stores, notifying peers, waiting for children, and writing rich diagnostics may involve unsafe operations.
+
+6
+00:00:38.860 --> 00:00:45.740
+Those tasks belong in mainline shutdown code that runs after the asynchronous notification has been converted into an ordinary control decision.
+
+7
+00:00:46.020 --> 00:00:48.580
+Shutdown paths should be idempotent.
+
+8
+00:00:48.680 --> 00:00:58.520
+A program may receive more than one termination request, may encounter an error while already shutting down, or may have cleanup called from both success and failure paths.
+
+9
+00:00:58.620 --> 00:01:05.900
+Cleanup routines should tolerate repeated requests, partially initialized resources, and resources that were already released.
+
+10
+00:01:06.180 --> 00:01:10.740
+Temporary files and coordination resources need predictable handling.
+
+11
+00:01:10.840 --> 00:01:18.520
+The program should know which directory is trusted, which files it owns, which permissions are expected, and what should happen if cleanup cannot complete.
+
+12
+00:01:18.620 --> 00:01:27.420
+A failure to remove a temporary resource should be logged safely from normal code and should not cause broad cleanup behavior outside the intended path.
+
+13
+00:01:27.700 --> 00:01:31.140
+Tests should cover shutdown under realistic timing.
+
+14
+00:01:31.240 --> 00:01:41.560
+Exercise normal shutdown, interrupted waits, pending work, partially initialized resources, child processes, failed cleanup, and repeated shutdown requests.
+
+15
+00:01:41.660 --> 00:01:50.700
+The goal is not to force every timing interleaving, but to prove that the design behaves predictably when interruption occurs during important lifecycle stages.

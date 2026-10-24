@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Configuration Security Matters",
+  "graphicAlt": "Runtime configuration shapes authentication, browser policy, resource limits and operations under explicit ownership.",
+  "narration": "Configuration decides how a Node.js application behaves in each environment. A service can have strong code and still be unsafe if production runs with a permissive CORS value, debug logging enabled, weak cookie settings, unexpected proxy behavior, or a fallback secret copied from development. Configuration is not outside the app. It is part of the application's security behavior, even when it lives in a deployment dashboard, CI variable, container setting, or cloud console.\n\nNode.js applications commonly use configuration for database connections, authentication settings, sessions, CORS, cookies, logging, feature flags, API endpoints, cloud services, rate limits, request limits, debug behavior, proxy settings, and deployment mode. These values decide which systems the app trusts, how users are authenticated, what responses reveal, which origins can call APIs, which limits are enforced, and which protections are enabled. A bad value can weaken security as directly as a bad code change.\n\nThe goal is to make configuration explicit, validated, least-privileged, environment-specific, observable, and recoverable. Secure configuration management is not solved by one .env file, one config package, or one deployment variable. It requires inventory, validation, secure defaults, secrets discipline, change review, drift detection, safe logging, monitoring, and a response plan when configuration is wrong or exposed.",
+  "narrationPoints": [
+    "It is part of the application's security behavior, even when it lives in a deployment dashboard, CI variable, container setting, or cloud console.",
+    "Node.js applications commonly use configuration for database connections, authentication settings, sessions, CORS, cookies, logging, feature flags, API endpoints, cloud services, rate limits, request limits, debug behavior, proxy settings, and deployment mode.",
+    "It requires inventory, validation, secure defaults, secrets discipline, change review, drift detection, safe logging, monitoring, and a response plan when configuration is wrong or exposed.",
+    "Secure configuration management is not solved by one .env file, one config package, or one deployment variable.",
+    "The goal is to make configuration explicit, validated, least-privileged, environment-specific, observable, and recoverable.",
+    "These values decide which systems the app trusts, how users are authenticated, what responses reveal, which origins can call APIs, which limits are enforced, and which protections are enabled."
+  ]
+};

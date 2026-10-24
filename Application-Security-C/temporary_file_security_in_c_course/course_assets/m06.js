@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Data Sensitivity and Temporary Storage",
+  "graphicAlt": "A storage-need decision favors memory or streaming where suitable and applies access and retention controls when temporary disk storage is needed.",
+  "narration": "Data sensitivity should shape temporary-file design. Temporary files may contain secrets, personal data, generated reports, intermediate transformed data, or content that is safe only after a later redaction or validation step. The program should decide whether that data belongs on disk at all.\n\nTemporary does not always mean private. A file may be readable by another account because of directory or mode settings. It may remain after a crash. It may be included in backups, snapshots, diagnostics, or operational collection. It may be visible through logs or monitoring tools that record paths and names.\n\nAvoid storing sensitive values unless the workflow truly requires it. If data can remain in memory, stream through a pipe, or be represented by a handle without writing sensitive content to disk, that may reduce persistence and exposure. When disk storage is necessary, permissions and cleanup need to match the sensitivity.\n\nIntermediate content can be more sensitive than final output. Decrypted data, unredacted reports, raw imports, temporary exports, and expanded configuration values may reveal more than the final artifact. Reviewers should ask what the file contains during every phase, not only what it becomes at the end.\n\nDiagnostics should avoid exposing sensitive paths, names, or values unnecessarily. Logs can identify a field, operation, failure category, or sanitized path without dumping secrets or untrusted content. Redaction rules should be part of the temporary-file contract.\n\nRetention expectations should be clear. Is the file removed immediately, retained for troubleshooting, kept until a process exits, or cleaned by an external job? The answer affects privacy, storage, compliance, and incident response.",
+  "narrationPoints": [
+    "The program should decide whether that data belongs on disk at all.",
+    "A file may be readable by another account because of directory or mode settings.",
+    "When disk storage is necessary, permissions and cleanup need to match the sensitivity.",
+    "Reviewers should ask what the file contains during every phase, not only what it becomes at the end.",
+    "Logs can identify a field, operation, failure category, or sanitized path without dumping secrets or untrusted content."
+  ]
+};

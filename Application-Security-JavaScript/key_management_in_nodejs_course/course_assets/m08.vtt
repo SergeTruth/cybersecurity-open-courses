@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.260
+Asymmetric systems use private keys and public keys, but the direction depends on the design.
+
+2
+00:00:06.360 --> 00:00:10.440
+A private key may sign data that public keys verify.
+
+3
+00:00:10.540 --> 00:00:15.020
+A public key may encrypt data that only the private key can decrypt.
+
+4
+00:00:15.120 --> 00:00:18.560
+In both cases, the private key is a high-value secret.
+
+5
+00:00:18.660 --> 00:00:25.460
+It should be protected with strong storage, limited access, rotation planning, and careful operational handling.
+
+6
+00:00:25.740 --> 00:00:29.020
+Public keys are not secret, but their integrity matters.
+
+7
+00:00:29.120 --> 00:00:34.720
+If a verifier trusts the wrong public key, signature verification may succeed for the wrong signer.
+
+8
+00:00:34.820 --> 00:00:45.140
+JWKS endpoints, certificate chains, pinned keys, configured public keys, and service metadata are all ways to distribute verification material.
+
+9
+00:00:45.240 --> 00:00:51.640
+The security question is whether the verifier receives authentic keys and applies the expected trust rules.
+
+10
+00:00:51.920 --> 00:00:58.400
+Key identifiers help verifiers choose the right key during rotation, but they should not be trusted blindly.
+
+11
+00:00:58.500 --> 00:01:12.020
+A token or message may include a key identifier, but the application still needs to enforce expected issuer, audience, algorithm, key source, certificate trust, and purpose where relevant.
+
+12
+00:01:12.120 --> 00:01:18.680
+The key identifier selects from trusted material; it should not cause the verifier to fetch and trust arbitrary keys.
+
+13
+00:01:18.960 --> 00:01:25.840
+Certificates add identity, expiration, and trust-chain considerations beyond raw keys.
+
+14
+00:01:25.940 --> 00:01:32.180
+Renewal, revocation, rollover, and outage behavior should be planned before production incidents occur.
+
+15
+00:01:32.280 --> 00:01:35.400
+Public-key management is trust distribution.
+
+16
+00:01:35.500 --> 00:01:47.020
+The hard part is not only generating a pair; it is protecting the private key, distributing authentic verification material, and rolling keys without accepting the wrong key or breaking legitimate traffic.

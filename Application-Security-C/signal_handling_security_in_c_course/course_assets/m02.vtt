@@ -1,0 +1,105 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.780
+A signal has a disposition: what the process will do when that signal is delivered.
+
+2
+00:00:05.880 --> 00:00:12.760
+Some signals have default actions such as terminating the process, stopping it, continuing it, or being ignored.
+
+3
+00:00:12.860 --> 00:00:19.820
+A program can install a handler for selected signals, ignore selected signals, or restore default behavior where appropriate.
+
+4
+00:00:19.920 --> 00:00:24.080
+These choices should be part of the design, not scattered setup code.
+
+5
+00:00:24.360 --> 00:00:28.520
+Installed handlers change the program's behavior under interruption.
+
+6
+00:00:28.620 --> 00:00:36.460
+A handler might request shutdown, notify an event loop, record a simple state change, or coordinate child process cleanup through normal code.
+
+7
+00:00:36.560 --> 00:00:42.560
+The key point is that the handler runs asynchronously relative to the interrupted code.
+
+8
+00:00:42.660 --> 00:00:46.900
+It should be treated as a restricted entry point, not as a normal callback.
+
+9
+00:00:47.180 --> 00:00:52.380
+Signal masks control whether selected signals are blocked for a thread or process context.
+
+10
+00:00:52.480 --> 00:00:57.680
+When a signal is blocked, delivery may be delayed and the signal can become pending.
+
+11
+00:00:57.780 --> 00:01:03.940
+This is useful during sensitive setup or state transitions, but it also creates design responsibilities.
+
+12
+00:01:04.040 --> 00:01:10.120
+The program should restore masks predictably and avoid leaving signals blocked by accident.
+
+13
+00:01:10.400 --> 00:01:13.120
+Delivery behavior is platform-sensitive.
+
+14
+00:01:13.220 --> 00:01:28.100
+POSIX-style systems have concepts such as process-directed signals, thread-directed signals, pending signals, signal masks, interrupted system calls, process groups, and child process notifications.
+
+15
+00:01:28.200 --> 00:01:33.560
+Other platforms may use different mechanisms such as console control handlers or service-control callbacks.
+
+16
+00:01:33.660 --> 00:01:38.460
+A portable design avoids assuming that one environment's details apply everywhere.
+
+17
+00:01:38.740 --> 00:01:42.180
+Interrupted operations also need explicit handling.
+
+18
+00:01:42.280 --> 00:01:46.280
+Some blocking calls may return early when a signal is handled.
+
+19
+00:01:46.380 --> 00:01:52.300
+Some library or system calls may be restartable depending on configuration, platform, and call type.
+
+20
+00:01:52.400 --> 00:02:02.400
+Code that waits, reads, writes, accepts connections, or coordinates child processes should define how interruption is reported and how normal processing resumes or shuts down.
+
+21
+00:02:02.680 --> 00:02:06.840
+A reviewer should be able to map the signal flow from configuration to runtime behavior.
+
+22
+00:02:06.940 --> 00:02:08.380
+Which signals are handled?
+
+23
+00:02:08.480 --> 00:02:10.320
+Which are blocked during setup?
+
+24
+00:02:10.420 --> 00:02:13.700
+Which thread or loop observes shutdown requests?
+
+25
+00:02:13.800 --> 00:02:15.640
+Which operations may be interrupted?
+
+26
+00:02:15.740 --> 00:02:21.180
+This map is what turns signal handling from hidden control flow into maintainable engineering.

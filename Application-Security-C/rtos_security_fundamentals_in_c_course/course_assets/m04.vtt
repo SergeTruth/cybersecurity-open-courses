@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.660
+Memory safety is central to RTOS security because many embedded systems run for long periods with limited memory and direct hardware interaction.
+
+2
+00:00:08.760 --> 00:00:15.960
+Fixed buffers, stacks, heaps, memory pools, and shared objects all need clear limits and ownership.
+
+3
+00:00:16.060 --> 00:00:20.140
+Predictable memory behavior is often more important than raw flexibility.
+
+4
+00:00:20.420 --> 00:00:23.620
+Fixed buffers still require bounds checks.
+
+5
+00:00:23.720 --> 00:00:30.200
+A buffer sized for a nominal message, sensor record, or diagnostic line may be too small for a boundary case.
+
+6
+00:00:30.300 --> 00:00:36.300
+Code should validate lengths before copying, parsing, formatting, or appending.
+
+7
+00:00:36.400 --> 00:00:41.440
+The buffer size should be tied to the protocol or data contract, not only to an old example.
+
+8
+00:00:41.720 --> 00:00:44.440
+Stack usage needs special attention.
+
+9
+00:00:44.540 --> 00:00:54.620
+Each task has its own stack in many RTOS designs, and stack pressure may depend on call depth, local arrays, library calls, logging, and rare error paths.
+
+10
+00:00:54.720 --> 00:01:01.920
+Stack sizing should be supported by measurement, static review, and tests that exercise realistic worst cases.
+
+11
+00:01:02.200 --> 00:01:05.720
+Heap use should be governed by an explicit policy.
+
+12
+00:01:05.820 --> 00:01:10.140
+Some systems avoid dynamic allocation after startup.
+
+13
+00:01:10.240 --> 00:01:12.880
+Others use allocation in controlled layers.
+
+14
+00:01:12.980 --> 00:01:18.740
+If the heap is used, consider allocation failure, fragmentation, cleanup, and ownership.
+
+15
+00:01:18.840 --> 00:01:23.240
+The policy should be documented so reviewers know what is acceptable.
+
+16
+00:01:23.520 --> 00:01:28.560
+Memory pools can improve lifecycle control when they are sized and owned clearly.
+
+17
+00:01:28.660 --> 00:01:34.900
+A pool can bound allocation, reduce fragmentation, and make failure behavior predictable.
+
+18
+00:01:35.000 --> 00:01:43.320
+It still needs rules for who owns each object, when it is returned, what happens on exhaustion, and how stale references are prevented.
+
+19
+00:01:43.600 --> 00:01:51.360
+Where available, MPU-style isolation can reduce the impact of mistakes by limiting which tasks can access regions or peripherals.
+
+20
+00:01:51.460 --> 00:02:01.540
+It is not a complete security solution by itself, but it can support a design that already defines task boundaries, stack regions, shared buffers, and privileged code paths.

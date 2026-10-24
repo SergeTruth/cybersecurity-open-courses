@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+A common Go validation failure is trusting client-side checks.
+
+2
+00:00:04.200 --> 00:00:11.160
+Browser validation, frontend TypeScript, or mobile client rules can improve usability, but they are not the authority.
+
+3
+00:00:11.260 --> 00:00:18.300
+The server must validate because requests can be sent directly, clients can be modified, and old versions can remain in use.
+
+4
+00:00:18.400 --> 00:00:26.880
+Another common issue is accepting unknown JSON fields unintentionally, which can hide caller mistakes and make API contracts harder to reason about.
+
+5
+00:00:27.160 --> 00:00:31.000
+Zero values are another recurring source of bugs.
+
+6
+00:00:31.100 --> 00:00:41.980
+If a missing field and an intentionally provided zero both become the same Go value, the handler may approve a request that should have failed or overwrite data unintentionally.
+
+7
+00:00:42.080 --> 00:00:49.120
+Pointers, custom request types, explicit presence tracking, and careful validation can clarify the difference.
+
+8
+00:00:49.220 --> 00:00:53.940
+This is especially important in patch-style endpoints and partial updates.
+
+9
+00:00:54.220 --> 00:00:58.620
+Validation should not be mistaken for authorization or safe API use.
+
+10
+00:00:58.720 --> 00:01:01.680
+A valid user ID still needs an access check.
+
+11
+00:01:01.780 --> 00:01:07.380
+A validated search string should still be used with parameterized queries rather than string-built SQL.
+
+12
+00:01:07.480 --> 00:01:13.080
+A validated command option should still avoid unsafe process execution patterns.
+
+13
+00:01:13.180 --> 00:01:17.340
+A cleaned path should still be checked against allowed directories.
+
+14
+00:01:17.440 --> 00:01:23.040
+Validation reduces risk, but it is one layer in a larger defensive design.
+
+15
+00:01:23.320 --> 00:01:31.000
+Mass assignment style risks can appear in Go when request structs are copied too broadly into persistence models or update maps.
+
+16
+00:01:31.100 --> 00:01:39.820
+Clients should not be able to set server-controlled fields such as role, owner ID, tenant ID, approval state, or audit values.
+
+17
+00:01:39.920 --> 00:01:47.120
+Business logic validation gaps can be even subtler: the input has the right shape, but the requested state change is not allowed.
+
+18
+00:01:47.220 --> 00:01:50.900
+Strong Go services validate both the data and the operation.

@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defining a Configuration Contract",
+  "graphicAlt": "A configuration contract specifies fields, defaults, duplicates and version behavior.",
+  "narration": "A configuration parser should be guided by a contract before the parsing branches are written. The contract defines what the program accepts, what it rejects, and how it behaves when input is missing, duplicated, deprecated, or unknown. Without that contract, parser behavior tends to emerge accidentally from control flow.\n\nStart by identifying required and optional settings. Required settings should be present and valid before the program uses the configuration. Optional settings need documented defaults. A default is not just a convenience value; it is the behavior the program chooses when no explicit configuration is provided.\n\nAllowed values should be specific. Booleans, enumerations, identifiers, sizes, durations, percentages, paths, and lists each need a rule that matches their use. Unknown values should not silently become defaults unless that behavior is part of the documented contract.\n\nDuplicate keys and duplicate sections need deterministic behavior. A parser can reject duplicates, use the first value, use the last value, or merge values by rule. The important part is that the rule is intentional, documented, and covered by tests.\n\nUnknown keys and versioning deserve the same care. Some systems reject unknown keys to catch mistakes early. Others allow unknown keys for forward compatibility. Deprecated settings should have visible handling so teams know whether old configuration is still honored, warned about, or rejected.\n\nA good configuration contract makes review and testing straightforward. Reviewers can compare the parser against the schema, and tests can cover required fields, optional fields, defaults, duplicates, unknown keys, allowed values, deprecation, and version behavior.",
+  "narrationPoints": [
+    "A configuration parser should be guided by a contract before the parsing branches are written.",
+    "A default is not just a convenience value; it is the behavior the program chooses when no explicit configuration is provided.",
+    "A parser can reject duplicates, use the first value, use the last value.",
+    "Deprecated settings should have visible handling so teams know whether old configuration is still honored, warned about.",
+    "A good configuration contract makes review and testing straightforward."
+  ]
+};

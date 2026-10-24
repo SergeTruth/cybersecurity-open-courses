@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Privilege management should be reviewed like an explicit design feature.
+
+2
+00:00:04.040 --> 00:00:15.800
+Reviewers should ask what authority the process has, why it needs that authority, which operations use it, when authority is reduced, what inherited state is trusted, and what happens when any step fails.
+
+3
+00:00:15.900 --> 00:00:22.860
+These questions are more useful than scanning for one specific API call because they follow the actual behavior of the program.
+
+4
+00:00:23.140 --> 00:00:26.100
+Tests should include expected privilege state.
+
+5
+00:00:26.200 --> 00:00:41.640
+A test can confirm that the program starts under the intended identity, rejects unsafe configuration, creates files with correct permissions, avoids unexpected inherited resources, and runs ordinary processing with reduced authority where the design requires it.
+
+6
+00:00:41.740 --> 00:00:46.460
+Tests should also cover denied operations, not only allowed operations.
+
+7
+00:00:46.740 --> 00:00:48.820
+Failure-path tests are essential.
+
+8
+00:00:48.920 --> 00:00:51.720
+What happens if a privilege reduction fails?
+
+9
+00:00:51.820 --> 00:00:55.180
+What happens if configuration is owned by the wrong account?
+
+10
+00:00:55.280 --> 00:01:01.600
+What if a child process cannot start, exits with an error, runs too long, or leaves partial output?
+
+11
+00:01:01.700 --> 00:01:04.740
+What if cleanup cannot remove a file?
+
+12
+00:01:04.840 --> 00:01:09.640
+Privileged code is safer when these outcomes are deliberate instead of improvised.
+
+13
+00:01:09.920 --> 00:01:13.840
+Tooling helps, but it is not a substitute for design.
+
+14
+00:01:13.940 --> 00:01:20.740
+Static analysis, compiler warnings, sanitizers, dependency checks, and platform diagnostics can reveal many defects in C code.
+
+15
+00:01:20.840 --> 00:01:27.560
+They can find memory errors, suspicious control flow, unchecked results, and risky patterns.
+
+16
+00:01:27.660 --> 00:01:34.060
+They do not prove that the program has the right authority model or that the operational boundary is correct.
+
+17
+00:01:34.340 --> 00:01:38.580
+Logs and audit trails should make privileged behavior understandable.
+
+18
+00:01:38.680 --> 00:01:53.320
+Useful events include startup identity checks, unsafe configuration rejection, privilege reduction outcomes, denied operations, controlled process launches, sensitive resource access decisions, and cleanup failures.
+
+19
+00:01:53.420 --> 00:02:00.940
+Logs should be redacted, access-controlled, retained appropriately, and written with the assumption that they may be reviewed during an incident.

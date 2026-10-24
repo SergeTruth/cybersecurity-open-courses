@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.500
+Compatibility is a security and reliability topic for reusable C++ libraries.
+
+2
+00:00:06.600 --> 00:00:13.960
+Consumers may use the library as headers, static libraries, shared libraries, plugins, or package-manager artifacts.
+
+3
+00:00:14.060 --> 00:00:22.540
+Each model has different expectations around public headers, exported symbols, binary compatibility, build flags, and platform-specific behavior.
+
+4
+00:00:22.640 --> 00:00:27.680
+A change that is harmless for source consumers may be disruptive for binary consumers.
+
+5
+00:00:27.960 --> 00:00:30.680
+A public header is a long-lived contract.
+
+6
+00:00:30.780 --> 00:00:40.620
+Types, inline code, macros, templates, exceptions, default parameters, and conditional compilation can all affect consumers.
+
+7
+00:00:40.720 --> 00:00:47.760
+ABI stability requires deliberate policy because small implementation changes can break shared-library consumers or plugins.
+
+8
+00:00:47.860 --> 00:00:54.100
+If the library offers a binary boundary, the team should define what is stable and what is internal.
+
+9
+00:00:54.200 --> 00:00:58.520
+Exported symbols and visibility settings should be reviewed as part of that policy.
+
+10
+00:00:58.800 --> 00:01:01.440
+Versioning should help consumers update safely.
+
+11
+00:01:01.540 --> 00:01:09.540
+Semantic versioning, release notes, deprecation policy, feature flags, and migration guides all reduce surprise.
+
+12
+00:01:09.640 --> 00:01:17.480
+Opaque handles or C-compatible boundaries can reduce binary coupling in some cases, but they still need clear ownership and error contracts.
+
+13
+00:01:17.580 --> 00:01:22.380
+Optional features should be described so consumers know what changes when they are enabled.
+
+14
+00:01:22.480 --> 00:01:26.320
+Deprecation should come with examples and realistic timelines.
+
+15
+00:01:26.600 --> 00:01:30.200
+Compatibility surprises can delay security updates.
+
+16
+00:01:30.300 --> 00:01:41.340
+If an upgrade breaks builds, changes behavior without warning, or removes an API without a migration path, consumers may pin an older version or disable safety features to keep shipping.
+
+17
+00:01:41.440 --> 00:01:48.000
+Secure library teams make breaking changes deliberate, documented, tested, and paired with a realistic adoption path.
+
+18
+00:01:48.100 --> 00:01:52.180
+They also maintain patch branches when consumers need time to move.
+
+19
+00:01:52.280 --> 00:02:02.680
+Compatibility tests should cover the supported consumer patterns, not only the library's own examples and internal builds across platforms and package formats used by consumers.

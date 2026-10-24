@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary and Key Takeaways",
+  "narration": "Injection happens when untrusted input is interpreted as instructions in the wrong context. For Java developers, that context can be much broader than SQL. Sensitive sinks include database queries, ORM queries, LDAP filters, XPath and XML processing, shell commands, templates, expression languages, browser output, file paths, URLs, message systems, and downstream APIs. The consistent task is recognizing when data is about to cross into something that interprets it.\n\nStrong prevention combines several controls. Map data flow from trust boundaries to sensitive sinks. Validate input for business intent and shape. Use parameterized APIs for query construction. Prefer Java libraries over shell commands where practical. Configure parsers defensively. Use context-specific output encoding for web responses. Apply least privilege so mistakes have less impact. Review dependencies that interpret strings, evaluate expressions, or accept flexible query objects.\n\nDo not rely on one universal fix. Escaping is not the same as parameterization. Sanitization is not the same as output encoding. Client-side validation is not a server-side boundary. ORMs do not automatically make every dynamic query safe. Sandboxes do not justify evaluating untrusted expressions. Each interpreter has its own rules, so the control must fit the sink.\n\nThe professional habit is designing Java applications where untrusted data cannot change command meaning. That means using types, allowlists, safe APIs, narrow interfaces, focused tests, and review practices that make risky transitions obvious. When teams build these patterns into ordinary development, injection prevention stops being a last-minute audit exercise and becomes part of clean application design.",
+  "graphicAlt": "Typed values and approved choices reach safe context-specific APIs whose assumptions are reviewed and tested.",
+  "narrationPoints": [
+    "Injection happens when untrusted input is interpreted as instructions in the wrong context.",
+    "Strong prevention combines several controls.",
+    "Do not rely on one universal fix.",
+    "The professional habit is designing Java applications where untrusted data cannot change command meaning."
+  ]
+};

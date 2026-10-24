@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Key Inventory, Ownership, and Lifecycle",
+  "graphicAlt": "A key inventory tracks ownership, environment, storage, rotation and recovery metadata while excluding key values.",
+  "narration": "Key inventory does not mean building a spreadsheet full of secrets. It means tracking the facts needed to manage risk without exposing the key values themselves. For each important key, the team should know the owner, purpose, environment, storage location, access policy, creation date, rotation expectation, expiration expectation, recovery requirement, and decommissioning path.\n\nThe key lifecycle includes generation, activation, use, rotation, suspension or revocation, archival where needed, and destruction. Unknown keys create risk because nobody knows whether they are still needed, who can use them, or how to rotate them. Stale keys often remain active not because anyone intended that, but because rotation was never tested and nobody wants to touch a fragile production dependency.\n\nEnvironment separation is part of lifecycle discipline. Development, test, staging, production, preview, CI/CD, migration, and emergency workflows should not casually share keys. A key used in local development should not unlock production data. A CI job should not receive broad production secrets when it only builds an image. The more contexts share a key, the harder it becomes to reason about exposure.\n\nLifecycle documentation should be practical enough for incident response. If a key appears in a log or repository, the team should know what it protects, which systems use it, how to revoke or rotate it, how to validate that old access no longer works, and who is responsible for the decision. Inventory is boring until an incident; then it becomes the map.",
+  "narrationPoints": [
+    "For each important key, the team should know the owner, purpose, environment, storage location, access policy, creation date, rotation expectation, expiration expectation, recovery requirement, and decommissioning path.",
+    "The key lifecycle includes generation, activation, use, rotation, suspension or revocation, archival where needed, and destruction.",
+    "A key used in local development should not unlock production data.",
+    "If a key appears in a log or repository, the team should know what it protects, which systems use it, how to revoke or rotate it, how to validate that old access no longer works, and who is responsible for the decision.",
+    "Unknown keys create risk because nobody knows whether they are still needed, who can use them, or how to rotate them.",
+    "It means tracking the facts needed to manage risk without exposing the key values themselves."
+  ]
+};

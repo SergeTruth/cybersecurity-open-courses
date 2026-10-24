@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Authorization, Tenant Boundaries, and Data Exposure",
+  "graphicAlt": "Caller and trusted tenant context determine document authorization before field visibility limits the response.",
+  "narration": "Authentication identifies the caller, but authorization decides which documents and operations that caller may access. MongoDB-backed applications need object-level authorization for protected reads, updates, deletes, exports, aggregations, downloads, and administrative actions. It is not enough to confirm that a route requires login. If the request asks for a document by ID, the query or service logic must confirm that the caller is allowed to access that specific document.\n\nMulti-tenant systems need server-side tenant boundaries in normal queries, aggregation pipelines, exports, admin tools, and background jobs. Avoid trusting tenant IDs supplied by the client as proof of access. The server should derive tenant context from authenticated identity, authorization rules, or trusted service context, then include that boundary consistently. Aggregation pipelines deserve extra attention because an early missing match stage or a later broad lookup can expose more data than a simple find operation would.\n\nData exposure is also about fields, not only documents. Return the fields needed for the caller and use case, and avoid leaking password hashes, reset tokens, API tokens, internal notes, security flags, audit-only fields, billing metadata, or operational details. Projections, serializers, DTOs, and response mapping can help. The important habit is to treat document existence, document access, and field visibility as separate decisions that must all be enforced server-side.",
+  "narrationPoints": [
+    "MongoDB-backed applications need object-level authorization for protected reads, updates, deletes, exports, aggregations, downloads, and administrative actions.",
+    "Multi-tenant systems need server-side tenant boundaries in normal queries, aggregation pipelines, exports, admin tools, and background jobs.",
+    "Return the fields needed for the caller and use case, and avoid leaking password hashes, reset tokens, API tokens, internal notes, security flags, audit-only fields, billing metadata, or operational details.",
+    "The server should derive tenant context from authenticated identity, authorization rules, or trusted service context, then include that boundary consistently.",
+    "The important habit is to treat document existence, document access, and field visibility as separate decisions that must all be enforced server-side.",
+    "Avoid trusting tenant IDs supplied by the client as proof of access."
+  ]
+};

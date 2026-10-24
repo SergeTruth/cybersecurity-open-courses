@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.820
+Protocol parsers need resource limits because input can be malformed, oversized, repeated, slow, or unexpectedly complex.
+
+2
+00:00:08.920 --> 00:00:17.000
+A parser with no limits can spend too much memory, CPU, queue space, or session state on input that should have been rejected early.
+
+3
+00:00:17.280 --> 00:00:28.000
+Useful limits include maximum message size, field count, nesting depth, queue depth, session count, output size, and processing time.
+
+4
+00:00:28.100 --> 00:00:34.020
+These limits should be chosen for the protocol and deployment environment, then enforced consistently.
+
+5
+00:00:34.120 --> 00:00:39.560
+Documentation helps operators understand what the parser will accept and what it will reject.
+
+6
+00:00:39.840 --> 00:00:43.200
+Basic validation should happen before expensive work.
+
+7
+00:00:43.300 --> 00:00:55.140
+Check that a message is plausible, complete, supported, and within size limits before allocating large buffers, performing expensive transformations, touching storage, or dispatching application actions.
+
+8
+00:00:55.420 --> 00:01:02.380
+Do not allocate memory directly from untrusted length or count fields without checks and configured limits.
+
+9
+00:01:02.480 --> 00:01:06.880
+A field may be syntactically valid but operationally too large.
+
+10
+00:01:06.980 --> 00:01:13.540
+Allocation, indexing, copying, and loop bounds should all follow validated and bounded values.
+
+11
+00:01:13.820 --> 00:01:19.420
+Timeouts, backpressure, and controlled disconnect behavior help preserve availability.
+
+12
+00:01:19.520 --> 00:01:22.720
+A slow peer should not hold parser resources forever.
+
+13
+00:01:22.820 --> 00:01:25.540
+A full queue should fail predictably.
+
+14
+00:01:25.640 --> 00:01:29.640
+A session that violates the protocol should release resources.
+
+15
+00:01:29.740 --> 00:01:35.180
+Availability is part of parser security, especially for long-running services and embedded systems.

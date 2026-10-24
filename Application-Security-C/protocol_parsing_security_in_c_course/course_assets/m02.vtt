@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:15.300
+A protocol contract defines what messages exist, which versions are supported, which fields are required, which fields are optional, how lengths are encoded, what flags mean, what ordering is valid, and what should happen when input does not match the contract.
+
+2
+00:00:15.400 --> 00:00:18.840
+A parser is the executable version of that contract.
+
+3
+00:00:19.120 --> 00:00:23.920
+Parser assumptions should be visible rather than hidden in scattered conditionals.
+
+4
+00:00:24.020 --> 00:00:32.900
+Named constants, small validation helpers, clear state names, and direct error paths make it easier to understand what the parser believes.
+
+5
+00:00:33.000 --> 00:00:39.640
+If the protocol rules are buried in pointer arithmetic and one-off comparisons, review becomes guesswork.
+
+6
+00:00:39.920 --> 00:00:46.800
+Unknown versions, unsupported message types, reserved flags, and optional fields need defined behavior.
+
+7
+00:00:46.900 --> 00:00:49.860
+Sometimes the safest answer is to reject the message.
+
+8
+00:00:49.960 --> 00:00:55.800
+Sometimes compatibility calls for ignoring a field or returning an explicit unsupported response.
+
+9
+00:00:55.900 --> 00:01:00.460
+The important point is that the behavior is chosen deliberately.
+
+10
+00:01:00.740 --> 00:01:03.300
+Required fields must be checked before use.
+
+11
+00:01:03.400 --> 00:01:07.880
+A parser should not read a field because a later step expects it to exist.
+
+12
+00:01:07.980 --> 00:01:16.460
+It should first confirm that the message is long enough, that the field belongs to the message type, and that the value is acceptable for the current protocol version.
+
+13
+00:01:16.740 --> 00:01:22.340
+It can also be useful to distinguish malformed input from valid but unsupported input.
+
+14
+00:01:22.440 --> 00:01:24.680
+Malformed input violates the structure.
+
+15
+00:01:24.780 --> 00:01:30.860
+Unsupported input may be structurally correct but outside what this implementation supports.
+
+16
+00:01:30.960 --> 00:01:36.560
+That distinction can improve diagnostics and interoperability while keeping the parser strict where it matters.

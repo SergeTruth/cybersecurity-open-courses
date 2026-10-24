@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+The toolchain defines a large part of build trust.
+
+2
+00:00:04.040 --> 00:00:13.080
+Compiler identity, version, linker, sysroot, SDK, platform libraries, emulator behavior, and package discovery rules can all change the result.
+
+3
+00:00:13.180 --> 00:00:24.060
+In CMake, those choices may come from a toolchain file, a preset, a cache value, an environment variable, or the first compiler found on a developer workstation.
+
+4
+00:00:24.340 --> 00:00:29.300
+Environment variables are useful, but they should not silently decide security-sensitive behavior.
+
+5
+00:00:29.400 --> 00:00:39.160
+PATH, compiler variables, package roots, SDK locations, and feature toggles can make two builds from the same source produce different artifacts.
+
+6
+00:00:39.260 --> 00:00:49.980
+A secure workflow documents which environment inputs are supported, prints important selections during configuration, and avoids depending on local machine state for release decisions.
+
+7
+00:00:50.260 --> 00:00:54.100
+CMake cache values deserve review.
+
+8
+00:00:54.200 --> 00:01:01.640
+A cache is designed to preserve choices across configuration runs, which is convenient for development and easy to forget.
+
+9
+00:01:01.740 --> 00:01:09.660
+Stale cache entries can keep old paths, old feature values, or old dependency selections alive after source files change.
+
+10
+00:01:09.760 --> 00:01:16.480
+Clean build directories, named presets, and CI checks reduce surprises by making configuration state explicit.
+
+11
+00:01:16.760 --> 00:01:19.720
+Cross-compilation increases the need for discipline.
+
+12
+00:01:19.820 --> 00:01:25.980
+The host tools that run during the build may differ from the target platform where the application will run.
+
+13
+00:01:26.080 --> 00:01:34.240
+Generated files, tests, packaging rules, and runtime search paths may need separate assumptions for host and target.
+
+14
+00:01:34.340 --> 00:01:42.020
+Reliable cross builds identify those assumptions directly and verify that the intended compiler, sysroot, and package inputs were used.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+File paths, directory paths, resource names, and identifiers are common command-line values.
+
+2
+00:00:06.840 --> 00:00:14.440
+They deserve validation before the program opens, creates, deletes, modifies, or logs resources.
+
+3
+00:00:14.540 --> 00:00:19.420
+A path-like value is not safe just because it arrived as an argument string.
+
+4
+00:00:19.700 --> 00:00:21.540
+Start with basic shape.
+
+5
+00:00:21.640 --> 00:00:32.680
+Empty values, overly long values, unsupported characters, unexpected separators, or values outside the accepted naming rules should be rejected according to the tool's contract.
+
+6
+00:00:32.780 --> 00:00:39.180
+Length limits should be applied before copying into internal buffers or building derived paths.
+
+7
+00:00:39.460 --> 00:00:42.580
+Current working directory assumptions should be explicit.
+
+8
+00:00:42.680 --> 00:00:47.000
+A relative path can refer to different resources depending on where the process was launched.
+
+9
+00:00:47.100 --> 00:00:56.220
+If the tool expects paths relative to a workspace, configuration directory, or explicit root, the parser and resource layer should agree on that rule.
+
+10
+00:00:56.500 --> 00:00:59.860
+Normalization and canonicalization decisions should be deliberate.
+
+11
+00:00:59.960 --> 00:01:04.040
+Some tools preserve the user's path text for display.
+
+12
+00:01:04.140 --> 00:01:08.460
+Others resolve paths before comparing or enforcing intended scope.
+
+13
+00:01:08.560 --> 00:01:16.720
+The important part is to apply the rule before resource-changing operations and to avoid mixing unresolved and resolved interpretations.
+
+14
+00:01:17.000 --> 00:01:20.360
+Expected file modes and locations also matter.
+
+15
+00:01:20.460 --> 00:01:26.460
+A value meant to name an existing input file is different from a value meant to name a new output file or a directory.
+
+16
+00:01:26.560 --> 00:01:31.760
+The parser and validation layer should make those resource roles clear before the program acts.

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Before reviewing a queue consumer, map the workflow around it.
+
+2
+00:00:04.120 --> 00:00:17.080
+Identify producers, brokers, exchanges, topics, queues, subscriptions, worker pools, serverless triggers, retry paths, dead-letter queues, schedulers, and downstream services.
+
+3
+00:00:17.180 --> 00:00:20.940
+Then identify the business action each message can trigger.
+
+4
+00:00:21.040 --> 00:00:26.720
+This map shows where data enters, where authority is applied, and where failures can change state.
+
+5
+00:00:26.820 --> 00:00:31.460
+Without it, teams tend to review one handler and miss the surrounding system.
+
+6
+00:00:31.740 --> 00:00:51.100
+The phrase 'the message came from the queue' is not the same as 'the message is trustworthy.' The broker may prove where the consumer received the message, but it does not necessarily prove where every field originated, whether the data is current, whether a tenant boundary was enforced, or whether the producer was authorized to request the action.
+
+7
+00:00:51.200 --> 00:01:03.360
+A message may contain user-controlled file names, callback URLs, amounts, object keys, role names, or stale workflow state even when it travels through an internal queue.
+
+8
+00:01:03.640 --> 00:01:06.440
+Queue categories deserve different assumptions.
+
+9
+00:01:06.540 --> 00:01:19.180
+Internal queues, external integration queues, user-triggered jobs, scheduled jobs, administrative queues, and high-impact business workflows should not all have the same permissions and failure handling.
+
+10
+00:01:19.280 --> 00:01:24.080
+A low-impact email notification queue is different from a payment settlement queue.
+
+11
+00:01:24.180 --> 00:01:28.740
+A document conversion worker is different from a privileged administrative repair job.
+
+12
+00:01:28.840 --> 00:01:30.920
+The review needs to match the action.
+
+13
+00:01:31.200 --> 00:01:34.880
+Access to queue tooling is also part of the boundary.
+
+14
+00:01:34.980 --> 00:01:41.940
+Define who can publish, consume, inspect, purge, replay, delete, and administer messages.
+
+15
+00:01:42.040 --> 00:01:51.560
+A replay console, support dashboard, dead-letter queue, or broker administrator role can expose sensitive payloads or trigger business actions.
+
+16
+00:01:51.660 --> 00:02:00.460
+Security review should consider the full workflow and operating surface, not only the consumer function that processes the message during normal operation.

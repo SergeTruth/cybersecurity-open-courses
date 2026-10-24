@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.220
+SQL injection appears when user-controlled input changes database query structure.
+
+2
+00:00:07.320 --> 00:00:14.280
+In ADO.NET-style code, the primary defense is parameterized queries using DbCommand parameters.
+
+3
+00:00:14.380 --> 00:00:19.340
+The query structure is defined by the developer, and runtime values are supplied separately.
+
+4
+00:00:19.440 --> 00:00:25.840
+This separation matters because validation may reject unusual input, but it does not make string-built SQL safe.
+
+5
+00:00:25.940 --> 00:00:29.380
+Safe construction is required at the database boundary.
+
+6
+00:00:29.660 --> 00:00:35.100
+Entity Framework Core and other ORMs reduce many risks, but they do not eliminate review.
+
+7
+00:00:35.200 --> 00:00:48.240
+LINQ queries built from typed expressions are usually safer than hand-built query strings, but raw SQL APIs, interpolated SQL, dynamic filters, and provider-specific features still deserve attention.
+
+8
+00:00:48.340 --> 00:00:55.140
+Dapper can be used safely with parameter binding, yet it can also be used unsafely if values are spliced into command text.
+
+9
+00:00:55.240 --> 00:00:59.240
+The framework does not save code that bypasses its safe path.
+
+10
+00:00:59.520 --> 00:01:02.400
+Dynamic behavior needs tight constraints.
+
+11
+00:01:02.500 --> 00:01:12.980
+Sorting, filtering, pagination, reporting, and admin search features often tempt developers to accept field names, operators, or clauses from the client.
+
+12
+00:01:13.080 --> 00:01:18.920
+Safer designs map client choices to known columns, known properties, and known operations.
+
+13
+00:01:19.020 --> 00:01:29.660
+A user can request sorting by display name if display name is an approved option; the user should not provide raw SQL fragments, arbitrary property paths, or provider-specific syntax.
+
+14
+00:01:29.940 --> 00:01:35.380
+Stored procedures and least-privileged database accounts are useful, but they are not magic.
+
+15
+00:01:35.480 --> 00:01:42.840
+Procedures can still contain unsafe dynamic SQL, and permissions reduce blast radius rather than preventing the flaw.
+
+16
+00:01:42.940 --> 00:01:57.980
+A strong C# data-access pattern uses parameterized commands, safe ORM APIs, constrained dynamic options, review of raw SQL, focused tests around query-building code, and database accounts with only the permissions the service actually needs.

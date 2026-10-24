@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.260
+Every handler has a boundary, and every boundary needs validation.
+
+2
+00:00:04.360 --> 00:00:14.840
+HTTP requests need expected methods, paths, headers, bodies, sizes, types, formats, and authentication context.
+
+3
+00:00:14.940 --> 00:00:23.500
+Queue messages, event bus messages, object metadata, webhook payloads, scheduled inputs, and database events need the same discipline.
+
+4
+00:00:23.600 --> 00:00:35.840
+A managed service may deliver the event, but the payload can still contain user-controlled fields, stale state, unexpected nesting, oversized values, unsafe paths, or forged workflow data.
+
+5
+00:00:36.120 --> 00:00:47.880
+Do not trust client-supplied user IDs, tenant IDs, roles, object keys, file paths, callback URLs, prices, quantities, or workflow state.
+
+6
+00:00:47.980 --> 00:00:52.460
+Authentication proves who is calling or what system produced the event.
+
+7
+00:00:52.560 --> 00:00:58.320
+Authorization decides whether that caller or event is allowed to perform this action on this resource.
+
+8
+00:00:58.420 --> 00:01:04.660
+For multi-tenant systems, object-level and tenant-aware authorization must be enforced server-side.
+
+9
+00:01:04.760 --> 00:01:13.000
+A function that processes storage events still needs to understand whether the object key and metadata are valid for the tenant and workflow.
+
+10
+00:01:13.280 --> 00:01:16.960
+Webhooks and cross-service events deserve special care.
+
+11
+00:01:17.060 --> 00:01:25.380
+Verify signatures, source identity, timestamps, replay windows, and idempotency keys where the design requires them.
+
+12
+00:01:25.480 --> 00:01:32.680
+A webhook handler that accepts any JSON body from the internet is not protected simply because it runs behind an API gateway.
+
+13
+00:01:32.780 --> 00:01:38.940
+A queue worker that trusts every message is not protected simply because the queue is managed.
+
+14
+00:01:39.040 --> 00:01:41.920
+Validation belongs at the boundary of each handler.
+
+15
+00:01:42.200 --> 00:01:44.520
+Event schemas make review easier.
+
+16
+00:01:44.620 --> 00:01:53.340
+Define expected fields, types, sizes, ranges, formats, required values, and rejected values.
+
+17
+00:01:53.440 --> 00:01:59.840
+Use validation libraries or shared schema code where they reduce mistakes, but keep the business rules visible.
+
+18
+00:01:59.940 --> 00:02:04.820
+Validation supports security and reliability, but it does not replace authorization.
+
+19
+00:02:04.920 --> 00:02:12.920
+A valid event can still be unauthorized, and an authenticated caller can still request a resource they do not own.

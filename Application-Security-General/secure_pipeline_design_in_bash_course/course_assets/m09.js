@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Secure Bash Pipeline Checklist",
+  "graphicAlt": "Stream mapping, boundary validation, honest failure handling and protected evidence form a reviewable pipeline workflow.",
+  "narration": "Secure Bash pipeline design is a repeatable engineering habit. Start by understanding how data flows through every stage. Know which command produces data, which command consumes it, which streams are involved, and what each boundary assumes about format, count, and meaning.\n\nValidate assumptions between commands. Output may be empty, malformed, truncated, reordered, localized, or mixed with diagnostics. When downstream decisions matter, check required fields, expected counts, and no-match conditions before taking action.\n\nQuote and validate pipeline inputs. Treat file paths, names, patterns, branch labels, metadata, and filter values as data. Avoid command strings built from uncontrolled input. Preserve literal values and reject unsupported forms before the pipeline runs.\n\nHandle failures deliberately. Use exit status checks and pipefail where appropriate, but define success for the workflow, not just for one command. Stop safely when pipeline results cannot support the next step, and avoid misleading success messages.\n\nAvoid brittle parsing where possible. Prefer structured output when available. If human-readable output must be parsed, document the assumption and test no-match, malformed, empty, and unexpected cases. Break complex pipelines into reviewable steps and protect intermediate data from accidental exposure.\n\nFinally, log safely and review before production. Separate data from diagnostics, avoid secrets in logs, use ShellCheck and peer review, and monitor operational pipelines for failures, unusual counts, and missing expected output. The goal is stream processing that is predictable, validated, observable, and safe enough for real operations.",
+  "narrationPoints": [
+    "Secure Bash pipeline design is a repeatable engineering habit.",
+    "Output may be empty, malformed, truncated, reordered, localized, or mixed with diagnostics.",
+    "Treat file paths, names, patterns, branch labels, metadata, and filter values as data.",
+    "Use exit status checks and pipefail where appropriate, but define success for the workflow, not just for one command.",
+    "If human-readable output must be parsed, document the assumption and test no-match, malformed, empty, and unexpected cases.",
+    "Separate data from diagnostics, avoid secrets in logs, use ShellCheck and peer review, and monitor operational pipelines for failures, unusual counts, and missing expected output."
+  ]
+};

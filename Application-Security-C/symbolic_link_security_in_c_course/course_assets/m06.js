@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Creation, Replacement, and Temporary Files",
+  "graphicAlt": "Owned working files are written and checked before platform-aware finalization exposes output.",
+  "narration": "Symbolic-link risk often appears during creation and replacement. If code checks for a filename, then later creates it, the object at that path may not be the object the earlier check described. Safer workflows use platform-appropriate creation behavior that creates and opens the intended file atomically.\n\nTemporary files overlap strongly with symbolic-link safety. Temporary names should not be predictable, and temporary directories should be selected according to trust, permissions, and data sensitivity. The program should own the returned descriptor or handle and should not rely only on a generated pathname.\n\nReplacement workflows should be intentional. A program may write to a working file and later publish final output. The code should distinguish working files from final files, check write results, handle partial files, and expose final content only after the operation is complete and validated.\n\nRename-style finalization or other durable replacement patterns can be useful at a high level, but the exact guarantees depend on platform and filesystem behavior. The review should focus on whether final output appears only after the program has completed and checked the work.\n\nCleanup also belongs in the creation story. If creation succeeds but later validation fails, the program should know who removes the working file. If replacement fails, the program should avoid leaving ambiguous state. Safe creation is only complete when finalization and cleanup behavior are clear.",
+  "narrationPoints": [
+    "Safer workflows use platform-appropriate creation behavior that creates and opens the intended file atomically.",
+    "Temporary names should not be predictable, and temporary directories should be selected according to trust, permissions, and data sensitivity.",
+    "The code should distinguish working files from final files, check write results, handle partial files, and expose final content only after the operation is complete and validated.",
+    "The review should focus on whether final output appears only after the program has completed and checked the work.",
+    "If creation succeeds but later validation fails, the program should know who removes the working file."
+  ]
+};

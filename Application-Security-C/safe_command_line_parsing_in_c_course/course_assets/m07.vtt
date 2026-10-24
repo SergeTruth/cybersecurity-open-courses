@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.380
+Command-line arguments are commonly handled as C strings, and that means ordinary C string discipline still applies.
+
+2
+00:00:07.480 --> 00:00:16.600
+The program should not assume a value will fit into an internal buffer, produce a safe formatted message, or compare correctly under unclear encoding rules.
+
+3
+00:00:16.880 --> 00:00:21.680
+Length checks should happen before copying, formatting, or concatenation.
+
+4
+00:00:21.780 --> 00:00:30.420
+The parser should distinguish source length from destination capacity and should preserve room for a terminating null character when an internal buffer is meant to hold a C string.
+
+5
+00:00:30.520 --> 00:00:34.040
+A command-line value can be longer than the program author expected.
+
+6
+00:00:34.320 --> 00:00:37.280
+Fixed-size buffers need special care.
+
+7
+00:00:37.380 --> 00:00:47.460
+If a tool copies arguments into fixed arrays, the code should define maximum accepted lengths, check them before the copy, and handle too-long values with a clear error.
+
+8
+00:00:47.560 --> 00:00:54.920
+Silent truncation can change resource names, identifiers, paths, or mode values.
+
+9
+00:00:55.200 --> 00:00:58.080
+Encoding and character assumptions should be documented.
+
+10
+00:00:58.180 --> 00:01:09.220
+A tool may expect simple ASCII-like option names, UTF-8 text, path strings in the platform's usual representation, or opaque bytes carried as arguments.
+
+11
+00:01:09.320 --> 00:01:15.800
+The parser should define what characters are allowed for each field and how whitespace or unusual bytes are handled.
+
+12
+00:01:16.080 --> 00:01:18.560
+Comparison rules also depend on the field.
+
+13
+00:01:18.660 --> 00:01:26.420
+Some options are case-sensitive, some are not, and some should be matched only after a documented normalization step.
+
+14
+00:01:26.520 --> 00:01:34.040
+Safe string handling keeps length, capacity, encoding, and comparison behavior aligned with the option contract.

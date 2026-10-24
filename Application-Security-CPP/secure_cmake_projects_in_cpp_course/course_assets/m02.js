@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Project Structure, Targets, and Build Boundaries",
+  "graphicAlt": "Private properties affect the target, public properties affect target and consumers, and interface properties affect consumers.",
+  "narration": "Target-based CMake is more than a modern style preference. It is a way to express build intent at the level where the intent actually applies. Libraries, executables, tests, tools, and generated components can each carry their own include paths, compile definitions, compile options, link dependencies, and language requirements. This makes the project easier to reason about and easier to review.\n\nPublic, private, and interface properties are especially important. A private include path should help one target compile without leaking into downstream users. A public dependency becomes part of the contract for consumers. An interface property can carry requirements without building a binary of its own. When those scopes are chosen deliberately, the CMake files describe both implementation detail and integration boundary.\n\nBroad global settings create hidden coupling. A global include directory can make an unrelated target compile only because it accidentally sees headers it should not depend on. A global compile definition can change behavior across the project with little visibility. A global linker option may apply to tools, tests, and production binaries even when only one target needed it.\n\nA secure project structure helps reviewers see where trust boundaries exist. Internal libraries, third-party dependencies, command-line tools, plugins, and shipped executables should be named and organized so their relationships are visible. The closer CMake stays to the architecture of the software, the easier it becomes to identify unnecessary exposure, surprising inheritance, and changes that deserve deeper review before release.",
+  "narrationPoints": [
+    "Target-based CMake is more than a modern style preference.",
+    "When those scopes are chosen deliberately, the CMake files describe both implementation detail and integration boundary.",
+    "An interface property can carry requirements without building a binary of its own.",
+    "A global include directory can make an unrelated target compile only because it accidentally sees headers it should not depend on.",
+    "A secure project structure helps reviewers see where trust boundaries exist.",
+    "Internal libraries, third-party dependencies, command-line tools, plugins, and shipped executables should be named and organized so their relationships are visible."
+  ]
+};

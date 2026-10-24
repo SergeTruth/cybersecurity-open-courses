@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Defensive Coding Patterns",
+  "graphicAlt": "An initialized structured resource box combines pointer, capacity and ownership tokens; single cleanup routine leads to defined final state.",
+  "narration": "Defensive coding patterns make lifetime behavior easier to inspect. They do not replace design, but they reduce accidental reuse and make cleanup decisions visible. The best patterns are boring in a good way: predictable initialization, clear ownership flags, consistent cleanup, and limited control-flow surprises.\n\nInitialize pointers before use and keep cleanup state explicit. A pointer that starts as null is easier for cleanup code to handle than an uninitialized value. An initialized flag, ownership flag, or structured resource state can help cleanup routines know what has actually been acquired.\n\nCentralize release logic when repeated cleanup would create confusion. A shared cleanup path can release resources in a known order and reduce duplicated code. It should still be easy to tell which resources are valid at each point. Centralization helps most when state is explicit.\n\nSetting a pointer to null after freeing can help prevent accidental reuse through that specific variable. It is a useful local habit, especially for objects that may continue through cleanup code. But it does not solve aliasing across the whole program. Other aliases may still contain the old address.\n\nMake invalid states harder to represent with clearer structures and ownership flags where appropriate. A buffer object can pair pointer, capacity, count, and ownership. A handle type can require cleanup through one routine. A container can state whether it owns elements. These patterns reduce ambiguity.\n\nPrefer simple, reviewable lifetime logic over clever control flow. Complicated jumps, hidden ownership side effects, and surprising release behavior increase the chance that a later maintainer will use a pointer after release. Clear code is not only easier to read; it is easier to trust.",
+  "narrationPoints": [
+    "An initialized flag, ownership flag, or structured resource state can help cleanup routines know what has actually been acquired.",
+    "A shared cleanup path can release resources in a known order and reduce duplicated code.",
+    "Setting a pointer to null after freeing can help prevent accidental reuse through that specific variable.",
+    "A handle type can require cleanup through one routine.",
+    "Prefer simple, reviewable lifetime logic over clever control flow."
+  ]
+};

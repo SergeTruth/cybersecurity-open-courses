@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Scope, Authorization, and Administrative Boundaries",
+  "graphicAlt": "An accountable owner defines approved systems, tasks and timing before a remote action passes its authorization gate.",
+  "narration": "Before a Bash script administers remote systems, the team should know exactly what the script is authorized to do. Scope includes approved systems, environments, tasks, data, timing, operators, and expected outcomes. Without that definition, a small helper can quietly become a broad administrative tool.\n\nProduction and non-production boundaries need special care. A development helper should not inherit production reach by default. A diagnostic workflow should not become a deployment workflow because the same key or inventory file happens to work in both places.\n\nHigh-impact tasks may need change windows, approvals, ticket references, peer confirmation, or protected environment controls. Those gates are not just process overhead. They help ensure that remote actions happen at the right time, against the right systems, and with the right visibility.\n\nOwnership matters. A remote administration script should have a maintainer, a documented purpose, and a known review path. If nobody owns the script, nobody is accountable for updating targets, credentials, assumptions, or failure behavior as the environment changes.\n\nSeparation of duties can reduce risk. The person who writes a script, approves a production action, and operates privileged credentials does not always need to be the same person or role. Bash automation should fit the organization's control model rather than bypass it.\n\nSecure design makes boundaries visible in documentation, naming, configuration, runtime checks, and logs. Operators should know when a script is in preview mode, which environment it targets, what systems are in scope, and when it is about to perform a state-changing action.",
+  "narrationPoints": [
+    "Before a Bash script administers remote systems, the team should know exactly what the script is authorized to do.",
+    "A development helper should not inherit production reach by default.",
+    "High-impact tasks may need change windows, approvals, ticket references, peer confirmation, or protected environment controls.",
+    "A remote administration script should have a maintainer, a documented purpose, and a known review path.",
+    "The person who writes a script, approves a production action, and operates privileged credentials does not always need to be the same person or role.",
+    "Secure design makes boundaries visible in documentation, naming, configuration, runtime checks, and logs."
+  ]
+};

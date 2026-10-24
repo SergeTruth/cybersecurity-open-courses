@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Selecting Libraries Defensively",
+  "graphicAlt": "Library selection reviews maintenance, API contracts, tests and support expectations.",
+  "narration": "Adopting a library is a security decision because it adds code, assumptions, and maintenance obligations to the product. A useful evaluation looks beyond whether the library solves the immediate problem. Engineers should ask whether it is maintained, documented, tested, portable, compatible with the license model, and appropriate for the sensitivity of the feature that will use it.\n\nMaintenance signals matter. A library with clear releases, responsive maintainers, a documented security reporting process, and visible issue handling is easier to trust over time than a dependency with unclear ownership. The dependency footprint also matters. A small utility and a complex framework create different review needs, especially if the library brings additional transitive packages or platform-specific behavior.\n\nThe API design should encourage safe integration. Libraries that make ownership clear, return structured errors, support bounded input, document thread-safety, and provide conservative defaults are easier to use correctly. Libraries that expose broad global state, unclear lifetime rules, or surprising build-time options deserve additional scrutiny before adoption.\n\nRisk should be proportional to use. A dependency that parses untrusted files, handles cryptography, opens network connections, processes images, or loads plugins deserves deeper review than a narrow utility used only in build tooling. A defensive selection process is not bureaucracy for its own sake. It is how teams avoid short-term convenience becoming a long-term obligation nobody planned to support.",
+  "narrationPoints": [
+    "Adopting a library is a security decision because it adds code, assumptions, and maintenance obligations to the product.",
+    "A useful evaluation looks beyond whether the library solves the immediate problem.",
+    "A small utility and a complex framework create different review needs, especially if the library brings additional transitive packages or platform-specific behavior.",
+    "Libraries that make ownership clear, return structured errors, support bounded input, document thread-safety, and provide conservative defaults are easier to use correctly.",
+    "Libraries that expose broad global state, unclear lifetime rules, or surprising build-time options deserve additional scrutiny before adoption.",
+    "A dependency that parses untrusted files, handles cryptography, opens network connections, processes images, or loads plugins deserves deeper review than a narrow utility used only in build tooling."
+  ]
+};

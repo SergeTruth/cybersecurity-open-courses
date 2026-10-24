@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.740
+Use-after-free defects often appear in error handling and cleanup code.
+
+2
+00:00:04.840 --> 00:00:14.120
+The ordinary success path may be straightforward, while failure paths release only some resources, jump across state updates, or continue after cleanup.
+
+3
+00:00:14.220 --> 00:00:18.300
+Defensive review should give error paths the same attention as the main path.
+
+4
+00:00:18.580 --> 00:00:24.100
+Partial initialization requires cleanup logic that knows which resources are currently valid.
+
+5
+00:00:24.200 --> 00:00:32.520
+A function might allocate one object, initialize a second object, register a callback, then fail while preparing a third step.
+
+6
+00:00:32.620 --> 00:00:37.420
+Cleanup should release only what was acquired and should leave the remaining state predictable.
+
+7
+00:00:37.700 --> 00:00:43.620
+Releasing resources in multiple places can create accidental reuse or repeated cleanup.
+
+8
+00:00:43.720 --> 00:00:47.800
+A pointer might be freed in a helper, then freed again by the caller.
+
+9
+00:00:47.900 --> 00:00:53.980
+A function might clean up on error and then fall through to code that assumes the object is still active.
+
+10
+00:00:54.080 --> 00:00:58.560
+These problems are not about one line of code; they are about unclear control flow.
+
+11
+00:00:58.840 --> 00:01:02.920
+A predictable single cleanup path can reduce lifetime confusion.
+
+12
+00:01:03.020 --> 00:01:09.500
+Many C codebases use a structured cleanup section that releases resources in reverse acquisition order.
+
+13
+00:01:09.600 --> 00:01:16.320
+This approach is not magic, but it gives reviewers one place to inspect ownership state and makes early exits easier to reason about.
+
+14
+00:01:16.600 --> 00:01:20.520
+Cleanup code should leave objects in a safe, well-defined state.
+
+15
+00:01:20.620 --> 00:01:29.660
+That may mean clearing an owner pointer, resetting count and capacity metadata, unregistering callbacks before release, or marking a structure as no longer initialized.
+
+16
+00:01:29.760 --> 00:01:35.520
+The right state depends on whether the object can be reused, returned, or only discarded.
+
+17
+00:01:35.800 --> 00:01:40.760
+After cleanup, later code should not continue as though the object is still usable.
+
+18
+00:01:40.860 --> 00:01:49.820
+Watch for log calls, callbacks, metrics updates, error formatting, or cleanup helpers that use fields from an object after its storage has been released.
+
+19
+00:01:49.920 --> 00:01:55.760
+If information is needed after cleanup, copy the safe summary before release.

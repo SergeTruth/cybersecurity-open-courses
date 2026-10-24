@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+SSH automation in Bash is common because it fits naturally into operational work.
+
+2
+00:00:06.200 --> 00:00:17.320
+A short script can connect to remote hosts, run maintenance tasks, copy files, collect diagnostics, restart services, deploy artifacts, or trigger remote workflows.
+
+3
+00:00:17.420 --> 00:00:24.780
+That flexibility is useful, but it also means a small script can reach across system boundaries and change real infrastructure.
+
+4
+00:00:25.060 --> 00:00:28.340
+The security concern is not SSH itself.
+
+5
+00:00:28.440 --> 00:00:31.720
+SSH is a normal and valuable administration channel.
+
+6
+00:00:31.820 --> 00:00:43.740
+The concern is unattended automation that runs with powerful credentials, trusts the wrong host, builds remote commands loosely, transfers sensitive files carelessly, or fails in ways that operators cannot see.
+
+7
+00:00:43.840 --> 00:00:47.920
+Those problems are design problems, not reasons to avoid automation altogether.
+
+8
+00:00:48.200 --> 00:00:52.280
+Secure SSH automation makes remote actions intentional.
+
+9
+00:00:52.380 --> 00:01:03.180
+The script should know which host it is contacting, which identity it is using, what permissions that identity has, which command or transfer is allowed, and how success or failure will be reported.
+
+10
+00:01:03.280 --> 00:01:08.240
+Reviewers should be able to understand those decisions without reconstructing hidden shell behavior.
+
+11
+00:01:08.520 --> 00:01:09.960
+Scope matters.
+
+12
+00:01:10.060 --> 00:01:17.340
+A job-specific identity that can perform one deployment task is easier to reason about than a shared privileged key that works everywhere.
+
+13
+00:01:17.440 --> 00:01:22.960
+A managed known-hosts process is safer than casual trust prompts or verification bypasses.
+
+14
+00:01:23.060 --> 00:01:30.740
+Logs that show target, action, result, and time are more useful than silent success or raw sensitive output.
+
+15
+00:01:31.020 --> 00:01:35.420
+The defensive goal is reliable remote work without hidden risk.
+
+16
+00:01:35.520 --> 00:01:44.560
+Bash and SSH can remain simple and practical, but the automation around them should be verified, scoped, observable, and maintained over time.

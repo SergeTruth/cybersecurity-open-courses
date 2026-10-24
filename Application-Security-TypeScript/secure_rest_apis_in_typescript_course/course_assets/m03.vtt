@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+Input validation is one of the most important security boundaries in a REST API.
+
+2
+00:00:05.400 --> 00:00:14.600
+Every request body, query string, path value, header, and content type should be treated as untrusted until the application has checked it.
+
+3
+00:00:14.700 --> 00:00:20.860
+TypeScript can describe what the application wants, but runtime validation confirms what the caller actually sent.
+
+4
+00:00:21.140 --> 00:00:23.700
+A request contract should be specific.
+
+5
+00:00:23.800 --> 00:00:32.680
+Prefer allowlisted schemas with required fields, accepted formats, bounded sizes, permitted enum values, and clear handling for optional data.
+
+6
+00:00:32.780 --> 00:00:41.580
+Validation should reject unexpected structures rather than quietly accepting unknown fields that later code may interpret differently.
+
+7
+00:00:41.680 --> 00:00:45.920
+This makes route behavior easier to reason about and easier to test.
+
+8
+00:00:46.200 --> 00:00:54.280
+Validation should happen close to the API boundary, before business logic and before authorization decisions that depend on request data.
+
+9
+00:00:54.380 --> 00:01:03.580
+If a route uses a path value as a resource identifier, or a body value as a requested action, the application should parse and normalize that value first.
+
+10
+00:01:03.680 --> 00:01:08.720
+Authorization checks should operate on the same meaning the business logic will use.
+
+11
+00:01:09.000 --> 00:01:12.200
+Safe rejection is part of the contract.
+
+12
+00:01:12.300 --> 00:01:18.140
+Malformed input should receive consistent, helpful, non-sensitive error responses.
+
+13
+00:01:18.240 --> 00:01:23.360
+Logging should support investigation without storing secrets or full sensitive payloads.
+
+14
+00:01:23.460 --> 00:01:32.420
+A well-designed validation layer turns unpredictable client input into a small set of known shapes that the rest of the TypeScript application can handle confidently.
+
+15
+00:01:32.700 --> 00:01:38.300
+Validation rules should be maintained with the API, not scattered as informal assumptions.
+
+16
+00:01:38.400 --> 00:01:46.240
+When schemas, OpenAPI descriptions, tests, and TypeScript types agree, client teams and server teams have a shared contract.
+
+17
+00:01:46.340 --> 00:01:51.220
+When they drift, rejected requests and hidden exposure become more likely.

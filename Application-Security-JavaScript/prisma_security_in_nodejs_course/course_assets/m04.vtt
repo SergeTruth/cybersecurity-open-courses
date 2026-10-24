@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.900
+Prisma Client helps avoid manual SQL construction for ordinary model operations, but a running Node.js application still receives untyped runtime data.
+
+2
+00:00:11.000 --> 00:00:20.600
+Request bodies, query strings, route parameters, webhook payloads, and queue messages arrive as data from outside the TypeScript type system.
+
+3
+00:00:20.700 --> 00:00:34.220
+A public API should not let callers submit arbitrary nested Prisma query objects and then pass those objects into where, data, orderBy, include, select, pagination, filtering, or relation operations.
+
+4
+00:00:34.500 --> 00:00:36.900
+Validation should be tied to business meaning.
+
+5
+00:00:37.000 --> 00:00:41.720
+If an endpoint supports a status filter, define the allowed statuses.
+
+6
+00:00:41.820 --> 00:00:47.580
+If it supports sorting, map user-facing sort choices to known fields and directions.
+
+7
+00:00:47.680 --> 00:00:52.240
+If it supports pagination, validate page size and offsets.
+
+8
+00:00:52.340 --> 00:00:56.660
+If it supports date ranges, enforce format and range rules.
+
+9
+00:00:56.760 --> 00:01:02.040
+Server-side validation is required; client-side validation is only a usability aid.
+
+10
+00:01:02.140 --> 00:01:13.340
+Validation should cover fields, types, lengths, ranges, enum values, date ranges, pagination values, supported filters, and relation behavior.
+
+11
+00:01:13.620 --> 00:01:19.700
+The safer pattern is to accept a small business-level request and map it to a controlled Prisma query.
+
+12
+00:01:19.800 --> 00:01:25.160
+That mapping separates user-provided values from application-controlled query structure.
+
+13
+00:01:25.260 --> 00:01:29.500
+Validation supports security, but it does not replace authorization.
+
+14
+00:01:29.600 --> 00:01:33.280
+A valid record ID still needs an object-level access check.
+
+15
+00:01:33.380 --> 00:01:39.060
+A valid tenant identifier should not be trusted merely because the client supplied it.
+
+16
+00:01:39.160 --> 00:01:47.320
+Query safety means the application controls the shape, validates the values, and enforces permission before returning or changing data.

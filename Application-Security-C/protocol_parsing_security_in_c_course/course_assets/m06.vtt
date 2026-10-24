@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:02.980
+Many protocols are stateful.
+
+2
+00:00:03.080 --> 00:00:11.400
+They have setup, negotiation, authentication, authorization, normal operation, shutdown, and error states.
+
+3
+00:00:11.500 --> 00:00:14.380
+Not every message is valid in every state.
+
+4
+00:00:14.480 --> 00:00:22.000
+A parser that checks only structure but ignores state can hand later code a command that is well-formed but not allowed now.
+
+5
+00:00:22.280 --> 00:00:25.160
+The state machine should be explicit where it matters.
+
+6
+00:00:25.260 --> 00:00:30.780
+State names, allowed transitions, and error behavior should be visible in the code.
+
+7
+00:00:30.880 --> 00:00:36.080
+This makes it easier to review whether a message is allowed before the parser dispatches it to application logic.
+
+8
+00:00:36.360 --> 00:00:40.840
+A structurally valid message may still be invalid for the current state.
+
+9
+00:00:40.940 --> 00:00:45.740
+For example, a request that is valid during normal operation may not be valid during setup.
+
+10
+00:00:45.840 --> 00:00:51.760
+A message that is valid after authorization may not be valid before authorization.
+
+11
+00:00:51.860 --> 00:00:55.300
+The parser should check both format and state before action.
+
+12
+00:00:55.580 --> 00:01:03.260
+Command dispatch should happen only after framing, field validation, state checks, and authorization checks succeed.
+
+13
+00:01:03.360 --> 00:01:07.360
+Dispatch is the point where input begins to affect application behavior.
+
+14
+00:01:07.460 --> 00:01:10.820
+Reaching that point should require all relevant gates to pass.
+
+15
+00:01:11.100 --> 00:01:19.660
+The parser should handle unexpected sequence, repeated-looking messages, duplicates, and disconnects predictably at a defensive level.
+
+16
+00:01:19.760 --> 00:01:22.000
+Predictability is the goal.
+
+17
+00:01:22.100 --> 00:01:31.060
+The service should not preserve partial trust after a failed transition, and it should not let state-changing operations run from partially parsed data.

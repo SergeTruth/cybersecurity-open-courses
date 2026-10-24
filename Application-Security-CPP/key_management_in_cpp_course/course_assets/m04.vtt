@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.660
+Secure storage decisions define who can read key material and how much evidence exists when something changes.
+
+2
+00:00:06.760 --> 00:00:14.920
+Keys should live outside source code, outside build artifacts, and outside casual configuration paths whenever possible.
+
+3
+00:00:15.200 --> 00:00:30.080
+Managed secret stores, key-management systems, hardware-backed storage, platform keychains, HSM-style services, encrypted configuration, restricted files, and deployment-time secret injection all represent different tradeoffs.
+
+4
+00:00:30.180 --> 00:00:35.140
+The right choice depends on the platform, policy, and operational model.
+
+5
+00:00:35.420 --> 00:00:40.620
+Hardcoded secrets and private keys in repositories are high-priority findings.
+
+6
+00:00:40.720 --> 00:00:47.280
+They spread through commit history, backups, forks, build logs, and developer machines.
+
+7
+00:00:47.380 --> 00:00:50.820
+Removing the line later does not erase all copies.
+
+8
+00:00:51.100 --> 00:00:55.500
+Plaintext configuration files and broad environment variables also deserve review.
+
+9
+00:00:55.600 --> 00:01:01.600
+They may be visible to operators, child processes, crash collection, diagnostics, or deployment tooling.
+
+10
+00:01:01.700 --> 00:01:05.460
+Treat them as exposure-sensitive rather than automatically safe.
+
+11
+00:01:05.740 --> 00:01:09.180
+Storage design should answer practical questions.
+
+12
+00:01:09.280 --> 00:01:11.440
+Who or what can read the key?
+
+13
+00:01:11.540 --> 00:01:13.220
+Is access audited?
+
+14
+00:01:13.320 --> 00:01:15.720
+Can the key rotate without redeploying everything?
+
+15
+00:01:15.820 --> 00:01:18.700
+Can old data still be read during migration?
+
+16
+00:01:18.800 --> 00:01:21.840
+How does the application fail if the backend is unavailable?
+
+17
+00:01:22.120 --> 00:01:24.360
+Local copies should be minimized.
+
+18
+00:01:24.460 --> 00:01:35.820
+Developer convenience exports, shared test files, copied production configuration, and temporary debugging material can outlive their original purpose and create avoidable risk.
+
+19
+00:01:36.100 --> 00:01:45.620
+A good backend does not remove the need for discipline, but it gives teams a controlled place to enforce access, auditing, rotation, and operational ownership.
+
+20
+00:01:45.900 --> 00:01:53.500
+C++ services should also avoid spreading retrieved secrets through process-wide globals unless policy explicitly supports that pattern.
+
+21
+00:01:53.600 --> 00:01:58.640
+A narrow retrieval path makes it easier to audit who used the key and why.
+
+22
+00:01:58.920 --> 00:02:08.520
+When local caching is required for reliability or performance, define cache lifetime, refresh behavior, revocation handling, and cleanup expectations before deployment.

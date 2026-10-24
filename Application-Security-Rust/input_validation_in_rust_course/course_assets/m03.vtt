@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Many Rust programs begin with raw strings, byte slices, or unstructured values.
+
+2
+00:00:06.200 --> 00:00:12.360
+The safest pattern is to treat those values as raw input first, then parse before use.
+
+3
+00:00:12.460 --> 00:00:15.500
+Parsing should not simply convert syntax.
+
+4
+00:00:15.600 --> 00:00:19.760
+It should establish whether the value is acceptable for the program's purpose.
+
+5
+00:00:19.860 --> 00:00:29.220
+A port number, a user role, a tenant identifier, and a file name may all begin as strings, but they should not remain interchangeable strings throughout the application.
+
+6
+00:00:29.500 --> 00:00:35.420
+Result is a natural fit for validation because it communicates either success or a specific failure.
+
+7
+00:00:35.520 --> 00:00:41.760
+Option is useful when something may be absent, but it does not explain why a value failed validation.
+
+8
+00:00:41.860 --> 00:00:52.900
+If the program needs to tell the caller that a field was too long, a number was out of range, or an enum value was unsupported, Result with a clear error type is usually the better model.
+
+9
+00:00:53.000 --> 00:00:57.960
+Explicit errors also make tests and API responses easier to reason about.
+
+10
+00:00:58.240 --> 00:01:01.680
+Newtypes help move validated values into the type system.
+
+11
+00:01:01.780 --> 00:01:13.140
+A UserId, SafePathName, NonEmptyName, or PositiveQuantity can wrap a primitive after validation and prevent accidental mixing with unrelated strings or numbers.
+
+12
+00:01:13.240 --> 00:01:17.800
+TryFrom and FromStr provide familiar Rust patterns for fallible conversion.
+
+13
+00:01:17.900 --> 00:01:24.060
+They make the validation step visible at the call site and keep domain construction from being a casual assignment.
+
+14
+00:01:24.340 --> 00:01:28.980
+Avoiding primitive obsession is a security and maintainability win.
+
+15
+00:01:29.080 --> 00:01:35.320
+Primitive values are flexible, but that flexibility makes it easy to pass the wrong value to the wrong place.
+
+16
+00:01:35.420 --> 00:01:42.860
+Domain types, enums, and fallible constructors encode decisions that would otherwise live in comments or scattered if statements.
+
+17
+00:01:42.960 --> 00:01:49.040
+Once raw input has been converted into a well-defined type, later code can depend on a stronger contract.

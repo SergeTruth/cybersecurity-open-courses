@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.460
+A function's risk is often defined by what it can reach.
+
+2
+00:00:03.560 --> 00:00:15.640
+Serverless Node.js functions may access databases, object stores, caches, queues, identity providers, SaaS APIs, payment processors, internal services, and administrative endpoints.
+
+3
+00:00:15.740 --> 00:00:26.940
+A small HTTP handler with broad database access and unrestricted outbound network access can be more dangerous than a larger service with narrow permissions and well-defined traffic paths.
+
+4
+00:00:27.040 --> 00:00:32.640
+Review data access and network reachability together rather than treating them as separate checkboxes.
+
+5
+00:00:32.920 --> 00:00:37.240
+Database connections and serverless scaling require careful design.
+
+6
+00:00:37.340 --> 00:00:45.180
+A sudden burst of function invocations can overwhelm a database, connection pool, cache, or downstream API.
+
+7
+00:00:45.280 --> 00:00:52.480
+Use connection patterns appropriate for the platform, set timeouts, understand concurrency, and avoid unbounded parallel calls.
+
+8
+00:00:52.580 --> 00:01:06.580
+Outbound requests should have explicit timeouts, safe retry behavior, and error handling that does not expose stack traces, internal paths, service credentials, or downstream implementation details to clients.
+
+9
+00:01:06.860 --> 00:01:19.420
+Do not construct storage paths, object keys, queue names, topic names, table names, or callback URLs from untrusted input without allowlisting and validation.
+
+10
+00:01:19.520 --> 00:01:23.200
+User-supplied filenames can appear inside object events.
+
+11
+00:01:23.300 --> 00:01:26.580
+Tenant identifiers can influence database queries.
+
+12
+00:01:26.680 --> 00:01:31.800
+Callback URLs can become server-side request risks if they are accepted without constraints.
+
+13
+00:01:31.900 --> 00:01:39.100
+Defensive design keeps resource naming, tenant boundaries, and outbound destinations under application control.
+
+14
+00:01:39.380 --> 00:01:48.260
+Private networking, egress controls, service endpoints, network policies, and platform bindings can reduce unintended access paths where available.
+
+15
+00:01:48.360 --> 00:01:53.720
+They are helpful controls, but they still need scoped credentials and safe application logic.
+
+16
+00:01:53.820 --> 00:01:58.860
+Downstream credentials should allow only the specific operation the function needs.
+
+17
+00:01:58.960 --> 00:02:10.240
+Responses should be boring from an attacker's point of view: enough information for the caller to understand the result, but no secrets, private URLs, stack traces, or internal topology.

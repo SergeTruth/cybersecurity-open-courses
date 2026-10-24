@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Many C# applications build queries that are not SQL.
+
+2
+00:00:04.680 --> 00:00:17.480
+NoSQL filters, LDAP search filters, XPath expressions, XML queries, OData options, search-engine syntax, and dynamic LINQ expressions can all interpret user-controlled values.
+
+3
+00:00:17.580 --> 00:00:23.260
+The pattern is familiar: input changes the structure or meaning of a query language.
+
+4
+00:00:23.360 --> 00:00:33.840
+Teams that only review database access can miss important injection surfaces in directory lookups, search endpoints, XML processing, and flexible API filters.
+
+5
+00:00:34.120 --> 00:00:39.400
+The safest approach is to expose business capabilities, not query languages.
+
+6
+00:00:39.500 --> 00:00:47.500
+If an API supports filtering orders by status, customer, date range, or owner, those fields and operators should be explicit.
+
+7
+00:00:47.600 --> 00:00:55.600
+Allowlist the fields, operators, nesting depth, sort choices, and page sizes the application intends to support.
+
+8
+00:00:55.700 --> 00:01:06.180
+Avoid passing arbitrary dictionaries, objects, or strings from the request directly into query builders when those structures can introduce new operators or hidden behavior.
+
+9
+00:01:06.460 --> 00:01:11.420
+OData and dynamic LINQ require special care because they are powerful by design.
+
+10
+00:01:11.520 --> 00:01:19.120
+They can be appropriate for controlled internal scenarios, but public or broadly accessible endpoints need strict limits.
+
+11
+00:01:19.220 --> 00:01:30.900
+Review which properties are queryable, whether navigation properties expose unexpected relationships, how expensive queries are constrained, and whether the query layer can bypass authorization assumptions.
+
+12
+00:01:31.000 --> 00:01:34.760
+Flexibility should be deliberate, bounded, and tested.
+
+13
+00:01:35.040 --> 00:01:39.520
+JSON and XML inputs should be validated for shape before they affect queries.
+
+14
+00:01:39.620 --> 00:01:46.740
+Check expected fields, data types, maximum lengths, array sizes, nesting, and allowed combinations.
+
+15
+00:01:46.840 --> 00:01:53.560
+XML processing should use safe parser settings and avoid enabling features the application does not need.
+
+16
+00:01:53.660 --> 00:02:06.300
+Whether the sink is LDAP, XPath, OData, NoSQL, or a search engine, the review question is the same: can the caller choose only approved values, or can the caller change what the query means?

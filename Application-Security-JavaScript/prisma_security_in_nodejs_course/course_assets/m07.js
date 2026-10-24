@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Safe Updates, Nested Writes, Transactions, and Integrity",
+  "graphicAlt": "Authorization, record scope and allowed field and relation mapping precede related mutations within a transaction.",
+  "narration": "Mutations often carry more risk than reads because they change the state other features rely on. Use explicit allowlists for fields callers may create or update, and avoid passing untrusted request objects directly into Prisma data objects. A profile update should not allow the caller to set role, permission, tenantId, ownerId, passwordHash, emailVerified, accountStatus, billing state, audit fields, or security flags. These fields should be controlled by server-side workflows with clear authorization rules.\n\nNested writes, upsert, connectOrCreate, and relation changes deserve careful review. They can create or connect related records in ways that are not obvious from the top-level route name. A nested write should not create relationships the caller is not allowed to create. An upsert should match real business uniqueness expectations. A connectOrCreate path should not let a caller attach themselves to another tenant, project, account, or privileged object because the relation logic was too broad.\n\nTransactions can help maintain consistency across multiple operations, but they do not automatically enforce security rules. Authorization, scoping, validation, and audit evidence still need to be designed into the transaction. Destructive operations should include authorization, scoped where conditions, confirmation logic where appropriate, and evidence for later review. Use database constraints and Prisma-level checks together. Constraints help protect integrity, while application logic explains who is allowed to make each change and why.",
+  "narrationPoints": [
+    "A profile update should not allow the caller to set role, permission, tenantId, ownerId, passwordHash, emailVerified, accountStatus, billing state, audit fields, or security flags.",
+    "A connectOrCreate path should not let a caller attach themselves to another tenant, project, account, or privileged object because the relation logic was too broad.",
+    "Authorization, scoping, validation, and audit evidence still need to be designed into the transaction.",
+    "Transactions can help maintain consistency across multiple operations, but they do not automatically enforce security rules.",
+    "Constraints help protect integrity, while application logic explains who is allowed to make each change and why.",
+    "A nested write should not create relationships the caller is not allowed to create."
+  ]
+};

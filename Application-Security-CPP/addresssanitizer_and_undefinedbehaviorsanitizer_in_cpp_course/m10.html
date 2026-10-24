@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Quiz | AddressSanitizer and UndefinedBehaviorSanitizer in C++</title>
+  <link rel="stylesheet" href="base.css?v=10-layout2">
+</head>
+<body data-course-id="addresssanitizer_and_undefinedbehaviorsanitizer_in_cpp">
+  <main id="main-content" class="main-content">
+    <div class="wrap">
+      <section
+        id="module-meta"
+        data-module="10"
+        data-total="10"
+        data-quiz="true"
+        aria-labelledby="module-title"
+      >
+      <header class="card title-card">
+        <h1 id="module-title" data-module-title-target>Loading assessment title...</h1>
+      </header>
+
+      <section id="quiz-assessment" class="card" aria-labelledby="quiz-heading">
+        <h2 id="quiz-heading">Assessment</h2>
+        <p>Answer every question. Passing score: 80%.</p>
+        <p id="quiz-configuration-error" role="alert" hidden></p>
+        <button id="show-last-review" type="button" hidden>View last feedback</button>
+        <form
+          id="quiz-form"
+          class="quiz-form"
+          data-passing-score="80"
+          data-answer-key='{&quot;q01&quot;:&quot;C&quot;,&quot;q02&quot;:&quot;A&quot;,&quot;q03&quot;:&quot;B&quot;,&quot;q04&quot;:&quot;D&quot;,&quot;q05&quot;:&quot;D&quot;,&quot;q06&quot;:&quot;C&quot;,&quot;q07&quot;:&quot;B&quot;,&quot;q08&quot;:&quot;B&quot;,&quot;q09&quot;:&quot;C&quot;,&quot;q10&quot;:&quot;A&quot;}'
+        >
+                    <fieldset class="quiz-question">
+            <legend>1. What is the main role of sanitizers in C++ development?</legend>
+            <label class="quiz-option"><input type="radio" name="q01" value="A" required><span>Sanitizers statically prove that every unexecuted path is free from security defects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="B" required><span>Sanitizers harden production binaries without changing build flags or runtime behavior.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="C" required><span>Sanitizers expose memory and undefined-behavior defects during exercised test paths with reports.</span></label>
+            <label class="quiz-option"><input type="radio" name="q01" value="D" required><span>Sanitizers replace code review because their reports identify every possible root cause.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>2. Which issue is AddressSanitizer commonly used to detect?</legend>
+            <label class="quiz-option"><input type="radio" name="q02" value="A" required><span>AddressSanitizer detects out-of-bounds access and many use-after-free defects during testing.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="B" required><span>AddressSanitizer primarily detects weak cryptographic algorithms selected by the application.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="C" required><span>AddressSanitizer proves that concurrent container operations are free from data races.</span></label>
+            <label class="quiz-option"><input type="radio" name="q02" value="D" required><span>AddressSanitizer validates that every integer conversion preserves its mathematical value.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>3. Which issue is UndefinedBehaviorSanitizer commonly used to detect?</legend>
+            <label class="quiz-option"><input type="radio" name="q03" value="A" required><span>UndefinedBehaviorSanitizer reports only heap leaks after the process exits normally.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="B" required><span>UndefinedBehaviorSanitizer can report signed overflow, invalid shifts, and misaligned access.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="C" required><span>UndefinedBehaviorSanitizer makes all undefined operations well-defined for production execution.</span></label>
+            <label class="quiz-option"><input type="radio" name="q03" value="D" required><span>UndefinedBehaviorSanitizer checks network authorization decisions rather than language semantics.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>4. Why are sanitizer builds usually separate from production release builds?</legend>
+            <label class="quiz-option"><input type="radio" name="q04" value="A" required><span>Sanitizer builds must match release optimization and linker settings exactly.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="B" required><span>Production builds cannot contain security hardening when a separate sanitizer build exists.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="C" required><span>Separate builds are needed because sanitizers accept only C source, not modern C++.</span></label>
+            <label class="quiz-option"><input type="radio" name="q04" value="D" required><span>Instrumentation adds overhead and diagnostics unsuitable for many production deployments.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>5. What should engineers look for when reading a sanitizer report?</legend>
+            <label class="quiz-option"><input type="radio" name="q05" value="A" required><span>Start with the final library frame because earlier application frames cannot be causal.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="B" required><span>Treat the first reported address as proof that the allocator itself is defective.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="C" required><span>Ignore allocation and deallocation stacks when the crash occurs during a later read.</span></label>
+            <label class="quiz-option"><input type="radio" name="q05" value="D" required><span>Start directly with the defect class, access site, lifetime history, and application frames.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>6. What is usually the best way to fix a sanitizer finding?</legend>
+            <label class="quiz-option"><input type="radio" name="q06" value="A" required><span>Suppress the report immediately so the existing behavior remains compatible with tests.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="B" required><span>Catch the sanitizer signal and continue using the potentially corrupted process state.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="C" required><span>Correct the ownership, bounds, or arithmetic contract and add a focused regression.</span></label>
+            <label class="quiz-option"><input type="radio" name="q06" value="D" required><span>Increase the affected buffer size without determining which calculation violated its bound.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>7. How should sanitizer checks fit into CI?</legend>
+            <label class="quiz-option"><input type="radio" name="q07" value="A" required><span>CI should accept sanitizer process failures because instrumentation commonly changes exit status.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="B" required><span>CI should run representative sanitizer builds and fail on unexpected sanitizer reports.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="C" required><span>Sanitizer tests belong only on developer laptops because their reports cannot be archived.</span></label>
+            <label class="quiz-option"><input type="radio" name="q07" value="D" required><span>One sanitized smoke test provides the same evidence as exercising boundary and error paths.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>8. When are suppressions most appropriate?</legend>
+            <label class="quiz-option"><input type="radio" name="q08" value="A" required><span>Suppressions are the preferred fix whenever a finding occurs in application-owned code.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="B" required><span>Suppressions are narrow, reviewed exceptions with owners for unavoidable external or tooling findings.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="C" required><span>A global suppression is safer than documenting the exact dependency and report signature.</span></label>
+            <label class="quiz-option"><input type="radio" name="q08" value="D" required><span>Suppressions prove the reported operation is defined by the C++ language standard.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>9. Why can sanitizers miss defects?</legend>
+            <label class="quiz-option"><input type="radio" name="q09" value="A" required><span>Sanitizers miss defects only when the compiler has optimization completely disabled.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="B" required><span>A clean sanitizer run proves that every possible input and thread schedule was exercised.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="C" required><span>Sanitizers observe executed, instrumented paths and may not cover all dependencies or defects.</span></label>
+            <label class="quiz-option"><input type="radio" name="q09" value="D" required><span>Sanitizers inspect uninstrumented shared libraries with the same coverage as application objects.</span></label>
+          </fieldset>
+          <fieldset class="quiz-question">
+            <legend>10. Which habit best supports effective sanitizer use?</legend>
+            <label class="quiz-option"><input type="radio" name="q10" value="A" required><span>Use reproducible tests, first-cause fixes, regression coverage, and reviewed suppressions throughout development.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="B" required><span>Run sanitizers only after a production incident to avoid slowing normal development.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="C" required><span>Fix the last stack frame first because sanitizer reports are ordered by code ownership.</span></label>
+            <label class="quiz-option"><input type="radio" name="q10" value="D" required><span>Use one sanitizer configuration because combining independent evidence creates conflicting results.</span></label>
+          </fieldset>
+          <button id="submit-quiz" type="submit">Submit Quiz</button>
+        </form>
+      </section>
+
+      <section id="quiz-review" class="quiz-review" aria-labelledby="review-heading" hidden>
+        <header class="card review-summary">
+          <h2 id="review-heading" tabindex="-1">Quiz feedback</h2>
+          <p id="quiz-result" class="review-score" role="status" aria-live="polite"></p>
+          <p id="review-save-status"></p>
+          <p>Review your choices and the explanation for every option. Passing score: 80%.</p>
+          <button type="button" data-retry-quiz>Try again</button>
+        </header>
+        <div id="review-questions"></div>
+        <div class="card"><button type="button" data-retry-quiz>Try again</button></div>
+      </section>
+
+      <nav class="nav module-nav" aria-label="Module navigation">
+        <a id="previous-module" class="btn secondary" href="#" data-preview-href="m09.html">Previous</a>
+      </nav>
+      <footer class="slide-status-footer" role="status" aria-live="polite">
+        <span id="lms-message">Connecting to LMS...</span> <span id="progress">Progress: in progress</span>
+      </footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="scorm-wrapper.js?v=10"></script>
+  <script src="quiz-engine.js?v=10"></script>
+  <script src="course_assets/course.js?v=10"></script>
+  <script src="course_assets/modules.js?v=10"></script>
+  <script src="course_assets/m10.js?v=10"></script>
+  <script src="navigation.js?v=10-layout2"></script>
+  <script src="base.js?v=10"></script>
+</body>
+</html>

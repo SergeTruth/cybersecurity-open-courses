@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Terraform state is operationally sensitive.
+
+2
+00:00:03.960 --> 00:00:15.640
+It maps configuration to real infrastructure and can include resource identifiers, dependency relationships, outputs, metadata, configuration details, and secret-adjacent values.
+
+3
+00:00:15.740 --> 00:00:22.540
+Even when sensitive values are marked carefully, state can still reveal how an environment is structured and which resources matter.
+
+4
+00:00:22.640 --> 00:00:28.000
+A helper script should treat state as a protected artifact, not as ordinary temporary output.
+
+5
+00:00:28.280 --> 00:00:32.040
+Backend protection is central to safe Terraform automation.
+
+6
+00:00:32.140 --> 00:00:41.340
+Remote state backends should have appropriate access control, encryption where applicable, locking, versioning, audit logs, and ownership.
+
+7
+00:00:41.440 --> 00:00:47.200
+Helper scripts should confirm that the expected backend is in use before planning or applying.
+
+8
+00:00:47.300 --> 00:00:56.660
+If backend initialization fails, state locking fails, or the backend does not match the expected environment, the script should stop rather than continue with uncertain state.
+
+9
+00:00:56.940 --> 00:01:02.460
+Local state, plan files, and generated output files also need careful handling.
+
+10
+00:01:02.560 --> 00:01:11.440
+They should not be left casually in shared directories, uploaded as broad CI/CD artifacts, committed to repositories, or printed into logs.
+
+11
+00:01:11.540 --> 00:01:17.540
+Plan files can contain sensitive details and can become stale if the environment changes after review.
+
+12
+00:01:17.640 --> 00:01:24.520
+Outputs may include identifiers, endpoints, policy names, or other details that help explain the environment.
+
+13
+00:01:24.620 --> 00:01:28.540
+Helper scripts should keep retention and access rules clear.
+
+14
+00:01:28.820 --> 00:01:32.900
+Logging should support operations without spreading sensitive data.
+
+15
+00:01:33.000 --> 00:01:40.920
+It is useful to record the environment, workspace, backend category, action, result, and relevant high-level status.
+
+16
+00:01:41.020 --> 00:01:49.900
+It is usually not useful to dump large portions of state, raw plan details, sensitive outputs, provider credentials, or environment variables into logs.
+
+17
+00:01:50.000 --> 00:01:57.840
+Secure Terraform helper scripts protect state, handle artifacts deliberately, and fail safely when state protections are not available.

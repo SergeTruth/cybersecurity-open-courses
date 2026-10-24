@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.900
+Configuration parsers need tests for both acceptance and rejection paths.
+
+2
+00:00:05.000 --> 00:00:20.600
+A test suite should include valid minimal configuration, valid full configuration, missing required fields, optional fields, defaults, duplicate keys, duplicate sections, unknown keys, deprecated settings, and versioned formats.
+
+3
+00:00:20.880 --> 00:00:24.240
+Malformed syntax should be exercised deliberately.
+
+4
+00:00:24.340 --> 00:00:40.020
+Tests should cover missing delimiters, incomplete sections, invalid quoting, unexpected binary data at a high level, embedded null bytes where relevant, invalid encodings for the expected format, overly long lines, and oversized files.
+
+5
+00:00:40.120 --> 00:00:43.480
+These cases keep loader and parser assumptions visible.
+
+6
+00:00:43.760 --> 00:00:45.360
+Boundary values matter.
+
+7
+00:00:45.460 --> 00:00:54.580
+Numeric fields should test minimums, maximums, just-outside values, units, overflow-adjacent calculations, and invalid leftover text.
+
+8
+00:00:54.680 --> 00:01:01.640
+String fields should test empty values, maximum lengths, unexpected characters, and invalid list items.
+
+9
+00:01:01.920 --> 00:01:04.720
+Regression tests preserve parser decisions.
+
+10
+00:01:04.820 --> 00:01:10.340
+When a parser bug is fixed, add a test for the old behavior and the intended result.
+
+11
+00:01:10.440 --> 00:01:18.200
+Configuration formats tend to live for years, and tests help keep compatibility and rejection behavior stable across refactors.
+
+12
+00:01:18.480 --> 00:01:28.880
+Compiler warnings, static analysis, sanitizers, and high-level input-generation workflows can reveal missed checks, memory mistakes, and untested paths.
+
+13
+00:01:28.980 --> 00:01:37.700
+Code review should still verify the schema, precedence order, sensitive setting handling, failure behavior, and the separation between parse and apply.

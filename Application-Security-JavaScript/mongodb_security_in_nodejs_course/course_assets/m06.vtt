@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:07.540
+Authentication identifies the caller, but authorization decides which documents and operations that caller may access.
+
+2
+00:00:07.640 --> 00:00:19.960
+MongoDB-backed applications need object-level authorization for protected reads, updates, deletes, exports, aggregations, downloads, and administrative actions.
+
+3
+00:00:20.060 --> 00:00:23.180
+It is not enough to confirm that a route requires login.
+
+4
+00:00:23.280 --> 00:00:32.160
+If the request asks for a document by ID, the query or service logic must confirm that the caller is allowed to access that specific document.
+
+5
+00:00:32.440 --> 00:00:41.880
+Multi-tenant systems need server-side tenant boundaries in normal queries, aggregation pipelines, exports, admin tools, and background jobs.
+
+6
+00:00:41.980 --> 00:00:46.700
+Avoid trusting tenant IDs supplied by the client as proof of access.
+
+7
+00:00:46.800 --> 00:00:55.840
+The server should derive tenant context from authenticated identity, authorization rules, or trusted service context, then include that boundary consistently.
+
+8
+00:00:55.940 --> 00:01:05.060
+Aggregation pipelines deserve extra attention because an early missing match stage or a later broad lookup can expose more data than a simple find operation would.
+
+9
+00:01:05.340 --> 00:01:09.260
+Data exposure is also about fields, not only documents.
+
+10
+00:01:09.360 --> 00:01:25.040
+Return the fields needed for the caller and use case, and avoid leaking password hashes, reset tokens, API tokens, internal notes, security flags, audit-only fields, billing metadata, or operational details.
+
+11
+00:01:25.140 --> 00:01:30.420
+Projections, serializers, DTOs, and response mapping can help.
+
+12
+00:01:30.520 --> 00:01:38.920
+The important habit is to treat document existence, document access, and field visibility as separate decisions that must all be enforced server-side.

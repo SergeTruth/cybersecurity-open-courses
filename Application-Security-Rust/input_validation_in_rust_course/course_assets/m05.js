@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "Web and API Validation",
+  "narration": "Rust web frameworks such as Axum and Actix Web provide request extractors and routing tools that make API development efficient. Extractors can parse path parameters, query parameters, headers, JSON bodies, and other request data into typed structures. That is a helpful first step, but the application still needs to validate whether the extracted values are allowed for the endpoint and the current user, tenant, workflow, and business context.\n\nTransport validation and domain validation should remain separate concerns. Transport validation checks the request shape: required fields, formats, lengths, ranges, and unknown fields. Domain validation checks meaning: whether the account can perform the action, whether the state transition is allowed, whether the time window is still open, or whether a quantity is permitted. Mixing those concerns too tightly makes validation harder to test and reuse.\n\nAuthentication-related inputs need particular care. Headers, cookies, bearer tokens, session identifiers, redirect targets, and user-supplied IDs should be parsed and constrained before they influence access decisions. Validation does not replace authentication or authorization. It supports them by ensuring that the values passed into security logic have expected forms and cannot smuggle in unrelated fields or ambiguous encodings.\n\nValidation error responses should be predictable and safe. A legitimate client needs to know that a field is missing, a value is unsupported, or a payload is too large. It does not need stack traces, internal type names, secrets, or sensitive implementation details. Server-side enforcement remains the authority because clients can be bypassed, outdated, modified, or simply wrong. Rust helps keep the enforcement code explicit.",
+  "graphicAlt": "Extracted API input passes transport and domain validation plus separate authorization, with safe error responses.",
+  "narrationPoints": [
+    "Rust web frameworks such as Axum and Actix Web provide request extractors and routing tools that make API development efficient.",
+    "Transport validation and domain validation should remain separate concerns.",
+    "Authentication-related inputs need particular care.",
+    "Validation error responses should be predictable and safe."
+  ]
+};

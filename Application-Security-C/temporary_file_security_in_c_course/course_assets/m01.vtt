@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.100
+Temporary files are often created for convenience, but they are still real resources with real consequences.
+
+2
+00:00:06.200 --> 00:00:17.640
+A temporary file can contain intermediate data, staging output, cached results, generated reports, diagnostics, or content being handed from one component to another.
+
+3
+00:00:17.740 --> 00:00:28.460
+If that file is placed, opened, shared, or cleaned up carelessly, it can affect confidentiality, integrity, reliability, and operational behavior.
+
+4
+00:00:28.740 --> 00:00:31.460
+The word temporary can be misleading.
+
+5
+00:00:31.560 --> 00:00:37.400
+Temporary does not automatically mean private, short-lived, safely named, or unrecoverable.
+
+6
+00:00:37.500 --> 00:00:44.460
+A file can remain after a crash, appear in a backup, be observed by another process, or be reused by later code.
+
+7
+00:00:44.560 --> 00:00:51.680
+C programs need explicit decisions about where temporary files live, who owns them, which permissions apply, and when they are removed.
+
+8
+00:00:51.960 --> 00:00:55.240
+Temporary-file handling is a trust-boundary problem.
+
+9
+00:00:55.340 --> 00:01:06.220
+The program may be interacting with shared directories, environment-derived paths, user-selected locations, service accounts, deployment-specific permissions, or platform-specific file behavior.
+
+10
+00:01:06.320 --> 00:01:10.480
+Safe design starts by selecting the directory and creation method intentionally.
+
+11
+00:01:10.760 --> 00:01:13.560
+Cleanup should be planned at the same time as creation.
+
+12
+00:01:13.660 --> 00:01:21.500
+A temporary file's lifecycle includes creation, writing, reading, validation, finalization, and removal.
+
+13
+00:01:21.600 --> 00:01:31.680
+Failure paths, retries, and abnormal termination should be considered early instead of patched in after leftover files are found in production.
+
+14
+00:01:31.960 --> 00:01:36.200
+A useful mindset is to treat each temporary file as an owned asset.
+
+15
+00:01:36.300 --> 00:01:46.700
+It should have a purpose, an owner, a trusted location, a permission model, a sensitivity decision, a cleanup path, and tests that prove the intended behavior.

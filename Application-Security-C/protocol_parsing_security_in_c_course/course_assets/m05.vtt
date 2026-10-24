@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.500
+Protocol numeric fields often define exact widths, signedness, and byte order.
+
+2
+00:00:06.600 --> 00:00:14.120
+A field may be a 16-bit unsigned network-order value, a 32-bit length, a sequence number, a count, or an identifier.
+
+3
+00:00:14.220 --> 00:00:20.540
+The parser should decode those fields deliberately from bytes rather than relying on host layout or casts.
+
+4
+00:00:20.820 --> 00:00:22.900
+Endianness is part of the protocol contract.
+
+5
+00:00:23.000 --> 00:00:27.720
+If the protocol defines a byte order, the parser should apply it consistently on every platform.
+
+6
+00:00:27.820 --> 00:00:35.660
+Directly interpreting raw bytes through local C types hides that decision and can introduce portability and alignment problems.
+
+7
+00:00:35.940 --> 00:00:41.460
+Lengths, counts, offsets, sequence numbers, and identifiers require range checks.
+
+8
+00:00:41.560 --> 00:00:46.360
+A length may be syntactically present but too large for the configured maximum.
+
+9
+00:00:46.460 --> 00:00:52.220
+A count may be reasonable by itself but impossible when multiplied by element size.
+
+10
+00:00:52.320 --> 00:00:56.960
+An offset may point inside a buffer while the range it describes extends beyond it.
+
+11
+00:00:57.240 --> 00:01:01.160
+Allocation and indexing math must account for overflow before use.
+
+12
+00:01:01.260 --> 00:01:11.020
+Multiplying counts by element sizes, adding headers to payload lengths, and advancing parser positions should be checked before allocating, copying, or deriving pointers.
+
+13
+00:01:11.120 --> 00:01:14.240
+The safe calculation comes before the memory operation.
+
+14
+00:01:14.520 --> 00:01:21.960
+Values that cannot be represented safely in local parser types should be rejected or handled through a defined safe path.
+
+15
+00:01:22.060 --> 00:01:29.180
+This is especially important when a protocol uses wider integers than the platform can comfortably use for memory sizes.
+
+16
+00:01:29.280 --> 00:01:32.080
+Clear limits are better than accidental conversion.

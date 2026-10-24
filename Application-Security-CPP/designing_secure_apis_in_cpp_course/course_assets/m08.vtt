@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.180
+An API's first release is not the only security moment.
+
+2
+00:00:04.280 --> 00:00:13.000
+Changes to defaults, overloads, validation, error handling, ownership, and compatibility behavior can alter assumptions at many call sites.
+
+3
+00:00:13.280 --> 00:00:14.800
+Versioning should be deliberate.
+
+4
+00:00:14.900 --> 00:00:23.780
+If an older pattern is unsafe or unclear, deprecate it with a migration path rather than leaving callers to discover safer behavior by chance.
+
+5
+00:00:24.060 --> 00:00:27.340
+Compatibility should not silently weaken security.
+
+6
+00:00:27.440 --> 00:00:37.360
+A new version should not accept ambiguous inputs, relax validation, broaden authority, or hide failures simply to avoid breaking callers without a reviewed policy.
+
+7
+00:00:37.640 --> 00:00:42.840
+Migration wrappers can help when they narrow behavior and make old assumptions visible.
+
+8
+00:00:42.940 --> 00:00:46.940
+They become risky when they preserve unsafe defaults forever.
+
+9
+00:00:47.220 --> 00:00:56.340
+Testing should include valid calls, invalid calls, denied access, boundary sizes, resource limits, and failure paths.
+
+10
+00:00:56.440 --> 00:01:05.800
+Parser-like APIs or structured input boundaries may benefit from defensive fuzzing at a high level to exercise unusual shapes.
+
+11
+00:01:06.080 --> 00:01:07.920
+Tooling supports review.
+
+12
+00:01:08.020 --> 00:01:20.100
+Compiler warnings, sanitizers, static analysis, API review checklists, documentation review, and targeted tests all help catch interface changes that could spread risk.
+
+13
+00:01:20.380 --> 00:01:22.620
+Document compatibility behavior.
+
+14
+00:01:22.720 --> 00:01:32.960
+Callers should know which defaults changed, which overloads are deprecated, which errors are new, and how to migrate without weakening validation or authority boundaries.
+
+15
+00:01:33.240 --> 00:01:35.800
+Feature flags should be handled carefully.
+
+16
+00:01:35.900 --> 00:01:44.140
+A flag that changes validation, authorization, or failure behavior should be visible, documented, and tested in both states.
+
+17
+00:01:44.420 --> 00:01:48.980
+Review new overloads as new APIs, not as harmless convenience.
+
+18
+00:01:49.080 --> 00:01:54.760
+They may accept broader types, skip validation, or make an unsafe path easier to call.
+
+19
+00:01:55.040 --> 00:02:01.520
+Changelogs should name security-relevant behavior changes plainly so downstream maintainers can update assumptions.
+
+20
+00:02:01.800 --> 00:02:07.560
+A good workflow treats API evolution as design maintenance, not only as compatibility bookkeeping.

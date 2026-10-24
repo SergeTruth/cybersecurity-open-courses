@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+Ownership and lifetime rules are central to secure C++ API design.
+
+2
+00:00:05.320 --> 00:00:12.760
+An interface should make it clear who owns an object, who may borrow it, who may store access, and who is responsible for cleanup.
+
+3
+00:00:13.040 --> 00:00:15.360
+RAII is the preferred foundation.
+
+4
+00:00:15.460 --> 00:00:24.100
+Resource-owning objects should clean up through destructors, and APIs should avoid hidden ownership transfer that callers cannot see from the type or name.
+
+5
+00:00:24.380 --> 00:00:28.780
+std::unique_ptr communicates exclusive ownership transfer.
+
+6
+00:00:28.880 --> 00:00:36.080
+std::shared_ptr should indicate intentional shared lifetime, not uncertainty about who owns the object.
+
+7
+00:00:36.180 --> 00:00:41.380
+std::weak_ptr is useful for observation when shared ownership already exists.
+
+8
+00:00:41.660 --> 00:00:44.700
+References are good for short-lived required borrows.
+
+9
+00:00:44.800 --> 00:00:50.320
+Raw pointers can represent optional non-owning access when the convention is clear.
+
+10
+00:00:50.420 --> 00:00:58.340
+Whatever pattern is chosen, the API should not leave callers guessing whether they must delete, retain, or avoid storing the value.
+
+11
+00:00:58.620 --> 00:01:06.140
+View types such as std::span can safely express bounded non-owning data only when the source lifetime is clear.
+
+12
+00:01:06.240 --> 00:01:10.960
+An API that stores a view must document and enforce how long the source remains valid.
+
+13
+00:01:11.240 --> 00:01:13.240
+Callbacks need lifetime contracts.
+
+14
+00:01:13.340 --> 00:01:25.420
+If a callback may run later, on another thread, or after the registering object changes state, the API must define what may be captured, when callbacks stop, and how unregistration works.
+
+15
+00:01:25.700 --> 00:01:28.660
+Resource boundaries should be boring and obvious.
+
+16
+00:01:28.760 --> 00:01:38.520
+A secure API makes cleanup responsibility visible, avoids surprise retention, and preserves valid lifetime relationships across normal and failure paths.
+
+17
+00:01:38.800 --> 00:01:43.280
+Handle types can help when resources are managed by a subsystem.
+
+18
+00:01:43.380 --> 00:01:50.020
+A handle should have clear validity rules, close behavior, move behavior, and thread-safety expectations.
+
+19
+00:01:50.300 --> 00:01:54.140
+Avoid APIs that accept a pointer and later store it without saying so.
+
+20
+00:01:54.240 --> 00:01:58.240
+That pattern turns a short borrow into an implicit lifetime requirement.
+
+21
+00:01:58.520 --> 00:02:07.720
+Reviewers should trace every object crossing the boundary and ask whether its owner, borrower, cleanup path, and storage policy are visible.

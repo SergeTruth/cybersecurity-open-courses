@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.100
+Build environments are part of the trusted build system.
+
+2
+00:00:04.200 --> 00:00:21.240
+Hosted runners, self-hosted runners, ephemeral workers, persistent machines, build containers, virtual machines, operating-system images, compiler versions, linker behavior, package caches, and platform SDKs can all influence the artifact.
+
+3
+00:00:21.340 --> 00:00:25.580
+A release is only as understandable as the environment that produced it.
+
+4
+00:00:25.680 --> 00:00:30.880
+That makes runner configuration a release engineering concern, not background infrastructure.
+
+5
+00:00:30.980 --> 00:00:34.660
+Runner changes should be reviewed when they affect release jobs.
+
+6
+00:00:34.940 --> 00:00:38.540
+C++ builds are especially sensitive to toolchain detail.
+
+7
+00:00:38.640 --> 00:00:54.480
+Compiler flags, linker flags, build type, standard library, runtime libraries, architecture, SDK version, optimization level, debug or release configuration, optional features, and generated code can all change behavior.
+
+8
+00:00:54.580 --> 00:00:59.860
+Two builds from the same source can differ meaningfully if the environment is not controlled or documented.
+
+9
+00:00:59.960 --> 00:01:03.720
+This is why release notes should capture important build environment changes.
+
+10
+00:01:04.000 --> 00:01:05.840
+Runner hygiene matters.
+
+11
+00:01:05.940 --> 00:01:15.700
+Stale machines, shared workspaces, uncontrolled caches, leftover artifacts, and unknown tools can make builds difficult to reproduce and investigate.
+
+12
+00:01:15.800 --> 00:01:26.360
+Where practical, use isolated or ephemeral workers, clean workspaces between jobs, restrict persistent state, and define how caches are keyed, populated, and cleared.
+
+13
+00:01:26.460 --> 00:01:32.940
+If persistent runners are required, treat their maintenance, patching, and inventory as part of the pipeline.
+
+14
+00:01:33.220 --> 00:01:38.340
+Secure pipelines do not require every environment to be identical forever, but they should make differences visible.
+
+15
+00:01:38.440 --> 00:01:48.280
+Pin or document toolchain versions, record image versions, review build image changes, and test platform-specific builds in the configurations users actually receive.
+
+16
+00:01:48.380 --> 00:01:53.660
+That gives release engineers and responders a reliable picture of how the native artifact was created.
+
+17
+00:01:53.760 --> 00:02:00.720
+It also makes planned toolchain upgrades less disruptive because the old and new states can be compared before release approval and rollback planning.
+
+18
+00:02:00.820 --> 00:02:03.860
+Environment records should be retained with the artifact.

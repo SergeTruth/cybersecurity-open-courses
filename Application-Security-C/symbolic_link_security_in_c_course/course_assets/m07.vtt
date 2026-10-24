@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:10.180
+Permissions and ownership shape symbolic-link safety because they determine who can create, replace, read, modify, or remove filesystem entries.
+
+2
+00:00:10.280 --> 00:00:14.920
+A link-aware design still needs directory permissions that match the trust model.
+
+3
+00:00:15.200 --> 00:00:18.240
+Least privilege reduces the impact of mistakes.
+
+4
+00:00:18.340 --> 00:00:22.900
+Code that does not need broad filesystem access should not run with it.
+
+5
+00:00:23.000 --> 00:00:29.320
+Services should have clear filesystem scope, and helper processes should operate with only the access needed for their role.
+
+6
+00:00:29.600 --> 00:00:33.280
+Privileged contexts require extra care.
+
+7
+00:00:33.380 --> 00:00:41.940
+A higher-privilege program may process paths supplied by lower-trust users, configuration, automation, or service inputs.
+
+8
+00:00:42.040 --> 00:00:49.160
+The program should not let a less trusted path string determine access to resources that the path source could not normally reach.
+
+9
+00:00:49.440 --> 00:00:52.080
+Ownership checks should match the operation.
+
+10
+00:00:52.180 --> 00:01:00.740
+Reading a file, replacing a file, deleting a file, writing inside a directory, and traversing a tree all have different ownership and permission questions.
+
+11
+00:01:00.840 --> 00:01:05.480
+A single check is rarely enough to answer every operation.
+
+12
+00:01:05.760 --> 00:01:09.520
+Inherited privileges and service accounts should be documented.
+
+13
+00:01:09.620 --> 00:01:18.660
+Reviewers should know which account runs the code, which directories it can modify, which directories are shared, and which paths come from lower-trust sources.
+
+14
+00:01:18.760 --> 00:01:22.760
+File-handling design is much easier when privilege boundaries are explicit.

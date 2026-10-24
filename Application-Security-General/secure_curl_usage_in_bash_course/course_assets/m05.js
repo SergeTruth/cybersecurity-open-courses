@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Headers, Tokens, and Secret Handling",
+  "graphicAlt": "Controlled secret delivery feeds a scoped request while only redacted metadata reaches logs.",
+  "narration": "Many curl scripts send credentials through authorization headers, API tokens, session values, client certificates, signed request data, or service-specific secret headers. Those values are sensitive even when the script is internal and even when the target service belongs to the same organization.\n\nSecrets can leak in more places than developers expect. They may appear in shell history, process listings, CI/CD logs, debug traces, environment dumps, support bundles, copied terminal output, or failure messages. A script that is safe during a happy path can still disclose a token during troubleshooting.\n\nAvoid hard-coded credentials in scripts. Use approved secret-management or runtime-injection mechanisms where practical. Keep the secret scoped to the job that needs it, and avoid passing sensitive values to child processes, helper tools, or logs that do not need them.\n\nHeaders deserve the same care as payloads. An authorization header, session header, tenant identifier, or signed request value may reveal access or internal structure. Logging should show enough context to debug the request without printing secrets. Redaction should be deliberate, not an afterthought.\n\nDebugging should be scoped and temporary. Verbose request output can be helpful, but it may include headers, response bodies, or connection details that should not be stored broadly. Debug settings should be turned on only when needed and reviewed before being used in shared CI/CD logs.\n\nSecret handling is part of the curl design. The script should define how secrets enter, where they are used, how they are redacted, and what evidence remains after the request. That discipline reduces accidental disclosure while preserving operational visibility.",
+  "narrationPoints": [
+    "Many curl scripts send credentials through authorization headers, API tokens, session values, client certificates, signed request data, or service-specific secret headers.",
+    "Secrets can leak in more places than developers expect.",
+    "Use approved secret-management or runtime-injection mechanisms where practical.",
+    "An authorization header, session header, tenant identifier, or signed request value may reveal access or internal structure.",
+    "Verbose request output can be helpful, but it may include headers, response bodies, or connection details that should not be stored broadly.",
+    "Secret handling is part of the curl design."
+  ]
+};

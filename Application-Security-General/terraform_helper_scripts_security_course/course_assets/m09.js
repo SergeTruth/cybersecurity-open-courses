@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Course Summary: Terraform Helper Script Checklist",
+  "graphicAlt": "Validated scope, limited authority, protected artifacts and reviewed changes are supported by monitoring and recovery planning.",
+  "narration": "Terraform helper-script security is a repeatable engineering practice. Start by validating scope before action. Confirm the workspace, backend, state location, cloud account, project, tenant, subscription, region, repository path, variable files, and intended environment. Do not rely on whichever directory, profile, workspace, or backend happens to be active when the script starts.\n\nUse scoped identities and protect credentials. Separate validation, planning, applying, importing, recovery, and administration where the platform and process support it. Deliver credentials through approved mechanisms, avoid shared broad administrator access, and review, rotate, and revoke Terraform automation access over time. Treat credentials as operational authority, not as invisible setup.\n\nInvoke Terraform from Bash with fixed, reviewable patterns. Quote values, use arrays where helpful, validate paths and environment names, control working directories, check results, and stop on failures. Protect state, plan files, outputs, and logs. Review modules, providers, variables, generated configuration, defaults, and remote sources because those inputs can change infrastructure behavior.\n\nFinally, make high-impact change deliberate. Review plans before production applies, connect reviewed plans to applied changes, and use CI/CD gates that match the environment risk. Monitor failed runs, drift, lock failures, unusual identities, and unexpected changes. Prepare recovery steps before they are needed. Secure Terraform helper scripts are scoped, least-privileged, reviewed, observable, recoverable, and safe to operate.",
+  "narrationPoints": [
+    "Terraform helper-script security is a repeatable engineering practice.",
+    "Separate validation, planning, applying, importing, recovery, and administration where the platform and process support it.",
+    "Invoke Terraform from Bash with fixed, reviewable patterns.",
+    "Review plans before production applies, connect reviewed plans to applied changes, and use CI/CD gates that match the environment risk.",
+    "Confirm the workspace, backend, state location, cloud account, project, tenant, subscription, region, repository path, variable files, and intended environment.",
+    "Do not rely on whichever directory, profile, workspace, or backend happens to be active when the script starts."
+  ]
+};

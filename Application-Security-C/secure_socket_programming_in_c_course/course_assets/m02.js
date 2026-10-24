@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Socket Lifecycle and Resource Ownership",
+  "graphicAlt": "An explicit owner manages configuration, communication and final socket cleanup.",
+  "narration": "Socket code has a lifecycle. A program creates a descriptor or handle, configures it, binds or connects it, reads and writes through it, shuts it down when communication is finished, closes it, and cleans up any associated state. Security and reliability improve when that lifecycle is explicit rather than scattered across unrelated helper functions.\n\nEvery successful socket creation should have a clear owner. That owner is responsible for closing the descriptor, releasing buffers, unregistering event-loop state, and handling errors. In a simple function this may be obvious. In a threaded service, event-driven server, or helper-based codebase, ownership can become unclear quickly unless it is documented and reflected in the code structure.\n\nError paths need the same discipline as the successful path. If configuration fails after socket creation, the descriptor should be closed. If accepting a connection succeeds but allocating connection state fails, the accepted descriptor should not leak. If a worker thread takes ownership, the handoff should be visible and single-owner behavior should remain clear.\n\nShutdown and close behavior should be deliberate. A program may need to signal that it will not send more data, continue reading remaining data, or close immediately because the peer violated the protocol. The right behavior depends on the protocol and platform, but it should be a conscious choice rather than an accidental side effect.\n\nSocket options also deserve review. Options related to reuse, buffering, blocking mode, keepalive, timeouts, address families, and inheritance can change security and reliability behavior. Reviewers should be able to understand why each option is set and how it supports the intended lifecycle.",
+  "narrationPoints": [
+    "Security and reliability improve when that lifecycle is explicit rather than scattered across unrelated helper functions.",
+    "Every successful socket creation should have a clear owner.",
+    "If a worker thread takes ownership, the handoff should be visible and single-owner behavior should remain clear.",
+    "The right behavior depends on the protocol and platform, but it should be a conscious choice rather than an accidental side effect.",
+    "Reviewers should be able to understand why each option is set and how it supports the intended lifecycle."
+  ]
+};

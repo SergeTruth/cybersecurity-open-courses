@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Configuration as Input",
+  "graphicAlt": "Configuration sources cross validation before affecting runtime resources and behavior.",
+  "narration": "Configuration is input. It may look less dynamic than a command-line argument or network message, but it can still control program behavior, memory use, resource access, logging, network behavior, feature flags, and security posture. A configuration value can change what files are opened, which services are contacted, how much memory is allocated, or which protections are enabled.\n\nConfiguration can come from many places: local files, generated files, deployment systems, packages, environment variables, administrator edits, defaults compiled into the program, or settings loaded from a previous run. Some of those sources feel internal, but they are still data crossing a boundary into code that will rely on them.\n\nDefensive parsing is important because configuration often lives longer than the code that first wrote it. A file may survive upgrades, manual edits, migrations, packaging changes, or automation mistakes. If a parser assumes the file is always complete, small, well encoded, and perfectly shaped, later maintenance becomes fragile.\n\nConfiguration validation should happen before values affect memory operations, resource changes, logging, feature state, or security-sensitive decisions. The parser should define the expected keys, types, lengths, ranges, formats, defaults, and failure behavior before applying settings.\n\nThe practical mindset is simple: configuration is not trusted just because it is local or intended for administrators. It becomes usable after it has been loaded safely, parsed predictably, validated against an explicit contract, and applied in a controlled order.",
+  "narrationPoints": [
+    "A configuration value can change what files are opened, which services are contacted, how much memory is allocated.",
+    "Some of those sources feel internal, but they are still data crossing a boundary into code that will rely on them.",
+    "Defensive parsing is important because configuration often lives longer than the code that first wrote it.",
+    "Configuration validation should happen before values affect memory operations, resource changes, logging, feature state.",
+    "The practical mindset is simple: configuration is not trusted just because it is local or intended for administrators."
+  ]
+};

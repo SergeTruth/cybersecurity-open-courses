@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Why Key Management Matters in Node.js",
+  "graphicAlt": "A governed key connects to clear ownership, scoped use, tested rotation and recovery responsibilities.",
+  "narration": "A Node.js service may encrypt sensitive fields, sign JWTs, verify webhooks, connect to cloud services, and authenticate to databases. At first, the keys live in a local .env file because the team is trying to move quickly. Later, copies appear in CI/CD variables, Docker build contexts, developer machines, support tickets, logs, and emergency notes. The algorithm may still be strong, but the key lifecycle has escaped control.\n\nKeys are high-value assets because they unlock data, prove identity, authorize actions, or validate trust. A symmetric encryption key can reveal protected records. A JWT signing key can mint trusted claims. An HMAC key can validate integration messages. A TLS private key can impersonate a service. A cloud credential can reach infrastructure. These values deserve more structure than a random string pasted into configuration.\n\nKey management includes generation, storage, access control, use, rotation, revocation, backup, recovery, monitoring, and destruction. It is not solved by one environment variable, one secret manager, one KMS call, one Node.js crypto API, or one snippet from a wiki. Those tools can help, but only when the system defines ownership, scope, access, and response behavior.\n\nThe goal is to make key use intentional, scoped, protected, observable, and recoverable. The team should know what each key protects, who can use it, where it lives, how it is delivered to runtime, how it rotates, and what happens if it leaks. Strong cryptography fails quickly when keys are generated poorly, stored carelessly, reused across purposes, logged accidentally, or impossible to revoke.",
+  "narrationPoints": [
+    "js service may encrypt sensitive fields, sign JWTs, verify webhooks, connect to cloud services, and authenticate to databases.",
+    "Keys are high-value assets because they unlock data, prove identity, authorize actions, or validate trust.",
+    "Key management includes generation, storage, access control, use, rotation, revocation, backup, recovery, monitoring, and destruction.",
+    "The team should know what each key protects, who can use it, where it lives, how it is delivered to runtime, how it rotates, and what happens if it leaks.",
+    "The goal is to make key use intentional, scoped, protected, observable, and recoverable.",
+    "The algorithm may still be strong, but the key lifecycle has escaped control."
+  ]
+};

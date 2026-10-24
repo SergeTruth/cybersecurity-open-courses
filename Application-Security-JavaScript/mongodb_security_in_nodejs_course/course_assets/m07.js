@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secrets, Sensitive Data, and Encryption",
+  "graphicAlt": "Transport, storage and selected-field protection are distinct controls supported by owned keys and controlled logging and retention.",
+  "narration": "MongoDB credentials, connection strings, certificates, private keys, cloud credentials, and application secrets should be protected through approved secrets management. Do not hardcode them in source code, committed environment files, frontend bundles, container images, logs, tickets, screenshots, or documentation. Separate credentials by environment and purpose, use least privilege, and rotate credentials when they are exposed, inherited by the wrong system, or no longer needed.\n\nSensitive data protection is a lifecycle. A field may be encrypted at rest in the database but still leak through application logs, debug traces, support exports, analytics copies, backups, or test fixtures. Classify sensitive fields and decide how each should be stored, indexed, logged, encrypted, retained, and deleted. Do not log entire documents merely because it is convenient during debugging. Avoid logging tokens, cookies, authorization headers, connection strings, credentials, and unnecessary personal data.\n\nEncryption choices involve tradeoffs. TLS protects data in transit according to the deployment model. Storage-level and backup encryption help reduce exposure if infrastructure storage is accessed directly. Field-level or application-level encryption may be appropriate for highly sensitive fields, but it introduces key management, query limitations, rotation requirements, and recovery risk. Losing keys can mean losing access to data. Encryption is valuable when paired with access control, key ownership, operational procedures, and careful application design.",
+  "narrationPoints": [
+    "MongoDB credentials, connection strings, certificates, private keys, cloud credentials, and application secrets should be protected through approved secrets management.",
+    "Avoid logging tokens, cookies, authorization headers, connection strings, credentials, and unnecessary personal data.",
+    "Field-level or application-level encryption may be appropriate for highly sensitive fields, but it introduces key management, query limitations, rotation requirements, and recovery risk.",
+    "Separate credentials by environment and purpose, use least privilege, and rotate credentials when they are exposed, inherited by the wrong system, or no longer needed.",
+    "Storage-level and backup encryption help reduce exposure if infrastructure storage is accessed directly.",
+    "Encryption is valuable when paired with access control, key ownership, operational procedures, and careful application design."
+  ]
+};

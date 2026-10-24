@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+A Bash script should invoke curl in a way that is easy to review and test.
+
+2
+00:00:05.480 --> 00:00:18.280
+The executable, stable options, URL, headers, method, payload source, output destination, timeout, and retry behavior should be visible as separate parts of the request design.
+
+3
+00:00:18.560 --> 00:00:22.800
+Avoid building one large curl command string from variable data.
+
+4
+00:00:22.900 --> 00:00:29.540
+Command strings are difficult to review because they mix data, options, quoting rules, and shell syntax.
+
+5
+00:00:29.640 --> 00:00:35.400
+They also tempt later re-parsing, which makes it harder to prove what curl will actually receive.
+
+6
+00:00:35.680 --> 00:00:39.120
+Arrays are useful for curl options and operands.
+
+7
+00:00:39.220 --> 00:00:46.660
+A script can define fixed options, append validated optional values, and pass the array while preserving argument boundaries.
+
+8
+00:00:46.760 --> 00:00:52.840
+This approach is clearer than manually adding quotes inside a generated command line.
+
+9
+00:00:53.120 --> 00:00:55.520
+Quote values that should remain literal.
+
+10
+00:00:55.620 --> 00:01:08.020
+URLs, header values, file paths, output paths, request data values, and method names should not accidentally split into multiple arguments or become shell syntax.
+
+11
+00:01:08.120 --> 00:01:14.520
+Validation decides whether a value is allowed; quoting and arrays preserve the value during invocation.
+
+12
+00:01:14.800 --> 00:01:23.920
+Inputs that affect methods, headers, files, timeouts, redirects, retries, and output locations should be validated before curl runs.
+
+13
+00:01:24.020 --> 00:01:28.820
+A target environment label can map to a known API base URL.
+
+14
+00:01:28.920 --> 00:01:31.960
+A supported method can be selected from a small set.
+
+15
+00:01:32.060 --> 00:01:36.060
+A download path can be checked against approved directories.
+
+16
+00:01:36.340 --> 00:01:39.620
+The goal is a request that another engineer can inspect.
+
+17
+00:01:39.720 --> 00:01:49.560
+If the script makes clear which options are fixed, which values vary, and what validation protects them, curl automation becomes easier to maintain and safer to operate.

@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.900
+A check-then-use mistake happens when code makes a decision about a path and later uses the same path as if the decision still describes the object.
+
+2
+00:00:09.000 --> 00:00:16.200
+Filesystem state can change between the check and the operation, especially in directories that are shared or otherwise modifiable.
+
+3
+00:00:16.480 --> 00:00:20.560
+Defensive design reduces the gap between decision and operation.
+
+4
+00:00:20.660 --> 00:00:33.220
+Validate close to the operation, avoid unnecessary repeated path resolution, and prefer workflows where the program opens or creates the object safely and then validates the object it actually has.
+
+5
+00:00:33.500 --> 00:00:36.380
+This is not only about hostile input.
+
+6
+00:00:36.480 --> 00:00:48.240
+Ordinary maintenance can create the same risk: a cleanup job runs at the same time, a deployment rotates directories, another component replaces a file, or a test changes the working tree.
+
+7
+00:00:48.340 --> 00:00:52.420
+If the program relies on stale path assumptions, it becomes fragile.
+
+8
+00:00:52.700 --> 00:00:57.260
+The review question is whether the validated thing is the same thing the program later uses.
+
+9
+00:00:57.360 --> 00:01:10.400
+If validation looks at one path resolution and the operation relies on a later path resolution, reviewers should ask whether a descriptor-first or directory-relative workflow would make the contract clearer.

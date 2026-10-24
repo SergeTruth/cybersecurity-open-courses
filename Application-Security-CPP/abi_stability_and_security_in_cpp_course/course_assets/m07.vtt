@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.140
+Every exported symbol can become part of a compatibility and maintenance surface.
+
+2
+00:00:05.240 --> 00:00:14.040
+If internal functions, types, or data are visible, downstream code may start using them even when they were never intended as public ABI.
+
+3
+00:00:14.140 --> 00:00:21.340
+Hidden symbols reduce accidental coupling, symbol collisions, and reliance on implementation details.
+
+4
+00:00:21.440 --> 00:00:26.880
+A smaller export surface is easier to review, test, and preserve across releases.
+
+5
+00:00:27.160 --> 00:00:30.040
+Versioning makes compatibility expectations visible.
+
+6
+00:00:30.140 --> 00:00:39.180
+API and ABI versions, symbol versions, versioned structs, and release notes help callers understand what changed and what remains supported.
+
+7
+00:00:39.280 --> 00:00:47.680
+Versioning should be paired with policy: which changes are backward compatible, which require rebuilding clients, and which are unsupported internal details.
+
+8
+00:00:47.780 --> 00:00:51.300
+Without policy, a version number is only decoration.
+
+9
+00:00:51.580 --> 00:00:56.460
+Dependencies can alter ABI behavior even when public source headers look similar.
+
+10
+00:00:56.560 --> 00:01:07.360
+Compiler versions, standard library versions, runtime library choices, build flags, structure packing, and dependency updates may affect binary compatibility.
+
+11
+00:01:07.460 --> 00:01:14.500
+Release review should inspect exported symbols, binary metadata, dependency changes, and compatibility notes.
+
+12
+00:01:14.600 --> 00:01:20.360
+ABI changes should be intentional, documented, and approved before they reach users.
+
+13
+00:01:20.460 --> 00:01:26.540
+A release process that ignores binary artifacts can miss exactly the changes that older callers depend on.
+
+14
+00:01:26.820 --> 00:01:36.500
+A practical release checklist should compare exported symbols against a known baseline, record dependency updates, and call out toolchain or runtime changes.
+
+15
+00:01:36.600 --> 00:01:46.120
+When a symbol is removed, renamed, or newly exposed, reviewers should decide whether that change is compatible, accidental, or a deliberate breaking release.
+
+16
+00:01:46.220 --> 00:01:52.300
+The value is not bureaucracy; it is making binary risk visible before customers discover it.

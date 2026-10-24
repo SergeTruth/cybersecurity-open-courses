@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secure Storage, Encryption, and Transfer Paths",
+  "graphicAlt": "Sensitive data moves through authenticated transfer to protected backup storage, with encryption keys governed separately.",
+  "narration": "Backups frequently contain the same sensitive data as production systems, and sometimes more. A single backup location may aggregate data across applications, environments, and time. That makes backup storage a security-critical system, not a casual file dump. Access to backup data can reveal historical records, deleted information, configuration details, and operational context that may no longer exist in the live system.\n\nBackup destinations should be selected and configured deliberately. Cloud storage, network shares, removable media, managed backup platforms, and local disks each create different operational risks. Review who can write backups, who can read them, who can change retention settings, who can delete or overwrite objects, and where access is logged. Avoid public or broadly accessible locations. Segment backup storage so one broad credential or one operator mistake does not expose every recovery set.\n\nEncryption may be required at rest, in transit, or both. In transit protection matters when data moves across networks or between systems. At rest protection matters when backup media, storage accounts, or disks could be accessed outside the intended workflow. Encryption keys should be protected separately from backup data. If keys are stored beside the backup with the same access controls, unauthorized access to the backup location may still expose the data.\n\nTransfer paths should be authenticated and monitored. The script should know where it is sending data and should use approved channels for the environment. Destination logging and review are valuable because backup access may be rare until an incident or audit. A secure backup design treats storage, transfer, and key management as part of one recovery system. Protecting only the source while ignoring the destination leaves the organization exposed.",
+  "narrationPoints": [
+    "Backups frequently contain the same sensitive data as production systems, and sometimes more.",
+    "Backup destinations should be selected and configured deliberately.",
+    "Encryption may be required at rest, in transit, or both.",
+    "The script should know where it is sending data and should use approved channels for the environment.",
+    "A single backup location may aggregate data across applications, environments, and time.",
+    "Access to backup data can reveal historical records, deleted information, configuration details, and operational context that may no longer exist in the live system."
+  ]
+};

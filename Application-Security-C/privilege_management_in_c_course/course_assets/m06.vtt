@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.020
+Some operations truly require privilege.
+
+2
+00:00:04.120 --> 00:00:13.240
+A program may need to open a protected file, update a controlled directory, communicate with a restricted service, bind a resource, or perform a maintenance action.
+
+3
+00:00:13.340 --> 00:00:17.260
+The defensive goal is not to pretend those operations do not exist.
+
+4
+00:00:17.360 --> 00:00:20.960
+The goal is to make them narrow, intentional, and reviewable.
+
+5
+00:00:21.240 --> 00:00:24.520
+Inputs should be validated before they reach the privileged operation.
+
+6
+00:00:24.620 --> 00:00:35.980
+If an operation uses a path, validate the trusted base location, expected ownership, allowed name shape, and required permissions before opening or modifying anything.
+
+7
+00:00:36.080 --> 00:00:40.480
+If an operation uses an identifier, verify it against trusted state.
+
+8
+00:00:40.580 --> 00:00:48.260
+If an operation accepts a requested action, map it to an allowlisted internal behavior instead of letting the caller choose broad behavior.
+
+9
+00:00:48.540 --> 00:00:50.700
+Avoid helpers that hide authority.
+
+10
+00:00:50.800 --> 00:01:02.880
+A function named process_request can become dangerous if it quietly reads trusted configuration, opens privileged files, starts child processes, writes logs, and changes state.
+
+11
+00:01:02.980 --> 00:01:06.580
+Reviewers should not have to guess where authority is used.
+
+12
+00:01:06.680 --> 00:01:12.200
+Prefer small functions with names and contracts that reveal when a privileged decision is being made.
+
+13
+00:01:12.480 --> 00:01:16.560
+Separate policy from execution without scattering responsibility.
+
+14
+00:01:16.660 --> 00:01:19.380
+Policy checks answer whether the operation is allowed.
+
+15
+00:01:19.480 --> 00:01:22.040
+Execution performs the constrained action.
+
+16
+00:01:22.140 --> 00:01:30.780
+Keeping the two concepts visible helps reviews, but they should remain close enough that future changes cannot accidentally call the operation without the required policy decision.
+
+17
+00:01:31.060 --> 00:01:33.700
+Logging is part of control, not an afterthought.
+
+18
+00:01:33.800 --> 00:01:43.960
+Privileged operations should record enough context to support diagnosis and audit, such as the operation type, trusted decision inputs, outcome, and failure category.
+
+19
+00:01:44.060 --> 00:01:49.420
+Logs should avoid secrets, raw sensitive content, and unnecessary internal detail.
+
+20
+00:01:49.520 --> 00:01:53.920
+A useful log explains what was decided without creating a new exposure.

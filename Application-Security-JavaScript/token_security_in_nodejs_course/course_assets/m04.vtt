@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.940
+Opaque tokens do not reveal their meaning to the client.
+
+2
+00:00:04.040 --> 00:00:07.160
+The server maps the presented value to stored state.
+
+3
+00:00:07.260 --> 00:00:22.620
+That pattern is useful for API keys, reset tokens, invite links, magic links, email verification, and other workflows where the application wants direct control over status, expiration, owner, scope, and revocation.
+
+4
+00:00:22.720 --> 00:00:28.880
+Issuing the random value is only part of the design; managing the token record is the larger job.
+
+5
+00:00:29.160 --> 00:00:41.960
+A token record should say what the token is for, who owns it, what scope it carries, when it was created, when it expires, whether it is revoked, and which metadata supports monitoring or response.
+
+6
+00:00:42.060 --> 00:00:46.460
+One-time tokens should be invalidated after successful use.
+
+7
+00:00:46.560 --> 00:00:54.080
+API keys should be named, scoped, owned, monitored, rotated, and removable.
+
+8
+00:00:54.180 --> 00:01:01.220
+Users usually should not be able to recover full API keys after initial creation unless there is a deliberate reviewed reason.
+
+9
+00:01:01.500 --> 00:01:09.500
+For many opaque token types, storing a cryptographic digest of the token reduces exposure if the database is read.
+
+10
+00:01:09.600 --> 00:01:13.520
+The application stores a verifier and checks the presented token against it.
+
+11
+00:01:13.620 --> 00:01:19.940
+This is especially useful for reset tokens, invite tokens, and some API key designs.
+
+12
+00:01:20.040 --> 00:01:28.280
+The digest is not a full solution by itself, but it reduces the chance that a copied database immediately becomes a set of live bearer secrets.
+
+13
+00:01:28.560 --> 00:01:32.720
+Token verification should avoid unnecessary information disclosure.
+
+14
+00:01:32.820 --> 00:01:40.580
+Lookup and error behavior should not reveal whether an account, email address, invite, or sensitive object exists.
+
+15
+00:01:40.680 --> 00:01:44.920
+Security-sensitive comparisons should use timing-aware patterns where appropriate.
+
+16
+00:01:45.020 --> 00:01:49.580
+The practical distinction is simple: a token is not just a random string.
+
+17
+00:01:49.680 --> 00:01:54.000
+It is a server-managed authority record with lifecycle state.

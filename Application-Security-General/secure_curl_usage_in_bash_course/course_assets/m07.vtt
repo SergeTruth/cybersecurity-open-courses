@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.740
+A curl command can complete at the transport level while the HTTP response still represents an application error.
+
+2
+00:00:06.840 --> 00:00:16.280
+A script that only checks whether curl ran may miss an authorization failure, validation error, missing resource, rate limit, or server-side problem.
+
+3
+00:00:16.560 --> 00:00:20.400
+Secure automation defines expected status codes.
+
+4
+00:00:20.500 --> 00:00:26.740
+A health check, download, upload, and deployment trigger may each have different success criteria.
+
+5
+00:00:26.840 --> 00:00:34.600
+Scripts should check both curl's command behavior and the HTTP status expectations for the workflow before trusting the response.
+
+6
+00:00:34.880 --> 00:00:38.000
+Timeouts are essential for unattended jobs.
+
+7
+00:00:38.100 --> 00:00:45.060
+Without them, a request can hang long enough to block a deployment, monitoring job, or scheduled task.
+
+8
+00:00:45.160 --> 00:00:51.880
+Timeouts should be chosen with the service and workflow in mind, and failures should be reported clearly.
+
+9
+00:00:52.160 --> 00:00:54.400
+Retries require care.
+
+10
+00:00:54.500 --> 00:00:59.540
+Retrying a read-only request may be reasonable when a transient network problem occurs.
+
+11
+00:00:59.640 --> 00:01:04.760
+Retrying a state-changing request may not be safe unless the API and workflow are designed for it.
+
+12
+00:01:04.860 --> 00:01:10.460
+Idempotence, rate limits, and operational impact should guide retry behavior.
+
+13
+00:01:10.740 --> 00:01:12.580
+Redirects should be reviewed.
+
+14
+00:01:12.680 --> 00:01:17.880
+Following a redirect can change where content is fetched or where data is sent.
+
+15
+00:01:17.980 --> 00:01:22.540
+In some workflows redirects are expected; in others they should be rejected or limited.
+
+16
+00:01:22.640 --> 00:01:27.360
+A script should not blindly follow redirection when destination trust matters.
+
+17
+00:01:27.640 --> 00:01:30.920
+Safe stopping behavior prevents misleading success.
+
+18
+00:01:31.020 --> 00:01:40.380
+If a response is empty, malformed, unexpected, or returned with a status the workflow does not accept, later steps should not treat it as valid input.
+
+19
+00:01:40.480 --> 00:01:44.320
+The script should stop or handle the condition deliberately.

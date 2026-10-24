@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:11.300
+Configuration commonly points to files, directories, sockets, endpoints, resource names, credentials, tokens, keys, or other sensitive settings.
+
+2
+00:00:11.400 --> 00:00:19.400
+Those values should be validated before the program opens, creates, modifies, deletes, connects, or logs anything based on them.
+
+3
+00:00:19.680 --> 00:00:28.400
+Path-like values need basic shape checks such as empty value handling, length limits, allowed forms, and expected location.
+
+4
+00:00:28.500 --> 00:00:37.780
+If a setting is meant to refer to an application directory, key file, data directory, or log path, the validation rule should match that intended scope.
+
+5
+00:00:38.060 --> 00:00:41.340
+File modes and resource roles matter.
+
+6
+00:00:41.440 --> 00:00:49.680
+An input file, output file, directory, key material location, and temporary working directory have different expectations.
+
+7
+00:00:49.780 --> 00:00:53.700
+The parser should not treat all strings as interchangeable paths.
+
+8
+00:00:53.800 --> 00:00:58.440
+Later resource code should receive typed, validated intent where possible.
+
+9
+00:00:58.720 --> 00:01:01.280
+Sensitive settings require logging discipline.
+
+10
+00:01:01.380 --> 00:01:12.420
+Credentials, tokens, keys, passwords, and private endpoints should not be printed in full during parse failures, startup diagnostics, or debug output.
+
+11
+00:01:12.520 --> 00:01:18.600
+Logs may be retained, exported, searched, or accessible to more people than the runtime configuration.
+
+12
+00:01:18.880 --> 00:01:23.600
+A useful pattern is to separate value validation from value display.
+
+13
+00:01:23.700 --> 00:01:34.900
+The parser can verify that a sensitive value is present, within length limits, and formatted as expected while diagnostics report only the field name, source layer, and failure category.
+
+14
+00:01:35.000 --> 00:01:39.640
+That gives operators useful information without exposing the value itself.

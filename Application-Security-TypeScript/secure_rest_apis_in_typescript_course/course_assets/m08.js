@@ -1,0 +1,12 @@
+window.COURSE_MODULE = {
+  "title": "Testing, Review, and Secure Delivery",
+  "graphicAlt": "Contract, denied-access and integration tests feed reviewed release evidence, monitored operation and owned remediation.",
+  "narration": "API security lasts when it is tested and reviewed as part of ordinary delivery. Unit tests can exercise validation helpers, policy functions, and response mappers. Integration tests can confirm route behavior with real middleware, authentication context, and persistence. Negative tests are especially important because they show that invalid input, missing identity, and unauthorized object access are rejected consistently.\n\nAuthorization matrix tests help teams avoid gaps between roles, permissions, tenants, and resource ownership. Contract tests and OpenAPI review can reveal missing validation, inconsistent status codes, or response shapes that expose more than intended. These tests are not a replacement for design review, but they turn important expectations into repeatable checks.\n\nCode review should ask concrete questions. What does this route trust? Which caller is expected? What input is accepted? Where is runtime validation performed? Which object is being authorized? What fields leave the API? What gets logged? What happens when the dependency is slow or unavailable? Specific questions make review more useful than a generic security reminder.\n\nSecure delivery includes dependency review, CI checks, environment configuration, secret handling, release gates, and production telemetry. Findings should become tracked engineering work. A durable REST API security program is not a final checklist at the end of a sprint; it is a set of repeatable habits that keep routes, contracts, and operations aligned over time.\n\nDelivery governance should make secure behavior visible. Dashboards, release notes, pull request templates, and runbooks can all remind teams what changed and how it was verified. The goal is not paperwork; the goal is evidence that important controls still work after the API evolves.",
+  "narrationPoints": [
+    "API security lasts when it is tested and reviewed as part of ordinary delivery.",
+    "Authorization matrix tests help teams avoid gaps between roles, permissions, tenants, and resource ownership.",
+    "Code review should ask concrete questions.",
+    "Secure delivery includes dependency review, CI checks, environment configuration, secret handling, release gates, and production telemetry.",
+    "Delivery governance should make secure behavior visible."
+  ]
+};

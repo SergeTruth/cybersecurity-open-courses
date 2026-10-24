@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Vulnerability Management, VEX, and Incident Response",
+  "graphicAlt": "Component presence and advisory matches lead to contextual triage, qualified status and an owned response.",
+  "narration": "SBOMs help vulnerability management by showing whether a component may be present in a release or service. They are not the same as vulnerability reports. Vulnerability matching depends on identifiers, versions, ecosystems, advisory sources, and tool quality. A component appearing in an SBOM does not always mean the vulnerable code path is reachable or exploitable. It means the team has evidence to begin a focused triage instead of searching blindly.\n\nDuring a high-profile dependency vulnerability, an SBOM helps identify affected releases quickly. Engineers still need to confirm whether the vulnerable component is present, whether it is used, which environments or customers are affected, what exploit activity exists, what compensating controls apply, and which fixes are available. Triage should consider reachability, runtime use, exposure, asset criticality, exploitability, and business impact. The SBOM speeds the question of presence, but it does not automate judgment.\n\nVEX-style information can help communicate whether a known vulnerability is affected, not affected, fixed, under investigation, or otherwise qualified for a particular product or release. That context is valuable when a scanner flags a component that is present but not reachable, or when remediation is staged. Response decisions should be tracked through tickets, owners, deadlines, validation, and release evidence. SBOMs are most valuable when they are current, searchable, release-linked, and retained long enough to support older deployments.",
+  "narrationPoints": [
+    "SBOMs help vulnerability management by showing whether a component may be present in a release or service.",
+    "During a high-profile dependency vulnerability, an SBOM helps identify affected releases quickly.",
+    "Response decisions should be tracked through tickets, owners, deadlines, validation, and release evidence.",
+    "VEX-style information can help communicate whether a known vulnerability is affected, not affected, fixed, under investigation, or otherwise qualified for a particular product or release.",
+    "A component appearing in an SBOM does not always mean the vulnerable code path is reachable or exploitable.",
+    "Engineers still need to confirm whether the vulnerable component is present, whether it is used, which environments or customers are affected, what exploit activity exists, what compensating controls apply, and which fixes are available."
+  ]
+};

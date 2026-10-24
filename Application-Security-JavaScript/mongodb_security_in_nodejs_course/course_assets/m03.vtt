@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.540
+A MongoDB connection is more than a URL.
+
+2
+00:00:03.640 --> 00:00:14.680
+It encodes database identity, destination, transport expectations, replica or cluster behavior, database names, driver options, and sometimes credentials.
+
+3
+00:00:14.780 --> 00:00:25.740
+In Node.js, that configuration may live in environment variables, secret stores, deployment manifests, serverless settings, container configuration, or CI/CD variables.
+
+4
+00:00:25.840 --> 00:00:30.320
+Treat it as security-sensitive configuration and review it alongside application code.
+
+5
+00:00:30.600 --> 00:00:40.200
+Production connections should use authenticated database users or approved identity-based mechanisms, and those identities should be separated by environment and purpose.
+
+6
+00:00:40.300 --> 00:00:49.980
+Development, staging, production, migration jobs, reporting jobs, application runtime, and CI/CD should not casually share one broad credential.
+
+7
+00:00:50.080 --> 00:00:55.520
+TLS should be enabled and validated according to the deployment model.
+
+8
+00:00:55.620 --> 00:01:03.300
+Avoid insecure certificate acceptance, relaxed hostname validation, or test-only transport shortcuts moving quietly into production.
+
+9
+00:01:03.580 --> 00:01:06.300
+Driver options also matter operationally.
+
+10
+00:01:06.400 --> 00:01:16.400
+Connection pool size, timeouts, app name, retry behavior, server selection behavior, and logging settings affect reliability and observability.
+
+11
+00:01:16.500 --> 00:01:31.700
+Connection strings can expose usernames, passwords, hosts, database names, and options, so they should not appear in client responses, logs, screenshots, tickets, documentation, or frontend bundles.
+
+12
+00:01:31.800 --> 00:01:40.440
+A good review asks whether the application knows who it is connecting as, where it is connecting, how transport is protected, and how failures will be diagnosed safely.

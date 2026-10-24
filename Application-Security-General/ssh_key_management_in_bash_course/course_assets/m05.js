@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Authorized Keys, Account Scope, and Restrictions",
+  "graphicAlt": "Installed public keys are matched to job-specific accounts and allowed actions, with recurring review and removal of stale access.",
+  "narration": "Managing private keys is only half of SSH key management. The remote side matters too. Public keys in authorized_keys files, directory services, configuration-management systems, source-control platforms, and deployment tools determine which private keys can access which remote accounts. If those remote authorizations are unmanaged, protecting the private key alone is not enough.\n\nRemote account scope should match the automation job. A backup key should not grant general administrative access if read-only backup access is enough. A deployment key should not automatically have access to unrelated accounts or environments. A monitoring key should not be able to make production changes. The account, allowed actions, and authorized keys should all align with the intended workflow.\n\nWhere appropriate, SSH restrictions and controlled account design can reduce what a key can do after authentication. This can include limiting the account's permissions, using dedicated accounts, narrowing platform access, and applying approved restrictions that fit the environment. These controls should be managed defensively and reviewed; they are not a substitute for key ownership, but they can reduce blast radius.\n\nTeams should know who owns each authorized key, why it exists, where it is installed, and when it should be removed. Stale authorized_keys entries are a common source of forgotten access. Periodic review should compare installed keys against inventory, active workflows, user and service ownership, and environment scope. A key that no longer has a purpose should be removed rather than left as background access.",
+  "narrationPoints": [
+    "Managing private keys is only half of SSH key management.",
+    "Remote account scope should match the automation job.",
+    "Where appropriate, SSH restrictions and controlled account design can reduce what a key can do after authentication.",
+    "Teams should know who owns each authorized key, why it exists, where it is installed, and when it should be removed.",
+    "Public keys in authorized_keys files, directory services, configuration-management systems, source-control platforms, and deployment tools determine which private keys can access which remote accounts.",
+    "If those remote authorizations are unmanaged, protecting the private key alone is not enough."
+  ]
+};

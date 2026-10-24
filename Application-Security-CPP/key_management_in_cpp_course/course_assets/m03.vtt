@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:09.380
+Keys should be generated through approved cryptographic libraries, platform facilities, or managed key services according to project policy.
+
+2
+00:00:09.480 --> 00:00:13.720
+Generation is too important to improvise inside ordinary application logic.
+
+3
+00:00:14.000 --> 00:00:23.600
+Do not generate keys with timestamps, counters, predictable seeds, general-purpose random functions, or homemade entropy collection.
+
+4
+00:00:23.700 --> 00:00:30.420
+Those patterns can produce values that look random enough in a log or test but do not provide the assurance the design needs.
+
+5
+00:00:30.700 --> 00:00:36.060
+Key length and algorithm compatibility should follow current project and platform policy.
+
+6
+00:00:36.160 --> 00:00:41.680
+Application code should not guess sizes or silently downgrade choices for convenience.
+
+7
+00:00:41.780 --> 00:00:46.900
+If compatibility constraints exist, document them and review them deliberately.
+
+8
+00:00:47.180 --> 00:00:49.420
+Related values have different roles.
+
+9
+00:00:49.520 --> 00:00:55.440
+Salts, IVs, nonces, initialization values, and random challenges are not interchangeable.
+
+10
+00:00:55.540 --> 00:00:59.060
+Some are public but must be unique.
+
+11
+00:00:59.160 --> 00:01:01.080
+Some need unpredictability.
+
+12
+00:01:01.180 --> 00:01:04.620
+Some belong to a specific algorithm or library mode.
+
+13
+00:01:04.900 --> 00:01:08.580
+Nonce or IV policy should be tied to the approved API.
+
+14
+00:01:08.680 --> 00:01:16.760
+The code should make it clear whether the library generates the value, whether the application supplies it, and how uniqueness or persistence is maintained.
+
+15
+00:01:17.040 --> 00:01:22.320
+Generation should be automated, auditable, and repeatable as a controlled process.
+
+16
+00:01:22.420 --> 00:01:29.540
+A production deployment should not depend on a developer hand-generating a key on a workstation and pasting it into configuration.
+
+17
+00:01:29.820 --> 00:01:39.420
+The review question is simple: where did this key come from, was the source approved, and can the team prove the process will remain safe during rotation, scaling, and recovery?
+
+18
+00:01:39.700 --> 00:01:43.060
+Automation also reduces drift between environments.
+
+19
+00:01:43.160 --> 00:01:50.600
+If each team invents a different generation process, policies become hard to verify and emergency replacement becomes slower.
+
+20
+00:01:50.880 --> 00:01:59.120
+Controlled generation should produce metadata as well as key material, including owner, purpose, environment, and creation context.

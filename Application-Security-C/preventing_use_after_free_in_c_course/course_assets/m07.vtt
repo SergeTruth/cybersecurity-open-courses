@@ -1,0 +1,85 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+API design can reduce use-after-free risk by making lifetime rules visible.
+
+2
+00:00:05.480 --> 00:00:14.200
+A function boundary is where callers learn whether they are creating, borrowing, retaining, releasing, or destroying a resource.
+
+3
+00:00:14.300 --> 00:00:20.220
+If the boundary is vague, every caller has to guess, and those guesses will eventually diverge.
+
+4
+00:00:20.500 --> 00:00:23.220
+Naming conventions can clarify intent.
+
+5
+00:00:23.320 --> 00:00:27.240
+A create or allocate function commonly returns ownership.
+
+6
+00:00:27.340 --> 00:00:31.980
+An init function may initialize caller-provided storage.
+
+7
+00:00:32.080 --> 00:00:38.480
+A borrow or get function may return a pointer that remains valid only while the owning object remains alive.
+
+8
+00:00:38.580 --> 00:00:43.380
+A destroy or cleanup function should define what happens to the object and its fields afterward.
+
+9
+00:00:43.660 --> 00:00:48.060
+Functions that take ownership should say so explicitly.
+
+10
+00:00:48.160 --> 00:00:54.800
+If a function consumes a pointer, the caller should not use that pointer afterward except according to the documented contract.
+
+11
+00:00:54.900 --> 00:00:58.500
+If a function only borrows, it should not release the pointer.
+
+12
+00:00:58.600 --> 00:01:04.600
+If a function retains a pointer, it should document whether it copies the data or stores the pointer itself.
+
+13
+00:01:04.880 --> 00:01:09.200
+Functions that return borrowed pointers should document how long the pointer remains valid.
+
+14
+00:01:09.300 --> 00:01:17.700
+A returned pointer might be valid until the next mutation, until the owner is destroyed, until the next call, or only during the current callback.
+
+15
+00:01:17.800 --> 00:01:21.880
+Without that rule, callers may store references that outlive the object.
+
+16
+00:01:22.160 --> 00:01:27.680
+Structured resource types can keep state, ownership, and cleanup behavior together.
+
+17
+00:01:27.780 --> 00:01:34.660
+A struct can hold the pointer, count, capacity, initialized flag, and ownership mode.
+
+18
+00:01:34.760 --> 00:01:42.200
+Helper functions can then operate on that structure consistently instead of spreading lifecycle rules across unrelated call sites.
+
+19
+00:01:42.480 --> 00:01:48.720
+Consistent create and destroy, or init and cleanup, pairs make resource lifecycle easier to review.
+
+20
+00:01:48.820 --> 00:01:57.460
+The pair should document who calls each side, whether repeated cleanup is allowed, what state remains after cleanup, and whether borrowed references become invalid.
+
+21
+00:01:57.560 --> 00:02:03.800
+Consistency is not bureaucracy; it is how reviewers build confidence in lifetime behavior.

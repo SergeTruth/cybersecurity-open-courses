@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Secure Connections, Authentication, and TLS",
+  "graphicAlt": "A scoped database identity reaches the intended destination through validated TLS, using protected configuration and reviewed pool and timeout behavior.",
+  "narration": "A MongoDB connection is more than a URL. It encodes database identity, destination, transport expectations, replica or cluster behavior, database names, driver options, and sometimes credentials. In Node.js, that configuration may live in environment variables, secret stores, deployment manifests, serverless settings, container configuration, or CI/CD variables. Treat it as security-sensitive configuration and review it alongside application code.\n\nProduction connections should use authenticated database users or approved identity-based mechanisms, and those identities should be separated by environment and purpose. Development, staging, production, migration jobs, reporting jobs, application runtime, and CI/CD should not casually share one broad credential. TLS should be enabled and validated according to the deployment model. Avoid insecure certificate acceptance, relaxed hostname validation, or test-only transport shortcuts moving quietly into production.\n\nDriver options also matter operationally. Connection pool size, timeouts, app name, retry behavior, server selection behavior, and logging settings affect reliability and observability. Connection strings can expose usernames, passwords, hosts, database names, and options, so they should not appear in client responses, logs, screenshots, tickets, documentation, or frontend bundles. A good review asks whether the application knows who it is connecting as, where it is connecting, how transport is protected, and how failures will be diagnosed safely.",
+  "narrationPoints": [
+    "js, that configuration may live in environment variables, secret stores, deployment manifests, serverless settings, container configuration, or CI/CD variables.",
+    "Production connections should use authenticated database users or approved identity-based mechanisms, and those identities should be separated by environment and purpose.",
+    "Connection strings can expose usernames, passwords, hosts, database names, and options, so they should not appear in client responses, logs, screenshots, tickets, documentation, or frontend bundles.",
+    "TLS should be enabled and validated according to the deployment model.",
+    "Treat it as security-sensitive configuration and review it alongside application code.",
+    "It encodes database identity, destination, transport expectations, replica or cluster behavior, database names, driver options, and sometimes credentials."
+  ]
+};

@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.300
+IPC services need resource limits because peers can behave unexpectedly.
+
+2
+00:00:05.400 --> 00:00:14.200
+A local client may send too much data, connect too often, stop reading, stop writing, keep a connection open, or make requests that are expensive to process.
+
+3
+00:00:14.300 --> 00:00:18.540
+The service should not assume every peer is cooperative or perfectly implemented.
+
+4
+00:00:18.820 --> 00:00:28.260
+Useful limits include maximum message size, queue depth, connection count, shared memory size, request rate, nesting depth, and processing time.
+
+5
+00:00:28.360 --> 00:00:32.040
+These limits should be chosen for the workflow and enforced consistently.
+
+6
+00:00:32.140 --> 00:00:36.940
+A limit that is documented but not checked does not protect the service.
+
+7
+00:00:37.220 --> 00:00:42.180
+Timeouts, backpressure, and controlled failure behavior are part of secure IPC.
+
+8
+00:00:42.280 --> 00:00:45.560
+A slow peer should not hold critical resources indefinitely.
+
+9
+00:00:45.660 --> 00:00:48.140
+A full queue should have a defined response.
+
+10
+00:00:48.240 --> 00:00:55.040
+A request that exceeds limits should fail in a way that preserves service stability and releases owned resources.
+
+11
+00:00:55.320 --> 00:00:59.640
+Avoid unbounded allocation based on peer-provided lengths or counts.
+
+12
+00:00:59.740 --> 00:01:05.180
+Even when a message is well-formed, the service should decide how much memory and work it is willing to spend.
+
+13
+00:01:05.280 --> 00:01:11.360
+Allocation, copying, and dispatch should follow validated size and policy limits.
+
+14
+00:01:11.640 --> 00:01:17.800
+Cleanup is essential after disconnects, errors, interrupted operations, and protocol failures.
+
+15
+00:01:17.900 --> 00:01:26.620
+Long-running services accumulate reliability problems when partial state, descriptors, shared memory, queue entries, or timers are not released.
+
+16
+00:01:26.720 --> 00:01:33.280
+Availability is part of secure IPC because a service that cannot stay healthy cannot enforce its security boundary reliably.

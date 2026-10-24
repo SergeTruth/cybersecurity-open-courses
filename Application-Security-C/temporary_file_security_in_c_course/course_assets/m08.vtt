@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.220
+After a temporary file is created, the program still has to operate on it safely.
+
+2
+00:00:05.320 --> 00:00:09.240
+Reads and writes can be partial or fail.
+
+3
+00:00:09.340 --> 00:00:16.380
+Return values should be checked, and the program should know whether it has written all intended data or consumed the complete expected content.
+
+4
+00:00:16.660 --> 00:00:19.860
+Partial operations should be handled explicitly.
+
+5
+00:00:19.960 --> 00:00:25.000
+A write that transfers only part of a buffer is not the same as a successful complete write.
+
+6
+00:00:25.100 --> 00:00:33.020
+A read that returns less than expected may be normal end-of-file, a short read, or an error depending on context.
+
+7
+00:00:33.120 --> 00:00:36.160
+The code should make that distinction before continuing.
+
+8
+00:00:36.440 --> 00:00:39.560
+Final output should be separated from work files.
+
+9
+00:00:39.660 --> 00:00:54.220
+A temporary file used to build final content should remain in a working state until the program has finished writing, checked errors, performed any required flush or finalization step, and validated that the content matches the expected contract.
+
+10
+00:00:54.500 --> 00:00:59.620
+Durable replacement patterns should be designed at a high level for the platform and storage system.
+
+11
+00:00:59.720 --> 00:01:09.560
+The important review points are whether the program knows when work is complete, whether finalization errors are handled, and whether the final artifact is exposed only after it is ready.
+
+12
+00:01:09.660 --> 00:01:24.700
+A successful rename may expose the new target before parent-directory synchronization completes; if that synchronization fails, replacement occurred but durability remains unconfirmed, so the API should return a distinct status instead of reporting a pre-commit failure.
+
+13
+00:01:24.980 --> 00:01:27.860
+Temporary content should be validated before consuming it.
+
+14
+00:01:27.960 --> 00:01:36.840
+If another component writes or reads the file, the consumer should verify size, state, expected source, and format before relying on the content.
+
+15
+00:01:36.940 --> 00:01:43.260
+Temporary-file safety continues past creation and into every read, write, and replacement step.

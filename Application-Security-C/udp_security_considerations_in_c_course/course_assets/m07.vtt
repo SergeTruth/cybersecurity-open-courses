@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+UDP services need resource limits because datagrams can arrive quickly and without connection setup.
+
+2
+00:00:06.440 --> 00:00:15.480
+A service may receive bursts, repeated messages, unrelated discovery traffic, or datagrams from peers that are not following the expected protocol.
+
+3
+00:00:15.580 --> 00:00:19.820
+The code should not assume that every datagram deserves expensive work.
+
+4
+00:00:20.100 --> 00:00:28.500
+Useful limits include maximum message size, response size, queue depth, peer state size, request rate, and processing time.
+
+5
+00:00:28.600 --> 00:00:32.520
+These limits should be part of protocol and service design.
+
+6
+00:00:32.620 --> 00:00:39.500
+Without them, a small listener can spend too much memory or CPU on traffic that should have been rejected early.
+
+7
+00:00:39.780 --> 00:00:42.740
+Basic validation should happen before expensive work.
+
+8
+00:00:42.840 --> 00:00:52.360
+Check size, version, message type, and required fields before parsing deeply, touching storage, allocating large buffers, or generating responses.
+
+9
+00:00:52.460 --> 00:00:57.260
+This keeps invalid input cheap to reject and makes service behavior easier to reason about.
+
+10
+00:00:57.540 --> 00:00:59.700
+Response size should be controlled.
+
+11
+00:00:59.800 --> 00:01:07.240
+A service should avoid generating a response that is disproportionate to a small or weakly validated request.
+
+12
+00:01:07.340 --> 00:01:12.700
+For many UDP workflows, small and bounded responses are safer and easier to operate.
+
+13
+00:01:12.800 --> 00:01:18.560
+When larger responses are legitimate, the protocol should define the conditions and limits clearly.
+
+14
+00:01:18.840 --> 00:01:22.440
+Safe failure behavior protects availability.
+
+15
+00:01:22.540 --> 00:01:33.100
+Malformed, repeated, unexpected, or high-volume traffic should be handled without unbounded allocation, unbounded state growth, or noisy logs that overwhelm operators.
+
+16
+00:01:33.200 --> 00:01:40.560
+Availability is part of secure UDP design, especially for long-running services, discovery components, and embedded systems.

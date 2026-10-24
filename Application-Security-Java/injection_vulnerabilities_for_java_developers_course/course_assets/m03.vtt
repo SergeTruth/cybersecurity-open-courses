@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.340
+SQL injection happens when an application constructs database queries unsafely and lets user-controlled text alter query meaning.
+
+2
+00:00:08.440 --> 00:00:13.880
+In JDBC-style code, the primary defense is prepared statements with parameters.
+
+3
+00:00:13.980 --> 00:00:22.380
+The SQL structure is defined separately from the values supplied at runtime, so a customer name, account identifier, date range, or search term remains a value.
+
+4
+00:00:22.480 --> 00:00:27.360
+Input validation still matters, but it does not replace safe query construction.
+
+5
+00:00:27.640 --> 00:00:34.840
+The same principle applies when using JPA, Hibernate, JPQL, HQL, and criteria-style APIs.
+
+6
+00:00:34.940 --> 00:00:39.740
+ORMs reduce many risks, but they do not make every query safe automatically.
+
+7
+00:00:39.840 --> 00:00:51.840
+Dynamically assembled JPQL, HQL, native SQL, or repository fragments can still become dangerous if user-controlled values are inserted into query strings.
+
+8
+00:00:51.940 --> 00:01:01.140
+Review any code that builds query text, especially code handling search screens, reporting features, admin filters, or multi-tenant data access.
+
+9
+00:01:01.420 --> 00:01:03.820
+Dynamic behavior needs constraints.
+
+10
+00:01:03.920 --> 00:01:12.000
+Sorting fields, filtering operators, pagination values, and optional clauses should come from allowlisted choices rather than arbitrary client input.
+
+11
+00:01:12.100 --> 00:01:19.140
+For example, a user can choose from supported sort names that map to known columns, but should not provide raw query fragments.
+
+12
+00:01:19.240 --> 00:01:28.920
+Stored procedures should be treated as database interfaces that still require parameterized calls, careful permissions, and review of any dynamic SQL inside the procedure.
+
+13
+00:01:29.200 --> 00:01:32.560
+Database least privilege is a second layer, not the main defense.
+
+14
+00:01:32.660 --> 00:01:40.260
+A service account should only have the permissions the application actually needs, and destructive or administrative capabilities should be separated.
+
+15
+00:01:40.360 --> 00:01:46.360
+If a query-construction mistake occurs, least privilege can reduce blast radius.
+
+16
+00:01:46.460 --> 00:01:59.340
+The stronger design is using prepared statements, parameterized ORM APIs, constrained query options, focused tests, and code review that treats raw query construction as a security-relevant decision.

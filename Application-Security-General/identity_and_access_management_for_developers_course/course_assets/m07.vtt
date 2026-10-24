@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.700
+IAM should be designed with the application model, not bolted on after features are built.
+
+2
+00:00:05.800 --> 00:00:13.960
+Start by mapping users, roles, tenants, resources, permissions, administrative functions, and high-risk workflows.
+
+3
+00:00:14.060 --> 00:00:19.980
+For each important action, decide who can perform it, under what conditions, and against which resources.
+
+4
+00:00:20.080 --> 00:00:29.200
+This mapping is especially important in multi-tenant systems because an identity may be valid in one tenant, limited in another, and completely unauthorized elsewhere.
+
+5
+00:00:29.480 --> 00:00:40.200
+Privilege escalation risk appears when defaults are too broad, role changes are not controlled, administrative functions lack review, or authorization checks are far away from the protected resource.
+
+6
+00:00:40.300 --> 00:00:47.180
+A route may check that a user is logged in, while the service method later fetches data by object ID without checking ownership.
+
+7
+00:00:47.280 --> 00:00:53.040
+A background job may run with broad privileges and process user-controlled tasks.
+
+8
+00:00:53.140 --> 00:00:59.780
+Designing checks close to protected resources reduces the chance that a new caller accidentally bypasses policy.
+
+9
+00:01:00.060 --> 00:01:06.860
+Approval workflows, break-glass access, delegated administration, and audit logging should be part of the design.
+
+10
+00:01:06.960 --> 00:01:09.360
+Default permissions should start narrow.
+
+11
+00:01:09.460 --> 00:01:16.340
+New users, new tenants, and new service accounts should not inherit broad access just because it is convenient.
+
+12
+00:01:16.440 --> 00:01:19.880
+Administrative actions should produce useful audit records.
+
+13
+00:01:19.980 --> 00:01:31.180
+When authorization behavior is explicit in design, developers can write clearer tests, reviewers can reason about risk, and operations teams can investigate security events with confidence.

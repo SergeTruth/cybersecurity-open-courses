@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Node.js Dependency Anatomy",
+  "graphicAlt": "Dependency evidence differs across declarations, resolved trees, workspaces, build outputs and containers, so scope names the artifact.",
+  "narration": "Node.js dependencies are not one simple list. package.json declares intended dependencies, scripts, metadata, and version ranges. Lockfiles such as package-lock.json or npm-shrinkwrap.json describe resolved versions and dependency relationships. Workspaces add multiple package manifests. node_modules represents an installed tree. Build outputs, bundled files, Docker images, and deployed artifacts may contain a different view of the software than the source repository alone.\n\nDependencies may be direct, transitive, development-only, production runtime, optional, peer, bundled, or workspace-local. Native modules, generated code, vendored files, container base images, operating system packages, and runtime images may also matter depending on scope. None of these categories should be ignored by default. If dev dependencies, optional dependencies, peer dependencies, workspace packages, bundled code, native modules, or container packages are excluded, that should be a documented scope decision tied to the SBOM's purpose.\n\nBefore judging whether an SBOM is complete, define the artifact it represents. Is the SBOM for a source project, npm package, build artifact, container image, deployed service, or customer release. A source dependency SBOM may answer one question, while a container SBOM may answer another. The right inventory depends on the operational question. Good SBOM work begins by naming the artifact and then matching the dependency evidence to that artifact.",
+  "narrationPoints": [
+    "Node.js dependencies are not one simple list. package.json declares intended dependencies, scripts, metadata, and version ranges.",
+    "If dev dependencies, optional dependencies, peer dependencies, workspace packages, bundled code, native modules, or container packages are excluded, that should be a documented scope decision tied to the SBOM's purpose.",
+    "A source dependency SBOM may answer one question, while a container SBOM may answer another.",
+    "Lockfiles such as package-lock.json or npm-shrinkwrap.json describe resolved versions and dependency relationships.",
+    "Good SBOM work begins by naming the artifact and then matching the dependency evidence to that artifact.",
+    "Build outputs, bundled files, Docker images, and deployed artifacts may contain a different view of the software than the source repository alone."
+  ]
+};

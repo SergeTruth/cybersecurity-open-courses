@@ -1,0 +1,10 @@
+window.COURSE_MODULE = {
+  "title": "Authorization Fundamentals",
+  "narration": "Authorization decides what an authenticated identity is allowed to do. A user may be signed in and still not be allowed to view another tenant record, approve a payment, change a role, export data, or call an administrative endpoint. Roles, groups, permissions, claims, and scopes are common authorization building blocks, but the names do not matter as much as the enforcement. The application must check whether this identity can perform this action against this resource in this context.\n\nRole-based access control groups permissions into roles such as user, manager, auditor, or administrator. Groups can simplify assignment, especially when they come from an identity provider. Claims and scopes can communicate identity attributes or delegated permissions in tokens. These are useful inputs, but they must be interpreted carefully. A claim that says department equals finance is not the same thing as permission to approve every finance action. A scope that permits reading an API does not automatically decide which object instance may be read.\n\nObject-level and function-level authorization are both critical. Function-level checks decide whether an identity may perform a category of action, such as create users or export reports. Object-level checks decide whether that identity may access this specific invoice, ticket, project, or customer record. Enforcement belongs on the server side and should follow least privilege. Client-side checks can improve usability, but they cannot be the security boundary because requests can be changed, replayed, or crafted directly.",
+  "graphicAlt": "A server-side policy gate evaluates identity, action, resource and context under least privilege.",
+  "narrationPoints": [
+    "Authorization decides what an authenticated identity is allowed to do.",
+    "Role-based access control groups permissions into roles such as user, manager, auditor, or administrator.",
+    "Object-level and function-level authorization are both critical."
+  ]
+};

@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.620
+Not every pipeline should remain a single dense line.
+
+2
+00:00:03.720 --> 00:00:08.600
+When a pipeline becomes complex, it may be safer to break it into named steps.
+
+3
+00:00:08.700 --> 00:00:19.980
+Intermediate results can be inspected, validated, logged at a safe level, or reused without forcing reviewers to mentally execute a long chain of commands.
+
+4
+00:00:20.260 --> 00:00:24.580
+Temporary files can make pipelines clearer, but they must be handled safely.
+
+5
+00:00:24.680 --> 00:00:34.920
+A script should create them in an appropriate location, use permissions suitable for the data, avoid predictable or shared unsafe names, and clean them up deliberately.
+
+6
+00:00:35.020 --> 00:00:38.620
+Temporary data is still data, and it may need protection.
+
+7
+00:00:38.900 --> 00:00:40.820
+Intermediate data can be sensitive.
+
+8
+00:00:40.920 --> 00:00:49.080
+It may contain secrets, customer data, operational details, deployment decisions, file inventories, or vulnerability reports.
+
+9
+00:00:49.180 --> 00:00:58.860
+If that data would be sensitive in a normal file, it is sensitive in a temporary file, process substitution stream, captured variable, or build artifact.
+
+10
+00:00:59.140 --> 00:01:07.380
+Process substitution can improve readability in some cases because it lets tools consume generated streams without forcing everything into one pipeline.
+
+11
+00:01:07.480 --> 00:01:14.280
+It is still part of the data-flow design and should be reviewed for lifecycle, sensitivity, and compatibility assumptions.
+
+12
+00:01:14.560 --> 00:01:17.360
+Avoid accidental artifact or log exposure.
+
+13
+00:01:17.460 --> 00:01:25.460
+Intermediate files should not be copied into build outputs, left behind in workspaces, or dumped into diagnostic logs by default.
+
+14
+00:01:25.560 --> 00:01:31.080
+A secure pipeline protects intermediate data with the same seriousness as final output.

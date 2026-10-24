@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.620
+Socket tests should cover more than a clean client sending one perfect request.
+
+2
+00:00:05.720 --> 00:00:20.920
+Useful tests include malformed messages, partial messages, oversized messages, disconnects, reconnects, timeouts, repeated operations, idle peers, and protocol sequences that arrive in multiple reads.
+
+3
+00:00:21.020 --> 00:00:24.300
+These cases exercise the real boundary of the service.
+
+4
+00:00:24.580 --> 00:00:27.140
+Concurrency tests are also important.
+
+5
+00:00:27.240 --> 00:00:36.120
+A service may handle simultaneous clients, shared state, worker threads, event loops, shutdown signals, and cleanup paths.
+
+6
+00:00:36.220 --> 00:00:41.020
+Timing changes can reveal bugs that ordinary single-client tests never touch.
+
+7
+00:00:41.120 --> 00:00:46.000
+The goal is predictable behavior under normal operating stress and controlled failure.
+
+8
+00:00:46.280 --> 00:00:58.440
+Static analysis, compiler warnings, sanitizers, and runtime diagnostics can help identify unchecked return values, risky buffer handling, memory leaks, parser-state mistakes, and cleanup problems.
+
+9
+00:00:58.540 --> 00:01:03.820
+These tools are most valuable when the code makes ownership and protocol state clear.
+
+10
+00:01:04.100 --> 00:01:10.740
+Logs should provide operational value without exposing sensitive payloads, secrets, or misleading trust assumptions.
+
+11
+00:01:10.840 --> 00:01:23.000
+A log can report that a message was rejected, a connection timed out, or a peer failed validation without including private content or implying that a network location alone proved authorization.
+
+12
+00:01:23.280 --> 00:01:37.280
+Code review should trace endpoint creation, binding, exposure, peer checks, message framing, parsing, dispatch, state changes, transport decisions, cleanup, and error handling.
+
+13
+00:01:37.380 --> 00:01:44.900
+Reviewers should confirm that socket behavior matches the documented trust boundary and deployment model rather than only checking whether the code compiles.

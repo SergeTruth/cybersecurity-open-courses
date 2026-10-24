@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:05.380
+Secure APIs define failure behavior as carefully as success behavior.
+
+2
+00:00:05.480 --> 00:00:15.160
+Callers should know what happens when input is invalid, access is denied, a dependency fails, resources are exhausted, or verification does not succeed.
+
+3
+00:00:15.440 --> 00:00:21.360
+Different projects use exceptions, error codes, result objects, or status types.
+
+4
+00:00:21.460 --> 00:00:24.420
+The important part is consistency and clarity.
+
+5
+00:00:24.520 --> 00:00:30.280
+A security-sensitive failure should not disappear into a default value that looks like success.
+
+6
+00:00:30.560 --> 00:00:34.240
+APIs should preserve invariants after errors.
+
+7
+00:00:34.340 --> 00:00:46.260
+If a function updates several fields, writes a file, changes authorization state, or reserves resources, the contract should explain whether the operation is atomic, partially applied, or rolled back.
+
+8
+00:00:46.540 --> 00:00:48.940
+Partial updates need policy.
+
+9
+00:00:49.040 --> 00:00:53.280
+If they are allowed, callers need enough information to recover safely.
+
+10
+00:00:53.380 --> 00:00:59.140
+If they are not allowed, the API should structure work so failure leaves the system in a predictable state.
+
+11
+00:00:59.420 --> 00:01:05.020
+Diagnostics should help maintainers without leaking secrets or sensitive internal details.
+
+12
+00:01:05.120 --> 00:01:10.560
+User-facing messages may be simple, while internal logs can include sanitized context.
+
+13
+00:01:10.660 --> 00:01:13.620
+Both should avoid exposing protected values.
+
+14
+00:01:13.900 --> 00:01:17.100
+Authorization failures should be consistent.
+
+15
+00:01:17.200 --> 00:01:23.120
+A caller should not learn sensitive information because one path reports too much detail while another path is silent.
+
+16
+00:01:23.400 --> 00:01:28.520
+Review failure semantics by asking whether a caller can continue safely after each error.
+
+17
+00:01:28.620 --> 00:01:33.420
+If the answer is not clear, the API contract needs more precision.
+
+18
+00:01:33.700 --> 00:01:37.140
+Retry expectations should be part of the contract.
+
+19
+00:01:37.240 --> 00:01:45.480
+Some errors are temporary, some require caller correction, and some should stop the workflow until policy or configuration changes.
+
+20
+00:01:45.760 --> 00:01:47.520
+Cleanup guarantees matter too.
+
+21
+00:01:47.620 --> 00:01:57.060
+If an API allocates, locks, opens, registers, or reserves anything before failing, callers need to know what remains their responsibility.
+
+22
+00:01:57.340 --> 00:02:00.860
+Clear failure semantics make secure behavior easier than guessing.

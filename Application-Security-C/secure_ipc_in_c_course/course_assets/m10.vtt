@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:03.860
+Secure IPC in C starts by defining the boundary.
+
+2
+00:00:03.960 --> 00:00:13.560
+Know which processes may connect, which identity or role they have, who owns the endpoint, how long it exists, and what operations the protocol allows.
+
+3
+00:00:13.660 --> 00:00:16.780
+A channel that feels local still needs a clear trust model.
+
+4
+00:00:17.060 --> 00:00:25.540
+Restrict endpoint exposure with permissions, least privilege, controlled descriptor and handle inheritance, and predictable cleanup.
+
+5
+00:00:25.640 --> 00:00:36.360
+Named endpoints, shared memory regions, queues, and inherited handles should all be part of the application design rather than accidental side effects of startup.
+
+6
+00:00:36.640 --> 00:00:42.800
+Validate every message before parsing deeply, allocating, copying, or dispatching actions.
+
+7
+00:00:42.900 --> 00:00:44.820
+Byte streams need framing.
+
+8
+00:00:44.920 --> 00:00:47.240
+Lengths and counts need limits.
+
+9
+00:00:47.340 --> 00:00:51.660
+Unsupported commands and malformed sequences need safe failure.
+
+10
+00:00:51.760 --> 00:00:59.280
+Shared memory needs synchronization, layout contracts, and consistency checks before shared state becomes trusted.
+
+11
+00:00:59.560 --> 00:01:02.680
+Availability belongs in the security model.
+
+12
+00:01:02.780 --> 00:01:08.780
+Limit message sizes, queues, connections, shared memory, request rates, and processing time.
+
+13
+00:01:08.880 --> 00:01:14.240
+Define behavior for slow, malformed, disconnected, or unexpected peers.
+
+14
+00:01:14.340 --> 00:01:19.700
+Release resources on every path, including interrupted operations and protocol failures.
+
+15
+00:01:19.980 --> 00:01:22.700
+Finally, use layered assurance.
+
+16
+00:01:22.800 --> 00:01:30.800
+Tests, logging discipline, static analysis, sanitizers, runtime diagnostics, and code review all support IPC safety.
+
+17
+00:01:30.900 --> 00:01:39.220
+The best review traces endpoint creation, peer checks, message validation, dispatch, state changes, cleanup, and error handling.
+
+18
+00:01:39.320 --> 00:01:43.640
+That trace keeps IPC behavior predictable as systems evolve.

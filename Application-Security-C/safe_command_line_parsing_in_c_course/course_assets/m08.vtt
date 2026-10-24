@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+When parsing fails, the safest behavior is predictable rejection.
+
+2
+00:00:04.680 --> 00:00:11.160
+A tool should fail closed on invalid, missing, contradictory, unknown, or ambiguous arguments.
+
+3
+00:00:11.260 --> 00:00:18.140
+It should not continue with guessed defaults or partial interpretation unless that behavior is part of a documented contract.
+
+4
+00:00:18.420 --> 00:00:24.020
+Consistent error returns matter because command-line tools are often used by scripts and automation.
+
+5
+00:00:24.120 --> 00:00:31.080
+A clear nonzero exit status, stable error category, and useful usage message help callers respond correctly.
+
+6
+00:00:31.180 --> 00:00:36.620
+The parser should avoid mixing validation failure with partially completed work.
+
+7
+00:00:36.900 --> 00:00:40.260
+Avoid partial state changes after parse failure.
+
+8
+00:00:40.360 --> 00:00:52.200
+If a tool creates files, removes resources, updates configuration, or writes output before parsing is complete, a later validation error can leave the system in a confusing state.
+
+9
+00:00:52.300 --> 00:00:55.500
+Parse and validate first, then act.
+
+10
+00:00:55.780 --> 00:01:00.340
+Usage messages should be helpful without disclosing sensitive values.
+
+11
+00:01:00.440 --> 00:01:06.280
+They can name the invalid option, expected type, required range, or missing value.
+
+12
+00:01:06.380 --> 00:01:13.180
+Logs should avoid copying secrets, large raw arguments, or internal details that are unnecessary for diagnosis.
+
+13
+00:01:13.460 --> 00:01:17.860
+Good failure behavior is part of the user experience and the safety model.
+
+14
+00:01:17.960 --> 00:01:26.360
+A reliable tool tells the user what went wrong, exits consistently, and leaves program state unchanged when validation did not succeed.

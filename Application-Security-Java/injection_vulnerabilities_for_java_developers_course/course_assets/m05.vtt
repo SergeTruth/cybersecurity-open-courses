@@ -1,0 +1,69 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:06.340
+Java can start external processes through APIs such as Runtime.exec and ProcessBuilder.
+
+2
+00:00:06.440 --> 00:00:08.600
+That power should be treated carefully.
+
+3
+00:00:08.700 --> 00:00:21.820
+Command injection risk appears when user-controlled input influences an operating system command, argument, filename, path, flag, environment variable, working directory, or executable lookup.
+
+4
+00:00:21.920 --> 00:00:30.000
+Even when the feature is legitimate, such as image conversion or report generation, string-built commands can blur the line between data and process instructions.
+
+5
+00:00:30.280 --> 00:00:33.960
+The safest option is often not launching a process at all.
+
+6
+00:00:34.060 --> 00:00:38.540
+Prefer Java libraries or platform APIs when they can perform the operation directly.
+
+7
+00:00:38.640 --> 00:00:43.840
+If an external process is necessary, avoid building one large command string.
+
+8
+00:00:43.940 --> 00:00:52.820
+Use APIs that pass the executable and arguments as separate values, choose the executable path deliberately, and map user choices to approved operations.
+
+9
+00:00:52.920 --> 00:00:59.480
+A request should not be able to select arbitrary tools, flags, paths, or environment settings.
+
+10
+00:00:59.760 --> 00:01:02.480
+File paths deserve special handling.
+
+11
+00:01:02.580 --> 00:01:08.420
+A filename supplied by a user should become a controlled storage object, not a raw filesystem decision.
+
+12
+00:01:08.520 --> 00:01:19.400
+Normalize and constrain paths to approved directories, generate server-side names where possible, and treat extensions and media types as policy decisions rather than trust signals.
+
+13
+00:01:19.500 --> 00:01:26.860
+Process working directories and PATH behavior should be explicit so the application does not accidentally run a different executable than intended.
+
+14
+00:01:27.140 --> 00:01:28.900
+Logging also needs care.
+
+15
+00:01:29.000 --> 00:01:36.520
+It is useful to record which controlled operation ran, whether validation failed, and which request or job triggered the action.
+
+16
+00:01:36.620 --> 00:01:44.940
+It is usually not useful to store full raw command lines containing sensitive values, confusing characters, or user-supplied text.
+
+17
+00:01:45.040 --> 00:01:58.800
+Secure process execution combines safe APIs, allowlisted operations, least privilege, controlled paths, bounded timeouts, and logs that support investigation without creating new exposure.

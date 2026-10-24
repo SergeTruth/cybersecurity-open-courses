@@ -1,0 +1,13 @@
+window.COURSE_MODULE = {
+  "title": "Keys, Accounts, and Automation Identity",
+  "graphicAlt": "Deployment, diagnostics and backup use separate scoped identities governed by ownership and lifecycle records.",
+  "narration": "Every SSH automation workflow uses an identity. That identity may be represented by an SSH key, service account, deployment account, or job-specific credential. Good identity design is what lets teams answer who or what performed a remote action, why it was allowed, and how access can be changed later.\n\nA common weak pattern is one shared privileged key used across many jobs and environments. That kind of key is difficult to attribute, difficult to scope, difficult to rotate, and difficult to revoke without breaking unrelated workflows. It also makes incidents harder to investigate because many scripts may appear to be the same actor.\n\nDedicated automation identities are easier to manage. Each identity should have clear ownership, purpose, scope, and lifecycle. A deployment identity should not automatically be a diagnostic identity, a backup identity, and an administrative identity. Production access should be separated from development and staging access where practical.\n\nPrivate keys must be protected. Storage location, file permissions, secret manager handling, passphrase strategy, and agent use all affect risk. Agents and passphrases can help some workflows, but they introduce operational tradeoffs that should be understood rather than copied blindly.\n\nAuthorized keys need ongoing review. Stale keys, abandoned accounts, unclear comments, and broad forced-command exceptions can accumulate over time. Secure automation includes inventory, ownership tracking, rotation, revocation, and cleanup of access that no longer has a business purpose.\n\nThe purpose of key lifecycle work is not paperwork. It keeps remote access understandable. When a job changes, an owner leaves, a host is retired, or an environment boundary changes, the SSH identities behind automation should change with it.",
+  "narrationPoints": [
+    "Good identity design is what lets teams answer who or what performed a remote action, why it was allowed, and how access can be changed later.",
+    "A common weak pattern is one shared privileged key used across many jobs and environments.",
+    "Each identity should have clear ownership, purpose, scope, and lifecycle.",
+    "Storage location, file permissions, secret manager handling, passphrase strategy, and agent use all affect risk.",
+    "Stale keys, abandoned accounts, unclear comments, and broad forced-command exceptions can accumulate over time.",
+    "The purpose of key lifecycle work is not paperwork."
+  ]
+};

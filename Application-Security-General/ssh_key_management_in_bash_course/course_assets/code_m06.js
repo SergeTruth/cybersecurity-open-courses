@@ -1,0 +1,16 @@
+window.COURSE_CODE_MODULE = {
+    "title":  "Code Examples",
+    "codeIntro":  "These examples apply \u0027Host Keys, known_hosts, and Server Trust\u0027 to distinct, reviewable Bash workflows.",
+    "codeExamples":  [
+                         {
+                             "title":  "Require a known host key before connection",
+                             "code":  "#!/usr/bin/env bash\nset -euo pipefail\n\nhost=\"${1:?host required}\"\n[[ \"$host\" =~ ^(git|deploy|backup)\\.example\\.test$ ]] || exit 64\n/usr/bin/ssh-keygen -F \"$host\" -f /etc/orders-automation/known_hosts \u003e/dev/null || exit 77\n/usr/bin/ssh -oStrictHostKeyChecking=yes \\\n  -oUserKnownHostsFile=/etc/orders-automation/known_hosts \"$host\" -- /usr/bin/true",
+                             "blurb":  "ssh-keygen searches the dedicated database for the exact host; absence is a trust failure rather than a reason to learn a key during connection."
+                         },
+                         {
+                             "title":  "Install a signed host-key rotation package",
+                             "code": "#!/usr/bin/env bash\nset -euo pipefail\numask 077\n\ncandidate=\"${1:?known-hosts package required}\"\nexec {candidate_fd}<\"$candidate\"\nexec {signature_fd}<\"$candidate.asc\"\ncandidate_size=\"$(/usr/bin/stat -Lc '%s' \"/proc/$$/fd/$candidate_fd\")\"\nsignature_size=\"$(/usr/bin/stat -Lc '%s' \"/proc/$$/fd/$signature_fd\")\"\ncandidate_kind=\"$(FD=\"$candidate_fd\" /usr/bin/python3 -c 'import os, stat; print(int(stat.S_ISREG(os.fstat(int(os.environ[\"FD\"])).st_mode)))')\"\nsignature_kind=\"$(FD=\"$signature_fd\" /usr/bin/python3 -c 'import os, stat; print(int(stat.S_ISREG(os.fstat(int(os.environ[\"FD\"])).st_mode)))')\"\n[[ \"$candidate_kind\" == 1 && \"$signature_kind\" == 1 ]] || exit 77\n(( candidate_size > 0 && candidate_size <= 1048576 && signature_size > 0 && signature_size <= 65536 )) || exit 77\n\nwork=\"$(/usr/bin/mktemp -d /tmp/orders-known-hosts.XXXXXX)\"\ncleanup() { [[ \"$work\" == /tmp/orders-known-hosts.* ]] && /usr/bin/rm -rf -- \"$work\"; }\ntrap cleanup EXIT\n# Bound the copied bytes too: the files can grow after their metadata checks.\n/usr/bin/dd if=\"/proc/$/fd/$candidate_fd\" of=\"$work/known_hosts\" bs=1048577 count=1 iflag=fullblock status=none\n/usr/bin/dd if=\"/proc/$/fd/$signature_fd\" of=\"$work/known_hosts.asc\" bs=65537 count=1 iflag=fullblock status=none\ncandidate_size=\"$(/usr/bin/stat -Lc '%s' \"$work/known_hosts\")\"\nsignature_size=\"$(/usr/bin/stat -Lc '%s' \"$work/known_hosts.asc\")\"\n(( candidate_size > 0 && candidate_size <= 1048576 && signature_size > 0 && signature_size <= 65536 )) || exit 77\n/usr/bin/chmod 0400 \"$work/known_hosts\" \"$work/known_hosts.asc\"\n/usr/bin/gpgv --keyring /etc/orders-automation/infrastructure-signers.gpg \\\n  \"$work/known_hosts.asc\" \"$work/known_hosts\"\n/usr/bin/ssh-keygen -l -f \"$work/known_hosts\" >/dev/null\n/usr/bin/install -o root -g root -m 0644 -- \"$work/known_hosts\" /etc/orders-automation/known_hosts",
+                             "blurb":  "The candidate and signature are opened and copied into private staging before signature, syntax, and installation checks use that same stable snapshot."
+                         }
+                     ]
+};

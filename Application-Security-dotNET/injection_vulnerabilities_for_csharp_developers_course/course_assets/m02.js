@@ -1,0 +1,11 @@
+window.COURSE_MODULE = {
+  "title": "C# Trust Boundaries and Data Flow",
+  "narration": "Injection review starts by identifying trust boundaries. In ASP.NET and ASP.NET Core applications, untrusted data can enter through request bodies, query strings, route parameters, headers, cookies, JSON payloads, XML payloads, form fields, multipart uploads, and SignalR or API messages. Backend services add more sources: message queues, webhooks, third-party API responses, imports, environment variables, configuration values, command-line arguments, and data loaded from storage.\n\nA common mistake is treating internal-looking data as automatically safe. A queue message may have come from another team, a configuration value may be changed during deployment, and a third-party API response may reflect attacker-controlled input from somewhere else. If a value can cross a boundary before your code uses it, the value should be treated as untrusted until the application constrains it for the specific purpose at hand.\n\nData-flow mapping connects sources to sensitive use. A query parameter might become a DTO property, then a service option, then a repository filter, then part of a raw SQL statement. A file upload name might pass through validation, logging, storage selection, and an external process adapter. A JSON field might become an expression, a URL, or an outbound request parameter. The security review needs to follow the value all the way to the sink.\n\nGood C# design makes these transitions visible. Convert raw strings into typed values early. Use enums or known option objects for choices such as sort direction, export type, report format, and search field. Separate external request models from internal domain models. Keep validation close to the boundary, but also verify that the final API treats the data safely. Clear data flow makes injection risks easier to find, test, and explain during review.",
+  "graphicAlt": "External sources pass request DTOs and typed values through services to a reviewed sensitive sink.",
+  "narrationPoints": [
+    "Injection review starts by identifying trust boundaries.",
+    "A common mistake is treating internal-looking data as automatically safe.",
+    "Data-flow mapping connects sources to sensitive use.",
+    "Good C# design makes these transitions visible."
+  ]
+};

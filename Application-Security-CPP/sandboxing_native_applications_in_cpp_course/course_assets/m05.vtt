@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:04.580
+Resource access is where sandbox policy becomes concrete.
+
+2
+00:00:04.680 --> 00:00:15.240
+A worker may need to read a user-selected file, write a temporary result, contact a service, use a device, access clipboard data, or interact with a UI surface.
+
+3
+00:00:15.340 --> 00:00:21.500
+Each category should be granted according to the component's job, not according to what the full application can do.
+
+4
+00:00:21.780 --> 00:00:24.660
+Filesystem policy should be scoped carefully.
+
+5
+00:00:24.760 --> 00:00:33.480
+Prefer user-mediated file access, specific directories, temporary storage with cleanup rules, and brokered writes for sensitive locations.
+
+6
+00:00:33.580 --> 00:00:44.220
+Avoid broad read-write access to user profiles, configuration directories, shared folders, and application installation paths unless the feature truly requires it and policy approves it.
+
+7
+00:00:44.320 --> 00:00:50.560
+When output must be written, the broker can validate the destination, write atomically, and preserve a clear audit trail.
+
+8
+00:00:50.840 --> 00:00:53.400
+Network access deserves similar discipline.
+
+9
+00:00:53.500 --> 00:00:56.460
+Some workers should have no network access.
+
+10
+00:00:56.560 --> 00:01:04.160
+Others may need destination allowlists, brokered requests, proxy-aware configuration, timeouts, and response validation.
+
+11
+00:01:04.260 --> 00:01:12.340
+Network capability should not become a side effect of launching a helper process with the same environment and permissions as the host.
+
+12
+00:01:12.440 --> 00:01:19.320
+A documented network policy helps reviewers understand expected destinations, protocols, and failure behavior.
+
+13
+00:01:19.420 --> 00:01:21.980
+It also helps operations prepare alerts.
+
+14
+00:01:22.260 --> 00:01:35.940
+Devices, UI automation, accessibility APIs, clipboard content, cameras, microphones, environment variables, and credentials can expose sensitive information or powerful actions.
+
+15
+00:01:36.040 --> 00:01:44.440
+Broker these resources where possible, scope them narrowly, and record safe operational signals when access is denied or unexpectedly requested.
+
+16
+00:01:44.540 --> 00:01:49.820
+The goal is to keep sensitive resources unavailable to components that do not need them.
+
+17
+00:01:49.920 --> 00:01:57.200
+Review should include default permissions, user consent paths, enterprise policy, and what happens when access is unavailable.
+
+18
+00:01:57.300 --> 00:02:03.860
+A secure design should degrade clearly instead of quietly expanding access to keep a feature working.

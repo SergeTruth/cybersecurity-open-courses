@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.500 --> 00:00:08.900
+Cross-site scripting is browser-side injection: untrusted content is interpreted as executable script or unsafe markup.
+
+2
+00:00:09.000 --> 00:00:23.720
+In C# applications, browser output may come from ASP.NET Core MVC, Razor Pages, APIs consumed by JavaScript frontends, Blazor components, legacy ASP.NET views, or custom response writers.
+
+3
+00:00:23.820 --> 00:00:32.060
+The server may be written in C#, but the browser is the interpreter that decides whether content is displayed as text or treated as active behavior.
+
+4
+00:00:32.340 --> 00:00:35.380
+Output encoding must match the destination context.
+
+5
+00:00:35.480 --> 00:00:48.600
+Text in an HTML element, a value in an HTML attribute, a URL component, a CSS value, a JavaScript string, and JSON embedded into a page all have different rules.
+
+6
+00:00:48.700 --> 00:01:01.260
+Razor's default encoding is valuable, but teams still need to understand where raw output is used, where helper methods write markup, where strings are concatenated into scripts, and where JSON or HTML is assembled manually.
+
+7
+00:01:01.540 --> 00:01:05.460
+Sanitization and encoding solve different problems.
+
+8
+00:01:05.560 --> 00:01:09.720
+Encoding is usually right when the application only needs to display text.
+
+9
+00:01:09.820 --> 00:01:18.060
+Sanitization tries to allow limited markup while removing unsafe parts, which is harder and should rely on mature libraries and narrow requirements.
+
+10
+00:01:18.160 --> 00:01:23.840
+Client-side validation can improve user experience, but it is not a server security boundary.
+
+11
+00:01:23.940 --> 00:01:30.260
+The server must validate incoming data and encode outgoing data for the actual context where it is placed.
+
+12
+00:01:30.540 --> 00:01:37.340
+Content Security Policy can provide useful defense in depth by restricting script execution and resource loading.
+
+13
+00:01:37.440 --> 00:01:45.200
+It should not be the primary fix for unsafe rendering, because weak policies, legacy inline scripts, and raw output paths can undermine it.
+
+14
+00:01:45.300 --> 00:01:59.060
+Strong C# web defense uses framework defaults, context-specific encoding, careful rich-text handling, review of raw output, tests for rendering behavior, and a policy that makes exploitation harder if a rendering mistake slips through.
